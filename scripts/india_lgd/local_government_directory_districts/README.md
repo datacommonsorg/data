@@ -71,12 +71,22 @@ The WikiData dataset has the following columns
 
 
 #### Scripts
-- [preprocess.py](preprocess.py): Clean up and import script.
+Clean up and import script.
+
+```bash
+python3 -m india_lgd.local_government_directory_districts.preprocess
+```
 
 ### Running Tests
 
 ```bash
 python3 -m unittest discover -v -s scripts/ -p *_test.py
+```
+
+Run only the test cases related to this import
+
+```bash
+python3 -m unittest india_lgd.local_government_directory_districts.preprocess_test.TestPreprocess
 ```
 
 ### Import Procedure

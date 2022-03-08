@@ -25,45 +25,10 @@ import requests
 import time
 from os import path
 from india_udise.common.base_school_data import UDISEIndiaSchoolDataLoaderBase
+from india_udise.common.base_school_data import BASE_DATA_FOLDER
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
-
-ATTRIBUTE_MAPPING = {
-    "cat1": {
-        "levelOfSchool": "PrimarySchool_Grade1To5"
-    },
-    "cat2": {
-        "levelOfSchool": "UpperPrimarySchool_Grade1To8"
-    },
-    "cat3": {
-        "levelOfSchool": "HigherSecondarySchool_Grade1To12"
-    },
-    "cat4": {
-        "levelOfSchool": "UpperPrimarySchool_Grade6To8"
-    },
-    "cat5": {
-        "levelOfSchool": "UpperPrimarySchool_Grade6To12"
-    },
-    "cat6": {
-        "levelOfSchool": "SeniorSecondarySchool_Grade1To10"
-    },
-    "cat7": {
-        "levelOfSchool": "SeniorSecondarySchool_Grade6To10"
-    },
-    "cat8": {
-        "levelOfSchool": "SeniorSecondarySchool_Grade9To10"
-    },
-    "cat10": {
-        "levelOfSchool": "HigherSecondarySchool_Grade9To12"
-    },
-    "cat11": {
-        "levelOfSchool": "HigherSecondarySchool_Grade11To12"
-    },
-    "Total": {
-        "levelOfSchool": "Total"
-    }
-}
 
 
 class UDISESchools(UDISEIndiaSchoolDataLoaderBase):
@@ -95,7 +60,7 @@ if __name__ == "__main__":
     api_report_code = "1003"
     api_map_id = "81"
 
-    data_folder = os.path.join(module_dir_, "data")
+    data_folder = BASE_DATA_FOLDER
     csv_file_path = os.path.join(module_dir_, "UDISEIndia_Schools.csv")
     mcf_file_path = os.path.join(module_dir_, "UDISEIndia_Schools.mcf")
     if path.exists(csv_file_path):
@@ -104,13 +69,8 @@ if __name__ == "__main__":
     if path.exists(mcf_file_path):
         os.remove(mcf_file_path)
 
-    base = UDISESchools(api_report_code,
-                        api_map_id,
-                        data_folder,
-                        csv_file_path,
-                        mcf_file_path,
-                        years,
-                        attribute_mapping=ATTRIBUTE_MAPPING)
+    base = UDISESchools(api_report_code, api_map_id, data_folder, csv_file_path,
+                        mcf_file_path, years)
     if action == "download":
         base.download()
     elif action == "process":

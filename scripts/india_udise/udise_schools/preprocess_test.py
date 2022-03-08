@@ -19,7 +19,6 @@ import tempfile
 import unittest
 from os import path
 from india_udise.udise_schools.preprocess import UDISESchools
-from india_udise.udise_schools.preprocess import ATTRIBUTE_MAPPING
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 
@@ -41,13 +40,8 @@ class TestPreprocess(unittest.TestCase):
         csv_file_path = os.path.join(data_folder, "UDISEIndia_Schools.csv")
         mcf_file_path = os.path.join(data_folder, "UDISEIndia_Schools.mcf")
 
-        base = UDISESchools(api_report_code,
-                            api_map_id,
-                            data_folder,
-                            csv_file_path,
-                            mcf_file_path,
-                            years,
-                            attribute_mapping=ATTRIBUTE_MAPPING)
+        base = UDISESchools(api_report_code, api_map_id, data_folder,
+                            csv_file_path, mcf_file_path, years)
         base.process()
 
         expected_csv_file = open(expected_csv_file_path)

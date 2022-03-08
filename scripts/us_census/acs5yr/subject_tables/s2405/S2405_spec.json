@@ -1,0 +1,507 @@
+{
+    "populationType": {
+        "_DEFAULT": "schema:Person"
+    },
+    "measurement": {
+        "_DEFAULT": {
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        }
+    },
+    "enumSpecializations": {},
+    "pvs": {
+        "statType": {
+            "Margin of Error": "marginOfError"
+        },
+        "age": {
+            "Civilian employed population 16 years and over": "[Years 16 -]"
+        },
+        "armedForcesStatus": {
+            "Civilian employed population 16 years and over": "Civilian"
+        },
+        "employment": {
+            "Civilian employed population 16 years and over": "BLS_Employed"
+        },
+        "naics": {
+            "Agriculture, forestry, fishing and hunting, and mining": "NAICS/11_21",
+            "Construction": "NAICS/23",
+            "Manufacturing": "NAICS/33",
+            "Wholesale trade": "NAICS/42",
+            "Retail trade": "NAICS/44-45",
+            "Transportation and warehousing, and utilities": "NAICS/48-49_22",
+            "Information": "NAICS/51",
+            "Finance and insurance, and real estate and rental and leasing": "NAICS/52-53",
+            "Professional, scientific, and management, and administrative and waste management services": "NAICS/54-56",
+            "Educational services, and health care and social assistance": "NAICS/61-62",
+            "Arts, entertainment, and recreation, and accommodation and food services": "NAICS/71-72",
+            "Public administration": "NAICS/92",
+            "Other services, except public administration": "NAICS/81"
+        },
+        "occupation": {
+            "Management, business, science, and arts occupations": "SOCv2018/highLevelAggregation-1",
+            "Management, business, science, and arts occupations MOE": "SOCv2018/highLevelAggregation-1",
+            "Service occupations": "SOCv2018/highLevelAggregation-2",
+            "Service occupations MOE": "SOCv2018/highLevelAggregation-2",
+            "Sales and office occupations": "SOCv2018/highLevelAggregation-3",
+            "Sales and office occupations MOE": "SOCv2018/highLevelAggregation-3",
+            "Natural resources, construction, and maintenance occupations": "SOCv2018/highLevelAggregation-4",
+            "Natural resources, construction, and maintenance occupations MOE": "SOCv2018/highLevelAggregation-4",
+            "Production, transportation, and material moving occupations": "SOCv2018/highLevelAggregation-5",
+            "Production, transportation, and material moving occupations MOE": "SOCv2018/highLevelAggregation-5"
+        }
+    },
+    "inferredSpec": {
+        "naics": {
+            "age": "[Years 16 -]",
+            "armedForcesStatus": "Civilian",
+            "employment": "BLS_Employed"
+        }
+    },
+    "universePVs": [
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [
+                "armedForcesStatus"
+            ],
+            "dependentPVs": {
+                "age": "[Years 16 -]"
+            }
+        },
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [
+                "occupation"
+            ],
+            "dependentPVs": {
+                "age": "[Years 16 -]",
+                "employment": "BLS_Employed",
+                "armedForcesStatus": "Civilian"
+            }
+        },
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [
+                "naics"
+            ],
+            "dependentPVs": {
+                "age": "[Years 16 -]",
+                "employment": "BLS_Employed",
+                "armedForcesStatus": "Civilian"
+            }
+        }
+    ],
+    "denominators": {
+        "Estimate!!Total!!Civilian employed population 16 years and over": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over"
+        ],
+        "Total!!Estimate!!Civilian employed population 16 years and over": [
+            "Management, business, science, and arts occupations!!Estimate!!Civilian employed population 16 years and over",
+            "Management, business, science, and arts occupations!!Margin of Error!!Civilian employed population 16 years and over",
+            "Service occupations!!Estimate!!Civilian employed population 16 years and over",
+            "Service occupations!!Margin of Error!!Civilian employed population 16 years and over",
+            "Sales and office occupations!!Estimate!!Civilian employed population 16 years and over",
+            "Sales and office occupations!!Margin of Error!!Civilian employed population 16 years and over",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Civilian employed population 16 years and over",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Civilian employed population 16 years and over",
+            "Production, transportation, and material moving occupations!!Estimate!!Civilian employed population 16 years and over",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Civilian employed population 16 years and over"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Agriculture, forestry, fishing and hunting, and mining"
+        ],
+        "Total!!Estimate!!Agriculture, forestry, fishing and hunting, and mining": [
+            "Management, business, science, and arts occupations!!Estimate!!Agriculture, forestry, fishing and hunting, and mining",
+            "Management, business, science, and arts occupations!!Margin of Error!!Agriculture, forestry, fishing and hunting, and mining",
+            "Service occupations!!Estimate!!Agriculture, forestry, fishing and hunting, and mining",
+            "Service occupations!!Margin of Error!!Agriculture, forestry, fishing and hunting, and mining",
+            "Sales and office occupations!!Estimate!!Agriculture, forestry, fishing and hunting, and mining",
+            "Sales and office occupations!!Margin of Error!!Agriculture, forestry, fishing and hunting, and mining",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Agriculture, forestry, fishing and hunting, and mining",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Agriculture, forestry, fishing and hunting, and mining",
+            "Production, transportation, and material moving occupations!!Estimate!!Agriculture, forestry, fishing and hunting, and mining",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Agriculture, forestry, fishing and hunting, and mining"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Construction": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Construction",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Construction",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Construction",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Construction",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Construction",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Construction"
+        ],
+        "Total!!Estimate!!Construction": [
+            "Management, business, science, and arts occupations!!Estimate!!Construction",
+            "Management, business, science, and arts occupations!!Margin of Error!!Construction",
+            "Service occupations!!Estimate!!Construction",
+            "Service occupations!!Margin of Error!!Construction",
+            "Sales and office occupations!!Estimate!!Construction",
+            "Sales and office occupations!!Margin of Error!!Construction",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Construction",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Construction",
+            "Production, transportation, and material moving occupations!!Estimate!!Construction",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Construction"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Manufacturing": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Manufacturing",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Manufacturing"
+        ],
+        "Total!!Estimate!!Manufacturing": [
+            "Management, business, science, and arts occupations!!Estimate!!Manufacturing",
+            "Management, business, science, and arts occupations!!Margin of Error!!Manufacturing",
+            "Service occupations!!Estimate!!Manufacturing",
+            "Service occupations!!Margin of Error!!Manufacturing",
+            "Sales and office occupations!!Estimate!!Manufacturing",
+            "Sales and office occupations!!Margin of Error!!Manufacturing",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Manufacturing",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Manufacturing",
+            "Production, transportation, and material moving occupations!!Estimate!!Manufacturing",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Manufacturing"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Wholesale trade": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Wholesale trade",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Wholesale trade"
+        ],
+        "Total!!Estimate!!Wholesale trade": [
+            "Management, business, science, and arts occupations!!Estimate!!Wholesale trade",
+            "Management, business, science, and arts occupations!!Margin of Error!!Wholesale trade",
+            "Service occupations!!Estimate!!Wholesale trade",
+            "Service occupations!!Margin of Error!!Wholesale trade",
+            "Sales and office occupations!!Estimate!!Wholesale trade",
+            "Sales and office occupations!!Margin of Error!!Wholesale trade",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Wholesale trade",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Wholesale trade",
+            "Production, transportation, and material moving occupations!!Estimate!!Wholesale trade",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Wholesale trade"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Retail trade": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Retail trade",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Retail trade"
+        ],
+        "Total!!Estimate!!Retail trade": [
+            "Management, business, science, and arts occupations!!Estimate!!Retail trade",
+            "Management, business, science, and arts occupations!!Margin of Error!!Retail trade",
+            "Service occupations!!Estimate!!Retail trade",
+            "Service occupations!!Margin of Error!!Retail trade",
+            "Sales and office occupations!!Estimate!!Retail trade",
+            "Sales and office occupations!!Margin of Error!!Retail trade",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Retail trade",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Retail trade",
+            "Production, transportation, and material moving occupations!!Estimate!!Retail trade",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Retail trade"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Transportation and warehousing, and utilities"
+        ],
+        "Total!!Estimate!!Transportation and warehousing, and utilities": [
+            "Management, business, science, and arts occupations!!Estimate!!Transportation and warehousing, and utilities",
+            "Management, business, science, and arts occupations!!Margin of Error!!Transportation and warehousing, and utilities",
+            "Service occupations!!Estimate!!Transportation and warehousing, and utilities",
+            "Service occupations!!Margin of Error!!Transportation and warehousing, and utilities",
+            "Sales and office occupations!!Estimate!!Transportation and warehousing, and utilities",
+            "Sales and office occupations!!Margin of Error!!Transportation and warehousing, and utilities",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Transportation and warehousing, and utilities",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Transportation and warehousing, and utilities",
+            "Production, transportation, and material moving occupations!!Estimate!!Transportation and warehousing, and utilities",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Transportation and warehousing, and utilities"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Information": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Information",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Information",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Information",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Information",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Information",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Information"
+        ],
+        "Total!!Estimate!!Information": [
+            "Management, business, science, and arts occupations!!Estimate!!Information",
+            "Management, business, science, and arts occupations!!Margin of Error!!Information",
+            "Service occupations!!Estimate!!Information",
+            "Service occupations!!Margin of Error!!Information",
+            "Sales and office occupations!!Estimate!!Information",
+            "Sales and office occupations!!Margin of Error!!Information",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Information",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Information",
+            "Production, transportation, and material moving occupations!!Estimate!!Information",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Information"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Finance and insurance, and real estate and rental and leasing"
+        ],
+        "Total!!Estimate!!Finance and insurance, and real estate and rental and leasing": [
+            "Management, business, science, and arts occupations!!Estimate!!Finance and insurance, and real estate and rental and leasing",
+            "Management, business, science, and arts occupations!!Margin of Error!!Finance and insurance, and real estate and rental and leasing",
+            "Service occupations!!Estimate!!Finance and insurance, and real estate and rental and leasing",
+            "Service occupations!!Margin of Error!!Finance and insurance, and real estate and rental and leasing",
+            "Sales and office occupations!!Estimate!!Finance and insurance, and real estate and rental and leasing",
+            "Sales and office occupations!!Margin of Error!!Finance and insurance, and real estate and rental and leasing",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Finance and insurance, and real estate and rental and leasing",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Finance and insurance, and real estate and rental and leasing",
+            "Production, transportation, and material moving occupations!!Estimate!!Finance and insurance, and real estate and rental and leasing",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Finance and insurance, and real estate and rental and leasing"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Professional, scientific, and management, and administrative and waste management services"
+        ],
+        "Total!!Estimate!!Professional, scientific, and management, and administrative and waste management services": [
+            "Management, business, science, and arts occupations!!Estimate!!Professional, scientific, and management, and administrative and waste management services",
+            "Management, business, science, and arts occupations!!Margin of Error!!Professional, scientific, and management, and administrative and waste management services",
+            "Service occupations!!Estimate!!Professional, scientific, and management, and administrative and waste management services",
+            "Service occupations!!Margin of Error!!Professional, scientific, and management, and administrative and waste management services",
+            "Sales and office occupations!!Estimate!!Professional, scientific, and management, and administrative and waste management services",
+            "Sales and office occupations!!Margin of Error!!Professional, scientific, and management, and administrative and waste management services",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Professional, scientific, and management, and administrative and waste management services",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Professional, scientific, and management, and administrative and waste management services",
+            "Production, transportation, and material moving occupations!!Estimate!!Professional, scientific, and management, and administrative and waste management services",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Professional, scientific, and management, and administrative and waste management services"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Educational services, and health care and social assistance"
+        ],
+        "Total!!Estimate!!Educational services, and health care and social assistance": [
+            "Management, business, science, and arts occupations!!Estimate!!Educational services, and health care and social assistance",
+            "Management, business, science, and arts occupations!!Margin of Error!!Educational services, and health care and social assistance",
+            "Service occupations!!Estimate!!Educational services, and health care and social assistance",
+            "Service occupations!!Margin of Error!!Educational services, and health care and social assistance",
+            "Sales and office occupations!!Estimate!!Educational services, and health care and social assistance",
+            "Sales and office occupations!!Margin of Error!!Educational services, and health care and social assistance",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Educational services, and health care and social assistance",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Educational services, and health care and social assistance",
+            "Production, transportation, and material moving occupations!!Estimate!!Educational services, and health care and social assistance",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Educational services, and health care and social assistance"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Arts, entertainment, and recreation, and accommodation and food services"
+        ],
+        "Total!!Estimate!!Arts, entertainment, and recreation, and accommodation and food services": [
+            "Management, business, science, and arts occupations!!Estimate!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Management, business, science, and arts occupations!!Margin of Error!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Service occupations!!Estimate!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Service occupations!!Margin of Error!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Sales and office occupations!!Estimate!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Sales and office occupations!!Margin of Error!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Production, transportation, and material moving occupations!!Estimate!!Arts, entertainment, and recreation, and accommodation and food services",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Arts, entertainment, and recreation, and accommodation and food services"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Other services, except public administration": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Other services, except public administration",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Other services, except public administration"
+        ],
+        "Total!!Estimate!!Other services, except public administration": [
+            "Management, business, science, and arts occupations!!Estimate!!Other services, except public administration",
+            "Management, business, science, and arts occupations!!Margin of Error!!Other services, except public administration",
+            "Service occupations!!Estimate!!Other services, except public administration",
+            "Service occupations!!Margin of Error!!Other services, except public administration",
+            "Sales and office occupations!!Estimate!!Other services, except public administration",
+            "Sales and office occupations!!Margin of Error!!Other services, except public administration",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Other services, except public administration",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Other services, except public administration",
+            "Production, transportation, and material moving occupations!!Estimate!!Other services, except public administration",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Other services, except public administration"
+        ],
+        "Estimate!!Total!!Civilian employed population 16 years and over!!Public administration": [
+            "Estimate!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Management, business, science, and arts occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Estimate!!Service occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Service occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Estimate!!Sales and office occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Sales and office occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Estimate!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Estimate!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Production, transportation, and material moving occupations!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Management, business, science, and arts occupations MOE!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Service occupations MOE!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Sales and office occupations MOE!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Natural resources, construction, and maintenance occupations MOE!!Civilian employed population 16 years and over!!Public administration",
+            "Margin of Error!!Production, transportation, and material moving occupations MOE!!Civilian employed population 16 years and over!!Public administration"
+        ],
+        "Total!!Estimate!!Public administration": [
+            "Management, business, science, and arts occupations!!Estimate!!Public administration",
+            "Management, business, science, and arts occupations!!Margin of Error!!Public administration",
+            "Service occupations!!Estimate!!Public administration",
+            "Service occupations!!Margin of Error!!Public administration",
+            "Sales and office occupations!!Estimate!!Public administration",
+            "Sales and office occupations!!Margin of Error!!Public administration",
+            "Natural resources, construction, and maintenance occupations!!Estimate!!Public administration",
+            "Natural resources, construction, and maintenance occupations!!Margin of Error!!Public administration",
+            "Production, transportation, and material moving occupations!!Estimate!!Public administration",
+            "Production, transportation, and material moving occupations!!Margin of Error!!Public administration"
+        ]
+    },
+    "ignoreColumns": [
+        "id",
+        "Geographic Area Name",
+        "PERCENT IMPUTED",
+        "PERCENT ALLOCATED"
+    ]
+}
