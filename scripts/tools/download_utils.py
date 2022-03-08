@@ -151,7 +151,8 @@ async def fetch(session: Any, cur_url: dict, semaphore: Any, limiter: Any,
                     else:
                         cur_url['status'] = 'fail_http'
                         cur_url['http_code'] = str(http_code)
-                        logging.error("Error: HTTP status code: %s", str(http_code))
+                        logging.error("Error: HTTP status code: %s",
+                                      str(http_code))
                     semaphore.release()
                     # return response
             except Exception as e:
@@ -237,6 +238,7 @@ def download_url_list(url_list: list, url_api_modifier: Callable[[dict], str],
                                 process_and_store, rate_params))
     loop.run_until_complete(future)
     end_t = time.time()
-    logging.info("The time required to download %d URLs : %d", len(url_list), (end_t - start_t))
+    logging.info("The time required to download %d URLs : %d", len(url_list),
+                 (end_t - start_t))
 
     return len(get_pending_or_fail_url_list(url_list))
