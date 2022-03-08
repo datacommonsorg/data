@@ -10,6 +10,7 @@ The script works using `requests` and `BeautifulSoup` to find the download links
 - Currently the script is not able to download data for 2004 and Table 13, 14 for 2005
 - By default the extension of saved file is `.xls`. This might cause a problem is extenstions are changed in future.
 - The script tries to find a link to `Access Tables` at one stage. The first instance of it is used if multiple links are found.
+- It is a good idea to check the size or content type(pandas load) of data for a sanity check. If some error was encountered, HTML data might be stored in the file making it unusable with xls applications.
 
 ## Examples
 

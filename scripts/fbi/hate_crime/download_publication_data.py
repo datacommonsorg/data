@@ -40,8 +40,8 @@ flags.DEFINE_string(
 flags.DEFINE_string('base_url', 'https://ucr.fbi.gov/hate-crime',
                     'The base url containing list of URLs for each year')
 
-# TODO(issue id here) store http errors
-# TODO(issue id here) log no access URL found
+# TODO(639) store http errors
+# TODO(639) log no access URL found
 
 # Headers to make request
 _HEADERS = {
@@ -123,6 +123,10 @@ def _find_year_url(html_soup, year_str: str) -> str:
             year_url = cur_a.get('href')
     return year_url
 
+def _is_file_in_cache(file:str) -> bool:
+    if _STATUS_DICT['force_fetch']:
+       return False
+    return os.path.isfile(file)
 
 def _find_access_tables_url() -> str:
     """Find the URL to 'Access Tables' in the given HTML for the year.
@@ -135,7 +139,7 @@ def _find_access_tables_url() -> str:
     # fetch or return from cache
     year_html_path = os.path.join(_STATUS_DICT['cache_dir'],
                                   f"{_STATUS_DICT['cur_year']}.html")
-    if _STATUS_DICT['force_fetch'] or not os.path.isfile(year_html_path):
+    if _is_file_in_cache(year_html_path):
         year_html, year_soup = request_html_soup(_STATUS_DICT['session'],
                                                  _STATUS_DICT['cur_year_url'])
         with open(year_html_path, 'w') as fp:
@@ -195,7 +199,7 @@ def _find_table_html_url() -> list:
     # fetch or return from cache
     access_html_path = os.path.join(_STATUS_DICT['cache_dir'],
                                     f"{_STATUS_DICT['cur_year']}_access.html")
-    if _STATUS_DICT['force_fetch'] or not os.path.isfile(access_html_path):
+    if _is_file_in_cache(access_html_path):
         access_html, access_soup = request_html_soup(
             _STATUS_DICT['session'], _STATUS_DICT['cur_access_url'])
         with open(access_html_path, 'w') as fp:
@@ -235,8 +239,7 @@ def _find_table_xls_url():
             table_html_path = os.path.join(
                 _STATUS_DICT['cache_dir'],
                 f"{_STATUS_DICT['cur_year']}_table_{table_i}.html")
-            if _STATUS_DICT['force_fetch'] or not os.path.isfile(
-                    table_html_path):
+            if _is_file_in_cache(table_html_path):
                 table_html, table_soup = request_html_soup(
                     _STATUS_DICT['session'], table_html_url)
                 with open(table_html_path, 'w') as fp:
@@ -295,7 +298,7 @@ def scrape_yearwise():
     if not os.path.exists(_STATUS_DICT['cache_dir']):
         os.makedirs(_STATUS_DICT['cache_dir'], exist_ok=True)
     base_html_path = os.path.join(_STATUS_DICT['cache_dir'], 'base.html')
-    if _STATUS_DICT['force_fetch'] or not os.path.isfile(base_html_path):
+    if _is_file_in_cache(base_html_path):
         base_html, base_soup = request_html_soup(session,
                                                  _STATUS_DICT['base_url'])
         with open(base_html_path, 'w') as fp:
