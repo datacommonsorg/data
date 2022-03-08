@@ -16,6 +16,7 @@ Function library to make manage the status of URL downloads and their storage.
 """
 
 import json
+import logging
 import os
 from shutil import copy2
 import base64
@@ -171,7 +172,8 @@ def sync_status_list(log_list: list, new_list: list) -> list:
         if 'status' not in cur_url:
             cur_url['status'] = 'pending'
         if cur_url['status'] not in _VALID_STATUS:
-            print('Warning: Found invalid status for', cur_url['url'])
+            logging.warning('Warning: Found invalid status for %s',
+                            cur_url['url'])
             cur_url['status'] = 'pending'
     return ret_list
 
