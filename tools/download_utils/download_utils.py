@@ -226,6 +226,7 @@ def download_url_list(url_list: list, url_api_modifier: Callable[[dict], str],
         rate_params['limit_per_host'] = 0
     if 'req_per_unit_time' not in rate_params:
         rate_params['req_per_unit_time'] = 50
+    # time in sec, rate would be limited to req_per_unit_time requests per unit_time
     if 'unit_time' not in rate_params:
         rate_params['unit_time'] = 1
 
