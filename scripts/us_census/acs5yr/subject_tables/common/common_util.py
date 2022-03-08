@@ -86,12 +86,15 @@ def get_tokens_list_from_zip(zip_file_path: str,
                     csv_reader = csv.reader(io.TextIOWrapper(data_f, 'utf-8'))
                     for row in csv_reader:
                         if check_metadata:
+                            # metadata file has variable ID as the first column and
+                            # the column name corresponding to it as the second column.
                             for tok in row[1].split(delimiter):
                                 if tok not in tokens:
                                     tokens.append(tok)
                                     if print_details:
                                         print(tok)
                         else:
+                            # The entire second row is name of the columns.
                             if csv_reader.line_num == 2:
                                 for column_name in row:
                                     for tok in column_name.split(delimiter):
@@ -115,8 +118,9 @@ def token_in_list_ignore_case(token: str, list_check: list) -> bool:
         True if token is present in the list.
         False if token is not present in the list.
   """
+    cmp_token = token.lower()
     for tok in list_check:
-        if tok.lower() == token.lower():
+        if tok.lower() == cmp_token:
             return True
     return False
 
@@ -226,7 +230,7 @@ def get_spec_token_list(spec_dict: dict, delimiter: str = '!!') -> dict:
   """
     ret_list = []
     repeated_list = []
-    # check if the token appears in any of the pvs
+    # collect the token appears in any of the pvs
     for prop in spec_dict['pvs'].keys():
         for token in spec_dict['pvs'][prop]:
             if token in ret_list and not token.startswith('_'):
@@ -234,7 +238,7 @@ def get_spec_token_list(spec_dict: dict, delimiter: str = '!!') -> dict:
             elif not token.startswith('_'):
                 ret_list.append(token)
 
-    # check if the token appears in any of the population type
+    # collect the tokens appear in any of the population type
     if 'populationType' in spec_dict:
         for token in spec_dict['populationType'].keys():
             if token in ret_list and not token.startswith('_'):
@@ -242,7 +246,7 @@ def get_spec_token_list(spec_dict: dict, delimiter: str = '!!') -> dict:
             elif not token.startswith('_'):
                 ret_list.append(token)
 
-    # check if the token appears in measurement
+    # collect the tokens that appears in measurement
     if 'measurement' in spec_dict:
         for token in spec_dict['measurement'].keys():
             if token in ret_list and not token.startswith('_'):
@@ -250,7 +254,7 @@ def get_spec_token_list(spec_dict: dict, delimiter: str = '!!') -> dict:
             elif not token.startswith('_'):
                 ret_list.append(token)
 
-    #check if the token is to be ignored
+    #collect the tokens to be ignored
     if 'ignoreTokens' in spec_dict:
         for token in spec_dict['ignoreTokens']:
             if token in ret_list and not token.startswith('_'):
@@ -258,7 +262,7 @@ def get_spec_token_list(spec_dict: dict, delimiter: str = '!!') -> dict:
             elif not token.startswith('_'):
                 ret_list.append(token)
 
-    #check if the column name appears as ignore column or if a token appears in ignoreColumns
+    #collect the column names that appears as ignore column or if a token appears in ignoreColumns
     if 'ignoreColumns' in spec_dict:
         for token in spec_dict['ignoreColumns']:
             if token in ret_list and not token.startswith('_'):
@@ -266,13 +270,13 @@ def get_spec_token_list(spec_dict: dict, delimiter: str = '!!') -> dict:
             elif not token.startswith('_'):
                 ret_list.append(token)
 
-    #check if the token appears on any side of the enumspecialisation
+    #collect the tokens appears on any side of the enumspecialisation
     if 'enumSpecializations' in spec_dict:
         for token in spec_dict['enumSpecializations'].keys():
             ret_list.append(token)
             ret_list.append(spec_dict['enumSpecializations'][token])
 
-    #check if the total clomn is present and tokens in right side of denominator appear
+    #collect the total columns present and tokens in right side of denominator
     if 'denominators' in spec_dict:
         for column in spec_dict['denominators']:
             ret_list.append(column)
