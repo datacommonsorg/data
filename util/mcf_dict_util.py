@@ -41,10 +41,19 @@ Functions to edit mcf files include:
 - Check existence of dcids in DC.
 - Check existence of dcid in other set of nodes.
 - Drop a list of nodes with given list dcid.
+
+Caveats:
+- Text values with ':' within them, eg: prop: "my value : with colon" 
+    would not be easily accessible in dict form. It would be treated as multiple value.
+- All comments are moved to the top of the node if sort_keys option is set with write to mcf.
+- Currently cannot handle multiple instances of same property within a node.
+- Incomplete handling of multiple values assigned to properties.
+- Extra empty lines would be dropped
 """
 
 import ast
 import glob
+import logging
 import os
 import re
 import json
@@ -52,7 +61,7 @@ import requests
 from typing import Dict, Optional, Union
 from collections import OrderedDict
 
-prefix_list = ['dcs', 'dcid', 'l', 'schema']
+PREFIX_LIST = ['dcs', 'dcid', 'l', 'schema']
 
 
 def request_post_json(url: str, data_: dict) -> dict:
@@ -123,7 +132,7 @@ def dc_check_existence(dcid_list: list,
 
 
 def mcf_to_dict_list(mcf_str: str) -> list:
-    """Convets MCF file string to a list of OrderedDict objects.
+    """Converts MCF file string to a list of OrderedDict objects.
 
     Args:
         mcf_str: String read from MCF file.
@@ -154,7 +163,8 @@ def mcf_to_dict_list(mcf_str: str) -> list:
             elif is_first_prop:
                 is_first_prop = False
                 if pv_str and not pv_str.startswith('Node: '):
-                    raise ValueError('Each node must start with Node: <name>".')
+                    raise ValueError(
+                        f'Missing "Node: <name>" in MCF node {node}')
             if pv_str and not pv_str.startswith('#'):
                 # find p, prefix, v
                 pv = pv_str.split(':')
@@ -171,12 +181,10 @@ def mcf_to_dict_list(mcf_str: str) -> list:
                     prefix = pv[1].strip()
                     v = ':'.join(pv[2:]).strip()
                     # TODO detect colon within a str(for e.g. descriptionURL)
-                    print(
-                        f"Warning - unexpected number of ':' found in {pv_str}")
+                    logging.warning(
+                        "Warning - unexpected number of ':' found in %s",
+                        pv_str)
 
-                # TODO (optional) if not prefix
-                # if not complex value and p != 'dcid'
-                # prefix = 'dcs'
                 cur_node[p] = {}
                 cur_node[p]['value'] = v
                 if v.startswith('[') and v.endswith(']'):
@@ -318,8 +326,8 @@ def get_dcids_node_list(node_list: list) -> list:
 
 
 # get dcid list subset of key values
-def get_dcids_prop_list(node_list: list, prop_list: list) -> list:
-    """Fetches the list of dcids for given list of nodes.
+def get_dcids_prop_list(node_list: list, property_list: list) -> list:
+    """Fetches the list of dcids for given list of nodes and all the listed properties.
 
     Args:
         node_list: List of OrderedDict or Dict objects representing a node in MCF file.
@@ -331,7 +339,7 @@ def get_dcids_prop_list(node_list: list, prop_list: list) -> list:
     ret_list = []
     for node_dict in node_list:
         is_match = True
-        for prop in prop_list:
+        for prop in property_list:
             if prop not in node_dict:
                 is_match = False
         if is_match:
@@ -341,7 +349,6 @@ def get_dcids_prop_list(node_list: list, prop_list: list) -> list:
     return ret_list
 
 
-# list dupe
 def node_list_check_existence_dc(node_list: list) -> dict:
     """Checks the existence of dcid of each node in DC.
 
@@ -391,13 +398,13 @@ def drop_nodes(node_list: list, dcid_list: list) -> list:
     ret_list = []
     for node_dict in node_list:
         if not get_dcid_node(node_dict) in dcid_list:
-            ret_list.append(node_dict)
+            ret_list.append(node_dict.copy())
     return ret_list
 
 
-def add_path_exp_mcf_dicts(new_path: str,
-                           existing_dict: Optional[dict] = None,
-                           reopen: bool = False) -> dict:
+def load_mcf_dicts(new_path: str,
+                   existing_dict: Optional[dict] = None,
+                   reopen: bool = False) -> dict:
     """Opens a set of files specified by `new_path` expression to create a list of nodes for each file.
 
     Args:
@@ -406,7 +413,7 @@ def add_path_exp_mcf_dicts(new_path: str,
         reopen: Boolean value to skip opening files already present in the dictionary to prevent overwrites.
         
     Returns:
-        A dictionary with filenames as objects and a list of OrderedDict objects where each object 
+        A dictionary with filenames as key and a list of OrderedDict objects where each object 
             represents a node in the MCF file as value.
     """
     if not existing_dict:
@@ -420,7 +427,7 @@ def add_path_exp_mcf_dicts(new_path: str,
     matching_files = glob.glob(new_path, recursive=True)
     for cur_file in matching_files:
         # set of files
-        print(cur_file)
+        logging.info('Reading file %s', cur_file)
         if cur_file not in existing_dict or reopen:
             existing_dict[cur_file] = mcf_file_to_dict_list(cur_file)
 
@@ -470,7 +477,10 @@ def dict_list_to_mcf_str(node_list: list,
 
         if not is_comment_block:
             # Keep Node: first
-            ret_str += f"{'Node'}: {cur_node['Node']['namespace']+':' if cur_node['Node']['namespace'] else ''}{cur_node['Node']['value']}"
+            namespace = cur_node['Node'].get('namespace', '')
+            if namespace:
+                namespace += ':'
+            ret_str += f"Node: {namespace}{cur_node['Node']['value']}"
             ret_str += '\n'
             cur_node.pop('Node', None)
 
@@ -495,7 +505,7 @@ def dict_list_to_mcf_str(node_list: list,
 def dict_list_to_mcf_file(dict_list: list,
                           mcf_file_path: str,
                           sort_keys=False,
-                          regen_complex_vals: bool = False):
+                          regen_complex_values: bool = False):
     """Write list of Dict like object representation of nodes to an MCF file.
 
     Args:
@@ -509,12 +519,12 @@ def dict_list_to_mcf_file(dict_list: list,
     mcf_file_path = os.path.expanduser(mcf_file_path)
     if os.path.dirname(mcf_file_path):
         os.makedirs(os.path.dirname(mcf_file_path), exist_ok=True)
-    print('Writing file', mcf_file_path)
+    logging.info('Writing file %s', mcf_file_path)
     with open(mcf_file_path, 'w') as fp:
         fp.write(
             dict_list_to_mcf_str(dict_list,
                                  sort_keys=sort_keys,
-                                 regen_complex_vals=regen_complex_vals))
+                                 regen_complex_vals=regen_complex_values))
 
 
 def write_to_files(file_dict: dict,
@@ -534,4 +544,4 @@ def write_to_files(file_dict: dict,
         dict_list_to_mcf_file(file_dict[cur_file],
                               cur_file,
                               sort_keys=sort_keys,
-                              regen_complex_vals=regen_complex_vals)
+                              regen_complex_values=regen_complex_vals)
