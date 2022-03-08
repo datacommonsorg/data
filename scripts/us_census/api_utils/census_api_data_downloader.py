@@ -175,7 +175,7 @@ def download_table(dataset: str,
     url_list = sync_status_list(log_list, url_list)
     with open(status_path, 'w') as fp:
         json.dump(url_list, fp, indent=2)
-    print(len(url_list))
+    
     logging.info("Compiled a list of %d URLs", len(url_list))
 
     start = time.time()
@@ -280,12 +280,11 @@ def consolidate_files(dataset: str,
     for year in csv_files_list:
         total_files += len(csv_files_list[year])
 
-    print(len(csv_files_list), total_files)
     logging.info('consolidating %d files', total_files)
     var_col_lookup = get_yearwise_variable_column_map(dataset, table_id,
                                                       list(csv_files_list))
     for year in csv_files_list:
-        print(year)
+        print('Consolidating files for year', year)
         # TODO error handling when identifier is missing
         identifier = identifier_dict[year]
         logging.info('consolidating %d files for year:%s',
@@ -313,10 +312,6 @@ def consolidate_files(dataset: str,
                                       column_name, cur_csv_path)
             df2.drop(drop_list, axis=1, inplace=True)
 
-            # if df2.lt(-100).any().any():
-            #     print("Error: Check", output_path+csv_file, "annotation not replaced in some column")
-            # if df2.lt(0).any().any():
-            #     print("Warning: Check", output_path+csv_file, "file contains negative values")
             if 'GEO_ID' not in list(df2) or 'NAME' not in list(df2):
                 print("Error: Check", cur_csv_path,
                       "GEO_ID or NAME column missing")

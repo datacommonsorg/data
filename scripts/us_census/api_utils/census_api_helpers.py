@@ -376,7 +376,6 @@ def get_yearwise_required_geos(dataset: str,
     rate_params['req_per_unit_time'] = 10
     rate_params['unit_time'] = 1
     for year in geo_config:
-        print('required geos', year)
         if 'required_geo_lists' not in geo_config[year]:
             geo_config[year]['required_geo_lists'] = {}
         for geo_str in geo_config[year]['required_geos']:
