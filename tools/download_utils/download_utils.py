@@ -27,7 +27,7 @@ from aiolimiter import AsyncLimiter
 from .status_file_utils import get_pending_or_fail_url_list, url_to_download
 
 
-async def async_save_resp_json(resp: Any, store_path: str):
+async def async_save_resp_json(response: Any, filename: str):
     """Parses and stores json response to a file in async manner.
 
         Args:
@@ -35,14 +35,13 @@ async def async_save_resp_json(resp: Any, store_path: str):
             store_path: Path of the file to store the result.
     """
     try:
-        resp_data = await resp.json()
+        resp_data = await response.json()
     except asyncio.TimeoutError:
         logging.error('Error: Response parsing timing out.')
-        print('Error: Response parsing timing out.')
         return -1
-    logging.debug('Writing downloaded data to file: %s', store_path)
-    os.makedirs(os.path.dirname(store_path), exist_ok=True)
-    with open(store_path, 'w') as fp:
+    logging.debug('Writing downloaded data to file: %s', filename)
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    with open(filename, 'w') as fp:
         json.dump(resp_data, fp, indent=2)
     return 0
 
@@ -109,18 +108,17 @@ def download_url_list_iterations(url_list: list,
     return failed_urls_ctr
 
 
-# req url
 # TODO add back off decorator with aiohttp.ClientConnectionError as the trigger exception,
 #      try except might need to change for decorator to work
-async def fetch(session: Any, cur_url: str, semaphore: Any, limiter: Any,
+async def fetch(session: Any, cur_url: dict, semaphore: Any, limiter: Any,
                 url_api_modifier: Callable[[dict], str], api_key: str,
                 process_and_store: Callable[[Any, str], int]):
-    # async def fetch(session, url, semaphore):
     """Fetch a single URL in async fashion.
+        NOTE: The function catches all exceptions and marks the status as 'fail'.
 
         Args:
             session: aiohttp ClientSession object.
-            cur_url: URL to be requested.
+            cur_url: URL with metadata dict object.
             semaphore: asyncio Semaphore object.
             limiter: AsyncLimiter object.
             url_api_modifier: Function to attach API key to url.
@@ -128,7 +126,7 @@ async def fetch(session: Any, cur_url: str, semaphore: Any, limiter: Any,
             process_and_store: Function to parse, process and store the response to the passed store path.
     """
     if url_to_download(cur_url):
-        print(cur_url['url'])
+        logging.debug('%s', cur_url['url'])
         await semaphore.acquire()
         async with limiter:
             final_url = url_api_modifier(cur_url, api_key)
@@ -153,7 +151,7 @@ async def fetch(session: Any, cur_url: str, semaphore: Any, limiter: Any,
                     else:
                         cur_url['status'] = 'fail_http'
                         cur_url['http_code'] = str(http_code)
-                        print("HTTP status code: " + str(http_code))
+                        logging.error("Error: HTTP status code: %s", str(http_code))
                     semaphore.release()
                     # return response
             except Exception as e:
@@ -205,7 +203,7 @@ def download_url_list(url_list: list, url_api_modifier: Callable[[dict], str],
                       api_key: str, process_and_store: Callable[[Any, str],
                                                                 int],
                       rate_params: dict):
-    """Synchronous wrapper to the function for making asynchrous calls?
+    """Synchronous wrapper to the function for making asynchrous calls.
 
         Args:
             url_list: List of URL with metadata dict object.
@@ -238,7 +236,6 @@ def download_url_list(url_list: list, url_api_modifier: Callable[[dict], str],
                                 process_and_store, rate_params))
     loop.run_until_complete(future)
     end_t = time.time()
-    print("The time required to download", len(url_list), "URLs :",
-          end_t - start_t)
+    logging.info("The time required to download %d URLs : %d", len(url_list), (end_t - start_t))
 
     return len(get_pending_or_fail_url_list(url_list))

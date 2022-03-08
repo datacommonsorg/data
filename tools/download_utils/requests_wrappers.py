@@ -15,8 +15,9 @@
 Wrapper functions for easy use of requests library.
 """
 
-import requests
 import json
+import logging
+import requests
 import time
 
 
@@ -30,24 +31,23 @@ def request_url_json(url: str) -> dict:
     JSON decoded response from the GET call.
       Empty dict is returned in case the call fails.
   """
-    print(url)
+    logging.info('Requesting url: %s', url)
     try:
         req = requests.get(url)
-        # print(req.url)
     except requests.exceptions.ReadTimeout:
-        print('Timeout occoured, retrying after 10s.')
+        logging.warning('Timeout occoured, retrying after 10s.')
         time.sleep(10)
         try:
             req = requests.get(url)
         except requests.exceptions.ReadTimeout:
-            print('Timeout occoured, request failed.')
+            logging.error('Timeout occoured, request failed.')
             return {}
 
     if req.status_code == requests.codes.ok:
         response_data = req.json()
     else:
         response_data = {'http_err_code': req.status_code}
-        print('HTTP status code: ' + str(req.status_code))
+        logging.error('HTTP status code: ' + str(req.status_code))
     return response_data
 
 
@@ -64,11 +64,11 @@ def request_post_json(url: str, data_: dict) -> dict:
   """
     headers = {'Content-Type': 'application/json'}
     req = requests.post(url, data=json.dumps(data_), headers=headers)
-    print(req.request.url)
+    logging.info('Post request url: %s', req.request.url)
 
     if req.status_code == requests.codes.ok:
         response_data = req.json()
     else:
         response_data = {'http_err_code': req.status_code}
-        print('HTTP status code: ' + str(req.status_code))
+        logging.error('Error: HTTP status code: %s', str(req.status_code))
     return response_data
