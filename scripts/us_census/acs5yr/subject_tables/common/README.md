@@ -46,7 +46,7 @@ It tries to identify:
 - Columns that have no property assignment
 - Columns that might possibly be in conflict with ignore and property assignment
 - Missing Denominator Total Columns
-- Denominator ccolumn appearing under multiple totals
+- Denominator column appearing under multiple totals
 - Possible missing EnumSpecialisations
 - Multiple measurement assignment
 - Multiple population assignment
@@ -63,9 +63,11 @@ The script generates column and token data file and another file with outcome of
 
 filename based outcomes can also be found in the output files
 
-`filewise` option is generally used for debug purposes only
+When calling functions from another script, following function arguments can be used:
 
-`check_metadata` for zip file, `is_metadata` for CSV files can be made True if _metadata_ type files need to be processed
+- `filewise` option is generally used for debug purposes only
+
+- `check_metadata` for zip file, `is_metadata`(also a commandline option) for CSV files can be made True if _metadata_ type files need to be processed
 
 ### Commandline options
 - `spec_path` - path to JSON file containing the spec
@@ -127,7 +129,7 @@ Following checks are performed on the column map:
 python column_map_validator.py --spec_path=../spec_dir/S0701_spec.json --column_map=~/acs_tables/S0701/column_map.json --yearwise_columns=~/acs_tables/S0701/yearwise_columns.json --colmap_validation_output=~/acs_tables/S0701/
 ```
 
-Common utils has a set of functionalities that can be used for any basic US census file dealing
+Common utils has a set of functionalities that can be used for any basic US census file pre-processing.
 
 ### common_util.py
 It offers following functionalities through similar named functions:
