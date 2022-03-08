@@ -55,43 +55,43 @@ def url_add_api_key(url_dict: dict, api_key: str) -> str:
     return url_dict['url'] + f'&key={api_key}'
 
 
-def save_resp_csv(resp_data: list, store_path: str) -> int:
+def save_resp_csv(response_data: list, filename: str) -> int:
     """Saves given census data response to a file.
 
         Args:
-            resp_data: List of list returned by census API.
-            store_path: Path to store the response as a file.
+            response_data: List of list returned by census API.
+            filename: Path to store the response as a file.
         
         Returns:
             0 always.
     """
-    headers = resp_data.pop(0)
-    df = pd.DataFrame(resp_data, columns=headers)
-    logging.info('Writing downloaded data to file: %s', store_path)
-    df.to_csv(store_path, encoding='utf-8', index=False)
+    headers = response_data.pop(0)
+    df = pd.DataFrame(response_data, columns=headers)
+    logging.info('Writing downloaded data to file: %s', filename)
+    df.to_csv(filename, encoding='utf-8', index=False)
     return 0
 
 
-async def async_save_resp_csv(resp: Any, store_path: str) -> int:
+async def async_save_resp_csv(response: Any, filename: str) -> int:
     """Saves given census data response to a file in async manner.
 
         Args:
-            resp_data: Response object recieved from the API call.
-            store_path: Path to store the response as a file.
+            response: Response object recieved from the API call.
+            filename: Path to store the response as a file.
         
         Returns:
             -1 on Timeout,
             0 on success.
     """
     try:
-        resp_data = await resp.json()
+        resp_data = await response.json()
     except asyncio.TimeoutError:
         print('Error: Response parsing timing out.')
         return -1
     headers = resp_data.pop(0)
     df = pd.DataFrame(resp_data, columns=headers)
-    logging.info('Writing downloaded data to file: %s', store_path)
-    df.to_csv(store_path, encoding='utf-8', index=False)
+    logging.info('Writing downloaded data to file: %s', filename)
+    df.to_csv(filename, encoding='utf-8', index=False)
     return 0
 
 

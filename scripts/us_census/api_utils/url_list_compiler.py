@@ -174,7 +174,7 @@ def get_table_url_list(dataset: str,
     ret_list = []
     for year in year_list:
         if year in available_years:
-            print('urls ', year)
+            print('Compiling urls for', year)
             for s_level in s_level_list:
                 if s_level in geo_config[year]['summary_levels']:
                     req_str_list = get_str_list_required(
