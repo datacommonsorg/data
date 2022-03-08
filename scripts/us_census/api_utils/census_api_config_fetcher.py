@@ -29,9 +29,9 @@ module_parentdir_ = os.path.join(module_dir_, '..')
 CONFIG_PATH_ = os.path.join(module_dir_, 'config_files')
 path.insert(1, os.path.join(module_dir_, '../../../'))
 
-from tools.download_utils.download_utils import download_url_list_iterations, async_save_resp_json
+from scripts.tools.download_utils import download_url_list_iterations, async_save_resp_json
 from tools.download_utils.requests_wrappers import request_url_json
-from tools.download_utils.status_file_utils import get_pending_or_fail_url_list, sync_status_list
+from scripts.tools.status_file_utils import get_pending_or_fail_url_list, sync_status_list
 
 FLAGS = flags.FLAGS
 
