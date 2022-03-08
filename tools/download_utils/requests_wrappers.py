@@ -23,13 +23,13 @@ import time
 
 def request_url_json(url: str, max_retries: int = 1, retry_interval: int = 10) -> dict:
     """Get JSON object version of reponse to GET request to given URL.
-
+        Handles exception ReadTimeout.
   Args:
     url: URL to make the GET request.
 
   Returns:
     JSON decoded response from the GET call.
-      Empty dict is returned in case the call fails.
+      Empty dict is returned in case the call times out after max_retries.
   """
     logging.info('Requesting url: %s', url)
     try:
