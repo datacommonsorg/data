@@ -227,7 +227,6 @@ def check_column_map(column_map_path: str,
     with open(os.path.join(output_path, 'column_map_validation.json'),
               'w') as fp:
         json.dump(stat_dir, fp, indent=2)
-    # print(json.dumps(stat_dir, indent=2))
     return stat_dir
 
 

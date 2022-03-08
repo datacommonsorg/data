@@ -170,10 +170,7 @@ def find_missing_enum_specialisation(column_name_list: list,
         # check all the columns that have multiple values assigned to a single property
         for prop in temp_dict:
             if len(temp_dict[prop]) > 1:
-                # retDict.append(tempDict[prop])
-                for i, prop_token in enumerate(reversed(temp_dict[prop])):
-                    j = len(temp_dict[prop]) - 1 - i
-
+                for j, prop_token in reversed(list(enumerate(temp_dict[prop]))):
                     temp_flag = True
                     # if token appears as a specialisation but it's base doesn't appear before it
                     if 'enumSpecializations' in spec_dict:
@@ -228,10 +225,9 @@ def find_multiple_measurement(column_name_list: list,
         List of columns that have multiple measurement associated with it.
   """
     ret_list = []
-
-    # tokenList = getTokensListFromColumnList(columnNameList, delimiter)
-    for column_name in column_name_list:
-        if 'measurement' in spec_dict:
+    
+    if 'measurement' in spec_dict:
+        for column_name in column_name_list:
             temp_flag = False
             for token in column_name.split(delimiter):
                 if token in spec_dict['measurement']:
@@ -256,9 +252,8 @@ def find_multiple_population(column_name_list: list,
   """
     ret_list = []
 
-    # tokenList = getTokensListFromColumnList(columnNameList, delimiter)
-    for column_name in column_name_list:
-        if 'populationType' in spec_dict:
+    if 'populationType' in spec_dict:
+        for column_name in column_name_list:
             temp_flag = False
             for token in column_name.split(delimiter):
                 if token in spec_dict['populationType']:

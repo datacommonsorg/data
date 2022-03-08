@@ -87,7 +87,6 @@ def get_tokens_list_from_zip(zip_file_path: str,
                     for row in csv_reader:
                         if check_metadata:
                             for tok in row[1].split(delimiter):
-                                # tokens.add(tok)
                                 if tok not in tokens:
                                     tokens.append(tok)
                                     if print_details:
@@ -96,7 +95,6 @@ def get_tokens_list_from_zip(zip_file_path: str,
                             if csv_reader.line_num == 2:
                                 for column_name in row:
                                     for tok in column_name.split(delimiter):
-                                        # tokens.add(tok)
                                         if tok not in tokens:
                                             tokens.append(tok)
                                             if print_details:
