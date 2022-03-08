@@ -225,7 +225,7 @@ def find_multiple_measurement(column_name_list: list,
         List of columns that have multiple measurement associated with it.
   """
     ret_list = []
-    
+
     if 'measurement' in spec_dict:
         for column_name in column_name_list:
             temp_flag = False
