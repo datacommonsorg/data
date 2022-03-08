@@ -123,10 +123,12 @@ def _find_year_url(html_soup, year_str: str) -> str:
             year_url = cur_a.get('href')
     return year_url
 
-def _is_file_in_cache(file:str) -> bool:
+
+def _is_file_in_cache(file: str) -> bool:
     if _STATUS_DICT['force_fetch']:
-       return False
+        return False
     return os.path.isfile(file)
+
 
 def _find_access_tables_url() -> str:
     """Find the URL to 'Access Tables' in the given HTML for the year.
