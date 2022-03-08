@@ -222,9 +222,10 @@ def check_column_map(column_map_path: str,
         print('All dcids found across all years')
 
     print('Writing output file at', output_path)
-    
+
     os.makedirs(output_path, exist_ok=True)
-    with open(os.path.join(output_path, 'column_map_validation.json'), 'w') as fp:
+    with open(os.path.join(output_path, 'column_map_validation.json'),
+              'w') as fp:
         json.dump(stat_dir, fp, indent=2)
     # print(json.dumps(stat_dir, indent=2))
     return stat_dir
