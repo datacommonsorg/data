@@ -1,0 +1,253 @@
+{
+    "populationType": {
+        "Incidents": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "Offenses": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "Victims": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "KnownOffender": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offender",
+            "offenderType": "KnownOffender",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "pvs": {
+        "Total": {},
+        "Single-Bias Incidents": {
+            "biasMotivation": "SingleBias"
+        },
+        "Race/Ethnicity/Ancestry": {
+            "biasMotivation": "RaceOrEthnicity"
+        },
+        "Race": {
+            "biasMotivation": "race"
+        },
+        "Ethnicity": {
+            "biasMotivation": "ethnicity"
+        },
+        "Ethnicity/National Origin": {
+            "biasMotivation": "ethnicity"
+        },
+        "Anti-White": {
+            "biasMotivation": "race",
+            "targetedRace": "WhiteAlone"
+        },
+        "Anti-Black or African American": {
+            "biasMotivation": "race",
+            "targetedRace": "BlackOrAfricanAmericanAlone"
+        },
+        "Anti-Black": {
+            "biasMotivation": "race",
+            "targetedRace": "BlackOrAfricanAmericanAlone"
+        },
+        "Anti-American Indian or Alaska Native": {
+            "biasMotivation": "race",
+            "targetedRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "Anti-American Indian/Alaskan Native": {
+            "biasMotivation": "race",
+            "targetedRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "Anti-Asian": {
+            "biasMotivation": "race",
+            "targetedRace": "AsianAlone"
+        },
+        "Anti-Asian/Pacific Islander": {
+            "biasMotivation": "race",
+            "targetedRace": "AsianOrPacificIslander"
+        },
+        "Anti-Native Hawaiian or Other Pacific Islander": {
+            "biasMotivation": "race",
+            "targetedRace": "NativeHawaiianOrOtherPacificIslanderAlone"
+        },
+        "Anti-Multiple Races, Group": {
+            "biasMotivation": "race",
+            "targetedRace": "TwoOrMoreRaces"
+        },
+        "Anti-Arab": {
+            "biasMotivation": "race",
+            "targetedRace": "Arab"
+        },
+        "Anti-Hispanic or Latino": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "HispanicOrLatino"
+        },
+        "Anti-Not Hispanic or Latino": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "NotHispanicOrLatino"
+        },
+        "Anti-Hispanic": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "HispanicOrLatino"
+        },
+        "Anti-Other Ethnicity/National Origin": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "NotHispanicOrLatino"
+        },
+        "Anti-Other Race/Ethnicity/Ancestry": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "NotHispanicOrLatino"
+        },
+        "Religion": {
+            "biasMotivation": "religion"
+        },
+        "Anti-Jewish": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Judaism"
+        },
+        "Anti-Catholic": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Catholicism"
+        },
+        "Anti-Protestant": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Protestantism"
+        },
+        "Anti-Islamic (Muslim)": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Islam"
+        },
+        "Anti-Islamic": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Islam"
+        },
+        "Anti-Other Religion": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_OtherReligion"
+        },
+        "Anti-Multiple Religions, Group": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_MultipleReligion"
+        },
+        "Anti-Mormon": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Mormonism"
+        },
+        "Anti-Jehovah's Witness": {
+            "biasMotivation": "religion",
+            "targetedReligion": "JehovahsWitnesses"
+        },
+        "Anti-Eastern Orthodox (Russian, Greek, Other)": {
+            "biasMotivation": "religion",
+            "targetedReligion": "EasternChristianity"
+        },
+        "Anti-Other Christian": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_OtherChristian"
+        },
+        "Anti-Buddhist": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Buddhism"
+        },
+        "Anti-Buddist": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Buddhism"
+        },
+        "Anti-Hindu": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Hinduism"
+        },
+        "Anti-Sikh": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Sikhism"
+        },
+        "Anti-Atheism/Agnosticism/etc.": {
+            "biasMotivation": "religion",
+            "targetedReligion": "AtheismOrAgnosticism"
+        },
+        "Sexual Orientation": {
+            "biasMotivation": "sexualOrientation"
+        },
+        "Anti-Homosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Homosexual"
+        },
+        "Anti-Gay (Male)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Gay"
+        },
+        "Anti-Male Homosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Gay"
+        },
+        "Anti-Female Homosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Lesbian"
+        },
+        "Anti-Lesbian": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Lesbian"
+        },
+        "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "LGBT"
+        },
+        "Anti-Heterosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Heterosexual"
+        },
+        "Anti-Bisexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Bisexual"
+        },
+        "Disability": {
+            "biasMotivation": "disabilityStatus"
+        },
+        "Anti-Physical": {
+            "biasMotivation": "disabilityStatus",
+            "targetedDisabilityStatus": "PhysicalDisability"
+        },
+        "Anti-Mental": {
+            "biasMotivation": "disabilityStatus",
+            "targetedDisabilityStatus": "MentalDisability"
+        },
+        "Gender": {
+            "biasMotivation": "gender"
+        },
+        "Anti-Male": {
+            "biasMotivation": "gender",
+            "targetedGender": "Male"
+        },
+        "Anti-Female": {
+            "biasMotivation": "gender",
+            "targetedGender": "Female"
+        },
+        "Gender Identity": {
+            "biasMotivation": "TransgenderOrGenderNonConforming"
+        },
+        "Anti-Transgender": {
+            "biasMotivation": "gender",
+            "targetedGender": "Transgender"
+        },
+        "Anti-Gender Non-Conforming": {
+            "biasMotivation": "gender",
+            "targetedGender": "GenderNonConforming"
+        },
+        "Multiple-Bias Incidents": {
+            "biasMotivation": "MultipleBias"
+        }
+    },
+    "dpv": []
+}
