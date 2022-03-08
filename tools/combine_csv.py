@@ -1,11 +1,33 @@
-from calendar import c
-import json
-import pandas as pd
-import os
-import json
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Combine multiple csv files to form single file.
+    Following config parameters can be used:
+    - output_columns: Column name as key and dict with required boolean and
+                        default value if not required as value.
+    - output_file: Path to store the combined csv file.
+    - input_files: Dict with path expression for single or set of files as key
+                        and dict with old_column_name: new_column_name as value.
+"""
+
 import glob
+import json
+import os
+import pandas as pd
+
 from absl import app
 from absl import flags
+from calendar import c
 
 # commandline flags
 FLAGS = flags.FLAGS
