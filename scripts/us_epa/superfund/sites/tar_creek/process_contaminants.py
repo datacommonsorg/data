@@ -65,7 +65,7 @@ _BASE_SV_MAP = {
     "Zinc": {
         "populationType": "BodyOfWater",
         "contaminatedThing": "GroundWater",
-        "contaminant": "InChIKey/HCHKCACWOHOZIP-UHFFFAOYSA-N",
+        "contaminant": "inChIKey/HCHKCACWOHOZIP-UHFFFAOYSA-N",
         "measuredProperty": "concentration"
     },
     "Cadmium": {
@@ -98,7 +98,11 @@ def gen_statvar_dcid(sv_dict: dict) -> str:
     if 'contaminantStatus' in sv_dict.keys():
         dcid_str.append(sv_dict['contaminantStatus'])
     if 'contaminant' in sv_dict.keys():
-        dcid_str.append(sv_dict['contaminant'])
+        # Handle the case where for contaminant = zinc, dcid is the name and not the InChiKey
+        if sv_dict['contaminant'] == 'inChIKey/HCHKCACWOHOZIP-UHFFFAOYSA-N':
+            dcid_str.append('Zinc')
+        else:
+            dcid_str.append(sv_dict['contaminant'])
     if 'populationType' in sv_dict.keys():
         dcid_str.append(sv_dict['populationType'])
     if 'contaminatedThing' in sv_dict.keys():
