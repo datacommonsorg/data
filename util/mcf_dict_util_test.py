@@ -128,6 +128,42 @@ class TestMCFDict(unittest.TestCase):
             },
         })
 
+        node4_str = """Node: node3
+        a: v1
+        b: dcs:v2
+        #c : l: v3
+        d: schema:  v4
+        e:   dcid: v5
+        dcid: node3
+        """
+        node4_dict = OrderedDict({
+            'Node': {
+                'value': 'node3',
+                'namespace': ''
+            },
+            'a': {
+                'value': 'v1',
+                'namespace': ''
+            },
+            'b': {
+                'value': 'v2',
+                'namespace': 'dcs'
+            },
+            '__comment1': '#c : l: v3',
+            'd': {
+                'value': 'v4',
+                'namespace': 'schema'
+            },
+            'e': {
+                'value': 'v5',
+                'namespace': 'dcid'
+            },
+            'dcid': {
+                'value': 'node3',
+                'namespace': ''
+            },
+        })
+
         self.assertEqual(list(mcf_to_dict_list(node1_str)[0].values()),
                          list(node1_dict.values()))
         self.assertEqual(list(mcf_to_dict_list(node2_str)[0].values()),
@@ -388,6 +424,7 @@ dcid: node3
 a: v1
 b: dcs:v2
 c: l:v3
+#c1: l:v31
 d: schema:v4
 e: dcid:v5
 
@@ -409,6 +446,7 @@ e: dcid:v5
                 'value': 'v3',
                 'namespace': 'l'
             },
+            '__comment1': '#c1: l:v31',
             'd': {
                 'value': 'v4',
                 'namespace': 'schema'
