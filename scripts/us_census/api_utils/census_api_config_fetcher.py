@@ -637,7 +637,8 @@ def compile_geography_map(store_path: str = CONFIG_PATH_,
                                 error_dict['geo_multiple_id'].append(
                                     temp_url + ' ' + cur_geo['name'])
                                 print(cur_geo['name'], 'has multiple geoId ')
-                            # check only 3 key values
+                            # On manual check each geo level had 7 entries usually or 3
+                            # This is a sanity check for some important data that might have been missed.
                             if len(cur_geo) > 7:
                                 if 'groups_extra_keys' not in error_dict:
                                     error_dict['groups_extra_keys'] = []
