@@ -34,9 +34,9 @@ flags.DEFINE_boolean('force_fetch', False,
                      'forces api query and not return cached result')
 
 _MODULE_DIR = os.path.dirname(os.path.realpath(__file__))
-path.insert(1, os.path.join(_MODULE_DIR, '..'))
+path.insert(1, os.path.join(_MODULE_DIR, '../../../../../../'))
 
-from download_utils.requests_wrappers import request_post_json
+from tools.download_utils.requests_wrappers import request_post_json
 
 # logging.basicConfig() # you need to initialize logging, otherwise you will not see anything from requests
 # logging.getLogger().setLevel(logging.DEBUG)
