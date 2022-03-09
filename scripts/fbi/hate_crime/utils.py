@@ -225,9 +225,9 @@ def make_time_place_aggregation(dataframe,
                       groupby_cols),
         agg_dict=agg_dict,
         multi_index=multi_index)
-    agg_city['Place'] = agg_city.apply(
-        lambda row: convert_to_place_dcid(row['STATE_ABBR'], row['PUB_AGENCY_NAME'], 'City'),
-        axis=1)
+    agg_city['Place'] = agg_city.apply(lambda row: convert_to_place_dcid(
+        row['STATE_ABBR'], row['PUB_AGENCY_NAME'], 'City'),
+                                       axis=1)
     agg_city.drop(columns=['PUB_AGENCY_NAME', 'STATE_ABBR'], inplace=True)
     agg_list.append(agg_city)
 
