@@ -509,7 +509,7 @@ dcid: node3
             'a': {
                 'value': '[v1 v6 v7]',
                 'namespace': '',
-                'complexValue': ['v1', 'v8', 'v7'] # value v6 renamed to v8
+                'complexValue': ['v1', 'v8', 'v7']  # value v6 renamed to v8
             },
             'b': {
                 'value': 'v2',
