@@ -1725,10 +1725,12 @@ def _write_to_csv(df: pd.DataFrame, csv_file_name: str):
     df.to_csv(csv_file_name, index=False)
 
 
-if __name__ == '__main__':
-    source_data_path = os.path.join(_SCRIPT_PATH, 'source_data',
-                                    'hate_crime.csv')
-    df = pd.read_csv(source_data_path, usecols=_INPUT_COLUMNS)
+def process_main(input_csv = os.path.join(_SCRIPT_PATH, 'source_data', 'hate_crime.csv'), output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
+    global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
+    input_csv = os.path.expanduser(input_csv)
+    output_path = os.path.expanduser(output_path)
+    
+    df = pd.read_csv(input_csv, usecols=_INPUT_COLUMNS)
 
     with open('config.json', 'r') as f:
         config = json.load(f)
@@ -1768,8 +1770,8 @@ if __name__ == '__main__':
     # Aggregations
     statvar_list = []
     final_columns = ['DATA_YEAR', 'Place', 'StatVar', 'Value']
-    if not os.path.exists(os.path.join(_SCRIPT_PATH, 'aggregations')):
-        os.mkdir(os.path.join(_SCRIPT_PATH, 'aggregations'))
+    
+    os.makedirs(os.path.join(output_path), exist_ok=True)
 
     all_aggr = []
     for file_name, aggregations in _AGGREGATIONS.items():
@@ -1783,14 +1785,17 @@ if __name__ == '__main__':
                                 **aggr_map['args'])
             aggr_list.extend(aggr)
             all_aggr.extend(aggr)
-        aggr_csv_path = os.path.join(_SCRIPT_PATH, 'aggregations', file_name)
+        aggr_csv_path = os.path.join(output_path, file_name)
         _write_to_csv(pd.concat(aggr_list)[final_columns], aggr_csv_path)
 
-    all_aggr_csv_path = os.path.join(_SCRIPT_PATH, 'aggregations',
+    all_aggr_csv_path = os.path.join(output_path,
                                      'aggregation.csv')
     _write_to_csv(pd.concat(all_aggr)[final_columns], all_aggr_csv_path)
 
-    aggr_mcf_path = os.path.join(_SCRIPT_PATH, 'aggregations',
+    aggr_mcf_path = os.path.join(output_path,
                                  'aggregation.mcf')
     with open(aggr_mcf_path, 'w') as f:
         _write_statvar_mcf(statvar_list, f)
+
+if __name__ == '__main__':
+    process_main()
