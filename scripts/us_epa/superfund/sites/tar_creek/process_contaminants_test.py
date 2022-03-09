@@ -27,7 +27,8 @@ class ProcessTest(unittest.TestCase):
         self.maxDiff = None
         base_path = os.path.dirname(__file__)
         base_path = os.path.join(base_path, './data/test_data')
-        process_intermediate_csv(base_path, base_path)
+        input_file = os.path.join(base_path, 'tar_creek_2020_corrected.csv')
+        process_intermediate_csv(input_file, base_path)
 
         ## validate the csvs
         test_df = pd.read_csv(

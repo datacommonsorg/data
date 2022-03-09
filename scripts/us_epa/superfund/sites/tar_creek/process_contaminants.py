@@ -1,3 +1,20 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+This script generates clean csv and tmcf files for statistics about the contamination at Tar Creek using the csv file genereated by the ./process_report2020.py script.
+"""
+# NOTE: Please run ./process_report2020.py before running this script.
 import os
 import numpy as np
 import pandas as pd
@@ -75,7 +92,7 @@ _BASE_SV_MAP = {
         "measuredProperty": "concentration"
     }
 }
-_INTERMEDIATE_CSV_NAME = "tar_creek_2020_corrected.csv"
+_FILENAME_PREFIX = "superfund_sites_tarcreek"
 _CLEAN_CSV_FRAMES = []
 _TEMPLATE_MCF = """
 Node: E:EPASuperfundTarCreek->E0
@@ -188,12 +205,12 @@ def clean_dataset(row: pd.Series, column_list: list, sv_map: dict) -> None:
     _CLEAN_CSV_FRAMES.append(clean_csv)
 
 
-def process_intermediate_csv(input_path: str, output_path: str) -> None:
+def process_intermediate_csv(input_file: str, output_path: str) -> None:
     ## Create output directory if not present
     if not os.path.exists(output_path):
         os.makedirs(output_path)
 
-    df = pd.read_csv(os.path.join(input_path, _INTERMEDIATE_CSV_NAME))
+    df = pd.read_csv(input_file)
     df.replace(to_replace=r'^<.*$', value=0, regex=True,
                inplace=True)  #remove < from SVObs values
 
@@ -216,20 +233,22 @@ def process_intermediate_csv(input_path: str, output_path: str) -> None:
         ['observationAbout', 'observationDate', 'variableMeasured', 'units'],
         as_index=False)['value'].transform(max)
 
-    write_sv_mcf(os.path.join(output_path, "superfund_sites_tarcreek.mcf"),
-                 sv_dict, clean_csv['variableMeasured'].unique().tolist())
-    f = open(os.path.join(output_path, "superfund_sites_tarcreek.tmcf"), "w")
+    write_sv_mcf(os.path.join(output_path, f"{_FILENAME_PREFIX}.mcf"), sv_dict,
+                 clean_csv['variableMeasured'].unique().tolist())
+    f = open(os.path.join(output_path, f"{_FILENAME_PREFIX}.tmcf"), "w")
     f.write(_TEMPLATE_MCF)
     f.close()
 
-    clean_csv.to_csv(os.path.join(output_path, "superfund_sites_tarcreek.csv"),
+    clean_csv.to_csv(os.path.join(output_path, f"{_FILENAME_PREFIX}.csv"),
                      index=False)
 
 
 def main(_) -> None:
     FLAGS = flags.FLAGS
-    flags.DEFINE_string('input_path', './data',
-                        'Path to the directory with intermediate csv file')
+    flags.DEFINE_string(
+        'input_file', './data/tar_creek_2020_corrected.csv',
+        'Location of the intermediate csv file from process_report2020.py script'
+    )
     flags.DEFINE_string(
         'output_path', './data/output',
         'Path to the directory where generated files are to be stored.')

@@ -13,6 +13,7 @@
 # limitations under the License.
 """Tests for generate_measurement_site_mcf.py"""
 
+from email.mime import base
 import os
 import unittest
 
@@ -24,8 +25,9 @@ class ProcessTest(unittest.TestCase):
     def test_e2e(self):
         self.maxDiff = None
         base_path = os.path.dirname(__file__)
-        base_path = os.path.join(base_path, './data/test_data/')
-        generate_mcf(base_path, base_path)
+        base_path = os.path.join(base_path, './data/test_data')
+        file_path = os.path.join(base_path, 'measurement_sites.csv')
+        generate_mcf(file_path, base_path)
 
         ## validate the generated mcf file
         f = open(os.path.join(base_path, 'measurement_site_nodes_expected.mcf'),

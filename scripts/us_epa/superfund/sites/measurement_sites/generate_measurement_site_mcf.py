@@ -19,8 +19,6 @@ import re
 from absl import app, flags
 import pandas as pd
 
-DATASET_FILE = 'measurement_sites.csv'
-
 MCF_STR = """
 Node: {dcid}
 name: "{name}"
@@ -45,11 +43,10 @@ def write_to_file(row: pd.Series, file_object) -> None:
             location=row['latLong']))
 
 
-def generate_mcf(input_path: str, output_path: str) -> None:
+def generate_mcf(input_file: str, output_path: str) -> None:
     """
     Generates the nodes.mcf from the measurement_sites csv file
     """
-    input_file = os.path.join(input_path, DATASET_FILE)
     site_df = pd.read_csv(input_file)
     site_df['latLong'] = site_df.apply(
         lambda row: f"[latLong {str(row['Latitude'])} {str(row['Longitude'])}]",
@@ -66,13 +63,12 @@ def generate_mcf(input_path: str, output_path: str) -> None:
 
 def main(_) -> None:
     FLAGS = flags.FLAGS
-    flags.DEFINE_string(
-        'input_path', './data',
-        'Path to the directory with measurement_sites.csv file')
+    flags.DEFINE_string('input_file', './data/measurement_sites.csv',
+                        'Location of the measurement_sites.csv file')
     flags.DEFINE_string(
         'output_path', './data/output',
         'Path to the directory where generated files are to be stored.')
-    generate_mcf(FLAGS.input_path, FLAGS.output_path)
+    generate_mcf(FLAGS.input_file, FLAGS.output_path)
 
 
 if __name__ == '__main__':

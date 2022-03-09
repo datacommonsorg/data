@@ -4,12 +4,9 @@
 The data on the level of contamination at the site is measured through several sampling wells that are situated within and around the site in the cities of [Picher](https://en.wikipedia.org/wiki/Picher,_Oklahoma) and [Cardin](https://en.wikipedia.org/wiki/Cardin,_Oklahoma). The measurement of contamination levels are published in the 5-year review report mandated by the EPA to monitor the clean up in superfund sites.
 
 #### How to get the dataset:
-For Tar Creek, the 5-year review reports are available as PDF reports at [cumulis.epa.gov](https://cumulis.epa.gov/supercpad/SiteProfiles/index.cfm?fuseaction=second.scs&id=0601269&doc=Y&colid=33990&region=06&type=SC). While the EPA data source is preferred, you can also find these reports at the [Oklahoma Department of Environmental Quality](https://applications.deq.ok.gov/superfundweb/default.aspx?epaid=OKD980629844) page for Tar Creek.
+For Tar Creek, the 5-year review reports are available as PDF reports at [cumulis.epa.gov](https://cumulis.epa.gov/supercpad/SiteProfiles/index.cfm?fuseaction=second.scs&id=0601269&doc=Y&colid=33990&region=06&type=SC). The [Oklahoma Department of Environmental Quality](https://applications.deq.ok.gov/superfundweb/default.aspx?epaid=OKD980629844) page for Tar Creek has the same reports but are not preferred since the tables are encoded as images which are difficult to extract and process.
 
-The PDFs are fairly large and requires a pre-processing step to extract the tabular data from the reports, we use [`tabula-py`](https://github.com/chezou/tabula-py) to extract tabular data.
-
-**NOTE:** The extraction of tabular data with `tabula-py` works only for the PDFs downloaded from [cumulis.epa.gov](https://cumulis.epa.gov/supercpad/SiteProfiles/index.cfm?fuseaction=second.scs&id=0601269&doc=Y&colid=33990&region=06&type=SC).
-
+We use [`tabula-py`](https://github.com/chezou/tabula-py) to extract tabular data from the PDF files by specifying the page numbers of interest and setting two boolean flags namely: `stream` and `guess` to `True`. This is taken care by the [`process_report2020.py`](process_report2020.py) script.
 
 To simplify future look-up to reproduce the extracted data, please use the following table.
 
@@ -24,7 +21,7 @@ To simplify future look-up to reproduce the extracted data, please use the follo
 |[Fifth five-year report of Tar Creek Superfund site](https://semspub.epa.gov/src/document/06/9679184)|2015|38-55||TODO|
 |[Sixth five-year report of Tar Creek Superfund site](https://semspub.epa.gov/src/document/06/100021610)|2020|83-86||Imported|
 
-Since the format of the reports are inconsistent across different superfund site and review years, it is advisable to write custom scripts for each report to extract the tabular data. 
+> Since the format of the reports are inconsistent across different superfund site and review years, it is advisable to write custom scripts for each report to extract the tabular data. 
 
 #### Extract and process tabular data from PDF reports
 The [`process_report2020.py`](process_report2020.py) script is used to extract the tabular data published in the Sixth five-year report of Tar Creek Superfund site, 2020. The script takes as an input a PDF file, which is the file format in which the five-year review reports are available and uses [`tabula-py`](https://github.com/chezou/tabula-py) to extract the tabular data in the specified page number range. 
@@ -34,7 +31,7 @@ The [`process_report2020.py`](process_report2020.py) script can be run as
 ```bash
 python3 process_report2020.py --input_path=<path to the PDF on local computer> --pages=<83-89|83,..,89|83>
 ```
->**NOTE:** The intermediate csv file generated is stored in the same location as the location of the PDF file.
+**NOTE:** The intermediate csv file generated is stored in the same location as the location of the PDF file.
 
 >**TIP:** While the script supports the use of URL instead of a local path to the PDF file, it is recommended to download the reports locally and process them.
 
