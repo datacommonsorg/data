@@ -35,9 +35,9 @@ from url_list_compiler import get_table_url_list
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(module_dir_, '../../../'))
 
-from scripts.tools.download_utils import download_url_list_iterations
+from .download_utils import download_url_list_iterations
 from tools.download_utils.requests_wrappers import request_url_json
-from scripts.tools.status_file_utils import sync_status_list
+from .status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 

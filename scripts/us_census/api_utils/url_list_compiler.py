@@ -26,11 +26,7 @@ from sys import path
 from typing import Any, Union
 
 from census_api_helpers import *
-
-module_dir_ = os.path.dirname(os.path.realpath(__file__))
-path.insert(1, os.path.join(module_dir_, '../../../'))
-
-from tools.download_utils.status_file_utils import sync_status_list
+from .status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 
