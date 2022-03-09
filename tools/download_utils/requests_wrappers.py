@@ -15,60 +15,70 @@
 Wrapper functions for easy use of requests library.
 """
 
-import requests
 import json
+import logging
+import requests
 import time
 
 
-def request_url_json(url: str) -> dict:
+def request_url_json(url: str, max_retries: int = 1, retry_interval: int = 10) -> dict:
     """Get JSON object version of reponse to GET request to given URL.
-
+        Handles exception ReadTimeout.
   Args:
     url: URL to make the GET request.
+    max_retries: Number of timeout retries to be made before returning empty dict.
+    retry_interval: Wait interval in seconds before retying.
 
   Returns:
     JSON decoded response from the GET call.
-      Empty dict is returned in case the call fails.
+      Empty dict is returned in case the call times out after max_retries.
   """
-    print(url)
+    logging.info('Requesting url: %s', url)
     try:
         req = requests.get(url)
-        # print(req.url)
+        if req.status_code == requests.codes.ok:
+            response_data = req.json()
+        else:
+            response_data = {'http_err_code': req.status_code}
+            logging.error('HTTP status code: ' + str(req.status_code))
+        return response_data
     except requests.exceptions.ReadTimeout:
-        print('Timeout occoured, retrying after 10s.')
-        time.sleep(10)
-        try:
-            req = requests.get(url)
-        except requests.exceptions.ReadTimeout:
-            print('Timeout occoured, request failed.')
-            return {}
-
-    if req.status_code == requests.codes.ok:
-        response_data = req.json()
-    else:
-        response_data = {'http_err_code': req.status_code}
-        print('HTTP status code: ' + str(req.status_code))
-    return response_data
+        if max_retries> 0:
+          logging.warning('Timeout occoured, retrying after 10s.')
+          time.sleep(10)
+          return request_url_json(url, max_retries - 1, retry_interval)
+        else:
+          return {}
 
 
-def request_post_json(url: str, data_: dict) -> dict:
+def request_post_json(url: str, data_: dict, max_retries: int = 1, retry_interval: int = 10) -> dict:
     """Get JSON object version of reponse to POST request to given URL.
 
   Args:
     url: URL to make the POST request.
     data_: payload for the POST request
+    max_retries: Number of timeout retries to be made before returning empty dict.
+    retry_interval: Wait interval in seconds before retying.
 
   Returns:
     JSON decoded response from the POST call.
       Empty dict is returned in case the call fails.
   """
-    headers = {'Content-Type': 'application/json'}
-    req = requests.post(url, data=json.dumps(data_), headers=headers)
-    print(req.request.url)
+    try:
+      headers = {'Content-Type': 'application/json'}
+      req = requests.post(url, data=json.dumps(data_), headers=headers)
+      logging.info('Post request url: %s', req.request.url)
 
-    if req.status_code == requests.codes.ok:
-        response_data = req.json()
-    else:
-        response_data = {'http_err_code': req.status_code}
-        print('HTTP status code: ' + str(req.status_code))
-    return response_data
+      if req.status_code == requests.codes.ok:
+          response_data = req.json()
+      else:
+          response_data = {'http_err_code': req.status_code}
+          logging.error('Error: HTTP status code: %s', str(req.status_code))
+      return response_data
+    except requests.exceptions.ReadTimeout:
+      if max_retries> 0:
+          logging.warning('Timeout occoured, retrying after 10s.')
+          time.sleep(10)
+          return request_post_json(url, data_, max_retries - 1, retry_interval)
+      else:
+        return {}

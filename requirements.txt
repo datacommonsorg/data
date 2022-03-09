@@ -25,5 +25,3 @@ xarray==0.19.0
 xlrd==1.2.0
 yapf
 zipp
-aiohttp
-aiolimiter
