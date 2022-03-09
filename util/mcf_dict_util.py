@@ -57,78 +57,17 @@ import logging
 import os
 import re
 import json
+from sys import path
 import requests
 from typing import Dict, Optional, Union
 from collections import OrderedDict
 
+_MODULE_DIR = os.path.dirname(os.path.realpath(__file__))
+path.insert(1, os.path.join(_MODULE_DIR, '../'))
+
+from scripts.us_census.acs5yr.subject_tables.common.datacommons_api_wrappers.datacommons_wrappers import dc_check_existence
+
 PREFIX_LIST = ['dcs', 'dcid', 'l', 'schema']
-
-
-def request_post_json(url: str, data_: dict) -> dict:
-    """Get JSON object version of reponse to POST request to given URL.
-
-  Args:
-    url: URL to make the POST request.
-    data_: payload for the POST request
-
-  Returns:
-    JSON decoded response from the POST call.
-  """
-    headers = {'Content-Type': 'application/json'}
-    req = requests.post(url, data=json.dumps(data_), headers=headers)
-    print(req.request.url)
-
-    if req.status_code == requests.codes.ok:
-        response_data = req.json()
-    else:
-        response_data = {'http_err_code': req.status_code}
-        print('HTTP status code: ' + str(req.status_code))
-    return response_data
-
-
-def dc_check_existence(dcid_list: list,
-                       use_autopush: bool = True,
-                       max_items: int = 450) -> dict:
-    """Checks if a given list of dcids are present in DC.
-
-    Args:
-        dcid_list: List of dcids to be queried for existence.
-        use_autopush: Boolean value to use autopush API and not public API.
-        max_items: Limit of items to be queried in a single POST request.
-
-
-    Returns:
-        Dict object with dcids as key values and boolean values signifying existence as values.
-    """
-    data_ = {}
-    ret_dict = {}
-    if use_autopush:
-        url_prefix = 'autopush.'
-    else:
-        url_prefix = ''
-
-    chunk_size = max_items
-    dcid_list_chunked = [
-        dcid_list[i:i + chunk_size]
-        for i in range(0, len(dcid_list), chunk_size)
-    ]
-    for dcid_chunk in dcid_list_chunked:
-        data_["dcids"] = dcid_chunk
-        req = request_post_json(
-            f'https://{url_prefix}api.datacommons.org/node/property-labels',
-            data_)
-        resp_dicts = req['payload']
-        resp_dicts = ast.literal_eval(resp_dicts)
-        for cur_dcid in resp_dicts:
-            if not resp_dicts[cur_dcid]:
-                ret_dict[cur_dcid] = False
-            elif not resp_dicts[cur_dcid]['inLabels'] and not resp_dicts[
-                    cur_dcid]['outLabels']:
-                ret_dict[cur_dcid] = False
-            else:
-                ret_dict[cur_dcid] = True
-
-    return ret_dict
 
 
 def mcf_to_dict_list(mcf_str: str) -> list:
