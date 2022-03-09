@@ -84,20 +84,24 @@ def dc_check_existence(dcid_list: list,
         for cur_dcid in resp_dicts:
             if not resp_dicts[cur_dcid]:
                 ret_dict[cur_dcid] = False
-            elif not resp_dicts[cur_dcid]['inLabels'] and not resp_dicts[cur_dcid]['outLabels']:
+            elif not resp_dicts[cur_dcid]['inLabels'] and not resp_dicts[
+                    cur_dcid]['outLabels']:
                 ret_dict[cur_dcid] = False
             else:
                 ret_dict[cur_dcid] = True
 
     return ret_dict
 
+
 # fetch pvs from dc, enums from dc
 
+
 def fetch_dcid_properties_enums(dcid: str,
-                                cache_path: str = _MODULE_DIR + '/prefetched_outputs',
+                                cache_path: str = _MODULE_DIR +
+                                '/prefetched_outputs',
                                 use_autopush: bool = True,
                                 force_fetch: bool = False):
-  """Fetches all the properties and it's possible values for a given dcid.
+    """Fetches all the properties and it's possible values for a given dcid.
 
     Args:
       dcid: DCID of the object whose properties and enum values need to be fetched.
@@ -108,103 +112,104 @@ def fetch_dcid_properties_enums(dcid: str,
     Returns:
       Dict object with properties as keys and list of possible enum values as values.
   """
-  cache_path = os.path.expanduser(cache_path)
-  if not os.path.exists(cache_path):
-    os.makedirs(cache_path, exist_ok=True)
+    cache_path = os.path.expanduser(cache_path)
+    if not os.path.exists(cache_path):
+        os.makedirs(cache_path, exist_ok=True)
 
-  if use_autopush:
-    api_prefix = 'autopush.'
-  else:
-    api_prefix = ''
+    if use_autopush:
+        api_prefix = 'autopush.'
+    else:
+        api_prefix = ''
 
-  dc_props = {}
+    dc_props = {}
 
-  # get list of properties for each population type
-  if force_fetch or not os.path.isfile(
-      os.path.join(cache_path, f'{dcid}_dc_props.json')):
-    data_ = {}
-    data_["dcids"] = [dcid]
-    data_["property"] = "domainIncludes"
-    data_["direction"] = "in"
-    population_props = request_post_json(f'https://{api_prefix}api.datacommons.org/node/property-values', data_)
-    dc_population_pvs = population_props['payload']
-    dc_population_pvs = ast.literal_eval(dc_population_pvs)
+    # get list of properties for each population type
+    if force_fetch or not os.path.isfile(
+            os.path.join(cache_path, f'{dcid}_dc_props.json')):
+        data_ = {}
+        data_["dcids"] = [dcid]
+        data_["property"] = "domainIncludes"
+        data_["direction"] = "in"
+        population_props = request_post_json(
+            f'https://{api_prefix}api.datacommons.org/node/property-values',
+            data_)
+        dc_population_pvs = population_props['payload']
+        dc_population_pvs = ast.literal_eval(dc_population_pvs)
 
-    if dc_population_pvs[dcid]:
-      dc_props = {}
-      for prop_dict in dc_population_pvs[dcid]['in']:
-        dc_props[prop_dict['dcid']] = []
+        if dc_population_pvs[dcid]:
+            dc_props = {}
+            for prop_dict in dc_population_pvs[dcid]['in']:
+                dc_props[prop_dict['dcid']] = []
 
-    with open(os.path.join(cache_path, f'{dcid}_dc_props.json'),
-              'w') as fp:
-      json.dump(dc_props, fp, indent=2)
-  else:
-    dc_props = json.load(
-        open(os.path.join(cache_path, f'{dcid}_dc_props.json'), 'r'))
+        with open(os.path.join(cache_path, f'{dcid}_dc_props.json'), 'w') as fp:
+            json.dump(dc_props, fp, indent=2)
+    else:
+        dc_props = json.load(
+            open(os.path.join(cache_path, f'{dcid}_dc_props.json'), 'r'))
 
-  # check if the list has enum type
-  if force_fetch or not os.path.isfile(
-      os.path.join(cache_path, f'{dcid}_dc_props_types.json')):
-    data_ = {}
-    data_['dcids'] = list(dc_props.keys())
-    data_['property'] = 'rangeIncludes'
-    data_['direction'] = 'out'
-    if data_['dcids']:
-      population_props_types = request_post_json(f'https://{api_prefix}api.datacommons.org/node/property-values', data_)
-      population_props_types = ast.literal_eval(population_props_types['payload'])
-      for property_name in population_props_types:
-        if population_props_types[property_name]:
-          for temp_dict in population_props_types[property_name]['out']:
-            dc_props[property_name].append(temp_dict['dcid'])
-      with open(
-          os.path.join(cache_path, f'{dcid}_dc_props_types.json'),
-          'w') as fp:
-        json.dump(dc_props, fp, indent=2)
-  else:
-    dc_props = json.load(
-        open(
-            os.path.join(cache_path, f'{dcid}_dc_props_types.json'),
-            'r'))
+    # check if the list has enum type
+    if force_fetch or not os.path.isfile(
+            os.path.join(cache_path, f'{dcid}_dc_props_types.json')):
+        data_ = {}
+        data_['dcids'] = list(dc_props.keys())
+        data_['property'] = 'rangeIncludes'
+        data_['direction'] = 'out'
+        if data_['dcids']:
+            population_props_types = request_post_json(
+                f'https://{api_prefix}api.datacommons.org/node/property-values',
+                data_)
+            population_props_types = ast.literal_eval(
+                population_props_types['payload'])
+            for property_name in population_props_types:
+                if population_props_types[property_name]:
+                    for temp_dict in population_props_types[property_name][
+                            'out']:
+                        dc_props[property_name].append(temp_dict['dcid'])
+            with open(os.path.join(cache_path, f'{dcid}_dc_props_types.json'),
+                      'w') as fp:
+                json.dump(dc_props, fp, indent=2)
+    else:
+        dc_props = json.load(
+            open(os.path.join(cache_path, f'{dcid}_dc_props_types.json'), 'r'))
 
-  # get enum value list
-  if force_fetch or not os.path.isfile(
-      os.path.join(cache_path, f'{dcid}_dc_props_enum_values.json')):
-    new_dict = copy.deepcopy(dc_props)
-    for property_name in new_dict.keys():
-      dc_props[property_name] = []
-      for type_name in new_dict[property_name]:
-        if 'enum' in type_name.lower():
-          data_ = {}
-          data_['dcids'] = [type_name]
-          data_['property'] = 'typeOf'
-          data_['direction'] = 'in'
-          enum_values = request_post_json(f'https://{api_prefix}api.datacommons.org/node/property-values', data_)
-          enum_values = ast.literal_eval(enum_values['payload'])
-          if enum_values[type_name]:
-            for temp_dict in enum_values[type_name]['in']:
-              dc_props[property_name].append(temp_dict['dcid'])
+    # get enum value list
+    if force_fetch or not os.path.isfile(
+            os.path.join(cache_path, f'{dcid}_dc_props_enum_values.json')):
+        new_dict = copy.deepcopy(dc_props)
+        for property_name in new_dict.keys():
+            dc_props[property_name] = []
+            for type_name in new_dict[property_name]:
+                if 'enum' in type_name.lower():
+                    data_ = {}
+                    data_['dcids'] = [type_name]
+                    data_['property'] = 'typeOf'
+                    data_['direction'] = 'in'
+                    enum_values = request_post_json(
+                        f'https://{api_prefix}api.datacommons.org/node/property-values',
+                        data_)
+                    enum_values = ast.literal_eval(enum_values['payload'])
+                    if enum_values[type_name]:
+                        for temp_dict in enum_values[type_name]['in']:
+                            dc_props[property_name].append(temp_dict['dcid'])
 
-    with open(
-        os.path.join(cache_path, f'{dcid}_dc_props_enum_values.json'),
-        'w') as fp:
-      json.dump(dc_props, fp, indent=2)
-  else:
-    dc_props = json.load(
-        open(
-            os.path.join(cache_path,
-                         f'{dcid}_dc_props_enum_values.json'), 'r'))
+        with open(os.path.join(cache_path, f'{dcid}_dc_props_enum_values.json'),
+                  'w') as fp:
+            json.dump(dc_props, fp, indent=2)
+    else:
+        dc_props = json.load(
+            open(os.path.join(cache_path, f'{dcid}_dc_props_enum_values.json'),
+                 'r'))
 
-  return dc_props
+    return dc_props
 
 
 def main(argv):
-  print(
-      json.dumps(
-          fetch_dcid_properties_enums(FLAGS.dcid, FLAGS.dc_output_path,
-                                      FLAGS.force_fetch),
-          indent=2))
+    print(
+        json.dumps(fetch_dcid_properties_enums(FLAGS.dcid, FLAGS.dc_output_path,
+                                               FLAGS.force_fetch),
+                   indent=2))
 
 
 if __name__ == '__main__':
-  flags.mark_flags_as_required(['dcid'])
-  app.run(main)
+    flags.mark_flags_as_required(['dcid'])
+    app.run(main)

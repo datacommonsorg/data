@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import unittest
 from DC_wrappers import *
 
@@ -21,7 +20,12 @@ class TestDCWrappers(unittest.TestCase):
 
     def test_dc_check_existence(self):
         ret = dc_check_existence(['Count_Person', 'Person', 'node1'])
-        self.assertEqual(ret, {'Count_Person': True, 'Person': True, 'node1': False})
+        self.assertEqual(ret, {
+            'Count_Person': True,
+            'Person': True,
+            'node1': False
+        })
+
 
 if __name__ == '__main__':
     unittest.main()
