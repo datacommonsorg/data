@@ -26,6 +26,8 @@ def request_url_json(url: str, max_retries: int = 1, retry_interval: int = 10) -
         Handles exception ReadTimeout.
   Args:
     url: URL to make the GET request.
+    max_retries: Number of timeout retries to be made before returning empty dict.
+    retry_interval: Wait interval in seconds before retying.
 
   Returns:
     JSON decoded response from the GET call.
@@ -55,6 +57,8 @@ def request_post_json(url: str, data_: dict, max_retries: int = 1, retry_interva
   Args:
     url: URL to make the POST request.
     data_: payload for the POST request
+    max_retries: Number of timeout retries to be made before returning empty dict.
+    retry_interval: Wait interval in seconds before retying.
 
   Returns:
     JSON decoded response from the POST call.
