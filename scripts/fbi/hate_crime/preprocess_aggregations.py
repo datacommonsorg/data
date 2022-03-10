@@ -1725,11 +1725,13 @@ def _write_to_csv(df: pd.DataFrame, csv_file_name: str):
     df.to_csv(csv_file_name, index=False)
 
 
-def process_main(input_csv = os.path.join(_SCRIPT_PATH, 'source_data', 'hate_crime.csv'), output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
+def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
+                                        'hate_crime.csv'),
+                 output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
     global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
     input_csv = os.path.expanduser(input_csv)
     output_path = os.path.expanduser(output_path)
-    
+
     df = pd.read_csv(input_csv, usecols=_INPUT_COLUMNS)
 
     with open('config.json', 'r') as f:
@@ -1742,35 +1744,12 @@ def process_main(input_csv = os.path.join(_SCRIPT_PATH, 'source_data', 'hate_cri
     }
     config_old['_DPV_'] = []
 
-    _PREPEND_APPEND_REPLACE_MAP.pop('targetedRace', None)
-    _PREPEND_APPEND_REPLACE_MAP.pop('targetedEthnicity', None)
-    _PREPEND_APPEND_REPLACE_MAP.pop('targetedReligion', None)
-    _PREPEND_APPEND_REPLACE_MAP.pop('targetedSexualOrientation', None)
-    _PREPEND_APPEND_REPLACE_MAP.pop('targetedDisabilityStatus', None)
-    _PREPEND_APPEND_REPLACE_MAP.pop('targetedGender', None)
-
     df_dict = _create_df_dict(df, False)
-
-    # Incidents by StatVar
-    # df_dict['incident_df'], statvar_list = _gen_statvar_mcf(
-    #     df_dict['incident_df'], config, population_type='HateCrimeIncidents')
-
-    # incident_by_statvar = make_time_place_aggregation(
-    #     df_dict['incident_df'],
-    #     groupby_cols=['StatVar'],
-    #     agg_dict={'INCIDENT_ID': 'count'},
-    #     multi_index=False)
-    # output_csv_path = os.path.join(_SCRIPT_PATH, 'output', 'output.csv')
-    # _write_to_csv(pd.concat(incident_by_statvar), output_csv_path)
-
-    # output_mcf_path = os.path.join(_SCRIPT_PATH, 'output', 'output.mcf')
-    # with open(output_mcf_path, 'w') as f:
-    #     _write_statvar_mcf(statvar_list, f)
 
     # Aggregations
     statvar_list = []
     final_columns = ['DATA_YEAR', 'Place', 'StatVar', 'Value']
-    
+
     os.makedirs(os.path.join(output_path), exist_ok=True)
 
     all_aggr = []
@@ -1788,14 +1767,13 @@ def process_main(input_csv = os.path.join(_SCRIPT_PATH, 'source_data', 'hate_cri
         aggr_csv_path = os.path.join(output_path, file_name)
         _write_to_csv(pd.concat(aggr_list)[final_columns], aggr_csv_path)
 
-    all_aggr_csv_path = os.path.join(output_path,
-                                     'aggregation.csv')
+    all_aggr_csv_path = os.path.join(output_path, 'aggregation.csv')
     _write_to_csv(pd.concat(all_aggr)[final_columns], all_aggr_csv_path)
 
-    aggr_mcf_path = os.path.join(output_path,
-                                 'aggregation.mcf')
+    aggr_mcf_path = os.path.join(output_path, 'aggregation.mcf')
     with open(aggr_mcf_path, 'w') as f:
         _write_statvar_mcf(statvar_list, f)
+
 
 if __name__ == '__main__':
     process_main()

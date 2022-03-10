@@ -42,3 +42,12 @@ To download data from 2005 to 2019 at a different location and force download ra
 ```bash
 python3 download_publication_data.py --store_path=./publications --force_fetch
 ```
+
+## Aggreations from master file
+
+`preprocess_aggregations.py` creates aggregations from master file with each individual incident recorded. The script outputs individual files for each type of aggregation to ease debugging and a combined `aggregation.csv` file under `aggregations` folder with all the final observations.
+
+To create aggregations
+```bash
+python preprocess_aggregations_test.py
+```
