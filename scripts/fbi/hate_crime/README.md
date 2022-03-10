@@ -51,3 +51,11 @@ To create aggregations
 ```bash
 python preprocess_aggregations_test.py
 ```
+
+### Changes required for final mcf file
+
+The output mcf file is produced such that the DCIDs are present. In order to get the final version of the stat vars following changes need to be made:
+- drop `isHateCrime` property
+- change `populationType` to be `HateCrimeIncidents`
+- `biasMotivation: dcs:TransgenderOrGenderNonConforming` to `biasMotivation: dcs:gender` and `targetedGender: dcs:TransgenderOrGenderNonConforming`
+- add `offenderType` property with value from `KnownOffender`, `KnownOffenderRace`, `KnownOffenderEthnicity`, `KnownOffenderAge` where applicable.
