@@ -180,6 +180,8 @@ The long config file generated in the 1st step can be used to check and modify t
     - `totals` - Yearwise list of column names containing total values and hence the list of prefix matching used. The same will be used for other census columns listed under `used_columns`. It is a good idea to check this list against actual table, and tally the number of entries against it.
 
 **NOTE: `prefix` method might fail if census doesn't use a prefix in the column name and mentions just the entity.**
+**NOTE: `prefix` method might generate wrong associations if the column sequence is not maintained in the source file.**
+**NOTE: known caveat for `prefix` method: If multiple totlas are followed by percentages and 1st total is to be used, generator will wrongly associate the percentages to the last total.**
     
 ### Common Guidelines For Using Denominator Generator
 - Sometimes using a subset of years would lead to change in `denominator_method`. This might be the case when table format changes across years.
@@ -235,6 +237,8 @@ python common_util.py --get_ignored_columns --zip_path=../sample_data/s1810.zip 
 
 ### helper_functions.py
 
+This file can be used from command line to generate denominator section. The file also contains related functions which might be used elsewhere.
+
 To excute the 1st step of the denominator section generation:
 ```
 python helper_functions.py --denominator_config=~/acs_tables/S0701/denominator_config.json
@@ -254,3 +258,54 @@ In case no modification is needed in long config file:
 python helper_functions.py --denominator_config=~/acs_tables/S0701/denominator_config.json --denominator_long_config=~/acs_tables/S0701/denominator_config_long.json
 ```
 The above command will execute both the steps and create denominators.json file in the directory with config file.
+
+**WARNING:**
+Save a copy of the generated spec if it is modified. Running the script again will overwrite the changes
+
+Check the missing_report.json file for list of columns that need attention
+
+The script creates a 'compiled spec' which contains everythin from all the specs present in the spec_dir
+
+It then proceeds to split 'compiled spec' in 2 parts:
+- keeping the parts where token match occours
+- storing the discarded parts in other similar spec for reference in case of similar token
+
+## Command Line Invocations
+
+To generate a guess spec:
+```
+python acs_spec_compiler.py --guess_new_spec --zip_list=../sample_data/s1810.zip
+```
+NOTE: This command creates following important files to lookout for:
+- generate_spec.json: This is the guessed spec for the input file
+- missing_report.json: This file contains:
+	- List of tokens present in the dataset but not in the spec
+	- List of columns that were not assigned any propery and value
+- union_spec.json: This is the union of all the 
+- discarded_spec_parts.json: This contains parts of the union spec that were not used in the output spec
+
+To generate a guess spec with expected properties or population types:
+```
+python acs_spec_compiler.py --guess_new_spec --zip_list=../sample_data/s1810.zip --expected_populations=Person,Household --expected_properties=occupancyTenure
+```
+This will look for properties on DataCommons API and add placeholders for available enum values
+
+
+To create a union of all specs:
+```
+python acs_spec_compiler.py --create_union_spec
+```
+NOTE: The output is also stored in file 'union_spec.json'
+
+If the specs are present in some other directory:
+```
+python acs_spec_compiler.py --create_union_spec --spec_dir=<path to dir>
+```
+
+To get a list of properties available in the union of all specs:
+```
+python acs_spec_compiler.py --get_combined_property_list
+```
+Other available flags from common_utils:
+- is_metadata
+- delimiter
