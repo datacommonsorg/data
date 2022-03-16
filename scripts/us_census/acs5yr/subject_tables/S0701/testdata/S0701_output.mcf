@@ -1,0 +1,4669 @@
+Node: dcid:Count_Person_1OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1To4Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1To4Years
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To24Years
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To34Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To34Years
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To44Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To44Years
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To54Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To54Years
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To64Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To64Years
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_1OrMoreYears
+measuredProperty: dcs:age
+statType: dcs:medianValue
+age: [1 - Years]
+populationType: dcs:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OneRace
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OneRace
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AsianAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AsianAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_SomeOtherRaceAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_SomeOtherRaceAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_TwoOrMoreRaces
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_TwoOrMoreRaces
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NeverMarried
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NeverMarried
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_MarriedAndNotSeparated
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_MarriedAndNotSeparated
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DivorcedOrSeparated
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DivorcedOrSeparated
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Widowed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Widowed
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegree
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegree
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentGraduateOrProfessionalDegree
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentGraduateOrProfessionalDegree
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOfUpto9999USDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Person
+measuredProperty: dcs:income
+statType: dcs:medianValue
+age: [15 - Years]
+incomeStatus: dcs:WithIncome
+populationType: dcs:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_PovertyStatusDetermined
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_PovertyStatusDetermined
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ResidesInHousingUnit
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ResidesInHousingUnit
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1To4Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1To4Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To24Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To34Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To34Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To44Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To44Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To54Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To54Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To64Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To64Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_1OrMoreYears_DifferentHouseInSameCounty
+measuredProperty: dcs:age
+statType: dcs:medianValue
+age: [1 - Years]
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Male_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Male_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Female_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Female_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OneRace_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OneRace_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AsianAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AsianAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_SomeOtherRaceAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_SomeOtherRaceAlone_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_TwoOrMoreRaces_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_TwoOrMoreRaces_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_HispanicOrLatino_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_HispanicOrLatino_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ForeignBorn_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ForeignBorn_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NeverMarried_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NeverMarried_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_MarriedAndNotSeparated_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_MarriedAndNotSeparated_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DivorcedOrSeparated_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DivorcedOrSeparated_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Widowed_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Widowed_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegree_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegree_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentGraduateOrProfessionalDegree_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentGraduateOrProfessionalDegree_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Person_DifferentHouseInSameCounty
+measuredProperty: dcs:income
+statType: dcs:medianValue
+age: [15 - Years]
+incomeStatus: dcs:WithIncome
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_PovertyStatusDetermined_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_PovertyStatusDetermined_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ResidesInHousingUnit_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ResidesInHousingUnit_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit_DifferentHouseInSameCounty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInSameCounty
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1To4Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1To4Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To24Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To34Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To34Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To44Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To44Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To54Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To54Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To64Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To64Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_1OrMoreYears_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:age
+statType: dcs:medianValue
+age: [1 - Years]
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Male_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Male_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Female_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Female_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OneRace_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OneRace_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AsianAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AsianAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_SomeOtherRaceAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_SomeOtherRaceAlone_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_TwoOrMoreRaces_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_TwoOrMoreRaces_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_HispanicOrLatino_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_HispanicOrLatino_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ForeignBorn_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ForeignBorn_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NeverMarried_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NeverMarried_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_MarriedAndNotSeparated_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_MarriedAndNotSeparated_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DivorcedOrSeparated_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DivorcedOrSeparated_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Widowed_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Widowed_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegree_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegree_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentGraduateOrProfessionalDegree_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentGraduateOrProfessionalDegree_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Person_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:income
+statType: dcs:medianValue
+age: [15 - Years]
+incomeStatus: dcs:WithIncome
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_PovertyStatusDetermined_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_PovertyStatusDetermined_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ResidesInHousingUnit_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ResidesInHousingUnit_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit_DifferentHouseInDifferentCountySameState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountySameState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1To4Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1To4Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To24Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To34Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To34Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To44Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To44Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To54Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To54Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To64Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To64Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_1OrMoreYears_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:age
+statType: dcs:medianValue
+age: [1 - Years]
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Male_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Male_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Female_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Female_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OneRace_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OneRace_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AsianAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AsianAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_SomeOtherRaceAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_SomeOtherRaceAlone_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_TwoOrMoreRaces_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_TwoOrMoreRaces_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_HispanicOrLatino_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_HispanicOrLatino_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ForeignBorn_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ForeignBorn_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NeverMarried_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NeverMarried_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_MarriedAndNotSeparated_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_MarriedAndNotSeparated_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DivorcedOrSeparated_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DivorcedOrSeparated_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Widowed_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Widowed_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegree_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegree_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentGraduateOrProfessionalDegree_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentGraduateOrProfessionalDegree_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Person_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:income
+statType: dcs:medianValue
+age: [15 - Years]
+incomeStatus: dcs:WithIncome
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_PovertyStatusDetermined_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_PovertyStatusDetermined_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ResidesInHousingUnit_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ResidesInHousingUnit_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit_DifferentHouseInDifferentCountyDifferentState
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseInDifferentCountyDifferentState
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1To4Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1To4Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 4 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To24Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To24Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [18 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25To34Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25To34Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To44Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To44Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [35 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To54Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To54Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [45 54 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To64Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To64Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [55 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_1OrMoreYears_DifferentHouseAbroad
+measuredProperty: dcs:age
+statType: dcs:medianValue
+age: [1 - Years]
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Male_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Male_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_Female_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_Female_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OneRace_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OneRace_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_BlackOrAfricanAmericanAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AmericanIndianOrAlaskaNativeAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_AsianAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_AsianAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NativeHawaiianOrOtherPacificIslanderAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_SomeOtherRaceAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_SomeOtherRaceAlone_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_TwoOrMoreRaces_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_TwoOrMoreRaces_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_HispanicOrLatino_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_HispanicOrLatino_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_WhiteAloneNotHispanicOrLatino_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenBornInTheUnitedStates_Native_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+nativity: dcs:USC_Native
+citizenship: dcs:USCitizenBornInTheUnitedStates
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ForeignBorn_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ForeignBorn_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_USCitizenByNaturalization_ForeignBorn_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_NotAUSCitizen_ForeignBorn_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+nativity: dcs:USC_ForeignBorn
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NeverMarried_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NeverMarried_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_MarriedAndNotSeparated_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_MarriedAndNotSeparated_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+maritalStatus: dcs:MarriedAndNotSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DivorcedOrSeparated_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DivorcedOrSeparated_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+maritalStatus: dcs:DivorcedOrSeparated
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Widowed_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Widowed_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+maritalStatus: dcs:Widowed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25OrMoreYears_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25OrMoreYears_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentBachelorsDegree_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegree_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:BachelorsDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_EducationalAttainmentGraduateOrProfessionalDegree_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_EducationalAttainmentGraduateOrProfessionalDegree_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [25 - Years]
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15OrMoreYears_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf9999OrLessUSDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [- 9999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf10000To14999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf10000To14999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [10000 14999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf15000To24999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf15000To24999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [15000 24999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf25000To34999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf25000To34999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [25000 34999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf35000To49999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf35000To49999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [35000 49999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf50000To64999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf50000To64999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [50000 64999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf65000To74999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [65000 74999 USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf75000OrMoreUSDollar_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [15 - Years]
+income: [75000 - USDollar]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Person_DifferentHouseAbroad
+measuredProperty: dcs:income
+statType: dcs:medianValue
+age: [15 - Years]
+incomeStatus: dcs:WithIncome
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_PovertyStatusDetermined_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_PovertyStatusDetermined_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+povertyStatus: dcs:PovertyStatusDetermined
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1OrLessRatioToPovertyLine_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+povertyStatus: [- 1 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1To1.49RatioToPovertyLine_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+povertyStatus: [1 1.49 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_1.5OrMoreRatioToPovertyLine_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+povertyStatus: [1.5 - RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_ResidesInHousingUnit_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_ResidesInHousingUnit_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_OwnerOccupied_ResidesInHousingUnit_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_1OrMoreYears_RenterOccupied_ResidesInHousingUnit_DifferentHouseAbroad
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residentStatus: dcs:DifferentHouseAbroad
+age: [1 - Years]
+residenceType: dcs:HousingUnit
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
