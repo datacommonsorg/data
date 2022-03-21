@@ -1,0 +1,12 @@
+
+Node: E:Substance->E0
+typeOf: C:Substance->TypeOf
+dcid: C:Substance->dcid
+name: C:Substance->Name
+iupacName: C:Substance->IUPACName
+molecularFormula: C:Substance->Symbol
+atomicNumber: C:Substance->AtomicNumber
+chemicalSubstanceType: C:Substance->Type
+iupacInternationalChemicalID: C:Substance->InChI
+inChIKey: C:Substance->InChIKey
+sameAs: C:Substance->SameAs

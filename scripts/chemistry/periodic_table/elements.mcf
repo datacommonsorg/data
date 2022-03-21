@@ -1,0 +1,1299 @@
+Node: dcid:Hydrogen
+iupacName: "Hydrogen"
+dcid: "Hydrogen"
+molecularFormula: "H"
+name: "Hydrogen", "hydron"
+inChIKey: "YZCKVEUIGOORGS-UHFFFAOYSA-N"
+atomicNumber: 1
+chemicalSubstanceType: dcid:NonMetal
+iupacInternationalChemicalID: "InChI=1S/H"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Helium
+iupacName: "Helium"
+dcid: "Helium"
+molecularFormula: "He"
+name: "Helium"
+inChIKey: "SWQJXJOGLNCZEY-UHFFFAOYSA-N"
+atomicNumber: 2
+chemicalSubstanceType: dcid:NobleGas
+iupacInternationalChemicalID: "InChI=1S/He"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Lithium
+iupacName: "Lithium"
+dcid: "Lithium"
+molecularFormula: "Li"
+name: "Lithium"
+inChIKey: "WHXSMMKQMYFTQS-UHFFFAOYSA-N"
+atomicNumber: 3
+chemicalSubstanceType: dcid:AlkaliMetal
+iupacInternationalChemicalID: "InChI=1S/Li"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Beryllium
+iupacName: "Beryllium"
+dcid: "Beryllium"
+molecularFormula: "Be"
+name: "Beryllium"
+inChIKey: "ATBAMAFKBVZNFJ-UHFFFAOYSA-N"
+atomicNumber: 4
+chemicalSubstanceType: dcid:AlkalineEarthMetal
+iupacInternationalChemicalID: "InChI=1S/Be"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Boron
+iupacName: "Boron"
+dcid: "Boron"
+molecularFormula: "B"
+name: "Boron"
+inChIKey: "ZOXJGFHDIHLPTG-UHFFFAOYSA-N"
+atomicNumber: 5
+chemicalSubstanceType: dcid:SemiMetal
+iupacInternationalChemicalID: "InChI=1S/B"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Carbon
+iupacName: "Carbon"
+dcid: "Carbon"
+molecularFormula: "C"
+name: "Carbon"
+inChIKey: "OKTJSMMVPCPJKN-UHFFFAOYSA-N"
+atomicNumber: 6
+chemicalSubstanceType: dcid:NonMetal
+iupacInternationalChemicalID: "InChI=1S/C"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Nitrogen
+iupacName: "Nitrogen"
+dcid: "Nitrogen"
+molecularFormula: "N"
+name: "Nitrogen", "nitrogen(1-)"
+inChIKey: "QJGQUHMNIGDVPM-UHFFFAOYSA-N"
+atomicNumber: 7
+chemicalSubstanceType: dcid:Pnictogen
+iupacInternationalChemicalID: "InChI=1S/N"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Oxygen
+iupacName: "Oxygen"
+dcid: "Oxygen"
+molecularFormula: "O"
+name: "Oxygen"
+inChIKey: "QVGXLLKOCUKJST-UHFFFAOYSA-N"
+atomicNumber: 8
+chemicalSubstanceType: dcid:Chalcogen
+iupacInternationalChemicalID: "InChI=1S/O"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Fluorine
+iupacName: "Fluorine"
+dcid: "Fluorine"
+molecularFormula: "F"
+name: "Fluorine", "fluoride"
+inChIKey: "YCKRFDGAMUMZLT-UHFFFAOYSA-N"
+atomicNumber: 9
+chemicalSubstanceType: dcid:Halogen
+iupacInternationalChemicalID: "InChI=1S/F"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Neon
+iupacName: "Neon"
+dcid: "Neon"
+molecularFormula: "Ne"
+name: "Neon"
+inChIKey: "GKAOGPIIYCISHV-UHFFFAOYSA-N"
+atomicNumber: 10
+chemicalSubstanceType: dcid:NobleGas
+iupacInternationalChemicalID: "InChI=1S/Ne"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Sodium
+iupacName: "Sodium"
+dcid: "Sodium"
+molecularFormula: "Na"
+name: "Sodium"
+inChIKey: "KEAYESYHFKHZAL-UHFFFAOYSA-N"
+atomicNumber: 11
+chemicalSubstanceType: dcid:AlkaliMetal
+iupacInternationalChemicalID: "InChI=1S/Na"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Magnesium
+iupacName: "Magnesium"
+dcid: "Magnesium"
+molecularFormula: "Mg"
+name: "Magnesium"
+inChIKey: "FYYHWMGAXLPEAU-UHFFFAOYSA-N"
+atomicNumber: 12
+chemicalSubstanceType: dcid:AlkalineEarthMetal
+iupacInternationalChemicalID: "InChI=1S/Mg"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Aluminum
+iupacName: "Aluminum"
+dcid: "Aluminum"
+molecularFormula: "Al"
+name: "Aluminum", "Aluminium"
+inChIKey: "XAGFODPZIPBFFR-UHFFFAOYSA-N"
+atomicNumber: 13
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Al"
+typeOf: dcid:ChemicalElement
+sameAs: dcid:bio/PA164760864
+
+Node: dcid:Silicon
+iupacName: "Silicon"
+dcid: "Silicon"
+molecularFormula: "Si"
+name: "Silicon"
+inChIKey: "XUIMIQQOPSSXEZ-UHFFFAOYSA-N"
+atomicNumber: 14
+chemicalSubstanceType: dcid:SemiMetal
+iupacInternationalChemicalID: "InChI=1S/Si"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Phosphorus
+iupacName: "Phosphorus"
+dcid: "Phosphorus"
+molecularFormula: "P"
+name: "Phosphorus"
+inChIKey: "OAICVXFJPJFONN-UHFFFAOYSA-N"
+atomicNumber: 15
+chemicalSubstanceType: dcid:Pnictogen
+iupacInternationalChemicalID: "InChI=1S/P"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Sulfur
+iupacName: "Sulfur"
+dcid: "Sulfur"
+molecularFormula: "S"
+name: "Sulfur"
+inChIKey: "NINIDFKCEFEMDL-UHFFFAOYSA-N"
+atomicNumber: 16
+chemicalSubstanceType: dcid:Chalcogen
+iupacInternationalChemicalID: "InChI=1S/S"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Chlorine
+iupacName: "Chlorine"
+dcid: "Chlorine"
+molecularFormula: "Cl"
+name: "Chlorine", "chloride"
+inChIKey: "ZAMOUSCENKQFHK-UHFFFAOYSA-N"
+atomicNumber: 17
+chemicalSubstanceType: dcid:Halogen
+iupacInternationalChemicalID: "InChI=1S/Cl"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Argon
+iupacName: "Argon"
+dcid: "Argon"
+molecularFormula: "Ar"
+name: "Argon"
+inChIKey: "XKRFYHLGVUSROY-UHFFFAOYSA-N"
+atomicNumber: 18
+chemicalSubstanceType: dcid:NobleGas
+iupacInternationalChemicalID: "InChI=1S/Ar"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Potassium
+iupacName: "Potassium"
+dcid: "Potassium"
+molecularFormula: "K"
+name: "Potassium", "potassium(1+)"
+inChIKey: "ZLMJMSJWJFRBEC-UHFFFAOYSA-N"
+atomicNumber: 19
+chemicalSubstanceType: dcid:AlkaliMetal
+iupacInternationalChemicalID: "InChI=1S/K"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Calcium
+iupacName: "Calcium"
+dcid: "Calcium"
+molecularFormula: "Ca"
+name: "Calcium"
+inChIKey: "OYPRJOBELJOOCE-UHFFFAOYSA-N"
+atomicNumber: 20
+chemicalSubstanceType: dcid:AlkalineEarthMetal
+iupacInternationalChemicalID: "InChI=1S/Ca"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Scandium
+iupacName: "Scandium"
+dcid: "Scandium"
+molecularFormula: "Sc"
+name: "Scandium"
+inChIKey: "SIXSYDAISGFNSX-UHFFFAOYSA-N"
+atomicNumber: 21
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Sc"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Titanium
+iupacName: "Titanium"
+dcid: "Titanium"
+molecularFormula: "Ti"
+name: "Titanium"
+inChIKey: "RTAQQCXQSZGOHL-UHFFFAOYSA-N"
+atomicNumber: 22
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Ti"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Vanadium
+iupacName: "Vanadium"
+dcid: "Vanadium"
+molecularFormula: "V"
+name: "Vanadium"
+inChIKey: "LEONUFNNVUYDNQ-UHFFFAOYSA-N"
+atomicNumber: 23
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/V"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Chromium
+iupacName: "Chromium"
+dcid: "Chromium"
+molecularFormula: "Cr"
+name: "Chromium"
+inChIKey: "VYZAMTAEIAYCRO-UHFFFAOYSA-N"
+atomicNumber: 24
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Cr"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Manganese
+iupacName: "Manganese"
+dcid: "Manganese"
+molecularFormula: "Mn"
+name: "Manganese"
+inChIKey: "PWHULOQIROXLJO-UHFFFAOYSA-N"
+atomicNumber: 25
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Mn"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Iron
+iupacName: "Iron"
+dcid: "Iron"
+molecularFormula: "Fe"
+name: "Iron", "iron-56"
+inChIKey: "XEEYBQQBJWHFJM-UHFFFAOYSA-N"
+atomicNumber: 26
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Fe"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Cobalt
+iupacName: "Cobalt"
+dcid: "Cobalt"
+molecularFormula: "Co"
+name: "Cobalt"
+inChIKey: "GUTLYIVDDKVIGB-UHFFFAOYSA-N"
+atomicNumber: 27
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Co"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Nickel
+iupacName: "Nickel"
+dcid: "Nickel"
+molecularFormula: "Ni"
+name: "Nickel"
+inChIKey: "PXHVJJICTQNCMI-UHFFFAOYSA-N"
+atomicNumber: 28
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Ni"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Copper
+iupacName: "Copper"
+dcid: "Copper"
+molecularFormula: "Cu"
+name: "Copper"
+inChIKey: "RYGMFSIKBFXOCR-UHFFFAOYSA-N"
+atomicNumber: 29
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Cu"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:InChIKey/HCHKCACWOHOZIP-UHFFFAOYSA-N
+iupacName: "Zinc"
+dcid: "InChIKey/HCHKCACWOHOZIP-UHFFFAOYSA-N"
+molecularFormula: "Zn"
+name: "Zinc"
+inChIKey: "HCHKCACWOHOZIP-UHFFFAOYSA-N"
+atomicNumber: 30
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Zn"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Gallium
+iupacName: "Gallium"
+dcid: "Gallium"
+molecularFormula: "Ga"
+name: "Gallium"
+inChIKey: "GYHNNYVSQQEPJS-UHFFFAOYSA-N"
+atomicNumber: 31
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Ga"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Germanium
+iupacName: "Germanium"
+dcid: "Germanium"
+molecularFormula: "Ge"
+name: "Germanium"
+inChIKey: "GNPVGFCGXDBREM-UHFFFAOYSA-N"
+atomicNumber: 32
+chemicalSubstanceType: dcid:SemiMetal
+iupacInternationalChemicalID: "InChI=1S/Ge"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Arsenic
+iupacName: "Arsenic"
+dcid: "Arsenic"
+molecularFormula: "As"
+name: "Arsenic"
+inChIKey: "RQNWIZPPADIBDY-UHFFFAOYSA-N"
+atomicNumber: 33
+chemicalSubstanceType: dcid:Pnictogen
+iupacInternationalChemicalID: "InChI=1S/As"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Selenium
+iupacName: "Selenium"
+dcid: "Selenium"
+molecularFormula: "Se"
+name: "Selenium"
+inChIKey: "BUGBHKTXTAQXES-UHFFFAOYSA-N"
+atomicNumber: 34
+chemicalSubstanceType: dcid:Chalcogen
+iupacInternationalChemicalID: "InChI=1S/Se"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Bromine
+iupacName: "Bromine"
+dcid: "Bromine"
+molecularFormula: "Br"
+name: "Bromine", "bromide"
+inChIKey: "WKBOTKDWSSQWDR-UHFFFAOYSA-N"
+atomicNumber: 35
+chemicalSubstanceType: dcid:Halogen
+iupacInternationalChemicalID: "InChI=1S/Br"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Krypton
+iupacName: "Krypton"
+dcid: "Krypton"
+molecularFormula: "Kr"
+name: "Krypton"
+inChIKey: "DNNSSWSSYDEUBZ-UHFFFAOYSA-N"
+atomicNumber: 36
+chemicalSubstanceType: dcid:NobleGas
+iupacInternationalChemicalID: "InChI=1S/Kr"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Rubidium
+iupacName: "Rubidium"
+dcid: "Rubidium"
+molecularFormula: "Rb"
+name: "Rubidium"
+inChIKey: "IGLNJRXAVVLDKE-UHFFFAOYSA-N"
+atomicNumber: 37
+chemicalSubstanceType: dcid:AlkaliMetal
+iupacInternationalChemicalID: "InChI=1S/Rb"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Strontium
+iupacName: "Strontium"
+dcid: "Strontium"
+molecularFormula: "Sr"
+name: "Strontium"
+inChIKey: "CIOAGBVUUVVLOB-UHFFFAOYSA-N"
+atomicNumber: 38
+chemicalSubstanceType: dcid:AlkalineEarthMetal
+iupacInternationalChemicalID: "InChI=1S/Sr"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Yttrium
+iupacName: "Yttrium"
+dcid: "Yttrium"
+molecularFormula: "Y"
+name: "Yttrium"
+inChIKey: "VWQVUPCCIRVNHF-UHFFFAOYSA-N"
+atomicNumber: 39
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Y"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Zirconium
+iupacName: "Zirconium"
+dcid: "Zirconium"
+molecularFormula: "Zr"
+name: "Zirconium"
+inChIKey: "QCWXUUIWCKQGHC-UHFFFAOYSA-N"
+atomicNumber: 40
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Zr"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Niobium
+iupacName: "Niobium"
+dcid: "Niobium"
+molecularFormula: "Nb"
+name: "Niobium"
+inChIKey: "GUCVJGMIXFAOAE-UHFFFAOYSA-N"
+atomicNumber: 41
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Nb"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Molybdenum
+iupacName: "Molybdenum"
+dcid: "Molybdenum"
+molecularFormula: "Mo"
+name: "Molybdenum"
+inChIKey: "ZOKXTWBITQBERF-UHFFFAOYSA-N"
+atomicNumber: 42
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Mo"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Technetium
+iupacName: "Technetium"
+dcid: "Technetium"
+molecularFormula: "Tc"
+name: "Technetium"
+inChIKey: "GKLVYJBZJHMRIY-UHFFFAOYSA-N"
+atomicNumber: 43
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Tc"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Ruthenium
+iupacName: "Ruthenium"
+dcid: "Ruthenium"
+molecularFormula: "Ru"
+name: "Ruthenium"
+inChIKey: "KJTLSVCANCCWHF-UHFFFAOYSA-N"
+atomicNumber: 44
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Ru"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Rhodium
+iupacName: "Rhodium"
+dcid: "Rhodium"
+molecularFormula: "Rh"
+name: "Rhodium"
+inChIKey: "MHOVAHRLVXNVSD-UHFFFAOYSA-N"
+atomicNumber: 45
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Rh"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Palladium
+iupacName: "Palladium"
+dcid: "Palladium"
+molecularFormula: "Pd"
+name: "Palladium"
+inChIKey: "KDLHZDBZIXYQEI-UHFFFAOYSA-N"
+atomicNumber: 46
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Pd"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Silver
+iupacName: "Silver"
+dcid: "Silver"
+molecularFormula: "Ag"
+name: "Silver"
+inChIKey: "BQCADISMDOOEFD-UHFFFAOYSA-N"
+atomicNumber: 47
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Ag"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Cadmium
+iupacName: "Cadmium"
+dcid: "Cadmium"
+molecularFormula: "Cd"
+name: "Cadmium"
+inChIKey: "BDOSMKKIYDKNTQ-UHFFFAOYSA-N"
+atomicNumber: 48
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Cd"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Indium
+iupacName: "Indium"
+dcid: "Indium"
+molecularFormula: "In"
+name: "Indium"
+inChIKey: "APFVFJFRJDLVQX-UHFFFAOYSA-N"
+atomicNumber: 49
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/In"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Tin
+iupacName: "Tin"
+dcid: "Tin"
+molecularFormula: "Sn"
+name: "Tin"
+inChIKey: "ATJFFYVFTNAWJD-UHFFFAOYSA-N"
+atomicNumber: 50
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Sn"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Antimony
+iupacName: "Antimony"
+dcid: "Antimony"
+molecularFormula: "Sb"
+name: "Antimony"
+inChIKey: "WATWJIUSRGPENY-UHFFFAOYSA-N"
+atomicNumber: 51
+chemicalSubstanceType: dcid:Pnictogen
+iupacInternationalChemicalID: "InChI=1S/Sb"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Tellurium
+iupacName: "Tellurium"
+dcid: "Tellurium"
+molecularFormula: "Te"
+name: "Tellurium"
+inChIKey: "PORWMNRCUJJQNO-UHFFFAOYSA-N"
+atomicNumber: 52
+chemicalSubstanceType: dcid:Chalcogen
+iupacInternationalChemicalID: "InChI=1S/Te"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Iodine
+iupacName: "Iodine"
+dcid: "Iodine"
+molecularFormula: "I"
+name: "Iodine", "iodide"
+inChIKey: "ZCYVEMRRCGMTRW-UHFFFAOYSA-N"
+atomicNumber: 53
+chemicalSubstanceType: dcid:Halogen
+iupacInternationalChemicalID: "InChI=1S/I"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Xenon
+iupacName: "Xenon"
+dcid: "Xenon"
+molecularFormula: "Xe"
+name: "Xenon"
+inChIKey: "FHNFHKCVQCLJFQ-UHFFFAOYSA-N"
+atomicNumber: 54
+chemicalSubstanceType: dcid:NobleGas
+iupacInternationalChemicalID: "InChI=1S/Xe"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Cesium
+iupacName: "Cesium"
+dcid: "Cesium"
+molecularFormula: "Cs"
+name: "Cesium", "Caesium"
+inChIKey: "TVFDJXOCXUVLDH-UHFFFAOYSA-N"
+atomicNumber: 55
+chemicalSubstanceType: dcid:AlkaliMetal
+iupacInternationalChemicalID: "InChI=1S/Cs"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Barium
+iupacName: "Barium"
+dcid: "Barium"
+molecularFormula: "Ba"
+name: "Barium"
+inChIKey: "DSAJWYNOEDNPEQ-UHFFFAOYSA-N"
+atomicNumber: 56
+chemicalSubstanceType: dcid:AlkalineEarthMetal
+iupacInternationalChemicalID: "InChI=1S/Ba"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Lanthanum
+iupacName: "Lanthanum"
+dcid: "Lanthanum"
+molecularFormula: "La"
+name: "Lanthanum"
+inChIKey: "FZLIPJUXYLNCLC-UHFFFAOYSA-N"
+atomicNumber: 57
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/La"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Cerium
+iupacName: "Cerium"
+dcid: "Cerium"
+molecularFormula: "Ce"
+name: "Cerium"
+inChIKey: "GWXLDORMOJMVQZ-UHFFFAOYSA-N"
+atomicNumber: 58
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Ce"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Praseodymium
+iupacName: "Praseodymium"
+dcid: "Praseodymium"
+molecularFormula: "Pr"
+name: "Praseodymium"
+inChIKey: "PUDIUYLPXJFUGB-UHFFFAOYSA-N"
+atomicNumber: 59
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Pr"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Neodymium
+iupacName: "Neodymium"
+dcid: "Neodymium"
+molecularFormula: "Nd"
+name: "Neodymium"
+inChIKey: "QEFYFXOXNSNQGX-UHFFFAOYSA-N"
+atomicNumber: 60
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Nd"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Promethium
+iupacName: "Promethium"
+dcid: "Promethium"
+molecularFormula: "Pm"
+name: "Promethium"
+inChIKey: "VQMWBBYLQSCNPO-UHFFFAOYSA-N"
+atomicNumber: 61
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Pm"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Samarium
+iupacName: "Samarium"
+dcid: "Samarium"
+molecularFormula: "Sm"
+name: "Samarium"
+inChIKey: "KZUNJOHGWZRPMI-UHFFFAOYSA-N"
+atomicNumber: 62
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Sm"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Europium
+iupacName: "Europium"
+dcid: "Europium"
+molecularFormula: "Eu"
+name: "Europium"
+inChIKey: "OGPBJKLSAFTDLK-UHFFFAOYSA-N"
+atomicNumber: 63
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Eu"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Gadolinium
+iupacName: "Gadolinium"
+dcid: "Gadolinium"
+molecularFormula: "Gd"
+name: "Gadolinium"
+inChIKey: "UIWYJDYFSGRHKR-UHFFFAOYSA-N"
+atomicNumber: 64
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Gd"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Terbium
+iupacName: "Terbium"
+dcid: "Terbium"
+molecularFormula: "Tb"
+name: "Terbium"
+inChIKey: "GZCRRIHWUXGPOV-UHFFFAOYSA-N"
+atomicNumber: 65
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Tb"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Dysprosium
+iupacName: "Dysprosium"
+dcid: "Dysprosium"
+molecularFormula: "Dy"
+name: "Dysprosium"
+inChIKey: "KBQHZAAAGSGFKK-UHFFFAOYSA-N"
+atomicNumber: 66
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Dy"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Holmium
+iupacName: "Holmium"
+dcid: "Holmium"
+molecularFormula: "Ho"
+name: "Holmium"
+inChIKey: "KJZYNXUDTRRSPN-UHFFFAOYSA-N"
+atomicNumber: 67
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Ho"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Erbium
+iupacName: "Erbium"
+dcid: "Erbium"
+molecularFormula: "Er"
+name: "Erbium"
+inChIKey: "UYAHIZSMUZPPFV-UHFFFAOYSA-N"
+atomicNumber: 68
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Er"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Thulium
+iupacName: "Thulium"
+dcid: "Thulium"
+molecularFormula: "Tm"
+name: "Thulium"
+inChIKey: "FRNOGLGSGLTDKL-UHFFFAOYSA-N"
+atomicNumber: 69
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Tm"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Ytterbium
+iupacName: "Ytterbium"
+dcid: "Ytterbium"
+molecularFormula: "Yb"
+name: "Ytterbium"
+inChIKey: "NAWDYIZEMPQZHO-UHFFFAOYSA-N"
+atomicNumber: 70
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Yb"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Lutetium
+iupacName: "Lutetium"
+dcid: "Lutetium"
+molecularFormula: "Lu"
+name: "Lutetium"
+inChIKey: "OHSVLFRHMCKCQY-UHFFFAOYSA-N"
+atomicNumber: 71
+chemicalSubstanceType: dcid:Lanthanide
+iupacInternationalChemicalID: "InChI=1S/Lu"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Hafnium
+iupacName: "Hafnium"
+dcid: "Hafnium"
+molecularFormula: "Hf"
+name: "Hafnium"
+inChIKey: "VBJZVLUMGGDVMO-UHFFFAOYSA-N"
+atomicNumber: 72
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Hf"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Tantalum
+iupacName: "Tantalum"
+dcid: "Tantalum"
+molecularFormula: "Ta"
+name: "Tantalum"
+inChIKey: "GUVRBAGPIYLISA-UHFFFAOYSA-N"
+atomicNumber: 73
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Ta"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Tungsten
+iupacName: "Tungsten"
+dcid: "Tungsten"
+molecularFormula: "W"
+name: "Tungsten"
+inChIKey: "WFKWXMTUELFFGS-UHFFFAOYSA-N"
+atomicNumber: 74
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/W"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Rhenium
+iupacName: "Rhenium"
+dcid: "Rhenium"
+molecularFormula: "Re"
+name: "Rhenium"
+inChIKey: "WUAPFZMCVAUBPE-UHFFFAOYSA-N"
+atomicNumber: 75
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Re"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Osmium
+iupacName: "Osmium"
+dcid: "Osmium"
+molecularFormula: "Os"
+name: "Osmium"
+inChIKey: "SYQBFIAQOQZEGI-UHFFFAOYSA-N"
+atomicNumber: 76
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Os"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Iridium
+iupacName: "Iridium"
+dcid: "Iridium"
+molecularFormula: "Ir"
+name: "Iridium"
+inChIKey: "GKOZUEZYRPOHIO-UHFFFAOYSA-N"
+atomicNumber: 77
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Ir"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Platinum
+iupacName: "Platinum"
+dcid: "Platinum"
+molecularFormula: "Pt"
+name: "Platinum"
+inChIKey: "BASFCYQUMIYNBI-UHFFFAOYSA-N"
+atomicNumber: 78
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Pt"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Gold
+iupacName: "Gold"
+dcid: "Gold"
+molecularFormula: "Au"
+name: "Gold"
+inChIKey: "PCHJSUWPFVWCPO-UHFFFAOYSA-N"
+atomicNumber: 79
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Au"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Mercury
+iupacName: "Mercury"
+dcid: "Mercury"
+molecularFormula: "Hg"
+name: "Mercury"
+inChIKey: "QSHDDOUJBYECFT-UHFFFAOYSA-N"
+atomicNumber: 80
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Hg"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Thallium
+iupacName: "Thallium"
+dcid: "Thallium"
+molecularFormula: "Tl"
+name: "Thallium"
+inChIKey: "BKVIYDNLLOSFOA-UHFFFAOYSA-N"
+atomicNumber: 81
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Tl"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Lead
+iupacName: "Lead"
+dcid: "Lead"
+molecularFormula: "Pb"
+name: "Lead"
+inChIKey: "WABPQHHGFIMREM-UHFFFAOYSA-N"
+atomicNumber: 82
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Pb"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Bismuth
+iupacName: "Bismuth"
+dcid: "Bismuth"
+molecularFormula: "Bi"
+name: "Bismuth"
+inChIKey: "JCXGWMGPZLAOME-UHFFFAOYSA-N"
+atomicNumber: 83
+chemicalSubstanceType: dcid:Pnictogen
+iupacInternationalChemicalID: "InChI=1S/Bi"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Polonium
+iupacName: "Polonium"
+dcid: "Polonium"
+molecularFormula: "Po"
+name: "Polonium"
+inChIKey: "HZEBHPIOVYHPMT-UHFFFAOYSA-N"
+atomicNumber: 84
+chemicalSubstanceType: dcid:Chalcogen
+iupacInternationalChemicalID: "InChI=1S/Po"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Astatine
+iupacName: "Astatine"
+dcid: "Astatine"
+molecularFormula: "At"
+name: "Astatine", "astatine-211"
+inChIKey: "RYXHOMYVWAEKHL-UHFFFAOYSA-N"
+atomicNumber: 85
+chemicalSubstanceType: dcid:Halogen
+iupacInternationalChemicalID: "InChI=1S/At"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Radon
+iupacName: "Radon"
+dcid: "Radon"
+molecularFormula: "Rn"
+name: "Radon"
+inChIKey: "SYUHGPGVQRZVTB-UHFFFAOYSA-N"
+atomicNumber: 86
+chemicalSubstanceType: dcid:NobleGas
+iupacInternationalChemicalID: "InChI=1S/Rn"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Francium
+iupacName: "Francium"
+dcid: "Francium"
+molecularFormula: "Fr"
+name: "Francium"
+inChIKey: "KLMCZVJOEAUDNE-UHFFFAOYSA-N"
+atomicNumber: 87
+chemicalSubstanceType: dcid:AlkaliMetal
+iupacInternationalChemicalID: "InChI=1S/Fr"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Radium
+iupacName: "Radium"
+dcid: "Radium"
+molecularFormula: "Ra"
+name: "Radium"
+inChIKey: "HCWPIIXVSYCSAN-UHFFFAOYSA-N"
+atomicNumber: 88
+chemicalSubstanceType: dcid:AlkalineEarthMetal
+iupacInternationalChemicalID: "InChI=1S/Ra"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Actinium
+iupacName: "Actinium"
+dcid: "Actinium"
+molecularFormula: "Ac"
+name: "Actinium"
+inChIKey: "QQINRWTZWGJFDB-UHFFFAOYSA-N"
+atomicNumber: 89
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Ac"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Thorium
+iupacName: "Thorium"
+dcid: "Thorium"
+molecularFormula: "Th"
+name: "Thorium"
+inChIKey: "ZSLUVFAKFWKJRC-UHFFFAOYSA-N"
+atomicNumber: 90
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Th"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Protactinium
+iupacName: "Protactinium"
+dcid: "Protactinium"
+molecularFormula: "Pa"
+name: "Protactinium"
+inChIKey: "XLROVYAPLOFLNU-UHFFFAOYSA-N"
+atomicNumber: 91
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Pa"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Uranium
+iupacName: "Uranium"
+dcid: "Uranium"
+molecularFormula: "U"
+name: "Uranium"
+inChIKey: "JFALSRSLKYAFGM-UHFFFAOYSA-N"
+atomicNumber: 92
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/U"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Neptunium
+iupacName: "Neptunium"
+dcid: "Neptunium"
+molecularFormula: "Np"
+name: "Neptunium"
+inChIKey: "LFNLGNPSGWYGGD-UHFFFAOYSA-N"
+atomicNumber: 93
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Np"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Plutonium
+iupacName: "Plutonium"
+dcid: "Plutonium"
+molecularFormula: "Pu"
+name: "Plutonium"
+inChIKey: "OYEHPCDNVJXUIW-UHFFFAOYSA-N"
+atomicNumber: 94
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Pu"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Americium
+iupacName: "Americium"
+dcid: "Americium"
+molecularFormula: "Am"
+name: "Americium"
+inChIKey: "LXQXZNRPTYVCNG-UHFFFAOYSA-N"
+atomicNumber: 95
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Am"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Curium
+iupacName: "Curium"
+dcid: "Curium"
+molecularFormula: "Cm"
+name: "Curium"
+inChIKey: "NIWWFAAXEMMFMS-UHFFFAOYSA-N"
+atomicNumber: 96
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Cm"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Berkelium
+iupacName: "Berkelium"
+dcid: "Berkelium"
+molecularFormula: "Bk"
+name: "Berkelium"
+inChIKey: "PWVKJRSRVJTHTR-UHFFFAOYSA-N"
+atomicNumber: 97
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Bk"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Californium
+iupacName: "Californium"
+dcid: "Californium"
+molecularFormula: "Cf"
+name: "Californium"
+inChIKey: "HGLDOAKPQXAFKI-UHFFFAOYSA-N"
+atomicNumber: 98
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Cf"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Einsteinium
+iupacName: "Einsteinium"
+dcid: "Einsteinium"
+molecularFormula: "Es"
+name: "Einsteinium"
+inChIKey: "CKBRQZNRCSJHFT-UHFFFAOYSA-N"
+atomicNumber: 99
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Es"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Fermium
+iupacName: "Fermium"
+dcid: "Fermium"
+molecularFormula: "Fm"
+name: "Fermium"
+inChIKey: "MIORUQGGZCBUGO-UHFFFAOYSA-N"
+atomicNumber: 100
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Fm"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Mendelevium
+iupacName: "Mendelevium"
+dcid: "Mendelevium"
+molecularFormula: "Md"
+name: "Mendelevium"
+inChIKey: "MQVSLOYRCXQRPM-UHFFFAOYSA-N"
+atomicNumber: 101
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Md"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Nobelium
+iupacName: "Nobelium"
+dcid: "Nobelium"
+molecularFormula: "No"
+name: "Nobelium"
+inChIKey: "ORQBXQOJMQIAOY-UHFFFAOYSA-N"
+atomicNumber: 102
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/No"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Lawrencium
+iupacName: "Lawrencium"
+dcid: "Lawrencium"
+molecularFormula: "Lr"
+name: "Lawrencium"
+inChIKey: "CNQCVBJFEGMYDW-UHFFFAOYSA-N"
+atomicNumber: 103
+chemicalSubstanceType: dcid:Actinide
+iupacInternationalChemicalID: "InChI=1S/Lr"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Rutherfordium
+iupacName: "Rutherfordium"
+dcid: "Rutherfordium"
+molecularFormula: "Rf"
+name: "Rutherfordium"
+inChIKey: "YGPLJIIQQIDVFJ-UHFFFAOYSA-N"
+atomicNumber: 104
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Rf"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Dubnium
+iupacName: "Dubnium"
+dcid: "Dubnium"
+molecularFormula: "Db"
+name: "Dubnium"
+inChIKey: "PUKKTGLVJQVIOF-UHFFFAOYSA-N"
+atomicNumber: 105
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Db"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Seaborgium
+iupacName: "Seaborgium"
+dcid: "Seaborgium"
+molecularFormula: "Sg"
+name: "Seaborgium"
+inChIKey: "VAOUCABZIBBBJH-UHFFFAOYSA-N"
+atomicNumber: 106
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Sg"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Bohrium
+iupacName: "Bohrium"
+dcid: "Bohrium"
+molecularFormula: "Bh"
+name: "Bohrium"
+inChIKey: "INOXRQQPOOCQPH-UHFFFAOYSA-N"
+atomicNumber: 107
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Bh"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Hassium
+iupacName: "Hassium"
+dcid: "Hassium"
+molecularFormula: "Hs"
+name: "Hassium"
+inChIKey: "OBDWMWVOVYJOMI-UHFFFAOYSA-N"
+atomicNumber: 108
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Hs"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Meitnerium
+iupacName: "Meitnerium"
+dcid: "Meitnerium"
+molecularFormula: "Mt"
+name: "Meitnerium"
+inChIKey: "VAJSJTKWMRUWBF-UHFFFAOYSA-N"
+atomicNumber: 109
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Mt"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Darmstadtium
+iupacName: "Darmstadtium"
+dcid: "Darmstadtium"
+molecularFormula: "Ds"
+name: "Darmstadtium"
+inChIKey: "NCBMSFCPDGXTHD-UHFFFAOYSA-N"
+atomicNumber: 110
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Ds"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Roentgenium
+iupacName: "Roentgenium"
+dcid: "Roentgenium"
+molecularFormula: "Rg"
+name: "Roentgenium"
+inChIKey: "LJROPTGWFUZRDB-UHFFFAOYSA-N"
+atomicNumber: 111
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Rg"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Copernicium
+iupacName: "Copernicium"
+dcid: "Copernicium"
+molecularFormula: "Cn"
+name: "Copernicium"
+inChIKey: "NOTIIDSZELDPOP-UHFFFAOYSA-N"
+atomicNumber: 112
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Cn"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Nihonium
+iupacName: "Nihonium"
+dcid: "Nihonium"
+molecularFormula: "Nh"
+name: "Nihonium"
+inChIKey: "KUGNSLWRKGRKGS-UHFFFAOYSA-N"
+atomicNumber: 113
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Nh"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Flerovium
+iupacName: "Flerovium"
+dcid: "Flerovium"
+molecularFormula: "Fl"
+name: "Flerovium"
+inChIKey: "WIHJCBVMYKIGOT-UHFFFAOYSA-N"
+atomicNumber: 114
+chemicalSubstanceType: dcid:Metal
+iupacInternationalChemicalID: "InChI=1S/Fl"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Moscovium
+iupacName: "Moscovium"
+dcid: "Moscovium"
+molecularFormula: "Mc"
+name: "Moscovium"
+inChIKey: "QDXZEHQJHSHEQF-UHFFFAOYSA-N"
+atomicNumber: 115
+chemicalSubstanceType: dcid:Pnictogen
+iupacInternationalChemicalID: "InChI=1S/Mc"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Livermorium
+iupacName: "Livermorium"
+dcid: "Livermorium"
+molecularFormula: "Lv"
+name: "Livermorium"
+inChIKey: "ONFASNXETZOODS-UHFFFAOYSA-N"
+atomicNumber: 116
+chemicalSubstanceType: dcid:Chalcogen
+iupacInternationalChemicalID: "InChI=1S/Lv"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Tennessine
+iupacName: "Tennessine"
+dcid: "Tennessine"
+molecularFormula: "Ts"
+name: "Tennessine"
+inChIKey: "INMSAURDCVBGHH-UHFFFAOYSA-N"
+atomicNumber: 117
+chemicalSubstanceType: dcid:Halogen
+iupacInternationalChemicalID: "InChI=1S/Ts"
+typeOf: dcid:ChemicalElement
+
+Node: dcid:Oganesson
+iupacName: "Oganesson"
+dcid: "Oganesson"
+molecularFormula: "Og"
+name: "Oganesson"
+inChIKey: "GOANEQIZDYDFCO-UHFFFAOYSA-N"
+atomicNumber: 118
+chemicalSubstanceType: dcid:NobleGas
+iupacInternationalChemicalID: "InChI=1S/Og"
+typeOf: dcid:ChemicalElement
+
