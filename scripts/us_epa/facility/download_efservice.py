@@ -23,6 +23,7 @@ flags.DEFINE_string('epa_output_path', 'tmp_data', 'Output directory')
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
 
+
 def main(_):
     assert FLAGS.epa_output_path
     assert FLAGS.epa_table_name
