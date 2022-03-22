@@ -17,17 +17,19 @@ from us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('epa_table_name', '', 'Name of table to download')
-flags.DEFINE_string('epa_output_path', 'tmp_data', 'Output directory')
+flags.DEFINE_string('companies_table_name', '', 'Name of table to download')
+flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
 
+
 def main(_):
-    assert FLAGS.epa_output_path
-    assert FLAGS.epa_table_name
-    pathlib.Path(FLAGS.epa_output_path).mkdir(exist_ok=True)
-    fh.download(_API_ROOT, FLAGS.epa_table_name, _MAX_ROWS, FLAGS.epa_output_path)
+    assert FLAGS.output_path
+    assert FLAGS.companies_table_name
+    pathlib.Path(FLAGS.output_path).mkdir(exist_ok=True)
+    fh.download(_API_ROOT, FLAGS.companies_table_name, _MAX_ROWS,
+                FLAGS.output_path)
 
 
 if __name__ == '__main__':
