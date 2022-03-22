@@ -1,0 +1,6 @@
+Node: dcid:EpaOrganizationOwnership
+description: The ownership of an EPA Facility by an Organization in a given year.
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Organization
+measuredProperty: owns
+statType: measurementResult
