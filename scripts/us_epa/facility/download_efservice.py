@@ -27,7 +27,8 @@ def main(_):
     assert FLAGS.epa_output_path
     assert FLAGS.epa_table_name
     pathlib.Path(FLAGS.epa_output_path).mkdir(exist_ok=True)
-    fh.download(_API_ROOT, FLAGS.epa_table_name, _MAX_ROWS, FLAGS.epa_output_path)
+    fh.download(_API_ROOT, FLAGS.epa_table_name, _MAX_ROWS,
+                FLAGS.epa_output_path)
 
 
 if __name__ == '__main__':
