@@ -27,7 +27,7 @@ def make_list_of_geos_to_resolve(latitude: np.float64,
     """
     Utility function that adds a pair of latitiude and longitude to a list
     """
-    _GEO_COORDS.append({"latitude": str(latitude),"longitude": str(longitude)})
+    _GEO_COORDS.append({"latitude": str(latitude), "longitude": str(longitude)})
 
 
 def resolve_with_recon(output_path: str,
