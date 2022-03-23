@@ -1,3 +1,16 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """A script to download, parse and process the Parent Company Info for Facilities tracked by EPA."""
 
 import os.path
@@ -109,6 +122,7 @@ def _get_name(table, row):
 
 
 def _name_to_id(s):
+    s = s.replace('&', ' And')
     s = sub(r'\W+', '', s)
     s = s.replace(' Llc', ' LLC')
     return ''.join([s[0].upper(), s[1:]])
@@ -130,9 +144,17 @@ def _get_address(table, row):
 def _get_county(company_id, zip, year):
     """Resolve the geo relations for the given Facility
 
-    Returns resolved <zip>, <county>
+    Returns resolved <county> which is the first county returned by the
+    containedInPlace resolver OR the first county in the geoOverlaps resolver.
+    containedInPlace is given precendence over geoOverlaps.
+
+    county is an empty string if both the resolvers fail to return counties.
+    This can happen for some zip codes which don't have a county associated in
+    Data Commons, e.g. https://datacommons.org/browser/zip/31040 or the zip
+    code itself does not exist in Data Commons, e.g.
+    https://datacommons.org/browser/zip/00804.
     """
-    if zip == "zip/00000" or zip == "zip/":
+    if zip == "zip/00000" or zip == "":
         _COUNTERS["missing_zip"].add((company_id, year))
         return ""
 
@@ -141,12 +163,15 @@ def _get_county(company_id, zip, year):
         _COUNTERS["missing_zip"].add((company_id, year))
         return ""
 
-    # Choose the first.
-    try:
-        # This could fail because county_candidates is of form [[], []]
+    # Choose the first matching county. fh.get_county_candidates() returns a
+    # two dimensional array corresponding to containedInPlace (at index 0)
+    # and geoOverlaps (at index 1).
+    county = ""
+    if county_candidates[0]:
         county = county_candidates[0][0]
-    except:
-        county = ""
+    elif county_candidates[1]:
+        county = county_candidates[1][0]
+
     return county
 
 
@@ -240,9 +265,9 @@ def process(input_table_path, existing_facilities_file, output_path_info,
                 if company_id.lower() not in processed_companies:
                     # zips have extension
                     zip_code = _v(_TABLE, in_row, "PARENT_CO_ZIP")[:5]
-                    if not zip_code:
-                        zip_code = ""
-                    zip = "zip/" + zip_code
+                    zip = ""
+                    if zip_code:
+                        zip = "zip/" + zip_code
                     county = _get_county(company_id, zip, year)
 
                     table_out_row = {
