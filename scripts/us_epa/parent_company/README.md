@@ -13,12 +13,14 @@ attached to a `CensusZipCodeTabulationArea` and `County` (via
 
 We create a Node for each unique Parent Company contained in the table:
 V_PARENT_COMPANY_INFO. However, since there is no unique "id" for these
-companies, we create one using the name (the ID is set to the dcid: and only
-includes alphanumeric characters).
+companies, we create one using the name (the ID is set to the dcid). This name
+to ID scheme only retains the alphanumeric characters and removes all others. As
+as example, names "Abc & Xyz Co. LLC " and "Abc & Xyz Co., LLC" would both get
+converted to "dcid:EpaParentCompany/AbcXyzCoLLC".
 
 We use the existing epaGhgrpFacility Ids which already exist in Data Commons to
 create an ownership mapping (EpaOrganizationOwnership) between the facility and
-Parent Companies for each year. Note that the ownership is expepressed via a
+Parent Companies for each year. Note that the ownership is expressed via a
 percentage and if no percentage is provided it is assumed to be 100.
 
 ## Generating and Validating Artifacts
@@ -54,15 +56,15 @@ percentage and if no percentage is provided it is assumed to be 100.
         "counters": {
           "NumRowSuccesses": "102603",
           "NumPVSuccesses": "820824",
-          "Existence_NumChecks": "792732",
+          "Existence_NumChecks": "793535",
           "NumNodeSuccesses": "102603",
           "Existence_NumDcCalls": "7"
         }
       },
       "LEVEL_WARNING": {
         "counters": {
-          "Existence_MissingReference_Property": "119665",
-          "Existence_MissingReference_locatedIn": "707"
+          "Existence_MissingReference_Property": "119514",
+          "Existence_MissingReference_locatedIn": "687"
         }
       }
     },
