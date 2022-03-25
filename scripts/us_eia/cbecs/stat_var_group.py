@@ -16,7 +16,7 @@ Utilities to create StatVarGroups.
 '''
 
 _SVG_ROOT = 'dcid:dc/g/Energy'  # or 'dcid:eia/g/Root'
-_SVG_GROUP = 'dcid:eia/g/cbes'
+_SVG_GROUP = 'dcid:cbes/'
 
 _DEFAULT_IGNORE_PROPS = [
     'Node',
@@ -39,12 +39,17 @@ _DEFAULT_IGNORE_PROPS = [
     # properties from StatVarGroups
     'specializationOf',
     'memberOf',
+    # Additional columns dropped from StatVarGroups
+    'Scale',
+    'Input',
 ]
 
 
 def _strip_namespace(dcid: str) -> str:
     '''Returns the dcid without the namespace.'''
-    return dcid[dcid.find(':') + 1:]
+    if isinstance(dcid, str):
+      return dcid[dcid.find(':') + 1:]
+    return dcid
 
 
 def _strip_nonalpha(name: str) -> str:
@@ -87,15 +92,15 @@ def _add_stat_var_group(svg_id: str, name: str, svg_parent_id: str,
     '''Add a statvar to the group. '''
     if svg_id not in svg_map:
         svg_map[svg_id] = {
-            'Node': svg_id,
+            'Node': f'{svg_id}',
             'name': f'"{name}"',
             'typeOf': 'dcs:StatVarGroup',
         }
     svg_node = svg_map[svg_id]
     prop = 'specializationOf'
     if prop in svg_node:
-        if svg_parent_id != '' and svg_parent_id not in svg_node[prop]:
-            svg_node[prop] = f'{svg_node[prop]}, {svg_parent_id}'
+        if svg_parent_id != '' and svg_parent_id not in svg_node[prop].split(','):
+            svg_node[prop] = f'{svg_node[prop]},{svg_parent_id}'
     else:
         svg_node[prop] = svg_parent_id
 

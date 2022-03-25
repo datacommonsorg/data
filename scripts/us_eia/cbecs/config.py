@@ -85,6 +85,24 @@ PROPERTY_MAP = {
         'statType': 'medianValue',
         'unit': 'Year',
     },
+    'ElectricityConsumption': {
+        'measuredProperty': 'consumption',
+        'populationType': 'Electricity',
+        'consumingSector': 'CommercialBuildings',
+        'measurementQualifier': 'dcs:Annual',
+    },
+    'ElectricityExpenditures': {
+        'measuredProperty': 'expenditure',
+        'populationType': 'Electricity',
+        'consumingSector': 'CommercialBuildings',
+        'measurementQualifier': 'dcs:Annual',
+    },
+    'Principal' : {
+       'BuildingType': 'Principal', 
+    },
+    'Site' : {
+       'BuildingType': 'Site', 
+    },
     'EnergySourcesUsed': {
         'usingEnergySource': '@VALUE',
     },
@@ -390,7 +408,18 @@ PROPERTY_MAP = {
     'Thousand': {
         'Scale': 1000
     },
-
+    'TrillionBtu' : {
+        'Scale': 1000,
+        'unit': 'dcid:MMBtu',
+    },
+    'BillionKWh': {
+        'Scale': 1000,
+        'unit': 'dcid:GigawattHour',
+    },
+    'MillionDollars': {
+         'Scale': 1000000,
+         'unit': 'dcid:USDollar'
+    },
     # Places
     'CensusRegionAndDivision': {
         'observationAbout': '@VALUE'
@@ -399,42 +428,54 @@ PROPERTY_MAP = {
         'observationAbout': '@VALUE'
     },
     'Northeast': {
-        'observationAbout': 'USNortheastRegion'
+        'observationAbout': 'dcid:usc/NortheastRegion'
     },
     'NewEngland': {
-        'observationAbout': 'USNewEnglandDivision'
+        'observationAbout': 'dcid:usc/NewEnglandDivision'
     },
     'MiddleAtlantic': {
-        'observationAbout': 'USMiddleAtlanticDivision'
+        'observationAbout': 'dcid:usc/MiddleAtlanticDivision'
     },
     'Midwest': {
-        'observationAbout': 'USMidwestRegion'
+        'observationAbout': 'dcid:usc/MidwestRegion'
     },
     'EastNorthCentral': {
-        'observationAbout': 'USEastNorthCentralDivision'
+        'observationAbout': 'dcid:usc/EastNorthCentralDivision'
     },
     'WestNorthCentral': {
-        'observationAbout': 'USWestNorthCentralDivision'
+        'observationAbout': 'dcid:usc/WestNorthCentralDivision'
     },
     'South': {
-        'observationAbout': 'USSouthRegion'
+        'observationAbout': 'dcid:usc/SouthRegion'
     },
     'SouthAtlantic': {
-        'observationAbout': 'USSouthAtlanticDivision'
+        'observationAbout': 'dcid:usc/SouthAtlanticDivision'
     },
     'EastSouthCentral': {
-        'observationAbout': 'USEastSouthCentralDivision'
+        'observationAbout': 'dcid:usc/EastSouthCentralDivision'
     },
     'WestSouthCentral': {
-        'observationAbout': 'USWestSouthCentralDivision'
+        'observationAbout': 'dcid:usc/WestSouthCentralDivision'
     },
     'West': {
-        'observationAbout': 'USWestRegion'
+        'observationAbout': 'dcid:usc/WestRegion'
     },
     'Mountain': {
-        'observationAbout': 'USMountainDivision'
+        'observationAbout': 'dcid:usc/MountainDivision'
     },
     'Pacific': {
-        'observationAbout': 'USPacificDivision'
+        'observationAbout': 'dcid:usc/PacificDivision'
+    },
+    'ClimateRegion1': {
+        'ClimateRegion': '@VALUE',
+    },
+    'ClimateRegion2': {
+        'ClimateRegion': '@VALUE',
+    },
+    'ClimateRegion3': {
+        'ClimateRegion': '@VALUE',
+    },
+    'PrimarySpaceHeatingEnergySourceUsed1': {
+       'PrimarySpaceHeatingEnergySourceUsed': '@VALUE',
     },
 }

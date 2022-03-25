@@ -39,9 +39,9 @@ flags.DEFINE_string('stat_var_mcf', None,
 flags.mark_flag_as_required('stat_var_mcf')
 flags.DEFINE_string('stat_var_group_mcf', None, 'Ouptut file for statvar group MCF.')
 flags.mark_flag_as_required('stat_var_group_mcf')
-flags.DEFINE_string('svg_root', 'eia/g/Root',
+flags.DEFINE_string('svg_root', 'dcid:dc/g/Energy',
                     'Generate statvar groups under this root statvar.')
-flags.DEFINE_string('svg_prefix', '',
+flags.DEFINE_string('svg_prefix', 'dcid:cbecs/',
                     'Generate statvar groups under this root statvar.')
 
 

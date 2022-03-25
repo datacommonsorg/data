@@ -93,7 +93,7 @@ _DEFAULT_NODE_PVS = OrderedDict({
 def add_namespace(value, namespace: str = 'dcid') -> str:
    '''Returns the value with a namespace prefix for references.'''
    if isinstance(value, str):
-       if value[0].isalpha() and value[0].islower() and value.find(':') < 0:
+       if value[0].isalpha() and value.find(':') < 0:
            return f'{namespace}:{value}'
    return f'{value}'
 
@@ -101,18 +101,21 @@ def get_prop_value_line(prop, value) -> str:
    '''Return a text line for a propoerty and value.'''
    if isinstance(value, list):
        value = ','.join([add_namespace(x) for x in value])
+   else:
+       value = add_namespace(value)
    return f'{prop}: {value}'
    
 
 def write_mcf_nodes(node_dicts: list,
                     filename: str,
+                    mode: str = 'w',
                     default_pvs: dict = _DEFAULT_NODE_PVS,
                     ignore_props=None,
                     header: str = None):
     '''Write the nodes to an MCF file.'''
     if ignore_props is None:
         ignore_props = []
-    with open(filename, 'w') as output_f:
+    with open(filename, mode) as output_f:
         if header is not None:
             output_f.write(header)
             output_f.write('\n')
