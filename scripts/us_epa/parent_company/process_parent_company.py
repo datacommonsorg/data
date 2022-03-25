@@ -242,7 +242,7 @@ def process(input_table_path, existing_facilities_file, output_path_info,
                     percent_own = 100
 
                 ownership_out_row = {
-                    _DCID: "dcid:" + company_id,
+                    _DCID: company_id,
                     _EPA_FACILITY_GHG_ID: ghg_id,
                     _PERCENT_OWNERSHIP: percent_own,
                     _YEAR: year
@@ -271,7 +271,7 @@ def process(input_table_path, existing_facilities_file, output_path_info,
                     county = _get_county(company_id, zip, year)
 
                     table_out_row = {
-                        _DCID: "dcid:" + company_id,
+                        _DCID: company_id,
                         _NAME: company_name,
                         _ADDRESS: _get_address(_TABLE, in_row),
                         _CIP: ", ".join(fh.get_cip(zip, county)),
