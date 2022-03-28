@@ -13,8 +13,6 @@
 # limitations under the License.
 """Script to aggregate CDC Data at a country level from state level data."""
 
-import os
-import sys
 import pandas as pd
 
 from absl import app
