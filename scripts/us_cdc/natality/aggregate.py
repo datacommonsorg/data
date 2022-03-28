@@ -22,8 +22,7 @@ from absl import flags
 
 flags.DEFINE_string('input_path', None,
                     'Path to input CSV with state level data.')
-flags.DEFINE_string('output_path', None,
-                    'Path to directory where cleaned CSV will be written.')
+flags.DEFINE_string('output_path', None, 'Output CSV path.')
 
 _FLAGS = flags.FLAGS
 
