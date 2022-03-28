@@ -20,12 +20,6 @@ import pandas as pd
 from absl import app
 from absl import flags
 
-# Allows the following module imports to work when running as a script
-_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
-
-from statvar_dcid_generator import get_statvar_dcid
-
 flags.DEFINE_string('input_path', None,
                     'Path to input CSV with state level data.')
 flags.DEFINE_string('output_path', None,
