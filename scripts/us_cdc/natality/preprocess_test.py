@@ -14,12 +14,8 @@
 """Tests for preprocess.py of the CDC Natality import."""
 
 import os
-import sys
 import unittest
 import tempfile
-import json
-import pandas as pd
-from . import preprocess
 import subprocess
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
