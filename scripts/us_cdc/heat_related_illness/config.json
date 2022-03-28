@@ -1,0 +1,41 @@
+{
+    "filename": {
+        "emergency_visits_heat_stress.csv": {
+            "populationType": "MedicalConditionIncident",
+            "medicalStatus": "VisitedEmergencyDepartment",
+            "medicalCondition": "HeatStress",
+            "climaticSeason": "SummerSeason",
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        },
+        "hospitalization_heat_stress.csv": {
+            "populationType": "MedicalConditionIncident",
+            "medicalStatus": "PatientHospitalized",
+            "medicalCondition": "HeatStress",
+            "climaticSeason": "SummerSeason",
+            "measuredProperty": "count",
+            "statType": "measuredValue"            
+        },
+        "summertime_heat_related_deaths.csv": {
+            "populationType": "MedicalConditionIncident",
+            "medicalStatus": "PatientDeceased",
+            "medicalCondition": "HeatStress",
+            "climaticSeason": "SummerSeason",
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        }
+    },
+    "pvs": {
+        "Age Group": {
+            "0 TO 4": { "age": "[0 4 Years]" },
+            "5 TO 14": { "age": "[5 14 Years]" },
+            "15 TO 34": { "age": "[15 34 Years]" },
+            "35 TO 64": { "age": "[35 64 Years]" },
+            ">= 65": { "age": "[65 - Years]" }
+        },
+        "Gender": {
+            "Male": { "gender": "Male" },
+            "Female": { "gender": "Female" }
+        }
+    }
+}
