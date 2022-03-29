@@ -25,7 +25,7 @@ from bs4 import BeautifulSoup
 
 _START = 2016
 _END = 2019 + 1  #to make the last year inclusive
-_TABLE_ID = ['4', '5', '6', '7', '8']
+_TABLE_ID = ['4', '5', '6', '7']
 _BASE_URL = "https://wonder.cdc.gov/nndss/"
 _TABLE_URL = _BASE_URL + "static/{year}/annual/{year}-table{id}.html"
 

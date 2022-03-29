@@ -21,8 +21,8 @@ import pandas as pd
 from absl import flags, app
 from bs4 import BeautifulSoup
 
-_START = 2007
-_END = datetime.date.today().year + 1  #to make the last year inclusive
+_START = 2019
+_END = 2020#datetime.date.today().year + 1  #to make the last year inclusive
 
 _BASE_URL = "https://wonder.cdc.gov/nndss/"
 _WEEKLY_TABLE_2010 = _BASE_URL + "nndss_weekly_tables_menu.asp?mmwr_year={year}&mmwr_week={week}"
@@ -130,7 +130,7 @@ def download_weekly_nnds_data_across_years(year_range: str,
                                            output_path: str) -> None:
     """
 	"""
-    output_path = os.path.join(output_path, './nndss_weekly_data_updated')
+    output_path = os.path.join(output_path, './nndss_weekly_data')
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     for year in year_range:

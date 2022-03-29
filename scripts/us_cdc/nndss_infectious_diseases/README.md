@@ -40,3 +40,11 @@ A similar dataset from 2014 onwards is available at [data.cdc.gov](https://data.
 scripts for data processing
 ```
 The csv file is updated periodically every week and we pick up the entire csv file each time to ensure the corrections done after review (reflected in [Notice to Data Users](https://wonder.cdc.gov/nndss/NTR.html) page) is reflected in the import.
+
+
+Columns that need to be resolved with schema
+
+- weekly tables:
+1. Carbapenemase-producing carbapenem-resistant  Enterobacteriaceae  †;Enterobacter  spp.;Current  week,,,
+2. Carbapenemase-producing carbapenem-resistant  Enterobacteriaceae  †;Escherichia coli;Current  week,,,
+3. Carbapenemase-producing carbapenem-resistant  Enterobacteriaceae  †;Klebsiella  spp.;Current  week,,,
