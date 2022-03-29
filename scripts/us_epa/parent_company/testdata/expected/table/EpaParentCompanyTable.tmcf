@@ -1,6 +1,6 @@
 Node: E:EpaParentCompanyTable->E1
-typeOf: dcs:Organization
+typeOf: dcs:EpaParentCompany
 dcid: C:EpaParentCompanyTable->dcid
-parentCompanyName: C:EpaParentCompanyTable->parentCompanyName
+name: C:EpaParentCompanyTable->name
 address: C:EpaParentCompanyTable->address
 locatedIn: C:EpaParentCompanyTable->locatedIn

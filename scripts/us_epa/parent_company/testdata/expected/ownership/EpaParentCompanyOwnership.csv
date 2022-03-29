@@ -1,4 +1,4 @@
-dcid,epaGhgrpFacilityId,year,facilityPercentOwnership
+dcid,epaGhgrpFacilityId,year,ownership
 EpaParentCompany/NationalFuelGasCompany,epaGhgrpFacilityId/1001829,,100
 EpaParentCompany/UsGovernment,epaGhgrpFacilityId/1001818,2012,100
 EpaParentCompany/UsGovernment,epaGhgrpFacilityId/1001818,2014,100
