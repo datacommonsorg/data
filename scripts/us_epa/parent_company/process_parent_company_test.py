@@ -35,11 +35,11 @@ _EXPECTED_COUNTERS = {
     # company and does not have a zip code which will be flagged.
     'missing_zip':
         set([('EpaParentCompany/BrownAndProvidencePlantations', '2020'),
-            ('EpaParentCompany/UsGovernment', '2012')]),
+             ('EpaParentCompany/UsGovernment', '2012')]),
     # There are two cases of ownership not set.
     'percent_ownership_not_found':
         set([('EpaParentCompany/UsGovernment', '2012'),
-            ('EpaParentCompany/UsGovernment', '2015')]),
+             ('EpaParentCompany/UsGovernment', '2015')]),
     # epaGhgrpFacilityId/9999 does not exist in the existing_facilities.csv.
     'facility_does_not_exist':
         set(['epaGhgrpFacilityId/9999']),
@@ -50,7 +50,7 @@ _EXPECTED_COUNTERS = {
     # do not have a Year.
     'year_does_not_exist':
         set([('EpaParentCompany/NationalFuelGasCompany',
-            'epaGhgrpFacilityId/1001829')])
+              'epaGhgrpFacilityId/1001829')])
 }
 
 
