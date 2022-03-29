@@ -1,0 +1,302 @@
+{
+  "same_dcid_different_statvar": [],
+  "2013": {
+    "actual_column_count": 205,
+    "moe_only": [],
+    "estimate_count": 104,
+    "moe_count": 101,
+    "repeated_dcids": {},
+    "dcid_missing_in_year": [
+      "dcid:Count_Person_19OrLessYears_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_19To25Years_NoHealthInsurance",
+      "dcid:Count_Person_19To25Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_19OrLessYears_NoHealthInsurance",
+      "dcid:Count_Person_26To34Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_19To64Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_6To18Years_NoHealthInsurance",
+      "dcid:Count_Person_6To18Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_26To34Years_NoHealthInsurance",
+      "dcid:Count_Person_19To64Years_NoHealthInsurance"
+    ],
+    "year_unique_dcid": [
+      "dcid:MarginOfError_Count_Person_25To34Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_18To24Years_NoHealthInsurance",
+      "dcid:Count_Person_18OrLessYears_NoHealthInsurance",
+      "dcid:Count_Person_6To17Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_18OrLessYears_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_18To64Years_NoHealthInsurance",
+      "dcid:Count_Person_25To34Years_NoHealthInsurance",
+      "dcid:Count_Person_18To64Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_6To17Years_NoHealthInsurance",
+      "dcid:Count_Person_18To24Years_NoHealthInsurance"
+    ]
+  },
+  "2017": {
+    "actual_column_count": 205,
+    "moe_only": [],
+    "estimate_count": 104,
+    "moe_count": 101,
+    "repeated_dcids": {},
+    "extra_columns": [
+      "Margin of Error!!Total Uninsured MOE!!Subject!!Total civilian noninstitutionalized population",
+      "Estimate!!Total Uninsured!!Subject!!Total civilian noninstitutionalized population"
+    ],
+    "dcid_missing_in_year": [
+      "dcid:MarginOfError_Count_Person_25To34Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_18To24Years_NoHealthInsurance",
+      "dcid:Count_Person_18OrLessYears_NoHealthInsurance",
+      "dcid:Count_Person_6To17Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_18OrLessYears_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_18To64Years_NoHealthInsurance",
+      "dcid:Count_Person_25To34Years_NoHealthInsurance",
+      "dcid:Count_Person_18To64Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_6To17Years_NoHealthInsurance",
+      "dcid:Count_Person_18To24Years_NoHealthInsurance"
+    ],
+    "year_unique_dcid": []
+  },
+  "2019": {
+    "actual_column_count": 205,
+    "moe_only": [],
+    "estimate_count": 104,
+    "moe_count": 101,
+    "repeated_dcids": {},
+    "extra_columns": [
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Male",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Female",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Not a citizen",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!55 to 64 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Not a citizen",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!65 to 74 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Naturalized",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!75 years and older",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Native born",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Median age (years)",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!75 years and older",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Male",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Naturalized",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Native born",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Female",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!55 to 64 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!65 to 74 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability"
+    ],
+    "dcid_missing_in_year": [
+      "dcid:MarginOfError_Count_Person_25To34Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_18To24Years_NoHealthInsurance",
+      "dcid:Count_Person_18OrLessYears_NoHealthInsurance",
+      "dcid:Count_Person_6To17Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_18OrLessYears_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_18To64Years_NoHealthInsurance",
+      "dcid:Count_Person_25To34Years_NoHealthInsurance",
+      "dcid:Count_Person_18To64Years_NoHealthInsurance",
+      "dcid:MarginOfError_Count_Person_6To17Years_NoHealthInsurance",
+      "dcid:Count_Person_18To24Years_NoHealthInsurance"
+    ],
+    "year_unique_dcid": []
+  },
+  "all": {
+    "missing_columns": [
+      "Uninsured Population!!Margin of Error!!HOUSEHOLD INCOME (IN 2015 INFLATION ADJUSTED DOLLARS)!!Total household population",
+      "Uninsured Population!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings",
+      "Uninsured Population!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings",
+      "Uninsured Population!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings",
+      "Uninsured Population!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2014 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings",
+      "Uninsured Population!!Estimate!!HOUSEHOLD INCOME (IN 2015 INFLATION ADJUSTED DOLLARS)!!Total household population",
+      "Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings",
+      "Uninsured Population!!Estimate!!HOUSEHOLD INCOME (IN 2016 INFLATION ADJUSTED DOLLARS)!!Total household population",
+      "Uninsured Population!!Margin of Error!!HOUSEHOLD INCOME (IN 2014 INFLATION ADJUSTED DOLLARS)!!Total household population",
+      "Uninsured Population!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2014 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings",
+      "Margin of Error!!Total Uninsured MOE!!HOUSEHOLD INCOME (IN 2018 INFLATION ADJUSTED DOLLARS)!!Total household population",
+      "Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2018 INFLATION ADJUSTED DOLLARS)!!Total household population",
+      "Uninsured Population!!Estimate!!HOUSEHOLD INCOME (IN 2014 INFLATION ADJUSTED DOLLARS)!!Total household population",
+      "Margin of Error!!Total Uninsured MOE!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings",
+      "Uninsured Population!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2015 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings",
+      "Uninsured Population!!Margin of Error!!HOUSEHOLD INCOME (IN 2016 INFLATION ADJUSTED DOLLARS)!!Total household population"
+    ],
+    "extra_columns": [
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years",
+      "Estimate!!Total Uninsured!!Subject!!Total civilian noninstitutionalized population",
+      "Margin of Error!!Total Uninsured MOE!!Subject!!Total civilian noninstitutionalized population",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Male",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Female",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Not a citizen",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!55 to 64 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!White alone, not Hispanic or Latino",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Not a citizen",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!65 to 74 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Naturalized",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!75 years and older",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Native born",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino (of any race)",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native alone",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!35 to 44 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Median age (years)",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!75 years and older",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!19 to 25 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Male",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!26 to 34 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Native born",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!SEX!!Female",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!45 to 54 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born!!Naturalized",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race alone",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!NATIVITY AND U.S. CITIZENSHIP STATUS!!Foreign born",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years!!55 to 64 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years",
+      "Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!65 years and older!!65 to 74 years",
+      "Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability"
+    ]
+  },
+  "dcid_series_holes": {
+    "dcid:Count_Person_18OrLessYears_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:MarginOfError_Count_Person_18OrLessYears_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:Count_Person_6To17Years_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:MarginOfError_Count_Person_6To17Years_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:Count_Person_18To64Years_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:MarginOfError_Count_Person_18To64Years_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:Count_Person_18To24Years_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:MarginOfError_Count_Person_18To24Years_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:Count_Person_25To34Years_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:MarginOfError_Count_Person_25To34Years_NoHealthInsurance": [
+      "2013"
+    ],
+    "dcid:Count_Person_19OrLessYears_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ],
+    "dcid:MarginOfError_Count_Person_19OrLessYears_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ],
+    "dcid:Count_Person_6To18Years_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ],
+    "dcid:MarginOfError_Count_Person_6To18Years_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ],
+    "dcid:Count_Person_19To64Years_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ],
+    "dcid:MarginOfError_Count_Person_19To64Years_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ],
+    "dcid:Count_Person_19To25Years_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ],
+    "dcid:MarginOfError_Count_Person_19To25Years_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ],
+    "dcid:Count_Person_26To34Years_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ],
+    "dcid:MarginOfError_Count_Person_26To34Years_NoHealthInsurance": [
+      "2017",
+      "2019"
+    ]
+  }
+}
