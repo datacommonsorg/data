@@ -4,4 +4,4 @@ variableMeasured: dcid:EpaOrganizationOwnership
 observationDate: C:EpaParentCompanyOwnership->year
 observationAbout: C:EpaParentCompanyOwnership->dcid
 value: C:EpaParentCompanyOwnership->epaGhgrpFacilityId
-ownershipPercentage: C:EpaParentCompanyOwnership->facilityPercentOwnership
+ownershipPercentage: C:EpaParentCompanyOwnership->ownership

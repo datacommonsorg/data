@@ -54,10 +54,9 @@ _COUNTY_CANDIDATES_CACHE = {}
 # - "containedInPlace" is a repeated list of refs to County and Census ZCTA
 _DCID = "dcid"
 _EPA_FACILITY_GHG_ID = "epaGhgrpFacilityId"
-_NAME = "parentCompanyName"
-_OTHERNAME = "otherName"
+_NAME = "name"
 _YEAR = "year"
-_PERCENT_OWNERSHIP = "facilityPercentOwnership"
+_PERCENT_OWNERSHIP = "ownership"
 _ADDRESS = "address"
 _CIP = "locatedIn"
 
@@ -74,12 +73,36 @@ _COUNTERS = {
 }
 
 
-def _gen_mcf():
+def _gen_table_mcf():
+    lines = [
+        "Node: dcid:EpaParentCompany",
+        "subClassOf: dcs:Organization",
+        "name: EpaParentCompany",
+        "typeOf: schema:Class",
+        "\n",
+        "Node: dcid:locatedIn",
+        "typeOf: schema:Property",
+        "domainIncludes: schema:Place",
+        "rangeIncludes: schema:Place",
+        "name: locatedIn",
+    ]
+    return "\n".join(lines)
+
+
+def _gen_ownership_mcf():
     lines = [
         "Node: dcid:EpaOrganizationOwnership",
         "description: The ownership of an EPA Facility by an Organization in a given year.",
-        "typeOf: dcs:StatisticalVariable", "populationType: dcs:Organization",
-        "measuredProperty: owns", "statType: measurementResult"
+        "typeOf: dcs:StatisticalVariable",
+        "populationType: dcs:EpaParentCompany",
+        "measuredProperty: owns",
+        "statType: measurementResult",
+        "\n",
+        "Node: dcid:ownershipPercentage",
+        "typeOf: schema:Property",
+        "domainIncludes: dcs:EpaParentCompany",
+        "rangeIncludes: schema:Number",
+        "name: ownershipPercentage",
     ]
     return "\n".join(lines)
 
@@ -99,11 +122,12 @@ def _gen_ownership_tmcf():
 
 def _gen_company_tmcf():
     lines = [
-        "Node: E:EpaParentCompanyTable->E1", "typeOf: dcs:Organization",
+        "Node: E:EpaParentCompanyTable->E1",
+        "typeOf: dcs:EpaParentCompany",
         f"{_DCID}: C:EpaParentCompanyTable->{_DCID}",
         f"{_NAME}: C:EpaParentCompanyTable->{_NAME}",
         f"{_ADDRESS}: C:EpaParentCompanyTable->{_ADDRESS}",
-        f"{_CIP}: C:EpaParentCompanyTable->{_CIP}"
+        f"{_CIP}: C:EpaParentCompanyTable->{_CIP}",
     ]
     return "\n".join(lines)
 
@@ -283,14 +307,17 @@ def process(input_table_path, existing_facilities_file, output_path_info,
         print("Geo Resolution Stats: \n" + counters_string())
 
     # Write the MCF and TMCF files in their respective destination locations.
-    with open(ownership_path + "Ownership.mcf", "w") as fp:
-        fp.write(_gen_mcf())
+    with open(table_path + "Table.mcf", "w") as fp:
+        fp.write(_gen_table_mcf())
 
-    with open(ownership_path + "Ownership.tmcf", "w") as fp:
-        fp.write(_gen_ownership_tmcf())
+    with open(ownership_path + "Ownership.mcf", "w") as fp:
+        fp.write(_gen_ownership_mcf())
 
     with open(table_path + "Table.tmcf", "w") as fp:
         fp.write(_gen_company_tmcf())
+
+    with open(ownership_path + "Ownership.tmcf", "w") as fp:
+        fp.write(_gen_ownership_tmcf())
 
 
 def main(_):

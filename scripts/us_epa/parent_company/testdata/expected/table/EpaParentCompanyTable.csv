@@ -1,4 +1,4 @@
-dcid,parentCompanyName,address,locatedIn
+dcid,name,address,locatedIn
 EpaParentCompany/NationalFuelGasCompany,National Fuel Gas Company,"6363 Main Street, Williamsville, Ny - 14221","dcid:zip/14221, dcid:geoId/36029"
 EpaParentCompany/UsGovernment,Us Government,,
 EpaParentCompany/RandomCompanyName,Random Company Name,"1 Prospect Street, Providence, Ri - 02912","dcid:zip/02912, dcid:geoId/44007"
