@@ -132,6 +132,12 @@ def _gen_company_tmcf():
     return "\n".join(lines)
 
 
+def _str(v):
+    if not v:
+        return ''
+    return '"' + v + '"'
+
+
 def _v(table, row, col):
     return row.get(_TABLE_PREFIX + "." + table + "." + col, "")
 
@@ -147,6 +153,9 @@ def _get_name(table, row):
 
 def _name_to_id(s):
     s = s.replace('&', ' And')
+    s = s.replace('U.S.', ' US')
+    s = s.replace('U. S.', ' US')
+    s = s.replace('United States', ' US')
     s = sub(r'\W+', '', s)
     s = s.replace(' Llc', ' LLC')
     return ''.join([s[0].upper(), s[1:]])
@@ -296,8 +305,8 @@ def process(input_table_path, existing_facilities_file, output_path_info,
 
                     table_out_row = {
                         _DCID: company_id,
-                        _NAME: company_name,
-                        _ADDRESS: _get_address(_TABLE, in_row),
+                        _NAME: _str(company_name),
+                        _ADDRESS: _str(_get_address(_TABLE, in_row)),
                         _CIP: ", ".join(fh.get_cip(zip, county)),
                     }
                     tableWriter.writerow(table_out_row)

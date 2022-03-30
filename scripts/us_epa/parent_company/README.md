@@ -17,7 +17,8 @@ companies, we create one using the name (the ID is set to the dcid). This name
 to ID scheme only retains the alphanumeric characters and removes all others. As
 as example, names "Abc & Xyz Co. LLC " and "Abc & Xyz Co., LLC" would both get
 converted to "dcid:EpaParentCompany/AbcAndXyzCoLLC". Note that the "&" gets
-converted to "And".
+converted to "And". Similarly, "U.S.", "U. S." and "United States" all get
+mapped to "US".
 
 We use the existing epaGhgrpFacility Ids which already exist in Data Commons to
 create an ownership mapping (EpaOrganizationOwnership) between the facility and
@@ -57,7 +58,7 @@ percentage and if no percentage is provided it is assumed to be 100.
         "counters": {
           "NumRowSuccesses": "102603",
           "NumPVSuccesses": "820824",
-          "Existence_NumChecks": "785095",
+          "Existence_NumChecks": "785041",
           "NumNodeSuccesses": "102603",
           "Existence_NumDcCalls": "7"
         }
@@ -65,7 +66,7 @@ percentage and if no percentage is provided it is assumed to be 100.
       "LEVEL_WARNING": {
         "counters": {
           "Existence_MissingTriple_domainIncludes": "1",
-          "Existence_MissingReference_locatedIn": "687"
+          "Existence_MissingReference_locatedIn": "685"
         }
       }
     },
