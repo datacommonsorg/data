@@ -42,7 +42,7 @@ percentage and if no percentage is provided it is assumed to be 100.
 
     ```
     dc-import lint output/table/*
-    dc-import lint output/ownership/* dc_generated/table_mcf_nodes_EpaParentCompanyTable.mcf
+    dc-import lint output/ownership/* dc_generated/*.mcf
     ```
 
     This produced the following warning counters, where
@@ -57,14 +57,14 @@ percentage and if no percentage is provided it is assumed to be 100.
         "counters": {
           "NumRowSuccesses": "102603",
           "NumPVSuccesses": "820824",
-          "Existence_NumChecks": "793535",
+          "Existence_NumChecks": "785095",
           "NumNodeSuccesses": "102603",
           "Existence_NumDcCalls": "7"
         }
       },
       "LEVEL_WARNING": {
         "counters": {
-          "Existence_MissingReference_Property": "119514",
+          "Existence_MissingTriple_domainIncludes": "1",
           "Existence_MissingReference_locatedIn": "687"
         }
       }
