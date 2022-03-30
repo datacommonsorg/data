@@ -1,0 +1,614 @@
+{
+    "_COMMENT_": "This is a JSON Config to add constraint props to statvars based on values in the columns of CSV/XLS files. Properties under _COMMON_ are added to all stat vars. The _DPV_ section is used to identify dependent properties based on other constraint properties.",
+    "_COMMON_": {
+        "statType": "measuredValue",
+        "measuredProperty": "count",
+        "typeOf": "StatisticalVariable"
+    },
+    "_DPV_": [
+        {
+            "cprop": "targetedRace",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "race"
+            }
+        },
+        {
+            "cprop": "targetedEthnicity",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "ethnicity"
+            }
+        },
+        {
+            "cprop": "targetedReligion",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "religion"
+            }
+        },
+        {
+            "cprop": "targetedSexualOrientation",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "sexualOrientation"
+            }
+        },
+        {
+            "cprop": "targetedDisabilityStatus",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "disabilityStatus"
+            }
+        },
+        {
+            "cprop": "targetedGender",
+            "dpv": {
+                "prop": "biasMotivation",
+                "val": "gender"
+            }
+        }
+    ],
+    "OFFENDER_RACE": {
+        "White": {
+            "offenderRace": "WhiteAlone"
+        },
+        "Black or African American": {
+            "offenderRace": "BlackOrAfricanAmericanAlone"
+        },
+        "Unknown": {
+            "offenderRace": "UnknownRace"
+        },
+        "Multiple": {
+            "offenderRace": "TwoOrMoreRaces"
+        },
+        "Asian": {
+            "offenderRace": "AsianAlone"
+        },
+        "American Indian or Alaska Native": {
+            "offenderRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "Native Hawaiian or Other Pacific Islander": {
+            "offenderRace": "NativeHawaiianOrOtherPacificIslanderAlone"
+        }
+    },
+    "OFFENDER_ETHNICITY": {
+        "Unknown": {
+            "offenderEthnicity": "UCR_UnknownEthnicity"
+        },
+        "Not Hispanic or Latino": {
+            "offenderEthnicity": "NotHispanicOrLatino"
+        },
+        "Hispanic or Latino": {
+            "offenderEthnicity": "HispanicOrLatino"
+        },
+        "Multiple": {
+            "offenderEthnicity": "UCR_MultipleEthnicity"
+        }
+    },
+    "MULTIPLE_BIAS": {
+        "S": {
+            "biasMotivation": "SingleBias"
+        },
+        "M": {
+            "biasMotivation": "MultipleBias"
+        }
+    },
+    "MULTIPLE_LOCATION_NAME": {
+        "S": {
+            "locationOfCrime": "SingleCrimeLocation"
+        },
+        "M": {
+            "locationOfCrime": "MultipleCrimeLocations"
+        }
+    },
+    "BIAS_CATEGORY": {
+        "race": {
+            "biasMotivation": "race"
+        },
+        "religion": {
+            "biasMotivation": "religion"
+        },
+        "sexualOrientation": {
+            "biasMotivation": "sexualOrientation"
+        },
+        "ethnicity": {
+            "biasMotivation": "ethnicity"
+        },
+        "disabilityStatus": {
+            "biasMotivation": "disabilityStatus"
+        },
+        "gender": {
+            "biasMotivation": "gender"
+        },
+        "TransgenderOrGenderNonConforming": {
+            "biasMotivation": "gender",
+            "targetedGender": "TransgenderOrGenderNonConforming"
+        },
+        "UnknownBias": {
+            "biasMotivation": "UnknownBias"
+        }
+    },
+    "BIAS_DESC": {
+        "Anti-Black or African American": {
+            "biasMotivation": "race",
+            "targetedRace": "BlackOrAfricanAmericanAlone"
+        },
+        "Anti-White": {
+            "biasMotivation": "race",
+            "targetedRace": "WhiteAlone"
+        },
+        "Anti-Arab": {
+            "biasMotivation": "race",
+            "targetedRace": "Arab"
+        },
+        "Anti-American Indian or Alaska Native": {
+            "biasMotivation": "race",
+            "targetedRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "Anti-Asian": {
+            "biasMotivation": "race",
+            "targetedRace": "AsianAlone"
+        },
+        "Anti-Multiple Races, Group": {
+            "biasMotivation": "race",
+            "targetedRace": "TwoOrMoreRaces"
+        },
+        "Anti-Native Hawaiian or Other Pacific Islander": {
+            "biasMotivation": "race",
+            "targetedRace": "NativeHawaiianOrOtherPacificIslanderAlone"
+        },
+        "Anti-Hispanic or Latino": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "HispanicOrLatino"
+        },
+        "Anti-Other Race/Ethnicity/Ancestry": {
+            "biasMotivation": "UCR_OtherRaceOrEthnicity"
+        },
+        "Anti-Jewish": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Judaism"
+        },
+        "Anti-Protestant": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Protestantism"
+        },
+        "Anti-Other Religion": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_OtherReligion"
+        },
+        "Anti-Islamic (Muslim)": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Islam"
+        },
+        "Anti-Catholic": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Catholicism"
+        },
+        "Anti-Jehovah's Witness": {
+            "biasMotivation": "religion",
+            "targetedReligion": "JehovahsWitnesses"
+        },
+        "Anti-Mormon": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Mormonism"
+        },
+        "Anti-Buddhist": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Buddhism"
+        },
+        "Anti-Sikh": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Sikhism"
+        },
+        "Anti-Other Christian": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_OtherChristian"
+        },
+        "Anti-Hindu": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Hinduism"
+        },
+        "Anti-Eastern Orthodox (Russian, Greek, Other)": {
+            "biasMotivation": "religion",
+            "targetedReligion": "EasternChristianity"
+        },
+        "Anti-Atheism/Agnosticism": {
+            "biasMotivation": "religion",
+            "targetedReligion": "AtheismOrAgnosticism"
+        },
+        "Anti-Multiple Religions, Group": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_MultipleReligion"
+        },
+        "Anti-Heterosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Heterosexual"
+        },
+        "Anti-Gay (Male)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Gay"
+        },
+        "Anti-Bisexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Bisexual"
+        },
+        "Anti-Lesbian (Female)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Lesbian"
+        },
+        "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "LGBT"
+        },
+        "Anti-Physical Disability": {
+            "biasMotivation": "disabilityStatus",
+            "targetedDisabilityStatus": "PhysicalDisability"
+        },
+        "Anti-Mental Disability": {
+            "biasMotivation": "disabilityStatus",
+            "targetedDisabilityStatus": "MentalDisability"
+        },
+        "Anti-Gender Non-Conforming": {
+            "biasMotivation": "gender",
+            "targetedGender": "GenderNonConforming"
+        },
+        "Anti-Female": {
+            "biasMotivation": "gender",
+            "targetedGender": "Female"
+        },
+        "Anti-Transgender": {
+            "biasMotivation": "gender",
+            "targetedGender": "Transgender"
+        },
+        "Anti-Male": {
+            "biasMotivation": "gender",
+            "targetedGender": "Male"
+        },
+        "Unknown (offender's motivation not known)": {
+            "biasMotivation": "UnknownBias"
+        }
+    },
+    "OFFENSE_NAME": {
+        "Intimidation": {
+            "crimeType": "Intimidation"
+        },
+        "Simple Assault": {
+            "crimeType": "SimpleAssault"
+        },
+        "Aggravated Assault": {
+            "crimeType": "AggravatedAssault"
+        },
+        "Robbery": {
+            "crimeType": "Robbery"
+        },
+        "Destruction/Damage/Vandalism of Property": {
+            "crimeType": "DestructionOrDamageOrVandalismOfProperty"
+        },
+        "Arson": {
+            "crimeType": "Arson"
+        },
+        "Murder and Nonnegligent Manslaughter": {
+            "crimeType": "MurderAndNonNegligentManslaughter"
+        },
+        "Burglary/Breaking & Entering": {
+            "crimeType": "Burglary"
+        },
+        "Not Specified": {
+            "crimeType": "UCR_NotSpecified"
+        },
+        "Rape": {
+            "crimeType": "Rape"
+        },
+        "Motor Vehicle Theft": {
+            "crimeType": "MotorVehicleTheft"
+        },
+        "Drug/Narcotic Violations": {
+            "crimeType": "DrugOrNarcoticViolations"
+        },
+        "Weapon Law Violations": {
+            "crimeType": "WeaponLawViolations"
+        },
+        "Theft From Motor Vehicle": {
+            "crimeType": "TheftFromMotorVehicle"
+        },
+        "Shoplifting": {
+            "crimeType": "Shoplifting"
+        },
+        "All Other Larceny": {
+            "crimeType": "UCR_AllOtherLarceny"
+        },
+        "Theft of Motor Vehicle Parts or Accessories": {
+            "crimeType": "TheftOfMotorVehiclePartsOrAccessories"
+        },
+        "Fondling": {
+            "crimeType": "Fondling"
+        },
+        "Counterfeiting/Forgery": {
+            "crimeType": "CounterfeitingOrForgery"
+        },
+        "Kidnapping/Abduction": {
+            "crimeType": "KidnappingOrAbduction"
+        },
+        "Theft From Building": {
+            "crimeType": "TheftFromBuilding"
+        },
+        "Pornography/Obscene Material": {
+            "crimeType": "PornographyOrObsceneMaterial"
+        },
+        "Embezzlement": {
+            "crimeType": "Embezzlement"
+        },
+        "Purse-snatching": {
+            "crimeType": "PurseSnatching"
+        },
+        "Drug Equipment Violations": {
+            "crimeType": "DrugEquipmentViolations"
+        },
+        "Credit Card/Automated Teller Machine Fraud": {
+            "crimeType": "CreditCardOrAutomatedTellerMachineFraud"
+        },
+        "Sexual Assault With An Object": {
+            "crimeType": "SexualAssaultWithAnObject"
+        },
+        "False Pretenses/Swindle/Confidence Game": {
+            "crimeType": "FalsePretenseOrSwindleOrConfidenceGame"
+        },
+        "Pocket-picking": {
+            "crimeType": "PocketPicking"
+        },
+        "Welfare Fraud": {
+            "crimeType": "WelfareFraud"
+        },
+        "Extortion/Blackmail": {
+            "crimeType": "ExtortionOrBlackmail"
+        },
+        "Stolen Property Offenses": {
+            "crimeType": "StolenPropertyOffenses"
+        },
+        "Incest": {
+            "crimeType": "Incest"
+        },
+        "Sodomy": {
+            "crimeType": "Sodomy"
+        },
+        "Negligent Manslaughter": {
+            "crimeType": "NegligentManslaughter"
+        },
+        "Statutory Rape": {
+            "crimeType": "StatutoryRape"
+        },
+        "Theft From Coin-Operated Machine or Device": {
+            "crimeType": "TheftFromCoinOperatedMachineOrDevice"
+        },
+        "Impersonation": {
+            "crimeType": "Impersonation"
+        },
+        "Prostitution": {
+            "crimeType": "Prostitution"
+        },
+        "Wire Fraud": {
+            "crimeType": "WireFraud"
+        },
+        "Assisting or Promoting Prostitution": {
+            "crimeType": "AssistingOrPromotingProstitution"
+        },
+        "Purchasing Prostitution": {
+            "crimeType": "PurchasingProstitution"
+        },
+        "Bribery": {
+            "crimeType": "Bribery"
+        },
+        "Identity Theft": {
+            "crimeType": "IdentityTheft"
+        },
+        "Human Trafficking, Commercial Sex Acts": {
+            "crimeType": "HumanTrafficking_CommercialSexActs"
+        },
+        "Hacking/Computer Invasion": {
+            "crimeType": "HackingOrComputerInvasion"
+        },
+        "Betting/Wagering": {
+            "crimeType": "BettingOrWagering"
+        },
+        "Animal Cruelty": {
+            "crimeType": "AnimalCruelty"
+        }
+    },
+    "OFFENSE_CATEGORY": {
+        "CrimeAgainstProperty": {
+            "crimeType": "CrimeAgainstProperty"
+        },
+        "CrimeAgainstPerson": {
+            "crimeType": "CrimeAgainstPerson"
+        },
+        "CrimeAgainstSociety": {
+            "crimeType": "CrimeAgainstSociety"
+        },
+        "Not Specified": {
+            "crimeType": "UCR_NotSpecified"
+        }
+    },
+    "OFFENDER_CATEGORY": {
+        "UnknownOffender": {
+            "offenderType": "UnknownOffender"
+        },
+        "KnownOffender": {
+            "offenderType": "KnownOffender"
+        }
+    },
+    "VICTIM_TYPES": {
+        "Financial Institution": {
+            "victimType": "FinancialInstitution"
+        },
+        "Law Enforcement Officer": {
+            "victimType": "LawEnforcementOfficer"
+        },
+        "Society/Public": {
+            "victimType": "Society"
+        },
+        "Individual": {
+            "victimType": "Person"
+        },
+        "Government": {
+            "victimType": "Government"
+        },
+        "Unknown": {
+            "victimType": "UCR_UnknownVictimType"
+        },
+        "Religious Organization": {
+            "victimType": "ReligiousOrganization"
+        },
+        "Business": {
+            "victimType": "Business"
+        },
+        "Other": {
+            "victimType": "UCR_OtherVictimType"
+        }
+    },
+    "MULTIPLE_VICTIM_TYPE": {
+        "M": {
+            "victimType": "MultipleVictimType"
+        }
+    },
+    "LOCATION_NAME": {
+        "Cyberspace": {
+            "locationOfCrime": "Cyberspace"
+        },
+        "Rest Area": {
+            "locationOfCrime": "RestArea"
+        },
+        "Commercial/Office Building": {
+            "locationOfCrime": "CommercialOrOfficeBuilding"
+        },
+        "Grocery/Supermarket": {
+            "locationOfCrime": "GroceryStore&Supermarket"
+        },
+        "School-Elementary/Secondary": {
+            "locationOfCrime": "ElementarySchool&HighSchool"
+        },
+        "Construction Site": {
+            "locationOfCrime": "ConstructionSite"
+        },
+        "Air/Bus/Train Terminal": {
+            "locationOfCrime": "Airport&BusStation&TrainStation"
+        },
+        "Camp/Campground": {
+            "locationOfCrime": "Campground"
+        },
+        "Military Installation": {
+            "locationOfCrime": "MilitaryInstallation"
+        },
+        "Government/Public Building": {
+            "locationOfCrime": "GovernmentOrPublicBuilding"
+        },
+        "Church/Synagogue/Temple/Mosque": {
+            "locationOfCrime": "PlaceOfWorship"
+        },
+        "Park/Playground": {
+            "locationOfCrime": "Park&Playground"
+        },
+        "Farm Facility": {
+            "locationOfCrime": "FarmFacility"
+        },
+        "Community Center": {
+            "locationOfCrime": "CommunityCenter"
+        },
+        "Other/Unknown": {
+            "locationOfCrime": "UCR_UnclassifiedLocation"
+        },
+        "Abandoned/Condemned Structure": {
+            "locationOfCrime": "AbandonedOrCondemnedStructure"
+        },
+        "Department/Discount Store": {
+            "locationOfCrime": "DepartmentStore"
+        },
+        "Amusement Park": {
+            "locationOfCrime": "AmusementPark"
+        },
+        "Highway/Road/Alley/Street/Sidewalk": {
+            "locationOfCrime": "HighwayOrRoadOrAlleyOrStreetOrSidewalk"
+        },
+        "Jail/Prison/Penitentiary/Corrections Facility": {
+            "locationOfCrime": "Prisons"
+        },
+        "Tribal Lands": {
+            "locationOfCrime": "TribalLands"
+        },
+        "Arena/Stadium/Fairgrounds/Coliseum": {
+            "locationOfCrime": "StadiumOrArena"
+        },
+        "Auto Dealership New/Used": {
+            "locationOfCrime": "AutoDealer"
+        },
+        "Shelter-Mission/Homeless": {
+            "locationOfCrime": "MissionOrHomelessShelter"
+        },
+        "Hotel/Motel/Etc.": {
+            "locationOfCrime": "LodgingBusiness"
+        },
+        "Field/Woods": {
+            "locationOfCrime": "FieldOrWoods"
+        },
+        "Specialty Store": {
+            "locationOfCrime": "SpecialtyStore"
+        },
+        "Industrial Site": {
+            "locationOfCrime": "IndustrialSite"
+        },
+        "School/College": {
+            "locationOfCrime": "School&CollegeOrUniversity"
+        },
+        "Residence/Home": {
+            "locationOfCrime": "Residence"
+        },
+        "Restaurant": {
+            "locationOfCrime": "Restaurant"
+        },
+        "Gambling Facility/Casino/Race Track": {
+            "locationOfCrime": "GamblingFacilityOrCasinoOrRaceTrack"
+        },
+        "Convenience Store": {
+            "locationOfCrime": "ConvenienceStore"
+        },
+        "Rental Storage Facility": {
+            "locationOfCrime": "SelfStorage"
+        },
+        "School-College/University": {
+            "locationOfCrime": "CollegeOrUniversity"
+        },
+        "ATM Separate from Bank": {
+            "locationOfCrime": "ATMSeparateFromBank"
+        },
+        "Service/Gas Station": {
+            "locationOfCrime": "GasStation"
+        },
+        "Parking/Drop Lot/Garage": {
+            "locationOfCrime": "ParkingFacility"
+        },
+        "Bank/Savings and Loan": {
+            "locationOfCrime": "BankOrSavingsAndLoan"
+        },
+        "Dock/Wharf/Freight/Modal Terminal": {
+            "locationOfCrime": "DockOrWharfOrFreightOrModalTerminal"
+        },
+        "Bar/Nightclub": {
+            "locationOfCrime": "BarOrPub&NightClub"
+        },
+        "Lake/Waterway/Beach": {
+            "locationOfCrime": "BodyOfWater&Beach"
+        },
+        "Shopping Mall": {
+            "locationOfCrime": "ShoppingCenter"
+        },
+        "Drug Store/Doctor's Office/Hospital": {
+            "locationOfCrime": "MedicalBusiness"
+        },
+        "Liquor Store": {
+            "locationOfCrime": "LiquorStore"
+        },
+        "Daycare Facility": {
+            "locationOfCrime": "ChildCare"
+        }
+    }
+}
