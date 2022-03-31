@@ -6,7 +6,8 @@
             "medicalCondition": "HeatStress",
             "climaticSeason": "SummerSeason",
             "measuredProperty": "count",
-            "statType": "measuredValue"
+            "statType": "measuredValue",
+            "typeOf": "StatisticalVariable"
         },
         "hospitalization_heat_stress.csv": {
             "populationType": "MedicalConditionIncident",
@@ -14,7 +15,8 @@
             "medicalCondition": "HeatStress",
             "climaticSeason": "SummerSeason",
             "measuredProperty": "count",
-            "statType": "measuredValue"            
+            "statType": "measuredValue",
+            "typeOf": "StatisticalVariable"           
         },
         "summertime_heat_related_deaths.csv": {
             "populationType": "MedicalConditionIncident",
@@ -22,7 +24,8 @@
             "medicalCondition": "HeatStress",
             "climaticSeason": "SummerSeason",
             "measuredProperty": "count",
-            "statType": "measuredValue"
+            "statType": "measuredValue",
+            "typeOf": "StatisticalVariable"
         }
     },
     "pvs": {
