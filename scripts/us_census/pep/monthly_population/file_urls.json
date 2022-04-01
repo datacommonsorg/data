@@ -1,0 +1,8 @@
+{
+    "previous_urls" : [],
+    "previous_urls" : ["https://www2.census.gov/programs-surveys/popest/tables/2020-2021/national/totals/NA-EST2021-POP.xlsx"],
+    "new_urls" : ["https://www2.census.gov/programs-surveys/popest/tables/2020-2021/national/totals/NA-EST2021-POP.xlsx",
+                  "https://www2.census.gov/programs-surveys/popest/tables/2010-2019/national/totals/na-est2019-01.xlsx",
+                  "https://www2.census.gov/programs-surveys/popest/tables/2000-2008/national/totals/na-est2008-01.xls",
+                  "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/national/totals/nat-total.txt"]
+}
