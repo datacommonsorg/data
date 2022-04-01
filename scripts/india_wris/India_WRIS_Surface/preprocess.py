@@ -13,15 +13,14 @@
 # limitations under the License.
 
 import os
-
-os.chdir('../../')
 from india_wris.base import WaterQualityBase
 
 DATASET_NAME = 'India_WRIS_Surface'
 
 ## Defining MCF and TMCF template nodes
 
-SOLUTE_MCF_NODES = """Node: dcid:WaterQuality_Concentration_SurfaceWater_{variable}
+SOLUTE_MCF_NODES = """Node: dcid:Concentration_{variable}_BodyOfWater_SurfaceWater
+name: Concentration of {variable}, SurfaceWater
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
@@ -32,7 +31,8 @@ statType: dcs:measuredValue
 
 """
 
-CHEMPROP_MCF_NODES = """Node: dcid:WaterQuality_SurfaceWater_{variable}
+CHEMPROP_MCF_NODES = """Node: dcid:{variable}_BodyOfWater_SurfaceWater
+name: {variable}, Surface Water
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
@@ -58,7 +58,7 @@ observationDate: C:{dataset_name}->Month
 observationAbout: E:{dataset_name}->E0
 containedIn: E:{dataset_name}->E1
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQuality_Concentration_SurfaceWater_{variable}
+variableMeasured: dcid:Concentration_{variable}_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:{dataset_name}->"{name}"
 """
@@ -69,7 +69,7 @@ observationDate: C:{dataset_name}->Month
 observationAbout: E:{dataset_name}->E0
 containedIn: E:{dataset_name}->E1
 observationPeriod: "P1M"
-variableMeasured: dcid:WaterQuality_SurfaceWater_{variable}
+variableMeasured: dcid:{variable}_BodyOfWater_SurfaceWater
 measuredProperty: dcs:{dcid}
 value: C:{dataset_name}->"{name}"
 """

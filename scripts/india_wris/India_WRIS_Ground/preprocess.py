@@ -15,11 +15,13 @@
 import os
 from india_wris.base import WaterQualityBase
 
+
 DATASET_NAME = 'India_WRIS_Ground'
 
 ## Defining MCF and TMCF template nodes
 
-SOLUTE_MCF_NODES = """Node: dcid:WaterQuality_Concentration_GroundWater_{variable}
+SOLUTE_MCF_NODES = """Node: dcid:Concentration_{variable}_BodyOfWater_GroundWater
+name: Concentration of {variable}, Ground Water
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 contaminatedThing: dcs:GroundWater
@@ -30,7 +32,8 @@ statType: dcs:measuredValue
 
 """
 
-CHEMPROP_MCF_NODES = """Node: dcid:WaterQuality_GroundWater_{variable}
+CHEMPROP_MCF_NODES = """Node: dcid:{variable}_BodyOfWater_GroundWater
+name: {variable}, Ground Water
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:GroundWater
@@ -56,7 +59,7 @@ observationDate: C:{dataset_name}->Year
 observationAbout: E:{dataset_name}->E0
 containedIn: E:{dataset_name}->E1
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQuality_Concentration_GroundWater_{variable}
+variableMeasured: dcid:Concentration_{variable}_BodyOfWater_GroundWater
 measuredProperty: dcs:concentration
 value: C:{dataset_name}->"{name}"
 """
@@ -67,7 +70,7 @@ observationDate: C:{dataset_name}->Year
 observationAbout: E:{dataset_name}->E0
 containedIn: E:{dataset_name}->E1
 observationPeriod: "P1Y"
-variableMeasured: dcid:WaterQuality_GroundWater_{variable}
+variableMeasured: dcid:{variable}_BodyOfWater_GroundWater
 measuredProperty: dcs:{dcid}
 value: C:{dataset_name}->"{name}"
 """
