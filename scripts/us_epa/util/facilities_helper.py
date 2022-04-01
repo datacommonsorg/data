@@ -17,7 +17,12 @@ import os
 import ssl
 
 import datacommons
+import json
 import pandas as pd
+import requests
+
+from requests.structures import CaseInsensitiveDict
+from requests.exceptions import HTTPError
 
 _COUNTY_CANDIDATES_CACHE = {}
 
@@ -73,3 +78,68 @@ def get_county_candidates(zcta):
         candidate_lists.append(sorted(resp[zcta]))
     _COUNTY_CANDIDATES_CACHE[zcta] = candidate_lists
     return candidate_lists
+
+
+def _dc_sv_query(dc_api_url, data_string, svs=set()):
+    headers = CaseInsensitiveDict()
+    headers["Content-Type"] = "application/json"
+    try:
+        resp = requests.post(dc_api_url, headers=headers, data=data_string)
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')
+        return set()
+    except Exception as e:
+        print(f'Some unkonw Exceptionoccurred: {e}')
+        return set()
+
+    d = json.loads(resp.content.decode('utf8').replace("'", '"'))
+    for p, p_dict in d["places"].items():
+        if "statVars" in p_dict:
+            sv_list = d["places"][p]["statVars"]
+            for sv in sv_list:
+                svs.add(sv)
+    return svs
+
+# Returns a union all StatVars associated with all facilities using the
+# Data Commons API.
+def get_all_statvars(dc_api_url, facility_ids):
+    if not facility_ids:
+        return set()
+
+    statVars = set()
+    # 500 facilities at a time.
+    n_facilities = 50
+    print("****Getting existing StatVars for Facilities.")
+    for i in range(0, len(facility_ids), n_facilities):
+        if i % n_facilities == 0:
+           print(f'**Processing facilities from index {i} to {i+n_facilities}')
+        # Compose the API query params.
+        # Need to be of the form:
+        # '{"dcids":["epaGhgrpFacilityId/1004962","epaGhgrpFacilityId/1010899"]}'
+        data_string = "{'dcids': ["
+        for f in facility_ids[i:i + n_facilities]:
+            data_string += '"%s",' % f
+        data_string += ']}'
+
+        statVars = _dc_sv_query(dc_api_url, data_string, statVars)
+
+    print("****Done getting existing StatVars.")
+    print("***********************************.")
+    return statVars
+
+# Returns a map of Facility ID : {SV: SV Observation} from the Data Commons API.
+def get_all_svobs(facility_ids, svs):
+    facility_svo_dict = {}
+
+    # Process in batches of size n_facilities.
+    n_facilities = 100
+    print("****Getting all StatVar Observations for the Facilities.")
+    for i in range(0, len(facility_ids), n_facilities):
+        if i % n_facilities == 0:
+           print(f'**Processing facilities from index {i} to {i+n_facilities}')
+        facility_svo_dict.update(
+            datacommons.get_stat_all(facility_ids[i:i + n_facilities], svs))
+
+    print("****Done getting existing StatVarObs.")
+    print("***********************************.")
+    return facility_svo_dict

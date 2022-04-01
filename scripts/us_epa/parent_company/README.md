@@ -52,6 +52,9 @@ percentage and if no percentage is provided it is assumed to be 100.
     warnings for 'Existence_MissingReference_Property' are for the parent
     company names not yet existing in Data Commons.
 
+    The counters produced for the company table import followed by the
+    ownership import:
+
     ```
     "levelSummary": {
       "LEVEL_INFO": {
@@ -70,4 +73,42 @@ percentage and if no percentage is provided it is assumed to be 100.
         }
       }
     },
+    ```
+
+    For the Stat Var Observations, there are several warnings for major jumps
+    in values in consecutive years. These are mostly happening due to the
+    company names either changing substantially in the data, e.g. in one year
+    the company ID (produced from the name) is 'SandridgeProductionAndExplorationLLC'
+    and in the next it is 'SandridgeExplorationAndProductionLLC'. In some cases
+    the differences are more subtle and might be corrected in the parent
+    company import, e.g. 'PotashHoldingCoInc' and 'PotashHoldingCompanyInc' or
+    'NewpageHoldingCorporation' and 'NewpageHoldingCorp'.
+
+    The warnings produced for data holes are expected because we only produce
+    stat var observation for the companies in a year where a relationship exists
+    between the company and a facility. If no relationship exists, then we
+    will not have a stat var observation.
+
+    The counters produced for the stat var observations import:
+
+    ```
+    "levelSummary": {
+      "LEVEL_INFO": {
+        "counters": {
+          "NumRowSuccesses": "178365",
+          "NumPVSuccesses": "1783650",
+          "Existence_NumChecks": "2028816",
+          "NumNodeSuccesses": "178365",
+          "Existence_NumDcCalls": "7"
+        }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "190",
+        "Existence_MissingReference_locatedIn": "685",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "180",
+        "StatsCheck_Data_Holes": "76"
+     }
+   }
+ },
     ```
