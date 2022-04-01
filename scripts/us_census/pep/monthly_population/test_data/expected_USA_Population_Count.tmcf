@@ -1,0 +1,44 @@
+Node: E:Population_Count_USA->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_InArmedForcesOverseas
+measurementMethod: dcs:dcAggregate/CensusPEPSurvey
+observationAbout: C:Population_Count_USA->Location
+observationDate: C:Population_Count_USA->Date
+observationPeriod: "P1M"
+value: C:Population_Count_USA->Count_Person_InArmedForcesOverseas 
+
+Node: E:Population_Count_USA->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_USResident
+measurementMethod: dcs:CensusPEPSurvey
+observationAbout: C:Population_Count_USA->Location
+observationDate: C:Population_Count_USA->Date
+observationPeriod: "P1M"
+value: C:Population_Count_USA->Count_Person_USResident 
+
+Node: E:Population_Count_USA->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_USResidentOrInArmedForcesOverseas
+measurementMethod: dcs:CensusPEPSurvey
+observationAbout: C:Population_Count_USA->Location
+observationDate: C:Population_Count_USA->Date
+observationPeriod: "P1M"
+value: C:Population_Count_USA->Count_Person_USResidentOrInArmedForcesOverseas 
+
+Node: E:Population_Count_USA->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Civilian
+measurementMethod: dcs:CensusPEPSurvey
+observationAbout: C:Population_Count_USA->Location
+observationDate: C:Population_Count_USA->Date
+observationPeriod: "P1M"
+value: C:Population_Count_USA->Count_Person_Civilian 
+
+Node: E:Population_Count_USA->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Civilian_NonInstitutionalized
+measurementMethod: dcs:CensusPEPSurvey
+observationAbout: C:Population_Count_USA->Location
+observationDate: C:Population_Count_USA->Date
+observationPeriod: "P1M"
+value: C:Population_Count_USA->Count_Person_Civilian_NonInstitutionalized 
