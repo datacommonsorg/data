@@ -39,6 +39,46 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         expected_dcid = 'Median_Income_Person'
         self.assertEqual(dcid, expected_dcid)
 
+    def test_double_underscore(self):
+        statvar_dict1 = {
+            'typeOf': 'StatisticalVariable',
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'CriminalIncidents',
+            'locationOfCrime': 'Park__Playground',
+            'crimeType': 'UCR_OtherCrimeAgainstProperty'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict1)
+        expected_dcid = ('Count_CriminalIncidents_OtherCrimeAgainstProperty_'
+                         'LocationOfCrimeParkOrPlayground')
+        self.assertEqual(dcid, expected_dcid)
+
+        statvar_dict2 = {
+            'populationType': 'dcs:CriminalIncidents',
+            'measurementQualifier': 'dcs:Offense',
+            'victimType': 'dcs:UCR_OtherVictimType&UCR_UnknownVictimType',
+            'statType': 'dcs:measuredValue',
+            'measuredProperty': 'dcs:count',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict2)
+        expected_dcid = ('Offense_Count_CriminalIncidents_VictimType'
+                         'OtherVictimTypeOrUnknownVictimType')
+        self.assertEqual(dcid, expected_dcid)
+
+        statvar_dict1 = {
+            'typeOf': 'StatisticalVariable',
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'CriminalIncidents',
+            'locationOfCrime': 'Park__Playground&NightClub',
+            'crimeType': 'UCR_OtherCrimeAgainstProperty'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict1)
+        expected_dcid = ('Count_CriminalIncidents_OtherCrimeAgainstProperty_'
+                         'LocationOfCrimeParkOrPlaygroundOrNightClub')
+        self.assertEqual(dcid, expected_dcid)
+
     def test_namespace_removal(self):
         statvar_dict = {
             'typeOf': 'StatisticalVariable',
@@ -343,11 +383,11 @@ class TestStatVarDcidGenerator(unittest.TestCase):
             'measuredProperty': 'dcid:count',
             'populationType': 'dcid:HousingUnit',
             'occupancyStatus': 'dcid:OccupiedHousingUnit',
-            'dateMovedIntoHousingUnit': '[2017 - Date]',
+            'dateMovedIn': '[2017 - Date]',
             'typeOf': 'dcs:StatisticalVariable'
         }
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict6)
-        expected_dcid = ('Count_HousingUnit_MovedIn2017OrLater_'
+        expected_dcid = ('Count_HousingUnit_MovedInDate2017OrLater_'
                          'OccupiedHousingUnit')
         self.assertEqual(dcid, expected_dcid)
 
@@ -492,6 +532,51 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict6)
         expected_dcid = ('Count_Person_'
                          'SOCv2018/highLevelAggregation-99Occupation')
+        self.assertEqual(dcid, expected_dcid)
+
+    def test_boolean_naming(self):
+        stat_var_dict1 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:CriminalActivities',
+            'isHateCrime': 'True',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict1)
+        expected_dcid = ('Count_CriminalActivities_IsHateCrime')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict2 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:CriminalActivities',
+            'isHateCrime': 'False',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict2)
+        expected_dcid = ('Count_CriminalActivities_NotHateCrime')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict3 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Household',
+            'hasComputer': 'True',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict3)
+        expected_dcid = ('Count_Household_HasComputer')
+        self.assertEqual(dcid, expected_dcid)
+
+        stat_var_dict4 = {
+            'measuredProperty': 'dcid:count',
+            'statType': 'dcid:measuredValue',
+            'populationType': 'dcid:Household',
+            'hasComputer': 'False',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(stat_var_dict4)
+        expected_dcid = ('Count_Household_NoComputer')
         self.assertEqual(dcid, expected_dcid)
 
     def test_soc_map(self):
