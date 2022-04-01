@@ -67,40 +67,40 @@ _PV_MAP = {
         'age': '[- 5 Years]'
     },
     'all serotypes': {
-        'seroTypes': 'dcs:AllSerotypes'
+        'seroType': 'dcs:AllSerotypes'
     },
     'serotype b': {
-        'seroTypes': 'dcs:BSerotype'
+        'seroType': 'dcs:SerotypeB'
     },
     'unknown serotype': {
-        'seroTypes': 'dcs:UnknownSerotype'
+        'seroType': 'dcs:UnknownSerotype'
     },
     'non-b serotype': {
-        'seroTypes': 'dcs:NonBSerotype'
+        'seroType': 'dcs:NonSerotypeB'
     },
     'other serogroups': {
-        'seroGroups': 'dcs:OtherSerogroups'
+        'seroGroup': 'dcs:OtherSerogroups'
     },
     'nontypeable': {
-        'seroGroups': 'dcs:OtherSerogroups'
+        'seroGroup': 'dcs:OtherSerogroups'
     },
     'unknown serogroup': {
-        'seroGroups': 'dcs:UnknownSerogroups'
+        'seroGroup': 'dcs:UnknownSerogroups'
     },
     'all groups': {
-        'seroGroups': 'dcs:AllSerogroups'
+        'seroGroup': 'dcs:AllSerogroups'
     },
     'all serogroups': {
-        'seroGroups': 'dcs:AllSerogroups'
+        'seroGroup': 'dcs:AllSerogroups'
     },
     'serogroups ACWY': {
-        'seroGroups': 'dcs:ACWYSerogroups'
+        'seroGroups': 'dcs:ACWYSerogroup'
     },
     'serogroup B': {
-        'seroGroups': 'dcs:BSerogroup'
+        'seroGroup': 'dcs:SerogroupB'
     },
     'group A': {
-        'seroGroups': 'dcs:ASerogroup'
+        'seroGroup': 'dcs:SerogroupA'
     },
     'perinatal infection': {
         'medicalStatus': 'dcs:PerinatalInfection'
@@ -296,36 +296,33 @@ def process_nndss_current_weekly(input_filepath: str):
 
             # add the week as a column to the dataframe for easy validation
             df['week'] = week
-
             return df
-
-def generate_name_and_dcid(svdict, disease):
-    props_to_drop = ['populationType', 'typeOf', 'statType', 'incidentType']
-
-    disease_descriptor = []
-    for k, v in svdict.items():
-        if k not in props_to_drop:
-            disease_descriptor.append(v)
-    disease = disease.replace('_', ' ')
-
-    for idx, d in enumerate(disease_descriptor):
-        if d.startswith('dcs:'):
-            d = d[4:] # remove namespace prefix
-            d = d[0].upper() + d[1:] # capitalize first letter
-        if  d == '[- 5 Years]': # fix age quantity ranges
-            d = 'Age 5 Or Less Years'
-        disease_descriptor[idx] = d
-    name = ''
-    if len(disease_descriptor[1:]) > 0:
-        name = disease_descriptor[0] + ' of ' + disease + ' outbreak incidents ('+  ', '.join(disease_descriptor[1:]) + ')'
-    else:
-        name = disease_descriptor[0] + ' of ' + disease + ' outbreak incidents'
-    # generate dcid
-    dcid = get_statvar_dcid(svdict)
-    # pad quotes
-    name = '\"' + name + '\"' 
-    return name, dcid
     
+def make_name_str(column_components, disease_match, dcid):
+    pv_str = []
+    resident_status = ''
+    # collect all pvs
+    for component in column_components:
+        if component != disease_match and 'Current' not in component:
+            pv_str.append(component)
+
+    # get the residentStatus value in dcid
+    if 'USResident' in dcid:
+        if 'NonUS' in dcid:
+            resident_status = 'among Non US Residents'
+        else:
+            resident_status = 'among US Residents'
+    
+    # construct the sv name
+    name = f"\"Count of {', '.join(pv_str) } { disease_match } incidents { resident_status }\""
+
+    # remove empty spaces
+    name = name.strip()
+    name = name.replace('  ', ' ')
+    return name
+    
+    
+
 def generate_statvar_map_for_columns(column_list, place_list):
 
     sv_map = {}
@@ -374,7 +371,7 @@ def generate_statvar_map_for_columns(column_list, place_list):
                         # if property exists, append the value to existing property, separated by a comma
                         for p, v in pv_dict.items():
                             if p in svdict.keys():
-                                svdict[p] = svdict[p] + "&" + v[4:]
+                                svdict[p] = svdict[p] + "__" + v[4:]
                             else:
                                 svdict[p] = v
             
@@ -392,8 +389,8 @@ def generate_statvar_map_for_columns(column_list, place_list):
                     svdict_tmp = svdict.copy()
                     svdict_tmp['residentStatus'] = resident_status
                     # get name and dcid
-                    name, dcid = generate_name_and_dcid(svdict_tmp, disease)
-                    svdict_tmp['name'] = name
+                    dcid = get_statvar_dcid(svdict_tmp)
+                    svdict_tmp['name'] = make_name_str(column_components, match, dcid)
                     # add to column_map
                     key = 'Node: dcid:' + dcid
                     if key not in sv_map.keys():
@@ -408,9 +405,9 @@ def generate_statvar_map_for_columns(column_list, place_list):
 
                 else:
                     # get name and dcid
-                    name, dcid = generate_name_and_dcid(svdict, disease)
                     svdict_tmp = svdict.copy()
-                    svdict_tmp['name'] = name
+                    dcid = get_statvar_dcid(svdict_tmp)
+                    svdict_tmp['name'] = make_name_str(column_components, match, dcid)
                     # add to column_map
                     key = 'Node: dcid:' + dcid
                     if key not in sv_map.keys():
