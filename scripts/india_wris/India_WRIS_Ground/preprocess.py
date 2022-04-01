@@ -15,7 +15,6 @@
 import os
 from india_wris.base import WaterQualityBase
 
-
 DATASET_NAME = 'India_WRIS_Ground'
 
 ## Defining MCF and TMCF template nodes
