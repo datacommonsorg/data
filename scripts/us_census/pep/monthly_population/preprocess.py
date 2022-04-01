@@ -1,9 +1,8 @@
 """ A Script to process USA Census PEP monthly population data
     from the datasets in provided local path.
     Typical usage:
-    1. python3 download.py
-    2. python3 download.py -f file_urls.json
-    3. python3 download.py -f <<path_to_file>>
+    1. python3 preprocess.py
+    2. python3 preprocess.py -i input_data
 """
 import os
 import sys
