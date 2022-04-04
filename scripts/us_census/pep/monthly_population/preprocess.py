@@ -5,7 +5,6 @@
     2. python3 preprocess.py -i input_data
 """
 import os
-import sys
 import re
 import argparse
 
@@ -13,6 +12,66 @@ import numpy as np
 import pandas as pd
 
 pd.set_option("display.max_columns", None)
+
+
+def extract_year(val):
+    """
+    This Methods returns true,year from the value contains year.
+    Otherwise false,''
+    val - Contains yyyy or yyyy [1] or .MM 1
+    """
+    val = str(val).strip().split(' ', maxsplit=1)[0]
+    if val.isnumeric() and len(val) == 4:
+        return True, val
+    return False, ''
+
+
+def return_year(col):
+    """
+    This Methods returns year value if col contains year.
+    Otherwise pandas NA value.
+    val - Contains yyyy or yyyy [1] or .MM 1
+    """
+    res, out = extract_year(col)
+    if res:
+        return out
+    return pd.NA
+
+
+def return_month(col):
+    """
+    This Methods returns month and date value if col contains month, date.
+    Otherwise pandas NA value.
+    val - Contains yyyy or yyyy [1] or .MM dd
+    """
+    res = extract_year(col)
+    if res[0]:
+        return pd.NA
+    return col
+
+
+def sum_cols(col):
+    """
+    This method adds Dataframe columns Year and Month, Date.
+    Returns the column value in format yyyymmdd. Example: 2022March01
+    """
+    if col[1] is None:
+        return col[0]
+    return col[0] + ' ' + col[1]
+
+def find_keep_value(curr_df: pd.DataFrame, new_df: pd.DataFrame):
+    """
+    This method returns keep value first or last while dropping
+    duplicates in the df. As few years repeating twice in few
+    datasets.
+    """
+    curr_max_year = max(
+        pd.to_datetime(curr_df['Date'], errors='coerce').dt.year)
+    new_max_year = max(
+        pd.to_datetime(new_df['Date'], errors='coerce').dt.year)
+    if curr_max_year > new_max_year:
+        return "first"
+    return "last"
 
 
 class CensusUSACountryPopulation:
@@ -32,26 +91,8 @@ class CensusUSACountryPopulation:
         self.mcf_file_path = mcf_file_path
         self.tmcf_file_path = tmcf_file_path
         self.df = None
-        self.final_cols = []
         self.file_name = None
-        self.mcf = ""
-        self.tmcf = ""
         self.scaling_factor = 1
-        self.mcf_template = """Node: dcid:{}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person{}{}{}
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
-        self.tmcf_template = """Node: E:Population_Count_USA->E{}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{}
-measurementMethod: dcs:{}
-observationAbout: C:Population_Count_USA->Location
-observationDate: C:Population_Count_USA->Date
-observationPeriod: \"P1M\"
-value: C:Population_Count_USA->{} 
-"""
 
     def _load_data(self, file):
         """
@@ -67,6 +108,8 @@ value: C:Population_Count_USA->{}
                               )
 
         elif ".txt" in file:
+            #SKIP_ROWS_TXT = 17
+            skip_rows_txt = 17
             self.file_name = self.file_name.replace(".txt", ".xlsx")
             cols = [
                 "Year and Month", "Date", "Resident Population",
@@ -78,51 +121,9 @@ value: C:Population_Count_USA->{}
                                index_col=False,
                                delim_whitespace=True,
                                engine='python',
-                               skiprows=SKIP_ROWS_TXT,
+                               skiprows=skip_rows_txt,
                                names=cols)
         return df
-
-    def _extract_year(self, val):
-        """
-        This Methods returns true,year from the value contains year.
-        Otherwise false,''
-        val - Contains yyyy or yyyy [1] or .MM 1
-        """
-        val = str(val).strip().split(' ', maxsplit=1)[0]
-        if val.isnumeric() and len(val) == 4:
-            return True, val
-        return False, ''
-
-    def _return_year(self, col):
-        """
-        This Methods returns year value if col contains year.
-        Otherwise pandas NA value.
-        val - Contains yyyy or yyyy [1] or .MM 1
-        """
-        res, out = self._extract_year(col)
-        if res:
-            return out
-        return pd.NA
-
-    def _return_month(self, col):
-        """
-        This Methods returns month and date value if col contains month, date.
-        Otherwise pandas NA value.
-        val - Contains yyyy or yyyy [1] or .MM dd
-        """
-        res = self._extract_year(col)
-        if res[0]:
-            return pd.NA
-        return col
-
-    def _sum_cols(self, col):
-        """
-        This method adds Dataframe columns Year and Month, Date.
-        Returns the column value in format yyyymmdd. Example: 2022March01
-        """
-        if col[1] is None:
-            return col[0]
-        return col[0] + ' ' + col[1]
 
     def _clean_txt_file(self, df):
         """
@@ -130,8 +131,8 @@ value: C:Population_Count_USA->{}
         Also, Performs transformations on the data.
         """
         self.scaling_factor = 1000
-        df['Year and Month'] = df[['Year and Month',
-                                   'Date']].apply(self._sum_cols, axis=1)
+        df['Year and Month'] = df[['Year and Month', 'Date']].apply(sum_cols,
+                                                                    axis=1)
         df.drop(columns=['Date'], inplace=True)
         for col in df.columns:
             df[col] = df[col].str.replace(",", "")
@@ -156,17 +157,15 @@ value: C:Population_Count_USA->{}
     def _transform_df(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         This method transforms Dataframe into cleaned DF.
-        Also, It Creates new columns, remove duplicates, 
-        Standaradize headers to SV's, Mulitplies with 
+        Also, It Creates new columns, remove duplicates,
+        Standaradize headers to SV's, Mulitplies with
         scaling factor.
         """
-        self.final_cols = [
-            col for col in df.columns if 'year' not in col.lower()
-        ]
+        final_cols = [col for col in df.columns if 'year' not in col.lower()]
 
-        df['Year'] = df['Year and Month'].apply(self._return_year).fillna(
+        df['Year'] = df['Year and Month'].apply(return_year).fillna(
             method='ffill', limit=12)
-        df['Month'] = df['Year and Month'].apply(self._return_month)
+        df['Month'] = df['Year and Month'].apply(return_month)
         df.dropna(subset=['Year', 'Month'], inplace=True)
 
         #Creating new Date Column and Final Date format is yyyy-mm
@@ -189,25 +188,27 @@ value: C:Population_Count_USA->{}
         computed_cols = ["Date", "Count_Person_InArmedForcesOverseas"]
 
         #Selecting Coumputed and Final Columns from the DF.
-        df = df[computed_cols + self.final_cols]
+        df = df[computed_cols + final_cols]
 
         #Renaming DF Headers with ref to SV's Naming Standards.
         final_cols_list = ["Count_Person_" + col\
                         .replace("Population ", "")\
                         .replace("Population", "")\
                         .replace(" Plus ", "Or")\
-                        .replace("Armed Forces Overseas", "InArmedForcesOverseas")\
-                        .replace("Household", "ResidesInHousehold")\
+                        .replace("Armed Forces Overseas", \
+                            "InArmedForcesOverseas")\
+                        .replace("Household", \
+                                "ResidesInHousehold")\
                         .replace("Resident", "USResident")\
-                        .replace("Noninstitutionalized", "NonInstitutionalized")\
+                        .replace("Noninstitutionalized", \
+                            "NonInstitutionalized")\
                         .strip()\
                         .replace(" ", "_")\
                         .replace("__", "_")\
-                        for col in self.final_cols]
+                        for col in final_cols]
 
         final_cols_list = computed_cols + final_cols_list
         df.columns = final_cols_list
-        self.final_cols = final_cols_list
 
         #Multiplying the data with scaling factor.
         for col in final_cols_list:
@@ -222,20 +223,6 @@ value: C:Population_Count_USA->{}
         #as the dataset is all about USA country level only.
         df.insert(1, "Location", "country/USA", True)
         return df
-
-    def _find_keep_value(self, curr_df: pd.DataFrame, new_df: pd.DataFrame):
-        """
-        This method returns keep value first or last while dropping
-        duplicates in the df. As few years repeating twice in few 
-        datasets.
-        """
-        curr_max_year = max(
-            pd.to_datetime(curr_df['Date'], errors='coerce').dt.year)
-        new_max_year = max(
-            pd.to_datetime(new_df['Date'], errors='coerce').dt.year)
-        if curr_max_year > new_max_year:
-            return "first"
-        return "last"
 
     def _transform_data(self, file, df):
         """
@@ -265,7 +252,7 @@ value: C:Population_Count_USA->{}
         if self.df is None:
             self.df = df
         else:
-            keep_value = self._find_keep_value(self.df, df)
+            keep_value = find_keep_value(self.df, df)
             self.df = self.df.append(df, ignore_index=True)
 
         self.df = self.df.drop_duplicates("Date", keep=keep_value)
@@ -279,19 +266,24 @@ value: C:Population_Count_USA->{}
         cleaned CSV file, MCF file and TMCF file.
         """
         for file in self.input_files:
-            #print(file)
             df = self._load_data(file)
             self._transform_data(file, df)
-        self._generate_mcf(self.df)
-        self._generate_tmcf(self.df)
+        self._generate_mcf(self.df.columns)
+        self._generate_tmcf(self.df.columns)
 
-    def _generate_mcf(self, df):
+    def _generate_mcf(self, df_cols):
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
         """
-
-        for col in df.columns:  #Enter DF Name
+        mcf_template = """Node: dcid:{}
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person{}{}{}
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+"""
+        mcf = ""
+        for col in df_cols:  #Enter DF Name
             # Check if it is a delayed payment column
             residence = ""
             status = ""
@@ -320,33 +312,41 @@ value: C:Population_Count_USA->{}
                 armedf = "\narmedForcesStatus: dcs:Civilian"
             if re.findall('Count_Person_InArmedForcesOverseas', col):
                 armedf = "\narmedForcesStatus: dcs:InArmedForces"
-            self.mcf = self.mcf + self.mcf_template.format(
-                col, residence, status, armedf) + "\n"
+            mcf = mcf + mcf_template.format(col, residence, status,
+                                            armedf) + "\n"
 
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(self.mcf.rstrip('\n'))
+            f_out.write(mcf.rstrip('\n'))
 
-    def _generate_tmcf(self, df):
+    def _generate_tmcf(self, df_cols):
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template
         """
+        tmcf_template = """Node: E:Population_Count_USA->E{}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{}
+measurementMethod: dcs:{}
+observationAbout: C:Population_Count_USA->Location
+observationDate: C:Population_Count_USA->Date
+observationPeriod: \"P1M\"
+value: C:Population_Count_USA->{} 
+"""
         i = 0
         measure = ""
-
-        for col in df.columns:
+        tmcf = ""
+        for col in df_cols:
             if col.lower() in ["date", "location"]:
                 continue
             if re.findall('Count_Person_InArmedForcesOverseas', col):
                 measure = "dcAggregate/CensusPEPSurvey"
             else:
                 measure = "CensusPEPSurvey"
-            self.tmcf = self.tmcf + self.tmcf_template.format(
-                i, col, measure, col) + "\n"
+            tmcf = tmcf + tmcf_template.format(i, col, measure, col) + "\n"
             i = i + 1
 
         with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(self.tmcf.rstrip('\n'))
+            f_out.write(tmcf.rstrip('\n'))
 
 
 if __name__ == "__main__":
@@ -367,7 +367,7 @@ if __name__ == "__main__":
     # Read arguments from command line
     args = parser.parse_args()
     input_path = args.input_data
-       
+
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
 
@@ -375,8 +375,8 @@ if __name__ == "__main__":
     data_file_path = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + "output"
     cleaned_csv_path = data_file_path + os.sep + "USA_Population_Count.csv"
-    mcf_path = data_file_path + os.sep + "USA_Population_Count_MCF.mcf"
-    tmcf_path = data_file_path + os.sep + "USA_Population_Count_TMCF.tmcf"
+    mcf_path = data_file_path + os.sep + "USA_Population_Count.mcf"
+    tmcf_path = data_file_path + os.sep + "USA_Population_Count.tmcf"
 
     loader = CensusUSACountryPopulation(ip_files, cleaned_csv_path, mcf_path,
                                         tmcf_path)
