@@ -28,7 +28,7 @@ import utils
 
 _YEAR_INDEX = 0
 
-_OUTPUT_COLUMNS = ['Year', 'StatVar', 'Quantity']
+_OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity')
 
 
 class HateCrimeTable7Test(unittest.TestCase):
