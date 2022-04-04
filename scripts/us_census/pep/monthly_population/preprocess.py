@@ -59,6 +59,7 @@ def sum_cols(col):
         return col[0]
     return col[0] + ' ' + col[1]
 
+
 def find_keep_value(curr_df: pd.DataFrame, new_df: pd.DataFrame):
     """
     This method returns keep value first or last while dropping
@@ -67,8 +68,7 @@ def find_keep_value(curr_df: pd.DataFrame, new_df: pd.DataFrame):
     """
     curr_max_year = max(
         pd.to_datetime(curr_df['Date'], errors='coerce').dt.year)
-    new_max_year = max(
-        pd.to_datetime(new_df['Date'], errors='coerce').dt.year)
+    new_max_year = max(pd.to_datetime(new_df['Date'], errors='coerce').dt.year)
     if curr_max_year > new_max_year:
         return "first"
     return "last"
