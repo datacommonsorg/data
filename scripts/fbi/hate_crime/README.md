@@ -43,6 +43,24 @@ To download data from 2005 to 2019 at a different location and force download ra
 python3 download_publication_data.py --store_path=./publications --force_fetch
 ```
 
+## Aggreations from master file
+
+`preprocess_aggregations.py` creates aggregations from master file with each individual incident recorded. The script outputs individual files for each type of aggregation to ease debugging and a combined `aggregation.csv` file under `aggregations` folder with all the final observations.
+
+To create aggregations
+```bash
+python preprocess_aggregations_test.py
+```
+
+
+### Changes required for final mcf file
+
+The output mcf file is produced such that the DCIDs are present. In order to get the final version of the stat vars following changes need to be made:
+- drop `isHateCrime` property
+- change `populationType` to be `HateCrimeIncidents`
+- `biasMotivation: dcs:TransgenderOrGenderNonConforming` to `biasMotivation: dcs:gender` and `targetedGender: dcs:TransgenderOrGenderNonConforming`
+- add `offenderType` property with value from `KnownOffender`, `KnownOffenderRace`, `KnownOffenderEthnicity`, `KnownOffenderAge` where applicable.
+
 
 ## Download Publication Tables
 
