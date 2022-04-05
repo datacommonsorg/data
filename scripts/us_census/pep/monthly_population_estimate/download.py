@@ -21,8 +21,8 @@ def save_data(url, download_local_path):
     Writes the data to local path provided as one the parameter.
 
     Parameters:
-    url: Url of the dataset
-    download_local_path: Path to save the datasets.
+    url (str): Url of the dataset
+    download_local_path (str): Path to save the datasets.
 
     Returns:
     None

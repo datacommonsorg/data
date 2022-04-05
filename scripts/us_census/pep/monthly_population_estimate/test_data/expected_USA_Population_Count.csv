@@ -1,4 +1,4 @@
-﻿Date,Location,Count_Person_InArmedForcesOverseas,Count_Person_USResident,Count_Person_USResidentOrInArmedForcesOverseas,Count_Person_Civilian,Count_Person_Civilian_NonInstitutionalized
+﻿Date,Location,Count_Person_InUSArmedForcesOverseas,Count_Person_USResident,Count_Person_USResidentOrInUSArmedForcesOverseas,Count_Person_Civilian,Count_Person_Civilian_NonInstitutionalized
 2002-12,country/USA,308953,288910708,289219661,287657759,283567193
 2002-11,country/USA,299808,288716345,289016153,287455156,283367384
 2002-10,country/USA,298850,288484263,288783113,287215377,283130237

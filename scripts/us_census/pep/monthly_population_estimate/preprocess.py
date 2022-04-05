@@ -60,18 +60,14 @@ def sum_cols(col):
     return col[0] + ' ' + col[1]
 
 
-def find_keep_value(curr_df: pd.DataFrame, new_df: pd.DataFrame):
+def year_range(col):
     """
-    This method returns keep value first or last while dropping
-    duplicates in the df. As few years repeating twice in few
-    datasets.
+    This method returns year range from the dataframe
+    column.
     """
-    curr_max_year = max(
-        pd.to_datetime(curr_df['Date'], errors='coerce').dt.year)
-    new_max_year = max(pd.to_datetime(new_df['Date'], errors='coerce').dt.year)
-    if curr_max_year > new_max_year:
-        return "first"
-    return "last"
+    max_year = max(pd.to_datetime(col, errors='coerce').dt.year)
+    min_year = min(pd.to_datetime(col, errors='coerce').dt.year)
+    return str(max_year) + '-' + str(min_year)
 
 
 class CensusUSACountryPopulation:
@@ -182,10 +178,10 @@ class CensusUSACountryPopulation:
         #Deriving new SV Count_Person_InArmedForcesOverseas as
         #subtracting Resident Population from
         #Resident Population Plus Armed Forces Overseas
-        df['Count_Person_InArmedForcesOverseas'] = df[
+        df['Count_Person_InUSArmedForcesOverseas'] = df[
             'Resident Population Plus Armed Forces Overseas'].astype(
                 'int') - df['Resident Population'].astype('int')
-        computed_cols = ["Date", "Count_Person_InArmedForcesOverseas"]
+        computed_cols = ["Date", "Count_Person_InUSArmedForcesOverseas"]
 
         #Selecting Coumputed and Final Columns from the DF.
         df = df[computed_cols + final_cols]
@@ -196,7 +192,7 @@ class CensusUSACountryPopulation:
                         .replace("Population", "")\
                         .replace(" Plus ", "Or")\
                         .replace("Armed Forces Overseas", \
-                            "InArmedForcesOverseas")\
+                            "InUSArmedForcesOverseas")\
                         .replace("Household", \
                                 "ResidesInHousehold")\
                         .replace("Resident", "USResident")\
@@ -222,6 +218,8 @@ class CensusUSACountryPopulation:
         #Creating Location column with default value country/USA.
         #as the dataset is all about USA country level only.
         df.insert(1, "Location", "country/USA", True)
+        df.insert(0, 'date_range', year_range(df['Date']), True)
+        #print(df.head())
         return df
 
     def _transform_data(self, file, df):
@@ -252,11 +250,14 @@ class CensusUSACountryPopulation:
         if self.df is None:
             self.df = df
         else:
-            keep_value = find_keep_value(self.df, df)
+            #keep_value = find_keep_value(self.df, df)
             self.df = self.df.append(df, ignore_index=True)
 
-        self.df = self.df.drop_duplicates("Date", keep=keep_value)
-        self.df = self.df.sort_values(by=['Date'], ascending=False)
+        self.df.sort_values(by=['Date', 'date_range'],
+                            ascending=False,
+                            inplace=True)
+        self.df.drop_duplicates("Date", keep=keep_value, inplace=True)
+        self.df.drop(['date_range'], axis=1, inplace=True)
         self.df.to_csv(self.cleaned_csv_file_path, index=False)
 
     def process(self):
@@ -298,9 +299,9 @@ measuredProperty: dcs:count
             if re.findall('ArmedForces', col):
                 residence = "\nresidentStatus"
                 if len(status) == 0:
-                    status = ": dcs:InArmedForcesOverseas"
+                    status = ": dcs:InUSArmedForcesOverseas"
                 else:
-                    status = ": dcs:USResident__InArmedForcesOverseas"
+                    status = ": dcs:USResident__InUSArmedForcesOverseas"
             if re.findall('Resides', col):
                 if re.findall('Household', col):
                     residence = "\nresidenceType"
@@ -310,7 +311,7 @@ measuredProperty: dcs:count
                 status = ": dcs:USC_NonInstitutionalized"
             if re.findall('Civilian', col):
                 armedf = "\narmedForcesStatus: dcs:Civilian"
-            if re.findall('Count_Person_InArmedForcesOverseas', col):
+            if re.findall('Count_Person_InUSArmedForcesOverseas', col):
                 armedf = "\narmedForcesStatus: dcs:InArmedForces"
             mcf = mcf + mcf_template.format(col, residence, status,
                                             armedf) + "\n"
@@ -338,7 +339,7 @@ value: C:Population_Count_USA->{}
         for col in df_cols:
             if col.lower() in ["date", "location"]:
                 continue
-            if re.findall('Count_Person_InArmedForcesOverseas', col):
+            if re.findall('Count_Person_InUSArmedForcesOverseas', col):
                 measure = "dcAggregate/CensusPEPSurvey"
             else:
                 measure = "CensusPEPSurvey"
