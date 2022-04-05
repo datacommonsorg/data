@@ -186,6 +186,7 @@ _YEARWISE_CONFIG = {
     }
 }
 
+
 def _write_row(year: int, geo: str, statvar_dcid: str, quantity: str,
                writer: csv.DictWriter):
     """A wrapper to write data to the cleaned CSV."""
@@ -242,6 +243,7 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
         statvars.extend(statvar_list)
 
     return statvars
+
 
 def _clean_dataframe(df: pd.DataFrame, year: str):
     """Clean the column names and offense type values in a dataframe."""

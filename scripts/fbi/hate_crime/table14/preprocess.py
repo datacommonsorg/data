@@ -169,6 +169,7 @@ _YEARWISE_CONFIG = {
     }
 }
 
+
 def _write_row(year: int, geo: str, statvar_dcid: str, obs_date: str,
                obs_period: str, quantity: str, writer: csv.DictWriter):
     """A wrapper to write data to the cleaned CSV."""
@@ -223,17 +224,16 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
         A list of statvars.
     """
     global _UNRESOLVED_GEOS
-    
+
     statvars = []
     columns = list(reader.fieldnames)
-    
+
     _remove_from_list(columns, 'state')
     _remove_from_list(columns, 'state_abbr')
     _remove_from_list(columns, 'Year')
     _remove_from_list(columns, 'agency')
     _remove_from_list(columns, 'agency type')
     _remove_from_list(columns, 'geo_dcid')
-    
 
     for crime in reader:
         geo_id = crime['geo_dcid']
@@ -274,6 +274,7 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
         statvars.extend(statvar_list)
 
     return statvars
+
 
 def _clean_dataframe(df: pd.DataFrame, year: str):
     """Clean the column names and offense type values in a dataframe."""
@@ -346,6 +347,7 @@ def main(argv):
             ug_writer.writeheader()
             for geo in _UNRESOLVED_GEOS:
                 ug_writer.writerow({'name': geo})
+
 
 if __name__ == '__main__':
     app.run(main)

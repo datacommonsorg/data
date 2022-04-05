@@ -48,8 +48,7 @@ class HateCrimeTable13Test(unittest.TestCase):
             xls_file_path = os.path.join(_SCRIPT_PATH, test_config['path'])
             csv_file_path = os.path.join(tmp_dir, '2004.csv')
 
-            read_file = pd.read_excel(xls_file_path,
-                                      **test_config['args'])
+            read_file = pd.read_excel(xls_file_path, **test_config['args'])
             read_file = preprocess._clean_dataframe(read_file, '2004')
             read_file.insert(_YEAR_INDEX, 'Year', '2004')
             read_file.to_csv(csv_file_path, header=True, index=False)
