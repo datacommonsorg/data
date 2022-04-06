@@ -1,0 +1,122 @@
+[
+    {
+        "Pollutant": [
+            {
+                "name": "Arsenic (As)",
+                "statvar": "Arsenic",
+                "unit": "MicrogramsPerLitre"
+            },
+            {
+                "name": "carbonate (CO3)",
+                "statvar": "Carbonate",
+                "unit": "MilligramsPerLitre"
+            },
+            {
+                "name": "Calcium (Ca)",
+                "statvar": "Calcium",
+                "unit": "MilligramsPerLitre"
+            },
+            {
+                "name": "Chloride (Cl)",
+                "statvar": "Chloride",
+                "unit": "MilligramsPerLitre"
+            },
+            {
+                "name": "Fluorine (F)",
+                "statvar": "Fluorine",
+                "unit": "MilligramsPerLitre"
+            },
+            {
+                "name": "Iron (Fe)",
+                "statvar": "Iron",
+                "unit": "MilligramsPerLitre"
+            },
+            {
+                "name": "Hydrogencarbonate (HCO3)",
+                "statvar": "HydrogenCarbonate",
+                "unit": ""
+            },
+            {
+                "name": "Potassium (K)",
+                "statvar": "Potassium",
+                "unit": "MilligramsPerLitre"
+            },
+            {
+                "name": "Magnesium (Mg)",
+                "statvar": "Magnesium",
+                "unit": "MilligramsPerLitre"
+            },
+            {
+                "name": "Nitrate (NO3)",
+                "statvar": "Nitrate",
+                "unit": ""
+            },
+            {
+                "name": "Sodium (Na)",
+                "statvar": "Sodium",
+                "unit": "MilligramsPerLitre"
+            },
+            {
+                "name": "Phosphate Ion (PO4)",
+                "statvar": "Phosphate",
+                "unit": ""
+            },
+            {
+                "name": "Sulfate (SO4)",
+                "statvar": "Sulfate",
+                "unit": "MilligramsPerLitre"
+            },
+            {
+                "name": "Silicon dioxide (SiO2)",
+                "statvar": "SiliconDioxide",
+                "unit": "MilligramsPerLitre"
+            }
+        ]    
+    },
+    {
+        "ChemicalProperty": [
+            {
+                "name": "Electrical Conductivity",
+                "statvar": "electricalConductivity",
+                "unit": "",
+                "dcid": "electricalConductivity"
+            },
+            {
+                "name": "Residual Sodium Carbonate",
+                "statvar": "ResidualSodiumCarbonate",
+                "unit": "",
+                "dcid": "residualSodiumCarbonate"
+            },
+            {
+                "name": "Sodium absorption ratio (SAR)",
+                "statvar": "SodiumAbsorptionRatio",
+                "unit": "",
+                "dcid": "sodiumAbsorptionRatio"
+            },
+            {
+                "name": "Hardness Total",
+                "statvar": "WaterHardness",
+                "unit": "MilligramsCaCO3PerLitre",
+                "dcid": "waterHardness"
+            },
+            {
+                "name": "Alkalinity Total",
+                "statvar": "WaterAlkalinity",
+                "unit": "MilligramsCaCO3PerLitre",
+                "dcid": "waterAlkalinity"
+            },
+            {
+                "name": "Total Dissolved Solids",
+                "statvar": "TotalDissolvedSolids",
+                "unit": "MilligramsPerLitre",
+                "dcid": "totalDissolvedSolids"
+            },
+            {
+                "name": "Potential of Hydrogen (pH)",
+                "statvar": "PotentialOfHydrogen",
+                "unit": "",
+                "dcid": "potentialOfHydrogen"
+            }
+        ]    
+    }
+]
