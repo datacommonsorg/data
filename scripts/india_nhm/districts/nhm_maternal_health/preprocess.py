@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
 from india_nhm.districts.base.readme_generator import ReadMeGen
 
@@ -65,16 +67,20 @@ clean_names = {
     '% Safe deliveries to Total Reported Deliveries':
         'Percentage of safe deliveries to total reported deliveries'
 }
+    
+module_dir = os.path.dirname(__file__)
 
 if __name__ == '__main__':
     dataset_name = "NHM_MaternalHealth"
+    data_folder = os.path.join(module_dir, '../data/')
+    csv_path = os.path.join(module_dir, "{}.csv".format(dataset_name))
 
     # Preprocess files; Generate CSV; Generate TMCF file
-    loader = NHMDataLoaderBase(data_folder='../data/',
+    loader = NHMDataLoaderBase(data_folder=data_folder,
                                dataset_name=dataset_name,
                                cols_dict=cols_to_nodes,
                                clean_names=clean_names,
-                               final_csv_path="{}.csv".format(dataset_name))
+                               final_csv_path=csv_path)
     loader.generate_csv()
     loader.create_mcf_tmcf()
 

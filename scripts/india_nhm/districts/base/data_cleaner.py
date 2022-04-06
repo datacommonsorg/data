@@ -65,6 +65,7 @@ class NHMDataLoaderBase(object):
         self.final_csv_path = final_csv_path
 
         self.raw_df = None
+        self.missing_dists = []
 
         # Ignoring the first 3 elements (State, isoCode, Date) in the dictionary map
         self.cols_to_extract = list(self.cols_dict.keys())[3:]
@@ -82,8 +83,8 @@ class NHMDataLoaderBase(object):
         """
         df_full = pd.DataFrame(columns=list(self.cols_dict.keys()))
 
-        lgd_url = 'https://india-local-government-directory-bixhnw23da-el.a.run.app/india-local-government-directory/districts.csv?_size=max'
-        self.dist_code = pd.read_csv(lgd_url, dtype={'DistrictCode': str})
+        lgd_file = os.path.join(self.data_folder, 'lgd_table.csv')
+        self.dist_code = pd.read_csv(lgd_file, dtype={'DistrictCode': str})
 
         # Loop through each year file
         for file in os.listdir(self.data_folder):
@@ -121,10 +122,14 @@ class NHMDataLoaderBase(object):
         # Converting column names according to schema and saving it as csv
         df_full['DistrictCode'] = df_full.apply(
             lambda row: self._get_district_code(row), axis=1)
+                
         df_full.columns = df_full.columns.map(self.cols_dict)
         df_full = df_full.groupby(
             level=0, axis=1).first()  # merging columns with same names
-
+        
+        # Dropping unwanted rows
+        df_full = self._drop_unwanted_rows(df_full)
+        
         df_full.iloc[2:].to_csv(self.final_csv_path, index=False)
 
     def create_mcf_tmcf(self):
@@ -161,7 +166,7 @@ class NHMDataLoaderBase(object):
 
     def _get_district_code(self, row):
         """
-        Function to get a complete match or partial match to district names.
+        Class method to get a complete match or partial match to district names.
         For example, this function can identify 'Nilgiris' and 'The Niligris' as same name
         
         Cutoff = 0.8 captures all of the variations in the same district name
@@ -181,4 +186,28 @@ class NHMDataLoaderBase(object):
                                       ==
                                       close_match[0]]['DistrictCode'].values[0]
             else:
-                return None
+                close_match = difflib.get_close_matches(
+                                    row['District'].upper(),
+                                    self.dist_code['AlternateLabel'].astype(str),
+                                    n=1,
+                                    cutoff=0.8)
+                if close_match:
+                    return self.dist_code[self.dist_code[
+                                                'AlternateLabel'
+                                                ] == close_match[0]
+                                          ]['DistrictCode'].values[0]
+               
+            return None
+
+    def _drop_unwanted_rows(self, df):
+        """
+        Class method to drop unwanted rows from dataset.
+        This method will drop rows with empty District names and rows with
+        'Indicators.1' string (this is one of the headers from dataset)
+        """
+        
+        unwanted_values = ['Indicators.1']
+        df = df[df['District'].isin(unwanted_values) == False]
+        df = df[df['District'].isna() == False]
+        
+        return df
