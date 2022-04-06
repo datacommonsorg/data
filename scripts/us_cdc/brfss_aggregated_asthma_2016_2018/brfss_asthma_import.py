@@ -1,8 +1,21 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import os
 import pandas as pd
 from absl import flags, app
 
-from county_to_dcid import COUNTY_MAP
+from place_to_dcid import PLACE_MAP
 
 _TEMPLATE_MCF = """
 Node: E:SubjectTable->E0
@@ -53,7 +66,7 @@ def get_statvar_dcid(row):
 
 def associate_place_dcids(row):
 	county_suffixes = ['Municipality', 'Census Area', 'County', 'Parish', 'Borough', 'District', 'city']
-	counties_in_states = COUNTY_MAP[row['Alpha2']]
+	counties_in_states = PLACE_MAP[row['Alpha2']]
 
 	county_name = row['Counties']
 	county_name = county_name.replace('City and Borough', 'Borough')
@@ -83,7 +96,7 @@ def make_extract_df_readable(clean_df):
 	
 	# assign statvars based on age_group and column_name
 	clean_df['variableMeasured'] = clean_df.apply(get_statvar_dcid, axis=1)
-	clean_df['scalingFactor'] = clean_df['variableMeasured'].apply(lambda e: 100 if e == 'Percent_Person_Children_WithAsthma' else '')
+	clean_df['scalingFactor'] = clean_df['variableMeasured'].apply(lambda e: 100 if 'Children_WithAsthma' in e else '')
 	
 	# drop empty county
 	clean_df = clean_df[clean_df['Counties']!='']

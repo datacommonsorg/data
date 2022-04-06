@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,8 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""State Alpha2 to County to dcid."""
-COUNTY_MAP: dict = {
+"""Extension of the State Alpha2 to Place to dcid."""
+PLACE_MAP: dict = {
     "AL": {
         "Autauga County": "geoId/01001",
         "Baldwin County": "geoId/01003",
