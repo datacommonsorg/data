@@ -1,0 +1,1715 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "8232",
+        "NumPVSuccesses": "0",
+        "Existence_NumChecks": "601650",
+        "NumNodeSuccesses": "0",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "Existence_MissingReference_measurementMethod": "64106",
+        "StrSplit_EmptyToken_value": "1750",
+        "Sanity_MissingOrEmpty_value": "1750",
+        "Existence_MissingReference_variableMeasured": "64106"
+      }
+    },
+    "LEVEL_ERROR": {
+      "counters": {
+        "Resolution_IrreplaceableLocalRef": "64106",
+        "Resolution_DcidAssignmentFailure_AdministrativeArea2": "8232",
+        "Resolution_UnassignableNodeDcid": "64106"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E5/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E1/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E6/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E2/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E4/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E3/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E7/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E8/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E5/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E1/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E6/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E2/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E4/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E3/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E7/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/93af81ab-7a45-8dfe-2a74-afe4a8a164e8', node: 'NHM_MaternalHealth/E8/93af81ab-7a45-8dfe-2a74-afe4a8a164e8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E2/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E7/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E1/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E6/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E8/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E3/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E5/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E4/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E2/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E7/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E1/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E6/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E8/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E3/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E5/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83', node: 'NHM_MaternalHealth/E4/c9dc8195-40ba-7064-cfb1-e4bbe3df8a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E5/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E1/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E6/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E4/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E3/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E2/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E7/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E8/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E5/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E1/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E6/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E4/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E3/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E2/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E7/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/b27782c5-f226-3295-c713-4a74ee2be3a8', node: 'NHM_MaternalHealth/E8/b27782c5-f226-3295-c713-4a74ee2be3a8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E5/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E1/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E6/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E8/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E3/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E7/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E5/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E1/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E6/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E8/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E3/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_MaternalHealth/E0/539ca7db-230e-0aaf-9f30-8813d78e5b15', node: 'NHM_MaternalHealth/E7/539ca7db-230e-0aaf-9f30-8813d78e5b15'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/142f598a-a31e-27df-225d-b0d758852f4a'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/f7953461-fc24-bbaa-39f1-1ffd23a97dab'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/2a45ec25-960a-d563-f002-3f6d07317bd2'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/591858cc-3075-6302-b7ae-68aadd196171'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/43553f2b-0a54-b902-1a86-b0446878848a'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/4602375e-2cd1-a43a-1815-3eef88118fef'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/08d72b60-8eec-e09f-06ad-986f31564c8a'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/4f29f4ca-6e69-47c2-94d8-62d5032b2e2b'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/e3b56498-a655-2b44-5d23-61b800f35e53'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/1bdc0a00-8146-90c1-0fe9-3e247cc71c02'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/1b297924-1b19-66cb-fa79-1fb6ed33f463'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/433ec4ec-ad1c-e7e8-0e52-1c976319b7f1'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/313b3770-2121-dbc4-c7cc-8dfa2725c900'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/09f64f3b-c272-0731-65f5-3b54eaedb359'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/6bb59431-dae8-b6a3-ca98-cc005570018d'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/f291058a-ea9d-a837-b73f-bcbfbae45c0a'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/dc78218b-78fa-eec4-eef5-18f3402eb2e2'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/9ccca14a-54a6-b98c-42b7-03bef5938ce9'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/7e0ffee9-8181-60ff-0552-b481c80b40e4'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/e38e2a72-5fdd-c0eb-26a9-32fe79416aa3'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/8572c96c-db91-bc8c-ba4c-55da22b64394'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/1f07469f-a808-1d3f-9267-2f2dedbaac70'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/7a430bc5-3a19-3978-5cc7-20cbf1160add'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/2b5ddc2d-6c96-94dc-20a5-83fecd50d3d3'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/f249920e-6e40-1d9c-dcbe-20bcb9094505'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_MaternalHealth/E0/1bbe0631-0e6d-abf4-3ca8-a6a26bc70283'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "692"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome', property: 'value', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "692"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "692"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandByAssist', property: 'value', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "692"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_PregnantWomen_RegisteredForAntenatalCare', property: 'value', node: 'E:NHM_MaternalHealth->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester', property: 'value', node: 'E:NHM_MaternalHealth->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_InPublicInstitution', property: 'value', node: 'E:NHM_MaternalHealth->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome', property: 'value', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_InAnInstitution', property: 'value', node: 'E:NHM_MaternalHealth->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandByAssist', property: 'value', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "704"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_PregnantWomen_RegisteredForAntenatalCare', property: 'value', node: 'E:NHM_MaternalHealth->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester', property: 'value', node: 'E:NHM_MaternalHealth->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_InPublicInstitution', property: 'value', node: 'E:NHM_MaternalHealth->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome', property: 'value', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_InAnInstitution', property: 'value', node: 'E:NHM_MaternalHealth->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandByAssist', property: 'value', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "705"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "713"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandByAssist', property: 'value', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "713"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "732"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome', property: 'value', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "732"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "732"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandByAssist', property: 'value', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "732"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_PregnantWomen_RegisteredForAntenatalCare', property: 'value', node: 'E:NHM_MaternalHealth->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester', property: 'value', node: 'E:NHM_MaternalHealth->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_InPublicInstitution', property: 'value', node: 'E:NHM_MaternalHealth->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome', property: 'value', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_InAnInstitution', property: 'value', node: 'E:NHM_MaternalHealth->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandByAssist', property: 'value', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "737"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "777"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome', property: 'value', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "777"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_ChildDeliveryEvent', property: 'variableMeasured', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

@@ -26,7 +26,7 @@ Node: E:{dataset_name}->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{statvar}
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:{dataset_name}->E0
+observationAbout: E:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
 observationPeriod: "P1Y"
 value: C:{dataset_name}->{statvar}
