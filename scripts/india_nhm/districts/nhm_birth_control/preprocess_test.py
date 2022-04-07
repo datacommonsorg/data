@@ -13,11 +13,13 @@
 # limitations under the License.
 
 import os
+
 import unittest
 from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
+
 cols_to_nodes = {
     'District':
         'District',
@@ -107,14 +109,15 @@ class TestPreprocess(unittest.TestCase):
             dataset_name='test_gen',
             cols_dict=cols_to_nodes,
             clean_names=clean_names,
-            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"))
+            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"),
+            module_dir=module_dir_)
         loader.generate_csv()
 
         result_file = open(os.path.join(module_dir_, 'test/test_gen.csv'))
         result_data = result_file.read()
         result_file.close()
 
-        os.remove(os.path.join(module_dir_, 'test/test_gen.csv'))
+        # os.remove(os.path.join(module_dir_, 'test/test_gen.csv'))
         self.assertEqual(u'{}'.format(expected_data), result_data)
 
 

@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+
 import unittest
 from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
 
@@ -83,7 +84,8 @@ class TestPreprocess(unittest.TestCase):
             dataset_name='test_gen',
             cols_dict=cols_to_nodes,
             clean_names=clean_names,
-            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"))
+            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"),
+            module_dir=module_dir_)
         loader.generate_csv()
 
         result_file = open(os.path.join(module_dir_, 'test/test_gen.csv'))

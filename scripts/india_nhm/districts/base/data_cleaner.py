@@ -54,7 +54,7 @@ class NHMDataLoaderBase(object):
     """
 
     def __init__(self, data_folder, dataset_name, cols_dict, clean_names,
-                 final_csv_path):
+                 final_csv_path, module_dir):
         """
         Constructor
         """
@@ -63,6 +63,7 @@ class NHMDataLoaderBase(object):
         self.cols_dict = cols_dict
         self.clean_names = clean_names
         self.final_csv_path = final_csv_path
+        self.module_dir = module_dir
 
         self.raw_df = None
         self.missing_dists = []
@@ -83,7 +84,7 @@ class NHMDataLoaderBase(object):
         """
         df_full = pd.DataFrame(columns=list(self.cols_dict.keys()))
 
-        lgd_file = os.path.join(self.data_folder, 'lgd_table.csv')
+        lgd_file = os.path.join(self.module_dir, '../data/lgd_table.csv')
         self.dist_code = pd.read_csv(lgd_file, dtype={'DistrictCode': str})
 
         # Loop through each year file
@@ -122,14 +123,14 @@ class NHMDataLoaderBase(object):
         # Converting column names according to schema and saving it as csv
         df_full['DistrictCode'] = df_full.apply(
             lambda row: self._get_district_code(row), axis=1)
-                
+
         df_full.columns = df_full.columns.map(self.cols_dict)
         df_full = df_full.groupby(
             level=0, axis=1).first()  # merging columns with same names
-        
+
         # Dropping unwanted rows
         df_full = self._drop_unwanted_rows(df_full)
-        
+
         df_full.iloc[2:].to_csv(self.final_csv_path, index=False)
 
     def create_mcf_tmcf(self):
@@ -137,8 +138,11 @@ class NHMDataLoaderBase(object):
         Class method to generate MCF and TMCF files for the current dataset.
         
         """
-        tmcf_file = "{}.tmcf".format(self.dataset_name)
-        mcf_file = "{}.mcf".format(self.dataset_name)
+        tmcf_file = os.path.join(self.module_dir,
+                                 "{}.tmcf".format(self.dataset_name))
+
+        mcf_file = os.path.join(self.module_dir,
+                                "{}.mcf".format(self.dataset_name))
 
         with open(tmcf_file, 'w+') as tmcf, open(mcf_file, 'w+') as mcf:
             # Writing isoCODE entity
@@ -187,16 +191,15 @@ class NHMDataLoaderBase(object):
                                       close_match[0]]['DistrictCode'].values[0]
             else:
                 close_match = difflib.get_close_matches(
-                                    row['District'].upper(),
-                                    self.dist_code['AlternateLabel'].astype(str),
-                                    n=1,
-                                    cutoff=0.8)
+                    row['District'].upper(),
+                    self.dist_code['AlternateLabel'].astype(str),
+                    n=1,
+                    cutoff=0.8)
                 if close_match:
-                    return self.dist_code[self.dist_code[
-                                                'AlternateLabel'
-                                                ] == close_match[0]
-                                          ]['DistrictCode'].values[0]
-               
+                    return self.dist_code[
+                        self.dist_code['AlternateLabel'] ==
+                        close_match[0]]['DistrictCode'].values[0]
+
             return None
 
     def _drop_unwanted_rows(self, df):
@@ -205,9 +208,9 @@ class NHMDataLoaderBase(object):
         This method will drop rows with empty District names and rows with
         'Indicators.1' string (this is one of the headers from dataset)
         """
-        
+
         unwanted_values = ['Indicators.1']
         df = df[df['District'].isin(unwanted_values) == False]
         df = df[df['District'].isna() == False]
-        
+
         return df

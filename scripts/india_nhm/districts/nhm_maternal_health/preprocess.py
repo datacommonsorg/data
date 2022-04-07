@@ -67,7 +67,7 @@ clean_names = {
     '% Safe deliveries to Total Reported Deliveries':
         'Percentage of safe deliveries to total reported deliveries'
 }
-    
+
 module_dir = os.path.dirname(__file__)
 
 if __name__ == '__main__':
@@ -80,7 +80,8 @@ if __name__ == '__main__':
                                dataset_name=dataset_name,
                                cols_dict=cols_to_nodes,
                                clean_names=clean_names,
-                               final_csv_path=csv_path)
+                               final_csv_path=csv_path,
+                               module_dir=module_dir)
     loader.generate_csv()
     loader.create_mcf_tmcf()
 
@@ -89,5 +90,6 @@ if __name__ == '__main__':
                            dataset_description="Maternal Health Data",
                            data_level="District level",
                            cols_dict=cols_to_nodes,
-                           clean_names=clean_names)
+                           clean_names=clean_names,
+                           module_dir=module_dir)
     readme_gen.gen_readme()

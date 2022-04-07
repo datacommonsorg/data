@@ -21,12 +21,13 @@ class ReadMeGen():
     """
 
     def __init__(self, dataset_name, dataset_description, data_level, cols_dict,
-                 clean_names):
+                 clean_names, module_dir):
         self.dataset_name = dataset_name
         self.dataset_description = dataset_description
         self.data_level = data_level
         self.cols_dict = cols_dict
         self.clean_names = clean_names
+        self.module_dir = module_dir
 
     def _initial_stuff(self):
         INITIAL_STUFF = """# {dataset_description} - 2008 to 2020
@@ -75,7 +76,9 @@ The cleaned csv has the following columns:
         return ARTIFACTS.format(dataset_name=self.dataset_name)
 
     def gen_readme(self):
-        with open('README.md', 'w+') as out:
+        readme_path = os.path.join(self.module_dir, "README.md")
+
+        with open(readme_path, 'w+') as out:
             out.write(self._initial_stuff())
             out.write(self._cleaned_data())
             out.write(self._artifacts())
