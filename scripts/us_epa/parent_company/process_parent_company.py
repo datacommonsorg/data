@@ -24,7 +24,6 @@ import pandas as pd
 
 from absl import app
 from absl import flags
-from re import sub
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -56,7 +55,7 @@ _OUT_SVOBS_FILE_PREFIX = "SVObs"
 _COUNTY_CANDIDATES_CACHE = {}
 
 # Cleaned CSV Columns
-# - "containedInPlace" is a repeated list of refs to County and Census ZCTA
+# - "locatedIn" is a repeated list of refs to County and Census ZCTA
 _DCID = "dcid"
 _EPA_FACILITY_GHG_ID = "epaGhgrpFacilityId"
 _NAME = "name"
@@ -75,8 +74,8 @@ _OBSERVATION_DATE = "year"
 _TABLE_CLEAN_CSV_HDR = (_DCID, _NAME, _ADDRESS, _CIP)
 _OWNERSHIP_CLEAN_CSV_HDR = (_DCID, _EPA_FACILITY_GHG_ID, _YEAR,
                             _PERCENT_OWNERSHIP)
-_SVOBS_CLEAN_CSV_HDR = (_PARENT_COMPANY_DCID, _SV_MEASURED, _OBSERVATION_PERIOD,
-                        _SVO_VAL, _OBSERVATION_DATE)
+_SVOBS_CLEAN_CSV_HDR = (_PARENT_COMPANY_DCID, _SV_MEASURED,
+                        _OBSERVATION_PERIOD, _SVO_VAL, _OBSERVATION_DATE)
 
 _COUNTERS_COMPANIES = {
     "missing_zip": set(),
@@ -84,6 +83,7 @@ _COUNTERS_COMPANIES = {
     "facility_does_not_exist": set(),
     "company_name_not_found": set(),
     "year_does_not_exist": set(),
+    "company_ids_replaced": set(),
 }
 
 
@@ -165,42 +165,6 @@ def _str(v):
     if not v:
         return ''
     return '"' + v + '"'
-
-
-def _v(table, row, col):
-    return row.get(_TABLE_PREFIX + "." + table + "." + col, "")
-
-
-def _cv(table, row, col):
-    return _v(table, row, col).strip().title()
-
-
-def _get_name(table, row):
-    name = _cv(table, row, "PARENT_COMPANY_NAME")
-    return name.replace(" Llc", " LLC")
-
-
-def _name_to_id(s):
-    s = s.replace('&', ' And')
-    s = s.replace('U.S.', ' US')
-    s = s.replace('U. S.', ' US')
-    s = s.replace('United States', ' US')
-    s = sub(r'\W+', '', s)
-    s = s.replace(' Llc', ' LLC')
-    return ''.join([s[0].upper(), s[1:]])
-
-
-def _get_address(table, row):
-    parts = []
-    for k in ["PARENT_CO_STREET_ADDRESS", "PARENT_CO_CITY", "PARENT_CO_STATE"]:
-        p = _cv(table, row, k)
-        if p:
-            parts.append(p)
-    address = ", ".join(parts)
-    p = _cv(table, row, "PARENT_CO_ZIP")
-    if p:
-        address += " - " + p
-    return address
 
 
 def _get_county(company_id, zip, year):
@@ -293,6 +257,16 @@ def counters_string(counter_dict):
 
 def process_companies(input_table_path, existing_facilities_file,
                       output_path_info, output_path_ownership):
+
+    company_ids_replaced_counter = 0
+    # First retrieve the ID duplicate mappings.
+    dupes = {}
+    dupes_filepath = os.path.join(input_table_path, "DuplicateIdMappings.csv")
+    with open(dupes_filepath, "r") as dfp:
+        cr = csv.DictReader(dfp)
+        for row in cr:
+            dupes[row['Id']] = row['MappedTo']
+
     processed_companies = set()
     # Writing two CSVs: one for the CompanyInfo; the other for the Ownership StatVarObs.
     table_path = os.path.join(output_path_info, _OUT_FILE_PREFIX)
@@ -325,26 +299,41 @@ def process_companies(input_table_path, existing_facilities_file,
         with open(input_table, "r") as rfp:
             cr = csv.DictReader(rfp)
             for in_row in cr:
-                ghg_id = _v(_TABLE, in_row, "FACILITY_ID")
+                ghg_id = fh.v(_TABLE,
+                              in_row,
+                              "FACILITY_ID",
+                              table_prefix=_TABLE_PREFIX)
                 assert ghg_id, str(in_row)
                 ghg_id = _EPA_FACILITY_GHG_ID + "/" + ghg_id
 
-                company_name = _get_name(_TABLE, in_row)
+                company_name = fh.get_name(_TABLE,
+                                           in_row,
+                                           "PARENT_COMPANY_NAME",
+                                           table_prefix=_TABLE_PREFIX)
                 if not company_name:
                     _COUNTERS_COMPANIES["company_name_not_found"].add(ghg_id)
                     continue
 
                 company_name = company_name.replace("\"", "").replace("'", "")
 
-                company_id = "EpaParentCompany/" + _name_to_id(company_name)
+                company_id = fh.name_to_id(company_name)
                 assert company_id, str(in_row)
 
-                year = _v(_TABLE, in_row, "YEAR")
+                # Replace the company_id with a duplicate mapping, if it exists.
+                if company_id in dupes:
+                    _COUNTERS_COMPANIES["company_ids_replaced"].add(company_id)
+                    company_id = dupes[company_id]
+                company_id = "EpaParentCompany/" + company_id
+
+                year = fh.v(_TABLE, in_row, "YEAR", table_prefix=_TABLE_PREFIX)
                 if not year:
                     _COUNTERS_COMPANIES["year_does_not_exist"].add(
                         (company_id, ghg_id))
 
-                percent_own = _v(_TABLE, in_row, "PARENT_CO_PERCENT_OWN")
+                percent_own = fh.v(_TABLE,
+                                   in_row,
+                                   "PARENT_CO_PERCENT_OWN",
+                                   table_prefix=_TABLE_PREFIX)
                 # If the ownership percentage is not known, set it to 100.
                 if not percent_own:
                     _COUNTERS_COMPANIES["percent_ownership_not_found"].add(
@@ -375,23 +364,36 @@ def process_companies(input_table_path, existing_facilities_file,
                 # need one version.
                 if company_id.lower() not in processed_companies:
                     # zips have extension
-                    zip_code = _v(_TABLE, in_row, "PARENT_CO_ZIP")[:5]
+                    zip_code = fh.v(_TABLE,
+                                    in_row,
+                                    "PARENT_CO_ZIP",
+                                    table_prefix=_TABLE_PREFIX)[:5]
                     zip = ""
                     if zip_code:
                         zip = "zip/" + zip_code
                     county = _get_county(company_id, zip, year)
 
                     table_out_row = {
-                        _DCID: company_id,
-                        _NAME: _str(company_name),
-                        _ADDRESS: _str(_get_address(_TABLE, in_row)),
-                        _CIP: ", ".join(fh.get_cip(zip, county)),
+                        _DCID:
+                        company_id,
+                        _NAME:
+                        _str(company_name),
+                        _ADDRESS:
+                        _str(
+                            fh.get_address(_TABLE,
+                                           in_row,
+                                           table_prefix=_TABLE_PREFIX)),
+                        _CIP:
+                        ", ".join(fh.get_cip(zip, county)),
                     }
                     tableWriter.writerow(table_out_row)
                     processed_companies.add(company_id.lower())
 
         print("Produced " + str(rows_written) + " rows from " + _TABLE)
-        print("Geo Resolution Stats: \n" + counters_string(_COUNTERS_COMPANIES))
+        print("Geo Resolution Stats: \n" +
+              counters_string(_COUNTERS_COMPANIES))
+
+    print("Company ID duplicated replaced = ", company_ids_replaced_counter)
 
     # Write the MCF and TMCF files in their respective destination locations.
     with open(table_path + "Table.mcf", "w") as fp:
@@ -511,8 +513,9 @@ def main(_):
     pathlib.Path(output_path_ownership).mkdir(exist_ok=True)
 
     # First process companies.
-    # process_companies(FLAGS.input_download_path, FLAGS.existing_facilities_file,
-    #                   output_path_info, output_path_ownership)
+    process_companies(FLAGS.input_download_path,
+                      FLAGS.existing_facilities_file, output_path_info,
+                      output_path_ownership)
 
     # Now process the StatVarObs.
     # First check that the output csv from process_companies() exists.
@@ -524,6 +527,7 @@ def main(_):
                                    FLAGS.svobs_output_path)
     pathlib.Path(svobs_path_info).mkdir(exist_ok=True)
 
+    # Generate the new SVOs.
     generate_svobs_helper(ownership_relationships_filepath, svobs_path_info)
 
 

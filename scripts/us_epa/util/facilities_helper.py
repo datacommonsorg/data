@@ -21,10 +21,55 @@ import json
 import pandas as pd
 import requests
 
+from re import sub
 from requests.structures import CaseInsensitiveDict
 from requests.exceptions import HTTPError
 
 _COUNTY_CANDIDATES_CACHE = {}
+
+
+def v(table, row, col, table_prefix=""):
+    if table_prefix:
+        return row.get(table_prefix + "." + table + "." + col, "")
+    else:
+        return row.get(table + '.' + col, '')
+
+
+def cv(table, row, col, table_prefix=""):
+    return v(table, row, col, table_prefix=table_prefix).strip().title()
+
+
+def get_name(table, row, col_name, table_prefix=""):
+    name = cv(table, row, col_name, table_prefix)
+    return name.replace(" Llc", " LLC")
+
+
+def name_to_id(s):
+    s = s.replace('&', 'And')
+    s = s.replace('U.S.', 'US')
+    s = s.replace('U. S.', 'US')
+    s = s.replace('United States', 'US')
+    s = sub(r'\W+', '', s)
+    s = s.replace(' Llc', ' LLC')
+
+    s = s.replace('Corporation', 'Corp')
+    s = s.replace('Company', 'Co')
+    s = s.replace('Incorportated', 'Inc')
+    s = s.replace('Lp', 'LP')
+    return ''.join([s[0].upper(), s[1:]])
+
+
+def get_address(table, row, table_prefix=""):
+    parts = []
+    for k in ["PARENT_CO_STREET_ADDRESS", "PARENT_CO_CITY", "PARENT_CO_STATE"]:
+        p = cv(table, row, k, table_prefix=table_prefix)
+        if p:
+            parts.append(p)
+    address = ", ".join(parts)
+    p = cv(table, row, "PARENT_CO_ZIP", table_prefix=table_prefix)
+    if p:
+        address += " - " + p
+    return address
 
 
 def download(api_root, table_name, max_rows, output_path):
@@ -100,6 +145,7 @@ def _dc_sv_query(dc_api_url, data_string, svs=set()):
                 svs.add(sv)
     return svs
 
+
 # Returns a union all StatVars associated with all facilities using the
 # Data Commons API.
 def get_all_statvars(dc_api_url, facility_ids):
@@ -112,7 +158,8 @@ def get_all_statvars(dc_api_url, facility_ids):
     print("****Getting existing StatVars for Facilities.")
     for i in range(0, len(facility_ids), n_facilities):
         if i % n_facilities == 0:
-           print(f'**Processing facilities from index {i} to {i+n_facilities}')
+            print(
+                f'**Processing facilities from index {i} to {i+n_facilities}')
         # Compose the API query params.
         # Need to be of the form:
         # '{"dcids":["epaGhgrpFacilityId/1004962","epaGhgrpFacilityId/1010899"]}'
@@ -127,6 +174,7 @@ def get_all_statvars(dc_api_url, facility_ids):
     print("***********************************.")
     return statVars
 
+
 # Returns a map of Facility ID : {SV: SV Observation} from the Data Commons API.
 def get_all_svobs(facility_ids, svs):
     facility_svo_dict = {}
@@ -136,7 +184,8 @@ def get_all_svobs(facility_ids, svs):
     print("****Getting all StatVar Observations for the Facilities.")
     for i in range(0, len(facility_ids), n_facilities):
         if i % n_facilities == 0:
-           print(f'**Processing facilities from index {i} to {i+n_facilities}')
+            print(
+                f'**Processing facilities from index {i} to {i+n_facilities}')
         facility_svo_dict.update(
             datacommons.get_stat_all(facility_ids[i:i + n_facilities], svs))
 
