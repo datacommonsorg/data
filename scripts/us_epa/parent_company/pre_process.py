@@ -71,10 +71,10 @@ def _add_to_duplicate_mapping(company_id_1, company_id_2, company_id_count):
 
     # If (company_id_1, company_id_2) exist already (in either direction),
     # then no point continuing.
-    if ((company_id_1 in _DUPLICATE_MAPPING
-         and company_id_2 == _DUPLICATE_MAPPING[company_id_1])
-            or (company_id_2 in _DUPLICATE_MAPPING
-                and company_id_1 == _DUPLICATE_MAPPING[company_id_2])):
+    if ((company_id_1 in _DUPLICATE_MAPPING and
+         company_id_2 == _DUPLICATE_MAPPING[company_id_1]) or
+        (company_id_2 in _DUPLICATE_MAPPING and
+         company_id_1 == _DUPLICATE_MAPPING[company_id_2])):
 
         return
 
@@ -87,9 +87,9 @@ def _add_to_duplicate_mapping(company_id_1, company_id_2, company_id_count):
     val = company_id_2
     comp_count = company_id_count[company_id_2]
 
-    if ((company_id_count[company_id_1] > comp_count)
-            or ((company_id_count[company_id_1] == comp_count) and
-                (len(company_id_1) >= len(company_id_2)))):
+    if ((company_id_count[company_id_1] > comp_count) or
+        ((company_id_count[company_id_1] == comp_count) and
+         (len(company_id_1) >= len(company_id_2)))):
         key = company_id_2
         val = company_id_1
         comp_count = company_id_count[company_id_1]
@@ -105,9 +105,9 @@ def _add_to_duplicate_mapping(company_id_1, company_id_2, company_id_count):
 
     # Only update if the company_id being mapped to has a greater count than
     # the existing_count (for a different company id).
-    if ((comp_count >= existing_count)
-            or ((comp_count == existing_count) and
-                (len(val) >= len(existing_company)))):
+    if ((comp_count >= existing_count) or
+        ((comp_count == existing_count) and
+         (len(val) >= len(existing_company)))):
         _DUPLICATE_MAPPING[key] = val
 
 

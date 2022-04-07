@@ -36,28 +36,28 @@ _EXPECTED_COUNTERS = {
     # Company Name: 'US Government' in YEAR 2012 is the first entry for the
     # company and does not have a zip code which will be flagged.
     'missing_zip':
-    set([('EpaParentCompany/BrownAndProvidencePlantations', '2020'),
-         ('EpaParentCompany/UsGovernment', '2012')]),
+        set([('EpaParentCompany/BrownAndProvidencePlantations', '2020'),
+             ('EpaParentCompany/UsGovernment', '2012')]),
     # There are two cases of ownership not set.
     'percent_ownership_not_found':
-    set([('EpaParentCompany/UsGovernment', '2012'),
-         ('EpaParentCompany/UsGovernment', '2015')]),
+        set([('EpaParentCompany/UsGovernment', '2012'),
+             ('EpaParentCompany/UsGovernment', '2015')]),
     # epaGhgrpFacilityId/9999 does not exist in the existing_facilities.csv.
     'facility_does_not_exist':
-    set(['epaGhgrpFacilityId/9999']),
+        set(['epaGhgrpFacilityId/9999']),
     # Facility Id: 1001799 in Year 2000 has no company name.
     'company_name_not_found':
-    set(['epaGhgrpFacilityId/1001799']),
+        set(['epaGhgrpFacilityId/1001799']),
     # Company name: 'National Fuel Gas Company' and Facility Id: 1001829
     # do not have a Year.
     'year_does_not_exist':
-    set([('EpaParentCompany/NationalFuelGasCo', 'epaGhgrpFacilityId/1001829')
-         ]),
+        set([('EpaParentCompany/NationalFuelGasCo',
+              'epaGhgrpFacilityId/1001829')]),
     # Company Ids replaced should have the Ids of companies where a resolution/
     # replacement took place. In the test input file, these are the two
     # companies noted below.
     'company_ids_replaced':
-    set(['ChevronUsaInc', 'RandomCoName']),
+        set(['ChevronUsaInc', 'RandomCoName']),
 }
 
 # The relationships below are only for years 2016, 2017 and 2018. This means
@@ -103,18 +103,12 @@ _FACILITY_SVO_DICT = {
                     '2011': 1144.25,
                     '2012': 1100.5
                 },
-                'measurementMethod':
-                'EPA_GHGRP',
-                'observationPeriod':
-                'P1Y',
-                'importName':
-                'EPA_GHGRP',
-                'provenanceDomain':
-                'epa.gov',
-                'unit':
-                'MetricTonCO2e',
-                'provenanceUrl':
-                'https://www.epa.gov/ghgreporting'
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
+                'unit': 'MetricTonCO2e',
+                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
         },
         # An easier to follow case. See below for the same SV corresponding to
@@ -133,18 +127,12 @@ _FACILITY_SVO_DICT = {
                     '2014': 100,
                     '2011': 100,
                 },
-                'measurementMethod':
-                'EPA_GHGRP',
-                'observationPeriod':
-                'P1Y',
-                'importName':
-                'EPA_GHGRP',
-                'provenanceDomain':
-                'epa.gov',
-                'unit':
-                'MetricTonCO2e',
-                'provenanceUrl':
-                'https://www.epa.gov/ghgreporting'
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
+                'unit': 'MetricTonCO2e',
+                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
         },
     },
@@ -163,18 +151,12 @@ _FACILITY_SVO_DICT = {
                     '2015': 12,
                     '2017': 14.5
                 },
-                'measurementMethod':
-                'EPA_GHGRP',
-                'observationPeriod':
-                'P1Y',
-                'importName':
-                'EPA_GHGRP',
-                'provenanceDomain':
-                'epa.gov',
-                'unit':
-                'MetricTonCO2e',
-                'provenanceUrl':
-                'https://www.epa.gov/ghgreporting'
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
+                'unit': 'MetricTonCO2e',
+                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
         },
         # Continuation of the easier to follow case.
@@ -192,18 +174,12 @@ _FACILITY_SVO_DICT = {
                     '2014': 50,
                     '2011': 50,
                 },
-                'measurementMethod':
-                'EPA_GHGRP',
-                'observationPeriod':
-                'P1Y',
-                'importName':
-                'EPA_GHGRP',
-                'provenanceDomain':
-                'epa.gov',
-                'unit':
-                'MetricTonCO2e',
-                'provenanceUrl':
-                'https://www.epa.gov/ghgreporting'
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
+                'unit': 'MetricTonCO2e',
+                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
         },
     }

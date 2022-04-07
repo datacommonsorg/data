@@ -74,8 +74,8 @@ _OBSERVATION_DATE = "year"
 _TABLE_CLEAN_CSV_HDR = (_DCID, _NAME, _ADDRESS, _CIP)
 _OWNERSHIP_CLEAN_CSV_HDR = (_DCID, _EPA_FACILITY_GHG_ID, _YEAR,
                             _PERCENT_OWNERSHIP)
-_SVOBS_CLEAN_CSV_HDR = (_PARENT_COMPANY_DCID, _SV_MEASURED,
-                        _OBSERVATION_PERIOD, _SVO_VAL, _OBSERVATION_DATE)
+_SVOBS_CLEAN_CSV_HDR = (_PARENT_COMPANY_DCID, _SV_MEASURED, _OBSERVATION_PERIOD,
+                        _SVO_VAL, _OBSERVATION_DATE)
 
 _COUNTERS_COMPANIES = {
     "missing_zip": set(),
@@ -375,23 +375,22 @@ def process_companies(input_table_path, existing_facilities_file,
 
                     table_out_row = {
                         _DCID:
-                        company_id,
+                            company_id,
                         _NAME:
-                        _str(company_name),
+                            _str(company_name),
                         _ADDRESS:
-                        _str(
-                            fh.get_address(_TABLE,
-                                           in_row,
-                                           table_prefix=_TABLE_PREFIX)),
+                            _str(
+                                fh.get_address(_TABLE,
+                                            in_row,
+                                            table_prefix=_TABLE_PREFIX)),
                         _CIP:
-                        ", ".join(fh.get_cip(zip, county)),
+                            ", ".join(fh.get_cip(zip, county)),
                     }
                     tableWriter.writerow(table_out_row)
                     processed_companies.add(company_id.lower())
 
         print("Produced " + str(rows_written) + " rows from " + _TABLE)
-        print("Geo Resolution Stats: \n" +
-              counters_string(_COUNTERS_COMPANIES))
+        print("Geo Resolution Stats: \n" + counters_string(_COUNTERS_COMPANIES))
 
     print("Company ID duplicated replaced = ", company_ids_replaced_counter)
 

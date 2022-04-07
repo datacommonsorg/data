@@ -158,8 +158,7 @@ def get_all_statvars(dc_api_url, facility_ids):
     print("****Getting existing StatVars for Facilities.")
     for i in range(0, len(facility_ids), n_facilities):
         if i % n_facilities == 0:
-            print(
-                f'**Processing facilities from index {i} to {i+n_facilities}')
+            print(f'**Processing facilities from index {i} to {i+n_facilities}')
         # Compose the API query params.
         # Need to be of the form:
         # '{"dcids":["epaGhgrpFacilityId/1004962","epaGhgrpFacilityId/1010899"]}'
@@ -184,8 +183,7 @@ def get_all_svobs(facility_ids, svs):
     print("****Getting all StatVar Observations for the Facilities.")
     for i in range(0, len(facility_ids), n_facilities):
         if i % n_facilities == 0:
-            print(
-                f'**Processing facilities from index {i} to {i+n_facilities}')
+            print(f'**Processing facilities from index {i} to {i+n_facilities}')
         facility_svo_dict.update(
             datacommons.get_stat_all(facility_ids[i:i + n_facilities], svs))
 

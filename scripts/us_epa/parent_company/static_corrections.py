@@ -16,50 +16,84 @@
 company_id_mappings = {
     # Data Commons import-tool validation check warnings reveal some of the
     # changes below.
-    "AirLiquideUsaLLC": "AirLiquideLargeIndustriesUsLP",
-    "AirLiquideAmericaLP": "AirLiquideLargeIndustriesUsLP",
-    "AirLiquideUs": "AirLiquideLargeIndustriesUsLP",
-    "AirLiquideUsaInc": "AirLiquideLargeIndustriesUsLP",
-    "AkSteelHoldingCorp": "AkSteelCorp",
-    "AlcoaCorp": "AlcoaInc",
-    "CovantaEnergy": "CovantaHoldingCorp",
-    "GreenPlainsRenewableEnergyInc": "GreenPlains",
-    "HastingsUtilitiesCityOfHastingsNe": "CityOfHastingsNebraska",
+    "AirLiquideUsaLLC":
+        "AirLiquideLargeIndustriesUsLP",
+    "AirLiquideAmericaLP":
+        "AirLiquideLargeIndustriesUsLP",
+    "AirLiquideUs":
+        "AirLiquideLargeIndustriesUsLP",
+    "AirLiquideUsaInc":
+        "AirLiquideLargeIndustriesUsLP",
+    "AkSteelHoldingCorp":
+        "AkSteelCorp",
+    "AlcoaCorp":
+        "AlcoaInc",
+    "CovantaEnergy":
+        "CovantaHoldingCorp",
+    "GreenPlainsRenewableEnergyInc":
+        "GreenPlains",
+    "HastingsUtilitiesCityOfHastingsNe":
+        "CityOfHastingsNebraska",
     "IndianaMunicipalPowerAgencyImpa100OwnsGt2AndGt3":
-    "IndianaMunicipalPowerAgency",
+        "IndianaMunicipalPowerAgency",
     "JointSolidWasteDisposalBoardCityAndCountOfPeoria":
-    "JointSolidWasteDisposalBoardCityAndCountyOfPeoria",
-    "MartinResourceManagementCorp": "MartinMidstreamPartnersLP",
+        "JointSolidWasteDisposalBoardCityAndCountyOfPeoria",
+    "MartinResourceManagementCorp":
+        "MartinMidstreamPartnersLP",
     "MiamiDadePublicWorksAndWasteManagementDepartment":
-    "MiamiDadeCountyDepartmentOfSolidWasteManagement",
-    "MiamiDadeWaterAndSewer": "MiamiDadeCounty",
-    "NrgEnergyInc": "NrgEnergy",
-    "OneokInc": "OneokPartnersLP",
-    "OptimEnergyLLCCOCompetitivePowerVentures": "OptimEnergyLLC",
-    "PetrobrasUsa": "PetrobrasAmericaInc",
-    "PioneerNaturalResourcesCo": "PioneerNaturalResourcesUsaInc",
+        "MiamiDadeCountyDepartmentOfSolidWasteManagement",
+    "MiamiDadeWaterAndSewer":
+        "MiamiDadeCounty",
+    "NrgEnergyInc":
+        "NrgEnergy",
+    "OneokInc":
+        "OneokPartnersLP",
+    "OptimEnergyLLCCOCompetitivePowerVentures":
+        "OptimEnergyLLC",
+    "PetrobrasUsa":
+        "PetrobrasAmericaInc",
+    "PioneerNaturalResourcesCo":
+        "PioneerNaturalResourcesUsaInc",
     "PrinceWilliamCountyPublicWorksDepartmentSolidWasteDivision":
-    "PrinceWilliamCountyPublicWorksDepartmentSolidWasteDiv",
+        "PrinceWilliamCountyPublicWorksDepartmentSolidWasteDiv",
     "SandridgeProductionAndExplorationLLC":
-    "SandridgeExplorationAndProductionLLC",
-    "ShellPetroleumIncShellChemicalLPNorcoLa": "ShellPetroleumInc",
-    "SouthwesternEnergy": "SouthwesternEnergyCo",
-    "SouthwesternEnergyCoInc": "SouthwesternEnergyCo",
-    "TpfGencoCoInvestmentFundLP": "TpfIiALP",
-    "UsgCorp": "USGypsumCorp",
-    "USGypsumCo": "USGypsumCorp",
-    "UsSteel": "UsSteelCorp",
-    "USSteel": "UsSteelCorp",
-    "VanguardNaturalResourcesLLC": "VanguardNaturalResourcesInc",
-    "VanguardNaturalResourcesIncorporated": "VanguardNaturalResourcesInc",
-    "WestrockCorp": "WestrockCo",
-    "XcelEnergy": "XcelEnergyInc",
+        "SandridgeExplorationAndProductionLLC",
+    "ShellPetroleumIncShellChemicalLPNorcoLa":
+        "ShellPetroleumInc",
+    "SouthwesternEnergy":
+        "SouthwesternEnergyCo",
+    "SouthwesternEnergyCoInc":
+        "SouthwesternEnergyCo",
+    "TpfGencoCoInvestmentFundLP":
+        "TpfIiALP",
+    "UsgCorp":
+        "USGypsumCorp",
+    "USGypsumCo":
+        "USGypsumCorp",
+    "UsSteel":
+        "UsSteelCorp",
+    "USSteel":
+        "UsSteelCorp",
+    "VanguardNaturalResourcesLLC":
+        "VanguardNaturalResourcesInc",
+    "VanguardNaturalResourcesIncorporated":
+        "VanguardNaturalResourcesInc",
+    "WestrockCorp":
+        "WestrockCo",
+    "XcelEnergy":
+        "XcelEnergyInc",
 
     # Special case: https://www.epa.gov/enforcement/equilon-enterprises-llc-doing-business-shell-oil-products-us-motiva-enterprises-llc-and
-    "EquilonEnterprisesLLCDbaShellOilProductsUs": "EquilonEnterprisesLLC",
-    "MotivaEnterprisesLLC": "EquilonEnterprisesLLC",
-    "DeerParkRefiningLimitedPartnership": "EquilonEnterprisesLLC",
-    "DeerParkRefiningLP": "EquilonEnterprisesLLC",
-    "ShellOilProductsUs": "EquilonEnterprisesLLC",
-    "ShellPetroleumIncorporated": "ShellPetroleumInc",
+    "EquilonEnterprisesLLCDbaShellOilProductsUs":
+        "EquilonEnterprisesLLC",
+    "MotivaEnterprisesLLC":
+        "EquilonEnterprisesLLC",
+    "DeerParkRefiningLimitedPartnership":
+        "EquilonEnterprisesLLC",
+    "DeerParkRefiningLP":
+        "EquilonEnterprisesLLC",
+    "ShellOilProductsUs":
+        "EquilonEnterprisesLLC",
+    "ShellPetroleumIncorporated":
+        "ShellPetroleumInc",
 }
