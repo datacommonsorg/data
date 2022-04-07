@@ -381,8 +381,8 @@ def process_companies(input_table_path, existing_facilities_file,
                         _ADDRESS:
                             _str(
                                 fh.get_address(_TABLE,
-                                            in_row,
-                                            table_prefix=_TABLE_PREFIX)),
+                                               in_row,
+                                               table_prefix=_TABLE_PREFIX)),
                         _CIP:
                             ", ".join(fh.get_cip(zip, county)),
                     }
@@ -512,9 +512,8 @@ def main(_):
     pathlib.Path(output_path_ownership).mkdir(exist_ok=True)
 
     # First process companies.
-    process_companies(FLAGS.input_download_path,
-                      FLAGS.existing_facilities_file, output_path_info,
-                      output_path_ownership)
+    process_companies(FLAGS.input_download_path, FLAGS.existing_facilities_file,
+                      output_path_info, output_path_ownership)
 
     # Now process the StatVarObs.
     # First check that the output csv from process_companies() exists.
