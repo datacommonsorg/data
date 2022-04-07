@@ -1,6 +1,6 @@
 variableMeasured,observationAbout,value,unit
 dcs:Count_Farm,dcid:country/USA,2042220,
-dcs:Area_Farm,dcid:country/USA,900217576,
+dcs:Area_Farm,dcid:country/USA,900217576,dcs:Acre
 dcs:Mean_Area_Farm,dcid:country/USA,441,dcs:Acre
 dcs:Mean_MarketValue_Farm_LandAndBuildings,dcid:country/USA,1311808,dcs:USDollarPerFarm
 dcs:Mean_MarketValue_Farm_LandAndBuildings,dcid:country/USA,2976,dcs:USDollarPerAcre
