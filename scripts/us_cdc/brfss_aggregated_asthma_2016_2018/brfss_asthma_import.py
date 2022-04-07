@@ -26,6 +26,7 @@ observationDate: C:SubjectTable->observationDate
 variableMeasured: C:SubjectTable->variableMeasured
 value: C:SubjectTable->value
 scalingFactor: C:SubjectTable->scalingFactor
+unit: C:SubjectTable->unit
 """
 
 _SV_MCF = """Node: dcid:StandardError_Person_Children_WithAsthma
@@ -96,7 +97,7 @@ def make_extract_df_readable(clean_df):
 	
 	# assign statvars based on age_group and column_name
 	clean_df['variableMeasured'] = clean_df.apply(get_statvar_dcid, axis=1)
-	clean_df['scalingFactor'] = clean_df['variableMeasured'].apply(lambda e: 100 if 'Children_WithAsthma' in e else '')
+	clean_df['scalingFactor'] = clean_df['variableMeasured'].apply(lambda e: 100 if (('Children_WithAsthma' in e) or ('StandardError_Person_Adults' in e)) else '')
 	
 	# drop empty county
 	clean_df = clean_df[clean_df['Counties']!='']
@@ -105,7 +106,7 @@ def make_extract_df_readable(clean_df):
 	clean_df['observationAbout'] = clean_df.apply(associate_place_dcids, axis=1)
 	clean_df = clean_df[clean_df['observationAbout']!='']
 	clean_df['observationDate'] = '2018'
-
+	clean_df['unit'] = 'dcs:Percent'
 	return clean_df
 	
 def main(_):

@@ -7,3 +7,4 @@ observationDate: C:SubjectTable->observationDate
 variableMeasured: C:SubjectTable->variableMeasured
 value: C:SubjectTable->value
 scalingFactor: C:SubjectTable->scalingFactor
+unit: C:SubjectTable->unit
