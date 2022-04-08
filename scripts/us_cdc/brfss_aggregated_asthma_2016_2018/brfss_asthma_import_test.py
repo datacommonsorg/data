@@ -11,3 +11,39 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Tests for brfss_asthma_import.py"""
+
+import os
+import unittest
+import pandas as pd
+from pandas.testing import assert_frame_equal
+
+from .brfss_asthma_import import process_brfss_asthma
+
+
+class ProcessTest(unittest.TestCase):
+
+    def test_e2e(self):
+        self.maxDiff = None
+        base_path = os.path.dirname(__file__)
+        base_path = os.path.join(base_path, './data/test_data')
+        inputfile_path = os.path.join(
+            base_path, "./Extracted_State-maps-for-asthma-prevalence.tsv")
+        process_brfss_asthma(input_dataset=inputfile_path,
+                             sep="\t",
+                             output_path=base_path)
+
+        ## validate the csvs
+        test_df = pd.read_csv(os.path.join(base_path, 'brfss_asthma.csv'))
+        expected_df = pd.read_csv(
+            os.path.join(base_path, 'brfss_asthma_expected.csv'))
+        assert_frame_equal(test_df, expected_df)
+
+        # clean up
+        os.remove(os.path.join(base_path, 'brfss_asthma.csv'))
+        os.remove(os.path.join(base_path, 'brfss_asthma.tmcf'))
+        os.remove(os.path.join(base_path, 'brfss_asthma.mcf'))
+
+
+if __name__ == '__main__':
+    unittest.main()

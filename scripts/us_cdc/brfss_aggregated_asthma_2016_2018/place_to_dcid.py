@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Extension of the State Alpha2 to Place to dcid."""
+"""State Alpha2 to Place to dcid."""
 PLACE_MAP: dict = {
     "AL": {
         "Autauga County": "geoId/01001",
