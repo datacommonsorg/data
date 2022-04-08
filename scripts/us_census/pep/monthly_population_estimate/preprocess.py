@@ -1,3 +1,16 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """ A Script to process USA Census PEP monthly population data
     from the datasets in provided local path.
     Typical usage:
@@ -6,68 +19,110 @@
 """
 import os
 import re
-import argparse
+import sys
 
 import numpy as np
 import pandas as pd
+from absl import app
+from absl import flags
 
 pd.set_option("display.max_columns", None)
 
+FLAGS = flags.FLAGS
+default_input_path = os.path.dirname(
+    os.path.abspath(__file__)) + os.sep + "input_data"
 
-def extract_year(val):
+if ("ip_path" in sys.argv and len(sys.argv) > 2):
+    default_input_path = sys.argv[2]
+flags.DEFINE_string("input_path", default_input_path, "Import Data URL's List")
+
+
+def _extract_year(val: str) -> tuple:
     """
     This Methods returns true,year from the value contains year.
     Otherwise false,''
-    val - Contains yyyy or yyyy [1] or .MM 1
+
+    Arguments:
+        val (str) : A string value contains data below format
+                    yyyy or yyyy [1] or .MM 1
+    Returns:
+        res (tuple) : Tuple with boolean value and year value or None
     """
     val = str(val).strip().split(' ', maxsplit=1)[0]
     if val.isnumeric() and len(val) == 4:
         return True, val
-    return False, ''
+    return False, None
 
 
-def return_year(col):
+def _return_year(col: str) -> str:
     """
     This Methods returns year value if col contains year.
     Otherwise pandas NA value.
-    val - Contains yyyy or yyyy [1] or .MM 1
+
+    Arguments:
+        col (str) : A string value contains data below format
+                    yyyy or yyyy [1] or .MM 1
+    Returns:
+        res (str) : String value with year yyyy or pandas NA value
     """
-    res, out = extract_year(col)
+    res, out = _extract_year(col)
     if res:
         return out
     return pd.NA
 
 
-def return_month(col):
+def _return_month(col: str) -> str:
     """
     This Methods returns month and date value if col contains month, date.
     Otherwise pandas NA value.
-    val - Contains yyyy or yyyy [1] or .MM dd
+
+    Arguments:
+        col (str) : A string value contains data below format
+                    yyyy or yyyy [1] or .MM 1
+    Returns:
+        res (str) : String value with month mm or pandas NA value
     """
-    res = extract_year(col)
+    res = _extract_year(col)
     if res[0]:
         return pd.NA
     return col
 
 
-def sum_cols(col):
+def _sum_cols(col: pd.Series) -> pd.Series:
     """
-    This method adds Dataframe columns Year and Month, Date.
-    Returns the column value in format yyyymmdd. Example: 2022March01
+    This method concats two DataFrame column values
+    with space in-between.
+
+    Arguments:
+        col[0] (Series) : DataFrame Column of dtype str
+        col[1] (Series) : DataFrame Column of dtype str
+
+    Returns:
+        res (Series) : Concatenated DataFrame Columns
     """
+    res = col[0]
     if col[1] is None:
-        return col[0]
-    return col[0] + ' ' + col[1]
+        return res
+    res = col[0] + ' ' + col[1]
+    return res
 
 
-def year_range(col):
+def _year_range(col: pd.Series) -> str:
     """
     This method returns year range from the dataframe
     column.
+
+    Arguments:
+        col (Series) : DataFrame Column of dtype str
+
+    Returns:
+        year_range (str) : String of Concatenated max and min year values
     """
+    year_range = None
     max_year = max(pd.to_datetime(col, errors='coerce').dt.year)
     min_year = min(pd.to_datetime(col, errors='coerce').dt.year)
-    return str(max_year) + '-' + str(min_year)
+    year_range = str(max_year) + '-' + str(min_year)
+    return year_range
 
 
 class CensusUSACountryPopulation:
@@ -80,8 +135,8 @@ class CensusUSACountryPopulation:
     Files using pre-defined templates.
     """
 
-    def __init__(self, input_files, csv_file_path, mcf_file_path,
-                 tmcf_file_path):
+    def __init__(self, input_files: list, csv_file_path: str,
+                 mcf_file_path: str, tmcf_file_path: str) -> None:
         self.input_files = input_files
         self.cleaned_csv_file_path = csv_file_path
         self.mcf_file_path = mcf_file_path
@@ -90,21 +145,22 @@ class CensusUSACountryPopulation:
         self.file_name = None
         self.scaling_factor = 1
 
-    def _load_data(self, file):
+    def _load_data(self, file: str) -> pd.DataFrame:
         """
         This Methods loads the data into pandas Dataframe
         using the provided file path and Returns the Dataframe.
+
+        Arguments:
+            file (str) : String of Dataset File Path
+        Returns:
+            df (DataFrame) : DataFrame with loaded dataset
         """
-        df = ""
-        self.file_name = file.split("/")[-1]
+        df = None
+        self.file_name = os.path.basename(file)
         if ".xls" in file:
-            df = pd.read_excel(file,
-                               #header=HEADER,
-                               #skiprows=SKIP_ROWS
-                              )
+            df = pd.read_excel(file)
 
         elif ".txt" in file:
-            #SKIP_ROWS_TXT = 17
             skip_rows_txt = 17
             self.file_name = self.file_name.replace(".txt", ".xlsx")
             cols = [
@@ -121,13 +177,20 @@ class CensusUSACountryPopulation:
                                names=cols)
         return df
 
-    def _clean_txt_file(self, df):
+    def _clean_txt_file(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         This method cleans the dataframe loaded from a txt file format.
         Also, Performs transformations on the data.
+
+        Arguments:
+            df (DataFrame) : DataFrame of txt dataset
+
+        Returns:
+            df (DataFrame) : Transformed DataFrame for txt dataset.
         """
+        # Scaling factor for txt file : 1000
         self.scaling_factor = 1000
-        df['Year and Month'] = df[['Year and Month', 'Date']].apply(sum_cols,
+        df['Year and Month'] = df[['Year and Month', 'Date']].apply(_sum_cols,
                                                                     axis=1)
         df.drop(columns=['Date'], inplace=True)
         for col in df.columns:
@@ -139,7 +202,7 @@ class CensusUSACountryPopulation:
         civilian_population = 3
         civilian_noninstitutionalized_population = 4
 
-        #Moving the row data left upto one index value.
+        # Moving the row data left upto one index value.
         df.iloc[idx, resident_population] = df.iloc[idx][
             "Resident Population Plus Armed Forces Overseas"]
         df.iloc[idx, resident_population_plus_armed_forces_overseas] = df.iloc[
@@ -154,17 +217,23 @@ class CensusUSACountryPopulation:
         """
         This method transforms Dataframe into cleaned DF.
         Also, It Creates new columns, remove duplicates,
-        Standaradize headers to SV's, Mulitplies with
+        Standaradize headers to SV's, Mulitply with
         scaling factor.
+
+        Arguments:
+            df (DataFrame) : DataFrame
+
+        Returns:
+            df (DataFrame) : DataFrame.
         """
         final_cols = [col for col in df.columns if 'year' not in col.lower()]
 
-        df['Year'] = df['Year and Month'].apply(return_year).fillna(
+        df['Year'] = df['Year and Month'].apply(_return_year).fillna(
             method='ffill', limit=12)
-        df['Month'] = df['Year and Month'].apply(return_month)
+        df['Month'] = df['Year and Month'].apply(_return_month)
         df.dropna(subset=['Year', 'Month'], inplace=True)
 
-        #Creating new Date Column and Final Date format is yyyy-mm
+        # Creating new Date Column and Final Date format is yyyy-mm
         df['Date'] = df['Year'] + df['Month']
         df['Date'] = df['Date'].str.replace(".", "").str.replace(
             " ", "").str.replace("*", "")
@@ -175,18 +244,18 @@ class CensusUSACountryPopulation:
         df['Date'] = df['Date'].dt.strftime('%Y-%m')
         df.drop_duplicates(subset=['Date'], inplace=True)
 
-        #Deriving new SV Count_Person_InArmedForcesOverseas as
-        #subtracting Resident Population from
-        #Resident Population Plus Armed Forces Overseas
+        # Deriving new SV Count_Person_InArmedForcesOverseas as
+        # subtracting Resident Population from
+        # Resident Population Plus Armed Forces Overseas
         df['Count_Person_InUSArmedForcesOverseas'] = df[
             'Resident Population Plus Armed Forces Overseas'].astype(
                 'int') - df['Resident Population'].astype('int')
         computed_cols = ["Date", "Count_Person_InUSArmedForcesOverseas"]
 
-        #Selecting Coumputed and Final Columns from the DF.
+        # Selecting Coumputed and Final Columns from the DF.
         df = df[computed_cols + final_cols]
 
-        #Renaming DF Headers with ref to SV's Naming Standards.
+        # Renaming DF Headers with ref to SV's Naming Standards.
         final_cols_list = ["Count_Person_" + col\
                         .replace("Population ", "")\
                         .replace("Population", "")\
@@ -206,7 +275,7 @@ class CensusUSACountryPopulation:
         final_cols_list = computed_cols + final_cols_list
         df.columns = final_cols_list
 
-        #Multiplying the data with scaling factor.
+        # Multiplying the data with scaling factor.
         for col in final_cols_list:
             if "count" in col.lower():
                 if self.scaling_factor != 1:
@@ -215,32 +284,31 @@ class CensusUSACountryPopulation:
                 df[col] = df[col].astype('Int64', errors="ignore")
         self.scaling_factor = 1
 
-        #Creating Location column with default value country/USA.
-        #as the dataset is all about USA country level only.
+        # Creating Location column with default value country/USA.
+        # as the dataset is all about USA country level only.
         df.insert(1, "Location", "country/USA", True)
-        df.insert(0, 'date_range', year_range(df['Date']), True)
-        #print(df.head())
+        df.insert(0, 'date_range', _year_range(df['Date']), True)
         return df
 
-    def _transform_data(self, file, df):
+    def _transform_data(self, file: str, df: pd.DataFrame) -> None:
         """
         This method calls the required functions to transform
         the dataframe and saves the final cleaned data in
         CSV file format.
+
+        Arguments:
+            file (str) : Dataset File Path
+
+        Returns:
+            df (DataFrame) : DataFrame.
         """
-        path = ""
 
-        #Finding the file name
-        if "\\" in self.cleaned_csv_file_path:
-            path = self.cleaned_csv_file_path[:self.cleaned_csv_file_path.
-                                              rfind("\\")]
-        elif "/" in self.cleaned_csv_file_path:
-            path = self.cleaned_csv_file_path[:self.cleaned_csv_file_path.
-                                              rfind("/")]
-        if not os.path.exists(path):
-            os.mkdir(path)
+        # Finding the Dir Path
+        file_dir = os.path.dirname(self.cleaned_csv_file_path)
+        if not os.path.exists(file_dir):
+            os.mkdir(file_dir)
 
-        #Cleaning txt file if file is in txt format
+        # Cleaning txt file if file is in txt format
         if ".txt" in file:
             df = self._clean_txt_file(df)
 
@@ -250,7 +318,6 @@ class CensusUSACountryPopulation:
         if self.df is None:
             self.df = df
         else:
-            #keep_value = find_keep_value(self.df, df)
             self.df = self.df.append(df, ignore_index=True)
 
         self.df.sort_values(by=['Date', 'date_range'],
@@ -272,10 +339,16 @@ class CensusUSACountryPopulation:
         self._generate_mcf(self.df.columns)
         self._generate_tmcf(self.df.columns)
 
-    def _generate_mcf(self, df_cols):
+    def _generate_mcf(self, df_cols: list) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
+
+        Arguments:
+            df_cols (list) : List of DataFrame Columns
+
+        Returns:
+            None
         """
         mcf_template = """Node: dcid:{}
 typeOf: dcs:StatisticalVariable
@@ -284,15 +357,12 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 """
         mcf = ""
-        for col in df_cols:  #Enter DF Name
-            # Check if it is a delayed payment column
+        for col in df_cols:
             residence = ""
             status = ""
             armedf = ""
             if col.lower() in ["date", "location"]:
                 continue
-            #residentStatus: dcs:InArmedForcesOverseas
-            #armedForcesStatus: dcs:InArmedForces
             if re.findall('Resident', col):
                 residence = "\nresidentStatus"
                 status = ": dcs:USResident"
@@ -316,22 +386,29 @@ measuredProperty: dcs:count
             mcf = mcf + mcf_template.format(col, residence, status,
                                             armedf) + "\n"
 
+        # Writing Genereated MCF to local path.
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(mcf.rstrip('\n'))
 
-    def _generate_tmcf(self, df_cols):
+    def _generate_tmcf(self, df_cols: list) -> None:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template
+
+        Arguments:
+            df_cols (list) : List of DataFrame Columns
+
+        Returns:
+            None
         """
-        tmcf_template = """Node: E:Population_Count_USA->E{}
+        tmcf_template = """Node: E:USA_Population_Count->E{}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{}
 measurementMethod: dcs:{}
-observationAbout: C:Population_Count_USA->Location
-observationDate: C:Population_Count_USA->Date
+observationAbout: C:USA_Population_Count->Location
+observationDate: C:USA_Population_Count->Date
 observationPeriod: \"P1M\"
-value: C:Population_Count_USA->{} 
+value: C:USA_Population_Count->{} 
 """
         i = 0
         measure = ""
@@ -346,33 +423,18 @@ value: C:Population_Count_USA->{}
             tmcf = tmcf + tmcf_template.format(i, col, measure, col) + "\n"
             i = i + 1
 
+        # Writing Genereated TMCF to local path.
         with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
 
 
-if __name__ == "__main__":
-
-    HEADER = 1
-    SKIP_ROWS = 1
-    SKIP_ROWS_TXT = 17
-
-    parser = argparse.ArgumentParser()
-    #Adding optional argument
-    default_input_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "input_data"
-    parser.add_argument("-i",
-                        "--input_data",
-                        default=default_input_path,
-                        help="Json file with Dataset URLS")
-
-    # Read arguments from command line
-    args = parser.parse_args()
-    input_path = args.input_data
+def main(_):
+    input_path = FLAGS.input_path
 
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
 
-    #Defining Output file names
+    # Defining Output file names
     data_file_path = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + "output"
     cleaned_csv_path = data_file_path + os.sep + "USA_Population_Count.csv"
@@ -383,3 +445,7 @@ if __name__ == "__main__":
                                         tmcf_path)
 
     loader.process()
+
+
+if __name__ == "__main__":
+    app.run(main)

@@ -1,31 +1,56 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """ A Script to download USA Census PEP monthly population data
     from the URLS in provided json file.
-    Typical usage:
-    1. python3 download.py
-    2. python3 download.py -f file_urls.json
-    3. python3 download.py -f <<path_to_file>>
 """
+
 import os
 import json
-import argparse
 import pandas as pd
 import numpy as np
+from absl import app
+from absl import flags
+
+FLAGS = flags.FLAGS
+URLS_JSON_PATH = os.path.dirname(os.path.abspath(__file__)) \
+                    + os.sep +"file_urls.json"
+
+URLS_JSON = None
+with open(URLS_JSON_PATH, encoding="UTF-8") as file:
+    URLS_JSON = json.load(file)
+
+# Flag names are globally defined!  So in general, we need to be
+# careful to pick names that are unlikely to be used by other libraries.
+# If there is a conflict, we'll get an error at import time.
+flags.DEFINE_list("url", URLS_JSON["new_urls"], "Import Data URL's List")
 
 HEADER = 1
 SKIP_ROWS = 1
+SCALING_FACTOR_TXT_FILE = 1000
 
 
-def save_data(url, download_local_path):
+def _save_data(url: str, download_local_path: str) -> None:
     """
     This method loads the Data from url to pandas Dataframe.
     Writes the data to local path provided as one the parameter.
 
-    Parameters:
-    url (str): Url of the dataset
-    download_local_path (str): Path to save the datasets.
+    Arguments:
+        url (str): Url of the dataset
+        download_local_path (str): LocalPath to save the datasets.
 
     Returns:
-    None
+        None
     """
     df = ""
     file_name = url.split("/")[-1]
@@ -48,42 +73,65 @@ def save_data(url, download_local_path):
                            engine='python',
                            skiprows=17,
                            names=cols)
-        df = clean_txt_file(df)
+        df = clean_txt_file(df, SCALING_FACTOR_TXT_FILE)
         df.to_excel(download_local_path + os.sep + file_name,
                     index=False,
                     engine='xlsxwriter')
 
 
-def sum_cols(col):
+def _sum_cols(col: pd.Series) -> pd.Series:
     """
-    This method adds Dataframe columns Year and Month, Date.
-    Returns the column value in format yyyymmdd. Example: 2022March01
+    This method concats two DataFrame column values
+    with space in-between.
+
+    Arguments:
+        col[0] (Series) : DataFrame Column of dtype str
+        col[1] (Series) : DataFrame Column of dtype str
+
+    Returns:
+        res (Series) : Concatenated DataFrame Columns
     """
+    res = col[0]
     if col[1] is None:
-        return col[0]
-    return col[0] + ' ' + col[1]
+        return res
+    res = col[0] + ' ' + col[1]
+    return res
 
 
-def mulitply(col):
+def _mulitply(col: pd.Series, **kwargs: dict) -> pd.Series:
     """
-    This method multiply dataframe column with scaling factor 1000.
-    Returns New column value mulitplied by 1000.
+    This method multiply dataframe column with scaling factor.
+
+    Arguments:
+        col (Series): DataFrame Column of dtype int
+        **kwargs (dict): Dict with key 'scaling_factor' and value type int
+
+    Returns:
+        res (Series): DataFrame column values mulitplied by scaling_factor.
     """
     res = col
     if col not in [None, np.NAN]:
         if col.isdigit():
-            res = int(col) * 1000
+            res = int(col) * kwargs["scaling_factor"]
     return res
 
 
-def clean_txt_file(df):
+def clean_txt_file(df: pd.DataFrame,
+                   scaling_factor_txt_file: int) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a txt file format.
     Also, Performs transformations on the data.
+
+    Arguments:
+        df (DataFrame) : DataFrame of txt dataset
+        scaling_factor_txt_file (int) : Scaling factor for text file
+
+    Returns:
+        df (DataFrame) : Transformed DataFrame for txt dataset.
     """
 
     df['Year and Month'] = df[['Year and Month', 'Date']]\
-                                    .apply(sum_cols, axis=1)
+                                    .apply(_sum_cols, axis=1)
     df.drop(columns=['Date'], inplace=True)
     for col in df.columns:
         df[col] = df[col].str.replace(",", "")
@@ -104,50 +152,37 @@ def clean_txt_file(df):
     df.iloc[idx, civilian_noninstitutionalized_population] = np.NAN
 
     #Multiplying the data with scaling factor 1000.
-    scaling_factor = 1000
     for col in df.columns:
         if "year" not in col.lower():
-            if scaling_factor != 1:
-                df[col] = df[col].apply(mulitply)
+            if scaling_factor_txt_file != 1:
+                df[col] = df[col].apply(_mulitply,
+                                        scaling_factor=scaling_factor_txt_file)
     return df
 
 
-def download():
+def download(download_path: str, file_urls: list) -> None:
     """
     This method iterates on each url and calls the above defined
     functions to download and clean the data.
-    """
 
-    download_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "input_data"
+    Arguments:
+        download_path (str) : Local Path to download datasets from URLS
+        file_urls (list) : List of dataset URLS.
+
+    Returns:
+        df (DataFrame) : Transformed DataFrame for txt dataset.
+    """
     if not os.path.exists(download_path):
         os.mkdir(download_path)
-    for url in FILE_URLS:
-        save_data(url, download_path)
+    for url in file_urls:
+        _save_data(url, download_path)
+
+
+def main(_):
+    file_urls = FLAGS.url
+    path = os.path.dirname(os.path.abspath(__file__)) + os.sep + "input_data"
+    download(path, file_urls)
 
 
 if __name__ == "__main__":
-    #Initialize parser
-    parser = argparse.ArgumentParser()
-    #Adding optional argument
-    default_urls_file = os.path.dirname(os.path.abspath(__file__))\
-                        + os.sep + "file_urls.json"
-    parser.add_argument("-f",
-                        "--file_urls",
-                        default=default_urls_file,
-                        help="Json file with Dataset URLS")
-
-    # Read arguments from command line
-    args = parser.parse_args()
-    urls_file = args.file_urls
-
-    #Loading urls config file
-    urls = None
-    with open(urls_file, encoding="UTF-8") as file:
-        urls = file.read()
-
-    #Loading json string and extracting urls.
-    urls = json.loads(urls)
-    FILE_URLS = urls['new_urls']
-
-    download()
+    app.run(main)
