@@ -23,7 +23,7 @@ from .brfss_asthma_import import process_brfss_asthma
 
 class ProcessTest(unittest.TestCase):
 
-    def test_e2e(self):
+    def test_brfss_asthma_extracted_data(self):
         self.maxDiff = None
         base_path = os.path.dirname(__file__)
         base_path = os.path.join(base_path, './data/test_data')
