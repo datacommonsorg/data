@@ -18,7 +18,9 @@ to ID scheme only retains the alphanumeric characters and removes all others. As
 as example, names "Abc & Xyz Co. LLC " and "Abc & Xyz Co., LLC" would both get
 converted to "dcid:EpaParentCompany/AbcAndXyzCoLLC". Note that the "&" gets
 converted to "And". Similarly, "U.S.", "U. S." and "United States" all get
-mapped to "US".
+mapped to "US". We also perform some name to ID resolution to avoid
+duplicates. They algorithm used for this resolution can be found under the
+docs/ folder ([Data Commons Import] Mapping Company Names to Resolved IDs.pdf).
 
 We use the existing epaGhgrpFacility Ids which already exist in Data Commons to
 create an ownership mapping (EpaOrganizationOwnership) between the facility and
@@ -79,7 +81,8 @@ percentage and if no percentage is provided it is assumed to be 100.
     in values in consecutive years. These happen because either the underlying
     facility SVObs also have those jumps, e.g. https://datacommons.org/browser/epaGhgrpFacilityId/1001678
     or because there are are some company names which could not be resolved to
-    the same unique (despite correcting for the obvious cases in pre_process.py).
+    the same unique (despite correcting for the obvious cases in pre_process.py). For exact details about the name to ID resolution algorithm
+    used, please see the pdf doc under the docs/ folder ([Data Commons Import] Mapping Company Names to Resolved IDs.pdf).
 
     The warnings produced for data holes are expected because we only produce
     stat var observation for the companies in a year where a relationship exists
