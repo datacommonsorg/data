@@ -34,6 +34,15 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../../../../util/'))  # for statvar_dcid_generator
 from statvar_dcid_generator import get_statvar_dcid
 
+FLAGS = flags.FLAGS
+flags.DEFINE_string('site_contamination_input_path', './data',
+                        'Path to the directory with input files')
+flags.DEFINE_string('contaminant_csv', './data',
+                        'Path to the contaminant.csv file')
+flags.DEFINE_string(
+        'site_contamination_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 _TEMPLATE_MCF = """
 Node: E:SuperfundSite->E0
 typeOf: dcs:StatVarObservation
@@ -54,14 +63,14 @@ _COL_NAME_MAP = {
 def make_contamination_svobs(df: pd.DataFrame,
                              output_path: str) -> pd.DataFrame:
     """
-    Function makes SVObs of contaminated medium at the site concatenated with '&' as the observed value.
+    Function makes SVObs of contaminated medium at the site concatenated with '__' as the observed value.
     """
     df = df.drop_duplicates()
     # there are some rows where contaminatedThing is nan, which we drop
     df = df.dropna()
     df['Media'] = df['Media'].apply(lambda x: _CONTAMINATED_THING_DCID_MAP[x])
     df = df.groupby(['EPA ID', 'Actual Completion Date'],
-                    as_index=False)['Media'].apply('&'.join).reset_index()
+                    as_index=False)['Media'].apply('__'.join).reset_index()
     # NOTE: The following check is put in place to resolve pandas version issues that affects the returning dataframe of the `groupby` method. Without this check, the tests in cloud-build where the container uses Python3.7 with pandas==1.0.4 replaces the columns after group by with 0-based indices. In this case, the column name `Media` is replaced as 0. Whereas in pandas==1.3.4 in Python3.9 environment the column name is preserved after groupby.
     if 'Media' not in df.columns and 0 in df.columns:
         df.columns = ['EPA ID', 'Actual Completion Date', 'Media']
@@ -86,6 +95,7 @@ def make_contamination_svobs(df: pd.DataFrame,
     node_str = f"Node: dcid:ContaminatedThing_SuperfundSite\n"
     node_str += "typeOf: dcs:StatisticalVariable\n"
     node_str += "populationType: dcs:SuperfundSite\n"
+    node_str += "name: \"Lists all the contaminanted media at a superfund site\"\n"
     node_str += "statType: dcs:measurementResult\n"
     node_str += "measuredProperty: dcs:contaminatedThing\n\n"
     f.write(node_str)
@@ -118,6 +128,7 @@ def write_sv_to_file(row, contaminant_df, file_obj):
         node_str = f"Node: dcid:{dcid_str}\n"
         node_str += "typeOf: dcs:StatisticalVariable\n"
         node_str += "populationType: dcs:SuperfundSite\n"
+        node_str += f"name: \"Is the {contminated_thing} contaminated with {contaminated_series['dcid'] }? A Boolean observation is expected. \"\n"
         node_str += "statType: dcs:measurementResult\n"
         node_str += f"contaminant: dcs:{contaminant_series['dcid']}\n"
         node_str += f"contaminatedThing: dcs:{contaminated_thing}\n"
@@ -210,17 +221,9 @@ def process_site_contamination(input_path: str, contaminant_csv_path: str,
 
 
 def main(_) -> None:
-    FLAGS = flags.FLAGS
-    flags.DEFINE_string('input_path', './data',
-                        'Path to the directory with input files')
-    flags.DEFINE_string('contaminant_csv', './data',
-                        'Path to the contaminant.csv file')
-    flags.DEFINE_string(
-        'output_path', './data/output',
-        'Path to the directory where generated files are to be stored.')
-    site_count = process_site_contamination(FLAGS.input_path,
+    site_count = process_site_contamination(FLAGS.site_contamination_input_path,
                                             FLAGS.contaminant_csv,
-                                            FLAGS.output_path)
+                                            FLAGS.site_contamination_output_path)
     print(f"Processing of {site_count} superfund sites is complete.")
 
 

@@ -1,6 +1,3 @@
-observationAbout,observationDate,variableMeasured,value
-epaSuperfundSiteId/MAD001026319,2000-03-10,dcs:ContaminatedThing_SuperfundSite,dcs:GroundWater&EPA_OtherContaminatedThing&Sediment&Soil
-epaSuperfundSiteId/MAD001026319,2000-03-10,IsContaminated_Chromium_GroundWater,True
-epaSuperfundSiteId/MAD001026319,2000-03-10,IsContaminated_Chromium_EPAOtherContaminatedThing,True
-epaSuperfundSiteId/MAD001026319,2000-03-10,IsContaminated_Chromium_Sediment,True
-epaSuperfundSiteId/MAD001026319,2000-03-10,IsContaminated_Chromium_Soil,True
+version https://git-lfs.github.com/spec/v1
+oid sha256:8f907bc32d957d0c2b8d9b37eb183e329b926508b11c3476204945488e479639
+size 534
