@@ -36,7 +36,7 @@ This file can be downloaded with the [direct link](https://semspub.epa.gov/work/
 
     > using the argument `--help` with any of the above commands lists the different command line arguments that is expected.
     
-The `fundingStatus` dataset requires a StatisticalVariable definition, which is found in the [statvar.mcf](statvar.mcf) file.
+The `fundingStatus` dataset requires a StatisticalVariable definition, which is found in the [statvar.mcf](statvar.mcf) file. We use a static statistical variable defintion since there is only one statistical variable that is measured in the observation.
 
 #### Notes
 1. There is another [EPA Superfund Applet](https://epa.maps.arcgis.com/apps/mapviewer/index.html?layers=c2b7cdff579c41bbba4898400aa38815) that lists more superfund sites but we had difficulties finding a means to export this data to csv.
