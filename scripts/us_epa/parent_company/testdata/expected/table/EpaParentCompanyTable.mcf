@@ -1,0 +1,11 @@
+Node: dcid:EpaParentCompany
+subClassOf: dcs:Organization
+name: EpaParentCompany
+typeOf: schema:Class
+
+
+Node: dcid:locatedIn
+typeOf: schema:Property
+domainIncludes: schema:Place
+rangeIncludes: schema:Place
+name: locatedIn
