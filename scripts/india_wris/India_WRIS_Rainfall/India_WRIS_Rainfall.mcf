@@ -1,0 +1,26 @@
+Node: dcid:rainfallAverage
+name: "Rainfall Average"
+typeOf: schema:Property
+domainIncludes: schema:Place
+rangeIncludes: dcs:Quantity
+measuredProperty: dcs:rainfall
+statType: dcs:meanValue
+measurementQualifier: Monthly
+description: "Average (or normal) rainfall measurement in a place"
+
+Node: dcid:rainfall
+name: "rainfall"
+typeOf: schema:Property
+domainIncludes: schema:Place
+rangeIncludes: dcs:Quantity
+statType: measuredValue
+measurementQualifier: Monthly
+description: "“"Actual rainfall measurement in a place at that time period"
+
+Node: dcid:rainfallDeviation
+typeOf: dcs:StatisticalVariable
+typeOf: schema:Property
+domainIncludes: schema:Place
+rangeIncludes: dcs:Quantity
+measurementQualifier: Monthly
+description: "Percentage change in rainfall between rainfall and rainfallAverage"
