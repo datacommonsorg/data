@@ -36,7 +36,7 @@ class ProcessTest(unittest.TestCase):
         ## validate the csvs
         test_df = pd.read_csv(os.path.join(base_path, 'brfss_asthma.csv'))
         expected_df = pd.read_csv(
-            os.path.join(base_path, 'brfss_asthma_expected.csv'))
+            os.path.join(base_path, 'brfss_asthma_expected.txt'))
         assert_frame_equal(test_df, expected_df)
 
         # clean up
