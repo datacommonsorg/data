@@ -54,7 +54,7 @@ unit: C:SubjectTable->unit
 _SV_MCF = """Node: dcid:StandardError_Person_Children_WithAsthma
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-name: "Standard Error observed in the Prevalence of Asthma in Children"
+name: "Standard error, Prevalance of Asthma in Children"
 measuredProperty: dcs:count
 statType: dcs:stdError
 age: [- 18 Years]
@@ -64,7 +64,7 @@ measurementDenominator: dcs:Count_Person_Upto18Years
 Node: dcid:Percent_Person_Children_WithAsthma
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-name: "Prevalence of Asthma in Children"
+name: "Prevalence: Asthma in Children"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 age: [- 18 Years]
@@ -74,7 +74,7 @@ measurementDenominator: dcs:Count_Person_Upto18Years
 Node: dcid:StandardError_Person_Adults_WithAsthma
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-name:  "Standard Error observed in the Prevalence of Asthma in Adults"
+name: "Standard error, Prevalance of Asthma in Adults"
 measuredProperty: dcs:count
 statType: dcs:stdError
 age: [18 - Years]
