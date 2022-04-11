@@ -57,7 +57,7 @@
             "populationType": "CriminalIncidents",
             "isHateCrime": "True",
             "measurementQualifier": "Offense",
-            "victimType": "UCR_OtherVictimType&UCR_UnknownVictimType&MultipleVictimType",
+            "victimType": "UCR_OtherVictimType__UCR_UnknownVictimType__MultipleVictimType",
             "statType": "measuredValue",
             "measuredProperty": "count",
             "typeOf": "StatisticalVariable"

@@ -86,7 +86,7 @@
             "locationOfCrime": "AbandonedOrCondemnedStructure"
         },
         "air/bus/train terminal": {
-            "locationOfCrime": "Airport&BusStation&TrainStation"
+            "locationOfCrime": "Airport__BusStation__TrainStation"
         },
         "amusement park": {
             "locationOfCrime": "AmusementPark"
@@ -101,7 +101,7 @@
             "locationOfCrime": "BankOrSavingsAndLoan"
         },
         "bar/nightclub": {
-            "locationOfCrime": "BarOrPub&NightClub"
+            "locationOfCrime": "BarOrPub__NightClub"
         },
         "camp/campground": {
             "locationOfCrime": "Campground"
@@ -155,7 +155,7 @@
             "locationOfCrime": "GovernmentOrPublicBuilding"
         },
         "grocery/supermarket": {
-            "locationOfCrime": "GroceryStore&Supermarket"
+            "locationOfCrime": "GroceryStore__Supermarket"
         },
         "highway/road/alley/street/sidewalk": {
             "locationOfCrime": "HighwayOrRoadOrAlleyOrStreetOrSidewalk"
@@ -176,10 +176,10 @@
             "locationOfCrime": "Prisons"
         },
         "lake/waterway/beach": {
-            "locationOfCrime": "BodyOfWater&Beach"
+            "locationOfCrime": "BodyOfWater__Beach"
         },
         "lake/waterway": {
-            "locationOfCrime": "BodyOfWater&Beach"
+            "locationOfCrime": "BodyOfWater__Beach"
         },
         "liquor store": {
             "locationOfCrime": "LiquorStore"
@@ -188,7 +188,7 @@
             "locationOfCrime": "MilitaryInstallation"
         },
         "park/playground": {
-            "locationOfCrime": "Park&Playground"
+            "locationOfCrime": "Park__Playground"
         },
         "parking/drop lot/garage": {
             "locationOfCrime": "ParkingFacility"
@@ -209,7 +209,7 @@
             "locationOfCrime": "Restaurant"
         },
         "school/college": {
-            "locationOfCrime": "School&CollegeOrUniversity"
+            "locationOfCrime": "School__CollegeOrUniversity"
         },
         "school-college/university": {
             "locationOfCrime": "CollegeOrUniversity"
@@ -218,10 +218,10 @@
             "locationOfCrime": "CollegeOrUniversity"
         },
         "school-elementary/secondary": {
-            "locationOfCrime": "ElementarySchool&HighSchool"
+            "locationOfCrime": "ElementarySchool__HighSchool"
         },
         "school—elementary/secondary": {
-            "locationOfCrime": "ElementarySchool&HighSchool"
+            "locationOfCrime": "ElementarySchool__HighSchool"
         },
         "service/gas station": {
             "locationOfCrime": "GasStation"

@@ -50,7 +50,7 @@
         "other/unknown/multiple": {
             "populationType": "CriminalIncidents",
             "isHateCrime": "True",
-            "victimType": "UCR_OtherVictimType&UCR_UnknownVictimType&MultipleVictimType",
+            "victimType": "UCR_OtherVictimType__UCR_UnknownVictimType__MultipleVictimType",
             "statType": "measuredValue",
             "measuredProperty": "count",
             "typeOf": "StatisticalVariable"
