@@ -42,7 +42,7 @@ flags.DEFINE_string('outputdir_path', default_output_path,
 _TEMPLATE_MCF = """
 Node: E:SubjectTable->E0
 typeOf: dcs:StatVarObservation
-measurementMethod: dcs:Aggregate_NCHS013_BRFSS2016To2018
+measurementMethod: dcs:Aggregate_NCHS2013_BRFSS2016To2018
 observationAbout: C:SubjectTable->observationAbout
 observationDate: C:SubjectTable->observationDate
 variableMeasured: C:SubjectTable->variableMeasured
