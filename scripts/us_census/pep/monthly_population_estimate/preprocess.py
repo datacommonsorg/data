@@ -34,7 +34,7 @@ default_input_path = os.path.dirname(
 
 if ("ip_path" in sys.argv and len(sys.argv) > 2):
     default_input_path = sys.argv[2]
-flags.DEFINE_string("input_path", default_input_path, "Import Data URL's List")
+flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
 def _extract_year(val: str) -> tuple:
@@ -51,6 +51,8 @@ def _extract_year(val: str) -> tuple:
     val = str(val).strip().split(' ', maxsplit=1)[0]
     if val.isnumeric() and len(val) == 4:
         return True, val
+    if val.isnumeric() and len(val) == 5:
+        return True, val[:4]
     return False, None
 
 
@@ -125,6 +127,31 @@ def _year_range(col: pd.Series) -> str:
     return year_range
 
 
+def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    This method cleans the dataframe loaded from a csv file format.
+    Also, Performs transformations on the data.
+
+    Arguments:
+        df (DataFrame) : DataFrame of csv dataset
+
+    Returns:
+        df (DataFrame) : Transformed DataFrame for txt dataset.
+    """
+    idx = df[df[0] == "Year and Month"].index
+    df = df.iloc[idx.values[0] + 1:][:]
+    df = df.dropna(axis=1, how='all')
+    cols = [
+        "Year and Month", "Resident Population",
+        "Resident Population Plus Armed Forces Overseas", "Civilian Population",
+        "Civilian NonInstitutionalized Population"
+    ]
+    df.columns = cols
+    for col in df.columns:
+        df[col] = df[col].str.replace(",", "")
+    return df
+
+
 class CensusUSACountryPopulation:
     """
     CensusUSACountryPopulation class provides methods
@@ -159,6 +186,10 @@ class CensusUSACountryPopulation:
         self.file_name = os.path.basename(file)
         if ".xls" in file:
             df = pd.read_excel(file)
+        elif ".csv" in file:
+            file_name = file_name.replace(".csv", ".xlsx")
+            df = pd.read_csv(file, header=None)
+            df = _clean_csv_file(df)
 
         elif ".txt" in file:
             skip_rows_txt = 17

@@ -33,7 +33,7 @@ with open(URLS_JSON_PATH, encoding="UTF-8") as file:
 # Flag names are globally defined!  So in general, we need to be
 # careful to pick names that are unlikely to be used by other libraries.
 # If there is a conflict, we'll get an error at import time.
-flags.DEFINE_list("url", URLS_JSON["new_urls"], "Import Data URL's List")
+flags.DEFINE_list("url", URLS_JSON["urls"], "Import Data URL's List")
 
 HEADER = 1
 SKIP_ROWS = 1
@@ -60,6 +60,13 @@ def _save_data(url: str, download_local_path: str) -> None:
                     index=False,
                     header=False,
                     engine='xlsxwriter')
+    elif ".csv" in url:
+        file_name = file_name.replace(".csv", ".xlsx")
+        df = pd.read_csv(url, header=None)
+        df = _clean_csv_file(df)
+        df.to_excel(download_local_path + os.sep + file_name,
+                    index=False,
+                    engine='xlsxwriter')
     elif ".txt" in url:
         file_name = file_name.replace(".txt", ".xlsx")
         cols = [
@@ -73,7 +80,7 @@ def _save_data(url: str, download_local_path: str) -> None:
                            engine='python',
                            skiprows=17,
                            names=cols)
-        df = clean_txt_file(df, SCALING_FACTOR_TXT_FILE)
+        df = _clean_txt_file(df, SCALING_FACTOR_TXT_FILE)
         df.to_excel(download_local_path + os.sep + file_name,
                     index=False,
                     engine='xlsxwriter')
@@ -116,8 +123,33 @@ def _mulitply(col: pd.Series, **kwargs: dict) -> pd.Series:
     return res
 
 
-def clean_txt_file(df: pd.DataFrame,
-                   scaling_factor_txt_file: int) -> pd.DataFrame:
+def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    This method cleans the dataframe loaded from a csv file format.
+    Also, Performs transformations on the data.
+
+    Arguments:
+        df (DataFrame) : DataFrame of csv dataset
+
+    Returns:
+        df (DataFrame) : Transformed DataFrame for txt dataset.
+    """
+    idx = df[df[0] == "Year and Month"].index
+    df = df.iloc[idx.values[0] + 1:][:]
+    df = df.dropna(axis=1, how='all')
+    cols = [
+        "Year and Month", "Resident Population",
+        "Resident Population Plus Armed Forces Overseas", "Civilian Population",
+        "Civilian NonInstitutionalized Population"
+    ]
+    df.columns = cols
+    for col in df.columns:
+        df[col] = df[col].str.replace(",", "")
+    return df
+
+
+def _clean_txt_file(df: pd.DataFrame,
+                    scaling_factor_txt_file: int) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a txt file format.
     Also, Performs transformations on the data.
@@ -160,7 +192,7 @@ def clean_txt_file(df: pd.DataFrame,
     return df
 
 
-def download(download_path: str, file_urls: list) -> None:
+def _download(download_path: str, file_urls: list) -> None:
     """
     This method iterates on each url and calls the above defined
     functions to download and clean the data.
@@ -181,7 +213,7 @@ def download(download_path: str, file_urls: list) -> None:
 def main(_):
     file_urls = FLAGS.url
     path = os.path.dirname(os.path.abspath(__file__)) + os.sep + "input_data"
-    download(path, file_urls)
+    _download(path, file_urls)
 
 
 if __name__ == "__main__":
