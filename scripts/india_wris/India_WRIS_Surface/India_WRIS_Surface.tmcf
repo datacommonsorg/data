@@ -250,7 +250,7 @@ observationDate: C:India_WRIS_Surface->Month
 observationAbout: E:India_WRIS_Surface->E0
 containedIn: E:India_WRIS_Surface->E1
 observationPeriod: "P1M"
-variableMeasured: dcid:SodiumAbsorptionRatio_BodyOfWater_SurfaceWater
+variableMeasured: dcid:SodiumAdsorptionRatio_BodyOfWater_SurfaceWater
 value: C:India_WRIS_Surface->"Sodium absorption ratio (SAR)"
 
 Node: E:India_WRIS_Surface->E27

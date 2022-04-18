@@ -89,9 +89,9 @@
             },
             {
                 "name": "Sodium absorption ratio (SAR)",
-                "statvar": "SodiumAbsorptionRatio",
+                "statvar": "SodiumAdsorptionRatio",
                 "unit": "",
-                "dcid": "sodiumAbsorptionRatio"
+                "dcid": "sodiumAdsorptionRatio"
             },
             {
                 "name": "Hardness Total",

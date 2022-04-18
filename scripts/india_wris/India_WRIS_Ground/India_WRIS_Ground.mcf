@@ -156,12 +156,12 @@ measuredProperty: dcs:residualSodiumCarbonate
 measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 
-Node: dcid:SodiumAbsorptionRatio_BodyOfWater_GroundWater
-name: SodiumAbsorptionRatio, Ground Water
+Node: dcid:SodiumAdsorptionRatio_BodyOfWater_GroundWater
+name: SodiumAdsorptionRatio, Ground Water
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:GroundWater
-measuredProperty: dcs:sodiumAbsorptionRatio
+measuredProperty: dcs:sodiumAdsorptionRatio
 measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 
