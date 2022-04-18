@@ -168,7 +168,7 @@ observationAbout: E:India_WRIS_Ground->E0
 containedIn: E:India_WRIS_Ground->E1
 observationPeriod: "P1Y"
 variableMeasured: dcid:SodiumAdsorptionRatio_BodyOfWater_GroundWater
-value: C:India_WRIS_Ground->"Sodium absorption ratio (SAR)"
+value: C:India_WRIS_Ground->"Sodium adsorption ratio (SAR)"
 
 Node: E:India_WRIS_Ground->E19
 typeOf: dcid:StatVarObservation

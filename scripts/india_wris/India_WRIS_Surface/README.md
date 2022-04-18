@@ -28,7 +28,7 @@ The quality parameters represented in this dataset are:
 - Total Hardness
 - Total Alkalinity
 - Residual Sodium Carbonate
-- Sodium absorption ratio (SAR)
+- Sodium adsorption ratio (SAR)
 - Total Dissolved Solids
 - Potential of Hydrogen (pH)
 

@@ -133,7 +133,7 @@
                 "dcid": "residualSodiumCarbonate"
             },
             {
-                "name": "Sodium absorption ratio (SAR)",
+                "name": "Sodium adsorption ratio (SAR)",
                 "statvar": "SodiumAdsorptionRatio",
                 "unit": "",
                 "dcid": "sodiumAdsorptionRatio"
