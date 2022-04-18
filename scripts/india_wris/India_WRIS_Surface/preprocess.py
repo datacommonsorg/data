@@ -26,7 +26,7 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:{variable}
 measuredProperty: dcs:concentration
-measurementMethod: dcs:WRIS_India
+measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 
 """
@@ -37,7 +37,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:{dcid}
-measurementMethod: dcs:WRIS_India
+measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 
 """
