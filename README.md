@@ -15,8 +15,11 @@ Botanical Garden, Opportunity Insights, and more. However, Data Commons is meant
 to be for community, by the community. We're excited to work with you to make
 public data accessible to everyone.
 
-To see the extent of data we have today, browse the graph using our
-[browser](https://browser.datacommons.org/).
+To see the extent of data we have today, [browse the graph](https://datacommons.org/browser).
+
+We welcome contributions to the graph! To get started, take a look at the
+resources [in the docs directory](docs/) and the [list of pending
+imports](https://github.com/orgs/datacommonsorg/projects/10).
 
 ## License
 
@@ -49,7 +52,7 @@ example, this includes maps to and from common geographic identifiers.
 1. Fork this repo - follow the [Github guide to forking a repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
    - In https://github.com/datacommonsorg/data, click on "Fork" button to
    fork the repo.
-
+   - Add upstream: `git remote add upstream https://github.com/datacommonsorg/data.git`
    - Clone your forked repo to your desktop. Please do not directly clone
    this repo, verify by running `git remote -v`, the output should look like
    this:

@@ -1,0 +1,6 @@
+Node: dcid:SuperfundFundingStatus_SuperfundSite
+description: "This statistical variable tracks the date when a superfund site has a change in the NPL Status"
+measuredProperty: dcs:superfundFundingStatus
+populationType: dcs:SuperfundSite
+statType: dcs:measurementResult
+typeOf: dcs:StatisticalVariable

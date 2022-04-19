@@ -1,0 +1,39 @@
+{
+    "columnName":
+    [
+        "udise_state_code",
+        "udise_district_code",
+        "district_name"
+    ],
+    "rowValue":
+    [
+        {
+            "udise_state_code": "01",
+            "udise_district_code": "0102",
+            "district_name": "BARAMULA"
+        },
+        {
+            "udise_state_code": "23",
+            "udise_district_code": "2302",
+            "district_name": "MORENA"
+        }        
+    ],
+    "staticFilter": null,
+    "columnView": null,
+    "columnDataType": null,
+    "msData": null,
+    "status": "1",
+    "errorMessage": null,
+    "jsonString": null,
+    "yearList":
+    [
+        "2019-20",
+        "2018-19",
+        "2017-18",
+        "2016-17",
+        "2015-16",
+        "2014-15",
+        "2013-14",
+        "2012-13"
+    ]
+}

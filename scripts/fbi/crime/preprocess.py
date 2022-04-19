@@ -275,10 +275,6 @@ def _update_and_calculate_crime_csv(geo_codes, crime_csv, writer):
                 writer.writerow(processed_dict)
 
         # Output the cities not_found
-        with open('city_not_found.txt', 'w') as cities_not_found_f:
-            for s in cities_not_found_set:
-                cities_not_found_f.write('{}\n'.format(s))
-
         print('US src_cities = {}, cities_not_found = {}'.format(
             len(found_set), len(cities_not_found_set)))
 
