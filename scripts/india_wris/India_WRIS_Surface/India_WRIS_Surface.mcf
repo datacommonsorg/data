@@ -1,5 +1,5 @@
-Node: dcid:Concentration_Aluminium_BodyOfWater_SurfaceWater
-name: Concentration of Aluminium, SurfaceWater
+Node: dcid:Concentration_Aluminum_BodyOfWater_SurfaceWater
+name: Concentration of Aluminum, SurfaceWater
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
@@ -173,7 +173,7 @@ name: Concentration of SiliconDioxide, SurfaceWater
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
-contaminant: dcs:SiliconDioxide
+contaminant: dcs:Dioxosilane
 measuredProperty: dcs:concentration
 measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
@@ -193,7 +193,9 @@ name: DissolvedOxygen, Surface Water
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
-measuredProperty: dcs:dissolvedOxygen
+measuredProperty: dcs:concentration
+solute: dcs:Oxygen
+solvent: dcs:Water
 measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 

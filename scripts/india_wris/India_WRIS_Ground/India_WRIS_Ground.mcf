@@ -133,12 +133,12 @@ name: Concentration of SiliconDioxide, Ground Water
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 contaminatedThing: dcs:GroundWater
-contaminant: dcs:SiliconDioxide
+contaminant: dcs:Dioxosilane
 measuredProperty: dcs:concentration
 measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 
-Node: dcid:electricalConductivity_BodyOfWater_GroundWater
+Node: dcid:ElectricalConductivity_BodyOfWater_GroundWater
 name: electricalConductivity, Ground Water
 typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
