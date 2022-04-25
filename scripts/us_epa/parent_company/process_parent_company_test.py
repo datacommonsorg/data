@@ -16,8 +16,9 @@
 import os
 import tempfile
 import unittest
-from .process_parent_company import process
-from .process_parent_company import _COUNTERS
+from .process_parent_company import process_companies
+from .process_parent_company import process_svobs
+from .process_parent_company import _COUNTERS_COMPANIES
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _INPUT_DATA_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
@@ -26,6 +27,7 @@ _EXISTING_FACILITIES_FILENAME = 'existing_facilities'
 _EXPECTED_DIR = os.path.join(_CODEDIR, 'testdata', 'expected')
 _EXPECTED_OWNERSHIP_DIR = _EXPECTED_DIR + "/ownership"
 _EXPECTED_TABLE_DIR = _EXPECTED_DIR + "/table"
+_EXPECTED_SVOBS_DIR = _EXPECTED_DIR + "/svobs"
 
 # We have test-cases to cover all the different mapping scenarios.
 _EXPECTED_COUNTERS = {
@@ -49,8 +51,138 @@ _EXPECTED_COUNTERS = {
     # Company name: 'National Fuel Gas Company' and Facility Id: 1001829
     # do not have a Year.
     'year_does_not_exist':
-        set([('EpaParentCompany/NationalFuelGasCompany',
-              'epaGhgrpFacilityId/1001829')])
+        set([('EpaParentCompany/NationalFuelGasCo',
+              'epaGhgrpFacilityId/1001829')]),
+    # Company Ids replaced should have the Ids of companies where a resolution/
+    # replacement took place. In the test input file, these are the two
+    # companies noted below.
+    'company_ids_replaced':
+        set(['ChevronUsaInc', 'RandomCoName']),
+}
+
+# The relationships below are only for years 2016, 2017 and 2018. This means
+# that the SV Observations produced will only belong to these years. All other
+# years will be ignored.
+_FACILITY_COMPANY_OWNERSHIP = {
+    ("epaGhgrpFacilityId/1004962", '2016'): {
+        "EpaParentCompany/abc": 100.0,
+    },
+    ("epaGhgrpFacilityId/1004962", '2017'): {
+        "EpaParentCompany/abc": 90.0,
+        "EpaParentCompany/efg": 10.0
+    },
+    ("epaGhgrpFacilityId/1010899", '2016'): {
+        "EpaParentCompany/efg": 100.0,
+    },
+    ("epaGhgrpFacilityId/1010899", '2017'): {
+        "EpaParentCompany/abc": 75.0,
+        "EpaParentCompany/efg": 25.0
+    },
+    ("epaGhgrpFacilityId/1010899", '2018'): {
+        "EpaParentCompany/abc": 50.0,
+        "EpaParentCompany/efg": 50.0
+    },
+}
+
+_FACILITY_SVO_DICT = {
+    'epaGhgrpFacilityId/1004962': {
+        # The SVO series below is from an actual SVO on Data Commons.
+        # Date: 03/31/2021. See below for an easier to follow example with
+        # synthetically made up numbers.
+        'Annual_Emissions_Methane_NonBiogenic': {
+            'sourceSeries': [{
+                'val': {
+                    '2010': 312.75,
+                    '2016': 997,
+                    '2017': 975.5,
+                    '2019': 932,
+                    '2018': 966.75,
+                    '2013': 1138.5,
+                    '2015': 1029.25,
+                    '2014': 1097.75,
+                    '2011': 1144.25,
+                    '2012': 1100.5
+                },
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
+                'unit': 'MetricTonCO2e',
+                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
+            }]
+        },
+        # An easier to follow case. See below for the same SV corresponding to
+        # the second company.
+        'Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic': {
+            'sourceSeries': [{
+                'val': {
+                    '2010': 100,
+                    '2016': 100,  # 100% belongs to abc.
+                    '2015': 100,
+                    '2017': 100,  # 90% belongs to abc, 10% to efg.
+                    '2018': 100,
+                    '2013': 100,
+                    '2012': 100,
+                    '2019': 100,
+                    '2014': 100,
+                    '2011': 100,
+                },
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
+                'unit': 'MetricTonCO2e',
+                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
+            }]
+        },
+    },
+    'epaGhgrpFacilityId/1010899': {
+        # The SVO series below is from an actual SVO on Data Commons.
+        # Date: 03/31/2021. See below for an easier to follow example with
+        # synthetically made up numbers.
+        'Annual_Emissions_Methane_NonBiogenic': {
+            'sourceSeries': [{
+                'val': {
+                    '2014': 12,
+                    '2013': 12,
+                    '2016': 13,
+                    '2019': 13.75,
+                    '2018': 14.25,
+                    '2015': 12,
+                    '2017': 14.5
+                },
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
+                'unit': 'MetricTonCO2e',
+                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
+            }]
+        },
+        # Continuation of the easier to follow case.
+        'Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic': {
+            'sourceSeries': [{
+                'val': {
+                    '2010': 50,
+                    '2016': 50,  # 100% belongs to efg.
+                    '2015': 50,
+                    '2017': 50,  # 75% belongs to abc and 25% to efg.
+                    '2018': 50,  # 50% belongs to abc and 50% to efg.
+                    '2013': 50,
+                    '2012': 50,
+                    '2019': 50,
+                    '2014': 50,
+                    '2011': 50,
+                },
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
+                'unit': 'MetricTonCO2e',
+                'provenanceUrl': 'https://www.epa.gov/ghgreporting'
+            }]
+        },
+    }
 }
 
 
@@ -64,12 +196,12 @@ def compare_files(t, output_path, expected_path):
 
 class ProcessTest(unittest.TestCase):
 
-    def test_e2e(self):
+    def test_parent_companies_e2e(self):
         self.maxDiff = None
         with tempfile.TemporaryDirectory() as tmp_dir:
-            process(_INPUT_DATA_DIR, _EXISTING_FACILITIES_FILENAME, tmp_dir,
-                    tmp_dir)
-            self.assertEqual(_COUNTERS, _EXPECTED_COUNTERS)
+            process_companies(_INPUT_DATA_DIR, _EXISTING_FACILITIES_FILENAME,
+                              tmp_dir, tmp_dir)
+            self.assertEqual(_COUNTERS_COMPANIES, _EXPECTED_COUNTERS)
             for fname in [
                     'EpaParentCompanyTable.csv', 'EpaParentCompanyTable.tmcf',
                     'EpaParentCompanyTable.mcf'
@@ -84,6 +216,20 @@ class ProcessTest(unittest.TestCase):
             ]:
                 output_path = os.path.join(tmp_dir, fname)
                 expected_path = os.path.join(_EXPECTED_OWNERSHIP_DIR, fname)
+                compare_files(self, output_path, expected_path)
+
+    def test_svobs_e2e(self):
+        self.maxDiff = None
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            process_svobs(tmp_dir, _FACILITY_COMPANY_OWNERSHIP,
+                          _FACILITY_SVO_DICT)
+            for fname in [
+                    'SVObs.tmcf',
+                    'SVObs.csv',
+            ]:
+                output_path = os.path.join(tmp_dir, fname)
+                expected_path = os.path.join(_EXPECTED_SVOBS_DIR, fname)
                 compare_files(self, output_path, expected_path)
 
 
