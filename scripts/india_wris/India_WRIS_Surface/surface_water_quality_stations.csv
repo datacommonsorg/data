@@ -324,8 +324,8 @@ Telangana,Mancherial,Mancherial,18.85027778,79.44444444,684,india_wris/684_Manch
 Telangana,Nalgonda,Dameracherla,16.73916667,79.66972222,514,india_wris/514_Dameracherla,dcs:SurfaceWater
 Telangana,Nalgonda,Halia,16.79027778,79.33861111,514,india_wris/514_Halia,dcs:SurfaceWater
 Telangana,Nizamabad,Gandlapet,17.0,80.0,516,india_wris/516_Gandlapet,dcs:SurfaceWater
-Telangana,Warangal Rural,Perur,18.55,80.36666667,Warangal Rural,india_wris/Warangal_Rural_Perur,dcs:SurfaceWater
-Telangana,Warangal Rural,Sangam,17.6,80.81666667,Warangal Rural,india_wris/Warangal_Rural_Sangam,dcs:SurfaceWater
+Telangana,Warangal Rural,Perur,18.55,80.36666667,522,india_wris/522_Perur,dcs:SurfaceWater
+Telangana,Warangal Rural,Sangam,17.6,80.81666667,522,india_wris/522_Sangam,dcs:SurfaceWater
 The Dadra And Nagar Haveli And Daman And Diu,Daman,Pingalwada,20.41138889,72.83638889,463,india_wris/463_Pingalwada,dcs:SurfaceWater
 Tripura,Dhalai,Kamalpur Gds Site,24.18888889,91.83083333,269,india_wris/269_KamalpurGdsSite,dcs:SurfaceWater
 Tripura,Khowai,Khowai,24.07888889,91.59194444,652,india_wris/652_Khowai,dcs:SurfaceWater
@@ -437,4 +437,4 @@ West Bengal,Nadia,Hanskhali,23.35527778,88.60611111,320,india_wris/320_Hanskhali
 West Bengal,Purba Bardhaman,Kalna (Ebb),23.22472222,88.37416667,306,india_wris/306_KalnaEbb,dcs:SurfaceWater
 West Bengal,Purba Bardhaman,Kalna (Flow),23.22472222,88.37416667,306,india_wris/306_KalnaFlow,dcs:SurfaceWater
 West Bengal,Purba Bardhaman,Katwa,23.64861111,88.13888889,306,india_wris/306_Katwa,dcs:SurfaceWater
-West Bengal,Purulia,Muri,23.36666667,85.87527778,Purulia,india_wris/Purulia_Muri,dcs:SurfaceWater
+West Bengal,Purulia,Muri,23.36666667,85.87527778,321,india_wris/321_Muri,dcs:SurfaceWater
