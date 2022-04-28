@@ -45,6 +45,9 @@ specializationOf: dcid:WHO/g/%s
 
 
 def _str_to_id(s):
+    # ID is Title Case.
+    # ID has no spaces.
+    # ID only keeps alphanumeric chars.
     s = s.title()
     s = s.replace(" ", "")
     s = re.sub(r'\W+', '', s)
