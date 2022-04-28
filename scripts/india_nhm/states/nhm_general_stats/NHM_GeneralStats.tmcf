@@ -6,7 +6,7 @@ Node: E:NHM_GeneralStats->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_InPatient
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_GeneralStats->E0
+observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
 value: C:NHM_GeneralStats->Count_InPatient
@@ -15,7 +15,7 @@ Node: E:NHM_GeneralStats->E2
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_OutPatient
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_GeneralStats->E0
+observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
 value: C:NHM_GeneralStats->Count_OutPatient
@@ -24,7 +24,7 @@ Node: E:NHM_GeneralStats->E4
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_SurgicalProcedure_Major
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_GeneralStats->E0
+observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
 value: C:NHM_GeneralStats->Count_SurgicalProcedure_Major
@@ -33,7 +33,7 @@ Node: E:NHM_GeneralStats->E5
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_SurgicalProcedure_Minor
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_GeneralStats->E0
+observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
 value: C:NHM_GeneralStats->Count_SurgicalProcedure_Minor
@@ -42,7 +42,7 @@ Node: E:NHM_GeneralStats->E6
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_InPatient_Deceased_AsFractionOf_Count_InPatient
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_GeneralStats->E0
+observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
 value: C:NHM_GeneralStats->Count_InPatient_Deceased_AsFractionOf_Count_InPatient
@@ -51,7 +51,7 @@ Node: E:NHM_GeneralStats->E7
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_OutPatient_Ayush
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_GeneralStats->E0
+observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
 value: C:NHM_GeneralStats->Count_OutPatient_Ayush
