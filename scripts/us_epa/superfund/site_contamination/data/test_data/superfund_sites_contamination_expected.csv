@@ -1,0 +1,6 @@
+observationAbout,observationDate,variableMeasured,value
+epaSuperfundSiteId/MAD001026319,2000-03-10,dcs:ContaminatedThing_SuperfundSite,dcs:GroundWater&EPA_OtherContaminatedThing&Sediment&Soil
+epaSuperfundSiteId/MAD001026319,2000-03-10,IsContaminated_Chromium_GroundWater,True
+epaSuperfundSiteId/MAD001026319,2000-03-10,IsContaminated_Chromium_EPAOtherContaminatedThing,True
+epaSuperfundSiteId/MAD001026319,2000-03-10,IsContaminated_Chromium_Sediment,True
+epaSuperfundSiteId/MAD001026319,2000-03-10,IsContaminated_Chromium_Soil,True
