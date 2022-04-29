@@ -1,0 +1,75 @@
+Node: E:deepsolar->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Count_SolarInstallation_Residential
+observationDate: "2017"
+observationAbout: C:deepsolar->block_group_FIPS
+observationPeriod: "P1Y"
+value: C:deepsolar->num_of_installations_residential
+
+Node: E:deepsolar->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Count_SolarInstallation_Commercial
+observationDate: "2017"
+observationAbout: C:deepsolar->block_group_FIPS
+observationPeriod: "P1Y"
+value: C:deepsolar->num_of_installations_commercial
+
+Node: E:deepsolar->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Count_SolarInstallation_UtilityScale
+observationDate: "2017"
+observationAbout: C:deepsolar->block_group_FIPS
+observationPeriod: "P1Y"
+value: C:deepsolar->num_of_installations_utility_scale
+
+Node: E:deepsolar->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Count_SolarThermalInstallation_NonUtility
+observationDate: "2017"
+observationAbout: C:deepsolar->block_group_FIPS
+observationPeriod: "P1Y"
+value: C:deepsolar->num_of_installations_solar_heat
+
+Node: E:deepsolar->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Count_SolarInstallation
+observationDate: "2017"
+observationAbout: C:deepsolar->block_group_FIPS
+observationPeriod: "P1Y"
+value: C:deepsolar->num_of_installations
+
+Node: E:deepsolar->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Mean_CoverageArea_SolarInstallation_Residential
+observationDate: "2017"
+observationAbout: C:deepsolar->block_group_FIPS
+observationPeriod: "P1Y"
+value: C:deepsolar->avg_size_residential
+unit: dcs:SquareMeter
+
+Node: E:deepsolar->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Mean_CoverageArea_SolarInstallation_Commercial
+observationDate: "2017"
+observationAbout: C:deepsolar->block_group_FIPS
+observationPeriod: "P1Y"
+value: C:deepsolar->avg_size_commercial
+unit: dcs:SquareMeter
+
+Node: E:deepsolar->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Mean_CoverageArea_SolarInstallation_UtilityScale
+observationDate: "2017"
+observationAbout: C:deepsolar->block_group_FIPS
+observationPeriod: "P1Y"
+value: C:deepsolar->avg_size_utility_scale
+unit: dcs:SquareMeter
+
+Node: E:deepsolar->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Mean_CoverageArea_SolarThermalInstallation_NonUtility
+observationDate: "2017"
+observationAbout: C:deepsolar->block_group_FIPS
+observationPeriod: "P1Y"
+value: C:deepsolar->avg_size_solar_heat
+unit: dcs:SquareMeter

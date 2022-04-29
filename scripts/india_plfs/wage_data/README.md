@@ -7,6 +7,23 @@ Average wage/salary earnings (Rs. 0.00) during the preceding calendar month from
 
 ### Download Data
 
+#### PLES July 2019 - Jun 2020
+Wage data from PLES July 2019 - Jun 2020 is available as embedded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual_Report_PLFS_2019_20.pdf). Standard table format.
+
+* Page 381 has the data for July-Sep 2019 
+* Page 382 has the data for Oct-Dec 2019
+* Page 383 has the data for Jan-Mar 2020
+* Page 384 has the data for Apr-Jun 2020
+
+Extracted as CSV using [tabula](https://github.com/tabulapdf/tabula) by running the command
+
+```
+java -jar tabula-java.jar --lattice -a 26.836,136.812,514.097,628.283 -p 381 Annual_Report_PLFS_2019_20.pdf  -o Table_42_07_09_2019.csv
+java -jar tabula-java.jar --lattice  -a 26.836,136.812,514.097,628.283 -p 382 Annual_Report_PLFS_2019_20.pdf   -o Table_42_10_12_2019.csv
+java -jar tabula-java.jar --lattice -a 26.836,136.812,514.097,628.283 -p 383 Annual_Report_PLFS_2019_20.pdf   -o Table_42_01_03_2020.csv
+java -jar tabula-java.jar --lattice -a 26.836,136.812,514.097,628.283 -p 384 Annual_Report_PLFS_2019_20.pdf   -o Table_42_04_06_2020.csv
+```
+
 #### PLES July 2018 - June 2019
 Wage data from PLES July 2018 - June 2019 is available as [XLSX](http://mospi.nic.in/sites/default/files/reports_and_publication/PLFS_2018_19_Anual/Table_42.xlsx).
 
@@ -48,6 +65,7 @@ Average wage/salary earnings are per state and by quarter. There are three sets 
 **Notes from the data page:** 
 1. Reported earnings from regular wage/salaried employment
 2. The Current Weekly Status (CWS) approach to measuring uses seven days preceding the date of survey as the reference period. 
+3. Cell value zero(0) indicates no sample observation in the respective category
 
 
 

@@ -1,0 +1,9 @@
+observationAbout,variableMeasured,value,observationDate
+dcid:country/USA,dcid:Count_Person,281421906,2000
+dcid:country/USA,dcid:Count_Person_WhiteAlone,211460626,2000
+dcid:country/USA,dcid:Count_Person_BlackOrAfricanAmericanAlone,34658190,2000
+dcid:country/USA,dcid:Count_Person_AmericanIndianAndAlaskaNativeAlone,2475956,2000
+dcid:country/USA,dcid:Count_Person_AsianAlone,10242998,2000
+dcid:country/USA,dcid:Count_Person_NativeHawaiianAndOtherPacificIslanderAlone,398835,2000
+dcid:country/USA,dcid:Count_Person_SomeOtherRaceAlone,15359073,2000
+dcid:country/USA,dcid:Count_Person_HispanicOrLatino,35305818,2000

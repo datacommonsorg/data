@@ -15,8 +15,11 @@ Botanical Garden, Opportunity Insights, and more. However, Data Commons is meant
 to be for community, by the community. We're excited to work with you to make
 public data accessible to everyone.
 
-To see the extent of data we have today, browse the graph using our
-[browser](https://browser.datacommons.org/).
+To see the extent of data we have today, [browse the graph](https://datacommons.org/browser).
+
+We welcome contributions to the graph! To get started, take a look at the
+resources [in the docs directory](docs/) and the [list of pending
+imports](https://github.com/orgs/datacommonsorg/projects/10).
 
 ## License
 
@@ -49,7 +52,7 @@ example, this includes maps to and from common geographic identifiers.
 1. Fork this repo - follow the [Github guide to forking a repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo)
    - In https://github.com/datacommonsorg/data, click on "Fork" button to
    fork the repo.
-
+   - Add upstream: `git remote add upstream https://github.com/datacommonsorg/data.git`
    - Clone your forked repo to your desktop. Please do not directly clone
    this repo, verify by running `git remote -v`, the output should look like
    this:
@@ -112,6 +115,41 @@ source .env/bin/activate
 
 pip3 install -r requirements.txt
 ```
+
+##### Testing
+
+Scripts should be accompanied with tests using the [`unittest`
+framework](https://docs.python.org/3/library/unittest.html), and named with
+an `_test.py` suffix.
+
+A common test pattern is to drive your main processing function through some
+sample input files (e.g., with a few rows of the real csv/xls/etc.) and
+compare the produced output files (e.g., cleaned csv, mcf, tmcf) against
+expected ones.  An example test following this pattern is
+[here](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py).
+
+> **IMPORTANT:**  Please ensure that there is an `__init__.py` file in the
+directory of your import scripts, and every parent directory until
+`scripts/`.  This is necessary for the `unittest` framework to automatically
+discover and run your tests as part of presubmit.
+
+> **NOTE:** In the presence of `__init__.py`, you will need to adjust the way
+you import modules and run tests, as below.
+
+1. You should import modules in your test with a dotted prefix like
+   [this](https://github.com/datacommonsorg/data/blob/b868f558497783bba7a7f3ced9b918f1c0249290/scripts/us_epa/facility/process_facility_test.py#L8).
+
+2. Instead of running your test as `python3 foo_test.py`, run as:
+
+    `python3 -m unittest discover -v -s ../ -p "foo_test.py"`
+
+   Consider creating a generic alias like this:
+
+    - `alias dc-data-py-test='python3 -m unittest discover -v -s ../ -p "*_test.py"'`
+
+   Then, you can run your tests as:
+
+    - `dc-data-py-test`
 
 ##### Guidelines
 

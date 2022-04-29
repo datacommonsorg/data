@@ -22,7 +22,7 @@ python3 parse_precipitation_index_test.py input_file output_file
 
 import unittest
 import os
-from parse_precipitation_index import clean_precipitation_data
+from .parse_precipitation_index import clean_precipitation_data
 
 module_dir_ = os.path.dirname(__file__)
 

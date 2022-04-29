@@ -22,99 +22,68 @@ import pandas as pd
 import numpy as np
 import urllib.request
 from os import path
-
-INDIA_ISO_CODES = {
-    "Andhra Pradesh": "IN-AP",
-    "Arunachal Pradesh": "IN-AR",
-    "Assam": "IN-AS",
-    "Bihar": "IN-BR",
-    "Chattisgarh": "IN-CT",
-    "Chhattisgarh": "IN-CT",
-    "Goa": "IN-GA",
-    "Gujarat": "IN-GJ",
-    "Haryana": "IN-HR",
-    "Himachal Pradesh": "IN-HP",
-    "Jharkhand": "IN-JH",
-    "Jharkhand#": "IN-JH",
-    "Karnataka": "IN-KA",
-    "Kerala": "IN-KL",
-    "Madhya Pradesh": "IN-MP",
-    "Madhya Pradesh#": "IN-MP",
-    "Maharashtra": "IN-MH",
-    "Manipur": "IN-MN",
-    "Meghalaya": "IN-ML",
-    "Mizoram": "IN-MZ",
-    "Nagaland": "IN-NL",
-    "Nagaland#": "IN-NL",
-    "Odisha": "IN-OR",
-    "Punjab": "IN-PB",
-    "Rajasthan": "IN-RJ",
-    "Sikkim": "IN-SK",
-    "Tamil Nadu": "IN-TN",
-    "Tamilnadu": "IN-TN",
-    "Telengana": "IN-TG",
-    "Telangana": "IN-TG",
-    "Tripura": "IN-TR",
-    "Uttarakhand": "IN-UT",
-    "Uttar Pradesh": "IN-UP",
-    "West Bengal": "IN-WB",
-    "Andaman and Nicobar Islands": "IN-AN",
-    "Andaman & Nicobar Islands": "IN-AN",
-    "Andaman & N. Island": "IN-AN",
-    "A & N Islands": "IN-AN",
-    "Chandigarh": "IN-CH",
-    "Dadra and Nagar Haveli": "IN-DN",
-    "Dadra & Nagar Haveli": "IN-DN",
-    "Dadar Nagar Haveli": "IN-DN",
-    "Daman and Diu": "IN-DD",
-    "Daman & Diu": "IN-DD",
-    "Delhi": "IN-DL",
-    "Jammu and Kashmir": "IN-JK",
-    "Jammu & Kashmir": "IN-JK",
-    "Ladakh": "IN-LA",
-    "Lakshadweep": "IN-LD",
-    "Lakshwadeep": "IN-LD",
-    "Pondicherry": "IN-PY",
-    "Puducherry": "IN-PY",
-    "Puduchery": "IN-PY",
-    "Dadra and Nagar Haveli and Daman and Diu": "IN-DN_DD",
-    "Telangana": "IN-TG",
-    "all India": "IN",
-    "all-India": "IN",
-}
+from india.geo.states import IndiaStatesMapper
 
 DATASETS = [
     {
         "period": "2017-07",
-        "data_file": "Table_42_07_09_2017"
+        "data_file": "Table_42_07_09_2017.xlsx",
+        "data_rows": 37
     },
     {
         "period": "2017-10",
-        "data_file": "Table_42_10_12_2017"
+        "data_file": "Table_42_10_12_2017.xlsx",
+        "data_rows": 37
     },
     {
         "period": "2018-01",
-        "data_file": "Table_42_01_03_2018"
+        "data_file": "Table_42_01_03_2018.xlsx",
+        "data_rows": 37
     },
     {
         "period": "2018-04",
-        "data_file": "Table_42_04_06_2018"
+        "data_file": "Table_42_04_06_2018.xlsx",
+        "data_rows": 37
     },
     {
         "period": "2018-07",
-        "data_file": "Table_42_07_09_2018"
+        "data_file": "Table_42_07_09_2018.xlsx",
+        "data_rows": 37
     },
     {
         "period": "2018-10",
-        "data_file": "Table_42_10_12_2018"
+        "data_file": "Table_42_10_12_2018.xlsx",
+        "data_rows": 37
     },
     {
         "period": "2019-01",
-        "data_file": "Table_42_01_03_2019"
+        "data_file": "Table_42_01_03_2019.xlsx",
+        "data_rows": 37
     },
     {
         "period": "2019-04",
-        "data_file": "Table_42_04_06_2019"
+        "data_file": "Table_42_04_06_2019.xlsx",
+        "data_rows": 37
+    },
+    {
+        "period": "2019-07",
+        "data_file": "Table_42_07_09_2019.csv",
+        "data_rows": 38
+    },
+    {
+        "period": "2019-10",
+        "data_file": "Table_42_10_12_2019.csv",
+        "data_rows": 38
+    },
+    {
+        "period": "2020-01",
+        "data_file": "Table_42_01_03_2020.csv",
+        "data_rows": 38
+    },
+    {
+        "period": "2020-04",
+        "data_file": "Table_42_04_07_2020.csv",
+        "data_rows": 38
     },
 ]
 
@@ -134,22 +103,32 @@ class PLFSWageDataLoader:
         "wage_total_person",
     ]
 
-    def __init__(self, source, period):
+    def __init__(self, source, period, data_rows):
         self.source = source
         self.period = period
+        self.data_rows = data_rows
         self.raw_df = None
         self.clean_df = None
 
     def load(self):
-        df = pd.read_excel(self.source)
-        # Drop title rows in the top and  rows after 41.
-        # The actual data is between 4nd and 41st row. So keep only them.
-        df = df.iloc[4:41]
+        if self.source.endswith("xlsx"):
+            df = pd.read_excel(self.source)
+        else:
+            df = pd.read_csv(self.source)
+        # Drop title rows in the top and  rows after `data_rows`.
+        # The actual data is between 4nd and (4 + data_rows) row. So keep only them.
+        df = df.iloc[4:(4 + self.data_rows)]
+
+        # Cell value zero(0) indicates no sample observation
+        # in the respective category
+        df = df.replace(0, '')
+        df = df.replace("0", '')
+
         self.raw_df = df
 
     def _setup_location(self):
         self.clean_df["territory"] = self.clean_df["territory"].apply(
-            lambda x: INDIA_ISO_CODES[x])
+            IndiaStatesMapper.get_state_name_to_iso_code_mapping)
 
     def _make_column_numerical(self, column):
         self.clean_df[column] = self.clean_df[column].astype(str).str.replace(
@@ -201,11 +180,12 @@ def main():
     for dataset in DATASETS:
         period = dataset["period"]
         data_file = dataset["data_file"]
+        data_rows = dataset["data_rows"]
         data_file_path = os.path.join(
             os.path.dirname(__file__),
-            "data/{data_file}.xlsx".format(data_file=data_file),
+            "data/{data_file}".format(data_file=data_file),
         )
-        loader = PLFSWageDataLoader(data_file_path, period)
+        loader = PLFSWageDataLoader(data_file_path, period, data_rows)
         loader.load()
         loader.process()
         loader.save(csv_file_path)

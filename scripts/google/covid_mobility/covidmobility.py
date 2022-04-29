@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 from sys import path
 
-path.insert(1, '../../../')
+module_dir_ = os.path.dirname(os.path.realpath(__file__))
+path.insert(1, os.path.join(module_dir_, '../../../'))
 
 from os import remove, path as ospath
 from csv import DictReader
@@ -27,7 +30,7 @@ import util.county_to_dcid as county_to_dcid
 # Dictionary that maps a row name in the CSV file is mapped to a Schema place.
 # key = CSV's row name
 # value = Schema.org place
-from config import PLACE_CATEGORIES
+from .config import PLACE_CATEGORIES
 
 USSTATE_TO_ALPHA2 = name_to_alpha2.USSTATE_MAP
 COUNTRY_MAP = alpha2_to_dcid.COUNTRY_MAP

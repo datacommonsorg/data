@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "Admin2",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "ST_NM": "Ladakh" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 76.200766800381359, 33.775195129564452 ], [ 76.200766660000113, 33.775195290000056 ], [ 76.200766660000113, 33.77519544776186 ], [ 76.200766800381359, 33.775195129564452 ] ] ] } }
+]
+}
