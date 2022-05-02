@@ -60,6 +60,12 @@ class IndiaDistrictsMapper:
         if len(df_districts.index) == 1:
             return list(df_districts["LGDDistrictCode"])[0]
 
+        # Try match using closestDistrictLabel (Close Name Alternatives)
+        df_districts = df_districts_by_state.loc[
+            df_districts_by_state['closestDistrictLabel'] == district_name]
+        if len(df_districts.index) == 1:
+            return list(df_districts["LGDDistrictCode"])[0]
+
         # This shouldn't happen
         raise Exception("District name - {district_name} is not found".format(
             district_name=district_name))

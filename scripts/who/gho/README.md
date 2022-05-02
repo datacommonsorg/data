@@ -6,13 +6,14 @@ Author: chejennifer
 
 1. [About the Dataset](#about-the-dataset)
 1. [Import Procedure](#import-procedure)
+1. [Categories to StatVar Groups](#categories-to-svgroups)
 
 ## About the Dataset
 
 ### Overview
-This directory imports [WHO GHO Data](https://www.who.int/data/gho) into Data Commons. The WHO’s Global Health Observatory website provides access to data for over 2300 indicators and each indicator can be further broken down by 0-3 different dimension types. 
+This directory imports [WHO GHO Data](https://www.who.int/data/gho) into Data Commons. The WHO’s Global Health Observatory website provides access to data for over 2300 indicators and each indicator can be further broken down by 0-3 different dimension types.
 
-These indicators fall under a wide range of categories including: 
+These indicators fall under a wide range of categories including:
 - BMI, nutrition, health technologies, tobacco control. Child health, communicable diseases, mental health, immunization, violence prevention, STIs, health equity, health regulations, WASH (water, sanitation, and hygiene), violence against women, tropical diseases, public health and environment, dementia, women and health, resources for substance use disorders, world health statistics, HIV/AIDS, noncommunicable diseases, health workforce, global health estimates, antimicrobial resistance, malaria, air pollution, global information system on alcohol and health, health systems, maternal and reproductive health, universal health coverage, tuberculosis
 
 ### Notes and Caveats
@@ -43,3 +44,12 @@ These indicators fall under a wide range of categories including:
 ```
 python3 import_data.py --data_dir=<folder holding the raw data> --curated_dim_file=curated_dim_map.json
 ```
+
+## Categories To SVGroups
+We use the following url to extract the categories that each WHO-GHO indicator belongs to:
+https://www.who.int/data/gho/data/indicators
+
+There is no API access to this category mapping. Therefore, this mapping was extracted manually.
+Note that the mapping available at the url above is from a Main Category to a Sub Category to the
+Indicator Name. This is the same name being used as the StatVar name by the import procedure
+described above. 
