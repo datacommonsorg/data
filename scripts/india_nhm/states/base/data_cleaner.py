@@ -86,7 +86,7 @@ Node: E:{dataset_name}->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{statvar}
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:{dataset_name}->E0
+observationAbout: E:{dataset_name}->E0
 observationDate: C:{dataset_name}->Date
 observationPeriod: "P1Y"
 value: C:{dataset_name}->{statvar}
@@ -98,6 +98,7 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:{statvar}
 statType: dcs:measuredValue
+
 """
 
 
@@ -179,13 +180,13 @@ class NHMDataLoaderBase(object):
 
     def create_mcf_tmcf(self):
         """
-        Class method to generate MCF and TMCF files for the current dataset.
+        Class method to generate TMCF files for the current dataset.
+        MCF is written in Districts folder
         
         """
         tmcf_file = "{}.tmcf".format(self.dataset_name)
-        mcf_file = "{}.mcf".format(self.dataset_name)
 
-        with open(tmcf_file, 'w+') as tmcf, open(mcf_file, 'w+') as mcf:
+        with open(tmcf_file, 'w+') as tmcf:
             # Writing isoCODE entity
             tmcf.write(TMCF_ISOCODE.format(dataset_name=self.dataset_name))
 
@@ -201,10 +202,5 @@ class NHMDataLoaderBase(object):
                         TMCF_NODES.format(dataset_name=self.dataset_name,
                                           index=idx + 1,
                                           statvar=self.cols_dict[variable]))
-                    # Writing MCF
-                    mcf.write(
-                        MCF_NODES.format(
-                            statvar=self.cols_dict[variable],
-                            description=str(variable).capitalize()))
 
                     statvars_written.append(self.cols_dict[variable])

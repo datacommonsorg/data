@@ -1,8 +1,8 @@
-Node: dcid:Count_PregnantWomen_RegisteredForAntenatalCare
-description: "Total number of pregnant women registered for Antenatal Care"
+Node: dcid:Count_PregnancyEvent
+description: "Total number of pregnancies"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcid:Count_PregnantWomen_RegisteredForAntenatalCare
+measuredProperty: dcid:Count_PregnancyEvent
 statType: dcs:measuredValue
 
 Node: dcid:Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester

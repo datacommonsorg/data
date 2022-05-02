@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+os.chdir('../../../')
 
 from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
 from india_nhm.districts.base.readme_generator import ReadMeGen

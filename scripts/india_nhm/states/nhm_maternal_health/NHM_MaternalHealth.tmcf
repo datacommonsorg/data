@@ -6,7 +6,7 @@ Node: E:NHM_MaternalHealth->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_PregnancyEvent
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_MaternalHealth->E0
+observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
 value: C:NHM_MaternalHealth->Count_PregnancyEvent
@@ -15,7 +15,7 @@ Node: E:NHM_MaternalHealth->E2
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_PregnantWomen_RegisteredForAntenatalCare
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_MaternalHealth->E0
+observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
 value: C:NHM_MaternalHealth->Count_PregnantWomen_RegisteredForAntenatalCare
@@ -24,7 +24,7 @@ Node: E:NHM_MaternalHealth->E3
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_MaternalHealth->E0
+observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
 value: C:NHM_MaternalHealth->Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
@@ -33,7 +33,7 @@ Node: E:NHM_MaternalHealth->E4
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_ChildDeliveryEvent
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_MaternalHealth->E0
+observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
 value: C:NHM_MaternalHealth->Count_ChildDeliveryEvent
@@ -42,7 +42,7 @@ Node: E:NHM_MaternalHealth->E5
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_ChildDeliveryEvent_InAnInstitution
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_MaternalHealth->E0
+observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
 value: C:NHM_MaternalHealth->Count_ChildDeliveryEvent_InAnInstitution
@@ -51,7 +51,7 @@ Node: E:NHM_MaternalHealth->E6
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_ChildDeliveryEvent_InPublicInstitution
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_MaternalHealth->E0
+observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
 value: C:NHM_MaternalHealth->Count_ChildDeliveryEvent_InPublicInstitution
@@ -60,7 +60,7 @@ Node: E:NHM_MaternalHealth->E7
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_ChildDeliveryEvent_AtHome
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_MaternalHealth->E0
+observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
 value: C:NHM_MaternalHealth->Count_ChildDeliveryEvent_AtHome
@@ -69,7 +69,7 @@ Node: E:NHM_MaternalHealth->E8
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_ChildDeliveryEvent_AtHome_WithStandByAssist
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_MaternalHealth->E0
+observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
 value: C:NHM_MaternalHealth->Count_ChildDeliveryEvent_AtHome_WithStandByAssist
@@ -78,7 +78,7 @@ Node: E:NHM_MaternalHealth->E9
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
-observationAbout: C:NHM_MaternalHealth->E0
+observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
 value: C:NHM_MaternalHealth->Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
