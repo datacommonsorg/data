@@ -39,6 +39,46 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         expected_dcid = 'Median_Income_Person'
         self.assertEqual(dcid, expected_dcid)
 
+    def test_double_underscore(self):
+        statvar_dict1 = {
+            'typeOf': 'StatisticalVariable',
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'CriminalIncidents',
+            'locationOfCrime': 'Park__Playground',
+            'crimeType': 'UCR_OtherCrimeAgainstProperty'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict1)
+        expected_dcid = ('Count_CriminalIncidents_OtherCrimeAgainstProperty_'
+                         'LocationOfCrimeParkOrPlayground')
+        self.assertEqual(dcid, expected_dcid)
+
+        statvar_dict2 = {
+            'populationType': 'dcs:CriminalIncidents',
+            'measurementQualifier': 'dcs:Offense',
+            'victimType': 'dcs:UCR_OtherVictimType&UCR_UnknownVictimType',
+            'statType': 'dcs:measuredValue',
+            'measuredProperty': 'dcs:count',
+            'typeOf': 'dcs:StatisticalVariable'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict2)
+        expected_dcid = ('Offense_Count_CriminalIncidents_VictimType'
+                         'OtherVictimTypeOrUnknownVictimType')
+        self.assertEqual(dcid, expected_dcid)
+
+        statvar_dict1 = {
+            'typeOf': 'StatisticalVariable',
+            'statType': 'measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'CriminalIncidents',
+            'locationOfCrime': 'Park__Playground&NightClub',
+            'crimeType': 'UCR_OtherCrimeAgainstProperty'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict1)
+        expected_dcid = ('Count_CriminalIncidents_OtherCrimeAgainstProperty_'
+                         'LocationOfCrimeParkOrPlaygroundOrNightClub')
+        self.assertEqual(dcid, expected_dcid)
+
     def test_namespace_removal(self):
         statvar_dict = {
             'typeOf': 'StatisticalVariable',
