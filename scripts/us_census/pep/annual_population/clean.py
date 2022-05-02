@@ -469,9 +469,7 @@ def process_states_1990_1999(file_path: str) -> pd.DataFrame:
             for line in file.readlines():
                 if len(line.strip()) == 0:
                     continue
-                if line.startswith(
-                        "------"
-                ):
+                if line.startswith("------"):
                     flag = True
                     continue
                 if line.startswith("Documentation Notes"):

@@ -38,7 +38,7 @@ class TestPreprocess(unittest.TestCase):
     ip_data_path = [os.path.join(test_data_folder, "test_input_data.csv")]
 
     base = USCensusPEPAnnualPopulation(ip_data_path, cleaned_csv_file_path,
-                                      mcf_file_path, tmcf_file_path)
+                                       mcf_file_path, tmcf_file_path)
     base.process()
 
     def test_mcf_tmcf_files(self):
