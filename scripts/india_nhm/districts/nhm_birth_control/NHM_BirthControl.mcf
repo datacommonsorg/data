@@ -1,12 +1,12 @@
 Node: dcid:Count_BirthControlEvent_Vasectomy
-name: "Number of Vasectomies Conducted (Public and Private Institutions)"
+name: "Number of Vasectomies Conducted"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_BirthControlEvent_Vasectomy
 statType: dcs:measuredValue
 
 Node: dcid:Count_BirthControlEvent_Tubectomy
-name: "Number of Tubectomies Conducted (Public and Private Institutions)"
+name: "Number of Tubectomies Conducted"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_BirthControlEvent_Tubectomy
@@ -20,7 +20,7 @@ measuredProperty: dcid:Count_BirthControlEvent_Sterilisation
 statType: dcs:measuredValue
 
 Node: dcid:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
-name: "Percent of Male Sterlisation (Vasectomies) to Total sterilisation"
+name: "Percent of Male Vasectomies to Total Sterilisations"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
@@ -48,14 +48,14 @@ measuredProperty: dcid:Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_
 statType: dcs:measuredValue
 
 Node: dcid:Count_ContraceptiveDistribution_OralPill
-name: "Oral Pills distributed"
+name: "Number of distributed contraceptives (oral pills)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_ContraceptiveDistribution_OralPill
 statType: dcs:measuredValue
 
 Node: dcid:Count_ContraceptiveDistribution_Condom
-name: "Condom pieces distributed"
+name: "Number of distributed contraceptives (condoms)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_ContraceptiveDistribution_Condom

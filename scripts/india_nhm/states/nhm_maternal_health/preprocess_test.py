@@ -39,8 +39,8 @@ cols_to_nodes = {
         'Count_ChildDeliveryEvent_InPublicInstitution',
     'Number of Home deliveries':
         'Count_ChildDeliveryEvent_AtHome',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/Auxillary Nurse Midwife)':
+        'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist',
     '% Safe deliveries to Total Reported Deliveries':
         'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }

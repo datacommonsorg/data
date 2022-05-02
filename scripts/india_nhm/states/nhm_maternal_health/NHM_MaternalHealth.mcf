@@ -40,11 +40,11 @@ typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:Count_ChildDeliveryEvent_AtHome
 statType: dcs:measuredValue
-Node: dcid:Count_ChildDeliveryEvent_AtHome_WithStandByAssist
+Node: dcid:Count_ChildDeliveryEvent_AtHome_WithStandbyAssist
 name: "Number of home deliveries attended by sba trained (doctor/nurse/anm)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcs:Count_ChildDeliveryEvent_AtHome_WithStandByAssist
+measuredProperty: dcs:Count_ChildDeliveryEvent_AtHome_WithStandbyAssist
 statType: dcs:measuredValue
 Node: dcid:Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
 name: "% safe deliveries to total reported deliveries"

@@ -38,7 +38,7 @@ cols_to_nodes = {
     '% Inpatient Deaths to Total IPD':
         'Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient',
     'Ayush OPD (Number)':
-        'Count_Outpatient_Ayush',
+        'Count_Outpatient_AYUSH',
 }
 
 

@@ -40,11 +40,11 @@ populationType: schema:Person
 measuredProperty: dcid:Count_ChildDeliveryEvent_AtHome
 statType: dcs:measuredValue
 
-Node: dcid:Count_ChildDeliveryEvent_AtHome_WithStandByAssist
-name: "Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)"
+Node: dcid:Count_ChildDeliveryEvent_AtHome_WithStandbyAssist
+name: "Number of home deliveries attended by Standby Assist (Doctor/Nurse/Auxillary Nurse Midwife)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcid:Count_ChildDeliveryEvent_AtHome_WithStandByAssist
+measuredProperty: dcid:Count_ChildDeliveryEvent_AtHome_WithStandbyAssist
 statType: dcs:measuredValue
 
 Node: dcid:Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent

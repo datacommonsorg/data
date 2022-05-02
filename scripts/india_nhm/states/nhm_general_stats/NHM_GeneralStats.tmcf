@@ -44,8 +44,8 @@ value: C:NHM_GeneralStats->Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient
 
 Node: E:NHM_GeneralStats->E7
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Outpatient_Ayush
+variableMeasured: dcs:Count_Outpatient_AYUSH
 observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
-value: C:NHM_GeneralStats->Count_Outpatient_Ayush
+value: C:NHM_GeneralStats->Count_Outpatient_AYUSH

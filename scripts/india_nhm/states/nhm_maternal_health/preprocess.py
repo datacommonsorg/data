@@ -37,8 +37,8 @@ cols_to_nodes = {
         'Count_ChildDeliveryEvent_InPublicInstitution',
     'Number of Home deliveries':
         'Count_ChildDeliveryEvent_AtHome',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/Auxillary Nurse Midwife)':
+        'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist',
     '% Safe deliveries to Total Reported Deliveries':
         'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }
@@ -64,8 +64,8 @@ clean_names = {
         'Deliveries conducted at public institutions',
     'Number of Home deliveries':
         'Number of home deliveries',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)',
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/Auxillary Nurse Midwife)':
+        'Number of home deliveries attended by Standby Assist (Doctor/Nurse/Auxillary Nurse Midwife)',
     '% Safe deliveries to Total Reported Deliveries':
         'Percentage of safe deliveries to total reported deliveries'
 }

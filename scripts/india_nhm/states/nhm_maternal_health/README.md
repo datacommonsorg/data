@@ -29,7 +29,7 @@ The cleaned csv has the following columns:
 - Count_ChildDeliveryEvent_InAnInstitution: Institutional deliveries (includes public and private institutions)
 - Count_ChildDeliveryEvent_InPublicInstitution: Deliveries conducted at public institutions
 - Count_ChildDeliveryEvent_AtHome: Number of home deliveries
-- Count_ChildDeliveryEvent_AtHome_WithStandByAssist: Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)
+- Count_ChildDeliveryEvent_AtHome_WithStandbyAssist: Number of home deliveries attended by Standby Assist (Doctor/Nurse/Auxillary Nurse Midwife)
 - Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent: Percentage of safe deliveries to total reported deliveries
 
 #### TMCF

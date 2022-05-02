@@ -39,7 +39,7 @@ cols_to_nodes = {
     '% Inpatient Deaths to Total IPD':
         'Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient',
     'Ayush OPD (Number)':
-        'Count_Outpatient_Ayush',
+        'Count_Outpatient_AYUSH',
 }
 
 clean_names = {
@@ -50,19 +50,19 @@ clean_names = {
     'Date':
         'Date',
     'IPD (Number)':
-        'Number of In-Patients',
+        'Number of Inpatients',
     'OPD (Number)':
-        'Number of Out-Patients',
+        'Number of Outpatients',
     'OPD (Allopathic)':
-        'Number of Out-Patients',
+        'Number of Outpatients',
     'Number of Major Operations':
         'Number of Major Surgeries',
     'Number of Minor Operations':
         'Number of Minor Surgeries',
     '% Inpatient Deaths to Total IPD':
-        'Percent of In-patient Deaths to Total In-patients',
+        'Percent of Inpatient Deaths to Total Inpatients',
     'Ayush OPD (Number)':
-        'Number of Out-Patients (AYUSH)',
+        'Number of Outpatients (AYUSH)',
 }
 
 

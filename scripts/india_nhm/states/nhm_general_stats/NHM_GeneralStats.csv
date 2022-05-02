@@ -1,4 +1,4 @@
-State,isoCode,Date,Count_Inpatient,Count_Outpatient,Count_SurgicalProcedure_Major,Count_SurgicalProcedure_Minor,Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient,Count_Outpatient_Ayush
+State,isoCode,Date,Count_Inpatient,Count_Outpatient,Count_SurgicalProcedure_Major,Count_SurgicalProcedure_Minor,Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient,Count_Outpatient_AYUSH
 All India,IN,2018-03,75161065,1492876134,4334356,11499953,0.8,110660947
 A & N Islands,IN-AN,2018-03,51690,1744255,3113,2194,1.6,122773
 Andhra Pradesh,IN-AP,2018-03,3274749,69703125,168786,882576,1.3,2805619

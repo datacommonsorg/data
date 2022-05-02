@@ -1,12 +1,12 @@
 Node: dcid:Count_BirthControlEvent_Vasectomy
-name: "Number of vasectomies conducted (public + pvt.)"
+name: "Number of vasectomies conducted"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:Count_BirthControlEvent_Vasectomy
 statType: dcs:measuredValue
 
 Node: dcid:Count_BirthControlEvent_Tubectomy
-name: "Number of tubectomies conducted (public + pvt.)"
+name: "Number of tubectomies conducted"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:Count_BirthControlEvent_Tubectomy
@@ -20,7 +20,7 @@ measuredProperty: dcs:Count_BirthControlEvent_Sterilisation
 statType: dcs:measuredValue
 
 Node: dcid:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
-name: "Percent of male sterlisation (vasectomies) to total sterilisation"
+name: "Percent of male vasectomies to total sterilisations"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcs:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization

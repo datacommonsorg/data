@@ -60,11 +60,11 @@ value: C:NHM_MaternalHealth->Count_ChildDeliveryEvent_AtHome
 
 Node: E:NHM_MaternalHealth->E8
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_ChildDeliveryEvent_AtHome_WithStandByAssist
+variableMeasured: dcs:Count_ChildDeliveryEvent_AtHome_WithStandbyAssist
 observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"
-value: C:NHM_MaternalHealth->Count_ChildDeliveryEvent_AtHome_WithStandByAssist
+value: C:NHM_MaternalHealth->Count_ChildDeliveryEvent_AtHome_WithStandbyAssist
 
 Node: E:NHM_MaternalHealth->E9
 typeOf: dcs:StatVarObservation
