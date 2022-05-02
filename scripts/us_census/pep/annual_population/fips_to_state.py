@@ -1,3 +1,17 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""This Script converts geoID to State Geographic Name"""
 FIPSCODE = {
     '00000': 'country/USA',
     '01000': 'geoId/01',
@@ -47,7 +61,7 @@ FIPSCODE = {
     '49000': 'geoId/49',
     '50000': 'geoId/50',
     '51000': 'geoId/51',
-    '53000': 'geoId/53', 
+    '53000': 'geoId/53',
     '54000': 'geoId/54',
     '55000': 'geoId/55',
     '56000': 'geoId/56',

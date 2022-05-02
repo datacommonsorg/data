@@ -18,7 +18,6 @@ import os
 import pandas as pd
 from state_to_geoid import USSTATE_MAP
 from fips_to_state import FIPSCODE
-import sys
 
 
 def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
@@ -342,8 +341,17 @@ def get_state_file_config() -> dict:
     }
     return states_config
 
-def process_states_1970_1979(file_path: str,
-                            ):
+
+def process_states_1970_1979(file_path: str) -> pd.DataFrame:
+    """
+
+    Args:
+        file_path (str): Input File Path
+
+    Returns:
+        pd.DataFrame: DataFrame with Processed States Data
+                      from 1970 to 1979
+    """
     with open(file_path, "r", encoding="UTF-8") as file:
         search_str1 = "4/1/70      7/71      7/72      7/73      7/74      7/75"
         search_str2 = "7/76      7/77      7/78      7/79    4/1/80"
@@ -368,7 +376,11 @@ def process_states_1970_1979(file_path: str,
                 if flag:
                     #print(line)
                     data = line.split(" ")
-                    data = [val.strip() for val in data if val != '' and val.strip().isnumeric()]
+                    data = [
+                        val.strip()
+                        for val in data
+                        if val != '' and val.strip().isnumeric()
+                    ]
                     if not data[1].isnumeric():
                         continue
                     loc = "geoId/" + f"{int(data[0]):02d}"
@@ -378,8 +390,17 @@ def process_states_1970_1979(file_path: str,
         os.remove("out.csv")
         return df
 
-def process_states_1980_1989(file_path: str,
-                            ):
+
+def process_states_1980_1989(file_path: str) -> pd.DataFrame:
+    """
+
+    Args:
+        file_path (str): Input File Path
+
+    Returns:
+        pd.DataFrame: DataFrame with Processed States Data
+                      from 1980 to 1989
+    """
     with open(file_path, "r", encoding="UTF-8") as file:
         search_str1 = "4/80cen     7/81      7/82      7/83      7/84"
         search_str2 = "7/85      7/86      7/87      7/88      7/89   4/90cen"
@@ -390,7 +411,8 @@ def process_states_1980_1989(file_path: str,
             for line in file.readlines():
                 if len(line.strip()) == 0:
                     continue
-                if line.startswith("Intercensal") or line.startswith("All data") or line.startswith("Table 2"):
+                if line.startswith("Intercensal") or line.startswith(
+                        "All data") or line.startswith("Table 2"):
                     flag = False
                     continue
                 if search_str1 in line.strip():
@@ -407,10 +429,14 @@ def process_states_1980_1989(file_path: str,
                     loc = data[0]
                     if loc == "US":
                         continue
-                    data = [val.strip() for val in data if val != '' and val.strip().isnumeric()]
+                    data = [
+                        val.strip()
+                        for val in data
+                        if val != '' and val.strip().isnumeric()
+                    ]
                     if not data[1].isnumeric():
                         continue
-                    
+
                     #loc = "geoId/" + f"{int(data[0]):02d}"
                     for year, val in dict(zip(cols, data)).items():
                         #print(f"{year},{loc},{val}")
@@ -419,11 +445,22 @@ def process_states_1980_1989(file_path: str,
         os.remove("out.csv")
         return df
 
-def process_states_1990_1999(file_path: str):
 
+def process_states_1990_1999(file_path: str) -> pd.DataFrame:
+    """
+
+    Args:
+        file_path (str): Input File Path
+
+    Returns:
+        pd.DataFrame: DataFrame with Processed States Data
+                      from 1990 to 1999
+    """
     with open(file_path, "r", encoding="UTF-8") as file:
-        search_str1 = "(Estimate)  (Estimate)  (Estimate)  (Estimate)  (Estimate)  (Estimate)"
-        search_str2 = "(Estimate)  (Estimate)  (Estimate)  (Estimate)    (Census)"
+        search_str1 = "(Estimate)  (Estimate)  (Estimate)  (Estimate)" +\
+                      "  (Estimate)  (Estimate)"
+        search_str2 = "(Estimate)  (Estimate)  (Estimate)  (Estimate) "+\
+                      "   (Census)"
         with open("out.csv", "w", encoding="UTF-8") as outfile:
             outfile.write("Year,Location,Count_Person\n")
             cols = None
@@ -432,7 +469,9 @@ def process_states_1990_1999(file_path: str):
             for line in file.readlines():
                 if len(line.strip()) == 0:
                     continue
-                if line.startswith("------"): #or line.startswith("All data") or line.startswith("Table 2")
+                if line.startswith(
+                        "------"
+                ):
                     flag = True
                     continue
                 if line.startswith("Documentation Notes"):
@@ -448,8 +487,8 @@ def process_states_1990_1999(file_path: str):
                     continue
                 if flag:
                     data = line.split(" ")
-                    
-                    data = [val.strip() for val in data if val != '' ]
+
+                    data = [val.strip() for val in data if val != '']
                     #print(data)
                     for idx, val in enumerate(data):
                         if val.isnumeric():
@@ -457,10 +496,10 @@ def process_states_1990_1999(file_path: str):
                         if idx > 1:
                             data[1] = data[1] + val
                             data[idx] = ''
-                    data = [val.strip() for val in data if val != '' ]
+                    data = [val.strip() for val in data if val != '']
                     loc = data[1]
                     if loc == "Alabama":
-                        start = True                    
+                        start = True
                     if start:
                         for year, val in dict(zip(cols, data[2:])).items():
                             outfile.write(f"{year},{loc},{val}\n")
@@ -469,6 +508,7 @@ def process_states_1990_1999(file_path: str):
         df = pd.read_csv("out.csv", header=0)
         os.remove("out.csv")
         return df
+
 
 def process_states_1900_1969(states_config: dict, file_path: str,
                              file_name: str,
@@ -495,14 +535,9 @@ def process_states_1900_1969(states_config: dict, file_path: str,
     _create_intermediate_file(file_path, temp_file1, temp_file2, s1, s2)
     _create_final_file(temp_file1, s1, op_file_name)
     _create_final_file(temp_file2, s2, op_file_name)
-    import sys
-    #sys.exit(0)
     df = pd.read_csv(final_file_path, header=None)
     df.columns = ["Year", "Location", "Count_Person"]
-
     df["Count_Person"] = df["Count_Person"].multiply(scaling_factor)
-    #print(df.head())
-
     os.remove(temp_file1 + ".csv")
     os.remove(temp_file2 + ".csv")
     os.remove(final_file_path)

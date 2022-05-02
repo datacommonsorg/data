@@ -1,5 +1,20 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""This Script contains dictionary tp convert County to GeoID
+"""
 _county_geoId_dict = {
-    "AK": {   
+    "AK": {
         "AK": "geoId/02",
         "Aleutians East Borough": "geoId/02013",
         "Aleutians West Census Area": "geoId/02016",
@@ -24,13 +39,13 @@ _county_geoId_dict = {
         "North Slope Borough": "geoId/02185",
         "Northwest Arctic Borough": "geoId/02188",
         "Petersburg Borough": "geoId/02195",
-        "Petersburg Census Area" : "geoId/02280",
+        "Petersburg Census Area": "geoId/02280",
         "Prince of Wales-Hyder Census Area": "geoId/02198",
         "Sitka City and Borough": "geoId/02220",
         "Skagway Municipality": "geoId/02230",
         "Southeast Fairbanks Census Area": "geoId/02240",
-        "Valdez-Cordova Census Area" : "geoId/02261",
-        "Wade Hampton Census Area" : "geoId/02270",
+        "Valdez-Cordova Census Area": "geoId/02261",
+        "Wade Hampton Census Area": "geoId/02270",
         "Wrangell City and Borough": "geoId/02275",
         "Yakutat City and Borough": "geoId/02282",
         "Yukon-Koyukuk Census Area": "geoId/02290"
@@ -2955,7 +2970,7 @@ _county_geoId_dict = {
         "Arlington County": "geoId/51013",
         "Augusta County": "geoId/51015",
         "Bath County": "geoId/51017",
-        "Bedford city" : "geoId/51515",
+        "Bedford city": "geoId/51515",
         "Bedford County": "geoId/51019",
         "Bland County": "geoId/51021",
         "Botetourt County": "geoId/51023",
@@ -3302,5 +3317,5 @@ _county_geoId_dict = {
 }
 
 
-def county_geoId():
+def county_geoid():
     return _county_geoId_dict

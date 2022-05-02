@@ -26,7 +26,7 @@ from absl import flags
 from state_to_geoid import USSTATE_MAP
 from states_to_shortform import get_states
 from county_to_dcid import COUNTY_MAP
-from county_fips_code import county_geoId
+from county_to_dcid_additional import county_geoid
 
 from clean import (clean_df, clean_1970_1989_county_txt,
                    process_states_1900_1969, process_states_1970_1979,
@@ -406,7 +406,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
             df.loc[1, "Location"] = "Washington County"
         df["Location"] = df.apply(
             lambda x: _county_to_dcid(COUNTY_MAP, x.State, x.Location), axis=1)
-        county_fips_code = county_geoId()
+        county_fips_code = county_geoid()
         df["Location"] = df.apply(
             lambda x: _county_to_dcid(county_fips_code, x.State, x.Location),
             axis=1)
