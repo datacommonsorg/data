@@ -26,19 +26,19 @@ cols_to_nodes = {
     'Date':
         'Date',
     'IPD (Number)':
-        'Count_InPatient',
+        'Count_Inpatient',
     'OPD (Number)':
-        'Count_OutPatient',
+        'Count_Outpatient',
     'OPD (Allopathic)':
-        'Count_OutPatient',
+        'Count_Outpatient',
     'Number of Major Operations':
         'Count_SurgicalProcedure_Major',
     'Number of Minor Operations':
         'Count_SurgicalProcedure_Minor',
     '% Inpatient Deaths to Total IPD':
-        'Count_InPatient_Deceased_AsFractionOf_Count_InPatient',
+        'Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient',
     'Ayush OPD (Number)':
-        'Count_OutPatient_Ayush',
+        'Count_Outpatient_Ayush',
 }
 
 

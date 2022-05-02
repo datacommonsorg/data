@@ -4,19 +4,19 @@ lgdCode: C:NHM_GeneralStats->lgdCode
 
 Node: E:NHM_GeneralStats->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_InPatient
+variableMeasured: dcs:Count_Inpatient
 observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
-value: C:NHM_GeneralStats->Count_InPatient
+value: C:NHM_GeneralStats->Count_Inpatient
 
 Node: E:NHM_GeneralStats->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_OutPatient
+variableMeasured: dcs:Count_Outpatient
 observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
-value: C:NHM_GeneralStats->Count_OutPatient
+value: C:NHM_GeneralStats->Count_Outpatient
 
 Node: E:NHM_GeneralStats->E4
 typeOf: dcs:StatVarObservation
@@ -36,16 +36,16 @@ value: C:NHM_GeneralStats->Count_SurgicalProcedure_Minor
 
 Node: E:NHM_GeneralStats->E6
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_InPatient_Deceased_AsFractionOf_Count_InPatient
+variableMeasured: dcs:Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient
 observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
-value: C:NHM_GeneralStats->Count_InPatient_Deceased_AsFractionOf_Count_InPatient
+value: C:NHM_GeneralStats->Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient
 
 Node: E:NHM_GeneralStats->E7
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_OutPatient_Ayush
+variableMeasured: dcs:Count_Outpatient_Ayush
 observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"
-value: C:NHM_GeneralStats->Count_OutPatient_Ayush
+value: C:NHM_GeneralStats->Count_Outpatient_Ayush

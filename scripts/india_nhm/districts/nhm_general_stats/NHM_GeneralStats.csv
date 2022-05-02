@@ -1,4 +1,4 @@
-Count_InPatient,Count_InPatient_Deceased_AsFractionOf_Count_InPatient,Count_OutPatient,Count_OutPatient_Ayush,Count_SurgicalProcedure_Major,Count_SurgicalProcedure_Minor,Date,District,lgdCode
+Count_Inpatient,Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient,Count_Outpatient,Count_Outpatient_Ayush,Count_SurgicalProcedure_Major,Count_SurgicalProcedure_Minor,Date,District,lgdCode
 34829.0,1.9,1197743.0,59967.0,2975.0,1019.0,2019-03,South Andaman,602
 387680.0,0.6,7869346.0,274587.0,8214.0,74205.0,2019-03,Anantapur,502
 412284.0,0.8,7709899.0,400535.0,12982.0,191610.0,2019-03,Chittoor,503
