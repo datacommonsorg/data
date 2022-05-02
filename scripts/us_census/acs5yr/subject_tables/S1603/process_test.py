@@ -23,9 +23,10 @@ from .process import S1603SubjectTableDataLoader
 _TEST_DIR = os.path.join(_CODEDIR, 'testdata')
 _TEST_DATA_ZIP = os.path.join(_TEST_DIR, 'alabama.zip')
 _CONFIG_PATH = os.path.join(_CODEDIR, 'config.json')
-_EXPECTED_TMCF = os.path.join(_CODEDIR, 'output.tmcf')
-_EXPECTED_MCF = os.path.join(_CODEDIR, 'output.mcf')
+_EXPECTED_TMCF = os.path.join(_TEST_DIR, 'output.tmcf')
+_EXPECTED_MCF = os.path.join(_TEST_DIR, 'output.mcf')
 _EXPECTED_CSV = os.path.join(_TEST_DIR, 'expected.csv')
+_EXPECTED_CMAP = os.path.join(_TEST_DIR, 'column_map.json')
 
 
 def set_column_map(input_path, spec_path, output_dir):
@@ -59,6 +60,7 @@ class ProcessTest(unittest.TestCase):
             mcf_file_path = os.path.join(tmp_dir, 'S1603_output.mcf')
             tmcf_file_path = os.path.join(tmp_dir, 'S1603_output.tmcf')
             csv_file_path = os.path.join(tmp_dir, 'S1603_cleaned.csv')
+            cmap_file_path = os.path.join(tmp_dir, 'column_map.json')
 
             with open(mcf_file_path) as mcf_f:
                 mcf_result = mcf_f.read()
@@ -77,3 +79,9 @@ class ProcessTest(unittest.TestCase):
                 with open(_EXPECTED_CSV) as expected_csv_f:
                     expected_csv_result = expected_csv_f.read()
                     self.assertEqual(csv_result, expected_csv_result)
+
+            with open(cmap_file_path) as cmap_f:
+                cmap_result = cmap_f.read()
+                with open(_EXPECTED_CMAP) as expected_cmap_f:
+                    expected_cmap_result = expected_cmap_f.read()
+                    self.assertEqual(cmap_result, expected_cmap_result)
