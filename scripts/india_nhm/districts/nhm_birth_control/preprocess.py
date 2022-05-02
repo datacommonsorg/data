@@ -37,11 +37,11 @@ cols_to_nodes = {
     'Number of Tubectomies Conducted':
         'Count_BirthControlEvent_Tubectomy',
     'Total Sterilisation Conducted':
-        'Count_BirthControlEvent_Sterilization',
+        'Count_BirthControlEvent_Sterilisation',
     '% Male Sterlisation (Vasectomies) to Total sterilisation':
         'Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization',
     'Total cases of deaths following Sterlisation ( Male + Female)':
-        'Count_Death_BirthControlSterilization',
+        'Count_Death_BirthControlSterilisation',
     'Total IUCD Insertions done(public+private)':
         'Count_BirthControlEvent_IUCDInsertion',
     'Total Interval IUCD Insertions done':

@@ -26,9 +26,9 @@ The cleaned csv has the following columns:
 - Count_BirthControlEvent_Vasectomy: Number of Vasectomies Conducted
 - Count_BirthControlEvent_Tubectomy: Number of Tubectomies Conducted (Public + Pvt.)
 - Count_BirthControlEvent_Tubectomy: Number of Tubectomies Conducted
-- Count_BirthControlEvent_Sterilization: Total Sterilisation Conducted
+- Count_BirthControlEvent_Sterilisation: Total Sterilisation Conducted
 - Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization: % Male Sterlisation (Vasectomies) to Total sterilisation
-- Count_Death_BirthControlSterilization: Total cases of deaths following Sterlisation ( Male + Female)
+- Count_Death_BirthControlSterilisation: Total cases of deaths following Sterlisation ( Male + Female)
 - Count_BirthControlEvent_IUCDInsertion: Total IUCD Insertions done(public+private)
 - Count_BirthControlEvent_IUCDInsertion: Total Interval IUCD Insertions done
 - Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent: % IUCD insertions in public plus private institutions to all family planning methods ( IUCD plus permanent)

@@ -12,11 +12,11 @@ populationType: schema:Person
 measuredProperty: dcid:Count_BirthControlEvent_Tubectomy
 statType: dcs:measuredValue
 
-Node: dcid:Count_BirthControlEvent_Sterilization
+Node: dcid:Count_BirthControlEvent_Sterilisation
 name: "Total Sterilisation Conducted"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcid:Count_BirthControlEvent_Sterilization
+measuredProperty: dcid:Count_BirthControlEvent_Sterilisation
 statType: dcs:measuredValue
 
 Node: dcid:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
@@ -26,11 +26,11 @@ populationType: schema:Person
 measuredProperty: dcid:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
 statType: dcs:measuredValue
 
-Node: dcid:Count_Death_BirthControlSterilization
+Node: dcid:Count_Death_BirthControlSterilisation
 name: "Total cases of deaths following Sterilisation (Male and Female)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcid:Count_Death_BirthControlSterilization
+measuredProperty: dcid:Count_Death_BirthControlSterilisation
 statType: dcs:measuredValue
 
 Node: dcid:Count_BirthControlEvent_IUCDInsertion
