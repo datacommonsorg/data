@@ -41,7 +41,6 @@ class ProcessTest(unittest.TestCase):
 
     def test_create_csv_mcf_tmcf(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            tmp_dir = '.'
             set_column_map(_TEST_DATA_ZIP, _CONFIG_PATH, tmp_dir)
             column_map_path = os.path.join(tmp_dir, 'column_map.json')
             data_loader = S2303SubjectTableDataLoader(
