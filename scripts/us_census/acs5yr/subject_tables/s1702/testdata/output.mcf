@@ -348,70 +348,6 @@ householdType: dcs:FamilyHousehold
 householderRelatedChildrenUnder18Years: [5 - Child]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Household_Householder0OwnChildren_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder1To2OwnChildren_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder3To4OwnChildren_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder5OrMoreOwnChildren_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
 Node: dcid:Count_Household_With2Person_FamilyHousehold
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -547,188 +483,28 @@ populationType: dcs:Household
 householdType: dcs:FamilyHousehold
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Household_FamilyHousehold_OwnerOccupied
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-occupancyTenure: dcs:OwnerOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_FamilyHousehold_OwnerOccupied
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-occupancyTenure: dcs:OwnerOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_FamilyHousehold_RenterOccupied
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-occupancyTenure: dcs:RenterOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_FamilyHousehold_RenterOccupied
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-occupancyTenure: dcs:RenterOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_0.5OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 0.5 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_0.5OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 0.5 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_1.25OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 1.25 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_1.25OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 1.25 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_1.5OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 1.5 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_1.5OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 1.5 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_1.85OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 1.85 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_1.85OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 1.85 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_2OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 2 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_2OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 2 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_3OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 3 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_3OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 3 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_4OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 4 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_4OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 4 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_5OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 5 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_5OrLessRatioToPovertyLine_FamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:FamilyHousehold
-familyIncome: [- 5 RatioToPovertyLine]
-typeOf: dcs:StatisticalVariable
-
 Node: dcid:Count_Household_FamilyHousehold_BelowPovertyLevelInThePast12Months
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Household_FamilyHousehold_BelowPovertyLevelInThePast12Months
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Household_HouseholderRaceWhiteAlone_FamilyHousehold_BelowPovertyLevelInThePast12Months
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:WhiteAlone
 typeOf: dcs:StatisticalVariable
 
@@ -736,8 +512,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceWhiteAlone_FamilyHouseho
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:WhiteAlone
 typeOf: dcs:StatisticalVariable
 
@@ -745,8 +521,8 @@ Node: dcid:Count_Household_HouseholderRaceBlackOrAfricanAmericanAlone_FamilyHous
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:BlackOrAfricanAmericanAlone
 typeOf: dcs:StatisticalVariable
 
@@ -754,8 +530,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceBlackOrAfricanAmericanAl
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:BlackOrAfricanAmericanAlone
 typeOf: dcs:StatisticalVariable
 
@@ -763,8 +539,8 @@ Node: dcid:Count_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_Fami
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 
@@ -772,8 +548,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceAmericanIndianOrAlaskaNa
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 
@@ -781,8 +557,8 @@ Node: dcid:Count_Household_HouseholderRaceAsianAlone_FamilyHousehold_BelowPovert
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:AsianAlone
 typeOf: dcs:StatisticalVariable
 
@@ -790,8 +566,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceAsianAlone_FamilyHouseho
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:AsianAlone
 typeOf: dcs:StatisticalVariable
 
@@ -799,8 +575,8 @@ Node: dcid:Count_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAl
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
 typeOf: dcs:StatisticalVariable
 
@@ -808,8 +584,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceNativeHawaiianOrOtherPac
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
 typeOf: dcs:StatisticalVariable
 
@@ -817,8 +593,8 @@ Node: dcid:Count_Household_HouseholderRaceSomeOtherRaceAlone_FamilyHousehold_Bel
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:SomeOtherRaceAlone
 typeOf: dcs:StatisticalVariable
 
@@ -826,8 +602,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceSomeOtherRaceAlone_Famil
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:SomeOtherRaceAlone
 typeOf: dcs:StatisticalVariable
 
@@ -835,8 +611,8 @@ Node: dcid:Count_Household_HouseholderRaceTwoOrMoreRaces_FamilyHousehold_BelowPo
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:TwoOrMoreRaces
 typeOf: dcs:StatisticalVariable
 
@@ -844,8 +620,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceTwoOrMoreRaces_FamilyHou
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:TwoOrMoreRaces
 typeOf: dcs:StatisticalVariable
 
@@ -853,8 +629,8 @@ Node: dcid:Count_Household_HouseholderRaceHispanicOrLatino_FamilyHousehold_Below
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:HispanicOrLatino
 typeOf: dcs:StatisticalVariable
 
@@ -862,8 +638,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceHispanicOrLatino_FamilyH
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:HispanicOrLatino
 typeOf: dcs:StatisticalVariable
 
@@ -871,8 +647,8 @@ Node: dcid:Count_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino_FamilyHo
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:WhiteAloneNotHispanicOrLatino
 typeOf: dcs:StatisticalVariable
 
@@ -880,8 +656,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceWhiteAloneNotHispanicOrL
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:WhiteAloneNotHispanicOrLatino
 typeOf: dcs:StatisticalVariable
 
@@ -889,8 +665,8 @@ Node: dcid:Count_Household_FullTimeYearRoundWorker_FamilyHousehold_BelowPovertyL
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderWorkStatus: dcs:USC_FullTimeYearRoundWorker
 typeOf: dcs:StatisticalVariable
 
@@ -898,8 +674,8 @@ Node: dcid:MarginOfError_Count_Household_FullTimeYearRoundWorker_FamilyHousehold
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderWorkStatus: dcs:USC_FullTimeYearRoundWorker
 typeOf: dcs:StatisticalVariable
 
@@ -907,8 +683,8 @@ Node: dcid:Count_Household_HouseholderAge65OrMoreYears_FamilyHousehold_BelowPove
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderAge: [65 - Years]
 typeOf: dcs:StatisticalVariable
 
@@ -916,8 +692,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderAge65OrMoreYears_FamilyHouse
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderAge: [65 - Years]
 typeOf: dcs:StatisticalVariable
 
@@ -925,8 +701,8 @@ Node: dcid:Count_Household_WithSSIAndOrCashAssistanceInThePast12Months_FamilyHou
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 benefitsStatus: dcs:WithSSIAndOrCashAssistanceInThePast12Months
 typeOf: dcs:StatisticalVariable
 
@@ -934,8 +710,8 @@ Node: dcid:MarginOfError_Count_Household_WithSSIAndOrCashAssistanceInThePast12Mo
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 benefitsStatus: dcs:WithSSIAndOrCashAssistanceInThePast12Months
 typeOf: dcs:StatisticalVariable
 
@@ -943,8 +719,8 @@ Node: dcid:Count_Household_WithSocialSecurityIncomeInThePast12Months_FamilyHouse
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 benefitsStatus: dcs:WithSocialSecurityIncomeInThePast12Months
 typeOf: dcs:StatisticalVariable
 
@@ -952,8 +728,8 @@ Node: dcid:MarginOfError_Count_Household_WithSocialSecurityIncomeInThePast12Mont
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 benefitsStatus: dcs:WithSocialSecurityIncomeInThePast12Months
 typeOf: dcs:StatisticalVariable
 
@@ -961,8 +737,8 @@ Node: dcid:Count_Household_HouseholderEducationalAttainmentLessThanHighSchoolGra
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
 typeOf: dcs:StatisticalVariable
 
@@ -970,8 +746,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentLessTha
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
 typeOf: dcs:StatisticalVariable
 
@@ -979,8 +755,8 @@ Node: dcid:Count_Household_HouseholderEducationalAttainmentHighSchoolGraduateInc
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
 typeOf: dcs:StatisticalVariable
 
@@ -988,8 +764,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentHighSch
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
 typeOf: dcs:StatisticalVariable
 
@@ -997,8 +773,8 @@ Node: dcid:Count_Household_HouseholderEducationalAttainmentSomeCollegeOrAssociat
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
 typeOf: dcs:StatisticalVariable
 
@@ -1006,8 +782,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentSomeCol
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
 typeOf: dcs:StatisticalVariable
 
@@ -1015,8 +791,8 @@ Node: dcid:Count_Household_HouseholderEducationalAttainmentBachelorsDegreeOrHigh
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
 typeOf: dcs:StatisticalVariable
 
@@ -1024,8 +800,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentBachelo
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
 typeOf: dcs:StatisticalVariable
 
@@ -1033,8 +809,8 @@ Node: dcid:Count_Household_Householder0RelatedChildren_FamilyHousehold_BelowPove
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [0 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -1042,8 +818,8 @@ Node: dcid:MarginOfError_Count_Household_Householder0RelatedChildren_FamilyHouse
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [0 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -1051,8 +827,8 @@ Node: dcid:Count_Household_Householder1To2RelatedChildren_FamilyHousehold_BelowP
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [1 2 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -1060,8 +836,8 @@ Node: dcid:MarginOfError_Count_Household_Householder1To2RelatedChildren_FamilyHo
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [1 2 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -1069,8 +845,8 @@ Node: dcid:Count_Household_Householder3To4RelatedChildren_FamilyHousehold_BelowP
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [3 4 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -1078,8 +854,8 @@ Node: dcid:MarginOfError_Count_Household_Householder3To4RelatedChildren_FamilyHo
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [3 4 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -1087,8 +863,8 @@ Node: dcid:Count_Household_Householder5OrMoreRelatedChildren_FamilyHousehold_Bel
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [5 - Child]
 typeOf: dcs:StatisticalVariable
 
@@ -1096,89 +872,17 @@ Node: dcid:MarginOfError_Count_Household_Householder5OrMoreRelatedChildren_Famil
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder0OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder1To2OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder3To4OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder5OrMoreOwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Household_With2Person_FamilyHousehold_BelowPovertyLevelInThePast12Months
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [2 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -1186,8 +890,8 @@ Node: dcid:MarginOfError_Count_Household_With2Person_FamilyHousehold_BelowPovert
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [2 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -1195,8 +899,8 @@ Node: dcid:Count_Household_With3To4Person_FamilyHousehold_BelowPovertyLevelInThe
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [3 4 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -1204,8 +908,8 @@ Node: dcid:MarginOfError_Count_Household_With3To4Person_FamilyHousehold_BelowPov
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [3 4 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -1213,8 +917,8 @@ Node: dcid:Count_Household_With5To6Person_FamilyHousehold_BelowPovertyLevelInThe
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [5 6 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -1222,8 +926,8 @@ Node: dcid:MarginOfError_Count_Household_With5To6Person_FamilyHousehold_BelowPov
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [5 6 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -1231,8 +935,8 @@ Node: dcid:Count_Household_With7OrMorePerson_FamilyHousehold_BelowPovertyLevelIn
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [7 - Person]
 typeOf: dcs:StatisticalVariable
 
@@ -1240,8 +944,8 @@ Node: dcid:MarginOfError_Count_Household_With7OrMorePerson_FamilyHousehold_Below
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [7 - Person]
 typeOf: dcs:StatisticalVariable
 
@@ -1249,8 +953,8 @@ Node: dcid:Count_Household_FamilyHousehold_With0Worker_BelowPovertyLevelInThePas
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [0 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -1258,8 +962,8 @@ Node: dcid:MarginOfError_Count_Household_FamilyHousehold_With0Worker_BelowPovert
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [0 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -1267,8 +971,8 @@ Node: dcid:Count_Household_FamilyHousehold_With1Worker_BelowPovertyLevelInThePas
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [1 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -1276,8 +980,8 @@ Node: dcid:MarginOfError_Count_Household_FamilyHousehold_With1Worker_BelowPovert
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [1 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -1285,8 +989,8 @@ Node: dcid:Count_Household_FamilyHousehold_With2Worker_BelowPovertyLevelInThePas
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [2 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -1294,8 +998,8 @@ Node: dcid:MarginOfError_Count_Household_FamilyHousehold_With2Worker_BelowPovert
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [2 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -1303,8 +1007,8 @@ Node: dcid:Count_Household_FamilyHousehold_With3OrMoreWorker_BelowPovertyLevelIn
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [3 - Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -1312,45 +1016,9 @@ Node: dcid:MarginOfError_Count_Household_FamilyHousehold_With3OrMoreWorker_Below
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:FamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [3 - Worker]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_FamilyHousehold_OwnerOccupied_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-occupancyTenure: dcs:OwnerOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_FamilyHousehold_OwnerOccupied_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-occupancyTenure: dcs:OwnerOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_FamilyHousehold_RenterOccupied_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-occupancyTenure: dcs:RenterOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_FamilyHousehold_RenterOccupied_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:FamilyHousehold
-occupancyTenure: dcs:RenterOccupied
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Household_MarriedCoupleFamilyHousehold
@@ -1703,70 +1371,6 @@ householdType: dcs:MarriedCoupleFamilyHousehold
 householderRelatedChildrenUnder18Years: [5 - Child]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Household_Householder0OwnChildren_MarriedCoupleFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_MarriedCoupleFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder1To2OwnChildren_MarriedCoupleFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_MarriedCoupleFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder3To4OwnChildren_MarriedCoupleFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_MarriedCoupleFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder5OrMoreOwnChildren_MarriedCoupleFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_MarriedCoupleFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
 Node: dcid:Count_Household_With2Person_MarriedCoupleFamilyHousehold
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -1902,60 +1506,28 @@ populationType: dcs:Household
 householdType: dcs:MarriedCoupleFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_OwnerOccupied
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-occupancyTenure: dcs:OwnerOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_OwnerOccupied
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-occupancyTenure: dcs:OwnerOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_RenterOccupied
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-occupancyTenure: dcs:RenterOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_RenterOccupied
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:MarriedCoupleFamilyHousehold
-occupancyTenure: dcs:RenterOccupied
-typeOf: dcs:StatisticalVariable
-
 Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Household_HouseholderRaceWhiteAlone_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:WhiteAlone
 typeOf: dcs:StatisticalVariable
 
@@ -1963,8 +1535,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceWhiteAlone_MarriedCouple
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:WhiteAlone
 typeOf: dcs:StatisticalVariable
 
@@ -1972,8 +1544,8 @@ Node: dcid:Count_Household_HouseholderRaceBlackOrAfricanAmericanAlone_MarriedCou
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:BlackOrAfricanAmericanAlone
 typeOf: dcs:StatisticalVariable
 
@@ -1981,8 +1553,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceBlackOrAfricanAmericanAl
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:BlackOrAfricanAmericanAlone
 typeOf: dcs:StatisticalVariable
 
@@ -1990,8 +1562,8 @@ Node: dcid:Count_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_Marr
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 
@@ -1999,8 +1571,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceAmericanIndianOrAlaskaNa
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 
@@ -2008,8 +1580,8 @@ Node: dcid:Count_Household_HouseholderRaceAsianAlone_MarriedCoupleFamilyHousehol
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:AsianAlone
 typeOf: dcs:StatisticalVariable
 
@@ -2017,8 +1589,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceAsianAlone_MarriedCouple
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:AsianAlone
 typeOf: dcs:StatisticalVariable
 
@@ -2026,8 +1598,8 @@ Node: dcid:Count_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAl
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
 typeOf: dcs:StatisticalVariable
 
@@ -2035,8 +1607,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceNativeHawaiianOrOtherPac
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
 typeOf: dcs:StatisticalVariable
 
@@ -2044,8 +1616,8 @@ Node: dcid:Count_Household_HouseholderRaceSomeOtherRaceAlone_MarriedCoupleFamily
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:SomeOtherRaceAlone
 typeOf: dcs:StatisticalVariable
 
@@ -2053,8 +1625,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceSomeOtherRaceAlone_Marri
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:SomeOtherRaceAlone
 typeOf: dcs:StatisticalVariable
 
@@ -2062,8 +1634,8 @@ Node: dcid:Count_Household_HouseholderRaceTwoOrMoreRaces_MarriedCoupleFamilyHous
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:TwoOrMoreRaces
 typeOf: dcs:StatisticalVariable
 
@@ -2071,8 +1643,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceTwoOrMoreRaces_MarriedCo
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:TwoOrMoreRaces
 typeOf: dcs:StatisticalVariable
 
@@ -2080,8 +1652,8 @@ Node: dcid:Count_Household_HouseholderRaceHispanicOrLatino_MarriedCoupleFamilyHo
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:HispanicOrLatino
 typeOf: dcs:StatisticalVariable
 
@@ -2089,8 +1661,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceHispanicOrLatino_Married
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:HispanicOrLatino
 typeOf: dcs:StatisticalVariable
 
@@ -2098,8 +1670,8 @@ Node: dcid:Count_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino_MarriedC
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:WhiteAloneNotHispanicOrLatino
 typeOf: dcs:StatisticalVariable
 
@@ -2107,8 +1679,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderRaceWhiteAloneNotHispanicOrL
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRace: dcs:WhiteAloneNotHispanicOrLatino
 typeOf: dcs:StatisticalVariable
 
@@ -2116,8 +1688,8 @@ Node: dcid:Count_Household_FullTimeYearRoundWorker_MarriedCoupleFamilyHousehold_
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderWorkStatus: dcs:USC_FullTimeYearRoundWorker
 typeOf: dcs:StatisticalVariable
 
@@ -2125,8 +1697,8 @@ Node: dcid:MarginOfError_Count_Household_FullTimeYearRoundWorker_MarriedCoupleFa
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderWorkStatus: dcs:USC_FullTimeYearRoundWorker
 typeOf: dcs:StatisticalVariable
 
@@ -2134,8 +1706,8 @@ Node: dcid:Count_Household_HouseholderAge65OrMoreYears_MarriedCoupleFamilyHouseh
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderAge: [65 - Years]
 typeOf: dcs:StatisticalVariable
 
@@ -2143,8 +1715,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderAge65OrMoreYears_MarriedCoup
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderAge: [65 - Years]
 typeOf: dcs:StatisticalVariable
 
@@ -2152,8 +1724,8 @@ Node: dcid:Count_Household_WithSSIAndOrCashAssistanceInThePast12Months_MarriedCo
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 benefitsStatus: dcs:WithSSIAndOrCashAssistanceInThePast12Months
 typeOf: dcs:StatisticalVariable
 
@@ -2161,8 +1733,8 @@ Node: dcid:MarginOfError_Count_Household_WithSSIAndOrCashAssistanceInThePast12Mo
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 benefitsStatus: dcs:WithSSIAndOrCashAssistanceInThePast12Months
 typeOf: dcs:StatisticalVariable
 
@@ -2170,8 +1742,8 @@ Node: dcid:Count_Household_WithSocialSecurityIncomeInThePast12Months_MarriedCoup
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 benefitsStatus: dcs:WithSocialSecurityIncomeInThePast12Months
 typeOf: dcs:StatisticalVariable
 
@@ -2179,8 +1751,8 @@ Node: dcid:MarginOfError_Count_Household_WithSocialSecurityIncomeInThePast12Mont
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 benefitsStatus: dcs:WithSocialSecurityIncomeInThePast12Months
 typeOf: dcs:StatisticalVariable
 
@@ -2188,8 +1760,8 @@ Node: dcid:Count_Household_HouseholderEducationalAttainmentLessThanHighSchoolGra
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
 typeOf: dcs:StatisticalVariable
 
@@ -2197,8 +1769,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentLessTha
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
 typeOf: dcs:StatisticalVariable
 
@@ -2206,8 +1778,8 @@ Node: dcid:Count_Household_HouseholderEducationalAttainmentHighSchoolGraduateInc
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
 typeOf: dcs:StatisticalVariable
 
@@ -2215,8 +1787,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentHighSch
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
 typeOf: dcs:StatisticalVariable
 
@@ -2224,8 +1796,8 @@ Node: dcid:Count_Household_HouseholderEducationalAttainmentSomeCollegeOrAssociat
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
 typeOf: dcs:StatisticalVariable
 
@@ -2233,8 +1805,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentSomeCol
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
 typeOf: dcs:StatisticalVariable
 
@@ -2242,8 +1814,8 @@ Node: dcid:Count_Household_HouseholderEducationalAttainmentBachelorsDegreeOrHigh
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
 typeOf: dcs:StatisticalVariable
 
@@ -2251,8 +1823,8 @@ Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentBachelo
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
 typeOf: dcs:StatisticalVariable
 
@@ -2260,8 +1832,8 @@ Node: dcid:Count_Household_Householder0RelatedChildren_MarriedCoupleFamilyHouseh
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [0 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -2269,8 +1841,8 @@ Node: dcid:MarginOfError_Count_Household_Householder0RelatedChildren_MarriedCoup
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [0 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -2278,8 +1850,8 @@ Node: dcid:Count_Household_Householder1To2RelatedChildren_MarriedCoupleFamilyHou
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [1 2 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -2287,8 +1859,8 @@ Node: dcid:MarginOfError_Count_Household_Householder1To2RelatedChildren_MarriedC
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [1 2 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -2296,8 +1868,8 @@ Node: dcid:Count_Household_Householder3To4RelatedChildren_MarriedCoupleFamilyHou
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [3 4 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -2305,8 +1877,8 @@ Node: dcid:MarginOfError_Count_Household_Householder3To4RelatedChildren_MarriedC
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [3 4 Child]
 typeOf: dcs:StatisticalVariable
 
@@ -2314,8 +1886,8 @@ Node: dcid:Count_Household_Householder5OrMoreRelatedChildren_MarriedCoupleFamily
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [5 - Child]
 typeOf: dcs:StatisticalVariable
 
@@ -2323,89 +1895,17 @@ Node: dcid:MarginOfError_Count_Household_Householder5OrMoreRelatedChildren_Marri
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householderRelatedChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder0OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder1To2OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder3To4OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder5OrMoreOwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Household_With2Person_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [2 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -2413,8 +1913,8 @@ Node: dcid:MarginOfError_Count_Household_With2Person_MarriedCoupleFamilyHousehol
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [2 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -2422,8 +1922,8 @@ Node: dcid:Count_Household_With3To4Person_MarriedCoupleFamilyHousehold_BelowPove
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [3 4 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -2431,8 +1931,8 @@ Node: dcid:MarginOfError_Count_Household_With3To4Person_MarriedCoupleFamilyHouse
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [3 4 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -2440,8 +1940,8 @@ Node: dcid:Count_Household_With5To6Person_MarriedCoupleFamilyHousehold_BelowPove
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [5 6 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -2449,8 +1949,8 @@ Node: dcid:MarginOfError_Count_Household_With5To6Person_MarriedCoupleFamilyHouse
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [5 6 Person]
 typeOf: dcs:StatisticalVariable
 
@@ -2458,8 +1958,8 @@ Node: dcid:Count_Household_With7OrMorePerson_MarriedCoupleFamilyHousehold_BelowP
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [7 - Person]
 typeOf: dcs:StatisticalVariable
 
@@ -2467,8 +1967,8 @@ Node: dcid:MarginOfError_Count_Household_With7OrMorePerson_MarriedCoupleFamilyHo
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdSize: [7 - Person]
 typeOf: dcs:StatisticalVariable
 
@@ -2476,8 +1976,8 @@ Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_With0Worker_BelowPoverty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [0 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -2485,8 +1985,8 @@ Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_With0Worke
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [0 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -2494,8 +1994,8 @@ Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_With1Worker_BelowPoverty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [1 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -2503,8 +2003,8 @@ Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_With1Worke
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [1 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -2512,8 +2012,8 @@ Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_With2Worker_BelowPoverty
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [2 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -2521,8 +2021,8 @@ Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_With2Worke
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [2 Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -2530,8 +2030,8 @@ Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_With3OrMoreWorker_BelowP
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [3 - Worker]
 typeOf: dcs:StatisticalVariable
 
@@ -2539,45 +2039,9 @@ Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_With3OrMor
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:MarriedCoupleFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdWorkerSize: [3 - Worker]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_OwnerOccupied_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-occupancyTenure: dcs:OwnerOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_OwnerOccupied_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-occupancyTenure: dcs:OwnerOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_RenterOccupied_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-occupancyTenure: dcs:RenterOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_RenterOccupied_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:MarriedCoupleFamilyHousehold
-occupancyTenure: dcs:RenterOccupied
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Household_SingleMotherFamilyHousehold
@@ -2930,70 +2394,6 @@ householdType: dcs:SingleMotherFamilyHousehold
 householderRelatedChildrenUnder18Years: [5 - Child]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Household_Householder0OwnChildren_SingleMotherFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:SingleMotherFamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_SingleMotherFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:SingleMotherFamilyHousehold
-householderOwnChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder1To2OwnChildren_SingleMotherFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:SingleMotherFamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_SingleMotherFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:SingleMotherFamilyHousehold
-householderOwnChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder3To4OwnChildren_SingleMotherFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:SingleMotherFamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_SingleMotherFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:SingleMotherFamilyHousehold
-householderOwnChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder5OrMoreOwnChildren_SingleMotherFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-householdType: dcs:SingleMotherFamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_SingleMotherFamilyHousehold
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-householdType: dcs:SingleMotherFamilyHousehold
-householderOwnChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
 Node: dcid:Count_Household_With2Person_SingleMotherFamilyHousehold
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -3129,6 +2529,1144 @@ populationType: dcs:Household
 householdType: dcs:SingleMotherFamilyHousehold
 typeOf: dcs:StatisticalVariable
 
+Node: dcid:Count_Household_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceWhiteAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderRaceWhiteAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceBlackOrAfricanAmericanAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderRaceBlackOrAfricanAmericanAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceAsianAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderRaceAsianAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceSomeOtherRaceAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderRaceSomeOtherRaceAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceTwoOrMoreRaces_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderRaceTwoOrMoreRaces_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceHispanicOrLatino_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderRaceHispanicOrLatino_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FullTimeYearRoundWorker_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderWorkStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FullTimeYearRoundWorker_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderWorkStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderAge65OrMoreYears_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderAge: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderAge65OrMoreYears_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderAge: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_WithSSIAndOrCashAssistanceInThePast12Months_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+benefitsStatus: dcs:WithSSIAndOrCashAssistanceInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_WithSSIAndOrCashAssistanceInThePast12Months_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+benefitsStatus: dcs:WithSSIAndOrCashAssistanceInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_WithSocialSecurityIncomeInThePast12Months_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+benefitsStatus: dcs:WithSocialSecurityIncomeInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_WithSocialSecurityIncomeInThePast12Months_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+benefitsStatus: dcs:WithSocialSecurityIncomeInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder0RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRelatedChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder0RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRelatedChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder1To2RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRelatedChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder1To2RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRelatedChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder3To4RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRelatedChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder3To4RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRelatedChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder5OrMoreRelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRelatedChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder5OrMoreRelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householderRelatedChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_With2Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdSize: [2 Person]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_With2Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdSize: [2 Person]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_With3To4Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdSize: [3 4 Person]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_With3To4Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdSize: [3 4 Person]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_With5To6Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdSize: [5 6 Person]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_With5To6Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdSize: [5 6 Person]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_With7OrMorePerson_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdSize: [7 - Person]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_With7OrMorePerson_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdSize: [7 - Person]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_SingleMotherFamilyHousehold_With0Worker_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdWorkerSize: [0 Worker]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_With0Worker_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdWorkerSize: [0 Worker]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_SingleMotherFamilyHousehold_With1Worker_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdWorkerSize: [1 Worker]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_With1Worker_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdWorkerSize: [1 Worker]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_SingleMotherFamilyHousehold_With2Worker_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdWorkerSize: [2 Worker]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_With2Worker_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdWorkerSize: [2 Worker]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_SingleMotherFamilyHousehold_With3OrMoreWorker_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdWorkerSize: [3 - Worker]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_With3OrMoreWorker_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdWorkerSize: [3 - Worker]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder0OwnChildren_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder1To2OwnChildren_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder3To4OwnChildren_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder5OrMoreOwnChildren_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_OwnerOccupied
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_OwnerOccupied
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_RenterOccupied
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_RenterOccupied
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_0.5OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 0.5 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_0.5OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 0.5 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_1.25OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 1.25 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_1.25OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 1.25 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_1.5OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 1.5 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_1.5OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 1.5 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_1.85OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 1.85 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_1.85OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 1.85 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_2OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 2 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_2OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 2 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_3OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 3 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_3OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 3 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_4OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 4 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_4OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 4 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_5OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 5 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_5OrLessRatioToPovertyLine_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+familyIncome: [- 5 RatioToPovertyLine]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder0OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder1To2OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder3To4OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder5OrMoreOwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_FamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_OwnerOccupied_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_OwnerOccupied_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_RenterOccupied_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_RenterOccupied_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:FamilyHousehold
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder0OwnChildren_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder1To2OwnChildren_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder3To4OwnChildren_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder5OrMoreOwnChildren_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_OwnerOccupied
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_OwnerOccupied
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_RenterOccupied
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_RenterOccupied
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder0OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder1To2OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder3To4OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder5OrMoreOwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_MarriedCoupleFamilyHousehold_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_OwnerOccupied_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_OwnerOccupied_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+occupancyTenure: dcs:OwnerOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_RenterOccupied_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_RenterOccupied_BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+householdType: dcs:MarriedCoupleFamilyHousehold
+occupancyTenure: dcs:RenterOccupied
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder0OwnChildren_SingleMotherFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder0OwnChildren_SingleMotherFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+householderOwnChildrenUnder18Years: [0 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder1To2OwnChildren_SingleMotherFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder1To2OwnChildren_SingleMotherFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+householderOwnChildrenUnder18Years: [1 2 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder3To4OwnChildren_SingleMotherFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder3To4OwnChildren_SingleMotherFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+householderOwnChildrenUnder18Years: [3 4 Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_Householder5OrMoreOwnChildren_SingleMotherFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_Householder5OrMoreOwnChildren_SingleMotherFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:SingleMotherFamilyHousehold
+householderOwnChildrenUnder18Years: [5 - Child]
+typeOf: dcs:StatisticalVariable
+
 Node: dcid:Count_Household_SingleMotherFamilyHousehold_OwnerOccupied
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -3159,400 +3697,6 @@ statType: dcs:marginOfError
 populationType: dcs:Household
 householdType: dcs:SingleMotherFamilyHousehold
 occupancyTenure: dcs:RenterOccupied
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderRaceWhiteAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:WhiteAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderRaceWhiteAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:WhiteAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderRaceBlackOrAfricanAmericanAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:BlackOrAfricanAmericanAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderRaceBlackOrAfricanAmericanAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:BlackOrAfricanAmericanAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderRaceAsianAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:AsianAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderRaceAsianAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:AsianAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderRaceSomeOtherRaceAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:SomeOtherRaceAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderRaceSomeOtherRaceAlone_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:SomeOtherRaceAlone
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderRaceTwoOrMoreRaces_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:TwoOrMoreRaces
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderRaceTwoOrMoreRaces_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:TwoOrMoreRaces
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderRaceHispanicOrLatino_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:HispanicOrLatino
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderRaceHispanicOrLatino_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:HispanicOrLatino
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:WhiteAloneNotHispanicOrLatino
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRace: dcs:WhiteAloneNotHispanicOrLatino
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_FullTimeYearRoundWorker_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderWorkStatus: dcs:USC_FullTimeYearRoundWorker
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_FullTimeYearRoundWorker_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderWorkStatus: dcs:USC_FullTimeYearRoundWorker
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderAge65OrMoreYears_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderAge: [65 - Years]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderAge65OrMoreYears_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderAge: [65 - Years]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_WithSSIAndOrCashAssistanceInThePast12Months_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-benefitsStatus: dcs:WithSSIAndOrCashAssistanceInThePast12Months
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_WithSSIAndOrCashAssistanceInThePast12Months_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-benefitsStatus: dcs:WithSSIAndOrCashAssistanceInThePast12Months
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_WithSocialSecurityIncomeInThePast12Months_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-benefitsStatus: dcs:WithSocialSecurityIncomeInThePast12Months
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_WithSocialSecurityIncomeInThePast12Months_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-benefitsStatus: dcs:WithSocialSecurityIncomeInThePast12Months
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentLessThanHighSchoolGraduate_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderEducationalAttainment: dcs:LessThanHighSchoolGraduate
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentHighSchoolGraduateIncludesEquivalency_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderEducationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentSomeCollegeOrAssociatesDegree_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderEducationalAttainment: dcs:SomeCollegeOrAssociatesDegree
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_HouseholderEducationalAttainmentBachelorsDegreeOrHigher_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder0RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRelatedChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder0RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRelatedChildrenUnder18Years: [0 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder1To2RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRelatedChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder1To2RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRelatedChildrenUnder18Years: [1 2 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder3To4RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRelatedChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder3To4RelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRelatedChildrenUnder18Years: [3 4 Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_Householder5OrMoreRelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRelatedChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_Householder5OrMoreRelatedChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householderRelatedChildrenUnder18Years: [5 - Child]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Household_Householder0OwnChildren_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
@@ -3625,150 +3769,6 @@ populationType: dcs:Household
 povertyStatus: dcs:BelowPovertyLevelInThePast12Months
 householdType: dcs:SingleMotherFamilyHousehold
 householderOwnChildrenUnder18Years: [5 - Child]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_With2Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdSize: [2 Person]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_With2Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdSize: [2 Person]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_With3To4Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdSize: [3 4 Person]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_With3To4Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdSize: [3 4 Person]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_With5To6Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdSize: [5 6 Person]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_With5To6Person_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdSize: [5 6 Person]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_With7OrMorePerson_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdSize: [7 - Person]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_With7OrMorePerson_SingleMotherFamilyHousehold_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdSize: [7 - Person]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_SingleMotherFamilyHousehold_With0Worker_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdWorkerSize: [0 Worker]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_With0Worker_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdWorkerSize: [0 Worker]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_SingleMotherFamilyHousehold_With1Worker_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdWorkerSize: [1 Worker]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_With1Worker_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdWorkerSize: [1 Worker]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_SingleMotherFamilyHousehold_With2Worker_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdWorkerSize: [2 Worker]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_With2Worker_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdWorkerSize: [2 Worker]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Household_SingleMotherFamilyHousehold_With3OrMoreWorker_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdWorkerSize: [3 - Worker]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Household_SingleMotherFamilyHousehold_With3OrMoreWorker_BelowPovertyLevelInThePast12Months
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Household
-povertyStatus: dcs:BelowPovertyLevelInThePast12Months
-householdType: dcs:SingleMotherFamilyHousehold
-householdWorkerSize: [3 - Worker]
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Household_SingleMotherFamilyHousehold_OwnerOccupied_BelowPovertyLevelInThePast12Months
