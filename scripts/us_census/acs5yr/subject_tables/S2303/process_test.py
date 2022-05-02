@@ -23,8 +23,8 @@ from .process import S2303SubjectTableDataLoader
 _TEST_DIR = os.path.join(_CODEDIR, 'testdata')
 _TEST_DATA_ZIP = os.path.join(_TEST_DIR, 'alabama.zip')
 _CONFIG_PATH = os.path.join(_CODEDIR, 'config.json')
-_EXPECTED_TMCF = os.path.join(_CODEDIR, 'output.tmcf')
-_EXPECTED_MCF = os.path.join(_CODEDIR, 'output.mcf')
+_EXPECTED_TMCF = os.path.join(_TEST_DIR, 'output.tmcf')
+_EXPECTED_MCF = os.path.join(_TEST_DIR, 'output.mcf')
 _EXPECTED_CSV = os.path.join(_TEST_DIR, 'expected.csv')
 
 
@@ -41,6 +41,7 @@ class ProcessTest(unittest.TestCase):
 
     def test_create_csv_mcf_tmcf(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_dir = '.'
             set_column_map(_TEST_DATA_ZIP, _CONFIG_PATH, tmp_dir)
             column_map_path = os.path.join(tmp_dir, 'column_map.json')
             data_loader = S2303SubjectTableDataLoader(
