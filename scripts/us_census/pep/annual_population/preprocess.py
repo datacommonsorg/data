@@ -63,7 +63,6 @@ def _load_df(path: str,
     df = None
     if file_format.lower() == "csv":
         df = pd.read_csv(path, header=header, encoding=encoding)
-        #print(df)
     elif file_format.lower() == "txt":
         df = pd.read_table(path,
                            index_col=False,
@@ -71,7 +70,6 @@ def _load_df(path: str,
                            engine='python',
                            header=header,
                            skiprows=skip_rows)
-        #print(df.head())
     elif file_format.lower() in ["xls", "xlsx"]:
         df = pd.read_excel(path, header=header)
     return df
@@ -119,12 +117,8 @@ def _transpose_df(df: pd.DataFrame, common_col: str,
         pd.DataFrame: Dataframe with Location, Count_Person
     """
     res_df = pd.DataFrame()
-    #print("df")
-    #print(df.head())
     for col in data_cols:
         tmp_df = df[[common_col, col]]
-        #print("tmp_df")
-        #print(tmp_df.head())
         tmp_df.columns = ["Location", "Count_Person"]
         tmp_df["Year"] = col
         res_df = pd.concat([res_df, tmp_df])
@@ -188,13 +182,6 @@ def _add_geo_id(df: pd.DataFrame, data_col: str, new_col: str) -> pd.DataFrame:
     df[new_col] = df[data_col].apply(lambda rec: USSTATE_MAP.get(rec, pd.NA))
 
     df = df.dropna(subset=[new_col])
-    return df
-
-
-def _shortform_to_geoid(df: pd.DataFrame) -> pd.DataFrame:
-    df['Location'] = df['Short_Form'].apply(
-        lambda rec: USSTATE_MAP.get(rec, pd.NA))
-    df = df.dropna(subset=['Location'])
     return df
 
 
@@ -350,9 +337,7 @@ def _process_county_coest2020(file_path: str) -> pd.DataFrame:
                                                     fillchar='0')
     df['Location'] = df[["STATE", "COUNTY"]].apply(geo_id, axis=1)
     df.columns = df.columns.str.replace('POPESTIMATE', '')
-    #geoId = df[["STNAME", "CTYNAME", "Location"]]
     df = df.drop(columns=["STATE", "COUNTY", "STNAME", "CTYNAME", "042020"])
-    #print(geoId.head())
     df = _transpose_df(df, "Location", df.columns[:-1])
 
     return df
@@ -405,16 +390,11 @@ def _process_counties(file_path: str) -> pd.DataFrame:
             df.loc[1, "Location"] = "Washington County"
         df["Location"] = df.apply(
             lambda x: _county_to_dcid(COUNTY_MAP, x.State, x.Location), axis=1)
-        #county_fips_code = county_geoid()
-        #df["Location"] = df.apply(
-        #    lambda x: _county_to_dcid(county_fips_code, x.State, x.Location),
-        #    axis=1)
         df.loc[0, 'Location'] = df.loc[0, 'State']
         df["Location"] = df["Location"].apply(_state_to_geo_id)
         df = _transpose_df(df, "Location", df.columns[:-2])
         df["Count_Person"] = df["Count_Person"].str.replace(",", "")
         df = df[["Year", "Location", "Count_Person"]]
-        #print(df.head())
     df = df[df["Location"] != "country/USA"]
     return df
 
@@ -435,46 +415,6 @@ def _first_non_zero_val(place: str, cousub: str, concit: str) -> str:
     if cousub not in ['00000', '99990']:
         return cousub
     return concit
-
-
-def _get_city_geo_id(county: str, place: str, cousub: str, concit: str,
-                     name: str) -> str:
-    """
-
-    Args:
-        county (str): COUNTY FIPS Code
-        place (str): PLACE FIPS Code
-        cousub (str): COUSUB FIPS Code
-        concit (str): CONCIT FIPS Code
-        name (str): Name of the Area
-
-    Returns:
-        str: _description_
-    """
-    res = None
-    if "county" in name.lower():
-        return pd.NA
-    if "census area" in name.lower():
-        return pd.NA
-    if "borough" in name.lower():
-        res = _first_non_zero_val(place, cousub, concit)
-    elif name.lower().endswith("borough"):
-        res = _first_non_zero_val(place, cousub, concit)
-    elif "city" in name.lower():
-        res = _first_non_zero_val(place, cousub, concit)
-    elif "township" in name.lower() or "CDP" in name.lower():
-        res = _first_non_zero_val(place, cousub, concit)
-    elif "town" in name.lower():
-        res = _first_non_zero_val(place, cousub, concit)
-    elif "village" in name.lower():
-        res = _first_non_zero_val(place, cousub, concit)
-    elif "municipality" in name.lower():
-        res = _first_non_zero_val(place, cousub, concit)
-    elif "metropolitan" in name.lower():
-        res = _first_non_zero_val(place, cousub, concit)
-    else:
-        res = county + cousub
-    return res
 
 
 def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
@@ -546,36 +486,12 @@ def _process_cities(file_path: str, file_name: str) -> pd.DataFrame:
                       header=0,
                       encoding="ISO-8859-1")
         df = df[df["SUMLEV"] == 162]
-        #res_df = df.sort_values(by=[
-        #    "STATE", "COUNTY", "PLACE", "COUSUB", "CONCIT", "NAME", "STNAME"
-        #])
-        #res_df.to_csv("sort_by.csv", index=False)
         df['STATE'] = df['STATE'].astype('str').str.pad(2,
                                                         side='left',
                                                         fillchar='0')
-        #df['COUNTY'] = df['COUNTY'].astype('str').str.pad(3,
-        #                                                  side='left',
-        #                                                  fillchar='0')
         df['PLACE'] = df['PLACE'].astype('str').str.pad(5,
                                                         side='left',
                                                         fillchar='0')
-        #df['COUSUB'] = df['COUSUB'].astype('str').str.pad(5,
-        #                                                  side='left',
-        #                                                  fillchar='0')
-        #df['CONCIT'] = df['CONCIT'].astype('str').str.pad(5,
-        #                                                  side='left',
-        #                                                  fillchar='0')
-        #df["PLACE"] = df["PLACE"].str.replace("99990", "00000")
-        #df["Location"] = df.apply(
-        #    lambda row: "geoId/" + row.STATE + _get_city_geo_id(
-        #        row.COUNTY, row.PLACE, row.COUSUB, row.CONCIT, row.NAME),
-        #    axis=1)
-        #df = df.dropna()
-        #df["STNAME"] = df["STNAME"].str.lower()
-        #df["NAME"] = df["NAME"].str.lower()
-        #df = df.drop_duplicates(subset=["NAME", "STNAME"], keep="last")
-        #df = df[~df["Location"].str.endswith("00000")]
-        #df = df.drop_duplicates(subset=["Location"], keep="last")
         df["Location"] = "geoId/" + df["STATE"] + df["PLACE"]
         key = "POPESTIMATE07"
         final_cols = [
@@ -592,7 +508,6 @@ def _process_cities(file_path: str, file_name: str) -> pd.DataFrame:
         df.columns = df.columns.str.replace(key, '')
         df = df[final_cols]
         df = _transpose_df(df, common_col="Location", data_cols=df.columns[1:])
-        #print(df.groupby(by="Location").count())
     return df
 
 
@@ -673,7 +588,6 @@ value: C:USA_Annual_Population->Count_Person
         for file in self.input_files:
             file_name = os.path.basename(file)
             print(file_name)
-            #print(f"file name {file_name}")
             file_format = _find_file_format(file)
 
             op_file = "output" + os.sep + file_name.replace(".txt", ".csv")
@@ -708,8 +622,6 @@ value: C:USA_Annual_Population->Count_Person
                     "sub-est2019_all.csv"
             ]:
                 df = _process_cities(file, file_name)
-                #print(df.head())
-                #df = df.drop_duplicates(subset=["Year", "Location"])
             else:
                 df = _load_df(file, file_format)
                 df = clean_df(df, file_format)
@@ -721,8 +633,6 @@ value: C:USA_Annual_Population->Count_Person
         self.df[["Year", "Location",
                  "Count_Person"]].to_csv(self.cleaned_csv_file_path,
                                          index=False)
-        #tmp_df = self.df["Location"]
-        #tmp_df.groupby().value_counts().to_csv("loc.csv")
         self.__generate_mcf()
         self.__generate_tmcf()
 
