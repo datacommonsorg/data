@@ -25,17 +25,20 @@ These are the attributes that we will use
 #### Cleaned Data
 Cleaned data will be inside [Output/USA_Population_Count_by_Race.csv] as a CSV file with the following columns.
 
-- Geographic Area
 - Year
+- geo_ID
+- Count_Person_USAllRaces
 - Count_Person_WhiteAlone
-- Count_Person_BlackOrAfricanAlone,
+- Count_Person_BlackOrAfricanAmericanAlone
 - Count_Person_AmericanIndianOrAlaskaNativeAlone
 - Count_Person_AsianAlone
 - Count_Person_NativeHawaiianAndOtherPacificIslanderAlone
+- Count_Person_White
+- Count_Person_Black
+- Count_Person_AsianOrPacificIslander
+- Count_Person_AmericanIndianOrAlaskaNative
 - Count_Person_TwoOrMoreRace
 - Count_Person_NonWhite
-- short_Form
-_ geo_ID
 
 #### MCFs and Template MCFs
 - [Output/USA_Population_Count_by_Race.mcf]
