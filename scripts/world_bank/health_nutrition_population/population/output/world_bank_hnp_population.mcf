@@ -1,0 +1,519 @@
+
+Node: Count_Persons_5Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 05, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 5]
+
+
+Node: Count_Persons_2Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 02, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 2]
+
+
+Node: Count_Persons_19Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 19, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 19]
+
+
+Node: Count_Persons_7Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 07, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 7]
+
+
+Node: Count_Persons_4Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 04, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 4]
+
+
+Node: Count_Persons_4Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 04, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 4]
+
+
+Node: Count_Persons_3Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 03, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 3]
+
+
+Node: Count_Persons_18Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 18, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 18]
+
+
+Node: Count_Persons_15Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 15, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 15]
+
+
+Node: Count_Persons_16Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 16, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 16]
+
+
+Node: Count_Persons_16Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 16, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 16]
+
+
+Node: Count_Persons_11Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 11, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 11]
+
+
+Node: Count_Persons_22Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 22, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 22]
+
+
+Node: Count_Persons_0Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 00, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 0]
+
+
+Node: Count_Persons_8Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 08, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 8]
+
+
+Node: Count_Persons_19Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 19, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 19]
+
+
+Node: Count_Persons_13Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 13, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 13]
+
+
+Node: Count_Persons_1Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 01, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 1]
+
+
+Node: Count_Persons_23Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 23, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 23]
+
+
+Node: Count_Persons_7Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 07, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 7]
+
+
+Node: Count_Persons_3Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 03, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 3]
+
+
+Node: Count_Persons_10Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 10, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 10]
+
+
+Node: Count_Persons_24Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 24, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 24]
+
+
+Node: Count_Persons_6Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 06, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 6]
+
+
+Node: Count_Persons_18Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 18, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 18]
+
+
+Node: Count_Persons_24Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 24, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 24]
+
+
+Node: Count_Persons_13Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 13, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 13]
+
+
+Node: Count_Persons_20Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 20, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 20]
+
+
+Node: Count_Persons_5Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 05, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 5]
+
+
+Node: Count_Persons_1Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 01, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 1]
+
+
+Node: Count_Persons_25Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 25, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 25]
+
+
+Node: Count_Persons_2Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 02, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 2]
+
+
+Node: Count_Persons_9Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 09, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 9]
+
+
+Node: Count_Persons_23Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 23, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 23]
+
+
+Node: Count_Persons_15Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 15, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 15]
+
+
+Node: Count_Persons_25Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 25, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 25]
+
+
+Node: Count_Persons_8Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 08, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 8]
+
+
+Node: Count_Persons_11Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 11, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 11]
+
+
+Node: Count_Persons_21Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 21, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 21]
+
+
+Node: Count_Persons_17Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 17, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 17]
+
+
+Node: Count_Persons_17Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 17, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 17]
+
+
+Node: Count_Persons_14Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 14, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 14]
+
+
+Node: Count_Persons_22Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 22, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 22]
+
+
+Node: Count_Persons_21Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 21, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 21]
+
+
+Node: Count_Persons_6Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 06, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 6]
+
+
+Node: Count_Persons_12Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 12, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 12]
+
+
+Node: Count_Persons_20Years_Male
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 20, male, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 20]
+
+
+Node: Count_Persons_14Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 14, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 14]
+
+
+Node: Count_Persons_10Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 10, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 10]
+
+
+Node: Count_Persons_0Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 00, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 0]
+
+
+Node: Count_Persons_12Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 12, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 12]
+
+
+Node: Count_Persons_9Years_Female
+typeOf: dcs:StatisticalVariable
+description: "Age population, age 09, female, interpolated"
+populationType: dcs:Person
+measuredProperty: dcs:count
+gender: dcs:Female
+statType: dcs:measuredValue
+age: [Years 9]
