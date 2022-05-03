@@ -1,0 +1,39 @@
+Node: dcid:WHO/AIR_1
+name: "Ambient Air Pollution Attributable Deaths"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_1
+statType: dcs:measuredValue
+
+Node: dcid:WHO/AIR_7_IschaemicHeartDisease
+name: "Ambient Air Pollution Attributable Dalys (AIR_7), Ischaemic Heart Disease"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_7
+statType: dcs:measuredValue
+causeOfDeathAndDisability: dcs:IschaemicHeartDisease
+
+Node: dcid:WHO/AIR_7_Female_Stroke
+name: "Ambient Air Pollution Attributable Dalys (AIR_7), Female, Stroke"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_7
+statType: dcs:measuredValue
+gender: schema:Female
+causeOfDeathAndDisability: dcs:Stroke
+
+Node: dcid:WHO/AIR_43_TracheaBronchusLungCancers
+name: "Ambient Air Pollution Attributable Dalys (AIR_43), Trachea Bronchus Lung Cancers"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_43
+statType: dcs:measuredValue
+causeOfDeathAndDisability: dcs:TracheaBronchusLungCancers
+
+Node: dcid:WHO/AIR_43_IschaemicHeartDisease
+name: "Ambient Air Pollution Attributable Dalys (AIR_43), Ischaemic Heart Disease"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_43
+statType: dcs:measuredValue
+causeOfDeathAndDisability: dcs:IschaemicHeartDisease
