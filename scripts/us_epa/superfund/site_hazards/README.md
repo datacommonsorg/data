@@ -17,5 +17,5 @@ To download the dataset, visit [catalog.data.gov](https://catalog.data.gov/datas
     python3 process_sites_hazards.py
     ```
 #### Notes
-The dataset has only observations for 1 year, and hence when visualized you will see a single data point.
-This dataset requires a StatisticalVariable definition, which is found in the [statvar.mcf](statvar.mcf) file.
+- The dataset has only observations for 1 year, and hence when visualized you will see a single data point.
+- This dataset requires a StatisticalVariable definition, which is found in the [statvar.mcf](statvar.mcf) file.

@@ -82,7 +82,7 @@ _BASE_SV_MAP = {
     "Zinc": {
         "populationType": "BodyOfWater",
         "contaminatedThing": "GroundWater",
-        "contaminant": "inChIKey/HCHKCACWOHOZIP-UHFFFAOYSA-N",
+        "contaminant": "ZincElement",
         "measuredProperty": "concentration"
     },
     "Cadmium": {
@@ -116,7 +116,7 @@ def gen_statvar_dcid(sv_dict: dict) -> str:
         dcid_str.append(sv_dict['contaminantStatus'])
     if 'contaminant' in sv_dict.keys():
         # Handle the case where for contaminant = zinc, dcid is the name and not the InChiKey
-        if sv_dict['contaminant'] == 'inChIKey/HCHKCACWOHOZIP-UHFFFAOYSA-N':
+        if sv_dict['contaminant'] == 'ZincElement':
             dcid_str.append('Zinc')
         else:
             dcid_str.append(sv_dict['contaminant'])
@@ -132,6 +132,9 @@ def gen_statvar_dcid(sv_dict: dict) -> str:
         return 'DissolvedOxygen_BodyOfWater_GroundWater'
     return dcid_str
 
+#TODO[sharadshriram]: Complete the implementation
+def gen_stavar_name(sv_dict:dict)->str:
+  pass
 
 def make_stat_var_dict(contaminant_type: list,
                        column_list: list) -> (dict, dict):
@@ -150,6 +153,8 @@ def make_stat_var_dict(contaminant_type: list,
                 if contaminant_state == 'Dissolved':
                     base_sv['contaminantStatus'] = 'DissolvedContaminant'
                 dcid_str = gen_statvar_dcid(base_sv)
+                if 'ZincElement' in dcid_str:
+                    dcid_str = dcid_str.replace('ZincElement', 'Zinc')
                 key = 'Node: dcid:' + dcid_str
                 base_sv['typeOf'] = 'StatisticalVariable'
                 base_sv['statType'] = 'measuredValue'
@@ -252,7 +257,7 @@ def main(_) -> None:
     flags.DEFINE_string(
         'output_path', './data/output',
         'Path to the directory where generated files are to be stored.')
-    process_intermediate_csv(FLAGS.input_path, FLAGS.output_path)
+    process_intermediate_csv(FLAGS.input_file, FLAGS.output_path)
 
 
 if __name__ == '__main__':

@@ -116,7 +116,13 @@ def write_sv_to_file(row, contaminant_df, file_obj):
         # there are multiple node dcids mapping to the same element/compund's
         # commonName -- hence we take the first occurance of this name
         # TODO: Handle isotopes and different compound names
+        if contaminant_series.shape[0] == 0:
+          raise KeyError # Contaminant is not found
         contaminant_series = contaminant_series.iloc[0]
+
+        # TODO: Graceful exception handling
+        if 'InChI' in contaminant_series['dcid']:
+          raise KeyError # skips organic compounds
 
         sv_dict = {
             "contaminatedThing": f"{contaminated_thing}",
@@ -128,7 +134,7 @@ def write_sv_to_file(row, contaminant_df, file_obj):
         node_str = f"Node: dcid:{dcid_str}\n"
         node_str += "typeOf: dcs:StatisticalVariable\n"
         node_str += "populationType: dcs:SuperfundSite\n"
-        node_str += f"name: \"Is the {contminated_thing} contaminated with {contaminated_series['dcid'] }? A Boolean observation is expected. \"\n"
+        node_str += f"name: \"Whether {contaminated_thing} is contaminated with {contaminant_series['CommonName'].title() }.\"\n"
         node_str += "statType: dcs:measurementResult\n"
         node_str += f"contaminant: dcs:{contaminant_series['dcid']}\n"
         node_str += f"contaminatedThing: dcs:{contaminated_thing}\n"
