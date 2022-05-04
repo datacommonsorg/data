@@ -295,7 +295,7 @@ def _clean_county_20_csv_file(file_path: str) -> pd.DataFrame:
         "Black or African American Alone": ["BA_MALE", "BA_FEMALE"],
         "American Indian or Alaska Native Alone": ["IA_MALE", "IA_FEMALE"],
         "Asian Alone": ["AA_MALE", "AA_FEMALE"],
-        "Native Hawaiian and Other Pacific Islander Alone":      \
+        "Native Hawaiian and Other Pacific Islander Alone":        \
             ["NA_MALE", "NA_FEMALE"],
         "Two or more Races": ["TOM_MALE", "TOM_FEMALE"]
     }
