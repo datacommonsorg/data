@@ -29,6 +29,7 @@ value: C:NHM_BirthControl->Count_BirthControlEvent_Sterilisation
 Node: E:NHM_BirthControl->E6
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
+scalingFactor: 100
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"
@@ -53,6 +54,7 @@ value: C:NHM_BirthControl->Count_BirthControlEvent_IUCDInsertion
 Node: E:NHM_BirthControl->E10
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent
+scalingFactor: 100
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"

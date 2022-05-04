@@ -37,6 +37,7 @@ value: C:NHM_GeneralStats->Count_SurgicalProcedure_Minor
 Node: E:NHM_GeneralStats->E6
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient
+scalingFactor: 100
 observationAbout: E:NHM_GeneralStats->E0
 observationDate: C:NHM_GeneralStats->Date
 observationPeriod: "P1Y"

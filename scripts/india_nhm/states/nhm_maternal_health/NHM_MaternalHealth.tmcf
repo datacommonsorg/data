@@ -69,6 +69,7 @@ value: C:NHM_MaternalHealth->Count_ChildDeliveryEvent_AtHome_WithStandbyAssist
 Node: E:NHM_MaternalHealth->E9
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
+scalingFactor: 100
 observationAbout: E:NHM_MaternalHealth->E0
 observationDate: C:NHM_MaternalHealth->Date
 observationPeriod: "P1Y"

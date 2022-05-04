@@ -21,6 +21,7 @@ value: C:NHM_ChildHealth->Count_BirthEvent_StillBirth
 Node: E:NHM_ChildHealth->E3
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent
+scalingFactor: 100
 observationAbout: E:NHM_ChildHealth->E0
 observationDate: C:NHM_ChildHealth->Date
 observationPeriod: "P1Y"
