@@ -15,6 +15,7 @@ from shapely import geometry
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))  # for Crosswalk
 from us_epa.util.crosswalk import Crosswalk
+from us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
@@ -49,7 +50,6 @@ _OUT_FILE_PREFIX = 'us_epa_facility'
 _CROSSWALK_FILE = 'crosswalks.csv'
 
 _GEOJSON_CACHE = {}
-_COUNTY_CANDIDATES_CACHE = {}
 
 
 def _gen_tmcf():
@@ -94,39 +94,12 @@ def _get_address(table, row):
     return address
 
 
-def _get_cip(zip, county):
-    cip = []
-    if zip:
-        cip.append('dcid:' + zip)
-    if county:
-        cip.append('dcid:' + county)
-    return cip
-
-
 def _get_naics(table, row):
     column = 'NAICS_CODE' if table == 'V_GHG_INJECTION_FACILITIES' else 'PRIMARY_NAICS_CODE'
     naics = _v(table, row, column)
     if not naics:
         return ''
     return 'dcs:NAICS/' + naics
-
-
-def _get_county_candidates(zcta):
-    """Returns counties that the zcta is associated with.
-
-       Returns: two candidate county lists corresponding to zip and geoOverlaps respectively.
-    """
-    if zcta in _COUNTY_CANDIDATES_CACHE:
-        return _COUNTY_CANDIDATES_CACHE[zcta]
-    candidate_lists = []
-    for prop in ['containedInPlace', 'geoOverlaps']:
-        resp = datacommons.get_property_values([zcta],
-                                               prop,
-                                               out=True,
-                                               value_type='County')
-        candidate_lists.append(sorted(resp[zcta]))
-    _COUNTY_CANDIDATES_CACHE[zcta] = candidate_lists
-    return candidate_lists
 
 
 def _validate_latlng(lat, lng, dcid):
@@ -168,7 +141,7 @@ def _resolve_places(facility_id, zip, provided_county, lat, lng):
         _COUNTERS['missing_zip_and_county'].append(facility_id)
         return '', '', '', ''
 
-    county_candidates = _get_county_candidates(zip)
+    county_candidates = fh.get_county_candidates(zip)
     if any(provided_county in l for l in county_candidates):
         # Provided county is in the candidate list, use that.
 
@@ -256,7 +229,7 @@ def process(input_tables_path, output_path):
                         _ADDRESS:
                             _str(_get_address(table, in_row)),
                         _CIP:
-                            ', '.join(_get_cip(zip, county)),
+                            ', '.join(fh.get_cip(zip, county)),
                         _NAICS:
                             _get_naics(table, in_row),
                         _LAT:
