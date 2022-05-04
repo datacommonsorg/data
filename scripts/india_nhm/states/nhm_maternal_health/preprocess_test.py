@@ -72,6 +72,5 @@ class TestPreprocess(unittest.TestCase):
         self.assertEqual(u'{}'.format(expected_data), result_data)
 
 
-
 if __name__ == '__main__':
     unittest.main()
