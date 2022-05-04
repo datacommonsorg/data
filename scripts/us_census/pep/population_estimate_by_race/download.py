@@ -37,7 +37,8 @@ with open(URLS_JSON_PATH, encoding="UTF-8") as file:
 # If there is a conflict, we'll get an error at import time.
 flags.DEFINE_list("url", URLS_JSON["urls"], "Import Data URL's List")
 
-def _resolve_pe_11(file_name: str,url: str) -> pd.DataFrame:
+
+def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
 
@@ -56,14 +57,14 @@ def _resolve_pe_11(file_name: str,url: str) -> pd.DataFrame:
         df['Geographic Area'] = "United States"
     else:
         cols = [
-            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
-            "11", "12"
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
         ]
         df = pd.read_csv(url, names=cols, skiprows=2)
         df = df[df["0"].str.contains("All ages", na=False)]
         df['Year'] = year
         df['Geographic Area'] = "United States"
     return df
+
 
 def _save_data(url: str, download_local_path: str) -> None:
     """
@@ -85,7 +86,7 @@ def _save_data(url: str, download_local_path: str) -> None:
             df.to_excel(download_local_path + os.sep + file_name\
                 ,index=False,engine='xlsxwriter')
         elif "pe-11" in url:
-            df=_resolve_pe_11(file_name,url)
+            df = _resolve_pe_11(file_name, url)
             df.to_csv(download_local_path + os.sep + file_name, index=False)
         elif "pe-19" in url:
             file_name = file_name.replace(".csv", ".xlsx")

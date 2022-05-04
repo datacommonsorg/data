@@ -48,7 +48,7 @@ def add_geo_id(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _clean_xls_file(df: pd.DataFrame, file :str) -> pd.DataFrame:
+def _clean_xls_file(df: pd.DataFrame, file: str) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a xls file format.
     Also, Performs transformations on the data.
@@ -61,26 +61,39 @@ def _clean_xls_file(df: pd.DataFrame, file :str) -> pd.DataFrame:
     """
     #index=0
     if "2020" in file:
-        df.drop(df[df['ORIGIN'] != 0].index, inplace = True)
-        df.drop(df[df['SEX'] != 0].index, inplace = True)
+        df.drop(df[df['ORIGIN'] != 0].index, inplace=True)
+        df.drop(df[df['SEX'] != 0].index, inplace=True)
         df = df.drop(['STATE','DIVISION','SUMLEV','SEX','ORIGIN'\
             ,'AGE','REGION','ESTIMATESBASE2010','CENSUS2010POP'\
             ,'POPESTIMATE042020'],axis=1)
     else:
         df = df.drop(['STATE','DIVISION','REGION','ESTIMATESBASE2000',\
             'CENSUS2010POP','POPESTIMATE2010'],axis=1)
-    df = df.groupby(['NAME','RACE']).sum().transpose().stack(0).reset_index()
+    df = df.groupby(['NAME', 'RACE']).sum().transpose().stack(0).reset_index()
     if "2020" in file:
-        df[0]=df[1]+df[2]+df[3]+df[4]+df[5]+df[6]
-    df['Year']=df['level_0'].str[-4:]
-    df = df.drop(['level_0'],axis=1)
-    df.rename(columns = {"NAME":"Geographic Area",0:"Total",1:"White Alone",\
-        2:"Black or African American Alone",\
-        3:"American Indian or Alaska Native Alone",\
-        4:"Asian Alone",5:"Native Hawaiian and Other Pacific Islander Alone",\
-        6:"Two or more Races"}, inplace = True)
-    #print(df)
+        df[0] = df[1] + df[2] + df[3] + df[4] + df[5] + df[6]
+    df['0'] = df[0]
+    df['1'] = df[1]
+    df['2'] = df[2]
+    df['3'] = df[3]
+    df['4'] = df[4]
+    df['5'] = df[5]
+    df['6'] = df[6]
+    df['Year'] = df['level_0'].str[-4:]
+    df = df.drop(['level_0', 0, 1, 2, 3, 4, 5, 6], axis=1)
+    df.columns = df.columns.str.replace('NAME', 'Geographic Area')
+    df.columns = df.columns.str.replace('0', 'Total')
+    df.columns = df.columns.str.replace('1', 'White Alone')
+    df.columns = df.columns.str.replace('2', 'Black or African American Alone')
+    df.columns = df.columns.str.replace('3',\
+        'American Indian or Alaska Native Alone')
+    df.columns = df.columns.str.replace('4', 'Asian Alone')
+    df.columns = df.columns.str.replace('5',\
+        'Native Hawaiian and Other Pacific Islander Alone')
+    df.columns = df.columns.str.replace('6', 'Two or more Races')
+    print(df.columns)
     return df
+
 
 def _clean_xlsx_file(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -93,24 +106,29 @@ def _clean_xlsx_file(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         df (DataFrame) : Transformed DataFrame for xls dataset.
     """
-    df = df.drop(['Census','Estimates Base',2010],axis=1)
-    df = df.drop([1],axis=0)
+    df = df.drop(['Census', 'Estimates Base', 2010], axis=1)
+    df = df.drop([1], axis=0)
     df.drop(df.index[7:], inplace=True)
     #print(df.columns)
     df['Unnamed: 0'] = df['Unnamed: 0'].str.replace(".", "")
     df['Geographic Area'] = 'United States'
     df = df.groupby(['Geographic Area','Unnamed: 0']).sum()\
         .transpose().stack(0).reset_index()
-    df.rename(columns = {"level_0":"Year","Asian":"Asian Alone"\
-        , "White":"White Alone"\
-        , "TOTAL POPULATION":"Total","Black or African American":\
-        "Black or African American Alone"\
-        ,"Native Hawaiian and Other Pacific Islander":\
-        "Native Hawaiian and Other Pacific Islander Alone"}\
-        ,inplace = True)
+
+    df.columns = df.columns.str.replace('level_0', 'Year')
+    df.columns = df.columns.str.replace('White', 'White Alone')
+    df.columns = df.columns.str.replace('TOTAL POPULATION', 'Total')
+    df.columns = df.columns.str.replace('Black or African American', \
+        'Black or African American Alone')
+    df.columns = df.columns.str.replace(
+        'Native Hawaiian and Other Pacific\
+         Islander', 'Native Hawaiian and Other Pacific Islander Alone')
+    df.columns = df.columns.str.replace('Asian', 'Asian Alone')
+
     df['Total'] = pd.to_numeric(df['Total'])
     #print(df)
     return df
+
 
 def _clean_county_70_xls_file(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -127,18 +145,19 @@ def _clean_county_70_xls_file(df: pd.DataFrame) -> pd.DataFrame:
         +df[8]+df[9]+df[10]+df[11]+df[12]+df[13]+df[14]+df[15]+\
         df[16]+df[17]+df[18]
     df['FIPS'] = [f'{x:05}' for x in df['FIPS']]
-    df['Info']=df['Year'].astype(str)+'-'+df['FIPS'].astype(str)
+    df['Info'] = df['Year'].astype(str) + '-' + df['FIPS'].astype(str)
     df.drop(columns=['Year','FIPS',1,2,3,4,5,6,7,8,9,10,11,12,\
         13,14,15,16,17,18],inplace=True)
     df = df.groupby(['Info','Race/Sex']).sum().transpose().\
         stack(0).reset_index()
-    df['Year'] = df['Info'].str.split('-',expand=True)[0]
-    df['geo_ID'] = "geoID/"+df['Info'].str.split('-',expand=True)[1]
-    df['Total']=df[1]+df[2]+df[3]+df[4]+df[5]+df[6]
-    df['White Alone']=df[1]+df[2]
-    df['Black or African American Alone']=df[3]+df[4]
-    df.drop(columns=['Info','level_0',1,2,3,4,5,6],inplace=True)
+    df['Year'] = df['Info'].str.split('-', expand=True)[0]
+    df['geo_ID'] = "geoID/" + df['Info'].str.split('-', expand=True)[1]
+    df['Total'] = df[1] + df[2] + df[3] + df[4] + df[5] + df[6]
+    df['White Alone'] = df[1] + df[2]
+    df['Black or African American Alone'] = df[3] + df[4]
+    df.drop(columns=['Info', 'level_0', 1, 2, 3, 4, 5, 6], inplace=True)
     return df
+
 
 def _clean_county_80_xls_file(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -154,21 +173,23 @@ def _clean_county_80_xls_file(df: pd.DataFrame) -> pd.DataFrame:
     df['Total People']=df[1]+df[2]+df[3]+df[4]+df[5]+df[6]+df[7]+\
         df[8]+df[9]+df[10]+df[11]+df[12]+df[13]+df[14]+df[15]+\
         df[16]+df[17]+df[18]
-    df['FIPS']=[f'{x:05}' for x in df['FIPS']]
-    df['Info']=df['Year'].astype(str)+'-'+df['FIPS'].astype(str)
+    df['FIPS'] = [f'{x:05}' for x in df['FIPS']]
+    df['Info'] = df['Year'].astype(str) + '-' + df['FIPS'].astype(str)
     df.drop(columns=['Year','FIPS',1,2,3,4,5,6,7,8,9,10,11,12,13,14\
         ,15,16,17,18],inplace=True)
     df = df.groupby(['Info','Race/Sex']).sum().transpose().\
         stack(0).reset_index()
-    df['Year'] = df['Info'].str.split('-',expand=True)[0]
-    df['geo_ID'] = "geoID/"+df['Info'].str.split('-',expand=True)[1]
+    df['Year'] = df['Info'].str.split('-', expand=True)[0]
+    df['geo_ID'] = "geoID/" + df['Info'].str.split('-', expand=True)[1]
     df['Total']=df['White male']+df['White female']+df['Black male']\
         +df['Black female']+df['Other races male']+df['Other races female']
-    df['White Alone']=df['White male']+df['White female']
-    df['Black or African American Alone']=df['Black male']+df['Black female']
+    df['White Alone'] = df['White male'] + df['White female']
+    df['Black or African American Alone'] = df['Black male'] + \
+        df['Black female']
     df.drop(columns=['Info','level_0','White male','White female','Black male'\
         ,'Black female','Other races male','Other races female'],inplace=True)
     return df
+
 
 def _clean_xls2_file(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -181,38 +202,41 @@ def _clean_xls2_file(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         df (DataFrame) : Transformed DataFrame for xls dataset.
     """
-    df['Race']=(df['Race/Sex Indicator'].str.replace(" female",""))
-    df['Race']=(df['Race'].str.replace(" male",""))
-    df = df.drop(['Race/Sex Indicator'],axis=1)
+    df['Race'] = (df['Race/Sex Indicator'].str.replace(" female", ""))
+    df['Race'] = (df['Race'].str.replace(" male", ""))
+    df = df.drop(['Race/Sex Indicator'], axis=1)
     for col in df.columns:
         df[col] = df[col].astype(str)
         df[col] = df[col].str.replace(",", "")
-    extras=['Year of Estimate','FIPS State Code','State Name','Race']
-    cols= df.columns.drop(extras)
+    extras = ['Year of Estimate', 'FIPS State Code', 'State Name', 'Race']
+    cols = df.columns.drop(extras)
     df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
     df['count']=df['Under 5 years']+df['5 to 9 years']+df['10 to 14 years']\
         +df['15 to 19 years']+df['20 to 24 years']+df['25 to 29 years']+\
-        df['30 to 34 years']+df['35 to 39 years']	+df['40 to 44 years']	\
-        +df['45 to 49 years']	+df['50 to 54 years']	+df['55 to 59 years']\
-        +df['60 to 64 years']	+df['65 to 69 years']	+df['70 to 74 years']\
-        +df['75 to 79 years']	+df['80 to 84 years']	+df['85 years and over']
+        df['30 to 34 years']+df['35 to 39 years'] +df['40 to 44 years']	\
+        +df['45 to 49 years'] +df['50 to 54 years'] +df['55 to 59 years']\
+        +df['60 to 64 years'] +df['65 to 69 years'] +df['70 to 74 years']\
+        +df['75 to 79 years'] +df['80 to 84 years'] +df['85 years and over']
     df = df.drop(['Under 5 years','5 to 9 years','10 to 14 years',\
         '15 to 19 years','20 to 24 years','25 to 29 years',\
         '30 to 34 years','35 to 39 years','40 to 44 years',\
         '45 to 49 years','50 to 54 years','55 to 59 years',\
         '60 to 64 years','65 to 69 years','70 to 74 years','75 to 79 years',\
         '80 to 84 years','85 years and over'],axis=1)
-    df['locationyear']=df['Year of Estimate']+"-"+df['State Name']
-    df = df.drop(['Year of Estimate','State Name'],axis=1)
+    df['locationyear'] = df['Year of Estimate'] + "-" + df['State Name']
+    df = df.drop(['Year of Estimate', 'State Name'], axis=1)
     df = df.groupby(['locationyear','Race']).sum().transpose().\
         stack(0).reset_index()
-    df['Year'] = df['locationyear'].str.split('-',expand=True)[0]
-    df['Geographic Area'] = df['locationyear'].str.split('-',expand=True)[1]
-    df['Total']=df["White"]+df["Black"]+df['Other races']
-    df = df.drop(['locationyear','level_0','Other races'],axis=1)
-    df.rename(columns = {"White":"White Alone","Black":\
-        "Black or African American Alone"},inplace = True)
+    df['Year'] = df['locationyear'].str.split('-', expand=True)[0]
+    df['Geographic Area'] = df['locationyear'].str.split('-', expand=True)[1]
+    df['Total'] = df["White"] + df["Black"] + df['Other races']
+    df = df.drop(['locationyear', 'level_0', 'Other races'], axis=1)
+
+    df.columns = df.columns.str.replace('White', 'White Alone')
+    df.columns = df.columns.str.replace('Black', 'Black Alone')
+
     return df
+
 
 def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -234,16 +258,17 @@ def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     if len(col) >= 15:
         df['Black or African American Alone'] = pd.to_numeric(df['7'])
         df = df.drop(["10", "11", "12"], axis=1)
-        df["American Indian or Alaska Native Alone"]=""
-        df["Asian Alone"]=""
-        df["Native Hawaiian and Other Pacific Islander Alone"]=""
-        df["Two or more Races"]=""
-        df["Total White"]=""
-        df["Total Black"]=""
-        df["Total American Indian & Alaska Native"]=""
-        df["Total Asian & Pacific Islander"]=""
+        df["American Indian or Alaska Native Alone"] = ""
+        df["Asian Alone"] = ""
+        df["Native Hawaiian and Other Pacific Islander Alone"] = ""
+        df["Two or more Races"] = ""
+        df["Total White"] = ""
+        df["Total Black"] = ""
+        df["Total American Indian & Alaska Native"] = ""
+        df["Total Asian & Pacific Islander"] = ""
     df = df.drop(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], axis=1)
     return df
+
 
 def _clean_county_20_csv_file(file_path: str) -> pd.DataFrame:
     """
@@ -270,18 +295,18 @@ def _clean_county_20_csv_file(file_path: str) -> pd.DataFrame:
         "Black or African American Alone": ["BA_MALE", "BA_FEMALE"],
         "American Indian or Alaska Native Alone": ["IA_MALE", "IA_FEMALE"],
         "Asian Alone": ["AA_MALE", "AA_FEMALE"],
-        "Native Hawaiian and Other Pacific Islander Alone": \
+        "Native Hawaiian and Other Pacific Islander Alone":     \
             ["NA_MALE", "NA_FEMALE"],
         "Two or more Races": ["TOM_MALE", "TOM_FEMALE"]
     }
     file_name = os.path.basename(file_path)
     start_yr, skip_yr1, skip_yr2, age_grp, initial_yr = 2, 12, 13, 99, 1998
     if "CC-EST2020-ALLDATA6" in file_name:
-        start_yr, skip_yr1, skip_yr2,  age_grp, initial_yr = 3, 13, 13, 0, 2007
+        start_yr, skip_yr1, skip_yr2, age_grp, initial_yr = 3, 13, 13, 0, 2007
     df = df[(df["YEAR"] >= start_yr) & (df["YEAR"] != skip_yr1) & (df["YEAR"] \
         != skip_yr2) & (df["AGEGRP"] == age_grp) ].reset_index().\
         drop(columns=["index"])
-    df["YEAR"] = df["YEAR"].replace(skip_yr1+1, skip_yr1)
+    df["YEAR"] = df["YEAR"].replace(skip_yr1 + 1, skip_yr1)
     df["STATE"] = df["STATE"].astype('str').str.pad\
         (width=2, side="left", fillchar="0")
     df["COUNTY"] = df["COUNTY"].astype('str').str.pad\
@@ -293,8 +318,9 @@ def _clean_county_20_csv_file(file_path: str) -> pd.DataFrame:
         elif col == "geo_ID":
             final_df[col] = "geoId/" + df["STATE"] + df["COUNTY"]
         else:
-            final_df[col] = df.loc[:,cols_dict[col]].sum(axis=1).astype('int')
+            final_df[col] = df.loc[:, cols_dict[col]].sum(axis=1).astype('int')
     return final_df
+
 
 def _clean_csv2_file(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -309,22 +335,28 @@ def _clean_csv2_file(df: pd.DataFrame) -> pd.DataFrame:
     """
     df.drop(df.index[65:], inplace=True)
     df.drop(df.index[1:14], inplace=True)
-    modify=[0,30,31,32,33,34,35,40,41,42,49]
+    modify = [0, 30, 31, 32, 33, 34, 35, 40, 41, 42, 49]
     for j in modify:
-        df.iloc[j]["Area"]=df.iloc[j]["Area"]+" "+df.iloc[j][1]
-        for i in range(2,10):
-            df.iloc[j][i-1]=df.iloc[j][i]
-    df.iloc[9]["Area"]=df.iloc[9]["Area"]+" "+df.iloc[9][1]+" "+df.iloc[9][2]
-    for i in range(3,11):
-        df.iloc[9][i-2]=df.iloc[9][i]
-    df.drop(columns=["3","4","8","9","10"],inplace=True)
-    df.rename(columns = {"Area":"Geographic Area","1":"Total",\
-        "2":"Total White","5":"Total Black",\
-        "6":"Total American Indian & Alaska Native",\
-        "7":"Total Asian & Pacific Islander"},inplace = True)
+        df.iloc[j]["Area"] = df.iloc[j]["Area"] + " " + df.iloc[j][1]
+        for i in range(2, 10):
+            df.iloc[j][i - 1] = df.iloc[j][i]
+    df.iloc[9][
+        "Area"] = df.iloc[9]["Area"] + " " + df.iloc[9][1] + " " + df.iloc[9][2]
+    for i in range(3, 11):
+        df.iloc[9][i - 2] = df.iloc[9][i]
+    df.drop(columns=["3", "4", "8", "9", "10"], inplace=True)
+    df.columns = df.columns.str.replace('Area', 'Geographic Area')
+    df.columns = df.columns.str.replace('1', 'Total')
+    df.columns = df.columns.str.replace('2', 'Total White')
+    df.columns = df.columns.str.replace('5', 'Total Black')
+    df.columns = df.columns.str.replace('6', \
+        'Total American Indian & Alaska Native')
+    df.columns = df.columns.str.replace('7', 'Total Asian & Pacific Islander')
+
     df["Geographic Area"] = [x.title() for x in df["Geographic Area"]]
     #print(df)
     return df
+
 
 def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -347,7 +379,7 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     df['Total White'] = df['5'] + df['6']
     df['Total Black'] = df['7'] + df['8']
     df['Total American Indian & Alaska Native'] = df['9'] + df['10']
-    df['Total Asian & Pacific Islander']=df['11']+df['12']
+    df['Total Asian & Pacific Islander'] = df['11'] + df['12']
     df = df.drop([
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
         "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"
@@ -355,6 +387,7 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
                  axis=1)
     #print(df)
     return df
+
 
 def _clean_txt2_file(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -383,13 +416,14 @@ def _clean_txt2_file(df: pd.DataFrame) -> pd.DataFrame:
     df['Total White'] = df['5'] + df['6']
     df['Total Black'] = df['7'] + df['8']
     df['Total American Indian & Alaska Native'] = df['9'] + df['10']
-    df['Total Asian & Pacific Islander']=df['11']+df['12']
+    df['Total Asian & Pacific Islander'] = df['11'] + df['12']
     df = df.drop([
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
         "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"
     ],
                  axis=1)
     return df
+
 
 def _clean_county_90_txt_file(file: str) -> pd.DataFrame:
     """
@@ -406,19 +440,20 @@ def _clean_county_90_txt_file(file: str) -> pd.DataFrame:
         "Total American Indian & Alaska Native",\
         "Total Asian & Pacific Islander",3])
     with open(file, encoding="ISO-8859-1") as inp:
-        filter_list=["1","2","3","4","5","0"]
+        filter_list = ["1", "2", "3", "4", "5", "0"]
         for line in inp.readlines():
             if line.strip().startswith(tuple(filter_list)):
-                list2=(" ".join(line.strip('\n').split()).split())
-                list1=[]
+                list2 = (" ".join(line.strip('\n').split()).split())
+                list1 = []
                 for x in list2:
                     if x.isnumeric():
                         list1.append(x)
                 df.loc[len(df.index)] = list1
-    df["geo_ID"]="geoID/"+df["FIPS"]
-    df.drop(columns=["FIPS",1,2,3],inplace=True)
-    df["Year"]="19"+file[-6:-4]
+    df["geo_ID"] = "geoID/" + df["FIPS"]
+    df.drop(columns=["FIPS", 1, 2, 3], inplace=True)
+    df["Year"] = "19" + file[-6:-4]
     return df
+
 
 def _transform_df(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -445,8 +480,8 @@ def _transform_df(df: pd.DataFrame) -> pd.DataFrame:
         missing_cols = ['Geographic Area', 'Year']
     else:
         final_cols = [
-            col for col in df.columns if 'year' not in col.lower() and
-            'geo_id' not in col.lower()
+            col for col in df.columns
+            if 'year' not in col.lower() and 'geo_id' not in col.lower()
         ]
         missing_cols = ['geo_ID', 'Year']
 
@@ -455,7 +490,7 @@ def _transform_df(df: pd.DataFrame) -> pd.DataFrame:
             'int') - df['White Alone'].astype('int')
         computed_cols = ['Count_Person_NonWhite']
     else:
-        computed_cols=[]
+        computed_cols = []
     df = df[missing_cols + final_cols + computed_cols]
 
     # Renaming DF Headers with ref to SV's Naming Standards.
@@ -470,15 +505,17 @@ def _transform_df(df: pd.DataFrame) -> pd.DataFrame:
                     .replace("Two or more Races",\
                             "TwoOrMoreRaces")\
                     .replace("American Indian or Alaska Native Alone",\
-                        "AmericanIndianOrAlaskaNativeAlone")\
+                        "AmericanIndianAndAlaskaNativeAlone")
                     .replace("Asian and Pacific Islander",\
                         "AsianAndPacificIslander")\
                     .replace("Total White",\
-                        "White")\
+                        "WhiteAloneOrInCombinationWithOneOrMoreOtherRaces")\
                     .replace("Total Black",\
-                        "Black")\
+                        "BlackOrAfricanAmericanAloneOrInCombination"+\
+                            "WithOneOrMoreOtherRaces")\
                     .replace("Total American Indian & Alaska Native",\
-                        "AmericanIndianOrAlaskaNative")\
+                        "AmericanIndianAndAlaskaNativeAloneOrInCombin"\
+                            +"ationWithOneOrMoreOtherRaces")\
                     .replace("Total Asian & Pacific Islander",\
                         "AsianOrPacificIslander")\
                     .strip()\
@@ -487,11 +524,7 @@ def _transform_df(df: pd.DataFrame) -> pd.DataFrame:
 
     final_cols_list = missing_cols + final_cols_list + computed_cols
     df.columns = final_cols_list
-    df.rename(columns={'Count_Person_Total': \
-            'Count_Person_USAllRaces'}, inplace=True)
     return df
-
-
 
 
 class CensusUSAPopulationByRace:
@@ -524,7 +557,7 @@ class CensusUSAPopulationByRace:
         Returns:
             df (DataFrame) : DataFrame with loaded dataset
         """
-        df=None
+        df = None
         self.file_name = os.path.basename(file)
         print(file)
         if ".xls" in file:
@@ -542,29 +575,29 @@ class CensusUSAPopulationByRace:
                 df = _clean_county_80_xls_file(df)
             else:
                 df = pd.read_excel(file)
-                df = _clean_xls_file(df,file)
+                df = _clean_xls_file(df, file)
         elif ".csv" in file:
             if "srh" in file:
                 df = pd.read_csv(file)
-                df["Year"]="19"+file[-6:-4]
+                df["Year"] = "19" + file[-6:-4]
                 df = _clean_csv2_file(df)
             elif "co-est00" in file or "CC-EST2020" in file:
-                df=_clean_county_20_csv_file(file)
+                df = _clean_county_20_csv_file(file)
             else:
                 df = pd.read_csv(file)
                 df = _clean_csv_file(df)
         elif ".TXT" in file or ".txt" in file:
             if "USCounty" in file:
-                df=_clean_county_90_txt_file(file)
+                df = _clean_county_90_txt_file(file)
             else:
                 cols = ["0", "1", "2", "3", "4", "5", "6", "7",\
                     "8", "9", "10", "11","12", "13", "14", "15",\
                     "16", "17", "18", "19", "20", "21", "22"]
                 df = pd.read_table(file,
-                                index_col=False,
-                                delim_whitespace=True,
-                                engine='python',
-                                names=cols)
+                                   index_col=False,
+                                   delim_whitespace=True,
+                                   engine='python',
+                                   names=cols)
                 if "CQI" in file:
                     df = _clean_txt_file(df)
                 elif "for" in file:
@@ -594,31 +627,35 @@ class CensusUSAPopulationByRace:
             self.df = pd.DataFrame(columns=["Year","geo_ID",\
                 "Count_Person_USAllRaces","Count_Person_WhiteAlone",\
                 "Count_Person_BlackOrAfricanAmericanAlone",\
-                "Count_Person_AmericanIndianOrAlaskaNativeAlone",\
+                "Count_Person_AmericanIndianAndAlaskaNativeAlone",\
                 "Count_Person_AsianAlone"\
                 ,"Count_Person_NativeHawaiianAndOtherPacificIslanderAlone",\
-                "Count_Person_White","Count_Person_Black",\
+                "Count_Person_WhiteAloneOrInCombinationWithOne"+\
+                    "OrMoreOtherRaces",\
+                "Count_Person_BlackOrAfricanAmericanAloneOrInCombination"+\
+                    "WithOneOrMoreOtherRaces",\
                 "Count_Person_AsianOrPacificIslander",\
-                "Count_Person_AmericanIndianOrAlaskaNative",\
+                "Count_Person_AmericanIndianAndAlaskaNativeAloneOrIn"+\
+                    "CombinationWithOneOrMoreOtherRaces",\
                 "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"])
             self.df = self.df.append(df, ignore_index=True)
 
         else:
             self.df = self.df.append(df, ignore_index=True)
         self.df['Year'] = pd.to_numeric(self.df['Year'])
-        self.df.sort_values(by=['Year', 'geo_ID'],
-                            ascending=True,
-                            inplace=True)
+        self.df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
         self.df = self.df[["Year","geo_ID",
-            "Count_Person_USAllRaces","Count_Person_WhiteAlone",\
+            "Count_Person_WhiteAlone",\
             "Count_Person_BlackOrAfricanAmericanAlone",\
-            "Count_Person_AmericanIndianOrAlaskaNativeAlone",\
+            "Count_Person_AmericanIndianAndAlaskaNativeAlone",\
             "Count_Person_AsianAlone",\
             "Count_Person_NativeHawaiianAndOtherPacificIslanderAlone",\
-            "Count_Person_White",\
-            "Count_Person_Black",\
+            "Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces",\
+            "Count_Person_BlackOrAfricanAmericanAloneOrInCombination"+\
+                "WithOneOrMoreOtherRaces",\
             "Count_Person_AsianOrPacificIslander",\
-            "Count_Person_AmericanIndianOrAlaskaNative",\
+            "Count_Person_AmericanIndianAndAlaskaNativeAloneOrIn"+\
+                "CombinationWithOneOrMoreOtherRaces",\
             "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"]]
         self.df.to_csv(self.cleaned_csv_file_path, index=False)
 
@@ -659,23 +696,25 @@ race: dcs:{}
                     "geographic area", "year", "short_form", "geo_id"
             ]:
                 continue
-            if re.findall('Count_Person_USAllRaces', col):
-                race = "USAllRaces"
-            if re.findall('White', col) and re.findall('Alone', col):
-                race = "WhiteAlone"
+            if re.findall('WhiteAlone', col) and \
+                re.findall('OrInCombination', col):
+                race = "WhiteAloneOrInCombinationWithOneOrMoreOtherRaces"
             elif re.findall('White', col) and re.findall('Non', col):
                 race = "NonWhite"
-            elif re.findall('White', col):
-                race = "White"
-            if re.findall('Black', col) and re.findall('Alone', col):
-                race = "BlackOrAfricanAmericanAlone"
+            elif re.findall('WhiteAlone', col):
+                race = "WhiteAlone"
+            if re.findall('Black', col) and \
+                re.findall('OrInCombination', col):
+                race = "BlackOrAfricanAmericanAloneOrInCombination"+\
+                    "WithOneOrMoreOtherRaces"
             elif re.findall('Black', col):
-                race = "Black"
-            if re.findall('AmericanIndianOrAlaskaNative', col):
-                if re.findall('AmericanIndianOrAlaskaNativeAlone', col):
-                    race = "AmericanIndianOrAlaskaNativeAlone"
+                race = "BlackOrAfricanAmericanAlone"
+            if re.findall('AmericanIndian', col):
+                if re.findall('OrInCombination', col):
+                    race = "AmericanIndianAndAlaskaNativeAloneOrIn"+\
+                        "CombinationWithOneOrMoreOtherRaces"
                 else:
-                    race = "AmericanIndianOrAlaskaNative"
+                    race = "AmericanIndianAndAlaskaNativeAlone"
             if re.findall('AsianAlone', col):
                 race = "AsianAlone"
             if re.findall('NativeHawaiianAndOtherPacificIslanderAlone', col):

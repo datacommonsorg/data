@@ -39,7 +39,7 @@ class TestPreprocess(unittest.TestCase):
         "test_census_data_USCountyak90.txt")]
 
     base = CensusUSAPopulationByRace(ip_data_path, cleaned_csv_file_path,
-                                      mcf_file_path, tmcf_file_path)
+                                     mcf_file_path, tmcf_file_path)
     base.process()
 
     def test_mcf_tmcf_files(self):
