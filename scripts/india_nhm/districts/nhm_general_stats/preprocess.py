@@ -39,7 +39,7 @@ cols_to_nodes = {
     '% Inpatient Deaths to Total IPD':
         'Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient',
     'Ayush OPD (Number)':
-        'Count_Outpatient_AYUSH',
+        'Count_Outpatient_Ayush',
 }
 
 clean_names = {
@@ -62,7 +62,7 @@ clean_names = {
     '% Inpatient Deaths to Total IPD':
         'Percent of Inpatient Deaths to Total Inpatients',
     'Ayush OPD (Number)':
-        'Number of Outpatients (AYUSH)',
+        'Number of Outpatients - AYUSH (Ayurveda, Yoga and Naturopathy, Unani, Siddha and Homeopathy)',
 }
 
 module_dir = os.path.dirname(__file__)

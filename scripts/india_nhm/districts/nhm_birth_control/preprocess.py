@@ -64,13 +64,13 @@ clean_names = {
     'Date':
         'Date',
     'Number of Vasectomies Conducted (Public + Pvt.)':
-        'Number of Vasectomies Conducted (Public and Private Institutions)',
+        'Number of Vasectomies Conducted',
     'Number of Vasectomies Conducted':
-        'Number of Vasectomies Conducted (Public and Private Institutions)',
+        'Number of Vasectomies Conducted',
     'Number of Tubectomies Conducted (Public + Pvt.)':
-        'Number of Tubectomies Conducted (Public and Private Institutions)',
+        'Number of Tubectomies Conducted',
     'Number of Tubectomies Conducted':
-        'Number of Tubectomies Conducted (Public and Private Institutions)',
+        'Number of Tubectomies Conducted',
     'Total Sterilisation Conducted':
         'Total Sterilisation Conducted',
     '% Male Sterlisation (Vasectomies) to Total sterilisation':
@@ -86,11 +86,11 @@ clean_names = {
     '% IUCD insertions to all family planning methods ( IUCD plus permanent)':
         'Percent of IUCD insertions to all family planning methods',
     'Oral Pills distributed':
-        'Oral Pills distributed',
+        'Number of distributed contraceptives (oral pills)',
     'Combined Oral Pills distributed':
-        'Combined Oral Pills distributed',
+        'Number of distributed contraceptives (oral pills)',
     'Condom pieces distributed':
-        'Condom pieces distributed',
+        'Number of distributed contraceptives (condoms)',
 }
 
 module_dir = os.path.dirname(__file__)

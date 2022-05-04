@@ -22,10 +22,10 @@ The cleaned csv has the following columns:
 - District: District
 - lgdCode: lgdCode
 - Date: Date
-- Count_BirthControlEvent_Vasectomy: Number of Vasectomies Conducted (Public and Private Institutions)
-- Count_BirthControlEvent_Vasectomy: Number of Vasectomies Conducted (Public and Private Institutions)
-- Count_BirthControlEvent_Tubectomy: Number of Tubectomies Conducted (Public and Private Institutions)
-- Count_BirthControlEvent_Tubectomy: Number of Tubectomies Conducted (Public and Private Institutions)
+- Count_BirthControlEvent_Vasectomy: Number of Vasectomies Conducted
+- Count_BirthControlEvent_Vasectomy: Number of Vasectomies Conducted
+- Count_BirthControlEvent_Tubectomy: Number of Tubectomies Conducted
+- Count_BirthControlEvent_Tubectomy: Number of Tubectomies Conducted
 - Count_BirthControlEvent_Sterilisation: Total Sterilisation Conducted
 - Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization: Percent of Male Sterlisation (Vasectomies) to Total sterilisation
 - Count_Death_BirthControlSterilisation: Total cases of deaths following Sterilisation (Male and Female)
@@ -33,9 +33,9 @@ The cleaned csv has the following columns:
 - Count_BirthControlEvent_IUCDInsertion: Total IUCD Insertions done
 - Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent: Percent of IUCD insertions to all family planning methods
 - Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent: Percent of IUCD insertions to all family planning methods
-- Count_ContraceptiveDistribution_OralPill: Oral Pills distributed
-- Count_ContraceptiveDistribution_OralPill: Combined Oral Pills distributed
-- Count_ContraceptiveDistribution_Condom: Condom pieces distributed
+- Count_ContraceptiveDistribution_OralPill: Number of distributed contraceptives (oral pills)
+- Count_ContraceptiveDistribution_OralPill: Number of distributed contraceptives (oral pills)
+- Count_ContraceptiveDistribution_Condom: Number of distributed contraceptives (condoms)
 
 #### TMCF
 - [NHM_BirthControl.tmcf](NHM_BirthControl.tmcf)

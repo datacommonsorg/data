@@ -66,17 +66,17 @@ clean_names = {
     '% Total Reported Live Births to Total Deliveries':
         'Percent of total reported live births to total deliveries',
     'Number of Infants given BCG':
-        'Number of infants given BCG vaccine',
+        'Number of infants given BCG (Bacillus Calmette–Guérin) vaccine',
     'Number of Infants given OPV 0 (Birth Dose)':
-        'Number of infants given OPV 0 Vaccine (Birth Dose)',
+        'Number of infants given Polio Vaccine (Birth Dose)',
     'Number of Infants given DPT1':
-        'Number of infants given DPT Vaccine Dose 1',
+        'Number of infants given DPT (Diptheria, Tetanus toxoids and Pertussis) Vaccine Dose 1',
     'Number of Infants given DPT2':
-        'Number of infants given DPT Vaccine Dose 2',
+        'Number of infants given DPT (Diptheria, Tetanus toxoids and Pertussis) Vaccine Dose 2',
     'Number of Infants given DPT3':
-        'Number of infants given DPT Vaccine Dose 3',
+        'Number of infants given DPT (Diptheria, Tetanus toxoids and Pertussis) Vaccine Dose 3',
     'Number of Infants given Measles':
-        'Number of infants given MMR Vaccine',
+        'Number of infants given Measles Vaccine',
     'Adverse Events Following Imunisation (Deaths)':
         'Adverse events following immunization (Deaths)',
     'Adverse Events Following Imunisation (Others)':

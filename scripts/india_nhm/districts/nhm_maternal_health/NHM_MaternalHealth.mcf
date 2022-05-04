@@ -1,59 +1,54 @@
-<<<<<<< HEAD
-Node: dcid:Count_PregnancyEvent
-description: "Total number of pregnancies"
-=======
 Node: dcid:Count_PregnantWomen_RegisteredForAntenatalCare
-name: "Total number of pregnant women registered for Antenatal Care"
->>>>>>> 8add21e07776d3672982401e04da81af567d2128
+description: "Total number of pregnant women registered for Antenatal Care"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
-measuredProperty: dcid:Count_PregnancyEvent
+measuredProperty: dcid:Count_PregnantWomen_RegisteredForAntenatalCare
 statType: dcs:measuredValue
 
 Node: dcid:Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
-name: "Number of pregnant women registered for Antenatal Care within first trimester"
+description: "Number of pregnant women registered for Antenatal Care within first trimester"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester
 statType: dcs:measuredValue
 
 Node: dcid:Count_ChildDeliveryEvent
-name: "Total reported child deliveries"
+description: "Total reported child deliveries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_ChildDeliveryEvent
 statType: dcs:measuredValue
 
 Node: dcid:Count_ChildDeliveryEvent_InAnInstitution
-name: "Institutional deliveries (includes public and private institutions)"
+description: "Institutional deliveries (includes public and private institutions)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_ChildDeliveryEvent_InAnInstitution
 statType: dcs:measuredValue
 
 Node: dcid:Count_ChildDeliveryEvent_InPublicInstitution
-name: "Deliveries conducted at public institutions"
+description: "Deliveries conducted at public institutions"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_ChildDeliveryEvent_InPublicInstitution
 statType: dcs:measuredValue
 
 Node: dcid:Count_ChildDeliveryEvent_AtHome
-name: "Number of home deliveries"
+description: "Number of home deliveries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_ChildDeliveryEvent_AtHome
 statType: dcs:measuredValue
 
 Node: dcid:Count_ChildDeliveryEvent_AtHome_WithStandbyAssist
-name: "Number of home deliveries attended by Standby Assist (Doctor/Nurse/Auxillary Nurse Midwife)"
+description: "Number of home deliveries attended by StandbyAssist (Doctor/Nurse/Auxillary Nurse Midwife)"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_ChildDeliveryEvent_AtHome_WithStandbyAssist
 statType: dcs:measuredValue
 
 Node: dcid:Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent
-name: "Percentage of safe deliveries to total reported deliveries"
+description: "Percentage of safe deliveries to total reported deliveries"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
 measuredProperty: dcid:Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent

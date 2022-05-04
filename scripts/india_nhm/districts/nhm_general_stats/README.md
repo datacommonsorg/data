@@ -28,7 +28,7 @@ The cleaned csv has the following columns:
 - Count_SurgicalProcedure_Major: Number of Major Surgeries
 - Count_SurgicalProcedure_Minor: Number of Minor Surgeries
 - Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient: Percent of Inpatient Deaths to Total Inpatients
-- Count_Outpatient_AYUSH: Number of Outpatients (AYUSH)
+- Count_Outpatient_Ayush: Number of Outpatients - AYUSH (Ayurveda, Yoga and Naturopathy, Unani, Siddha and Homeopathy)
 
 #### TMCF
 - [NHM_GeneralStats.tmcf](NHM_GeneralStats.tmcf)

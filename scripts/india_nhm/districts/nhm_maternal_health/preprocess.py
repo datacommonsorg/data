@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import os
-os.chdir('../../../')
 
 from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
 from india_nhm.districts.base.readme_generator import ReadMeGen
@@ -64,7 +63,7 @@ clean_names = {
     'Number of Home deliveries':
         'Number of home deliveries',
     'Number of home deliveries attended by SBA trained (Doctor/Nurse/Auxillary Nurse Midwife)':
-        'Number of home deliveries attended by Standby Assist (Doctor/Nurse/Auxillary Nurse Midwife)',
+        'Number of home deliveries attended by StandbyAssist (Doctor/Nurse/Auxillary Nurse Midwife)',
     '% Safe deliveries to Total Reported Deliveries':
         'Percentage of safe deliveries to total reported deliveries'
 }
