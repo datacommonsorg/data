@@ -113,14 +113,17 @@ class NHMDataLoaderBase(object):
                     (keys contain column names and values contains StatVar names)
     """
 
-    def __init__(self, data_folder, dataset_name, cols_dict, final_csv_path):
+    def __init__(self, data_folder, dataset_name, cols_dict, clean_names,
+                 final_csv_path, module_dir):
         """
         Constructor
         """
         self.data_folder = data_folder
         self.dataset_name = dataset_name
         self.cols_dict = cols_dict
+        self.clean_names = clean_names
         self.final_csv_path = final_csv_path
+        self.module_dir = module_dir
 
         self.raw_df = None
 
@@ -180,13 +183,16 @@ class NHMDataLoaderBase(object):
 
     def create_mcf_tmcf(self):
         """
-        Class method to generate TMCF files for the current dataset.
-        MCF is written in Districts folder
+        Class method to generate MCF and TMCF files for the current dataset.
         
         """
-        tmcf_file = "{}.tmcf".format(self.dataset_name)
+        tmcf_file = os.path.join(self.module_dir,
+                                 "{}.tmcf".format(self.dataset_name))
 
-        with open(tmcf_file, 'w+') as tmcf:
+        mcf_file = os.path.join(self.module_dir,
+                                "{}.mcf".format(self.dataset_name))
+
+        with open(tmcf_file, 'w+') as tmcf, open(mcf_file, 'w+') as mcf:
             # Writing isoCODE entity
             tmcf.write(TMCF_ISOCODE.format(dataset_name=self.dataset_name))
 
@@ -202,5 +208,10 @@ class NHMDataLoaderBase(object):
                         TMCF_NODES.format(dataset_name=self.dataset_name,
                                           index=idx + 1,
                                           statvar=self.cols_dict[variable]))
+                    # Writing MCF
+                    mcf.write(
+                        MCF_NODES.format(
+                            statvar=self.cols_dict[variable],
+                            description=self.clean_names[variable]))
 
                     statvars_written.append(self.cols_dict[variable])

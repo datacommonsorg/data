@@ -39,8 +39,8 @@ cols_to_nodes = {
         'Count_ChildDeliveryEvent_InPublicInstitution',
     'Number of Home deliveries':
         'Count_ChildDeliveryEvent_AtHome',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/Auxillary Nurse Midwife)':
+        'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist',
     '% Safe deliveries to Total Reported Deliveries':
         'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }
@@ -59,7 +59,9 @@ class TestPreprocess(unittest.TestCase):
             data_folder=os.path.join(module_dir_, 'test/'),
             dataset_name='test_gen',
             cols_dict=cols_to_nodes,
-            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"))
+            clean_names=None,
+            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"),
+            module_dir=module_dir_)
         loader.generate_csv()
 
         result_file = open(os.path.join(module_dir_, "test/test_gen.csv"))
@@ -68,6 +70,7 @@ class TestPreprocess(unittest.TestCase):
 
         os.remove(os.path.join(module_dir_, "test/test_gen.csv"))
         self.assertEqual(u'{}'.format(expected_data), result_data)
+
 
 
 if __name__ == '__main__':

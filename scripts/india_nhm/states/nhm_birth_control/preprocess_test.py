@@ -34,11 +34,11 @@ cols_to_nodes = {
     'Number of Tubectomies Conducted':
         'Count_BirthControlEvent_Tubectomy',
     'Total Sterilisation Conducted':
-        'Count_BirthControlEvent_Sterilization',
+        'Count_BirthControlEvent_Sterilisation',
     '% Male Sterlisation (Vasectomies) to Total sterilisation':
         'Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization',
     'Total cases of deaths following Sterlisation ( Male + Female)':
-        'Count_Death_BirthControlSterilization',
+        'Count_Death_BirthControlSterilisation',
     'Total IUCD Insertions done(public+private)':
         'Count_BirthControlEvent_IUCDInsertion',
     'Total Interval IUCD Insertions done':
@@ -69,7 +69,9 @@ class TestPreprocess(unittest.TestCase):
             data_folder=os.path.join(module_dir_, 'test/'),
             dataset_name='test_gen',
             cols_dict=cols_to_nodes,
-            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"))
+            clean_names=None,
+            final_csv_path=os.path.join(module_dir_, "test/test_gen.csv"),
+            module_dir=module_dir_)
         loader.generate_csv()
 
         result_file = open(os.path.join(module_dir_, "test/test_gen.csv"))

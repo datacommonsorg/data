@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
 from india_nhm.states.base.readme_generator import ReadMeGen
 
@@ -63,17 +65,17 @@ clean_names = {
     '% Total Reported Live Births to Total Deliveries':
         'Percent of total reported live births to total deliveries',
     'Number of Infants given BCG':
-        'Number of infants given BCG vaccine',
+        'Number of infants given BCG (Bacillus Calmette–Guérin) vaccine',
     'Number of Infants given OPV 0 (Birth Dose)':
-        'Number of infants given OPV 0 Vaccine (Birth Dose)',
+        'Number of infants given Polio Vaccine (Birth Dose)',
     'Number of Infants given DPT1':
-        'Number of infants given DPT Vaccine Dose 1',
+        'Number of infants given DPT (Diptheria, Tetanus toxoids and Pertussis) Vaccine Dose 1',
     'Number of Infants given DPT2':
-        'Number of infants given DPT Vaccine Dose 2',
+        'Number of infants given DPT (Diptheria, Tetanus toxoids and Pertussis) Vaccine Dose 2',
     'Number of Infants given DPT3':
-        'Number of infants given DPT Vaccine Dose 3',
+        'Number of infants given DPT (Diptheria, Tetanus toxoids and Pertussis) Vaccine Dose 3',
     'Number of Infants given Measles':
-        'Number of infants given MMR Vaccine',
+        'Number of infants given Measles Vaccine',
     'Adverse Events Following Imunisation (Deaths)':
         'Adverse events following immunization (Deaths)',
     'Adverse Events Following Imunisation (Others)':
@@ -82,14 +84,20 @@ clean_names = {
         'Total number of infant deaths reported'
 }
 
+module_dir = os.path.dirname(__file__)
+
 if __name__ == '__main__':
     dataset_name = "NHM_ChildHealth"
+    data_folder = os.path.join(module_dir, '../data/')
+    csv_path = os.path.join(module_dir, "{}.csv".format(dataset_name))
 
     # Preprocess files; Generate CSV; Generate TMCF file
-    loader = NHMDataLoaderBase(data_folder='../data/',
+    loader = NHMDataLoaderBase(data_folder=data_folder,
                                dataset_name=dataset_name,
                                cols_dict=cols_to_nodes,
-                               final_csv_path="{}.csv".format(dataset_name))
+                               clean_names=clean_names,
+                               final_csv_path=csv_path,
+                               module_dir=module_dir)
     loader.generate_csv()
     loader.create_mcf_tmcf()
 
@@ -98,5 +106,6 @@ if __name__ == '__main__':
                            dataset_description="Child Health Data",
                            data_level="State level",
                            cols_dict=cols_to_nodes,
-                           clean_names=clean_names)
+                           clean_names=clean_names,
+                           module_dir=module_dir)
     readme_gen.gen_readme()

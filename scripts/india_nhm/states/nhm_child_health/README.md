@@ -25,12 +25,12 @@ The cleaned csv has the following columns:
 - Count_BirthEvent_LiveBirth: Total number of reported live births
 - Count_BirthEvent_StillBirth: Total number of reported still births
 - Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent: Percent of total reported live births to total deliveries
-- Count_Infant_VaccineAdministered_BCG: Number of infants given BCG vaccine
-- Count_Infant_VaccineAdministered_OPV: Number of infants given OPV 0 Vaccine (Birth Dose)
-- Count_Infant_VaccineAdministered_DPTDose1: Number of infants given DPT Vaccine Dose 1
-- Count_Infant_VaccineAdministered_DPTDose2: Number of infants given DPT Vaccine Dose 2
-- Count_Infant_VaccineAdministered_DPTDose3: Number of infants given DPT Vaccine Dose 3
-- Count_ChildVaccinationEvent_MMR: Number of infants given MMR Vaccine
+- Count_Infant_VaccineAdministered_BCG: Number of infants given BCG (Bacillus Calmette–Guérin) vaccine
+- Count_Infant_VaccineAdministered_OPV: Number of infants given Polio Vaccine (Birth Dose)
+- Count_Infant_VaccineAdministered_DPTDose1: Number of infants given DPT (Diptheria, Tetanus toxoids and Pertussis) Vaccine Dose 1
+- Count_Infant_VaccineAdministered_DPTDose2: Number of infants given DPT (Diptheria, Tetanus toxoids and Pertussis) Vaccine Dose 2
+- Count_Infant_VaccineAdministered_DPTDose3: Number of infants given DPT (Diptheria, Tetanus toxoids and Pertussis) Vaccine Dose 3
+- Count_ChildVaccinationEvent_MMR: Number of infants given Measles Vaccine
 - Count_Infant_VaccineSideEffect_Adverse_Deaths: Adverse events following immunization (Deaths)
 - Count_Infant_VaccineSideEffect_Adverse_Others: Adverse events following immunization (Others)
 - Count_Death_Infant: Total number of infant deaths reported

@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
 from india_nhm.states.base.readme_generator import ReadMeGen
 
@@ -37,8 +39,8 @@ cols_to_nodes = {
         'Count_ChildDeliveryEvent_InPublicInstitution',
     'Number of Home deliveries':
         'Count_ChildDeliveryEvent_AtHome',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Count_ChildDeliveryEvent_AtHome_WithStandByAssist',
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/Auxillary Nurse Midwife)':
+        'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist',
     '% Safe deliveries to Total Reported Deliveries':
         'Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent'
 }
@@ -64,20 +66,26 @@ clean_names = {
         'Deliveries conducted at public institutions',
     'Number of Home deliveries':
         'Number of home deliveries',
-    'Number of home deliveries attended by SBA trained (Doctor/Nurse/ANM)':
-        'Number of home deliveries attended by StandBy Assist (Doctor/Nurse/ANM)',
+    'Number of home deliveries attended by SBA trained (Doctor/Nurse/Auxillary Nurse Midwife)':
+        'Number of home deliveries attended by StandbyAssist (Doctor/Nurse/Auxillary Nurse Midwife)',
     '% Safe deliveries to Total Reported Deliveries':
         'Percentage of safe deliveries to total reported deliveries'
 }
 
+module_dir = os.path.dirname(__file__)
+
 if __name__ == '__main__':
     dataset_name = "NHM_MaternalHealth"
+    data_folder = os.path.join(module_dir, '../data/')
+    csv_path = os.path.join(module_dir, "{}.csv".format(dataset_name))
 
     # Preprocess files; Generate CSV; Generate TMCF file
-    loader = NHMDataLoaderBase(data_folder='../data/',
+    loader = NHMDataLoaderBase(data_folder=data_folder,
                                dataset_name=dataset_name,
                                cols_dict=cols_to_nodes,
-                               final_csv_path="{}.csv".format(dataset_name))
+                               clean_names=clean_names,
+                               final_csv_path=csv_path,
+                               module_dir=module_dir)
     loader.generate_csv()
     loader.create_mcf_tmcf()
 
@@ -86,5 +94,6 @@ if __name__ == '__main__':
                            dataset_description="Maternal Health Data",
                            data_level="State level",
                            cols_dict=cols_to_nodes,
-                           clean_names=clean_names)
+                           clean_names=clean_names,
+                           module_dir=module_dir)
     readme_gen.gen_readme()

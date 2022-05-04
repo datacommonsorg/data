@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
 from india_nhm.states.base.readme_generator import ReadMeGen
 
@@ -33,11 +35,11 @@ cols_to_nodes = {
     'Number of Tubectomies Conducted':
         'Count_BirthControlEvent_Tubectomy',
     'Total Sterilisation Conducted':
-        'Count_BirthControlEvent_Sterilization',
+        'Count_BirthControlEvent_Sterilisation',
     '% Male Sterlisation (Vasectomies) to Total sterilisation':
         'Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization',
     'Total cases of deaths following Sterlisation ( Male + Female)':
-        'Count_Death_BirthControlSterilization',
+        'Count_Death_BirthControlSterilisation',
     'Total IUCD Insertions done(public+private)':
         'Count_BirthControlEvent_IUCDInsertion',
     'Total Interval IUCD Insertions done':
@@ -62,13 +64,13 @@ clean_names = {
     'Date':
         'Date',
     'Number of Vasectomies Conducted (Public + Pvt.)':
-        'Number of Vasectomies Conducted (Public and Private Institutions)',
+        'Number of Vasectomies Conducted',
     'Number of Vasectomies Conducted':
-        'Number of Vasectomies Conducted (Public and Private Institutions)',
+        'Number of Vasectomies Conducted',
     'Number of Tubectomies Conducted (Public + Pvt.)':
-        'Number of Tubectomies Conducted (Public and Private Institutions)',
+        'Number of Tubectomies Conducted',
     'Number of Tubectomies Conducted':
-        'Number of Tubectomies Conducted (Public and Private Institutions)',
+        'Number of Tubectomies Conducted',
     'Total Sterilisation Conducted':
         'Total Sterilisation Conducted',
     '% Male Sterlisation (Vasectomies) to Total sterilisation':
@@ -84,22 +86,27 @@ clean_names = {
     '% IUCD insertions to all family planning methods ( IUCD plus permanent)':
         'Percent of IUCD insertions to all family planning methods',
     'Oral Pills distributed':
-        'Oral Pills distributed',
+        'Number of distributed contraceptives (oral pills)',
     'Combined Oral Pills distributed':
-        'Combined Oral Pills distributed',
+        'Number of distributed contraceptives (oral pills)',
     'Condom pieces distributed':
-        'Condom pieces distributed',
+        'Number of distributed contraceptives (condoms)',
 }
+
+module_dir = os.path.dirname(__file__)
 
 if __name__ == '__main__':
     dataset_name = "NHM_BirthControl"
-    data_path = os.path.join(os.path.dirname(__file__), '../data/')
+    data_folder = os.path.join(module_dir, '../data/')
+    csv_path = os.path.join(module_dir, "{}.csv".format(dataset_name))
 
     # Preprocess files; Generate CSV; Generate TMCF file
-    loader = NHMDataLoaderBase(data_folder=data_path,
+    loader = NHMDataLoaderBase(data_folder=data_folder,
                                dataset_name=dataset_name,
                                cols_dict=cols_to_nodes,
-                               final_csv_path="{}.csv".format(dataset_name))
+                               clean_names=clean_names,
+                               final_csv_path=csv_path,
+                               module_dir=module_dir)
     loader.generate_csv()
     loader.create_mcf_tmcf()
 
@@ -108,5 +115,6 @@ if __name__ == '__main__':
                            dataset_description="Birth Control Data",
                            data_level="State level",
                            cols_dict=cols_to_nodes,
-                           clean_names=clean_names)
+                           clean_names=clean_names,
+                           module_dir=module_dir)
     readme_gen.gen_readme()

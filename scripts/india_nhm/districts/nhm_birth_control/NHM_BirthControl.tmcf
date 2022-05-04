@@ -5,7 +5,6 @@ lgdCode: C:NHM_BirthControl->lgdCode
 Node: E:NHM_BirthControl->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_BirthControlEvent_Vasectomy
-measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"
@@ -14,7 +13,6 @@ value: C:NHM_BirthControl->Count_BirthControlEvent_Vasectomy
 Node: E:NHM_BirthControl->E3
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_BirthControlEvent_Tubectomy
-measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"
@@ -22,17 +20,15 @@ value: C:NHM_BirthControl->Count_BirthControlEvent_Tubectomy
 
 Node: E:NHM_BirthControl->E5
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_BirthControlEvent_Sterilization
-measurementMethod: dcs:NHM_HealthInformationManagementSystem
+variableMeasured: dcs:Count_BirthControlEvent_Sterilisation
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"
-value: C:NHM_BirthControl->Count_BirthControlEvent_Sterilization
+value: C:NHM_BirthControl->Count_BirthControlEvent_Sterilisation
 
 Node: E:NHM_BirthControl->E6
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
-measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"
@@ -40,17 +36,15 @@ value: C:NHM_BirthControl->Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_
 
 Node: E:NHM_BirthControl->E7
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Death_BirthControlSterilization
-measurementMethod: dcs:NHM_HealthInformationManagementSystem
+variableMeasured: dcs:Count_Death_BirthControlSterilisation
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"
-value: C:NHM_BirthControl->Count_Death_BirthControlSterilization
+value: C:NHM_BirthControl->Count_Death_BirthControlSterilisation
 
 Node: E:NHM_BirthControl->E8
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_BirthControlEvent_IUCDInsertion
-measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"
@@ -59,7 +53,6 @@ value: C:NHM_BirthControl->Count_BirthControlEvent_IUCDInsertion
 Node: E:NHM_BirthControl->E10
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent
-measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"
@@ -68,7 +61,6 @@ value: C:NHM_BirthControl->Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Co
 Node: E:NHM_BirthControl->E12
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_ContraceptiveDistribution_OralPill
-measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"
@@ -77,7 +69,6 @@ value: C:NHM_BirthControl->Count_ContraceptiveDistribution_OralPill
 Node: E:NHM_BirthControl->E14
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_ContraceptiveDistribution_Condom
-measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NHM_BirthControl->E0
 observationDate: C:NHM_BirthControl->Date
 observationPeriod: "P1Y"

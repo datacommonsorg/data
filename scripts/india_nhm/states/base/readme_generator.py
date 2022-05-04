@@ -18,12 +18,15 @@ class ReadMeGen():
     """
 
     def __init__(self, dataset_name, dataset_description, data_level, cols_dict,
-                 clean_names):
+                 clean_names, module_dir):
         self.dataset_name = dataset_name
         self.dataset_description = dataset_description
         self.data_level = data_level
         self.cols_dict = cols_dict
         self.clean_names = clean_names
+        self.module_dir = module_dir
+        
+        self.readme_path = module_dir + '/README.md'
 
     def _initial_stuff(self):
         INITIAL_STUFF = """# {dataset_description} - 2008 to 2020
@@ -54,8 +57,14 @@ The dataset contains key performance indicators of {dataset_description} for the
 
 The cleaned csv has the following columns:
 """
+        
+        statvars_written = []
         for k, v in self.cols_dict.items():
-            CLEANED_DATA += "\n- {}: {}".format(v, self.clean_names[k])
+            if v not in statvars_written:
+                CLEANED_DATA += "\n- {}: {}".format(v, self.clean_names[k])
+                statvars_written.append(v)
+                
+        del statvars_written
 
         return CLEANED_DATA.format(dataset_name=self.dataset_name)
 
