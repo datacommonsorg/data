@@ -22,9 +22,9 @@ Once finalized the statistical variables get checked in
 
 ## Template MCF with tabular data (CSV)
 
-Template MCF is essentially a mapping file that instructs Data Commons on how
-to convert the data in a CSV into graph nodes for ingestion into Data Commons.
-For additional information, read [Template
+Template MCF is essentially a mapping file that instructs how to convert the
+data in a CSV into graph nodes for ingestion into Data Commons.  For additional
+information, read [Template
 MCF](https://github.com/datacommonsorg/data/blob/master/docs/mcf_format.md#template-mcf).
 
 The raw CSV will often needs pre-processing before it can be imported.  An
@@ -37,7 +37,7 @@ illustrated in the examples in [MCF format](mcf_format.md)).
 
 The general guidelines are:
 
-1. Typically, a property in the TMCF should have a constant value (like `typeOf`), or a CSV column for its value, including the values of [`observationAbout`](https://datacommons.org/browser/observationAbout), `value` and [`observationDate`](https://datacommons.org/browser/observationDate). ([`observationPeriod`](https://datacommons.org/browser/observationPeriod) is optional.)
+1. A property in the Template MCF node should have a constant value (like `typeOf`), reference to another node (like `E:Dataset->E1`), or refer to a CSV column for its value (like `C:Dataset->col_name`).
 1. Dates must be in [ISO 8601 format](https://www.w3.org/TR/NOTE-datetime): "YYYY-MM-DD", "YYYY-MM", etc.
 1. References to existing nodes in the graph must be `dcid`s.
 1. The cleaning script is reproducible and easy to run. Python or Golang is recommended.
