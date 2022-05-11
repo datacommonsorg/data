@@ -70,18 +70,10 @@ If you introduced new statistical variables, please create a Pull Request for th
 ## Alternate approach: Generate Instance MCF
 
 In some cases, a dataset is so highly unstructured that it makes sense to skip
-the TMCF/CSV pairing step and directly construct the instance MCF. For example,
-data from biological sources frequently needs to be directly formatted as MCF.
+the Template MCF / CSV approach and directly generate the instance MCF. For
+example, data from biological sources frequently needs to be directly formatted
+as MCF.
 
-For StatVarObservation, an example instance MCF node is below:
-
-```
-Node: Observation_Median_Age_Person_Female_SanAntonio_TX_2014
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Median_Age_Person_Female
-observationAbout: dcid:geoId/4865000
-observationDate: "2014"
-value: 34.4
-unit: dcs:Year
-measurementMethod: dcs:CensusACS5yrSurvey
-```
+In this case, the cleaning script should do more heavy-lifting to generate
+instance MCFs.  Such an example script is
+[here](https://github.com/datacommonsorg/data/tree/master/scripts/biomedical/proteinInteractionMINT).
