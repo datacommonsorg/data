@@ -55,11 +55,10 @@ have the following properties:
 - `populationType`: specifies the type of thing being measured (here, `Person`)
 - `measuredProperty`: specifies the property being measured. This property is of
   the type defined in `populationType` (here, `age`).
-- (optional) `statType`: specifies the type of statistical property nodes (here,
-  `medianValue`). The default is `measuredValue`.
+- (optional) `statType`: specifies the type of statistic (here, `medianValue`). The default is `measuredValue`.
 - (optional) `measurementQualifier`: additional qualifiers of the variable;
   e.g., "Nominal" for GDP.
-- (optional) `measurementDenominator`: for percentages or rations, this refers
+- (optional) `measurementDenominator`: for percentages or ratios, this refers
   to another `StatisticalVariable` node.
 
 Additionally, there can be a number of property-value (PV) pairs representing
@@ -70,11 +69,10 @@ with value `Female`. The constraint property values are typically Enumerations
 
 ## `StatVarObservation`
 
-Each `StatisticalVariable` is an abstract specification, about which we can make
-observations that are grounded at a particular location and time. These are
+Each `StatisticalVariable` node is an abstract specification about which we can
+make observations that are grounded at a particular location and time. These is
 represented by the
-[`StatVarObservation`](https://datacommons.org/browser/StatVarObservation) type
-in DC.
+[`StatVarObservation`](https://datacommons.org/browser/StatVarObservation) type.
 
 As an example, the statement "According to the US Census ACS 5 Year Estimates,
 the median age of women in San Antonio, Texas in 2014 was 34.4 years." can be
