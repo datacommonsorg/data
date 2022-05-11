@@ -52,15 +52,15 @@ on a set of things of a certain type ("people") that satisfy some set of
 constraints ("of female gender").  Correspondingly, `StatisticalVariable` types
 have the following required properties:
 
-[optional] measurementQualifier refers to Enumeration nodes
-e.g., Nominal / Real for GDP
-[optional] measurementDenominator refers to another StatVar node
-For per-capita, measurementDenominator: dcs:Count_Person
-
 - `populationType`: specifies the type of thing being measured (here, `Person`)
 - `measuredProperty`: specifies the property being measured. This property is of
   the type defined in `populationType` (here, `age`).
-- `statType`: specifies the type of statistical property nodes (here, `medianValue`)
+- (optional) `statType`: specifies the type of statistical property nodes (here,
+  `medianValue`). The default is `measuredValue`.
+- (optional) `measurementQualifier`: additional qualifiers of the variable;
+  e.g., "Nominal" for GDP.
+- (optional) `measurementDenominator`: for percentages or rations, this refers
+  to another `StatisticalVariable` node.
 
 Additionally, there can be a number of property-value (PV) pairs representing
 the constraints on the type identified by `populationType`.  In this example,
