@@ -49,8 +49,8 @@ and `schema:` (aka schema.org defined schema).
 
 Semantically, the `StatisticalVariable` is modeled as a measure ("median age")
 on a set of things of a certain type ("people") that satisfy some set of
-constraints ("of female gender").  Correspondingly, `StatisticalVariable` types
-have the following required properties:
+constraints ("gender is female").  Correspondingly, `StatisticalVariable` types
+have the following properties:
 
 - `populationType`: specifies the type of thing being measured (here, `Person`)
 - `measuredProperty`: specifies the property being measured. This property is of
