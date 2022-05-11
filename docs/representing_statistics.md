@@ -1,11 +1,11 @@
 # Representing statistics in Data Commons
 
-> Note: this document assumes familiarity with the [Schema.org Data
-> Model](https://schema.org/docs/datamodel.html).
+> Note: this document assumes familiarity with the [schema.org data
+> model](https://schema.org/docs/datamodel.html).
 
-Data Commons adopts the [Schema.org Data
-Model](https://schema.org/docs/datamodel.html), and its schema is a superset of
-[Schema.org schema](https://schema.org/docs/schemas.html).
+Data Commons adopts the [schema.org data
+model](https://schema.org/docs/datamodel.html), and its schema is a superset of
+[schema.org schema](https://schema.org/docs/schemas.html).
 
 The most commonly used high-level schema types for representing statistical data
 are:
