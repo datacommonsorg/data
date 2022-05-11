@@ -10,6 +10,8 @@ As a prerequisite, you should understand the dataset, and have an idea of how
 to map location entities in your dataset to Data Commons entities and measures
 in your dataset to Data Commons statistical variables.
 
+[TOC]
+
 ## Defining Statistical Variables
 
 If you are adding new types of data to the knowledge graph, you will likely
