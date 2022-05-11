@@ -55,10 +55,10 @@ have the following properties:
 - `populationType`: specifies the type of thing being measured (here, `Person`)
 - `measuredProperty`: specifies the property being measured. This property is of
   the type defined in `populationType` (here, `age`).
-- (optional) `statType`: specifies the type of statistic (here, `medianValue`). The default is `measuredValue`.
-- (optional) `measurementQualifier`: additional qualifiers of the variable;
+- `statType` (optional): specifies the type of statistic (here, `medianValue`). The default is `measuredValue`.
+- `measurementQualifier` (optional): additional qualifiers of the variable;
   e.g., "Nominal" for GDP.
-- (optional) `measurementDenominator`: for percentages or ratios, this refers
+- `measurementDenominator` (optional): for percentages or ratios, this refers
   to another `StatisticalVariable` node.
 
 Additionally, there can be a number of property-value (PV) pairs representing
