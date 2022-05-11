@@ -59,11 +59,13 @@ There are a couple of ways to map the statistical variables with TMCF:
 
 Use the [`dc-import`](https://github.com/datacommonsorg/import#using-import-tool) tool to validate the artifacts. When you run it, it will generate `report.json` and `summary_report.html` with counters representing warnings/errors and summary statistics.
 
-## Send a PR
+## Send Pull Requests
 
-Create a Pull Request (PR) with the Template MCF file together with the cleaned CSV, its preprocessing script, and the README ([template](https://github.com/datacommonsorg/data/tree/master/scripts/example_provenance/example_dataset)) to [https://github.com/datacommonsorg/data](https://github.com/datacommonsorg/data) under the appropriate [`scripts/<provenance>/<dataset>` subdirectory](https://github.com/datacommonsorg/data/tree/master/scripts/india_census/primary_census_abstract_data). If you wrote a script to automate the generation of the TMCF, please also include that. In the PR, please also include the validation results (`report.json` and `summary_report.html`).
+Create a Pull Request (PR) with the Template MCF file together with the cleaned CSV, its preprocessing script, and the README ([template](https://github.com/datacommonsorg/data/tree/master/scripts/example_provenance/example_dataset)) to [https://github.com/datacommonsorg/data](https://github.com/datacommonsorg/data) under the appropriate [`scripts/<provenance>/<dataset>` subdirectory](https://github.com/datacommonsorg/data/tree/master/scripts/india_census/primary_census_abstract_data). If you wrote a script to automate the generation of the TMCF, please also include that.
 
-If you introduced new statistical variables, please create a Pull Request in the [schema repo](https://github.com/datacommonsorg/schema) to add them too.
+In the PR, please also include the validation results (`report.json` and `summary_report.html`).
+
+If you introduced new statistical variables, please create a Pull Request for them in the [schema repo](https://github.com/datacommonsorg/schema).
 
 ## Alternate approach: Generate Instance MCF
 
