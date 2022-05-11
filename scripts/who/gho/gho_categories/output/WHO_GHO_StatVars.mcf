@@ -40512,3 +40512,11 @@ measuredProperty: dcs:who/M_Est_smk_curr_std
 statType: dcs:measuredValue
 gender: schema:Female
 memberOf: dc/g/WHO/Tobacco
+
+Node: dcid:WHO/M_Est_smk_curr_std
+name: "Estimate Of Current Tobacco Smoking Prevalence (%) (Age-Standardized Rate)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/M_Est_smk_curr_std
+statType: dcs:measuredValue
+memberOf: dc/g/WHO/Tobacco
