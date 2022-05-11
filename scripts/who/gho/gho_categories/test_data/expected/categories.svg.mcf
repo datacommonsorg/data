@@ -1,0 +1,14 @@
+Node: dcid:dc/g/WHO/Root
+typeOf: dcs:StatVarGroup
+name: "Global Health Observatory"
+specializationOf: dcid:dc/g/Uncategorized
+
+Node: dcid:WHO/g/CategoryOne
+typeOf: dcs:StatVarGroup
+name: "Category One"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/CategoryTwo
+typeOf: dcs:StatVarGroup
+name: "Category Two"
+specializationOf: dcid:dc/g/WHO/Root

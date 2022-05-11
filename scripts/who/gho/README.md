@@ -44,12 +44,3 @@ These indicators fall under a wide range of categories including:
 ```
 python3 import_data.py --data_dir=<folder holding the raw data> --curated_dim_file=curated_dim_map.json
 ```
-
-## Categories To SVGroups
-We use the following url to extract the categories that each WHO-GHO indicator belongs to:
-https://www.who.int/data/gho/data/indicators
-
-There is no API access to this category mapping. Therefore, this mapping was extracted manually.
-Note that the mapping available at the url above is from a Main Category to a Sub Category to the
-Indicator Name. This is the same name being used as the StatVar name by the import procedure
-described above. 
