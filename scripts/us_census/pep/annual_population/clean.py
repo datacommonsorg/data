@@ -15,10 +15,13 @@
 This Python Script contains methods to clean the county, state datasets
 """
 import os
+#import sys
 import pandas as pd
-from state_to_geoid import USSTATE_MAP
 from fips_to_state import FIPSCODE
-
+from util import alpha2_to_dcid as alpha2todcid
+#module_dir_ = os.path.dirname(os.path.realpath(__file__))
+#sys.path.insert(1, os.path.join(module_dir_, '../../../../'))
+#from util import alpha2_to_dcid as alpha2todcid
 
 def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
     """
@@ -37,53 +40,84 @@ def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
         df = df.reset_index().drop(columns=["index"])
     return df
 
-
 def find_file_format(path: str) -> str:
-    return path[path.rfind('.') + 1:]
-
+    return os.path.splitext(path)[-1]
 
 def _move_data_to_right(df: pd.DataFrame, row_index: list) -> pd.DataFrame:
+    """
+    Moving data to right starting from 2nd index column to 7th index column
 
+    Args:
+        df (pd.DataFrame): Input DataFrame
+        row_index (list): row index value requires data shifting to right side
+
+    Returns:
+        pd.DataFrame: DataFrame
+    """
     for row in row_index:
         for idx in range(7, 2, -1):
             df.iloc[row, idx] = df.iloc[row, idx - 1]
     return df
 
-
 def _get_nonna_index_for_tmp1(df: pd.DataFrame) -> pd.DataFrame:
-    return df[df["tmp1"].notnull()].index.values
+    """
+    Returns Non-NA index values from tmp1 column
+    tmp1 column can contains actual data
+    because of extra delimiters for some rows.
+    Args:
+        df (pd.DataFrame): _description_
 
+    Returns:
+        pd.DataFrame: _description_
+    """
+    return df[df["tmp1"].notnull()].index.values
 
 def _move_data_to_left(df: pd.DataFrame,
                        row_values: list,
                        idx1: int = -7,
                        idx2: int = -2) -> pd.DataFrame:
+    """
+    Moving data to left starting from idx1 index column to idx2 index column
+
+    Args:
+        df (pd.DataFrame): Input DataFrame
+        row_index (list): row index value requires data shifting to left side
+
+    Returns:
+        pd.DataFrame: DataFrame
+    """
     for row in row_values:
-        for idx in range(idx1, idx2):  #-2:74, -3:73, -4:72, -5:71, -6:70
+        for idx in range(idx1, idx2):
             df.iloc[row, idx] = df.iloc[row, idx + 1]
     return df
 
-
 def _get_numeric_index(df: pd.DataFrame, column: str) -> pd.DataFrame:
     return df[df[column].apply(lambda row: row.isnumeric())].index.values
-
 
 def _get_char_index_in_col(df: pd.DataFrame, col: str) -> pd.DataFrame:
     return df[df[col].str.replace(
         ".", "").apply(lambda row: row.isalpha())].index.values
 
-
-def _merge_rows(df: pd.DataFrame, index_list: list, lr_idx: int, left_idx: int,
+def _merge_rows(df: pd.DataFrame, index_list: list, f_idx: int, left_idx: int,
                 right_idx: int) -> pd.DataFrame:
+    """
+    Merge two rows from index list and fro m columns left_idx to right_idx
+    Args:
+        df (pd.DataFrame): Input DataFrame
+        index_list (list): Row index list
+        f_idx (int): Final Column Index
+        left_idx (int): Left Column Index
+        right_idx (int): Right Column Index
 
+    Returns:
+        pd.DataFrame: DataFrame
+    """
     for idx in index_list:
-        if lr_idx == 0:
+        if f_idx == 0:
             df.iloc[idx - 1, -8:] = df.iloc[idx, left_idx:right_idx]
         else:
             df.iloc[idx - 1, -8:-1] = df.iloc[idx, left_idx:right_idx]
-        #print(df.iloc[idx-2:idx+2,:])
     return df
-
 
 def _clean_county_df(county_df: pd.DataFrame,
                      first_df_cols: list) -> pd.DataFrame:
@@ -104,17 +138,13 @@ def _clean_county_df(county_df: pd.DataFrame,
     county_df = _merge_rows(county_df, index_list, lr_idx, -9, right_idx)
     county_df = county_df.drop(index=index_list)
     county_df = county_df.reset_index().drop(columns=["index"])
-
     index_list = _get_numeric_index(county_df, "Tmp_Row")
     county_df = _move_data_to_right(county_df, index_list)
     county_df = county_df.reset_index().drop(columns=["index"])
-
     index_list = _get_nonna_index_for_tmp1(county_df)
     county_df = _move_data_to_left(county_df, index_list)
     county_df = county_df.reset_index().drop(columns=["index"])
-
     return county_df
-
 
 def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
                                second_df_cols: list) -> pd.DataFrame:
@@ -181,7 +211,6 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
         else:
             final_df = pd.concat([final_df, next_df], axis=0)
     final_cols = ["Location"] + first_df_cols[3:8] + second_df_cols[3:8]
-
     return final_df[final_cols]
 
 
@@ -208,12 +237,12 @@ def _create_final_file(op_tmp_file: str, search_string: str,
         for state in states:
             items = dict(zip(header, state))
             # state_name = items['Location']
-            state_name = USSTATE_MAP.get(items['Location'], items['Location'])
+            state_name = alpha2todcid.USSTATE_MAP\
+                            .get(items['Location'], items['Location'])
             for k, v in items.items():
                 if k not in ['Location', '(census)', '1970']:
                     op.write("\n" + k + "," + state_name + "," +
                              v.replace(",", ""))
-
 
 def _create_intermediate_file(ip_file: str, temp_file1: str, temp_file2: str,
                               search_string1: str, search_string2: str) -> None:
@@ -226,10 +255,8 @@ def _create_intermediate_file(ip_file: str, temp_file1: str, temp_file2: str,
         search_string1 (str): Search String in Input File
         search_string2 (str): Search String in Input File
     """
-
     flag1 = 0
     flag2 = 0
-
     with open(temp_file1 + ".csv", 'w', encoding='utf-8') as temp_file_1:
         with open(temp_file2 + ".csv", 'w', encoding='utf-8') as temp_file_2:
             with open(ip_file, encoding='utf-8') as file:
@@ -240,107 +267,10 @@ def _create_intermediate_file(ip_file: str, temp_file1: str, temp_file2: str,
                     elif line.strip() == search_string2:
                         flag1 = 0
                         flag2 = 1
-
                     if flag1:
                         temp_file_1.write(line)
                     elif flag2:
                         temp_file_2.write(line)
-
-
-def get_state_file_config() -> dict:
-    """
-    This Method create a dict of states config file.
-    Returns:
-        states_config (dict): dict of states file config
-    """
-    states_config = {
-        "st0009ts.txt": {
-            "temp_file1":
-                "st0005ts_tmp",
-            "temp_file2":
-                "st0509ts_tmp",
-            "search_string_1":
-                "1900     1901     1902     1903     1904    1905",
-            "search_string_2":
-                "1906     1907     1908     1909",
-            "op_file_name":
-                "st0069ts"
-        },
-        "st1019ts.txt": {
-            "temp_file1":
-                "st1015ts_tmp",
-            "temp_file2":
-                "st1519ts_tmp",
-            "search_string_1":
-                "1910     1911     1912     1913     1914    1915",
-            "search_string_2":
-                "1916     1917     1918     1919",
-            "op_file_name":
-                "st0069ts"
-        },
-        "st2029ts.txt": {
-            "temp_file1":
-                "st2025ts_tmp",
-            "temp_file2":
-                "st2529ts_tmp",
-            "search_string_1":
-                "1920     1921     1922     1923     1924    1925",
-            "search_string_2":
-                "1926     1927     1928     1929",
-            "op_file_name":
-                "st0069ts"
-        },
-        "st3039ts.txt": {
-            "temp_file1":
-                "st3035ts_tmp",
-            "temp_file2":
-                "st3539ts_tmp",
-            "search_string_1":
-                "1930     1931     1932     1933     1934    1935",
-            "search_string_2":
-                "1936     1937     1938     1939",
-            "op_file_name":
-                "st0069ts"
-        },
-        "st4049ts.txt": {
-            "temp_file1":
-                "st4045ts_tmp",
-            "temp_file2":
-                "st4549ts_tmp",
-            "search_string_1":
-                "1940     1941     1942     1943     1944    1945",
-            "search_string_2":
-                "1946     1947     1948     1949",
-            "op_file_name":
-                "st0069ts"
-        },
-        "st5060ts.txt": {
-            "temp_file1":
-                "st5054ts_tmp",
-            "temp_file2":
-                "st5559ts_tmp",
-            "search_string_1":
-                "(census)    1950     1951     1952    1953     1954",
-            "search_string_2":
-                "1955    1956     1957     1958    1959 (census)",
-            "op_file_name":
-                "st0069ts"
-        },
-        "st6070ts.txt": {
-            "temp_file1":
-                "st6064ts_tmp",
-            "temp_file2":
-                "st6569ts_tmp",
-            "search_string_1":
-                "1960     1960     1961     1962     1963     1964",
-            "search_string_2":
-                "1965     1966     1967     1968     1969     1970",
-            "op_file_name":
-                "st0069ts"
-        }
-    }
-    return states_config
-
 
 def process_states_1970_1979(file_path: str) -> pd.DataFrame:
     """

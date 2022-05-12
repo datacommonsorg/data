@@ -6,7 +6,7 @@ This dataset has Annual Population Estimates from the year 1900 to 2020 for diff
 The population is categorized by [Count_Person](https://datacommons.org/browser/Count_Person) StatVar in Datacommons.org
 
 ### Download URL
-A backend API allows the data to be queryable and responds with txt/xls/xlsx data. The API endpoint is at "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/totals/popclockest.txt","https://www2.census.gov/programs-surveys/popest/tables/1980-1990/state/asrh/st0009ts.txt","https://www2.census.gov/programs-surveys/popest/tables/1900-1980/counties/totals/e7079co.txt","https://www2.census.gov/programs-surveys/popest/datasets/2010-2020/counties/totals/co-est2020.csv". The API takes URL as a string input and downloads the dataset.
+The data in txt/csv formats are downloadable from within https://www2.census.gov/programs-surveys/popest/tables and https://www2.census.gov/programs-surveys/popest/datasets. The actual URLs are listed in file_urls.txt.
 
 #### API Output
 These are the attributes that we will use
