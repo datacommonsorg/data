@@ -12,13 +12,17 @@ in your dataset to Data Commons statistical variables.
 
 ## Define Statistical Variables
 
-If you are adding new types of data to the knowledge graph, you will likely
-need to define new [statistical variables](representing_statistics.html).
-These statistical variables' names should encapsulate the meaning of its
-triples. The naming rules are summarized in [this doc](https://docs.google.com/document/u/2/d/e/2PACX-1vR7wU6qGXm2er9N2Mf9FaavYSpsX629hKtdmqL6m3_gBrAxGdG5Htlblrh3lO-e3fsUJOkH3Yx2wmnS/pub).
+If you are adding new types of data to the knowledge graph, you might need to
+define new [statistical variables](representing_statistics.md). You can browse
+all existing variables in the [Statistical Variable
+Explorer](https://datacommons.org/tools/statvar).
 
-Once finalized the statistical variables get checked in
-[here](https://github.com/datacommonsorg/schema/tree/main/stat_vars).
+The statistical variable DCIDs should be human-readable, encapsulating the
+meaning of its triples.  The naming rules are summarized in [this
+doc](https://docs.google.com/document/u/2/d/e/2PACX-1vR7wU6qGXm2er9N2Mf9FaavYSpsX629hKtdmqL6m3_gBrAxGdG5Htlblrh3lO-e3fsUJOkH3Yx2wmnS/pub).
+
+When the variables are finalized, they get checked into the [schema
+repo](https://github.com/datacommonsorg/schema/tree/main/stat_vars).
 
 ## Template MCF with tabular data (CSV)
 
