@@ -13,6 +13,7 @@ The population is categorized by various set of combinations as below:
 ### Download URL
 The data in txt/csv formats are downloadable from within https://www2.census.gov/programs-surveys/popest/tables and https://www2.census.gov/programs-surveys/popest/datasets. The actual URLs are listed in file_urls.txt.
 
+
 #### API Output
 These are the attributes that we will use
 | Attribute      					| Description                                                 				|
@@ -56,4 +57,4 @@ The below script will download the data.
 
 The below script will generate csv and mcf files.
 
-`/bin/python3 scripts/us_census/pep/pep_by_asrh//preprocess.py`
+`/bin/python3 scripts/us_census/pep/pep_by_asrh/preprocess.py`

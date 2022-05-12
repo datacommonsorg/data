@@ -1,7 +1,9 @@
+#Loading file_urls.txt file
 urls=$(<file_urls.txt)
 
-mkdir -p "input_data_2"
-cd "input_data_2"
+#Creating Input Directory
+mkdir -p "input_data"
+cd "input_data"
 for url in $urls;do
     echo "downloading $url"
     curl -sS -O $url >> /dev/null
