@@ -172,7 +172,7 @@ def process_categories(input_sv_fp, input_category_map_fp,
                     _COUNTERS_SV_GROUPS["other_category"] += 1
 
                 current_cat = _str_to_id(current_cat)
-                output_lines.append("memberOf: dc/g/WHO/%s\n" % current_cat)
+                output_lines.append("memberOf: dcid:WHO/g/%s\n" % current_cat)
 
                 # Now start the process for the new SV.
                 current_sv = []

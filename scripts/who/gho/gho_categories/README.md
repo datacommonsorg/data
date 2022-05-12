@@ -17,7 +17,7 @@ This directory imports the [WHO GHO Indicator Categories](https://www.who.int/da
 1. Retrieve the raw indicator to category information using the [WHO GHO API](https://www.who.int/data/gho/info/athena-api). This can be done by executing:
 
     ```
-    python3 gho_categories_extractor.py
+    $ python3 gho_categories_extractor.py
     ```
 
   This will produce a csv file called ```WHO_GHO_Categories.csv``` under the ```input_data/``` folder. **Note that this script can take a very long time to finish because it retrieves all the data for each indicator individually and extracts the category metadata**. If the ```WHO_GHO_Categories.csv``` csv file already exists in this repo, you do not need to re-generate it unless you want to refresh it.
@@ -29,7 +29,32 @@ This directory imports the [WHO GHO Indicator Categories](https://www.who.int/da
   (a) Generates an mcf file for the StatVarGroups (categories);
 
   (b) Generates an updated mcf file for the WHO GHO Indicator StatVars which now includes the group/category information.
-```
+
+4. Using the [import-tool](https://github.com/datacommonsorg/import) the validation exercise should produce no errors and no warnings. The import tool validation can invoked as:
+
+    ```
+    $ alias dc-import ='java -jar <path_to_jar>'
+    $ dc-import genmcf <data_repo_path>/scripts/who/gho/gho_categories/output/*.mcf
+    ```
+
+Output from the validation should be similar (or the same as) what's shown below:
+
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "Existence_NumChecks": "66990",
+        "Existence_NumDcCalls": "3"
+      }
+    }
+  },
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}
 
 ## E2E Unit Test
 
