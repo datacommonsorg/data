@@ -19,7 +19,7 @@ Explorer](https://datacommons.org/tools/statvar).
 
 The statistical variable DCIDs should be human-readable, encapsulating the
 meaning of its triples.  The naming rules are summarized in [this
-doc](https://docs.google.com/document/u/2/d/e/2PACX-1vR7wU6qGXm2er9N2Mf9FaavYSpsX629hKtdmqL6m3_gBrAxGdG5Htlblrh3lO-e3fsUJOkH3Yx2wmnS/pub).
+doc](https://docs.google.com/document/d/1YtmQu_gOXENt4W2lmlK-8Mtnw_XB3kZlLBjSN-gT0oE/preview#bookmark=kix.bdksa8hbv3si).
 
 When the variables are finalized, they get checked into the [schema
 repo](https://github.com/datacommonsorg/schema/tree/main/stat_vars).
