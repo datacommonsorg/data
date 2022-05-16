@@ -8,7 +8,7 @@ AmericanIndianAndAlaskaNativeAlone,AsianAlone,BlackOrAfricanAmericanAlone,WhiteA
  
 
 ### Download URL
-A backend API allows the data to be queryable and responds with txt/csv/zip/xls/xlsx data. The API endpoint is at ["https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1900.csv","https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1901.csv","https://www2.census.gov/programs-surveys/popest/datasets/1980-1990/national/asrh/e8283cqi.zip","https://www2.census.gov/programs-surveys/popest/datasets/1980-1990/national/asrh/e8384cqi.zip","https://www2.census.gov/programs-surveys/popest/tables/1990-2000/counties/asrh/crhar95.txt","https://www2.census.gov/programs-surveys/popest/tables/1990-2000/counties/asrh/crhar96.txt","https://www2.census.gov/programs-surveys/popest/tables/2010-2019/national/asrh/nc-est2019-sr11h.xlsx"]
+The data in txt/csv formats are downloadable from within "https://www2.census.gov/programs-surveys/popest/tables" and "https://www2.census.gov/programs-surveys/popest/datasets". The actual URLs are listed in file_urls.json and file_url.txt(County data from 2020).
 
 #### API Output
 These are the attributes that we will use
@@ -54,7 +54,7 @@ Run the test cases
 
 The below scripts will download the data
 `/bin/python3 scripts/us_census/pep/population_estimate_by_race/download.py`
-`/bin/python3 scripts/us_census/pep/population_estimate_by_race/download.sh`
+`sh scripts/us_census/pep/population_estimate_by_race/download1.sh`
 
 The below script will generate csv and mcf files.
 `/bin/python3 scripts/us_census/pep/population_estimate_by_race/preprocess.py`

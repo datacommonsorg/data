@@ -1,10 +1,3 @@
-Node: dcid:Count_Person_USAllRaces
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-race: dcs:USAllRaces
-
 Node: dcid:Count_Person_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -19,12 +12,12 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 race: dcs:BlackOrAfricanAmericanAlone
 
-Node: dcid:Count_Person_AmericanIndianOrAlaskaNativeAlone
+Node: dcid:Count_Person_AmericanIndianAndAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-race: dcs:AmericanIndianOrAlaskaNativeAlone
+race: dcs:AmericanIndianAndAlaskaNativeAlone
 
 Node: dcid:Count_Person_AsianAlone
 typeOf: dcs:StatisticalVariable
@@ -40,19 +33,19 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 race: dcs:NativeHawaiianAndOtherPacificIslanderAlone
 
-Node: dcid:Count_Person_White
+Node: dcid:Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-race: dcs:White
+race: dcs:WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
 
-Node: dcid:Count_Person_Black
+Node: dcid:Count_Person_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-race: dcs:Black
+race: dcs:BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
 
 Node: dcid:Count_Person_AsianOrPacificIslander
 typeOf: dcs:StatisticalVariable
@@ -61,12 +54,12 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 race: dcs:AsianOrPacificIslander
 
-Node: dcid:Count_Person_AmericanIndianOrAlaskaNative
+Node: dcid:Count_Person_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-race: dcs:AmericanIndianOrAlaskaNative
+race: dcs:AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
 
 Node: dcid:Count_Person_TwoOrMoreRaces
 typeOf: dcs:StatisticalVariable
