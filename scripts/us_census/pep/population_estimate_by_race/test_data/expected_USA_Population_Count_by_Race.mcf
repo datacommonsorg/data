@@ -1,0 +1,83 @@
+Node: dcid:Count_Person_USAllRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:USAllRaces
+
+Node: dcid:Count_Person_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:WhiteAlone
+
+Node: dcid:Count_Person_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Person_AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Count_Person_AsianAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:AsianAlone
+
+Node: dcid:Count_Person_NativeHawaiianAndOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:NativeHawaiianAndOtherPacificIslanderAlone
+
+Node: dcid:Count_Person_White
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:White
+
+Node: dcid:Count_Person_Black
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:Black
+
+Node: dcid:Count_Person_AsianOrPacificIslander
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:AsianOrPacificIslander
+
+Node: dcid:Count_Person_AmericanIndianOrAlaskaNative
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:AmericanIndianOrAlaskaNative
+
+Node: dcid:Count_Person_TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:TwoOrMoreRaces
+
+Node: dcid:Count_Person_NonWhite
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:NonWhite
