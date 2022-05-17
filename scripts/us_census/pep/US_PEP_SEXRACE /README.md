@@ -3,6 +3,9 @@
 ## About the Dataset
 This dataset has Population Estimates By Sex And Race from the year 1900 to 2020 for different geographic level such as National, State and County.
 
+The population is categorized by Sex and Race.
+
+### Download URL
 The data in txt/csv formats are downloadable from within "https://www2.census.gov/programs-surveys/popest/tables" and "https://www2.census.gov/programs-surveys/popest/datasets". The actual URLs are listed in 
 individual .json files.
 
@@ -61,13 +64,10 @@ Cleaned data will be inside [Output/postprocess.csv] as a CSV file with the foll
 - [preprocess/Sex_Race_aggregate_state_20102_2020.tmcf]
 
 
-
 ### Running Tests
-
-
-
+The below command will run preprocess_test.py `python3 -m unittest script/us_census/pep/population_estimates_by_sr/preprocess_test.py`
 
 ### Import Procedure
-1. The below command will run preprocess.py script/us_census/pep/population_estimates_by_sr/preprocess.py
+1. The below command will run preprocess.py `python script/us_census/pep/population_estimates_by_sr/preprocess.py`
 
-2. The below command will run postprocess.py script/us_census/pep/population_estimates_by_sr/postprocess.py
+2. The below command will run postprocess.py `python script/us_census/pep/population_estimates_by_sr/postprocess.py`
