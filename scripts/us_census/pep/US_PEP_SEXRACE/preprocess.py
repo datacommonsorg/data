@@ -5,6 +5,7 @@ county python script and generate output csv
 '''
 
 import os
+
 os.system('python Nationals/national_1900_1970.py')
 os.system('python Nationals/national_1980_1990.py')
 os.system('python Nationals/national_1990_2000.py')
