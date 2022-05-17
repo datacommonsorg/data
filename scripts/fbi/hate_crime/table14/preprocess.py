@@ -297,7 +297,9 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
     df['agency type'] = df['agency type'].fillna(method='ffill')
 
     # Cleaning cities
+    df = df[df['agency'].notna()]
     df['agency'] = df['agency'].replace(r'[\d:]+', '', regex=True)
+    df['agency'] = df['agency'].str.replace(r'\n', ' ', regex=True)
     df['agency'] = df['agency'].replace(r'\s+', ' ', regex=True)
     df['agency'] = df['agency'].str.strip()
 
@@ -306,10 +308,6 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
 
     df['state'] = df['state'].str.title()
     df['state'] = df['state'].str.strip()
-
-    df = df[df['agency'].notna()]
-    df['agency'] = df['agency'].str.replace(r'\n', ' ', regex=True)
-    df['agency'] = df['agency'].str.replace(r'\s+', ' ', regex=True)
 
     df = df.apply(_add_state_alpha, axis=1)
     df = df.apply(_geo_resolution, axis=1)
