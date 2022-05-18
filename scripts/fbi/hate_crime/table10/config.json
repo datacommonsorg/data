@@ -1,0 +1,255 @@
+{
+    "populationType": {
+        "total": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "r/e/a": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "RaceOrEthnicity"
+        },
+        "religion": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "religion"
+        },
+        "sexual orientation": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "sexualOrientation"
+        },
+        "disability": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "disabilityStatus"
+        },
+        "gender": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "gender"
+        },
+        "gender identity": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "TransgenderOrGenderNonConforming"
+        },
+        "multiple": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "MultipleBias"
+        },
+        "race": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "race"
+        },
+        "ethnicity": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "ethnicity"
+        }
+    },
+    "pvs": {
+        "total": {},
+        "abandoned/condemned structure": {
+            "locationOfCrime": "AbandonedOrCondemnedStructure"
+        },
+        "air/bus/train terminal": {
+            "locationOfCrime": "Airport__BusStation__TrainStation"
+        },
+        "amusement park": {
+            "locationOfCrime": "AmusementPark"
+        },
+        "arena/stadium/fairgrounds/coliseum": {
+            "locationOfCrime": "StadiumOrArena"
+        },
+        "auto dealership new/used": {
+            "locationOfCrime": "AutoDealer"
+        },
+        "bank/savings and loan": {
+            "locationOfCrime": "BankOrSavingsAndLoan"
+        },
+        "bar/nightclub": {
+            "locationOfCrime": "BarOrPub__NightClub"
+        },
+        "camp/campground": {
+            "locationOfCrime": "Campground"
+        },
+        "church/synagogue/temple/mosque": {
+            "locationOfCrime": "PlaceOfWorship"
+        },
+        "church/synagogue/temple": {
+            "locationOfCrime": "PlaceOfWorship"
+        },
+        "commercial office building": {
+            "locationOfCrime": "CommercialOrOfficeBuilding"
+        },
+        "community center": {
+            "locationOfCrime": "CommunityCenter"
+        },
+        "construction site": {
+            "locationOfCrime": "ConstructionSite"
+        },
+        "convenience store": {
+            "locationOfCrime": "ConvenienceStore"
+        },
+        "cyberspace": {
+            "locationOfCrime": "Cyberspace"
+        },
+        "daycare facility": {
+            "locationOfCrime": "ChildCare"
+        },
+        "department/discount store": {
+            "locationOfCrime": "DepartmentStore"
+        },
+        "dock/wharf/freight/modal terminal": {
+            "locationOfCrime": "DockOrWharfOrFreightOrModalTerminal"
+        },
+        "drug store/doctor's office/hospital": {
+            "locationOfCrime": "MedicalBusiness"
+        },
+        "drug store/dr.'s office/hospital": {
+            "locationOfCrime": "MedicalBusiness"
+        },
+        "farm facility": {
+            "locationOfCrime": "FarmFacility"
+        },
+        "field/woods": {
+            "locationOfCrime": "FieldOrWoods"
+        },
+        "gambling facility/casino/race track": {
+            "locationOfCrime": "GamblingFacilityOrCasinoOrRaceTrack"
+        },
+        "government/public building": {
+            "locationOfCrime": "GovernmentOrPublicBuilding"
+        },
+        "grocery/supermarket": {
+            "locationOfCrime": "GroceryStore__Supermarket"
+        },
+        "highway/road/alley/street/sidewalk": {
+            "locationOfCrime": "HighwayOrRoadOrAlleyOrStreetOrSidewalk"
+        },
+        "highway/road/alley/street": {
+            "locationOfCrime": "HighwayOrRoadOrAlleyOrStreetOrSidewalk"
+        },
+        "hotel/motel/etc.": {
+            "locationOfCrime": "LodgingBusiness"
+        },
+        "industrial site": {
+            "locationOfCrime": "IndustrialSite"
+        },
+        "jail/prison/penitentiary/corrections facility": {
+            "locationOfCrime": "Prisons"
+        },
+        "jail/prison": {
+            "locationOfCrime": "Prisons"
+        },
+        "lake/waterway/beach": {
+            "locationOfCrime": "BodyOfWater__Beach"
+        },
+        "lake/waterway": {
+            "locationOfCrime": "BodyOfWater__Beach"
+        },
+        "liquor store": {
+            "locationOfCrime": "LiquorStore"
+        },
+        "military installation": {
+            "locationOfCrime": "MilitaryInstallation"
+        },
+        "park/playground": {
+            "locationOfCrime": "Park__Playground"
+        },
+        "parking/drop lot/garage": {
+            "locationOfCrime": "ParkingFacility"
+        },
+        "parking lot/garage": {
+            "locationOfCrime": "ParkingFacility"
+        },
+        "rental storage facility": {
+            "locationOfCrime": "SelfStorage"
+        },
+        "residence/home": {
+            "locationOfCrime": "Residence"
+        },
+        "rest area": {
+            "locationOfCrime": "RestArea"
+        },
+        "restaurant": {
+            "locationOfCrime": "Restaurant"
+        },
+        "school/college": {
+            "locationOfCrime": "School__CollegeOrUniversity"
+        },
+        "school-college/university": {
+            "locationOfCrime": "CollegeOrUniversity"
+        },
+        "school—college/university": {
+            "locationOfCrime": "CollegeOrUniversity"
+        },
+        "school-elementary/secondary": {
+            "locationOfCrime": "ElementarySchool__HighSchool"
+        },
+        "school—elementary/secondary": {
+            "locationOfCrime": "ElementarySchool__HighSchool"
+        },
+        "service/gas station": {
+            "locationOfCrime": "GasStation"
+        },
+        "shelter-mission/homeless": {
+            "locationOfCrime": "MissionOrHomelessShelter"
+        },
+        "shelter—mission/homeless": {
+            "locationOfCrime": "MissionOrHomelessShelter"
+        },
+        "shopping mall": {
+            "locationOfCrime": "ShoppingCenter"
+        },
+        "specialty store (tv, fur, etc.)": {
+            "locationOfCrime": "SpecialtyStore"
+        },
+        "tribal lands": {
+            "locationOfCrime": "TribalLands"
+        },
+        "other/unknown": {
+            "locationOfCrime": "UCR_UnclassifiedLocation"
+        },
+        "multiple locations": {
+            "locationOfCrime": "MultipleCrimeLocations"
+        },
+        "atm separate from bank": {
+            "locationOfCrime": "ATMSeparateFromBank"
+        }
+    },
+    "dpv": []
+}
