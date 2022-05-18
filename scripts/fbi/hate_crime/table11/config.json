@@ -1,0 +1,158 @@
+{
+    "populationType": {
+        "total offenses": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "murder": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "MurderAndNonNegligentManslaughter",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "rape": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "ForcibleRape",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "forcible rape": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "ForcibleRape",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "aggravated assault": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "AggravatedAssault",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "simple assault": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "SimpleAssault",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "intimidation": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "Intimidation",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "other crimes against person": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "UCR_OtherCrimesAgainstPerson",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "robbery": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "Robbery",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "burglary": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "Burglary",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "larceny theft": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "LarcenyTheft",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "motor vehicle theft": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "MotorVehicleTheft",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "arson": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "Arson",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "vandalism": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "DestructionOrDamageOrVandalismOfProperty",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "other crimes against property": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "UCR_OtherCrimesAgainstProperty",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "crimes against society": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "CrimeAgainstSociety",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "trafficking": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "crimeType": "HumanTrafficking_CommercialSexActs",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "pvs": {},
+    "dpv": []
+}
