@@ -1,0 +1,100 @@
+{
+    "populationType": {
+        "total offenses": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "individual": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "victimType": "Person",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "business": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "victimType": "Business",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "government": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "victimType": "Government",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "religious organization": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "victimType": "ReligiousOrganization",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "society": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "victimType": "Society",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "other/unknown/multiple": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "victimType": "UCR_OtherVictimType__UCR_UnknownVictimType__MultipleVictimType",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "pvs": {
+        "total": {},
+        "crimes against persons": {
+            "crimeType": "CrimeAgainstPerson"
+        },
+        "crimes against property": {
+            "crimeType": "CrimeAgainstProperty"
+        },
+        "robbery": {
+            "crimeType": "Robbery"
+        },
+        "burglary": {
+            "crimeType": "Burglary"
+        },
+        "larceny-theft": {
+            "crimeType": "LarcenyTheft"
+        },
+        "motor vehicle theft": {
+            "crimeType": "MotorVehicleTheft"
+        },
+        "arson": {
+            "crimeType": "Arson"
+        },
+        "destruction/damage/vandalism": {
+            "crimeType": "DestructionOrDamageOrVandalismOfProperty"
+        },
+        "other": {
+            "crimeType": "UCR_OtherCrimesAgainstProperty"
+        },
+        "crimes against society": {
+            "crimeType": "CrimeAgainstSociety"
+        }
+    },
+    "dpv": []
+}
