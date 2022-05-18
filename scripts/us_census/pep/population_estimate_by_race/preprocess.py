@@ -106,7 +106,7 @@ def _clean_xlsx_file(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         df (DataFrame) : Transformed DataFrame for xls dataset.
     """
-    df = df.drop(['Census', 'Estimates Base', 2010], axis=1)
+    df = df.drop(['Census', 'Estimates Base'], axis=1)
     df = df.drop([1], axis=0)
     df.drop(df.index[7:], inplace=True)
     #print(df.columns)
@@ -114,19 +114,21 @@ def _clean_xlsx_file(df: pd.DataFrame) -> pd.DataFrame:
     df['Geographic Area'] = 'United States'
     df = df.groupby(['Geographic Area','Unnamed: 0']).sum()\
         .transpose().stack(0).reset_index()
-
     df.columns = df.columns.str.replace('level_0', 'Year')
     df.columns = df.columns.str.replace('White', 'White Alone')
     df.columns = df.columns.str.replace('TOTAL POPULATION', 'Total')
     df.columns = df.columns.str.replace('Black or African American', \
         'Black or African American Alone')
     df.columns = df.columns.str.replace(
-        'Native Hawaiian and Other Pacific\
-         Islander', 'Native Hawaiian and Other Pacific Islander Alone')
+        'Native Hawaiian and Other Pacific Islander'\
+        , 'Native Hawaiian and Other Pacific Islander Alone')
+    df.columns = df.columns.str.replace(
+        'American Indian and Alaska Native'\
+        , 'American Indian or Alaska Native Alone')
     df.columns = df.columns.str.replace('Asian', 'Asian Alone')
 
     df['Total'] = pd.to_numeric(df['Total'])
-    #print(df)
+    print(df)
     return df
 
 
@@ -542,7 +544,7 @@ def _mcf_path(flag: int):
     if flag == 1:
         suffix = "_State1980.mcf"
     else:
-        suffix = ""
+        suffix = ".mcf"
     return suffix
 
 
@@ -640,6 +642,7 @@ class CensusUSAPopulationByRace:
         if not os.path.exists(file_dir):
             os.mkdir(file_dir)
         df = _transform_df(df)
+        print(df)
         if 'geo_ID' not in df.columns:
             df = add_geo_id(df)
         if self.df is None:
@@ -816,7 +819,6 @@ def main(_):
     mcf_path = data_file_path + os.sep + "USA_Population_Count_by_Race"
     tmcf_path = data_file_path + os.sep + \
         "USA_Population_Count_by_Race"
-
     loader = CensusUSAPopulationByRace(ip_files, cleaned_csv_path, mcf_path,
                                        tmcf_path)
 
