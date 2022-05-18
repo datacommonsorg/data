@@ -1,0 +1,96 @@
+{
+    "populationType": {
+        "total": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offender",
+            "offenderType": "KnownOffender",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "pvs": {
+        "Race": {
+            "offenderType": "KnownOffenderRace"
+        },
+        "Ethnicity3":{
+            "offenderType": "KnownOffenderEthnicity"
+        },
+        "Age3": {
+            "offenderType": "KnownOffenderAge"
+        },
+        "Total": {
+            "offenderType": "KnownOffenderRace"
+        },
+        "White": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "WhiteAlone"
+        },
+        "Black or African American": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "BlackOrAfricanAmericanAlone"
+        },
+        "Black": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "BlackOrAfricanAmericanAlone"
+        },
+        "Unknown Race": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "UnknownRace"
+        },
+        "Group of Multiple Races2": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "TwoOrMoreRaces"
+        },
+        "Multiple Races, Group2": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "TwoOrMoreRaces"
+        },
+        "Asian": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "AsianAlone"
+        },
+        "American Indian or Alaska Native": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "American Indian/Alaskan Native": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "Native Hawaiian or Other Pacific Islander": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "NativeHawaiianOrOtherPacificIslanderAlone"
+        },
+        "Asian/Pacific Islander": {
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "AsianOrPacificIslander"
+        },
+        "Unknown Ethnicity": {
+            "offenderType": "KnownOffenderEthnicity",
+            "offenderEthnicity": "UCR_UnknownEthnicity"
+        },
+        "Not Hispanic or Latino": {
+            "offenderType": "KnownOffenderEthnicity",
+            "offenderEthnicity": "NotHispanicOrLatino"
+        },
+        "Hispanic or Latino": {
+            "offenderType": "KnownOffenderEthnicity",
+            "offenderEthnicity": "HispanicOrLatino"
+        },
+        "Group of Multiple Ethnicities4": {
+            "offenderType": "KnownOffenderEthnicity",
+            "offenderEthnicity": "UCR_MultipleEthnicity"
+        },
+        "Total known offenders 18 and over": {
+            "offenderType": "KnownOffenderAge",
+            "offenderAge": "[18 - Years]"
+        },
+        "Total known offenders under 18": {
+            "offenderType": "KnownOffenderAge",
+            "offenderAge": "[- 17 Years]"
+        }
+    },
+    "dpv": []
+}
