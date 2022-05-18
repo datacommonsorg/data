@@ -23,8 +23,9 @@ class ScraperTest(unittest.TestCase):
 
   def test_get_links_from_page(self):
     link_list = scraper.get_all_links_in_page(PAGE_URL)
-    print(link_list)
-    pass
+    self.assertEqual(len(link_list), 127)
+
+#TODO: Add more tests for the other functions that were added to the script
 
 
 if __name__ == '__main__':
