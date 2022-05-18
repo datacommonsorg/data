@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Tests for Hate Crime Table 1."""
+"""Tests for Hate Crime Table 10."""
 
 import os
 import sys
@@ -31,26 +31,27 @@ _YEAR_INDEX = 0
 _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity')
 
 
-class HateCrimeTable1Test(unittest.TestCase):
+class HateCrimeTable10Test(unittest.TestCase):
 
     def test_csv(self):
         csv_files = []
         test_config = {
             'type': 'xls',
-            'path': 'testdata/2019.xls',
+            'path': 'testdata/2011.xls',
             'args': {
-                'header': 3,
-                'skipfooter': 3
+                'header': 4,
+                'skipfooter': 2,
+                'usecols': [0, 1, 2, 3, 4, 5, 6, 7]
             }
         }
         with tempfile.TemporaryDirectory() as tmp_dir:
             xls_file_path = os.path.join(_SCRIPT_PATH, test_config['path'])
-            csv_file_path = os.path.join(tmp_dir, '2019.csv')
+            csv_file_path = os.path.join(tmp_dir, '2011.csv')
 
             read_file = pd.read_excel(xls_file_path, **test_config['args'])
-            read_file = preprocess._clean_dataframe(read_file)
-            read_file.insert(_YEAR_INDEX, 'Year', '2019')
-            read_file.to_csv(csv_file_path, index=None, header=True)
+            read_file = preprocess._clean_dataframe(read_file, '2011')
+            read_file.insert(_YEAR_INDEX, 'Year', '2011')
+            read_file.to_csv(csv_file_path, header=True, index=False)
             csv_files.append(csv_file_path)
 
             config_path = os.path.join(_SCRIPT_PATH, 'config.json')
