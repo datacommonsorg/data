@@ -90,25 +90,6 @@ def _return_month(col: str) -> str:
     return col
 
 
-def _sum_cols(col: pd.Series) -> pd.Series:
-    """
-    This method concats two DataFrame column values
-    with space in-between.
-
-    Arguments:
-        col[0] (Series) : DataFrame Column of dtype str
-        col[1] (Series) : DataFrame Column of dtype str
-
-    Returns:
-        res (Series) : Concatenated DataFrame Columns
-    """
-    res = col[0]
-    if col[1] is None:
-        return res
-    res = col[0] + ' ' + col[1]
-    return res
-
-
 def _year_range(col: pd.Series) -> str:
     """
     This method returns year range from the dataframe
@@ -125,32 +106,6 @@ def _year_range(col: pd.Series) -> str:
     min_year = min(pd.to_datetime(col, errors='coerce').dt.year)
     year_range = str(max_year) + '-' + str(min_year)
     return year_range
-
-
-def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    This method cleans the dataframe loaded from a csv file format.
-    Also, Performs transformations on the data.
-
-    Arguments:
-        df (DataFrame) : DataFrame of csv dataset
-
-    Returns:
-        df (DataFrame) : Transformed DataFrame for txt dataset.
-    """
-    idx = df[df[0] == "Year and Month"].index
-    df = df.iloc[idx.values[0] + 1:][:]
-    df = df.dropna(axis=1, how='all')
-    cols = [
-        "Year and Month", "Resident Population",
-        "Resident Population Plus Armed Forces Overseas", "Civilian Population",
-        "Civilian NonInstitutionalized Population"
-    ]
-    df.columns = cols
-    for col in df.columns:
-        df[col] = df[col].str.replace(",", "")
-    return df
-
 
 class CensusUSACountryPopulation:
     """
@@ -186,62 +141,6 @@ class CensusUSACountryPopulation:
         self.file_name = os.path.basename(file)
         if ".xls" in file:
             df = pd.read_excel(file)
-        elif ".csv" in file:
-            file_name = file_name.replace(".csv", ".xlsx")
-            df = pd.read_csv(file, header=None)
-            df = _clean_csv_file(df)
-
-        elif ".txt" in file:
-            skip_rows_txt = 17
-            self.file_name = self.file_name.replace(".txt", ".xlsx")
-            cols = [
-                "Year and Month", "Date", "Resident Population",
-                "Resident Population Plus Armed Forces Overseas",
-                "Civilian Population",
-                "Civilian NonInstitutionalized Population"
-            ]
-            df = pd.read_table(file,
-                               index_col=False,
-                               delim_whitespace=True,
-                               engine='python',
-                               skiprows=skip_rows_txt,
-                               names=cols)
-        return df
-
-    def _clean_txt_file(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        This method cleans the dataframe loaded from a txt file format.
-        Also, Performs transformations on the data.
-
-        Arguments:
-            df (DataFrame) : DataFrame of txt dataset
-
-        Returns:
-            df (DataFrame) : Transformed DataFrame for txt dataset.
-        """
-        # Scaling factor for txt file : 1000
-        self.scaling_factor = 1000
-        df['Year and Month'] = df[['Year and Month', 'Date']].apply(_sum_cols,
-                                                                    axis=1)
-        df.drop(columns=['Date'], inplace=True)
-        for col in df.columns:
-            df[col] = df[col].str.replace(",", "")
-        idx = df[df['Resident Population'] == "(census)"].index
-
-        resident_population = 1
-        resident_population_plus_armed_forces_overseas = 2
-        civilian_population = 3
-        civilian_noninstitutionalized_population = 4
-
-        # Moving the row data left upto one index value.
-        df.iloc[idx, resident_population] = df.iloc[idx][
-            "Resident Population Plus Armed Forces Overseas"]
-        df.iloc[idx, resident_population_plus_armed_forces_overseas] = df.iloc[
-            idx]["Civilian Population"]
-        df.iloc[idx, civilian_population] = df.iloc[idx][
-            "Civilian NonInstitutionalized Population"]
-        df.iloc[idx, civilian_noninstitutionalized_population] = np.NAN
-
         return df
 
     def _transform_df(self, df: pd.DataFrame) -> pd.DataFrame:

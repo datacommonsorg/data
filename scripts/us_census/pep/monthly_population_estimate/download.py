@@ -136,7 +136,8 @@ def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         df (DataFrame) : Transformed DataFrame for txt dataset.
     """
-    # Deletion of garbage in the initial lines of the input
+    # Removal of file description and headers in the initial lines of the input
+    print(df)
     idx = df[df[0] == "Year and Month"].index
     df = df.iloc[idx.values[0] + 1:][:]
     df = df.dropna(axis=1, how='all')
