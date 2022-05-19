@@ -11,8 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" A Script to download USA Census PEP monthly population data
-    from the URLS in provided json file.
+""" A Script to download, perform some basic transformations to
+    USA Census PEP monthly population data from the URLS in 
+    provided json file and save it as an xlsx file.
 """
 
 import os
@@ -22,22 +23,23 @@ import numpy as np
 from absl import app
 from absl import flags
 
-FLAGS = flags.FLAGS
-URLS_JSON_PATH = os.path.dirname(os.path.abspath(__file__)) \
+_FLAGS = flags.FLAGS
+_URLS_JSON_PATH = os.path.dirname(os.path.abspath(__file__)) \
                     + os.sep +"file_urls.json"
 
-URLS_JSON = None
-with open(URLS_JSON_PATH, encoding="UTF-8") as file:
-    URLS_JSON = json.load(file)
+_URLS_JSON = None
+with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
+    _URLS_JSON = json.load(file)
 
 # Flag names are globally defined!  So in general, we need to be
 # careful to pick names that are unlikely to be used by other libraries.
 # If there is a conflict, we'll get an error at import time.
-flags.DEFINE_list("url", URLS_JSON["urls"], "Import Data URL's List")
+flags.DEFINE_list("us_census_pep_monthly_pop_estimate_url", \
+    _URLS_JSON["urls"], "Import Data URL's List")
 
-HEADER = 1
+_HEADER = 1
 SKIP_ROWS = 1
-SCALING_FACTOR_TXT_FILE = 1000
+_SCALING_FACTOR_TXT_FILE = 1000
 
 
 def _save_data(url: str, download_local_path: str) -> None:
@@ -55,7 +57,7 @@ def _save_data(url: str, download_local_path: str) -> None:
     df = ""
     file_name = url.split("/")[-1]
     if ".xls" in url:
-        df = pd.read_excel(url, header=HEADER)
+        df = pd.read_excel(url, header=_HEADER)
         df.to_excel(download_local_path + os.sep + file_name,
                     index=False,
                     header=False,
@@ -80,7 +82,7 @@ def _save_data(url: str, download_local_path: str) -> None:
                            engine='python',
                            skiprows=17,
                            names=cols)
-        df = _clean_txt_file(df, SCALING_FACTOR_TXT_FILE)
+        df = _clean_txt_file(df, _SCALING_FACTOR_TXT_FILE)
         df.to_excel(download_local_path + os.sep + file_name,
                     index=False,
                     engine='xlsxwriter')
@@ -105,7 +107,7 @@ def _sum_cols(col: pd.Series) -> pd.Series:
     return res
 
 
-def _mulitply(col: pd.Series, **kwargs: dict) -> pd.Series:
+def _mulitply_scaling_factor(col: pd.Series, **kwargs: dict) -> pd.Series:
     """
     This method multiply dataframe column with scaling factor.
 
@@ -134,6 +136,7 @@ def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         df (DataFrame) : Transformed DataFrame for txt dataset.
     """
+    # Deletion of garbage in the initial lines of the input
     idx = df[df[0] == "Year and Month"].index
     df = df.iloc[idx.values[0] + 1:][:]
     df = df.dropna(axis=1, how='all')
@@ -161,7 +164,7 @@ def _clean_txt_file(df: pd.DataFrame,
     Returns:
         df (DataFrame) : Transformed DataFrame for txt dataset.
     """
-
+    # Month and Year are concatenated into a single column if they are not None
     df['Year and Month'] = df[['Year and Month', 'Date']]\
                                     .apply(_sum_cols, axis=1)
     df.drop(columns=['Date'], inplace=True)
@@ -174,7 +177,7 @@ def _clean_txt_file(df: pd.DataFrame,
     civilian_population = 3
     civilian_noninstitutionalized_population = 4
 
-    #Moving the row data left upto one index value.
+    # Moving the row data left upto one index value.
     df.iloc[idx, resident_population] = df.iloc[idx][
         "Resident Population Plus Armed Forces Overseas"]
     df.iloc[idx, resident_population_plus_armed_forces_overseas] = df.iloc[idx][
@@ -183,11 +186,11 @@ def _clean_txt_file(df: pd.DataFrame,
         "Civilian NonInstitutionalized Population"]
     df.iloc[idx, civilian_noninstitutionalized_population] = np.NAN
 
-    #Multiplying the data with scaling factor 1000.
+    # Multiplying the data with scaling factor 1000.
     for col in df.columns:
         if "year" not in col.lower():
             if scaling_factor_txt_file != 1:
-                df[col] = df[col].apply(_mulitply,
+                df[col] = df[col].apply(_mulitply_scaling_factor,
                                         scaling_factor=scaling_factor_txt_file)
     return df
 
@@ -211,7 +214,7 @@ def _download(download_path: str, file_urls: list) -> None:
 
 
 def main(_):
-    file_urls = FLAGS.url
+    file_urls = _FLAGS.us_census_pep_monthly_pop_estimate_url
     path = os.path.dirname(os.path.abspath(__file__)) + os.sep + "input_data"
     _download(path, file_urls)
 
