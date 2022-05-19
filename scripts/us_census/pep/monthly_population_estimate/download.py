@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ A Script to download, perform some basic transformations to
-    USA Census PEP monthly population data from the URLS in 
+    USA Census PEP monthly population data from the URLS in
     provided json file and save it as an xlsx file.
 """
 
@@ -137,7 +137,6 @@ def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for txt dataset.
     """
     # Removal of file description and headers in the initial lines of the input
-    print(df)
     idx = df[df[0] == "Year and Month"].index
     df = df.iloc[idx.values[0] + 1:][:]
     df = df.dropna(axis=1, how='all')
