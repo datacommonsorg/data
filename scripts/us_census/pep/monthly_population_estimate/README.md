@@ -1,4 +1,4 @@
-# US Census PEP: National Population Count
+# US Census PEP: National Population Count by Residential Status and Military Status
 
 ## About the Dataset
 This dataset has Population Count Estimates for the United States from the year 1980 to 2022 on a monthly basis.
@@ -6,7 +6,7 @@ This dataset has Population Count Estimates for the United States from the year 
 The population is categorized by residential status (resident,InArmedForcesOverseas), military status(Civilian,InArmedForces) and a combination of the same. 
 
 ### Download URL
-A backend API allows the data to be queryable and responds with txt/xls/xlsx data. The API endpoint is at "https://www2.census.gov/programs-surveys/popest/tables/2020-2021/national/totals/NA-EST2021-POP.xlsx","https://www2.census.gov/programs-surveys/popest/tables/2010-2019/national/totals/na-est2019-01.xlsx","https://www2.census.gov/programs-surveys/popest/tables/2000-2008/national/totals/na-est2008-01.xls","https://www2.census.gov/programs-surveys/popest/tables/1990-2000/national/totals/nat-total.txt". The API takes JSON input with two main attributes.
+The data in txt/xls/xlsx formats are downloadable from within https://www2.census.gov/programs-surveys/popest/tables. The actual URLs are listed in file_urls.json.
 
 #### API Output
 These are the attributes that we will use
