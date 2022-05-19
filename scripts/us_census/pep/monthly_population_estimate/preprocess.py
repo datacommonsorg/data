@@ -21,7 +21,6 @@ import os
 import re
 import sys
 
-import numpy as np
 import pandas as pd
 from absl import app
 from absl import flags
@@ -220,7 +219,7 @@ class CensusUSACountryPopulation:
         df.insert(0, 'date_range', _year_range(df['Date']), True)
         return df
 
-    def _transform_data(self, file: str, df: pd.DataFrame) -> None:
+    def _transform_data(self, df: pd.DataFrame) -> None:
         """
         This method calls the required functions to transform
         the dataframe and saves the final cleaned data in
@@ -237,13 +236,7 @@ class CensusUSACountryPopulation:
         file_dir = os.path.dirname(self.cleaned_csv_file_path)
         if not os.path.exists(file_dir):
             os.mkdir(file_dir)
-
-        # Cleaning txt file if file is in txt format
-        if ".txt" in file:
-            df = self._clean_txt_file(df)
-
         df = self._transform_df(df)
-
         keep_value = "first"
         if self.df is None:
             self.df = df
@@ -265,7 +258,7 @@ class CensusUSACountryPopulation:
         """
         for file in self.input_files:
             df = self._load_data(file)
-            self._transform_data(file, df)
+            self._transform_data(df)
         self._generate_mcf(self.df.columns)
         self._generate_tmcf(self.df.columns)
 
