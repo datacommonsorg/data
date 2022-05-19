@@ -106,6 +106,7 @@ def _year_range(col: pd.Series) -> str:
     year_range = str(max_year) + '-' + str(min_year)
     return year_range
 
+
 class CensusUSACountryPopulation:
     """
     CensusUSACountryPopulation class provides methods
