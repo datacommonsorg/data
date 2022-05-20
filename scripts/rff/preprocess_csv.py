@@ -22,7 +22,7 @@ time_interval_types = {
 gdcStatVars_to_csvColName = {
     "StandardDeviation": "std_dev_mean",
     "Skewness": "skewness_mean",
-    "Kurtosis": "kurtosis_mean",
+    "Kurtosis": "kurtosis_mean"
 }  
 ## Returns dict mapping GDC-Stat-Names to the corresponding column-name as stored in local csv's
 def get_stat_labels(climate_var):
