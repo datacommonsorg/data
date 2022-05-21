@@ -1,0 +1,248 @@
+{
+    "preprocess": {
+        "find_and_replace": {
+            "Number Uninsured!!Estimate!!WORK EXPERIENCE!!Worked full-time, year round in the past 12 months": "Number Uninsured!!Estimate!!WORK EXPERIENCE!!Worked full-time, year round in the past 12 months!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Margin of Error!!WORK EXPERIENCE!!Worked full-time, year round in the past 12 months": "Number Uninsured!!Margin of Error!!WORK EXPERIENCE!!Worked full-time, year round in the past 12 months!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Estimate!!WORK EXPERIENCE!!Worked less than full-time, year round in the past 12 months": "Number Uninsured!!Estimate!!WORK EXPERIENCE!!Worked less than full-time, year round in the past 12 months!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Margin of Error!!WORK EXPERIENCE!!Worked less than full-time, year round in the past 12 months": "Number Uninsured!!Margin of Error!!WORK EXPERIENCE!!Worked less than full-time, year round in the past 12 months!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Estimate!!WORK EXPERIENCE!!Did not work": "Number Uninsured!!Estimate!!WORK EXPERIENCE!!Did not work!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Margin of Error!!WORK EXPERIENCE!!Did not work": "Number Uninsured!!Margin of Error!!WORK EXPERIENCE!!Did not work!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Estimate!!WORK EXPERIENCE!!Worked full-time, year round in the past 12 months": "Total!!Estimate!!WORK EXPERIENCE!!Worked full-time, year round in the past 12 months!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Margin of Error!!WORK EXPERIENCE!!Worked full-time, year round in the past 12 months": "Total!!Margin of Error!!WORK EXPERIENCE!!Worked full-time, year round in the past 12 months!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Estimate!!WORK EXPERIENCE!!Worked less than full-time, year round in the past 12 months": "Total!!Estimate!!WORK EXPERIENCE!!Worked less than full-time, year round in the past 12 months!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Margin of Error!!WORK EXPERIENCE!!Worked less than full-time, year round in the past 12 months": "Total!!Margin of Error!!WORK EXPERIENCE!!Worked less than full-time, year round in the past 12 months!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Estimate!!WORK EXPERIENCE!!Did not work": "Total!!Estimate!!WORK EXPERIENCE!!Did not work!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Margin of Error!!WORK EXPERIENCE!!Did not work": "Total!!Margin of Error!!WORK EXPERIENCE!!Did not work!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Number Uninsured!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate!!Civilian noninstitutionalized population 25 years and older",
+            "Number Uninsured!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Number Uninsured!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate!!Civilian noninstitutionalized population 25 years and older",
+            "Number Uninsured!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate, GED, or alternative": "Number Uninsured!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate, GED, or alternative!!Civilian noninstitutionalized population 25 years and older",
+            "Number Uninsured!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate, GED, or alternative": "Number Uninsured!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate, GED, or alternative!!Civilian noninstitutionalized population 25 years and older",
+            "Number Uninsured!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Number Uninsured!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree!!Civilian noninstitutionalized population 25 years and older",
+            "Number Uninsured!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Number Uninsured!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree!!Civilian noninstitutionalized population 25 years and older",
+            "Number Uninsured!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher": "Number Uninsured!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher!!Civilian noninstitutionalized population 25 years and older",
+            "Number Uninsured!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher": "Number Uninsured!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher!!Civilian noninstitutionalized population 25 years and older",
+            "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Less than high school graduate!!Civilian noninstitutionalized population 25 years and older",
+            "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Less than high school graduate!!Civilian noninstitutionalized population 25 years and older",
+            "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate, GED, or alternative": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate, GED, or alternative!!Civilian noninstitutionalized population 25 years and older",
+            "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate, GED, or alternative": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate, GED, or alternative!!Civilian noninstitutionalized population 25 years and older",
+            "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree!!Civilian noninstitutionalized population 25 years and older",
+            "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Some college or associate's degree!!Civilian noninstitutionalized population 25 years and older",
+            "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher": "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher!!Civilian noninstitutionalized population 25 years and older",
+            "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher": "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Bachelor's degree or higher!!Civilian noninstitutionalized population 25 years and older",
+            "Total!!Estimate!!EMPLOYMENT STATUS!!In labor force": "Total!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Margin of Error!!EMPLOYMENT STATUS!!In labor force": "Total!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Employed": "Total!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Employed!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Employed": "Total!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Employed!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Unemployed": "Total!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Unemployed!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Unemployed": "Total!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Unemployed!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Estimate!!EMPLOYMENT STATUS!!Not in labor force": "Total!!Estimate!!EMPLOYMENT STATUS!!Not in labor force!!Civilian noninstitutionalized population 18 years and older",
+            "Total!!Margin of Error!!EMPLOYMENT STATUS!!Not in labor force": "Total!!Margin of Error!!EMPLOYMENT STATUS!!Not in labor force!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Estimate!!EMPLOYMENT STATUS!!In labor force": "Number Uninsured!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Margin of Error!!EMPLOYMENT STATUS!!In labor force": "Number Uninsured!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Employed": "Number Uninsured!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Employed!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Employed": "Number Uninsured!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Employed!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Unemployed": "Number Uninsured!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Unemployed!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Unemployed": "Number Uninsured!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Unemployed!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Estimate!!EMPLOYMENT STATUS!!Not in labor force": "Number Uninsured!!Estimate!!EMPLOYMENT STATUS!!Not in labor force!!Civilian noninstitutionalized population 18 years and older",
+            "Number Uninsured!!Margin of Error!!EMPLOYMENT STATUS!!Not in labor force": "Number Uninsured!!Margin of Error!!EMPLOYMENT STATUS!!Not in labor force!!Civilian noninstitutionalized population 18 years and older"
+        }
+    },
+    "overwrite_dcids": {
+        "Count_Person_19OrLessYears_Civilian_NonInstitutionalized": "Count_Person_Upto19Years_Civilian_NonInstitutionalized",
+        "Count_Person_18OrLessYears_Civilian_NonInstitutionalized": "Count_Person_Upto18Years_Civilian_NonInstitutionalized",
+        "Count_Person_WithDisability_NoHealthInsurance": "Count_Person_NoHealthInsurance_WithDisability",
+        "Count_Person_NoDisability_NoHealthInsurance": "Count_Person_NoHealthInsurance_NoDisability",
+        "Count_Person_NoDisability_WithHealthInsurance": "Count_Person_WithHealthInsurance_NoDisability",
+        "Count_Person_WithDisability_WithHealthInsurance": "Count_Person_WithHealthInsurance_WithDisability"
+    },
+    "populationType": {
+        "_DEFAULT": "schema:Person"
+    },
+    "measurement": {
+        "_DEFAULT": {
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        }
+    },
+    "enumSpecializations": {},
+    "pvs": {
+        "healthInsurance": {
+            "Insured": "WithHealthInsurance",
+            "Number Insured by  Coverage Type": "WithHealthInsurance",
+            "Uninsured": "NoHealthInsurance",
+            "Number Uninsured": "NoHealthInsurance",
+            "Insured MOE": "WithHealthInsurance",
+            "Uninsured MOE": "NoHealthInsurance",
+            "Private health insurance": "WithPrivateHealthInsurance",
+            "Private health insurance alone": "WithPrivateHealthInsuranceOnly",
+            "Employment-based health insurance": "WithEmployerBasedHealthInsurance",
+            "Employment-based health insurance alone": "WithEmployerBasedHealthInsuranceOnly",
+            "Direct-purchase health insurance": "WithDirectPurchaseHealthInsurance",
+            "Direct-purchase health insurance alone": "WithDirectPurchaseHealthInsuranceOnly",
+            "TRICARE/military health coverage": "WithTricareMilitaryHealthCoverage",
+            "TRICARE/military health coverage alone": "WithTricareMilitaryHealthCoverageOnly",
+            "Public coverage": "WithPublicHealthInsurance",
+            "Public coverage alone": "WithPublicHealthInsuranceOnly",
+            "Medicare coverage": "WithMedicareCoverage",
+            "Medicare coverage alone": "WithMedicareCoverageOnly",
+            "Medicaid/means-tested public coverage": "WithMedicaidOrMeansTestedPublicCoverage",
+            "Medicaid/means-tested public coverage alone": "WithMedicaidOrMeansTestedPublicCoverageOnly",
+            "VA Health Care": "WithVAHealthCare",
+            "VA Health Care alone": "WithVAHealthCareOnly"
+        },
+        "statType": {
+            "Margin of Error": "marginOfError"
+        },
+        "age": {
+            "18 to 64 years": "[18 64 Years]",
+            "Under 19 years": "[- 19 Years]",
+            "Under 18 years": "[- 18 Years]",
+            "Under 6 years": "[- 6 Years]",
+            "6 to 17 years": "[6 17 Years]",
+            "6 to 18 years": "[6 18 Years]",
+            "19 to 64 years": "[19 64 Years]",
+            "18 to 24 years": "[18 24 Years]",
+            "19 to 25 years": "[19 25 Years]",
+            "25 to 34 years": "[25 34 Years]",
+            "26 to 34 years": "[26 34 Years]",
+            "35 to 44 years": "[35 44 Years]",
+            "45 to 54 years": "[45 54 Years]",
+            "55 to 64 years": "[55 64 Years]",
+            "65 years and older": "[65 - Years]",
+            "65 to 74 years": "[65 74 Years]",
+            "75 years and older": "[75 - Years]",
+            "Civilian noninstitutionalized population 25 years and over": "[25 - Years]",
+            "Civilian noninstitutionalized population 25 years and older": "[25 - Years]",
+            "Civilian noninstitutionalized population 26 years and over": "[26 - Years]",
+            "Civilian noninstitutionalized population 19 to 64 years": "[19 64 Years]",
+            "Civilian noninstitutionalized population 18 years and over": "[18 - Years]",
+            "Civilian noninstitutionalized population 18 years and older": "[18 - Years]",
+            "Civilian noninstitutionalized population 18 to 64 years": "[18 64 Years]"
+        },
+        "nativity": {
+            "Foreign born": "USC_ForeignBorn",
+            "Native born": "USC_Native"
+        },
+        "educationalAttainment": {
+            "Less than high school graduate": "LessThanHighSchoolGraduate",
+            "High school graduate (includes equivalency)": "HighSchoolGraduateIncludesEquivalency",
+            "High school graduate, GED, or alternative": "HighSchoolGraduateGedOrAlternative",
+            "Some college or associate's degree": "SomeCollegeOrAssociatesDegree",
+            "Bachelor's degree or higher": "BachelorsDegreeOrHigher"
+        },
+        "citizenship": {
+            "Naturalized": "USCitizenByNaturalization",
+            "Not a citizen": "NotAUSCitizen"
+        },
+        "povertyStatus": {
+            "Civilian noninstitutionalized population for whom poverty status is determined": "PovertyStatusDetermined",
+            "Below 138 percent of the poverty threshold": "[- 1.38 RatioToPovertyLine]",
+            "Under 1.38 of poverty threshold": "[- 1.38 RatioToPovertyLine]",
+            "138 to 399 percent of the poverty threshold": "[1.38 3.99 RatioToPovertyLine]",
+            "1.38 to 1.99 of poverty threshold": "[1.38 1.99 RatioToPovertyLine]",
+            "At or above 400 percent of the poverty threshold": "[4.00 - RatioToPovertyLine]",
+            "Below 100 percent of the poverty threshold": "[- 1.00 RatioToPovertyLine]",
+            "138 to 199 percent of the poverty threshold": "[1.38 1.99 RatioToPovertyLine]",
+            "200 to 399 percent of the poverty threshold": "[2.00 3.99 RatioToPovertyLine]",
+            "2.00 of poverty threshold and over": "[2.00 - RatioToPovertyLine]"
+        },
+        "gender": {
+            "Male": "Male",
+            "Female": "Female"
+        },
+        "race": {
+            "One race": "OneRace",
+            "White alone": "WhiteAlone",
+            "Black or African American alone": "BlackOrAfricanAmericanAlone",
+            "American Indian and Alaska Native alone": "AmericanIndianOrAlaskaNativeAlone",
+            "Asian alone": "AsianAlone",
+            "Native Hawaiian and Other Pacific Islander alone": "NativeHawaiianOrOtherPacificIslanderAlone",
+            "Some other race alone": "SomeOtherRaceAlone",
+            "Two or more races": "TwoOrMoreRaces",
+            "Hispanic or Latino (of any race)": "HispanicOrLatino",
+            "White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino"
+        },
+        "disabilityStatus": {
+            "With a disability": "WithDisability",
+            "No disability": "NoDisability"
+        },
+        "employmentStatus": {
+            "In labor force": "BLS_InLaborForce",
+            "Not in labor force": "BLS_NotInLaborForce"
+        },
+        "employment": {
+            "Employed": "BLS_Employed",
+            "Unemployed": "BLS_Unemployed"
+        },
+        "workStatus": {
+            "Worked full-time, year round in the past 12 months": "USC_FullTimeYearRoundWorker",
+            "Worked less than full-time, year round in the past 12 months": "LessThanFullTimeYearRoundWorker",
+            "Did not work": "DidNotWork"
+        },
+        "householdIncome": {
+            "$50,000 to $74,999": "[50000 74999 InflationAdjustedUSD_CurrentYear]",
+            "Under $25,000": "[- 25000 InflationAdjustedUSD_CurrentYear]",
+            "$25,000 to $49,999": "[25000 49999 InflationAdjustedUSD_CurrentYear]",
+            "$75,000 to $99,999": "[75000 99999 InflationAdjustedUSD_CurrentYear]",
+            "$100,000 and over": "[100000 - InflationAdjustedUSD_CurrentYear]"
+        },
+        "residenceType": {
+            "Total household population": "Household",
+            "Civilian household population": "Household"
+        },
+        "householdType": {
+            "In family households": "FamilyHousehold",
+            "In married couple families": "MarriedCoupleFamilyHousehold",
+            "In other families": "OtherFamilyHousehold",
+            "Male reference person, no spouse present": "SingleFatherFamilyHousehold",
+            "Male householder, no wife present": "SingleFatherFamilyHousehold",
+            "Female reference person, no spouse present": "SingleMotherFamilyHousehold",
+            "Female householder, no husband present": "SingleMotherFamilyHousehold",
+            "In non-family households and other living arrangements": "NonfamilyHouseholdAndOtherLivingArrangements"
+        }
+    },
+    "inferredSpec": {
+        "populationType": {
+            "institutionalization": "USC_NonInstitutionalized",
+            "armedForcesStatus": "Civilian"
+        },
+        "householdIncome": {
+            "residenceType": "Household"
+        }
+    },
+    "universePVs": [
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [
+                "healthInsurance"
+            ],
+            "dependentPVs": {
+                "institutionalization": "USC_NonInstitutionalized",
+                "armedForcesStatus": "Civilian"
+            }
+        }
+    ],
+    "denominators": {},
+    "ignoreColumns": [
+        "id",
+        "Geographic Area Name",
+        "PERCENT IMPUTED",
+        "Percent Imputed",
+        "Percent Insured",
+        "Percent Uninsured",
+        "Percent Insured by  Coverage Type",
+        "Percent Insured MOE",
+        "Percent Uninsured MOE"
+    ],
+    "ignoreTokens": [
+        "DISABILITY STATUS",
+        "Estimate",
+        "EDUCATIONAL ATTAINMENT",
+        "EMPLOYMENT STATUS",
+        "SEX",
+        "AGE",
+        "RACE AND HISPANIC OR LATINO ORIGIN",
+        "Total civilian noninstitutionalized population",
+        "NATIVITY AND CITIZENSHIP STATUS"
+    ]
+}
