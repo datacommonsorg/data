@@ -1,0 +1,13 @@
+parent_company_dcid,sv_measured,obs_period,value,year
+EpaParentCompany/abc,Annual_Emissions_Methane_NonBiogenic,P1Y,997.0,2016
+EpaParentCompany/abc,Annual_Emissions_Methane_NonBiogenic,P1Y,888.825,2017
+EpaParentCompany/efg,Annual_Emissions_Methane_NonBiogenic,P1Y,101.175,2017
+EpaParentCompany/abc,Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic,P1Y,100.0,2016
+EpaParentCompany/abc,Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic,P1Y,127.5,2017
+EpaParentCompany/efg,Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic,P1Y,22.5,2017
+EpaParentCompany/efg,Annual_Emissions_Methane_NonBiogenic,P1Y,13.0,2016
+EpaParentCompany/abc,Annual_Emissions_Methane_NonBiogenic,P1Y,7.125,2018
+EpaParentCompany/efg,Annual_Emissions_Methane_NonBiogenic,P1Y,7.125,2018
+EpaParentCompany/efg,Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic,P1Y,50.0,2016
+EpaParentCompany/abc,Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic,P1Y,25.0,2018
+EpaParentCompany/efg,Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic,P1Y,25.0,2018
