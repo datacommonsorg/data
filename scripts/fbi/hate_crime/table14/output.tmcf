@@ -1,0 +1,7 @@
+Node: E:UCRHateCrime->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:UCRHateCrime->Geo
+variableMeasured: C:UCRHateCrime->StatVar
+observationDate: C:UCRHateCrime->ObsDate
+observationPeriod: C:UCRHateCrime->ObsPeriod
+value: C:UCRHateCrime->Quantity
