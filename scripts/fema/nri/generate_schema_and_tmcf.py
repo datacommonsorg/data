@@ -69,18 +69,16 @@ def drop_spaces(string):
 	"""
 	return string.replace(" ", "")
 
-def tmcf_from_row(row, statVarDCID):
+def tmcf_from_row(row, index, statVarDCID):
 	"""
 	Given a row of NRIDataDictionary describing a measure, generates the TMCF for that StatVar.
 	Returns the TMCF as a string.
 	"""
 
-	# the "Sort" field is an unique, monotonically increasing ID.
-	# 	there will be gaps in this ID, which should be OK? 
 	# as of 2022-05-23, the "Version" field for all data is "November 2021"
 	# "Field Name" in the data dictionary holds the name of the column in the data CSV
 	TMCF = f"""
-Node: E:FEMA_NRI->E{row["Sort"]}
+Node: E:FEMA_NRI->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{statVarDCID}
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -185,12 +183,12 @@ dd = pd.read_csv(NRI_DATADICTIONARY_INFILE_FILENAME)
 logging.info(f"[info] ignoring {len(IGNORED_FIELDS)} fields in NRIDataDictionary")
 
 dd = dd[~dd["Field Name"].isin(IGNORED_FIELDS)]
-
+dd = dd.reset_index()
 schema_out = ""
 tmcf_out = ""
-for _, row in dd.iterrows():
+for index, row in dd.iterrows():
 	statvar_mcf, statvar_dcid = statvar_from_row(row)
-	statobs_tmcf = tmcf_from_row(row, statvar_dcid)
+	statobs_tmcf = tmcf_from_row(row, index, statvar_dcid)
 	
 	schema_out += statvar_mcf + "\n"
 	tmcf_out += statobs_tmcf
