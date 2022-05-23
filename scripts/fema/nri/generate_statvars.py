@@ -1,9 +1,9 @@
 # TODO: casing of property values
-# TODO: write to a file
 
 from os import stat
 import pandas as pd
 import numpy as np
+import logging
 
 IGNORED_FIELDS = [
 		"OBJECTID",
@@ -59,16 +59,16 @@ def get_nth_dash_from_field(row, i):
 def drop_spaces(string):
 	return string.replace(" ", "")
 
-def tmcf_from_row(row):
+def mcf_from_row(row):
 	if is_composite_row(row):
-		return tmcf_from_composite_row(row)
+		return mcf_from_composite_row(row)
 	else:
-		return tmcf_from_individual_hazard_row(row)
+		return mcf_from_individual_hazard_row(row)
 
 def is_composite_row(row):
 	return row["Relevant Layer"] in COMPOSITE_ROW_LAYERS
 
-def tmcf_from_composite_row(row):
+def mcf_from_composite_row(row):
 	measuredProperty = drop_spaces(get_nth_dash_from_field(row, 0))
 	measurementQualifier = drop_spaces(get_nth_dash_from_field(row, 1))
 
@@ -76,7 +76,7 @@ def tmcf_from_composite_row(row):
 
 	return formatted
 
-def tmcf_from_individual_hazard_row(row):
+def mcf_from_individual_hazard_row(row):
 	"""
 	FYI: until import document gets more comments, I am implementing this script for approach 1.
 	"""
@@ -136,8 +136,16 @@ def tmcf_from_individual_hazard_row(row):
 
 dd = pd.read_csv("source_data/NRIDataDictionary.csv")
 
-print(f"[info] ignoring {len(IGNORED_FIELDS)} fields")
+logging.info(f"[info] ignoring {len(IGNORED_FIELDS)} fields in NRIDataDictionary")
+
 dd = dd[~dd["Field Name"].isin(IGNORED_FIELDS)]
 
+out = ""
 for _, row in dd.iterrows():
-	print(tmcf_from_row(row))
+	statvar_mcf = mcf_from_row(row)
+	out += statvar_mcf
+
+outfile_filename = "fema_nri_schema.mcf"
+with open(outfile_filename, "w") as outfile:
+	logging.info(f"Writing StatVar MCF to {outfile_filename}")
+	outfile.write(out)

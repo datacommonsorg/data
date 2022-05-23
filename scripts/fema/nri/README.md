@@ -2,6 +2,6 @@
 
 This directory imports the [FEMA NRI](https://hazards.fema.gov/nri/) dataset into Data Commons. The study includes relative measures of risks from 18 hazards to the US at the county and tract level, as well as data on individual hazards and their estimated risk to those affected.
 
-## Files
+## Folder Structure
 
 `source_data` holds original files downloaded from [the official data download page](https://hazards.fema.gov/nri/data-resources)

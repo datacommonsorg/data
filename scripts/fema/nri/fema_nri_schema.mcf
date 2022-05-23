@@ -1,0 +1,2119 @@
+
+Node: dcid:NationalRiskIndex_Score_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:NationalRiskIndex
+measurementQualifier: dcs:Score
+
+Node: dcid:NationalRiskIndex_Rating_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:NationalRiskIndex
+measurementQualifier: dcs:Rating
+
+Node: dcid:NationalRiskIndex_NationalPercentile_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:NationalRiskIndex
+measurementQualifier: dcs:NationalPercentile
+
+Node: dcid:NationalRiskIndex_StatePercentile_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:NationalRiskIndex
+measurementQualifier: dcs:StatePercentile
+
+Node: dcid:ExpectedAnnualLoss_Score_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:ExpectedAnnualLoss
+measurementQualifier: dcs:Score
+
+Node: dcid:ExpectedAnnualLoss_Rating_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:ExpectedAnnualLoss
+measurementQualifier: dcs:Rating
+
+Node: dcid:ExpectedAnnualLoss_NationalPercentile_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:ExpectedAnnualLoss
+measurementQualifier: dcs:NationalPercentile
+
+Node: dcid:ExpectedAnnualLoss_StatePercentile_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:ExpectedAnnualLoss
+measurementQualifier: dcs:StatePercentile
+
+Node: dcid:ExpectedAnnualLoss_Total_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:ExpectedAnnualLoss
+measurementQualifier: dcs:Total
+
+Node: dcid:ExpectedAnnualLoss_BuildingValue_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:ExpectedAnnualLoss
+measurementQualifier: dcs:BuildingValue
+
+Node: dcid:ExpectedAnnualLoss_Population_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:ExpectedAnnualLoss
+measurementQualifier: dcs:Population
+
+Node: dcid:ExpectedAnnualLoss_PopulationEquivalence_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:ExpectedAnnualLoss
+measurementQualifier: dcs:PopulationEquivalence
+
+Node: dcid:ExpectedAnnualLoss_AgricultureValue_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:ExpectedAnnualLoss
+measurementQualifier: dcs:AgricultureValue
+
+Node: dcid:SocialVulnerability_Score_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:SocialVulnerability
+measurementQualifier: dcs:Score
+
+Node: dcid:SocialVulnerability_Rating_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:SocialVulnerability
+measurementQualifier: dcs:Rating
+
+Node: dcid:SocialVulnerability_NationalPercentile_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:SocialVulnerability
+measurementQualifier: dcs:NationalPercentile
+
+Node: dcid:SocialVulnerability_StatePercentile_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:SocialVulnerability
+measurementQualifier: dcs:StatePercentile
+
+Node: dcid:SocialVulnerability_Value_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:SocialVulnerability
+measurementQualifier: dcs:Value
+
+Node: dcid:CommunityResilience_Score_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:CommunityResilience
+measurementQualifier: dcs:Score
+
+Node: dcid:CommunityResilience_Rating_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:CommunityResilience
+measurementQualifier: dcs:Rating
+
+Node: dcid:CommunityResilience_NationalPercentile_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:CommunityResilience
+measurementQualifier: dcs:NationalPercentile
+
+Node: dcid:CommunityResilience_StatePercentile_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:CommunityResilience
+measurementQualifier: dcs:StatePercentile
+
+Node: dcid:CommunityResilience_Value_NaturalHazardImpact
+typeOf: dcs:StatisticalVariable
+populationType: dcs:NaturalHazardImpact
+measuredProperty: dcs:CommunityResilience
+measurementQualifier: dcs:Value
+
+Node: dcid:NumberofEvents_AvalancheEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_AvalancheEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_AvalancheEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_AvalancheEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_AvalancheEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_AvalancheEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_AvalancheEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_AvalancheEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_AvalancheEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_AvalancheEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_AvalancheEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_AvalancheEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_AvalancheEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_AvalancheEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_AvalancheEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_AvalancheEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_AvalancheEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:AvalancheEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_CoastalFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_CoastalFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_CoastalFloodingEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_CoastalFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_CoastalFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_CoastalFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_CoastalFloodingEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_CoastalFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_CoastalFloodingEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_CoastalFloodingEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_CoastalFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_CoastalFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_CoastalFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_CoastalFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_CoastalFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_CoastalFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_CoastalFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CoastalFloodingEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_ColdWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_ColdWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_ColdWaveEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_ColdWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_ColdWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_ColdWaveEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_ColdWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_ColdWaveEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_ColdWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_ColdWaveEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_ColdWaveEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_ColdWaveEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_ColdWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_ColdWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_ColdWaveEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_ColdWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_ColdWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_ColdWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_ColdWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_ColdWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:ColdWaveEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_DroughtEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_DroughtEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_DroughtEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_DroughtEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_DroughtEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_DroughtEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_DroughtEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_DroughtEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_DroughtEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_DroughtEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_DroughtEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_DroughtEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:DroughtEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_EarthquakeEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_EarthquakeEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_EarthquakeEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_EarthquakeEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_EarthquakeEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_EarthquakeEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_EarthquakeEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_EarthquakeEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_EarthquakeEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_EarthquakeEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_EarthquakeEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_EarthquakeEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_EarthquakeEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_EarthquakeEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_EarthquakeEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_EarthquakeEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_EarthquakeEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EarthquakeEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_HailEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_HailEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_HailEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_HailEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_HailEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_HailEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_HailEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_HailEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_HailEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_HailEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_HailEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_HailEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_HailEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_HailEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_HailEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_HailEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_HailEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_HailEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_HailEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_HailEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HailEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_HeatWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_HeatWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_HeatWaveEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_HeatWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_HeatWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_HeatWaveEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_HeatWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_HeatWaveEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_HeatWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_HeatWaveEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_HeatWaveEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_HeatWaveEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_HeatWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_HeatWaveEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_HeatWaveEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_HeatWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_HeatWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_HeatWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_HeatWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_HeatWaveEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HeatWaveEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_HurricaneEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_HurricaneEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_HurricaneEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_HurricaneEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_HurricaneEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_HurricaneEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_HurricaneEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_HurricaneEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_HurricaneEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_HurricaneEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_HurricaneEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_HurricaneEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_HurricaneEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_HurricaneEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_HurricaneEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_HurricaneEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_HurricaneEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_HurricaneEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_HurricaneEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_HurricaneEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HurricaneEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_IceStormEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_IceStormEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_IceStormEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_IceStormEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_IceStormEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_IceStormEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_IceStormEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_IceStormEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_IceStormEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_IceStormEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_IceStormEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_IceStormEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_IceStormEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_IceStormEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_IceStormEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_IceStormEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_IceStormEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:IceStormEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_LandslideEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_LandslideEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_LandslideEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_LandslideEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_LandslideEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_LandslideEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_LandslideEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_LandslideEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_LandslideEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_LandslideEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_LandslideEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_LandslideEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_LandslideEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_LandslideEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_LandslideEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_LandslideEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_LandslideEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LandslideEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_LightningEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_LightningEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_LightningEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_LightningEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_LightningEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_LightningEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_LightningEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_LightningEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_LightningEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_LightningEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_LightningEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_LightningEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_LightningEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_LightningEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_LightningEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_LightningEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_LightningEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:LightningEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_RiverineFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_RiverineFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_RiverineFloodingEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_RiverineFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_RiverineFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_RiverineFloodingEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_RiverineFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_RiverineFloodingEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_RiverineFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_RiverineFloodingEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_RiverineFloodingEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_RiverineFloodingEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_RiverineFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_RiverineFloodingEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_RiverineFloodingEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_RiverineFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_RiverineFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_RiverineFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_RiverineFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_RiverineFloodingEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:RiverineFloodingEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_StrongWindEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_StrongWindEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_StrongWindEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_StrongWindEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_StrongWindEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_StrongWindEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_StrongWindEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_StrongWindEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_StrongWindEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_StrongWindEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_StrongWindEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_StrongWindEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_StrongWindEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_StrongWindEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_StrongWindEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_StrongWindEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_StrongWindEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_StrongWindEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_StrongWindEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_StrongWindEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:StrongWindEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_TornadoEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_TornadoEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_TornadoEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_TornadoEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_TornadoEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_TornadoEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_TornadoEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_TornadoEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_TornadoEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_TornadoEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_TornadoEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_TornadoEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_TornadoEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_TornadoEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_TornadoEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_TornadoEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_TornadoEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_TornadoEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_TornadoEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_TornadoEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TornadoEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_TsunamiEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_TsunamiEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_TsunamiEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_TsunamiEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_TsunamiEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_TsunamiEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_TsunamiEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_TsunamiEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_TsunamiEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_TsunamiEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_TsunamiEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_TsunamiEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_TsunamiEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_TsunamiEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_TsunamiEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_TsunamiEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_TsunamiEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:TsunamiEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_VolcanicActivityEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_VolcanicActivityEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_VolcanicActivityEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_VolcanicActivityEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_VolcanicActivityEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_VolcanicActivityEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_VolcanicActivityEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_VolcanicActivityEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_VolcanicActivityEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_VolcanicActivityEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_VolcanicActivityEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_VolcanicActivityEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_VolcanicActivityEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_VolcanicActivityEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_VolcanicActivityEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_VolcanicActivityEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_VolcanicActivityEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:VolcanicActivityEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_WildfireEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_WildfireEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_WildfireEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_WildfireEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_WildfireEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_WildfireEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_WildfireEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_WildfireEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_WildfireEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_WildfireEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_WildfireEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_WildfireEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_WildfireEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_WildfireEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_WildfireEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_WildfireEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_WildfireEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_WildfireEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_WildfireEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_WildfireEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WildfireEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
+
+Node: dcid:NumberofEvents_WinterWeatherEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: NumberofEvents
+
+Node: dcid:AnnualizedFrequency_WinterWeatherEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: AnnualizedFrequency
+
+Node: dcid:Exposure_WinterWeatherEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: Exposure
+impactedThing: BuildingValue
+
+Node: dcid:Count_Exposure_WinterWeatherEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: Exposure
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_Exposure_WinterWeatherEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: Exposure
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:Exposure_WinterWeatherEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: Exposure
+impactedThing: AgricultureValue
+
+Node: dcid:Exposure_WinterWeatherEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: Exposure
+
+Node: dcid:HistoricLossRatio_WinterWeatherEvent_Buildings
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Buildings
+
+Node: dcid:Count_HistoricLossRatio_WinterWeatherEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: HistoricLossRatio
+statType: Count
+impactedThing: Population
+
+Node: dcid:HistoricLossRatio_WinterWeatherEvent_Agriculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: HistoricLossRatio
+impactedThing: Agriculture
+
+Node: dcid:HistoricLossRatio_WinterWeatherEvent_TotalRating
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: HistoricLossRatio
+impactedThing: TotalRating
+
+Node: dcid:ExpectedAnnualLoss_WinterWeatherEvent_BuildingValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: BuildingValue
+
+Node: dcid:Count_ExpectedAnnualLoss_WinterWeatherEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: ExpectedAnnualLoss
+statType: Count
+impactedThing: Population
+
+Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_WinterWeatherEvent_Population
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: ExpectedAnnualLoss
+statType: ValueOfStatisticalLifeEquivalent
+impactedThing: Population
+
+Node: dcid:ExpectedAnnualLoss_WinterWeatherEvent_AgricultureValue
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: ExpectedAnnualLoss
+impactedThing: AgricultureValue
+
+Node: dcid:ExpectedAnnualLoss_WinterWeatherEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: ExpectedAnnualLoss
+
+Node: dcid:Score_ExpectedAnnualLoss_WinterWeatherEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Score
+
+Node: dcid:Rating_ExpectedAnnualLoss_WinterWeatherEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: ExpectedAnnualLoss
+measurementQualifier: Rating
+
+Node: dcid:Score_HazardTypeRiskIndex_WinterWeatherEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Score
+
+Node: dcid:Rating_HazardTypeRiskIndex_WinterWeatherEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:WinterWeatherEvent
+measuredProperty: HazardTypeRiskIndex
+measurementQualifier: Rating
