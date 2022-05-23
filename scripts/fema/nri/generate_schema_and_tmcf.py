@@ -1,9 +1,12 @@
-# TODO: casing of property values
-
 from os import stat
 import pandas as pd
 import numpy as np
 import logging
+
+# i/o filenames
+NRI_DATADICTIONARY_INFILE_FILENAME = "source_data/NRIDataDictionary.csv"
+SCHEMA_OUTFILE_FILENAME = "fema_nri_schema.mcf"
+TMCF_OUTFILE_FILENAME = "fema_nri_counties.tmcf"
 
 IGNORED_FIELDS = [
 		"OBJECTID",
@@ -51,10 +54,19 @@ populationType: dcs:{hazType}
 measuredProperty: {mProp}
 """
 
-def get_nth_dash_from_field(row, i):
+def get_nth_dash_from_field_alias(row, i):
+	"""
+	Given a row containing a list of words separated with dashes surrounded by spaces 
+		in the "Field Alias" column and an index i, finds the i-th string between those dashes.
+	Returns the string without the spaces associated with the neighboring dashes.
+	"""
 	return row["Field Alias"].split(" - ")[i]
 
 def drop_spaces(string):
+	"""
+	Given a string, removes the space characters contained in that string.
+	Returns a new string without the spaces.
+	"""
 	return string.replace(" ", "")
 
 def tmcf_from_row(row, statVarDCID):
@@ -79,17 +91,29 @@ value: C:FEMA_NRI_Counties->{row["Field Name"]}
 	return TMCF
 
 def statvar_from_row(row):
+	"""
+	Given a row of NRIDataDictionary, computes the corresponding StatVar Schema.
+	Returns the StatVar MCF node as a string.
+	"""
 	if is_composite_row(row):
 		return statvar_from_composite_row(row)
 	else:
 		return statvar_from_individual_hazard_row(row)
 
 def is_composite_row(row):
+	"""
+	Given a row of NRIDataDictionary, computes whether that row is a measure of all hazards
+		in aggregate (composite).
+	Returns boolean True if so, False otherwise.
+	"""
 	return row["Relevant Layer"] in COMPOSITE_ROW_LAYERS
 
 def statvar_from_composite_row(row):
-	measuredProperty = drop_spaces(get_nth_dash_from_field(row, 0))
-	measurementQualifier = drop_spaces(get_nth_dash_from_field(row, 1))
+	"""
+	Helper function for statvar_from_row()
+	"""
+	measuredProperty = drop_spaces(get_nth_dash_from_field_alias(row, 0))
+	measurementQualifier = drop_spaces(get_nth_dash_from_field_alias(row, 1))
 
 	dcid = f"{measuredProperty}_{measurementQualifier}_NaturalHazardImpact"
 
@@ -99,11 +123,13 @@ def statvar_from_composite_row(row):
 
 def statvar_from_individual_hazard_row(row):
 	"""
-	FYI: until import document gets more comments, I am implementing this script for approach 1.
+	Helper function for statvar_from_row()
+
+	NOTE: until import document gets more comments, I am implementing this script for approach 1.
 	"""
 
-	hazardType = drop_spaces(get_nth_dash_from_field(row, 0)) + "Event"
-	measuredProperty = get_nth_dash_from_field(row, 1)
+	hazardType = drop_spaces(get_nth_dash_from_field_alias(row, 0)) + "Event"
+	measuredProperty = get_nth_dash_from_field_alias(row, 1)
 	measurementQualifier = ""
 	# we want to cut off score/rating from measuredProperty and make it a measurement qualifier instead
 	if "Score" in measuredProperty or "Rating" in measuredProperty:
@@ -114,7 +140,7 @@ def statvar_from_individual_hazard_row(row):
 	
 	impactedThing = ""
 	if row["Field Alias"].count("-") > 1:
-		impactedThing = drop_spaces(get_nth_dash_from_field(row, 2))
+		impactedThing = drop_spaces(get_nth_dash_from_field_alias(row, 2))
 		if impactedThing == "Total":
 			impactedThing = ""
 	
@@ -154,8 +180,7 @@ def statvar_from_individual_hazard_row(row):
 
 	return formatted, dcid
 
-
-dd = pd.read_csv("source_data/NRIDataDictionary.csv")
+dd = pd.read_csv(NRI_DATADICTIONARY_INFILE_FILENAME)
 
 logging.info(f"[info] ignoring {len(IGNORED_FIELDS)} fields in NRIDataDictionary")
 
@@ -170,13 +195,10 @@ for _, row in dd.iterrows():
 	schema_out += statvar_mcf + "\n"
 	tmcf_out += statobs_tmcf
 
-schema_outfile_filename = "fema_nri_schema.mcf"
-tmcf_outfile_filename = "fema_nri_counties.tmcf"
-
-with open(schema_outfile_filename, "w") as outfile:
-	logging.info(f"Writing StatVar MCF to {schema_outfile_filename}")
+with open(SCHEMA_OUTFILE_FILENAME, "w") as outfile:
+	logging.info(f"Writing StatVar MCF to {SCHEMA_OUTFILE_FILENAME}")
 	outfile.write(schema_out)
 
-with open(tmcf_outfile_filename, "w") as outfile:
-	logging.info(f"Writing County TMCF to {tmcf_outfile_filename}")
+with open(TMCF_OUTFILE_FILENAME, "w") as outfile:
+	logging.info(f"Writing County TMCF to {TMCF_OUTFILE_FILENAME}")
 	outfile.write(tmcf_out)
