@@ -1,0 +1,380 @@
+Sort,Field Name,Field Alias,Type,Length,Relevant Layer,Metric Type,Version
+1,OBJECTID,OBJECTID,Integer,4,n/a,n/a,November 2021
+2,Shape,Shape,Geometry,n/a,n/a,n/a,November 2021
+3,Shape_Length,Shape_Length,Double,8,n/a,n/a,November 2021
+4,Shape_Area,Shape_Area,Double,8,n/a,n/a,November 2021
+5,STATE,State Name,String,250,All,n/a,November 2021
+6,STATEABBRV,State Name Abbreviation,String,20,All,n/a,November 2021
+7,STATEFIPS,State FIPS Code,String,20,All,n/a,November 2021
+8,COUNTY,County Name,String,250,All,n/a,November 2021
+9,COUNTYTYPE,County Type,String,250,All,n/a,November 2021
+10,COUNTYFIPS,County FIPS Code,String,20,All,n/a,November 2021
+11,STCOFIPS,State-County FIPS Code,String,20,All,n/a,November 2021
+12,TRACT,Census Tract,String,20,All,n/a,November 2021
+13,TRACTFIPS,Census Tract FIPS Code,String,20,All,n/a,November 2021
+14,NRI_ID,National Risk Index ID,String,20,All,n/a,November 2021
+15,POPULATION,Population (2016),Integer,4,All,n/a,November 2021
+16,BUILDVALUE,Building Value ($),Double,8,All,n/a,November 2021
+17,AGRIVALUE,Agriculture Value ($),Double,8,All,n/a,November 2021
+18,AREA,Area (sq mi),Double,8,All,n/a,November 2021
+19,RISK_SCORE,National Risk Index - Score - Composite,Double,8,National Risk Index,Score,November 2021
+20,RISK_RATNG,National Risk Index - Rating - Composite,String,50,National Risk Index,Rating,November 2021
+21,RISK_NPCTL,National Risk Index - National Percentile - Composite,Double,8,National Risk Index,National Percentile,November 2021
+22,RISK_SPCTL,National Risk Index - State Percentile - Composite,Double,8,National Risk Index,State Percentile,November 2021
+23,EAL_SCORE,Expected Annual Loss - Score - Composite,Double,8,Expected Annual Loss,Score,November 2021
+24,EAL_RATNG,Expected Annual Loss - Rating - Composite,String,50,Expected Annual Loss,Rating,November 2021
+25,EAL_NPCTL,Expected Annual Loss - National Percentile - Composite,Double,8,Expected Annual Loss,National Percentile,November 2021
+26,EAL_SPCTL,Expected Annual Loss - State Percentile - Composite,Double,8,Expected Annual Loss,State Percentile,November 2021
+27,EAL_VALT,Expected Annual Loss - Total - Composite,Double,8,Expected Annual Loss,Value,November 2021
+28,EAL_VALB,Expected Annual Loss - Building Value - Composite,Double,8,Expected Annual Loss,Value,November 2021
+29,EAL_VALP,Expected Annual Loss - Population - Composite,Double,8,Expected Annual Loss,Value,November 2021
+30,EAL_VALPE,Expected Annual Loss - Population Equivalence - Composite,Double,8,Expected Annual Loss,Value,November 2021
+31,EAL_VALA,Expected Annual Loss - Agriculture Value - Composite,Double,8,Expected Annual Loss,Value,November 2021
+32,SOVI_SCORE,Social Vulnerability - Score,Double,8,Social Vulnerability,Score,November 2021
+33,SOVI_RATNG,Social Vulnerability - Rating,String,50,Social Vulnerability,Rating,November 2021
+34,SOVI_NPCTL,Social Vulnerability - National Percentile,Double,8,Social Vulnerability,National Percentile,November 2021
+35,SOVI_SPCTL,Social Vulnerability - State Percentile,Double,8,Social Vulnerability,State Percentile,November 2021
+36,SOVI_VALUE,Social Vulnerability - Value,Double,8,Social Vulnerability,Value,November 2021
+37,RESL_SCORE,Community Resilience - Score,Double,8,Community Resilience,Score,November 2021
+38,RESL_RATNG,Community Resilience - Rating,String,50,Community Resilience,Rating,November 2021
+39,RESL_NPCTL,Community Resilience - National Percentile,Double,8,Community Resilience,National Percentile,November 2021
+40,RESL_SPCTL,Community Resilience - State Percentile,Double,8,Community Resilience,State Percentile,November 2021
+41,RESL_VALUE,Community Resilience - Value,Double,8,Community Resilience,Value,November 2021
+42,AVLN_EVNTS,Avalanche - Number of Events,Double,8,Avalanche,Number of Events,November 2021
+43,AVLN_AFREQ,Avalanche - Annualized Frequency,Double,8,Avalanche,Annualized Frequency,November 2021
+44,AVLN_EXPB,Avalanche - Exposure - Building Value,Double,8,Avalanche,Exposure - Building Value,November 2021
+45,AVLN_EXPP,Avalanche - Exposure - Population,Double,8,Avalanche,Exposure - Population,November 2021
+46,AVLN_EXPPE,Avalanche - Exposure - Population Equivalence,Double,8,Avalanche,Exposure - Population Equivalence,November 2021
+47,AVLN_EXPT,Avalanche - Exposure - Total,Double,8,Avalanche,Exposure - Total,November 2021
+48,AVLN_HLRB,Avalanche - Historic Loss Ratio - Buildings,Double,8,Avalanche,Historic Loss Ratio - Buildings,November 2021
+49,AVLN_HLRP,Avalanche - Historic Loss Ratio - Population,Double,8,Avalanche,Historic Loss Ratio - Population,November 2021
+50,AVLN_HLRR,Avalanche - Historic Loss Ratio - Total Rating,String,50,Avalanche,Historic Loss Ratio - Total Rating,November 2021
+51,AVLN_EALB,Avalanche - Expected Annual Loss - Building Value,Double,8,Avalanche,Expected Annual Loss - Building Value,November 2021
+52,AVLN_EALP,Avalanche - Expected Annual Loss - Population,Double,8,Avalanche,Expected Annual Loss - Population,November 2021
+53,AVLN_EALPE,Avalanche - Expected Annual Loss - Population Equivalence,Double,8,Avalanche,Expected Annual Loss - Population Equivalence,November 2021
+54,AVLN_EALT,Avalanche - Expected Annual Loss - Total,Double,8,Avalanche,Expected Annual Loss - Total,November 2021
+55,AVLN_EALS,Avalanche - Expected Annual Loss Score,Double,8,Avalanche,Expected Annual Loss Score,November 2021
+56,AVLN_EALR,Avalanche - Expected Annual Loss Rating,String,50,Avalanche,Expected Annual Loss Rating,November 2021
+57,AVLN_RISKS,Avalanche - Hazard Type Risk Index Score,Double,8,Avalanche,Hazard Type Risk Index Score,November 2021
+58,AVLN_RISKR,Avalanche - Hazard Type Risk Index Rating,String,50,Avalanche,Hazard Type Risk Index Rating,November 2021
+59,CFLD_EVNTS,Coastal Flooding - Number of Events,Double,8,Coastal Flooding,Number of Events,November 2021
+60,CFLD_AFREQ,Coastal Flooding - Annualized Frequency,Double,8,Coastal Flooding,Annualized Frequency,November 2021
+61,CFLD_EXPB,Coastal Flooding - Exposure - Building Value,Double,8,Coastal Flooding,Exposure - Building Value,November 2021
+62,CFLD_EXPP,Coastal Flooding - Exposure - Population,Double,8,Coastal Flooding,Exposure - Population,November 2021
+63,CFLD_EXPPE,Coastal Flooding - Exposure - Population Equivalence,Double,8,Coastal Flooding,Exposure - Population Equivalence,November 2021
+64,CFLD_EXPT,Coastal Flooding - Exposure - Total,Double,8,Coastal Flooding,Exposure - Total,November 2021
+65,CFLD_HLRB,Coastal Flooding - Historic Loss Ratio - Buildings,Double,8,Coastal Flooding,Historic Loss Ratio - Buildings,November 2021
+66,CFLD_HLRP,Coastal Flooding - Historic Loss Ratio - Population,Double,8,Coastal Flooding,Historic Loss Ratio - Population,November 2021
+67,CFLD_HLRR,Coastal Flooding - Historic Loss Ratio - Total Rating,String,50,Coastal Flooding,Historic Loss Ratio - Total Rating,November 2021
+68,CFLD_EALB,Coastal Flooding - Expected Annual Loss - Building Value,Double,8,Coastal Flooding,Expected Annual Loss - Building Value,November 2021
+69,CFLD_EALP,Coastal Flooding - Expected Annual Loss - Population,Double,8,Coastal Flooding,Expected Annual Loss - Population,November 2021
+70,CFLD_EALPE,Coastal Flooding - Expected Annual Loss - Population Equivalence,Double,8,Coastal Flooding,Expected Annual Loss - Population Equivalence,November 2021
+71,CFLD_EALT,Coastal Flooding - Expected Annual Loss - Total,Double,8,Coastal Flooding,Expected Annual Loss - Total,November 2021
+72,CFLD_EALS,Coastal Flooding - Expected Annual Loss Score,Double,8,Coastal Flooding,Expected Annual Loss Score,November 2021
+73,CFLD_EALR,Coastal Flooding - Expected Annual Loss Rating,String,50,Coastal Flooding,Expected Annual Loss Rating,November 2021
+74,CFLD_RISKS,Coastal Flooding - Hazard Type Risk Index Score,Double,8,Coastal Flooding,Hazard Type Risk Index Score,November 2021
+75,CFLD_RISKR,Coastal Flooding - Hazard Type Risk Index Rating,String,50,Coastal Flooding,Hazard Type Risk Index Rating,November 2021
+76,CWAV_EVNTS,Cold Wave - Number of Events,Double,8,Cold Wave,Number of Events,November 2021
+77,CWAV_AFREQ,Cold Wave - Annualized Frequency,Double,8,Cold Wave,Annualized Frequency,November 2021
+78,CWAV_EXPB,Cold Wave - Exposure - Building Value,Double,8,Cold Wave,Exposure - Building Value,November 2021
+79,CWAV_EXPP,Cold Wave - Exposure - Population,Double,8,Cold Wave,Exposure - Population,November 2021
+80,CWAV_EXPPE,Cold Wave - Exposure - Population Equivalence,Double,8,Cold Wave,Exposure - Population Equivalence,November 2021
+81,CWAV_EXPA,Cold Wave - Exposure - Agriculture Value,Double,8,Cold Wave,Exposure - Agriculture Value,November 2021
+82,CWAV_EXPT,Cold Wave - Exposure - Total,Double,8,Cold Wave,Exposure - Total,November 2021
+83,CWAV_HLRB,Cold Wave - Historic Loss Ratio - Buildings,Double,8,Cold Wave,Historic Loss Ratio - Buildings,November 2021
+84,CWAV_HLRP,Cold Wave - Historic Loss Ratio - Population,Double,8,Cold Wave,Historic Loss Ratio - Population,November 2021
+85,CWAV_HLRA,Cold Wave - Historic Loss Ratio - Agriculture,Double,8,Cold Wave,Historic Loss Ratio - Agriculture,November 2021
+86,CWAV_HLRR,Cold Wave - Historic Loss Ratio - Total Rating,String,50,Cold Wave,Historic Loss Ratio - Total Rating,November 2021
+87,CWAV_EALB,Cold Wave - Expected Annual Loss - Building Value,Double,8,Cold Wave,Expected Annual Loss - Building Value,November 2021
+88,CWAV_EALP,Cold Wave - Expected Annual Loss - Population,Double,8,Cold Wave,Expected Annual Loss - Population,November 2021
+89,CWAV_EALPE,Cold Wave - Expected Annual Loss - Population Equivalence,Double,8,Cold Wave,Expected Annual Loss - Population Equivalence,November 2021
+90,CWAV_EALA,Cold Wave - Expected Annual Loss - Agriculture Value,Double,8,Cold Wave,Expected Annual Loss - Agriculture Value,November 2021
+91,CWAV_EALT,Cold Wave - Expected Annual Loss - Total,Double,8,Cold Wave,Expected Annual Loss - Total,November 2021
+92,CWAV_EALS,Cold Wave - Expected Annual Loss Score,Double,8,Cold Wave,Expected Annual Loss Score,November 2021
+93,CWAV_EALR,Cold Wave - Expected Annual Loss Rating,String,50,Cold Wave,Expected Annual Loss Rating,November 2021
+94,CWAV_RISKS,Cold Wave - Hazard Type Risk Index Score,Double,8,Cold Wave,Hazard Type Risk Index Score,November 2021
+95,CWAV_RISKR,Cold Wave - Hazard Type Risk Index Rating,String,50,Cold Wave,Hazard Type Risk Index Rating,November 2021
+96,DRGT_EVNTS,Drought - Number of Events,Double,8,Drought,Number of Events,November 2021
+97,DRGT_AFREQ,Drought - Annualized Frequency,Double,8,Drought,Annualized Frequency,November 2021
+98,DRGT_EXPA,Drought - Exposure - Agriculture Value,Double,8,Drought,Exposure - Agriculture Value,November 2021
+99,DRGT_EXPT,Drought - Exposure - Total,Double,8,Drought,Exposure - Total,November 2021
+100,DRGT_HLRA,Drought - Historic Loss Ratio - Agriculture,Double,8,Drought,Historic Loss Ratio - Agriculture,November 2021
+101,DRGT_HLRR,Drought - Historic Loss Ratio - Total Rating,String,50,Drought,Historic Loss Ratio - Total Rating,November 2021
+102,DRGT_EALA,Drought - Expected Annual Loss - Agriculture Value,Double,8,Drought,Expected Annual Loss - Agriculture Value,November 2021
+103,DRGT_EALT,Drought - Expected Annual Loss - Total,Double,8,Drought,Expected Annual Loss - Total,November 2021
+104,DRGT_EALS,Drought - Expected Annual Loss Score,Double,8,Drought,Expected Annual Loss Score,November 2021
+105,DRGT_EALR,Drought - Expected Annual Loss Rating,String,50,Drought,Expected Annual Loss Rating,November 2021
+106,DRGT_RISKS,Drought - Hazard Type Risk Index Score,Double,8,Drought,Hazard Type Risk Index Score,November 2021
+107,DRGT_RISKR,Drought - Hazard Type Risk Index Rating,String,50,Drought,Hazard Type Risk Index Rating,November 2021
+108,ERQK_EVNTS,Earthquake - Number of Events,Double,8,Earthquake,Number of Events,November 2021
+109,ERQK_AFREQ,Earthquake - Annualized Frequency,Double,8,Earthquake,Annualized Frequency,November 2021
+110,ERQK_EXPB,Earthquake - Exposure - Building Value,Double,8,Earthquake,Exposure - Building Value,November 2021
+111,ERQK_EXPP,Earthquake - Exposure - Population,Double,8,Earthquake,Exposure - Population,November 2021
+112,ERQK_EXPPE,Earthquake - Exposure - Population Equivalence,Double,8,Earthquake,Exposure - Population Equivalence,November 2021
+113,ERQK_EXPT,Earthquake - Exposure - Total,Double,8,Earthquake,Exposure - Total,November 2021
+114,ERQK_HLRB,Earthquake - Historic Loss Ratio - Buildings,Double,8,Earthquake,Historic Loss Ratio - Buildings,November 2021
+115,ERQK_HLRP,Earthquake - Historic Loss Ratio - Population,Double,8,Earthquake,Historic Loss Ratio - Population,November 2021
+116,ERQK_HLRR,Earthquake - Historic Loss Ratio - Total Rating,String,50,Earthquake,Historic Loss Ratio - Total Rating,November 2021
+117,ERQK_EALB,Earthquake - Expected Annual Loss - Building Value,Double,8,Earthquake,Expected Annual Loss - Building Value,November 2021
+118,ERQK_EALP,Earthquake - Expected Annual Loss - Population,Double,8,Earthquake,Expected Annual Loss - Population,November 2021
+119,ERQK_EALPE,Earthquake - Expected Annual Loss - Population Equivalence,Double,8,Earthquake,Expected Annual Loss - Population Equivalence,November 2021
+120,ERQK_EALT,Earthquake - Expected Annual Loss - Total,Double,8,Earthquake,Expected Annual Loss - Total,November 2021
+121,ERQK_EALS,Earthquake - Expected Annual Loss Score,Double,8,Earthquake,Expected Annual Loss Score,November 2021
+122,ERQK_EALR,Earthquake - Expected Annual Loss Rating,String,50,Earthquake,Expected Annual Loss Rating,November 2021
+123,ERQK_RISKS,Earthquake - Hazard Type Risk Index Score,Double,8,Earthquake,Hazard Type Risk Index Score,November 2021
+124,ERQK_RISKR,Earthquake - Hazard Type Risk Index Rating,String,50,Earthquake,Hazard Type Risk Index Rating,November 2021
+125,HAIL_EVNTS,Hail - Number of Events,Double,8,Hail,Number of Events,November 2021
+126,HAIL_AFREQ,Hail - Annualized Frequency,Double,8,Hail,Annualized Frequency,November 2021
+127,HAIL_EXPB,Hail - Exposure - Building Value,Double,8,Hail,Exposure - Building Value,November 2021
+128,HAIL_EXPP,Hail - Exposure - Population,Double,8,Hail,Exposure - Population,November 2021
+129,HAIL_EXPPE,Hail - Exposure - Population Equivalence,Double,8,Hail,Exposure - Population Equivalence,November 2021
+130,HAIL_EXPA,Hail - Exposure - Agriculture Value,Double,8,Hail,Exposure - Agriculture Value,November 2021
+131,HAIL_EXPT,Hail - Exposure - Total,Double,8,Hail,Exposure - Total,November 2021
+132,HAIL_HLRB,Hail - Historic Loss Ratio - Buildings,Double,8,Hail,Historic Loss Ratio - Buildings,November 2021
+133,HAIL_HLRP,Hail - Historic Loss Ratio - Population,Double,8,Hail,Historic Loss Ratio - Population,November 2021
+134,HAIL_HLRA,Hail - Historic Loss Ratio - Agriculture,Double,8,Hail,Historic Loss Ratio - Agriculture,November 2021
+135,HAIL_HLRR,Hail - Historic Loss Ratio - Total Rating,String,50,Hail,Historic Loss Ratio - Total Rating,November 2021
+136,HAIL_EALB,Hail - Expected Annual Loss - Building Value,Double,8,Hail,Expected Annual Loss - Building Value,November 2021
+137,HAIL_EALP,Hail - Expected Annual Loss - Population,Double,8,Hail,Expected Annual Loss - Population,November 2021
+138,HAIL_EALPE,Hail - Expected Annual Loss - Population Equivalence,Double,8,Hail,Expected Annual Loss - Population Equivalence,November 2021
+139,HAIL_EALA,Hail - Expected Annual Loss - Agriculture Value,Double,8,Hail,Expected Annual Loss - Agriculture Value,November 2021
+140,HAIL_EALT,Hail - Expected Annual Loss - Total,Double,8,Hail,Expected Annual Loss - Total,November 2021
+141,HAIL_EALS,Hail - Expected Annual Loss Score,Double,8,Hail,Expected Annual Loss Score,November 2021
+142,HAIL_EALR,Hail - Expected Annual Loss Rating,String,50,Hail,Expected Annual Loss Rating,November 2021
+143,HAIL_RISKS,Hail - Hazard Type Risk Index Score,Double,8,Hail,Hazard Type Risk Index Score,November 2021
+144,HAIL_RISKR,Hail - Hazard Type Risk Index Rating,String,50,Hail,Hazard Type Risk Index Rating,November 2021
+145,HWAV_EVNTS,Heat Wave - Number of Events,Double,8,Heat Wave,Number of Events,November 2021
+146,HWAV_AFREQ,Heat Wave - Annualized Frequency,Double,8,Heat Wave,Annualized Frequency,November 2021
+147,HWAV_EXPB,Heat Wave - Exposure - Building Value,Double,8,Heat Wave,Exposure - Building Value,November 2021
+148,HWAV_EXPP,Heat Wave - Exposure - Population,Double,8,Heat Wave,Exposure - Population,November 2021
+149,HWAV_EXPPE,Heat Wave - Exposure - Population Equivalence,Double,8,Heat Wave,Exposure - Population Equivalence,November 2021
+150,HWAV_EXPA,Heat Wave - Exposure - Agriculture Value,Double,8,Heat Wave,Exposure - Agriculture Value,November 2021
+151,HWAV_EXPT,Heat Wave - Exposure - Total,Double,8,Heat Wave,Exposure - Total,November 2021
+152,HWAV_HLRB,Heat Wave - Historic Loss Ratio - Buildings,Double,8,Heat Wave,Historic Loss Ratio - Buildings,November 2021
+153,HWAV_HLRP,Heat Wave - Historic Loss Ratio - Population,Double,8,Heat Wave,Historic Loss Ratio - Population,November 2021
+154,HWAV_HLRA,Heat Wave - Historic Loss Ratio - Agriculture,Double,8,Heat Wave,Historic Loss Ratio - Agriculture,November 2021
+155,HWAV_HLRR,Heat Wave - Historic Loss Ratio - Total Rating,String,50,Heat Wave,Historic Loss Ratio - Total Rating,November 2021
+156,HWAV_EALB,Heat Wave - Expected Annual Loss - Building Value,Double,8,Heat Wave,Expected Annual Loss - Building Value,November 2021
+157,HWAV_EALP,Heat Wave - Expected Annual Loss - Population,Double,8,Heat Wave,Expected Annual Loss - Population,November 2021
+158,HWAV_EALPE,Heat Wave - Expected Annual Loss - Population Equivalence,Double,8,Heat Wave,Expected Annual Loss - Population Equivalence,November 2021
+159,HWAV_EALA,Heat Wave - Expected Annual Loss - Agriculture Value,Double,8,Heat Wave,Expected Annual Loss - Agriculture Value,November 2021
+160,HWAV_EALT,Heat Wave - Expected Annual Loss - Total,Double,8,Heat Wave,Expected Annual Loss - Total,November 2021
+161,HWAV_EALS,Heat Wave - Expected Annual Loss Score,Double,8,Heat Wave,Expected Annual Loss Score,November 2021
+162,HWAV_EALR,Heat Wave - Expected Annual Loss Rating,String,50,Heat Wave,Expected Annual Loss Rating,November 2021
+163,HWAV_RISKS,Heat Wave - Hazard Type Risk Index Score,Double,8,Heat Wave,Hazard Type Risk Index Score,November 2021
+164,HWAV_RISKR,Heat Wave - Hazard Type Risk Index Rating,String,50,Heat Wave,Hazard Type Risk Index Rating,November 2021
+165,HRCN_EVNTS,Hurricane - Number of Events,Double,8,Hurricane,Number of Events,November 2021
+166,HRCN_AFREQ,Hurricane - Annualized Frequency,Double,8,Hurricane,Annualized Frequency,November 2021
+167,HRCN_EXPB,Hurricane - Exposure - Building Value,Double,8,Hurricane,Exposure - Building Value,November 2021
+168,HRCN_EXPP,Hurricane - Exposure - Population,Double,8,Hurricane,Exposure - Population,November 2021
+169,HRCN_EXPPE,Hurricane - Exposure - Population Equivalence,Double,8,Hurricane,Exposure - Population Equivalence,November 2021
+170,HRCN_EXPA,Hurricane - Exposure - Agriculture Value,Double,8,Hurricane,Exposure - Agriculture Value,November 2021
+171,HRCN_EXPT,Hurricane - Exposure - Total,Double,8,Hurricane,Exposure - Total,November 2021
+172,HRCN_HLRB,Hurricane - Historic Loss Ratio - Buildings,Double,8,Hurricane,Historic Loss Ratio - Buildings,November 2021
+173,HRCN_HLRP,Hurricane - Historic Loss Ratio - Population,Double,8,Hurricane,Historic Loss Ratio - Population,November 2021
+174,HRCN_HLRA,Hurricane - Historic Loss Ratio - Agriculture,Double,8,Hurricane,Historic Loss Ratio - Agriculture,November 2021
+175,HRCN_HLRR,Hurricane - Historic Loss Ratio - Total Rating,String,50,Hurricane,Historic Loss Ratio - Total Rating,November 2021
+176,HRCN_EALB,Hurricane - Expected Annual Loss - Building Value,Double,8,Hurricane,Expected Annual Loss - Building Value,November 2021
+177,HRCN_EALP,Hurricane - Expected Annual Loss - Population,Double,8,Hurricane,Expected Annual Loss - Population,November 2021
+178,HRCN_EALPE,Hurricane - Expected Annual Loss - Population Equivalence,Double,8,Hurricane,Expected Annual Loss - Population Equivalence,November 2021
+179,HRCN_EALA,Hurricane - Expected Annual Loss - Agriculture Value,Double,8,Hurricane,Expected Annual Loss - Agriculture Value,November 2021
+180,HRCN_EALT,Hurricane - Expected Annual Loss - Total,Double,8,Hurricane,Expected Annual Loss - Total,November 2021
+181,HRCN_EALS,Hurricane - Expected Annual Loss Score,Double,8,Hurricane,Expected Annual Loss Score,November 2021
+182,HRCN_EALR,Hurricane - Expected Annual Loss Rating,String,50,Hurricane,Expected Annual Loss Rating,November 2021
+183,HRCN_RISKS,Hurricane - Hazard Type Risk Index Score,Double,8,Hurricane,Hazard Type Risk Index Score,November 2021
+184,HRCN_RISKR,Hurricane - Hazard Type Risk Index Rating,String,50,Hurricane,Hazard Type Risk Index Rating,November 2021
+185,ISTM_EVNTS,Ice Storm - Number of Events,Double,8,Ice Storm,Number of Events,November 2021
+186,ISTM_AFREQ,Ice Storm - Annualized Frequency,Double,8,Ice Storm,Annualized Frequency,November 2021
+187,ISTM_EXPB,Ice Storm - Exposure - Building Value,Double,8,Ice Storm,Exposure - Building Value,November 2021
+188,ISTM_EXPP,Ice Storm - Exposure - Population,Double,8,Ice Storm,Exposure - Population,November 2021
+189,ISTM_EXPPE,Ice Storm - Exposure - Population Equivalence,Double,8,Ice Storm,Exposure - Population Equivalence,November 2021
+190,ISTM_EXPT,Ice Storm - Exposure - Total,Double,8,Ice Storm,Exposure - Total,November 2021
+191,ISTM_HLRB,Ice Storm - Historic Loss Ratio - Buildings,Double,8,Ice Storm,Historic Loss Ratio - Buildings,November 2021
+192,ISTM_HLRP,Ice Storm - Historic Loss Ratio - Population,Double,8,Ice Storm,Historic Loss Ratio - Population,November 2021
+193,ISTM_HLRR,Ice Storm - Historic Loss Ratio - Total Rating,String,50,Ice Storm,Historic Loss Ratio - Total Rating,November 2021
+194,ISTM_EALB,Ice Storm - Expected Annual Loss - Building Value,Double,8,Ice Storm,Expected Annual Loss - Building Value,November 2021
+195,ISTM_EALP,Ice Storm - Expected Annual Loss - Population,Double,8,Ice Storm,Expected Annual Loss - Population,November 2021
+196,ISTM_EALPE,Ice Storm - Expected Annual Loss - Population Equivalence,Double,8,Ice Storm,Expected Annual Loss - Population Equivalence,November 2021
+197,ISTM_EALT,Ice Storm - Expected Annual Loss - Total,Double,8,Ice Storm,Expected Annual Loss - Total,November 2021
+198,ISTM_EALS,Ice Storm - Expected Annual Loss Score,Double,8,Ice Storm,Expected Annual Loss Score,November 2021
+199,ISTM_EALR,Ice Storm - Expected Annual Loss Rating,String,50,Ice Storm,Expected Annual Loss Rating,November 2021
+200,ISTM_RISKS,Ice Storm - Hazard Type Risk Index Score,Double,8,Ice Storm,Hazard Type Risk Index Score,November 2021
+201,ISTM_RISKR,Ice Storm - Hazard Type Risk Index Rating,String,50,Ice Storm,Hazard Type Risk Index Rating,November 2021
+202,LNDS_EVNTS,Landslide - Number of Events,Double,8,Landslide,Number of Events,November 2021
+203,LNDS_AFREQ,Landslide - Annualized Frequency,Double,8,Landslide,Annualized Frequency,November 2021
+204,LNDS_EXPB,Landslide - Exposure - Building Value,Double,8,Landslide,Exposure - Building Value,November 2021
+205,LNDS_EXPP,Landslide - Exposure - Population,Double,8,Landslide,Exposure - Population,November 2021
+206,LNDS_EXPPE,Landslide - Exposure - Population Equivalence,Double,8,Landslide,Exposure - Population Equivalence,November 2021
+207,LNDS_EXPT,Landslide - Exposure - Total,Double,8,Landslide,Exposure - Total,November 2021
+208,LNDS_HLRB,Landslide - Historic Loss Ratio - Buildings,Double,8,Landslide,Historic Loss Ratio - Buildings,November 2021
+209,LNDS_HLRP,Landslide - Historic Loss Ratio - Population,Double,8,Landslide,Historic Loss Ratio - Population,November 2021
+210,LNDS_HLRR,Landslide - Historic Loss Ratio - Total Rating,String,50,Landslide,Historic Loss Ratio - Total Rating,November 2021
+211,LNDS_EALB,Landslide - Expected Annual Loss - Building Value,Double,8,Landslide,Expected Annual Loss - Building Value,November 2021
+212,LNDS_EALP,Landslide - Expected Annual Loss - Population,Double,8,Landslide,Expected Annual Loss - Population,November 2021
+213,LNDS_EALPE,Landslide - Expected Annual Loss - Population Equivalence,Double,8,Landslide,Expected Annual Loss - Population Equivalence,November 2021
+214,LNDS_EALT,Landslide - Expected Annual Loss - Total,Double,8,Landslide,Expected Annual Loss - Total,November 2021
+215,LNDS_EALS,Landslide - Expected Annual Loss Score,Double,8,Landslide,Expected Annual Loss Score,November 2021
+216,LNDS_EALR,Landslide - Expected Annual Loss Rating,String,50,Landslide,Expected Annual Loss Rating,November 2021
+217,LNDS_RISKS,Landslide - Hazard Type Risk Index Score,Double,8,Landslide,Hazard Type Risk Index Score,November 2021
+218,LNDS_RISKR,Landslide - Hazard Type Risk Index Rating,String,50,Landslide,Hazard Type Risk Index Rating,November 2021
+219,LTNG_EVNTS,Lightning - Number of Events,Double,8,Lightning,Number of Events,November 2021
+220,LTNG_AFREQ,Lightning - Annualized Frequency,Double,8,Lightning,Annualized Frequency,November 2021
+221,LTNG_EXPB,Lightning - Exposure - Building Value,Double,8,Lightning,Exposure - Building Value,November 2021
+222,LTNG_EXPP,Lightning - Exposure - Population,Double,8,Lightning,Exposure - Population,November 2021
+223,LTNG_EXPPE,Lightning - Exposure - Population Equivalence,Double,8,Lightning,Exposure - Population Equivalence,November 2021
+224,LTNG_EXPT,Lightning - Exposure - Total,Double,8,Lightning,Exposure - Total,November 2021
+225,LTNG_HLRB,Lightning - Historic Loss Ratio - Buildings,Double,8,Lightning,Historic Loss Ratio - Buildings,November 2021
+226,LTNG_HLRP,Lightning - Historic Loss Ratio - Population,Double,8,Lightning,Historic Loss Ratio - Population,November 2021
+227,LTNG_HLRR,Lightning - Historic Loss Ratio - Total Rating,String,50,Lightning,Historic Loss Ratio - Total Rating,November 2021
+228,LTNG_EALB,Lightning - Expected Annual Loss - Building Value,Double,8,Lightning,Expected Annual Loss - Building Value,November 2021
+229,LTNG_EALP,Lightning - Expected Annual Loss - Population,Double,8,Lightning,Expected Annual Loss - Population,November 2021
+230,LTNG_EALPE,Lightning - Expected Annual Loss - Population Equivalence,Double,8,Lightning,Expected Annual Loss - Population Equivalence,November 2021
+231,LTNG_EALT,Lightning - Expected Annual Loss - Total,Double,8,Lightning,Expected Annual Loss - Total,November 2021
+232,LTNG_EALS,Lightning - Expected Annual Loss Score,Double,8,Lightning,Expected Annual Loss Score,November 2021
+233,LTNG_EALR,Lightning - Expected Annual Loss Rating,String,50,Lightning,Expected Annual Loss Rating,November 2021
+234,LTNG_RISKS,Lightning - Hazard Type Risk Index Score,Double,8,Lightning,Hazard Type Risk Index Score,November 2021
+235,LTNG_RISKR,Lightning - Hazard Type Risk Index Rating,String,50,Lightning,Hazard Type Risk Index Rating,November 2021
+236,RFLD_EVNTS,Riverine Flooding - Number of Events,Double,8,Riverine Flooding,Number of Events,November 2021
+237,RFLD_AFREQ,Riverine Flooding - Annualized Frequency,Double,8,Riverine Flooding,Annualized Frequency,November 2021
+238,RFLD_EXPB,Riverine Flooding - Exposure - Building Value,Double,8,Riverine Flooding,Exposure - Building Value,November 2021
+239,RFLD_EXPP,Riverine Flooding - Exposure - Population,Double,8,Riverine Flooding,Exposure - Population,November 2021
+240,RFLD_EXPPE,Riverine Flooding - Exposure - Population Equivalence,Double,8,Riverine Flooding,Exposure - Population Equivalence,November 2021
+241,RFLD_EXPA,Riverine Flooding - Exposure - Agriculture Value,Double,8,Riverine Flooding,Exposure - Agriculture Value,November 2021
+242,RFLD_EXPT,Riverine Flooding - Exposure - Total,Double,8,Riverine Flooding,Exposure - Total,November 2021
+243,RFLD_HLRB,Riverine Flooding - Historic Loss Ratio - Buildings,Double,8,Riverine Flooding,Historic Loss Ratio - Buildings,November 2021
+244,RFLD_HLRP,Riverine Flooding - Historic Loss Ratio - Population,Double,8,Riverine Flooding,Historic Loss Ratio - Population,November 2021
+245,RFLD_HLRA,Riverine Flooding - Historic Loss Ratio - Agriculture,Double,8,Riverine Flooding,Historic Loss Ratio - Agriculture,November 2021
+246,RFLD_HLRR,Riverine Flooding - Historic Loss Ratio - Total Rating,String,50,Riverine Flooding,Historic Loss Ratio - Total Rating,November 2021
+247,RFLD_EALB,Riverine Flooding - Expected Annual Loss - Building Value,Double,8,Riverine Flooding,Expected Annual Loss - Building Value,November 2021
+248,RFLD_EALP,Riverine Flooding - Expected Annual Loss - Population,Double,8,Riverine Flooding,Expected Annual Loss - Population,November 2021
+249,RFLD_EALPE,Riverine Flooding - Expected Annual Loss - Population Equivalence,Double,8,Riverine Flooding,Expected Annual Loss - Population Equivalence,November 2021
+250,RFLD_EALA,Riverine Flooding - Expected Annual Loss - Agriculture Value,Double,8,Riverine Flooding,Expected Annual Loss - Agriculture Value,November 2021
+251,RFLD_EALT,Riverine Flooding - Expected Annual Loss - Total,Double,8,Riverine Flooding,Expected Annual Loss - Total,November 2021
+252,RFLD_EALS,Riverine Flooding - Expected Annual Loss Score,Double,8,Riverine Flooding,Expected Annual Loss Score,November 2021
+253,RFLD_EALR,Riverine Flooding - Expected Annual Loss Rating,String,50,Riverine Flooding,Expected Annual Loss Rating,November 2021
+254,RFLD_RISKS,Riverine Flooding - Hazard Type Risk Index Score,Double,8,Riverine Flooding,Hazard Type Risk Index Score,November 2021
+255,RFLD_RISKR,Riverine Flooding - Hazard Type Risk Index Rating,String,50,Riverine Flooding,Hazard Type Risk Index Rating,November 2021
+256,SWND_EVNTS,Strong Wind - Number of Events,Double,8,Strong Wind,Number of Events,November 2021
+257,SWND_AFREQ,Strong Wind - Annualized Frequency,Double,8,Strong Wind,Annualized Frequency,November 2021
+258,SWND_EXPB,Strong Wind - Exposure - Building Value,Double,8,Strong Wind,Exposure - Building Value,November 2021
+259,SWND_EXPP,Strong Wind - Exposure - Population,Double,8,Strong Wind,Exposure - Population,November 2021
+260,SWND_EXPPE,Strong Wind - Exposure - Population Equivalence,Double,8,Strong Wind,Exposure - Population Equivalence,November 2021
+261,SWND_EXPA,Strong Wind - Exposure - Agriculture Value,Double,8,Strong Wind,Exposure - Agriculture Value,November 2021
+262,SWND_EXPT,Strong Wind - Exposure - Total,Double,8,Strong Wind,Exposure - Total,November 2021
+263,SWND_HLRB,Strong Wind - Historic Loss Ratio - Buildings,Double,8,Strong Wind,Historic Loss Ratio - Buildings,November 2021
+264,SWND_HLRP,Strong Wind - Historic Loss Ratio - Population,Double,8,Strong Wind,Historic Loss Ratio - Population,November 2021
+265,SWND_HLRA,Strong Wind - Historic Loss Ratio - Agriculture,Double,8,Strong Wind,Historic Loss Ratio - Agriculture,November 2021
+266,SWND_HLRR,Strong Wind - Historic Loss Ratio - Total Rating,String,50,Strong Wind,Historic Loss Ratio - Total Rating,November 2021
+267,SWND_EALB,Strong Wind - Expected Annual Loss - Building Value,Double,8,Strong Wind,Expected Annual Loss - Building Value,November 2021
+268,SWND_EALP,Strong Wind - Expected Annual Loss - Population,Double,8,Strong Wind,Expected Annual Loss - Population,November 2021
+269,SWND_EALPE,Strong Wind - Expected Annual Loss - Population Equivalence,Double,8,Strong Wind,Expected Annual Loss - Population Equivalence,November 2021
+270,SWND_EALA,Strong Wind - Expected Annual Loss - Agriculture Value,Double,8,Strong Wind,Expected Annual Loss - Agriculture Value,November 2021
+271,SWND_EALT,Strong Wind - Expected Annual Loss - Total,Double,8,Strong Wind,Expected Annual Loss - Total,November 2021
+272,SWND_EALS,Strong Wind - Expected Annual Loss Score,Double,8,Strong Wind,Expected Annual Loss Score,November 2021
+273,SWND_EALR,Strong Wind - Expected Annual Loss Rating,String,50,Strong Wind,Expected Annual Loss Rating,November 2021
+274,SWND_RISKS,Strong Wind - Hazard Type Risk Index Score,Double,8,Strong Wind,Hazard Type Risk Index Score,November 2021
+275,SWND_RISKR,Strong Wind - Hazard Type Risk Index Rating,String,50,Strong Wind,Hazard Type Risk Index Rating,November 2021
+276,TRND_EVNTS,Tornado - Number of Events,Double,8,Tornado,Number of Events,November 2021
+277,TRND_AFREQ,Tornado - Annualized Frequency,Double,8,Tornado,Annualized Frequency,November 2021
+278,TRND_EXPB,Tornado - Exposure - Building Value,Double,8,Tornado,Exposure - Building Value,November 2021
+279,TRND_EXPP,Tornado - Exposure - Population,Double,8,Tornado,Exposure - Population,November 2021
+280,TRND_EXPPE,Tornado - Exposure - Population Equivalence,Double,8,Tornado,Exposure - Population Equivalence,November 2021
+281,TRND_EXPA,Tornado - Exposure - Agriculture Value,Double,8,Tornado,Exposure - Agriculture Value,November 2021
+282,TRND_EXPT,Tornado - Exposure - Total,Double,8,Tornado,Exposure - Total,November 2021
+283,TRND_HLRB,Tornado - Historic Loss Ratio - Buildings,Double,8,Tornado,Historic Loss Ratio - Buildings,November 2021
+284,TRND_HLRP,Tornado - Historic Loss Ratio - Population,Double,8,Tornado,Historic Loss Ratio - Population,November 2021
+285,TRND_HLRA,Tornado - Historic Loss Ratio - Agriculture,Double,8,Tornado,Historic Loss Ratio - Agriculture,November 2021
+286,TRND_HLRR,Tornado - Historic Loss Ratio - Total Rating,String,50,Tornado,Historic Loss Ratio - Total Rating,November 2021
+287,TRND_EALB,Tornado - Expected Annual Loss - Building Value,Double,8,Tornado,Expected Annual Loss - Building Value,November 2021
+288,TRND_EALP,Tornado - Expected Annual Loss - Population,Double,8,Tornado,Expected Annual Loss - Population,November 2021
+289,TRND_EALPE,Tornado - Expected Annual Loss - Population Equivalence,Double,8,Tornado,Expected Annual Loss - Population Equivalence,November 2021
+290,TRND_EALA,Tornado - Expected Annual Loss - Agriculture Value,Double,8,Tornado,Expected Annual Loss - Agriculture Value,November 2021
+291,TRND_EALT,Tornado - Expected Annual Loss - Total,Double,8,Tornado,Expected Annual Loss - Total,November 2021
+292,TRND_EALS,Tornado - Expected Annual Loss Score,Double,8,Tornado,Expected Annual Loss Score,November 2021
+293,TRND_EALR,Tornado - Expected Annual Loss Rating,String,50,Tornado,Expected Annual Loss Rating,November 2021
+294,TRND_RISKS,Tornado - Hazard Type Risk Index Score,Double,8,Tornado,Hazard Type Risk Index Score,November 2021
+295,TRND_RISKR,Tornado - Hazard Type Risk Index Rating,String,50,Tornado,Hazard Type Risk Index Rating,November 2021
+296,TSUN_EVNTS,Tsunami - Number of Events,Double,8,Tsunami,Number of Events,November 2021
+297,TSUN_AFREQ,Tsunami - Annualized Frequency,Double,8,Tsunami,Annualized Frequency,November 2021
+298,TSUN_EXPB,Tsunami - Exposure - Building Value,Double,8,Tsunami,Exposure - Building Value,November 2021
+299,TSUN_EXPP,Tsunami - Exposure - Population,Double,8,Tsunami,Exposure - Population,November 2021
+300,TSUN_EXPPE,Tsunami - Exposure - Population Equivalence,Double,8,Tsunami,Exposure - Population Equivalence,November 2021
+301,TSUN_EXPT,Tsunami - Exposure - Total,Double,8,Tsunami,Exposure - Total,November 2021
+302,TSUN_HLRB,Tsunami - Historic Loss Ratio - Buildings,Double,8,Tsunami,Historic Loss Ratio - Buildings,November 2021
+303,TSUN_HLRP,Tsunami - Historic Loss Ratio - Population,Double,8,Tsunami,Historic Loss Ratio - Population,November 2021
+304,TSUN_HLRR,Tsunami - Historic Loss Ratio - Total Rating,String,50,Tsunami,Historic Loss Ratio - Total Rating,November 2021
+305,TSUN_EALB,Tsunami - Expected Annual Loss - Building Value,Double,8,Tsunami,Expected Annual Loss - Building Value,November 2021
+306,TSUN_EALP,Tsunami - Expected Annual Loss - Population,Double,8,Tsunami,Expected Annual Loss - Population,November 2021
+307,TSUN_EALPE,Tsunami - Expected Annual Loss - Population Equivalence,Double,8,Tsunami,Expected Annual Loss - Population Equivalence,November 2021
+308,TSUN_EALT,Tsunami - Expected Annual Loss - Total,Double,8,Tsunami,Expected Annual Loss - Total,November 2021
+309,TSUN_EALS,Tsunami - Expected Annual Loss Score,Double,8,Tsunami,Expected Annual Loss Score,November 2021
+310,TSUN_EALR,Tsunami - Expected Annual Loss Rating,String,50,Tsunami,Expected Annual Loss Rating,November 2021
+311,TSUN_RISKS,Tsunami - Hazard Type Risk Index Score,Double,8,Tsunami,Hazard Type Risk Index Score,November 2021
+312,TSUN_RISKR,Tsunami - Hazard Type Risk Index Rating,String,50,Tsunami,Hazard Type Risk Index Rating,November 2021
+313,VLCN_EVNTS,Volcanic Activity - Number of Events,Double,8,Volcanic Activity,Number of Events,November 2021
+314,VLCN_AFREQ,Volcanic Activity - Annualized Frequency,Double,8,Volcanic Activity,Annualized Frequency,November 2021
+315,VLCN_EXPB,Volcanic Activity - Exposure - Building Value,Double,8,Volcanic Activity,Exposure - Building Value,November 2021
+316,VLCN_EXPP,Volcanic Activity - Exposure - Population,Double,8,Volcanic Activity,Exposure - Population,November 2021
+317,VLCN_EXPPE,Volcanic Activity - Exposure - Population Equivalence,Double,8,Volcanic Activity,Exposure - Population Equivalence,November 2021
+318,VLCN_EXPT,Volcanic Activity - Exposure - Total,Double,8,Volcanic Activity,Exposure - Total,November 2021
+319,VLCN_HLRB,Volcanic Activity - Historic Loss Ratio - Buildings,Double,8,Volcanic Activity,Historic Loss Ratio - Buildings,November 2021
+320,VLCN_HLRP,Volcanic Activity - Historic Loss Ratio - Population,Double,8,Volcanic Activity,Historic Loss Ratio - Population,November 2021
+321,VLCN_HLRR,Volcanic Activity - Historic Loss Ratio - Total Rating,String,50,Volcanic Activity,Historic Loss Ratio - Total Rating,November 2021
+322,VLCN_EALB,Volcanic Activity - Expected Annual Loss - Building Value,Double,8,Volcanic Activity,Expected Annual Loss - Building Value,November 2021
+323,VLCN_EALP,Volcanic Activity - Expected Annual Loss - Population,Double,8,Volcanic Activity,Expected Annual Loss - Population,November 2021
+324,VLCN_EALPE,Volcanic Activity - Expected Annual Loss - Population Equivalence,Double,8,Volcanic Activity,Expected Annual Loss - Population Equivalence,November 2021
+325,VLCN_EALT,Volcanic Activity - Expected Annual Loss - Total,Double,8,Volcanic Activity,Expected Annual Loss - Total,November 2021
+326,VLCN_EALS,Volcanic Activity - Expected Annual Loss Score,Double,8,Volcanic Activity,Expected Annual Loss Score,November 2021
+327,VLCN_EALR,Volcanic Activity - Expected Annual Loss Rating,String,50,Volcanic Activity,Expected Annual Loss Rating,November 2021
+328,VLCN_RISKS,Volcanic Activity - Hazard Type Risk Index Score,Double,8,Volcanic Activity,Hazard Type Risk Index Score,November 2021
+329,VLCN_RISKR,Volcanic Activity - Hazard Type Risk Index Rating,String,50,Volcanic Activity,Hazard Type Risk Index Rating,November 2021
+330,WFIR_EVNTS,Wildfire - Number of Events,Double,8,Wildfire,Number of Events,November 2021
+331,WFIR_AFREQ,Wildfire - Annualized Frequency,Double,8,Wildfire,Annualized Frequency,November 2021
+332,WFIR_EXPB,Wildfire - Exposure - Building Value,Double,8,Wildfire,Exposure - Building Value,November 2021
+333,WFIR_EXPP,Wildfire - Exposure - Population,Double,8,Wildfire,Exposure - Population,November 2021
+334,WFIR_EXPPE,Wildfire - Exposure - Population Equivalence,Double,8,Wildfire,Exposure - Population Equivalence,November 2021
+335,WFIR_EXPA,Wildfire - Exposure - Agriculture Value,Double,8,Wildfire,Exposure - Agriculture Value,November 2021
+336,WFIR_EXPT,Wildfire - Exposure - Total,Double,8,Wildfire,Exposure - Total,November 2021
+337,WFIR_HLRB,Wildfire - Historic Loss Ratio - Buildings,Double,8,Wildfire,Historic Loss Ratio - Buildings,November 2021
+338,WFIR_HLRP,Wildfire - Historic Loss Ratio - Population,Double,8,Wildfire,Historic Loss Ratio - Population,November 2021
+339,WFIR_HLRA,Wildfire - Historic Loss Ratio - Agriculture,Double,8,Wildfire,Historic Loss Ratio - Agriculture,November 2021
+340,WFIR_HLRR,Wildfire - Historic Loss Ratio - Total Rating,String,50,Wildfire,Historic Loss Ratio - Total Rating,November 2021
+341,WFIR_EALB,Wildfire - Expected Annual Loss - Building Value,Double,8,Wildfire,Expected Annual Loss - Building Value,November 2021
+342,WFIR_EALP,Wildfire - Expected Annual Loss - Population,Double,8,Wildfire,Expected Annual Loss - Population,November 2021
+343,WFIR_EALPE,Wildfire - Expected Annual Loss - Population Equivalence,Double,8,Wildfire,Expected Annual Loss - Population Equivalence,November 2021
+344,WFIR_EALA,Wildfire - Expected Annual Loss - Agriculture Value,Double,8,Wildfire,Expected Annual Loss - Agriculture Value,November 2021
+345,WFIR_EALT,Wildfire - Expected Annual Loss - Total,Double,8,Wildfire,Expected Annual Loss - Total,November 2021
+346,WFIR_EALS,Wildfire - Expected Annual Loss Score,Double,8,Wildfire,Expected Annual Loss Score,November 2021
+347,WFIR_EALR,Wildfire - Expected Annual Loss Rating,String,50,Wildfire,Expected Annual Loss Rating,November 2021
+348,WFIR_RISKS,Wildfire - Hazard Type Risk Index Score,Double,8,Wildfire,Hazard Type Risk Index Score,November 2021
+349,WFIR_RISKR,Wildfire - Hazard Type Risk Index Rating,String,50,Wildfire,Hazard Type Risk Index Rating,November 2021
+350,WNTW_EVNTS,Winter Weather - Number of Events,Double,8,Winter Weather,Number of Events,November 2021
+351,WNTW_AFREQ,Winter Weather - Annualized Frequency,Double,8,Winter Weather,Annualized Frequency,November 2021
+352,WNTW_EXPB,Winter Weather - Exposure - Building Value,Double,8,Winter Weather,Exposure - Building Value,November 2021
+353,WNTW_EXPP,Winter Weather - Exposure - Population,Double,8,Winter Weather,Exposure - Population,November 2021
+354,WNTW_EXPPE,Winter Weather - Exposure - Population Equivalence,Double,8,Winter Weather,Exposure - Population Equivalence,November 2021
+355,WNTW_EXPA,Winter Weather - Exposure - Agriculture Value,Double,8,Winter Weather,Exposure - Agriculture Value,November 2021
+356,WNTW_EXPT,Winter Weather - Exposure - Total,Double,8,Winter Weather,Exposure - Total,November 2021
+357,WNTW_HLRB,Winter Weather - Historic Loss Ratio - Buildings,Double,8,Winter Weather,Historic Loss Ratio - Buildings,November 2021
+358,WNTW_HLRP,Winter Weather - Historic Loss Ratio - Population,Double,8,Winter Weather,Historic Loss Ratio - Population,November 2021
+359,WNTW_HLRA,Winter Weather - Historic Loss Ratio - Agriculture,Double,8,Winter Weather,Historic Loss Ratio - Agriculture,November 2021
+360,WNTW_HLRR,Winter Weather - Historic Loss Ratio - Total Rating,String,50,Winter Weather,Historic Loss Ratio - Total Rating,November 2021
+361,WNTW_EALB,Winter Weather - Expected Annual Loss - Building Value,Double,8,Winter Weather,Expected Annual Loss - Building Value,November 2021
+362,WNTW_EALP,Winter Weather - Expected Annual Loss - Population,Double,8,Winter Weather,Expected Annual Loss - Population,November 2021
+363,WNTW_EALPE,Winter Weather - Expected Annual Loss - Population Equivalence,Double,8,Winter Weather,Expected Annual Loss - Population Equivalence,November 2021
+364,WNTW_EALA,Winter Weather - Expected Annual Loss - Agriculture Value,Double,8,Winter Weather,Expected Annual Loss - Agriculture Value,November 2021
+365,WNTW_EALT,Winter Weather - Expected Annual Loss - Total,Double,8,Winter Weather,Expected Annual Loss - Total,November 2021
+366,WNTW_EALS,Winter Weather - Expected Annual Loss Score,Double,8,Winter Weather,Expected Annual Loss Score,November 2021
+367,WNTW_EALR,Winter Weather - Expected Annual Loss Rating,String,50,Winter Weather,Expected Annual Loss Rating,November 2021
+368,WNTW_RISKS,Winter Weather - Hazard Type Risk Index Score,Double,8,Winter Weather,Hazard Type Risk Index Score,November 2021
+369,WNTW_RISKR,Winter Weather - Hazard Type Risk Index Rating,String,50,Winter Weather,Hazard Type Risk Index Rating,November 2021
+370,NRI_VER,National Risk Index Version,String,50,All,n/a,November 2021
+371,AIANNHCE,American Indian / Alaska Native / Native Hawaiian (AIANNH) Area Census Code,String,4,All,n/a,November 2021
+372,FEDREG2020,Federal Register Number 2020,Integer,4,All,n/a,November 2021
+373,FEDERAL_ID,Federal ID,Integer,4,All,n/a,November 2021
+374,JURS_NAME,FEMA Mitigation Planning Jurisdiction Layer - Tribal Entity,String,254,All,n/a,November 2021
+375,JURS_AREA,FEMA Mitigation Planning Jurisdiction Layer - Tribal Area,String,254,All,n/a,November 2021
+376,JURS_TYPE,FEMA Mitigation Planning Jurisdiction Layer - Tribal Area Type,String,254,All,n/a,November 2021
+377,HIFLD_NAME,Homeland Infrastructure Foundation-Level Data (HIFLD) AIANNH Areas Dataset - Tribal Entity,String,100,All,n/a,November 2021
+378,HIFLD_AREA,Homeland Infrastructure Foundation-Level Data (HIFLD) AIANNH Areas Dataset - Tribal Area,String,800,All,n/a,November 2021
+379,HIFLD_TYPE,Homeland Infrastructure Foundation-Level Data (HIFLD) AIANNH Areas Dataset - Tribal Area Type,String,100,All,n/a,November 2021
