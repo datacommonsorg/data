@@ -24,10 +24,10 @@ from absl import app, flags
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_path', './data',
+flags.DEFINE_string('site_hazard_input_path', './data',
                     'Path to the directory with input files')
 flags.DEFINE_string(
-    'output_path', './data/output',
+    'site_hazard_output_path', './data/output',
     'Path to the directory where generated files are to be stored.')
 
 _RISK_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
@@ -171,7 +171,8 @@ def process_site_hazards(input_path: str, output_path: str) -> int:
 
 
 def main(_) -> None:
-    site_count = process_site_hazards(FLAGS.input_path, FLAGS.output_path)
+    site_count = process_site_hazards(FLAGS.site_hazard_input_path,
+                                      FLAGS.site_hazard_output_path)
     print(f"Processing of {site_count} superfund sites is complete.")
 
 
