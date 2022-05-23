@@ -59,16 +59,16 @@ def get_nth_dash_from_field(row, i):
 def drop_spaces(string):
 	return string.replace(" ", "")
 
-def mcf_from_row(row):
+def statvar_from_row(row):
 	if is_composite_row(row):
-		return mcf_from_composite_row(row)
+		return statvar_from_composite_row(row)
 	else:
-		return mcf_from_individual_hazard_row(row)
+		return statvar_from_individual_hazard_row(row)
 
 def is_composite_row(row):
 	return row["Relevant Layer"] in COMPOSITE_ROW_LAYERS
 
-def mcf_from_composite_row(row):
+def statvar_from_composite_row(row):
 	measuredProperty = drop_spaces(get_nth_dash_from_field(row, 0))
 	measurementQualifier = drop_spaces(get_nth_dash_from_field(row, 1))
 
@@ -76,7 +76,7 @@ def mcf_from_composite_row(row):
 
 	return formatted
 
-def mcf_from_individual_hazard_row(row):
+def statvar_from_individual_hazard_row(row):
 	"""
 	FYI: until import document gets more comments, I am implementing this script for approach 1.
 	"""
@@ -142,7 +142,7 @@ dd = dd[~dd["Field Name"].isin(IGNORED_FIELDS)]
 
 out = ""
 for _, row in dd.iterrows():
-	statvar_mcf = mcf_from_row(row)
+	statvar_mcf = statvar_from_row(row)
 	out += statvar_mcf
 
 outfile_filename = "fema_nri_schema.mcf"
