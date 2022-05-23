@@ -198,7 +198,7 @@ def _transpose_df(df: pd.DataFrame,
 
 
 def _create_sv(desc: str, age: str) -> str:
-    if age in[100, 85]:
+    if age in [100, 85]:
         return f"Count_Person_{age}OrMoreYears_{desc}"
     return f"Count_Person_{age}Years_{desc}"
 
