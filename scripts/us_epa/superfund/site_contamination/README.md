@@ -9,11 +9,14 @@ This dataset can be downloaded as a spreadsheet from the EPA Superfund's [data a
 > NOTE: The link to this dataset changes with every update. It is recommended to
 > have a local copy of the file.
 
-#### Script to generate the clean_csv + tmcf:
+#### Script to generate the clean csv + tmcf:
     For adding Statistical Variable Observations
-    
+
     ```shell
     python3 process_sites_contamination.py
     ```
 #### Notes
+2022/05 - The static file with DC node ids of contaminants is updated with
+organic compounds. The **scripts do not create statistical variables for
+organice compounds.**
 2022/01 - The code currently does not import contaminants that are organic compunds.

@@ -25,10 +25,10 @@ import pandas as pd
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('site_funding_input_path', './data',
-                        'Path to the directory with input files')
+                    'Path to the directory with input files')
 flags.DEFINE_string(
-        'site_funding_output_path', './data/output',
-        'Path to the directory where generated files are to be stored.')
+    'site_funding_output_path', './data/output',
+    'Path to the directory where generated files are to be stored.')
 
 _DATASET_NAME = "./superfund_sites_with_status.csv"
 
@@ -141,7 +141,8 @@ def process_site_funding(input_path: str, output_path: str) -> int:
 
 
 def main(_) -> None:
-    site_count = process_site_funding(FLAGS.site_funding_input_path, FLAGS.site_funding_output_path)
+    site_count = process_site_funding(FLAGS.site_funding_input_path,
+                                      FLAGS.site_funding_output_path)
     print(f"Processing of {site_count} superfund sites is complete.")
 
 

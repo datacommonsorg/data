@@ -20,6 +20,14 @@ import numpy as np
 import pandas as pd
 from absl import app, flags
 
+FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    'report_input_file', './data/tar_creek_2020_corrected.csv',
+    'Location of the intermediate csv file from process_report2020.py script')
+flags.DEFINE_string(
+    'processed_output_path', './data/output',
+    'Path to the directory where generated files are to be stored.')
+
 _UNIT_MAP = {
     "Cond.": "dcs:MicroseimensPerCentimeter",
     "pH": "",
@@ -132,9 +140,11 @@ def gen_statvar_dcid(sv_dict: dict) -> str:
         return 'DissolvedOxygen_BodyOfWater_GroundWater'
     return dcid_str
 
+
 #TODO[sharadshriram]: Complete the implementation
-def gen_stavar_name(sv_dict:dict)->str:
-  pass
+def gen_stavar_name(sv_dict: dict) -> str:
+    pass
+
 
 def make_stat_var_dict(contaminant_type: list,
                        column_list: list) -> (dict, dict):
@@ -249,15 +259,8 @@ def process_intermediate_csv(input_file: str, output_path: str) -> None:
 
 
 def main(_) -> None:
-    FLAGS = flags.FLAGS
-    flags.DEFINE_string(
-        'input_file', './data/tar_creek_2020_corrected.csv',
-        'Location of the intermediate csv file from process_report2020.py script'
-    )
-    flags.DEFINE_string(
-        'output_path', './data/output',
-        'Path to the directory where generated files are to be stored.')
-    process_intermediate_csv(FLAGS.input_file, FLAGS.output_path)
+    process_intermediate_csv(FLAGS.report_input_file,
+                             FLAGS.processed_output_path)
 
 
 if __name__ == '__main__':

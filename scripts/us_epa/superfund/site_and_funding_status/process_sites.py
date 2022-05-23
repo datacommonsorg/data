@@ -37,12 +37,10 @@ from us_epa.util.superfund_helper import make_list_of_geos_to_resolve, resolve_w
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('site_details_dir', './data',
-                        'Path to the directory with input files')
+                    'Path to the directory with input files')
 flags.DEFINE_string(
-        'sites_output_path', './data/output',
-        'Path to the directory where generated files are to be stored.')
-
-
+    'sites_output_path', './data/output',
+    'Path to the directory where generated files are to be stored.')
 
 _SITE_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:SuperfundSite

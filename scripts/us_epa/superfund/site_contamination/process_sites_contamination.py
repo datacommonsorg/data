@@ -36,12 +36,12 @@ from statvar_dcid_generator import get_statvar_dcid
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('site_contamination_input_path', './data',
-                        'Path to the directory with input files')
+                    'Path to the directory with input files')
 flags.DEFINE_string('contaminant_csv', './data',
-                        'Path to the contaminant.csv file')
+                    'Path to the contaminant.csv file')
 flags.DEFINE_string(
-        'site_contamination_output_path', './data/output',
-        'Path to the directory where generated files are to be stored.')
+    'site_contamination_output_path', './data/output',
+    'Path to the directory where generated files are to be stored.')
 
 _TEMPLATE_MCF = """
 Node: E:SuperfundSite->E0
@@ -117,12 +117,12 @@ def write_sv_to_file(row, contaminant_df, file_obj):
         # commonName -- hence we take the first occurance of this name
         # TODO: Handle isotopes and different compound names
         if contaminant_series.shape[0] == 0:
-          raise KeyError # Contaminant is not found
+            raise KeyError  # Contaminant is not found
         contaminant_series = contaminant_series.iloc[0]
 
         # TODO: Graceful exception handling
         if 'InChI' in contaminant_series['dcid']:
-          raise KeyError # skips organic compounds
+            raise KeyError  # skips organic compounds
 
         sv_dict = {
             "contaminatedThing": f"{contaminated_thing}",
@@ -227,9 +227,9 @@ def process_site_contamination(input_path: str, contaminant_csv_path: str,
 
 
 def main(_) -> None:
-    site_count = process_site_contamination(FLAGS.site_contamination_input_path,
-                                            FLAGS.contaminant_csv,
-                                            FLAGS.site_contamination_output_path)
+    site_count = process_site_contamination(
+        FLAGS.site_contamination_input_path, FLAGS.contaminant_csv,
+        FLAGS.site_contamination_output_path)
     print(f"Processing of {site_count} superfund sites is complete.")
 
 
