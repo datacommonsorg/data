@@ -38,16 +38,14 @@ IGNORED_FIELDS = [
 
 COMPOSITE_ROW_LAYERS = ["National Risk Index", "Expected Annual Loss", "Social Vulnerability", "Community Resilience"]
 
-COMPOSITE_MCF_FORMAT = """
-Node: dcid:{nodeDCID}
+COMPOSITE_MCF_FORMAT = """Node: dcid:{nodeDCID}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:{mProp}
 measurementQualifier: dcs:{mQual}
 """
 
-HAZARD_MCF_FORMAT_BASE_APPR1 = """
-Node: dcid:{nodeDCID}
+HAZARD_MCF_FORMAT_BASE_APPR1 = """Node: dcid:{nodeDCID}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:{hazType}
 measuredProperty: {mProp}
@@ -169,7 +167,7 @@ for _, row in dd.iterrows():
 	statvar_mcf, statvar_dcid = statvar_from_row(row)
 	statobs_tmcf = tmcf_from_row(row, statvar_dcid)
 	
-	schema_out += statvar_mcf
+	schema_out += statvar_mcf + "\n"
 	tmcf_out += statobs_tmcf
 
 schema_outfile_filename = "fema_nri_schema.mcf"

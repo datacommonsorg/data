@@ -1,4 +1,3 @@
-
 Node: dcid:NationalRiskIndex_Score_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
@@ -2117,3 +2116,4 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:WinterWeatherEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Rating
+
