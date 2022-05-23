@@ -216,31 +216,28 @@ _cols_dict = {
         "AGEGRP"
 }
 
-
-def get_cols_dict() -> dict:
-    return _cols_dict
-
-
 _nationals_1980_1999_hispanic_cols = {
     "Male_HispanicOrLatino_WhiteAlone_computed": [
-        "White_Male_Population", "Male_WhiteAloneNotHispanicOrLatino"
+        "Male_WhiteAlone_Population", "Male_WhiteAloneNotHispanicOrLatino"
     ],
     "Female_HispanicOrLatino_WhiteAlone_computed": [
-        "White_Female_Population", "Female_WhiteAloneNotHispanicOrLatino"
+        "Female_WhiteAlone_Population", "Female_WhiteAloneNotHispanicOrLatino"
     ],
-    "Male_HispanicOrLatino_Black_computed": [
-        "Black_Male_Population", "Male_NotHispanicOrLatino_Black"
+    "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
+        "Male_BlackOrAfricanAmericanAlone_Population",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone"
     ],
-    "Female_HispanicOrLatino_Black_computed": [
-        "Black_Female_Population", "Female_NotHispanicOrLatino_Black"
+    "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
+        "Female_BlackOrAfricanAmericanAlone_Population",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone"
     ],
     "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed": [
-        "Male_AsianOrPacificIslander",
+        "Male_AmericanIndianAndAlaskaNativeAlone",
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone"
     ],
     "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed": [
-        "Female_AsianOrPacificIslander",
-        "Female_NotHispanicOrLatino_AsianOrPacificIslander"
+        "Female_AmericanIndianAndAlaskaNativeAlone",
+        "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone"
     ],
     "Male_HispanicOrLatino_AsianOrPacificIslander_computed": [
         "Male_AsianOrPacificIslander",
@@ -253,25 +250,26 @@ _nationals_1980_1999_hispanic_cols = {
 }
 _nationals_1980_1999_derived_cols = {
     "Male_NotHispanicOrLatino_computed": [
-        "Male_WhiteAloneNotHispanicOrLatino", "Male_NotHispanicOrLatino_Black",
+        "Male_WhiteAloneNotHispanicOrLatino",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
     "Female_NotHispanicOrLatino_computed": [
         "Female_WhiteAloneNotHispanicOrLatino",
-        "Female_NotHispanicOrLatino_Black",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
     "Male_HispanicOrLatino_computed": [
         "Male_HispanicOrLatino_WhiteAlone_computed",
-        "Male_HispanicOrLatino_Black_computed",
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed",
         "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed",
         "Male_HispanicOrLatino_AsianOrPacificIslander_computed"
     ],
     "Female_HispanicOrLatino_computed": [
         "Female_HispanicOrLatino_WhiteAlone_computed",
-        "Female_HispanicOrLatino_Black_computed",
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed",
         "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed",
         "Female_HispanicOrLatino_AsianOrPacificIslander_computed"
     ],
@@ -279,16 +277,17 @@ _nationals_1980_1999_derived_cols = {
         "Male_WhiteAloneNotHispanicOrLatino",
         "Female_WhiteAloneNotHispanicOrLatino"
     ],
-    "NotHispanicOrLatino_Black_computed": [
-        "Male_NotHispanicOrLatino_Black", "Female_NotHispanicOrLatino_Black"
+    "NotHispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone"
     ],
     "HispanicOrLatino_WhiteAlone_computed": [
         "Male_HispanicOrLatino_WhiteAlone_computed",
         "Female_HispanicOrLatino_WhiteAlone_computed"
     ],
-    "HispanicOrLatino_Black_computed": [
-        "Male_HispanicOrLatino_Black_computed",
-        "Female_HispanicOrLatino_Black_computed"
+    "HispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed",
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed"
     ],
     "NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed": [
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
@@ -308,20 +307,21 @@ _nationals_1980_1999_derived_cols = {
     ],
     "HispanicOrLatino_computed": [
         "Male_HispanicOrLatino_WhiteAlone_computed",
-        "Male_HispanicOrLatino_Black_computed",
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed",
         "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed",
         "Male_HispanicOrLatino_AsianOrPacificIslander_computed",
         "Female_HispanicOrLatino_WhiteAlone_computed",
-        "Female_HispanicOrLatino_Black_computed",
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed",
         "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed",
         "Female_HispanicOrLatino_AsianOrPacificIslander_computed"
     ],
     "NotHispanicOrLatino_computed": [
-        "Male_WhiteAloneNotHispanicOrLatino", "Male_NotHispanicOrLatino_Black",
+        "Male_WhiteAloneNotHispanicOrLatino",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_NotHispanicOrLatino_AsianOrPacificIslander",
         "Female_WhiteAloneNotHispanicOrLatino",
-        "Female_NotHispanicOrLatino_Black",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander"
     ]
@@ -821,11 +821,12 @@ _county_2010_2020_dict = {
 }
 
 _county_1900_1999_dict = {
-    "NotHispanicOrLatino_White_computed": [
-        "Male_NotHispanicOrLatino_White", "Female_NotHispanicOrLatino_White"
+    "NotHispanicOrLatino_WhiteAlone_computed": [
+        "Male_NotHispanicOrLatino_WhiteAlone",
+        "Female_NotHispanicOrLatino_WhiteAlone"
     ],
-    "HispanicOrLatino_White_computed": [
-        "Male_HispanicOrLatino_White", "Female_HispanicOrLatino_White"
+    "HispanicOrLatino_WhiteAlone_computed": [
+        "Male_HispanicOrLatino_WhiteAlone", "Female_HispanicOrLatino_WhiteAlone"
     ],
     "HispanicOrLatino_computed": [
         "Male_HispanicOrLatino", "Female_HispanicOrLatino"
@@ -833,11 +834,13 @@ _county_1900_1999_dict = {
 }
 
 _state_1980_1989_dict = {
-    "NotHispanicOrLatino_Black_computed": [
-        "Female_NotHispanicOrLatino_Black", "Male_NotHispanicOrLatino_Black"
+    "NotHispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone"
     ],
-    "NotHispanicOrLatino_White_computed": [
-        "Female_NotHispanicOrLatino_White", "Male_NotHispanicOrLatino_White"
+    "NotHispanicOrLatino_WhiteAlone_computed": [
+        "Female_NotHispanicOrLatino_WhiteAlone",
+        "Male_NotHispanicOrLatino_WhiteAlone"
     ],
     "NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed": [
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
@@ -848,20 +851,23 @@ _state_1980_1989_dict = {
         "Male_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
     "Female_NotHispanicOrLatino_computed": [
-        "Female_NotHispanicOrLatino_Black", "Female_NotHispanicOrLatino_White",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_NotHispanicOrLatino_WhiteAlone",
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
     "Male_NotHispanicOrLatino_computed": [
-        "Male_NotHispanicOrLatino_Black", "Male_NotHispanicOrLatino_White",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Male_NotHispanicOrLatino_WhiteAlone",
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
-    "HispanicOrLatino_Black_computed": [
-        "Female_HispanicOrLatino_Black", "Male_HispanicOrLatino_Black"
+    "HispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone"
     ],
-    "HispanicOrLatino_White_computed": [
-        "Female_HispanicOrLatino_White", "Male_HispanicOrLatino_White"
+    "HispanicOrLatino_WhiteAlone_computed": [
+        "Female_HispanicOrLatino_WhiteAlone", "Male_HispanicOrLatino_WhiteAlone"
     ],
     "HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed": [
         "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
@@ -872,12 +878,14 @@ _state_1980_1989_dict = {
         "Male_HispanicOrLatino_AsianOrPacificIslander"
     ],
     "Female_HispanicOrLatino_computed": [
-        "Female_HispanicOrLatino_Black", "Female_HispanicOrLatino_White",
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_HispanicOrLatino_WhiteAlone",
         "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_HispanicOrLatino_AsianOrPacificIslander"
     ],
     "Male_HispanicOrLatino_computed": [
-        "Male_HispanicOrLatino_Black", "Male_HispanicOrLatino_White",
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Male_HispanicOrLatino_WhiteAlone",
         "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_HispanicOrLatino_AsianOrPacificIslander"
     ]
@@ -885,23 +893,26 @@ _state_1980_1989_dict = {
 
 _state_1990_1999_dict = {
     "Male_NotHispanicOrLatino_computed": [
-        "Male_WhiteAloneNotHispanicOrLatino", "Male_NotHispanicOrLatino_Black",
+        "Male_WhiteAloneNotHispanicOrLatino",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
     "Female_NotHispanicOrLatino_computed": [
         "Female_WhiteAloneNotHispanicOrLatino",
-        "Female_NotHispanicOrLatino_Black",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
     "Male_HispanicOrLatino_computed": [
-        "Male_HispanicOrLatino_WhiteAlone", "Male_HispanicOrLatino_Black",
+        "Male_HispanicOrLatino_WhiteAlone",
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_HispanicOrLatino_AsianOrPacificIslander"
     ],
     "Female_HispanicOrLatino_computed": [
-        "Female_HispanicOrLatino_WhiteAlone", "Female_HispanicOrLatino_Black",
+        "Female_HispanicOrLatino_WhiteAlone",
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_HispanicOrLatino_AsianOrPacificIslander"
     ],
@@ -909,14 +920,16 @@ _state_1990_1999_dict = {
         "Male_WhiteAloneNotHispanicOrLatino",
         "Female_WhiteAloneNotHispanicOrLatino"
     ],
-    "NotHispanicOrLatino_Black_computed": [
-        "Male_NotHispanicOrLatino_Black", "Female_NotHispanicOrLatino_Black"
+    "NotHispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone"
     ],
     "HispanicOrLatino_WhiteAlone_computed": [
         "Male_HispanicOrLatino_WhiteAlone", "Female_HispanicOrLatino_WhiteAlone"
     ],
-    "HispanicOrLatino_Black_computed": [
-        "Male_HispanicOrLatino_Black", "Female_HispanicOrLatino_Black"
+    "HispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone"
     ],
     "NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed": [
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
@@ -935,60 +948,61 @@ _state_1990_1999_dict = {
         "Female_HispanicOrLatino_AsianOrPacificIslander"
     ],
     "HispanicOrLatino_computed": [
-        "Male_HispanicOrLatino_WhiteAlone", "Male_HispanicOrLatino_Black",
+        "Male_HispanicOrLatino_WhiteAlone",
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_HispanicOrLatino_AsianOrPacificIslander",
-        "Female_HispanicOrLatino_WhiteAlone", "Female_HispanicOrLatino_Black",
+        "Female_HispanicOrLatino_WhiteAlone",
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_HispanicOrLatino_AsianOrPacificIslander"
     ],
     "NotHispanicOrLatino_computed": [
-        "Male_WhiteAloneNotHispanicOrLatino", "Male_NotHispanicOrLatino_Black",
+        "Male_WhiteAloneNotHispanicOrLatino",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_NotHispanicOrLatino_AsianOrPacificIslander",
         "Female_WhiteAloneNotHispanicOrLatino",
-        "Female_NotHispanicOrLatino_Black",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander"
     ]
 }
 
 
-def _state_1990_1999():
-    return _state_1990_1999_dict
+def _get_mapper_cols_dict(dict_name: str) -> dict:
+    """
+    Returns the required dictionary depending on 
+    dict_name which can be either new derivable columns
+    or Dataset Header to Columns mappings
 
+    Args:
+        dict_name (str): Required Dictionary name
 
-def _state_1980_1989():
-    return _state_1980_1989_dict
-
-
-def _county_1900_1999():
-    return _county_1900_1999_dict
-
-
-def _county_2010_2020():
-    return _county_2010_2020_dict
-
-
-def _county_2000_2009():
-    return _county_2000_2009_dict
-
-
-def _nationals_2010_2021():
-    return _nationals_2010_2021_dict
-
-
-def _get_state_2010_2020(dict_name):
-    if dict_name == "derived":
+    Returns:
+        dict: Mapper Dictionary
+    """
+    if dict_name == "header_mappers":
+        return _cols_dict
+    if dict_name == "state_1990_1999":
+        return _state_1990_1999_dict
+    if dict_name == "state_1980_1989":
+        return _state_1980_1989_dict
+    if dict_name == "county_1900_1999":
+        return _county_1900_1999_dict
+    if dict_name == "county_2010_2020":
+        return _county_2010_2020_dict
+    if dict_name == "county_2000_2009":
+        return _county_2000_2009_dict
+    if dict_name == "nationals_2010_2021":
+        return _nationals_2010_2021_dict
+    if dict_name == "state_2010_2020_derived":
         return _state_2010_2020_hispanic_dict
-    return _state_2010_2020_total_dict
-
-
-def _get_nationals_2000_2009():
-    return _nationals_2000_2009_dict
-
-
-def _get_nationals_1980_1999(dict_name):
-    if dict_name == "hispanic":
+    if dict_name == "county_2010_2020_total":
+        return _state_2010_2020_total_dict
+    if dict_name == "nationals_2000_2009":
+        return _nationals_2000_2009_dict
+    if dict_name == "nationals_1980_1999_hispanic":
         return _nationals_1980_1999_hispanic_cols
-    return _nationals_1980_1999_derived_cols
+    if dict_name == "nationals_1980_1999_total":
+        return _nationals_1980_1999_derived_cols

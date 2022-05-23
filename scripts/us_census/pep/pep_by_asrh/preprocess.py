@@ -22,30 +22,49 @@ import pandas as pd
 
 from absl import app
 from absl import flags
-from cols_map import (get_cols_dict, _get_nationals_1980_1999,
-                      _get_nationals_2000_2009, _nationals_2010_2021,
-                      _state_1980_1989, _state_1990_1999, _get_state_2010_2020,
-                      _county_2000_2009, _county_2010_2020, _county_1900_1999)
+from cols_map import _get_mapper_cols_dict
 
 pd.set_option("display.max_columns", None)
 pd.set_option("display.max_rows", None)
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "input_data"
+    os.path.abspath(__file__)) + os.sep + "ip_data"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
-def _get_age_grp(age_grp: int) -> str:
+def _convert_to_int(df: pd.DataFrame) -> pd.DataFrame:
+    for col in df.columns:
+        df[col] = df[col].astype("int", errors='ignore')
+    return df
+
+
+def _derive_cols(df: pd.DataFrame, derived_cols: dict) -> pd.DataFrame:
+    """Derive new columns using derived_cols dict
+       where key represents dervied col and values represents existing columns
+
+    Args:
+        df (pd.DataFrame): _description_
+        derived_cols (list): _description_
+
+    Returns:
+        pd.DataFrame: _description_
+    """
+    for dsv, sv in derived_cols.items():
+        df[dsv] = df.loc[:, sv].sum(axis=1)
+    return df
+
+
+def _get_age_grp(age_grp: enumerate) -> str:
     """
     Returns Age Groups using age_grp index as below
     0: ""
-    1: 0To4
+    1: 0To4f
     2: 5To9
     3: 10To14
     ...
     ...
-    85: 85
+    18: 85
     Args:
         age_grp (int): Age Group Bucket Index
 
@@ -54,14 +73,14 @@ def _get_age_grp(age_grp: int) -> str:
     """
     if age_grp == 0:
         return ""
-    if age_grp == 85:
-        return "85"
+    if age_grp == 18:
+        return "85OrMore"
     start = 5 * (age_grp - 1)
     end = 5 * (age_grp) - 1
     return f"{start}To{end}"
 
 
-def _get_age_grp2(age_grp: int) -> str:
+def _get_age_grp2(age_grp: enumerate) -> str:
     """
     Returns Age Groups using age_grp index as below
     0: "0"
@@ -105,6 +124,10 @@ def _add_measurement_method(df: pd.DataFrame, src_col: str,
     df[tgt_col] = df[tgt_col].str.replace('computed',
                                           "dcs:dcAggregate/CensusPEPSurvey",
                                           regex=False)
+
+    # Dervied SV's has '_computed' as part of the name,
+    # to differentiate them with source generated SV's
+    # Removing '_computed' in the SV's names.
     df[src_col] = df[src_col].str.replace("_computed", "")
     return df
 
@@ -118,10 +141,14 @@ def _load_df(path: str,
     Returns the DataFrame using input path and config
     Args:
         path (str): Input File Path
-        file_format (str): Input File Format
-        header (str, optional): Input File Header Index. Defaults to None.
-        skip_rows (int, optional): Skip Rows Value. Defaults to None.
-        encoding (str, optional): Input File Encoding. Defaults to None.
+        file_format (str): Input File Format [csv, txt, xls, xlsx]
+        header (str, optional): Input Dataset Header Row Line Number.
+        DataFrame will consider header value and make it as header.
+        Defaults to None.
+        skip_rows (int, optional): Skip Rows Value for txt files.
+        This is helpful to skip initial rows in txt file.Defaults to None.
+        encoding (str, optional): Input File Encoding while
+        loading data into DataFrame.Defaults to None.
 
     Returns:
         df (pd.DataFrame): Dataframe of input file
@@ -139,13 +166,8 @@ def _load_df(path: str,
                            encoding=encoding)
     elif file_format.lower() in ["xls", "xlsx"]:
         df = pd.read_excel(path, header=header)
+    df = _convert_to_int(df)
     return df
-
-
-def _merge_df(df_1: pd.DataFrame, df_2: pd.DataFrame) -> pd.DataFrame:
-    if df_1 is None:
-        return df_2
-    return pd.concat([df_1, df_2], axis=0)
 
 
 def _transpose_df(df: pd.DataFrame,
@@ -165,8 +187,10 @@ def _transpose_df(df: pd.DataFrame,
     """
     res_df = pd.DataFrame()
     for col in data_cols:
-        cols = common_col + [col]
+        cols = common_col + [col]  # col have the population data,
         tmp_df = df[cols]
+        # Renaming Col value with 'Count_Person' to
+        # align with DataCommons Standarads
         tmp_df.columns = common_col + ["Count_Person"]
         tmp_df[default_col] = col
         res_df = pd.concat([res_df, tmp_df])
@@ -174,9 +198,7 @@ def _transpose_df(df: pd.DataFrame,
 
 
 def _create_sv(desc: str, age: str) -> str:
-    if age == 100:
-        return f"Count_Person_{age}OrMoreYears_{desc}"
-    if age == 85:
+    if age in[100, 85]:
         return f"Count_Person_{age}OrMoreYears_{desc}"
     return f"Count_Person_{age}Years_{desc}"
 
@@ -202,22 +224,25 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     df = df[df[1] == yr].iloc[:, 1:].reset_index(drop=True)
     cols = [
         "Year", "Age", "Total_Population", "Total_Male_Population",
-        "Total_Female_Population", "White_Male_Population",
-        "White_Female_Population", "Black_Male_Population",
-        "Black_Female_Population", "Male_AmericanIndianAndAlaskaNativeAlone",
+        "Total_Female_Population", "Male_WhiteAlone_Population",
+        "Female_WhiteAlone_Population",
+        "Male_BlackOrAfricanAmericanAlone_Population",
+        "Female_BlackOrAfricanAmericanAlone_Population",
+        "Male_AmericanIndianAndAlaskaNativeAlone",
         "Female_AmericanIndianAndAlaskaNativeAlone",
         "Male_AsianOrPacificIslander", "Female_AsianOrPacificIslander",
         "Male_HispanicOrLatino", "Female_HispanicOrLatino",
         "Male_WhiteAloneNotHispanicOrLatino",
         "Female_WhiteAloneNotHispanicOrLatino",
-        "Male_NotHispanicOrLatino_Black", "Female_NotHispanicOrLatino_Black",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_NotHispanicOrLatino_AsianOrPacificIslander",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander"
     ]
-    hispanic_cols = _get_nationals_1980_1999("hispanic")
-    derived_cols = _get_nationals_1980_1999("derived")
+    hispanic_cols = _get_mapper_cols_dict("nationals_1980_1999_hispanic")
+    derived_cols = _get_mapper_cols_dict("nationals_1980_1999_derived")
     df.columns = cols
     if yr_100_df.shape[0] > 0:
         yr_100_df.insert(0, 0, yr)
@@ -237,9 +262,8 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
         df[sv[1:]] = -df[sv[1:]]
         cols.append(dsv)
     # Deriving New Columns
-    for dsv, sv in derived_cols.items():
-        df[dsv] = df.loc[:, sv].sum(axis=1)
-        cols.append(dsv)
+    df = _derive_cols(df, derived_cols)
+    cols.append(derived_cols.keys())
     f_cols = [val for val in cols if "Hispanic" in val]
     df = _transpose_df(df, ["Year", "Age"], f_cols)
     # Creating SV's name using SV, Age Column
@@ -268,25 +292,26 @@ def _process_state_1990_1999(file_path):
     cols = [
         "Year", "Location", "Age", "Male_WhiteAloneNotHispanicOrLatino",
         "Female_WhiteAloneNotHispanicOrLatino",
-        "Male_NotHispanicOrLatino_Black", "Female_NotHispanicOrLatino_Black",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_NotHispanicOrLatino_AsianOrPacificIslander",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander",
         "Male_HispanicOrLatino_WhiteAlone",
-        "Female_HispanicOrLatino_WhiteAlone", "Male_HispanicOrLatino_Black",
-        "Female_HispanicOrLatino_Black",
+        "Female_HispanicOrLatino_WhiteAlone",
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_HispanicOrLatino_AsianOrPacificIslander",
         "Female_HispanicOrLatino_AsianOrPacificIslander"
     ]
     df.columns = cols
-    derived_cols = _state_1990_1999()
+    derived_cols = _get_mapper_cols_dict("state_1990_1999")
     # Deriving New Columns
-    for dsv, sv in derived_cols.items():
-        df[dsv] = df.loc[:, sv].sum(axis=1)
-        cols.append(dsv)
+    df = _derive_cols(df, derived_cols)
+    cols.append(derived_cols.keys())
     # Adding Leading Zeros for State's Fips Code.
     df["Location"] = df["Location"].astype('str').str.pad(width=2,
                                                           side="left",
@@ -321,15 +346,14 @@ def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
             (df["YEAR"] != 2010)].reset_index(drop=True)
     cols = list(df.columns)
     # Mapping Dataset Headers to its FullForm
-    cols_dict = get_cols_dict()
+    cols_dict = _get_mapper_cols_dict("header_mappers")
     for idx, val in enumerate(cols):
         cols[idx] = cols_dict.get(val, val)
     df.columns = cols
-    derived_cols = _get_nationals_2000_2009()
+    derived_cols = _get_mapper_cols_dict("nationals_2000_2009")
     # Deriving New Columns
-    for dsv, sv in derived_cols.items():
-        df[dsv] = df.loc[:, sv].sum(axis=1)
-        cols.append(dsv)
+    df = _derive_cols(df, derived_cols)
+    cols.append(derived_cols.keys())
     f_cols = [val for val in cols if "Hispanic" in val]
     df = _transpose_df(df, ["Year", "Age"], f_cols)
     # Creating SV's name using SV, Age Columns
@@ -383,9 +407,10 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     ] + req_cols[11:21] + [req_cols[-2]]
     pop_cols = [val for val in req_cols if "POPESTIMATE" in val]
     # Deriving New Columns
-    derived_cols_df = pd.DataFrame()
-    derived_cols = _get_state_2010_2020("derived")
+    #df[pop_cols] = df[pop_cols].apply(pd.to_numeric, errors='coerce')
+    derived_cols = _get_mapper_cols_dict("state_2010_2020_derived")
     for dsv, sv in derived_cols.items():
+        derived_cols_df = pd.DataFrame()
         flag = True
         for col in sv:
             tmp_derived_cols_df = df[df["SV"] == col][req_cols].reset_index(
@@ -398,9 +423,9 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
             derived_cols_df["SV"] = dsv
             df = df.append(derived_cols_df)
     # Deriving New Columns
-    derived_cols_df = pd.DataFrame()
-    derived_cols = _get_state_2010_2020("total")
+    derived_cols = _get_mapper_cols_dict("state_2010_2020_total")
     for dsv, sv in derived_cols.items():
+        derived_cols_df = pd.DataFrame()
         flag = True
         for col in sv:
             tmp_derived_cols_df = df[df["SV"] == col][req_cols].reset_index(
@@ -412,7 +437,8 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
         derived_cols_df["SV"] = dsv
         df = df.append(derived_cols_df)
     # Creating SV's name using SV, Age Column
-    df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
+
+    df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.AGE), axis=1)
     df = df[req_cols]
     req_cols = [
         col.replace("POPESTIMATE", "").replace("STATE", "Location")
@@ -440,14 +466,13 @@ def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
     """
     df = _load_df(file_path, "csv", header=0)
     df = df[(df["AGE"] != 999) & (df["MONTH"] == 7)].reset_index(drop=True)
-    cols_dict = get_cols_dict()
+    cols_dict = _get_mapper_cols_dict("header_mappers")
     df.columns = df.columns.map(cols_dict)
     cols = df.columns.to_list()
-    derived_cols = _nationals_2010_2021()
+    derived_cols = _get_mapper_cols_dict("nationals_2010_2021")
     # Deriving New Columns
-    for dsv, sv in derived_cols.items():
-        df[dsv] = df.loc[:, sv].sum(axis=1)
-        cols.append(dsv)
+    df = _derive_cols(df, derived_cols)
+    cols.append(derived_cols.keys())
     cols = ["Year", "Age"] + [col for col in cols if "Hispanic" in col]
     df = df[cols]
     df = _transpose_df(df, ["Year", "Age"], cols[2:])
@@ -494,12 +519,12 @@ def _process_state_1980_1989(file_path: str) -> str:
     df["Sex"] = df[0].str[4]
     gender_dict = {'1': "Male", '2': "Female"}
     race_dict = {
-        '1': "NotHispanicOrLatino_White",
-        '2': "NotHispanicOrLatino_Black",
+        '1': "NotHispanicOrLatino_WhiteAlone",
+        '2': "NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         '3': "NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         '4': "NotHispanicOrLatino_AsianOrPacificIslander",
-        '5': "HispanicOrLatino_White",
-        '6': "HispanicOrLatino_Black",
+        '5': "HispanicOrLatino_WhiteAlone",
+        '6': "HispanicOrLatino_BlackOrAfricanAmericanAlone",
         '7': "HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         '8': "HispanicOrLatino_AsianOrPacificIslander",
     }
@@ -508,10 +533,11 @@ def _process_state_1980_1989(file_path: str) -> str:
     df = df.drop(columns=[0])
     df["SV"] = df["Sex"] + "_" + df["Race"]
     # Deriving New Columns
-    derived_cols = _state_1980_1989()
-    derived_cols_df = pd.DataFrame()
+    #df[pop_cols] = df[pop_cols].apply(pd.to_numeric, errors='coerce')
+    derived_cols = _get_mapper_cols_dict("state_1980_1989")
     df = df[["Year", "Location", "SV"] + pop_cols]
     for dsv, sv in derived_cols.items():
+        derived_cols_df = pd.DataFrame()
         flag = True
         for col in sv:
             derived_cols_tmp_df = df[df["SV"] == col].reset_index(drop=True)
@@ -638,12 +664,12 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
     ]
     df.columns = ["Year", "Location", "SV"] + pop_cols
     sv_dict = {
-        '1': "Male_NotHispanicOrLatino_White",
-        '2': "Female_NotHispanicOrLatino_White",
-        '3': "Male_HispanicOrLatino_White",
-        '4': "Female_HispanicOrLatino_White",
-        '5': "Male_Black",
-        '6': "Black_Female",
+        '1': "Male_NotHispanicOrLatino_WhiteAlone",
+        '2': "Female_NotHispanicOrLatino_WhiteAlone",
+        '3': "Male_HispanicOrLatino_WhiteAlone",
+        '4': "Female_HispanicOrLatino_WhiteAlone",
+        '5': "Male_BlackOrAfricanAmericanAlone",
+        '6': "Female_BlackOrAfricanAmericanAlone",
         '7': "Male_AmericanIndianAndAlaskaNativeAlone",
         '8': "Female_AmericanIndianAndAlaskaNativeAlone",
         '9': "Male_AsianOrPacificIslander",
@@ -652,10 +678,10 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
         '12': "Female_HispanicOrLatino"
     }
     df["SV"] = df["SV"].map(sv_dict)
-    # Deriving New Columns
-    derived_df = pd.DataFrame()
-    derived_cols = _county_1900_1999()
+    derived_cols = _get_mapper_cols_dict("county_1900_1999")
+    #df[pop_cols] = df[pop_cols].apply(pd.to_numeric, errors='coerce')
     for dsv, sv in derived_cols.items():
+        derived_df = pd.DataFrame()
         flag = True
         for col in sv:
             derived_tmp_df = df[df["SV"] == col].reset_index(drop=True)
@@ -666,6 +692,7 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
         if flag:
             derived_df["SV"] = dsv
             df = df.append(derived_df)
+
     df = df.dropna()
     df = _transpose_df(df, ["Year", "Location", "SV"],
                        pop_cols,
@@ -699,7 +726,7 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
 
     cols = list(df.columns)
     # Mapping Dataset Headers to its FullForm
-    cols_dict = get_cols_dict()
+    cols_dict = _get_mapper_cols_dict("header_mappers")
     for idx, val in enumerate(cols):
         cols[idx] = cols_dict.get(val, val)
     df.columns = cols
@@ -711,10 +738,9 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
                                                       fillchar="0")
     df["Location"] = "geoId/" + df["STATE"] + df["COUNTY"]
     # Deriving New Columns
-    derived_cols = _county_2000_2009()
-    for dsv, sv in derived_cols.items():
-        df[dsv] = df.loc[:, sv].sum(axis=1)
-        cols.append(dsv)
+    derived_cols = _get_mapper_cols_dict("county_2000_2009")
+    df = _derive_cols(df, derived_cols)
+    cols.append(derived_cols.keys())
     df["Age"] = df["AGEGRP"].apply(_get_age_grp2)
     f_cols = [val for val in cols if "Hispanic" in val]
     df = _transpose_df(df, ["Year", "Location", "Age"], f_cols)
@@ -744,7 +770,7 @@ def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
     df["YEAR"] = df["YEAR"].astype('str').str.replace("14", "13").astype("int")
     df["YEAR"] = 2007 + df["YEAR"]
     # Mapping Dataset Headers to its FullForm
-    cols_dict = get_cols_dict()
+    cols_dict = _get_mapper_cols_dict("header_mappers")
     cols = df.columns.to_list()
     for idx, val in enumerate(cols):
         cols[idx] = cols_dict.get(val, val)
@@ -757,13 +783,14 @@ def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
                                                       fillchar="0")
     df["Location"] = "geoId/" + df["STATE"] + df["COUNTY"]
     # Deriving New Columns
-    derived_cols = _county_2010_2020()
-    for dsv, sv in derived_cols.items():
-        df[dsv] = df.loc[:, sv].sum(axis=1)
-        cols.append(dsv)
+    derived_cols = _get_mapper_cols_dict("county_2010_2020")
+    df = _derive_cols(df, derived_cols)
+    cols.append(derived_cols.keys())
     f_cols = [val for val in cols if "Hispanic" in val]
+    print(df["AGEGRP"].unique())
     df["Age"] = df["AGEGRP"].apply(_get_age_grp)
-    df["Age"] = df["Age"].str.replace("85To89", "85OrMore")
+
+    df["Age"] = df["Age"].str.replace("85To89", "85")
     df = _transpose_df(df, ["Year", "Location", "Age"], f_cols)
     # Creating SV's name using SV, Age Column
     df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
@@ -890,11 +917,12 @@ value: C:USA_Population_ASRH->Count_Person
         data_df.to_csv(self.cleaned_csv_file_path, index=False)
         for file_path in self.input_files:
             data_df = None
+            f_names.append(file_path)
             if "sasr" in file_path:
                 data_df = _process_state_1990_1999(file_path)
                 if "sasrh" in file_path:
                     nat_df = _derive_nationals(deepcopy(data_df))
-                    data_df = _merge_df(data_df, nat_df)
+                    data_df = pd.concat([data_df, nat_df], axis=0)
             elif "st-est00int-alldata" in file_path:
                 data_df = _process_state_2000_2010(file_path)
             elif "SC-EST2020-ALLDATA6" in file_path:
@@ -914,12 +942,12 @@ value: C:USA_Population_ASRH->Count_Person
             elif "CC-EST2020" in file_path:
                 data_df = _process_county_2010_2020(file_path)
             # Appending DataFrame to final CSV File
+
             data_df.to_csv(self.cleaned_csv_file_path,
                            mode="a",
                            header=False,
                            index=False)
             sv_list += data_df["SV"].to_list()
-
         sv_list = list(set(sv_list))
         sv_list.sort()
         self.__generate_mcf(sv_list)
