@@ -1,5 +1,7 @@
-from os import stat
-from pickle import TRUE
+# todo: remove duplicate schemas
+	# these are generated because part of what the dataset considers to be different measures,
+	# we consider it as different units measuring the same StatisticalVariable
+
 import pandas as pd
 import numpy as np
 import logging
@@ -55,12 +57,12 @@ COMPOSITE_MCF_FORMAT = """Node: dcid:{nodeDCID}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:{mProp}
-measurementQualifier: dcs:{mQual}
 """
 
 HAZARD_MCF_FORMAT_BASE_APPR1 = """Node: dcid:{nodeDCID}
 typeOf: dcs:StatisticalVariable
-populationType: dcs:{hazType}
+populationType: dcs:NaturalHazardImpact
+naturalHazardType: dcs:{hazType}
 measuredProperty: {mProp}
 """
 
@@ -74,6 +76,30 @@ if FLAG_SKIP_IMPACTED_THING_COMPONENTS:
 	FIELD_ALIAS_STRINGS_TO_SKIP.extend(IMPACTED_THING_COMPONENTS)
 if FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES:
 	FIELD_ALIAS_STRINGS_TO_SKIP.extend(NON_SCORE_RELATIVE_MEASURES)
+
+DATACOMMONS_ALIASES = {
+	"Score": "FemaNationalRiskScore",
+	"SocialVulnerability": "femaSocialVulnerability",
+	"CommunityResilience": "femaCommunityResilience",
+	"HazardTypeRiskIndex": "femaNaturalHazardRiskIndex",
+	"Hazard Type Risk Index": "femaNaturalHazardRiskIndex",
+	"NationalRiskIndex":  "femaNaturalHazardRiskIndex",
+	"Expected Annual Loss": "ExpectedLoss",
+	"ExpectedAnnualLoss": "ExpectedLoss"
+}
+
+def apply_datacommon_alias(string):
+	"""
+	Given a string, returns the defined alias for the Data Commons import.
+	If no alias is found, returns the string as is.
+	"""
+	string = string.strip()
+	if string in DATACOMMONS_ALIASES:
+		return DATACOMMONS_ALIASES[string]
+	else:
+		print(f"could not find alias for {string.replace(' ', '!')}")
+		return string
+
 
 def get_nth_dash_from_field_alias(row, i):
 	"""
@@ -133,12 +159,18 @@ def statvar_from_composite_row(row):
 	"""
 	Helper function for statvar_from_row()
 	"""
-	measuredProperty = drop_spaces(get_nth_dash_from_field_alias(row, 0))
-	measurementQualifier = drop_spaces(get_nth_dash_from_field_alias(row, 1))
+	measuredProperty = apply_datacommon_alias(drop_spaces(get_nth_dash_from_field_alias(row, 0)))
+	unit = apply_datacommon_alias(drop_spaces(get_nth_dash_from_field_alias(row, 1)))
 
-	dcid = f"{measuredProperty}_{measurementQualifier}_NaturalHazardImpact"
+	if measuredProperty == "ExpectedLoss":
+		dcid = f"Annual_{measuredProperty}_NaturalHazardImpact"
+	else:
+		dcid = f"{measuredProperty}_NaturalHazardImpact"
+	
+	formatted = COMPOSITE_MCF_FORMAT.format(nodeDCID = dcid, mProp=measuredProperty)
 
-	formatted = COMPOSITE_MCF_FORMAT.format(nodeDCID = dcid, mProp=measuredProperty, mQual = measurementQualifier)
+	if measuredProperty == "ExpectedLoss":
+		formatted += "measurementQualifier: Annual\n"
 
 	return formatted, dcid
 
@@ -148,12 +180,18 @@ def statvar_from_individual_hazard_row(row):
 	"""
 
 	hazardType = drop_spaces(get_nth_dash_from_field_alias(row, 0)) + "Event"
-	measuredProperty = get_nth_dash_from_field_alias(row, 1)
-	measurementQualifier = ""
-	# we want to cut off score/rating from measuredProperty and make it a measurement qualifier instead
+	measuredProperty = apply_datacommon_alias(get_nth_dash_from_field_alias(row, 1))
+	
+	unit = ""
+	# we want to cut off score/rating from measuredProperty and make it a unit instead
 	if "Score" in measuredProperty or "Rating" in measuredProperty:
-		measurementQualifier = measuredProperty.split(' ')[-1]
-		measuredProperty = measuredProperty[:-len(measurementQualifier)]
+		unit = measuredProperty.split(' ')[-1]
+		measuredProperty = apply_datacommon_alias(measuredProperty[:-len(unit)])
+		unit = apply_datacommon_alias(unit)
+
+	measurementQualifier = ""
+	if measuredProperty == "ExpectedLoss":
+		measurementQualifier = "Annual"
 
 	measuredProperty = drop_spaces(measuredProperty)
 	
@@ -193,9 +231,6 @@ def statvar_from_individual_hazard_row(row):
 
 	if measurementQualifier:
 		formatted += f"measurementQualifier: {measurementQualifier}\n"
-
-	if "Expected Annual Loss" in measuredProperty:
-		formatted += f"unit: USDollar\n"
 
 	return formatted, dcid
 
