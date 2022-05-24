@@ -50,17 +50,6 @@ EAL_COMPONENTS = ["Number of Events", "Annualized Frequency", "Historic Loss Rat
 IMPACTED_THING_COMPONENTS = ["Building", "Population", "Agriculture"]
 NON_SCORE_RELATIVE_MEASURES = ["Rating", "Percentile"]
 
-# if field alias includes any of these strings, skip that row from the schema and TMCF generation
-FIELD_ALIAS_STRINGS_TO_SKIP = []
-
-if FLAG_SKIP_EAL_COMPONENTS:
-	FIELD_ALIAS_STRINGS_TO_SKIP.extend(EAL_COMPONENTS)
-if FLAG_SKIP_IMPACTED_THING_COMPONENTS:
-	FIELD_ALIAS_STRINGS_TO_SKIP.extend(IMPACTED_THING_COMPONENTS)
-if FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES:
-	FIELD_ALIAS_STRINGS_TO_SKIP.extend(NON_SCORE_RELATIVE_MEASURES)
-
-
 # template strings
 COMPOSITE_MCF_FORMAT = """Node: dcid:{nodeDCID}
 typeOf: dcs:StatisticalVariable
@@ -74,6 +63,17 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:{hazType}
 measuredProperty: {mProp}
 """
+
+# computed variables
+# if field alias includes any of these strings, skip that row from the schema and TMCF generation
+FIELD_ALIAS_STRINGS_TO_SKIP = []
+
+if FLAG_SKIP_EAL_COMPONENTS:
+	FIELD_ALIAS_STRINGS_TO_SKIP.extend(EAL_COMPONENTS)
+if FLAG_SKIP_IMPACTED_THING_COMPONENTS:
+	FIELD_ALIAS_STRINGS_TO_SKIP.extend(IMPACTED_THING_COMPONENTS)
+if FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES:
+	FIELD_ALIAS_STRINGS_TO_SKIP.extend(NON_SCORE_RELATIVE_MEASURES)
 
 def get_nth_dash_from_field_alias(row, i):
 	"""
