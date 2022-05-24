@@ -33,10 +33,9 @@ class TestSpecGenerator(unittest.TestCase):
             combined_spec_out = create_combined_spec(get_spec_list(), tmp_dir)
             all_columns = columns_from_zip_list(zip_path_list=zip_path_list)
 
-            
             guess_spec = create_new_spec(all_columns,
-                                        combined_spec_out,
-                                        output_path=tmp_dir)
+                                         combined_spec_out,
+                                         output_path=tmp_dir)
 
             f = open(_EXPECTED_SPEC_PATH, 'r')
             expected_spec = json.load(f)

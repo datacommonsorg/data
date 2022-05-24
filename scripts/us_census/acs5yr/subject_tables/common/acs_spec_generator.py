@@ -65,7 +65,8 @@ def get_spec_list() -> list:
 
 
 # create megaspec
-def create_combined_spec(all_specs: list, output_path: str = '../output/') -> dict:
+def create_combined_spec(all_specs: list,
+                         output_path: str = '../output/') -> dict:
     """Creates a union of all specs provided in the list.
     NOTE: XXXXX is placed at places where some manual resolution is required.
     
@@ -478,7 +479,8 @@ def create_new_spec(all_columns: list,
 
 
 def main(argv):
-    combined_spec_out = create_combined_spec(get_spec_list(), _FLAGS.generator_output)
+    combined_spec_out = create_combined_spec(get_spec_list(),
+                                             _FLAGS.generator_output)
 
     if _FLAGS.create_union_spec:
         print(json.dumps(combined_spec_out, indent=2))

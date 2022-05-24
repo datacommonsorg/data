@@ -23,7 +23,7 @@ import requests
 import time
 
 module_dir_ = os.path.dirname(__file__)
-FLAGS = flags.FLAGS
+_FLAGS = flags.FLAGS
 
 flags.DEFINE_string('dcid', None, 'dcid of the node to query')
 flags.DEFINE_string('dc_output_path', './prefetched_outputs/',
@@ -207,8 +207,9 @@ def fetch_dcid_properties_enums(class_dcid,
 
 def main(argv):
     print(
-        json.dumps(fetch_dcid_properties_enums(FLAGS.dcid, FLAGS.dc_output_path,
-                                               FLAGS.force_fetch),
+        json.dumps(fetch_dcid_properties_enums(_FLAGS.dcid,
+                                               _FLAGS.dc_output_path,
+                                               _FLAGS.force_fetch),
                    indent=2))
 
 
