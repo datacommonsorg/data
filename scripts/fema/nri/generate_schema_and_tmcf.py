@@ -11,6 +11,8 @@ TMCF_OUTFILE_FILENAME = "fema_nri_counties.tmcf"
 
 # flags
 FLAG_SKIP_EAL_COMPONENTS = True # skip {Annualized Frequency, Historic Loss Ratio, Exposure}
+FLAG_SKIP_IMPACTED_THING_COMPONENTS = True # skip {Building, Population, Population Equivalence, Agriculture}
+FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES = True # skip {Rating, National Percentile, State Percentile}
 
 # hard coded lists of interest
 IGNORED_FIELDS = [
@@ -44,7 +46,20 @@ IGNORED_FIELDS = [
 		"HIFLD_TYPE"
 ]
 COMPOSITE_ROW_LAYERS = ["National Risk Index", "Expected Annual Loss", "Social Vulnerability", "Community Resilience"]
-EAL_COMPONENTS = ["Annualized Frequency", "Historic Loss Ratio", "Exposure"]
+EAL_COMPONENTS = ["Number of Events", "Annualized Frequency", "Historic Loss Ratio", "Exposure"]
+IMPACTED_THING_COMPONENTS = ["Building", "Population", "Agriculture"]
+NON_SCORE_RELATIVE_MEASURES = ["Rating", "Percentile"]
+
+# if field alias includes any of these strings, skip that row from the schema and TMCF generation
+FIELD_ALIAS_STRINGS_TO_SKIP = []
+
+if FLAG_SKIP_EAL_COMPONENTS:
+	FIELD_ALIAS_STRINGS_TO_SKIP.extend(EAL_COMPONENTS)
+if FLAG_SKIP_IMPACTED_THING_COMPONENTS:
+	FIELD_ALIAS_STRINGS_TO_SKIP.extend(IMPACTED_THING_COMPONENTS)
+if FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES:
+	FIELD_ALIAS_STRINGS_TO_SKIP.extend(NON_SCORE_RELATIVE_MEASURES)
+
 
 # template strings
 COMPOSITE_MCF_FORMAT = """Node: dcid:{nodeDCID}
@@ -197,14 +212,12 @@ tmcf_out = ""
 
 for index, row in dd.iterrows():
 	skipped = False
-	if FLAG_SKIP_EAL_COMPONENTS:
-		is_eal_component = any([eal_comp in row["Field Alias"] for eal_comp in EAL_COMPONENTS])
-		if is_eal_component and not is_composite_row(row):
-			
-			logging.info(f"Skipping individual hazard row {row['Field Alias']}" + 
-			" because it is an EAL component and FLAG_SKIP_EAL_COMPONENTS is {FLAG_SKIP_EAL_COMPONENTS}")
-			
-			skipped = True
+
+	should_skip_component = any([eal_comp in row["Field Alias"] for eal_comp in FIELD_ALIAS_STRINGS_TO_SKIP])
+	if should_skip_component :
+		logging.info(f"Skipping individual hazard row {row['Field Alias']}" + 
+		" because it is an EAL component and FLAG_SKIP_EAL_COMPONENTS is {FLAG_SKIP_EAL_COMPONENTS}")
+		skipped = True
 	
 	if not skipped:
 		statvar_mcf, statvar_dcid = statvar_from_row(row)

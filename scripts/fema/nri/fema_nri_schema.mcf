@@ -4,47 +4,11 @@ populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:NationalRiskIndex
 measurementQualifier: dcs:Score
 
-Node: dcid:NationalRiskIndex_Rating_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:NationalRiskIndex
-measurementQualifier: dcs:Rating
-
-Node: dcid:NationalRiskIndex_NationalPercentile_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:NationalRiskIndex
-measurementQualifier: dcs:NationalPercentile
-
-Node: dcid:NationalRiskIndex_StatePercentile_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:NationalRiskIndex
-measurementQualifier: dcs:StatePercentile
-
 Node: dcid:ExpectedAnnualLoss_Score_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:ExpectedAnnualLoss
 measurementQualifier: dcs:Score
-
-Node: dcid:ExpectedAnnualLoss_Rating_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:ExpectedAnnualLoss
-measurementQualifier: dcs:Rating
-
-Node: dcid:ExpectedAnnualLoss_NationalPercentile_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:ExpectedAnnualLoss
-measurementQualifier: dcs:NationalPercentile
-
-Node: dcid:ExpectedAnnualLoss_StatePercentile_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:ExpectedAnnualLoss
-measurementQualifier: dcs:StatePercentile
 
 Node: dcid:ExpectedAnnualLoss_Total_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
@@ -52,53 +16,11 @@ populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:ExpectedAnnualLoss
 measurementQualifier: dcs:Total
 
-Node: dcid:ExpectedAnnualLoss_BuildingValue_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:ExpectedAnnualLoss
-measurementQualifier: dcs:BuildingValue
-
-Node: dcid:ExpectedAnnualLoss_Population_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:ExpectedAnnualLoss
-measurementQualifier: dcs:Population
-
-Node: dcid:ExpectedAnnualLoss_PopulationEquivalence_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:ExpectedAnnualLoss
-measurementQualifier: dcs:PopulationEquivalence
-
-Node: dcid:ExpectedAnnualLoss_AgricultureValue_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:ExpectedAnnualLoss
-measurementQualifier: dcs:AgricultureValue
-
 Node: dcid:SocialVulnerability_Score_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:SocialVulnerability
 measurementQualifier: dcs:Score
-
-Node: dcid:SocialVulnerability_Rating_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:SocialVulnerability
-measurementQualifier: dcs:Rating
-
-Node: dcid:SocialVulnerability_NationalPercentile_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:SocialVulnerability
-measurementQualifier: dcs:NationalPercentile
-
-Node: dcid:SocialVulnerability_StatePercentile_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:SocialVulnerability
-measurementQualifier: dcs:StatePercentile
 
 Node: dcid:SocialVulnerability_Value_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
@@ -112,54 +34,11 @@ populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:CommunityResilience
 measurementQualifier: dcs:Score
 
-Node: dcid:CommunityResilience_Rating_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:CommunityResilience
-measurementQualifier: dcs:Rating
-
-Node: dcid:CommunityResilience_NationalPercentile_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:CommunityResilience
-measurementQualifier: dcs:NationalPercentile
-
-Node: dcid:CommunityResilience_StatePercentile_NaturalHazardImpact
-typeOf: dcs:StatisticalVariable
-populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:CommunityResilience
-measurementQualifier: dcs:StatePercentile
-
 Node: dcid:CommunityResilience_Value_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:CommunityResilience
 measurementQualifier: dcs:Value
-
-Node: dcid:NumberofEvents_AvalancheEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:AvalancheEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_AvalancheEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:AvalancheEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_AvalancheEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:AvalancheEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_AvalancheEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:AvalancheEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
 
 Node: dcid:ExpectedAnnualLoss_AvalancheEvent
 typeOf: dcs:StatisticalVariable
@@ -172,48 +51,11 @@ populationType: dcs:AvalancheEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_AvalancheEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:AvalancheEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_AvalancheEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:AvalancheEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_AvalancheEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:AvalancheEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_CoastalFloodingEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:CoastalFloodingEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_CoastalFloodingEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:CoastalFloodingEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_CoastalFloodingEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:CoastalFloodingEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_CoastalFloodingEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:CoastalFloodingEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
 
 Node: dcid:ExpectedAnnualLoss_CoastalFloodingEvent
 typeOf: dcs:StatisticalVariable
@@ -226,54 +68,11 @@ populationType: dcs:CoastalFloodingEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_CoastalFloodingEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:CoastalFloodingEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_CoastalFloodingEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:CoastalFloodingEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_CoastalFloodingEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:CoastalFloodingEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_ColdWaveEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:ColdWaveEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_ColdWaveEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:ColdWaveEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_ColdWaveEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:ColdWaveEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_ColdWaveEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:ColdWaveEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
-
-Node: dcid:ExpectedAnnualLoss_ColdWaveEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:ColdWaveEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_ColdWaveEvent
 typeOf: dcs:StatisticalVariable
@@ -286,34 +85,11 @@ populationType: dcs:ColdWaveEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_ColdWaveEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:ColdWaveEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_ColdWaveEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:ColdWaveEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_ColdWaveEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:ColdWaveEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_DroughtEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:DroughtEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_DroughtEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:DroughtEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_DroughtEvent
 typeOf: dcs:StatisticalVariable
@@ -326,48 +102,11 @@ populationType: dcs:DroughtEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_DroughtEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:DroughtEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_DroughtEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:DroughtEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_DroughtEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:DroughtEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_EarthquakeEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:EarthquakeEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_EarthquakeEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:EarthquakeEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_EarthquakeEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:EarthquakeEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_EarthquakeEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:EarthquakeEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
 
 Node: dcid:ExpectedAnnualLoss_EarthquakeEvent
 typeOf: dcs:StatisticalVariable
@@ -380,54 +119,11 @@ populationType: dcs:EarthquakeEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_EarthquakeEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:EarthquakeEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_EarthquakeEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:EarthquakeEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_EarthquakeEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:EarthquakeEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_HailEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HailEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_HailEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HailEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_HailEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HailEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_HailEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HailEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
-
-Node: dcid:ExpectedAnnualLoss_HailEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HailEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_HailEvent
 typeOf: dcs:StatisticalVariable
@@ -440,54 +136,11 @@ populationType: dcs:HailEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_HailEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HailEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_HailEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:HailEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_HailEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HailEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_HeatWaveEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HeatWaveEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_HeatWaveEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HeatWaveEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_HeatWaveEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HeatWaveEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_HeatWaveEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HeatWaveEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
-
-Node: dcid:ExpectedAnnualLoss_HeatWaveEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HeatWaveEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_HeatWaveEvent
 typeOf: dcs:StatisticalVariable
@@ -500,54 +153,11 @@ populationType: dcs:HeatWaveEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_HeatWaveEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HeatWaveEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_HeatWaveEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:HeatWaveEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_HeatWaveEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HeatWaveEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_HurricaneEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HurricaneEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_HurricaneEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HurricaneEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_HurricaneEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HurricaneEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_HurricaneEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HurricaneEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
-
-Node: dcid:ExpectedAnnualLoss_HurricaneEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HurricaneEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_HurricaneEvent
 typeOf: dcs:StatisticalVariable
@@ -560,48 +170,11 @@ populationType: dcs:HurricaneEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_HurricaneEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HurricaneEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_HurricaneEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:HurricaneEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_HurricaneEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:HurricaneEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_IceStormEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:IceStormEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_IceStormEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:IceStormEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_IceStormEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:IceStormEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_IceStormEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:IceStormEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
 
 Node: dcid:ExpectedAnnualLoss_IceStormEvent
 typeOf: dcs:StatisticalVariable
@@ -614,48 +187,11 @@ populationType: dcs:IceStormEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_IceStormEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:IceStormEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_IceStormEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:IceStormEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_IceStormEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:IceStormEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_LandslideEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LandslideEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_LandslideEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LandslideEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_LandslideEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LandslideEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_LandslideEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LandslideEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
 
 Node: dcid:ExpectedAnnualLoss_LandslideEvent
 typeOf: dcs:StatisticalVariable
@@ -668,48 +204,11 @@ populationType: dcs:LandslideEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_LandslideEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LandslideEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_LandslideEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:LandslideEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_LandslideEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LandslideEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_LightningEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LightningEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_LightningEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LightningEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_LightningEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LightningEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_LightningEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LightningEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
 
 Node: dcid:ExpectedAnnualLoss_LightningEvent
 typeOf: dcs:StatisticalVariable
@@ -722,54 +221,11 @@ populationType: dcs:LightningEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_LightningEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LightningEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_LightningEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:LightningEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_LightningEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:LightningEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_RiverineFloodingEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:RiverineFloodingEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_RiverineFloodingEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:RiverineFloodingEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_RiverineFloodingEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:RiverineFloodingEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_RiverineFloodingEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:RiverineFloodingEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
-
-Node: dcid:ExpectedAnnualLoss_RiverineFloodingEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:RiverineFloodingEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_RiverineFloodingEvent
 typeOf: dcs:StatisticalVariable
@@ -782,54 +238,11 @@ populationType: dcs:RiverineFloodingEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_RiverineFloodingEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:RiverineFloodingEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_RiverineFloodingEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:RiverineFloodingEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_RiverineFloodingEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:RiverineFloodingEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_StrongWindEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:StrongWindEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_StrongWindEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:StrongWindEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_StrongWindEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:StrongWindEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_StrongWindEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:StrongWindEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
-
-Node: dcid:ExpectedAnnualLoss_StrongWindEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:StrongWindEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_StrongWindEvent
 typeOf: dcs:StatisticalVariable
@@ -842,54 +255,11 @@ populationType: dcs:StrongWindEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_StrongWindEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:StrongWindEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_StrongWindEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:StrongWindEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_StrongWindEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:StrongWindEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_TornadoEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TornadoEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_TornadoEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TornadoEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_TornadoEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TornadoEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_TornadoEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TornadoEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
-
-Node: dcid:ExpectedAnnualLoss_TornadoEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TornadoEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_TornadoEvent
 typeOf: dcs:StatisticalVariable
@@ -902,48 +272,11 @@ populationType: dcs:TornadoEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_TornadoEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TornadoEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_TornadoEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:TornadoEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_TornadoEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TornadoEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_TsunamiEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TsunamiEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_TsunamiEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TsunamiEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_TsunamiEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TsunamiEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_TsunamiEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TsunamiEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
 
 Node: dcid:ExpectedAnnualLoss_TsunamiEvent
 typeOf: dcs:StatisticalVariable
@@ -956,48 +289,11 @@ populationType: dcs:TsunamiEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_TsunamiEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TsunamiEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_TsunamiEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:TsunamiEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_TsunamiEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:TsunamiEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_VolcanicActivityEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:VolcanicActivityEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_VolcanicActivityEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:VolcanicActivityEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_VolcanicActivityEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:VolcanicActivityEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_VolcanicActivityEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:VolcanicActivityEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
 
 Node: dcid:ExpectedAnnualLoss_VolcanicActivityEvent
 typeOf: dcs:StatisticalVariable
@@ -1010,54 +306,11 @@ populationType: dcs:VolcanicActivityEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_VolcanicActivityEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:VolcanicActivityEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_VolcanicActivityEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:VolcanicActivityEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_VolcanicActivityEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:VolcanicActivityEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_WildfireEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WildfireEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_WildfireEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WildfireEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_WildfireEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WildfireEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_WildfireEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WildfireEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
-
-Node: dcid:ExpectedAnnualLoss_WildfireEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WildfireEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_WildfireEvent
 typeOf: dcs:StatisticalVariable
@@ -1070,54 +323,11 @@ populationType: dcs:WildfireEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_WildfireEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WildfireEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_WildfireEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:WildfireEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_WildfireEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WildfireEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
-
-Node: dcid:NumberofEvents_WinterWeatherEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WinterWeatherEvent
-measuredProperty: NumberofEvents
-
-Node: dcid:ExpectedAnnualLoss_WinterWeatherEvent_BuildingValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WinterWeatherEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: BuildingValue
-
-Node: dcid:Count_ExpectedAnnualLoss_WinterWeatherEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WinterWeatherEvent
-measuredProperty: ExpectedAnnualLoss
-statType: Count
-impactedThing: Population
-
-Node: dcid:ValueOfStatisticalLifeEquivalent_ExpectedAnnualLoss_WinterWeatherEvent_Population
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WinterWeatherEvent
-measuredProperty: ExpectedAnnualLoss
-statType: ValueOfStatisticalLifeEquivalent
-impactedThing: Population
-
-Node: dcid:ExpectedAnnualLoss_WinterWeatherEvent_AgricultureValue
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WinterWeatherEvent
-measuredProperty: ExpectedAnnualLoss
-impactedThing: AgricultureValue
 
 Node: dcid:ExpectedAnnualLoss_WinterWeatherEvent
 typeOf: dcs:StatisticalVariable
@@ -1130,21 +340,9 @@ populationType: dcs:WinterWeatherEvent
 measuredProperty: ExpectedAnnualLoss
 measurementQualifier: Score
 
-Node: dcid:Rating_ExpectedAnnualLoss_WinterWeatherEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WinterWeatherEvent
-measuredProperty: ExpectedAnnualLoss
-measurementQualifier: Rating
-
 Node: dcid:Score_HazardTypeRiskIndex_WinterWeatherEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:WinterWeatherEvent
 measuredProperty: HazardTypeRiskIndex
 measurementQualifier: Score
-
-Node: dcid:Rating_HazardTypeRiskIndex_WinterWeatherEvent
-typeOf: dcs:StatisticalVariable
-populationType: dcs:WinterWeatherEvent
-measuredProperty: HazardTypeRiskIndex
-measurementQualifier: Rating
 
