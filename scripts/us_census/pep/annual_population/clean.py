@@ -15,13 +15,20 @@
 This Python Script contains methods to clean the county, state datasets
 """
 import os
-#import sys
+import sys
 import pandas as pd
+
+module_dir_ = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, os.path.join(module_dir_, '../../../../util'))
+# pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-order
+# pylint: disable=import-error
+import util.alpha2_to_dcid as alpha2todcid
 from fips_to_state import FIPSCODE
-from util import alpha2_to_dcid as alpha2todcid
 #module_dir_ = os.path.dirname(os.path.realpath(__file__))
 #sys.path.insert(1, os.path.join(module_dir_, '../../../../'))
 #from util import alpha2_to_dcid as alpha2todcid
+
 
 def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
     """
@@ -40,8 +47,10 @@ def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
         df = df.reset_index().drop(columns=["index"])
     return df
 
+
 def find_file_format(path: str) -> str:
     return os.path.splitext(path)[-1]
+
 
 def _move_data_to_right(df: pd.DataFrame, row_index: list) -> pd.DataFrame:
     """
@@ -59,6 +68,7 @@ def _move_data_to_right(df: pd.DataFrame, row_index: list) -> pd.DataFrame:
             df.iloc[row, idx] = df.iloc[row, idx - 1]
     return df
 
+
 def _get_nonna_index_for_tmp1(df: pd.DataFrame) -> pd.DataFrame:
     """
     Returns Non-NA index values from tmp1 column
@@ -71,6 +81,7 @@ def _get_nonna_index_for_tmp1(df: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: _description_
     """
     return df[df["tmp1"].notnull()].index.values
+
 
 def _move_data_to_left(df: pd.DataFrame,
                        row_values: list,
@@ -91,12 +102,15 @@ def _move_data_to_left(df: pd.DataFrame,
             df.iloc[row, idx] = df.iloc[row, idx + 1]
     return df
 
+
 def _get_numeric_index(df: pd.DataFrame, column: str) -> pd.DataFrame:
     return df[df[column].apply(lambda row: row.isnumeric())].index.values
+
 
 def _get_char_index_in_col(df: pd.DataFrame, col: str) -> pd.DataFrame:
     return df[df[col].str.replace(
         ".", "").apply(lambda row: row.isalpha())].index.values
+
 
 def _merge_rows(df: pd.DataFrame, index_list: list, f_idx: int, left_idx: int,
                 right_idx: int) -> pd.DataFrame:
@@ -119,10 +133,11 @@ def _merge_rows(df: pd.DataFrame, index_list: list, f_idx: int, left_idx: int,
             df.iloc[idx - 1, -8:-1] = df.iloc[idx, left_idx:right_idx]
     return df
 
+
 def _clean_county_df(county_df: pd.DataFrame,
                      first_df_cols: list) -> pd.DataFrame:
     """
-
+    Transforms the county DataFrame by data shifting left/right by one column
     Args:
         county_df (pd.DataFrame): County Dataframe
         first_df_cols (list): List of Dataset Columns
@@ -146,17 +161,18 @@ def _clean_county_df(county_df: pd.DataFrame,
     county_df = county_df.reset_index().drop(columns=["index"])
     return county_df
 
+
 def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
                                second_df_cols: list) -> pd.DataFrame:
     """
-
+    Returns the Cleaned DataFrame consists county data from 1970 to 1989
     Args:
         df (pd.DataFrame): Dataframe contains county data from 1970 to 1989
         first_df_cols (list): Columns List from 1970 to 1974 or 1980 to 1984
         second_df_cols (list): Columns List from 1975 to 1979 or 1985 to 1989
 
     Returns:
-        final_df (pd.DataFrame): Returns Transformed County dataframe
+        pd.DataFrame: Cleaned DataFrame
     """
     idx = df[df[0] == "FIPS"].index.values
     next_idx = 0
@@ -179,26 +195,36 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
         next_df = _clean_county_df(next_df, first_df_cols)
         if "1985" in second_df_cols:
             index_list = _get_char_index_in_col(next_df, "1985")
+            # Shifting data to left starting from column at -2 index to -8
             next_df = _move_data_to_left(next_df, index_list, -8, -2)
         if "1980" in first_df_cols:
             index_list = _get_char_index_in_col(initial_df, "1980")
             if len(index_list) > 0:
+                # Shifting data to left starting from column at -1 index to -8
                 initial_df = _move_data_to_left(initial_df, index_list, -8, -1)
                 if initial_df.loc[index_list[0], "tmp2"] is not None:
+                    # Shifting data to left starting
+                    # from column at -1 index to -3
                     initial_df = _move_data_to_left(initial_df, index_list, -3,
                                                     -1)
         if "1970" in first_df_cols:
             index_list = _get_char_index_in_col(initial_df, "1970")
             if len(index_list) > 0:
+                # Shifting data to left starting from column at -1 index to -7
                 initial_df = _move_data_to_left(initial_df, index_list, -7, -1)
                 if initial_df.loc[index_list[0], "tmp2"] is not None:
+                    # Shifting data to left starting from column at -3
+                    #  index to -1
                     initial_df = _move_data_to_left(initial_df, index_list, -3,
                                                     -1)
         if "1975" in second_df_cols:
             index_list = _get_char_index_in_col(next_df, "1975")
             if len(index_list) > 0:
+                # Shifting data to left starting from column at -1 index to -7
                 next_df = _move_data_to_left(next_df, index_list, -7, -1)
                 if next_df.loc[index_list[0], "tmp2"] is not None:
+                    # Shifting data to left starting from
+                    # column at -1 index to -1
                     next_df = _move_data_to_left(next_df, index_list, -3, -1)
         next_df = initial_df.merge(next_df,
                                    how="inner",
@@ -217,7 +243,8 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
 def _create_final_file(op_tmp_file: str, search_string: str,
                        op_file: str) -> None:
     """
-
+    Creates Final CSV File using files created
+    thru _create_intermediate_file method
     Args:
         op_tmp_file (str): Output temp File path
         search_string (str): Search String in File
@@ -244,10 +271,12 @@ def _create_final_file(op_tmp_file: str, search_string: str,
                     op.write("\n" + k + "," + state_name + "," +
                              v.replace(",", ""))
 
+
 def _create_intermediate_file(ip_file: str, temp_file1: str, temp_file2: str,
                               search_string1: str, search_string2: str) -> None:
     """
-
+    Reads txt file and creates Intermediate files
+    which are further processed to create final CSV file
     Args:
         ip_file (str): Input File Path
         temp_file1 (str): Temporary File Path
@@ -272,9 +301,10 @@ def _create_intermediate_file(ip_file: str, temp_file1: str, temp_file2: str,
                     elif flag2:
                         temp_file_2.write(line)
 
+
 def process_states_1970_1979(file_path: str) -> pd.DataFrame:
     """
-
+    Returns the Cleaned DataFrame consists states data from 1970 to 1989
     Args:
         file_path (str): Input File Path
 
@@ -323,13 +353,13 @@ def process_states_1970_1979(file_path: str) -> pd.DataFrame:
 
 def process_states_1980_1989(file_path: str) -> pd.DataFrame:
     """
-
+    Returns the Cleaned DataFrame consists
+    States data from 1980 to 1989
     Args:
         file_path (str): Input File Path
 
     Returns:
-        pd.DataFrame: DataFrame with Processed States Data
-                      from 1980 to 1989
+        pd.DataFrame: Cleaned DataFrame
     """
     with open(file_path, "r", encoding="UTF-8") as file:
         search_str1 = "4/80cen     7/81      7/82      7/83      7/84"
@@ -378,7 +408,7 @@ def process_states_1980_1989(file_path: str) -> pd.DataFrame:
 
 def process_states_1990_1999(file_path: str) -> pd.DataFrame:
     """
-
+    Returns the Cleaned DataFrame consists states data from 1990 to 1999
     Args:
         file_path (str): Input File Path
 
@@ -397,33 +427,38 @@ def process_states_1990_1999(file_path: str) -> pd.DataFrame:
             flag = None
             start = False
             for line in file.readlines():
+                # Skipping unwanted Lines
                 if len(line.strip()) == 0:
                     continue
+                # Skipping unwanted Lines
                 if line.startswith("------"):
                     flag = True
                     continue
+                # Skipping unwanted Lines
                 if line.startswith("Documentation Notes"):
                     flag = False
                     continue
+                # Skipping unwanted Lines
                 if search_str1 in line.strip():
                     flag = True
                     cols = ["1999", "1998", "1997", "1996", "1995", "1994"]
                     continue
+                # Skipping unwanted Lines
                 if search_str2 in line.strip():
                     flag = True
                     cols = ["1993", "1992", "1991", "1990"]
                     continue
+                # Processing the actual data rows
                 if flag:
                     data = line.split(" ")
-
                     data = [val.strip() for val in data if val != '']
-                    #print(data)
                     for idx, val in enumerate(data):
                         if val.isnumeric():
                             continue
                         if idx > 1:
                             data[1] = data[1] + val
                             data[idx] = ''
+                    # Skiping extra empty spaces
                     data = [val.strip() for val in data if val != '']
                     loc = data[1]
                     if loc == "Alabama":
@@ -442,7 +477,7 @@ def process_states_1900_1969(states_config: dict, file_path: str,
                              file_name: str,
                              scaling_factor: int) -> pd.DataFrame:
     """
-
+    Returns the Cleaned DataFrame consists states data from 1990 to 1999
     Args:
         states_config (dict): dict of states file config
         file_path (str): Input File Path
@@ -459,7 +494,7 @@ def process_states_1900_1969(states_config: dict, file_path: str,
     s2 = conf['search_string_2']
     op_file_name = conf['op_file_name']
     final_file_path = op_file_name + ".csv"
-
+    # Creating intermediates Files
     _create_intermediate_file(file_path, temp_file1, temp_file2, s1, s2)
     _create_final_file(temp_file1, s1, op_file_name)
     _create_final_file(temp_file2, s2, op_file_name)

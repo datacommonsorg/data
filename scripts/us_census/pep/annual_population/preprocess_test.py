@@ -18,7 +18,7 @@ Script to automate the testing for USA Population preprocess script.
 import os
 import unittest
 from os import path
-from preprocess import USCensusPEPAnnualPopulation
+from .preprocess import USCensusPEPAnnualPopulation
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 test_data_folder = os.path.join(module_dir_, "test_data")

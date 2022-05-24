@@ -24,21 +24,18 @@ import pandas as pd
 from absl import app
 from absl import flags
 
-
-from clean import (clean_df, clean_1970_1989_county_txt,
-                   process_states_1900_1969, process_states_1970_1979,
-                   process_states_1980_1989, process_states_1990_1999)
-
-print("Paths")
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(module_dir_, '../../../../'))
 print(sys.path)
-print(os.path.dirname(os.path.abspath(__file__)))
-sys.exit(0)
 
-from util import alpha2_to_dcid as alpha2todcid
-from util import county_to_dcid as countytodcid
-from util import name_to_alpha2 as statetoshortform
+# pylint: disable=wrong-import-position
+# pylint: disable=import-error
+from clean import (clean_df, clean_1970_1989_county_txt,
+                   process_states_1900_1969, process_states_1970_1979,
+                   process_states_1980_1989, process_states_1990_1999)
+import util.alpha2_to_dcid as alpha2todcid
+import util.name_to_alpha2 as statetoshortform
+import util.county_to_dcid as countytodcid
 
 USSTATE_MAP = alpha2todcid.USSTATE_MAP
 COUNTY_MAP = countytodcid.COUNTY_MAP
@@ -445,8 +442,10 @@ def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
             cols = None
             flag = None
             for line in ipfile.readlines():
+                # Skipping Unwanted Lines
                 if len(line.strip()) == 0:
                     continue
+                # Skipping Unwanted Lines
                 if line.startswith("Block 2 of 2:") or line.startswith(
                         "Abbreviations:"):
                     flag = False
@@ -459,6 +458,7 @@ def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
                     flag = True
                     cols = ["1993", "1992", "1991", "1990"]
                     continue
+                # Processing Actual data rows
                 if flag:
                     #print(line)
                     data = line.split(" ")
