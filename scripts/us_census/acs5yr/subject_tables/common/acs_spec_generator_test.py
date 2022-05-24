@@ -19,7 +19,7 @@ import tempfile
 from .acs_spec_generator import *
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-_TEST_ZIP = os.path.join(_SCRIPT_PATH, 'testdata', 'S2303_alabama_2019.zip')
+_TEST_ZIP = os.path.join(_SCRIPT_PATH, 'testdata', 's2702_alabama.zip')
 _EXPECTED_SPEC_PATH = os.path.join(_SCRIPT_PATH, 'testdata',
                                    'expected_generated_spec.json')
 
@@ -38,6 +38,10 @@ class TestSpecGenerator(unittest.TestCase):
             guess_spec = create_new_spec(all_columns,
                                          combined_spec_out,
                                          output_path=tmp_dir)
+
+            # Sorting values in spec if they are of type list.
+            guess_spec['ignoreColumns XXXXX'].sort()
+            guess_spec['ignoreTokens XXXXX'].sort()
 
             # inferredSpec and universePVs are not deterministic.
             del guess_spec['inferredSpec']
