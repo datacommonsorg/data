@@ -67,62 +67,6 @@
             "Female": "Female"
         }
     },
-    "inferredSpec": {
-        "gender": {
-            "age": "[15 19 Years]"
-        }
-    },
-    "universePVs": [
-        {
-            "populationType": "Person",
-            "constraintProperties": [
-                "workStatus"
-            ],
-            "dependentPVs": {
-                "age": "[16 64 Years]"
-            }
-        },
-        {
-            "populationType": "Person",
-            "constraintProperties": [
-                "workPeriod"
-            ],
-            "dependentPVs": {
-                "workStatus": "WorkedInThePast12Months",
-                "age": "[16 64 Years]"
-            }
-        },
-        {
-            "populationType": "Person",
-            "constraintProperties": [
-                "usualHoursWorked"
-            ],
-            "dependentPVs": {
-                "workStatus": "WorkedInThePast12Months",
-                "age": "[16 64 Years]"
-            }
-        },
-        {
-            "populationType": "Person",
-            "obs_props": {
-                "mprop": "earnings"
-            },
-            "dependentPVs": {
-                "incomeStatus": "WithEarnings"
-            }
-        },
-        {
-            "populationType": "Person",
-            "constraintProperties": [],
-            "obs_props": {
-                "mprop": "earnings"
-            },
-            "dependentPVs": {
-                "age": "[16 - Years]",
-                "incomeStatus": "WithEarnings"
-            }
-        }
-    ],
     "denominators": {},
     "ignoreColumns XXXXX": [
         "Estimate!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",

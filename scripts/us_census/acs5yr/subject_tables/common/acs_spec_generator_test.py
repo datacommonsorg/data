@@ -43,6 +43,10 @@ class TestSpecGenerator(unittest.TestCase):
             guess_spec['ignoreColumns XXXXX'].sort()
             guess_spec['ignoreTokens XXXXX'].sort()
 
+            # inferredSpec and universePVs are not deterministic.
+            del guess_spec['inferredSpec']
+            del guess_spec['universePVs']
+
             f = open(_EXPECTED_SPEC_PATH, 'r')
             expected_spec = json.load(f)
             f.close()
