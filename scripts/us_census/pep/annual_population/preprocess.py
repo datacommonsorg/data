@@ -312,21 +312,21 @@ def _process_county_e8089co_e7079co(file_path: str) -> pd.DataFrame:
     skip_rows = 23
     first_df_cols = [
         "Fips_Code", "Location", "Tmp_Row", "1970", "1971", "1972", "1973",
-        "1974", "tmp1", "tmp2"
+        "1974", "extra_data_col_1", "extra_data_col_2"
     ]
     second_df_cols = [
         "Fips_Code", "Location", "Tmp_Row", "1975", "1976", "1977", "1978",
-        "1979", "tmp1", "tmp2"
+        "1979", "extra_data_col_1", "extra_data_col_2"
     ]
     if "e8089co.txt" in file_path:
         skip_rows = 0
         first_df_cols = [
             "Fips_Code", "Location", "Tmp_Row", "1980", "1981", "1982", "1983",
-            "1984", "tmp1", "tmp2"
+            "1984", "extra_data_col_1", "extra_data_col_2"
         ]
         second_df_cols = [
             "Fips_Code", "Location", "Tmp_Row", "1985", "1986", "1987", "1988",
-            "1989", "tmp1", "tmp2"
+            "1989", "extra_data_col_1", "extra_data_col_2"
         ]
     df = _load_df(file_path, "txt", None, skip_rows)
     df = clean_1970_1989_county_txt(df, first_df_cols, second_df_cols)
@@ -390,7 +390,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         df = _process_county_coest2020(file_path)
     elif "co-est2021" in file_path:
         df = _load_df(file_path, "xlsx", header=3)
-        df.columns = ["Location", "tmp1", "tmp2", "2021"]
+        df.columns = ["Location", "extra_data_col_1", "extra_data_col_2", "2021"]
         df = _transpose_df(df, "Location", ["2021"])
         df = df.dropna(subset=["Count_Person"])
         df["Count_Person"] = df["Count_Person"].astype('int')
