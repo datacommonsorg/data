@@ -145,8 +145,6 @@ def statvar_from_composite_row(row):
 def statvar_from_individual_hazard_row(row):
 	"""
 	Helper function for statvar_from_row()
-
-	NOTE: until import document gets more comments, this script is implemented for approach 1.
 	"""
 
 	hazardType = drop_spaces(get_nth_dash_from_field_alias(row, 0)) + "Event"
