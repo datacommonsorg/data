@@ -39,10 +39,6 @@ class TestSpecGenerator(unittest.TestCase):
                                          combined_spec_out,
                                          output_path=tmp_dir)
 
-            # Sorting values in spec if they are of type list.
-            guess_spec['ignoreColumns XXXXX'].sort()
-            guess_spec['ignoreTokens XXXXX'].sort()
-
             # inferredSpec and universePVs are not deterministic.
             del guess_spec['inferredSpec']
             del guess_spec['universePVs']
