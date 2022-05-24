@@ -26,6 +26,7 @@ import util.alpha2_to_dcid as alpha2todcid
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 
+
 def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
     """
     This Methods cleans the CSV dataset using the key Geographic Area as header
@@ -43,6 +44,7 @@ def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
         df = df.reset_index().drop(columns=["index"])
     return df
 
+
 def _get_fips_code(fips_code: str) -> str:
     """Returns geoID's for the Country, State and counties
 
@@ -58,8 +60,10 @@ def _get_fips_code(fips_code: str) -> str:
         return "geoId/" + fips_code[:2]
     return "geoId/" + fips_code
 
+
 def find_file_format(path: str) -> str:
     return os.path.splitext(path)[-1]
+
 
 def _move_data_to_right(df: pd.DataFrame, row_index: list) -> pd.DataFrame:
     """
