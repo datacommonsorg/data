@@ -37,6 +37,9 @@ class TestSpecGenerator(unittest.TestCase):
                                          combined_spec_out,
                                          output_path=tmp_dir)
 
+            # Sorting keys
+            guess_spec = dict(sorted(guess_spec.items()))
+
             f = open(_EXPECTED_SPEC_PATH, 'r')
             expected_spec = json.load(f)
             f.close()
