@@ -17,13 +17,13 @@ Once the file is downloaded, please rename the filename from `'Superfund
 National Priorities List (NPL) Sites with Status Information.csv'` to
 `superfund_sites_with_status.csv`
 
-Additionally, we use the [Remedy Component Data for Decision Documents by Media, FYs 1982-2017](https://semspub.epa.gov/work/HQ/401063.xlsx) dataset that lists the different remedial actions carried out different superfund sites based on the contaminated media between 1982 to 2017. In this script, this dataset is used to map the ownership type (government-owned, privately-owned) of the site. 
+Additionally, we use the [Remedy Component Data for Decision Documents by Media, FYs 1982-2017](https://semspub.epa.gov/work/HQ/401063.xlsx) dataset that lists the different remedial actions carried out different superfund sites based on the contaminated media between 1982 to 2017. In this script, this dataset is used to map the ownership type (government-owned, privately-owned) of the site.
 
 This file can be downloaded with the [direct link](https://semspub.epa.gov/work/HQ/401063.xlsx) or by finding the dataset by name in the [EPA Superfund page](https://www.epa.gov/superfund/superfund-data-and-reports)
 
-#### Script to generate the clean_csv + tmcf:
+#### Script to generate the clean csv + tmcf:
     For creating the nodes for superfund sites,
-    
+
     ```shell
     python3 process_sites.py
     ```
@@ -35,8 +35,8 @@ This file can be downloaded with the [direct link](https://semspub.epa.gov/work/
     ```
 
     > using the argument `--help` with any of the above commands lists the different command line arguments that is expected.
-    
-The `fundingStatus` dataset requires a StatisticalVariable definition, which is found in the [statvar.mcf](statvar.mcf) file.
+
+The `fundingStatus` dataset requires a StatisticalVariable definition, which is found in the [statvar.mcf](statvar.mcf) file. We use a static statistical variable defintion since there is only one statistical variable that is measured in the observation.
 
 #### Notes
 1. There is another [EPA Superfund Applet](https://epa.maps.arcgis.com/apps/mapviewer/index.html?layers=c2b7cdff579c41bbba4898400aa38815) that lists more superfund sites but we had difficulties finding a means to export this data to csv.
