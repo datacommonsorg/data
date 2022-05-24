@@ -19,14 +19,12 @@ import tempfile
 from .acs_spec_generator import *
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-_TEST_ZIP = os.path.join(_SCRIPT_PATH, 'testdata', 's2702_alabama.zip')
+_TEST_ZIP = os.path.join(_SCRIPT_PATH, 'testdata', 'S2303_alabama_2019.zip')
 _EXPECTED_SPEC_PATH = os.path.join(_SCRIPT_PATH, 'testdata',
                                    'expected_generated_spec.json')
 
 
 class TestSpecGenerator(unittest.TestCase):
-
-    maxDiff = None
 
     def test_spec_generation(self):
         zip_path_list = [_TEST_ZIP]
