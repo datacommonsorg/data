@@ -153,7 +153,7 @@ def statvar_from_individual_hazard_row(row):
 	statType = ""
 	if "Population" in impactedThing:
 		statType = "ValueOfStatisticalLifeEquivalent" if impactedThing == "PopulationEquivalence" else "Count"
-		impactedThing = "Population"
+		impactedThing = "People"
 
 	# create a list of names that might go on the dcid
 	dcid_list = [
