@@ -1,4 +1,4 @@
-# US Census PEP: Population Estimates by Age, Sex, Race and Origin
+# US Census PEP: Population Estimates by Age, Sex and Race
 
 ## About the Dataset
 This dataset has Population Estimates for the National, State and County geographic levels in United States from the year 1900 to 2020 on a yearly basis.
