@@ -45,6 +45,7 @@ class TestSpecGenerator(unittest.TestCase):
             expected_spec = json.load(f)
             f.close()
 
+            self.maxDiff = None
             self.assertEqual(guess_spec, expected_spec)
 
 
