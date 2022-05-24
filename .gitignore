@@ -14,3 +14,5 @@ scripts/india_udise/common/data/3109_*.json
 scripts/india_udise/common/data/3031_*.json
 scripts/us_epa/superfund/**/output
 **/tmp/
+scripts/rff/raw_data/**
+scripts/rff/WeatherVariability_Counties.csv
