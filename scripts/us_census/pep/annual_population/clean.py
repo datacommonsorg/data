@@ -21,17 +21,10 @@ import pandas as pd
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(module_dir_, '../../../../util'))
 # pylint: disable=wrong-import-position
-# pylint: disable=wrong-import-order
 # pylint: disable=import-error
 import util.alpha2_to_dcid as alpha2todcid
-from fips_to_state import FIPSCODE
 # pylint: enable=wrong-import-position
-# pylint: enable=wrong-import-order
 # pylint: enable=import-error
-#module_dir_ = os.path.dirname(os.path.realpath(__file__))
-#sys.path.insert(1, os.path.join(module_dir_, '../../../../'))
-#from util import alpha2_to_dcid as alpha2todcid
-
 
 def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
     """
@@ -50,10 +43,23 @@ def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
         df = df.reset_index().drop(columns=["index"])
     return df
 
+def _get_fips_code(fips_code: str) -> str:
+    """Returns geoID's for the Country, State and counties
+
+    Args:
+        fips_code (str): FIPS Code
+
+    Returns:
+        str: geoId String
+    """
+    if str(fips_code) == "00000":
+        return "country/USA"
+    if str(fips_code)[-3:] == "000" and len(fips_code) == 5:
+        return "geoId/" + fips_code[:2]
+    return "geoId/" + fips_code
 
 def find_file_format(path: str) -> str:
     return os.path.splitext(path)[-1]
-
 
 def _move_data_to_right(df: pd.DataFrame, row_index: list) -> pd.DataFrame:
     """
@@ -235,8 +241,7 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
                                    how="inner",
                                    on="Fips_Code",
                                    suffixes=("", "_right"))
-        next_df["Location"] = next_df["Fips_Code"].apply(
-            lambda row: FIPSCODE.get(row, "geoId/" + row))
+        next_df["Location"] = next_df["Fips_Code"].apply(_get_fips_code)
         if final_df is None:
             final_df = next_df
         else:
