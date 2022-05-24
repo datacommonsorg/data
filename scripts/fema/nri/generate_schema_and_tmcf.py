@@ -1,4 +1,5 @@
 from os import stat
+from pickle import TRUE
 import pandas as pd
 import numpy as np
 import logging
@@ -8,6 +9,10 @@ NRI_DATADICTIONARY_INFILE_FILENAME = "source_data/NRIDataDictionary.csv"
 SCHEMA_OUTFILE_FILENAME = "fema_nri_schema.mcf"
 TMCF_OUTFILE_FILENAME = "fema_nri_counties.tmcf"
 
+# flags
+FLAG_SKIP_EAL_COMPONENTS = True # skip {Annualized Frequency, Historic Loss Ratio, Exposure}
+
+# hard coded lists of interest
 IGNORED_FIELDS = [
 		"OBJECTID",
 		"Shape",
@@ -38,9 +43,10 @@ IGNORED_FIELDS = [
 		"HIFLD_AREA",
 		"HIFLD_TYPE"
 ]
-
 COMPOSITE_ROW_LAYERS = ["National Risk Index", "Expected Annual Loss", "Social Vulnerability", "Community Resilience"]
+EAL_COMPONENTS = ["Annualized Frequency", "Historic Loss Ratio", "Exposure"]
 
+# template strings
 COMPOSITE_MCF_FORMAT = """Node: dcid:{nodeDCID}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
@@ -93,10 +99,12 @@ def statvar_from_row(row):
 	Given a row of NRIDataDictionary, computes the corresponding StatVar Schema.
 	Returns the StatVar MCF node as a string.
 	"""
+
 	if is_composite_row(row):
 		return statvar_from_composite_row(row)
 	else:
 		return statvar_from_individual_hazard_row(row)
+
 
 def is_composite_row(row):
 	"""
@@ -123,7 +131,7 @@ def statvar_from_individual_hazard_row(row):
 	"""
 	Helper function for statvar_from_row()
 
-	NOTE: until import document gets more comments, I am implementing this script for approach 1.
+	NOTE: until import document gets more comments, this script is implemented for approach 1.
 	"""
 
 	hazardType = drop_spaces(get_nth_dash_from_field_alias(row, 0)) + "Event"
@@ -181,17 +189,29 @@ def statvar_from_individual_hazard_row(row):
 dd = pd.read_csv(NRI_DATADICTIONARY_INFILE_FILENAME)
 
 logging.info(f"[info] ignoring {len(IGNORED_FIELDS)} fields in NRIDataDictionary")
-
 dd = dd[~dd["Field Name"].isin(IGNORED_FIELDS)]
 dd = dd.reset_index()
+
 schema_out = ""
 tmcf_out = ""
+
 for index, row in dd.iterrows():
-	statvar_mcf, statvar_dcid = statvar_from_row(row)
-	statobs_tmcf = tmcf_from_row(row, index, statvar_dcid)
+	skipped = False
+	if FLAG_SKIP_EAL_COMPONENTS:
+		is_eal_component = any([eal_comp in row["Field Alias"] for eal_comp in EAL_COMPONENTS])
+		if is_eal_component and not is_composite_row(row):
+			
+			logging.info(f"Skipping individual hazard row {row['Field Alias']}" + 
+			" because it is an EAL component and FLAG_SKIP_EAL_COMPONENTS is {FLAG_SKIP_EAL_COMPONENTS}")
+			
+			skipped = True
 	
-	schema_out += statvar_mcf + "\n"
-	tmcf_out += statobs_tmcf
+	if not skipped:
+		statvar_mcf, statvar_dcid = statvar_from_row(row)
+		statobs_tmcf = tmcf_from_row(row, index, statvar_dcid)
+		
+		schema_out += statvar_mcf + "\n"
+		tmcf_out += statobs_tmcf
 
 with open(SCHEMA_OUTFILE_FILENAME, "w") as outfile:
 	logging.info(f"Writing StatVar MCF to {SCHEMA_OUTFILE_FILENAME}")
