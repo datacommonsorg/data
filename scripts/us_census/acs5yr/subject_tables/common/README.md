@@ -286,25 +286,25 @@ NOTE: This command creates following important files to lookout for:
 
 To generate a guess spec with expected properties or population types:
 ```
-python acs_spec_compiler.py --guess_new_spec --zip_list=../sample_data/s1810.zip --expected_populations=Person,Household --expected_properties=occupancyTenure
+python acs_spec_generator.py --guess_new_spec --zip_list=../sample_data/s1810.zip --expected_populations=Person,Household --expected_properties=occupancyTenure
 ```
 This will look for properties on DataCommons API and add placeholders for available enum values
 
 
 To create a union of all specs:
 ```
-python acs_spec_compiler.py --create_union_spec
+python acs_spec_generator.py --create_union_spec
 ```
 NOTE: The output is also stored in file 'union_spec.json'
 
 If the specs are present in some other directory:
 ```
-python acs_spec_compiler.py --create_union_spec --spec_dir=<path to dir>
+python acs_spec_generator.py --create_union_spec --spec_dir=<path to dir>
 ```
 
 To get a list of properties available in the union of all specs:
 ```
-python acs_spec_compiler.py --get_combined_property_list
+python acs_spec_generator.py --get_combined_property_list
 ```
 Other available flags from common_utils:
 - is_metadata
