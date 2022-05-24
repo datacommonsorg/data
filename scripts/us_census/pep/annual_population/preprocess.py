@@ -390,7 +390,9 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         df = _process_county_coest2020(file_path)
     elif "co-est2021" in file_path:
         df = _load_df(file_path, "xlsx", header=3)
-        df.columns = ["Location", "extra_data_col_1", "extra_data_col_2", "2021"]
+        df.columns = [
+            "Location", "extra_data_col_1", "extra_data_col_2", "2021"
+        ]
         df = _transpose_df(df, "Location", ["2021"])
         df = df.dropna(subset=["Count_Person"])
         df["Count_Person"] = df["Count_Person"].astype('int')

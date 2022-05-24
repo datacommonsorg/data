@@ -202,7 +202,8 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
             if len(index_list) > 0:
                 # Shifting data to left starting from column at -1 index to -8
                 initial_df = _move_data_to_left(initial_df, index_list, -8, -1)
-                if initial_df.loc[index_list[0], "extra_data_col_2"] is not None:
+                if initial_df.loc[index_list[0],
+                                  "extra_data_col_2"] is not None:
                     # Shifting data to left starting
                     # from column at -1 index to -3
                     initial_df = _move_data_to_left(initial_df, index_list, -3,
@@ -212,7 +213,8 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
             if len(index_list) > 0:
                 # Shifting data to left starting from column at -1 index to -7
                 initial_df = _move_data_to_left(initial_df, index_list, -7, -1)
-                if initial_df.loc[index_list[0], "extra_data_col_2"] is not None:
+                if initial_df.loc[index_list[0],
+                                  "extra_data_col_2"] is not None:
                     # Shifting data to left starting from column at -3
                     #  index to -1
                     initial_df = _move_data_to_left(initial_df, index_list, -3,
