@@ -22,7 +22,7 @@ from .process import S2303SubjectTableDataLoader
 
 _TEST_DIR = os.path.join(_CODEDIR, 'testdata')
 _TEST_DATA_ZIP = os.path.join(_TEST_DIR, 'alabama.zip')
-_CONFIG_PATH = os.path.join(_CODEDIR, 'config.json')
+_CONFIG_PATH = os.path.join(_CODEDIR, 'S2303_spec.json')
 _EXPECTED_TMCF = os.path.join(_TEST_DIR, 'output.tmcf')
 _EXPECTED_MCF = os.path.join(_TEST_DIR, 'output.mcf')
 _EXPECTED_CSV = os.path.join(_TEST_DIR, 'expected.csv')

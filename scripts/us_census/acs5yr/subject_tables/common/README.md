@@ -264,7 +264,7 @@ Save a copy of the generated spec if it is modified. Running the script again wi
 
 Check the missing_report.json file for list of columns that need attention
 
-The script creates a 'compiled spec' which contains everythin from all the specs present in the spec_dir
+The script creates a 'compiled spec' which contains everything from all the specs present in the spec_dir
 
 It then proceeds to split 'compiled spec' in 2 parts:
 - keeping the parts where token match occours
@@ -274,7 +274,7 @@ It then proceeds to split 'compiled spec' in 2 parts:
 
 To generate a guess spec:
 ```
-python acs_spec_compiler.py --guess_new_spec --zip_list=../sample_data/s1810.zip
+python acs_spec_generator.py --guess_new_spec --zip_list=../sample_data/s1810.zip
 ```
 NOTE: This command creates following important files to lookout for:
 - generate_spec.json: This is the guessed spec for the input file
