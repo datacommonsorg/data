@@ -37,8 +37,9 @@ class TestSpecGenerator(unittest.TestCase):
                                          combined_spec_out,
                                          output_path=tmp_dir)
 
-            # Sorting keys
-            guess_spec = dict(sorted(guess_spec.items()))
+            # Sorting values in spec if they are of type list.
+            guess_spec['ignoreColumns XXXXX'].sort()
+            guess_spec['ignoreTokens XXXXX'].sort()
 
             f = open(_EXPECTED_SPEC_PATH, 'r')
             expected_spec = json.load(f)
