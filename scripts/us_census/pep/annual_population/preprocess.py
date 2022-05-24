@@ -36,6 +36,8 @@ from clean import (clean_df, clean_1970_1989_county_txt,
 import util.alpha2_to_dcid as alpha2todcid
 import util.name_to_alpha2 as statetoshortform
 import util.county_to_dcid as countytodcid
+# pylint: enable=wrong-import-position
+# pylint: enable=import-error
 
 USSTATE_MAP = alpha2todcid.USSTATE_MAP
 COUNTY_MAP = countytodcid.COUNTY_MAP

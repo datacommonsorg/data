@@ -25,6 +25,9 @@ sys.path.insert(1, os.path.join(module_dir_, '../../../../util'))
 # pylint: disable=import-error
 import util.alpha2_to_dcid as alpha2todcid
 from fips_to_state import FIPSCODE
+# pylint: enable=wrong-import-position
+# pylint: enable=wrong-import-order
+# pylint: enable=import-error
 #module_dir_ = os.path.dirname(os.path.realpath(__file__))
 #sys.path.insert(1, os.path.join(module_dir_, '../../../../'))
 #from util import alpha2_to_dcid as alpha2todcid

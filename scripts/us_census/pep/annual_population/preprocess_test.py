@@ -20,6 +20,7 @@ import unittest
 from os import path
 # pylint: disable=import-error
 from preprocess import USCensusPEPAnnualPopulation
+# pylint: enable=import-error
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 test_data_folder = os.path.join(module_dir_, "test_data")
