@@ -204,7 +204,7 @@ def statvar_from_individual_hazard_row(row):
   # join the rest with underscores to obtain the final dcid
   dcid = "_".join(dcid_list)
 
-  formatted = HAZARD_MCF_FORMAT_BASE_APPR1.format(
+  formatted = HAZARD_MCF_FORMAT_BASE.format(
       nodeDCID=dcid, hazType=hazardType, mProp=drop_spaces(measuredProperty))
 
   if statType:
