@@ -1,6 +1,7 @@
 # todo: remove duplicate schemas
-# these are generated because part of what the dataset considers to be different measures,
-# we consider it as different units measuring the same StatisticalVariable
+# these are generated because part of what the dataset considers to be different
+# measures, we consider it as different units measuring the same
+# StatisticalVariable
 
 import pandas as pd
 import numpy as np
@@ -11,10 +12,13 @@ NRI_DATADICTIONARY_INFILE_FILENAME = "source_data/NRIDataDictionary.csv"
 SCHEMA_OUTFILE_FILENAME = "output/fema_nri_schema.mcf"
 TMCF_OUTFILE_FILENAME = "output/fema_nri_counties.tmcf"
 
-# flags
-FLAG_SKIP_EAL_COMPONENTS = True  # skip {Annualized Frequency, Historic Loss Ratio, Exposure}
-FLAG_SKIP_IMPACTED_THING_COMPONENTS = True  # skip {Building, Population, Population Equivalence, Agriculture}
-FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES = True  # skip {Rating, National Percentile, State Percentile}
+# feature flags
+# skip {Annualized Frequency, Historic Loss Ratio, Exposure}
+FLAG_SKIP_EAL_COMPONENTS = True
+# skip {Building, Population, Population Equivalence, Agriculture}
+FLAG_SKIP_IMPACTED_THING_COMPONENTS = True
+# skip {Rating, National Percentile, State Percentile}
+FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES = True
 
 # hard coded lists of interest
 IGNORED_FIELDS = [
@@ -36,24 +40,24 @@ IMPACTED_THING_COMPONENTS = ["Building", "Population", "Agriculture"]
 NON_SCORE_RELATIVE_MEASURES = ["Rating", "Percentile"]
 
 # template strings
-COMPOSITE_MCF_FORMAT = """Node: dcid:{nodeDCID}
+COMPOSITE_MCF_FORMAT = """Node: dcid:{node_dcid}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:{mProp}
+measuredProperty: dcs:{m_prop}
 """
-HAZARD_MCF_FORMAT_BASE = """Node: dcid:{nodeDCID}
+HAZARD_MCF_FORMAT_BASE = """Node: dcid:{node_dcid}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-naturalHazardType: dcs:{hazType}
-measuredProperty: {mProp}
+naturalHazardType: dcs:{haz_type}
+measuredProperty: {m_prop}
 """
 TMCF_FORMAT = """
 Node: E:FEMA_NRI->E{index}
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{statVarDCID}
+variableMeasured: dcs:{statvar_dcid}
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
-observationDate: "{obsDate}"
-value: C:FEMA_NRI_Counties->{fieldName} 
+observationDate: "{obs_date}"
+value: C:FEMA_NRI_Counties->{field_name} 
 """
 
 # mappings
@@ -84,8 +88,9 @@ def apply_datacommon_alias(string):
 
 def get_nth_dash_from_field_alias(row, i):
   """
-	Given a row containing a list of words separated with dashes surrounded by spaces 
-		in the "Field Alias" column and an index i, finds the i-th string between those dashes.
+	Given a row containing a list of words separated with dashes surrounded by
+        spaces  in the "Field Alias" column and an index i, finds the i-th
+        string between those dashes.
 	Returns the string without the spaces associated with the neighboring dashes.
 	"""
   return row["Field Alias"].split(" - ")[i]
@@ -101,7 +106,8 @@ def drop_spaces(string):
 
 def tmcf_from_row(row, index, statvar_dcid):
   """
-	Given a row of NRIDataDictionary describing a measure, generates the TMCF for that StatVar.
+	Given a row of NRIDataDictionary describing a measure, generates the TMCF
+    for that StatVar.
 	Returns the TMCF as a string.
 	"""
 
@@ -110,7 +116,7 @@ def tmcf_from_row(row, index, statvar_dcid):
   return TMCF_FORMAT.format(
       index=index,
       statvar_dcid=statvar_dcid,
-      obsDate=row["Version"],
+      obs_date=row["Version"],
       field_name=row["Field Name"])
 
 
@@ -128,8 +134,8 @@ def statvar_from_row(row):
 
 def is_composite_row(row):
   """
-	Given a row of NRIDataDictionary, computes whether that row is a measure of all hazards
-		in aggregate (composite).
+	Given a row of NRIDataDictionary, computes whether that row is a measure of 
+        all hazards in aggregate (composite).
 	Returns boolean True if so, False otherwise.
 	"""
   return row["Relevant Layer"] in COMPOSITE_ROW_LAYERS
@@ -138,7 +144,8 @@ def is_composite_row(row):
 def statvar_from_composite_row(row):
   """
 	Helper function for statvar_from_row().
-	Processes rows that represent data at the composite level (all hazards combined)
+	Processes rows that represent data at the composite level (all hazards
+    combined)
 	"""
   measuredProperty = apply_datacommon_alias(
       drop_spaces(get_nth_dash_from_field_alias(row, 0)))
@@ -150,7 +157,8 @@ def statvar_from_composite_row(row):
   else:
     dcid = f"{measuredProperty}_NaturalHazardImpact"
 
-  formatted = COMPOSITE_MCF_FORMAT.format(nodeDCID=dcid, mProp=measuredProperty)
+  formatted = COMPOSITE_MCF_FORMAT.format(
+      node_dcid=dcid, m_prop=measuredProperty)
 
   if measuredProperty == "ExpectedLoss":
     formatted += "measurementQualifier: Annual\n"
@@ -169,7 +177,7 @@ def statvar_from_individual_hazard_row(row):
       get_nth_dash_from_field_alias(row, 1))
 
   unit = ""
-  # we want to cut off score/rating from measuredProperty and make it a unit instead
+  # we want to cut off score/rating from measuredProperty and make it a unit
   if "Score" in measuredProperty or "Rating" in measuredProperty:
     unit = measuredProperty.split(' ')[-1]
     measuredProperty = apply_datacommon_alias(measuredProperty[:-len(unit)])
@@ -189,7 +197,11 @@ def statvar_from_individual_hazard_row(row):
 
   statType = ""
   if "Population" in impactedThing:
-    statType = "ValueOfStatisticalLifeEquivalent" if impactedThing == "PopulationEquivalence" else "Count"
+    if impactedThing == "PopulationEquivalence":
+      statType = "ValueOfStatisticalLifeEquivalent"
+    else:
+      statType = "Count"
+
     impactedThing = "People"
 
   # create a list of names that might go on the dcid
@@ -205,7 +217,7 @@ def statvar_from_individual_hazard_row(row):
   dcid = "_".join(dcid_list)
 
   formatted = HAZARD_MCF_FORMAT_BASE.format(
-      nodeDCID=dcid, hazType=hazardType, mProp=drop_spaces(measuredProperty))
+      node_dcid=dcid, haz_type=hazardType, m_prop=drop_spaces(measuredProperty))
 
   if statType:
     formatted += f"statType: {statType}\n"
@@ -220,8 +232,8 @@ def statvar_from_individual_hazard_row(row):
 
 
 if __name__ == "__main__":
-  # computed variables
-  # if field alias includes any of these strings, we skip that row from the schema and TMCF generation
+  # if field alias includes any of these strings, we skip that row from the
+  # schema and TMCF generation
   field_alias_strings_to_skip = []
 
   if FLAG_SKIP_EAL_COMPONENTS:
@@ -251,9 +263,9 @@ if __name__ == "__main__":
     ])
     if should_skip_component:
       logging.info(
-          f"Skipping individual hazard row {row['Field Alias']}" +
-          " because it is an EAL component and FLAG_SKIP_EAL_COMPONENTS is {FLAG_SKIP_EAL_COMPONENTS}"
-      )
+          (f"Skipping individual hazard row {row['Field Alias']}"
+           " because it is an EAL component and FLAG_SKIP_EAL_COMPONENTS is "
+           f"{FLAG_SKIP_EAL_COMPONENTS}"))
       skipped = True
 
     if not skipped:
