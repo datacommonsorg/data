@@ -104,7 +104,7 @@ def drop_spaces(string):
     return string.replace(" ", "")
 
 
-def tmcf_from_row(row, index, statvar_dcid):
+def tmcf_from_row(row, index, statvar_dcid, unit):
     """
 	Given a row of NRIDataDictionary describing a measure, generates the TMCF
     for that StatVar.
@@ -113,14 +113,19 @@ def tmcf_from_row(row, index, statvar_dcid):
 
     # as of 2022-05-23, the "Version" field for all data is "November 2021"
     # "Field Name" in the data dictionary holds the name of the column in the data CSV
-    return TMCF_FORMAT.format(
+    tmcf = TMCF_FORMAT.format(
         index=index,
         statvar_dcid=statvar_dcid,
         obs_date=row["Version"],
         field_name=row["Field Name"])
 
+    if unit is not None and unit:
+        tmcf += f"unit: {unit}\n"
 
-def schema_and_dcid_from_row(row):
+    return tmcf
+
+
+def schema_and_tmcf_from_row(row, index):
     """
 	Given a row of NRIDataDictionary, computes the corresponding StatVar Schema.
 	Returns the StatVar MCF node as a string.
@@ -136,7 +141,8 @@ def schema_and_dcid_from_row(row):
         schema, statvar_dcid = format_ind_hazard_field_properties_to_schema(
             properties)
 
-    return schema, statvar_dcid
+    statobs_tmcf = tmcf_from_row(row, index, statvar_dcid, properties["unit"])
+    return schema, statobs_tmcf
 
 
 def is_composite_row(row):
@@ -146,6 +152,25 @@ def is_composite_row(row):
 	Returns boolean True if so, False otherwise.
 	"""
     return row["Relevant Layer"] in COMPOSITE_ROW_LAYERS
+
+
+def normalize_unit_for_measured_property(measured_property, unit):
+    """
+    Given a measured_property and unit, normalize it to KG terms.
+    If m_prop is Expected Loss, makes the unit be USD if it is not Score.
+    Otherwise, makes the unit empty if it is not Score.
+    
+    Returns the normalized measured_property and unit as a tuple.
+    """
+
+    if measured_property == "ExpectedLoss":
+        if unit != "FemaNationalRiskScore":
+            unit = "USDollar"
+    else:
+        if unit != "FemaNationalRiskScore":
+            unit = ""
+
+    return measured_property, unit
 
 
 def extract_properties_from_composite_row(row):
@@ -161,6 +186,9 @@ def extract_properties_from_composite_row(row):
         drop_spaces(get_nth_dash_from_field_alias(row, 0)))
     unit = apply_datacommon_alias(
         drop_spaces(get_nth_dash_from_field_alias(row, 1)))
+
+    measured_property, unit = normalize_unit_for_measured_property(
+        measured_property, unit)
 
     return {"measured_property": measured_property, "unit": unit}
 
@@ -212,6 +240,8 @@ def extract_properties_from_ind_hazard_row(row):
         measured_property = apply_datacommon_alias(
             measured_property[:-len(unit)])
         unit = apply_datacommon_alias(unit)
+    measured_property, unit = normalize_unit_for_measured_property(
+        measured_property, unit)
 
     measurement_qualifier = ""
     if measured_property == "ExpectedLoss":
@@ -316,8 +346,7 @@ if __name__ == "__main__":
             skipped = True
 
         if not skipped:
-            statvar_mcf, statvar_dcid = schema_and_dcid_from_row(row)
-            statobs_tmcf = tmcf_from_row(row, index, statvar_dcid)
+            statvar_mcf, statobs_tmcf = schema_and_tmcf_from_row(row, index)
 
             schema_out += statvar_mcf + "\n"
             tmcf_out += statobs_tmcf
