@@ -151,7 +151,8 @@ def is_composite_row(row):
 
 def statvar_from_composite_row(row):
 	"""
-	Helper function for statvar_from_row()
+	Helper function for statvar_from_row().
+	Processes rows that represent data at the composite level (all hazards combined)
 	"""
 	measuredProperty = apply_datacommon_alias(drop_spaces(get_nth_dash_from_field_alias(row, 0)))
 	unit = apply_datacommon_alias(drop_spaces(get_nth_dash_from_field_alias(row, 1)))
@@ -170,7 +171,8 @@ def statvar_from_composite_row(row):
 
 def statvar_from_individual_hazard_row(row):
 	"""
-	Helper function for statvar_from_row()
+	Helper function for statvar_from_row().
+	Processes rows that represent data about individual hazard types.
 	"""
 
 	hazardType = drop_spaces(get_nth_dash_from_field_alias(row, 0)) + "Event"
