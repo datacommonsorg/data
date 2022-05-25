@@ -1,7 +1,7 @@
 
 Node: E:FEMA_NRI->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_NaturalHazardImpact
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->RISK_SCORE 
@@ -22,406 +22,406 @@ value: C:FEMA_NRI_Counties->EAL_VALT
 
 Node: E:FEMA_NRI->E13
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaSocialVulnerability_NaturalHazardImpact
+variableMeasured: dcs:FemaSocialVulnerability_NaturalHazardImpact
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->SOVI_SCORE 
 
 Node: E:FEMA_NRI->E17
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaSocialVulnerability_NaturalHazardImpact
+variableMeasured: dcs:FemaSocialVulnerability_NaturalHazardImpact
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->SOVI_VALUE 
 
 Node: E:FEMA_NRI->E18
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaCommunityResilience_NaturalHazardImpact
+variableMeasured: dcs:FemaCommunityResilience_NaturalHazardImpact
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->RESL_SCORE 
 
 Node: E:FEMA_NRI->E22
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaCommunityResilience_NaturalHazardImpact
+variableMeasured: dcs:FemaCommunityResilience_NaturalHazardImpact
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->RESL_VALUE 
 
 Node: E:FEMA_NRI->E35
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_AvalancheEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_AvalancheEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->AVLN_EALT 
 
 Node: E:FEMA_NRI->E36
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_AvalancheEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_AvalancheEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->AVLN_EALS 
 
 Node: E:FEMA_NRI->E38
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_AvalancheEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_AvalancheEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->AVLN_RISKS 
 
 Node: E:FEMA_NRI->E52
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_CoastalFloodingEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_CoastalFloodingEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->CFLD_EALT 
 
 Node: E:FEMA_NRI->E53
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_CoastalFloodingEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_CoastalFloodingEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->CFLD_EALS 
 
 Node: E:FEMA_NRI->E55
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_CoastalFloodingEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_CoastalFloodingEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->CFLD_RISKS 
 
 Node: E:FEMA_NRI->E72
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_ColdWaveEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_ColdWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->CWAV_EALT 
 
 Node: E:FEMA_NRI->E73
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_ColdWaveEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_ColdWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->CWAV_EALS 
 
 Node: E:FEMA_NRI->E75
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_ColdWaveEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_ColdWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->CWAV_RISKS 
 
 Node: E:FEMA_NRI->E84
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_DroughtEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_DroughtEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->DRGT_EALT 
 
 Node: E:FEMA_NRI->E85
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_DroughtEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_DroughtEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->DRGT_EALS 
 
 Node: E:FEMA_NRI->E87
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_DroughtEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_DroughtEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->DRGT_RISKS 
 
 Node: E:FEMA_NRI->E101
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_EarthquakeEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_EarthquakeEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->ERQK_EALT 
 
 Node: E:FEMA_NRI->E102
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_EarthquakeEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_EarthquakeEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->ERQK_EALS 
 
 Node: E:FEMA_NRI->E104
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_EarthquakeEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_EarthquakeEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->ERQK_RISKS 
 
 Node: E:FEMA_NRI->E121
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_HailEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HailEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->HAIL_EALT 
 
 Node: E:FEMA_NRI->E122
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_HailEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HailEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->HAIL_EALS 
 
 Node: E:FEMA_NRI->E124
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_HailEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HailEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->HAIL_RISKS 
 
 Node: E:FEMA_NRI->E141
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_HeatWaveEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HeatWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->HWAV_EALT 
 
 Node: E:FEMA_NRI->E142
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_HeatWaveEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HeatWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->HWAV_EALS 
 
 Node: E:FEMA_NRI->E144
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_HeatWaveEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HeatWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->HWAV_RISKS 
 
 Node: E:FEMA_NRI->E161
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_HurricaneEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HurricaneEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->HRCN_EALT 
 
 Node: E:FEMA_NRI->E162
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_HurricaneEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HurricaneEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->HRCN_EALS 
 
 Node: E:FEMA_NRI->E164
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_HurricaneEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HurricaneEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->HRCN_RISKS 
 
 Node: E:FEMA_NRI->E178
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_IceStormEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_IceStormEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->ISTM_EALT 
 
 Node: E:FEMA_NRI->E179
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_IceStormEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_IceStormEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->ISTM_EALS 
 
 Node: E:FEMA_NRI->E181
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_IceStormEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_IceStormEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->ISTM_RISKS 
 
 Node: E:FEMA_NRI->E195
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_LandslideEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_LandslideEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->LNDS_EALT 
 
 Node: E:FEMA_NRI->E196
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_LandslideEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_LandslideEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->LNDS_EALS 
 
 Node: E:FEMA_NRI->E198
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_LandslideEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_LandslideEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->LNDS_RISKS 
 
 Node: E:FEMA_NRI->E212
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_LightningEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_LightningEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->LTNG_EALT 
 
 Node: E:FEMA_NRI->E213
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_LightningEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_LightningEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->LTNG_EALS 
 
 Node: E:FEMA_NRI->E215
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_LightningEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_LightningEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->LTNG_RISKS 
 
 Node: E:FEMA_NRI->E232
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_RiverineFloodingEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_RiverineFloodingEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->RFLD_EALT 
 
 Node: E:FEMA_NRI->E233
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_RiverineFloodingEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_RiverineFloodingEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->RFLD_EALS 
 
 Node: E:FEMA_NRI->E235
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_RiverineFloodingEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_RiverineFloodingEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->RFLD_RISKS 
 
 Node: E:FEMA_NRI->E252
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_StrongWindEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_StrongWindEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->SWND_EALT 
 
 Node: E:FEMA_NRI->E253
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_StrongWindEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_StrongWindEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->SWND_EALS 
 
 Node: E:FEMA_NRI->E255
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_StrongWindEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_StrongWindEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->SWND_RISKS 
 
 Node: E:FEMA_NRI->E272
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_TornadoEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_TornadoEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->TRND_EALT 
 
 Node: E:FEMA_NRI->E273
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_TornadoEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_TornadoEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->TRND_EALS 
 
 Node: E:FEMA_NRI->E275
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_TornadoEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_TornadoEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->TRND_RISKS 
 
 Node: E:FEMA_NRI->E289
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_TsunamiEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_TsunamiEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->TSUN_EALT 
 
 Node: E:FEMA_NRI->E290
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_TsunamiEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_TsunamiEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->TSUN_EALS 
 
 Node: E:FEMA_NRI->E292
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_TsunamiEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_TsunamiEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->TSUN_RISKS 
 
 Node: E:FEMA_NRI->E306
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_VolcanicActivityEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_VolcanicActivityEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->VLCN_EALT 
 
 Node: E:FEMA_NRI->E307
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_VolcanicActivityEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_VolcanicActivityEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->VLCN_EALS 
 
 Node: E:FEMA_NRI->E309
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_VolcanicActivityEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_VolcanicActivityEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->VLCN_RISKS 
 
 Node: E:FEMA_NRI->E326
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_WildfireEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_WildfireEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->WFIR_EALT 
 
 Node: E:FEMA_NRI->E327
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_WildfireEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_WildfireEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->WFIR_EALS 
 
 Node: E:FEMA_NRI->E329
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_WildfireEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_WildfireEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->WFIR_RISKS 
 
 Node: E:FEMA_NRI->E346
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_WinterWeatherEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_WinterWeatherEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->WNTW_EALT 
 
 Node: E:FEMA_NRI->E347
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_ExpectedLoss_WinterWeatherEvent
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_WinterWeatherEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->WNTW_EALS 
 
 Node: E:FEMA_NRI->E349
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_WinterWeatherEvent
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_WinterWeatherEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->WNTW_RISKS 
