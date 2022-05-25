@@ -52,11 +52,12 @@ def state1990():
             =df["NHAIANM"]+df["HAIANM"]+df["NHAIANF"]+df["HAIANF"]
         df['AsianOrPacificIslander']=df["NHAPIM"]+df["HAPIM"]+df["NHAPIF"]\
             +df["HAPIF"]
-        df['Male_WhiteAlone']=df["NHWM"]+df["HWM"]
-        df['Female_WhiteAlone']=df["NHWF"]+df["HWF"]
-        df['Male_BlackOrAfricanAmericanAlone']=df["NHBM"]+df["HBM"]
-        df['Female_BlackOrAfricanAmericanAlone']=df["NHBF"]+df["HBF"]
-        df['Male_AmericanIndianAndAlaskaNativeAlone']=df["NHAIANM"]+df["HAIANM"]
+        df['Male_WhiteAlone'] = df["NHWM"] + df["HWM"]
+        df['Female_WhiteAlone'] = df["NHWF"] + df["HWF"]
+        df['Male_BlackOrAfricanAmericanAlone'] = df["NHBM"] + df["HBM"]
+        df['Female_BlackOrAfricanAmericanAlone'] = df["NHBF"] + df["HBF"]
+        df['Male_AmericanIndianAndAlaskaNativeAlone'] = df["NHAIANM"] + df[
+            "HAIANM"]
         df['Female_AmericanIndianAndAlaskaNativeAlone']=\
             df["NHAIANF"]+df["HAIANF"]
         df['Male_AsianOrPacificIslander'] = df["NHAPIM"] + df["HAPIM"]
