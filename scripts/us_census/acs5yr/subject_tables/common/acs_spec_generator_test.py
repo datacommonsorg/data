@@ -26,8 +26,6 @@ _EXPECTED_SPEC_PATH = os.path.join(_SCRIPT_PATH, 'testdata',
 
 class TestSpecGenerator(unittest.TestCase):
 
-    maxDiff = None
-
     def test_spec_generation(self):
         zip_path_list = [_TEST_ZIP]
 
