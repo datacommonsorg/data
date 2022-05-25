@@ -63,11 +63,11 @@ value: C:FEMA_NRI_Counties->{field_name}
 # mappings
 DATACOMMONS_ALIASES = {
     "Score": "FemaNationalRiskScore",
-    "SocialVulnerability": "femaSocialVulnerability",
-    "CommunityResilience": "femaCommunityResilience",
-    "HazardTypeRiskIndex": "femaNaturalHazardRiskIndex",
-    "Hazard Type Risk Index": "femaNaturalHazardRiskIndex",
-    "NationalRiskIndex": "femaNaturalHazardRiskIndex",
+    "SocialVulnerability": "FemaSocialVulnerability",
+    "CommunityResilience": "FemaCommunityResilience",
+    "HazardTypeRiskIndex": "FemaNaturalHazardRiskIndex",
+    "Hazard Type Risk Index": "FemaNaturalHazardRiskIndex",
+    "NationalRiskIndex": "FemaNaturalHazardRiskIndex",
     "Expected Annual Loss": "ExpectedLoss",
     "ExpectedAnnualLoss": "ExpectedLoss"
 }
