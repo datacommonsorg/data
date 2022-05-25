@@ -131,7 +131,7 @@ def _gen_ownership_tmcf():
         f"value: C:EpaParentCompanyOwnership->{_EPA_FACILITY_GHG_ID}",
         f"ownershipPercentage: C:EpaParentCompanyOwnership->{_PERCENT_OWNERSHIP}",
     ]
-    return "\n".join(lines)
+    return "\n".join(lines) + "\n"
 
 
 def _gen_company_tmcf():
@@ -143,7 +143,7 @@ def _gen_company_tmcf():
         f"{_ADDRESS}: C:EpaParentCompanyTable->{_ADDRESS}",
         f"{_CIP}: C:EpaParentCompanyTable->{_CIP}",
     ]
-    return "\n".join(lines)
+    return "\n".join(lines) + "\n"
 
 
 def _gen_svobs_tmcf():
@@ -152,13 +152,13 @@ def _gen_svobs_tmcf():
         'typeOf: dcs:StatVarObservation',
         f'observationAbout: C:EpaParentCompanyStatVarObs->{_PARENT_COMPANY_DCID}',
         f'variableMeasured: C:EpaParentCompanyStatVarObs->{_SV_MEASURED}',
-        f'observationPeriod: \"C:EpaParentCompanyStatVarObs->{_OBSERVATION_PERIOD}\"',
+        f'observationPeriod: C:EpaParentCompanyStatVarObs->{_OBSERVATION_PERIOD}',
         'unit: dcs:MetricTonCO2e',
         'measurementMethod: dcs:dcAggregate/EPA_GHGRP',
         f'value: C:EpaParentCompanyStatVarObs->{_SVO_VAL}',
         f'observationDate: C:EpaParentCompanyStatVarObs->{_OBSERVATION_DATE}',
     ]
-    return "\n".join(lines)
+    return "\n".join(lines) + "\n"
 
 
 def _str(v):

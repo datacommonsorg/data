@@ -44,8 +44,8 @@ percentage and if no percentage is provided it is assumed to be 100.
 3. To validate the import, run the [dc-import](https://github.com/datacommonsorg/import#using-import-tool) tool as:
 
     ```
-    dc-import lint output/table/*
-    dc-import lint output/ownership/* dc_generated/*.mcf
+    dc-import genmcf output/table/*
+    dc-import genmcf output/ownership/* dc_generated/*.mcf
     ```
 
     This produced the following warning counters, where
@@ -63,7 +63,7 @@ percentage and if no percentage is provided it is assumed to be 100.
         "counters": {
           "NumRowSuccesses": "102603",
           "NumPVSuccesses": "820824",
-          "Existence_NumChecks": "765010",
+          "Existence_NumChecks": "771079",
           "NumNodeSuccesses": "102603",
           "Existence_NumDcCalls": "7"
         }
@@ -71,10 +71,16 @@ percentage and if no percentage is provided it is assumed to be 100.
       "LEVEL_WARNING": {
         "counters": {
           "Existence_MissingTriple_domainIncludes": "1",
-          "Existence_MissingReference_locatedIn": "513"
+          "Existence_MissingReference_locatedIn": "514"
         }
       }
     },
+    ```
+
+    Next, we can continue do the same for validation the SVObs:
+
+    ```
+    dc-import genmcf output/svobs/* dc_generated/*.mcf
     ```
 
     For the Stat Var Observations, there are several warnings for major jumps
@@ -95,21 +101,21 @@ percentage and if no percentage is provided it is assumed to be 100.
     "levelSummary": {
       "LEVEL_INFO": {
         "counters": {
-          "NumRowSuccesses": "168460",
-          "NumPVSuccesses": "1684600",
-          "Existence_NumChecks": "2870032",
-          "NumNodeSuccesses": "168460",
-          "Existence_NumDcCalls": "7"
+          "NumRowSuccesses": "168490",
+          "NumPVSuccesses": "1684900",
+          "Existence_NumChecks": "2882500",
+          "NumNodeSuccesses": "168490",
+          "Existence_NumDcCalls": "8"
         }
     },
     "LEVEL_WARNING": {
       "counters": {
-        "StatsCheck_MaxPercentFluctuationGreaterThan100": "212",
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "181",
         "Existence_MissingTriple_domainIncludes": "1",
         "Existence_MissingReference_Property": "102603",
-        "Existence_MissingReference_locatedIn": "1026",
-        "StatsCheck_MaxPercentFluctuationGreaterThan500": "198",
-        "StatsCheck_Data_Holes": "75"
+        "Existence_MissingReference_locatedIn": "1028",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "156",
+        "StatsCheck_Data_Holes": "51"
      }
    }
  },
