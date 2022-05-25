@@ -71,15 +71,6 @@ def national2010():
     df_final['SVs'] = 'Count_Person_' + df_final['SVs']
     df_final['Measurement_Method'] = 'CensusPEPSurvey'
     df_final['geo_ID'] = 'country/USA'
-    df_temp = pd.DataFrame()
-    # Making copies of DF to be aggregated upon
-    df_temp = pd.concat([df_temp, df_final])
-    df_temp['SVs'] = df_temp['SVs'].str.replace('_Male', '')
-    df_temp['SVs'] = df_temp['SVs'].str.replace('_Female', '')
-    df_temp = df_temp.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
-    df_temp.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    df_temp = df_temp[df_temp.SVs.str.contains('Years_')]
-    df_final = pd.concat([df_temp, df_final])
     df_final.to_csv(
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
         'input_data/national_2010_2019.csv')

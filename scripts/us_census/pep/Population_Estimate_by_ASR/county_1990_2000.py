@@ -81,21 +81,21 @@ def county1990():
             df['Race'] = df['Race'].str.replace('10',\
                 'Female_AsianOrPacificIslander')
             df['Race'] = df['Race'].str.replace('1',\
-                'Male_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces')
+                'Male_WhiteAlone')
             df['Race'] = df['Race'].str.replace('2',\
-                'Female_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces')
+                'Female_WhiteAlone')
             df['Race'] = df['Race'].str.replace('3',\
-                'Male_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces')
+                'Male_WhiteAlone')
             df['Race'] = df['Race'].str.replace('4',\
-                'Female_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces')
+                'Female_WhiteAlone')
             df['Race'] = df['Race'].str.replace('5','Male_BlackOrAfrican'+\
-                'AmericanAloneOrInCombinationWithOneOrMoreOtherRaces')
+                'AmericanAlone')
             df['Race'] = df['Race'].str.replace('6', 'Female_BlackOrAfrican'+\
-                'AmericanAloneOrInCombinationWithOneOrMoreOtherRaces')
+                'AmericanAlone')
             df['Race'] = df['Race'].str.replace('7', 'Male_AmericanIndianAnd'+\
-                'AlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces')
+                'AlaskaNativeAlone')
             df['Race'] = df['Race'].str.replace('8', 'Female_AmericanIndianAnd'\
-                +'AlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces')
+                +'AlaskaNativeAlone')
             df['Race'] = df['Race'].str.replace('9', \
                 'Male_AsianOrPacificIslander')
 
@@ -115,13 +115,11 @@ def county1990():
     # Making copies and using group by to get Aggregated Values
     df1 = pd.concat([final_df, df1])
     df2 = pd.concat([df2, final_df])
-    df1['SVs'] = df1['SVs'].str.replace('_AmericanIndianAndAlaskaNativeAlone'+\
-        'OrInCombinationWithOneOrMoreOtherRaces','')
+    df1['SVs'] = df1['SVs'].str.replace('_AmericanIndianAndAlaskaNativeAlone'\
+        ,'')
     df1['SVs'] = df1['SVs'].str.replace('_AsianOrPacificIslander', '')
-    df1['SVs'] = df1['SVs'].str.replace('_BlackOrAfricanAmericanAlone'+\
-        'OrInCombinationWithOneOrMoreOtherRaces','')
-    df1['SVs'] = df1['SVs'].str.replace('_WhiteAlone'+\
-        'OrInCombinationWithOneOrMoreOtherRaces','')
+    df1['SVs'] = df1['SVs'].str.replace('_BlackOrAfricanAmericanAlone','')
+    df1['SVs'] = df1['SVs'].str.replace('_WhiteAlone','')
     df1 = df1.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
     df1.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     df2['SVs'] = df2['SVs'].str.replace('_Male', '')

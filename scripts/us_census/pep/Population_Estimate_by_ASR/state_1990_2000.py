@@ -44,27 +44,21 @@ def state1990():
             df["HAIANM"]+df["NHAPIM"]+df["HAPIM"]
         df['Female']=df["NHWF"]+df["HWF"]+df["NHBF"]+df["HBF"]+df["NHAIANF"]+\
             df["HAIANF"]+df["NHAPIF"]+df["HAPIF"]
-        df['WhiteAloneOrInCombinationWithOneOrMoreOtherRaces']=\
+        df['WhiteAlone']=\
             df["NHWM"]+df["HWM"]+df["NHWF"]+df["HWF"]
-        df['BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces'\
-            ]=df["NHBM"]+df["HBM"]+df["NHBF"]+df["HBF"]
-        df['AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOr'+\
-            'MoreOtherRaces']=df["NHAIANM"]+df["HAIANM"]+df["NHAIANF"]+\
-            df["HAIANF"]
+        df['BlackOrAfricanAmericanAlone']=\
+            df["NHBM"]+df["HBM"]+df["NHBF"]+df["HBF"]
+        df['AmericanIndianAndAlaskaNativeAlone']\
+            =df["NHAIANM"]+df["HAIANM"]+df["NHAIANF"]+df["HAIANF"]
         df['AsianOrPacificIslander']=df["NHAPIM"]+df["HAPIM"]+df["NHAPIF"]\
             +df["HAPIF"]
-        df['Male_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces']=\
-            df["NHWM"]+df["HWM"]
-        df['Female_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces']=\
-            df["NHWF"]+df["HWF"]
-        df['Male_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMore'+\
-            'OtherRaces']=df["NHBM"]+df["HBM"]
-        df['Female_BlackOrAfricanAmericanAloneOrInCombinationWithOneOr'+\
-            'MoreOtherRaces']=df["NHBF"]+df["HBF"]
-        df['Male_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOr'+\
-            'MoreOtherRaces']=df["NHAIANM"]+df["HAIANM"]
-        df['Female_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOr'+\
-            'MoreOtherRaces']=df["NHAIANF"]+df["HAIANF"]
+        df['Male_WhiteAlone']=df["NHWM"]+df["HWM"]
+        df['Female_WhiteAlone']=df["NHWF"]+df["HWF"]
+        df['Male_BlackOrAfricanAmericanAlone']=df["NHBM"]+df["HBM"]
+        df['Female_BlackOrAfricanAmericanAlone']=df["NHBF"]+df["HBF"]
+        df['Male_AmericanIndianAndAlaskaNativeAlone']=df["NHAIANM"]+df["HAIANM"]
+        df['Female_AmericanIndianAndAlaskaNativeAlone']=\
+            df["NHAIANF"]+df["HAIANF"]
         df['Male_AsianOrPacificIslander'] = df["NHAPIM"] + df["HAPIM"]
         df['Female_AsianOrPacificIslander'] = df["NHAPIF"] + df["HAPIF"]
         # Dropping the old unwanted columns

@@ -106,7 +106,8 @@ def county1980():
     final_df['geo_ID'] = final_df['geo_ID'].str[:-3]
     final_df = final_df.groupby(['Year','geo_ID','SVs']).sum()\
     .stack(0).reset_index()
-    final_df['observation'] = df[0]
+    print(final_df)
+    final_df['observation'] = final_df[0]
     final_df.drop(columns=['level_3', 0], inplace=True)
     final_df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey'
     final_df.to_csv(

@@ -83,7 +83,7 @@ def national1990():
     ],
                  axis=1)
     df.columns = df.columns.str.replace('All', \
-        'AloneOrInCombinationWithOneOrMoreOtherRaces')
+        'Alone')
     df = df.melt(id_vars=['Year', 'Age'],
                  var_name='SVs',
                  value_name='observation')

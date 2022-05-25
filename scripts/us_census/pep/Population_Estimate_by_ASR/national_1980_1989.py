@@ -118,7 +118,7 @@ def national1980():
         df = column_naming(df)
         # writing all the output to a final dataframe
         df.columns = df.columns.str.replace('All', \
-            'AloneOrInCombinationWithOneOrMoreOtherRaces')
+            'Alone')
         df = df.melt(id_vars=['Year', 'Age'],
                      var_name='SVs',
                      value_name='observation')
