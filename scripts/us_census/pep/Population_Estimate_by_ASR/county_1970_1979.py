@@ -11,7 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+'''
+This Python Script is for
+for County Level Data
+1970-1979
+'''
 import os
 import json
 import pandas as pd
@@ -23,7 +27,7 @@ def county1970():
    from 1970-1979 on a County Level,
    cleans it and create a cleaned csv
    '''
-   # Getting input URL from the JSON file
+    # Getting input URL from the JSON file
     _URLS_JSON_PATH = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + "county.json"
     _URLS_JSON = None
@@ -39,7 +43,7 @@ def county1970():
     df['geo_ID'] = df['geo_ID'].astype(int)
     df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]
     df['Race'] = df['Race'].astype(str)
-   # Replacing the numbers with more understandable metadata headings
+    # Replacing the numbers with more understandable metadata headings
     _dict = {
         '1': 'Male_WhiteAlone',
         '2': 'Female_WhiteAlone',
@@ -49,7 +53,7 @@ def county1970():
         '6': 'Female_OtherRaces'
     }
     df = df.replace({'Race': _dict})
-   # Replacing the numbers with more understandable metadata headings
+    # Replacing the numbers with more understandable metadata headings
     _dict = {
         0: '0To4Years',
         1: '5To9Years',
@@ -77,7 +81,7 @@ def county1970():
     df['SVs'] = 'Count_Person_' + df['sv'] + '_' + df['Race']
     df.drop(columns=['Race', 'sv'], inplace=True)
     df['geo_ID'] = 'geoId/' + df['geo_ID']
-   # Making copies of the current DF to be aggregated upon
+    # Making copies of the current DF to be aggregated upon
     final_df = pd.concat([final_df, df])
     df2 = pd.concat([df2, df])
     final_df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
