@@ -1,0 +1,219 @@
+{
+    "preprocess": {
+        "find_and_replace": {
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Employer-based health insurance alone or in combination": "Estimate!!Total!!Civilian noninstitutionalized population",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Employer-based health insurance alone or in combination!!Under 19": "Estimate!!Total!!Civilian noninstitutionalized population!!Under 19",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Employer-based health insurance alone or in combination!!19 to 64 years": "Estimate!!Total!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Employer-based health insurance alone or in combination!!65 years and over": "Estimate!!Total!!Civilian noninstitutionalized population!!65 years and over",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Employer-based health insurance alone or in combination": "Margin of Error!!Total!!Civilian noninstitutionalized population",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Employer-based health insurance alone or in combination!!Under 19": "Margin of Error!!Total!!Civilian noninstitutionalized population!!Under 19",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Employer-based health insurance alone or in combination!!19 to 64 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Employer-based health insurance alone or in combination!!65 years and over": "Margin of Error!!Total!!Civilian noninstitutionalized population!!65 years and over",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Employer-based health insurance alone or in combination": "Estimate!!Total!!Civilian noninstitutionalized population",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Employer-based health insurance alone or in combination!!Under 19": "Estimate!!Total!!Civilian noninstitutionalized population!!Under 19",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Employer-based health insurance alone or in combination!!19 to 64 years": "Estimate!!Total!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Employer-based health insurance alone or in combination!!65 years and over": "Estimate!!Total!!Civilian noninstitutionalized population!!65 years and over",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Employer-based health insurance alone or in combination": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Employer-based health insurance alone or in combination!!Under 19": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Under 19",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Employer-based health insurance alone or in combination!!19 to 64 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Employer-based health insurance alone or in combination!!65 years and over": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!65 years and over",    
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Direct-purchase health insurance alone or in combination": "Estimate!!Total!!Civilian noninstitutionalized population",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Direct-purchase health insurance alone or in combination!!Under 19": "Estimate!!Total!!Civilian noninstitutionalized population!!Under 19",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Direct-purchase health insurance alone or in combination!!19 to 64 years": "Estimate!!Total!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Direct-purchase health insurance alone or in combination!!65 years and over": "Estimate!!Total!!Civilian noninstitutionalized population!!65 years and over",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Direct-purchase health insurance alone or in combination": "Margin of Error!!Total!!Civilian noninstitutionalized population",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Direct-purchase health insurance alone or in combination!!Under 19": "Margin of Error!!Total!!Civilian noninstitutionalized population!!Under 19",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Direct-purchase health insurance alone or in combination!!19 to 64 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Direct-purchase health insurance alone or in combination!!65 years and over": "Margin of Error!!Total!!Civilian noninstitutionalized population!!65 years and over", 
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Direct-purchase health insurance alone or in combination": "Estimate!!Total!!Civilian noninstitutionalized population",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Direct-purchase health insurance alone or in combination!!Under 19": "Estimate!!Total!!Civilian noninstitutionalized population!!Under 19",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Direct-purchase health insurance alone or in combination!!19 to 64 years": "Estimate!!Total!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Direct-purchase health insurance alone or in combination!!65 years and over": "Estimate!!Total!!Civilian noninstitutionalized population!!65 years and over",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Direct-purchase health insurance alone or in combination": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Direct-purchase health insurance alone or in combination!!Under 19": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Under 19",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Direct-purchase health insurance alone or in combination!!19 to 64 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Direct-purchase health insurance alone or in combination!!65 years and over": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!65 years and over",   
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Tricare/military  health insurance alone or in combination": "Estimate!!Total!!Civilian noninstitutionalized population",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Tricare/military  health insurance alone or in combination!!Under 19": "Estimate!!Total!!Civilian noninstitutionalized population!!Under 19",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Tricare/military  health insurance alone or in combination!!19 to 64 years": "Estimate!!Total!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Tricare/military  health insurance alone or in combination!!65 years and over": "Estimate!!Total!!Civilian noninstitutionalized population!!65 years and over",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Tricare/military  health insurance alone or in combination": "Margin of Error!!Total!!Civilian noninstitutionalized population",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Tricare/military  health insurance alone or in combination!!Under 19": "Margin of Error!!Total!!Civilian noninstitutionalized population!!Under 19",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Tricare/military  health insurance alone or in combination!!19 to 64 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE OR IN COMBINATION!!Tricare/military  health insurance alone or in combination!!65 years and over": "Margin of Error!!Total!!Civilian noninstitutionalized population!!65 years and over", 
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Tricare/military health insurance alone or in combination": "Estimate!!Total!!Civilian noninstitutionalized population",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Tricare/military health insurance alone or in combination!!Under 19": "Estimate!!Total!!Civilian noninstitutionalized population!!Under 19",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Tricare/military health insurance alone or in combination!!19 to 64 years": "Estimate!!Total!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!Tricare/military health insurance alone or in combination!!65 years and over": "Estimate!!Total!!Civilian noninstitutionalized population!!65 years and over",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Tricare/military health insurance alone or in combination": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Tricare/military health insurance alone or in combination!!Under 19": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Under 19",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Tricare/military health insurance alone or in combination!!19 to 64 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!19 to 64 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Tricare/military health insurance alone or in combination!!65 years and over": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!65 years and over",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Below 138 percent of the poverty threshold": "Estimate!!Total!!Civilian noninstitutionalized population!!Below 138 percent of the poverty threshold",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!At or above 138 percent of the poverty threshold": "Estimate!!Total!!Civilian noninstitutionalized population!!At or above 138 percent of the poverty threshold",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Worked full-time, year-round (19-64 years)": "Estimate!!Total!!Civilian noninstitutionalized population!!Worked full-time, year-round (19-64 years)",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Under 6": "Estimate!!Total!!Civilian noninstitutionalized population!!Under 6",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!6 to 18 years": "Estimate!!Total!!Civilian noninstitutionalized population!!6 to 18 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!19 to 25 years": "Estimate!!Total!!Civilian noninstitutionalized population!!19 to 25 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!26 to 34 years": "Estimate!!Total!!Civilian noninstitutionalized population!!26 to 34 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!35 to 44 years": "Estimate!!Total!!Civilian noninstitutionalized population!!35 to 44 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!45 to 54 years": "Estimate!!Total!!Civilian noninstitutionalized population!!45 to 54 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!55 to 64 years": "Estimate!!Total!!Civilian noninstitutionalized population!!55 to 64 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!65 to 74 years": "Estimate!!Total!!Civilian noninstitutionalized population!!65 to 74 years",
+            "Estimate!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!75 years and over": "Estimate!!Total!!Civilian noninstitutionalized population!!75 years and over",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Below 138 percent of the poverty threshold": "Margin of Error!!Total!!Civilian noninstitutionalized population!!Below 138 percent of the poverty threshold",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!At or above 138 percent of the poverty threshold": "Margin of Error!!Total!!Civilian noninstitutionalized population!!At or above 138 percent of the poverty threshold",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Worked full-time, year-round (19-64 years)": "Margin of Error!!Total!!Civilian noninstitutionalized population!!Worked full-time, year-round (19-64 years)",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Under 6": "Margin of Error!!Total!!Civilian noninstitutionalized population!!Under 6",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!6 to 18 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!6 to 18 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!19 to 25 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!19 to 25 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!26 to 34 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!26 to 34 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!35 to 44 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!35 to 44 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!45 to 54 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!45 to 54 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!55 to 64 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!55 to 64 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!65 to 74 years": "Margin of Error!!Total!!Civilian noninstitutionalized population!!65 to 74 years",
+            "Margin of Error!!Total!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!75 years and over": "Margin of Error!!Total!!Civilian noninstitutionalized population!!75 years and over",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Below 138 percent of the poverty threshold": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Below 138 percent of the poverty threshold",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!At or above 138 percent of the poverty threshold": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!At or above 138 percent of the poverty threshold",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Worked full-time, year-round (19-64 years)": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Worked full-time, year-round (19-64 years)",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Under 6": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!Under 6",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!6 to 18 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!6 to 18 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!19 to 25 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!19 to 25 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!26 to 34 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!26 to 34 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!35 to 44 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!35 to 44 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!45 to 54 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!45 to 54 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!55 to 64 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!55 to 64 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!65 to 74 years": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!65 to 74 years",
+            "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!75 years and over": "Margin of Error!!Total MOE!!Civilian noninstitutionalized population!!75 years and over",
+            "Total!!Estimate!!EMPLOYER-BASED HEALTH INSURANCE ALONE OR IN COMBINATION!!Under 18": "Total!!Estimate!!Under 18",
+            "Total!!Margin of Error!!EMPLOYER-BASED HEALTH INSURANCE ALONE OR IN COMBINATION!!Under 18": "Total!!Margin of Error!!Under 18",
+            "Total!!Estimate!!EMPLOYER-BASED HEALTH INSURANCE ALONE OR IN COMBINATION!!18 to 64 years": "Total!!Estimate!!18 to 64 years",
+            "Total!!Margin of Error!!EMPLOYER-BASED HEALTH INSURANCE ALONE OR IN COMBINATION!!18 to 64 years": "Total!!Margin of Error!!18 to 64 years",
+            "Total!!Estimate!!EMPLOYER-BASED HEALTH INSURANCE ALONE OR IN COMBINATION!!65 years and over": "Total!!Estimate!!65 years and over",
+            "Total!!Margin of Error!!EMPLOYER-BASED HEALTH INSURANCE ALONE OR IN COMBINATION!!65 years and over": "Total!!Margin of Error!!65 years and over",
+            "Total!!Estimate!!DIRECT-PURCHASE HEALTH INSURANCE ALONE OR IN COMBINATION!!Under 18": "Total!!Estimate!!Under 18",
+            "Total!!Margin of Error!!DIRECT-PURCHASE HEALTH INSURANCE ALONE OR IN COMBINATION!!Under 18": "Total!!Margin of Error!!Under 18",
+            "Total!!Estimate!!DIRECT-PURCHASE HEALTH INSURANCE ALONE OR IN COMBINATION!!18 to 64 years": "Total!!Estimate!!18 to 64 years",
+            "Total!!Margin of Error!!DIRECT-PURCHASE HEALTH INSURANCE ALONE OR IN COMBINATION!!18 to 64 years": "Total!!Margin of Error!!18 to 64 years",
+            "Total!!Estimate!!DIRECT-PURCHASE HEALTH INSURANCE ALONE OR IN COMBINATION!!65 years and over": "Total!!Estimate!!65 years and over",
+            "Total!!Margin of Error!!DIRECT-PURCHASE HEALTH INSURANCE ALONE OR IN COMBINATION!!65 years and over": "Total!!Margin of Error!!65 years and over",
+            "Total!!Estimate!!TRICARE/MILITARY HEALTH COVERAGE ALONE OR IN COMBINATION!!Under 18": "Total!!Estimate!!Under 18",
+            "Total!!Margin of Error!!TRICARE/MILITARY HEALTH COVERAGE ALONE OR IN COMBINATION!!Under 18": "Total!!Margin of Error!!Under 18",
+            "Total!!Estimate!!TRICARE/MILITARY HEALTH COVERAGE ALONE OR IN COMBINATION!!18 to 64 years": "Total!!Estimate!!18 to 64 years",
+            "Total!!Margin of Error!!TRICARE/MILITARY HEALTH COVERAGE ALONE OR IN COMBINATION!!18 to 64 years": "Total!!Margin of Error!!18 to 64 years",
+            "Total!!Estimate!!TRICARE/MILITARY HEALTH COVERAGE ALONE OR IN COMBINATION!!65 years and over": "Total!!Estimate!!65 years and over",
+            "Total!!Margin of Error!!TRICARE/MILITARY HEALTH COVERAGE ALONE OR IN COMBINATION!!65 years and over": "Total!!Margin of Error!!65 years and over",
+            "Total!!Estimate!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Below 138 percent of the poverty threshold": "Total!!Estimate!!Below 138 percent of the poverty threshold",
+            "Total!!Margin of Error!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!Below 138 percent of the poverty threshold": "Total!!Margin of Error!!Below 138 percent of the poverty threshold",
+            "Total!!Estimate!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!At or above 138 percent of the poverty threshold": "Total!!Estimate!!At or above 138 percent of the poverty threshold",
+            "Total!!Margin of Error!!PRIVATE HEALTH INSURANCE ALONE OR IN COMBINATION!!At or above 138 percent of the poverty threshold": "Total!!Margin of Error!!At or above 138 percent of the poverty threshold"
+        }
+    },
+    "overwrite_dcids": {
+        "Count_Person_19OrLessYears_Civilian_NonInstitutionalized": "Count_Person_Upto19Years_Civilian_NonInstitutionalized",
+        "Count_Person_18OrLessYears_Civilian_NonInstitutionalized": "Count_Person_Upto18Years_Civilian_NonInstitutionalized"
+    },
+    "populationType": {
+        "_DEFAULT": "schema:Person"
+    },
+    "measurement": {
+        "Total": {
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        },
+        "Total MOE": {
+            "measuredProperty": "count",
+            "statType": "marginOfError"
+        },
+        "Private Coverage": {
+            "measuredProperty": "count",
+            "statType": "measuredValue",
+            "healthInsurance": "WithPrivateHealthInsurance"
+        },
+        "Private Coverage MOE": {
+            "measuredProperty": "count",
+            "statType": "marginOfError",
+            "healthInsurance": "WithPrivateHealthInsurance"
+        }
+    },
+    "enumSpecializations": {},
+    "pvs": {
+        "statType": {
+            "Margin of Error": "marginOfError"
+        },
+        "age": {
+            "18 to 64 years": "[18 64 Years]",
+            "65 years and over": "[65 - Years]",
+            "Under 6": "[- 6 Years]",
+            "Under 19": "[- 19 Years]",
+            "Under 18": "[- 18 Years]",
+            "6 to 17 years": "[6 17 Years]",
+            "6 to 18 years": "[6 18 Years]",
+            "19 to 64 years": "[19 64 Years]",
+            "18 to 24 years": "[18 24 Years]",
+            "Worked full-time, year-round (18 years and over)": "[18 - Years]",
+            "Worked full-time, year-round (19-64 years)": "[19 64 Years]",
+            "19 to 25 years": "[19 25 Years]",
+            "Young adults 19 to 25 years": "[19 25 Years]",
+            "25 to 34 years": "[25 34 Years]",
+            "26 to 34 years": "[26 34 Years]",
+            "35 to 44 years": "[35 44 Years]",
+            "45 to 54 years": "[45 54 Years]",
+            "55 to 64 years": "[55 64 Years]",
+            "65 to 74 years": "[65 74 Years]",
+            "75 years and over": "[75 - Years]"
+        },
+        "healthInsurance": {
+            "Tricare/military health insurance alone or in combination": "WithTricareMilitaryHealthCoverage",
+            "Tricare/military  health insurance alone or in combination": "WithTricareMilitaryHealthCoverage",
+            "Tricare/military health coverage alone": "WithTricareMilitaryHealthCoverageOnly",
+            "TRICARE/MILITARY HEALTH COVERAGE ALONE OR IN COMBINATION": "WithTricareMilitaryHealthCoverage",
+            "Private health insurance alone": "WithPrivateHealthInsuranceOnly",
+            "Direct-purchase health insurance alone or in combination": "WithDirectPurchaseHealthInsurance",
+            "Direct-purchase health insurance alone": "WithDirectPurchaseHealthInsuranceOnly",
+            "DIRECT-PURCHASE HEALTH INSURANCE ALONE OR IN COMBINATION": "WithDirectPurchaseHealthInsurance",
+            "Employer-based health insurance alone": "WithEmployerBasedHealthInsuranceOnly",
+            "EMPLOYER-BASED HEALTH INSURANCE ALONE OR IN COMBINATION": "WithEmployerBasedHealthInsurance",
+            "Employer-based health insurance alone or in combination": "WithEmployerBasedHealthInsurance"
+        },
+        "workExperience": {
+            "Worked full-time, year-round (18 years and over)": "USC_FullTimeYearRoundWorker",
+            "Worked full-time, year-round (19-64 years)": "USC_FullTimeYearRoundWorker"
+        },
+        "povertyStatus": {
+            "At or above 138 percent of the poverty threshold": "[1.38 - RatioToPovertyLine]",
+            "Below 138 percent of the poverty threshold": "[- 1.38 RatioToPovertyLine]"
+        }
+    },
+    "inferredSpec": {
+        "populationType": {
+            "institutionalization": "USC_NonInstitutionalized",
+            "armedForcesStatus": "Civilian"
+        }
+    },
+    "universePVs": [
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [
+                "healthInsurance"
+            ],
+            "dependentPVs": {
+                "institutionalization": "USC_NonInstitutionalized",
+                "armedForcesStatus": "Civilian"
+            }
+        }
+    ],
+    "denominators": {},
+    "ignoreColumns": [
+        "id",
+        "Geographic Area Name",
+        "Percent Private Coverage",
+        "Percent Private Coverage MOE"
+    ],
+    "ignoreTokens": [
+        "Estimate",
+        "Civilian noninstitutionalized population",
+        "COVERAGE ALONE OR IN COMBINATION",
+        "COVERAGE ALONE"
+    ]
+}
