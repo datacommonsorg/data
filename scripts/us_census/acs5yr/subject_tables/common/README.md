@@ -284,6 +284,8 @@ NOTE: This command creates following important files to lookout for:
 - union_spec.json: This is the union of all the 
 - discarded_spec_parts.json: This contains parts of the union spec that were not used in the output spec
 
+NOTE: acs_spec_generator.py caches properties and types under `data/scripts/us_census/acs5yr/subject_tables/common/datacommons_api_wrappers/prefetched_outputs`. As new properties and enums are constantly added into DC, this needs to be refreshed regularly. This can be done by deleting the prefetch folder. Once this is done, the script will automatically make calls to the DC REST API and refresh the files during the next guess spec run.
+
 To generate a guess spec with expected properties or population types:
 ```
 python acs_spec_generator.py --guess_new_spec --zip_list=../sample_data/s1810.zip --expected_populations=Person,Household --expected_properties=occupancyTenure
