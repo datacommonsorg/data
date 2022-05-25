@@ -7,6 +7,10 @@
       "measuredProperty": "count XXXXX",
       "statType": "measuredValue"
     },
+    "Margin of Error": {
+      "measuredProperty": "count",
+      "statType": "marginOfError"
+    },
     "Mean usual hours worked for workers": {
       "measuredProperty": "usualHoursWorked",
       "statType": "meanValue",
@@ -17,9 +21,9 @@
       "statType": "medianValue",
       "unit": "Year"
     },
-    "Margin of Error": {
-      "statType": "marginOfError",
-      "measuredProperty": "count"
+    "Total": {
+      "measuredProperty": "count",
+      "statType": "measuredValue"
     },
     "Margin of Error XXXXX": {
       "statType": "marginOfError",
@@ -34,6 +38,10 @@
     },
     "age": {
       "Population 16 to 64 years": "[16 64 Years]"
+    },
+    "gender": {
+      "Male": "Male",
+      "Female": "Female"
     },
     "workPeriod": {
       "Worked 50 to 52 weeks": "[50 52 Week]",
@@ -61,33 +69,85 @@
       "Median age of workers 16 to 64 years": "WorkedInThePast12Months",
       "Workers 16 to 64 years who worked full-time, year-round": "USC_FullTimeYearRoundWorker",
       "Did not work": "DidNotWork"
-    },
-    "gender": {
-      "Male": "Male",
-      "Female": "Female"
     }
   },
+  "inferredSpec": {
+    "gender": {
+      "age": "[1 - Years]"
+    }
+  },
+  "universePVs": [
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "workStatus"
+      ],
+      "dependentPVs": {
+        "age": "[16 64 Years]"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "workPeriod"
+      ],
+      "dependentPVs": {
+        "workStatus": "WorkedInThePast12Months",
+        "age": "[16 64 Years]"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "usualHoursWorked"
+      ],
+      "dependentPVs": {
+        "workStatus": "WorkedInThePast12Months",
+        "age": "[16 64 Years]"
+      }
+    },
+    {
+      "populationType": "Person",
+      "obs_props": {
+        "mprop": "earnings"
+      },
+      "dependentPVs": {
+        "incomeStatus": "WithEarnings"
+      }
+    },
+    {
+      "populationType": "Person",
+      "constraintProperties": [],
+      "obs_props": {
+        "mprop": "earnings"
+      },
+      "dependentPVs": {
+        "age": "[16 - Years]",
+        "incomeStatus": "WithEarnings"
+      }
+    }
+  ],
   "denominators": {},
   "ignoreColumns XXXXX": [
-    "Estimate!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
-    "Estimate!!Male!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
-    "Estimate!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+    "id",
     "Geographic Area Name",
-    "Margin of Error",
-    "Margin of Error!!Female!!Population 16 to 64 years!!Mean usual hours worked for workers",
-    "Margin of Error!!Female!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
-    "Margin of Error!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
-    "Margin of Error!!Male!!Population 16 to 64 years!!Mean usual hours worked for workers",
-    "Margin of Error!!Male!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
-    "Margin of Error!!Male!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
-    "Margin of Error!!Total!!Population 16 to 64 years!!Mean usual hours worked for workers",
-    "Margin of Error!!Total!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
-    "Margin of Error!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
     "Percent",
-    "Percent Female",
-    "Percent Male",
     "Total",
-    "id"
+    "Percent Male",
+    "Percent Female",
+    "Estimate!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+    "Margin of Error!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+    "Estimate!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+    "Margin of Error!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+    "Estimate!!Male!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+    "Margin of Error!!Male!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+    "Margin of Error!!Total!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+    "Margin of Error!!Female!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+    "Margin of Error!!Male!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+    "Margin of Error!!Total!!Population 16 to 64 years!!Mean usual hours worked for workers",
+    "Margin of Error!!Male!!Population 16 to 64 years!!Mean usual hours worked for workers",
+    "Margin of Error!!Female!!Population 16 to 64 years!!Mean usual hours worked for workers",
+    "Margin of Error"
   ],
   "ignoreTokens XXXXX": [
     "Estimate"

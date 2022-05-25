@@ -21,8 +21,8 @@ from absl import app
 from absl import flags
 
 from .common_util import columns_from_zip_file, token_in_list_ignore_case, get_tokens_list_from_column_list
-from .dc_utils import fetch_dcid_properties_enums
 from .acs_spec_validator import find_columns_with_no_properties, find_missing_tokens
+from .datacommons_api_wrappers.datacommons_wrappers import fetch_dcid_properties_enums
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 _FLAGS = flags.FLAGS
@@ -52,7 +52,7 @@ def get_spec_list() -> list:
 
     spec_list = []
     # read all spec files in subject table folders
-    for directory in os.listdir(spec_dir):
+    for directory in sorted(os.listdir(spec_dir)):
         directory_path = os.path.join(spec_dir, directory)
         if os.path.isdir(directory_path):
             table_dir = os.path.join(spec_dir, directory)
