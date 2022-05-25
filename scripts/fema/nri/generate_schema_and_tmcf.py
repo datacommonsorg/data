@@ -58,25 +58,22 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:{mProp}
 """
-
-HAZARD_MCF_FORMAT_BASE_APPR1 = """Node: dcid:{nodeDCID}
+HAZARD_MCF_FORMAT_BASE = """Node: dcid:{nodeDCID}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:{hazType}
 measuredProperty: {mProp}
 """
+TMCF_FORMAT = """
+Node: E:FEMA_NRI->E{index}
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{statVarDCID}
+observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
+observationDate: "{obsDate}"
+value: C:FEMA_NRI_Counties->{fieldName} 
+"""
 
-# computed variables
-# if field alias includes any of these strings, skip that row from the schema and TMCF generation
-FIELD_ALIAS_STRINGS_TO_SKIP = []
-
-if FLAG_SKIP_EAL_COMPONENTS:
-	FIELD_ALIAS_STRINGS_TO_SKIP.extend(EAL_COMPONENTS)
-if FLAG_SKIP_IMPACTED_THING_COMPONENTS:
-	FIELD_ALIAS_STRINGS_TO_SKIP.extend(IMPACTED_THING_COMPONENTS)
-if FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES:
-	FIELD_ALIAS_STRINGS_TO_SKIP.extend(NON_SCORE_RELATIVE_MEASURES)
-
+# mappings
 DATACOMMONS_ALIASES = {
 	"Score": "FemaNationalRiskScore",
 	"SocialVulnerability": "femaSocialVulnerability",
@@ -116,7 +113,7 @@ def drop_spaces(string):
 	"""
 	return string.replace(" ", "")
 
-def tmcf_from_row(row, index, statVarDCID):
+def tmcf_from_row(row, index, statvar_dcid):
 	"""
 	Given a row of NRIDataDictionary describing a measure, generates the TMCF for that StatVar.
 	Returns the TMCF as a string.
@@ -124,16 +121,13 @@ def tmcf_from_row(row, index, statVarDCID):
 
 	# as of 2022-05-23, the "Version" field for all data is "November 2021"
 	# "Field Name" in the data dictionary holds the name of the column in the data CSV
-	TMCF = f"""
-Node: E:FEMA_NRI->E{index}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{statVarDCID}
-observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
-observationDate: "{row["Version"]}"
-value: C:FEMA_NRI_Counties->{row["Field Name"]} 
-"""
+	return TMCF_FORMAT.format(
+		index = index,
+		statvar_dcid = statvar_dcid,
+		obsDate=row["Version"],
+		field_name=row["Field Name"]
+	)
 
-	return TMCF
 
 def statvar_from_row(row):
 	"""
@@ -234,35 +228,51 @@ def statvar_from_individual_hazard_row(row):
 
 	return formatted, dcid
 
-dd = pd.read_csv(NRI_DATADICTIONARY_INFILE_FILENAME)
 
-logging.info(f"[info] ignoring {len(IGNORED_FIELDS)} fields in NRIDataDictionary")
-dd = dd[~dd["Field Name"].isin(IGNORED_FIELDS)]
-dd = dd.reset_index()
+if __name__ == "__main__":
+	# computed variables
+	# if field alias includes any of these strings, we skip that row from the schema and TMCF generation
+	field_alias_strings_to_skip = []
 
-schema_out = ""
-tmcf_out = ""
+	if FLAG_SKIP_EAL_COMPONENTS:
+		field_alias_strings_to_skip.extend(EAL_COMPONENTS)
+	if FLAG_SKIP_IMPACTED_THING_COMPONENTS:
+		field_alias_strings_to_skip.extend(IMPACTED_THING_COMPONENTS)
+	if FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES:
+		field_alias_strings_to_skip.extend(NON_SCORE_RELATIVE_MEASURES)
 
-for index, row in dd.iterrows():
-	skipped = False
+	# load the dataset and drop the ignored fields
+	dd = pd.read_csv(NRI_DATADICTIONARY_INFILE_FILENAME)
 
-	should_skip_component = any([eal_comp in row["Field Alias"] for eal_comp in FIELD_ALIAS_STRINGS_TO_SKIP])
-	if should_skip_component :
-		logging.info(f"Skipping individual hazard row {row['Field Alias']}" + 
-		" because it is an EAL component and FLAG_SKIP_EAL_COMPONENTS is {FLAG_SKIP_EAL_COMPONENTS}")
-		skipped = True
-	
-	if not skipped:
-		statvar_mcf, statvar_dcid = statvar_from_row(row)
-		statobs_tmcf = tmcf_from_row(row, index, statvar_dcid)
+	logging.info(f"[info] ignoring {len(IGNORED_FIELDS)} fields in NRIDataDictionary")
+	dd = dd[~dd["Field Name"].isin(IGNORED_FIELDS)]
+	dd = dd.reset_index()
+
+	schema_out = ""
+	tmcf_out = ""
+
+	for index, row in dd.iterrows():
+		skipped = False
+
+		should_skip_component = any([eal_comp in row["Field Alias"] for eal_comp in field_alias_strings_to_skip])
+		if should_skip_component :
+			logging.info(f"Skipping individual hazard row {row['Field Alias']}" + 
+			" because it is an EAL component and FLAG_SKIP_EAL_COMPONENTS is {FLAG_SKIP_EAL_COMPONENTS}")
+			skipped = True
 		
-		schema_out += statvar_mcf + "\n"
-		tmcf_out += statobs_tmcf
+		if not skipped:
+			statvar_mcf, statvar_dcid = statvar_from_row(row)
+			statobs_tmcf = tmcf_from_row(row, index, statvar_dcid)
+			
+			schema_out += statvar_mcf + "\n"
+			tmcf_out += statobs_tmcf
 
-with open(SCHEMA_OUTFILE_FILENAME, "w") as outfile:
-	logging.info(f"Writing StatVar MCF to {SCHEMA_OUTFILE_FILENAME}")
-	outfile.write(schema_out)
 
-with open(TMCF_OUTFILE_FILENAME, "w") as outfile:
-	logging.info(f"Writing County TMCF to {TMCF_OUTFILE_FILENAME}")
-	outfile.write(tmcf_out)
+	# write out the results
+	with open(SCHEMA_OUTFILE_FILENAME, "w") as outfile:
+		logging.info(f"Writing StatVar MCF to {SCHEMA_OUTFILE_FILENAME}")
+		outfile.write(schema_out)
+
+	with open(TMCF_OUTFILE_FILENAME, "w") as outfile:
+		logging.info(f"Writing County TMCF to {TMCF_OUTFILE_FILENAME}")
+		outfile.write(tmcf_out)
