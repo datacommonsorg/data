@@ -29,7 +29,7 @@ the [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pag
 To lint a file called `some_file.py` in-place (applying modifications to it),
 run the following:
 ```
-yapf some_file.py --style=yapf -i
+yapf some_file.py --style='{based_on_style: yapf, indent_width=4}' -i
 ```
 
 # Folder Structure
