@@ -8,8 +8,8 @@ import logging
 
 # i/o filenames
 NRI_DATADICTIONARY_INFILE_FILENAME = "source_data/NRIDataDictionary.csv"
-SCHEMA_OUTFILE_FILENAME = "fema_nri_schema.mcf"
-TMCF_OUTFILE_FILENAME = "fema_nri_counties.tmcf"
+SCHEMA_OUTFILE_FILENAME = "output/fema_nri_schema.mcf"
+TMCF_OUTFILE_FILENAME = "output/fema_nri_counties.tmcf"
 
 # flags
 FLAG_SKIP_EAL_COMPONENTS = True # skip {Annualized Frequency, Historic Loss Ratio, Exposure}
