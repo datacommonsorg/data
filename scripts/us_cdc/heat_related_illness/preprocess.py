@@ -24,7 +24,7 @@ from absl import flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
+sys.path.append(os.path.join(_SCRIPT_PATH, '..', '..', '..', 'util'))
 
 from statvar_dcid_generator import get_statvar_dcid
 from name_to_alpha2 import USSTATE_MAP_SPACE
@@ -64,7 +64,7 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
     statvars = []
     for row in csv_reader:
         quantity = row[data_col]
-        if quantity == 'Suppressed':  # SKip suppressed data
+        if quantity == 'Suppressed':  # Skip suppressed data
             continue
         quantity = float(quantity.replace(',', ''))
 
