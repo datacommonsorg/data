@@ -58,6 +58,7 @@ def county2010():
     df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + \
         (df['COUNTY'].map(str)).str.zfill(3)
     df['AGEGRP'] = df['AGEGRP'].astype(str)
+    # Replacing the numbers with more understandable metadata headings
     _dict = {
         '1': '0To4Years',
         '2': '5To9Years',
@@ -106,6 +107,7 @@ def county2010():
         df['TOM_FEMALE'].astype(int)
     df = df.melt(id_vars=['Year','geo_ID' ,'AGEGRP'], var_name='sv' , \
         value_name='observation')
+    # Changing Names to be more understandable
     _dict = {
         'TOT_MALE': 'Male',
         'TOT_FEMALE': 'Female',

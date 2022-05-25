@@ -28,6 +28,7 @@ def county1980():
     cleans it and create a cleaned csv
     for both County and State
     '''
+   # Getting input URL from the JSON file
     _URLS_JSON_PATH = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + "county.json"
     _URLS_JSON = None
@@ -46,6 +47,7 @@ def county1980():
     df['geo_ID'] = df['geo_ID'].astype(int)
     df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]
     df['Race'] = df['Race'].astype(str)
+   # Replacing the names with more understandable SV headings
     _dict = {
         'White male': 'Male_WhiteAlone',
         'White female': 'Female_WhiteAlone',
@@ -55,6 +57,7 @@ def county1980():
         'Other races female': 'Female_OtherRaces'
     }
     df = df.replace({'Race': _dict})
+   # Replacing the numbers with more understandable metadata headings
     _dict = {
         0: '0To4Years',
         1: '5To9Years',
@@ -99,6 +102,7 @@ def county1980():
     final_df.to_csv(
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
         'input_data/county_1980_1989.csv')
+    # Aggregating the County Data on geo_ID to make State Data
     final_df['geo_ID'] = final_df['geo_ID'].str[:-3]
     final_df = final_df.groupby(['Year','geo_ID','SVs']).sum()\
     .stack(0).reset_index()

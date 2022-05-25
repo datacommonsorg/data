@@ -35,7 +35,7 @@ def national1990():
     with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
         _URLS_JSON = json.load(file)
     _url = _URLS_JSON["1990-99"]
-
+    # Defining dummy column names for importing the data
     cols = ["0", "1", "2", "3", "4", "5", "6", "7",\
             "8", "9", "10", "11","12", "13", "14", "15",\
             "16", "17", "18", "19", "20", "21", "22", "23"]
@@ -44,6 +44,7 @@ def national1990():
                        delim_whitespace=True,
                        engine='python',
                        names=cols)
+    # Filtering the data required
     df = df.loc[df['0'].isin(['2I', '9P'])]
     df['1'] = df['1'].astype(str)
     df1 = df[df['1'].str.contains("100")]
@@ -59,6 +60,7 @@ def national1990():
     df = pd.concat([df, df1])
     mask = df['1'].str[0] == '7'
     df = df.loc[mask]
+    # Defining Columns based on the Dummy Column Names
     df['Year'] = df['1'].str[1:5]
     df['Age'] = df['2'].astype(float).astype(int)
     df['Male'] = df['4']
@@ -89,6 +91,7 @@ def national1990():
     df['Age'] = df['Age'] + 'Years'
     df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['SVs']
     df.drop(columns=['Age'], inplace=True)
+    # Adding the column Measurement method based on a condition
     df['Measurement_Method'] = np.where(df['SVs'].str.contains("Aggr"), \
         'dcAggregate/CensusPEPSurvey', 'CensusPEPSurvey')
     df['SVs'] = df['SVs'].str.replace('Aggr', '')

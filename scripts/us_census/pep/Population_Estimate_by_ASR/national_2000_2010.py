@@ -27,6 +27,7 @@ def national2000():
     from 2000-2010 on a National Level,
     cleans it and create a cleaned csv
     '''
+    # Getting input URL from the JSON file
     _URLS_JSON_PATH = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + 'National.json'
     _URLS_JSON = None

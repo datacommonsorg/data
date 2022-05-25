@@ -42,6 +42,7 @@ def county2000():
             # filter by agegrp = 99
             df = df.query("AGEGRP != 99")
             df['Year'] = df['Year'].astype(str)
+            # Replacing the numbers with more understandable metadata headings
             _dict = {
                 '2': '2000',
                 '3': '2001',
@@ -55,11 +56,11 @@ def county2000():
                 '11': '2009'
             }
             df = df.replace({'Year': _dict})
-
             df.insert(6, 'geo_ID', 'geoId/', True)
             df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + \
                 (df['COUNTY'].map(str)).str.zfill(3)
             df['AGEGRP'] = df['AGEGRP'].astype(str)
+            # Replacing the numbers with more understandable metadata headings
             _dict = {
                 '0': '0Years',
                 '1': '1To4Years',
@@ -109,6 +110,7 @@ def county2000():
                 df['TOM_FEMALE'].astype(int)
             df = df.melt(id_vars=['Year','geo_ID' ,'AGEGRP'], var_name='sv' , \
                 value_name='observation')
+            # Changing Names to be more understandable
             _dict = {
                 'TOT_MALE':
                     'Male',

@@ -27,10 +27,10 @@ def county1990():
     from 1990-2000 on a County Level,
     cleans it and create a cleaned csv
     '''
-    # reading the csv input file
     final_df = pd.DataFrame()
     df1 = pd.DataFrame()
     df2 = pd.DataFrame()
+    # reading the csv input file
     for i in range(1, 57):
         if i not in [3, 7, 14, 43, 52]:
             j = f'{i:02}'
@@ -51,7 +51,7 @@ def county1990():
 
             # providing geoId to the dataframe
             df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]
-
+            # Replacing the numbers with more understandable metadata headings
             _dict = {
                 0: '0To4Years',
                 1: '5To9Years',

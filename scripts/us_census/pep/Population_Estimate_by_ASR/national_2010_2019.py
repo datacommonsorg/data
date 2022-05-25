@@ -27,6 +27,7 @@ def national2010():
     from 2010-2019 on a National Level,
     cleans it and create a cleaned csv
     '''
+    # Getting input URL from the JSON file
     _URLS_JSON_PATH = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + "national.json"
     _URLS_JSON = None
@@ -38,12 +39,15 @@ def national2010():
     for sheet in _sheets:
         df_sheet = pd.DataFrame()
         df = pd.read_excel(_urls, sheet, skiprows=4, header=0)
+        # Dropping extra columns
         df = df.drop(['Census', 'Estimates Base'], axis=1)
         df = df.drop([0], axis=0)
+        # Cleaning the data to
         df['Unnamed: 0'] = df['Unnamed: 0'].str.replace(".", "").str.replace\
             ("Under 5", "0 to 4").str.replace(" ", "").str.replace("to", "To")\
             .str.replace("years", "Years").str.replace("85Yearsandover", \
             "85OrMoreYears")
+        # Filtering and reading the data
         if sheet != 'Total':
             df1 = df[0:18]
             df_sheet = pd.concat([df_sheet, df1])
@@ -68,6 +72,7 @@ def national2010():
     df_final['Measurement_Method'] = 'CensusPEPSurvey'
     df_final['geo_ID'] = 'country/USA'
     df_temp = pd.DataFrame()
+    # Making copies of DF to be aggregated upon
     df_temp = pd.concat([df_temp, df_final])
     df_temp['SVs'] = df_temp['SVs'].str.replace('_Male', '')
     df_temp['SVs'] = df_temp['SVs'].str.replace('_Female', '')
