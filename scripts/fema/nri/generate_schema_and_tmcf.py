@@ -127,8 +127,10 @@ def tmcf_from_row(row, index, statvar_dcid, unit):
 
 def schema_and_tmcf_from_row(row, index):
     """
-	Given a row of NRIDataDictionary, computes the corresponding StatVar Schema.
-	Returns the StatVar MCF node as a string.
+	Given a row of NRIDataDictionary, computes the corresponding StatVar schema
+    and StatVarObs schema template.
+
+	Returns the StatVar MCF and StatVarObs TMCF as strings in a tuple.
 	"""
 
     if is_composite_row(row):
