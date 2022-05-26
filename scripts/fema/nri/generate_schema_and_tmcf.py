@@ -2,7 +2,7 @@
 # these are generated because part of what the dataset considers to be different
 # measures, we consider it as different units measuring the same
 # StatisticalVariable
-
+import json
 import pandas as pd
 import numpy as np
 import logging
@@ -69,6 +69,13 @@ DATACOMMONS_ALIASES = {
     "ExpectedAnnualLoss": "expectedLoss"
 }
 
+def capitalize_first(string):
+    """
+    Given a string, capitalizes the first character.
+
+    Returns the new string
+    """
+    return string[0].upper() + string[1:]
 
 def apply_datacommon_alias(string):
     """
@@ -121,8 +128,22 @@ def tmcf_from_row(row, index, statvar_dcid, unit):
 
     return tmcf
 
+def extract_properties_from_row(row):
+    """
+	Given a row of NRIDataDictionary, extracts the relevant properties from it.
 
-def schema_and_tmcf_from_row(row, index):
+    Returns the properties as a dictionary
+    """
+    if is_composite_row(row):
+        properties = extract_properties_from_composite_row(row)
+        properties["is_composite"] = True
+    else:
+        properties = extract_properties_from_ind_hazard_row(row)
+        properties["is_composite"] = False
+    properties["row"] = row
+    return properties
+
+def schema_and_tmcf_from_properties(properties, index):
     """
 	Given a row of NRIDataDictionary, computes the corresponding StatVar schema
     and StatVarObs schema template.
@@ -130,17 +151,15 @@ def schema_and_tmcf_from_row(row, index):
 	Returns the StatVar MCF and StatVarObs TMCF as strings in a tuple.
 	"""
 
-    if is_composite_row(row):
-        properties = extract_properties_from_composite_row(row)
+    if properties["is_composite"]:
         schema, statvar_dcid = format_composite_field_properties_to_schema(
             properties)
 
     else:
-        properties = extract_properties_from_ind_hazard_row(row)
         schema, statvar_dcid = format_ind_hazard_field_properties_to_schema(
             properties)
 
-    statobs_tmcf = tmcf_from_row(row, index, statvar_dcid, properties["unit"])
+    statobs_tmcf = tmcf_from_row(properties["row"], index, statvar_dcid, properties["unit"])
     return schema, statobs_tmcf
 
 
@@ -203,9 +222,9 @@ def format_composite_field_properties_to_schema(properties):
     measured_property = properties["measured_property"]
 
     if measured_property == "expectedLoss":
-        dcid = f"Annual_{measured_property}_NaturalHazardImpact"
+        dcid = f"Annual_{capitalize_first(measured_property)}_NaturalHazardImpact"
     else:
-        dcid = f"{measured_property}_NaturalHazardImpact"
+        dcid = f"{capitalize_first(measured_property)}_NaturalHazardImpact"
 
     formatted = COMPOSITE_MCF_FORMAT.format(
         node_dcid=dcid, m_prop=measured_property)
@@ -295,6 +314,9 @@ def format_ind_hazard_field_properties_to_schema(properties):
     # drop empty dcid_list elements
     dcid_list = [element for element in dcid_list if element]
 
+    # capitalize dcid_list elements
+    dcid_list = [capitalize_first(element) for element in dcid_list]
+    
     # join the rest with underscores to obtain the final dcid
     dcid = "_".join(dcid_list)
 
@@ -332,9 +354,7 @@ if __name__ == "__main__":
     dd = dd[~dd["Field Name"].isin(IGNORED_FIELDS)]
     dd = dd.reset_index()
 
-    schema_out = ""
-    tmcf_out = ""
-
+    extracted_properties = []
     for index, row in dd.iterrows():
         skipped = False
 
@@ -350,10 +370,27 @@ if __name__ == "__main__":
             skipped = True
 
         if not skipped:
-            statvar_mcf, statobs_tmcf = schema_and_tmcf_from_row(row, index)
+            extracted_properties.append(extract_properties_from_row(row))
 
-            schema_out += statvar_mcf + "\n"
-            tmcf_out += statobs_tmcf
+    
+    schemas = []
+    tmcfs = []
+
+    for properties in extracted_properties:
+        statvar_mcf, statobs_tmcf = schema_and_tmcf_from_properties(properties, index)
+
+        schemas.append(statvar_mcf)
+        tmcfs.append(statobs_tmcf)
+
+    # prune out duplicate nodes
+    # - we might get duplicate nodes because the rows might be repeated
+    #   on the dimensions that we do not extract
+    # - this hits an edge case in the import tool, which we want to avoid
+    schemas = list(set(schemas))
+    tmcfs = list(set(tmcfs))
+
+    schema_out = "\n".join(schemas)
+    tmcf_out = "".join(tmcfs)
 
     # write out the results
     with open(SCHEMA_OUTFILE_FILENAME, "w") as outfile:
