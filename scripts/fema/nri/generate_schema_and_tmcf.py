@@ -1,4 +1,3 @@
-# todo: remove duplicate schemas
 # these are generated because part of what the dataset considers to be different
 # measures, we consider it as different units measuring the same
 # StatisticalVariable
@@ -11,7 +10,7 @@ from util.constants import IGNORED_FIELDS
 
 # i/o filenames
 NRI_DATADICTIONARY_INFILE_FILENAME = "source_data/NRIDataDictionary.csv"
-SCHEMA_OUTFILE_FILENAME = "output/fema_nri_schema.mcf"
+SCHEMA_OUTFILE_FILENAME = "output/fema_nri_stat_vars.mcf"
 TMCF_OUTFILE_FILENAME = "output/fema_nri_counties.tmcf"
 
 # feature flags
@@ -69,6 +68,22 @@ DATACOMMONS_ALIASES = {
     "ExpectedAnnualLoss": "expectedLoss"
 }
 
+
+def prune_list_dupes(l):
+    """
+    Given a list L, computes a new list K where the duplicate 
+    items in L are omitted, but all other items keep their
+    initial ordering.
+
+    Returns the new list K
+    """
+    k = []
+    for el in l:
+        if el not in k:
+            k.append(el)
+    return k
+
+
 def capitalize_first(string):
     """
     Given a string, capitalizes the first character.
@@ -76,6 +91,7 @@ def capitalize_first(string):
     Returns the new string
     """
     return string[0].upper() + string[1:]
+
 
 def apply_datacommon_alias(string):
     """
@@ -128,6 +144,7 @@ def tmcf_from_row(row, index, statvar_dcid, unit):
 
     return tmcf
 
+
 def extract_properties_from_row(row):
     """
 	Given a row of NRIDataDictionary, extracts the relevant properties from it.
@@ -142,6 +159,7 @@ def extract_properties_from_row(row):
         properties["is_composite"] = False
     properties["row"] = row
     return properties
+
 
 def schema_and_tmcf_from_properties(properties, index):
     """
@@ -159,7 +177,8 @@ def schema_and_tmcf_from_properties(properties, index):
         schema, statvar_dcid = format_ind_hazard_field_properties_to_schema(
             properties)
 
-    statobs_tmcf = tmcf_from_row(properties["row"], index, statvar_dcid, properties["unit"])
+    statobs_tmcf = tmcf_from_row(properties["row"], index, statvar_dcid,
+                                 properties["unit"])
     return schema, statobs_tmcf
 
 
@@ -250,7 +269,7 @@ def extract_properties_from_ind_hazard_row(row):
     hazard_type = drop_spaces(get_nth_dash_from_field_alias(row, 0)) + "Event"
     # edge case; one hazard type exists but spelled slightly different between
     # NRI and DC.
-    # solve by renaming to match existing DC class 
+    # solve by renaming to match existing DC class
     if hazard_type == "CoastalFloodingEvent":
         hazard_type = "CoastalFloodEvent"
     measured_property = apply_datacommon_alias(
@@ -316,7 +335,7 @@ def format_ind_hazard_field_properties_to_schema(properties):
 
     # capitalize dcid_list elements
     dcid_list = [capitalize_first(element) for element in dcid_list]
-    
+
     # join the rest with underscores to obtain the final dcid
     dcid = "_".join(dcid_list)
 
@@ -372,12 +391,12 @@ if __name__ == "__main__":
         if not skipped:
             extracted_properties.append(extract_properties_from_row(row))
 
-    
     schemas = []
     tmcfs = []
 
     for properties in extracted_properties:
-        statvar_mcf, statobs_tmcf = schema_and_tmcf_from_properties(properties, index)
+        statvar_mcf, statobs_tmcf = schema_and_tmcf_from_properties(
+            properties, index)
 
         schemas.append(statvar_mcf)
         tmcfs.append(statobs_tmcf)
@@ -386,8 +405,8 @@ if __name__ == "__main__":
     # - we might get duplicate nodes because the rows might be repeated
     #   on the dimensions that we do not extract
     # - this hits an edge case in the import tool, which we want to avoid
-    schemas = list(set(schemas))
-    tmcfs = list(set(tmcfs))
+    schemas = prune_list_dupes(schemas)
+    tmcfs = prune_list_dupes(tmcfs)
 
     schema_out = "\n".join(schemas)
     tmcf_out = "".join(tmcfs)
