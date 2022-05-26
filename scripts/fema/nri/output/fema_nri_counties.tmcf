@@ -79,7 +79,7 @@ unit: FemaNationalRiskScore
 
 Node: E:FEMA_NRI->E52
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodingEvent
+variableMeasured: dcs:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->CFLD_EALT 
@@ -87,7 +87,7 @@ unit: USDollar
 
 Node: E:FEMA_NRI->E53
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodingEvent
+variableMeasured: dcs:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->CFLD_EALS 
@@ -95,7 +95,7 @@ unit: FemaNationalRiskScore
 
 Node: E:FEMA_NRI->E55
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:femaNaturalHazardRiskIndex_NaturalHazardImpact_CoastalFloodingEvent
+variableMeasured: dcs:femaNaturalHazardRiskIndex_NaturalHazardImpact_CoastalFloodEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "November 2021"
 value: C:FEMA_NRI_Counties->CFLD_RISKS 

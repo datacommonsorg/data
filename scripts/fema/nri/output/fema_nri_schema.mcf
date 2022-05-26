@@ -65,27 +65,27 @@ statType: measuredValue
 naturalHazardType: dcs:AvalancheEvent
 measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodingEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 statType: measuredValue
-naturalHazardType: dcs:CoastalFloodingEvent
+naturalHazardType: dcs:CoastalFloodEvent
 measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodingEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 statType: measuredValue
-naturalHazardType: dcs:CoastalFloodingEvent
+naturalHazardType: dcs:CoastalFloodEvent
 measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_CoastalFloodingEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_CoastalFloodEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 statType: measuredValue
-naturalHazardType: dcs:CoastalFloodingEvent
+naturalHazardType: dcs:CoastalFloodEvent
 measuredProperty: femaNaturalHazardRiskIndex
 
 Node: dcid:Annual_expectedLoss_NaturalHazardImpact_ColdWaveEvent

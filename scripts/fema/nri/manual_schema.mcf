@@ -1,3 +1,4 @@
+# 4 new measuredProperties
 Node: dcid:expectedLoss
 typeOf: Property
 description: The estimated economic loss resulting from natural hazards. It quantifies loss for relevant consequence types (buildings, people, and agriculture), and in aggregate.
@@ -19,6 +20,7 @@ descriptionUrl: https://hazards.fema.gov/nri/community-resilience
 name: femaCommunityResilience
 domainIncludes: NaturalHazardImpact
 
+# 1 new unit: Fema Risk Index
 Node: dcid:femaNaturalHazardRiskIndex
 typeOf: Property
 description: The potential for negative impacts as a result of a natural hazard.
@@ -31,4 +33,32 @@ typeOf: UnitOfMeasure
 description: A unit describing the relative risk from natural hazards that a place is estimated to be, according to the FEMA National Risk Index study. Ranging from 0 to 100, where 0 is the least at risk, and 100 is the most at risk.
 name: FemaNationalRiskScore
 descriptionUrl: https://hazards.fema.gov/nri/understanding-scores-ratings
+
+# new NaturalHazardImpact Class (population type)
+Node: dcid:NaturalHazardImpact
+typeOf: Class
+description: Negative impacts, such as destruction or death, imposed upon factors such as Buildings, People, and Agriculture through occurrences of natural hazards.
+name: NaturalHazardImpact
+subClassOf: Intangible
+
+# new <Hazard>Event for individual hazards:
+Node: dcid:ColdWaveEvent
+typeOf: Class
+name: ColdWaveEvent
+subClassOf: MeteorologicalEvent
+
+Node: dcid:HeatWaveEvent
+typeOf: Class
+name: HeatWaveEvent
+subClassOf: MeteorologicalEvent
+
+Node: dcid:RiverineFloodingEvent
+typeOf: Class
+name: RiverineFloodingEvent
+subClassOf: Event
+
+Node: dcid:VolcanicActivityEvent
+typeOf: Class
+name: VolcanicActivityEvent
+subClassOf: Event
 

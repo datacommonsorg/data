@@ -229,6 +229,11 @@ def extract_properties_from_ind_hazard_row(row):
       - unit
     """
     hazard_type = drop_spaces(get_nth_dash_from_field_alias(row, 0)) + "Event"
+    # edge case; one hazard type exists but spelled slightly different between
+    # NRI and DC.
+    # solve by renaming to match existing DC class 
+    if hazard_type == "CoastalFloodingEvent":
+        hazard_type = "CoastalFloodEvent"
     measured_property = apply_datacommon_alias(
         get_nth_dash_from_field_alias(row, 1))
 
