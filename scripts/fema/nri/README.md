@@ -14,12 +14,20 @@ To generate the schema and the TMCF for the import, run
 python3 generate_schema_and_tmcf.py
 ```
 
-This will generate the following files under the `output` directory
+To clean the source data (in CSV format), run
+```
+python3 process_data.py
+```
+
+Running these 2 commands will generate the following files under the `output`
+directory
 
 1. `fema_nri_schema.mcf` holds the Schema for the StatisticalVariables in the
 dataset
 2. `fema_nri_counties.tmcf` holds the TMCF nodes for importing the dataset at
 the county level (a.k.a. `NRI_Table_Counties.csv`)
+3. `nri_table_counties.csv` holds the actual NRI study data, cleaned and
+prepared to be imported
 
 ## Linting
 
