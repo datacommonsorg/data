@@ -141,6 +141,7 @@ def _merge_rows(df: pd.DataFrame, index_list: list, f_idx: int, left_idx: int,
     """
     for idx in index_list:
         if f_idx == 0:
+            # Merging two Dataframe rows starting from -8th index
             df.iloc[idx - 1, -8:] = df.iloc[idx, left_idx:right_idx]
         else:
             df.iloc[idx - 1, -8:-1] = df.iloc[idx, left_idx:right_idx]
