@@ -37,12 +37,14 @@ NON_SCORE_RELATIVE_MEASURES = ["Rating", "Percentile"]
 # template strings
 COMPOSITE_MCF_FORMAT = """Node: dcid:{node_dcid}
 typeOf: dcs:StatisticalVariable
+statType: measuredValue
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:{m_prop}
 """
 HAZARD_MCF_FORMAT_BASE = """Node: dcid:{node_dcid}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
+statType: measuredValue
 naturalHazardType: dcs:{haz_type}
 measuredProperty: {m_prop}
 """
