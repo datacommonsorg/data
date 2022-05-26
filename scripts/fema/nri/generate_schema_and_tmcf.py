@@ -7,6 +7,8 @@ import pandas as pd
 import numpy as np
 import logging
 
+from util.constants import IGNORED_FIELDS
+
 # i/o filenames
 NRI_DATADICTIONARY_INFILE_FILENAME = "source_data/NRIDataDictionary.csv"
 SCHEMA_OUTFILE_FILENAME = "output/fema_nri_schema.mcf"
@@ -21,13 +23,6 @@ FLAG_SKIP_IMPACTED_THING_COMPONENTS = True
 FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES = True
 
 # hard coded lists of interest
-IGNORED_FIELDS = [
-    "OBJECTID", "Shape", "Shape_Length", "Shape_Area", "STATE", "STATEABBRV",
-    "STATEFIPS", "COUNTY", "COUNTYTYPE", "COUNTYFIPS", "STCOFIPS", "NRI_ID",
-    "TRACT", "TRACTFIPS", "POPULATION", "BUILDVALUE", "AGRIVALUE", "AREA",
-    "NRI_VER", "AIANNHCE", "FEDREG2020", "FEDERAL_ID", "JURS_NAME", "JURS_AREA",
-    "JURS_TYPE", "HIFLD_NAME", "HIFLD_AREA", "HIFLD_TYPE"
-]
 COMPOSITE_ROW_LAYERS = [
     "National Risk Index", "Expected Annual Loss", "Social Vulnerability",
     "Community Resilience"
