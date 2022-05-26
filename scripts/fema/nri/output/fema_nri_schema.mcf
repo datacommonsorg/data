@@ -1,397 +1,397 @@
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:FemaNaturalHazardRiskIndex
+measuredProperty: dcs:femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:ExpectedLoss
+measuredProperty: dcs:expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:ExpectedLoss
+measuredProperty: dcs:expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaSocialVulnerability_NaturalHazardImpact
+Node: dcid:femaSocialVulnerability_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:FemaSocialVulnerability
+measuredProperty: dcs:femaSocialVulnerability
 
-Node: dcid:FemaSocialVulnerability_NaturalHazardImpact
+Node: dcid:femaSocialVulnerability_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:FemaSocialVulnerability
+measuredProperty: dcs:femaSocialVulnerability
 
-Node: dcid:FemaCommunityResilience_NaturalHazardImpact
+Node: dcid:femaCommunityResilience_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:FemaCommunityResilience
+measuredProperty: dcs:femaCommunityResilience
 
-Node: dcid:FemaCommunityResilience_NaturalHazardImpact
+Node: dcid:femaCommunityResilience_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-measuredProperty: dcs:FemaCommunityResilience
+measuredProperty: dcs:femaCommunityResilience
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_AvalancheEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_AvalancheEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:AvalancheEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_AvalancheEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_AvalancheEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:AvalancheEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_AvalancheEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_AvalancheEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:AvalancheEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_CoastalFloodingEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodingEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:CoastalFloodingEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_CoastalFloodingEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_CoastalFloodingEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:CoastalFloodingEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_CoastalFloodingEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_CoastalFloodingEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:CoastalFloodingEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_ColdWaveEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_ColdWaveEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:ColdWaveEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_ColdWaveEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_ColdWaveEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:ColdWaveEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_ColdWaveEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_ColdWaveEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:ColdWaveEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_DroughtEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_DroughtEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:DroughtEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_DroughtEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_DroughtEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:DroughtEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_DroughtEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_DroughtEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:DroughtEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_EarthquakeEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_EarthquakeEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:EarthquakeEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_EarthquakeEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_EarthquakeEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:EarthquakeEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_EarthquakeEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_EarthquakeEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:EarthquakeEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_HailEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_HailEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:HailEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_HailEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_HailEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:HailEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HailEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_HailEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:HailEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_HeatWaveEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_HeatWaveEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:HeatWaveEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_HeatWaveEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_HeatWaveEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:HeatWaveEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HeatWaveEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_HeatWaveEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:HeatWaveEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_HurricaneEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_HurricaneEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:HurricaneEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_HurricaneEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_HurricaneEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:HurricaneEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HurricaneEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_HurricaneEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:HurricaneEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_IceStormEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_IceStormEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:IceStormEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_IceStormEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_IceStormEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:IceStormEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_IceStormEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_IceStormEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:IceStormEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_LandslideEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_LandslideEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:LandslideEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_LandslideEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_LandslideEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:LandslideEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_LandslideEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_LandslideEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:LandslideEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_LightningEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_LightningEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:LightningEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_LightningEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_LightningEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:LightningEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_LightningEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_LightningEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:LightningEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_RiverineFloodingEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_RiverineFloodingEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:RiverineFloodingEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_RiverineFloodingEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_RiverineFloodingEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:RiverineFloodingEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_RiverineFloodingEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_RiverineFloodingEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:RiverineFloodingEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_StrongWindEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_StrongWindEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:StrongWindEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_StrongWindEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_StrongWindEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:StrongWindEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_StrongWindEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_StrongWindEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:StrongWindEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_TornadoEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_TornadoEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:TornadoEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_TornadoEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_TornadoEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:TornadoEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_TornadoEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_TornadoEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:TornadoEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_TsunamiEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_TsunamiEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:TsunamiEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_TsunamiEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_TsunamiEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:TsunamiEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_TsunamiEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_TsunamiEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:TsunamiEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_VolcanicActivityEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_VolcanicActivityEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:VolcanicActivityEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_VolcanicActivityEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_VolcanicActivityEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:VolcanicActivityEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_VolcanicActivityEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_VolcanicActivityEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:VolcanicActivityEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_WildfireEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_WildfireEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:WildfireEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_WildfireEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_WildfireEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:WildfireEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_WildfireEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_WildfireEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:WildfireEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_WinterWeatherEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_WinterWeatherEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:WinterWeatherEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_WinterWeatherEvent
+Node: dcid:Annual_expectedLoss_NaturalHazardImpact_WinterWeatherEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:WinterWeatherEvent
-measuredProperty: ExpectedLoss
+measuredProperty: expectedLoss
 measurementQualifier: Annual
 
-Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_WinterWeatherEvent
+Node: dcid:femaNaturalHazardRiskIndex_NaturalHazardImpact_WinterWeatherEvent
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
 naturalHazardType: dcs:WinterWeatherEvent
-measuredProperty: FemaNaturalHazardRiskIndex
+measuredProperty: femaNaturalHazardRiskIndex
 

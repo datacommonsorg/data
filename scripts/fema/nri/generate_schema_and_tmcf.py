@@ -58,13 +58,13 @@ value: C:FEMA_NRI_Counties->{field_name}
 # mappings
 DATACOMMONS_ALIASES = {
     "Score": "FemaNationalRiskScore",
-    "SocialVulnerability": "FemaSocialVulnerability",
-    "CommunityResilience": "FemaCommunityResilience",
-    "HazardTypeRiskIndex": "FemaNaturalHazardRiskIndex",
-    "Hazard Type Risk Index": "FemaNaturalHazardRiskIndex",
-    "NationalRiskIndex": "FemaNaturalHazardRiskIndex",
-    "Expected Annual Loss": "ExpectedLoss",
-    "ExpectedAnnualLoss": "ExpectedLoss"
+    "SocialVulnerability": "femaSocialVulnerability",
+    "CommunityResilience": "femaCommunityResilience",
+    "HazardTypeRiskIndex": "femaNaturalHazardRiskIndex",
+    "Hazard Type Risk Index": "femaNaturalHazardRiskIndex",
+    "NationalRiskIndex": "femaNaturalHazardRiskIndex",
+    "Expected Annual Loss": "expectedLoss",
+    "ExpectedAnnualLoss": "expectedLoss"
 }
 
 
@@ -160,7 +160,7 @@ def normalize_unit_for_measured_property(measured_property, unit):
     Returns the normalized measured_property and unit as a tuple.
     """
 
-    if measured_property == "ExpectedLoss":
+    if measured_property == "expectedLoss":
         if unit != "FemaNationalRiskScore":
             unit = "USDollar"
     else:
@@ -200,7 +200,7 @@ def format_composite_field_properties_to_schema(properties):
     """
     measured_property = properties["measured_property"]
 
-    if measured_property == "ExpectedLoss":
+    if measured_property == "expectedLoss":
         dcid = f"Annual_{measured_property}_NaturalHazardImpact"
     else:
         dcid = f"{measured_property}_NaturalHazardImpact"
@@ -208,7 +208,7 @@ def format_composite_field_properties_to_schema(properties):
     formatted = COMPOSITE_MCF_FORMAT.format(
         node_dcid=dcid, m_prop=measured_property)
 
-    if measured_property == "ExpectedLoss":
+    if measured_property == "expectedLoss":
         formatted += "measurementQualifier: Annual\n"
 
     return formatted, dcid
@@ -241,7 +241,7 @@ def extract_properties_from_ind_hazard_row(row):
         measured_property, unit)
 
     measurement_qualifier = ""
-    if measured_property == "ExpectedLoss":
+    if measured_property == "expectedLoss":
         measurement_qualifier = "Annual"
 
     measured_property = drop_spaces(measured_property)
