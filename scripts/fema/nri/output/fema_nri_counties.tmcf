@@ -33,27 +33,13 @@ unit: FemaNationalRiskScore
 
 Node: E:FEMA_NRI->E4
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:FemaSocialVulnerability_NaturalHazardImpact
-observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
-observationDate: "2021-11"
-value: C:FEMA_NRI_Counties->SOVI_VALUE 
-
-Node: E:FEMA_NRI->E5
-typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaCommunityResilience_NaturalHazardImpact
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->RESL_SCORE 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E6
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:FemaCommunityResilience_NaturalHazardImpact
-observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
-observationDate: "2021-11"
-value: C:FEMA_NRI_Counties->RESL_VALUE 
-
-Node: E:FEMA_NRI->E7
+Node: E:FEMA_NRI->E5
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_AvalancheEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -61,7 +47,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->AVLN_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E8
+Node: E:FEMA_NRI->E6
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_AvalancheEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -69,7 +55,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->AVLN_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E9
+Node: E:FEMA_NRI->E7
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_AvalancheEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -77,7 +63,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->AVLN_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E10
+Node: E:FEMA_NRI->E8
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_CoastalFloodEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -85,7 +71,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->CFLD_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E11
+Node: E:FEMA_NRI->E9
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_CoastalFloodEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -93,7 +79,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->CFLD_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E12
+Node: E:FEMA_NRI->E10
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_CoastalFloodEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -101,7 +87,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->CFLD_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E13
+Node: E:FEMA_NRI->E11
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_ColdWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -109,7 +95,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->CWAV_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E14
+Node: E:FEMA_NRI->E12
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_ColdWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -117,7 +103,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->CWAV_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E15
+Node: E:FEMA_NRI->E13
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_ColdWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -125,7 +111,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->CWAV_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E16
+Node: E:FEMA_NRI->E14
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_DroughtEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -133,7 +119,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->DRGT_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E17
+Node: E:FEMA_NRI->E15
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_DroughtEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -141,7 +127,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->DRGT_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E18
+Node: E:FEMA_NRI->E16
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_DroughtEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -149,7 +135,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->DRGT_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E19
+Node: E:FEMA_NRI->E17
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_EarthquakeEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -157,7 +143,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->ERQK_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E20
+Node: E:FEMA_NRI->E18
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_EarthquakeEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -165,7 +151,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->ERQK_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E21
+Node: E:FEMA_NRI->E19
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_EarthquakeEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -173,7 +159,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->ERQK_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E22
+Node: E:FEMA_NRI->E20
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HailEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -181,7 +167,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->HAIL_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E23
+Node: E:FEMA_NRI->E21
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HailEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -189,7 +175,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->HAIL_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E24
+Node: E:FEMA_NRI->E22
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HailEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -197,7 +183,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->HAIL_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E25
+Node: E:FEMA_NRI->E23
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HeatWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -205,7 +191,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->HWAV_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E26
+Node: E:FEMA_NRI->E24
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HeatWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -213,7 +199,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->HWAV_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E27
+Node: E:FEMA_NRI->E25
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HeatWaveEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -221,7 +207,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->HWAV_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E28
+Node: E:FEMA_NRI->E26
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HurricaneEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -229,7 +215,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->HRCN_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E29
+Node: E:FEMA_NRI->E27
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_HurricaneEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -237,7 +223,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->HRCN_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E30
+Node: E:FEMA_NRI->E28
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HurricaneEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -245,7 +231,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->HRCN_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E31
+Node: E:FEMA_NRI->E29
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_IceStormEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -253,7 +239,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->ISTM_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E32
+Node: E:FEMA_NRI->E30
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_IceStormEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -261,7 +247,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->ISTM_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E33
+Node: E:FEMA_NRI->E31
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_IceStormEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -269,7 +255,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->ISTM_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E34
+Node: E:FEMA_NRI->E32
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_LandslideEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -277,7 +263,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->LNDS_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E35
+Node: E:FEMA_NRI->E33
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_LandslideEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -285,7 +271,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->LNDS_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E36
+Node: E:FEMA_NRI->E34
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_LandslideEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -293,7 +279,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->LNDS_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E37
+Node: E:FEMA_NRI->E35
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_LightningEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -301,7 +287,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->LTNG_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E38
+Node: E:FEMA_NRI->E36
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_LightningEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -309,7 +295,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->LTNG_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E39
+Node: E:FEMA_NRI->E37
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_LightningEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -317,7 +303,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->LTNG_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E40
+Node: E:FEMA_NRI->E38
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_RiverineFloodingEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -325,7 +311,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->RFLD_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E41
+Node: E:FEMA_NRI->E39
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_RiverineFloodingEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -333,7 +319,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->RFLD_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E42
+Node: E:FEMA_NRI->E40
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_RiverineFloodingEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -341,7 +327,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->RFLD_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E43
+Node: E:FEMA_NRI->E41
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_StrongWindEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -349,7 +335,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->SWND_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E44
+Node: E:FEMA_NRI->E42
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_StrongWindEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -357,7 +343,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->SWND_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E45
+Node: E:FEMA_NRI->E43
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_StrongWindEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -365,7 +351,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->SWND_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E46
+Node: E:FEMA_NRI->E44
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_TornadoEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -373,7 +359,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->TRND_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E47
+Node: E:FEMA_NRI->E45
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_TornadoEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -381,7 +367,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->TRND_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E48
+Node: E:FEMA_NRI->E46
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_TornadoEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -389,7 +375,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->TRND_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E49
+Node: E:FEMA_NRI->E47
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_TsunamiEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -397,7 +383,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->TSUN_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E50
+Node: E:FEMA_NRI->E48
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_TsunamiEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -405,7 +391,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->TSUN_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E51
+Node: E:FEMA_NRI->E49
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_TsunamiEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -413,7 +399,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->TSUN_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E52
+Node: E:FEMA_NRI->E50
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_VolcanicActivityEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -421,7 +407,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->VLCN_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E53
+Node: E:FEMA_NRI->E51
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_VolcanicActivityEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -429,7 +415,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->VLCN_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E54
+Node: E:FEMA_NRI->E52
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_VolcanicActivityEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -437,7 +423,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->VLCN_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E55
+Node: E:FEMA_NRI->E53
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_WildfireEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -445,7 +431,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->WFIR_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E56
+Node: E:FEMA_NRI->E54
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_WildfireEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -453,7 +439,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->WFIR_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E57
+Node: E:FEMA_NRI->E55
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_WildfireEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -461,7 +447,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->WFIR_RISKS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E58
+Node: E:FEMA_NRI->E56
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_WinterWeatherEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -469,7 +455,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->WNTW_EALT 
 unit: USDollar
 
-Node: E:FEMA_NRI->E59
+Node: E:FEMA_NRI->E57
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_WinterWeatherEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
@@ -477,7 +463,7 @@ observationDate: "2021-11"
 value: C:FEMA_NRI_Counties->WNTW_EALS 
 unit: FemaNationalRiskScore
 
-Node: E:FEMA_NRI->E60
+Node: E:FEMA_NRI->E58
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_WinterWeatherEvent
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID

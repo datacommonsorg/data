@@ -20,6 +20,8 @@ FLAG_SKIP_EAL_COMPONENTS = True
 FLAG_SKIP_IMPACTED_THING_COMPONENTS = True
 # skip {Rating, National Percentile, State Percentile}
 FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES = True
+# skip {Community Resilience Raw Value, Social Vulnerability Raw Value}
+FLAG_SKIP_RAW_VALUES = True
 
 # hard coded lists of interest
 COMPOSITE_ROW_LAYERS = [
@@ -31,6 +33,7 @@ EAL_COMPONENTS = [
     "Exposure"
 ]
 IMPACTED_THING_COMPONENTS = ["Building", "Population", "Agriculture"]
+RAW_VALUE_COMPONENTS = ["Social Vulnerability - Value", "Community Resilience - Value"]
 NON_SCORE_RELATIVE_MEASURES = ["Rating", "Percentile"]
 
 # template strings
@@ -364,6 +367,8 @@ if __name__ == "__main__":
         field_alias_strings_to_skip.extend(IMPACTED_THING_COMPONENTS)
     if FLAG_SKIP_NON_SCORE_RELATIVE_MEASURES:
         field_alias_strings_to_skip.extend(NON_SCORE_RELATIVE_MEASURES)
+    if FLAG_SKIP_RAW_VALUES:
+        field_alias_strings_to_skip.extend(RAW_VALUE_COMPONENTS)
 
     # load the dataset and drop the ignored fields
     dd = pd.read_csv(NRI_DATADICTIONARY_INFILE_FILENAME)
