@@ -1,0 +1,99 @@
+{
+    "populationType": {
+        "_DEFAULT": "Person"
+    },
+    "measurement": {
+        "_DEFAULT": {
+            "measuredProperty": "count XXXXX",
+            "statType": "measuredValue"
+        },
+        "Margin of Error": {
+            "measuredProperty": "count",
+            "statType": "marginOfError"
+        },
+        "Mean usual hours worked for workers": {
+            "measuredProperty": "usualHoursWorked",
+            "statType": "meanValue",
+            "unit": "Hour"
+        },
+        "Median age of workers 16 to 64 years": {
+            "measuredProperty": "age",
+            "statType": "medianValue",
+            "unit": "Year"
+        },
+        "Total": {
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        },
+        "Margin of Error XXXXX": {
+            "statType": "marginOfError",
+            "measuredProperty": "count",
+            "age": "[15 - Years]"
+        }
+    },
+    "enumSpecializations": {},
+    "pvs": {
+        "statType": {
+            "Margin of Error": "marginOfError"
+        },
+        "age": {
+            "Population 16 to 64 years": "[16 64 Years]"
+        },
+        "gender": {
+            "Male": "Male",
+            "Female": "Female"
+        },
+        "workPeriod": {
+            "Worked 50 to 52 weeks": "[50 52 Week]",
+            "Worked 48 to 49 weeks": "[48 49 Week]",
+            "Worked 40 to 47 weeks": "[40 47 Week]",
+            "Worked 27 to 39 weeks": "[27 39 Week]",
+            "Worked 14 to 26 weeks": "[14 26 Week]",
+            "Worked 1 to 13 weeks": "[1 13 Week]",
+            "50 to 52 weeks": "[50 52 Week]",
+            "48 to 49 weeks": "[48 49 Week]",
+            "40 to 47 weeks": "[40 47 Week]",
+            "27 to 39 weeks": "[27 39 Week]",
+            "14 to 26 weeks": "[14 26 Week]",
+            "1 to 13 weeks": "[1 13 Week]"
+        },
+        "usualHoursWorked": {
+            "Usually worked 35 or more hours per week": "[35 - Hour]",
+            "Usually worked 15 to 34 hours per week": "[15 34 Hour]",
+            "Usually worked 1 to 14 hours per week": "[1 14 Hour]"
+        },
+        "workStatus": {
+            "WEEKS WORKED": "WorkedInThePast12Months",
+            "USUAL HOURS WORKED": "WorkedInThePast12Months",
+            "Mean usual hours worked for workers": "WorkedInThePast12Months",
+            "Median age of workers 16 to 64 years": "WorkedInThePast12Months",
+            "Workers 16 to 64 years who worked full-time, year-round": "USC_FullTimeYearRoundWorker",
+            "Did not work": "DidNotWork"
+        }
+    },
+    "denominators": {},
+    "ignoreColumns XXXXX": [
+        "Estimate!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Estimate!!Male!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Estimate!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Geographic Area Name",
+        "Margin of Error",
+        "Margin of Error!!Female!!Population 16 to 64 years!!Mean usual hours worked for workers",
+        "Margin of Error!!Female!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+        "Margin of Error!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Margin of Error!!Male!!Population 16 to 64 years!!Mean usual hours worked for workers",
+        "Margin of Error!!Male!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+        "Margin of Error!!Male!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Margin of Error!!Total!!Population 16 to 64 years!!Mean usual hours worked for workers",
+        "Margin of Error!!Total!!Population 16 to 64 years!!Median age of workers 16 to 64 years",
+        "Margin of Error!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Percent",
+        "Percent Female",
+        "Percent Male",
+        "Total",
+        "id"
+    ],
+    "ignoreTokens XXXXX": [
+        "Estimate"
+    ]
+}
