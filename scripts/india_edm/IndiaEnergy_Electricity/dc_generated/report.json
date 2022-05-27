@@ -1,0 +1,408 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "346",
+        "NumPVSuccesses": "3806",
+        "Existence_NumChecks": "3806",
+        "NumNodeSuccesses": "692",
+        "Resolution_NumDcCalls": "1",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "2",
+        "StatsCheck_3_Sigma": "1",
+        "Existence_MissingReference_variableMeasured": "249",
+        "StatsCheck_Data_Holes": "6"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Electricity.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Electricity_DieselOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Electricity->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Potential_Electricity_PumpedHydro",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "Megawatt",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2015-03-01, 2017-03-01, 2018-03-01, 2019-03-01, 2020-03-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Electricity_UN_UnspecifiedSector",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "KilowattHour",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2016-03-01",
+        "values": [{
+          "value": 3007.34,
+          "locations": [{
+            "file": "IndiaEnergy_Electricity.csv",
+            "lineNumber": "193"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2015-03-01",
+        "values": [{
+          "value": 1023.865,
+          "locations": [{
+            "file": "IndiaEnergy_Electricity.csv",
+            "lineNumber": "192"
+          }]
+        }]
+      }, {
+        "date": "2016-03-01",
+        "values": [{
+          "value": 3007.34,
+          "locations": [{
+            "file": "IndiaEnergy_Electricity.csv",
+            "lineNumber": "193"
+          }]
+        }]
+      }],
+      "percentDifference": 193.72
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Potential_Electricity_NonRenewableWaste",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "Megawatt",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2015-03-01, 2017-03-01, 2018-03-01, 2019-03-01, 2020-03-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Potential_Electricity_Bagasse",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "Megawatt",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2015-03-01, 2017-03-01, 2018-03-01, 2019-03-01, 2020-03-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Potential_Electricity_OtherBiomass",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "Megawatt",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2015-03-01, 2017-03-01, 2018-03-01, 2019-03-01, 2020-03-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Capacity_Electricity_Solar",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "Megawatt",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018-03-01",
+        "values": [{
+          "value": 218.935,
+          "locations": [{
+            "file": "IndiaEnergy_Electricity.csv",
+            "lineNumber": "96"
+          }]
+        }]
+      }, {
+        "date": "2019-03-01",
+        "values": [{
+          "value": 1063.758,
+          "locations": [{
+            "file": "IndiaEnergy_Electricity.csv",
+            "lineNumber": "97"
+          }]
+        }]
+      }],
+      "percentDifference": 385.88
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Potential_Electricity_Solar",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "Megawatt",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2015-03-01, 2017-03-01, 2018-03-01, 2019-03-01, 2020-03-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Capacity_Electricity_Wind",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "Megawatt",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2006-03-01, 2007-03-01, 2008-03-01, 2009-03-01, 2010-03-01, 2011-03-01, 2012-03-01, 2014-03-01, 2015-03-01, 2016-03-01, 2017-03-01, 2018-03-01, 2019-03-01, 2020-03-01"
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_FULL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

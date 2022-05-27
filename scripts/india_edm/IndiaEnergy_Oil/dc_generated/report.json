@@ -1,0 +1,656 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "508",
+        "NumPVSuccesses": "5588",
+        "Existence_NumChecks": "5588",
+        "NumNodeSuccesses": "1016",
+        "Resolution_NumDcCalls": "1",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "7",
+        "StatsCheck_3_Sigma": "5",
+        "Existence_MissingReference_variableMeasured": "412",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "3",
+        "StatsCheck_Data_Holes": "3"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_CrudeOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_CrudeOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_CrudeOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_CrudeOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_CrudeOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_LiquefiedPetroleumGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_LiquefiedPetroleumGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_LiquefiedPetroleumGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_LiquefiedPetroleumGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_LiquefiedPetroleumGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_PetroleumLiquids', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_PetroleumLiquids', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_PetroleumLiquids', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_PetroleumLiquids', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Capacity_Fuel_PetroleumLiquids', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "47"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "48"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "49"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "50"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "51"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "52"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "53"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "54"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "55"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "56"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "57"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "58"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "59"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "60"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Oil.csv",
+      "lineNumber": "61"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_FuelOil', property: 'variableMeasured', node: 'E:IndiaEnergy_Oil->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_IronSteel_FuelOil",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2006-03-01, 2007-03-01, 2008-03-01, 2009-03-01, 2010-03-01, 2012-03-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Monthly_Imports_Fuel_MotorGasoline",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-12-01",
+        "values": [{
+          "value": 543500.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "410"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2020-05-01",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "403"
+          }]
+        }]
+      }, {
+        "date": "2020-06-01",
+        "values": [{
+          "value": 34980.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "404"
+          }]
+        }]
+      }],
+      "percentDifference": 3.498E12
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_FuelOil",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2007-03-01",
+        "values": [{
+          "value": 1197000.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "33"
+          }]
+        }]
+      }, {
+        "date": "2008-03-01",
+        "values": [{
+          "value": 6048000.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "34"
+          }]
+        }]
+      }],
+      "percentDifference": 405.26
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_Households_FuelOil",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03-01",
+        "values": [{
+          "value": 9131000.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "80"
+          }]
+        }]
+      }, {
+        "date": "2010-03-01",
+        "values": [{
+          "value": 2.04653E7,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "81"
+          }]
+        }]
+      }],
+      "percentDifference": 124.13
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Monthly_Imports_Fuel_PetroleumCoke",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2019-04-01",
+        "values": [{
+          "value": 1316630.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "468"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2019-04-01, 2019-05-01, 2020-04-01, 2020-05-01, 2020-06-01, 2020-07-01, 2020-08-01, 2020-09-01, 2020-10-01, 2020-11-01, 2020-12-01, 2021-01-01, 2021-02-01, 2021-03-01, 2021-04-01, 2021-05-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Monthly_Imports_Fuel_DieselOil",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-01-01",
+        "values": [{
+          "value": 684873.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "243"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2019-11-01",
+        "values": [{
+          "value": 16667.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "241"
+          }]
+        }]
+      }, {
+        "date": "2019-12-01",
+        "values": [{
+          "value": 507409.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "242"
+          }]
+        }]
+      }],
+      "percentDifference": 2944.39
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_UN_UnspecifiedSector_FuelOil",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2010-03-01",
+        "values": [{
+          "value": 5.76803E7,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "223"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03-01",
+        "values": [{
+          "value": 1.2725E7,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "222"
+          }]
+        }]
+      }, {
+        "date": "2010-03-01",
+        "values": [{
+          "value": 5.76803E7,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "223"
+          }]
+        }]
+      }],
+      "percentDifference": 353.28
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_RetailIndustry_FuelOil",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03-01",
+        "values": [{
+          "value": 1.1607E7,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "193"
+          }]
+        }]
+      }, {
+        "date": "2011-03-01",
+        "values": [{
+          "value": 4.87039E7,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "194"
+          }]
+        }]
+      }],
+      "percentDifference": 319.61
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2006-03-01, 2007-03-01, 2008-03-01, 2009-03-01, 2011-03-01, 2012-03-01, 2013-03-01, 2014-03-01, 2015-03-01, 2016-03-01, 2017-03-01, 2018-03-01, 2019-03-01, 2020-03-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Monthly_Imports_Fuel_Naphtha",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2019-06-01",
+        "values": [{
+          "value": 70473.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "418"
+          }]
+        }]
+      }, {
+        "date": "2019-07-01",
+        "values": [{
+          "value": 203323.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "419"
+          }]
+        }]
+      }],
+      "percentDifference": 188.51
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Monthly_Imports_Fuel_GasolineJetFuel",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2019-04-01",
+        "values": [{
+          "value": 64910.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "312"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2019-12-01",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "320"
+          }]
+        }]
+      }, {
+        "date": "2020-01-01",
+        "values": [{
+          "value": 1161.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "321"
+          }]
+        }]
+      }],
+      "percentDifference": 1.161E11
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Monthly_Imports_Fuel_UN_OtherOilProducts",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2019-05-01",
+        "values": [{
+          "value": 333350.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "485"
+          }]
+        }]
+      }, {
+        "date": "2019-06-01",
+        "values": [{
+          "value": 1132319.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "486"
+          }]
+        }]
+      }],
+      "percentDifference": 239.68
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Monthly_Imports_Fuel_FuelOil",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2019-05-01",
+        "values": [{
+          "value": 77330.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "287"
+          }]
+        }]
+      }, {
+        "date": "2019-06-01",
+        "values": [{
+          "value": 283957.0,
+          "locations": [{
+            "file": "IndiaEnergy_Oil.csv",
+            "lineNumber": "288"
+          }]
+        }]
+      }],
+      "percentDifference": 267.2
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_FULL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

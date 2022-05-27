@@ -1,0 +1,434 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "241",
+        "NumPVSuccesses": "2651",
+        "Existence_NumChecks": "2651",
+        "NumNodeSuccesses": "482",
+        "Resolution_NumDcCalls": "1",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "4",
+        "Existence_MissingReference_variableMeasured": "141",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "1",
+        "StatsCheck_Data_Holes": "2"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "32"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "33"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "34"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "35"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "36"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "37"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "38"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "39"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "40"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "41"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "42"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "43"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "44"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "45"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "46"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "47"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "48"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "49"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "50"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "51"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "52"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "53"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "54"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "55"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "56"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "57"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "58"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "59"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "60"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "IndiaEnergy_Gas.csv",
+      "lineNumber": "61"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas', property: 'variableMeasured', node: 'E:IndiaEnergy_Gas->E0'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_IronSteel_NaturalGas",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "CubicMeter",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2015-03-01",
+        "values": [{
+          "value": 1.5359E8,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "97"
+          }]
+        }]
+      }, {
+        "date": "2016-03-01",
+        "values": [{
+          "value": 5.4432E8,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "98"
+          }]
+        }]
+      }],
+      "percentDifference": 254.4
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Imports_Fuel_NaturalGasLiquids",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2005-03-01",
+        "values": [{
+          "value": 2371848.25,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "175"
+          }]
+        }]
+      }, {
+        "date": "2006-03-01",
+        "values": [{
+          "value": 4776791.609999999,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "176"
+          }]
+        }]
+      }],
+      "percentDifference": 101.4
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "CubicMeter",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2006-03-01, 2008-03-01, 2009-03-01, 2010-03-01, 2011-03-01, 2012-03-01, 2013-03-01, 2014-03-01, 2015-03-01, 2016-03-01, 2017-03-01, 2018-03-01, 2019-03-01, 2020-03-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "CubicMeter",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03-01",
+        "values": [{
+          "value": 3.42E9,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "148"
+          }]
+        }]
+      }, {
+        "date": "2010-03-01",
+        "values": [{
+          "value": 7.272E9,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "149"
+          }]
+        }]
+      }],
+      "percentDifference": 112.63
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_OilRefineries_NaturalGas",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "CubicMeter",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2011-03-01",
+        "values": [{
+          "value": 1.529E9,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "124"
+          }]
+        }]
+      }, {
+        "date": "2017-03-01",
+        "values": [{
+          "value": 5.37437E9,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "125"
+          }]
+        }]
+      }],
+      "percentDifference": 251.5
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03-01, 2010-03-01, 2011-03-01, 2017-03-01, 2018-03-01, 2019-03-01, 2020-03-01"
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Fuel_Households_NaturalGas",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "CubicMeter",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2008-03-01",
+        "values": [{
+          "value": 3.8E7,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "67"
+          }]
+        }]
+      }, {
+        "date": "2009-03-01",
+        "values": [{
+          "value": 4.27249E8,
+          "locations": [{
+            "file": "IndiaEnergy_Gas.csv",
+            "lineNumber": "68"
+          }]
+        }]
+      }],
+      "percentDifference": 1024.34
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_FULL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

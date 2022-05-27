@@ -1,0 +1,3615 @@
+Node: IndiaEnergy_Gas/E0/eb820a8d-9a1b-6297-8332-efd436b6e50b
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 151000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2006-03-01value=151000000.0unit=CubicMeter"
+dcid: "dc/o/9m121bmz1qkl1"
+
+Node: IndiaEnergy_Gas/E1/eb820a8d-9a1b-6297-8332-efd436b6e50b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/81caac98-6df5-7e9d-5825-55cc1ed30042
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 170000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2007-03-01value=170000000.0unit=CubicMeter"
+dcid: "dc/o/2jhsqbpdct8wg"
+
+Node: IndiaEnergy_Gas/E1/81caac98-6df5-7e9d-5825-55cc1ed30042
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/816bc3c8-f580-ada9-e492-029fb3807834
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 160000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2008-03-01value=160000000.0unit=CubicMeter"
+dcid: "dc/o/fgkw88758pf94"
+
+Node: IndiaEnergy_Gas/E1/816bc3c8-f580-ada9-e492-029fb3807834
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/38ae23a0-9feb-cb74-6d54-799b1b1298c1
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 154000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2009-03-01value=154000000.0unit=CubicMeter"
+dcid: "dc/o/xzg9s9c8e9gzg"
+
+Node: IndiaEnergy_Gas/E1/38ae23a0-9feb-cb74-6d54-799b1b1298c1
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/cb55293a-c001-5088-4e55-651de251a333
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 167000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2010-03-01value=167000000.0unit=CubicMeter"
+dcid: "dc/o/lj64lbd2cmd4h"
+
+Node: IndiaEnergy_Gas/E1/cb55293a-c001-5088-4e55-651de251a333
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/26fad68c-b039-3675-618d-7b2bc9700e8a
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 193000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2011-03-01value=193000000.0unit=CubicMeter"
+dcid: "dc/o/9k09x5d3kfcw4"
+
+Node: IndiaEnergy_Gas/E1/26fad68c-b039-3675-618d-7b2bc9700e8a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/0fddd8cc-13a6-7586-6712-8cca3f2ebeed
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 175000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2012-03-01value=175000000.0unit=CubicMeter"
+dcid: "dc/o/3ym5fpj5jx34g"
+
+Node: IndiaEnergy_Gas/E1/0fddd8cc-13a6-7586-6712-8cca3f2ebeed
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/0ccfa8cc-cdf2-3a2d-7590-88fa80f7374b
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 182000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2013-03-01value=182000000.0unit=CubicMeter"
+dcid: "dc/o/r9pnlc5s3wt8h"
+
+Node: IndiaEnergy_Gas/E1/0ccfa8cc-cdf2-3a2d-7590-88fa80f7374b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/31ae67b0-6a5c-ee79-88f3-a484e9d30ebd
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 195720000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2014-03-01value=195720000.0unit=CubicMeter"
+dcid: "dc/o/9nrd1371pt3s8"
+
+Node: IndiaEnergy_Gas/E1/31ae67b0-6a5c-ee79-88f3-a484e9d30ebd
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d2079461-c8cf-c666-bbd8-b5e772f495ef
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 180480000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2015-03-01value=180480000.0unit=CubicMeter"
+dcid: "dc/o/2lj6j24ezx60h"
+
+Node: IndiaEnergy_Gas/E1/d2079461-c8cf-c666-bbd8-b5e772f495ef
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/50e4275a-7404-5649-5bf1-aad8cb7508a8
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
+value: 188240000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Agriculture_NaturalGasobservationDate=2016-03-01value=188240000.0unit=CubicMeter"
+dcid: "dc/o/b0ek41rr289gh"
+
+Node: IndiaEnergy_Gas/E1/50e4275a-7404-5649-5bf1-aad8cb7508a8
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/4ae05fe9-0eff-528b-9a35-2f5a6b602dd9
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 1175000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2006-03-01value=1175000000.0unit=CubicMeter"
+dcid: "dc/o/pw9ce1dv660c7"
+
+Node: IndiaEnergy_Gas/E1/4ae05fe9-0eff-528b-9a35-2f5a6b602dd9
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/36d4abf3-e25c-436c-90dc-cec1d3cfe0d3
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 1377000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2007-03-01value=1377000000.0unit=CubicMeter"
+dcid: "dc/o/n3xsqrgcbgkj1"
+
+Node: IndiaEnergy_Gas/E1/36d4abf3-e25c-436c-90dc-cec1d3cfe0d3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/83c61cbc-4e59-c143-f396-e0b87ed3fc69
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 1432000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2008-03-01value=1432000000.0unit=CubicMeter"
+dcid: "dc/o/hrhpf72mgc1nb"
+
+Node: IndiaEnergy_Gas/E1/83c61cbc-4e59-c143-f396-e0b87ed3fc69
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/fdf36b8f-e5b8-b9cd-fb58-ecafef7839ca
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 1105000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2009-03-01value=1105000000.0unit=CubicMeter"
+dcid: "dc/o/p07wf8qbjej49"
+
+Node: IndiaEnergy_Gas/E1/fdf36b8f-e5b8-b9cd-fb58-ecafef7839ca
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1d2c5f7d-be00-6963-fc1e-23a8e47836d4
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 1264000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2010-03-01value=1264000000.0unit=CubicMeter"
+dcid: "dc/o/tve3nv9mv6xw4"
+
+Node: IndiaEnergy_Gas/E1/1d2c5f7d-be00-6963-fc1e-23a8e47836d4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/9283b959-f32e-a798-5dbc-4596a069ef78
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 1309000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2011-03-01value=1309000000.0unit=CubicMeter"
+dcid: "dc/o/dwwkqspje1x81"
+
+Node: IndiaEnergy_Gas/E1/9283b959-f32e-a798-5dbc-4596a069ef78
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/73f2bb65-8776-9e14-cafb-d229dc9d8afb
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 1857690000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2012-03-01value=1857690000.0unit=CubicMeter"
+dcid: "dc/o/eg33j5qpfb86c"
+
+Node: IndiaEnergy_Gas/E1/73f2bb65-8776-9e14-cafb-d229dc9d8afb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b50a1449-9301-f2d0-6d52-5739acfbbf6c
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 2485960000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2013-03-01value=2485960000.0unit=CubicMeter"
+dcid: "dc/o/2ttyx4jbqycyd"
+
+Node: IndiaEnergy_Gas/E1/b50a1449-9301-f2d0-6d52-5739acfbbf6c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1da9d7f9-eeba-bb22-5f97-5ec44e76e602
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 2404660000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2014-03-01value=2404660000.0unit=CubicMeter"
+dcid: "dc/o/6f87vy6lp2722"
+
+Node: IndiaEnergy_Gas/E1/1da9d7f9-eeba-bb22-5f97-5ec44e76e602
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/3c267e1f-0d0c-3071-e3f6-c237ecd4c8fb
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 2889670000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2015-03-01value=2889670000.0unit=CubicMeter"
+dcid: "dc/o/d91bn0yxkdz96"
+
+Node: IndiaEnergy_Gas/E1/3c267e1f-0d0c-3071-e3f6-c237ecd4c8fb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1f3ae169-289d-165a-0462-a2242c29e83c
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 3733280000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2016-03-01value=3733280000.0unit=CubicMeter"
+dcid: "dc/o/tdpqe77z5v5d"
+
+Node: IndiaEnergy_Gas/E1/1f3ae169-289d-165a-0462-a2242c29e83c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1ab7e61d-d1d3-8ed0-0924-3bd1327ef7b7
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 4170060000.0000005
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2017-03-01value=4170060000.0000005unit=CubicMeter"
+dcid: "dc/o/r6cbxbpwm6qr"
+
+Node: IndiaEnergy_Gas/E1/1ab7e61d-d1d3-8ed0-0924-3bd1327ef7b7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/bf172407-93a3-e8c0-5498-97d7707cb528
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 4024130000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2018-03-01value=4024130000.0unit=CubicMeter"
+dcid: "dc/o/fyend265tlglc"
+
+Node: IndiaEnergy_Gas/E1/bf172407-93a3-e8c0-5498-97d7707cb528
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/82faf6fa-1fff-fbf6-bad1-26ba15209eda
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 3386090000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2019-03-01value=3386090000.0unit=CubicMeter"
+dcid: "dc/o/v77yqcm4tszm4"
+
+Node: IndiaEnergy_Gas/E1/82faf6fa-1fff-fbf6-bad1-26ba15209eda
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b11f1b13-2709-fd49-7169-ee5b9d0652a2
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
+value: 3568790000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGasobservationDate=2020-03-01value=3568790000.0unit=CubicMeter"
+dcid: "dc/o/8pqhzshc9cjx8"
+
+Node: IndiaEnergy_Gas/E1/b11f1b13-2709-fd49-7169-ee5b9d0652a2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b1a19266-eb96-26da-fa78-6f01860d6a2f
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
+value: 4237505000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGasobservationDate=2017-03-01value=4237505000.0unit=CubicMeter"
+dcid: "dc/o/1l992h818nbs1"
+
+Node: IndiaEnergy_Gas/E1/b1a19266-eb96-26da-fa78-6f01860d6a2f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d7566121-9b0a-e347-4c6f-ac784f43abab
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
+value: 5114009000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGasobservationDate=2018-03-01value=5114009000.0unit=CubicMeter"
+dcid: "dc/o/9y717rx02v2w4"
+
+Node: IndiaEnergy_Gas/E1/d7566121-9b0a-e347-4c6f-ac784f43abab
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/283ea40b-c35d-746c-8708-53e8bdd673b8
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
+value: 5158987000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGasobservationDate=2019-03-01value=5158987000.0unit=CubicMeter"
+dcid: "dc/o/7w1m2elm5e288"
+
+Node: IndiaEnergy_Gas/E1/283ea40b-c35d-746c-8708-53e8bdd673b8
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a446353b-f4a2-decc-39d8-147fcc5919bb
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
+value: 6610278000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGasobservationDate=2020-03-01value=6610278000.0unit=CubicMeter"
+dcid: "dc/o/tpn654ydtj5k2"
+
+Node: IndiaEnergy_Gas/E1/a446353b-f4a2-decc-39d8-147fcc5919bb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/158080e2-1280-692a-2df6-f0695c9e8b7b
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 11878000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2006-03-01value=11878000000.0unit=CubicMeter"
+dcid: "dc/o/pwq1r37596zq1"
+
+Node: IndiaEnergy_Gas/E1/158080e2-1280-692a-2df6-f0695c9e8b7b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d7f9ad2e-b667-9323-ee59-f51d365f70e7
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 12037000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2008-03-01value=12037000000.0unit=CubicMeter"
+dcid: "dc/o/8zrr50v75vhlh"
+
+Node: IndiaEnergy_Gas/E1/d7f9ad2e-b667-9323-ee59-f51d365f70e7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d6ab13d4-2d1b-c270-962f-87807eb8465c
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 12603000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2009-03-01value=12603000000.0unit=CubicMeter"
+dcid: "dc/o/frv6jm5v8fv1"
+
+Node: IndiaEnergy_Gas/E1/d6ab13d4-2d1b-c270-962f-87807eb8465c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/700a851a-584c-ce61-4122-3bde59d1a82d
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 21365000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2010-03-01value=21365000000.0unit=CubicMeter"
+dcid: "dc/o/hbrcqz8pr3hh2"
+
+Node: IndiaEnergy_Gas/E1/700a851a-584c-ce61-4122-3bde59d1a82d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/70c521cc-1707-8f33-3383-65a37ab9d994
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 25787000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2011-03-01value=25787000000.0unit=CubicMeter"
+dcid: "dc/o/58wqz4jftg5z3"
+
+Node: IndiaEnergy_Gas/E1/70c521cc-1707-8f33-3383-65a37ab9d994
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/676333da-01f8-029c-e3c7-da2cffbf4127
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 22628000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2012-03-01value=22628000000.0unit=CubicMeter"
+dcid: "dc/o/8b1gw1sgvvd58"
+
+Node: IndiaEnergy_Gas/E1/676333da-01f8-029c-e3c7-da2cffbf4127
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/3b5a26f9-b5d5-9a16-9aea-ee47b53448cd
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 16078000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2013-03-01value=16078000000.0unit=CubicMeter"
+dcid: "dc/o/973zhwythlwz2"
+
+Node: IndiaEnergy_Gas/E1/3b5a26f9-b5d5-9a16-9aea-ee47b53448cd
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/659dd008-a37e-0ee7-0b4f-df50cf503da2
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 11284000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2014-03-01value=11284000000.0unit=CubicMeter"
+dcid: "dc/o/b915fmygfv5nb"
+
+Node: IndiaEnergy_Gas/E1/659dd008-a37e-0ee7-0b4f-df50cf503da2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/2df3457b-cdf9-5cc6-7d1a-079ac3fa0913
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 10720000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2015-03-01value=10720000000.0unit=CubicMeter"
+dcid: "dc/o/2s6p2ff7h2b7h"
+
+Node: IndiaEnergy_Gas/E1/2df3457b-cdf9-5cc6-7d1a-079ac3fa0913
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/26cd69eb-7ce9-d6a7-c345-441c1d158701
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 10889200000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2016-03-01value=10889200000.0unit=CubicMeter"
+dcid: "dc/o/gq5nfpyp7wjh6"
+
+Node: IndiaEnergy_Gas/E1/26cd69eb-7ce9-d6a7-c345-441c1d158701
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/e08bb0a0-d122-c40d-cfa9-6e75229ec65e
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 11616260000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2017-03-01value=11616260000.0unit=CubicMeter"
+dcid: "dc/o/83xdymtnzgjv9"
+
+Node: IndiaEnergy_Gas/E1/e08bb0a0-d122-c40d-cfa9-6e75229ec65e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/44098e35-0e73-efd2-df8b-d302da8ed982
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 12028290000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2018-03-01value=12028290000.0unit=CubicMeter"
+dcid: "dc/o/r5xfbk3gg5lw5"
+
+Node: IndiaEnergy_Gas/E1/44098e35-0e73-efd2-df8b-d302da8ed982
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/54fe8342-c5cb-c4ca-607f-9ae1cb8ac659
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 12004700000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2019-03-01value=12004700000.0unit=CubicMeter"
+dcid: "dc/o/fne7l32lhzmwc"
+
+Node: IndiaEnergy_Gas/E1/54fe8342-c5cb-c4ca-607f-9ae1cb8ac659
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/86e814d5-bf53-bb44-d668-3ad3a0389425
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_ElectricityGeneration_NaturalGas
+value: 11028890000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_ElectricityGeneration_NaturalGasobservationDate=2020-03-01value=11028890000.0unit=CubicMeter"
+dcid: "dc/o/e5pt5x0vhq3w5"
+
+Node: IndiaEnergy_Gas/E1/86e814d5-bf53-bb44-d668-3ad3a0389425
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/481a3ea9-83ed-4c91-c5ca-b10b1049c579
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
+value: 471180000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGasobservationDate=2017-03-01value=471180000.0unit=CubicMeter"
+dcid: "dc/o/c1y6g3699504d"
+
+Node: IndiaEnergy_Gas/E1/481a3ea9-83ed-4c91-c5ca-b10b1049c579
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/4d648cd7-8f7d-6de2-b7f1-7eb60d331777
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
+value: 495620000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGasobservationDate=2018-03-01value=495620000.0unit=CubicMeter"
+dcid: "dc/o/pqt8ml0c7tyl8"
+
+Node: IndiaEnergy_Gas/E1/4d648cd7-8f7d-6de2-b7f1-7eb60d331777
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/52325526-d861-c8c2-56ba-d27e9acdf49f
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
+value: 540710000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGasobservationDate=2019-03-01value=540710000.0unit=CubicMeter"
+dcid: "dc/o/g3zmwxsqtb116"
+
+Node: IndiaEnergy_Gas/E1/52325526-d861-c8c2-56ba-d27e9acdf49f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/0ed5a963-79e0-03ab-0f68-d1fb22598db7
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
+value: 525110000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGasobservationDate=2020-03-01value=525110000.0unit=CubicMeter"
+dcid: "dc/o/jr5037gs5qmgc"
+
+Node: IndiaEnergy_Gas/E1/0ed5a963-79e0-03ab-0f68-d1fb22598db7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/25560098-e919-663b-314f-dfefc278d590
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 7762000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2006-03-01value=7762000000.0unit=CubicMeter"
+dcid: "dc/o/v7d9lstffkx6f"
+
+Node: IndiaEnergy_Gas/E1/25560098-e919-663b-314f-dfefc278d590
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/54cd1dff-bcdc-5475-be2e-db4d0d2c384f
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 8497000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2007-03-01value=8497000000.0unit=CubicMeter"
+dcid: "dc/o/56jrg1xmvrtcf"
+
+Node: IndiaEnergy_Gas/E1/54cd1dff-bcdc-5475-be2e-db4d0d2c384f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/74db45a0-a29f-24b3-c01e-b941e676d8e5
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 9823000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2008-03-01value=9823000000.0unit=CubicMeter"
+dcid: "dc/o/s1nq7nb36k0e1"
+
+Node: IndiaEnergy_Gas/E1/74db45a0-a29f-24b3-c01e-b941e676d8e5
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b16be5ef-27ec-8a7f-03dc-55f789dc5131
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 9082000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2009-03-01value=9082000000.0unit=CubicMeter"
+dcid: "dc/o/9w83e9hvxwlyc"
+
+Node: IndiaEnergy_Gas/E1/b16be5ef-27ec-8a7f-03dc-55f789dc5131
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/fbca6e15-d20d-81e0-af33-2ad56b14b7e0
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 13168000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2010-03-01value=13168000000.0unit=CubicMeter"
+dcid: "dc/o/f3dredwczkcqh"
+
+Node: IndiaEnergy_Gas/E1/fbca6e15-d20d-81e0-af33-2ad56b14b7e0
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/9271eaf0-5b28-3fa8-13d7-7b1d62199d23
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 11464000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2011-03-01value=11464000000.0unit=CubicMeter"
+dcid: "dc/o/39g1vq1z6ewv1"
+
+Node: IndiaEnergy_Gas/E1/9271eaf0-5b28-3fa8-13d7-7b1d62199d23
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/3348699e-2350-b5cd-4452-f35e1fefdda8
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 14003320000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2012-03-01value=14003320000.0unit=CubicMeter"
+dcid: "dc/o/394y2xzptcl79"
+
+Node: IndiaEnergy_Gas/E1/3348699e-2350-b5cd-4452-f35e1fefdda8
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/9b634fac-1d99-57f3-d202-475885bf471a
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 14733290000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2013-03-01value=14733290000.0unit=CubicMeter"
+dcid: "dc/o/cjdnh67kgg9pf"
+
+Node: IndiaEnergy_Gas/E1/9b634fac-1d99-57f3-d202-475885bf471a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/0e8ac7bc-2d57-434a-81fc-c5d3f4918fcf
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 15869370000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2014-03-01value=15869370000.0unit=CubicMeter"
+dcid: "dc/o/egn4b452x3gd"
+
+Node: IndiaEnergy_Gas/E1/0e8ac7bc-2d57-434a-81fc-c5d3f4918fcf
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/8559f089-8e25-d4ed-5e17-1074837f9a7a
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 15190300000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2015-03-01value=15190300000.0unit=CubicMeter"
+dcid: "dc/o/gt20f2hp8yr9"
+
+Node: IndiaEnergy_Gas/E1/8559f089-8e25-d4ed-5e17-1074837f9a7a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/9065315b-5947-dc8c-29cb-6ec966bc6121
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 16134610000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2016-03-01value=16134610000.0unit=CubicMeter"
+dcid: "dc/o/f8s6yjs4p1pwg"
+
+Node: IndiaEnergy_Gas/E1/9065315b-5947-dc8c-29cb-6ec966bc6121
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/cac4571f-4343-88f3-19d7-235d8f93dedd
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 15428570000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2017-03-01value=15428570000.0unit=CubicMeter"
+dcid: "dc/o/jnwc7cmgt01rg"
+
+Node: IndiaEnergy_Gas/E1/cac4571f-4343-88f3-19d7-235d8f93dedd
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/84ea165a-cb36-2128-cc3f-984890d0d895
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 14675670000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2018-03-01value=14675670000.0unit=CubicMeter"
+dcid: "dc/o/klj2zceq00775"
+
+Node: IndiaEnergy_Gas/E1/84ea165a-cb36-2128-cc3f-984890d0d895
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d523b087-c6fd-bd87-73d6-a84647580b30
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 14986910000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2019-03-01value=14986910000.0unit=CubicMeter"
+dcid: "dc/o/vwvzgrk2fhhd6"
+
+Node: IndiaEnergy_Gas/E1/d523b087-c6fd-bd87-73d6-a84647580b30
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a4cb1d82-73fd-bd62-e8b6-ef0d45fd5562
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
+value: 16115240000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_FertilizerIndustry_NaturalGasobservationDate=2020-03-01value=16115240000.0unit=CubicMeter"
+dcid: "dc/o/exf1yrek8n2y3"
+
+Node: IndiaEnergy_Gas/E1/a4cb1d82-73fd-bd62-e8b6-ef0d45fd5562
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/f5005878-853b-d047-d893-04de1a8c7381
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 75000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2006-03-01value=75000000.0unit=CubicMeter"
+dcid: "dc/o/jgp02p6hp2jx6"
+
+Node: IndiaEnergy_Gas/E1/f5005878-853b-d047-d893-04de1a8c7381
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/fe4f4e5b-d03a-4a79-11c9-e23707a0932c
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 443000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2007-03-01value=443000000.0unit=CubicMeter"
+dcid: "dc/o/kt04qcwdhj381"
+
+Node: IndiaEnergy_Gas/E1/fe4f4e5b-d03a-4a79-11c9-e23707a0932c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/3aa2b7ca-d18a-bad4-3754-8a106511b864
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 38000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2008-03-01value=38000000.0unit=CubicMeter"
+dcid: "dc/o/p096jdwzn4ps8"
+
+Node: IndiaEnergy_Gas/E1/3aa2b7ca-d18a-bad4-3754-8a106511b864
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d6e433d1-670a-f6d4-0e59-0c810a66dcb3
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 427249000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2009-03-01value=427249000.0unit=CubicMeter"
+dcid: "dc/o/5j0tw92x56v67"
+
+Node: IndiaEnergy_Gas/E1/d6e433d1-670a-f6d4-0e59-0c810a66dcb3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/08632300-a5b9-3a74-d44e-4264384c69ee
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 182437000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2010-03-01value=182437000.0unit=CubicMeter"
+dcid: "dc/o/slv4jtp3gskff"
+
+Node: IndiaEnergy_Gas/E1/08632300-a5b9-3a74-d44e-4264384c69ee
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/94b1f8f5-dde6-6ece-5067-d3beda6a21f0
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 243462000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2011-03-01value=243462000.0unit=CubicMeter"
+dcid: "dc/o/ps9l1dswlkswg"
+
+Node: IndiaEnergy_Gas/E1/94b1f8f5-dde6-6ece-5067-d3beda6a21f0
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d7077123-0274-ed9e-0770-90c296ef1140
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 397752000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2012-03-01value=397752000.0unit=CubicMeter"
+dcid: "dc/o/1qlbvbyxtq801"
+
+Node: IndiaEnergy_Gas/E1/d7077123-0274-ed9e-0770-90c296ef1140
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/8ced4c7c-b7d2-079e-3f18-d4f3292960cb
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 410614000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2013-03-01value=410614000.0unit=CubicMeter"
+dcid: "dc/o/jwft40ed6j6q6"
+
+Node: IndiaEnergy_Gas/E1/8ced4c7c-b7d2-079e-3f18-d4f3292960cb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/04bb8193-4ea2-bc66-196e-afcaba28c881
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 414731000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2014-03-01value=414731000.0unit=CubicMeter"
+dcid: "dc/o/py9kf5psrvw45"
+
+Node: IndiaEnergy_Gas/E1/04bb8193-4ea2-bc66-196e-afcaba28c881
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/7b7775e5-63c6-f28d-ad90-9e239b47c85b
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 384730000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2015-03-01value=384730000.0unit=CubicMeter"
+dcid: "dc/o/lgf1e7x8ljke3"
+
+Node: IndiaEnergy_Gas/E1/7b7775e5-63c6-f28d-ad90-9e239b47c85b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/24e4c161-0869-50a6-8ef3-1afd06afd923
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Households_NaturalGas
+value: 388168000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Households_NaturalGasobservationDate=2016-03-01value=388168000.0unit=CubicMeter"
+dcid: "dc/o/6h66c4c7be8lf"
+
+Node: IndiaEnergy_Gas/E1/24e4c161-0869-50a6-8ef3-1afd06afd923
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/def98d04-420c-3ded-0a0e-dd3663b30834
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 3780000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2006-03-01value=3780000000.0unit=CubicMeter"
+dcid: "dc/o/l4h34hekpmr8c"
+
+Node: IndiaEnergy_Gas/E1/def98d04-420c-3ded-0a0e-dd3663b30834
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1716bed8-a2d9-88e3-99ec-c630d9b17866
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 3205000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2007-03-01value=3205000000.0unit=CubicMeter"
+dcid: "dc/o/hexn68dn9fkf7"
+
+Node: IndiaEnergy_Gas/E1/1716bed8-a2d9-88e3-99ec-c630d9b17866
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/29b684dd-6b3a-eadb-734b-b680861095a2
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 3323000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2008-03-01value=3323000000.0unit=CubicMeter"
+dcid: "dc/o/4zlr02f84dv89"
+
+Node: IndiaEnergy_Gas/E1/29b684dd-6b3a-eadb-734b-b680861095a2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/8dfbdea3-2b3e-759e-64fc-89d00662b511
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 2745752000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2009-03-01value=2745752000.0unit=CubicMeter"
+dcid: "dc/o/q4vqhzf8de627"
+
+Node: IndiaEnergy_Gas/E1/8dfbdea3-2b3e-759e-64fc-89d00662b511
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d196d17a-cb2d-b0ec-e6a5-4f86486a5279
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 1172446000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2010-03-01value=1172446000.0unit=CubicMeter"
+dcid: "dc/o/mgg09re6d4756"
+
+Node: IndiaEnergy_Gas/E1/d196d17a-cb2d-b0ec-e6a5-4f86486a5279
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/54085c9c-3cdb-0bf3-e124-7fe3d867f9da
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 1564631000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2011-03-01value=1564631000.0unit=CubicMeter"
+dcid: "dc/o/3m8g4ww1dnj4b"
+
+Node: IndiaEnergy_Gas/E1/54085c9c-3cdb-0bf3-e124-7fe3d867f9da
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/e8924002-f752-b1de-1715-7b84d7228246
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 2869544000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2012-03-01value=2869544000.0unit=CubicMeter"
+dcid: "dc/o/3l3dl4zqm1047"
+
+Node: IndiaEnergy_Gas/E1/e8924002-f752-b1de-1715-7b84d7228246
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/564dc12f-d28c-48f0-0af9-73be418070e2
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 2908244000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2013-03-01value=2908244000.0unit=CubicMeter"
+dcid: "dc/o/xx8n8mttk6jbh"
+
+Node: IndiaEnergy_Gas/E1/564dc12f-d28c-48f0-0af9-73be418070e2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/268b7b2c-4f69-dc38-5755-d926eba9247e
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 2926032000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2014-03-01value=2926032000.0unit=CubicMeter"
+dcid: "dc/o/5nr91epredgjd"
+
+Node: IndiaEnergy_Gas/E1/268b7b2c-4f69-dc38-5755-d926eba9247e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/ec62d886-124d-37fc-5d8f-4e68ed947884
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 3005306000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2015-03-01value=3005306000.0unit=CubicMeter"
+dcid: "dc/o/b298ygvl4ykz"
+
+Node: IndiaEnergy_Gas/E1/ec62d886-124d-37fc-5d8f-4e68ed947884
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/879aec61-02b5-b37e-65d3-2c0598381c4b
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 3039924000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2016-03-01value=3039924000.0unit=CubicMeter"
+dcid: "dc/o/zb09lzf73g6gg"
+
+Node: IndiaEnergy_Gas/E1/879aec61-02b5-b37e-65d3-2c0598381c4b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/8e9a247e-f2f1-2d82-dc8a-44e3789418af
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 688150000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2017-03-01value=688150000.0unit=CubicMeter"
+dcid: "dc/o/tt1ne7kfvq0ld"
+
+Node: IndiaEnergy_Gas/E1/8e9a247e-f2f1-2d82-dc8a-44e3789418af
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d4ea3384-4c2e-e950-c2cb-e58a73457c40
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 873010000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2018-03-01value=873010000.0unit=CubicMeter"
+dcid: "dc/o/88fn8te0eh4g4"
+
+Node: IndiaEnergy_Gas/E1/d4ea3384-4c2e-e950-c2cb-e58a73457c40
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/c1bae7d5-903d-1735-13d0-7b4ee4255378
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 944260000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2019-03-01value=944260000.0unit=CubicMeter"
+dcid: "dc/o/ls0cpp3cr4271"
+
+Node: IndiaEnergy_Gas/E1/c1bae7d5-903d-1735-13d0-7b4ee4255378
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/08af90d5-d096-edc8-a760-9fd2d4de4b21
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
+value: 568330000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Industry_NaturalGasobservationDate=2020-03-01value=568330000.0unit=CubicMeter"
+dcid: "dc/o/vy0hvg8xrcy26"
+
+Node: IndiaEnergy_Gas/E1/08af90d5-d096-edc8-a760-9fd2d4de4b21
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/02f1796d-d6ab-2bb4-d00b-76a21d1cc382
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 1535000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2009-03-01value=1535000000.0unit=CubicMeter"
+dcid: "dc/o/2x2414c9wcr4c"
+
+Node: IndiaEnergy_Gas/E1/02f1796d-d6ab-2bb4-d00b-76a21d1cc382
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/472e2252-3aba-0f1a-57d6-40a1f547918d
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 1838000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2010-03-01value=1838000000.0unit=CubicMeter"
+dcid: "dc/o/8m6p9lqgqhgm8"
+
+Node: IndiaEnergy_Gas/E1/472e2252-3aba-0f1a-57d6-40a1f547918d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/3868a9cf-786e-96e4-edf5-44fbf54335b3
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 765000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2011-03-01value=765000000.0unit=CubicMeter"
+dcid: "dc/o/d5jzwjeq00l34"
+
+Node: IndiaEnergy_Gas/E1/3868a9cf-786e-96e4-edf5-44fbf54335b3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/69a796b5-89cb-0b98-b28d-ad9e8afcc0c8
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 1333260000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2012-03-01value=1333260000.0unit=CubicMeter"
+dcid: "dc/o/g86sbtbcm4ylf"
+
+Node: IndiaEnergy_Gas/E1/69a796b5-89cb-0b98-b28d-ad9e8afcc0c8
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/696ec919-865d-a863-413d-3e19cec864b1
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 1105740000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2013-03-01value=1105740000.0unit=CubicMeter"
+dcid: "dc/o/km73dpnrkjbth"
+
+Node: IndiaEnergy_Gas/E1/696ec919-865d-a863-413d-3e19cec864b1
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/95ac3d0f-04c5-4d79-cbb5-26c1ad3a1ac2
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 274120000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2014-03-01value=274120000.0unit=CubicMeter"
+dcid: "dc/o/dz3jqk6k416cd"
+
+Node: IndiaEnergy_Gas/E1/95ac3d0f-04c5-4d79-cbb5-26c1ad3a1ac2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/9f84763e-5290-c0b9-2fe8-d3a50da9c33a
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 153590000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2015-03-01value=153590000.0unit=CubicMeter"
+dcid: "dc/o/5mq7c608pgqsf"
+
+Node: IndiaEnergy_Gas/E1/9f84763e-5290-c0b9-2fe8-d3a50da9c33a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/9fc1d6ac-9856-43ac-0301-74184e5e6e71
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 544320000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2016-03-01value=544320000.0unit=CubicMeter"
+dcid: "dc/o/j4rw3n2nyy922"
+
+Node: IndiaEnergy_Gas/E1/9fc1d6ac-9856-43ac-0301-74184e5e6e71
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/4d700545-c1a1-dcd4-29df-57ca601f9842
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 885050000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2017-03-01value=885050000.0unit=CubicMeter"
+dcid: "dc/o/mhxhdpkq4spx6"
+
+Node: IndiaEnergy_Gas/E1/4d700545-c1a1-dcd4-29df-57ca601f9842
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/644c5553-f274-bda3-1ef5-efccfb383751
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 1278000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2018-03-01value=1278000000.0unit=CubicMeter"
+dcid: "dc/o/fx6t6jlxcxnr8"
+
+Node: IndiaEnergy_Gas/E1/644c5553-f274-bda3-1ef5-efccfb383751
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/cc278934-adb5-37c0-8116-61e5d64d1ff3
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 1123710000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2019-03-01value=1123710000.0unit=CubicMeter"
+dcid: "dc/o/f037ep7wf0mf3"
+
+Node: IndiaEnergy_Gas/E1/cc278934-adb5-37c0-8116-61e5d64d1ff3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/c356aefc-c357-4da9-d6a0-a6b46a9c9424
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
+value: 567000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_IronSteel_NaturalGasobservationDate=2020-03-01value=567000000.0unit=CubicMeter"
+dcid: "dc/o/zxble9x90yqbb"
+
+Node: IndiaEnergy_Gas/E1/c356aefc-c357-4da9-d6a0-a6b46a9c9424
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/581087b2-4e72-7eee-3b95-19af3282444c
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Manufacturing_NaturalGas
+value: 105500000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Manufacturing_NaturalGasobservationDate=2017-03-01value=105500000.0unit=CubicMeter"
+dcid: "dc/o/cgzktd186l4d"
+
+Node: IndiaEnergy_Gas/E1/581087b2-4e72-7eee-3b95-19af3282444c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/e0af40ac-9da0-2d97-ae0b-532666963180
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Manufacturing_NaturalGas
+value: 126260000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Manufacturing_NaturalGasobservationDate=2018-03-01value=126260000.0unit=CubicMeter"
+dcid: "dc/o/7gckwcvrsg6d"
+
+Node: IndiaEnergy_Gas/E1/e0af40ac-9da0-2d97-ae0b-532666963180
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/78a359f3-ea2a-e037-d64c-351ab2dcd828
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Manufacturing_NaturalGas
+value: 141810000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Manufacturing_NaturalGasobservationDate=2019-03-01value=141810000.0unit=CubicMeter"
+dcid: "dc/o/w5gxyl7vqs87b"
+
+Node: IndiaEnergy_Gas/E1/78a359f3-ea2a-e037-d64c-351ab2dcd828
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/ad3f2838-5146-33b5-9e00-e6262930ec6d
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_Manufacturing_NaturalGas
+value: 132259999.99999999
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_Manufacturing_NaturalGasobservationDate=2020-03-01value=132259999.99999999unit=CubicMeter"
+dcid: "dc/o/wt7m2v0pzk9zd"
+
+Node: IndiaEnergy_Gas/E1/ad3f2838-5146-33b5-9e00-e6262930ec6d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/8181ee95-bfc0-1dbe-b79e-527b239b176d
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 6648840000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2006-03-01value=6648840000.0unit=CubicMeter"
+dcid: "dc/o/snz1mm32796ed"
+
+Node: IndiaEnergy_Gas/E1/8181ee95-bfc0-1dbe-b79e-527b239b176d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/6ab30633-ae8a-1107-7207-0cd312b72e59
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 8948340000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2007-03-01value=8948340000.0unit=CubicMeter"
+dcid: "dc/o/frm5y1vl4knkc"
+
+Node: IndiaEnergy_Gas/E1/6ab30633-ae8a-1107-7207-0cd312b72e59
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/3d3f7e23-2021-1bb3-87da-834e6e347e8c
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 10932480000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2008-03-01value=10932480000.0unit=CubicMeter"
+dcid: "dc/o/xn0gvpb1mlezc"
+
+Node: IndiaEnergy_Gas/E1/3d3f7e23-2021-1bb3-87da-834e6e347e8c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/e9c5eaec-99bd-97e1-8666-1e03be483c90
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 10590840000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2009-03-01value=10590840000.0unit=CubicMeter"
+dcid: "dc/o/xk99j3skml5q8"
+
+Node: IndiaEnergy_Gas/E1/e9c5eaec-99bd-97e1-8666-1e03be483c90
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/53319ced-ed25-cff8-af4e-b71b8fcbc7a3
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 11599992000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2010-03-01value=11599992000.0unit=CubicMeter"
+dcid: "dc/o/gs5qrxvzgtq15"
+
+Node: IndiaEnergy_Gas/E1/53319ced-ed25-cff8-af4e-b71b8fcbc7a3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/207245ea-a945-7bfe-5716-b0caf65bba4e
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 11758986000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2011-03-01value=11758986000.0unit=CubicMeter"
+dcid: "dc/o/7wbdgyw7vk0xf"
+
+Node: IndiaEnergy_Gas/E1/207245ea-a945-7bfe-5716-b0caf65bba4e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/421716ca-9781-a0b5-9cd7-24ab445ec415
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 1068369999.9999999
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2012-03-01value=1068369999.9999999unit=CubicMeter"
+dcid: "dc/o/v84e8yjknjy72"
+
+Node: IndiaEnergy_Gas/E1/421716ca-9781-a0b5-9cd7-24ab445ec415
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/41d94e47-ac65-36c9-630b-8c1b741263b4
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 1027290000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2013-03-01value=1027290000.0unit=CubicMeter"
+dcid: "dc/o/j89h4jzb9l758"
+
+Node: IndiaEnergy_Gas/E1/41d94e47-ac65-36c9-630b-8c1b741263b4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/bf22fd9b-7ed9-d13d-623b-6e4b250236ba
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 981850000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2014-03-01value=981850000.0unit=CubicMeter"
+dcid: "dc/o/mwvekgb05mm74"
+
+Node: IndiaEnergy_Gas/E1/bf22fd9b-7ed9-d13d-623b-6e4b250236ba
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b1a6046e-ecf8-66a3-38be-2a5dbb679a00
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 1005480000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2015-03-01value=1005480000.0unit=CubicMeter"
+dcid: "dc/o/h3pxrb8pcnxsd"
+
+Node: IndiaEnergy_Gas/E1/b1a6046e-ecf8-66a3-38be-2a5dbb679a00
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/30fdc3e8-3e44-a050-ba49-6f1ca0cfdc19
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 754190000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2016-03-01value=754190000.0unit=CubicMeter"
+dcid: "dc/o/wp7dbncqsxdb4"
+
+Node: IndiaEnergy_Gas/E1/30fdc3e8-3e44-a050-ba49-6f1ca0cfdc19
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/01bdc500-6269-edb0-26fa-d233b237c679
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 759450000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2017-03-01value=759450000.0unit=CubicMeter"
+dcid: "dc/o/mhvmkesdd8kp3"
+
+Node: IndiaEnergy_Gas/E1/01bdc500-6269-edb0-26fa-d233b237c679
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a8a1de14-d66e-c1e1-7172-2c1a250c1840
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 797870000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2018-03-01value=797870000.0unit=CubicMeter"
+dcid: "dc/o/fpgdev6q48kjb"
+
+Node: IndiaEnergy_Gas/E1/a8a1de14-d66e-c1e1-7172-2c1a250c1840
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/69af9221-7f1d-1dd8-cdf3-a145fa84ef9f
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 873520000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2019-03-01value=873520000.0unit=CubicMeter"
+dcid: "dc/o/2wcjv0tnqgcy3"
+
+Node: IndiaEnergy_Gas/E1/69af9221-7f1d-1dd8-cdf3-a145fa84ef9f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d1eb1ae1-88dd-e16d-0404-b033c3bd50ff
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
+value: 857940000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilGasExtraction_NaturalGasobservationDate=2020-03-01value=857940000.0unit=CubicMeter"
+dcid: "dc/o/ze6pqb1bq1vrh"
+
+Node: IndiaEnergy_Gas/E1/d1eb1ae1-88dd-e16d-0404-b033c3bd50ff
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/2c3c550a-2c98-7958-d8c5-7db759dc5a69
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilRefineries_NaturalGas
+value: 611000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilRefineries_NaturalGasobservationDate=2009-03-01value=611000000.0unit=CubicMeter"
+dcid: "dc/o/1n4f5yyywzxeh"
+
+Node: IndiaEnergy_Gas/E1/2c3c550a-2c98-7958-d8c5-7db759dc5a69
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d5dcd643-9114-9028-039b-c557bae2ecde
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilRefineries_NaturalGas
+value: 703000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilRefineries_NaturalGasobservationDate=2010-03-01value=703000000.0unit=CubicMeter"
+dcid: "dc/o/7y56vcz4d4lb7"
+
+Node: IndiaEnergy_Gas/E1/d5dcd643-9114-9028-039b-c557bae2ecde
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/17bade31-1217-8f0a-08aa-22e4e45d7325
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilRefineries_NaturalGas
+value: 1529000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilRefineries_NaturalGasobservationDate=2011-03-01value=1529000000.0unit=CubicMeter"
+dcid: "dc/o/p5kr4zxj77vp"
+
+Node: IndiaEnergy_Gas/E1/17bade31-1217-8f0a-08aa-22e4e45d7325
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b51a2719-b149-a533-5ff7-018214108bb0
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilRefineries_NaturalGas
+value: 5374370000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilRefineries_NaturalGasobservationDate=2017-03-01value=5374370000.0unit=CubicMeter"
+dcid: "dc/o/97f2q99plkv17"
+
+Node: IndiaEnergy_Gas/E1/b51a2719-b149-a533-5ff7-018214108bb0
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/c916acba-8d2e-fc3b-1207-f7fd1e4dc8aa
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilRefineries_NaturalGas
+value: 6533130000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilRefineries_NaturalGasobservationDate=2018-03-01value=6533130000.0unit=CubicMeter"
+dcid: "dc/o/r30fgbfy83lgd"
+
+Node: IndiaEnergy_Gas/E1/c916acba-8d2e-fc3b-1207-f7fd1e4dc8aa
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/844a535b-3f23-aa8c-a35c-55a824729655
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilRefineries_NaturalGas
+value: 7047310000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilRefineries_NaturalGasobservationDate=2019-03-01value=7047310000.0unit=CubicMeter"
+dcid: "dc/o/wgv8p24gnskff"
+
+Node: IndiaEnergy_Gas/E1/844a535b-3f23-aa8c-a35c-55a824729655
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d9825b28-483d-d3a2-45f8-fc53644e9819
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_OilRefineries_NaturalGas
+value: 7785990000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_OilRefineries_NaturalGasobservationDate=2020-03-01value=7785990000.0unit=CubicMeter"
+dcid: "dc/o/0fpgtcw1pz372"
+
+Node: IndiaEnergy_Gas/E1/d9825b28-483d-d3a2-45f8-fc53644e9819
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1b013f11-cc03-48d8-dfae-067de8cbf003
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TeaIndustry_NaturalGas
+value: 183330000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TeaIndustry_NaturalGasobservationDate=2017-03-01value=183330000.0unit=CubicMeter"
+dcid: "dc/o/hkv4040zb140h"
+
+Node: IndiaEnergy_Gas/E1/1b013f11-cc03-48d8-dfae-067de8cbf003
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/7de1b908-2f9f-f97c-1705-a3819d9e2bfb
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TeaIndustry_NaturalGas
+value: 188560000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TeaIndustry_NaturalGasobservationDate=2018-03-01value=188560000.0unit=CubicMeter"
+dcid: "dc/o/vmfgr32pzr467"
+
+Node: IndiaEnergy_Gas/E1/7de1b908-2f9f-f97c-1705-a3819d9e2bfb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/8dadadf9-bd9c-bc04-16e8-4e4bf97b2626
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TeaIndustry_NaturalGas
+value: 192260000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TeaIndustry_NaturalGasobservationDate=2019-03-01value=192260000.0unit=CubicMeter"
+dcid: "dc/o/vwr2tqqdvn1t"
+
+Node: IndiaEnergy_Gas/E1/8dadadf9-bd9c-bc04-16e8-4e4bf97b2626
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/e6f628ed-f8bf-79ac-fb1f-918e7edabf4d
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TeaIndustry_NaturalGas
+value: 200270000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TeaIndustry_NaturalGasobservationDate=2020-03-01value=200270000.0unit=CubicMeter"
+dcid: "dc/o/prhn3l1brdzb1"
+
+Node: IndiaEnergy_Gas/E1/e6f628ed-f8bf-79ac-fb1f-918e7edabf4d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/947af262-5c96-17ac-6459-e33eb73ed08a
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 2840999000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2009-03-01value=2840999000.0unit=CubicMeter"
+dcid: "dc/o/9rh4wl3gr5br4"
+
+Node: IndiaEnergy_Gas/E1/947af262-5c96-17ac-6459-e33eb73ed08a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/0883f637-4f10-54e8-5805-11f71ed49a19
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 1213117000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2010-03-01value=1213117000.0unit=CubicMeter"
+dcid: "dc/o/qn3zf55nmnrfb"
+
+Node: IndiaEnergy_Gas/E1/0883f637-4f10-54e8-5805-11f71ed49a19
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/988ed124-c1e3-b949-a2c8-798c7412cde3
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 1618906000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2011-03-01value=1618906000.0unit=CubicMeter"
+dcid: "dc/o/4jc4psdbpdx4f"
+
+Node: IndiaEnergy_Gas/E1/988ed124-c1e3-b949-a2c8-798c7412cde3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b986909a-9e53-c2a3-7220-b051ff8e07b6
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 2644855000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2012-03-01value=2644855000.0unit=CubicMeter"
+dcid: "dc/o/y1tvyx2g337b9"
+
+Node: IndiaEnergy_Gas/E1/b986909a-9e53-c2a3-7220-b051ff8e07b6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/91d584e2-8f84-0d3d-3df5-d3a6e0f2b1ec
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 2730382000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2013-03-01value=2730382000.0unit=CubicMeter"
+dcid: "dc/o/ldcg3skh39k5f"
+
+Node: IndiaEnergy_Gas/E1/91d584e2-8f84-0d3d-3df5-d3a6e0f2b1ec
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/4abc218a-2b6e-5b16-a50a-cb9b7237c65e
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 2824058000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2014-03-01value=2824058000.0unit=CubicMeter"
+dcid: "dc/o/37qhcqr34swb4"
+
+Node: IndiaEnergy_Gas/E1/4abc218a-2b6e-5b16-a50a-cb9b7237c65e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/c1548bdb-18af-84c2-a8d0-e05e31d651a6
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 2558284000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2015-03-01value=2558284000.0unit=CubicMeter"
+dcid: "dc/o/ry12xh0s7pdwc"
+
+Node: IndiaEnergy_Gas/E1/c1548bdb-18af-84c2-a8d0-e05e31d651a6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b3f286fe-85a4-2f94-3ecc-4839377df93a
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 2581128000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2016-03-01value=2581128000.0unit=CubicMeter"
+dcid: "dc/o/dgsgfww5h1rkf"
+
+Node: IndiaEnergy_Gas/E1/b3f286fe-85a4-2f94-3ecc-4839377df93a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/4d320ebb-f5d0-e120-b75f-6879c9efb9a0
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 3112495000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2017-03-01value=3112495000.0unit=CubicMeter"
+dcid: "dc/o/7kmwc3vgmw4r9"
+
+Node: IndiaEnergy_Gas/E1/4d320ebb-f5d0-e120-b75f-6879c9efb9a0
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a88df8e9-3585-7cc9-2a18-cd972b1e532e
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 3471361000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2018-03-01value=3471361000.0unit=CubicMeter"
+dcid: "dc/o/dhxztxzkvx0c2"
+
+Node: IndiaEnergy_Gas/E1/a88df8e9-3585-7cc9-2a18-cd972b1e532e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/322a137b-59e8-ff29-eb42-fd8e18299e0b
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 4047013000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2019-03-01value=4047013000.0unit=CubicMeter"
+dcid: "dc/o/c0jyj93f270h2"
+
+Node: IndiaEnergy_Gas/E1/322a137b-59e8-ff29-eb42-fd8e18299e0b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/240870a0-bd26-f267-36be-aa1eb501fb58
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
+value: 4272782000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_TransportIndustry_NaturalGasobservationDate=2020-03-01value=4272782000.0unit=CubicMeter"
+dcid: "dc/o/lsv25c1elc8c4"
+
+Node: IndiaEnergy_Gas/E1/240870a0-bd26-f267-36be-aa1eb501fb58
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b0e37722-4cee-a811-1822-9afd66fe0bf5
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 6204000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2006-03-01value=6204000000.0unit=CubicMeter"
+dcid: "dc/o/7rj73cezhdmr"
+
+Node: IndiaEnergy_Gas/E1/b0e37722-4cee-a811-1822-9afd66fe0bf5
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d96ade80-3fc1-d2c6-1f3c-a921e22b87f7
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 5713000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2007-03-01value=5713000000.0unit=CubicMeter"
+dcid: "dc/o/t72cvh5pg8qzb"
+
+Node: IndiaEnergy_Gas/E1/d96ade80-3fc1-d2c6-1f3c-a921e22b87f7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/65cbfc82-ee49-1424-760e-9465589e838d
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 3766000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2008-03-01value=3766000000.0unit=CubicMeter"
+dcid: "dc/o/n3tw47f0kg2y9"
+
+Node: IndiaEnergy_Gas/E1/65cbfc82-ee49-1424-760e-9465589e838d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/2ba6c493-b71a-c48f-ae77-f0db30a12dd5
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 3420000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2009-03-01value=3420000000.0unit=CubicMeter"
+dcid: "dc/o/q76yvn1nwwfjb"
+
+Node: IndiaEnergy_Gas/E1/2ba6c493-b71a-c48f-ae77-f0db30a12dd5
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/73988719-30b8-a86a-6c88-833e4409d09e
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 7272000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2010-03-01value=7272000000.0unit=CubicMeter"
+dcid: "dc/o/cfpb26gjz1jk3"
+
+Node: IndiaEnergy_Gas/E1/73988719-30b8-a86a-6c88-833e4409d09e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/54b19a8d-e15c-cc4e-f1ee-d7450f5aade4
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 7546000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2011-03-01value=7546000000.0unit=CubicMeter"
+dcid: "dc/o/me61v0rxq546h"
+
+Node: IndiaEnergy_Gas/E1/54b19a8d-e15c-cc4e-f1ee-d7450f5aade4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/15ed1fbd-5d0f-a123-cad6-54de6d87eb48
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 13705740000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2012-03-01value=13705740000.0unit=CubicMeter"
+dcid: "dc/o/03vtl8txwnnm4"
+
+Node: IndiaEnergy_Gas/E1/15ed1fbd-5d0f-a123-cad6-54de6d87eb48
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/9ac3c396-a571-477a-2956-990ae7183827
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 12253260000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2013-03-01value=12253260000.0unit=CubicMeter"
+dcid: "dc/o/d2lm5j7rwtq2g"
+
+Node: IndiaEnergy_Gas/E1/9ac3c396-a571-477a-2956-990ae7183827
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/369cb272-d137-c5e7-2c62-83c02eab6600
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 11819910000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2014-03-01value=11819910000.0unit=CubicMeter"
+dcid: "dc/o/r0s34decf60fg"
+
+Node: IndiaEnergy_Gas/E1/369cb272-d137-c5e7-2c62-83c02eab6600
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/829927b9-dd81-4f5e-0fc2-2cfe66fd4c37
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 10867000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2015-03-01value=10867000000.0unit=CubicMeter"
+dcid: "dc/o/ffj4dvx48yllg"
+
+Node: IndiaEnergy_Gas/E1/829927b9-dd81-4f5e-0fc2-2cfe66fd4c37
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/50fcc67f-3abc-1247-66cd-720b158a7c73
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 9596590000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2016-03-01value=9596590000.0unit=CubicMeter"
+dcid: "dc/o/3cwed1f8hjyk9"
+
+Node: IndiaEnergy_Gas/E1/50fcc67f-3abc-1247-66cd-720b158a7c73
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/9ca4af5e-33cc-ee17-7ef5-7b61eb83c1de
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 3745960000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2017-03-01value=3745960000.0unit=CubicMeter"
+dcid: "dc/o/n2j5wwp9f8329"
+
+Node: IndiaEnergy_Gas/E1/9ca4af5e-33cc-ee17-7ef5-7b61eb83c1de
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b8251a55-ad55-48c8-9b6e-c3cdbc340202
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 3226490000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2018-03-01value=3226490000.0unit=CubicMeter"
+dcid: "dc/o/1cjfdnjtnecfc"
+
+Node: IndiaEnergy_Gas/E1/b8251a55-ad55-48c8-9b6e-c3cdbc340202
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/fb3491b6-34f8-db43-f05c-82af796a80b6
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 3392600000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2019-03-01value=3392600000.0unit=CubicMeter"
+dcid: "dc/o/ppvb8ngd3kl9g"
+
+Node: IndiaEnergy_Gas/E1/fb3491b6-34f8-db43-f05c-82af796a80b6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/7943e6af-a507-b651-2ea1-4f5ad8fb053b
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+value: 4209000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGasobservationDate=2020-03-01value=4209000000.0unit=CubicMeter"
+dcid: "dc/o/1wby00q74wxt6"
+
+Node: IndiaEnergy_Gas/E1/7943e6af-a507-b651-2ea1-4f5ad8fb053b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d556acd1-9e9e-e9a5-003b-b7c714c33d51
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 32201000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2006-03-01value=32201000000.0unit=CubicMeter"
+dcid: "dc/o/pk2zkl1wxrlk4"
+
+Node: IndiaEnergy_Gas/E1/d556acd1-9e9e-e9a5-003b-b7c714c33d51
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/386dbd7b-4541-3a75-1895-f1c614ecb757
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 31748000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2007-03-01value=31748000000.0unit=CubicMeter"
+dcid: "dc/o/zf64xqk66hbmg"
+
+Node: IndiaEnergy_Gas/E1/386dbd7b-4541-3a75-1895-f1c614ecb757
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1b3b1b59-c783-f324-4a83-7b65977d1117
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 32417000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2008-03-01value=32417000000.0unit=CubicMeter"
+dcid: "dc/o/qjqdx1wp72k77"
+
+Node: IndiaEnergy_Gas/E1/1b3b1b59-c783-f324-4a83-7b65977d1117
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b9b2d42e-3ec0-d83e-9f82-03d4417ff2f5
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 32844000000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2009-03-01value=32844000000.0unit=CubicMeter"
+dcid: "dc/o/kl2v9wljwzetc"
+
+Node: IndiaEnergy_Gas/E1/b9b2d42e-3ec0-d83e-9f82-03d4417ff2f5
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/f5c80ae8-f80e-f760-e20d-42e2f5812e41
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 47496240000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2010-03-01value=47496240000.0unit=CubicMeter"
+dcid: "dc/o/d25w70crel6s5"
+
+Node: IndiaEnergy_Gas/E1/f5c80ae8-f80e-f760-e20d-42e2f5812e41
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a81b0f5a-6f42-f3fb-b3f7-16bdbbd96b15
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 52218700000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2011-03-01value=52218700000.0unit=CubicMeter"
+dcid: "dc/o/l26y1ztnfz4q"
+
+Node: IndiaEnergy_Gas/E1/a81b0f5a-6f42-f3fb-b3f7-16bdbbd96b15
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/fdf80f0e-df97-c79c-a2df-dae86b1a75e2
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 47558620000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2012-03-01value=47558620000.0unit=CubicMeter"
+dcid: "dc/o/7b9h3sflfysdg"
+
+Node: IndiaEnergy_Gas/E1/fdf80f0e-df97-c79c-a2df-dae86b1a75e2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a9cb39bd-b2ec-10e0-0f57-3ec2eb9e94ee
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 40679230000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2013-03-01value=40679230000.0unit=CubicMeter"
+dcid: "dc/o/txxk0tdq1ss57"
+
+Node: IndiaEnergy_Gas/E1/a9cb39bd-b2ec-10e0-0f57-3ec2eb9e94ee
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/59253f2f-29f2-4e93-cfa8-c861f3b15078
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 35406890000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2014-03-01value=35406890000.0unit=CubicMeter"
+dcid: "dc/o/get0zbs1hqlj4"
+
+Node: IndiaEnergy_Gas/E1/59253f2f-29f2-4e93-cfa8-c861f3b15078
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/787fd865-5895-89a3-6931-3d164b24bb0b
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 33657470000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2015-03-01value=33657470000.0unit=CubicMeter"
+dcid: "dc/o/ps28vdbxdjqd1"
+
+Node: IndiaEnergy_Gas/E1/787fd865-5895-89a3-6931-3d164b24bb0b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/df435c60-f0d3-f251-1db9-2cd17d08dfb7
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 32249200000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2016-03-01value=32249200000.0unit=CubicMeter"
+dcid: "dc/o/2jxl3ltcwdg06"
+
+Node: IndiaEnergy_Gas/E1/df435c60-f0d3-f251-1db9-2cd17d08dfb7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/e9674f42-124c-6756-9b07-08329e0cdac4
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 31896702000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2017-03-01value=31896702000.0unit=CubicMeter"
+dcid: "dc/o/3cv9kbmkmv4p4"
+
+Node: IndiaEnergy_Gas/E1/e9674f42-124c-6756-9b07-08329e0cdac4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/18f741ad-b8dd-758e-c882-be8b1e58feb9
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 32649307000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2018-03-01value=32649307000.0unit=CubicMeter"
+dcid: "dc/o/5d2wcle0ld84c"
+
+Node: IndiaEnergy_Gas/E1/18f741ad-b8dd-758e-c882-be8b1e58feb9
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a898db75-d861-5222-e1ae-4121be020f86
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 32873371000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2019-03-01value=32873371000.0unit=CubicMeter"
+dcid: "dc/o/hzshejf3d3ve6"
+
+Node: IndiaEnergy_Gas/E1/a898db75-d861-5222-e1ae-4121be020f86
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/54488693-fb0e-2d3f-0410-b9ab00d9e9bb
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Annual_Generation_Fuel_NaturalGas
+value: 31184230000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Fuel_NaturalGasobservationDate=2020-03-01value=31184230000.0unit=CubicMeter"
+dcid: "dc/o/tpq1t7lxflw78"
+
+Node: IndiaEnergy_Gas/E1/54488693-fb0e-2d3f-0410-b9ab00d9e9bb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/24fc5560-5ddb-3d02-74e1-3a0ad550fd68
+observationDate: "2005-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 2371848.25
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2005-03-01value=2371848.25unit=MetricTon"
+dcid: "dc/o/47rkxn1rle447"
+
+Node: IndiaEnergy_Gas/E1/24fc5560-5ddb-3d02-74e1-3a0ad550fd68
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a5098c41-9917-6073-ec1a-19afe440a385
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 4776791.609999999
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2006-03-01value=4776791.609999999unit=MetricTon"
+dcid: "dc/o/rg2crww6093yg"
+
+Node: IndiaEnergy_Gas/E1/a5098c41-9917-6073-ec1a-19afe440a385
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/df22cbfe-acaf-3a2d-c5d1-44b1d832d73d
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 7044454.73
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2007-03-01value=7044454.73unit=MetricTon"
+dcid: "dc/o/dx1w9lk9hp7n1"
+
+Node: IndiaEnergy_Gas/E1/df22cbfe-acaf-3a2d-c5d1-44b1d832d73d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/aa7133c5-5379-1aa6-cf20-56dd0a94861a
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 8086103.53
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2008-03-01value=8086103.53unit=MetricTon"
+dcid: "dc/o/p7txvrr0gmg29"
+
+Node: IndiaEnergy_Gas/E1/aa7133c5-5379-1aa6-cf20-56dd0a94861a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/5a8b0b69-e428-5af9-6c14-96c966cc318e
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 8306768.220000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2009-03-01value=8306768.220000001unit=MetricTon"
+dcid: "dc/o/edtbds6fqephg"
+
+Node: IndiaEnergy_Gas/E1/5a8b0b69-e428-5af9-6c14-96c966cc318e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1e70f964-34a3-e7ba-3f99-e938334223d4
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 9110571.17
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2010-03-01value=9110571.17unit=MetricTon"
+dcid: "dc/o/5h7s75mpl23t8"
+
+Node: IndiaEnergy_Gas/E1/1e70f964-34a3-e7ba-3f99-e938334223d4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/ebeff3ae-0da3-63fe-5db4-e54ae5c6e0aa
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 9765762.48
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2011-03-01value=9765762.48unit=MetricTon"
+dcid: "dc/o/dd2jy9ck7jbe"
+
+Node: IndiaEnergy_Gas/E1/ebeff3ae-0da3-63fe-5db4-e54ae5c6e0aa
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a56d11c4-143c-0efa-9d7d-d7535e361c53
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 13470619.959999999
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2012-03-01value=13470619.959999999unit=MetricTon"
+dcid: "dc/o/h4bzmynn8g945"
+
+Node: IndiaEnergy_Gas/E1/a56d11c4-143c-0efa-9d7d-d7535e361c53
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/f2014826-d89b-dc21-79bc-ce576e1303be
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 13135869.76
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2013-03-01value=13135869.76unit=MetricTon"
+dcid: "dc/o/synfjd0hns9z6"
+
+Node: IndiaEnergy_Gas/E1/f2014826-d89b-dc21-79bc-ce576e1303be
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/7d9cbb42-f179-2de1-a6ae-a7b8ec902732
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 13020688.629999999
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2014-03-01value=13020688.629999999unit=MetricTon"
+dcid: "dc/o/zt7l0gdv3pxf2"
+
+Node: IndiaEnergy_Gas/E1/7d9cbb42-f179-2de1-a6ae-a7b8ec902732
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d85fe195-ded3-af4d-f472-44dc66105f53
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 13289154.08
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2015-03-01value=13289154.08unit=MetricTon"
+dcid: "dc/o/0c4nsc4pcm6d5"
+
+Node: IndiaEnergy_Gas/E1/d85fe195-ded3-af4d-f472-44dc66105f53
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/f414f664-1812-a850-b336-d287f70de006
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 14376924.791
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2016-03-01value=14376924.791unit=MetricTon"
+dcid: "dc/o/vn6d6qtvkm6e4"
+
+Node: IndiaEnergy_Gas/E1/f414f664-1812-a850-b336-d287f70de006
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/41f1caec-93c2-bbc1-aee8-31b73120bdf4
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 17783327.15
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2017-03-01value=17783327.15unit=MetricTon"
+dcid: "dc/o/5e5j9bmwjjjx9"
+
+Node: IndiaEnergy_Gas/E1/41f1caec-93c2-bbc1-aee8-31b73120bdf4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/e9003853-e330-c6e8-41f8-bc018777b792
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 20176812.34
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2018-03-01value=20176812.34unit=MetricTon"
+dcid: "dc/o/3qskcd5xyvy74"
+
+Node: IndiaEnergy_Gas/E1/e9003853-e330-c6e8-41f8-bc018777b792
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d9ea030c-ca0d-9288-0792-49fea3486d44
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 21544662.869999997
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2019-03-01value=21544662.869999997unit=MetricTon"
+dcid: "dc/o/yvp549p6y4572"
+
+Node: IndiaEnergy_Gas/E1/d9ea030c-ca0d-9288-0792-49fea3486d44
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/afffbaaa-c519-4b5c-5495-5106dc39529b
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:MetricTon
+variableMeasured: dcid:Annual_Imports_Fuel_NaturalGasLiquids
+value: 24416606.26
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Imports_Fuel_NaturalGasLiquidsobservationDate=2020-03-01value=24416606.26unit=MetricTon"
+dcid: "dc/o/fj16ezpn8y20f"
+
+Node: IndiaEnergy_Gas/E1/afffbaaa-c519-4b5c-5495-5106dc39529b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/caa13900-4f0e-71fc-560b-e5f55adcdb10
+observationDate: "2019-06-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 54180000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2019-06-01value=54180000.0unit=CubicMeter"
+dcid: "dc/o/wbgtymjh3x273"
+
+Node: IndiaEnergy_Gas/E1/caa13900-4f0e-71fc-560b-e5f55adcdb10
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/14b457cc-2384-b7b1-de34-396ef8211f9b
+observationDate: "2019-07-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 55860000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2019-07-01value=55860000.0unit=CubicMeter"
+dcid: "dc/o/8w0b8wg4pw971"
+
+Node: IndiaEnergy_Gas/E1/14b457cc-2384-b7b1-de34-396ef8211f9b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/ba96178b-3a57-001b-5384-9db8be729d2a
+observationDate: "2019-08-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 54210000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2019-08-01value=54210000.0unit=CubicMeter"
+dcid: "dc/o/p5vv5r80skm23"
+
+Node: IndiaEnergy_Gas/E1/ba96178b-3a57-001b-5384-9db8be729d2a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/2b88d762-0fc5-ce8c-9ba6-174d89e288b6
+observationDate: "2019-09-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 52270000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2019-09-01value=52270000.0unit=CubicMeter"
+dcid: "dc/o/mg53z94wjerk5"
+
+Node: IndiaEnergy_Gas/E1/2b88d762-0fc5-ce8c-9ba6-174d89e288b6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/515c7af8-4398-a2f2-c418-73044c27aea4
+observationDate: "2019-10-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 53560000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2019-10-01value=53560000.0unit=CubicMeter"
+dcid: "dc/o/fl72vjfzgw6t"
+
+Node: IndiaEnergy_Gas/E1/515c7af8-4398-a2f2-c418-73044c27aea4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/f5ada09c-c6bf-854d-080a-8e216c2fe660
+observationDate: "2019-11-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 52170000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2019-11-01value=52170000.0unit=CubicMeter"
+dcid: "dc/o/dt8r8rs7jtn42"
+
+Node: IndiaEnergy_Gas/E1/f5ada09c-c6bf-854d-080a-8e216c2fe660
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/69f73bd9-516c-598f-be79-54ad2b8a5d5c
+observationDate: "2019-12-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 52980000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2019-12-01value=52980000.0unit=CubicMeter"
+dcid: "dc/o/s5703d5fhreh3"
+
+Node: IndiaEnergy_Gas/E1/69f73bd9-516c-598f-be79-54ad2b8a5d5c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/8c559f66-f6a9-6c49-646d-897b77d508ac
+observationDate: "2020-01-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 55640000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-01-01value=55640000.0unit=CubicMeter"
+dcid: "dc/o/crs9ckqyzwysf"
+
+Node: IndiaEnergy_Gas/E1/8c559f66-f6a9-6c49-646d-897b77d508ac
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/2e3ba0cc-de3e-8edc-003d-5ea4d274644e
+observationDate: "2020-02-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 56370000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-02-01value=56370000.0unit=CubicMeter"
+dcid: "dc/o/glceld1fz2x21"
+
+Node: IndiaEnergy_Gas/E1/2e3ba0cc-de3e-8edc-003d-5ea4d274644e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/31a31e3e-34a0-b6ef-7aba-4b1115508fc1
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 58360000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-03-01value=58360000.0unit=CubicMeter"
+dcid: "dc/o/fd5ds8mjb5sq4"
+
+Node: IndiaEnergy_Gas/E1/31a31e3e-34a0-b6ef-7aba-4b1115508fc1
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/58a12853-7130-c6ba-1685-7bab9f73fc71
+observationDate: "2020-04-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 50380000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-04-01value=50380000.0unit=CubicMeter"
+dcid: "dc/o/d6qczmf6rsb3h"
+
+Node: IndiaEnergy_Gas/E1/58a12853-7130-c6ba-1685-7bab9f73fc71
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1e270a3d-42d4-9a31-c34b-d004ffd9a743
+observationDate: "2020-05-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 52820000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-05-01value=52820000.0unit=CubicMeter"
+dcid: "dc/o/0j2fs5612brsd"
+
+Node: IndiaEnergy_Gas/E1/1e270a3d-42d4-9a31-c34b-d004ffd9a743
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/9d26adc9-c21f-5d23-b9f4-b87f55163da0
+observationDate: "2020-06-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 49840000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-06-01value=49840000.0unit=CubicMeter"
+dcid: "dc/o/l4m26xdnrsqw3"
+
+Node: IndiaEnergy_Gas/E1/9d26adc9-c21f-5d23-b9f4-b87f55163da0
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/007450af-203f-f06a-248a-2cf9d55ecef7
+observationDate: "2020-07-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 53280000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-07-01value=53280000.0unit=CubicMeter"
+dcid: "dc/o/v275hxqjrsvzd"
+
+Node: IndiaEnergy_Gas/E1/007450af-203f-f06a-248a-2cf9d55ecef7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/cf7b3a8a-8f24-678e-e1b2-055a9d502b63
+observationDate: "2020-08-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 54230000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-08-01value=54230000.0unit=CubicMeter"
+dcid: "dc/o/b95ke4vlsjgpg"
+
+Node: IndiaEnergy_Gas/E1/cf7b3a8a-8f24-678e-e1b2-055a9d502b63
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/28bafeca-2d2a-19fc-c178-751e1bc9155a
+observationDate: "2020-09-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 52400000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-09-01value=52400000.0unit=CubicMeter"
+dcid: "dc/o/kcvsqq2pmc58c"
+
+Node: IndiaEnergy_Gas/E1/28bafeca-2d2a-19fc-c178-751e1bc9155a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/4d8afe91-753c-047f-53ab-972f2061fc3a
+observationDate: "2020-10-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 54140000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-10-01value=54140000.0unit=CubicMeter"
+dcid: "dc/o/j3y6v5wnnh77"
+
+Node: IndiaEnergy_Gas/E1/4d8afe91-753c-047f-53ab-972f2061fc3a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/4552e37b-c616-9b72-ec94-f04467e41bdb
+observationDate: "2020-11-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 53920000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-11-01value=53920000.0unit=CubicMeter"
+dcid: "dc/o/9lbwjhxwr03g"
+
+Node: IndiaEnergy_Gas/E1/4552e37b-c616-9b72-ec94-f04467e41bdb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/91a8e9f8-f575-b792-df56-2b3631e40397
+observationDate: "2020-12-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 56440000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2020-12-01value=56440000.0unit=CubicMeter"
+dcid: "dc/o/v44x809kd5wy8"
+
+Node: IndiaEnergy_Gas/E1/91a8e9f8-f575-b792-df56-2b3631e40397
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/81dac158-9211-205d-e1e6-906a2cfa0db6
+observationDate: "2021-01-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 56250000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2021-01-01value=56250000.0unit=CubicMeter"
+dcid: "dc/o/4yk0ds3y9bll1"
+
+Node: IndiaEnergy_Gas/E1/81dac158-9211-205d-e1e6-906a2cfa0db6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/94eff9ae-45b3-1754-3d03-4ec86d9bd42b
+observationDate: "2021-02-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 51560000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2021-02-01value=51560000.0unit=CubicMeter"
+dcid: "dc/o/8hw0c5w235h81"
+
+Node: IndiaEnergy_Gas/E1/94eff9ae-45b3-1754-3d03-4ec86d9bd42b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a4a91c15-7cdf-f5e5-dd28-8aadd83b2f2a
+observationDate: "2021-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 57130000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2021-03-01value=57130000.0unit=CubicMeter"
+dcid: "dc/o/g7b281htc8bg3"
+
+Node: IndiaEnergy_Gas/E1/a4a91c15-7cdf-f5e5-dd28-8aadd83b2f2a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/643a9c9d-440e-167a-f705-052ee929db83
+observationDate: "2021-04-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 56510000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2021-04-01value=56510000.0unit=CubicMeter"
+dcid: "dc/o/w2vvrbmkd9xe2"
+
+Node: IndiaEnergy_Gas/E1/643a9c9d-440e-167a-f705-052ee929db83
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/0e38c90c-6314-2fc4-1954-fae4fa36f64f
+observationDate: "2021-05-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 58880000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2021-05-01value=58880000.0unit=CubicMeter"
+dcid: "dc/o/c6b03lddxbc73"
+
+Node: IndiaEnergy_Gas/E1/0e38c90c-6314-2fc4-1954-fae4fa36f64f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/ca65b704-f8eb-a2c2-c5cb-27d55da2c1e6
+observationDate: "2021-06-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
+value: 56700000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGasobservationDate=2021-06-01value=56700000.0unit=CubicMeter"
+dcid: "dc/o/2gyjp3f0plxp6"
+
+Node: IndiaEnergy_Gas/E1/ca65b704-f8eb-a2c2-c5cb-27d55da2c1e6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/12c78d0f-0fe2-9058-458d-249cb3471ead
+observationDate: "2019-04-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2579430000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2019-04-01value=2579430000.0unit=CubicMeter"
+dcid: "dc/o/725z90ge78qc4"
+
+Node: IndiaEnergy_Gas/E1/12c78d0f-0fe2-9058-458d-249cb3471ead
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/d13b208f-d4c3-06e8-7e40-1325b290b601
+observationDate: "2019-05-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2662350000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2019-05-01value=2662350000.0unit=CubicMeter"
+dcid: "dc/o/xk3m4s7yg3vrc"
+
+Node: IndiaEnergy_Gas/E1/d13b208f-d4c3-06e8-7e40-1325b290b601
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/22b449ae-dbc1-ed50-9109-1f966d971456
+observationDate: "2019-06-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2581920000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2019-06-01value=2581920000.0unit=CubicMeter"
+dcid: "dc/o/9wrskv98rmq3"
+
+Node: IndiaEnergy_Gas/E1/22b449ae-dbc1-ed50-9109-1f966d971456
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1195754c-5cd2-dacc-13a4-dc3f0c7e1a60
+observationDate: "2019-07-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2662060000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2019-07-01value=2662060000.0unit=CubicMeter"
+dcid: "dc/o/05gczhcd9bnwh"
+
+Node: IndiaEnergy_Gas/E1/1195754c-5cd2-dacc-13a4-dc3f0c7e1a60
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/a2d1f47e-632d-ac9e-125a-dade850cb960
+observationDate: "2019-08-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2634030000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2019-08-01value=2634030000.0unit=CubicMeter"
+dcid: "dc/o/g4qf00fy3cwkg"
+
+Node: IndiaEnergy_Gas/E1/a2d1f47e-632d-ac9e-125a-dade850cb960
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/4fd6cab7-6c36-5559-f465-2f77c1f80852
+observationDate: "2019-09-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2515840000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2019-09-01value=2515840000.0unit=CubicMeter"
+dcid: "dc/o/cfhqwne9hpqe9"
+
+Node: IndiaEnergy_Gas/E1/4fd6cab7-6c36-5559-f465-2f77c1f80852
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/dff4c98b-e210-954b-d0bd-a714e366e0ee
+observationDate: "2019-10-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2587480000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2019-10-01value=2587480000.0unit=CubicMeter"
+dcid: "dc/o/t4qt636mpw5db"
+
+Node: IndiaEnergy_Gas/E1/dff4c98b-e210-954b-d0bd-a714e366e0ee
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/16765f0d-2096-5e38-2ac1-bc02aca317a4
+observationDate: "2019-11-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2436490000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2019-11-01value=2436490000.0unit=CubicMeter"
+dcid: "dc/o/gg9mly7c1eph2"
+
+Node: IndiaEnergy_Gas/E1/16765f0d-2096-5e38-2ac1-bc02aca317a4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/2545bea6-68b6-c634-d970-e6fd2a4802d0
+observationDate: "2019-12-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2557400000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2019-12-01value=2557400000.0unit=CubicMeter"
+dcid: "dc/o/ct2tlzq5ssflc"
+
+Node: IndiaEnergy_Gas/E1/2545bea6-68b6-c634-d970-e6fd2a4802d0
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/65620f70-1643-f463-fb31-b70c6b862c3f
+observationDate: "2020-01-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2552720000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-01-01value=2552720000.0unit=CubicMeter"
+dcid: "dc/o/pmt21dbht85x7"
+
+Node: IndiaEnergy_Gas/E1/65620f70-1643-f463-fb31-b70c6b862c3f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/055f2d51-951c-920d-a33f-e9a3f7caff64
+observationDate: "2020-02-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2284150000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-02-01value=2284150000.0unit=CubicMeter"
+dcid: "dc/o/rg1dzk5ws3s6d"
+
+Node: IndiaEnergy_Gas/E1/055f2d51-951c-920d-a33f-e9a3f7caff64
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/3fe413bd-fc60-a1a1-b463-2f91ad6744a4
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2357070000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-03-01value=2357070000.0unit=CubicMeter"
+dcid: "dc/o/eet31ys5w92v7"
+
+Node: IndiaEnergy_Gas/E1/3fe413bd-fc60-a1a1-b463-2f91ad6744a4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/0ebb3446-eeb6-c584-daf1-2200bc00250e
+observationDate: "2020-04-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2110960000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-04-01value=2110960000.0unit=CubicMeter"
+dcid: "dc/o/z0z2m7cvdvkp"
+
+Node: IndiaEnergy_Gas/E1/0ebb3446-eeb6-c584-daf1-2200bc00250e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/f91b527c-3038-f8eb-f3b6-4811353c1976
+observationDate: "2020-05-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2247190000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-05-01value=2247190000.0unit=CubicMeter"
+dcid: "dc/o/8gtxvywksgd1f"
+
+Node: IndiaEnergy_Gas/E1/f91b527c-3038-f8eb-f3b6-4811353c1976
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/41ad6616-3985-4bf0-e3ab-4331c973df8f
+observationDate: "2020-06-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2273970000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-06-01value=2273970000.0unit=CubicMeter"
+dcid: "dc/o/knyh7mtyb8qlf"
+
+Node: IndiaEnergy_Gas/E1/41ad6616-3985-4bf0-e3ab-4331c973df8f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/17542f6a-8836-5948-de1e-05650d5de3d8
+observationDate: "2020-07-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2390040000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-07-01value=2390040000.0unit=CubicMeter"
+dcid: "dc/o/3vnkp3xfbbbv9"
+
+Node: IndiaEnergy_Gas/E1/17542f6a-8836-5948-de1e-05650d5de3d8
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b1ab59af-bb26-ceeb-5f81-fb3a453b183b
+observationDate: "2020-08-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2377690000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-08-01value=2377690000.0unit=CubicMeter"
+dcid: "dc/o/tv0d4ldnhev76"
+
+Node: IndiaEnergy_Gas/E1/b1ab59af-bb26-ceeb-5f81-fb3a453b183b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/227431e2-8ea5-43c9-77c9-e6c3dc317641
+observationDate: "2020-09-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2241120000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-09-01value=2241120000.0unit=CubicMeter"
+dcid: "dc/o/69531er7kmqx3"
+
+Node: IndiaEnergy_Gas/E1/227431e2-8ea5-43c9-77c9-e6c3dc317641
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/6280e2f3-f0ca-b43f-7fa4-16888ef72ae2
+observationDate: "2020-10-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2364750000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-10-01value=2364750000.0unit=CubicMeter"
+dcid: "dc/o/v41rh6zt85emh"
+
+Node: IndiaEnergy_Gas/E1/6280e2f3-f0ca-b43f-7fa4-16888ef72ae2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/b5159ffb-c88c-57c7-1859-7d999cdd3f41
+observationDate: "2020-11-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2277330000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-11-01value=2277330000.0unit=CubicMeter"
+dcid: "dc/o/hjn18v5mlrfd9"
+
+Node: IndiaEnergy_Gas/E1/b5159ffb-c88c-57c7-1859-7d999cdd3f41
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/24146e35-e8b0-d2b4-6dd0-82ea4f5775e6
+observationDate: "2020-12-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2368480000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2020-12-01value=2368480000.0unit=CubicMeter"
+dcid: "dc/o/lwe28et7l4yj7"
+
+Node: IndiaEnergy_Gas/E1/24146e35-e8b0-d2b4-6dd0-82ea4f5775e6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/e9c74bfc-5daf-9d91-92b2-0abda4ee1529
+observationDate: "2021-01-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2494370000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2021-01-01value=2494370000.0unit=CubicMeter"
+dcid: "dc/o/38elce9dl5jvb"
+
+Node: IndiaEnergy_Gas/E1/e9c74bfc-5daf-9d91-92b2-0abda4ee1529
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/264b9f22-d7c3-6401-aa5a-1d027020b04b
+observationDate: "2021-02-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2255590000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2021-02-01value=2255590000.0unit=CubicMeter"
+dcid: "dc/o/k7xqp66pw4bh1"
+
+Node: IndiaEnergy_Gas/E1/264b9f22-d7c3-6401-aa5a-1d027020b04b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/04bc7aa1-1a50-e6e9-8062-13de6e77c926
+observationDate: "2021-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2628630000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2021-03-01value=2628630000.0unit=CubicMeter"
+dcid: "dc/o/f73mhgggm523"
+
+Node: IndiaEnergy_Gas/E1/04bc7aa1-1a50-e6e9-8062-13de6e77c926
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/1582afdd-f7b8-21b0-3d33-c52236d95084
+observationDate: "2021-04-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2594980000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2021-04-01value=2594980000.0unit=CubicMeter"
+dcid: "dc/o/rsml044j1drd4"
+
+Node: IndiaEnergy_Gas/E1/1582afdd-f7b8-21b0-3d33-c52236d95084
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/54f70ce5-4363-7e7a-48cd-64a8c6dd5757
+observationDate: "2021-05-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2680760000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2021-05-01value=2680760000.0unit=CubicMeter"
+dcid: "dc/o/8y1kw12knr296"
+
+Node: IndiaEnergy_Gas/E1/54f70ce5-4363-7e7a-48cd-64a8c6dd5757
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Gas/E0/7677b1c2-3e3c-aec5-ba9e-f2bf19b3e357
+observationDate: "2021-06-01"
+observationAbout: dcid:country/IND
+unit: dcid:CubicMeter
+variableMeasured: dcid:Monthly_Generation_Fuel_NaturalGas
+value: 2720750000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Monthly_Generation_Fuel_NaturalGasobservationDate=2021-06-01value=2720750000.0unit=CubicMeter"
+dcid: "dc/o/t40p78kdp46q7"
+
+Node: IndiaEnergy_Gas/E1/7677b1c2-3e3c-aec5-ba9e-f2bf19b3e357
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+

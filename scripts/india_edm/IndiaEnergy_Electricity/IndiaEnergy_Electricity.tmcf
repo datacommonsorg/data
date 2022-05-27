@@ -1,0 +1,11 @@
+Node: E:IndiaEnergy_Electricity->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaEnergy_Electricity->StatVar
+observationDate: C:IndiaEnergy_Electricity->Date
+observationAbout: E:IndiaEnergy_Electricity->E1
+value: C:IndiaEnergy_Electricity->value
+unit: C:IndiaEnergy_Electricity->unit
+
+Node: E:IndiaEnergy_Electricity->E1
+typeOf: schema:Place
+isoCode: C:IndiaEnergy_Electricity->StateCode

@@ -1,0 +1,3510 @@
+Node: IndiaEnergy_Renewables/E0/accf902a-8507-3268-09c6-18b8d9f5794c
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 1400.63
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2008-03-01value=1400.63unit=Megawatt"
+dcid: "dc/o/wxz1dv1em7v6c"
+
+Node: IndiaEnergy_Renewables/E1/accf902a-8507-3268-09c6-18b8d9f5794c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/63b8e0ae-a467-1535-559a-5c64ef07c49c
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 1746.33
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2009-03-01value=1746.33unit=Megawatt"
+dcid: "dc/o/ec337n7kvgtq9"
+
+Node: IndiaEnergy_Renewables/E1/63b8e0ae-a467-1535-559a-5c64ef07c49c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/8a784b4d-0a50-08e0-8f79-9491c80c819b
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 2199.63
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2010-03-01value=2199.63unit=Megawatt"
+dcid: "dc/o/78gd673fgzrwg"
+
+Node: IndiaEnergy_Renewables/E1/8a784b4d-0a50-08e0-8f79-9491c80c819b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/d405b3cb-a849-2954-04fc-d1896ff22add
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 2664.63
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2011-03-01value=2664.63unit=Megawatt"
+dcid: "dc/o/44c6kbd598nd4"
+
+Node: IndiaEnergy_Renewables/E1/d405b3cb-a849-2954-04fc-d1896ff22add
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/46b39abe-0b2c-0161-95df-0f41da0c4b04
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 3135.33
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2012-03-01value=3135.33unit=Megawatt"
+dcid: "dc/o/rzghxhhrr4648"
+
+Node: IndiaEnergy_Renewables/E1/46b39abe-0b2c-0161-95df-0f41da0c4b04
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/f09d3ec1-1e2e-7643-ba75-6fc7656c8d02
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 3601.03
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2013-03-01value=3601.03unit=Megawatt"
+dcid: "dc/o/njn7ct3wst6zb"
+
+Node: IndiaEnergy_Renewables/E1/f09d3ec1-1e2e-7643-ba75-6fc7656c8d02
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7d11ff4c-5b0f-b4da-d101-3c0b30e04a01
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 4013.5499999999997
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2014-03-01value=4013.5499999999997unit=Megawatt"
+dcid: "dc/o/2gkkl6696kshd"
+
+Node: IndiaEnergy_Renewables/E1/7d11ff4c-5b0f-b4da-d101-3c0b30e04a01
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/d9bbc645-2d86-eb33-9abc-987e2ffd1b17
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 7714.9
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2015-03-01value=7714.9unit=Megawatt"
+dcid: "dc/o/snz4tlzd72yq3"
+
+Node: IndiaEnergy_Renewables/E1/d9bbc645-2d86-eb33-9abc-987e2ffd1b17
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/9b519891-f3f4-6d79-feb6-5b2de4cbfeb4
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 8019.75
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2016-03-01value=8019.75unit=Megawatt"
+dcid: "dc/o/7154n7wmn4yg"
+
+Node: IndiaEnergy_Renewables/E1/9b519891-f3f4-6d79-feb6-5b2de4cbfeb4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/3da6915f-b7b9-dd56-3cf6-be10541d856f
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 8181.7
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2017-03-01value=8181.7unit=Megawatt"
+dcid: "dc/o/g15lhqgcn9jxg"
+
+Node: IndiaEnergy_Renewables/E1/3da6915f-b7b9-dd56-3cf6-be10541d856f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7f37cdf5-fe47-0287-0124-84e00802df6f
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 8700.8
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2018-03-01value=8700.8unit=Megawatt"
+dcid: "dc/o/d806x2g7tjd91"
+
+Node: IndiaEnergy_Renewables/E1/7f37cdf5-fe47-0287-0124-84e00802df6f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/1131b9e2-f421-659a-4ca5-02ec56b4282f
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 9103.5
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2019-03-01value=9103.5unit=Megawatt"
+dcid: "dc/o/3m7ql7tltr8yh"
+
+Node: IndiaEnergy_Renewables/E1/1131b9e2-f421-659a-4ca5-02ec56b4282f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/f8a278cf-7518-ffdb-ba0e-4d6ea93141b2
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Bagasse
+value: 9875.31
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_BagasseobservationDate=2020-03-01value=9875.31unit=Megawatt"
+dcid: "dc/o/yxyg3mgspsx1h"
+
+Node: IndiaEnergy_Renewables/E1/f8a278cf-7518-ffdb-ba0e-4d6ea93141b2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e52a2326-9ea2-d6b0-9b82-c066f9544a7b
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 55.75
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2008-03-01value=55.75unit=Megawatt"
+dcid: "dc/o/33cf50f1v55e1"
+
+Node: IndiaEnergy_Renewables/E1/e52a2326-9ea2-d6b0-9b82-c066f9544a7b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ee7c2a5a-cf84-cfe5-a694-8538629f92a4
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 59.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2009-03-01value=59.0unit=Megawatt"
+dcid: "dc/o/b645ecj079scg"
+
+Node: IndiaEnergy_Renewables/E1/ee7c2a5a-cf84-cfe5-a694-8538629f92a4
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e7bfb67c-6d88-8c75-3ec5-dcd1c08ad918
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 64.96
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2010-03-01value=64.96unit=Megawatt"
+dcid: "dc/o/hblxwt0pr02eh"
+
+Node: IndiaEnergy_Renewables/E1/e7bfb67c-6d88-8c75-3ec5-dcd1c08ad918
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/a1f8afa3-3392-e1bc-503d-2821c7418314
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 72.48
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2011-03-01value=72.48unit=Megawatt"
+dcid: "dc/o/v6flng6n6rryb"
+
+Node: IndiaEnergy_Renewables/E1/a1f8afa3-3392-e1bc-503d-2821c7418314
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/df276625-3e9b-31ac-534a-ec1465b9436f
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 89.68
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2012-03-01value=89.68unit=Megawatt"
+dcid: "dc/o/c3xtww176jnn5"
+
+Node: IndiaEnergy_Renewables/E1/df276625-3e9b-31ac-534a-ec1465b9436f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ff8ea81f-921b-0231-ea40-f5a84c40904e
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 96.08
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2013-03-01value=96.08unit=Megawatt"
+dcid: "dc/o/907gscvv9n556"
+
+Node: IndiaEnergy_Renewables/E1/ff8ea81f-921b-0231-ea40-f5a84c40904e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/de38f3bb-26e2-b988-ab33-bfab4a8736be
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 106.58
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2014-03-01value=106.58unit=Megawatt"
+dcid: "dc/o/ld0ht68wnqqh1"
+
+Node: IndiaEnergy_Renewables/E1/de38f3bb-26e2-b988-ab33-bfab4a8736be
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e6ae6231-46ea-2490-ea65-b0cd36c71605
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 90.58
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2015-03-01value=90.58unit=Megawatt"
+dcid: "dc/o/99e2tzh0r1sw3"
+
+Node: IndiaEnergy_Renewables/E1/e6ae6231-46ea-2490-ea65-b0cd36c71605
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/9d6b5113-e123-2df1-fd84-f4a956146127
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 90.58
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2016-03-01value=90.58unit=Megawatt"
+dcid: "dc/o/5see8d88qcb24"
+
+Node: IndiaEnergy_Renewables/E1/9d6b5113-e123-2df1-fd84-f4a956146127
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ba9072a6-1e4d-7976-d5cb-596863b84447
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 114.08
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2017-03-01value=114.08unit=Megawatt"
+dcid: "dc/o/jh8e9bbrylhmc"
+
+Node: IndiaEnergy_Renewables/E1/ba9072a6-1e4d-7976-d5cb-596863b84447
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ae296100-8d6c-e7b4-54c7-068c13164f25
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 138.3
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2018-03-01value=138.3unit=Megawatt"
+dcid: "dc/o/v31jgq41zk647"
+
+Node: IndiaEnergy_Renewables/E1/ae296100-8d6c-e7b4-54c7-068c13164f25
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7eaea131-c8a4-1cb7-1bab-4554a86415fb
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 138.3
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2019-03-01value=138.3unit=Megawatt"
+dcid: "dc/o/w1qtslbghwc9"
+
+Node: IndiaEnergy_Renewables/E1/7eaea131-c8a4-1cb7-1bab-4554a86415fb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7adc66cd-b867-e63f-2819-e56764786ace
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_NonRenewableWaste
+value: 147.64
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_NonRenewableWasteobservationDate=2020-03-01value=147.64unit=Megawatt"
+dcid: "dc/o/ey654jhqf91xh"
+
+Node: IndiaEnergy_Renewables/E1/7adc66cd-b867-e63f-2819-e56764786ace
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/126e6ed3-7dc8-5086-c461-bb74af7f9500
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 2180.85
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2008-03-01value=2180.85unit=Megawatt"
+dcid: "dc/o/v5dmy4d0sb28d"
+
+Node: IndiaEnergy_Renewables/E1/126e6ed3-7dc8-5086-c461-bb74af7f9500
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/fc53ba22-53ac-18cb-ba18-db70524b7f22
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 2429.78
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2009-03-01value=2429.78unit=Megawatt"
+dcid: "dc/o/vq3q6t0ytftgc"
+
+Node: IndiaEnergy_Renewables/E1/fc53ba22-53ac-18cb-ba18-db70524b7f22
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ba2995b1-e65c-cd96-affd-293374401d79
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 2735.4300000000003
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2010-03-01value=2735.4300000000003unit=Megawatt"
+dcid: "dc/o/n1cblg5244hw5"
+
+Node: IndiaEnergy_Renewables/E1/ba2995b1-e65c-cd96-affd-293374401d79
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/04327681-b715-9e1d-3d80-5093e002168e
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 3042.92
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2011-03-01value=3042.92unit=Megawatt"
+dcid: "dc/o/nkl8rxfwhbyr"
+
+Node: IndiaEnergy_Renewables/E1/04327681-b715-9e1d-3d80-5093e002168e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/50fb11ee-4b4f-66c9-b392-fb095154dbd5
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 3395.33
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2012-03-01value=3395.33unit=Megawatt"
+dcid: "dc/o/jyt386kyhllxf"
+
+Node: IndiaEnergy_Renewables/E1/50fb11ee-4b4f-66c9-b392-fb095154dbd5
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/f0bc48ca-2dbf-49f0-e626-f2a1390f0cb3
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 3632.253
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2013-03-01value=3632.253unit=Megawatt"
+dcid: "dc/o/00yrdnjc7230d"
+
+Node: IndiaEnergy_Renewables/E1/f0bc48ca-2dbf-49f0-e626-f2a1390f0cb3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/b723bfcd-93cd-74f4-97ce-0931cbf92be1
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 3803.7
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2014-03-01value=3803.7unit=Megawatt"
+dcid: "dc/o/0ryzqkhj5q7s9"
+
+Node: IndiaEnergy_Renewables/E1/b723bfcd-93cd-74f4-97ce-0931cbf92be1
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/eb53ff33-a013-a6a4-840e-6ab1f9af1e54
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 4055.3599999999997
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2015-03-01value=4055.3599999999997unit=Megawatt"
+dcid: "dc/o/1k04mzle3n83b"
+
+Node: IndiaEnergy_Renewables/E1/eb53ff33-a013-a6a4-840e-6ab1f9af1e54
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/af853d8d-2116-e5d9-6848-6d8175722062
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 4273.465
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2016-03-01value=4273.465unit=Megawatt"
+dcid: "dc/o/bqnezfnxvq4n7"
+
+Node: IndiaEnergy_Renewables/E1/af853d8d-2116-e5d9-6848-6d8175722062
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/41827224-06d7-4706-9a00-faf0e5aa866e
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 4379.855
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2017-03-01value=4379.855unit=Megawatt"
+dcid: "dc/o/3b1mqnl241eh7"
+
+Node: IndiaEnergy_Renewables/E1/41827224-06d7-4706-9a00-faf0e5aa866e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/928a14d6-5bc8-aed4-8b67-f152a168ba0a
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 4485.82
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2018-03-01value=4485.82unit=Megawatt"
+dcid: "dc/o/307wd0j6y50g3"
+
+Node: IndiaEnergy_Renewables/E1/928a14d6-5bc8-aed4-8b67-f152a168ba0a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/fbbaf3d7-acf9-c1af-2d65-cbb2c3642e44
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 4593.150000000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2019-03-01value=4593.150000000001unit=Megawatt"
+dcid: "dc/o/w25lq5d0eqdhd"
+
+Node: IndiaEnergy_Renewables/E1/fbbaf3d7-acf9-c1af-2d65-cbb2c3642e44
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/a5dea819-e205-82c4-1055-5a2ea32e9252
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_PumpedHydro
+value: 4683.155
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_PumpedHydroobservationDate=2020-03-01value=4683.155unit=Megawatt"
+dcid: "dc/o/s84rz8p9rr8y3"
+
+Node: IndiaEnergy_Renewables/E1/a5dea819-e205-82c4-1055-5a2ea32e9252
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/108396c4-9b6e-eb5d-06b2-27122ca22707
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 2.12
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2008-03-01value=2.12unit=Megawatt"
+dcid: "dc/o/kpscymk9hx5wg"
+
+Node: IndiaEnergy_Renewables/E1/108396c4-9b6e-eb5d-06b2-27122ca22707
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/bfd83038-9235-a352-02a2-cc946819d46c
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 2.12
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2009-03-01value=2.12unit=Megawatt"
+dcid: "dc/o/362f9g93spncg"
+
+Node: IndiaEnergy_Renewables/E1/bfd83038-9235-a352-02a2-cc946819d46c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ae832c01-eb0f-94fd-9c7c-58a893d64510
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 10.3
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2010-03-01value=10.3unit=Megawatt"
+dcid: "dc/o/fcjj6mm5sgzn9"
+
+Node: IndiaEnergy_Renewables/E1/ae832c01-eb0f-94fd-9c7c-58a893d64510
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e258b77d-4964-083e-3a6f-2ee4304a5157
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 35.15
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2011-03-01value=35.15unit=Megawatt"
+dcid: "dc/o/6s5cedm0bnqn1"
+
+Node: IndiaEnergy_Renewables/E1/e258b77d-4964-083e-3a6f-2ee4304a5157
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/59e7bc94-17cb-b349-e20d-f1ad1da2c315
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 941.2399999999999
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2012-03-01value=941.2399999999999unit=Megawatt"
+dcid: "dc/o/8kyjbve1dy1gf"
+
+Node: IndiaEnergy_Renewables/E1/59e7bc94-17cb-b349-e20d-f1ad1da2c315
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/92b191d4-9d80-9d62-77e4-8c1b7695ba7e
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 1686.4409999999998
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2013-03-01value=1686.4409999999998unit=Megawatt"
+dcid: "dc/o/edbwk3f132lr9"
+
+Node: IndiaEnergy_Renewables/E1/92b191d4-9d80-9d62-77e4-8c1b7695ba7e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/995a6353-4c6e-beb0-9f53-246727844afc
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 2631.96
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2014-03-01value=2631.96unit=Megawatt"
+dcid: "dc/o/wsbsw6sgswht7"
+
+Node: IndiaEnergy_Renewables/E1/995a6353-4c6e-beb0-9f53-246727844afc
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/0f6ea1a4-f6c9-a8e7-fa59-09c613c6f13c
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 3743.97
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2015-03-01value=3743.97unit=Megawatt"
+dcid: "dc/o/88tnqd2vsgzlg"
+
+Node: IndiaEnergy_Renewables/E1/0f6ea1a4-f6c9-a8e7-fa59-09c613c6f13c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/8844cd2c-9d97-255a-fa36-e48091816ff5
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 6762.847
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2016-03-01value=6762.847unit=Megawatt"
+dcid: "dc/o/pqt2zzbx7yr96"
+
+Node: IndiaEnergy_Renewables/E1/8844cd2c-9d97-255a-fa36-e48091816ff5
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ee4d55cc-b7e6-321f-2478-418aca64fb2e
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 12288.825
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2017-03-01value=12288.825unit=Megawatt"
+dcid: "dc/o/f1be7cr82vyp7"
+
+Node: IndiaEnergy_Renewables/E1/ee4d55cc-b7e6-321f-2478-418aca64fb2e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/8351e24b-e52e-6c87-5ec5-4a06b76c09c2
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 21651.48
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2018-03-01value=21651.48unit=Megawatt"
+dcid: "dc/o/scjy5fd1jrlh3"
+
+Node: IndiaEnergy_Renewables/E1/8351e24b-e52e-6c87-5ec5-4a06b76c09c2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/bd0700e6-9e10-77d9-1bbd-f97be12e5285
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 28180.71
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2019-03-01value=28180.71unit=Megawatt"
+dcid: "dc/o/87ns43rweefv"
+
+Node: IndiaEnergy_Renewables/E1/bd0700e6-9e10-77d9-1bbd-f97be12e5285
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/94def8f4-9ce9-5051-48bd-1efe0fdd0434
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Solar
+value: 34627.82
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_SolarobservationDate=2020-03-01value=34627.82unit=Megawatt"
+dcid: "dc/o/6ps997f6311wd"
+
+Node: IndiaEnergy_Renewables/E1/94def8f4-9ce9-5051-48bd-1efe0fdd0434
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/22c29242-3344-df9d-cdb4-2cf1fb651b5d
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 8757.4
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2008-03-01value=8757.4unit=Megawatt"
+dcid: "dc/o/r04s8zrkm9jb1"
+
+Node: IndiaEnergy_Renewables/E1/22c29242-3344-df9d-cdb4-2cf1fb651b5d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/78adde16-a54d-7dec-3c6f-0071c3e1fb06
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 10242.300000000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2009-03-01value=10242.300000000001unit=Megawatt"
+dcid: "dc/o/glj88z55y6ph5"
+
+Node: IndiaEnergy_Renewables/E1/78adde16-a54d-7dec-3c6f-0071c3e1fb06
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c8229555-9229-b2de-9283-bbeea5cef307
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 11806.75
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2010-03-01value=11806.75unit=Megawatt"
+dcid: "dc/o/dph4ey3s0dct3"
+
+Node: IndiaEnergy_Renewables/E1/c8229555-9229-b2de-9283-bbeea5cef307
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c8945751-aea7-790c-ac2a-ba6a8eae1c26
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 14155.85
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2011-03-01value=14155.85unit=Megawatt"
+dcid: "dc/o/dp76l9dg44x4f"
+
+Node: IndiaEnergy_Renewables/E1/c8945751-aea7-790c-ac2a-ba6a8eae1c26
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/5ea7833d-81a4-f440-e9d1-9b3a5227b465
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 17317.56
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2012-03-01value=17317.56unit=Megawatt"
+dcid: "dc/o/g5w2j6wqkkf02"
+
+Node: IndiaEnergy_Renewables/E1/5ea7833d-81a4-f440-e9d1-9b3a5227b465
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/795fc73e-ac21-eaf3-5910-a91d374b5a6f
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 19051.46
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2013-03-01value=19051.46unit=Megawatt"
+dcid: "dc/o/5qkpw6emrzq13"
+
+Node: IndiaEnergy_Renewables/E1/795fc73e-ac21-eaf3-5910-a91d374b5a6f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/fca75c4e-6d83-8979-22b5-a4254e9c3608
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 21136.399999999998
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2014-03-01value=21136.399999999998unit=Megawatt"
+dcid: "dc/o/pz5p18d0bz1g8"
+
+Node: IndiaEnergy_Renewables/E1/fca75c4e-6d83-8979-22b5-a4254e9c3608
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/b167a957-4b1e-98f0-f8ac-7d7630d8e6fa
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 23354.35
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2015-03-01value=23354.35unit=Megawatt"
+dcid: "dc/o/t7gdpg2x3e606"
+
+Node: IndiaEnergy_Renewables/E1/b167a957-4b1e-98f0-f8ac-7d7630d8e6fa
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/6a825496-d296-148c-092f-9422e72097ef
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 26777.399999999998
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2016-03-01value=26777.399999999998unit=Megawatt"
+dcid: "dc/o/fjbezx3yb3xw4"
+
+Node: IndiaEnergy_Renewables/E1/6a825496-d296-148c-092f-9422e72097ef
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ef36b06b-6c44-7dc2-c14c-937b235284aa
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 32279.77
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2017-03-01value=32279.77unit=Megawatt"
+dcid: "dc/o/fys79zt2lnnb6"
+
+Node: IndiaEnergy_Renewables/E1/ef36b06b-6c44-7dc2-c14c-937b235284aa
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/384bc536-0e82-33fd-3994-4d6331611ccf
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 34046.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2018-03-01value=34046.0unit=Megawatt"
+dcid: "dc/o/x1gw5fplex9n7"
+
+Node: IndiaEnergy_Renewables/E1/384bc536-0e82-33fd-3994-4d6331611ccf
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/3e44e7fc-e028-5831-a9f9-0c69804d2a6e
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 35625.97
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2019-03-01value=35625.97unit=Megawatt"
+dcid: "dc/o/61qrhvltx36l2"
+
+Node: IndiaEnergy_Renewables/E1/3e44e7fc-e028-5831-a9f9-0c69804d2a6e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/a7aac6e6-e9f1-ddf8-0c81-d542c37f585b
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Capacity_Electricity_Wind
+value: 37693.75
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Capacity_Electricity_WindobservationDate=2020-03-01value=37693.75unit=Megawatt"
+dcid: "dc/o/p01spb0psb744"
+
+Node: IndiaEnergy_Renewables/E1/a7aac6e6-e9f1-ddf8-0c81-d542c37f585b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7e64e4b2-f143-9079-91a3-064ec04d50f2
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 4068.231
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2008-03-01value=4068.231unit=GigawattHour"
+dcid: "dc/o/313q8dbwtsk59"
+
+Node: IndiaEnergy_Renewables/E1/7e64e4b2-f143-9079-91a3-064ec04d50f2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/d7759d07-2dfb-6015-dd8a-c903214b8eff
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 5163.981
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2009-03-01value=5163.981unit=GigawattHour"
+dcid: "dc/o/7rpx350t538l4"
+
+Node: IndiaEnergy_Renewables/E1/d7759d07-2dfb-6015-dd8a-c903214b8eff
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/1c72185f-d1c7-92c6-e851-fafb79ebf3e3
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 7510.744000000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2010-03-01value=7510.744000000001unit=GigawattHour"
+dcid: "dc/o/f8jtyx2dksvqf"
+
+Node: IndiaEnergy_Renewables/E1/1c72185f-d1c7-92c6-e851-fafb79ebf3e3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/35f6bc2c-9875-9f0c-2cc7-2f33ea449e6e
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 8882.037
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2011-03-01value=8882.037unit=GigawattHour"
+dcid: "dc/o/ws5em4b11lst6"
+
+Node: IndiaEnergy_Renewables/E1/35f6bc2c-9875-9f0c-2cc7-2f33ea449e6e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/4eae93a5-29fb-2303-2a52-a70ba56b931f
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 10260.917
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2012-03-01value=10260.917unit=GigawattHour"
+dcid: "dc/o/eym250lzjtftb"
+
+Node: IndiaEnergy_Renewables/E1/4eae93a5-29fb-2303-2a52-a70ba56b931f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/b9cd6c5a-431a-1a0c-69bb-0ff3c15ef2bc
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 12259.323
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2013-03-01value=12259.323unit=GigawattHour"
+dcid: "dc/o/yqjt5crqxvrqf"
+
+Node: IndiaEnergy_Renewables/E1/b9cd6c5a-431a-1a0c-69bb-0ff3c15ef2bc
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/1f8d6e26-166f-8323-b459-ea08f94783b1
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 13514.885
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2014-03-01value=13514.885unit=GigawattHour"
+dcid: "dc/o/2gz667zjeps39"
+
+Node: IndiaEnergy_Renewables/E1/1f8d6e26-166f-8323-b459-ea08f94783b1
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/db403035-1e26-9e42-497a-ad09b51f4679
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 14670.772
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2015-03-01value=14670.772unit=GigawattHour"
+dcid: "dc/o/bgerwrgn1e2w6"
+
+Node: IndiaEnergy_Renewables/E1/db403035-1e26-9e42-497a-ad09b51f4679
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/18d0ccd5-7fee-ad43-3350-67a19015abf2
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 16680.499
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2016-03-01value=16680.499unit=GigawattHour"
+dcid: "dc/o/12lkbpcxfv5n7"
+
+Node: IndiaEnergy_Renewables/E1/18d0ccd5-7fee-ad43-3350-67a19015abf2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/542190b0-2916-a0d7-e4ba-5bc4993bac8e
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 14158.640000000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2017-03-01value=14158.640000000001unit=GigawattHour"
+dcid: "dc/o/jm9vr0v22pgzh"
+
+Node: IndiaEnergy_Renewables/E1/542190b0-2916-a0d7-e4ba-5bc4993bac8e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/89254114-466d-14b7-1bee-b3e8fc45344d
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 15252.3
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2018-03-01value=15252.3unit=GigawattHour"
+dcid: "dc/o/jd502661kxzz8"
+
+Node: IndiaEnergy_Renewables/E1/89254114-466d-14b7-1bee-b3e8fc45344d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/64a279b1-823c-1e43-c929-8c0ccf7b4b2d
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 16326.489
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2019-03-01value=16326.489unit=GigawattHour"
+dcid: "dc/o/1qpy5036lcl05"
+
+Node: IndiaEnergy_Renewables/E1/64a279b1-823c-1e43-c929-8c0ccf7b4b2d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/2115ecb7-ba16-b97b-4f4e-9867afa41e46
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Bagasse
+value: 13742.429
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_BagasseobservationDate=2020-03-01value=13742.429unit=GigawattHour"
+dcid: "dc/o/j1be4ll9f36gf"
+
+Node: IndiaEnergy_Renewables/E1/2115ecb7-ba16-b97b-4f4e-9867afa41e46
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/a975ba4e-96c2-f3d2-1771-86a817b302a7
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 457521.45
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2006-03-01value=457521.45unit=GigawattHour"
+dcid: "dc/o/1se17gelbh3ng"
+
+Node: IndiaEnergy_Renewables/E1/a975ba4e-96c2-f3d2-1771-86a817b302a7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/96903227-0efb-c852-4588-7d7529cd7588
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 493567.6
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2007-03-01value=493567.6unit=GigawattHour"
+dcid: "dc/o/tp8legkq28553"
+
+Node: IndiaEnergy_Renewables/E1/96903227-0efb-c852-4588-7d7529cd7588
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/5ad3c131-de0f-ee74-5c8e-826741889c4d
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 519914.57999999996
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2008-03-01value=519914.57999999996unit=GigawattHour"
+dcid: "dc/o/n8epslw0c9zb6"
+
+Node: IndiaEnergy_Renewables/E1/5ad3c131-de0f-ee74-5c8e-826741889c4d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/f05296ce-c83c-2533-923d-420316069c54
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 565663.73
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2009-03-01value=565663.73unit=GigawattHour"
+dcid: "dc/o/p6bkeyev6gy67"
+
+Node: IndiaEnergy_Renewables/E1/f05296ce-c83c-2533-923d-420316069c54
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ef268cc1-8c66-4052-80e9-7cabb123fe65
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 594727.35
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2010-03-01value=594727.35unit=GigawattHour"
+dcid: "dc/o/516h7hkc4bwn2"
+
+Node: IndiaEnergy_Renewables/E1/ef268cc1-8c66-4052-80e9-7cabb123fe65
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/9e7bbdc7-2702-6a6f-1c45-e65b9bd612bf
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 635517.99
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2011-03-01value=635517.99unit=GigawattHour"
+dcid: "dc/o/1w9n2xzd7ety1"
+
+Node: IndiaEnergy_Renewables/E1/9e7bbdc7-2702-6a6f-1c45-e65b9bd612bf
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/791efc2f-b379-354a-5435-4b60aa9283da
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 693773.9
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2012-03-01value=693773.9unit=GigawattHour"
+dcid: "dc/o/5l3f8skmx0n91"
+
+Node: IndiaEnergy_Renewables/E1/791efc2f-b379-354a-5435-4b60aa9283da
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/0e30a75e-d079-f231-75a2-64d0e284a43b
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 807006.8099999999
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2013-03-01value=807006.8099999999unit=GigawattHour"
+dcid: "dc/o/j0f2t1m41zeh3"
+
+Node: IndiaEnergy_Renewables/E1/0e30a75e-d079-f231-75a2-64d0e284a43b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7211db56-d251-e85c-70b8-af1789ef8715
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 866133.37
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2014-03-01value=866133.37unit=GigawattHour"
+dcid: "dc/o/wlnkgygq8m3n5"
+
+Node: IndiaEnergy_Renewables/E1/7211db56-d251-e85c-70b8-af1789ef8715
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/46fb9f9c-4e81-dab2-968d-eef29184a8e8
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 965646.05
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2015-03-01value=965646.05unit=GigawattHour"
+dcid: "dc/o/1ckbmzrb77n02"
+
+Node: IndiaEnergy_Renewables/E1/46fb9f9c-4e81-dab2-968d-eef29184a8e8
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/8919ef73-767a-9368-f833-d41fd1f4d2b7
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 1033386.15
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2016-03-01value=1033386.15unit=GigawattHour"
+dcid: "dc/o/zpzkk74jyecq1"
+
+Node: IndiaEnergy_Renewables/E1/8919ef73-767a-9368-f833-d41fd1f4d2b7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/2fc7590a-c9fe-e6d3-da51-58c07eb2c428
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 1082449.24
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2017-03-01value=1082449.24unit=GigawattHour"
+dcid: "dc/o/cwytpq43lz6hb"
+
+Node: IndiaEnergy_Renewables/E1/2fc7590a-c9fe-e6d3-da51-58c07eb2c428
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/9d898a0f-9e58-a5a8-e330-6573ab519100
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 1130458.329
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2018-03-01value=1130458.329unit=GigawattHour"
+dcid: "dc/o/8syl0r4e26qp9"
+
+Node: IndiaEnergy_Renewables/E1/9d898a0f-9e58-a5a8-e330-6573ab519100
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/263c4f32-aaab-b35c-a5ac-6f175644620f
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 1206515.691
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2019-03-01value=1206515.691unit=GigawattHour"
+dcid: "dc/o/0447jp8476kfg"
+
+Node: IndiaEnergy_Renewables/E1/263c4f32-aaab-b35c-a5ac-6f175644620f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/63e723eb-d62d-2a3a-b468-ca219ea6b91e
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Coal
+value: 1199742.768
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_CoalobservationDate=2020-03-01value=1199742.768unit=GigawattHour"
+dcid: "dc/o/7z3lv065gegh2"
+
+Node: IndiaEnergy_Renewables/E1/63e723eb-d62d-2a3a-b468-ca219ea6b91e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/0978d7ea-f6eb-3032-bcfb-d5dcb5d648a7
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 14242.13
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2006-03-01value=14242.13unit=GigawattHour"
+dcid: "dc/o/nxt0em54m8mb9"
+
+Node: IndiaEnergy_Renewables/E1/0978d7ea-f6eb-3032-bcfb-d5dcb5d648a7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/22f0b310-615f-a813-2ab9-4e2dc2fa1138
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 12463.62
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2007-03-01value=12463.62unit=GigawattHour"
+dcid: "dc/o/w06jt1flpn838"
+
+Node: IndiaEnergy_Renewables/E1/22f0b310-615f-a813-2ab9-4e2dc2fa1138
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/31bd55c8-88f7-d772-c4aa-34c29477bffc
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 14035.22
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2008-03-01value=14035.22unit=GigawattHour"
+dcid: "dc/o/ev40sctn1vnb1"
+
+Node: IndiaEnergy_Renewables/E1/31bd55c8-88f7-d772-c4aa-34c29477bffc
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/cdfb191f-4e2b-23c8-f8ec-30e644d27ead
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 14790.72
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2009-03-01value=14790.72unit=GigawattHour"
+dcid: "dc/o/30zhrrdct3w62"
+
+Node: IndiaEnergy_Renewables/E1/cdfb191f-4e2b-23c8-f8ec-30e644d27ead
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/464d1332-a9cc-0cfb-50c3-36f210e56cab
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 12460.61
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2010-03-01value=12460.61unit=GigawattHour"
+dcid: "dc/o/zclw9hwrfc8l3"
+
+Node: IndiaEnergy_Renewables/E1/464d1332-a9cc-0cfb-50c3-36f210e56cab
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/d6d641f2-38d7-b45b-8b80-58039563863c
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 10747.44
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2011-03-01value=10747.44unit=GigawattHour"
+dcid: "dc/o/df97wg8dqcbx4"
+
+Node: IndiaEnergy_Renewables/E1/d6d641f2-38d7-b45b-8b80-58039563863c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/421fa0f7-7645-74d4-4609-c3e3e71d2116
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 8705.61
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2012-03-01value=8705.61unit=GigawattHour"
+dcid: "dc/o/0q4dtez3wd302"
+
+Node: IndiaEnergy_Renewables/E1/421fa0f7-7645-74d4-4609-c3e3e71d2116
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/27c05898-b082-2645-feef-86b978d149fd
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 10489.97
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2013-03-01value=10489.97unit=GigawattHour"
+dcid: "dc/o/7lklmnz8zyjh3"
+
+Node: IndiaEnergy_Renewables/E1/27c05898-b082-2645-feef-86b978d149fd
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/956f10fe-e898-da02-5017-34bf379b9368
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 10734.65
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2014-03-01value=10734.65unit=GigawattHour"
+dcid: "dc/o/4pchtmpwppk89"
+
+Node: IndiaEnergy_Renewables/E1/956f10fe-e898-da02-5017-34bf379b9368
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/f89fd1e7-4e52-a0bd-7327-888a631e700d
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 11126.99
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2015-03-01value=11126.99unit=GigawattHour"
+dcid: "dc/o/wmx9kcemykm5b"
+
+Node: IndiaEnergy_Renewables/E1/f89fd1e7-4e52-a0bd-7327-888a631e700d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7bf8854e-8613-44de-eaa2-8f56225eece3
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 8818.07
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2016-03-01value=8818.07unit=GigawattHour"
+dcid: "dc/o/fh4qbyzmdwej3"
+
+Node: IndiaEnergy_Renewables/E1/7bf8854e-8613-44de-eaa2-8f56225eece3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/76fc7a04-a370-545c-81e0-b8aea52de047
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 9457.034
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2017-03-01value=9457.034unit=GigawattHour"
+dcid: "dc/o/kpxtslwbkm63"
+
+Node: IndiaEnergy_Renewables/E1/76fc7a04-a370-545c-81e0-b8aea52de047
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/309e4631-020f-b0a4-711c-5f9ee6a4160a
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 8367.596
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2018-03-01value=8367.596unit=GigawattHour"
+dcid: "dc/o/s2mkjp995x3tf"
+
+Node: IndiaEnergy_Renewables/E1/309e4631-020f-b0a4-711c-5f9ee6a4160a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7def3ec4-0124-b55a-fd30-b307070c8c55
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 5459.121999999999
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2019-03-01value=5459.121999999999unit=GigawattHour"
+dcid: "dc/o/ysnzh4klfj7hf"
+
+Node: IndiaEnergy_Renewables/E1/7def3ec4-0124-b55a-fd30-b307070c8c55
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/36d62085-71c1-0e41-ff0e-dafd749d7696
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_DieselOil
+value: 2027.548
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_DieselOilobservationDate=2020-03-01value=2027.548unit=GigawattHour"
+dcid: "dc/o/rm8t74dmr78m9"
+
+Node: IndiaEnergy_Renewables/E1/36d62085-71c1-0e41-ff0e-dafd749d7696
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/49826888-ce5e-7983-b6ea-c807d768fb41
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_LigniteCoal
+value: 18120.3
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_LigniteCoalobservationDate=2006-03-01value=18120.3unit=GigawattHour"
+dcid: "dc/o/xpg1vbgd1e56f"
+
+Node: IndiaEnergy_Renewables/E1/49826888-ce5e-7983-b6ea-c807d768fb41
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/4c5b74c8-481d-d3a1-2170-d36d5df4c478
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_LigniteCoal
+value: 17544.5
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_LigniteCoalobservationDate=2007-03-01value=17544.5unit=GigawattHour"
+dcid: "dc/o/l2z0y68r05gm5"
+
+Node: IndiaEnergy_Renewables/E1/4c5b74c8-481d-d3a1-2170-d36d5df4c478
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/352470ea-3e5a-a884-fc77-7205927af132
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_LigniteCoal
+value: 22147.52
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_LigniteCoalobservationDate=2008-03-01value=22147.52unit=GigawattHour"
+dcid: "dc/o/p5x1h40e6yxz"
+
+Node: IndiaEnergy_Renewables/E1/352470ea-3e5a-a884-fc77-7205927af132
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/6d867b53-4cdf-135c-207a-1b607eaa29b8
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_LigniteCoal
+value: 20397.2
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_LigniteCoalobservationDate=2009-03-01value=20397.2unit=GigawattHour"
+dcid: "dc/o/766d3472fhlb3"
+
+Node: IndiaEnergy_Renewables/E1/6d867b53-4cdf-135c-207a-1b607eaa29b8
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/6b7320d6-cecc-e6da-1ccf-5f8a21eaeb63
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_LigniteCoal
+value: 21277.58
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_LigniteCoalobservationDate=2010-03-01value=21277.58unit=GigawattHour"
+dcid: "dc/o/dqdkdpkc9wy62"
+
+Node: IndiaEnergy_Renewables/E1/6b7320d6-cecc-e6da-1ccf-5f8a21eaeb63
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/2a3870bf-49a0-8d79-0a0e-ddff6194dabb
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_LigniteCoal
+value: 23483.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_LigniteCoalobservationDate=2011-03-01value=23483.0unit=GigawattHour"
+dcid: "dc/o/kre102hheke9c"
+
+Node: IndiaEnergy_Renewables/E1/2a3870bf-49a0-8d79-0a0e-ddff6194dabb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/01b0ca04-ffdc-a9c0-bd53-483137a09767
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_LigniteCoal
+value: 24394.18
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_LigniteCoalobservationDate=2012-03-01value=24394.18unit=GigawattHour"
+dcid: "dc/o/beztqmhwvxg3"
+
+Node: IndiaEnergy_Renewables/E1/01b0ca04-ffdc-a9c0-bd53-483137a09767
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/1a5f04c7-a424-bf12-6129-93ce6dbbef2c
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Naphtha
+value: 26.380000000000003
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaphthaobservationDate=2017-03-01value=26.380000000000003unit=GigawattHour"
+dcid: "dc/o/38f7h9gbsbneh"
+
+Node: IndiaEnergy_Renewables/E1/1a5f04c7-a424-bf12-6129-93ce6dbbef2c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e014a5cc-bdff-abaa-86cd-af52a81a0305
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Naphtha
+value: 52.959999999999994
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaphthaobservationDate=2018-03-01value=52.959999999999994unit=GigawattHour"
+dcid: "dc/o/6fy065l4l75wb"
+
+Node: IndiaEnergy_Renewables/E1/e014a5cc-bdff-abaa-86cd-af52a81a0305
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/630b3421-fed0-c56e-9403-16921b47b04a
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Naphtha
+value: 0.8600000000000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaphthaobservationDate=2019-03-01value=0.8600000000000001unit=GigawattHour"
+dcid: "dc/o/72k7e2gbh1ej5"
+
+Node: IndiaEnergy_Renewables/E1/630b3421-fed0-c56e-9403-16921b47b04a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/63941726-4745-95bb-9584-8b5d90f25deb
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 80044.47
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2006-03-01value=80044.47unit=GigawattHour"
+dcid: "dc/o/s8fcewrxjy8yb"
+
+Node: IndiaEnergy_Renewables/E1/63941726-4745-95bb-9584-8b5d90f25deb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/d0d4ccfc-f59b-71a3-389c-f21fe45da49b
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 85337.7
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2007-03-01value=85337.7unit=GigawattHour"
+dcid: "dc/o/y5ymxxmn58yzd"
+
+Node: IndiaEnergy_Renewables/E1/d0d4ccfc-f59b-71a3-389c-f21fe45da49b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/4094415f-b727-810d-4bf3-886ee0bd8136
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 92783.78
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2008-03-01value=92783.78unit=GigawattHour"
+dcid: "dc/o/m1r53hgj33mb5"
+
+Node: IndiaEnergy_Renewables/E1/4094415f-b727-810d-4bf3-886ee0bd8136
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/58ae5f6b-6b93-f514-9ebb-5ede9f4ae59f
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 86687.33
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2009-03-01value=86687.33unit=GigawattHour"
+dcid: "dc/o/t2c7rlnh29rdh"
+
+Node: IndiaEnergy_Renewables/E1/58ae5f6b-6b93-f514-9ebb-5ede9f4ae59f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/6dcf0e8a-5b97-e140-e165-16b7d3ad49ee
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 116389.32
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2010-03-01value=116389.32unit=GigawattHour"
+dcid: "dc/o/q0bxe08scwwq5"
+
+Node: IndiaEnergy_Renewables/E1/6dcf0e8a-5b97-e140-e165-16b7d3ad49ee
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/65ea4a30-f63d-82cd-6771-f9a6600711ed
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 115692.38
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2011-03-01value=115692.38unit=GigawattHour"
+dcid: "dc/o/r9kd5dm1y0hkg"
+
+Node: IndiaEnergy_Renewables/E1/65ea4a30-f63d-82cd-6771-f9a6600711ed
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/379ee318-5d33-5ea6-9ccf-809efcfb9914
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 115436.01
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2012-03-01value=115436.01unit=GigawattHour"
+dcid: "dc/o/rss7zrmlh00eh"
+
+Node: IndiaEnergy_Renewables/E1/379ee318-5d33-5ea6-9ccf-809efcfb9914
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/05f9efc8-67b2-d195-00fc-7d3802ab317a
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 87604.83
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2013-03-01value=87604.83unit=GigawattHour"
+dcid: "dc/o/18fcqr9smh2z8"
+
+Node: IndiaEnergy_Renewables/E1/05f9efc8-67b2-d195-00fc-7d3802ab317a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/06e68d2b-37fd-690d-3c0c-20f2c2603fbc
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 64433.82
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2014-03-01value=64433.82unit=GigawattHour"
+dcid: "dc/o/rgvcgc4fydm73"
+
+Node: IndiaEnergy_Renewables/E1/06e68d2b-37fd-690d-3c0c-20f2c2603fbc
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7ece79d7-a914-69c3-1697-d438fee09652
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 62210.33
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2015-03-01value=62210.33unit=GigawattHour"
+dcid: "dc/o/kbenvm6pmm1tf"
+
+Node: IndiaEnergy_Renewables/E1/7ece79d7-a914-69c3-1697-d438fee09652
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/4f50ae0c-5a12-b9e6-9685-385f63ad9a55
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 68205.39
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2016-03-01value=68205.39unit=GigawattHour"
+dcid: "dc/o/c74h5j14pk86g"
+
+Node: IndiaEnergy_Renewables/E1/4f50ae0c-5a12-b9e6-9685-385f63ad9a55
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7909c58f-2752-f8ab-83e1-9718a85e5c5d
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 71922.881
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2017-03-01value=71922.881unit=GigawattHour"
+dcid: "dc/o/52mgm1yjzbxl5"
+
+Node: IndiaEnergy_Renewables/E1/7909c58f-2752-f8ab-83e1-9718a85e5c5d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/4a654602-9ed1-eef0-5598-9c8913e5107b
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 75516.951
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2018-03-01value=75516.951unit=GigawattHour"
+dcid: "dc/o/mpynzx7mhec7h"
+
+Node: IndiaEnergy_Renewables/E1/4a654602-9ed1-eef0-5598-9c8913e5107b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/0b521048-b7bd-c6c8-66a3-a62455ab7eb8
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 69377.976
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2019-03-01value=69377.976unit=GigawattHour"
+dcid: "dc/o/x1f5yek1mhcd7"
+
+Node: IndiaEnergy_Renewables/E1/0b521048-b7bd-c6c8-66a3-a62455ab7eb8
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c35418be-6cf3-b2df-3f7d-de0ddb572087
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NaturalGas
+value: 73885.792
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NaturalGasobservationDate=2020-03-01value=73885.792unit=GigawattHour"
+dcid: "dc/o/ytdh2fylgn04"
+
+Node: IndiaEnergy_Renewables/E1/c35418be-6cf3-b2df-3f7d-de0ddb572087
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/3f187b3c-f759-4fdd-3e53-5bdc7b633deb
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NonRenewableWaste
+value: 59.657000000000004
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NonRenewableWasteobservationDate=2008-03-01value=59.657000000000004unit=GigawattHour"
+dcid: "dc/o/cwmr35jw2pec9"
+
+Node: IndiaEnergy_Renewables/E1/3f187b3c-f759-4fdd-3e53-5bdc7b633deb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/a36976dc-f718-25a4-89fd-091e07f881d9
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NonRenewableWaste
+value: 60.133
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NonRenewableWasteobservationDate=2009-03-01value=60.133unit=GigawattHour"
+dcid: "dc/o/dpv4b8pvr2rq3"
+
+Node: IndiaEnergy_Renewables/E1/a36976dc-f718-25a4-89fd-091e07f881d9
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/745a02e0-08cc-bc1e-f694-2b28d7ef13d3
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NonRenewableWaste
+value: 59.68600000000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NonRenewableWasteobservationDate=2010-03-01value=59.68600000000001unit=GigawattHour"
+dcid: "dc/o/blq3hbsktyyq8"
+
+Node: IndiaEnergy_Renewables/E1/745a02e0-08cc-bc1e-f694-2b28d7ef13d3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/1db023fc-a1b8-36ee-a1c2-09c5027ee93a
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NonRenewableWaste
+value: 60.786
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NonRenewableWasteobservationDate=2011-03-01value=60.786unit=GigawattHour"
+dcid: "dc/o/cmczm8zxcs1w2"
+
+Node: IndiaEnergy_Renewables/E1/1db023fc-a1b8-36ee-a1c2-09c5027ee93a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/969edaaa-8d4e-fe73-68a1-10502e3cf21b
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NonRenewableWaste
+value: 186.374
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NonRenewableWasteobservationDate=2012-03-01value=186.374unit=GigawattHour"
+dcid: "dc/o/vwl0kc495y9s"
+
+Node: IndiaEnergy_Renewables/E1/969edaaa-8d4e-fe73-68a1-10502e3cf21b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/5cf39a06-d8e2-4ecc-8f9a-724bd2c5f96c
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NonRenewableWaste
+value: 186.469
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NonRenewableWasteobservationDate=2013-03-01value=186.469unit=GigawattHour"
+dcid: "dc/o/w81qrlycgtcy2"
+
+Node: IndiaEnergy_Renewables/E1/5cf39a06-d8e2-4ecc-8f9a-724bd2c5f96c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/57fb656b-c3ef-ae8c-ebee-814159f63fad
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NonRenewableWaste
+value: 187.639
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NonRenewableWasteobservationDate=2014-03-01value=187.639unit=GigawattHour"
+dcid: "dc/o/0nhmcj27z2fs1"
+
+Node: IndiaEnergy_Renewables/E1/57fb656b-c3ef-ae8c-ebee-814159f63fad
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/8c08a68c-1261-0f22-6f82-3822c25c4f54
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NonRenewableWaste
+value: 188.737
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NonRenewableWasteobservationDate=2015-03-01value=188.737unit=GigawattHour"
+dcid: "dc/o/f279k9m0vwlkb"
+
+Node: IndiaEnergy_Renewables/E1/8c08a68c-1261-0f22-6f82-3822c25c4f54
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/75c86e11-6d6e-0bee-e358-5e184a8bf177
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_NonRenewableWaste
+value: 268.532
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NonRenewableWasteobservationDate=2016-03-01value=268.532unit=GigawattHour"
+dcid: "dc/o/wj6rpqmzxf8j4"
+
+Node: IndiaEnergy_Renewables/E1/75c86e11-6d6e-0bee-e358-5e184a8bf177
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/cfe6e1d9-e4c6-79bc-43d7-41ae3c9f6630
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 17238.89
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2006-03-01value=17238.89unit=GigawattHour"
+dcid: "dc/o/gy0knxnqbf4fc"
+
+Node: IndiaEnergy_Renewables/E1/cfe6e1d9-e4c6-79bc-43d7-41ae3c9f6630
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e81b7189-ae8b-a5d0-4011-5a4fb70493e2
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 18606.75
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2007-03-01value=18606.75unit=GigawattHour"
+dcid: "dc/o/dk8p3kbt83npd"
+
+Node: IndiaEnergy_Renewables/E1/e81b7189-ae8b-a5d0-4011-5a4fb70493e2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/827a2cbe-b968-081d-12fd-267103c95d98
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 16776.91
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2008-03-01value=16776.91unit=GigawattHour"
+dcid: "dc/o/ymdgkq1y17l67"
+
+Node: IndiaEnergy_Renewables/E1/827a2cbe-b968-081d-12fd-267103c95d98
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ad9df818-afb4-8e6e-3b95-4bd83e258143
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 14712.59
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2009-03-01value=14712.59unit=GigawattHour"
+dcid: "dc/o/h8hlb98v50284"
+
+Node: IndiaEnergy_Renewables/E1/ad9df818-afb4-8e6e-3b95-4bd83e258143
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/0b17a24b-51c0-8301-fe73-a2f5c48c0d17
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 18636.440000000002
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2010-03-01value=18636.440000000002unit=GigawattHour"
+dcid: "dc/o/1054305vypl7h"
+
+Node: IndiaEnergy_Renewables/E1/0b17a24b-51c0-8301-fe73-a2f5c48c0d17
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/4dc89630-5f4d-cdc6-acea-defaaa0b2eca
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 26266.4
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2011-03-01value=26266.4unit=GigawattHour"
+dcid: "dc/o/2414hmcwfm8rf"
+
+Node: IndiaEnergy_Renewables/E1/4dc89630-5f4d-cdc6-acea-defaaa0b2eca
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/9f079ff0-231a-1b8d-1302-e1bc019a7c70
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 32286.560000000005
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2012-03-01value=32286.560000000005unit=GigawattHour"
+dcid: "dc/o/kd364q4gn9z4h"
+
+Node: IndiaEnergy_Renewables/E1/9f079ff0-231a-1b8d-1302-e1bc019a7c70
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/521d0a94-127d-a9b2-65d2-b70734ccbf3e
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 32866.11
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2013-03-01value=32866.11unit=GigawattHour"
+dcid: "dc/o/p2xrgb861drm8"
+
+Node: IndiaEnergy_Renewables/E1/521d0a94-127d-a9b2-65d2-b70734ccbf3e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/a93f9db6-861a-a3ae-e0a3-9d3a6f50211c
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 34227.79
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2014-03-01value=34227.79unit=GigawattHour"
+dcid: "dc/o/7880ts4jtyl11"
+
+Node: IndiaEnergy_Renewables/E1/a93f9db6-861a-a3ae-e0a3-9d3a6f50211c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/1488dd7c-58f4-5bd6-bf43-895394213fb2
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 36101.54
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2015-03-01value=36101.54unit=GigawattHour"
+dcid: "dc/o/w7gjy826gn89"
+
+Node: IndiaEnergy_Renewables/E1/1488dd7c-58f4-5bd6-bf43-895394213fb2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/94907aff-3341-0547-1314-240ed537f5b2
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 37413.62
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2016-03-01value=37413.62unit=GigawattHour"
+dcid: "dc/o/mgnxl49t10g57"
+
+Node: IndiaEnergy_Renewables/E1/94907aff-3341-0547-1314-240ed537f5b2
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/0e838b19-5507-576a-74bc-ac6cd0fa3268
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 37915.87
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2017-03-01value=37915.87unit=GigawattHour"
+dcid: "dc/o/nsb82jrqlspd5"
+
+Node: IndiaEnergy_Renewables/E1/0e838b19-5507-576a-74bc-ac6cd0fa3268
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/015eb833-1fda-6191-dc4c-89f3c580fb3c
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 38346.12
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2018-03-01value=38346.12unit=GigawattHour"
+dcid: "dc/o/48sm1nkkwg0lf"
+
+Node: IndiaEnergy_Renewables/E1/015eb833-1fda-6191-dc4c-89f3c580fb3c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/59d46c25-4eb3-9e82-5a09-c3065bb6188e
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 37812.59
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2019-03-01value=37812.59unit=GigawattHour"
+dcid: "dc/o/6q7s8mc4vkn38"
+
+Node: IndiaEnergy_Renewables/E1/59d46c25-4eb3-9e82-5a09-c3065bb6188e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/13b4fb80-aee3-508c-5c85-0f6a01aa5b78
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Nuclear
+value: 46472.450000000004
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_NuclearobservationDate=2020-03-01value=46472.450000000004unit=GigawattHour"
+dcid: "dc/o/pqen63lbfbgxg"
+
+Node: IndiaEnergy_Renewables/E1/13b4fb80-aee3-508c-5c85-0f6a01aa5b78
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/523a9563-ab26-27a0-55e6-9f630da6ba7d
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 103030.18000000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2006-03-01value=103030.18000000001unit=GigawattHour"
+dcid: "dc/o/cw3cttkxd3609"
+
+Node: IndiaEnergy_Renewables/E1/523a9563-ab26-27a0-55e6-9f630da6ba7d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c949a605-4cb0-7f2a-62d8-7bc22a36f0e8
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 113933.89
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2007-03-01value=113933.89unit=GigawattHour"
+dcid: "dc/o/mj0ry410zlcw6"
+
+Node: IndiaEnergy_Renewables/E1/c949a605-4cb0-7f2a-62d8-7bc22a36f0e8
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/fd3dedb1-3af9-c6c9-0575-4a0ceaa2c81b
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 128409.992
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2008-03-01value=128409.992unit=GigawattHour"
+dcid: "dc/o/y3vpkzhb3x40c"
+
+Node: IndiaEnergy_Renewables/E1/fd3dedb1-3af9-c6c9-0575-4a0ceaa2c81b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7727ffc0-5000-8d3f-a14c-413c0728fd48
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 118005.347
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2009-03-01value=118005.347unit=GigawattHour"
+dcid: "dc/o/zrnrmf9vvxnbf"
+
+Node: IndiaEnergy_Renewables/E1/7727ffc0-5000-8d3f-a14c-413c0728fd48
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/1a113f65-0993-20ef-aaa6-2ec21215301f
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 112281.888
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2010-03-01value=112281.888unit=GigawattHour"
+dcid: "dc/o/jn6c7pjngpj1b"
+
+Node: IndiaEnergy_Renewables/E1/1a113f65-0993-20ef-aaa6-2ec21215301f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/f7c4a345-05e4-38cc-8a8a-665404033410
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 120357.54
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2011-03-01value=120357.54unit=GigawattHour"
+dcid: "dc/o/2s3zkj26emdn"
+
+Node: IndiaEnergy_Renewables/E1/f7c4a345-05e4-38cc-8a8a-665404033410
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/954f89b5-6f2a-8bcf-b0d4-137405617f51
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 137257.014
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2012-03-01value=137257.014unit=GigawattHour"
+dcid: "dc/o/zp5zxpyrypnq1"
+
+Node: IndiaEnergy_Renewables/E1/954f89b5-6f2a-8bcf-b0d4-137405617f51
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e3390245-d3f8-1bd3-59e3-cec68da0b29d
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 120789.317
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2013-03-01value=120789.317unit=GigawattHour"
+dcid: "dc/o/s7ewxgv6w4xyb"
+
+Node: IndiaEnergy_Renewables/E1/e3390245-d3f8-1bd3-59e3-cec68da0b29d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e09e9518-516a-902d-75b4-dbd1276a1a8e
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 142227.579
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2014-03-01value=142227.579unit=GigawattHour"
+dcid: "dc/o/h5l44l5j0pwk4"
+
+Node: IndiaEnergy_Renewables/E1/e09e9518-516a-902d-75b4-dbd1276a1a8e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c88fc321-a729-dd6f-08c6-c2f89cfd2445
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 137146.84
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2015-03-01value=137146.84unit=GigawattHour"
+dcid: "dc/o/0m0meww9lplxh"
+
+Node: IndiaEnergy_Renewables/E1/c88fc321-a729-dd6f-08c6-c2f89cfd2445
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c3d6cc28-5f29-0c3e-aee2-1100cddf8169
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 129841.35
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2016-03-01value=129841.35unit=GigawattHour"
+dcid: "dc/o/ehd6z2vpqp0k5"
+
+Node: IndiaEnergy_Renewables/E1/c3d6cc28-5f29-0c3e-aee2-1100cddf8169
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/0ca304ba-5abd-3fd3-b57a-1d12f60ebe88
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 130193.864
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2017-03-01value=130193.864unit=GigawattHour"
+dcid: "dc/o/1zph7ehl52p4f"
+
+Node: IndiaEnergy_Renewables/E1/0ca304ba-5abd-3fd3-b57a-1d12f60ebe88
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/1d1f51db-3d79-098a-d964-d6cdfe73e02c
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 133926.76
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2018-03-01value=133926.76unit=GigawattHour"
+dcid: "dc/o/4x9vfwh5qmp4b"
+
+Node: IndiaEnergy_Renewables/E1/1d1f51db-3d79-098a-d964-d6cdfe73e02c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ae51c514-358a-ba1f-2dee-b05c1510fc34
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 143866.4
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2019-03-01value=143866.4unit=GigawattHour"
+dcid: "dc/o/fdpbkc58rsmdd"
+
+Node: IndiaEnergy_Renewables/E1/ae51c514-358a-ba1f-2dee-b05c1510fc34
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/352812d3-897b-ee03-ab76-330c23694660
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_PumpedHydro
+value: 165568.38700000002
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_PumpedHydroobservationDate=2020-03-01value=165568.38700000002unit=GigawattHour"
+dcid: "dc/o/1blxc0nrwmzw9"
+
+Node: IndiaEnergy_Renewables/E1/352812d3-897b-ee03-ab76-330c23694660
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/1419aedc-0af6-2084-7190-06d363a280e7
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_RenewableEnergy
+value: 6642.790000000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_RenewableEnergyobservationDate=2006-03-01value=6642.790000000001unit=GigawattHour"
+dcid: "dc/o/k4b78gnbd91bf"
+
+Node: IndiaEnergy_Renewables/E1/1419aedc-0af6-2084-7190-06d363a280e7
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/3284e92d-3dd7-bb06-e532-74a9ba4f744b
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_RenewableEnergy
+value: 9860.11
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_RenewableEnergyobservationDate=2007-03-01value=9860.11unit=GigawattHour"
+dcid: "dc/o/5xgs590qhlxrg"
+
+Node: IndiaEnergy_Renewables/E1/3284e92d-3dd7-bb06-e532-74a9ba4f744b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/d1ac0c36-4b7e-5e18-22ab-cf16345459ab
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_RenewableEnergy
+value: 1178.18
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_RenewableEnergyobservationDate=2012-03-01value=1178.18unit=GigawattHour"
+dcid: "dc/o/4bf8mg62p9vb5"
+
+Node: IndiaEnergy_Renewables/E1/d1ac0c36-4b7e-5e18-22ab-cf16345459ab
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/254c0caf-7ef9-a38a-bf26-915f0c8dea37
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_RenewableEnergy
+value: 213.161
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_RenewableEnergyobservationDate=2017-03-01value=213.161unit=GigawattHour"
+dcid: "dc/o/kxgv3efxw76bc"
+
+Node: IndiaEnergy_Renewables/E1/254c0caf-7ef9-a38a-bf26-915f0c8dea37
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/f4480e53-b31b-c6e9-9f4c-9a8b0bd35a0f
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_RenewableEnergy
+value: 358.45
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_RenewableEnergyobservationDate=2018-03-01value=358.45unit=GigawattHour"
+dcid: "dc/o/n9ps6xhmjb4y8"
+
+Node: IndiaEnergy_Renewables/E1/f4480e53-b31b-c6e9-9f4c-9a8b0bd35a0f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/bff55835-8bd0-972f-6ba1-355f553cfa23
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_RenewableEnergy
+value: 425.277
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_RenewableEnergyobservationDate=2019-03-01value=425.277unit=GigawattHour"
+dcid: "dc/o/qe64efl3lx2m"
+
+Node: IndiaEnergy_Renewables/E1/bff55835-8bd0-972f-6ba1-355f553cfa23
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/6dc903b2-5617-3b7a-dcea-1f58bb7cd58d
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_RenewableEnergy
+value: 365.895
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_RenewableEnergyobservationDate=2020-03-01value=365.895unit=GigawattHour"
+dcid: "dc/o/k1p5ekej59gq"
+
+Node: IndiaEnergy_Renewables/E1/6dc903b2-5617-3b7a-dcea-1f58bb7cd58d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/8edbc946-daef-6f22-7fce-efcd3eb3afee
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 2.426
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2008-03-01value=2.426unit=GigawattHour"
+dcid: "dc/o/pybhvps8cjy77"
+
+Node: IndiaEnergy_Renewables/E1/8edbc946-daef-6f22-7fce-efcd3eb3afee
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/248bf531-bdcb-bb3d-ef6f-c8a1a985d7fb
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 2.426
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2009-03-01value=2.426unit=GigawattHour"
+dcid: "dc/o/5jtdcm92cxktf"
+
+Node: IndiaEnergy_Renewables/E1/248bf531-bdcb-bb3d-ef6f-c8a1a985d7fb
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/162dd8c9-c5f1-931e-749c-0ebf7af8a529
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 12.02
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2010-03-01value=12.02unit=GigawattHour"
+dcid: "dc/o/1n064tch85ky3"
+
+Node: IndiaEnergy_Renewables/E1/162dd8c9-c5f1-931e-749c-0ebf7af8a529
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/771a961b-82bb-10a7-f3bd-d74b49694430
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 37.241
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2011-03-01value=37.241unit=GigawattHour"
+dcid: "dc/o/fkt1j2cb1eb9f"
+
+Node: IndiaEnergy_Renewables/E1/771a961b-82bb-10a7-f3bd-d74b49694430
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/279f45d0-c174-2380-00e5-00dca9c912b6
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 1347.733
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2012-03-01value=1347.733unit=GigawattHour"
+dcid: "dc/o/thdm2v1h99k3f"
+
+Node: IndiaEnergy_Renewables/E1/279f45d0-c174-2380-00e5-00dca9c912b6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/56f72cab-3f2b-ba65-8554-b001244fc829
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 2337.616
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2013-03-01value=2337.616unit=GigawattHour"
+dcid: "dc/o/7ynghmhmd1y35"
+
+Node: IndiaEnergy_Renewables/E1/56f72cab-3f2b-ba65-8554-b001244fc829
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/375ed9bd-00ef-a0eb-72cb-724c6902456c
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 3581.522
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2014-03-01value=3581.522unit=GigawattHour"
+dcid: "dc/o/jwb657dns8kgg"
+
+Node: IndiaEnergy_Renewables/E1/375ed9bd-00ef-a0eb-72cb-724c6902456c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/6ab2439e-2a38-8bbf-82cb-04262af47a2e
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 4925.094
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2015-03-01value=4925.094unit=GigawattHour"
+dcid: "dc/o/6bfg2xkf1jhy6"
+
+Node: IndiaEnergy_Renewables/E1/6ab2439e-2a38-8bbf-82cb-04262af47a2e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/020bc646-e21d-4149-0ff2-23b27e5d4f49
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 7478.543
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2016-03-01value=7478.543unit=GigawattHour"
+dcid: "dc/o/r891xcr9n61m3"
+
+Node: IndiaEnergy_Renewables/E1/020bc646-e21d-4149-0ff2-23b27e5d4f49
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/0bb59dc7-9709-e3ab-efba-aa23a358e624
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 13564.023
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2017-03-01value=13564.023unit=GigawattHour"
+dcid: "dc/o/l822ln72ztt27"
+
+Node: IndiaEnergy_Renewables/E1/0bb59dc7-9709-e3ab-efba-aa23a358e624
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c6b8de96-08b0-ec3c-2ae3-7f921051060b
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 26056.987
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2018-03-01value=26056.987unit=GigawattHour"
+dcid: "dc/o/pq5f3te37spef"
+
+Node: IndiaEnergy_Renewables/E1/c6b8de96-08b0-ec3c-2ae3-7f921051060b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/243eb117-dfae-c43b-6935-e8864018b799
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 40047.918
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2019-03-01value=40047.918unit=GigawattHour"
+dcid: "dc/o/h8f7b00qp7vn8"
+
+Node: IndiaEnergy_Renewables/E1/243eb117-dfae-c43b-6935-e8864018b799
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/4d70b992-3136-776d-1810-e450100684c9
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Solar
+value: 51938.299
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_SolarobservationDate=2020-03-01value=51938.299unit=GigawattHour"
+dcid: "dc/o/dn89nl2mzcj18"
+
+Node: IndiaEnergy_Renewables/E1/4d70b992-3136-776d-1810-e450100684c9
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/d70c3160-0629-fec8-933b-dff25ccdba7f
+observationDate: "2006-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 220.62
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2006-03-01value=220.62unit=GigawattHour"
+dcid: "dc/o/f5y9vscx6g417"
+
+Node: IndiaEnergy_Renewables/E1/d70c3160-0629-fec8-933b-dff25ccdba7f
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/6a3aa108-4e13-6bbf-c73b-c0f1b4945b12
+observationDate: "2007-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 215.88
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2007-03-01value=215.88unit=GigawattHour"
+dcid: "dc/o/m8x8szqpddggf"
+
+Node: IndiaEnergy_Renewables/E1/6a3aa108-4e13-6bbf-c73b-c0f1b4945b12
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/bd42f0e7-e678-86bc-2933-5a830db2ebe1
+observationDate: "2008-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 11065.371000000001
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2008-03-01value=11065.371000000001unit=GigawattHour"
+dcid: "dc/o/dntphjgg6trv7"
+
+Node: IndiaEnergy_Renewables/E1/bd42f0e7-e678-86bc-2933-5a830db2ebe1
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/f5907a7e-d487-9b9d-845a-95a15bce1c8a
+observationDate: "2009-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 13199.54
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2009-03-01value=13199.54unit=GigawattHour"
+dcid: "dc/o/115yf26pzew2f"
+
+Node: IndiaEnergy_Renewables/E1/f5907a7e-d487-9b9d-845a-95a15bce1c8a
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/36d97bce-0f27-e25c-6f36-dc4ba2ba8285
+observationDate: "2010-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 15171.851
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2010-03-01value=15171.851unit=GigawattHour"
+dcid: "dc/o/bcvc53gbj28gc"
+
+Node: IndiaEnergy_Renewables/E1/36d97bce-0f27-e25c-6f36-dc4ba2ba8285
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/3aab7ffd-1d1b-4c1c-bab9-ad7eb37ee8ef
+observationDate: "2011-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 18313.438000000002
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2011-03-01value=18313.438000000002unit=GigawattHour"
+dcid: "dc/o/mb0edlq0cz0jg"
+
+Node: IndiaEnergy_Renewables/E1/3aab7ffd-1d1b-4c1c-bab9-ad7eb37ee8ef
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/b8c71492-fe16-a8eb-5a4f-77e235264080
+observationDate: "2012-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 21339.002
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2012-03-01value=21339.002unit=GigawattHour"
+dcid: "dc/o/xsltgd3x9fle9"
+
+Node: IndiaEnergy_Renewables/E1/b8c71492-fe16-a8eb-5a4f-77e235264080
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/019a248e-07ff-e129-c819-b7962de74e65
+observationDate: "2013-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 25355.877
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2013-03-01value=25355.877unit=GigawattHour"
+dcid: "dc/o/8n2sbkvbg7q28"
+
+Node: IndiaEnergy_Renewables/E1/019a248e-07ff-e129-c819-b7962de74e65
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/210cb182-7587-9eb7-2813-85c482470330
+observationDate: "2014-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 28348.83
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2014-03-01value=28348.83unit=GigawattHour"
+dcid: "dc/o/ljymblsp71qz3"
+
+Node: IndiaEnergy_Renewables/E1/210cb182-7587-9eb7-2813-85c482470330
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e36b0ae5-95ce-7573-7b32-257576001aec
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 31930.113
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2015-03-01value=31930.113unit=GigawattHour"
+dcid: "dc/o/21dzpys3pd221"
+
+Node: IndiaEnergy_Renewables/E1/e36b0ae5-95ce-7573-7b32-257576001aec
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c1ec6f22-670d-2c88-f723-7ce434637726
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 35044.847
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2016-03-01value=35044.847unit=GigawattHour"
+dcid: "dc/o/lk9jg1lhbr2s"
+
+Node: IndiaEnergy_Renewables/E1/c1ec6f22-670d-2c88-f723-7ce434637726
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/e9a207b5-42b7-676c-14ef-967fb65eb2d6
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 48216.754
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2017-03-01value=48216.754unit=GigawattHour"
+dcid: "dc/o/zzwkpv57n4dpg"
+
+Node: IndiaEnergy_Renewables/E1/e9a207b5-42b7-676c-14ef-967fb65eb2d6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/43c8b2c3-7636-dc3f-6311-bcea5b6cb42e
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 54808.342
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2018-03-01value=54808.342unit=GigawattHour"
+dcid: "dc/o/bkmjtm8j0xrl2"
+
+Node: IndiaEnergy_Renewables/E1/43c8b2c3-7636-dc3f-6311-bcea5b6cb42e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/ccf0ed19-44b0-c969-f660-1640d2090d0b
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 64930.579999999994
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2019-03-01value=64930.579999999994unit=GigawattHour"
+dcid: "dc/o/xmjlm91rqnfwg"
+
+Node: IndiaEnergy_Renewables/E1/ccf0ed19-44b0-c969-f660-1640d2090d0b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c0e4287a-3e1b-5533-a0ea-fddca824ccc6
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:GigawattHour
+variableMeasured: dcid:Annual_Generation_Electricity_Wind
+value: 69149.642
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Generation_Electricity_WindobservationDate=2020-03-01value=69149.642unit=GigawattHour"
+dcid: "dc/o/7t0n7em055r5c"
+
+Node: IndiaEnergy_Renewables/E1/c0e4287a-3e1b-5533-a0ea-fddca824ccc6
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/93d60273-7729-1d7e-5bab-b01ea9f8d77c
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Bagasse
+value: 5000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_BagasseobservationDate=2015-03-01value=5000.0unit=Megawatt"
+dcid: "dc/o/8lkt4wj9lz4xh"
+
+Node: IndiaEnergy_Renewables/E1/93d60273-7729-1d7e-5bab-b01ea9f8d77c
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/b8435f6b-893e-c827-c843-0cb77799fb44
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Bagasse
+value: 5000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_BagasseobservationDate=2017-03-01value=5000.0unit=Megawatt"
+dcid: "dc/o/v6dtc51q0x2j9"
+
+Node: IndiaEnergy_Renewables/E1/b8435f6b-893e-c827-c843-0cb77799fb44
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c5e256ee-aaaa-c381-9023-dc98369237d3
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Bagasse
+value: 7260.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_BagasseobservationDate=2018-03-01value=7260.0unit=Megawatt"
+dcid: "dc/o/818ykkpwexlnb"
+
+Node: IndiaEnergy_Renewables/E1/c5e256ee-aaaa-c381-9023-dc98369237d3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/9e7838a1-5f97-62c6-bc4b-d20ddece1d71
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Bagasse
+value: 5000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_BagasseobservationDate=2019-03-01value=5000.0unit=Megawatt"
+dcid: "dc/o/zhcb2pn1xdl4"
+
+Node: IndiaEnergy_Renewables/E1/9e7838a1-5f97-62c6-bc4b-d20ddece1d71
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/802e2bb1-11c0-9cc6-f994-70d9416cce9b
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Bagasse
+value: 5000.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_BagasseobservationDate=2020-03-01value=5000.0unit=Megawatt"
+dcid: "dc/o/mkqr4jjbfzbpb"
+
+Node: IndiaEnergy_Renewables/E1/802e2bb1-11c0-9cc6-f994-70d9416cce9b
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/d596e3dd-e59e-2013-bcb5-27dd4fa7c5fe
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_NonRenewableWaste
+value: 2556.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_NonRenewableWasteobservationDate=2015-03-01value=2556.0unit=Megawatt"
+dcid: "dc/o/gssntepc1r6m5"
+
+Node: IndiaEnergy_Renewables/E1/d596e3dd-e59e-2013-bcb5-27dd4fa7c5fe
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/fb6f2810-b21e-a83c-9c80-91d956445611
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_NonRenewableWaste
+value: 2556.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_NonRenewableWasteobservationDate=2017-03-01value=2556.0unit=Megawatt"
+dcid: "dc/o/0m4xf3k0pz0df"
+
+Node: IndiaEnergy_Renewables/E1/fb6f2810-b21e-a83c-9c80-91d956445611
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/5bcaad81-6349-c47c-928f-06625e64656d
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_NonRenewableWaste
+value: 2425.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_NonRenewableWasteobservationDate=2018-03-01value=2425.0unit=Megawatt"
+dcid: "dc/o/8xzze5djrtcr9"
+
+Node: IndiaEnergy_Renewables/E1/5bcaad81-6349-c47c-928f-06625e64656d
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/4652a7d7-8379-9775-8719-b9a5fca17608
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_NonRenewableWaste
+value: 2556.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_NonRenewableWasteobservationDate=2019-03-01value=2556.0unit=Megawatt"
+dcid: "dc/o/xynvl4xctsd38"
+
+Node: IndiaEnergy_Renewables/E1/4652a7d7-8379-9775-8719-b9a5fca17608
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/0003c315-e81a-6a8b-cfd8-fa53ad42c935
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_NonRenewableWaste
+value: 2555.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_NonRenewableWasteobservationDate=2020-03-01value=2555.0unit=Megawatt"
+dcid: "dc/o/n0s9v2pfslw03"
+
+Node: IndiaEnergy_Renewables/E1/0003c315-e81a-6a8b-cfd8-fa53ad42c935
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/d2904896-7aff-2a0f-dd46-a8f1f5c69f97
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_OtherBiomass
+value: 17538.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_OtherBiomassobservationDate=2015-03-01value=17538.0unit=Megawatt"
+dcid: "dc/o/fex1lm9qcxghh"
+
+Node: IndiaEnergy_Renewables/E1/d2904896-7aff-2a0f-dd46-a8f1f5c69f97
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/134932ab-4301-b179-3161-ff310b538a99
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_OtherBiomass
+value: 17538.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_OtherBiomassobservationDate=2017-03-01value=17538.0unit=Megawatt"
+dcid: "dc/o/j5s245s02bpq1"
+
+Node: IndiaEnergy_Renewables/E1/134932ab-4301-b179-3161-ff310b538a99
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/2d995e3c-b3aa-2578-1216-6b3be79c0669
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_OtherBiomass
+value: 18600.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_OtherBiomassobservationDate=2018-03-01value=18600.0unit=Megawatt"
+dcid: "dc/o/k9t3yst0hskr5"
+
+Node: IndiaEnergy_Renewables/E1/2d995e3c-b3aa-2578-1216-6b3be79c0669
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/14824507-e562-8b06-1182-12b6582bf9dc
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_OtherBiomass
+value: 17538.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_OtherBiomassobservationDate=2019-03-01value=17538.0unit=Megawatt"
+dcid: "dc/o/00rws8g9l6hy3"
+
+Node: IndiaEnergy_Renewables/E1/14824507-e562-8b06-1182-12b6582bf9dc
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/994ef36d-1856-1bb7-21ea-09ce5d0bbc07
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_OtherBiomass
+value: 17537.3
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_OtherBiomassobservationDate=2020-03-01value=17537.3unit=Megawatt"
+dcid: "dc/o/k9egb998tsqx8"
+
+Node: IndiaEnergy_Renewables/E1/994ef36d-1856-1bb7-21ea-09ce5d0bbc07
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/79f83eea-8c72-228a-eefa-0c53789d086e
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_PumpedHydro
+value: 19749.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_PumpedHydroobservationDate=2015-03-01value=19749.0unit=Megawatt"
+dcid: "dc/o/9fy61plrfkcm3"
+
+Node: IndiaEnergy_Renewables/E1/79f83eea-8c72-228a-eefa-0c53789d086e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/05d69464-2ef3-385f-2ef8-7d5b09f83592
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_PumpedHydro
+value: 19749.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_PumpedHydroobservationDate=2017-03-01value=19749.0unit=Megawatt"
+dcid: "dc/o/qchv9dctrmzz7"
+
+Node: IndiaEnergy_Renewables/E1/05d69464-2ef3-385f-2ef8-7d5b09f83592
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/c33a0259-d8c6-7615-d58c-354d8bf0ddae
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_PumpedHydro
+value: 21130.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_PumpedHydroobservationDate=2018-03-01value=21130.0unit=Megawatt"
+dcid: "dc/o/qgzffxl3s4p61"
+
+Node: IndiaEnergy_Renewables/E1/c33a0259-d8c6-7615-d58c-354d8bf0ddae
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/a5c3908c-f5c5-021c-d87c-db40970aadec
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_PumpedHydro
+value: 19749.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_PumpedHydroobservationDate=2019-03-01value=19749.0unit=Megawatt"
+dcid: "dc/o/19my7423pn4m5"
+
+Node: IndiaEnergy_Renewables/E1/a5c3908c-f5c5-021c-d87c-db40970aadec
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/5ca8ce91-21c0-18a9-29e6-818f58347a59
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_PumpedHydro
+value: 21130.25
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_PumpedHydroobservationDate=2020-03-01value=21130.25unit=Megawatt"
+dcid: "dc/o/rl92bwygykcp5"
+
+Node: IndiaEnergy_Renewables/E1/5ca8ce91-21c0-18a9-29e6-818f58347a59
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/7d8b572f-7664-490f-6418-7191052d7ed3
+observationDate: "2015-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Solar
+value: 748990.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_SolarobservationDate=2015-03-01value=748990.0unit=Megawatt"
+dcid: "dc/o/0973ld8q5ptf"
+
+Node: IndiaEnergy_Renewables/E1/7d8b572f-7664-490f-6418-7191052d7ed3
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/485f32c9-569f-567d-bd9b-1f8d694dc21e
+observationDate: "2017-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Solar
+value: 748990.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_SolarobservationDate=2017-03-01value=748990.0unit=Megawatt"
+dcid: "dc/o/0yv4q71wyx1c6"
+
+Node: IndiaEnergy_Renewables/E1/485f32c9-569f-567d-bd9b-1f8d694dc21e
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/a9acaaf3-ff54-fb52-f759-5884ef85fd09
+observationDate: "2018-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Solar
+value: 631072.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_SolarobservationDate=2018-03-01value=631072.0unit=Megawatt"
+dcid: "dc/o/ge5txk8qbr9v"
+
+Node: IndiaEnergy_Renewables/E1/a9acaaf3-ff54-fb52-f759-5884ef85fd09
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/5ecb0195-611a-05a4-ff0e-dd24fe705ee1
+observationDate: "2019-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Solar
+value: 748990.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_SolarobservationDate=2019-03-01value=748990.0unit=Megawatt"
+dcid: "dc/o/6c6yksf7sv6p3"
+
+Node: IndiaEnergy_Renewables/E1/5ecb0195-611a-05a4-ff0e-dd24fe705ee1
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/61137738-aca7-109f-4ef9-5d659555d165
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Solar
+value: 748990.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_SolarobservationDate=2020-03-01value=748990.0unit=Megawatt"
+dcid: "dc/o/bz399mtk8eq66"
+
+Node: IndiaEnergy_Renewables/E1/61137738-aca7-109f-4ef9-5d659555d165
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/fa213aa0-80c8-2648-d790-14f03aaa9c09
+observationDate: "2016-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Wind
+value: 310725.57
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_WindobservationDate=2016-03-01value=310725.57unit=Megawatt"
+dcid: "dc/o/pfq7ljfj2zjp"
+
+Node: IndiaEnergy_Renewables/E1/fa213aa0-80c8-2648-d790-14f03aaa9c09
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
+Node: IndiaEnergy_Renewables/E0/107a255e-9aaf-8aa7-8d6f-ac3b52f552ab
+observationDate: "2020-03-01"
+observationAbout: dcid:country/IND
+unit: dcid:Megawatt
+variableMeasured: dcid:Annual_Potential_Electricity_Wind
+value: 695509.0
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/INDvariableMeasured=Annual_Potential_Electricity_WindobservationDate=2020-03-01value=695509.0unit=Megawatt"
+dcid: "dc/o/qglq2y81pvr2f"
+
+Node: IndiaEnergy_Renewables/E1/107a255e-9aaf-8aa7-8d6f-ac3b52f552ab
+isoCode: "IN"
+typeOf: dcid:Place
+dcid: "country/IND"
+
