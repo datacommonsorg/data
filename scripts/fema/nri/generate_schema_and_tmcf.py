@@ -393,8 +393,9 @@ if __name__ == "__main__":
 
     schemas = []
     tmcfs = []
-
-    for properties in extracted_properties:
+    
+    for index in range(len(extracted_properties)):
+        properties = extracted_properties[index]
         statvar_mcf, statobs_tmcf = schema_and_tmcf_from_properties(
             properties, index)
 
