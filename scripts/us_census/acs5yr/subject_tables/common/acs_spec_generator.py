@@ -17,25 +17,18 @@ Utility to generate a speculative version of the JSON config required to import 
 
 import json
 import os
-import sys
 from absl import app
 from absl import flags
 
-module_dir_ = os.path.dirname(__file__)
-sys.path.append(os.path.join(module_dir_, '..'))
+from .common_util import columns_from_zip_file, token_in_list_ignore_case, get_tokens_list_from_column_list
+from .acs_spec_validator import find_columns_with_no_properties, find_missing_tokens
+from .datacommons_api_wrappers.datacommons_wrappers import fetch_dcid_properties_enums
 
-from common_utils.common_util import columns_from_zip_file, token_in_list_ignore_case, get_tokens_list_from_column_list
-from dc_api_tools.dc_utils import fetch_dcid_properties_enums
-from spec_validator.acs_spec_validator import find_columns_with_no_properties, find_missing_tokens
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+_FLAGS = flags.FLAGS
 
-FLAGS = flags.FLAGS
-
-flags.DEFINE_string('generator_output', '../output/',
+flags.DEFINE_string('generator_output', os.path.join(_SCRIPT_PATH, 'output'),
                     'Path to store the output files')
-flags.DEFINE_string(
-    'spec_dir', '../spec_dir/',
-    'Path to folder containing all previous config spec JSON file')
-
 flags.DEFINE_boolean(
     'create_union_spec', False,
     'Produce union_spec.json which had combination of all previous specs')
@@ -52,26 +45,30 @@ flags.DEFINE_list('expected_populations', ['Person'],
                   'List of expected population types')
 flags.DEFINE_list('expected_properties', [], 'list of expected properties')
 
-# TODO add newly added spec section
 
-
-# TODO might have to change this if invocation from elsewhere is to be allowed
-def _get_spec_list(spec_dir: str = '../spec_dir/') -> list:
-    spec_dir = os.path.expanduser(spec_dir)
+def get_spec_list() -> list:
+    # data/scripts/us_census/acs5yr/subject_tables
+    spec_dir = os.path.join(_SCRIPT_PATH, '..')
 
     spec_list = []
-    # read all json files
-    for filename in os.listdir(spec_dir):
-        if filename.endswith('.json'):
-            with open(spec_dir + filename, 'r') as fp:
-                spec_list.append(json.load(fp))
+    # read all spec files in subject table folders
+    for directory in sorted(os.listdir(spec_dir)):
+        directory_path = os.path.join(spec_dir, directory)
+        if os.path.isdir(directory_path):
+            table_dir = os.path.join(spec_dir, directory)
+            for filename in os.listdir(table_dir):
+                if filename.endswith('_spec.json'):
+                    spec_file = os.path.join(table_dir, filename)
+                    with open(spec_file, 'r') as fp:
+                        spec_list.append(json.load(fp))
     return spec_list
 
 
 # create megaspec
-def create_combined_spec(all_specs: list) -> dict:
+def create_combined_spec(all_specs: list,
+                         output_path: str = '../output/') -> dict:
     """Creates a union of all specs provided in the list.
-    NOTE: XXXXX is placed at places where it some manual resolution is required.
+    NOTE: XXXXX is placed at places where some manual resolution is required.
     
     Args:
       all_specs: List of specs whose union is to be computed.
@@ -79,6 +76,10 @@ def create_combined_spec(all_specs: list) -> dict:
     Returns:
       Dict object of the union spec.
   """
+    output_path = os.path.expanduser(output_path)
+    if not os.path.exists(output_path):
+        os.makedirs(output_path, exist_ok=True)
+
     out_spec = {}
     out_spec['populationType'] = {}
     out_spec['measurement'] = {}
@@ -113,8 +114,6 @@ def create_combined_spec(all_specs: list) -> dict:
                         if temp_flag:
                             out_spec['populationType'][new_token] = cur_spec[
                                 'populationType'][population_token]
-                    # elif out_spec['populationType'][population_token] != cur_spec['populationType'][population_token]:
-                    # 	print("Error:", population_token, "already assigned to population", out_spec['populationType'][population_token], "new value:", cur_spec['populationType'][population_token])
 
         out_spec['measurement']['_DEFAULT'] = {
             'measuredProperty': 'count XXXXX',
@@ -141,8 +140,6 @@ def create_combined_spec(all_specs: list) -> dict:
                         if temp_flag:
                             out_spec['measurement'][new_token] = cur_spec[
                                 'measurement'][measurement_token]
-                    # elif out_spec['measurement'][measurement_token] != cur_spec['measurement'][measurement_token]:
-                    # 	print("Error:", measurement_token, "already assigned to measurement", out_spec['measurement'][measurement_token], "new value:", cur_spec['measurement'][measurement_token])
 
         if 'enumSpecializations' in cur_spec:
             for enum_token in cur_spec['enumSpecializations']:
@@ -180,8 +177,6 @@ def create_combined_spec(all_specs: list) -> dict:
                     if temp_flag:
                         out_spec['pvs'][property_name][new_token] = cur_spec[
                             'pvs'][property_name][property_token]
-                # elif out_spec['pvs'][property_name][property_token] != cur_spec['pvs'][property_name][property_token]:
-                # 	print("Error:", property_token, "already assigned to pv", out_spec['pvs'][property_name][property_token], "new value:", cur_spec['pvs'][property_name][property_token])
 
         if 'inferredSpec' in cur_spec:
             for property_name in cur_spec['inferredSpec']:
@@ -216,8 +211,6 @@ def create_combined_spec(all_specs: list) -> dict:
                                 out_spec['inferredSpec'][property_name][
                                     new_token] = cur_spec['inferredSpec'][
                                         property_name][dependent_prop]
-                        # elif out_spec['inferredSpec'][property_name][dependent_prop] != cur_spec['inferredSpec'][property_name][dependent_prop]:
-                        # 	print("Error:", dependent_prop, "already assigned to", property_name, out_spec['inferredSpec'][property_name][dependent_prop], "new value:", cur_spec['inferredSpec'][property_name][dependent_prop])
 
         # add universePVs
         if 'universePVs' in cur_spec:
@@ -235,7 +228,8 @@ def create_combined_spec(all_specs: list) -> dict:
                 if cur_token not in out_spec['ignoreTokens']:
                     out_spec['ignoreTokens'].append(cur_token)
 
-    with open('union_spec.json', 'w') as fp:
+    union_spec_path = os.path.join(output_path, 'union_spec.json')
+    with open(union_spec_path, 'w') as fp:
         json.dump(out_spec, fp, indent=2)
 
     return out_spec
@@ -264,7 +258,7 @@ def columns_from_zip_list(zip_path_list: list,
 # go through megaspec creating output and discarded spec
 def create_new_spec(all_columns: list,
                     union_spec: dict,
-                    expected_populations: list = ('Person'),
+                    expected_populations: list = ('Person',),
                     expected_pvs: list = (),
                     output_path: str = '../output/',
                     delimiter: str = '!!') -> dict:
@@ -402,9 +396,11 @@ def create_new_spec(all_columns: list,
                 population_flag = True
 
         property_flag = True
-        for property_name in cur_universe['constraintProperties']:
-            if property_name not in out_spec['pvs']:
-                property_flag = False
+        cprops = cur_universe.get('constraintProperties', None)
+        if cprops is not None:
+            for property_name in cprops:
+                if property_name not in out_spec['pvs']:
+                    property_flag = False
 
         if property_flag and population_flag:
             out_spec['universePVs'].append(cur_universe)
@@ -483,36 +479,37 @@ def create_new_spec(all_columns: list,
 
 
 def main(argv):
-    combined_spec_out = create_combined_spec(_get_spec_list(FLAGS.spec_dir))
+    combined_spec_out = create_combined_spec(get_spec_list(),
+                                             _FLAGS.generator_output)
 
-    if FLAGS.create_union_spec:
+    if _FLAGS.create_union_spec:
         print(json.dumps(combined_spec_out, indent=2))
-    if FLAGS.get_combined_property_list:
+    if _FLAGS.get_combined_property_list:
         print(
             json.dumps(sorted(list(combined_spec_out['pvs'].keys())), indent=2))
-    if FLAGS.guess_new_spec:
-        if not FLAGS.zip_list and not FLAGS.column_list_path:
+    if _FLAGS.guess_new_spec:
+        if not _FLAGS.zip_list and not _FLAGS.column_list_path:
             print(
                 'ERROR: zip file/s or column list required to guess the new spec'
             )
         else:
-            if FLAGS.column_list_path:
+            if _FLAGS.column_list_path:
                 all_columns = json.load(
-                    open(os.path.expanduser(FLAGS.column_list_path), 'r'))
+                    open(os.path.expanduser(_FLAGS.column_list_path), 'r'))
                 guess_spec = create_new_spec(all_columns, combined_spec_out,
-                                             FLAGS.expected_populations,
-                                             FLAGS.expected_properties,
-                                             FLAGS.generator_output,
-                                             FLAGS.delimiter)
+                                             _FLAGS.expected_populations,
+                                             _FLAGS.expected_properties,
+                                             _FLAGS.generator_output,
+                                             _FLAGS.delimiter)
                 print(json.dumps(guess_spec, indent=2))
-            if FLAGS.zip_list:
-                all_columns = columns_from_zip_list(FLAGS.zip_list,
-                                                    FLAGS.check_metadata)
+            if _FLAGS.zip_list:
+                all_columns = columns_from_zip_list(_FLAGS.zip_list,
+                                                    _FLAGS.check_metadata)
                 guess_spec = create_new_spec(all_columns, combined_spec_out,
-                                             FLAGS.expected_populations,
-                                             FLAGS.expected_properties,
-                                             FLAGS.generator_output,
-                                             FLAGS.delimiter)
+                                             _FLAGS.expected_populations,
+                                             _FLAGS.expected_properties,
+                                             _FLAGS.generator_output,
+                                             _FLAGS.delimiter)
                 print(json.dumps(guess_spec, indent=2))
 
 
