@@ -136,7 +136,7 @@ def tmcf_from_row(row, index, statvar_dcid, unit):
     tmcf = TMCF_FORMAT.format(
         index=index,
         statvar_dcid=statvar_dcid,
-        obs_date=row["Version"],
+        obs_date=row["Version ISO8601"],
         field_name=row["Field Name"])
 
     if unit is not None and unit:
@@ -371,6 +371,7 @@ if __name__ == "__main__":
     logging.info(
         f"[info] ignoring {len(IGNORED_FIELDS)} fields in NRIDataDictionary")
     dd = dd[~dd["Field Name"].isin(IGNORED_FIELDS)]
+    dd["Version ISO8601"] = pd.to_datetime(dd["Version"]).dt.strftime('%Y-%m')
     dd = dd.reset_index()
 
     extracted_properties = []
