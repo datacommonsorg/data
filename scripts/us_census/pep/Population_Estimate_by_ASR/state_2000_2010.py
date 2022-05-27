@@ -87,11 +87,18 @@ def state2000():
     df = df.melt(id_vars=['geo_ID','AGEGRP','SEX','RACE'], var_name='Year'\
             ,value_name='observation')
     # Making the years more understandable
-    _dict = {'POPESTIMATE2000': '2000','POPESTIMATE2001': '2001',
-            'POPESTIMATE2002': '2002','POPESTIMATE2003': '2003',
-            'POPESTIMATE2004': '2004','POPESTIMATE2005': '2005',
-            'POPESTIMATE2006': '2006','POPESTIMATE2007': '2007',
-            'POPESTIMATE2008': '2008','POPESTIMATE2009': '2009'}
+    _dict = {
+        'POPESTIMATE2000': '2000',
+        'POPESTIMATE2001': '2001',
+        'POPESTIMATE2002': '2002',
+        'POPESTIMATE2003': '2003',
+        'POPESTIMATE2004': '2004',
+        'POPESTIMATE2005': '2005',
+        'POPESTIMATE2006': '2006',
+        'POPESTIMATE2007': '2007',
+        'POPESTIMATE2008': '2008',
+        'POPESTIMATE2009': '2009'
+    }
     df = df.replace({"Year": _dict})
     df['SVs'] = 'Count_Person_' + df['AGEGRP'] + '_' + df['SEX'] + '_' + \
             df['RACE']

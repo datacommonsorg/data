@@ -35,7 +35,7 @@ def state1990():
     _urls = _URLS_JSON["1990-00"]
     final_df = pd.DataFrame()
     for url in _urls:
-        df = pd.read_table(url, skiprows=15,delim_whitespace=True, header=None)
+        df = pd.read_table(url, skiprows=15, delim_whitespace=True, header=None)
         df.columns=['Year','geo_ID','Age','NHWM','NHWF','NHBM','NHBF','NHAIANM'\
         ,'NHAIANF','NHAPIM','NHAPIF','HWM','HWF','HBM','HBF','HAIANM','HAIANF',\
         'HAPIM','HAPIF']
