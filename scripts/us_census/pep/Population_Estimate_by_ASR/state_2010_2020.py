@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is for
+This Python Script is
 for State Level Data
 2010-2020
 '''
@@ -82,7 +82,19 @@ def state2010():
     df['SVs'] = 'Count_Person_' + df['AGE'] + '_' + df['SEX'] + '_' + df['RACE']
     df = df.drop(columns=['AGE', 'RACE', 'SEX'])
     df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
+    temp_df = pd.DataFrame()
+    temp_df = pd.concat([temp_df,df])
+    temp_df = temp_df[~temp_df["SVs"].str.contains("Total")]
+    temp_df['SVs'] = temp_df['SVs'].str.replace('_WhiteAlone', '')\
+        .str.replace('_BlackOrAfricanAmericanAlone', '')\
+        .str.replace('_AmericanIndianAndAlaskaNativeAlone', '')\
+        .str.replace('_AsianAlone', '')\
+        .str.replace('_NativeHawaiianAndOtherPacificIslanderAlone', '')\
+        .str.replace('_TwoOrMoreRaces', '')
+    temp_df = temp_df.groupby(['Measurement_Method','Year', 'geo_ID', 'SVs'])\
+        .sum().reset_index()
     df['SVs'] = df['SVs'].str.replace('_Total', '')
+    df = pd.concat([df,temp_df])
     df.to_csv(
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
         'input_data/state_2010_2020.csv')

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is for
-for County Level Data
+This Python Script is 
+for County and State Level Data
 1980-1989
 '''
 import os
@@ -24,7 +24,7 @@ import pandas as pd
 def county1980():
     '''
     This Python Script Loads csv datasets
-    from 1980-1989 on a County Level,
+    from 1980-1989 on a County and State Level,
     cleans it and create a cleaned csv
     for both County and State
     '''

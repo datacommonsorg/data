@@ -23,7 +23,6 @@ from absl import flags
 from national_1900_1959 import national1900
 from national_1960_1979 import national1960
 from national_1980_1989 import national1980
-from national_1990_1999 import national1990
 from national_2000_2010 import national2000
 from national_2010_2019 import national2010
 from state_1970_1979 import state1970
@@ -171,7 +170,6 @@ def main(_):
     national1900()
     national1960()
     national1980()
-    national1990()
     national2000()
     national2010()
     state1970()
@@ -194,7 +192,6 @@ def main(_):
     tmcf_path = data_file_path + os.sep + "USA_Population_ASR.tmcf"
     loader = USCensusPEPByASR(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
     loader.process()
-
 
 if __name__ == "__main__":
     app.run(main)

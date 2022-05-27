@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is for
+This Python Script is
 for National Level Data
 1980-1989
 '''

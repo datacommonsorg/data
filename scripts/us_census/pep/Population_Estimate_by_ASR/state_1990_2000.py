@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is for
+This Python Script is
 for State Level Data
 1990-2000
 '''
@@ -35,7 +35,7 @@ def state1990():
     _urls = _URLS_JSON["1990-00"]
     final_df = pd.DataFrame()
     for url in _urls:
-        df = pd.read_fwf(url, skiprows=15, header=None)
+        df = pd.read_table(url, skiprows=15,delim_whitespace=True, header=None)
         df.columns=['Year','geo_ID','Age','NHWM','NHWF','NHBM','NHBF','NHAIANM'\
         ,'NHAIANF','NHAPIM','NHAPIF','HWM','HWF','HBM','HBF','HAIANM','HAIANF',\
         'HAPIM','HAPIF']
@@ -66,7 +66,6 @@ def state1990():
         df.drop(columns=['NHWM','NHWF','NHBM','NHBF','NHAIANM','NHAIANF',\
             'NHAPIM','NHAPIF','HWM','HWF','HBM','HBF','HAIANM','HAIANF','HAPIM'\
             ,'HAPIF'],inplace=True)
-
         df['geo_ID'] = [f'{x:02}' for x in df['geo_ID']]
         df['geo_ID'] = 'geoId/' + df['geo_ID']
         df['Age'] = df['Age'].astype(str)
@@ -74,7 +73,6 @@ def state1990():
         df['Age'] = df['Age'].str.replace("85Years", "85OrMoreYears")
         df = df.melt(id_vars=['Year','geo_ID','Age'], var_name='sv' , \
             value_name='observation')
-
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['sv']
         df.drop(columns=['Age', 'sv'], inplace=True)
         df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
@@ -83,3 +81,9 @@ def state1990():
     final_df.to_csv(
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
         'input_data/state_1990_2000.csv')
+    final_df['geo_ID'] = 'country/USA'
+    final_df = final_df.groupby(['geo_ID','Year','Measurement_Method','SVs'])\
+        .sum()
+    final_df.to_csv(
+        os.path.dirname(os.path.abspath(__file__)) + os.sep +
+        'input_data/national_1990_2000.csv')
