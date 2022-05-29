@@ -12,14 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is 
+This Python Script is
 for County and State Level Data
 1980-1989
 '''
 import os
 import json
 import pandas as pd
-
 
 def county1980():
     '''
