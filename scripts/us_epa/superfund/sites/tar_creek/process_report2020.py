@@ -29,6 +29,13 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../../../../'))  # for superfund_vars
 from us_epa.util.superfund_vars import _TAR_CREEK_WELL_MAP
 
+FLAGS = flags.FLAGS
+flags.DEFINE_string('input_path', './data/tar_creek_reports/2020_TarCreek.pdf',
+                    'Path to the directory with the PDF for the pdf files.')
+flags.DEFINE_string(
+    'output_path', './data/output',
+    'Path to the directory where generated files are to be stored.')
+
 # Curated map of strings and regex patterns to replace in the 2020 report
 _REPLACE_MAP = {
     'Unnamed: 0': {
@@ -181,14 +188,6 @@ def process_2020_report(input_path: str,
 
 
 def main(_) -> None:
-    FLAGS = flags.FLAGS
-    flags.DEFINE_string(
-        'input_path', './data/tar_creek_reports/2020_TarCreek.pdf',
-        'Path to the directory with the PDF for the pdf files.')
-    flags.DEFINE_string(
-        'output_path', './data/output',
-        'Path to the directory where generated files are to be stored.')
-
     process_2020_report(FLAGS.input_path, FLAGS.output_path, page_range='83-86')
     print(
         f"Tabular data from the table are extracted and saved in {FLAGS.output_path}"

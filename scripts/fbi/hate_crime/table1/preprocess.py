@@ -40,7 +40,7 @@ _FLAGS = flags.FLAGS
 _YEAR_INDEX = 0
 
 # Columns in final cleaned CSV
-_OUTPUT_COLUMNS = ['Year', 'StatVar', 'Quantity']
+_OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity')
 
 # A config that maps the year to corresponding xls file with args to be used
 # with pandas.read_excel()
