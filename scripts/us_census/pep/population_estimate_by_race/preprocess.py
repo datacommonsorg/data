@@ -626,6 +626,7 @@ def _mcf_path(flag: int):
         suffix = ".mcf"
     return suffix
 
+
 def _mcf_process(col: str):
     """
     This method processes MCF file w.r.t
