@@ -55,6 +55,7 @@ def clean_file(f_handle, w_handle=None):
     for line in lines:
         if line.startswith('"---"'):  # Start of metadata
             break
+
         elif line.startswith('"Notes"'):  # header line
             # Removing "Notes"
             cleaned_header = _HEADER_REGEX.sub('', line)
