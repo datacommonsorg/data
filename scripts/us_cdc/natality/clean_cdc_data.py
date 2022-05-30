@@ -53,7 +53,9 @@ def clean_file(f_handle, w_handle=None):
         w_handle.truncate(0)
 
     for line in lines:
-        if line.startswith('"Notes"'):  # header line
+        if line.startswith('"---"'):  # Start of metadata
+            break
+        elif line.startswith('"Notes"'):  # header line
             # Removing "Notes"
             cleaned_header = _HEADER_REGEX.sub('', line)
 
@@ -73,9 +75,6 @@ def clean_file(f_handle, w_handle=None):
             cleaned_line = _TAB_DELIMITER_REGEX.sub(',', cleaned_line)
 
             w_handle.write(cleaned_line)
-
-        elif line.startswith('"---"'):  # Start of metadata
-            break
 
 
 def main(argv):

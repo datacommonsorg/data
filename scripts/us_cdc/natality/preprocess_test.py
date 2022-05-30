@@ -26,6 +26,7 @@ class CDCNatality(unittest.TestCase):
     def test_csv(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             csv_path = os.path.join(tmp_dir, 'cleaned.csv')
+            mcf_path = os.path.join(tmp_dir, 'output.mcf')
             preprocess_path = os.path.join(_SCRIPT_PATH, 'preprocess.py')
             config_path = os.path.join(_SCRIPT_PATH, 'state',
                                        '16-20_state.json')
@@ -41,6 +42,15 @@ class CDCNatality(unittest.TestCase):
                 expected_csv_path = os.path.join(_SCRIPT_PATH, 'testdata',
                                                  'expected.csv')
                 with open(expected_csv_path, 'r',
+                          encoding='utf-8') as f_expected:
+                    expected_result = f_expected.read()
+                self.assertEqual(test_result, expected_result)
+
+            with open(mcf_path, 'r', encoding='utf-8') as f_result:
+                test_result = f_result.read()
+                expected_mcf_path = os.path.join(_SCRIPT_PATH, 'testdata',
+                                                 'output.mcf')
+                with open(expected_mcf_path, 'r',
                           encoding='utf-8') as f_expected:
                     expected_result = f_expected.read()
                 self.assertEqual(test_result, expected_result)

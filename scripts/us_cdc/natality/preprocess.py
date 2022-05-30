@@ -208,7 +208,8 @@ def main(argv):
                     f_reader = csv.DictReader(csv_f,
                                               delimiter=',',
                                               quotechar='"')
-                    f_name = file_name[:-4]  # Removing .txt from filename
+                    # Removing .txt from filename
+                    f_name = os.path.splitext(file_name)[0]
                     statvars = _process_file(f_name, f_reader, f_writer)
                     if statvars:
                         statvar_list.extend(statvars)
