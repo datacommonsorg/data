@@ -14,6 +14,10 @@ To generate the schema and the TMCF for the import, run
 python3 generate_schema_and_tmcf.py
 ```
 
+Please download tract level data from the FEMA NRI website, and place the CSV
+under the `source_data` folder with the same name. [direct download link](
+https://hazards.fema.gov/nri/Content/StaticDocuments/DataDownload//NRI_Table_CensusTracts/NRI_Table_CensusTracts.zip
+)
 To clean the source data (in CSV format), run
 ```
 python3 process_data.py
@@ -24,10 +28,11 @@ directory
 
 1. `fema_nri_schema.mcf` holds the Schema for the StatisticalVariables in the
 dataset
-2. `fema_nri_counties.tmcf` holds the TMCF nodes for importing the dataset at
+1. `fema_nri_counties.tmcf` holds the TMCF nodes for importing the dataset at
 the county level (a.k.a. `NRI_Table_Counties.csv`)
-3. `nri_table_counties.csv` holds the actual NRI study data, cleaned and
+1. `nri_table_counties.csv` holds the actual NRI study data, cleaned and
 prepared to be imported
+1. `nri_table_tracts.csv` is same as above, but for census tracts
 
 ## Linting
 
@@ -44,6 +49,8 @@ yapf some_file.py --style='{based_on_style: yapf, indent_width=4}' -i
 
 `source_data` holds original files downloaded from
 [the official data download page](https://hazards.fema.gov/nri/data-resources)
+ - It does not include tract level data, since the file size is roughly 500MB
+ zipped. Please download from original source
 
 `output` holds script outputs (the artifacts)
 
