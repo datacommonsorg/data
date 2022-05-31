@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 '''
 This script generate output CSV
 for national 1900-1979 and the file
@@ -19,6 +18,7 @@ is processed as is.
 '''
 
 import pandas as pd
+
 
 def _process_national_1900_1970(ip_files):
     '''
@@ -54,7 +54,8 @@ def _process_national_1900_1970(ip_files):
                 # dropping the unwanted columns
                 df.drop(columns=[
                     "Age", "All race total", "White Total", "Nonwhite Total"
-                ],inplace=True)
+                ],
+                        inplace=True)
 
                 # inserting year column to the dataframe
                 df.insert(loc=0, column='Year', value=year)
@@ -87,7 +88,8 @@ def _process_national_1900_1970(ip_files):
                     "Age", "All race total", "White Total", "Black Total",
                     "Other Races Total", "Count_Person_Male_OtherRaces",
                     "Count_Person_Female_OtherRaces"
-                ],inplace=True)
+                ],
+                         inplace=True)
 
                 # inserting year column
                 df2.insert(loc=0, column='Year', value=year)
@@ -112,6 +114,7 @@ def _process_national_1900_1970(ip_files):
             final_df2[col] = final_df2[col].astype("int")
 
     return final_df, final_df2
+
 
 def process_nat_1900_1970(ip_files):
     '''

@@ -111,6 +111,7 @@ def _process_state_1980_1990(url):
         'Count_Person_Female_WhiteAlone']].sum(axis=1)
     return df
 
+
 def process_sta_1980_1990(url):
     '''
     Function writes the output
