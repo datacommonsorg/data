@@ -39,16 +39,16 @@ NON_SCORE_RELATIVE_MEASURES = ["Rating", "Percentile"]
 # template strings
 COMPOSITE_MCF_FORMAT = """Node: dcid:{node_dcid}
 typeOf: dcs:StatisticalVariable
-statType: measuredValue
+statType: dcs:measuredValue
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:{m_prop}
 """
 HAZARD_MCF_FORMAT_BASE = """Node: dcid:{node_dcid}
 typeOf: dcs:StatisticalVariable
 populationType: dcs:NaturalHazardImpact
-statType: measuredValue
+statType: dcs:measuredValue
 naturalHazardType: dcs:{haz_type}
-measuredProperty: {m_prop}
+measuredProperty: dcs:{m_prop}
 """
 TMCF_FORMAT = """
 Node: E:FEMA_NRI->E{index}
@@ -205,7 +205,7 @@ def normalize_unit_for_measured_property(measured_property, unit):
 
     if measured_property == "expectedLoss":
         if unit != "FemaNationalRiskScore":
-            unit = "USDollar"
+            unit = "dcid:USDollar"
     else:
         if unit != "FemaNationalRiskScore":
             unit = ""
@@ -252,7 +252,7 @@ def format_composite_field_properties_to_schema(properties):
         node_dcid=dcid, m_prop=measured_property)
 
     if measured_property == "expectedLoss":
-        formatted += "measurementQualifier: Annual\n"
+        formatted += "measurementQualifier: dcid:Annual\n"
 
     return formatted, dcid
 
@@ -290,7 +290,7 @@ def extract_properties_from_ind_hazard_row(row):
 
     measurement_qualifier = ""
     if measured_property == "expectedLoss":
-        measurement_qualifier = "Annual"
+        measurement_qualifier = "dcs:Annual"
 
     measured_property = drop_spaces(measured_property)
 
@@ -348,10 +348,10 @@ def format_ind_hazard_field_properties_to_schema(properties):
         m_prop=drop_spaces(measured_property))
 
     if impacted_thing:
-        formatted += f"impactedThing: {impacted_thing}\n"
+        formatted += f"impactedThing: dcid:{impacted_thing}\n"
 
     if measurement_qualifier:
-        formatted += f"measurementQualifier: {measurement_qualifier}\n"
+        formatted += f"measurementQualifier: dcid:{measurement_qualifier}\n"
 
     return formatted, dcid
 
