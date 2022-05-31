@@ -995,6 +995,7 @@ _state_1990_1999_dict = {
     ]
 }
 
+
 def _get_nationals_dict(dict_name: str) -> dict:
     if dict_name == "nationals_1980_1999_hispanic":
         return _nationals_1980_1999_hispanic_cols
@@ -1005,6 +1006,7 @@ def _get_nationals_dict(dict_name: str) -> dict:
     if dict_name == "nationals_2000_2009":
         return _nationals_2000_2009_dict
     return {}
+
 
 def _get_state_dict(dict_name: str) -> dict:
     if dict_name == "state_1980_1989":
@@ -1017,6 +1019,7 @@ def _get_state_dict(dict_name: str) -> dict:
         return _state_2010_2020_total_dict
     return {}
 
+
 def _get_county_dict(dict_name: str) -> dict:
     if dict_name == "county_1900_1999":
         return _county_1900_1999_dict
@@ -1025,6 +1028,7 @@ def _get_county_dict(dict_name: str) -> dict:
     if dict_name == "county_2010_2020":
         return _county_2010_2020_dict
     return {}
+
 
 def _get_mapper_cols_dict(dict_name: str) -> dict:
     """
