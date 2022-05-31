@@ -23,6 +23,8 @@ from preprocess import USCensusPEPByASRH
 module_dir_ = os.path.dirname(__file__)
 test_data_folder = os.path.join(module_dir_, "test_data")
 op_data_folder = os.path.join(module_dir_, "test_output_data")
+if not os.path.exists(op_data_folder):
+    os.mkdir(op_data_folder)
 
 
 class TestPreprocess(unittest.TestCase):

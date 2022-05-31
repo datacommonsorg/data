@@ -261,18 +261,6 @@ _nationals_1980_1999_derived_cols = {
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
-    "Male_HispanicOrLatino_computed": [
-        "Male_HispanicOrLatino_WhiteAlone_computed",
-        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed",
-        "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed",
-        "Male_HispanicOrLatino_AsianOrPacificIslander_computed"
-    ],
-    "Female_HispanicOrLatino_computed": [
-        "Female_HispanicOrLatino_WhiteAlone_computed",
-        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone_computed",
-        "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed",
-        "Female_HispanicOrLatino_AsianOrPacificIslander_computed"
-    ],
     "WhiteAloneNotHispanicOrLatino_computed": [
         "Male_WhiteAloneNotHispanicOrLatino",
         "Female_WhiteAloneNotHispanicOrLatino"
@@ -409,6 +397,10 @@ _state_2010_2020_hispanic_dict = {
     "WhiteAloneNotHispanicOrLatino_computed": [
         "Female_WhiteAloneNotHispanicOrLatino",
         "Male_WhiteAloneNotHispanicOrLatino"
+    ],#Count_Person_85OrMoreYears_HispanicOrLatino_BlackOrAfricanAmericanAlone
+    "HispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone"
     ],
     "NotHispanicOrLatino_BlackOrAfricanAmericanAlone_computed": [
         "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
@@ -616,7 +608,15 @@ _nationals_2010_2021_dict = {
                 "PacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces",
             "Female_HispanicOrLatino_NativeHawaiianAndOther" + \
                 "PacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces"
-        ]
+        ],
+    "HispanicOrLatino_computed": [
+        "Male_HispanicOrLatino",
+        "Female_HispanicOrLatino"
+    ],
+    "NotHispanicOrLatino_computed": [
+        "Male_NotHispanicOrLatino",
+        "Female_NotHispanicOrLatino"
+    ],
 }
 
 _county_2000_2009_dict = {
@@ -817,13 +817,19 @@ _county_2010_2020_dict = {
             "Female_HispanicOrLatino_" + \
                 "NativeHawaiianAndOtherPacificIslanderAlone" + \
                     "OrInCombinationWithOneOrMoreOtherRaces"
-        ]
+        ],
+    "HispanicOrLatino_computed": [
+        "Male_HispanicOrLatino", "Female_HispanicOrLatino"
+    ],
+    "NotHispanicOrLatino_computed": [
+        "Male_NotHispanicOrLatino", "Female_NotHispanicOrLatino"
+    ]
 }
 
 _county_1900_1999_dict = {
-    "NotHispanicOrLatino_WhiteAlone_computed": [
-        "Male_NotHispanicOrLatino_WhiteAlone",
-        "Female_NotHispanicOrLatino_WhiteAlone"
+    "WhiteAloneNotHispanicOrLatino_computed": [
+        "Male_WhiteAloneNotHispanicOrLatino",
+        "Female_WhiteAloneNotHispanicOrLatino"
     ],
     "HispanicOrLatino_WhiteAlone_computed": [
         "Male_HispanicOrLatino_WhiteAlone", "Female_HispanicOrLatino_WhiteAlone"
@@ -838,9 +844,9 @@ _state_1980_1989_dict = {
         "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
         "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone"
     ],
-    "NotHispanicOrLatino_WhiteAlone_computed": [
-        "Female_NotHispanicOrLatino_WhiteAlone",
-        "Male_NotHispanicOrLatino_WhiteAlone"
+    "WhiteAloneNotHispanicOrLatino_computed": [
+        "Female_WhiteAloneNotHispanicOrLatino",
+        "Male_WhiteAloneNotHispanicOrLatino"
     ],
     "NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone_computed": [
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
@@ -852,13 +858,13 @@ _state_1980_1989_dict = {
     ],
     "Female_NotHispanicOrLatino_computed": [
         "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
-        "Female_NotHispanicOrLatino_WhiteAlone",
+        "Female_WhiteAloneNotHispanicOrLatino",
         "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
     "Male_NotHispanicOrLatino_computed": [
         "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
-        "Male_NotHispanicOrLatino_WhiteAlone",
+        "Male_WhiteAloneNotHispanicOrLatino",
         "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_NotHispanicOrLatino_AsianOrPacificIslander"
     ],
@@ -888,7 +894,27 @@ _state_1980_1989_dict = {
         "Male_HispanicOrLatino_WhiteAlone",
         "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
         "Male_HispanicOrLatino_AsianOrPacificIslander"
-    ]
+    ],
+    "NotHispanicOrLatino_computed": [
+        "Female_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_WhiteAloneNotHispanicOrLatino",
+        "Female_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
+        "Female_NotHispanicOrLatino_AsianOrPacificIslander",
+        "Male_NotHispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Male_WhiteAloneNotHispanicOrLatino",
+        "Male_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
+        "Male_NotHispanicOrLatino_AsianOrPacificIslander"
+    ],
+    "HispanicOrLatino_computed": [
+        "Female_HispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Female_HispanicOrLatino_WhiteAlone",
+        "Female_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
+        "Female_HispanicOrLatino_AsianOrPacificIslander",
+        "Male_HispanicOrLatino_BlackOrAfricanAmericanAlone",
+        "Male_HispanicOrLatino_WhiteAlone",
+        "Male_HispanicOrLatino_AmericanIndianAndAlaskaNativeAlone",
+        "Male_HispanicOrLatino_AsianOrPacificIslander"
+    ],
 }
 
 _state_1990_1999_dict = {
@@ -969,10 +995,40 @@ _state_1990_1999_dict = {
     ]
 }
 
+def _get_nationals_dict(dict_name: str) -> dict:
+    if dict_name == "nationals_1980_1999_hispanic":
+        return _nationals_1980_1999_hispanic_cols
+    if dict_name == "nationals_1980_1999_derived":
+        return _nationals_1980_1999_derived_cols
+    if dict_name == "nationals_2010_2021":
+        return _nationals_2010_2021_dict
+    if dict_name == "nationals_2000_2009":
+        return _nationals_2000_2009_dict
+    return {}
+
+def _get_state_dict(dict_name: str) -> dict:
+    if dict_name == "state_1980_1989":
+        return _state_1980_1989_dict
+    if dict_name == "state_1990_1999":
+        return _state_1990_1999_dict
+    if dict_name == "state_2010_2020_hispanic":
+        return _state_2010_2020_hispanic_dict
+    if dict_name == "state_2010_2020_total":
+        return _state_2010_2020_total_dict
+    return {}
+
+def _get_county_dict(dict_name: str) -> dict:
+    if dict_name == "county_1900_1999":
+        return _county_1900_1999_dict
+    if dict_name == "county_2000_2009":
+        return _county_2000_2009_dict
+    if dict_name == "county_2010_2020":
+        return _county_2010_2020_dict
+    return {}
 
 def _get_mapper_cols_dict(dict_name: str) -> dict:
     """
-    Returns the required dictionary depending on 
+    Returns the required dictionary depending on
     dict_name which can be either new derivable columns
     or Dataset Header to Columns mappings
 
@@ -984,25 +1040,10 @@ def _get_mapper_cols_dict(dict_name: str) -> dict:
     """
     if dict_name == "header_mappers":
         return _cols_dict
-    if dict_name == "state_1990_1999":
-        return _state_1990_1999_dict
-    if dict_name == "state_1980_1989":
-        return _state_1980_1989_dict
-    if dict_name == "county_1900_1999":
-        return _county_1900_1999_dict
-    if dict_name == "county_2010_2020":
-        return _county_2010_2020_dict
-    if dict_name == "county_2000_2009":
-        return _county_2000_2009_dict
-    if dict_name == "nationals_2010_2021":
-        return _nationals_2010_2021_dict
-    if dict_name == "state_2010_2020_derived":
-        return _state_2010_2020_hispanic_dict
-    if dict_name == "county_2010_2020_total":
-        return _state_2010_2020_total_dict
-    if dict_name == "nationals_2000_2009":
-        return _nationals_2000_2009_dict
-    if dict_name == "nationals_1980_1999_hispanic":
-        return _nationals_1980_1999_hispanic_cols
-    if dict_name == "nationals_1980_1999_total":
-        return _nationals_1980_1999_derived_cols
+    if "national" in dict_name:
+        return _get_nationals_dict(dict_name)
+    if "state" in dict_name:
+        return _get_state_dict(dict_name)
+    if "county" in dict_name:
+        return _get_county_dict(dict_name)
+    return {}
