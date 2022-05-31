@@ -1,64 +1,64 @@
 # New measuredProperties
 Node: dcid:expectedLoss
-typeOf: Property
-description: The estimated economic loss resulting from natural hazards. It quantifies loss for relevant consequence types (buildings, people, and agriculture), and in aggregate.
-descriptionUrl: https://hazards.fema.gov/nri/expected-annual-loss
-name: expectedLoss
-domainIncludes: NaturalHazardImpact
+typeOf: dcid:Property
+description: "The estimated economic loss resulting from natural hazards. It quantifies loss for relevant consequence types (buildings, people, and agriculture), and in aggregate."
+descriptionUrl: "https://hazards.fema.gov/nri/expected-annual-loss"
+name: "expectedLoss"
+domainIncludes: dcid:NaturalHazardImpact
 
 Node: dcid:femaSocialVulnerability
-typeOf: Property
-description: The susceptibility of social groups to the adverse impacts of natural hazards, including disproportionate death, injury, loss, or disruption of livelihood.
-descriptionUrl: https://hazards.fema.gov/nri/social-vulnerability
-name: femaSocialVulnerability
-domainIncludes: NaturalHazardImpact
+typeOf: dcid:Property
+description: "The susceptibility of social groups to the adverse impacts of natural hazards, including disproportionate death, injury, loss, or disruption of livelihood."
+descriptionUrl: "https://hazards.fema.gov/nri/social-vulnerability"
+name: "femaSocialVulnerability"
+domainIncludes: dcid:NaturalHazardImpact
 
 Node: dcid:femaCommunityResilience
-typeOf: Property
-description: The ability of a community to prepare for anticipated natural hazards, adapt to changing conditions, and withstand and recover rapidly from disruptions.
-descriptionUrl: https://hazards.fema.gov/nri/community-resilience
-name: femaCommunityResilience
-domainIncludes: NaturalHazardImpact
+typeOf: dcid:Property
+description: "The ability of a community to prepare for anticipated natural hazards, adapt to changing conditions, and withstand and recover rapidly from disruptions."
+descriptionUrl: "https://hazards.fema.gov/nri/community-resilience"
+name: "femaCommunityResilience"
+domainIncludes: dcid:NaturalHazardImpact
 
 # New unit: Fema Risk Index
 Node: dcid:femaNaturalHazardRiskIndex
-typeOf: Property
-description: The potential for negative impacts as a result of a natural hazard.
-descriptionUrl: https://hazards.fema.gov/nri/determining-risk
-name: femaNaturalHazardRiskIndex
-domainIncludes: NaturalHazardImpact
+typeOf: dcid:Property
+description: "The potential for negative impacts as a result of a natural hazard."
+descriptionUrl: "https://hazards.fema.gov/nri/determining-risk"
+name: "femaNaturalHazardRiskIndex"
+domainIncludes: dcid:NaturalHazardImpact
 
 Node: dcid:FemaNationalRiskScore
-typeOf: UnitOfMeasure
-description: A unit describing the relative risk from natural hazards that a place is estimated to be, according to the FEMA National Risk Index study. Ranging from 0 to 100, where 0 is the least at risk, and 100 is the most at risk.
-name: FemaNationalRiskScore
-descriptionUrl: https://hazards.fema.gov/nri/understanding-scores-ratings
+typeOf: dcid:UnitOfMeasure
+description: "A unit describing the relative risk from natural hazards that a place is estimated to be, according to the FEMA National Risk Index study. Ranging from 0 to 100, where 0 is the least at risk, and 100 is the most at risk."
+name: "FemaNationalRiskScore"
+descriptionUrl: "https://hazards.fema.gov/nri/understanding-scores-ratings"
 
 # New NaturalHazardImpact Class (population type)
 Node: dcid:NaturalHazardImpact
-typeOf: Class
-description: Negative impacts, such as destruction or death, imposed upon factors such as Buildings, People, and Agriculture through occurrences of natural hazards.
-name: NaturalHazardImpact
-subClassOf: Intangible
+typeOf: dcid:Class
+description: "Negative impacts, such as destruction or death, imposed upon factors such as Buildings, People, and Agriculture through occurrences of natural hazards."
+name: "NaturalHazardImpact"
+subClassOf: dcid:Intangible
 
 # New <Hazard>Event for individual hazards:
 Node: dcid:ColdWaveEvent
-typeOf: Class
-name: ColdWaveEvent
-subClassOf: MeteorologicalEvent
+typeOf: dcid:Class
+name: "ColdWaveEvent"
+subClassOf: dcid:MeteorologicalEvent
 
 Node: dcid:HeatWaveEvent
-typeOf: Class
-name: HeatWaveEvent
-subClassOf: MeteorologicalEvent
+typeOf: dcid:Class
+name: "HeatWaveEvent"
+subClassOf: dcid:MeteorologicalEvent
 
 Node: dcid:RiverineFloodingEvent
-typeOf: Class
-name: RiverineFloodingEvent
-subClassOf: Event
+typeOf: dcid:Class
+name: "RiverineFloodingEvent"
+subClassOf: dcid:Event
 
 Node: dcid:VolcanicActivityEvent
-typeOf: Class
-name: VolcanicActivityEvent
-subClassOf: Event
+typeOf: dcid:Class
+name: "VolcanicActivityEvent"
+subClassOf: dcid:Event
 
