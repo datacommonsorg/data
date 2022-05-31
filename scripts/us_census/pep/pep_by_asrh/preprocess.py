@@ -30,7 +30,6 @@ pd.set_option("display.max_rows", None)
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_data"
-default_input_path = "/usr/local/google/home/rpatnala/datacommons/git_scripts/pep_asrh/data/scripts/us_census/pep/pep_by_asrh/test_data/datasets"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
@@ -658,6 +657,15 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
                 elif curr_origin_race_cat is None:
                     curr_origin_race_cat = lines[2]
                 if len(data) == 2:
+                    # Row level aggregation is calculated
+                    # thru pairs (1,2), (3,4) and (11,12)
+                    # Dervied SV's are below
+                    # WhiteAloneNotHispanicOrLatino: 1 + 2
+                    # HispanicOrLatino_WhiteAlone: 3 + 4
+                    # HispanicOrLatino: 11 + 12
+                    # Few rows were dropped due to unreadable characters,
+                    # aggregation can be performed only when the pairs
+                    # are available
                     if [prev_origin_race_cat,
                             curr_origin_race_cat] in [['1', '2'], ['3', '4'],
                                                       ['11', '12']]:
@@ -705,8 +713,7 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
     for dsv, sv in derived_cols.items():
         data = df[df["SV"].isin(sv)].reset_index(drop=True)
         data["SV"] = dsv
-        data = data.groupby(['Year', 'Location',
-                                                 "SV"]).sum().reset_index()
+        data = data.groupby(['Year', 'Location', "SV"]).sum().reset_index()
         df = pd.concat([df, data])
     df = pd.concat([df, skipped_df])
     df = df.dropna()
@@ -965,6 +972,8 @@ value: C:USA_Population_ASRH->Count_Person
         sv_list.sort()
         self.__generate_mcf(sv_list)
         self.__generate_tmcf()
+
+
         #print(f_names)
 def main(_):
     input_path = FLAGS.input_path
