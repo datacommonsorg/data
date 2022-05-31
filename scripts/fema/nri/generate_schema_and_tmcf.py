@@ -42,6 +42,7 @@ typeOf: dcs:StatisticalVariable
 statType: dcs:measuredValue
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:{m_prop}
+name: "{statvar_name}"
 """
 HAZARD_MCF_FORMAT_BASE = """Node: dcid:{node_dcid}
 typeOf: dcs:StatisticalVariable
@@ -49,6 +50,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:{haz_type}
 measuredProperty: dcs:{m_prop}
+name: "{statvar_name}"
 """
 TMCF_FORMAT = """
 Node: E:FEMA_NRI->E{index}
@@ -238,6 +240,40 @@ def extract_properties_from_composite_row(row):
 
     return {"measured_property": measured_property, "unit": unit}
 
+def add_spaces_before_capital_letters(text):
+    """
+    Given a string, inserts a space before each uppercase character, and then removes any
+    trailing or leading spaces
+
+    Returns the new string.
+    """
+    return "".join([" " + char if char.isupper() else char.strip() for char in text]).strip()
+
+def format_human_readable_name_from_properties(properties, is_composite):
+    """
+    Given a dictionary of variables about the field, generates a human
+    readable name that makes sense for that field.
+
+    Returns the name as a string.
+    """
+    measured_property = properties["measured_property"]
+
+
+    if measured_property == "expectedLoss":
+        statvar_name = f"Annual Expected Loss from Natural Hazard Impact"
+    elif measured_property == "femaNaturalHazardRiskIndex":
+        statvar_name = f"FEMA National Risk Index for Natural Hazard Impact"
+    else: # community resilience, social vulnerability
+        m_prop_with_spaces = add_spaces_before_capital_letters(measured_property)
+        m_prop_without_fema = " ".join(m_prop_with_spaces.split(" ")[1:])
+        statvar_name = f"FEMA {m_prop_without_fema} to Natural Hazard Impact"
+
+    if not is_composite:
+        hazard_type_with_spaces = add_spaces_before_capital_letters(properties["hazard_type"])
+        hazard_type_no_event = " ".join(hazard_type_with_spaces.split(" ")[:-1])
+        statvar_name += f": {hazard_type_no_event}"
+
+    return statvar_name
 
 def format_composite_field_properties_to_schema(properties):
     """
@@ -253,9 +289,11 @@ def format_composite_field_properties_to_schema(properties):
         dcid = f"Annual_{capitalize_first(measured_property)}_NaturalHazardImpact"
     else:
         dcid = f"{capitalize_first(measured_property)}_NaturalHazardImpact"
+    
+    statvar_name = format_human_readable_name_from_properties(properties, is_composite = True)
 
     formatted = COMPOSITE_MCF_FORMAT.format(
-        node_dcid=dcid, m_prop=measured_property)
+        node_dcid=dcid, m_prop=measured_property, statvar_name = statvar_name)
 
     if measured_property == "expectedLoss":
         formatted += "measurementQualifier: dcid:Annual\n"
@@ -348,10 +386,14 @@ def format_ind_hazard_field_properties_to_schema(properties):
     # join the rest with underscores to obtain the final dcid
     dcid = "_".join(dcid_list)
 
+    statvar_name = format_human_readable_name_from_properties(properties, is_composite = False)
+
     formatted = HAZARD_MCF_FORMAT_BASE.format(
         node_dcid=dcid,
         haz_type=hazard_type,
-        m_prop=drop_spaces(measured_property))
+        m_prop=drop_spaces(measured_property),
+        statvar_name = statvar_name
+    )
 
     if impacted_thing:
         formatted += f"impactedThing: dcid:{impacted_thing}\n"

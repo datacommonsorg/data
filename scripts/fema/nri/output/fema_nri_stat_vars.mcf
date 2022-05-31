@@ -7,12 +7,14 @@ typeOf: dcs:StatisticalVariable
 statType: dcs:measuredValue
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 statType: dcs:measuredValue
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaSocialVulnerability_NaturalHazardImpact
@@ -20,12 +22,14 @@ typeOf: dcs:StatisticalVariable
 statType: dcs:measuredValue
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:femaSocialVulnerability
+name: "FEMA Social Vulnerability to Natural Hazard Impact"
 
 Node: dcid:FemaCommunityResilience_NaturalHazardImpact
 typeOf: dcs:StatisticalVariable
 statType: dcs:measuredValue
 populationType: dcs:NaturalHazardImpact
 measuredProperty: dcs:femaCommunityResilience
+name: "FEMA Community Resilience to Natural Hazard Impact"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_AvalancheEvent
 typeOf: dcs:StatisticalVariable
@@ -33,6 +37,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:AvalancheEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Avalanche"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_AvalancheEvent
@@ -41,6 +46,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:AvalancheEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Avalanche"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_CoastalFloodEvent
 typeOf: dcs:StatisticalVariable
@@ -48,6 +54,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:CoastalFloodEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Coastal Flood"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_CoastalFloodEvent
@@ -56,6 +63,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:CoastalFloodEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Coastal Flood"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_ColdWaveEvent
 typeOf: dcs:StatisticalVariable
@@ -63,6 +71,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:ColdWaveEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Cold Wave"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_ColdWaveEvent
@@ -71,6 +80,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:ColdWaveEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Cold Wave"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_DroughtEvent
 typeOf: dcs:StatisticalVariable
@@ -78,6 +88,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:DroughtEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Drought"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_DroughtEvent
@@ -86,6 +97,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:DroughtEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Drought"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_EarthquakeEvent
 typeOf: dcs:StatisticalVariable
@@ -93,6 +105,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:EarthquakeEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Earthquake"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_EarthquakeEvent
@@ -101,6 +114,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:EarthquakeEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Earthquake"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_HailEvent
 typeOf: dcs:StatisticalVariable
@@ -108,6 +122,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:HailEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Hail"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HailEvent
@@ -116,6 +131,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:HailEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Hail"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_HeatWaveEvent
 typeOf: dcs:StatisticalVariable
@@ -123,6 +139,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:HeatWaveEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Heat Wave"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HeatWaveEvent
@@ -131,6 +148,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:HeatWaveEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Heat Wave"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_HurricaneEvent
 typeOf: dcs:StatisticalVariable
@@ -138,6 +156,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:HurricaneEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Hurricane"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_HurricaneEvent
@@ -146,6 +165,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:HurricaneEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Hurricane"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_IceStormEvent
 typeOf: dcs:StatisticalVariable
@@ -153,6 +173,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:IceStormEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Ice Storm"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_IceStormEvent
@@ -161,6 +182,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:IceStormEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Ice Storm"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_LandslideEvent
 typeOf: dcs:StatisticalVariable
@@ -168,6 +190,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:LandslideEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Landslide"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_LandslideEvent
@@ -176,6 +199,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:LandslideEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Landslide"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_LightningEvent
 typeOf: dcs:StatisticalVariable
@@ -183,6 +207,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:LightningEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Lightning"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_LightningEvent
@@ -191,6 +216,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:LightningEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Lightning"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_RiverineFloodingEvent
 typeOf: dcs:StatisticalVariable
@@ -198,6 +224,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:RiverineFloodingEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Riverine Flooding"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_RiverineFloodingEvent
@@ -206,6 +233,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:RiverineFloodingEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Riverine Flooding"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_StrongWindEvent
 typeOf: dcs:StatisticalVariable
@@ -213,6 +241,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:StrongWindEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Strong Wind"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_StrongWindEvent
@@ -221,6 +250,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:StrongWindEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Strong Wind"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_TornadoEvent
 typeOf: dcs:StatisticalVariable
@@ -228,6 +258,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:TornadoEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Tornado"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_TornadoEvent
@@ -236,6 +267,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:TornadoEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Tornado"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_TsunamiEvent
 typeOf: dcs:StatisticalVariable
@@ -243,6 +275,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:TsunamiEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Tsunami"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_TsunamiEvent
@@ -251,6 +284,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:TsunamiEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Tsunami"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_VolcanicActivityEvent
 typeOf: dcs:StatisticalVariable
@@ -258,6 +292,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:VolcanicActivityEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Volcanic Activity"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_VolcanicActivityEvent
@@ -266,6 +301,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:VolcanicActivityEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Volcanic Activity"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_WildfireEvent
 typeOf: dcs:StatisticalVariable
@@ -273,6 +309,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:WildfireEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Wildfire"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_WildfireEvent
@@ -281,6 +318,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:WildfireEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Wildfire"
 
 Node: dcid:Annual_ExpectedLoss_NaturalHazardImpact_WinterWeatherEvent
 typeOf: dcs:StatisticalVariable
@@ -288,6 +326,7 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:WinterWeatherEvent
 measuredProperty: dcs:expectedLoss
+name: "Annual Expected Loss from Natural Hazard Impact: Winter Weather"
 measurementQualifier: dcid:Annual
 
 Node: dcid:FemaNaturalHazardRiskIndex_NaturalHazardImpact_WinterWeatherEvent
@@ -296,3 +335,4 @@ populationType: dcs:NaturalHazardImpact
 statType: dcs:measuredValue
 naturalHazardType: dcs:WinterWeatherEvent
 measuredProperty: dcs:femaNaturalHazardRiskIndex
+name: "FEMA National Risk Index for Natural Hazard Impact: Winter Weather"

@@ -3,21 +3,21 @@ Node: dcid:expectedLoss
 typeOf: dcid:Property
 description: "The estimated economic loss resulting from natural hazards. It quantifies loss for relevant consequence types (buildings, people, and agriculture), and in aggregate."
 descriptionUrl: "https://hazards.fema.gov/nri/expected-annual-loss"
-name: "expectedLoss"
+name: "Expected Loss"
 domainIncludes: dcid:NaturalHazardImpact
 
 Node: dcid:femaSocialVulnerability
 typeOf: dcid:Property
 description: "The susceptibility of social groups to the adverse impacts of natural hazards, including disproportionate death, injury, loss, or disruption of livelihood."
 descriptionUrl: "https://hazards.fema.gov/nri/social-vulnerability"
-name: "femaSocialVulnerability"
+name: "FEMA Social Vulnerability"
 domainIncludes: dcid:NaturalHazardImpact
 
 Node: dcid:femaCommunityResilience
 typeOf: dcid:Property
 description: "The ability of a community to prepare for anticipated natural hazards, adapt to changing conditions, and withstand and recover rapidly from disruptions."
 descriptionUrl: "https://hazards.fema.gov/nri/community-resilience"
-name: "femaCommunityResilience"
+name: "FEMA Community Resilience"
 domainIncludes: dcid:NaturalHazardImpact
 
 # New unit: Fema Risk Index
@@ -25,13 +25,13 @@ Node: dcid:femaNaturalHazardRiskIndex
 typeOf: dcid:Property
 description: "The potential for negative impacts as a result of a natural hazard."
 descriptionUrl: "https://hazards.fema.gov/nri/determining-risk"
-name: "femaNaturalHazardRiskIndex"
+name: "FEMA Natural Hazard Risk Index"
 domainIncludes: dcid:NaturalHazardImpact
 
 Node: dcid:FemaNationalRiskScore
 typeOf: dcid:UnitOfMeasure
 description: "A unit describing the relative risk from natural hazards that a place is estimated to be, according to the FEMA National Risk Index study. Ranging from 0 to 100, where 0 is the least at risk, and 100 is the most at risk."
-name: "FemaNationalRiskScore"
+name: "FEMA National Risk Score"
 descriptionUrl: "https://hazards.fema.gov/nri/understanding-scores-ratings"
 
 # New NaturalHazardImpact Class (population type)
