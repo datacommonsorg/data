@@ -12,93 +12,134 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script Loads csv datasets
-from 2010-2020 on a National Level,
-cleans it and create a cleaned csv
+This script generate output CSV
+for national 2010-2020 and it is aggregated
+from state 2010-2020 file.
 '''
-import json
+
 import pandas as pd
 
-URLS_JSON_PATH = "Nationals/national_2010_2020.json"
-URLS_JSON = None
-with open(URLS_JSON_PATH, encoding="UTF-8") as file:
-    URLS_JSON = json.load(file)
-url = URLS_JSON["url"]
 
-# reading the csv format input file and converting it to a dataframe
-# skipping unwanted rows from top
-df = pd.read_excel(url, skiprows=3, header=0)
+def _process_national_2010_2020(url):
+    '''
+    Function Loads input csv datasets
+    from 2010-2020 on a National Level,
+    cleans it and return cleaned dataframe.
+    '''
+    # reading input file to dataframe
+    df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
 
-# dropping the unwanted rows and column
-df = df.drop(['Census', 'Estimates Base', 2010], axis=1)
-df = df.drop([1], axis=0)
-df['Unnamed: 0'] = df['Unnamed: 0'].str.replace(".", "")
-df1 = df[0:6]
-df2 = df[8:13]
-df2['Unnamed: 0'] = df2['Unnamed: 0'] + ' Alone Or In Combination'
-df_final = pd.concat([df1, df2])
-df1 = df[41:48]
-df1['Unnamed: 0'] = 'Male ' + df1['Unnamed: 0']
-df2 = df[50:55]
-df2['Unnamed: 0'] = 'Male ' + df2['Unnamed: 0'] + ' Alone Or In Combination'
-df_final = pd.concat([df_final, df1, df2])
-df1 = df[83:90]
-df1['Unnamed: 0'] = 'Female ' + df1['Unnamed: 0']
-df2 = df[92:97]
-df2['Unnamed: 0'] = 'Female ' + df2['Unnamed: 0'] + ' Alone Or In Combination'
-df_final = pd.concat([df_final, df1, df2])
-df = df_final.transpose()
-df.columns = df.iloc[0]
+    # years having 1 and 2 value are not requried as estimate is for April Month
+    # agegrp is only required as it gives total of all ages
+    df = df.query("YEAR not in [1, 2]")
+    df = df.query("AGEGRP == 0")
 
-df = df[1:]
+    # year starting from 3 so need to convert it to 2010s
+    df['YEAR'] = df['YEAR'] + 2010 - 3
 
-# dropping unwanted columns
-df.drop(columns=[
-    'TOTAL POPULATION', 'White', 'Black or African American',
-    'American Indian and Alaska Native', 'Asian',
-    'Native Hawaiian and Other Pacific Islander',
-    'White Alone Or In Combination',
-    'Black or African American Alone Or In Combination',
-    'American Indian and Alaska Native Alone Or In Combination',
-    'Asian Alone Or In Combination',
-    'Native Hawaiian and Other Pacific Islander Alone Or In Combination',
-    'Female One Race:', 'Male One Race:'
-],
-        inplace=True)
-df['Year'] = df.index
+    # add fips code for location
+    df['geo_ID'] = 'geoId/' + (df['STATE']\
+        .map(str)).str.zfill(2) + (df['COUNTY'].map(str)).str.zfill(3)
 
-# giving proper name to the columns
-df.columns=['Count_Person_Male','Count_Person_Male_WhiteAlone',
-       'Count_Person_Male_BlackOrAfricanAmericanAlone',
-       'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
-       'Count_Person_Male_AsianAlone',
-       'Count_Person_Male_NativeHawaiianAndOtherPacificIslanderAlone',
-       'Count_Person_Male_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces',
-       'Count_Person_Male_BlackOrAfricanAmericanAlone'+\
-       'OrInCombinationWithOneOrMoreOtherRaces',
-       'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone'+\
-       'OrInCombinationWithOneOrMoreOtherRaces',
-       'Count_Person_Male_AsianAlone'+\
-       'OrInCombinationWithOneOrMoreOtherRaces',
-       'Count_Person_Male_NativeHawaiianAndOtherPacificIslanderAlone'+\
-       'OrInCombinationWithOneOrMoreOtherRaces',
-       'Count_Person_Female','Count_Person_Female_WhiteAlone',
-       'Count_Person_Female_BlackOrAfricanAmericanAlone',
-       'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
-       'Count_Person_Female_AsianAlone',
-       'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone',
-       'Count_Person_Female_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces',
-       'Count_Person_Female_BlackOrAfricanAmericanAlone'+\
-       'OrInCombinationWithOneOrMoreOtherRaces',
-       'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone'+\
-       'OrInCombinationWithOneOrMoreOtherRaces',
-       'Count_Person_Female_AsianAloneOrInCombinationWithOneOrMoreOtherRaces',
-       'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
-       'OrInCombinationWithOneOrMoreOtherRaces','Year']
+    # drop unwanted columns
+    df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+            axis=1,
+            inplace=True)
 
-df = df.reset_index()
-df = df.drop(columns=['index'])
-df.insert(0, 'geo_ID', 'country/USA', True)
+    # dropping unwanted columns
+    df = df.drop(columns=[
+        'TOT_POP', 'NH_MALE', 'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE',
+        'NHBA_MALE', 'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE',
+        'NHAA_FEMALE', 'NHNA_MALE', 'NHNA_FEMALE', 'NHTOM_MALE', 'NHTOM_FEMALE',
+        'NHWAC_MALE', 'NHWAC_FEMALE', 'NHBAC_MALE', 'NHBAC_FEMALE',
+        'NHIAC_MALE', 'NHIAC_FEMALE', 'NHAAC_MALE', 'NHAAC_FEMALE',
+        'NHNAC_MALE', 'NHNAC_FEMALE', 'H_MALE', 'H_FEMALE', 'HWA_MALE',
+        'HWA_FEMALE', 'HBA_MALE', 'HBA_FEMALE', 'HIA_MALE', 'HIA_FEMALE',
+        'HAA_MALE', 'HAA_FEMALE', 'HNA_MALE', 'HNA_FEMALE', 'HTOM_MALE',
+        'HTOM_FEMALE', 'HWAC_MALE', 'HWAC_FEMALE', 'HBAC_MALE', 'HBAC_FEMALE',
+        'HIAC_MALE', 'HIAC_FEMALE', 'HAAC_MALE', 'HAAC_FEMALE', 'HNAC_MALE',
+        'HNAC_FEMALE'
+    ])
 
-# writing the dataframe to output csv
-df.to_csv("nationals_result_2010_2020.csv")
+    # to remove numeric thousand seperator
+    df['YEAR'] = df['YEAR'].astype(int)
+    df['TOT_MALE'] = df['TOT_MALE'].astype(int)
+    df['TOT_FEMALE'] = df['TOT_FEMALE'].astype(int)
+    df['WA_MALE'] = df['WA_MALE'].astype(int)
+    df['WA_FEMALE'] = df['WA_FEMALE'].astype(int)
+    df['BA_MALE'] = df['BA_MALE'].astype(int)
+    df['BA_FEMALE'] = df['BA_FEMALE'].astype(int)
+    df['IA_MALE'] = df['IA_MALE'].astype(int)
+    df['IA_FEMALE'] = df['IA_FEMALE'].astype(int)
+    df['AA_MALE'] = df['AA_MALE'].astype(int)
+    df['AA_FEMALE'] = df['AA_FEMALE'].astype(int)
+    df['NA_MALE'] = df['NA_MALE'].astype(int)
+    df['NA_FEMALE'] = df['NA_FEMALE'].astype(int)
+    df['TOM_MALE'] = df['TOM_MALE'].astype(int)
+    df['TOM_FEMALE'] = df['TOM_FEMALE'].astype(int)
+    df['WAC_MALE'] = df['WAC_MALE'].astype(int)
+    df['WAC_FEMALE'] = df['WAC_FEMALE'].astype(int)
+    df['BAC_MALE'] = df['BAC_MALE'].astype(int)
+    df['BAC_FEMALE'] = df['BAC_FEMALE'].astype(int)
+    df['IAC_MALE'] = df['IAC_MALE'].astype(int)
+    df['IAC_FEMALE'] = df['IAC_FEMALE'].astype(int)
+    df['AAC_MALE'] = df['AAC_MALE'].astype(int)
+    df['AAC_FEMALE'] = df['AAC_FEMALE'].astype(int)
+    df['NAC_MALE'] = df['NAC_MALE'].astype(int)
+    df['NAC_FEMALE'] = df['NAC_FEMALE'].astype(int)
+
+    # extracting geoid
+    df['geo_ID'] = (df['geo_ID'].map(str)).str[:8]
+
+    # it groups the df as per columns provided
+    # performs the provided functions on the data
+    df = df.groupby(['YEAR', 'geo_ID']).sum().reset_index()
+
+    # providing proper column names
+    df.columns=['Year','geo_ID','Count_Person_Male',
+        'Count_Person_Female','Count_Person_Male_WhiteAlone',
+        'Count_Person_Female_WhiteAlone',
+        'Count_Person_Male_BlackOrAfricanAmericanAlone',
+        'Count_Person_Female_BlackOrAfricanAmericanAlone',
+        'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
+        'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
+        'Count_Person_Male_AsianAlone','Count_Person_Female_AsianAlone',
+        'Count_Person_Male_NativeHawaiianAndOtherPacificIslanderAlone',
+        'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone',
+        'Count_Person_Male_TwoOrMoreRaces','Count_Person_Female_TwoOrMoreRaces',
+        'Count_Person_Male_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces',
+        'Count_Person_Female_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces',
+        'Count_Person_Male_BlackOrAfricanAmericanAlone'+\
+            'OrInCombinationWithOneOrMoreOtherRaces',
+        'Count_Person_Female_BlackOrAfricanAmericanAlone'+\
+            'OrInCombinationWithOneOrMoreOtherRaces',
+        'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone'+\
+            'OrInCombinationWithOneOrMoreOtherRaces',
+        'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone'+\
+            'OrInCombinationWithOneOrMoreOtherRaces',
+        'Count_Person_Male_AsianAloneOrInCombinationWithOneOrMoreOtherRaces',
+        'Count_Person_Female_AsianAloneOrInCombinationWithOneOrMoreOtherRaces',
+        'Count_Person_Male_NativeHawaiianAndOtherPacificIslanderAlone'+\
+            'OrInCombinationWithOneOrMoreOtherRaces',
+        'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
+            'OrInCombinationWithOneOrMoreOtherRaces']
+
+    df.drop(columns=['geo_ID'], inplace=True)
+
+    df = df.groupby(['Year']).sum().reset_index()
+
+    # inserting geoid in columns
+    df.insert(0, 'geo_ID', 'country/USA', True)
+    return df
+
+
+def process_nat_2010_2020(url):
+    '''
+    Function writes the output
+    dataframe generated to csv
+    and return column names.
+    '''
+    df = _process_national_2010_2020(url)
+    # writing output to csv
+    df.to_csv('nationals_result_2010_2020.csv', index=False)
+    return df.columns

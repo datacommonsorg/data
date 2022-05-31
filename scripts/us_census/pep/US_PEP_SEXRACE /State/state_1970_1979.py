@@ -12,80 +12,103 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script Loads csv datasets
-from 1970-1979 on a State Level,
-cleans it and create a cleaned csv
+This script generate output CSV
+for state 1970-1979 and Count_Person_Male
+and Count_person_Female are aggregated for this file.
 '''
-import json
+
 import pandas as pd
 
-URLS_JSON_PATH = "State/state_1970_1979.json"
-URLS_JSON = None
-with open(URLS_JSON_PATH, encoding="UTF-8") as file:
-    URLS_JSON = json.load(file)
-url = URLS_JSON["url"]
 
-# reading the csv input file
-df = pd.read_csv(url, skiprows=5, header=0, thousands=',')
-df.rename(columns={
-    'Year of Estimate': 'Year',
-    'FIPS State Code': 'geo_ID',
-    'State Name': 'LOCATION',
-    'Race/Sex Indicator': 'Age & Sex'
-},
-          inplace=True)
-column_names = [
-    'Under 5 years', '5 to 9 years', '10 to 14 years', '15 to 19 years',
-    '20 to 24 years', '25 to 29 years', '30 to 34 years', '35 to 39 years',
-    '40 to 44 years', '45 to 49 years', '50 to 54 years', '55 to 59 years',
-    '60 to 64 years', '65 to 69 years', '70 to 74 years', '75 to 79 years',
-    '80 to 84 years', '85 years and over'
-]
-df['Total'] = df[column_names].sum(axis=1)
+def _process_state_1970_1979(url):
+    '''
+    Function Loads input csv datasets
+    from 1970-1979 on a State Level,
+    cleans it and return cleaned dataframe.
+    '''
+    # reading the csv input file
+    df = pd.read_csv(url, skiprows=5, header=0, thousands=',')
+    df.rename(columns={
+        'Year of Estimate': 'Year',
+        'FIPS State Code': 'geo_ID',
+        'State Name': 'LOCATION',
+        'Race/Sex Indicator': 'Age & Sex'
+    },
+              inplace=True)
 
-# creating fips code and making it 2 digit as state
-df['geo_ID'] = [f'{x:02}' for x in df['geo_ID']]
-df = df.drop(columns=[
-    'LOCATION', 'Under 5 years', '5 to 9 years', '10 to 14 years',
-    '15 to 19 years', '20 to 24 years', '25 to 29 years', '30 to 34 years',
-    '35 to 39 years', '40 to 44 years', '45 to 49 years', '50 to 54 years',
-    '55 to 59 years', '60 to 64 years', '65 to 69 years', '70 to 74 years',
-    '75 to 79 years', '80 to 84 years', '85 years and over'
-])
+    # listing the columns to be dropped as age gaps are not required
+    COLUMNS_TO_SUM = [
+        'Under 5 years', '5 to 9 years', '10 to 14 years', '15 to 19 years',
+        '20 to 24 years', '25 to 29 years', '30 to 34 years', '35 to 39 years',
+        '40 to 44 years', '45 to 49 years', '50 to 54 years', '55 to 59 years',
+        '60 to 64 years', '65 to 69 years', '70 to 74 years', '75 to 79 years',
+        '80 to 84 years', '85 years and over'
+    ]
 
-# providing geoId to the dataframe and making the geoId of 2 digit as state
-df['Year'] = df['Year'].astype(str) + '-' + df['geo_ID'].astype(str)
-df.drop(columns=['geo_ID'], inplace=True)
+    # aggregating all the ages to get total value
+    df['Total'] = df[COLUMNS_TO_SUM].sum(axis=1)
 
-df = df.groupby(['Year', 'Age & Sex']).sum().transpose().stack(0).reset_index()
-df.drop(columns=['level_0'], inplace=True)
-df['geo_ID'] = df['Year'].str.split('-', expand=True)[1]
-df['Year'] = df['Year'].str.split('-', expand=True)[0]
+    # creating fips code and making it 2 digit as state
+    df['geo_ID'] = [f'{x:02}' for x in df['geo_ID']]
 
-# providing proper column names
-df.columns = [
-    'Year', 'Count_Person_Female_BlackOrAfricanAmericanAlone',
-    'Count_Person_Male_BlackOrAfricanAmericanAlone',
-    'Count_Person_Female_OtherRaces', 'Count_Person_Male_OtherRaces',
-    'Count_Person_Female_WhiteAlone', 'Count_Person_Male_WhiteAlone', 'geo_ID'
-]
-df['geo_ID'] = 'geoId/' + df['geo_ID']
+    # dropping unwanted columns
+    df = df.drop(columns=(COLUMNS_TO_SUM))
 
-# dropping unwanted columns
-df = df.drop(
-    columns=['Count_Person_Male_OtherRaces', 'Count_Person_Female_OtherRaces'])
+    # providing geoId to the dataframe and making the geoId of 2 digit as state
+    df['Year'] = df['Year'].astype(str) + '-' + df['geo_ID'].astype(str)
+    df.drop(columns=['geo_ID'], inplace=True)
 
-# aggregating columns to get Count_Person_Male
-df["Count_Person_Male"] = df.loc[:, [
-    'Count_Person_Male_WhiteAlone',
-    "Count_Person_Male_BlackOrAfricanAmericanAlone"
-]].sum(axis=1)
+    # it groups the df as per columns provided
+    # performs the provided functions on the data
+    df = df.groupby(['Year', 'Age & Sex']).sum().\
+        transpose().stack(0).reset_index()
+    df.drop(columns=['level_0'], inplace=True)
 
-# aggregating columns to get Count_Person_Female
-df["Count_Person_Female"] = df.loc[:, [
-    'Count_Person_Female_WhiteAlone',
-    "Count_Person_Female_BlackOrAfricanAmericanAlone"
-]].sum(axis=1)
+    # extracting geoid
+    df['geo_ID'] = df['Year'].str.split('-', expand=True)[1]
+    df['Year'] = df['Year'].str.split('-', expand=True)[0]
 
-# writing the dataframe to output csv
-df.to_csv("state_result_1970_1979.csv")
+    # providing proper column names
+    df.columns = [
+        'Year', 'Count_Person_Female_BlackOrAfricanAmericanAlone',
+        'Count_Person_Male_BlackOrAfricanAmericanAlone',
+        'Count_Person_Female_OtherRaces', 'Count_Person_Male_OtherRaces',
+        'Count_Person_Female_WhiteAlone', 'Count_Person_Male_WhiteAlone',
+        'geo_ID'
+    ]
+
+    # giving proper geoid
+    df['geo_ID'] = 'geoId/' + df['geo_ID']
+
+    # aggregating columns to get Count_Person_Male
+    df["Count_Person_Male"] = df.loc[:, [
+        'Count_Person_Male_WhiteAlone',
+        "Count_Person_Male_BlackOrAfricanAmericanAlone",
+        "Count_Person_Male_OtherRaces"
+    ]].sum(axis=1)
+
+    # aggregating columns to get Count_Person_Female
+    df["Count_Person_Female"] = df.loc[:, [
+        'Count_Person_Female_WhiteAlone',
+        "Count_Person_Female_BlackOrAfricanAmericanAlone",
+        'Count_Person_Female_OtherRaces'
+    ]].sum(axis=1)
+
+    # dropping unwanted columns
+    df = df.drop(columns=[
+        'Count_Person_Male_OtherRaces', 'Count_Person_Female_OtherRaces'
+    ])
+
+    return df
+
+
+def process_sta_1970_1979(url):
+    '''
+    Function writes the output
+    dataframe generated to csv
+    and return column names.
+    '''
+    df = _process_state_1970_1979(url)
+    # writing the dataframe to output csv
+    df.to_csv("state_result_1970_1979.csv")
+    return df.columns

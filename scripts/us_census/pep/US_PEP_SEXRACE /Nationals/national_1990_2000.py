@@ -12,69 +12,116 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script Loads csv datasets
-from 1990-2000 on a National Level,
-cleans it and create a cleaned csv
+This script generate output CSV
+for national 1990-2000 and it is aggregated
+from state 1990-2000 file.
 '''
 
-import json
 import pandas as pd
 
-# Load the url in a variable
-URLS_JSON_PATH = "Nationals/national_1990_2000.json"
-URLS_JSON = None
-with open(URLS_JSON_PATH, encoding="UTF-8") as file:
-    URLS_JSON = json.load(file)
-url = URLS_JSON["url"]
 
-cols = [
-    'Series', 'Info', 'TP', 'TMP', 'TFP', 'WM', 'WF', 'BM', 'BF', 'AIM', 'AIF',
-    'APM', 'APF'
-]
+def _process_national_1990_2000(urls):
+    '''
+    Function Loads input txt datasets
+    from 1990-2000 on a National Level,
+    cleans it and return cleaned dataframe.
+    '''
+    final_df = pd.DataFrame()
+    for url in urls:
+        # reading the csv input file
+        df = pd.read_table(url,
+                           skiprows=15,
+                           header=None,
+                           delim_whitespace=True,
+                           index_col=False,
+                           engine='python')
 
-# reading the txt format input file, delimitng the columns by whitespace
-df = pd.read_table(url,
-                   index_col=False,
-                   delim_whitespace=True,
-                   engine='python',
-                   names=cols)
+        # NHWM = Non-Hispnic White Male, NHFM = Non-Hispnic White Female,
+        # NHBM = Non-Hispnic Black Male, NHFM = Non-Hispnic Black Female,
+        # NHAIANM = Non-Hispanic American Indian and Alaska Native Male,
+        # NHAIANF = Non-Hispanic American Indian and Alaska Native Female,
+        # NHAPIM = Non-Hispanic Asian and Pacific Islander Male,
+        # NHAPIF = Non-Hispanic Asian and Pacific Islander Female,
+        # HWM = Hispnic White Male, HFM = Hispnic White Female,
+        # HBM = Hispnic Black Male, HFM = Hispnic Black Female,
+        # HAIANM = Hispanic American Indian and Alaska Native Male,
+        # HAIANF = Hispanic American Indian and Alaska Native Female,
+        # HAPIM = Hispanic Asian and Pacific Islander Male,
+        # HAPIF = Hispanic Asian and Pacific Islander Female,
+        df.columns = [
+            'Year', 'geo_ID', 'Age', 'NHWM', 'NHWF', 'NHBM', 'NHBF', 'NHAIANM',
+            'NHAIANF', 'NHAPIM', 'NHAPIF', 'HWM', 'HWF', 'HBM', 'HBF', 'HAIANM',
+            'HAIANF', 'HAPIM', 'HAPIF'
+        ]
 
-df['Info'] = df['Info'].astype(str)
-mask = df['Info'].str.len() >= 6
-df = df.loc[mask]
+        # adding hispanic and non-hispanic columns to get total values
+        df['Count_Person_Male_WhiteAlone'] = df["NHWM"] + df["HWM"]
+        df['Count_Person_Female_WhiteAlone'] = df["NHWF"] + df["HWF"]
+        df['Count_Person_Male_BlackOrAfricanAmericanAlone'] = df["NHBM"] + df[
+            "HBM"]
+        df['Count_Person_Female_BlackOrAfricanAmericanAlone']\
+            =df["NHBF"]+df["HBF"]
+        df['Count_Person_Male_AmericanIndianAndAlaskaNativeAlone']\
+            =df["NHAIANM"]+df["HAIANM"]
+        df['Count_Person_Female_AmericanIndianAndAlaskaNativeAlone']\
+            =df["NHAIANF"]+df["HAIANF"]
+        df['Count_Person_Male_AsianOrPacificIslander'] = df["NHAPIM"] + df[
+            "HAPIM"]
+        df['Count_Person_Female_AsianOrPacificIslander']\
+            = df["NHAPIF"] + df["HAPIF"]
 
-# to get only july month estitmates of every year
-mask = df['Info'].str[0] == '7'
-df = df.loc[mask]
+        # dropping unwanted columns which are having origin
+        df.drop(columns=[
+            'Age', 'NHWM', 'NHWF', 'NHBM', 'NHBF', 'NHAIANM', 'NHAIANF',
+            'NHAPIM', 'NHAPIF', 'HWM', 'HWF', 'HBM', 'HBF', 'HAIANM', 'HAIANF',
+            'HAPIM', 'HAPIF'
+        ],
+                inplace=True)
 
-# to only get the row having total value of all the ages
-# which is present in "999" year in dataset
-mask = df['Info'].str[-3:] == '999'
-df = df.loc[mask]
+        # providing geoId to the dataframe
+        # and making the geoId of 2 digit as state
+        df['geo_ID'] = [f'{x:02}' for x in df['geo_ID']]
+        df['geo_ID'] = 'geoId/' + df['geo_ID']
 
-# Extracting year from column value
-df['Year'] = df['Info'].str[1:5]
+        # it groups the df as per columns provided
+        # performs the provided functions on the data
+        df = df.groupby(['Year', 'geo_ID']).agg('sum').reset_index()
 
-# dropping the unwanted columns
-df.drop(columns=['Series', 'Info', 'TP'], inplace=True)
+        # concatenating the value to final dataframe
+        final_df = pd.concat([final_df, df])
 
-# providing column names
-df.columns=["Count_Person_Male","Count_Person_Female",
-    "Count_Person_Male_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces",
-    "Count_Person_Female_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces",
-    "Count_Person_Male_BlackOrAfricanAmericanAlone"+\
-    "OrInCombinationWithOneOrMoreOtherRaces",
-    "Count_Person_Female_BlackOrAfricanAmericanAlone"+\
-    "OrInCombinationWithOneOrMoreOtherRaces",
-    "Count_Person_Male_AmericanIndianAndAlaskaNativeAlone"+\
-    "OrInCombinationWithOneOrMoreOtherRaces",
-    "Count_Person_Female_AmericanIndianAndAlaskaNativeAlone"+\
-    "OrInCombinationWithOneOrMoreOtherRaces",
-    "Count_Person_Male_AsianOrPacificIslander",
-    "Count_Person_Female_AsianOrPacificIslander","Year"]
+    final_df.drop(columns=['geo_ID'], inplace=True)
 
-# inserting geoId to the dataframe
-df.insert(1, 'geo_ID', 'country/USA', True)
+    final_df = final_df.groupby(['Year']).sum().reset_index()
+    # aggregating columns to get Count_Person_Male
+    final_df["Count_Person_Male"] = final_df.loc[:, [
+        'Count_Person_Male_WhiteAlone',
+        'Count_Person_Male_BlackOrAfricanAmericanAlone',
+        'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
+        'Count_Person_Male_AsianOrPacificIslander'
+    ]].sum(axis=1)
 
-# writing the dataframe to output csv
-df.to_csv("nationals_result_1990_2000.csv")
+    # aggregating columns to get Count_Person_Female
+    final_df["Count_Person_Female"] = final_df.loc[:, [
+        'Count_Person_Female_WhiteAlone',
+        'Count_Person_Female_BlackOrAfricanAmericanAlone',
+        'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
+        'Count_Person_Female_AsianOrPacificIslander'
+    ]].sum(axis=1)
+
+    # inserting geoid in columns
+    final_df.insert(0, 'geo_ID', 'country/USA', True)
+
+    return final_df
+
+
+def process_nat_1990_2000(urls):
+    '''
+    Function writes the output
+    dataframe generated to csv
+    and return column names.
+    '''
+    final_df = _process_national_1990_2000(urls)
+    # writing the dataframe to output csv
+    final_df.to_csv("nationals_result_1990_2000.csv")
+    return final_df.columns

@@ -12,79 +12,97 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script Loads csv datasets
-from 2000-2009 on a County Level,
-cleans it and create a cleaned csv
+This script generate output CSV
+for county 2000-2009 and the file
+is processed as is.
 '''
 
-import json
 import pandas as pd
 
-URLS_JSON_PATH = "County/county_2000_2009.json"
-URLS_JSON = None
-with open(URLS_JSON_PATH, encoding="UTF-8") as file:
-    URLS_JSON = json.load(file)
-url = URLS_JSON["url"]
 
-# reading the csv input file
-df = pd.read_csv(url)
+def _process_county_2000_2009(url):
+    '''
+    Function Loads input csv datasets
+    from 2000-2009 on a County Level,
+    cleans it and return cleaned dataframe.
+    '''
+    final_df = pd.DataFrame()
+    # 1 to 57 as state goes till 56
+    for i in range(1, 57):
 
-# years having 1 and 2 value are not requried as estimate is for April Month
-df = df.query("YEAR not in [1, 2]")
+        # states not available for these values
+        if i not in [3, 7, 14, 43, 52]:
+            j = f'{i:02}'
+            _url = url + str(j) + '.csv'
 
-# agegrp is only required as it gives total of all ages
-df = df.query("AGEGRP == 0")
+            # reading the input csv as dataframe
+            df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
 
-# providing geoId to the dataframe
-df.insert(1, 'geo_ID', 'geoId/', True)
-df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)\
-     + (df['COUNTY'].map(str)).str.zfill(3)
+            # years having 1 and 12 and 13 value are not requried
+            # as estimate is for April Month and 2010
+            df = df.query("YEAR not in [1, 12, 13]")
 
-# year value starting from 3-12 so need to convet it to 2000-2009
-df['YEAR'] = df['YEAR'] + 2000 - 3
+            # agegrp = 99 is only required as it gives total of all ages
+            df = df.query("AGEGRP == 99")
 
-# dropping unwanted column
-df = df.drop(columns=[
-    'SUMLEV', 'STNAME', 'CTYNAME', 'AGEGRP', 'COUNTY', 'TOT_POP', 'STATE',
-    'NH_MALE', 'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE', 'NHBA_MALE',
-    'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE', 'NHAA_FEMALE',
-    'NHNA_MALE', 'NHNA_FEMALE', 'NHTOM_MALE', 'NHTOM_FEMALE', 'NHWAC_MALE',
-    'NHWAC_FEMALE', 'NHBAC_MALE', 'NHBAC_FEMALE', 'NHIAC_MALE', 'NHIAC_FEMALE',
-    'NHAAC_MALE', 'NHAAC_FEMALE', 'NHNAC_MALE', 'NHNAC_FEMALE', 'H_MALE',
-    'H_FEMALE', 'HWA_MALE', 'HWA_FEMALE', 'HBA_MALE', 'HBA_FEMALE', 'HIA_MALE',
-    'HIA_FEMALE', 'HAA_MALE', 'HAA_FEMALE', 'HNA_MALE', 'HNA_FEMALE',
-    'HTOM_MALE', 'HTOM_FEMALE', 'HWAC_MALE', 'HWAC_FEMALE', 'HBAC_MALE',
-    'HBAC_FEMALE', 'HIAC_MALE', 'HIAC_FEMALE', 'HAAC_MALE', 'HAAC_FEMALE',
-    'HNAC_MALE', 'HNAC_FEMALE'
-])
+            # converting year value from 3-11 to 2000-2009 as per metadata
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('2', '2000')
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('3', '2001')
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('4', '2002')
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('5', '2003')
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('6', '2004')
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('7', '2005')
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('8', '2006')
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('9', '2007')
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('10', '2008')
+            df['YEAR'] = df['YEAR'].astype(str).str.replace('11', '2009')
 
-# providing proper column name
-df.columns=['geo_ID','Year','Count_Person_Male','Count_Person_Female',
-    'Count_Person_Male_WhiteAlone','Count_Person_Female_WhiteAlone',
-    'Count_Person_Male_BlackOrAfricanAmericanAlone',
-    'Count_Person_Female_BlackOrAfricanAmericanAlone',
-    'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
-    'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
-    'Count_Person_Male_AsianAlone','Count_Person_Female_AsianAlone',
-    'Count_Person_Male_NativeHawaiianAndOtherPacificIslanderAlone',
-    'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone',
-    'Count_Person_Male_TwoOrMoreRaces','Count_Person_Female_TwoOrMoreRaces',
-    'Count_Person_Male_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces',
-    'Count_Person_Female_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces',
-    'Count_Person_Male_BlackOrAfricanAmericanAlone'+\
-        'OrInCombinationWithOneOrMoreOtherRaces',
-    'Count_Person_Female_BlackOrAfricanAmericanAlone'+\
-        'OrInCombinationWithOneOrMoreOtherRaces',
-    'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone'+\
-        'OrInCombinationWithOneOrMoreOtherRaces',
-    'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone'+\
-        'OrInCombinationWithOneOrMoreOtherRaces',
-    'Count_Person_Male_AsianAloneOrInCombinationWithOneOrMoreOtherRaces',
-    'Count_Person_Female_AsianAloneOrInCombinationWithOneOrMoreOtherRaces',
-    'Count_Person_Male_NativeHawaiianAndOtherPacificIslanderAlone'+\
-        'OrInCombinationWithOneOrMoreOtherRaces',
-    'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
-        'OrInCombinationWithOneOrMoreOtherRaces']
+            # dropping unwanted columns
+            df = df.drop(columns=[
+                'SUMLEV', 'STNAME', 'CTYNAME', 'AGEGRP', 'TOT_POP', 'NH_MALE',
+                'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE', 'NHBA_MALE',
+                'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE',
+                'NHAA_FEMALE', 'NHNA_MALE', 'NHNA_FEMALE', 'NHTOM_MALE',
+                'NHTOM_FEMALE', 'H_MALE', 'H_FEMALE', 'HWA_MALE', 'HWA_FEMALE',
+                'HBA_MALE', 'HBA_FEMALE', 'HIA_MALE', 'HIA_FEMALE', 'HAA_MALE',
+                'HAA_FEMALE', 'HNA_MALE', 'HNA_FEMALE', 'HTOM_MALE',
+                'HTOM_FEMALE'
+            ])
 
-# writing the dataframe to output csv
-df.to_csv("county_result_2000_2009.csv")
+            # providing geoId to the dataframe
+            df.insert(1, 'geo_ID', 'geoId/', True)
+
+            # extracting geoid from state and county column
+            df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)\
+                + (df['COUNTY'].map(str)).str.zfill(3)
+
+            df.drop(columns=['STATE', 'COUNTY'], inplace=True)
+
+            # writing dataframe to final dataframe
+            final_df = pd.concat([final_df, df], ignore_index=True)
+
+    final_df.columns = [
+        'geo_ID', 'Year', 'Count_Person_Male', 'Count_Person_Female',
+        'Count_Person_Male_WhiteAlone', 'Count_Person_Female_WhiteAlone',
+        'Count_Person_Male_BlackOrAfricanAmericanAlone',
+        'Count_Person_Female_BlackOrAfricanAmericanAlone',
+        'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
+        'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
+        'Count_Person_Male_AsianAlone', 'Count_Person_Female_AsianAlone',
+        'Count_Person_Male_NativeHawaiianAndOtherPacificIslanderAlone',
+        'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone',
+        'Count_Person_Male_TwoOrMoreRaces', 'Count_Person_Female_TwoOrMoreRaces'
+    ]
+    return final_df
+
+
+def process_cou_2000_2009(url):
+    '''
+    Function writes the output
+    dataframe generated to csv
+    and return column names.
+    '''
+    final_df = _process_county_2000_2009(url)
+    # writing the output to final csv
+    final_df.to_csv("county_result_2000_2009.csv")
+    return final_df.columns

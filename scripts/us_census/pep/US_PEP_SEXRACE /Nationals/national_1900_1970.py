@@ -11,105 +11,116 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 '''
-This Python Script Loads each year csv datasets
-from 1900-1970 on a National Level,
-cleans it and create two cleaned csv
+This script generate output CSV
+for national 1900-1979 and the file
+is processed as is.
 '''
 
-import json
 import pandas as pd
 
-URLS_JSON_PATH = "Nationals/national_1900_1970.json"
-URLS_JSON = None
-with open(URLS_JSON_PATH, encoding="UTF-8") as file:
-    URLS_JSON = json.load(file)
-ip_files = URLS_JSON["ip_files"]
+def _process_national_1900_1970(ip_files):
+    '''
+    Function Loads input csv datasets
+    from 1900-1979 on a National Level,
+    cleans it and return cleaned dataframe.
+    '''
+    final_df = pd.DataFrame()
+    final_df2 = pd.DataFrame()
+    for file in ip_files:
 
-final_df = pd.DataFrame()
-final_df2 = pd.DataFrame()
+        filename = file
+        if ".csv" in filename:
+            # Extract year from the url
+            year = filename[-8:-4]
 
-for file in ip_files:
+            # comparing the year value as schema is chaning from 1959
+            if int(year) < 1960:
 
-    filename = file
-    if ".csv" in filename:
-        # Extract year from the url
-        year = filename[-8:-4]
+                # reading the csv format input file
+                # and converting it to a dataframe
+                df = pd.read_csv(file)
 
-        # comparing the year value as schema is chaning from 1959
-        if int(year) < 1960:
+                # providing proper column names
+                df.columns = [
+                    "Age", "All race total", "Count_Person_Male",
+                    "Count_Person_Female", "White Total",
+                    "Count_Person_Male_WhiteAlone",
+                    "Count_Person_Female_WhiteAlone", "Nonwhite Total",
+                    "Count_Person_Male_NonWhite", "Count_Person_Female_NonWhite"
+                ]
 
-            # reading the csv format input file and converting it to a dataframe
-            df = pd.read_csv(file)
+                # dropping the unwanted columns
+                df.drop(columns=[
+                    "Age", "All race total", "White Total", "Nonwhite Total"
+                ],inplace=True)
 
-            # providing proper column names
-            df.columns = [
-                "Age", "All race total", "Count_Person_Male",
-                "Count_Person_Female", "White Total",
-                "Count_Person_Male_WhiteAlone",
-                "Count_Person_Female_WhiteAlone", "Nonwhite Total",
-                "Count_Person_Male_NonWhite", "Count_Person_Female_NonWhite"
-            ]
+                # inserting year column to the dataframe
+                df.insert(loc=0, column='Year', value=year)
+                df = df.iloc[5:6, :]
 
-            # dropping the unwanted columns
-            df.drop(columns=[
-                "Age", "All race total", "White Total", "Nonwhite Total"
-            ],
-                    inplace=True)
+                # writing all the output to a dataframe
+                final_df = pd.concat([final_df, df], ignore_index=True)
+                final_df = final_df.sort_values('Year')
 
-            # inserting year column to the dataframe
-            df.insert(loc=0, column='Year', value=year)
-            df = df.iloc[5:6, :]
+            # for the years after 1960 as schema is changing
+            else:
+                # reading the csv format input file
+                # and converting it to a dataframe
+                df2 = pd.read_csv(file)
 
-            # writing all the output to a dataframe
-            final_df = pd.concat([final_df, df], ignore_index=True)
-            final_df = final_df.sort_values('Year')
+                # providing proper column names
+                df2.columns = [
+                    "Age", "All race total", "Count_Person_Male",
+                    "Count_Person_Female", "White Total",
+                    "Count_Person_Male_WhiteAlone",
+                    "Count_Person_Female_WhiteAlone", "Black Total",
+                    "Count_Person_Male_BlackOrAfricanAmericanAlone",
+                    "Count_Person_Female_BlackOrAfricanAmericanAlone",
+                    "Other Races Total", "Count_Person_Male_OtherRaces",
+                    "Count_Person_Female_OtherRaces"
+                ]
 
-        # for the years after 1960 as schema is changing
-        else:
-            # reading the csv format input file and converting it to a dataframe
-            df2 = pd.read_csv(file)
+                # dropping the unwanted columns
+                df2.drop(columns=[
+                    "Age", "All race total", "White Total", "Black Total",
+                    "Other Races Total", "Count_Person_Male_OtherRaces",
+                    "Count_Person_Female_OtherRaces"
+                ],inplace=True)
 
-            # providing proper column names
-            df2.columns = [
-                "Age", "All race total", "Count_Person_Male",
-                "Count_Person_Female", "White Total",
-                "Count_Person_Male_WhiteAlone",
-                "Count_Person_Female_WhiteAlone", "Black Total",
-                "Count_Person_Male_BlackOrAfricanAmericanAlone",
-                "Count_Person_Female_BlackOrAfricanAmericanAlone",
-                "Other Races Total", "Count_Person_Male_OtherRaces",
-                "Count_Person_Female_OtherRaces"
-            ]
+                # inserting year column
+                df2.insert(loc=0, column='Year', value=year)
+                df2 = df2.iloc[4:5, :]
 
-            # dropping the unwanted columns
-            df2.drop(columns=[
-                "Age", "All race total", "White Total", "Black Total",
-                "Other Races Total", "Count_Person_Male_OtherRaces",
-                "Count_Person_Female_OtherRaces"
-            ],
-                     inplace=True)
+                # writing all the output to a dataframe
+                final_df2 = pd.concat([df2, final_df2], ignore_index=True)
+                final_df2 = final_df2.sort_values('Year')
 
-            # inserting year column
-            df2.insert(loc=0, column='Year', value=year)
-            df2 = df2.iloc[4:5, :]
+    if final_df.shape[1] > 0:
+        # inseting geoId to the final dataframe
+        final_df.insert(1, 'geo_ID', 'country/USA', True)
+    if final_df2.shape[1] > 0:
+        final_df2.insert(1, 'geo_ID', 'country/USA', True)
 
-            # writing all the output to a dataframe
-            final_df2 = pd.concat([df2, final_df2], ignore_index=True)
-            final_df2 = final_df2.sort_values('Year')
+    # removing numerics thousand seperator from the row values
+    for col in final_df.columns:
+        final_df[col] = final_df[col].str.replace(",", "")
+    for col in final_df2.columns:
+        final_df2[col] = final_df2[col].str.replace(",", "")
+        if col not in ["Year", "geo_ID"]:
+            final_df2[col] = final_df2[col].astype("int")
 
-# inseting geoId to the final dataframe
-final_df.insert(1, 'geo_ID', 'country/USA', True)
-final_df2.insert(1, 'geo_ID', 'country/USA', True)
+    return final_df, final_df2
 
-# removing numerics thousand seperator from the row values
-for col in final_df.columns:
-    final_df[col] = final_df[col].str.replace(",", "")
-for col in final_df2.columns:
-    final_df2[col] = final_df2[col].str.replace(",", "")
-    if col not in ["Year", "geo_ID"]:
-        final_df2[col] = final_df2[col].astype("int")
-
-# writing final dataframe to output csv
-final_df.to_csv("nationals_result_1900_1959.csv", index=False)
-final_df2.to_csv("nationals_result_1960_1979.csv", index=False)
+def process_nat_1900_1970(ip_files):
+    '''
+    Function writes the output
+    dataframe generated to csv
+    and return column names.
+    '''
+    final_df, final_df2 = _process_national_1900_1970(ip_files)
+    # writing final dataframe to output csv
+    final_df.to_csv("nationals_result_1900_1959.csv", index=False)
+    final_df2.to_csv("nationals_result_1960_1979.csv", index=False)
+    return final_df.columns, final_df2.columns

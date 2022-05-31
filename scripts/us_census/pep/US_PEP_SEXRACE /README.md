@@ -65,9 +65,10 @@ Cleaned data will be inside [Output/postprocess.csv] as a CSV file with the foll
 
 
 ### Running Tests
-The below command will run preprocess_test.py `python3 -m unittest script/us_census/pep/population_estimates_by_sr/preprocess_test.py`
+The below command will run preprocess_test.py `python3 -m unittest script/us_census/pep/population_estimate_by_sr/preprocess_test.py`
 
 ### Import Procedure
-1. The below command will run preprocess.py `python script/us_census/pep/population_estimates_by_sr/preprocess.py`
+Run the following script order wise.
+1. The below command will run preprocess.py `python script/us_census/pep/population_estimate_by_sr/preprocess.py`
 
-2. The below command will run postprocess.py `python script/us_census/pep/population_estimates_by_sr/postprocess.py`
+2. The below command will run postprocess.py `python script/us_census/pep/population_estimate_by_sr/postprocess.py`

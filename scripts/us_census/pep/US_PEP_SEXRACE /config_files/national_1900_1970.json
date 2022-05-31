@@ -1,4 +1,4 @@
-{"ip_files":["https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1900.csv",
+{"urls":["https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1900.csv",
                 "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1901.csv",
                 "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1902.csv",
                 "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1903.csv",
@@ -70,6 +70,7 @@
                 "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1969.csv",
                 "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1970.csv",
                 "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1971.csv",
+                "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1972.csv",
                 "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1973.csv",
                 "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1974.csv",
                 "https://www2.census.gov/programs-surveys/popest/tables/1900-1980/national/asrh/pe-11-1975.csv",
