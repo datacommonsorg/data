@@ -5,6 +5,10 @@ into Data Commons. The study includes relative measures of risks from 18 hazards
 to the US at the county and tract level, as well as data on individual hazards
 and their estimated risk to those affected.
 
+Source data can be downloaded from this [download page](
+https://hazards.fema.gov/nri/Content/StaticDocuments/DataDownload//NRI_Table_CensusTracts/NRI_Table_CensusTracts.zip
+).
+
 # Instructions
 
 ## Generating Artifacts
@@ -14,11 +18,7 @@ To generate the schema and the TMCF for the import, run
 python3 generate_schema_and_tmcf.py
 ```
 
-Please download tract level data from the FEMA NRI website, and place the CSV
-under the `source_data` folder with the same name. [direct download link](
-https://hazards.fema.gov/nri/Content/StaticDocuments/DataDownload//NRI_Table_CensusTracts/NRI_Table_CensusTracts.zip
-)
-To clean the source data (in CSV format), run
+To clean the source data, run
 ```
 python3 process_data.py
 ```
@@ -59,4 +59,8 @@ run `sh/gen_test_golden.sh` while the current directory is `data/scripts/fema/nr
 
 `output` holds script outputs (the artifacts)
 
-`test_data` holds data files used for testing 
+`test_data` holds data files used for testing
+
+`sh` is for convenience scripts
+
+`util` is for common constants for Python scripts
