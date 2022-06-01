@@ -24,9 +24,9 @@ from absl import flags, app
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # for place_to_dcid
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))  # for place_to_dcid
 
-from place_to_dcid import PLACE_MAP
+from county_to_dcid import COUNTY_MAP
 
 default_input_path = os.path.join(
     _SCRIPT_PATH, "./data/Extracted_State-maps-for-asthma-prevalence.tsv")
@@ -105,7 +105,7 @@ def set_place_dcids(row: pd.Series) -> str:
         'Municipality', 'Census Area', 'County', 'Parish', 'Borough',
         'District', 'city'
     ]
-    counties_in_states = PLACE_MAP[row['Alpha2']]
+    counties_in_states = COUNTY_MAP[row['Alpha2']]
 
     county_name = row['Counties']
     county_name = county_name.replace('City and Borough', 'Borough')

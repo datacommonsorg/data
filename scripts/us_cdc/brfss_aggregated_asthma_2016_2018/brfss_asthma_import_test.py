@@ -36,8 +36,30 @@ class ProcessTest(unittest.TestCase):
         ## validate the csvs
         test_df = pd.read_csv(os.path.join(base_path, 'brfss_asthma.csv'))
         expected_df = pd.read_csv(
-            os.path.join(base_path, 'brfss_asthma_expected.txt'))
+            os.path.join(base_path, 'brfss_asthma_expected.csv'))
         assert_frame_equal(test_df, expected_df)
+
+        ## validate the statvar mcf
+        f = open(os.path.join(base_path, 'brfss_asthma.mcf'), 'r')
+        test_mcf = f.read()
+        f.close()
+
+        f = open(os.path.join(base_path, 'brfss_asthma_expected.mcf'), 'r')
+        expected_mcf = f.read()
+        f.close()
+
+        self.assertEqual(test_mcf, expected_mcf)
+        
+        ## validate the template mcf
+        f = open(os.path.join(base_path, 'brfss_asthma.tmcf'), 'r')
+        test_tmcf = f.read()
+        f.close()
+
+        f = open(os.path.join(base_path, 'brfss_asthma_expected.tmcf'), 'r')
+        expected_tmcf = f.read()
+        f.close()
+
+        self.assertEqual(test_tmcf, expected_tmcf)
 
         # clean up
         os.remove(os.path.join(base_path, 'brfss_asthma.csv'))

@@ -13,7 +13,7 @@ python3 brfss_asthma_import.py
 ```
 
 ### Notes
-1. The tabular data was extracted from the PDF using [tabula-online](http://tabula.ondata.it/pdf/527b9564edbbc6c929f17353c45a05288cc7df63). Since, we needed to draw bounding boxes for tables in each page
+1. The tabular data was extracted from the PDF using [tabula-online](http://tabula.ondata.it/). Since, the tables in the PDF are present in different regions of the pages, we need to draw separate bounding boxes around the tables in each page. This step is made easy in [tabula-online](http://tabula.ondata.it/).
 2. Once the tabular data was extracted we compared it with the source PDF file to ensure that there were no missing data points
 3. Some county names were incomplete, to resolve their names we find the names used in the [Power BI app](https://app.powerbigov.us/view?r=eyJrIjoiZmZmOWU2N2ItYzllZi00N2I4LWE1NGItYWMxNmU3MTJmYmY4IiwidCI6IjljZTcwODY5LTYwZGItNDRmZC1hYmU4LWQyNzY3MDc3ZmM4ZiJ9) from which the PDF was exported
 4. The statistical variables for this import are constant and are defined as a static string.
