@@ -347,6 +347,8 @@ def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Cleaned DataFrame
     """
     df = _load_df(file_path, "csv", header=0)
+    # Considering Month = 7(July) and Skipping Age:999(Total Age)
+    # Skipping Year: 2010
     df = df[(df["MONTH"] == 7) & (df["AGE"] != 999) &
             (df["YEAR"] != 2010)].reset_index(drop=True)
     cols = list(df.columns)
@@ -385,6 +387,7 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Cleaned DataFrame
     """
     df = _load_df(file_path, "csv", header=0)
+    # SKipping Sex: 0, Origin: 0 which represents Total Count
     df = df[(df["SEX"] != 0) & (df["ORIGIN"] != 0)].reset_index(drop=True)
 
     # Creating GeoId's for State FIPS Code
@@ -459,6 +462,7 @@ def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Cleaned DataFrame
     """
     df = _load_df(file_path, "csv", header=0)
+    # Considering Month = 7(July) and Skipping Age:999(Total Age)
     df = df[(df["AGE"] != 999) & (df["MONTH"] == 7)].reset_index(drop=True)
     cols_dict = _get_mapper_cols_dict("header_mappers")
     df.columns = df.columns.map(cols_dict)
@@ -508,6 +512,8 @@ def _process_state_1980_1989(file_path: str) -> str:
         end += 5
     df.columns = [0] + pop_cols
     # Creating GeoId's for State FIPS Code
+    # Sample df[0]: 06212
+    # df[0]: geoId(0,1)_Year(2)_Race(3)_Sex(4)
     df["Location"] = "geoId/" + df[0].str[:2]
     df["Year"] = "198" + df[0].str[2]
     df["Race"] = df[0].str[3]
@@ -532,8 +538,6 @@ def _process_state_1980_1989(file_path: str) -> str:
     derived_cols = _get_mapper_cols_dict("state_1980_1989")
     df = df[["Year", "Location", "SV"] + pop_cols]
     for dsv, sv in derived_cols.items():
-        if dsv != "WhiteAloneNotHispanicOrLatino_computed":
-            continue
         tmp_derived_cols_df = df[df["SV"].isin(sv)].reset_index(drop=True)
         tmp_derived_cols_df['SV'] = dsv
         tmp_derived_cols_df = tmp_derived_cols_df.groupby(
@@ -566,13 +570,24 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
     df = df[(df["STATE"] != 0)].reset_index(drop=True)
     df = df.reset_index()
     derived_cols_df = pd.DataFrame()
+    gender_dict = {0: "empty", 1: "Male", 2: "Female"}
+    origin_dict = {1: "NotHispanicOrLatino", 2: "HispanicOrLatino"}
+    race_dict = {
+        0: "empty",
+        1: "WhiteAlone",
+        2: "BlackOrAfricanAmericanAlone",
+        3: "AmericanIndianAndAlaskaNativeAlone",
+        4: "AsianAlone",
+        5: "NativeHawaiianAndOtherPacificIslanderAlone",
+        6: "TwoOrMoreRaces"
+    }
+    # Deriving New Columns
     for origin in [1, 2]:
         derived_cols_df = pd.concat([
             derived_cols_df, df[(df["ORIGIN"] == origin) & (df["SEX"] == 0) &
                                 (df["RACE"] == 0) & (df["AGEGRP"] != 0)]
         ],
                                     ignore_index=True)
-        # Deriving New Columns
         for sex in [0, 1, 2]:
             if sex == 0:
                 for race in [1, 2, 3, 4, 5, 6]:
@@ -592,18 +607,6 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
     df = df[(df["SEX"] != 0) & (df["RACE"] != 0) & (df["ORIGIN"] != 0) &
             (df["AGEGRP"] != 0)].reset_index(drop=True)
     df = pd.concat([df, derived_cols_df], ignore_index=True)
-
-    gender_dict = {0: "empty", 1: "Male", 2: "Female"}
-    origin_dict = {1: "NotHispanicOrLatino", 2: "HispanicOrLatino"}
-    race_dict = {
-        0: "empty",
-        1: "WhiteAlone",
-        2: "BlackOrAfricanAmericanAlone",
-        3: "AmericanIndianAndAlaskaNativeAlone",
-        4: "AsianAlone",
-        5: "NativeHawaiianAndOtherPacificIslanderAlone",
-        6: "TwoOrMoreRaces"
-    }
     df["RACE"] = df["RACE"].map(race_dict)
     df["ORIGIN"] = df["ORIGIN"].map(origin_dict)
     df["SEX"] = df["SEX"].map(gender_dict)
@@ -700,6 +703,8 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
         '11': "Male_HispanicOrLatino",
         '12': "Female_HispanicOrLatino"
     }
+    # Removing SV's from 5 to 10 as they are not part of origin
+    # HispanicOrlatino (or) NotHispanicOrLatino
     df = df[~df["SV"].isin(["5", "6", "7", "8", "9", "10"])].reset_index(
         drop=True)
     skipped_df = skipped_df[~skipped_df["SV"].
@@ -743,6 +748,10 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Cleaned DataFrame
     """
     df = _load_df(file_path, "csv", header=0, encoding="latin-1")
+    # Skipping Below Year Values
+    # 1 = 4/1/2000 resident population estimates base
+    # 12 = 4/1/2010 resident 2010 Census population
+    # 13 = 7/1/2010 resident population estimate
     df = df[(~df["YEAR"].isin([1, 12, 13])) &
             (df["AGEGRP"] != 99)].reset_index(drop=True)
     df["YEAR"] = 1998 + df["YEAR"]
