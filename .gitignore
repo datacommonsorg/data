@@ -16,5 +16,5 @@ scripts/us_epa/superfund/**/output
 **/tmp/
 scripts/**
 !scripts/rff
-scripts/rff/raw_data/prism/daily/**/**/heatwave
+scripts/rff/raw_data/prism/daily/**/**/heatwave/**
 scripts/rff/raw_data/prism/daily/4km/src/**
