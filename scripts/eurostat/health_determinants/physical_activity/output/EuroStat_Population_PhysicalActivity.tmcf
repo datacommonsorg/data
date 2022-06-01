@@ -1,0 +1,7 @@
+Node: E:EuroStat_Population_PhysicalActivity->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:EuroStat_Population_PhysicalActivity->SV
+measurementMethod: C:EuroStat_Population_PhysicalActivity->Measurement_Method
+observationAbout: C:EuroStat_Population_PhysicalActivity->geo
+observationDate: C:EuroStat_Population_PhysicalActivity->time
+value: C:EuroStat_Population_PhysicalActivity->observation 
