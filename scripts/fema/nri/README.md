@@ -36,30 +36,19 @@ prepared to be imported
 
 ## Linting
 
-Code was linted with [yapf](https://github.com/google/yapf/), as recommended by
-the [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md).
-
-To lint all Python files in this directory, run:
-```
-sh/lint.sh
-```
-
-
-The underlying command to lint a file called `some_file.py` in-place (applying 
-modifications to it) is the following:
-```
-yapf some_file.py --style='{based_on_style: yapf, indent_width=4}' -i
-```
+Follow instructions in the root of the repo, namely, run `./run_tests.sh -f`
+in the base of the repo.
 
 ## Running Tests
 
-To run tests, execute
-
+Follow instructions in the root of the repo, namely, run 
 ```
-sh/tests.sh
+./run_tests.sh -p scripts/fema/nri`
 ```
+in the base of the repo.
 
-To replace the test goldens under `test_data` with the format `expected_test_*`, run `sh/gen_test_golden.sh`
+To replace the test goldens under `test_data` with the format `expected_test_*`,
+run `sh/gen_test_golden.sh` while the current directory is `data/scripts/fema/nri`
  
 # Folder Structure
 

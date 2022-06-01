@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import logging
 
-from util.constants import IGNORED_FIELDS
+from .util.constants import IGNORED_FIELDS
 
 # i/o filenames
 NRI_DATADICTIONARY_INFILE_FILENAME = "source_data/NRIDataDictionary.csv"
@@ -146,11 +146,10 @@ def tmcf_from_row(row, index, statvar_dcid, unit):
 
     # as of 2022-05-23, the "Version" field for all data is "November 2021"
     # "Field Name" in the data dictionary holds the name of the column in the data CSV
-    tmcf = TMCF_FORMAT.format(
-        index=index,
-        statvar_dcid=statvar_dcid,
-        obs_date=row["Version ISO8601"],
-        field_name=row["Field Name"])
+    tmcf = TMCF_FORMAT.format(index=index,
+                              statvar_dcid=statvar_dcid,
+                              obs_date=row["Version ISO8601"],
+                              field_name=row["Field Name"])
 
     if unit is not None and unit:
         tmcf += f"unit: {unit}\n"
@@ -298,11 +297,12 @@ def format_composite_field_properties_to_schema(properties):
     else:
         dcid = f"{capitalize_first(measured_property)}_NaturalHazardImpact"
 
-    statvar_name = format_human_readable_name_from_properties(
-        properties, is_composite=True)
+    statvar_name = format_human_readable_name_from_properties(properties,
+                                                              is_composite=True)
 
-    formatted = COMPOSITE_MCF_FORMAT.format(
-        node_dcid=dcid, m_prop=measured_property, statvar_name=statvar_name)
+    formatted = COMPOSITE_MCF_FORMAT.format(node_dcid=dcid,
+                                            m_prop=measured_property,
+                                            statvar_name=statvar_name)
 
     if measured_property == "expectedLoss":
         formatted += "measurementQualifier: dcid:Annual\n"

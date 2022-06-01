@@ -2,7 +2,7 @@ import filecmp
 import os
 import tempfile
 import unittest
-import generate_schema_and_tmcf
+from .generate_schema_and_tmcf import generate_schema_and_tmcf_from_file
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -48,7 +48,7 @@ class ProcessFemaNriFileTest(unittest.TestCase):
 
     def test_main(self):
         assertion = check_function_on_file_gives_goldens(
-            fn=generate_schema_and_tmcf.generate_schema_and_tmcf_from_file,
+            fn=generate_schema_and_tmcf_from_file,
             inp_f="test_data/test_data_dictionary.csv",
             golden_f_1="test_data/expected_data_schema.mcf",
             golden_f_2="test_data/expected_data_tmcf.mcf")
