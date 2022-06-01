@@ -45,6 +45,12 @@ run the following:
 yapf some_file.py --style='{based_on_style: yapf, indent_width=4}' -i
 ```
 
+## Running Tests
+
+To run tests, execute
+
+`sh/tests.sh`
+ 
 # Folder Structure
 
 `source_data` holds original files downloaded from
@@ -54,3 +60,4 @@ yapf some_file.py --style='{based_on_style: yapf, indent_width=4}' -i
 
 `output` holds script outputs (the artifacts)
 
+`test_data` holds data files used for testing 
