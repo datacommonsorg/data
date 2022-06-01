@@ -28,6 +28,7 @@ class FormatGeoIDTest(unittest.TestCase):
             process_data.fips_to_geoid({"TRACTFIPS": "11001001002"}),
             "geoId/11001001002")
 
+
 def check_function_on_file_gives_golden(fn, inp_f, golden_f):
     """
     Given a function fn that takes an input file location inp_f and an output
@@ -41,7 +42,7 @@ def check_function_on_file_gives_golden(fn, inp_f, golden_f):
     with tempfile.TemporaryDirectory() as tmp_dir:
         test_csv_file = os.path.join(module_dir_, inp_f)
         result_csv_file = os.path.join(tmp_dir, "temp_test_output.tmp")
-        expected_csv_file = os.path.join(module_dir_,golden_f)
+        expected_csv_file = os.path.join(module_dir_, golden_f)
         process_data.process_csv(test_csv_file, result_csv_file)
 
         with open(result_csv_file, "r") as result_f:
@@ -50,22 +51,23 @@ def check_function_on_file_gives_golden(fn, inp_f, golden_f):
                 expect_str: str = expect_f.read()
                 return result_str == expect_str
 
+
 class ProcessFemaNriFileTest(unittest.TestCase):
+
     def test_process_county_file(self):
         assertion = check_function_on_file_gives_golden(
-                fn = process_data.process_csv,
-                inp_f = "test_data/test_data_county.csv",
-                golden_f = "test_data/expected_data_county.csv" 
-                )
+            fn=process_data.process_csv,
+            inp_f="test_data/test_data_county.csv",
+            golden_f="test_data/expected_data_county.csv")
         self.assertTrue(assertion)
 
     def test_process_tract_file(self):
         assertion = check_function_on_file_gives_golden(
-                fn = process_data.process_csv,
-                inp_f = "test_data/test_data_tract.csv",
-                golden_f = "test_data/expected_data_tract.csv" 
-                )
+            fn=process_data.process_csv,
+            inp_f="test_data/test_data_tract.csv",
+            golden_f="test_data/expected_data_tract.csv")
         self.assertTrue(assertion)
+
 
 if __name__ == "__main__":
     unittest.main()

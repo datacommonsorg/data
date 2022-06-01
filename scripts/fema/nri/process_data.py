@@ -37,6 +37,7 @@ def fips_to_geoid(row):
 
     return "geoId/" + str(row[field]).zfill(length)
 
+
 def process_csv(input_path, output_path):
     data_table = pd.read_csv(input_path)
 
@@ -49,6 +50,7 @@ def process_csv(input_path, output_path):
     data_table = data_table.fillna(0)
 
     data_table.to_csv(output_path)
+
 
 if __name__ == "__main__":
     for input_path in INPUT_TO_OUTPUT_PATHS:

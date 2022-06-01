@@ -24,13 +24,11 @@ def check_function_on_file_gives_goldens(fn, inp_f, golden_f_1, golden_f_2):
         result_csv_file_1 = os.path.join(tmp_dir, "temp_test_output1.tmp")
         result_csv_file_2 = os.path.join(tmp_dir, "temp_test_output2.tmp")
 
-        expected_csv_file_1 = os.path.join(module_dir_,golden_f_1)
-        expected_csv_file_2 = os.path.join(module_dir_,golden_f_2)
+        expected_csv_file_1 = os.path.join(module_dir_, golden_f_1)
+        expected_csv_file_2 = os.path.join(module_dir_, golden_f_2)
 
-        tuples_to_test = [
-            (result_csv_file_1, expected_csv_file_1),
-            (result_csv_file_2, expected_csv_file_2)
-        ]
+        tuples_to_test = [(result_csv_file_1, expected_csv_file_1),
+                          (result_csv_file_2, expected_csv_file_2)]
 
         fn(test_csv_file, result_csv_file_1, result_csv_file_2)
 
@@ -45,14 +43,17 @@ def check_function_on_file_gives_goldens(fn, inp_f, golden_f_1, golden_f_2):
 
         return check_is_good
 
+
 class ProcessFemaNriFileTest(unittest.TestCase):
+
     def test_main(self):
         assertion = check_function_on_file_gives_goldens(
-            fn = generate_schema_and_tmcf.generate_schema_and_tmcf_from_file,
-            inp_f = "test_data/test_data_dictionary.csv",
-            golden_f_1 = "test_data/expected_data_schema.mcf",
-            golden_f_2 = "test_data/expected_data_tmcf.mcf")
+            fn=generate_schema_and_tmcf.generate_schema_and_tmcf_from_file,
+            inp_f="test_data/test_data_dictionary.csv",
+            golden_f_1="test_data/expected_data_schema.mcf",
+            golden_f_2="test_data/expected_data_tmcf.mcf")
         self.assertTrue(assertion)
+
 
 if __name__ == "__main__":
     unittest.main()
