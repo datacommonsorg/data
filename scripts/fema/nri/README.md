@@ -56,6 +56,8 @@ yapf some_file.py --style='{based_on_style: yapf, indent_width=4}' -i
 To run tests, execute
 
 `sh/tests.sh`
+
+To replace the test goldens under `test_data` with the format `expected_test_*`, run `sh/gen_test_golden.sh`
  
 # Folder Structure
 

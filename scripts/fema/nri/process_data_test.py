@@ -28,8 +28,22 @@ class FormatGeoIDTest(unittest.TestCase):
             process_data.fips_to_geoid({"TRACTFIPS": "11001001002"}),
             "geoId/11001001002")
 
+class ProcessFemaNriFileTest(unittest.TestCase):
+    def test_process_county_file(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            test_csv_file = os.path.join(module_dir_,
+                                         'test_data/test_data_county.csv')
+            result_csv_file = os.path.join(tmp_dir, 'output/nri_counties_table.csv')
+            expected_csv_file = os.path.join(
+                module_dir_, 'test_data/expected_data_county.csv')
+            process_data.process_csv(test_csv_file, result_csv_file)
 
-# class ProcessFemaNriFileTest(unittest.TestCase):
+            with open(result_csv_file, "r") as result_f:
+                result_str: str = result_f.read()
+                with open(expected_csv_file, "r") as expect_f:
+                    expect_str: str = expect_f.read()
+                    self.assertEqual(result_str, expect_str)
+
 #     def test_clean_crime_file(self):
 #         with tempfile.TemporaryDirectory() as tmp_dir:
 #             test_csv_file = os.path.join(module_dir_,
