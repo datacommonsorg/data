@@ -22,8 +22,8 @@ gdcStatVars_to_csvColName = {
 }
 
 
-## Returns dict mapping GDC-Stat-Names to the 
-##  Scorresponding column-name as stored in local csv's
+## Returns dict mapping GDC-Stat-Names to the
+##  corresponding column-name as stored in local csv's
 def get_stat_labels(climate_var):
     basic_stats = ["StandardDeviation", "Skewness", "Kurtosis"]
     suffixes = {
@@ -64,7 +64,7 @@ def main(src_fldr, output_csv):
         writer.writeheader()
         for interval_type in time_interval_types:
             for climate_var in ["ppt", "tmin", "tmax"]:
-                ## file-path ex: 
+                ## file-path ex:
                 # "./data/prism/daily/county/agg_yearly/ppt/stats/2021.csv"
                 path = f"{src_fldr}/{interval_type}/{climate_var}/stats"
                 ## County-level stats for each monthly/yearly/5-yearly interval
