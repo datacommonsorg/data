@@ -1,4 +1,3 @@
-
 Node: E:WeatherVariability_Counties->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:GeoId
