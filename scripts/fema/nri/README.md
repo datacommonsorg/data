@@ -39,7 +39,7 @@ prepared to be imported
 Code was linted with [yapf](https://github.com/google/yapf/), as recommended by
 the [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md).
 
-To lint all Python files in this directorye, run:
+To lint all Python files in this directory, run:
 ```
 sh/lint.sh
 ```
@@ -55,7 +55,9 @@ yapf some_file.py --style='{based_on_style: yapf, indent_width=4}' -i
 
 To run tests, execute
 
-`sh/tests.sh`
+```
+sh/tests.sh
+```
 
 To replace the test goldens under `test_data` with the format `expected_test_*`, run `sh/gen_test_golden.sh`
  
