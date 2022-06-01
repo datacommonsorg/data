@@ -413,7 +413,15 @@ def format_ind_hazard_field_properties_to_schema(properties):
     return formatted, dcid
 
 
-if __name__ == "__main__":
+def generate_schema_and_tmcf_from_file(input_data_dictionary, output_schema,
+                                       output_tmcf):
+    """
+    Given the NRI data dictionary in location input_data_dictionary (path as string),
+    generates the corresponding StatVar MCF Schema and TMCF for the import.
+
+    Writes the StatVars to path given as a string by the argument output_schema
+    Writes the TMCF to path given as a string by the argument output_schema
+    """
     # if field alias includes any of these strings, we skip that row from the
     # schema and TMCF generation
     field_alias_strings_to_skip = []
@@ -428,7 +436,7 @@ if __name__ == "__main__":
         field_alias_strings_to_skip.extend(RAW_VALUE_COMPONENTS)
 
     # load the dataset and drop the ignored fields
-    dd = pd.read_csv(NRI_DATADICTIONARY_INFILE_FILENAME)
+    dd = pd.read_csv(input_data_dictionary)
 
     logging.info(
         f"[info] ignoring {len(IGNORED_FIELDS)} fields in NRIDataDictionary")
@@ -476,10 +484,17 @@ if __name__ == "__main__":
     tmcf_out = "".join(tmcfs)
 
     # write out the results
-    with open(SCHEMA_OUTFILE_FILENAME, "w") as outfile:
+    with open(output_schema, "w") as outfile:
         logging.info(f"Writing StatVar MCF to {SCHEMA_OUTFILE_FILENAME}")
         outfile.write(schema_out)
 
-    with open(TMCF_OUTFILE_FILENAME, "w") as outfile:
+    with open(output_tmcf, "w") as outfile:
         logging.info(f"Writing County TMCF to {TMCF_OUTFILE_FILENAME}")
         outfile.write(tmcf_out)
+
+
+if __name__ == "__main__":
+    generate_schema_and_tmcf_from_file(
+        input_data_dictionary=NRI_DATADICTIONARY_INFILE_FILENAME,
+        output_schema=SCHEMA_OUTFILE_FILENAME,
+        output_tmcf=TMCF_OUTFILE_FILENAME)

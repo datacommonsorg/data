@@ -1,1 +1,2 @@
 python3 process_data_test.py
+python3 generate_schema_and_tmcf_test.py
