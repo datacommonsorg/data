@@ -49,7 +49,7 @@ class ProcessTest(unittest.TestCase):
         f.close()
 
         self.assertEqual(test_mcf, expected_mcf)
-        
+
         ## validate the template mcf
         f = open(os.path.join(base_path, 'brfss_asthma.tmcf'), 'r')
         test_tmcf = f.read()

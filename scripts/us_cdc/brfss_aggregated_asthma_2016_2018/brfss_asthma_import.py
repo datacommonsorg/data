@@ -24,7 +24,8 @@ from absl import flags, app
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))  # for place_to_dcid
+sys.path.append(os.path.join(_SCRIPT_PATH,
+                             '../../../util/'))  # for place_to_dcid
 
 from county_to_dcid import COUNTY_MAP
 
