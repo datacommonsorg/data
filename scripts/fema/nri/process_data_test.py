@@ -1,4 +1,4 @@
-i1mport filecmp
+import filecmp
 import os
 import tempfile
 import unittest
