@@ -43,7 +43,7 @@ in the base of the repo.
 
 Follow instructions in the root of the repo, namely, run 
 ```
-./run_tests.sh -p scripts/fema/nri`
+./run_tests.sh -p scripts/fema/nri
 ```
 in the base of the repo.
 
