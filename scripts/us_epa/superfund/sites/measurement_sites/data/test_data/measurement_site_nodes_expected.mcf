@@ -1,0 +1,12 @@
+
+Node: dcid:epaSuperfundMeasurementSite/OKD980629844/Picher_5-MW
+name: "Picher #5 - MW"
+typeOf: dcs:SuperfundMeasurementSite
+containedInPlace: epaSuperfundSiteId/OKD980629844
+location: [latLong 36.96544 -94.830952]
+
+Node: dcid:epaSuperfundMeasurementSite/OKD980629844/Quapaw_4
+name: "Quapaw#4"
+typeOf: dcs:SuperfundMeasurementSite
+containedInPlace: epaSuperfundSiteId/OKD980629844
+location: [latLong 36.94244 -94.787671]
