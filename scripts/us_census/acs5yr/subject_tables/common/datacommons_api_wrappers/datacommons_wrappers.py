@@ -20,7 +20,6 @@ import copy
 import json
 import logging
 import os
-import sys
 from absl import app
 from absl import flags
 from sys import path
