@@ -2,9 +2,11 @@ import pandas as pd
 import numpy as np
 
 INPUT_TO_OUTPUT_PATHS = {
-    "source_data/NRI_Table_Counties.csv":"output/nri_counties_table.csv",
-    "source_data/NRI_Table_CensusTracts.csv":"output/nri_tracts_table.csv",
+    "source_data/NRI_Table_Counties.csv": "output/nri_counties_table.csv",
+    "source_data/NRI_Table_CensusTracts.csv": "output/nri_tracts_table.csv",
 }
+
+
 def fips_to_geoid(row):
     """
     Given a row of CSV data from the FEMA NRI source table, calculated the GeoID of the place
@@ -24,24 +26,26 @@ def fips_to_geoid(row):
     # The correct GeoId would be 06001
     # However, the FEMA study puts this down at 6001 in the STCOFIPS field
 
-    # tract FIPS are of length 11 
+    # tract FIPS are of length 11
 
     if "TRACTFIPS" in row:
         field = "TRACTFIPS"
         length = 11
-    else: # this is a county row
+    else:  # this is a county row
         field = "STCOFIPS"
         length = 5
 
     return "geoId/" + str(row[field]).zfill(length)
+
+
 if __name__ == "__main__":
     for input_path in INPUT_TO_OUTPUT_PATHS:
         data_table = pd.read_csv(input_path)
         output_path = INPUT_TO_OUTPUT_PATHS[input_path]
 
-        # the TMCF generated in generate_schema_and_tmcf.py expect to find the 
+        # the TMCF generated in generate_schema_and_tmcf.py expect to find the
         # geoID in the field "DCID_GeoID"
-        data_table["DCID_GeoID"] = data_table.apply(fips_to_geoid, axis = 1)
+        data_table["DCID_GeoID"] = data_table.apply(fips_to_geoid, axis=1)
 
         # we want to replace empty cells with 0s so that the import tool does not
         # have to assume what this is about [citation needed (snny)]

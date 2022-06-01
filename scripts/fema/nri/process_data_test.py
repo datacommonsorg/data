@@ -7,15 +7,27 @@ import process_data
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 
+
 class FormatGeoIDTest(unittest.TestCase):
+
     def test_county_missing_trailing_zero(self):
-        self.assertEqual(process_data.fips_to_geoid({"STCOFIPS":"6001"}), "geoId/06001")
+        self.assertEqual(
+            process_data.fips_to_geoid({"STCOFIPS": "6001"}), "geoId/06001")
+
     def test_county_no_change_needed(self):
-        self.assertEqual(process_data.fips_to_geoid({"STCOFIPS":"11001"}), "geoId/11001")
+        self.assertEqual(
+            process_data.fips_to_geoid({"STCOFIPS": "11001"}), "geoId/11001")
+
     def test_tract_missing_trailing_zero(self):
-        self.assertEqual(process_data.fips_to_geoid({"TRACTFIPS":"6001400100"}), "geoId/06001400100")
+        self.assertEqual(
+            process_data.fips_to_geoid({"TRACTFIPS": "6001400100"}),
+            "geoId/06001400100")
+
     def test_tract_no_change_needed(self):
-        self.assertEqual(process_data.fips_to_geoid({"TRACTFIPS":"11001001002"}), "geoId/11001001002")
+        self.assertEqual(
+            process_data.fips_to_geoid({"TRACTFIPS": "11001001002"}),
+            "geoId/11001001002")
+
 
 # class ProcessFemaNriFileTest(unittest.TestCase):
 #     def test_clean_crime_file(self):
@@ -26,15 +38,15 @@ class FormatGeoIDTest(unittest.TestCase):
 #             expected_csv_file = os.path.join(
 #                 module_dir_, 'test_data/expected_city_crime.csv')
 #             create_formatted_csv_file([test_csv_file], result_csv_file)
-# 
+#
 #             with open(result_csv_file, "r") as result_f:
 #                 result_str: str = result_f.read()
 #                 with open(expected_csv_file, "r") as expect_f:
 #                     expect_str: str = expect_f.read()
 #                     self.assertEqual(result_str, expect_str)
-# 
+#
 #             # os.remove(result_csv_file)
-# 
+#
 #     def test_calculate_crimes(self):
 #         crime = {
 #             'Year': 2019,
@@ -75,23 +87,22 @@ class FormatGeoIDTest(unittest.TestCase):
 #                 'Total': 472,
 #                 'Geocode': '5556375'
 #             })
-# 
+#
 #     def test_create_tmcf(self):
 #         with tempfile.TemporaryDirectory() as tmp_dir:
 #             expected_tmcf_file = os.path.join(
 #                 module_dir_, 'test_data/expected_fbi_crime.tmcf')
 #             result_tmcf_file = os.path.join(tmp_dir, 'FBI_crime.tmcf')
-# 
+#
 #             create_tmcf_file(result_tmcf_file)
-# 
+#
 #             with open(result_tmcf_file, "r") as result_f:
 #                 result_str: str = result_f.read()
 #                 with open(expected_tmcf_file, "r") as expect_f:
 #                     expect_str: str = expect_f.read()
 #                     self.assertEqual(result_str, expect_str)
-# 
+#
 #             os.remove(result_tmcf_file)
-
 
 if __name__ == '__main__':
     unittest.main()

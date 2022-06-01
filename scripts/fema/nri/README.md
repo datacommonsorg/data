@@ -39,8 +39,14 @@ prepared to be imported
 Code was linted with [yapf](https://github.com/google/yapf/), as recommended by
 the [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md).
 
-To lint a file called `some_file.py` in-place (applying modifications to it),
-run the following:
+To lint all Python files in this directorye, run:
+```
+sh/lint.sh
+```
+
+
+The underlying command to lint a file called `some_file.py` in-place (applying 
+modifications to it) is the following:
 ```
 yapf some_file.py --style='{based_on_style: yapf, indent_width=4}' -i
 ```

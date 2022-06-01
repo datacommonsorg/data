@@ -33,7 +33,9 @@ EAL_COMPONENTS = [
     "Exposure"
 ]
 IMPACTED_THING_COMPONENTS = ["Building", "Population", "Agriculture"]
-RAW_VALUE_COMPONENTS = ["Social Vulnerability - Value", "Community Resilience - Value"]
+RAW_VALUE_COMPONENTS = [
+    "Social Vulnerability - Value", "Community Resilience - Value"
+]
 NON_SCORE_RELATIVE_MEASURES = ["Rating", "Percentile"]
 
 # template strings
@@ -240,6 +242,7 @@ def extract_properties_from_composite_row(row):
 
     return {"measured_property": measured_property, "unit": unit}
 
+
 def add_spaces_before_capital_letters(text):
     """
     Given a string, inserts a space before each uppercase character, and then removes any
@@ -247,7 +250,10 @@ def add_spaces_before_capital_letters(text):
 
     Returns the new string.
     """
-    return "".join([" " + char if char.isupper() else char.strip() for char in text]).strip()
+    return "".join([
+        " " + char if char.isupper() else char.strip() for char in text
+    ]).strip()
+
 
 def format_human_readable_name_from_properties(properties, is_composite):
     """
@@ -258,22 +264,24 @@ def format_human_readable_name_from_properties(properties, is_composite):
     """
     measured_property = properties["measured_property"]
 
-
     if measured_property == "expectedLoss":
         statvar_name = f"Annual Expected Loss from Natural Hazard Impact"
     elif measured_property == "femaNaturalHazardRiskIndex":
         statvar_name = f"FEMA National Risk Index for Natural Hazard Impact"
-    else: # community resilience, social vulnerability
-        m_prop_with_spaces = add_spaces_before_capital_letters(measured_property)
+    else:  # community resilience, social vulnerability
+        m_prop_with_spaces = add_spaces_before_capital_letters(
+            measured_property)
         m_prop_without_fema = " ".join(m_prop_with_spaces.split(" ")[1:])
         statvar_name = f"FEMA {m_prop_without_fema} to Natural Hazard Impact"
 
     if not is_composite:
-        hazard_type_with_spaces = add_spaces_before_capital_letters(properties["hazard_type"])
+        hazard_type_with_spaces = add_spaces_before_capital_letters(
+            properties["hazard_type"])
         hazard_type_no_event = " ".join(hazard_type_with_spaces.split(" ")[:-1])
         statvar_name += f": {hazard_type_no_event}"
 
     return statvar_name
+
 
 def format_composite_field_properties_to_schema(properties):
     """
@@ -289,11 +297,12 @@ def format_composite_field_properties_to_schema(properties):
         dcid = f"Annual_{capitalize_first(measured_property)}_NaturalHazardImpact"
     else:
         dcid = f"{capitalize_first(measured_property)}_NaturalHazardImpact"
-    
-    statvar_name = format_human_readable_name_from_properties(properties, is_composite = True)
+
+    statvar_name = format_human_readable_name_from_properties(
+        properties, is_composite=True)
 
     formatted = COMPOSITE_MCF_FORMAT.format(
-        node_dcid=dcid, m_prop=measured_property, statvar_name = statvar_name)
+        node_dcid=dcid, m_prop=measured_property, statvar_name=statvar_name)
 
     if measured_property == "expectedLoss":
         formatted += "measurementQualifier: dcid:Annual\n"
@@ -386,14 +395,14 @@ def format_ind_hazard_field_properties_to_schema(properties):
     # join the rest with underscores to obtain the final dcid
     dcid = "_".join(dcid_list)
 
-    statvar_name = format_human_readable_name_from_properties(properties, is_composite = False)
+    statvar_name = format_human_readable_name_from_properties(
+        properties, is_composite=False)
 
     formatted = HAZARD_MCF_FORMAT_BASE.format(
         node_dcid=dcid,
         haz_type=hazard_type,
         m_prop=drop_spaces(measured_property),
-        statvar_name = statvar_name
-    )
+        statvar_name=statvar_name)
 
     if impacted_thing:
         formatted += f"impactedThing: dcid:{impacted_thing}\n"
@@ -447,7 +456,7 @@ if __name__ == "__main__":
 
     schemas = []
     tmcfs = []
-    
+
     for index in range(len(extracted_properties)):
         properties = extracted_properties[index]
         statvar_mcf, statobs_tmcf = schema_and_tmcf_from_properties(
