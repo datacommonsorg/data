@@ -14,7 +14,7 @@
 '''
 This Python Script is
 for National Level Data
-1960-1979
+1960-1979.
 '''
 import os
 import pandas as pd
@@ -24,8 +24,9 @@ def national1960():
     '''
     This Python Script Loads csv datasets
     from 1960-1979 on a National Level,
-    cleans it and create a cleaned csv
+    cleans it and create a cleaned csv.
     '''
+    # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     for i in range(60, 80):
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
@@ -33,22 +34,22 @@ def national1960():
 
         # 0-All races total,1-All races male,2-All races female,3-White total,
         # 4-White male,5-White female,6-Black total,7-Black male,8-Black female,
-        # 9-Other races total,10-Other races male,11-Other races female
+        # 9-Other races total,10-Other races male,11-Other races female.
         cols = [
             'Age', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'
         ]
-        # reading the csv format input file and converting it to a dataframe
-        # skipping unwanted rows from top and bottom
+        # Reading the csv format input file and converting it to a dataframe.
+        # Skipping unwanted rows from top and bottom.
         df = pd.read_csv(url,names=cols,engine='python',skiprows=8,\
             skipfooter=15)
         df['Age'] = df['Age'].astype(str)
         df['Age'] = df['Age'].str.replace("85\\+", "85OrMore")
         df['Age'] = df['Age'] + 'Years'
-        # dropping unwanted columns
+        # Dropping unwanted columns.
         df.drop(columns=['0', '9', '10', '11'], inplace=True)
-        # melt funtion used to change the Data frame format from wide to long
+        # Melt funtion used to change the Data frame format from wide to long.
         df = df.melt(id_vars=['Age'], var_name='sv', value_name='observation')
-        # providing proper column names
+        # Providing proper column names.
         _dict = {
             '1': 'Male',
             '2': 'Female',
@@ -61,18 +62,18 @@ def national1960():
         }
         df = df.replace({'sv': _dict})
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['sv']
-        # dropping unwanted columns
+        # Dropping unwanted columns.
         df.drop(columns=['Age', 'sv'], inplace=True)
-        # inserting Year,Location and Measurement_Method to the dataframe
-        # extracting year values from url
+        # Inserting Year,Location and Measurement_Method to the dataframe.
+        # Extracting year values from url.
         year = url[-8:-4]
         df.insert(loc=0, column='Year', value=year)
         df.insert(1, 'geo_ID', 'country/USA', True)
         df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
-        # removing numeric thousand separator from the values
+        # Removing numeric thousand separator from the values.
         df['observation'] = df['observation'].str.replace(",", "")
-        # writting the data to final dataframe
+        # Writting the data to final dataframe
         final_df = pd.concat([final_df, df])
-    # writing the dataframe to output csv
+    # Writing the dataframe to output csv.
     final_df.to_csv(os.path.dirname(os.path.abspath(__file__)) + os.sep \
         +'input_data/national_1960_1979.csv')

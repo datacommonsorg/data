@@ -26,6 +26,7 @@ def national1900():
     from 1900-1959 on a National Level,
     cleans it and create a cleaned csv
     '''
+    # Used to collect data after every loop for every file's df
     final_df = pd.DataFrame()
     for i in range(00, 60):
         j = f'{i:02}'

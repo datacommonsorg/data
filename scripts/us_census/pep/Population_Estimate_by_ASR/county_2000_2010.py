@@ -14,7 +14,7 @@
 '''
 This Python Script is
 for County Level Data
-2000-2010
+2000-2010.
 '''
 
 import os
@@ -26,8 +26,9 @@ def county2000():
     """
     This Python Script Loads csv datasets
     from 2000-2010 on a County Level,
-    cleans it and create a cleaned csv
+    cleans it and create a cleaned csv.
     """
+    # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     for i in range(1, 57):
         if i not in [3, 7, 14, 43, 52]:
@@ -35,14 +36,14 @@ def county2000():
             url = 'https://www2.census.gov/programs-surveys/popest/datasets/2'+\
                 '000-2010/intercensal/county/co-est00int-alldata-'+str(j)+'.csv'
             df = pd.read_csv(url, encoding='ISO-8859-1')
-            # filter years 1 - 12
+            # Filter years 1 - 12.
             df['Year'] = df['YEAR']
             df.drop(columns=['YEAR'], inplace=True)
             df = df.query("Year not in [1,12,13]")
-            # filter by agegrp = 99
+            # Filter by agegrp = 99.
             df = df.query("AGEGRP != 99")
             df['Year'] = df['Year'].astype(str)
-            # Replacing the numbers with more understandable metadata headings
+            # Replacing the numbers with more understandable metadata headings.
             _dict = {
                 '2': '2000',
                 '3': '2001',
@@ -60,7 +61,7 @@ def county2000():
             df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + \
                 (df['COUNTY'].map(str)).str.zfill(3)
             df['AGEGRP'] = df['AGEGRP'].astype(str)
-            # Replacing the numbers with more understandable metadata headings
+            # Replacing the numbers with more understandable metadata headings.
             _dict = {
                 '0': '0Years',
                 '1': '1To4Years',
@@ -84,7 +85,7 @@ def county2000():
             }
             df = df.replace({"AGEGRP": _dict})
 
-            # drop unwanted columns
+            # Drop unwanted columns.
             df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'],\
                 inplace=True)
             df = df.drop(columns=[
@@ -110,7 +111,7 @@ def county2000():
                 df['TOM_FEMALE'].astype(int)
             df = df.melt(id_vars=['Year','geo_ID' ,'AGEGRP'], var_name='sv' , \
                 value_name='observation')
-            # Changing Names to be more understandable
+            # Changing Names to be more understandable.
             _dict = {
                 'TOT_MALE':
                     'Male',
@@ -149,7 +150,7 @@ def county2000():
             df['SVs'] = df['SVs'].str.replace('Agg', '')
             final_df = pd.concat([final_df, df])
 
-    # write to final file
+    # Write to final file.
     final_df.to_csv(os.path.dirname(
     os.path.abspath(__file__)) + os.sep +'input_data/county_2000_2010.csv', \
         index=False)

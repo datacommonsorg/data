@@ -14,23 +14,27 @@
 '''
 This Python Script is
 for County Level Data
-1990-2000
+1990-2000.
 '''
 import os
 import numpy as np
 import pandas as pd
+from common_functions import _replace_age
 
 
 def county1990():
     '''
     This Python Script Loads csv datasets
     from 1990-2000 on a County Level,
-    cleans it and create a cleaned csv
+    cleans it and create a cleaned csv.
     '''
+    # Contains the final data which has been taken directly and aggregated.
     final_df = pd.DataFrame()
-    df1 = pd.DataFrame()
-    df2 = pd.DataFrame()
-    # reading the csv input file
+    # Contains aggregated data for age and sex.
+    df_as = pd.DataFrame()
+    # Contains aggregated data for age and race.
+    df_ar = pd.DataFrame()
+    # Reading the csv input file.
     for i in range(1, 57):
         if i not in [3, 7, 14, 43, 52]:
             j = f'{i:02}'
@@ -42,41 +46,21 @@ def county1990():
             df = pd.read_table(url,index_col=False,delim_whitespace=True\
                 ,skiprows=16,skipfooter=14,engine='python',names=cols,\
                     encoding='ISO-8859-1')
-            # removing the lines that have false symbols
+            # Removing the lines that have false symbols.
             num_df = (df.drop(cols, axis=1).join(df[cols]\
                 .apply(pd.to_numeric, errors='coerce')))
             df = num_df[num_df[cols].notnull().all(axis=1)]
             df[1:] = df[1:].apply(pd.to_numeric)
             df['geo_ID'] = df['geo_ID'].astype(int)
 
-            # providing geoId to the dataframe
+            # Providing geoId to the dataframe.
             df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]
-            # Replacing the numbers with more understandable metadata headings
-            _dict = {
-                0: '0To4Years',
-                1: '5To9Years',
-                2: '10To14Years',
-                3: '15To19Years',
-                4: '20To24Years',
-                5: '25To29Years',
-                6: '30To34Years',
-                7: '35To39Years',
-                8: '40To44Years',
-                9: '45To49Years',
-                10: '50To54Years',
-                11: '55To59Years',
-                12: '60To64Years',
-                13: '65To69Years',
-                14: '70To74Years',
-                15: '75To79Years',
-                16: '80To84Years',
-                17: '85OrMoreYears'
-            }
-            df.rename(_dict, axis=1, inplace=True)
+            # Replacing the numbers with more understandable metadata headings.
+            df = _replace_age(df)
 
-            # columns after 11 where having origin
+            # Columns after 11 where having origin.
             df.drop(df[df['Race'] >= 11].index, inplace=True)
-            # changing the column values as per metadata
+            # Changing the column values as per metadata.
             df['Race'] = df['Race'].astype(int).astype(str)
             df['Race'] = df['Race'].str.replace('10',\
                 'Female_AsianOrPacificIslander')
@@ -106,29 +90,29 @@ def county1990():
             # writing the dataframe to final dataframe
             final_df = pd.concat([final_df, df])
 
-    # creating geoId
+    # Creating geoId.
     final_df['geo_ID'] = 'geoId/' + final_df['geo_ID'].astype("str")
     final_df = final_df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
-    # adding measurement method
+    # Adding measurement method.
     final_df['Measurement_Method'] = np.where(final_df['SVs'].str.contains\
         ('White'), 'dcAggregate/CensusPEPSurvey', 'CensusPEPSurvey')
-    # Making copies and using group by to get Aggregated Values
-    df1 = pd.concat([final_df, df1])
-    df2 = pd.concat([df2, final_df])
-    df1['SVs'] = df1['SVs'].str.replace('_AmericanIndianAndAlaskaNativeAlone'\
-        ,'')
-    df1['SVs'] = df1['SVs'].str.replace('_AsianOrPacificIslander', '')
-    df1['SVs'] = df1['SVs'].str.replace('_BlackOrAfricanAmericanAlone', '')
-    df1['SVs'] = df1['SVs'].str.replace('_WhiteAlone', '')
-    df1 = df1.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
-    df1.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    df2['SVs'] = df2['SVs'].str.replace('_Male', '')
-    df2['SVs'] = df2['SVs'].str.replace('_Female', '')
-    df2 = df2.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
-    df2.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    final_df = pd.concat([final_df, df2, df1])
+    # Making copies and using group by to get Aggregated Values.
+    df_as = pd.concat([final_df, df_as])
+    df_ar = pd.concat([df_ar, final_df])
+    df_as['SVs'] = df_as['SVs'].str.replace\
+        ('_AmericanIndianAndAlaskaNativeAlone','')
+    df_as['SVs'] = df_as['SVs'].str.replace('_AsianOrPacificIslander', '')
+    df_as['SVs'] = df_as['SVs'].str.replace('_BlackOrAfricanAmericanAlone', '')
+    df_as['SVs'] = df_as['SVs'].str.replace('_WhiteAlone', '')
+    df_as = df_as.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
+    df_ar['SVs'] = df_ar['SVs'].str.replace('_Male', '')
+    df_ar['SVs'] = df_ar['SVs'].str.replace('_Female', '')
+    df_ar = df_ar.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
+    final_df = pd.concat([final_df, df_ar, df_as])
 
-    # writing to output csv
+    # Writing to output csv.
     final_df.to_csv(
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
         'input_data/county_1990_2000.csv')

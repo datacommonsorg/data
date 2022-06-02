@@ -48,7 +48,6 @@ class TestPreprocess(unittest.TestCase):
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
         'input_data/national_2000_2010.csv'
     ]
-    print(ip_data)
 
     base = USCensusPEPByASR(ip_data, cleaned_csv_file_path, mcf_file_path,
                             tmcf_file_path)

@@ -19,13 +19,13 @@ These are the attributes that we will use
 |-------------------------------------------------------|---------------------------------------------------------------------------------------|
 | Year       					| The Year of the population estimates provided. 				|
 | Age   				| The Individual Ages or Age Buckets of the population in the US. 						|
-| Race   	| Races of the population in the US.  	|
+| Race   	| Races of the population in the US (https://www.census.gov/topics/population/race/about.html).  	|
 | Sex   				| Gender either Male or Female. 							|
 
 
 
 #### Cleaned Data
-Cleaned data will be inside [Output/USA_Population_ASRH.csv] as a CSV file with the following columns.
+Cleaned data will be inside [output/usa_population_asr.csv] as a CSV file with the following columns.
 
 - Year
 - geo_ID
@@ -36,8 +36,8 @@ Cleaned data will be inside [Output/USA_Population_ASRH.csv] as a CSV file with 
 
 
 #### MCFs and Template MCFs
-- [Output/USA_Population_ASR.mcf]
-- [Output/USA_Population_ASR.tmcf]
+- [output/usa_population_asr.mcf]
+- [output/usa_population_asr.tmcf]
 
 ### Running Tests
 

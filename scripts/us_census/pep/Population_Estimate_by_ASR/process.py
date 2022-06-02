@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 This Python Script Load the datasets, cleans it
-and generates cleaned CSV, MCF, TMCF file
+and generates cleaned CSV, MCF, TMCF file.
 """
 import os
 import pandas as pd
@@ -47,7 +47,7 @@ flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 class USCensusPEPByASR:
     """
     This Class has requried methods to generate Cleaned CSV,
-    MCF and TMCF Files
+    MCF and TMCF Files.
     """
 
     def __init__(self, input_files: list, csv_file_path: str,
@@ -63,7 +63,7 @@ class USCensusPEPByASR:
     def __generate_mcf(self, sv_list) -> None:
         """
         This method generates MCF file w.r.t
-        dataframe headers and defined MCF template
+        dataframe headers and defined MCF template.
         Arguments:
             df_cols (list) : List of DataFrame Columns
         Returns:
@@ -115,20 +115,20 @@ measuredProperty: dcs:count
     def __generate_tmcf(self) -> None:
         """
         This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template
+        dataframe headers and defined TMCF template.
         Arguments:
             df_cols (list) : List of DataFrame Columns
         Returns:
             None
         """
-        tmcf_template = """Node: E:USA_Population_ASR->E0
+        tmcf_template = """Node: E:usa_population_asr->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: C:USA_Population_ASR->SVs
-measurementMethod: C:USA_Population_ASR->Measurement_Method
-observationAbout: C:USA_Population_ASR->geo_ID
-observationDate: C:USA_Population_ASR->Year
+variableMeasured: C:usa_population_asr->SVs
+measurementMethod: C:usa_population_asr->Measurement_Method
+observationAbout: C:usa_population_asr->geo_ID
+observationDate: C:usa_population_asr->Year
 observationPeriod: \"P1Y\"
-value: C:USA_Population_ASR->observation 
+value: C:usa_population_asr->observation 
 """
 
         # Writing Genereated TMCF to local path.
@@ -142,11 +142,13 @@ value: C:USA_Population_ASR->observation
         """
 
         final_df = pd.DataFrame()
-        # Creating Output Directory
+        # Creating Output Directory.
         output_path = os.path.dirname(self.cleaned_csv_file_path)
         if not os.path.exists(output_path):
             os.mkdir(output_path)
         sv_list = []
+        # data_df is used to read every single file which has been generated.
+        # final_df concatenates all these files.
         for file_path in self.input_files:
             data_df = pd.read_csv(file_path)
             final_df = pd.concat([final_df, data_df])
@@ -166,7 +168,7 @@ def main(_):
     input_path = FLAGS.input_path
     if not os.path.exists(input_path):
         os.mkdir(input_path)
-    # Running the fuctions in individual files by Year and Area
+    # Running the fuctions in individual files by Year and Area.
     national1900()
     national1960()
     national1980()
@@ -186,10 +188,10 @@ def main(_):
     ip_files = [input_path + os.sep + file for file in ip_files]
     data_file_path = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + "output"
-    # Defining Output Files
-    cleaned_csv_path = data_file_path + os.sep + "USA_Population_ASR.csv"
-    mcf_path = data_file_path + os.sep + "USA_Population_ASR.mcf"
-    tmcf_path = data_file_path + os.sep + "USA_Population_ASR.tmcf"
+    # Defining Output Files.
+    cleaned_csv_path = data_file_path + os.sep + "usa_population_asr.csv"
+    mcf_path = data_file_path + os.sep + "usa_population_asr.mcf"
+    tmcf_path = data_file_path + os.sep + "usa_population_asr.tmcf"
     loader = USCensusPEPByASR(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
     loader.process()
 

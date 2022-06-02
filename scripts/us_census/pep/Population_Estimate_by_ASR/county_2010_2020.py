@@ -14,31 +14,27 @@
 '''
 This Python Script is
 for County Level Data
-2010-2020
+2010-2020.
 '''
 import os
-import json
 import numpy as np
 import pandas as pd
+from common_functions import _input_url
+
 
 
 def county2010():
     '''
     This Python Script Loads csv datasets
     from 2010-2020 on a County Level,
-    cleans it and create a cleaned csv
+    cleans it and create a cleaned csv.
     '''
-    _URLS_JSON_PATH = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "county.json"
-    _URLS_JSON = None
-    with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
-        _URLS_JSON = json.load(file)
-    _url = _URLS_JSON["2010-20"]
+    _url = _input_url("county.json","2010-20")
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
-    # filter by agegrp = 0
+    # Filter by agegrp = 0.
     df = df.query("YEAR not in [1, 2, 13]")
     df = df.query("AGEGRP != 0")
-    # filter years 3 - 14
+    # Filter years 3 - 14.
     df['YEAR'] = df['YEAR'].astype(str)
     _dict = {
         '3': '2010',
@@ -58,7 +54,7 @@ def county2010():
     df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + \
         (df['COUNTY'].map(str)).str.zfill(3)
     df['AGEGRP'] = df['AGEGRP'].astype(str)
-    # Replacing the numbers with more understandable metadata headings
+    # Replacing the numbers with more understandable metadata headings.
     _dict = {
         '1': '0To4Years',
         '2': '5To9Years',
@@ -80,7 +76,7 @@ def county2010():
         '18': '85OrMoreYears'
     }
     df = df.replace({"AGEGRP": _dict})
-    # drop unwanted columns
+    # Drop unwanted columns.
     df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
         inplace=True)
     df = df.drop(columns=[
@@ -107,7 +103,7 @@ def county2010():
         df['TOM_FEMALE'].astype(int)
     df = df.melt(id_vars=['Year','geo_ID' ,'AGEGRP'], var_name='sv' , \
         value_name='observation')
-    # Changing Names to be more understandable
+    # Changing Names to be more understandable.
     _dict = {
         'TOT_MALE': 'Male',
         'TOT_FEMALE': 'Female',
@@ -130,7 +126,7 @@ def county2010():
     df['Measurement_Method'] = np.where(df['SVs'].str.contains('Agg')\
         , 'dcAggregate/CensusPEPSurvey', 'CensusPEPSurvey')
     df['SVs'] = df['SVs'].str.replace('Agg', '')
-    # write to final file
+    # Write to final file.
     df.to_csv(os.path.dirname(
         os.path.abspath(__file__)) + os.sep +'input_data/county_2010_2020.csv',\
         index=False)

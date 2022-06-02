@@ -16,9 +16,9 @@ This Python Script is
 for State Level Data
 2000-2010
 '''
-import json
 import os
 import pandas as pd
+from common_functions import _input_url
 
 
 def state2000():
@@ -27,25 +27,20 @@ def state2000():
         from 2000-2010 on a State Level,
         cleans it and create a cleaned csv
         '''
-    _URLS_JSON_PATH = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "state.json"
-    _URLS_JSON = None
-    with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
-        _URLS_JSON = json.load(file)
-    _url = _URLS_JSON["2000-10"]
+    _url = _input_url("state.json","2000-10")
     df = pd.read_csv(_url, encoding='ISO-8859-1')
-    # Filtering the data needed
+    # Filtering the data needed.
     df.drop(df[(df['RACE'] == 0) & (df['SEX'] == 0)].index, inplace=True)
     df = df.query("STATE != 0")
     df = df.query("AGEGRP != 0")
     df = df.query("ORIGIN == 0")
     df.insert(7, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)
-    # Replacing the Sex Numbers as per the metadata
+    # Replacing the Sex Numbers as per the metadata.
     df['SEX'] = df['SEX'].astype(str)
     _dict = {'0': 'Total', '1': 'Male', '2': 'Female'}
     df = df.replace({"SEX": _dict})
-    # Replacing the Race Numbers as per the metadata
+    # Replacing the Race Numbers as per the metadata.
     df['RACE'] = df['RACE'].astype(str)
     _dict = {
         '0': 'Total',
@@ -57,7 +52,7 @@ def state2000():
         '6': 'TwoOrMoreRaces'
     }
     df = df.replace({"RACE": _dict})
-    # Replacing the Age group Numbers as per the metadata
+    # Replacing the Age group Numbers as per the metadata.
     df['AGEGRP'] = df['AGEGRP'].astype(str)
     _dict = {
         '1': '0To4Years',
@@ -80,13 +75,13 @@ def state2000():
         '18': '85OrMoreYears'
     }
     df = df.replace({"AGEGRP": _dict})
-    # Dropping unwanted columns
+    # Dropping unwanted columns.
     df.drop(columns=['REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
             'ESTIMATESBASE2000','CENSUS2010POP','POPESTIMATE2010'],\
             inplace=True)
     df = df.melt(id_vars=['geo_ID','AGEGRP','SEX','RACE'], var_name='Year'\
             ,value_name='observation')
-    # Making the years more understandable
+    # Making the years more understandable.
     _dict = {
         'POPESTIMATE2000': '2000',
         'POPESTIMATE2001': '2001',

@@ -14,27 +14,24 @@
 '''
 This Python Script is
 for National Level Data
-2010-2019
+2010-2019.
 '''
 import os
-import json
 import pandas as pd
+from common_functions import _input_url
+
 
 
 def national2010():
     '''
     This Python Script Loads csv datasets
     from 2010-2019 on a National Level,
-    cleans it and create a cleaned csv
+    cleans it and create a cleaned csv.
     '''
-    # Getting input URL from the JSON file
-    _URLS_JSON_PATH = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "national.json"
-    _URLS_JSON = None
-    with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
-        _URLS_JSON = json.load(file)
-    _urls = _URLS_JSON["2010-19"]
-    _sheets = _URLS_JSON["2010-19sheets"]
+    # Getting input URL from the JSON file.
+    _urls = _input_url("national.json","2010-19")
+    _sheets = _input_url("national.json","2010-19sheets")
+    # Used to collect data after every loop for every file's df.
     df_final = pd.DataFrame()
     for sheet in _sheets:
         df_sheet = pd.DataFrame()
@@ -47,16 +44,20 @@ def national2010():
             ("Under 5", "0 to 4").str.replace(" ", "").str.replace("to", "To")\
             .str.replace("years", "Years").str.replace("85Yearsandover", \
             "85OrMoreYears")
-        # Filtering and reading the data
+        # Due to data being in a different format for male/female, and also
+        # required some extra processing. So, it has been put into other dfs
+        # df_sex(has data to be processed by gender),
+        # df_sheet(has data of a single sheet in excel) so it can be processed
+        # seperately before being put into our main df.
         if sheet != 'Total':
-            df1 = df[0:18]
-            df_sheet = pd.concat([df_sheet, df1])
-        df1 = df[36:54]
-        df1['Unnamed: 0'] = df1['Unnamed: 0'] + '_Male'
-        df_sheet = pd.concat([df_sheet, df1])
-        df1 = df[72:90]
-        df1['Unnamed: 0'] = df1['Unnamed: 0'] + '_Female'
-        df_sheet = pd.concat([df_sheet, df1])
+            df_sex = df[0:18]
+            df_sheet = pd.concat([df_sheet, df_sex])
+        df_sex = df[36:54]
+        df_sex['Unnamed: 0'] = df_sex['Unnamed: 0'] + '_Male'
+        df_sheet = pd.concat([df_sheet, df_sex])
+        df_sex = df[72:90]
+        df_sex['Unnamed: 0'] = df_sex['Unnamed: 0'] + '_Female'
+        df_sheet = pd.concat([df_sheet, df_sex])
         df_sheet['Unnamed: 0'] = df_sheet['Unnamed: 0'] + '_' + sheet + 'Alone'
         df_sheet = df_sheet.melt(id_vars=['Unnamed: 0'],
                                  var_name='Year',

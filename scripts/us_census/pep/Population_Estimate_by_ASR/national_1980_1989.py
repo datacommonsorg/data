@@ -14,20 +14,20 @@
 '''
 This Python Script is
 for National Level Data
-1980-1989
+1980-1989.
 '''
-import json
 import os
 from io import BytesIO
 from zipfile import ZipFile
 from urllib.request import urlopen
 import pandas as pd
 import numpy as np
+from common_functions import _input_url
 
 
 def column_naming(df: pd.DataFrame):
     '''
-    Provides appropriate names to df columns
+    Provides appropriate names to df columns.
     '''
     df['Year'] = "19" + df['1'].str[1:3]
     df['Age'] = df['2'].astype(float).astype(int)
@@ -57,44 +57,37 @@ def national1980():
     '''
     This Python Script Loads csv datasets
     from 1980-1989 on a National Level,
-    cleans it and create a cleaned csv
+    cleans it and create a cleaned csv.
     '''
-    # Getting list of URLs from JSON file
-    _URLS_JSON_PATH = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "national.json"
-    _URLS_JSON = None
+    # Getting list of URLs from JSON file.
     _ZIP_DIR = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + 'Zip1980-90'
-    with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
-        _URLS_JSON = json.load(file)
-    _urls = _URLS_JSON["1980-90"]
+    _urls = _input_url("national.json","1980-90")
 
-    # Creation of a folder if it does not exist
+    # Creation of a folder if it does not exist.
     if not os.path.exists(_ZIP_DIR):
         os.mkdir(_ZIP_DIR)
     current_dir = os.path.dirname(os.path.abspath(__file__)) + os.sep
     os.chdir(_ZIP_DIR)
 
-    # Extraction of ZIP files
+    # Extraction of ZIP files.
     for url in _urls:
         with urlopen(url) as resp:
             # unzipping the dataset
             with ZipFile(BytesIO(resp.read()), 'r') as zipfile:
                 zipfile.extractall()
-
-    _urls = _URLS_JSON["1980-90files"]
-    print(_urls)
+    _urls = _urls = _input_url("national.json","1980-90files")
 
     cols = ["0", "1", "2", "3", "4", "5", "6", "7",\
                         "8", "9", "10", "11","12", "13", "14", "15",\
                         "16", "17", "18", "19", "20", "21", "22"]
-
+    # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
 
     for file in _urls:
 
-        # reading the txt format input file converting it to a dataframe
-        # delimitng the columns by whitespace
+        # Reading the txt format input file converting it to a dataframe.
+        # Delimitng the columns by whitespace.
         df = pd.read_table(file,
                            index_col=False,
                            delim_whitespace=True,
@@ -116,7 +109,7 @@ def national1980():
         df = pd.concat([df, df1])
         df = df.loc[df['1'].str[0] == '7']
         df = column_naming(df)
-        # writing all the output to a final dataframe
+        # Writing all the output to a final dataframe.
         df.columns = df.columns.str.replace('All', \
             'Alone')
         df = df.melt(id_vars=['Year', 'Age'],

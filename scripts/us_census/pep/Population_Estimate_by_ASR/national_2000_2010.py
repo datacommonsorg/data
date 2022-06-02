@@ -14,36 +14,32 @@
 '''
 This Python Script is
 for National Level Data
-2000-2010
+2000-2010.
 '''
-import json
 import os
 import pandas as pd
+from common_functions import _input_url
+
 
 
 def national2000():
     '''
     This Python Script Loads csv datasets
     from 2000-2010 on a National Level,
-    cleans it and create a cleaned csv
+    cleans it and create a cleaned csv.
     '''
-    # Getting input URL from the JSON file
-    _URLS_JSON_PATH = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + 'National.json'
-    _URLS_JSON = None
-    with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
-        _URLS_JSON = json.load(file)
-    _url = _URLS_JSON["2000-10"]
-    # reading the csv format input file and converting it to a dataframe
+    # Getting input URL from the JSON file.
+    _url = _input_url("national.json","2000-10")
+    # Reading the csv format input file and converting it to a dataframe.
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
-    # removing the unwanted rows
+    # Removing the unwanted rows.
     df = df.query("MONTH != 4")
     df = df.query("YEAR != 2010")
     df = df.query("AGE != 999")
     df['AGE'] = df['AGE'].astype(str)
     df['AGE'] = df['AGE'] + 'Years'
     df['AGE'] = df['AGE'].str.replace("85Years", "85OrMoreYears")
-    # dropping unwanted columns
+    # Dropping unwanted columns.
     df = df.drop(columns=[
         'TOT_POP', 'NH_MALE', 'NH_FEMALE', 'NHWA_MALE', 'MONTH', 'NHWA_FEMALE',
         'NHBA_MALE', 'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE',
@@ -52,12 +48,12 @@ def national2000():
         'HBA_FEMALE', 'HIA_MALE', 'HIA_FEMALE', 'HAA_MALE', 'HAA_FEMALE',
         'HNA_MALE', 'HNA_FEMALE', 'HTOM_MALE', 'HTOM_FEMALE'
     ])
-    # melt funtion used to change the Data frame format from wide to long
+    # Melt funtion used to change the Data frame format from wide to long.
     df['Year'] = df['YEAR']
     df.drop(columns=['YEAR'], inplace=True)
     df = df.melt(id_vars=['Year','AGE'], var_name='sv' ,\
         value_name='observation')
-    # Providing proper columns names
+    # Providing proper columns names.
     _dict = {
         'TOT_MALE': 'Male',
         'TOT_FEMALE': 'Female',
@@ -75,22 +71,23 @@ def national2000():
         'TOM_FEMALE': 'Female_TwoOrMoreRaces'
     }
     df = df.replace({"sv": _dict})
-    # giving proper column names
+    # Giving proper column names.
     df['SVs'] = 'Count_Person_' + df['AGE'] + '_' + df['sv']
     df = df.drop(columns=['AGE', 'sv'])
-    # inserting geoId to the dataframe
+    # Inserting geoId to the dataframe.
     df.insert(1, 'geo_ID', 'country/USA', True)
-    # inserting measurement method to the dataframe
+    # Inserting measurement method to the dataframe.
     df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
-    df_temp = pd.DataFrame()
-    df_temp = pd.concat([df_temp, df])
-    df_temp['SVs'] = df_temp['SVs'].str.replace('_Male', '')
-    df_temp['SVs'] = df_temp['SVs'].str.replace('_Female', '')
-    df_temp = df_temp.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
-    df_temp.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    df_temp = df_temp[df_temp.SVs.str.contains('Years_')]
-    df = pd.concat([df_temp, df])
-    # writing the dataframe to output csv
+    # Contains aggregated data for age and race.
+    df_ar = pd.DataFrame()
+    df_ar = pd.concat([df_ar, df])
+    df_ar['SVs'] = df_ar['SVs'].str.replace('_Male', '')
+    df_ar['SVs'] = df_ar['SVs'].str.replace('_Female', '')
+    df_ar = df_ar.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
+    df_ar = df_ar[df_ar.SVs.str.contains('Years_')]
+    df = pd.concat([df_ar, df])
+    # Writing the dataframe to output csv.
     df.to_csv(os.path.dirname(
         os.path.abspath(__file__)) + os.sep +\
         'input_data/national_2000_2010.csv',index=False)

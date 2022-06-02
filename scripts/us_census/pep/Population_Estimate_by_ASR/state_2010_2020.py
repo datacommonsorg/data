@@ -14,39 +14,35 @@
 '''
 This Python Script is
 for State Level Data
-2010-2020
+2010-2020.
 '''
-import json
 import os
 import pandas as pd
+from common_functions import _input_url
+
 
 
 def state2010():
     '''
    This Python Script Loads csv datasets
    from 2010-2020 on a State Level,
-   cleans it and create a cleaned csv
+   cleans it and create a cleaned csv.
    '''
-    _URLS_JSON_PATH = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "state.json"
-    _URLS_JSON = None
-    with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
-        _URLS_JSON = json.load(file)
-    _url = _URLS_JSON["2010-20"]
+    _url = _input_url("state.json","2010-20")
     df = pd.read_csv(_url, encoding='ISO-8859-1')
 
-    # filter years 3 - 13
+    # Filter years 3 - 13.
     df.insert(2, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)
-    # Filtering the data needed
+    # Filtering the data needed.
     df = df.query("geo_ID !=0")
     df = df.query("ORIGIN ==0")
-    # Replacing the Sex Numbers as per the metadata
+    # Replacing the Sex Numbers as per the metadata.
     df['SEX'] = df['SEX'].astype(str)
     _dict = {'0': 'Total', '1': 'Male', '2': 'Female'}
     df = df.replace({"SEX": _dict})
     df['RACE'] = df['RACE'].astype(str)
-    # Replacing the Race Numbers as per the metadata
+    # Replacing the Race Numbers as per the metadata.
     _dict = {
         '1': 'WhiteAlone',
         '2': 'BlackOrAfricanAmericanAlone',
@@ -59,12 +55,12 @@ def state2010():
     df['AGE'] = df['AGE'].astype(str)
     df['AGE'] = df['AGE'] + 'Years'
     df['AGE'] = df['AGE'].str.replace("85Years", "85OrMoreYears")
-    # drop unwanted columns
+    # Drop unwanted columns.
     df.drop(columns=['SUMLEV','REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
        'ESTIMATESBASE2010','CENSUS2010POP','POPESTIMATE042020'], inplace=True)
     df = df.melt(id_vars=['geo_ID','AGE','SEX','RACE'], var_name='Year' , \
        value_name='observation')
-    # Making the years more understandable
+    # Making the years more understandable.
     _dict = {
         'POPESTIMATE2010': '2010',
         'POPESTIMATE2011': '2011',
@@ -82,19 +78,20 @@ def state2010():
     df['SVs'] = 'Count_Person_' + df['AGE'] + '_' + df['SEX'] + '_' + df['RACE']
     df = df.drop(columns=['AGE', 'RACE', 'SEX'])
     df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
-    temp_df = pd.DataFrame()
-    temp_df = pd.concat([temp_df, df])
-    temp_df = temp_df[~temp_df["SVs"].str.contains("Total")]
-    temp_df['SVs'] = temp_df['SVs'].str.replace('_WhiteAlone', '')\
+    # df_as is used to get aggregated data of age/sex.
+    df_as = pd.DataFrame()
+    df_as = pd.concat([df_as, df])
+    df_as = df_as[~df_as["SVs"].str.contains("Total")]
+    df_as['SVs'] = df_as['SVs'].str.replace('_WhiteAlone', '')\
         .str.replace('_BlackOrAfricanAmericanAlone', '')\
         .str.replace('_AmericanIndianAndAlaskaNativeAlone', '')\
         .str.replace('_AsianAlone', '')\
         .str.replace('_NativeHawaiianAndOtherPacificIslanderAlone', '')\
         .str.replace('_TwoOrMoreRaces', '')
-    temp_df = temp_df.groupby(['Measurement_Method','Year', 'geo_ID', 'SVs'])\
+    df_as = df_as.groupby(['Measurement_Method','Year', 'geo_ID', 'SVs'])\
         .sum().reset_index()
     df['SVs'] = df['SVs'].str.replace('_Total', '')
-    df = pd.concat([df, temp_df])
+    df = pd.concat([df, df_as])
     df.to_csv(
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
         'input_data/state_2010_2020.csv')

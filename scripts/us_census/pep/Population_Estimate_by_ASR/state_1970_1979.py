@@ -14,29 +14,25 @@
 '''
 This Python Script is
 for State Level Data
-1970-1979
+1970-1979.
 '''
 import os
-import json
 import pandas as pd
+from common_functions import _input_url
 
 
 def state1970():
     '''
       This Python Script Loads csv datasets
       from 1970-1979 on a State Level,
-      cleans it and create a cleaned csv
+      cleans it and create a cleaned csv.
       '''
-    _URLS_JSON_PATH = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "state.json"
-    _URLS_JSON = None
-    with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
-        _URLS_JSON = json.load(file)
-    _url = _URLS_JSON["1970-79"]
+
+    _url = _input_url("state.json","1970-79")
     df = pd.read_csv(_url, skiprows=5, encoding='ISO-8859-1')
     df.insert(1, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['FIPS State Code'].map(str)).str.zfill(2)
-    # Dropping the old unwanted columns
+    # Dropping the old unwanted columns.
     df.drop(columns=['State Name', 'FIPS State Code'], inplace=True)
     df.rename(columns=\
        {'Year of Estimate': 'Year','Race/Sex Indicator': 'Race/Sex'},\
@@ -55,7 +51,7 @@ def state1970():
     df = df.melt(id_vars=['Year','geo_ID' ,'Race/Sex'], var_name='Age' ,\
        value_name='observation')
     df['Age'] = df['Age'].astype(str)
-    # Making Age groups as per SV Naming Convention
+    # Making Age groups as per SV Naming Convention.
     _dict = {
         'Under 5 years': '0To4Years',
         '5 to 9 years': '5To9Years',
@@ -82,21 +78,23 @@ def state1970():
     df['observation'] = df['observation'].str.replace(",", "").astype(int)
     # Making Copies of current DF and using Group by on them
     # to get Aggregated Values
+    # final_df for displaying final concatinated output
+    # and df_ar for aggregated age/race output.
     final_df = pd.DataFrame()
-    df2 = pd.DataFrame()
+    df_ar = pd.DataFrame()
     final_df = pd.concat([final_df, df])
-    df2 = pd.concat([df2, df])
+    df_ar = pd.concat([df_ar, df])
     final_df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
     df['SVs'] = df['SVs'].str.replace('_WhiteAlone', '')
     df['SVs'] = df['SVs'].str.replace('_BlackOrAfricanAmericanAlone', '')
     df['SVs'] = df['SVs'].str.replace('_OtherRaces', '')
     df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
     df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    df2['SVs'] = df2['SVs'].str.replace('_Male', '')
-    df2['SVs'] = df2['SVs'].str.replace('_Female', '')
-    df2 = df2.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
-    df2.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    final_df = pd.concat([final_df, df2, df])
+    df_ar['SVs'] = df_ar['SVs'].str.replace('_Male', '')
+    df_ar['SVs'] = df_ar['SVs'].str.replace('_Female', '')
+    df_ar = df_ar.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
+    final_df = pd.concat([final_df, df_ar, df])
     final_df = final_df[~final_df.SVs.str.contains('OtherRaces')]
     final_df.to_csv(
         os.path.dirname(os.path.abspath(__file__)) + os.sep +

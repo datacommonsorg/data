@@ -14,32 +14,28 @@
 '''
 This Python Script is
 for State Level Data
-1990-2000
+1990-2000.
 '''
 import os
-import json
 import pandas as pd
+from common_functions import _input_url
 
 
 def state1990():
     '''
     This Python Script Loads csv datasets
     from 1990-2000 on a State Level,
-    cleans it and create a cleaned csv
+    cleans it and create a cleaned csv.
     '''
-    _URLS_JSON_PATH = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "state.json"
-    _URLS_JSON = None
-    with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
-        _URLS_JSON = json.load(file)
-    _urls = _URLS_JSON["1990-00"]
+    _urls = _input_url("state.json","1990-00")
+    # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     for url in _urls:
         df = pd.read_table(url, skiprows=15, delim_whitespace=True, header=None)
         df.columns=['Year','geo_ID','Age','NHWM','NHWF','NHBM','NHBF','NHAIANM'\
         ,'NHAIANF','NHAPIM','NHAPIF','HWM','HWF','HBM','HBF','HAIANM','HAIANF',\
         'HAPIM','HAPIF']
-        # Defining New Columns as Aggregation is required in all
+        # Defining New Columns as Aggregation is required in all.
         df['Male']=df["NHWM"]+df["HWM"]+df["NHBM"]+df["HBM"]+df["NHAIANM"]+\
             df["HAIANM"]+df["NHAPIM"]+df["HAPIM"]
         df['Female']=df["NHWF"]+df["HWF"]+df["NHBF"]+df["HBF"]+df["NHAIANF"]+\
@@ -62,7 +58,7 @@ def state1990():
             df["NHAIANF"]+df["HAIANF"]
         df['Male_AsianOrPacificIslander'] = df["NHAPIM"] + df["HAPIM"]
         df['Female_AsianOrPacificIslander'] = df["NHAPIF"] + df["HAPIF"]
-        # Dropping the old unwanted columns
+        # Dropping the old unwanted columns.
         df.drop(columns=['NHWM','NHWF','NHBM','NHBF','NHAIANM','NHAIANF',\
             'NHAPIM','NHAPIF','HWM','HWF','HBM','HBF','HAIANM','HAIANF','HAPIM'\
             ,'HAPIF'],inplace=True)
