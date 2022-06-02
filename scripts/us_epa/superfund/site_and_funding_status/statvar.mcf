@@ -1,5 +1,5 @@
 Node: dcid:SuperfundFundingStatus_SuperfundSite
-description: "This statistical variable tracks the date when a superfund site has a change in the NPL Status"
+name: "Superfund site funding status or the status of a superfund site on the National Priority List (NPL)"
 measuredProperty: dcs:superfundFundingStatus
 populationType: dcs:SuperfundSite
 statType: dcs:measurementResult
