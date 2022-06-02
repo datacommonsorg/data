@@ -89,16 +89,18 @@ def main(src_fldr, output_csv):
                                     csv_col_name]
                             writer.writerow(processed_dict)
 
+
     # Automate Template MCF generation
     #  since there are many Statitical Variables
     template_mcf = """Node: E:WeatherVariability_Counties->E{index}
-    typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:{stat_var}
-    observationAbout: C:WeatherVariability_Counties->GeoId
-    observationDate: C:WeatherVariability_Counties->Date
-    value: C:WeatherVariability_Counties->{stat_var}
-    observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
-    """
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:{stat_var}
+observationAbout: C:WeatherVariability_Counties->GeoId
+observationDate: C:WeatherVariability_Counties->Date
+value: C:WeatherVariability_Counties->{stat_var}
+observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
+"""
 
     stat_vars = output_columns[3:]
     output_tmcf = output_csv.replace(".csv", ".tmcf")

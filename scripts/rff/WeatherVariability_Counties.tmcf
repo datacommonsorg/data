@@ -5,6 +5,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->StandardDeviation_DailyPrecipitation
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E1
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Skewness_DailyPrecipitation
@@ -12,6 +13,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->Skewness_DailyPrecipitation
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E2
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Kurtosis_DailyPrecipitation
@@ -19,6 +21,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->Kurtosis_DailyPrecipitation
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E3
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:StandardDeviation_DailyMinTemperature
@@ -26,6 +29,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->StandardDeviation_DailyMinTemperature
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E4
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Skewness_DailyMinTemperature
@@ -33,6 +37,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->Skewness_DailyMinTemperature
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E5
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Kurtosis_DailyMinTemperature
@@ -40,6 +45,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->Kurtosis_DailyMinTemperature
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E6
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:StandardDeviation_DailyMaxTemperature
@@ -47,6 +53,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->StandardDeviation_DailyMaxTemperature
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E7
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Skewness_DailyMaxTemperature
@@ -54,6 +61,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->Skewness_DailyMaxTemperature
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E8
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Kurtosis_DailyMaxTemperature
@@ -61,6 +69,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->Kurtosis_DailyMaxTemperature
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E9
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:HeavyPrecipitationIndex
@@ -68,6 +77,7 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->HeavyPrecipitationIndex
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
 Node: E:WeatherVariability_Counties->E10
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:ConsecutiveDryDays
@@ -75,3 +85,4 @@ observationAbout: C:WeatherVariability_Counties->GeoId
 observationDate: C:WeatherVariability_Counties->Date
 value: C:WeatherVariability_Counties->ConsecutiveDryDays
 observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+

@@ -9,17 +9,19 @@ import unittest
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from rff import preprocess_csv
 
-
 class ProcessTest(unittest.TestCase):
 
     def test_preprocess(self):
-        src_fldr = "test_data/input/prism/daily/county"
-        expected_csv = "test_data/expected/WeatherVariability_Counties.csv"
+        _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'test_data')
+        src_fldr = os.path.join(_TESTDIR, 'input/prism/daily/county')
+        print(src_fldr)
+        expected_csv = os.path.join(_TESTDIR, 'expected/WeatherVariability_Counties.csv')
+        print(expected_csv)
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_csv = f"{tmp_dir}/WeatherVariability_Counties.csv"
             preprocess_csv.main(src_fldr, output_csv)
-            with open(expected_csv, 'rb') as wantf:
-                with open(output_csv, 'rb') as gotf:
+            with open(expected_csv) as wantf:
+                with open(output_csv) as gotf:
                     self.assertEqual(gotf.read(), wantf.read())
 
 
