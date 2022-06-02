@@ -41,10 +41,12 @@ def fips_to_geoid(row):
 def process_csv(input_path, output_path):
     data_table = pd.read_csv(input_path)
 
-    # the TMCF generated in generate_schema_and_tmcf.py expect to find the
+    # - the TMCF generated in generate_schema_and_tmcf.py expect to find the
     # geoID in the field "DCID_GeoID"
-    data_table["DCID_GeoID"] = data_table.apply(fips_to_geoid, axis=1)
-
+    # - tentative fix for a potential bug in the server code: move the DCID_GeoID
+    # column to be the first (makes sure that the column is in the same place)
+    # across CSVs with different column sizes.
+    data_table.insert(0, "DCID_GeoID",data_table.apply(fips_to_geoid, axis=1))
     # we want to replace empty cells with 0s so that the import tool does not
     # have to assume what this is about [citation needed (snny)]
     data_table = data_table.fillna(0)
