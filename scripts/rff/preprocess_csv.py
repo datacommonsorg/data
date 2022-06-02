@@ -89,7 +89,6 @@ def main(src_fldr, output_csv):
                                     csv_col_name]
                             writer.writerow(processed_dict)
 
-
     # Automate Template MCF generation
     #  since there are many Statitical Variables
     template_mcf = """Node: E:WeatherVariability_Counties->E{index}
