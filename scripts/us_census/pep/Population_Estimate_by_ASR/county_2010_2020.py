@@ -22,14 +22,13 @@ import pandas as pd
 from common_functions import _input_url
 
 
-
 def county2010():
     '''
     This Python Script Loads csv datasets
     from 2010-2020 on a County Level,
     cleans it and create a cleaned csv.
     '''
-    _url = _input_url("county.json","2010-20")
+    _url = _input_url("county.json", "2010-20")
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
     # Filter by agegrp = 0.
     df = df.query("YEAR not in [1, 2, 13]")

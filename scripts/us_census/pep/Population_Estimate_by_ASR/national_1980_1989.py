@@ -62,7 +62,7 @@ def national1980():
     # Getting list of URLs from JSON file.
     _ZIP_DIR = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + 'Zip1980-90'
-    _urls = _input_url("national.json","1980-90")
+    _urls = _input_url("national.json", "1980-90")
 
     # Creation of a folder if it does not exist.
     if not os.path.exists(_ZIP_DIR):
@@ -76,7 +76,7 @@ def national1980():
             # unzipping the dataset
             with ZipFile(BytesIO(resp.read()), 'r') as zipfile:
                 zipfile.extractall()
-    _urls = _urls = _input_url("national.json","1980-90files")
+    _urls = _urls = _input_url("national.json", "1980-90files")
 
     cols = ["0", "1", "2", "3", "4", "5", "6", "7",\
                         "8", "9", "10", "11","12", "13", "14", "15",\

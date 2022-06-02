@@ -19,6 +19,7 @@ def _input_url(file_name: str, key_name: str):
     _url = _URLS_JSON[key_name]
     return _url
 
+
 def _replace_age(df: pd.DataFrame):
     """
     Replaces the columns of DF as per metadata

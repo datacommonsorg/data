@@ -27,7 +27,7 @@ def state2000():
         from 2000-2010 on a State Level,
         cleans it and create a cleaned csv
         '''
-    _url = _input_url("state.json","2000-10")
+    _url = _input_url("state.json", "2000-10")
     df = pd.read_csv(_url, encoding='ISO-8859-1')
     # Filtering the data needed.
     df.drop(df[(df['RACE'] == 0) & (df['SEX'] == 0)].index, inplace=True)

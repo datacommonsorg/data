@@ -21,7 +21,6 @@ import pandas as pd
 from common_functions import _input_url
 
 
-
 def national2010():
     '''
     This Python Script Loads csv datasets
@@ -29,8 +28,8 @@ def national2010():
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
-    _urls = _input_url("national.json","2010-19")
-    _sheets = _input_url("national.json","2010-19sheets")
+    _urls = _input_url("national.json", "2010-19")
+    _sheets = _input_url("national.json", "2010-19sheets")
     # Used to collect data after every loop for every file's df.
     df_final = pd.DataFrame()
     for sheet in _sheets:

@@ -28,7 +28,7 @@ def state1970():
       cleans it and create a cleaned csv.
       '''
 
-    _url = _input_url("state.json","1970-79")
+    _url = _input_url("state.json", "1970-79")
     df = pd.read_csv(_url, skiprows=5, encoding='ISO-8859-1')
     df.insert(1, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['FIPS State Code'].map(str)).str.zfill(2)

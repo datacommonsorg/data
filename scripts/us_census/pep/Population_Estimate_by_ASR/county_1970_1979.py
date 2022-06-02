@@ -18,7 +18,7 @@ for County Level Data
 '''
 import os
 import pandas as pd
-from common_functions import _input_url,_replace_age
+from common_functions import _input_url, _replace_age
 
 
 def county1970():
@@ -28,7 +28,7 @@ def county1970():
    cleans it and create a cleaned csv
    '''
     # Getting input URL from the JSON file.
-    _url = _input_url("county.json","1970-79")
+    _url = _input_url("county.json", "1970-79")
     _cols=['Year','geo_ID','Race',0,1,2,3,4,5,6,7\
                       ,8,9,10,11,12,13,14,15,16,17]
     # Contains the final data which has been taken directly and aggregated.

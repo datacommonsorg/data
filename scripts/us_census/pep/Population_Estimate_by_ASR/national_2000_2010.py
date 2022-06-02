@@ -21,7 +21,6 @@ import pandas as pd
 from common_functions import _input_url
 
 
-
 def national2000():
     '''
     This Python Script Loads csv datasets
@@ -29,7 +28,7 @@ def national2000():
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
-    _url = _input_url("national.json","2000-10")
+    _url = _input_url("national.json", "2000-10")
     # Reading the csv format input file and converting it to a dataframe.
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
     # Removing the unwanted rows.

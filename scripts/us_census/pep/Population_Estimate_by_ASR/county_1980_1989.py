@@ -18,7 +18,8 @@ for County and State Level Data
 '''
 import os
 import pandas as pd
-from common_functions import _input_url,_replace_age
+from common_functions import _input_url, _replace_age
+
 
 def county1980():
     '''
@@ -28,7 +29,7 @@ def county1980():
     for both County and State.
     '''
     # Getting input URL from the JSON file.
-    _url = _input_url("county.json","1980-89")
+    _url = _input_url("county.json", "1980-89")
     # Contains the final data which has been taken directly and aggregated.
     final_df = pd.DataFrame()
     # Contains aggregated data for age and sex.

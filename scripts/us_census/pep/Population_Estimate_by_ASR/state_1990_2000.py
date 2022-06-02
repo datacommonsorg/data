@@ -27,7 +27,7 @@ def state1990():
     from 1990-2000 on a State Level,
     cleans it and create a cleaned csv.
     '''
-    _urls = _input_url("state.json","1990-00")
+    _urls = _input_url("state.json", "1990-00")
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     for url in _urls:
