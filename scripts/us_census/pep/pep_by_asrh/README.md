@@ -20,13 +20,13 @@ These are the attributes that we will use
 |-------------------------------------------------------|---------------------------------------------------------------------------------------|
 | Year       					| The Year of the population estimates provided. 				|
 | Age   				| The Individual Ages or Age Buckets of the population in the US. 						|
-| Race   	| Races of the population in the US.  	|
+| Race   	| Races of the population in the US.(https://www.census.gov/topics/population/race/about.html, https://www.census.gov/newsroom/blogs/random-samplings/2021/08/measuring-racial-ethnic-diversity-2020-census.html).  	|
 | Sex   				| Gender either Male or Female. 							|
 | Origin   		| Origin either Hispanic or Non Hispanic  		|
 
 
 #### Cleaned Data
-Cleaned data will be inside [Output/USA_Population_ASRH.csv] as a CSV file with the following columns.
+Cleaned data will be inside [output/USA_Population_ASRH.csv] as a CSV file with the following columns.
 
 - Year
 - Location
@@ -37,8 +37,8 @@ Cleaned data will be inside [Output/USA_Population_ASRH.csv] as a CSV file with 
 
 
 #### MCFs and Template MCFs
-- [Output/USA_Population_ASRH.mcf]
-- [Output/USA_Population_ASRH.tmcf]
+- [output/USA_Population_ASRH.mcf]
+- [output/USA_Population_ASRH.tmcf]
 
 ### Running Tests
 

@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 This Python Script Load the datasets, cleans it
-and generates cleaned csv, MCF, TMCF file
+and generates cleaned csv, MCF, TMCF file.
 """
 import os
 
@@ -40,15 +40,14 @@ def _convert_to_int(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _derive_cols(df: pd.DataFrame, derived_cols: dict) -> pd.DataFrame:
-    """Derive new columns using derived_cols dict
-       where key represents dervied col and values represents existing columns
-
+    """Derive new columns using DataFrame and derived_cols dict
     Args:
-        df (pd.DataFrame): _description_
-        derived_cols (list): _description_
+        df (pd.DataFrame): Input DataFrame loaded with data.
+        derived_cols (dict): derived_cols dict
+       where key represents dervied col and values represents existing columns.
 
     Returns:
-        pd.DataFrame: _description_
+        pd.DataFrame: DataFrame
     """
     for dsv, sv in derived_cols.items():
         df[dsv] = df.loc[:, sv].apply(pd.to_numeric,
@@ -58,9 +57,9 @@ def _derive_cols(df: pd.DataFrame, derived_cols: dict) -> pd.DataFrame:
 
 def _get_age_grp(age_grp: enumerate) -> str:
     """
-    Returns Age Groups using age_grp index as below
+    Returns Age Groups using age_grp index as below.
     0: ""
-    1: 0To4f
+    1: 0To4
     2: 5To9
     3: 10To14
     ...
@@ -81,16 +80,17 @@ def _get_age_grp(age_grp: enumerate) -> str:
     return f"{start}To{end}"
 
 
-def _get_age_grp2(age_grp: enumerate) -> str:
+def _get_age_grp_county_2000_2009(age_grp: enumerate) -> str:
     """
-    Returns Age Groups using age_grp index as below
+    Returns Age Groups using age_grp index as below,
+    applies for country between years 2000 to 2009.
     0: "0"
     1: 1To4
     2: 5To9
     3: 10To14
     ...
     ...
-    85: 85To89
+    18: 85To89
     Args:
         age_grp (int): Age Group Bucket Index
 
@@ -141,7 +141,7 @@ def _load_df(path: str,
              skip_rows: int = None,
              encoding: str = "UTF-8") -> pd.DataFrame:
     """
-    Returns the DataFrame using input path and config
+    Returns the DataFrame using input path and config.
     Args:
         path (str): Input File Path
         file_format (str): Input File Format [csv, txt, xls, xlsx]
@@ -173,13 +173,31 @@ def _load_df(path: str,
     return df
 
 
-def _transpose_df(df: pd.DataFrame,
-                  common_col: list,
-                  data_cols: list,
-                  default_col="SV") -> pd.DataFrame:
+def _unpivot_df(df: pd.DataFrame,
+                id_col: list,
+                data_cols: list,
+                default_col="SV") -> pd.DataFrame:
     """
-    Transpose the data_cols into single column named as default_col
-    and concatinates the default_col with common_cols
+    Unpivot a DataFrame from wide to long format
+
+    Before Transpose,
+
+    df:
+    Year    Location   HispaicOrLatino_Male  HispaicOrLatino_Female
+    1999    geoId/01   14890                  15678
+    1999    geoId/02   13452                  11980
+
+    id_col: ["Year", "Location"]
+    data_cols: ["HispaicOrLatino_Male", "HispaicOrLatino_Female"]
+    default_col: "SV"
+
+    Result df:
+    Year    Location   SV                       Count_Person
+    1999    geoId/01   HispaicOrLatino_Male     14890
+    1999    geoId/02   HispaicOrLatino_Male     13452
+    1999    geoId/01   HispaicOrLatino_Female   15678
+    1999    geoId/02   HispaicOrLatino_Female   11980
+
     Args:
         df (pd.DataFrame): Dataframe with cleaned data
         common_col (list): Dataframe Column list
@@ -189,19 +207,25 @@ def _transpose_df(df: pd.DataFrame,
         pd.DataFrame: Dataframe
     """
     res_df = pd.DataFrame()
-    for col in data_cols:
-        cols = common_col + [col]  # col have the population data,
-        tmp_df = df[cols]
-        # Renaming Col value with 'Count_Person' to
-        # align with DataCommons Standarads
-        tmp_df.columns = common_col + ["Count_Person"]
-        tmp_df[default_col] = col
-        res_df = pd.concat([res_df, tmp_df])
+    res_df = pd.melt(df,
+                     id_vars=id_col,
+                     value_vars=data_cols,
+                     var_name=default_col,
+                     value_name='Count_Person')
+    # for col in data_cols:
+    #     cols = common_col + [col]  # col have the population data,
+    #     tmp_df = df[cols]
+    #     # Renaming Col value with 'Count_Person' to
+    #     # align with DataCommons Standarads
+    #     tmp_df.columns = common_col + ["Count_Person"]
+    #     tmp_df[default_col] = col
+    #     res_df = pd.concat([res_df, tmp_df])
     return res_df
 
 
 def _create_sv(desc: str, age: str) -> str:
-    if age in [100, 85]:
+    # Age 85 and 100
+    if age in {100, 85}:
         return f"Count_Person_{age}OrMoreYears_{desc}"
     return f"Count_Person_{age}Years_{desc}"
 
@@ -209,7 +233,7 @@ def _create_sv(desc: str, age: str) -> str:
 def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists
-    national data for the year 1980-1989
+    national data for the year 1980-1989.
 
     Args:
         file_path (str): Input File Path
@@ -217,14 +241,21 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df = _load_df(file_path, "txt", header=None, skip_rows=1)
-    # Extracting Year from the file name and adding '7'
-    # to match the dataframe values
+    data_df = _load_df(file_path, "txt", header=None, skip_rows=1)
+    # Extracting Year from the file name and adding '7' to it
+    # to filter the dataframe as it provides
+    # population estimates for april(4) and july(7) month.
     yr = '7' + os.path.basename(file_path)[1:3]
+    # col at index 1 in DataFrame contains date values, example as below
+    # 488, 488100,788,788100 where 4 or 7 represents month, 88 represents year,
+    # 100 represents age.
     yr_100 = yr + '100'
     yr, yr_100 = int(yr), int(yr_100)
-    yr_100_df = df[df[1] == yr_100].iloc[:, 1:].reset_index(drop=True)
-    df = df[df[1] == yr].iloc[:, 1:].reset_index(drop=True)
+    # Age is at index 2 column, but for age 100, it is present in index 1
+    # column as 788100, so filtering that row separately
+    # and loading it to another DataFrame yr_100_df
+    yr_100_df = data_df[data_df[1] == yr_100].iloc[:, 1:].reset_index(drop=True)
+    data_df = data_df[data_df[1] == yr].iloc[:, 1:].reset_index(drop=True)
     cols = [
         "Year", "Age", "Total_Population", "Total_Male_Population",
         "Total_Female_Population", "Male_WhiteAlone_Population",
@@ -246,45 +277,46 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     ]
     hispanic_cols = _get_mapper_cols_dict("nationals_1980_1999_hispanic")
     derived_cols = _get_mapper_cols_dict("nationals_1980_1999_derived")
-    df.columns = cols
+    data_df.columns = cols
+    # Appending yr_100_df to
     if yr_100_df.shape[0] > 0:
         yr_100_df.insert(0, 0, yr)
         yr_100_df[1] = 100
         yr_100_df = yr_100_df.drop(columns=[23])
         yr_100_df.columns = cols
-        df = pd.concat([df, yr_100_df]).reset_index(drop=True)
+        data_df = pd.concat([data_df, yr_100_df]).reset_index(drop=True)
     # Type casting dataframe values to int.
-    for col in df.columns:
-        df[col] = df[col].astype('int')
+    data_df = _convert_to_int(data_df)
     # Creating Year Column
-    df["Year"] = "19" + df["Year"].astype('str').str[-2:]
+    data_df["Year"] = "19" + data_df["Year"].astype('str').str[-2:]
     # Deriving Columns for HispanicOrLatino Origin
     for dsv, sv in hispanic_cols.items():
-        df[sv[1:]] = -df[sv[1:]]
-        df[dsv] = df.loc[:, sv].sum(axis=1)
-        df[sv[1:]] = -df[sv[1:]]
+        data_df[sv[1:]] = -data_df[sv[1:]]
+        data_df[dsv] = data_df.loc[:, sv].sum(axis=1)
+        data_df[sv[1:]] = -data_df[sv[1:]]
         cols.append(dsv)
     # Deriving New Columns
-    df = _derive_cols(df, derived_cols)
+    data_df = _derive_cols(data_df, derived_cols)
     cols = cols + list(derived_cols.keys())
     f_cols = [val for val in cols if "Hispanic" in val]
-    df = _transpose_df(df, ["Year", "Age"], f_cols)
+    data_df = _unpivot_df(data_df, ["Year", "Age"], f_cols)
     # Creating SV's name using SV, Age Column
-    df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
-    df["SV"] = df["SV"].str.replace("85OrMore", "85")
-    df["Location"] = "country/USA"
+    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
+                                  axis=1)
+    data_df["SV"] = data_df["SV"].str.replace("85OrMore", "85")
+    data_df["Location"] = "country/USA"
     final_cols = [
         "Year", "Location", "SV", "Measurement_Method", "Count_Person"
     ]
     # Deriving Measurement Method for the SV's
-    df = _add_measurement_method(df, "SV", "Measurement_Method")
-    return df[final_cols]
+    data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
+    return data_df[final_cols]
 
 
 def _process_state_1990_1999(file_path):
     """
     Returns the Cleaned DataFrame consists
-    state data for the year 1990-1999
+    state data for the year 1990-1999.
 
     Args:
         file_path (str): Input File Path
@@ -324,7 +356,7 @@ def _process_state_1990_1999(file_path):
     # Creating GeoId's using Fips Code
     df["Location"] = "geoId/" + df["Location"]
     f_cols = [val for val in cols if "Hispanic" in val]
-    df = _transpose_df(df, ["Year", "Location", "Age"], f_cols)
+    df = _unpivot_df(df, ["Year", "Location", "Age"], f_cols)
     df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
     final_cols = [
         "Year", "Location", "SV", "Measurement_Method", "Count_Person"
@@ -338,7 +370,7 @@ def _process_state_1990_1999(file_path):
 def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists
-    nationals data for the year 2000-2009
+    nationals data for the year 2000-2009.
 
     Args:
         file_path (str): Input File Path
@@ -362,7 +394,7 @@ def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
     df = _derive_cols(df, derived_cols)
     cols = cols + list(derived_cols.keys())
     f_cols = [val for val in cols if "Hispanic" in val]
-    df = _transpose_df(df, ["Year", "Age"], f_cols)
+    df = _unpivot_df(df, ["Year", "Age"], f_cols)
     # Creating SV's name using SV, Age Columns
     df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
     df["Location"] = "country/USA"
@@ -378,7 +410,7 @@ def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
 def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists
-    state data for the year 2010-2020
+    state data for the year 2010-2020.
 
     Args:
         file_path (str): Input File Path
@@ -442,7 +474,7 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
         for col in req_cols
     ]
     df.columns = req_cols
-    df = _transpose_df(df, req_cols[:2], req_cols[3:], default_col="Year")
+    df = _unpivot_df(df, req_cols[:2], req_cols[3:], default_col="Year")
     f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
     df["Count_Person"] = df["Count_Person"].astype("int")
     # Deriving Measurement Method for the SV's
@@ -453,7 +485,7 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
 def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists
-    natioanls data for the year 2010-2021
+    natioanls data for the year 2010-2021.
 
     Args:
         file_path (str): Input File Path
@@ -473,7 +505,7 @@ def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
     cols = cols + list(derived_cols.keys())
     cols = ["Year", "Age"] + [col for col in cols if "Hispanic" in col]
     df = df[cols]
-    df = _transpose_df(df, ["Year", "Age"], cols[2:])
+    df = _unpivot_df(df, ["Year", "Age"], cols[2:])
     # Creating SV's name using SV, Age Column
     df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
     df["SV"] = df["SV"].str.replace("85OrMore", "85")
@@ -490,7 +522,7 @@ def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
 def _process_state_1980_1989(file_path: str) -> str:
     """
     Returns the Cleaned DataFrame consists
-    state data for the year 1980-1989
+    state data for the year 1980-1989.
 
     Args:
         file_path (str): Input File Path
@@ -543,9 +575,9 @@ def _process_state_1980_1989(file_path: str) -> str:
         tmp_derived_cols_df = tmp_derived_cols_df.groupby(
             ['Year', 'Location', 'SV']).sum().reset_index()
         df = df.append(tmp_derived_cols_df)
-    df = _transpose_df(df, ["Year", "Location", "SV"],
-                       pop_cols,
-                       default_col="Age")
+    df = _unpivot_df(df, ["Year", "Location", "SV"],
+                     pop_cols,
+                     default_col="Age")
     # Creating SV's name using SV, Age Column
     df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
     # Deriving Measurement Method for the SV's
@@ -557,7 +589,7 @@ def _process_state_1980_1989(file_path: str) -> str:
 def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists
-    state data for the year 2000-2010
+    state data for the year 2000-2010.
 
     Args:
         file_path (str): Input File Path
@@ -625,7 +657,7 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
     df = df[cols]
     cols = [col.replace("POPESTIMATE", "") for col in cols]
     df.columns = cols
-    df = _transpose_df(df, cols[:2], cols[2:], default_col="Year")
+    df = _unpivot_df(df, cols[:2], cols[2:], default_col="Year")
     df = df[["Year", "Location", "SV", "Count_Person"]]
     # Deriving Measurement Method for the SV's
     df = _add_measurement_method(df, "SV", "Measurement_Method")
@@ -635,13 +667,13 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
 def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists
-    county data for the year 1990-1999
+    county data for the year 1990-1999.
 
     Args:
-        file_path (str): Input File Path
+        file_path (str): Input File Path.
 
     Returns:
-        pd.DataFrame: Cleaned DataFrame
+        pd.DataFrame: Cleaned DataFrame.
     """
     final_data = []
     # Reading txt file and filtering required rows
@@ -722,9 +754,9 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
         df = pd.concat([df, data])
     df = pd.concat([df, skipped_df])
     df = df.dropna()
-    df = _transpose_df(df, ["Year", "Location", "SV"],
-                       pop_cols,
-                       default_col="Age")
+    df = _unpivot_df(df, ["Year", "Location", "SV"],
+                     pop_cols,
+                     default_col="Age")
     # Creating SV's name using SV, Age Column
     df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
     # Creating GeoId's for State FIPS Code
@@ -739,7 +771,7 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
 def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists
-    county data for the year 2000-2009
+    county data for the year 2000-2009.
 
     Args:
         file_path (str): Input File Path
@@ -772,9 +804,9 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
     derived_cols = _get_mapper_cols_dict("county_2000_2009")
     df = _derive_cols(df, derived_cols)
     cols = cols + list(derived_cols.keys())
-    df["Age"] = df["AGEGRP"].apply(_get_age_grp2)
+    df["Age"] = df["AGEGRP"].apply(_get_age_grp_county_2000_2009)
     f_cols = [val for val in cols if "Hispanic" in val]
-    df = _transpose_df(df, ["Year", "Location", "Age"], f_cols)
+    df = _unpivot_df(df, ["Year", "Location", "Age"], f_cols)
     # Creating SV's name using SV, Age Column
     df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
     # Deriving Measurement Method for the SV's
@@ -786,7 +818,7 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
 def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
     """
     Returns the Cleaned DataFrame consists
-    county data for the year 2010-2020
+    county data for the year 2010-2020.
 
     Args:
         file_path (str): Input File Path
@@ -820,7 +852,7 @@ def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
     f_cols = [val for val in cols if "Hispanic" in val]
     df["Age"] = df["AGEGRP"].apply(_get_age_grp)
     df["Age"] = df["Age"].str.replace("85To89", "85")
-    df = _transpose_df(df, ["Year", "Location", "Age"], f_cols)
+    df = _unpivot_df(df, ["Year", "Location", "Age"], f_cols)
     # Creating SV's name using SV, Age Column
     df["SV"] = df.apply(lambda row: _create_sv(row.SV, row.Age), axis=1)
     f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
@@ -840,7 +872,7 @@ def _derive_nationals(df: pd.DataFrame) -> pd.DataFrame:
 class USCensusPEPByASRH:
     """
     This Class has requried methods to generate Cleaned CSV,
-    MCF and TMCF Files
+    MCF and TMCF Files.
     """
 
     def __init__(self, input_files: list, csv_file_path: str,
@@ -853,7 +885,7 @@ class USCensusPEPByASRH:
         self.file_name = None
         self.scaling_factor = 1
 
-    def __generate_mcf(self, sv_list) -> None:
+    def _generate_mcf(self, sv_list) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
@@ -906,10 +938,10 @@ measuredProperty: dcs:count
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
 
-    def __generate_tmcf(self) -> None:
+    def _generate_tmcf(self) -> None:
         """
         This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template
+        dataframe headers and defined TMCF template.
         Arguments:
             df_cols (list) : List of DataFrame Columns
         Returns:
@@ -979,11 +1011,10 @@ value: C:USA_Population_ASRH->Count_Person
             sv_list += data_df["SV"].to_list()
         sv_list = list(set(sv_list))
         sv_list.sort()
-        self.__generate_mcf(sv_list)
-        self.__generate_tmcf()
+        self._generate_mcf(sv_list)
+        self._generate_tmcf()
 
 
-        #print(f_names)
 def main(_):
     input_path = FLAGS.input_path
     ip_files = os.listdir(input_path)
