@@ -34,7 +34,7 @@ class TestPreprocess(unittest.TestCase):
     cleaned_csv_file_path = os.path.join(op_data_folder, "data.csv")
     mcf_file_path = os.path.join(op_data_folder, "test_census.mcf")
     tmcf_file_path = os.path.join(op_data_folder, "test_census.tmcf")
-    
+
     ip_data = [
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
         'test_files/test_hlth_ehis_pe1u.tsv',
@@ -53,7 +53,7 @@ class TestPreprocess(unittest.TestCase):
         expected_mcf_file_path = os.path.join(test_data_folder,
             "expected_eurostat_population_physicalactivity.mcf")
 
-        expected_tmcf_file_path = os.path.join(test_data_folder, 
+        expected_tmcf_file_path = os.path.join(test_data_folder,
             "expected_eurostat_population_physicalactivity.tmcf")
 
         with open(expected_mcf_file_path,
@@ -82,7 +82,7 @@ class TestPreprocess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(test_data_folder, 
+        expected_csv_file_path = os.path.join(test_data_folder,
             "expected_eurostat_population_physicalactivity.csv")
 
         expected_csv_data = ""

@@ -44,7 +44,7 @@ def hlth_ehis_pe9e(df: pd.DataFrame) -> pd.DataFrame:
     df.columns=cols
     col1 = "unit,physact,isced11,sex,age,geo"
     df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns.   
+    # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_physact(df)
@@ -432,7 +432,7 @@ def hlth_ehis_pe2m(df: pd.DataFrame) -> pd.DataFrame:
     """
     cols = ['unit,duration,bmi,sex,age,time','EU27_2020','BE','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
-    'MT','NL','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','RS','TR']
+    'MT','NL','AT','PL','PT','RO','SI','SK','SE','IS','NO','RS','TR']
     df.columns=cols
     col1 = "unit,duration,bmi,sex,age,time"
     df = _split_column(df,col1)
@@ -447,6 +447,29 @@ def hlth_ehis_pe2m(df: pd.DataFrame) -> pd.DataFrame:
         +'_'+'NonWorkRelatedPhysicalActivity'+'_'+df['bmi']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['bmi']
     df.drop(columns=['bmi','duration','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+        ,value_name='observation')
+    return df
+
+def hlth_ehis_de9(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans the file hlth_ehis_de9 for concatenation in Final CSV.
+    Input Taken: DF
+    Output Provided: DF
+    """
+    cols = ['sex,age,isced11,time','BG','CZ','EL','ES','CY','LV','HU','MT','AT',
+        'PL','RO','SK']
+    df.columns=cols
+    col1 = "sex,age,isced11,time"
+    df = _split_column(df,col1)
+    # Filtering out the wanted rows and columns.
+    df = df[df['age'] == 'TOTAL']
+    df = _replace_isced11(df)
+    df = _replace_sex(df)
+    df.drop(columns=['age'],inplace=True)
+    df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_'+\
+        'PhysicalActivity'+'_AsAFractionOf_Count_Person_'+df['sex']
+    df.drop(columns=['isced11','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     print(df)
@@ -496,6 +519,7 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
         'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
         'ED3_4': 'EducationalAttainment'+\
             'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+        'ED5_6' : 'FirstStageTertiaryEducationOrSecondStageTertiaryEducation',
         'ED5-8': 'EducationalAttainmentTertiaryEducation',
         'ED5_8': 'EducationalAttainmentTertiaryEducation',
         'TOTAL': 'Total'
@@ -509,9 +533,9 @@ def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF.
     """
 
-    _quant_inc = {                   
+    _quant_inc = {
         'TOTAL':'Total',
-	    'QU1':'Percentile0To20', 
+	    'QU1':'Percentile0To20',
 	    'QU2':'Percentile20To40',
         'QU3':'Percentile40To60',
 	    'QU4':'Percentile60To80',
@@ -644,7 +668,7 @@ class EuroStatPhysicalActivity:
         self.file_name = None
         self.scaling_factor = 1
 
-    def __generate_tmcf(self) -> None:
+    def _generate_tmcf(self) -> None:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
@@ -665,7 +689,7 @@ value: C:EuroStat_Population_PhysicalActivity->observation
         with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf_template.rstrip('\n'))
 
-    def __generate_mcf(self, sv_list) -> None:
+    def _generate_mcf(self, sv_list) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
@@ -696,9 +720,11 @@ measuredProperty: dcs:count
             citizenship = ''
             lev_limit= ''
             bmi = ''
+
             sv_temp = sv.split("_AsAFractionOf_")
             denominator = "\nmeasurementDenominator: dcs:"+sv_temp[1]
             sv_prop = sv_temp[0].split("_")
+
             for prop in sv_prop:
                 if prop in ["Count", "Person"]:
                     continue
@@ -743,6 +769,7 @@ measuredProperty: dcs:count
                 elif "weight" in prop or "Normal" in prop \
                     or "Obese" in prop or "Obesity" in prop:
                     lev_limit = "\nbmi: dcs:" + prop
+
             final_mcf_template += mcf_template.format(sv,denominator,incomequin,
                 education,healthBehavior,exercise,residence,activity,duration,
                 gender,countryofbirth,citizenship,lev_limit,bmi) + "\n"
@@ -764,6 +791,7 @@ measuredProperty: dcs:count
         if not os.path.exists(output_path):
             os.mkdir(output_path)
         sv_list = []
+
         for file_path in self.input_files:
             print(file_path)
             df = pd.read_csv(file_path, sep='\t',skiprows=1)
@@ -799,6 +827,9 @@ measuredProperty: dcs:count
                 df = hlth_ehis_pe9d(df)
             elif 'hlth_ehis_pe2m' in file_path:
                 df = hlth_ehis_pe2m(df)
+            elif 'hlth_ehis_de9' in file_path:
+                df = hlth_ehis_de9(df)
+            
             df['SV'] = df['SV'].str.replace('_Total','')
             df['Measurement_Method'] = np.where(df['observation']\
                 .str.contains('u'),'LowReliability/EurostatRegionalStatistics',\
@@ -810,13 +841,14 @@ measuredProperty: dcs:count
             df['observation']= pd.to_numeric(df['observation'], errors='coerce')
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
+
         final_df = final_df.sort_values(by=['time', 'geo','SV'])
         final_df = final_df.replace({'geo': COUNTRY_MAP})
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
-        self.__generate_mcf(sv_list)
-        self.__generate_tmcf()
+        self._generate_mcf(sv_list)
+        self._generate_tmcf()
 
 def main(_):
     input_path = FLAGS.input_path
