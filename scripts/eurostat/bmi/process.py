@@ -32,7 +32,7 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_data"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-def hlth_ehis_bm1e(df: pd.DataFrame) -> pd.DataFrame:
+def _age_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_bm1e for concatenation in Final CSV
     Input Taken: DF
@@ -252,37 +252,7 @@ measuredProperty: dcs:count
             print(file_path)
             df = pd.read_csv(file_path, sep='\t',skiprows=1)
             if 'hlth_ehis_bm1e' in file_path:
-                df = hlth_ehis_bm1e(df)
-            elif 'hlth_ehis_pe9i' in file_path:
-                df = hlth_ehis_pe9i(df)
-            elif 'hlth_ehis_pe9u' in file_path:
-                df = hlth_ehis_pe9u(df)
-            elif 'hlth_ehis_pe1e' in file_path:
-                df = hlth_ehis_pe1e(df)
-            elif 'hlth_ehis_pe1i' in file_path:
-                df = hlth_ehis_pe1i(df)
-            elif 'hlth_ehis_pe1u' in file_path:
-                df = hlth_ehis_pe1u(df)
-            elif 'hlth_ehis_pe3e' in file_path:
-                df = hlth_ehis_pe3e(df)
-            elif 'hlth_ehis_pe3i' in file_path:
-                df = hlth_ehis_pe3i(df)
-            elif 'hlth_ehis_pe3u' in file_path:
-                df = hlth_ehis_pe3u(df)
-            elif 'hlth_ehis_pe2e' in file_path:
-                df = hlth_ehis_pe2e(df)
-            elif 'hlth_ehis_pe2i' in file_path:
-                df = hlth_ehis_pe2i(df)
-            elif 'hlth_ehis_pe2u' in file_path:
-                df = hlth_ehis_pe2u(df)
-            elif 'hlth_ehis_pe9b' in file_path:
-                df = hlth_ehis_pe9b(df)
-            elif 'hlth_ehis_pe9c' in file_path:
-                df = hlth_ehis_pe9c(df)
-            elif 'hlth_ehis_pe9d' in file_path:
-                df = hlth_ehis_pe9d(df)
-            elif 'hlth_ehis_pe2m' in file_path:
-                df = hlth_ehis_pe2m(df)
+                df = _age_sex_education(df)
             df['SV'] = df['SV'].str.replace('_Total','')
             df['Measurement_Method'] = np.where(df['observation']\
                 .str.contains('u'),'LowReliability/EurostatRegionalStatistics',\
