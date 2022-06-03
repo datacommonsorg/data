@@ -44,6 +44,7 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "config_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
+
 def _get_urls(json_file_path, key):
     '''
     Extracting dataset urls from
@@ -54,6 +55,7 @@ def _get_urls(json_file_path, key):
         _URLS_JSON = json.load(file)
     urls = _URLS_JSON[key]
     return urls
+
 
 def process(config_files, sv_list=None):
     '''
@@ -97,34 +99,38 @@ def process(config_files, sv_list=None):
 
     if sv_list is None:
         # list of output files which are processed as is
-        CSVLIST = ["nationals_result_1900_1959.csv",
-            "nationals_result_1960_1979.csv",
-            "nationals_result_2000_2010.csv",
-            "state_result_2000_2010.csv","state_result_2010_2020.csv",
-            "county_result_2000_2009.csv", "county_result_2010_2020.csv"]
+        CSVLIST = [
+            "nationals_result_1900_1959.csv", "nationals_result_1960_1979.csv",
+            "nationals_result_2000_2010.csv", "state_result_2000_2010.csv",
+            "state_result_2010_2020.csv", "county_result_2000_2009.csv",
+            "county_result_2010_2020.csv"
+        ]
 
         # list of output files which are having aggregation Count_Person_Male
         # and Count_Person_Female
-        CSVLIST1 = ["state_result_1970_1979.csv","state_result_1980_1990.csv",
-            "state_result_1990_2000.csv",
-            "county_result_1970_1979.csv", "county_result_1980_1989.csv",
-            "county_result_1990_2000.csv"]
+        CSVLIST1 = [
+            "state_result_1970_1979.csv", "state_result_1980_1990.csv",
+            "state_result_1990_2000.csv", "county_result_1970_1979.csv",
+            "county_result_1980_1989.csv", "county_result_1990_2000.csv"
+        ]
 
         # list of files which are aggregated from state
-        CSVLIST2 = ["nationals_result_1980_1990.csv",
-            "nationals_result_1990_2000.csv",
-            "nationals_result_2010_2020.csv"]
+        CSVLIST2 = [
+            "nationals_result_1980_1990.csv", "nationals_result_1990_2000.csv",
+            "nationals_result_2010_2020.csv"
+        ]
     else:
         CSVLIST = sv_list[0]
         CSVLIST1 = sv_list[1]
         CSVLIST2 = sv_list[2]
 
-    flag_dict = {1:CSVLIST, 2:CSVLIST1, 3:CSVLIST2}
+    flag_dict = {1: CSVLIST, 2: CSVLIST1, 3: CSVLIST2}
     sv_dict = _create_single_csv(flag_dict)
 
-    for flag,sv_list in sv_dict.items():
+    for flag, sv_list in sv_dict.items():
         _generate_mcf(sv_list, flag)
         _generate_tmcf(sv_list, flag)
+
 
 def main(_):
     '''
@@ -136,6 +142,7 @@ def main(_):
     ip_files = [input_path + os.sep + file for file in ip_files]
 
     process(ip_files)
+
 
 if __name__ == "__main__":
     app.run(main)

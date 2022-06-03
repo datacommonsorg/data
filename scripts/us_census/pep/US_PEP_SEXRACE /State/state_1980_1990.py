@@ -33,7 +33,7 @@ def _process_state_1980_1990(url):
     # 16 = Ages 80-84, 17 = Ages 85+
 
     # COLUMNS_TO_SUM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,\
-      #  11, 12, 13, 14, 15, 16, 17]
+    #  11, 12, 13, 14, 15, 16, 17]
     _cols = ['Info', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,\
         11, 12, 13, 14, 15, 16, 17]
     # _cols = ['Info', 'COLUMNS_TO_SUM']
@@ -118,6 +118,7 @@ def _process_state_1980_1990(url):
         'Count_Person_Female_BlackOrAfricanAmericanAlone',
         'Count_Person_Female_WhiteAlone']].sum(axis=1)
     return df
+
 
 def process_state_1980_1990(url):
     '''
