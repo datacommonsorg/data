@@ -593,10 +593,10 @@ def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF.
     """
     _c_birth = {
-        'EU28_FOR':	'CountryOfBirthForeignBornWithinEU28',
-	    'NEU28_FOR': 'CountryOfBirthForeignBornOutsideEU28',
-	    'FOR': 'CountryOfBirthForeignBorn',
-	    'NAT': 'CountryOfBirthNative'
+        'EU28_FOR':	'ForeignBornWithinEU28',
+	    'NEU28_FOR': 'ForeignBornOutsideEU28',
+	    'FOR': 'ForeignBorn',
+	    'NAT': 'Native'
         }
     df = df.replace({'c_birth': _c_birth})
     return df
@@ -607,10 +607,10 @@ def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF.
     """
     _citizen = {
-        'EU28_FOR':	'CitizenshipForeignBornWithinEU28',
-	    'NEU28_FOR': 'CitizenshipForeignBornOutsideEU28',
-	    'FOR': 'CitizenshipForeignBorn',
-	    'NAT': 'CitizenshipNative'
+        'EU28_FOR':	'ForeignWithinEU28',
+	    'NEU28_FOR': 'ForeignOutsideEU28',
+	    'FOR': 'NotACitizen',
+	    'NAT': 'Citizen'
         }
     df = df.replace({'citizen': _citizen})
     return df
@@ -700,7 +700,7 @@ value: C:EuroStat_Population_PhysicalActivity->observation
         """
         mcf_template = """Node: dcid:{}
 typeOf: dcs:StatisticalVariable
-populationType: dcs:Person{}{}{}{}{}{}{}{}{}{}{}{}{}
+populationType: dcs:Person{}{}{}{}{}{}{}{}{}{}{}{}
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 """
@@ -744,7 +744,7 @@ measuredProperty: dcs:count
                         "").replace("To"," ")+" Percentile]"
                 elif "Cities" in prop or "TownsAndSuburbs" in prop \
                     or "RuralAreas" in prop:
-                    residence = "\nplaceofResidenceClassification: dcs:" + prop
+                    residence = "\nplaceOfResidenceClassification: dcs:" + prop
                 elif "Activity" in prop:
                     activity = "\nphysicalActivityEffortLevel: dcs:" + prop
                 elif "Minutes" in prop:
@@ -757,10 +757,11 @@ measuredProperty: dcs:count
                     else:
                         duration = "\nduration: [Minutes " + prop.replace\
                             ("Minutes","") + "]"
-                elif "CountryOfBirth" in prop:
+                elif "ForeignBorn" in prop or "Native" in prop:
                     countryofbirth = "\nnativity: dcs:" + \
                         prop.replace("CountryOfBirth","")
-                elif "Citizenship" in prop:
+                elif "ForeignWithin" in prop or "ForeignOutside" in prop\
+                    or "Citizen" in prop:
                     citizenship = "\ncitizenship: dcs:" + \
                         prop.replace("Citizenship","")
                 elif "Moderate" in prop or "Severe" in prop \
@@ -768,11 +769,12 @@ measuredProperty: dcs:count
                     lev_limit = "\nglobalActivityLimitationIndicator: dcs:"+prop
                 elif "weight" in prop or "Normal" in prop \
                     or "Obese" in prop or "Obesity" in prop:
-                    lev_limit = "\nbmi: dcs:" + prop
+                    bmi = "__" + prop
+                    healthBehavior = healthBehavior +bmi
 
             final_mcf_template += mcf_template.format(sv,denominator,incomequin,
                 education,healthBehavior,exercise,residence,activity,duration,
-                gender,countryofbirth,citizenship,lev_limit,bmi) + "\n"
+                gender,countryofbirth,citizenship,lev_limit) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
