@@ -54,12 +54,15 @@ Cleaned data will be inside [Output/postprocess.csv] as a CSV file with the foll
 - Count_Person_Female_NonWhite
 
 #### MCFs and Template MCFs
+These files are genrated for the datasets which are processed as is.
 - [preprocess/Sex_Race.mcf]
 - [preprocess/Sex_Race.tmcf]
 
+These files are genrated for the datasets which are having aggregated Statvar Count_Person_Male and Count_Person_Female.
 - [preprocess/Sex_Race_aggregate.mcf]
 - [preprocess/Sex_Race_aggregate.tmcf]
 
+These files are genrated for the datasets which are aggregated from different geo granularity.
 - [preprocess/Sex_Race_aggregate_state_2010_2020.mcf]
 - [preprocess/Sex_Race_aggregate_state_20102_2020.tmcf]
 
@@ -68,7 +71,4 @@ Cleaned data will be inside [Output/postprocess.csv] as a CSV file with the foll
 The below command will run preprocess_test.py `python3 -m unittest script/us_census/pep/population_estimate_by_sr/preprocess_test.py`
 
 ### Import Procedure
-Run the following script order wise.
-1. The below command will run preprocess.py `python script/us_census/pep/population_estimate_by_sr/preprocess.py`
-
-2. The below command will run postprocess.py `python script/us_census/pep/population_estimate_by_sr/postprocess.py`
+The below command will run preprocess.py and generate three output csv, mcf and tmcf.  `python script/us_census/pep/population_estimate_by_sr/preprocess.py`

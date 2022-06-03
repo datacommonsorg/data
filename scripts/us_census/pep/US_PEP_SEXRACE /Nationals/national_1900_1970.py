@@ -116,7 +116,7 @@ def _process_national_1900_1970(ip_files):
     return final_df, final_df2
 
 
-def process_nat_1900_1970(ip_files):
+def process_national_1900_1970(ip_files):
     '''
     Function writes the output
     dataframe generated to csv

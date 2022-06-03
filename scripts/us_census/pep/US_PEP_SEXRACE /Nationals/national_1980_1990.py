@@ -31,8 +31,12 @@ def _process_national_1980_1990(url):
     # 8 = Ages 40-44, 9 = Ages 45-49, 10 = Ages 50-54, 11 = Ages 55-59
     # 12 = Ages 60-64, 13 = Ages 65-69, 14 = Ages 70-74, 15 = Ages 75-79
     # 16 = Ages 80-84, 17 = Ages 85+
+
+    # COLUMNS_TO_SUM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,\
+      #  11, 12, 13, 14, 15, 16, 17]
     _cols = ['Info', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,\
         11, 12, 13, 14, 15, 16, 17]
+    #_cols = ['Info', COLUMNS_TO_SUM]
 
     # reading the csv input file
     df = pd.read_table(url,
@@ -42,6 +46,7 @@ def _process_national_1980_1990(url):
                        names=_cols)
 
     # adding all the ages to get total value
+    #df['Total'] = df[COLUMNS_TO_SUM].sum(axis=1)
     df['Total']=df[0]+df[1]+df[2]+df[3]+df[4]+df[5]+df[6]\
         +df[7]+df[8]+df[9]+df[10]+df[11]+df[12]+df[13]+df[14]\
         +df[15]+df[16]+df[17]
@@ -55,9 +60,12 @@ def _process_national_1980_1990(url):
     df['Info'] = df['Info'].astype(str)
     df['Year'] = df['Info'].str[0:2] + "-198" + df['Info'].str[2]
 
-    # extracting sex and race from the columns
+    # extracting sex and race from the Info column
     df['Race'] = df['Info'].str[3]
     df['Sex'] = df['Info'].str[4]
+    # df = df.replace({'Sex':{'1':'Male', '2':'Female}
+    # df = df.replace({'Race':{'1':'W', '2': 'B', '3': 'AI',
+    # '4': 'AP', '5': 'W', '6':'B', '7':'AI', '8':'AP'}})
     df['Sex'] = df['Sex'].str.replace('1', 'Male')
     df['Sex'] = df['Sex'].str.replace('2', 'Female')
     df['Race'] = df['Race'].str.replace('1', 'W')
@@ -120,7 +128,7 @@ def _process_national_1980_1990(url):
     return df
 
 
-def process_nat_1980_1990(url):
+def process_national_1980_1990(url):
     '''
     Function writes the output
     dataframe generated to csv

@@ -51,6 +51,12 @@ def _process_state_2000_2010(url):
     df = df.query("SEX !=0")
 
     # changing values of column as per the metadata
+    # df = df.replace({'SEX':{1:'Male', 2:'Female}
+    # df = df.replace({'RACE':{0:'All_Races_Combined',
+    # 1:'WhiteAlone', 2: 'BlackOrAfricanAmericanAlone',
+    # 3: 'AmericanIndianAndAlaskaNativeAlone',
+    # 4: 'AsianAlone', 5: 'NativeHawaiianAndOtherPacificIslanderAlone',
+    # 6:'TwoOrMoreRaces'}})
     df['SEX'] = df['SEX'].astype(str).str.replace('1', 'Male')
     df['SEX'] = df['SEX'].astype(str).str.replace('2', 'Female')
     df['RACE'] = df['RACE'].astype(str).str.replace('0', 'All_Races_Combined')
@@ -98,7 +104,7 @@ def _process_state_2000_2010(url):
     return df
 
 
-def process_sta_2000_2010(url):
+def process_state_2000_2010(url):
     '''
     Function writes the output
     dataframe generated to csv

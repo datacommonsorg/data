@@ -102,7 +102,7 @@ def _process_state_1970_1979(url):
     return df
 
 
-def process_sta_1970_1979(url):
+def process_state_1970_1979(url):
     '''
     Function writes the output
     dataframe generated to csv

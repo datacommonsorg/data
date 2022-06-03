@@ -139,7 +139,7 @@ def _process_national_2000_2010(url):
     return df
 
 
-def process_nat_2000_2010(url):
+def process_national_2000_2010(url):
     '''
     Function writes the output
     dataframe generated to csv

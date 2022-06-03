@@ -115,7 +115,7 @@ def _process_national_1990_2000(urls):
     return final_df
 
 
-def process_nat_1990_2000(urls):
+def process_national_1990_2000(urls):
     '''
     Function writes the output
     dataframe generated to csv

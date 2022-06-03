@@ -95,7 +95,7 @@ def _process_county_2010_2020(url):
     return df
 
 
-def process_cou_2010_2020(url):
+def process_county_2010_2020(url):
     '''
     Function writes the output
     dataframe generated to csv

@@ -45,7 +45,8 @@ def _process_county_1980_1989(url):
         '80 to 84 years', '85 years and over'
     ]
 
-    # summing all the ages value as age is not required
+    # summing all the ages value as age is not required as
+    # the dataset deals with sex and race
     df['Total'] = df[COLUMNS_TO_SUM].sum(axis=1)
 
     # providing geoId to the dataframe and making the geoId of 5 digit as county
@@ -102,7 +103,7 @@ def _process_county_1980_1989(url):
     return df
 
 
-def process_cou_1980_1989(url):
+def process_county_1980_1989(url):
     '''
     Function writes the output
     dataframe generated to csv

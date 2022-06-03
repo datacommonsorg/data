@@ -151,10 +151,10 @@ def _generate_mcf(sv_list: list, flag1: int) -> None:
     """
     This method generates 3 MCF file w.r.t
     dataframe headers and defined MCF template
-    1. Sex_Rcae.mcf : for the files which are processed as is.
-    2. Sex_Race_aggregate.mcf : for the files which
+    1. sex_race.mcf : for the files which are processed as is.
+    2. sex_race_aggregate.mcf : for the files which
         are having Count Person Male/Female aggregated.
-    3. Sex_Race_aggregate_state_2010_2020.mcf : for the files
+    3. sex_race_aggregate_state_2010_2020.mcf : for the files
         which are aggregated from different geo granularity.
     Arguments:
         sv_list (list) : List of DataFrame Columns
@@ -191,13 +191,13 @@ measuredProperty: dcs:count
         final_mcf_template += mcf_template.format(sv, race, gender) + "\n"
     # Writing Genereated MCF to local path.
     if flag1 == 1:
-        with open("Sex_Race.mcf", 'w+', encoding='utf-8') as f_out:
+        with open("sex_race.mcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     elif flag1 == 2:
-        with open("Sex_Race_aggregate.mcf", 'w+', encoding='utf-8') as f_out:
+        with open("sex_race_aggregate.mcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     else:
-        with open("Sex_Race_aggregate_state_2010_2020.mcf",\
+        with open("sex_race_aggregate_state_2010_2020.mcf",\
              'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
 
@@ -207,9 +207,9 @@ def _generate_tmcf(df_cols: list, flag2: int) -> None:
             This method generates 3 TMCF file w.r.t
     dataframe headers and defined TMCF template
     1. Sex_Rcae.tmcf : for the files which are processed as is.
-    2. Sex_Race_aggregate.tmcf : for the files which
+    2. sex_race_aggregate.tmcf : for the files which
         are having Count Person Male/Female aggregated.
-    3. Sex_Race_aggregate_state_2010_2020.tmcf : for the files
+    3. sex_race_aggregate_state_2010_2020.tmcf : for the files
         which are aggregated from different geo granularity.
     Arguments:
         df_cols (list) : List of DataFrame Columns
@@ -251,12 +251,12 @@ value: C:postprocess->{}
         j = j + 1
     # Writing Genereated TMCF to local path.
     if flag2 == 1:
-        with open("Sex_Race.tmcf", 'w+', encoding='utf-8') as f_out:
+        with open("sex_race.tmcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     elif flag2 == 2:
-        with open("Sex_Race_aggregate.tmcf", 'w+', encoding='utf-8') as f_out:
+        with open("sex_race_aggregate.tmcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     else:
-        with open("Sex_Race_aggregate_state_2010_2020.tmcf"\
+        with open("sex_race_aggregate_state_2010_2020.tmcf"\
                 , 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
