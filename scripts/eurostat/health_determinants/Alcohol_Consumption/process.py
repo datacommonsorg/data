@@ -24,14 +24,12 @@ sys.path.insert(0, 'util')
 from absl import app
 from absl import flags
 
-# pd.set_option("display.max_columns", None)
-# pd.set_option("display.max_rows", None)
-
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
+# education
 def hlth_ehis_al1e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1e for concatenation in Final CSV
@@ -184,9 +182,33 @@ def hlth_ehis_al3u(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(columns=['frequenc','deg_urb','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
-    df.to_csv("sample6.csv")
+    df.to_csv("sample6.csv",index=False)
     return df
 
+def hlth_ehis_al2e(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans the file hlth_ehis_al2e for concatenation in Final CSV
+    Input Taken: DF
+    Output Provided: DF
+    """
+    cols = ['unit,isced11,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ', 'DK'
+    ,'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT',
+    'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO', 'UK', 'TR' ]
+    df.columns=cols
+    col1 = "unit,isced11,sex,age,time"
+    df = _split_column(df,col1)
+    # Filtering out the wanted rows and columns
+    df = df[df['age'] == 'TOTAL']
+    df.drop(columns=['EU27_2020','EU28'],inplace=True)
+    df = _replace_sex(df)
+    df = _replace_isced11(df)
+    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['isced11']+'_'+'HazardousAlcoholDrinkers'+'_'+\
+        'AsAFractionOf_Count_Person_'+df['sex']+'_'+df['isced11']
+    df.drop(columns=['unit','age','isced11','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+            ,value_name='observation')
+    df.to_csv("sample7.csv",index=False)
+    return df
 
 
 def _split_column(df: pd.DataFrame,col: str) -> pd.DataFrame:
@@ -281,211 +303,30 @@ def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
     df = df.replace({'deg_urb': _dict})
     return df
 
-class EuroStatPhysicalActivity:
-    """
-    This Class has requried methods to generate Cleaned CSV,
-    MCF and TMCF Files
-    """
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
-        self.input_files = input_files
-        self.cleaned_csv_file_path = csv_file_path
-        self.mcf_file_path = mcf_file_path
-        self.tmcf_file_path = tmcf_file_path
-        self.df = None
-        self.file_name = None
-        self.scaling_factor = 1
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1e.tsv.gz", sep='\t',skiprows=1)
+hlth_ehis_al1e(df)
 
-    def __generate_tmcf(self) -> None:
-        """
-        This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template
-        Arguments:
-            None
-        Returns:
-            None
-        """
-        tmcf_template = """Node: E:EuroStat_Population_PhysicalActivity->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: C:EuroStat_Population_PhysicalActivity->SV
-measurementMethod: C:EuroStat_Population_PhysicalActivity->Measurement_Method
-observationAbout: C:EuroStat_Population_PhysicalActivity->geo
-observationDate: C:EuroStat_Population_PhysicalActivity->time
-value: C:EuroStat_Population_PhysicalActivity->observation 
-"""
-        # Writing Genereated TMCF to local path.
-        with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(tmcf_template.rstrip('\n'))
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1i.tsv.gz", sep='\t',skiprows=1)
+hlth_ehis_al1i(df)
 
-    def __generate_mcf(self, sv_list) -> None:
-        """
-        This method generates MCF file w.r.t
-        dataframe headers and defined MCF template
-        Arguments:
-            df_cols (list) : List of DataFrame Columns
-        Returns:
-            None
-        """
-        mcf_template = """Node: dcid:{}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person{}{}{}{}{}{}{}{}{}{}{}{}{}
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
-        final_mcf_template = ""
-        for sv in sv_list:
-            if "Total" in sv:
-                continue
-            incomequin = ''
-            gender = ''
-            education = ''
-            healthBehavior = ''
-            exercise = ''
-            residence = ''
-            activity = ''
-            duration = ''
-            countryofbirth = ''
-            citizenship = ''
-            lev_limit= ''
-            bmi = ''
-            sv_temp = sv.split("_AsAFractionOf_")
-            denominator = "\nmeasurementDenominator: "+sv_temp[1]
-            sv_prop = sv_temp[0].split("_")
-            for prop in sv_prop:
-                if prop in ["Count", "Person"]:
-                    continue
-                if "PhysicalActivity" in prop:
-                    healthBehavior = "\nhealthBehavior: " + prop
-                elif "Male" in prop or "Female" in prop:
-                    gender = "\ngender: dcs:" + prop
-                elif "Aerobic" in prop or "MuscleStrengthening" in prop \
-                    or "Walking" in prop or "Cycling" in prop:
-                    exercise = "\nexerciseType: " + prop
-                elif "Education" in prop:
-                    education = "\neducationalAttainment: " + \
-                        prop.replace("EducationalAttainment","")\
-                        .replace("Or","__")
-                elif "Quintile" in prop:
-                    incomequin = "\nincome: ["+prop.replace("Quintile",\
-                        " Quintile").replace("First","1").replace("Second","2")\
-                        .replace("Third","3").replace("Fourth","4")\
-                        .replace("Fifth","5")+"]"
-                elif "Cities" in prop or "TownsAndSuburbs" in prop \
-                    or "RuralAreas" in prop:
-                    residence = "\nplaceofResidenceClassification: " + prop
-                elif "Activity" in prop:
-                    activity = "\nphysicalActivityEffortLevel: " + prop
-                elif "Minutes" in prop:
-                    if "OrMoreMinutes" in prop:
-                        duration = "\nduration: [" + prop.replace\
-                            ("OrMoreMinutes","") + " - Minutes]"
-                    elif "To" in prop:
-                        duration = "\nduration: [" + prop.replace("Minutes",\
-                             "").replace("To", " ") + " Minutes]"
-                    else:
-                        duration = "\nduration: [Minutes " + prop.replace\
-                            ("Minutes","") + "]"
-                elif "CountryOfBirth" in prop:
-                    countryofbirth = "\nnativity: " + prop
-                elif "Citizenship" in prop:
-                    citizenship = "\ncitizenship: " + prop
-                elif "Moderate" in prop or "Severe" in prop \
-                    or "None" in prop:
-                    lev_limit = "\nglobalActivityLimitationIndicator: "+prop
-                elif "weight" in prop or "Normal" in prop \
-                    or "Obese" in prop:
-                    lev_limit = "\nbmi: " + prop
-            final_mcf_template += mcf_template.format(sv,denominator,incomequin,
-                education,healthBehavior,exercise,residence,activity,duration,
-                gender,countryofbirth,citizenship,lev_limit,bmi) + "\n"
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1u.tsv.gz", sep='\t',skiprows=1)
+hlth_ehis_al1u(df)
 
-        # Writing Genereated MCF to local path.
-        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(final_mcf_template.rstrip('\n'))
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+    "BulkDownloadListing?file=data/hlth_ehis_al3e.tsv.gz", sep='\t',skiprows=1)
+hlth_ehis_al3e(df)
 
-    def process(self):
-        """
-        This Method calls the required methods to generate
-        cleaned CSV, MCF, and TMCF file
-        """
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al3i.tsv.gz", sep='\t',skiprows=1)
+hlth_ehis_al3i(df)
 
-        final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
-            'Measurement_Method'])
-        # Creating Output Directory
-        output_path = os.path.dirname(self.cleaned_csv_file_path)
-        if not os.path.exists(output_path):
-            os.mkdir(output_path)
-        sv_list = []
-        for file_path in self.input_files:
-            print(file_path)
-            df = pd.read_csv(file_path, sep='\t',skiprows=1)
-            if 'hlth_ehis_pe9e' in file_path:
-                df = hlth_ehis_pe9e(df)
-            elif 'hlth_ehis_pe9i' in file_path:
-                df = hlth_ehis_pe9i(df)
-            elif 'hlth_ehis_pe9u' in file_path:
-                df = hlth_ehis_pe9u(df)
-            elif 'hlth_ehis_pe1e' in file_path:
-                df = hlth_ehis_pe1e(df)
-            elif 'hlth_ehis_pe1i' in file_path:
-                df = hlth_ehis_pe1i(df)
-            elif 'hlth_ehis_pe1u' in file_path:
-                df = hlth_ehis_pe1u(df)
-            elif 'hlth_ehis_pe3e' in file_path:
-                df = hlth_ehis_pe3e(df)
-            elif 'hlth_ehis_pe3i' in file_path:
-                df = hlth_ehis_pe3i(df)
-            elif 'hlth_ehis_pe3u' in file_path:
-                df = hlth_ehis_pe3u(df)
-            elif 'hlth_ehis_pe2e' in file_path:
-                df = hlth_ehis_pe2e(df)
-            elif 'hlth_ehis_pe2i' in file_path:
-                df = hlth_ehis_pe2i(df)
-            elif 'hlth_ehis_pe2u' in file_path:
-                df = hlth_ehis_pe2u(df)
-            elif 'hlth_ehis_pe9b' in file_path:
-                df = hlth_ehis_pe9b(df)
-            elif 'hlth_ehis_pe9c' in file_path:
-                df = hlth_ehis_pe9c(df)
-            elif 'hlth_ehis_pe9d' in file_path:
-                df = hlth_ehis_pe9d(df)
-            elif 'hlth_ehis_pe2m' in file_path:
-                df = hlth_ehis_pe2m(df)
-            df['SV'] = df['SV'].str.replace('_Total','')
-            df['Measurement_Method'] = np.where(df['observation']\
-                .str.contains('u'),'LowReliability/EurostatRegionalStatistics',\
-                'EurostatRegionalStatistics')
-            df['observation'] = df['observation'].str.replace(':','')\
-                .str.replace(' ','').str.replace('u','')
-            df['observation']= pd.to_numeric(df['observation'], errors='coerce')
-            final_df = pd.concat([final_df, df])
-            sv_list += df["SV"].to_list()
-        final_df = final_df.sort_values(by=['time', 'geo','SV'])
-        final_df = final_df.replace({'geo': COUNTRY_MAP})
-        final_df.to_csv(self.cleaned_csv_file_path, index=False)
-        sv_list = list(set(sv_list))
-        sv_list.sort()
-        self.__generate_mcf(sv_list)
-        self.__generate_tmcf()
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al3u.tsv.gz", sep='\t',skiprows=1)
+hlth_ehis_al3u(df)
 
-def main(_):
-    input_path = FLAGS.input_path
-    if not os.path.exists(input_path):
-        os.mkdir(input_path)
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output"
-    # Defining Output Files
-    cleaned_csv_path = data_file_path + os.sep + \
-        "EuroStat_Population_PhysicalActivity.csv"
-    mcf_path = data_file_path + os.sep + \
-        "EuroStat_Population_PhysicalActivity.mcf"
-    tmcf_path = data_file_path + os.sep + \
-        "EuroStat_Population_PhysicalActivity.tmcf"
-    loader = EuroStatPhysicalActivity(ip_files, cleaned_csv_path, mcf_path,\
-        tmcf_path)
-    loader.process()
-
-if __name__ == "__main__":
-    app.run(main)
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+           "BulkDownloadListing?file=data/hlth_ehis_al2e.tsv.gz", sep='\t',skiprows=1)
+hlth_ehis_al2e(df)
