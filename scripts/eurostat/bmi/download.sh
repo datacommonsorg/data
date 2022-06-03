@@ -1,15 +1,19 @@
-#Loading file_urls.txt file
+#!/bin/sh
+
+# Loading file_urls.txt file
 BASEDIR=$(dirname "$0")
+
+# Creating Input Directory
+mkdir -p "$BASEDIR/input_data"
+
+# Changing Dir
+cd "$BASEDIR/input_data"
+
 urls="$(<$BASEDIR/file_urls.txt)"
 
-#Creating Input Directory
-mkdir -p "$BASEDIR/input_data"
-cd "$BASEDIR/input_data"
-for url in $urls;do
+for url in $urls
+do
     echo "downloading $url"
     curl -sS -O $url >> /dev/null
-    if [[ $url =~ ".gz" ]];
-    then 
-      gunzip *.gz
-    fi
+    gunzip *.gz
 done

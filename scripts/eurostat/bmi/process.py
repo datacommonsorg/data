@@ -19,10 +19,16 @@ import os
 import sys
 import pandas as pd
 import numpy as np
+import sys
 sys.path.insert(0, 'util')
 from alpha2_to_dcid import COUNTRY_MAP
 from absl import app
 from absl import flags
+from config import (BMI_VALUES_MAPPER,
+                    EDUCATIONAL_VALUES_MAPPER,
+                    SEX_VALUES_MAPPER,
+                    INCOME_QUANTILE_VALUES_MAPPER,
+                    DEGREE_URBANISATION_VALUES_MAPPER)
 
 pd.set_option("display.max_columns", None)
 # pd.set_option("display.max_rows", None)
@@ -32,28 +38,84 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_data"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-def _age_sex_education(df: pd.DataFrame) -> pd.DataFrame:
+def _load_df(file_path: str, skip_rows: int, header: int = None) -> pd.DataFrame:
+    data_df = pd.read_csv(file_path, sep="\t", skiprows=skip_rows, header=header)
+    return data_df
+
+def _age_sex_education(file_path: str) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_bm1e for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
+    data_df = _load_df(file_path, 1)
     df_cols = ['unit,bmi,isced11,sex,age,geo', '2019', '2014' ]
-    df.columns=df_cols
+    data_df.columns=df_cols
     multiple_cols = "unit,bmi,isced11,sex,age,geo"
-    df = _split_column(df,multiple_cols)
+    data_df = _split_column(data_df,multiple_cols)
+    # Filtering out the required rows and columns    
+    data_df = data_df[data_df['age'] == 'TOTAL']
+    data_df = data_df[~(data_df['geo'].isin(['EU27_2020','EU28']))]
+    data_df = _replace_bmi(data_df)
+    data_df = _replace_sex(data_df)
+    data_df = _replace_education(data_df)
+    data_df['SV'] = 'Count_Person_'+data_df['bmi'] + '_' + data_df['isced11']+'_'\
+        + data_df['sex'] + '_AsAFractionOf_Count_Person_'+\
+        data_df['isced11']+'_'+data_df['sex']
+    data_df.drop(columns=['unit','age','isced11','bmi','sex'],inplace=True)
+    data_df = data_df.melt(id_vars=['SV','geo'], var_name='time'\
+            ,value_name='observation')
+    return data_df
+
+def _age_sex_income(file_path: str) -> pd.DataFrame:
+    """
+    Cleans the file hlth_ehis_pe9i for concatenation in Final CSV
+    Input Taken: DF
+    Output Provided: DF
+    """
+    data_df = _load_df(file_path, skip_rows=1)
+    df_cols = ['unit,bmi,quant_inc,sex,age,geo', '2019', '2014' ]
+    data_df.columns=df_cols
+    multiple_cols = "unit,bmi,quant_inc,sex,age,geo"
+    data_df = _split_column(data_df,multiple_cols)
     # Filtering out the wanted rows and columns    
+    data_df = data_df[data_df['age'] == 'TOTAL']
+    data_df = data_df[~(data_df['geo'].isin(['EU27_2020','EU28']))]
+    data_df = _replace_bmi(data_df)
+    data_df = _replace_sex(data_df)
+    data_df = _replace_income_quantile(data_df)
+    data_df['SV'] = 'Count_Person_'+data_df['bmi']+'_'+ data_df['sex'] +'_'+data_df['quant_inc']+\
+        '_AsAFractionOf_Count_Person_' +data_df['sex']+'_' + data_df['quant_inc']
+    data_df.drop(columns=['unit','age','quant_inc','bmi','sex'],inplace=True)
+    data_df = data_df.melt(id_vars=['SV','geo'], var_name='time'\
+            ,value_name='observation')
+    return data_df
+
+def _age_sex_degree_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans the file hlth_ehis_pe9u for concatenation in Final CSV
+    Input Taken: DF
+    Output Provided: DF
+    """
+    cols = ['bmi,deg_urb,sex,age,unit,time','EU27_2020','EU28','BG','CZ',
+    'DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU','MT',
+    'AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
+    df.columns=cols
+    col1 = "physact,deg_urb,sex,age,unit,time"
+    df = _split_column(df,col1)
+    # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
-    df = df[~(df['geo'].isin(['EU27_2020','EU28']))]
+    df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_bmi(df)
     df = _replace_sex(df)
-    df = _replace_isced11(df)
-    df['SV'] = 'Count_Person_'+df['isced11']+'_'+ df['sex'] +'_'+df['bmi']+\
-        '_AsAFractionOf_Count_Person_'+\
-        df['isced11']+'_'+df['sex']
-    df.drop(columns=['unit','age','isced11','bmi','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
+    df = _replace_deg_urb(df)
+    df.drop(columns=['unit','age'],inplace=True)
+    df['SV'] = 'Count_Person_'+ df['physact'] +'_'+df['sex']+\
+        '_'+'HealthEnhancingPhysicalActivity'+'_'+df['deg_urb']+\
+        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['deg_urb']
+    df.drop(columns=['deg_urb','physact','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+        ,value_name='observation')
     return df
 
 def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
@@ -61,34 +123,23 @@ def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    _dict = {
-        'F': 'Female',
-        'M': 'Male',
-        'T': 'Total'
-        }
-    df = df.replace({'sex': _dict})
+    df['sex'] = df['sex'].map(SEX_VALUES_MAPPER)
     return df
 
-def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
+def _replace_income_quantile(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
     """
+    df['quant_inc'] = df['quant_inc'].map(INCOME_QUANTILE_VALUES_MAPPER)
+    return df
 
-    _dict = {
-        'ED0-2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED0_2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED3-4': 'EducationalAttainment'+\
-        'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED3_4': 'EducationalAttainment'+\
-            'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED5-8': 'EducationalAttainmentTertiaryEducation',
-        'ED5_8': 'EducationalAttainmentTertiaryEducation',
-        'TOTAL': 'Total'
-        }
-    df = df.replace({'isced11': _dict})
+def _replace_education(df:pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF
+    """
+    df['isced11'] = df['isced11'].map(EDUCATIONAL_VALUES_MAPPER)
     return df
 
 def _replace_bmi(df:pd.DataFrame) -> pd.DataFrame:
@@ -96,14 +147,15 @@ def _replace_bmi(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    _dict = {
-        'BMI_LT18P5':'Underweight',
-	    'BMI18P5-24':'Normal',
-	    'BMI_GE25':'Overweight',
-	    'BMI25-29':'PreObese',
-        'BMI_GE30':'Obesity'
-        }
-    df = df.replace({'bmi': _dict})
+    df['bmi'] = df['bmi'].map(BMI_VALUES_MAPPER)
+    return df
+
+def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF
+    """
+    df['deg_urb'] = df['deg_urb'].map(DEGREE_URBANISATION_VALUES_MAPPER)
     return df
 
 def _split_column(df: pd.DataFrame,col: str) -> pd.DataFrame:
@@ -130,7 +182,7 @@ class EuroStatBMI:
         self.file_name = None
         self.scaling_factor = 1
 
-    def __generate_tmcf(self) -> None:
+    def _generate_tmcf(self) -> None:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template
@@ -151,7 +203,7 @@ value: C:EuroStat_Population_PhysicalActivity->observation
         with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf_template.rstrip('\n'))
 
-    def __generate_mcf(self, sv_list) -> None:
+    def _generate_mcf(self, sv_list) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
@@ -226,7 +278,7 @@ measuredProperty: dcs:count
                     or "None" in prop:
                     lev_limit = "\nglobalActivityLimitationIndicator: "+prop
                 elif "weight" in prop or "Normal" in prop \
-                    or "Obese" in prop:
+                    or "Obesity" in prop:
                     lev_limit = "\nbmi: dcs:" + prop
             final_mcf_template += mcf_template.format(sv,denominator,incomequin,
                 education,healthBehavior,exercise,residence,activity,duration,
@@ -250,9 +302,12 @@ measuredProperty: dcs:count
         sv_list = []
         for file_path in self.input_files:
             print(file_path)
-            df = pd.read_csv(file_path, sep='\t',skiprows=1)
             if 'hlth_ehis_bm1e' in file_path:
-                df = _age_sex_education(df)
+                df = _age_sex_education(file_path)
+            elif 'hlth_ehis_bm1i' in file_path:
+                df = _age_sex_income(file_path)
+            elif 'hlth_ehis_bm1u' in file_path:
+                df = _age_sex_degree_urbanisation(file_path)
             df['SV'] = df['SV'].str.replace('_Total','')
             df['Measurement_Method'] = np.where(df['observation']\
                 .str.contains('u'),'LowReliability/EurostatRegionalStatistics',\
@@ -267,8 +322,8 @@ measuredProperty: dcs:count
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
-        self.__generate_mcf(sv_list)
-        self.__generate_tmcf()
+        self._generate_mcf(sv_list)
+        self._generate_tmcf()
 
 def main(_):
     input_path = FLAGS.input_path
