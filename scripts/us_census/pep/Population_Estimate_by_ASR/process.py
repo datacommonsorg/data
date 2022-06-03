@@ -60,7 +60,7 @@ class USCensusPEPByASR:
         self.file_name = None
         self.scaling_factor = 1
 
-    def __generate_mcf(self, sv_list) -> None:
+    def _generate_mcf(self, sv_list) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template.
@@ -112,7 +112,7 @@ measuredProperty: dcs:count
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
 
-    def __generate_tmcf(self) -> None:
+    def _generate_tmcf(self) -> None:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
@@ -160,8 +160,8 @@ value: C:usa_population_asr->observation
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
-        self.__generate_mcf(sv_list)
-        self.__generate_tmcf()
+        self._generate_mcf(sv_list)
+        self._generate_tmcf()
 
 
 def main(_):
