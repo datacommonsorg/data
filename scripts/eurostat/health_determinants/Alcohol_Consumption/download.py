@@ -43,6 +43,14 @@ def download_file(url) -> None:
 if __name__ == "__main__":
     files = [
     "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al1e.tsv.gz",]
+        "BulkDownloadListing?file=data/hlth_ehis_al1e.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1i.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1u.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al3e.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al3i.tsv.gz"]
     for file in files:
         download_file(file)
