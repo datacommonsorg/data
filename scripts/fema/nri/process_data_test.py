@@ -25,7 +25,7 @@ class FormatGeoIDTest(unittest.TestCase):
                          "geoId/11001001002")
 
 
-def check_function_on_file_gives_golden(fn, inp_f, golden_f):
+def check_function_on_file_gives_golden(fn, inp_f, inp_csv_f, golden_f, ):
     """
     Given a function fn that takes an input file location inp_f and an output
     location, calls the function with the input file path string and a temporary
@@ -39,7 +39,7 @@ def check_function_on_file_gives_golden(fn, inp_f, golden_f):
         test_csv_file = os.path.join(module_dir_, inp_f)
         result_csv_file = os.path.join(tmp_dir, "temp_test_output.tmp")
         expected_csv_file = os.path.join(module_dir_, golden_f)
-        fn(test_csv_file, result_csv_file)
+        fn(test_csv_file, result_csv_file, inp_csv_f)
 
         with open(result_csv_file, "r") as result_f:
             result_str: str = result_f.read()
@@ -54,6 +54,7 @@ class ProcessFemaNriFileTest(unittest.TestCase):
         assertion = check_function_on_file_gives_golden(
             fn=process_csv,
             inp_f="test_data/test_data_county.csv",
+            inp_csv_f="test_data/test_csv_columns.json",
             golden_f="test_data/expected_data_county.csv")
         self.assertTrue(assertion)
 
@@ -61,6 +62,7 @@ class ProcessFemaNriFileTest(unittest.TestCase):
         assertion = check_function_on_file_gives_golden(
             fn=process_csv,
             inp_f="test_data/test_data_tract.csv",
+            inp_csv_f="test_data/test_csv_columns.json",
             golden_f="test_data/expected_data_tract.csv")
         self.assertTrue(assertion)
 

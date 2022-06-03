@@ -43,9 +43,9 @@ in the base of the repo.
 
 Follow instructions in the root of the repo, namely, run 
 ```
-./run_tests.sh -p scripts/fema/nri
+python3 -m unittest discover -v -s ../ -p "*_test.py"
 ```
-in the base of the repo.
+in this folder.
 
 To replace the test goldens under `test_data` with the format `expected_test_*`,
 run `sh/gen_test_golden.sh` while the current directory is `data/scripts/fema/nri`

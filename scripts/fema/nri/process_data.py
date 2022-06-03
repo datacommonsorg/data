@@ -1,3 +1,4 @@
+import json
 import pandas as pd
 import numpy as np
 
@@ -38,23 +39,32 @@ def fips_to_geoid(row):
     return "geoId/" + str(row[field]).zfill(length)
 
 
-def process_csv(input_path, output_path):
+def process_csv(input_path, output_path, csv_structure_f):
     data_table = pd.read_csv(input_path)
 
-    # - the TMCF generated in generate_schema_and_tmcf.py expect to find the
-    # geoID in the field "DCID_GeoID"
-    # - tentative fix for a potential bug in the server code: move the DCID_GeoID
-    # column to be the first (makes sure that the column is in the same place)
-    # across CSVs with different column sizes.
-    data_table.insert(0, "DCID_GeoID",data_table.apply(fips_to_geoid, axis=1))
     # we want to replace empty cells with 0s so that the import tool does not
     # have to assume what this is about [citation needed (snny)]
     data_table = data_table.fillna(0)
 
-    data_table.to_csv(output_path)
+  
+    
+    # the column structure should be the same between the county and tract tables
+    # so we normalize it with the list of fields "csv_structure" 
+    with open(csv_structure_f, "r") as json_file:
+        csv_structure = json.load(json_file)
+    normalized_table = data_table[csv_structure]
+
+    # - after the structure is normalized, add the DCID_GeoID field to the first location
+    # - the TMCF generated in generate_schema_and_tmcf.py expect to find the
+    # geoID in the field "DCID_GeoID"
+    normalized_table.insert(0, "DCID_GeoID",data_table.apply(fips_to_geoid, axis=1))
+
+    normalized_table.to_csv(output_path)
 
 
 if __name__ == "__main__":
+    
+
     for input_path in INPUT_TO_OUTPUT_PATHS:
         output_path = INPUT_TO_OUTPUT_PATHS[input_path]
-        process_csv(input_path, output_path)
+        process_csv(input_path, output_path, "output/csv_columns.json")

@@ -18,6 +18,7 @@ IGNORED_FIELDS = [
 NRI_DATADICTIONARY_INFILE_FILENAME = "source_data/NRIDataDictionary.csv"
 SCHEMA_OUTFILE_FILENAME = "output/fema_nri_stat_vars.mcf"
 TMCF_OUTFILE_FILENAME = "output/fema_nri_counties.tmcf"
+CSV_COLUMNS_FILENAME = "output/csv_columns.json"
 
 # feature flags
 # skip {Annualized Frequency, Historic Loss Ratio, Exposure}
@@ -420,13 +421,15 @@ def format_ind_hazard_field_properties_to_schema(properties):
 
 
 def generate_schema_and_tmcf_from_file(input_data_dictionary, output_schema,
-                                       output_tmcf):
+                                       output_tmcf, output_csv = CSV_COLUMNS_FILENAME):
     """
     Given the NRI data dictionary in location input_data_dictionary (path as string),
-    generates the corresponding StatVar MCF Schema and TMCF for the import.
+    generates the corresponding StatVar MCF Schema, TMCF for the import, and the
+    CSV columns that should exist in the import tables (in the correct order).
 
     Writes the StatVars to path given as a string by the argument output_schema
-    Writes the TMCF to path given as a string by the argument output_schema
+    Writes the TMCF to path given as a string by the argument output_tmcf
+    Writes the CSV to path given as a string by the argument output_csv
     """
     # if field alias includes any of these strings, we skip that row from the
     # schema and TMCF generation
@@ -470,6 +473,7 @@ def generate_schema_and_tmcf_from_file(input_data_dictionary, output_schema,
 
     schemas = []
     tmcfs = []
+    csv_columns = []
 
     for index in range(len(extracted_properties)):
         properties = extracted_properties[index]
@@ -478,6 +482,7 @@ def generate_schema_and_tmcf_from_file(input_data_dictionary, output_schema,
 
         schemas.append(statvar_mcf)
         tmcfs.append(statobs_tmcf)
+        csv_columns.append(properties["row"]["Field Name"])
 
     # prune out duplicate nodes
     # - we might get duplicate nodes because the rows might be repeated
@@ -485,22 +490,28 @@ def generate_schema_and_tmcf_from_file(input_data_dictionary, output_schema,
     # - this hits an edge case in the import tool, which we want to avoid
     schemas = prune_list_dupes(schemas)
     tmcfs = prune_list_dupes(tmcfs)
+    csv_columns = prune_list_dupes(csv_columns)
 
     schema_out = SCHEMA_OUTPUT_PREFIX + "\n".join(schemas)
     tmcf_out = "".join(tmcfs)
+    csv_columns_out = json.dumps(csv_columns)
 
     # write out the results
     with open(output_schema, "w") as outfile:
-        logging.info(f"Writing StatVar MCF to {SCHEMA_OUTFILE_FILENAME}")
+        logging.info(f"Writing StatVar MCF to {output_schema}")
         outfile.write(schema_out)
 
     with open(output_tmcf, "w") as outfile:
-        logging.info(f"Writing County TMCF to {TMCF_OUTFILE_FILENAME}")
+        logging.info(f"Writing County TMCF to {output_tmcf}")
         outfile.write(tmcf_out)
 
+    with open(output_csv, "w") as outfile:
+        logging.info(f"Writing CSV columns to {output_csv}")
+        outfile.write(csv_columns_out)
 
 if __name__ == "__main__":
     generate_schema_and_tmcf_from_file(
         input_data_dictionary=NRI_DATADICTIONARY_INFILE_FILENAME,
         output_schema=SCHEMA_OUTFILE_FILENAME,
-        output_tmcf=TMCF_OUTFILE_FILENAME)
+        output_tmcf=TMCF_OUTFILE_FILENAME,
+        output_csv=CSV_COLUMNS_FILENAME)
