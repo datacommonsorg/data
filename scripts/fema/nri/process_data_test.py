@@ -25,11 +25,14 @@ class FormatGeoIDTest(unittest.TestCase):
                          "geoId/11001001002")
 
 
-def check_function_on_file_gives_golden(fn, inp_f, inp_csv_f, golden_f, ):
+def check_function_on_file_gives_golden(fn, inp_f, inp_csv_f, golden_f):
     """
-    Given a function fn that takes an input file location inp_f and an output
-    location, calls the function with the input file path string and a temporary
-    output location.
+    Given a function fn that takes in:
+    - input file location `inp_f`
+    - output file location (not passed in as an argument to this function)
+    - input CSV file location `inp_csv_f`
+   
+    Calls the function with those inputs.
     
     Checks if the output file is equivalent to the golden_f passed in
 
