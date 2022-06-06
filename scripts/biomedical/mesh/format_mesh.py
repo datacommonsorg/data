@@ -262,10 +262,10 @@ def mesh_wrapper(file_input):
     df3 = format_concept_df(df)
     df4 = format_term_df(df)
 
-    df1.to_csv('descriptor_mesh.csv')
-    df2.to_csv('qualifier_mesh.csv')
-    df3.to_csv('concept_mesh.csv')
-    df4.to_csv('term_mesh.csv')
+    df1.to_csv('mesh_descriptor.csv')
+    df2.to_csv('mesh_qualifier.csv')
+    df3.to_csv('mesh_concept.csv')
+    df4.to_csv('mesh_term.csv')
 
 
 def main():
