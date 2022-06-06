@@ -55,6 +55,18 @@ if __name__ == "__main__":
     "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
         "BulkDownloadListing?file=data/hlth_ehis_al3u.tsv.gz",
     "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al2e.tsv.gz"]
+        "BulkDownloadListing?file=data/hlth_ehis_al2e.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al2i.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al2u.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1b.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1c.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_de10.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_de6.tsv.gz"]
     for file in files:
         download_file(file)
