@@ -54,7 +54,7 @@ def _save_data(url: str, download_local_path: str) -> None:
     Returns:
         None
     """
-    df = ""
+    df = None
     file_name = url.split("/")[-1]
     if ".xls" in url:
         df = pd.read_excel(url, header=_HEADER)
@@ -100,6 +100,7 @@ def _sum_cols(col: pd.Series) -> pd.Series:
     Returns:
         res (Series) : Concatenated DataFrame Columns
     """
+    print(type(col))
     res = col[0]
     if col[1] is None:
         return res

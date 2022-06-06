@@ -30,9 +30,6 @@ pd.set_option("display.max_columns", None)
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_data"
-
-if ("ip_path" in sys.argv and len(sys.argv) > 2):
-    default_input_path = sys.argv[2]
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
@@ -251,18 +248,6 @@ class CensusUSACountryPopulation:
         self.df.drop(['date_range'], axis=1, inplace=True)
         self.df.to_csv(self.cleaned_csv_file_path, index=False)
 
-    def process(self):
-        """
-        This is main method to iterate on each file,
-        calls defined methods to clean, generate final
-        cleaned CSV file, MCF file and TMCF file.
-        """
-        for file in self.input_files:
-            df = self._load_data(file)
-            self._transform_data(df)
-        self._generate_mcf(self.df.columns)
-        self._generate_tmcf(self.df.columns)
-
     def _generate_mcf(self, df_cols: list) -> None:
         """
         This method generates MCF file w.r.t
@@ -274,12 +259,12 @@ class CensusUSACountryPopulation:
         Returns:
             None
         """
-        mcf_template = """Node: dcid:{}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person{}{}{}
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
+        mcf_template = ("Node: dcid:{}\n"
+                        "typeOf: dcs:StatisticalVariable\n"
+                        "populationType: dcs:Person{}{}{}\n"
+                        "statType: dcs:measuredValue\n"
+                        "measuredProperty: dcs:count\n"
+                        )
         mcf = ""
         for col in df_cols:
             residence = ""
@@ -325,15 +310,15 @@ measuredProperty: dcs:count
         Returns:
             None
         """
-        tmcf_template = """Node: E:USA_Population_Count->E{}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{}
-measurementMethod: dcs:{}
-observationAbout: C:USA_Population_Count->Location
-observationDate: C:USA_Population_Count->Date
-observationPeriod: \"P1M\"
-value: C:USA_Population_Count->{} 
-"""
+        tmcf_template = ("Node: E:USA_Population_Count->E{}\n"
+                        "typeOf: dcs:StatVarObservation\n"
+                        "variableMeasured: dcs:{}\n"
+                        "measurementMethod: dcs:{}\n"
+                        "observationAbout: C:USA_Population_Count->Location\n"
+                        "observationDate: C:USA_Population_Count->Date\n"
+                        "observationPeriod: \"P1M\"\n"
+                        "value: C:USA_Population_Count->{}\n"
+                        )
         i = 0
         measure = ""
         tmcf = ""
@@ -350,7 +335,18 @@ value: C:USA_Population_Count->{}
         # Writing Genereated TMCF to local path.
         with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
-
+    
+    def process(self):
+        """
+        This is main method to iterate on each file,
+        calls defined methods to clean, generate final
+        cleaned CSV file, MCF file and TMCF file.
+        """
+        for file in self.input_files:
+            df = self._load_data(file)
+            self._transform_data(df)
+        self._generate_mcf(self.df.columns)
+        self._generate_tmcf(self.df.columns)
 
 def main(_):
     input_path = FLAGS.input_path
