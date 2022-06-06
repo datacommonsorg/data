@@ -303,6 +303,20 @@ def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
     df = df.replace({'deg_urb': _dict})
     return df
 
+def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF
+    """
+    _dict = {
+        'EU28_FOR':	'CountryOfBirthEU28CountriesExceptReportingCountry',
+	    'NEU28_FOR': 'CountryOfBirthNonEU28CountriesNorReportingCountry',
+	    'FOR': 'CountryOfBirthForeignCountry',
+	    'NAT': 'CountryOfBirthReportingCountry'
+        }
+    df = df.replace({'c_birth': _dict})
+    return df
+
 df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
         "BulkDownloadListing?file=data/hlth_ehis_al1e.tsv.gz", sep='\t',skiprows=1)
 hlth_ehis_al1e(df)
