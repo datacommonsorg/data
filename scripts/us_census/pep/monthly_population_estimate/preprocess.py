@@ -19,7 +19,6 @@
 """
 import os
 import re
-import sys
 
 import pandas as pd
 from absl import app
@@ -263,8 +262,7 @@ class CensusUSACountryPopulation:
                         "typeOf: dcs:StatisticalVariable\n"
                         "populationType: dcs:Person{}{}{}\n"
                         "statType: dcs:measuredValue\n"
-                        "measuredProperty: dcs:count\n"
-                        )
+                        "measuredProperty: dcs:count\n")
         mcf = ""
         for col in df_cols:
             residence = ""
@@ -311,14 +309,13 @@ class CensusUSACountryPopulation:
             None
         """
         tmcf_template = ("Node: E:USA_Population_Count->E{}\n"
-                        "typeOf: dcs:StatVarObservation\n"
-                        "variableMeasured: dcs:{}\n"
-                        "measurementMethod: dcs:{}\n"
-                        "observationAbout: C:USA_Population_Count->Location\n"
-                        "observationDate: C:USA_Population_Count->Date\n"
-                        "observationPeriod: \"P1M\"\n"
-                        "value: C:USA_Population_Count->{}\n"
-                        )
+                         "typeOf: dcs:StatVarObservation\n"
+                         "variableMeasured: dcs:{}\n"
+                         "measurementMethod: dcs:{}\n"
+                         "observationAbout: C:USA_Population_Count->Location\n"
+                         "observationDate: C:USA_Population_Count->Date\n"
+                         "observationPeriod: \"P1M\"\n"
+                         "value: C:USA_Population_Count->{}\n")
         i = 0
         measure = ""
         tmcf = ""
@@ -335,7 +332,7 @@ class CensusUSACountryPopulation:
         # Writing Genereated TMCF to local path.
         with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
-    
+
     def process(self):
         """
         This is main method to iterate on each file,
@@ -347,6 +344,7 @@ class CensusUSACountryPopulation:
             self._transform_data(df)
         self._generate_mcf(self.df.columns)
         self._generate_tmcf(self.df.columns)
+
 
 def main(_):
     input_path = FLAGS.input_path
