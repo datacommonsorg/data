@@ -18,15 +18,15 @@
 
 ## About the Dataset
 
-Medical Subject Headings (MeSH) is a hierarchically-organized terminology for indexing and cataloging of biomedical information. More information about the dataset can be found on the official NCBI [website](https://www.ncbi.nlm.nih.gov/mesh/).
+“The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information”. Data Commons includes the Concept, Descriptor, Qualifier, and Term elements of MeSH as described [`here`](https://www.nlm.nih.gov/mesh/xml_data_elements.html). More information about the dataset can be found on the official National Center for Biotechnology (NCBI) [website](https://www.ncbi.nlm.nih.gov/mesh/).
 
 ### Download URL
 
-All the terminology referenced in the MeSH data can be downloaded in various formats [here](https://www.ncbi.nlm.nih.gov/mesh/).
+All the terminology referenced in the MeSH data can be downloaded in various formats [here](https://www.nlm.nih.gov/databases/download/mesh.html).
 
 ### Overview
 
-This directory stores the script used to convert the xml obtained from the NCBI webpage into 4 different csv files, each describing the relation between concepts, terms, qualifiers and descriptors, and generating dcids for each.
+This directory stores the script used to convert the xml obtained from the NCBI webpage into four different csv files, each describing the relation between concepts, terms, qualifiers and descriptors, and generating dcids for each.
 
 The MeSH data stores the vocabulary thesaurus used for indexing articles for PubMed.
 
@@ -52,10 +52,11 @@ The tMCF files that map each column in the corresponding CSV file to the appropr
 
 ### Schema
 
+Each csv + tMCF pair generated is an import of the MeSH ontology mapping to one of the four following entities: [`MeSHConcept`](https://datacommons.org/browser/MeSHConcept), [`MeSHDescriptor`](https://datacommons.org/browser/MeSHDescriptor), [`MeSHQualifier`](https://datacommons.org/browser/MeSHQualifier), or [`MeSHTerm`](https://datacommons.org/browser/MeSHTerm).
 
 ## Examples
 
-To generate the 4 formatted csv files from xml:
+To generate the four formatted csv files from xml:
 
 ```
 python format_mesh.py desc2021.xml
