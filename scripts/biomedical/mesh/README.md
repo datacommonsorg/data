@@ -65,7 +65,7 @@ To generate the four formatted csv files from xml:
 1. Download the data to `scratch/`.
 
 ```
-./download.sh
+bash download.sh
 ```
 
 2. Generate cleaned CSV.
