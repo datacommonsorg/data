@@ -20,7 +20,7 @@ import sys
 import pandas as pd
 import numpy as np
 sys.path.insert(0, 'util')
-from alpha2_to_dcid import COUNTRY_MAP
+# from alpha2_to_dcid import COUNTRY_MAP
 from absl import app
 from absl import flags
 
@@ -32,149 +32,128 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-def hlth_ehis_pe9e(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe9e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
-    df.columns=cols
-    col1 = "unit,physact,isced11,sex,age,geo"
-    df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns    
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_isced11(df)
-    df['SV'] = 'Count_Person_'+df['isced11']+'_'+ df['physact'] +'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity_AsAFractionOf_Count_Person_'+\
-        df['isced11']+'_'+df['sex']
-    df.drop(columns=['unit','age','isced11','physact','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-def hlth_ehis_pe9i(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe9i for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,physact,quant_inc,sex,age,time','EU27_2020','EU28','BG','CZ',
-    'DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU','MT',
-    'AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "unit,physact,quant_inc,sex,age,time"
-    df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020','EU28'],inplace=True)
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_quant_inc(df)
-    df.drop(columns=['unit','age'],inplace=True)
-    df['SV'] = 'Count_Person_'+ df['physact'] +'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity'+'_'+df['quant_inc']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['quant_inc','physact','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-def hlth_ehis_pe9u(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe9u for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['physact,deg_urb,sex,age,unit,time','EU27_2020','EU28','BG','CZ',
-    'DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU','MT',
-    'AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "physact,deg_urb,sex,age,unit,time"
-    df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020','EU28'],inplace=True)
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_deg_urb(df)
-    df.drop(columns=['unit','age'],inplace=True)
-    df['SV'] = 'Count_Person_'+ df['physact'] +'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity'+'_'+df['deg_urb']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['deg_urb']
-    df.drop(columns=['deg_urb','physact','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-def hlth_ehis_sk1e(df: pd.DataFrame) -> pd.DataFrame:
+def health_determinant_eurostat_smoking_county_of_birth(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,levels,isced11,sex,age,time','EU27_2020','EU28','BE','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
-    'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
+    cols = ['unit,smoking,sex,age,c_birth,time','EU27_2020','EU28',
+    'BE','BG','CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY',
+    'LV','LT','LU','HU','MT','NL','AT','PL','PT','RO','SI','SK','FI',
+    'SE','IS','NO','UK','TR']
     df.columns=cols
-    col1 = "unit,levels,isced11,sex,age,time"
+    col1 = "unit,smoking,sex,age,c_birth,time"
     df = _split_column(df,col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
+    df = _replace_c_birth(df)
+    df = _replace_sex(df)
+    df = _replace_levels(df)
+    df.drop(columns=['unit','age'],inplace=True)
+    df['SV'] = 'Count_Person_'+ df['c_birth']+'_'+df['sex']+\
+        '_'+'Smoking_TobaccoProducts'+'_'+df['smoking']+\
+        '_AsAFractionOf_Count_Person_'+df['c_birth']+'_'+df['sex']
+    df.drop(columns=['smoking','c_birth','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+        ,value_name='observation')
+    df.to_csv("sk1b.csv")
+    return df
+
+def health_determinant_eurostat_smoking_country_of_citizenship(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
+    Input Taken: DF
+    Output Provided: DF
+    """
+    cols = ['unit,smoking,sex,age,citizen,time','EU27_2020','EU28',
+    'BE','BG','CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY',
+    'LV','LT','LU','HU','MT','NL','AT','PL','PT','RO','SI','SK','FI',
+    'SE','IS','NO','UK','TR']
+    df.columns=cols
+    col1 = "unit,smoking,sex,age,citizen,time"
+    df = _split_column(df,col1)
+    # Filtering out the wanted rows and columns
+    df = df[df['age'] == 'TOTAL']
+    df.drop(columns=['EU27_2020','EU28'],inplace=True)
+    df = _replace_citizen(df)
+    df = _replace_sex(df)
+    df = _replace_levels(df)
+    df.drop(columns=['unit','age'],inplace=True)
+    df['SV'] = 'Count_Person_'+ df['citizen']+'_'+df['sex']+\
+        '_'+'Smoking_TobaccoProducts'+'_'+df['smoking']+\
+        '_AsAFractionOf_Count_Person_'+df['citizen']+'_'+df['sex']
+    df.drop(columns=['smoking','citizen','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+        ,value_name='observation')
+    df.to_csv("sk1c.csv")
+    return df
+
+def health_determinant_eurostat_smoking_education_attainment_level(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
+    Input Taken: DF
+    Output Provided: DF
+    """
+    cols = ['unit,smoking,isced11,sex,age,geo','2019','2014']
+    df.columns=cols
+    col1 = "unit,smoking,isced11,sex,age,geo"
+    df = _split_column(df,col1)
+    # Filtering out the wanted rows and columns
+    df = df[df['age'] == 'TOTAL']
+    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_isced11(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
     df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+\
-        '_'+'WorkRelatedPhysicalActivity'+'_'+df['levels']+\
+        '_'+'Smoking_TobaccoProducts'+'_'+df['smoking']+\
         '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['levels','isced11','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+    df.drop(columns=['smoking','isced11','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
+    df.to_csv("sk1e.csv")
     return df
 
-def hlth_ehis_pe1i(df: pd.DataFrame) -> pd.DataFrame:
+def health_determinant_eurostat_smoking_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe1i for concatenation in Final CSV
+    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,levels,quant_inc,sex,age,time','EU27_2020','EU28','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
-    'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
+    cols = ['unit,smoking,quant_inc,sex,age,geo','2019','2014']
     df.columns=cols
-    col1 = "unit,levels,quant_inc,sex,age,time"
+    col1 = "unit,smoking,quant_inc,sex,age,geo"
     df = _split_column(df,col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020','EU28'],inplace=True)
+    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
     df.drop(columns=['unit','age'],inplace=True)
-    df['SV'] = 'Count_Person_'+df['sex']+\
-        '_'+'WorkRelatedPhysicalActivity'+'_'+df['quant_inc']+'_'+df['levels']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['levels','quant_inc','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+    df['SV'] = 'Count_Person_'+ df['quant_inc']+'_'+df['sex']+\
+        '_'+'Smoking_TobaccoProducts'+'_'+df['smoking']+\
+        '_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
+    df.drop(columns=['smoking','quant_inc','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
+    df.to_csv("sk1i.csv")
     return df
 
-def hlth_ehis_pe1u(df: pd.DataFrame) -> pd.DataFrame:
+def health_determinant_eurostat_smoking_degree_of_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe1u for concatenation in Final CSV
+    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['levels,deg_urb,sex,age,unit,time','EU27_2020','EU28','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
-    'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
+    cols = ['smoking,deg_urb,sex,age,unit,time','EU27_2020','EU28',
+    'BE','BG','CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY',
+    'LV','LT','LU','HU','MT','NL','AT','PL','PT','RO','SI','SK','FI',
+    'SE','IS','NO','UK','TR' ]
     df.columns=cols
-    col1 = "levels,deg_urb,sex,age,unit,time"
+    col1 = "smoking,deg_urb,sex,age,unit,time"
     df = _split_column(df,col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
@@ -183,218 +162,125 @@ def hlth_ehis_pe1u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_levels(df)
     df.drop(columns=['unit','age'],inplace=True)
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+'WorkRelatedPhysicalActivity'+\
-        '_'+df['levels']+'_'+df['deg_urb']+'_AsAFractionOf_Count_Person_'+\
-        df['sex']+'_'+df['deg_urb']
-    df.drop(columns=['levels','deg_urb','sex'],inplace=True)
+    df['SV'] = 'Count_Person_'+ df['deg_urb']+'_'+df['sex']+\
+        '_'+'Smoking_TobaccoProducts'+'_'+df['smoking']+\
+        '_AsAFractionOf_Count_Person_'+df['deg_urb']+'_'+df['sex']
+    df.drop(columns=['smoking','deg_urb','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
+    df.to_csv("sk1u.csv")
     return df
 
-def hlth_ehis_pe3e(df: pd.DataFrame) -> pd.DataFrame:
+def health_determinant_eurostat_former_daily_tobacco_smoking_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe3e for concatenation in Final CSV
+    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
+    cols = ['unit,sex,age,quant_inc,time','EU27_2020','BE',
+    'BG','CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY',
+    'LV','LT','LU','HU','MT','NL','AT','PL','PT','RO','SI','SK',
+    'FI','SE','IS','NO','RS','TR']
     df.columns=cols
-    col1 = "unit,physact,isced11,sex,age,geo"
+    col1 = "unit,sex,age,quant_inc,time"
     df = _split_column(df,col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_isced11(df)
-    df['SV'] = 'Count_Person_'+df['isced11']+'_'+ df['physact'] +'_'+df['sex']+\
-        '_'+'NonWorkRelatedPhysicalActivity'+'_AsAFractionOf_Count_Person_'+\
-        df['isced11']+'_'+df['sex']
-    df.drop(columns=['unit','age','isced11','physact','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-def hlth_ehis_pe3i(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe3i for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,physact,quant_inc,sex,age,geo', '2019', '2014']
-    df.columns=cols
-    col1 = "unit,physact,quant_inc,sex,age,geo"
-    df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_physact(df)
-    df = _replace_sex(df)
+    df.drop(columns=['EU27_2020'],inplace=True)
     df = _replace_quant_inc(df)
-    df['SV'] = 'Count_Person_'+df['physact']+'_'+df['sex']+\
-        '_'+'NonWorkRelatedPhysicalActivity'+'_'+df['quant_inc']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['unit','age','quant_inc','physact','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
+    df = _replace_sex(df)
+    df = _replace_levels(df)
+    df.drop(columns=['unit','age'],inplace=True)
+    df['SV'] = 'Count_Person_'+ df['quant_inc']+'_'+df['sex']+\
+        '_'+'Former_daily_tobacco_smoking'+'_'+df['smoking']+\
+        '_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
+    df.drop(columns=['smoking','quant_inc','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+        ,value_name='observation')
+    df.to_csv("sk2i.csv")
     return df
 
-def hlth_ehis_pe3u(df: pd.DataFrame) -> pd.DataFrame:
+def health_determinant_eurostat_daily_smokers_education_attainment_level(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe3u for concatenation in Final CSV
+    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['physact,deg_urb,sex,age,unit,time','EU27_2020','EU28','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
-    'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
+    cols = ['unit,smoking,isced11,sex,age,geo','2019','2014']
     df.columns=cols
-    col1 = "physact,deg_urb,sex,age,unit,time"
+    col1 = "unit,smoking,isced11,sex,age,geo"
+    df = _split_column(df,col1)
+    # Filtering out the wanted rows and columns
+    df = df[df['age'] == 'TOTAL']
+    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
+    df = _replace_isced11(df)
+    df = _replace_sex(df)
+    df = _replace_levels(df)
+    df.drop(columns=['unit','age'],inplace=True)
+    df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+\
+        '_'+'Daily_Smokers'+'_'+df['smoking']+\
+        '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
+    df.drop(columns=['smoking','isced11','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','geo'], var_name='time'\
+        ,value_name='observation')
+    df.to_csv("sk3e.csv")
+    return df
+
+def health_determinant_eurostat_daily_smokers_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
+    Input Taken: DF
+    Output Provided: DF
+    """
+    cols = ['unit,smoking,quant_inc,sex,age,geo','2019','2014']
+    df.columns=cols
+    col1 = "unit,smoking,quant_inc,sex,age,geo"
+    df = _split_column(df,col1)
+    # Filtering out the wanted rows and columns
+    df = df[df['age'] == 'TOTAL']
+    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
+    df = _replace_quant_inc(df)
+    df = _replace_sex(df)
+    df = _replace_levels(df)
+    df.drop(columns=['unit','age'],inplace=True)
+    df['SV'] = 'Count_Person_'+ df['quant_inc']+'_'+df['sex']+\
+        '_'+'Daily_Smokers'+'_'+df['smoking']+\
+        '_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
+    df.drop(columns=['smoking','quant_inc','sex'],inplace=True)
+    df = df.melt(id_vars=['SV','geo'], var_name='time'\
+        ,value_name='observation')
+    df.to_csv("sk3i.csv")
+    return df
+
+def health_determinant_eurostat_daily_smokers_degree_of_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
+    Input Taken: DF
+    Output Provided: DF
+    """
+    cols = ['smoking,deg_urb,sex,age,unit,time','EU27_2020','EU28',
+    'BE','BG','CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY',
+    'LV','LT','LU','HU','MT','NL','AT','PL','PT','RO','SI','SK','FI',
+    'SE','IS','NO','UK','TR' ]
+    df.columns=cols
+    col1 = "smoking,deg_urb,sex,age,unit,time"
     df = _split_column(df,col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
-    df = _replace_physact(df)
+    df = _replace_levels(df)
     df.drop(columns=['unit','age'],inplace=True)
-    df['SV'] = 'Count_Person_'+df['physact']+'_'+df['sex']+'_'+\
-        'NonWorkRelatedPhysicalActivity'+'_'+df['deg_urb']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['deg_urb']
-    df.drop(columns=['physact','deg_urb','sex'],inplace=True)
+    df['SV'] = 'Count_Person_'+ df['deg_urb']+'_'+df['sex']+\
+        '_'+'Daily_Smokers'+'_'+df['smoking']+\
+        '_AsAFractionOf_Count_Person_'+df['deg_urb']+'_'+df['sex']
+    df.drop(columns=['smoking','deg_urb','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
+    df.to_csv("sk3u.csv")
     return df
-
-def hlth_ehis_pe2e(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe2e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,duration,isced11,sex,age,geo', '2019', '2014']
-    df.columns=cols
-    col1 = "unit,duration,isced11,sex,age,geo"
-    df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_duration(df)
-    df = _replace_sex(df)
-    df = _replace_isced11(df)
-    df['SV'] = 'Count_Person_'+df['duration']+'_'+df['isced11']+'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity'+'_AsAFractionOf_Count_Person_'+\
-        df['isced11']+'_'+df['sex']
-    df.drop(columns=['unit','age','duration','isced11','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-def hlth_ehis_pe2i(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe2i for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,quant_inc,duration,sex,age,geo', '2019', '2014']
-    df.columns=cols
-    col1 = "unit,quant_inc,duration,sex,age,geo"
-    df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_duration(df)
-    df = _replace_sex(df)
-    df = _replace_quant_inc(df)
-    df['SV'] = 'Count_Person_'+df['duration']+'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity'+'_'+df['quant_inc']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['unit','age','duration','quant_inc','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-def hlth_ehis_pe2u(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe2u for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['duration,deg_urb,sex,age,unit,time','EU27_2020','EU28','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
-    'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "duration,deg_urb,sex,age,unit,time"
-    df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020','EU28'],inplace=True)
-    df = _replace_deg_urb(df)
-    df = _replace_sex(df)
-    df = _replace_duration(df)
-    df.drop(columns=['unit','age'],inplace=True)
-    df['SV'] = 'Count_Person_'+df['duration']+'_'+df['sex']+'_'+\
-        'HealthEnhancingPhysicalActivity'+'_'+df['deg_urb']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['deg_urb']
-    df.drop(columns=['duration','deg_urb','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-def hlth_ehis_pe9b(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe9b for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,physact,c_birth,sex,age,time','EU27_2020','EU28','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
-    'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "unit,physact,c_birth,sex,age,time"
-    df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020','EU28'],inplace=True)
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_c_birth(df)
-    df.drop(columns=['unit','age'],inplace=True)
-    df['SV'] = 'Count_Person_'+df['physact']+'_'+df['sex']\
-        +'_'+'HealthEnhancingPhysicalActivity'+'_'+df['c_birth']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['c_birth']
-    df.drop(columns=['physact','c_birth','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-def hlth_ehis_pe9c(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe9c for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,physact,sex,age,citizen,time','EU27_2020','EU28','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
-    'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "unit,physact,sex,age,citizen,time"
-    df = _split_column(df,col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020','EU28'],inplace=True)
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_citizen(df)
-    df.drop(columns=['unit','age'],inplace=True)
-    df['SV'] = 'Count_Person_'+df['citizen']+'_'+df['physact']+'_'+\
-        df['sex']+'_'+'HealthEnhancingPhysicalActivity'+\
-        '_AsAFractionOf_Count_Person_'+df['citizen']+'_'+df['sex']
-    df.drop(columns=['physact','citizen','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
+# ............................................................................................................................................
 def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
@@ -406,22 +292,6 @@ def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
         'T': 'Total'
         }
     df = df.replace({'sex': _dict})
-    return df
-
-def _replace_physact(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF
-    """
-    _dict = {
-        'MV_AERO': 'Aerobic',
-        'MV_MSC': 'MuscleStrengthening',
-        'MV_AERO_MSC': 'AerobicAndMuscleStrengthening',
-        'MV_WALK_GET': 'Walking',
-	    'MV_CYCL_GET':'Cycling',
-	    'MV_AERO_SPRT':'AerobicSports'
-        }
-    df = df.replace({'physact': _dict})
     return df
 
 def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
@@ -483,27 +353,14 @@ def _replace_levels(df:pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF
     """
     _dict = {
-        'HVY':'HeavyActivity',
-        'MOD':'ModerateActivity',
-        'MOD_HVY':'ModerateActivityOrHeavyActivity',
-        'NONE_LGHT':'NoneActivityOrLightActivity'
+        'NSM':'NonSmoker',
+        'SM_CUR':'CurrentSmoker',
+        'SM_DAY':'DailySmoker',
+        'SM_OCC':'OccasionalSmoker',
+        'SM_LT20D': 'LessThan20CigarettesPerDay',
+        'SM_GE20D':	'20OrMoreCigarettesPerDay'
         }
-    df = df.replace({'levels': _dict})
-    return df
-
-def _replace_duration(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF
-    """
-    _dict = {
-        'MN0':'0Minutes',
-        'MN1-149':'1To149Minutes',
-        'MN150-299':'150To299Minutes',
-        'MN_GE150':'150OrMoreMinutes',
-        'MN_GE300':'300OrMoreMinutes'
-        }
-    df = df.replace({'duration': _dict})
+    df = df.replace({'smoking': _dict})
     return df
 
 def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
@@ -534,33 +391,18 @@ def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
     df = df.replace({'citizen': _dict})
     return df
 
-def _replace_lev_limit(df:pd.DataFrame) -> pd.DataFrame:
+def _replace_frequenc(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    _dict = {
-        'MOD':	'Moderate',
-	    'SEV': 'Severe',
-	    'SM_SEV': 'SomeOrSevere',
-	    'NONE': 'None'
+    _frequenc = {
+        'DAY': 'EveryDay',
+        'FMR': 'Formerly',
+        'OCC': 'Occasionally',
+	    'NVR': 'Never',
         }
-    df = df.replace({'lev_limit': _dict})
-    return df
-
-def _replace_bmi(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF
-    """
-    _dict = {
-        'BMI_LT18P5':'Underweight',
-	    'BMI18P5-24':'Normal',
-	    'BMI_GE25':'Overweight',
-	    'BMI25-29':'PreObese',
-        'BMI_GE30':'Obese'
-        }
-    df = df.replace({'bmi': _dict})
+    df = df.replace({'frequenc': _frequenc})
     return df
 
 def _split_column(df: pd.DataFrame,col: str) -> pd.DataFrame:
@@ -572,207 +414,29 @@ def _split_column(df: pd.DataFrame,col: str) -> pd.DataFrame:
     df.drop(columns=[col],inplace=True)
     return df
 
-class EuroStatPhysicalActivity:
-    """
-    This Class has requried methods to generate Cleaned CSV,
-    MCF and TMCF Files
-    """
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
-        self.input_files = input_files
-        self.cleaned_csv_file_path = csv_file_path
-        self.mcf_file_path = mcf_file_path
-        self.tmcf_file_path = tmcf_file_path
-        self.df = None
-        self.file_name = None
-        self.scaling_factor = 1
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk1b.tsv.gz",sep='\t')
+health_determinant_eurostat_smoking_county_of_birth(df)
 
-    def __generate_tmcf(self) -> None:
-        """
-        This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template
-        Arguments:
-            None
-        Returns:
-            None
-        """
-        tmcf_template = """Node: E:EuroStat_Population_PhysicalActivity->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: C:EuroStat_Population_PhysicalActivity->SV
-measurementMethod: C:EuroStat_Population_PhysicalActivity->Measurement_Method
-observationAbout: C:EuroStat_Population_PhysicalActivity->geo
-observationDate: C:EuroStat_Population_PhysicalActivity->time
-value: C:EuroStat_Population_PhysicalActivity->observation 
-"""
-        # Writing Genereated TMCF to local path.
-        with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(tmcf_template.rstrip('\n'))
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk1c.tsv.gz",sep='\t')
+health_determinant_eurostat_smoking_country_of_citizenship(df)
 
-    def __generate_mcf(self, sv_list) -> None:
-        """
-        This method generates MCF file w.r.t
-        dataframe headers and defined MCF template
-        Arguments:
-            df_cols (list) : List of DataFrame Columns
-        Returns:
-            None
-        """
-        mcf_template = """Node: dcid:{}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person{}{}{}{}{}{}{}{}{}{}{}{}{}
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
-        final_mcf_template = ""
-        for sv in sv_list:
-            if "Total" in sv:
-                continue
-            incomequin = ''
-            gender = ''
-            education = ''
-            healthBehavior = ''
-            exercise = ''
-            residence = ''
-            activity = ''
-            duration = ''
-            countryofbirth = ''
-            citizenship = ''
-            lev_limit= ''
-            bmi = ''
-            sv_temp = sv.split("_AsAFractionOf_")
-            denominator = "\nmeasurementDenominator: "+sv_temp[1]
-            sv_prop = sv_temp[0].split("_")
-            for prop in sv_prop:
-                if prop in ["Count", "Person"]:
-                    continue
-                if "PhysicalActivity" in prop:
-                    healthBehavior = "\nhealthBehavior: " + prop
-                elif "Male" in prop or "Female" in prop:
-                    gender = "\ngender: dcs:" + prop
-                elif "Aerobic" in prop or "MuscleStrengthening" in prop \
-                    or "Walking" in prop or "Cycling" in prop:
-                    exercise = "\nexerciseType: " + prop
-                elif "Education" in prop:
-                    education = "\neducationalAttainment: " + \
-                        prop.replace("EducationalAttainment","")\
-                        .replace("Or","__")
-                elif "Quintile" in prop:
-                    incomequin = "\nincome: ["+prop.replace("Quintile",\
-                        " Quintile").replace("First","1").replace("Second","2")\
-                        .replace("Third","3").replace("Fourth","4")\
-                        .replace("Fifth","5")+"]"
-                elif "Cities" in prop or "TownsAndSuburbs" in prop \
-                    or "RuralAreas" in prop:
-                    residence = "\nplaceofResidenceClassification: " + prop
-                elif "Activity" in prop:
-                    activity = "\nphysicalActivityEffortLevel: " + prop
-                elif "Minutes" in prop:
-                    if "OrMoreMinutes" in prop:
-                        duration = "\nduration: [" + prop.replace\
-                            ("OrMoreMinutes","") + " - Minutes]"
-                    elif "To" in prop:
-                        duration = "\nduration: [" + prop.replace("Minutes",\
-                             "").replace("To", " ") + " Minutes]"
-                    else:
-                        duration = "\nduration: [Minutes " + prop.replace\
-                            ("Minutes","") + "]"
-                elif "CountryOfBirth" in prop:
-                    countryofbirth = "\nnativity: " + prop
-                elif "Citizenship" in prop:
-                    citizenship = "\ncitizenship: " + prop
-                elif "Moderate" in prop or "Severe" in prop \
-                    or "None" in prop:
-                    lev_limit = "\nglobalActivityLimitationIndicator: "+prop
-                elif "weight" in prop or "Normal" in prop \
-                    or "Obese" in prop:
-                    lev_limit = "\nbmi: " + prop
-            final_mcf_template += mcf_template.format(sv,denominator,incomequin,
-                education,healthBehavior,exercise,residence,activity,duration,
-                gender,countryofbirth,citizenship,lev_limit,bmi) + "\n"
+df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk1e.tsv.gz",sep='\t')
+health_determinant_eurostat_smoking_education_attainment_level(df)
 
-        # Writing Genereated MCF to local path.
-        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(final_mcf_template.rstrip('\n'))
+df1 = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk1i.tsv.gz",sep='\t')
+health_determinant_eurostat_smoking_income_quintile(df1)
 
-    def process(self):
-        """
-        This Method calls the required methods to generate
-        cleaned CSV, MCF, and TMCF file
-        """
+df1 = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk1u.tsv.gz",sep='\t')
+health_determinant_eurostat_smoking_degree_of_urbanisation(df1)
 
-        final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
-            'Measurement_Method'])
-        # Creating Output Directory
-        output_path = os.path.dirname(self.cleaned_csv_file_path)
-        if not os.path.exists(output_path):
-            os.mkdir(output_path)
-        sv_list = []
-        for file_path in self.input_files:
-            print(file_path)
-            df = pd.read_csv(file_path, sep='\t',skiprows=1)
-            if 'hlth_ehis_sk1e' in file_path:
-                df = hlth_ehis_sk1e(df)
-            elif 'hlth_ehis_sk1i' in file_path:
-                df = hlth_ehis_sk1i(df)
-            elif 'hlth_ehis_sk1u' in file_path:
-                df = hlth_ehis_sk1u(df)
-            elif 'hlth_ehis_sk3e' in file_path:
-                df = hlth_ehis_sk3e(df)
-            elif 'hlth_ehis_sk3i' in file_path:
-                df = hlth_ehis_sk3i(df)
-            elif 'hlth_ehis_sk3u' in file_path:
-                df = hlth_ehis_sk3u(df)
-            elif 'hlth_ehis_sk4e' in file_path:
-                df = hlth_ehis_sk4e(df)
-            elif 'hlth_ehis_sk4u' in file_path:
-                df = hlth_ehis_sk4u(df)
-            elif 'hlth_ehis_sk1b' in file_path:
-                df = hlth_ehis_sk1b(df)
-            elif 'hlth_ehis_sk1c' in file_path:
-                df = hlth_ehis_sk1c(df)
-            elif 'hlth_ehis_sk2i' in file_path:
-                df = hlth_ehis_sk2i(df)
-            elif 'hlth_ehis_sk2e' in file_path:
-                df = hlth_ehis_sk2e(df)
-            elif 'hlth_ehis_sk5e' in file_path:
-                df = hlth_ehis_sk5e(df)
-            elif 'hlth_ehis_sk6e' in file_path:
-                df = hlth_ehis_sk6e(df)
-            df['SV'] = df['SV'].str.replace('_Total','')
-            df['Measurement_Method'] = np.where(df['observation']\
-                .str.contains('u'),'LowReliability/EurostatRegionalStatistics',\
-                'EurostatRegionalStatistics')
-            df['observation'] = df['observation'].str.replace(':','')\
-                .str.replace(' ','').str.replace('u','')
-            df['observation']= pd.to_numeric(df['observation'], errors='coerce')
-            final_df = pd.concat([final_df, df])
-            sv_list += df["SV"].to_list()
-        final_df = final_df.sort_values(by=['time', 'geo','SV'])
-        final_df = final_df.replace({'geo': COUNTRY_MAP})
-        final_df.to_csv(self.cleaned_csv_file_path, index=False)
-        sv_list = list(set(sv_list))
-        sv_list.sort()
-        self.__generate_mcf(sv_list)
-        self.__generate_tmcf()
+df1 = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk2i.tsv.gz",sep='\t')
+health_determinant_eurostat_former_daily_tobacco_smoking_income_quintile(df1)
 
-def main(_):
-    input_path = FLAGS.input_path
-    if not os.path.exists(input_path):
-        os.mkdir(input_path)
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output"
-    # Defining Output Files
-    cleaned_csv_path = data_file_path + os.sep + \
-        "EuroStat_Population_PhysicalActivity.csv"
-    mcf_path = data_file_path + os.sep + \
-        "EuroStat_Population_PhysicalActivity.mcf"
-    tmcf_path = data_file_path + os.sep + \
-        "EuroStat_Population_PhysicalActivity.tmcf"
-    loader = EuroStatPhysicalActivity(ip_files, cleaned_csv_path, mcf_path,\
-        tmcf_path)
-    loader.process()
+df1 = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk3e.tsv.gz",sep='\t')
+health_determinant_eurostat_daily_smokers_education_attainment_level(df1)
 
-if __name__ == "__main__":
-    app.run(main)
+df1 = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk3i.tsv.gz",sep='\t')
+health_determinant_eurostat_daily_smokers_income_quintile(df1)
+
+df1 = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk3u.tsv.gz",sep='\t')
+health_determinant_eurostat_daily_smokers_degree_of_urbanisation(df1)
