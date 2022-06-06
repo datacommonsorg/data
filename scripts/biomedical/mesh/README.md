@@ -8,6 +8,7 @@
     - [Download URL](#download-url)
     - [Overview](#overview)
     - [Notes and Caveats](#notes-and-caveats)
+    - [License](#license)
   - [About the import](#about-the-import)
     - [Artifacts](#artifacts)
       - [Scripts](#scripts)
@@ -19,7 +20,7 @@ Medical Subject Headings (MeSH) is a hierarchically-organized terminology for in
 
 ### Download URL
 
-All the terminology referenced in the MeSH data can be downloaded in various formats, [here](https://www.ncbi.nlm.nih.gov/mesh/).
+All the terminology referenced in the MeSH data can be downloaded in various formats [here](https://www.ncbi.nlm.nih.gov/mesh/).
 
 ### Overview
 
@@ -31,7 +32,7 @@ The MeSH data stores the vocabulary thesaurus used for indexing articles for Pub
 
 The data is formatted in XML format. So, it had to be parsed into CSV format, which might have contributed to the extended runtime of the program, depending on the RAM of the user's system.
 
-- ### License
+### License
 
 Any works found on National Library of Medicine (NLM) Web sites may be freely used or reproduced without permission in the U.S. More information about the license can be found [here](https://www.nlm.nih.gov/web_policies.html).
 
@@ -41,7 +42,13 @@ Any works found on National Library of Medicine (NLM) Web sites may be freely us
 
 #### Scripts
 
-[`format_mesh.py`](format_mesh.py)
+[`format_mesh.py`](format_mesh.py) converts the xml into four formatted csv files, which each can be imported alongside it's matching tMCF. 
+
+#### tMCFs
+
+
+#### Schema
+
 
 ## Examples
 
