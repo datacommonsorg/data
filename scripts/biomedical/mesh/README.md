@@ -22,7 +22,7 @@
 
 ### Download URL
 
-All the terminology referenced in the MeSH data can be downloaded in various formats [here](https://www.nlm.nih.gov/databases/download/mesh.html).
+All the terminology referenced in the MeSH data can be downloaded in various formats [here](https://www.nlm.nih.gov/databases/download/mesh.html). The current xml file version can also be downloaded by running [`download.sh`](download.sh)
 
 ### Overview
 
@@ -48,7 +48,11 @@ Any works found on National Library of Medicine (NLM) Web sites may be freely us
 
 #### tMCFs
 
-The tMCF files that map each column in the corresponding CSV file to the appropriate property can be found [here](tmcf).
+The tMCF files that map each column in the corresponding CSV file to the appropriate property can be found [here](tmcf). They include:
+  * [`mesh_concept.tmcf`](tmcf/mesh_concept.tmcf)
+  * [`mesh_descriptor.tmcf`](tmcf/mesh_descriptor.tmcf)
+  * [`mesh_qualifier.tmcf`](tmcf/mesh_qualifier.tmcf)
+  * [`mesh_term.tmcf`](tmcf/mesh_term.tmcf)
 
 ### Schema
 
@@ -58,6 +62,14 @@ Each csv + tMCF pair generated is an import of the MeSH ontology mapping to one 
 
 To generate the four formatted csv files from xml:
 
+1. Download the data to scratch/.
+
 ```
-python format_mesh.py desc2021.xml
+./download.sh
+```
+
+2. Generate cleaned CSV.
+
+```
+python format_mesh.py scratch/mesh.xml
 ```
