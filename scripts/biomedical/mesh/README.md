@@ -12,6 +12,8 @@
   - [About the import](#about-the-import)
     - [Artifacts](#artifacts)
       - [Scripts](#scripts)
+      - [tMCFs](#tmcfs)
+     - [Schema](#schema)
   - [Examples](#examples)
 
 ## About the Dataset
@@ -42,12 +44,13 @@ Any works found on National Library of Medicine (NLM) Web sites may be freely us
 
 #### Scripts
 
-[`format_mesh.py`](format_mesh.py) converts the xml into four formatted csv files, which each can be imported alongside it's matching tMCF. 
+[`format_mesh.py`](format_mesh.py) converts the original xml into four formatted csv files, which each can be imported alongside it's matching tMCF. 
 
 #### tMCFs
 
+The tMCF files that map each column in the corresponding CSV file to the appropriate property can be found [`here`](tmcf).
 
-#### Schema
+### Schema
 
 
 ## Examples
