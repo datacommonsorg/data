@@ -42,7 +42,7 @@ class TestPreprocess(unittest.TestCase):
         'test_files/hlth_ehis_pe9c.tsv'
     ]
     base = EuroStatPhysicalActivity(ip_data, cleaned_csv_file_path,
-        mcf_file_path, tmcf_file_path)
+                                    mcf_file_path, tmcf_file_path)
     base.process()
 
     def test_mcf_tmcf_files(self):
@@ -50,10 +50,12 @@ class TestPreprocess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        expected_mcf_file_path = os.path.join(test_data_folder,
+        expected_mcf_file_path = os.path.join(
+            test_data_folder,
             "expected_eurostat_population_physicalactivity.mcf")
 
-        expected_tmcf_file_path = os.path.join(test_data_folder,
+        expected_tmcf_file_path = os.path.join(
+            test_data_folder,
             "expected_eurostat_population_physicalactivity.tmcf")
 
         with open(expected_mcf_file_path,
@@ -82,7 +84,8 @@ class TestPreprocess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(test_data_folder,
+        expected_csv_file_path = os.path.join(
+            test_data_folder,
             "expected_eurostat_population_physicalactivity.csv")
 
         expected_csv_data = ""

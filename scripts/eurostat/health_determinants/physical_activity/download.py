@@ -46,7 +46,7 @@ def download_file(url) -> None:
     with open(out_file, 'wb') as f:
         f.write(file_content)
 
+
 if __name__ == "__main__":
     for file in input_urls:
         download_file(file)
-    
