@@ -37,9 +37,9 @@ class TestPreprocess(unittest.TestCase):
 
     ip_data = [
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'test_files/test_hlth_ehis_pe1u.tsv',
+        'test_files/hlth_ehis_pe1u.tsv',
         os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'test_files/test_hlth_ehis_pe9c.tsv'
+        'test_files/hlth_ehis_pe9c.tsv'
     ]
     base = EuroStatPhysicalActivity(ip_data, cleaned_csv_file_path,
         mcf_file_path, tmcf_file_path)

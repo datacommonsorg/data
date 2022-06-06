@@ -17,23 +17,20 @@ Unzips it and makes it available for further processing
 """
 import gzip
 import os
-import json
 import urllib.request
-
-_URLS_JSON_PATH = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + 'input_urls.json'
-_URLS_JSON = None
-with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
-    _URLS_JSON = json.load(file)
-_urls = _URLS_JSON['files']
+from input_files import input_urls
 
 
 def download_file(url) -> None:
     """
     Function to Download and Unzip the file provided in url
-    Input Provided: String
-    Output Given: None
+    Args: url (str), url of the file to be downloaded as a string
+    Returns: None
     """
+    # This extracts the filename form the complete URL,
+    # also removes the .gz extension.
+    # Example - ....-prod/BulkDownloadListing?file=data/hlth_ehis_pe9e.tsv.gz
+    # is made hlth_ehis_pe9e.tsv
     file_name = url.split("/")[-1][:-3]
     path = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'input_files/'
     if not os.path.exists(path):
@@ -50,6 +47,6 @@ def download_file(url) -> None:
         f.write(file_content)
 
 if __name__ == "__main__":
-    for file in _urls:
+    for file in input_urls:
         download_file(file)
     

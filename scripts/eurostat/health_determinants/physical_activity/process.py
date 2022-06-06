@@ -37,8 +37,8 @@ flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 def hlth_ehis_pe9e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9e for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
     df.columns=cols
@@ -61,8 +61,8 @@ def hlth_ehis_pe9e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9i for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,physact,quant_inc,sex,age,time','EU27_2020','EU28','BG','CZ',
     'DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU','MT',
@@ -76,11 +76,10 @@ def hlth_ehis_pe9i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
-    df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+ df['physact'] +'_'+df['sex']+\
         '_'+'HealthEnhancingPhysicalActivity'+'_'+df['quant_inc']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['quant_inc','physact','sex'],inplace=True)
+    df.drop(columns=['unit','age','quant_inc','physact','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -88,8 +87,8 @@ def hlth_ehis_pe9i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9u for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['physact,deg_urb,sex,age,unit,time','EU27_2020','EU28','BG','CZ',
     'DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU','MT',
@@ -103,11 +102,10 @@ def hlth_ehis_pe9u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_deg_urb(df)
-    df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+ df['physact'] +'_'+df['sex']+\
         '_'+'HealthEnhancingPhysicalActivity'+'_'+df['deg_urb']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['deg_urb']
-    df.drop(columns=['deg_urb','physact','sex'],inplace=True)
+    df.drop(columns=['unit','age','deg_urb','physact','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -115,8 +113,8 @@ def hlth_ehis_pe9u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe1e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,levels,isced11,sex,age,time','EU27_2020','EU28','BE','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
@@ -130,11 +128,10 @@ def hlth_ehis_pe1e(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_isced11(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
-    df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+\
         '_'+'WorkRelatedPhysicalActivity'+'_'+df['levels']+\
         '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['levels','isced11','sex'],inplace=True)
+    df.drop(columns=['unit','age','levels','isced11','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -142,8 +139,8 @@ def hlth_ehis_pe1e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe1i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1i for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,levels,quant_inc,sex,age,time','EU27_2020','EU28','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
@@ -157,11 +154,10 @@ def hlth_ehis_pe1i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
-    df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+df['sex']+\
         '_'+'WorkRelatedPhysicalActivity'+'_'+df['quant_inc']+'_'+df['levels']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['levels','quant_inc','sex'],inplace=True)
+    df.drop(columns=['unit','age','levels','quant_inc','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -169,8 +165,8 @@ def hlth_ehis_pe1i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe1u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1u for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['levels,deg_urb,sex,age,unit,time','EU27_2020','EU28','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
@@ -196,8 +192,8 @@ def hlth_ehis_pe1u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe3e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe3e for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
     df.columns=cols
@@ -220,8 +216,8 @@ def hlth_ehis_pe3e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe3i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe3i for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,physact,quant_inc,sex,age,geo', '2019', '2014']
     df.columns=cols
@@ -244,8 +240,8 @@ def hlth_ehis_pe3i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe3u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe3u for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['physact,deg_urb,sex,age,unit,time','EU27_2020','EU28','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
@@ -271,8 +267,8 @@ def hlth_ehis_pe3u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe2e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe2e for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,duration,isced11,sex,age,geo', '2019', '2014']
     df.columns=cols
@@ -295,8 +291,8 @@ def hlth_ehis_pe2e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe2i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe2i for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,quant_inc,duration,sex,age,geo', '2019', '2014']
     df.columns=cols
@@ -319,8 +315,8 @@ def hlth_ehis_pe2i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe2u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe2u for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['duration,deg_urb,sex,age,unit,time','EU27_2020','EU28','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
@@ -334,11 +330,10 @@ def hlth_ehis_pe2u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     df = _replace_duration(df)
-    df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+df['duration']+'_'+df['sex']+'_'+\
         'HealthEnhancingPhysicalActivity'+'_'+df['deg_urb']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['deg_urb']
-    df.drop(columns=['duration','deg_urb','sex'],inplace=True)
+    df.drop(columns=['unit','age','duration','deg_urb','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -346,8 +341,8 @@ def hlth_ehis_pe2u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9b(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9b for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,physact,c_birth,sex,age,time','EU27_2020','EU28','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
@@ -361,11 +356,10 @@ def hlth_ehis_pe9b(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_c_birth(df)
-    df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+df['physact']+'_'+df['sex']\
         +'_'+'HealthEnhancingPhysicalActivity'+'_'+df['c_birth']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['c_birth']
-    df.drop(columns=['physact','c_birth','sex'],inplace=True)
+    df.drop(columns=['unit','age','physact','c_birth','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -373,8 +367,8 @@ def hlth_ehis_pe9b(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9c(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9c for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,physact,sex,age,citizen,time','EU27_2020','EU28','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
@@ -388,11 +382,10 @@ def hlth_ehis_pe9c(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_citizen(df)
-    df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+df['citizen']+'_'+df['physact']+'_'+\
         df['sex']+'_'+'HealthEnhancingPhysicalActivity'+\
         '_AsAFractionOf_Count_Person_'+df['citizen']+'_'+df['sex']
-    df.drop(columns=['physact','citizen','sex'],inplace=True)
+    df.drop(columns=['unit','age','physact','citizen','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -400,8 +393,8 @@ def hlth_ehis_pe9c(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9d(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9d for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,physact,sex,age,lev_limit,time','EU27_2020','EU28','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
@@ -415,11 +408,10 @@ def hlth_ehis_pe9d(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_lev_limit(df)
-    df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+df['physact']+'_'+df['sex']\
         +'_'+'HealthEnhancingPhysicalActivity'+'_'+df['lev_limit']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['lev_limit']
-    df.drop(columns=['physact','lev_limit','sex'],inplace=True)
+    df.drop(columns=['unit','age','physact','lev_limit','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -427,8 +419,8 @@ def hlth_ehis_pe9d(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe2m(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe2m for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['unit,duration,bmi,sex,age,time','EU27_2020','BE','BG',
     'CZ','DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU',
@@ -442,11 +434,10 @@ def hlth_ehis_pe2m(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_duration(df)
     df = _replace_sex(df)
     df = _replace_bmi(df)
-    df.drop(columns=['unit','age'],inplace=True)
     df['SV'] = 'Count_Person_'+df['duration']+'_'+df['sex']\
         +'_'+'NonWorkRelatedPhysicalActivity'+'_'+df['bmi']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['bmi']
-    df.drop(columns=['bmi','duration','sex'],inplace=True)
+    df.drop(columns=['unit','age','bmi','duration','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -454,8 +445,8 @@ def hlth_ehis_pe2m(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_de9(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_de9 for concatenation in Final CSV.
-    Input Taken: DF
-    Output Provided: DF
+    Arguments: df (pd.DataFrame), the raw df as the input
+    Returns: df (pd.DataFrame), provides the cleaned df as output
     """
     cols = ['sex,age,isced11,time','BG','CZ','EL','ES','CY','LV','HU','MT','AT',
         'PL','RO','SK']
@@ -466,11 +457,10 @@ def hlth_ehis_de9(df: pd.DataFrame) -> pd.DataFrame:
     df = df[df['age'] == 'TOTAL']
     df = _replace_isced11(df)
     df = _replace_sex(df)
-    df.drop(columns=['age'],inplace=True)
     df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_'+\
         'PhysicalActivity'+'_AsAFractionOf_Count_Person_'+df['sex']
     df.drop(columns=['isced11','sex'],inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+    df = df.melt(id_vars=['age','SV','time'], var_name='geo'\
         ,value_name='observation')
     print(df)
     return df
@@ -479,21 +469,25 @@ def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
-    _sex = {
+    sex = {
         'F': 'Female',
         'M': 'Male',
         'T': 'Total'
         }
-    df = df.replace({'sex': _sex})
+    df = df.replace({'sex': sex})
     return df
 
 def _replace_physact(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
-    _physact = {
+    physact = {
         'MV_AERO': 'Aerobic',
         'MV_MSC': 'MuscleStrengthening',
         'MV_AERO_MSC': 'AerobicAndMuscleStrengthening',
@@ -501,16 +495,17 @@ def _replace_physact(df:pd.DataFrame) -> pd.DataFrame:
 	    'MV_CYCL_GET':'Cycling',
 	    'MV_AERO_SPRT':'AerobicSports'
         }
-    df = df.replace({'physact': _physact})
+    df = df.replace({'physact': physact})
     return df
 
 def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
-
-    _isced11 = {
+    isced11 = {
         'ED0-2': 'EducationalAttainment'+\
         'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
         'ED0_2': 'EducationalAttainment'+\
@@ -524,16 +519,18 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
         'ED5_8': 'EducationalAttainmentTertiaryEducation',
         'TOTAL': 'Total'
         }
-    df = df.replace({'isced11': _isced11})
+    df = df.replace({'isced11': isced11})
     return df
 
 def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
 
-    _quant_inc = {
+    quant_inc = {
         'TOTAL':'Total',
 	    'QU1':'Percentile0To20',
 	    'QU2':'Percentile20To40',
@@ -541,50 +538,56 @@ def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
 	    'QU4':'Percentile60To80',
         'QU5':'Percentile80To100'
         }
-    df = df.replace({'quant_inc': _quant_inc})
+    df = df.replace({'quant_inc': quant_inc})
     return df
 
 def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
-    _deg_urb = {
+    deg_urb = {
         'TOTAL':'Total',
         'DEG1':'Cities',
         'DEG2':'TownsAndSuburbs',
         'DEG3':'RuralAreas',
         }
-    df = df.replace({'deg_urb': _deg_urb})
+    df = df.replace({'deg_urb': deg_urb})
     return df
 
 def _replace_levels(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
-    _levels = {
+    levels = {
         'HVY':'HeavyActivity',
         'MOD':'ModerateActivity',
         'MOD_HVY':'ModerateActivityOrHeavyActivity',
         'NONE_LGHT':'NoneActivityOrLightActivity'
         }
-    df = df.replace({'levels': _levels})
+    df = df.replace({'levels': levels})
     return df
 
 def _replace_duration(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
-    _duration = {
+    duration = {
         'MN0':'0Minutes',
         'MN1-149':'1To149Minutes',
         'MN150-299':'150To299Minutes',
         'MN_GE150':'150OrMoreMinutes',
         'MN_GE300':'300OrMoreMinutes'
         }
-    df = df.replace({'duration': _duration})
+    df = df.replace({'duration': duration})
     return df
 
 def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
@@ -592,61 +595,69 @@ def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
     """
-    _c_birth = {
+    c_birth = {
         'EU28_FOR':	'ForeignBornWithinEU28',
 	    'NEU28_FOR': 'ForeignBornOutsideEU28',
 	    'FOR': 'ForeignBorn',
 	    'NAT': 'Native'
         }
-    df = df.replace({'c_birth': _c_birth})
+    df = df.replace({'c_birth': c_birth})
     return df
 
 def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
-    _citizen = {
+    citizen = {
         'EU28_FOR':	'ForeignWithinEU28',
 	    'NEU28_FOR': 'ForeignOutsideEU28',
 	    'FOR': 'NotACitizen',
 	    'NAT': 'Citizen'
         }
-    df = df.replace({'citizen': _citizen})
+    df = df.replace({'citizen': citizen})
     return df
 
 def _replace_lev_limit(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
-    _lev_limit = {
+    lev_limit = {
         'MOD':	'Moderate',
 	    'SEV': 'Severe',
 	    'SM_SEV': 'SomeOrSevere',
 	    'NONE': 'None'
         }
-    df = df.replace({'lev_limit': _lev_limit})
+    df = df.replace({'lev_limit': lev_limit})
     return df
 
 def _replace_bmi(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
-    _bmi = {
+    bmi = {
         'BMI_LT18P5':'Underweight',
 	    'BMI18P5-24':'Normalweight',
 	    'BMI_GE25':'Overweight',
 	    'BMI25-29':'PreObese',
         'BMI_GE30':'Obesity'
         }
-    df = df.replace({'bmi': _bmi})
+    df = df.replace({'bmi': bmi})
     return df
 
 def _split_column(df: pd.DataFrame,col: str) -> pd.DataFrame:
     """
     Divides a single column into multiple columns and returns the DF.
+    Arguments: df (pd.DataFrame)
+    Returns: df (pd.DataFrame)
     """
     info = col.split(",")
     df[info] = df[col].str.split(',', expand=True)
@@ -677,14 +688,16 @@ class EuroStatPhysicalActivity:
         Returns:
             None
         """
-        tmcf_template = """Node: E:EuroStat_Population_PhysicalActivity->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: C:EuroStat_Population_PhysicalActivity->SV
-measurementMethod: C:EuroStat_Population_PhysicalActivity->Measurement_Method
-observationAbout: C:EuroStat_Population_PhysicalActivity->geo
-observationDate: C:EuroStat_Population_PhysicalActivity->time
-value: C:EuroStat_Population_PhysicalActivity->observation 
-"""
+        tmcf_template = (
+            "Node: E:EuroStat_Population_PhysicalActivity->E0\n"
+            "typeOf: dcs:StatVarObservation\n"
+            "variableMeasured: C:EuroStat_Population_PhysicalActivity->SV\n"
+            "measurementMethod: C:EuroStat_Population_PhysicalActivity->"
+            "Measurement_Method\n"
+            "observationAbout: C:EuroStat_Population_PhysicalActivity->geo\n"
+            "observationDate: C:EuroStat_Population_PhysicalActivity->time\n"
+            "value: C:EuroStat_Population_PhysicalActivity->observation\n"
+        )
         # Writing Genereated TMCF to local path.
         with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf_template.rstrip('\n'))
@@ -698,12 +711,11 @@ value: C:EuroStat_Population_PhysicalActivity->observation
         Returns:
             None
         """
-        mcf_template = """Node: dcid:{}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person{}{}{}{}{}{}{}{}{}{}{}{}
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
+        mcf_template =  ("Node: dcid:{}\n"
+                        "typeOf: dcs:StatisticalVariable\n"
+                        "populationType: dcs:Person{}{}{}{}{}{}{}{}{}{}{}{}\n"
+                        "statType: dcs:measuredValue\n"
+                        "measuredProperty: dcs:count\n")
         final_mcf_template = ""
         for sv in sv_list:
             if "Total" in sv:
@@ -784,6 +796,8 @@ measuredProperty: dcs:count
         """
         This Method calls the required methods to generate
         cleaned CSV, MCF, and TMCF file.
+        Arguments: None
+        Returns: None
         """
 
         final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
@@ -797,47 +811,24 @@ measuredProperty: dcs:count
         for file_path in self.input_files:
             print(file_path)
             df = pd.read_csv(file_path, sep='\t',skiprows=1)
-            if 'hlth_ehis_pe9e' in file_path:
-                df = hlth_ehis_pe9e(df)
-            elif 'hlth_ehis_pe9i' in file_path:
-                df = hlth_ehis_pe9i(df)
-            elif 'hlth_ehis_pe9u' in file_path:
-                df = hlth_ehis_pe9u(df)
-            elif 'hlth_ehis_pe1e' in file_path:
-                df = hlth_ehis_pe1e(df)
-            elif 'hlth_ehis_pe1i' in file_path:
-                df = hlth_ehis_pe1i(df)
-            elif 'hlth_ehis_pe1u' in file_path:
-                df = hlth_ehis_pe1u(df)
-            elif 'hlth_ehis_pe3e' in file_path:
-                df = hlth_ehis_pe3e(df)
-            elif 'hlth_ehis_pe3i' in file_path:
-                df = hlth_ehis_pe3i(df)
-            elif 'hlth_ehis_pe3u' in file_path:
-                df = hlth_ehis_pe3u(df)
-            elif 'hlth_ehis_pe2e' in file_path:
-                df = hlth_ehis_pe2e(df)
-            elif 'hlth_ehis_pe2i' in file_path:
-                df = hlth_ehis_pe2i(df)
-            elif 'hlth_ehis_pe2u' in file_path:
-                df = hlth_ehis_pe2u(df)
-            elif 'hlth_ehis_pe9b' in file_path:
-                df = hlth_ehis_pe9b(df)
-            elif 'hlth_ehis_pe9c' in file_path:
-                df = hlth_ehis_pe9c(df)
-            elif 'hlth_ehis_pe9d' in file_path:
-                df = hlth_ehis_pe9d(df)
-            elif 'hlth_ehis_pe2m' in file_path:
-                df = hlth_ehis_pe2m(df)
-            elif 'hlth_ehis_de9' in file_path:
-                df = hlth_ehis_de9(df)
-            
+            file_name = file_path.split("/")[-1][:-4]
+            function_dict = {"hlth_ehis_pe9e": hlth_ehis_pe9e,
+                "hlth_ehis_pe9i":hlth_ehis_pe9i,"hlth_ehis_pe9u":hlth_ehis_pe9u,
+                "hlth_ehis_pe1e":hlth_ehis_pe1e,"hlth_ehis_pe1i":hlth_ehis_pe1i,
+                "hlth_ehis_pe1u":hlth_ehis_pe1u,"hlth_ehis_pe3e":hlth_ehis_pe3e,
+                "hlth_ehis_pe3i":hlth_ehis_pe3i,"hlth_ehis_pe3u":hlth_ehis_pe3u,
+                "hlth_ehis_pe2e":hlth_ehis_pe2e,"hlth_ehis_pe2i":hlth_ehis_pe2i,
+                "hlth_ehis_pe2u":hlth_ehis_pe2u,"hlth_ehis_pe9b":hlth_ehis_pe9b,
+                "hlth_ehis_pe9c":hlth_ehis_pe9c,"hlth_ehis_pe9d":hlth_ehis_pe9d,
+                "hlth_ehis_pe2m":hlth_ehis_pe2m,"hlth_ehis_de9":hlth_ehis_de9}
+            df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total','')
-            df['Measurement_Method'] = np.where(df['observation']\
-                .str.contains('u'),'LowReliability/EurostatRegionalStatistics',\
+            df['Measurement_Method'] = np.where(df['observation']
+                .str.contains('u'),'LowReliability/EurostatRegionalStatistics',
                 'EurostatRegionalStatistics')
-            df['observation'] = df['observation'].str.replace(':','')\
-                .str.replace(' ','').str.replace('u','')
+            df['observation'] = (df['observation'].str.replace(':','')
+                                                .str.replace(' ','')
+                                                .str.replace('u',''))
             df['observation'].replace('', np.nan, inplace=True)
             df.dropna(subset=['observation'], inplace=True)
             df['observation']= pd.to_numeric(df['observation'], errors='coerce')
@@ -861,12 +852,12 @@ def main(_):
     data_file_path = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + "output"
     # Defining Output Files
-    cleaned_csv_path = data_file_path + os.sep + \
-        "eurostat_population_physicalactivity.csv"
-    mcf_path = data_file_path + os.sep + \
-        "eurostat_population_physicalactivity.mcf"
-    tmcf_path = data_file_path + os.sep + \
-        "eurostat_population_physicalactivity.tmcf"
+    csv_name = "eurostat_population_physicalactivity.csv"
+    mcf_name = "eurostat_population_physicalactivity.mcf"
+    tmcf_name = "eurostat_population_physicalactivity.tmcf"
+    cleaned_csv_path = data_file_path + os.sep + csv_name
+    mcf_path = data_file_path + os.sep + mcf_name
+    tmcf_path = data_file_path + os.sep + tmcf_name
     loader = EuroStatPhysicalActivity(ip_files, cleaned_csv_path, mcf_path,\
         tmcf_path)
     loader.process()
