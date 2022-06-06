@@ -173,6 +173,8 @@ def _clean_txt_file(df: pd.DataFrame,
         df[col] = df[col].str.replace(",", "")
     idx = df[df['Resident Population'] == "(census)"].index
 
+    # The index numbers alotted as per where the columns are present to
+    # move the columns left
     resident_population = 1
     resident_population_plus_armed_forces_overseas = 2
     civilian_population = 3
