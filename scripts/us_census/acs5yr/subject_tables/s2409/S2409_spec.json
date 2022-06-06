@@ -1,0 +1,225 @@
+{
+    "populationType": {
+        "_DEFAULT": "Person"
+    },
+    "measurement": {
+        "_DEFAULT": {
+            "measuredProperty": "count",
+            "statType": "measuredValue"
+        },
+
+        "Margin of Error": {
+            "measuredProperty": "count",
+            "statType": "marginOfError"
+        },
+
+        "Median earnings (dollars)": {
+            "measuredProperty": "earnings",
+            "incomeStatus": "WithEarnings",
+            "statType": "medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear"
+        },
+        "Median earnings (dollars) for male": {
+            "measuredProperty": "earnings",
+            "incomeStatus": "WithEarnings",
+            "statType": "medianValue",
+            "gender": "Male",
+            "unit": "InflationAdjustedUSD_CurrentYear"
+        },
+        "Median earnings (dollars) for female": {
+            "measuredProperty": "earnings",
+            "incomeStatus": "WithEarnings",
+            "statType": "medianValue",
+            "gender": "Female",
+            "unit": "InflationAdjustedUSD_CurrentYear"
+        }
+    },
+    "pvs": {
+        "gender": {
+            "Male": "Male",
+            "Female": "Female",
+            "Male MOE": "Male",
+            "Female MOE": "Female"
+        },
+        "establishmentOwnership": {
+            "Private for-profit wage and salary workers": "PrivatelyOwnedForProfit",
+            "Private for-profit wage and salary workers:": "PrivatelyOwnedForProfit",
+            "Employee of private company workers": "PrivatelyOwnedForProfit",
+            "Self-employed in own incorporated business workers": "PrivatelyOwnedForProfit",
+            "Private not-for-profit wage and salary workers": "PrivatelyOwnedNotForProfit",
+            "Local government workers": "LocalGovernmentOwned",
+            "State government workers": "StateGovernmentOwned",
+            "Federal government workers": "FederalGovernmentOwned",
+            "Self-employed in own not incorporated business workers and unpaid family workers": "PrivatelyOwned"
+        },
+        "workerClassification": {
+            "Private for-profit wage and salary workers": "PaidWorker",
+            "Private for-profit wage and salary workers:": "PaidWorker",
+            "Employee of private company workers": "PaidEmployee",
+            "Self-employed in own incorporated business workers": "IncorporatedBusinessOwner",
+            "Private not-for-profit wage and salary workers": "PaidWorker",
+            "Local government workers": "Worker",
+            "State government workers": "Worker",
+            "Federal government workers": "Worker",
+            "Self-employed in own not incorporated business workers and unpaid family workers": "UnincorporatedBusinessOwnerOrUnpaidFamilyWorker"
+        },
+        "employment": {
+            "Full-time, year-round civilian employed population 16 years and over": "BLS_Employed"
+        },
+        "age": {
+            "Full-time, year-round civilian employed population 16 years and over": "[16 - Years]"
+        },
+        "armedForcesStatus": {
+            "Full-time, year-round civilian employed population 16 years and over": "Civilian"
+        },
+        "workStatus": {
+            "Full-time, year-round civilian employed population 16 years and over": "USC_FullTimeYearRoundWorker"
+        }
+    },
+  
+    "inferredSpec": {
+        "workerClassification": {
+            "workStatus": "USC_FullTimeYearRoundWorker"
+        }
+    },
+    "universePVs": [
+        {
+            "populationType": "Person",
+            "constraintProperties": [
+                "armedForcesStatus"
+            ],
+            "dependentPVs": {
+                "age": "[16 - Years]"
+            }
+        },
+        {
+            "populationType": "Person",
+            "constraintProperties": [
+                "workerClassification",
+                "establishmentOwnership"
+            ],
+            "dependentPVs": {
+                "age": "[16 - Years]",
+                "employment": "BLS_Employed",
+                "armedForcesStatus": "Civilian"
+            }
+        },
+        {
+            "populationType": "Person",
+            "constraintProperties": [],
+            "obs_props": { "mprop": "earnings"},
+            "dependentPVs": {
+                "age": "[16 - Years]",
+                "incomeStatus": "WithEarnings"
+            }
+        },
+        {
+            "populationType": "Person",
+            "constraintProperties": [
+                "workerClassification",
+                "establishmentOwnership"
+            ],
+            "obs_props": { "mprop": "earnings"},
+            "dependentPVs": {
+                "age": "[16 - Years]",
+                "employment": "BLS_Employed",
+                "armedForcesStatus": "Civilian",
+                "incomeStatus": "WithEarnings"
+            }
+        }
+    ],
+
+    "denominators": {
+        "Total!!Estimate!!Full-time, year-round civilian employed population 16 years and over": [
+            "Male!!Estimate!!Full-time, year-round civilian employed population 16 years and over",
+            "Male!!Margin of Error!!Full-time, year-round civilian employed population 16 years and over",
+            "Female!!Estimate!!Full-time, year-round civilian employed population 16 years and over",
+            "Female!!Margin of Error!!Full-time, year-round civilian employed population 16 years and over"
+        ],
+        "Total!!Estimate!!Private for-profit wage and salary workers": [
+            "Male!!Estimate!!Private for-profit wage and salary workers",
+            "Male!!Margin of Error!!Private for-profit wage and salary workers",
+            "Female!!Estimate!!Private for-profit wage and salary workers",
+            "Female!!Margin of Error!!Private for-profit wage and salary workers"
+        ],
+        "Total!!Estimate!!Private for-profit wage and salary workers!!Employee of private company workers": [
+            "Male!!Estimate!!Private for-profit wage and salary workers!!Employee of private company workers",
+            "Male!!Margin of Error!!Private for-profit wage and salary workers!!Employee of private company workers",
+            "Female!!Estimate!!Private for-profit wage and salary workers!!Employee of private company workers",
+            "Female!!Margin of Error!!Private for-profit wage and salary workers!!Employee of private company workers"
+        ],
+        "Total!!Estimate!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers": [
+            "Male!!Estimate!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers",
+            "Male!!Margin of Error!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers",
+            "Female!!Estimate!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers",
+            "Female!!Margin of Error!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers"
+        ],
+        "Total!!Estimate!!Private not-for-profit wage and salary workers": [
+            "Male!!Estimate!!Private not-for-profit wage and salary workers",
+            "Male!!Margin of Error!!Private not-for-profit wage and salary workers",
+            "Female!!Estimate!!Private not-for-profit wage and salary workers",
+            "Female!!Margin of Error!!Private not-for-profit wage and salary workers"
+        ],
+        "Total!!Estimate!!Local government workers": [
+            "Male!!Estimate!!Local government workers",
+            "Male!!Margin of Error!!Local government workers",
+            "Female!!Estimate!!Local government workers",
+            "Female!!Margin of Error!!Local government workers"
+        ],
+        "Total!!Estimate!!State government workers": [
+            "Male!!Estimate!!State government workers",
+            "Male!!Margin of Error!!State government workers",
+            "Female!!Estimate!!State government workers",
+            "Female!!Margin of Error!!State government workers"
+        ],
+        "Total!!Estimate!!Federal government workers": [
+            "Male!!Estimate!!Federal government workers",
+            "Male!!Margin of Error!!Federal government workers",
+            "Female!!Estimate!!Federal government workers",
+            "Female!!Margin of Error!!Federal government workers"
+        ],
+        "Total!!Estimate!!Self-employed in own not incorporated business workers and unpaid family workers": [
+            "Male!!Estimate!!Self-employed in own not incorporated business workers and unpaid family workers",
+            "Male!!Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers",
+            "Female!!Estimate!!Self-employed in own not incorporated business workers and unpaid family workers",
+            "Female!!Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers"
+        ]
+    },
+    "ignoreColumns": [
+        "id",
+        "Geographic Area Name",
+        "PERCENT IMPUTED",
+        "Percent Male",
+        "Percent Female",
+        "Percent Male MOE",
+        "Percent Female MOE",
+        "Median earnings (dollars) for male!!Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers",
+        "Median earnings (dollars) for male!!Margin of Error!!Private not-for-profit wage and salary workers",
+        "Median earnings (dollars) for male!!Margin of Error!!Private for-profit wage and salary workers!!Employee of private company workers",
+        "Median earnings (dollars) for male!!Margin of Error!!Local government workers",
+        "Median earnings (dollars) for male!!Margin of Error!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers",
+        "Median earnings (dollars) for male!!Margin of Error!!Full-time, year-round civilian employed population 16 years and over",
+        "Median earnings (dollars) for male!!Margin of Error!!State government workers",
+        "Median earnings (dollars) for male!!Margin of Error!!Private for-profit wage and salary workers",
+        "Median earnings (dollars) for male!!Margin of Error!!Federal government workers",
+        "Median earnings (dollars) for female!!Margin of Error!!State government workers",
+        "Median earnings (dollars) for female!!Margin of Error!!Federal government workers",
+        "Median earnings (dollars) for female!!Margin of Error!!Local government workers",
+        "Median earnings (dollars) for female!!Margin of Error!!Private not-for-profit wage and salary workers",
+        "Median earnings (dollars) for female!!Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers",
+        "Median earnings (dollars) for female!!Margin of Error!!Full-time, year-round civilian employed population 16 years and over",
+        "Median earnings (dollars) for female!!Margin of Error!!Private for-profit wage and salary workers",
+        "Median earnings (dollars) for female!!Margin of Error!!Private for-profit wage and salary workers!!Employee of private company workers",
+        "Median earnings (dollars) for female!!Margin of Error!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers",
+        "Median earnings (dollars)!!Margin of Error!!Self-employed in own not incorporated business workers and unpaid family workers",
+        "Median earnings (dollars)!!Margin of Error!!Private for-profit wage and salary workers",
+        "Median earnings (dollars)!!Margin of Error!!Federal government workers",
+        "Median earnings (dollars)!!Margin of Error!!Private for-profit wage and salary workers!!Self-employed in own incorporated business workers",
+        "Median earnings (dollars)!!Margin of Error!!Local government workers",
+        "Median earnings (dollars)!!Margin of Error!!Full-time, year-round civilian employed population 16 years and over",
+        "Median earnings (dollars)!!Margin of Error!!State government workers",
+        "Median earnings (dollars)!!Margin of Error!!Private not-for-profit wage and salary workers",
+        "Median earnings (dollars)!!Margin of Error!!Private for-profit wage and salary workers!!Employee of private company workers"
+
+    ]
+}

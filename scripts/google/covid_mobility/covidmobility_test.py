@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import unittest
-from covidmobility import csv_to_mcf
+from .covidmobility import csv_to_mcf
 from os import path
 
 
@@ -49,9 +49,10 @@ class TestCovidMobility(unittest.TestCase):
             str: expected output == actual output.
         """
 
-        input_path = path.join(dir_path, "data.csv")
-        output_path = path.join(dir_path, "output.mcf")
-        expected_path = path.join(dir_path, "expected.mcf")
+        module_dir = path.dirname(path.realpath(__file__))
+        input_path = path.join(module_dir, dir_path, "data.csv")
+        output_path = path.join(module_dir, dir_path, "output.mcf")
+        expected_path = path.join(module_dir, dir_path, "expected.mcf")
 
         if not path.exists(input_path):
             self.fail(input_path + " doesn't exist!")
