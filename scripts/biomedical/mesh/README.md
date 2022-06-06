@@ -62,7 +62,7 @@ Each csv + tMCF pair generated is an import of the MeSH ontology mapping to one 
 
 To generate the four formatted csv files from xml:
 
-1. Download the data to scratch/.
+1. Download the data to `scratch/`.
 
 ```
 ./download.sh
