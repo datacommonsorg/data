@@ -18,7 +18,7 @@
 
 ## About the Dataset
 
-“The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information”. Data Commons includes the Concept, Descriptor, Qualifier, and Term elements of MeSH as described [`here`](https://www.nlm.nih.gov/mesh/xml_data_elements.html). More information about the dataset can be found on the official National Center for Biotechnology (NCBI) [website](https://www.ncbi.nlm.nih.gov/mesh/).
+“The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information”. Data Commons includes the Concept, Descriptor, Qualifier, and Term elements of MeSH as described [here](https://www.nlm.nih.gov/mesh/xml_data_elements.html). More information about the dataset can be found on the official National Center for Biotechnology (NCBI) [website](https://www.ncbi.nlm.nih.gov/mesh/).
 
 ### Download URL
 
@@ -48,11 +48,11 @@ Any works found on National Library of Medicine (NLM) Web sites may be freely us
 
 #### tMCFs
 
-The tMCF files that map each column in the corresponding CSV file to the appropriate property can be found [`here`](tmcf).
+The tMCF files that map each column in the corresponding CSV file to the appropriate property can be found [here](tmcf).
 
 ### Schema
 
-Each csv + tMCF pair generated is an import of the MeSH ontology mapping to one of the four following entities: [`MeSHConcept`](https://datacommons.org/browser/MeSHConcept), [`MeSHDescriptor`](https://datacommons.org/browser/MeSHDescriptor), [`MeSHQualifier`](https://datacommons.org/browser/MeSHQualifier), or [`MeSHTerm`](https://datacommons.org/browser/MeSHTerm).
+Each csv + tMCF pair generated is an import of the MeSH ontology mapping to one of the four following entities: [MeSHConcept](https://datacommons.org/browser/MeSHConcept), [MeSHDescriptor](https://datacommons.org/browser/MeSHDescriptor), [MeSHQualifier](https://datacommons.org/browser/MeSHQualifier), or [MeSHTerm](https://datacommons.org/browser/MeSHTerm).
 
 ## Examples
 
