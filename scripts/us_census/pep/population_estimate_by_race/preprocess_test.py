@@ -53,12 +53,14 @@ class TestPreprocess(unittest.TestCase):
         expected_mcf_file_path = os.path.join(
             TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race.mcf")
         expected_mcf_file_path1 = os.path.join(
-            TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race_State1980.mcf")
+            TEST_DATA_FOLDER,
+            "expected_USA_Population_Count_by_Race_State1980.mcf")
 
         expected_tmcf_file_path = os.path.join(
             TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race.tmcf")
         expected_tmcf_file_path1 = os.path.join(
-            TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race_State1980.tmcf")
+            TEST_DATA_FOLDER,
+            "expected_USA_Population_Count_by_Race_State1980.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -79,9 +81,10 @@ class TestPreprocess(unittest.TestCase):
         with open(self.mcf_file_path1 + ".mcf", encoding="UTF-8") as mcf_file1:
             mcf_data1 = mcf_file1.read()
 
-        with open(self.tmcf_file_path+ ".tmcf", encoding="UTF-8") as tmcf_file:
+        with open(self.tmcf_file_path + ".tmcf", encoding="UTF-8") as tmcf_file:
             tmcf_data = tmcf_file.read()
-        with open(self.tmcf_file_path1+ ".tmcf", encoding="UTF-8") as tmcf_file1:
+        with open(self.tmcf_file_path1 + ".tmcf",
+                  encoding="UTF-8") as tmcf_file1:
             tmcf_data1 = tmcf_file1.read()
 
         if path.exists(self.mcf_file_path):

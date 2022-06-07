@@ -106,10 +106,16 @@ def _save_data(_url: str, download_local_path: str) -> None:
             df.to_excel(download_local_path + os.sep + file_name,\
                 index=False,engine='xlsxwriter')
         elif "co-est00int-alldata" in _url:
-            df = pd.read_csv(_url, on_bad_lines='skip',encoding='ISO-8859-1', low_memory=False)
+            df = pd.read_csv(_url,
+                             on_bad_lines='skip',
+                             encoding='ISO-8859-1',
+                             low_memory=False)
             df.to_csv(download_local_path + os.sep + file_name, index=False)
         elif "CC-EST2020-ALLDATA" in _url:
-            df = pd.read_csv(_url, on_bad_lines='skip',encoding='ISO-8859-1', low_memory=False)
+            df = pd.read_csv(_url,
+                             on_bad_lines='skip',
+                             encoding='ISO-8859-1',
+                             low_memory=False)
             df.to_csv(download_local_path + os.sep + file_name, index=False)
 
     elif ".txt" in _url:

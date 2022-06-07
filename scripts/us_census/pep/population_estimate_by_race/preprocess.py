@@ -36,6 +36,7 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_data"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
+
 # Generating geoID by taking Geographical area as input
 def _add_geo_id(df: pd.DataFrame) -> pd.DataFrame:
     short_forms = get_states()
@@ -142,8 +143,8 @@ def _clean_county_70_xls_file(df: pd.DataFrame) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for xls dataset.
     """
     df['Total People'] = 0
-    for i in range(1,19):
-        df['Total People'] = df['Total People']+df[i]
+    for i in range(1, 19):
+        df['Total People'] = df['Total People'] + df[i]
     df['FIPS'] = [f'{x:05}' for x in df['FIPS']]
     df['Info'] = df['Year'].astype(str) + '-' + df['FIPS'].astype(str)
     df.drop(columns=['Year','FIPS',1,2,3,4,5,6,7,8,9,10,11,12,\
@@ -237,17 +238,18 @@ def _clean_xls2_file(df: pd.DataFrame) -> pd.DataFrame:
     cols = df.columns.drop(extras)
     df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
     # All the age groups are being added up to get total value.
-    age_list = ['Under 5 years','5 to 9 years','10 to 14 years',
-        '15 to 19 years','20 to 24 years','25 to 29 years',
-        '30 to 34 years','35 to 39 years','40 to 44 years',
-        '45 to 49 years','50 to 54 years','55 to 59 years',
-        '60 to 64 years','65 to 69 years','70 to 74 years','75 to 79 years',
-        '80 to 84 years','85 years and over']
-    
-    df['count']=0
+    age_list = [
+        'Under 5 years', '5 to 9 years', '10 to 14 years', '15 to 19 years',
+        '20 to 24 years', '25 to 29 years', '30 to 34 years', '35 to 39 years',
+        '40 to 44 years', '45 to 49 years', '50 to 54 years', '55 to 59 years',
+        '60 to 64 years', '65 to 69 years', '70 to 74 years', '75 to 79 years',
+        '80 to 84 years', '85 years and over'
+    ]
+
+    df['count'] = 0
     for i in age_list:
-        df['count'] = df['count']+df[i]
-    df = df.drop(age_list,axis=1)
+        df['count'] = df['count'] + df[i]
+    df = df.drop(age_list, axis=1)
     df['locationyear'] = df['Year of Estimate'] + "-" + df['State Name']
     df = df.drop(['Year of Estimate', 'State Name'], axis=1)
     # it groups the df as per columns provided
@@ -457,7 +459,7 @@ def _clean_csv2_file(df: pd.DataFrame) -> pd.DataFrame:
     """
     # dropping unwanted rows after the data
     df.drop(df.index[65:], inplace=True)
-    # dropping the first 14 unwanted rows 
+    # dropping the first 14 unwanted rows
     df.drop(df.index[1:14], inplace=True)
     modify = [0, 30, 31, 32, 33, 34, 35, 40, 41, 42, 49]
     for j in modify:
@@ -612,6 +614,7 @@ def _transform_df(df: pd.DataFrame) -> pd.DataFrame:
     final_cols_list = missing_cols + final_cols_list
     df.columns = final_cols_list
     return df
+
 
 def _mcf_process(col: str):
     """
@@ -834,13 +837,12 @@ class CensusUSAPopulationByRace:
         Returns:
             None
         """
-        mcf_template =(
-            "Node: dcid:{}\n"
-            "typeOf: dcs:StatisticalVariable\n"
-            "populationType: dcs:Person\n"
-            "statType: dcs:measuredValue\n"
-            "measuredProperty: dcs:count\n"
-            "race: dcs:{}\n")
+        mcf_template = ("Node: dcid:{}\n"
+                        "typeOf: dcs:StatisticalVariable\n"
+                        "populationType: dcs:Person\n"
+                        "statType: dcs:measuredValue\n"
+                        "measuredProperty: dcs:count\n"
+                        "race: dcs:{}\n")
         mcf = ""
         for col in df_cols:
             race = ""
