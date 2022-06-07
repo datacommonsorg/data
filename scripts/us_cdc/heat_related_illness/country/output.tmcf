@@ -1,0 +1,8 @@
+Node: E:EPHHeatIllness->E0
+typeOf: dcs:StatVarObservation
+measurementMethod: dcs:DataCommonsAggregate
+observationAbout: country/USA
+observationDate: C:EPHHeatIllness->Year
+variableMeasured: C:EPHHeatIllness->StatVar
+observationPeriod: "P5M"
+value: C:EPHHeatIllness->Quantity

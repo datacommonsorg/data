@@ -33,3 +33,12 @@ _CONTAMINATED_THING_DCID_MAP = {
     'Fish Tissue': "FishTissue",
     'Residuals': "Residuals"
 }
+
+### Map for the different sampling wells in Tar Creek to dcids
+_TAR_CREEK_WELL_MAP = {
+    'Picher #d - MW': 'epaSuperfundMeasurementSite/OKD980629844/Picher_5-MW',
+    'Picher #5 - MW': 'epaSuperfundMeasurementSite/OKD980629844/Picher_5-MW',
+    'Picher #7 - MW': 'epaSuperfundMeasurementSite/OKD980629844/Picher_7-MW',
+    'Quapaw#4': 'epaSuperfundMeasurementSite/OKD980629844/Quapaw_4',
+    'Commerce#S': 'epaSuperfundMeasurementSite/OKD980629844/Commerce_5'
+}
