@@ -260,9 +260,10 @@ def hlth_ehis_pe3i(df: pd.DataFrame) -> pd.DataFrame:
             inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
-    df = df.drop(df[(df['SV'] == 'Count_Person_Cycling_Female_NonWorkRelated'
-        'PhysicalActivity_Total_AsAFractionOf_Count_Person_Female_Total')
-        & (df['geo'] == 'BE') & (df['time'] == '2014')].index)
+    df = df.drop(
+        df[(df['SV'] == 'Count_Person_Cycling_Female_NonWorkRelated'
+            'PhysicalActivity_Total_AsAFractionOf_Count_Person_Female_Total') &
+           (df['geo'] == 'BE') & (df['time'] == '2014')].index)
     return df
 
 
