@@ -15,12 +15,14 @@
 This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file
 """
+from sys import path
+# For import util.alpha2_to_dcid
+path.insert(1, '../../../../')
+
 import os
-import sys
 import pandas as pd
 import numpy as np
-sys.path.insert(0, 'util')
-#from alpha2_to_dcid import COUNTRY_MAP
+from util.alpha2_to_dcid import COUNTRY_MAP
 from absl import app
 from absl import flags
 
@@ -73,7 +75,7 @@ def hlth_ehis_al1i(df: pd.DataFrame) -> pd.DataFrame:
     df['SV'] = 'Count_Person_'+df['quant_inc']+'_'+df['sex']\
         +'_AlcoholConsumption_'+df['frequenc']\
             +'_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
-    df.drop(columns=['quant_inc','frequenc','sex'],inplace=True)
+    df.drop(columns=['quant_inc','frequenc','sex','age','unit'],inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
     df.to_csv("sample2.csv",index=False)
@@ -122,7 +124,7 @@ def hlth_ehis_al3e(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     df = _replace_isced11(df)
-    df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_HeavyEpisodicDrinking_'+\
+    df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_BingeDrinking_'+\
         df['frequenc']+'_'+'AsAFractionOf_Count_Person_'+\
         df['isced11']+'_'+df['sex']
     df.drop(columns=['unit','age','isced11','frequenc','sex'],inplace=True)
@@ -147,7 +149,7 @@ def hlth_ehis_al3i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
-    df['SV'] = 'Count_Person_'+df['sex']+'_HeavyEpisodicDrinking_'+\
+    df['SV'] = 'Count_Person_'+df['sex']+'_BingeDrinking_'+\
         +df['quant_inc']+'_'+df['frequenc']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['unit','age','quant_inc','frequenc','sex'],inplace=True)
@@ -175,7 +177,7 @@ def hlth_ehis_al3u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_frequenc(df)
     #df.drop(columns=['unit','age'],inplace=True)
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+'HeavyEpisodicDrinking'+\
+    df['SV'] = 'Count_Person_'+df['sex']+'_'+'BingeDrinking'+\
         '_'+df['deg_urb']+'_'+df['frequenc']+'_AsAFractionOf_Count_Person_'+\
         df['sex']+'_'+df['deg_urb']
     df.drop(columns=['frequenc','deg_urb','sex','unit','age'],inplace=True)
@@ -202,7 +204,7 @@ def hlth_ehis_al2e(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_isced11(df)
     df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']\
-        +'_HazardousAlcoholDrinkers_AsAFractionOf_Count_Person_'\
+        +'_HazardousAlcoholConsumption_AsAFractionOf_Count_Person_'\
             +df['isced11']+'_'+df['sex']
     df.drop(columns=['unit','age','isced11','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -228,7 +230,7 @@ def hlth_ehis_al2i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     df['SV'] = 'Count_Person_'+df['sex']+'_'+\
-        +df['quant_inc']+'_'+'HazardousAlcoholDrinkers'+'_'+\
+        +df['quant_inc']+'_'+'HazardousAlcoholConsumption'+'_'+\
             'AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['unit','age' ,'quant_inc','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -253,7 +255,7 @@ def hlth_ehis_al2u(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+'HazardousAlcoholDrinkers'+\
+    df['SV'] = 'Count_Person_'+df['sex']+'_'+'HazardousAlcoholConsumption'+\
         '_'+df['deg_urb']+'_AsAFractionOf_Count_Person_'+\
         df['sex']+'_'+df['deg_urb']
     df.drop(columns=['deg_urb','sex','unit','age'],inplace=True)
@@ -308,7 +310,7 @@ def hlth_ehis_al1c(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_citizen(df)
     df['SV'] = 'Count_Person_'+df['citizen']+'_'+df['frequenc']+'_'+\
-        df['sex']+'_'+'HealthEnhancingAlcoholConsumption'+\
+        df['sex']+'_AlcoholConsumption'+\
         '_AsAFractionOf_Count_Person_'+df['citizen']+'_'+df['sex']
     df.drop(columns=['frequenc','citizen','sex','unit','age'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -380,7 +382,7 @@ def _replace_frequenc(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    _frequenc = {
+    frequenc = {
         'DAY': 'EveryDay',
         'LT1M': 'LessThanOnceAMonth',
         'MTH': 'EveryMonth',
@@ -388,8 +390,10 @@ def _replace_frequenc(df:pd.DataFrame) -> pd.DataFrame:
 	    'NVR': 'Never',
 	    'NVR_NM12': 'NeverOrNotInTheLast12Months',
         'WEEK': 'EveryWeek',
-        'GE1W': 'AtLeastOnceAWeek'}
-    df = df.replace({'frequenc': _frequenc})
+        'GE1W': 'AtLeastOnceAWeek',
+        'NVR_OCC': 'NeverOrOccasionally',
+        'NBINGE': 'NoBingeDrinking'}
+    df = df.replace({'frequenc': frequenc})
     return df
 
 def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
@@ -397,12 +401,12 @@ def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    _sex = {
+    sex = {
         'F': 'Female',
         'M': 'Male',
         'T': 'Total'
         }
-    df = df.replace({'sex': _sex})
+    df = df.replace({'sex': sex})
     return df
 
 def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
@@ -411,7 +415,7 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF
     """
 
-    _isced11 = {
+    isced11 = {
         'ED0-2': 'EducationalAttainment'+\
         'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
         'ED0_2': 'EducationalAttainment'+\
@@ -426,7 +430,7 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
             'FirstStageTertiaryEducationOrSecondStageTertiaryEducation',
         'TOTAL': 'Total'
         }
-    df = df.replace({'isced11': _isced11})
+    df = df.replace({'isced11': isced11})
     return df
 
 def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
@@ -435,7 +439,7 @@ def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF
     """
 
-    _quant_inc = {
+    quant_inc = {
         'TOTAL':'Total',
 	    'QU1':'Percentile0To20',
 	    'QU2':'Percentile20To40',
@@ -443,7 +447,7 @@ def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
 	    'QU4':'Percentile60To80',
         'QU5':'Percentile80To100'
         }
-    df = df.replace({'quant_inc': _quant_inc})
+    df = df.replace({'quant_inc': quant_inc})
     return df
 
 def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
@@ -451,13 +455,13 @@ def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    _deg_urb = {
+    deg_urb = {
         'TOTAL':'Total',
         'DEG1':'Cities',
         'DEG2':'TownsAndSuburbs',
         'DEG3':'RuralAreas',
         }
-    df = df.replace({'deg_urb': _deg_urb})
+    df = df.replace({'deg_urb': deg_urb})
     return df
 
 def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
@@ -465,13 +469,13 @@ def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    _c_birth = {
-        'EU28_FOR':	'CountryOfBirthEU28CountriesExceptReportingCountry',
-	    'NEU28_FOR': 'CountryOfBirthNonEU28CountriesNorReportingCountry',
-	    'FOR': 'CountryOfBirthForeignCountry',
-	    'NAT': 'CountryOfBirthReportingCountry'
-        }
-    df = df.replace({'c_birth': _c_birth})
+    c_birth = {
+        'EU28_FOR': 'ForeignBornWithinEU28',
+        'NEU28_FOR': 'ForeignBornOutsideEU28',
+        'FOR': 'ForeignBorn',
+        'NAT': 'Native'
+    }
+    df = df.replace({'c_birth': c_birth})
     return df
 
 def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
@@ -479,137 +483,210 @@ def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    _citizen = {
-        'EU28_FOR':	'CitizenshipEU28CountriesExceptReportingCountry',
-	    'NEU28_FOR': 'CitizenshipNonEU28CountriesNorReportingCountry',
-	    'FOR': 'CitizenshipForeignCountry',
-	    'NAT': 'CitizenshipReportingCountry'
-        }
-    df = df.replace({'citizen': _citizen})
+    citizen = {
+        'EU28_FOR': 'ForeignWithinEU28',
+        'NEU28_FOR': 'ForeignOutsideEU28',
+        'FOR': 'NotACitizen',
+        'NAT': 'Citizen'
+    }
+    df = df.replace({'citizen': citizen})
     return df
 
-# class EuroStatAlcoholConsumption:
-#     """
-#     This Class has requried methods to generate Cleaned CSV,
-#     MCF and TMCF Files.
-#     """
+class EuroStatAlcoholConsumption:
+    """
+    This Class has requried methods to generate Cleaned CSV,
+    MCF and TMCF Files.
+    """
+    def __init__(self, input_files: list, csv_file_path: str,\
+        mcf_file_path: str, tmcf_file_path: str) -> None:
+        self.input_files = input_files
+        self.cleaned_csv_file_path = csv_file_path
+        self.mcf_file_path = mcf_file_path
+        self.tmcf_file_path = tmcf_file_path
 
-#     def __init__(self, input_files: list, csv_file_path: str,
-#                  mcf_file_path: str, tmcf_file_path: str) -> None:
-#         self.input_files = input_files
-#         self.cleaned_csv_file_path = csv_file_path
-#         self.mcf_file_path = mcf_file_path
-#         self.tmcf_file_path = tmcf_file_path
+    def _generate_tmcf(self) -> None:
+        """
+        This method generates TMCF file w.r.t
+        dataframe headers and defined TMCF template.
+        Arguments:
+            None
+        Returns:
+            None
+        """
+        tmcf_template = (
+            "Node: E:EuroStat_Population_AlcoholConsumption->E0\n"
+            "typeOf: dcs:StatVarObservation\n"
+            "variableMeasured: C:EuroStat_Population_AlcoholConsumption->SV\n"
+            "measurementMethod: C:EuroStat_Population_AlcoholConsumption->"
+            "Measurement_Method\n"
+            "observationAbout: C:EuroStat_Population_AlcoholConsumption->geo\n"
+            "observationDate: C:EuroStat_Population_AlcoholConsumption->time\n"
+            "value: C:EuroStat_Population_AlcoholConsumption->observation\n")
+        # Writing Genereated TMCF to local path.
+        with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(tmcf_template.rstrip('\n'))
 
-#     def process(self):
-#         """
-#         This Method calls the required methods to generate
-#         cleaned CSV, MCF, and TMCF file.
-#         Arguments: None
-#         Returns: None
-#         """
+    def _generate_mcf(self, sv_list) -> None:
+        """
+        This method generates MCF file w.r.t
+        dataframe headers and defined MCF template
+        Arguments:
+            df_cols (list) : List of DataFrame Columns
+        Returns:
+            None
+        """
+        # pylint: disable=R0914
+        # pylint: disable=R0912
+        # pylint: disable=R0915
+        mcf_template = ("Node: dcid:{}\n"
+                        "typeOf: dcs:StatisticalVariable\n"
+                        "populationType: dcs:Person{}{}{}{}{}{}{}{}\n"
+                        "statType: dcs:measuredValue\n"
+                        "measuredProperty: dcs:count\n")
+        final_mcf_template = ""
+        for sv in sv_list:
+            if "Total" in sv:
+                continue
+            incomequin = ''
+            gender = ''
+            education = ''
+            frequenc = ''
+            healthbehavior = ''
+            residence = ''
+            countryofbirth = ''
+            citizenship = ''
 
-#         final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
-#             'Measurement_Method'])
-#         # Creating Output Directory
-#         output_path = os.path.dirname(self.cleaned_csv_file_path)
-#         if not os.path.exists(output_path):
-#             os.mkdir(output_path)
-#         sv_list = []
+            sv_temp = sv.split("_AsAFractionOf_")
+            denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
+            sv_prop = sv_temp[0].split("_")
 
-#         for file_path in self.input_files:
-#             print(file_path)
-#             df = pd.read_csv(file_path, sep='\t', skiprows=1)
-#             file_name = file_path.split("/")[-1][:-4]
-#             function_dict = {
-#                 "hlth_ehis_al1b": hlth_ehis_al1b,
-#                 "hlth_ehis_al1c": hlth_ehis_al1c,
-#                 "hlth_ehis_al1e": hlth_ehis_al1e,
-#                 "hlth_ehis_al1i": hlth_ehis_al1i,
-#                 "hlth_ehis_al1u": hlth_ehis_al1u,
-#                 "hlth_ehis_al2e": hlth_ehis_al2e,
-#                 "hlth_ehis_al2i": hlth_ehis_al2i,
-#                 "hlth_ehis_al2u": hlth_ehis_al2u,
-#                 "hlth_ehis_al3e": hlth_ehis_al3e,
-#                 "hlth_ehis_al3i": hlth_ehis_al3i,
-#                 "hlth_ehis_al3u": hlth_ehis_al3u,
-#                 "hlth_ehis_de6": hlth_ehis_de6,
-#                 "hlth_ehis_de10": hlth_ehis_de10
-#             }
-#             df = function_dict[file_name](df)
-#             df['SV'] = df['SV'].str.replace('_Total', '')
-#             df['Measurement_Method'] = np.where(
-#                 df['observation'].str.contains('u'),
-#                 'LowReliability/EurostatRegionalStatistics',
-#                 'EurostatRegionalStatistics')
-#             df['observation'] = (df['observation'].str.replace(
-#                 ':', '').str.replace(' ', '').str.replace('u', ''))
-#             df['observation'].replace('', np.nan, inplace=True)
-#             df.dropna(subset=['observation'], inplace=True)
-#             df['observation'] = pd.to_numeric(df['observation'],
-#                                               errors='coerce')
-#             final_df = pd.concat([final_df, df])
-#             sv_list += df["SV"].to_list()
+            for prop in sv_prop:
+                if prop in ["Count", "Person"]:
+                    continue
+                if "AlcoholConsumption" in prop or "BingeDrinking" in prop\
+                    or "HazardousAlcoholConsumption" in prop:
+                    healthbehavior = "\nhealthbehavior: dcs:" + prop
+                elif "Male" in prop or "Female" in prop:
+                    gender = "\ngender: dcs:" + prop
+                elif "EveryDay" in prop or "LessThanOnceAMonth" in prop \
+                    or "EveryMonth" in prop or "NotInTheLast12Months" in prop\
+                    or "Never" in prop or "NeverOrNotInTheLast12Months" in prop \
+                    or "EveryWeek" in prop or "AtLeastOnceAWeek" in prop\
+                    or "NeverOrOccasionally" in prop\
+                    or "NoBingeDrinking" in prop:
+                    frequenc = "\nsubstanceUsageFrequency: dcs:" + prop
+                elif "Education" in prop:
+                    education = "\neducationalAttainment: dcs:" + \
+                        prop.replace("EducationalAttainment","")\
+                        .replace("Or","__")
+                elif "Percentile" in prop:
+                    incomequin = "\nincome: ["+prop.replace("Percentile",\
+                        "").replace("To"," ")+" Percentile]"
+                elif "Cities" in prop or "TownsAndSuburbs" in prop \
+                    or "RuralAreas" in prop:
+                    residence = "\nplaceOfResidenceClassification: dcs:" + prop
+                elif "ForeignBorn" in prop or "Native" in prop:
+                    countryofbirth = "\nnativity: dcs:" + \
+                        prop.replace("CountryOfBirth","")
+                elif "ForeignWithin" in prop or "ForeignOutside" in prop\
+                    or "Citizen" in prop:
+                    citizenship = "\ncitizenship: dcs:" + \
+                        prop.replace("Citizenship","")
 
-#         final_df = final_df.sort_values(by=['time', 'geo', 'SV'])
-#         final_df = final_df.replace({'geo': COUNTRY_MAP})
-#         final_df.to_csv(self.cleaned_csv_file_path, index=False)
-#         sv_list = list(set(sv_list))
-#         sv_list.sort()
-#         self._generate_mcf(sv_list)
-#         self._generate_tmcf()
+            final_mcf_template += mcf_template.format(
+                sv, denominator, healthbehavior, gender,
+                frequenc, education, incomequin,
+                residence, countryofbirth,
+                citizenship) + "\n"
+
+        # Writing Genereated MCF to local path.
+        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(final_mcf_template.rstrip('\n'))
+        # pylint: enable=R0914
+        # pylint: enable=R0912
+        # pylint: enable=R0915
+
+    def process(self):
+        """
+        This Method calls the required methods to generate
+        cleaned CSV, MCF, and TMCF file.
+        Arguments: None
+        Returns: None
+        """
+
+        final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
+            'Measurement_Method'])
+        # Creating Output Directory
+        output_path = os.path.dirname(self.cleaned_csv_file_path)
+        if not os.path.exists(output_path):
+            os.mkdir(output_path)
+        sv_list = []
+
+        for file_path in self.input_files:
+            print(file_path)
+            df = pd.read_csv(file_path, sep='\t', skiprows=1)
+            file_name = file_path.split("/")[-1][:-4]
+            function_dict = {
+                "hlth_ehis_al1b": hlth_ehis_al1b,
+                "hlth_ehis_al1c": hlth_ehis_al1c,
+                "hlth_ehis_al1e": hlth_ehis_al1e,
+                "hlth_ehis_al1i": hlth_ehis_al1i,
+                "hlth_ehis_al1u": hlth_ehis_al1u,
+                "hlth_ehis_al2e": hlth_ehis_al2e,
+                "hlth_ehis_al2i": hlth_ehis_al2i,
+                "hlth_ehis_al2u": hlth_ehis_al2u,
+                "hlth_ehis_al3e": hlth_ehis_al3e,
+                "hlth_ehis_al3i": hlth_ehis_al3i,
+                "hlth_ehis_al3u": hlth_ehis_al3u,
+                "hlth_ehis_de6": hlth_ehis_de6,
+                "hlth_ehis_de10": hlth_ehis_de10
+            }
+            df = function_dict[file_name](df)
+            df['SV'] = df['SV'].str.replace('_Total', '')
+            df['Measurement_Method'] = 'EurostatRegionalStatistics'
+            
+            df['Measurement_Method'] = np.where(
+                df['observation'].str.contains('u'),
+                'LowReliability/EurostatRegionalStatistics',
+                'EurostatRegionalStatistics')
+            df['observation'] = (df['observation'].str.replace(
+                ':', '').str.replace(' ', '').str.replace('u', '')
+                .str.replace('d', ''))
+            df['observation'].replace('', np.nan, inplace=True)
+            df.dropna(subset=['observation'], inplace=True)
+            df['observation'] = pd.to_numeric(df['observation'],
+                                              errors='coerce')
+            final_df = pd.concat([final_df, df])
+            sv_list += df["SV"].to_list()
+
+        final_df = final_df.sort_values(by=['time', 'geo', 'SV'])
+        final_df = final_df.replace({'geo': COUNTRY_MAP})
+        final_df.to_csv(self.cleaned_csv_file_path, index=False)
+        sv_list = list(set(sv_list))
+        sv_list.sort()
+        self._generate_mcf(sv_list)
+        self._generate_tmcf()
+
+def main(_):
+    input_path = FLAGS.input_path
+    if not os.path.exists(input_path):
+        os.mkdir(input_path)
+    ip_files = os.listdir(input_path)
+    ip_files = [input_path + os.sep + file for file in ip_files]
+    data_file_path = os.path.dirname(
+        os.path.abspath(__file__)) + os.sep + "output"
+    # Defining Output Files
+    csv_name = "eurostat_population_alcoholconsumption.csv"
+    mcf_name = "eurostat_population_alcoholconsumption.mcf"
+    tmcf_name = "eurostat_population_alcoholconsumption.tmcf"
+    cleaned_csv_path = data_file_path + os.sep + csv_name
+    mcf_path = data_file_path + os.sep + mcf_name
+    tmcf_path = data_file_path + os.sep + tmcf_name
+    loader = EuroStatAlcoholConsumption(ip_files, cleaned_csv_path,\
+        mcf_path, tmcf_path) 
+    loader.process()
+
+if __name__ == "__main__":
+    app.run(main)
 
 
-
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#         "BulkDownloadListing?file=data/hlth_ehis_al1e.tsv.gz", sep='\t')
-# hlth_ehis_al1e(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#         "BulkDownloadListing?file=data/hlth_ehis_al1i.tsv.gz", sep='\t')
-# hlth_ehis_al1i(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#         "BulkDownloadListing?file=data/hlth_ehis_al1u.tsv.gz", sep='\t')
-# hlth_ehis_al1u(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#     "BulkDownloadListing?file=data/hlth_ehis_al3e.tsv.gz", sep='\t')
-# hlth_ehis_al3e(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#         "BulkDownloadListing?file=data/hlth_ehis_al3i.tsv.gz", sep='\t')
-# hlth_ehis_al3i(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#         "BulkDownloadListing?file=data/hlth_ehis_al3u.tsv.gz", sep='\t')
-# hlth_ehis_al3u(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#            "BulkDownloadListing?file=data/hlth_ehis_al2e.tsv.gz", sep='\t')
-# hlth_ehis_al2e(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#         "BulkDownloadListing?file=data/hlth_ehis_al2i.tsv.gz", sep='\t')
-# hlth_ehis_al2i(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#         "BulkDownloadListing?file=data/hlth_ehis_al2u.tsv.gz", sep='\t')
-# hlth_ehis_al2u(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#     "BulkDownloadListing?file=data/hlth_ehis_al1b.tsv.gz", sep='\t')
-# hlth_ehis_al1b(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#     "BulkDownloadListing?file=data/hlth_ehis_al1c.tsv.gz", sep='\t')
-# hlth_ehis_al1c(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#         "BulkDownloadListing?file=data/hlth_ehis_de10.tsv.gz", sep='\t')
-# hlth_ehis_de10(df)
-
-# df = pd.read_csv("https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-#         "BulkDownloadListing?file=data/hlth_ehis_de6.tsv.gz", sep='\t')
-# hlth_ehis_de6(df)
