@@ -19,12 +19,14 @@
 """
 import os
 import re
-import sys
+from sys import path
+# For import util.alpha2_to_dcid
+path.insert(1, '../../../../')
 
 import pandas as pd
 from absl import app
 from absl import flags
-from state_to_geoid import USSTATE_MAP
+from util.alpha2_to_dcid import USSTATE_MAP
 from states_to_shortform import get_states
 
 pd.set_option("display.max_columns", None)
@@ -32,17 +34,14 @@ pd.set_option("display.max_columns", None)
 _FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_data"
-
-if ("ip_path" in sys.argv and len(sys.argv) > 2):
-    default_input_path = sys.argv[2]
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-
 # Generating geoID by taking Geographical area as input
-def add_geo_id(df: pd.DataFrame) -> pd.DataFrame:
+def _add_geo_id(df: pd.DataFrame) -> pd.DataFrame:
     short_forms = get_states()
     df['Short_Form'] = df['Geographic Area'].str.replace(
         " ", "").apply(lambda row: short_forms.get(row, row))
+    USSTATE_MAP.update({'US': 'country/USA'})
     df['geo_ID'] = df['Short_Form'].apply(
         lambda rec: USSTATE_MAP.get(rec, pd.NA))
     df = df.dropna(subset=['Geographic Area'])
@@ -75,25 +74,16 @@ def _clean_xls_file(df: pd.DataFrame, file: str) -> pd.DataFrame:
     df = df.groupby(['NAME', 'RACE']).sum().transpose().stack(0).reset_index()
     if "2020" in file:
         df[0] = df[1] + df[2] + df[3] + df[4] + df[5] + df[6]
-    df['0'] = df[0]
-    df['1'] = df[1]
-    df['2'] = df[2]
-    df['3'] = df[3]
-    df['4'] = df[4]
-    df['5'] = df[5]
-    df['6'] = df[6]
+    df['Total'] = df[0]
+    df['White Alone'] = df[1]
+    df['Black or African American Alone'] = df[2]
+    df['American Indian or Alaska Native Alone'] = df[3]
+    df['Asian Alone'] = df[4]
+    df['Native Hawaiian and Other Pacific Islander Alone'] = df[5]
+    df['Two or more Races'] = df[6]
     df['Year'] = df['level_0'].str[-4:]
     df = df.drop(['level_0', 0, 1, 2, 3, 4, 5, 6], axis=1)
     df.columns = df.columns.str.replace('NAME', 'Geographic Area')
-    df.columns = df.columns.str.replace('0', 'Total')
-    df.columns = df.columns.str.replace('1', 'White Alone')
-    df.columns = df.columns.str.replace('2', 'Black or African American Alone')
-    df.columns = df.columns.str.replace('3',\
-        'American Indian or Alaska Native Alone')
-    df.columns = df.columns.str.replace('4', 'Asian Alone')
-    df.columns = df.columns.str.replace('5',\
-        'Native Hawaiian and Other Pacific Islander Alone')
-    df.columns = df.columns.str.replace('6', 'Two or more Races')
     print(df.columns)
     return df
 
@@ -151,9 +141,9 @@ def _clean_county_70_xls_file(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         df (DataFrame) : Transformed DataFrame for xls dataset.
     """
-    df['Total People']=df[1]+df[2]+df[3]+df[4]+df[5]+df[6]+df[7]\
-        +df[8]+df[9]+df[10]+df[11]+df[12]+df[13]+df[14]+df[15]+\
-        df[16]+df[17]+df[18]
+    df['Total People'] = 0
+    for i in range(1,19):
+        df['Total People'] = df['Total People']+df[i]
     df['FIPS'] = [f'{x:05}' for x in df['FIPS']]
     df['Info'] = df['Year'].astype(str) + '-' + df['FIPS'].astype(str)
     df.drop(columns=['Year','FIPS',1,2,3,4,5,6,7,8,9,10,11,12,\
@@ -181,6 +171,12 @@ def _clean_county_80_xls_file(df: pd.DataFrame) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for xls dataset.
     """
     # All the Column values are summed up to derive Total Population Value
+    # {"1":"0-4 year olds", "2":"5-9 year olds", "3":"10-14 year olds",
+    # "4":"15-19 year olds","5":"20-24 year olds","6":"25-29 year olds",
+    # "7":"30-34 year olds","8":"35-39 year olds","9":"40-44 year olds",
+    # "10":"45-49 year olds","11":"50-54 year olds","12":"55-59 year olds",
+    # "13":"60-64 year olds","14":"65-69 year olds","15":"0-74 year olds",
+    # "16":"75-79 year olds","17":"80-84 year olds","18":"85 years old and older"}
     df['Total People']=df[1]+df[2]+df[3]+df[4]+df[5]+df[6]+df[7]+\
         df[8]+df[9]+df[10]+df[11]+df[12]+df[13]+df[14]+df[15]+\
         df[16]+df[17]+df[18]
@@ -241,18 +237,17 @@ def _clean_xls2_file(df: pd.DataFrame) -> pd.DataFrame:
     cols = df.columns.drop(extras)
     df[cols] = df[cols].apply(pd.to_numeric, errors='coerce')
     # All the age groups are being added up to get total value.
-    df['count']=df['Under 5 years']+df['5 to 9 years']+df['10 to 14 years']\
-        +df['15 to 19 years']+df['20 to 24 years']+df['25 to 29 years']+\
-        df['30 to 34 years']+df['35 to 39 years'] +df['40 to 44 years']	\
-        +df['45 to 49 years'] +df['50 to 54 years'] +df['55 to 59 years']\
-        +df['60 to 64 years'] +df['65 to 69 years'] +df['70 to 74 years']\
-        +df['75 to 79 years'] +df['80 to 84 years'] +df['85 years and over']
-    df = df.drop(['Under 5 years','5 to 9 years','10 to 14 years',\
-        '15 to 19 years','20 to 24 years','25 to 29 years',\
-        '30 to 34 years','35 to 39 years','40 to 44 years',\
-        '45 to 49 years','50 to 54 years','55 to 59 years',\
-        '60 to 64 years','65 to 69 years','70 to 74 years','75 to 79 years',\
-        '80 to 84 years','85 years and over'],axis=1)
+    age_list = ['Under 5 years','5 to 9 years','10 to 14 years',
+        '15 to 19 years','20 to 24 years','25 to 29 years',
+        '30 to 34 years','35 to 39 years','40 to 44 years',
+        '45 to 49 years','50 to 54 years','55 to 59 years',
+        '60 to 64 years','65 to 69 years','70 to 74 years','75 to 79 years',
+        '80 to 84 years','85 years and over']
+    
+    df['count']=0
+    for i in age_list:
+        df['count'] = df['count']+df[i]
+    df = df.drop(age_list,axis=1)
     df['locationyear'] = df['Year of Estimate'] + "-" + df['State Name']
     df = df.drop(['Year of Estimate', 'State Name'], axis=1)
     # it groups the df as per columns provided
@@ -309,6 +304,9 @@ def _clean_county_20_csv_file(file_path: str) -> pd.DataFrame:
 
     Returns:
         df (DataFrame) : Transformed DataFrame for csv dataset.
+    
+    The function _clean_county_29_csv_file cleans 56 county files 
+    for the year range 2000-2010.
     """
     df = pd.read_csv(file_path, encoding="ISO-8859-1")
     final_cols = ["Year", "geo_ID", "Total","White Alone",\
@@ -355,13 +353,19 @@ def _clean_county_2010_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     This Python Script Loads csv datasets
     from 2010-2020 on a County Level,
     cleans it and create a cleaned csv
+
+    Arguments:
+        df (DataFrame) : DataFrame of csv dataset
+
+    Returns:
+        df (DataFrame) : Transformed DataFrame for csv dataset.
     '''
     # filter by agegrp = 0
     df = df.query("YEAR not in [1, 2, 13]")
     df = df.query("AGEGRP == 0")
     # filter years 3 - 14
     df['YEAR'] = df['YEAR'].astype(str)
-    _dict = {
+    conversion_of_year_to_value = {
         '3': '2010',
         '4': '2011',
         '5': '2012',
@@ -374,13 +378,13 @@ def _clean_county_2010_csv_file(df: pd.DataFrame) -> pd.DataFrame:
         '12': '2019',
         '14': '2020'
     }
-    df = df.replace({'YEAR': _dict})
+    df = df.replace({'YEAR': conversion_of_year_to_value})
     df.insert(6, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + \
         (df['COUNTY'].map(str)).str.zfill(3)
     df['AGEGRP'] = df['AGEGRP'].astype(str)
     # Replacing the numbers with more understandable metadata headings
-    _dict = {
+    conversion_of_agebracket_to_value = {
         '1': '0To4Years',
         '2': '5To9Years',
         '3': '10To14Years',
@@ -400,7 +404,7 @@ def _clean_county_2010_csv_file(df: pd.DataFrame) -> pd.DataFrame:
         '17': '80To84Years',
         '18': '85OrMoreYears'
     }
-    df = df.replace({"AGEGRP": _dict})
+    df = df.replace({"AGEGRP": conversion_of_agebracket_to_value})
     # drop unwanted columns
     df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
         inplace=True)
@@ -451,7 +455,9 @@ def _clean_csv2_file(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         df (DataFrame) : Transformed DataFrame for csv dataset.
     """
+    # dropping unwanted rows after the data
     df.drop(df.index[65:], inplace=True)
+    # dropping the first 14 unwanted rows 
     df.drop(df.index[1:14], inplace=True)
     modify = [0, 30, 31, 32, 33, 34, 35, 40, 41, 42, 49]
     for j in modify:
@@ -489,10 +495,10 @@ def _clean_txt2_file(df: pd.DataFrame) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for txt dataset.
     """
     df['1'] = df['1'].astype(str)
+    # Length more than 6 has been taken to avoid individual ages
     mask = df['1'].str.len() >= 6
     df = df.loc[mask]
-    mask = df['2'] >= 50000
-    df = df.loc[mask]
+    # This has been taken to consider the month of july
     mask = df['1'].str[0] == '7'
     df = df.loc[mask]
     df = df[df['1'].str.contains("999")]
@@ -607,30 +613,15 @@ def _transform_df(df: pd.DataFrame) -> pd.DataFrame:
     df.columns = final_cols_list
     return df
 
-
-def _mcf_path(flag: int):
-    """
-    This method takes the flag input
-    and returns the appropriate mcf
-    file name suffix.
-
-    Arguments:
-        flag: int
-
-    Returns:
-        str
-    """
-    if flag == 1:
-        suffix = "_State1980.mcf"
-    else:
-        suffix = ".mcf"
-    return suffix
-
-
 def _mcf_process(col: str):
     """
     This method processes MCF file w.r.t
         dataframe headers.
+    
+    Arguments:
+        df(col) : refers to headers of dataFrame
+
+    Returns: none
     """
     if re.findall('WhiteAlone', col) and \
         re.findall('OrInCombination', col):
@@ -766,7 +757,7 @@ class CensusUSAPopulationByRace:
         df = _transform_df(df)
         # print(df)
         if 'geo_ID' not in df.columns:
-            df = add_geo_id(df)
+            df = _add_geo_id(df)
         if self.df is None:
             self.df = pd.DataFrame(columns=["Year","geo_ID",\
                 "Count_Person_USAllRaces","Count_Person_WhiteAlone",\
@@ -819,35 +810,37 @@ class CensusUSAPopulationByRace:
         for file in self.input_files:
             df = self._load_data(file)
             self._transform_data(df)
-        flag = 0
-        self._generate_mcf(self.df.columns, flag)
-        self._generate_tmcf(self.df.columns, flag)
-        flag = 1
+        name = ""
+        self._generate_mcf(self.df.columns, name)
+        self._generate_tmcf(self.df.columns, name)
+        name = "USA_Population_Count_by_Race_National_State_1980"
         self.df1=pd.read_csv\
-            ("output/USA_Population_Count_by_Race_State_1980.csv")
+            ("output/USA_Population_Count_by_Race_National_State_1980.csv")
         self.df1.drop(columns=["Unnamed: 0"], inplace=True)
-        self._generate_mcf(self.df1.columns, flag)
-        self._generate_tmcf(self.df1.columns, flag)
+        self._generate_mcf(self.df1.columns, name)
+        self._generate_tmcf(self.df1.columns, name)
 
     # Generating MCF files
-    def _generate_mcf(self, df_cols: list, flag: int) -> None:
+    def _generate_mcf(self, df_cols: list, name: str) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
 
         Arguments:
             df_cols (list) : List of DataFrame Columns
+            name (str): name of the file from which
+            the mcf is generated
 
         Returns:
             None
         """
-        mcf_template = """Node: dcid:{}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-race: dcs:{}
-"""
+        mcf_template =(
+            "Node: dcid:{}\n"
+            "typeOf: dcs:StatisticalVariable\n"
+            "populationType: dcs:Person\n"
+            "statType: dcs:measuredValue\n"
+            "measuredProperty: dcs:count\n"
+            "race: dcs:{}\n")
         mcf = ""
         for col in df_cols:
             race = ""
@@ -859,32 +852,38 @@ race: dcs:{}
             mcf = mcf + mcf_template.format(col, race) + "\n"
 
         # Writing Genereated MCF to local path.
-        suffix = _mcf_path(flag)
+        # suffix = _mcf_path(flag)
+        if name == "USA_Population_Count_by_Race_National_State_1980":
+            suffix = "_State1980.mcf"
+        else:
+            suffix = ".mcf"
         with open(self.mcf_file_path+suffix,\
-                'w+', encoding='utf-8') as f_out:
+            'w+', encoding='utf-8') as f_out:
             f_out.write(mcf.rstrip('\n'))
 
     # Generating TMCF file.
-    def _generate_tmcf(self, df_cols: list, flag: int) -> None:
+    def _generate_tmcf(self, df_cols: list, name: str) -> None:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template
 
         Arguments:
             df_cols (list) : List of DataFrame Columns
+            name (str) : name of the file from which
+            the tmcf is being generated.
 
         Returns:
             None
         """
-        tmcf_template = """Node: E:USA_Population_Count->E{}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{}
-measurementMethod: dcs:{}
-observationAbout: C:USA_Population_Count->geo_ID
-observationDate: C:USA_Population_Count->Year
-observationPeriod: \"P1Y\"
-value: C:USA_Population_Count->{}  
-"""
+        tmcf_template = (
+            "Node: E:USA_Population_Count_by_Race->E{}\n"
+            "typeOf: dcs:StatVarObservation\n"
+            "variableMeasured: dcs:{}\n"
+            "measurementMethod: dcs:{}\n"
+            "observationAbout: C:USA_Population_Count_by_Race->geo_ID\n"
+            "observationDate: C:USA_Population_Count_by_Race->Year\n"
+            "observationPeriod: \"P1Y\"\n"
+            "value: C:USA_Population_Count_by_Race->{}\n")
         i = 0
         measure = ""
         tmcf = ""
@@ -893,7 +892,7 @@ value: C:USA_Population_Count->{}
                     "geographic area", "year", "short_form", "geo_id"
             ]:
                 continue
-            if flag == 1:
+            if name == "USA_Population_Count_by_Race_National_State_1980":
                 measure = "dcAggregate/CensusPEPSurvey"
             else:
                 measure = "CensusPEPSurvey"
@@ -901,7 +900,7 @@ value: C:USA_Population_Count->{}
             i = i + 1
 
         # Writing Genereated TMCF to local path.
-        if flag == 1:
+        if name == "USA_Population_Count_by_Race_National_State_1980":
             with open(self.tmcf_file_path+"_State1980.tmcf",\
                  'w+', encoding='utf-8') as f_out:
                 f_out.write(tmcf.rstrip('\n'))
@@ -928,7 +927,6 @@ def main(_):
         "USA_Population_Count_by_Race"
     loader = CensusUSAPopulationByRace(ip_files, cleaned_csv_path, mcf_path,
                                        tmcf_path)
-
     loader.process()
 
 

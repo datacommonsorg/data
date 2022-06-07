@@ -19,10 +19,10 @@ import os
 import unittest
 from os import path
 from preprocess import CensusUSAPopulationByRace
-# module_dir_ is the path to where this test is running from.
-module_dir_ = os.path.dirname(__file__)
-test_data_folder = os.path.join(module_dir_, "test_data")
-op_data_folder = os.path.join(module_dir_, "test_output_data")
+# module_dir is the path to where this test is running from.
+module_dir = os.path.dirname(__file__)
+TEST_DATA_FOLDER = os.path.join(module_dir, "test_data")
+OP_DATA_FOLDER = os.path.join(module_dir, "test_output_data")
 
 
 class TestPreprocess(unittest.TestCase):
@@ -31,11 +31,14 @@ class TestPreprocess(unittest.TestCase):
     properties which further requried for unit testing
     """
 
-    cleaned_csv_file_path = os.path.join(op_data_folder, "data.csv")
-    mcf_file_path = os.path.join(op_data_folder, "test_census.mcf")
-    tmcf_file_path = os.path.join(op_data_folder, "test_census.tmcf")
+    cleaned_csv_file_path = os.path.join(OP_DATA_FOLDER, "data.csv")
+    mcf_file_path = os.path.join(OP_DATA_FOLDER, "test_census")
+    tmcf_file_path = os.path.join(OP_DATA_FOLDER, "test_census")
+    mcf_file_path1 = os.path.join(OP_DATA_FOLDER, "test_census_State1980")
+    tmcf_file_path1 = os.path.join(OP_DATA_FOLDER, "test_census_State1980")
 
-    ip_data_path = [os.path.join(test_data_folder, \
+
+    ip_data_path = [os.path.join(TEST_DATA_FOLDER, \
         "test_census_data_USCountyak90.txt")]
 
     base = CensusUSAPopulationByRace(ip_data_path, cleaned_csv_file_path,
@@ -48,24 +51,38 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like MCF File
         """
         expected_mcf_file_path = os.path.join(
-            test_data_folder, "expected_USA_Population_Count_by_Race.mcf")
+            TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race.mcf")
+        expected_mcf_file_path1 = os.path.join(
+            TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race_State1980.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            test_data_folder, "expected_USA_Population_Count_by_Race.tmcf")
+            TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race.tmcf")
+        expected_tmcf_file_path1 = os.path.join(
+            TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race_State1980.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
             expected_mcf_data = expected_mcf_file.read()
+        with open(expected_mcf_file_path1,
+                  encoding="UTF-8") as expected_mcf_file1:
+            expected_mcf_data1 = expected_mcf_file1.read()
 
         with open(expected_tmcf_file_path,
                   encoding="UTF-8") as expected_tmcf_file:
             expected_tmcf_data = expected_tmcf_file.read()
+        with open(expected_tmcf_file_path1,
+                  encoding="UTF-8") as expected_tmcf_file1:
+            expected_tmcf_data1 = expected_tmcf_file1.read()
 
-        with open(self.mcf_file_path, encoding="UTF-8") as mcf_file:
+        with open(self.mcf_file_path + ".mcf", encoding="UTF-8") as mcf_file:
             mcf_data = mcf_file.read()
+        with open(self.mcf_file_path1 + ".mcf", encoding="UTF-8") as mcf_file1:
+            mcf_data1 = mcf_file1.read()
 
-        with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
+        with open(self.tmcf_file_path+ ".tmcf", encoding="UTF-8") as tmcf_file:
             tmcf_data = tmcf_file.read()
+        with open(self.tmcf_file_path1+ ".tmcf", encoding="UTF-8") as tmcf_file1:
+            tmcf_data1 = tmcf_file1.read()
 
         if path.exists(self.mcf_file_path):
             os.remove(self.mcf_file_path)
@@ -74,6 +91,8 @@ class TestPreprocess(unittest.TestCase):
 
         self.assertEqual(expected_mcf_data.strip(), mcf_data.strip())
         self.assertEqual(expected_tmcf_data.strip(), tmcf_data.strip())
+        self.assertEqual(expected_mcf_data1.strip(), mcf_data1.strip())
+        self.assertEqual(expected_tmcf_data1.strip(), tmcf_data1.strip())
 
     def test_create_csv(self):
         """
@@ -81,7 +100,7 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like CSV
         """
         expected_csv_file_path = os.path.join(
-            test_data_folder, "expected_USA_Population_Count_by_Race.csv")
+            TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,

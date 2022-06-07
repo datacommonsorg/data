@@ -1,0 +1,13 @@
+Node: dcid:Count_Person_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:WhiteAlone
+
+Node: dcid:Count_Person_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+race: dcs:BlackOrAfricanAmericanAlone

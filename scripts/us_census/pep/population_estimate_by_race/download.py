@@ -79,6 +79,7 @@ def _save_data(_url: str, download_local_path: str) -> None:
         None
     """
     file_name = _url.split("/")[-1]
+    print(file_name)
     if ".csv" in _url:
         if "st-est" in _url or 'SC-EST' in _url:
             file_name = file_name.replace(".csv", ".xlsx")
@@ -104,6 +105,12 @@ def _save_data(_url: str, download_local_path: str) -> None:
                 df = pd.read_csv(_url, on_bad_lines='skip', names=cols)
             df.to_excel(download_local_path + os.sep + file_name,\
                 index=False,engine='xlsxwriter')
+        elif "co-est00int-alldata" in _url:
+            df = pd.read_csv(_url, on_bad_lines='skip',encoding='ISO-8859-1', low_memory=False)
+            df.to_csv(download_local_path + os.sep + file_name, index=False)
+        elif "CC-EST2020-ALLDATA" in _url:
+            df = pd.read_csv(_url, on_bad_lines='skip',encoding='ISO-8859-1', low_memory=False)
+            df.to_csv(download_local_path + os.sep + file_name, index=False)
 
     elif ".txt" in _url:
         if "srh" in _url:
