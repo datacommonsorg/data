@@ -260,6 +260,9 @@ def hlth_ehis_pe3i(df: pd.DataFrame) -> pd.DataFrame:
             inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
+    df = df.drop(df[(df['SV'] == 'Count_Person_Cycling_Female_NonWorkRelated'
+        'PhysicalActivity_Total_AsAFractionOf_Count_Person_Female_Total')
+        & (df['geo'] == 'BE') & (df['time'] == '2014')].index)
     return df
 
 
@@ -518,7 +521,6 @@ def hlth_ehis_de9(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(columns=['isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['age','SV','time'], var_name='geo'\
         ,value_name='observation')
-    print(df)
     return df
 
 
@@ -569,7 +571,7 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
         'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
         'ED3_4': 'EducationalAttainment'+\
             'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED5_6' : 'FirstStageTertiaryEducationOrSecondStageTertiaryEducation',
+        'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
         'ED5-8': 'EducationalAttainmentTertiaryEducation',
         'ED5_8': 'EducationalAttainmentTertiaryEducation',
         'TOTAL': 'Total'
