@@ -12,24 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for USA Population by Race preprocess script.
+Script to automate the testing for EuroStat Physical Activity process script.
 """
 
 import os
 from os import path
 import unittest
 from process import EuroStatPhysicalActivity
-# module_dir_ is the path to where this test is running from.
-module_dir_ = os.path.dirname(__file__)
-test_data_folder = os.path.join(module_dir_, "test_files")
-op_data_folder = os.path.join(module_dir_, "test_output_data")
+# module_dir is the path to where this test is running from.
+module_dir = os.path.dirname(__file__)
+test_data_folder = os.path.join(module_dir, "test_files")
+op_data_folder = os.path.join(module_dir, "test_output_data")
 input_path = os.path.dirname(os.path.abspath(__file__)) + os.sep + "input_data"
 
 
 class TestPreprocess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
-    properties which further requried for unit testing
+    properties which further requried for unit testing.
+    The test will be conducted for EuroStat Physical Activity
+    It will be generating CSV, MCF and TMCF files based on the sample input.
+    Comparing the data with the expected files.
     """
     cleaned_csv_file_path = os.path.join(op_data_folder, "data.csv")
     mcf_file_path = os.path.join(op_data_folder, "test_census.mcf")
@@ -67,17 +70,17 @@ class TestPreprocess(unittest.TestCase):
             expected_tmcf_data = expected_tmcf_file.read()
 
         with open(self.mcf_file_path, encoding="UTF-8") as mcf_file:
-            mcf_data = mcf_file.read()
+            actual_mcf_data = mcf_file.read()
 
         with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
-            tmcf_data = tmcf_file.read()
+            actual_tmcf_data = tmcf_file.read()
         if path.exists(self.mcf_file_path):
             os.remove(self.mcf_file_path)
         if path.exists(self.tmcf_file_path):
             os.remove(self.tmcf_file_path)
 
-        self.assertEqual(expected_mcf_data.strip(), mcf_data.strip())
-        self.assertEqual(expected_tmcf_data.strip(), tmcf_data.strip())
+        self.assertEqual(expected_mcf_data.strip(), actual_mcf_data.strip())
+        self.assertEqual(expected_tmcf_data.strip(), actual_tmcf_data.strip())
 
     def test_create_csv(self):
         """
@@ -94,8 +97,8 @@ class TestPreprocess(unittest.TestCase):
             expected_csv_data = expected_csv_file.read()
 
         with open(self.cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-            csv_data = csv_file.read()
+            actual_csv_data = csv_file.read()
         if path.exists(self.cleaned_csv_file_path):
             os.remove(self.cleaned_csv_file_path)
 
-        self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+        self.assertEqual(expected_csv_data.strip(), actual_csv_data.strip())

@@ -21,24 +21,25 @@ import urllib.request
 from input_files import input_urls
 
 
-def download_file(url) -> None:
+def download_file(download_file_url) -> None:
     """
     Function to Download and Unzip the file provided in url
-    Args: url (str), url of the file to be downloaded as a string
+
+    Args: download_file_url: url of the file to be downloaded as a string
+    
     Returns: None
     """
-    # This extracts the filename form the complete URL,
+    # This extracts the filename from the complete URL,
     # also removes the .gz extension.
     # Example - ....-prod/BulkDownloadListing?file=data/hlth_ehis_pe9e.tsv.gz
     # is made hlth_ehis_pe9e.tsv
-    file_name = url.split("/")[-1][:-3]
+    file_name = download_file_url.split("/")[-1][:-3]
     path = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'input_files/'
     if not os.path.exists(path):
         os.mkdir(path)
     out_file = path + file_name
-    print(out_file)
 
-    with urllib.request.urlopen(url) as response:
+    with urllib.request.urlopen(download_file_url) as response:
         with gzip.GzipFile(fileobj=response) as uncompressed:
             file_content = uncompressed.read()
 
@@ -48,5 +49,5 @@ def download_file(url) -> None:
 
 
 if __name__ == "__main__":
-    for file in input_urls:
-        download_file(file)
+    for file_download_url in input_urls:
+        download_file(file_download_url)

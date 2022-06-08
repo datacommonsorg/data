@@ -35,11 +35,252 @@ default_input_path = os.path.dirname(
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
+def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({'sex': {'F': 'Female', 'M': 'Male', 'T': 'Total'}})
+    return df
+
+
+def _replace_physact(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'physact': {
+            'MV_AERO': 'Aerobic',
+            'MV_MSC': 'MuscleStrengthening',
+            'MV_AERO_MSC': 'AerobicAndMuscleStrengthening',
+            'MV_WALK_GET': 'Walking',
+            'MV_CYCL_GET': 'Cycling',
+            'MV_AERO_SPRT': 'AerobicSports'
+        }
+    })
+    return df
+
+
+def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({'isced11': {
+        'ED0-2': 'EducationalAttainment'+\
+        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
+        'ED0_2': 'EducationalAttainment'+\
+        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
+        'ED3-4': 'EducationalAttainment'+\
+        'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+        'ED3_4': 'EducationalAttainment'+\
+            'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+        'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
+        'ED5-8': 'EducationalAttainmentTertiaryEducation',
+        'ED5_8': 'EducationalAttainmentTertiaryEducation',
+        'TOTAL': 'Total'
+        }})
+    return df
+
+
+def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'quant_inc': {
+            'TOTAL': 'Total',
+            'QU1': 'Percentile0To20',
+            'QU2': 'Percentile20To40',
+            'QU3': 'Percentile40To60',
+            'QU4': 'Percentile60To80',
+            'QU5': 'Percentile80To100'
+        }
+    })
+    return df
+
+
+def _replace_deg_urb(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'deg_urb': {
+            'TOTAL': 'Total',
+            'DEG1': 'Cities',
+            'DEG2': 'TownsAndSuburbs',
+            'DEG3': 'RuralAreas',
+        }
+    })
+    return df
+
+
+def _replace_levels(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'levels': {
+            'HVY': 'HeavyActivity',
+            'MOD': 'ModerateActivity',
+            'MOD_HVY': 'ModerateActivityOrHeavyActivity',
+            'NONE_LGHT': 'NoneActivityOrLightActivity'
+        }
+    })
+    return df
+
+
+def _replace_duration(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'duration': {
+            'MN0': '0Minutes',
+            'MN1-149': '1To149Minutes',
+            'MN150-299': '150To299Minutes',
+            'MN_GE150': '150OrMoreMinutes',
+            'MN_GE300': '300OrMoreMinutes'
+        }
+    })
+    return df
+
+
+def _replace_c_birth(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'c_birth': {
+            'EU28_FOR': 'ForeignBornWithinEU28',
+            'NEU28_FOR': 'ForeignBornOutsideEU28',
+            'FOR': 'ForeignBorn',
+            'NAT': 'Native'
+        }
+    })
+    return df
+
+
+def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'citizen': {
+            'EU28_FOR': 'ForeignWithinEU28',
+            'NEU28_FOR': 'ForeignOutsideEU28',
+            'FOR': 'NotACitizen',
+            'NAT': 'Citizen'
+        }
+    })
+    return df
+
+
+def _replace_lev_limit(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'lev_limit': {
+            'MOD': 'Moderate',
+            'SEV': 'Severe',
+            'SM_SEV': 'SomeOrSevere',
+            'NONE': 'None'
+        }
+    })
+    return df
+
+
+def _replace_bmi(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'bmi': {
+            'BMI_LT18P5': 'Underweight',
+            'BMI18P5-24': 'Normalweight',
+            'BMI_GE25': 'Overweight',
+            'BMI25-29': 'PreObese',
+            'BMI_GE30': 'Obesity'
+        }
+    })
+    return df
+
+
+def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
+    """
+    Divides a single column into multiple columns and returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to divide the column
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    info = col.split(",")
+    df[info] = df[col].str.split(',', expand=True)
+    df.drop(columns=[col], inplace=True)
+    return df
+
+
 def hlth_ehis_pe9e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9e for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -63,8 +304,10 @@ def hlth_ehis_pe9e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9i for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,physact,quant_inc,sex,age,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -94,8 +337,10 @@ def hlth_ehis_pe9i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9u for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'physact,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -124,8 +369,10 @@ def hlth_ehis_pe9u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe1e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,levels,isced11,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG',
@@ -154,8 +401,10 @@ def hlth_ehis_pe1e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe1i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1i for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,levels,quant_inc,sex,age,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -184,8 +433,10 @@ def hlth_ehis_pe1i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe1u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1u for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'levels,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -215,8 +466,10 @@ def hlth_ehis_pe1u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe3e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe3e for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -240,8 +493,10 @@ def hlth_ehis_pe3e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe3i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe3i for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,physact,quant_inc,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -270,8 +525,10 @@ def hlth_ehis_pe3i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe3u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe3u for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'physact,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -301,8 +558,10 @@ def hlth_ehis_pe3u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe2e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe2e for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,duration,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -326,8 +585,10 @@ def hlth_ehis_pe2e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe2i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe2i for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,quant_inc,duration,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -352,8 +613,10 @@ def hlth_ehis_pe2i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe2u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe2u for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'duration,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -382,8 +645,10 @@ def hlth_ehis_pe2u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9b(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9b for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,physact,c_birth,sex,age,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -412,8 +677,10 @@ def hlth_ehis_pe9b(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9c(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9c for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,physact,sex,age,citizen,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -442,8 +709,10 @@ def hlth_ehis_pe9c(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe9d(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe9d for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,physact,sex,age,lev_limit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -473,8 +742,10 @@ def hlth_ehis_pe9d(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_pe2m(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe2m for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,duration,bmi,sex,age,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK',
@@ -503,8 +774,10 @@ def hlth_ehis_pe2m(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_de9(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_de9 for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+
+    Args: df (pd.DataFrame): the raw df as the input
+
+    Returns: df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'sex,age,isced11,time', 'BG', 'CZ', 'EL', 'ES', 'CY', 'LV', 'HU', 'MT',
@@ -522,213 +795,6 @@ def hlth_ehis_de9(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(columns=['isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['age','SV','time'], var_name='geo'\
         ,value_name='observation')
-    return df
-
-
-def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    sex = {'F': 'Female', 'M': 'Male', 'T': 'Total'}
-    df = df.replace({'sex': sex})
-    return df
-
-
-def _replace_physact(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    physact = {
-        'MV_AERO': 'Aerobic',
-        'MV_MSC': 'MuscleStrengthening',
-        'MV_AERO_MSC': 'AerobicAndMuscleStrengthening',
-        'MV_WALK_GET': 'Walking',
-        'MV_CYCL_GET': 'Cycling',
-        'MV_AERO_SPRT': 'AerobicSports'
-    }
-    df = df.replace({'physact': physact})
-    return df
-
-
-def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    isced11 = {
-        'ED0-2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED0_2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED3-4': 'EducationalAttainment'+\
-        'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED3_4': 'EducationalAttainment'+\
-            'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
-        'ED5-8': 'EducationalAttainmentTertiaryEducation',
-        'ED5_8': 'EducationalAttainmentTertiaryEducation',
-        'TOTAL': 'Total'
-        }
-    df = df.replace({'isced11': isced11})
-    return df
-
-
-def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-
-    quant_inc = {
-        'TOTAL': 'Total',
-        'QU1': 'Percentile0To20',
-        'QU2': 'Percentile20To40',
-        'QU3': 'Percentile40To60',
-        'QU4': 'Percentile60To80',
-        'QU5': 'Percentile80To100'
-    }
-    df = df.replace({'quant_inc': quant_inc})
-    return df
-
-
-def _replace_deg_urb(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    deg_urb = {
-        'TOTAL': 'Total',
-        'DEG1': 'Cities',
-        'DEG2': 'TownsAndSuburbs',
-        'DEG3': 'RuralAreas',
-    }
-    df = df.replace({'deg_urb': deg_urb})
-    return df
-
-
-def _replace_levels(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    levels = {
-        'HVY': 'HeavyActivity',
-        'MOD': 'ModerateActivity',
-        'MOD_HVY': 'ModerateActivityOrHeavyActivity',
-        'NONE_LGHT': 'NoneActivityOrLightActivity'
-    }
-    df = df.replace({'levels': levels})
-    return df
-
-
-def _replace_duration(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    duration = {
-        'MN0': '0Minutes',
-        'MN1-149': '1To149Minutes',
-        'MN150-299': '150To299Minutes',
-        'MN_GE150': '150OrMoreMinutes',
-        'MN_GE300': '300OrMoreMinutes'
-    }
-    df = df.replace({'duration': duration})
-    return df
-
-
-def _replace_c_birth(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    """
-    c_birth = {
-        'EU28_FOR': 'ForeignBornWithinEU28',
-        'NEU28_FOR': 'ForeignBornOutsideEU28',
-        'FOR': 'ForeignBorn',
-        'NAT': 'Native'
-    }
-    df = df.replace({'c_birth': c_birth})
-    return df
-
-
-def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    citizen = {
-        'EU28_FOR': 'ForeignWithinEU28',
-        'NEU28_FOR': 'ForeignOutsideEU28',
-        'FOR': 'NotACitizen',
-        'NAT': 'Citizen'
-    }
-    df = df.replace({'citizen': citizen})
-    return df
-
-
-def _replace_lev_limit(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    lev_limit = {
-        'MOD': 'Moderate',
-        'SEV': 'Severe',
-        'SM_SEV': 'SomeOrSevere',
-        'NONE': 'None'
-    }
-    df = df.replace({'lev_limit': lev_limit})
-    return df
-
-
-def _replace_bmi(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    bmi = {
-        'BMI_LT18P5': 'Underweight',
-        'BMI18P5-24': 'Normalweight',
-        'BMI_GE25': 'Overweight',
-        'BMI25-29': 'PreObese',
-        'BMI_GE30': 'Obesity'
-    }
-    df = df.replace({'bmi': bmi})
-    return df
-
-
-def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
-    """
-    Divides a single column into multiple columns and returns the DF.
-    Arguments: df (pd.DataFrame)
-    Returns: df (pd.DataFrame)
-    """
-    info = col.split(",")
-    df[info] = df[col].str.split(',', expand=True)
-    df.drop(columns=[col], inplace=True)
     return df
 
 
@@ -771,8 +837,10 @@ class EuroStatPhysicalActivity:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
-        Arguments:
+
+        Args:
             df_cols (list) : List of DataFrame Columns
+
         Returns:
             None
         """
@@ -829,14 +897,14 @@ class EuroStatPhysicalActivity:
                     activity = "\nphysicalActivityEffortLevel: dcs:" + prop
                 elif "Minutes" in prop:
                     if "OrMoreMinutes" in prop:
-                        duration = "\nduration: [" + prop.replace\
+                        duration = "\nactivityDuration: [" + prop.replace\
                             ("OrMoreMinutes","") + " - Minutes]"
                     elif "To" in prop:
-                        duration = "\nduration: [" + prop.replace("Minutes",\
-                             "").replace("To", " ") + " Minutes]"
+                        duration = "\nactivityDuration: [" + prop.replace\
+                            ("Minutes", "").replace("To", " ") + " Minutes]"
                     else:
-                        duration = "\nduration: [Minutes " + prop.replace\
-                            ("Minutes","") + "]"
+                        duration = "\nactivityDuration: [Minutes " +\
+                            prop.replace("Minutes","") + "]"
                 elif "ForeignBorn" in prop or "Native" in prop:
                     countryofbirth = "\nnativity: dcs:" + \
                         prop.replace("CountryOfBirth","")
@@ -869,7 +937,7 @@ class EuroStatPhysicalActivity:
         """
         This Method calls the required methods to generate
         cleaned CSV, MCF, and TMCF file.
-        Arguments: None
+        Args: None
         Returns: None
         """
 
@@ -882,8 +950,10 @@ class EuroStatPhysicalActivity:
         sv_list = []
 
         for file_path in self.input_files:
-            print(file_path)
             df = pd.read_csv(file_path, sep='\t', skiprows=1)
+            # Taking the File name out of the complete file address
+            # Used -1 to pickup the last part which is file name
+            # Read till -4 inorder to remove the .tsv extension
             file_name = file_path.split("/")[-1][:-4]
             function_dict = {
                 "hlth_ehis_pe9e": hlth_ehis_pe9e,
