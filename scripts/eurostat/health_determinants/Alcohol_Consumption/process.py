@@ -31,341 +31,405 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
+#health_determinant_eurostat_alcoholconsumption_education_attainment
 def hlth_ehis_al1e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1e for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,frequenc,isced11,sex,age,geo', '2019', '2014']
-    df.columns=cols
-    col1 = "unit,frequenc,isced11,sex,age,geo"
-    df = _split_column(df,col1)
+    # providing column names
+    columns = ['unit,frequenc,isced11,sex,age,geo', '2019', '2014']
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "unit,frequenc,isced11,sex,age,geo"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns    
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     df = _replace_isced11(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_AlcoholConsumption_'+\
         df['frequenc']+'_AsAFractionOf_Count_Person_'+\
             df['isced11']+'_'+df['sex']
+    # dropping unwanted columns
     df.drop(columns=['unit','age','isced11','frequenc','sex'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
-    df.to_csv('sample1.csv',index=False)
     return df
 
+#health_determinant_eurostat_alcoholconsumption_income_quintile
 def hlth_ehis_al1i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1i for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,quant_inc,frequenc,sex,age,geo', '2019', '2014']
-    df.columns=cols
-    col1 = "unit,quant_inc,frequenc,sex,age,geo"
-    df = _split_column(df,col1)
+    # providing column names
+    columns = ['unit,quant_inc,frequenc,sex,age,geo', '2019', '2014']
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "unit,quant_inc,frequenc,sex,age,geo"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]    
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['quant_inc']+'_'+df['sex']\
         +'_AlcoholConsumption_'+df['frequenc']\
             +'_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
+    # dropping unwanted columns
     df.drop(columns=['quant_inc','frequenc','sex','age','unit'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
-    df.to_csv("sample2.csv",index=False)
     return df
 
+#health_determinant_eurostat_alcoholconsumption_degree_of_urbanisation
 def hlth_ehis_al1u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1u for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
+    # providing column names
+    columns = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
     'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "frequenc,deg_urb,sex,age,unit,time"
-    df = _split_column(df,col1)
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "frequenc,deg_urb,sex,age,unit,time"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     df = _replace_frequenc(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['sex']+'_'+'AlcoholConsumption'+\
         '_'+df['deg_urb']+'_'+df['frequenc']+'_AsAFractionOf_Count_Person_'+\
         df['sex']+'_'+df['deg_urb']
+    # dropping unwanted columns
     df.drop(columns=['frequenc','deg_urb','sex','unit','age'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
-    df.to_csv("sample3.csv",index=False)
     return df
 
+#health_determinant_eurostat_bingedrinking_education_attainment
 def hlth_ehis_al3e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al3e for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,frequenc,isced11,sex,age,geo', '2019', '2014']
-    df.columns=cols
-    col1 = "unit,frequenc,isced11,sex,age,geo"
-    df = _split_column(df,col1)
+    # providing column names
+    columns = ['unit,frequenc,isced11,sex,age,geo', '2019', '2014']
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "unit,frequenc,isced11,sex,age,geo"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     df = _replace_isced11(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_BingeDrinking_'+\
         df['frequenc']+'_'+'AsAFractionOf_Count_Person_'+\
-        df['isced11']+'_'+df['sex']
+            df['isced11']+'_'+df['sex']
+    # dropping unwanted columns
     df.drop(columns=['unit','age','isced11','frequenc','sex'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
-    df.to_csv("sample4.csv",index=False)
     return df
 
+#health_determinant_eurostat_bingedrinking_income_quintile
 def hlth_ehis_al3i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al3i for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,quant_inc,frequenc,sex,age,geo', '2019', '2014']
-    df.columns=cols
-    col1 = "unit,quant_inc,frequenc,sex,age,geo"
-    df = _split_column(df,col1)
+    # providing column names
+    columns = ['unit,quant_inc,frequenc,sex,age,geo', '2019', '2014']
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "unit,quant_inc,frequenc,sex,age,geo"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['sex']+'_BingeDrinking_'+\
         +df['quant_inc']+'_'+df['frequenc']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    # dropping unwanted columns
     df.drop(columns=['unit','age','quant_inc','frequenc','sex'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
-    df.to_csv("sample5.csv",index=False)
     return df
 
+#health_determinant_eurostat_bingedrinking_degree_of_urbanisation
 def hlth_ehis_al3u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al3u for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
+    # providing column names
+    columns = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
     'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "frequenc,deg_urb,sex,age,unit,time"
-    df = _split_column(df,col1)
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "frequenc,deg_urb,sex,age,unit,time"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     df = _replace_frequenc(df)
-    #df.drop(columns=['unit','age'],inplace=True)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['sex']+'_'+'BingeDrinking'+\
         '_'+df['deg_urb']+'_'+df['frequenc']+'_AsAFractionOf_Count_Person_'+\
-        df['sex']+'_'+df['deg_urb']
+            df['sex']+'_'+df['deg_urb']
+    # dropping unwanted columns
     df.drop(columns=['frequenc','deg_urb','sex','unit','age'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
-    df.to_csv("sample6.csv",index=False)
     return df
 
+#health_determinant_eurostat_hazardousalcoholconsumption_education_attainment
 def hlth_ehis_al2e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al2e for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,isced11,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ', 'DK'
+    # providing column names
+    columns = ['unit,isced11,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ', 'DK'
     ,'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT',
     'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO', 'UK', 'TR' ]
-    df.columns=cols
-    col1 = "unit,isced11,sex,age,time"
-    df = _split_column(df,col1)
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "unit,isced11,sex,age,time"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_sex(df)
     df = _replace_isced11(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']\
         +'_HazardousAlcoholConsumption_AsAFractionOf_Count_Person_'\
             +df['isced11']+'_'+df['sex']
+    # dropping unwanted columns
     df.drop(columns=['unit','age','isced11','sex'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
             ,value_name='observation')
-    df.to_csv("sample7.csv",index=False)
     return df
 
+#health_determinant_eurostat_hazardousalcoholconsumption_income_quintile
 def hlth_ehis_al2i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al2i for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,quant_inc,sex,age,time','EU27_2020','EU28','BE','BG',
+    # providing column names
+    columns = ['unit,quant_inc,sex,age,time','EU27_2020','EU28','BE','BG',
     'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "unit,quant_inc,sex,age,time"
-    df = _split_column(df,col1)
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "unit,quant_inc,sex,age,time"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['sex']+'_'+\
         +df['quant_inc']+'_'+'HazardousAlcoholConsumption'+'_'+\
             'AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    # dropping unwanted columns
     df.drop(columns=['unit','age' ,'quant_inc','sex'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
             ,value_name='observation')
-    df.to_csv("sample8.csv",index=False)
     return df
 
+#health_determinant_eurostat_hazardousalcoholconsumption_degree_of_urbanisation
 def hlth_ehis_al2u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al2u for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
+    # providing column names
+    columns = ['deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
     'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "deg_urb,sex,age,unit,time"
-    df = _split_column(df,col1)
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "deg_urb,sex,age,unit,time"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['sex']+'_'+'HazardousAlcoholConsumption'+\
         '_'+df['deg_urb']+'_AsAFractionOf_Count_Person_'+\
         df['sex']+'_'+df['deg_urb']
+    # dropping unwanted columns
     df.drop(columns=['deg_urb','sex','unit','age'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
-    df.to_csv("sample9.csv")
     return df
 
+#health_determinant_eurostat_alcoholconsumption_country_of_birth
 def hlth_ehis_al1b(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1b for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,frequenc,sex,age,c_birth,time','EU27_2020','EU28','BE','BG',
+    # providing column names
+    columns = ['unit,frequenc,sex,age,c_birth,time','EU27_2020','EU28','BE','BG',
     'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "unit,frequenc,sex,age,c_birth,time"
-    df = _split_column(df,col1)
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "unit,frequenc,sex,age,c_birth,time"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     df = _replace_c_birth(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['frequenc']+'_'+df['sex']\
         +'_'+'AlcoholConsumption'+'_'+df['c_birth']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['c_birth']
+    # dropping unwanted columns
     df.drop(columns=['frequenc','c_birth','sex','unit','age'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
-    df.to_csv("sample10.csv")
     return df
 
+#health_determinant_eurostat_alcoholconsumption_citizen
 def hlth_ehis_al1c(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1c for concatenation in Final CSV
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,frequenc,sex,age,citizen,time','EU27_2020','EU28','BE','BG',
+    # providing column names
+    columns = ['unit,frequenc,sex,age,citizen,time','EU27_2020','EU28','BE','BG',
     'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
-    df.columns=cols
-    col1 = "unit,frequenc,sex,age,citizen,time"
-    df = _split_column(df,col1)
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "unit,frequenc,sex,age,citizen,time"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020','EU28'],inplace=True)
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     df = _replace_citizen(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['citizen']+'_'+df['frequenc']+'_'+\
         df['sex']+'_AlcoholConsumption'+\
         '_AsAFractionOf_Count_Person_'+df['citizen']+'_'+df['sex']
+    # dropping unwanted columns
     df.drop(columns=['frequenc','citizen','sex','unit','age'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
-    df.to_csv("sample11.csv")
     return df
 
+#health_determinant_eurostat_historical_alcoholconsumption_education_attainment
 def hlth_ehis_de10(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_de10 for concatenation in Final CSV.
     Arguments: df (pd.DataFrame), the raw df as the input
     Returns: df (pd.DataFrame), provides the cleaned df as output
     """
-    cols = ['sex,age,isced11,frequenc,unit,time','BE','BG','CZ','EL',
+    # providing column names
+    columns = ['sex,age,isced11,frequenc,unit,time','BE','BG','CZ','EL',
         'ES','FR','CY','LV','HU','MT','PL','RO','SI','SK','TR']
-    df.columns=cols
-    col1 = "sex,age,isced11,frequenc,unit,time"
-    df = _split_column(df,col1)
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "sex,age,isced11,frequenc,unit,time"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = _replace_isced11(df)
     df = _replace_frequenc(df)
     df = _replace_sex(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_AlcoholConsumption_'+\
         df['frequenc']+'_AsAFractionOf_Count_Person_'+\
             df['isced11']+'_'+df['sex']
+    # dropping unwanted columns
     df.drop(columns=['isced11','sex','age','frequenc','unit'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
-    df.to_csv("sample12.csv")
     return df
 
+#health_determinant_eurostat_historical_bingedrinking_education_attainment
 def hlth_ehis_de6(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_de6 for concatenation in Final CSV.
     Arguments: df (pd.DataFrame), the raw df as the input
     Returns: df (pd.DataFrame), provides the cleaned df as output
     """
-    cols = ['frequenc,sex,age,isced11,time','BE','BG','CZ','EL',
+    # providing column names
+    columns = ['frequenc,sex,age,isced11,time','BE','BG','CZ','EL',
         'ES','CY','LV','HU','MT','RO','SI','SK']
-    df.columns=cols
-    col1 = "frequenc,sex,age,isced11,time"
-    df = _split_column(df,col1)
+    df.columns=columns
+    # spliting the first column to multiple columns
+    split_columns = "frequenc,sex,age,isced11,time"
+    df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = _replace_isced11(df)
     df = _replace_frequenc(df)
     df = _replace_sex(df)
+    # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_BingeDrinking_'+\
         df['frequenc']+'_AsAFractionOf_Count_Person_'+\
             df['isced11']+'_'+df['sex']
+    # dropping unwanted columns
     df.drop(columns=['isced11','sex','age','frequenc'],inplace=True)
+    # ask
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
-    df.to_csv("sample13.csv")
     return df
 
 def _split_column(df: pd.DataFrame,col: str) -> pd.DataFrame:
@@ -382,7 +446,7 @@ def _replace_frequenc(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    frequenc = {
+    df = df.replace({'frequenc': {
         'DAY': 'EveryDay',
         'LT1M': 'LessThanOnceAMonth',
         'MTH': 'EveryMonth',
@@ -392,8 +456,7 @@ def _replace_frequenc(df:pd.DataFrame) -> pd.DataFrame:
         'WEEK': 'EveryWeek',
         'GE1W': 'AtLeastOnceAWeek',
         'NVR_OCC': 'NeverOrOccasionally',
-        'NBINGE': 'NoBingeDrinking'}
-    df = df.replace({'frequenc': frequenc})
+        'NBINGE': 'NoBingeDrinking'}})
     return df
 
 def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
@@ -401,12 +464,10 @@ def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    sex = {
+    df = df.replace({'sex': {
         'F': 'Female',
         'M': 'Male',
-        'T': 'Total'
-        }
-    df = df.replace({'sex': sex})
+        'T': 'Total'}})
     return df
 
 def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
@@ -414,8 +475,7 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-
-    isced11 = {
+    df = df.replace({'isced11': {
         'ED0-2': 'EducationalAttainment'+\
         'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
         'ED0_2': 'EducationalAttainment'+\
@@ -429,8 +489,7 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
         'ED5_6': 'EducationalAttainment'+\
             'FirstStageTertiaryEducationOrSecondStageTertiaryEducation',
         'TOTAL': 'Total'
-        }
-    df = df.replace({'isced11': isced11})
+        }})
     return df
 
 def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
@@ -438,16 +497,14 @@ def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-
-    quant_inc = {
-        'TOTAL':'Total',
-	    'QU1':'Percentile0To20',
-	    'QU2':'Percentile20To40',
-        'QU3':'Percentile40To60',
-	    'QU4':'Percentile60To80',
-        'QU5':'Percentile80To100'
-        }
-    df = df.replace({'quant_inc': quant_inc})
+    df = df.replace({'quant_inc': {
+        'TOTAL': 'Total',
+        'QU1': 'IncomeOf0To20Percentile',
+        'QU2': 'IncomeOf20To40Percentile',
+        'QU3': 'IncomeOf40To60Percentile',
+        'QU4': 'IncomeOf60To80Percentile',
+        'QU5': 'IncomeOf80To100Percentile'
+        }})
     return df
 
 def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
@@ -455,13 +512,12 @@ def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    deg_urb = {
+    df = df.replace({'deg_urb': {
         'TOTAL':'Total',
         'DEG1':'Cities',
         'DEG2':'TownsAndSuburbs',
         'DEG3':'RuralAreas',
-        }
-    df = df.replace({'deg_urb': deg_urb})
+        }})
     return df
 
 def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
@@ -469,13 +525,12 @@ def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    c_birth = {
+    df = df.replace({'c_birth': {
         'EU28_FOR': 'ForeignBornWithinEU28',
         'NEU28_FOR': 'ForeignBornOutsideEU28',
         'FOR': 'ForeignBorn',
         'NAT': 'Native'
-    }
-    df = df.replace({'c_birth': c_birth})
+    }})
     return df
 
 def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
@@ -483,13 +538,12 @@ def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    citizen = {
+    df = df.replace({'citizen': {
         'EU28_FOR': 'ForeignWithinEU28',
         'NEU28_FOR': 'ForeignOutsideEU28',
         'FOR': 'NotACitizen',
         'NAT': 'Citizen'
-    }
-    df = df.replace({'citizen': citizen})
+    }})
     return df
 
 class EuroStatAlcoholConsumption:
@@ -531,7 +585,7 @@ class EuroStatAlcoholConsumption:
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
         Arguments:
-            df_cols (list) : List of DataFrame Columns
+            df_columns (list) : List of DataFrame Columns
         Returns:
             None
         """
@@ -581,7 +635,7 @@ class EuroStatAlcoholConsumption:
                         .replace("Or","__")
                 elif "Percentile" in prop:
                     incomequin = "\nincome: ["+prop.replace("Percentile",\
-                        "").replace("To"," ")+" Percentile]"
+                        "").replace("IncomeOf","").replace("To"," ")+" Percentile]"
                 elif "Cities" in prop or "TownsAndSuburbs" in prop \
                     or "RuralAreas" in prop:
                     residence = "\nplaceOfResidenceClassification: dcs:" + prop
@@ -648,6 +702,9 @@ class EuroStatAlcoholConsumption:
             df['Measurement_Method'] = np.where(
                 df['observation'].str.contains('u'),
                 'LowReliability/EurostatRegionalStatistics',
+                # np.where(
+                # df['observation'].str.contains('d'),
+                # 'DefinationDiffer/EurostatRegionalStatistics',
                 'EurostatRegionalStatistics')
             df['observation'] = (df['observation'].str.replace(
                 ':', '').str.replace(' ', '').str.replace('u', '')

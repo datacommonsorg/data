@@ -18,13 +18,19 @@ Unzips it and makes it available for further processing
 import gzip
 import os
 import urllib.request
+from input_data import input_urls
+
 
 def download_file(url) -> None:
     """
     Function to Download and Unzip the file provided in url
-    Input Provided: String
-    Output Given: None
+    Args: url (str), url of the file to be downloaded as a string
+    Returns: None
     """
+    # This extracts the filename form the complete URL,
+    # also removes the .gz extension.
+    # Example - ....-prod/BulkDownloadListing?file=data/hlth_ehis_pe9e.tsv.gz
+    # is made hlth_ehis_pe9e.tsv
     file_name = url.split("/")[-1][:-3]
     path = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'input_files/'
     if not os.path.exists(path):
@@ -41,32 +47,5 @@ def download_file(url) -> None:
         f.write(file_content)
 
 if __name__ == "__main__":
-    files = [
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al1e.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al1i.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al1u.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al3e.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al3i.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al3u.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al2e.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al2i.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al2u.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al1b.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_al1c.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_de10.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-        "BulkDownloadListing?file=data/hlth_ehis_de6.tsv.gz"]
-    for file in files:
+    for file in input_urls:
         download_file(file)
