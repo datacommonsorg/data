@@ -61,7 +61,7 @@ def _replace_physact(df: pd.DataFrame) -> pd.DataFrame:
         'physact': {
             'MV_AERO': 'Aerobic',
             'MV_MSC': 'MuscleStrengthening',
-            'MV_AERO_MSC': 'AerobicAndMuscleStrengthening',
+            'MV_AERO_MSC': 'AerobicOrMuscleStrengthening',
             'MV_WALK_GET': 'Walking',
             'MV_CYCL_GET': 'Cycling',
             'MV_AERO_SPRT': 'AerobicSports'
@@ -230,10 +230,10 @@ def _replace_lev_limit(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'lev_limit': {
-            'MOD': 'Moderate',
-            'SEV': 'Severe',
-            'SM_SEV': 'SomeOrSevere',
-            'NONE': 'None'
+            'MOD': 'ModerateActivityLimitation',
+            'SEV': 'SevereActivityLimitation',
+            'SM_SEV': 'LimitedActivityLimitation',
+            'NONE': 'NoActivityLimitation'
         }
     })
     return df
@@ -882,7 +882,7 @@ class EuroStatPhysicalActivity:
                     gender = "\ngender: dcs:" + prop
                 elif "Aerobic" in prop or "MuscleStrengthening" in prop \
                     or "Walking" in prop or "Cycling" in prop:
-                    exercise = "\nexerciseType: dcs:" + prop
+                    exercise = "\nexerciseType: dcs:" + prop.replace("Or", "__")
                 elif "Education" in prop:
                     education = "\neducationalAttainment: dcs:" + \
                         prop.replace("EducationalAttainment","")\
@@ -893,8 +893,14 @@ class EuroStatPhysicalActivity:
                 elif "Cities" in prop or "TownsAndSuburbs" in prop \
                     or "RuralAreas" in prop:
                     residence = "\nplaceOfResidenceClassification: dcs:" + prop
-                elif "Activity" in prop:
-                    activity = "\nphysicalActivityEffortLevel: dcs:" + prop
+                elif "Limitation" in prop:
+                    lev_limit = "\nglobalActivityLimitationIndicator: dcs:"\
+                        + prop
+                elif "ModerateActivity" in prop or "HeavyActivity" in prop\
+                    or "NoActivityOrLightActivity" in prop:
+                    activity = "\nphysicalActivityEffortLevel: dcs:"\
+                        + prop.replace("ModerateActivityOrHeavyActivity",\
+                        "ModerateActivity__HeavyActivity")
                 elif "Minutes" in prop:
                     if "OrMoreMinutes" in prop:
                         duration = "\nactivityDuration: [" + prop.replace\
@@ -912,10 +918,6 @@ class EuroStatPhysicalActivity:
                     or "Citizen" in prop:
                     citizenship = "\ncitizenship: dcs:" + \
                         prop.replace("Citizenship","")
-                elif "Moderate" in prop or "Severe" in prop \
-                    or "None" in prop:
-                    lev_limit = "\nglobalActivityLimitationIndicator: dcs:"\
-                        + prop
                 elif "weight" in prop or "Normal" in prop \
                     or "Obese" in prop or "Obesity" in prop:
                     bmi = "__" + prop

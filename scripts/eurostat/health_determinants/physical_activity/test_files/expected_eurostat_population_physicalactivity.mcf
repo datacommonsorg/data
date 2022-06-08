@@ -2,7 +2,7 @@ Node: dcid:Count_Person_Citizen_Aerobic_Female_HealthEnhancingPhysicalActivity_A
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Female
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
+healthbehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 gender: dcs:Female
 citizenship: dcs:Citizen
@@ -13,7 +13,7 @@ Node: dcid:Count_Person_Citizen_Aerobic_Male_HealthEnhancingPhysicalActivity_AsA
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Male
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
+healthbehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 gender: dcs:Male
 citizenship: dcs:Citizen
@@ -24,7 +24,7 @@ Node: dcid:Count_Person_Female_WorkRelatedPhysicalActivity_HeavyActivity_TownsAn
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_TownsAndSuburbs
-healthBehavior: dcs:WorkRelatedPhysicalActivity
+healthbehavior: dcs:WorkRelatedPhysicalActivity
 placeOfResidenceClassification: dcs:TownsAndSuburbs
 physicalActivityEffortLevel: dcs:HeavyActivity
 gender: dcs:Female
@@ -35,7 +35,7 @@ Node: dcid:Count_Person_ForeignOutsideEU28_Aerobic_Female_HealthEnhancingPhysica
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignOutsideEU28_Female
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
+healthbehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 gender: dcs:Female
 citizenship: dcs:ForeignOutsideEU28
@@ -46,7 +46,7 @@ Node: dcid:Count_Person_ForeignOutsideEU28_Aerobic_Male_HealthEnhancingPhysicalA
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignOutsideEU28_Male
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
+healthbehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 gender: dcs:Male
 citizenship: dcs:ForeignOutsideEU28
@@ -57,7 +57,7 @@ Node: dcid:Count_Person_ForeignWithinEU28_Aerobic_Male_HealthEnhancingPhysicalAc
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignWithinEU28_Male
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
+healthbehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 gender: dcs:Male
 citizenship: dcs:ForeignWithinEU28
@@ -68,7 +68,7 @@ Node: dcid:Count_Person_Male_WorkRelatedPhysicalActivity_HeavyActivity_Cities_As
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Cities
-healthBehavior: dcs:WorkRelatedPhysicalActivity
+healthbehavior: dcs:WorkRelatedPhysicalActivity
 placeOfResidenceClassification: dcs:Cities
 physicalActivityEffortLevel: dcs:HeavyActivity
 gender: dcs:Male
@@ -79,7 +79,7 @@ Node: dcid:Count_Person_Male_WorkRelatedPhysicalActivity_HeavyActivity_TownsAndS
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_TownsAndSuburbs
-healthBehavior: dcs:WorkRelatedPhysicalActivity
+healthbehavior: dcs:WorkRelatedPhysicalActivity
 placeOfResidenceClassification: dcs:TownsAndSuburbs
 physicalActivityEffortLevel: dcs:HeavyActivity
 gender: dcs:Male
@@ -90,7 +90,7 @@ Node: dcid:Count_Person_NotACitizen_Aerobic_Female_HealthEnhancingPhysicalActivi
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
+healthbehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 gender: dcs:Female
 citizenship: dcs:NotACitizen
@@ -101,7 +101,7 @@ Node: dcid:Count_Person_NotACitizen_Aerobic_Male_HealthEnhancingPhysicalActivity
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
+healthbehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 gender: dcs:Male
 citizenship: dcs:NotACitizen
@@ -112,7 +112,7 @@ Node: dcid:Count_Person_WorkRelatedPhysicalActivity_HeavyActivity_Cities_AsAFrac
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Cities
-healthBehavior: dcs:WorkRelatedPhysicalActivity
+healthbehavior: dcs:WorkRelatedPhysicalActivity
 placeOfResidenceClassification: dcs:Cities
 physicalActivityEffortLevel: dcs:HeavyActivity
 statType: dcs:measuredValue
