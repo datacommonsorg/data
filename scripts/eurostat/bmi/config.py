@@ -7,9 +7,9 @@ _BMI_VALUES_MAPPER = {
     'BMI25-29': 'PreObese',
     'BMI_GE30': 'Obesity',
     'LT18P5': 'Underweight',
-	'18P5-25': 'Normal',
-	'25-30': 'Overweight',
-	'GE30': 'Obesity',
+    '18P5-25': 'Normal',
+    '25-30': 'Overweight',
+    'GE30': 'Obesity',
 }
 
 _EDUCATIONAL_VALUES_MAPPER = {
