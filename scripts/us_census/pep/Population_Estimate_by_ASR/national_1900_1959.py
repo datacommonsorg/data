@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for National Level Data
-1900-1959
+This Python Script is for National Level Data 1900-1959
 '''
 import os
 import pandas as pd
@@ -22,17 +20,16 @@ import pandas as pd
 
 def national1900():
     '''
-    This Python Script Loads csv datasets
-    from 1900-1959 on a National Level,
+    This Python Script Loads csv datasets from 1900-1959 on a National Level,
     cleans it and create a cleaned csv
     '''
     # Used to collect data after every loop for every file's df
     final_df = pd.DataFrame()
+    # The numbers 00 to 60 signify the available files as per year numbers
     for i in range(00, 60):
         j = f'{i:02}'
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
             '1900-1980/national/asrh/pe-11-19'+str(j)+'.csv'
-
         # 0=Total_AllRaces
         # 1=Male_AllRaces
         # 2=Female_AllRaces
@@ -42,7 +39,6 @@ def national1900():
         # 6=Total_NonWhiteAlone
         # 7=Male_NonWhiteAlone
         # 8=Female_NonWhiteAlone
-
         cols = ['Age', '0', '1', '2', '3', '4', '5', '6', '7', '8']
         # reading the csv format input file and converting it to a dataframe
         # skipping unwanted rows from top and bottom
@@ -57,17 +53,18 @@ def national1900():
         # melt function is used to change the dataframe format from wide to long
         df = df.melt(id_vars=['Age'], var_name='sv', value_name='observation')
         # giving proper column names
-        _dict = {
-            '1': 'Male',
-            '2': 'Female',
-            '3': 'WhiteAlone',
-            '4': 'Male_WhiteAlone',
-            '5': 'Female_WhiteAlone',
-            '6': 'NonWhite',
-            '7': 'Male_NonWhite',
-            '8': 'Female_NonWhite'
-        }
-        df = df.replace({'sv': _dict})
+        df = df.replace({
+            'sv': {
+                '1': 'Male',
+                '2': 'Female',
+                '3': 'WhiteAlone',
+                '4': 'Male_WhiteAlone',
+                '5': 'Female_WhiteAlone',
+                '6': 'NonWhite',
+                '7': 'Male_NonWhite',
+                '8': 'Female_NonWhite'
+            }
+        })
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['sv']
         df.drop(columns=['Age', 'sv'], inplace=True)
         #to swap the columns

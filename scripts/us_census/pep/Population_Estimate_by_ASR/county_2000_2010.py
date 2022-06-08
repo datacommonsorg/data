@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for County Level Data
-2000-2010.
+This Python Script is for County Level Data 2000-2010.
 '''
 
 import os
@@ -24,12 +22,13 @@ import numpy as np
 
 def county2000():
     """
-    This Python Script Loads csv datasets
-    from 2000-2010 on a County Level,
+    This Python Script Loads csv datasets from 2000-2010 on a County Level,
     cleans it and create a cleaned csv.
     """
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
+    # The numbers 1 to 57 signify the available files as per state numbers
+    # The [3, 7, 14, 43, 52] signify the state numbers absent
     for i in range(1, 57):
         if i not in [3, 7, 14, 43, 52]:
             j = f'{i:02}'
@@ -44,46 +43,48 @@ def county2000():
             df = df.query("AGEGRP != 99")
             df['Year'] = df['Year'].astype(str)
             # Replacing the numbers with more understandable metadata headings.
-            _dict = {
-                '2': '2000',
-                '3': '2001',
-                '4': '2002',
-                '5': '2003',
-                '6': '2004',
-                '7': '2005',
-                '8': '2006',
-                '9': '2007',
-                '10': '2008',
-                '11': '2009'
-            }
-            df = df.replace({'Year': _dict})
+            df = df.replace({
+                'Year': {
+                    '2': '2000',
+                    '3': '2001',
+                    '4': '2002',
+                    '5': '2003',
+                    '6': '2004',
+                    '7': '2005',
+                    '8': '2006',
+                    '9': '2007',
+                    '10': '2008',
+                    '11': '2009'
+                }
+            })
             df.insert(6, 'geo_ID', 'geoId/', True)
             df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + \
                 (df['COUNTY'].map(str)).str.zfill(3)
             df['AGEGRP'] = df['AGEGRP'].astype(str)
             # Replacing the numbers with more understandable metadata headings.
-            _dict = {
-                '0': '0Years',
-                '1': '1To4Years',
-                '2': '5To9Years',
-                '3': '10To14Years',
-                '4': '15To19Years',
-                '5': '20To24Years',
-                '6': '25To29Years',
-                '7': '30To34Years',
-                '8': '35To39Years',
-                '9': '40To44Years',
-                '10': '45To49Years',
-                '11': '50To54Years',
-                '12': '55To59Years',
-                '13': '60To64Years',
-                '14': '65To69Years',
-                '15': '70To74Years',
-                '16': '75To79Years',
-                '17': '80To84Years',
-                '18': '85OrMoreYears'
-            }
-            df = df.replace({"AGEGRP": _dict})
+            df = df.replace({
+                "AGEGRP": {
+                    '0': '0Years',
+                    '1': '1To4Years',
+                    '2': '5To9Years',
+                    '3': '10To14Years',
+                    '4': '15To19Years',
+                    '5': '20To24Years',
+                    '6': '25To29Years',
+                    '7': '30To34Years',
+                    '8': '35To39Years',
+                    '9': '40To44Years',
+                    '10': '45To49Years',
+                    '11': '50To54Years',
+                    '12': '55To59Years',
+                    '13': '60To64Years',
+                    '14': '65To69Years',
+                    '15': '70To74Years',
+                    '16': '75To79Years',
+                    '17': '80To84Years',
+                    '18': '85OrMoreYears'
+                }
+            })
 
             # Drop unwanted columns.
             df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'],\
@@ -112,7 +113,7 @@ def county2000():
             df = df.melt(id_vars=['Year','geo_ID' ,'AGEGRP'], var_name='sv' , \
                 value_name='observation')
             # Changing Names to be more understandable.
-            _dict = {
+            _sexrace_dict = {
                 'TOT_MALE':
                     'Male',
                 'TOT_FEMALE':
@@ -142,7 +143,7 @@ def county2000():
                 'TOM_FEMALE':
                     'Female_TwoOrMoreRaces'
             }
-            df = df.replace({"sv": _dict})
+            df = df.replace({"sv": _sexrace_dict})
             df['SVs'] = 'Count_Person_' + df['AGEGRP'] + '_' + df['sv']
             df = df.drop(columns=['AGEGRP', 'sv'])
             df['Measurement_Method'] = np.where(df['SVs'].str.contains('Agg')\

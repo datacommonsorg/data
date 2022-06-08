@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for State Level Data
-1990-2000.
+This Python Script is for State Level Data 1990-2000.
 '''
 import os
 import pandas as pd
@@ -23,8 +21,7 @@ from common_functions import _input_url
 
 def state1990():
     '''
-    This Python Script Loads csv datasets
-    from 1990-2000 on a State Level,
+    This Python Script Loads csv datasets from 1990-2000 on a State Level,
     cleans it and create a cleaned csv.
     '''
     _urls = _input_url("state.json", "1990-00")

@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for National Level Data
-2010-2019.
+This Python Script is for National Level Data 2010-2019.
 '''
 import os
 import pandas as pd
@@ -23,8 +21,7 @@ from common_functions import _input_url
 
 def national2010():
     '''
-    This Python Script Loads csv datasets
-    from 2010-2019 on a National Level,
+    This Python Script Loads csv datasets from 2010-2019 on a National Level,
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
@@ -63,11 +60,12 @@ def national2010():
                                  value_name='observation')
         df_sheet.columns = df_sheet.columns.str.replace('Unnamed: 0', 'SVs')
         df_final = pd.concat([df_final, df_sheet])
-    df_final['SVs'] = df_final['SVs'].str.replace("_TotalAlone", "")\
-        .str.replace("Black", "BlackOrAfricanAmerican").str.replace\
-        ("AIAN", "AmericanIndianAndAlaskaNative").str.replace\
-        ("NHPI", "NativeHawaiianAndOtherPacificIslander").str.replace\
-        ("Two or More RacesAlone", "TwoOrMoreRaces")
+    df_final['SVs'] = (df_final['SVs'].str.replace(
+        "_TotalAlone",
+        "").str.replace("Black", "BlackOrAfricanAmerican").str.replace(
+            "AIAN", "AmericanIndianAndAlaskaNative").str.replace(
+                "NHPI", "NativeHawaiianAndOtherPacificIslander").str.replace(
+                    "Two or More RacesAlone", "TwoOrMoreRaces"))
     df_final['SVs'] = 'Count_Person_' + df_final['SVs']
     df_final['Measurement_Method'] = 'CensusPEPSurvey'
     df_final['geo_ID'] = 'country/USA'

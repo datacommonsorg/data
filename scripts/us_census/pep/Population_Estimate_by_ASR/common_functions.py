@@ -24,7 +24,7 @@ def _replace_age(df: pd.DataFrame):
     """
     Replaces the columns of DF as per metadata
     """
-    _age = {
+    df.rename(columns={
         0: '0To4Years',
         1: '5To9Years',
         2: '10To14Years',
@@ -43,6 +43,33 @@ def _replace_age(df: pd.DataFrame):
         15: '75To79Years',
         16: '80To84Years',
         17: '85OrMoreYears'
-    }
-    df.rename(columns=_age, inplace=True)
+    },
+              inplace=True)
+    return df
+
+
+def _gender_based_grouping(df: pd.DataFrame):
+    """
+    Aggregates the columns based on gender by removing race from SV
+    """
+    df['SVs'] = df['SVs'].str.replace('_WhiteAlone', '')
+    df['SVs'] = df['SVs'].str.replace('_BlackOrAfricanAmericanAlone', '')
+    df['SVs'] = df['SVs'].str.replace('_OtherRaces', '')
+    df['SVs'] = df['SVs'].str.replace('_AmericanIndianAndAlaskaNativeAlone', '')
+    df['SVs'] = df['SVs'].str.replace('_AsianOrPacificIslander', '')
+    df['SVs'] = df['SVs'].str.replace('_AsianAlone', '')
+    df['SVs'] = df['SVs'].str.replace\
+        ('_NativeHawaiianAndOtherPacificIslanderAlone', '')
+    df['SVs'] = df['SVs'].str.replace('_TwoOrMoreRaces', '')
+    df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    return df
+
+
+def _race_based_grouping(df: pd.DataFrame):
+    """
+    Aggregates the columns based on race by removing gender from SV
+    """
+    df['SVs'] = df['SVs'].str.replace('_Male', '')
+    df['SVs'] = df['SVs'].str.replace('_Female', '')
+    df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
     return df

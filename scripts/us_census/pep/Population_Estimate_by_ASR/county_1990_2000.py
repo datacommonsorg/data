@@ -12,20 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for County Level Data
-1990-2000.
+This Python Script is for County Level Data 1990-2000.
 '''
 import os
 import numpy as np
 import pandas as pd
-from common_functions import _replace_age
+from common_functions import (_replace_age, _gender_based_grouping,
+                              _race_based_grouping)
 
 
 def county1990():
     '''
-    This Python Script Loads csv datasets
-    from 1990-2000 on a County Level,
+    This Python Script Loads csv datasets from 1990-2000 on a County Level,
     cleans it and create a cleaned csv.
     '''
     # Contains the final data which has been taken directly and aggregated.
@@ -35,6 +33,8 @@ def county1990():
     # Contains aggregated data for age and race.
     df_ar = pd.DataFrame()
     # Reading the csv input file.
+    # The numbers 1 to 57 signify the available files as per state numbers
+    # The [3, 7, 14, 43, 52] signify the state numbers absent
     for i in range(1, 57):
         if i not in [3, 7, 14, 43, 52]:
             j = f'{i:02}'
@@ -62,27 +62,20 @@ def county1990():
             df.drop(df[df['Race'] >= 11].index, inplace=True)
             # Changing the column values as per metadata.
             df['Race'] = df['Race'].astype(int).astype(str)
-            df['Race'] = df['Race'].str.replace('10',\
-                'Female_AsianOrPacificIslander')
-            df['Race'] = df['Race'].str.replace('1',\
-                'Male_WhiteAlone')
-            df['Race'] = df['Race'].str.replace('2',\
-                'Female_WhiteAlone')
-            df['Race'] = df['Race'].str.replace('3',\
-                'Male_WhiteAlone')
-            df['Race'] = df['Race'].str.replace('4',\
-                'Female_WhiteAlone')
-            df['Race'] = df['Race'].str.replace('5','Male_BlackOrAfrican'+\
-                'AmericanAlone')
-            df['Race'] = df['Race'].str.replace('6', 'Female_BlackOrAfrican'+\
-                'AmericanAlone')
-            df['Race'] = df['Race'].str.replace('7', 'Male_AmericanIndianAnd'+\
-                'AlaskaNativeAlone')
-            df['Race'] = df['Race'].str.replace('8', 'Female_AmericanIndianAnd'\
-                +'AlaskaNativeAlone')
-            df['Race'] = df['Race'].str.replace('9', \
-                'Male_AsianOrPacificIslander')
-
+            df = df.replace({
+                'Race': {
+                    '10': 'Female_AsianOrPacificIslander',
+                    '1': 'Male_WhiteAlone',
+                    '2': 'Female_WhiteAlone',
+                    '3': 'Male_WhiteAlone',
+                    '4': 'Female_WhiteAlone',
+                    '5': 'Male_BlackOrAfricanAmericanAlone',
+                    '6': 'Female_BlackOrAfricanAmericanAlone',
+                    '7': 'Male_AmericanIndianAndAlaskaNativeAlone',
+                    '8': 'Female_AmericanIndianAndAlaskaNativeAlone',
+                    '9': 'Male_AsianOrPacificIslander'
+                }
+            })
             df = df.melt(id_vars=['Year','geo_ID' ,'Race'], var_name='Age' , \
                 value_name='observation')
             df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['Race']
@@ -99,16 +92,11 @@ def county1990():
     # Making copies and using group by to get Aggregated Values.
     df_as = pd.concat([final_df, df_as])
     df_ar = pd.concat([df_ar, final_df])
-    df_as['SVs'] = df_as['SVs'].str.replace\
-        ('_AmericanIndianAndAlaskaNativeAlone','')
-    df_as['SVs'] = df_as['SVs'].str.replace('_AsianOrPacificIslander', '')
-    df_as['SVs'] = df_as['SVs'].str.replace('_BlackOrAfricanAmericanAlone', '')
-    df_as['SVs'] = df_as['SVs'].str.replace('_WhiteAlone', '')
-    df_as = df_as.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    # DF sent to an external function for aggregation based on gender.
+    df_as = _gender_based_grouping(df_as)
     df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    df_ar['SVs'] = df_ar['SVs'].str.replace('_Male', '')
-    df_ar['SVs'] = df_ar['SVs'].str.replace('_Female', '')
-    df_ar = df_ar.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    # DF sent to an external function for aggregation based on race.
+    df_ar = _race_based_grouping(df_ar)
     df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     final_df = pd.concat([final_df, df_ar, df_as])
 

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python Script Load the datasets, cleans it
-and generates cleaned CSV, MCF, TMCF file.
+This Python Script Load the datasets, cleans it and generates 
+cleaned CSV, MCF, TMCF file.
 """
 import os
 import pandas as pd
@@ -56,9 +56,6 @@ class USCensusPEPByASR:
         self.cleaned_csv_file_path = csv_file_path
         self.mcf_file_path = mcf_file_path
         self.tmcf_file_path = tmcf_file_path
-        self.df = None
-        self.file_name = None
-        self.scaling_factor = 1
 
     def _generate_mcf(self, sv_list) -> None:
         """

@@ -12,21 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for County and State Level Data
-1980-1989.
+This Python Script is for County and State Level Data 1980-1989.
 '''
 import os
 import pandas as pd
-from common_functions import _input_url, _replace_age
+from common_functions import (_input_url, _replace_age, _race_based_grouping,
+                              _gender_based_grouping)
 
 
 def county1980():
     '''
-    This Python Script Loads csv datasets
-    from 1980-1989 on a County and State Level,
-    cleans it and create a cleaned csv
-    for both County and State.
+    This Python Script Loads csv datasets from 1980-1989 on a County and State 
+    Level, cleans it and create a cleaned csv for both County and State.
     '''
     # Getting input URL from the JSON file.
     _url = _input_url("county.json", "1980-89")
@@ -46,15 +43,16 @@ def county1980():
     df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]
     df['Race'] = df['Race'].astype(str)
     # Replacing the names with more understandable SV headings.
-    _dict = {
-        'White male': 'Male_WhiteAlone',
-        'White female': 'Female_WhiteAlone',
-        'Black male': 'Male_BlackOrAfricanAmericanAlone',
-        'Black female': 'Female_BlackOrAfricanAmericanAlone',
-        'Other races male': 'Male_OtherRaces',
-        'Other races female': 'Female_OtherRaces'
-    }
-    df = df.replace({'Race': _dict})
+    df = df.replace({
+        'Race': {
+            'White male': 'Male_WhiteAlone',
+            'White female': 'Female_WhiteAlone',
+            'Black male': 'Male_BlackOrAfricanAmericanAlone',
+            'Black female': 'Female_BlackOrAfricanAmericanAlone',
+            'Other races male': 'Male_OtherRaces',
+            'Other races female': 'Female_OtherRaces'
+        }
+    })
     # Replacing the numbers with more understandable metadata headings.
     df = _replace_age(df)
     df = df.melt(id_vars=['Year','geo_ID' ,'Race'], var_name='sv' ,\
@@ -64,17 +62,14 @@ def county1980():
     # Generating Aggregated Data by using Group by on rows.
     df_as = pd.concat([df_as, df])
     df_ar = pd.concat([df_ar, df])
-    df_as.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
-    df['SVs'] = df['SVs'].str.replace('_WhiteAlone', '')
-    df['SVs'] = df['SVs'].str.replace('_BlackOrAfricanAmericanAlone', '')
-    df['SVs'] = df['SVs'].str.replace('_OtherRaces', '')
-    df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
-    df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    df_ar['SVs'] = df_ar['SVs'].str.replace('_Male', '')
-    df_ar['SVs'] = df_ar['SVs'].str.replace('_Female', '')
-    df_ar = df_ar.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
+    # DF sent to an external function for aggregation based on gender.
+    df_as = _gender_based_grouping(df_as)
+    df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
+    # DF sent to an external function for aggregation based on race.
+    df_ar = _race_based_grouping(df_ar)
     df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    df_as = pd.concat([df_as, df_ar, df])
+    df = pd.concat([df_as, df_ar, df])
     df_as['geo_ID'] = 'geoId/' + df_as['geo_ID'].astype(str)
     final_df = df_as[~df_as.SVs.str.contains('OtherRaces')]
     final_df.to_csv(

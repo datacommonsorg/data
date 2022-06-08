@@ -12,19 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for County Level Data
-1970-1979
+This Python Script is for County Level Data 1970-1979
 '''
 import os
 import pandas as pd
-from common_functions import _input_url, _replace_age
+from common_functions import (_input_url, _replace_age, _gender_based_grouping,
+                              _race_based_grouping)
 
 
 def county1970():
     '''
-   This Python Script Loads csv datasets
-   from 1970-1979 on a County Level,
+   This Python Script Loads csv datasets from 1970-1979 on a County Level,
    cleans it and create a cleaned csv
    '''
     # Getting input URL from the JSON file.
@@ -41,15 +39,16 @@ def county1970():
     df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]
     df['Race'] = df['Race'].astype(str)
     # Replacing the numbers with more understandable metadata headings.
-    _dict = {
-        '1': 'Male_WhiteAlone',
-        '2': 'Female_WhiteAlone',
-        '3': 'Male_BlackOrAfricanAmericanAlone',
-        '4': 'Female_BlackOrAfricanAmericanAlone',
-        '5': 'Male_OtherRaces',
-        '6': 'Female_OtherRaces'
-    }
-    df = df.replace({'Race': _dict})
+    df = df.replace({
+        'Race': {
+            '1': 'Male_WhiteAlone',
+            '2': 'Female_WhiteAlone',
+            '3': 'Male_BlackOrAfricanAmericanAlone',
+            '4': 'Female_BlackOrAfricanAmericanAlone',
+            '5': 'Male_OtherRaces',
+            '6': 'Female_OtherRaces'
+        }
+    })
     # Replacing the numbers with more understandable metadata headings.
     df = _replace_age(df)
     df = df.melt(id_vars=['Year','geo_ID' ,'Race'], var_name='sv' ,\
@@ -61,14 +60,11 @@ def county1970():
     final_df = pd.concat([final_df, df])
     df_ar = pd.concat([df_ar, df])
     final_df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
-    df['SVs'] = df['SVs'].str.replace('_WhiteAlone', '')
-    df['SVs'] = df['SVs'].str.replace('_BlackOrAfricanAmericanAlone', '')
-    df['SVs'] = df['SVs'].str.replace('_OtherRaces', '')
-    df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    # DF sent to an external function for aggregation based on gender.
+    df = _gender_based_grouping(df)
     df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    df_ar['SVs'] = df_ar['SVs'].str.replace('_Male', '')
-    df_ar['SVs'] = df_ar['SVs'].str.replace('_Female', '')
-    df_ar = df_ar.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    # DF sent to an external function for aggregation based on race.
+    df_ar = _race_based_grouping(df_ar)
     df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     final_df = pd.concat([final_df, df_ar, df])
     final_df = final_df[~final_df.SVs.str.contains('OtherRaces')]

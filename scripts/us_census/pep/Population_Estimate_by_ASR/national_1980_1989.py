@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for National Level Data
-1980-1989.
+This Python Script is for National Level Data 1980-1989.
 '''
 import os
 from io import BytesIO
@@ -55,8 +53,7 @@ def column_naming(df: pd.DataFrame):
 
 def national1980():
     '''
-    This Python Script Loads csv datasets
-    from 1980-1989 on a National Level,
+    This Python Script Loads csv datasets from 1980-1989 on a National Level,
     cleans it and create a cleaned csv.
     '''
     # Getting list of URLs from JSON file.
@@ -95,18 +92,27 @@ def national1980():
                            names=cols)
         df = df.loc[df['0'].isin(['2I', '9P'])]
         df['1'] = df['1'].astype(str)
+        # Divinding rows with 100 and others to make the format similar
+        # rows with 100 have a different format.
         df1 = df[df['1'].str.contains("100")]
+        # Removing rows with 999 as they denote total age,
+        # which is not needed in ASR
         df = df[~df['1'].str.contains("999")]
         df = df[~df['1'].str.contains("100")]
+        # Making the columns shift one place left for df1 which has 100 year,
+        # different format data
         for i in range(22, 1, -1):
             j = i + 1
             i = str(i)
             j = str(j)
             df1[j] = df1[i]
             i = int(i)
+        # Dividing the 1 column into multiple parts as the basic information
+        # and year is combined for age 100 and need to be sepreated
         df1['2'] = df1['1'].str[-5:]
         df1['1'] = df1['1'].str[:-5]
         df = pd.concat([df, df1])
+        # Using data from July, hence number 7
         df = df.loc[df['1'].str[0] == '7']
         df = column_naming(df)
         # Writing all the output to a final dataframe.

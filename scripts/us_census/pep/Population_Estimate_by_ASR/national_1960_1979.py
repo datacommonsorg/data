@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for National Level Data
-1960-1979.
+This Python Script is for National Level Data 1960-1979.
 '''
 import os
 import pandas as pd
@@ -22,12 +20,12 @@ import pandas as pd
 
 def national1960():
     '''
-    This Python Script Loads csv datasets
-    from 1960-1979 on a National Level,
+    This Python Script Loads csv datasets from 1960-1979 on a National Level,
     cleans it and create a cleaned csv.
     '''
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
+    # The numbers 60 to 80 signify the available files as per year numbers
     for i in range(60, 80):
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
             '1900-1980/national/asrh/pe-11-19'+str(i)+'.csv'
@@ -45,22 +43,23 @@ def national1960():
         df['Age'] = df['Age'].astype(str)
         df['Age'] = df['Age'].str.replace("85\\+", "85OrMore")
         df['Age'] = df['Age'] + 'Years'
-        # Dropping unwanted columns.
+        # Dropping unwanted columns Total (0) and Other Races (9-11)
         df.drop(columns=['0', '9', '10', '11'], inplace=True)
         # Melt funtion used to change the Data frame format from wide to long.
         df = df.melt(id_vars=['Age'], var_name='sv', value_name='observation')
         # Providing proper column names.
-        _dict = {
-            '1': 'Male',
-            '2': 'Female',
-            '3': 'WhiteAlone',
-            '4': 'Male_WhiteAlone',
-            '5': 'Female_WhiteAlone',
-            '6': 'BlackOrAfricanAmericanAlone',
-            '7': 'Male_BlackOrAfricanAmericanAlone',
-            '8': 'Female_BlackOrAfricanAmericanAlone'
-        }
-        df = df.replace({'sv': _dict})
+        df = df.replace({
+            'sv': {
+                '1': 'Male',
+                '2': 'Female',
+                '3': 'WhiteAlone',
+                '4': 'Male_WhiteAlone',
+                '5': 'Female_WhiteAlone',
+                '6': 'BlackOrAfricanAmericanAlone',
+                '7': 'Male_BlackOrAfricanAmericanAlone',
+                '8': 'Female_BlackOrAfricanAmericanAlone'
+            }
+        })
         df['SVs'] = 'Count_Person_' + df['Age'] + '_' + df['sv']
         # Dropping unwanted columns.
         df.drop(columns=['Age', 'sv'], inplace=True)

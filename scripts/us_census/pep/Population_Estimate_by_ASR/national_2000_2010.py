@@ -12,19 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for National Level Data
-2000-2010.
+This Python Script is for National Level Data 2000-2010.
 '''
 import os
 import pandas as pd
-from common_functions import _input_url
+from common_functions import _input_url, _race_based_grouping
 
 
 def national2000():
     '''
-    This Python Script Loads csv datasets
-    from 2000-2010 on a National Level,
+    This Python Script Loads csv datasets from 2000-2010 on a National Level,
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
@@ -32,8 +29,11 @@ def national2000():
     # Reading the csv format input file and converting it to a dataframe.
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
     # Removing the unwanted rows.
+    # 4 removed as July month is being considered
     df = df.query("MONTH != 4")
+    # 2010 is covered in another input function
     df = df.query("YEAR != 2010")
+    # 999 denotes total age which is not being taken in ASR input
     df = df.query("AGE != 999")
     df['AGE'] = df['AGE'].astype(str)
     df['AGE'] = df['AGE'] + 'Years'
@@ -53,7 +53,7 @@ def national2000():
     df = df.melt(id_vars=['Year','AGE'], var_name='sv' ,\
         value_name='observation')
     # Providing proper columns names.
-    _dict = {
+    _sexrace_dict = {
         'TOT_MALE': 'Male',
         'TOT_FEMALE': 'Female',
         'WA_MALE': 'Male_WhiteAlone',
@@ -69,7 +69,7 @@ def national2000():
         'TOM_MALE': 'Male_TwoOrMoreRaces',
         'TOM_FEMALE': 'Female_TwoOrMoreRaces'
     }
-    df = df.replace({"sv": _dict})
+    df = df.replace({"sv": _sexrace_dict})
     # Giving proper column names.
     df['SVs'] = 'Count_Person_' + df['AGE'] + '_' + df['sv']
     df = df.drop(columns=['AGE', 'sv'])
@@ -80,9 +80,8 @@ def national2000():
     # Contains aggregated data for age and race.
     df_ar = pd.DataFrame()
     df_ar = pd.concat([df_ar, df])
-    df_ar['SVs'] = df_ar['SVs'].str.replace('_Male', '')
-    df_ar['SVs'] = df_ar['SVs'].str.replace('_Female', '')
-    df_ar = df_ar.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    # DF sent to an external function for aggregation based on race.
+    df_ar = _race_based_grouping(df_ar)
     df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     df_ar = df_ar[df_ar.SVs.str.contains('Years_')]
     df = pd.concat([df_ar, df])

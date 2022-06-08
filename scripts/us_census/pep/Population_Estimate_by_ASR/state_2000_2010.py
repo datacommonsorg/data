@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is
-for State Level Data
-2000-2010
+This Python Script is for State Level Data 2000-2010
 '''
 import os
 import pandas as pd
@@ -23,10 +21,9 @@ from common_functions import _input_url
 
 def state2000():
     '''
-        This Python Script Loads csv datasets
-        from 2000-2010 on a State Level,
-        cleans it and create a cleaned csv
-        '''
+    This Python Script Loads csv datasets from 2000-2010 on a State Level,
+    cleans it and create a cleaned csv
+    '''
     _url = _input_url("state.json", "2000-10")
     df = pd.read_csv(_url, encoding='ISO-8859-1')
     # Filtering the data needed.
@@ -38,43 +35,45 @@ def state2000():
     df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)
     # Replacing the Sex Numbers as per the metadata.
     df['SEX'] = df['SEX'].astype(str)
-    _dict = {'0': 'Total', '1': 'Male', '2': 'Female'}
-    df = df.replace({"SEX": _dict})
+    df = df.replace({"SEX": {'0': 'Total', '1': 'Male', '2': 'Female'}})
     # Replacing the Race Numbers as per the metadata.
     df['RACE'] = df['RACE'].astype(str)
-    _dict = {
-        '0': 'Total',
-        '1': 'WhiteAlone',
-        '2': 'BlackOrAfricanAmericanAlone',
-        '3': 'AmericanIndianAndAlaskaNativeAlone',
-        '4': 'AsianAlone',
-        '5': 'NativeHawaiianAndOtherPacificIslanderAlone',
-        '6': 'TwoOrMoreRaces'
-    }
-    df = df.replace({"RACE": _dict})
+
+    df = df.replace({
+        "RACE": {
+            '0': 'Total',
+            '1': 'WhiteAlone',
+            '2': 'BlackOrAfricanAmericanAlone',
+            '3': 'AmericanIndianAndAlaskaNativeAlone',
+            '4': 'AsianAlone',
+            '5': 'NativeHawaiianAndOtherPacificIslanderAlone',
+            '6': 'TwoOrMoreRaces'
+        }
+    })
     # Replacing the Age group Numbers as per the metadata.
     df['AGEGRP'] = df['AGEGRP'].astype(str)
-    _dict = {
-        '1': '0To4Years',
-        '2': '5To9Years',
-        '3': '10To14Years',
-        '4': '15To19Years',
-        '5': '20To24Years',
-        '6': '25To29Years',
-        '7': '30To34Years',
-        '8': '35To39Years',
-        '9': '40To44Years',
-        '10': '45To49Years',
-        '11': '50To54Years',
-        '12': '55To59Years',
-        '13': '60To64Years',
-        '14': '65To69Years',
-        '15': '70To74Years',
-        '16': '75To79Years',
-        '17': '80To84Years',
-        '18': '85OrMoreYears'
-    }
-    df = df.replace({"AGEGRP": _dict})
+    df = df.replace({
+        "AGEGRP": {
+            '1': '0To4Years',
+            '2': '5To9Years',
+            '3': '10To14Years',
+            '4': '15To19Years',
+            '5': '20To24Years',
+            '6': '25To29Years',
+            '7': '30To34Years',
+            '8': '35To39Years',
+            '9': '40To44Years',
+            '10': '45To49Years',
+            '11': '50To54Years',
+            '12': '55To59Years',
+            '13': '60To64Years',
+            '14': '65To69Years',
+            '15': '70To74Years',
+            '16': '75To79Years',
+            '17': '80To84Years',
+            '18': '85OrMoreYears'
+        }
+    })
     # Dropping unwanted columns.
     df.drop(columns=['REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
             'ESTIMATESBASE2000','CENSUS2010POP','POPESTIMATE2010'],\
@@ -82,19 +81,20 @@ def state2000():
     df = df.melt(id_vars=['geo_ID','AGEGRP','SEX','RACE'], var_name='Year'\
             ,value_name='observation')
     # Making the years more understandable.
-    _dict = {
-        'POPESTIMATE2000': '2000',
-        'POPESTIMATE2001': '2001',
-        'POPESTIMATE2002': '2002',
-        'POPESTIMATE2003': '2003',
-        'POPESTIMATE2004': '2004',
-        'POPESTIMATE2005': '2005',
-        'POPESTIMATE2006': '2006',
-        'POPESTIMATE2007': '2007',
-        'POPESTIMATE2008': '2008',
-        'POPESTIMATE2009': '2009'
-    }
-    df = df.replace({"Year": _dict})
+    df = df.replace({
+        "Year": {
+            'POPESTIMATE2000': '2000',
+            'POPESTIMATE2001': '2001',
+            'POPESTIMATE2002': '2002',
+            'POPESTIMATE2003': '2003',
+            'POPESTIMATE2004': '2004',
+            'POPESTIMATE2005': '2005',
+            'POPESTIMATE2006': '2006',
+            'POPESTIMATE2007': '2007',
+            'POPESTIMATE2008': '2008',
+            'POPESTIMATE2009': '2009'
+        }
+    })
     df['SVs'] = 'Count_Person_' + df['AGEGRP'] + '_' + df['SEX'] + '_' + \
             df['RACE']
     df = df.drop(columns=['AGEGRP', 'RACE', 'SEX'])
