@@ -34,6 +34,7 @@ def national2010():
         df = pd.read_excel(_urls, sheet, skiprows=4, header=0)
         # Dropping extra columns
         df = df.drop(['Census', 'Estimates Base'], axis=1)
+        # Deleting the row with garbage information , 0 denotes the row
         df = df.drop([0], axis=0)
         # Cleaning the data to
         df['Unnamed: 0'] = df['Unnamed: 0'].str.replace(".", "").str.replace\

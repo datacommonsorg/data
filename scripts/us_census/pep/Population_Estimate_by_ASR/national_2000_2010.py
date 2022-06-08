@@ -53,23 +53,24 @@ def national2000():
     df = df.melt(id_vars=['Year','AGE'], var_name='sv' ,\
         value_name='observation')
     # Providing proper columns names.
-    _sexrace_dict = {
-        'TOT_MALE': 'Male',
-        'TOT_FEMALE': 'Female',
-        'WA_MALE': 'Male_WhiteAlone',
-        'WA_FEMALE': 'Female_WhiteAlone',
-        'BA_MALE': 'Male_BlackOrAfricanAmericanAlone',
-        'BA_FEMALE': 'Female_BlackOrAfricanAmericanAlone',
-        'IA_MALE': 'Male_AmericanIndianAndAlaskaNativeAlone',
-        'IA_FEMALE': 'Female_AmericanIndianAndAlaskaNativeAlone',
-        'AA_MALE': 'Male_AsianAlone',
-        'AA_FEMALE': 'Female_AsianAlone',
-        'NA_MALE': 'Male_NativeHawaiianAndOtherPacificIslanderAlone',
-        'NA_FEMALE': 'Female_NativeHawaiianAndOtherPacificIslanderAlone',
-        'TOM_MALE': 'Male_TwoOrMoreRaces',
-        'TOM_FEMALE': 'Female_TwoOrMoreRaces'
-    }
-    df = df.replace({"sv": _sexrace_dict})
+    df = df.replace({
+        "sv": {
+            'TOT_MALE': 'Male',
+            'TOT_FEMALE': 'Female',
+            'WA_MALE': 'Male_WhiteAlone',
+            'WA_FEMALE': 'Female_WhiteAlone',
+            'BA_MALE': 'Male_BlackOrAfricanAmericanAlone',
+            'BA_FEMALE': 'Female_BlackOrAfricanAmericanAlone',
+            'IA_MALE': 'Male_AmericanIndianAndAlaskaNativeAlone',
+            'IA_FEMALE': 'Female_AmericanIndianAndAlaskaNativeAlone',
+            'AA_MALE': 'Male_AsianAlone',
+            'AA_FEMALE': 'Female_AsianAlone',
+            'NA_MALE': 'Male_NativeHawaiianAndOtherPacificIslanderAlone',
+            'NA_FEMALE': 'Female_NativeHawaiianAndOtherPacificIslanderAlone',
+            'TOM_MALE': 'Male_TwoOrMoreRaces',
+            'TOM_FEMALE': 'Female_TwoOrMoreRaces'
+        }
+    })
     # Giving proper column names.
     df['SVs'] = 'Count_Person_' + df['AGE'] + '_' + df['sv']
     df = df.drop(columns=['AGE', 'sv'])
