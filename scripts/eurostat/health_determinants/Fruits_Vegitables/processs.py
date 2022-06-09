@@ -1,4 +1,4 @@
-#  Copyright 2022 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ def hlth_ehis_fv3e(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv3i(df: pd.DataFrame) -> pd.DataFrame:
    """
-   Cleans the file hlth_ehis_fv3e for concatenation in Final CSV.
+   Cleans the file hlth_ehis_fv3i for concatenation in Final CSV.
    Arguments: df (pd.DataFrame), the raw df as the input
    Returns: df (pd.DataFrame), provides the cleaned df as output
    """
@@ -86,7 +86,7 @@ def hlth_ehis_fv3i(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv3u(df: pd.DataFrame) -> pd.DataFrame:
    """
-   Cleans the file hlth_ehis_pe9u for concatenation in Final CSV.
+   Cleans the file hlth_ehis_fv3u for concatenation in Final CSV.
    Arguments: df (pd.DataFrame), the raw df as the input
    Returns: df (pd.DataFrame), provides the cleaned df as output
    """
@@ -115,7 +115,7 @@ def hlth_ehis_fv3u(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv1e(df: pd.DataFrame) -> pd.DataFrame:
    """
-   Cleans the file hlth_ehis_fv3e for concatenation in Final CSV.
+   Cleans the file hlth_ehis_fv1e for concatenation in Final CSV.
    Arguments: df (pd.DataFrame), the raw df as the input
    Returns: df (pd.DataFrame), provides the cleaned df as output
    """
@@ -141,7 +141,7 @@ def hlth_ehis_fv1e(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv1u(df: pd.DataFrame) -> pd.DataFrame:
    """
-   Cleans the file hlth_ehis_pe9u for concatenation in Final CSV.
+   Cleans the file hlth_ehis_fv1u for concatenation in Final CSV.
    Arguments: df (pd.DataFrame), the raw df as the input
    Returns: df (pd.DataFrame), provides the cleaned df as output
    """
@@ -174,7 +174,7 @@ def hlth_ehis_fv1u(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv3b(df: pd.DataFrame) -> pd.DataFrame:
   """
-  Cleans the file hlth_ehis_pe9e for concatenation in Final CSV
+  Cleans the file hlth_ehis_fv3b for concatenation in Final CSV
   Input Taken: DF
   Output Provided: DF
   """
@@ -200,7 +200,7 @@ def hlth_ehis_fv3b(df: pd.DataFrame) -> pd.DataFrame:
   return df
 def hlth_ehis_fv3c(df: pd.DataFrame) -> pd.DataFrame:
   """
-  Cleans the file hlth_ehis_pe9e for concatenation in Final CSV
+  Cleans the file hlth_ehis_fv3c for concatenation in Final CSV
   Input Taken: DF
   Output Provided: DF
   """
@@ -226,7 +226,7 @@ def hlth_ehis_fv3c(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv3d(df: pd.DataFrame) -> pd.DataFrame:
   """
-  Cleans the file hlth_ehis_pe9e for concatenation in Final CSV
+  Cleans the file hlth_ehis_fv3d for concatenation in Final CSV
   Input Taken: DF
   Output Provided: DF
   """
@@ -305,7 +305,7 @@ def hlth_ehis_fv1b(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv1c(df: pd.DataFrame) -> pd.DataFrame:
  """
- Cleans the file hlth_ehis_pe9e for concatenation in Final CSV
+ Cleans the file hlth_ehis_fv1c for concatenation in Final CSV
  Input Taken: DF
  Output Provided: DF
  """
@@ -333,7 +333,7 @@ def hlth_ehis_fv1c(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv1i(df: pd.DataFrame) -> pd.DataFrame:
  """
- Cleans the file hlth_ehis_pe9e for concatenation in Final CSV
+ Cleans the file hlth_ehis_fv1i for concatenation in Final CSV
  Input Taken: DF
  Output Provided: DF
  """
@@ -362,7 +362,7 @@ def hlth_ehis_fv1i(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv1m(df: pd.DataFrame) -> pd.DataFrame:
  """
- Cleans the file hlth_ehis_pe9e for concatenation in Final CSV
+ Cleans the file hlth_ehis_fv1m for concatenation in Final CSV
  Input Taken: DF
  Output Provided: DF
  """
@@ -389,7 +389,7 @@ def hlth_ehis_fv1m(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv1d(df: pd.DataFrame) -> pd.DataFrame:
  """
- Cleans the file hlth_ehis_pe9e for concatenation in Final CSV
+ Cleans the file hlth_ehis_fv1d for concatenation in Final CSV
  Input Taken: DF
  Output Provided: DF
  """
@@ -418,7 +418,7 @@ def hlth_ehis_fv1d(df: pd.DataFrame) -> pd.DataFrame:
  
 def hlth_ehis_fv7e(df: pd.DataFrame) -> pd.DataFrame:
  """
- Cleans the file hlth_ehis_pe9e for concatenation in Final CSV
+ Cleans the file hlth_ehis_fv7e for concatenation in Final CSV
  Input Taken: DF
  Output Provided: DF
  """
@@ -438,6 +438,106 @@ def hlth_ehis_fv7e(df: pd.DataFrame) -> pd.DataFrame:
      '_'+'HealthEnhancingEnhancingConsumptionOfFruitsAndVegetables_'+\
        'AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
  df.drop(columns=['unit','age','isced11','frequenc','sex'],inplace=True)
+ df = df.melt(id_vars=['SV','time'], var_name='geo'\
+         ,value_name='observation')
+ return df
+ 
+def hlth_ehis_fv7m(df: pd.DataFrame) -> pd.DataFrame:
+ """
+ Cleans the file hlth_ehis_fv7m for concatenation in Final CSV
+ Input Taken: DF
+ Output Provided: DF
+ """
+ cols = ['unit,frequenc,sex,age,bmi,time', 'EU27_2020','BE','BG','CZ','DK',
+ 'DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU','MT','AT',
+ 'PL','PT','RO','SI','SK','FI','SE','IS','NO','RS','TR']
+ df.columns=cols
+ col1 = "unit,frequenc,sex,age,bmi,time"
+ df = _split_column(df,col1)
+ # Filtering out the wanted rows and columns 
+ df = df[df['age'] == 'TOTAL']
+ df = _replace_frequenc(df)
+ df = _replace_sex(df)
+ df = _replace_bmi(df)
+ df.drop(columns=['EU27_2020'],inplace=True)
+ df['SV'] = 'Count_Person_'+df['bmi']+'_'+df['frequenc'] +'_'+df['sex']+\
+     '_'+'HealthEnhancingEnhancingConsumptionOfFruitsAndVegetables_'+\
+       'AsAFractionOf_Count_Person_'+df['bmi']+'_'+df['sex']
+ df.drop(columns=['unit','age','bmi','frequenc','sex'],inplace=True)
+ df = df.melt(id_vars=['SV','time'], var_name='geo'\
+         ,value_name='observation')
+ return df
+ 
+def hlth_ehis_fv7i(df: pd.DataFrame) -> pd.DataFrame:
+ """
+ Cleans the file hlth_ehis_fv7i for concatenation in Final CSV
+ Input Taken: DF
+ Output Provided: DF
+ """
+ cols = ['unit,frequenc,sex,age,quant_inc,time','EU27_2020','BE','BG','CZ',
+ 'DK','DE','EE','IE','EL','ES','FR','HR','IT','CY','LV','LT','LU','HU','MT',
+ 'AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','RS','TR']
+ df.columns=cols
+ col1 = "unit,frequenc,sex,age,quant_inc,time"
+ df = _split_column(df,col1)
+ # Filtering out the wanted rows and columns 
+ df = df[df['age'] == 'TOTAL']
+ df = _replace_frequenc(df)
+ df = _replace_sex(df)
+ df = _replace_quant_inc(df)
+ df.drop(columns=['EU27_2020'],inplace=True)
+ df['SV'] = 'Count_Person_'+ df['frequenc']+'_' + df['quant_inc']+ '_'+\
+   df['sex']+'_'+'HealthEnhancingEnhancingConsumptionOfFruitsAndVegetables_'+\
+   'AsAFractionOf_Count_Person_'+ df['quant_inc']+'_'+ df['sex']
+ df.drop(columns=['unit','age','quant_inc','frequenc','sex'],inplace=True)
+ df = df.melt(id_vars=['SV','time'], var_name='geo'\
+         ,value_name='observation')
+ return df
+ 
+def hlth_ehis_de7(df: pd.DataFrame) -> pd.DataFrame:
+ """
+ Cleans the file hlth_ehis_de7 for concatenation in Final CSV
+ Input Taken: DF
+ Output Provided: DF
+ """
+ cols = ['sex,age,frequenc,isced97,time','BE','BG','CZ','EE','EL','ES','FR',
+ 'CY','LV','HU','MT','PL','RO','SI','SK','TR']
+ df.columns=cols
+ col1 = "sex,age,frequenc,isced97,time"
+ df = _split_column(df,col1)
+ # Filtering out the wanted rows and columns 
+ df = df[df['age'] == 'TOTAL']
+ df = _replace_frequenc(df)
+ df = _replace_sex(df)
+ df = _replace_isced97(df)
+ df['SV'] = 'Count_Person_'+ df['frequenc']+'_' + df['isced97']+ '_'+\
+   df['sex']+'_'+'HealthEnhancingEnhancingConsumptionOfFruitsAndVegetables_'+\
+   'AsAFractionOf_Count_Person_'+ df['isced97']+'_'+ df['sex']
+ df.drop(columns=['age','isced97','frequenc','sex'],inplace=True)
+ df = df.melt(id_vars=['SV','time'], var_name='geo'\
+         ,value_name='observation')
+ return df
+ 
+def hlth_ehis_de8(df: pd.DataFrame) -> pd.DataFrame:
+ """
+ Cleans the file hlth_ehis_de8 for concatenation in Final CSV
+ Input Taken: DF
+ Output Provided: DF
+ """
+ cols = ['sex,age,frequenc,isced97,time','BE','BG','CZ','EE','EL','ES','FR',
+ 'CY','LV','HU','MT','PL','RO','SI','SK','TR']
+ df.columns=cols
+ col1 = "sex,age,frequenc,isced97,time"
+ df = _split_column(df,col1)
+ # Filtering out the wanted rows and columns 
+ df = df[df['age'] == 'TOTAL']
+ df = _replace_frequenc(df)
+ df = _replace_sex(df)
+ df = _replace_isced97(df)
+ df['SV'] = 'Count_Person_'+ df['frequenc']+'_' + df['isced97']+ '_'+\
+   df['sex']+'_'+'HealthEnhancingEnhancingConsumptionOfFruitsAndVegetables_'+\
+   'AsAFractionOf_Count_Person_'+ df['isced97']+'_'+ df['sex']
+ df.drop(columns=['age','isced97','frequenc','sex'],inplace=True)
  df = df.melt(id_vars=['SV','time'], var_name='geo'\
          ,value_name='observation')
  return df
@@ -545,6 +645,25 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
        'TOTAL': 'Total'
        }
    df = df.replace({'isced11': isced11})
+   return df
+ 
+def _replace_isced97(df: pd.DataFrame) -> pd.DataFrame:
+   """
+   Replaces values of a single column into true values
+   from metadata returns the DF.
+   Arguments: df (pd.DataFrame)
+   Returns: df (pd.DataFrame)
+   """
+   isced97 = {
+       'ED0-2': 'EducationalAttainment'+\
+       'PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
+       'ED3_4': 'EducationalAttainment'+\
+       'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+       'ED5_6': 'EducationalAttainment'+\
+       'FirstOrSecondStageOfTertiaryEducation',
+       'TOTAL': 'Total'
+       }
+   df = df.replace({'isced97': isced97})
    return df
  
 def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
@@ -669,7 +788,11 @@ class EuroStatConsumptionOfFruitsAndVegetables:
                "hlth_ehis_fv1i": hlth_ehis_fv1i,
                "hlth_ehis_fv1m": hlth_ehis_fv1m,
                "hlth_ehis_fv1d": hlth_ehis_fv1d,
-               "hlth_ehis_fv7e": hlth_ehis_fv7e
+               "hlth_ehis_fv7e": hlth_ehis_fv7e,
+               "hlth_ehis_fv7m": hlth_ehis_fv7m,
+               "hlth_ehis_fv7i": hlth_ehis_fv7i,
+               "hlth_ehis_de7": hlth_ehis_de7,
+               "hlth_ehis_de8": hlth_ehis_de8
            }
            df = function_dict[file_name](df)
            df['SV'] = df['SV'].str.replace('_Total', '')

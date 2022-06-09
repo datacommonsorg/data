@@ -28,8 +28,8 @@ def download_file(url) -> None:
    """
    # This extracts the filename form the complete URL,
    # also removes the .gz extension.
-   # Example - ....-prod/BulkDownloadListing?file=data/hlth_ehis_pe9e.tsv.gz
-   # is made hlth_ehis_pe9e.tsv
+   # Example - ....-prod/BulkDownloadListing?file=data/hlth_ehis_fv3e.tsv.gz
+   # is made hlth_ehis_fv3e.tsv
    file_name = url.split("/")[-1][:-3]
    path = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'input_files/'
    if not os.path.exists(path):
@@ -76,7 +76,15 @@ if __name__ == "__main__":
        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
            "BulkDownloadListing?file=data/hlth_ehis_fv1d.tsv.gz",
        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-           "BulkDownloadListing?file=data/hlth_ehis_fv7e.tsv.gz"
+           "BulkDownloadListing?file=data/hlth_ehis_fv7e.tsv.gz",
+       "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+           "BulkDownloadListing?file=data/hlth_ehis_fv7m.tsv.gz",
+       "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+           "BulkDownloadListing?file=data/hlth_ehis_fv7i.tsv.gz",
+       "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+           "BulkDownloadListing?file=data/hlth_ehis_de7.tsv.gz",
+       "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+           "BulkDownloadListing?file=data/hlth_ehis_de8.tsv.gz"
        ]
    for file in files:
        download_file(file)
