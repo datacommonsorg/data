@@ -52,4 +52,4 @@ Run the test cases
 
 The below script will download the data and clean the data, Also generate final csv, mcf and tmcf files.
 
-`/bin/sh scripts/us_census/pep/Population_Estimate_by_ASR/process.py`
+`/bin/python3 scripts/us_census/pep/Population_Estimate_by_ASR/process.py`
