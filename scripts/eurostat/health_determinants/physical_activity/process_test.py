@@ -37,16 +37,16 @@ class TestPreprocess(unittest.TestCase):
     cleaned_csv_file_path = os.path.join(op_data_folder, "data.csv")
     mcf_file_path = os.path.join(op_data_folder, "test_census.mcf")
     tmcf_file_path = os.path.join(op_data_folder, "test_census.tmcf")
-
-    ip_data = [
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'test_files/hlth_ehis_pe1u.tsv',
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'test_files/hlth_ehis_pe9c.tsv'
-    ]
+    test_input_path = (os.path.dirname(os.path.abspath(__file__)) + os.sep
+        + 'test_files/test_input_files')
+    ip_data = os.listdir(test_input_path)
+    ip_data = [os.path.dirname(os.path.abspath(__file__)) + os.sep
+        + 'test_files/test_input_files' + os.sep + file for file in ip_data]
+        
     base = EuroStatPhysicalActivity(ip_data, cleaned_csv_file_path,
                                     mcf_file_path, tmcf_file_path)
     base.process()
+
 
     def test_mcf_tmcf_files(self):
         """

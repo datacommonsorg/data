@@ -16,6 +16,12 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 from sys import path
+# For import common.replacement_functions
+path.insert(1, '../')
+from common.replacement_functions import (_replace_sex,_replace_physact,
+    _replace_isced11,_replace_quant_inc,_replace_deg_urb,_replace_levels,
+    _replace_duration,_replace_c_birth,_replace_citizen,_replace_lev_limit,
+    _replace_bmi,_split_column)
 # For import util.alpha2_to_dcid
 path.insert(1, '../../../../')
 
@@ -26,6 +32,7 @@ from util.alpha2_to_dcid import COUNTRY_MAP
 from absl import app
 from absl import flags
 
+
 # pd.set_option("display.max_columns", None)
 # pd.set_option("display.max_rows", None)
 
@@ -35,248 +42,9 @@ default_input_path = os.path.dirname(
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
-def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({'sex': {'F': 'Female', 'M': 'Male', 'T': 'Total'}})
-    return df
-
-
-def _replace_physact(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        'physact': {
-            'MV_AERO': 'Aerobic',
-            'MV_MSC': 'MuscleStrengthening',
-            'MV_AERO_MSC': 'AerobicOrMuscleStrengthening',
-            'MV_WALK_GET': 'Walking',
-            'MV_CYCL_GET': 'Cycling',
-            'MV_AERO_SPRT': 'AerobicSports'
-        }
-    })
-    return df
-
-
-def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({'isced11': {
-        'ED0-2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED0_2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED3-4': 'EducationalAttainment'+\
-        'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED3_4': 'EducationalAttainment'+\
-            'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
-        'ED5-8': 'EducationalAttainmentTertiaryEducation',
-        'ED5_8': 'EducationalAttainmentTertiaryEducation',
-        'TOTAL': 'Total'
-        }})
-    return df
-
-
-def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        'quant_inc': {
-            'TOTAL': 'Total',
-            'QU1': 'Percentile0To20',
-            'QU2': 'Percentile20To40',
-            'QU3': 'Percentile40To60',
-            'QU4': 'Percentile60To80',
-            'QU5': 'Percentile80To100'
-        }
-    })
-    return df
-
-
-def _replace_deg_urb(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        'deg_urb': {
-            'TOTAL': 'Total',
-            'DEG1': 'Cities',
-            'DEG2': 'TownsAndSuburbs',
-            'DEG3': 'RuralAreas',
-        }
-    })
-    return df
-
-
-def _replace_levels(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        'levels': {
-            'HVY': 'HeavyActivity',
-            'MOD': 'ModerateActivity',
-            'MOD_HVY': 'ModerateActivityOrHeavyActivity',
-            'NONE_LGHT': 'NoneActivityOrLightActivity'
-        }
-    })
-    return df
-
-
-def _replace_duration(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        'duration': {
-            'MN0': '0Minutes',
-            'MN1-149': '1To149Minutes',
-            'MN150-299': '150To299Minutes',
-            'MN_GE150': '150OrMoreMinutes',
-            'MN_GE300': '300OrMoreMinutes'
-        }
-    })
-    return df
-
-
-def _replace_c_birth(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        'c_birth': {
-            'EU28_FOR': 'ForeignBornWithinEU28',
-            'NEU28_FOR': 'ForeignBornOutsideEU28',
-            'FOR': 'ForeignBorn',
-            'NAT': 'Native'
-        }
-    })
-    return df
-
-
-def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        'citizen': {
-            'EU28_FOR': 'ForeignWithinEU28',
-            'NEU28_FOR': 'ForeignOutsideEU28',
-            'FOR': 'NotACitizen',
-            'NAT': 'Citizen'
-        }
-    })
-    return df
-
-
-def _replace_lev_limit(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        'lev_limit': {
-            'MOD': 'ModerateActivityLimitation',
-            'SEV': 'SevereActivityLimitation',
-            'SM_SEV': 'LimitedActivityLimitation',
-            'NONE': 'NoActivityLimitation'
-        }
-    })
-    return df
-
-
-def _replace_bmi(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        'bmi': {
-            'BMI_LT18P5': 'Underweight',
-            'BMI18P5-24': 'Normalweight',
-            'BMI_GE25': 'Overweight',
-            'BMI25-29': 'PreObese',
-            'BMI_GE30': 'Obesity'
-        }
-    })
-    return df
-
-
-def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
-    """
-    Divides a single column into multiple columns and returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to divide the column
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
-    info = col.split(",")
-    df[info] = df[col].str.split(',', expand=True)
-    df.drop(columns=[col], inplace=True)
-    return df
-
-
-def hlth_ehis_pe9e(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe9e for concatenation in Final CSV.
+    Cleans the file healthenhancing_sexeducation for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -301,9 +69,9 @@ def hlth_ehis_pe9e(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe9i(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe9i for concatenation in Final CSV.
+    Cleans the file healthenhancing_sexincome for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -334,9 +102,10 @@ def hlth_ehis_pe9i(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe9u(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe9u for concatenation in Final CSV.
+    Cleans the file healthenhancing_sexurbanisation
+    for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -366,9 +135,9 @@ def hlth_ehis_pe9u(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe1e(df: pd.DataFrame) -> pd.DataFrame:
+def workrelated_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV.
+    Cleans the file workrelated_sexeducation for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -398,9 +167,9 @@ def hlth_ehis_pe1e(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe1i(df: pd.DataFrame) -> pd.DataFrame:
+def workrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe1i for concatenation in Final CSV.
+    Cleans the file workrelated_sexincome for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -430,9 +199,9 @@ def hlth_ehis_pe1i(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe1u(df: pd.DataFrame) -> pd.DataFrame:
+def workrelated_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe1u for concatenation in Final CSV.
+    Cleans the file workrelated_sexurbanisation for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -463,9 +232,9 @@ def hlth_ehis_pe1u(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe3e(df: pd.DataFrame) -> pd.DataFrame:
+def nonworkrelated_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe3e for concatenation in Final CSV.
+    Cleans the file nonworkrelated_sexeducation for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -490,9 +259,9 @@ def hlth_ehis_pe3e(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe3i(df: pd.DataFrame) -> pd.DataFrame:
+def nonworkrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe3i for concatenation in Final CSV.
+    Cleans the file nonworkrelated_sexincome for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -522,9 +291,10 @@ def hlth_ehis_pe3i(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe3u(df: pd.DataFrame) -> pd.DataFrame:
+def nonworkrelated_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe3u for concatenation in Final CSV.
+    Cleans the file nonworkrelated_sexurbanisation
+    for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -555,9 +325,11 @@ def hlth_ehis_pe3u(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe2e(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_nonworkrelated_sexeducation(df: pd.DataFrame)\
+                                                -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe2e for concatenation in Final CSV.
+    Cleans the file healthenhancing_nonworkrelated_sexeducation
+    for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -582,9 +354,10 @@ def hlth_ehis_pe2e(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe2i(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_nonworkrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe2i for concatenation in Final CSV.
+    Cleans the file healthenhancing_nonworkrelated_sexincome
+    for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -610,9 +383,11 @@ def hlth_ehis_pe2i(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe2u(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_nonworkrelated_sexurbanisation(df: pd.DataFrame)\
+                                                    -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe2u for concatenation in Final CSV.
+    Cleans the file healthenhancing_nonworkrelated_sexurbanisation
+    for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -642,9 +417,9 @@ def hlth_ehis_pe2u(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe9b(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_sexnativity(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe9b for concatenation in Final CSV.
+    Cleans the file healthenhancing_sexnativity for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -674,9 +449,10 @@ def hlth_ehis_pe9b(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe9c(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_sexcitizenship(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe9c for concatenation in Final CSV.
+    Cleans the file healthenhancing_sexcitizenship
+    for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -706,9 +482,10 @@ def hlth_ehis_pe9c(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe9d(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_sexactivitylimitation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe9d for concatenation in Final CSV.
+    Cleans the file healthenhancing_sexactivitylimitation
+    for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -739,9 +516,10 @@ def hlth_ehis_pe9d(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_pe2m(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_nonworkrelated_sexbmi(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_pe2m for concatenation in Final CSV.
+    Cleans the file healthenhancing_nonworkrelated_sexbmi
+    for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -771,9 +549,9 @@ def hlth_ehis_pe2m(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def hlth_ehis_de9(df: pd.DataFrame) -> pd.DataFrame:
+def dailypractice_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_de9 for concatenation in Final CSV.
+    Cleans the file dailypractice_sexeducation for concatenation in Final CSV.
 
     Args: df (pd.DataFrame): the raw df as the input
 
@@ -847,28 +625,20 @@ class EuroStatPhysicalActivity:
         # pylint: disable=R0914
         # pylint: disable=R0912
         # pylint: disable=R0915
-        mcf_template = ("Node: dcid:{}\n"
+        mcf_template = ("Node: dcid:{inp1}\n"
                         "typeOf: dcs:StatisticalVariable\n"
-                        "populationType: dcs:Person{}{}{}{}{}{}{}{}{}{}{}{}\n"
+                        "populationType: dcs:Person{inp2}{inp3}{inp4}{inp5}"
+                        "{inp6}{inp7}{inp8}{inp9}{inp10}{inp11}{inp12}{inp13}\n"
                         "statType: dcs:measuredValue\n"
                         "measuredProperty: dcs:count\n")
         final_mcf_template = ""
         for sv in sv_list:
             if "Total" in sv:
                 continue
-            incomequin = ''
-            gender = ''
-            education = ''
-            healthbehavior = ''
-            exercise = ''
-            residence = ''
-            activity = ''
-            duration = ''
-            countryofbirth = ''
-            citizenship = ''
-            lev_limit = ''
-            bmi = ''
-
+            incomequin = gender = education = healthbehavior = exercise = ''
+            residence = activity = duration = countryofbirth = citizenship = ''
+            lev_limit = bmi = ''
+            
             sv_temp = sv.split("_AsAFractionOf_")
             denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
             sv_prop = sv_temp[0].split("_")
@@ -890,8 +660,7 @@ class EuroStatPhysicalActivity:
                 elif "Percentile" in prop:
                     incomequin = "\nincome: ["+prop.replace("Percentile",\
                         "").replace("To"," ")+" Percentile]"
-                elif "Cities" in prop or "TownsAndSuburbs" in prop \
-                    or "RuralAreas" in prop:
+                elif "Urban" in prop or "Rural" in prop:
                     residence = "\nplaceOfResidenceClassification: dcs:" + prop
                 elif "Limitation" in prop:
                     lev_limit = "\nglobalActivityLimitationIndicator: dcs:"\
@@ -924,9 +693,10 @@ class EuroStatPhysicalActivity:
                     healthbehavior = healthbehavior + bmi
 
             final_mcf_template += mcf_template.format(
-                sv, denominator, incomequin, education, healthbehavior,
-                exercise, residence, activity, duration, gender, countryofbirth,
-                citizenship, lev_limit) + "\n"
+                inp1=sv, inp2=denominator, inp3=incomequin, inp4=education, 
+                inp5=healthbehavior, inp6=exercise, inp7=residence, 
+                inp8=activity, inp9=duration, inp10=gender, 
+                inp11=countryofbirth, inp12=citizenship, inp13=lev_limit) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
@@ -958,23 +728,40 @@ class EuroStatPhysicalActivity:
             # Read till -4 inorder to remove the .tsv extension
             file_name = file_path.split("/")[-1][:-4]
             function_dict = {
-                "hlth_ehis_pe9e": hlth_ehis_pe9e,
-                "hlth_ehis_pe9i": hlth_ehis_pe9i,
-                "hlth_ehis_pe9u": hlth_ehis_pe9u,
-                "hlth_ehis_pe1e": hlth_ehis_pe1e,
-                "hlth_ehis_pe1i": hlth_ehis_pe1i,
-                "hlth_ehis_pe1u": hlth_ehis_pe1u,
-                "hlth_ehis_pe3e": hlth_ehis_pe3e,
-                "hlth_ehis_pe3i": hlth_ehis_pe3i,
-                "hlth_ehis_pe3u": hlth_ehis_pe3u,
-                "hlth_ehis_pe2e": hlth_ehis_pe2e,
-                "hlth_ehis_pe2i": hlth_ehis_pe2i,
-                "hlth_ehis_pe2u": hlth_ehis_pe2u,
-                "hlth_ehis_pe9b": hlth_ehis_pe9b,
-                "hlth_ehis_pe9c": hlth_ehis_pe9c,
-                "hlth_ehis_pe9d": hlth_ehis_pe9d,
-                "hlth_ehis_pe2m": hlth_ehis_pe2m,
-                "hlth_ehis_de9": hlth_ehis_de9
+                "hlth_ehis_pe9e":
+                    healthenhancing_sexeducation,
+                "hlth_ehis_pe9i":
+                    healthenhancing_sexincome,
+                "hlth_ehis_pe9u":
+                    healthenhancing_sexurbanisation,
+                "hlth_ehis_pe1e":
+                    workrelated_sexeducation,
+                "hlth_ehis_pe1i":
+                    workrelated_sexincome,
+                "hlth_ehis_pe1u":
+                    workrelated_sexurbanisation,
+                "hlth_ehis_pe3e":
+                    nonworkrelated_sexeducation,
+                "hlth_ehis_pe3i":
+                    nonworkrelated_sexincome,
+                "hlth_ehis_pe3u":
+                    nonworkrelated_sexurbanisation,
+                "hlth_ehis_pe2e":
+                    healthenhancing_nonworkrelated_sexeducation,
+                "hlth_ehis_pe2i":
+                    healthenhancing_nonworkrelated_sexincome,
+                "hlth_ehis_pe2u":
+                    healthenhancing_nonworkrelated_sexurbanisation,
+                "hlth_ehis_pe9b":
+                    healthenhancing_sexnativity,
+                "hlth_ehis_pe9c":
+                    healthenhancing_sexcitizenship,
+                "hlth_ehis_pe9d":
+                    healthenhancing_sexactivitylimitation,
+                "hlth_ehis_pe2m":
+                    healthenhancing_nonworkrelated_sexbmi,
+                "hlth_ehis_de9":
+                    dailypractice_sexeducation
             }
             df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
