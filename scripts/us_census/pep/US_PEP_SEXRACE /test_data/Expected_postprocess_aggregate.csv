@@ -1,6 +1,0 @@
-Year,geo_ID,Count_Person_Male_WhiteAlone,Count_Person_Female_WhiteAlone,Count_Person_Male_BlackOrAfricanAmericanAlone,Count_Person_Female_BlackOrAfricanAmericanAlone,Count_Person_Male_AmericanIndianAndAlaskaNativeAlone,Count_Person_Female_AmericanIndianAndAlaskaNativeAlone,Count_Person_Male_AsianOrPacificIslander,Count_Person_Female_AsianOrPacificIslander,Count_Person_Male,Count_Person_Female
-1970,geoId/01001,8760,8960,3285,3629,,,,,12050,12611
-1970,geoId/01003,24016,24840,5029,5502,,,,,29109,30422
-1970,geoId/01005,5799,6408,4672,5747,,,,,10479,12165
-1970,geoId/01007,4911,5069,1847,1989,,,,,6762,7062
-1992,geoId/01,1478937,1566261,485923,568138,7999,8118,11204,12689,1984063,2155206
