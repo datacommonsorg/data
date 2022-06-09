@@ -19,6 +19,7 @@ and Count_person_Female are aggregated for this file.
 
 import pandas as pd
 
+
 def _process_county_1970_1979(url):
     """
     Function Loads input csv datasets
@@ -63,12 +64,16 @@ def _process_county_1970_1979(url):
     df = df.drop(columns=COLUMNS_TO_SUM)
 
     # changing the column values as per metadata
-    df=df.replace({'Race/Sex code':{1: 'Count_Person_Male_WhiteAlone',
-    2: 'Count_Person_Female_WhiteAlone',
-    3:'Count_Person_Male_BlackOrAfricanAmericanAlone',
-    4:'Count_Person_Female_BlackOrAfricanAmericanAlone',
-    5:'Count_Person_Male_OtherRaces',
-    6:'Count_Person_Female_OtherRaces'}})
+    df = df.replace({
+        'Race/Sex code': {
+            1: 'Count_Person_Male_WhiteAlone',
+            2: 'Count_Person_Female_WhiteAlone',
+            3: 'Count_Person_Male_BlackOrAfricanAmericanAlone',
+            4: 'Count_Person_Female_BlackOrAfricanAmericanAlone',
+            5: 'Count_Person_Male_OtherRaces',
+            6: 'Count_Person_Female_OtherRaces'
+        }
+    })
 
     # grouping the df as per columns provided
     # performs the provided functions on the data
