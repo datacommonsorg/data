@@ -24,8 +24,10 @@ from input_data import input_urls
 def download_file(url) -> None:
     """
     Function to Download and Unzip the file provided in url
-    Args: url (str), url of the file to be downloaded as a string
-    Returns: None
+    Args:
+        url (str): url of the file to be downloaded as a string
+    Returns: 
+        None
     """
     # This extracts the filename form the complete URL,
     # also removes the .gz extension.
@@ -36,7 +38,6 @@ def download_file(url) -> None:
     if not os.path.exists(path):
         os.mkdir(path)
     out_file = path + file_name
-    print(out_file)
 
     with urllib.request.urlopen(url) as response:
         with gzip.GzipFile(fileobj=response) as uncompressed:
@@ -47,5 +48,5 @@ def download_file(url) -> None:
         f.write(file_content)
 
 if __name__ == "__main__":
-    for file in input_urls:
-        download_file(file)
+    for file_download_url in input_urls:
+        download_file(file_download_url)

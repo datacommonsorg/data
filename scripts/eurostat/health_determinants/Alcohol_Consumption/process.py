@@ -16,6 +16,12 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file
 """
 from sys import path
+# For import common.replacement_functions
+# path.insert(1, '../')
+# from common.replacement_functions import (_replace_sex, _replace_frequenc,
+#                                           _replace_isced11, _replace_quant_inc,
+#                                           _replace_deg_urb, _replace_c_birth,
+#                                           _replace_citizen, _split_column)
 # For import util.alpha2_to_dcid
 path.insert(1, '../../../../')
 
@@ -26,7 +32,7 @@ from util.alpha2_to_dcid import COUNTRY_MAP
 from absl import app
 from absl import flags
 
-FLAGS = flags.FLAGS
+_FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
@@ -35,8 +41,10 @@ flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 def hlth_ehis_al1e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['unit,frequenc,isced11,sex,age,geo', '2019', '2014']
@@ -65,8 +73,10 @@ def hlth_ehis_al1e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al1i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1i for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['unit,quant_inc,frequenc,sex,age,geo', '2019', '2014']
@@ -95,8 +105,10 @@ def hlth_ehis_al1i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al1u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1u for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
@@ -127,8 +139,10 @@ def hlth_ehis_al1u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al3e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al3e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['unit,frequenc,isced11,sex,age,geo', '2019', '2014']
@@ -157,8 +171,10 @@ def hlth_ehis_al3e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al3i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al3i for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['unit,quant_inc,frequenc,sex,age,geo', '2019', '2014']
@@ -187,8 +203,10 @@ def hlth_ehis_al3i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al3u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al3u for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
@@ -219,8 +237,10 @@ def hlth_ehis_al3u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al2e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al2e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['unit,isced11,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ', 'DK'
@@ -250,8 +270,10 @@ def hlth_ehis_al2e(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al2i(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al2i for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['unit,quant_inc,sex,age,time','EU27_2020','EU28','BE','BG',
@@ -281,8 +303,10 @@ def hlth_ehis_al2i(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al2u(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al2u for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
@@ -312,8 +336,10 @@ def hlth_ehis_al2u(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al1b(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1b for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['unit,frequenc,sex,age,c_birth,time','EU27_2020','EU28','BE','BG',
@@ -344,8 +370,10 @@ def hlth_ehis_al1b(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_al1c(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1c for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['unit,frequenc,sex,age,citizen,time','EU27_2020','EU28','BE','BG',
@@ -376,8 +404,10 @@ def hlth_ehis_al1c(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_de10(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_de10 for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['sex,age,isced11,frequenc,unit,time','BE','BG','CZ','EL',
@@ -406,8 +436,10 @@ def hlth_ehis_de10(df: pd.DataFrame) -> pd.DataFrame:
 def hlth_ehis_de6(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_de6 for concatenation in Final CSV.
-    Arguments: df (pd.DataFrame), the raw df as the input
-    Returns: df (pd.DataFrame), provides the cleaned df as output
+    Args:
+        df (pd.DataFrame): The raw df as the input
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
     columns = ['frequenc,sex,age,isced11,time','BE','BG','CZ','EL',
@@ -444,19 +476,23 @@ def _split_column(df: pd.DataFrame,col: str) -> pd.DataFrame:
 def _replace_frequenc(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
-    from metadata returns the DF
+    from metadata returns the DF.
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({'frequenc': {
-        'DAY': 'EveryDay',
+        'DAY': 'DailyUsage',
         'LT1M': 'LessThanOnceAMonth',
         'MTH': 'EveryMonth',
-        'NM12': 'NotInTheLast12Months',
-	    'NVR': 'Never',
-	    'NVR_NM12': 'NeverOrNotInTheLast12Months',
+        'NM12': 'NotUsedInTheLast12Months',
+	    'NVR': 'NeverUsed',
+	    'NVR_NM12': 'NeverUsedOrNotUsedInTheLast12Months',
         'WEEK': 'EveryWeek',
         'GE1W': 'AtLeastOnceAWeek',
-        'NVR_OCC': 'NeverOrOccasionally',
-        'NBINGE': 'NoBingeDrinking'}})
+        'NVR_OCC': 'NeverUsedOrOccasionallyUsage',
+        'NBINGE': 'NeverUsed'}})
     return df
 
 def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
@@ -484,10 +520,9 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
         'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
         'ED3_4': 'EducationalAttainment'+\
             'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+        'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
         'ED5-8': 'EducationalAttainmentTertiaryEducation',
         'ED5_8': 'EducationalAttainmentTertiaryEducation',
-        'ED5_6': 'EducationalAttainment'+\
-            'FirstStageTertiaryEducationOrSecondStageTertiaryEducation',
         'TOTAL': 'Total'
         }})
     return df
@@ -495,7 +530,11 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
 def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
-    from metadata returns the DF
+    from metadata returns the DF.
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({'quant_inc': {
         'TOTAL': 'Total',
@@ -514,9 +553,9 @@ def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({'deg_urb': {
         'TOTAL':'Total',
-        'DEG1':'Cities',
-        'DEG2':'TownsAndSuburbs',
-        'DEG3':'RuralAreas',
+        'DEG1':'Urban',
+        'DEG2':'SemiUrban',
+        'DEG3':'Rural',
         }})
     return df
 
@@ -601,14 +640,8 @@ class EuroStatAlcoholConsumption:
         for sv in sv_list:
             if "Total" in sv:
                 continue
-            incomequin = ''
-            gender = ''
-            education = ''
-            frequenc = ''
-            healthbehavior = ''
-            residence = ''
-            countryofbirth = ''
-            citizenship = ''
+            incomequin = gender = education = frequenc = healthbehavior =\
+            residence = countryofbirth = citizenship = ''
 
             sv_temp = sv.split("_AsAFractionOf_")
             denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
@@ -619,16 +652,16 @@ class EuroStatAlcoholConsumption:
                     continue
                 if "AlcoholConsumption" in prop or "BingeDrinking" in prop\
                     or "HazardousAlcoholConsumption" in prop:
-                    healthbehavior = "\nhealthbehavior: dcs:" + prop
+                    healthbehavior = "\nhealthBehavior: dcs:" + prop
                 elif "Male" in prop or "Female" in prop:
                     gender = "\ngender: dcs:" + prop
-                elif "EveryDay" in prop or "LessThanOnceAMonth" in prop \
-                    or "EveryMonth" in prop or "NotInTheLast12Months" in prop\
-                    or "Never" in prop or "NeverOrNotInTheLast12Months" in prop \
+                elif "DailyUsage" in prop or "LessThanOnceAMonth" in prop \
+                    or "EveryMonth" in prop or "NotUsedInTheLast12Months" in prop\
+                    or "NeverUsed" in prop or "NeverUsedOrNotUsedInTheLast12Months" in prop \
                     or "EveryWeek" in prop or "AtLeastOnceAWeek" in prop\
-                    or "NeverOrOccasionally" in prop\
-                    or "NoBingeDrinking" in prop:
-                    frequenc = "\nsubstanceUsageFrequency: dcs:" + prop
+                    or "NeverUsedOrOccasionallyUsage" in prop:
+                    frequenc = "\nsubstanceUsageFrequency: dcs:" + prop\
+                        .replace("Or","__")
                 elif "Education" in prop:
                     education = "\neducationalAttainment: dcs:" + \
                         prop.replace("EducationalAttainment","")\
@@ -636,14 +669,14 @@ class EuroStatAlcoholConsumption:
                 elif "Percentile" in prop:
                     incomequin = "\nincome: ["+prop.replace("Percentile",\
                         "").replace("IncomeOf","").replace("To"," ")+" Percentile]"
-                elif "Cities" in prop or "TownsAndSuburbs" in prop \
-                    or "RuralAreas" in prop:
+                elif "Urban" in prop or "SemiUrban" in prop \
+                    or "Rural" in prop:
                     residence = "\nplaceOfResidenceClassification: dcs:" + prop
                 elif "ForeignBorn" in prop or "Native" in prop:
                     countryofbirth = "\nnativity: dcs:" + \
                         prop.replace("CountryOfBirth","")
-                elif "ForeignWithin" in prop or "ForeignOutside" in prop\
-                    or "Citizen" in prop:
+                elif "ForeignWithinEU28" in prop or "ForeignOutsideEU28" in prop\
+                    or "Citizen" in prop or "NotACitizen" in prop:
                     citizenship = "\ncitizenship: dcs:" + \
                         prop.replace("Citizenship","")
 
@@ -698,14 +731,14 @@ class EuroStatAlcoholConsumption:
             df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
             df['Measurement_Method'] = 'EurostatRegionalStatistics'
-            
             df['Measurement_Method'] = np.where(
                 df['observation'].str.contains('u'),
                 'LowReliability/EurostatRegionalStatistics',
-                # np.where(
-                # df['observation'].str.contains('d'),
-                # 'DefinationDiffer/EurostatRegionalStatistics',
-                'EurostatRegionalStatistics')
+                df['Measurement_Method'])
+            df['Measurement_Method'] = np.where(
+                df['observation'].str.contains('d'),
+                'DefinitionDiffers/EurostatRegionalStatistics',
+                df['Measurement_Method'])
             df['observation'] = (df['observation'].str.replace(
                 ':', '').str.replace(' ', '').str.replace('u', '')
                 .str.replace('d', ''))
@@ -725,7 +758,7 @@ class EuroStatAlcoholConsumption:
         self._generate_tmcf()
 
 def main(_):
-    input_path = FLAGS.input_path
+    input_path = _FLAGS.input_path
     if not os.path.exists(input_path):
         os.mkdir(input_path)
     ip_files = os.listdir(input_path)
@@ -745,5 +778,3 @@ def main(_):
 
 if __name__ == "__main__":
     app.run(main)
-
-
