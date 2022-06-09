@@ -454,7 +454,7 @@ class EuroStatBMI:
                 .str.replace(' ','').str.replace('u','')
             df['observation'] = pd.to_numeric(df['observation'],
                                               errors='coerce')
-            df['file_name'] = file_name_without_ext
+            #df['file_name'] = file_name_without_ext
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
 
