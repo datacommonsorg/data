@@ -22,7 +22,6 @@ import numpy as np
 from absl import app
 from absl import flags
 
-
 sys.path.insert(0, 'util')
 # pylint: disable=import-error
 # pylint: disable=wrong-import-position

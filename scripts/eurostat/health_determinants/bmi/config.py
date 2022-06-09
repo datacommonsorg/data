@@ -53,11 +53,7 @@ _EDUCATIONAL_VALUES_MAPPER = {
     'TOTAL': 'Total'
 }
 
-_SEX_VALUES_MAPPER = {
-    'F': 'Female',
-    'M': 'Male',
-    'T': 'Total'
-}
+_SEX_VALUES_MAPPER = {'F': 'Female', 'M': 'Male', 'T': 'Total'}
 
 _INCOME_QUANTILE_VALUES_MAPPER = {
     'TOTAL': 'Total',

@@ -31,6 +31,7 @@ expected_output_folder = os.path.join(module_dir, "test_data", "expected_files")
 op_data_folder = os.path.join(module_dir, "test_output_data")
 input_path = os.path.dirname(os.path.abspath(__file__)) + os.sep + "input_data"
 
+
 class TestPreprocess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
