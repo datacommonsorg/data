@@ -27,11 +27,7 @@ _EDUCATIONAL_VALUES_MAPPER = {
     'TOTAL': 'Total'
 }
 
-_SEX_VALUES_MAPPER = {
-    'F': 'Female',
-    'M': 'Male',
-    'T': 'Total'
-}
+_SEX_VALUES_MAPPER = {'F': 'Female', 'M': 'Male', 'T': 'Total'}
 
 _INCOME_QUANTILE_VALUES_MAPPER = {
     'TOTAL': 'Total',
@@ -81,6 +77,8 @@ _COLUMN_MAPPER = {
     "activity_level": _ACTIVITY_LEVEL_VALUES_MAPPER
 }
 
-def map_to_full_form(df: pd.DataFrame, category: str, df_col: str) -> pd.DataFrame:
+
+def map_to_full_form(df: pd.DataFrame, category: str,
+                     df_col: str) -> pd.DataFrame:
     df[df_col] = df[df_col].map(_COLUMN_MAPPER.get(category))
     return df

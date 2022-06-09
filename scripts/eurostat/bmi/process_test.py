@@ -19,6 +19,7 @@ import os
 from os import path
 import unittest
 import sys
+
 module_dir = os.path.dirname(__file__)
 
 sys.path.insert(0, module_dir)
@@ -44,15 +45,18 @@ class TestPreprocess(unittest.TestCase):
     mcf_file_path = os.path.join(op_data_folder, "test_census.mcf")
     tmcf_file_path = os.path.join(op_data_folder, "test_census.tmcf")
 
-    test_data_files = ['hlth_ehis_bm1c.tsv', 'hlth_ehis_de2.tsv', 'hlth_ehis_bm1d.tsv',
-    'hlth_ehis_bm1u.tsv', 'hlth_ehis_bm1b.tsv', 'hlth_ehis_de1.tsv',
-    'hlth_ehis_bm1e.tsv', 'hlth_ehis_bm1i.tsv']
+    test_data_files = [
+        'hlth_ehis_bm1c.tsv', 'hlth_ehis_de2.tsv', 'hlth_ehis_bm1d.tsv',
+        'hlth_ehis_bm1u.tsv', 'hlth_ehis_bm1b.tsv', 'hlth_ehis_de1.tsv',
+        'hlth_ehis_bm1e.tsv', 'hlth_ehis_bm1i.tsv'
+    ]
 
     ip_data = [
-        os.path.join(test_dataset_folder, file_name) for file_name in test_data_files
+        os.path.join(test_dataset_folder, file_name)
+        for file_name in test_data_files
     ]
-    base = EuroStatBMI(ip_data, cleaned_csv_file_path,
-                        mcf_file_path, tmcf_file_path)
+    base = EuroStatBMI(ip_data, cleaned_csv_file_path, mcf_file_path,
+                       tmcf_file_path)
     base.process()
 
     def test_mcf_tmcf_files(self):
@@ -61,12 +65,10 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like MCF File
         """
         expected_mcf_file_path = os.path.join(
-            expected_output_folder,
-            "Expected_EuroStat_Population_BMI.mcf")
+            expected_output_folder, "Expected_EuroStat_Population_BMI.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            expected_output_folder,
-            "Expected_EuroStat_Population_BMI.tmcf")
+            expected_output_folder, "Expected_EuroStat_Population_BMI.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -95,8 +97,7 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like CSV
         """
         expected_csv_file_path = os.path.join(
-            expected_output_folder,
-            "Expected_EuroStat_Population_BMI.csv")
+            expected_output_folder, "Expected_EuroStat_Population_BMI.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
