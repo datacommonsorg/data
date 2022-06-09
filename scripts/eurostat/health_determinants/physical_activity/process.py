@@ -659,8 +659,9 @@ class EuroStatPhysicalActivity:
                         prop.replace("EducationalAttainment","")\
                         .replace("Or","__")
                 elif "Percentile" in prop:
-                    incomequin = "\nincome: ["+prop.replace("Percentile",\
-                        "").replace("To"," ")+" Percentile]"
+                    incomequin = "\nincome: ["+prop.replace("IncomeOf","")\
+                        .replace("To"," ").replace("Percentile"," Percentile")\
+                        +"]"
                 elif "Urban" in prop or "Rural" in prop:
                     residence = "\nplaceOfResidenceClassification: dcs:" + prop
                 elif "Limitation" in prop:

@@ -70,19 +70,45 @@ def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'quant_inc': {
             'TOTAL': 'Total',
-            'QU1': 'Percentile0To20',
-            'QU2': 'Percentile20To40',
-            'QU3': 'Percentile40To60',
-            'QU4': 'Percentile60To80',
-            'QU5': 'Percentile80To100'
+            'QU1': 'IncomeOf0To20Percentile',
+            'QU2': 'IncomeOf20To40Percentile',
+            'QU3': 'IncomeOf40To60Percentile',
+            'QU4': 'IncomeOf60To80Percentile',
+            'QU5': 'IncomeOf80To100Percentile'
+        }
+    })
+    return df
+
+
+def _replace_frequenc(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'frequenc': {
+            'DAY': 'DailyUsage',
+            'LT1M': 'LessThanOnceAMonth',
+            'MTH': 'EveryMonth',
+            'NM12': 'NotUsedInTheLast12Months',
+            'NVR': 'NeverUsed',
+            'NVR_NM12': 'NeverUsedOrNotUsedInTheLast12Months',
+            'WEEK': 'EveryWeek',
+            'GE1W': 'AtLeastOnceAWeek',
+            'NVR_OCC': 'NeverUsedOrOccasionallyUsage',
+            'NBINGE': 'NeverUsed'
         }
     })
     return df
@@ -122,7 +148,7 @@ def _replace_levels(df: pd.DataFrame) -> pd.DataFrame:
             'HVY': 'HeavyActivity',
             'MOD': 'ModerateActivity',
             'MOD_HVY': 'ModerateActivityOrHeavyActivity',
-            'NONE_LGHT': 'NoneActivityOrLightActivity'
+            'NONE_LGHT': 'NoActivityOrLightActivity'
         }
     })
     return df

@@ -39,7 +39,7 @@ These are the attributes that we will use
 | Educational Attainment level   	| The level of education of the population.  |
 | Sex   				| Gender either Male or Female. 							|
 | Income Quintile 				| The slab of income of the population.						|
-| Degree of Urbanisation   				| The type of residence (rural/urban/semiurban) of the population.							|
+| Degree of Urbanisation   				| The type of residence (rural/urban/semiurban) of the population.					|
 | Country of Birth   				| The nativity of the population.						|
 | Country of Citizenship   				| The citizenship of the population.						|
 | Degree of Activity Limitation   				|  							|
