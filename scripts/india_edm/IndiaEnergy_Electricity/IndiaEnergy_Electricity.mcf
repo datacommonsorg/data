@@ -101,13 +101,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 consumingSector: dcs:Industry
 
-Node: dcid:Annual_Generation_Electricity_UN_UnspecifiedSector
+Node: dcid:Annual_Generation_Electricity_IndiaEDMUnspecifiedSector
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Generation_Electricity_EnergyIndustryOwnUse
 typeOf: dcs:StatisticalVariable
@@ -149,13 +149,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 consumingSector: dcs:Industry
 
-Node: dcid:Annual_Consumption_Electricity_UN_UnspecifiedSector
+Node: dcid:Annual_Consumption_Electricity_IndiaEDMUnspecifiedSector
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Electricity_EnergyIndustryOwnUse
 typeOf: dcs:StatisticalVariable

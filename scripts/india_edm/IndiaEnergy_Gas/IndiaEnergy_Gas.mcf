@@ -61,14 +61,14 @@ statType: dcs:measuredValue
 energySource: dcs:NaturalGas
 consumingSector: dcs:OilRefineries
 
-Node: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_NaturalGas
+Node: dcid:Annual_Consumption_Fuel_IndiaEDMUnspecifiedSector_NaturalGas
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NaturalGas
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
 typeOf: dcs:StatisticalVariable

@@ -88,14 +88,14 @@ statType: dcs:measuredValue
 energySource: dcs:RawCoal
 consumingSector: dcs:TextileAndLeatherIndustry
 
-Node: dcid:Annual_Consumption_Coal_UN_UnspecifiedSector_RawCoal
+Node: dcid:Annual_Consumption_Coal_IndiaEDMUnspecifiedSector_RawCoal
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Coal
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:RawCoal
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Coal_CoalMines_RawCoal
 typeOf: dcs:StatisticalVariable
@@ -151,14 +151,14 @@ statType: dcs:measuredValue
 energySource: dcs:RawCoal
 consumingSector: dcs:BricksConstructionIndustry
 
-Node: dcid:Annual_Consumption_Coal_UN_UnspecifiedSector_MiddlingsCoal
+Node: dcid:Annual_Consumption_Coal_IndiaEDMUnspecifiedSector_MiddlingsCoal
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Coal
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:MiddlingsCoal
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Coal_ElectricityGeneration_Coal
 typeOf: dcs:StatisticalVariable
@@ -232,14 +232,14 @@ statType: dcs:measuredValue
 energySource: dcs:Coal
 consumingSector: dcs:BricksConstructionIndustry
 
-Node: dcid:Annual_Consumption_Coal_UN_UnspecifiedSector_Coal
+Node: dcid:Annual_Consumption_Coal_IndiaEDMUnspecifiedSector_Coal
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Coal
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Coal
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Coal_CoalMines_Coal
 typeOf: dcs:StatisticalVariable
@@ -250,14 +250,14 @@ statType: dcs:measuredValue
 energySource: dcs:Coal
 consumingSector: dcs:CoalMines
 
-Node: dcid:Annual_Consumption_Coal_UN_UnspecifiedSector_WashedCoal
+Node: dcid:Annual_Consumption_Coal_IndiaEDMUnspecifiedSector_WashedCoal
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Coal
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:WashedCoal
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Coal_CokeOvens_WashedCoal
 typeOf: dcs:StatisticalVariable
@@ -439,14 +439,14 @@ statType: dcs:measuredValue
 energySource: dcs:LigniteCoal
 consumingSector: dcs:BricksConstructionIndustry
 
-Node: dcid:Annual_Consumption_Coal_UN_UnspecifiedSector_LigniteCoal
+Node: dcid:Annual_Consumption_Coal_IndiaEDMUnspecifiedSector_LigniteCoal
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Coal
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:LigniteCoal
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Coal_FertilizerIndustry_LigniteCoal
 typeOf: dcs:StatisticalVariable

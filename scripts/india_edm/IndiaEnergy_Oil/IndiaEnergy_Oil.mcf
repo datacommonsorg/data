@@ -43,14 +43,14 @@ statType: dcs:measuredValue
 energySource: dcs:FuelOil
 consumingSector: dcs:MiningAndQuarryingIndustry
 
-Node: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_FuelOil
+Node: dcid:Annual_Consumption_Fuel_IndiaEDMUnspecifiedSector_FuelOil
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:FuelOil
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Fuel_ElectricityGeneration_FuelOil
 typeOf: dcs:StatisticalVariable
@@ -222,13 +222,13 @@ measurementQualifier: dcs:Monthly
 statType: dcs:measuredValue
 energySource: dcs:PetroleumCoke
 
-Node: dcid:Monthly_Imports_Fuel_UN_OtherOilProducts
+Node: dcid:Monthly_Imports_Fuel_IndiaEDMOtherOilProducts
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Fuel
 measuredProperty: dcs:imports
 measurementQualifier: dcs:Monthly
 statType: dcs:measuredValue
-energySource: dcs:UN_OtherOilProducts
+energySource: dcs:IndiaEDM_OtherOilProducts
 
 Node: dcid:Monthly_Imports_Fuel_FuelOil
 typeOf: dcs:StatisticalVariable
