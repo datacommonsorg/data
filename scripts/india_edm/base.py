@@ -217,6 +217,12 @@ class EnergyIndiaBase():
             df['StateCode'] = 'OTHERS'
 
         return df
+    
+    def _to_camel_case(self, text):
+        """
+        Helper method to convert text to camel case
+        """
+        return str(text[0]).lower() + str(text[1:])
 
     def _aggregate_values_to_country_level(self, df):
         """
@@ -251,6 +257,7 @@ class EnergyIndiaBase():
             df_temp = df.loc[df['StatVar'] == statvar]
             pop = df_temp['popType'].unique()[0]  # populationType
             mProp = df_temp['mProp'].unique()[0]  # measuredProperty
+            mProp = self._to_camel_case(mProp)
             mQual = df_temp['mQual'].unique()[0]  # measurementQualifier
             if not df_temp['type'].isnull().values.any():
                 energy_type = df_temp['type'].unique()[0]  # energySource
@@ -267,7 +274,7 @@ class EnergyIndiaBase():
             # Create the node and remove empty lines from strings
             node = self.NODE.format(statvar=statvar,
                                     pop=pop,
-                                    mProp=mProp.lower(),
+                                    mProp=mProp,
                                     mQual=mQual,
                                     energy_type=type_,
                                     consumingSector=sector)

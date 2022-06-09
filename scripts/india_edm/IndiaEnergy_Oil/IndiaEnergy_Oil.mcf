@@ -43,14 +43,14 @@ statType: dcs:measuredValue
 energySource: dcs:FuelOil
 consumingSector: dcs:MiningAndQuarryingIndustry
 
-Node: dcid:Annual_Consumption_Fuel_UN_UnspecifiedSector_FuelOil
+Node: dcid:Annual_Consumption_Fuel_IndiaEDM_UnspecifiedSector_FuelOil
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:FuelOil
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Fuel_ElectricityGeneration_FuelOil
 typeOf: dcs:StatisticalVariable

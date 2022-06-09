@@ -17,7 +17,7 @@
         "NAPHTHA": "Naphtha",
         "THERMAL": "ThermalElectricity",
         "WASTE HEAT RECOVERY": "OtherGases",
-        "WASTE GAS": "UN_OtherRecoveredGases",
+        "WASTE GAS": "IndiaEDM_OtherRecoveredGases",
         "IMPORTED COAL": "Coal",
         "R-LNG": "NaturalGasLiquids"
     }

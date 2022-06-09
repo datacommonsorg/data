@@ -134,50 +134,50 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NonRenewableWaste
 
-Node: dcid:Annual_Potential_Electricity_OtherBiomass
+Node: dcid:Annual_PotentialCapacity_Electricity_OtherBiomass
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialcapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:OtherBiomass
 
-Node: dcid:Annual_Potential_Electricity_PumpedHydro
+Node: dcid:Annual_PotentialCapacity_Electricity_PumpedHydro
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialcapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:PumpedHydro
 
-Node: dcid:Annual_Potential_Electricity_Solar
+Node: dcid:Annual_PotentialCapacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialcapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Solar
 
-Node: dcid:Annual_Potential_Electricity_NonRenewableWaste
+Node: dcid:Annual_PotentialCapacity_Electricity_NonRenewableWaste
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialcapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NonRenewableWaste
 
-Node: dcid:Annual_Potential_Electricity_Wind
+Node: dcid:Annual_PotentialCapacity_Electricity_Wind
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialcapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Wind
 
-Node: dcid:Annual_Potential_Electricity_Bagasse
+Node: dcid:Annual_PotentialCapacity_Electricity_Bagasse
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialcapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Bagasse

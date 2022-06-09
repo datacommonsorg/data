@@ -101,13 +101,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 consumingSector: dcs:Industry
 
-Node: dcid:Annual_Generation_Electricity_UN_UnspecifiedSector
+Node: dcid:Annual_Generation_Electricity_IndiaEDM_UnspecifiedSector
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Generation_Electricity_EnergyIndustryOwnUse
 typeOf: dcs:StatisticalVariable
@@ -149,13 +149,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 consumingSector: dcs:Industry
 
-Node: dcid:Annual_Consumption_Electricity_UN_UnspecifiedSector
+Node: dcid:Annual_Consumption_Electricity_IndiaEDM_UnspecifiedSector
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-consumingSector: dcs:UN_UnspecifiedSector
+consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Electricity_EnergyIndustryOwnUse
 typeOf: dcs:StatisticalVariable
@@ -172,50 +172,50 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 
-Node: dcid:Annual_Potential_Electricity_PumpedHydro
+Node: dcid:Annual_PotentialCapacity_Electricity_PumpedHydro
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:PumpedHydro
 
-Node: dcid:Annual_Potential_Electricity_OtherBiomass
+Node: dcid:Annual_PotentialCapacity_Electricity_OtherBiomass
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:OtherBiomass
 
-Node: dcid:Annual_Potential_Electricity_Solar
+Node: dcid:Annual_PotentialCapacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Solar
 
-Node: dcid:Annual_Potential_Electricity_NonRenewableWaste
+Node: dcid:Annual_PotentialCapacity_Electricity_NonRenewableWaste
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NonRenewableWaste
 
-Node: dcid:Annual_Potential_Electricity_Wind
+Node: dcid:Annual_PotentialCapacity_Electricity_Wind
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Wind
 
-Node: dcid:Annual_Potential_Electricity_Bagasse
+Node: dcid:Annual_PotentialCapacity_Electricity_Bagasse
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potential
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Bagasse
