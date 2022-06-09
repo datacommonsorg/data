@@ -20,16 +20,16 @@ from os import path
 import unittest
 import sys
 # module_dir is the path to where this test is running from.
-module_dir = os.path.dirname(__file__)
-sys.path.insert(0, module_dir)
+MODULE_DIR = os.path.dirname(__file__)
+sys.path.insert(0, MODULE_DIR)
 # pylint: disable=wrong-import-position
 from process import EuroStatBMI
 # pylint: enable=wrong-import-position
 
-test_dataset_folder = os.path.join(module_dir, "test_data", "datasets")
-expected_output_folder = os.path.join(module_dir, "test_data", "expected_files")
-op_data_folder = os.path.join(module_dir, "test_output_data")
-input_path = os.path.dirname(os.path.abspath(__file__)) + os.sep + "input_data"
+TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
+EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
+OUTPUT_DATA_DIR = os.path.join(MODULE_DIR, "test_output_data")
+
 
 
 class TestPreprocess(unittest.TestCase):
@@ -40,9 +40,9 @@ class TestPreprocess(unittest.TestCase):
     It will be generating CSV, MCF and TMCF files based on the sample input.
     Comparing the data with the expected files.
     """
-    cleaned_csv_file_path = os.path.join(op_data_folder, "data.csv")
-    mcf_file_path = os.path.join(op_data_folder, "test_census.mcf")
-    tmcf_file_path = os.path.join(op_data_folder, "test_census.tmcf")
+    cleaned_csv_file_path = os.path.join(OUTPUT_DATA_DIR, "data.csv")
+    mcf_file_path = os.path.join(OUTPUT_DATA_DIR, "test_census.mcf")
+    tmcf_file_path = os.path.join(OUTPUT_DATA_DIR, "test_census.tmcf")
 
     test_data_files = [
         'hlth_ehis_bm1c.tsv', 'hlth_ehis_de2.tsv', 'hlth_ehis_bm1d.tsv',
@@ -51,7 +51,7 @@ class TestPreprocess(unittest.TestCase):
     ]
 
     ip_data = [
-        os.path.join(test_dataset_folder, file_name)
+        os.path.join(TEST_DATASET_DIR, file_name)
         for file_name in test_data_files
     ]
     base = EuroStatBMI(ip_data, cleaned_csv_file_path, mcf_file_path,
@@ -64,10 +64,10 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like MCF File
         """
         expected_mcf_file_path = os.path.join(
-            expected_output_folder, "Expected_EuroStat_Population_BMI.mcf")
+            EXPECTED_FILES_DIR, "EuroStat_Population_BMI.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            expected_output_folder, "Expected_EuroStat_Population_BMI.tmcf")
+            EXPECTED_FILES_DIR, "EuroStat_Population_BMI.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -96,7 +96,7 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like CSV
         """
         expected_csv_file_path = os.path.join(
-            expected_output_folder, "Expected_EuroStat_Population_BMI.csv")
+            EXPECTED_FILES_DIR, "EuroStat_Population_BMI.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,

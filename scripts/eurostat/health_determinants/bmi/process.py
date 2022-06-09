@@ -22,10 +22,19 @@ import numpy as np
 from absl import app
 from absl import flags
 
-sys.path.insert(0, 'util')
+sys.path.insert(1, '../')
+from common.replacement_functions import (_replace_sex, _replace_physact,
+                                          _replace_isced11, _replace_quant_inc,
+                                          _replace_deg_urb, _replace_levels,
+                                          _replace_duration, _replace_c_birth,
+                                          _replace_citizen, _replace_lev_limit,
+                                          _replace_bmi, _split_column)
+
+# For import util.alpha2_to_dcid
+sys.path.insert(1, 'util')
 # pylint: disable=import-error
 # pylint: disable=wrong-import-position
-from alpha2_to_dcid import COUNTRY_MAP
+from util.alpha2_to_dcid import COUNTRY_MAP
 from config import map_to_full_form
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
@@ -35,7 +44,7 @@ pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "input_data"
+    os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
@@ -381,7 +390,7 @@ class EuroStatBMI:
                 if prop in ["Count", "Person"]:
                     continue
                 if "PhysicalActivity" in prop:
-                    healthbehavior = "\nhealthbehavior: dcs:" + prop
+                    healthbehavior = "\nhealthBehavior: dcs:" + prop
                 elif "Male" in prop or "Female" in prop:
                     gender = "\ngender: dcs:" + prop
                 elif "Aerobic" in prop or "MuscleStrengthening" in prop \
@@ -422,7 +431,7 @@ class EuroStatBMI:
                         + prop
                 elif "weight" in prop or "Normal" in prop \
                     or "Obese" in prop or "Obesity" in prop:
-                    healthbehavior = "\nhealthbehavior: dcs:" + prop
+                    healthbehavior = "\nhealthBehavior: dcs:" + prop
             final_mcf_template += actual_mcf_template.format(
                 sv, denominator, incomequin, education, healthbehavior,
                 exercise, residence, activity, duration, gender, countryofbirth,
@@ -478,6 +487,7 @@ class EuroStatBMI:
 
         final_df = final_df.sort_values(by=['time', 'geo'])
         final_df['geo'] = final_df['geo'].map(COUNTRY_MAP)
+        final_df.dropna(inplace=True)
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         #print(sv_list)

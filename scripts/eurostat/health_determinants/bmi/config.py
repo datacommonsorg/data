@@ -86,10 +86,10 @@ _CITIZENSHIP_COUNTRY_VALUES_MAPPER = {
 }
 
 _ACTIVITY_LEVEL_VALUES_MAPPER = {
-    'MOD': 'Moderate',
-    'SEV': 'Severe',
-    'SM_SEV': 'SomeOrSevere',
-    'NONE': 'None'
+    'MOD': 'ModerateActivityLimitation',
+    'SEV': 'SevereActivityLimitation',
+    'SM_SEV': 'LimitedActivityLimitation',
+    'NONE': 'NoActivityLimitation'
 }
 
 _COLUMN_MAPPER = {
