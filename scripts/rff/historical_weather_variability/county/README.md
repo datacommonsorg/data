@@ -25,5 +25,5 @@ and it relies on these statistic variables:
 To generate `WeatherVariability_Counties.tmcf` and `WeatherVariability_Counties.csv`, run:
 
 ```bash
-python preprocess_csv.py
+python preprocess_counties.py
 ```
