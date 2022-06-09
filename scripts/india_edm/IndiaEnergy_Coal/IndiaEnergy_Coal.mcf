@@ -463,7 +463,7 @@ populationType: dcs:Coal
 measuredProperty: dcs:imports
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:CokeCoal
+energySource: dcs:CokingCoal
 
 Node: dcid:Annual_Imports_Coal_CokingCoal
 typeOf: dcs:StatisticalVariable
