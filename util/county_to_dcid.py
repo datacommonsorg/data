@@ -1711,6 +1711,7 @@ COUNTY_MAP: dict = {
         "Ste. Genevieve County": "geoId/29186",
         "St. Francois County": "geoId/29187",
         "St. Louis County": "geoId/29189",
+        "St. Louis": "geoId/29510",
         "St. Louis city": "geoId/2965000",
         "Saline County": "geoId/29195",
         "Schuyler County": "geoId/29197",
@@ -1729,9 +1730,7 @@ COUNTY_MAP: dict = {
         "Wayne County": "geoId/29223",
         "Webster County": "geoId/29225",
         "Worth County": "geoId/29227",
-        "Wright County": "geoId/29229",
-        "St. Louis": "geoId/29510",
-        "St. Louis city": "geoId/29510"
+        "Wright County": "geoId/29229"
     },
     "MT": {
         "Beaverhead County": "geoId/30001",
