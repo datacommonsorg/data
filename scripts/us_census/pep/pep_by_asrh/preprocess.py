@@ -29,7 +29,7 @@ pd.set_option("display.max_rows", None)
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "input_data"
+    os.path.abspath(__file__)) + os.sep + "ip_data"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
@@ -212,19 +212,13 @@ def _unpivot_df(df: pd.DataFrame,
                      value_vars=data_cols,
                      var_name=default_col,
                      value_name='Count_Person')
-    # for col in data_cols:
-    #     cols = common_col + [col]  # col have the population data,
-    #     tmp_df = df[cols]
-    #     # Renaming Col value with 'Count_Person' to
-    #     # align with DataCommons Standarads
-    #     tmp_df.columns = common_col + ["Count_Person"]
-    #     tmp_df[default_col] = col
-    #     res_df = pd.concat([res_df, tmp_df])
     return res_df
 
 
 def _create_sv(desc: str, age: str) -> str:
-    # Age 85 and 100
+    # Age 85+ and 100+ are represented as individual
+    # age numbers such as  85, 100.
+    # Adding 'OrMoreYears' for 85 and 100 Ages.
     if age in {100, 85}:
         return f"Count_Person_{age}OrMoreYears_{desc}"
     return f"Count_Person_{age}Years_{desc}"
@@ -254,6 +248,7 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     # Age is at index 2 column, but for age 100, it is present in index 1
     # column as 788100, so filtering that row separately
     # and loading it to another DataFrame yr_100_df
+    # yr_100_df contains rows with age 100
     yr_100_df = data_df[data_df[1] == yr_100].iloc[:, 1:].reset_index(drop=True)
     data_df = data_df[data_df[1] == yr].iloc[:, 1:].reset_index(drop=True)
     cols = [
@@ -278,7 +273,7 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     hispanic_cols = _get_mapper_cols_dict("nationals_1980_1999_hispanic")
     derived_cols = _get_mapper_cols_dict("nationals_1980_1999_derived")
     data_df.columns = cols
-    # Appending yr_100_df to
+    # Appending yr_100_df to data_df(which contains age for 1 to 99)
     if yr_100_df.shape[0] > 0:
         yr_100_df.insert(0, 0, yr)
         yr_100_df[1] = 100
@@ -442,9 +437,28 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     df["SV"] = df["SV"].str.replace("NotHispanicOrLatino_WhiteAlone",
                                     "WhiteAloneNotHispanicOrLatino")
     req_cols = list(df.columns)
-    req_cols = [req_cols[3]] + [req_cols[-1]] + [
-        req_cols[8]
-    ] + req_cols[11:21] + [req_cols[-2]]
+    # DataFrame Columns
+    # ['SUMLEV', 'REGION', 'DIVISION', 'STATE', 'NAME', 'SEX', 'ORIGIN',
+    # 'RACE', 'AGE', 'CENSUS2010POP', 'ESTIMATESBASE2010', 'POPESTIMATE2010',
+    # 'POPESTIMATE2011', 'POPESTIMATE2012', 'POPESTIMATE2013',
+    # 'POPESTIMATE2014', 'POPESTIMATE2015', 'POPESTIMATE2016',
+    # 'POPESTIMATE2017', 'POPESTIMATE2018', 'POPESTIMATE2019',
+    # 'POPESTIMATE042020', 'POPESTIMATE2020', 'SV']
+    column_indexes = {
+        "STATE": 3,
+        "SV": 23,
+        "AGE": 8,
+        "POPULATION_EST_2010_2019_START": 11,
+        "POPULATION_EST_2010_2019_END": 21,
+        "POPULATION_EST_2020": 22
+    }
+    req_cols = [req_cols[column_indexes['STATE']]] + [
+        req_cols[column_indexes['SV']]
+    ] + [req_cols[column_indexes['AGE']]
+        ] + req_cols[column_indexes['POPULATION_EST_2010_2019_START']:
+                     column_indexes['POPULATION_EST_2010_2019_END']] + [
+                         req_cols[column_indexes['POPULATION_EST_2020']]
+                     ]
     pop_cols = [val for val in req_cols if "POPESTIMATE" in val]
     # Deriving New Columns
     df[pop_cols] = df[pop_cols].apply(pd.to_numeric, errors='coerce')
@@ -474,6 +488,9 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
         for col in req_cols
     ]
     df.columns = req_cols
+    # DataFrame Columns or req_cols are below
+    # ['Location', 'SV', 'AGE', '2010', '2011', '2012',
+    # '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
     df = _unpivot_df(df, req_cols[:2], req_cols[3:], default_col="Year")
     f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
     df["Count_Person"] = df["Count_Person"].astype("int")
@@ -613,7 +630,8 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
         5: "NativeHawaiianAndOtherPacificIslanderAlone",
         6: "TwoOrMoreRaces"
     }
-    # Deriving New Columns
+    # Deriving New Columns and actual values for below numbers are
+    # represented in above dictonaries
     for origin in [1, 2]:
         derived_cols_df = pd.concat([
             derived_cols_df, df[(df["ORIGIN"] == origin) & (df["SEX"] == 0) &
