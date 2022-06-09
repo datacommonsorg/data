@@ -34,6 +34,7 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
+
 def health_determinant_eurostat_smoking_county_of_birth(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -64,6 +65,7 @@ def health_determinant_eurostat_smoking_county_of_birth(
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
+
 
 def health_determinant_eurostat_smoking_country_of_citizenship(
         df: pd.DataFrame) -> pd.DataFrame:
@@ -96,6 +98,7 @@ def health_determinant_eurostat_smoking_country_of_citizenship(
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_smoking_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -123,6 +126,7 @@ def health_determinant_eurostat_smoking_education_attainment_level(
 
     return df
 
+
 def health_determinant_eurostat_smoking_income_quintile(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -148,6 +152,7 @@ def health_determinant_eurostat_smoking_income_quintile(
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
     return df
+
 
 def health_determinant_eurostat_smoking_degree_of_urbanisation(
         df: pd.DataFrame) -> pd.DataFrame:
@@ -180,6 +185,7 @@ def health_determinant_eurostat_smoking_degree_of_urbanisation(
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_former_daily_tobacco_smoker_income_quintile(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -188,7 +194,7 @@ def health_determinant_eurostat_former_daily_tobacco_smoker_income_quintile(
     Output Provided: DF
     """
     cols = [
-        'unit,sex,age,quant_inc,time','EU27_2020', 'BE', 'BG', 'CZ', 'DK',
+        'unit,sex,age,quant_inc,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK',
         'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU',
         'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
         'NO', 'RS', 'TR'
@@ -212,6 +218,7 @@ def health_determinant_eurostat_former_daily_tobacco_smoker_income_quintile(
     df
     return df
 
+
 def health_determinant_eurostat_former_daily_tobacco_smoker_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -219,10 +226,11 @@ def health_determinant_eurostat_former_daily_tobacco_smoker_education_attainment
     Input Taken: DF
     Output Provided: DF
     """
-    cols = ['unit,sex,age,isced11,time','EU27_2020', 'BE', 'BG', 'CZ', 'DK',
-        'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU',
-        'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'RS', 'TR'
+    cols = [
+        'unit,sex,age,isced11,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK', 'DE',
+        'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU',
+        'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO',
+        'RS', 'TR'
     ]
     df.columns = cols
     col1 = "unit,sex,age,isced11,time"
@@ -241,6 +249,7 @@ def health_determinant_eurostat_former_daily_tobacco_smoker_education_attainment
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
+
 
 def health_determinant_eurostat_daily_smokers_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
@@ -268,6 +277,7 @@ def health_determinant_eurostat_daily_smokers_education_attainment_level(
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_daily_smokers_income_quintile(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -293,6 +303,7 @@ def health_determinant_eurostat_daily_smokers_income_quintile(
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
     return df
+
 
 def health_determinant_eurostat_daily_smokers_degree_of_urbanisation(
         df: pd.DataFrame) -> pd.DataFrame:
@@ -325,6 +336,7 @@ def health_determinant_eurostat_daily_smokers_degree_of_urbanisation(
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -352,6 +364,7 @@ def health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_educatio
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_degree_of_urbanisation(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -370,7 +383,7 @@ def health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_degree_o
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020','EU28'],inplace=True)
+    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
     df = _replace_deg_urb(df)
     df = _replace_frequenc(df)
     df = _replace_sex(df)
@@ -384,6 +397,7 @@ def health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_degree_o
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_duration_of_daily_tobacco_smoking_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -392,17 +406,17 @@ def health_determinant_eurostat_duration_of_daily_tobacco_smoking_education_atta
     Output Provided: DF
     """
     cols = [
-        'unit,duration,sex,age,isced11,time','EU27_2020',
-        'BE','BG','CZ','DK','DE','EE','IE','EL','ES','FR',
-        'HR','IT','CY','LV','LT','LU','HU','MT','NL','AT',
-        'PL','PT','RO','SI','SK','FI','SE','IS','NO','RS','TR'
+        'unit,duration,sex,age,isced11,time', 'EU27_2020', 'BE', 'BG', 'CZ',
+        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
+        'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
+        'IS', 'NO', 'RS', 'TR'
     ]
     df.columns = cols
     col1 = "unit,duration,sex,age,isced11,time"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020'],inplace=True)
+    df.drop(columns=['EU27_2020'], inplace=True)
     df = _replace_isced11(df)
     df = _replace_duration(df)
     df = _replace_sex(df)
@@ -416,6 +430,7 @@ def health_determinant_eurostat_duration_of_daily_tobacco_smoking_education_atta
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_electronic_cigarettes_similar_electronic_devices_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -424,17 +439,17 @@ def health_determinant_eurostat_electronic_cigarettes_similar_electronic_devices
     Output Provided: DF
     """
     cols = [
-        'unit,frequenc,sex,age,isced11,time','EU27_2020',
-        'BE','BG','CZ','DK','DE','EE','IE','EL','ES','FR',
-        'HR','IT','CY','LV','LT','LU','HU','MT','NL','AT',
-        'PL','PT','RO','SI','SK','FI','SE','IS','NO','RS','TR'
+        'unit,frequenc,sex,age,isced11,time', 'EU27_2020', 'BE', 'BG', 'CZ',
+        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
+        'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
+        'IS', 'NO', 'RS', 'TR'
     ]
     df.columns = cols
     col1 = "unit,frequenc,sex,age,isced11,time"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020'],inplace=True)
+    df.drop(columns=['EU27_2020'], inplace=True)
     df = _replace_isced11(df)
     df = _replace_frequenc(df)
     df = _replace_sex(df)
@@ -448,6 +463,7 @@ def health_determinant_eurostat_electronic_cigarettes_similar_electronic_devices
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_daily_smokers_history_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -456,9 +472,9 @@ def health_determinant_eurostat_daily_smokers_history_education_attainment_level
     Output Provided: DF
     """
     cols = [
-        'sex,age,isced97,time','BE','BG','CZ','DE','EE',
-        'EL','ES','CY','LV','HU','MT','AT','PL','RO','SI','SK'
-        ]
+        'sex,age,isced97,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL', 'ES', 'CY',
+        'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK'
+    ]
     df.columns = cols
     col1 = "sex,age,isced97,time"
     df = _split_column(df, col1)
@@ -476,6 +492,7 @@ def health_determinant_eurostat_daily_smokers_history_education_attainment_level
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_daily_smokers_history_income_quintile(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -484,9 +501,9 @@ def health_determinant_eurostat_daily_smokers_history_income_quintile(
     Output Provided: DF
     """
     cols = [
-        'sex,age,quant_inc,time','BE','BG','CZ','DE','EE','EL','ES',
-        'CY','LV','HU','MT','AT','PL','RO','SI','SK'
-        ]
+        'sex,age,quant_inc,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL', 'ES',
+        'CY', 'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK'
+    ]
     df.columns = cols
     col1 = "sex,age,quant_inc,time"
     df = _split_column(df, col1)
@@ -504,6 +521,7 @@ def health_determinant_eurostat_daily_smokers_history_income_quintile(
         ,value_name='observation')
     return df
 
+
 def health_determinant_eurostat_daily_smokers_number_of_cigarettes_history_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -512,9 +530,9 @@ def health_determinant_eurostat_daily_smokers_number_of_cigarettes_history_educa
     Output Provided: DF
     """
     cols = [
-        'sex,age,smoking,isced97,time','BE','BG','CZ','DE',
-        'EE','EL','ES','CY','LV','HU','MT','PL','RO','SI','SK'
-        ]
+        'sex,age,smoking,isced97,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL',
+        'ES', 'CY', 'LV', 'HU', 'MT', 'PL', 'RO', 'SI', 'SK'
+    ]
     df.columns = cols
     col1 = "sex,age,smoking,isced97,time"
     df = _split_column(df, col1)
@@ -527,10 +545,11 @@ def health_determinant_eurostat_daily_smokers_number_of_cigarettes_history_educa
     df['SV'] = 'Count_Person_'+ df['isced97']+'_'+df['sex']+\
         '_'+'DailySmokersByNumberOfCigarettesHistory'+'_'+\
         df['smoking']+'_AsAFractionOf_Count_Person_'+df['isced97']+'_'+df['sex']
-    df.drop(columns=['smoking','isced97', 'sex'], inplace=True)
+    df.drop(columns=['smoking', 'isced97', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
+
 
 def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -546,7 +565,7 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
-    """ 
+    """
     df = df.replace({'isced11': {
         'ED0-2': 'EducationalAttainment'+\
         'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
@@ -563,6 +582,7 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
         'TOTAL': 'Total'
         }})
     return df
+
 
 def _replace_isced97(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -586,15 +606,17 @@ def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    df = df.replace({'quant_inc': {
-        'TOTAL': 'Total',
-        'QU1': 'FirstQuintile',
-        'QU2': 'SecondQuintile',
-        'QU3': 'ThirdQuintile',
-        'QU4': 'FourthQuintile',
-        'QU5': 'FifthQuintile',
-        'UNK': 'Unknown'
-    }})
+    df = df.replace({
+        'quant_inc': {
+            'TOTAL': 'Total',
+            'QU1': 'FirstQuintile',
+            'QU2': 'SecondQuintile',
+            'QU3': 'ThirdQuintile',
+            'QU4': 'FourthQuintile',
+            'QU5': 'FifthQuintile',
+            'UNK': 'Unknown'
+        }
+    })
     return df
 
 
@@ -603,12 +625,14 @@ def _replace_deg_urb(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    df = df.replace({'deg_urb': {
-        'TOTAL': 'Total',
-        'DEG1': 'Cities',
-        'DEG2': 'TownsAndSuburbs',
-        'DEG3': 'RuralAreas'
-    }})
+    df = df.replace({
+        'deg_urb': {
+            'TOTAL': 'Total',
+            'DEG1': 'Cities',
+            'DEG2': 'TownsAndSuburbs',
+            'DEG3': 'RuralAreas'
+        }
+    })
     return df
 
 
@@ -618,17 +642,19 @@ def _replace_smoking(df: pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF
     """
 
-    df = df.replace({'smoking': {
-        'TOTAL': 'Total',
-        'NSM': 'NonSmoker',
-        'SM_CUR': 'CurrentSmoker',
-        'SM_DAY': 'DailySmoker',
-        'SM_OCC': 'OccasionalSmoker',
-        'SM_LT20D': 'LessThan20CigarettesPerDay',
-        'SM_GE20D': '20OrMoreCigarettesPerDay',
-        'DSM_GE20': 'DailyCigaretteSmoker20OrMorePerDay',
-        'DSM_LT20': 'DailyCigaretteSmokerLessThan20PerDay'
-    }})
+    df = df.replace({
+        'smoking': {
+            'TOTAL': 'Total',
+            'NSM': 'NonSmoker',
+            'SM_CUR': 'CurrentSmoker',
+            'SM_DAY': 'DailySmoker',
+            'SM_OCC': 'OccasionalSmoker',
+            'SM_LT20D': 'LessThan20CigarettesPerDay',
+            'SM_GE20D': '20OrMoreCigarettesPerDay',
+            'DSM_GE20': 'DailyCigaretteSmoker20OrMorePerDay',
+            'DSM_LT20': 'DailyCigaretteSmokerLessThan20PerDay'
+        }
+    })
     return df
 
 
@@ -637,12 +663,14 @@ def _replace_c_birth(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    df = df.replace({'c_birth':  {
-        'EU28_FOR': 'CountryOfBirthEU28CountriesExceptReportingCountry',
-        'NEU28_FOR': 'CountryOfBirthNonEU28CountriesNorReportingCountry',
-        'FOR': 'CountryOfBirthForeignCountry',
-        'NAT': 'CountryOfBirthReportingCountry'
-    }})
+    df = df.replace({
+        'c_birth': {
+            'EU28_FOR': 'CountryOfBirthEU28CountriesExceptReportingCountry',
+            'NEU28_FOR': 'CountryOfBirthNonEU28CountriesNorReportingCountry',
+            'FOR': 'CountryOfBirthForeignCountry',
+            'NAT': 'CountryOfBirthReportingCountry'
+        }
+    })
     return df
 
 
@@ -651,25 +679,30 @@ def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    df = df.replace({'citizen':  {
-        'EU28_FOR': 'CitizenshipEU28CountriesExceptReportingCountry',
-        'NEU28_FOR': 'CitizenshipNonEU28CountriesNorReportingCountry',
-        'FOR': 'CitizenshipForeignCountry',
-        'NAT': 'CitizenshipReportingCountry'
-    }})
+    df = df.replace({
+        'citizen': {
+            'EU28_FOR': 'CitizenshipEU28CountriesExceptReportingCountry',
+            'NEU28_FOR': 'CitizenshipNonEU28CountriesNorReportingCountry',
+            'FOR': 'CitizenshipForeignCountry',
+            'NAT': 'CitizenshipReportingCountry'
+        }
+    })
     return df
+
 
 def _replace_duration(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    df = df.replace({'duration': {
-        'Y_LT1': 'LessThan1Year',
-        'Y1-5': 'From1To5Years',
-        'Y5-10': 'From5To10Years',
-        'Y_GE10': '10YearsOrOver'
-    }})
+    df = df.replace({
+        'duration': {
+            'Y_LT1': 'LessThan1Year',
+            'Y1-5': 'From1To5Years',
+            'Y5-10': 'From5To10Years',
+            'Y_GE10': '10YearsOrOver'
+        }
+    })
     return df
 
 
@@ -678,18 +711,21 @@ def _replace_frequenc(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    df = df.replace({'frequenc': {
-        'DAY_GE1HD': 'AtLeast1HourEveryDay',
-        'DAY_LT1HD': 'LessThan1HourEveryDay',
-        'LT1W': 'LessThanOnceAWeek',
-        'GE1W': 'AtLeastOnceAWeek',
-        'RAR_NVR': 'RarelyOrNever',
-        'DAY': 'EveryDay',
-        'FMR': 'Formerly',
-        'OCC': 'Occasionally',
-        'NVR': 'Never'
-    }})
+    df = df.replace({
+        'frequenc': {
+            'DAY_GE1HD': 'AtLeast1HourEveryDay',
+            'DAY_LT1HD': 'LessThan1HourEveryDay',
+            'LT1W': 'LessThanOnceAWeek',
+            'GE1W': 'AtLeastOnceAWeek',
+            'RAR_NVR': 'RarelyOrNever',
+            'DAY': 'EveryDay',
+            'FMR': 'Formerly',
+            'OCC': 'Occasionally',
+            'NVR': 'Never'
+        }
+    })
     return df
+
 
 def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
     """
@@ -700,14 +736,16 @@ def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
     df.drop(columns=[col], inplace=True)
     return df
 
+
 class EuroStatTobaccoConsumption:
     """
     This Class has requried methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
 
-    def __init__(self, input_files: list, csv_file_path: str, tmcf_file_path: str)-> None:
-                #  mcf_file_path: str, ) 
+    def __init__(self, input_files: list, csv_file_path: str,
+                 tmcf_file_path: str) -> None:
+        #  mcf_file_path: str, )
         self.input_files = input_files
         self.cleaned_csv_file_path = csv_file_path
         # self.mcf_file_path = mcf_file_path
@@ -735,8 +773,6 @@ class EuroStatTobaccoConsumption:
         with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf_template.rstrip('\n'))
 
-
-
     def process(self):
         """
         This Method calls the required methods to generate
@@ -758,23 +794,40 @@ class EuroStatTobaccoConsumption:
             df = pd.read_csv(file_path, sep='\t', skiprows=1)
             file_name = file_path.split("/")[-1][:-4]
             function_dict = {
-                "hlth_ehis_sk1b": health_determinant_eurostat_smoking_county_of_birth,
-                "hlth_ehis_sk1c": health_determinant_eurostat_smoking_country_of_citizenship,
-                "hlth_ehis_sk1e": health_determinant_eurostat_smoking_education_attainment_level,
-                "hlth_ehis_sk1i": health_determinant_eurostat_smoking_income_quintile,
-                "hlth_ehis_sk1u": health_determinant_eurostat_smoking_degree_of_urbanisation,
-                "hlth_ehis_sk2i": health_determinant_eurostat_former_daily_tobacco_smoker_income_quintile,
-                "hlth_ehis_sk2e": health_determinant_eurostat_former_daily_tobacco_smoker_education_attainment_level,
-                "hlth_ehis_sk3e": health_determinant_eurostat_daily_smokers_education_attainment_level,
-                "hlth_ehis_sk3i": health_determinant_eurostat_daily_smokers_income_quintile,
-                "hlth_ehis_sk3u": health_determinant_eurostat_daily_smokers_degree_of_urbanisation,
-                "hlth_ehis_sk4e": health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_education_attainment_level,
-                "hlth_ehis_sk4u": health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_degree_of_urbanisation,
-                "hlth_ehis_sk5e": health_determinant_eurostat_duration_of_daily_tobacco_smoking_education_attainment_level,
-                "hlth_ehis_sk6e": health_determinant_eurostat_electronic_cigarettes_similar_electronic_devices_education_attainment_level,
-                "hlth_ehis_de3": health_determinant_eurostat_daily_smokers_history_education_attainment_level,
-                "hlth_ehis_de4": health_determinant_eurostat_daily_smokers_history_income_quintile,
-                "hlth_ehis_de5": health_determinant_eurostat_daily_smokers_number_of_cigarettes_history_education_attainment_level
+                "hlth_ehis_sk1b":
+                    health_determinant_eurostat_smoking_county_of_birth,
+                "hlth_ehis_sk1c":
+                    health_determinant_eurostat_smoking_country_of_citizenship,
+                "hlth_ehis_sk1e":
+                    health_determinant_eurostat_smoking_education_attainment_level,
+                "hlth_ehis_sk1i":
+                    health_determinant_eurostat_smoking_income_quintile,
+                "hlth_ehis_sk1u":
+                    health_determinant_eurostat_smoking_degree_of_urbanisation,
+                "hlth_ehis_sk2i":
+                    health_determinant_eurostat_former_daily_tobacco_smoker_income_quintile,
+                "hlth_ehis_sk2e":
+                    health_determinant_eurostat_former_daily_tobacco_smoker_education_attainment_level,
+                "hlth_ehis_sk3e":
+                    health_determinant_eurostat_daily_smokers_education_attainment_level,
+                "hlth_ehis_sk3i":
+                    health_determinant_eurostat_daily_smokers_income_quintile,
+                "hlth_ehis_sk3u":
+                    health_determinant_eurostat_daily_smokers_degree_of_urbanisation,
+                "hlth_ehis_sk4e":
+                    health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_education_attainment_level,
+                "hlth_ehis_sk4u":
+                    health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_degree_of_urbanisation,
+                "hlth_ehis_sk5e":
+                    health_determinant_eurostat_duration_of_daily_tobacco_smoking_education_attainment_level,
+                "hlth_ehis_sk6e":
+                    health_determinant_eurostat_electronic_cigarettes_similar_electronic_devices_education_attainment_level,
+                "hlth_ehis_de3":
+                    health_determinant_eurostat_daily_smokers_history_education_attainment_level,
+                "hlth_ehis_de4":
+                    health_determinant_eurostat_daily_smokers_history_income_quintile,
+                "hlth_ehis_de5":
+                    health_determinant_eurostat_daily_smokers_number_of_cigarettes_history_education_attainment_level
             }
             df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
@@ -799,6 +852,7 @@ class EuroStatTobaccoConsumption:
         # self._generate_mcf(sv_list)
         self._generate_tmcf()
 
+
 def main(_):
     input_path = FLAGS.input_path
     if not os.path.exists(input_path):
@@ -817,6 +871,7 @@ def main(_):
     loader = EuroStatTobaccoConsumption(ip_files, cleaned_csv_path, tmcf_path)
     # , mcf_path,\
     loader.process()
+
 
 if __name__ == "__main__":
     app.run(main)
