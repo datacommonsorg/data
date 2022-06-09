@@ -32,7 +32,7 @@ def download_file(input_urls: list, current_working_directory: str) -> None:
     # also removes the .gz extension.
     # Example - ....-prod/BulkDownloadListing?file=data/hlth_ehis_pe9e.tsv.gz
     # is made hlth_ehis_pe9e.tsv
-    path = current_working_directory+'/input_files/'
+    path = current_working_directory + '/input_files/'
     for download_file_url in input_urls:
         file_name = download_file_url.split("/")[-1][:-3]
         if not os.path.exists(path):
@@ -46,5 +46,3 @@ def download_file(input_urls: list, current_working_directory: str) -> None:
         # write to file in binary mode 'wb'
         with open(out_file, 'wb') as f:
             f.write(file_content)
-
-

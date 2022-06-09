@@ -18,10 +18,12 @@ and generates cleaned CSV, MCF, TMCF file.
 from sys import path
 # For import common.replacement_functions
 path.insert(1, '../')
-from common.replacement_functions import (_replace_sex,_replace_physact,
-    _replace_isced11,_replace_quant_inc,_replace_deg_urb,_replace_levels,
-    _replace_duration,_replace_c_birth,_replace_citizen,_replace_lev_limit,
-    _replace_bmi,_split_column)
+from common.replacement_functions import (_replace_sex, _replace_physact,
+                                          _replace_isced11, _replace_quant_inc,
+                                          _replace_deg_urb, _replace_levels,
+                                          _replace_duration, _replace_c_birth,
+                                          _replace_citizen, _replace_lev_limit,
+                                          _replace_bmi, _split_column)
 # For import util.alpha2_to_dcid
 path.insert(1, '../../../../')
 
@@ -31,7 +33,6 @@ import numpy as np
 from util.alpha2_to_dcid import COUNTRY_MAP
 from absl import app
 from absl import flags
-
 
 # pd.set_option("display.max_columns", None)
 # pd.set_option("display.max_rows", None)
@@ -638,7 +639,7 @@ class EuroStatPhysicalActivity:
             incomequin = gender = education = healthbehavior = exercise = ''
             residence = activity = duration = countryofbirth = citizenship = ''
             lev_limit = bmi = ''
-            
+
             sv_temp = sv.split("_AsAFractionOf_")
             denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
             sv_prop = sv_temp[0].split("_")
@@ -647,7 +648,7 @@ class EuroStatPhysicalActivity:
                 if prop in ["Count", "Person"]:
                     continue
                 if "PhysicalActivity" in prop:
-                    healthbehavior = "\nhealthbehavior: dcs:" + prop
+                    healthbehavior = "\nhealthBehavior: dcs:" + prop
                 elif "Male" in prop or "Female" in prop:
                     gender = "\ngender: dcs:" + prop
                 elif "Aerobic" in prop or "MuscleStrengthening" in prop \
@@ -663,7 +664,7 @@ class EuroStatPhysicalActivity:
                 elif "Urban" in prop or "Rural" in prop:
                     residence = "\nplaceOfResidenceClassification: dcs:" + prop
                 elif "Limitation" in prop:
-                    lev_limit = "\nglobalActivityLimitationIndicator: dcs:"\
+                    lev_limit = "\nglobalActivityLimitationindicator: dcs:"\
                         + prop
                 elif "ModerateActivity" in prop or "HeavyActivity" in prop\
                     or "NoActivityOrLightActivity" in prop:
@@ -692,11 +693,19 @@ class EuroStatPhysicalActivity:
                     bmi = "__" + prop
                     healthbehavior = healthbehavior + bmi
 
-            final_mcf_template += mcf_template.format(
-                inp1=sv, inp2=denominator, inp3=incomequin, inp4=education, 
-                inp5=healthbehavior, inp6=exercise, inp7=residence, 
-                inp8=activity, inp9=duration, inp10=gender, 
-                inp11=countryofbirth, inp12=citizenship, inp13=lev_limit) + "\n"
+            final_mcf_template += mcf_template.format(inp1=sv,
+                                                      inp2=denominator,
+                                                      inp3=incomequin,
+                                                      inp4=education,
+                                                      inp5=healthbehavior,
+                                                      inp6=exercise,
+                                                      inp7=residence,
+                                                      inp8=activity,
+                                                      inp9=duration,
+                                                      inp10=gender,
+                                                      inp11=countryofbirth,
+                                                      inp12=citizenship,
+                                                      inp13=lev_limit) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:

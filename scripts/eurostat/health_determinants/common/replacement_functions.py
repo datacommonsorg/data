@@ -4,6 +4,7 @@ which are common for all the Eurostat Health Inputs
 """
 import pandas as pd
 
+
 def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
