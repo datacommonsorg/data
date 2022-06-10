@@ -36,8 +36,7 @@ default_input_path = os.path.dirname(
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
-def smoking_tobaccoproducts_county_of_birth(
-        df: pd.DataFrame) -> pd.DataFrame:
+def smoking_tobaccoproducts_county_of_birth(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
     Input Taken: DF
@@ -128,8 +127,7 @@ def smoking_tobaccoproducts_education_attainment_level(
     return df
 
 
-def smoking_tobaccoproducts_income_quintile(
-        df: pd.DataFrame) -> pd.DataFrame:
+def smoking_tobaccoproducts_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
     Input Taken: DF
@@ -279,8 +277,7 @@ def daily_smokers_cigarettes_education_attainment_level(
     return df
 
 
-def daily_smokers_cigarettes_income_quintile(
-        df: pd.DataFrame) -> pd.DataFrame:
+def daily_smokers_cigarettes_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
     Input Taken: DF
@@ -745,7 +742,7 @@ class EuroStatTobaccoConsumption:
     """
 
     def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str,tmcf_file_path: str) -> None:
+                 mcf_file_path: str, tmcf_file_path: str) -> None:
         self.input_files = input_files
         self.cleaned_csv_file_path = csv_file_path
         self.mcf_file_path = mcf_file_path
@@ -870,7 +867,8 @@ def main(_):
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
-    loader = EuroStatTobaccoConsumption(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
+    loader = EuroStatTobaccoConsumption(ip_files, cleaned_csv_path, mcf_path,
+                                        tmcf_path)
     loader.process()
 
 
