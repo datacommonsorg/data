@@ -119,10 +119,10 @@ def _replace_levels(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'levels': {
-            'HVY': 'HeavyActivity',
-            'MOD': 'ModerateActivity',
+            'HVY': 'HeavyActivityLevel',
+            'MOD': 'ModerateActivityLevel',
             'MOD_HVY': 'ModerateActivityOrHeavyActivity',
-            'NONE_LGHT': 'NoneActivityOrLightActivity'
+            'NONE_LGHT': 'NoActivityOrLightActivityLevel'
         }
     })
     return df
@@ -180,8 +180,8 @@ def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'citizen': {
-            'EU28_FOR': 'ForeignWithinEU28',
-            'NEU28_FOR': 'ForeignOutsideEU28',
+            'EU28_FOR': 'WithinEU28AndNotACitizen',
+            'NEU28_FOR': 'CitizenOutsideEU28',
             'FOR': 'NotACitizen',
             'NAT': 'Citizen'
         }
@@ -224,7 +224,11 @@ def _replace_bmi(df: pd.DataFrame) -> pd.DataFrame:
             'BMI18P5-24': 'Normalweight',
             'BMI_GE25': 'Overweight',
             'BMI25-29': 'PreObese',
-            'BMI_GE30': 'Obesity'
+            'BMI_GE30': 'Obesity',
+            'LT18P5': 'Underweight',
+            '18P5-25': 'Normalweight',
+            '25-30': 'Overweight',
+            'GE30': 'Obesity'
         }
     })
     return df

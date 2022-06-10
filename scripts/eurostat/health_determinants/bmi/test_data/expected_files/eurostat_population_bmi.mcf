@@ -6,6 +6,26 @@ healthBehavior: dcs:Normalweight
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_Normalweight_CitizenOutsideEU28_Female_AsAFractionOf_Count_Person_CitizenOutsideEU28_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
+healthBehavior: dcs:Normalweight
+gender: dcs:Female
+citizenship: dcs:CitizenOutsideEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Normalweight_CitizenOutsideEU28_Male_AsAFractionOf_Count_Person_CitizenOutsideEU28_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+citizenship: dcs:CitizenOutsideEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_Normalweight_Citizen_Female_AsAFractionOf_Count_Person_Citizen_Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -162,26 +182,6 @@ nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_ForeignOutsideEU28_Female_AsAFractionOf_Count_Person_ForeignOutsideEU28_Female
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignOutsideEU28_Female
-healthBehavior: dcs:Normalweight
-gender: dcs:Female
-citizenship: dcs:ForeignOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Normalweight_ForeignOutsideEU28_Male_AsAFractionOf_Count_Person_ForeignOutsideEU28_Male
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignOutsideEU28_Male
-healthBehavior: dcs:Normalweight
-gender: dcs:Male
-citizenship: dcs:ForeignOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Count_Person_Normalweight_Male_ForeignBornOutsideEU28_AsAFractionOf_Count_Person_Male_ForeignBornOutsideEU28
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -212,13 +212,13 @@ nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_Male_Moderate_AsAFractionOf_Count_Person_Male_Moderate
+Node: dcid:Count_Person_Normalweight_Male_ModerateActivityLimitation_AsAFractionOf_Count_Person_Male_ModerateActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Moderate
+measurementDenominator: dcs:Count_Person_Male_ModerateActivityLimitation
 healthBehavior: dcs:Normalweight
+physicalActivityEffortLevel: dcs:ModerateActivityLimitation
 gender: dcs:Male
-globalActivityLimitationindicator: dcs:Moderate
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -232,13 +232,13 @@ nativity: dcs:Native
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_Male_None_AsAFractionOf_Count_Person_Male_None
+Node: dcid:Count_Person_Normalweight_Male_NoActivityLimitation_AsAFractionOf_Count_Person_Male_NoActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_None
+measurementDenominator: dcs:Count_Person_Male_NoActivityLimitation
 healthBehavior: dcs:Normalweight
+physicalActivityEffortLevel: dcs:NoActivityLimitation
 gender: dcs:Male
-globalActivityLimitationindicator: dcs:None
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -266,6 +266,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_SemiUrban
 healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:SemiUrban
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -316,16 +317,6 @@ gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Overweight_ForeignWithinEU28_Female_AsAFractionOf_Count_Person_ForeignWithinEU28_Female
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignWithinEU28_Female
-healthBehavior: dcs:Overweight
-gender: dcs:Female
-citizenship: dcs:ForeignWithinEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Count_Person_Overweight_Male_AsAFractionOf_Count_Person_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -365,12 +356,12 @@ nativity: dcs:Native
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Overweight_Moderate_AsAFractionOf_Count_Person_Moderate
+Node: dcid:Count_Person_Overweight_ModerateActivityLimitation_AsAFractionOf_Count_Person_ModerateActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Moderate
+measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
 healthBehavior: dcs:Overweight
-globalActivityLimitationindicator: dcs:Moderate
+physicalActivityEffortLevel: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -390,6 +381,36 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Percentile80To100
 income: [80 100 Percentile]
 healthBehavior: dcs:Overweight
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Overweight_WithinEU28AndNotACitizen_Female_AsAFractionOf_Count_Person_WithinEU28AndNotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+citizenship: dcs:WithinEU28AndNotACitizen
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_PreObese_CitizenOutsideEU28_Female_AsAFractionOf_Count_Person_CitizenOutsideEU28_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+citizenship: dcs:CitizenOutsideEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_PreObese_CitizenOutsideEU28_Male_AsAFractionOf_Count_Person_CitizenOutsideEU28_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -422,6 +443,16 @@ healthBehavior: dcs:PreObese
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_PreObese_Female_LimitedActivityLimitation_AsAFractionOf_Count_Person_Female_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_LimitedActivityLimitation
+healthBehavior: dcs:PreObese
+physicalActivityEffortLevel: dcs:LimitedActivityLimitation
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_PreObese_Female_Percentile20To40_AsAFractionOf_Count_Person_Female_Percentile20To40
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -432,43 +463,13 @@ gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Count_Person_PreObese_Female_Severe_AsAFractionOf_Count_Person_Female_Severe
+Node: dcid:Count_Person_PreObese_Female_SevereActivityLimitation_AsAFractionOf_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Severe
+measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
 healthBehavior: dcs:PreObese
+physicalActivityEffortLevel: dcs:SevereActivityLimitation
 gender: dcs:Female
-globalActivityLimitationindicator: dcs:Severe
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_PreObese_Female_SomeOrSevere_AsAFractionOf_Count_Person_Female_SomeOrSevere
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SomeOrSevere
-healthBehavior: dcs:PreObese
-gender: dcs:Female
-globalActivityLimitationindicator: dcs:SomeOrSevere
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_PreObese_ForeignOutsideEU28_Female_AsAFractionOf_Count_Person_ForeignOutsideEU28_Female
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignOutsideEU28_Female
-healthBehavior: dcs:PreObese
-gender: dcs:Female
-citizenship: dcs:ForeignOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_PreObese_ForeignOutsideEU28_Male_AsAFractionOf_Count_Person_ForeignOutsideEU28_Male
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignOutsideEU28_Male
-healthBehavior: dcs:PreObese
-gender: dcs:Male
-citizenship: dcs:ForeignOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -477,6 +478,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_SemiUrban
 healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:SemiUrban
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
