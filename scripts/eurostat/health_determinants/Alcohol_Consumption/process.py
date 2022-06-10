@@ -37,7 +37,7 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-#health_determinant_eurostat_alcoholconsumption_education_attainment
+#alcoholconsumption_by_education_attainment
 def hlth_ehis_al1e(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_al1e for concatenation in Final CSV
@@ -91,9 +91,9 @@ def hlth_ehis_al1i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['quant_inc']+'_'+df['sex']\
+    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['quant_inc']\
         +'_AlcoholConsumption_'+df['frequenc']\
-            +'_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
+            +'_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
     # dropping unwanted columns
     df.drop(columns=['quant_inc','frequenc','sex','age','unit'],inplace=True)
     # ask
@@ -125,8 +125,8 @@ def hlth_ehis_al1u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_frequenc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+'AlcoholConsumption'+\
-        '_'+df['deg_urb']+'_'+df['frequenc']+'_AsAFractionOf_Count_Person_'+\
+    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['deg_urb']+\
+        '_AlcoholConsumption_'+df['frequenc']+'_AsAFractionOf_Count_Person_'+\
         df['sex']+'_'+df['deg_urb']
     # dropping unwanted columns
     df.drop(columns=['frequenc','deg_urb','sex','unit','age'],inplace=True)
@@ -158,7 +158,7 @@ def hlth_ehis_al3e(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_isced11(df)
     # giving proper statvar name
     df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_BingeDrinking_'+\
-        df['frequenc']+'_'+'AsAFractionOf_Count_Person_'+\
+        df['frequenc']+'_AsAFractionOf_Count_Person_'+\
             df['isced11']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['unit','age','isced11','frequenc','sex'],inplace=True)
@@ -189,9 +189,9 @@ def hlth_ehis_al3i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_BingeDrinking_'+\
-        +df['quant_inc']+'_'+df['frequenc']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['quant_inc']\
+        +'_BingeDrinking_'+df['frequenc']\
+            +'_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']\
     # dropping unwanted columns
     df.drop(columns=['unit','age','quant_inc','frequenc','sex'],inplace=True)
     # ask
@@ -223,9 +223,9 @@ def hlth_ehis_al3u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_frequenc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+'BingeDrinking'+\
-        '_'+df['deg_urb']+'_'+df['frequenc']+'_AsAFractionOf_Count_Person_'+\
-            df['sex']+'_'+df['deg_urb']
+    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['deg_urb']+\
+        '_BingeDrinking_'+df['frequenc']+'_AsAFractionOf_Count_Person_'+\
+        df['sex']+'_'+df['deg_urb']
     # dropping unwanted columns
     df.drop(columns=['frequenc','deg_urb','sex','unit','age'],inplace=True)
     # ask
@@ -289,9 +289,9 @@ def hlth_ehis_al2i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+\
-        +df['quant_inc']+'_'+'HazardousAlcoholConsumption'+'_'+\
-            'AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['quant_inc']\
+        +'_HazardousAlcoholConsumption_AsAFractionOf_Count_Person_'\
+            +df['sex']+'_'+df['quant_inc']
     # dropping unwanted columns
     df.drop(columns=['unit','age' ,'quant_inc','sex'],inplace=True)
     # ask
@@ -322,8 +322,8 @@ def hlth_ehis_al2u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+'HazardousAlcoholConsumption'+\
-        '_'+df['deg_urb']+'_AsAFractionOf_Count_Person_'+\
+    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['deg_urb']+\
+        '_HazardousAlcoholConsumption_AsAFractionOf_Count_Person_'+\
         df['sex']+'_'+df['deg_urb']
     # dropping unwanted columns
     df.drop(columns=['deg_urb','sex','unit','age'],inplace=True)
@@ -356,8 +356,8 @@ def hlth_ehis_al1b(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_c_birth(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['frequenc']+'_'+df['sex']\
-        +'_'+'AlcoholConsumption'+'_'+df['c_birth']+\
+    df['SV'] = 'Count_Person_'+'_'+df['sex']+'_'+df['c_birth']\
+        +'_'+'AlcoholConsumption'+'_'+df['frequenc']+\
         '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['c_birth']
     # dropping unwanted columns
     df.drop(columns=['frequenc','c_birth','sex','unit','age'],inplace=True)
@@ -390,8 +390,8 @@ def hlth_ehis_al1c(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_citizen(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['citizen']+'_'+df['frequenc']+'_'+\
-        df['sex']+'_AlcoholConsumption'+\
+    df['SV'] = 'Count_Person_'+df['citizen']+'_'+df['sex']+\
+        '_AlcoholConsumption_'+df['frequenc']+\
         '_AsAFractionOf_Count_Person_'+df['citizen']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['frequenc','citizen','sex','unit','age'],inplace=True)
@@ -512,17 +512,17 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF
     """
     df = df.replace({'isced11': {
-        'ED0-2': 'EducationalAttainment'+\
+        'ED0-2':
         'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED0_2': 'EducationalAttainment'+\
+        'ED0_2':
         'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED3-4': 'EducationalAttainment'+\
+        'ED3-4':
         'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED3_4': 'EducationalAttainment'+\
+        'ED3_4':
             'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
         'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
-        'ED5-8': 'EducationalAttainmentTertiaryEducation',
-        'ED5_8': 'EducationalAttainmentTertiaryEducation',
+        'ED5-8': 'TertiaryEducation',
+        'ED5_8': 'TertiaryEducation',
         'TOTAL': 'Total'
         }})
     return df
@@ -578,8 +578,8 @@ def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF
     """
     df = df.replace({'citizen': {
-        'EU28_FOR': 'ForeignWithinEU28',
-        'NEU28_FOR': 'ForeignOutsideEU28',
+        'EU28_FOR': 'WithinEU28AndNotACitizen',
+        'NEU28_FOR': 'CitizenOutsideEU28',
         'FOR': 'NotACitizen',
         'NAT': 'Citizen'
     }})
@@ -633,7 +633,7 @@ class EuroStatAlcoholConsumption:
         # pylint: disable=R0915
         mcf_template = ("Node: dcid:{}\n"
                         "typeOf: dcs:StatisticalVariable\n"
-                        "populationType: dcs:Person{}{}{}{}{}{}{}{}\n"
+                        "populationType: dcs:Person{}{}{}{}{}{}{}{}{}\n"
                         "statType: dcs:measuredValue\n"
                         "measuredProperty: dcs:count\n")
         final_mcf_template = ""
@@ -664,8 +664,9 @@ class EuroStatAlcoholConsumption:
                         .replace("Or","__")
                 elif "Education" in prop:
                     education = "\neducationalAttainment: dcs:" + \
-                        prop.replace("EducationalAttainment","")\
-                        .replace("Or","__")
+                        prop.replace("Or","__")
+                    #prop.replace("EducationalAttainment","")
+                    prop.replace("Or","__")
                 elif "Percentile" in prop:
                     incomequin = "\nincome: ["+prop.replace("Percentile",\
                         "").replace("IncomeOf","").replace("To"," ")+" Percentile]"
@@ -677,8 +678,8 @@ class EuroStatAlcoholConsumption:
                         prop.replace("CountryOfBirth","")
                 elif "ForeignWithinEU28" in prop or "ForeignOutsideEU28" in prop\
                     or "Citizen" in prop or "NotACitizen" in prop:
-                    citizenship = "\ncitizenship: dcs:" + \
-                        prop.replace("Citizenship","")
+                    citizenship = "\ncitizenship: dcs:"+\
+                    prop.replace("Citizenship","")
 
             final_mcf_template += mcf_template.format(
                 sv, denominator, healthbehavior, gender,
@@ -733,11 +734,11 @@ class EuroStatAlcoholConsumption:
             df['Measurement_Method'] = 'EurostatRegionalStatistics'
             df['Measurement_Method'] = np.where(
                 df['observation'].str.contains('u'),
-                'LowReliability/EurostatRegionalStatistics',
+                'EurostatRegionalStatistics_LowReliability',
                 df['Measurement_Method'])
             df['Measurement_Method'] = np.where(
                 df['observation'].str.contains('d'),
-                'DefinitionDiffers/EurostatRegionalStatistics',
+                'EurostatRegionalStatistics_DefinitionDiffers',
                 df['Measurement_Method'])
             df['observation'] = (df['observation'].str.replace(
                 ':', '').str.replace(' ', '').str.replace('u', '')
