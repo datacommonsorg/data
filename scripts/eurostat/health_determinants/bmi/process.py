@@ -290,6 +290,7 @@ def _age_sex_acitivity_limitation(data_df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return data_df
 
+
 def _generate_tmcf(tmcf_file_path) -> None:
     """
     This method generates TMCF file w.r.t
