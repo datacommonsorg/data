@@ -46,7 +46,8 @@ base_class = EnergyIndiaBase(category='Electricity',
                              dataset_name=DATASET_NAME,
                              mcf_path=mcf_path,
                              tmcf_path=tmcf_path,
-                             mcf_strings=mcf_strings)
+                             mcf_strings=mcf_strings,
+                             energy_type_filter=['Solar', 'Wind'])
 
 final_csv = base_class.preprocess_data()
 final_csv.to_csv(os.path.join(module_dir, "{}.csv".format(DATASET_NAME)),

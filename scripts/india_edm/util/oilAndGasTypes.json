@@ -7,7 +7,7 @@
         "ATF/RTF/JET": "GasolineJetFuel",
         "DIESEL/ HSD": "DieselOil",
         "BITUMEN": "OilShaleAndTarSands",
-        "OTHERS": "UN_OtherOilProducts",
+        "OTHERS": "IndiaEDM_OtherOilProducts",
         "FUEL OIL": "FuelOil",
         "MOTOR SPIRIT (PETROL)": "MotorGasoline",
         "LUBES/GREASES": "Lubricants",

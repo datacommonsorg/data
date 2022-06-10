@@ -6,13 +6,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Coal
 
-Node: dcid:Annual_Generation_Electricity_PumpedHydro
+Node: dcid:Annual_Generation_Electricity_ConventionalHydroelectric
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:PumpedHydro
+energySource: dcs:ConventionalHydroelectric
 
 Node: dcid:Annual_Generation_Electricity_Bagasse
 typeOf: dcs:StatisticalVariable
@@ -21,6 +21,14 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Bagasse
+
+Node: dcid:Annual_Generation_Electricity_SmallHydro
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Electricity
+measuredProperty: dcs:generation
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:SmallHydro
 
 Node: dcid:Annual_Generation_Electricity_Solar
 typeOf: dcs:StatisticalVariable
@@ -94,13 +102,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Naphtha
 
-Node: dcid:Annual_Capacity_Electricity_PumpedHydro
+Node: dcid:Annual_Capacity_Electricity_SmallHydro
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:capacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:PumpedHydro
+energySource: dcs:SmallHydro
 
 Node: dcid:Annual_Capacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable
@@ -142,13 +150,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:OtherBiomass
 
-Node: dcid:Annual_PotentialCapacity_Electricity_PumpedHydro
+Node: dcid:Annual_PotentialCapacity_Electricity_SmallHydro
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:potentialcapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:PumpedHydro
+energySource: dcs:SmallHydro
 
 Node: dcid:Annual_PotentialCapacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable

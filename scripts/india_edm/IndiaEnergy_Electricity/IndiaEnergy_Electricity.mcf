@@ -22,13 +22,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NaturalGas
 
-Node: dcid:Annual_Capacity_Electricity_PumpedHydro
+Node: dcid:Annual_Capacity_Electricity_ConventionalHydroelectric
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:capacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:PumpedHydro
+energySource: dcs:ConventionalHydroelectric
 
 Node: dcid:Annual_Capacity_Electricity_RenewableEnergy
 typeOf: dcs:StatisticalVariable
@@ -172,13 +172,13 @@ measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 
-Node: dcid:Annual_PotentialCapacity_Electricity_PumpedHydro
+Node: dcid:Annual_PotentialCapacity_Electricity_ConventionalHydroelectric
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:PumpedHydro
+energySource: dcs:ConventionalHydroelectric
 
 Node: dcid:Annual_PotentialCapacity_Electricity_OtherBiomass
 typeOf: dcs:StatisticalVariable
@@ -187,6 +187,14 @@ measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:OtherBiomass
+
+Node: dcid:Annual_PotentialCapacity_Electricity_SmallHydro
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Electricity
+measuredProperty: dcs:potentialCapacity
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:SmallHydro
 
 Node: dcid:Annual_PotentialCapacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable

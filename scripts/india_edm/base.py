@@ -41,13 +41,14 @@ class EnergyIndiaBase():
     """
 
     def __init__(self, category, json_file, json_key, dataset_name, mcf_path,
-                 tmcf_path, mcf_strings):
+                 tmcf_path, mcf_strings, energy_type_filter=None):
         self.cat = category
         self.json_file = json_file
         self.json_key = json_key
         self.dataset_name = dataset_name
         self.mcf_path = mcf_path
         self.tmcf_path = tmcf_path
+        self.energy_type_filter = energy_type_filter
 
         # Template strings for MCF nodes
         self.NODE = mcf_strings['node']
@@ -223,6 +224,15 @@ class EnergyIndiaBase():
         Helper method to convert text to camel case
         """
         return str(text[0]).lower() + str(text[1:])
+    
+    def _filter_overlapping_energy_sources(self, df):
+        """
+        Renewable energy sources overlap between Electricity and Renewables
+        datasets. This method ensures that only one of the aggregated values
+        for the renewable energy is written into final CSV.
+        """
+        df = df[~df['StatVar'].str.contains('|'.join(self.energy_type_filter))]
+        return df
 
     def _aggregate_values_to_country_level(self, df):
         """
@@ -334,6 +344,10 @@ class EnergyIndiaBase():
 
         final_df = final_df[self.columns]
         final_df = self._aggregate_values_to_country_level(final_df)
+        
+        if self.energy_type_filter:
+            print(self.energy_type_filter)
+            final_df = self._filter_overlapping_energy_sources(final_df)
 
         # Return only required columns in the final_df
         return final_df

@@ -222,13 +222,13 @@ measurementQualifier: dcs:Monthly
 statType: dcs:measuredValue
 energySource: dcs:PetroleumCoke
 
-Node: dcid:Monthly_Imports_Fuel_UN_OtherOilProducts
+Node: dcid:Monthly_Imports_Fuel_IndiaEDM_OtherOilProducts
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Fuel
 measuredProperty: dcs:imports
 measurementQualifier: dcs:Monthly
 statType: dcs:measuredValue
-energySource: dcs:UN_OtherOilProducts
+energySource: dcs:IndiaEDM_OtherOilProducts
 
 Node: dcid:Monthly_Imports_Fuel_FuelOil
 typeOf: dcs:StatisticalVariable

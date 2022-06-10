@@ -1,13 +1,13 @@
 {
     "EnergySource": {
         "BIOMASS": "OtherBiomass",
-        "SMALL HYDRO": "PumpedHydro",
+        "SMALL HYDRO": "SmallHydro",
         "SOLAR": "Solar",
         "WASTE": "NonRenewableWaste",
         "WIND": "Wind",
         "COGENERATION-BAGASSE": "Bagasse",
         "COAL": "Coal",
-        "HYDRO": "PumpedHydro",
+        "HYDRO": "ConventionalHydroelectric",
         "BIOMASS-BAGASSE": "Bagasse",
         "RENEWABLES": "RenewableEnergy",
         "DIESEL": "DieselOil",

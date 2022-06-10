@@ -26,7 +26,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "637"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -34,7 +34,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "638"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -42,7 +42,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "639"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -50,7 +50,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "640"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -58,7 +58,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "641"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -66,7 +66,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "642"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -74,7 +74,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "643"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -82,7 +82,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "644"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -90,7 +90,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "645"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -98,7 +98,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "646"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -106,7 +106,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "647"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -114,7 +114,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "648"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -122,7 +122,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "649"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -130,7 +130,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "650"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -138,7 +138,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "651"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_MiddlingsCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_MiddlingsCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -146,7 +146,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "652"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -154,7 +154,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "653"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -162,7 +162,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "654"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -170,7 +170,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "655"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -178,7 +178,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "656"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -186,7 +186,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "657"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -194,7 +194,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "658"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -202,7 +202,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "659"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -210,7 +210,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "660"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -218,7 +218,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "661"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -226,7 +226,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "662"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -234,7 +234,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "663"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_RawCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -242,7 +242,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "664"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_WashedCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_BricksConstructionIndustry_WashedCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -250,7 +250,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "665"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_CementConstructionIndustry_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_CementConstructionIndustry_Coal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }, {
     "level": "LEVEL_WARNING",
@@ -258,7 +258,7 @@
       "file": "IndiaEnergy_Coal.csv",
       "lineNumber": "666"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_CementConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E1'",
+    "userMessage": "Failed reference existence check :: value-ref: 'Annual_Consumption_Coal_CementConstructionIndustry_LigniteCoal', property: 'variableMeasured', node: 'E:IndiaEnergy_Coal->E0'",
     "counterKey": "Existence_MissingReference_variableMeasured"
   }],
   "statsCheckSummary": [{
@@ -438,7 +438,7 @@
           "value": 6654000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "910"
+            "lineNumber": "954"
           }]
         }]
       }]
@@ -450,7 +450,7 @@
           "value": 2104000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "909"
+            "lineNumber": "953"
           }]
         }]
       }, {
@@ -459,11 +459,44 @@
           "value": 6654000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "910"
+            "lineNumber": "954"
           }]
         }]
       }],
       "percentDifference": 216.25
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Annual_Consumption_Coal_IndiaEDM_UnspecifiedSector_MiddlingsCoal",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "",
+    "unit": "MetricTon",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018-03-01",
+        "values": [{
+          "value": 9000.0,
+          "locations": [{
+            "file": "IndiaEnergy_Coal.csv",
+            "lineNumber": "866"
+          }]
+        }]
+      }, {
+        "date": "2019-03-01",
+        "values": [{
+          "value": 699000.0,
+          "locations": [{
+            "file": "IndiaEnergy_Coal.csv",
+            "lineNumber": "867"
+          }]
+        }]
+      }],
+      "percentDifference": 7666.67
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2007-03-01, 2008-03-01, 2010-03-01, 2011-03-01, 2013-03-01, 2014-03-01, 2015-03-01, 2016-03-01, 2017-03-01, 2018-03-01, 2019-03-01"
     }]
   }, {
     "placeDcid": "country/IND",
@@ -513,7 +546,7 @@
           "value": 74000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "857"
+            "lineNumber": "901"
           }]
         }]
       }, {
@@ -522,7 +555,7 @@
           "value": 1370000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "858"
+            "lineNumber": "902"
           }]
         }]
       }],
@@ -692,7 +725,7 @@
           "value": 4000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "844"
+            "lineNumber": "888"
           }]
         }]
       }, {
@@ -701,7 +734,7 @@
           "value": 108000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "845"
+            "lineNumber": "889"
           }]
         }]
       }],
@@ -725,7 +758,7 @@
           "value": 365000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "929"
+            "lineNumber": "973"
           }]
         }]
       }, {
@@ -734,7 +767,7 @@
           "value": 1818000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "930"
+            "lineNumber": "974"
           }]
         }]
       }],
@@ -766,7 +799,7 @@
           "value": 2534000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "974"
+            "lineNumber": "1018"
           }]
         }]
       }]
@@ -778,7 +811,7 @@
           "value": 458000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "973"
+            "lineNumber": "1017"
           }]
         }]
       }, {
@@ -787,41 +820,11 @@
           "value": 2534000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "974"
+            "lineNumber": "1018"
           }]
         }]
       }],
       "percentDifference": 453.28
-    }]
-  }, {
-    "placeDcid": "country/IND",
-    "statVarDcid": "Annual_Consumption_Coal_UN_UnspecifiedSector_WashedCoal",
-    "measurementMethod": "",
-    "observationPeriod": "",
-    "scalingFactor": "",
-    "unit": "MetricTon",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
-      "problemPoints": [{
-        "date": "2015-03-01",
-        "values": [{
-          "value": 65000.0,
-          "locations": [{
-            "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "1029"
-          }]
-        }]
-      }, {
-        "date": "2019-03-01",
-        "values": [{
-          "value": 901000.0,
-          "locations": [{
-            "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "1030"
-          }]
-        }]
-      }],
-      "percentDifference": 1286.15
     }]
   }, {
     "placeDcid": "country/IND",
@@ -868,7 +871,7 @@
           "value": 58000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "894"
+            "lineNumber": "938"
           }]
         }]
       }, {
@@ -877,7 +880,7 @@
           "value": 888000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "895"
+            "lineNumber": "939"
           }]
         }]
       }],
@@ -918,7 +921,7 @@
     }]
   }, {
     "placeDcid": "country/IND",
-    "statVarDcid": "Annual_Consumption_Coal_UN_UnspecifiedSector_MiddlingsCoal",
+    "statVarDcid": "Annual_Consumption_Coal_IndiaEDM_UnspecifiedSector_WashedCoal",
     "measurementMethod": "",
     "observationPeriod": "",
     "scalingFactor": "",
@@ -926,28 +929,25 @@
     "validationCounters": [{
       "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
       "problemPoints": [{
-        "date": "2018-03-01",
+        "date": "2015-03-01",
         "values": [{
-          "value": 9000.0,
+          "value": 65000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "1012"
+            "lineNumber": "883"
           }]
         }]
       }, {
         "date": "2019-03-01",
         "values": [{
-          "value": 699000.0,
+          "value": 901000.0,
           "locations": [{
             "file": "IndiaEnergy_Coal.csv",
-            "lineNumber": "1013"
+            "lineNumber": "884"
           }]
         }]
       }],
-      "percentDifference": 7666.67
-    }, {
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2007-03-01, 2008-03-01, 2010-03-01, 2011-03-01, 2013-03-01, 2014-03-01, 2015-03-01, 2016-03-01, 2017-03-01, 2018-03-01, 2019-03-01"
+      "percentDifference": 1286.15
     }]
   }],
   "commandArgs": {
