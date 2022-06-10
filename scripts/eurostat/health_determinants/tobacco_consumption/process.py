@@ -22,10 +22,11 @@ path.insert(1, '../../../../')
 import os
 import pandas as pd
 import numpy as np
+import mcf_generator
 from util.alpha2_to_dcid import COUNTRY_MAP
 from absl import app
 from absl import flags
-
+# from mcf_generator import generate_mcf
 # pd.set_option("display.max_columns", None)
 # pd.set_option("display.max_rows", None)
 
@@ -35,7 +36,7 @@ default_input_path = os.path.dirname(
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
-def health_determinant_eurostat_smoking_county_of_birth(
+def smoking_tobaccoproducts_county_of_birth(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -67,7 +68,7 @@ def health_determinant_eurostat_smoking_county_of_birth(
     return df
 
 
-def health_determinant_eurostat_smoking_country_of_citizenship(
+def smoking_tobaccoproducts_country_of_citizenship(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -99,7 +100,7 @@ def health_determinant_eurostat_smoking_country_of_citizenship(
     return df
 
 
-def health_determinant_eurostat_smoking_education_attainment_level(
+def smoking_tobaccoproducts_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -127,7 +128,7 @@ def health_determinant_eurostat_smoking_education_attainment_level(
     return df
 
 
-def health_determinant_eurostat_smoking_income_quintile(
+def smoking_tobaccoproducts_income_quintile(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -154,7 +155,7 @@ def health_determinant_eurostat_smoking_income_quintile(
     return df
 
 
-def health_determinant_eurostat_smoking_degree_of_urbanisation(
+def smoking_tobaccoproducts_degree_of_urbanisation(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -186,7 +187,7 @@ def health_determinant_eurostat_smoking_degree_of_urbanisation(
     return df
 
 
-def health_determinant_eurostat_former_daily_tobacco_smoker_income_quintile(
+def former_daily_tobacco_smoker_income_quintile(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -219,7 +220,7 @@ def health_determinant_eurostat_former_daily_tobacco_smoker_income_quintile(
     return df
 
 
-def health_determinant_eurostat_former_daily_tobacco_smoker_education_attainment_level(
+def former_daily_tobacco_smoker_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -251,7 +252,7 @@ def health_determinant_eurostat_former_daily_tobacco_smoker_education_attainment
     return df
 
 
-def health_determinant_eurostat_daily_smokers_education_attainment_level(
+def daily_smokers_cigarettes_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -278,7 +279,7 @@ def health_determinant_eurostat_daily_smokers_education_attainment_level(
     return df
 
 
-def health_determinant_eurostat_daily_smokers_income_quintile(
+def daily_smokers_cigarettes_income_quintile(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -305,7 +306,7 @@ def health_determinant_eurostat_daily_smokers_income_quintile(
     return df
 
 
-def health_determinant_eurostat_daily_smokers_degree_of_urbanisation(
+def daily_smokers_cigarettes_degree_of_urbanisation(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -337,7 +338,7 @@ def health_determinant_eurostat_daily_smokers_degree_of_urbanisation(
     return df
 
 
-def health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_education_attainment_level(
+def daily_exposure_tobacco_smoke_indoors_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -365,7 +366,7 @@ def health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_educatio
     return df
 
 
-def health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_degree_of_urbanisation(
+def daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -398,7 +399,7 @@ def health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_degree_o
     return df
 
 
-def health_determinant_eurostat_duration_of_daily_tobacco_smoking_education_attainment_level(
+def duration_daily_tobacco_smoking_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -431,7 +432,7 @@ def health_determinant_eurostat_duration_of_daily_tobacco_smoking_education_atta
     return df
 
 
-def health_determinant_eurostat_electronic_cigarettes_similar_electronic_devices_education_attainment_level(
+def electronic_cigarettes_similar_electronic_devices_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -464,7 +465,7 @@ def health_determinant_eurostat_electronic_cigarettes_similar_electronic_devices
     return df
 
 
-def health_determinant_eurostat_daily_smokers_history_education_attainment_level(
+def daily_smokers_cigarettes_history_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -493,7 +494,7 @@ def health_determinant_eurostat_daily_smokers_history_education_attainment_level
     return df
 
 
-def health_determinant_eurostat_daily_smokers_history_income_quintile(
+def daily_smokers_cigarettes_history_income_quintile(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -522,7 +523,7 @@ def health_determinant_eurostat_daily_smokers_history_income_quintile(
     return df
 
 
-def health_determinant_eurostat_daily_smokers_number_of_cigarettes_history_education_attainment_level(
+def daily_smokers_number_of_cigarettes_history_education_attainment_level(
         df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
@@ -576,7 +577,7 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
         'ED3_4': 'EducationalAttainment'+\
             'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
         'ED5_6': 'EducationalAttainment'+\
-            'FirstAndSecondStageOfTertiaryEducation',
+            'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
         'ED5-8': 'EducationalAttainmentTertiaryEducation',
         'ED5_8': 'EducationalAttainmentTertiaryEducation',
         'TOTAL': 'Total'
@@ -744,11 +745,10 @@ class EuroStatTobaccoConsumption:
     """
 
     def __init__(self, input_files: list, csv_file_path: str,
-                 tmcf_file_path: str) -> None:
-        #  mcf_file_path: str, )
+                 mcf_file_path: str,tmcf_file_path: str) -> None:
         self.input_files = input_files
         self.cleaned_csv_file_path = csv_file_path
-        # self.mcf_file_path = mcf_file_path
+        self.mcf_file_path = mcf_file_path
         self.tmcf_file_path = tmcf_file_path
 
     def _generate_tmcf(self) -> None:
@@ -795,39 +795,39 @@ class EuroStatTobaccoConsumption:
             file_name = file_path.split("/")[-1][:-4]
             function_dict = {
                 "hlth_ehis_sk1b":
-                    health_determinant_eurostat_smoking_county_of_birth,
+                    smoking_tobaccoproducts_county_of_birth,
                 "hlth_ehis_sk1c":
-                    health_determinant_eurostat_smoking_country_of_citizenship,
+                    smoking_tobaccoproducts_country_of_citizenship,
                 "hlth_ehis_sk1e":
-                    health_determinant_eurostat_smoking_education_attainment_level,
+                    smoking_tobaccoproducts_education_attainment_level,
                 "hlth_ehis_sk1i":
-                    health_determinant_eurostat_smoking_income_quintile,
+                    smoking_tobaccoproducts_income_quintile,
                 "hlth_ehis_sk1u":
-                    health_determinant_eurostat_smoking_degree_of_urbanisation,
+                    smoking_tobaccoproducts_degree_of_urbanisation,
                 "hlth_ehis_sk2i":
-                    health_determinant_eurostat_former_daily_tobacco_smoker_income_quintile,
+                    former_daily_tobacco_smoker_income_quintile,
                 "hlth_ehis_sk2e":
-                    health_determinant_eurostat_former_daily_tobacco_smoker_education_attainment_level,
+                    former_daily_tobacco_smoker_education_attainment_level,
                 "hlth_ehis_sk3e":
-                    health_determinant_eurostat_daily_smokers_education_attainment_level,
+                    daily_smokers_cigarettes_education_attainment_level,
                 "hlth_ehis_sk3i":
-                    health_determinant_eurostat_daily_smokers_income_quintile,
+                    daily_smokers_cigarettes_income_quintile,
                 "hlth_ehis_sk3u":
-                    health_determinant_eurostat_daily_smokers_degree_of_urbanisation,
+                    daily_smokers_cigarettes_degree_of_urbanisation,
                 "hlth_ehis_sk4e":
-                    health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_education_attainment_level,
+                    daily_exposure_tobacco_smoke_indoors_education_attainment_level,
                 "hlth_ehis_sk4u":
-                    health_determinant_eurostat_daily_exposure_to_tobacco_smoke_indoors_degree_of_urbanisation,
+                    daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
                 "hlth_ehis_sk5e":
-                    health_determinant_eurostat_duration_of_daily_tobacco_smoking_education_attainment_level,
+                    duration_daily_tobacco_smoking_education_attainment_level,
                 "hlth_ehis_sk6e":
-                    health_determinant_eurostat_electronic_cigarettes_similar_electronic_devices_education_attainment_level,
+                    electronic_cigarettes_similar_electronic_devices_education_attainment_level,
                 "hlth_ehis_de3":
-                    health_determinant_eurostat_daily_smokers_history_education_attainment_level,
+                    daily_smokers_cigarettes_history_education_attainment_level,
                 "hlth_ehis_de4":
-                    health_determinant_eurostat_daily_smokers_history_income_quintile,
+                    daily_smokers_cigarettes_history_income_quintile,
                 "hlth_ehis_de5":
-                    health_determinant_eurostat_daily_smokers_number_of_cigarettes_history_education_attainment_level
+                    daily_smokers_number_of_cigarettes_history_education_attainment_level
             }
             df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
@@ -849,8 +849,10 @@ class EuroStatTobaccoConsumption:
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
-        # self._generate_mcf(sv_list)
+        final_mcf = mcf_generator.generate_mcf()
         self._generate_tmcf()
+        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(final_mcf.rstrip('\n'))
 
 
 def main(_):
@@ -863,13 +865,12 @@ def main(_):
         os.path.abspath(__file__)) + os.sep + "output"
     # Defining Output Files
     csv_name = "eurostat_population_tobaccocunsumption.csv"
-    # mcf_name = "eurostat_population_physicalactivity.mcf"
+    mcf_name = "eurostat_population_tobaccocunsumption.mcf"
     tmcf_name = "eurostat_population_tobaccocunsumption.tmcf"
     cleaned_csv_path = data_file_path + os.sep + csv_name
-    # mcf_path = data_file_path + os.sep + mcf_name
+    mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
-    loader = EuroStatTobaccoConsumption(ip_files, cleaned_csv_path, tmcf_path)
-    # , mcf_path,\
+    loader = EuroStatTobaccoConsumption(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
     loader.process()
 
 
