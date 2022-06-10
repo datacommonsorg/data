@@ -40,8 +40,15 @@ class EnergyIndiaBase():
     Base class to process data files, create MCF/TMCF files
     """
 
-    def __init__(self, category, json_file, json_key, dataset_name, mcf_path,
-                 tmcf_path, mcf_strings, energy_type_filter=None):
+    def __init__(self,
+                 category,
+                 json_file,
+                 json_key,
+                 dataset_name,
+                 mcf_path,
+                 tmcf_path,
+                 mcf_strings,
+                 energy_type_filter=None):
         self.cat = category
         self.json_file = json_file
         self.json_key = json_key
@@ -218,13 +225,13 @@ class EnergyIndiaBase():
             df['StateCode'] = 'OTHERS'
 
         return df
-    
+
     def _to_camel_case(self, text):
         """
         Helper method to convert text to camel case
         """
         return str(text[0]).lower() + str(text[1:])
-    
+
     def _filter_overlapping_energy_sources(self, df):
         """
         Renewable energy sources overlap between Electricity and Renewables
@@ -344,7 +351,7 @@ class EnergyIndiaBase():
 
         final_df = final_df[self.columns]
         final_df = self._aggregate_values_to_country_level(final_df)
-        
+
         if self.energy_type_filter:
             print(self.energy_type_filter)
             final_df = self._filter_overlapping_energy_sources(final_df)
