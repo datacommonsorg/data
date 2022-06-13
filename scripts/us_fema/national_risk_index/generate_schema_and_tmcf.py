@@ -420,8 +420,10 @@ def format_ind_hazard_field_properties_to_schema(properties):
     return formatted, dcid
 
 
-def generate_schema_and_tmcf_from_file(input_data_dictionary, output_schema,
-                                       output_tmcf, output_csv = CSV_COLUMNS_FILENAME):
+def generate_schema_and_tmcf_from_file(input_data_dictionary,
+                                       output_schema,
+                                       output_tmcf,
+                                       output_csv=CSV_COLUMNS_FILENAME):
     """
     Given the NRI data dictionary in location input_data_dictionary (path as string),
     generates the corresponding StatVar MCF Schema, TMCF for the import, and the
@@ -508,6 +510,7 @@ def generate_schema_and_tmcf_from_file(input_data_dictionary, output_schema,
     with open(output_csv, "w") as outfile:
         logging.info(f"Writing CSV columns to {output_csv}")
         outfile.write(csv_columns_out)
+
 
 if __name__ == "__main__":
     generate_schema_and_tmcf_from_file(
