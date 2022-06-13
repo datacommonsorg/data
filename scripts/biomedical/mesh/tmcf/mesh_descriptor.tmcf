@@ -4,7 +4,9 @@ dcid: C:mesh_descriptor->Descriptor_dcid
 name: C:mesh_descriptor->DescriptorName
 medicalSubjectHeadingDescriptorID: C:mesh_descriptor->DescriptorID
 medicalSubjectHeadingTreeNumber: C:mesh_descriptor->TreeNumber
-parent: C:mesh_descriptor->DescriptorParentID
+specializationOf: C:mesh_descriptor->DescriptorParentID
+description: C:mesh_descriptor->ScopeNote
+nationalLibraryOfMedicineClassificationNumber: C:mesh_descriptor->NLMClassificationNumber
 dateCreated: C:mesh_descriptor->DateCreated
 dateRevised: C:mesh_descriptor->DateRevised
 dateEstablished: C:mesh_descriptor->DateEstablished
