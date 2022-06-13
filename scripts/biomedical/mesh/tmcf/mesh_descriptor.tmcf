@@ -1,8 +1,10 @@
 Node: E:mesh_descriptor->E1
 typeOf: dcs:MeSHDescriptor
 dcid: C:mesh_descriptor->Descriptor_dcid
+name: C:mesh_descriptor->DescriptorName
+medicalSubjectHeadingDescriptorID: C:mesh_descriptor->DescriptorID
+medicalSubjectHeadingTreeNumber: C:mesh_descriptor->TreeNumber
+parent: C:mesh_descriptor->DescriptorParentID
 dateCreated: C:mesh_descriptor->DateCreated
 dateRevised: C:mesh_descriptor->DateRevised
 dateEstablished: C:mesh_descriptor->DateEstablished
-descriptorID: C:mesh_descriptor->DescriptorID
-descriptorName: C:mesh_descriptor->DescriptorName
