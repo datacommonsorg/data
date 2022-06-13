@@ -2,8 +2,8 @@ Node: E:mesh_term->E1
 typeOf: dcs:MeSHTerm
 dcid: C:mesh_term->Term_dcid
 name: C:mesh_term->TermName
-termID: C:mesh_term->TermID
-conceptID: E:mesh_term->E2
+medicalSubjectHeadingTermID: C:mesh_term->TermID
+medicalSubjectHeadingConceptID: E:mesh_term->E2
 
 Node: E:mesh_term->E2
 typeOf: dcs:mesh_term
