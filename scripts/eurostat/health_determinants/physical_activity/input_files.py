@@ -27,10 +27,9 @@ sys.path.insert(1, _COMMON_PATH)
 from common import download
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "download_directory", os.path.dirname((__file__)),
-    "Directory path where input files need to be downloaded"
-)
+flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
+                    "Directory path where input files need to be downloaded")
+
 
 def download_files(download_directory: str) -> None:
     """
@@ -70,6 +69,6 @@ def download_files(download_directory: str) -> None:
 def main(_):
     download_files(_FLAGS.download_directory)
 
+
 if __name__ == '__main__':
     app.run(main)
-    

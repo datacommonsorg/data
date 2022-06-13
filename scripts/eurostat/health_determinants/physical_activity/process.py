@@ -810,8 +810,8 @@ class EuroStatPhysicalActivity:
                 df['observation'].str.contains('u'),
                 'EurostatRegionalStatistics_LowReliability',
                 'EurostatRegionalStatistics')
-            df['observation'] = (df['observation'].astype(str)
-                .str.replace(':', '').str.replace(' ', '').str.replace('u', ''))
+            df['observation'] = (df['observation'].astype(str).str.replace(
+                ':', '').str.replace(' ', '').str.replace('u', ''))
             df['observation'].replace('', np.nan, inplace=True)
             df.dropna(subset=['observation'], inplace=True)
             df['observation'] = pd.to_numeric(df['observation'],
