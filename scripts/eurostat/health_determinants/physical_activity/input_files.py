@@ -32,7 +32,17 @@ flags.DEFINE_string(
     "Directory path where input files need to be downloaded"
 )
 
-def download_files(download_directory):
+def download_files(download_directory: str) -> None:
+    """
+    This Method calls the download function from the commons directory
+    to download all the input files.
+
+    Args:
+        download_directory (str):Location where the files need to be downloaded.
+
+    Returns:
+        None
+    """
     # List to provide the URLs of input files to download script.
     INPUT_URLS = [
         "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_pe9e.tsv.gz",

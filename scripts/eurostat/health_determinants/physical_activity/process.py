@@ -628,7 +628,7 @@ class EuroStatPhysicalActivity:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
-        Arguments:
+        Args:
             None
         Returns:
             None
