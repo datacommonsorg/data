@@ -426,7 +426,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     for file_path in input_files:
         file_name_with_ext = os.path.basename(file_path)
         file_name_without_ext = os.path.splitext(file_name_with_ext)[0]
-        function_dict = {
+        file_to_function_mapping = {
             "hlth_ehis_bm1e": _age_sex_education,
             "hlth_ehis_bm1i": _age_sex_income,
             "hlth_ehis_bm1u": _age_sex_degree_urbanisation,
@@ -437,7 +437,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
             "hlth_ehis_de2": _age_sex_income_history
         }
         df = pd.read_csv(file_path, sep='\t', header=0)
-        df = function_dict[file_name_without_ext](df)
+        df = file_to_function_mapping[file_name_without_ext](df)
         df['SV'] = df['SV'].str.replace('_Total', '')
         df['Measurement_Method'] = np.where(df['observation']\
             .str.contains('u'),'EurostatRegionalStatistics_LowReliability',\

@@ -31,7 +31,7 @@ EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
 OUTPUT_DATA_DIR = os.path.join(MODULE_DIR, "test_output_data")
 
 
-class TestPreprocess(unittest.TestCase):
+class TestProcess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
     properties which further requried for unit testing.
@@ -48,59 +48,63 @@ class TestPreprocess(unittest.TestCase):
         os.path.join(TEST_DATASET_DIR, file_name)
         for file_name in test_data_files
     ]
-    with tempfile.TemporaryDirectory() as tmp_dir:
 
-        cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-        mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-        tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+    def __init__(self, methodName: str = ...) -> None:
+        super().__init__(methodName)
 
-        process(ip_data, cleaned_csv_file_path, mcf_file_path, tmcf_file_path)
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
+            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
+            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-        with open(mcf_file_path, encoding="UTF-8") as mcf_file:
-            actual_mcf_data = mcf_file.read()
+            process(self.ip_data, cleaned_csv_file_path, mcf_file_path,
+                    tmcf_file_path)
 
-        with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
-            actual_tmcf_data = tmcf_file.read()
+            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+                self.actual_mcf_data = mcf_file.read()
 
-        with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-            actual_csv_data = csv_file.read()
+            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+                self.actual_tmcf_data = tmcf_file.read()
 
-        def test_mcf_tmcf_files(self):
-            """
-            This method is required to test between output generated
-            preprocess script and excepted output files like MCF File
-            """
-            expected_mcf_file_path = os.path.join(
-                EXPECTED_FILES_DIR, "eurostat_population_bmi.mcf")
+            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+                self.actual_csv_data = csv_file.read()
 
-            expected_tmcf_file_path = os.path.join(
-                EXPECTED_FILES_DIR, "eurostat_population_bmi.tmcf")
+    def test_mcf_tmcf_files(self):
+        """
+        This method is required to test between output generated
+        preprocess script and excepted output files like MCF File
+        """
+        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
+                                              "eurostat_population_bmi.mcf")
 
-            with open(expected_mcf_file_path,
-                      encoding="UTF-8") as expected_mcf_file:
-                expected_mcf_data = expected_mcf_file.read()
+        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
+                                               "eurostat_population_bmi.tmcf")
 
-            with open(expected_tmcf_file_path,
-                      encoding="UTF-8") as expected_tmcf_file:
-                expected_tmcf_data = expected_tmcf_file.read()
+        with open(expected_mcf_file_path,
+                  encoding="UTF-8") as expected_mcf_file:
+            expected_mcf_data = expected_mcf_file.read()
 
-            self.assertEqual(expected_mcf_data.strip(),
-                             self.actual_mcf_data.strip())
-            self.assertEqual(expected_tmcf_data.strip(),
-                             self.actual_tmcf_data.strip())
+        with open(expected_tmcf_file_path,
+                  encoding="UTF-8") as expected_tmcf_file:
+            expected_tmcf_data = expected_tmcf_file.read()
 
-        def test_create_csv(self):
-            """
-            This method is required to test between output generated
-            preprocess script and excepted output files like CSV
-            """
-            expected_csv_file_path = os.path.join(
-                EXPECTED_FILES_DIR, "eurostat_population_bmi.csv")
+        self.assertEqual(expected_mcf_data.strip(),
+                         self.actual_mcf_data.strip())
+        self.assertEqual(expected_tmcf_data.strip(),
+                         self.actual_tmcf_data.strip())
 
-            expected_csv_data = ""
-            with open(expected_csv_file_path,
-                      encoding="utf-8-sig") as expected_csv_file:
-                expected_csv_data = expected_csv_file.read()
+    def test_create_csv(self):
+        """
+        This method is required to test between output generated
+        preprocess script and excepted output files like CSV
+        """
+        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
+                                              "eurostat_population_bmi.csv")
 
-            self.assertEqual(expected_csv_data.strip(),
-                             self.actual_csv_data.strip())
+        expected_csv_data = ""
+        with open(expected_csv_file_path,
+                  encoding="utf-8-sig") as expected_csv_file:
+            expected_csv_data = expected_csv_file.read()
+
+        self.assertEqual(expected_csv_data.strip(),
+                         self.actual_csv_data.strip())
