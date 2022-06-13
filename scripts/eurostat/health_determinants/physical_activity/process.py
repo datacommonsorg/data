@@ -47,9 +47,11 @@ def healthenhancing_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file healthenhancing_sexeducation for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -74,9 +76,11 @@ def healthenhancing_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file healthenhancing_sexincome for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,physact,quant_inc,sex,age,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -108,9 +112,11 @@ def healthenhancing_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
     Cleans the file healthenhancing_sexurbanisation
     for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'physact,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -140,9 +146,11 @@ def workrelated_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file workrelated_sexeducation for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,levels,isced11,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG',
@@ -172,9 +180,11 @@ def workrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file workrelated_sexincome for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,levels,quant_inc,sex,age,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -204,9 +214,11 @@ def workrelated_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file workrelated_sexurbanisation for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'levels,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -237,9 +249,11 @@ def nonworkrelated_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file nonworkrelated_sexeducation for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -264,9 +278,11 @@ def nonworkrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file nonworkrelated_sexincome for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,physact,quant_inc,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -297,9 +313,11 @@ def nonworkrelated_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
     Cleans the file nonworkrelated_sexurbanisation
     for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'physact,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -332,9 +350,11 @@ def healthenhancing_nonworkrelated_sexeducation(df: pd.DataFrame)\
     Cleans the file healthenhancing_nonworkrelated_sexeducation
     for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,duration,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -360,9 +380,11 @@ def healthenhancing_nonworkrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     Cleans the file healthenhancing_nonworkrelated_sexincome
     for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = ['unit,quant_inc,duration,sex,age,geo', '2019', '2014']
     df.columns = cols
@@ -390,9 +412,11 @@ def healthenhancing_nonworkrelated_sexurbanisation(df: pd.DataFrame)\
     Cleans the file healthenhancing_nonworkrelated_sexurbanisation
     for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'duration,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -422,9 +446,11 @@ def healthenhancing_sexnativity(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file healthenhancing_sexnativity for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,physact,c_birth,sex,age,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -455,9 +481,11 @@ def healthenhancing_sexcitizenship(df: pd.DataFrame) -> pd.DataFrame:
     Cleans the file healthenhancing_sexcitizenship
     for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,physact,sex,age,citizen,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -488,9 +516,11 @@ def healthenhancing_sexactivitylimitation(df: pd.DataFrame) -> pd.DataFrame:
     Cleans the file healthenhancing_sexactivitylimitation
     for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,physact,sex,age,lev_limit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
@@ -522,9 +552,11 @@ def healthenhancing_nonworkrelated_sexbmi(df: pd.DataFrame) -> pd.DataFrame:
     Cleans the file healthenhancing_nonworkrelated_sexbmi
     for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'unit,duration,bmi,sex,age,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK',
@@ -554,9 +586,11 @@ def dailypractice_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file dailypractice_sexeducation for concatenation in Final CSV.
 
-    Args: df (pd.DataFrame): the raw df as the input
+    Args:
+        df (pd.DataFrame): the raw df as the input
 
-    Returns: df (pd.DataFrame): provides the cleaned df as output
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
     """
     cols = [
         'sex,age,isced11,time', 'BG', 'CZ', 'EL', 'ES', 'CY', 'LV', 'HU', 'MT',
@@ -719,8 +753,6 @@ class EuroStatPhysicalActivity:
         """
         This Method calls the required methods to generate
         cleaned CSV, MCF, and TMCF file.
-        Args: None
-        Returns: None
         """
 
         final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
