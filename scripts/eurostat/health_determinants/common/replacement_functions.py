@@ -49,20 +49,26 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
 
     Returns: df (pd.DataFrame): modified df as output
     """
-    df = df.replace({'isced11': {
-        'ED0-2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED0_2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED3-4': 'EducationalAttainment'+\
-        'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED3_4': 'EducationalAttainment'+\
-            'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
-        'ED5-8': 'EducationalAttainmentTertiaryEducation',
-        'ED5_8': 'EducationalAttainmentTertiaryEducation',
-        'TOTAL': 'Total'
-        }})
+    df = df.replace({
+        'isced11': {
+            'ED0-2':
+                'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
+            'ED0_2':
+                'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
+            'ED3-4':
+                'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+            'ED3_4':
+                'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+            'ED5_6':
+                'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
+            'ED5-8':
+                'TertiaryEducation',
+            'ED5_8':
+                'TertiaryEducation',
+            'TOTAL':
+                'Total'
+        }
+    })
     return df
 
 

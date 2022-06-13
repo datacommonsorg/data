@@ -47,6 +47,7 @@ pd.set_option("display.max_columns", None)
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
+
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
@@ -124,6 +125,7 @@ def _age_sex_income(data_df: pd.DataFrame) -> pd.DataFrame:
                     data_df['sex'] +'_'+data_df['quant_inc']+\
                     '_AsAFractionOf_Count_Person_' +data_df['sex']+\
                     '_' + data_df['quant_inc']
+
     data_df.drop(columns=['unit', 'age', 'quant_inc', 'bmi', 'sex'],
                  inplace=True)
     data_df = data_df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -188,6 +190,7 @@ def _age_sex_degree_urbanisation(data_df: pd.DataFrame) -> pd.DataFrame:
                     data_df['sex'] +'_'+data_df['deg_urb']+\
                     '_AsAFractionOf_Count_Person_' +data_df['sex']+\
                     '_' + data_df['deg_urb']
+    #print(data_df.head())
     data_df.drop(columns=['deg_urb', 'bmi', 'sex'], inplace=True)
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -433,13 +436,13 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
             "hlth_ehis_de1": _age_sex_education_history,
             "hlth_ehis_de2": _age_sex_income_history
         }
-        df = pd.read_csv(file_path, sep='\t', skiprows=1)
+        df = pd.read_csv(file_path, sep='\t', header=0)
         df = function_dict[file_name_without_ext](df)
         df['SV'] = df['SV'].str.replace('_Total', '')
         df['Measurement_Method'] = np.where(df['observation']\
             .str.contains('u'),'EurostatRegionalStatistics_LowReliability',\
             'EurostatRegionalStatistics')
-        df['observation'] = df['observation'].str.replace(':','')\
+        df['observation'] = df['observation'].astype('str').str.replace(':','')\
             .str.replace(' ','').str.replace('u','')
         df['observation'] = pd.to_numeric(df['observation'], errors='coerce')
         #df['file_name'] = file_name_without_ext
