@@ -353,7 +353,6 @@ class EnergyIndiaBase():
         final_df = self._aggregate_values_to_country_level(final_df)
 
         if self.energy_type_filter:
-            print(self.energy_type_filter)
             final_df = self._filter_overlapping_energy_sources(final_df)
 
         # Return only required columns in the final_df

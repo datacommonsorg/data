@@ -188,13 +188,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:OtherBiomass
 
-Node: dcid:Annual_PotentialCapacity_Electricity_SmallHydro
+Node: dcid:Annual_PotentialCapacity_Electricity_SmallHydroelectric
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:SmallHydro
+energySource: dcs:SmallHydroelectric
 
 Node: dcid:Annual_PotentialCapacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable

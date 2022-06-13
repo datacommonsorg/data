@@ -1,7 +1,7 @@
 {
     "EnergySource": {
         "BIOMASS": "OtherBiomass",
-        "SMALL HYDRO": "SmallHydro",
+        "SMALL HYDRO": "SmallHydroelectric",
         "SOLAR": "Solar",
         "WASTE": "NonRenewableWaste",
         "WIND": "Wind",

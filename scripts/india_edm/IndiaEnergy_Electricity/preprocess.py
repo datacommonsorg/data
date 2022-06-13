@@ -13,6 +13,9 @@
 # limitations under the License.
 
 import os
+
+os.chdir('../../')
+
 from india_edm.base import EnergyIndiaBase
 
 DATASET_NAME = "IndiaEnergy_Electricity"

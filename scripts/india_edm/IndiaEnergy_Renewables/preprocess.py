@@ -52,6 +52,7 @@ class EnergyIndiaRenewables(EnergyIndiaBase):
             df_temp = df.loc[df['StatVar'] == statvar]
             pop = df_temp['popType'].unique()[0]
             mProp = df_temp['mProp'].unique()[0]
+            mProp = self._to_camel_case(mProp)
             mQual = df_temp['mQual'].unique()[0]
             if not df_temp['type'].isnull().values.any():
                 energy_type = df_temp['type'].unique()[0]
@@ -62,7 +63,7 @@ class EnergyIndiaRenewables(EnergyIndiaBase):
             mcf.write(
                 self.NODE.format(statvar=statvar,
                                  pop=pop,
-                                 mProp=mProp.lower(),
+                                 mProp=mProp,
                                  mQual=mQual,
                                  energy_type=type_))
         mcf.close()

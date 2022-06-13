@@ -317,8 +317,8 @@ IN,Annual_PotentialCapacity_Electricity_OtherBiomass,2017-03-01,Megawatt,17538.0
 IN,Annual_PotentialCapacity_Electricity_OtherBiomass,2018-03-01,Megawatt,18600.0
 IN,Annual_PotentialCapacity_Electricity_OtherBiomass,2019-03-01,Megawatt,17538.0
 IN,Annual_PotentialCapacity_Electricity_OtherBiomass,2020-03-01,Megawatt,17537.3
-IN,Annual_PotentialCapacity_Electricity_SmallHydro,2015-03-01,Megawatt,19749.0
-IN,Annual_PotentialCapacity_Electricity_SmallHydro,2017-03-01,Megawatt,19749.0
-IN,Annual_PotentialCapacity_Electricity_SmallHydro,2018-03-01,Megawatt,21130.0
-IN,Annual_PotentialCapacity_Electricity_SmallHydro,2019-03-01,Megawatt,19749.0
-IN,Annual_PotentialCapacity_Electricity_SmallHydro,2020-03-01,Megawatt,21130.25
+IN,Annual_PotentialCapacity_Electricity_SmallHydroelectric,2015-03-01,Megawatt,19749.0
+IN,Annual_PotentialCapacity_Electricity_SmallHydroelectric,2017-03-01,Megawatt,19749.0
+IN,Annual_PotentialCapacity_Electricity_SmallHydroelectric,2018-03-01,Megawatt,21130.0
+IN,Annual_PotentialCapacity_Electricity_SmallHydroelectric,2019-03-01,Megawatt,19749.0
+IN,Annual_PotentialCapacity_Electricity_SmallHydroelectric,2020-03-01,Megawatt,21130.25

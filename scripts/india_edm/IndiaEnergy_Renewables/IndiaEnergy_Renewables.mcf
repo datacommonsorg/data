@@ -22,13 +22,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Bagasse
 
-Node: dcid:Annual_Generation_Electricity_SmallHydro
+Node: dcid:Annual_Generation_Electricity_SmallHydroelectric
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:SmallHydro
+energySource: dcs:SmallHydroelectric
 
 Node: dcid:Annual_Generation_Electricity_Solar
 typeOf: dcs:StatisticalVariable
@@ -102,13 +102,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Naphtha
 
-Node: dcid:Annual_Capacity_Electricity_SmallHydro
+Node: dcid:Annual_Capacity_Electricity_SmallHydroelectric
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
 measuredProperty: dcs:capacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:SmallHydro
+energySource: dcs:SmallHydroelectric
 
 Node: dcid:Annual_Capacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable
@@ -145,23 +145,23 @@ energySource: dcs:NonRenewableWaste
 Node: dcid:Annual_PotentialCapacity_Electricity_OtherBiomass
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potentialcapacity
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:OtherBiomass
 
-Node: dcid:Annual_PotentialCapacity_Electricity_SmallHydro
+Node: dcid:Annual_PotentialCapacity_Electricity_SmallHydroelectric
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potentialcapacity
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:SmallHydro
+energySource: dcs:SmallHydroelectric
 
 Node: dcid:Annual_PotentialCapacity_Electricity_Solar
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potentialcapacity
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Solar
@@ -169,7 +169,7 @@ energySource: dcs:Solar
 Node: dcid:Annual_PotentialCapacity_Electricity_NonRenewableWaste
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potentialcapacity
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:NonRenewableWaste
@@ -177,7 +177,7 @@ energySource: dcs:NonRenewableWaste
 Node: dcid:Annual_PotentialCapacity_Electricity_Wind
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potentialcapacity
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Wind
@@ -185,7 +185,7 @@ energySource: dcs:Wind
 Node: dcid:Annual_PotentialCapacity_Electricity_Bagasse
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Electricity
-measuredProperty: dcs:potentialcapacity
+measuredProperty: dcs:potentialCapacity
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Bagasse
