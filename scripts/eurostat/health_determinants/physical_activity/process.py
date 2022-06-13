@@ -43,9 +43,10 @@ default_input_path = os.path.dirname(
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
-def healthenhancing_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_sexeducation for concatenation in Final CSV.
+    Cleans the file healthenhancing_by_sex_education for concatenation
+    in Final CSV.
 
     Args:
         df (pd.DataFrame): the raw df as the input
@@ -72,9 +73,10 @@ def healthenhancing_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def healthenhancing_sexincome(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_sexincome for concatenation in Final CSV.
+    Cleans the file healthenhancing_by_sex_income for concatenation
+    in Final CSV.
 
     Args:
         df (pd.DataFrame): the raw df as the input
@@ -107,9 +109,9 @@ def healthenhancing_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def healthenhancing_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_sexurbanisation
+    Cleans the file healthenhancing_by_sex_urbanisation
     for concatenation in Final CSV.
 
     Args:
@@ -142,9 +144,9 @@ def healthenhancing_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def workrelated_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
+def workrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file workrelated_sexeducation for concatenation in Final CSV.
+    Cleans the file workrelated_by_sex_education for concatenation in Final CSV.
 
     Args:
         df (pd.DataFrame): the raw df as the input
@@ -176,9 +178,10 @@ def workrelated_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def workrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
+def workrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file workrelated_sexincome for concatenation in Final CSV.
+    Cleans the file workrelated_by_sex_income for concatenation
+    in Final CSV.
 
     Args:
         df (pd.DataFrame): the raw df as the input
@@ -210,9 +213,10 @@ def workrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def workrelated_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
+def workrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file workrelated_sexurbanisation for concatenation in Final CSV.
+    Cleans the file workrelated_by_sex_urbanisation for concatenation
+    in Final CSV.
 
     Args:
         df (pd.DataFrame): the raw df as the input
@@ -245,9 +249,10 @@ def workrelated_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def nonworkrelated_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
+def nonworkrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file nonworkrelated_sexeducation for concatenation in Final CSV.
+    Cleans the file nonworkrelated_by_sex_education for concatenation 
+    in Final CSV.
 
     Args:
         df (pd.DataFrame): the raw df as the input
@@ -274,9 +279,9 @@ def nonworkrelated_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def nonworkrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
+def nonworkrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file nonworkrelated_sexincome for concatenation in Final CSV.
+    Cleans the file nonworkrelated_by_sex_income for concatenation in Final CSV.
 
     Args:
         df (pd.DataFrame): the raw df as the input
@@ -308,9 +313,9 @@ def nonworkrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def nonworkrelated_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
+def nonworkrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file nonworkrelated_sexurbanisation
+    Cleans the file nonworkrelated_by_sex_urbanisation
     for concatenation in Final CSV.
 
     Args:
@@ -344,10 +349,10 @@ def nonworkrelated_sexurbanisation(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def healthenhancing_nonworkrelated_sexeducation(df: pd.DataFrame)\
+def healthenhancing_nonworkrelated_by_sex_education(df: pd.DataFrame)\
                                                 -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_nonworkrelated_sexeducation
+    Cleans the file healthenhancing_nonworkrelated_by_sex_education
     for concatenation in Final CSV.
 
     Args:
@@ -375,9 +380,10 @@ def healthenhancing_nonworkrelated_sexeducation(df: pd.DataFrame)\
     return df
 
 
-def healthenhancing_nonworkrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_nonworkrelated_by_sex_income(df: pd.DataFrame)\
+                                                -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_nonworkrelated_sexincome
+    Cleans the file healthenhancing_nonworkrelated_by_sex_income
     for concatenation in Final CSV.
 
     Args:
@@ -406,10 +412,10 @@ def healthenhancing_nonworkrelated_sexincome(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def healthenhancing_nonworkrelated_sexurbanisation(df: pd.DataFrame)\
+def healthenhancing_nonworkrelated_by_sex_urbanisation(df: pd.DataFrame)\
                                                     -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_nonworkrelated_sexurbanisation
+    Cleans the file healthenhancing_nonworkrelated_by_sex_urbanisation
     for concatenation in Final CSV.
 
     Args:
@@ -442,9 +448,10 @@ def healthenhancing_nonworkrelated_sexurbanisation(df: pd.DataFrame)\
     return df
 
 
-def healthenhancing_sexnativity(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_by_sex_nativity(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_sexnativity for concatenation in Final CSV.
+    Cleans the file healthenhancing_by_sex_nativity for concatenation
+    in Final CSV.
 
     Args:
         df (pd.DataFrame): the raw df as the input
@@ -476,9 +483,9 @@ def healthenhancing_sexnativity(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def healthenhancing_sexcitizenship(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_by_sex_citizenship(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_sexcitizenship
+    Cleans the file healthenhancing_by_sex_citizenship
     for concatenation in Final CSV.
 
     Args:
@@ -511,9 +518,9 @@ def healthenhancing_sexcitizenship(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def healthenhancing_sexactivitylimitation(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_by_sex_activitylimitation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_sexactivitylimitation
+    Cleans the file healthenhancing_by_sex_activitylimitation
     for concatenation in Final CSV.
 
     Args:
@@ -547,9 +554,9 @@ def healthenhancing_sexactivitylimitation(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def healthenhancing_nonworkrelated_sexbmi(df: pd.DataFrame) -> pd.DataFrame:
+def healthenhancing_nonworkrelated_by_sex_bmi(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file healthenhancing_nonworkrelated_sexbmi
+    Cleans the file healthenhancing_nonworkrelated_by_sex_bmi
     for concatenation in Final CSV.
 
     Args:
@@ -582,9 +589,10 @@ def healthenhancing_nonworkrelated_sexbmi(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def dailypractice_sexeducation(df: pd.DataFrame) -> pd.DataFrame:
+def dailypractice_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file dailypractice_sexeducation for concatenation in Final CSV.
+    Cleans the file dailypractice_by_sex_education for concatenation
+    in Final CSV.
 
     Args:
         df (pd.DataFrame): the raw df as the input
@@ -770,39 +778,39 @@ class EuroStatPhysicalActivity:
             file_name = file_path.split("/")[-1][:-4]
             function_dict = {
                 "hlth_ehis_pe9e":
-                    healthenhancing_sexeducation,
+                    healthenhancing_by_sex_education,
                 "hlth_ehis_pe9i":
-                    healthenhancing_sexincome,
+                    healthenhancing_by_sex_income,
                 "hlth_ehis_pe9u":
-                    healthenhancing_sexurbanisation,
+                    healthenhancing_by_sex_urbanisation,
                 "hlth_ehis_pe1e":
-                    workrelated_sexeducation,
+                    workrelated_by_sex_education,
                 "hlth_ehis_pe1i":
-                    workrelated_sexincome,
+                    workrelated_by_sex_income,
                 "hlth_ehis_pe1u":
-                    workrelated_sexurbanisation,
+                    workrelated_by_sex_urbanisation,
                 "hlth_ehis_pe3e":
-                    nonworkrelated_sexeducation,
+                    nonworkrelated_by_sex_education,
                 "hlth_ehis_pe3i":
-                    nonworkrelated_sexincome,
+                    nonworkrelated_by_sex_income,
                 "hlth_ehis_pe3u":
-                    nonworkrelated_sexurbanisation,
+                    nonworkrelated_by_sex_urbanisation,
                 "hlth_ehis_pe2e":
-                    healthenhancing_nonworkrelated_sexeducation,
+                    healthenhancing_nonworkrelated_by_sex_education,
                 "hlth_ehis_pe2i":
-                    healthenhancing_nonworkrelated_sexincome,
+                    healthenhancing_nonworkrelated_by_sex_income,
                 "hlth_ehis_pe2u":
-                    healthenhancing_nonworkrelated_sexurbanisation,
+                    healthenhancing_nonworkrelated_by_sex_urbanisation,
                 "hlth_ehis_pe9b":
-                    healthenhancing_sexnativity,
+                    healthenhancing_by_sex_nativity,
                 "hlth_ehis_pe9c":
-                    healthenhancing_sexcitizenship,
+                    healthenhancing_by_sex_citizenship,
                 "hlth_ehis_pe9d":
-                    healthenhancing_sexactivitylimitation,
+                    healthenhancing_by_sex_activitylimitation,
                 "hlth_ehis_pe2m":
-                    healthenhancing_nonworkrelated_sexbmi,
+                    healthenhancing_nonworkrelated_by_sex_bmi,
                 "hlth_ehis_de9":
-                    dailypractice_sexeducation
+                    dailypractice_by_sex_education
             }
             df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
