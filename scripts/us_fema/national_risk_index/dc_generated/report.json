@@ -1,0 +1,19 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "75881",
+        "NumPVSuccesses": "35815832",
+        "Existence_NumChecks": "35816455",
+        "NumNodeSuccesses": "4476979",
+        "Existence_NumDcCalls": "2"
+      }
+    }
+  },
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}
