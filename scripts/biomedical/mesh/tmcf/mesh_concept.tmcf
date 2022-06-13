@@ -1,9 +1,9 @@
 Node: E:mesh_concept->E1
 typeOf: dcs:MeSHConcept
 dcid: C:mesh_concept->Concept_dcid
-conceptID: C:mesh_concept->ConceptID
-conceptName: C:mesh_concept->ConceptName
-descriptorID: E:mesh_concept->E2
+medicalSubjectHeadingConceptID: C:mesh_concept->ConceptID
+name: C:mesh_concept->ConceptName
+medicalSubjectHeadingDescriptorID: E:mesh_concept->E2
 
 Node: E:mesh_concept->E2
 typeOf: dcs:MeSHDescriptor
