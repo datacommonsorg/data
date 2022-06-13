@@ -702,7 +702,7 @@ class EuroStatPhysicalActivity:
                     lev_limit = "\nglobalActivityLimitationindicator: dcs:"\
                         + prop
                 elif "ModerateActivity" in prop or "HeavyActivity" in prop\
-                    or "NoActivityOrLightActivity" in prop:
+                    or "NoActivity" in prop:
                     activity = "\nphysicalActivityEffortLevel: dcs:"\
                         + prop.replace("ModerateActivityOrHeavyActivity",\
                         "ModerateActivity__HeavyActivity")
@@ -719,8 +719,7 @@ class EuroStatPhysicalActivity:
                 elif "ForeignBorn" in prop or "Native" in prop:
                     countryofbirth = "\nnativity: dcs:" + \
                         prop.replace("CountryOfBirth","")
-                elif "ForeignWithin" in prop or "ForeignOutside" in prop\
-                    or "Citizen" in prop:
+                elif "Citizen" in prop:
                     citizenship = "\ncitizenship: dcs:" + \
                         prop.replace("Citizenship","")
                 elif "weight" in prop or "Normal" in prop \
@@ -764,7 +763,7 @@ class EuroStatPhysicalActivity:
         sv_list = []
 
         for file_path in self.input_files:
-            df = pd.read_csv(file_path, sep='\t', skiprows=1)
+            df = pd.read_csv(file_path, sep='\t', header=0)
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .tsv extension
@@ -809,10 +808,10 @@ class EuroStatPhysicalActivity:
             df['SV'] = df['SV'].str.replace('_Total', '')
             df['Measurement_Method'] = np.where(
                 df['observation'].str.contains('u'),
-                'LowReliability/EurostatRegionalStatistics',
+                'EurostatRegionalStatistics_LowReliability',
                 'EurostatRegionalStatistics')
-            df['observation'] = (df['observation'].str.replace(
-                ':', '').str.replace(' ', '').str.replace('u', ''))
+            df['observation'] = (df['observation'].astype(str)
+                .str.replace(':', '').str.replace(' ', '').str.replace('u', ''))
             df['observation'].replace('', np.nan, inplace=True)
             df.dropna(subset=['observation'], inplace=True)
             df['observation'] = pd.to_numeric(df['observation'],

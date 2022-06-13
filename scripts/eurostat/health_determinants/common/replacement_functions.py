@@ -145,10 +145,10 @@ def _replace_levels(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'levels': {
-            'HVY': 'HeavyActivity',
-            'MOD': 'ModerateActivity',
-            'MOD_HVY': 'ModerateActivityOrHeavyActivity',
-            'NONE_LGHT': 'NoActivityOrLightActivity'
+            'HVY': 'HeavyActivityLevel',
+            'MOD': 'ModerateActivityLevel',
+            'MOD_HVY': 'ModerateActivityLevelOrHeavyActivityLevel',
+            'NONE_LGHT': 'NoActivityOrLightActivityLevel'
         }
     })
     return df
@@ -206,8 +206,8 @@ def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'citizen': {
-            'EU28_FOR': 'ForeignWithinEU28',
-            'NEU28_FOR': 'ForeignOutsideEU28',
+            'EU28_FOR': 'CitizenOutsideEU28',
+            'NEU28_FOR': 'WithinEU28AndNotACitizen',
             'FOR': 'NotACitizen',
             'NAT': 'Citizen'
         }
