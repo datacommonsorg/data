@@ -768,7 +768,7 @@ class EuroStatTobaccoConsumption:
             "observationDate: C:EuroStat_Population_TobaccoConsumption->time\n"
             "value: C:EuroStat_Population_TobaccoConsumption->observation\n")
         # Writing Genereated TMCF to local path.
-        with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+        with open(self.tmcf_file_path, 'w+', encoding="UTF-8") as f_out:
             f_out.write(tmcf_template.rstrip('\n'))
 
     def process(self):
@@ -849,7 +849,7 @@ class EuroStatTobaccoConsumption:
         sv_list.sort()
         final_mcf = mcf_generator.generate_mcf()
         self._generate_tmcf()
-        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
+        with open(self.mcf_file_path, 'w+', encoding="UTF-8") as f_out:
             f_out.write(final_mcf.rstrip('\n'))
 
 

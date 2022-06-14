@@ -426,8 +426,8 @@ def daily_smokers_cigarettes_income_quintile() -> str:
                     Node = Node.replace("_Total", "")
                     f_gender = ""
 
-                f_income = f"income: dcs:{income}\n"
-                f_income = f_income.replace("IncomeOf","[").replace("To"," ").replace("Percentile"," Percentile]")
+                f_income = f"income: {income}\n"
+                f_income = f_income.replace("IncomeOf","").replace("To"," ").replace("Percentile"," Percentile]")
                 if income == "Total":
                     Node = Node.replace("_Total", "")
                     denominator = denominator.replace("_Total", "") 
@@ -468,7 +468,7 @@ def former_daily_tobacco_smoker_income_quintile() -> str:
                 Node = Node.replace("_Total", "")
                 f_gender = ""
 
-            f_income = f"income: dcs:{[income]}\n"
+            f_income = f"income: dcs:[{income}]\n"
             f_income = f_income.replace("IncomeOf","").replace("To"," ").replace("Percentile"," Percentile")
             if income == "Total":
                 Node = Node.replace("_Total", "")
@@ -487,6 +487,7 @@ def smoking_tobaccoproducts_degree_of_urbanisation() -> str:
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
+        "statType: dcs:measuredValue\n"
         "measurementDenominator: dcs:{denominator}\n"
         "healthBehavior: dcs:{healthBehavior}\n"
         "substanceUsed: dcs:TobaccoProducts\n"
@@ -614,7 +615,7 @@ def daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation() -> str:
             ]:
                 for placeOfResidenceClassification in ['Total', 'Urban', 'SemiUrban', 'Rural']:
                     Node = "Count_Person_"+ gender+"_"+"ExposureToTobaccoSmoke"+"_" +placeOfResidenceClassification + "_"+substanceExposureFrequency +"_"+"Cigarettes"+ "_AsAFractionOf_" + "Count_Person_" + gender + placeOfResidenceClassification
-                    denominator =  "Count_Person_" + gender + placeOfResidenceClassification
+                    denominator =  "Count_Person_" + gender +"_"+ placeOfResidenceClassification
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
                         Node = Node.replace("_Total", "")
@@ -772,22 +773,22 @@ def smoking_tobaccoproducts_country_of_citizenship() -> str:
 def generate_mcf():
     mcf = ''
     for f in [
-            # smoking_tobaccoproducts_education_attainment_level,
-            # daily_smokers_cigarettes_education_attainment_level,
-            # daily_exposure_tobacco_smoke_indoors_education_attainment_level,
-            # former_daily_tobacco_smoker_education_attainment_level,
-            # duration_daily_tobacco_smoking_education_attainment_level,
-            # electronic_cigarettes_similar_electronic_devices_education_attainment_level,
+            smoking_tobaccoproducts_education_attainment_level,
+            daily_smokers_cigarettes_education_attainment_level,
+            daily_exposure_tobacco_smoke_indoors_education_attainment_level,
+            former_daily_tobacco_smoker_education_attainment_level,
+            duration_daily_tobacco_smoking_education_attainment_level,
+            electronic_cigarettes_similar_electronic_devices_education_attainment_level,
 
-            # smoking_tobaccoproducts_income_quintile,
-            # daily_smokers_cigarettes_income_quintile,
-            # former_daily_tobacco_smoker_income_quintile,
+            smoking_tobaccoproducts_income_quintile,
+            daily_smokers_cigarettes_income_quintile,
+            former_daily_tobacco_smoker_income_quintile,
 
-            # smoking_tobaccoproducts_degree_of_urbanisation,
-            # daily_smokers_cigarettes_degree_of_urbanisation,
-            # daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
+            smoking_tobaccoproducts_degree_of_urbanisation,
+            daily_smokers_cigarettes_degree_of_urbanisation,
+            daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
 
-            # smoking_tobaccoproducts_county_of_birth,
+            smoking_tobaccoproducts_county_of_birth,
             smoking_tobaccoproducts_country_of_citizenship
             ]:
         mcf += f()
