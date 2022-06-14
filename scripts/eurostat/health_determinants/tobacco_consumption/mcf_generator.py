@@ -341,13 +341,10 @@ def smoking_tobaccoproducts_income_quintile() -> str:
 
     mcf = ''
     for gender in ['Male', 'Female','Total']:
-        for healthBehavior in [
-                'NonSmoker', 'Smoking'
-        ]:
-            for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
-                f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
+        for healthBehavior in ['NonSmoker', 'Smoking']:
+            if healthBehavior == 'NonSmoker':
                 for income in ['Total', 'IncomeOf0To20Percentile', 'IncomeOf20To40Percentile', 'IncomeOf40To60Percentile','IncomeOf60To80Percentile', 'IncomeOf80To100Percentile']:
-                    Node = "Count_Person_"  + gender +"_"+ healthBehavior+"_"+income+ "_"+ substanceUsageFrequency +"_"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + gender +"_"+income
+                    Node = "Count_Person_"  + gender +"_"+ healthBehavior+"_"+income+ "_" + "_"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + gender +"_"+income
                     denominator = "Count_Person_" + gender +"_"+income
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
@@ -367,10 +364,39 @@ def smoking_tobaccoproducts_income_quintile() -> str:
                         f_substanceUsageFrequency = ""
                     mcf += template_mcf.format(Node=Node,
                                             gender=f_gender,
-                                            substanceUsageFrequency=f_substanceUsageFrequency,
+                                            substanceUsageFrequency="",
                                             denominator=denominator,
                                             healthBehavior=healthBehavior,
                                             income=f_income)
+            elif healthBehavior == 'Smoking':
+                for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
+                    f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
+                    for income in ['Total', 'IncomeOf0To20Percentile', 'IncomeOf20To40Percentile', 'IncomeOf40To60Percentile','IncomeOf60To80Percentile', 'IncomeOf80To100Percentile']:
+                        Node = "Count_Person_"  + gender +"_"+ healthBehavior+"_"+income+ "_"+ substanceUsageFrequency +"_"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + gender +"_"+income
+                        denominator = "Count_Person_" + gender +"_"+income
+                        f_gender = f"gender: dcs:{gender}\n"
+                        if gender == "Total":
+                            Node = Node.replace("_Total", "")
+                            denominator = denominator.replace("_Total", "")
+                            f_gender = ""
+
+                        f_income = f"income: dcs:{income}\n"
+                        f_income = f_income.replace("IncomeOf","[").replace("To"," ").replace("Percentile"," Percentile]")
+                        if income == "Total":
+                            Node = Node.replace("_Total", "")
+                            denominator = denominator.replace("_Total", "")
+                            f_income = ""
+
+                        if healthBehavior == "NonSmoker":
+                            Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                            f_substanceUsageFrequency = ""
+                        mcf += template_mcf.format(Node=Node,
+                                                gender=f_gender,
+                                                substanceUsageFrequency=f_substanceUsageFrequency,
+                                                denominator=denominator,
+                                                healthBehavior=healthBehavior,
+                                                income=f_income)
+
     return mcf
 
 def daily_smokers_cigarettes_income_quintile() -> str:
@@ -468,13 +494,10 @@ def smoking_tobaccoproducts_degree_of_urbanisation() -> str:
 
     mcf = ''
     for gender in ['Male', 'Female','Total']:
-        for healthBehavior in [
-                'NonSmoker', 'Smoking'
-        ]:
-            for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
-                f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
+        for healthBehavior in ['NonSmoker', 'Smoking']:
+            if healthBehavior == 'NonSmoker':
                 for placeOfResidenceClassification in ['Total', 'Urban', 'SemiUrban', 'Rural']:
-                    Node = "Count_Person_" + gender+ "_"+healthBehavior+ "_"+ placeOfResidenceClassification+ "_"+substanceUsageFrequency+ "_" + "TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" +gender+"_" + placeOfResidenceClassification
+                    Node = "Count_Person_" + gender+ "_"+healthBehavior+ "_"+ placeOfResidenceClassification+ "_" + "TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" +gender+"_" + placeOfResidenceClassification
                     denominator = "Count_Person_"+gender+"_" + placeOfResidenceClassification
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
@@ -493,9 +516,35 @@ def smoking_tobaccoproducts_degree_of_urbanisation() -> str:
                     mcf += template_mcf.format(Node=Node,
                                             gender=f_gender,
                                             denominator=denominator,
-                                            substanceUsageFrequency=f_substanceUsageFrequency,
+                                            substanceUsageFrequency="",
                                             healthBehavior=healthBehavior,
                                             placeOfResidenceClassification=f_placeOfResidenceClassification)
+            elif healthBehavior == 'Smoking':
+                for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
+                    f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
+                    for placeOfResidenceClassification in ['Total', 'Urban', 'SemiUrban', 'Rural']:
+                        Node = "Count_Person_" + gender+ "_"+healthBehavior+ "_"+ placeOfResidenceClassification+ "_"+substanceUsageFrequency+ "_" + "TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" +gender+"_" + placeOfResidenceClassification
+                        denominator = "Count_Person_"+gender+"_" + placeOfResidenceClassification
+                        f_gender = f"gender: dcs:{gender}\n"
+                        if gender == "Total":
+                            Node = Node.replace("_Total", "")
+                            f_gender = ""
+
+                        f_placeOfResidenceClassification = f"placeOfResidenceClassification: dcs:{placeOfResidenceClassification}\n"
+                        if placeOfResidenceClassification == "Total":
+                            Node = Node.replace("_Total", "")
+                            denominator = denominator = denominator.replace("_Total", "")
+                            f_placeOfResidenceClassification = ""
+
+                        if healthBehavior == "NonSmoker":
+                            Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                            f_substanceUsageFrequency = ""
+                        mcf += template_mcf.format(Node=Node,
+                                                gender=f_gender,
+                                                denominator=denominator,
+                                                substanceUsageFrequency=f_substanceUsageFrequency,
+                                                healthBehavior=healthBehavior,
+                                                placeOfResidenceClassification=f_placeOfResidenceClassification)
     return mcf
 
 def daily_smokers_cigarettes_degree_of_urbanisation() -> str:
@@ -597,18 +646,15 @@ def smoking_tobaccoproducts_county_of_birth() -> str:
         "{substanceUsageFrequency}{gender}\n")
     mcf = ''
     for gender in ['Male', 'Female', 'Total']:
-        for healthBehavior in [
-                'NonSmoker', 'Smoking'
-        ]:
-            for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
-                f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
+        for healthBehavior in ['NonSmoker', 'Smoking']:
+            if healthBehavior == 'NonSmoker':
                 for nativity in [
                         'CountryOfBirthEU28CountriesExceptReportingCountry',
                         'CountryOfBirthNonEU28CountriesNorReportingCountry',
                         'CountryOfBirthForeignCountry',
                         'CountryOfBirthReportingCountry'
                 ]:
-                    Node = "Count_Person_"+ gender + "_" +healthBehavior+"_"+nativity+"_"+substanceUsageFrequency+"_"+"TobaccoProducts"+"_AsAFractionOf_" + "Count_Person_" + gender+"_" + nativity
+                    Node = "Count_Person_"+ gender + "_" +healthBehavior+"_"+nativity + "_" + "TobaccoProducts"+"_AsAFractionOf_" + "Count_Person_" + gender+"_" + nativity
                     denominator =  "Count_Person_" + gender+"_" + nativity
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
@@ -622,9 +668,35 @@ def smoking_tobaccoproducts_county_of_birth() -> str:
                     mcf += template_mcf.format(Node=Node,
                                             gender=f_gender,
                                             denominator=denominator,
-                                            substanceUsageFrequency=f_substanceUsageFrequency,
+                                            substanceUsageFrequency="",
                                             healthBehavior=healthBehavior,
                                             nativity=nativity)
+            elif healthBehavior == 'Smoking':
+                for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
+                    f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
+                    for nativity in [
+                            'CountryOfBirthEU28CountriesExceptReportingCountry',
+                            'CountryOfBirthNonEU28CountriesNorReportingCountry',
+                            'CountryOfBirthForeignCountry',
+                            'CountryOfBirthReportingCountry'
+                    ]:
+                        Node = "Count_Person_"+ gender + "_" +healthBehavior+"_"+nativity+"_"+substanceUsageFrequency+"_"+"TobaccoProducts"+"_AsAFractionOf_" + "Count_Person_" + gender+"_" + nativity
+                        denominator =  "Count_Person_" + gender+"_" + nativity
+                        f_gender = f"gender: dcs:{gender}\n"
+                        if gender == "Total":
+                            Node = Node.replace("_Total", "")
+                            denominator = denominator = denominator.replace("_Total", "")
+                            f_gender = ""
+
+                        if healthBehavior == "NonSmoker":
+                            Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                            f_substanceUsageFrequency = ""
+                        mcf += template_mcf.format(Node=Node,
+                                                gender=f_gender,
+                                                denominator=denominator,
+                                                substanceUsageFrequency=f_substanceUsageFrequency,
+                                                healthBehavior=healthBehavior,
+                                                nativity=nativity)
 
     return mcf
 
@@ -643,17 +715,14 @@ def smoking_tobaccoproducts_country_of_citizenship() -> str:
 
     mcf = ''
     for gender in ['Male', 'Female', 'Total']:
-        for healthBehavior in [
-                'NonSmoker', 'Smoking'
-        ]:
-            for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
-                f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
+        for healthBehavior in ['NonSmoker', 'Smoking']:
+            if healthBehavior == 'NonSmoker':
                 for citizenship in [
                         'CitizenshipEU28CountriesExceptReportingCountry',
                         'CitizenshipNonEU28CountriesNorReportingCountry',
                         'CitizenshipForeignCountry', 'CitizenshipReportingCountry'
                 ]:
-                    Node = "Count_Person_" + citizenship + "_" + gender + "_" + healthBehavior +"_"+substanceUsageFrequency+"_"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + citizenship + "_" + gender
+                    Node = "Count_Person_" + citizenship + "_" + gender + "_" + healthBehavior + "_" +"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + citizenship + "_" + gender
                     denominator = "Count_Person_" + citizenship + "_" + gender
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
@@ -666,17 +735,44 @@ def smoking_tobaccoproducts_country_of_citizenship() -> str:
                         f_substanceUsageFrequency = ""
                     mcf += template_mcf.format(Node=Node,
                                             gender=f_gender,
-                                            substanceUsageFrequency=f_substanceUsageFrequency,
+                                            substanceUsageFrequency="",
                                             denominator=denominator,
                                             healthBehavior=healthBehavior,
                                             citizen=citizenship)
+            elif healthBehavior == 'Smoking':
+                for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
+                    f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
+                    for citizenship in [
+                            'CitizenshipEU28CountriesExceptReportingCountry',
+                            'CitizenshipNonEU28CountriesNorReportingCountry',
+                            'CitizenshipForeignCountry', 'CitizenshipReportingCountry'
+                    ]:
+                        Node = "Count_Person_" + citizenship + "_" + gender + "_" + healthBehavior +"_"+substanceUsageFrequency+"_"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + citizenship + "_" + gender
+                        denominator = "Count_Person_" + citizenship + "_" + gender
+                        f_gender = f"gender: dcs:{gender}\n"
+                        if gender == "Total":
+                            Node = Node.replace("_Total", "")
+                            denominator = denominator = denominator.replace("_Total", "")
+                            f_gender = ""
+
+                        if healthBehavior == "NonSmoker":
+                            Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                            f_substanceUsageFrequency = ""
+                        mcf += template_mcf.format(Node=Node,
+                                                gender=f_gender,
+                                                substanceUsageFrequency=f_substanceUsageFrequency,
+                                                denominator=denominator,
+                                                healthBehavior=healthBehavior,
+                                                citizen=citizenship)
+
 
     return mcf
 
 
 def generate_mcf():
     mcf = ''
-    for f in [smoking_tobaccoproducts_education_attainment_level,
+    for f in [
+            # smoking_tobaccoproducts_education_attainment_level,
             # daily_smokers_cigarettes_education_attainment_level,
             # daily_exposure_tobacco_smoke_indoors_education_attainment_level,
             # former_daily_tobacco_smoker_education_attainment_level,
@@ -692,7 +788,7 @@ def generate_mcf():
             # daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
 
             # smoking_tobaccoproducts_county_of_birth,
-            # smoking_tobaccoproducts_country_of_citizenship
+            smoking_tobaccoproducts_country_of_citizenship
             ]:
         mcf += f()
 
