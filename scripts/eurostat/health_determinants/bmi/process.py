@@ -188,8 +188,8 @@ def _age_sex_degree_urbanisation(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df.drop(columns=['unit', 'age'], inplace=True)
     data_df['SV'] = 'Count_Person_'+data_df['bmi']+'_'+ \
                     data_df['sex'] +'_'+data_df['deg_urb']+\
-                    '_AsAFractionOf_Count_Person_' +data_df['sex']+\
-                    '_' + data_df['deg_urb']
+                    '_AsAFractionOf_Count_Person_' +data_df['deg_urb']+\
+                    '_' + data_df['sex']
     #print(data_df.head())
     data_df.drop(columns=['deg_urb', 'bmi', 'sex'], inplace=True)
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -371,7 +371,7 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
                     .replace("Or","__")
             elif "Percentile" in prop:
                 incomequin = "\nincome: ["+prop.replace("Percentile",\
-                    "").replace("To"," ")+" Percentile]"
+                    "").replace("To"," ").replace("IncomeOf", "")+" Percentile]"
             elif "Urban" in prop or "SemiUrban" in prop \
                 or "Rural" in prop:
                 residence = "\nplaceOfResidenceClassification: dcs:" + prop
@@ -439,22 +439,34 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
         df = pd.read_csv(file_path, sep='\t', header=0)
         df = file_to_function_mapping[file_name_without_ext](df)
         df['SV'] = df['SV'].str.replace('_Total', '')
-        df['Measurement_Method'] = np.where(df['observation']\
-            .str.contains('u'),'EurostatRegionalStatistics_LowReliability',\
-            'EurostatRegionalStatistics')
-        df['observation'] = df['observation'].astype('str').str.replace(':','')\
-            .str.replace(' ','').str.replace('u','')
-        df['observation'] = pd.to_numeric(df['observation'], errors='coerce')
-        #df['file_name'] = file_name_without_ext
         final_df = pd.concat([final_df, df])
         sv_list += df["SV"].to_list()
 
-    final_df = final_df.sort_values(by=['time', 'geo'])
-    final_df['geo'] = final_df['geo'].map(COUNTRY_MAP)
-    final_df.dropna(inplace=True)
-    final_df.drop_duplicates(subset=["SV", "time", "geo"], inplace=True)
+    final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
+    final_df = final_df.drop_duplicates(subset=['time','geo','SV'],\
+        keep='first')
+    final_df['observation'] = final_df['observation'].astype(str)\
+        .str.strip()
+    # derived_df generated to get the year/SV/location sets
+    # where 'u' exist
+    derived_df = final_df[final_df['observation'].astype(str).str.contains('u')]
+    u_rows = list(derived_df['SV'] + derived_df['geo'])
+    final_df['info'] = final_df['SV'] + final_df['geo']
+    # Adding Measurement Method based on a condition
+    final_df['Measurement_Method'] = np.where(
+        final_df['info'].isin(u_rows),
+        'EurostatRegionalStatistics_LowReliability',
+        'EurostatRegionalStatistics')
+    final_df.drop(columns=['info'], inplace=True)
+    final_df['observation'] = (final_df['observation'].astype(str).str.replace(
+        ':', '').str.replace(' ', '').str.replace('u', ''))
+    final_df['observation'] = pd.to_numeric(final_df['observation'],
+                                            errors='coerce')
+    final_df = final_df.replace({'geo': COUNTRY_MAP})
+    final_df = final_df.sort_values(by=['geo', 'SV'])
+    final_df['observation'].replace('', np.nan, inplace=True)
+    final_df.dropna(subset=['observation'], inplace=True)
     final_df.to_csv(cleaned_csv_file_path, index=False)
-
     sv_list = list(set(sv_list))
     sv_list.sort()
     _generate_mcf(sv_list, mcf_file_path)

@@ -20,16 +20,14 @@ import unittest
 import sys
 import tempfile
 # module_dir is the path to where this test is running from.
-MODULE_DIR = os.path.dirname(__file__)
-sys.path.insert(0, MODULE_DIR)
+_MODULE_DIR = os.path.dirname(__file__)
+sys.path.insert(0, _MODULE_DIR)
 # pylint: disable=wrong-import-position
 from process import process
 # pylint: enable=wrong-import-position
 
-TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
-EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
-OUTPUT_DATA_DIR = os.path.join(MODULE_DIR, "test_output_data")
-
+_TEST_DATASET_DIR = os.path.join(_MODULE_DIR, "test_data", "datasets")
+_EXPECTED_FILES_DIR = os.path.join(_MODULE_DIR, "test_data", "expected_files")
 
 class TestProcess(unittest.TestCase):
     """
@@ -45,7 +43,7 @@ class TestProcess(unittest.TestCase):
         'hlth_ehis_bm1e.tsv', 'hlth_ehis_bm1i.tsv'
     ]
     ip_data = [
-        os.path.join(TEST_DATASET_DIR, file_name)
+        os.path.join(_TEST_DATASET_DIR, file_name)
         for file_name in test_data_files
     ]
 
@@ -74,10 +72,10 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
+        expected_mcf_file_path = os.path.join(_EXPECTED_FILES_DIR,
                                               "eurostat_population_bmi.mcf")
 
-        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
+        expected_tmcf_file_path = os.path.join(_EXPECTED_FILES_DIR,
                                                "eurostat_population_bmi.tmcf")
 
         with open(expected_mcf_file_path,
@@ -98,7 +96,7 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
+        expected_csv_file_path = os.path.join(_EXPECTED_FILES_DIR,
                                               "eurostat_population_bmi.csv")
 
         expected_csv_data = ""

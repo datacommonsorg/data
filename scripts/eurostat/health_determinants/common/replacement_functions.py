@@ -49,26 +49,19 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
 
     Returns: df (pd.DataFrame): modified df as output
     """
-    df = df.replace({
-        'isced11': {
-            'ED0-2':
-                'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-            'ED0_2':
-                'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-            'ED3-4':
-                'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-            'ED3_4':
-                'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-            'ED5_6':
-                'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
-            'ED5-8':
-                'TertiaryEducation',
-            'ED5_8':
-                'TertiaryEducation',
-            'TOTAL':
-                'Total'
-        }
-    })
+    df = df.replace({'isced11': {
+        'ED0-2': 'LessThanPrimaryEducation'+\
+        'OrPrimaryEducationOrLowerSecondaryEducation',
+        'ED0_2': 'LessThanPrimaryEducation'+\
+        'OrPrimaryEducationOrLowerSecondaryEducation',
+        'ED3-4': 'UpperSecondaryEducation'+\
+        'OrPostSecondaryNonTertiaryEducation',
+        'ED3_4': 'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+        'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
+        'ED5-8': 'TertiaryEducation',
+        'ED5_8': 'TertiaryEducation',
+        'TOTAL': 'Total'
+        }})
     return df
 
 
@@ -76,19 +69,45 @@ def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'quant_inc': {
             'TOTAL': 'Total',
-            'QU1': 'Percentile0To20',
-            'QU2': 'Percentile20To40',
-            'QU3': 'Percentile40To60',
-            'QU4': 'Percentile60To80',
-            'QU5': 'Percentile80To100'
+            'QU1': 'IncomeOf0To20Percentile',
+            'QU2': 'IncomeOf20To40Percentile',
+            'QU3': 'IncomeOf40To60Percentile',
+            'QU4': 'IncomeOf60To80Percentile',
+            'QU5': 'IncomeOf80To100Percentile'
+        }
+    })
+    return df
+
+
+def _replace_frequenc(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'frequenc': {
+            'DAY': 'DailyUsage',
+            'LT1M': 'LessThanOnceAMonth',
+            'MTH': 'EveryMonth',
+            'NM12': 'NotUsedInTheLast12Months',
+            'NVR': 'NeverUsed',
+            'NVR_NM12': 'NeverUsedOrNotUsedInTheLast12Months',
+            'WEEK': 'EveryWeek',
+            'GE1W': 'AtLeastOnceAWeek',
+            'NVR_OCC': 'NeverUsedOrOccasionallyUsage',
+            'NBINGE': 'NeverUsed'
         }
     })
     return df
@@ -127,7 +146,7 @@ def _replace_levels(df: pd.DataFrame) -> pd.DataFrame:
         'levels': {
             'HVY': 'HeavyActivityLevel',
             'MOD': 'ModerateActivityLevel',
-            'MOD_HVY': 'ModerateActivityOrHeavyActivity',
+            'MOD_HVY': 'ModerateActivityLevelOrHeavyActivityLevel',
             'NONE_LGHT': 'NoActivityOrLightActivityLevel'
         }
     })
@@ -186,8 +205,8 @@ def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'citizen': {
-            'EU28_FOR': 'WithinEU28AndNotACitizen',
-            'NEU28_FOR': 'CitizenOutsideEU28',
+            'EU28_FOR': 'CitizenOutsideEU28',
+            'NEU28_FOR': 'WithinEU28AndNotACitizen',
             'FOR': 'NotACitizen',
             'NAT': 'Citizen'
         }
