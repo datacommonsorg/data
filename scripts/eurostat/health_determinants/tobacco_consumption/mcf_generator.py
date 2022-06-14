@@ -12,20 +12,19 @@ def smoking_tobaccoproducts_education_attainment_level() -> str:
         "{substanceUsageFrequency}{gender}{educationalAttainment}\n")
 
     mcf = ''
-    for gender in ['Male', 'Female']:
-            # for gender in ['Male', 'Female','Total']:
+    # for gender in ['Male', 'Female']:
+    for gender in ['Male', 'Female','Total']:
 
         for healthBehavior in ['NonSmoker', 'Smoking']:
-            for substanceUsageFrequency in ['DailyUsage' , 'OccasionalUsage']:
-                f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
-                
+            if healthBehavior == 'NonSmoker':
                 for educationalAttainment in [
-                        # 'AllISCED2011Levels',
+                        'AllISCED2011Levels',
                         'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
                         'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
                         'TertiaryEducation'
                 ]:
-                    node = "Count_Person_" + educationalAttainment + "_" + gender + "_" + healthBehavior +"_"+ substanceUsageFrequency+"_TobaccoProducts"+"_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
+                    node = "Count_Person_" + educationalAttainment + "_" + gender + "_" + healthBehavior + "_TobaccoProducts" + "_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
+                    
                     denominator = "Count_Person_" + educationalAttainment + "_" + gender
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
@@ -35,22 +34,54 @@ def smoking_tobaccoproducts_education_attainment_level() -> str:
 
                     f_educationalAttainment = f"educationalAttainment: dcs:{educationalAttainment}\n"
                     f_educationalAttainment = f_educationalAttainment.replace("Or", "__")
+                    
                     if educationalAttainment == "AllISCED2011Levels":
                         node = node.replace("_AllISCED2011Levels", "")
                         denominator = denominator.replace("_AllISCED2011Levels", "")
                         f_educationalAttainment = ""
-
-                    if healthBehavior == "NonSmoker":
-                        node = node.replace("DailyUsage", "").replace("OccasionalUsage","")
-                        f_substanceUsageFrequency = ""
 
                     mcf += template_mcf.format(
                         node=node,
                         denominator = denominator,
                         gender=f_gender,
                         healthBehavior=healthBehavior,
-                        substanceUsageFrequency=f_substanceUsageFrequency,
+                        substanceUsageFrequency="",
                         educationalAttainment=f_educationalAttainment)
+
+            elif healthBehavior == 'Smoking':
+                for substanceUsageFrequency in ['DailyUsage' , 'OccasionalUsage']:
+                    f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
+                    
+                    for educationalAttainment in [
+                            'AllISCED2011Levels',
+                            'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
+                            'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+                            'TertiaryEducation'
+                    ]:
+                        node = "Count_Person_" + educationalAttainment + "_" + gender + "_" + healthBehavior +"_"+ substanceUsageFrequency+"_TobaccoProducts"+"_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
+                        
+                        denominator = "Count_Person_" + educationalAttainment + "_" + gender
+                        f_gender = f"gender: dcs:{gender}\n"
+                        if gender == "Total":
+                            node = node.replace("_Total", "")
+                            denominator = denominator.replace("_Total", "")
+                            f_gender = ""
+
+                        f_educationalAttainment = f"educationalAttainment: dcs:{educationalAttainment}\n"
+                        f_educationalAttainment = f_educationalAttainment.replace("Or", "__")
+                        
+                        if educationalAttainment == "AllISCED2011Levels":
+                            node = node.replace("_AllISCED2011Levels", "")
+                            denominator = denominator.replace("_AllISCED2011Levels", "")
+                            f_educationalAttainment = ""
+
+                        mcf += template_mcf.format(
+                            node=node,
+                            denominator = denominator,
+                            gender=f_gender,
+                            healthBehavior=healthBehavior,
+                            substanceUsageFrequency=f_substanceUsageFrequency,
+                            educationalAttainment=f_educationalAttainment)
     return mcf
 
 
