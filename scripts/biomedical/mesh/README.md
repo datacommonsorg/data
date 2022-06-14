@@ -3,7 +3,6 @@
 ## Table of Contents
 
 - [Importing Medical Subject Headings (MeSH) data from NCBI](#importing-medical-subject-headings-mesh-data-from-ncbi)
-  - [Table of Contents](#table-of-contents)
   - [About the Dataset](#about-the-dataset)
     - [Download URL](#download-url)
     - [Overview](#overview)
