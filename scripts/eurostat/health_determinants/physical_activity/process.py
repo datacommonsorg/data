@@ -613,8 +613,8 @@ def dailypractice_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_'+\
         'PhysicalActivity'+'_AsAFractionOf_Count_Person_'+df['sex']
-    df.drop(columns=['isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['age','SV','time'], var_name='geo'\
+    df.drop(columns=['age','isced11', 'sex'], inplace=True)
+    df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
 
@@ -814,21 +814,34 @@ class EuroStatPhysicalActivity:
             }
             df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
-            df['Measurement_Method'] = np.where(
-                df['observation'].str.contains('u'),
-                'EurostatRegionalStatistics_LowReliability',
-                'EurostatRegionalStatistics')
-            df['observation'] = (df['observation'].astype(str).str.replace(
-                ':', '').str.replace(' ', '').str.replace('u', ''))
-            df['observation'].replace('', np.nan, inplace=True)
-            df.dropna(subset=['observation'], inplace=True)
-            df['observation'] = pd.to_numeric(df['observation'],
-                                              errors='coerce')
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
 
-        final_df = final_df.sort_values(by=['time', 'geo', 'SV'])
+        final_df = final_df.sort_values(by=['time', 'geo', 'SV','observation'])
+        final_df = final_df.drop_duplicates(subset=['time','geo','SV'],\
+            keep='first')
+        final_df['observation'] = final_df['observation'].astype(str)\
+            .str.strip()
+        # derived_df generated to get the year/SV/location sets 
+        # where 'u' exist
+        derived_df = final_df[final_df['observation'].astype(str)
+            .str.contains('u')]
+        u_rows = list(derived_df['SV']+derived_df['geo'])
+        final_df['info'] = final_df['SV']+final_df['geo']
+        # Adding Measurement Method based on a condition
+        final_df['Measurement_Method'] = np.where(
+            final_df['info'].isin(u_rows),
+            'EurostatRegionalStatistics_LowReliability',
+            'EurostatRegionalStatistics')
+        final_df.drop(columns=['info'],inplace=True)
+        final_df['observation'] = (final_df['observation'].astype(str)
+            .str.replace(':', '').str.replace(' ', '').str.replace('u', ''))
+        final_df['observation'] = pd.to_numeric(final_df['observation'],
+            errors='coerce')
         final_df = final_df.replace({'geo': COUNTRY_MAP})
+        final_df = final_df.sort_values(by=['geo', 'SV'])
+        final_df['observation'].replace('', np.nan, inplace=True)
+        final_df.dropna(subset=['observation'],inplace=True)
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
