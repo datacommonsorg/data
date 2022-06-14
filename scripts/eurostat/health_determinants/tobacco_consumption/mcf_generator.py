@@ -12,13 +12,15 @@ def smoking_tobaccoproducts_education_attainment_level() -> str:
         "{substanceUsageFrequency}{gender}{educationalAttainment}\n")
 
     mcf = ''
-    for gender in ['Male', 'Female', 'Total']:
+    for gender in ['Male', 'Female']:
+            # for gender in ['Male', 'Female','Total']:
+
         for healthBehavior in ['NonSmoker', 'Smoking']:
             for substanceUsageFrequency in ['DailyUsage' , 'OccasionalUsage']:
                 f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
                 
                 for educationalAttainment in [
-                        'AllISCED2011Levels',
+                        # 'AllISCED2011Levels',
                         'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
                         'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
                         'TertiaryEducation'
@@ -644,22 +646,23 @@ def smoking_tobaccoproducts_country_of_citizenship() -> str:
 def generate_mcf():
     mcf = ''
     for f in [smoking_tobaccoproducts_education_attainment_level,
-            daily_smokers_cigarettes_education_attainment_level,
-            daily_exposure_tobacco_smoke_indoors_education_attainment_level,
-            former_daily_tobacco_smoker_education_attainment_level,
-            duration_daily_tobacco_smoking_education_attainment_level,
-            electronic_cigarettes_similar_electronic_devices_education_attainment_level,
+            # daily_smokers_cigarettes_education_attainment_level,
+            # daily_exposure_tobacco_smoke_indoors_education_attainment_level,
+            # former_daily_tobacco_smoker_education_attainment_level,
+            # duration_daily_tobacco_smoking_education_attainment_level,
+            # electronic_cigarettes_similar_electronic_devices_education_attainment_level,
 
-            smoking_tobaccoproducts_income_quintile,
-            daily_smokers_cigarettes_income_quintile,
-            former_daily_tobacco_smoker_income_quintile,
+            # smoking_tobaccoproducts_income_quintile,
+            # daily_smokers_cigarettes_income_quintile,
+            # former_daily_tobacco_smoker_income_quintile,
 
-            smoking_tobaccoproducts_degree_of_urbanisation,
-            daily_smokers_cigarettes_degree_of_urbanisation,
-            daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
+            # smoking_tobaccoproducts_degree_of_urbanisation,
+            # daily_smokers_cigarettes_degree_of_urbanisation,
+            # daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
 
-            smoking_tobaccoproducts_county_of_birth,
-            smoking_tobaccoproducts_country_of_citizenship]:
+            # smoking_tobaccoproducts_county_of_birth,
+            # smoking_tobaccoproducts_country_of_citizenship
+            ]:
         mcf += f()
 
     return mcf
