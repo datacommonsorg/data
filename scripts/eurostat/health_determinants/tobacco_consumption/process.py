@@ -483,7 +483,7 @@ def daily_smokers_cigarettes_history_education_attainment_level(
     df = _replace_smoking(df)
     df.drop(columns=['age'], inplace=True)
     df['SV'] = 'Count_Person_'+ df['isced97']+'_'+df['sex']+'_'\
-        +'DailySmokersHistory'+\
+        +'DailySmokersHistoryEducation'+\
         '_AsAFractionOf_Count_Person_'+df['isced97']+'_'+df['sex']
     df.drop(columns=['isced97', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -512,7 +512,7 @@ def daily_smokers_cigarettes_history_income_quintile(
     df = _replace_smoking(df)
     df.drop(columns=['age'], inplace=True)
     df['SV'] = 'Count_Person_'+ df['quant_inc']+'_'+df['sex']+\
-        '_'+'DailySmokersHistory'+\
+        '_'+'DailySmokersHistoryIncome'+\
         '_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
     df.drop(columns=['quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -554,8 +554,10 @@ def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    _dict = {'F': 'Female', 'M': 'Male', 'T': 'Total'}
-    df = df.replace({'sex': _dict})
+    df = df.replace({'sex': {
+        'F': 'Female',
+        'M': 'Male',
+        'T': 'Total'}})
     return df
 
 
@@ -607,12 +609,11 @@ def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
     df = df.replace({
         'quant_inc': {
             'TOTAL': 'Total',
-            'QU1': 'FirstQuintile',
-            'QU2': 'SecondQuintile',
-            'QU3': 'ThirdQuintile',
-            'QU4': 'FourthQuintile',
-            'QU5': 'FifthQuintile',
-            'UNK': 'Unknown'
+            'QU1': 'IncomeOf0To20Percentile',
+            'QU2': 'IncomeOf20To40Percentile',
+            'QU3': 'IncomeOf40To60Percentile',
+            'QU4': 'IncomeOf60To80Percentile',
+            'QU5': 'IncomeOf80To100Percentile',
         }
     })
     return df
@@ -626,9 +627,9 @@ def _replace_deg_urb(df: pd.DataFrame) -> pd.DataFrame:
     df = df.replace({
         'deg_urb': {
             'TOTAL': 'Total',
-            'DEG1': 'Cities',
-            'DEG2': 'TownsAndSuburbs',
-            'DEG3': 'RuralAreas'
+            'DEG1': 'Urban',
+            'DEG2': 'SemiUrban',
+            'DEG3': 'Rural'
         }
     })
     return df
@@ -788,7 +789,7 @@ class EuroStatTobaccoConsumption:
 
         for file_path in self.input_files:
             print(file_path)
-            df = pd.read_csv(file_path, sep='\t', skiprows=1)
+            df = pd.read_csv(file_path, sep='\t', header=0)
             file_name = file_path.split("/")[-1][:-4]
             function_dict = {
                 "hlth_ehis_sk1b":
@@ -832,7 +833,7 @@ class EuroStatTobaccoConsumption:
                 df['observation'].str.contains('u'),
                 'LowReliability/EurostatRegionalStatistics',
                 'EurostatRegionalStatistics')
-            df['observation'] = (df['observation'].str.replace(
+            df['observation'] = (df['observation'].astype("str").str.replace(
                 ':', '').str.replace(' ', '').str.replace('u', ''))
             df['observation'].replace('', np.nan, inplace=True)
             df.dropna(subset=['observation'], inplace=True)

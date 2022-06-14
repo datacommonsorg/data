@@ -17,11 +17,31 @@ the download script takes INPUT_URLs and current directory as input
 and downloads the files.
 """
 import os
-from sys import path
+import sys
+
+from absl import app, flags
+
 # For import common.download
-path.insert(1, '../')
-from common.download import download_file
-# List to provide the URLs of input files to download script.
+_COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(1, _COMMON_PATH)
+from common import download
+
+_FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    "download_directory", os.path.dirname((__file__)),
+    "Directory path where input files need to be downloaded"
+)
+
+def download_files(download_directory: str) -> None:
+    """
+    This Method calls the download function from the commons directory
+    to download all the input files.
+    Args:
+        download_directory (str):Location where the files need to be downloaded.
+    Returns:
+        None
+    """
+    # List to provide the URLs of input files to download script.
 INPUT_URLS = [
     "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk1i.tsv.gz",
     "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_sk1e.tsv.gz",
@@ -44,6 +64,11 @@ INPUT_URLS = [
     "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_de4.tsv.gz",
     "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_de5.tsv.gz"
 ]
-# Variable to provide the current working directory to download script.
-current_working_directory = os.getcwd()
-download_file(INPUT_URLS, current_working_directory)
+download.download_file(INPUT_URLS, download_directory)
+
+
+def main(_):
+    download_files(_FLAGS.download_directory)
+
+if __name__ == '__main__':
+    app.run(main)
