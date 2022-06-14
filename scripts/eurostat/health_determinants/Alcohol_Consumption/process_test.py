@@ -12,92 +12,102 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for USA Population by Race preprocess script.
+Script to automate the testing for EuroStat BMI process script.
 """
 
 import os
-from os import path
 import unittest
+import sys
+import tempfile
+# module_dir is the path to where this test is running from.
+MODULE_DIR = os.path.dirname(__file__)
+sys.path.insert(0, MODULE_DIR)
+# pylint: disable=wrong-import-position
 from process import EuroStatAlcoholConsumption
-# module_dir_ is the path to where this test is running from.
-MODULE_DIR_ = os.path.dirname(__file__)
-TEST_DATA_FOLDER = os.path.join(MODULE_DIR_, "test_data")
-OP_DATA_FOLDER = os.path.join(MODULE_DIR_, "test_output_data")
-INPUT_PATH = os.path.dirname(os.path.abspath(__file__)) + os.sep + "input_data"
+# pylint: enable=wrong-import-position
+
+TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
+EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
+OUTPUT_DATA_DIR = os.path.join(MODULE_DIR, "test_output_data")
 
 
-class TestPreprocess(unittest.TestCase):
+class TestProcess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
     properties which further requried for unit testing.
-    The test will be conducted for EuroStat Physical Activity
+    The test will be conducted for EuroStat BMI Sample Datasets,
     It will be generating CSV, MCF and TMCF files based on the sample input.
     Comparing the data with the expected files.
     """
-    CLEANED_CSV_FILE_PATH = os.path.join(OP_DATA_FOLDER, "data.csv")
-    MCF_FILE_PATH = os.path.join(OP_DATA_FOLDER, "test_census.mcf")
-    TMCF_FILE_PATH = os.path.join(OP_DATA_FOLDER, "test_census.tmcf")
-    test_input_path = (os.path.dirname(os.path.abspath(__file__)) + os.sep
-        + 'test_data/test_input_files')
-    ip_data = os.listdir(test_input_path)
-    ip_data = [os.path.dirname(os.path.abspath(__file__)) + os.sep
-        + 'test_data/test_input_files' + os.sep + file for file in ip_data]
-        
-    base = EuroStatAlcoholConsumption(ip_data, CLEANED_CSV_FILE_PATH,
-                                    MCF_FILE_PATH, TMCF_FILE_PATH)
-    base.process()
+    test_data_files = [
+        'hlth_ehis_al1e.tsv', 'hlth_ehis_al1i.tsv', 'hlth_ehis_al1u.tsv',
+        'hlth_ehis_al3e.tsv', 'hlth_ehis_al3i.tsv', 'hlth_ehis_al3u.tsv',
+        'hlth_ehis_al2e.tsv', 'hlth_ehis_al2i.tsv', 'hlth_ehis_al2u.tsv',
+        'hlth_ehis_al1b.tsv', 'hlth_ehis_al1c.tsv', 'hlth_ehis_de10.tsv',
+        'hlth_ehis_de6.tsv'
+    ]
+    ip_data = [
+        os.path.join(TEST_DATASET_DIR, file_name)
+        for file_name in test_data_files
+    ]
+
+    def __init__(self, methodName: str = ...) -> None:
+        super().__init__(methodName)
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
+            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
+            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+            
+            base = EuroStatAlcoholConsumption(self.ip_data, cleaned_csv_file_path,
+                                    mcf_file_path, tmcf_file_path)
+            base.process()
+            
+            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+                self.actual_mcf_data = mcf_file.read()
+
+            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+                self.actual_tmcf_data = tmcf_file.read()
+
+            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+                self.actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):
         """
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        expected_MCF_FILE_PATH = os.path.join(
-            TEST_DATA_FOLDER,
-            "expected_eurostat_population_alcoholconsumption.mcf")
+        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
+                        "expected_eurostat_population_alcoholconsumption.mcf")
 
-        expected_TMCF_FILE_PATH = os.path.join(
-            TEST_DATA_FOLDER,
-            "expected_eurostat_population_alcoholconsumption.tmcf")
+        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
+                        "expected_eurostat_population_alcoholconsumption.tmcf")
 
-        with open(expected_MCF_FILE_PATH,
+        with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
             expected_mcf_data = expected_mcf_file.read()
 
-        with open(expected_TMCF_FILE_PATH,
+        with open(expected_tmcf_file_path,
                   encoding="UTF-8") as expected_tmcf_file:
             expected_tmcf_data = expected_tmcf_file.read()
 
-        with open(self.MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
-            actual_mcf_data = mcf_file.read()
-
-        with open(self.TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
-            actual_tmcf_data = tmcf_file.read()
-        if path.exists(self.MCF_FILE_PATH):
-            os.remove(self.MCF_FILE_PATH)
-        if path.exists(self.TMCF_FILE_PATH):
-            os.remove(self.TMCF_FILE_PATH)
-
-        self.assertEqual(expected_mcf_data.strip(), actual_mcf_data.strip())
-        self.assertEqual(expected_tmcf_data.strip(), actual_tmcf_data.strip())
+        self.assertEqual(expected_mcf_data.strip(),
+                         self.actual_mcf_data.strip())
+        self.assertEqual(expected_tmcf_data.strip(),
+                         self.actual_tmcf_data.strip())
 
     def test_create_csv(self):
         """
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(
-            TEST_DATA_FOLDER,
-            "expected_eurostat_population_alcoholconsumption.csv")
+        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
+                        "expected_eurostat_population_alcoholconsumption.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
                   encoding="utf-8-sig") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
-        with open(self.CLEANED_CSV_FILE_PATH, encoding="utf-8-sig") as csv_file:
-            actual_csv_data = csv_file.read()
-        if path.exists(self.CLEANED_CSV_FILE_PATH):
-            os.remove(self.CLEANED_CSV_FILE_PATH)
-
-        self.assertEqual(expected_csv_data.strip(), actual_csv_data.strip())
+        self.assertEqual(expected_csv_data.strip(),
+                         self.actual_csv_data.strip())

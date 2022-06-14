@@ -37,10 +37,11 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-#alcoholconsumption_by_education_attainment
-def hlth_ehis_al1e(df: pd.DataFrame) -> pd.DataFrame:
+#alcoholconsumption_by_sex_educationattainment
+def alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al1e for concatenation in Final CSV
+    Cleans the file alcoholconsumption_by_sex_education
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -69,10 +70,10 @@ def hlth_ehis_al1e(df: pd.DataFrame) -> pd.DataFrame:
             ,value_name='observation')
     return df
 
-#health_determinant_eurostat_alcoholconsumption_income_quintile
-def hlth_ehis_al1i(df: pd.DataFrame) -> pd.DataFrame:
+#alcoholconsumption_by_sex_income
+def alcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al1i for concatenation in Final CSV
+    Cleans the file alcoholconsumption_by_sex_income for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -91,8 +92,8 @@ def hlth_ehis_al1i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['quant_inc']\
-        +'_AlcoholConsumption_'+df['frequenc']\
+    df['SV'] = 'Count_Person_'+df['sex']+'_AlcoholConsumption_'\
+        +df['quant_inc']+'_'+df['frequenc']\
             +'_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
     # dropping unwanted columns
     df.drop(columns=['quant_inc','frequenc','sex','age','unit'],inplace=True)
@@ -101,10 +102,10 @@ def hlth_ehis_al1i(df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return df
 
-#health_determinant_eurostat_alcoholconsumption_degree_of_urbanisation
-def hlth_ehis_al1u(df: pd.DataFrame) -> pd.DataFrame:
+#alcoholconsumption_by_sex_urbanisation
+def alcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al1u for concatenation in Final CSV
+    Cleans the file alcoholconsumption_by_sex_urbanisation for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -125,9 +126,9 @@ def hlth_ehis_al1u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_frequenc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['deg_urb']+\
-        '_AlcoholConsumption_'+df['frequenc']+'_AsAFractionOf_Count_Person_'+\
-        df['sex']+'_'+df['deg_urb']
+    df['SV'] = 'Count_Person_'+df['sex']+'_AlcoholConsumption_'\
+        +df['deg_urb']+'_'+df['frequenc']+'_AsAFractionOf_Count_Person_'\
+            +df['deg_urb']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['frequenc','deg_urb','sex','unit','age'],inplace=True)
     # ask
@@ -135,10 +136,10 @@ def hlth_ehis_al1u(df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return df
 
-#health_determinant_eurostat_bingedrinking_education_attainment
-def hlth_ehis_al3e(df: pd.DataFrame) -> pd.DataFrame:
+#bingedrinking_by_sex_education
+def bingedrinking_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al3e for concatenation in Final CSV
+    Cleans the file bingedrinking_by_sex_education for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -167,10 +168,10 @@ def hlth_ehis_al3e(df: pd.DataFrame) -> pd.DataFrame:
             ,value_name='observation')
     return df
 
-#health_determinant_eurostat_bingedrinking_income_quintile
-def hlth_ehis_al3i(df: pd.DataFrame) -> pd.DataFrame:
+#bingedrinking_by_sex_income
+def bingedrinking_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al3i for concatenation in Final CSV
+    Cleans the file bingedrinking_by_sex_income for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -189,9 +190,9 @@ def hlth_ehis_al3i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['quant_inc']\
-        +'_BingeDrinking_'+df['frequenc']\
-            +'_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']\
+    df['SV'] = 'Count_Person_'+df['sex']+'_BingeDrinking_'\
+        +df['quant_inc']+'_'+df['frequenc']\
+            +'_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
     # dropping unwanted columns
     df.drop(columns=['unit','age','quant_inc','frequenc','sex'],inplace=True)
     # ask
@@ -199,10 +200,10 @@ def hlth_ehis_al3i(df: pd.DataFrame) -> pd.DataFrame:
             ,value_name='observation')
     return df
 
-#health_determinant_eurostat_bingedrinking_degree_of_urbanisation
-def hlth_ehis_al3u(df: pd.DataFrame) -> pd.DataFrame:
+#bingedrinking_by_sex_urbanisation
+def bingedrinking_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al3u for concatenation in Final CSV
+    Cleans the file bingedrinking_by_sex_urbanisation for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -223,9 +224,9 @@ def hlth_ehis_al3u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_frequenc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['deg_urb']+\
-        '_BingeDrinking_'+df['frequenc']+'_AsAFractionOf_Count_Person_'+\
-        df['sex']+'_'+df['deg_urb']
+    df['SV'] = 'Count_Person_'+df['sex']+'_BingeDrinking_'\
+        +df['deg_urb']+'_'+df['frequenc']+'_AsAFractionOf_Count_Person_'\
+            +df['deg_urb']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['frequenc','deg_urb','sex','unit','age'],inplace=True)
     # ask
@@ -233,10 +234,10 @@ def hlth_ehis_al3u(df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return df
 
-#health_determinant_eurostat_hazardousalcoholconsumption_education_attainment
-def hlth_ehis_al2e(df: pd.DataFrame) -> pd.DataFrame:
+#hazardousalcoholconsumption_by_sex_education
+def hazardousalcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al2e for concatenation in Final CSV
+    Cleans the file hazardousalcoholconsumption_by_sex_education for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -266,10 +267,10 @@ def hlth_ehis_al2e(df: pd.DataFrame) -> pd.DataFrame:
             ,value_name='observation')
     return df
 
-#health_determinant_eurostat_hazardousalcoholconsumption_income_quintile
-def hlth_ehis_al2i(df: pd.DataFrame) -> pd.DataFrame:
+#hazardousalcoholconsumption_by_sex_income
+def hazardousalcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al2i for concatenation in Final CSV
+    Cleans the file hazardousalcoholconsumption_by_sex_income for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -289,8 +290,8 @@ def hlth_ehis_al2i(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['quant_inc']\
-        +'_HazardousAlcoholConsumption_AsAFractionOf_Count_Person_'\
+    df['SV'] = 'Count_Person_'+df['sex']+'_HazardousAlcoholConsumption_'\
+        +df['quant_inc']+'_AsAFractionOf_Count_Person_'\
             +df['sex']+'_'+df['quant_inc']
     # dropping unwanted columns
     df.drop(columns=['unit','age' ,'quant_inc','sex'],inplace=True)
@@ -299,10 +300,10 @@ def hlth_ehis_al2i(df: pd.DataFrame) -> pd.DataFrame:
             ,value_name='observation')
     return df
 
-#health_determinant_eurostat_hazardousalcoholconsumption_degree_of_urbanisation
-def hlth_ehis_al2u(df: pd.DataFrame) -> pd.DataFrame:
+#hazardousalcoholconsumption_by_sex_urbanisation
+def hazardousalcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al2u for concatenation in Final CSV
+    Cleans the file hazardousalcoholconsumption_by_sex_urbanisation for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -322,9 +323,9 @@ def hlth_ehis_al2u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+df['deg_urb']+\
-        '_HazardousAlcoholConsumption_AsAFractionOf_Count_Person_'+\
-        df['sex']+'_'+df['deg_urb']
+    df['SV'] = 'Count_Person_'+df['sex']+'_HazardousAlcoholConsumption_'\
+        +df['deg_urb']+'_AsAFractionOf_Count_Person_'\
+            +df['deg_urb']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['deg_urb','sex','unit','age'],inplace=True)
     # ask
@@ -332,10 +333,10 @@ def hlth_ehis_al2u(df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return df
 
-#health_determinant_eurostat_alcoholconsumption_country_of_birth
-def hlth_ehis_al1b(df: pd.DataFrame) -> pd.DataFrame:
+#alcoholconsumption_by_sex_country_of_birth
+def alcoholconsumption_by_sex_country_of_birth(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al1b for concatenation in Final CSV
+    Cleans the file alcoholconsumption_by_sex_country_of_birth for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -356,9 +357,9 @@ def hlth_ehis_al1b(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_c_birth(df)
     # giving proper statvar name
-    df['SV'] = 'Count_Person_'+'_'+df['sex']+'_'+df['c_birth']\
-        +'_'+'AlcoholConsumption'+'_'+df['frequenc']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['c_birth']
+    df['SV'] = 'Count_Person_'+df['sex']+'_AlcoholConsumption_'\
+        +df['c_birth']+'_'+df['frequenc']+\
+            '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['c_birth']
     # dropping unwanted columns
     df.drop(columns=['frequenc','c_birth','sex','unit','age'],inplace=True)
     # ask
@@ -366,10 +367,10 @@ def hlth_ehis_al1b(df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return df
 
-#health_determinant_eurostat_alcoholconsumption_citizen
-def hlth_ehis_al1c(df: pd.DataFrame) -> pd.DataFrame:
+#alcoholconsumption_by_sex_citizen
+def alcoholconsumption_by_sex_citizen(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_al1c for concatenation in Final CSV
+    Cleans the file alcoholconsumption_by_sex_citizen for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -400,10 +401,10 @@ def hlth_ehis_al1c(df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return df
 
-#health_determinant_eurostat_historical_alcoholconsumption_education_attainment
-def hlth_ehis_de10(df: pd.DataFrame) -> pd.DataFrame:
+#historical_alcoholconsumption_by_sex_education
+def historical_alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_de10 for concatenation in Final CSV.
+    Cleans the file historical_alcoholconsumption_by_sex_education for concatenation in Final CSV.
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -432,10 +433,10 @@ def hlth_ehis_de10(df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return df
 
-#health_determinant_eurostat_historical_bingedrinking_education_attainment
-def hlth_ehis_de6(df: pd.DataFrame) -> pd.DataFrame:
+#historical_bingedrinking_by_sex_education
+def historical_bingedrinking_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file hlth_ehis_de6 for concatenation in Final CSV.
+    Cleans the file historical_bingedrinking_by_sex_education for concatenation in Final CSV.
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -499,6 +500,10 @@ def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({'sex': {
         'F': 'Female',
@@ -510,6 +515,10 @@ def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({'isced11': {
         'ED0-2':
@@ -550,6 +559,10 @@ def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({'deg_urb': {
         'TOTAL':'Total',
@@ -563,6 +576,10 @@ def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({'c_birth': {
         'EU28_FOR': 'ForeignBornWithinEU28',
@@ -576,6 +593,10 @@ def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
+    Args: 
+        df (pd.DataFrame): df as the input, to change column values
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({'citizen': {
         'EU28_FOR': 'WithinEU28AndNotACitizen',
@@ -601,7 +622,7 @@ class EuroStatAlcoholConsumption:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
-        Arguments:
+        Args:
             None
         Returns:
             None
@@ -623,7 +644,7 @@ class EuroStatAlcoholConsumption:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
-        Arguments:
+        Args:
             df_columns (list) : List of DataFrame Columns
         Returns:
             None
@@ -631,9 +652,10 @@ class EuroStatAlcoholConsumption:
         # pylint: disable=R0914
         # pylint: disable=R0912
         # pylint: disable=R0915
-        mcf_template = ("Node: dcid:{}\n"
+        mcf_template = ("Node: dcid:{ip1}\n"
                         "typeOf: dcs:StatisticalVariable\n"
-                        "populationType: dcs:Person{}{}{}{}{}{}{}{}{}\n"
+                        "populationType: dcs:Person{ip2}{ip3}{ip4}{ip5}"
+                        "{ip6}{ip7}{ip8}{ip9}{ip10}\n"
                         "statType: dcs:measuredValue\n"
                         "measuredProperty: dcs:count\n")
         final_mcf_template = ""
@@ -681,11 +703,16 @@ class EuroStatAlcoholConsumption:
                     citizenship = "\ncitizenship: dcs:"+\
                     prop.replace("Citizenship","")
 
-            final_mcf_template += mcf_template.format(
-                sv, denominator, healthbehavior, gender,
-                frequenc, education, incomequin,
-                residence, countryofbirth,
-                citizenship) + "\n"
+            final_mcf_template += mcf_template.format(ip1=sv,
+                                                      ip2=denominator,
+                                                      ip3=healthbehavior,
+                                                      ip4=gender,
+                                                      ip5=frequenc,
+                                                      ip6=education,
+                                                      ip7=incomequin,
+                                                      ip8=residence,
+                                                      ip9=countryofbirth,
+                                                      ip10=citizenship) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
@@ -698,8 +725,10 @@ class EuroStatAlcoholConsumption:
         """
         This Method calls the required methods to generate
         cleaned CSV, MCF, and TMCF file.
-        Arguments: None
-        Returns: None
+        Args:
+            None
+        Returns:
+            None
         """
 
         final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
@@ -711,47 +740,63 @@ class EuroStatAlcoholConsumption:
         sv_list = []
 
         for file_path in self.input_files:
-            print(file_path)
-            df = pd.read_csv(file_path, sep='\t', skiprows=1)
+            df = pd.read_csv(file_path, sep='\t', header=0)
             file_name = file_path.split("/")[-1][:-4]
             function_dict = {
-                "hlth_ehis_al1b": hlth_ehis_al1b,
-                "hlth_ehis_al1c": hlth_ehis_al1c,
-                "hlth_ehis_al1e": hlth_ehis_al1e,
-                "hlth_ehis_al1i": hlth_ehis_al1i,
-                "hlth_ehis_al1u": hlth_ehis_al1u,
-                "hlth_ehis_al2e": hlth_ehis_al2e,
-                "hlth_ehis_al2i": hlth_ehis_al2i,
-                "hlth_ehis_al2u": hlth_ehis_al2u,
-                "hlth_ehis_al3e": hlth_ehis_al3e,
-                "hlth_ehis_al3i": hlth_ehis_al3i,
-                "hlth_ehis_al3u": hlth_ehis_al3u,
-                "hlth_ehis_de6": hlth_ehis_de6,
-                "hlth_ehis_de10": hlth_ehis_de10
+                "hlth_ehis_al1b": alcoholconsumption_by_sex_country_of_birth,
+                "hlth_ehis_al1c": alcoholconsumption_by_sex_citizen,
+                "hlth_ehis_al1e": alcoholconsumption_by_sex_education,
+                "hlth_ehis_al1i": alcoholconsumption_by_sex_income,
+                "hlth_ehis_al1u": alcoholconsumption_by_sex_urbanisation,
+                "hlth_ehis_al2e": hazardousalcoholconsumption_by_sex_education,
+                "hlth_ehis_al2i": hazardousalcoholconsumption_by_sex_income,
+                "hlth_ehis_al2u": hazardousalcoholconsumption_by_sex_urbanisation,
+                "hlth_ehis_al3e": bingedrinking_by_sex_education,
+                "hlth_ehis_al3i": bingedrinking_by_sex_income,
+                "hlth_ehis_al3u": bingedrinking_by_sex_urbanisation,
+                "hlth_ehis_de6": historical_bingedrinking_by_sex_education,
+                "hlth_ehis_de10": historical_alcoholconsumption_by_sex_education
             }
             df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
-            df['Measurement_Method'] = 'EurostatRegionalStatistics'
-            df['Measurement_Method'] = np.where(
-                df['observation'].str.contains('u'),
-                'EurostatRegionalStatistics_LowReliability',
-                df['Measurement_Method'])
-            df['Measurement_Method'] = np.where(
-                df['observation'].str.contains('d'),
-                'EurostatRegionalStatistics_DefinitionDiffers',
-                df['Measurement_Method'])
-            df['observation'] = (df['observation'].str.replace(
-                ':', '').str.replace(' ', '').str.replace('u', '')
-                .str.replace('d', ''))
-            df['observation'].replace('', np.nan, inplace=True)
-            df.dropna(subset=['observation'], inplace=True)
-            df['observation'] = pd.to_numeric(df['observation'],
-                                              errors='coerce')
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
 
-        final_df = final_df.sort_values(by=['time', 'geo', 'SV'])
+        final_df = final_df.sort_values(by=['time', 'geo', 'SV','observation'])
+        final_df = final_df.drop_duplicates(subset=['time','geo','SV'],\
+            keep='first')
+        final_df['observation'] = final_df['observation'].astype(str)\
+            .str.strip()
+        # derived_df generated to get the year/SV/location sets 
+        # where 'u' exist
+        derived_df = final_df[final_df['observation'].astype(str)
+            .str.contains('u')]
+        u_rows = list(derived_df['SV']+derived_df['geo'])
+        final_df['info'] = final_df['SV']+final_df['geo']
+        # Adding Measurement Method based on a condition
+        final_df['Measurement_Method'] = np.where(
+            final_df['info'].isin(u_rows),
+            'EurostatRegionalStatistics_LowReliability',
+            'EurostatRegionalStatistics')
+        derived_df = final_df[final_df['observation'].astype(str)
+            .str.contains('d')]
+        u_rows = list(derived_df['SV']+derived_df['geo'])
+        final_df['info'] = final_df['SV']+final_df['geo']
+        # Adding Measurement Method based on a condition
+        final_df['Measurement_Method'] = np.where(
+            final_df['info'].isin(u_rows),
+            'EurostatRegionalStatistics_DefinitionDiffers',
+            final_df['Measurement_Method'])
+        final_df.drop(columns=['info'],inplace=True)
+        final_df['observation'] = (final_df['observation'].astype(str)
+            .str.replace(':', '').str.replace(' ', '').str.replace('u', '')
+            .str.replace('d', ''))
+        final_df['observation'] = pd.to_numeric(final_df['observation'],
+            errors='coerce')
         final_df = final_df.replace({'geo': COUNTRY_MAP})
+        final_df = final_df.sort_values(by=['geo', 'SV'])
+        final_df['observation'].replace('', np.nan, inplace=True)
+        final_df.dropna(subset=['observation'],inplace=True)
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
