@@ -27,9 +27,17 @@ from absl import flags
 pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
-default_input_path = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "input_data"
+default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "input_data")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+_MCF_TEMPLATE = """Node: dcid:{dcid}
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+{xtra_pvs}
+"""
 
 
 def _extract_year(val: str) -> tuple:
@@ -89,6 +97,8 @@ def _year_range(col: pd.Series) -> str:
     """
     This method returns year range from the dataframe
     column.
+    Example:
+
 
     Arguments:
         col (Series) : DataFrame Column of dtype str
@@ -115,13 +125,16 @@ class CensusUSACountryPopulation:
 
     def __init__(self, input_files: list, csv_file_path: str,
                  mcf_file_path: str, tmcf_file_path: str) -> None:
-        self.input_files = input_files
-        self.cleaned_csv_file_path = csv_file_path
-        self.mcf_file_path = mcf_file_path
-        self.tmcf_file_path = tmcf_file_path
-        self.df = None
-        self.file_name = None
-        self.scaling_factor = 1
+        self._input_files = input_files
+        self._cleaned_csv_file_path = csv_file_path
+        self._mcf_file_path = mcf_file_path
+        self._tmcf_file_path = tmcf_file_path
+        self._df = None
+        self._file_name = None
+        self._scaling_factor = 1
+        # Finding the Dir Path
+        if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
+            os.mkdir(os.path.dirname(self._cleaned_csv_file_path))
 
     def _load_data(self, file: str) -> pd.DataFrame:
         """
@@ -134,7 +147,7 @@ class CensusUSACountryPopulation:
             df (DataFrame) : DataFrame with loaded dataset
         """
         df = None
-        self.file_name = os.path.basename(file)
+        self._file_name = os.path.basename(file)
         if ".xls" in file:
             df = pd.read_excel(file)
         return df
@@ -153,9 +166,12 @@ class CensusUSACountryPopulation:
             df (DataFrame) : DataFrame.
         """
         final_cols = [col for col in df.columns if 'year' not in col.lower()]
-
+        # _return_year("1999") or _return_year("1999 [1]"): 1999
+        # _return_year(".07 1"): pd.NA
         df['Year'] = df['Year and Month'].apply(_return_year).fillna(
             method='ffill', limit=12)
+        # _return_year("1999") or _return_year("1999 [1]"): pd.NA
+        # _return_year(".07 1"): 07
         df['Month'] = df['Year and Month'].apply(_return_month)
         df.dropna(subset=['Year', 'Month'], inplace=True)
 
@@ -204,11 +220,11 @@ class CensusUSACountryPopulation:
         # Multiplying the data with scaling factor.
         for col in final_cols_list:
             if "count" in col.lower():
-                if self.scaling_factor != 1:
+                if self._scaling_factor != 1:
                     df[col] = df[col].astype('float', errors="ignore").multiply(
-                        self.scaling_factor)
+                        self._scaling_factor)
                 df[col] = df[col].astype('Int64', errors="ignore")
-        self.scaling_factor = 1
+        self._scaling_factor = 1
 
         # Creating Location column with default value country/USA.
         # as the dataset is all about USA country level only.
@@ -229,23 +245,19 @@ class CensusUSACountryPopulation:
             df (DataFrame) : DataFrame.
         """
 
-        # Finding the Dir Path
-        file_dir = os.path.dirname(self.cleaned_csv_file_path)
-        if not os.path.exists(file_dir):
-            os.mkdir(file_dir)
         df = self._transform_df(df)
-        keep_value = "first"
-        if self.df is None:
-            self.df = df
-        else:
-            self.df = self.df.append(df, ignore_index=True)
 
-        self.df.sort_values(by=['Date', 'date_range'],
-                            ascending=False,
-                            inplace=True)
-        self.df.drop_duplicates("Date", keep=keep_value, inplace=True)
-        self.df.drop(['date_range'], axis=1, inplace=True)
-        self.df.to_csv(self.cleaned_csv_file_path, index=False)
+        if self._df is None:
+            self._df = df
+        else:
+            self._df = self._df.append(df, ignore_index=True)
+
+        self._df.sort_values(by=['Date', 'date_range'],
+                             ascending=False,
+                             inplace=True)
+        self._df.drop_duplicates("Date", keep="first", inplace=True)
+        self._df.drop(['date_range'], axis=1, inplace=True)
+        self._df.to_csv(self._cleaned_csv_file_path, index=False)
 
     def _generate_mcf(self, df_cols: list) -> None:
         """
@@ -258,43 +270,51 @@ class CensusUSACountryPopulation:
         Returns:
             None
         """
-        mcf_template = ("Node: dcid:{}\n"
-                        "typeOf: dcs:StatisticalVariable\n"
-                        "populationType: dcs:Person{}{}{}\n"
-                        "statType: dcs:measuredValue\n"
-                        "measuredProperty: dcs:count\n")
-        mcf = ""
+
+        mcf_nodes = []
         for col in df_cols:
+            pvs = []
             residence = ""
             status = ""
             armedf = ""
             if col.lower() in ["date", "location"]:
                 continue
             if re.findall('Resident', col):
-                residence = "\nresidentStatus"
-                status = ": dcs:USResident"
-            if re.findall('ArmedForces', col):
-                residence = "\nresidentStatus"
-                if len(status) == 0:
-                    status = ": dcs:InUSArmedForcesOverseas"
+                if re.findall('InUSArmedForcesOverseas', col):
+                    status = "USResident__InUSArmedForcesOverseas"
                 else:
-                    status = ": dcs:USResident__InUSArmedForcesOverseas"
+                    status = "USResident"
+                residence = "residentStatus: dcs:" + \
+                    status
+                pvs.append(residence)
+            elif re.findall('ArmedForces', col):
+                residence = "residentStatus: dcs:" + \
+                         "InUSArmedForcesOverseas"
+                pvs.append(residence)
             if re.findall('Resides', col):
                 if re.findall('Household', col):
-                    residence = "\nresidenceType"
-                    status = ": dcs:Household"
-            if re.findall('NonInstitutionalized', col):
-                residence = "\ninstitutionalization"
-                status = ": dcs:USC_NonInstitutionalized"
+                    residence = "residenceType: dcs:" + \
+                         "Household"
+                    pvs.append(residence)
             if re.findall('Civilian', col):
-                armedf = "\narmedForcesStatus: dcs:Civilian"
+                armedf = "armedForcesStatus: dcs:Civilian"
+                pvs.append(armedf)
+                if re.findall('NonInstitutionalized', col):
+                    residence = "institutionalization: dcs:" + \
+                            "USC_NonInstitutionalized"
+                    pvs.append(residence)
             if re.findall('Count_Person_InUSArmedForcesOverseas', col):
-                armedf = "\narmedForcesStatus: dcs:InArmedForces"
-            mcf = mcf + mcf_template.format(col, residence, status,
-                                            armedf) + "\n"
+                armedf = "armedForcesStatus: dcs:InArmedForces"
+                pvs.append(armedf)
+            node = _MCF_TEMPLATE.format(dcid=col, xtra_pvs='\n'.join(pvs))
+            mcf_nodes.append(node)
+
+            mcf = '\n'.join(mcf_nodes)
+            #mcf = mcf + _MCF_TEMPLATE.format(col, residence, status,
+            #                                armedf) + "\n"
 
         # Writing Genereated MCF to local path.
-        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
+        with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(mcf.rstrip('\n'))
 
     def _generate_tmcf(self, df_cols: list) -> None:
@@ -330,7 +350,7 @@ class CensusUSACountryPopulation:
             i = i + 1
 
         # Writing Genereated TMCF to local path.
-        with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+        with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
 
     def process(self):
@@ -339,11 +359,11 @@ class CensusUSACountryPopulation:
         calls defined methods to clean, generate final
         cleaned CSV file, MCF file and TMCF file.
         """
-        for file in self.input_files:
+        for file in self._input_files:
             df = self._load_data(file)
             self._transform_data(df)
-        self._generate_mcf(self.df.columns)
-        self._generate_tmcf(self.df.columns)
+        self._generate_mcf(self._df.columns)
+        self._generate_tmcf(self._df.columns)
 
 
 def main(_):
@@ -353,11 +373,11 @@ def main(_):
     ip_files = [input_path + os.sep + file for file in ip_files]
 
     # Defining Output file names
-    data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output"
-    cleaned_csv_path = data_file_path + os.sep + "USA_Population_Count.csv"
-    mcf_path = data_file_path + os.sep + "USA_Population_Count.mcf"
-    tmcf_path = data_file_path + os.sep + "USA_Population_Count.tmcf"
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "output")
+    cleaned_csv_path = os.path.join(data_file_path, "USA_Population_Count.csv")
+    mcf_path = os.path.join(data_file_path, "USA_Population_Count.mcf")
+    tmcf_path = os.path.join(data_file_path, "USA_Population_Count.tmcf")
 
     loader = CensusUSACountryPopulation(ip_files, cleaned_csv_path, mcf_path,
                                         tmcf_path)

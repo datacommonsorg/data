@@ -48,7 +48,7 @@ Run the test cases
 
 ### Import Procedure
 
-The below script will download the data
+The below script make a new folder named as input_data (if not already present) where the download.py script is present and will download the data into this folder.
 `/bin/python3 scripts/us_census/pep/monthly_population_estimate/download.py`
 
 The below script will generate csv and mcf files.

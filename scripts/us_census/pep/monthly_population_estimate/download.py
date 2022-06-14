@@ -24,8 +24,8 @@ from absl import app
 from absl import flags
 
 _FLAGS = flags.FLAGS
-_URLS_JSON_PATH = os.path.dirname(os.path.abspath(__file__)) \
-                    + os.sep +"file_urls.json"
+_URLS_JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)) \
+                    ,"file_urls.json")
 
 _URLS_JSON = None
 with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
@@ -58,7 +58,7 @@ def _save_data(url: str, download_local_path: str) -> None:
     file_name = url.split("/")[-1]
     if ".xls" in url:
         df = pd.read_excel(url, header=_HEADER)
-        df.to_excel(download_local_path + os.sep + file_name,
+        df.to_excel(os.path.join(download_local_path,file_name),
                     index=False,
                     header=False,
                     engine='xlsxwriter')
@@ -66,7 +66,7 @@ def _save_data(url: str, download_local_path: str) -> None:
         file_name = file_name.replace(".csv", ".xlsx")
         df = pd.read_csv(url, header=None)
         df = _clean_csv_file(df)
-        df.to_excel(download_local_path + os.sep + file_name,
+        df.to_excel(os.path.join(download_local_path,file_name),
                     index=False,
                     engine='xlsxwriter')
     elif ".txt" in url:
@@ -82,13 +82,22 @@ def _save_data(url: str, download_local_path: str) -> None:
                            engine='python',
                            skiprows=17,
                            names=cols)
-        df = _clean_txt_file(df, _SCALING_FACTOR_TXT_FILE)
-        df.to_excel(download_local_path + os.sep + file_name,
+        # Skipping 17 rows as the initial 17 rows contains the information about
+        # the file being used, heading files spread accross multiple lines and 
+        # other irrelevant information like source/contact details.
+        df = _clean_txt_file(df)
+        # Multiplying the data with scaling factor 1000.
+        for col in df.columns:
+            if "year" not in col.lower():
+                if _SCALING_FACTOR_TXT_FILE != 1:
+                    df[col] = df[col].apply(_mulitply_scaling_factor,
+                        scaling_factor=_SCALING_FACTOR_TXT_FILE)
+        df.to_excel(os.path.join(download_local_path,file_name),
                     index=False,
                     engine='xlsxwriter')
 
 
-def _sum_cols(col: pd.Series) -> pd.Series:
+def _concat_cols(col: pd.Series) -> pd.Series:
     """
     This method concats two DataFrame column values
     with space in-between.
@@ -100,7 +109,8 @@ def _sum_cols(col: pd.Series) -> pd.Series:
     Returns:
         res (Series) : Concatenated DataFrame Columns
     """
-    print(type(col))
+    # Looking at the data whenever col[0] has year, col[1] is None 
+    # Thus concatinating Date with Month which is needed here
     res = col[0]
     if col[1] is None:
         return res
@@ -138,6 +148,21 @@ def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for txt dataset.
     """
     # Removal of file description and headers in the initial lines of the input
+    #
+    # Input Data:
+    # table with row headers in column A and column headers in rows 3 through 5 (leading dots indicate sub-parts)				
+    # Table 1. Monthly Population Estimates for the United States:  April 1, 2000 to December 1, 2010				
+    # Year and Month    Resident Population     Resident Population Plus Armed Forces Overseas   Civilian Population	Civilian Noninstitutionalized Population
+    # 2000				
+    # .April 1	28,14,24,602	28,16,52,670	28,02,00,922	27,61,62,490
+    # .May 1	28,16,46,806	28,18,76,634	28,04,28,534	27,63,89,920
+    # 
+    # Output Data:
+    # (Made Headers) Year and Month    Resident Population     Resident Population Plus Armed Forces Overseas   Civilian Population    Civilian Noninstitutionalized Population
+    # 2000				
+    # .April 1	28,14,24,602	28,16,52,670	28,02,00,922	27,61,62,490
+    # .May 1	28,16,46,806	28,18,76,634	28,04,28,534	27,63,89,920
+
     idx = df[df[0] == "Year and Month"].index
     df = df.iloc[idx.values[0] + 1:][:]
     df = df.dropna(axis=1, how='all')
@@ -152,8 +177,7 @@ def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _clean_txt_file(df: pd.DataFrame,
-                    scaling_factor_txt_file: int) -> pd.DataFrame:
+def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a txt file format.
     Also, Performs transformations on the data.
@@ -167,11 +191,10 @@ def _clean_txt_file(df: pd.DataFrame,
     """
     # Month and Year are concatenated into a single column if they are not None
     df['Year and Month'] = df[['Year and Month', 'Date']]\
-                                    .apply(_sum_cols, axis=1)
+                                    .apply(_concat_cols, axis=1)
     df.drop(columns=['Date'], inplace=True)
     for col in df.columns:
         df[col] = df[col].str.replace(",", "")
-    idx = df[df['Resident Population'] == "(census)"].index
 
     # The index numbers alotted as per where the columns are present to
     # move the columns left
@@ -179,8 +202,11 @@ def _clean_txt_file(df: pd.DataFrame,
     resident_population_plus_armed_forces_overseas = 2
     civilian_population = 3
     civilian_noninstitutionalized_population = 4
-
     # Moving the row data left upto one index value.
+    # As the text file has (census) mentioned in some rows and it makes the 
+    # other column's data shift by one place, we need to shift it back to the
+    # original place.
+    idx = df[df['Resident Population'] == "(census)"].index
     df.iloc[idx, resident_population] = df.iloc[idx][
         "Resident Population Plus Armed Forces Overseas"]
     df.iloc[idx, resident_population_plus_armed_forces_overseas] = df.iloc[idx][
@@ -188,13 +214,6 @@ def _clean_txt_file(df: pd.DataFrame,
     df.iloc[idx, civilian_population] = df.iloc[idx][
         "Civilian NonInstitutionalized Population"]
     df.iloc[idx, civilian_noninstitutionalized_population] = np.NAN
-
-    # Multiplying the data with scaling factor 1000.
-    for col in df.columns:
-        if "year" not in col.lower():
-            if scaling_factor_txt_file != 1:
-                df[col] = df[col].apply(_mulitply_scaling_factor,
-                                        scaling_factor=scaling_factor_txt_file)
     return df
 
 
@@ -218,7 +237,7 @@ def _download(download_path: str, file_urls: list) -> None:
 
 def main(_):
     file_urls = _FLAGS.us_census_pep_monthly_pop_estimate_url
-    path = os.path.dirname(os.path.abspath(__file__)) + os.sep + "input_data"
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"input_data")
     _download(path, file_urls)
 
 
