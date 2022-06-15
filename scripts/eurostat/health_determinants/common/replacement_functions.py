@@ -6,14 +6,6 @@ import pandas as pd
 
 
 def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args: df (pd.DataFrame): df as the input, to change column values
-
-    Returns: df (pd.DataFrame): modified df as output
-    """
     df = df.replace({'sex': {'F': 'Female', 'M': 'Male', 'T': 'Total'}})
     return df
 
@@ -23,9 +15,11 @@ def _replace_physact(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'physact': {
@@ -45,9 +39,11 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({'isced11': {
         'ED0-2': 'LessThanPrimaryEducation'+\
@@ -69,7 +65,7 @@ def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
-    Args: 
+    Args:
         df (pd.DataFrame): df as the input, to change column values
     Returns:
         df (pd.DataFrame): modified df as output
@@ -91,7 +87,7 @@ def _replace_frequenc(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
-    Args: 
+    Args:
         df (pd.DataFrame): df as the input, to change column values
     Returns:
         df (pd.DataFrame): modified df as output
@@ -118,9 +114,11 @@ def _replace_deg_urb(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'deg_urb': {
@@ -138,9 +136,11 @@ def _replace_levels(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'levels': {
@@ -158,9 +158,11 @@ def _replace_duration(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'duration': {
@@ -179,9 +181,11 @@ def _replace_c_birth(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'c_birth': {
@@ -199,9 +203,11 @@ def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'citizen': {
@@ -219,9 +225,11 @@ def _replace_lev_limit(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'lev_limit': {
@@ -239,9 +247,11 @@ def _replace_bmi(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'bmi': {
@@ -263,9 +273,11 @@ def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
     """
     Divides a single column into multiple columns and returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to divide the column
+    Args:
+        df (pd.DataFrame): df as the input, to divide the column
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     info = col.split(",")
     df[info] = df[col].str.split(',', expand=True)
