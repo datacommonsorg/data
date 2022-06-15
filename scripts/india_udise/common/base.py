@@ -23,6 +23,7 @@ import requests
 import time
 from os import path
 from csv import writer
+import pandas as pd
 
 DATA_API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getTabularData"
 MASTER_API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getMasterData"
@@ -304,9 +305,6 @@ class UDISEIndiaDataLoaderBase:
                     writer.writeheader()
                 writer.writerows(data_rows)
                 file_object.close()
-        else:
-            raise Exception("Data file: {data_file} doesn't exist".format(
-                data_file=data_file))
 
     def _get_data(self,
                   year,
@@ -441,5 +439,10 @@ class UDISEIndiaDataLoaderBase:
                                    udise_state_code=block["udise_state_code"],
                                    udise_dist_code=block["udise_dist_code"],
                                    udise_block_code=block["udise_block_code"])
+
+        # Only keep the distinct rows
+        df = pd.read_csv(self.csv_file_path, dtype=str)
+        df = df.drop_duplicates()
+        df.to_csv(self.csv_file_path, index=False)
 
         self._save_mcf()
