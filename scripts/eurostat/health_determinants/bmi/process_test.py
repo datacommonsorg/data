@@ -29,6 +29,7 @@ from process import process
 _TEST_DATASET_DIR = os.path.join(_MODULE_DIR, "test_data", "datasets")
 _EXPECTED_FILES_DIR = os.path.join(_MODULE_DIR, "test_data", "expected_files")
 
+
 class TestProcess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class

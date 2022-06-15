@@ -275,8 +275,8 @@ def _age_sex_degree_urbanisation(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _replace_deg_urb(data_df)
     data_df.drop(columns=['unit', 'age'], inplace=True)
     data_df['SV'] = 'Percent_'+data_df['bmi']+'_'+ \
-                    'In_Count_Person_' +data_df['sex']+\
-                    '_' + data_df['deg_urb']
+                    'In_Count_Person_' +data_df['deg_urb']+\
+                    '_' + data_df['sex']
     #print(data_df.head())
     data_df.drop(columns=['deg_urb', 'bmi', 'sex'], inplace=True)
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
