@@ -1,8 +1,17 @@
-import filecmp
+import sys
 import os
+
+# Allows module imports to work when running as a script
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+
+_TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                        'test_data')
+
 import tempfile
 import unittest
-from .process_data import process_csv, fips_to_geoid
+from us_fema.national_risk_index.process_data import process_csv, fips_to_geoid
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -56,17 +65,17 @@ class ProcessFemaNriFileTest(unittest.TestCase):
     def test_process_county_file(self):
         assertion = check_function_on_file_gives_golden(
             fn=process_csv,
-            inp_f="test_data/test_data_county.csv",
-            inp_csv_f="test_data/test_csv_columns.json",
-            golden_f="test_data/expected_data_county.csv")
+            inp_f=os.path.join(_TESTDIR, "test_data_county.csv"),
+            inp_csv_f=os.path.join(_TESTDIR, "test_csv_columns.json"),
+            golden_f=os.path.join(_TESTDIR, "expected_data_county.csv"))
         self.assertTrue(assertion)
 
     def test_process_tract_file(self):
         assertion = check_function_on_file_gives_golden(
             fn=process_csv,
-            inp_f="test_data/test_data_tract.csv",
-            inp_csv_f="test_data/test_csv_columns.json",
-            golden_f="test_data/expected_data_tract.csv")
+            inp_f=os.path.join(_TESTDIR, "test_data_tract.csv"),
+            inp_csv_f=os.path.join(_TESTDIR, "test_csv_columns.json"),
+            golden_f=os.path.join(_TESTDIR, "expected_data_tract.csv"))
         self.assertTrue(assertion)
 
 
