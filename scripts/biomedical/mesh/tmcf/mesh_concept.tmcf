@@ -3,6 +3,7 @@ typeOf: dcs:MeSHConcept
 dcid: C:mesh_concept->Concept_dcid
 medicalSubjectHeadingConceptID: C:mesh_concept->ConceptID
 name: C:mesh_concept->ConceptName
+description: C:mesh_concept->ScopeNote
 medicalSubjectHeadingDescriptorID: E:mesh_concept->E2
 
 Node: E:mesh_concept->E2

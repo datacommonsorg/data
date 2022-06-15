@@ -5,7 +5,6 @@ name: C:mesh_descriptor->DescriptorName
 medicalSubjectHeadingDescriptorID: C:mesh_descriptor->DescriptorID
 medicalSubjectHeadingTreeNumber: C:mesh_descriptor->TreeNumber
 specializationOf: C:mesh_descriptor->DescriptorParentID
-description: C:mesh_descriptor->ScopeNote
 nationalLibraryOfMedicineClassificationNumber: C:mesh_descriptor->NLMClassificationNumber
 dateCreated: C:mesh_descriptor->DateCreated
 dateRevised: C:mesh_descriptor->DateRevised
