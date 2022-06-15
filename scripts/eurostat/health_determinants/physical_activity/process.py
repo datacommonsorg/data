@@ -42,6 +42,23 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
+_MCF_TEMPLATE = ("Node: dcid:{inp1}\n"
+                 "typeOf: dcs:StatisticalVariable\n"
+                 "populationType: dcs:Person{inp2}{inp3}{inp4}{inp5}"
+                 "{inp6}{inp7}{inp8}{inp9}{inp10}{inp11}{inp12}{inp13}\n"
+                 "statType: dcs:measuredValue\n"
+                 "measuredProperty: dcs:count\n")
+
+_TMCF_TEMPLATE = (
+    "Node: E:EuroStat_Population_PhysicalActivity->E0\n"
+    "typeOf: dcs:StatVarObservation\n"
+    "variableMeasured: C:EuroStat_Population_PhysicalActivity->SV\n"
+    "measurementMethod: C:EuroStat_Population_PhysicalActivity->"
+    "Measurement_Method\n"
+    "observationAbout: C:EuroStat_Population_PhysicalActivity->geo\n"
+    "observationDate: C:EuroStat_Population_PhysicalActivity->time\n"
+    "value: C:EuroStat_Population_PhysicalActivity->observation\n")
+
 
 def healthenhancing_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -64,8 +81,8 @@ def healthenhancing_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_isced11(df)
-    df['SV'] = 'Count_Person_'+df['isced11']+'_'+ df['physact'] +'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity_AsAFractionOf_Count_Person_'+\
+    df['SV'] = 'Percent_'+df['physact']+'_'+\
+        'HealthEnhancingPhysicalActivity_In_Count_Person_'+\
         df['isced11']+'_'+df['sex']
     df.drop(columns=['unit', 'age', 'isced11', 'physact', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -99,9 +116,9 @@ def healthenhancing_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
-    df['SV'] = 'Count_Person_'+ df['physact'] +'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity'+'_'+df['quant_inc']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Percent_'+ df['physact'] +'_'+\
+        'HealthEnhancingPhysicalActivity'+'_In_Count_Person_'+df['sex']\
+        +'_'+df['quant_inc']
     df.drop(columns=['unit', 'age', 'quant_inc', 'physact', 'sex'],
             inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -135,9 +152,8 @@ def healthenhancing_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_deg_urb(df)
-    df['SV'] = 'Count_Person_'+ df['physact'] +'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity'+'_'+df['deg_urb']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['deg_urb']
+    df['SV'] = 'Percent_'+ df['physact'] +'_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['deg_urb']
     df.drop(columns=['unit', 'age', 'deg_urb', 'physact', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -169,9 +185,8 @@ def workrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_isced11(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
-    df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+\
-        '_'+'WorkRelatedPhysicalActivity'+'_'+df['levels']+\
-        '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_'+'WorkRelatedPhysicalActivity'+'_'+df['levels']+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['unit', 'age', 'levels', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -204,9 +219,8 @@ def workrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
-    df['SV'] = 'Count_Person_'+df['sex']+\
-        '_'+'WorkRelatedPhysicalActivity'+'_'+df['quant_inc']+'_'+df['levels']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Percent_'+'WorkRelatedPhysicalActivity'+'_'+df['levels']+\
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['unit', 'age', 'levels', 'quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -240,9 +254,8 @@ def workrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_levels(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+df['sex']+'_'+'WorkRelatedPhysicalActivity'+\
-        '_'+df['levels']+'_'+df['deg_urb']+'_AsAFractionOf_Count_Person_'+\
-        df['sex']+'_'+df['deg_urb']
+    df['SV'] = 'Percent_'+'WorkRelatedPhysicalActivity_'+df['levels']\
+        +'_In_Count_Person_'+df['sex']+'_'+df['deg_urb']
     df.drop(columns=['levels', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -270,9 +283,8 @@ def nonworkrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_isced11(df)
-    df['SV'] = 'Count_Person_'+df['isced11']+'_'+ df['physact'] +'_'+df['sex']+\
-        '_'+'NonWorkRelatedPhysicalActivity'+'_AsAFractionOf_Count_Person_'+\
-        df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_'+df['physact']+'_NonWorkRelatedPhysicalActivity'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['unit', 'age', 'isced11', 'physact', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
@@ -299,17 +311,15 @@ def nonworkrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
-    df['SV'] = 'Count_Person_'+df['physact']+'_'+df['sex']+\
-        '_'+'NonWorkRelatedPhysicalActivity'+'_'+df['quant_inc']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Percent_'+df['physact']+'_NonWorkRelatedPhysicalActivity'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['unit', 'age', 'quant_inc', 'physact', 'sex'],
             inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
-    df = df.drop(
-        df[(df['SV'] == 'Count_Person_Cycling_Female_NonWorkRelated'
-            'PhysicalActivity_Total_AsAFractionOf_Count_Person_Female_Total') &
-           (df['geo'] == 'BE') & (df['time'] == '2014')].index)
+    df = df.drop(df[(df['SV'] == 'Percent_Cycling_NonWorkRelated'
+                     'PhysicalActivity_In_Count_Person_Female_Total') &
+                    (df['geo'] == 'BE') & (df['time'] == '2014')].index)
     return df
 
 
@@ -340,9 +350,8 @@ def nonworkrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_physact(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+df['physact']+'_'+df['sex']+'_'+\
-        'NonWorkRelatedPhysicalActivity'+'_'+df['deg_urb']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['deg_urb']
+    df['SV'] = 'Percent_'+df['physact']+'_'+'NonWorkRelatedPhysicalActivity'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['deg_urb']
     df.drop(columns=['physact', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -371,9 +380,8 @@ def healthenhancing_nonworkrelated_by_sex_education(df: pd.DataFrame)\
     df = _replace_duration(df)
     df = _replace_sex(df)
     df = _replace_isced11(df)
-    df['SV'] = 'Count_Person_'+df['duration']+'_'+df['isced11']+'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity'+'_AsAFractionOf_Count_Person_'+\
-        df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_'+df['duration']+'_'+'HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['unit', 'age', 'duration', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
@@ -402,9 +410,8 @@ def healthenhancing_nonworkrelated_by_sex_income(df: pd.DataFrame)\
     df = _replace_duration(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
-    df['SV'] = 'Count_Person_'+df['duration']+'_'+df['sex']+\
-        '_'+'HealthEnhancingPhysicalActivity'+'_'+df['quant_inc']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Percent_'+df['duration']+'_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['unit', 'age', 'duration', 'quant_inc', 'sex'],
             inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -439,9 +446,8 @@ def healthenhancing_nonworkrelated_by_sex_urbanisation(df: pd.DataFrame)\
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     df = _replace_duration(df)
-    df['SV'] = 'Count_Person_'+df['duration']+'_'+df['sex']+'_'+\
-        'HealthEnhancingPhysicalActivity'+'_'+df['deg_urb']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['deg_urb']
+    df['SV'] = 'Percent_'+df['duration']+'_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['deg_urb']
     df.drop(columns=['unit', 'age', 'duration', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -474,9 +480,8 @@ def healthenhancing_by_sex_nativity(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_c_birth(df)
-    df['SV'] = 'Count_Person_'+df['physact']+'_'+df['sex']\
-        +'_'+'HealthEnhancingPhysicalActivity'+'_'+df['c_birth']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['c_birth']
+    df['SV'] = 'Percent_'+df['physact']+'_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['c_birth']
     df.drop(columns=['unit', 'age', 'physact', 'c_birth', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -509,9 +514,8 @@ def healthenhancing_by_sex_citizenship(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_citizen(df)
-    df['SV'] = 'Count_Person_'+df['citizen']+'_'+df['physact']+'_'+\
-        df['sex']+'_'+'HealthEnhancingPhysicalActivity'+\
-        '_AsAFractionOf_Count_Person_'+df['citizen']+'_'+df['sex']
+    df['SV'] = 'Percent_'+df['physact']+'_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_'+df['citizen']+'_'+df['sex']
     df.drop(columns=['unit', 'age', 'physact', 'citizen', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -544,9 +548,8 @@ def healthenhancing_by_sex_activitylimitation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_lev_limit(df)
-    df['SV'] = 'Count_Person_'+df['physact']+'_'+df['sex']\
-        +'_'+'HealthEnhancingPhysicalActivity'+'_'+df['lev_limit']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['lev_limit']
+    df['SV'] = 'Percent_'+df['physact']+'_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['lev_limit']
     df.drop(columns=['unit', 'age', 'physact', 'lev_limit', 'sex'],
             inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -580,9 +583,8 @@ def healthenhancing_nonworkrelated_by_sex_bmi(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_duration(df)
     df = _replace_sex(df)
     df = _replace_bmi(df)
-    df['SV'] = 'Count_Person_'+df['duration']+'_'+df['sex']\
-        +'_'+'NonWorkRelatedPhysicalActivity'+'_'+df['bmi']+\
-        '_AsAFractionOf_Count_Person_'+df['sex']+'_'+df['bmi']
+    df['SV'] = 'Percent_'+df['duration']+'_NonWorkRelatedPhysicalActivity'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['bmi']
     df.drop(columns=['unit', 'age', 'bmi', 'duration', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -611,9 +613,9 @@ def dailypractice_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     df = df[df['age'] == 'TOTAL']
     df = _replace_isced11(df)
     df = _replace_sex(df)
-    df['SV'] = 'Count_Person_'+df['isced11']+'_'+df['sex']+'_'+\
-        'PhysicalActivity'+'_AsAFractionOf_Count_Person_'+df['sex']
-    df.drop(columns=['age','isced11', 'sex'], inplace=True)
+    df['SV'] = 'Percent_'+df['isced11']+'_PhysicalActivity'+\
+        '_In_Count_Person_'+df['sex']
+    df.drop(columns=['age', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -641,18 +643,9 @@ class EuroStatPhysicalActivity:
         Returns:
             None
         """
-        tmcf_template = (
-            "Node: E:EuroStat_Population_PhysicalActivity->E0\n"
-            "typeOf: dcs:StatVarObservation\n"
-            "variableMeasured: C:EuroStat_Population_PhysicalActivity->SV\n"
-            "measurementMethod: C:EuroStat_Population_PhysicalActivity->"
-            "Measurement_Method\n"
-            "observationAbout: C:EuroStat_Population_PhysicalActivity->geo\n"
-            "observationDate: C:EuroStat_Population_PhysicalActivity->time\n"
-            "value: C:EuroStat_Population_PhysicalActivity->observation\n")
         # Writing Genereated TMCF to local path.
         with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(tmcf_template.rstrip('\n'))
+            f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
 
     def _generate_mcf(self, sv_list) -> None:
         """
@@ -668,12 +661,6 @@ class EuroStatPhysicalActivity:
         # pylint: disable=R0914
         # pylint: disable=R0912
         # pylint: disable=R0915
-        mcf_template = ("Node: dcid:{inp1}\n"
-                        "typeOf: dcs:StatisticalVariable\n"
-                        "populationType: dcs:Person{inp2}{inp3}{inp4}{inp5}"
-                        "{inp6}{inp7}{inp8}{inp9}{inp10}{inp11}{inp12}{inp13}\n"
-                        "statType: dcs:measuredValue\n"
-                        "measuredProperty: dcs:count\n")
         final_mcf_template = ""
         for sv in sv_list:
             if "Total" in sv:
@@ -682,12 +669,11 @@ class EuroStatPhysicalActivity:
             residence = activity = duration = countryofbirth = citizenship = ''
             lev_limit = bmi = ''
 
-            sv_temp = sv.split("_AsAFractionOf_")
+            sv_temp = sv.split("_In_")
             denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
-            sv_prop = sv_temp[0].split("_")
-
-            for prop in sv_prop:
-                if prop in ["Count", "Person"]:
+            sv_property = sv.split("_")
+            for prop in sv_property:
+                if prop in ["Percent", "In", "Count", "Person"]:
                     continue
                 if "PhysicalActivity" in prop:
                     healthbehavior = "\nhealthBehavior: dcs:" + prop
@@ -712,8 +698,8 @@ class EuroStatPhysicalActivity:
                 elif "ModerateActivity" in prop or "HeavyActivity" in prop\
                     or "NoActivity" in prop:
                     activity = "\nphysicalActivityEffortLevel: dcs:"\
-                        + prop.replace("ModerateActivityOrHeavyActivity",\
-                        "ModerateActivity__HeavyActivity")
+                    + prop.replace("ModerateActivityOrHeavyActivity",
+                        "ModerateActivityLevel__HeavyActivity")+"Level"
                 elif "Minutes" in prop:
                     if "OrMoreMinutes" in prop:
                         duration = "\nactivityDuration: [" + prop.replace\
@@ -735,19 +721,19 @@ class EuroStatPhysicalActivity:
                     bmi = "__" + prop
                     healthbehavior = healthbehavior + bmi
 
-            final_mcf_template += mcf_template.format(inp1=sv,
-                                                      inp2=denominator,
-                                                      inp3=incomequin,
-                                                      inp4=education,
-                                                      inp5=healthbehavior,
-                                                      inp6=exercise,
-                                                      inp7=residence,
-                                                      inp8=activity,
-                                                      inp9=duration,
-                                                      inp10=gender,
-                                                      inp11=countryofbirth,
-                                                      inp12=citizenship,
-                                                      inp13=lev_limit) + "\n"
+            final_mcf_template += _MCF_TEMPLATE.format(inp1=sv,
+                                                       inp2=denominator,
+                                                       inp3=incomequin,
+                                                       inp4=education,
+                                                       inp5=healthbehavior,
+                                                       inp6=exercise,
+                                                       inp7=residence,
+                                                       inp8=activity,
+                                                       inp9=duration,
+                                                       inp10=gender,
+                                                       inp11=countryofbirth,
+                                                       inp12=citizenship,
+                                                       inp13=lev_limit) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
@@ -817,31 +803,32 @@ class EuroStatPhysicalActivity:
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
 
-        final_df = final_df.sort_values(by=['time', 'geo', 'SV','observation'])
+        final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
         final_df = final_df.drop_duplicates(subset=['time','geo','SV'],\
             keep='first')
         final_df['observation'] = final_df['observation'].astype(str)\
             .str.strip()
-        # derived_df generated to get the year/SV/location sets 
+        # derived_df generated to get the year/SV/location sets
         # where 'u' exist
-        derived_df = final_df[final_df['observation'].astype(str)
-            .str.contains('u')]
-        u_rows = list(derived_df['SV']+derived_df['geo'])
-        final_df['info'] = final_df['SV']+final_df['geo']
+        derived_df = final_df[final_df['observation'].astype(str).str.contains(
+            'u')]
+        u_rows = list(derived_df['SV'] + derived_df['geo'])
+        final_df['info'] = final_df['SV'] + final_df['geo']
         # Adding Measurement Method based on a condition
         final_df['Measurement_Method'] = np.where(
             final_df['info'].isin(u_rows),
             'EurostatRegionalStatistics_LowReliability',
             'EurostatRegionalStatistics')
-        final_df.drop(columns=['info'],inplace=True)
-        final_df['observation'] = (final_df['observation'].astype(str)
-            .str.replace(':', '').str.replace(' ', '').str.replace('u', ''))
+        final_df.drop(columns=['info'], inplace=True)
+        final_df['observation'] = (
+            final_df['observation'].astype(str).str.replace(
+                ':', '').str.replace(' ', '').str.replace('u', ''))
         final_df['observation'] = pd.to_numeric(final_df['observation'],
-            errors='coerce')
+                                                errors='coerce')
         final_df = final_df.replace({'geo': COUNTRY_MAP})
         final_df = final_df.sort_values(by=['geo', 'SV'])
         final_df['observation'].replace('', np.nan, inplace=True)
-        final_df.dropna(subset=['observation'],inplace=True)
+        final_df.dropna(subset=['observation'], inplace=True)
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()

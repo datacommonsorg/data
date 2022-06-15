@@ -144,10 +144,10 @@ def _replace_levels(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'levels': {
-            'HVY': 'HeavyActivityLevel',
-            'MOD': 'ModerateActivityLevel',
-            'MOD_HVY': 'ModerateActivityLevelOrHeavyActivityLevel',
-            'NONE_LGHT': 'NoActivityOrLightActivityLevel'
+            'HVY': 'HeavyActivity',
+            'MOD': 'ModerateActivity',
+            'MOD_HVY': 'ModerateActivityOrHeavyActivity',
+            'NONE_LGHT': 'NoActivityOrLightActivity'
         }
     })
     return df

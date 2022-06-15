@@ -59,11 +59,11 @@ class TestProcess(unittest.TestCase):
             cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
-            
+
             base = EuroStatPhysicalActivity(self.ip_data, cleaned_csv_file_path,
-                                    mcf_file_path, tmcf_file_path)
+                                            mcf_file_path, tmcf_file_path)
             base.process()
-            
+
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()
 
@@ -78,11 +78,13 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                        "expected_eurostat_population_physicalactivity.mcf")
+        expected_mcf_file_path = os.path.join(
+            EXPECTED_FILES_DIR,
+            "expected_eurostat_population_physicalactivity.mcf")
 
-        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                        "expected_eurostat_population_physicalactivity.tmcf")
+        expected_tmcf_file_path = os.path.join(
+            EXPECTED_FILES_DIR,
+            "expected_eurostat_population_physicalactivity.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -102,8 +104,9 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
-                        "expected_eurostat_population_physicalactivity.csv")
+        expected_csv_file_path = os.path.join(
+            EXPECTED_FILES_DIR,
+            "expected_eurostat_population_physicalactivity.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
