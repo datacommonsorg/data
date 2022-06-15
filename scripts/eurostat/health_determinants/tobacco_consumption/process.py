@@ -138,7 +138,8 @@ def smoking_tobaccoproducts_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     col1 = "unit,smoking,quant_inc,sex,age,geo"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
+    df = df[(df['age'] == 'TOTAL') &
+                      (~(df['quant_inc'] == 'UNK'))]
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
@@ -202,7 +203,8 @@ def former_daily_tobacco_smoker_income_quintile(
     col1 = "unit,sex,age,quant_inc,time"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
+    df = df[(df['age'] == 'TOTAL') &
+                      (~(df['quant_inc'] == 'UNK'))]
     df.drop(columns=['EU27_2020'], inplace=True)
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
@@ -286,7 +288,8 @@ def daily_smokers_cigarettes_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     col1 = "unit,smoking,quant_inc,sex,age,geo"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
+    df = df[(df['age'] == 'TOTAL') &
+                      (~(df['quant_inc'] == 'UNK'))]
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
@@ -502,7 +505,8 @@ def daily_smokers_cigarettes_history_income_quintile(
     col1 = "sex,age,quant_inc,time"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
+    df = df[(df['age'] == 'TOTAL') &
+                      (~(df['quant_inc'] == 'UNK'))]
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
     df.drop(columns=['age'], inplace=True)
