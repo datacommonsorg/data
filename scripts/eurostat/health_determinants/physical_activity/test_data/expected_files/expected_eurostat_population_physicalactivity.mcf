@@ -72,39 +72,6 @@ gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [Minutes 0]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [Minutes 0]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [Minutes 0]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf0To20Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -252,39 +219,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [Minutes 0]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [Minutes 0]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [Minutes 0]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -295,6 +229,28 @@ activityDuration: [Minutes 0]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [Minutes 0]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [Minutes 0]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -302,6 +258,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:SemiUrban
 activityDuration: [Minutes 0]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [Minutes 0]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [Minutes 0]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -376,6 +354,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:Urban
 activityDuration: [Minutes 0]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [Minutes 0]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [Minutes 0]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -598,39 +598,6 @@ gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [150 - Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [150 - Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [150 - Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf0To20Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -778,39 +745,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [150 - Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [150 - Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [150 - Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -821,6 +755,28 @@ activityDuration: [150 - Minutes]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [150 - Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [150 - Minutes]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -828,6 +784,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:SemiUrban
 activityDuration: [150 - Minutes]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [150 - Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [150 - Minutes]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -902,6 +880,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:Urban
 activityDuration: [150 - Minutes]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [150 - Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [150 - Minutes]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1124,39 +1124,6 @@ gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [150 299 Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [150 299 Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [150 299 Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf0To20Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1304,39 +1271,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [150 299 Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [150 299 Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [150 299 Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1347,6 +1281,28 @@ activityDuration: [150 299 Minutes]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [150 299 Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [150 299 Minutes]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1354,6 +1310,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:SemiUrban
 activityDuration: [150 299 Minutes]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [150 299 Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [150 299 Minutes]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1428,6 +1406,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:Urban
 activityDuration: [150 299 Minutes]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [150 299 Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [150 299 Minutes]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1650,39 +1650,6 @@ gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [1 149 Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [1 149 Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [1 149 Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf0To20Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1830,39 +1797,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [1 149 Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [1 149 Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [1 149 Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1873,6 +1807,28 @@ activityDuration: [1 149 Minutes]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [1 149 Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [1 149 Minutes]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1880,6 +1836,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:SemiUrban
 activityDuration: [1 149 Minutes]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [1 149 Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [1 149 Minutes]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1954,6 +1932,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:Urban
 activityDuration: [1 149 Minutes]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [1 149 Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [1 149 Minutes]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2176,39 +2176,6 @@ gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [300 - Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [300 - Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [300 - Minutes]
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf0To20Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -2356,39 +2323,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-activityDuration: [300 - Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-activityDuration: [300 - Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-activityDuration: [300 - Minutes]
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -2399,6 +2333,28 @@ activityDuration: [300 - Minutes]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [300 - Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+activityDuration: [300 - Minutes]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -2406,6 +2362,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:SemiUrban
 activityDuration: [300 - Minutes]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [300 - Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+activityDuration: [300 - Minutes]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2480,6 +2458,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 placeOfResidenceClassification: dcs:Urban
 activityDuration: [300 - Minutes]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [300 - Minutes]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_300OrMoreMinutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [300 - Minutes]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2843,28 +2843,6 @@ globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic__MuscleStrengthening
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic__MuscleStrengthening
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -2873,17 +2851,6 @@ healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic__MuscleStrengthening
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic__MuscleStrengthening
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -3151,28 +3118,6 @@ globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic__MuscleStrengthening
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic__MuscleStrengthening
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -3181,17 +3126,6 @@ healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic__MuscleStrengthening
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic__MuscleStrengthening
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -3267,6 +3201,28 @@ placeOfResidenceClassification: dcs:Rural
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic__MuscleStrengthening
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic__MuscleStrengthening
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -3274,6 +3230,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic__MuscleStrengthening
 placeOfResidenceClassification: dcs:SemiUrban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic__MuscleStrengthening
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic__MuscleStrengthening
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -3358,6 +3336,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic__MuscleStrengthening
 placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic__MuscleStrengthening
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic__MuscleStrengthening
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -3463,39 +3463,6 @@ measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
 income: [80 100 Percentile]
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:AerobicSports
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:AerobicSports
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:AerobicSports
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:AerobicSports
-placeOfResidenceClassification: dcs:Urban
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -3647,39 +3614,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:AerobicSports
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:AerobicSports
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:AerobicSports
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -3690,6 +3624,28 @@ placeOfResidenceClassification: dcs:Rural
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:AerobicSports
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:AerobicSports
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -3697,6 +3653,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:AerobicSports
 placeOfResidenceClassification: dcs:SemiUrban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:AerobicSports
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:AerobicSports
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -3771,6 +3749,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:AerobicSports
 placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:AerobicSports
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:AerobicSports
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -3989,28 +3989,6 @@ globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -4019,17 +3997,6 @@ healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -4297,28 +4264,6 @@ globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -4327,17 +4272,6 @@ healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:Aerobic
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -4413,6 +4347,28 @@ placeOfResidenceClassification: dcs:Rural
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -4420,6 +4376,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 placeOfResidenceClassification: dcs:SemiUrban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -4504,6 +4482,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:Aerobic
 placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -4609,39 +4609,6 @@ measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
 income: [80 100 Percentile]
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:Cycling
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Cycling
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Cycling
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Cycling
-placeOfResidenceClassification: dcs:Urban
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -4793,39 +4760,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Cycling
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Cycling
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Cycling
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -4836,6 +4770,28 @@ placeOfResidenceClassification: dcs:Rural
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Cycling
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Cycling
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -4843,6 +4799,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:Cycling
 placeOfResidenceClassification: dcs:SemiUrban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Cycling
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Cycling
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -4917,6 +4895,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:Cycling
 placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Cycling
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Cycling
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -5164,28 +5164,6 @@ globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -5194,17 +5172,6 @@ healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:MuscleStrengthening
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -5472,28 +5439,6 @@ globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -5502,17 +5447,6 @@ healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:MuscleStrengthening
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:HealthEnhancingPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -5588,6 +5522,28 @@ placeOfResidenceClassification: dcs:Rural
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -5595,6 +5551,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:MuscleStrengthening
 placeOfResidenceClassification: dcs:SemiUrban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -5679,6 +5657,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:HealthEnhancingPhysicalActivity
 exerciseType: dcs:MuscleStrengthening
 placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -5784,39 +5784,6 @@ measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
 income: [80 100 Percentile]
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:MuscleStrengthening
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:Urban
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -5968,39 +5935,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:MuscleStrengthening
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -6011,6 +5945,28 @@ placeOfResidenceClassification: dcs:Rural
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -6018,6 +5974,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:MuscleStrengthening
 placeOfResidenceClassification: dcs:SemiUrban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -6092,6 +6070,28 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:MuscleStrengthening
 placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_MuscleStrengthening_NonWorkRelatedPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:MuscleStrengthening
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -6253,39 +6253,6 @@ gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Walking
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Walking
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Walking
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_IncomeOf0To20Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -6433,39 +6400,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Walking
-placeOfResidenceClassification: dcs:Rural
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Walking
-placeOfResidenceClassification: dcs:SemiUrban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:NonWorkRelatedPhysicalActivity
-exerciseType: dcs:Walking
-placeOfResidenceClassification: dcs:Urban
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -6476,6 +6410,28 @@ placeOfResidenceClassification: dcs:Rural
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Walking
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Walking
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -6483,6 +6439,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:NonWorkRelatedPhysicalActivity
 exerciseType: dcs:Walking
 placeOfResidenceClassification: dcs:SemiUrban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Walking
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Walking
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -6560,6 +6538,28 @@ placeOfResidenceClassification: dcs:Urban
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Walking
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Walking_NonWorkRelatedPhysicalActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:Walking
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -6629,39 +6629,6 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
 income: [80 100 Percentile]
 healthBehavior: dcs:WorkRelatedPhysicalActivity
-physicalActivityEffortLevel: dcs:HeavyActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-physicalActivityEffortLevel: dcs:HeavyActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-physicalActivityEffortLevel: dcs:HeavyActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
 physicalActivityEffortLevel: dcs:HeavyActivityLevel
 gender: dcs:Female
 statType: dcs:measuredValue
@@ -6814,39 +6781,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-physicalActivityEffortLevel: dcs:HeavyActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-physicalActivityEffortLevel: dcs:HeavyActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-physicalActivityEffortLevel: dcs:HeavyActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -6857,6 +6791,28 @@ physicalActivityEffortLevel: dcs:HeavyActivityLevel
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+physicalActivityEffortLevel: dcs:HeavyActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+physicalActivityEffortLevel: dcs:HeavyActivityLevel
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -6864,6 +6820,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:WorkRelatedPhysicalActivity
 placeOfResidenceClassification: dcs:SemiUrban
 physicalActivityEffortLevel: dcs:HeavyActivityLevel
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+physicalActivityEffortLevel: dcs:HeavyActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+physicalActivityEffortLevel: dcs:HeavyActivityLevel
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -6941,6 +6919,28 @@ physicalActivityEffortLevel: dcs:HeavyActivityLevel
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+physicalActivityEffortLevel: dcs:HeavyActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+physicalActivityEffortLevel: dcs:HeavyActivityLevel
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -7010,39 +7010,6 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
 income: [80 100 Percentile]
 healthBehavior: dcs:WorkRelatedPhysicalActivity
-physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
 physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
 gender: dcs:Female
 statType: dcs:measuredValue
@@ -7195,39 +7162,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -7238,6 +7172,28 @@ physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -7245,6 +7201,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:WorkRelatedPhysicalActivity
 placeOfResidenceClassification: dcs:SemiUrban
 physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -7322,6 +7300,28 @@ physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+physicalActivityEffortLevel: dcs:ModerateActivityLevel__HeavyActivityLevel
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -7391,39 +7391,6 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
 income: [80 100 Percentile]
 healthBehavior: dcs:WorkRelatedPhysicalActivity
-physicalActivityEffortLevel: dcs:ModerateActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-physicalActivityEffortLevel: dcs:ModerateActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-physicalActivityEffortLevel: dcs:ModerateActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
 physicalActivityEffortLevel: dcs:ModerateActivityLevel
 gender: dcs:Female
 statType: dcs:measuredValue
@@ -7576,39 +7543,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-physicalActivityEffortLevel: dcs:ModerateActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-physicalActivityEffortLevel: dcs:ModerateActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-physicalActivityEffortLevel: dcs:ModerateActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -7619,6 +7553,28 @@ physicalActivityEffortLevel: dcs:ModerateActivityLevel
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+physicalActivityEffortLevel: dcs:ModerateActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+physicalActivityEffortLevel: dcs:ModerateActivityLevel
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -7626,6 +7582,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:WorkRelatedPhysicalActivity
 placeOfResidenceClassification: dcs:SemiUrban
 physicalActivityEffortLevel: dcs:ModerateActivityLevel
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+physicalActivityEffortLevel: dcs:ModerateActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+physicalActivityEffortLevel: dcs:ModerateActivityLevel
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -7703,6 +7681,28 @@ physicalActivityEffortLevel: dcs:ModerateActivityLevel
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+physicalActivityEffortLevel: dcs:ModerateActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+physicalActivityEffortLevel: dcs:ModerateActivityLevel
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -7772,39 +7772,6 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
 income: [80 100 Percentile]
 healthBehavior: dcs:WorkRelatedPhysicalActivity
-physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Rural
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
 physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
 gender: dcs:Female
 statType: dcs:measuredValue
@@ -7957,39 +7924,6 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Rural
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Rural
-physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:SemiUrban
-physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Urban
-healthBehavior: dcs:WorkRelatedPhysicalActivity
-placeOfResidenceClassification: dcs:Urban
-physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -8000,6 +7934,28 @@ physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Rural
+physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -8007,6 +7963,28 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:WorkRelatedPhysicalActivity
 placeOfResidenceClassification: dcs:SemiUrban
 physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:SemiUrban
+physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -8081,5 +8059,27 @@ measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:WorkRelatedPhysicalActivity
 placeOfResidenceClassification: dcs:Urban
 physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_NoActivityOrLightActivity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+physicalActivityEffortLevel: dcs:NoActivityOrLightActivityLevel
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
