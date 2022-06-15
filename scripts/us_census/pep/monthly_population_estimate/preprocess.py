@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ A Script to process USA Census PEP monthly population data
-    from the datasets in provided local path.
+    from the datasets in the provided local path.
     Typical usage:
     1. python3 preprocess.py
     2. python3 preprocess.py -i input_data
