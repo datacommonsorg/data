@@ -31,7 +31,7 @@ class TestPreprocess(unittest.TestCase):
     TestPreprocess is inherting unittest class
     properties which further requried for unit testing
     """
-    ip_data_path = [os.path.join(test_data_folder, "test_census_data.xlsx")]
+    ip_data_path = [os.path.join(test_data_folder, "test_census_data.csv")]
     # op_data_folder = os.path.join(op_data_folder,"download")
     _download(op_data_folder, ip_data_path)
 
