@@ -153,7 +153,7 @@ def healthenhancing_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_deg_urb(df)
     df['SV'] = 'Percent_'+ df['physact'] +'_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['deg_urb']
+        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     df.drop(columns=['unit', 'age', 'deg_urb', 'physact', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -255,7 +255,7 @@ def workrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_levels(df)
     df.drop(columns=['unit', 'age'], inplace=True)
     df['SV'] = 'Percent_'+'WorkRelatedPhysicalActivity_'+df['levels']\
-        +'_In_Count_Person_'+df['sex']+'_'+df['deg_urb']
+        +'_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     df.drop(columns=['levels', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -351,7 +351,7 @@ def nonworkrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_physact(df)
     df.drop(columns=['unit', 'age'], inplace=True)
     df['SV'] = 'Percent_'+df['physact']+'_'+'NonWorkRelatedPhysicalActivity'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['deg_urb']
+        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     df.drop(columns=['physact', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -447,7 +447,7 @@ def healthenhancing_nonworkrelated_by_sex_urbanisation(df: pd.DataFrame)\
     df = _replace_sex(df)
     df = _replace_duration(df)
     df['SV'] = 'Percent_'+df['duration']+'_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['deg_urb']
+        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     df.drop(columns=['unit', 'age', 'duration', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')

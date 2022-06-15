@@ -56,7 +56,7 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
                     .replace("Or","__")
             elif "Percentile" in prop:
                 incomequin = "\nincome: ["+prop.replace("Percentile",\
-                    "").replace("To"," ")+" Percentile]"
+                    "").replace("To"," ").replace("IncomeOf","")+" Percentile]"
             elif "Urban" in prop or "SemiUrban" in prop \
                 or "Rural" in prop:
                 residence = "\nplaceOfResidenceClassification: dcs:" + prop
