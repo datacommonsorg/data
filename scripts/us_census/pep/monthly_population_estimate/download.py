@@ -58,7 +58,7 @@ def _save_data(url: str, download_local_path: str) -> None:
     file_name = url.split("/")[-1]
     if ".xls" in url:
         df = pd.read_excel(url, header=_HEADER)
-        df.to_excel(os.path.join(download_local_path,file_name),
+        df.to_excel(os.path.join(download_local_path, file_name),
                     index=False,
                     header=False,
                     engine='xlsxwriter')
@@ -66,7 +66,7 @@ def _save_data(url: str, download_local_path: str) -> None:
         file_name = file_name.replace(".csv", ".xlsx")
         df = pd.read_csv(url, header=None)
         df = _clean_csv_file(df)
-        df.to_excel(os.path.join(download_local_path,file_name),
+        df.to_excel(os.path.join(download_local_path, file_name),
                     index=False,
                     engine='xlsxwriter')
     elif ".txt" in url:
@@ -83,16 +83,17 @@ def _save_data(url: str, download_local_path: str) -> None:
                            skiprows=17,
                            names=cols)
         # Skipping 17 rows as the initial 17 rows contains the information about
-        # the file being used, heading files spread accross multiple lines and 
+        # the file being used, heading files spread accross multiple lines and
         # other irrelevant information like source/contact details.
         df = _clean_txt_file(df)
         # Multiplying the data with scaling factor 1000.
         for col in df.columns:
             if "year" not in col.lower():
                 if _SCALING_FACTOR_TXT_FILE != 1:
-                    df[col] = df[col].apply(_mulitply_scaling_factor,
+                    df[col] = df[col].apply(
+                        _mulitply_scaling_factor,
                         scaling_factor=_SCALING_FACTOR_TXT_FILE)
-        df.to_excel(os.path.join(download_local_path,file_name),
+        df.to_excel(os.path.join(download_local_path, file_name),
                     index=False,
                     engine='xlsxwriter')
 
@@ -109,7 +110,7 @@ def _concat_cols(col: pd.Series) -> pd.Series:
     Returns:
         res (Series) : Concatenated DataFrame Columns
     """
-    # Looking at the data whenever col[0] has year, col[1] is None 
+    # Looking at the data whenever col[0] has year, col[1] is None
     # Thus concatinating Date with Month which is needed here
     res = col[0]
     if col[1] is None:
@@ -150,16 +151,16 @@ def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     # Removal of file description and headers in the initial lines of the input
     #
     # Input Data:
-    # table with row headers in column A and column headers in rows 3 through 5 (leading dots indicate sub-parts)				
-    # Table 1. Monthly Population Estimates for the United States:  April 1, 2000 to December 1, 2010				
+    # table with row headers in column A and column headers in rows 3 through 5 (leading dots indicate sub-parts)
+    # Table 1. Monthly Population Estimates for the United States:  April 1, 2000 to December 1, 2010
     # Year and Month    Resident Population     Resident Population Plus Armed Forces Overseas   Civilian Population	Civilian Noninstitutionalized Population
-    # 2000				
+    # 2000
     # .April 1	28,14,24,602	28,16,52,670	28,02,00,922	27,61,62,490
     # .May 1	28,16,46,806	28,18,76,634	28,04,28,534	27,63,89,920
-    # 
+    #
     # Output Data:
     # (Made Headers) Year and Month    Resident Population     Resident Population Plus Armed Forces Overseas   Civilian Population    Civilian Noninstitutionalized Population
-    # 2000				
+    # 2000
     # .April 1	28,14,24,602	28,16,52,670	28,02,00,922	27,61,62,490
     # .May 1	28,16,46,806	28,18,76,634	28,04,28,534	27,63,89,920
 
@@ -203,7 +204,7 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     civilian_population = 3
     civilian_noninstitutionalized_population = 4
     # Moving the row data left upto one index value.
-    # As the text file has (census) mentioned in some rows and it makes the 
+    # As the text file has (census) mentioned in some rows and it makes the
     # other column's data shift by one place, we need to shift it back to the
     # original place.
     idx = df[df['Resident Population'] == "(census)"].index
@@ -237,7 +238,8 @@ def _download(download_path: str, file_urls: list) -> None:
 
 def main(_):
     file_urls = _FLAGS.us_census_pep_monthly_pop_estimate_url
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"input_data")
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        "input_data")
     _download(path, file_urls)
 
 
