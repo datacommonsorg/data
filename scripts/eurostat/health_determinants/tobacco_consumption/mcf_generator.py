@@ -1,3 +1,6 @@
+INCOME_QUANTILE_VALUES =  {'IncomeOf0To20Percentile':'[0 20 Percentile]', 'IncomeOf20To40Percentile':'[20 40 Percentile]', 
+'IncomeOf40To60Percentile':'[40 60 Percentile]','IncomeOf60To80Percentile':'[60 80 Percentile]',
+ 'IncomeOf80To100Percentile':'[80 100 Percentile]'}
 
 def smoking_tobaccoproducts_education_attainment_level() -> str:
     template_mcf = (
@@ -23,9 +26,8 @@ def smoking_tobaccoproducts_education_attainment_level() -> str:
                         'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
                         'TertiaryEducation'
                 ]:
-                    node = "Count_Person_" + educationalAttainment + "_" + gender + "_" + healthBehavior + "_TobaccoProducts" + "_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
-                    
-                    denominator = "Count_Person_" + educationalAttainment + "_" + gender
+                    node = "Percent" + "_" + healthBehavior +"_TobaccoProducts" + "_In_" + "Count_Person" +"_"+ educationalAttainment + "_" + gender                   
+                    denominator = "Count_Person" +"_"+ educationalAttainment + "_" + gender
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
                         node = node.replace("_Total", "")
@@ -58,9 +60,9 @@ def smoking_tobaccoproducts_education_attainment_level() -> str:
                             'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
                             'TertiaryEducation'
                     ]:
-                        node = "Count_Person_" + educationalAttainment + "_" + gender + "_" + healthBehavior +"_"+ substanceUsageFrequency+"_TobaccoProducts"+"_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
+                        node = "Percent" +"_"+ healthBehavior +"_"+ substanceUsageFrequency+"_"+"TobaccoProducts"+"_In_" + "Count_Person" +"_"+ educationalAttainment + "_" + gender
                         
-                        denominator = "Count_Person_" + educationalAttainment + "_" + gender
+                        denominator = "Count_Person" +"_"+ educationalAttainment + "_" + gender
                         f_gender = f"gender: dcs:{gender}\n"
                         if gender == "Total":
                             node = node.replace("_Total", "")
@@ -110,8 +112,8 @@ def daily_smokers_cigarettes_education_attainment_level() -> str:
                     'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
                     'TertiaryEducation'
             ]:
-                node = "Count_Person_" + educationalAttainment + "_" + gender + "_" + "Smoking"+"_" + "DailyUsage"+"_"+"Cigarettes"+"_" + substanceUsageQuantity + "_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
-                denominator = "Count_Person_" + educationalAttainment + "_" + gender
+                node = "Percent_" + "Smoking"+"_" + "DailyUsage"+"_"+"Cigarettes"+"_" + substanceUsageQuantity + "_In_" + "Count_Person" +"_"+ educationalAttainment + "_" + gender
+                denominator = "Count_Person" +"_"+ educationalAttainment + "_" + gender
                 f_gender = f"gender: dcs:{gender}\n"
                 if gender == "Total":
                     node = node.replace("_Total", "")
@@ -164,7 +166,7 @@ def daily_exposure_tobacco_smoke_indoors_education_attainment_level() -> str:
                     'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
                     'TertiaryEducation'
             ]:
-                node = "Count_Person_" + educationalAttainment + "_" + gender + "_"+ "ExposureToTobaccoSmoke" + "_" + substanceExposureFrequency + "_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
+                node = "Percent_"+ "ExposureToTobaccoSmoke" + "_" + substanceExposureFrequency + "_In_" + "Count_Person_" + educationalAttainment + "_" + gender
                 denominator = "Count_Person_" + educationalAttainment + "_" + gender
                 f_gender = f"gender: dcs:{gender}\n"
                 if gender == "Total":
@@ -189,7 +191,7 @@ def daily_exposure_tobacco_smoke_indoors_education_attainment_level() -> str:
 
 def former_daily_tobacco_smoker_education_attainment_level() -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -208,22 +210,22 @@ def former_daily_tobacco_smoker_education_attainment_level() -> str:
                 'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
                 'TertiaryEducation'
         ]:
-            Node = "Count_Person_" + educationalAttainment + "_" + gender + "_" + "FormerSmoker"+"_"+"DailyUsage"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
+            node = "Percent_"+ "FormerSmoker"+"_"+"DailyUsage"+"TobaccoProducts"+ "_In_" + "Count_Person_" + educationalAttainment + "_" + gender
             denominator = "Count_Person_" + educationalAttainment + "_" + gender
             f_gender = f"gender: dcs:{gender}\n"
             if gender == "Total":
-                Node = Node.replace("_Total", "")
+                node = node.replace("_Total", "")
                 denominator = denominator.replace("_Total", "")
                 f_gender = ""
 
             f_educationalAttainment = f"educationalAttainment: dcs:{educationalAttainment}\n"
             f_educationalAttainment = f_educationalAttainment.replace("Or", "__")
             if educationalAttainment == "AllISCED2011Levels":
-                Node = Node.replace("_AllISCED2011Levels", "")
+                node = node.replace("_AllISCED2011Levels", "")
                 denominator = denominator.replace("_AllISCED2011Levels", "")
                 f_educationalAttainment = ""
             mcf += template_mcf.format(
-                Node=Node,
+                node=node,
                 denominator=denominator,
                 gender=f_gender,
                 educationalAttainment=f_educationalAttainment)
@@ -232,7 +234,7 @@ def former_daily_tobacco_smoker_education_attainment_level() -> str:
 
 def duration_daily_tobacco_smoking_education_attainment_level() -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -255,22 +257,22 @@ def duration_daily_tobacco_smoking_education_attainment_level() -> str:
                     'LessThan1Year', 'From1To5Years', 'From5To10Years',
                     '10YearsOrOver'
             ]:
-                Node = "Count_Person_" + educationalAttainment + "_" + gender + "_" + "Smoking" + "_" +"DailyUsage"+"_"+ substanceUsageHistory +"_"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
+                node = "Percent_" + "Smoking" + "_" +"DailyUsage"+"_"+ substanceUsageHistory +"_"+"TobaccoProducts"+ "_In_" + "Count_Person_" + educationalAttainment + "_" + gender
                 denominator = "Count_Person_" + educationalAttainment + "_" + gender
                 f_gender = f"gender: dcs:{gender}\n"
                 if gender == "Total":
-                    Node = Node.replace("_Total", "")
+                    node = node.replace("_Total", "")
                     denominator = denominator.replace("_Total", "")
                     f_gender = ""
 
                 f_educationalAttainment = f"educationalAttainment: dcs:{educationalAttainment}\n"
                 f_educationalAttainment = f_educationalAttainment.replace("Or", "__")
                 if educationalAttainment == "AllISCED2011Levels":
-                    Node = Node.replace("_AllISCED2011Levels", "")
+                    node = node.replace("_AllISCED2011Levels", "")
                     denominator = denominator.replace("_AllISCED2011Levels", "")
                     f_educationalAttainment = ""
                 mcf += template_mcf.format(
-                    Node=Node,
+                    node=node,
                     denominator=denominator,
                     gender=f_gender,
                     educationalAttainment=f_educationalAttainment,
@@ -281,7 +283,7 @@ def duration_daily_tobacco_smoking_education_attainment_level() -> str:
 def electronic_cigarettes_similar_electronic_devices_education_attainment_level(
 ) -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -302,22 +304,22 @@ def electronic_cigarettes_similar_electronic_devices_education_attainment_level(
         ]:
             for healthBehavior in ['Smoking','FormerSmoker']:
                 for substanceUsageFrequency in ['DailyUsage', 'OccasionalUsage', 'NeverUsed']:
-                    Node = "Count_Person_" + educationalAttainment + "_" + gender + "_" +healthBehavior+ substanceUsageFrequency + "_" + "Ecigarettes" + "_AsAFractionOf_" + "Count_Person_" + educationalAttainment + "_" + gender
+                    node = "Percent_" +healthBehavior+ "_"+substanceUsageFrequency + "_" + "Ecigarettes" + "_In_" + "Count_Person_" + educationalAttainment + "_" + gender
                     denominator = "Count_Person_" + educationalAttainment + "_" + gender
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
-                        Node = Node.replace("_Total", "")
+                        node = node.replace("_Total", "")
                         denominator = denominator.replace("_Total", "")
                         f_gender = ""
 
                     f_educationalAttainment = f"educationalAttainment: dcs:{educationalAttainment}\n"
                     f_educationalAttainment = f_educationalAttainment.replace("Or", "__")
                     if educationalAttainment == "AllISCED2011Levels":
-                        Node = Node.replace("_AllISCED2011Levels", "")
+                        node = node.replace("_AllISCED2011Levels", "")
                         denominator = denominator.replace("_AllISCED2011Levels", "")
                     f_educationalAttainment = ""
                     mcf += template_mcf.format(
-                        Node=Node,
+                        node=node,
                         healthBehavior=healthBehavior,
                         denominator=denominator,
                         gender=f_gender,
@@ -329,7 +331,7 @@ def electronic_cigarettes_similar_electronic_devices_education_attainment_level(
 
 def smoking_tobaccoproducts_income_quintile() -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -344,25 +346,25 @@ def smoking_tobaccoproducts_income_quintile() -> str:
         for healthBehavior in ['NonSmoker', 'Smoking']:
             if healthBehavior == 'NonSmoker':
                 for income in ['Total', 'IncomeOf0To20Percentile', 'IncomeOf20To40Percentile', 'IncomeOf40To60Percentile','IncomeOf60To80Percentile', 'IncomeOf80To100Percentile']:
-                    Node = "Count_Person_"  + gender +"_"+ healthBehavior+"_"+income+ "_" + "_"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + gender +"_"+income
+                    node = "Percent_"+ healthBehavior+ "_"+"TobaccoProducts"+ "_In_" + "Count_Person_" + gender +"_"+income
                     denominator = "Count_Person_" + gender +"_"+income
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
-                        Node = Node.replace("_Total", "")
+                        node = node.replace("_Total", "")
                         denominator = denominator.replace("_Total", "")
                         f_gender = ""
 
-                    f_income = f"income: dcs:{income}\n"
-                    f_income = f_income.replace("IncomeOf","[").replace("To"," ").replace("Percentile"," Percentile]")
                     if income == "Total":
-                        Node = Node.replace("_Total", "")
+                        node = node.replace("_Total", "")
                         denominator = denominator.replace("_Total", "")
                         f_income = ""
-
+                    else:
+                        f_income = f"income: {INCOME_QUANTILE_VALUES[income]}\n"
+                    
                     if healthBehavior == "NonSmoker":
-                        Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                        node = node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
                         f_substanceUsageFrequency = ""
-                    mcf += template_mcf.format(Node=Node,
+                    mcf += template_mcf.format(node=node,
                                             gender=f_gender,
                                             substanceUsageFrequency="",
                                             denominator=denominator,
@@ -372,25 +374,26 @@ def smoking_tobaccoproducts_income_quintile() -> str:
                 for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
                     f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
                     for income in ['Total', 'IncomeOf0To20Percentile', 'IncomeOf20To40Percentile', 'IncomeOf40To60Percentile','IncomeOf60To80Percentile', 'IncomeOf80To100Percentile']:
-                        Node = "Count_Person_"  + gender +"_"+ healthBehavior+"_"+income+ "_"+ substanceUsageFrequency +"_"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + gender +"_"+income
+                        node = "Percent_"+ healthBehavior+"_"+ substanceUsageFrequency +"_"+"TobaccoProducts"+ "_In_" + "Count_Person_" + gender +"_"+income
                         denominator = "Count_Person_" + gender +"_"+income
                         f_gender = f"gender: dcs:{gender}\n"
                         if gender == "Total":
-                            Node = Node.replace("_Total", "")
+                            node = node.replace("_Total", "")
                             denominator = denominator.replace("_Total", "")
                             f_gender = ""
 
-                        f_income = f"income: dcs:{income}\n"
-                        f_income = f_income.replace("IncomeOf","[").replace("To"," ").replace("Percentile"," Percentile]")
+                        f_income = f"income: {income}\n"
+                        
                         if income == "Total":
-                            Node = Node.replace("_Total", "")
+                            node = node.replace("_Total", "")
                             denominator = denominator.replace("_Total", "")
                             f_income = ""
-
+                        else:
+                            f_income = f"income: {INCOME_QUANTILE_VALUES[income]}\n"
                         if healthBehavior == "NonSmoker":
-                            Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                            node = node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
                             f_substanceUsageFrequency = ""
-                        mcf += template_mcf.format(Node=Node,
+                        mcf += template_mcf.format(node=node,
                                                 gender=f_gender,
                                                 substanceUsageFrequency=f_substanceUsageFrequency,
                                                 denominator=denominator,
@@ -401,7 +404,7 @@ def smoking_tobaccoproducts_income_quintile() -> str:
 
 def daily_smokers_cigarettes_income_quintile() -> str:
     template_mcf = (
-         "Node: dcid:{Node}\n"
+         "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -419,26 +422,28 @@ def daily_smokers_cigarettes_income_quintile() -> str:
                 '20OrMoreCigarettesPerDay'
         ]:
             for income in ['Total', 'IncomeOf0To20Percentile', 'IncomeOf20To40Percentile', 'IncomeOf40To60Percentile','IncomeOf60To80Percentile', 'IncomeOf80To100Percentile']:
-                Node = "Count_Person_"  + gender +"_"+ "Smoking"+"_"+income+ "_"+ "DailyUsage" +substanceUsageQuantity+ "Cigarettes"+"_AsAFractionOf_" + "Count_Person_" + gender +"_"+income
+                node = "Percent_"+ "Smoking"+"_"+ "DailyUsage" +"_"+substanceUsageQuantity+ "_"+"Cigarettes"+"_In_" + "Count_Person_" + gender +"_"+income
                 denominator = "Count_Person_" + gender +"_"+income
                 f_gender = f"gender: dcs:{gender}\n"
                 if gender == "Total":
-                    Node = Node.replace("_Total", "")
+                    node = node.replace("_Total", "")
                     f_gender = ""
 
                 f_income = f"income: {income}\n"
                 f_income = f_income.replace("IncomeOf","").replace("To"," ").replace("Percentile"," Percentile]")
                 if income == "Total":
-                    Node = Node.replace("_Total", "")
+                    node = node.replace("_Total", "")
                     denominator = denominator.replace("_Total", "") 
                     f_income = ""
+                else:
+                        f_income = f"income: {INCOME_QUANTILE_VALUES[income]}\n"
 
-                f_substanceUsageQuantity = f"substanceUsageFrequency: dcs:{substanceUsageQuantity}\n"
+                f_substanceUsageQuantity = f"substanceUsageQuantity: dcs:{substanceUsageQuantity}\n"
                 if substanceUsageQuantity == "Total":
-                    Node = Node.replace("_Total", "")
+                    node = node.replace("_Total", "")
                     denominator = denominator.replace("_Total", "")
                     f_substanceUsageQuantity = ""
-                mcf += template_mcf.format(Node=Node,
+                mcf += template_mcf.format(node=node,
                                            gender=f_gender,
                                            denominator=denominator,
                                            substanceUsageQuantity=f_substanceUsageQuantity,
@@ -448,7 +453,7 @@ def daily_smokers_cigarettes_income_quintile() -> str:
 
 def former_daily_tobacco_smoker_income_quintile() -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -461,20 +466,22 @@ def former_daily_tobacco_smoker_income_quintile() -> str:
     mcf = ''
     for gender in ['Male', 'Female','Total']:
         for income in ['Total', 'IncomeOf0To20Percentile', 'IncomeOf20To40Percentile', 'IncomeOf40To60Percentile','IncomeOf60To80Percentile', 'IncomeOf80To100Percentile']:
-            Node = "Count_Person_"  + gender +"_"+ "FormerSmoker"+"_"+income+ "_"+ "DailyUsage"+"_" +"TobaccoProducts"+"_"+ "Cigarettes"+"_AsAFractionOf_" + "Count_Person_" + gender +"_"+income
-            denominator = "Count_Person_" + gender +"_"+income
+            node = "Percent"+"_"+ "FormerSmoker"+"_"+ "DailyUsage"+"_" +"TobaccoProducts"+"_"+ "Cigarettes"+"_In_" + "Count_Person"+"_" + gender +"_"+income
+            denominator = "Count_Person"+"_" + gender +"_"+income
             f_gender = f"gender: dcs:{gender}\n"
             if gender == "Total":
-                Node = Node.replace("_Total", "")
+                node = node.replace("_Total", "")
                 f_gender = ""
 
             f_income = f"income: dcs:[{income}]\n"
             f_income = f_income.replace("IncomeOf","").replace("To"," ").replace("Percentile"," Percentile")
             if income == "Total":
-                Node = Node.replace("_Total", "")
+                node = node.replace("_Total", "")
                 denominator = denominator.replace("_Total", "")
                 f_income = ""
-            mcf += template_mcf.format(Node=Node,
+            else:
+                    f_income = f"income: {INCOME_QUANTILE_VALUES[income]}\n"
+            mcf += template_mcf.format(node=node,
                                     denominator=denominator,
                                        gender=f_gender,
                                        income=f_income)
@@ -483,7 +490,7 @@ def former_daily_tobacco_smoker_income_quintile() -> str:
 
 def smoking_tobaccoproducts_degree_of_urbanisation() -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -498,23 +505,23 @@ def smoking_tobaccoproducts_degree_of_urbanisation() -> str:
         for healthBehavior in ['NonSmoker', 'Smoking']:
             if healthBehavior == 'NonSmoker':
                 for placeOfResidenceClassification in ['Total', 'Urban', 'SemiUrban', 'Rural']:
-                    Node = "Count_Person_" + gender+ "_"+healthBehavior+ "_"+ placeOfResidenceClassification+ "_" + "TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" +gender+"_" + placeOfResidenceClassification
-                    denominator = "Count_Person_"+gender+"_" + placeOfResidenceClassification
+                    node = "Percent"+"_"+healthBehavior+ "_" + "TobaccoProducts"+ "_In_" + "Count_Person"+"_" +gender+"_" + placeOfResidenceClassification
+                    denominator = "Count_Person"+"_" +gender+"_" + placeOfResidenceClassification
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
-                        Node = Node.replace("_Total", "")
+                        node = node.replace("_Total", "")
                         f_gender = ""
 
                     f_placeOfResidenceClassification = f"placeOfResidenceClassification: dcs:{placeOfResidenceClassification}\n"
                     if placeOfResidenceClassification == "Total":
-                        Node = Node.replace("_Total", "")
+                        node = node.replace("_Total", "")
                         denominator = denominator = denominator.replace("_Total", "")
                         f_placeOfResidenceClassification = ""
 
                     if healthBehavior == "NonSmoker":
-                        Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                        node = node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
                         f_substanceUsageFrequency = ""
-                    mcf += template_mcf.format(Node=Node,
+                    mcf += template_mcf.format(node=node,
                                             gender=f_gender,
                                             denominator=denominator,
                                             substanceUsageFrequency="",
@@ -524,23 +531,23 @@ def smoking_tobaccoproducts_degree_of_urbanisation() -> str:
                 for substanceUsageFrequency in ['DailyUsage','OccasionalUsage']:
                     f_substanceUsageFrequency = f"substanceUsageFrequency: dcs:{substanceUsageFrequency}\n"
                     for placeOfResidenceClassification in ['Total', 'Urban', 'SemiUrban', 'Rural']:
-                        Node = "Count_Person_" + gender+ "_"+healthBehavior+ "_"+ placeOfResidenceClassification+ "_"+substanceUsageFrequency+ "_" + "TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" +gender+"_" + placeOfResidenceClassification
-                        denominator = "Count_Person_"+gender+"_" + placeOfResidenceClassification
+                        node = "Percent"+"_"+healthBehavior+ "_"+substanceUsageFrequency+ "_" + "TobaccoProducts"+ "_In_" + "Count_Person"+"_" +gender+"_" + placeOfResidenceClassification
+                        denominator =  "Count_Person"+"_" +gender+"_" + placeOfResidenceClassification
                         f_gender = f"gender: dcs:{gender}\n"
                         if gender == "Total":
-                            Node = Node.replace("_Total", "")
+                            node = node.replace("_Total", "")
                             f_gender = ""
 
                         f_placeOfResidenceClassification = f"placeOfResidenceClassification: dcs:{placeOfResidenceClassification}\n"
                         if placeOfResidenceClassification == "Total":
-                            Node = Node.replace("_Total", "")
+                            node = node.replace("_Total", "")
                             denominator = denominator = denominator.replace("_Total", "")
                             f_placeOfResidenceClassification = ""
 
                         if healthBehavior == "NonSmoker":
-                            Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                            node = node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
                             f_substanceUsageFrequency = ""
-                        mcf += template_mcf.format(Node=Node,
+                        mcf += template_mcf.format(node=node,
                                                 gender=f_gender,
                                                 denominator=denominator,
                                                 substanceUsageFrequency=f_substanceUsageFrequency,
@@ -550,7 +557,7 @@ def smoking_tobaccoproducts_degree_of_urbanisation() -> str:
 
 def daily_smokers_cigarettes_degree_of_urbanisation() -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -569,25 +576,25 @@ def daily_smokers_cigarettes_degree_of_urbanisation() -> str:
                 '20OrMoreCigarettesPerDay'
         ]:
             for placeOfResidenceClassification in ['Total', 'Urban', 'SemiUrban', 'Rural']:
-                Node = "Count_Person_"+ gender+"_"+"Smoking"+"_" +placeOfResidenceClassification + "_"+"DailyUsage"+"_" + substanceUsageQuantity +"_"+"Cigarettes"+ "_AsAFractionOf_" + "Count_Person_" + gender + placeOfResidenceClassification
-                denominator =  "Count_Person_" + gender + placeOfResidenceClassification
+                node = "Percent"+"_"+"Smoking"+"_"+"DailyUsage"+"_" + substanceUsageQuantity +"_"+"Cigarettes"+ "_In_" + "Count_Person" +"_"+ gender +"_"+ placeOfResidenceClassification
+                denominator =  "Count_Person" +"_"+ gender +"_"+ placeOfResidenceClassification
                 f_gender = f"gender: dcs:{gender}\n"
                 if gender == "Total":
-                    Node = Node.replace("_Total", "")
+                    node = node.replace("_Total", "")
                     f_gender = ""
 
                 f_substanceUsageQuantity = f"substanceUsageFrequency: dcs:{substanceUsageQuantity}\n"
                 if substanceUsageQuantity == "Total":
-                    Node = Node.replace("_Total", "")
+                    node = node.replace("_Total", "")
                     denominator = denominator.replace("_Total", "")
                     f_substanceUsageQuantity = ""
 
                 f_placeOfResidenceClassification = f"placeOfResidenceClassification: dcs:{placeOfResidenceClassification}\n"
                 if placeOfResidenceClassification == "Total":
-                    Node = Node.replace("_Total", "")
+                    node = node.replace("_Total", "")
                     denominator = denominator = denominator.replace("_Total", "")
                     f_placeOfResidenceClassification = ""
-                mcf += template_mcf.format(Node=Node,
+                mcf += template_mcf.format(node=node,
                                            gender=f_gender,
                                            denominator=denominator,
                                            substanceUsageQuantity=f_substanceUsageQuantity,
@@ -597,7 +604,7 @@ def daily_smokers_cigarettes_degree_of_urbanisation() -> str:
 
 def daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation() -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -614,19 +621,19 @@ def daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation() -> str:
                     'LessThanOnceAWeek', 'AtLeastOnceAWeek', 'RarelyOrNever'
             ]:
                 for placeOfResidenceClassification in ['Total', 'Urban', 'SemiUrban', 'Rural']:
-                    Node = "Count_Person_"+ gender+"_"+"ExposureToTobaccoSmoke"+"_" +placeOfResidenceClassification + "_"+substanceExposureFrequency +"_"+"Cigarettes"+ "_AsAFractionOf_" + "Count_Person_" + gender + placeOfResidenceClassification
-                    denominator =  "Count_Person_" + gender +"_"+ placeOfResidenceClassification
+                    node = "Percent"+"_"+"ExposureToTobaccoSmoke"+ "_"+substanceExposureFrequency +"_"+"Cigarettes"+ "_In_" + "Count_Person" +"_"+ gender +"_"+ placeOfResidenceClassification
+                    denominator =  "Count_Person" +"_"+ gender +"_"+ placeOfResidenceClassification
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
-                        Node = Node.replace("_Total", "")
+                        node = node.replace("_Total", "")
                         f_gender = ""
 
                     f_placeOfResidenceClassification = f"placeOfResidenceClassification: dcs:{placeOfResidenceClassification}\n"
                     if placeOfResidenceClassification == "Total":
-                        Node = Node.replace("_Total", "")
+                        node = node.replace("_Total", "")
                         denominator = denominator = denominator.replace("_Total", "")
                         f_placeOfResidenceClassification = ""
-                    mcf += template_mcf.format(Node=Node,
+                    mcf += template_mcf.format(node=node,
                                             gender=f_gender,
                                             denominator=denominator,
                                             substanceExposureFrequency=substanceExposureFrequency,
@@ -635,7 +642,7 @@ def daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation() -> str:
 
 def smoking_tobaccoproducts_county_of_birth() -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -655,18 +662,18 @@ def smoking_tobaccoproducts_county_of_birth() -> str:
                         'CountryOfBirthForeignCountry',
                         'CountryOfBirthReportingCountry'
                 ]:
-                    Node = "Count_Person_"+ gender + "_" +healthBehavior+"_"+nativity + "_" + "TobaccoProducts"+"_AsAFractionOf_" + "Count_Person_" + gender+"_" + nativity
-                    denominator =  "Count_Person_" + gender+"_" + nativity
+                    node = "Percent_"+healthBehavior + "_" + "TobaccoProducts"+"_In_" + "Count_Person" +"_"+ gender+"_" + nativity
+                    denominator =  "Count_Person" +"_"+ gender+"_" + nativity
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
-                        Node = Node.replace("_Total", "")
+                        node = node.replace("_Total", "")
                         denominator = denominator = denominator.replace("_Total", "")
                         f_gender = ""
 
                     if healthBehavior == "NonSmoker":
-                        Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                        node = node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
                         f_substanceUsageFrequency = ""
-                    mcf += template_mcf.format(Node=Node,
+                    mcf += template_mcf.format(node=node,
                                             gender=f_gender,
                                             denominator=denominator,
                                             substanceUsageFrequency="",
@@ -681,18 +688,18 @@ def smoking_tobaccoproducts_county_of_birth() -> str:
                             'CountryOfBirthForeignCountry',
                             'CountryOfBirthReportingCountry'
                     ]:
-                        Node = "Count_Person_"+ gender + "_" +healthBehavior+"_"+nativity+"_"+substanceUsageFrequency+"_"+"TobaccoProducts"+"_AsAFractionOf_" + "Count_Person_" + gender+"_" + nativity
+                        node = "Percent"+"_" +healthBehavior+"_"+substanceUsageFrequency+"_"+"TobaccoProducts"+"_In_" + "Count_Person_" + gender+"_" + nativity
                         denominator =  "Count_Person_" + gender+"_" + nativity
                         f_gender = f"gender: dcs:{gender}\n"
                         if gender == "Total":
-                            Node = Node.replace("_Total", "")
+                            node = node.replace("_Total", "")
                             denominator = denominator = denominator.replace("_Total", "")
                             f_gender = ""
 
                         if healthBehavior == "NonSmoker":
-                            Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                            node = node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
                             f_substanceUsageFrequency = ""
-                        mcf += template_mcf.format(Node=Node,
+                        mcf += template_mcf.format(node=node,
                                                 gender=f_gender,
                                                 denominator=denominator,
                                                 substanceUsageFrequency=f_substanceUsageFrequency,
@@ -703,7 +710,7 @@ def smoking_tobaccoproducts_county_of_birth() -> str:
 
 def smoking_tobaccoproducts_country_of_citizenship() -> str:
     template_mcf = (
-        "Node: dcid:{Node}\n"
+        "Node: dcid:{node}\n"
         "typeOf: dcs:StatisticalVariable\n"
         "populationType: dcs:Person\n"
         "measuredProperty: dcs:count\n"
@@ -723,18 +730,18 @@ def smoking_tobaccoproducts_country_of_citizenship() -> str:
                         'CitizenshipNonEU28CountriesNorReportingCountry',
                         'CitizenshipForeignCountry', 'CitizenshipReportingCountry'
                 ]:
-                    Node = "Count_Person_" + citizenship + "_" + gender + "_" + healthBehavior + "_" +"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + citizenship + "_" + gender
+                    node = "Percent" + "_" + healthBehavior + "_" +"TobaccoProducts"+ "_In_" + "Count_Person_" + citizenship + "_" + gender
                     denominator = "Count_Person_" + citizenship + "_" + gender
                     f_gender = f"gender: dcs:{gender}\n"
                     if gender == "Total":
-                        Node = Node.replace("_Total", "")
+                        node = node.replace("_Total", "")
                         denominator = denominator = denominator.replace("_Total", "")
                         f_gender = ""
 
                     if healthBehavior == "NonSmoker":
-                        Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                        node = node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
                         f_substanceUsageFrequency = ""
-                    mcf += template_mcf.format(Node=Node,
+                    mcf += template_mcf.format(node=node,
                                             gender=f_gender,
                                             substanceUsageFrequency="",
                                             denominator=denominator,
@@ -748,18 +755,18 @@ def smoking_tobaccoproducts_country_of_citizenship() -> str:
                             'CitizenshipNonEU28CountriesNorReportingCountry',
                             'CitizenshipForeignCountry', 'CitizenshipReportingCountry'
                     ]:
-                        Node = "Count_Person_" + citizenship + "_" + gender + "_" + healthBehavior +"_"+substanceUsageFrequency+"_"+"TobaccoProducts"+ "_AsAFractionOf_" + "Count_Person_" + citizenship + "_" + gender
-                        denominator = "Count_Person_" + citizenship + "_" + gender
+                        node = "Percent_" + "_" + healthBehavior +"_"+substanceUsageFrequency+"_"+"TobaccoProducts"+ "_In_" + "Count_Person" +"_"+ citizenship + "_" + gender
+                        denominator = "Count_Person" +"_"+ citizenship + "_" + gender
                         f_gender = f"gender: dcs:{gender}\n"
                         if gender == "Total":
-                            Node = Node.replace("_Total", "")
+                            node = node.replace("_Total", "")
                             denominator = denominator = denominator.replace("_Total", "")
                             f_gender = ""
 
                         if healthBehavior == "NonSmoker":
-                            Node = Node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
+                            node = node.replace("_DailyUsage", "").replace("_OccasionalUsage","")
                             f_substanceUsageFrequency = ""
-                        mcf += template_mcf.format(Node=Node,
+                        mcf += template_mcf.format(node=node,
                                                 gender=f_gender,
                                                 substanceUsageFrequency=f_substanceUsageFrequency,
                                                 denominator=denominator,
@@ -773,23 +780,23 @@ def smoking_tobaccoproducts_country_of_citizenship() -> str:
 def generate_mcf():
     mcf = ''
     for f in [
-            smoking_tobaccoproducts_education_attainment_level,
-            daily_smokers_cigarettes_education_attainment_level,
-            daily_exposure_tobacco_smoke_indoors_education_attainment_level,
-            former_daily_tobacco_smoker_education_attainment_level,
-            duration_daily_tobacco_smoking_education_attainment_level,
+            # smoking_tobaccoproducts_education_attainment_level,
+            # daily_smokers_cigarettes_education_attainment_level,
+            # daily_exposure_tobacco_smoke_indoors_education_attainment_level,
+            # former_daily_tobacco_smoker_education_attainment_level,
+            # duration_daily_tobacco_smoking_education_attainment_level,
             electronic_cigarettes_similar_electronic_devices_education_attainment_level,
 
-            smoking_tobaccoproducts_income_quintile,
-            daily_smokers_cigarettes_income_quintile,
-            former_daily_tobacco_smoker_income_quintile,
+            # smoking_tobaccoproducts_income_quintile,
+            # daily_smokers_cigarettes_income_quintile,
+            # former_daily_tobacco_smoker_income_quintile,
 
-            smoking_tobaccoproducts_degree_of_urbanisation,
-            daily_smokers_cigarettes_degree_of_urbanisation,
-            daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
+            # smoking_tobaccoproducts_degree_of_urbanisation,
+            # daily_smokers_cigarettes_degree_of_urbanisation,
+            # daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
 
-            smoking_tobaccoproducts_county_of_birth,
-            smoking_tobaccoproducts_country_of_citizenship
+            # smoking_tobaccoproducts_county_of_birth,
+            # smoking_tobaccoproducts_country_of_citizenship
             ]:
         mcf += f()
 

@@ -22,7 +22,7 @@ path.insert(1, '../../../../')
 import os
 import pandas as pd
 import numpy as np
-import mcf_generator
+# import mcf_generator
 from util.alpha2_to_dcid import COUNTRY_MAP
 from absl import app
 from absl import flags
@@ -58,9 +58,9 @@ def smoking_tobaccoproducts_county_of_birth(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['c_birth']+'_'+df['sex']+\
-        '_'+'SmokingTobaccoProducts'+'_'+df['smoking']+\
-        '_AsAFractionOf_Count_Person_'+df['c_birth']+'_'+df['sex']
+    df['SV'] = 'Percent'+\
+        '_'+df['smoking']+"_"+'TobaccoProducts'+\
+        '_In_Count_Person_'+df['c_birth']+'_'+df['sex']
     df.drop(columns=['smoking', 'c_birth', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -90,9 +90,9 @@ def smoking_tobaccoproducts_country_of_citizenship(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['citizen']+'_'+df['sex']+\
-        '_'+'SmokingTobaccoProducts'+'_'+df['smoking']+\
-        '_AsAFractionOf_Count_Person_'+df['citizen']+'_'+df['sex']
+    df['SV'] = 'Percent'+\
+        '_'+df['smoking']+"_"+'TobaccoProducts'+\
+        '_In_Count_Person_'+df['citizen']+'_'+df['sex']
     df.drop(columns=['smoking', 'citizen', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -117,9 +117,9 @@ def smoking_tobaccoproducts_education_attainment_level(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+\
-        '_'+'SmokingTobaccoProducts'+'_'+df['smoking']+\
-        '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent'+\
+        '_'+df['smoking']+'_TobaccoProducts'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['smoking', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
@@ -144,9 +144,9 @@ def smoking_tobaccoproducts_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['quant_inc']+'_'+df['sex']+\
-        '_'+'SmokingTobaccoProducts'+'_'+df['smoking']+\
-        '_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
+    df['SV'] = 'Percent'+\
+        '_'+df['smoking']+'_TobaccoProducts'+\
+        '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
     df.drop(columns=['smoking', 'quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
@@ -176,9 +176,9 @@ def smoking_tobaccoproducts_degree_of_urbanisation(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['deg_urb']+'_'+df['sex']+\
-        '_'+'SmokingTobaccoProducts'+'_'+df['smoking']+\
-        '_AsAFractionOf_Count_Person_'+df['deg_urb']+'_'+df['sex']
+    df['SV'] = 'Percent'+\
+        '_'+df['smoking']+'_TobaccoProducts'+\
+        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     df.drop(columns=['smoking', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -208,9 +208,8 @@ def former_daily_tobacco_smoker_income_quintile(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['quant_inc']+'_'+df['sex']+\
-        '_'+'FormerDailyTobaccoSmoking'+\
-        '_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
+    df['SV'] = 'Percent_FormerSmoker_DailyUsage_TobaccoSmoking'+\
+        '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
     df.drop(columns=['quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -241,9 +240,8 @@ def former_daily_tobacco_smoker_education_attainment_level(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+\
-        '_'+'FormerDailyTobaccoSmoking'+\
-        '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_FormerSmoker_DailyUsage_TobaccoSmoking'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -268,9 +266,9 @@ def daily_smokers_cigarettes_education_attainment_level(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+\
-        '_'+'DailySmokers'+'_'+df['smoking']+\
-        '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_Smoking'+\
+        '_'+df['smoking']+'_DailyUsage_Cigarettes'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['smoking', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
@@ -294,9 +292,9 @@ def daily_smokers_cigarettes_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['quant_inc']+'_'+df['sex']+\
-        '_'+'DailySmokers'+'_'+df['smoking']+\
-        '_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
+    df['SV'] = 'Percent_Smoking'+\
+        '_'+df['smoking']+'_DailyUsage_Cigarettes'+\
+        '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
     df.drop(columns=['smoking', 'quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
@@ -326,9 +324,9 @@ def daily_smokers_cigarettes_degree_of_urbanisation(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['deg_urb']+'_'+df['sex']+\
-        '_'+'DailySmokers'+'_'+df['smoking']+\
-        '_AsAFractionOf_Count_Person_'+df['deg_urb']+'_'+df['sex']
+    df['SV'] = 'Percent_Smoking'+\
+        '_'+df['smoking']+'_DailyUsage_Cigarettes'+\
+        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     df.drop(columns=['smoking', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -354,9 +352,9 @@ def daily_exposure_tobacco_smoke_indoors_education_attainment_level(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+\
-        '_'+'DailyExposureToTobaccoSmokeIndoors'+'_'+df['frequenc']+\
-        '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_ExposureToTobaccoSmoke'+\
+        '_'+df['frequenc']+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['frequenc', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
@@ -387,9 +385,9 @@ def daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['deg_urb']+'_'+df['sex']+\
-        '_'+'DailyExposureToTobaccoSmokeIndoors'+'_'+df['frequenc']+\
-        '_AsAFractionOf_Count_Person_'+df['deg_urb']+'_'+df['sex']
+    df['SV'] = 'Percent_ExposureToTobaccoSmoke'+\
+        '_'+df['frequenc']+\
+        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     df.drop(columns=['frequenc', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -420,9 +418,9 @@ def duration_daily_tobacco_smoking_education_attainment_level(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+\
-        '_'+'DurationOfDailyTobaccoSmoking'+'_'+df['duration']+\
-        '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_Smoking_'+\
+        df['duration']+'_DailyUsage_TobaccoProducts'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['duration', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -451,11 +449,10 @@ def electronic_cigarettes_similar_electronic_devices_education_attainment_level(
     df = _replace_isced11(df)
     df = _replace_frequenc(df)
     df = _replace_sex(df)
-    df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['isced11']+'_'+df['sex']+'_'\
-        +'UsageOfElectronicCigarettesOrSimilarElectronicDevices'+'_'+df['frequenc']+\
-        '_AsAFractionOf_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_'\
+        +df['frequenc']+'_'+'ECigarettes'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['frequenc', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -470,22 +467,21 @@ def daily_smokers_cigarettes_history_education_attainment_level(
     Output Provided: DF
     """
     cols = [
-        'sex,age,isced97,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL', 'ES', 'CY',
+        'sex,age,isced11,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL', 'ES', 'CY',
         'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK'
     ]
     df.columns = cols
-    col1 = "sex,age,isced97,time"
+    col1 = "sex,age,isced11,time"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
-    df = _replace_isced97(df)
+    df = _replace_isced11(df)
     df = _replace_sex(df)
-    df = _replace_smoking(df)
     df.drop(columns=['age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['isced97']+'_'+df['sex']+'_'\
-        +'DailySmokersHistoryEducation'+\
-        '_AsAFractionOf_Count_Person_'+df['isced97']+'_'+df['sex']
-    df.drop(columns=['isced97', 'sex'], inplace=True)
+    df['SV'] = 'Percent_Smoking'+\
+        '_DailyUsage_Cigarettes'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
+    df.drop(columns=['isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -509,11 +505,10 @@ def daily_smokers_cigarettes_history_income_quintile(
     df = df[df['age'] == 'TOTAL']
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
-    df = _replace_smoking(df)
     df.drop(columns=['age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['quant_inc']+'_'+df['sex']+\
-        '_'+'DailySmokersHistoryIncome'+\
-        '_AsAFractionOf_Count_Person_'+df['quant_inc']+'_'+df['sex']
+    df['SV'] = 'Percent_Smoking'+\
+        '_DailyUsage_Cigarettes'+\
+        '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
     df.drop(columns=['quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -528,22 +523,22 @@ def daily_smokers_number_of_cigarettes_history_education_attainment_level(
     Output Provided: DF
     """
     cols = [
-        'sex,age,smoking,isced97,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL',
+        'sex,age,smoking,isced11,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL',
         'ES', 'CY', 'LV', 'HU', 'MT', 'PL', 'RO', 'SI', 'SK'
     ]
     df.columns = cols
-    col1 = "sex,age,smoking,isced97,time"
+    col1 = "sex,age,smoking,isced11,time"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
-    df = _replace_isced97(df)
+    df = _replace_isced11(df)
     df = _replace_smoking(df)
     df = _replace_sex(df)
     df.drop(columns=['age'], inplace=True)
-    df['SV'] = 'Count_Person_'+ df['isced97']+'_'+df['sex']+\
-        '_'+'DailySmokersByNumberOfCigarettesHistory'+'_'+\
-        df['smoking']+'_AsAFractionOf_Count_Person_'+df['isced97']+'_'+df['sex']
-    df.drop(columns=['smoking', 'isced97', 'sex'], inplace=True)
+    df['SV'] = 'Percent_Smoking'+\
+        '_'+df['smoking']+'_DailyUsage_Cigarettes'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
+    df.drop(columns=['smoking', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return df
@@ -567,39 +562,19 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
     from metadata returns the DF
     """
     df = df.replace({'isced11': {
-        'ED0-2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED0_2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED3-4': 'EducationalAttainment'+\
-        'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED3_4': 'EducationalAttainment'+\
-            'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED5_6': 'EducationalAttainment'+\
-            'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
-        'ED5-8': 'EducationalAttainmentTertiaryEducation',
-        'ED5_8': 'EducationalAttainmentTertiaryEducation',
+        'ED0-2': 'LessThanPrimaryEducation'+\
+        'OrPrimaryEducationOrLowerSecondaryEducation',
+        'ED0_2': 'LessThanPrimaryEducation'+\
+        'OrPrimaryEducationOrLowerSecondaryEducation',
+        'ED3-4': 'UpperSecondaryEducation'+\
+        'OrPostSecondaryNonTertiaryEducation',
+        'ED3_4': 'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+        'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
+        'ED5-8': 'TertiaryEducation',
+        'ED5_8': 'TertiaryEducation',
         'TOTAL': 'Total'
         }})
     return df
-
-
-def _replace_isced97(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF
-    """
-    df = df.replace({'isced97': {
-        'ED0-2': 'EducationalAttainment'+\
-        'PrePrimary_PrimaryAndLowerSecondaryEducation',
-        'ED3_4': 'EducationalAttainment'+\
-            'UpperSecondaryEducationAndPostSecondaryNonTertiaryEducation',
-        'ED5_6': 'EducationalAttainment'+\
-            'FirstAndSecondStageOfTertiaryEducation',
-        'TOTAL': 'Total'
-        }})
-    return df
-
 
 def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -645,9 +620,9 @@ def _replace_smoking(df: pd.DataFrame) -> pd.DataFrame:
         'smoking': {
             'TOTAL': 'Total',
             'NSM': 'NonSmoker',
-            'SM_CUR': 'CurrentSmoker',
-            'SM_DAY': 'DailySmoker',
-            'SM_OCC': 'OccasionalSmoker',
+            'SM_CUR': 'Smoking',
+            'SM_DAY': 'Smoking_DailyUsage',
+            'SM_OCC': 'Smoking_OccasionalUsage',
             'SM_LT20D': 'LessThan20CigarettesPerDay',
             'SM_GE20D': '20OrMoreCigarettesPerDay',
             'DSM_GE20': 'DailyCigaretteSmoker20OrMorePerDay',
@@ -664,10 +639,10 @@ def _replace_c_birth(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'c_birth': {
-            'EU28_FOR': 'CountryOfBirthEU28CountriesExceptReportingCountry',
-            'NEU28_FOR': 'CountryOfBirthNonEU28CountriesNorReportingCountry',
-            'FOR': 'CountryOfBirthForeignCountry',
-            'NAT': 'CountryOfBirthReportingCountry'
+            'EU28_FOR': 'ForeignBornWithinEU28',
+            'NEU28_FOR': 'ForeignBornOutsideEU28',
+            'FOR': 'ForeignBorn',
+            'NAT': 'Native'
         }
     })
     return df
@@ -680,10 +655,10 @@ def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'citizen': {
-            'EU28_FOR': 'CitizenshipEU28CountriesExceptReportingCountry',
-            'NEU28_FOR': 'CitizenshipNonEU28CountriesNorReportingCountry',
-            'FOR': 'CitizenshipForeignCountry',
-            'NAT': 'CitizenshipReportingCountry'
+            'EU28_FOR': 'WithinEU28AndNotACitizen',
+            'NEU28_FOR': 'CitizenOutsideEU28',
+            'FOR': 'NotACitizen',
+            'NAT': 'Citizen'
         }
     })
     return df
@@ -712,15 +687,15 @@ def _replace_frequenc(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'frequenc': {
-            'DAY_GE1HD': 'AtLeast1HourEveryDay',
-            'DAY_LT1HD': 'LessThan1HourEveryDay',
+            'DAY_GE1HD': 'AtLeastOneHourPerDay',
+            'DAY_LT1HD': 'LessThanOneHourPerDay',
             'LT1W': 'LessThanOnceAWeek',
             'GE1W': 'AtLeastOnceAWeek',
             'RAR_NVR': 'RarelyOrNever',
-            'DAY': 'EveryDay',
-            'FMR': 'Formerly',
-            'OCC': 'Occasionally',
-            'NVR': 'Never'
+            'DAY': 'Smoking_DailyUsage',
+            'FMR': 'FormerSmoker_Formerly',
+            'OCC': 'Smoking_OccasionalUsage',
+            'NVR': 'Smoking_NeverUsed'
         }
     })
     return df
@@ -742,8 +717,8 @@ class EuroStatTobaccoConsumption:
     MCF and TMCF Files.
     """
 
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
+    def __init__(self, input_files: list, csv_file_path: str,\
+        mcf_file_path: str, tmcf_file_path: str) -> None:
         self.input_files = input_files
         self.cleaned_csv_file_path = csv_file_path
         self.mcf_file_path = mcf_file_path
@@ -770,6 +745,107 @@ class EuroStatTobaccoConsumption:
         # Writing Genereated TMCF to local path.
         with open(self.tmcf_file_path, 'w+', encoding="UTF-8") as f_out:
             f_out.write(tmcf_template.rstrip('\n'))
+# ----------------------------------------------------------------------------------------------------------------------------------
+    def _generate_mcf(self, sv_list) -> None:
+        """
+        This method generates MCF file w.r.t
+        dataframe headers and defined MCF template
+        Args:
+            df_columns (list) : List of DataFrame Columns
+        Returns:
+            None
+        """
+        # pylint: disable=R0914
+        # pylint: disable=R0912
+        # pylint: disable=R0915
+        mcf_template = ("Node: dcid:{ip1}\n"
+                        "typeOf: dcs:StatisticalVariable\n"
+                        "populationType: dcs:Person{ip2}{ip3}{ip4}{ip5}"
+                        "{ip6}{ip7}{ip8}{ip9}{ip10}{ip11}{ip12}{ip13}\n"
+                        "statType: dcs:measuredValue\n"
+                        "measuredProperty: dcs:count\n"
+                        "")
+        final_mcf_template = ""
+        for sv in sv_list:
+            if "Total" in sv:
+                continue
+            incomequin = gender = education = frequenc = healthbehavior =\
+            residence = countryofbirth = citizenship = substance = quantity = history = ''
+
+            sv_temp = sv.split("_In_")
+            denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
+            sv_prop = sv_temp[0].split("_")
+            sv_prop1 = sv_temp[1].split("_")
+            for prop in sv_prop:
+                if prop in ["Percent"]:
+                    continue
+                if  "Smoking" in prop:\
+                    healthbehavior = "\nhealthBehavior: dcs:" + prop
+                elif "NonSmoker" in prop:
+                    healthbehavior = "\nhealthBehavior: dcs:" + prop
+                elif "ExposureToTobaccoSmoke" in prop:
+                      healthbehavior = "\nhealthBehavior: dcs:" + prop
+          
+
+                if "DailyUsage" in prop or "OccasionalUsage" in prop\
+                     or "AtLeastOneHourPerDay" in prop or "LessThanOneHourPerDay" in prop\
+                      or "LessThanOnceAWeek" in prop or "AtLeastOnceAWeek" in prop\
+                      or "RarelyOrNever" in prop :
+                    frequenc = "\nsubstanceUsageFrequency: dcs:" + prop
+
+                if "LessThan20CigarettesPerDay"in prop or "20OrMoreCigarettesPerDay" in prop \
+                    or "DailyCigaretteSmoker20OrMorePerDay" in prop or "DailyCigaretteSmokerLessThan20PerDay" in prop:
+                    quantity = "\nsubstanceUsageQuantity: dcs:" + prop
+                if "TobaccoProducts" in prop or "Cigarette" in prop or "ECigarettes" in prop:
+                    substance = "\nsubstanceUsed: dcs:" + prop
+                if 'LessThan1Year'in prop or 'From1To5Years'in prop or 'From5To10Years'in prop or'10YearsOrOver'in prop:
+                      history = "\nsubstanceUsageHistory: dcs:" + prop
+
+                for prop in sv_prop1:
+                    if prop in ["Count","Person"]:
+                        continue
+                    if "Male" in prop or "Female" in prop:
+                        gender = "\ngender: dcs:" + prop
+                    elif "Education" in prop:
+                        education = "\neducationalAttainment: dcs:" + \
+                            prop.replace("Or","__")
+                        #prop.replace("EducationalAttainment","")
+                        prop.replace("Or","__")
+                    elif "Percentile" in prop:
+                        incomequin = "\nincome: ["+prop.replace("Percentile",\
+                            "").replace("IncomeOf","").replace("To"," ")+" Percentile]"
+                    elif "Urban" in prop or "SemiUrban" in prop \
+                        or "Rural" in prop:
+                        residence = "\nplaceOfResidenceClassification: dcs:" + prop
+                    elif "ForeignBorn" in prop or "Native" in prop:
+                        countryofbirth = "\nnativity: dcs:" + \
+                            prop.replace("CountryOfBirth","")
+                    elif "ForeignWithinEU28" in prop or "ForeignOutsideEU28" in prop\
+                        or "Citizen" in prop or "NotACitizen" in prop:
+                        citizenship = "\ncitizenship: dcs:"+\
+                        prop.replace("Citizenship","")
+
+            final_mcf_template += mcf_template.format(ip1=sv,
+                                                      ip2=denominator,
+                                                      ip3=healthbehavior,
+                                                      ip4=gender,
+                                                      ip5=frequenc,
+                                                      ip6=education,
+                                                      ip7=incomequin,
+                                                      ip8=residence,
+                                                      ip9=countryofbirth,
+                                                      ip10=citizenship,
+                                                      ip11=substance,
+                                                      ip12=quantity,
+                                                      ip13=history) + "\n"
+
+
+        # Writing Genereated MCF to local path.
+        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(final_mcf_template.rstrip('\n'))
+        # pylint: enable=R0914
+        # pylint: enable=R0912
+        # pylint: enable=R0915
 
     def process(self):
         """
@@ -829,28 +905,39 @@ class EuroStatTobaccoConsumption:
             }
             df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
-            df['Measurement_Method'] = np.where(
-                df['observation'].str.contains('u'),
-                'LowReliability/EurostatRegionalStatistics',
-                'EurostatRegionalStatistics')
-            df['observation'] = (df['observation'].astype("str").str.replace(
-                ':', '').str.replace(' ', '').str.replace('u', ''))
-            df['observation'].replace('', np.nan, inplace=True)
-            df.dropna(subset=['observation'], inplace=True)
-            df['observation'] = pd.to_numeric(df['observation'],
-                                              errors='coerce')
+            # df["file_name"] = file_name_without_ext
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
 
-        final_df = final_df.sort_values(by=['time', 'geo', 'SV'])
+        final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
+        final_df = final_df.drop_duplicates(subset=['time','geo','SV'],\
+            keep='first')
+        final_df['observation'] = final_df['observation'].astype(str)\
+            .str.strip()
+        # derived_df generated to get the year/SV/location sets
+        # where 'u' exist
+        derived_df = final_df[final_df['observation'].astype(str).str.contains('u')]
+        u_rows = list(derived_df['SV'] + derived_df['geo'])
+        final_df['info'] = final_df['SV'] + final_df['geo']
+        # Adding Measurement Method based on a condition
+        final_df['Measurement_Method'] = np.where(
+            final_df['info'].isin(u_rows),
+            'EurostatRegionalStatistics_LowReliability',
+            'EurostatRegionalStatistics')
+        final_df.drop(columns=['info'], inplace=True)
+        final_df['observation'] = (final_df['observation'].astype(str).str.replace(
+            ':', '').str.replace(' ', '').str.replace('u', ''))
+        final_df['observation'] = pd.to_numeric(final_df['observation'],
+                                                errors='coerce')
         final_df = final_df.replace({'geo': COUNTRY_MAP})
+        final_df = final_df.sort_values(by=['geo', 'SV'])
+        final_df['observation'].replace('', np.nan, inplace=True)
+        final_df.dropna(subset=['observation'], inplace=True)
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
-        final_mcf = mcf_generator.generate_mcf()
+        self._generate_mcf(sv_list)
         self._generate_tmcf()
-        with open(self.mcf_file_path, 'w+', encoding="UTF-8") as f_out:
-            f_out.write(final_mcf.rstrip('\n'))
 
 
 def main(_):
