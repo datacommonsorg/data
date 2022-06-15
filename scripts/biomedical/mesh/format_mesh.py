@@ -37,12 +37,12 @@ def format_mesh_xml(mesh_xml):
     """
     document = parse(mesh_xml)
     dfcols = [
-        'DescriptorId', 'DescriptorName', 'DateCreated-Year',
+        'DescriptorID', 'DescriptorName', 'DateCreated-Year',
         'DateCreated-Month', 'DateCreated-Day', 'DateRevised-Year',
         'DateRevised-Month', 'DateRevised-Day', 'DateEstablished-Year',
         'DateEstablished-Month', 'DateEstablished-Day', 'QualifierID',
         'QualifierName', 'QualifierAbbreviation', 'ConceptID', 'ConceptName',
-        'TermID', 'TermName'
+        'ScopeNote', 'TermID', 'TermName', 'TreeNumber', 'NLMClassificationNumber'
     ]
     df = pd.DataFrame(columns=dfcols)
     for item in document.iterfind('DescriptorRecord'):
@@ -76,6 +76,16 @@ def format_mesh_xml(mesh_xml):
             d1_established_year = date_established.findtext("Year")
             d1_established_month = date_established.findtext("Month")
             d1_established_day = date_established.findtext("Day")
+        tree_list = item.find(".//TreeNumberList")
+        if not tree_list:
+            tree_num = np.nan
+        else:
+            tree_num = []
+            for i in range(len(tree_list)):
+                tree_num.append(tree_list.findtext("TreeNumber"))
+        nlm_num = item.findtext("NLMClassificationNumber")
+        if not nlm_num:
+            nlm_num = np.nan
         quantifier_list = item.find(".//AllowableQualifiersList")
         qualID = []
         qual_name = []
@@ -97,16 +107,19 @@ def format_mesh_xml(mesh_xml):
         if not concept_list:
             conceptID = np.nan
             conceptName = np.nan
+            scopeNote = np.nan
             termUI = np.nan
             termName = np.nan
         else:
             c1 = concept_list.findall(".//Concept")
             conceptID = []
             conceptName = []
+            scopeNote = []
             termUI = []
             termName = []
             for i in range(len(c1)):
                 conceptID.append(c1[i].findtext("ConceptUI"))
+                scopeNote.append(c1[i].findtext("ScopeNote"))
                 c2 = c1[i].find(".//ConceptName")
                 conceptName.append(c2.findtext("String"))
                 c3 = c1[i].find(".//TermList")
@@ -122,13 +135,12 @@ def format_mesh_xml(mesh_xml):
             d1, d1_name, d1_created_year, d1_created_month, d1_created_day,
             d1_revised_year, d1_revised_month, d1_revised_day,
             d1_established_year, d1_established_month, d1_established_day,
-            qualID, qual_name, qual_abbr, conceptID, conceptName, termUI,
-            termName
+            qualID, qual_name, qual_abbr, conceptID, conceptName, scopeNote,
+            termUI, termName, tree_num, nlm_num
         ],
                                  index=dfcols),
                        ignore_index=True)
     return df
-
 
 def date_modify(df1):
     """
@@ -168,9 +180,15 @@ def format_descriptor_df(df):
     df_1 = df
     df_1 = df_1.drop(columns=[
         'QualifierID', 'QualifierName', 'QualifierAbbreviation', 'ConceptID',
-        'ConceptName', 'TermID', 'TermName'
+        'ConceptName', 'ScopeNote', 'TermID', 'TermName'
     ])
-    df_1['Descriptor_dcid'] = 'bio/' + df_1['DescriptorId'].astype(str)
+    df_1 = df_1.apply(lambda x: x.explode() if x.name in
+                      ['TreeNumber'] else x)
+    df_1['Descriptor_dcid'] = 'bio/' + df_1['DescriptorID'].astype(str)
+    df_1['DescriptorParentID'] = df_1['TreeNumber'].str[:-4]
+    map_dict = dict(zip(df_1['TreeNumber'], df_1['Descriptor_dcid']))
+    df_1 = df_1.replace({"DescriptorParentID": map_dict})
+    df_1["DescriptorParentID"] = np.where(df_1['DescriptorParentID'].str[0] == "b", df_1["DescriptorParentID"], np.nan)
     return df_1
 
 
@@ -188,12 +206,13 @@ def format_qualifier_df(df):
         'DescriptorName', 'DateCreated-Year', 'DateCreated-Month',
         'DateCreated-Day', 'DateRevised-Year', 'DateRevised-Month',
         'DateRevised-Day', 'DateEstablished-Year', 'DateEstablished-Month',
-        'DateEstablished-Day', 'ConceptID', 'ConceptName', 'TermID', 'TermName'
+        'DateEstablished-Day', 'ConceptID', 'ConceptName', 'ScopeNote', 
+        'TermID', 'TermName', 'TreeNumber', 'NLMClassificationNumber'
     ])
-    df_2 = (df_2.set_index('DescriptorId').apply(
+    df_2 = (df_2.set_index('DescriptorID').apply(
         lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
     df_2['Qualifier_dcid'] = 'bio/' + df_2['QualifierID'].astype(str)
-    df_2['Descriptor_dcid'] = 'bio/' + df_2['DescriptorId'].astype(str)
+    df_2['Descriptor_dcid'] = 'bio/' + df_2['DescriptorID'].astype(str)
     return df_2
 
 
@@ -212,12 +231,14 @@ def format_concept_df(df):
         'DateCreated-Day', 'DateRevised-Year', 'DateRevised-Month',
         'DateRevised-Day', 'DateEstablished-Year', 'DateEstablished-Month',
         'DateEstablished-Day', 'QualifierID', 'QualifierName',
-        'QualifierAbbreviation', 'TermID', 'TermName'
+        'QualifierAbbreviation', 'TermID', 'TermName', 'TreeNumber', 'NLMClassificationNumber'
     ])
-    df_3 = df_3 = (df_3.set_index('DescriptorId').apply(
+    df_3['ScopeNote'] = df_3['ScopeNote'].str[0]
+    df_3['ScopeNote'] = df_3['ScopeNote'].str.strip()
+    df_3 = df_3 = (df_3.set_index('DescriptorID').apply(
         lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
     df_3['Concept_dcid'] = 'bio/' + df_3['ConceptID'].astype(str)
-    df_3['Descriptor_dcid'] = 'bio/' + df_3['DescriptorId'].astype(str)
+    df_3['Descriptor_dcid'] = 'bio/' + df_3['DescriptorID'].astype(str)
     return df_3
 
 
@@ -235,8 +256,8 @@ def format_term_df(df):
         'DateCreated-Year', 'DateCreated-Month', 'DateCreated-Day',
         'DateRevised-Year', 'DateRevised-Month', 'DateRevised-Day',
         'DateEstablished-Year', 'DateEstablished-Month', 'DateEstablished-Day',
-        'QualifierID', 'QualifierName', 'QualifierAbbreviation',
-        'DescriptorName', 'DescriptorId'
+        'QualifierID', 'QualifierName', 'QualifierAbbreviation', 'ScopeNote', 
+        'DescriptorName', 'DescriptorID', 'TreeNumber', 'NLMClassificationNumber'
     ])
     df_4 = df_4.apply(lambda x: x.explode() if x.name in
                       ['ConceptID', 'ConceptName', 'TermID', 'TermName'] else x)
