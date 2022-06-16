@@ -32,11 +32,9 @@ _EXPECTED_FILES_DIR = os.path.join(_MODULE_DIR, "test_data", "expected_files")
 
 class TestProcess(unittest.TestCase):
     """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing.
-    The test will be conducted for EuroStat BMI Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
-    Comparing the data with the expected files.
+    This module is used to test EuroStat BMI data processing.
+    It will generate and test CSV, MCF and TMCF files for given test input files
+    and comapre it with expected results.
     """
     test_data_files = [
         'hlth_ehis_bm1c.tsv', 'hlth_ehis_de2.tsv', 'hlth_ehis_bm1d.tsv',
