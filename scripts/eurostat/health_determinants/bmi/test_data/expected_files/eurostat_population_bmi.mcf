@@ -1,626 +1,3580 @@
-Node: dcid:Count_Person_Normalweight_AsAFractionOf_Count_Person
+Node: dcid:Percent_Normalweight_In_Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person
 healthBehavior: dcs:Normalweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_CitizenOutsideEU28_Female_AsAFractionOf_Count_Person_CitizenOutsideEU28_Female
+Node: dcid:Percent_Normalweight_In_Count_Person_Citizen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen
+healthBehavior: dcs:Normalweight
+citizenship: dcs:Citizen
+
+Node: dcid:Percent_Normalweight_In_Count_Person_CitizenOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
+healthBehavior: dcs:Normalweight
+citizenship: dcs:CitizenOutsideEU28
+
+Node: dcid:Percent_Normalweight_In_Count_Person_CitizenOutsideEU28_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
 healthBehavior: dcs:Normalweight
-gender: dcs:Female
 citizenship: dcs:CitizenOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Female
 
-Node: dcid:Count_Person_Normalweight_CitizenOutsideEU28_Male_AsAFractionOf_Count_Person_CitizenOutsideEU28_Male
+Node: dcid:Percent_Normalweight_In_Count_Person_CitizenOutsideEU28_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
 healthBehavior: dcs:Normalweight
-gender: dcs:Male
 citizenship: dcs:CitizenOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Male
 
-Node: dcid:Count_Person_Normalweight_Citizen_Female_AsAFractionOf_Count_Person_Citizen_Female
+Node: dcid:Percent_Normalweight_In_Count_Person_Citizen_Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Citizen_Female
 healthBehavior: dcs:Normalweight
-gender: dcs:Female
 citizenship: dcs:Citizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Female
 
-Node: dcid:Count_Person_Normalweight_Female_AsAFractionOf_Count_Person_Female
+Node: dcid:Percent_Normalweight_In_Count_Person_Citizen_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen_Male
+healthBehavior: dcs:Normalweight
+citizenship: dcs:Citizen
+gender: dcs:Male
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Female
 healthBehavior: dcs:Normalweight
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_Female_ForeignBornOutsideEU28_AsAFractionOf_Count_Person_Female_ForeignBornOutsideEU28
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_ForeignBorn
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
-healthBehavior: dcs:Normalweight
-gender: dcs:Female
-nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Normalweight_Female_ForeignBornWithinEU28_AsAFractionOf_Count_Person_Female_ForeignBornWithinEU28
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
-healthBehavior: dcs:Normalweight
-gender: dcs:Female
-nativity: dcs:ForeignBornWithinEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Normalweight_Female_ForeignBorn_AsAFractionOf_Count_Person_Female_ForeignBorn
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_ForeignBorn
 healthBehavior: dcs:Normalweight
 gender: dcs:Female
 nativity: dcs:ForeignBorn
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_Female_ModerateActivityLimitation_AsAFractionOf_Count_Person_Female_ModerateActivityLimitation
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_ForeignBornOutsideEU28
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
+healthBehavior: dcs:Normalweight
+gender: dcs:Female
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
+healthBehavior: dcs:Normalweight
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+healthBehavior: dcs:Normalweight
+gender: dcs:Female
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf20To40Percentile
+healthBehavior: dcs:Normalweight
+gender: dcs:Female
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf40To60Percentile
+healthBehavior: dcs:Normalweight
+gender: dcs:Female
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf60To80Percentile
+healthBehavior: dcs:Normalweight
+gender: dcs:Female
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
+healthBehavior: dcs:Normalweight
+gender: dcs:Female
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_LimitedActivityLimitation
+healthBehavior: dcs:Normalweight
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
 healthBehavior: dcs:Normalweight
-physicalActivityEffortLevel: dcs:ModerateActivityLimitation
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 
-Node: dcid:Count_Person_Normalweight_Female_Native_AsAFractionOf_Count_Person_Female_Native
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_Native
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Female_Native
 healthBehavior: dcs:Normalweight
 gender: dcs:Female
 nativity: dcs:Native
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_Female_Percentile0To20_AsAFractionOf_Count_Person_Female_Percentile0To20
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_NoActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Percentile0To20
-income: [0 20 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_NoActivityLimitation
 healthBehavior: dcs:Normalweight
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Count_Person_Normalweight_Female_Percentile20To40_AsAFractionOf_Count_Person_Female_Percentile20To40
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Percentile20To40
-income: [20 40 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
 healthBehavior: dcs:Normalweight
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Count_Person_Normalweight_Female_Percentile40To60_AsAFractionOf_Count_Person_Female_Percentile40To60
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Percentile40To60
-income: [40 60 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_SemiUrban
 healthBehavior: dcs:Normalweight
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Count_Person_Normalweight_Female_Percentile60To80_AsAFractionOf_Count_Person_Female_Percentile60To80
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Percentile60To80
-income: [60 80 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
 healthBehavior: dcs:Normalweight
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
 
-Node: dcid:Count_Person_Normalweight_Female_Percentile80To100_AsAFractionOf_Count_Person_Female_Percentile80To100
+Node: dcid:Percent_Normalweight_In_Count_Person_Female_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Percentile80To100
-income: [80 100 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
 healthBehavior: dcs:Normalweight
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Normalweight_Female_Urban_AsAFractionOf_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Urban
-healthBehavior: dcs:Normalweight
 placeOfResidenceClassification: dcs:Urban
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_ForeignBornOutsideEU28_AsAFractionOf_Count_Person_ForeignBornOutsideEU28
+Node: dcid:Percent_Normalweight_In_Count_Person_ForeignBorn
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBorn
+healthBehavior: dcs:Normalweight
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_Normalweight_In_Count_Person_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
 healthBehavior: dcs:Normalweight
 nativity: dcs:ForeignBornOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOf_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+Node: dcid:Percent_Normalweight_In_Count_Person_ForeignBornWithinEU28
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
+healthBehavior: dcs:Normalweight
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Normalweight_In_Count_Person_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf0To20Percentile
+healthBehavior: dcs:Normalweight
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf20To40Percentile
+healthBehavior: dcs:Normalweight
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf40To60Percentile
+healthBehavior: dcs:Normalweight
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf60To80Percentile
+healthBehavior: dcs:Normalweight
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf80To100Percentile
+healthBehavior: dcs:Normalweight
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 healthBehavior: dcs:Normalweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 
-Node: dcid:Count_Person_Normalweight_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOf_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+Node: dcid:Percent_Normalweight_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOf_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+Node: dcid:Percent_Normalweight_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+healthBehavior: dcs:Normalweight
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Normalweight_In_Count_Person_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LimitedActivityLimitation
+healthBehavior: dcs:Normalweight
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male
 healthBehavior: dcs:Normalweight
 gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_Male_ForeignBornOutsideEU28_AsAFractionOf_Count_Person_Male_ForeignBornOutsideEU28
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_ForeignBorn
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBorn
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Male_ForeignBornOutsideEU28
 healthBehavior: dcs:Normalweight
 gender: dcs:Male
 nativity: dcs:ForeignBornOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_Male_ForeignBornWithinEU28_AsAFractionOf_Count_Person_Male_ForeignBornWithinEU28
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_ForeignBornWithinEU28
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Male_ForeignBornWithinEU28
 healthBehavior: dcs:Normalweight
 gender: dcs:Male
 nativity: dcs:ForeignBornWithinEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_Male_ForeignBorn_AsAFractionOf_Count_Person_Male_ForeignBorn
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_IncomeOf0To20Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf0To20Percentile
 healthBehavior: dcs:Normalweight
 gender: dcs:Male
-nativity: dcs:ForeignBorn
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+income: [0 20 Percentile]
 
-Node: dcid:Count_Person_Normalweight_Male_ModerateActivityLimitation_AsAFractionOf_Count_Person_Male_ModerateActivityLimitation
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_IncomeOf20To40Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf20To40Percentile
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf40To60Percentile
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf60To80Percentile
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf80To100Percentile
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_LimitedActivityLimitation
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Male_ModerateActivityLimitation
 healthBehavior: dcs:Normalweight
-physicalActivityEffortLevel: dcs:ModerateActivityLimitation
 gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 
-Node: dcid:Count_Person_Normalweight_Male_Native_AsAFractionOf_Count_Person_Male_Native
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_Native
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Male_Native
 healthBehavior: dcs:Normalweight
 gender: dcs:Male
 nativity: dcs:Native
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_Male_NoActivityLimitation_AsAFractionOf_Count_Person_Male_NoActivityLimitation
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_NoActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Male_NoActivityLimitation
 healthBehavior: dcs:Normalweight
-physicalActivityEffortLevel: dcs:NoActivityLimitation
 gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Count_Person_Normalweight_NotACitizen_Female_AsAFractionOf_Count_Person_NotACitizen_Female
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_SemiUrban
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Male_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:Normalweight
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Normalweight_In_Count_Person_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
+healthBehavior: dcs:Normalweight
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Native
+healthBehavior: dcs:Normalweight
+nativity: dcs:Native
+
+Node: dcid:Percent_Normalweight_In_Count_Person_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NoActivityLimitation
+healthBehavior: dcs:Normalweight
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Normalweight_In_Count_Person_NotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen
+healthBehavior: dcs:Normalweight
+citizenship: dcs:NotACitizen
+
+Node: dcid:Percent_Normalweight_In_Count_Person_NotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
 healthBehavior: dcs:Normalweight
-gender: dcs:Female
 citizenship: dcs:NotACitizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Normalweight_Percentile60To80_AsAFractionOf_Count_Person_Percentile60To80
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Percentile60To80
-income: [60 80 Percentile]
-healthBehavior: dcs:Normalweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Normalweight_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOf_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-healthBehavior: dcs:Normalweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Normalweight_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOf_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-healthBehavior: dcs:Normalweight
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Normalweight_WithinEU28AndNotACitizen_Female_AsAFractionOf_Count_Person_WithinEU28AndNotACitizen_Female
+Node: dcid:Percent_Normalweight_In_Count_Person_NotACitizen_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen_Male
+healthBehavior: dcs:Normalweight
+citizenship: dcs:NotACitizen
+gender: dcs:Male
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural
+healthBehavior: dcs:Normalweight
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Normalweight_In_Count_Person_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban
+healthBehavior: dcs:Normalweight
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Normalweight_In_Count_Person_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SevereActivityLimitation
+healthBehavior: dcs:Normalweight
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Normalweight_In_Count_Person_TertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:TertiaryEducation
+
+Node: dcid:Percent_Normalweight_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo
+healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+
+Node: dcid:Percent_Normalweight_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+gender: dcs:Female
+
+Node: dcid:Percent_Normalweight_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
+healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+gender: dcs:Male
+
+Node: dcid:Percent_Normalweight_In_Count_Person_TertiaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Normalweight_In_Count_Person_TertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Normalweight_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+
+Node: dcid:Percent_Normalweight_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Normalweight_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+healthBehavior: dcs:Normalweight
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban
+healthBehavior: dcs:Normalweight
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Normalweight_In_Count_Person_WithinEU28AndNotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
+healthBehavior: dcs:Normalweight
+citizenship: dcs:WithinEU28AndNotACitizen
+
+Node: dcid:Percent_Normalweight_In_Count_Person_WithinEU28AndNotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
 healthBehavior: dcs:Normalweight
-gender: dcs:Female
 citizenship: dcs:WithinEU28AndNotACitizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Female
 
-Node: dcid:Count_Person_Obesity_Female_SemiUrban_AsAFractionOf_Count_Person_Female_SemiUrban
+Node: dcid:Percent_Normalweight_In_Count_Person_WithinEU28AndNotACitizen_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
+healthBehavior: dcs:Normalweight
+citizenship: dcs:WithinEU28AndNotACitizen
+gender: dcs:Male
+
+Node: dcid:Percent_Obesity_In_Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person
+healthBehavior: dcs:Obesity
+
+Node: dcid:Percent_Obesity_In_Count_Person_Citizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen
+healthBehavior: dcs:Obesity
+citizenship: dcs:Citizen
+
+Node: dcid:Percent_Obesity_In_Count_Person_CitizenOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
+healthBehavior: dcs:Obesity
+citizenship: dcs:CitizenOutsideEU28
+
+Node: dcid:Percent_Obesity_In_Count_Person_CitizenOutsideEU28_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
+healthBehavior: dcs:Obesity
+citizenship: dcs:CitizenOutsideEU28
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_CitizenOutsideEU28_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
+healthBehavior: dcs:Obesity
+citizenship: dcs:CitizenOutsideEU28
+gender: dcs:Male
+
+Node: dcid:Percent_Obesity_In_Count_Person_Citizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen_Female
+healthBehavior: dcs:Obesity
+citizenship: dcs:Citizen
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_Citizen_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen_Male
+healthBehavior: dcs:Obesity
+citizenship: dcs:Citizen
+gender: dcs:Male
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBorn
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf20To40Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf40To60Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf60To80Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_LimitedActivityLimitation
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_Native
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+nativity: dcs:Native
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_NoActivityLimitation
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Female_SemiUrban
 healthBehavior: dcs:Obesity
-placeOfResidenceClassification: dcs:SemiUrban
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Count_Person_Overweight_AsAFractionOf_Count_Person
+Node: dcid:Percent_Obesity_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Female_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:Obesity
+gender: dcs:Female
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Obesity_In_Count_Person_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBorn
+healthBehavior: dcs:Obesity
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_Obesity_In_Count_Person_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
+healthBehavior: dcs:Obesity
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_Obesity_In_Count_Person_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
+healthBehavior: dcs:Obesity
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Obesity_In_Count_Person_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf0To20Percentile
+healthBehavior: dcs:Obesity
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf20To40Percentile
+healthBehavior: dcs:Obesity
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf40To60Percentile
+healthBehavior: dcs:Obesity
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf60To80Percentile
+healthBehavior: dcs:Obesity
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf80To100Percentile
+healthBehavior: dcs:Obesity
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+
+Node: dcid:Percent_Obesity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Obesity_In_Count_Person_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LimitedActivityLimitation
+healthBehavior: dcs:Obesity
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBorn
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBornOutsideEU28
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBornWithinEU28
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf0To20Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf20To40Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf40To60Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf60To80Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf80To100Percentile
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_LimitedActivityLimitation
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ModerateActivityLimitation
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_Native
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+nativity: dcs:Native
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_NoActivityLimitation
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_SemiUrban
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Male_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:Obesity
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Obesity_In_Count_Person_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
+healthBehavior: dcs:Obesity
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Native
+healthBehavior: dcs:Obesity
+nativity: dcs:Native
+
+Node: dcid:Percent_Obesity_In_Count_Person_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NoActivityLimitation
+healthBehavior: dcs:Obesity
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_NotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen
+healthBehavior: dcs:Obesity
+citizenship: dcs:NotACitizen
+
+Node: dcid:Percent_Obesity_In_Count_Person_NotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen_Female
+healthBehavior: dcs:Obesity
+citizenship: dcs:NotACitizen
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_NotACitizen_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen_Male
+healthBehavior: dcs:Obesity
+citizenship: dcs:NotACitizen
+gender: dcs:Male
+
+Node: dcid:Percent_Obesity_In_Count_Person_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural
+healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Obesity_In_Count_Person_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban
+healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Obesity_In_Count_Person_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SevereActivityLimitation
+healthBehavior: dcs:Obesity
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Obesity_In_Count_Person_TertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:TertiaryEducation
+
+Node: dcid:Percent_Obesity_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+
+Node: dcid:Percent_Obesity_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+gender: dcs:Male
+
+Node: dcid:Percent_Obesity_In_Count_Person_TertiaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_TertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Obesity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+
+Node: dcid:Percent_Obesity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+healthBehavior: dcs:Obesity
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Obesity_In_Count_Person_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban
+healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Obesity_In_Count_Person_WithinEU28AndNotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
+healthBehavior: dcs:Obesity
+citizenship: dcs:WithinEU28AndNotACitizen
+
+Node: dcid:Percent_Obesity_In_Count_Person_WithinEU28AndNotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
+healthBehavior: dcs:Obesity
+citizenship: dcs:WithinEU28AndNotACitizen
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_WithinEU28AndNotACitizen_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
+healthBehavior: dcs:Obesity
+citizenship: dcs:WithinEU28AndNotACitizen
+gender: dcs:Male
+
+Node: dcid:Percent_Overweight_In_Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person
 healthBehavior: dcs:Overweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Overweight_Citizen_Female_AsAFractionOf_Count_Person_Citizen_Female
+Node: dcid:Percent_Overweight_In_Count_Person_Citizen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen
+healthBehavior: dcs:Overweight
+citizenship: dcs:Citizen
+
+Node: dcid:Percent_Overweight_In_Count_Person_CitizenOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
+healthBehavior: dcs:Overweight
+citizenship: dcs:CitizenOutsideEU28
+
+Node: dcid:Percent_Overweight_In_Count_Person_CitizenOutsideEU28_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
+healthBehavior: dcs:Overweight
+citizenship: dcs:CitizenOutsideEU28
+gender: dcs:Female
+
+Node: dcid:Percent_Overweight_In_Count_Person_CitizenOutsideEU28_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
+healthBehavior: dcs:Overweight
+citizenship: dcs:CitizenOutsideEU28
+gender: dcs:Male
+
+Node: dcid:Percent_Overweight_In_Count_Person_Citizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Citizen_Female
 healthBehavior: dcs:Overweight
-gender: dcs:Female
 citizenship: dcs:Citizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Female
 
-Node: dcid:Count_Person_Overweight_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOf_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+Node: dcid:Percent_Overweight_In_Count_Person_Citizen_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen_Male
 healthBehavior: dcs:Overweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+citizenship: dcs:Citizen
+gender: dcs:Male
 
-Node: dcid:Count_Person_Overweight_Male_AsAFractionOf_Count_Person_Male
+Node: dcid:Percent_Overweight_In_Count_Person_Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBorn
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf20To40Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf40To60Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf60To80Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_LimitedActivityLimitation
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_Native
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+nativity: dcs:Native
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_NoActivityLimitation
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_SemiUrban
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_Female_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:Overweight
+gender: dcs:Female
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Overweight_In_Count_Person_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBorn
+healthBehavior: dcs:Overweight
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_Overweight_In_Count_Person_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
+healthBehavior: dcs:Overweight
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_Overweight_In_Count_Person_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
+healthBehavior: dcs:Overweight
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Overweight_In_Count_Person_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf0To20Percentile
+healthBehavior: dcs:Overweight
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf20To40Percentile
+healthBehavior: dcs:Overweight
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf40To60Percentile
+healthBehavior: dcs:Overweight
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf60To80Percentile
+healthBehavior: dcs:Overweight
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf80To100Percentile
+healthBehavior: dcs:Overweight
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+
+Node: dcid:Percent_Overweight_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Overweight_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Overweight_In_Count_Person_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LimitedActivityLimitation
+healthBehavior: dcs:Overweight
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Male
 healthBehavior: dcs:Overweight
 gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Overweight_Male_ForeignBornOutsideEU28_AsAFractionOf_Count_Person_Male_ForeignBornOutsideEU28
+Node: dcid:Percent_Overweight_In_Count_Person_Male_ForeignBorn
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBorn
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Male_ForeignBornOutsideEU28
 healthBehavior: dcs:Overweight
 gender: dcs:Male
 nativity: dcs:ForeignBornOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Overweight_Male_ForeignBorn_AsAFractionOf_Count_Person_Male_ForeignBorn
+Node: dcid:Percent_Overweight_In_Count_Person_Male_ForeignBornWithinEU28
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBornWithinEU28
 healthBehavior: dcs:Overweight
 gender: dcs:Male
-nativity: dcs:ForeignBorn
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+nativity: dcs:ForeignBornWithinEU28
 
-Node: dcid:Count_Person_Overweight_Male_Native_AsAFractionOf_Count_Person_Male_Native
+Node: dcid:Percent_Overweight_In_Count_Person_Male_IncomeOf0To20Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf0To20Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf20To40Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf40To60Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf60To80Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf80To100Percentile
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_LimitedActivityLimitation
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ModerateActivityLimitation
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Male_Native
 healthBehavior: dcs:Overweight
 gender: dcs:Male
 nativity: dcs:Native
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Overweight_ModerateActivityLimitation_AsAFractionOf_Count_Person_ModerateActivityLimitation
+Node: dcid:Percent_Overweight_In_Count_Person_Male_NoActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_NoActivityLimitation
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_SemiUrban
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_Male_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:Overweight
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Overweight_In_Count_Person_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
 healthBehavior: dcs:Overweight
-physicalActivityEffortLevel: dcs:ModerateActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 
-Node: dcid:Count_Person_Overweight_NotACitizen_Female_AsAFractionOf_Count_Person_NotACitizen_Female
+Node: dcid:Percent_Overweight_In_Count_Person_Native
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Native
+healthBehavior: dcs:Overweight
+nativity: dcs:Native
+
+Node: dcid:Percent_Overweight_In_Count_Person_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NoActivityLimitation
+healthBehavior: dcs:Overweight
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_NotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen
+healthBehavior: dcs:Overweight
+citizenship: dcs:NotACitizen
+
+Node: dcid:Percent_Overweight_In_Count_Person_NotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
 healthBehavior: dcs:Overweight
-gender: dcs:Female
 citizenship: dcs:NotACitizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Overweight_Percentile80To100_AsAFractionOf_Count_Person_Percentile80To100
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Percentile80To100
-income: [80 100 Percentile]
-healthBehavior: dcs:Overweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Overweight_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOf_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-healthBehavior: dcs:Overweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Count_Person_Overweight_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOf_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-healthBehavior: dcs:Overweight
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Overweight_WithinEU28AndNotACitizen_Female_AsAFractionOf_Count_Person_WithinEU28AndNotACitizen_Female
+Node: dcid:Percent_Overweight_In_Count_Person_NotACitizen_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen_Male
+healthBehavior: dcs:Overweight
+citizenship: dcs:NotACitizen
+gender: dcs:Male
+
+Node: dcid:Percent_Overweight_In_Count_Person_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural
+healthBehavior: dcs:Overweight
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Overweight_In_Count_Person_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban
+healthBehavior: dcs:Overweight
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Overweight_In_Count_Person_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SevereActivityLimitation
+healthBehavior: dcs:Overweight
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Overweight_In_Count_Person_TertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:TertiaryEducation
+
+Node: dcid:Percent_Overweight_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+
+Node: dcid:Percent_Overweight_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+gender: dcs:Female
+
+Node: dcid:Percent_Overweight_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+gender: dcs:Male
+
+Node: dcid:Percent_Overweight_In_Count_Person_TertiaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Overweight_In_Count_Person_TertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Overweight_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+
+Node: dcid:Percent_Overweight_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Overweight_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+healthBehavior: dcs:Overweight
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Overweight_In_Count_Person_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban
+healthBehavior: dcs:Overweight
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Overweight_In_Count_Person_WithinEU28AndNotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
+healthBehavior: dcs:Overweight
+citizenship: dcs:WithinEU28AndNotACitizen
+
+Node: dcid:Percent_Overweight_In_Count_Person_WithinEU28AndNotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
 healthBehavior: dcs:Overweight
-gender: dcs:Female
 citizenship: dcs:WithinEU28AndNotACitizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Female
 
-Node: dcid:Count_Person_PreObese_CitizenOutsideEU28_Female_AsAFractionOf_Count_Person_CitizenOutsideEU28_Female
+Node: dcid:Percent_Overweight_In_Count_Person_WithinEU28AndNotACitizen_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
+healthBehavior: dcs:Overweight
+citizenship: dcs:WithinEU28AndNotACitizen
+gender: dcs:Male
+
+Node: dcid:Percent_PreObese_In_Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person
+healthBehavior: dcs:PreObese
+
+Node: dcid:Percent_PreObese_In_Count_Person_Citizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen
+healthBehavior: dcs:PreObese
+citizenship: dcs:Citizen
+
+Node: dcid:Percent_PreObese_In_Count_Person_CitizenOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
+healthBehavior: dcs:PreObese
+citizenship: dcs:CitizenOutsideEU28
+
+Node: dcid:Percent_PreObese_In_Count_Person_CitizenOutsideEU28_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
 healthBehavior: dcs:PreObese
-gender: dcs:Female
 citizenship: dcs:CitizenOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Female
 
-Node: dcid:Count_Person_PreObese_CitizenOutsideEU28_Male_AsAFractionOf_Count_Person_CitizenOutsideEU28_Male
+Node: dcid:Percent_PreObese_In_Count_Person_CitizenOutsideEU28_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
 healthBehavior: dcs:PreObese
-gender: dcs:Male
 citizenship: dcs:CitizenOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Male
 
-Node: dcid:Count_Person_PreObese_Citizen_Female_AsAFractionOf_Count_Person_Citizen_Female
+Node: dcid:Percent_PreObese_In_Count_Person_Citizen_Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Citizen_Female
 healthBehavior: dcs:PreObese
-gender: dcs:Female
 citizenship: dcs:Citizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Female
 
-Node: dcid:Count_Person_PreObese_Citizen_Male_AsAFractionOf_Count_Person_Citizen_Male
+Node: dcid:Percent_PreObese_In_Count_Person_Citizen_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Citizen_Male
 healthBehavior: dcs:PreObese
-gender: dcs:Male
 citizenship: dcs:Citizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Male
 
-Node: dcid:Count_Person_PreObese_Female_LimitedActivityLimitation_AsAFractionOf_Count_Person_Female_LimitedActivityLimitation
+Node: dcid:Percent_PreObese_In_Count_Person_Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBorn
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+income: [0 20 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf20To40Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+income: [20 40 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf40To60Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+income: [40 60 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf60To80Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+income: [60 80 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+income: [80 100 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Female_LimitedActivityLimitation
 healthBehavior: dcs:PreObese
-physicalActivityEffortLevel: dcs:LimitedActivityLimitation
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 
-Node: dcid:Count_Person_PreObese_Female_Percentile20To40_AsAFractionOf_Count_Person_Female_Percentile20To40
+Node: dcid:Percent_PreObese_In_Count_Person_Female_ModerateActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Percentile20To40
-income: [20 40 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
 healthBehavior: dcs:PreObese
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 
-Node: dcid:Count_Person_PreObese_Female_SevereActivityLimitation_AsAFractionOf_Count_Person_Female_SevereActivityLimitation
+Node: dcid:Percent_PreObese_In_Count_Person_Female_Native
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_Native
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+nativity: dcs:Native
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_NoActivityLimitation
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_SemiUrban
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_PreObese_In_Count_Person_Female_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
 healthBehavior: dcs:PreObese
-physicalActivityEffortLevel: dcs:SevereActivityLimitation
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
 
-Node: dcid:Count_Person_PreObese_Male_SemiUrban_AsAFractionOf_Count_Person_Male_SemiUrban
+Node: dcid:Percent_PreObese_In_Count_Person_Female_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:PreObese
+gender: dcs:Female
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_PreObese_In_Count_Person_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBorn
+healthBehavior: dcs:PreObese
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_PreObese_In_Count_Person_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
+healthBehavior: dcs:PreObese
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_PreObese_In_Count_Person_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
+healthBehavior: dcs:PreObese
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_PreObese_In_Count_Person_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf0To20Percentile
+healthBehavior: dcs:PreObese
+income: [0 20 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf20To40Percentile
+healthBehavior: dcs:PreObese
+income: [20 40 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf40To60Percentile
+healthBehavior: dcs:PreObese
+income: [40 60 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf60To80Percentile
+healthBehavior: dcs:PreObese
+income: [60 80 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf80To100Percentile
+healthBehavior: dcs:PreObese
+income: [80 100 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+healthBehavior: dcs:PreObese
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+
+Node: dcid:Percent_PreObese_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+healthBehavior: dcs:PreObese
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_PreObese_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+healthBehavior: dcs:PreObese
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_PreObese_In_Count_Person_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LimitedActivityLimitation
+healthBehavior: dcs:PreObese
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBorn
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBornOutsideEU28
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBornWithinEU28
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf0To20Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+income: [0 20 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf20To40Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+income: [20 40 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf40To60Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+income: [40 60 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf60To80Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+income: [60 80 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf80To100Percentile
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+income: [80 100 Percentile]
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_LimitedActivityLimitation
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ModerateActivityLimitation
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_Native
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+nativity: dcs:Native
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_NoActivityLimitation
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_PreObese_In_Count_Person_Male_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Male_SemiUrban
 healthBehavior: dcs:PreObese
-placeOfResidenceClassification: dcs:SemiUrban
 gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Count_Person_PreObese_Percentile0To20_AsAFractionOf_Count_Person_Percentile0To20
+Node: dcid:Percent_PreObese_In_Count_Person_Male_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Percentile0To20
-income: [0 20 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
 healthBehavior: dcs:PreObese
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
 
-Node: dcid:Count_Person_PreObese_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOf_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+Node: dcid:Percent_PreObese_In_Count_Person_Male_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:PreObese
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_PreObese_In_Count_Person_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
+healthBehavior: dcs:PreObese
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_PreObese_In_Count_Person_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Native
+healthBehavior: dcs:PreObese
+nativity: dcs:Native
+
+Node: dcid:Percent_PreObese_In_Count_Person_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NoActivityLimitation
+healthBehavior: dcs:PreObese
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_PreObese_In_Count_Person_NotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen
+healthBehavior: dcs:PreObese
+citizenship: dcs:NotACitizen
+
+Node: dcid:Percent_PreObese_In_Count_Person_NotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen_Female
+healthBehavior: dcs:PreObese
+citizenship: dcs:NotACitizen
+gender: dcs:Female
+
+Node: dcid:Percent_PreObese_In_Count_Person_NotACitizen_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen_Male
+healthBehavior: dcs:PreObese
+citizenship: dcs:NotACitizen
+gender: dcs:Male
+
+Node: dcid:Percent_PreObese_In_Count_Person_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural
+healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_PreObese_In_Count_Person_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban
+healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_PreObese_In_Count_Person_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SevereActivityLimitation
+healthBehavior: dcs:PreObese
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_PreObese_In_Count_Person_TertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+healthBehavior: dcs:PreObese
+educationalAttainment: dcs:TertiaryEducation
+
+Node: dcid:Percent_PreObese_In_Count_Person_TertiaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+healthBehavior: dcs:PreObese
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_PreObese_In_Count_Person_TertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+healthBehavior: dcs:PreObese
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_PreObese_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 healthBehavior: dcs:PreObese
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 
-Node: dcid:Count_Person_Underweight_AsAFractionOf_Count_Person
+Node: dcid:Percent_PreObese_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+healthBehavior: dcs:PreObese
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_PreObese_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+healthBehavior: dcs:PreObese
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_PreObese_In_Count_Person_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban
+healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_PreObese_In_Count_Person_WithinEU28AndNotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
+healthBehavior: dcs:PreObese
+citizenship: dcs:WithinEU28AndNotACitizen
+
+Node: dcid:Percent_PreObese_In_Count_Person_WithinEU28AndNotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
+healthBehavior: dcs:PreObese
+citizenship: dcs:WithinEU28AndNotACitizen
+gender: dcs:Female
+
+Node: dcid:Percent_PreObese_In_Count_Person_WithinEU28AndNotACitizen_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
+healthBehavior: dcs:PreObese
+citizenship: dcs:WithinEU28AndNotACitizen
+gender: dcs:Male
+
+Node: dcid:Percent_Underweight_In_Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person
 healthBehavior: dcs:Underweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Underweight_Female_AsAFractionOf_Count_Person_Female
+Node: dcid:Percent_Underweight_In_Count_Person_Citizen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen
+healthBehavior: dcs:Underweight
+citizenship: dcs:Citizen
+
+Node: dcid:Percent_Underweight_In_Count_Person_CitizenOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
+healthBehavior: dcs:Underweight
+citizenship: dcs:CitizenOutsideEU28
+
+Node: dcid:Percent_Underweight_In_Count_Person_CitizenOutsideEU28_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
+healthBehavior: dcs:Underweight
+citizenship: dcs:CitizenOutsideEU28
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_CitizenOutsideEU28_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
+healthBehavior: dcs:Underweight
+citizenship: dcs:CitizenOutsideEU28
+gender: dcs:Male
+
+Node: dcid:Percent_Underweight_In_Count_Person_Citizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen_Female
+healthBehavior: dcs:Underweight
+citizenship: dcs:Citizen
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_Citizen_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Citizen_Male
+healthBehavior: dcs:Underweight
+citizenship: dcs:Citizen
+gender: dcs:Male
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Female
 healthBehavior: dcs:Underweight
 gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Underweight_ForeignBornOutsideEU28_AsAFractionOf_Count_Person_ForeignBornOutsideEU28
+Node: dcid:Percent_Underweight_In_Count_Person_Female_ForeignBorn
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBorn
 healthBehavior: dcs:Underweight
-nativity: dcs:ForeignBornOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+gender: dcs:Female
+nativity: dcs:ForeignBorn
 
-Node: dcid:Count_Person_Underweight_ForeignBorn_AsAFractionOf_Count_Person_ForeignBorn
+Node: dcid:Percent_Underweight_In_Count_Person_Female_ForeignBornOutsideEU28
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf20To40Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf40To60Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf60To80Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_LimitedActivityLimitation
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_Native
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+nativity: dcs:Native
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_NoActivityLimitation
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_SemiUrban
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Female_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:Underweight
+gender: dcs:Female
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Underweight_In_Count_Person_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_ForeignBorn
 healthBehavior: dcs:Underweight
 nativity: dcs:ForeignBorn
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Underweight_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOf_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+Node: dcid:Percent_Underweight_In_Count_Person_ForeignBornOutsideEU28
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
 healthBehavior: dcs:Underweight
-statType: dcs:measuredValue
-measuredProperty: dcs:count
+nativity: dcs:ForeignBornOutsideEU28
 
-Node: dcid:Count_Person_Underweight_Male_Percentile0To20_AsAFractionOf_Count_Person_Male_Percentile0To20
+Node: dcid:Percent_Underweight_In_Count_Person_ForeignBornWithinEU28
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Percentile0To20
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
+healthBehavior: dcs:Underweight
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Underweight_In_Count_Person_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf0To20Percentile
+healthBehavior: dcs:Underweight
 income: [0 20 Percentile]
-healthBehavior: dcs:Underweight
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Underweight_Male_Percentile20To40_AsAFractionOf_Count_Person_Male_Percentile20To40
+Node: dcid:Percent_Underweight_In_Count_Person_IncomeOf20To40Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Percentile20To40
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf20To40Percentile
+healthBehavior: dcs:Underweight
 income: [20 40 Percentile]
-healthBehavior: dcs:Underweight
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Underweight_Male_Percentile40To60_AsAFractionOf_Count_Person_Male_Percentile40To60
+Node: dcid:Percent_Underweight_In_Count_Person_IncomeOf40To60Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Percentile40To60
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf40To60Percentile
+healthBehavior: dcs:Underweight
 income: [40 60 Percentile]
-healthBehavior: dcs:Underweight
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Underweight_Male_Percentile60To80_AsAFractionOf_Count_Person_Male_Percentile60To80
+Node: dcid:Percent_Underweight_In_Count_Person_IncomeOf60To80Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_Percentile60To80
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf60To80Percentile
+healthBehavior: dcs:Underweight
 income: [60 80 Percentile]
-healthBehavior: dcs:Underweight
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
 
-Node: dcid:Count_Person_Underweight_Native_AsAFractionOf_Count_Person_Native
+Node: dcid:Percent_Underweight_In_Count_Person_IncomeOf80To100Percentile
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_IncomeOf80To100Percentile
+healthBehavior: dcs:Underweight
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+
+Node: dcid:Percent_Underweight_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Underweight_In_Count_Person_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_LimitedActivityLimitation
+healthBehavior: dcs:Underweight
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_ForeignBorn
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBorn
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+nativity: dcs:ForeignBorn
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_ForeignBornOutsideEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBornOutsideEU28
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+nativity: dcs:ForeignBornOutsideEU28
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_ForeignBornWithinEU28
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ForeignBornWithinEU28
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+nativity: dcs:ForeignBornWithinEU28
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_IncomeOf0To20Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf0To20Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+income: [0 20 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_IncomeOf20To40Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf20To40Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+income: [20 40 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_IncomeOf40To60Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf40To60Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+income: [40 60 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_IncomeOf60To80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf60To80Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+income: [60 80 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_IncomeOf80To100Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_IncomeOf80To100Percentile
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+income: [80 100 Percentile]
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_LimitedActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_LimitedActivityLimitation
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_ModerateActivityLimitation
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_Native
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+nativity: dcs:Native
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_NoActivityLimitation
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_SemiUrban
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Male_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:Underweight
+gender: dcs:Male
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Underweight_In_Count_Person_ModerateActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
+healthBehavior: dcs:Underweight
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_Native
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Native
 healthBehavior: dcs:Underweight
 nativity: dcs:Native
+
+Node: dcid:Percent_Underweight_In_Count_Person_NoActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NoActivityLimitation
+healthBehavior: dcs:Underweight
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_NotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen
+healthBehavior: dcs:Underweight
+citizenship: dcs:NotACitizen
+
+Node: dcid:Percent_Underweight_In_Count_Person_NotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen_Female
+healthBehavior: dcs:Underweight
+citizenship: dcs:NotACitizen
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_NotACitizen_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_NotACitizen_Male
+healthBehavior: dcs:Underweight
+citizenship: dcs:NotACitizen
+gender: dcs:Male
+
+Node: dcid:Percent_Underweight_In_Count_Person_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural
+healthBehavior: dcs:Underweight
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Percent_Underweight_In_Count_Person_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban
+healthBehavior: dcs:Underweight
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Underweight_In_Count_Person_SevereActivityLimitation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SevereActivityLimitation
+healthBehavior: dcs:Underweight
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
+
+Node: dcid:Percent_Underweight_In_Count_Person_TertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:TertiaryEducation
+
+Node: dcid:Percent_Underweight_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+
+Node: dcid:Percent_Underweight_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
+gender: dcs:Male
+
+Node: dcid:Percent_Underweight_In_Count_Person_TertiaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_TertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:TertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Underweight_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+
+Node: dcid:Percent_Underweight_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+healthBehavior: dcs:Underweight
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: dcs:Male
+
+Node: dcid:Percent_Underweight_In_Count_Person_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban
+healthBehavior: dcs:Underweight
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Underweight_In_Count_Person_WithinEU28AndNotACitizen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
+healthBehavior: dcs:Underweight
+citizenship: dcs:WithinEU28AndNotACitizen
+
+Node: dcid:Percent_Underweight_In_Count_Person_WithinEU28AndNotACitizen_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
+healthBehavior: dcs:Underweight
+citizenship: dcs:WithinEU28AndNotACitizen
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_WithinEU28AndNotACitizen_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
+healthBehavior: dcs:Underweight
+citizenship: dcs:WithinEU28AndNotACitizen
+gender: dcs:Male

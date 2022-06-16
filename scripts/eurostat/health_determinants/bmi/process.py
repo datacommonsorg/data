@@ -132,9 +132,9 @@ def _age_sex_education(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _replace_sex(data_df)
     data_df = _replace_isced11(data_df)
     # Creating SV using the DataFrame Values
-    data_df['SV'] = 'Percent_'+data_df['bmi'] + '_' + \
-                    'In_Count_Person_'+ data_df['isced11']+\
-                    '_'+data_df['sex']
+    data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
+                    'In_Count_Person_' + data_df['isced11'] +\
+                    '_' + data_df['sex']
     data_df.drop(columns=['unit', 'age', 'isced11', 'bmi', 'sex'], inplace=True)
     data_df = data_df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
@@ -156,17 +156,16 @@ def _age_sex_education_history(data_df: pd.DataFrame) -> pd.DataFrame:
         'FR', 'CY', 'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK', 'TR'
     ]
     data_df.columns = df_cols
-    multiple_cols = "isced11,bmi,sex,age,time"
     # Splits the DataFrame having mulitple column data
     # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, multiple_cols)
+    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the required rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
     data_df = _replace_bmi(data_df)
     data_df = _replace_sex(data_df)
     data_df = _replace_isced11(data_df)
-    data_df['SV'] = 'Percent_'+data_df['bmi']+'_'+ \
-                    'In_Count_Person_' +data_df['isced11']+\
+    data_df['SV'] = 'Percent_'+ data_df['bmi'] +'_' + \
+                    'In_Count_Person_' + data_df['isced11'] + \
                     '_' + data_df['sex']
     data_df.drop(columns=['isced11', 'bmi', 'sex', 'age'], inplace=True)
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -187,18 +186,17 @@ def _age_sex_income(data_df: pd.DataFrame) -> pd.DataFrame:
     """
     df_cols = ['unit,bmi,quant_inc,sex,age,geo', '2019', '2014']
     data_df.columns = df_cols
-    multiple_cols = "unit,bmi,quant_inc,sex,age,geo"
     # Splits the DataFrame having mulitple column data
     # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, multiple_cols)
+    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
     data_df = data_df[~(data_df['geo'].isin(['EU27_2020', 'EU28']))]
     data_df = _replace_bmi(data_df)
     data_df = _replace_sex(data_df)
     data_df = _replace_quant_inc(data_df)
-    data_df['SV'] = 'Percent_'+data_df['bmi']+'_'+ \
-                    'In_Count_Person_' +data_df['sex']+\
+    data_df['SV'] = 'Percent_'+ data_df['bmi'] +'_' + \
+                    'In_Count_Person_' + data_df['sex'] + \
                     '_' + data_df['quant_inc']
 
     data_df.drop(columns=['unit', 'age', 'quant_inc', 'bmi', 'sex'],
@@ -224,18 +222,17 @@ def _age_sex_income_history(data_df: pd.DataFrame) -> pd.DataFrame:
         'FR', 'CY', 'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK', 'TR'
     ]
     data_df.columns = df_cols
-    multiple_cols = "bmi,sex,age,quant_inc,time"
     # Splits the DataFrame having mulitple column data
     # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, multiple_cols)
+    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the required rows and columns
     data_df = data_df[(data_df['age'] == 'TOTAL') &
                       (~(data_df['quant_inc'] == 'UNK'))]
     data_df = _replace_bmi(data_df)
     data_df = _replace_sex(data_df)
     data_df = _replace_quant_inc(data_df)
-    data_df['SV'] = 'Percent_'+data_df['bmi']+'_'+\
-                    'In_Count_Person_' +data_df['sex']+\
+    data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
+                    'In_Count_Person_' + data_df['sex'] + \
                     '_' + data_df['quant_inc']
 
     data_df.drop(columns=['quant_inc', 'bmi', 'sex', 'age'], inplace=True)
@@ -256,17 +253,16 @@ def _age_sex_degree_urbanisation(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    cols = [
+    df_cols = [
         'bmi,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ',
         'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
         'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
         'IS', 'NO', 'UK', 'TR'
     ]
-    data_df.columns = cols
-    multiple_cols = "bmi,deg_urb,sex,age,unit,time"
+    data_df.columns = df_cols
     # Splits the DataFrame having mulitple column data
     # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, multiple_cols)
+    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
     data_df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
@@ -274,8 +270,8 @@ def _age_sex_degree_urbanisation(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _replace_sex(data_df)
     data_df = _replace_deg_urb(data_df)
     data_df.drop(columns=['unit', 'age'], inplace=True)
-    data_df['SV'] = 'Percent_'+data_df['bmi']+'_'+ \
-                    'In_Count_Person_' +data_df['deg_urb']+\
+    data_df['SV'] = 'Percent_' + data_df['bmi'] +'_' + \
+                    'In_Count_Person_' + data_df['deg_urb'] + \
                     '_' + data_df['sex']
     #print(data_df.head())
     data_df.drop(columns=['deg_urb', 'bmi', 'sex'], inplace=True)
@@ -295,17 +291,16 @@ def _age_sex_birth_country(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    cols = [
+    df_cols = [
         'unit,bmi,sex,age,c_birth,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ',
         'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
         'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
         'IS', 'NO', 'UK', 'TR'
     ]
-    data_df.columns = cols
-    multiple_cols = "unit,bmi,sex,age,c_birth,time"
+    data_df.columns = df_cols
     # Splits the DataFrame having mulitple column data
     # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, multiple_cols)
+    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
     data_df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
@@ -313,8 +308,8 @@ def _age_sex_birth_country(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _replace_sex(data_df)
     data_df = _replace_c_birth(data_df)
     data_df.drop(columns=['unit', 'age'], inplace=True)
-    data_df['SV'] = 'Percent_'+data_df['bmi']+'_'+ \
-                    'In_Count_Person_' +data_df['sex']+\
+    data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
+                    'In_Count_Person_' + data_df['sex'] + \
                     '_' + data_df['c_birth']
     data_df.drop(columns=['c_birth', 'bmi', 'sex'], inplace=True)
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -333,17 +328,16 @@ def _age_sex_citizenship_country(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    cols = [
+    df_cols = [
         'unit,bmi,sex,age,citizen,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ',
         'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
         'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
         'IS', 'NO', 'UK', 'TR'
     ]
-    data_df.columns = cols
-    multiple_cols = "unit,bmi,sex,age,citizen,time"
+    data_df.columns = df_cols
     # Splits the DataFrame having mulitple column data
     # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, multiple_cols)
+    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
     data_df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
@@ -352,9 +346,9 @@ def _age_sex_citizenship_country(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _replace_citizen(data_df)
 
     data_df.drop(columns=['unit', 'age'], inplace=True)
-    data_df['SV'] = 'Percent_'+data_df['bmi']+'_'+\
-                    'In_Count_Person_' +\
-                    data_df['citizen']+'_' + data_df['sex']
+    data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
+                    'In_Count_Person_' + \
+                    data_df['citizen'] + '_' + data_df['sex']
     data_df.drop(columns=['citizen', 'bmi', 'sex'], inplace=True)
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -372,17 +366,16 @@ def _age_sex_acitivity_limitation(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    cols = [
+    df_cols = [
         'bmi,lev_limit,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE', 'BG',
         'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV',
         'LT', 'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI',
         'SE', 'IS', 'NO', 'UK', 'TR'
     ]
-    data_df.columns = cols
-    multiple_cols = "bmi,lev_limit,sex,age,unit,time"
+    data_df.columns = df_cols
     # Splits the DataFrame having mulitple column data
     # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, multiple_cols)
+    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
     data_df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
@@ -390,9 +383,9 @@ def _age_sex_acitivity_limitation(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _replace_sex(data_df)
     data_df = _replace_lev_limit(data_df)
     data_df.drop(columns=['unit', 'age'], inplace=True)
-    data_df['SV'] = 'Percent_'+data_df['bmi']+'_'+\
-                    'In_Count_Person_' +\
-                    data_df['sex']+'_' + data_df['lev_limit']
+    data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
+                    'In_Count_Person_' + \
+                    data_df['sex'] + '_' + data_df['lev_limit']
     data_df.drop(columns=['lev_limit', 'bmi', 'sex'], inplace=True)
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
