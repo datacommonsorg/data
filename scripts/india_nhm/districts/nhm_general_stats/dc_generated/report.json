@@ -1,0 +1,2775 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "7786",
+        "NumPVSuccesses": "409503",
+        "Existence_NumChecks": "411339",
+        "NumNodeSuccesses": "50667",
+        "Resolution_NumDcCalls": "202",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "Existence_MissingReference_measurementMethod": "43109",
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "42",
+        "StatsCheck_3_Sigma": "5",
+        "StrSplit_EmptyToken_value": "3607",
+        "Sanity_MissingOrEmpty_value": "3607",
+        "Existence_MissingReference_variableMeasured": "6898",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "43",
+        "StatsCheck_Data_Holes": "1"
+      }
+    },
+    "LEVEL_ERROR": {
+      "counters": {
+        "Resolution_IrreplaceableLocalRef": "192",
+        "Resolution_UnresolvedExternalId_lgdCode": "36",
+        "Resolution_DcidAssignmentFailure_AdministrativeArea2": "36",
+        "Resolution_UnassignableNodeDcid": "192"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Major', property: 'value', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E2/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E1/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E4/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E5/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E7/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E6/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E2/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E1/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E4/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E5/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E7/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8', node: 'NHM_GeneralStats/E6/92a3ab81-2f3a-d6c0-7e7d-f92f4909c3f8'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E7/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E2/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E1/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E5/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E4/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E6/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E7/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E2/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E1/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E5/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E4/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/b1dcd631-f948-e980-bd19-e7ea19e6568f', node: 'NHM_GeneralStats/E6/b1dcd631-f948-e980-bd19-e7ea19e6568f'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E6/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E1/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E5/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E7/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E4/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E2/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E6/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E1/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E5/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E7/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E4/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/41ed8f80-56d1-1b55-6696-4041028ac461', node: 'NHM_GeneralStats/E2/41ed8f80-56d1-1b55-6696-4041028ac461'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient_Ayush', property: 'value', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient', property: 'value', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Minor', property: 'value', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Major', property: 'value', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient', property: 'value', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Inpatient', property: 'value', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "668"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient_Ayush', property: 'value', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient', property: 'value', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Minor', property: 'value', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Major', property: 'value', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient', property: 'value', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Inpatient', property: 'value', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "669"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient_Ayush', property: 'value', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient', property: 'value', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Minor', property: 'value', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Major', property: 'value', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient', property: 'value', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Inpatient', property: 'value', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "670"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "671"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient_Ayush', property: 'value', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "671"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "672"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient_Ayush', property: 'value', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "672"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "672"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Minor', property: 'value', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "672"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "672"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Major', property: 'value', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "672"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "673"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient_Ayush', property: 'value', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "673"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "675"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Minor', property: 'value', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "675"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "675"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Major', property: 'value', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "675"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "677"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient_Ayush', property: 'value', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "677"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "677"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Minor', property: 'value', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "677"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "677"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_SurgicalProcedure_Major', property: 'value', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "677"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "687"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Outpatient_Ayush', property: 'value', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "687"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_GeneralStats->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E4/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E1/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E6/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E2/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E7/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E5/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E4/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E1/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E6/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E2/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E7/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/e3c818cc-de27-5a4a-61c0-cea0a2785a5c', node: 'NHM_GeneralStats/E5/e3c818cc-de27-5a4a-61c0-cea0a2785a5c'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "797"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/5a7515c7-d4c3-2660-47ac-bf6998abf5b2",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "797"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/5a7515c7-d4c3-2660-47ac-bf6998abf5b2'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "798"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/74df4d02-de8e-d9c9-a72b-10237200fb9e",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "798"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/74df4d02-de8e-d9c9-a72b-10237200fb9e'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E5/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E1/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E7/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E2/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E6/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E4/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E5/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E1/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E7/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E2/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E6/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_GeneralStats/E0/777a3519-9eaa-97e1-152e-667351376a83', node: 'NHM_GeneralStats/E4/777a3519-9eaa-97e1-152e-667351376a83'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1434"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/ece60f5f-dab6-a7aa-5e6c-80270dea46e7",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1434"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/ece60f5f-dab6-a7aa-5e6c-80270dea46e7'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1435"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/5048059e-3bec-6432-be3e-0a58b7a128ac",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "1435"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/5048059e-3bec-6432-be3e-0a58b7a128ac'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2069"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/014e5236-72bd-0b36-313f-51fe93cf49f3",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2069"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/014e5236-72bd-0b36-313f-51fe93cf49f3'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2070"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/33684b07-8e10-8069-5b45-1dc9af044756",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2070"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/33684b07-8e10-8069-5b45-1dc9af044756'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2071"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/ce8c0964-c986-ec68-fcc6-bcd4615c3843",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2071"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/ce8c0964-c986-ec68-fcc6-bcd4615c3843'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2697"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/db3fed02-9d2f-9753-51b0-c9a9f56811cb",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2697"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/db3fed02-9d2f-9753-51b0-c9a9f56811cb'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2698"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/fc197f1b-074e-1a24-2492-9a89b0964cbb",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2698"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/fc197f1b-074e-1a24-2492-9a89b0964cbb'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2699"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/4d3cfc9d-28c3-41bf-78b8-3f1252e9955a",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2699"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/4d3cfc9d-28c3-41bf-78b8-3f1252e9955a'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3366"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/b9940fed-0973-2215-2863-1b6d41f1bd35",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3366"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/b9940fed-0973-2215-2863-1b6d41f1bd35'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3367"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/d7a373a1-4dcb-1b1a-42d6-e64a0ea72631",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3367"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/d7a373a1-4dcb-1b1a-42d6-e64a0ea72631'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3368"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/3a29484d-ecc6-4c7f-fb7f-a1b60d1c4283",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3368"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/3a29484d-ecc6-4c7f-fb7f-a1b60d1c4283'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3997"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/b36106a1-11ff-2883-0780-f9ebffbb4a0e",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3997"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/b36106a1-11ff-2883-0780-f9ebffbb4a0e'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3998"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/aa4477ae-e166-0aa0-b7b5-63179af4575c",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3998"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/aa4477ae-e166-0aa0-b7b5-63179af4575c'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3999"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/f578f269-2bda-5a48-29b6-cf20d295be57",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3999"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/f578f269-2bda-5a48-29b6-cf20d295be57'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4671"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/88f87ff4-7f2b-3160-ed2f-4e249e92451c",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4671"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/88f87ff4-7f2b-3160-ed2f-4e249e92451c'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4672"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/d8d9bb42-8c42-11e9-3291-cb9f6fe7afaf",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4672"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/d8d9bb42-8c42-11e9-3291-cb9f6fe7afaf'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4673"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/37c9f6d7-b89d-27f3-90f0-4ddbe1bd0e6f",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4673"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/37c9f6d7-b89d-27f3-90f0-4ddbe1bd0e6f'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5302"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/a5c9b8ea-f777-5d11-572a-70436770f0ba",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5302"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/a5c9b8ea-f777-5d11-572a-70436770f0ba'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5303"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/1bd21fb4-79b5-6c68-f7ce-8e6c7ac2b7be",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5303"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/1bd21fb4-79b5-6c68-f7ce-8e6c7ac2b7be'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5304"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/0770455f-1607-3368-ff4d-4712e7829621",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5304"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/0770455f-1607-3368-ff4d-4712e7829621'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5975"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_GeneralStats/E0/27756afb-410d-b667-97b8-24db2b3ea6f4",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5975"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/27756afb-410d-b667-97b8-24db2b3ea6f4'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5976"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_GeneralStats/E0/4aec1a2f-49f9-1f7f-fef3-95ad9121386a",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5976"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/4aec1a2f-49f9-1f7f-fef3-95ad9121386a'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5977"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_GeneralStats/E0/2f1a295f-b252-7009-af64-573d15809bb5",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5977"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_GeneralStats/E0/2f1a295f-b252-7009-af64-573d15809bb5'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_Outpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 1208914.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1397"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 2883163.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4635"
+          }]
+        }]
+      }],
+      "percentDifference": 138.49
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "760"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 0.1,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1397"
+          }]
+        }]
+      }],
+      "percentDifference": 1.0E7
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_Outpatient_Ayush",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 52.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1397"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 5766.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4635"
+          }]
+        }]
+      }],
+      "percentDifference": 10988.46
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 21019.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1397"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 93713.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4635"
+          }]
+        }]
+      }],
+      "percentDifference": 345.85
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_SurgicalProcedure_Major",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2011-03",
+        "values": [{
+          "value": 131.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4635"
+          }]
+        }]
+      }, {
+        "date": "2012-03",
+        "values": [{
+          "value": 5222.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "5939"
+          }]
+        }]
+      }],
+      "percentDifference": 3886.26
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_SurgicalProcedure_Minor",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 8504.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "5939"
+          }]
+        }]
+      }, {
+        "date": "2013-03",
+        "values": [{
+          "value": 82473.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "3330"
+          }]
+        }]
+      }],
+      "percentDifference": 869.81
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q16056266",
+    "statVarDcid": "Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2014-03",
+        "values": [{
+          "value": 0.2,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "2047"
+          }]
+        }]
+      }, {
+        "date": "2015-03",
+        "values": [{
+          "value": 2.9,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "7247"
+          }]
+        }]
+      }],
+      "percentDifference": 1350.0
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q16056266",
+    "statVarDcid": "Count_Outpatient_Ayush",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2013-03",
+        "values": [{
+          "value": 4552.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "3344"
+          }]
+        }]
+      }, {
+        "date": "2014-03",
+        "values": [{
+          "value": 10840.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "2047"
+          }]
+        }]
+      }],
+      "percentDifference": 138.14
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q16056266",
+    "statVarDcid": "Count_SurgicalProcedure_Major",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2015-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "7247"
+          }]
+        }]
+      }, {
+        "date": "2016-03",
+        "values": [{
+          "value": 52.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "2675"
+          }]
+        }]
+      }],
+      "percentDifference": 5.2E9
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_Outpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 40536.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1396"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 373808.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4634"
+          }]
+        }]
+      }],
+      "percentDifference": 822.16
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "5938"
+          }]
+        }]
+      }, {
+        "date": "2013-03",
+        "values": [{
+          "value": 0.2,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "3329"
+          }]
+        }]
+      }],
+      "percentDifference": 2.0E7
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_Outpatient_Ayush",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2011-03",
+        "values": [{
+          "value": 11532.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4634"
+          }]
+        }]
+      }, {
+        "date": "2012-03",
+        "values": [{
+          "value": 98658.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "5938"
+          }]
+        }]
+      }],
+      "percentDifference": 755.52
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 896.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1396"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 31394.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4634"
+          }]
+        }]
+      }],
+      "percentDifference": 3403.79
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_SurgicalProcedure_Minor",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 671.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1396"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 2403.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4634"
+          }]
+        }]
+      }],
+      "percentDifference": 258.12
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q321998",
+    "statVarDcid": "Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 21.4,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1372"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2015-03",
+        "values": [{
+          "value": 1.5,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "7208"
+          }]
+        }]
+      }, {
+        "date": "2016-03",
+        "values": [{
+          "value": 4.7,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "2636"
+          }]
+        }]
+      }],
+      "percentDifference": 213.33
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q321998",
+    "statVarDcid": "Count_Outpatient_Ayush",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 2670.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1372"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 12739.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4610"
+          }]
+        }]
+      }],
+      "percentDifference": 377.12
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q321998",
+    "statVarDcid": "Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 4734.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1372"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 12805.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4610"
+          }]
+        }]
+      }],
+      "percentDifference": 170.49
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100082",
+    "statVarDcid": "Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.4,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1398"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 1.8,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4636"
+          }]
+        }]
+      }],
+      "percentDifference": 350.0
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100082",
+    "statVarDcid": "Count_SurgicalProcedure_Minor",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 10760.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1398"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 22900.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4636"
+          }]
+        }]
+      }],
+      "percentDifference": 112.83
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q2574898",
+    "statVarDcid": "Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 1870.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "6523"
+          }]
+        }]
+      }, {
+        "date": "2018-03",
+        "values": [{
+          "value": 6851.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "3914"
+          }]
+        }]
+      }],
+      "percentDifference": 266.36
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q2360266",
+    "statVarDcid": "Count_Outpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 173575.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1347"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 173575.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1347"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 594277.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "4585"
+          }]
+        }]
+      }],
+      "percentDifference": 242.37
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q15212",
+    "statVarDcid": "Count_SurgicalProcedure_Major",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2014-03",
+        "values": [{
+          "value": 481.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1946"
+          }]
+        }]
+      }, {
+        "date": "2015-03",
+        "values": [{
+          "value": 10467.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "7154"
+          }]
+        }]
+      }],
+      "percentDifference": 2076.09
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2010-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2018-03, 2019-03, 2020-03"
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q15213",
+    "statVarDcid": "Count_SurgicalProcedure_Major",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2013-03",
+        "values": [{
+          "value": 273417.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "3244"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 1518.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "5853"
+          }]
+        }]
+      }, {
+        "date": "2013-03",
+        "values": [{
+          "value": 273417.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "3244"
+          }]
+        }]
+      }],
+      "percentDifference": 17911.66
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q2373368",
+    "statVarDcid": "Count_Outpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 12202.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "701"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 12202.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "701"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 49872.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "1338"
+          }]
+        }]
+      }],
+      "percentDifference": 308.72
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q2373368",
+    "statVarDcid": "Count_SurgicalProcedure_Major",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2013-03",
+        "values": [{
+          "value": 436.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "3271"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2015-03",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "7174"
+          }]
+        }]
+      }, {
+        "date": "2016-03",
+        "values": [{
+          "value": 45.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "2601"
+          }]
+        }]
+      }],
+      "percentDifference": 4400.0
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_FULL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

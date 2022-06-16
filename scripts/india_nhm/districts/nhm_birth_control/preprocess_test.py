@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import os
-
 import unittest
 from india_nhm.districts.base.data_cleaner import NHMDataLoaderBase
 
@@ -24,7 +23,7 @@ cols_to_nodes = {
     'District':
         'District',
     'DistrictCode':
-        'DistrictCode',
+        'lgdCode',
     'Date':
         'Date',
     'Number of Vasectomies Conducted (Public + Pvt.)':
@@ -117,7 +116,7 @@ class TestPreprocess(unittest.TestCase):
         result_data = result_file.read()
         result_file.close()
 
-        # os.remove(os.path.join(module_dir_, 'test/test_gen.csv'))
+        os.remove(os.path.join(module_dir_, 'test/test_gen.csv'))
         self.assertEqual(u'{}'.format(expected_data), result_data)
 
 

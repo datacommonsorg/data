@@ -1,0 +1,2485 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "7786",
+        "NumPVSuccesses": "750666",
+        "Existence_NumChecks": "753906",
+        "NumNodeSuccesses": "88574",
+        "Resolution_NumDcCalls": "202",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "Existence_MissingReference_measurementMethod": "81172",
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "38",
+        "StatsCheck_3_Sigma": "1",
+        "StrSplit_EmptyToken_value": "12260",
+        "Sanity_MissingOrEmpty_value": "12260",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "54",
+        "StatsCheck_Data_Holes": "8"
+      }
+    },
+    "LEVEL_ERROR": {
+      "counters": {
+        "Resolution_IrreplaceableLocalRef": "348",
+        "Resolution_UnresolvedExternalId_lgdCode": "36",
+        "Resolution_DcidAssignmentFailure_AdministrativeArea2": "36",
+        "Resolution_UnassignableNodeDcid": "348"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_ChildVaccinationEvent_MMR', property: 'value', node: 'E:NHM_ChildHealth->E9'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E9', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E12/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E7/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E11/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E9/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E8/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E10/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E5/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E1/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E6/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E4/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E2/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E12/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E7/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E11/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E9/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E8/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E10/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E5/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E1/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E6/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E4/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "122"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/426aa59e-c680-1809-2aee-cdbacf00ed91', node: 'NHM_ChildHealth/E2/426aa59e-c680-1809-2aee-cdbacf00ed91'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E5/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E9/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E10/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E2/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E11/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E1/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E12/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E7/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E8/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E4/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E6/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E5/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E9/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E10/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E2/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E11/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E1/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E12/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E7/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E8/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E4/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "123"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48', node: 'NHM_ChildHealth/E6/3f2c3894-c652-83b7-d6cb-a5b9cdcdba48'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E2/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E11/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E6/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E12/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E1/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E4/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E9/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to replace a local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E5/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_IrreplaceableLocalRef"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E2/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E11/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E6/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E12/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E1/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E4/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E9/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "124"
+    },
+    "userMessage": "Unable to assign DCID due to unresolved local reference :: ref: 'NHM_ChildHealth/E0/beb451e5-567a-652a-5fbf-167f26b7b29a', node: 'NHM_ChildHealth/E5/beb451e5-567a-652a-5fbf-167f26b7b29a'",
+    "counterKey": "Resolution_UnassignableNodeDcid"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/874558c3-e649-918f-ee48-7cdf6e6b40f9",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "796"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/874558c3-e649-918f-ee48-7cdf6e6b40f9'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "797"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/6e9e5ad0-62a6-c289-3a3d-23e706ca6782",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "797"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/6e9e5ad0-62a6-c289-3a3d-23e706ca6782'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "798"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/df547bcb-c762-330d-0928-76cb68f8d5bd",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "798"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/df547bcb-c762-330d-0928-76cb68f8d5bd'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E9'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E12'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E10'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E11'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E9'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E12'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E10'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E11'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E9'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/ce217482-f192-8880-5a65-2805a9206c8c",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "1433"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/ce217482-f192-8880-5a65-2805a9206c8c'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "1434"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/63b4e573-19c2-350a-3091-d9fa764b39c1",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "1434"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/63b4e573-19c2-350a-3091-d9fa764b39c1'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "1435"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/82a729c6-a9be-a8e1-8783-504b647c2881",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "1435"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/82a729c6-a9be-a8e1-8783-504b647c2881'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2069"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/cbad9f95-df7b-57b7-6e3f-62bb993ee7e0",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2069"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/cbad9f95-df7b-57b7-6e3f-62bb993ee7e0'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2070"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/af91355a-e2af-b592-8dd6-e4d94a0b2f22",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2070"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/af91355a-e2af-b592-8dd6-e4d94a0b2f22'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2071"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/44d60535-5c11-d5d4-8016-bc21e2f77d64",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2071"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/44d60535-5c11-d5d4-8016-bc21e2f77d64'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2697"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/4d17e2fc-f12c-fdc7-93a3-4a417c188894",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2697"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/4d17e2fc-f12c-fdc7-93a3-4a417c188894'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2698"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/b67b475a-e348-bccf-8d74-9e032ad392ae",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2698"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/b67b475a-e348-bccf-8d74-9e032ad392ae'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2699"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/29b8017a-17ab-807e-7821-4b8adc9433de",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "2699"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/29b8017a-17ab-807e-7821-4b8adc9433de'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3366"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/1e2cd57b-cd36-8536-2dcc-e75a960eb3d8",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3366"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/1e2cd57b-cd36-8536-2dcc-e75a960eb3d8'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3367"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/f045e5db-3659-d5c0-6d51-7a117b7bc1b3",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3367"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/f045e5db-3659-d5c0-6d51-7a117b7bc1b3'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3368"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/3e11df36-f88e-cda4-e55c-f043e1caaadf",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3368"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/3e11df36-f88e-cda4-e55c-f043e1caaadf'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3997"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/9f9b3c17-4d09-baa5-3ff4-52d1a3e2907f",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3997"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/9f9b3c17-4d09-baa5-3ff4-52d1a3e2907f'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3998"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/d83587cd-5ec2-a308-f417-529b3c477689",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3998"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/d83587cd-5ec2-a308-f417-529b3c477689'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3999"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/2485e69e-f977-6440-904a-3c1563fb0108",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3999"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/2485e69e-f977-6440-904a-3c1563fb0108'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4671"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/4c484376-5be2-a0a5-a738-c30ee8633a33",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4671"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/4c484376-5be2-a0a5-a738-c30ee8633a33'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4672"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/8574a8d1-8fca-741d-2f25-5f5bedb00c89",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4672"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/8574a8d1-8fca-741d-2f25-5f5bedb00c89'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4673"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/1214743e-a2a2-7c98-1ec2-134e536b940d",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4673"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/1214743e-a2a2-7c98-1ec2-134e536b940d'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5302"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/c1827b45-71a2-4943-bf1a-b704300ea71c",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5302"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/c1827b45-71a2-4943-bf1a-b704300ea71c'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5303"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/a7777dbc-51d6-97c7-87c5-c8d6dee5b749",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5303"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/a7777dbc-51d6-97c7-87c5-c8d6dee5b749'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5304"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/60814a36-b4e5-5843-8d0e-20ba373b84a8",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5304"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/60814a36-b4e5-5843-8d0e-20ba373b84a8'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5975"
+    },
+    "userMessage": "Unresolved external ID :: id: '465', property: 'lgdCode', node: 'NHM_ChildHealth/E0/88df2675-c150-64a2-6157-453acff018d5",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5975"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/88df2675-c150-64a2-6157-453acff018d5'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5976"
+    },
+    "userMessage": "Unresolved external ID :: id: '463', property: 'lgdCode', node: 'NHM_ChildHealth/E0/043ca59d-54d3-d0cd-f66a-a18f61bad846",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5976"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/043ca59d-54d3-d0cd-f66a-a18f61bad846'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5977"
+    },
+    "userMessage": "Unresolved external ID :: id: '464', property: 'lgdCode', node: 'NHM_ChildHealth/E0/984b158a-8cca-c407-7c17-2ab848cd624c",
+    "counterKey": "Resolution_UnresolvedExternalId_lgdCode"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "5977"
+    },
+    "userMessage": "Failed to assign DCID :: type: 'AdministrativeArea2', node: 'NHM_ChildHealth/E0/984b158a-8cca-c407-7c17-2ab848cd624c'",
+    "counterKey": "Resolution_DcidAssignmentFailure_AdministrativeArea2"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_Death_Infant",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2014-03",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2033"
+          }]
+        }]
+      }, {
+        "date": "2016-03",
+        "values": [{
+          "value": 188.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2661"
+          }]
+        }]
+      }],
+      "percentDifference": 18700.0
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2010-03, 2012-03, 2013-03, 2014-03, 2016-03, 2017-03, 2018-03, 2019-03, 2020-03"
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Deaths",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2019-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "86"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5266"
+          }]
+        }]
+      }],
+      "percentDifference": 1.0E8
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_Infant_VaccineAdministered_DPTDose1",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 186.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "6570"
+          }]
+        }]
+      }, {
+        "date": "2018-03",
+        "values": [{
+          "value": 661.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "3961"
+          }]
+        }]
+      }],
+      "percentDifference": 255.38
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Others",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5939"
+          }]
+        }]
+      }, {
+        "date": "2014-03",
+        "values": [{
+          "value": 227.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2033"
+          }]
+        }]
+      }],
+      "percentDifference": 22600.0
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2014-03, 2015-03, 2016-03, 2017-03, 2018-03, 2019-03, 2020-03"
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_BirthEvent_StillBirth",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2011-03",
+        "values": [{
+          "value": 39.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "4635"
+          }]
+        }]
+      }, {
+        "date": "2012-03",
+        "values": [{
+          "value": 805.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5939"
+          }]
+        }]
+      }],
+      "percentDifference": 1964.1
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_Infant_VaccineAdministered_BCG",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 62862.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5939"
+          }]
+        }]
+      }, {
+        "date": "2013-03",
+        "values": [{
+          "value": 126852.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "3330"
+          }]
+        }]
+      }],
+      "percentDifference": 101.79
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100077",
+    "statVarDcid": "Count_BirthEvent_LiveBirth",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 31997.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "1397"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 65283.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "4635"
+          }]
+        }]
+      }],
+      "percentDifference": 104.03
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q16056266",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Others",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2015-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "7247"
+          }]
+        }]
+      }, {
+        "date": "2016-03",
+        "values": [{
+          "value": 21.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2675"
+          }]
+        }]
+      }],
+      "percentDifference": 2.1E9
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_Death_Infant",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 2.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2660"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 19.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "6569"
+          }]
+        }]
+      }],
+      "percentDifference": 850.0
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2016-03, 2017-03, 2018-03, 2019-03, 2020-03"
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Deaths",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2019-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": 2.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5265"
+          }]
+        }]
+      }],
+      "percentDifference": 2.0E8
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Others",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 3.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5938"
+          }]
+        }]
+      }, {
+        "date": "2013-03",
+        "values": [{
+          "value": 122.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "3329"
+          }]
+        }]
+      }],
+      "percentDifference": 3966.67
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_Infant_VaccineAdministered_DPTDose3",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 17167.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2660"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 46140.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "6569"
+          }]
+        }]
+      }],
+      "percentDifference": 168.77
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_BirthEvent_StillBirth",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2011-03",
+        "values": [{
+          "value": 178.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "4634"
+          }]
+        }]
+      }, {
+        "date": "2012-03",
+        "values": [{
+          "value": 571.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5938"
+          }]
+        }]
+      }],
+      "percentDifference": 220.79
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 15.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "1396"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 89.1,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "4634"
+          }]
+        }]
+      }],
+      "percentDifference": 494.0
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100067",
+    "statVarDcid": "Count_BirthEvent_LiveBirth",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 3001.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "1396"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 16888.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "4634"
+          }]
+        }]
+      }],
+      "percentDifference": 462.75
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q321998",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Deaths",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2019-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "61"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": 7.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5241"
+          }]
+        }]
+      }],
+      "percentDifference": 7.0E8
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q321998",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Others",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 22.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "735"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 94.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "1372"
+          }]
+        }]
+      }],
+      "percentDifference": 327.27
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q100082",
+    "statVarDcid": "Count_Death_Infant",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 56.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2662"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 507.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "6571"
+          }]
+        }]
+      }],
+      "percentDifference": 805.36
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2016-03, 2017-03, 2018-03, 2019-03, 2020-03"
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q2574898",
+    "statVarDcid": "Count_Death_Infant",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2011-03",
+        "values": [{
+          "value": 5.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "4589"
+          }]
+        }]
+      }, {
+        "date": "2012-03",
+        "values": [{
+          "value": 27.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5893"
+          }]
+        }]
+      }],
+      "percentDifference": 440.0
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q2574898",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Others",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2019-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "39"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": 14.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "5219"
+          }]
+        }]
+      }],
+      "percentDifference": 1.4E9
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2018-03, 2019-03, 2020-03"
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q18642331",
+    "statVarDcid": "Count_Infant_VaccineAdministered_DPTDose3",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018-03",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "3903"
+          }]
+        }]
+      }, {
+        "date": "2019-03",
+        "values": [{
+          "value": 6.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "28"
+          }]
+        }]
+      }],
+      "percentDifference": 500.0
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q2449506",
+    "statVarDcid": "Count_Death_Infant",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2010-03, 2012-03, 2013-03, 2018-03, 2019-03, 2020-03"
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q2449506",
+    "statVarDcid": "Count_BirthEvent_StillBirth",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2013-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "3269"
+          }]
+        }]
+      }, {
+        "date": "2014-03",
+        "values": [{
+          "value": 2.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "1972"
+          }]
+        }]
+      }],
+      "percentDifference": 2.0E8
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2018-03, 2019-03, 2020-03"
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q15212",
+    "statVarDcid": "Count_Infant_VaccineAdministered_OPV",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 21166.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "672"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 21166.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "672"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 63583.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "1309"
+          }]
+        }]
+      }],
+      "percentDifference": 200.4
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q2373368",
+    "statVarDcid": "Count_Death_Infant",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2015-03",
+        "values": [{
+          "value": 3.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "7174"
+          }]
+        }]
+      }, {
+        "date": "2016-03",
+        "values": [{
+          "value": 7.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2601"
+          }]
+        }]
+      }],
+      "percentDifference": 133.33
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2014-03, 2015-03, 2016-03, 2017-03, 2018-03, 2019-03, 2020-03"
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_FULL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

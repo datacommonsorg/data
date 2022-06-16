@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Summary Report</title>
+  </head>
+  <body>
+    <style>
+      table,
+      td,
+      th {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+      }
+      td, th {
+        max-width: 25rem;
+        word-wrap: break-word;
+        vertical-align: top;
+      }
+      tbody tr:hover {
+        background-color: #ccc;
+      }
+      summary {
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-bottom: 1rem;
+      }
+      details {
+        padding-bottom: 1rem;
+      }
+    </style>
+    <h1>Summary Report</h1>
+    <div>
+      <h2>Import Run Details</h2>
+      <table>
+        <tr>
+          <td>Existence Checks Enabled</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Resolution Mode</td>
+          <td>RESOLUTION_MODE_FULL</td>
+        </tr>
+        <tr>
+          <td>Num Threads</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Stat Checks Enabled</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td>Sample Places Entered</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h2>Counters</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Counter Name</th>
+              <th>Num Occurences</th>
+            </tr>
+          </thead>
+        </table>
+    </div>
+  </body>
+</html>

@@ -23,7 +23,7 @@ cols_to_nodes = {
     'District':
         'District',
     'DistrictCode':
-        'DistrictCode',
+        'lgdCode',
     'Date':
         'Date',
     'Total Number of reported live births':

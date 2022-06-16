@@ -118,12 +118,19 @@ class NHMDataLoaderBase(object):
                     else:
                         continue
 
-                df_full = df_full.append(cleaned_df, ignore_index=True)
-
-        # Converting column names according to schema and saving it as csv
+                df_full = pd.concat([df_full, cleaned_df], ignore_index=True)
+                
+        # Mapping District Names to corresponding LGD Codes
         df_full['DistrictCode'] = df_full.apply(
             lambda row: self._get_district_code(row), axis=1)
-
+        
+        # Reverse mapping LGD codes to District names to remove
+        # spelling variations in names
+        df_full['District'] = df_full.apply(
+            lambda row: self._get_district_name(row), axis=1)
+        
+        
+        # Converting column names according to schema and saving it as csv
         df_full.columns = df_full.columns.map(self.cols_dict)
         df_full = df_full.groupby(
             level=0, axis=1).first()  # merging columns with same names
@@ -186,9 +193,10 @@ class NHMDataLoaderBase(object):
                 n=1,
                 cutoff=0.8)
             if close_match:
-                return self.dist_code[self.dist_code['DistrictName(InEnglish)']
+                lgd = self.dist_code[self.dist_code['DistrictName(InEnglish)']
                                       ==
                                       close_match[0]]['DistrictCode'].values[0]
+                return str(lgd).zfill(3)
             else:
                 close_match = difflib.get_close_matches(
                     row['District'].upper(),
@@ -196,10 +204,21 @@ class NHMDataLoaderBase(object):
                     n=1,
                     cutoff=0.8)
                 if close_match:
-                    return self.dist_code[
+                    lgd = self.dist_code[
                         self.dist_code['AlternateLabel'] ==
                         close_match[0]]['DistrictCode'].values[0]
+                    
+                    return str(lgd).zfill(3)
 
+            return None
+        
+    def _get_district_name(self, row):
+        df = self.dist_code[
+                self.dist_code['DistrictCode'] == row['DistrictCode']
+                ]
+        try:
+            return df['DistrictName(InEnglish)'].unique()[0].capitalize()
+        except IndexError:
             return None
 
     def _drop_unwanted_rows(self, df):
@@ -212,5 +231,7 @@ class NHMDataLoaderBase(object):
         unwanted_values = ['Indicators.1']
         df = df[df['District'].isin(unwanted_values) == False]
         df = df[df['District'].isna() == False]
+        df = df.drop_duplicates(subset=['Date', 'District', 'lgdCode'], 
+                                keep=False)
 
         return df
