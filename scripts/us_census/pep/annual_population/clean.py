@@ -151,11 +151,34 @@ def _merge_rows(df: pd.DataFrame, index_list: list, f_idx: int, left_idx: int,
 def _clean_county_df(county_df: pd.DataFrame,
                      first_df_cols: list) -> pd.DataFrame:
     """
-    Transforms the county DataFrame by data shifting left/right by one column
+    Transforms the county DataFrame by data shifting left/right by one column.
+
+    Example Row that requires right shift using _move_data_to_right method.
+    DataFrame:
+    Fips_Code Location extra_Location     1970     1971     1972     1973 \
+        49000     Utah        1059273  1101000  1135000  1169000  1199000 \
+            1974 extra_data_col_1 extra_data_col_2
+            None             None             None
+    1970 column data is shifted by 1 places to left and it will be right
+    shifted by 1 place
     Args:
         county_df (pd.DataFrame): County Dataframe
         first_df_cols (list): List of Dataset Columns
 
+    Some rows in DataFrame is merged as they were splitted into two rows
+       Fips_Code Location extra_Location   1970  1971   1972  1973 \
+           51097     King            and  Queen  None   None  None \
+              Co.    5491           5500   5500  5700   5800  None \
+                1974 extra_data_col_1 extra_data_col_2
+                None             None             None
+                None             None             None
+
+    The above two rows will be merged and formed as below in single row
+    DataFrame:
+    Fips_Code Location extra_Location  1970  1971  1972  1973 \
+        51097     King            and  5491  5500  5500  5700 \
+                1974 extra_data_col_1 extra_data_col_2
+                5800             None             None
     Returns:
         county_df (pd.DataFrame): Returns Transformed County dataframe
     """
@@ -167,7 +190,7 @@ def _clean_county_df(county_df: pd.DataFrame,
     county_df = _merge_rows(county_df, index_list, lr_idx, -9, right_idx)
     county_df = county_df.drop(index=index_list)
     county_df = county_df.reset_index().drop(columns=["index"])
-    index_list = _get_numeric_index(county_df, "Tmp_Row")
+    index_list = _get_numeric_index(county_df, "extra_Location")
     county_df = _move_data_to_right(county_df, index_list)
     county_df = county_df.reset_index().drop(columns=["index"])
     index_list = _get_nonna_index_for_extra_data_col_1(county_df)
@@ -180,6 +203,25 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
                                second_df_cols: list) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists county data from 1970 to 1989
+
+    Example Row that requires left shift using _move_data_to_left method.
+    DataFrame:
+    Fips_Code Location extra_Location 1970   1971   1972   1973 \
+        01115      St.          Clair  Co.  27956  29500  31300 \
+            1974    extra_data_col_1 extra_data_col_2
+            32200              33700             None
+    Because of extra delimiters Location column, the data is shifted right by 1
+    index and will be to shifted left by 1 index value
+
+    Below Example requires double left shift using _move_data_to_left func.
+    DataFrame:
+    Fips_Code Location extra_Location   1970   1971   1972   1973 \
+        51093     Isle             of  Wight     Co  18285  19300 \
+            1974   extra_data_col_1 extra_data_col_2
+            19500             19800            20000
+    Locaion Value is shifted by 2 places to right and so it will be left
+    shifted twice
+
     Args:
         df (pd.DataFrame): Dataframe contains county data from 1970 to 1989
         first_df_cols (list): Columns List from 1970 to 1974 or 1980 to 1984
@@ -188,6 +230,7 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
+
     idx = df[df[0] == "FIPS"].index.values
     next_idx = 0
     final_df = None
@@ -204,7 +247,6 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
         initial_df.columns, next_df.columns = first_df_cols, second_df_cols
         initial_df = initial_df.reset_index().drop(columns=["index"])
         next_df = next_df.reset_index().drop(columns=["index"])
-
         initial_df = _clean_county_df(initial_df, first_df_cols)
         next_df = _clean_county_df(next_df, first_df_cols)
         if "1985" in second_df_cols:

@@ -3,7 +3,7 @@ File Edit Options Buffers Tools Sh-Script Help
 urls=$(<file_urls.txt)
 
 #Creating Input Directory                                                       
-mkdir -p "input_data"
+mkdir -p "input_files"
 cd "input_data"
 for url in $urls;do
     echo "downloading $url"

@@ -12,8 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python Script Load the datasets, cleans it
-and generates cleaned csv, MCF, TMCF file
+This module creates CSV files used for importing data into DC.
+Below are list of files processed -
+City
+    1990 - 2019     Processed As Is
+
+County
+    1970 - 2020     Processed As Is
+
+State
+    1900 - 2020     Processed As Is
+
+National
+    1900 - 1999     Processed As Is
+    2000 - 2009     Data is available in State File in the year 2000-2009
+    2010 - 2020     Processed As Is
+
+Before running this module, run download.sh script, it downloads required
+input files, creates necessary folders for processing.
+Folder information
+input_files - downloaded files (from US census website) are placed here
+output_files - output files (mcf, tmcf and csv are written here)
 """
 
 import os
@@ -26,7 +45,6 @@ from absl import flags
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(module_dir_, '../../../../'))
-print(sys.path)
 
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
@@ -47,7 +65,7 @@ pd.set_option("display.max_rows", None)
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "input_data"
+    os.path.abspath(__file__)) + os.sep + "input_files"
 
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
@@ -313,22 +331,22 @@ def _process_county_e8089co_e7079co(file_path: str) -> pd.DataFrame:
     """
     skip_rows = 23
     first_df_cols = [
-        "Fips_Code", "Location", "Tmp_Row", "1970", "1971", "1972", "1973",
-        "1974", "extra_data_col_1", "extra_data_col_2"
+        "Fips_Code", "Location", "extra_Location", "1970", "1971", "1972",
+        "1973", "1974", "extra_data_col_1", "extra_data_col_2"
     ]
     second_df_cols = [
-        "Fips_Code", "Location", "Tmp_Row", "1975", "1976", "1977", "1978",
-        "1979", "extra_data_col_1", "extra_data_col_2"
+        "Fips_Code", "Location", "extra_Location", "1975", "1976", "1977",
+        "1978", "1979", "extra_data_col_1", "extra_data_col_2"
     ]
     if "e8089co.txt" in file_path:
         skip_rows = 0
         first_df_cols = [
-            "Fips_Code", "Location", "Tmp_Row", "1980", "1981", "1982", "1983",
-            "1984", "extra_data_col_1", "extra_data_col_2"
+            "Fips_Code", "Location", "extra_Location", "1980", "1981", "1982",
+            "1983", "1984", "extra_data_col_1", "extra_data_col_2"
         ]
         second_df_cols = [
-            "Fips_Code", "Location", "Tmp_Row", "1985", "1986", "1987", "1988",
-            "1989", "extra_data_col_1", "extra_data_col_2"
+            "Fips_Code", "Location", "extra_Location", "1985", "1986", "1987",
+            "1988", "1989", "extra_data_col_1", "extra_data_col_2"
         ]
     df = _load_df(file_path, "txt", None, skip_rows)
     df = clean_1970_1989_county_txt(df, first_df_cols, second_df_cols)
@@ -660,7 +678,7 @@ def main(_):
 
     # Defining Output file names
     data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output"
+        os.path.abspath(__file__)) + os.sep + "output_files"
     cleaned_csv_path = data_file_path + os.sep + "USA_Annual_Population.csv"
     mcf_path = data_file_path + os.sep + "USA_Annual_Population.mcf"
     tmcf_path = data_file_path + os.sep + "USA_Annual_Population.tmcf"
