@@ -68,8 +68,8 @@ class TestProcess(unittest.TestCase):
 
     def test_mcf_tmcf_files(self):
         """
-        This method is required to test between output generated
-        preprocess script and excepted output files like MCF File
+        This method tests MCF, tMCF files generated using process module against
+        expected results.
         """
         expected_mcf_file_path = os.path.join(_EXPECTED_FILES_DIR,
                                               "eurostat_population_bmi.mcf")
@@ -92,8 +92,8 @@ class TestProcess(unittest.TestCase):
 
     def test_create_csv(self):
         """
-        This method is required to test between output generated
-        preprocess script and excepted output files like CSV
+        This method tests CSV file generated using process module against
+        expected CSV result.
         """
         expected_csv_file_path = os.path.join(_EXPECTED_FILES_DIR,
                                               "eurostat_population_bmi.csv")
