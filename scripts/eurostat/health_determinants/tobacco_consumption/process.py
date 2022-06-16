@@ -210,7 +210,7 @@ def former_daily_tobacco_smoker_income_quintile(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_FormerSmoker_DailyUsage_TobaccoSmoking'+\
+    df['SV'] = 'Percent_FormerSmoker_DailyUsage_TobaccoProducts'+\
         '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
     df.drop(columns=['quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -242,7 +242,7 @@ def former_daily_tobacco_smoker_education_attainment_level(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_FormerSmoker_DailyUsage_TobaccoSmoking'+\
+    df['SV'] = 'Percent_FormerSmoker_DailyUsage_TobaccoProducts'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -629,8 +629,8 @@ def _replace_smoking(df: pd.DataFrame) -> pd.DataFrame:
             'SM_OCC': 'Smoking_OccasionalUsage',
             'SM_LT20D': 'LessThan20CigarettesPerDay',
             'SM_GE20D': '20OrMoreCigarettesPerDay',
-            'DSM_GE20': 'DailyCigaretteSmoker20OrMorePerDay',
-            'DSM_LT20': 'DailyCigaretteSmokerLessThan20PerDay'
+            'DSM_GE20': '20OrMoreCigarettesPerDay',
+            'DSM_LT20': 'LessThan20CigarettesPerDay'
         }
     })
     return df
@@ -749,7 +749,7 @@ class EuroStatTobaccoConsumption:
         # Writing Genereated TMCF to local path.
         with open(self.tmcf_file_path, 'w+', encoding="UTF-8") as f_out:
             f_out.write(tmcf_template.rstrip('\n'))
-# ----------------------------------------------------------------------------------------------------------------------------------
+
     def _generate_mcf(self, sv_list) -> None:
         """
         This method generates MCF file w.r.t
@@ -789,6 +789,8 @@ class EuroStatTobaccoConsumption:
                     healthbehavior = "\nhealthBehavior: dcs:" + prop
                 elif "ExposureToTobaccoSmoke" in prop:
                       healthbehavior = "\nhealthBehavior: dcs:" + prop
+                elif "FormerSmoker" in prop:
+                      healthbehavior = "\nhealthBehavior: dcs:" + prop
           
 
                 if "DailyUsage" in prop or "OccasionalUsage" in prop\
@@ -799,11 +801,16 @@ class EuroStatTobaccoConsumption:
 
                 if "LessThan20CigarettesPerDay"in prop or "20OrMoreCigarettesPerDay" in prop \
                     or "DailyCigaretteSmoker20OrMorePerDay" in prop or "DailyCigaretteSmokerLessThan20PerDay" in prop:
-                    quantity = "\nsubstanceUsageQuantity: dcs:" + prop
-                if "TobaccoProducts" in prop or "Cigarette" in prop or "ECigarettes" in prop:
-                    substance = "\nsubstanceUsed: dcs:" + prop
+                    quantity = "\nsubstanceUsageQuantity: "+prop.replace("LessThan20CigarettesPerDay","[- 20 Cigarettes]")\
+                        .replace("20OrMoreCigarettesPerDay","[20 - Cigarettes]").replace("DailyCigaretteSmoker20OrMorePerDay","[20 - Cigarettes]")\
+                            .replace("DailyCigaretteSmokerLessThan20PerDay","[- 20 Cigarettes]")
+                
+                if "TobaccoProducts" in prop or "Cigarette" in prop or "ECigarettes" in prop or "":
+                    substance = "\nsubstanceUsed: dcs:"+ prop
+                
                 if 'LessThan1Year'in prop or 'From1To5Years'in prop or 'From5To10Years'in prop or'10YearsOrOver'in prop:
-                      history = "\nsubstanceUsageHistory: dcs:" + prop
+                      history = "\nsubstanceUsageHistory: " + prop.replace("LessThan1Year","[- 1 Year]").replace("From1To5Years","[Years 1 5]")\
+                          .replace("From5To10Years","[Years 5 10]").replace("10YearsOrOver","[10 - Years]")
 
                 for prop in sv_prop1:
                     if prop in ["Count","Person"]:
@@ -908,6 +915,7 @@ class EuroStatTobaccoConsumption:
                     daily_smokers_number_of_cigarettes_history_education_attainment_level
             }
             df = function_dict[file_name](df)
+            # df['file_name'] = file_name
             df['SV'] = df['SV'].str.replace('_Total', '')
             # df["file_name"] = file_name_without_ext
             final_df = pd.concat([final_df, df])
