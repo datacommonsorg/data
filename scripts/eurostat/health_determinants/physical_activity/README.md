@@ -75,7 +75,7 @@ Run the test cases
 
 The below script will download the data and extract it.
 
-`/bin/python3 scripts/eurostat/health_determinants/physical_activity/input_files.py`
+`/bin/python3 scripts/eurostat/health_determinants/physical_activity/download_input_files.py`
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 

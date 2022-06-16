@@ -15,9 +15,12 @@
 This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
-from sys import path
+import os
+import sys
+from absl import app, flags
 # For import common.replacement_functions
-path.insert(1, '../')
+_COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(1, _COMMON_PATH)
 from common.replacement_functions import (_replace_sex, _replace_physact,
                                           _replace_isced11, _replace_quant_inc,
                                           _replace_deg_urb, _replace_levels,
@@ -25,14 +28,12 @@ from common.replacement_functions import (_replace_sex, _replace_physact,
                                           _replace_citizen, _replace_lev_limit,
                                           _replace_bmi, _split_column)
 # For import util.alpha2_to_dcid
-path.insert(1, '../../../../')
-
-import os
+_COMMON_PATH = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '../../../../'))
+sys.path.insert(1, _COMMON_PATH)
 import pandas as pd
 import numpy as np
 from util.alpha2_to_dcid import COUNTRY_MAP
-from absl import app
-from absl import flags
 
 # pd.set_option("display.max_columns", None)
 # pd.set_option("display.max_rows", None)
@@ -42,10 +43,10 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-_MCF_TEMPLATE = ("Node: dcid:{inp1}\n"
+_MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "typeOf: dcs:StatisticalVariable\n"
-                 "populationType: dcs:Person{inp2}{inp3}{inp4}{inp5}"
-                 "{inp6}{inp7}{inp8}{inp9}{inp10}{inp11}{inp12}{inp13}\n"
+                 "populationType: dcs:Person{pv2}{pv3}{pv4}{pv5}"
+                 "{pv6}{pv7}{pv8}{pv9}{pv10}{pv11}{pv12}{pv13}\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:count\n")
 
@@ -73,8 +74,7 @@ def healthenhancing_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
     cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
-    col1 = "unit,physact,isced11,sex,age,geo"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
@@ -108,17 +108,16 @@ def healthenhancing_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
         'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "unit,physact,quant_inc,sex,age,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
-    df['SV'] = 'Percent_'+ df['physact'] +'_'+\
-        'HealthEnhancingPhysicalActivity'+'_In_Count_Person_'+df['sex']\
-        +'_'+df['quant_inc']
+    df['SV'] = 'Percent_' + df['physact'] + '_' +\
+        'HealthEnhancingPhysicalActivity'+ '_In_Count_Person_' + df['sex']\
+        + '_' + df['quant_inc']
     df.drop(columns=['unit', 'age', 'quant_inc', 'physact', 'sex'],
             inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -144,16 +143,15 @@ def healthenhancing_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
         'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "physact,deg_urb,sex,age,unit,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_deg_urb(df)
-    df['SV'] = 'Percent_'+ df['physact'] +'_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
+    df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'deg_urb', 'physact', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -177,16 +175,15 @@ def workrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
         'IS', 'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "unit,levels,isced11,sex,age,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
     df = _replace_isced11(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
-    df['SV'] = 'Percent_'+'WorkRelatedPhysicalActivity'+'_'+df['levels']+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity' + '_' + df['levels']+\
+        '_In_Count_Person_' + df['isced11'] + '_'+ df['sex']
     df.drop(columns=['unit', 'age', 'levels', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -211,16 +208,15 @@ def workrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
         'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "unit,levels,quant_inc,sex,age,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
-    df['SV'] = 'Percent_'+'WorkRelatedPhysicalActivity'+'_'+df['levels']+\
-        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity' + '_' + df['levels']+\
+        '_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']
     df.drop(columns=['unit', 'age', 'levels', 'quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -245,8 +241,7 @@ def workrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
         'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "levels,deg_urb,sex,age,unit,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
@@ -254,8 +249,8 @@ def workrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_levels(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_'+'WorkRelatedPhysicalActivity_'+df['levels']\
-        +'_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
+    df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity_' + df['levels']\
+        + '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
     df.drop(columns=['levels', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -275,16 +270,15 @@ def nonworkrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
     cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
-    col1 = "unit,physact,isced11,sex,age,geo"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_isced11(df)
-    df['SV'] = 'Percent_'+df['physact']+'_NonWorkRelatedPhysicalActivity'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_' + df['physact'] + '_NonWorkRelatedPhysicalActivity'+\
+        '_In_Count_Person_' + df['isced11'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'isced11', 'physact', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
@@ -303,16 +297,15 @@ def nonworkrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
     cols = ['unit,physact,quant_inc,sex,age,geo', '2019', '2014']
     df.columns = cols
-    col1 = "unit,physact,quant_inc,sex,age,geo"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
-    df['SV'] = 'Percent_'+df['physact']+'_NonWorkRelatedPhysicalActivity'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Percent_' + df['physact'] + '_NonWorkRelatedPhysicalActivity'+\
+        '_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']
     df.drop(columns=['unit', 'age', 'quant_inc', 'physact', 'sex'],
             inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -341,8 +334,7 @@ def nonworkrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
         'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "physact,deg_urb,sex,age,unit,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
@@ -350,8 +342,8 @@ def nonworkrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_physact(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_'+df['physact']+'_'+'NonWorkRelatedPhysicalActivity'+\
-        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
+    df['SV'] = 'Percent_' + df['physact'] + '_' + 'NonWorkRelatedPhysical'+\
+        'Activity_In_Count_Person_' + df['deg_urb'] + '_'+df['sex']
     df.drop(columns=['physact', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -372,16 +364,15 @@ def healthenhancing_nonworkrelated_by_sex_education(df: pd.DataFrame)\
     """
     cols = ['unit,duration,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
-    col1 = "unit,duration,isced11,sex,age,geo"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_duration(df)
     df = _replace_sex(df)
     df = _replace_isced11(df)
-    df['SV'] = 'Percent_'+df['duration']+'_'+'HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_' + df['duration'] + '_' + 'HealthEnhancingPhysical'+\
+        'Activity_In_Count_Person_' + df['isced11'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'duration', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
@@ -402,16 +393,15 @@ def healthenhancing_nonworkrelated_by_sex_income(df: pd.DataFrame)\
     """
     cols = ['unit,quant_inc,duration,sex,age,geo', '2019', '2014']
     df.columns = cols
-    col1 = "unit,quant_inc,duration,sex,age,geo"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_duration(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
-    df['SV'] = 'Percent_'+df['duration']+'_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Percent_' + df['duration'] + '_HealthEnhancingPhysical'+\
+        'Activity_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']
     df.drop(columns=['unit', 'age', 'duration', 'quant_inc', 'sex'],
             inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -438,16 +428,15 @@ def healthenhancing_nonworkrelated_by_sex_urbanisation(df: pd.DataFrame)\
         'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "duration,deg_urb,sex,age,unit,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     df = _replace_duration(df)
-    df['SV'] = 'Percent_'+df['duration']+'_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
+    df['SV'] = 'Percent_' + df['duration'] + '_HealthEnhancingPhysicalActivity'\
+        + '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'duration', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -472,16 +461,15 @@ def healthenhancing_by_sex_nativity(df: pd.DataFrame) -> pd.DataFrame:
         'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "unit,physact,c_birth,sex,age,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_c_birth(df)
-    df['SV'] = 'Percent_'+df['physact']+'_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['c_birth']
+    df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_' + df['sex'] + '_' + df['c_birth']
     df.drop(columns=['unit', 'age', 'physact', 'c_birth', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -506,16 +494,15 @@ def healthenhancing_by_sex_citizenship(df: pd.DataFrame) -> pd.DataFrame:
         'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "unit,physact,sex,age,citizen,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_citizen(df)
-    df['SV'] = 'Percent_'+df['physact']+'_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_'+df['citizen']+'_'+df['sex']
+    df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_' + df['citizen'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'physact', 'citizen', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -540,16 +527,15 @@ def healthenhancing_by_sex_activitylimitation(df: pd.DataFrame) -> pd.DataFrame:
         'NO', 'UK', 'TR'
     ]
     df.columns = cols
-    col1 = "unit,physact,sex,age,lev_limit,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_lev_limit(df)
-    df['SV'] = 'Percent_'+df['physact']+'_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['lev_limit']
+    df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
+        '_In_Count_Person_' + df['sex'] + '_' + df['lev_limit']
     df.drop(columns=['unit', 'age', 'physact', 'lev_limit', 'sex'],
             inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -575,16 +561,15 @@ def healthenhancing_nonworkrelated_by_sex_bmi(df: pd.DataFrame) -> pd.DataFrame:
         'RS', 'TR'
     ]
     df.columns = cols
-    col1 = "unit,duration,bmi,sex,age,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df.drop(columns=['EU27_2020'], inplace=True)
     df = _replace_duration(df)
     df = _replace_sex(df)
     df = _replace_bmi(df)
-    df['SV'] = 'Percent_'+df['duration']+'_NonWorkRelatedPhysicalActivity'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['bmi']
+    df['SV'] = 'Percent_' + df['duration'] + '_NonWorkRelatedPhysicalActivity'+\
+        '_In_Count_Person_' + df['sex'] + '_' + df['bmi']
     df.drop(columns=['unit', 'age', 'bmi', 'duration', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -607,14 +592,13 @@ def dailypractice_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
         'AT', 'PL', 'RO', 'SK'
     ]
     df.columns = cols
-    col1 = "sex,age,isced11,time"
-    df = _split_column(df, col1)
+    df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = _replace_isced11(df)
     df = _replace_sex(df)
-    df['SV'] = 'Percent_'+df['isced11']+'_PhysicalActivity'+\
-        '_In_Count_Person_'+df['sex']
+    df['SV'] = 'Percent_' + df['isced11'] + '_PhysicalActivity' +\
+        '_In_Count_Person_' + df['sex']
     df.drop(columns=['age', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -629,10 +613,10 @@ class EuroStatPhysicalActivity:
 
     def __init__(self, input_files: list, csv_file_path: str,
                  mcf_file_path: str, tmcf_file_path: str) -> None:
-        self.input_files = input_files
-        self.cleaned_csv_file_path = csv_file_path
-        self.mcf_file_path = mcf_file_path
-        self.tmcf_file_path = tmcf_file_path
+        self._input_files = input_files
+        self._cleaned_csv_file_path = csv_file_path
+        self._mcf_file_path = mcf_file_path
+        self._tmcf_file_path = tmcf_file_path
 
     def _generate_tmcf(self) -> None:
         """
@@ -644,7 +628,7 @@ class EuroStatPhysicalActivity:
             None
         """
         # Writing Genereated TMCF to local path.
-        with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+        with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
 
     def _generate_mcf(self, sv_list) -> None:
@@ -721,22 +705,22 @@ class EuroStatPhysicalActivity:
                     bmi = "__" + prop
                     healthbehavior = healthbehavior + bmi
 
-            final_mcf_template += _MCF_TEMPLATE.format(inp1=sv,
-                                                       inp2=denominator,
-                                                       inp3=incomequin,
-                                                       inp4=education,
-                                                       inp5=healthbehavior,
-                                                       inp6=exercise,
-                                                       inp7=residence,
-                                                       inp8=activity,
-                                                       inp9=duration,
-                                                       inp10=gender,
-                                                       inp11=countryofbirth,
-                                                       inp12=citizenship,
-                                                       inp13=lev_limit) + "\n"
+            final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
+                                                       pv2=denominator,
+                                                       pv3=incomequin,
+                                                       pv4=education,
+                                                       pv5=healthbehavior,
+                                                       pv6=exercise,
+                                                       pv7=residence,
+                                                       pv8=activity,
+                                                       pv9=duration,
+                                                       pv10=gender,
+                                                       pv11=countryofbirth,
+                                                       pv12=citizenship,
+                                                       pv13=lev_limit) + "\n"
 
         # Writing Genereated MCF to local path.
-        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
+        with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
         # pylint: enable=R0914
         # pylint: enable=R0912
@@ -751,12 +735,12 @@ class EuroStatPhysicalActivity:
         final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
             'Measurement_Method'])
         # Creating Output Directory
-        output_path = os.path.dirname(self.cleaned_csv_file_path)
+        output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
             os.mkdir(output_path)
         sv_list = []
 
-        for file_path in self.input_files:
+        for file_path in self._input_files:
             df = pd.read_csv(file_path, sep='\t', header=0)
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
@@ -829,7 +813,7 @@ class EuroStatPhysicalActivity:
         final_df = final_df.sort_values(by=['geo', 'SV'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
-        final_df.to_csv(self.cleaned_csv_file_path, index=False)
+        final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
         self._generate_mcf(sv_list)

@@ -56,9 +56,9 @@ class TestProcess(unittest.TestCase):
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(EXPECTED_FILES_DIR, "data.csv")
-            mcf_file_path = os.path.join(EXPECTED_FILES_DIR, "test_census.mcf")
-            tmcf_file_path = os.path.join(EXPECTED_FILES_DIR, "test_census.tmcf")
+            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
+            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
+            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
             base = EuroStatPhysicalActivity(self.ip_data, cleaned_csv_file_path,
                                             mcf_file_path, tmcf_file_path)
@@ -110,7 +110,7 @@ class TestProcess(unittest.TestCase):
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
-                  encoding="utf-8-sig") as expected_csv_file:
+                  encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(),
