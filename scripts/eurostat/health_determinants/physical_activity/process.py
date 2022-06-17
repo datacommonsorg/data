@@ -36,14 +36,13 @@ import pandas as pd
 import numpy as np
 from util.alpha2_to_dcid import COUNTRY_MAP
 
-
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
-                "{pv14}\n"
+                 "{pv14}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Person{pv2}{pv3}{pv4}{pv5}"
                  "{pv6}{pv7}{pv8}{pv9}{pv10}{pv11}{pv12}{pv13}\n"
@@ -726,7 +725,7 @@ class EuroStatPhysicalActivity:
             # Making the changes to the SV Name,
             # Removing any extra commas, with keyword and
             # adding Population in the end
-            sv_name = sv_name.replace(", Among"," Among")
+            sv_name = sv_name.replace(", Among", " Among")
             sv_name = sv_name.rstrip(', ')
             sv_name = sv_name.rstrip('with')
             # Adding spaces before every capital letter,
