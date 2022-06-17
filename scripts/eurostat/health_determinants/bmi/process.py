@@ -56,9 +56,6 @@ from util.alpha2_to_dcid import COUNTRY_MAP
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
-pd.set_option("display.max_columns", None)
-# pd.set_option("display.max_rows", None)
-
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
@@ -135,7 +132,7 @@ def _age_sex_education(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + data_df['isced11'] +\
                     '_' + data_df['sex']
-    data_df.drop(columns=['unit', 'age', 'isced11', 'bmi', 'sex'], inplace=True)
+    data_df = data_df.drop(columns=['unit', 'age', 'isced11', 'bmi', 'sex'])
     data_df = data_df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
     return data_df
@@ -167,7 +164,7 @@ def _age_sex_education_history(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df['SV'] = 'Percent_'+ data_df['bmi'] +'_' + \
                     'In_Count_Person_' + data_df['isced11'] + \
                     '_' + data_df['sex']
-    data_df.drop(columns=['isced11', 'bmi', 'sex', 'age'], inplace=True)
+    data_df = data_df.drop(columns=['isced11', 'bmi', 'sex', 'age'])
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return data_df
@@ -199,8 +196,7 @@ def _age_sex_income(data_df: pd.DataFrame) -> pd.DataFrame:
                     'In_Count_Person_' + data_df['sex'] + \
                     '_' + data_df['quant_inc']
 
-    data_df.drop(columns=['unit', 'age', 'quant_inc', 'bmi', 'sex'],
-                 inplace=True)
+    data_df = data_df.drop(columns=['unit', 'age', 'quant_inc', 'bmi', 'sex'])
     data_df = data_df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
     return data_df
@@ -235,8 +231,7 @@ def _age_sex_income_history(data_df: pd.DataFrame) -> pd.DataFrame:
                     'In_Count_Person_' + data_df['sex'] + \
                     '_' + data_df['quant_inc']
 
-    data_df.drop(columns=['quant_inc', 'bmi', 'sex', 'age'], inplace=True)
-    print(data_df['SV'].isna().sum())
+    data_df = data_df.drop(columns=['quant_inc', 'bmi', 'sex', 'age'])
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return data_df
@@ -265,16 +260,16 @@ def _age_sex_degree_urbanisation(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
-    data_df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
     data_df = _replace_bmi(data_df)
     data_df = _replace_sex(data_df)
     data_df = _replace_deg_urb(data_df)
-    data_df.drop(columns=['unit', 'age'], inplace=True)
+    data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] +'_' + \
                     'In_Count_Person_' + data_df['deg_urb'] + \
                     '_' + data_df['sex']
-    #print(data_df.head())
-    data_df.drop(columns=['deg_urb', 'bmi', 'sex'], inplace=True)
+
+    data_df = data_df.drop(columns=['deg_urb', 'bmi', 'sex'])
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return data_df
@@ -303,11 +298,11 @@ def _age_sex_birth_country(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
-    data_df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
     data_df = _replace_bmi(data_df)
     data_df = _replace_sex(data_df)
     data_df = _replace_c_birth(data_df)
-    data_df.drop(columns=['unit', 'age'], inplace=True)
+    data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + data_df['sex'] + \
                     '_' + data_df['c_birth']
@@ -340,12 +335,12 @@ def _age_sex_citizenship_country(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
-    data_df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
     data_df = _replace_bmi(data_df)
     data_df = _replace_sex(data_df)
     data_df = _replace_citizen(data_df)
 
-    data_df.drop(columns=['unit', 'age'], inplace=True)
+    data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + \
                     data_df['citizen'] + '_' + data_df['sex']
@@ -378,15 +373,15 @@ def _age_sex_acitivity_limitation(data_df: pd.DataFrame) -> pd.DataFrame:
     data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
-    data_df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
     data_df = _replace_bmi(data_df)
     data_df = _replace_sex(data_df)
     data_df = _replace_lev_limit(data_df)
-    data_df.drop(columns=['unit', 'age'], inplace=True)
+    data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + \
                     data_df['sex'] + '_' + data_df['lev_limit']
-    data_df.drop(columns=['lev_limit', 'bmi', 'sex'], inplace=True)
+    data_df = data_df.drop(columns=['lev_limit', 'bmi', 'sex'])
     data_df = data_df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
     return data_df
@@ -462,8 +457,10 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
 
     final_df = pd.DataFrame()
     sv_list = []
+    f_names = []
     for file_path in input_files:
         file_name_with_ext = os.path.basename(file_path)
+        f_names.append(file_name_with_ext)
         file_name_without_ext = os.path.splitext(file_name_with_ext)[0]
         file_to_function_mapping = {
             "hlth_ehis_bm1e": _age_sex_education,
@@ -478,11 +475,10 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
         df = pd.read_csv(file_path, sep='\t', header=0)
         df = file_to_function_mapping[file_name_without_ext](df)
         df['SV'] = df['SV'].str.replace('_Total', '')
-        df["file_name"] = file_name_without_ext
         final_df = pd.concat([final_df, df])
         sv_list += df["SV"].to_list()
 
-    final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
+    final_df.sort_values(by=['time', 'geo', 'SV', 'observation'], inplace=True)
     final_df = final_df.drop_duplicates(subset=['time','geo','SV'],\
         keep='first')
     final_df['observation'] = final_df['observation'].astype(str)\
@@ -497,7 +493,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
         final_df['info'].isin(u_rows),
         'EurostatRegionalStatistics_LowReliability',
         'EurostatRegionalStatistics')
-    final_df.drop(columns=['info'], inplace=True)
+    final_df = final_df.drop(columns=['info'])
     final_df['observation'] = (final_df['observation'].astype(str).str.replace(
         ':', '').str.replace(' ', '').str.replace('u', ''))
     final_df['observation'] = pd.to_numeric(final_df['observation'],

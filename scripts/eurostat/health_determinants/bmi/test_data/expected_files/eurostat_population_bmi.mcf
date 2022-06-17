@@ -193,26 +193,6 @@ healthBehavior: dcs:Normalweight
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_Normalweight_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Female
-healthBehavior: dcs:Normalweight
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_Normalweight_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:Normalweight
-gender: dcs:Female
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_Normalweight_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -222,16 +202,6 @@ measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
 healthBehavior: dcs:Normalweight
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_Normalweight_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Female
-healthBehavior: dcs:Normalweight
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_Normalweight_In_Count_Person_ForeignBorn
 typeOf: dcs:StatisticalVariable
@@ -472,26 +442,6 @@ healthBehavior: dcs:Normalweight
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_Normalweight_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Male
-healthBehavior: dcs:Normalweight
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_Normalweight_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:Normalweight
-gender: dcs:Male
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_Normalweight_In_Count_Person_Male_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -501,16 +451,6 @@ measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
 healthBehavior: dcs:Normalweight
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_Normalweight_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Male
-healthBehavior: dcs:Normalweight
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_Normalweight_In_Count_Person_ModerateActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -577,6 +517,26 @@ measurementDenominator: dcs:Count_Person_Rural
 healthBehavior: dcs:Normalweight
 placeOfResidenceClassification: dcs:Rural
 
+Node: dcid:Percent_Normalweight_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:Normalweight
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:Normalweight
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+
 Node: dcid:Percent_Normalweight_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -585,6 +545,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:Normalweight
 placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Normalweight_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:Normalweight
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+
+Node: dcid:Percent_Normalweight_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:Normalweight
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 
 Node: dcid:Percent_Normalweight_In_Count_Person_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -690,6 +670,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:Normalweight
 placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:Normalweight
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+
+Node: dcid:Percent_Normalweight_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:Normalweight
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 
 Node: dcid:Percent_Normalweight_In_Count_Person_WithinEU28AndNotACitizen
 typeOf: dcs:StatisticalVariable
@@ -915,26 +915,6 @@ healthBehavior: dcs:Obesity
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_Obesity_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Female
-healthBehavior: dcs:Obesity
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_Obesity_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:Obesity
-gender: dcs:Female
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_Obesity_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -944,16 +924,6 @@ measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
 healthBehavior: dcs:Obesity
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_Obesity_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Female
-healthBehavior: dcs:Obesity
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_Obesity_In_Count_Person_ForeignBorn
 typeOf: dcs:StatisticalVariable
@@ -1194,26 +1164,6 @@ healthBehavior: dcs:Obesity
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_Obesity_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Male
-healthBehavior: dcs:Obesity
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_Obesity_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:Obesity
-gender: dcs:Male
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_Obesity_In_Count_Person_Male_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1223,16 +1173,6 @@ measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
 healthBehavior: dcs:Obesity
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_Obesity_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Male
-healthBehavior: dcs:Obesity
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_Obesity_In_Count_Person_ModerateActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -1299,6 +1239,26 @@ measurementDenominator: dcs:Count_Person_Rural
 healthBehavior: dcs:Obesity
 placeOfResidenceClassification: dcs:Rural
 
+Node: dcid:Percent_Obesity_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+
 Node: dcid:Percent_Obesity_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1307,6 +1267,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:Obesity
 placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Obesity_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 
 Node: dcid:Percent_Obesity_In_Count_Person_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -1412,6 +1392,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:Obesity
 placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Obesity_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+
+Node: dcid:Percent_Obesity_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:Obesity
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 
 Node: dcid:Percent_Obesity_In_Count_Person_WithinEU28AndNotACitizen
 typeOf: dcs:StatisticalVariable
@@ -1637,26 +1637,6 @@ healthBehavior: dcs:Overweight
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_Overweight_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Female
-healthBehavior: dcs:Overweight
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_Overweight_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:Overweight
-gender: dcs:Female
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_Overweight_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1666,16 +1646,6 @@ measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
 healthBehavior: dcs:Overweight
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_Overweight_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Female
-healthBehavior: dcs:Overweight
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_Overweight_In_Count_Person_ForeignBorn
 typeOf: dcs:StatisticalVariable
@@ -1916,26 +1886,6 @@ healthBehavior: dcs:Overweight
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_Overweight_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Male
-healthBehavior: dcs:Overweight
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_Overweight_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:Overweight
-gender: dcs:Male
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_Overweight_In_Count_Person_Male_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -1945,16 +1895,6 @@ measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
 healthBehavior: dcs:Overweight
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_Overweight_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Male
-healthBehavior: dcs:Overweight
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_Overweight_In_Count_Person_ModerateActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -2021,6 +1961,26 @@ measurementDenominator: dcs:Count_Person_Rural
 healthBehavior: dcs:Overweight
 placeOfResidenceClassification: dcs:Rural
 
+Node: dcid:Percent_Overweight_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:Overweight
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+
+Node: dcid:Percent_Overweight_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:Overweight
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+
 Node: dcid:Percent_Overweight_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -2029,6 +1989,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:Overweight
 placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Overweight_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:Overweight
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+
+Node: dcid:Percent_Overweight_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:Overweight
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 
 Node: dcid:Percent_Overweight_In_Count_Person_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -2134,6 +2114,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:Overweight
 placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Overweight_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:Overweight
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+
+Node: dcid:Percent_Overweight_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:Overweight
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 
 Node: dcid:Percent_Overweight_In_Count_Person_WithinEU28AndNotACitizen
 typeOf: dcs:StatisticalVariable
@@ -2359,26 +2359,6 @@ healthBehavior: dcs:PreObese
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_PreObese_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Female
-healthBehavior: dcs:PreObese
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_PreObese_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:PreObese
-gender: dcs:Female
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_PreObese_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -2388,16 +2368,6 @@ measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
 healthBehavior: dcs:PreObese
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_PreObese_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Female
-healthBehavior: dcs:PreObese
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_PreObese_In_Count_Person_ForeignBorn
 typeOf: dcs:StatisticalVariable
@@ -2638,26 +2608,6 @@ healthBehavior: dcs:PreObese
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_PreObese_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Male
-healthBehavior: dcs:PreObese
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_PreObese_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:PreObese
-gender: dcs:Male
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_PreObese_In_Count_Person_Male_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -2667,16 +2617,6 @@ measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
 healthBehavior: dcs:PreObese
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_PreObese_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Male
-healthBehavior: dcs:PreObese
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_PreObese_In_Count_Person_ModerateActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -2743,6 +2683,26 @@ measurementDenominator: dcs:Count_Person_Rural
 healthBehavior: dcs:PreObese
 placeOfResidenceClassification: dcs:Rural
 
+Node: dcid:Percent_PreObese_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+
+Node: dcid:Percent_PreObese_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+
 Node: dcid:Percent_PreObese_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -2751,6 +2711,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:PreObese
 placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_PreObese_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+
+Node: dcid:Percent_PreObese_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 
 Node: dcid:Percent_PreObese_In_Count_Person_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -2827,6 +2807,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:PreObese
 placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_PreObese_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+
+Node: dcid:Percent_PreObese_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:PreObese
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 
 Node: dcid:Percent_PreObese_In_Count_Person_WithinEU28AndNotACitizen
 typeOf: dcs:StatisticalVariable
@@ -3052,26 +3052,6 @@ healthBehavior: dcs:Underweight
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_Underweight_In_Count_Person_Female_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Female
-healthBehavior: dcs:Underweight
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_Underweight_In_Count_Person_Female_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Female_SemiUrban
-healthBehavior: dcs:Underweight
-gender: dcs:Female
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_Underweight_In_Count_Person_Female_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -3081,16 +3061,6 @@ measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
 healthBehavior: dcs:Underweight
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_Underweight_In_Count_Person_Female_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Female
-healthBehavior: dcs:Underweight
-gender: dcs:Female
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_Underweight_In_Count_Person_ForeignBorn
 typeOf: dcs:StatisticalVariable
@@ -3331,26 +3301,6 @@ healthBehavior: dcs:Underweight
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 
-Node: dcid:Percent_Underweight_In_Count_Person_Male_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Rural_Male
-healthBehavior: dcs:Underweight
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Percent_Underweight_In_Count_Person_Male_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Male_SemiUrban
-healthBehavior: dcs:Underweight
-gender: dcs:Male
-placeOfResidenceClassification: dcs:SemiUrban
-
 Node: dcid:Percent_Underweight_In_Count_Person_Male_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -3360,16 +3310,6 @@ measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
 healthBehavior: dcs:Underweight
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
-
-Node: dcid:Percent_Underweight_In_Count_Person_Male_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person_Urban_Male
-healthBehavior: dcs:Underweight
-gender: dcs:Male
-placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Percent_Underweight_In_Count_Person_ModerateActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -3436,6 +3376,26 @@ measurementDenominator: dcs:Count_Person_Rural
 healthBehavior: dcs:Underweight
 placeOfResidenceClassification: dcs:Rural
 
+Node: dcid:Percent_Underweight_In_Count_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Female
+healthBehavior: dcs:Underweight
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Rural_Male
+healthBehavior: dcs:Underweight
+placeOfResidenceClassification: dcs:Rural
+gender: dcs:Male
+
 Node: dcid:Percent_Underweight_In_Count_Person_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -3444,6 +3404,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_SemiUrban
 healthBehavior: dcs:Underweight
 placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:Percent_Underweight_In_Count_Person_SemiUrban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Female
+healthBehavior: dcs:Underweight
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_SemiUrban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_SemiUrban_Male
+healthBehavior: dcs:Underweight
+placeOfResidenceClassification: dcs:SemiUrban
+gender: dcs:Male
 
 Node: dcid:Percent_Underweight_In_Count_Person_SevereActivityLimitation
 typeOf: dcs:StatisticalVariable
@@ -3549,6 +3529,26 @@ measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person_Urban
 healthBehavior: dcs:Underweight
 placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Percent_Underweight_In_Count_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:Underweight
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+
+Node: dcid:Percent_Underweight_In_Count_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Person_Urban_Male
+healthBehavior: dcs:Underweight
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Male
 
 Node: dcid:Percent_Underweight_In_Count_Person_WithinEU28AndNotACitizen
 typeOf: dcs:StatisticalVariable

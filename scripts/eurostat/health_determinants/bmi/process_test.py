@@ -63,7 +63,7 @@ class TestProcess(unittest.TestCase):
             with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
                 self.actual_tmcf_data = tmcf_file.read()
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+            with open(cleaned_csv_file_path, encoding="UTF-8") as csv_file:
                 self.actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):
@@ -100,7 +100,7 @@ class TestProcess(unittest.TestCase):
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
-                  encoding="utf-8-sig") as expected_csv_file:
+                  encoding="UTF-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(),
