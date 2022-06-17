@@ -17,6 +17,7 @@ and generates cleaned CSV, MCF, TMCF file.
 """
 import os
 import sys
+import re
 from absl import app, flags
 # For import common.replacement_functions
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -35,8 +36,6 @@ import pandas as pd
 import numpy as np
 from util.alpha2_to_dcid import COUNTRY_MAP
 
-# pd.set_option("display.max_columns", None)
-# pd.set_option("display.max_rows", None)
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
@@ -44,6 +43,7 @@ default_input_path = os.path.dirname(
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
+                "{pv14}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Person{pv2}{pv3}{pv4}{pv5}"
                  "{pv6}{pv7}{pv8}{pv9}{pv10}{pv11}{pv12}{pv13}\n"
@@ -111,7 +111,7 @@ def healthenhancing_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
@@ -146,7 +146,7 @@ def healthenhancing_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_deg_urb(df)
@@ -178,7 +178,7 @@ def workrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_isced11(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
@@ -211,7 +211,7 @@ def workrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
@@ -244,7 +244,7 @@ def workrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
@@ -259,7 +259,7 @@ def workrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
 
 def nonworkrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file nonworkrelated_by_sex_education for concatenation 
+    Cleans the file nonworkrelated_by_sex_education for concatenation
     in Final CSV.
 
     Args:
@@ -337,7 +337,7 @@ def nonworkrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     df = _replace_physact(df)
@@ -431,7 +431,7 @@ def healthenhancing_nonworkrelated_by_sex_urbanisation(df: pd.DataFrame)\
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_deg_urb(df)
     df = _replace_sex(df)
     df = _replace_duration(df)
@@ -464,7 +464,7 @@ def healthenhancing_by_sex_nativity(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_c_birth(df)
@@ -497,7 +497,7 @@ def healthenhancing_by_sex_citizenship(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_citizen(df)
@@ -530,7 +530,7 @@ def healthenhancing_by_sex_activitylimitation(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020', 'EU28'], inplace=True)
+    df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_physact(df)
     df = _replace_sex(df)
     df = _replace_lev_limit(df)
@@ -564,7 +564,7 @@ def healthenhancing_nonworkrelated_by_sex_bmi(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df.drop(columns=['EU27_2020'], inplace=True)
+    df = df.drop(columns=['EU27_2020'])
     df = _replace_duration(df)
     df = _replace_sex(df)
     df = _replace_bmi(df)
@@ -651,40 +651,56 @@ class EuroStatPhysicalActivity:
                 continue
             incomequin = gender = education = healthbehavior = exercise = ''
             residence = activity = duration = countryofbirth = citizenship = ''
-            lev_limit = bmi = ''
+            lev_limit = bmi = sv_name = ''
 
             sv_temp = sv.split("_In_")
             denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
             sv_property = sv.split("_")
             for prop in sv_property:
-                if prop in ["Percent", "In", "Count", "Person"]:
+                if prop == "Percent":
+                    sv_name = sv_name + "Percentage "
+                elif prop == "In":
+                    sv_name = sv_name + "Among "
+                elif prop == "Count":
+                    continue
+                elif prop == "Person":
                     continue
                 if "PhysicalActivity" in prop:
                     healthbehavior = "\nhealthBehavior: dcs:" + prop
+                    sv_name = sv_name + prop + ", "
                 elif "Male" in prop or "Female" in prop:
                     gender = "\ngender: dcs:" + prop
+                    sv_name = sv_name + prop + ", "
                 elif "Aerobic" in prop or "MuscleStrengthening" in prop \
                     or "Walking" in prop or "Cycling" in prop:
                     exercise = "\nexerciseType: dcs:" + prop.replace("Or", "__")
+                    sv_name = sv_name + prop + ", "
                 elif "Education" in prop:
                     education = "\neducationalAttainment: dcs:" + \
                         prop.replace("EducationalAttainment","")\
                         .replace("Or","__")
+                    sv_name = sv_name + prop + ", "
                 elif "Percentile" in prop:
                     incomequin = "\nincome: ["+prop.replace("IncomeOf","")\
                         .replace("To"," ").replace("Percentile"," Percentile")\
                         +"]"
+                    sv_name = sv_name + prop.replace("Of","Of ")\
+                        .replace("To"," To ") + ", "
                 elif "Urban" in prop or "Rural" in prop:
                     residence = "\nplaceOfResidenceClassification: dcs:" + prop
+                    sv_name = sv_name + prop + ", "
                 elif "Limitation" in prop:
                     lev_limit = "\nglobalActivityLimitationindicator: dcs:"\
                         + prop
+                    sv_name = sv_name + prop + ", "
                 elif "ModerateActivity" in prop or "HeavyActivity" in prop\
                     or "NoActivity" in prop:
                     activity = "\nphysicalActivityEffortLevel: dcs:"\
                     + prop.replace("ModerateActivityOrHeavyActivity",
                         "ModerateActivityLevel__HeavyActivity")+"Level"
+                    sv_name = sv_name + prop + ", "
                 elif "Minutes" in prop:
+                    sv_name = sv_name + prop + ", "
                     if "OrMoreMinutes" in prop:
                         duration = "\nactivityDuration: [" + prop.replace\
                             ("OrMoreMinutes","") + " - Minutes]"
@@ -697,15 +713,29 @@ class EuroStatPhysicalActivity:
                 elif "ForeignBorn" in prop or "Native" in prop:
                     countryofbirth = "\nnativity: dcs:" + \
                         prop.replace("CountryOfBirth","")
+                    sv_name = sv_name + prop + ", "
                 elif "Citizen" in prop:
                     citizenship = "\ncitizenship: dcs:" + \
                         prop.replace("Citizenship","")
+                    sv_name = sv_name + prop + ", "
                 elif "weight" in prop or "Normal" in prop \
                     or "Obese" in prop or "Obesity" in prop:
                     bmi = "__" + prop
                     healthbehavior = healthbehavior + bmi
+                    sv_name = sv_name + prop + ", "
+            # Making the changes to the SV Name,
+            # Removing any extra commas, with keyword and
+            # adding Population in the end
+            sv_name = sv_name.replace(", Among"," Among")
+            sv_name = sv_name.rstrip(', ')
+            sv_name = sv_name.rstrip('with')
+            # Adding spaces before every capital letter,
+            # to make SV look more like a name.
+            sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
+            sv_name = "name: " + sv_name + " Population"
 
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
+                                                       pv14=sv_name,
                                                        pv2=denominator,
                                                        pv3=incomequin,
                                                        pv4=education,
@@ -798,7 +828,15 @@ class EuroStatPhysicalActivity:
             'u')]
         u_rows = list(derived_df['SV'] + derived_df['geo'])
         final_df['info'] = final_df['SV'] + final_df['geo']
-        # Adding Measurement Method based on a condition
+        # Adding Measurement Method based on a condition, whereever u is found
+        # in an observation. The corresponding measurement method for all the
+        # years of that perticular SV/Country is made as Low Reliability.
+        # Eg: 2014
+        #   country/AUT
+        #   Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person
+        #   77.3 u,
+        # so measurement method for both 2014 and 2019 years shall be made
+        # low reliability.
         final_df['Measurement_Method'] = np.where(
             final_df['info'].isin(u_rows),
             'EurostatRegionalStatistics_LowReliability',
