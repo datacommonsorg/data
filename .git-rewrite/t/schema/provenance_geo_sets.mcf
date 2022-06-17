@@ -1,0 +1,6 @@
+Node: dcid:CohortSet
+typeOf: schema:Class
+name: "CohortSet"
+subClassOf: schema:Intangible
+description: "Represents a set of entities that belong to the same cohort. A cohort may be cities that have stats in a particular import."
+

@@ -1,0 +1,111 @@
+Province Code,NUTS3,Province name,Province Abbreviation
+001,nuts/ITC11,Torino,TO
+002,nuts/ITC12,Vercelli,VC
+003,nuts/ITC15,Novara,NO
+004,nuts/ITC16,Cuneo,CN
+005,nuts/ITC17,Asti,AT
+006,nuts/ITC18,Alessandria,AL
+096,nuts/ITC13,Biella,BI
+103,nuts/ITC14,Verbano-Cusio-Ossola,VB
+007,nuts/ITC20,Valle d'Aosta/Vallée d'Aoste,AO
+012,nuts/ITC41,Varese,VA
+013,nuts/ITC42,Como,CO
+014,nuts/ITC44,Sondrio,SO
+015,nuts/ITC4C,Milano,MI
+016,nuts/ITC46,Bergamo,BG
+017,nuts/ITC47,Brescia,BS
+018,nuts/ITC48,Pavia,PV
+019,nuts/ITC4A,Cremona,CR
+020,nuts/ITC4B,Mantova,MN
+097,nuts/ITC43,Lecco,LC
+098,nuts/ITC49,Lodi,LO
+108,nuts/ITC4D,Monza e della Brianza,MB
+021,nuts/ITH10,Bolzano/Bozen,BZ
+022,nuts/ITH20,Trento,TN
+023,nuts/ITH31,Verona,VR
+024,nuts/ITH32,Vicenza,VI
+025,nuts/ITH33,Belluno,BL
+026,nuts/ITH34,Treviso,TV
+027,nuts/ITH35,Venezia,VE
+028,nuts/ITH36,Padova,PD
+029,nuts/ITH37,Rovigo,RO
+030,nuts/ITH42,Udine,UD
+031,nuts/ITH43,Gorizia,GO
+032,nuts/ITH44,Trieste,TS
+093,nuts/ITH41,Pordenone,PN
+008,nuts/ITC31,Imperia,IM
+009,nuts/ITC32,Savona,SV
+010,nuts/ITC33,Genova,GE
+011,nuts/ITC34,La Spezia,SP
+033,nuts/ITH51,Piacenza,PC
+034,nuts/ITH52,Parma,PR
+035,nuts/ITH53,Reggio nell'Emilia,RE
+036,nuts/ITH54,Modena,MO
+037,nuts/ITH55,Bologna,BO
+038,nuts/ITH56,Ferrara,FE
+039,nuts/ITH57,Ravenna,RA
+040,nuts/ITH58,Forlì-Cesena,FC
+099,nuts/ITH59,Rimini,RN
+045,nuts/ITI11,Massa-Carrara,MS
+046,nuts/ITI12,Lucca,LU
+047,nuts/ITI13,Pistoia,PT
+048,nuts/ITI14,Firenze,FI
+049,nuts/ITI16,Livorno,LI
+050,nuts/ITI17,Pisa,PI
+051,nuts/ITI18,Arezzo,AR
+052,nuts/ITI19,Siena,SI
+053,nuts/ITI1A,Grosseto,GR
+100,nuts/ITI15,Prato,PO
+054,nuts/ITI21,Perugia,PG
+055,nuts/ITI22,Terni,TR
+041,nuts/ITI31,Pesaro e Urbino,PU
+042,nuts/ITI32,Ancona,AN
+043,nuts/ITI33,Macerata,MC
+044,nuts/ITI34,Ascoli Piceno,AP
+109,nuts/ITI35,Fermo,FM
+056,nuts/ITI41,Viterbo,VT
+057,nuts/ITI42,Rieti,RI
+058,nuts/ITI43,Roma,RM
+059,nuts/ITI44,Latina,LT
+060,nuts/ITI45,Frosinone,FR
+066,nuts/ITF11,L'Aquila,AQ
+067,nuts/ITF12,Teramo,TE
+068,nuts/ITF13,Pescara,PE
+069,nuts/ITF14,Chieti,CH
+070,nuts/ITF22,Campobasso,CB
+094,nuts/ITF21,Isernia,IS
+061,nuts/ITF31,Caserta,CE
+062,nuts/ITF32,Benevento,BN
+063,nuts/ITF33,Napoli,NA
+064,nuts/ITF34,Avellino,AV
+065,nuts/ITF35,Salerno,SA
+071,nuts/ITF46,Foggia,FG
+072,nuts/ITF47,Bari,BA
+073,nuts/ITF43,Taranto,TA
+074,nuts/ITF44,Brindisi,BR
+075,nuts/ITF45,Lecce,LE
+110,nuts/ITF48,Barletta-Andria-Trani,BT
+076,nuts/ITF51,Potenza,PZ
+077,nuts/ITF52,Matera,MT
+078,nuts/ITF61,Cosenza,CS
+079,nuts/ITF63,Catanzaro,CZ
+080,nuts/ITF65,Reggio Calabria,RC
+101,nuts/ITF62,Crotone,KR
+102,nuts/ITF64,Vibo Valentia,VV
+081,nuts/ITG11,Trapani,TP
+082,nuts/ITG12,Palermo,PA
+083,nuts/ITG13,Messina,ME
+084,nuts/ITG14,Agrigento,AG
+085,nuts/ITG15,Caltanissetta,CL
+086,nuts/ITG16,Enna,EN
+087,nuts/ITG17,Catania,CT
+088,nuts/ITG18,Ragusa,RG
+089,nuts/ITG19,Siracusa,SR
+090,nuts/ITG29,Olbia-Tempio,OT
+090,nuts/ITG25,Sassari,SS
+091,nuts/ITG26,Nuoro,NU
+091,nuts/ITG2A,Ogliastra,OG
+092,nuts/ITG27,Cargliari,CA
+095,nuts/ITG28,Oristano,OR
+111,nuts/ITG2B,Sud Sardegna,SU
+111,nuts/ITG2C,Sud Sardegna,SU

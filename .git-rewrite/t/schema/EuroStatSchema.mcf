@@ -1,0 +1,59 @@
+Node: dcid:EuroStat_Employed
+typeOf: dcs:EmploymentEnum
+name: "EuroStat_Employed"
+descriptionUrl: "https://ec.europa.eu/eurostat/cache/metadata/en/une_esms.htm"
+description: "Employed persons are all persons (age 15-74) who worked at least one hour for pay or profit during the reference week or were temporarily absent from such work."
+
+Node: dcid:EuroStat_Unemployed
+typeOf: dcs:EmploymentEnum
+name: "EuroStat_Unemployed"
+descriptionUrl: "https://ec.europa.eu/eurostat/cache/metadata/en/une_esms.htm"
+description: "Unemployed persons are all persons (age 15 to 74) who were not employed during the reference week, had actively sought work during the past four weeks and were ready to begin working immediately or within two weeks."
+
+Node: dcid:Infrastructure
+subClassOf: schema:Thing
+name: "Infrastructure"
+description: "Infrastructure the fundamental facilities and systems serving a country, city, or other area, including the services and facilities necessary for its economy to function."
+descriptionUrl: https://en.wikipedia.org/wiki/Infrastructure
+typeOf: schema:Class
+
+Node: dcid:TelecomInfrastructure
+subClassOf: schema:Thing
+name: "Telecom Infrastructure"
+typeOf: dcs:Infrastructure
+
+Node: dcid:InfrastructureTypeEnum
+typeOf: dcs:Class
+name: "InfrastructureTypeEnum"
+subClassOf: schema:Enumeration
+
+Node: dcid:BroadbandAccessLine
+typeOf: dcs:InfrastructureTypeEnum
+name: "Broadband Access Line"
+description: "Broadband access utility."
+
+Node: dcid:infrastructureType
+typeOf: schema:Property
+name: "infrastructureType"
+rangeIncludes: schema:InfrastructureTypeEnum
+domainIncludes: dcs:Infrastructure
+
+Node: dcid:minimumWage
+typeOf: schema:Property
+name: "minimumWage"
+description: "The minimumWage is minimum wage as determined by the administrative authority in that region."
+rangeIncludes: schema:Number
+domainIncludes: schema:AdministrativeArea
+
+Node: dcid:Debt
+name: "Debt"
+typeOf: schema:Class
+subClassOf: schema:Thing
+description: "Amount of money owed."
+
+Node: dcid:debtor
+name: "debtor"
+typeOf: schema:Property
+domainIncludes: dcs:Debt
+rangeIncludes: schema:AdministrativeArea, schema:Person
+

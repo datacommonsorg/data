@@ -1,0 +1,17 @@
+Node: E:states_gdp->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InflationAdjustedGDP
+observationAbout: C:states_gdp->GeoId
+observationDate: C:states_gdp->Quarter
+observationPeriod: "P3M"
+value: C:states_gdp->chained_2012_dollars
+unit: dcs:ChainedUSDollarBaseYr2012
+
+Node: E:states_gdp->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InflationAdjustedGDP
+observationAbout: C:states_gdp->GeoId
+observationDate: C:states_gdp->Quarter
+observationPeriod: "P3M"
+value: C:states_gdp->current_dollars
+unit: dcs:USDollar

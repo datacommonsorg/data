@@ -1,0 +1,1360 @@
+Node: ACS5Enum
+dcid: dcs:CensusACS5yrSurvey
+typeOf: dcs:CensusSurveyEnum
+name: "CensusACS5yrSurvey"
+description: "American Community Survey 5 year estimates"
+
+Node: dcid:Difference
+typeOf: dcs:BinaryOperatorEnum
+name: "Difference"
+description: "Represents the first input minus the second input"
+
+Node: dcid:Ratio
+typeOf: dcs:BinaryOperatorEnum
+name: "Ratio"
+description: "Represents the ratio between the first input and the second input"
+
+Node: dcid:Percentage
+typeOf: dcs:BinaryOperatorEnum
+name: "Percentage"
+description: "The percentage of the first input where the whole is the second input"
+
+Node: Percentile1
+dcid: "Percentile1"
+typeOf: dcs:PercentileEnum
+description: "1st percentile value"
+name: "Percentile1"
+
+Node: Percentile10
+dcid: "Percentile10"
+description: "10th percentile value"
+name: "Percentile10"
+typeOf: dcs:PercentileEnum
+
+Node: Percentile25
+dcid: "Percentile25"
+name: "Percentile25"
+typeOf: dcs:PercentileEnum
+description: "25th percentile value"
+
+Node: Percentile50
+dcid: "Percentile50"
+name: "Percentile50"
+typeOf: dcs:PercentileEnum
+description: "50th percentile value"
+
+Node: Percentile75
+dcid: "Percentile75"
+name: "Percentile75"
+typeOf: dcs:PercentileEnum
+description: "75th percentile value"
+
+Node: Percentile100
+dcid: "Percentile100"
+typeOf: dcs:PercentileEnum
+name: "Percentile100"
+description: "100th percentile value"
+
+Node: Windy
+dcid: "Windy"
+name: "Windy"
+typeOf: dcs:NOAA_WeatherConditionEnum
+
+Node: Thunder
+dcid: "Thunder"
+typeOf: dcs:NOAA_WeatherConditionEnum
+name: "Thunder"
+
+Node: Fog
+dcid: "Fog"
+name: "Fog"
+typeOf: dcs:NOAA_WeatherConditionEnum
+
+Node: Rain
+dcid: "Rain"
+name: "Rain"
+typeOf: dcs:NOAA_WeatherConditionEnum
+
+Node: Hail
+dcid: "Hail"
+typeOf: dcs:NOAA_WeatherConditionEnum
+name: "Hail"
+
+Node: Snow
+dcid: "Snow"
+typeOf: dcs:NOAA_WeatherConditionEnum
+name: "Snow"
+
+Node: Tornado
+dcid: "Tornado"
+typeOf: dcs:NOAA_WeatherConditionEnum
+name: "Tornado"
+
+Node: IPEDS_75000To110000
+dcid: "IPEDS_75000To110000"
+name: "IPEDS_75000To110000"
+typeOf: dcs:FamilyIncomeEnum
+
+Node: IPEDS_48000To75000
+dcid: "IPEDS_48000To75000"
+name: "IPEDS_48000To75000"
+typeOf: dcs:FamilyIncomeEnum
+
+Node: IPEDS_110000AndAbove
+dcid: "IPEDS_110000AndAbove"
+name: "IPEDS_110000AndAbove"
+typeOf: dcs:FamilyIncomeEnum
+description: "Family income brackets for statistics provided by IPEDS."
+
+Node: IPEDS_30000To48000
+dcid: "IPEDS_30000To48000"
+typeOf: dcs:FamilyIncomeEnum
+name: "IPEDS_30000To48000"
+
+Node: IPEDS_0To30000
+dcid: "IPEDS_0To30000"
+name: "IPEDS_0To30000"
+typeOf: dcs:FamilyIncomeEnum
+
+Node: OI_RaceOther
+dcid: "OI_RaceOther"
+name: "OI_RaceOther"
+description: "Category of race or ethnicity group used by Opportunity Insights that combines non-enumerated categories."
+typeOf: dcs:OI_RaceCodeEnum
+
+###---- begin BEA enum instances ----###
+Node: dcid:BEAServicesRents
+name: "BEAServicesRents"
+description: "Indicates Housing Rental Prices to determine Consumer Price Index (CPI) by US Bureau of Economic Analysis."
+typeOf: dcs:BEAProductEnum
+dcid: "BEAServicesRents"
+
+Node: dcid:BEAServicesOthers
+name: "BEAServicesOthers"
+description: "Indicates Services Others than Rentals to determine Consumer Price Index (CPI) by US Bureau of Economic Analysis."
+typeOf: dcs:BEAProductEnum
+dcid: "BEAServicesOthers"
+
+Node: dcid:BEAAllItems
+name: "BEAAllItems"
+description: "Indicates the entire bucket of goods and services used to determine Consumer Price Index (CPI) by US Bureau of Economic Analysis."
+typeOf: dcs:BEAProductEnum
+dcid: "BEAAllItems"
+
+Node: dcid:BEAGoods
+name: "BEAGoods"
+description: "Indicates the list of Goods to determine Consumer Price Index (CPI) by US Bureau of Economic Analysis."
+typeOf: dcs:BEAProductEnum
+dcid: "BEAGoods"
+
+Node: dcid:InflationAdjustmentEnum
+typeOf: schema:Enumeration
+name: "InflationAdjustmentEnum"
+description: "Enumerations that enable comparison of quantities in real terms as if prices had not changed OR in nominal terms where there value has not been adjusted for inflation"
+
+Node: dcid:InflationAdjusted
+typeOf: dcs:InflationAdjustmentEnum
+name: "InflationAdjusted"
+description: "Indicates adjustment of a time series data to eliminate the effect Inflation or price changes over a period"
+
+Node: dcid:InflationUnadjusted
+typeOf: dcs:InflationAdjustmentEnum
+name: "InflationUnAdjusted"
+description: "Indicates raw time series data or nominal data without adjustments to eliminate the effect of inflation or price changes"
+
+Node: dcid:BEASurvey
+typeOf: dcs:CensusSurveyEnum
+name: "BEASurvey"
+description: "Methodology used by the Bureau of Economic Analysis (BEA) to produce its annual Gross domestic product (GDP)"
+
+###---- begin FEC enum instances ----###
+Node: dcid:CandidateStatusIncumbent
+name: "Incumbent"
+typeOf: dcs:CandidateICOStatusEnum
+
+Node: dcid:CandidateStatusChallenger
+name: "Challenger"
+typeOf: dcs:CandidateICOStatusEnum
+
+Node: dcid:CandidateStatusOpenSeat
+name: "OpenSeat"
+typeOf: dcs:CandidateICOStatusEnum
+
+Node: dcid:FEC_CmteDesignationPrincipal
+name: "PrincipalCampaignCommitteeOfCandidate"
+typeOf: dcs:PoliticalCampaignCmteDesignationEnum
+description: "FEC Committee Designation Types as defined in https://www.fec.gov/campaign-finance-data/candidate-committee-linkage-file-description/"
+
+Node: dcid:FEC_CmteDesignationAuthorized
+name: "AuthorizedByCandiate"
+typeOf: dcs:PoliticalCampaignCmteDesignationEnum
+description: "FEC Committee Designation Types as defined in https://www.fec.gov/campaign-finance-data/candidate-committee-linkage-file-description/"
+
+Node: dcid:FEC_CmteDesignationLobbyistOrRegistrantPAC
+name: "Lobbyist/RegistrantPAC"
+typeOf: dcs:PoliticalCampaignCmteDesignationEnum
+description: "FEC Committee Designation Types as defined in https://www.fec.gov/campaign-finance-data/candidate-committee-linkage-file-description/"
+
+Node: dcid:FEC_CmteDesignationLeadershipPAC
+name: "LeadershipPAC"
+typeOf: dcs:PoliticalCampaignCmteDesignationEnum
+description: "FEC Committee Designation Types as defined in https://www.fec.gov/campaign-finance-data/candidate-committee-linkage-file-description/"
+
+Node: dcid:FEC_CmteDesignationJoint
+name: "JointFundraiser"
+typeOf: dcs:PoliticalCampaignCmteDesignationEnum
+description: "FEC Committee Designation Types as defined in https://www.fec.gov/campaign-finance-data/candidate-committee-linkage-file-description/"
+
+Node: dcid:FEC_CmteDesignationUnauthorized
+name: "Unauthorized"
+typeOf: dcs:PoliticalCampaignCmteDesignationEnum
+description: "FEC Committee Designation Types as defined in https://www.fec.gov/campaign-finance-data/candidate-committee-linkage-file-description/"
+
+Node: dcid:FEC_CmteTypeHouse
+name: "House"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Campaign committee for candidates for the U.S. House of Representatives - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypeSenate
+name: "Senate"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Campaign committee for candidate for Senate - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypePresidential
+name: "Presidential"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Campaign committee for candidate for U.S. President - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypeCommunicationCost
+name: "CommunicationCost"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Organizations like corporations or unions may prepare communications for their employees or members that advocate the election of specific candidates and they must disclose them under certain circumstances. These are usually paid with direct corporate or union funds rather than from PACs - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypeDelegateCommittee
+name: "DelegateCommittee"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Delegate committees are organized for the purpose of influencing the selection of delegates to Presidential nominating conventions. The term includes a group of delegates, a group of individuals seeking to become delegates, and a group of individuals supporting delegates - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypeElectioneeringCommunication
+name: "ElectioneeringCommunication"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Groups (other than PACs) making electioneering communications - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypeIndependentExpenditorPersonOrGroup
+name: "IndependentExpenditorPersonOrGroup"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Individuals or groups (other than PACs) making independent expenditures over $250 in a year must disclose those expenditures - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypeIndependentExpenditureOnlySuperPACs
+name: "IndependentExpenditureOnlySuperPACs"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Political Committee that has filed a statement consistent with AO 2010-09 or AO 2010-11 - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypeSingleCandidateIndependentExpenditure
+name: "SingleCandidateIndependentExpenditure"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Enumerated in https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/ but without a description"
+
+Node: dcid:FEC_CmteTypeNationalPartyNonfederalAccount
+name: "NationalPartyNonfederalAccount"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "National party nonfederal accounts. Not permitted after enactment of Bipartisan Campaign Reform Act of 2002 - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypePAC
+name: "PAC"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Political Action Committee - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+Node: dcid:FEC_CmteTypePACWithNonContributionAccount
+name: "PACWithNonContributionAccount"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Link to description: https://www.fec.gov/help-candidates-and-committees/registering-pac/bank-accounts-nonconnected-pacs/"
+
+Node: dcid:FEC_CmteTypeParty
+name: "Party"
+typeOf: dcs:PoliticalCampaignCmteTypeEnum
+description: "Party committees. May be affiliated with another party committee - https://www.fec.gov/campaign-finance-data/committee-type-code-descriptions/"
+
+# Begin general education enums
+Node: USInState
+dcid: "USInState"
+typeOf: dcs:StudentTypeEnum
+name: "USInState"
+
+Node: USOutOfState
+dcid: "USOutOfState"
+typeOf: dcs:StudentTypeEnum
+description: "Students who are not from the state of their College or University"
+name: "USOutOfState"
+
+Node: Graduate
+dcid: "Graduate"
+name: "Graduate"
+typeOf: dcs:EnrollmentLevelEnum
+
+Node: PostGraduate
+dcid: "PostGraduate"
+description: "Educational enrollment level."
+typeOf: dcs:EnrollmentLevelEnum
+name: "PostGraduate"
+
+Node: UnderGraduate
+dcid: "UnderGraduate"
+name: "UnderGraduate"
+typeOf: dcs:EnrollmentLevelEnum
+
+Node: InstitutionControlUnknown
+typeOf: dcs:InstitutionControlEnum
+dcid: "InstitutionControlUnknown"
+name: "InstitutionControlUnknown"
+description: "Unknown educational institution control."
+
+Node: InstitutionControlPublic
+typeOf: dcs:InstitutionControlEnum
+dcid: "InstitutionControlPublic"
+name: "InstitutionControlPublic"
+description: "A public educational institution."
+
+Node: InstitutionControlPrivateNonProfit
+typeOf: dcs:InstitutionControlEnum
+dcid: "InstitutionControlPrivateNonProfit"
+name: "InstitutionControlPrivateNonProfit"
+description: "A private non-profit educational institution."
+
+Node: InstitutionControlPrivateForProfit
+typeOf: dcs:InstitutionControlEnum
+dcid: "InstitutionControlPrivateForProfit"
+name: "InstitutionControlPrivateForProfit"
+description: "A private for-profit educational institution."
+
+###---- begin Carnegie enum instances ----###
+Node: CarnegieInstitutionTypeUnknown
+typeOf: dcs:CarnegieInstitutionTypeEnum
+dcid: "CarnegieInstitutionTypeUnknown"
+name: "CarnegieInstitutionTypeUnknown"
+description: "An educational institution of unknown type Carnegie classification."
+
+Node: CarnegieInstitutionTypeTwoYear
+typeOf: dcs:CarnegieInstitutionTypeEnum
+dcid: "CarnegieInstitutionTypeTwoYear"
+name: "CarnegieInstitutionTypeTwoYear"
+description: "A two-year study educational institution per Carnegie classification."
+
+Node: CarnegieInstitutionTypeFourYear
+typeOf: dcs:CarnegieInstitutionTypeEnum
+dcid: "CarnegieInstitutionTypeFourYear"
+name: "CarnegieInstitutionTypeFourYear"
+description: "A four-year study educational institution per Carnegie classification."
+
+Node: CarnegieInstitutionTypeExclusivelyGraduate
+typeOf: dcs:CarnegieInstitutionTypeEnum
+dcid: "CarnegieInstitutionTypeExclusivelyGraduate"
+name: "CarnegieInstitutionTypeExclusivelyGraduate"
+description: "An exclusively graduate educational institution per Carnegie classification."
+
+Node: CarnegieInstitutionSizeUnknown
+typeOf: dcs:CarnegieInstitutionSizeEnum
+dcid: "CarnegieInstitutionSizeUnknown"
+name: "CarnegieInstitutionSizeUnknown"
+description: "An educational institution with an unknown size per Carnegie classification."
+
+Node: CarnegieInstitutionSizeVerySmall
+typeOf: dcs:CarnegieInstitutionSizeEnum
+dcid: "CarnegieInstitutionSizeVerySmall"
+name: "CarnegieInstitutionSizeVerySmall"
+description: "A very small educational institution per Carnegie classification."
+
+Node: CarnegieInstitutionSizeSmall
+typeOf: dcs:CarnegieInstitutionSizeEnum
+dcid: "CarnegieInstitutionSizeSmall"
+name: "CarnegieInstitutionSizeSmall"
+description: "A small educational institution per Carnegie classification."
+
+Node: CarnegieInstitutionSizeMedium
+typeOf: dcs:CarnegieInstitutionSizeEnum
+dcid: "CarnegieInstitutionSizeMedium"
+name: "CarnegieInstitutionSizeMedium"
+description: "A medium sized educational institution per Carnegie classification."
+
+Node: CarnegieInstitutionSizeLarge
+typeOf: dcs:CarnegieInstitutionSizeEnum
+dcid: "CarnegieInstitutionSizeLarge"
+name: "CarnegieInstitutionSizeLarge"
+description: "A large educational institution per Carnegie classification."
+
+Node: CarnegieInstitutionSizeVeryLarge
+typeOf: dcs:CarnegieInstitutionSizeEnum
+dcid: "CarnegieInstitutionSizeVeryLarge"
+name: "CarnegieInstitutionSizeVeryLarge"
+description: "A very large educational institution per Carnegie classification."
+
+Node: CarnegieResidenceTypeUnknown
+typeOf: dcs:ResidenceTypeEnum
+dcid: "CarnegieResidenceTypeUnknown"
+name: "CarnegieResidenceTypeUnknown"
+description: "An educational institution with an unknown residence type per Carnegie classification."
+
+Node: CarnegieResidenceTypeNonResidential
+typeOf: dcs:ResidenceTypeEnum
+dcid: "CarnegieResidenceTypeNonResidential"
+name: "CarnegieResidenceTypeNonResidential"
+description: "A non-residential educational institution per Carnegie classification."
+
+Node: CarnegieResidenceTypeResidential
+typeOf: dcs:ResidenceTypeEnum
+dcid: "CarnegieResidenceTypeResidential"
+name: "CarnegieResidenceTypeResidential"
+description: "A residential educational institution per Carnegie classification."
+
+Node: CarnegieResidenceTypeHighlyResidential
+typeOf: dcs:ResidenceTypeEnum
+dcid: "CarnegieResidenceTypeHighlyResidential"
+name: "CarnegieResidenceTypeHighlyResidential"
+description: "A highly residential educational institution per Carnegie classification."
+
+###---- begin EIA enum instances ----###
+Node: dcid:EIA_AllOther
+name: "EIA_AllOther"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_Batteries
+name: "EIA_Batteries"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_CoalIntegratedGasificationCombinedCycle
+name: "EIA_CoalIntegratedGasificationCombinedCycle"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_ConventionalHydroelectric
+name: "EIA_ConventionalHydroelectric"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_ConventionalSteamCoal
+name: "EIA_ConventionalSteamCoal"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_Flywheels
+name: "EIA_Flywheels"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_Geothermal
+name: "EIA_Geothermal"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_HydroelectricPumpedStorage
+name: "EIA_HydroelectricPumpedStorage"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_LandfillGas
+name: "EIA_LandfillGas"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_MunicipalSolidWaste
+name: "EIA_MunicipalSolidWaste"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_NaturalGasFiredCombinedCycle
+name: "EIA_NaturalGasFiredCombinedCycle"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_NaturalGasFiredCombustionTurbine
+name: "EIA_NaturalGasFiredCombustionTurbine"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_NaturalGasInternalCombustionEngine
+name: "EIA_NaturalGasInternalCombustionEngine"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_NaturalGasSteamTurbine
+name: "EIA_NaturalGasSteamTurbine"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_NaturalGaswithCompressedAirStorage
+name: "EIA_NaturalGaswithCompressedAirStorage"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_Nuclear
+name: "EIA_Nuclear"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_OffshoreWindTurbine
+name: "EIA_OffshoreWindTurbine"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_OnshoreWindTurbine
+name: "EIA_OnshoreWindTurbine"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_OtherGases
+name: "EIA_OtherGases"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_OtherNaturalGas
+name: "EIA_OtherNaturalGas"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_OtherWasteBiomass
+name: "EIA_OtherWasteBiomass"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_PetroleumCoke
+name: "EIA_PetroleumCoke"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_PetroleumLiquids
+name: "EIA_PetroleumLiquids"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_SolarPhotovoltaic
+name: "EIA_SolarPhotovoltaic"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_SolarThermalwithEnergyStorage
+name: "EIA_SolarThermalwithEnergyStorage"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_SolarThermalwithoutEnergyStorage
+name: "EIA_SolarThermalwithoutEnergyStorage"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_WoodWasteBiomass
+name: "EIA_WoodWasteBiomass"
+typeOf: dcs:GeneratorTechnologyEnum
+
+Node: dcid:EIA_OutOfService_InServiceNextYear
+name: "EIA_OutOfService_InServiceNextYear"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_Operating
+name: "EIA_Operating"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_OutOfService
+name: "EIA_OutOfService"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_Standby_Backup
+name: "EIA_Standby_Backup"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_Retired
+name: "EIA_Retired"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_Cancelled
+name: "EIA_Cancelled"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_IndefinitelyPostponed
+name: "EIA_IndefinitelyPostponed"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_Testing_ConstructionComplete
+name: "EIA_Testing_ConstructionComplete"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_Planned
+name: "EIA_Planned"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_Legal_RegulatoryApprovalPending
+name: "EIA_Legal_RegulatoryApprovalPending"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_RegulatoryApproval
+name: "EIA_RegulatoryApproval"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_UnderConstruction
+name: "EIA_UnderConstruction"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_UnderConstruction_MoreThanHalfComplete
+name: "EIA_UnderConstruction_MoreThanHalfComplete"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_Other
+name: "EIA_Other"
+typeOf: dcs:PowerPlantStatusEnum
+
+Node: dcid:EIA_AnthraciteCoal
+name: "EIA_AnthraciteCoal"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_BituminousCoal
+name: "EIA_BituminousCoal"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_LigniteCoal
+name: "EIA_LigniteCoal"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_CoalDerivedSynthesisGas
+name: "EIA_CoalDerivedSynthesisGas"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_SubbituminousCoal
+name: "EIA_SubbituminousCoal"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_Waste_OtherCoal
+name: "EIA_Waste_OtherCoal"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_RefinedCoal
+name: "EIA_RefinedCoal"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_DistillateFuelOil
+name: "EIA_DistillateFuelOil"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_JetFuel
+name: "EIA_JetFuel"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_Kerosene
+name: "EIA_Kerosene"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_PetroleumCoke
+name: "EIA_PetroleumCoke"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_GaseousPropane
+name: "EIA_GaseousPropane"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_ResidualFuelOil
+name: "EIA_ResidualFuelOil"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_SynthesisGasfromPetroleumCoke
+name: "EIA_SynthesisGasfromPetroleumCoke"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_Waste_OtherOil
+name: "EIA_Waste_OtherOil"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_BlastFurnaceGas
+name: "EIA_BlastFurnaceGas"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_NaturalGas
+name: "EIA_NaturalGas"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_OtherGas
+name: "EIA_OtherGas"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_WoodWasteBiomass
+name: "EIA_WoodWasteBiomass"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_Wind
+name: "EIA_Wind"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_Water
+name: "EIA_Water"
+typeOf: dcs:EnergySourceEnum
+
+Node: dcid:EIA_EnergyStorageBattery
+name: "EIA_EnergyStorageBattery"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_EnergyStorageCompressedAir
+name: "EIA_EnergyStorageCompressedAir"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_EnergyStorageConcentratedSolarPower
+name: "EIA_EnergyStorageConcentratedSolarPower"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_EnergyStorageFlywheel
+name: "EIA_EnergyStorageFlywheel"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_EnergyStorageReversibleHydraulicTurbine
+name: "EIA_EnergyStorageReversibleHydraulicTurbine"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_EnergyStorageOther
+name: "EIA_EnergyStorageOther"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_SteamTurbineAllexceptcombinedcycle
+name: "EIA_SteamTurbineAllexceptcombinedcycle"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_GasTurbine
+name: "EIA_GasTurbine"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_InternalCombustionEngine
+name: "EIA_InternalCombustionEngine"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_CombinedCycleSteamPart
+name: "EIA_CombinedCycleSteamPart"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_CombinedCycleCombustionTurbinePart
+name: "EIA_CombinedCycleCombustionTurbinePart"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_CombinedCycleSingleShaft
+name: "EIA_CombinedCycleSingleShaft"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_CombinedCycleTotalUnit
+name: "EIA_CombinedCycleTotalUnit"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_HydrokineticAxialFlowTurbine
+name: "EIA_HydrokineticAxialFlowTurbine"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_HydrokineticWaveBuoy
+name: "EIA_HydrokineticWaveBuoy"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_HydrokineticOther
+name: "EIA_HydrokineticOther"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_HydroelectricTurbine
+name: "EIA_HydroelectricTurbine"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_TurbinesinBinaryCycle
+name: "EIA_TurbinesinBinaryCycle"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_Photovoltaic
+name: "EIA_Photovoltaic"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_WindTurbineOnshore
+name: "EIA_WindTurbineOnshore"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_WindTurbineOffshore
+name: "EIA_WindTurbineOffshore"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_FuelCell
+name: "EIA_FuelCell"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_BlastFurnaceGas
+name: "EIA_BlastFurnaceGas"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_NaturalGas
+name: "EIA_NaturalGas"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_OtherGas
+name: "EIA_OtherGas"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_AgriculturalByproducts
+name: "EIA_AgriculturalByproducts"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_MunicipalSolidWaste
+name: "EIA_MunicipalSolidWaste"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_OtherBiomassSolids
+name: "EIA_OtherBiomassSolids"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_WoodWasteBiomass
+name: "EIA_WoodWasteBiomass"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_OtherBiomassLiquids
+name: "EIA_OtherBiomassLiquids"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_SludgeWaste
+name: "EIA_SludgeWaste"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_BlackLiquor
+name: "EIA_BlackLiquor"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_WoodWasteLiquidsexcludingBlackLiquor
+name: "EIA_WoodWasteLiquidsexcludingBlackLiquor"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_LandfillGas
+name: "EIA_LandfillGas"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_OtherBiomassGas
+name: "EIA_OtherBiomassGas"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_Solar
+name: "EIA_Solar"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_Wind
+name: "EIA_Wind"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_Geothermal
+name: "EIA_Geothermal"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_Water
+name: "EIA_Water"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_Nuclear
+name: "EIA_Nuclear"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_PurchasedSteam
+name: "EIA_PurchasedSteam"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_Wasteheatnotdirectlyattributedtoafuelsource
+name: "EIA_Wasteheatnotdirectlyattributedtoafuelsource"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_TireDerivedFuels
+name: "EIA_TireDerivedFuels"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_Electricityusedforenergystorage
+name: "EIA_Electricityusedforenergystorage"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_Other
+name: "EIA_Other"
+typeOf: dcs:PrimeMoverEnum
+
+Node: dcid:EIA_SingleOwner
+name: "EIA_SingleOwner"
+typeOf: dcs:TypeOfPowerPlantUnitOwnershipEnum
+
+Node: dcid:EIA_JointlyOwned
+name: "EIA_JointlyOwned"
+typeOf: dcs:TypeOfPowerPlantUnitOwnershipEnum
+
+Node: dcid:EIA_SingleOwnerNotRespondent
+name: "EIA_SingleOwnerNotRespondent"
+typeOf: dcs:TypeOfPowerPlantUnitOwnershipEnum
+
+Node: dcid:EIA_Topping
+name: "EIA_Topping"
+typeOf: dcs:ToppingOrBottomingEnum
+
+Node: dcid:EIA_Bottoming
+name: "EIA_Bottoming"
+typeOf: dcs:ToppingOrBottomingEnum
+
+Node: dcid:EIA_DuctBurners
+name: "EIA_DuctBurners"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_CanBypassHeatRecoverySteamGenerator
+name: "EIA_CanBypassHeatRecoverySteamGenerator"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_AssociatedwithCombinedHeatandPowerSystem
+name: "EIA_AssociatedwithCombinedHeatandPowerSystem"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_ToppingorBottoming
+name: "EIA_ToppingorBottoming"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_SolidFuelGasificationSystem
+name: "EIA_SolidFuelGasificationSystem"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_CarbonCaptureTechnology
+name: "EIA_CarbonCaptureTechnology"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_FluidizedBedTechnology
+name: "EIA_FluidizedBedTechnology"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_PulverizedCoalTechnology
+name: "EIA_PulverizedCoalTechnology"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_StokerTechnology
+name: "EIA_StokerTechnology"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_OtherCombustionTechnology
+name: "EIA_OtherCombustionTechnology"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_SubcriticalTechnology
+name: "EIA_SubcriticalTechnology"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_SupercriticalTechnology
+name: "EIA_SupercriticalTechnology"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_UltrasupercriticalTechnology
+name: "EIA_UltrasupercriticalTechnology"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_MultipleFuels
+name: "EIA_MultipleFuels"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_CofireFuels
+name: "EIA_CofireFuels"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_SwitchBetweenOilandNaturalGas
+name: "EIA_SwitchBetweenOilandNaturalGas"
+typeOf: dcs:CombustionPowerPlantPropertiesEnum
+
+Node: dcid:EIA_ElectricUtility
+name: "EIA_ElectricUtility"
+typeOf: dcs:PowerProviderCategoryEnum
+
+Node: dcid:EIA_IndependentPowerProducer_NonCombinedHeatandPower
+name: "EIA_IndependentPowerProducer_NonCombinedHeatandPower"
+typeOf: dcs:PowerProviderCategoryEnum
+
+Node: dcid:EIA_IndependentPowerProducer_CombinedHeatandPower
+name: "EIA_IndependentPowerProducer_CombinedHeatandPower"
+typeOf: dcs:PowerProviderCategoryEnum
+
+Node: dcid:EIA_Commercial_NonCombinedHeatandPower
+name: "EIA_Commercial_NonCombinedHeatandPower"
+typeOf: dcs:PowerProviderCategoryEnum
+
+Node: dcid:EIA_Commercial_CombinedHeatandPower
+name: "EIA_Commercial_CombinedHeatandPower"
+typeOf: dcs:PowerProviderCategoryEnum
+
+Node: dcid:EIA_Industrial_NonCombinedHeatandPower
+name: "EIA_Industrial_NonCombinedHeatandPower"
+typeOf: dcs:PowerProviderCategoryEnum
+
+Node: dcid:EIA_Industrial_CombinedHeatandPower
+name: "EIA_Industrial_CombinedHeatandPower"
+typeOf: dcs:PowerProviderCategoryEnum
+
+Node: dcid:EIA_AnthraciteCoal
+name: "EIA_AnthraciteCoal"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_BituminousCoal
+name: "EIA_BituminousCoal"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_LigniteCoal
+name: "EIA_LigniteCoal"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_CoalDerivedSynthesisGas
+name: "EIA_CoalDerivedSynthesisGas"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_SubbituminousCoal
+name: "EIA_SubbituminousCoal"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_Waste_OtherCoal
+name: "EIA_Waste_OtherCoal"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_RefinedCoal
+name: "EIA_RefinedCoal"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_DistillateFuelOil
+name: "EIA_DistillateFuelOil"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_JetFuel
+name: "EIA_JetFuel"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_Kerosene
+name: "EIA_Kerosene"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_PetroleumCoke
+name: "EIA_PetroleumCoke"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_GaseousPropane
+name: "EIA_GaseousPropane"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_ResidualFuelOil
+name: "EIA_ResidualFuelOil"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_SynthesisGasfromPetroleumCoke
+name: "EIA_SynthesisGasfromPetroleumCoke"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_Waste_OtherOil
+name: "EIA_Waste_OtherOil"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_BlastFurnaceGas
+name: "EIA_BlastFurnaceGas"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_NaturalGas
+name: "EIA_NaturalGas"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_OtherGas
+name: "EIA_OtherGas"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_WoodWasteBiomass
+name: "EIA_WoodWasteBiomass"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_Wind
+name: "EIA_Wind"
+typeOf: dcs:StartupEnergySourceEnum
+
+Node: dcid:EIA_Water
+name: "EIA_Water"
+typeOf: dcs:StartupEnergySourceEnum
+
+# Begin Dartmouth Atlas enums
+Node: dcid:NonHmoMedicare
+typeOf: dcs:MedicareTypeEnum
+name: "NonHmoMedicare"
+description: "Medicare enrollees age 65 or older not under Health Maintenance Organization (HMO) plans."
+
+Node: dcid:MedicareA
+typeOf: dcs:MedicareTypeEnum
+name: "MedicareA"
+description: "Medicare enrollees age 65 or older at mid-year eligible for Part A."
+
+Node: dcid:MedicareB
+typeOf: dcs:MedicareTypeEnum
+name: "MedicareB"
+description: "Medicare enrollees age 65 or older at mid-year eligible for Part B."
+
+Node: dcid:MedicareAB
+typeOf: dcs:MedicareTypeEnum
+name: "MedicareAB"
+description: "Medicare enrollees age 65 or older at mid-year eligible for Parts A and B."
+
+Node: dcid:DAD_NonBlack
+typeOf: dcs:RaceCodeEnum
+name: "DAD_NonBlack"
+description: "Dartmouth Atlas Data (DAD) defines any non-Black person as White."
+
+Node: dcid:DAD_Black
+typeOf: dcs:RaceCodeEnum
+name: "DAD_Black"
+description: "Black."
+
+# Begin generic health enums
+Node: dcid:Mammography
+typeOf: dcs:HealthPreventionEnum
+name: "Mammography"
+description: "Had a mammogram."
+
+Node: dcid:HemoglobinA1cTest
+typeOf: dcs:HealthPreventionEnum
+name: "HemoglobinA1cTest"
+description: "Took a hemoglobin A1c test."
+
+Node: dcid:EyeExam
+typeOf: dcs:HealthPreventionEnum
+name: "EyeExam"
+description: "Took a retinal or dilated eye exam by an eye care professional."
+
+Node: dcid:BloodLipidsTest
+typeOf: dcs:HealthPreventionEnum
+name: "BloodLipidsTest"
+description: "Took a low-density lipoprotein-cholesterol (LDL-C) test."
+
+Node: dcid:PrimaryCareClinicianVisit
+typeOf: dcs:HealthPreventionEnum
+name: "PrimaryCareClinicianVisit"
+description: "Made a visit to an office, outpatient center, rural health clinic or federally qualified health center with one of the following clinician specialty codes: general practice, family practice, internal medicine, pediatrician, nurse practitioner, physician assistant or clinic."
+
+Node: dcid:Discharge
+typeOf: dcs:MedicalEventEnum
+name: "Discharge"
+description: "Discharges for ambulatory care-sensitive conditions (convulsions, COPD, pneumonia, asthma, CHF, hypertension, angina, cellulitis, diabetes, gastroenteritis, kidney/urinary tract infections, dehydration) from short-stay acute care hospitals."
+
+Node: dcid:InfluenzaVaccineReceived
+typeOf: dcs:HealthPreventionEnum
+name: "InfluenzaVaccineReceived"
+description: "Had an annual flu vaccination."
+
+# Begin FBI UCR Crime enums
+Node: PropertyCrime
+dcid: "PropertyCrime"
+name: "Property Crime"
+typeOf: dcs:CrimeTypeEnum
+
+Node: LarcenyTheft
+dcid: "LarcenyTheft"
+typeOf: dcs:PropertyCrimeTypeEnum
+name: "Larceny-Theft"
+
+Node: Burglary
+dcid: "Burglary"
+typeOf: dcs:PropertyCrimeTypeEnum
+name: "Property Burglary"
+
+Node: MotorVehicleTheft
+dcid: "MotorVehicleTheft"
+name: "Motor Vehicle Theft"
+typeOf: dcs:PropertyCrimeTypeEnum
+
+Node: ViolentCrime
+dcid: "ViolentCrime"
+name: "Violent Crime"
+typeOf: dcs:CrimeTypeEnum
+
+Node: AggravatedAssault
+dcid: "AggravatedAssault"
+typeOf: dcs:ViolentCrimeTypeEnum
+name: "Aggravated Assault"
+
+Node: ForcibleRape
+dcid: "ForcibleRape"
+typeOf: dcs:ViolentCrimeTypeEnum
+name: "Forcible Rape"
+
+Node: MurderAndNonNegligentManslaughter
+dcid: "MurderAndNonNegligentManslaughter"
+typeOf: dcs:ViolentCrimeTypeEnum
+name: "Murder And Non Negligent Manslaughter"
+
+Node: Robbery
+dcid: "Robbery"
+typeOf: dcs:ViolentCrimeTypeEnum
+name: "Robbery"
+
+Node: Arson
+dcid: "Arson"
+typeOf: dcs:CrimeTypeEnum
+name: "Arson"
+
+Node: UCR_CombinedCrime
+dcid: "UCR_CombinedCrime"
+typeOf: dcs:CrimeTypeEnum
+name: "Combined Crime"
+description: "Sum of Property, Violent, and Arson crimes included in the UCR datasets."
+
+Node: dcid:DataCommonsAggregate
+typeOf: dcs:AggregateTypeEnum
+name: "DataCommonsAggregate"
+description: "Represents an aggregate computed by DataCommons."
+
+Node: dcid:ISICv3.1/A
+name: "Agriculture, hunting and forestry"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/A-B
+name: "Agriculture, hunting, forestry, fishing"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/B
+name: "Fishing"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/C
+name: "Mining and quarrying"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/C-E
+name: "Mining, Manufacturing, Utilities"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/D
+name: "Manufacturing"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/E
+name: "Electricity, gas and water supply"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/F
+name: "Construction"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/G
+name: "Wholesale and retail trade; repair of motor vehicles, motorcycles and personal and household goods"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/G-H
+name: "Wholesale, retail trade, restaurants and hotels"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/H
+name: "Hotels and restaurants"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/I
+name: "Transport, storage and communications"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/J
+name: "Financial intermediation"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/J-P
+name: "Other Activities"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/K
+name: "Real estate, renting and business activities"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/L
+name: "Public administration and defence; compulsory social security"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/M
+name: "Education"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/N
+name: "Health and social work"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/O
+name: "Other community, social and personal service activities"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/P
+name: "Activities of private households as employers and undifferentiated production activities of private households"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:ISICv3.1/Q
+name: "Extraterritorial organizations and bodies"
+typeOf: dcs:ISICv3.1Enum
+
+Node: dcid:InitialClaimExcludingIntrastateTransitional
+typeOf: dcs:UnemploymentInsuranceClaimTypeEnum
+name: "InitialClaimExcludingIntrastateTransitional"
+description: "Used by State UI programs. Includes intrastate initial claims and interstate initial claims filed from the agent state, but not instrastate transitional claims."
+descriptionUrL: "https://wdr.doleta.gov/directives/attach/ETAH/ETHand401_4th_s01.pdf"
+
+Node: dcid:InitialClaim
+typeOf: dcs:UnemploymentInsuranceClaimTypeEnum
+name: "InitialClaim"
+description: "An initial request for unemployment benefits."
+
+Node: dcid:ContinuedClaim
+typeOf: dcs:UnemploymentInsuranceClaimTypeEnum
+name: "ContinuedClaim"
+description: "A claim to continue receiving unemployment benefits."
+
+Node: dcid:StateUnemploymentInsurance
+typeOf: dcs:UnemploymentInsuranceProgramEnum
+name: "StateUnemploymentInsurance"
+description: "Unemployment insurance provided by a state (first-level administrative country subdivision) or state-equivalent."
+
+Node: dcid:UCFENoStateUnemploymentInsurance
+typeOf: dcs:UnemploymentInsuranceProgramEnum
+name: "UCFENoStateUnemploymentInsurance"
+description: "Represents Unemployment Compensation for Federal Employees, not in conjunction with any State Unemployment Insurance program."
+
+Node: dcid:UCXOnly
+typeOf: dcs:UnemploymentInsuranceProgramEnum
+name: "UCXOnly"
+description: "Represents Unemployment Compensation for Ex-servicemembers, not in conjunction with any other unemployment insurance program."
+
+Node: dcid:ShortTimeCompensation
+typeOf: dcs:UnemploymentInsuranceProgramEnum
+name: "ShortTimeCompensation"
+description: "Short-Time Compensation (STC), also known as work sharing or shared-work program, is an alternative to layoffs for employers experiencing a reduction in available work."
+descriptionUrl: "https://oui.doleta.gov/unemploy/docs/stc_fact_sheet.pdf"
+
+Node: dcid:StateUnemploymentInsuranceOrShortTimeCompensation
+typeOf: dcs:UnemploymentInsuranceProgramEnum
+name: "StateUnemploymentInsuranceOrShortTimeCompensation"
+description: "Represents any State Unemployment Insurance program or Short Time Compensation program."
+
+Node: dcid:WithCoveredEmployment
+typeOf: dcs:UnemploymentInsuranceStatusEnum
+name: WithCoveredEmployment
+description: "Qualified for unemployment insurance benefits via conditions such as: earned a specified amount of wages or must have worked a certain number of weeks or calendar quarters in covered employment, or must have met some combination of the wage and employment requirements within his/her base period."
+descriptionUrl: "https://oui.doleta.gov/unemploy/pdf/partnership.pdf"
+
+Node: dcid:MovingAverage1WeekWindow
+typeOf: dcs:MovingAverageWindowEnum
+name: MovingAverage1WeekWindow
+description: "Moving average with a window of 1 week. A statistic attributed to any given day would be the average of that day plus the preceding 6 days. This does NOT make any statement about the frequency of observations."
+
+Node: dcid:ScaledForPartTimeUnemploymentBenefits
+typeOf: dcs:UnemploymentInsuranceMeasurementEnum
+name: ScaledForPartTimeUnemploymentBenefits
+description: "For Short-Time Compensation program observations. Indicates that the measurement of number of STC claims has been scaled down to the equivalent of the full time layoff initial claims that would have taken place if not for the STC program. That is, if the agreement is for a 20 percent reduction in each STC claimant's hours, then each of these claimants initial claim would represent 20 percent of an equivalent full time layoff initial claim."
+descriptionUrl: "https://wdr.doleta.gov/directives/attach/ETAH/ETHand401_4th_s01.pdf"
+
+Node: dcid:COVID_19
+typeOf: dcs:MedicalConditionIncidentTypeEnum
+name: COVID_19
+description: "Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2)."
+descriptionUrl: "https://en.wikipedia.org/wiki/Coronavirus_disease_2019"
+
+Node: dcid:PatientDeceased
+typeOf: dcs:MedicalStatusEnum
+name: PatientDeceased
+
+Node: dcid:ConfirmedCase
+typeOf: dcs:MedicalStatusEnum
+name: ConfirmedCase
+
+Node: dcid:ConfirmedOrProbableCase
+typeOf: dcs:MedicalStatusEnum
+name: ConfirmedOrProbableCase
+
+Node: dcid:PatientRecovered
+name: "PatientRecovered"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:PatientHospitalized
+name: "PatientHospitalized"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:PatientInICU
+name: "PatientInICU"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:PatientOnVentilator
+name: "PatientOnVentilator"
+typeOf: dcs:MedicalStatusEnum
+
+Node: dcid:Positive
+typeOf: dcs:MedicalTestResultEnum
+name: "Positive"
+
+Node: dcid:Negative
+typeOf: dcs:MedicalTestResultEnum
+name: "Negative"
+
+Node: dcid:Pending
+typeOf: dcs:MedicalTestResultEnum
+name: "Pending"
+
+Node: dcid:Ready
+typeOf: dcs:MedicalTestResultEnum
+name: "Ready"

@@ -1,0 +1,893 @@
+{
+    "levelSummary": {
+      "LEVEL_INFO": {
+        "counters": {
+          "NumRowSuccesses": "40094478",
+          "NumPVSuccesses": "320755824",
+          "Existence_NumChecks": "280661346",
+          "NumNodeSuccesses": "40094478",
+          "Existence_NumDcCalls": "5"
+        }
+      },
+      "LEVEL_WARNING": {
+        "counters": {
+          "StatsCheck_MaxPercentFluctuationGreaterThan100": "17",
+          "StatsCheck_3_Sigma": "2",
+          "StrSplit_EmptyToken_value": "400944780",
+          "Sanity_MissingOrEmpty_value": "400944780"
+        }
+      }
+    },
+    "entries": [{
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_4km->E4'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E4', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_4km->E5'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E5', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_4km->E6'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E6', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'ConsecutiveDryDays', property: 'value', node: 'E:WeatherVariability_4km->E10'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E10', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_4km->E7'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E7', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_4km->E8'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E8', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'HeavyPrecipitationIndex', property: 'value', node: 'E:WeatherVariability_4km->E9'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E9', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_4km->E1'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E1', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_4km->E2'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E2', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_4km->E3'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "2"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E3', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_4km->E4'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E4', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_4km->E5'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E5', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_4km->E6'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E6', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'ConsecutiveDryDays', property: 'value', node: 'E:WeatherVariability_4km->E10'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E10', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_4km->E7'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E7', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_4km->E8'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E8', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'HeavyPrecipitationIndex', property: 'value', node: 'E:WeatherVariability_4km->E9'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E9', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_4km->E1'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E1', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_4km->E2'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E2', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_4km->E3'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "3"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E3', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_4km->E4'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E4', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_4km->E5'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E5', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_4km->E6'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E6', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'ConsecutiveDryDays', property: 'value', node: 'E:WeatherVariability_4km->E10'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E10', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_4km->E7'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E7', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_4km->E8'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E8', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'HeavyPrecipitationIndex', property: 'value', node: 'E:WeatherVariability_4km->E9'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E9', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_4km->E1'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E1', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_4km->E2'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E2', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_4km->E3'",
+      "counterKey": "StrSplit_EmptyToken_value"
+    }, {
+      "level": "LEVEL_WARNING",
+      "location": {
+        "file": "WeatherVariability_4km.csv",
+        "lineNumber": "4"
+      },
+      "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_4km->E3', type: 'StatVarObservation'",
+      "counterKey": "Sanity_MissingOrEmpty_value"
+    }],
+    "statsCheckSummary": [{
+      "placeDcid": "grid_4km/49.02083_-122.77083",
+      "statVarDcid": "ConsecutiveDryDays",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1989",
+          "values": [{
+            "value": 18.0,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "21213132"
+            }]
+          }]
+        }, {
+          "date": "1990",
+          "values": [{
+            "value": 39.0,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "23623707"
+            }]
+          }]
+        }],
+        "percentDifference": 116.67
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.02083_-122.77083",
+      "statVarDcid": "Kurtosis_DailyPrecipitation",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1981",
+          "values": [{
+            "value": 7.2687006,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "964302"
+            }]
+          }]
+        }, {
+          "date": "1982",
+          "values": [{
+            "value": 30.292892,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "3374877"
+            }]
+          }]
+        }],
+        "percentDifference": 316.76
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.35417_-95.14583",
+      "statVarDcid": "StandardDeviation_DailyPrecipitation",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1990",
+          "values": [{
+            "value": 3.1502547,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "21695177"
+            }]
+          }]
+        }, {
+          "date": "1991",
+          "values": [{
+            "value": 6.348899,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "24105752"
+            }]
+          }]
+        }],
+        "percentDifference": 101.54
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.35417_-95.14583",
+      "statVarDcid": "Kurtosis_DailyPrecipitation",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1986",
+          "values": [{
+            "value": 18.805204,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "13017107"
+            }]
+          }]
+        }, {
+          "date": "1987",
+          "values": [{
+            "value": 70.160095,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "15427682"
+            }]
+          }]
+        }],
+        "percentDifference": 273.09
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.02083_-122.68750",
+      "statVarDcid": "ConsecutiveDryDays",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1989",
+          "values": [{
+            "value": 18.0,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "21213134"
+            }]
+          }]
+        }, {
+          "date": "1990",
+          "values": [{
+            "value": 39.0,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "23623709"
+            }]
+          }]
+        }],
+        "percentDifference": 116.67
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.02083_-122.68750",
+      "statVarDcid": "Kurtosis_DailyPrecipitation",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1981",
+          "values": [{
+            "value": 6.165807,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "964304"
+            }]
+          }]
+        }, {
+          "date": "1982",
+          "values": [{
+            "value": 25.243927,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "3374879"
+            }]
+          }]
+        }],
+        "percentDifference": 309.42
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.02083_-123.10417",
+      "statVarDcid": "ConsecutiveDryDays",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1989",
+          "values": [{
+            "value": 16.0,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "21213130"
+            }]
+          }]
+        }, {
+          "date": "1990",
+          "values": [{
+            "value": 45.0,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "23623705"
+            }]
+          }]
+        }],
+        "percentDifference": 181.25
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.02083_-123.10417",
+      "statVarDcid": "Kurtosis_DailyPrecipitation",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1981",
+          "values": [{
+            "value": 7.8651133,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "964300"
+            }]
+          }]
+        }, {
+          "date": "1982",
+          "values": [{
+            "value": 29.849426,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "3374875"
+            }]
+          }]
+        }],
+        "percentDifference": 279.52
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.35417_-95.10417",
+      "statVarDcid": "Kurtosis_DailyPrecipitation",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1986",
+          "values": [{
+            "value": 18.55243,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "13017108"
+            }]
+          }]
+        }, {
+          "date": "1987",
+          "values": [{
+            "value": 70.71822,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "15427683"
+            }]
+          }]
+        }],
+        "percentDifference": 281.18
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.02083_-123.06250",
+      "statVarDcid": "ConsecutiveDryDays",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1989",
+          "values": [{
+            "value": 16.0,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "21213131"
+            }]
+          }]
+        }, {
+          "date": "1990",
+          "values": [{
+            "value": 45.0,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "23623706"
+            }]
+          }]
+        }],
+        "percentDifference": 181.25
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.35417_-94.97917",
+      "statVarDcid": "Kurtosis_DailyPrecipitation",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_3_Sigma",
+        "problemPoints": [{
+          "date": "1987",
+          "values": [{
+            "value": 65.519936,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "15427686"
+            }]
+          }]
+        }]
+      }, {
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1986",
+          "values": [{
+            "value": 18.135202,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "13017111"
+            }]
+          }]
+        }, {
+          "date": "1987",
+          "values": [{
+            "value": 65.519936,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "15427686"
+            }]
+          }]
+        }],
+        "percentDifference": 261.29
+      }]
+    }, {
+      "placeDcid": "grid_4km/49.35417_-95.02083",
+      "statVarDcid": "Kurtosis_DailyPrecipitation",
+      "measurementMethod": "",
+      "observationPeriod": "P1Y",
+      "scalingFactor": "",
+      "unit": "",
+      "validationCounters": [{
+        "counterKey": "StatsCheck_3_Sigma",
+        "problemPoints": [{
+          "date": "1987",
+          "values": [{
+            "value": 67.184715,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "15427685"
+            }]
+          }]
+        }]
+      }, {
+        "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+        "problemPoints": [{
+          "date": "1986",
+          "values": [{
+            "value": 18.294107,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "13017110"
+            }]
+          }]
+        }, {
+          "date": "1987",
+          "values": [{
+            "value": 67.184715,
+            "locations": [{
+              "file": "WeatherVariability_4km.csv",
+              "lineNumber": "15427685"
+            }]
+          }]
+        }],
+        "percentDifference": 267.25
+      }]
+    }],
+    "commandArgs": {
+      "existenceChecks": true,
+      "resolution": "RESOLUTION_MODE_LOCAL",
+      "numThreads": 1,
+      "statChecks": true
+    }
+  }

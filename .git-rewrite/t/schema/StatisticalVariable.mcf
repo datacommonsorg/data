@@ -1,0 +1,157 @@
+Node: dcid:TotalPopulation
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:MalePopulation
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+gender: schema:Male
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:FemalePopulation
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+gender: schema:Female
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:MarriedPopulation
+typeOf: dcs:StatisticalVariable
+maritalStatus: dcs:MarriedAndNotSeparated
+age: dcid:Years15Onwards
+populationType: schema:Person
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:DivorcedPopulation
+typeOf: dcs:StatisticalVariable
+maritalStatus: dcs:Divorced
+age: dcid:Years15Onwards
+populationType: schema:Person
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:NeverMarriedPopulation
+typeOf: dcs:StatisticalVariable
+maritalStatus: dcs:NeverMarried
+age: dcid:Years15Onwards
+populationType: schema:Person
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:SeparatedPopulation
+typeOf: dcs:StatisticalVariable
+maritalStatus: dcs:Separated
+age: dcid:Years15Onwards
+populationType: schema:Person
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:WidowedPopulation
+typeOf: dcs:StatisticalVariable
+maritalStatus: dcs:Widowed
+age: dcid:Years15Onwards
+populationType: schema:Person
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:MedianAge
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:age
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:medianValue
+unit: dcs:Year
+
+Node: dcid:MedianIncome
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+age: dcid:Years15Onwards
+incomeStatus: dcs:WithIncome
+measuredProperty: dcs:income
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:medianValue
+unit: dcs:USDollar
+
+Node: dcid:BelowPovertyLine
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+povertyStatus: dcs:BelowPovertyLevelInThePast12Months
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:HousingUnits
+typeOf: dcs:StatisticalVariable
+populationType: dcs:HousingUnit
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:Households
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:count
+measurementMethod: dcs:CensusACS5yrSurvey
+statType: dcs:measuredValue
+
+Node: dcid:TotalCrimes
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CriminalActivities
+crimeType: dcs:UCR_CombinedCrime
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:UnemploymentRate
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:unemploymentRate
+measurementMethod: dcs:BLSSeasonallyUnadjusted
+statType: dcs:measuredValue
+
+Node: dcid:NYTCovid19CumulativeCases
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+medicalStatus: dcs:ConfirmedOrProbableCase
+measuredProperty: dcs:cumulativeCount
+measurementMethod: dcs:NYT_COVID19_GitHub
+statType: dcs:measuredValue
+
+Node: dcid:NYTCovid19CumulativeDeaths
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:cumulativeCount
+measurementMethod: dcs:NYT_COVID19_GitHub
+statType: dcs:measuredValue
+
+Node: dcid:NYTCovid19IncrementalCases
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+medicalStatus: dcs:ConfirmedOrProbableCase
+measuredProperty: dcs:incrementalCount
+measurementMethod: dcs:dcDerivedStat/NYT_COVID19_GitHub
+statType: dcs:measuredValue
+
+Node: dcid:NYTCovid19IncrementalDeaths
+typeOf: dcs:StatisticalVariable
+populationType: dcs:MedicalConditionIncident
+incidentType: dcs:COVID_19
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:incrementalCount
+measurementMethod: dcs:dcDerivedStat/NYT_COVID19_GitHub
+statType: dcs:measuredValue

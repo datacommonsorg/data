@@ -1,0 +1,46 @@
+
+Node: E:COVIDTracking_States->E0
+typeOf: schema:State
+dcid: C:COVIDTracking_States->GeoId
+
+Node: E:COVIDTracking_States->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19CumulativeTestResults
+observationAbout: E:COVIDTracking_States->E0
+observationDate: C:COVIDTracking_States->Date
+value: C:COVIDTracking_States->COVID19CumulativeTestResults
+
+Node: E:COVIDTracking_States->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19NewTestResults
+observationAbout: E:COVIDTracking_States->E0
+observationDate: C:COVIDTracking_States->Date
+value: C:COVIDTracking_States->COVID19NewTestResults
+
+Node: E:COVIDTracking_States->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19CumulativePositiveTestResults
+observationAbout: E:COVIDTracking_States->E0
+observationDate: C:COVIDTracking_States->Date
+value: C:COVIDTracking_States->COVID19CumulativePositiveTestResults
+
+Node: E:COVIDTracking_States->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19NewPositiveTestResults
+observationAbout: E:COVIDTracking_States->E0
+observationDate: C:COVIDTracking_States->Date
+value: C:COVIDTracking_States->COVID19NewPositiveTestResults
+
+Node: E:COVIDTracking_States->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19CumulativeNegativeTestResults
+observationAbout: E:COVIDTracking_States->E0
+observationDate: C:COVIDTracking_States->Date
+value: C:COVIDTracking_States->COVID19CumulativeNegativeTestResults
+
+Node: E:COVIDTracking_States->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:COVID19NewNegativeTestResults
+observationAbout: E:COVIDTracking_States->E0
+observationDate: C:COVIDTracking_States->Date
+value: C:COVIDTracking_States->COVID19NewNegativeTestResults

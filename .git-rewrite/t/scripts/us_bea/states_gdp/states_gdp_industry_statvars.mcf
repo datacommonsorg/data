@@ -1,0 +1,168 @@
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_11
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/11
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_21
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/21
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_22
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/22
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_23
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/23
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_31_33
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/31-33
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_321&327_339
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/321&NAICS/327-339
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_311_316&322_326
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/311-316&NAICS/322-326
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/42
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_44_45
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/44-45
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_48_49
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/48-49
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_51
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/51
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_52
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/52
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_53
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/53
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_54
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/54
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_55
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/55
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_56
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/56
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_61
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/61
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_62
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/62
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_71
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/71
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_72
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/72
+
+Node: dcid:USStateQuarterlyIndustryGDP_NAICS_81
+typeOf: dcs:StatisticalVariable
+populationType: dcs:EconomicActivity
+activitySource: dcs:GrossDomesticProduction
+measuredProperty: dcs:amount
+measurementQualifier: dcs:Nominal
+naics: dcid:NAICS/81
+
