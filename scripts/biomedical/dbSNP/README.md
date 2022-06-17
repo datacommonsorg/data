@@ -67,7 +67,7 @@ All data downloaded for this import belongs to the U.S. National Library of Medi
 ### Input Files
 
 ## Schema
-The schema for both the data sources for the allele frequencies of genetic variants and the databases with alternative IDs for genetic variants were generated using scripts. The GenVarSourceEnum for data sources of allele frequencies is generated using [format_dbSNP_GenVarSource_enum_schema.py](https://github.com/datacommonsorg/data/blob/master/scripts/biomedical/dbSNP/format_dbSNP_GenVarSource_enum_schema.py). The GeneticVariant properties for alternative IDs is generated using [format_dbSNP_alt_ID_database_property_schema.py](https://github.com/datacommonsorg/data/blob/master/scripts/biomedical/dbSNP/format_dbSNP_alt_ID_database_property_schema.py).
+The schema for both the data sources for the allele frequencies of genetic variants and the databases with alternative IDs for genetic variants were generated using scripts. The GenVarSourceEnum for data sources of allele frequencies is generated using [format_dbSNP_GenVarSource_enum_schema.py](schema/format_dbSNP_GenVarSource_enum_schema.py). The GeneticVariant properties for alternative IDs is generated using [format_dbSNP_alt_ID_database_property_schema.py](schema/format_dbSNP_alt_ID_database_property_schema.py).
 
 ### Scripts
 [`format_dbSNP_GenVarSource_enum_schema.py`](schema/format_dbSNP_GenVarSource_enum_schema.py) generates the schema ([GenVarSourceEnum](https://datacommons.org/browser/GenVarSourceEnum)) used to represent the population study in which allele frequencies of genetic variants were observed.
