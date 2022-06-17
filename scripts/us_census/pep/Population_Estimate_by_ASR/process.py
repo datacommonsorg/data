@@ -59,6 +59,7 @@ observationPeriod: \"P1Y\"
 value: C:usa_population_asr->observation 
 """
 
+
 class USCensusPEPByASR:
     """
     This Class has requried methods to generate Cleaned CSV,
@@ -113,8 +114,8 @@ class USCensusPEPByASR:
                         race = "race: dcs:" + prop + "\n"
             if gender == "":
                 race = race.strip()
-            final_mcf_template += MCF_TEMPLATE.format(pv1=sv, pv2=age, pv3=race,
-                                                      pv4=gender) + "\n"
+            final_mcf_template += MCF_TEMPLATE.format(
+                pv1=sv, pv2=age, pv3=race, pv4=gender) + "\n"
         # Writing Genereated MCF to local path.
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
