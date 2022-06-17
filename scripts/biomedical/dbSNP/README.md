@@ -105,13 +105,19 @@ bash split.sh
 4. Parallely run the script to clean and convert hg38 data to an output MCF, which is needed for import into the graph. This script takes records information about the genetic variant in the output MCF.
 
 ```
-python format_dbsnp.py scratch/hg38_subset/hg38_GCF_subset_*.vcf hg38_subset_output_*.mcf hg38
+python format_dbsnp.py 
+  scratch/hg38_subset/hg38_GCF_subset_*.vcf 
+  output/hg38/hg38_subset_output_*.mcf 
+  hg38
 ```
 
 5. Parallely run the script to clean and convert hg19 data to an output MCF, which is needed for import into the graph. This script only records information about the hg19 genomic position of the genetic variant in the output MCF.
 
 ```
-python format_dbsnp_pos_only.py scratch/hg19_subset/hg19_GCF_subset_*.vcf hg19_subset_output_*.mcf hg19
+python format_dbsnp_pos_only.py 
+  scratch/hg19_subset/hg19_GCF_subset_*.vcf 
+  output/hg19/hg19_subset_output_*.mcf 
+  hg19
 ```
 
 ### Schema Generation
@@ -119,11 +125,15 @@ python format_dbsnp_pos_only.py scratch/hg19_subset/hg19_GCF_subset_*.vcf hg19_s
 1. Generate schema mcf GenVarSourceEnum to reperesent all population studies that report measurements on one or more genetic variants in dbSNP
 
 ```
-python format_dbSNP_GenVarSource_enum_schema.py scratch/hg38_GCF_no_conflicting_entries.vcf GeneticVariant_GenVarSource_enums.mcf
+python format_dbSNP_GenVarSource_enum_schema.py 
+  scratch/hg38_GCF_no_conflicting_entries.vcf 
+  GeneticVariant_GenVarSource_enums.mcf
 ```
 
 2. Generate schema mcf for initiating GeneticVariant property values for all alternative database IDs that are reported for one or more genetic variant in dbSNP
 
 ```
-python format_dbSNP_alt_ID_database_property_schema.py scratch/hg38_GCF_no_conflicting_entries.vcf GeneticVariant_Alt_ID_Database_properties.mcf
+python format_dbSNP_alt_ID_database_property_schema.py 
+  scratch/hg38_GCF_no_conflicting_entries.vcf 
+  GeneticVariant_Alt_ID_Database_properties.mcf
 ```
