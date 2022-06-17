@@ -1,4 +1,1202 @@
 {
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "438",
+        "NumPVSuccesses": "36792",
+        "Existence_NumChecks": "36792",
+        "NumNodeSuccesses": "4380",
+        "Resolution_NumDcCalls": "1",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "Existence_MissingReference_measurementMethod": "3942",
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "20",
+        "StatsCheck_3_Sigma": "8",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "31"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E14'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E12'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E10'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E14'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E12'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E10'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E14'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E12'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E10'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_BirthControl.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_BirthControl->E14'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "wikidataId/Q46107",
+    "statVarDcid": "Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 13.9,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "193"
+          }]
+        }]
+      }, {
+        "date": "2013-03",
+        "values": [{
+          "value": 36.3,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "157"
+          }]
+        }]
+      }],
+      "percentDifference": 161.15
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q46107",
+    "statVarDcid": "Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "47"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 0.7,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "120"
+          }]
+        }]
+      }],
+      "percentDifference": 7.0E7
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q46107",
+    "statVarDcid": "Count_BirthControlEvent_IUCDInsertion",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 201.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "193"
+          }]
+        }]
+      }, {
+        "date": "2013-03",
+        "values": [{
+          "value": 657.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "157"
+          }]
+        }]
+      }],
+      "percentDifference": 226.87
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q46107",
+    "statVarDcid": "Count_BirthControlEvent_Vasectomy",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "47"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 7.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "120"
+          }]
+        }]
+      }],
+      "percentDifference": 7.0E8
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q43433",
+    "statVarDcid": "Count_ContraceptiveDistribution_OralPill",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 10519.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "45"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 21312.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "118"
+          }]
+        }]
+      }],
+      "percentDifference": 102.6
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q43433",
+    "statVarDcid": "Count_ContraceptiveDistribution_Condom",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 695863.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "45"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 1456315.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "118"
+          }]
+        }]
+      }],
+      "percentDifference": 109.28
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_ContraceptiveDistribution_OralPill",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 6260.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 6.26E11
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 36.8,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 3.68E9
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_BirthControlEvent_Tubectomy",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 380.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 3.8E10
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_ContraceptiveDistribution_Condom",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 168766.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 1.68766E13
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2015-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "230"
+          }]
+        }]
+      }, {
+        "date": "2016-03",
+        "values": [{
+          "value": 3.3,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "48"
+          }]
+        }]
+      }],
+      "percentDifference": 3.3E8
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_BirthControlEvent_IUCDInsertion",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 226.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 2.26E10
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_BirthControlEvent_Vasectomy",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 8.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 8.0E8
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_BirthControlEvent_Sterilisation",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 388.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 3.88E10
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q677037",
+    "statVarDcid": "Count_ContraceptiveDistribution_OralPill",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 395739.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "71"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 811073.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "144"
+          }]
+        }]
+      }],
+      "percentDifference": 104.95
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q677037",
+    "statVarDcid": "Count_ContraceptiveDistribution_Condom",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 2138912.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "71"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 4567390.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "144"
+          }]
+        }]
+      }],
+      "percentDifference": 113.54
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q40888",
+    "statVarDcid": "Count_ContraceptiveDistribution_Condom",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2013-03",
+        "values": [{
+          "value": 38049.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "150"
+          }]
+        }]
+      }, {
+        "date": "2014-03",
+        "values": [{
+          "value": 168456.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "368"
+          }]
+        }]
+      }],
+      "percentDifference": 342.73
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q40888",
+    "statVarDcid": "Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 30.5,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "113"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2013-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "150"
+          }]
+        }]
+      }, {
+        "date": "2014-03",
+        "values": [{
+          "value": 0.1,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "368"
+          }]
+        }]
+      }],
+      "percentDifference": 1.0E7
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q40888",
+    "statVarDcid": "Count_BirthControlEvent_Vasectomy",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 330.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "113"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2013-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "150"
+          }]
+        }]
+      }, {
+        "date": "2014-03",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "368"
+          }]
+        }]
+      }],
+      "percentDifference": 1.0E8
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q40888",
+    "statVarDcid": "Count_BirthControlEvent_Sterilisation",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 514.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "40"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 1081.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "113"
+          }]
+        }]
+      }],
+      "percentDifference": 110.31
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q1165",
+    "statVarDcid": "Count_ContraceptiveDistribution_OralPill",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 201887.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "299"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 584605.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "263"
+          }]
+        }]
+      }],
+      "percentDifference": 189.57
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q1165",
+    "statVarDcid": "Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 14.2,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "299"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 36.6,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "263"
+          }]
+        }]
+      }],
+      "percentDifference": 157.75
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q1162",
+    "statVarDcid": "Count_ContraceptiveDistribution_OralPill",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 253723.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "261"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 16932.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "297"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 253723.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "261"
+          }]
+        }]
+      }],
+      "percentDifference": 1398.48
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q1162",
+    "statVarDcid": "Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 2.7,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "115"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2013-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "152"
+          }]
+        }]
+      }, {
+        "date": "2014-03",
+        "values": [{
+          "value": 0.2,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "370"
+          }]
+        }]
+      }],
+      "percentDifference": 2.0E7
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q1162",
+    "statVarDcid": "Count_BirthControlEvent_Vasectomy",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 30.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "115"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016-03",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "42"
+          }]
+        }]
+      }, {
+        "date": "2017-03",
+        "values": [{
+          "value": 30.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "115"
+          }]
+        }]
+      }],
+      "percentDifference": 2900.0
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q26927",
+    "statVarDcid": "Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 14.3,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "277"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "313"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 14.3,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "277"
+          }]
+        }]
+      }],
+      "percentDifference": 1.43E9
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q1168",
+    "statVarDcid": "Count_Death_BirthControlSterilisation",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 91.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "192"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2011-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "83"
+          }]
+        }]
+      }, {
+        "date": "2012-03",
+        "values": [{
+          "value": 91.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "192"
+          }]
+        }]
+      }],
+      "percentDifference": 9.1E9
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q1159",
+    "statVarDcid": "Count_Death_BirthControlSterilisation",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2013-03",
+        "values": [{
+          "value": 154.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "151"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2012-03",
+        "values": [{
+          "value": 17.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "187"
+          }]
+        }]
+      }, {
+        "date": "2013-03",
+        "values": [{
+          "value": 154.0,
+          "locations": [{
+            "file": "NHM_BirthControl.csv",
+            "lineNumber": "151"
+          }]
+        }]
+      }],
+      "percentDifference": 805.88
+    }]
+  }],
   "commandArgs": {
     "existenceChecks": true,
     "resolution": "RESOLUTION_MODE_FULL",

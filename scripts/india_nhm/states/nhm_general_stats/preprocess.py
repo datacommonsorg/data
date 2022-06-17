@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import os
-
 from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
 from india_nhm.states.base.readme_generator import ReadMeGen
 

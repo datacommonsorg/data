@@ -173,10 +173,12 @@ class NHMDataLoaderBase(object):
                     else:
                         continue
 
-                df_full = df_full.append(cleaned_df, ignore_index=True)
-
+                df_full = pd.concat([df_full, cleaned_df], ignore_index=True)
+                        
         # Converting column names according to schema and saving it as csv
         df_full.columns = df_full.columns.map(self.cols_dict)
+        df_full = df_full.groupby(level=0, axis=1).sum()
+
         df_full.to_csv(self.final_csv_path, index=False)
 
         return df_full

@@ -13,6 +13,8 @@
 # limitations under the License.
 
 import os
+os.chdir('../../../')
+
 import unittest
 from india_nhm.states.base.data_cleaner import NHMDataLoaderBase
 

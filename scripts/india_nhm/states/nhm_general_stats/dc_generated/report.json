@@ -1,4 +1,1119 @@
 {
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "438",
+        "NumPVSuccesses": "24966",
+        "Existence_NumChecks": "24966",
+        "NumNodeSuccesses": "3066",
+        "Resolution_NumDcCalls": "1",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "Existence_MissingReference_measurementMethod": "2628",
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "24",
+        "StatsCheck_3_Sigma": "1",
+        "Existence_MissingReference_variableMeasured": "438",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "39"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Outpatient_Ayush', property: 'variableMeasured', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E6'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E5'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E4'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E2'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_GeneralStats.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_GeneralStats->E1'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "wikidataId/Q46107",
+    "statVarDcid": "Count_Outpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 104471.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "302"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 618772.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "266"
+          }]
+        }]
+      }],
+      "percentDifference": 492.29
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q46107",
+    "statVarDcid": "Count_Outpatient_Ayush",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 5904.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "302"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 22359.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "266"
+          }]
+        }]
+      }],
+      "percentDifference": 278.71
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q46107",
+    "statVarDcid": "Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 4371.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "302"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 50879.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "266"
+          }]
+        }]
+      }],
+      "percentDifference": 1064.01
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q46107",
+    "statVarDcid": "Count_SurgicalProcedure_Major",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 328.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "302"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 1811.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "266"
+          }]
+        }]
+      }],
+      "percentDifference": 452.13
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q46107",
+    "statVarDcid": "Count_SurgicalProcedure_Minor",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 471.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "302"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 2739.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "266"
+          }]
+        }]
+      }],
+      "percentDifference": 481.53
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Count_Outpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 2.51530874E8,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "294"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 5.46863974E8,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "258"
+          }]
+        }]
+      }],
+      "percentDifference": 117.41
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.5,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "294"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 1.5,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "258"
+          }]
+        }]
+      }],
+      "percentDifference": 200.0
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Count_Outpatient_Ayush",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 1.0309938E7,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "294"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 2.4974899E7,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "258"
+          }]
+        }]
+      }],
+      "percentDifference": 142.24
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Count_SurgicalProcedure_Major",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 494035.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "294"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 1844457.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "258"
+          }]
+        }]
+      }],
+      "percentDifference": 273.35
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q43433",
+    "statVarDcid": "Count_Outpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 69133.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "300"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 1989019.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "264"
+          }]
+        }]
+      }],
+      "percentDifference": 2777.09
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q43433",
+    "statVarDcid": "Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "300"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "300"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 3.2,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "264"
+          }]
+        }]
+      }],
+      "percentDifference": 3.2E8
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q43433",
+    "statVarDcid": "Count_Outpatient_Ayush",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "300"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 130605.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "264"
+          }]
+        }]
+      }],
+      "percentDifference": 1.30605E13
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q43433",
+    "statVarDcid": "Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "300"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 42015.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "264"
+          }]
+        }]
+      }],
+      "percentDifference": 4.2015E12
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q43433",
+    "statVarDcid": "Count_SurgicalProcedure_Major",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 450.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "300"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 10054.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "264"
+          }]
+        }]
+      }],
+      "percentDifference": 2134.22
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q43433",
+    "statVarDcid": "Count_SurgicalProcedure_Minor",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 851.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "300"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 15171.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "264"
+          }]
+        }]
+      }],
+      "percentDifference": 1682.73
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_Outpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 501784.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 5.01784E13
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_Inpatient_Deceased_AsFractionOf_Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 1.7,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 1.7E8
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_Outpatient_Ayush",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 44801.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 4.4801E12
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66278313",
+    "statVarDcid": "Count_Outpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 3355304.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "309"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 9965420.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "273"
+          }]
+        }]
+      }],
+      "percentDifference": 197.0
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66278313",
+    "statVarDcid": "Count_Inpatient",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 81420.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "309"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 305676.0,
+          "locations": [{
+            "file": "NHM_GeneralStats.csv",
+            "lineNumber": "273"
+          }]
+        }]
+      }],
+      "percentDifference": 275.43
+    }]
+  }],
   "commandArgs": {
     "existenceChecks": true,
     "resolution": "RESOLUTION_MODE_FULL",

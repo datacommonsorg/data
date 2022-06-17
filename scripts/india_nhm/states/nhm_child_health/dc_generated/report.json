@@ -3,22 +3,19 @@
     "LEVEL_INFO": {
       "counters": {
         "NumRowSuccesses": "438",
-        "NumPVSuccesses": "44505",
-        "Existence_NumChecks": "44505",
-        "NumNodeSuccesses": "5237",
+        "NumPVSuccesses": "48618",
+        "Existence_NumChecks": "48618",
+        "NumNodeSuccesses": "5694",
         "Resolution_NumDcCalls": "1",
         "Existence_NumDcCalls": "1"
       }
     },
     "LEVEL_WARNING": {
       "counters": {
-        "Existence_MissingReference_measurementMethod": "4799",
-        "StatsCheck_MaxPercentFluctuationGreaterThan100": "29",
-        "StatsCheck_3_Sigma": "5",
-        "StrSplit_EmptyToken_value": "457",
-        "Sanity_MissingOrEmpty_value": "457",
-        "StatsCheck_MaxPercentFluctuationGreaterThan500": "26",
-        "StatsCheck_Data_Holes": "14"
+        "Existence_MissingReference_measurementMethod": "5256",
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "20",
+        "StatsCheck_3_Sigma": "12",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "61"
       }
     }
   },
@@ -28,480 +25,8 @@
       "file": "NHM_ChildHealth.csv",
       "lineNumber": "2"
     },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "2"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "3"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "3"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "4"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "4"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "5"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "5"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "6"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "6"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "7"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "7"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "8"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "8"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "9"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "9"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "10"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "10"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "11"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "11"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "12"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "12"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "13"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "13"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "14"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "14"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "15"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "15"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "16"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "16"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "17"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "17"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "18"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "18"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "19"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "19"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "20"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "20"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "21"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "21"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "22"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "22"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "23"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "23"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "24"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "24"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "25"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "25"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "26"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "26"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "27"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "27"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "28"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "28"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "29"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "29"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "30"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "30"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "31"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent', property: 'value', node: 'E:NHM_ChildHealth->E3'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "31"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_ChildHealth->E3', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
@@ -589,6 +114,14 @@
       "lineNumber": "2"
     },
     "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E11'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E3'",
     "counterKey": "Existence_MissingReference_measurementMethod"
   }, {
     "level": "LEVEL_WARNING",
@@ -684,6 +217,14 @@
       "file": "NHM_ChildHealth.csv",
       "lineNumber": "4"
     },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E3'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_ChildHealth.csv",
+      "lineNumber": "4"
+    },
     "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E4'",
     "counterKey": "Existence_MissingReference_measurementMethod"
   }, {
@@ -717,30 +258,6 @@
       "lineNumber": "4"
     },
     "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E7'",
-    "counterKey": "Existence_MissingReference_measurementMethod"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "4"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E8'",
-    "counterKey": "Existence_MissingReference_measurementMethod"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "4"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E5'",
-    "counterKey": "Existence_MissingReference_measurementMethod"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_ChildHealth.csv",
-      "lineNumber": "4"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_ChildHealth->E6'",
     "counterKey": "Existence_MissingReference_measurementMethod"
   }],
   "statsCheckSummary": [{
@@ -901,30 +418,27 @@
     "scalingFactor": "",
     "unit": "",
     "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
       "problemPoints": [{
-        "date": "2009-03",
+        "date": "2018-03",
         "values": [{
-          "value": 48.6,
+          "value": 0.0,
           "locations": [{
             "file": "NHM_ChildHealth.csv",
-            "lineNumber": "302"
+            "lineNumber": "10"
           }]
         }]
       }, {
-        "date": "2010-03",
+        "date": "2019-03",
         "values": [{
-          "value": 153.3,
+          "value": 99.6,
           "locations": [{
             "file": "NHM_ChildHealth.csv",
-            "lineNumber": "266"
+            "lineNumber": "338"
           }]
         }]
       }],
-      "percentDifference": 215.43
-    }, {
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2019-03"
+      "percentDifference": 9.96E9
     }]
   }, {
     "placeDcid": "wikidataId/Q46107",
@@ -955,6 +469,36 @@
         }]
       }],
       "percentDifference": 246.19
+    }]
+  }, {
+    "placeDcid": "country/IND",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Deaths",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "112"
+          }]
+        }]
+      }, {
+        "date": "2018-03",
+        "values": [{
+          "value": 250.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2"
+          }]
+        }]
+      }],
+      "percentDifference": 2.5E10
     }]
   }, {
     "placeDcid": "country/IND",
@@ -994,8 +538,27 @@
     "scalingFactor": "",
     "unit": "",
     "validationCounters": [{
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2019-03"
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "2"
+          }]
+        }]
+      }, {
+        "date": "2019-03",
+        "values": [{
+          "value": 98.9,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "330"
+          }]
+        }]
+      }],
+      "percentDifference": 9.89E9
     }]
   }, {
     "placeDcid": "wikidataId/Q43433",
@@ -1007,6 +570,15 @@
     "validationCounters": [{
       "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
       "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "300"
+          }]
+        }]
+      }, {
         "date": "2010-03",
         "values": [{
           "value": 194.0,
@@ -1015,17 +587,8 @@
             "lineNumber": "264"
           }]
         }]
-      }, {
-        "date": "2011-03",
-        "values": [{
-          "value": 1294.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "82"
-          }]
-        }]
       }],
-      "percentDifference": 567.01
+      "percentDifference": 1.94E10
     }]
   }, {
     "placeDcid": "wikidataId/Q43433",
@@ -1035,17 +598,8 @@
     "scalingFactor": "",
     "unit": "",
     "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "counterKey": "StatsCheck_3_Sigma",
       "problemPoints": [{
-        "date": "2018-03",
-        "values": [{
-          "value": 1.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "8"
-          }]
-        }]
-      }, {
         "date": "2019-03",
         "values": [{
           "value": 3.0,
@@ -1054,8 +608,29 @@
             "lineNumber": "336"
           }]
         }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "118"
+          }]
+        }]
+      }, {
+        "date": "2018-03",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "8"
+          }]
+        }]
       }],
-      "percentDifference": 200.0
+      "percentDifference": 1.0E8
     }]
   }, {
     "placeDcid": "wikidataId/Q43433",
@@ -1067,25 +642,25 @@
     "validationCounters": [{
       "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
       "problemPoints": [{
-        "date": "2013-03",
+        "date": "2009-03",
         "values": [{
           "value": 0.0,
           "locations": [{
             "file": "NHM_ChildHealth.csv",
-            "lineNumber": "155"
+            "lineNumber": "300"
           }]
         }]
       }, {
-        "date": "2014-03",
+        "date": "2010-03",
         "values": [{
-          "value": 1.0,
+          "value": 7.0,
           "locations": [{
             "file": "NHM_ChildHealth.csv",
-            "lineNumber": "373"
+            "lineNumber": "264"
           }]
         }]
       }],
-      "percentDifference": 1.0E8
+      "percentDifference": 7.0E8
     }]
   }, {
     "placeDcid": "wikidataId/Q43433",
@@ -1097,28 +672,25 @@
     "validationCounters": [{
       "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
       "problemPoints": [{
-        "date": "2009-03",
+        "date": "2018-03",
         "values": [{
-          "value": 5.6,
+          "value": 0.0,
           "locations": [{
             "file": "NHM_ChildHealth.csv",
-            "lineNumber": "300"
+            "lineNumber": "8"
           }]
         }]
       }, {
-        "date": "2010-03",
+        "date": "2019-03",
         "values": [{
-          "value": 98.4,
+          "value": 99.2,
           "locations": [{
             "file": "NHM_ChildHealth.csv",
-            "lineNumber": "264"
+            "lineNumber": "336"
           }]
         }]
       }],
-      "percentDifference": 1657.14
-    }, {
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2019-03"
+      "percentDifference": 9.92E9
     }]
   }, {
     "placeDcid": "wikidataId/Q43433",
@@ -1163,107 +735,6 @@
       "percentDifference": 1645.42
     }]
   }, {
-    "placeDcid": "wikidataId/Q66710",
-    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Others",
-    "measurementMethod": "NHM_HealthInformationManagementSystem",
-    "observationPeriod": "P1Y",
-    "scalingFactor": "",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
-      "problemPoints": [{
-        "date": "2015-03",
-        "values": [{
-          "value": 0.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "230"
-          }]
-        }]
-      }, {
-        "date": "2016-03",
-        "values": [{
-          "value": 45.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "48"
-          }]
-        }]
-      }],
-      "percentDifference": 4.5E9
-    }]
-  }, {
-    "placeDcid": "wikidataId/Q66710",
-    "statVarDcid": "Count_Infant_VaccineAdministered_DPTDose3",
-    "measurementMethod": "NHM_HealthInformationManagementSystem",
-    "observationPeriod": "P1Y",
-    "scalingFactor": "",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2018-03",
-        "values": [{
-          "value": 7.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "11"
-          }]
-        }]
-      }, {
-        "date": "2019-03",
-        "values": [{
-          "value": 24.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "339"
-          }]
-        }]
-      }],
-      "percentDifference": 242.86
-    }]
-  }, {
-    "placeDcid": "wikidataId/Q66710",
-    "statVarDcid": "Count_BirthEvent_StillBirth",
-    "measurementMethod": "NHM_HealthInformationManagementSystem",
-    "observationPeriod": "P1Y",
-    "scalingFactor": "",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2013-03",
-        "values": [{
-          "value": 10.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "158"
-          }]
-        }]
-      }, {
-        "date": "2014-03",
-        "values": [{
-          "value": 28.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "376"
-          }]
-        }]
-      }],
-      "percentDifference": 180.0
-    }]
-  }, {
-    "placeDcid": "wikidataId/Q66710",
-    "statVarDcid": "Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent",
-    "measurementMethod": "NHM_HealthInformationManagementSystem",
-    "observationPeriod": "P1Y",
-    "scalingFactor": "",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2019-03"
-    }]
-  }, {
     "placeDcid": "wikidataId/Q66278313",
     "statVarDcid": "Count_Death_Infant",
     "measurementMethod": "NHM_HealthInformationManagementSystem",
@@ -1295,42 +766,24 @@
     }]
   }, {
     "placeDcid": "wikidataId/Q66278313",
-    "statVarDcid": "Count_Infant_VaccineAdministered_DPTDose2",
-    "measurementMethod": "NHM_HealthInformationManagementSystem",
-    "observationPeriod": "P1Y",
-    "scalingFactor": "",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
-      "problemPoints": [{
-        "date": "2017-03",
-        "values": [{
-          "value": 72.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "127"
-          }]
-        }]
-      }, {
-        "date": "2018-03",
-        "values": [{
-          "value": 603.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "17"
-          }]
-        }]
-      }],
-      "percentDifference": 737.5
-    }]
-  }, {
-    "placeDcid": "wikidataId/Q66278313",
     "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Deaths",
     "measurementMethod": "NHM_HealthInformationManagementSystem",
     "observationPeriod": "P1Y",
     "scalingFactor": "",
     "unit": "",
     "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "418"
+          }]
+        }]
+      }]
+    }, {
       "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
       "problemPoints": [{
         "date": "2019-03",
@@ -1352,36 +805,6 @@
         }]
       }],
       "percentDifference": 1.0E8
-    }]
-  }, {
-    "placeDcid": "wikidataId/Q66278313",
-    "statVarDcid": "Count_Infant_VaccineAdministered_DPTDose1",
-    "measurementMethod": "NHM_HealthInformationManagementSystem",
-    "observationPeriod": "P1Y",
-    "scalingFactor": "",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
-      "problemPoints": [{
-        "date": "2017-03",
-        "values": [{
-          "value": 75.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "127"
-          }]
-        }]
-      }, {
-        "date": "2018-03",
-        "values": [{
-          "value": 902.0,
-          "locations": [{
-            "file": "NHM_ChildHealth.csv",
-            "lineNumber": "17"
-          }]
-        }]
-      }],
-      "percentDifference": 1102.67
     }]
   }, {
     "placeDcid": "wikidataId/Q66278313",
@@ -1426,26 +849,136 @@
       "percentDifference": 1920.41
     }]
   }, {
-    "placeDcid": "wikidataId/Q66278313",
-    "statVarDcid": "Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent",
+    "placeDcid": "wikidataId/Q677037",
+    "statVarDcid": "Count_Death_Infant",
     "measurementMethod": "NHM_HealthInformationManagementSystem",
     "observationPeriod": "P1Y",
     "scalingFactor": "",
     "unit": "",
     "validationCounters": [{
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2019-03"
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 1271.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "144"
+          }]
+        }]
+      }, {
+        "date": "2018-03",
+        "values": [{
+          "value": 2614.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "34"
+          }]
+        }]
+      }],
+      "percentDifference": 105.66
     }]
   }, {
     "placeDcid": "wikidataId/Q677037",
-    "statVarDcid": "Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Others",
     "measurementMethod": "NHM_HealthInformationManagementSystem",
     "observationPeriod": "P1Y",
     "scalingFactor": "",
     "unit": "",
     "validationCounters": [{
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2015-03, 2016-03, 2017-03, 2019-03"
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 88.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "144"
+          }]
+        }]
+      }, {
+        "date": "2018-03",
+        "values": [{
+          "value": 354.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "34"
+          }]
+        }]
+      }],
+      "percentDifference": 302.27
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q1164",
+    "statVarDcid": "Count_Death_Infant",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 5430.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "116"
+          }]
+        }]
+      }, {
+        "date": "2018-03",
+        "values": [{
+          "value": 11663.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "6"
+          }]
+        }]
+      }],
+      "percentDifference": 114.79
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q1164",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Deaths",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": 29.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "407"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2017-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "116"
+          }]
+        }]
+      }, {
+        "date": "2018-03",
+        "values": [{
+          "value": 5.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "6"
+          }]
+        }]
+      }],
+      "percentDifference": 5.0E8
     }]
   }, {
     "placeDcid": "wikidataId/Q1164",
@@ -1490,48 +1023,46 @@
       "percentDifference": 140.52
     }]
   }, {
-    "placeDcid": "wikidataId/Q1164",
-    "statVarDcid": "Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent",
-    "measurementMethod": "NHM_HealthInformationManagementSystem",
-    "observationPeriod": "P1Y",
-    "scalingFactor": "",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2019-03"
-    }]
-  }, {
     "placeDcid": "wikidataId/Q40888",
-    "statVarDcid": "Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Deaths",
     "measurementMethod": "NHM_HealthInformationManagementSystem",
     "observationPeriod": "P1Y",
     "scalingFactor": "",
     "unit": "",
     "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": 4.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "404"
+          }]
+        }]
+      }]
+    }, {
       "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
       "problemPoints": [{
-        "date": "2009-03",
+        "date": "2019-03",
         "values": [{
           "value": 0.0,
           "locations": [{
             "file": "NHM_ChildHealth.csv",
-            "lineNumber": "295"
+            "lineNumber": "331"
           }]
         }]
       }, {
-        "date": "2010-03",
+        "date": "2020-03",
         "values": [{
-          "value": 118.1,
+          "value": 4.0,
           "locations": [{
             "file": "NHM_ChildHealth.csv",
-            "lineNumber": "259"
+            "lineNumber": "404"
           }]
         }]
       }],
-      "percentDifference": 1.181E10
-    }, {
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2019-03"
+      "percentDifference": 4.0E8
     }]
   }, {
     "placeDcid": "wikidataId/Q1165",
@@ -1552,17 +1083,6 @@
           }]
         }]
       }]
-    }]
-  }, {
-    "placeDcid": "wikidataId/Q1165",
-    "statVarDcid": "Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent",
-    "measurementMethod": "NHM_HealthInformationManagementSystem",
-    "observationPeriod": "P1Y",
-    "scalingFactor": "",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2019-03"
     }]
   }, {
     "placeDcid": "wikidataId/Q1162",
@@ -1607,15 +1127,46 @@
       "percentDifference": 2500.0
     }]
   }, {
-    "placeDcid": "wikidataId/Q1162",
-    "statVarDcid": "Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent",
+    "placeDcid": "wikidataId/Q26927",
+    "statVarDcid": "Count_Infant_VaccineSideEffect_Adverse_Others",
     "measurementMethod": "NHM_HealthInformationManagementSystem",
     "observationPeriod": "P1Y",
     "scalingFactor": "",
     "unit": "",
     "validationCounters": [{
-      "counterKey": "StatsCheck_Data_Holes",
-      "additionalDetails": "Possible data hole found. Dates in this series: 2009-03, 2010-03, 2011-03, 2012-03, 2013-03, 2014-03, 2015-03, 2016-03, 2017-03, 2019-03"
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 117.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "277"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "313"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 117.0,
+          "locations": [{
+            "file": "NHM_ChildHealth.csv",
+            "lineNumber": "277"
+          }]
+        }]
+      }],
+      "percentDifference": 1.17E10
     }]
   }],
   "commandArgs": {

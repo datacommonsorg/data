@@ -3,21 +3,19 @@
     "LEVEL_INFO": {
       "counters": {
         "NumRowSuccesses": "438",
-        "NumPVSuccesses": "32688",
-        "Existence_NumChecks": "32688",
-        "NumNodeSuccesses": "3924",
+        "NumPVSuccesses": "36792",
+        "Existence_NumChecks": "36792",
+        "NumNodeSuccesses": "4380",
         "Resolution_NumDcCalls": "1",
         "Existence_NumDcCalls": "1"
       }
     },
     "LEVEL_WARNING": {
       "counters": {
-        "Existence_MissingReference_measurementMethod": "3486",
+        "Existence_MissingReference_measurementMethod": "3942",
         "StatsCheck_MaxPercentFluctuationGreaterThan100": "7",
         "StatsCheck_3_Sigma": "2",
-        "StrSplit_EmptyToken_value": "456",
-        "Sanity_MissingOrEmpty_value": "456",
-        "StatsCheck_MaxPercentFluctuationGreaterThan500": "2"
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "10"
       }
     }
   },
@@ -27,486 +25,6 @@
       "file": "NHM_MaternalHealth.csv",
       "lineNumber": "2"
     },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "2"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "3"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "3"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "4"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "4"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "5"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "5"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "6"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "6"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "7"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "7"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "8"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "8"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "9"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "9"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "10"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "10"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "11"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "11"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "12"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "12"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "13"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "13"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "14"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "14"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "15"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "15"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "16"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "16"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "17"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "17"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "18"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "18"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "19"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "19"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "20"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "20"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "21"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "21"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "22"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "22"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "23"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "23"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "24"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "24"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "25"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "25"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "26"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "26"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "27"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "27"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "28"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "28"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "29"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "29"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "30"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "30"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "31"
-    },
-    "userMessage": "Empty value found :: value: '', column: 'Count_ChildDeliveryEvent_AtHome_WithStandbyAssist', property: 'value', node: 'E:NHM_MaternalHealth->E8'",
-    "counterKey": "StrSplit_EmptyToken_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "31"
-    },
-    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:NHM_MaternalHealth->E8', type: 'StatVarObservation'",
-    "counterKey": "Sanity_MissingOrEmpty_value"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "2"
-    },
     "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E1'",
     "counterKey": "Existence_MissingReference_measurementMethod"
   }, {
@@ -564,6 +82,14 @@
       "lineNumber": "2"
     },
     "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E7'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E8'",
     "counterKey": "Existence_MissingReference_measurementMethod"
   }, {
     "level": "LEVEL_WARNING",
@@ -633,6 +159,14 @@
     "level": "LEVEL_WARNING",
     "location": {
       "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
       "lineNumber": "4"
     },
     "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E1'",
@@ -697,6 +231,14 @@
     "level": "LEVEL_WARNING",
     "location": {
       "file": "NHM_MaternalHealth.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E8'",
+    "counterKey": "Existence_MissingReference_measurementMethod"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "NHM_MaternalHealth.csv",
       "lineNumber": "5"
     },
     "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E1'",
@@ -716,30 +258,6 @@
       "lineNumber": "5"
     },
     "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E5'",
-    "counterKey": "Existence_MissingReference_measurementMethod"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "5"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E6'",
-    "counterKey": "Existence_MissingReference_measurementMethod"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "5"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E3'",
-    "counterKey": "Existence_MissingReference_measurementMethod"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "NHM_MaternalHealth.csv",
-      "lineNumber": "5"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'NHM_HealthInformationManagementSystem', property: 'measurementMethod', node: 'E:NHM_MaternalHealth->E4'",
     "counterKey": "Existence_MissingReference_measurementMethod"
   }],
   "statsCheckSummary": [{
@@ -791,6 +309,246 @@
           }]
         }]
       }]
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q43433",
+    "statVarDcid": "Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "300"
+          }]
+        }]
+      }, {
+        "date": "2010-03",
+        "values": [{
+          "value": 10886.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "264"
+          }]
+        }]
+      }],
+      "percentDifference": 1.0886E12
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_DeliveryEvent_Safe_AsFractionOf_Count_DeliveryEvent",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 99.1,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 9.91E9
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_ChildDeliveryEvent",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 2981.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 2.981E11
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_PregnantWomen_RegisteredForAntenatalCareWithinFirstTrimester",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 1723.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 1.723E11
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_PregnantWomen_RegisteredForAntenatalCare",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 4537.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 4.537E11
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_ChildDeliveryEvent_AtHome",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 364.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 3.64E10
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_ChildDeliveryEvent_InPublicInstitution",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 1168.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 1.168E11
+    }]
+  }, {
+    "placeDcid": "wikidataId/Q66710",
+    "statVarDcid": "Count_ChildDeliveryEvent_InAnInstitution",
+    "measurementMethod": "NHM_HealthInformationManagementSystem",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-03",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "267"
+          }]
+        }]
+      }, {
+        "date": "2011-03",
+        "values": [{
+          "value": 2617.0,
+          "locations": [{
+            "file": "NHM_MaternalHealth.csv",
+            "lineNumber": "85"
+          }]
+        }]
+      }],
+      "percentDifference": 2.617E11
     }]
   }, {
     "placeDcid": "wikidataId/Q677037",
@@ -964,25 +722,25 @@
     "validationCounters": [{
       "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
       "problemPoints": [{
-        "date": "2015-03",
+        "date": "2009-03",
         "values": [{
           "value": 0.0,
           "locations": [{
             "file": "NHM_MaternalHealth.csv",
-            "lineNumber": "240"
+            "lineNumber": "313"
           }]
         }]
       }, {
-        "date": "2016-03",
+        "date": "2010-03",
         "values": [{
-          "value": 1.0,
+          "value": 58.0,
           "locations": [{
             "file": "NHM_MaternalHealth.csv",
-            "lineNumber": "58"
+            "lineNumber": "277"
           }]
         }]
       }],
-      "percentDifference": 1.0E8
+      "percentDifference": 5.8E9
     }]
   }, {
     "placeDcid": "wikidataId/Q26927",
