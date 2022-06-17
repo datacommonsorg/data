@@ -29,7 +29,7 @@ This directory stores the scripts used to download, clean, and convert the NCBI 
 
 ### Notes and Caveats
 
-This import has large data storage and compute requirements to execute. This includes 360 GB for storing the original files, an additional 360 GB for intermediate files and 2 TB for the output files. It also requires parallel processing with 
+This import has large data storage and compute requirements to execute. This includes 360 GB for storing the original files, an additional 360 GB for intermediate files and 2 TB for the output files. It also requires parallel processing with 6,153 serial hours at 2 GB of RAM required to run all the code provided here to generate this import.
 
 ### License
 
