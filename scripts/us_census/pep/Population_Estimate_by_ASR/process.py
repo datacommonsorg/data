@@ -35,29 +35,25 @@ from county_1990_2000 import county1990
 from county_2000_2010 import county2000
 from county_2010_2020 import county2010
 
-pd.set_option("display.max_columns", None)
-pd.set_option("display.max_rows", None)
-
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_data"
 flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH, "Import Data File's List")
 
-MCF_TEMPLATE = """Node: dcid:{pv1}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person{pv2}{pv3}{pv4}
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
-TMCF_TEMPLATE = """Node: E:usa_population_asr->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: C:usa_population_asr->SVs
-measurementMethod: C:usa_population_asr->Measurement_Method
-observationAbout: C:usa_population_asr->geo_ID
-observationDate: C:usa_population_asr->Year
-observationPeriod: \"P1Y\"
-value: C:usa_population_asr->observation 
-"""
+MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
+                "typeOf: dcs:StatisticalVariable\n"
+                "populationType: dcs:Person{pv2}{pv3}{pv4}\n"
+                "statType: dcs:measuredValue\n"
+                "measuredProperty: dcs:count\n")
+
+TMCF_TEMPLATE = ("Node: E:usa_population_asr->E0\n"
+                 "typeOf: dcs:StatVarObservation\n"
+                 "variableMeasured: C:usa_population_asr->SVs\n"
+                 "measurementMethod: C:usa_population_asr->Measurement_Method\n"
+                 "observationAbout: C:usa_population_asr->geo_ID\n"
+                 "observationDate: C:usa_population_asr->Year\n"
+                 "observationPeriod: \"P1Y\"\n"
+                 "value: C:usa_population_asr->observation\n")
 
 
 class USCensusPEPByASR:
