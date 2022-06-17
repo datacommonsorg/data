@@ -1,6 +1,0 @@
-Node: E:ISTAT->E0
-typeOf: dcs:AdministrativeArea3
-istatId: C:ISTAT->Municipal Code
-name: C:ISTAT->Municipal Name
-containedInPlace: C:ISTAT->NUTS3
-
