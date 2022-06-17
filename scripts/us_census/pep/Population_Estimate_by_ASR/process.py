@@ -39,10 +39,25 @@ pd.set_option("display.max_columns", None)
 pd.set_option("display.max_rows", None)
 
 FLAGS = flags.FLAGS
-default_input_path = os.path.dirname(
+DEFAULT_INPUT_PATH = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_data"
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH, "Import Data File's List")
 
+MCF_TEMPLATE = """Node: dcid:{pv1}
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person{pv2}{pv3}{pv4}
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+"""
+TMCF_TEMPLATE = """Node: E:usa_population_asr->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:usa_population_asr->SVs
+measurementMethod: C:usa_population_asr->Measurement_Method
+observationAbout: C:usa_population_asr->geo_ID
+observationDate: C:usa_population_asr->Year
+observationPeriod: \"P1Y\"
+value: C:usa_population_asr->observation 
+"""
 
 class USCensusPEPByASR:
     """
@@ -52,10 +67,10 @@ class USCensusPEPByASR:
 
     def __init__(self, input_files: list, csv_file_path: str,
                  mcf_file_path: str, tmcf_file_path: str) -> None:
-        self.input_files = input_files
-        self.cleaned_csv_file_path = csv_file_path
-        self.mcf_file_path = mcf_file_path
-        self.tmcf_file_path = tmcf_file_path
+        self._input_files = input_files
+        self._cleaned_csv_file_path = csv_file_path
+        self._mcf_file_path = mcf_file_path
+        self._tmcf_file_path = tmcf_file_path
 
     def _generate_mcf(self, sv_list) -> None:
         """
@@ -66,12 +81,7 @@ class USCensusPEPByASR:
         Returns:
             None
         """
-        mcf_template = """Node: dcid:{}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person{}{}{}
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
+
         final_mcf_template = ""
         for sv in sv_list:
             if "Total" in sv:
@@ -103,10 +113,10 @@ measuredProperty: dcs:count
                         race = "race: dcs:" + prop + "\n"
             if gender == "":
                 race = race.strip()
-            final_mcf_template += mcf_template.format(sv, age, race,
-                                                      gender) + "\n"
+            final_mcf_template += MCF_TEMPLATE.format(pv1=sv, pv2=age, pv3=race,
+                                                      pv4=gender) + "\n"
         # Writing Genereated MCF to local path.
-        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
+        with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
 
     def _generate_tmcf(self) -> None:
@@ -118,19 +128,10 @@ measuredProperty: dcs:count
         Returns:
             None
         """
-        tmcf_template = """Node: E:usa_population_asr->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: C:usa_population_asr->SVs
-measurementMethod: C:usa_population_asr->Measurement_Method
-observationAbout: C:usa_population_asr->geo_ID
-observationDate: C:usa_population_asr->Year
-observationPeriod: \"P1Y\"
-value: C:usa_population_asr->observation 
-"""
 
         # Writing Genereated TMCF to local path.
-        with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(tmcf_template.rstrip('\n'))
+        with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(TMCF_TEMPLATE.rstrip('\n'))
 
     def process(self):
         """
@@ -140,21 +141,22 @@ value: C:usa_population_asr->observation
 
         final_df = pd.DataFrame()
         # Creating Output Directory.
-        output_path = os.path.dirname(self.cleaned_csv_file_path)
+        output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
             os.mkdir(output_path)
         sv_list = []
         # data_df is used to read every single file which has been generated.
         # final_df concatenates all these files.
-        for file_path in self.input_files:
+        for file_path in self._input_files:
             data_df = pd.read_csv(file_path)
             final_df = pd.concat([final_df, data_df])
             sv_list += data_df["SVs"].to_list()
+        # Drop the unwanted columns and NA.
         final_df.drop(columns=['Unnamed: 0'], inplace=True)
         final_df = final_df.dropna()
         final_df['Year'] = final_df['Year'].astype(float).astype(int)
         final_df = final_df.sort_values(by=['Year', 'geo_ID'])
-        final_df.to_csv(self.cleaned_csv_file_path, index=False)
+        final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
         self._generate_mcf(sv_list)
