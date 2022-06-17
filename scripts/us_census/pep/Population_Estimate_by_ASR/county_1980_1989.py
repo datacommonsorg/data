@@ -20,13 +20,13 @@ from common_functions import (_input_url, _replace_age, _race_based_grouping,
                               _gender_based_grouping)
 
 
-def county1980():
+def county1980(url_file: str, output_folder: str):
     '''
     This Python Script Loads csv datasets from 1980-1989 on a County and State 
     Level, cleans it and create a cleaned csv for both County and State.
     '''
     # Getting input URL from the JSON file.
-    _url = _input_url("county.json", "1980-89")
+    _url = _input_url(url_file, "1980-89")
     # Contains the final data which has been taken directly and aggregated.
     final_df = pd.DataFrame()
     # Contains aggregated data for age and sex.
@@ -73,16 +73,15 @@ def county1980():
     df_as['geo_ID'] = 'geoId/' + df_as['geo_ID'].astype(str)
     final_df = df_as[~df_as.SVs.str.contains('OtherRaces')]
     final_df.to_csv(
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/county_1980_1989.csv')
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'county_1980_1989.csv'))
     # Aggregating the County Data on geo_ID to make State Data.
     final_df['geo_ID'] = final_df['geo_ID'].str[:-3]
     final_df = final_df.groupby(['Year','geo_ID','SVs']).sum()\
     .stack(0).reset_index()
-    print(final_df)
     final_df['observation'] = final_df[0]
     final_df.drop(columns=['level_3', 0], inplace=True)
     final_df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey'
     final_df.to_csv(
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/state_1980_1989.csv')
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'state_1980_1989.csv'))

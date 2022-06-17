@@ -1,3 +1,71 @@
+Node: dcid:Count_Person_0To4Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [0 4 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_0To4Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [0 4 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_0To4Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [0 4 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_0To4Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [0 4 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_0To4Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [0 4 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_0To4Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [0 4 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_0To4Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [0 4 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_0To4Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [0 4 Years]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_0Years_AmericanIndianAndAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -192,6 +260,74 @@ Node: dcid:Count_Person_0Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 0]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_10To14Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [10 14 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_10To14Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [10 14 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_10To14Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [10 14 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_10To14Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [10 14 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_10To14Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [10 14 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_10To14Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [10 14 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_10To14Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [10 14 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_10To14Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [10 14 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1182,6 +1318,74 @@ Node: dcid:Count_Person_14Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 14]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_15To19Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [15 19 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_15To19Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [15 19 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_15To19Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [15 19 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_15To19Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [15 19 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_15To19Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [15 19 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_15To19Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [15 19 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_15To19Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [15 19 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_15To19Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [15 19 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2374,6 +2578,74 @@ race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_20To24Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [20 24 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_20To24Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [20 24 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_20To24Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [20 24 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_20To24Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [20 24 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_20To24Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [20 24 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_20To24Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [20 24 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_20To24Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [20 24 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_20To24Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [20 24 Years]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_20Years_AmericanIndianAndAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -3360,6 +3632,74 @@ Node: dcid:Count_Person_24Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 24]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_25To29Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [25 29 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_25To29Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [25 29 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_25To29Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [25 29 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_25To29Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [25 29 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_25To29Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [25 29 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_25To29Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [25 29 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_25To29Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [25 29 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_25To29Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [25 29 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -4552,6 +4892,74 @@ race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_30To34Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [30 34 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_30To34Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [30 34 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_30To34Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [30 34 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_30To34Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [30 34 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_30To34Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [30 34 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_30To34Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [30 34 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_30To34Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [30 34 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_30To34Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [30 34 Years]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_30Years_AmericanIndianAndAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -5538,6 +5946,74 @@ Node: dcid:Count_Person_34Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 34]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_35To39Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [35 39 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_35To39Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [35 39 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_35To39Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [35 39 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_35To39Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [35 39 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_35To39Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [35 39 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_35To39Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [35 39 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_35To39Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [35 39 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_35To39Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [35 39 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -6730,6 +7206,74 @@ race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_40To44Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [40 44 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_40To44Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [40 44 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_40To44Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [40 44 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_40To44Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [40 44 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_40To44Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [40 44 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_40To44Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [40 44 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_40To44Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [40 44 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_40To44Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [40 44 Years]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_40Years_AmericanIndianAndAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -7716,6 +8260,74 @@ Node: dcid:Count_Person_44Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 44]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_45To49Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [45 49 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_45To49Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [45 49 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_45To49Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [45 49 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_45To49Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [45 49 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_45To49Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [45 49 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_45To49Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [45 49 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_45To49Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [45 49 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_45To49Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [45 49 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -8908,6 +9520,74 @@ race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_50To54Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [50 54 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_50To54Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [50 54 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_50To54Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [50 54 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_50To54Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [50 54 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_50To54Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [50 54 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_50To54Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [50 54 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_50To54Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [50 54 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_50To54Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [50 54 Years]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_50Years_AmericanIndianAndAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -9894,6 +10574,74 @@ Node: dcid:Count_Person_54Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 54]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_55To59Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [55 59 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_55To59Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [55 59 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_55To59Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [55 59 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_55To59Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [55 59 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_55To59Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [55 59 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_55To59Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [55 59 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_55To59Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [55 59 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_55To59Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [55 59 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -10888,6 +11636,74 @@ race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_5To9Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [5 9 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_5To9Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [5 9 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_5To9Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [5 9 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_5To9Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [5 9 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_5To9Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [5 9 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_5To9Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [5 9 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_5To9Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [5 9 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_5To9Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [5 9 Years]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_5Years_AmericanIndianAndAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -11082,6 +11898,74 @@ Node: dcid:Count_Person_5Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 5]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_60To64Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [60 64 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_60To64Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [60 64 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_60To64Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [60 64 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_60To64Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [60 64 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_60To64Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [60 64 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_60To64Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [60 64 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_60To64Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [60 64 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_60To64Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [60 64 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -12072,6 +12956,74 @@ Node: dcid:Count_Person_64Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 64]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_65To69Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [65 69 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_65To69Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [65 69 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_65To69Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [65 69 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_65To69Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [65 69 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_65To69Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [65 69 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_65To69Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [65 69 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_65To69Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [65 69 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_65To69Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [65 69 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -13264,6 +14216,74 @@ race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_70To74Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [70 74 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_70To74Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [70 74 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_70To74Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [70 74 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_70To74Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [70 74 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_70To74Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [70 74 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_70To74Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [70 74 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_70To74Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [70 74 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_70To74Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [70 74 Years]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_70Years_AmericanIndianAndAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -14250,6 +15270,74 @@ Node: dcid:Count_Person_74Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 74]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_75To79Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [75 79 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_75To79Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [75 79 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_75To79Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [75 79 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_75To79Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [75 79 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_75To79Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [75 79 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_75To79Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [75 79 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_75To79Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [75 79 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_75To79Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [75 79 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -15438,6 +16526,74 @@ Node: dcid:Count_Person_7Years_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 7]
+race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_80To84Years_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [80 84 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_80To84Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [80 84 Years]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_80To84Years_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [80 84 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_80To84Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [80 84 Years]
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_80To84Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [80 84 Years]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_80To84Years_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [80 84 Years]
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_80To84Years_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [80 84 Years]
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_80To84Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [80 84 Years]
 race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count

@@ -18,7 +18,7 @@ import os
 import pandas as pd
 
 
-def national1960():
+def national1960(output_folder: str):
     '''
     This Python Script Loads csv datasets from 1960-1979 on a National Level,
     cleans it and create a cleaned csv.
@@ -74,5 +74,6 @@ def national1960():
         # Writting the data to final dataframe
         final_df = pd.concat([final_df, df])
     # Writing the dataframe to output csv.
-    final_df.to_csv(os.path.dirname(os.path.abspath(__file__)) + os.sep \
-        +'input_data/national_1960_1979.csv')
+    final_df.to_csv(
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'national_1960_1979.csv'))

@@ -36,8 +36,8 @@ from county_2000_2010 import county2000
 from county_2010_2020 import county2010
 
 FLAGS = flags.FLAGS
-DEFAULT_INPUT_PATH = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "input_data"
+DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "input_data")
 flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH, "Import Data File's List")
 
 MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -165,29 +165,33 @@ def main(_):
     if not os.path.exists(input_path):
         os.mkdir(input_path)
     # Running the fuctions in individual files by Year and Area.
-    national1900()
-    national1960()
-    national1980()
-    national2000()
-    national2010()
-    state1970()
-    state1990()
-    state2000()
-    state2010()
-    county1970()
-    county1980()
-    county1990()
-    county2000()
-    county2010()
+    national_url_file = "national.json"
+    state_url_file = "state.json"
+    county_url_file = "county.json"
+    output_folder = "input_data"
+    national1900(output_folder)
+    national1960(output_folder)
+    national1980(national_url_file, output_folder)
+    national2000(national_url_file, output_folder)
+    national2010(national_url_file, output_folder)
+    state1970(state_url_file, output_folder)
+    state1990(state_url_file, output_folder)
+    state2000(state_url_file, output_folder)
+    state2010(state_url_file, output_folder)
+    county1970(county_url_file, output_folder)
+    county1980(county_url_file, output_folder)
+    county1990(output_folder)
+    county2000(output_folder)
+    county2010(county_url_file, output_folder)
 
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output"
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "output")
     # Defining Output Files.
-    cleaned_csv_path = data_file_path + os.sep + "usa_population_asr.csv"
-    mcf_path = data_file_path + os.sep + "usa_population_asr.mcf"
-    tmcf_path = data_file_path + os.sep + "usa_population_asr.tmcf"
+    cleaned_csv_path = os.path.join(data_file_path, "usa_population_asr.csv")
+    mcf_path = os.path.join(data_file_path, "usa_population_asr.mcf")
+    tmcf_path = os.path.join(data_file_path, "usa_population_asr.tmcf")
     loader = USCensusPEPByASR(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
     loader.process()
 

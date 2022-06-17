@@ -20,13 +20,13 @@ from common_functions import (_input_url, _replace_age, _gender_based_grouping,
                               _race_based_grouping)
 
 
-def county1970():
+def county1970(url_file: str, output_folder: str):
     '''
    This Python Script Loads csv datasets from 1970-1979 on a County Level,
    cleans it and create a cleaned csv
    '''
     # Getting input URL from the JSON file.
-    _url = _input_url("county.json", "1970-79")
+    _url = _input_url(url_file, "1970-79")
     _cols=['Year','geo_ID','Race',0,1,2,3,4,5,6,7\
                       ,8,9,10,11,12,13,14,15,16,17]
     # Contains the final data which has been taken directly and aggregated.
@@ -69,5 +69,5 @@ def county1970():
     final_df = pd.concat([final_df, df_ar, df])
     final_df = final_df[~final_df.SVs.str.contains('OtherRaces')]
     final_df.to_csv(
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/county_1970_1979.csv')
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'county_1970_1979.csv'))

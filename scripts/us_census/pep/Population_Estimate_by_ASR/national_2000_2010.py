@@ -19,13 +19,13 @@ import pandas as pd
 from common_functions import _input_url, _race_based_grouping
 
 
-def national2000():
+def national2000(url_file: str, output_folder: str):
     '''
     This Python Script Loads csv datasets from 2000-2010 on a National Level,
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
-    _url = _input_url("national.json", "2000-10")
+    _url = _input_url(url_file, "2000-10")
     # Reading the csv format input file and converting it to a dataframe.
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
     # Removing the unwanted rows.
@@ -87,6 +87,6 @@ def national2000():
     df_ar = df_ar[df_ar.SVs.str.contains('Years_')]
     df = pd.concat([df_ar, df])
     # Writing the dataframe to output csv.
-    df.to_csv(os.path.dirname(
-        os.path.abspath(__file__)) + os.sep +\
-        'input_data/national_2000_2010.csv',index=False)
+    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           output_folder, 'national_2000_2010.csv'),
+              index=False)

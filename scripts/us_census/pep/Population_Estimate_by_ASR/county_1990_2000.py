@@ -21,7 +21,7 @@ from common_functions import (_replace_age, _gender_based_grouping,
                               _race_based_grouping)
 
 
-def county1990():
+def county1990(output_folder: str):
     '''
     This Python Script Loads csv datasets from 1990-2000 on a County Level,
     cleans it and create a cleaned csv.
@@ -102,5 +102,5 @@ def county1990():
 
     # Writing to output csv.
     final_df.to_csv(
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/county_1990_2000.csv')
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'county_1990_2000.csv'))

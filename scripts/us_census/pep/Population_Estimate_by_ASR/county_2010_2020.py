@@ -20,12 +20,12 @@ import pandas as pd
 from common_functions import _input_url
 
 
-def county2010():
+def county2010(url_file: str, output_folder: str):
     '''
     This Python Script Loads csv datasets from 2010-2020 on a County Level,
     cleans it and create a cleaned csv.
     '''
-    _url = _input_url("county.json", "2010-20")
+    _url = _input_url(url_file, "2010-20")
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
     # Filter by agegrp = 0.
     df = df.query("YEAR not in [1, 2, 13]")
@@ -125,6 +125,7 @@ def county2010():
         , 'dcAggregate/CensusPEPSurvey', 'CensusPEPSurvey')
     df['SVs'] = df['SVs'].str.replace('Agg', '')
     # Write to final file.
-    df.to_csv(os.path.dirname(
-        os.path.abspath(__file__)) + os.sep +'input_data/county_2010_2020.csv',\
+    df.to_csv(
+        os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), output_folder,'county_2010_2020.csv'),\
         index=False)

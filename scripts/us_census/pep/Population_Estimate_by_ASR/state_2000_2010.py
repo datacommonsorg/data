@@ -19,12 +19,12 @@ import pandas as pd
 from common_functions import _input_url
 
 
-def state2000():
+def state2000(url_file: str, output_folder: str):
     '''
     This Python Script Loads csv datasets from 2000-2010 on a State Level,
     cleans it and create a cleaned csv
     '''
-    _url = _input_url("state.json", "2000-10")
+    _url = _input_url(url_file, "2000-10")
     df = pd.read_csv(_url, encoding='ISO-8859-1')
     # Filtering the data needed.
     df.drop(df[(df['RACE'] == 0) & (df['SEX'] == 0)].index, inplace=True)
@@ -101,5 +101,5 @@ def state2000():
     df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
     df['SVs'] = df['SVs'].str.replace('_Total', '')
     df.to_csv(
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/state_2000_2010.csv')
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'state_2000_2010.csv'))

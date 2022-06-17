@@ -18,7 +18,7 @@ import os
 import pandas as pd
 
 
-def national1900():
+def national1900(output_folder: str):
     '''
     This Python Script Loads csv datasets from 1900-1959 on a National Level,
     cleans it and create a cleaned csv
@@ -76,5 +76,6 @@ def national1900():
         # removing commas from the row values
         df['observation'] = df['observation'].str.replace(",", "")
         final_df = pd.concat([final_df, df])
-    final_df.to_csv(os.path.dirname(os.path.abspath(__file__)) + \
-        os.sep +'input_data/national_1900_1959.csv')
+    final_df.to_csv(
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'national_1900_1959.csv'))

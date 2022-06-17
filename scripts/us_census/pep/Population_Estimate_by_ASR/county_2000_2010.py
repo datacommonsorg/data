@@ -20,7 +20,7 @@ import pandas as pd
 import numpy as np
 
 
-def county2000():
+def county2000(output_folder: str):
     """
     This Python Script Loads csv datasets from 2000-2010 on a County Level,
     cleans it and create a cleaned csv.
@@ -152,6 +152,7 @@ def county2000():
             final_df = pd.concat([final_df, df])
 
     # Write to final file.
-    final_df.to_csv(os.path.dirname(
-    os.path.abspath(__file__)) + os.sep +'input_data/county_2000_2010.csv', \
+    final_df.to_csv(
+        os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), output_folder,'county_2000_2010.csv'), \
         index=False)

@@ -20,13 +20,13 @@ from common_functions import (_input_url, _gender_based_grouping,
                               _race_based_grouping)
 
 
-def state1970():
+def state1970(url_file: str, output_folder: str):
     '''
       This Python Script Loads csv datasets from 1970-1979 on a State Level,
       cleans it and create a cleaned csv.
       '''
 
-    _url = _input_url("state.json", "1970-79")
+    _url = _input_url(url_file, "1970-79")
     df = pd.read_csv(_url, skiprows=5, encoding='ISO-8859-1')
     df.insert(1, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['FIPS State Code'].map(str)).str.zfill(2)
@@ -95,5 +95,5 @@ def state1970():
     final_df = pd.concat([final_df, df_ar, df])
     final_df = final_df[~final_df.SVs.str.contains('OtherRaces')]
     final_df.to_csv(
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/state_1970_1979.csv')
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'state_1970_1979.csv'))

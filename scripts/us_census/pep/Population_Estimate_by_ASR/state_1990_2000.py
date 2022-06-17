@@ -19,12 +19,12 @@ import pandas as pd
 from common_functions import _input_url
 
 
-def state1990():
+def state1990(url_file: str, output_folder: str):
     '''
     This Python Script Loads csv datasets from 1990-2000 on a State Level,
     cleans it and create a cleaned csv.
     '''
-    _urls = _input_url("state.json", "1990-00")
+    _urls = _input_url(url_file, "1990-00")
     # Used to collect data after every loop for every file's df.
     final_df = pd.DataFrame()
     for url in _urls:
@@ -72,11 +72,11 @@ def state1990():
         final_df = pd.concat([final_df, df])
 
     final_df.to_csv(
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/state_1990_2000.csv')
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'state_1990_2000.csv'))
     final_df['geo_ID'] = 'country/USA'
     final_df = final_df.groupby(['geo_ID','Year','Measurement_Method','SVs'])\
         .sum()
     final_df.to_csv(
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/national_1990_2000.csv')
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
+                     'national_1990_2000.csv'))

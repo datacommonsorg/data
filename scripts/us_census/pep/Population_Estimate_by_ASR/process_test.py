@@ -18,14 +18,19 @@ Script to automate the testing for USA Population by Race preprocess script.
 import os
 from os import path
 import unittest
+import shutil
 from national_2000_2010 import national2000
 from state_1990_2000 import state1990
+from state_2010_2020 import state2010
+from county_1970_1979 import county1970
+from county_1980_1989 import county1980
 from process import USCensusPEPByASR
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 test_data_folder = os.path.join(module_dir_, "test_data")
 op_data_folder = os.path.join(module_dir_, "test_output_data")
-input_path = os.path.dirname(os.path.abspath(__file__)) + os.sep + "input_data"
+input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          "test_temp_files")
 
 
 class TestPreprocess(unittest.TestCase):
@@ -38,20 +43,29 @@ class TestPreprocess(unittest.TestCase):
     tmcf_file_path = os.path.join(op_data_folder, "test_census.tmcf")
     if not os.path.exists(input_path):
         os.mkdir(input_path)
-
-    national2000()
-    state1990()
+    national_url_file = "test_data/test_input_data/national_test.json"
+    state_url_file = "test_data/test_input_data/state_test.json"
+    county_url_file = "test_data/test_input_data/county_test.json"
+    output_folder = "test_temp_files"
+    national2000(national_url_file, output_folder)
+    state1990(state_url_file, output_folder)
+    state2010(state_url_file, output_folder)
+    county1980(county_url_file, output_folder)
+    county1970(county_url_file, output_folder)
 
     ip_data = [
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/state_1990_2000.csv',
-        os.path.dirname(os.path.abspath(__file__)) + os.sep +
-        'input_data/national_2000_2010.csv'
+        os.path.join(input_path, 'county_1970_1979.csv'),
+        os.path.join(input_path, 'county_1980_1989.csv'),
+        os.path.join(input_path, 'state_1980_1989.csv'),
+        os.path.join(input_path, 'state_1990_2000.csv'),
+        os.path.join(input_path, 'state_2010_2020.csv'),
+        os.path.join(input_path, 'national_2000_2010.csv')
     ]
 
     base = USCensusPEPByASR(ip_data, cleaned_csv_file_path, mcf_file_path,
                             tmcf_file_path)
     base.process()
+    shutil.rmtree(input_path, ignore_errors=True)
 
     def test_mcf_tmcf_files(self):
         """
