@@ -11,11 +11,12 @@
   - [About the import](#about-the-import)
     - [Artifacts](#artifacts)
       - [Scripts](#scripts)
-      - [Input Files](#input-files)
-     - [Schema](#schema)
+      - [Files](#files)
+     - [Schema Artifacts](#schema)
        - [Scripts](#scripts)
        - [Output Schema MCF Files](#output-schema-mcf-files)
   - [Examples](#examples)
+    - [Run Tests](#run-testers)
     - [Import](#import)
     - [Schema Generation](#schema-generation)  
 
@@ -35,7 +36,7 @@ This directory stores the scripts used to download, clean, and convert the NCBI 
 
 ### Notes and Caveats
 
-This import has large data storage and compute requirements to execute. This includes 360 GB for storing the original files, an additional 360 GB for intermediate files, and 2 TB for the output files. It also requires parallel processing with ~6,150 serial hours at 2 GB of RAM required to run all the code provided here to generate this import. This imports also details how to clean data from the two most recent human genome assemblies hg19 and hg38. The only data taken from the hg19 dbSNP file is the genomic position, whereas all information contained in the hg38 file is cleaned and written to MCF files. This was done because all information besides the genomic position, which is unique to the genome assembly is duplicated between the two files and therefore only needs to be imported from one of them. Prior to cleaning the dbSNP data and converting it to MCF format, a user must create a key to map chromosome RefSeq IDs to the corresponding Biomedical Data Commons Chromosome dcids. Finally, the schema for population studies measuring frequencies of genetic variant alleles and GeneticVariant properties representing alternative dcids need to be generated using scripts.
+This import has large data storage and compute requirements to execute. This includes 360 GB for storing the original files, an additional 360 GB for intermediate files, and 2 TB for the output files. It also requires parallel processing with ~7,000 serial hours at 2 GB of RAM required to run all the code provided here to generate this import. This imports also details how to clean data from the two most recent human genome assemblies hg19 and hg38. The only data taken from the hg19 dbSNP file is the genomic position, whereas all information contained in the hg38 file is cleaned and written to MCF files. This was done because all information besides the genomic position, which is unique to the genome assembly is duplicated between the two files and therefore only needs to be imported from one of them. Prior to cleaning the dbSNP data and converting it to MCF format, a user must create a key to map chromosome RefSeq IDs to the corresponding Biomedical Data Commons Chromosome dcids. Finally, the schema for population studies measuring frequencies of genetic variant alleles and GeneticVariant properties representing alternative dcids need to be generated using scripts.
 
 In addition, the data representation in the original import files is dense and uses mixed seperators making extraction difficult. Update frequency for dbSNP is roughly on an annual schedule, but commonly involves the addition of new properties, alternative database IDs, or population studies of allele frequencies. Furthermore, although effort was made to fix obvious data entry errors (e.g. a population study being recorded as "Stonian" in dbSNP instead of "Estonian") additional errors in data entry may still exist in the final import.
 
@@ -64,7 +65,11 @@ All data downloaded for this import belongs to the U.S. National Library of Medi
 
 [`format_dbsnp_pos_only.py`](format_dbsnp_pos_only.py) cleans and converts genomic position only for dbSNP genetic variant data to MCF format.
 
-### Input Files
+#### Test Scripts
+
+### Files
+
+#### Test Files
 
 ## Schema
 The schema for both the data sources for the allele frequencies of genetic variants and the databases with alternative IDs for genetic variants were generated using scripts. The GenVarSourceEnum for data sources of allele frequencies is generated using [format_dbSNP_GenVarSource_enum_schema.py](schema/format_dbSNP_GenVarSource_enum_schema.py). The GeneticVariant properties for alternative IDs is generated using [format_dbSNP_alt_ID_database_property_schema.py](schema/format_dbSNP_alt_ID_database_property_schema.py).
@@ -81,6 +86,38 @@ The schema for both the data sources for the allele frequencies of genetic varia
 [`GeneticVariant_Alt_ID_Database_properties.mcf`](schema/GeneticVariant_Alt_ID_Database_properties.mcf)
 
 ## Examples
+
+### Run Tests
+
+1. To test [`format_refseq_chromosome_id_to_dcid.py`](format_refseq_chromosome_id_to_dcid.py) run:
+
+```
+python test_chromosome_key_script.py
+```
+
+2. To test [`format_dbsnp.py`](format_dbsnp.py) run:
+
+```
+python test_format_dbsnp.py
+```
+
+3. To test [`format_dbsnp_pos_only.py`](format_dbsnp_pos_only.py) run:
+
+```
+python test_format_dbsnp_pos_only.py
+```
+
+4. To test [`format_dbSNP_GenVarSource_enum_schema.py`](schema/format_dbSNP_GenVarSource_enum_schema.py) run:
+
+```
+python test_GenVarSourceEnum_schema_creation.py
+```
+
+6. To test [`format_dbSNP_alt_ID_database_property_schema.py`](schema/format_dbSNP_alt_ID_database_property_schema.py) run:
+
+```
+python test_alt_database_ID_schema_creation.py
+```
 
 ### Import
 
