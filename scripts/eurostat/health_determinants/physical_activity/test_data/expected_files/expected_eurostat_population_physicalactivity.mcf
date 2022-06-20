@@ -416,7 +416,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Normalweight
-name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Female, Normalweig Population"
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Female, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Normalweight
@@ -438,7 +438,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Overweight
-name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Female, Overweig Population"
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Female, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Overweight
@@ -460,7 +460,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Underweight
-name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Female, Underweig Population"
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Female, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Underweight
@@ -471,7 +471,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Normalweight
-name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Male, Normalweig Population"
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Male, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Normalweight
@@ -493,7 +493,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Overweight
-name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Male, Overweig Population"
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Male, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Overweight
@@ -515,7 +515,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Underweight
-name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Male, Underweig Population"
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Male, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Underweight
@@ -526,7 +526,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Normalweight
-name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Normalweig Population"
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Normalweight
@@ -546,7 +546,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Overweight
-name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Overweig Population"
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Overweight
@@ -566,7 +566,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Underweight
-name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Underweig Population"
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Underweight
@@ -993,7 +993,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Normalweight
-name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Female, Normalweig Population"
+name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Female, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Normalweight
@@ -1015,7 +1015,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Overweight
-name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Female, Overweig Population"
+name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Female, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Overweight
@@ -1037,7 +1037,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Underweight
-name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Female, Underweig Population"
+name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Female, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Underweight
@@ -1048,7 +1048,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Normalweight
-name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Male, Normalweig Population"
+name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Male, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Normalweight
@@ -1070,7 +1070,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Overweight
-name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Male, Overweig Population"
+name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Male, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Overweight
@@ -1092,7 +1092,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Underweight
-name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Male, Underweig Population"
+name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Male, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Underweight
@@ -1103,7 +1103,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Normalweight
-name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Normalweig Population"
+name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Normalweight
@@ -1123,7 +1123,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Overweight
-name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Overweig Population"
+name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Overweight
@@ -1143,7 +1143,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Underweight
-name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Underweig Population"
+name: "Percentage 150 Or More Minutes, Non Work Related Physical Activity Among Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Underweight
@@ -1570,7 +1570,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150To299Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Normalweight
-name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Female, Normalweig Population"
+name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Female, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Normalweight
@@ -1592,7 +1592,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150To299Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Overweight
-name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Female, Overweig Population"
+name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Female, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Overweight
@@ -1614,7 +1614,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150To299Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Underweight
-name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Female, Underweig Population"
+name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Female, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Underweight
@@ -1625,7 +1625,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150To299Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Normalweight
-name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Male, Normalweig Population"
+name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Male, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Normalweight
@@ -1647,7 +1647,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150To299Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Overweight
-name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Male, Overweig Population"
+name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Male, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Overweight
@@ -1669,7 +1669,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150To299Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Underweight
-name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Male, Underweig Population"
+name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Male, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Underweight
@@ -1680,7 +1680,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150To299Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Normalweight
-name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Normalweig Population"
+name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Normalweight
@@ -1700,7 +1700,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150To299Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Overweight
-name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Overweig Population"
+name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Overweight
@@ -1720,7 +1720,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_150To299Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Underweight
-name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Underweig Population"
+name: "Percentage 150 To 299 Minutes, Non Work Related Physical Activity Among Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Underweight
@@ -1730,7 +1730,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
@@ -1740,7 +1740,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Female Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
@@ -1751,7 +1751,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_IncomeOf0To20Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 0 To 20 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 0 To 20 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
@@ -1763,7 +1763,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_IncomeOf20To40Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 20 To 40 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 20 To 40 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_IncomeOf20To40Percentile
@@ -1775,7 +1775,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_IncomeOf40To60Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 40 To 60 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 40 To 60 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_IncomeOf40To60Percentile
@@ -1787,7 +1787,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_IncomeOf60To80Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 60 To 80 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 60 To 80 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_IncomeOf60To80Percentile
@@ -1799,7 +1799,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_IncomeOf80To100Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 80 To 100 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Female, Income Of 80 To 100 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
@@ -1811,7 +1811,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf0To20Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Income Of 0 To 20 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Income Of 0 To 20 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_IncomeOf0To20Percentile
@@ -1822,7 +1822,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf20To40Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Income Of 20 To 40 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Income Of 20 To 40 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_IncomeOf20To40Percentile
@@ -1833,7 +1833,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf40To60Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Income Of 40 To 60 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Income Of 40 To 60 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_IncomeOf40To60Percentile
@@ -1844,7 +1844,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf60To80Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Income Of 60 To 80 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Income Of 60 To 80 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_IncomeOf60To80Percentile
@@ -1855,7 +1855,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_IncomeOf80To100Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Income Of 80 To 100 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Income Of 80 To 100 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_IncomeOf80To100Percentile
@@ -1866,7 +1866,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
@@ -1877,7 +1877,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
@@ -1889,7 +1889,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
@@ -1901,7 +1901,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Male Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male
@@ -1912,7 +1912,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_IncomeOf0To20Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 0 To 20 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 0 To 20 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_IncomeOf0To20Percentile
@@ -1924,7 +1924,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_IncomeOf20To40Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 20 To 40 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 20 To 40 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_IncomeOf20To40Percentile
@@ -1936,7 +1936,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_IncomeOf40To60Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 40 To 60 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 40 To 60 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_IncomeOf40To60Percentile
@@ -1948,7 +1948,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_IncomeOf60To80Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 60 To 80 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 60 To 80 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_IncomeOf60To80Percentile
@@ -1960,7 +1960,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Male_IncomeOf80To100Percentile
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 80 To 100 Percentile Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Male, Income Of 80 To 100 Percentile Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_IncomeOf80To100Percentile
@@ -1972,7 +1972,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Rural Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Rural Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural
@@ -1983,7 +1983,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Female
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Rural, Female Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Rural, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural_Female
@@ -1995,7 +1995,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Rural_Male
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Rural, Male Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Rural, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural_Male
@@ -2007,7 +2007,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Semi Urban Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Semi Urban Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban
@@ -2018,7 +2018,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Female
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Semi Urban, Female Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Semi Urban, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Female
@@ -2030,7 +2030,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_SemiUrban_Male
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Semi Urban, Male Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Semi Urban, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Male
@@ -2042,7 +2042,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_TertiaryEducation
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Tertiary Education Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Tertiary Education Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_TertiaryEducation
@@ -2053,7 +2053,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_TertiaryEducation_Female
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Tertiary Education, Female Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Tertiary Education, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
@@ -2065,7 +2065,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_TertiaryEducation_Male
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Tertiary Education, Male Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Tertiary Education, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
@@ -2077,7 +2077,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
@@ -2088,7 +2088,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
@@ -2100,7 +2100,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
@@ -2112,7 +2112,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Urban Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Urban Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
@@ -2123,7 +2123,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Urban, Female Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Urban, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Female
@@ -2135,7 +2135,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Male
-name: "Percentage 1 To 149 Minutes, Health Enhancing Physical Activity Among Urban, Male Population"
+name: "Percentage 1 To149 Minutes, Health Enhancing Physical Activity Among Urban, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Male
@@ -2147,7 +2147,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Normalweight
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Female, Normalweig Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Female, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Normalweight
@@ -2158,7 +2158,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Obesity
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Female, Obesity Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Female, Obesity Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Obesity
@@ -2169,7 +2169,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Overweight
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Female, Overweig Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Female, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Overweight
@@ -2180,7 +2180,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_PreObese
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Female, Pre Obese Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Female, Pre Obese Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_PreObese
@@ -2191,7 +2191,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Underweight
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Female, Underweig Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Female, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Underweight
@@ -2202,7 +2202,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Normalweight
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Male, Normalweig Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Male, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Normalweight
@@ -2213,7 +2213,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Obesity
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Male, Obesity Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Male, Obesity Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Obesity
@@ -2224,7 +2224,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Overweight
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Male, Overweig Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Male, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Overweight
@@ -2235,7 +2235,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_PreObese
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Male, Pre Obese Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Male, Pre Obese Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_PreObese
@@ -2246,7 +2246,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Underweight
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Male, Underweig Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Male, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Underweight
@@ -2257,7 +2257,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Normalweight
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Normalweig Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Normalweight
@@ -2267,7 +2267,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Obesity
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Obesity Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Obesity Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Obesity
@@ -2277,7 +2277,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Overweight
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Overweig Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Overweight
@@ -2287,7 +2287,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_PreObese
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Pre Obese Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Pre Obese Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_PreObese
@@ -2297,7 +2297,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_1To149Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Underweight
-name: "Percentage 1 To 149 Minutes, Non Work Related Physical Activity Among Underweig Population"
+name: "Percentage 1 To149 Minutes, Non Work Related Physical Activity Among Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Underweight
@@ -2724,7 +2724,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_300OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Normalweight
-name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Female, Normalweig Population"
+name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Female, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Normalweight
@@ -2746,7 +2746,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_300OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Overweight
-name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Female, Overweig Population"
+name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Female, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Overweight
@@ -2768,7 +2768,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_300OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Underweight
-name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Female, Underweig Population"
+name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Female, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_Underweight
@@ -2779,7 +2779,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_300OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Normalweight
-name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Male, Normalweig Population"
+name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Male, Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Normalweight
@@ -2801,7 +2801,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_300OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Overweight
-name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Male, Overweig Population"
+name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Male, Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Overweight
@@ -2823,7 +2823,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_300OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Male_Underweight
-name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Male, Underweig Population"
+name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Male, Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_Underweight
@@ -2834,7 +2834,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_300OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Normalweight
-name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Normalweig Population"
+name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Normalweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Normalweight
@@ -2854,7 +2854,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_300OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Overweight
-name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Overweig Population"
+name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Overweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Overweight
@@ -2874,7 +2874,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_300OrMoreMinutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Underweight
-name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Underweig Population"
+name: "Percentage 300 Or More Minutes, Non Work Related Physical Activity Among Underweight Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Underweight
@@ -2905,7 +2905,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_CitizenOutsideEU28
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU 28  Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
@@ -2916,7 +2916,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_CitizenOutsideEU28_Female
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU 28 , Female Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU28, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
@@ -2928,7 +2928,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_CitizenOutsideEU28_Male
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU 28 , Male Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU28, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
@@ -2987,7 +2987,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_ForeignBornOutsideEU28
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Female, Foreign Born Outside EU 28  Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Female, Foreign Born Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
@@ -2999,7 +2999,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_ForeignBornWithinEU28
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Female, Foreign Born Within EU 28  Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Female, Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
@@ -3142,7 +3142,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_ForeignBornOutsideEU28
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Foreign Born Outside EU 28  Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Foreign Born Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
@@ -3153,7 +3153,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_ForeignBornWithinEU28
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Foreign Born Within EU 28  Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
@@ -3288,7 +3288,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_ForeignBornOutsideEU28
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Male, Foreign Born Outside EU 28  Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Male, Foreign Born Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_ForeignBornOutsideEU28
@@ -3300,7 +3300,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_ForeignBornWithinEU28
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Male, Foreign Born Within EU 28  Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Male, Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_ForeignBornWithinEU28
@@ -3465,7 +3465,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_NotACitizen
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Not ACitizen Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen
@@ -3476,7 +3476,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_NotACitizen_Female
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Not ACitizen, Female Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
@@ -3488,7 +3488,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_NotACitizen_Male
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Not ACitizen, Male Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
@@ -3686,7 +3686,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU28AndNotACitizen
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Within EU 28 And Not ACitizen Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Within EU28 And Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
@@ -3697,7 +3697,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU28AndNotACitizen_Female
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Within EU 28 And Not ACitizen, Female Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Within EU28 And Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
@@ -3709,7 +3709,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AerobicOrMuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU28AndNotACitizen_Male
-name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Within EU 28 And Not ACitizen, Male Population"
+name: "Percentage Aerobic Or Muscle Strengthening, Health Enhancing Physical Activity Among Within EU28 And Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
@@ -4159,7 +4159,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_CitizenOutsideEU28
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Citizen Outside EU 28  Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Citizen Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
@@ -4170,7 +4170,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_CitizenOutsideEU28_Female
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Citizen Outside EU 28 , Female Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Citizen Outside EU28, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
@@ -4182,7 +4182,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_CitizenOutsideEU28_Male
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Citizen Outside EU 28 , Male Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Citizen Outside EU28, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
@@ -4241,7 +4241,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Female_ForeignBornOutsideEU28
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Female, Foreign Born Outside EU 28  Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Female, Foreign Born Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
@@ -4253,7 +4253,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Female_ForeignBornWithinEU28
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Female, Foreign Born Within EU 28  Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Female, Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
@@ -4396,7 +4396,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_ForeignBornOutsideEU28
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Foreign Born Outside EU 28  Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Foreign Born Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
@@ -4407,7 +4407,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_ForeignBornWithinEU28
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Foreign Born Within EU 28  Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
@@ -4542,7 +4542,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Male_ForeignBornOutsideEU28
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Male, Foreign Born Outside EU 28  Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Male, Foreign Born Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_ForeignBornOutsideEU28
@@ -4554,7 +4554,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Male_ForeignBornWithinEU28
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Male, Foreign Born Within EU 28  Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Male, Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_ForeignBornWithinEU28
@@ -4719,7 +4719,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_NotACitizen
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Not ACitizen Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen
@@ -4730,7 +4730,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_NotACitizen_Female
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Not ACitizen, Female Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
@@ -4742,7 +4742,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_NotACitizen_Male
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Not ACitizen, Male Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
@@ -4940,7 +4940,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU28AndNotACitizen
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Within EU 28 And Not ACitizen Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Within EU28 And Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
@@ -4951,7 +4951,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU28AndNotACitizen_Female
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Within EU 28 And Not ACitizen, Female Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Within EU28 And Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
@@ -4963,7 +4963,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU28AndNotACitizen_Male
-name: "Percentage Aerobic, Health Enhancing Physical Activity Among Within EU 28 And Not ACitizen, Male Population"
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Within EU28 And Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
@@ -5445,7 +5445,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_CitizenOutsideEU28
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU 28  Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
@@ -5456,7 +5456,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_CitizenOutsideEU28_Female
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU 28 , Female Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU28, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
@@ -5468,7 +5468,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_CitizenOutsideEU28_Male
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU 28 , Male Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Citizen Outside EU28, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
@@ -5527,7 +5527,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_ForeignBornOutsideEU28
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Female, Foreign Born Outside EU 28  Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Female, Foreign Born Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
@@ -5539,7 +5539,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Female_ForeignBornWithinEU28
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Female, Foreign Born Within EU 28  Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Female, Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
@@ -5682,7 +5682,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_ForeignBornOutsideEU28
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Foreign Born Outside EU 28  Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Foreign Born Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
@@ -5693,7 +5693,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_ForeignBornWithinEU28
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Foreign Born Within EU 28  Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
@@ -5828,7 +5828,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_ForeignBornOutsideEU28
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Male, Foreign Born Outside EU 28  Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Male, Foreign Born Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_ForeignBornOutsideEU28
@@ -5840,7 +5840,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_Male_ForeignBornWithinEU28
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Male, Foreign Born Within EU 28  Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Male, Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male_ForeignBornWithinEU28
@@ -6005,7 +6005,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_NotACitizen
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Not ACitizen Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen
@@ -6016,7 +6016,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_NotACitizen_Female
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Not ACitizen, Female Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
@@ -6028,7 +6028,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_NotACitizen_Male
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Not ACitizen, Male Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
@@ -6226,7 +6226,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU28AndNotACitizen
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Within EU 28 And Not ACitizen Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Within EU28 And Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
@@ -6237,7 +6237,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU28AndNotACitizen_Female
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Within EU 28 And Not ACitizen, Female Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Within EU28 And Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
@@ -6249,7 +6249,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_MuscleStrengthening_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU28AndNotACitizen_Male
-name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Within EU 28 And Not ACitizen, Male Population"
+name: "Percentage Muscle Strengthening, Health Enhancing Physical Activity Among Within EU28 And Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male

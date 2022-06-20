@@ -727,13 +727,12 @@ class EuroStatPhysicalActivity:
             # adding Population in the end
             sv_name = sv_name.replace(", Among", " Among")
             sv_name = sv_name.rstrip(', ')
-            sv_name = sv_name.rstrip('with')
             # Adding spaces before every capital letter,
             # to make SV look more like a name.
-            sv_name = re.sub(r"([0-9]+(\.[0-9]+)?)",r" \1 ", sv_name)
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
-            sv_name = "name: \"" + sv_name.replace("  "," ") + " Population\""
-
+            sv_name = "name: \"" + sv_name + " Population\""
+            sv_name = sv_name.replace("To299","To 299").replace("ACitizen","A Citizen")
+            
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv14=sv_name,
                                                        pv2=denominator,
