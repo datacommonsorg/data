@@ -43,14 +43,15 @@ import pandas as pd
 from absl import app
 from absl import flags
 
-module_dir_ = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(1, os.path.join(module_dir_, '../../../../'))
-
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, _MODULE_DIR)
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
-from clean import (clean_df, clean_1970_1989_county_txt,
+from clean import (clean_data_df, clean_1970_1989_county_txt,
                    process_states_1900_1969, process_states_1970_1979,
                    process_states_1980_1989, process_states_1990_1999)
+
+sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2todcid
 import util.name_to_alpha2 as statetoshortform
 import util.county_to_dcid as countytodcid
@@ -60,30 +61,46 @@ import util.county_to_dcid as countytodcid
 USSTATE_MAP = alpha2todcid.USSTATE_MAP
 COUNTY_MAP = countytodcid.COUNTY_MAP
 _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
-
-pd.set_option("display.max_rows", None)
+_SCALING_FACTOR_STATE_1900_1960 = 1000
+_USA = "United States"
+_DISTRICT_OF_COLUMBIA_STATE_CODE = 11
+_DISTRICT_OF_COLUMBIA_COUNTY_CODE = 1
 
 FLAGS = flags.FLAGS
-default_input_path = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "input_files"
+_DEFAULT_INPUT_PATH = _MODULE_DIR + os.sep + "input_files"
 
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
+                    "Import Data File's List")
 
-_state_config = None
-_state_config_path = os.path.join(os.path.dirname(__file__),
-                                  "states_config.json")
-with open(_state_config_path, encoding="utf-8") as states_file:
-    print(states_file)
-    _state_config = json.load(states_file)
+_STATE_CONFIG_PATH = os.path.join(_MODULE_DIR, "states_config.json")
+with open(_STATE_CONFIG_PATH, encoding="utf-8") as states_file:
+    _STATE_CONFIG = json.load(states_file)
+
+_MCF_TEMPLATE = """Node: dcid:Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+"""
+
+_TMCF_TEMPLATE = """Node: E:USA_Annual_Population->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person
+measurementMethod: dcs:CensusPEPSurvey
+observationAbout: C:USA_Annual_Population->Location
+observationDate: C:USA_Annual_Population->Year
+observationPeriod: \"P1Y\"
+value: C:USA_Annual_Population->Count_Person 
+"""
 
 
-def _load_df(path: str,
-             file_format: str,
-             header: str = None,
-             skip_rows: int = None,
-             encoding: str = None) -> pd.DataFrame:
+def _load_data_df(path: str,
+                  file_format: str,
+                  header: str = None,
+                  skip_rows: int = None,
+                  encoding: str = None) -> pd.DataFrame:
     """
-    Returns the DataFrame using input path and config
+    Returns the DataFrame using input path and config.
     Args:
         path (str): Input File Path
         file_format (str): Input File Format
@@ -92,36 +109,26 @@ def _load_df(path: str,
         encoding (str, optional): Input File Encoding. Defaults to None.
 
     Returns:
-        df (pd.DataFrame): Dataframe of input file
+        data_df (pd.DataFrame): Dataframe of input file
     """
-    df = None
+    data_df = None
     if file_format.lower() == "csv":
-        df = pd.read_csv(path, header=header, encoding=encoding)
+        data_df = pd.read_csv(path, header=header, encoding=encoding)
     elif file_format.lower() == "txt":
-        df = pd.read_table(path,
-                           index_col=False,
-                           delim_whitespace=True,
-                           engine='python',
-                           header=header,
-                           skiprows=skip_rows)
+        data_df = pd.read_table(path,
+                                index_col=False,
+                                delim_whitespace=True,
+                                engine='python',
+                                header=header,
+                                skiprows=skip_rows)
     elif file_format.lower() in ["xls", "xlsx"]:
-        df = pd.read_excel(path, header=header)
-    return df
+        data_df = pd.read_excel(path, header=header)
+    return data_df
 
 
-def _find_file_format(path: str) -> str:
-    return path[path.rfind('.') + 1:]
-
-
-def _merge_df(df_1: pd.DataFrame, df_2: pd.DataFrame) -> pd.DataFrame:
-    if df_1 is None:
-        return df_2
-    return pd.concat([df_1, df_2], axis=0)
-
-
-def geo_id(val: str) -> str:
+def _geo_id(val: str) -> str:
     """
-    Returns GeoID for State Or County
+    Returns GeoID for State Or County.
     Args:
         val (str): FIPS Code
 
@@ -135,37 +142,78 @@ def geo_id(val: str) -> str:
     return res + state + county
 
 
-def _state_to_county_geoid(df: pd.DataFrame) -> dict:
-    if len(df.columns) == 1:
-        if df.values.size == 1:
-            return df.values[0][0]
-        return df.values.squeeze()
-    grouped = df.groupby(df.columns[0])
+def _state_to_county_geoid(data_df: pd.DataFrame) -> dict:
+    if len(data_df.columns) == 1:
+        if data_df.values.size == 1:
+            return data_df.values[0][0]
+        return data_df.values.squeeze()
+    grouped = data_df.groupby(data_df.columns[0])
 
     d = {k: _state_to_county_geoid(g.iloc[:, 1:]) for k, g in grouped}
     return d
 
 
-def _transpose_df(df: pd.DataFrame, common_col: str,
-                  data_cols: list) -> pd.DataFrame:
+def _unpivot_data_df(data_df: pd.DataFrame,
+                     id_col: list,
+                     data_cols: list,
+                     default_col="Year") -> pd.DataFrame:
+    """
+    Unpivot a DataFrame from wide to long format.
+    Before Transpose,
+    data_df:
+    Location    2010    2011    2012    2013
+    geoId/01   14890   15678   16012   16234
+    geoId/02   13452   11980   12121   12432
+    id_col: ["Location"]
+    data_cols: ["2010", "2011", "2012", "2013"]
+    default_col: "Year"
+    Result data_df:
+    Year    Location   Count_Person
+    2010    geoId/01          14890
+    2010    geoId/02          13452
+    2011    geoId/01          15678
+    2011    geoId/02          11980
+    2012    geoId/01          14890
+    2012    geoId/02          13452
+    2013    geoId/01          15678
+    2013    geoId/02          11980
+
+    Args:
+        data_df (pd.DataFrame): Dataframe with cleaned data
+        common_col (list): Dataframe Column list
+        data_cols (list): Dataframe Column list
+    Returns:
+        pd.DataFrame: Dataframe
+    """
+    res_data_df = pd.DataFrame()
+    res_data_df = pd.melt(data_df,
+                          id_vars=id_col,
+                          value_vars=data_cols,
+                          var_name=default_col,
+                          value_name='Count_Person')
+    return res_data_df
+
+
+def _transpose_data_df(data_df: pd.DataFrame, common_col: str,
+                       data_cols: list) -> pd.DataFrame:
     """
     Transpose the data_cols into single column named as default_col
-    and concatinates the default_col with common_cols
+    and concatinates the default_col with common_cols.
     Args:
-        df (pd.DataFrame): Dataframe with cleaned data
+        data_df (pd.DataFrame): Dataframe with cleaned data
         common_col (str): Dataframe Column
         data_cols (list): Dataframe Column list
 
     Returns:
         pd.DataFrame: Dataframe with Location, Count_Person
     """
-    res_df = pd.DataFrame()
+    res_data_df = pd.DataFrame()
     for col in data_cols:
-        tmp_df = df[[common_col, col]]
-        tmp_df.columns = ["Location", "Count_Person"]
-        tmp_df["Year"] = col
-        res_df = pd.concat([res_df, tmp_df])
-    return res_df
+        tmp_data_df = data_df[[common_col, col]]
+        tmp_data_df.columns = ["Location", "Count_Person"]
+        tmp_data_df["Year"] = col
+        res_data_df = pd.concat([res_data_df, tmp_data_df])
+    return res_data_df
 
 
 def _remove_initial_dot_values(val: str) -> str:
@@ -174,57 +222,60 @@ def _remove_initial_dot_values(val: str) -> str:
     return val
 
 
-def _process_csv_file(df: pd.DataFrame, area: str) -> pd.DataFrame:
+def _process_csv_file(data_df: pd.DataFrame, area: str) -> pd.DataFrame:
     """
-    Clean the DataFrame loaded for CSV file
+    Clean the DataFrame loaded for CSV file.
     Args:
-        df (pd.DataFrame): Dataframe loaded with a dataset
-        area (str): Value from the 1st Column of df
+        data_df (pd.DataFrame): Dataframe loaded with a dataset
+        area (str): Value from the 1st Column of data_df
 
     Returns:
         pd.DataFrame: Cleaned Dataframe
     """
-    data_idx = df[df[0] == area].index.values[0]
-    df = df.iloc[data_idx - 1:, :]
+    data_idx = data_df[data_df[0] == area].index.values[0]
+    data_df = data_df.iloc[data_idx - 1:, :]
     year_idx = data_idx - 1
-    res_df = pd.DataFrame()
-    for col in df.columns[1:]:
+    res_data_df = pd.DataFrame()
+    for col in data_df.columns[1:]:
         usa_idx = 2
-        tmp_df = df[[0, col]].iloc[data_idx - 1:usa_idx, :]
-        tmp_df.columns = ["Location", "Count_Person"]
-        year = df.iat[year_idx - 1, col]
+        tmp_data_df = data_df[[0, col]].iloc[data_idx - 1:usa_idx, :]
+        tmp_data_df.columns = ["Location", "Count_Person"]
+        year = data_df.iat[year_idx - 1, col]
         if str(year).isnumeric():
-            tmp_df['Year'] = year
+            tmp_data_df['Year'] = year
         elif len(year.split(",")) == 1:
             continue
         else:
-            tmp_df['Year'] = (year.split(",")[1].strip())
-        res_df = pd.concat([res_df, tmp_df])
-    res_df = res_df.dropna(subset=["Count_Person"])
-    for col in res_df.columns:
-        res_df[col] = res_df[col].str.replace(",", "").str.replace(".", "")
-    res_df = res_df.reset_index().drop(columns=['index'])
-    return res_df
+            tmp_data_df['Year'] = (year.split(",")[1].strip())
+        res_data_df = pd.concat([res_data_df, tmp_data_df])
+    res_data_df = res_data_df.dropna(subset=["Count_Person"])
+    for col in res_data_df.columns:
+        res_data_df[col] = res_data_df[col].str.replace(",", "").str.replace(
+            ".", "")
+    res_data_df = res_data_df.reset_index().drop(columns=['index'])
+    return res_data_df
 
 
-def _states_full_to_short_form(df: pd.DataFrame,
+def _states_full_to_short_form(data_df: pd.DataFrame,
                                data_col: str,
                                new_col: str,
                                replace_key: str = " ") -> pd.DataFrame:
     short_forms = _USSTATE_SHORT_FORM
-    df[new_col] = df[data_col].str.replace(
+    data_df[new_col] = data_df[data_col].str.replace(
         replace_key, "").apply(lambda row: short_forms.get(row, row))
-    return df
+    return data_df
 
 
 def _state_to_geo_id(state: str) -> str:
     return USSTATE_MAP.get(state, state)
 
 
-def _add_geo_id(df: pd.DataFrame, data_col: str, new_col: str) -> pd.DataFrame:
-    df[new_col] = df[data_col].apply(lambda rec: USSTATE_MAP.get(rec, pd.NA))
-    df = df.dropna(subset=[new_col])
-    return df
+def _add_geo_id(data_df: pd.DataFrame, data_col: str,
+                new_col: str) -> pd.DataFrame:
+    data_df[new_col] = data_df[data_col].apply(
+        lambda rec: USSTATE_MAP.get(rec, pd.NA))
+    data_df = data_df.dropna(subset=[new_col])
+    return data_df
 
 
 def _county_to_dcid(geo_id_dict: dict, state_abbr: str, county: str) -> str:
@@ -246,7 +297,7 @@ def _county_to_dcid(geo_id_dict: dict, state_abbr: str, county: str) -> str:
 
 def _process_nationals_1900_1999(ip_file: str, op_file: str) -> None:
     """
-    Process the nationals data for the year 1990-1999
+    Process the nationals data for the year 1990-1999.
     Args:
         ip_file (str): Input File Path
         op_file (str): Output File Path
@@ -254,8 +305,13 @@ def _process_nationals_1900_1999(ip_file: str, op_file: str) -> None:
     with open(op_file, 'w', encoding='utf-8') as national_pop_stats:
         national_pop_stats.write("Year,Location,Count_Person")
         with open(ip_file, encoding='utf-8') as ipfile:
+
             for line in ipfile.readlines():
+                # Example:
+                # July 1, 1999      272,690,813          2,442,810        0.90
                 if line.startswith(" July 1"):
+                    # Index 9 to 13 provides Year from the line
+                    # and 14 to 30 provides the population count
                     national_pop_stats.write(
                         "\n" + line[9:13] + ",country/USA," +
                         line[14:30].replace(",", "").lstrip().rstrip())
@@ -263,7 +319,7 @@ def _process_nationals_1900_1999(ip_file: str, op_file: str) -> None:
 
 def _process_nationals_2010_2020(ip_file: str, op_file: str) -> None:
     """
-    Process the nationals data for the year 2010-2020
+    Process the nationals data for the year 2010-2020.
     Args:
         ip_file (str): Input File Path
         op_file (str): Output File Path
@@ -278,20 +334,21 @@ def _process_nationals_2010_2020(ip_file: str, op_file: str) -> None:
                     values = line.strip('\n').split(",")
         for k, v in dict(zip(header, values)).items():
             if k.find('POPESTIMATE2') != -1:
+                # k contains values such as POPESTIMATE2010,POPESTIMATE2011,
+                # POPESTIMATE2012 and index at [-4:] provides year value
                 national_pop_stats.write("\n" + k[-4:] + ",country/USA," + v)
 
 
 def _process_county_file_99c8_00(file_path: str) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists
-    county data for the year 1990 to 1999
+    county data for the year 1990 to 1999.
     Args:
         file_path (str): Input file path
 
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df = None
     with open(file_path, encoding='ISO-8859-1') as ipfile:
         with open("outfile.csv", "w+", encoding="UTF-8") as outfile:
             outfile.write("Year,Location,Count_Person\n")
@@ -303,7 +360,6 @@ def _process_county_file_99c8_00(file_path: str) -> pd.DataFrame:
                     while ",," in tmp_line:
                         tmp_line = tmp_line.replace(",,", ",")
                     tmp_line = tmp_line.split(",")
-                    fips_code = None
                     if tmp_line[-2] == "United":
                         continue
                     fips_code = "geoId/" + tmp_line[1]
@@ -314,56 +370,58 @@ def _process_county_file_99c8_00(file_path: str) -> pd.DataFrame:
                         outfile.write(
                             str(val) + ',' + str(fips_code) + "," +
                             str(tmp_line[idx + 2]) + "\n")
-    df = pd.read_csv("outfile.csv")
-    df = df[df["Location"] != "country/USA"]
+    data_df = pd.read_csv("outfile.csv")
+    data_df = data_df[data_df["Location"] != "country/USA"]
     os.remove("outfile.csv")
-    return df
+    return data_df
 
 
 def _process_county_e8089co_e7079co(file_path: str) -> pd.DataFrame:
     """
-    Process DataFrame of County data for years 1970-1989
+    Process DataFrame of County data for years 1970-1989.
     Args:
         file_path (str): Input File Path
 
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
+    # skip_rows is helpful in skipping intial unwanted rows from the source.
     skip_rows = 23
-    first_df_cols = [
+    first_data_df_cols = [
         "Fips_Code", "Location", "extra_Location", "1970", "1971", "1972",
         "1973", "1974", "extra_data_col_1", "extra_data_col_2"
     ]
-    second_df_cols = [
+    second_data_df_cols = [
         "Fips_Code", "Location", "extra_Location", "1975", "1976", "1977",
         "1978", "1979", "extra_data_col_1", "extra_data_col_2"
     ]
     if "e8089co.txt" in file_path:
         skip_rows = 0
-        first_df_cols = [
+        first_data_df_cols = [
             "Fips_Code", "Location", "extra_Location", "1980", "1981", "1982",
             "1983", "1984", "extra_data_col_1", "extra_data_col_2"
         ]
-        second_df_cols = [
+        second_data_df_cols = [
             "Fips_Code", "Location", "extra_Location", "1985", "1986", "1987",
             "1988", "1989", "extra_data_col_1", "extra_data_col_2"
         ]
-    df = _load_df(file_path, "txt", None, skip_rows)
-    df = clean_1970_1989_county_txt(df, first_df_cols, second_df_cols)
-    df = _transpose_df(df, "Location", df.columns[1:])
-    return df
+    data_df = _load_data_df(file_path, "txt", None, skip_rows)
+    data_df = clean_1970_1989_county_txt(data_df, first_data_df_cols,
+                                         second_data_df_cols)
+    data_df = _transpose_data_df(data_df, "Location", data_df.columns[1:])
+    return data_df
 
 
 def _process_county_coest2020(file_path: str) -> pd.DataFrame:
     """
-    Process DataFrame of County data for year 2020
+    Process DataFrame of County data for year 2020.
     Args:
         file_path (str): Input File Path
 
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df = _load_df(file_path, "csv", header=0, encoding='ISO-8859-1')
+    data_df = _load_data_df(file_path, "csv", header=0, encoding='ISO-8859-1')
 
     cols = [
         "STATE", "COUNTY", "STNAME", "CTYNAME", "POPESTIMATE2010",
@@ -372,79 +430,87 @@ def _process_county_coest2020(file_path: str) -> pd.DataFrame:
         "POPESTIMATE2017", "POPESTIMATE2018", "POPESTIMATE2019",
         "POPESTIMATE042020", "POPESTIMATE2020"
     ]
-    df = df[cols]
-    idx = df[(df["STATE"] == 11) & df["COUNTY"] == 1].index.values[0]
-    df.loc[idx, "CTYNAME"] = "Washington County"
+    data_df = data_df[cols]
+    # Modifying actual city name for State: District of Columbia
+    # and City Name: District of Columbia. This is havind duplicate
+    idx = data_df[(data_df["STATE"] == _DISTRICT_OF_COLUMBIA_STATE_CODE) &
+                  (data_df["COUNTY"] == _DISTRICT_OF_COLUMBIA_COUNTY_CODE)]\
+                      .index.values[0]
+    data_df.loc[idx, "CTYNAME"] = "Washington County"
 
-    df['COUNTY'] = df['COUNTY'].astype('str').str.pad(3,
-                                                      side='left',
-                                                      fillchar='0')
-    df['STATE'] = df['STATE'].astype('str').str.pad(2,
-                                                    side='left',
-                                                    fillchar='0')
-    df['Location'] = df[["STATE", "COUNTY"]].apply(geo_id, axis=1)
-    df.columns = df.columns.str.replace('POPESTIMATE', '')
-    df = df.drop(columns=["STATE", "COUNTY", "STNAME", "CTYNAME", "042020"])
-    df = _transpose_df(df, "Location", df.columns[:-1])
-    return df
+    data_df['COUNTY'] = data_df['COUNTY'].astype('str').str.pad(3,
+                                                                side='left',
+                                                                fillchar='0')
+    data_df['STATE'] = data_df['STATE'].astype('str').str.pad(2,
+                                                              side='left',
+                                                              fillchar='0')
+    data_df['Location'] = data_df[["STATE", "COUNTY"]].apply(_geo_id, axis=1)
+    data_df.columns = data_df.columns.str.replace('POPESTIMATE', '')
+
+    # Dropping Unwanted Columns
+    data_df = data_df.drop(
+        columns=["STATE", "COUNTY", "STNAME", "CTYNAME", "042020"])
+    data_df = _transpose_data_df(data_df, "Location", data_df.columns[:-1])
+    return data_df
 
 
 def _process_counties(file_path: str) -> pd.DataFrame:
     """
-    Processes County data and Returns DataFrame
+    Processes County data and Returns DataFrame.
     Args:
         file_path (str): Input File Path
 
     Returns:
         pd.DataFrame: Processed County DataFrame
     """
-    df = None
+    data_df = None
 
     if "99c8_00.txt" in file_path:
-        df = _process_county_file_99c8_00(file_path)
-        df = df[df["Location"].str.len() != 8]
+        data_df = _process_county_file_99c8_00(file_path)
+        data_df = data_df[data_df["Location"].str.len() != 8]
     elif "e8089co.txt" in file_path or "e7079co.txt" in file_path:
-        df = _process_county_e8089co_e7079co(file_path)
-        df = df[df["Location"].str.len() != 8]
+        data_df = _process_county_e8089co_e7079co(file_path)
+        data_df = data_df[data_df["Location"].str.len() != 8]
     elif "co-est2020" in file_path:
-        df = _process_county_coest2020(file_path)
+        data_df = _process_county_coest2020(file_path)
     elif "co-est2021" in file_path:
-        df = _load_df(file_path, "xlsx", header=3)
-        df.columns = [
+        data_df = _load_data_df(file_path, "xlsx", header=3)
+        data_df.columns = [
             "Location", "extra_data_col_1", "extra_data_col_2", "2021"
         ]
-        df = _transpose_df(df, "Location", ["2021"])
-        df = df.dropna(subset=["Count_Person"])
-        df["Count_Person"] = df["Count_Person"].astype('int')
-        df["Location"] = df["Location"].str.replace(".", "")
+        data_df = _transpose_data_df(data_df, "Location", ["2021"])
+        data_df = data_df.dropna(subset=["Count_Person"])
+        data_df["Count_Person"] = data_df["Count_Person"].astype('int')
+        data_df["Location"] = data_df["Location"].str.replace(".", "")
     elif "co-est" in file_path:
-        df = _load_df(file_path, "csv", encoding='ISO-8859-1')
-        df = clean_df(df, "csv")
-        df = df.dropna(subset=[11, 12])
+        data_df = _load_data_df(file_path, "csv", encoding='ISO-8859-1')
+        data_df = clean_data_df(data_df, "csv")
+        data_df = data_df.dropna(subset=[11, 12])
         cols = [
             "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007",
             "2008", "2009", "Location"
         ]
-        geo, df = df[0], df.iloc[:, 2:12]
-        df['Location'] = geo
-        df.columns = cols
-        df = df.reset_index().drop(columns=["index"])
-        df["Location"] = df["Location"].apply(_remove_initial_dot_values)
-        state = df.loc[0, 'Location']
-        df['State'] = state
-        df['State'] = df['State'].str.replace(" ", "")
-        df = _states_full_to_short_form(df, 'State', 'State')
+        geo, data_df = data_df[0], data_df.iloc[:, 2:12]
+        data_df['Location'] = geo
+        data_df.columns = cols
+        data_df = data_df.reset_index().drop(columns=["index"])
+        data_df["Location"] = data_df["Location"].apply(
+            _remove_initial_dot_values)
+        state = data_df.loc[0, 'Location']
+        data_df['State'] = state
+        data_df['State'] = data_df['State'].str.replace(" ", "")
+        data_df = _states_full_to_short_form(data_df, 'State', 'State')
         if state == "District of Columbia":
-            df.loc[1, "Location"] = "Washington County"
-        df["Location"] = df.apply(
+            data_df.loc[1, "Location"] = "Washington County"
+        data_df["Location"] = data_df.apply(
             lambda x: _county_to_dcid(COUNTY_MAP, x.State, x.Location), axis=1)
-        df.loc[0, 'Location'] = df.loc[0, 'State']
-        df["Location"] = df["Location"].apply(_state_to_geo_id)
-        df = _transpose_df(df, "Location", df.columns[:-2])
-        df["Count_Person"] = df["Count_Person"].str.replace(",", "")
-        df = df[["Year", "Location", "Count_Person"]]
-    df = df[df["Location"] != "country/USA"]
-    return df
+        data_df.loc[0, 'Location'] = data_df.loc[0, 'State']
+        data_df["Location"] = data_df["Location"].apply(_state_to_geo_id)
+        data_df = _transpose_data_df(data_df, "Location", data_df.columns[:-2])
+        data_df["Count_Person"] = data_df["Count_Person"].str.replace(",", "")
+        data_df = data_df[["Year", "Location", "Count_Person"]]
+    data_df = data_df[data_df["Location"] != "country/USA"]
+    return data_df
 
 
 def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
@@ -482,11 +548,11 @@ def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
                     continue
                 # Processing Actual data rows
                 if flag:
-                    #print(line)
                     data = line.split(" ")
                     data = [val.strip() for val in data if val != '']
                     if not data[1].isnumeric():
                         continue
+                    # Mapping the below cities and geoId as per DataCommons
                     if data[1] == "76870" and data[2] == "Stanley":
                         data[1] = "76780"
                     if data[1] == "06242" and data[2] == "Beach":
@@ -495,9 +561,9 @@ def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
                                    + f"{int(data[1]):05d}"
                     for year, val in dict(zip(cols, data[-len(cols):])).items():
                         outfile.write(f"{year},{loc},{val}\n")
-        df = pd.read_csv("out.csv", header=0)
+        data_df = pd.read_csv("out.csv", header=0)
         os.remove("out.csv")
-        return df
+        return data_df
 
 
 def _process_cities(file_path: str, file_name: str) -> pd.DataFrame:
@@ -510,22 +576,22 @@ def _process_cities(file_path: str, file_name: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Processed City DataFrame
     """
-    df = None
+    data_df = None
     if file_name in ['su-99-7_us.txt']:
-        df = _process_city_1990_1999(file_path)
+        data_df = _process_city_1990_1999(file_path)
     if "sub-est2010-alt" in file_name or "sub-est2019_all" in file_name:
-        df = _load_df(file_path,
-                      file_format="csv",
-                      header=0,
-                      encoding="ISO-8859-1")
-        df = df[df["SUMLEV"] == 162]
-        df['STATE'] = df['STATE'].astype('str').str.pad(2,
-                                                        side='left',
-                                                        fillchar='0')
-        df['PLACE'] = df['PLACE'].astype('str').str.pad(5,
-                                                        side='left',
-                                                        fillchar='0')
-        df["Location"] = "geoId/" + df["STATE"] + df["PLACE"]
+        data_df = _load_data_df(file_path,
+                                file_format="csv",
+                                header=0,
+                                encoding="ISO-8859-1")
+        data_df = data_df[data_df["SUMLEV"] == 162]
+        data_df['STATE'] = data_df['STATE'].astype('str').str.pad(2,
+                                                                  side='left',
+                                                                  fillchar='0')
+        data_df['PLACE'] = data_df['PLACE'].astype('str').str.pad(5,
+                                                                  side='left',
+                                                                  fillchar='0')
+        data_df["Location"] = "geoId/" + data_df["STATE"] + data_df["PLACE"]
         key = "POPESTIMATE07"
         final_cols = [
             "Location", "2000", "2001", "2002", "2003", "2004", "2005", "2006",
@@ -538,136 +604,99 @@ def _process_cities(file_path: str, file_name: str) -> pd.DataFrame:
                 "2016", "2017", "2018", "2019"
             ]
 
-        df.columns = df.columns.str.replace(key, '')
-        df = df[final_cols]
-        df = _transpose_df(df, common_col="Location", data_cols=df.columns[1:])
-    return df
+        data_df.columns = data_df.columns.str.replace(key, '')
+        data_df = data_df[final_cols]
+        data_df = _transpose_data_df(data_df,
+                                     common_col="Location",
+                                     data_cols=data_df.columns[1:])
+    return data_df
 
 
-class USCensusPEPAnnualPopulation:
+def _transform_data_df(data_df: pd.DataFrame, area: str) -> pd.DataFrame:
+    data_df = _process_csv_file(data_df, area)
+    data_df = _states_full_to_short_form(data_df, "Location", "Short_Form")
+    data_df = _add_geo_id(data_df, "Short_Form", "Location")
+    return data_df[["Year", "Location", "Count_Person"]]
+
+
+def _generate_mcf(mcf_file_path) -> None:
     """
-    This Class has requried methods to generate Cleaned CSV,
+    This method generates MCF file w.r.t
+    dataframe headers and defined MCF template
+
+    Returns:
+        None
     """
+    # Writing Genereated MCF to local path.
+    with open(mcf_file_path, 'w+', encoding='utf-8') as f_out:
+        f_out.write(_MCF_TEMPLATE.rstrip('\n'))
 
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
-        self.input_files = input_files
-        self.cleaned_csv_file_path = csv_file_path
-        self.mcf_file_path = mcf_file_path
-        self.tmcf_file_path = tmcf_file_path
-        self.df = None
-        self.file_name = None
-        self.scaling_factor = 1
 
-    def __transform_df(self, df: pd.DataFrame, area: str) -> pd.DataFrame:
-        df = _process_csv_file(df, area)
-        df = _states_full_to_short_form(df, "Location", "Short_Form")
-        df = _add_geo_id(df, "Short_Form", "Location")
+def _generate_tmcf(tmcf_file_path) -> None:
+    """
+    This method generates TMCF file w.r.t
+    dataframe headers and defined TMCF template
 
-        output_path = self.cleaned_csv_file_path[:self.cleaned_csv_file_path.
-                                                 rfind("/")]
-        if not os.path.exists(output_path):
-            os.mkdir(output_path)
-        return df[["Year", "Location", "Count_Person"]]
+    Returns:
+        None
+    """
+    # Writing Genereated TMCF to local path.
+    with open(tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+        f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
 
-    def __generate_mcf(self) -> None:
-        """
-        This method generates MCF file w.r.t
-        dataframe headers and defined MCF template
-        Arguments:
-            df_cols (list) : List of DataFrame Columns
-        Returns:
-            None
-        """
-        mcf_template = """Node: dcid:Count_Person
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
-        # Writing Genereated MCF to local path.
-        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(mcf_template.rstrip('\n'))
 
-    def __generate_tmcf(self) -> None:
-        """
-        This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template
-        Arguments:
-            df_cols (list) : List of DataFrame Columns
-        Returns:
-            None
-        """
-        tmcf_template = """Node: E:USA_Annual_Population->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person
-measurementMethod: dcs:CensusPEPSurvey
-observationAbout: C:USA_Annual_Population->Location
-observationDate: C:USA_Annual_Population->Year
-observationPeriod: \"P1Y\"
-value: C:USA_Annual_Population->Count_Person 
-"""
+def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
+            tmcf_file_path: str):
+    """
+    This Method calls the required methods to generate cleaned CSV,
+    MCF, and TMCF file
+    """
+    final_df = pd.DataFrame()
+    if not os.path.exists(os.path.dirname(cleaned_csv_file_path)):
+        os.mkdir(os.path.dirname(cleaned_csv_file_path))
+    for file in input_files:
+        file_name = os.path.basename(file)
+        op_file = os.path.join(os.path.dirname(cleaned_csv_file_path),
+                               file_name.replace(".txt", ".csv"))
+        if "popclockest.txt" in file:
+            _process_nationals_1900_1999(file, op_file)
+            data_df = _load_data_df(op_file, "csv", 0)
+            os.remove(op_file)
+        elif "nst-est2020.csv" in file:
+            _process_nationals_2010_2020(file, op_file)
+            data_df = _load_data_df(op_file, "csv", 0)
+            os.remove(op_file)
+        elif file_name.startswith("st") and file_name.endswith("ts.txt"):
+            data_df = process_states_1900_1969(_STATE_CONFIG, file, file_name,
+                                               _SCALING_FACTOR_STATE_1900_1960)
+        elif "st7080ts" in file:
+            data_df = process_states_1970_1979(file)
+        elif "st8090ts" in file:
+            data_df = process_states_1980_1989(file)
+            data_df["Location"] = data_df["Location"].apply(_state_to_geo_id)
+        elif "st-99-03" in file:
+            data_df = process_states_1990_1999(file)
+            data_df = _states_full_to_short_form(data_df, "Location",
+                                                 "Location")
+            data_df["Location"] = data_df["Location"].apply(_state_to_geo_id)
+        elif file_name in ["e8089co.txt", "e7079co.txt", "99c8_00.txt"
+                          ] or "co-est" in file_name:
+            data_df = _process_counties(file)
+        elif file_name in [
+                'su-99-7_us.txt', "sub-est2010-alt.csv", "sub-est2019_all.csv"
+        ]:
+            data_df = _process_cities(file, file_name)
+        else:
+            file_format = os.path.splitext(file)[1]
+            data_df = _load_data_df(file, file_format)
+            data_df = clean_data_df(data_df, file_format)
+            data_df = _transform_data_df(data_df, _USA)
 
-        # Writing Genereated TMCF to local path.
-        with open(self.tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(tmcf_template.rstrip('\n'))
-
-    def process(self):
-        """
-        This Method calls the required methods to generate cleaned CSV,
-        MCF, and TMCF file
-        """
-
-        for file in self.input_files:
-            file_name = os.path.basename(file)
-            print(file_name)
-            file_format = _find_file_format(file)
-
-            op_file = "output" + os.sep + file_name.replace(".txt", ".csv")
-            if "popclockest.txt" in file:
-                _process_nationals_1900_1999(file, op_file)
-                df = _load_df(op_file, "csv", 0)
-                os.remove(op_file)
-            elif "nst-est2020.csv" in file:
-                _process_nationals_2010_2020(file, op_file)
-                df = _load_df(op_file, "csv", 0)
-                os.remove(op_file)
-            elif "st7080ts" in file:
-                df = process_states_1970_1979(file)
-            elif "st8090ts" in file:
-                df = process_states_1980_1989(file)
-                df["Location"] = df["Location"].apply(_state_to_geo_id)
-            elif "st-99-03" in file:
-                df = process_states_1990_1999(file)
-                df = _states_full_to_short_form(df, "Location", "Location")
-                df["Location"] = df["Location"].apply(_state_to_geo_id)
-
-            elif file_name.startswith("st"):
-                states_conf = _state_config
-                df = process_states_1900_1969(states_conf, file, file_name,
-                                              1000)
-
-            elif file_name in ["e8089co.txt", "e7079co.txt", "99c8_00.txt"
-                              ] or "co-est" in file_name:
-                df = _process_counties(file)
-            elif file_name in [
-                    'su-99-7_us.txt', "sub-est2010-alt.csv",
-                    "sub-est2019_all.csv"
-            ]:
-                df = _process_cities(file, file_name)
-            else:
-                df = _load_df(file, file_format)
-                df = clean_df(df, file_format)
-                area = "United States"
-                df = self.__transform_df(df, area)
-
-            df["file_name"] = file_name
-            self.df = _merge_df(self.df, df)
-        self.df[["Year", "Location",
-                 "Count_Person"]].to_csv(self.cleaned_csv_file_path,
-                                         index=False)
-        self.__generate_mcf()
-        self.__generate_tmcf()
+        final_df = pd.concat([final_df, data_df], axis=0)
+    final_df[["Year", "Location", "Count_Person"]].to_csv(cleaned_csv_file_path,
+                                                          index=False)
+    _generate_mcf(mcf_file_path)
+    _generate_tmcf(tmcf_file_path)
 
 
 def main(_):
@@ -675,17 +704,13 @@ def main(_):
 
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
-
     # Defining Output file names
-    data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output_files"
-    cleaned_csv_path = data_file_path + os.sep + "USA_Annual_Population.csv"
-    mcf_path = data_file_path + os.sep + "USA_Annual_Population.mcf"
-    tmcf_path = data_file_path + os.sep + "USA_Annual_Population.tmcf"
+    data_file_path = _MODULE_DIR + os.sep + "output_files"
+    cleaned_csv_path = data_file_path + os.sep + "usa_annual_population.csv"
+    mcf_path = data_file_path + os.sep + "usa_annual_population.mcf"
+    tmcf_path = data_file_path + os.sep + "usa_annual_population.tmcf"
 
-    loader = USCensusPEPAnnualPopulation(ip_files, cleaned_csv_path, mcf_path,
-                                         tmcf_path)
-    loader.process()
+    process(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
 
 
 if __name__ == "__main__":

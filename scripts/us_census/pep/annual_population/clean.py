@@ -18,35 +18,38 @@ import os
 import sys
 import pandas as pd
 
-module_dir_ = os.path.dirname(os.path.realpath(__file__))
-sys.path.insert(1, os.path.join(module_dir_, '../../../../util'))
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
 import util.alpha2_to_dcid as alpha2todcid
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 
+_EXTRA_LOCATION_COL_IDX = 2
+_PROPER_DATA_END_COL_IDX = 7
 
-def clean_df(df: pd.DataFrame, file_format: str) -> pd.DataFrame:
+
+def clean_data_df(data_df: pd.DataFrame, file_format: str) -> pd.DataFrame:
     """
-    This Methods cleans the CSV dataset using the key Geographic Area as header
+    This Methods cleans the CSV dataset using the Geographic Area as header.
     Arguments:
-        df (DataFrame) : Dataframe contains CSV data
+        data_df (DataFrame) : Dataframe contains CSV data
         file_format (str) : Sring value of either CSV, TXT
     Returns:
-        df (DataFrame) : Cleaned Dataframe
+        data_df (DataFrame) : Cleaned Dataframe
     """
     if file_format.lower() == "csv":
         header = "Geographic Area"
-        idx = df[df[0] == header].index
+        idx = data_df[data_df[0] == header].index
         idx = idx.values[0]
-        df = df.iloc[idx:, :]
-        df = df.reset_index().drop(columns=["index"])
-    return df
+        data_df = data_df.iloc[idx:, :]
+        data_df = data_df.reset_index().drop(columns=["index"])
+    return data_df
 
 
 def _get_fips_code(fips_code: str) -> str:
-    """Returns geoID's for the Country, State and counties
+    """Returns geoID's for the Country, State and counties.
 
     Args:
         fips_code (str): FIPS Code
@@ -65,46 +68,56 @@ def find_file_format(path: str) -> str:
     return os.path.splitext(path)[-1]
 
 
-def _move_data_to_right(df: pd.DataFrame, row_index: list) -> pd.DataFrame:
+def _move_data_to_right(data_df: pd.DataFrame, row_index: list) -> pd.DataFrame:
     """
-    Moving data to right starting from 2nd index column to 7th index column
+    Moving data to right starting from 2nd index column to 7th index column.
 
     Args:
-        df (pd.DataFrame): Input DataFrame
+        data_df (pd.DataFrame): Input DataFrame
         row_index (list): row index value requires data shifting to right side
 
     Returns:
         pd.DataFrame: DataFrame
     """
     for row in row_index:
-        for idx in range(7, 2, -1):
-            df.iloc[row, idx] = df.iloc[row, idx - 1]
-    return df
+        for idx in range(_PROPER_DATA_END_COL_IDX, _EXTRA_LOCATION_COL_IDX, -1):
+            data_df.iloc[row, idx] = data_df.iloc[row, idx - 1]
+    return data_df
 
 
-def _get_nonna_index_for_extra_data_col_1(df: pd.DataFrame) -> pd.DataFrame:
+def _get_nonna_index_for_extra_data_col_1(
+        data_df: pd.DataFrame) -> pd.DataFrame:
     """
     Returns Non-NA index values from extra_data_col_1 column
     extra_data_col_1 column can contains actual data
     because of extra delimiters for some rows.
     Args:
-        df (pd.DataFrame): _description_
+        data_df (pd.DataFrame): Input Raw DataFrame
 
     Returns:
-        pd.DataFrame: _description_
+        pd.DataFrame: DataFrame
     """
-    return df[df["extra_data_col_1"].notnull()].index.values
+    return data_df[data_df["extra_data_col_1"].notnull()].index.values
 
 
-def _move_data_to_left(df: pd.DataFrame,
+def _move_data_to_left(data_df: pd.DataFrame,
                        row_values: list,
                        idx1: int = -7,
                        idx2: int = -2) -> pd.DataFrame:
     """
     Moving data to left starting from idx1 index column to idx2 index column
 
+    Example Row that requires left shift using _move_data_to_left method.
+    DataFrame:
+    Fips_Code Location extra_Location 1970   1971   1972   1973 \
+        01115      St.          Clair  Co.  27956  29500  31300 \
+            1974    extra_data_col_1 extra_data_col_2
+            32200              33700             None
+    Because of extra delimiters Location column, the data is shifted right by 1
+    index and will be to shifted left by 1 index value
+
     Args:
-        df (pd.DataFrame): Input DataFrame
+        data_df (pd.DataFrame): Input DataFrame
         row_index (list): row index value requires data shifting to left side
 
     Returns:
@@ -112,25 +125,42 @@ def _move_data_to_left(df: pd.DataFrame,
     """
     for row in row_values:
         for idx in range(idx1, idx2):
-            df.iloc[row, idx] = df.iloc[row, idx + 1]
-    return df
+            data_df.iloc[row, idx] = data_df.iloc[row, idx + 1]
+    return data_df
 
 
-def _get_numeric_index(df: pd.DataFrame, column: str) -> pd.DataFrame:
-    return df[df[column].apply(lambda row: row.isnumeric())].index.values
+def _get_numeric_index(data_df: pd.DataFrame, column: str) -> pd.DataFrame:
+    return data_df[data_df[column].apply(
+        lambda row: row.isnumeric())].index.values
 
 
-def _get_char_index_in_col(df: pd.DataFrame, col: str) -> pd.DataFrame:
-    return df[df[col].str.replace(
+def _get_char_index_in_col(data_df: pd.DataFrame, col: str) -> pd.DataFrame:
+    return data_df[data_df[col].str.replace(
         ".", "").apply(lambda row: row.isalpha())].index.values
 
 
-def _merge_rows(df: pd.DataFrame, index_list: list, f_idx: int, left_idx: int,
-                right_idx: int) -> pd.DataFrame:
+def _merge_rows(data_df: pd.DataFrame, index_list: list, f_idx: int,
+                left_idx: int, right_idx: int) -> pd.DataFrame:
     """
     Merge two rows from index list and fro m columns left_idx to right_idx
+
+    Some rows in DataFrame is merged as they were splitted into two rows
+       Fips_Code Location extra_Location   1970  1971   1972  1973 \
+           51097     King            and  Queen  None   None  None \
+              Co.    5491           5500   5500  5700   5800  None \
+                1974 extra_data_col_1 extra_data_col_2
+                None             None             None
+                None             None             None
+
+    The above two rows will be merged and formed as below in single row
+    DataFrame:
+    Fips_Code Location extra_Location  1970  1971  1972  1973 \
+        51097     King            and  5491  5500  5500  5700 \
+                1974 extra_data_col_1 extra_data_col_2
+                5800             None             None
+
     Args:
-        df (pd.DataFrame): Input DataFrame
+        data_df (pd.DataFrame): Input DataFrame
         index_list (list): Row index list
         f_idx (int): Final Column Index
         left_idx (int): Left Column Index
@@ -142,14 +172,14 @@ def _merge_rows(df: pd.DataFrame, index_list: list, f_idx: int, left_idx: int,
     for idx in index_list:
         if f_idx == 0:
             # Merging two Dataframe rows starting from -8th index
-            df.iloc[idx - 1, -8:] = df.iloc[idx, left_idx:right_idx]
+            data_df.iloc[idx - 1, -8:] = data_df.iloc[idx, left_idx:right_idx]
         else:
-            df.iloc[idx - 1, -8:-1] = df.iloc[idx, left_idx:right_idx]
-    return df
+            data_df.iloc[idx - 1, -8:-1] = data_df.iloc[idx, left_idx:right_idx]
+    return data_df
 
 
-def _clean_county_df(county_df: pd.DataFrame,
-                     first_df_cols: list) -> pd.DataFrame:
+def _clean_county_data_df(county_data_df: pd.DataFrame,
+                          first_data_df_cols: list) -> pd.DataFrame:
     """
     Transforms the county DataFrame by data shifting left/right by one column.
 
@@ -162,8 +192,8 @@ def _clean_county_df(county_df: pd.DataFrame,
     1970 column data is shifted by 1 places to left and it will be right
     shifted by 1 place
     Args:
-        county_df (pd.DataFrame): County Dataframe
-        first_df_cols (list): List of Dataset Columns
+        county_data_df (pd.DataFrame): County Dataframe
+        first_data_df_cols (list): List of Dataset Columns
 
     Some rows in DataFrame is merged as they were splitted into two rows
        Fips_Code Location extra_Location   1970  1971   1972  1973 \
@@ -180,27 +210,30 @@ def _clean_county_df(county_df: pd.DataFrame,
                 1974 extra_data_col_1 extra_data_col_2
                 5800             None             None
     Returns:
-        county_df (pd.DataFrame): Returns Transformed County dataframe
+        county_data_df (pd.DataFrame): Returns Transformed County dataframe
     """
-    if "1980" in first_df_cols:
+    # Below idx values helps to merge two rows in DataFrame
+    # depends on the dataset either 1980-89 or 1970-79
+    if "1980" in first_data_df_cols:
         lr_idx, right_idx = 0, -1
-    else:
+    elif "1970" in first_data_df_cols:
         lr_idx, right_idx = -1, -2
-    index_list = _get_char_index_in_col(county_df, "Fips_Code")
-    county_df = _merge_rows(county_df, index_list, lr_idx, -9, right_idx)
-    county_df = county_df.drop(index=index_list)
-    county_df = county_df.reset_index().drop(columns=["index"])
-    index_list = _get_numeric_index(county_df, "extra_Location")
-    county_df = _move_data_to_right(county_df, index_list)
-    county_df = county_df.reset_index().drop(columns=["index"])
-    index_list = _get_nonna_index_for_extra_data_col_1(county_df)
-    county_df = _move_data_to_left(county_df, index_list)
-    county_df = county_df.reset_index().drop(columns=["index"])
-    return county_df
+    index_list = _get_char_index_in_col(county_data_df, "Fips_Code")
+    county_data_df = _merge_rows(county_data_df, index_list, lr_idx, -9,
+                                 right_idx)
+    county_data_df = county_data_df.drop(index=index_list)
+    county_data_df = county_data_df.reset_index().drop(columns=["index"])
+    index_list = _get_numeric_index(county_data_df, "extra_Location")
+    county_data_df = _move_data_to_right(county_data_df, index_list)
+    county_data_df = county_data_df.reset_index().drop(columns=["index"])
+    index_list = _get_nonna_index_for_extra_data_col_1(county_data_df)
+    county_data_df = _move_data_to_left(county_data_df, index_list)
+    county_data_df = county_data_df.reset_index().drop(columns=["index"])
+    return county_data_df
 
 
-def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
-                               second_df_cols: list) -> pd.DataFrame:
+def clean_1970_1989_county_txt(data_df: pd.DataFrame, first_data_df_cols: list,
+                               second_data_df_cols: list) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists county data from 1970 to 1989
 
@@ -223,78 +256,89 @@ def clean_1970_1989_county_txt(df: pd.DataFrame, first_df_cols: list,
     shifted twice
 
     Args:
-        df (pd.DataFrame): Dataframe contains county data from 1970 to 1989
-        first_df_cols (list): Columns List from 1970 to 1974 or 1980 to 1984
-        second_df_cols (list): Columns List from 1975 to 1979 or 1985 to 1989
+        data_df (pd.DataFrame): Dataframe contains county data from 1970 to 1989
+        first_data_df_cols (list): Columns List from 1970 to 1974 or
+                                   1980 to 1984
+        second_data_df_cols (list): Columns List from 1975 to 1979 or
+                                    1985 to 1989
 
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
 
-    idx = df[df[0] == "FIPS"].index.values
+    idx = data_df[data_df[0] == "FIPS"].index.values
     next_idx = 0
-    final_df = None
+    final_data_df = None
     for first_idx, second_idx in zip(idx[::2], idx[1::2]):
         next_idx += 2
         if next_idx >= len(idx):
-            end_idx = len(df)
+            end_idx = len(data_df)
         else:
             end_idx = idx[next_idx]
-        initial_df = df.iloc[first_idx + 2:second_idx, :]
-        next_df = df.iloc[second_idx + 2:end_idx, :]
-        initial_df.reset_index().drop(columns=["index"])
+        initial_data_df = data_df.iloc[first_idx + 2:second_idx, :]
+        next_data_df = data_df.iloc[second_idx + 2:end_idx, :]
+        initial_data_df.reset_index().drop(columns=["index"])
 
-        initial_df.columns, next_df.columns = first_df_cols, second_df_cols
-        initial_df = initial_df.reset_index().drop(columns=["index"])
-        next_df = next_df.reset_index().drop(columns=["index"])
-        initial_df = _clean_county_df(initial_df, first_df_cols)
-        next_df = _clean_county_df(next_df, first_df_cols)
-        if "1985" in second_df_cols:
-            index_list = _get_char_index_in_col(next_df, "1985")
+        initial_data_df.columns = first_data_df_cols
+        next_data_df.columns = second_data_df_cols
+        initial_data_df = initial_data_df.reset_index().drop(columns=["index"])
+        next_data_df = next_data_df.reset_index().drop(columns=["index"])
+        initial_data_df = _clean_county_data_df(initial_data_df,
+                                                first_data_df_cols)
+        next_data_df = _clean_county_data_df(next_data_df, first_data_df_cols)
+        if "1985" in second_data_df_cols:
+            index_list = _get_char_index_in_col(next_data_df, "1985")
             # Shifting data to left starting from column at -2 index to -8
-            next_df = _move_data_to_left(next_df, index_list, -8, -2)
-        if "1980" in first_df_cols:
-            index_list = _get_char_index_in_col(initial_df, "1980")
+            next_data_df = _move_data_to_left(next_data_df, index_list, -8, -2)
+        if "1980" in first_data_df_cols:
+            index_list = _get_char_index_in_col(initial_data_df, "1980")
             if len(index_list) > 0:
                 # Shifting data to left starting from column at -1 index to -8
-                initial_df = _move_data_to_left(initial_df, index_list, -8, -1)
-                if initial_df.loc[index_list[0],
-                                  "extra_data_col_2"] is not None:
+                initial_data_df = _move_data_to_left(initial_data_df,
+                                                     index_list, -8, -1)
+                if initial_data_df.loc[index_list[0],
+                                       "extra_data_col_2"] is not None:
                     # Shifting data to left starting
                     # from column at -1 index to -3
-                    initial_df = _move_data_to_left(initial_df, index_list, -3,
-                                                    -1)
-        if "1970" in first_df_cols:
-            index_list = _get_char_index_in_col(initial_df, "1970")
+                    initial_data_df = _move_data_to_left(
+                        initial_data_df, index_list, -3, -1)
+        if "1970" in first_data_df_cols:
+            index_list = _get_char_index_in_col(initial_data_df, "1970")
             if len(index_list) > 0:
                 # Shifting data to left starting from column at -1 index to -7
-                initial_df = _move_data_to_left(initial_df, index_list, -7, -1)
-                if initial_df.loc[index_list[0],
-                                  "extra_data_col_2"] is not None:
+                initial_data_df = _move_data_to_left(initial_data_df,
+                                                     index_list, -7, -1)
+                if initial_data_df.loc[index_list[0],
+                                       "extra_data_col_2"] is not None:
                     # Shifting data to left starting from column at -3
                     #  index to -1
-                    initial_df = _move_data_to_left(initial_df, index_list, -3,
-                                                    -1)
-        if "1975" in second_df_cols:
-            index_list = _get_char_index_in_col(next_df, "1975")
+                    initial_data_df = _move_data_to_left(
+                        initial_data_df, index_list, -3, -1)
+        if "1975" in second_data_df_cols:
+            index_list = _get_char_index_in_col(next_data_df, "1975")
             if len(index_list) > 0:
                 # Shifting data to left starting from column at -1 index to -7
-                next_df = _move_data_to_left(next_df, index_list, -7, -1)
-                if next_df.loc[index_list[0], "extra_data_col_2"] is not None:
+                next_data_df = _move_data_to_left(next_data_df, index_list, -7,
+                                                  -1)
+                if next_data_df.loc[index_list[0],
+                                    "extra_data_col_2"] is not None:
                     # Shifting data to left starting from
                     # column at -1 index to -1
-                    next_df = _move_data_to_left(next_df, index_list, -3, -1)
-        next_df = initial_df.merge(next_df,
-                                   how="inner",
-                                   on="Fips_Code",
-                                   suffixes=("", "_right"))
-        next_df["Location"] = next_df["Fips_Code"].apply(_get_fips_code)
-        if final_df is None:
-            final_df = next_df
+                    next_data_df = _move_data_to_left(next_data_df, index_list,
+                                                      -3, -1)
+        next_data_df = initial_data_df.merge(next_data_df,
+                                             how="inner",
+                                             on="Fips_Code",
+                                             suffixes=("", "_right"))
+        next_data_df["Location"] = next_data_df["Fips_Code"].apply(
+            _get_fips_code)
+        if final_data_df is None:
+            final_data_df = next_data_df
         else:
-            final_df = pd.concat([final_df, next_df], axis=0)
-    final_cols = ["Location"] + first_df_cols[3:8] + second_df_cols[3:8]
-    return final_df[final_cols]
+            final_data_df = pd.concat([final_data_df, next_data_df], axis=0)
+    final_cols = ["Location"
+                 ] + first_data_df_cols[3:8] + second_data_df_cols[3:8]
+    return final_data_df[final_cols]
 
 
 def _create_final_file(op_tmp_file: str, search_string: str,
@@ -403,9 +447,9 @@ def process_states_1970_1979(file_path: str) -> pd.DataFrame:
                     loc = "geoId/" + f"{int(data[0]):02d}"
                     for year, val in dict(zip(cols, data[1:])).items():
                         outfile.write(f"{year},{loc},{val}\n")
-        df = pd.read_csv("out.csv", header=0)
+        data_df = pd.read_csv("out.csv", header=0)
         os.remove("out.csv")
-        return df
+        return data_df
 
 
 def process_states_1980_1989(file_path: str) -> pd.DataFrame:
@@ -458,9 +502,9 @@ def process_states_1980_1989(file_path: str) -> pd.DataFrame:
                     for year, val in dict(zip(cols, data)).items():
                         #print(f"{year},{loc},{val}")
                         outfile.write(f"{year},{loc},{val}\n")
-        df = pd.read_csv("out.csv", header=0)
+        data_df = pd.read_csv("out.csv", header=0)
         os.remove("out.csv")
-        return df
+        return data_df
 
 
 def process_states_1990_1999(file_path: str) -> pd.DataFrame:
@@ -525,9 +569,9 @@ def process_states_1990_1999(file_path: str) -> pd.DataFrame:
                             outfile.write(f"{year},{loc},{val}\n")
                     if data[1] == "Wyoming":
                         start = False
-        df = pd.read_csv("out.csv", header=0)
+        data_df = pd.read_csv("out.csv", header=0)
         os.remove("out.csv")
-        return df
+        return data_df
 
 
 def process_states_1900_1969(states_config: dict, file_path: str,
@@ -542,7 +586,7 @@ def process_states_1900_1969(states_config: dict, file_path: str,
         scaling_factor (int): Scaling factor to be multiplied
 
     Returns:
-        df (DataFrame): Cleaned States Dataframe
+        data_df (DataFrame): Cleaned States Dataframe
     """
     conf = states_config[file_name]
     temp_file1 = conf['temp_file1']
@@ -555,10 +599,10 @@ def process_states_1900_1969(states_config: dict, file_path: str,
     _create_intermediate_file(file_path, temp_file1, temp_file2, s1, s2)
     _create_final_file(temp_file1, s1, op_file_name)
     _create_final_file(temp_file2, s2, op_file_name)
-    df = pd.read_csv(final_file_path, header=None)
-    df.columns = ["Year", "Location", "Count_Person"]
-    df["Count_Person"] = df["Count_Person"].multiply(scaling_factor)
+    data_df = pd.read_csv(final_file_path, header=None)
+    data_df.columns = ["Year", "Location", "Count_Person"]
+    data_df["Count_Person"] = data_df["Count_Person"].multiply(scaling_factor)
     os.remove(temp_file1 + ".csv")
     os.remove(temp_file2 + ".csv")
     os.remove(final_file_path)
-    return df
+    return data_df
