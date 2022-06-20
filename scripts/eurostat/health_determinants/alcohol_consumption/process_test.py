@@ -39,37 +39,28 @@ class TestProcess(unittest.TestCase):
     It will be generating CSV, MCF and TMCF files based on the sample input.
     Comparing the data with the expected files.
     """
-    test_data_files = [
-        'hlth_ehis_al1e.tsv', 'hlth_ehis_al1i.tsv', 'hlth_ehis_al1u.tsv',
-        'hlth_ehis_al3e.tsv', 'hlth_ehis_al3i.tsv', 'hlth_ehis_al3u.tsv',
-        'hlth_ehis_al2e.tsv', 'hlth_ehis_al2i.tsv', 'hlth_ehis_al2u.tsv',
-        'hlth_ehis_al1b.tsv', 'hlth_ehis_al1c.tsv', 'hlth_ehis_de10.tsv',
-        'hlth_ehis_de6.tsv'
-    ]
-    ip_data = [
-        os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in test_data_files
-    ]
+    ip_data = os.listdir(TEST_DATASET_DIR)
+    ip_data = [TEST_DATASET_DIR + os.sep + file for file in ip_data]
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+            _CLEANED_CSV_FILE_PATH = os.path.join(tmp_dir, "data.csv")
+            _MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
+            _TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
             
-            base = EuroStatAlcoholConsumption(self.ip_data, cleaned_csv_file_path,
-                                    mcf_file_path, tmcf_file_path)
+            base = EuroStatAlcoholConsumption(self.ip_data, _CLEANED_CSV_FILE_PATH,
+                                    _MCF_FILE_PATH, _TMCF_FILE_PATH)
             base.process()
             
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+            with open(_MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+            with open(_TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
                 self.actual_tmcf_data = tmcf_file.read()
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+            with open(_CLEANED_CSV_FILE_PATH, encoding="UTF-8") as csv_file:
                 self.actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):
@@ -106,7 +97,7 @@ class TestProcess(unittest.TestCase):
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
-                  encoding="utf-8-sig") as expected_csv_file:
+                  encoding="UTF-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(),
