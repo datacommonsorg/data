@@ -730,8 +730,9 @@ class EuroStatPhysicalActivity:
             sv_name = sv_name.rstrip('with')
             # Adding spaces before every capital letter,
             # to make SV look more like a name.
+            sv_name = re.sub(r"([0-9]+(\.[0-9]+)?)",r" \1 ", sv_name)
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
-            sv_name = "name: " + sv_name + " Population"
+            sv_name = "name: \"" + sv_name.replace("  "," ") + " Population\""
 
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv14=sv_name,
@@ -863,15 +864,15 @@ def main(_):
         os.mkdir(input_path)
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output"
+    data_file_path = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), "output")
     # Defining Output Files
     csv_name = "eurostat_population_physicalactivity.csv"
     mcf_name = "eurostat_population_physicalactivity.mcf"
     tmcf_name = "eurostat_population_physicalactivity.tmcf"
-    cleaned_csv_path = data_file_path + os.sep + csv_name
-    mcf_path = data_file_path + os.sep + mcf_name
-    tmcf_path = data_file_path + os.sep + tmcf_name
+    cleaned_csv_path = os.path.join(data_file_path, csv_name)
+    mcf_path = os.path.join(data_file_path, mcf_name)
+    tmcf_path = os.path.join(data_file_path, tmcf_name)
     loader = EuroStatPhysicalActivity(ip_files, cleaned_csv_path, mcf_path,\
         tmcf_path)
     loader.process()
