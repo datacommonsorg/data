@@ -27,11 +27,10 @@ def create_4km_grids(output_csv, sample_gtiff):
     sample_ds = gdal.Open(sample_gtiff)
     raster = sample_ds.GetRasterBand(1).ReadAsArray()
     shape = raster.shape
-    headers = ['latitude', 'longitude', 'typeOf', 'dcid', 'containedInPlace']
+    headers = ['latitude', 'longitude', 'dcid', 'containedInPlace']
     with open(output_csv, 'w', newline='') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(headers)
-        typeOf = "dcid:GeoGridPlace_4KM"
         url = "https://geocoding.geo.census.gov/geocoder/geographies/coordinates?benchmark=Public_AR_Current&vintage=ACS2021_Current&format=json"
         for y in range(shape[0]):
             for x in range(shape[1]):
@@ -42,7 +41,7 @@ def create_4km_grids(output_csv, sample_gtiff):
                     if geo_data != {}:
                         geoid = f"dcid:geoId/{geo_data['Counties'][0]['GEOID']}"
                         dcid = 'dcid:grid_4km/' + str(lat) + '_' + str(lon)
-                        csvwriter.writerow([lat, lon, typeOf, dcid, geoid])
+                        csvwriter.writerow([lat, lon, dcid, geoid])
 
     sample_ds = None
 
