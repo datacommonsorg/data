@@ -17,37 +17,51 @@ Script to automate the testing for USA Population preprocess script.
 
 import os
 import unittest
-from os import path
-from preprocess import USCensusPEPByASRH
-# module_dir_ is the path to where this test is running from.
-module_dir_ = os.path.dirname(__file__)
-test_data_folder = os.path.join(module_dir_, "test_data")
-op_data_folder = os.path.join(module_dir_, "test_output_data")
-if not os.path.exists(op_data_folder):
-    os.mkdir(op_data_folder)
+import tempfile
+from preprocess import process
+# _MODULE_DIR is the path to where this test is running from.
+_MODULE_DIR = os.path.dirname(__file__)
+_TEST_DATA_FOLDER = os.path.join(_MODULE_DIR, "test_data")
 
 
 class TestPreprocess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
-    properties which further requried for unit testing
+    properties which further requried for unit testing.
+    The test will be conducted for US Census Sample Datasets,
+    It will be generating CSV, MCF and TMCF files based on the sample input.
+    Comparing the data with the expected files.
     """
-    cleaned_csv_file_path = os.path.join(op_data_folder, "test_output_data.csv")
-    mcf_file_path = os.path.join(op_data_folder, "test_census.mcf")
-    tmcf_file_path = os.path.join(op_data_folder, "test_census.tmcf")
 
-    file_list = [
-        'NC-EST2020_Nationals.csv', 'co-est00int-alldata_county.csv',
-        'sasrh_state.txt'
-    ]
-    ip_data_path = [
-        os.path.join(test_data_folder, "datasets", file_name)
-        for file_name in file_list
-    ]
+    def __init__(self, methodName: str = ...) -> None:
+        super().__init__(methodName)
 
-    base = USCensusPEPByASRH(ip_data_path, cleaned_csv_file_path, mcf_file_path,
-                             tmcf_file_path)
-    base.process()
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cleaned_csv_file_path = os.path.join(tmp_dir,
+                                                 "test_output_data.csv")
+            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
+            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+
+            file_list = [
+                'NC-EST2020_Nationals.csv', 'co-est00int-alldata_county.csv',
+                'sasrh_state.txt'
+            ]
+            ip_data_path = [
+                os.path.join(_TEST_DATA_FOLDER, "datasets", file_name)
+                for file_name in file_list
+            ]
+
+            process(ip_data_path, cleaned_csv_file_path,
+                                     mcf_file_path, tmcf_file_path)
+
+            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+                self._actual_mcf_data = mcf_file.read()
+
+            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+                self._actual_tmcf_data = tmcf_file.read()
+
+            with open(cleaned_csv_file_path, encoding="utf-8") as csv_file:
+                self._actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):
         """
@@ -55,10 +69,10 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like MCF File
         """
         expected_mcf_file_path = os.path.join(
-            test_data_folder, "expected_USA_Population_ASRH.mcf")
+            _TEST_DATA_FOLDER, "expected_usa_population_asrh.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            test_data_folder, "expected_USA_Population_ASRH.tmcf")
+            _TEST_DATA_FOLDER, "expected_usa_population_asrh.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -68,19 +82,10 @@ class TestPreprocess(unittest.TestCase):
                   encoding="UTF-8") as expected_tmcf_file:
             expected_tmcf_data = expected_tmcf_file.read()
 
-        with open(self.mcf_file_path, encoding="UTF-8") as mcf_file:
-            mcf_data = mcf_file.read()
-
-        with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
-            tmcf_data = tmcf_file.read()
-
-        if path.exists(self.mcf_file_path):
-            os.remove(self.mcf_file_path)
-        if path.exists(self.tmcf_file_path):
-            os.remove(self.tmcf_file_path)
-
-        self.assertEqual(expected_mcf_data.strip(), mcf_data.strip())
-        self.assertEqual(expected_tmcf_data.strip(), tmcf_data.strip())
+        self.assertEqual(expected_mcf_data.strip(),
+                         self._actual_mcf_data.strip())
+        self.assertEqual(expected_tmcf_data.strip(),
+                         self._actual_tmcf_data.strip())
 
     def test_create_csv(self):
         """
@@ -88,17 +93,11 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like CSV
         """
         expected_csv_file_path = os.path.join(
-            test_data_folder, "expected_USA_Population_ASRH.csv")
+            _TEST_DATA_FOLDER, "expected_usa_population_asrh.csv")
 
-        expected_csv_data = ""
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
-        with open(self.cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-            csv_data = csv_file.read()
-
-        if path.exists(self.cleaned_csv_file_path):
-            os.remove(self.cleaned_csv_file_path)
-
-        self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+        self.assertEqual(expected_csv_data.strip(),
+                         self._actual_csv_data.strip())
