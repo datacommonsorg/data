@@ -46,6 +46,9 @@ def national2010(url_file: str, output_folder: str):
         # df_sex(has data to be processed by gender),
         # df_sheet(has data of a single sheet in excel) so it can be processed
         # seperately before being put into our main df.
+        # 0 to 18 are the total values to be picked.
+        # 36 to 54 are the male values to be picked.
+        # 72 to 90 are the female values to be picked.
         if sheet != 'Total':
             df_sex = df[0:18]
             df_sheet = pd.concat([df_sheet, df_sex])

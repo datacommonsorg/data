@@ -19,6 +19,7 @@ import os
 from os import path
 import unittest
 import shutil
+from national_2010_2019 import national2010
 from national_2000_2010 import national2000
 from state_1990_2000 import state1990
 from state_2010_2020 import state2010
@@ -47,9 +48,10 @@ class TestPreprocess(unittest.TestCase):
     state_url_file = "test_data/test_input_data/state_test.json"
     county_url_file = "test_data/test_input_data/county_test.json"
     output_folder = "test_temp_files"
+    national2010(national_url_file, output_folder)
     national2000(national_url_file, output_folder)
-    state1990(state_url_file, output_folder)
     state2010(state_url_file, output_folder)
+    state1990(state_url_file, output_folder)
     county1980(county_url_file, output_folder)
     county1970(county_url_file, output_folder)
 
@@ -59,7 +61,9 @@ class TestPreprocess(unittest.TestCase):
         os.path.join(input_path, 'state_1980_1989.csv'),
         os.path.join(input_path, 'state_1990_2000.csv'),
         os.path.join(input_path, 'state_2010_2020.csv'),
-        os.path.join(input_path, 'national_2000_2010.csv')
+        os.path.join(input_path, 'national_1990_2000.csv'),
+        os.path.join(input_path, 'national_2000_2010.csv'),
+        os.path.join(input_path, 'national_2010_2019.csv')
     ]
 
     base = USCensusPEPByASR(ip_data, cleaned_csv_file_path, mcf_file_path,

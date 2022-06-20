@@ -1,2 +1,4 @@
-{"2000-10":"test_data/test_input_data/us-est00int-alldata.csv"
+{"2000-10":"test_data/test_input_data/us-est00int-alldata.csv",
+"2010-19":"test_data/test_input_data/nc-est2019-asr6h.xlsx",
+"2010-19sheets":["Total","White"]
 }
