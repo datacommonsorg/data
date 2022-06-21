@@ -36,11 +36,7 @@ class TestProcess(unittest.TestCase):
     It will generate and test CSV, MCF and TMCF files for given test input files
     and comapre it with expected results.
     """
-    test_data_files = [
-        'hlth_ehis_bm1c.tsv', 'hlth_ehis_de2.tsv', 'hlth_ehis_bm1d.tsv',
-        'hlth_ehis_bm1u.tsv', 'hlth_ehis_bm1b.tsv', 'hlth_ehis_de1.tsv',
-        'hlth_ehis_bm1e.tsv', 'hlth_ehis_bm1i.tsv'
-    ]
+    test_data_files = os.listdir(_TEST_DATASET_DIR)
     ip_data = [
         os.path.join(_TEST_DATASET_DIR, file_name)
         for file_name in test_data_files
@@ -50,21 +46,21 @@ class TestProcess(unittest.TestCase):
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+            _CLEANED_CSV_FILE_PATH = os.path.join(tmp_dir, "data.csv")
+            _MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
+            _TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
 
-            process(self.ip_data, cleaned_csv_file_path, mcf_file_path,
-                    tmcf_file_path)
+            process(self.ip_data, _CLEANED_CSV_FILE_PATH, _MCF_FILE_PATH,
+                    _TMCF_FILE_PATH)
 
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
-                self.actual_mcf_data = mcf_file.read()
+            with open(_MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
+                self._actual_mcf_data = mcf_file.read()
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_data = tmcf_file.read()
+            with open(_TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
+                self._actual_tmcf_data = tmcf_file.read()
 
-            with open(cleaned_csv_file_path, encoding="UTF-8") as csv_file:
-                self.actual_csv_data = csv_file.read()
+            with open(_CLEANED_CSV_FILE_PATH, encoding="UTF-8") as csv_file:
+                self._actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):
         """
@@ -86,9 +82,9 @@ class TestProcess(unittest.TestCase):
             expected_tmcf_data = expected_tmcf_file.read()
 
         self.assertEqual(expected_mcf_data.strip(),
-                         self.actual_mcf_data.strip())
+                         self._actual_mcf_data.strip())
         self.assertEqual(expected_tmcf_data.strip(),
-                         self.actual_tmcf_data.strip())
+                         self._actual_tmcf_data.strip())
 
     def test_create_csv(self):
         """
@@ -104,4 +100,4 @@ class TestProcess(unittest.TestCase):
             expected_csv_data = expected_csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(),
-                         self.actual_csv_data.strip())
+                         self._actual_csv_data.strip())

@@ -32,13 +32,14 @@ output_files - output files (mcf, tmcf and csv are written here)
 
 import os
 import sys
+import re
 import pandas as pd
 import numpy as np
 from absl import app
 from absl import flags
 
-COMMON_MODULE_DIR = os.path.dirname(__file__) + os.sep + '..' + os.sep
-sys.path.insert(1, COMMON_MODULE_DIR)
+_COMMON_MODULE_DIR = os.path.join(os.path.dirname(__file__), '..')
+sys.path.insert(1, _COMMON_MODULE_DIR)
 # pylint: disable=import-error
 # pylint: disable=wrong-import-position
 from common.replacement_functions import (_replace_sex, _replace_isced11,
@@ -48,19 +49,20 @@ from common.replacement_functions import (_replace_sex, _replace_isced11,
                                           _split_column)
 
 # For import util.alpha2_to_dcid
-UTIL_MODULE_DIR = os.path.dirname(__file__) + os.sep + '..' + \
-                  os.sep + '..' + os.sep + '..' + os.sep + '..' + os.sep
-sys.path.insert(1, UTIL_MODULE_DIR)
+_UTIL_MODULE_DIR = os.path.join(os.path.dirname(__file__), '..', '..', '..',
+                                '..')
+sys.path.insert(1, _UTIL_MODULE_DIR)
 
 from util.alpha2_to_dcid import COUNTRY_MAP
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
-FLAGS = flags.FLAGS
-default_input_path = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "input_files"
+_FLAGS = flags.FLAGS
+_DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "input_files")
 
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
+                    "Import Data File's List")
 
 _MCF_TEMPLATE = """Node: dcid:{dcid}
 typeOf: dcs:StatisticalVariable
@@ -100,10 +102,8 @@ _SV_DENOMINATOR = 1
 def _replace_prop(sv: str):
     return sv.replace("CountryOfBirth", "")\
              .replace("Citizenship", "")\
-             .replace("In_", "")\
              .replace("Count_", "")\
              .replace("Person_", "")\
-             .replace("Percent_", "")
 
 
 def _age_sex_education(data_df: pd.DataFrame) -> pd.DataFrame:
@@ -407,45 +407,70 @@ def _generate_mcf(sv_list: list, mcf_file_path: str) -> None:
         sv_list (list): List of Statistical Variables
         mcf_file_path (str): Output MCF File Path
     """
+    # pylint: disable=too-many-statements
     mcf_nodes = []
     for sv in sv_list:
-        pvs = []
+        pvs = name_pv = []
         dcid = sv
         sv_denominator = sv.split("_In_")[_SV_DENOMINATOR]
         denominator_value = _EXISTING_SV_DEG_URB_GENDER.get(
             sv_denominator, sv_denominator)
         pvs.append(f"measurementDenominator: dcs:{denominator_value}")
-        sv = _replace_prop(sv)
         sv_prop = [prop for prop in sv.split("_") if sv.strip()]
         for prop in sv_prop:
-            if "Male" in prop or "Female" in prop:
+            if prop in ["Count", "Person"]:
+                continue
+            if prop == "Percent":
+                name_pv.append("Percentage")
+            elif prop == "In":
+                name_pv.append("Among")
+            elif "Male" in prop or "Female" in prop:
                 pvs.append(f"gender: dcs:{prop}")
+                name_pv.append(f"{prop}")
             elif "Education" in prop:
                 pvs.append(
                     f"educationalAttainment: dcs:{prop.replace('Or', '__')}")
+                name_pv.append(f"{prop}")
             elif "Percentile" in prop:
                 income_quin = _INCOME_QUINTILE_VALUES[prop]
                 pvs.append(f"income: {income_quin}")
-            elif "Urban" in prop or "SemiUrban" in prop \
+                prop = prop.replace("Of", "Of ").replace("To", " To ")
+                name_pv.append(f"{prop}")
+            elif "Urban" in prop or "Rural" in prop \
                 or "Rural" in prop:
                 pvs.append(f"placeOfResidenceClassification: dcs:{prop}")
+                name_pv.append(f"{prop}")
             elif "ForeignBorn" in prop or "Native" in prop:
-                pvs.append(f"nativity: dcs:{prop}")
-            elif "ForeignWithin" in prop or "ForeignOutside" in prop\
-                or "Citizen" in prop:
-                pvs.append(f"citizenship: dcs:{prop}")
+                pvs.append(f"nativity: dcs:{prop.replace('CountryOfBirth','')}")
+                name_pv.append(f"{prop}")
+            elif "Citizen" in prop:
+                pvs.append(f"citizenship: dcs:{prop.replace('Citizenship','')}")
+                name_pv.append(f"{prop}")
             elif "Activity" in prop:
                 pvs.append(f"globalActivityLimitationindicator: dcs:{prop}")
+                name_pv.append(f"{prop}")
             elif "weight" in prop \
                 or "Obese" in prop or "Obesity" in prop:
                 pvs.append(f"healthBehavior: dcs:{prop}")
-
-        node = _MCF_TEMPLATE.format(dcid=dcid, xtra_pvs='\n'.join(pvs))
-        mcf_nodes.append(node)
+                name_pv.append(f"{prop}")
+        name_pv.append("Population")
+        name_prop = ", ".join(name_pv)
+        name_prop = name_prop.replace(", Among", " Among")
+        name_prop = name_prop.rstrip(', ')
+        name_prop = name_prop.rstrip('with')
+        # Adding spaces before every capital letter,
+        # to make SV look more like a name.
+        name_prop = re.sub(r"(\w)([A-Z])", r"\1 \2", name_prop)
+        name_prop = name_prop.replace("ACitizen", "A Citizen")
+        name_prop = "name: \"" + name_prop + "\""
+        pvs.append(name_prop)
+        mcf_nodes.append(
+            _MCF_TEMPLATE.format(dcid=dcid, xtra_pvs='\n'.join(pvs)))
     mcf = '\n'.join(mcf_nodes)
     # Writing Genereated MCF to local path.
     with open(mcf_file_path, 'w+', encoding='utf-8') as f_out:
         f_out.write(mcf.rstrip('\n'))
+    # pylint: enable=too-many-statements
 
 
 def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
@@ -510,7 +535,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
 
 
 def main(_):
-    input_path = FLAGS.input_path
+    input_path = _FLAGS.input_path
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
     data_file_path = os.path.dirname(
