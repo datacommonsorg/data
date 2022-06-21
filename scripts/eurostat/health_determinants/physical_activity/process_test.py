@@ -39,14 +39,8 @@ class TestProcess(unittest.TestCase):
     It will be generating CSV, MCF and TMCF files based on the sample input.
     Comparing the data with the expected files.
     """
-    test_data_files = [
-        'hlth_ehis_de9.tsv', 'hlth_ehis_pe1e.tsv', 'hlth_ehis_pe1i.tsv',
-        'hlth_ehis_pe1u.tsv', 'hlth_ehis_pe2e.tsv', 'hlth_ehis_pe2i.tsv',
-        'hlth_ehis_pe3e.tsv', 'hlth_ehis_pe3i.tsv', 'hlth_ehis_pe3u.tsv',
-        'hlth_ehis_pe9b.tsv', 'hlth_ehis_pe9c.tsv', 'hlth_ehis_pe9d.tsv',
-        'hlth_ehis_pe9e.tsv', 'hlth_ehis_pe9i.tsv', 'hlth_ehis_pe9u.tsv',
-        'hlth_ehis_pe2u.tsv', 'hlth_ehis_pe2m.tsv'
-    ]
+    test_data_files = os.listdir(TEST_DATASET_DIR)
+
     ip_data = [
         os.path.join(TEST_DATASET_DIR, file_name)
         for file_name in test_data_files
