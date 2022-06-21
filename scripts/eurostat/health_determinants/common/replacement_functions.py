@@ -91,7 +91,7 @@ def _replace_frequenc(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
-    Args: 
+    Args:
         df (pd.DataFrame): df as the input, to change column values
     Returns:
         df (pd.DataFrame): modified df as output
@@ -168,7 +168,11 @@ def _replace_duration(df: pd.DataFrame) -> pd.DataFrame:
             'MN1-149': '1To149Minutes',
             'MN150-299': '150To299Minutes',
             'MN_GE150': '150OrMoreMinutes',
-            'MN_GE300': '300OrMoreMinutes'
+            'MN_GE300': '300OrMoreMinutes',
+            'Y_LT1': 'LessThan1Year',
+            'Y1-5': 'From1To5Years',
+            'Y5-10': 'From5To10Years',
+            'Y_GE10': '10YearsOrOver'
         }
     })
     return df
@@ -254,6 +258,46 @@ def _replace_bmi(df: pd.DataFrame) -> pd.DataFrame:
     })
     return df
 
+def _replace_smoking(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF
+    """
+
+    df = df.replace({
+        'smoking': {
+            'TOTAL': 'Total',
+            'NSM': 'NonSmoker',
+            'SM_CUR': 'Smoking',
+            'SM_DAY': 'Smoking_Daily',
+            'SM_OCC': 'Smoking_Occasional',
+            'SM_LT20D': 'LessThan20CigarettesPerDay',
+            'SM_GE20D': '20OrMoreCigarettesPerDay',
+            'DSM_GE20': '20OrMoreCigarettesPerDay',
+            'DSM_LT20': 'LessThan20CigarettesPerDay'
+        }
+    })
+    return df
+
+def _replace_smoking_frequenc(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF
+    """
+    df = df.replace({
+        'frequenc': {
+            'DAY_GE1HD': 'AtLeastOneHourPerDay',
+            'DAY_LT1HD': 'LessThanOneHourPerDay',
+            'LT1W': 'LessThanOnceAWeek',
+            'GE1W': 'AtLeastOnceAWeek',
+            'RAR_NVR': 'RarelyOrNever',
+            'DAY': 'Smoking_Daily',
+            'FMR': 'FormerSmoker_Formerly',
+            'OCC': 'Smoking_Occasional',
+            'NVR': 'Smoking_NeverUsed'
+        }
+    })
+    return df
 
 def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
     """
