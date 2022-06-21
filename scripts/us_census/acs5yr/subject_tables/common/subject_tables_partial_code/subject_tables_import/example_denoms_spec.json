@@ -1,0 +1,36 @@
+{
+  "spec_path": "../spec_dir/S0701_spec.json",
+  "us_data_zip": "~/acs_tables/S0701/S0701_us.zip",
+  "yearwise_columns_path": "~/acs_tables/S0701/yearwise_columns.json",
+  "update_spec": false,
+  "ignore_tokens": [
+    "Median",
+    "Mean"
+  ],
+  "census_columns": [
+    "Total",
+    "Moved; within same county",
+    "Moved; from different county, same state",
+    "Moved; from different  state",
+    "Moved; from abroad"
+  ],
+  "used_columns": [
+    "Total",
+    "Moved; within same county",
+    "Moved; from different county, same state",
+    "Moved; from different  state",
+    "Moved; from abroad"
+  ],
+  "year_list": [
+    "2010",
+    "2011",
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019"
+  ]
+}

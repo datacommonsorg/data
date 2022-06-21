@@ -1,0 +1,188 @@
+{
+	"preprocess": {
+		"find_and_replace": {
+			"$1 to $4,999 or loss": "Civilian noninstitutionalized population 16 years and over with earnings!!$1 to $4,999 or loss",
+			"$5,000 to $14,999": "Civilian noninstitutionalized population 16 years and over with earnings!!$5,000 to $14,999",
+			"$15,000 to $24,999": "Civilian noninstitutionalized population 16 years and over with earnings!!$15,000 to $24,999",
+			"$25,000 to $34,999": "Civilian noninstitutionalized population 16 years and over with earnings!!$25,000 to $34,999",
+			"$35,000 to $49,999": "Civilian noninstitutionalized population 16 years and over with earnings!!$35,000 to $49,999",
+			"$50,000 to $74,999": "Civilian noninstitutionalized population 16 years and over with earnings!!$50,000 to $74,999",
+			"$75,000 or more": "Civilian noninstitutionalized population 16 years and over with earnings!!$75,000 or more"
+		}
+	},
+	"overwrite_dcids": {
+		"Count_Person_NoDisability_NoHealthInsurance": "Count_Person_NoHealthInsurance_NoDisability",
+		"Count_Person_WithDisability_NoHealthInsurance": "Count_Person_NoHealthInsurance_WithDisability"
+	},
+	"populationType": {
+		"_DEFAULT": "Person"
+	},
+	"measurement": {
+		"Margin of Error": {
+			"measuredProperty": "count",
+			"statType": "marginOfError"
+		},
+		"Median age (years)": {
+			"measuredProperty": "age",
+			"statType": "medianValue",
+			"unit": "Years"
+		},
+		"_DEFAULT": {
+			"measuredProperty": "count",
+			"statType": "measuredValue"
+		}
+	},
+	"pvs": {
+		"healthInsurance": {
+			"Total Uninsured": "NoHealthInsurance",
+			"Uninsured Population": "NoHealthInsurance",
+			"Total Uninsured MOE": "NoHealthInsurance"
+		},
+		"age": {
+			"Under 19 years": "[- 19 Years]",
+			"Under 18 years": "[- 18 Years]",
+			"Under 6 years": "[- 6 Years]",
+			"6 to 17 years": "[6 17 Years]",
+			"6 to 18 years": "[6 18 Years]",
+			"18 to 64 years": "[18 64 Years]",
+			"19 to 64 years": "[19 64 Years]"
+		},
+		"disabilityStatus": {
+			"With a disability": "WithDisability",
+			"No disability": "NoDisability"
+		},
+		"earnings": {
+			"$1 to $4,999 or loss": "[- 4999 USDollar]",
+			"$5,000 to $14,999": "[5000 14999 USDollar]",
+			"$15,000 to $24,999": "[15000 24999 USDollar]",
+			"$25,000 to $34,999": "[25000 34999 USDollar]",
+			"$35,000 to $49,999": "[35000 49999 USDollar]",
+			"$50,000 to $74,999": "[50000 74999 USDollar]",
+			"$75,000 or more": "[75000 - USDollar]"
+		}
+	},
+	"inferredSpec": {
+		"earnings": {
+			"age": "[16 - Years]",
+			"incomeStatus": "WithEarnings"
+		}
+	},
+	"universePVs": [{
+		"populationType": "Person",
+		"constraintProperties": ["healthInsurance"],
+		"dependentPVs": {
+			"armedForcesStatus": "Civilian",
+			"institutionalization": "USC_NonInstitutionalized"
+		}
+	}],
+	"ignoreColumns": [
+		"id",
+		"Geographic Area Name",
+		"Total",
+		"Total MOE",
+		"Total Civilian Noninstitutionalized Population",
+		"Median age (years)",
+		"Median earnings (dollars)",
+		"Median household income of householders",
+		"NATIVITY AND U.S. CITIZENSHIP STATUS",
+		"Native born",
+		"Foreign born",
+		"RACE AND HISPANIC OR LATINO ORIGIN",
+		"One race",
+		"Two or races",
+		"Hispanic or Latino (of any race)",
+		"White alone, not Hispanic or Latino",
+		"SEX",
+		"RESIDENCE 1 YEAR AGO",
+		"Same house",
+		"Different House in the U.S.",
+		"EDUCATIONAL ATTAINMENT",
+		"Less than high school graduate",
+		"High school graduate (includes equivalency)",
+		"Some college or associate's degree",
+		"Bachelor's degree or higher",
+		"EMPLOYMENT STATUS",
+		"In labor force",
+		"Not in labor force",
+		"WORK EXPERIENCE",
+		"Worked full-time, year round in the past 12 months",
+		"Worked less than full-time, year round in the past 12 months",
+		"Did not work",
+		"Civilian noninstitutionalized workers 16 years and over",
+		"CLASS OF WORKER",
+		"INDUSTRY",
+		"OCCUPATION",
+		"Total household population",
+		"RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS"
+	],
+	"denominators": {
+		"Uninsured Population!!Estimate!!Total population": [
+			"Uninsured Population!!Estimate!!AGE!!Under 18 years",
+			"Uninsured Population!!Estimate!!AGE!!Under 18 years!!Under 6 years",
+			"Uninsured Population!!Estimate!!AGE!!Under 18 years!!6 to 17 years",
+			"Uninsured Population!!Estimate!!AGE!!18 to 64 years",
+			"Uninsured Population!!Estimate!!DISABILITY STATUS!!With a disability",
+			"Uninsured Population!!Estimate!!DISABILITY STATUS!!No disability"
+		],
+		"Uninsured Population!!Margin of Error!!Total population": [
+			"Uninsured Population!!Margin of Error!!AGE!!Under 18 years",
+			"Uninsured Population!!Margin of Error!!AGE!!Under 18 years!!Under 6 years",
+			"Uninsured Population!!Margin of Error!!AGE!!Under 18 years!!6 to 17 years",
+			"Uninsured Population!!Margin of Error!!AGE!!18 to 64 years",
+			"Uninsured Population!!Margin of Error!!DISABILITY STATUS!!With a disability",
+			"Uninsured Population!!Margin of Error!!DISABILITY STATUS!!No disability"
+		],
+		"Uninsured Population!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2013 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings": [
+			"Uninsured Population!!Estimate!!$1 to $4,999 or loss",
+			"Uninsured Population!!Estimate!!$5,000 to $14,999",
+			"Uninsured Population!!Estimate!!$15,000 to $24,999",
+			"Uninsured Population!!Estimate!!$25,000 to $34,999",
+			"Uninsured Population!!Estimate!!$35,000 to $49,999",
+			"Uninsured Population!!Estimate!!$50,000 to $74,999",
+			"Uninsured Population!!Estimate!!$75,000 or more"
+		],
+		"Uninsured Population!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2013 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings": [
+			"Uninsured Population!!Margin of Error!!$1 to $4,999 or loss",
+			"Uninsured Population!!Margin of Error!!$5,000 to $14,999",
+			"Uninsured Population!!Margin of Error!!$15,000 to $24,999",
+			"Uninsured Population!!Margin of Error!!$25,000 to $34,999",
+			"Uninsured Population!!Margin of Error!!$35,000 to $49,999",
+			"Uninsured Population!!Margin of Error!!$50,000 to $74,999",
+			"Uninsured Population!!Margin of Error!!$75,000 or more"
+		],
+		"Estimate!!Total Uninsured!!Total civilian noninstitutionalized population": [
+			"Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years",
+			"Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years",
+			"Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years",
+			"Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years",
+			"Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability",
+			"Estimate!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability"
+		],
+		"Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population": [
+			"Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years",
+			"Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!Under 6 years",
+			"Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!Under 19 years!!6 to 18 years",
+			"Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!AGE!!19 to 64 years",
+			"Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!With a disability",
+			"Margin of Error!!Total Uninsured!!Total civilian noninstitutionalized population!!DISABILITY STATUS!!No disability"
+		],
+		"Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings": [
+			"Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$1 to $4,999 or loss",
+			"Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$5,000 to $14,999",
+			"Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$15,000 to $24,999",
+			"Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$25,000 to $34,999",
+			"Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$35,000 to $49,999",
+			"Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$50,000 to $74,999",
+			"Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$75,000 or more"
+		],
+		"Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings": [
+			"Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$1 to $4,999 or loss",
+			"Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$5,000 to $14,999",
+			"Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$15,000 to $24,999",
+			"Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$25,000 to $34,999",
+			"Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$35,000 to $49,999",
+			"Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$50,000 to $74,999",
+			"Margin of Error!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2019 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings!!$75,000 or more"
+		]
+	}
+}
