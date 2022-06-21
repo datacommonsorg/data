@@ -3,8 +3,9 @@ import glob
 import os
 import sys
 
-SCRIPTS_DIR = os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+SCRIPTS_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
 sys.path.append(SCRIPTS_DIR)
 from rff import util
 
@@ -13,6 +14,7 @@ gdcStatVars_to_csvColName = {
     "Skewness": "skewness_mean",
     "Kurtosis": "kurtosis_mean"
 }
+
 
 ## Returns dict mapping GDC-Stat-Names to the
 ##  corresponding column-name as stored in local csv's
@@ -27,6 +29,7 @@ def get_stat_labels(climate_var):
         stat_labels["HeavyPrecipitationIndex"] = "hpi_mean"
         stat_labels["ConsecutiveDryDays"] = "cdd_mean"
     return stat_labels
+
 
 def main(src_fldr, output_csv):
     util.autogen_template_mcf(output_csv)

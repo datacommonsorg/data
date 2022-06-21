@@ -30,7 +30,7 @@ class ProcessTest(unittest.TestCase):
                 for row in csvreader:
                     if numrows == 0:
                         print("first row:", row)
-                    numrows+=1
+                    numrows += 1
                 self.assertEqual(numrows, 2410575)
 
 

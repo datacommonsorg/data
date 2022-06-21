@@ -9,8 +9,9 @@ import requests
 from shapely import geometry
 import sys
 
-SCRIPTS_DIR = os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+SCRIPTS_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
 sys.path.append(SCRIPTS_DIR)
 from rff import util
 
@@ -25,7 +26,7 @@ bandname_to_gdcStatVars = {
 
 def get_grid_latlon(ds, x, y):
     xmin, xres, _, ymax, _, yres = ds.GetGeoTransform()
-    return ymax + y*yres, xmin + xres*x
+    return ymax + y * yres, xmin + xres * x
 
 
 def get_dcid(lat, lon):
@@ -66,6 +67,7 @@ def create_4km_grids(output_csv, sample_gtiff):
                     break
     sample_ds = None
 
+
 def main(src_fldr, output_csv):
     util.autogen_template_mcf(output_csv)
     with open(output_csv, 'w', newline='') as f_out:
@@ -82,12 +84,14 @@ def main(src_fldr, output_csv):
                 ##  are stored in individual geotiff files (i.e. 2021.tif)
                 for interval_gtif in glob.glob(f"{path}/*.tif"):
                     gtiff = gdal.Open(interval_gtif)
-                    for bandnum in range(1, gtiff.RasterCount+1):
+                    for bandnum in range(1, gtiff.RasterCount + 1):
                         band = gtiff.GetRasterBand(bandnum)
                         raster, desc = band.ReadAsArray(), band.GetDescription()
                         statvar_fmt = bandname_to_gdcStatVars[desc]
-                        statvar = statvar_fmt.replace("<c_var>", util.cvar_suffixes[climate_var])
-                        date = util.format_date(interval_gtif, interval_type, ".tif")
+                        statvar = statvar_fmt.replace(
+                            "<c_var>", util.cvar_suffixes[climate_var])
+                        date = util.format_date(interval_gtif, interval_type,
+                                                ".tif")
                         for y in range(raster.shape[0]):
                             for x in range(raster.shape[1]):
                                 grid_value = raster[y][x]
@@ -95,12 +99,14 @@ def main(src_fldr, output_csv):
                                     lat, lon = get_grid_latlon(gtiff, x, y)
                                     processed_dict = {
                                         'TimeIntervalType':
-                                            util.time_interval_types[interval_type],
+                                            util.
+                                            time_interval_types[interval_type],
                                         'Date':
                                             date,
                                         'GeoId':
                                             get_dcid(lat, lon),
-                                        statvar: grid_value
+                                        statvar:
+                                            grid_value
                                     }
                                     writer.writerow(processed_dict)
                     gtiff = None
@@ -110,8 +116,9 @@ if __name__ == '__main__':
     CURR_DIR = os.path.dirname(os.path.realpath(__file__))
     grids_csv = f"{CURR_DIR}/places_4km.csv"
     if not os.path.exists(grids_csv):
-        sample_gtif = os.path.join(SCRIPTS_DIR,
-                    'rff/raw_data/prism/daily/4km/agg_year/ppt/stats/2021.tif')
+        sample_gtif = os.path.join(
+            SCRIPTS_DIR,
+            'rff/raw_data/prism/daily/4km/agg_year/ppt/stats/2021.tif')
         create_4km_grids(grids_csv, sample_gtif)
     src_folder = "scripts/rff/raw_data/prism/daily/4km"
     output_csv_fname = f"{CURR_DIR}/WeatherVariability_4km.csv"
