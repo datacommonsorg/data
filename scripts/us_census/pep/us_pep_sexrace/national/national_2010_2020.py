@@ -66,38 +66,13 @@ def _process_national_2010_2020(url):
     ])
 
     # to remove numeric thousand seperator
-    # for sv in ['YEAR', 'TOT_MALE', 'TOT_FEMALE',\
-    #     'WA_MALE', 'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE',\
-    #         'IA_FEMALE', 'AA_MALE', 'AA_FEMALE', 'NA_MALE', 'NA_FEMALE'\
-    #             'TOM_MALE', 'TOM_FEMALE', 'WAC_MALE', 'WAC_FEMALE',\
-    #                 'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE'\
-    #                     'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE']:
-    #     df[sv] = df[sv].astype(int)
-    df['YEAR'] = df['YEAR'].astype(int)
-    df['TOT_MALE'] = df['TOT_MALE'].astype(int)
-    df['TOT_FEMALE'] = df['TOT_FEMALE'].astype(int)
-    df['WA_MALE'] = df['WA_MALE'].astype(int)
-    df['WA_FEMALE'] = df['WA_FEMALE'].astype(int)
-    df['BA_MALE'] = df['BA_MALE'].astype(int)
-    df['BA_FEMALE'] = df['BA_FEMALE'].astype(int)
-    df['IA_MALE'] = df['IA_MALE'].astype(int)
-    df['IA_FEMALE'] = df['IA_FEMALE'].astype(int)
-    df['AA_MALE'] = df['AA_MALE'].astype(int)
-    df['AA_FEMALE'] = df['AA_FEMALE'].astype(int)
-    df['NA_MALE'] = df['NA_MALE'].astype(int)
-    df['NA_FEMALE'] = df['NA_FEMALE'].astype(int)
-    df['TOM_MALE'] = df['TOM_MALE'].astype(int)
-    df['TOM_FEMALE'] = df['TOM_FEMALE'].astype(int)
-    df['WAC_MALE'] = df['WAC_MALE'].astype(int)
-    df['WAC_FEMALE'] = df['WAC_FEMALE'].astype(int)
-    df['BAC_MALE'] = df['BAC_MALE'].astype(int)
-    df['BAC_FEMALE'] = df['BAC_FEMALE'].astype(int)
-    df['IAC_MALE'] = df['IAC_MALE'].astype(int)
-    df['IAC_FEMALE'] = df['IAC_FEMALE'].astype(int)
-    df['AAC_MALE'] = df['AAC_MALE'].astype(int)
-    df['AAC_FEMALE'] = df['AAC_FEMALE'].astype(int)
-    df['NAC_MALE'] = df['NAC_MALE'].astype(int)
-    df['NAC_FEMALE'] = df['NAC_FEMALE'].astype(int)
+    for sv in ['YEAR', 'TOT_MALE', 'TOT_FEMALE',\
+        'WA_MALE', 'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE',\
+            'IA_FEMALE', 'AA_MALE', 'AA_FEMALE', 'NA_MALE', 'NA_FEMALE'\
+                'TOM_MALE', 'TOM_FEMALE', 'WAC_MALE', 'WAC_FEMALE',\
+                    'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE'\
+                        'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE']:
+        df[sv] = df[sv].astype(int)
 
     # extracting geoid
     df['geo_ID'] = (df['geo_ID'].map(str)).str[:8]

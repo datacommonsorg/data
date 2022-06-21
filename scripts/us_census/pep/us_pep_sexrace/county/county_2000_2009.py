@@ -50,19 +50,9 @@ def _process_county_2000_2009(url):
             df = df.query("AGEGRP == 99")
 
             # converting year value from 3-11 to 2000-2009 as per metadata
-            # df=df.replace({'YEAR':{2: '2000', 3: '2001', 4: '2002',
-            # 5: '2003', 6:'2004', 7:'2005', 8:'2006', 9:'2007', 10:'2008',
-            # 11:'2009'}})
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('2', '2000')
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('3', '2001')
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('4', '2002')
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('5', '2003')
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('6', '2004')
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('7', '2005')
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('8', '2006')
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('9', '2007')
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('10', '2008')
-            df['YEAR'] = df['YEAR'].astype(str).str.replace('11', '2009')
+            df=df.replace({'YEAR':{2: '2000', 3: '2001', 4: '2002',
+            5: '2003', 6:'2004', 7:'2005', 8:'2006', 9:'2007', 10:'2008',
+            11:'2009'}})
 
             # dropping unwanted columns
             df = df.drop(columns=[
