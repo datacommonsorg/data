@@ -51,8 +51,8 @@ class TestPreprocess(unittest.TestCase):
                 for file_name in file_list
             ]
 
-            process(ip_data_path, cleaned_csv_file_path,
-                                     mcf_file_path, tmcf_file_path)
+            process(ip_data_path, cleaned_csv_file_path, mcf_file_path,
+                    tmcf_file_path)
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                 self._actual_mcf_data = mcf_file.read()
