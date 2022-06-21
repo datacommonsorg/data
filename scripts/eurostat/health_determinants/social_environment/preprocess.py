@@ -17,6 +17,7 @@ and generates cleaned CSV, MCF, TMCF file
 """
 import os
 import sys
+
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
 sys.path.insert(1, _COMMON_PATH)
@@ -30,8 +31,8 @@ from absl import flags
 # pd.set_option("display.max_columns", None)
 # pd.set_option("display.max_rows", None)
 FLAGS = flags.FLAGS
-default_input_path = os.path.join(os.path.dirname(
-    os.path.abspath(__file__)), "input_file")
+default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "input_file")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -51,6 +52,7 @@ _TMCF_TEMPLATE = (
     "observationAbout: C:EuroStat_Population_PhysicalActivity->geo\n"
     "observationDate: C:EuroStat_Population_PhysicalActivity->time\n"
     "value: C:EuroStat_Population_PhysicalActivity->observation\n")
+
 
 def _hlth_ehis_ss1e(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -483,7 +485,7 @@ class EuroStatSocialEnvironment:
             # to make SV look more like a name.
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
             sv_name = "name: \"" + sv_name + " Population\""
-            sv_name = sv_name.replace('AWeek','A Week')
+            sv_name = sv_name.replace('AWeek', 'A Week')
 
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv2=sv_name,
@@ -505,7 +507,7 @@ class EuroStatSocialEnvironment:
         # pylint: enable=R0914
         # pylint: enable=R0912
         # pylint: enable=R0915
-    
+
     def _generate_tmcf(self) -> None:
         """
         This method generates TMCF file w.r.t
@@ -518,7 +520,6 @@ class EuroStatSocialEnvironment:
         # Writing Genereated TMCF to local path.
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
-
 
     def process(self):
         """
@@ -590,14 +591,15 @@ class EuroStatSocialEnvironment:
         self._generate_mcf(sv_list)
         self._generate_tmcf()
 
+
 def main(_):
     input_path = FLAGS.input_path
     if not os.path.exists(input_path):
         os.mkdir(input_path)
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), "output")
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "output")
     # Defining Output Files
     csv_name = "eurostat_population_socialenvironment.csv"
     mcf_name = "eurostat_population_socialenvironment.mcf"
