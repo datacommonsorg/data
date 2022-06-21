@@ -731,8 +731,9 @@ class EuroStatPhysicalActivity:
             # to make SV look more like a name.
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
             sv_name = "name: \"" + sv_name + " Population\""
-            sv_name = sv_name.replace("To299","To 299").replace("ACitizen","A Citizen")
-            
+            sv_name = sv_name.replace("To299",
+                                      "To 299").replace("ACitizen", "A Citizen")
+
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv14=sv_name,
                                                        pv2=denominator,
@@ -863,8 +864,8 @@ def main(_):
         os.mkdir(input_path)
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), "output")
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "output")
     # Defining Output Files
     csv_name = "eurostat_population_physicalactivity.csv"
     mcf_name = "eurostat_population_physicalactivity.mcf"
