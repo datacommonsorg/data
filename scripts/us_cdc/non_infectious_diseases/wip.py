@@ -1,9 +1,8 @@
+from distutils.command.clean import clean
 import os
 import sys
 import json
 import pandas as pd
-from typing import Union
-
 from absl import app, flags
 
 # Allows the following module imports to work when running as a script
@@ -90,6 +89,7 @@ def generate_aggregates(df:pd.DataFrame, groupby_cols:list=None)->pd.DataFrame:
     country_stat_df = df[df['observationAbout'].str.contains('country')]
     cols = groupby_cols + _STAT_COLS
     country_stat_df = country_stat_df[cols]
+    country_stat_df = country_stat_df.groupby(groupby_cols, as_index=False).agg({'Illnesses': sum, 'Hospitalizations': sum, 'Info on Hospitalizations': sum, 'Deaths': sum, 'Info on Deaths': sum})
 
     # aggreagte stats for US states and territories
     aggregate_df = df[~(df['observationAbout'].str.contains('country'))]
@@ -99,13 +99,11 @@ def generate_aggregates(df:pd.DataFrame, groupby_cols:list=None)->pd.DataFrame:
     country_group_by = [cols for cols in groupby_cols if cols != 'observationAbout']
     print(country_group_by)
     us_aggreagte_df = aggregate_df.groupby(country_group_by, as_index=False).agg({'Illnesses': sum, 'Hospitalizations': sum, 'Info on Hospitalizations': sum, 'Deaths': sum, 'Info on Deaths': sum})
-    print(us_aggreagte_df.shape)
-    print(us_aggreagte_df.drop_duplicates().shape)
     us_aggreagte_df['observationAbout'] = 'country/USA'
     us_aggreagte_df = us_aggreagte_df[['observationDate', 'observationAbout', 'Primary Mode', 'Illnesses', 'Hospitalizations', 'Info on Hospitalizations', 'Deaths', 'Info on Deaths']]
 
     # merge all aggregations
-    aggregate_df = pd.concat([aggregate_df, us_aggreagte_df, country_stat_df])
+    aggregate_df = pd.concat([aggregate_df, us_aggreagte_df, country_stat_df], ignore_index=True)
     # transform the dataframe to date, place, variable, value format
     aggregate_df = aggregate_df.melt(id_vars=groupby_cols, value_vars=_STAT_COLS)
     # add additional columns
@@ -236,9 +234,10 @@ def process_non_infectious_data(input_path:str, sheet_name:str, schema_map_path:
 
     # empty strings for  null etiology and etiology status values
     clean_df = clean_df.fillna('') 
+    clean_df = clean_df[(clean_df['value'] != '') | (clean_df['observationAbout'] != '')]
     # another check to ensure there is only 1 Etiology in the clean_csv
     clean_df = clean_df[~(clean_df['Etiology'].str.contains('; '))]
-    # removing unused columns -- comment this while debugging
+    # removing unused columns
     clean_df.drop(columns=['variable', 'Primary Mode', 'Etiology', 'Etiology Status'], inplace=True)
     clean_df.to_csv(f'{output_path}/{_FILE_PREFIX}.csv', index=False)
 

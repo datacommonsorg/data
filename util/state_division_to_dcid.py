@@ -49,7 +49,7 @@ _PLACE_MAP = {
     "South Atlantic": "usc/SouthAtlanticDivision",
     "Delaware": "geoId/10",
     "District of Columbia": "geoId/11",
-    "Washington DC": "geoId/1150000",
+    "Washington DC": "geoId/11001",
     "Florida": "geoId/12",
     "Georgia": "geoId/13",
     "Maryland": "geoId/24",
