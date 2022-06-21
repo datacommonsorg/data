@@ -60,8 +60,9 @@ class TestProcess(unittest.TestCase):
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            base = EuroStatTobaccoConsumption(self.ip_data, cleaned_csv_file_path,
-                                            mcf_file_path, tmcf_file_path)
+            base = EuroStatTobaccoConsumption(self.ip_data,
+                                              cleaned_csv_file_path,
+                                              mcf_file_path, tmcf_file_path)
             base.process()
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:

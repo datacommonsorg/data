@@ -15,8 +15,8 @@ _INCOME_QUINTILE_VALUES = {
     "IncomeOf40To60Percentile": "[40 60 Percentile]",
     "IncomeOf60To80Percentile": "[60 80 Percentile]",
     "IncomeOf80To100Percentile": "[80 100 Percentile]",
-
 }
+
 
 def _replace_prop(sv: str):
     return sv.replace("CountryOfBirth", "")\
@@ -47,7 +47,8 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
             if "Male" in prop or "Female" in prop:
                 pvs.append(f"gender: dcs:{prop}")
             elif "Education" in prop:
-                pvs.append(f"educationalAttainment: dcs:{prop.replace('Or', '__')}")
+                pvs.append(
+                    f"educationalAttainment: dcs:{prop.replace('Or', '__')}")
             elif "Percentile" in prop:
                 income_quin = _INCOME_QUINTILE_VALUES[prop]
                 pvs.append(f"income: {income_quin}")
@@ -58,7 +59,7 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
                 pvs.append(f"nativity: dcs:{prop}")
             elif "ForeignWithin" in prop or "ForeignOutside" in prop\
                 or "Citizen" in prop:
-                pvs.append(f"citizenship: dcs:{prop}")       
+                pvs.append(f"citizenship: dcs:{prop}")
             elif "Activity" in prop:
                 pvs.append(f"globalActivityLimitationindicator: dcs:{prop}")
             elif "weight" in prop \
@@ -70,6 +71,7 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
     # Writing Genereated MCF to local path.
     with open(mcf_file_path, 'w+', encoding='utf-8') as f_out:
         f_out.write(mcf.rstrip('\n'))
+
 
 _MODULE_DIR = os.path.dirname(__file__)
 # _INPUT_MCF_FILE_PATH=os.path.join(_MODULE_DIR, "output_files", "eurostat_population_bmi.mcf")
@@ -87,4 +89,3 @@ with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     f_deno = list(set(f_deno))
     f_deno.sort()
     _generate_mcf(f_deno, _OUTPUT_MCF_FILE_PATH)
-    

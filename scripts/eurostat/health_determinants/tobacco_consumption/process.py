@@ -139,8 +139,7 @@ def smoking_tobaccoproducts_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     col1 = "unit,smoking,quant_inc,sex,age,geo"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
-    df = df[(df['age'] == 'TOTAL') &
-                      (~(df['quant_inc'] == 'UNK'))]
+    df = df[(df['age'] == 'TOTAL') & (~(df['quant_inc'] == 'UNK'))]
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
@@ -204,8 +203,7 @@ def former_daily_tobacco_smoker_income_quintile(
     col1 = "unit,sex,age,quant_inc,time"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
-    df = df[(df['age'] == 'TOTAL') &
-                      (~(df['quant_inc'] == 'UNK'))]
+    df = df[(df['age'] == 'TOTAL') & (~(df['quant_inc'] == 'UNK'))]
     df = df.drop(columns=['EU27_2020'])
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
@@ -289,8 +287,7 @@ def daily_smokers_cigarettes_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     col1 = "unit,smoking,quant_inc,sex,age,geo"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
-    df = df[(df['age'] == 'TOTAL') &
-                      (~(df['quant_inc'] == 'UNK'))]
+    df = df[(df['age'] == 'TOTAL') & (~(df['quant_inc'] == 'UNK'))]
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
@@ -352,7 +349,7 @@ def daily_exposure_tobacco_smoke_indoors_education_attainment_level(
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_isced11(df)
-    df = _replace_frequenc(df)
+    df = _replace_smoking_frequenc(df)
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
@@ -385,7 +382,7 @@ def daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation(
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
     df = _replace_deg_urb(df)
-    df = _replace_frequenc(df)
+    df = _replace_smoking_frequenc(df)
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
@@ -451,7 +448,7 @@ def electronic_cigarettes_similar_electronic_devices_education_attainment_level(
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020'])
     df = _replace_isced11(df)
-    df = _replace_frequenc(df)
+    df = _replace_smoking_frequenc(df)
     df = _replace_sex(df)
     df.drop(columns=['unit', 'age'], inplace=True)
     df['SV'] = 'Percent_'\
@@ -506,8 +503,7 @@ def daily_smokers_cigarettes_history_income_quintile(
     col1 = "sex,age,quant_inc,time"
     df = _split_column(df, col1)
     # Filtering out the wanted rows and columns
-    df = df[(df['age'] == 'TOTAL') &
-                      (~(df['quant_inc'] == 'UNK'))]
+    df = df[(df['age'] == 'TOTAL') & (~(df['quant_inc'] == 'UNK'))]
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
     df.drop(columns=['age'], inplace=True)
@@ -554,10 +550,7 @@ def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF
     """
-    df = df.replace({'sex': {
-        'F': 'Female',
-        'M': 'Male',
-        'T': 'Total'}})
+    df = df.replace({'sex': {'F': 'Female', 'M': 'Male', 'T': 'Total'}})
     return df
 
 
@@ -580,6 +573,7 @@ def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
         'TOTAL': 'Total'
         }})
     return df
+
 
 def _replace_quant_inc(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -685,7 +679,7 @@ def _replace_duration(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _replace_frequenc(df: pd.DataFrame) -> pd.DataFrame:
+def _replace_smoking_frequenc(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
@@ -788,30 +782,31 @@ class EuroStatTobaccoConsumption:
                 elif  "Smoking" in prop or "NonSmoker" in prop or "ExposureToTobaccoSmoke"\
                      in prop or "FormerSmoker" in prop:
                     healthBehavior = "\nhealthBehavior: dcs:" + prop
-                    sv_name = sv_name + prop + ", " 
+                    sv_name = sv_name + prop + ", "
                 elif "Daily" in prop or "Occasional" in prop\
                      or "AtLeastOneHourPerDay" in prop or "LessThanOneHourPerDay" in prop\
                       or "LessThanOnceAWeek" in prop or "AtLeastOnceAWeek" in prop\
                       or "RarelyOrNever" in prop :
-                    frequenc = "\nhealthBehaviorFrequency: dcs:" + prop.replace("Or","__")
-                    sv_name = sv_name + prop + ", " 
+                    frequenc = "\nhealthBehaviorFrequency: dcs:" + prop.replace(
+                        "Or", "__")
+                    sv_name = sv_name + prop + ", "
                 elif "LessThan20CigarettesPerDay"in prop or "20OrMoreCigarettesPerDay" in prop \
                     or "DailyCigaretteSmoker20OrMorePerDay" in prop or "DailyCigaretteSmokerLessThan20PerDay" in prop:
                     quantity = "\nconsumptionQuantity: "+prop.replace("LessThan20CigarettesPerDay","[- 20 Cigarettes]")\
                         .replace("20OrMoreCigarettesPerDay","[20 - Cigarettes]").replace("DailyCigaretteSmoker20OrMorePerDay","[20 - Cigarettes]")\
                             .replace("DailyCigaretteSmokerLessThan20PerDay","[- 20 Cigarettes]")
-                    sv_name = sv_name + prop + ", "                 
+                    sv_name = sv_name + prop + ", "
                 elif "TobaccoProducts" in prop or "Cigarette" in prop or "ECigarettes" in prop:
-                    substance = "\nsubstanceUsed: dcs:"+ prop
-                    sv_name = sv_name + prop + ", "                 
-                elif 'LessThan1Year'in prop or 'From1To5Years'in prop or 'From5To10Years'in prop or'10YearsOrOver'in prop:
+                    substance = "\nsubstanceUsed: dcs:" + prop
+                    sv_name = sv_name + prop + ", "
+                elif 'LessThan1Year' in prop or 'From1To5Years' in prop or 'From5To10Years' in prop or '10YearsOrOver' in prop:
                     history = "\nactivityDuration: " + prop.replace("LessThan1Year","[- 1 Year]").replace("From1To5Years","[Years 1 5]")\
                           .replace("From5To10Years","[Years 5 10]").replace("10YearsOrOver","[10 - Years]")
-                    sv_name = sv_name + prop + ", " 
+                    sv_name = sv_name + prop + ", "
 
             sv_name = sv_name + "Among"
             for prop in sv_prop1:
-                if prop in ["Count","Person"]:
+                if prop in ["Count", "Person"]:
                     continue
                 if "Male" in prop or "Female" in prop:
                     gender = "\ngender: dcs:" + prop
@@ -862,7 +857,6 @@ class EuroStatTobaccoConsumption:
                                                       pv11=substance,
                                                       pv12=quantity,
                                                       pv13=history) + "\n"
-
 
         # Writing Genereated MCF to local path.
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
@@ -933,6 +927,7 @@ class EuroStatTobaccoConsumption:
             # df["file_name"] = file_name_without_ext
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
+            sv_temp = df["SV"].to_list()
 
         final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
         final_df = final_df.drop_duplicates(subset=['time','geo','SV'],\
@@ -941,7 +936,8 @@ class EuroStatTobaccoConsumption:
             .str.strip()
         # derived_df generated to get the year/SV/location sets
         # where 'u' exist
-        derived_df = final_df[final_df['observation'].astype(str).str.contains('u')]
+        derived_df = final_df[final_df['observation'].astype(str).str.contains(
+            'u')]
         u_rows = list(derived_df['SV'] + derived_df['geo'])
         final_df['info'] = final_df['SV'] + final_df['geo']
         # Adding Measurement Method based on a condition
@@ -950,8 +946,9 @@ class EuroStatTobaccoConsumption:
             'EurostatRegionalStatistics_LowReliability',
             'EurostatRegionalStatistics')
         final_df.drop(columns=['info'], inplace=True)
-        final_df['observation'] = (final_df['observation'].astype(str).str.replace(
-            ':', '').str.replace(' ', '').str.replace('u', ''))
+        final_df['observation'] = (
+            final_df['observation'].astype(str).str.replace(
+                ':', '').str.replace(' ', '').str.replace('u', ''))
         final_df['observation'] = pd.to_numeric(final_df['observation'],
                                                 errors='coerce')
         final_df = final_df.replace({'geo': COUNTRY_MAP})
