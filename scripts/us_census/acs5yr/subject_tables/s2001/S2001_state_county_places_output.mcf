@@ -1,0 +1,929 @@
+Node: dcid:Count_Person_16OrMoreYears_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [16 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [16 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_9999OrLessInflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [- 9999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_9999OrLessInflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [- 9999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_10000To14999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [10000 14999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_10000To14999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [10000 14999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15000To24999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [15000 24999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15000To24999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [15000 24999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25000To34999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [25000 34999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25000To34999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [25000 34999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35000To49999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [35000 49999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35000To49999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [35000 49999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_50000To64999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [50000 64999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_50000To64999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [50000 64999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65000To74999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [65000 74999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65000To74999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [65000 74999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75000To99999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [75000 99999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75000To99999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [75000 99999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_100000OrMoreInflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [100000 - InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_100000OrMoreInflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [100000 - InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_Earnings_Person_WithEarnings_FullTimeYearRoundWorker
+statType: dcs:meanValue
+measuredProperty: dcs:earnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+populationType: schema:Person
+incomeStatus: dcs:WithEarnings
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_25OrMoreYears
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+age: [25 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentLessThanHighSchoolGraduate_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentBachelorsDegree_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+educationalAttainment: dcs:BachelorsDegree
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentGraduateOrProfessionalDegree_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Male_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+age: [16 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Male_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+age: [16 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_Male
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_9999OrLessInflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [- 9999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_9999OrLessInflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [- 9999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_10000To14999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [10000 14999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_10000To14999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [10000 14999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15000To24999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [15000 24999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15000To24999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [15000 24999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25000To34999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [25000 34999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25000To34999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [25000 34999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35000To49999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [35000 49999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35000To49999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [35000 49999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_50000To64999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [50000 64999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_50000To64999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [50000 64999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65000To74999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [65000 74999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65000To74999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [65000 74999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75000To99999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [75000 99999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75000To99999InflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [75000 99999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_100000OrMoreInflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [100000 - InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_100000OrMoreInflationAdjustedUSDCurrentYear_Male_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [100000 - InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_Male_FullTimeYearRoundWorker
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_Earnings_Person_Male_FullTimeYearRoundWorker
+statType: dcs:meanValue
+measuredProperty: dcs:earnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+populationType: schema:Person
+gender: dcs:Male
+incomeStatus: dcs:WithEarnings
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_25OrMoreYears_Male
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Male
+age: [25 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentLessThanHighSchoolGraduate_Male_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Male
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Male_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Male
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_Male_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Male
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentBachelorsDegree_Male_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Male
+educationalAttainment: dcs:BachelorsDegree
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentGraduateOrProfessionalDegree_Male_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Male
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16OrMoreYears_Female_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+age: [16 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16OrMoreYears_Female_WithEarnings
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+age: [16 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_Female
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_9999OrLessInflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [- 9999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_9999OrLessInflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [- 9999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_10000To14999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [10000 14999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_10000To14999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [10000 14999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15000To24999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [15000 24999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_15000To24999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [15000 24999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_25000To34999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [25000 34999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_25000To34999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [25000 34999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35000To49999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [35000 49999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35000To49999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [35000 49999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_50000To64999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [50000 64999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_50000To64999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [50000 64999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65000To74999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [65000 74999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65000To74999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [65000 74999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75000To99999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [75000 99999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75000To99999InflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [75000 99999 InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_100000OrMoreInflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [100000 - InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_100000OrMoreInflationAdjustedUSDCurrentYear_Female_WithEarnings_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+earnings: [100000 - InflationAdjustedUSD_CurrentYear]
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_Female_FullTimeYearRoundWorker
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_Earnings_Person_Female_FullTimeYearRoundWorker
+statType: dcs:meanValue
+measuredProperty: dcs:earnings
+workStatus: dcs:USC_FullTimeYearRoundWorker
+populationType: schema:Person
+gender: dcs:Female
+incomeStatus: dcs:WithEarnings
+age: [16 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_25OrMoreYears_Female
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Female
+age: [25 - Years]
+incomeStatus: dcs:WithEarnings
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentLessThanHighSchoolGraduate_Female_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Female
+educationalAttainment: dcs:LessThanHighSchoolGraduate
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency_Female_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Female
+educationalAttainment: dcs:HighSchoolGraduateIncludesEquivalency
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree_Female_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Female
+educationalAttainment: dcs:SomeCollegeOrAssociatesDegree
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentBachelorsDegree_Female_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Female
+educationalAttainment: dcs:BachelorsDegree
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Earnings_Person_EducationalAttainmentGraduateOrProfessionalDegree_Female_WithEarnings
+statType: dcs:medianValue
+measuredProperty: dcs:earnings
+populationType: schema:Person
+gender: dcs:Female
+educationalAttainment: dcs:GraduateOrProfessionalDegree
+incomeStatus: dcs:WithEarnings
+age: [25 - Years]
+typeOf: dcs:StatisticalVariable
+

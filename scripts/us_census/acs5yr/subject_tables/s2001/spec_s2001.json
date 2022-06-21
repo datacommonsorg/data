@@ -1,0 +1,304 @@
+{
+	"preprocess": {
+		"find_and_replace": {
+			"$1 to $9,999 or loss": "Full-time, year-round workers with earnings!!$1 to $9,999 or loss",
+			"$10,000 to $14,999": "Full-time, year-round workers with earnings!!$10,000 to $14,999",
+			"$15,000 to $24,999": "Full-time, year-round workers with earnings!!$15,000 to $24,999",
+			"$25,000 to $34,999": "Full-time, year-round workers with earnings!!$25,000 to $34,999",
+			"$35,000 to $49,999": "Full-time, year-round workers with earnings!!$35,000 to $49,999",
+			"$50,000 to $64,999": "Full-time, year-round workers with earnings!!$50,000 to $64,999",
+			"$65,000 to $74,999": "Full-time, year-round workers with earnings!!$65,000 to $74,999",
+			"$75,000 to $99,999": "Full-time, year-round workers with earnings!!$75,000 to $99,999",
+			"$100,000 or more": "Full-time, year-round workers with earnings!!$100,000 or more",
+			"Population 16 years and over with earnings!!Median earnings (dollars)": "Median earnings (dollars)",
+			"Population 25 years and over with earnings!!Less than high school graduate": "Less than high school graduate",
+			"Population 25 years and over with earnings!!High school graduate (includes equivalency)": "High school graduate (includes equivalency)",
+			"Population 25 years and over with earnings!!Some college or associate's degree": "Some college or associate's degree",
+			"Population 25 years and over with earnings!!Bachelor's degree": "Bachelor's degree",
+			"Population 25 years and over with earnings!!Graduate or professional degree": "Graduate or professional degree",
+			"Median earnings (dollars).1": "Median earnings (dollars) for full-time, year-round workers with earnings",
+			"Total!!Estimate!!Median earnings (dollars).1": "Estimate!!Total!!Population 16 years and over with earnings!!FULL-TIME, YEAR-ROUND WORKERS WITH EARNINGS!!Median earnings (dollars) for full-time, year-round workers with earnings",
+			"Population 16 years and over with earnings!!FULL-TIME, YEAR-ROUND WORKERS WITH EARNINGS!!Median earnings (dollars) for full-time, year-round workers with earnings": "Median earnings (dollars) for full-time, year-round workers with earnings"
+		}
+	},
+	"overwrite_dcids": {
+		"Median_Earnings_Person_16OrMoreYears_Male_WithEarnings": "Median_Earnings_Person_16OrMoreYears_Male",
+		"Median_Earnings_Person_Male_WithEarnings_FullTimeYearRoundWorker": "Median_Earnings_Person_Male_FullTimeYearRoundWorker",
+		"Mean_Earnings_Person_Male_WithEarnings_FullTimeYearRoundWorker": "Mean_Earnings_Person_Male_FullTimeYearRoundWorker",
+		"Median_Earnings_Person_25OrMoreYears_Male_WithEarnings": "Median_Earnings_Person_25OrMoreYears_Male",
+		"Median_Earnings_Person_LessThanHighSchoolGraduate_Male_WithEarnings": "Median_Earnings_Person_LessThanHighSchoolGraduate_Male",
+		"Median_Earnings_Person_HighSchoolGraduateIncludesEquivalency_Male_WithEarnings": "Median_Earnings_Person_HighSchoolGraduateIncludesEquivalency_Male",
+		"Median_Earnings_Person_SomeCollegeOrAssociatesDegree_Male_WithEarnings": "Median_Earnings_Person_SomeCollegeOrAssociatesDegree_Male",
+		"Median_Earnings_Person_BachelorsDegree_Male_WithEarnings": "Median_Earnings_Person_BachelorsDegree_Male",
+		"Median_Earnings_Person_GraduateOrProfessionalDegree_Male_WithEarnings": "Median_Earnings_Person_GraduateOrProfessionalDegree_Male",
+		"Median_Earnings_Person_16OrMoreYears_Female_WithEarnings": "Median_Earnings_Person_16OrMoreYears_Female",
+		"Median_Earnings_Person_Female_WithEarnings_FullTimeYearRoundWorker": "Median_Earnings_Person_Female_FullTimeYearRoundWorker",
+		"Mean_Earnings_Person_Female_WithEarnings_FullTimeYearRoundWorker": "Mean_Earnings_Person_Female_FullTimeYearRoundWorker",
+		"Median_Earnings_Person_25OrMoreYears_Female_WithEarnings": "Median_Earnings_Person_25OrMoreYears_Female",
+		"Median_Earnings_Person_LessThanHighSchoolGraduate_Female_WithEarnings": "Median_Earnings_Person_LessThanHighSchoolGraduate_Female_WithEarnings",
+		"Median_Earnings_Person_HighSchoolGraduateIncludesEquivalency_Female_WithEarnings": "Median_Earnings_Person_HighSchoolGraduateIncludesEquivalency_Female",
+		"Median_Earnings_Person_SomeCollegeOrAssociatesDegree_Female_WithEarnings": "Median_Earnings_Person_SomeCollegeOrAssociatesDegree_Female",
+		"Median_Earnings_Person_BachelorsDegree_Female_WithEarnings": "Median_Earnings_Person_BachelorsDegree_Female",
+		"Median_Earnings_Person_GraduateOrProfessionalDegree_Female_WithEarnings": "Median_Earnings_Person_GraduateOrProfessionalDegree_Female"
+	},
+	"populationType": {
+		"_DEFAULT": "schema:Person"
+	},
+	"measurement": {
+		"_DEFAULT": {
+			"measuredProperty": "count",
+			"statType": "measuredValue"
+		},
+		"Margin of Error": {
+			"measuredProperty": "count",
+			"statType": "marginOfError"
+		},
+		"Median earnings (dollars)": {
+			"statType": "medianValue",
+			"measuredProperty": "earnings",
+			"unit": "InflationAdjustedUSD_CurrentYear"
+		},
+		"Median earnings (dollars) for full-time, year-round workers with earnings": {
+			"statType": "medianValue",
+			"measuredProperty": "earnings",
+			"workStatus": "USC_FullTimeYearRoundWorker",
+			"unit": "InflationAdjustedUSD_CurrentYear"
+		},
+		"Mean earnings (dollars)": {
+			"statType": "meanValue",
+			"measuredProperty": "earnings",
+			"workStatus": "USC_FullTimeYearRoundWorker",
+			"unit": "InflationAdjustedUSD_CurrentYear"
+		},
+		"Mean earnings (dollars) for full-time, year-round workers with earnings": {
+			"statType": "meanValue",
+			"measuredProperty": "earnings",
+			"workStatus": "USC_FullTimeYearRoundWorker",
+			"unit": "InflationAdjustedUSD_CurrentYear"
+		},
+		"MEDIAN EARNINGS BY EDUCATIONAL ATTAINMENT": {
+			"statType": "medianValue",
+			"measuredProperty": "earnings",
+			"unit": "InflationAdjustedUSD_CurrentYear"
+		}
+	},
+	"pvs": {
+		"age": {
+			"Population 16 years and over with earnings": "[16 - Years]",
+			"Population 25 years and over with earnings": "[25 - Years]"
+		},
+		"incomeStatus": {
+			"Population 16 years and over with earnings": "WithEarnings",
+			"Full-time, year-round workers with earnings": "WithEarnings",
+			"Population 25 years and over with earnings": "WithEarnings"
+		},
+		"gender": {
+			"Male": "Male",
+			"Female": "Female",
+			"Male MOE": "Male",
+			"Female MOE": "Female"
+		},
+		"earnings": {
+			"$1 to $9,999 or loss": "[- 9999 InflationAdjustedUSD_CurrentYear]",
+			"$10,000 to $14,999": "[10000 14999 InflationAdjustedUSD_CurrentYear]",
+			"$15,000 to $24,999": "[15000 24999 InflationAdjustedUSD_CurrentYear]",
+			"$25,000 to $34,999": "[25000 34999 InflationAdjustedUSD_CurrentYear]",
+			"$35,000 to $49,999": "[35000 49999 InflationAdjustedUSD_CurrentYear]",
+			"$50,000 to $64,999": "[50000 64999 InflationAdjustedUSD_CurrentYear]",
+			"$65,000 to $74,999": "[65000 74999 InflationAdjustedUSD_CurrentYear]",
+			"$75,000 to $99,999": "[75000 99999 InflationAdjustedUSD_CurrentYear]",
+			"$100,000 or more": "[100000 - InflationAdjustedUSD_CurrentYear]"
+		},
+		"workStatus": {
+			"Full-time, year-round workers with earnings": "USC_FullTimeYearRoundWorker"
+		},
+		"educationalAttainment": {
+			"Less than high school graduate": "LessThanHighSchoolGraduate",
+			"High school graduate (includes equivalency)": "HighSchoolGraduateIncludesEquivalency",
+			"Some college or associate's degree": "SomeCollegeOrAssociatesDegree",
+			"Bachelor's degree": "BachelorsDegree",
+			"Graduate or professional degree": "GraduateOrProfessionalDegree"
+		}
+	},
+	"inferredSpec": {
+		"earnings": {
+			"workStatus": "USC_FullTimeYearRoundWorker"
+		}
+	},
+	"universePVs": [{
+			"populationType": "schema:Person",
+			"obs_props": {
+				"mprop": "earnings"
+			},
+			"dependentPVs": {
+				"incomeStatus": "WithEarnings"
+			}
+		},
+		{
+			"populationType": "schema:Person",
+			"constraintProperties": ["educationalAttainment", "earnings"],
+			"dependentPVs": {
+				"age": "[25 - Years]",
+				"incomeStatus": "WithEarnings"
+			}
+		},
+		{
+			"populationType": "schema:Person",
+			"constraintProperties": ["educationalAttainment"],
+			"dependentPVs": {
+				"age": "[25 - Years]"
+			}
+		},
+		{
+			"populationType": "schema:Person",
+			"constraintProperties": ["workStatus", "earnings"],
+			"dependentPVs": {
+				"age": "[16 - Years]",
+				"incomeStatus": "WithEarnings"
+			}
+		},
+		{
+			"populationType": "schema:Person",
+			"constraintProperties": ["workStatus"],
+			"dependentPVs": {
+				"age": "[16 - Years]"
+			}
+		}
+	],
+	"ignoreColumns": [
+		"id",
+		"Geographic Area Name",
+		"Percent",
+		"Percent MOE",
+		"PERCENT ALLOCATED",
+		"PERCENT IMPUTED",
+		"Percent Female",
+		"Percent Male MOE",
+		"Percent Female MOE",
+		"Percent Male",
+		"Margin of Error!!Mean earnings (dollars)",
+		"Margin of Error!!Median earnings (dollars).1",
+		"Margin of Error!!Median earnings (dollars)",
+		"Margin of Error!!MEDIAN EARNINGS BY EDUCATIONAL ATTAINMENT",
+		"Margin of Error!!Median earnings (dollars) for full-time, year-round workers with earnings",
+		"Margin of Error!!Mean earnings (dollars) for full-time, year-round workers with earnings",
+		"Total!!Estimate!!Median earnings (dollars).1",
+		"Estimate!!Total!!Population 16 years and over with earnings!!FULL-TIME, YEAR-ROUND WORKERS WITH EARNINGS!!Median earnings (dollars) for full-time, year-round workers with earnings"
+	],
+	"denominators": {
+		"Total!!Estimate!!Full-time, year-round workers with earnings": [
+			"Total!!Estimate!!$1 to $9,999 or loss",
+			"Total!!Margin of Error!!$1 to $9,999 or loss",
+			"Total!!Estimate!!$10,000 to $14,999",
+			"Total!!Margin of Error!!$10,000 to $14,999",
+			"Total!!Estimate!!$15,000 to $24,999",
+			"Total!!Margin of Error!!$15,000 to $24,999",
+			"Total!!Estimate!!$25,000 to $34,999",
+			"Total!!Margin of Error!!$25,000 to $34,999",
+			"Total!!Estimate!!$35,000 to $49,999",
+			"Total!!Margin of Error!!$35,000 to $49,999",
+			"Total!!Estimate!!$50,000 to $64,999",
+			"Total!!Margin of Error!!$50,000 to $64,999",
+			"Total!!Estimate!!$65,000 to $74,999",
+			"Total!!Margin of Error!!$65,000 to $74,999",
+			"Total!!Estimate!!$75,000 to $99,999",
+			"Total!!Margin of Error!!$75,000 to $99,999",
+			"Total!!Estimate!!$100,000 or more",
+			"Total!!Margin of Error!!$100,000 or more",
+			"Total!!Estimate!!Full-time, year-round workers with earnings!!$1 to $9,999 or loss",
+			"Total!!Margin of Error!!Full-time, year-round workers with earnings!!$1 to $9,999 or loss",
+			"Total!!Estimate!!Full-time, year-round workers with earnings!!$10,000 to $14,999",
+			"Total!!Margin of Error!!Full-time, year-round workers with earnings!!$10,000 to $14,999",
+			"Total!!Estimate!!Full-time, year-round workers with earnings!!$15,000 to $24,999",
+			"Total!!Margin of Error!!Full-time, year-round workers with earnings!!$15,000 to $24,999",
+			"Total!!Estimate!!Full-time, year-round workers with earnings!!$25,000 to $34,999",
+			"Total!!Margin of Error!!Full-time, year-round workers with earnings!!$25,000 to $34,999",
+			"Total!!Estimate!!Full-time, year-round workers with earnings!!$35,000 to $49,999",
+			"Total!!Margin of Error!!Full-time, year-round workers with earnings!!$35,000 to $49,999",
+			"Total!!Estimate!!Full-time, year-round workers with earnings!!$50,000 to $64,999",
+			"Total!!Margin of Error!!Full-time, year-round workers with earnings!!$50,000 to $64,999",
+			"Total!!Estimate!!Full-time, year-round workers with earnings!!$65,000 to $74,999",
+			"Total!!Margin of Error!!Full-time, year-round workers with earnings!!$65,000 to $74,999",
+			"Total!!Estimate!!Full-time, year-round workers with earnings!!$75,000 to $99,999",
+			"Total!!Margin of Error!!Full-time, year-round workers with earnings!!$75,000 to $99,999",
+			"Total!!Estimate!!Full-time, year-round workers with earnings!!$100,000 or more",
+			"Total!!Margin of Error!!Full-time, year-round workers with earnings!!$100,000 or more"
+		],
+		"Male!!Estimate!!Full-time, year-round workers with earnings": [
+			"Male!!Estimate!!Full-time, year-round workers with earnings!!$1 to $9,999 or loss",
+			"Male!!Margin of Error!!Full-time, year-round workers with earnings!!$1 to $9,999 or loss",
+			"Male!!Estimate!!Full-time, year-round workers with earnings!!$10,000 to $14,999",
+			"Male!!Margin of Error!!Full-time, year-round workers with earnings!!$10,000 to $14,999",
+			"Male!!Estimate!!Full-time, year-round workers with earnings!!$15,000 to $24,999",
+			"Male!!Margin of Error!!Full-time, year-round workers with earnings!!$15,000 to $24,999",
+			"Male!!Estimate!!Full-time, year-round workers with earnings!!$25,000 to $34,999",
+			"Male!!Margin of Error!!Full-time, year-round workers with earnings!!$25,000 to $34,999",
+			"Male!!Estimate!!Full-time, year-round workers with earnings!!$35,000 to $49,999",
+			"Male!!Margin of Error!!Full-time, year-round workers with earnings!!$35,000 to $49,999",
+			"Male!!Estimate!!Full-time, year-round workers with earnings!!$50,000 to $64,999",
+			"Male!!Margin of Error!!Full-time, year-round workers with earnings!!$50,000 to $64,999",
+			"Male!!Estimate!!Full-time, year-round workers with earnings!!$65,000 to $74,999",
+			"Male!!Margin of Error!!Full-time, year-round workers with earnings!!$65,000 to $74,999",
+			"Male!!Estimate!!Full-time, year-round workers with earnings!!$75,000 to $99,999",
+			"Male!!Margin of Error!!Full-time, year-round workers with earnings!!$75,000 to $99,999",
+			"Male!!Estimate!!Full-time, year-round workers with earnings!!$100,000 or more",
+			"Male!!Margin of Error!!Full-time, year-round workers with earnings!!$100,000 or more",
+			"Male!!Estimate!!$1 to $9,999 or loss",
+			"Male!!Margin of Error!!$1 to $9,999 or loss",
+			"Male!!Estimate!!$10,000 to $14,999",
+			"Male!!Margin of Error!!$10,000 to $14,999",
+			"Male!!Estimate!!$15,000 to $24,999",
+			"Male!!Margin of Error!!$15,000 to $24,999",
+			"Male!!Estimate!!$25,000 to $34,999",
+			"Male!!Margin of Error!!$25,000 to $34,999",
+			"Male!!Estimate!!$35,000 to $49,999",
+			"Male!!Margin of Error!!$35,000 to $49,999",
+			"Male!!Estimate!!$50,000 to $64,999",
+			"Male!!Margin of Error!!$50,000 to $64,999",
+			"Male!!Estimate!!$65,000 to $74,999",
+			"Male!!Margin of Error!!$65,000 to $74,999",
+			"Male!!Estimate!!$75,000 to $99,999",
+			"Male!!Margin of Error!!$75,000 to $99,999",
+			"Male!!Estimate!!$100,000 or more",
+			"Male!!Margin of Error!!$100,000 or more"
+		],
+		"Female!!Estimate!!Full-time, year-round workers with earnings": [
+			"Female!!Estimate!!Full-time, year-round workers with earnings!!$1 to $9,999 or loss",
+			"Female!!Margin of Error!!Full-time, year-round workers with earnings!!$1 to $9,999 or loss",
+			"Female!!Estimate!!Full-time, year-round workers with earnings!!$10,000 to $14,999",
+			"Female!!Margin of Error!!Full-time, year-round workers with earnings!!$10,000 to $14,999",
+			"Female!!Estimate!!Full-time, year-round workers with earnings!!$15,000 to $24,999",
+			"Female!!Margin of Error!!Full-time, year-round workers with earnings!!$15,000 to $24,999",
+			"Female!!Estimate!!Full-time, year-round workers with earnings!!$25,000 to $34,999",
+			"Female!!Margin of Error!!Full-time, year-round workers with earnings!!$25,000 to $34,999",
+			"Female!!Estimate!!Full-time, year-round workers with earnings!!$35,000 to $49,999",
+			"Female!!Margin of Error!!Full-time, year-round workers with earnings!!$35,000 to $49,999",
+			"Female!!Estimate!!Full-time, year-round workers with earnings!!$50,000 to $64,999",
+			"Female!!Margin of Error!!Full-time, year-round workers with earnings!!$50,000 to $64,999",
+			"Female!!Estimate!!Full-time, year-round workers with earnings!!$65,000 to $74,999",
+			"Female!!Margin of Error!!Full-time, year-round workers with earnings!!$65,000 to $74,999",
+			"Female!!Estimate!!Full-time, year-round workers with earnings!!$75,000 to $99,999",
+			"Female!!Margin of Error!!Full-time, year-round workers with earnings!!$75,000 to $99,999",
+			"Female!!Estimate!!Full-time, year-round workers with earnings!!$100,000 or more",
+			"Female!!Margin of Error!!Full-time, year-round workers with earnings!!$100,000 or more",
+			"Female!!Estimate!!$1 to $9,999 or loss",
+			"Female!!Margin of Error!!$1 to $9,999 or loss",
+			"Female!!Estimate!!$10,000 to $14,999",
+			"Female!!Margin of Error!!$10,000 to $14,999",
+			"Female!!Estimate!!$15,000 to $24,999",
+			"Female!!Margin of Error!!$15,000 to $24,999",
+			"Female!!Estimate!!$25,000 to $34,999",
+			"Female!!Margin of Error!!$25,000 to $34,999",
+			"Female!!Estimate!!$35,000 to $49,999",
+			"Female!!Margin of Error!!$35,000 to $49,999",
+			"Female!!Estimate!!$50,000 to $64,999",
+			"Female!!Margin of Error!!$50,000 to $64,999",
+			"Female!!Estimate!!$65,000 to $74,999",
+			"Female!!Margin of Error!!$65,000 to $74,999",
+			"Female!!Estimate!!$75,000 to $99,999",
+			"Female!!Margin of Error!!$75,000 to $99,999",
+			"Female!!Estimate!!$100,000 or more",
+			"Female!!Margin of Error!!$100,000 or more"
+		]
+	}
+}
