@@ -5,7 +5,7 @@ measurementMethod: dcs:dcAggregate/CensusPEPSurvey
 observationAbout: C:USA_Population_Count->Location
 observationDate: C:USA_Population_Count->Date
 observationPeriod: "P1M"
-value: C:USA_Population_Count->Count_Person_InUSArmedForcesOverseas 
+value: C:USA_Population_Count->Count_Person_InUSArmedForcesOverseas
 
 Node: E:USA_Population_Count->E1
 typeOf: dcs:StatVarObservation
@@ -14,7 +14,7 @@ measurementMethod: dcs:CensusPEPSurvey
 observationAbout: C:USA_Population_Count->Location
 observationDate: C:USA_Population_Count->Date
 observationPeriod: "P1M"
-value: C:USA_Population_Count->Count_Person_USResident 
+value: C:USA_Population_Count->Count_Person_USResident
 
 Node: E:USA_Population_Count->E2
 typeOf: dcs:StatVarObservation
@@ -23,7 +23,7 @@ measurementMethod: dcs:CensusPEPSurvey
 observationAbout: C:USA_Population_Count->Location
 observationDate: C:USA_Population_Count->Date
 observationPeriod: "P1M"
-value: C:USA_Population_Count->Count_Person_USResidentOrInUSArmedForcesOverseas 
+value: C:USA_Population_Count->Count_Person_USResidentOrInUSArmedForcesOverseas
 
 Node: E:USA_Population_Count->E3
 typeOf: dcs:StatVarObservation
@@ -32,7 +32,7 @@ measurementMethod: dcs:CensusPEPSurvey
 observationAbout: C:USA_Population_Count->Location
 observationDate: C:USA_Population_Count->Date
 observationPeriod: "P1M"
-value: C:USA_Population_Count->Count_Person_Civilian 
+value: C:USA_Population_Count->Count_Person_Civilian
 
 Node: E:USA_Population_Count->E4
 typeOf: dcs:StatVarObservation

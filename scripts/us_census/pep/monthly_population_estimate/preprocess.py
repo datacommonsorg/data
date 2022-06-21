@@ -17,6 +17,7 @@
     1. python3 preprocess.py
     2. python3 preprocess.py -i input_data
 """
+from dataclasses import replace
 import os
 import re
 
@@ -51,9 +52,15 @@ def _extract_year(val: str) -> tuple:
     Returns:
         res (tuple) : Tuple with boolean value and year value or None
     """
+    # Extracting 0th index value from the val.
+    # val contains yyyy or yyyy [1] or .MM 1
+    print(val)
     val = str(val).strip().split(' ', maxsplit=1)[0]
     if val.isnumeric() and len(val) == 4:
         return True, val
+    # Exceptional Case: val contains 20091
+    # 2009 is year and 1 is Date.
+    # Extracting just year from above format
     if val.isnumeric() and len(val) == 5:
         return True, val[:4]
     return False, None
@@ -98,7 +105,20 @@ def _year_range(col: pd.Series) -> str:
     This method returns year range from the dataframe
     column.
     Example:
-
+    col(input):
+    2000-04
+    2000-05
+    2000-06
+    2000-07
+    2000-08
+    ...   
+    2010-08
+    2010-09
+    2010-10
+    2010-11
+    2010-12
+    output:
+    "2010-2000"
 
     Arguments:
         col (Series) : DataFrame Column of dtype str
@@ -111,6 +131,30 @@ def _year_range(col: pd.Series) -> str:
     min_year = min(pd.to_datetime(col, errors='coerce').dt.year)
     year_range = str(max_year) + '-' + str(min_year)
     return year_range
+
+
+def _replace_name(final_cols: list) -> list:
+    """
+    List provided inorder to change the name as required by output.
+
+    Arguments:
+        final_cols (list) : List of dtype str
+
+    Returns:
+        final_cols (list) : List of dtype str
+    """
+    final_cols = [
+        "Count_Person_" + (col.replace("Population ", "").replace(
+            "Population", "").replace(" Plus ", "Or").replace(
+                "Armed Forces Overseas", "InUSArmedForcesOverseas").replace(
+                    "Household", "ResidesInHousehold").replace(
+                        "Resident", "USResident").replace(
+                            "Noninstitutionalized",
+                            "NonInstitutionalized").strip().replace(
+                                " ", "_").replace("__", "_"))
+        for col in final_cols
+    ]
+    return final_cols
 
 
 class CensusUSACountryPopulation:
@@ -198,33 +242,10 @@ class CensusUSACountryPopulation:
         df = df[computed_cols + final_cols]
 
         # Renaming DF Headers with ref to SV's Naming Standards.
-        final_cols_list = ["Count_Person_" + col\
-                        .replace("Population ", "")\
-                        .replace("Population", "")\
-                        .replace(" Plus ", "Or")\
-                        .replace("Armed Forces Overseas", \
-                            "InUSArmedForcesOverseas")\
-                        .replace("Household", \
-                                "ResidesInHousehold")\
-                        .replace("Resident", "USResident")\
-                        .replace("Noninstitutionalized", \
-                            "NonInstitutionalized")\
-                        .strip()\
-                        .replace(" ", "_")\
-                        .replace("__", "_")\
-                        for col in final_cols]
+        final_cols_list = _replace_name(final_cols)
 
         final_cols_list = computed_cols + final_cols_list
         df.columns = final_cols_list
-
-        # Multiplying the data with scaling factor.
-        for col in final_cols_list:
-            if "count" in col.lower():
-                if self._scaling_factor != 1:
-                    df[col] = df[col].astype('float', errors="ignore").multiply(
-                        self._scaling_factor)
-                df[col] = df[col].astype('Int64', errors="ignore")
-        self._scaling_factor = 1
 
         # Creating Location column with default value country/USA.
         # as the dataset is all about USA country level only.
