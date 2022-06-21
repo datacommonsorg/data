@@ -258,6 +258,7 @@ def _replace_bmi(df: pd.DataFrame) -> pd.DataFrame:
     })
     return df
 
+
 def _replace_smoking(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
@@ -279,6 +280,7 @@ def _replace_smoking(df: pd.DataFrame) -> pd.DataFrame:
     })
     return df
 
+
 def _replace_smoking_frequenc(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
@@ -298,6 +300,7 @@ def _replace_smoking_frequenc(df: pd.DataFrame) -> pd.DataFrame:
         }
     })
     return df
+
 
 def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
     """

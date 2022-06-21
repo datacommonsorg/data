@@ -37,8 +37,8 @@ import numpy as np
 from util.alpha2_to_dcid import COUNTRY_MAP
 
 FLAGS = flags.FLAGS
-default_input_path = os.path.join(os.path.dirname(
-    os.path.abspath(__file__)), "input_files")
+default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -508,7 +508,8 @@ def _healthenhancing_by_sex_citizenship(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _healthenhancing_by_sex_activitylimitation(df: pd.DataFrame) -> pd.DataFrame:
+def _healthenhancing_by_sex_activitylimitation(
+        df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file healthenhancing_by_sex_activitylimitation
     for concatenation in Final CSV.
@@ -542,7 +543,8 @@ def _healthenhancing_by_sex_activitylimitation(df: pd.DataFrame) -> pd.DataFrame
     return df
 
 
-def _healthenhancing_nonworkrelated_by_sex_bmi(df: pd.DataFrame) -> pd.DataFrame:
+def _healthenhancing_nonworkrelated_by_sex_bmi(
+        df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file healthenhancing_nonworkrelated_by_sex_bmi
     for concatenation in Final CSV.
