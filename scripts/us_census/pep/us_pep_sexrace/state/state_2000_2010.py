@@ -55,12 +55,18 @@ def _process_state_2000_2010(url):
     df = df.query("SEX !=0")
 
     # changing values of column as per the metadata
-    df = df.replace({'SEX':{1:'Male', 2:'Female'}})
-    df = df.replace({'RACE':{0:'All_Races_Combined',
-    1:'WhiteAlone', 2: 'BlackOrAfricanAmericanAlone',
-    3: 'AmericanIndianAndAlaskaNativeAlone',
-    4: 'AsianAlone', 5: 'NativeHawaiianAndOtherPacificIslanderAlone',
-    6:'TwoOrMoreRaces'}})
+    df = df.replace({'SEX': {1: 'Male', 2: 'Female'}})
+    df = df.replace({
+        'RACE': {
+            0: 'All_Races_Combined',
+            1: 'WhiteAlone',
+            2: 'BlackOrAfricanAmericanAlone',
+            3: 'AmericanIndianAndAlaskaNativeAlone',
+            4: 'AsianAlone',
+            5: 'NativeHawaiianAndOtherPacificIslanderAlone',
+            6: 'TwoOrMoreRaces'
+        }
+    })
 
     df['INFO'] = "Count_Person_" + df['SEX'] + '_' + df['RACE']
     df['INFO'] = df['INFO'].astype(str).str.replace('_All_Races_Combined', '')

@@ -77,16 +77,20 @@ def _process_county_1990_2000(url):
                 ,15,16,17],inplace=True)
 
             # changing the column values as per metadata
-            df=df.replace({'RACE':{1: 'Count_Person_Male_WhiteAlone',
-            2: 'Count_Person_Female_WhiteAlone',
-            3: 'Count_Person_Male_WhiteAlone',
-            4: 'Count_Person_Female_WhiteAlone',
-            5:'Count_Person_Male_BlackOrAfricanAmericanAlone',
-            6:'Count_Person_Female_BlackOrAfricanAmericanAlone',
-            7:'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
-            8:'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
-            9:'Count_Person_Male_AsianOrPacificIslander',
-            10:'Count_Person_Female_AsianOrPacificIslander'}})
+            df = df.replace({
+                'RACE': {
+                    1: 'Count_Person_Male_WhiteAlone',
+                    2: 'Count_Person_Female_WhiteAlone',
+                    3: 'Count_Person_Male_WhiteAlone',
+                    4: 'Count_Person_Female_WhiteAlone',
+                    5: 'Count_Person_Male_BlackOrAfricanAmericanAlone',
+                    6: 'Count_Person_Female_BlackOrAfricanAmericanAlone',
+                    7: 'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
+                    8: 'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
+                    9: 'Count_Person_Male_AsianOrPacificIslander',
+                    10: 'Count_Person_Female_AsianOrPacificIslander'
+                }
+            })
 
             # extracting year
             df['Year'] = df['Year'].astype(str) + "-" + df['geo_ID'].astype(str)
