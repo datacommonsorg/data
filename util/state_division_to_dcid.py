@@ -157,8 +157,9 @@ _PLACE_MAP = {
     "V.I.": "geoId/78"
 }
 
-def get_place_dcid(place_name:str)->str:
-  """
+
+def get_place_dcid(place_name: str) -> str:
+    """
   Utility wrapper that returns the place dcid given a name
   """
-  return _PLACE_MAP[place_name]
+    return _PLACE_MAP[place_name]

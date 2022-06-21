@@ -20,10 +20,11 @@ from place_map import get_place_dcid
 
 class PlaceMapTest(unittest.TestCase):
 
-  def test_place_id_resolution_by_name(self):
-    self.assertEqual(get_place_dcid('United States'), 'country/USA')
-    self.assertEqual(get_place_dcid('California'), 'geoId/06')
-    self.assertEqual(get_place_dcid('Calif.'), 'geoId/06')
+    def test_place_id_resolution_by_name(self):
+        self.assertEqual(get_place_dcid('United States'), 'country/USA')
+        self.assertEqual(get_place_dcid('California'), 'geoId/06')
+        self.assertEqual(get_place_dcid('Calif.'), 'geoId/06')
+
 
 if __name__ == '__main__':
-  unittest.main()
+    unittest.main()
