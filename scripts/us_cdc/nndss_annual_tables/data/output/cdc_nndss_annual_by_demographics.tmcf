@@ -1,0 +1,8 @@
+Node: E:NNDSWeekly->E0
+typeOf: dcs:StatVarObservation
+measurementMethod: C:NNDSWeekly->measurementMethod
+observationAbout: C:NNDSWeekly->observationAbout
+observationDate: C:NNDSWeekly->observationDate
+variableMeasured: C:NNDSWeekly->variableMeasured
+value: C:NNDSWeekly->value
+observationPeriod: C:NNDSWeekly->observationPeriod

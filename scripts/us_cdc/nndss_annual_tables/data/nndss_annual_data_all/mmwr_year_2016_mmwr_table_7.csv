@@ -1,0 +1,160 @@
+Disease,Hispanic,Hispanic,Non-Hispanic,Non-Hispanic,Ethnicity not stated,Total
+Disease,No.,Rate,No.,Rate,No.,No.
+Anthrax,—,—,—,—,—,—
+Arboviral diseases,,,,,,
+Chikungunya virus disease,60,0.10,132,0.05,55,247
+Eastern equine encephalitis virus disease,,,,,,
+Neuroinvasive,S,S,S,S,S,7
+Non-neuroinvasive,—,—,—,—,—,—
+Jamestown Canyon virus disease,,,,,,
+Neuroinvasive,S,S,S,S,S,7
+Non-neuroinvasive,S,S,S,S,S,8
+La Crosse virus disease,,,,,,
+Neuroinvasive,1,0.00,20,0.01,10,31
+Non-neuroinvasive,S,S,S,S,S,4
+Powassan virus disease,,,,,,
+Neuroinvasive,S,S,S,S,S,21
+Non-neuroinvasive,S,S,S,S,S,1
+St. Louis encephalitis virus disease,,,,,,
+Neuroinvasive,S,S,S,S,S,7
+Non-neuroinvasive,S,S,S,S,S,1
+West Nile virus disease,,,,,,
+Neuroinvasive,160,0.28,841,0.32,307,1308
+Non-neuroinvasive,33,0.06,581,0.22,227,841
+Western equine encephalitis virus disease,,,,,,
+Neuroinvasive,—,—,—,—,—,—
+Non-neuroinvasive,—,—,—,—,—,—
+Babesiosis,,,,,,
+Total,72,0.17,1011,0.54,827,1910
+Confirmed,63,0.15,818,0.44,704,1585
+Probable,9,0.02,193,0.10,123,325
+Botulism,,,,,,
+Total,39,0.07,119,0.04,43,201
+Foodborne,4,0.01,18,0.01,9,31
+Infant  †,28,2.73,87,2.95,29,144
+Other (wound & unspecified),7,0.01,14,0.01,5,26
+Brucellosis,69,0.12,43,0.02,15,127
+Campylobacteriosis,7367,12.82,33388,12.57,19365,60120
+Chancroid,S,S,S,S,S,7
+Chlamydia trachomatis  infection,212027,368.93,767700,288.98,618627,1598354
+Cholera,S,S,S,S,S,15
+Coccidioidomycosis  §,1964,8.04,3301,3.09,6564,11829
+Cryptosporidiosis,,,,,,
+Total,1137,1.98,8867,3.34,3449,13453
+Confirmed,827,1.44,5615,2.11,2195,8637
+Probable,310,0.54,3252,1.22,1254,4816
+Cyclosporiasis,106,0.19,320,0.13,111,537
+Dengue virus infections  ¶,,,,,,
+Dengue,200,0.35,498,0.19,205,903
+Dengue-like illness,8,0.01,21,0.01,11,40
+Severe dengue,S,S,S,S,S,10
+Diphtheria,—,—,—,—,—,—
+Ehrlichiosis and Anaplasmosis,,,,,,
+Anaplasma phagocytophilum  infection,52,0.09,2557,1.00,1542,4151
+Ehrlichia chaffeensis  infection,28,0.05,918,0.36,431,1377
+Ehrlichia ewingii  infection,S,S,S,S,S,22
+Undetermined ehrlichiosis/anaplasmosis,2,0.00,126,0.05,72,200
+Giardiasis,1063,2.50,8829,4.18,6418,16310
+Gonorrhea,54300,94.48,277814,104.58,136400,468514
+"Haemophilus influenzae,  invasive disease",,,,,,
+"All ages, all serotypes",289,0.50,3118,1.17,1488,4895
+Age <5 years  **,,,,,,
+Serotype b,1,0.02,19,0.13,10,30
+Non-b serotype,12,0.23,107,0.72,40,159
+Nontypeable,28,0.54,109,0.74,59,196
+Unknown serotype,35,0.68,104,0.70,48,187
+Hansen's disease,10,0.02,48,0.02,20,78
+"Hantavirus infection, non-hantavirus pulmonary syndrome",S,S,S,S,S,6
+Hantavirus pulmonary syndrome,4,0.01,23,0.01,4,31
+Hemolytic uremic syndrome post-diarrheal,36,0.06,228,0.09,43,307
+Hepatitis  ††,,,,,,
+"A, acute",293,0.51,1232,0.46,482,2007
+"B, acute",194,0.34,2272,0.86,752,3218
+"B, perinatal infection  §§",—,—,19,0.32,13,32
+"C, acute",191,0.35,1941,0.78,810,2942
+Human immunodeficiency virus diagnoses,8076,14.05,26699,10.05,—,34775
+Influenza-associated pediatric mortality  ¶¶,20,0.11,49,0.09,13,82
+Invasive pneumococcal disease,,,,,,
+All ages,1119,3.04,10584,5.19,5923,17626
+Confirmed,1119,3.04,10570,5.18,5914,17603
+Probable,S,S,S,S,S,23
+Age <5 years  **,182,0.46,666,0.30,294,1142
+Confirmed,182,5.08,663,5.36,292,1137
+Probable,S,S,S,S,S,5
+Legionellosis,397,0.69,4506,1.70,1238,6141
+Leptospirosis,7,0.02,52,0.03,19,78
+Listeriosis,87,0.15,564,0.21,135,786
+Lyme disease,,,,,,
+Total,546,0.95,13833,5.23,22050,36429
+Confirmed,365,0.64,9666,3.66,16172,26203
+Probable,181,0.32,4167,1.58,5878,10226
+Malaria,59,0.10,1492,0.56,404,1955
+Measles,,,,,,
+Total,6,0.01,44,0.02,35,85
+Indigenous,6,0.01,29,0.01,33,68
+Imported,S,S,S,S,S,17
+Meningococcal disease,,,,,,
+All serogroups,55,0.10,262,0.10,58,375
+Serogroups ACWY,17,0.03,91,0.03,18,126
+Serogroup B,6,0.01,67,0.03,13,86
+Other serogroups,S,S,S,S,S,21
+Unknown serogroup,30,0.05,88,0.03,24,142
+Mumps,596,1.04,4685,1.76,1088,6369
+Novel Influenza A virus infections,S,S,S,S,S,23
+Pertussis,2396,4.17,10358,3.90,5218,17972
+Plague,S,S,S,S,S,4
+"Poliomyelitis, paralytic",—,—,—,—,—,—
+"Poliovirus infection, nonparalytic",—,—,—,—,—,—
+Psittacosis,S,S,S,S,S,12
+Q fever,,,,,,
+Total,22,0.04,88,0.03,54,164
+Acute,20,0.03,73,0.03,39,132
+Chronic,2,0.00,15,0.01,15,32
+Rabies,,,,,,
+Human,—,—,—,—,—,—
+Rubella,S,S,S,S,S,1
+"Rubella, congenital syndrome  †",S,S,S,S,S,2
+Salmonellosis,7406,12.89,33064,12.45,13380,53850
+Severe acute respiratory syndrome-associated coronavirus disease,—,—,—,—,—,—
+Shiga toxin-producing  Escherichia coli  ***,1274,2.22,4984,1.88,1911,8169
+Shigellosis,4919,8.56,11539,4.34,4639,21097
+Smallpox,—,—,—,—,—,—
+Spotted fever rickettsiosis,,,,,,
+Total,108,0.19,2887,1.09,1274,4269
+Confirmed,4,0.01,93,0.04,57,154
+Probable,104,0.18,2794,1.06,1217,4115
+Streptococcal toxic shock syndrome,23,0.10,201,0.11,59,283
+Syphilis,,,,,,
+"Total, all stages  †††",22694,39.49,58751,22.12,6597,88042
+Congenital  †,187,18.24,407,13.82,34,628
+Primary and secondary,6193,10.78,19791,7.45,1830,27814
+Tetanus,4,0.01,20,0.01,10,34
+Toxic shock syndrome (other than Streptococcal),5,0.01,25,0.01,10,40
+Trichinellosis,1,0.00,20,0.01,5,26
+Tuberculosis,2601,4.53,6656,2.51,15,9272
+Tularemia,10,0.02,174,0.07,46,230
+Typhoid fever,40,0.07,281,0.11,55,376
+Vancomycin-intermediate  Staphylococcus aureus,5,0.01,78,0.04,25,108
+Vancomycin-resistant  Staphylococcus aureus,—,—,—,—,—,—
+Varicella morbidity,1559,3.05,5034,2.41,2360,8953
+Varicella mortality,U,U,U,U,U,U
+Vibriosis,,,,,,
+Total,127,0.22,843,0.32,303,1273
+Confirmed,125,0.22,818,0.31,298,1241
+Probable,2,0.00,25,0.01,5,32
+Viral hemorrhagic fevers,,,,,,
+Crimean-Congo hemorrhagic fever virus,—,—,—,—,—,—
+Ebola virus,—,—,—,—,—,—
+Guanarito virus,—,—,—,—,—,—
+Junin virus,—,—,—,—,—,—
+Lassa virus,—,—,—,—,—,—
+Lujo virus,—,—,—,—,—,—
+Machupo virus,—,—,—,—,—,—
+Marburg virus,—,—,—,—,—,—
+Sabia virus,—,—,—,—,—,—
+Yellow fever,S,S,S,S,S,1
+Zika virus,,,,,,
+"Zika virus disease, congenital  †,§§§",18,1.76,5,0.17,7,30
+"Zika virus disease, non-congenital",2079,3.62,1680,0.63,1373,5132
+"Zika virus infection, congenital  †,§§§",16,1.56,3,0.10,26,45
+"Zika virus infection, non-congenital",463,0.81,262,0.10,186,911

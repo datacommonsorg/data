@@ -1,0 +1,1283 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "Existence_NumChecks": "489133",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "Existence_MissingReference_medicalCondition": "663",
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "268",
+        "Existence_MissingReference_Property": "41567",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "54",
+        "StatsCheck_Data_Holes": "109"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "195"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_AgeNotStated_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "3043"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_15To24Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "4627"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_OtherRace'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "5380"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_Asian_PacificIslander'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "8758"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_GenderUnknown_NotStated_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "10451"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_1_LessYears_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "11235"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_White'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "11256"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_25To39Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "12587"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_Male_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "13441"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_5To14Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "14054"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_RaceUnknown_NotStated'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "14492"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_40To64Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "16466"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_Female_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "17336"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_AmericanIndianAndAlaskaNativeAlone'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "17580"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_EthnicityUnknown_NotStated_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "18110"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_1To4Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "18261"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_Black'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "19902"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_NotHispanic_Latino_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "20971"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_Hispanic_Latino_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "22131"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_65_MoreYears_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "215"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_AgeNotStated_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "3013"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_15To24Years_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "5170"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisB_White'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "6566"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisB_OtherRace'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "8423"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisB_Asian_PacificIslander'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "8738"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_GenderUnknown_NotStated_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "10472"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_1_LessYears_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "11277"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_25To39Years_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "11360"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisB_AmericanIndianAndAlaskaNativeAlone'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "instance_mcf_nodes.mcf",
+      "lineNumber": "12577"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_Male_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "1"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/3720e77e-1789-eb02-af71-2b6fedc514a9'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/8d75c671-9b35-3f27-819f-9307f5143466'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "23"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/68520406-9eb7-54f5-3997-670f240ae393'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "34"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/ca05c289-b2a7-719c-5f4a-3d6219c2fc19'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "45"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/6fb2d862-3ef8-cbb5-bab3-881ba7e8f38c'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "56"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/2bd0c257-3595-1fec-9d85-cdba268972ce'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "67"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/8a039b99-3946-5c7a-ac3a-fba1129b7b2a'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "78"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/0b690a36-ed58-afa5-9811-76923ab06cf6'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "89"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/8aa9927c-d935-1f4b-07f9-96551c7b9af9'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "100"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/77152704-0dba-637e-c445-dd41b43eb9c6'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "111"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/d9a83767-4478-6243-7d41-68bc9ff9c58c'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "122"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/a4cc6c71-d8c8-9084-4786-9338973ebc9c'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "133"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/9b1adcf6-e820-bf44-3082-6d21ff9d3ca0'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "144"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/486b34df-aa4d-00b3-a610-818d1b8b3dc6'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "155"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/aea81ed2-64ac-0597-798a-ae066cf78026'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "166"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/2f405626-8ad7-cd3f-2c6c-5c1c2d12520e'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "177"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/ebe62bcf-4e15-e524-73a3-bba00c0ec7a5'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "188"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/71afd231-cac7-01e4-d951-ebeeee99d6a9'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "199"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/8ed22126-4079-9cc8-9c20-8b30602f56a4'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "210"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/4008d272-86da-8d98-8981-2b8574e04236'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "221"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/d0de664b-e590-d2c2-7bc0-b0bf8ff3a0d4'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "232"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/cd2d6914-6b96-0c27-633e-9c97fedca686'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "243"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/8a4b9c64-3c46-a3d7-625a-b74a6ebb2bef'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "254"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/54b69559-983f-d48c-0273-900a282ae030'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "265"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/26df8d1c-51e1-ded8-70d5-82986ec5499f'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "276"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/19497668-b53d-4d9a-1a47-7fcb0bf5360a'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "287"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/7582b050-0bab-2332-59e1-ade0871a6b4a'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "298"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/0e700fcf-3770-355d-5e5a-b242b8fa3921'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "309"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/3cb5da64-c839-dcd4-729f-5980010a8e63'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "table_mcf_nodes_cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "320"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'keyString', node: 'NNDSWeekly/E0/c108b4c0-25e7-35f7-170b-4d54b0e4fb02'",
+    "counterKey": "Existence_MissingReference_Property"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionBrucellosis",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 6.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "93325"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 16.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "138722"
+          }]
+        }]
+      }],
+      "percentDifference": 166.67
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionSpottedFeverRickettsiosis_ConfirmedCase",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 3.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "78552"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 11.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "124818"
+          }]
+        }]
+      }],
+      "percentDifference": 266.67
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_UnknownSerotype",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 11.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "103500"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 36.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "149909"
+          }]
+        }]
+      }],
+      "percentDifference": 227.27
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionDengueDisease",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 59.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "98264"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 249.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "144200"
+          }]
+        }]
+      }],
+      "percentDifference": 322.03
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionSevereDengue",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 2.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "99078"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 6.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "145124"
+          }]
+        }]
+      }],
+      "percentDifference": 200.0
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionShigaToxinEColi",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 674.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "76638"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 1549.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "122904"
+          }]
+        }]
+      }],
+      "percentDifference": 129.82
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionWestNileVirusDisease_NeuroinvasiveDisease",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 66.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "44980"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 216.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "89893"
+          }]
+        }]
+      }],
+      "percentDifference": 227.27
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionMeasles_ImportedCase",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "26170"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 8.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "70357"
+          }]
+        }]
+      }],
+      "percentDifference": 700.0
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_SerogroupB",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 8.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "27380"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 17.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "71622"
+          }]
+        }]
+      }],
+      "percentDifference": 112.5
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionMeasles_IndigenousCase",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 3.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "70170"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 200.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "116183"
+          }]
+        }]
+      }],
+      "percentDifference": 6566.67
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionMeasles",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 11.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "69928"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 226.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "115798"
+          }]
+        }]
+      }],
+      "percentDifference": 1954.55
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionToxicShockSyndromExceptStreptococcal",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 6.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "128536"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 13.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "175847"
+          }]
+        }]
+      }],
+      "percentDifference": 116.67
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionPowassanVirusDisease_NeuroinvasiveDisease",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "1057"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 13.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "44672"
+          }]
+        }]
+      }],
+      "percentDifference": 1200.0
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionStreptococcalToxicShockSyndrome",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 16.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "34926"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 33.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "79652"
+          }]
+        }]
+      }],
+      "percentDifference": 106.25
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionEhrlichiaEwingiiInfection",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionChickenpox_PatientDeceased",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2018, 2019"
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionEasternEquineEncephalitis_NeuroinvasiveDisease",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "89046"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 4.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "134696"
+          }]
+        }]
+      }],
+      "percentDifference": 300.0
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2018, 2019"
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera_ProbableCase",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 7.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "41845"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 52.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "86582"
+          }]
+        }]
+      }],
+      "percentDifference": 642.86
+    }]
+  }, {
+    "placeDcid": "usc/MiddleAtlanticDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionPowassanVirusDisease_NonNeuroinvasiveDisease",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "usc/PacificDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_SerotypeB",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "usc/PacificDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionDengueLikeIllness",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 2.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "99034"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 5.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "145058"
+          }]
+        }]
+      }],
+      "percentDifference": 150.0
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2018, 2019"
+    }]
+  }, {
+    "placeDcid": "usc/PacificDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionTrichinellosis",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "usc/PacificDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionMeasles_IndigenousCase",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 21.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "116359"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 160.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "163604"
+          }]
+        }]
+      }],
+      "percentDifference": 661.9
+    }]
+  }, {
+    "placeDcid": "usc/PacificDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionHumanMonocyticEhrlichiosis",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "usc/PacificDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionQFever_ChronicCondition",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 1.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "31120"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 9.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "75582"
+          }]
+        }]
+      }],
+      "percentDifference": 800.0
+    }]
+  }, {
+    "placeDcid": "usc/PacificDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera_ProbableCase",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 4.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "42032"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 94.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "87022"
+          }]
+        }]
+      }],
+      "percentDifference": 2250.0
+    }]
+  }, {
+    "placeDcid": "usc/PacificDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionInfluenza_PediatricMortality",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 4.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "109715"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 25.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "155618"
+          }]
+        }]
+      }],
+      "percentDifference": 525.0
+    }]
+  }, {
+    "placeDcid": "usc/PacificDivision",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionMumps",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": 280.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "28931"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": 2033.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "73217"
+          }]
+        }]
+      }],
+      "percentDifference": 626.07
+    }]
+  }, {
+    "placeDcid": "geoId/49",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionTyphoidFever",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 2.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "130406"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": 7.0,
+          "locations": [{
+            "file": "table_mcf_nodes_cdc_nndss_annual_by_reporting_area_tables.mcf",
+            "lineNumber": "169445"
+          }]
+        }]
+      }],
+      "percentDifference": 250.0
+    }, {
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2018, 2019"
+    }]
+  }, {
+    "placeDcid": "geoId/49",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionChikungunya",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2018, 2019"
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_FULL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

@@ -1,0 +1,618 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "25138",
+        "NumPVSuccesses": "226242",
+        "Existence_NumChecks": "260804",
+        "NumNodeSuccesses": "25138",
+        "Existence_NumDcCalls": "2"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "Existence_MissingReference_medicalCondition": "581",
+        "Existence_MissingReference_race": "99",
+        "StatsCheck_Data_Holes": "60"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "3450"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_WhiteAlone'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4216"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_Male_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4703"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_OtherRace'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4898"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_Female_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "7104"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_RaceUnknown_NotStated'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "7854"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_AmericanIndianAndAlaskaNativeAlone'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "7936"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_Asian_PacificIslander'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "9645"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_40To64Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "10043"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_GenderUnknown_NotStated_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "10593"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_1To4Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "10853"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_5To14Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "12819"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_25To39Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "13049"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_Black_AfricanAmericanAlone'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "13418"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_Hispanic_Latino_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "13510"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_NotHispanic_Latino_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "13780"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_AgeNotStated_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "15357"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_EthnicityUnknown_NotStated_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "15618"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_15To24Years_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "16718"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_1_LessYears_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "17747"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisA', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_65_MoreYears_ConditionAcuteCondition_HepatitisA'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "260"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_1_LessYears_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "1493"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisB_Black_AfricanAmericanAlone'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "3024"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_Hispanic_Latino_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4234"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisB_WhiteAlone'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4860"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_AgeNotStated_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "5048"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisB_Asian_PacificIslander'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "5513"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_Male_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "6945"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_40To64Years_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "7293"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_NotHispanic_Latino_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "8879"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'AcuteCondition__HepatitisB', property: 'medicalCondition', node: 'dcid:Count_MedicalConditionIncident_1To4Years_ConditionAcuteCondition_HepatitisB'",
+    "counterKey": "Existence_MissingReference_medicalCondition"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "38"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionMalaria_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "197"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionLegionnairesDisease_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "501"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionTularemia_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "650"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionListeriosis_ConfirmedCase_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "886"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionGonorrhea_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "914"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_OtherRace_UnknownSerogroups'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "1335"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionMeasles_IndigenousCase_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "1643"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionStreptococcusPneumonia_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "1792"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_5_LessYears_ConditionStreptococcusPneumonia_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "2753"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionShigellosis_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "2762"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_QFever_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "3218"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionHumanMonocyticEhrlichiosis_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "3227"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisC_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "3302"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionChikungunya_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "3523"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera_ConfirmedCase_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "3657"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionBabesiosis_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4437"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionInfluenza_PediatricMortality_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4530"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionVancomycinIntermediateStaphylococcusAureus_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4676"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionChlamydia_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4703"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisA_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "4850"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionAcuteCondition_HepatitisC_ProbableCase_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "5112"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionNeuroinvasiveDisease_LaCrosseVirusDisease_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "5410"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera_ProbableCase_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "5448"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionListeriosis_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "5748"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionNonCongenitalDisease_ZikaVirusInfection_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "6117"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionBrucellosis_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "6463"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_5_LessYears_ConditionInvasiveDisease_HaemophilusInfluenzae_OtherRace_SerotypeB'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "6566"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionQFever_OtherRace'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "6695"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_OtherRace_ACWYSerogroup'",
+    "counterKey": "Existence_MissingReference_race"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cdc_nndss_annual_by_demographics.mcf",
+      "lineNumber": "6973"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'CDC_OtherRace', property: 'race', node: 'dcid:Count_MedicalConditionIncident_5_LessYears_ConditionInvasiveDisease_HaemophilusInfluenzae_OtherRace_UnknownSerotype'",
+    "counterKey": "Existence_MissingReference_race"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_AmericanIndianAndAlaskaNativeAlone",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2018, 2019"
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionTetanus_WhiteAlone",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_25To39Years_ConditionNeuroinvasiveDisease_EasternEquineEncephalitis",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_NotHispanic_Latino_ConditionTetanus",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_AgeNotStated_ConditionInfantBotulism",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionDengueLikeIllness_OtherRace",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2018, 2019"
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_AgeNotStated_ConditionTyphoidFever",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_EthnicityUnknown_NotStated_ConditionTetanus",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_AgeNotStated_ConditionBotulism",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2017, 2019"
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_MedicalConditionIncident_ConditionWoundBotulism_RaceUnknown_NotStated",
+    "measurementMethod": "CDC_NNDSS_Diseases_AnnualTables",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 2016, 2018, 2019"
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_FULL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

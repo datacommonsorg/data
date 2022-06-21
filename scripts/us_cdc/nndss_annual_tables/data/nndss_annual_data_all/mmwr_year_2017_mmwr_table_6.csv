@@ -1,0 +1,162 @@
+Disease,American Indian or  Alaska Native,American Indian or  Alaska Native,Asian or Pacific  Islander,Asian or Pacific  Islander,Black,Black,White,White,Other Race,Race not stated,Total
+Disease,No.,Rate,No.,Rate,No.,Rate,No.,Rate,No.,No.,No.
+Anthrax,—,—,—,—,—,—,—,—,—,—,—
+Arboviral diseases,,,,,,,,,,,
+Chikungunya virus disease,1,0.02,78,0.37,3,0.01,21,0.01,11,42,156
+Eastern equine encephalitis virus disease,,,,,,,,,,,
+Neuroinvasive,S,S,S,S,S,S,S,S,S,S,5
+Non-neuroinvasive,—,—,—,—,—,—,—,—,—,—,—
+Jamestown Canyon virus disease,,,,,,,,,,,
+Neuroinvasive,1,0.02,—,—,—,—,38,0.01,3,16,58
+Non-neuroinvasive,S,S,S,S,S,S,S,S,S,S,17
+La Crosse virus disease,,,,,,,,,,,
+Neuroinvasive,—,—,1,0.00,—,—,56,0.02,1,5,63
+Non-neuroinvasive,—,—,—,—,—,—,—,—,—,—,—
+Powassan virus disease,,,,,,,,,,,
+Neuroinvasive,—,—,—,—,—,—,18,0.01,—,15,33
+Non-neuroinvasive,S,S,S,S,S,S,S,S,S,S,1
+St. Louis encephalitis virus disease,,,,,,,,,,,
+Neuroinvasive,S,S,S,S,S,S,S,S,S,S,6
+Non-neuroinvasive,S,S,S,S,S,S,S,S,S,S,5
+West Nile virus disease,,,,,,,,,,,
+Neuroinvasive,11,0.23,21,0.10,99,0.22,1064,0.42,62,168,1425
+Non-neuroinvasive,6,0.13,9,0.04,21,0.05,498,0.20,29,109,672
+Western equine encephalitis virus disease,,,,,,,,,,,
+Neuroinvasive,—,—,—,—,—,—,—,—,—,—,—
+Non-neuroinvasive,—,—,—,—,—,—,—,—,—,—,—
+Babesiosis,,,,,,,,,,,
+Total,10,0.35,59,0.35,39,0.12,1511,0.76,98,651,2368
+Confirmed,7,0.24,48,0.28,34,0.10,1264,0.64,94,547,1994
+Probable,3,0.10,11,0.06,5,0.01,247,0.12,4,104,374
+Botulism,,,,,,,,,,,
+Total,4,0.09,15,0.07,5,0.01,105,0.04,7,41,177
+Foodborne,S,S,S,S,S,S,S,S,S,S,19
+Infant  †,—,—,11,4.48,5,0.74,89,3.03,4,28,137
+Other (wound & unspecified),S,S,S,S,S,S,S,S,S,S,21
+Brucellosis,2,0.04,6,0.03,7,0.02,84,0.03,6,35,140
+Campylobacteriosis,574,12.24,1859,8.76,3391,7.39,41482,16.34,4505,15726,67537
+Chancroid  §,S,S,S,S,S,S,S,S,S,S,7
+Chlamydia trachomatis  infection  §,19770,421.62,27956,131.80,475496,1036.30,552963,217.76,112699,519685,1708569
+Cholera,S,S,S,S,S,S,S,S,S,S,10
+Coccidioidomycosis  ¶,203,8.46,504,5.08,489,3.46,4587,4.37,1071,7510,14364
+Cryptosporidiosis,,,,,,,,,,,
+Total,79,1.68,164,0.77,986,2.15,7937,3.13,488,1760,11414
+Confirmed,62,1.32,128,0.60,751,1.64,5447,2.15,343,1312,8043
+Probable,17,0.36,36,0.17,235,0.51,2490,0.98,145,448,3371
+Cyclosporiasis,1,0.02,21,0.10,44,0.11,826,0.36,44,258,1194
+Dengue virus infections  **,,,,,,,,,,,
+Dengue,1,0.02,145,0.68,15,0.03,130,0.05,22,124,437
+Dengue-like illness,S,S,S,S,S,S,S,S,S,S,8
+Severe dengue,S,S,S,S,S,S,S,S,S,S,9
+Diphtheria,—,—,—,—,—,—,—,—,—,—,—
+Ehrlichiosis and Anaplasmosis,,,,,,,,,,,
+Anaplasma phagocytophilum  infection,33,0.79,41,0.21,26,0.06,3921,1.60,199,1542,5762
+Ehrlichia chaffeensis  infection,11,0.26,19,0.10,37,0.08,1123,0.46,37,415,1642
+Ehrlichia ewingii  infection,—,—,—,—,—,—,40,0.02,1,4,45
+Undetermined ehrlichiosis/anaplasmosis,5,0.12,—,—,2,0.00,187,0.08,21,54,269
+Giardiasis,76,2.10,427,2.35,1202,3.46,7740,3.89,864,4884,15193
+Gonorrhea  §,7661,163.38,7541,35.55,221377,482.47,169576,66.78,31460,117993,555608
+"Haemophilus influenzae,  invasive disease",,,,,,,,,,,
+"All ages, all serotypes",70,1.49,95,0.45,843,1.84,3552,1.40,142,846,5548
+Age <5 years  ††,,,,,,,,,,,
+Serotype b,3,0.78,—,—,3,0.09,20,0.13,1,6,33
+Non-b serotype,15,3.91,3,0.23,49,1.44,92,0.62,8,22,189
+Nontypeable,4,1.04,7,0.54,43,1.26,104,0.70,12,30,200
+Unknown serotype,4,1.04,10,0.78,48,1.41,98,0.66,17,26,203
+Hansen's disease,—,—,19,0.10,7,0.02,40,0.02,4,24,94
+"Hantavirus infection, non-hantavirus pulmonary syndrome",S,S,S,S,S,S,S,S,S,S,2
+Hantavirus pulmonary syndrome,6,0.13,—,—,—,—,17,0.01,1,9,33
+Hemolytic uremic syndrome post-diarrheal,3,0.07,11,0.05,13,0.03,261,0.11,17,33,338
+Hepatitis  §§,,,,,,,,,,,
+"A, acute",13,0.28,123,0.58,306,0.67,2310,0.91,184,429,3365
+"B, acute",19,0.41,67,0.32,415,0.91,2316,0.92,146,446,3409
+"B, perinatal infection  ¶¶",—,—,15,3.01,2,0.15,6,0.10,1,7,31
+"C, acute",81,1.97,27,0.13,244,0.56,3136,1.30,189,548,4225
+Confirmed,66,1.61,24,0.12,211,0.48,2347,0.97,151,414,3213
+Probable,15,0.37,3,0.01,33,0.08,789,0.33,38,134,1012
+Human immunodeficiency virus diagnoses,178,3.80,870,4.10,14956,32.60,9292,3.66,8642,—,33938
+Influenza-associated pediatric mortality  ***,1,0.07,5,0.11,31,0.25,67,0.12,3,19,126
+Invasive pneumococcal disease  †††,,,,,,,,,,,
+All ages,381,13.06,247,2.01,3289,8.72,11753,6.19,500,3610,19780
+Confirmed,380,13.03,245,1.99,3262,8.65,11673,6.15,492,3568,19620
+Probable,1,0.03,2,0.02,27,0.07,80,0.04,8,42,160
+Age <5 years  ††,39,1.13,44,0.33,264,0.66,639,0.31,37,211,1234
+Confirmed,39,13.51,43,5.14,260,8.68,632,5.34,37,209,1220
+Probable,—,—,1,0.12,4,0.13,7,0.06,—,2,14
+Legionellosis,28,0.60,103,0.49,1579,3.44,4706,1.85,215,827,7458
+Leptospirosis,1,0.03,9,0.05,4,0.01,32,0.02,9,17,72
+Listeriosis,3,0.06,81,0.38,96,0.21,581,0.23,35,91,887
+Lyme disease,,,,,,,,,,,
+Total,109,2.33,361,1.78,390,0.85,23641,9.33,961,17281,42743
+Confirmed,66,1.41,238,1.17,256,0.56,16153,6.37,741,12059,29513
+Probable,43,0.92,123,0.61,134,0.29,7488,2.95,220,5222,13230
+Malaria,4,0.09,121,0.57,1335,2.91,244,0.10,71,281,2056
+Measles,,,,,,,,,,,
+Total,—,—,10,0.05,62,0.14,34,0.01,3,11,120
+Indigenous,—,—,3,0.01,62,0.14,26,0.01,2,6,99
+Imported,—,—,7,0.03,—,—,8,0.00,1,5,21
+Meningococcal disease,,,,,,,,,,,
+All serogroups,—,—,9,0.04,52,0.11,222,0.09,15,55,353
+Serogroups ACWY,—,—,3,0.01,21,0.05,68,0.03,3,12,107
+Serogroup B,—,—,1,0.00,10,0.02,65,0.03,3,11,90
+Other serogroups,—,—,—,—,9,0.02,9,0.00,2,5,25
+Unknown serogroup,—,—,5,0.02,12,0.03,80,0.03,7,27,131
+Mumps,56,1.19,1599,7.54,409,0.89,2530,1.00,312,1203,6109
+Novel Influenza A virus infections,—,—,—,—,2,0.00,61,0.02,—,3,66
+Pertussis,122,2.60,337,1.59,987,2.15,13031,5.13,721,3777,18975
+Plague,S,S,S,S,S,S,S,S,S,S,5
+"Poliomyelitis, paralytic",—,—,—,—,—,—,—,—,—,—,—
+"Poliovirus infection, nonparalytic",—,—,—,—,—,—,—,—,—,—,—
+Psittacosis,S,S,S,S,S,S,S,S,S,S,5
+Q fever,,,,,,,,,,,
+Total,—,—,6,0.03,4,0.01,127,0.05,10,46,193
+Acute,—,—,5,0.02,2,0.00,104,0.04,9,33,153
+Chronic,—,—,1,0.00,2,0.00,23,0.01,1,13,40
+Rabies,,,,,,,,,,,
+Human,S,S,S,S,S,S,S,S,S,S,2
+Rubella,S,S,S,S,S,S,S,S,S,S,7
+"Rubella, congenital syndrome  †",S,S,S,S,S,S,S,S,S,S,5
+Salmonellosis,399,8.51,1845,8.70,4634,10.10,34011,13.39,3318,10078,54285
+Severe acute respiratory syndrome-associated coronavirus disease,—,—,—,—,—,—,—,—,—,—,—
+Shiga toxin-producing  Escherichia coli  §§§,64,1.36,226,1.07,399,0.87,5854,2.31,419,1710,8672
+Shigellosis,196,4.18,369,1.74,3006,6.55,7842,3.09,1103,2396,14912
+Smallpox,—,—,—,—,—,—,—,—,—,—,—
+Spotted fever rickettsiosis,,,,,,,,,,,
+Total,122,2.68,31,0.15,134,0.29,4298,1.70,141,1522,6248
+Confirmed,5,0.11,—,—,5,0.01,108,0.04,3,55,176
+Probable,117,2.57,31,0.15,129,0.28,4190,1.66,138,1467,6072
+Streptococcal toxic shock syndrome,—,—,9,0.08,61,0.19,250,0.15,16,36,372
+Syphilis,,,,,,,,,,,
+"Total, all stages  §",857,18.28,2762,13.02,33974,74.04,48505,19.10,7617,7852,101567
+Congenital  †,14,18.34,14,5.70,359,53.10,474,16.11,22,35,918
+Primary and secondary  §,297,6.33,885,4.17,9869,21.51,15525,6.11,2086,1982,30644
+Tetanus,—,—,—,—,3,0.01,22,0.01,—,8,33
+Toxic shock syndrome (other than Streptococcal),—,—,1,0.01,3,0.01,14,0.01,1,11,30
+Trichinellosis,S,S,S,S,S,S,S,S,S,S,15
+Tuberculosis,110,2.35,3273,15.43,1958,4.27,3453,1.36,157,154,9105
+Tularemia,24,0.51,3,0.01,6,0.01,155,0.06,6,45,239
+Typhoid fever,4,0.09,196,0.92,54,0.12,66,0.03,47,52,419
+Vancomycin-intermediate  Staphylococcus aureus,—,—,—,—,25,0.06,63,0.03,7,14,109
+Vancomycin-resistant  Staphylococcus aureus,S,S,S,S,S,S,S,S,S,S,3
+Varicella morbidity,63,1.77,508,2.80,557,1.47,5454,2.64,393,1800,8775
+Varicella mortality,U,U,U,U,U,U,U,U,U,U,U
+Vibriosis,,,,,,,,,,,
+Total,15,0.32,116,0.55,137,0.30,1386,0.56,101,330,2085
+Confirmed,11,0.24,82,0.39,91,0.20,977,0.39,85,251,1497
+Probable,4,0.09,34,0.16,46,0.10,409,0.16,16,79,588
+Viral hemorrhagic fevers,,,,,,,,,,,
+Crimean-Congo hemorrhagic fever virus,—,—,—,—,—,—,—,—,—,—,—
+Ebola virus,—,—,—,—,—,—,—,—,—,—,—
+Guanarito virus,—,—,—,—,—,—,—,—,—,—,—
+Junin virus,—,—,—,—,—,—,—,—,—,—,—
+Lassa virus,—,—,—,—,—,—,—,—,—,—,—
+Lujo virus,—,—,—,—,—,—,—,—,—,—,—
+Machupo virus,—,—,—,—,—,—,—,—,—,—,—
+Marburg virus,—,—,—,—,—,—,—,—,—,—,—
+Sabia virus,—,—,—,—,—,—,—,—,—,—,—
+Yellow fever,—,—,—,—,—,—,—,—,—,—,—
+Zika virus,,,,,,,,,,,
+"Zika virus disease, congenital  †,¶¶¶",S,S,S,S,S,S,S,S,S,S,22
+"Zika virus disease, non-congenital",—,—,12,0.06,21,0.05,290,0.11,46,128,497
+"Zika virus infection, congenital  †,¶¶¶",S,S,S,S,S,S,S,S,S,S,17
+"Zika virus infection, non-congenital",1,0.02,27,0.13,146,0.32,189,0.07,101,177,641

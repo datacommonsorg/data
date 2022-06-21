@@ -1,0 +1,2133 @@
+Node: dcid:Count_MedicalConditionIncident_ConditionChikungunya
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chikungunya
+name: "Count of Chikungunya virus incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChikungunya_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chikungunya
+residentStatus: dcs:USResident
+name: "Count of Chikungunya virus incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionEasternEquineEncephalitis_NeuroinvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:EasternEquineEncephalitis__NeuroinvasiveDisease
+name: "Count of Eastern equine encephalitis, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionEasternEquineEncephalitis_NeuroinvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:EasternEquineEncephalitis__NeuroinvasiveDisease
+residentStatus: dcs:USResident
+name: "Count of Eastern equine encephalitis, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionJamestownCanyonVirusDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:JamestownCanyonVirusDisease
+name: "Count of Jamestown Canyon virus s:Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionJamestownCanyonVirusDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:JamestownCanyonVirusDisease
+residentStatus: dcs:USResident
+name: "Count of Jamestown Canyon virus s:Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionJamestownCanyonVirusDisease_NonNeuroinvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:JamestownCanyonVirusDisease__NonNeuroinvasiveDisease
+name: "Count of Jamestown Canyon virus s, Non-neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionJamestownCanyonVirusDisease_NonNeuroinvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:JamestownCanyonVirusDisease__NonNeuroinvasiveDisease
+residentStatus: dcs:USResident
+name: "Count of Jamestown Canyon virus s, Non-neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLaCrosseVirusDisease_NeuroinvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LaCrosseVirusDisease__NeuroinvasiveDisease
+name: "Count of La Crosse virus, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLaCrosseVirusDisease_NeuroinvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LaCrosseVirusDisease__NeuroinvasiveDisease
+residentStatus: dcs:USResident
+name: "Count of La Crosse virus, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLaCrosseVirusDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LaCrosseVirusDisease
+name: "Count of La Crosse virus, Non-neurovasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLaCrosseVirusDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LaCrosseVirusDisease
+residentStatus: dcs:USResident
+name: "Count of La Crosse virus, Non-neurovasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPowassanVirusDisease_NeuroinvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:PowassanVirusDisease__NeuroinvasiveDisease
+name: "Count of Powassan virus, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPowassanVirusDisease_NeuroinvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:PowassanVirusDisease__NeuroinvasiveDisease
+residentStatus: dcs:USResident
+name: "Count of Powassan virus, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPowassanVirusDisease_NonNeuroinvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:PowassanVirusDisease__NonNeuroinvasiveDisease
+name: "Count of Powassan virus, Non-neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPowassanVirusDisease_NonNeuroinvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:PowassanVirusDisease__NonNeuroinvasiveDisease
+residentStatus: dcs:USResident
+name: "Count of Powassan virus, Non-neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStLouisEncephalitis_NeuroinvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StLouisEncephalitis__NeuroinvasiveDisease
+name: "Count of St. Louis encephalitis virus, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStLouisEncephalitis_NeuroinvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StLouisEncephalitis__NeuroinvasiveDisease
+residentStatus: dcs:USResident
+name: "Count of St. Louis encephalitis virus, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStLouisEncephalitis_NonNeuroinvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StLouisEncephalitis__NonNeuroinvasiveDisease
+name: "Count of St. Louis encephalitis virus, Non-neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStLouisEncephalitis_NonNeuroinvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StLouisEncephalitis__NonNeuroinvasiveDisease
+residentStatus: dcs:USResident
+name: "Count of St. Louis encephalitis virus, Non-neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionWestNileVirusDisease_NeuroinvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:WestNileVirusDisease__NeuroinvasiveDisease
+name: "Count of West Nile virus, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionWestNileVirusDisease_NeuroinvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:WestNileVirusDisease__NeuroinvasiveDisease
+residentStatus: dcs:USResident
+name: "Count of West Nile virus, Neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionWestNileVirusDisease_NonNeuroinvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:WestNileVirusDisease__NonNeuroinvasiveDisease
+name: "Count of West Nile virus, Non-neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionWestNileVirusDisease_NonNeuroinvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:WestNileVirusDisease__NonNeuroinvasiveDisease
+residentStatus: dcs:USResident
+name: "Count of West Nile virus, Non-neuroinvasive incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBabesiosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Babesiosis
+name: "Count of Babesiosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBabesiosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Babesiosis
+residentStatus: dcs:USResident
+name: "Count of Babesiosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBabesiosis_ConfirmedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Babesiosis
+medicalStatus: dcs:ConfirmedCase
+name: "Count of Babesiosis, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBabesiosis_ConfirmedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Babesiosis
+medicalStatus: dcs:ConfirmedCase
+residentStatus: dcs:USResident
+name: "Count of Babesiosis, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBabesiosis_ProbableCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Babesiosis
+medicalStatus: dcs:ProbableCase
+name: "Count of Babesiosis, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBabesiosis_ProbableCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Babesiosis
+medicalStatus: dcs:ProbableCase
+residentStatus: dcs:USResident
+name: "Count of Babesiosis, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBotulism
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Botulism
+name: "Count of Botulism incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBotulism_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Botulism
+residentStatus: dcs:USResident
+name: "Count of Botulism incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionFoodborneBotulism
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:FoodborneBotulism
+name: "Count of Foodborne Botulism incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionFoodborneBotulism_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:FoodborneBotulism
+residentStatus: dcs:USResident
+name: "Count of Foodborne Botulism incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionInfantBotulism
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:InfantBotulism
+name: "Count of Infant Botulism incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionInfantBotulism_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:InfantBotulism
+residentStatus: dcs:USResident
+name: "Count of Infant Botulism incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionWoundBotulism
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:WoundBotulism
+name: "Count of Other wound & unspecified Botulism incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionWoundBotulism_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:WoundBotulism
+residentStatus: dcs:USResident
+name: "Count of Other wound & unspecified Botulism incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBrucellosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Brucellosis
+name: "Count of Brucellosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionBrucellosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Brucellosis
+residentStatus: dcs:USResident
+name: "Count of Brucellosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCampylobacteriosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Campylobacteriosis
+name: "Count of Campylobacteriosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCampylobacteriosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Campylobacteriosis
+residentStatus: dcs:USResident
+name: "Count of Campylobacteriosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChancroid
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chancroid
+name: "Count of Chancroid incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChancroid_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chancroid
+residentStatus: dcs:USResident
+name: "Count of Chancroid incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChlamydia
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chlamydia
+name: "Count of Chlamydia trachomatis infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChlamydia_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chlamydia
+residentStatus: dcs:USResident
+name: "Count of Chlamydia trachomatis infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCholera
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cholera
+name: "Count of Cholera incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCholera_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cholera
+residentStatus: dcs:USResident
+name: "Count of Cholera incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCoccidioidomycosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Coccidioidomycosis
+name: "Count of Coccidioidomycosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCoccidioidomycosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Coccidioidomycosis
+residentStatus: dcs:USResident
+name: "Count of Coccidioidomycosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCryptosporidiosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cryptosporidiosis
+name: "Count of Cryptosporidiosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCryptosporidiosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cryptosporidiosis
+residentStatus: dcs:USResident
+name: "Count of Cryptosporidiosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCryptosporidiosis_ConfirmedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cryptosporidiosis
+medicalStatus: dcs:ConfirmedCase
+name: "Count of Cryptosporidiosis, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCryptosporidiosis_ConfirmedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cryptosporidiosis
+medicalStatus: dcs:ConfirmedCase
+residentStatus: dcs:USResident
+name: "Count of Cryptosporidiosis, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCryptosporidiosis_ProbableCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cryptosporidiosis
+medicalStatus: dcs:ProbableCase
+name: "Count of Cryptosporidiosis, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCryptosporidiosis_ProbableCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cryptosporidiosis
+medicalStatus: dcs:ProbableCase
+residentStatus: dcs:USResident
+name: "Count of Cryptosporidiosis, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCyclosporiasis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cyclosporiasis
+name: "Count of Cyclosporiasis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCyclosporiasis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Cyclosporiasis
+residentStatus: dcs:USResident
+name: "Count of Cyclosporiasis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionDengueDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:DengueDisease
+name: "Count of Dengue incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionDengueDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:DengueDisease
+residentStatus: dcs:USResident
+name: "Count of Dengue incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionDengueLikeIllness
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:DengueLikeIllness
+name: "Count of Dengue-like illness incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionDengueLikeIllness_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:DengueLikeIllness
+residentStatus: dcs:USResident
+name: "Count of Dengue-like illness incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSevereDengue
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SevereDengue
+name: "Count of Severe dengue incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSevereDengue_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SevereDengue
+residentStatus: dcs:USResident
+name: "Count of Severe dengue incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHumanGranulocyticAnaplasmosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HumanGranulocyticAnaplasmosis
+name: "Count of Anaplasma phagocytophilum infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHumanGranulocyticAnaplasmosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HumanGranulocyticAnaplasmosis
+residentStatus: dcs:USResident
+name: "Count of Anaplasma phagocytophilum infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHumanMonocyticEhrlichiosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HumanMonocyticEhrlichiosis
+name: "Count of Ehrlichia chaffeensis infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHumanMonocyticEhrlichiosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HumanMonocyticEhrlichiosis
+residentStatus: dcs:USResident
+name: "Count of Ehrlichia chaffeensis infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionEhrlichiaEwingiiInfection
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:EhrlichiaEwingiiInfection
+name: "Count of Ehrlichia ewingii infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionEhrlichiaEwingiiInfection_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:EhrlichiaEwingiiInfection
+residentStatus: dcs:USResident
+name: "Count of Ehrlichia ewingii infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionEhrlichiosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Ehrlichiosis
+name: "Count of Undetermined ehrlichiosis/anaplasmosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionEhrlichiosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Ehrlichiosis
+residentStatus: dcs:USResident
+name: "Count of Undetermined ehrlichiosis/anaplasmosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionGiardiasis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Giardiasis
+name: "Count of Giardiasis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionGiardiasis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Giardiasis
+residentStatus: dcs:USResident
+name: "Count of Giardiasis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionGonorrhea
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Gonorrhea
+name: "Count of Gonorrhea incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionGonorrhea_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Gonorrhea
+residentStatus: dcs:USResident
+name: "Count of Gonorrhea incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHaemophilusInfluenzae_InvasiveDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+#serotype: dcs:AllSerotypes
+name: "Count of Haemophilus influenzae, invasive, All ages, all Serotypes incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHaemophilusInfluenzae_InvasiveDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+#serotype: dcs:AllSerotypes
+residentStatus: dcs:USResident
+name: "Count of Haemophilus influenzae, invasive, All ages, all Serotypes incidents"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_SerotypeB
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+age: [- 5 Years]
+serotype: dcs:SerotypeB
+name: "Count of Haemophilus influenzae, invasive, Serotype B incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_USResident_SerotypeB
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+age: [- 5 Years]
+serotype: dcs:SerotypeB
+residentStatus: dcs:USResident
+name: "Count of Haemophilus influenzae, invasive, Serotype B incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_OtherSerogroups
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+age: [- 5 Years]
+serogroup: dcs:OtherSerogroups
+name: "Count of Haemophilus influenzae, invasive, Nontypeable incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_USResident_OtherSerogroups
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+age: [- 5 Years]
+serogroup: dcs:OtherSerogroups
+residentStatus: dcs:USResident
+name: "Count of Haemophilus influenzae, invasive, Nontypeable incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_UnknownSerotype
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+age: [- 5 Years]
+serotype: dcs:UnknownSerotype
+name: "Count of Haemophilus influenzae, invasive, Unknown Serotype incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_USResident_UnknownSerotype
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+age: [- 5 Years]
+serotype: dcs:UnknownSerotype
+residentStatus: dcs:USResident
+name: "Count of Haemophilus influenzae, invasive, Unknown Serotype incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_NonSerotypeB
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+age: [- 5 Years]
+serotype: dcs:NonSerotypeB
+name: "Count of Haemophilus influenzae, invasive, Non-B Serotype incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionHaemophilusInfluenzae_InvasiveDisease_USResident_NonSerotypeB
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusInfluenzae__InvasiveDisease
+age: [- 5 Years]
+serotype: dcs:NonSerotypeB
+residentStatus: dcs:USResident
+name: "Count of Haemophilus influenzae, invasive, Non-B Serotype incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLeprosy
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Leprosy
+name: "Count of Leprosy incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLeprosy_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Leprosy
+residentStatus: dcs:USResident
+name: "Count of Leprosy incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHaemophilusMeningitis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusMeningitis
+name: "Count of Non-hantavirus pulmonary syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHaemophilusMeningitis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HaemophilusMeningitis
+residentStatus: dcs:USResident
+name: "Count of Non-hantavirus pulmonary syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHantavirusPulmonarySyndrome
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HantavirusPulmonarySyndrome
+name: "Count of Hantavirus pulmonary syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHantavirusPulmonarySyndrome_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HantavirusPulmonarySyndrome
+residentStatus: dcs:USResident
+name: "Count of Hantavirus pulmonary syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHemolyticUremicSyndrome_PostDiarrheal
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HemolyticUremicSyndrome__PostDiarrheal
+name: "Count of Hemolytic uremic syndrome, post-diarrheal incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHemolyticUremicSyndrome_PostDiarrheal_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HemolyticUremicSyndrome__PostDiarrheal
+residentStatus: dcs:USResident
+name: "Count of Hemolytic uremic syndrome, post-diarrheal incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisA_AcuteCondition
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisA__AcuteCondition
+name: "Count of Hepatitis A, Acute incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisA_AcuteCondition_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisA__AcuteCondition
+residentStatus: dcs:USResident
+name: "Count of Hepatitis A, Acute incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisB_AcuteCondition
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisB__AcuteCondition
+name: "Count of Hepatitis B, Acute incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisB_AcuteCondition_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisB__AcuteCondition
+residentStatus: dcs:USResident
+name: "Count of Hepatitis B, Acute incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisB_PerinatalInfection
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisB__PerinatalInfection
+name: "Count of Hepatitis B, Perinatal infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisB_PerinatalInfection_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisB__PerinatalInfection
+residentStatus: dcs:USResident
+name: "Count of Hepatitis B, Perinatal infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisC_AcuteCondition
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisC__AcuteCondition
+name: "Count of Hepatitis C, Acute incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisC_AcuteCondition_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisC__AcuteCondition
+residentStatus: dcs:USResident
+name: "Count of Hepatitis C, Acute incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHIVAIDS
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HIV_AIDS
+name: "Count of HIV/Acquired Immune Deficiency Syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHIVAIDS_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HIV_AIDS
+residentStatus: dcs:USResident
+name: "Count of HIV/Acquired Immune Deficiency Syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionInfluenza_PediatricMortality
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Influenza
+medicalStatus: dcs:PediatricMortality
+name: "Count of Influenza, pediatric mortality incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionInfluenza_PediatricMortality_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Influenza
+medicalStatus: dcs:PediatricMortality
+residentStatus: dcs:USResident
+name: "Count of Influenza, pediatric mortality incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStreptococcusPneumonia_ConfirmedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcusPneumonia
+medicalStatus: dcs:ConfirmedCase
+name: "Count of Invasive pneumococcal, All ages, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStreptococcusPneumonia_ConfirmedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcusPneumonia
+medicalStatus: dcs:ConfirmedCase
+residentStatus: dcs:USResident
+name: "Count of Invasive pneumococcal, All ages, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStreptococcusPneumonia
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcusPneumonia
+name: "Count of Invasive pneumococcal, All ages:Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStreptococcusPneumonia_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcusPneumonia
+residentStatus: dcs:USResident
+name: "Count of Invasive pneumococcal, All ages:Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionStreptococcusPneumonia_ConfirmedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcusPneumonia
+age: [- 5 Years]
+medicalStatus: dcs:ConfirmedCase
+name: "Count of Invasive pneumococcal, Confirmed incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionStreptococcusPneumonia_ConfirmedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcusPneumonia
+age: [- 5 Years]
+medicalStatus: dcs:ConfirmedCase
+residentStatus: dcs:USResident
+name: "Count of Invasive pneumococcal, Confirmed incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionStreptococcusPneumonia_ProbableCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcusPneumonia
+age: [- 5 Years]
+medicalStatus: dcs:ProbableCase
+name: "Count of Invasive pneumococcal, Probable incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_5_LessYears_ConditionStreptococcusPneumonia_ProbableCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcusPneumonia
+age: [- 5 Years]
+medicalStatus: dcs:ProbableCase
+residentStatus: dcs:USResident
+name: "Count of Invasive pneumococcal, Probable incidents, age 5 or less years"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLegionnairesDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LegionnairesDisease
+name: "Count of LegionnairesDisease incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLegionnairesDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LegionnairesDisease
+residentStatus: dcs:USResident
+name: "Count of LegionnairesDisease incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLeptospirosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Leptospirosis
+name: "Count of Leptospirosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLeptospirosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Leptospirosis
+residentStatus: dcs:USResident
+name: "Count of Leptospirosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionListeriosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Listeriosis
+name: "Count of Listeriosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionListeriosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Listeriosis
+residentStatus: dcs:USResident
+name: "Count of Listeriosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLymeDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LymeDisease
+name: "Count of Lyme incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLymeDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LymeDisease
+residentStatus: dcs:USResident
+name: "Count of Lyme incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLymeDisease_ConfirmedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LymeDisease
+medicalStatus: dcs:ConfirmedCase
+name: "Count of Lyme, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLymeDisease_ConfirmedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LymeDisease
+medicalStatus: dcs:ConfirmedCase
+residentStatus: dcs:USResident
+name: "Count of Lyme, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLymeDisease_ProbableCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LymeDisease
+medicalStatus: dcs:ProbableCase
+name: "Count of Lyme, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionLymeDisease_ProbableCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:LymeDisease
+medicalStatus: dcs:ProbableCase
+residentStatus: dcs:USResident
+name: "Count of Lyme, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMalaria
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Malaria
+name: "Count of Malaria incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMalaria_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Malaria
+residentStatus: dcs:USResident
+name: "Count of Malaria incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeasles
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Measles
+name: "Count of Measles incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeasles_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Measles
+residentStatus: dcs:USResident
+name: "Count of Measles incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeasles_IndigenousCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Measles
+medicalStatus: dcs:IndigenousCase
+name: "Count of Measles, Indigenous incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeasles_IndigenousCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Measles
+medicalStatus: dcs:IndigenousCase
+residentStatus: dcs:USResident
+name: "Count of Measles, Indigenous incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeasles_ImportedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Measles
+medicalStatus: dcs:ImportedCase
+name: "Count of Measles, Imported incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeasles_ImportedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Measles
+medicalStatus: dcs:ImportedCase
+residentStatus: dcs:USResident
+name: "Count of Measles, Imported incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+#serogroup: dcs:AllSerogroups
+name: "Count of Meningococcal, All serogroups incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+#serogroup: dcs:AllSerogroups
+residentStatus: dcs:USResident
+name: "Count of Meningococcal, All serogroups incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_ACWYSerogroup
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+serogroup: dcs:ACWYSerogroup
+name: "Count of Meningococcal, Serogroups ACWY incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_USResident_ACWYSerogroup
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+serogroup: dcs:ACWYSerogroup
+residentStatus: dcs:USResident
+name: "Count of Meningococcal, Serogroups ACWY incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_SerogroupB
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+serogroup: dcs:SerogroupB
+name: "Count of Meningococcal, Serogroup B incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_USResident_SerogroupB
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+serogroup: dcs:SerogroupB
+residentStatus: dcs:USResident
+name: "Count of Meningococcal, Serogroup B incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_OtherSerogroups
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+serogroup: dcs:OtherSerogroups
+name: "Count of Meningococcal, Other serogroups incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_USResident_OtherSerogroups
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+serogroup: dcs:OtherSerogroups
+residentStatus: dcs:USResident
+name: "Count of Meningococcal, Other serogroups incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_UnknownSerogroups
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+serogroup: dcs:UnknownSerogroups
+name: "Count of Meningococcal, Unknown serogroup incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningococcalMeningitis_USResident_UnknownSerogroups
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:MeningococcalMeningitis
+serogroup: dcs:UnknownSerogroups
+residentStatus: dcs:USResident
+name: "Count of Meningococcal, Unknown serogroup incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMumps
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Mumps
+name: "Count of Mumps incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMumps_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Mumps
+residentStatus: dcs:USResident
+name: "Count of Mumps incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionNovelInfluenzaAViralInfection
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:NovelInfluenzaAViralInfection
+name: "Count of Novel Influenza A virus infections incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionNovelInfluenzaAViralInfection_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:NovelInfluenzaAViralInfection
+residentStatus: dcs:USResident
+name: "Count of Novel Influenza A virus infections incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPertussis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Pertussis
+name: "Count of Pertussis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPertussis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Pertussis
+residentStatus: dcs:USResident
+name: "Count of Pertussis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPlague
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Plague
+name: "Count of Plague incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPlague_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Plague
+residentStatus: dcs:USResident
+name: "Count of Plague incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPsittacosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Psittacosis
+name: "Count of Psittacosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPsittacosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Psittacosis
+residentStatus: dcs:USResident
+name: "Count of Psittacosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionQFever
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:QFever
+name: "Count of Q fever incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionQFever_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:QFever
+residentStatus: dcs:USResident
+name: "Count of Q fever incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionQFever_AcuteCondition
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:QFever__AcuteCondition
+name: "Count of Q fever, Acute incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionQFever_AcuteCondition_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:QFever__AcuteCondition
+residentStatus: dcs:USResident
+name: "Count of Q fever, Acute incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionQFever_ChronicCondition
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:QFever__ChronicCondition
+name: "Count of Q fever, Chronic incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionQFever_ChronicCondition_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:QFever__ChronicCondition
+residentStatus: dcs:USResident
+name: "Count of Q fever, Chronic incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionRubella
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Rubella
+name: "Count of Rubella incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionRubella_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Rubella
+residentStatus: dcs:USResident
+name: "Count of Rubella incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionRubella_CongenitalDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Rubella__CongenitalDisease
+name: "Count of Rubella, congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionRubella_CongenitalDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Rubella__CongenitalDisease
+residentStatus: dcs:USResident
+name: "Count of Rubella, congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSalmonellosisExceptTyphiAndParatyphi
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SalmonellosisExceptTyphiAndParatyphi
+name: "Count of Salmonellosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSalmonellosisExceptTyphiAndParatyphi_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SalmonellosisExceptTyphiAndParatyphi
+residentStatus: dcs:USResident
+name: "Count of Salmonellosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionShigaToxinEColi
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ShigaToxinEColi
+name: "Count of Shiga toxin-producing Escherichia coli incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionShigaToxinEColi_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ShigaToxinEColi
+residentStatus: dcs:USResident
+name: "Count of Shiga toxin-producing Escherichia coli incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionShigellosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Shigellosis
+name: "Count of Shigellosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionShigellosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Shigellosis
+residentStatus: dcs:USResident
+name: "Count of Shigellosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSpottedFeverRickettsiosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SpottedFeverRickettsiosis
+name: "Count of Spotted fever rickettsiosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSpottedFeverRickettsiosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SpottedFeverRickettsiosis
+residentStatus: dcs:USResident
+name: "Count of Spotted fever rickettsiosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSpottedFeverRickettsiosis_ConfirmedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SpottedFeverRickettsiosis
+medicalStatus: dcs:ConfirmedCase
+name: "Count of Spotted fever rickettsiosis, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSpottedFeverRickettsiosis_ConfirmedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SpottedFeverRickettsiosis
+medicalStatus: dcs:ConfirmedCase
+residentStatus: dcs:USResident
+name: "Count of Spotted fever rickettsiosis, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSpottedFeverRickettsiosis_ProbableCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SpottedFeverRickettsiosis
+medicalStatus: dcs:ProbableCase
+name: "Count of Spotted fever rickettsiosis, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSpottedFeverRickettsiosis_ProbableCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SpottedFeverRickettsiosis
+medicalStatus: dcs:ProbableCase
+residentStatus: dcs:USResident
+name: "Count of Spotted fever rickettsiosis, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStreptococcalToxicShockSyndrome
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcalToxicShockSyndrome
+name: "Count of Streptococcal toxic shock syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionStreptococcalToxicShockSyndrome_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:StreptococcalToxicShockSyndrome
+residentStatus: dcs:USResident
+name: "Count of Streptococcal toxic shock syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSyphilis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Syphilis
+name: "Count of Syphilis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSyphilis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Syphilis
+residentStatus: dcs:USResident
+name: "Count of Syphilis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCongenitalSyphilis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:CongenitalSyphilis
+name: "Count of Congenital Syphilis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCongenitalSyphilis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:CongenitalSyphilis
+residentStatus: dcs:USResident
+name: "Count of Congenital Syphilis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSyphilisPrimaryAndSecondary
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SyphilisPrimaryAndSecondary
+name: "Count of Syphilis primary and secondary incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSyphilisPrimaryAndSecondary_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:SyphilisPrimaryAndSecondary
+residentStatus: dcs:USResident
+name: "Count of Syphilis primary and secondary incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTetanus
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Tetanus
+name: "Count of Tetanus incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTetanus_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Tetanus
+residentStatus: dcs:USResident
+name: "Count of Tetanus incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionToxicShockSyndromExceptStreptococcal
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ToxicShockSyndromExceptStreptococcal
+name: "Count of Other toxic shock syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionToxicShockSyndromExceptStreptococcal_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ToxicShockSyndromExceptStreptococcal
+residentStatus: dcs:USResident
+name: "Count of Other toxic shock syndrome incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTrichinellosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Trichinellosis
+name: "Count of Trichinellosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTrichinellosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Trichinellosis
+residentStatus: dcs:USResident
+name: "Count of Trichinellosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTuberculosis
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Tuberculosis
+name: "Count of Tuberculosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTuberculosis_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Tuberculosis
+residentStatus: dcs:USResident
+name: "Count of Tuberculosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTularemia
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Tularemia
+name: "Count of Tularemia incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTularemia_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Tularemia
+residentStatus: dcs:USResident
+name: "Count of Tularemia incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTyphoidFever
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:TyphoidFever
+name: "Count of Typhoid fever incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionTyphoidFever_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:TyphoidFever
+residentStatus: dcs:USResident
+name: "Count of Typhoid fever incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVancomycinIntermediateStaphylococcusAureus
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VancomycinIntermediateStaphylococcusAureus
+name: "Count of Vancomycin-intermediate Staphylococcus aureus incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVancomycinIntermediateStaphylococcusAureus_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VancomycinIntermediateStaphylococcusAureus
+residentStatus: dcs:USResident
+name: "Count of Vancomycin-intermediate Staphylococcus aureus incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChickenpox
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chickenpox
+name: "Count of Chickenpox incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChickenpox_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chickenpox
+residentStatus: dcs:USResident
+name: "Count of Chickenpox incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChickenpox_PatientDeceased
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chickenpox
+medicalStatus: dcs:PatientDeceased
+name: "Count of Chickenpox, Deaths incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionChickenpox_PatientDeceased_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Chickenpox
+medicalStatus: dcs:PatientDeceased
+residentStatus: dcs:USResident
+name: "Count of Chickenpox, Deaths incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VibriosisExcludingCholera
+name: "Count of Vibriosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VibriosisExcludingCholera
+residentStatus: dcs:USResident
+name: "Count of Vibriosis incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera_ConfirmedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VibriosisExcludingCholera
+medicalStatus: dcs:ConfirmedCase
+name: "Count of Vibriosis except cholera, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera_ConfirmedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VibriosisExcludingCholera
+medicalStatus: dcs:ConfirmedCase
+residentStatus: dcs:USResident
+name: "Count of Vibriosis except cholera, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera_ProbableCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VibriosisExcludingCholera
+medicalStatus: dcs:ProbableCase
+name: "Count of Vibriosis except cholera, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVibriosisExcludingCholera_ProbableCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VibriosisExcludingCholera
+medicalStatus: dcs:ProbableCase
+residentStatus: dcs:USResident
+name: "Count of Vibriosis except cholera, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionYellowFever
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:YellowFever
+name: "Count of Yellow fever incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionYellowFever_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:YellowFever
+residentStatus: dcs:USResident
+name: "Count of Yellow fever incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionZikaVirusDisease_CongenitalDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ZikaVirusDisease__CongenitalDisease
+name: "Count of Zika fever, congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionZikaVirusDisease_CongenitalDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ZikaVirusDisease__CongenitalDisease
+residentStatus: dcs:USResident
+name: "Count of Zika fever, congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionZikaVirusDisease_NonCongenitalDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ZikaVirusDisease__NonCongenitalDisease
+name: "Count of Zika fever, non-congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionZikaVirusDisease_NonCongenitalDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ZikaVirusDisease__NonCongenitalDisease
+residentStatus: dcs:USResident
+name: "Count of Zika fever, non-congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionZikaVirusInfection_CongenitalDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ZikaVirusInfection__CongenitalDisease
+name: "Count of Zika virus infection, congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionZikaVirusInfection_CongenitalDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ZikaVirusInfection__CongenitalDisease
+residentStatus: dcs:USResident
+name: "Count of Zika virus infection, congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionZikaVirusInfection_NonCongenitalDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ZikaVirusInfection__NonCongenitalDisease
+name: "Count of Zika virus infection, non-congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionZikaVirusInfection_NonCongenitalDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:ZikaVirusInfection__NonCongenitalDisease
+residentStatus: dcs:USResident
+name: "Count of Zika virus infection, non-congenital incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionDiphtheria
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Diphtheria
+name: "Count of Diphtheria incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionDiphtheria_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Diphtheria
+residentStatus: dcs:USResident
+name: "Count of Diphtheria incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisC_AcuteCondition_ConfirmedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisC__AcuteCondition
+medicalStatus: dcs:ConfirmedCase
+name: "Count of Hepatitis C, Acute, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisC_AcuteCondition_ConfirmedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisC__AcuteCondition
+medicalStatus: dcs:ConfirmedCase
+residentStatus: dcs:USResident
+name: "Count of Hepatitis C, Acute, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisC_AcuteCondition_ProbableCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisC__AcuteCondition
+medicalStatus: dcs:ProbableCase
+name: "Count of Hepatitis C, Acute, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisC_AcuteCondition_ProbableCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisC__AcuteCondition
+medicalStatus: dcs:ProbableCase
+residentStatus: dcs:USResident
+name: "Count of Hepatitis C, Acute, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionRabiesinhuman
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Rabiesinhuman
+name: "Count of Rabies incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionRabiesinhuman_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Rabiesinhuman
+residentStatus: dcs:USResident
+name: "Count of Rabies incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVancomycinResistantStaphylococcusAureus
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VancomycinResistantStaphylococcusAureus
+name: "Count of Vancomycin-resistant Staphylococcus aureus incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionVancomycinResistantStaphylococcusAureus_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:VancomycinResistantStaphylococcusAureus
+residentStatus: dcs:USResident
+name: "Count of Vancomycin-resistant Staphylococcus aureus incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionAnthraxDisease
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:AnthraxDisease
+name: "Count of Anthrax incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionAnthraxDisease_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:AnthraxDisease
+residentStatus: dcs:USResident
+name: "Count of Anthrax incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisC_PerinatalInfection
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisC__PerinatalInfection
+name: "Count of Hepatitis C, Perinatal infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionHepatitisC_PerinatalInfection_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:HepatitisC__PerinatalInfection
+residentStatus: dcs:USResident
+name: "Count of Hepatitis C, Perinatal infection incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionParatyphoid
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Paratyphoid
+name: "Count of Paratyphoid incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionParatyphoid_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Paratyphoid
+residentStatus: dcs:USResident
+name: "Count of Paratyphoid incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCandidaAuris_ClinicalCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:CandidaAuris
+medicalStatus: dcs:ClinicalCase
+name: "Count of Candida auris, clinical incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCandidaAuris_ClinicalCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:CandidaAuris
+medicalStatus: dcs:ClinicalCase
+residentStatus: dcs:USResident
+name: "Count of Candida auris, clinical incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCarbapenemResistantEnterobacteriaceae
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:CarbapenemResistantEnterobacteriaceae
+name: "Count of Carbapenemase-producing carbapenem-resistant Enterobacteriaceae incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCarbapenemResistantEnterobacteriaceae_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:CarbapenemResistantEnterobacteriaceae
+residentStatus: dcs:USResident
+name: "Count of Carbapenemase-producing carbapenem-resistant Enterobacteriaceae incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionListeriosis_ConfirmedCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Listeriosis
+medicalStatus: dcs:ConfirmedCase
+name: "Count of Listeriosis, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionListeriosis_ConfirmedCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Listeriosis
+medicalStatus: dcs:ConfirmedCase
+residentStatus: dcs:USResident
+name: "Count of Listeriosis, Confirmed incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionListeriosis_ProbableCase
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Listeriosis
+medicalStatus: dcs:ProbableCase
+name: "Count of Listeriosis, Probable incidents"
+
+Node: dcid:Count_MedicalConditionIncident_ConditionListeriosis_ProbableCase_USResident
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+medicalCondition: dcs:Listeriosis
+medicalStatus: dcs:ProbableCase
+residentStatus: dcs:USResident
+name: "Count of Listeriosis, Probable incidents"
+
