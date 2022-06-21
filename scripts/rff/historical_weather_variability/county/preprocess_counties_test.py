@@ -1,4 +1,4 @@
-"""Tests for preprocess_csv.py"""
+"""Tests for preprocess_counties.py"""
 
 import os
 import sys
@@ -6,10 +6,9 @@ import tempfile
 import unittest
 
 # Allows the following module imports to work when running as a script
-SCRIPTS_DIR = os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-sys.path.append(SCRIPTS_DIR)
-from rff import preprocess_csv
+COUNTY_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(COUNTY_DIR)
+import preprocess_counties
 
 
 class ProcessTest(unittest.TestCase):
@@ -24,7 +23,7 @@ class ProcessTest(unittest.TestCase):
         print(expected_csv)
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_csv = f"{tmp_dir}/WeatherVariability_Counties.csv"
-            preprocess_csv.main(src_fldr, output_csv)
+            preprocess_counties.main(src_fldr, output_csv)
             with open(expected_csv) as wantf:
                 with open(output_csv) as gotf:
                     self.assertEqual(gotf.read(), wantf.read())
