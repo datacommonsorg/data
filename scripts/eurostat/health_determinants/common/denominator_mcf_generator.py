@@ -74,8 +74,8 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
 _MODULE_DIR = os.path.dirname(__file__)
 # _INPUT_MCF_FILE_PATH=os.path.join(_MODULE_DIR, "output_files", "eurostat_population_bmi.mcf")
 # _OUTPUT_MCF_FILE_PATH=os.path.join(_MODULE_DIR, "output_files", "eurostat_population_bmi_deno.mcf")
-_INPUT_MCF_FILE_PATH = "/Users/chharish/datacommonsEU/data/scripts/eurostat/health_determinants/tobacco_consumption/output/eurostat_population_tobaccocunsumption.mcf"
-_OUTPUT_MCF_FILE_PATH = "/Users/chharish/datacommonsEU/data/scripts/eurostat/health_determinants/tobacco_consumption/output/eurostat_population_tobaccocunsumption_denominator.mcf"
+_INPUT_MCF_FILE_PATH = "/Users/chharish/datacommonsEU/data/scripts/eurostat/health_determinants/tobacco_consumption/output/eurostat_population_tobaccoconsumption.mcf"
+_OUTPUT_MCF_FILE_PATH = "/Users/chharish/datacommonsEU/data/scripts/eurostat/health_determinants/tobacco_consumption/output/eurostat_population_tobaccoconsumption_denominator.mcf"
 
 with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     mcf = mcf_file.read()

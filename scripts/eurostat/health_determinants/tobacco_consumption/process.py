@@ -20,6 +20,7 @@ from sys import path
 path.insert(1, '../../../../')
 
 import os
+import re
 import pandas as pd
 import numpy as np
 # import mcf_generator
@@ -763,6 +764,7 @@ class EuroStatTobaccoConsumption:
         # pylint: disable=R0912
         # pylint: disable=R0915
         mcf_template = ("Node: dcid:{pv1}\n"
+                        "{pv14}\n"
                         "typeOf: dcs:StatisticalVariable\n"
                         "populationType: dcs:Person{pv2}{pv3}{pv4}{pv5}"
                         "{pv6}{pv7}{pv8}{pv9}{pv10}{pv11}{pv12}{pv13}\n"
@@ -774,7 +776,7 @@ class EuroStatTobaccoConsumption:
             if "Total" in sv:
                 continue
             incomequin = gender = education = frequenc = healthBehavior =\
-            residence = countryofbirth = citizenship = substance = quantity = history = ''
+            residence = countryofbirth = citizenship = substance = quantity = history = sv_name = ''
 
             sv_temp = sv.split("_In_")
             denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
@@ -782,61 +784,72 @@ class EuroStatTobaccoConsumption:
             sv_prop1 = sv_temp[1].split("_")
             for prop in sv_prop:
                 if prop in ["Percent"]:
-                    continue
-                if  "Smoking" in prop:\
+                    sv_name = sv_name + "Percentage"
+                elif  "Smoking" in prop or "NonSmoker" in prop or "ExposureToTobaccoSmoke"\
+                     in prop or "FormerSmoker" in prop:
                     healthBehavior = "\nhealthBehavior: dcs:" + prop
-                elif "NonSmoker" in prop:
-                    healthBehavior = "\nhealthBehavior: dcs:" + prop
-                elif "ExposureToTobaccoSmoke" in prop:
-                      healthBehavior = "\nhealthBehavior: dcs:" + prop
-                elif "FormerSmoker" in prop:
-                      healthBehavior = "\nhealthBehavior: dcs:" + prop
-          
-
-                if "Daily" in prop or "Occasional" in prop\
+                    sv_name = sv_name + prop + ", " 
+                elif "Daily" in prop or "Occasional" in prop\
                      or "AtLeastOneHourPerDay" in prop or "LessThanOneHourPerDay" in prop\
                       or "LessThanOnceAWeek" in prop or "AtLeastOnceAWeek" in prop\
                       or "RarelyOrNever" in prop :
                     frequenc = "\nhealthBehaviorFrequency: dcs:" + prop.replace("Or","__")
-
-                if "LessThan20CigarettesPerDay"in prop or "20OrMoreCigarettesPerDay" in prop \
+                    sv_name = sv_name + prop + ", " 
+                elif "LessThan20CigarettesPerDay"in prop or "20OrMoreCigarettesPerDay" in prop \
                     or "DailyCigaretteSmoker20OrMorePerDay" in prop or "DailyCigaretteSmokerLessThan20PerDay" in prop:
                     quantity = "\nconsumptionQuantity: "+prop.replace("LessThan20CigarettesPerDay","[- 20 Cigarettes]")\
                         .replace("20OrMoreCigarettesPerDay","[20 - Cigarettes]").replace("DailyCigaretteSmoker20OrMorePerDay","[20 - Cigarettes]")\
                             .replace("DailyCigaretteSmokerLessThan20PerDay","[- 20 Cigarettes]")
-                
-                if "TobaccoProducts" in prop or "Cigarette" in prop or "ECigarettes" in prop or "":
+                    sv_name = sv_name + prop + ", "                 
+                elif "TobaccoProducts" in prop or "Cigarette" in prop or "ECigarettes" in prop:
                     substance = "\nsubstanceUsed: dcs:"+ prop
-                
-                if 'LessThan1Year'in prop or 'From1To5Years'in prop or 'From5To10Years'in prop or'10YearsOrOver'in prop:
-                      history = "\nactivityDuration: " + prop.replace("LessThan1Year","[- 1 Year]").replace("From1To5Years","[Years 1 5]")\
+                    sv_name = sv_name + prop + ", "                 
+                elif 'LessThan1Year'in prop or 'From1To5Years'in prop or 'From5To10Years'in prop or'10YearsOrOver'in prop:
+                    history = "\nactivityDuration: " + prop.replace("LessThan1Year","[- 1 Year]").replace("From1To5Years","[Years 1 5]")\
                           .replace("From5To10Years","[Years 5 10]").replace("10YearsOrOver","[10 - Years]")
+                    sv_name = sv_name + prop + ", " 
 
-                for prop in sv_prop1:
-                    if prop in ["Count","Person"]:
-                        continue
-                    if "Male" in prop or "Female" in prop:
-                        gender = "\ngender: dcs:" + prop
-                    elif "Education" in prop:
-                        education = "\neducationalAttainment: dcs:" + \
-                            prop.replace("Or","__")
-                        #prop.replace("EducationalAttainment","")
+            sv_name = sv_name + "Among"
+            for prop in sv_prop1:
+                if prop in ["Count","Person"]:
+                    continue
+                if "Male" in prop or "Female" in prop:
+                    gender = "\ngender: dcs:" + prop
+                    sv_name = sv_name + prop + ", "
+                elif "Education" in prop:
+                    education = "\neducationalAttainment: dcs:" + \
                         prop.replace("Or","__")
-                    elif "Percentile" in prop:
-                        incomequin = "\nincome: ["+prop.replace("Percentile",\
-                            "").replace("IncomeOf","").replace("To"," ")+" Percentile]"
-                    elif "Urban" in prop or "SemiUrban" in prop \
-                        or "Rural" in prop:
-                        residence = "\nplaceOfResidenceClassification: dcs:" + prop
-                    elif "ForeignBorn" in prop or "Native" in prop:
-                        countryofbirth = "\nnativity: dcs:" + \
-                            prop.replace("CountryOfBirth","")
-                    elif "ForeignWithinEU28" in prop or "ForeignOutsideEU28" in prop\
-                        or "Citizen" in prop or "NotACitizen" in prop:
-                        citizenship = "\ncitizenship: dcs:"+\
-                        prop.replace("Citizenship","")
+                    sv_name = sv_name + prop + ", "
+                elif "Percentile" in prop:
+                    incomequin = "\nincome: ["+prop.replace("Percentile",\
+                        "").replace("IncomeOf","").replace("To"," ")+" Percentile]"
+                    sv_name = sv_name + prop.replace("Of","Of ")\
+                        .replace("To"," To ") + ", "
+                elif "Urban" in prop or "SemiUrban" in prop \
+                    or "Rural" in prop:
+                    residence = "\nplaceOfResidenceClassification: dcs:" + prop
+                    sv_name = sv_name + prop + ", "
+                elif "ForeignBorn" in prop or "Native" in prop:
+                    countryofbirth = "\nnativity: dcs:" + \
+                        prop.replace("CountryOfBirth","")
+                    sv_name = sv_name + prop + ", "
+                elif "WithinEU28AndNotACitizen" in prop or "CitizenOutsideEU28" in prop\
+                    or "Citizen" in prop or "NotACitizen" in prop:
+                    citizenship = "\ncitizenship: dcs:"+\
+                    prop.replace("Citizenship","")
+                    sv_name = sv_name + prop + ", "
 
+            sv_name = sv_name.replace(", Among", " Among")
+            sv_name = sv_name.rstrip(', ')
+            sv_name = sv_name.rstrip('with')
+            # Adding spaces before every capital letter,
+            # to make SV look more like a name.
+            sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
+            sv_name = "name: \"" + sv_name + " Population\""
+            sv_name = sv_name.replace("AWeek","A Week")\
+            .replace("Than20","Than 20").replace("ACitizen","A Citizen")
             final_mcf_template += mcf_template.format(pv1=sv,
+                                                      pv14=sv_name,
                                                       pv2=denominator,
                                                       pv3=healthBehavior,
                                                       pv4=gender,
