@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for USA Population preprocess script.
+Script to automate the testing for USA Population preprocess scripts.
 """
 
 import os
