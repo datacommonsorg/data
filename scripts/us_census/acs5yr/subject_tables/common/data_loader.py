@@ -14,15 +14,12 @@
 """Common data processing module for ACS Subject Tables"""
 import os
 import sys
-import re
 import json
 from zipfile import ZipFile
 
 import numpy as np
 import pandas as pd
-# TODO: Consider using logs for logging warning messages for debug at a later
-# date
-#
+
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -30,6 +27,9 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # for resolve_geo_id
 from resolve_geo_id import convert_to_place_dcid
 
 _IGNORED_VALUES = set(['-', '*', '**', '***', '*****', 'N', '(X)', 'null'])
+
+# TODO: Consider using logs for logging warning messages for debug at a later
+# date
 
 
 def process_subject_tables(table_prefix='',

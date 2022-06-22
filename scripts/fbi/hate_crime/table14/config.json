@@ -1,0 +1,46 @@
+{
+    "populationType": {
+        "1st quarter": {
+            "Node": "Count_CriminalIncidents_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "observationPeriod": "P3M",
+            "endingMonth": "03",
+            "isQuarter": "True"
+        }, 
+        "2nd quarter": {
+            "Node": "Count_CriminalIncidents_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "observationPeriod": "P3M",
+            "endingMonth": "06",
+            "isQuarter": "True"
+        }, 
+        "3rd quarter": {
+            "Node": "Count_CriminalIncidents_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "observationPeriod": "P3M",
+            "endingMonth": "09",
+            "isQuarter": "True"
+        },
+        "4th quarter": {
+            "Node": "Count_CriminalIncidents_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "observationPeriod": "P3M",
+            "endingMonth": "12",
+            "isQuarter": "True"
+        }
+    },
+    "pvs": {},
+    "dpv": []
+}

@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import unittest
-from operator import imod
 
 from .column_map_validator import *
 

@@ -20,7 +20,6 @@ import csv
 import io
 import json
 import os
-import sys
 import zipfile
 from absl import app
 from absl import flags
