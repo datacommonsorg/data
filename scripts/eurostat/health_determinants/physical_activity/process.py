@@ -704,12 +704,12 @@ class EuroStatPhysicalActivity:
                     sv_name = sv_name + prop + ", "
                     if "OrMoreMinutes" in prop:
                         duration = "\nactivityDuration: [" + prop.replace\
-                            ("OrMoreMinutes","") + " - Minutes]"
+                            ("OrMoreMinutes","") + " - Minute]"
                     elif "To" in prop:
                         duration = "\nactivityDuration: [" + prop.replace\
-                            ("Minutes", "").replace("To", " ") + " Minutes]"
+                            ("Minutes", "").replace("To", " ") + " Minute]"
                     else:
-                        duration = "\nactivityDuration: [Minutes " +\
+                        duration = "\nactivityDuration: [Minute " +\
                             prop.replace("Minutes","") + "]"
                 elif "ForeignBorn" in prop or "Native" in prop:
                     countryofbirth = "\nnativity: dcs:" + \
@@ -733,8 +733,7 @@ class EuroStatPhysicalActivity:
             # to make SV look more like a name.
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
             sv_name = "name: \"" + sv_name + " Population\""
-            sv_name = sv_name.replace("To299",
-                                      "To 299").replace("ACitizen", "A Citizen")
+            sv_name = sv_name.replace("To299","To 299").replace("To149","To 149").replace("ACitizen", "A Citizen")
 
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv14=sv_name,

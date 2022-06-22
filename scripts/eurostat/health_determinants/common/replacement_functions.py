@@ -98,16 +98,16 @@ def _replace_frequenc(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'frequenc': {
-            'DAY': 'DailyUsage',
+            'DAY': 'Daily',
             'LT1M': 'LessThanOnceAMonth',
             'MTH': 'EveryMonth',
-            'NM12': 'NotUsedInTheLast12Months',
-            'NVR': 'NeverUsed',
-            'NVR_NM12': 'NeverUsedOrNotUsedInTheLast12Months',
+            'NM12': 'NotInTheLast12Months',
+            'NVR': 'Never',
+            'NVR_NM12': 'NeverOrNotInTheLast12Months',
             'WEEK': 'EveryWeek',
             'GE1W': 'AtLeastOnceAWeek',
-            'NVR_OCC': 'NeverUsedOrOccasionallyUsage',
-            'NBINGE': 'NeverUsed'
+            'NVR_OCC': 'NeverOrOccasionallyUsage',
+            'NBINGE': 'Never'
         }
     })
     return df
@@ -209,8 +209,8 @@ def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
     """
     df = df.replace({
         'citizen': {
-            'EU28_FOR': 'CitizenOutsideEU28',
-            'NEU28_FOR': 'WithinEU28AndNotACitizen',
+            'EU28_FOR': 'WithinEU28AndNotACitizen',
+            'NEU28_FOR': 'CitizenOutsideEU28',
             'FOR': 'NotACitizen',
             'NAT': 'Citizen'
         }
