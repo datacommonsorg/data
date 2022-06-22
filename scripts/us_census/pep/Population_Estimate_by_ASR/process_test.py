@@ -20,6 +20,7 @@ from os import path
 import sys
 import unittest
 import shutil
+
 _COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(1, _COMMON_PATH)
 from national_2010_2019 import national2010
