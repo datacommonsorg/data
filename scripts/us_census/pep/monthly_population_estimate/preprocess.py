@@ -32,13 +32,21 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_data")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-_MCF_TEMPLATE = """Node: dcid:{dcid}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-{xtra_pvs}
-"""
+_MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
+                 "typeOf: dcs:StatisticalVariable\n"
+                 "populationType: dcs:Person\n"
+                 "statType: dcs:measuredValue\n"
+                 "measuredProperty: dcs:count\n"
+                 "{xtra_pvs}\n")
+
+_TMCF_TEMPLATE = ("Node: E:USA_Population_Count->E{}\n"
+                  "typeOf: dcs:StatVarObservation\n"
+                  "variableMeasured: dcs:{}\n"
+                  "measurementMethod: dcs:{}\n"
+                  "observationAbout: C:USA_Population_Count->Location\n"
+                  "observationDate: C:USA_Population_Count->Date\n"
+                  "observationPeriod: \"P1M\"\n"
+                  "value: C:USA_Population_Count->{}\n")
 
 
 def _extract_year(val: str) -> tuple:
@@ -349,14 +357,7 @@ class CensusUSACountryPopulation:
         Returns:
             None
         """
-        tmcf_template = ("Node: E:USA_Population_Count->E{}\n"
-                         "typeOf: dcs:StatVarObservation\n"
-                         "variableMeasured: dcs:{}\n"
-                         "measurementMethod: dcs:{}\n"
-                         "observationAbout: C:USA_Population_Count->Location\n"
-                         "observationDate: C:USA_Population_Count->Date\n"
-                         "observationPeriod: \"P1M\"\n"
-                         "value: C:USA_Population_Count->{}\n")
+
         i = 0
         measure = ""
         tmcf = ""
@@ -367,7 +368,7 @@ class CensusUSACountryPopulation:
                 measure = "dcAggregate/CensusPEPSurvey"
             else:
                 measure = "CensusPEPSurvey"
-            tmcf = tmcf + tmcf_template.format(i, col, measure, col) + "\n"
+            tmcf = tmcf + _TMCF_TEMPLATE.format(i, col, measure, col) + "\n"
             i = i + 1
 
         # Writing Genereated TMCF to local path.
