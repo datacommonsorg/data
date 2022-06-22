@@ -1,4 +1,4 @@
-import os 
+import os
 
 output_columns = [
     'TimeIntervalType', 'Date', 'GeoId', 'StandardDeviation_DailyPrecipitation',
@@ -12,12 +12,14 @@ time_interval_types = {
     "agg_year": "P1Y",
     "agg_5year": "P5Y",
     "agg_month": "P1M"
-}   
+}
 cvar_suffixes = {
     "ppt": "DailyPrecipitation",
     "tmin": "DailyMinTemperature",
     "tmax": "DailyMaxTemperature"
 }
+
+
 ## from the filename of src csv file (which details the date-interval)
 ##  reformat to YYYY or YYYY-MM
 def format_date(file_path, time_interval_type, fname_suffix=".csv"):
@@ -30,6 +32,7 @@ def format_date(file_path, time_interval_type, fname_suffix=".csv"):
             d_str[:4]  # fname ex: 2017to2021.csv
     }
     return date_formats[time_interval_type]
+
 
 def autogen_template_mcf(output_csv):
     # Automate Template MCF generation
