@@ -584,6 +584,7 @@ class EuroStatAlcoholConsumption:
                     or "Never" in prop:
                     frequenc = "\nhealthBehaviorFrequency: dcs:" + prop\
                         .replace("Or","__")
+                    sv_name = sv_name + prop + ", "
                 elif "NeverOrNotInTheLast12Months" in\
                     prop or "EveryWeek" in prop or "AtLeastOnceAWeek" in prop\
                     or "NeverOrOccasional" in prop:
