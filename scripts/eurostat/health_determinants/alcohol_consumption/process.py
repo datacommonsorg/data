@@ -13,26 +13,37 @@
 # limitations under the License.
 """
 This Python Script Load the datasets, cleans it
-and generates cleaned CSV, MCF, TMCF file
+and generates cleaned CSV, MCF, TMCF file.
+Before running this module, run download_input_files.py script, it downloads
+required input files, creates necessary folders for processing.
+Folder information
+input_files - downloaded files (from US census website) are placed here
+output_files - output files (mcf, tmcf and csv are written here)
 """
 import os
 import sys
 import re
+import pandas as pd
+import numpy as np
 from absl import app, flags
+
 # For import common.replacement_functions
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
-# from common.replacement_functions import (_replace_sex, _replace_frequenc,
-#                                           _replace_isced11, _replace_quant_inc,
-#                                           _replace_deg_urb, _replace_c_birth,
-#                                           _replace_citizen, _split_column)
+# pylint: disable=import-error
+# pylint: disable=wrong-import-position
+from common.replacement_functions import (_replace_sex, _replace_frequenc,
+                                          _replace_isced11, _replace_quant_inc,
+                                          _replace_deg_urb, _replace_c_birth,
+                                          _replace_citizen, _split_column)
 # For import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
 sys.path.insert(1, _COMMON_PATH)
-import pandas as pd
-import numpy as np
+
 from util.alpha2_to_dcid import COUNTRY_MAP
+# pylint: enable=import-error
+# pylint: enable=wrong-import-position
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
@@ -72,7 +83,7 @@ def _alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     # spliting the first column to multiple columns
     split_columns = "unit,frequenc,isced11,sex,age,geo"
     df = _split_column(df,split_columns)
-    # Filtering out the wanted rows and columns    
+    # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_frequenc(df)
@@ -91,7 +102,8 @@ def _alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
 
 def _alcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file alcoholconsumption_by_sex_income for concatenation in Final CSV
+    Cleans the file alcoholconsumption_by_sex_income
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -105,7 +117,7 @@ def _alcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df,split_columns)
     # Filtering out the wanted rows and columns
     df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]    
+    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
@@ -121,15 +133,16 @@ def _alcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
 
 def _alcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file alcoholconsumption_by_sex_urbanisation for concatenation in Final CSV
+    Cleans the file alcoholconsumption_by_sex_urbanisation
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
-    columns = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
+    columns = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE',
+    'BG','CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
     df.columns=columns
     # spliting the first column to multiple columns
@@ -153,7 +166,8 @@ def _alcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
 
 def _bingedrinking_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file bingedrinking_by_sex_education for concatenation in Final CSV
+    Cleans the file bingedrinking_by_sex_education
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -214,15 +228,16 @@ def _bingedrinking_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
 
 def _bingedrinking_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file bingedrinking_by_sex_urbanisation for concatenation in Final CSV
+    Cleans the file bingedrinking_by_sex_urbanisation
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
-    columns = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
+    columns = ['frequenc,deg_urb,sex,age,unit,time','EU27_2020','EU28','BE',
+    'BG','CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
     df.columns=columns
     # spliting the first column to multiple columns
@@ -244,17 +259,19 @@ def _bingedrinking_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return df
 
-def _hazardousalcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
+def _hazardousalcoholconsumption_by_sex_education(df: pd.DataFrame)\
+    -> pd.DataFrame:
     """
-    Cleans the file hazardousalcoholconsumption_by_sex_education for concatenation in Final CSV
+    Cleans the file hazardousalcoholconsumption_by_sex_education
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
-    columns = ['unit,isced11,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ', 'DK'
-    ,'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT',
+    columns = ['unit,isced11,sex,age,time','EU27_2020','EU28','BE','BG','CZ',
+    'DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU','MT',
     'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO', 'UK', 'TR' ]
     df.columns=columns
     # spliting the first column to multiple columns
@@ -275,9 +292,11 @@ def _hazardousalcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFr
             ,value_name='observation')
     return df
 
-def _hazardousalcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
+def _hazardousalcoholconsumption_by_sex_income(df: pd.DataFrame)\
+    -> pd.DataFrame:
     """
-    Cleans the file hazardousalcoholconsumption_by_sex_income for concatenation in Final CSV
+    Cleans the file hazardousalcoholconsumption_by_sex_income
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -306,9 +325,11 @@ def _hazardousalcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame
             ,value_name='observation')
     return df
 
-def _hazardousalcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
+def _hazardousalcoholconsumption_by_sex_urbanisation(df: pd.DataFrame)\
+    -> pd.DataFrame:
     """
-    Cleans the file hazardousalcoholconsumption_by_sex_urbanisation for concatenation in Final CSV
+    Cleans the file hazardousalcoholconsumption_by_sex_urbanisation
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -337,17 +358,19 @@ def _hazardousalcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.Dat
         ,value_name='observation')
     return df
 
-def _alcoholconsumption_by_sex_country_of_birth(df: pd.DataFrame) -> pd.DataFrame:
+def _alcoholconsumption_by_sex_country_of_birth(df: pd.DataFrame)\
+    -> pd.DataFrame:
     """
-    Cleans the file alcoholconsumption_by_sex_country_of_birth for concatenation in Final CSV
+    Cleans the file alcoholconsumption_by_sex_country_of_birth
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
-    columns = ['unit,frequenc,sex,age,c_birth,time','EU27_2020','EU28','BE','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
+    columns = ['unit,frequenc,sex,age,c_birth,time','EU27_2020','EU28','BE',
+    'BG','CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
     df.columns=columns
     # spliting the first column to multiple columns
@@ -371,15 +394,16 @@ def _alcoholconsumption_by_sex_country_of_birth(df: pd.DataFrame) -> pd.DataFram
 
 def _alcoholconsumption_by_sex_citizen(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file alcoholconsumption_by_sex_citizen for concatenation in Final CSV
+    Cleans the file alcoholconsumption_by_sex_citizen
+    for concatenation in Final CSV
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
     # providing column names
-    columns = ['unit,frequenc,sex,age,citizen,time','EU27_2020','EU28','BE','BG',
-    'CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
+    columns = ['unit,frequenc,sex,age,citizen,time','EU27_2020','EU28','BE',
+    'BG','CZ','DK','DE','EE','IE','EL','ES','HR','IT','CY','LV','LT','LU','HU',
     'MT','AT','PL','PT','RO','SI','SK','FI','SE','IS','NO','UK','TR']
     df.columns=columns
     # spliting the first column to multiple columns
@@ -401,9 +425,11 @@ def _alcoholconsumption_by_sex_citizen(df: pd.DataFrame) -> pd.DataFrame:
         ,value_name='observation')
     return df
 
-def _historical_alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
+def _historical_alcoholconsumption_by_sex_education(df: pd.DataFrame)\
+    -> pd.DataFrame:
     """
-    Cleans the file historical_alcoholconsumption_by_sex_education for concatenation in Final CSV.
+    Cleans the file historical_alcoholconsumption_by_sex_education
+    for concatenation in Final CSV.
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -432,9 +458,11 @@ def _historical_alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.Data
         ,value_name='observation')
     return df
 
-def _historical_bingedrinking_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
+def _historical_bingedrinking_by_sex_education(df: pd.DataFrame)\
+    -> pd.DataFrame:
     """
-    Cleans the file historical_bingedrinking_by_sex_education for concatenation in Final CSV.
+    Cleans the file historical_bingedrinking_by_sex_education
+    for concatenation in Final CSV.
     Args:
         df (pd.DataFrame): The raw df as the input
     Returns:
@@ -463,146 +491,6 @@ def _historical_bingedrinking_by_sex_education(df: pd.DataFrame) -> pd.DataFrame
         ,value_name='observation')
     return df
 
-def _split_column(df: pd.DataFrame,col: str) -> pd.DataFrame:
-    """
-    Divides a single column into multiple columns and returns the DF
-    """
-    info = col.split(",")
-    df[info] = df[col].str.split(',', expand=True)
-    df.drop(columns=[col],inplace=True)
-    return df
-
-def _replace_frequenc(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Args: 
-        df (pd.DataFrame): df as the input, to change column values
-    Returns:
-        df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({'frequenc': {
-        'DAY': 'Daily',
-        'LT1M': 'LessThanOnceAMonth',
-        'MTH': 'EveryMonth',
-        'NM12': 'NotInTheLast12Months',
-	    'NVR': 'Never',
-	    'NVR_NM12': 'NeverOrNotInTheLast12Months',
-        'WEEK': 'EveryWeek',
-        'GE1W': 'AtLeastOnceAWeek',
-        'NVR_OCC': 'NeverOrOccasional',
-        'NBINGE': 'Never'}})
-    return df
-
-def _replace_sex(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF
-    Args: 
-        df (pd.DataFrame): df as the input, to change column values
-    Returns:
-        df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({'sex': {
-        'F': 'Female',
-        'M': 'Male',
-        'T': 'Total'}})
-    return df
-
-def _replace_isced11(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF
-    Args: 
-        df (pd.DataFrame): df as the input, to change column values
-    Returns:
-        df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({'isced11': {
-        'ED0-2':
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED0_2':
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED3-4':
-        'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED3_4':
-            'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED5_6' : 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
-        'ED5-8': 'TertiaryEducation',
-        'ED5_8': 'TertiaryEducation',
-        'TOTAL': 'Total'
-        }})
-    return df
-
-def _replace_quant_inc(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-    Args: 
-        df (pd.DataFrame): df as the input, to change column values
-    Returns:
-        df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({'quant_inc': {
-        'TOTAL': 'Total',
-        'QU1': 'IncomeOf0To20Percentile',
-        'QU2': 'IncomeOf20To40Percentile',
-        'QU3': 'IncomeOf40To60Percentile',
-        'QU4': 'IncomeOf60To80Percentile',
-        'QU5': 'IncomeOf80To100Percentile'
-        }})
-    return df
-
-def _replace_deg_urb(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF
-    Args: 
-        df (pd.DataFrame): df as the input, to change column values
-    Returns:
-        df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({'deg_urb': {
-        'TOTAL':'Total',
-        'DEG1':'Urban',
-        'DEG2':'SemiUrban',
-        'DEG3':'Rural',
-        }})
-    return df
-
-def _replace_c_birth(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF
-    Args: 
-        df (pd.DataFrame): df as the input, to change column values
-    Returns:
-        df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({'c_birth': {
-        'EU28_FOR': 'ForeignBornWithinEU28',
-        'NEU28_FOR': 'ForeignBornOutsideEU28',
-        'FOR': 'ForeignBorn',
-        'NAT': 'Native'
-    }})
-    return df
-
-def _replace_citizen(df:pd.DataFrame) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF
-    Args: 
-        df (pd.DataFrame): df as the input, to change column values
-    Returns:
-        df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({'citizen': {
-        'EU28_FOR': 'WithinEU28AndNotACitizen',
-        'NEU28_FOR': 'CitizenOutsideEU28',
-        'FOR': 'NotACitizen',
-        'NAT': 'Citizen'
-    }})
-    return df
 
 class EuroStatAlcoholConsumption:
     """
@@ -638,6 +526,7 @@ class EuroStatAlcoholConsumption:
         Returns:
             None
         """
+        # pylint: disable=R0914
         final_mcf_template = ""
         for sv in sv_list:
             if "Total" in sv:
@@ -653,13 +542,17 @@ class EuroStatAlcoholConsumption:
                 if prop in ["Percent"]:
                     sv_name = sv_name + "Percentage "
                 if "AlcoholConsumption" in prop or "BingeDrinking" in prop\
-                    or "HazardousAlcoholConsumption" in prop:
+                    or "HazardousAlcoholConsumption" in prop: 
                     healthbehavior = "\nhealthBehavior: dcs:" + prop
-                    sv_name = sv_name + prop + ", "              
+                    sv_name = sv_name + prop + ", "
                 elif "Daily" in prop or "LessThanOnceAMonth" in prop \
                     or "EveryMonth" in prop or "NotInTheLast12Months" in prop\
-                    or "Never" in prop or "NeverOrNotInTheLast12Months" in prop \
-                    or "EveryWeek" in prop or "AtLeastOnceAWeek" in prop\
+                    or "Never" in prop:
+                    frequenc = "\nhealthBehaviorFrequency: dcs:" + prop\
+                        .replace("Or","__")
+                    sv_name = sv_name + prop + ", "
+                elif "NeverOrNotInTheLast12Months" in\
+                    prop or "EveryWeek" in prop or "AtLeastOnceAWeek" in prop\
                     or "NeverOrOccasional" in prop:
                     frequenc = "\nhealthBehaviorFrequency: dcs:" + prop\
                         .replace("Or","__")
@@ -677,7 +570,8 @@ class EuroStatAlcoholConsumption:
                     sv_name = sv_name + prop + ", "
                 elif "Percentile" in prop:
                     incomequin = "\nincome: ["+prop.replace("Percentile",\
-                        "").replace("IncomeOf","").replace("To"," ")+" Percentile]"
+                        "").replace("IncomeOf","").replace("To"," ")\
+                            +" Percentile]"
                     sv_name = sv_name + prop.replace("Of","Of ")\
                         .replace("To"," To ") + ", "
                 elif "Urban" in prop or "SemiUrban" in prop \
@@ -688,8 +582,9 @@ class EuroStatAlcoholConsumption:
                     countryofbirth = "\nnativity: dcs:" + \
                         prop.replace("CountryOfBirth","")
                     sv_name = sv_name + prop + ", "
-                elif "WithinEU28AndNotACitizen" in prop or "CitizenOutsideEU28" in prop\
-                    or "Citizen" in prop or "NotACitizen" in prop:
+                elif "WithinEU28AndNotACitizen" in prop or\
+                    "CitizenOutsideEU28" in prop or "Citizen"\
+                        in prop or "NotACitizen" in prop:
                     citizenship = "\ncitizenship: dcs:"+\
                     prop.replace("Citizenship","")
                     sv_name = sv_name + prop + ", "
@@ -722,9 +617,6 @@ class EuroStatAlcoholConsumption:
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
         # pylint: enable=R0914
-        # pylint: enable=R0912
-        # pylint: enable=R0915
-
     def process(self):
         """
         This Method calls the required methods to generate
@@ -755,14 +647,17 @@ class EuroStatAlcoholConsumption:
                 "hlth_ehis_al1e": _alcoholconsumption_by_sex_education,
                 "hlth_ehis_al1i": _alcoholconsumption_by_sex_income,
                 "hlth_ehis_al1u": _alcoholconsumption_by_sex_urbanisation,
-                "hlth_ehis_al2e": _hazardousalcoholconsumption_by_sex_education,
+                "hlth_ehis_al2e":\
+                    _hazardousalcoholconsumption_by_sex_education,
                 "hlth_ehis_al2i": _hazardousalcoholconsumption_by_sex_income,
-                "hlth_ehis_al2u": _hazardousalcoholconsumption_by_sex_urbanisation,
+                "hlth_ehis_al2u":\
+                    _hazardousalcoholconsumption_by_sex_urbanisation,
                 "hlth_ehis_al3e": _bingedrinking_by_sex_education,
                 "hlth_ehis_al3i": _bingedrinking_by_sex_income,
                 "hlth_ehis_al3u": _bingedrinking_by_sex_urbanisation,
                 "hlth_ehis_de6": _historical_bingedrinking_by_sex_education,
-                "hlth_ehis_de10": _historical_alcoholconsumption_by_sex_education
+                "hlth_ehis_de10":\
+                    _historical_alcoholconsumption_by_sex_education
             }
             df = file_to_function_mapping[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
@@ -774,7 +669,7 @@ class EuroStatAlcoholConsumption:
             keep='first')
         final_df['observation'] = final_df['observation'].astype(str)\
             .str.strip()
-        # derived_df generated to get the year/SV/location sets 
+        # derived_df generated to get the year/SV/location sets
         # where 'u' exist
         derived_df = final_df[final_df['observation'].astype(str)
             .str.contains('u')]
@@ -840,7 +735,7 @@ def main(_):
     mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
     loader = EuroStatAlcoholConsumption(ip_files, cleaned_csv_path,\
-        mcf_path, tmcf_path) 
+        mcf_path, tmcf_path)
     loader.process()
 
 if __name__ == "__main__":

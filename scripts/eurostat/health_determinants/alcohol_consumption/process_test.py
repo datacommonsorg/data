@@ -46,14 +46,16 @@ class TestProcess(unittest.TestCase):
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
+            # pylint: disable=invalid-name
             _CLEANED_CSV_FILE_PATH = os.path.join(tmp_dir, "data.csv")
             _MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
             _TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
-            
-            base = EuroStatAlcoholConsumption(self.ip_data, _CLEANED_CSV_FILE_PATH,
-                                    _MCF_FILE_PATH, _TMCF_FILE_PATH)
+
+            base = EuroStatAlcoholConsumption(self.ip_data,
+                                              _CLEANED_CSV_FILE_PATH,
+                                              _MCF_FILE_PATH, _TMCF_FILE_PATH)
             base.process()
-            
+
             with open(_MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()
 
@@ -62,17 +64,20 @@ class TestProcess(unittest.TestCase):
 
             with open(_CLEANED_CSV_FILE_PATH, encoding="UTF-8") as csv_file:
                 self.actual_csv_data = csv_file.read()
+            # pylint: enable=invalid-name
 
     def test_mcf_tmcf_files(self):
         """
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                        "expected_eurostat_population_alcoholconsumption.mcf")
+        expected_mcf_file_path = os.path.join(
+            EXPECTED_FILES_DIR,
+            "expected_eurostat_population_alcoholconsumption.mcf")
 
-        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                        "expected_eurostat_population_alcoholconsumption.tmcf")
+        expected_tmcf_file_path = os.path.join(
+            EXPECTED_FILES_DIR,
+            "expected_eurostat_population_alcoholconsumption.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -92,8 +97,9 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
-                        "expected_eurostat_population_alcoholconsumption.csv")
+        expected_csv_file_path = os.path.join(
+            EXPECTED_FILES_DIR,
+            "expected_eurostat_population_alcoholconsumption.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,

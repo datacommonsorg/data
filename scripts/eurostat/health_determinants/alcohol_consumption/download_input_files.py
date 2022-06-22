@@ -21,10 +21,14 @@ import sys
 
 from absl import app, flags
 
+# pylint: disable=import-error
+# pylint: disable=wrong-import-position
 # For import common.download
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 from common import download
+# pylint: enable=import-error
+# pylint: enable=wrong-import-position
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
@@ -41,23 +45,38 @@ def download_files(download_directory: str) -> None:
         None
     """
     # List to provide the URLs of input files to download script.
+    # pylint: disable=invalid-name
     INPUT_URLS = [
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al1e.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al1i.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al1u.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al3e.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al3i.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al3u.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al2e.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al2i.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al2u.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al1b.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al1c.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_de10.tsv.gz",
-    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_de6.tsv.gz"
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1e.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1i.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1u.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al3e.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al3i.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al3u.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al2e.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al2i.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al2u.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1b.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_al1c.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_de10.tsv.gz",
+    "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+        "BulkDownloadListing?file=data/hlth_ehis_de6.tsv.gz"
     ]
 
     download.download_file(INPUT_URLS, download_directory)
+    # pylint: enable=invalid-name
 
 
 def main(_):
