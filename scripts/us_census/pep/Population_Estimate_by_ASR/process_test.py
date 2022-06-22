@@ -17,8 +17,11 @@ Script to automate the testing for USA Population by Race preprocess script.
 
 import os
 from os import path
+import sys
 import unittest
 import shutil
+_COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
+sys.path.insert(1, _COMMON_PATH)
 from national_2010_2019 import national2010
 from national_2000_2010 import national2000
 from state_1990_2000 import state1990

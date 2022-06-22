@@ -17,6 +17,7 @@ cleaned CSV, MCF, TMCF file.
 """
 import os
 import pandas as pd
+import numpy as np
 
 from absl import app
 from absl import flags
@@ -25,6 +26,7 @@ from national_1960_1979 import national1960
 from national_1980_1989 import national1980
 from national_2000_2010 import national2000
 from national_2010_2019 import national2010
+from national_2020_2021 import national2020
 from state_1970_1979 import state1970
 from state_1990_2000 import state1990
 from state_2000_2010 import state2000
@@ -56,6 +58,67 @@ TMCF_TEMPLATE = ("Node: E:usa_population_asr->E0\n"
                  "value: C:usa_population_asr->observation\n")
 
 
+def _measurement_conditions(x: str, y: str) -> str:
+    """
+    Divides the Races before and after 2000, by using different measurement
+    methods.
+
+    Args:
+        x (str) : String from DataFrame Values in a Column.
+        x (str) : String from DataFrame Values in a Column.
+    Returns:
+        str
+    """
+    races = ['Alone', 'Races', 'Pacific', 'NonWhite']
+    if (not x.lower().endswith('male')) and y >= 2000:
+        return "RaceAfter2000_"
+    elif (not x.lower().endswith('male')) and y < 2000:
+        return "RaceBefore2000_"
+    else:
+        return ""
+
+
+def _measurement_aggregate(df: pd.DataFrame) -> list:
+    """
+    Checks for aggregations done and makes all the years of that race and area
+    as Aggregated
+
+    Args:
+        df (Pandas Dataframe) : Divided Dataframe to check
+    Returns:
+        list
+    """
+    derived_df = df[df['Measurement_Method'].str.contains('dcAggregate')]
+    aggregated_rows = list(derived_df['SVs'] + derived_df['geo_ID'])
+    df['info'] = df['SVs'] + df['geo_ID']
+    aggregate_list = np.where(df['info'].isin(aggregated_rows),
+                              'Partial_DCAggregate_', '')
+    df.drop(columns=['info'], inplace=True)
+    return aggregate_list.tolist()
+
+
+def _measurement_method(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Generates measurement method based on provided guidlines.
+
+    Args:
+        df (Pandas Dataframe) : Dataframe to add columns
+    Returns:
+        df (Pandas Dataframe) : Dataframe with added columns
+    """
+    df_lt_2000 = df[df['Year'] < 2000]
+    df_gt_2000 = df[df['Year'] >= 2000]
+    aggregate_list = _measurement_aggregate(df_lt_2000)
+    aggregate_list = aggregate_list + _measurement_aggregate(df_gt_2000)
+    func = np.vectorize(_measurement_conditions)
+    race_year = func(df['SVs'], df['Year'])
+    df['Measurement_Method'] = aggregate_list
+    df['Measurement_Method'] = df['Measurement_Method'] + race_year
+    df['Measurement_Method'] = df['Measurement_Method'] + 'CensusPEPSurvey'
+
+    return df
+
+
 class USCensusPEPByASR:
     """
     This Class has requried methods to generate Cleaned CSV,
@@ -73,7 +136,7 @@ class USCensusPEPByASR:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template.
-        Arguments:
+        Args:
             df_cols (list) : List of DataFrame Columns
         Returns:
             None
@@ -120,7 +183,7 @@ class USCensusPEPByASR:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
-        Arguments:
+        Args:
             df_cols (list) : List of DataFrame Columns
         Returns:
             None
@@ -153,6 +216,7 @@ class USCensusPEPByASR:
         final_df = final_df.dropna()
         final_df['Year'] = final_df['Year'].astype(float).astype(int)
         final_df = final_df.sort_values(by=['Year', 'geo_ID'])
+        final_df = _measurement_method(final_df)
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
@@ -174,6 +238,7 @@ def main(_):
     national1980(national_url_file, output_folder)
     national2000(national_url_file, output_folder)
     national2010(national_url_file, output_folder)
+    national2020(national_url_file, output_folder)
     state1970(state_url_file, output_folder)
     state1990(state_url_file, output_folder)
     state2000(state_url_file, output_folder)
