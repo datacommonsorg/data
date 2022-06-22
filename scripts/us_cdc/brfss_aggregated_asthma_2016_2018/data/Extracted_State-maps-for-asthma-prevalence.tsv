@@ -1,0 +1,384 @@
+Age Group	Urban-Rural Classification	Counties	Prevalence, % (SE)	State	Alpha2
+Adult	Large Central Metropolitan	Jefferson	8.7% (0.72)	Alabama	AL
+Adult	Large Fringe Metropolitan	Bibb, Blount, Chilton, St. Clair, Shelby, Walker	8.7% (0.83)	Alabama	AL
+Adult	Medium Metropolitan	Autauga, Elmore, Limestone, Lowndes, Madison, Mobile, Montgomery, Russell	11.3% (0.69)	Alabama	AL
+Adult	Small Metropolitan	Baldwin, Calhoun, Colbert, Etowah, Geneva, Hale, Henry, Houston, Lauderdale, Lawrence, Lee, Morgan, Pickens, Tuscaloosa	10.0% (0.51)	Alabama	AL
+Adult	Micropolitan	Chambers, Coffee, Coosa, Cullman, Dale, Dallas, Jackson, Marshall, Pike, Talladega	11.6% (1.00)	Alabama	AL
+Adult	Noncore	Barbour, Bullock, Butler, Cherokee, Choctaw, Clarke, Clay, Cleburne, Conecuh, Covington, Crenshaw, DeKalb, Escambia, Fayette, Franklin, Greene, Lamar, Macon, Marengo, Marion, Monroe, Perry, Randolph, Sumter, Tallapoosa, Washington, Wilcox, Winston	11.1% (0.73)	Alabama	AL
+Adult	Medium Metropolitan	Anchorage Municipality, Matanuska-Susitna Borough	9.7% (0.78)	Alaska	AK
+Adult	Small Metropolitan	Fairbanks North Star Borough	7.7% (0.97)	Alaska	AK
+Adult	Micropolitan	Juneau City and Borough, Ketchikan Gateway Borough	7.4% (1.11)	Alaska	AK
+Adult	Noncore	Aleutians East Borough, Aleutians West Census Area, Bethel Census Area, Bristol Bay Borough, Denali Borough, Dillingham Census Area, Haines Borough, Hoonah-Angoon Census Area, Kenai Peninsula Borough, Kodiak Island Borough, Kusilvak Census Area, Lake and Peninsula Borough, Nome Census Area, North Slope Borough, Northwest Arctic Borough, Petersburg Census Area, Prince of Wales- Hyder Census Area, Sitka City and Borough, Skagway Municipality, Southeast Fairbanks Census Area, Valdez-Cordova Census Area, Wrangell City and Borough, Yakutat City and Borough, Yukon-Koyukuk Census Area	7.8% (0.71)	Alaska	AK
+Adult	Large Central Metropolitan	Maricopa	9.2% (0.34)	Arizona	AZ
+Adult	Large Fringe Metropolitan	Pinal	11.8% (1.19)	Arizona	AZ
+Adult	Medium Metropolitan	Pima	11.5% (0.75)	Arizona	AZ
+Adult	Small Metropolitan	Cochise, Coconino, Mohave, Yavapai, Yuma	9.4% (0.50)	Arizona	AZ
+Adult	Micropolitan	Gila, Graham, Navajo, Santa Cruz	8.1% (0.68)	Arizona	AZ
+Adult	Noncore	Apache, Greenlee, La Paz	10.7% (1.36)	Arizona	AZ
+Adult	Large Fringe Metropolitan	Crittenden	12.8% (3.81)	Arkansas	AR
+Adult	Medium Metropolitan	Benton, Crawford, Faulkner, Grant, Lonoke, Madison, Perry, Pulaski, Saline, Sebastian, Washington	8.8% (0.58)	Arkansas	AR
+Adult	Small Metropolitan	Cleveland, Craighead, Garland, Jefferson, Lincoln, Little River, Miller, Poinsett	9.1% (1.31)	Arkansas	AR
+Adult	Micropolitan	Baxter, Boone, Calhoun, Clark, Columbia, Greene, Hot Spring, Independence, Mississippi, Newton, Ouachita, Phillips, Pope, St. Francis, Union, White, Yell	9.7% (0.78)	Arkansas	AR
+Adult	Noncore	Arkansas, Ashley, Bradley, Carroll, Chicot, Clay, Cleburne, Conway, Cross, Dallas, Desha, Drew, Franklin, Fulton, Hempstead, Howard, Izard, Jackson, Johnson, Lafayette, Lawrence, Lee, Logan, Marion, Monroe, Montgomery, Nevada, Pike, Polk, Prairie, Randolph, Scott, Searcy, Sevier, Sharp, Stone, Van Buren, Woodruff	10.0% (0.81	Arkansas	AR
+Child	Large Central Metropolitan	Alameda, Los Angeles, Orange, Riverside, Sacramento, San Diego, San Francisco, Santa Clara	6.4% (0.50)	California	CA
+Child	Large Fringe Metropolitan	Contra Costa, El Dorado, Marin, Placer, San Benito, San Bernardino, San Mateo, Yolo	6.5% (0.92)	California	CA
+Child	Medium Metropolitan	Fresno, Kern, Merced, Monterey, San Joaquin, San Luis Obispo, Santa Barbara, Santa Cruz, Solano, Sonoma, Stanislaus, Tulare, Ventura	7.0% (0.74)	California	CA
+Child	Small Metropolitan	Butte, Imperial, Kings, Madera, Napa, Shasta, Sutter, Yuba	7.2% (1.75)	California	CA
+Child	Micropolitan	Del Norte, Humboldt, Lake, Lassen, Mendocino, Nevada, Tehama	6.1% (2.86)	California	CA
+Child	Noncore	Alpine, Amador, Calaveras, Colusa, Glenn, Inyo, Mariposa, Modoc, Mono, Plumas, Sierra, Siskiyou, Trinity	13.8% (5.99)	California	CA
+Adult	Large Central Metropolitan	Alameda, Los Angeles, Orange, Riverside, Sacramento, San Diego, San Francisco, Santa Clara	7.4% (0.25)	California	CA
+Adult	Large Fringe Metropolitan	Contra Costa, El Dorado, Marin, Placer, San Benito, San Bernardino, San Mateo, Yolo	8.3% (0.52)	California	CA
+Adult	Medium Metropolitan	Fresno, Kern, Merced, Monterey, San Joaquin, San Luis Obispo, Santa Barbara, Santa Cruz, Solano, Sonoma, Stanislaus, Tulare, Ventura	9.9% (0.48)	California	CA
+Adult	Small Metropolitan	Butte, Imperial, Kings, Madera, Napa, Shasta, Sutter, Yuba	8.8% (0.97)	California	CA
+Adult	Micropolitan	Del Norte, Humboldt, Lake, Lassen, Mendocino, Nevada, Tehama, Tuolumne	11.0% (1.50)	California	CA
+Adult	Noncore	Alpine, Amador, Calaveras, Colusa, Glenn, Inyo, Mariposa, Modoc, Mono, Plumas, Sierra, Siskiyou, Trinity	8.6% (1.95)	California	CA
+Adult	Large Central Metropolitan	Denver	8.7% (0.55)	Colorado	CO
+Adult	Large Fringe Metropolitan	Adams, Arapahoe, Broomfield, Clear Creek, Douglas, Elbert, Gilpin, Jefferson, Park	9.2% (0.35)	Colorado	CO
+Adult	Medium Metropolitan	Boulder, El Paso, Larimer, Teller, Weld	8.8% (0.37)	Colorado	CO
+Adult	Small Metropolitan	Mesa, Pueblo	10.9% (0.90)	Colorado	CO
+Adult	Micropolitan	Eagle, Fremont, Garfield, La Plata, Logan, Moffat, Montrose, Morgan, Pitkin, Routt, Summit	7.3% (0.60)	Colorado	CO
+Adult	Noncore	Alamosa, Archuleta, Baca, Bent, Chaffee, Cheyenne, Conejos, Costilla, Crowley, Custer, Delta, Dolores, Grand, Gunnison, Hinsdale, Huerfano, Jackson, Kiowa, Kit Carson, Lake, Las Animas, Lincoln, Mineral, Montezuma, Otero, Ouray, Phillips, Prowers, Rio Blanco, Rio Grande, Saguache, San Juan, San Miguel, Sedgwick, Washington, Yuma	10.4% (0.78)	Colorado	CO
+Child	Large Central Metropolitan	Hartford	11.8% (1.15)	Connecticut	CT
+Child	Large Fringe Metropolitan	Middlesex, Tolland	11.0% (1.73)	Connecticut	CT
+Child	Medium Metropolitan	Fairfield, New Haven, New London, Windham	11.1% (0.73)	Connecticut	CT
+Child	Micropolitan	Litchfield	9.3% (2.16)	Connecticut	CT
+Adult	Large Central Metropolitan	Hartford	11.7% (0.54)	Connecticut	CT
+Adult	Large Fringe Metropolitan	Middlesex, Tolland	10.4% (0.82)	Connecticut	CT
+Adult	Medium Metropolitan	Fairfield, New Haven, New London, Windham	10.1% (0.30)	Connecticut	CT
+Adult	Micropolitan	Litchfield	9.2% (0.95)	Connecticut	CT
+Adult	Large Fringe Metropolitan	New Castle County	9.8% (0.55)	Delaware	DE
+Adult	Medium Metropolitan	Sussex County	8.8% (0.60)	Delaware	DE
+Adult	Small Metropolitan	Kent County	10.8% (0.64)	Delaware	DE
+Adult	Large Central Metropolitan	District of Columbia	10.3% (0.38)	District of Columbia	DC
+Child	Large Central Metropolitan	Duval, Hillsborough, Miami-Dade, Orange, Pinellas	7.7% (1.00)	Florida	FL
+Child	Large Fringe Metropolitan	Baker, Broward, Clay, Hernando, Lake, Nassau, Osceola, Palm Beach, Pasco, St. Johns, Seminole	6.7% (0.87)	Florida	FL
+Child	Medium Metropolitan	Alachua, Brevard, Collier, Escambia, Flagler, Gadsden, Gilchrist, Jefferson, Lee, Leon, Manatee, Marion, Martin, Polk, St. Lucie, Santa Rosa, Sarasota, Volusia, Wakulla	7.8% (0.70)	Florida	FL
+Child	Small Metropolitan	Bay, Charlotte, Citrus, Gulf, Highlands, Indian River, Okaloosa, Sumter, Walton	7.9% (1.50)	Florida	FL
+Child	Micropolitan	Columbia, DeSoto, Hardee, Hendry, Monroe, Okeechobee, Putnam	8.1% (1.27)	Florida	FL
+Child	Noncore	Bradford, Calhoun, Dixie, Franklin, Glades, Hamilton, Holmes, Jackson, Lafayette, Levy, Liberty, Madison, Suwannee, Taylor, Union, Washington	8.5% (1.24)	Florida	FL
+Adult	Large Central Metropolitan	Duval, Hillsborough, Miami-Dade, Orange, Pinellas	7.9% (0.47)	Florida	FL
+Adult	Large Fringe Metropolitan	Baker, Broward, Clay, Hernando, Lake, Nassau, Osceola, Palm Beach, Pasco, St. Johns, Seminole	7.4% (0.47)	Florida	FL
+Adult	Medium Metropolitan	Alachua, Brevard, Collier, Escambia, Flagler, Gadsden, Gilchrist, Jefferson, Lee, Leon, Manatee, Marion, Martin, Polk, St. Lucie, Santa Rosa, Sarasota, Volusia, Wakulla	7.4% (0.30)	Florida	FL
+Adult	Small Metropolitan	Bay, Charlotte, Citrus, Gulf, Highlands, Indian River, Okaloosa, Sumter, Walton	7.9% (0.45)	Florida	FL
+Adult	Micropolitan	Columbia, DeSoto, Hardee, Hendry, Monroe, Okeechobee, Putnam	8.4% (0.78)	Florida	FL
+Adult	Noncore	Bradford, Calhoun, Dixie, Franklin, Glades, Hamilton, Holmes, Jackson, Lafayette, Levy, Liberty, Madison, Suwannee, Taylor, Union, Washington	9.2% (0.77)	Florida	FL
+Child	Large Central Metropolitan	Fulton	12.3% (2.83)	Georgia	GA
+Child	Large Fringe Metropolitan	Barrow, Bartow, Butts, Carroll, Cherokee, Clayton, Cobb, Coweta, Dawson, DeKalb, Douglas, Fayette, Forsyth, Gwinnett, Haralson, Heard, Henry, Jasper, Lamar, Meriwether, Morgan, Newton, Paulding, Pickens, Pike, Rockdale, Spalding, Walton	7.2% (0.75)	Georgia	GA
+Child	Medium Metropolitan	Bryan, Burke, Catoosa, Chatham, Chattahoochee, Columbia, Dade, Effingham, Harris, Lincoln, McDuffie, Marion, Muscogee, Richmond, Walker	9.2% (1.97)	Georgia	GA
+Child	Small Metropolitan	Baker, Bibb, Brantley, Brooks, Clarke, Crawford, Dougherty, Echols, Floyd, Glynn, Hall, Houston, Jones, Lanier, Lee, Liberty, Long, Lowndes, McIntosh, Madison, Monroe, Murray, Oconee, Oglethorpe, Peach, Pulaski, Terrell, Twiggs, Whitfield, Worth	9.8% (1.50)	Georgia	GA
+Child	Micropolitan	Baldwin, Ben Hill, Bulloch, Camden, Chattooga, Coffee, Colquitt, Crisp, Decatur, Gordon, Habersham, Hancock, Jackson, Johnson, Laurens, Montgomery, Pierce, Polk, Schley, Stephens, Sumter, Thomas, Tift, Toombs, Troup, Upson, Ware, Wayne	8.2% (1.82)	Georgia	GA
+Child	Noncore	Appling, Atkinson, Bacon, Banks, Berrien, Bleckley, Calhoun, Candler, Charlton, Clay, Clinch, Cook, Dodge, Dooly, Early, Elbert, Emanuel, Evans, Fannin, Franklin, Gilmer, Glascock, Grady, Greene, Hart, Irwin, Jeff Davis, Jefferson, Jenkins, Lumpkin, Macon, Miller, Mitchell, Putnam, Quitman, Rabun, Randolph, Screven, Seminole, Stewart, Talbot, Taliaferro, Tattnall, Taylor, Telfair, Towns, Treutlen, Turner, Union, Warren, Washington, Webster, Wheeler, White, Wilcox, Wilkes, Wilkinson	9.0% (1.69)	Georgia	GA
+Adult	Large Central Metropolitan	Fulton	7.8% (0.76)	Georgia	GA
+Adult	Large Fringe Metropolitan	Barrow, Bartow, Butts, Carroll, Cherokee, Clayton, Cobb, Coweta, Dawson, DeKalb, Douglas, Fayette, Forsyth, Gwinnett, Haralson, Heard, Henry, Jasper, Lamar, Meriwether, Morgan, Newton, Paulding, Pickens, Pike, Rockdale, Spalding, Walton	7.9% (0.40)	Georgia	GA
+Adult	Medium Metropolitan	Bryan, Burke, Catoosa, Chatham, Chattahoochee, Columbia, Dade, Effingham, Harris, Lincoln, McDuffie, Marion, Muscogee, Richmond, Walker	9.1% (0.79)	Georgia	GA
+Adult	Small Metropolitan	Baker, Bibb, Brantley, Brooks, Clarke, Crawford, Dougherty, Echols, Floyd, Glynn, Hall, Houston, Jones, Lanier, Lee, Liberty, Long, Lowndes, McIntosh, Madison, Monroe, Murray, Oconee, Oglethorpe, Peach, Pulaski, Terrell, Twiggs, Whitfield, Worth	9.6% (0.71)	Georgia	GA
+Adult	Micropolitan	Baldwin, Ben Hill, Bulloch, Camden, Chattooga, Coffee, Colquitt, Crisp, Decatur, Gordon, Habersham, Hancock, Jackson, Johnson, Laurens, Montgomery, Pierce, Polk, Schley, Stephens, Sumter, Thomas, Tift, Toombs, Troup, Upson, Ware, Wayne	10.0% (0.86)	Georgia	GA
+Adult	Noncore	Appling, Atkinson, Bacon, Banks, Berrien, Bleckley, Calhoun, Candler, Charlton, Clay, Clinch, Cook, Dodge, Dooly, Early, Elbert, Emanuel, Evans, Fannin, Franklin, Gilmer, Glascock, Grady, Greene, Hart, Irwin, Jeff Davis, Jefferson, Jenkins, Lumpkin, Macon, Miller, Mitchell, Putnam, Quitman, Rabun, Randolph, Screven, Seminole, Stewart, Talbot, Taliaferro, Tattnall, Taylor, Telfair, Towns, Treutlen, Turner, Union, Warren, Washington, Webster, Wheeler, White, Wilcox, Wilkes, Wilkinson	9.5% (0.93)	Georgia	GA
+Child	Medium Metropolitan	Honolulu	9.8% (0.72)	Hawaii	HI
+Child	Small Metropolitan	Kalawao, Maui	9.9% (1.28)	Hawaii	HI
+Child	Micropolitan	Hawaii, Kauai	11.0% (1.09)	Hawaii	HI
+Adult	Medium Metropolitan	Honolulu	9.4% (0.35)	Hawaii	HI
+Adult	Small Metropolitan	Kalawao, Maui	11.0% (0.71)	Hawaii	HI
+Adult	Micropolitan	Hawaii, Kauai	11.0% (0.57)	Hawaii	HI
+Adult	Medium Metropolitan	Ada, Boise, Canyon, Gem, Owyhee	8.0% (0.61)	Idaho	ID
+Adult	Small Metropolitan	Bannock, Bonneville, Butte, Franklin, Jefferson, Kootenai, Nez Perce	9.2% (0.57)	Idaho	ID
+Adult	Micropolitan	Bingham, Blaine, Bonner, Camas, Cassia, Elmore, Fremont, Jerome, Latah, Lincoln, Madison, Minidoka, Payette, Teton, Twin Falls	9.8% (0.65)	Idaho	ID
+Adult	Noncore	Adams, Bear Lake, Benewah, Boundary, Caribou, Clark, Clearwater, Custer, Gooding, Idaho, Lemhi, Lewis, Oneida, Power, Shoshone, Valley, Washington	10.3% (0.92)	Idaho	ID
+Child	Large Central Metropolitan	Cook	6.7% (0.78)	Illinois	IL
+Child	Large Fringe Metropolitan	Bond, Calhoun, Clinton, DeKalb, DuPage, Grundy, Jersey, Kane, Kendall, Lake, McHenry, Macoupin, Madison, Monroe, St. Clair, Will	5.8% (0.78)	Illinois	IL
+Child	Medium Metropolitan	Boone, Henry, Marshall, Mercer, Peoria, Rock Island, Stark, Tazewell, Winnebago, Woodford	7.6% (1.84)	Illinois	IL
+Child	Small Metropolitan	Alexander, Champaign, De Witt, Ford, Jackson, Kankakee, McLean, Macon, Menard, Piatt, Sangamon, Vermilion, Williamson	6.2% (1.86)	Illinois	IL
+Child	Micropolitan	Adams, Bureau, Christian, Coles, Cumberland, Effingham, Fulton, Hancock, Henderson, Jefferson, Knox, La Salle, Lee, Livingston, Logan, McDonough, Marion, Massac, Morgan, Ogle, Putnam, Scott, Stephenson, Whiteside	7.0% (1.85)	Illinois	IL
+Child	Noncore	Brown, Carroll, Cass, Clark, Clay, Crawford, Douglas, Edgar, Edwards, Fayette, Franklin, Gallatin, Greene, Hamilton, Hardin, Iroquois, Jasper, Jo Daviess, Johnson, Lawrence, Mason, Montgomery, Moultrie, Perry, Pike, Pope, Pulaski, Randolph, Richland, Saline, Schuyler, Shelby, Union, Wabash, Warren, Washington, Wayne, White	4.6% (1.97)	Illinois	IL
+Adult	Large Central Metropolitan	Cook	8.5% (0.44)	Illinois	IL
+Adult	Large Fringe Metropolitan	Bond, Calhoun, Clinton, DeKalb, DuPage, Grundy, Jersey, Kane, Kendall, Lake, McHenry, Macoupin, Madison, Monroe, St. Clair, Will	8.3% (0.50)	Illinois	IL
+Adult	Medium Metropolitan	Boone, Henry, Marshall, Mercer, Peoria, Rock Island, Stark, Tazewell, Winnebago, Woodford	9.1% (1.07)	Illinois	IL
+Adult	Small Metropolitan	Alexander, Champaign, De Witt, Ford, Jackson, Kankakee, McLean, Macon, Menard, Piatt, Sangamon, Vermilion, Williamson	9.6% (1.09)	Illinois	IL
+Adult	Micropolitan	Adams, Bureau, Christian, Coles, Cumberland, Effingham, Fulton, Hancock, Henderson, Jefferson, Knox, La Salle, Lee, Livingston, Logan, McDonough, Marion, Massac, Morgan, Ogle, Putnam, Scott, Stephenson, Whiteside	8.7% (0.91)	Illinois	IL
+Adult	Noncore	Brown, Carroll, Cass, Clark, Clay, Crawford, Douglas, Edgar, Edwards, Fayette, Franklin, Gallatin, Greene, Hamilton, Hardin, Iroquois, Jasper, Jo Daviess, Johnson, Lawrence, Mason, Montgomery, Moultrie, Perry, Pike, Pope, Pulaski, Randolph, Richland, Saline, Schuyler, Shelby, Union, Wabash, Warren, Washington, Wayne, White	8.7% (1.44)	Illinois	IL
+Child	Large Central Metropolitan	Marion	10.4% (1.28)	Indiana	IN
+Child	Large Fringe Metropolitan	Boone, Brown, Clark, Dearborn, Floyd, Hamilton, Hancock, Harrison, Hendricks, Jasper, Johnson, Lake, Madison, Morgan, Newton, Ohio, Porter, Putnam, Scott, Shelby, Union, Washington	8.1% (0.80)	Indiana	IN
+Child	Medium Metropolitan	Allen, Posey, St. Joseph, Vanderburgh, Warrick, Wells, Whitley	6.6% (0.96)	Indiana	IN
+Child	Small Metropolitan	Bartholomew, Benton, Carroll, Clay, Delaware, Elkhart, Howard, LaPorte, Monroe, Owen, Sullivan, Tippecanoe, Vermillion, Vigo	8.1% (1.04)	Indiana	IN
+Child	Micropolitan	Adams, Cass, Clinton, Daviess, Decatur, DeKalb, Dubois, Fayette, Grant, Henry, Huntington, Jackson, Jefferson, Jennings, Knox, Kosciusko, Lawrence, Marshall, Miami, Montgomery, Noble, Pike, Steuben, Wabash, Wayne	7.0% (0.93)	Indiana	IN
+Child	Noncore	Blackford, Crawford, Fountain, Franklin, Fulton, Gibson, Greene, Jay, LaGrange, Martin, Orange, Parke, Perry, Pulaski, Randolph, Ripley, Rush, Spencer, Starke, Switzerland, Tipton, Warren, White	4.5% (1.18)	Indiana	IN
+Adult	Large Central Metropolitan	Marion	10.6% (0.62)	Indiana	IN
+Adult	Large Fringe Metropolitan	Boone, Brown, Clark, Dearborn, Floyd, Hamilton, Hancock, Harrison, Hendricks, Jasper, Johnson, Lake, Madison, Morgan, Newton, Ohio, Porter, Putnam, Scott, Shelby, Union, Washington	9.3% (0.42)	Indiana	IN
+Adult	Medium Metropolitan	Allen, Posey, St. Joseph, Vanderburgh, Warrick, Wells, Whitley	10.7% (0.66)	Indiana	IN
+Adult	Small Metropolitan	Bartholomew, Benton, Carroll, Clay, Delaware, Elkhart, Howard, LaPorte, Monroe, Owen, Sullivan, Tippecanoe, Vermillion, Vigo	9.7% (0.54)	Indiana	IN
+Adult	Micropolitan	Adams, Cass, Clinton, Daviess, Decatur, DeKalb, Dubois, Fayette, Grant, Henry, Huntington, Jackson, Jefferson, Jennings, Knox, Kosciusko, Lawrence, Marshall, Miami, Montgomery, Noble, Pike, Steuben, Wabash, Wayne	10.7% (0.63)	Indiana	IN
+Adult	Noncore	Blackford, Crawford, Fountain, Franklin, Fulton, Gibson, Greene, Jay, LaGrange, Martin, Orange, Parke, Perry, Pulaski, Randolph, Ripley, Rush, Spencer, Starke, Switzerland, Tipton, Warren, White	10.9% (0.86)	Indiana	IN
+Adult	Medium Metropolitan	Benton, Dallas, Guthrie, Harrison, Jones, Linn, Madison, Mills, Polk, Pottawattamie, Scott, Warren	8.7% (0.40)	Iowa	IA
+Adult	Small Metropolitan	Black Hawk, Bremer, Dubuque, Grundy, Johnson, Plymouth, Story, Washington, Woodbury	7.5% (0.50)	Iowa	IA
+Adult	Micropolitan	Boone, Buena Vista, Cerro, Clay, Clinton, Davis, Des, Dickinson, Jasper, Jefferson, Lee, Mahaska, Marshall, Muscatine, Wapello, Webster, Worth	9.4% (0.59)	Iowa	IA
+Adult	Noncore	Adair, Adams, Allamakee, Appanoose, Audubon, Buchanan, Butler, Calhoun, Carroll, Cass, Cedar, Cherokee, Chickasaw, Clarke, Clayton, Crawford, Decatur, Delaware, Emmet, Fayette, Floyd, Franklin, Fremont, Greene, Hamilton, Hancock, Hardin, Henry, Howard, Humboldt, Ida, Iowa, Jackson, Keokuk, Kossuth, Louisa, Lucas, Lyon, Marion, Mitchell, Monona, Monroe, Montgomery, O'Brien, Osceola, Page, Palo, Pocahontas, Poweshiek, Ringgold, Sac, Shelby, Sioux, Tama, Taylor, Union, Van, Wayne, Winnebago, Winneshiek, Wright	7.8% (0.39)	Iowa	IA
+Child	Large Fringe Metropolitan	Johnson, Leavenworth, Linn, Miami, Wyandotte	9.3% (0.70)	Kansas	KS
+Child	Medium Metropolitan	Butler, Harvey, Kingman, Sedgwick, Sumner	8.6% (0.78)	Kansas	KS
+Child	Small Metropolitan	Doniphan, Douglas, Jackson, Jefferson, Osage, Pottawatomie, Riley, Shawnee, Wabaunsee,	10.5% (1.12)	Kansas	KS
+Child	Micropolitan	Atchison, Barton, Cowley, Crawford, Ellis, Finney, Ford, Franklin, Geary, Kearny, Labette, Lyon, McPherson, Montgomery, Ottawa, Reno, Saline, Seward	6.9% (0.81)	Kansas	KS
+Child	Noncore	Allen, Anderson, Barber, Bourbon, Brown, Chase, Chautauqua, Cherokee, Cheyenne, Clark, Clay, Cloud, Coffey, Comanche, Decatur, Dickinson, Edwards, Elk, Ellsworth, Gove, Graham, Grant, Gray, Greeley, Greenwood, Hamilton, Harper, Haskell, Hodgeman, Jewell, Kiowa, Lane, Lincoln, Logan, Marion, Marshall, Meade, Mitchell, Morris, Morton, Nemaha, Neosho, Ness, Norton, Osborne, Pawnee, Phillips, Pratt, Rawlins, Republic, Rice, Rooks, Rush, Russell, Scott, Sheridan, Sherman, Smith, Stafford, Stanton, Stevens, Thomas, Trego, Wallace, Washington, Wichita, Wilson, Woodson	7.8% (0.87)	Kansas	KS
+Adult	Large Fringe Metropolitan	Johnson, Leavenworth, Linn, Miami, Wyandotte	8.8% (0.34)	Kansas	KS
+Adult	Medium Metropolitan	Butler, Harvey, Kingman, Sedgwick, Sumner	9.5% (0.42)	Kansas	KS
+Adult	Small Metropolitan	Doniphan, Douglas, Jackson, Jefferson, Osage, Pottawatomie, Riley, Shawnee, Wabaunsee,	10.3% (0.51)	Kansas	KS
+Adult	Micropolitan	Atchison, Barton, Cowley, Crawford, Ellis, Finney, Ford, Franklin, Geary, Kearny, Labette, Lyon, McPherson, Montgomery, Ottawa, Reno, Saline, Seward	8.7% (0.43)	Kansas	KS
+Adult	Noncore	Allen, Anderson, Barber, Bourbon, Brown, Chase, Chautauqua, Cherokee, Cheyenne, Clark, Clay, Cloud, Coffey, Comanche, Decatur, Dickinson, Edwards, Elk, Ellsworth, Gove, Graham, Grant, Gray, Greeley, Greenwood, Hamilton, Harper, Haskell, Hodgeman, Jewell, Kiowa, Lane, Lincoln, Logan, Marion, Marshall, Meade, Mitchell, Morris, Morton, Nemaha, Neosho, Ness, Norton, Osborne, Pawnee, Phillips, Pratt, Rawlins, Republic, Rice, Rooks, Rush, Russell, Scott, Sheridan, Sherman, Smith, Stafford, Stanton, Stevens, Thomas, Trego, Wallace, Washington, Wichita, Wilson, Woodson	9.2% (0.45)	Kansas	KS
+Adult	Large Central Metropolitan	Jefferson	11.1% (0.88)	Kentucky	KY
+Adult	Large Fringe Metropolitan	Boone, Bracken, Bullitt, Campbell, Gallatin, Grant, Henry, Kenton, Oldham, Pendleton, Shelby, Spencer, Trimble	8.5% (0.77)	Kentucky	KY
+Adult	Medium Metropolitan	Bourbon, Boyd, Christian, Clark, Fayette, Greenup, Henderson, Jessamine, Scott, Trigg, Woodford	11.9% (0.92)	Kentucky	KY
+Adult	Small Metropolitan	Allen, Butler, Daviess, Edmonson, Hancock, Hardin, Larue, McLean, Meade, Warren	9.4% (0.70)	Kentucky	KY
+Adult	Micropolitan	Anderson, Ballard, Barren, Bath, Bell, Boyle, Calloway, Franklin, Fulton, Graves, Hopkins, Knox, Laurel, Lincoln, Livingston, McCracken, Madison, Mason, Menifee, Metcalfe, Montgomery, Nelson, Pulaski, Rockcastle, Taylor, Whitley	12.6% (0.74)	Kentucky	KY
+Adult	Noncore	Adair, Breathitt, Breckinridge, Caldwell, Carlisle, Carroll, Carter, Casey, Clay, Clinton, Crittenden, Cumberland, Elliott, Estill, Fleming, Floyd, Garrard, Grayson, Green, Harlan, Harrison, Hart, Hickman, Jackson, Johnson, Knott, Lawrence, Lee, Leslie, Letcher, Lewis, Logan, Lyon, McCreary, Magoffin, Marion, Marshall, Martin, Mercer, Monroe, Morgan, Muhlenberg, Nicholas, Ohio, Owen, Owsley, Perry, Pike, Powell, Robertson, Rowan, Russell, Simpson, Todd, Union, Washington, Wayne, Webster, Wolfe	12.3% (0.56)	Kentucky	KY
+Adult	Large Central Metropolitan	Orleans Parish	9.5% (2.03)	Louisiana	LA
+Adult	Large Fringe Metropolitan	Jefferson Parish, Plaquemines Parish, St. Bernard Parish, St. Charles Parish, St. James Parish, St. John the Baptist Parish, St. Tammany Parish	8.0% (0.88)	Louisiana	LA
+Adult	Medium Metropolitan	Acadia Parish, Ascension Parish, Bossier Parish, Caddo Parish, De Soto Parish, East Baton Rouge Parish, East Feliciana Parish, Iberia Parish, Iberville Parish, Lafayette Parish, Livingston Parish, Pointe Coupee Parish, St. Helena Parish, St. Martin Parish, Vermilion Parish, Webster Parish, West Baton Rouge Parish, West Feliciana Parish	8.6% (0.55)	Louisiana	LA
+Adult	Small Metropolitan	Calcasieu Parish, Cameron Parish, Grant Parish, Lafourche Parish, Ouachita Parish, Rapides Parish, Tangipahoa Parish, Terrebonne Parish, Union Parish	8.3% (0.62)	Louisiana	LA
+Adult	Micropolitan	Beauregard Parish, Concordia Parish, Lincoln Parish, Morehouse Parish, Natchitoches Parish, St. Landry Parish, St. Mary Parish, Vernon Parish, Washington Parish	9.5% (0.94)	Louisiana	LA
+Adult	Noncore	Allen Parish, Assumption Parish, Avoyelles Parish, Bienville Parish, Caldwell Parish, Catahoula Parish, Claiborne Parish, East Carroll Parish, Evangeline Parish, Franklin Parish, Jackson Parish, Jefferson Davis Parish, LaSalle Parish, Madison Parish, Red River Parish, Richland Parish, Sabine Parish, Tensas Parish, West Carroll Parish, Winn Parish	10.5% (1.22)	Louisiana	LA
+Child	Medium Metropolitan	Cumberland, Sagadahoc, York	6.9% (0.93)	Maine	ME
+Child	Small Metropolitan	Androscoggin, Penobscot	10.5% (1.56)	Maine	ME
+Child	Micropolitan	Kennebec	7.2% (1.73)	Maine	ME
+Child	Noncore	Aroostook, Franklin, Hancock, Knox, Lincoln, Oxford, Piscataquis, Somerset, Waldo, Washington	7.0% (0.64)	Maine	ME
+Adult	Medium Metropolitan	Cumberland, Sagadahoc, York	10.5% (0.52)	Maine	ME
+Adult	Small Metropolitan	Androscoggin, Penobscot	14.3% (0.82)	Maine	ME
+Adult	Micropolitan	Kennebec	10.7% (1.06)	Maine	ME
+Adult	Noncore	Aroostook, Franklin, Hancock, Knox, Lincoln, Oxford, Piscataquis, Somerset, Waldo, Washington	12.5% (0.40)	Maine	ME
+Adult	Large Central Metropolitan	Baltimore city	12.6% (0.90)	Maryland	MD
+Adult	Large Fringe Metropolitan	Anne Arundel, Baltimore, Calvert, Carroll, Cecil, Charles, Frederick, Harford, Howard, Montgomery, Prince George's, Queen Anne's	8.8% (0.24)	Maryland	MD
+Adult	Medium Metropolitan	Somerset, Washington, Wicomico, Worcester	11.1% (0.70)	Maryland	MD
+Adult	Small Metropolitan	Allegany, St. Mary's	10.0% (0.99)	Maryland	MD
+Adult	Micropolitan	Dorchester, Talbot	11.5% (1.05)	Maryland	MD
+Adult	Noncore	Caroline, Garrett, Kent	9.3% (0.99)	Maryland	MD
+Child	Large Central Metropolitan	Suffolk	6.4% (2.10)	Massachusetts	MA
+Child	Large Fringe Metropolitan	Bristol, Essex, Middlesex, Norfolk, Plymouth	10.5% (1.61)	Massachusetts	MA
+Child	Medium Metropolitan	Hampden, Hampshire, Worcester	13.3% (2.49)	Massachusetts	MA
+Adult	Large Central Metropolitan	Suffolk	10.7% (1.06)	Massachusetts	MA
+Adult	Large Fringe Metropolitan	Bristol, Essex, Middlesex, Norfolk, Plymouth	10.3% (0.41)	Massachusetts	MA
+Adult	Medium Metropolitan	Hampden, Hampshire, Worcester	12.2% (0.70)	Massachusetts	MA
+Adult	Small Metropolitan	Barnstable, Berkshire	8.9% (0.97)	Massachusetts	MA
+Adult	Micropolitan	Dukes, Franklin	10.5% (2.13)	Massachusetts	MA
+Adult	Noncore	Nantucket	11.5% (5.39)	Massachusetts	MA
+Child	Large Central Metropolitan	Kent, Wayne	11.4% (0.98)	Michigan	MI
+Child	Large Fringe Metropolitan	Barry, Lapeer, Livingston, Macomb, Montcalm, Oakland, Ottawa, St. Clair	7.8% (0.74)	Michigan	MI
+Child	Medium Metropolitan	Cass, Clinton, Eaton, Genesee, Ingham, Kalamazoo, Van Buren, Washtenaw	8.5% (0.89)	Michigan	MI
+Child	Small Metropolitan	Bay, Berrien, Calhoun, Jackson, Midland, Monroe, Muskegon, Saginaw	8.8% (1.05)	Michigan	MI
+Child	Micropolitan	Allegan, Alpena, Benzie, Branch, Chippewa, Delta, Dickinson, Grand Traverse, Gratiot, Hillsdale, Houghton, Ionia, Isabella, Kalkaska, Keweenaw, Leelanau, Lenawee, Marquette, Mason, Mecosta, Menominee, Missaukee, St. Joseph, Shiawassee, Wexford	6.9% (1.08)	Michigan	MI
+Child	Noncore	Alcona, Alger, Antrim, Arenac, Baraga, Charlevoix, Cheboygan, Clare, Crawford, Emmet, Gladwin, Gogebic, Huron, Iosco, Iron, Lake, Luce, Mackinac, Manistee, Montmorency, Newaygo, Oceana, Ogemaw, Ontonagon, Osceola, Oscoda, Otsego, Presque Isle, Roscommon, Sanilac, Schoolcraft, Tuscola	7.0% (1.35)	Michigan	MI
+Adult	Large Central Metropolitan	Kent, Wayne	11.9% (0.50)	Michigan	MI
+Adult	Large Fringe Metropolitan	Barry, Lapeer, Livingston, Macomb, Montcalm, Oakland, Ottawa, St. Clair	9.8% (0.41)	Michigan	MI
+Adult	Medium Metropolitan	Cass, Clinton, Eaton, Genesee, Ingham, Kalamazoo, Van Buren, Washtenaw	10.5% (0.51)	Michigan	MI
+Adult	Small Metropolitan	Bay, Berrien, Calhoun, Jackson, Midland, Monroe, Muskegon, Saginaw	11.6% (0.67)	Michigan	MI
+Adult	Micropolitan	Allegan, Alpena, Benzie, Branch, Chippewa, Delta, Dickinson, Grand Traverse, Gratiot, Hillsdale, Houghton, Ionia, Isabella, Kalkaska, Keweenaw, Leelanau, Lenawee, Marquette, Mason, Mecosta, Menominee, Missaukee, St. Joseph, Shiawassee, Wexford	11.2% (0.67)	Michigan	MI
+Adult	Noncore	Alcona, Alger, Antrim, Arenac, Baraga, Charlevoix, Cheboygan, Clare, Crawford, Emmet, Gladwin, Gogebic, Huron, Iosco, Iron, Lake, Luce, Mackinac, Manistee, Montmorency, Newaygo, Oceana, Ogemaw, Ontonagon, Osceola, Oscoda, Otsego, Presque Isle, Roscommon, Sanilac, Schoolcraft, Tuscola	12.7% (0.89)	Michigan	MI
+Child	Large Fringe Metropolitan	Benton, DeSoto, Marshall, Tate, Tunica	5.0% (2.02)	Mississippi	MS
+Child	Medium Metropolitan	Copiah, Hancock, Harrison, Hinds, Jackson, Madison, Rankin, Simpson, Yazoo	8.0% (1.32)	Mississippi	MS
+Child	Small Metropolitan	Forrest, Lamar, Perry	12.0% (3.24)	Mississippi	MS
+Child	Micropolitan	Adams, Alcorn, Amite, Bolivar, Carroll, Claiborne, Clarke, Coahoma, Grenada, Itawamba, Jasper, Jones, Kemper, Lafayette, Lauderdale, Lee, Leflore, Lincoln, Lowndes, Oktibbeha, Pearl River, Pike, Pontotoc, Sunflower, Warren, Washington	7.6% (0.92)	Mississippi	MS
+Child	Noncore	Attala, Calhoun, Chickasaw, Choctaw, Clay, Covington, Franklin, George, Greene, Holmes, Humphreys, Issaquena, Jefferson, Jefferson Davis, Lawrence, Leake, Marion, Monroe, Montgomery, Neshoba, Newton, Noxubee, Panola, Prentiss, Quitman, Scott, Sharkey, Smith, Stone, Tallahatchie, Tippah, Tishomingo, Union, Walthall, Wayne, Webster, Wilkinson, Winston, Yalobusha	9.0% (1.03)	Mississippi	MS
+Adult	Large Fringe Metropolitan	Benton, DeSoto, Marshall, Tate, Tunica	9.4% (1.13)	Mississippi	MS
+Adult	Medium Metropolitan	Copiah, Hancock, Harrison, Hinds, Jackson, Madison, Rankin, Simpson, Yazoo	7.7% (0.57)	Mississippi	MS
+Adult	Small Metropolitan	Forrest, Lamar, Perry	8.7% (1.27)	Mississippi	MS
+Adult	Micropolitan	Adams, Alcorn, Amite, Bolivar, Carroll, Claiborne, Clarke, Coahoma, Grenada, Itawamba, Jasper, Jones, Kemper, Lafayette, Lauderdale, Lee, Leflore, Lincoln, Lowndes, Oktibbeha, Pearl River, Pike, Pontotoc, Sunflower, Warren, Washington	9.2% (0.52)	Mississippi	MS
+Adult	Noncore	Attala, Calhoun, Chickasaw, Choctaw, Clay, Covington, Franklin, George, Greene, Holmes, Humphreys, Issaquena, Jefferson, Jefferson Davis, Lawrence, Leake, Marion, Monroe, Montgomery, Neshoba, Newton, Noxubee, Panola, Prentiss, Quitman, Scott, Sharkey, Smith, Stone, Tallahatchie, Tippah, Tishomingo, Union, Walthall, Wayne, Webster, Wilkinson, Winston, Yalobusha	9.0% (0.55)	Mississippi	MS
+Child	Large Central Metropolitan	Hennepin, Ramsey	6.4% (0.52)	Minnesota	MN
+Child	Large Fringe Metropolitan	Anoka, Carver, Chisago, Dakota, Isanti, Le Sueur, Mille Lacs, Scott, Sherburne, Sibley, Washington, Wright	5.8% (0.51)	Minnesota	MN
+Child	Medium Metropolitan	Carlton, St. Louis	6.1% (1.23)	Minnesota	MN
+Child	Small Metropolitan	Benton, Blue Earth, Clay, Dodge, Fillmore, Houston, Nicollet, Olmsted, Polk, Stearns, Wabasha	3.7% (0.54)	Minnesota	MN
+Child	Micropolitan	Beltrami, Brown, Cass, Crow Wing, Douglas, Freeborn, Goodhue, Kandiyohi, Lyon, McLeod, Mower, Nobles, Otter Tail, Rice, Steele, Wilkin, Winona	4.8% (0.67)	Minnesota	MN
+Child	Noncore	Aitkin, Becker, Big Stone, Chippewa, Clearwater, Cook, Cottonwood, Faribault, Grant, Hubbard, Itasca, Jackson, Kanabec, Kittson, Koochiching, Lac qui Parle, Lake, Lake of the Woods, Lincoln, Mahnomen, Marshall, Martin, Meeker, Morrison, Murray, Norman, Pennington, Pine, Pipestone, Pope, Red Lake, Redwood, Renville, Rock, Roseau, Stevens, Swift, Todd, Traverse, Wadena, Waseca, Watonwan, Yellow Medicine	4.6% (0.75)	Minnesota	MN
+Adult	Large Central Metropolitan	Hennepin, Ramsey	8.0% (0.28)	Minnesota	MN
+Adult	Large Fringe Metropolitan	Anoka, Carver, Chisago, Dakota, Isanti, Le Sueur, Mille Lacs, Scott, Sherburne, Sibley, Washington, Wright	7.4% (0.29)	Minnesota	MN
+Adult	Medium Metropolitan	Carlton, St. Louis	8.1% (0.62)	Minnesota	MN
+Adult	Small Metropolitan	Benton, Blue Earth, Clay, Dodge, Fillmore, Houston, Nicollet, Olmsted, Polk, Stearns, Wabasha	7.9% (0.47)	Minnesota	MN
+Adult	Micropolitan	Beltrami, Brown, Cass, Crow Wing, Douglas, Freeborn, Goodhue, Kandiyohi, Lyon, McLeod, Mower, Nobles, Otter Tail, Rice, Steele, Wilkin, Winona	7.3% (0.38)	Minnesota	MN
+Adult	Noncore	Aitkin, Becker, Big Stone, Chippewa, Clearwater, Cook, Cottonwood, Faribault, Grant, Hubbard, Itasca, Jackson, Kanabec, Kittson, Koochiching, Lac qui Parle, Lake, Lake of the Woods, Lincoln, Mahnomen, Marshall, Martin, Meeker, Morrison, Murray, Norman, Pennington, Pine, Pipestone, Pope, Red Lake, Redwood, Renville, Rock, Roseau, Stevens, Swift, Todd, Traverse, Wadena, Waseca, Watonwan, Yellow Medicine	7.9% (0.40)	Minnesota	MN
+Child	Large Central Metropolitan	Jackson, St. Louis city	12.7% (1.66)	Missouri	MO
+Child	Large Fringe Metropolitan	Bates, Caldwell, Cass, Clay, Clinton, Franklin, Jefferson, Lafayette, Lincoln, Platte, Ray, St. Charles, St. Louis, Warren	9.8% (1.08)	Missouri	MO
+Child	Medium Metropolitan	Christian, Dallas, Greene, McDonald, Polk, Webster	3.1% (1.24)	Missouri	MO
+Child	Small Metropolitan	Andrew, Bollinger, Boone, Buchanan, Callaway, Cape Girardeau, Cole, DeKalb, Jasper, Moniteau, Newton, Osage	7.0% (1.96)	Missouri	MO
+Child	Micropolitan	Adair, Audrain, Butler, Clark, Dunklin, Howell, Johnson, Laclede, Lewis, Marion, Nodaway, Pettis, Phelps, Pulaski, Ralls, Randolph, St. Francois, Saline, Schuyler, Scott, Stone, Taney	8.3% (1.76)	Missouri	MO
+Child	Noncore	Atchison, Barry, Barton, Benton, Camden, Carroll, Carter, Cedar, Chariton, Cooper, Crawford, Dade, Daviess, Dent, Douglas, Gasconade, Gentry, Grundy, Harrison, Henry, Hickory, Holt, Howard, Iron, Knox, Lawrence, Linn, Livingston, Macon, Madison, Maries, Mercer, Miller, Mississippi, Monroe, Montgomery, Morgan, New Madrid, Oregon, Ozark, Pemiscot, Perry, Pike, Putnam, Reynolds, Ripley, St. Clair, Ste. Genevieve, Scotland, Shannon, Shelby, Stoddard, Sullivan, Texas, Vernon, Washington, Wayne, Worth, Wright	7.5% (1.57)	Missouri	MO
+Adult	Large Central Metropolitan	Jackson, St. Louis city	10.7% (0.78)	Missouri	MO
+Adult	Large Fringe Metropolitan	Bates, Caldwell, Cass, Clay, Clinton, Franklin, Jefferson, Lafayette, Lincoln, Platte, Ray, St. Charles, St. Louis, Warren	9.7% (0.51)	Missouri	MO
+Adult	Medium Metropolitan	Christian, Dallas, Greene, McDonald, Polk, Webster	8.3% (1.50)	Missouri	MO
+Adult	Small Metropolitan	Andrew, Bollinger, Boone, Buchanan, Callaway, Cape Girardeau, Cole, DeKalb, Jasper, Moniteau, Newton, Osage	8.6% (0.90)	Missouri	MO
+Adult	Micropolitan	Adair, Audrain, Butler, Clark, Dunklin, Howell, Johnson, Laclede, Lewis, Marion, Nodaway, Pettis, Phelps, Pulaski, Ralls, Randolph, St. Francois, Saline, Schuyler, Scott, Stone, Taney	9.1% (0.71)	Missouri	MO
+Adult	Noncore	Atchison, Barry, Barton, Benton, Camden, Carroll, Carter, Cedar, Chariton, Cooper, Crawford, Dade, Daviess, Dent, Douglas, Gasconade, Gentry, Grundy, Harrison, Henry, Hickory, Holt, Howard, Iron, Knox, Lawrence, Linn, Livingston, Macon, Madison, Maries, Mercer, Miller, Mississippi, Monroe, Montgomery, Morgan, New Madrid, Oregon, Ozark, Pemiscot, Perry, Pike, Putnam, Reynolds, Ripley, St. Clair, Ste. Genevieve, Scotland, Shannon, Shelby, Stoddard, Sullivan, Texas, Vernon, Washington, Wayne, Worth, Wright	9.6% (0.67)	Missouri	MO
+Child	Small Metropolitan	Carbon, Cascade, Golden Valley, Missoula, Yellowstone	6.1% (0.96)	Montana	MT
+Child	Micropolitan	Flathead, Gallatin, Jefferson, Lewis and Clark, Silver Bow	7.2% (1.43)	Montana	MT
+Child	Noncore	Beaverhead, Big Horn, Blaine, Broadwater, Carter, Chouteau, Custer, Daniels, Dawson, Deer Lodge, Fallon, Fergus, Garfield, Glacier, Granite, Hill, Judith Basin, Lake, Liberty, Lincoln, McCone, Madison, Meagher, Mineral, Musselshell, Park, Petroleum, Phillips, Pondera, Powder River, Powell, Prairie, Ravalli, Richland, Roosevelt, Rosebud, Sanders, Sheridan, Stillwater, Sweet Grass, Teton, Toole, Treasure, Valley, Wheatland, Wibaux	6.5% (0.81)	Montana	MT
+Adult	Small Metropolitan	Carbon, Cascade, Golden Valley, Missoula, Yellowstone	10.1% (0.56)	Montana	MT
+Adult	Micropolitan	Flathead, Gallatin, Jefferson, Lewis and Clark, Silver Bow	8.7% (0.62)	Montana	MT
+Adult	Noncore	Beaverhead, Big Horn, Blaine, Broadwater, Carter, Chouteau, Custer, Daniels, Dawson, Deer Lodge, Fallon, Fergus, Garfield, Glacier, Granite, Hill, Judith Basin, Lake, Liberty, Lincoln, McCone, Madison, Meagher, Mineral, Musselshell, Park, Petroleum, Phillips, Pondera, Powder River, Powell, Prairie, Ravalli, Richland, Roosevelt, Rosebud, Sanders, Sheridan, Stillwater, Sweet Grass, Teton, Toole, Treasure, Valley, Wheatland, Wibaux	8.9% (0.44)	Montana	MT
+Child	Medium Metropolitan	Cass, Douglas, Lancaster, Sarpy, Saunders, Seward, Washington	6.5% (0.57)	Nebraska	NE
+Child	Small Metropolitan	Dakota, Dixon, Hall, Hamilton, Howard, Merrick	4.9% (0.86)	Nebraska	NE
+Child	Micropolitan	Adams, Banner, Buffalo, Dawson, Dodge, Gage, Gosper, Kearney, Lincoln, Logan, McPherson, Madison, Pierce, Platte, Scotts Bluff, Sioux, Stanton	5.3% (0.57)	Nebraska	NE
+Child	Noncore	Antelope, Arthur, Blaine, Boone, Box Butte, Boyd, Brown, Burt, Butler, Cedar, Chase, Cherry, Cheyenne, Clay, Colfax, Cuming, Custer, Dawes, Deuel, Dundy, Fillmore, Franklin, Frontier, Furnas, Garden, Garfield, Grant, Greeley, Harlan, Hayes, Hitchcock, Holt, Hooker, Jefferson, Johnson, Keith, Keya Paha, Kimball, Knox, Loup, Morrill, Nance, Nemaha, Nuckolls, Otoe, Pawnee, Perkins, Phelps, Polk, Red, Richardson, Rock, Saline, Sheridan, Sherman, Thayer, Thomas, Thurston, Valley, Wayne, Webster, Wheeler, York	4.6% (0.43)	Nebraska	NE
+Adult	Medium Metropolitan	Cass, Douglas, Lancaster, Sarpy, Saunders, Seward, Washington	8.9% (0.34)	Nebraska	NE
+Adult	Small Metropolitan	Dakota, Dixon, Hall, Hamilton, Howard, Merrick	6.4% (0.55)	Nebraska	NE
+Adult	Micropolitan	Adams, Banner, Buffalo, Dawson, Dodge, Gage, Gosper, Kearney, Lincoln, Logan, McPherson, Madison, Pierce, Platte, Scotts Bluff, Sioux, Stanton	8.2% (0.34)	Nebraska	NE
+Adult	Noncore	Antelope, Arthur, Blaine, Boone, Box Butte, Boyd, Brown, Burt, Butler, Cedar, Chase, Cherry, Cheyenne, Clay, Colfax, Cuming, Custer, Dawes, Deuel, Dundy, Fillmore, Franklin, Frontier, Furnas, Garden, Garfield, Grant, Greeley, Harlan, Hayes, Hitchcock, Holt, Hooker, Jefferson, Johnson, Keith, Keya Paha, Kimball, Knox, Loup, Morrill, Nance, Nemaha, Nuckolls, Otoe, Pawnee, Perkins, Phelps, Polk, Red, Richardson, Rock, Saline, Sheridan, Sherman, Thayer, Thomas, Thurston, Valley, Wayne, Webster, Wheeler, York	7.8% (0.28)	Nebraska	NE
+Child	Large Central Metropolitan	Clark	7.4% (1.02)	Nevada	NV
+Child	Medium Metropolitan	Storey, Washoe	6.2% (1.11)	Nevada	NV
+Child	Micropolitan	Churchill, Douglas, Elko, Eureka, Humboldt, Lyon, Nye	4.8% (1.08)	Nevada	NV
+Adult	Large Central Metropolitan	Clark	8.6% (0.55)	Nevada	NV
+Adult	Medium Metropolitan	Storey, Washoe	9.5% (0.60)	Nevada	NV
+Adult	Small Metropolitan	Carson	7.8% (1.48)	Nevada	NV
+Adult	Micropolitan	Churchill, Douglas, Elko, Eureka, Humboldt, Lyon, Nye	8.7% (0.67)	Nevada	NV
+Adult	Noncore	Esmeralda, Lander, Lincoln, Mineral, Pershing, White Pine	9.8% (1.97)	Nevada	NV
+Adult	Large Fringe Metropolitan	Rockingham, Strafford	11.9% (0.71)	New Hampshire	NH
+Adult	Medium Metropolitan	Hillsborough	11.8% (0.74)	New Hampshire	NH
+Adult	Micropolitan	Belknap, Cheshire, Coos, Grafton, Merrimack, Sullivan	12.6% (0.58)	New Hampshire	NH
+Adult	Noncore	Carroll	13.2% (1.51)	New Hampshire	NH
+Child	Large Central Metropolitan	Essex, Hudson, Union	8.0% (1.39)	New Jersey	NJ
+Child	Large Fringe Metropolitan	Bergen, Burlington, Camden, Gloucester, Hunterdon, Middlesex, Monmouth, Morris, Ocean, Passaic, Salem, Somerset, Sussex	7.9% (0.91)	New Jersey	NJ
+Child	Medium Metropolitan	Atlantic, Mercer, Warren	8.2% (2.02)	New Jersey	NJ
+Child	Small Metropolitan	Cape May, Cumberland	6.7% (2.01)	New Jersey	NJ
+Adult	Large Central Metropolitan	Essex, Hudson, Union	8.1% (0.64)	New Jersey	NJ
+Adult	Large Fringe Metropolitan	Bergen, Burlington, Camden, Gloucester, Hunterdon, Middlesex, Monmouth, Morris, Ocean, Passaic, Salem, Somerset, Sussex	8.4% (0.43)	New Jersey	NJ
+Adult	Medium Metropolitan	Atlantic, Mercer, Warren	8.7% (0.98)	New Jersey	NJ
+Adult	Small Metropolitan	Cape May, Cumberland	11.5% (1.57)	New Jersey	NJ
+Child	Medium Metropolitan	Bernalillo, Sandoval, Torrance, Valencia	9.4% (1.30)	New Mexico	NM
+Child	Small Metropolitan	Dona Ana, San Juan, Santa Fe	7.8% (0.94)	New Mexico	NM
+Child	Micropolitan	Chaves, Cibola, Curry, Eddy, Grant, Lea, Los Alamos, Luna, McKinley, Otero, Rio Arriba, Roosevelt , San Miguel, Taos	8.8% (0.98)	New Mexico	NM
+Child	Noncore	Catron, Colfax, De Baca, Guadalupe, Harding, Hidalgo, Lincoln, Mora, Quay, Sierra, Socorro, Union	10.1% (2.82)	New Mexico	NM
+Adult	Medium Metropolitan	Bernalillo, Sandoval, Torrance, Valencia	11.3% (0.62)	New Mexico	NM
+Adult	Small Metropolitan	Dona Ana, San Juan, Santa Fe	10.2% (0.54)	New Mexico	NM
+Adult	Micropolitan	Chaves, Cibola, Curry, Eddy, Grant, Lea, Los Alamos, Luna, McKinley, Otero, Rio Arriba, Roosevelt , San Miguel, Taos	10.5% (0.50)	New Mexico	NM
+Adult	Noncore	Catron, Colfax, De Baca, Guadalupe, Harding, Hidalgo, Lincoln, Mora, Quay, Sierra, Socorro, Union	9.5% (1.07)	New Mexico	NM
+Child	Large Central Metropolitan	Bronx, Erie, Kings, Monroe, New York, Queens, Richmond	8.1% (0.86)	New York	NY
+Child	Large Fringe Metropolitan	Dutchess, Livingston, Nassau, Niagara, Ontario, Orange, Orleans, Putnam, Rockland, Suffolk, Wayne, Westchester, Yates	7.2% (0.94)	New York	NY
+Child	Medium Metropolitan	Albany, Herkimer, Madison, Oneida, Onondaga, Oswego, Rensselaer, Saratoga, Schenectady, Schoharie	9.4% (1.70)	New York	NY
+Child	Small Metropolitan	Broome, Chemung, Jefferson, Tioga, Tompkins, Ulster, Warren, Washington	11.2% (2.77)	New York	NY
+Child	Micropolitan	Cattaraugus, Cayuga, Chautauqua, Clinton, Columbia, Cortland, Franklin, Fulton, Genesee, Montgomery, Otsego, St. Lawrence, Seneca, Steuben	8.6% (1.53)	New York	NY
+Child	Noncore	Allegany, Chenango, Delaware, Essex, Greene, Hamilton, Lewis, Schuyler, Sullivan, Wyoming	8.2% (2.86)	New York	NY
+Adult	Large Central Metropolitan	Bronx, Erie, Kings, Monroe, New York, Queens, Richmond	9.2% (0.28)	New York	NY
+Adult	Large Fringe Metropolitan	Dutchess, Livingston, Nassau, Niagara, Ontario, Orange, Orleans, Putnam, Rockland, Suffolk, Wayne, Westchester, Yates	8.7% (0.34)	New York	NY
+Adult	Medium Metropolitan	Albany, Herkimer, Madison, Oneida, Onondaga, Oswego, Rensselaer, Saratoga, Schenectady, Schoharie	11.9% (0.56)	New York	NY
+Adult	Small Metropolitan	Broome, Chemung, Jefferson, Tioga, Tompkins, Ulster, Warren, Washington	11.2% (0.65)	New York	NY
+Adult	Micropolitan	Cattaraugus, Cayuga, Chautauqua, Clinton, Columbia, Cortland, Franklin, Fulton, Genesee, Montgomery, Otsego, St. Lawrence, Seneca, Steuben	12.7% (0.74)	New York	NY
+Adult	Noncore	Allegany, Chenango, Delaware, Essex, Greene, Hamilton, Lewis, Schuyler, Sullivan, Wyoming	10.7% (0.92)	New York	NY
+Adult	Large Central Metropolitan	Mecklenburg, Wake	8.3% (0.68)	North Carolina	NC
+Adult	Large Fringe Metropolitan	Cabarrus, Currituck, Franklin, Gaston, Gates, Iredell, Johnston, Lincoln, Rowan, Union	10.0% (1.11)	North Carolina	NC
+Adult	Medium Metropolitan	Alexander, Brunswick, Buncombe, Burke, Caldwell, Catawba, Chatham, Cumberland, Davidson, Davie, Durham, Forsyth, Guilford, Haywood, Henderson, Hoke, Madison, New Hanover, Orange, Pender, Person, Randolph, Rockingham, Stokes, Yadkin	8.6% (0.47)	North Carolina	NC
+Adult	Small Metropolitan	Alamance, Craven, Edgecombe, Jones, Nash, Onslow, Pamlico, Pitt, Wayne	9.0% (0.93)	North Carolina	NC
+Adult	Micropolitan	Beaufort, Camden, Carteret, Cleveland, Dare, Granville, Halifax, Harnett, Jackson, Lee, Lenoir, McDowell, Moore, Northampton, Pasquotank, Perquimans, Richmond, Robeson, Rutherford, Scotland, Stanly, Surry, Transylvania, Tyrrell, Vance, Watauga, Wilkes, Wilson	9.2% (0.67)	North Carolina	NC
+Adult	Noncore	Alleghany, Anson, Ashe, Avery, Bertie, Bladen, Caswell, Cherokee, Chowan, Clay, Columbus, Duplin, Graham, Greene, Hertford, Hyde, Macon, Martin, Mitchell, Montgomery, Polk, Sampson, Swain, Warren, Washington, Yancey	9.3% (0.96)	North Carolina	NC
+Adult	Small Metropolitan	Burleigh, Cass, Grand Forks, Morton, Oliver, Sioux	8.6% (0.45)	North Dakota	ND
+Adult	Micropolitan	McHenry, Renville, Richland, Stark, Stutsman, Ward, Williams	8.2% (0.57)	North Dakota	ND
+Adult	Noncore	Adams, Barnes, Benson, Billings, Bottineau, Bowman, Burke, Cavalier, Dickey, Divide, Dunn, Eddy, Emmons, Foster, Golden Valley, Grant, Griggs, Hettinger, Kidder, LaMoure, Logan, McIntosh, McKenzie, McLean, Mercer, Mountrail, Nelson, Pembina, Pierce, Ramsey, Ransom, Rolette, Sargent, Sheridan, Slope, Steele, Towner, Traill, Walsh, Wells	8.9% (0.53)	North Dakota	ND
+Child	Large Central Metropolitan	Cuyahoga, Franklin, Hamilton	8.7% (0.94)	Ohio	OH
+Child	Large Fringe Metropolitan	Brown, Butler, Clermont, Delaware, Fairfield, Geauga, Hocking, Lake, Licking, Lorain, Madison, Medina, Morrow, Perry, Pickaway, Union, Warren	6.0% (0.87)	Ohio	OH
+Child	Medium Metropolitan	Carroll, Fulton, Greene, Lawrence, Lucas, Mahoning, Miami, Montgomery, Portage, Stark, Summit, Trumbull, Wood	9.7% (1.02)	Ohio	OH
+Child	Small Metropolitan	Allen, Belmont, Clark, Jefferson, Richland	5.3% (1.04)	Ohio	OH
+Child	Micropolitan	Ashland, Ashtabula, Athens, Auglaize, Champaign, Clinton, Columbiana, Coshocton, Crawford, Darke, Defiance, Erie, Fayette, Gallia, Guernsey, Hancock, Huron, Jackson, Knox, Logan, Marion, Mercer, Muskingum, Ottawa, Ross, Sandusky, Scioto, Seneca, Shelby, Tuscarawas, Van Wert, Washington, Wayne	6.8% (0.84)	Ohio	OH
+Child	Noncore	Adams, Hardin, Harrison, Henry, Highland, Holmes, Meigs, Monroe, Morgan, Noble, Paulding, Pike, Preble, Putnam, Vinton, Williams, Wyandot	6.0% (1.16)	Ohio	OH
+Adult	Large Central Metropolitan	Cuyahoga, Franklin, Hamilton	9.8% (0.51)	Ohio	OH
+Adult	Large Fringe Metropolitan	Brown, Butler, Clermont, Delaware, Fairfield, Geauga, Hocking, Lake, Licking, Lorain, Madison, Medina, Morrow, Perry, Pickaway, Union, Warren	8.1% (0.52)	Ohio	OH
+Adult	Medium Metropolitan	Carroll, Fulton, Greene, Lawrence, Lucas, Mahoning, Miami, Montgomery, Portage, Stark, Summit, Trumbull, Wood	10.5% (0.51)	Ohio	OH
+Adult	Small Metropolitan	Allen, Belmont, Clark, Jefferson, Richland	10.3% (1.01)	Ohio	OH
+Adult	Micropolitan	Ashland, Ashtabula, Athens, Auglaize, Champaign, Clinton, Columbiana, Coshocton, Crawford, Darke, Defiance, Erie, Fayette, Gallia, Guernsey, Hancock, Huron, Jackson, Knox, Logan, Marion, Mercer, Muskingum, Ottawa, Ross, Sandusky, Scioto, Seneca, Shelby, Tuscarawas, Van Wert, Washington, Wayne	10.4% (0.52)	Ohio	OH
+Adult	Noncore	Adams, Hardin, Harrison, Henry, Highland, Holmes, Meigs, Monroe, Morgan, Noble, Paulding, Pike, Preble, Putnam, Vinton, Williams, Wyandot	7.8% (0.71)	Ohio	OH
+Adult	Large Central Metropolitan	Oklahoma	10.5% (0.66)	Oklahoma	OK
+Adult	Large Fringe Metropolitan	Canadian, Cleveland, Grady, Lincoln, Logan, McClain	8.4% (0.70)	Oklahoma	OK
+Adult	Medium Metropolitan	Creek, Le Flore, Okmulgee, Osage, Pawnee, Rogers, Sequoyah, Tulsa, Wagoner	9.6% (0.63)	Oklahoma	OK
+Adult	Small Metropolitan	Comanche, Cotton	9.7% (1.42)	Oklahoma	OK
+Adult	Micropolitan	Beckham, Bryan, Carter, Cherokee, Custer, Garfield, Jackson, Kay, Muskogee, Ottawa, Payne, Pittsburg, Pontotoc, Pottawatomie, Stephens, Texas, Washington, Woodward	11.0% (0.67)	Oklahoma	OK
+Adult	Noncore	Adair, Alfalfa, Atoka, Beaver, Blaine, Caddo, Choctaw, Cimarron, Coal, Craig, Delaware, Dewey, Ellis, Garvin, Grant, Greer, Harmon, Harper, Haskell, Hughes, Jefferson, Johnston, Kingfisher, Kiowa, Latimer, Love, McCurtain, McIntosh, Major, Marshall, Mayes, Murray, Noble, Nowata, Okfuskee, Pushmataha, Roger Mills, Seminole, Tillman, Washita, Woods	10.1% (0.68)	Oklahoma	OK
+Child	Large Central Metropolitan	Multnomah	3.3% (0.80)	Oregon	OR
+Child	Large Fringe Metropolitan	Clackamas, Columbia, Washington, Yamhill	5.2% (0.80)	Oregon	OR
+Child	Medium Metropolitan	Lane, Marion, Polk	7.7% (1.23)	Oregon	OR
+Child	Small Metropolitan	Benton, Deschutes, Jackson, Josephine, Linn	8.0% (1.28)	Oregon	OR
+Child	Micropolitan	Clatsop, Coos, Crook, Curry, Douglas, Hood River, Klamath, Lincoln, Malheur, Morrow, Umatilla, Union, Wasco	8.2% (2.03)	Oregon	OR
+Child	Noncore	Baker, Gilliam, Grant, Harney, Jefferson, Lake, Sherman, Tillamook, Wallowa, Wheeler	4.6% (1.95)	Oregon	OR
+Adult	Large Central Metropolitan	Multnomah	10.2% (0.65)	Oregon	OR
+Adult	Large Fringe Metropolitan	Clackamas, Columbia, Washington, Yamhill	9.8% (0.53)	Oregon	OR
+Adult	Medium Metropolitan	Lane, Marion, Polk	12.2% (0.68)	Oregon	OR
+Adult	Small Metropolitan	Benton, Deschutes, Jackson, Josephine, Linn	12.3% (0.77)	Oregon	OR
+Adult	Micropolitan	Clatsop, Coos, Crook, Curry, Douglas, Hood River, Klamath, Lincoln, Malheur, Morrow, Umatilla, Union, Wasco	11.8% (0.83)	Oregon	OR
+Adult	Noncore	Baker, Gilliam, Grant, Harney, Jefferson, Lake, Sherman, Tillamook, Wallowa, Wheeler	10.0% (1.58)	Oregon	OR
+Child	Large Central Metropolitan	Allegheny, Philadelphia	10.8% (1.14)	Pennsylvania	PA
+Child	Large Fringe Metropolitan	Armstrong, Beaver, Bucks, Butler, Chester, Delaware, Fayette, Montgomery, Pike, Washington, Westmoreland	9.0% (1.37)	Pennsylvania	PA
+Child	Medium Metropolitan	Berks, Carbon, Cumberland, Dauphin, Erie, Lackawanna, Lancaster, Lehigh, Luzerne, Mercer, Northampton, Perry, Wyoming, York	8.7% (1.00)	Pennsylvania	PA
+Child	Small Metropolitan	Adams, Blair, Cambria, Centre, Columbia, Franklin, Lebanon, Lycoming, Monroe, Montour	7.6% (1.72)	Pennsylvania	PA
+Child	Micropolitan	Bradford, Clearfield, Clinton, Crawford, Huntingdon, Indiana, Lawrence, McKean, Mifflin, Northumberland, Schuylkill, Snyder, Somerset, Union, Venango, Warren	6.3% (1.29)	Pennsylvania	PA
+Child	Noncore	Bedford, Cameron, Clarion, Elk, Forest, Fulton, Greene, Jefferson, Juniata, Potter, Sullivan, Susquehanna, Tioga, Wayne	12.8% (5.05)	Pennsylvania	PA
+Adult	Large Central Metropolitan	Allegheny, Philadelphia	11.0% (0.57)	Pennsylvania	PA
+Adult	Large Fringe Metropolitan	Armstrong, Beaver, Bucks, Butler, Chester, Delaware, Fayette, Montgomery, Pike, Washington, Westmoreland	9.3% (0.56)	Pennsylvania	PA
+Adult	Medium Metropolitan	Berks, Carbon, Cumberland, Dauphin, Erie, Lackawanna, Lancaster, Lehigh, Luzerne, Mercer, Northampton, Perry, Wyoming, York	10.5% (0.63)	Pennsylvania	PA
+Adult	Small Metropolitan	Adams, Blair, Cambria, Centre, Columbia, Franklin, Lebanon, Lycoming, Monroe, Montour	11.0% (0.90)	Pennsylvania	PA
+Adult	Micropolitan	Bradford, Clearfield, Clinton, Crawford, Huntingdon, Indiana, Lawrence, McKean, Mifflin, Northumberland, Schuylkill, Snyder, Somerset, Union, Venango, Warren	11.4% (0.88)	Pennsylvania	PA
+Adult	Noncore	Bedford, Cameron, Clarion, Elk, Forest, Fulton, Greene, Jefferson, Juniata, Potter, Sullivan, Susquehanna, Tioga, Wayne	7.6% (1.07)	Pennsylvania	PA
+Child	Large Central Metropolitan	Providence	10.1% (1.03)	Rhode Island	RI
+Child	Large Fringe Metropolitan	Bristol, Kent, Newport, Washington	7.7% (0.99)	Rhode Island	RI
+Adult	Large Central Metropolitan	Providence	11.8% (0.48)	Rhode Island	RI
+Adult	Large Fringe Metropolitan	Bristol, Kent, Newport, Washington	11.4% (0.57)	Rhode Island	RI
+Adult	Large Fringe Metropolitan	Chester, Lancaster, York	10.1% (0.79)	South Carolina	SC
+Adult	Medium Metropolitan	Aiken, Anderson, Berkeley, Calhoun, Charleston, Dorchester, Edgefield, Fairfield, Greenville, Horry, Kershaw, Laurens, Lexington, Pickens, Richland, Saluda, Spartanburg, Union	9.0% (0.30)	South Carolina	SC
+Adult	Small Metropolitan	Beaufort, Darlington, Florence, Jasper, Sumter	7.6% (0.50)	South Carolina	SC
+Adult	Micropolitan	Abbeville, Cherokee, Georgetown, Greenwood, Marlboro, Newberry, Oconee, Orangeburg	9.6% (0.66)	South Carolina	SC
+Adult	Noncore	Allendale, Bamberg, Barnwell, Chesterfield, Clarendon, Colleton, Dillon, Hampton, Lee, McCormick, Marion, Williamsburg	9.5% (0.77)	South Carolina	SC
+Adult	Small Metropolitan	Custer, Lincoln, McCook, Meade, Minnehaha, Pennington, Turner, Union	7.0% (0.51)	South Dakota	SD
+Adult	Micropolitan	Beadle, Brookings, Brown, Clay, Codington, Davison, Edmunds, Hanson, Hughes, Lawrence, Stanley, Sully, Yankton	7.2% (0.60)	South Dakota	SD
+Adult	Noncore	Aurora, Bennett, Bon Homme, Brule, Buffalo, Butte, Campbell, Charles Mix, Clark, Corson, Day, Deuel, Dewey, Douglas, Fall River, Faulk, Grant, Gregory, Haakon, Hamlin, Hand, Harding, Hutchinson, Hyde, Jackson, Jerauld, Jones, Kingsbury, Lake, Lyman, McPherson, Marshall, Mellette, Miner, Moody, Oglala Lakota, Perkins, Potter, Roberts, Sanborn, Shannon, Spink, Todd, Tripp, Walworth, Ziebach	7.2% (0.59)	South Dakota	SD
+Adult	Large Central Metropolitan	Davidson, Shelby	9.8% (0.90)	Tennesse	TN
+Adult	Large Fringe Metropolitan	Cannon, Cheatham, Dickson, Fayette, Hickman, Macon, Maury, Robertson, Rutherford, Smith, Sumner, Tipton, Trousdale, Williamson, Wilson	8.9% (0.87)	Tennesse	TN
+Adult	Medium Metropolitan	Anderson, Blount, Campbell, Grainger, Hamilton, Hawkins, Knox, Loudon, Marion, Montgomery, Morgan, Roane, Sequatchie, Sullivan, Union	11.2% (0.64)	Tennesse	TN
+Adult	Small Metropolitan	Bradley, Carter, Chester, Crockett, Hamblen, Jefferson, Madison, Polk, Unicoi, Washington	10.3% (0.85)	Tennesse	TN
+Adult	Micropolitan	Bedford, Cocke, Coffee, Cumberland, Dyer, Franklin, Greene, Henry, Jackson, Lawrence, McMinn, Marshall, Moore, Obion, Overton, Putnam, Rhea, Sevier, Warren, Weakley	10.1% (0.69)	Tennesse	TN
+Adult	Noncore	Benton, Bledsoe, Carroll, Claiborne, Clay, Decatur, DeKalb, Fentress, Gibson, Giles, Grundy, Hancock, Hardeman, Hardin, Haywood, Henderson, Houston, Humphreys, Johnson, Lake, Lauderdale, Lewis, Lincoln, McNairy, Meigs, Monroe, Perry, Pickett, Scott, Stewart, Van Buren, Wayne, White	10.8% (0.86)	Tennesse	TN
+Adult	Large Central Metropolitan	Bexar, Collin, Dallas, Harris, Tarrant, Travis	7.4% (0.43)	Texas	TX
+Adult	Large Fringe Metropolitan	Atascosa, Austin, Bandera, Bastrop, Brazoria, Caldwell, Chambers, Comal, Denton, Ellis, Fort Bend, Galveston, Guadalupe, Hays, Hood, Hunt, Johnson, Kaufman, Kendall, Liberty, Medina, Montgomery, Parker, Rockwall, Somervell, Waller, Williamson, Wilson, Wise	6.9% (0.60)	Texas	TX
+Adult	Medium Metropolitan	Aransas, Armstrong, Bell, Cameron, Carson, Coryell, Crosby, El Paso, Falls, Hardin, Hidalgo, Hudspeth, Jefferson, Lampasas, Lubbock, Lynn, McLennan, Newton, Nueces, Oldham, Orange, Potter, Randall, San Patricio, Webb	8.0% (0.66)	Texas	TX
+Adult	Small Metropolitan	Archer, Bowie, Brazos, Burleson, Callahan, Clay, Ector, Goliad, Grayson, Gregg, Irion, Jones, Martin, Midland, Robertson, Rusk, Smith, Taylor, Tom Green, Upshur, Victoria, Wichita	7.5% (0.88)	Texas	TX
+Adult	Micropolitan	Anderson, Andrews, Angelina, Bee, Brown, Calhoun, Cherokee, Cooke, Dawson, Deaf Smith, Erath, Gillespie, Glasscock, Gray, Hale, Harrison, Henderson, Hockley, Hopkins, Howard, Hutchinson, Jim Wells, Kenedy, Kerr, Kleberg, Lamar, Matagorda, Maverick, Moore, Nacogdoches, Navarro, Nolan, Palo Pinto, Reeves, Scurry, Starr, Titus, Trinity, Uvalde, Val Verde, Walker, Washington, Wharton, Wilbarger, Willacy, Zapata,	7.7% (1.16)	Texas	TX
+Adult	Noncore	Bailey, Baylor, Blanco, Borden, Bosque, Brewster, Briscoe, Brooks, Burnet, Camp, Cass, Castro, Childress, Cochran, Coke, Coleman, Collingsworth, Colorado, Comanche, Concho, Cottle, Crane, Crockett, Culberson, Dallam, Delta, DeWitt, Dickens, Dimmit, Donley, Duval, Eastland, Edwards, Fannin, Fayette, Fisher, Floyd, Foard, Franklin, Freestone, Frio, Gaines, Garza, Gonzales, Grimes, Hall, Hamilton, Hansford, Hardeman, Hartley, Haskell, Hemphill, Hill, Houston, Jack, Jackson, Jasper, Jeff Davis, Jim Hogg, Karnes, Kent, Kimble, King, Kinney, Knox, Lamb, La, Lavaca, Lee, Leon, Limestone, Lipscomb, Live Oak, Llano, Loving, McCulloch, McMullen, Madison, Marion, Mason, Menard, Milam, Mills, Mitchell, Montague, Morris, Motley, Ochiltree, Panola, Parmer, Pecos, Polk, Presidio, Rains, Reagan, Real, Red River, Refugio, Roberts, Runnels, Sabine, San Augustine, San Jacinto, San Saba, Schleicher, Shackelford, Shelby, Sherman, Stephens, Sterling, Stonewall, Sutton, Swisher, Terrell, Terry, Throckmorton, Tyler, Upton, Van Zandt, Ward, Wheeler, Winkler, Wood, Yoakum, Young, Zavala	7.9% (0.99)	Texas	TX
+Child	Large Central Metropolitan	Salt Lake	6.3% (0.55)	Utah	UT
+Child	Large Fringe Metropolitan	Tooele	8.8% (1.94)	Utah	UT
+Child	Medium Metropolitan	Box Elder, Davis, Juab, Morgan, Utah, Weber	5.6% (0.39)	Utah	UT
+Child	Small Metropolitan	Cache, Washington	4.4% (1.20)	Utah	UT
+Child	Micropolitan	Carbon, Iron, Summit, Uintah, Wasatch	4.6% (0.65)	Utah	UT
+Child	Noncore	Beaver, Daggett, Duchesne, Emery, Garfield, Grand, Kane, Millard, Piute, Rich, San Juan, Sanpete, Sevier, Wayne        	6.8% (0.96)	Utah	UT
+Adult	Large Central Metropolitan	Salt Lake	9.3% (0.37)	Utah	UT
+Adult	Large Fringe Metropolitan	Tooele	10.0% (1.12)	Utah	UT
+Adult	Medium Metropolitan	Box Elder, Davis, Juab, Morgan, Utah, Weber	8.6% (0.34)	Utah	UT
+Adult	Small Metropolitan	Cache, Washington	7.6% (0.60)	Utah	UT
+Adult	Micropolitan	Carbon, Iron, Summit, Uintah, Wasatch	9.0% (0.66)	Utah	UT
+Adult	Noncore	Beaver, Daggett, Duchesne, Emery, Garfield, Grand, Kane, Millard, Piute, Rich, San Juan, Sanpete, Sevier, Wayne        	8.5% (0.62)	Utah	UT
+Child	Small Metropolitan	Chittenden, Franklin, Grand Isle	6.9% (1.03)	Vermont	VT
+Child	Micropolitan	Bennington, Essex, Orange, Rutland, Washington, Windsor	9.5% (1.13)	Vermont	VT
+Child	Noncore	Addison, Caledonia, Lamoille, Orleans, Windham	7.5% (1.01)	Vermont	VT
+Adult	Small Metropolitan	Chittenden, Franklin, Grand Isle	11.1% (0.64)	Vermont	VT
+Adult	Micropolitan	Bennington, Essex, Orange, Rutland, Washington, Windsor	11.6% (0.48)	Vermont	VT
+Adult	Noncore	Addison, Caledonia, Lamoille, Orleans, Windham	11.2% (0.56)	Vermont	VT
+Adult	Large Central Metropolitan	Arlington, Alexandria city, Norfolk city, Richmond city, Virginia Beach city	8.4% (0.61)	Virginia	VA
+Adult	Large Fringe Metropolitan	Amelia, Caroline, Charles City, Chesterfield, Clarke, Culpeper, Dinwiddie, Fairfax, Fauquier, Gloucester, Goochland, Hanover, Henrico, Isle of Wight, James City, King William, Loudoun, Mathews, New Kent, Powhatan, Prince George, Prince William, Rappahannock, Spotsylvania, Stafford, Sussex, Warren, York, Chesapeake city, Colonial Heights, Fairfax city, Falls Church city, Fredericksburg city, Hampton city, Hopewell city, Manassas city, Manassas Park city, Newport News city, Petersburg city, Poquoson city, Portsmouth city, Suffolk city, Williamsburg city	8.2% (0.32)	Virginia	VA
+Adult	Medium Metropolitan	Amherst, Appomattox, Bedford, Botetourt, Campbell, Craig, Franklin, Roanoke, Scott, Washington, Bedford city, Bristol city, Lynchburg city, Roanoke city, Salem city	8.9% (0.71)	Virginia	VA
+Adult	Small Metropolitan	Albemarle, Augusta, Buckingham, Floyd, Fluvanna, Frederick, Giles, Greene, Montgomery, Nelson, Pulaski, Rockingham, Charlottesville city, Harrisonburg city, Radford city, Staunton city, Waynesboro city, Winchester city	9.1% (0.71)	Virginia	VA
+Adult	Micropolitan	Dickenson, Henry, Pittsylvania, Tazewell, Wise, Danville city, Martinsville city, Norton city	10.7% (1.10)	Virginia	VA
+Adult	Noncore	Accomack, Alleghany, Bath, Bland, Brunswick, Buchanan, Carroll, Charlotte, Cumberland, Essex, Grayson, Greensville, Halifax, Highland, King and Queen, King George, Lancaster, Lee, Louisa, Lunenburg, Madison, Mecklenburg, Middlesex, Northampton, Northumberland, Nottoway, Orange, Page, Patrick, Prince Edward, Richmond, Rockbridge, Russell, Shenandoah, Smyth, Southampton, Surry, Westmoreland, Wythe, Buena Vista city, Covington city, Emporia city, Franklin city, Galax city, Lexington city	10.0% (0.73)	Virginia	VA
+Adult	Large Central Metropolitan	King	8.5% (0.36)	Washington	WA
+Adult	Large Fringe Metropolitan	Clark, Pierce, Skamania, Snohomish	10.4% (0.41)	Washington	WA
+Adult	Medium Metropolitan	Benton, Franklin, Kitsap, Pend Oreille, Spokane, Stevens, Thurston	10.4% (0.46)	Washington	WA
+Adult	Small Metropolitan	Asotin, Chelan, Columbia, Cowlitz, Douglas, Skagit, Walla Walla, Whatcom, Yakima	11.0% (0.58)	Washington	WA
+Adult	Micropolitan	Adams, Clallam, Grant, Grays Harbor, Island, Kittitas, Lewis, Mason, Whitman	10.9% (0.63)	Washington	WA
+Adult	Noncore	Ferry, Garfield, Jefferson, Klickitat, Lincoln, Okanogan, Pacific, San Juan, Wahkiakum	9.4% (0.92)	Washington	WA
+Adult	Large Fringe Metropolitan	Jefferson	9.4% (1.82)	West Virginia	WV
+Adult	Medium Metropolitan	Berkeley, Cabell, Lincoln, Putnam, Wayne	13.9% (0.82)	West Virginia	WV
+Adult	Small Metropolitan	Boone, Brooke, Clay, Fayette, Hampshire, Hancock, Kanawha, Marshall, Mineral, Monongalia, Ohio, Preston, Raleigh, Wirt, Wood	11.5% (0.48)	West Virginia	WV
+Adult	Micropolitan	Doddridge, Harrison, Logan, Marion, Mason, Mercer, Randolph, Taylor	13.9% (0.80)	West Virginia	WV
+Adult	Noncore	Barbour, Braxton, Calhoun, Gilmer, Grant, Greenbrier, Hardy, Jackson, Lewis, McDowell, Mingo, Monroe, Morgan, Nicholas, Pendleton, Pleasants, Pocahontas, Ritchie, Roane, Summers, Tucker, Tyler, Upshur, Webster, Wetzel, Wyoming	11.4% (0.63)	West Virginia	WV
+Child	Large Central Metropolitan	Milwaukee	15.1% (2.87)	Wisconsin	WI
+Child	Large Fringe Metropolitan	Kenosha, Ozaukee, Pierce, St. Croix, Washington, Waukesha	7.2% (1.62)	Wisconsin	WI
+Child	Medium Metropolitan	Brown, Columbia, Dane, Douglas, Green, Iowa, Kewaunee, Oconto	7.9% (1.65)	Wisconsin	WI
+Child	Small Metropolitan	Calumet, Chippewa, Eau Claire, Fond du Lac, La Crosse, Marathon, Outagamie, Racine, Rock, Sheboygan, Winnebago	5.3% (0.97)	Wisconsin	WI
+Child	Micropolitan	Dodge, Dunn, Florence, Grant, Jefferson, Lincoln, Manitowoc, Marinette, Menominee, Portage, Sauk, Shawano, Walworth, Wood	7.9% (1.78)	Wisconsin	WI
+Child	Noncore	Adams, Ashland, Barron, Bayfield, Buffalo, Burnett, Clark, Crawford, Door, Forest, Green Lake, Iron, Jackson, Juneau, Lafayette, Langlade, Marquette, Monroe, Oneida, Pepin, Polk, Price, Richland, Rusk, Sawyer, Taylor, Trempealeau, Vernon, Vilas, Washburn, Waupaca, Waushara	5.8% (1.19)	Wisconsin	WI
+Adult	Large Central Metropolitan	Milwaukee	11.1% (0.97)	Wisconsin	WI
+Adult	Large Fringe Metropolitan	Kenosha, Ozaukee, Pierce, St. Croix, Washington, Waukesha	8.7% (0.85)	Wisconsin	WI
+Adult	Medium Metropolitan	Brown, Columbia, Dane, Douglas, Green, Iowa, Kewaunee, Oconto	8.4% (0.80)	Wisconsin	WI
+Adult	Small Metropolitan	Calumet, Chippewa, Eau Claire, Fond du Lac, La Crosse, Marathon, Outagamie, Racine, Rock, Sheboygan, Winnebago	9.2% (0.60)	Wisconsin	WI
+Adult	Micropolitan	Dodge, Dunn, Florence, Grant, Jefferson, Lincoln, Manitowoc, Marinette, Menominee, Portage, Sauk, Shawano, Walworth, Wood	8.1% (0.72)	Wisconsin	WI
+Adult	Noncore	Adams, Ashland, Barron, Bayfield, Buffalo, Burnett, Clark, Crawford, Door, Forest, Green Lake, Iron, Jackson, Juneau, Lafayette, Langlade, Marquette, Monroe, Oneida, Pepin, Polk, Price, Richland, Rusk, Sawyer, Taylor, Trempealeau, Vernon, Vilas, Washburn, Waupaca, Waushara	8.3% (0.65)	Wisconsin	WI
+Adult	Small Metropolitan	Laramie, Natrona	9.7% (0.67)	Wyoming	WY
+Adult	Micropolitan	Albany, Campbell, Fremont, Sheridan, Sweetwater, Teton, Uinta	9.4% (0.59)	Wyoming	WY
+Adult	Noncore	Big Horn, Carbon, Converse, Crook, Goshen, Hot Springs, Johnson, Lincoln, Niobrara, Park, Platte, Sublette, Washakie, Weston	8.0% (0.58)	Wyoming	WY
