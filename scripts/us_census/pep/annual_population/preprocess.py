@@ -76,22 +76,20 @@ _STATE_CONFIG_PATH = os.path.join(_MODULE_DIR, "states_config.json")
 with open(_STATE_CONFIG_PATH, encoding="utf-8") as states_file:
     _STATE_CONFIG = json.load(states_file)
 
-_MCF_TEMPLATE = """Node: dcid:Count_Person
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
+_MCF_TEMPLATE = ("Node: dcid:Count_Person\n"
+                 "typeOf: dcs:StatisticalVariable\n"
+                 "populationType: dcs:Person\n"
+                 "statType: dcs:measuredValue\n"
+                 "measuredProperty: dcs:count\n")
 
-_TMCF_TEMPLATE = """Node: E:USA_Annual_Population->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person
-measurementMethod: dcs:CensusPEPSurvey
-observationAbout: C:USA_Annual_Population->Location
-observationDate: C:USA_Annual_Population->Year
-observationPeriod: \"P1Y\"
-value: C:USA_Annual_Population->Count_Person 
-"""
+_TMCF_TEMPLATE = ("Node: E:USA_Annual_Population->E0\n"
+                  "typeOf: dcs:StatVarObservation\n"
+                  "variableMeasured: dcs:Count_Person\n"
+                  "measurementMethod: dcs:CensusPEPSurvey\n"
+                  "observationAbout: C:USA_Annual_Population->Location\n"
+                  "observationDate: C:USA_Annual_Population->Year\n"
+                  "observationPeriod: \"P1Y\"\n"
+                  "value: C:USA_Annual_Population->Count_Person \n")
 
 
 def _load_data_df(path: str,
@@ -191,28 +189,6 @@ def _unpivot_data_df(data_df: pd.DataFrame,
                           value_vars=data_cols,
                           var_name=default_col,
                           value_name='Count_Person')
-    return res_data_df
-
-
-def _transpose_data_df(data_df: pd.DataFrame, common_col: str,
-                       data_cols: list) -> pd.DataFrame:
-    """
-    Transpose the data_cols into single column named as default_col
-    and concatinates the default_col with common_cols.
-    Args:
-        data_df (pd.DataFrame): Dataframe with cleaned data
-        common_col (str): Dataframe Column
-        data_cols (list): Dataframe Column list
-
-    Returns:
-        pd.DataFrame: Dataframe with Location, Count_Person
-    """
-    res_data_df = pd.DataFrame()
-    for col in data_cols:
-        tmp_data_df = data_df[[common_col, col]]
-        tmp_data_df.columns = ["Location", "Count_Person"]
-        tmp_data_df["Year"] = col
-        res_data_df = pd.concat([res_data_df, tmp_data_df])
     return res_data_df
 
 
@@ -408,7 +384,7 @@ def _process_county_e8089co_e7079co(file_path: str) -> pd.DataFrame:
     data_df = _load_data_df(file_path, "txt", None, skip_rows)
     data_df = clean_1970_1989_county_txt(data_df, first_data_df_cols,
                                          second_data_df_cols)
-    data_df = _transpose_data_df(data_df, "Location", data_df.columns[1:])
+    data_df = _unpivot_data_df(data_df, "Location", data_df.columns[1:])
     return data_df
 
 
@@ -450,7 +426,7 @@ def _process_county_coest2020(file_path: str) -> pd.DataFrame:
     # Dropping Unwanted Columns
     data_df = data_df.drop(
         columns=["STATE", "COUNTY", "STNAME", "CTYNAME", "042020"])
-    data_df = _transpose_data_df(data_df, "Location", data_df.columns[:-1])
+    data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[:-1])
     return data_df
 
 
@@ -478,7 +454,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df.columns = [
             "Location", "extra_data_col_1", "extra_data_col_2", "2021"
         ]
-        data_df = _transpose_data_df(data_df, "Location", ["2021"])
+        data_df = _unpivot_data_df(data_df, ["Location"], ["2021"])
         data_df = data_df.dropna(subset=["Count_Person"])
         data_df["Count_Person"] = data_df["Count_Person"].astype('int')
         data_df["Location"] = data_df["Location"].str.replace(".", "")
@@ -506,7 +482,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
             lambda x: _county_to_dcid(COUNTY_MAP, x.State, x.Location), axis=1)
         data_df.loc[0, 'Location'] = data_df.loc[0, 'State']
         data_df["Location"] = data_df["Location"].apply(_state_to_geo_id)
-        data_df = _transpose_data_df(data_df, "Location", data_df.columns[:-2])
+        data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[:-2])
         data_df["Count_Person"] = data_df["Count_Person"].str.replace(",", "")
         data_df = data_df[["Year", "Location", "Count_Person"]]
     data_df = data_df[data_df["Location"] != "country/USA"]
@@ -606,9 +582,7 @@ def _process_cities(file_path: str, file_name: str) -> pd.DataFrame:
 
         data_df.columns = data_df.columns.str.replace(key, '')
         data_df = data_df[final_cols]
-        data_df = _transpose_data_df(data_df,
-                                     common_col="Location",
-                                     data_cols=data_df.columns[1:])
+        data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[1:])
     return data_df
 
 
