@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ Test for the data loader for the subject tables"""
-
 import unittest
 import os
 from .data_loader import process_subject_tables
