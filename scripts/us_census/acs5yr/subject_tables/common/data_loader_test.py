@@ -13,19 +13,9 @@
 # limitations under the License.
 """ Test for the data loader for the subject tables"""
 
-import os
-import sys
 import unittest
-
-# Allows the following module imports to work when running as a script
-# relative to data/scripts/
-sys.path.append(
-    os.path.sep.join([
-        '..' for x in filter(lambda x: x == os.path.sep,
-                             os.path.abspath(__file__).split('scripts/')[1])
-    ]))
-
-from data_loader import process_subject_tables
+import os
+from .data_loader import process_subject_tables
 
 base_path = os.path.dirname(__file__)
 

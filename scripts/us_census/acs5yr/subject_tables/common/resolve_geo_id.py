@@ -72,7 +72,7 @@ _US_SUMMARY_LEVEL_GEO_PREFIX_MAP = {
 _US_CENSUS_DIVISIONS_MAP = {
     # usc/NortheastRegion
     '1': 'usc/NewEnglandDivision',
-    '2': 'usc/MiddleAtlanticDivision,',
+    '2': 'usc/MiddleAtlanticDivision',
     # usc/MidwestRegion
     '3': 'usc/EastNorthCentralDivision',
     '4': 'usc/WestNorthCentralDivision',

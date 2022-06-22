@@ -13,22 +13,8 @@
 # limitations under the License.
 """Tests for resolve_geo_id."""
 
-import os
-import sys
 import unittest
-
-# Allows the following module imports to work when running as a script
-# relative to data/scripts/
-sys.path.append(
-    os.path.sep.join([
-        '..' for x in filter(lambda x: x == os.path.sep,
-                             os.path.abspath(__file__).split('scripts/')[1])
-    ]))
-
-# module_dir_ is the path to where this test is running from.
-module_dir_ = os.path.dirname(__file__)
-
-from resolve_geo_id import convert_to_place_dcid
+from .resolve_geo_id import convert_to_place_dcid
 
 _TEST_GEOIDS = {
     '0100000US': 'country/USA',  # Country (US)
