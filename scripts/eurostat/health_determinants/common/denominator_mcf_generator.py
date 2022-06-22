@@ -102,8 +102,8 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
 
 _MODULE_DIR = "/Users/chharish/datacommonsEU/data/scripts/"+\
     "eurostat/health_determinants/tobacco_consumption/"
-_INPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output",
-    "eurostat_population_tobaccoconsumption.mcf")
+_INPUT_MCF_FILE_PATH = os.path.join(
+    _MODULE_DIR, "output", "eurostat_population_tobaccoconsumption.mcf")
 _OUTPUT_MCF_FILE_PATH = os.path.join(
     _MODULE_DIR, "output", "eurostat_population_"+\
         "tobaccoconsumption_denominator.mcf")

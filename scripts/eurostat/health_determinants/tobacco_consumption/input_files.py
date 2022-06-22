@@ -85,6 +85,7 @@ def download_files(download_directory: str) -> None:
     download.download_file(INPUT_URLS, download_directory)
     # # pylint: enable=invalid-name
 
+
 def main(_):
     download_files(_FLAGS.download_directory)
 

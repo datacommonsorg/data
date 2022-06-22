@@ -769,19 +769,19 @@ class EuroStatTobaccoConsumption:
                 "hlth_ehis_sk3u":
                     daily_smokers_cigarettes_degree_of_urbanisation,
                 "hlth_ehis_sk4e":
-                daily_exposure_tobacco_smoke_indoors_education_attainment_level,
+                    daily_exposure_tobacco_smoke_indoors_education_attainment_level,
                 "hlth_ehis_sk4u":
                     daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
                 "hlth_ehis_sk5e":
                     duration_daily_tobacco_smoking_education_attainment_level,
                 "hlth_ehis_sk6e":
-                ecigarettes_similar_elecdevices_education_attainment_level,
+                    ecigarettes_similar_elecdevices_education_attainment_level,
                 "hlth_ehis_de3":
                     daily_smokers_cigarettes_history_education_attainment_level,
                 "hlth_ehis_de4":
                     daily_smokers_cigarettes_history_income_quintile,
                 "hlth_ehis_de5":
-                dsmokers_number_of_cigarettes_history_education_attainment_level
+                    dsmokers_number_of_cigarettes_history_education_attainment_level
             }
             df = function_dict[file_name](df)
             # df['file_name'] = file_name
