@@ -25,11 +25,12 @@ sys.path.append(
         '..' for x in filter(lambda x: x == os.path.sep,
                              os.path.abspath(__file__).split('scripts/')[1])
     ]))
+sys.path.append('.')
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 
-import census_divisions
+from . import census_divisions
 
 
 class TestProcess(unittest.TestCase):
