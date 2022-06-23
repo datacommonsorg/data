@@ -50,15 +50,15 @@ _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "measuredProperty: dcs:count\n")
 
 _TMCF_TEMPLATE = (
-    "Node: E:EuroStat_Population_PhysicalActivity->E0\n"
+    "Node: E:eurostat_population_physicalactivity->E0\n"
     "typeOf: dcs:StatVarObservation\n"
-    "variableMeasured: C:EuroStat_Population_PhysicalActivity->SV\n"
-    "measurementMethod: C:EuroStat_Population_PhysicalActivity->"
+    "variableMeasured: C:eurostat_population_physicalactivity->SV\n"
+    "measurementMethod: C:eurostat_population_physicalactivity->"
     "Measurement_Method\n"
-    "observationAbout: C:EuroStat_Population_PhysicalActivity->geo\n"
-    "observationDate: C:EuroStat_Population_PhysicalActivity->time\n"
+    "observationAbout: C:eurostat_population_physicalactivity->geo\n"
+    "observationDate: C:eurostat_population_physicalactivity->time\n"
     "scalingFactor: 100\n"
-    "value: C:EuroStat_Population_PhysicalActivity->observation\n")
+    "value: C:eurostat_population_physicalactivity->observation\n")
 
 
 def _healthenhancing_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:

@@ -1,8 +1,8 @@
-Node: E:EuroStat_Population_PhysicalActivity->E0
+Node: E:eurostat_population_physicalactivity->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: C:EuroStat_Population_PhysicalActivity->SV
-measurementMethod: C:EuroStat_Population_PhysicalActivity->Measurement_Method
-observationAbout: C:EuroStat_Population_PhysicalActivity->geo
-observationDate: C:EuroStat_Population_PhysicalActivity->time
+variableMeasured: C:eurostat_population_physicalactivity->SV
+measurementMethod: C:eurostat_population_physicalactivity->Measurement_Method
+observationAbout: C:eurostat_population_physicalactivity->geo
+observationDate: C:eurostat_population_physicalactivity->time
 scalingFactor: 100
-value: C:EuroStat_Population_PhysicalActivity->observation
+value: C:eurostat_population_physicalactivity->observation
