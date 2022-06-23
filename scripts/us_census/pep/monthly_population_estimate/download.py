@@ -24,8 +24,8 @@ from absl import app
 from absl import flags
 
 _FLAGS = flags.FLAGS
-_URLS_JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)) \
-                    ,"file_urls.json")
+_URLS_JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               "file_urls.json")
 
 _URLS_JSON = None
 with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
@@ -38,7 +38,6 @@ flags.DEFINE_list("us_census_pep_monthly_pop_estimate_url", \
     _URLS_JSON["urls"], "Import Data URL's List")
 
 _HEADER = 1
-SKIP_ROWS = 1
 _SCALING_FACTOR_TXT_FILE = 1000
 
 
@@ -47,7 +46,7 @@ def _save_data(url: str, download_local_path: str) -> None:
     This method loads the Data from url to pandas Dataframe.
     Writes the data to local path provided as one the parameter.
 
-    Arguments:
+    Args:
         url (str): Url of the dataset
         download_local_path (str): LocalPath to save the datasets.
 
@@ -89,10 +88,7 @@ def _save_data(url: str, download_local_path: str) -> None:
         # Multiplying the data with scaling factor 1000.
         for col in df.columns:
             if "year" not in col.lower():
-                if _SCALING_FACTOR_TXT_FILE != 1:
-                    df[col] = df[col].apply(
-                        _mulitply_scaling_factor,
-                        scaling_factor=_SCALING_FACTOR_TXT_FILE)
+                df[col] = df[col].apply(_mulitply_scaling_factor)
         df.to_excel(os.path.join(download_local_path, file_name),
                     index=False,
                     engine='xlsxwriter')
@@ -103,7 +99,7 @@ def _concat_cols(col: pd.Series) -> pd.Series:
     This method concats two DataFrame column values
     with space in-between.
 
-    Arguments:
+    Args:
         col[0] (Series) : DataFrame Column of dtype str
         col[1] (Series) : DataFrame Column of dtype str
 
@@ -119,11 +115,11 @@ def _concat_cols(col: pd.Series) -> pd.Series:
     return res
 
 
-def _mulitply_scaling_factor(col: pd.Series, **kwargs: dict) -> pd.Series:
+def _mulitply_scaling_factor(col: pd.Series) -> pd.Series:
     """
     This method multiply dataframe column with scaling factor.
 
-    Arguments:
+    Args:
         col (Series): DataFrame Column of dtype int
         **kwargs (dict): Dict with key 'scaling_factor' and value type int
 
@@ -133,7 +129,7 @@ def _mulitply_scaling_factor(col: pd.Series, **kwargs: dict) -> pd.Series:
     res = col
     if col not in [None, np.NAN]:
         if col.isdigit():
-            res = int(col) * kwargs["scaling_factor"]
+            res = int(col) * _SCALING_FACTOR_TXT_FILE
     return res
 
 
@@ -142,7 +138,7 @@ def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     This method cleans the dataframe loaded from a csv file format.
     Also, Performs transformations on the data.
 
-    Arguments:
+    Args:
         df (DataFrame) : DataFrame of csv dataset
 
     Returns:
@@ -183,7 +179,7 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     This method cleans the dataframe loaded from a txt file format.
     Also, Performs transformations on the data.
 
-    Arguments:
+    Args:
         df (DataFrame) : DataFrame of txt dataset
         scaling_factor_txt_file (int) : Scaling factor for text file
 
@@ -223,7 +219,7 @@ def _download(download_path: str, file_urls: list) -> None:
     This method iterates on each url and calls the above defined
     functions to download and clean the data.
 
-    Arguments:
+    Args:
         download_path (str) : Local Path to download datasets from URLS
         file_urls (list) : List of dataset URLS.
 

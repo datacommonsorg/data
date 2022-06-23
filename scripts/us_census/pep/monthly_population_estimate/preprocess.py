@@ -62,7 +62,6 @@ def _extract_year(val: str) -> tuple:
     """
     # Extracting 0th index value from the val.
     # val contains yyyy or yyyy [1] or .MM 1
-    print(val)
     val = str(val).strip().split(' ', maxsplit=1)[0]
     if val.isnumeric() and len(val) == 4:
         return True, val
@@ -313,24 +312,21 @@ class CensusUSACountryPopulation:
                     status = "USResident__InUSArmedForcesOverseas"
                 else:
                     status = "USResident"
-                residence = "residentStatus: dcs:" + \
-                    status
+                residence = "residentStatus: dcs:" + status
                 pvs.append(residence)
             elif re.findall('ArmedForces', col):
-                residence = "residentStatus: dcs:" + \
-                         "InUSArmedForcesOverseas"
+                residence = "residentStatus: dcs:" + "InUSArmedForcesOverseas"
                 pvs.append(residence)
             if re.findall('Resides', col):
                 if re.findall('Household', col):
-                    residence = "residenceType: dcs:" + \
-                         "Household"
+                    residence = "residenceType: dcs:" + "Household"
                     pvs.append(residence)
             if re.findall('Civilian', col):
                 armedf = "armedForcesStatus: dcs:Civilian"
                 pvs.append(armedf)
                 if re.findall('NonInstitutionalized', col):
-                    residence = "institutionalization: dcs:" + \
-                            "USC_NonInstitutionalized"
+                    residence = ("institutionalization: dcs:" +
+                                 "USC_NonInstitutionalized")
                     pvs.append(residence)
             if re.findall('Count_Person_InUSArmedForcesOverseas', col):
                 armedf = "armedForcesStatus: dcs:InArmedForces"
@@ -339,8 +335,6 @@ class CensusUSACountryPopulation:
             mcf_nodes.append(node)
 
             mcf = '\n'.join(mcf_nodes)
-            #mcf = mcf + _MCF_TEMPLATE.format(col, residence, status,
-            #                                armedf) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:

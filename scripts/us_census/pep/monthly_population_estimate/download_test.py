@@ -22,8 +22,8 @@ from download import _download
 import pandas as pd
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
-test_data_folder = os.path.join(module_dir_, "test_data")
-op_data_folder = os.path.join(module_dir_, "test_output_data_download")
+_TEST_DATA_FOLDER = os.path.join(module_dir_, "test_data")
+_OP_DATA_FOLDER = os.path.join(module_dir_, "test_output_data_download")
 
 
 class TestPreprocess(unittest.TestCase):
@@ -31,23 +31,21 @@ class TestPreprocess(unittest.TestCase):
     TestPreprocess is inherting unittest class
     properties which further requried for unit testing
     """
-    ip_data_path = [os.path.join(test_data_folder, "test_census_data.csv")]
-    # op_data_folder = os.path.join(op_data_folder,"download")
-    _download(op_data_folder, ip_data_path)
 
     def test_create_xlsx(self):
         """
         This method is required to test between output generated
         preprocess script and excepted output files like XLSX
         """
+        ip_data_path = [os.path.join(_TEST_DATA_FOLDER, "test_census_data.csv")]
+        _download(_OP_DATA_FOLDER, ip_data_path)
         expected_xlsx_file_path = os.path.join(
-            test_data_folder, "download_expected_USA_Population_Count.xlsx")
+            _TEST_DATA_FOLDER, "download_expected_USA_Population_Count.xlsx")
 
-        print(expected_xlsx_file_path)
         expected_df = pd.read_excel(expected_xlsx_file_path)
-        actual_df = pd.read_excel(op_data_folder + "/test_census_data.xlsx")
+        actual_df = pd.read_excel(_OP_DATA_FOLDER + "/test_census_data.xlsx")
 
-        if path.exists(op_data_folder):
-            os.remove(op_data_folder)
+        if path.exists(_OP_DATA_FOLDER):
+            os.remove(_OP_DATA_FOLDER)
 
         self.assertEqual(True, actual_df.equals(expected_df))
