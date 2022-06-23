@@ -4,4 +4,5 @@ variableMeasured: C:EuroStat_Population_PhysicalActivity->SV
 measurementMethod: C:EuroStat_Population_PhysicalActivity->Measurement_Method
 observationAbout: C:EuroStat_Population_PhysicalActivity->geo
 observationDate: C:EuroStat_Population_PhysicalActivity->time
+scalingFactor: 100
 value: C:EuroStat_Population_PhysicalActivity->observation

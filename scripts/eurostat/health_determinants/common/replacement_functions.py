@@ -263,6 +263,10 @@ def _replace_smoking(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
     """
 
     df = df.replace({
@@ -285,6 +289,10 @@ def _replace_smoking_frequenc(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         'frequenc': {
@@ -297,6 +305,45 @@ def _replace_smoking_frequenc(df: pd.DataFrame) -> pd.DataFrame:
             'FMR': 'FormerSmoker_Formerly',
             'OCC': 'Smoking_Occasional',
             'NVR': 'Smoking_NeverUsed'
+        }
+    })
+    return df
+
+
+def _replace_lev_perc(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'lev_perc': {
+            'STR': 'Strong',
+            'INT': 'Intermediate',
+            'POOR': 'Poor'
+        }
+    })
+    return df
+
+
+def _replace_assist(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Replaces values of a single column into true values
+    from metadata returns the DF.
+
+    Args: df (pd.DataFrame): df as the input, to change column values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+    df = df.replace({
+        'assist': {
+            'PROV': 'ProvidingInformalCare',
+            'PROV_R': 'Relatives_ProvidingInformalCare',
+            'PROV_NR': 'NonRelatives_ProvidingInformalCare',
+            'NPROV': 'NotProvidingInformalCare'
         }
     })
     return df

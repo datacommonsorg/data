@@ -57,6 +57,7 @@ _TMCF_TEMPLATE = (
     "Measurement_Method\n"
     "observationAbout: C:EuroStat_Population_PhysicalActivity->geo\n"
     "observationDate: C:EuroStat_Population_PhysicalActivity->time\n"
+    "scalingFactor: 100\n"
     "value: C:EuroStat_Population_PhysicalActivity->observation\n")
 
 
