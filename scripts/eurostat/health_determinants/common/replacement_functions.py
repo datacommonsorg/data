@@ -319,13 +319,12 @@ def _replace_lev_perc(df: pd.DataFrame) -> pd.DataFrame:
 
     Returns: df (pd.DataFrame): modified df as output
     """
-    df = df.replace({
-        'lev_perc': {
+    df = df.replace(
+        {'lev_perc': {
             'STR': 'Strong',
             'INT': 'Intermediate',
             'POOR': 'Poor'
-        }
-    })
+        }})
     return df
 
 

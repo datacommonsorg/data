@@ -16,7 +16,7 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
     # pylint: disable=R0912
     # pylint: disable=R0915
     actual_mcf_template = ("Node: dcid:{}\n"
-                            "name: \"{}\"\n"
+                           "name: \"{}\"\n"
                            "typeOf: dcs:StatisticalVariable\n"
                            "populationType: dcs:Person{}{}{}{}{}{}{}{}{}{}{}\n"
                            "statType: dcs:measuredValue\n"
@@ -36,7 +36,7 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
         countryofbirth = ''
         citizenship = ''
         lev_limit = ''
-        sv_name=''
+        sv_name = ''
 
         #sv_temp = sv.split("_AsAFractionOf_")
         #denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
@@ -104,10 +104,11 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
                 sv_name = sv_name + prop + ", "
         sv_name = sv_name.rstrip(', ')
         sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
-        sv_name = sv_name.replace("To", "To ").replace("Of", "Of ").replace("ACitizen","A Citizen")
+        sv_name = sv_name.replace("To", "To ").replace("Of", "Of ").replace(
+            "ACitizen", "A Citizen")
         final_mcf_template += actual_mcf_template.format(
-            sv, sv_name, incomequin, education, healthbehavior, exercise, residence,
-            activity, duration, gender, countryofbirth, citizenship,
+            sv, sv_name, incomequin, education, healthbehavior, exercise,
+            residence, activity, duration, gender, countryofbirth, citizenship,
             lev_limit) + "\n"
 
     # Writing Genereated MCF to local path.
