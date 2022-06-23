@@ -9,9 +9,9 @@ The population is categorized by various set of combinations as below:
         2. Overall perceived Social Support by Sex and Degree of Urbanisation
         3. Persons providing informal care or assistance at least once a week by Sex and Educational Attainment level
         4. Persons providing informal care or assistance at least once a week by Sex and Degree of Urbanisation
-        13. Overall perceived Social Support by Sex and Country of Birth
-        14. Overall perceived Social Support by Sex and Country of Citizenship
-        15. Overall perceived Social Support by Sex and Degree of Activity Limitation
+        5. Overall perceived Social Support by Sex and Country of Birth
+        6. Overall perceived Social Support by Sex and Country of Citizenship
+        7. Overall perceived Social Support by Sex and Degree of Activity Limitation
        
 
 ### Download URL
