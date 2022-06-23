@@ -17,22 +17,28 @@ and generates cleaned CSV, MCF, TMCF file
 """
 import os
 import sys
-
+import re
+from absl import app, flags
+# For import common.replacement_functions
+_COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(1, _COMMON_PATH)
+from common.replacement_functions import (_replace_sex, _replace_lev_perc,
+                                          _replace_isced11, _replace_assist,
+                                          _replace_deg_urb, _replace_c_birth,
+                                          _replace_citizen, _replace_lev_limit,
+                                          _split_column)
+# For import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
 sys.path.insert(1, _COMMON_PATH)
-
 import pandas as pd
 import numpy as np
-import re
 from util.alpha2_to_dcid import COUNTRY_MAP
-from absl import app
-from absl import flags
 # pd.set_option("display.max_columns", None)
 # pd.set_option("display.max_rows", None)
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "input_file")
+                                  "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -444,7 +450,7 @@ class EuroStatSocialEnvironment:
                     sv_name = sv_name + prop + ", "
                 elif "Strong" in prop or "Intermediate" in prop \
                     or "Poor" in prop:
-                    lev_perc = "\nsocialSupport: dcs:" + prop
+                    lev_perc = "\nsocialSupportLevel: dcs:" + prop
                     sv_name = sv_name + prop + ", "
                 elif "Education" in prop:
                     education = "\neducationalAttainment: dcs:" + \
@@ -470,7 +476,7 @@ class EuroStatSocialEnvironment:
                     assist = "\nsocialSupportType: dcs:" + prop
                     sv_name = sv_name + prop + ", "
                 elif "Relatives" in prop:
-                    benificiary = "\nsocialSupportBenefciaryType: dcs:" + prop
+                    benificiary = "\nsocialSupportBeneficiaryType: dcs:" + prop
                     sv_name = sv_name + prop + ", "
                 elif "AtLeastOnceAWeek" in prop:
                     frequency = "\nactivityFrequency: \"" + prop + "\""

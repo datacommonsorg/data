@@ -4,7 +4,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -16,7 +16,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -29,7 +29,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEdu
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -42,7 +42,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEdu
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -54,7 +54,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -67,7 +67,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -80,7 +80,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -92,7 +92,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -105,7 +105,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEduc
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -118,7 +118,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEduc
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -130,7 +130,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -142,7 +142,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -154,7 +154,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -167,7 +167,7 @@ measurementDenominator: dcs:Count_Person_Rural_Female
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -180,7 +180,7 @@ measurementDenominator: dcs:Count_Person_Rural_Male
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -192,7 +192,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -205,7 +205,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban_Female
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -218,7 +218,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban_Male
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -230,7 +230,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -243,7 +243,7 @@ measurementDenominator: dcs:Count_Person_Urban_Female
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -256,7 +256,7 @@ measurementDenominator: dcs:Count_Person_Urban_Male
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:NonRelatives
+socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -739,7 +739,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -751,7 +751,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -764,7 +764,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEdu
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -777,7 +777,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEdu
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -789,7 +789,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -802,7 +802,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -815,7 +815,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -827,7 +827,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -840,7 +840,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEduc
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -853,7 +853,7 @@ measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEduc
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -865,7 +865,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -877,7 +877,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -889,7 +889,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -902,7 +902,7 @@ measurementDenominator: dcs:Count_Person_Rural_Female
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -915,7 +915,7 @@ measurementDenominator: dcs:Count_Person_Rural_Male
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -927,7 +927,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -940,7 +940,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban_Female
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -953,7 +953,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban_Male
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -965,7 +965,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -978,7 +978,7 @@ measurementDenominator: dcs:Count_Person_Urban_Female
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -991,7 +991,7 @@ measurementDenominator: dcs:Count_Person_Urban_Male
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-socialSupportBenefciaryType: dcs:Relatives
+socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1001,7 +1001,7 @@ name: "Percentage Intermediate Social Support Among Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1010,7 +1010,7 @@ name: "Percentage Intermediate Social Support Among Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 citizenship: dcs:Citizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1020,7 +1020,7 @@ name: "Percentage Intermediate Social Support Among Citizen Outside EU28 Populat
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1030,7 +1030,7 @@ name: "Percentage Intermediate Social Support Among Citizen Outside EU28, Male P
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
@@ -1041,7 +1041,7 @@ name: "Percentage Intermediate Social Support Among Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 citizenship: dcs:Citizen
 statType: dcs:measuredValue
@@ -1052,7 +1052,7 @@ name: "Percentage Intermediate Social Support Among Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 citizenship: dcs:Citizen
 statType: dcs:measuredValue
@@ -1064,7 +1064,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1074,7 +1074,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1085,7 +1085,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1096,7 +1096,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
 educationalAttainment: dcs:TertiaryEducation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1106,7 +1106,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
 educationalAttainment: dcs:TertiaryEducation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1117,7 +1117,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
 educationalAttainment: dcs:TertiaryEducation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1128,7 +1128,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1138,7 +1138,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1149,7 +1149,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1159,7 +1159,7 @@ name: "Percentage Intermediate Social Support Among Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1169,7 +1169,7 @@ name: "Percentage Intermediate Social Support Among Foreign Born Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBorn
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1179,7 +1179,7 @@ name: "Percentage Intermediate Social Support Among Foreign Born Outside EU28 Po
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1189,7 +1189,7 @@ name: "Percentage Intermediate Social Support Among Foreign Born Outside EU28, F
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
@@ -1200,7 +1200,7 @@ name: "Percentage Intermediate Social Support Among Foreign Born Outside EU28, M
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
@@ -1211,7 +1211,7 @@ name: "Percentage Intermediate Social Support Among Foreign Born Within EU28 Pop
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 nativity: dcs:ForeignBornWithinEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1221,7 +1221,7 @@ name: "Percentage Intermediate Social Support Among Foreign Born Within EU28, Ma
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBornWithinEU28
 statType: dcs:measuredValue
@@ -1232,7 +1232,7 @@ name: "Percentage Intermediate Social Support Among Foreign Born, Female Populat
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBorn_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
@@ -1243,7 +1243,7 @@ name: "Percentage Intermediate Social Support Among Foreign Born, Male Populatio
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBorn_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
@@ -1254,7 +1254,7 @@ name: "Percentage Intermediate Social Support Among Limited Activity Limitation 
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LimitedActivityLimitation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1264,7 +1264,7 @@ name: "Percentage Intermediate Social Support Among Limited Activity Limitation,
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LimitedActivityLimitation_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
@@ -1275,7 +1275,7 @@ name: "Percentage Intermediate Social Support Among Limited Activity Limitation,
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LimitedActivityLimitation_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
@@ -1286,7 +1286,7 @@ name: "Percentage Intermediate Social Support Among Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1296,7 +1296,7 @@ name: "Percentage Intermediate Social Support Among Moderate Activity Limitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1306,7 +1306,7 @@ name: "Percentage Intermediate Social Support Among Moderate Activity Limitation
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
@@ -1317,7 +1317,7 @@ name: "Percentage Intermediate Social Support Among Native Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Native
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 nativity: dcs:Native
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1327,7 +1327,7 @@ name: "Percentage Intermediate Social Support Among Native, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Native_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 nativity: dcs:Native
 statType: dcs:measuredValue
@@ -1338,7 +1338,7 @@ name: "Percentage Intermediate Social Support Among Native, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Native_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 nativity: dcs:Native
 statType: dcs:measuredValue
@@ -1349,7 +1349,7 @@ name: "Percentage Intermediate Social Support Among No Activity Limitation Popul
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NoActivityLimitation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1359,7 +1359,7 @@ name: "Percentage Intermediate Social Support Among No Activity Limitation, Fema
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NoActivityLimitation_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
@@ -1370,7 +1370,7 @@ name: "Percentage Intermediate Social Support Among No Activity Limitation, Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NoActivityLimitation_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
@@ -1381,7 +1381,7 @@ name: "Percentage Intermediate Social Support Among Not ACitizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 citizenship: dcs:NotACitizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1391,7 +1391,7 @@ name: "Percentage Intermediate Social Support Among Not ACitizen, Female Populat
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 citizenship: dcs:NotACitizen
 statType: dcs:measuredValue
@@ -1402,7 +1402,7 @@ name: "Percentage Intermediate Social Support Among Not ACitizen, Male Populatio
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 citizenship: dcs:NotACitizen
 statType: dcs:measuredValue
@@ -1414,7 +1414,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural
 placeOfResidenceClassification: dcs:Rural
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1424,7 +1424,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural_Female
 placeOfResidenceClassification: dcs:Rural
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1435,7 +1435,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural_Male
 placeOfResidenceClassification: dcs:Rural
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1446,7 +1446,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban
 placeOfResidenceClassification: dcs:SemiUrban
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1456,7 +1456,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Female
 placeOfResidenceClassification: dcs:SemiUrban
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1467,7 +1467,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Male
 placeOfResidenceClassification: dcs:SemiUrban
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1477,7 +1477,7 @@ name: "Percentage Intermediate Social Support Among Severe Activity Limitation P
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SevereActivityLimitation
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1487,7 +1487,7 @@ name: "Percentage Intermediate Social Support Among Severe Activity Limitation, 
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SevereActivityLimitation_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
@@ -1498,7 +1498,7 @@ name: "Percentage Intermediate Social Support Among Severe Activity Limitation, 
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SevereActivityLimitation_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
@@ -1510,7 +1510,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1520,7 +1520,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Male
 placeOfResidenceClassification: dcs:Urban
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1530,7 +1530,7 @@ name: "Percentage Intermediate Social Support Among Within EU28 And Not ACitizen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1540,7 +1540,7 @@ name: "Percentage Intermediate Social Support Among Within EU28 And Not ACitizen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Female
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
@@ -1551,7 +1551,7 @@ name: "Percentage Intermediate Social Support Among Within EU28 And Not ACitizen
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
-socialSupport: dcs:IntermediateSocialSupport
+socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
@@ -1562,7 +1562,7 @@ name: "Percentage Poor Social Support Among Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1571,7 +1571,7 @@ name: "Percentage Poor Social Support Among Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 citizenship: dcs:Citizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1581,7 +1581,7 @@ name: "Percentage Poor Social Support Among Citizen Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1591,7 +1591,7 @@ name: "Percentage Poor Social Support Among Citizen Outside EU28, Female Populat
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
@@ -1602,7 +1602,7 @@ name: "Percentage Poor Social Support Among Citizen Outside EU28, Male Populatio
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
@@ -1613,7 +1613,7 @@ name: "Percentage Poor Social Support Among Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 citizenship: dcs:Citizen
 statType: dcs:measuredValue
@@ -1624,7 +1624,7 @@ name: "Percentage Poor Social Support Among Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 citizenship: dcs:Citizen
 statType: dcs:measuredValue
@@ -1636,7 +1636,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1646,7 +1646,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1657,7 +1657,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1668,7 +1668,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
 educationalAttainment: dcs:TertiaryEducation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1678,7 +1678,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
 educationalAttainment: dcs:TertiaryEducation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1689,7 +1689,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
 educationalAttainment: dcs:TertiaryEducation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1700,7 +1700,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1710,7 +1710,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1721,7 +1721,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1731,7 +1731,7 @@ name: "Percentage Poor Social Support Among Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1741,7 +1741,7 @@ name: "Percentage Poor Social Support Among Foreign Born Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBorn
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1751,7 +1751,7 @@ name: "Percentage Poor Social Support Among Foreign Born Outside EU28 Population
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1761,7 +1761,7 @@ name: "Percentage Poor Social Support Among Foreign Born Outside EU28, Female Po
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
@@ -1772,7 +1772,7 @@ name: "Percentage Poor Social Support Among Foreign Born Outside EU28, Male Popu
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
@@ -1783,7 +1783,7 @@ name: "Percentage Poor Social Support Among Foreign Born Within EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 nativity: dcs:ForeignBornWithinEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1793,7 +1793,7 @@ name: "Percentage Poor Social Support Among Foreign Born Within EU28, Female Pop
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 nativity: dcs:ForeignBornWithinEU28
 statType: dcs:measuredValue
@@ -1804,7 +1804,7 @@ name: "Percentage Poor Social Support Among Foreign Born Within EU28, Male Popul
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBornWithinEU28
 statType: dcs:measuredValue
@@ -1815,7 +1815,7 @@ name: "Percentage Poor Social Support Among Foreign Born, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBorn_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
@@ -1826,7 +1826,7 @@ name: "Percentage Poor Social Support Among Foreign Born, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBorn_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
@@ -1837,7 +1837,7 @@ name: "Percentage Poor Social Support Among Limited Activity Limitation Populati
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LimitedActivityLimitation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1847,7 +1847,7 @@ name: "Percentage Poor Social Support Among Limited Activity Limitation, Female 
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LimitedActivityLimitation_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
@@ -1858,7 +1858,7 @@ name: "Percentage Poor Social Support Among Limited Activity Limitation, Male Po
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LimitedActivityLimitation_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
@@ -1869,7 +1869,7 @@ name: "Percentage Poor Social Support Among Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1879,7 +1879,7 @@ name: "Percentage Poor Social Support Among Moderate Activity Limitation Populat
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1889,7 +1889,7 @@ name: "Percentage Poor Social Support Among Moderate Activity Limitation, Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
@@ -1900,7 +1900,7 @@ name: "Percentage Poor Social Support Among Moderate Activity Limitation, Male P
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
@@ -1911,7 +1911,7 @@ name: "Percentage Poor Social Support Among Native Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Native
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 nativity: dcs:Native
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1921,7 +1921,7 @@ name: "Percentage Poor Social Support Among Native, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Native_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 nativity: dcs:Native
 statType: dcs:measuredValue
@@ -1932,7 +1932,7 @@ name: "Percentage Poor Social Support Among Native, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Native_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 nativity: dcs:Native
 statType: dcs:measuredValue
@@ -1943,7 +1943,7 @@ name: "Percentage Poor Social Support Among No Activity Limitation Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NoActivityLimitation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1953,7 +1953,7 @@ name: "Percentage Poor Social Support Among No Activity Limitation, Female Popul
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NoActivityLimitation_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
@@ -1964,7 +1964,7 @@ name: "Percentage Poor Social Support Among No Activity Limitation, Male Populat
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NoActivityLimitation_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
@@ -1975,7 +1975,7 @@ name: "Percentage Poor Social Support Among Not ACitizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 citizenship: dcs:NotACitizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1985,7 +1985,7 @@ name: "Percentage Poor Social Support Among Not ACitizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 citizenship: dcs:NotACitizen
 statType: dcs:measuredValue
@@ -1996,7 +1996,7 @@ name: "Percentage Poor Social Support Among Not ACitizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 citizenship: dcs:NotACitizen
 statType: dcs:measuredValue
@@ -2008,7 +2008,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural
 placeOfResidenceClassification: dcs:Rural
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2018,7 +2018,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural_Female
 placeOfResidenceClassification: dcs:Rural
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2029,7 +2029,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural_Male
 placeOfResidenceClassification: dcs:Rural
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2040,7 +2040,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban
 placeOfResidenceClassification: dcs:SemiUrban
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2050,7 +2050,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Female
 placeOfResidenceClassification: dcs:SemiUrban
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2061,7 +2061,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Male
 placeOfResidenceClassification: dcs:SemiUrban
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2071,7 +2071,7 @@ name: "Percentage Poor Social Support Among Severe Activity Limitation Populatio
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SevereActivityLimitation
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2081,7 +2081,7 @@ name: "Percentage Poor Social Support Among Severe Activity Limitation, Female P
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SevereActivityLimitation_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
@@ -2092,7 +2092,7 @@ name: "Percentage Poor Social Support Among Severe Activity Limitation, Male Pop
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SevereActivityLimitation_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
@@ -2104,7 +2104,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2114,7 +2114,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Female
 placeOfResidenceClassification: dcs:Urban
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2125,7 +2125,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Male
 placeOfResidenceClassification: dcs:Urban
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2135,7 +2135,7 @@ name: "Percentage Poor Social Support Among Within EU28 And Not ACitizen Populat
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2145,7 +2145,7 @@ name: "Percentage Poor Social Support Among Within EU28 And Not ACitizen, Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Female
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
@@ -2156,7 +2156,7 @@ name: "Percentage Poor Social Support Among Within EU28 And Not ACitizen, Male P
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
-socialSupport: dcs:PoorSocialSupport
+socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
@@ -2167,7 +2167,7 @@ name: "Percentage Strong Social Support Among Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2176,7 +2176,7 @@ name: "Percentage Strong Social Support Among Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 citizenship: dcs:Citizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2186,7 +2186,7 @@ name: "Percentage Strong Social Support Among Citizen Outside EU28 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2196,7 +2196,7 @@ name: "Percentage Strong Social Support Among Citizen Outside EU28, Female Popul
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
@@ -2207,7 +2207,7 @@ name: "Percentage Strong Social Support Among Citizen Outside EU28, Male Populat
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
@@ -2218,7 +2218,7 @@ name: "Percentage Strong Social Support Among Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 citizenship: dcs:Citizen
 statType: dcs:measuredValue
@@ -2229,7 +2229,7 @@ name: "Percentage Strong Social Support Among Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 citizenship: dcs:Citizen
 statType: dcs:measuredValue
@@ -2241,7 +2241,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2251,7 +2251,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2262,7 +2262,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2273,7 +2273,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
 educationalAttainment: dcs:TertiaryEducation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2283,7 +2283,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
 educationalAttainment: dcs:TertiaryEducation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2294,7 +2294,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
 educationalAttainment: dcs:TertiaryEducation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2305,7 +2305,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2315,7 +2315,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2326,7 +2326,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2336,7 +2336,7 @@ name: "Percentage Strong Social Support Among Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2346,7 +2346,7 @@ name: "Percentage Strong Social Support Among Foreign Born Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBorn
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2356,7 +2356,7 @@ name: "Percentage Strong Social Support Among Foreign Born Outside EU28 Populati
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2366,7 +2366,7 @@ name: "Percentage Strong Social Support Among Foreign Born Outside EU28, Female 
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
@@ -2377,7 +2377,7 @@ name: "Percentage Strong Social Support Among Foreign Born Outside EU28, Male Po
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBornOutsideEU28
 statType: dcs:measuredValue
@@ -2388,7 +2388,7 @@ name: "Percentage Strong Social Support Among Foreign Born Within EU28 Populatio
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 nativity: dcs:ForeignBornWithinEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2398,7 +2398,7 @@ name: "Percentage Strong Social Support Among Foreign Born Within EU28, Female P
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 nativity: dcs:ForeignBornWithinEU28
 statType: dcs:measuredValue
@@ -2409,7 +2409,7 @@ name: "Percentage Strong Social Support Among Foreign Born Within EU28, Male Pop
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBornWithinEU28
 statType: dcs:measuredValue
@@ -2420,7 +2420,7 @@ name: "Percentage Strong Social Support Among Foreign Born, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBorn_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
@@ -2431,7 +2431,7 @@ name: "Percentage Strong Social Support Among Foreign Born, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ForeignBorn_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
@@ -2442,7 +2442,7 @@ name: "Percentage Strong Social Support Among Limited Activity Limitation Popula
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LimitedActivityLimitation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2452,7 +2452,7 @@ name: "Percentage Strong Social Support Among Limited Activity Limitation, Femal
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LimitedActivityLimitation_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
@@ -2463,7 +2463,7 @@ name: "Percentage Strong Social Support Among Limited Activity Limitation, Male 
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LimitedActivityLimitation_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
@@ -2474,7 +2474,7 @@ name: "Percentage Strong Social Support Among Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2484,7 +2484,7 @@ name: "Percentage Strong Social Support Among Moderate Activity Limitation Popul
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2494,7 +2494,7 @@ name: "Percentage Strong Social Support Among Moderate Activity Limitation, Fema
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
@@ -2505,7 +2505,7 @@ name: "Percentage Strong Social Support Among Moderate Activity Limitation, Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
@@ -2516,7 +2516,7 @@ name: "Percentage Strong Social Support Among Native Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Native
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 nativity: dcs:Native
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2526,7 +2526,7 @@ name: "Percentage Strong Social Support Among Native, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Native_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 nativity: dcs:Native
 statType: dcs:measuredValue
@@ -2537,7 +2537,7 @@ name: "Percentage Strong Social Support Among Native, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Native_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 nativity: dcs:Native
 statType: dcs:measuredValue
@@ -2548,7 +2548,7 @@ name: "Percentage Strong Social Support Among No Activity Limitation Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NoActivityLimitation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2558,7 +2558,7 @@ name: "Percentage Strong Social Support Among No Activity Limitation, Female Pop
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NoActivityLimitation_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
@@ -2569,7 +2569,7 @@ name: "Percentage Strong Social Support Among No Activity Limitation, Male Popul
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NoActivityLimitation_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
@@ -2580,7 +2580,7 @@ name: "Percentage Strong Social Support Among Not ACitizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 citizenship: dcs:NotACitizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2590,7 +2590,7 @@ name: "Percentage Strong Social Support Among Not ACitizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 citizenship: dcs:NotACitizen
 statType: dcs:measuredValue
@@ -2601,7 +2601,7 @@ name: "Percentage Strong Social Support Among Not ACitizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 citizenship: dcs:NotACitizen
 statType: dcs:measuredValue
@@ -2613,7 +2613,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural
 placeOfResidenceClassification: dcs:Rural
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2623,7 +2623,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural_Female
 placeOfResidenceClassification: dcs:Rural
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2634,7 +2634,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural_Male
 placeOfResidenceClassification: dcs:Rural
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2645,7 +2645,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban
 placeOfResidenceClassification: dcs:SemiUrban
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2655,7 +2655,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Female
 placeOfResidenceClassification: dcs:SemiUrban
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2666,7 +2666,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Male
 placeOfResidenceClassification: dcs:SemiUrban
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2676,7 +2676,7 @@ name: "Percentage Strong Social Support Among Severe Activity Limitation Populat
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SevereActivityLimitation
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2686,7 +2686,7 @@ name: "Percentage Strong Social Support Among Severe Activity Limitation, Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SevereActivityLimitation_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
@@ -2697,7 +2697,7 @@ name: "Percentage Strong Social Support Among Severe Activity Limitation, Male P
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SevereActivityLimitation_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
@@ -2709,7 +2709,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2719,7 +2719,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Female
 placeOfResidenceClassification: dcs:Urban
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2730,7 +2730,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Male
 placeOfResidenceClassification: dcs:Urban
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2740,7 +2740,7 @@ name: "Percentage Strong Social Support Among Within EU28 And Not ACitizen Popul
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -2750,7 +2750,7 @@ name: "Percentage Strong Social Support Among Within EU28 And Not ACitizen, Fema
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Female
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
@@ -2761,7 +2761,7 @@ name: "Percentage Strong Social Support Among Within EU28 And Not ACitizen, Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
-socialSupport: dcs:StrongSocialSupport
+socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
