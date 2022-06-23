@@ -21,8 +21,7 @@ import sys
 import unittest
 import shutil
 
-_COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
-sys.path.insert(1, _COMMON_PATH)
+from national_2020_2021 import national2020
 from national_2010_2019 import national2010
 from national_2000_2010 import national2000
 from state_1990_2000 import state1990
@@ -52,6 +51,7 @@ class TestPreprocess(unittest.TestCase):
     state_url_file = "test_data/test_input_data/state_test.json"
     county_url_file = "test_data/test_input_data/county_test.json"
     output_folder = "test_temp_files"
+    national2020(national_url_file, output_folder)
     national2010(national_url_file, output_folder)
     national2000(national_url_file, output_folder)
     state2010(state_url_file, output_folder)
@@ -67,7 +67,8 @@ class TestPreprocess(unittest.TestCase):
         os.path.join(input_path, 'state_2010_2020.csv'),
         os.path.join(input_path, 'national_1990_2000.csv'),
         os.path.join(input_path, 'national_2000_2010.csv'),
-        os.path.join(input_path, 'national_2010_2019.csv')
+        os.path.join(input_path, 'national_2010_2019.csv'),
+        os.path.join(input_path, 'national_2020_2021.csv')
     ]
 
     base = USCensusPEPByASR(ip_data, cleaned_csv_file_path, mcf_file_path,

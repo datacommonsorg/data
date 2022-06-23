@@ -69,11 +69,10 @@ def _measurement_conditions(x: str, y: str) -> str:
     Returns:
         str
     """
-    races = ['Alone', 'Races', 'Pacific', 'NonWhite']
     if (not x.lower().endswith('male')) and y >= 2000:
-        return "RaceAfter2000_"
+        return "_Race2000Onwards"
     elif (not x.lower().endswith('male')) and y < 2000:
-        return "RaceBefore2000_"
+        return "_RaceUpto1999"
     else:
         return ""
 
@@ -92,7 +91,8 @@ def _measurement_aggregate(df: pd.DataFrame) -> list:
     aggregated_rows = list(derived_df['SVs'] + derived_df['geo_ID'])
     df['info'] = df['SVs'] + df['geo_ID']
     aggregate_list = np.where(df['info'].isin(aggregated_rows),
-                              'Partial_DCAggregate_', '')
+                              'dcAggregate/CensusPEPSurvey_PartialAggregate',
+                              'CensusPEPSurvey')
     df.drop(columns=['info'], inplace=True)
     return aggregate_list.tolist()
 
@@ -114,7 +114,6 @@ def _measurement_method(df: pd.DataFrame) -> pd.DataFrame:
     race_year = func(df['SVs'], df['Year'])
     df['Measurement_Method'] = aggregate_list
     df['Measurement_Method'] = df['Measurement_Method'] + race_year
-    df['Measurement_Method'] = df['Measurement_Method'] + 'CensusPEPSurvey'
 
     return df
 

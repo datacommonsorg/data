@@ -264,6 +264,22 @@ race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_100Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 100]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_100Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 100]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_10To14Years_BlackOrAfricanAmericanAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -17786,6 +17802,86 @@ race: dcs:WhiteAlone
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Count_Person_85Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 85]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_85Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 85]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_86Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 86]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_86Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 86]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_87Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 87]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_87Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 87]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_88Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 88]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_88Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 88]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_89Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 89]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_89Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 89]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Count_Person_8Years_AmericanIndianAndAlaskaNativeAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
@@ -17981,6 +18077,166 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 8]
 race: dcs:WhiteAlone
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_90Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 90]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_90Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 90]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_91Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 91]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_91Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 91]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_92Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 92]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_92Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 92]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_93Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 93]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_93Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 93]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_94Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 94]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_94Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 94]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_95Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 95]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_95Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 95]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_96Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 96]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_96Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 96]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_97Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 97]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_97Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 97]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_98Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 98]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_98Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 98]
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_99Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 99]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_99Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 99]
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
