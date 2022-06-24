@@ -9,120 +9,6 @@ activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Female
-socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Male
-socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation
-name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Educational Attainment Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation_Female
-name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Educational Attainment Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Female
-socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation_Male
-name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Educational Attainment Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Male
-socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Female
-socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Male
-socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_Female
 name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Female Population"
 typeOf: dcs:StatisticalVariable
@@ -130,6 +16,44 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
+socialSupportBeneficiaryType: dcs:NonRelatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+socialSupportBeneficiaryType: dcs:NonRelatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Female
+socialSupportBeneficiaryType: dcs:NonRelatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Male
 socialSupportBeneficiaryType: dcs:NonRelatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
@@ -223,6 +147,82 @@ activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_TertiaryEducation
+name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+socialSupportBeneficiaryType: dcs:NonRelatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_TertiaryEducation_Female
+name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Female
+socialSupportBeneficiaryType: dcs:NonRelatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_TertiaryEducation_Male
+name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Male
+socialSupportBeneficiaryType: dcs:NonRelatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+socialSupportBeneficiaryType: dcs:NonRelatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Female
+socialSupportBeneficiaryType: dcs:NonRelatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Male
+socialSupportBeneficiaryType: dcs:NonRelatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_AtLeastOnceAWeek_NonRelatives_ProvidingInformalCare_In_Count_Person_Urban
 name: "Percentage At Least Once A Week, Non Relatives, Providing Informal Care Among Urban Population"
 typeOf: dcs:StatisticalVariable
@@ -271,111 +271,6 @@ activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-name: "Percentage At Least Once A Week, Not Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage At Least Once A Week, Not Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:NotProvidingInformalCare
-gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage At Least Once A Week, Not Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:NotProvidingInformalCare
-gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation
-name: "Percentage At Least Once A Week, Not Providing Informal Care Among Educational Attainment Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation_Female
-name: "Percentage At Least Once A Week, Not Providing Informal Care Among Educational Attainment Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:NotProvidingInformalCare
-gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation_Male
-name: "Percentage At Least Once A Week, Not Providing Informal Care Among Educational Attainment Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:NotProvidingInformalCare
-gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-name: "Percentage At Least Once A Week, Not Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage At Least Once A Week, Not Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:NotProvidingInformalCare
-gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage At Least Once A Week, Not Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:NotProvidingInformalCare
-gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_Female
 name: "Percentage At Least Once A Week, Not Providing Informal Care Among Female Population"
 typeOf: dcs:StatisticalVariable
@@ -383,6 +278,41 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Female
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:NotProvidingInformalCare
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:NotProvidingInformalCare
+gender: dcs:Female
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:NotProvidingInformalCare
+gender: dcs:Male
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -468,6 +398,76 @@ activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_TertiaryEducation
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:NotProvidingInformalCare
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_TertiaryEducation_Female
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:NotProvidingInformalCare
+gender: dcs:Female
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_TertiaryEducation_Male
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:NotProvidingInformalCare
+gender: dcs:Male
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:NotProvidingInformalCare
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:NotProvidingInformalCare
+gender: dcs:Female
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:NotProvidingInformalCare
+gender: dcs:Male
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_Urban
 name: "Percentage At Least Once A Week, Not Providing Informal Care Among Urban Population"
 typeOf: dcs:StatisticalVariable
@@ -475,6 +475,18 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:NotProvidingInformalCare
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCare_In_Count_Person_Urban_Female
+name: "Percentage At Least Once A Week, Not Providing Informal Care Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+placeOfResidenceClassification: dcs:Urban
+socialSupportType: dcs:NotProvidingInformalCare
+gender: dcs:Female
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -501,111 +513,6 @@ activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-name: "Percentage At Least Once A Week, Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage At Least Once A Week, Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage At Least Once A Week, Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation
-name: "Percentage At Least Once A Week, Providing Informal Care Among Educational Attainment Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation_Female
-name: "Percentage At Least Once A Week, Providing Informal Care Among Educational Attainment Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation_Male
-name: "Percentage At Least Once A Week, Providing Informal Care Among Educational Attainment Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-name: "Percentage At Least Once A Week, Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage At Least Once A Week, Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage At Least Once A Week, Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_Female
 name: "Percentage At Least Once A Week, Providing Informal Care Among Female Population"
 typeOf: dcs:StatisticalVariable
@@ -613,6 +520,41 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+name: "Percentage At Least Once A Week, Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage At Least Once A Week, Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Female
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+name: "Percentage At Least Once A Week, Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Male
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -698,6 +640,76 @@ activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_TertiaryEducation
+name: "Percentage At Least Once A Week, Providing Informal Care Among Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_TertiaryEducation_Female
+name: "Percentage At Least Once A Week, Providing Informal Care Among Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Female
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_TertiaryEducation_Male
+name: "Percentage At Least Once A Week, Providing Informal Care Among Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Male
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+name: "Percentage At Least Once A Week, Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Percentage At Least Once A Week, Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Female
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+name: "Percentage At Least Once A Week, Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Male
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_AtLeastOnceAWeek_ProvidingInformalCare_In_Count_Person_Urban
 name: "Percentage At Least Once A Week, Providing Informal Care Among Urban Population"
 typeOf: dcs:StatisticalVariable
@@ -744,120 +756,6 @@ activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Female
-socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Male
-socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation
-name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Educational Attainment Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation_Female
-name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Educational Attainment Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Female
-socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentTertiaryEducation_Male
-name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Educational Attainment Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
-educationalAttainment: dcs:TertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Male
-socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Female
-socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportType: dcs:ProvidingInformalCare
-gender: dcs:Male
-socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_Female
 name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Female Population"
 typeOf: dcs:StatisticalVariable
@@ -865,6 +763,44 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
+socialSupportBeneficiaryType: dcs:Relatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+socialSupportBeneficiaryType: dcs:Relatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Female
+socialSupportBeneficiaryType: dcs:Relatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Male
 socialSupportBeneficiaryType: dcs:Relatives
 activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
@@ -958,6 +894,82 @@ activityFrequency: "AtLeastOnceAWeek"
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_TertiaryEducation
+name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+socialSupportBeneficiaryType: dcs:Relatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_TertiaryEducation_Female
+name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Female
+socialSupportBeneficiaryType: dcs:Relatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_TertiaryEducation_Male
+name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+educationalAttainment: dcs:TertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Male
+socialSupportBeneficiaryType: dcs:Relatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+socialSupportBeneficiaryType: dcs:Relatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Female
+socialSupportBeneficiaryType: dcs:Relatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportType: dcs:ProvidingInformalCare
+gender: dcs:Male
+socialSupportBeneficiaryType: dcs:Relatives
+activityFrequency: "AtLeastOnceAWeek"
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_AtLeastOnceAWeek_Relatives_ProvidingInformalCare_In_Count_Person_Urban
 name: "Percentage At Least Once A Week, Relatives, Providing Informal Care Among Urban Population"
 typeOf: dcs:StatisticalVariable
@@ -1025,6 +1037,17 @@ citizenship: dcs:CitizenOutsideEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_CitizenOutsideEU28_Female
+name: "Percentage Intermediate Social Support Among Citizen Outside EU28, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Female
+citizenship: dcs:CitizenOutsideEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_CitizenOutsideEU28_Male
 name: "Percentage Intermediate Social Support Among Citizen Outside EU28, Male Population"
 typeOf: dcs:StatisticalVariable
@@ -1055,102 +1078,6 @@ measurementDenominator: dcs:Count_Person_Citizen_Male
 socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 citizenship: dcs:Citizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-name: "Percentage Intermediate Social Support Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportLevel: dcs:IntermediateSocialSupport
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage Intermediate Social Support Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportLevel: dcs:IntermediateSocialSupport
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage Intermediate Social Support Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportLevel: dcs:IntermediateSocialSupport
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_EducationalAttainmentTertiaryEducation
-name: "Percentage Intermediate Social Support Among Educational Attainment Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
-educationalAttainment: dcs:TertiaryEducation
-socialSupportLevel: dcs:IntermediateSocialSupport
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_EducationalAttainmentTertiaryEducation_Female
-name: "Percentage Intermediate Social Support Among Educational Attainment Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
-educationalAttainment: dcs:TertiaryEducation
-socialSupportLevel: dcs:IntermediateSocialSupport
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_EducationalAttainmentTertiaryEducation_Male
-name: "Percentage Intermediate Social Support Among Educational Attainment Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
-educationalAttainment: dcs:TertiaryEducation
-socialSupportLevel: dcs:IntermediateSocialSupport
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-name: "Percentage Intermediate Social Support Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportLevel: dcs:IntermediateSocialSupport
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Intermediate Social Support Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportLevel: dcs:IntermediateSocialSupport
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage Intermediate Social Support Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportLevel: dcs:IntermediateSocialSupport
-gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1216,6 +1143,17 @@ nativity: dcs:ForeignBornWithinEU28
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_ForeignBornWithinEU28_Female
+name: "Percentage Intermediate Social Support Among Foreign Born Within EU28, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28_Female
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_ForeignBornWithinEU28_Male
 name: "Percentage Intermediate Social Support Among Foreign Born Within EU28, Male Population"
 typeOf: dcs:StatisticalVariable
@@ -1246,6 +1184,38 @@ measurementDenominator: dcs:Count_Person_ForeignBorn_Male
 socialSupportLevel: dcs:IntermediateSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+name: "Percentage Intermediate Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportLevel: dcs:IntermediateSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Intermediate Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+name: "Percentage Intermediate Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1297,6 +1267,17 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_ModerateActivityLimitation
 socialSupportLevel: dcs:IntermediateSocialSupport
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_ModerateActivityLimitation_Female
+name: "Percentage Intermediate Social Support Among Moderate Activity Limitation, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_ModerateActivityLimitation_Female
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Female
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -1504,6 +1485,70 @@ globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_TertiaryEducation
+name: "Percentage Intermediate Social Support Among Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+educationalAttainment: dcs:TertiaryEducation
+socialSupportLevel: dcs:IntermediateSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_TertiaryEducation_Female
+name: "Percentage Intermediate Social Support Among Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+educationalAttainment: dcs:TertiaryEducation
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_TertiaryEducation_Male
+name: "Percentage Intermediate Social Support Among Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+educationalAttainment: dcs:TertiaryEducation
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+name: "Percentage Intermediate Social Support Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportLevel: dcs:IntermediateSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Percentage Intermediate Social Support Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+name: "Percentage Intermediate Social Support Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_Urban
 name: "Percentage Intermediate Social Support Among Urban Population"
 typeOf: dcs:StatisticalVariable
@@ -1511,6 +1556,17 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
 socialSupportLevel: dcs:IntermediateSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_Urban_Female
+name: "Percentage Intermediate Social Support Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+placeOfResidenceClassification: dcs:Urban
+socialSupportLevel: dcs:IntermediateSocialSupport
+gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1630,102 +1686,6 @@ citizenship: dcs:Citizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_PoorSocialSupport_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-name: "Percentage Poor Social Support Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportLevel: dcs:PoorSocialSupport
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_PoorSocialSupport_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage Poor Social Support Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportLevel: dcs:PoorSocialSupport
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_PoorSocialSupport_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage Poor Social Support Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportLevel: dcs:PoorSocialSupport
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_PoorSocialSupport_In_Count_Person_EducationalAttainmentTertiaryEducation
-name: "Percentage Poor Social Support Among Educational Attainment Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
-educationalAttainment: dcs:TertiaryEducation
-socialSupportLevel: dcs:PoorSocialSupport
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_PoorSocialSupport_In_Count_Person_EducationalAttainmentTertiaryEducation_Female
-name: "Percentage Poor Social Support Among Educational Attainment Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
-educationalAttainment: dcs:TertiaryEducation
-socialSupportLevel: dcs:PoorSocialSupport
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_PoorSocialSupport_In_Count_Person_EducationalAttainmentTertiaryEducation_Male
-name: "Percentage Poor Social Support Among Educational Attainment Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
-educationalAttainment: dcs:TertiaryEducation
-socialSupportLevel: dcs:PoorSocialSupport
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_PoorSocialSupport_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-name: "Percentage Poor Social Support Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportLevel: dcs:PoorSocialSupport
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_PoorSocialSupport_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Poor Social Support Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportLevel: dcs:PoorSocialSupport
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_PoorSocialSupport_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage Poor Social Support Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportLevel: dcs:PoorSocialSupport
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_PoorSocialSupport_In_Count_Person_Female
 name: "Percentage Poor Social Support Among Female Population"
 typeOf: dcs:StatisticalVariable
@@ -1829,6 +1789,38 @@ measurementDenominator: dcs:Count_Person_ForeignBorn_Male
 socialSupportLevel: dcs:PoorSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_PoorSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+name: "Percentage Poor Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportLevel: dcs:PoorSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_PoorSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Poor Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportLevel: dcs:PoorSocialSupport
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_PoorSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+name: "Percentage Poor Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportLevel: dcs:PoorSocialSupport
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2098,6 +2090,70 @@ globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_PoorSocialSupport_In_Count_Person_TertiaryEducation
+name: "Percentage Poor Social Support Among Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+educationalAttainment: dcs:TertiaryEducation
+socialSupportLevel: dcs:PoorSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_PoorSocialSupport_In_Count_Person_TertiaryEducation_Female
+name: "Percentage Poor Social Support Among Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+educationalAttainment: dcs:TertiaryEducation
+socialSupportLevel: dcs:PoorSocialSupport
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_PoorSocialSupport_In_Count_Person_TertiaryEducation_Male
+name: "Percentage Poor Social Support Among Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+educationalAttainment: dcs:TertiaryEducation
+socialSupportLevel: dcs:PoorSocialSupport
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_PoorSocialSupport_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+name: "Percentage Poor Social Support Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportLevel: dcs:PoorSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_PoorSocialSupport_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Percentage Poor Social Support Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportLevel: dcs:PoorSocialSupport
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_PoorSocialSupport_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+name: "Percentage Poor Social Support Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportLevel: dcs:PoorSocialSupport
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_PoorSocialSupport_In_Count_Person_Urban
 name: "Percentage Poor Social Support Among Urban Population"
 typeOf: dcs:StatisticalVariable
@@ -2235,102 +2291,6 @@ citizenship: dcs:Citizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_StrongSocialSupport_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-name: "Percentage Strong Social Support Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportLevel: dcs:StrongSocialSupport
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_StrongSocialSupport_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage Strong Social Support Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportLevel: dcs:StrongSocialSupport
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_StrongSocialSupport_In_Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage Strong Social Support Among Educational Attainment Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentLessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-socialSupportLevel: dcs:StrongSocialSupport
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_StrongSocialSupport_In_Count_Person_EducationalAttainmentTertiaryEducation
-name: "Percentage Strong Social Support Among Educational Attainment Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation
-educationalAttainment: dcs:TertiaryEducation
-socialSupportLevel: dcs:StrongSocialSupport
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_StrongSocialSupport_In_Count_Person_EducationalAttainmentTertiaryEducation_Female
-name: "Percentage Strong Social Support Among Educational Attainment Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Female
-educationalAttainment: dcs:TertiaryEducation
-socialSupportLevel: dcs:StrongSocialSupport
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_StrongSocialSupport_In_Count_Person_EducationalAttainmentTertiaryEducation_Male
-name: "Percentage Strong Social Support Among Educational Attainment Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentTertiaryEducation_Male
-educationalAttainment: dcs:TertiaryEducation
-socialSupportLevel: dcs:StrongSocialSupport
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_StrongSocialSupport_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-name: "Percentage Strong Social Support Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportLevel: dcs:StrongSocialSupport
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_StrongSocialSupport_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Strong Social Support Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportLevel: dcs:StrongSocialSupport
-gender: dcs:Female
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_StrongSocialSupport_In_Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage Strong Social Support Among Educational Attainment Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_EducationalAttainmentUpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-socialSupportLevel: dcs:StrongSocialSupport
-gender: dcs:Male
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_StrongSocialSupport_In_Count_Person_Female
 name: "Percentage Strong Social Support Among Female Population"
 typeOf: dcs:StatisticalVariable
@@ -2434,6 +2394,38 @@ measurementDenominator: dcs:Count_Person_ForeignBorn_Male
 socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 nativity: dcs:ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_StrongSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+name: "Percentage Strong Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportLevel: dcs:StrongSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_StrongSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Strong Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportLevel: dcs:StrongSocialSupport
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_StrongSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+name: "Percentage Strong Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportLevel: dcs:StrongSocialSupport
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -2700,6 +2692,70 @@ measurementDenominator: dcs:Count_Person_SevereActivityLimitation_Male
 socialSupportLevel: dcs:StrongSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:SevereActivityLimitation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_StrongSocialSupport_In_Count_Person_TertiaryEducation
+name: "Percentage Strong Social Support Among Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+educationalAttainment: dcs:TertiaryEducation
+socialSupportLevel: dcs:StrongSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_StrongSocialSupport_In_Count_Person_TertiaryEducation_Female
+name: "Percentage Strong Social Support Among Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+educationalAttainment: dcs:TertiaryEducation
+socialSupportLevel: dcs:StrongSocialSupport
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_StrongSocialSupport_In_Count_Person_TertiaryEducation_Male
+name: "Percentage Strong Social Support Among Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+educationalAttainment: dcs:TertiaryEducation
+socialSupportLevel: dcs:StrongSocialSupport
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_StrongSocialSupport_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+name: "Percentage Strong Social Support Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportLevel: dcs:StrongSocialSupport
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_StrongSocialSupport_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Percentage Strong Social Support Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportLevel: dcs:StrongSocialSupport
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_StrongSocialSupport_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+name: "Percentage Strong Social Support Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+socialSupportLevel: dcs:StrongSocialSupport
+gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 

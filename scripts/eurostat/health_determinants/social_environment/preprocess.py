@@ -277,128 +277,6 @@ def _hlth_ehis_ss1d(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
-    """
-  Replaces values of a single column into true values
-  from metadata returns the DF
-  """
-    sex = {'F': 'Female', 'M': 'Male', 'T': 'Total'}
-    df = df.replace({'sex': sex})
-    return df
-
-
-def _replace_lev_perc(df: pd.DataFrame) -> pd.DataFrame:
-    """
-  Replaces values of a single column into true values
-  from metadata returns the DF
-  """
-    lev_perc = {'STR': 'Strong', 'INT': 'Intermediate', 'POOR': 'Poor'}
-    df = df.replace({'lev_perc': lev_perc})
-    return df
-
-
-def _replace_isced11(df: pd.DataFrame) -> pd.DataFrame:
-    """
-  Replaces values of a single column into true values
-  from metadata returns the DF
-  """
-    isced11 = {
-        'ED0-2': 'EducationalAttainment'+\
-        'LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
-        'ED3_4': 'EducationalAttainment'+\
-            'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
-        'ED5-8': 'EducationalAttainmentTertiaryEducation',
-        'TOTAL': 'Total'
-        }
-    df = df.replace({'isced11': isced11})
-    return df
-
-
-def _replace_deg_urb(df: pd.DataFrame) -> pd.DataFrame:
-    """
-   Replaces values of a single column into true values
-   from metadata returns the DF
-   """
-    deg_urb = {
-        'TOTAL': 'Total',
-        'DEG1': 'Urban',
-        'DEG2': 'SemiUrban',
-        'DEG3': 'Rural',
-    }
-    df = df.replace({'deg_urb': deg_urb})
-    return df
-
-
-def _replace_assist(df: pd.DataFrame) -> pd.DataFrame:
-    """
-  Replaces values of a single column into true values
-  from metadata returns the DF
-  """
-    assist = {
-        'PROV': 'ProvidingInformalCare',
-        'PROV_R': 'Relatives_ProvidingInformalCare',
-        'PROV_NR': 'NonRelatives_ProvidingInformalCare',
-        'NPROV': 'NotProvidingInformalCare'
-    }
-    df = df.replace({'assist': assist})
-    return df
-
-
-def _replace_c_birth(df: pd.DataFrame) -> pd.DataFrame:
-    """
- Replaces values of a single column into true values
- from metadata returns the DF
- """
-    c_birth = {
-        'EU28_FOR': 'ForeignBornWithinEU28',
-        'NEU28_FOR': 'ForeignBornOutsideEU28',
-        'FOR': 'ForeignBorn',
-        'NAT': 'Native'
-    }
-    df = df.replace({'c_birth': c_birth})
-    return df
-
-
-def _replace_citizen(df: pd.DataFrame) -> pd.DataFrame:
-    """
- Replaces values of a single column into true values
- from metadata returns the DF
- """
-    citizen = {
-        'EU28_FOR': 'CitizenOutsideEU28',
-        'NEU28_FOR': 'WithinEU28AndNotACitizen',
-        'FOR': 'NotACitizen',
-        'NAT': 'Citizen'
-    }
-    df = df.replace({'citizen': citizen})
-    return df
-
-
-def _replace_lev_limit(df: pd.DataFrame) -> pd.DataFrame:
-    """
-  Replaces values of a single column into true values
-  from metadata returns the DF
-  """
-    lev_limit = {
-        'MOD': 'ModerateActivityLimitation',
-        'SEV': 'SevereActivityLimitation',
-        'SM_SEV': 'LimitedActivityLimitation',
-        'NONE': 'NoActivityLimitation'
-    }
-    df = df.replace({'lev_limit': lev_limit})
-    return df
-
-
-def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
-    """
-  Divides a single column into multiple columns and returns the DF
-  """
-    info = col.split(",")
-    df[info] = df[col].str.split(',', expand=True)
-    df.drop(columns=[col], inplace=True)
-    return df
-
-
 class EuroStatSocialEnvironment:
     """
   This Class has requried methods to generate Cleaned CSV,
@@ -541,8 +419,7 @@ class EuroStatSocialEnvironment:
             os.mkdir(output_path)
         sv_list = []
         for file_path in self._input_files:
-            print(file_path)
-            df = pd.read_csv(file_path, sep='\t', skiprows=1)
+            df = pd.read_csv(file_path, sep='\t', header=0)
             file_name = file_path.split("/")[-1][:-4]
             function_dict = {
                 "hlth_ehis_ss1e": _hlth_ehis_ss1e,
