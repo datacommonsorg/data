@@ -83,7 +83,7 @@ def main(src_fldr, output_csv):
                 ##  are stored in individual geotiff files (i.e. 2021.tif)
                 for interval_gtif in glob.glob(f"{path}/*.tif"):
                     gtiff = gdal.Open(interval_gtif)
-                    ## Each geotiff consists of 3-5 bands corresponding with the 
+                    ## Each geotiff consists of 3-5 bands corresponding with the
                     ## statistics computed for the given climate variable
                     for bandnum in range(1, gtiff.RasterCount + 1):
                         band = gtiff.GetRasterBand(bandnum)
