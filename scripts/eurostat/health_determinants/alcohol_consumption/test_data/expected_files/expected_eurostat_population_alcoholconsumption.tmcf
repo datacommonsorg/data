@@ -4,4 +4,5 @@ variableMeasured: C:EuroStat_Population_AlcoholConsumption->SV
 measurementMethod: C:EuroStat_Population_AlcoholConsumption->Measurement_Method
 observationAbout: C:EuroStat_Population_AlcoholConsumption->geo
 observationDate: C:EuroStat_Population_AlcoholConsumption->time
+scalingFactor: 100
 value: C:EuroStat_Population_AlcoholConsumption->observation

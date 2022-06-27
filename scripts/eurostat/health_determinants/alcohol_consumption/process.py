@@ -66,6 +66,7 @@ _TMCF_TEMPLATE = (
     "Measurement_Method\n"
     "observationAbout: C:EuroStat_Population_AlcoholConsumption->geo\n"
     "observationDate: C:EuroStat_Population_AlcoholConsumption->time\n"
+    "scalingFactor: 100\n"
     "value: C:EuroStat_Population_AlcoholConsumption->observation\n")
 
 
@@ -582,13 +583,13 @@ class EuroStatAlcoholConsumption:
                 elif "Daily" in prop or "LessThanOnceAMonth" in prop \
                     or "EveryMonth" in prop or "NotInTheLast12Months" in prop\
                     or "Never" in prop:
-                    frequenc = "\nhealthBehaviorFrequency: dcs:" + prop\
+                    frequenc = "\nactivityFrequency: dcs:" + prop\
                         .replace("Or","__")
                     sv_name = sv_name + prop + ", "
                 elif "NeverOrNotInTheLast12Months" in\
                     prop or "EveryWeek" in prop or "AtLeastOnceAWeek" in prop\
                     or "NeverOrOccasional" in prop:
-                    frequenc = "\nhealthBehaviorFrequency: dcs:" + prop\
+                    frequenc = "\nactivityFrequency: dcs:" + prop\
                         .replace("Or","__")
                     sv_name = sv_name + prop + ", "
             sv_name = sv_name + "Among "
