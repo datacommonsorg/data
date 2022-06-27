@@ -62,6 +62,7 @@ _TMCF_TEMPLATE = (
     "Measurement_Method\n"
     "observationAbout: C:EuroStat_Population_TobaccoConsumption->geo\n"
     "observationDate: C:EuroStat_Population_TobaccoConsumption->time\n"
+    "scalingFactor: 100\n"
     "value: C:EuroStat_Population_TobaccoConsumption->observation\n")
 
 
@@ -615,7 +616,7 @@ class EuroStatTobaccoConsumption:
         for sv in sv_list:
             if "Total" in sv:
                 continue
-            incomequin = gender = education = frequenc = healthbehavior =\
+            incomequin = gender = education = frequenc = activity =\
             residence = countryofbirth = citizenship = substance\
             = quantity = history = sv_name = ''
 
@@ -628,17 +629,17 @@ class EuroStatTobaccoConsumption:
                     sv_name = sv_name + "Percentage"
                 elif  "TobaccoSmoking" in prop or "NonSmoker" in prop or\
                     "ExposureToTobaccoSmoke" in prop or "FormerSmoker" in prop:
-                    healthbehavior = "\nhealthBehavior: dcs:" + prop
+                    activity = "\nhealthBehavior: dcs:" + prop
                     sv_name = sv_name + prop + ", "
                 elif "Daily" in prop or "Occasional" in prop\
                      or "AtLeastOneHourPerDay" in prop or \
                     "LessThanOneHourPerDay" in prop:
-                    frequenc = "\nhealthBehaviorFrequency: dcs:" + prop.replace(
+                    frequenc = "\nactivityFrequency: dcs:" + prop.replace(
                         "Or", "__")
                     sv_name = sv_name + prop + ", "
                 elif "LessThanOnceAWeek" in prop or "AtLeastOnceAWeek" in\
                     prop or "RarelyOrNever" in prop :
-                    frequenc = "\nhealthBehaviorFrequency: dcs:" + prop.replace(
+                    frequenc = "\nactivityFrequency: dcs:" + prop.replace(
                         "Or", "__")
                     sv_name = sv_name + prop + ", "
                 elif "LessThan20CigarettesPerDay"in prop or \
@@ -708,7 +709,7 @@ class EuroStatTobaccoConsumption:
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv14=sv_name,
                                                        pv2=denominator,
-                                                       pv3=healthbehavior,
+                                                       pv3=activity,
                                                        pv4=gender,
                                                        pv5=frequenc,
                                                        pv6=education,
