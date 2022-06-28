@@ -15,7 +15,7 @@ To download the data,
 1. Copy the downloaded data to the `data` sub-directory
 2. Run the following command to generate the clean csv, statvar mcf files,
    ```bash
-   python3 process_nors.py
+   python3 process.py
    --input_file=./data/NationalOutbreakPublicDataTool.xlsx
    --output_path=./data/output
    ```
@@ -23,6 +23,8 @@ To download the data,
 ### Notes
 There are some notes and caveats with this dataset.
 1. NORS dashboard data is updated **annually**.
-2. NORS dashboard data can differ between two years since past data can be fixed
-   by the reporting states any time.
-
+2. NORS dashboard data can differ between two years since past data can be fixed by the reporting states any time.
+3. This is a partial import the NORS Dashboard i.e. the statistical variables are aggregated on the Primary Mode, Etiology and Etiology Status columns.
+	> The other columns add more classification of the etiology outbreak which can be added to the script at a later time -- since it requires new schema
+4. This import also imports statistics only for a single etiology -- since it is unclear how to interpret the statistics with multiple Etiologies
+5. The columns `Info on Hospitalisations` and `Info on Deaths` are not used in this import.
