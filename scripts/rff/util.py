@@ -16,7 +16,10 @@ time_interval_types = {
 cvar_suffixes = {
     "ppt": "DailyPrecipitation",
     "tmin": "DailyMinTemperature",
-    "tmax": "DailyMaxTemperature"
+    "tmax": "DailyMaxTemperature",
+    "pr": "DailyPrecipitation",
+    "tasmin": "DailyMinTemperature",
+    "tasmax": "DailyMaxTemperature"
 }
 
 
@@ -37,21 +40,23 @@ def format_date(file_path, time_interval_type, fname_suffix=".csv"):
 def autogen_template_mcf(output_csv):
     # Automate Template MCF generation
     #  since there are many Statitical Variables
-    template_mcf = """Node: E:WeatherVariability_Counties->E{index}
+    template_mcf = """Node: E:{fname}->E{index}
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{stat_var}
-observationAbout: C:WeatherVariability_Counties->GeoId
-observationDate: C:WeatherVariability_Counties->Date
-value: C:WeatherVariability_Counties->{stat_var}
-observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+observationAbout: C:{fname}->GeoId
+observationDate: C:{fname}->Date
+value: C:{fname}->{stat_var}
+observationPeriod: C:{fname}->TimeIntervalType
 
 """
     stat_vars = output_columns[3:]
     output_tmcf = output_csv.replace(".csv", ".tmcf")
+    fname = os.path.basename(output_csv).replace(".csv", "")
     with open(output_tmcf, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
                 template_mcf.format_map({
                     'index': i,
-                    'stat_var': stat_vars[i]
+                    'stat_var': stat_vars[i],
+                    'fname': fname
                 }))
