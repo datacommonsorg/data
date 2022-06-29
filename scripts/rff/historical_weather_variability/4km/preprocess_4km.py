@@ -21,6 +21,8 @@ if __name__ == '__main__':
             SCRIPTS_DIR,
             'rff/raw_data/prism/daily/4km/agg_year/ppt/stats/2021.tif')
         preprocess_raster.create_grids("4km", grids_csv, sample_gtif)
-    src_folder = "scripts/rff/raw_data/prism/daily/4km"
+    src_folder = os.path.join(
+        SCRIPTS_DIR,
+        "rff/raw_data/prism/daily/4km")
     output_csv_fname = f"{CURR_DIR}/WeatherVariability_4km.csv"
     main(src_folder, output_csv_fname)
