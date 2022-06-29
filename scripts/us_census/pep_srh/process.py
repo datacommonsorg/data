@@ -759,7 +759,8 @@ def _consolidate_state_files():
         df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
         df["SV"] = 'dcid:' + df["SV"]
         df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
-        df["MEASUREMENT_METHOD"] = df.apply(lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
+        df["MEASUREMENT_METHOD"] = df.apply(
+            lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
         if file == state_as_is_files[0]:
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'state_consolidated_temp.csv',
@@ -813,7 +814,8 @@ def _consolidate_state_files():
     df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR + 'state_consolidated_temp.csv')
     df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
     df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey', True)
-    df["MEASUREMENT_METHOD"] = df.apply(lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
+    df["MEASUREMENT_METHOD"] = df.apply(
+        lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
     df.to_csv(_CODEDIR + PROCESS_AGG_DIR + 'state_consolidated_agg_final.csv',
               header=True,
               index=False)
@@ -849,7 +851,8 @@ def _consolidate_county_files():
         df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
         df["SV"] = 'dcid:' + df["SV"]
         df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
-        df["MEASUREMENT_METHOD"] = df.apply(lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
+        df["MEASUREMENT_METHOD"] = df.apply(
+            lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
 
         if file == county_file[0]:
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
@@ -907,7 +910,8 @@ def _consolidate_county_files():
                      'county_consolidated_temp.csv')
     df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
     df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey', True)
-    df["MEASUREMENT_METHOD"] = df.apply(lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
+    df["MEASUREMENT_METHOD"] = df.apply(
+        lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
     df.to_csv(_CODEDIR + PROCESS_AGG_DIR + 'county_consolidated_agg_final.csv',
               header=True,
               index=False)
