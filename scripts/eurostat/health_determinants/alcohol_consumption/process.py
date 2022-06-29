@@ -92,9 +92,8 @@ def _alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_isced11(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_AlcoholConsumption_'+\
-        df['frequenc']+'_In_Count_Person_'+\
-            df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_'+df['frequenc']+'_AlcoholConsumption'\
+        +'_In_Count_Person_'+df['isced11']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['unit', 'age', 'isced11', 'frequenc', 'sex'], inplace=True)
     # arraning the dataframe in long format
@@ -125,8 +124,8 @@ def _alcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_AlcoholConsumption_'+df['frequenc']\
-            +'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
+    df['SV'] = 'Percent_'+df['frequenc']+'_AlcoholConsumption'\
+        +'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     # dropping unwanted columns
     df.drop(columns=['quant_inc', 'frequenc', 'sex', 'age', 'unit'],
             inplace=True)
@@ -163,7 +162,7 @@ def _alcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_frequenc(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_AlcoholConsumption_'+df['frequenc']\
+    df['SV'] = 'Percent_'+df['frequenc']+'_AlcoholConsumption'\
         +'_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['frequenc', 'deg_urb', 'sex', 'unit', 'age'], inplace=True)
@@ -195,9 +194,8 @@ def _bingedrinking_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_isced11(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_BingeDrinking_'+\
-        df['frequenc']+'_In_Count_Person_'+\
-            df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_'+df['frequenc']+'_BingeDrinking'\
+        +'_In_Count_Person_'+df['isced11']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['unit', 'age', 'isced11', 'frequenc', 'sex'], inplace=True)
     # arraning the dataframe in long format
@@ -227,7 +225,7 @@ def _bingedrinking_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_BingeDrinking_'+df['frequenc']\
+    df['SV'] = 'Percent_'+df['frequenc']+'_BingeDrinking'\
         +'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     # dropping unwanted columns
     df.drop(columns=['unit', 'age', 'quant_inc', 'frequenc', 'sex'],
@@ -265,7 +263,7 @@ def _bingedrinking_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_frequenc(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_BingeDrinking_'+df['frequenc']\
+    df['SV'] = 'Percent_'+df['frequenc']+'_BingeDrinking'\
         +'_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['frequenc', 'deg_urb', 'sex', 'unit', 'age'], inplace=True)
@@ -410,8 +408,8 @@ def _alcoholconsumption_by_sex_country_of_birth(df: pd.DataFrame)\
     df = _replace_sex(df)
     df = _replace_c_birth(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_AlcoholConsumption_'+df['frequenc']+\
-        '_In_Count_Person_'+df['sex']+'_'+df['c_birth']
+    df['SV'] = 'Percent_'+df['frequenc']+'_AlcoholConsumption'\
+        +'_In_Count_Person_'+df['sex']+'_'+df['c_birth']
     # dropping unwanted columns
     df.drop(columns=['frequenc', 'c_birth', 'sex', 'unit', 'age'], inplace=True)
     # arraning the dataframe in long format
@@ -447,8 +445,8 @@ def _alcoholconsumption_by_sex_citizen(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_citizen(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_AlcoholConsumption_'+df['frequenc']+\
-        '_In_Count_Person_'+df['citizen']+'_'+df['sex']
+    df['SV'] = 'Percent_'+df['frequenc']+'_AlcoholConsumption'\
+        +'_In_Count_Person_'+df['citizen']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['frequenc', 'citizen', 'sex', 'unit', 'age'], inplace=True)
     # arraning the dataframe in long format
@@ -481,9 +479,8 @@ def _historical_alcoholconsumption_by_sex_education(df: pd.DataFrame)\
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_AlcoholConsumption_'+\
-        df['frequenc']+'_In_Count_Person_'+\
-            df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_'+df['frequenc']+'_AlcoholConsumption'\
+        +'_In_Count_Person_'+df['isced11']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['isced11', 'sex', 'age', 'frequenc', 'unit'], inplace=True)
     # arraning the dataframe in long format
@@ -516,9 +513,8 @@ def _historical_bingedrinking_by_sex_education(df: pd.DataFrame)\
     df = _replace_frequenc(df)
     df = _replace_sex(df)
     # giving proper statvar name
-    df['SV'] = 'Percent_BingeDrinking_'+\
-        df['frequenc']+'_In_Count_Person_'+\
-            df['isced11']+'_'+df['sex']
+    df['SV'] = 'Percent_'+df['frequenc']+'_BingeDrinking'\
+        +'_In_Count_Person_'+df['isced11']+'_'+df['sex']
     # dropping unwanted columns
     df.drop(columns=['isced11', 'sex', 'age', 'frequenc'], inplace=True)
     # arraning the dataframe in long format
