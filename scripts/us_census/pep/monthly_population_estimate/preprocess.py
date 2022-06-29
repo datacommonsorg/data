@@ -285,6 +285,9 @@ class CensusUSACountryPopulation:
                              inplace=True)
         self._df.drop_duplicates("Date", keep="first", inplace=True)
         self._df.drop(['date_range'], axis=1, inplace=True)
+        float_col = self._df.select_dtypes(include=['float64'])
+        for col in float_col.columns.values:
+            self._df[col] = self._df[col].astype('int64')
         self._df.to_csv(self._cleaned_csv_file_path, index=False)
 
     def _generate_mcf(self, df_cols: list) -> None:
