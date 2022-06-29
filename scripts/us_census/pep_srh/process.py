@@ -54,7 +54,7 @@ import pandas as pd
 from absl import app
 from absl import flags
 
-from constants import DOWNLOAD_DIR, PROCESS_AS_IS_DIR, PROCESS_AGG_DIR
+from constants import DOWNLOAD_DIR, PROCESS_AS_IS_DIR, PROCESS_AGG_DIR, RACE
 from constants import OUTPUT_DIR, STAT_VAR_COL_MAPPING, WORKING_DIRECTORIES
 from mcf_generator import generate_mcf
 from tmcf_generator import generate_tmcf
@@ -78,6 +78,58 @@ _SR_CMBN_COLUMNS = [
     'WAC_MALE', 'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE',
     'IAC_FEMALE', 'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE'
 ]
+
+
+def _calculate_agg_measure_method(year, sv):
+    """
+    This method calculates measurement method of SV's.
+    US Census introduced additional Races and option to select more than one
+    Race in census survey from year 2000 onwards. 
+    This method will return measurement method as CensusPEPSurvey_RaceUpto1999
+    for data prior to 2000 and CensusPEPSurvey_Race2000Onwards for data from
+    2000 onwards. This is caluclated on those SV's only which has Race as one
+    of their property
+    
+    Args:
+      year: Year
+      SV: Statistical Variable
+    
+    Returns:
+      Measurement Method
+    """
+    for r in RACE:
+        if r in sv:
+            if year < 2000:
+                return 'dcs:dcAggregate/CensusPEPSurvey_RaceUpto1999'
+            elif year >= 2000:
+                return 'dcs:dcAggregate/CensusPEPSurvey_Race2000Onwards'
+    return 'dcs:dcAggregate/CensusPEPSurvey'
+
+
+def _calculate_asis_measure_method(year, sv):
+    """
+    This method calculates measurement method of SV's.
+    US Census introduced additional Races and option to select more than one
+    Race in census survey from year 2000 onwards. 
+    This method will return measurement method as CensusPEPSurvey_RaceUpto1999
+    for data prior to 2000 and CensusPEPSurvey_Race2000Onwards for data from
+    2000 onwards. This is caluclated on those SV's only which has Race as one
+    of their property
+    
+    Args:
+      year: Year
+      SV: Statistical Variable
+    
+    Returns:
+      Measurement Method
+    """
+    for r in RACE:
+        if r in sv:
+            if year < 2000:
+                return 'dcs:CensusPEPSurvey_RaceUpto1999'
+            elif year >= 2000:
+                return 'dcs:CensusPEPSurvey_Race2000Onwards'
+    return 'dcs:CensusPEPSurvey'
 
 
 def _process_geo_aggregation(input_file_path, input_file_name, output_file_path,
@@ -206,52 +258,58 @@ def _process_state_files_1980_1990(download_dir):
                             (89, 96), (96, 103), (103, 110), (110, 117),
                             (117, 124), (124, 131)]
 
-    df = pd.read_fwf(input_file_path + files_list[0],
-                     names=column_names,
-                     colspecs=column_specification)
+    for file in files_list:
+        df = pd.read_fwf(input_file_path + files_list[0],
+                         names=column_names,
+                         colspecs=column_specification)
 
-    df["ALL_AGE"] = 0
-    for age in age_columns:
-        df["ALL_AGE"] += df[age]
+        df["ALL_AGE"] = 0
+        for age in age_columns:
+            df["ALL_AGE"] += df[age]
 
-    df.drop(age_columns, axis=1, inplace=True)
+        df.drop(age_columns, axis=1, inplace=True)
 
-    df = df.pivot(index=['LOCATION', 'YEAR_TEMP'],
-                  columns=['RACE_ORIGIN', 'SEX'],
-                  values='ALL_AGE').reset_index()
+        df = df.pivot(index=['LOCATION', 'YEAR_TEMP'],
+                      columns=['RACE_ORIGIN', 'SEX'],
+                      values='ALL_AGE').reset_index()
 
-    df.to_csv(output_file_path + output_temp_file_name,
-              header=True,
-              index=False)
+        df.to_csv(output_file_path + output_temp_file_name,
+                  header=True,
+                  index=False)
 
-    df = pd.read_csv(output_file_path + output_temp_file_name)
-    # On pivoting one new row is introduced with NaN - hence dropping
-    df = df.dropna()
-    # Some of the columns are read as Float, hence converting them to Int
-    float_col = df.select_dtypes(include=['float64'])
-    for col in float_col.columns.values:
-        df[col] = df[col].astype('int64')
+        df = pd.read_csv(output_file_path + output_temp_file_name)
+        # On pivoting one new row is introduced with NaN - hence dropping
+        df = df.dropna()
+        # Some of the columns are read as Float, hence converting them to Int
+        float_col = df.select_dtypes(include=['float64'])
+        for col in float_col.columns.values:
+            df[col] = df[col].astype('int64')
 
-    df.insert(0, 'YEAR', 1980 + df['YEAR_TEMP'], True)
-    df['LOCATION'] = 'geoId/' + (df['LOCATION'].map(str)).str.zfill(2)
-    df.drop(["YEAR_TEMP"], axis=1, inplace=True)
+        df.insert(0, 'YEAR', 1980 + df['YEAR_TEMP'], True)
+        df['LOCATION'] = 'geoId/' + (df['LOCATION'].map(str)).str.zfill(2)
+        df.drop(["YEAR_TEMP"], axis=1, inplace=True)
 
-    _NOT_HISPANIC_RACES = ['NH-W', 'NH-B', 'NH-AI', 'NH-API']
-    _HISPANIC_RACES = ['H-W', 'H-B', 'H-AI', 'H-API']
+        _NOT_HISPANIC_RACES = ['NH-W', 'NH-B', 'NH-AI', 'NH-API']
+        _HISPANIC_RACES = ['H-W', 'H-B', 'H-AI', 'H-API']
 
-    column_header = ['YEAR', 'LOCATION']
-    for p in _NOT_HISPANIC_RACES:
-        column_header.append(p + '-M')
-        column_header.append(p + '-F')
-    for p in _HISPANIC_RACES:
-        column_header.append(p + '-M')
-        column_header.append(p + '-F')
-    df.columns = column_header
+        column_header = ['YEAR', 'LOCATION']
+        for p in _NOT_HISPANIC_RACES:
+            column_header.append(p + '-M')
+            column_header.append(p + '-F')
+        for p in _HISPANIC_RACES:
+            column_header.append(p + '-M')
+            column_header.append(p + '-F')
+        df.columns = column_header
 
-    df.to_csv(output_file_path + output_file_name, index=False)
+        if file == files_list[0]:
+            df.to_csv(output_file_path + output_file_name, index=False)
+        else:
+            df.to_csv(output_file_path + output_file_name,
+                      index=False,
+                      mode='a')
 
-    if os.path.exists(output_file_path + output_temp_file_name):
-        os.remove(output_file_path + output_temp_file_name)
+        if os.path.exists(output_file_path + output_temp_file_name):
+            os.remove(output_file_path + output_temp_file_name)
 
     # Section 2 - Writing Agg data
     output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1980_1990/state/'
@@ -400,14 +458,21 @@ def _process_county_files_1990_2000(download_dir):
     column_specification = [(0, 4), (5, 10), (10, 19), (19, 28), (28, 37),
                             (37, 46), (46, 55), (55, 64), (64, 73), (73, 82)]
 
-    df = pd.read_fwf(input_file_path + files_list[0],
-                     names=column_names,
-                     colspecs=column_specification,
-                     header=None,
-                     skiprows=18)
+    for file in files_list:
+        df = pd.read_fwf(input_file_path + file,
+                         names=column_names,
+                         colspecs=column_specification,
+                         header=None,
+                         skiprows=18)
 
-    df['LOCATION'] = 'geoId/' + (df['LOCATION'].map(str)).str.zfill(5)
-    df.to_csv(output_file_path + output_file_name, index=False)
+        df['LOCATION'] = 'geoId/' + (df['LOCATION'].map(str)).str.zfill(5)
+
+        if file == files_list[0]:
+            df.to_csv(output_file_path + output_file_name, index=False)
+        else:
+            df.to_csv(output_file_path + output_file_name,
+                      index=False,
+                      mode='a')
 
     # Section 2 - Writing Agg data
     output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1990_2000/county/'
@@ -471,7 +536,7 @@ def _process_county_files_2000_2010(download_dir):
     ]
     _HISPANIC_RACES = ['H', 'HWA', 'HBA', 'HIA', 'HAA', 'HNA', 'HTOM']
 
-    df1['NH'] = df1['H'] = 0
+    # df1['NH'] = df1['H'] = 0
     for p in _NOT_HISPANIC_RACES:
         df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
@@ -497,28 +562,34 @@ def _process_county_files_2010_2020(download_dir):
     files_list = os.listdir(input_file_path)
     files_list.sort()
 
-    df = pd.read_csv(input_file_path + files_list[0],
-                     encoding='ISO-8859-1',
-                     low_memory=False)
-    # filter by agegrp = 0 (0 = sum of all age group added)
-    # filter years 3 - 13 (1, 2 - is base estimate and not for month July)
-    df = df.query("AGEGRP == 0 & YEAR not in [1, 2]").copy()
+    for file in files_list:
+        df = pd.read_csv(input_file_path + file,
+                         encoding='ISO-8859-1',
+                         low_memory=False)
+        # filter by agegrp = 0 (0 = sum of all age group added)
+        # filter years 3 - 13 (1, 2 - is base estimate and not for month July)
+        df = df.query("AGEGRP == 0 & YEAR not in [1, 2]").copy()
 
-    # convert year code to year
-    # Year code starting from 3 for Year 2010
-    df['YEAR'] = df['YEAR'] + 2010 - 3
+        # convert year code to year
+        # Year code starting from 3 for Year 2010
+        df['YEAR'] = df['YEAR'] + 2010 - 3
 
-    # add fips code for location
-    df.insert(6, 'LOCATION', 'geoId/', True)
-    df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
-        df['COUNTY'].map(str)).str.zfill(3)
+        # add fips code for location
+        df.insert(6, 'LOCATION', 'geoId/', True)
+        df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
+            df['COUNTY'].map(str)).str.zfill(3)
 
-    # drop not reuqire columns
-    df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
-            axis=1,
-            inplace=True)
+        # drop not reuqire columns
+        df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+                axis=1,
+                inplace=True)
 
-    df.to_csv(output_file_path + output_file_name, index=False)
+        if file == files_list[0]:
+            df.to_csv(output_file_path + output_file_name, index=False)
+        else:
+            df.to_csv(output_file_path + output_file_name,
+                      index=False,
+                      mode='a')
 
     # Section 2 - Writing Agg data
     df = pd.read_csv(output_file_path + output_file_name)
@@ -536,7 +607,7 @@ def _process_county_files_2010_2020(download_dir):
         'HAAC', 'HNAC'
     ]
 
-    df1['NH'] = df1['H'] = 0
+    # df1['NH'] = df1['H'] = 0
     for p in _NOT_HISPANIC_RACES:
         df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
@@ -568,12 +639,8 @@ def _consolidate_national_files():
     This funtion consolidates both as-is and agg data into two seperate files.
     """
     national_as_is_files = [
-        _CODEDIR + PROCESS_AS_IS_DIR +
-        '1980_1990/national/national_1980_1990.csv', _CODEDIR +
-        PROCESS_AS_IS_DIR + '1990_2000/national/national_1990_2000.csv',
-        _CODEDIR + PROCESS_AS_IS_DIR +
-        '2000_2010/national/national_2000_2010.csv', _CODEDIR +
-        PROCESS_AS_IS_DIR + '2010_2020/national/national_2010_2020.csv'
+        _CODEDIR + PROCESS_AS_IS_DIR + yr + '/national/national_' + yr + '.csv'
+        for yr in ['1980_1990', '1990_2000', '2000_2010', '2010_2020']
     ]
 
     for file in national_as_is_files:
@@ -596,6 +663,9 @@ def _consolidate_national_files():
         df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey',
                   True)
 
+        df["MEASUREMENT_METHOD"] = df.apply(
+            lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
+
         if file == national_as_is_files[0]:
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'national_consolidated_temp.csv',
@@ -608,8 +678,8 @@ def _consolidate_national_files():
                       index=False,
                       mode='a')
 
-        df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                         'national_consolidated_temp.csv')
+    df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                     'national_consolidated_temp.csv')
 
     df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
     df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
@@ -624,12 +694,8 @@ def _consolidate_national_files():
 
     # Aggregate file processing
     national_agg_files = [
-        _CODEDIR + PROCESS_AGG_DIR +
-        '1980_1990/national/national_1980_1990.csv', _CODEDIR +
-        PROCESS_AGG_DIR + '1990_2000/national/national_1990_2000.csv',
-        _CODEDIR + PROCESS_AGG_DIR +
-        '2000_2010/national/national_2000_2010.csv',
-        _CODEDIR + PROCESS_AGG_DIR + '2010_2020/national/national_2010_2020.csv'
+        _CODEDIR + PROCESS_AGG_DIR + yr + '/national/national_' + yr + '.csv'
+        for yr in ['1980_1990', '1990_2000', '2000_2010', '2010_2020']
     ]
 
     for file in national_agg_files:
@@ -656,6 +722,8 @@ def _consolidate_national_files():
         _CODEDIR + PROCESS_AGG_DIR + 'national_consolidated_temp.csv',)
     df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
     df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey', True)
+    df["MEASUREMENT_METHOD"] = df.apply(
+        lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
     df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
               'national_consolidated_agg_final.csv',
               header=True,
@@ -674,64 +742,35 @@ def _consolidate_state_files():
 
     This funtion consolidates both as-is and agg data into two seperate files.
     """
-    ip_file = _CODEDIR + PROCESS_AS_IS_DIR \
-        + '1980_1990/state/state_1980_1990.csv'
+    state_as_is_files = [
+        _CODEDIR + PROCESS_AS_IS_DIR + yr + '/state/state_' + yr + '.csv'
+        for yr in ['1980_1990', '1990_2000', '2000_2010', '2010_2020']
+    ]
 
-    df = pd.read_csv(ip_file)
-    df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                 var_name='SV',
-                 value_name='OBSERVATION')
-    df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-    df["SV"] = 'dcid:' + df["SV"]
-    df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
-    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR + 'state_consolidated_temp.csv',
-              header=True,
-              index=False)
-
-    ip_file = _CODEDIR + PROCESS_AS_IS_DIR \
-        + '1990_2000/state/state_1990_2000.csv'
-
-    df = pd.read_csv(ip_file)
-    df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                 var_name='SV',
-                 value_name='OBSERVATION')
-    df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-    df["SV"] = 'dcid:' + df["SV"]
-    df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
-    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR + 'state_consolidated_temp.csv',
-              header=False,
-              index=False,
-              mode='a')
-
-    ip_file = _CODEDIR + PROCESS_AS_IS_DIR \
-        + '2000_2010/state/state_2000_2010.csv'
-    df = pd.read_csv(ip_file)
-    # Drop SR columns - is not used as part of current import
-    df.drop(_SR_COLUMNS, axis=1, inplace=True)
-    df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                 var_name='SV',
-                 value_name='OBSERVATION')
-    df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-    df["SV"] = 'dcid:' + df["SV"]
-    df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
-    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR + 'state_consolidated_temp.csv',
-              header=False,
-              index=False,
-              mode='a')
-
-    df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                     '2010_2020/state/state_2010_2020.csv')
-    df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS, axis=1, inplace=True)
-    df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                 var_name='SV',
-                 value_name='OBSERVATION')
-    df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-    df["SV"] = 'dcid:' + df["SV"]
-    df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
-    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR + 'state_consolidated_temp.csv',
-              header=False,
-              index=False,
-              mode='a')
+    for file in state_as_is_files:
+        df = pd.read_csv(file)
+        df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS,
+                axis=1,
+                inplace=True,
+                errors='ignore')
+        df = df.melt(id_vars=['YEAR', 'LOCATION'],
+                     var_name='SV',
+                     value_name='OBSERVATION')
+        df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
+        df["SV"] = 'dcid:' + df["SV"]
+        df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
+        df["MEASUREMENT_METHOD"] = df.apply(lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
+        if file == state_as_is_files[0]:
+            df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                      'state_consolidated_temp.csv',
+                      header=True,
+                      index=False)
+        else:
+            df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                      'state_consolidated_temp.csv',
+                      header=False,
+                      index=False,
+                      mode='a')
 
     df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                      'state_consolidated_temp.csv')
@@ -747,10 +786,8 @@ def _consolidate_state_files():
 
     # Agg file processing
     state_agg_files = [
-        _CODEDIR + PROCESS_AGG_DIR + '1980_1990/state/state_1980_1990.csv',
-        _CODEDIR + PROCESS_AGG_DIR + '1990_2000/state/state_1990_2000.csv',
-        _CODEDIR + PROCESS_AGG_DIR + '2000_2010/state/state_2000_2010.csv',
-        _CODEDIR + PROCESS_AGG_DIR + '2010_2020/state/state_2010_2020.csv'
+        _CODEDIR + PROCESS_AGG_DIR + yr + '/state/state_' + yr + '.csv'
+        for yr in ['1980_1990', '1990_2000', '2000_2010', '2010_2020']
     ]
 
     for file in state_agg_files:
@@ -776,6 +813,7 @@ def _consolidate_state_files():
     df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR + 'state_consolidated_temp.csv')
     df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
     df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey', True)
+    df["MEASUREMENT_METHOD"] = df.apply(lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
     df.to_csv(_CODEDIR + PROCESS_AGG_DIR + 'state_consolidated_agg_final.csv',
               header=True,
               index=False)
@@ -793,38 +831,32 @@ def _consolidate_county_files():
 
     This funtion consolidates both as-is and agg data into two seperate files.
     """
-    input_file1 = _CODEDIR + PROCESS_AS_IS_DIR \
-        + '2000_2010/county/county_2000_2010.csv'
-    input_file2 = _CODEDIR + PROCESS_AS_IS_DIR \
-        + '2010_2020/county/county_2010_2020.csv'
 
-    county_file = []
-    county_file.append(input_file1)
-    county_file.append(input_file2)
+    county_file = [
+        _CODEDIR + PROCESS_AS_IS_DIR + '2000_2010/county/county_2000_2010.csv',
+        _CODEDIR + PROCESS_AS_IS_DIR + '2010_2020/county/county_2010_2020.csv'
+    ]
 
     for file in county_file:
         df = pd.read_csv(file)
+        df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS,
+                axis=1,
+                inplace=True,
+                errors='ignore')
+        df = df.melt(id_vars=['YEAR', 'LOCATION'],
+                     var_name='SV',
+                     value_name='OBSERVATION')
+        df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
+        df["SV"] = 'dcid:' + df["SV"]
+        df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
+        df["MEASUREMENT_METHOD"] = df.apply(lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
 
         if file == county_file[0]:
-            df.drop(_SR_COLUMNS, axis=1, inplace=True)
-            df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                         var_name='SV',
-                         value_name='OBSERVATION')
-            df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-            df["SV"] = 'dcid:' + df["SV"]
-            df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'county_consolidated_temp.csv',
                       header=True,
                       index=False)
         else:
-            df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS, axis=1, inplace=True)
-            df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                         var_name='SV',
-                         value_name='OBSERVATION')
-            df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-            df["SV"] = 'dcid:' + df["SV"]
-            df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'county_consolidated_temp.csv',
                       header=False,
@@ -843,6 +875,7 @@ def _consolidate_county_files():
         + 'county_consolidated_temp.csv'):
         os.remove(_CODEDIR + PROCESS_AS_IS_DIR + 'county_consolidated_temp.csv')
 
+    # Agg file processing
     county_file = [
         _CODEDIR + PROCESS_AS_IS_DIR + '1990_2000/county/county_1990_2000.csv',
         _CODEDIR + PROCESS_AGG_DIR + '1990_2000/county/county_1990_2000.csv',
@@ -874,6 +907,7 @@ def _consolidate_county_files():
                      'county_consolidated_temp.csv')
     df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
     df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey', True)
+    df["MEASUREMENT_METHOD"] = df.apply(lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
     df.to_csv(_CODEDIR + PROCESS_AGG_DIR + 'county_consolidated_agg_final.csv',
               header=True,
               index=False)
@@ -891,34 +925,27 @@ def _consolidate_all_geo_files():
 
     Output files are written to /output_files/ folder
     """
+    as_is_df = pd.DataFrame()
+    for file in [
+            _CODEDIR + PROCESS_AS_IS_DIR + geo + '_consolidated_as_is_final.csv'
+            for geo in ['national', 'state', 'county']
+    ]:
+        as_is_df = pd.concat([as_is_df, pd.read_csv(file)])
 
-    df1 = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                      'national_consolidated_as_is_final.csv')
+    as_is_df.to_csv(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh.csv',
+                    header=True,
+                    index=False)
 
-    df2 = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                      'state_consolidated_as_is_final.csv')
-
-    df3 = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                      'county_consolidated_as_is_final.csv')
-
-    df = pd.concat([df1, df2, df3])
-    df.to_csv(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh.csv',
-              header=True,
-              index=False)
-
-    df1 = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
-                      'national_consolidated_agg_final.csv')
-
-    df2 = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
-                      'state_consolidated_agg_final.csv')
-
-    df3 = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
-                      'county_consolidated_agg_final.csv')
-
-    df = pd.concat([df1, df2, df3])
-    df.to_csv(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh_agg.csv',
-              header=True,
-              index=False)
+    agg_df = pd.DataFrame()
+    for file in [
+            _CODEDIR + PROCESS_AGG_DIR + geo + '_consolidated_agg_final.csv'
+            for geo in ['national', 'state', 'county']
+    ]:
+        agg_df = pd.concat([agg_df, pd.read_csv(file)])
+        agg_df.to_csv(_CODEDIR + OUTPUT_DIR +
+                      'population_estimate_by_srh_agg.csv',
+                      header=True,
+                      index=False)
 
 
 def _consolidate_files():

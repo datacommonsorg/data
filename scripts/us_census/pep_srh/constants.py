@@ -306,3 +306,14 @@ observationPeriod: "P1Y"
 measurementMethod: C:population_estimate_by_srh_agg->MEASUREMENT_METHOD
 value: C:population_estimate_by_srh_agg->OBSERVATION
 '''
+
+RACE = {
+    'WhiteAloneOrInCombinationWithOneOrMoreOtherRaces',
+    'AmericanIndianOrAlaskaNativeAlone', 'WhiteAlone',
+    'AsianAloneOrInCombinationWithOneOrMoreOtherRaces',
+    'BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces',
+    'AsianOrPacificIslander', 'TwoOrMoreRaces', 'AsianAlone',
+    'NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces',
+    'AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces',
+    'BlackOrAfricanAmericanAlone', 'NativeHawaiianOrOtherPacificIslanderAlone'
+}
