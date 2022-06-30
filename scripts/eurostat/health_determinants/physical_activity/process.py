@@ -622,7 +622,7 @@ def _walkingcycling_atleast30mins_by_sex_education(df: pd.DataFrame)\
     cols = [
         'isced11,sex,age,unit,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK', 'DE',
         'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU',
-        'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO', 
+        'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO',
         'RS', 'TR'
     ]
     df.columns = cols
@@ -772,8 +772,9 @@ class EuroStatPhysicalActivity:
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
             sv_name = "name: \"" + sv_name + " Population\""
             sv_name = sv_name.replace("To299", "To 299").replace(
-                "To149", "To 149").replace("ACitizen", "A Citizen").replace(
-                    "Least30", "Least 30")
+                "To149",
+                "To 149").replace("ACitizen",
+                                  "A Citizen").replace("Least30", "Least 30")
 
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv14=sv_name,
