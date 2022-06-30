@@ -1358,7 +1358,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_NotACitizen
-name: "Percentage Intermediate Social Support Among Not ACitizen Population"
+name: "Percentage Intermediate Social Support Among Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen
@@ -1368,7 +1368,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_NotACitizen_Female
-name: "Percentage Intermediate Social Support Among Not ACitizen, Female Population"
+name: "Percentage Intermediate Social Support Among Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
@@ -1379,7 +1379,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_NotACitizen_Male
-name: "Percentage Intermediate Social Support Among Not ACitizen, Male Population"
+name: "Percentage Intermediate Social Support Among Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
@@ -1582,7 +1582,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_WithinEU28AndNotACitizen
-name: "Percentage Intermediate Social Support Among Within EU28 And Not ACitizen Population"
+name: "Percentage Intermediate Social Support Among Within EU28 And Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
@@ -1592,7 +1592,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_WithinEU28AndNotACitizen_Female
-name: "Percentage Intermediate Social Support Among Within EU28 And Not ACitizen, Female Population"
+name: "Percentage Intermediate Social Support Among Within EU28 And Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
@@ -1603,7 +1603,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_IntermediateSocialSupport_In_Count_Person_WithinEU28AndNotACitizen_Male
-name: "Percentage Intermediate Social Support Among Within EU28 And Not ACitizen, Male Population"
+name: "Percentage Intermediate Social Support Among Within EU28 And Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
@@ -1963,7 +1963,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_PoorSocialSupport_In_Count_Person_NotACitizen
-name: "Percentage Poor Social Support Among Not ACitizen Population"
+name: "Percentage Poor Social Support Among Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen
@@ -1973,7 +1973,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_PoorSocialSupport_In_Count_Person_NotACitizen_Female
-name: "Percentage Poor Social Support Among Not ACitizen, Female Population"
+name: "Percentage Poor Social Support Among Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
@@ -1984,7 +1984,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_PoorSocialSupport_In_Count_Person_NotACitizen_Male
-name: "Percentage Poor Social Support Among Not ACitizen, Male Population"
+name: "Percentage Poor Social Support Among Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
@@ -2187,7 +2187,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_PoorSocialSupport_In_Count_Person_WithinEU28AndNotACitizen
-name: "Percentage Poor Social Support Among Within EU28 And Not ACitizen Population"
+name: "Percentage Poor Social Support Among Within EU28 And Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
@@ -2197,7 +2197,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_PoorSocialSupport_In_Count_Person_WithinEU28AndNotACitizen_Female
-name: "Percentage Poor Social Support Among Within EU28 And Not ACitizen, Female Population"
+name: "Percentage Poor Social Support Among Within EU28 And Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
@@ -2208,7 +2208,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_PoorSocialSupport_In_Count_Person_WithinEU28AndNotACitizen_Male
-name: "Percentage Poor Social Support Among Within EU28 And Not ACitizen, Male Population"
+name: "Percentage Poor Social Support Among Within EU28 And Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male
@@ -2568,7 +2568,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_StrongSocialSupport_In_Count_Person_NotACitizen
-name: "Percentage Strong Social Support Among Not ACitizen Population"
+name: "Percentage Strong Social Support Among Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen
@@ -2578,7 +2578,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_StrongSocialSupport_In_Count_Person_NotACitizen_Female
-name: "Percentage Strong Social Support Among Not ACitizen, Female Population"
+name: "Percentage Strong Social Support Among Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
@@ -2589,7 +2589,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_StrongSocialSupport_In_Count_Person_NotACitizen_Male
-name: "Percentage Strong Social Support Among Not ACitizen, Male Population"
+name: "Percentage Strong Social Support Among Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
@@ -2792,7 +2792,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_StrongSocialSupport_In_Count_Person_WithinEU28AndNotACitizen
-name: "Percentage Strong Social Support Among Within EU28 And Not ACitizen Population"
+name: "Percentage Strong Social Support Among Within EU28 And Not A Citizen Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen
@@ -2802,7 +2802,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_StrongSocialSupport_In_Count_Person_WithinEU28AndNotACitizen_Female
-name: "Percentage Strong Social Support Among Within EU28 And Not ACitizen, Female Population"
+name: "Percentage Strong Social Support Among Within EU28 And Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
@@ -2813,7 +2813,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_StrongSocialSupport_In_Count_Person_WithinEU28AndNotACitizen_Male
-name: "Percentage Strong Social Support Among Within EU28 And Not ACitizen, Male Population"
+name: "Percentage Strong Social Support Among Within EU28 And Not A Citizen, Male Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male

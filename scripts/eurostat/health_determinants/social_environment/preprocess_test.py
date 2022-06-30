@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for EuroStat BMI process script.
+Script to automate the testing for EuroStat Social Environment process script.
 """
 
 import os
@@ -35,7 +35,7 @@ class TestProcess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
     properties which further requried for unit testing.
-    The test will be conducted for EuroStat BMI Sample Datasets,
+    The test will be conducted for EuroStat Social Environment Sample Datasets,
     It will be generating CSV, MCF and TMCF files based on the sample input.
     Comparing the data with the expected files.
     """
