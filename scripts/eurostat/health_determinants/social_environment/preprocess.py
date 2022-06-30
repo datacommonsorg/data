@@ -358,7 +358,7 @@ class EuroStatSocialEnvironment:
                     benificiary = "\nsocialSupportBeneficiaryType: dcs:" + prop
                     sv_name = sv_name + prop + ", "
                 elif "AtLeastOnceAWeek" in prop:
-                    frequency = "\nactivityFrequency: \"" + prop + "\""
+                    frequency = "\nactivityFrequency: dcs:" + prop
                     sv_name = sv_name + prop + ", "
             # Making the changes to the SV Name,
             # Removing any extra commas, with keyword and
