@@ -16,11 +16,16 @@ Script to automate the testing for USA Population preprocess scripts.
 """
 
 import os
+import sys
 import unittest
 import tempfile
-from preprocess import process
-# _MODULE_DIR is the path to where this test is running from.
+
 _MODULE_DIR = os.path.dirname(__file__)
+sys.path.insert(0, _MODULE_DIR)
+from preprocess import process
+from constants import INPUT_DIR, INPUT_DIRS
+# _MODULE_DIR is the path to where this test is running from.
+
 _TEST_DATA_FOLDER = os.path.join(_MODULE_DIR, "test_data")
 
 
@@ -42,16 +47,15 @@ class TestPreprocess(unittest.TestCase):
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            file_list = [
-                'NC-EST2020_Nationals.csv', 'co-est00int-alldata_county.csv',
-                'sasrh_state.txt'
-            ]
-            ip_data_path = [
-                os.path.join(_TEST_DATA_FOLDER, "datasets", file_name)
-                for file_name in file_list
-            ]
+            test_files = []
+            for dir_path in INPUT_DIRS:
+                files_dir = os.path.join(_MODULE_DIR, _TEST_DATA_FOLDER, "datasets", dir_path)
+                test_files += [
+                    os.path.join(files_dir, file)
+                    for file in sorted(os.listdir(files_dir))
+                ]
 
-            process(ip_data_path, cleaned_csv_file_path, mcf_file_path,
+            process(test_files, cleaned_csv_file_path, mcf_file_path,
                     tmcf_file_path)
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
@@ -69,10 +73,10 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like MCF File
         """
         expected_mcf_file_path = os.path.join(
-            _TEST_DATA_FOLDER, "expected_usa_population_asrh.mcf")
+            _TEST_DATA_FOLDER, "expected_files", "usa_population_asrh.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            _TEST_DATA_FOLDER, "expected_usa_population_asrh.tmcf")
+            _TEST_DATA_FOLDER, "expected_files", "usa_population_asrh.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -93,7 +97,7 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like CSV
         """
         expected_csv_file_path = os.path.join(
-            _TEST_DATA_FOLDER, "expected_usa_population_asrh.csv")
+            _TEST_DATA_FOLDER, "expected_files", "usa_population_asrh.csv")
 
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:

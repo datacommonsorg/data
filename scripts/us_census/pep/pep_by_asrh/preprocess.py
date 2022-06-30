@@ -12,22 +12,59 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python Script Load the datasets, cleans it
-and generates cleaned csv, MCF, TMCF file.
+This module creates CSV files used for importing data into DC.
+Below are list of files processed -
+County
+    1990 - 1999     Processed As Is
+    2000 - 2009     Processed As Is
+    2010 - 2020     Processed As Is
+State
+    1980 - 1989     Processed As Is
+    1990 - 2999     Processed As Is
+    2000 - 2009     Processed As Is
+    2010 - 2020     Processed As Is
+National
+    1980 - 1989     Processed As Is
+    1990 - 1999     Aggregted from State to National Level
+    2000 - 2009     Processed As Is
+    2010 - 2020     Processed As Is
+Also SV aggregation are produced while processing above files.
+E.g., Count_Person_10Years_White_HispanicOrLatino is calulated by addding
+Count_Person_10Years_Male_WhiteHispanicOrLatino and
+Count_Person_10Years_Male_WhiteHispanicOrLatino
+Before running this module, run download.sh script, it downloads required
+input files, creates necessary folders for processing.
+Folder information
+input_files - downloaded files (from US census website) are placed here
+output_files - output files (mcf, tmcf and csv are written here)
 """
-import os
 
+import os
 from copy import deepcopy
 import pandas as pd
-
+import numpy as np
 from absl import app
-from absl import flags
 from cols_map import _get_mapper_cols_dict
+from constants import INPUT_DIRS, TEST_DATA_DIR
 
-FLAGS = flags.FLAGS
-default_input_path = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "ip_data"
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+_CODEDIR = os.path.dirname(__file__)
+
+_MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
+                 "typeOf: dcs:StatisticalVariable\n"
+                 "populationType: dcs:Person\n"
+                 "statType: dcs:measuredValue\n"
+                 "measuredProperty: dcs:count\n"
+                 "{xtra_pv}")
+
+_TMCF_TEMPLATE = (
+    "Node: E:USA_Population_ASRH->E0\n"
+    "typeOf: dcs:StatVarObservation\n"
+    "variableMeasured: C:USA_Population_ASRH->SV\n"
+    "measurementMethod: C:USA_Population_ASRH->Measurement_Method\n"
+    "observationAbout: C:USA_Population_ASRH->Location\n"
+    "observationDate: C:USA_Population_ASRH->Year\n"
+    "observationPeriod: \"P1Y\"\n"
+    "value: C:USA_Population_ASRH->Count_Person\n")
 
 
 def _convert_to_int(data_df: pd.DataFrame) -> pd.DataFrame:
@@ -37,11 +74,13 @@ def _convert_to_int(data_df: pd.DataFrame) -> pd.DataFrame:
 
 
 def _derive_cols(data_df: pd.DataFrame, derived_cols: dict) -> pd.DataFrame:
-    """Derive new columns using DataFrame and derived_cols dict
+    """
+    Derive new columns using data_df and derived_cols dict
     Args:
         data_df (pd.DataFrame): Input DataFrame loaded with data.
         derived_cols (dict): derived_cols dict
-       where key represents dervied col and values represents existing columns.
+                             where key represents dervied col and
+                             values represents existing columns.
 
     Returns:
         pd.DataFrame: DataFrame
@@ -131,6 +170,68 @@ def _add_measurement_method(data_df: pd.DataFrame, src_col: str,
     return data_df
 
 
+def _measurement_conditions(sv: str, year: int) -> str:
+    """
+    Divides the Races before and after 2000, by using different measurement
+    methods.
+    Args:
+        x (str) : String from DataFrame Values in a Column.
+        x (str) : String from DataFrame Values in a Column.
+    Returns:
+        str
+    """
+    measurement_method = ""
+    #print(sv)
+    #Count_Person_0To4Years_Male_WhiteAloneNotHispanicOrLatino
+    if ((not sv.lower().endswith('male')) and
+        (not sv.lower().endswith('latino') or
+         "WhiteAloneNot" in sv)) and year >= 2000:
+        measurement_method = "_Race2000Onwards"
+    elif ((not sv.lower().endswith('male')) and
+          (not sv.lower().endswith('latino') or
+           "WhiteAloneNot" in sv)) and year < 2000:
+        measurement_method = "_RaceUpto1999"
+    else:
+        measurement_method = ""
+    return measurement_method
+
+
+def _measurement_aggregate(df: pd.DataFrame) -> list:
+    """
+    Checks for aggregations done and makes all the years of that race and area
+    as Aggregated
+    Args:
+        df (Pandas Dataframe) : Divided Dataframe to check
+    Returns:
+        list
+    """
+    derived_df = df[df['Measurement_Method'].str.contains('dcAggregate')]
+    aggregated_rows = set(derived_df['SV'] + derived_df['Location'])
+    df['info'] = df['SV'] + df['Location']
+    df['Measurement_Method'] = np.where(
+        df['info'].isin(aggregated_rows),
+        'dcs:dcAggregate/CensusPEPSurvey_PartialAggregate',
+        df['Measurement_Method'])
+    df = df.drop(columns=['info'])
+    return df
+
+
+def _measurement_method(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Generates measurement method based on provided guidlines.
+    Args:
+        df (Pandas Dataframe) : Dataframe to add columns
+    Returns:
+        df (Pandas Dataframe) : Dataframe with added columns
+    """
+
+    df = _measurement_aggregate(df)
+    func = np.vectorize(_measurement_conditions)
+    race_year = func(df['SV'], df['Year'].astype('int'))
+    df['Measurement_Method'] = df['Measurement_Method'] + race_year
+    return df
+
+
 def _load_data_df(path: str,
                   file_format: str,
                   header: str = None,
@@ -169,7 +270,7 @@ def _load_data_df(path: str,
     return data_df
 
 
-def _create_sv(desc: str, age: str) -> str:
+def _create_sv_with_age(desc: str, age: str) -> str:
     # Age 85+ and 100+ are represented as individual
     # age numbers such as  85, 100.
     # Adding "OrMoreYears" for 85 and 100 Ages.
@@ -228,13 +329,12 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
         "Male_NotHispanicOrLatino_AsianOrPacificIslander",
         "Female_NotHispanicOrLatino_AsianOrPacificIslander"
     ]
-    hispanic_cols = _get_mapper_cols_dict("nationals_1980_1999_hispanic")
-    derived_cols = _get_mapper_cols_dict("nationals_1980_1999_derived")
     data_df.columns = cols
     # Appending yr_100_data_df to data_df(which contains age for 1 to 99)
     if yr_100_data_df.shape[0] > 0:
         yr_100_data_df.insert(0, 0, yr)
         yr_100_data_df[1] = 100
+        # column 23 has NAN value, and dropping that column
         yr_100_data_df = yr_100_data_df.drop(columns=[23])
         yr_100_data_df.columns = cols
         data_df = pd.concat([data_df, yr_100_data_df]).reset_index(drop=True)
@@ -242,6 +342,7 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     data_df = _convert_to_int(data_df)
     # Creating Year Column
     data_df["Year"] = "19" + data_df["Year"].astype("str").str[-2:]
+    hispanic_cols = _get_mapper_cols_dict("nationals_1980_1999_hispanic")
     # Deriving Columns for HispanicOrLatino Origin
     for dsv, sv in hispanic_cols.items():
         data_df[sv[1:]] = -data_df[sv[1:]]
@@ -249,17 +350,20 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
         data_df[sv[1:]] = -data_df[sv[1:]]
         cols.append(dsv)
     # Deriving New Columns
+    derived_cols = _get_mapper_cols_dict("nationals_1980_1999_derived")
     data_df = _derive_cols(data_df, derived_cols)
-    cols = cols + list(derived_cols.keys())
-    f_cols = [val for val in cols if "Hispanic" in val]
+    # Extracting columns having Hispanic and NotHispanic
+    pop_cols = [
+        val for val in cols + list(derived_cols.keys()) if "Hispanic" in val
+    ]
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Age"],
-                      value_vars=f_cols,
+                      value_vars=pop_cols,
                       var_name="SV",
                       value_name="Count_Person")
     # Creating SV"s name using SV, Age Column
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
-                                  axis=1)
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     data_df["SV"] = data_df["SV"].str.replace("85OrMore", "85")
     data_df["Location"] = "country/USA"
     final_cols = [
@@ -268,6 +372,15 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     # Deriving Measurement Method for the SV"s
     data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
     return data_df[final_cols]
+
+
+def _derive_nationals_1990_1999(data_df: pd.DataFrame) -> pd.DataFrame:
+    data_df["Location"] = "country/USA"
+    data_df = data_df.groupby(
+        by=["Year", "Location", "SV", "Measurement_Method"]).agg({
+            "Count_Person": "sum"
+        }).reset_index()
+    return data_df
 
 
 def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
@@ -286,25 +399,38 @@ def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
     # Skipping Year: 2010
     data_df = data_df[(data_df["MONTH"] == 7) & (data_df["AGE"] != 999) &
                       (data_df["YEAR"] != 2010)].reset_index(drop=True)
+    # data_df columns
+    # 'MONTH', 'YEAR', 'AGE', 'TOT_POP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE',
+    # 'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE',
+    # 'AA_FEMALE', 'NA_MALE', 'NA_FEMALE', 'TOM_MALE', 'TOM_FEMALE',
+    # 'NH_MALE', 'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE', 'NHBA_MALE',
+    # 'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE', 'NHAA_FEMALE',
+    # 'NHNA_MALE', 'NHNA_FEMALE', 'NHTOM_MALE', 'NHTOM_FEMALE', 'H_MALE',
+    # 'H_FEMALE', 'HWA_MALE', 'HWA_FEMALE', 'HBA_MALE', 'HBA_FEMALE',
+    # 'HIA_MALE', 'HIA_FEMALE', 'HAA_MALE', 'HAA_FEMALE', 'HNA_MALE',
+    # 'HNA_FEMALE', 'HTOM_MALE', 'HTOM_FEMALE'
     cols = list(data_df.columns)
     # Mapping Dataset Headers to its FullForm
     cols_mapper = _get_mapper_cols_dict("header_mappers")
-    for idx, val in enumerate(cols):
-        cols[idx] = cols_mapper.get(val, val)
-    data_df.columns = cols
+    cols_with_full_name = []
+    for val in cols:
+        cols_with_full_name.append(cols_mapper.get(val, val))
+    data_df.columns = cols_with_full_name
     derived_cols = _get_mapper_cols_dict("nationals_2000_2009")
     # Deriving New Columns
     data_df = _derive_cols(data_df, derived_cols)
-    cols = cols + list(derived_cols.keys())
-    f_cols = [val for val in cols if "Hispanic" in val]
+    pop_cols = [
+        val for val in cols_with_full_name + list(derived_cols.keys())
+        if "Hispanic" in val
+    ]
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Age"],
-                      value_vars=f_cols,
+                      value_vars=pop_cols,
                       var_name="SV",
                       value_name="Count_Person")
     # Creating SV"s name using SV, Age Columns
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
-                                  axis=1)
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     data_df["Location"] = "country/USA"
     final_cols = [
         "Year", "Location", "SV", "Measurement_Method", "Count_Person"
@@ -336,8 +462,10 @@ def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
     derived_cols = _get_mapper_cols_dict("nationals_2010_2021")
     # Deriving New Columns
     data_df = _derive_cols(data_df, derived_cols)
-    cols = cols + list(derived_cols.keys())
-    cols = ["Year", "Age"] + [col for col in cols if "Hispanic" in col]
+    # Extracting columns having Hispanic and NotHispanic
+    cols = ["Year", "Age"] + [
+        col for col in cols + list(derived_cols.keys()) if "Hispanic" in col
+    ]
     data_df = data_df[cols]
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Age"],
@@ -345,8 +473,8 @@ def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
                       var_name="SV",
                       value_name="Count_Person")
     # Creating SV"s name using SV, Age Column
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
-                                  axis=1)
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     data_df["SV"] = data_df["SV"].str.replace("85OrMore", "85")
     data_df["Location"] = "country/USA"
     data_df = data_df.drop(columns=["Age"])
@@ -370,6 +498,7 @@ def _process_state_1980_1989(file_path: str) -> str:
         pd.DataFrame: Cleaned DataFrame
     """
     data_df = _load_data_df(path=file_path, file_format="txt", header=None)
+    # Adding Leading Zeros for Fips Code in the zeroth column.
     data_df[0] = data_df[0].astype("str").str.pad(width=5,
                                                   side="left",
                                                   fillchar="0")
@@ -407,24 +536,25 @@ def _process_state_1980_1989(file_path: str) -> str:
     data_df = data_df.drop(columns=[0])
     data_df["SV"] = data_df["Sex"] + "_" + data_df["Race"]
     # Deriving New Columns
+    # Type Casting the pop_cols to integer/float using pd.to_numeric function
     data_df[pop_cols] = data_df[pop_cols].apply(pd.to_numeric, errors="coerce")
     derived_cols = _get_mapper_cols_dict("state_1980_1989")
     data_df = data_df[["Year", "Location", "SV"] + pop_cols]
     for dsv, sv in derived_cols.items():
-        tmp_derived_cols_data_df = data_df[data_df["SV"].isin(sv)].reset_index(
+        tmp_derived_cols_df = data_df[data_df["SV"].isin(sv)].reset_index(
             drop=True)
-        tmp_derived_cols_data_df["SV"] = dsv
-        tmp_derived_cols_data_df = tmp_derived_cols_data_df.groupby(
+        tmp_derived_cols_df["SV"] = dsv
+        tmp_derived_cols_df = tmp_derived_cols_df.groupby(
             ["Year", "Location", "SV"]).sum().reset_index()
-        data_df = data_df.append(tmp_derived_cols_data_df)
+        data_df = pd.concat([data_df, tmp_derived_cols_df])
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Location", "SV"],
                       value_vars=pop_cols,
                       var_name="Age",
                       value_name="Count_Person")
     # Creating SV"s name using SV, Age Column
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
-                                  axis=1)
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     # Deriving Measurement Method for the SV"s
     data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
     data_df = data_df[[
@@ -471,20 +601,22 @@ def _process_state_1990_1999(file_path):
     # Deriving New Columns
     data_df = _derive_cols(data_df, derived_cols)
 
-    cols = cols + list(derived_cols.keys())
     # Adding Leading Zeros for State"s Fips Code.
     data_df["Location"] = data_df["Location"].astype("str").str.pad(
         width=2, side="left", fillchar="0")
     # Creating GeoId"s using Fips Code
     data_df["Location"] = "geoId/" + data_df["Location"]
-    f_cols = [val for val in cols if "Hispanic" in val]
+    # Extracting columns having Hispanic and NotHispanic
+    pop_cols = [
+        val for val in cols + list(derived_cols.keys()) if "Hispanic" in val
+    ]
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Location", "Age"],
-                      value_vars=f_cols,
+                      value_vars=pop_cols,
                       var_name="SV",
                       value_name="Count_Person")
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
-                                  axis=1)
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     final_cols = [
         "Year", "Location", "SV", "Measurement_Method", "Count_Person"
     ]
@@ -507,9 +639,11 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
     """
     data_df = _load_data_df(path=file_path, file_format="csv", header=0)
     data_df = data_df.drop(columns=["POPESTIMATE2010"])
+    # STATE COLUMN with 0 value has national data,
+    # So, skipping  the national data rows
     data_df = data_df[(data_df["STATE"] != 0)].reset_index(drop=True)
     data_df = data_df.reset_index()
-    derived_cols_data_df = pd.DataFrame()
+    derived_cols_df = pd.DataFrame()
     gender_mapper = {0: "empty", 1: "Male", 2: "Female"}
     origin_mapper = {1: "NotHispanicOrLatino", 2: "HispanicOrLatino"}
     race_mapper = {
@@ -524,64 +658,79 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
     # Deriving New Columns and actual values for below numbers are
     # represented in above dictonaries
     for origin in [1, 2]:
-        derived_cols_data_df = pd.concat([
-            derived_cols_data_df,
+        derived_cols_df = pd.concat([
+            derived_cols_df,
             data_df[(data_df["ORIGIN"] == origin) & (data_df["SEX"] == 0) &
                     (data_df["RACE"] == 0) & (data_df["AGEGRP"] != 0)]
         ],
-                                         ignore_index=True)
+                                    ignore_index=True)
         for sex in [0, 1, 2]:
             if sex == 0:
                 for race in [1, 2, 3, 4, 5, 6]:
-                    derived_cols_data_df = pd.concat([
-                        derived_cols_data_df,
-                        data_df[(data_df["ORIGIN"] == origin) &
-                                (data_df["SEX"] == 0) &
-                                (data_df["RACE"] == race) &
-                                (data_df["AGEGRP"] != 0)]
+                    derived_cols_df = pd.concat([
+                        derived_cols_df, data_df[(data_df["ORIGIN"] == origin) &
+                                                 (data_df["SEX"] == 0) &
+                                                 (data_df["RACE"] == race) &
+                                                 (data_df["AGEGRP"] != 0)]
                     ],
-                                                     ignore_index=True)
+                                                ignore_index=True)
             else:
-                derived_cols_data_df = pd.concat([
-                    derived_cols_data_df,
-                    data_df[(data_df["ORIGIN"] == origin) &
-                            (data_df["SEX"] == sex) & (data_df["RACE"] == 0) &
-                            (data_df["AGEGRP"] != 0)]
+                derived_cols_df = pd.concat([
+                    derived_cols_df, data_df[(data_df["ORIGIN"] == origin) &
+                                             (data_df["SEX"] == sex) &
+                                             (data_df["RACE"] == 0) &
+                                             (data_df["AGEGRP"] != 0)]
                 ],
-                                                 ignore_index=True)
+                                            ignore_index=True)
     data_df = data_df[(data_df["SEX"] != 0) & (data_df["RACE"] != 0) &
                       (data_df["ORIGIN"] != 0) &
                       (data_df["AGEGRP"] != 0)].reset_index(drop=True)
-    data_df = pd.concat([data_df, derived_cols_data_df], ignore_index=True)
+    data_df = pd.concat([data_df, derived_cols_df], ignore_index=True)
     data_df["RACE"] = data_df["RACE"].map(race_mapper)
     data_df["ORIGIN"] = data_df["ORIGIN"].map(origin_mapper)
     data_df["SEX"] = data_df["SEX"].map(gender_mapper)
     data_df[
         "SV"] = data_df["SEX"] + "_" + data_df["ORIGIN"] + "_" + data_df["RACE"]
+    # Replacing NotHispanicOrLatino_WhiteAlone with
+    # existing Datacommons PV WhiteAloneNotHispanicOrLatino
     data_df["SV"] = data_df["SV"].str.replace("NotHispanicOrLatino_WhiteAlone",
                                               "WhiteAloneNotHispanicOrLatino")
     data_df["SV"] = data_df["SV"].str.replace("empty_",
                                               "").str.replace("_empty", "")
+    # Adding Leading Zeros for State"s Fips Code.
     data_df["Location"] = "geoId/" + data_df["STATE"].astype("str").str.pad(
         width=2, side="left", fillchar="0")
+    # data_df.columns
+    # 'index', 'REGION', 'DIVISION', 'STATE', 'NAME', 'SEX', 'ORIGIN', 'RACE',
+    # 'AGEGRP', 'ESTIMATESBASE2000', 'POPESTIMATE2000', 'POPESTIMATE2001',
+    # 'POPESTIMATE2002', 'POPESTIMATE2003', 'POPESTIMATE2004',
+    # 'POPESTIMATE2005', 'POPESTIMATE2006', 'POPESTIMATE2007',
+    # 'POPESTIMATE2008', 'POPESTIMATE2009', 'CENSUS2010POP',
+    # 'SV', 'Location'
     cols = data_df.columns.to_list()
     # Creating Age Groups
     data_df["Age"] = data_df["AGEGRP"].apply(_get_age_grp)
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
-                                  axis=1)
-    cols = ["Location", "SV"
-           ] + [col for col in cols if col.startswith("POPESTIMATE")]
-    data_df = data_df[cols]
-    cols = [col.replace("POPESTIMATE", "") for col in cols]
-    data_df.columns = cols
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
+    req_cols = ["Location", "SV"
+               ] + [col for col in cols if col.startswith("POPESTIMATE")]
+    data_df = data_df[req_cols]
+    pop_cols = [
+        col.replace("POPESTIMATE", "")
+        for col in req_cols
+        if col.startswith("POPESTIMATE")
+    ]
+    data_df.columns = data_df.columns.str.replace("POPESTIMATE", "")
+    #print(data_df.columns)
     # DataFrame Columns or Cols
     # ["Location", "SV", "2000", "2001", "2002", "2003",
     # "2004", "2005", "2006", "2007", "2008", "2009"]
     data_df = pd.melt(data_df,
                       id_vars=["Location", "SV"],
-                      value_vars=cols,
+                      value_vars=pop_cols,
                       var_name="Year",
                       value_name="Count_Person")
+
     data_df = data_df[["Year", "Location", "SV", "Count_Person"]]
     # Deriving Measurement Method for the SV"s
     data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
@@ -626,7 +775,7 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
         "SV"] = data_df["SEX"] + "_" + data_df["ORIGIN"] + "_" + data_df["RACE"]
     data_df["SV"] = data_df["SV"].str.replace("NotHispanicOrLatino_WhiteAlone",
                                               "WhiteAloneNotHispanicOrLatino")
-    req_cols = list(data_df.columns)
+    cols = list(data_df.columns)
     # DataFrame Columns
     # ["SUMLEV", "REGION", "DIVISION", "STATE", "NAME", "SEX", "ORIGIN",
     # "RACE", "AGE", "CENSUS2010POP", "ESTIMATESBASE2010", "POPESTIMATE2010",
@@ -642,37 +791,38 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
         "POPULATION_EST_2010_2019_END": 21,
         "POPULATION_EST_2020": 22
     }
-    req_cols = [req_cols[column_indexes["STATE"]]] + [
-        req_cols[column_indexes["SV"]]
-    ] + [req_cols[column_indexes["AGE"]]
-        ] + req_cols[column_indexes["POPULATION_EST_2010_2019_START"]:
-                     column_indexes["POPULATION_EST_2010_2019_END"]] + [
-                         req_cols[column_indexes["POPULATION_EST_2020"]]
-                     ]
+    req_cols = [cols[column_indexes["STATE"]]] + [
+        cols[column_indexes["SV"]]
+    ] + [cols[column_indexes["AGE"]]
+        ] + cols[column_indexes["POPULATION_EST_2010_2019_START"]:
+                 column_indexes["POPULATION_EST_2010_2019_END"]] + [
+                     cols[column_indexes["POPULATION_EST_2020"]]
+                 ]
     pop_cols = [val for val in req_cols if "POPESTIMATE" in val]
     # Deriving New Columns
+    # Type Casting the pop_cols to integer/float using pd.to_numeric function
     data_df[pop_cols] = data_df[pop_cols].apply(pd.to_numeric, errors="coerce")
     derived_cols = _get_mapper_cols_dict("state_2010_2020_hispanic")
     for dsv, sv in derived_cols.items():
-        tmp_derived_cols_data_df = data_df[data_df["SV"].isin(
+        tmp_derived_cols_df = data_df[data_df["SV"].isin(
             sv)][req_cols].reset_index(drop=True)
-        tmp_derived_cols_data_df["SV"] = dsv
-        tmp_derived_cols_data_df = tmp_derived_cols_data_df.groupby(
+        tmp_derived_cols_df["SV"] = dsv
+        tmp_derived_cols_df = tmp_derived_cols_df.groupby(
             ["STATE", "SV", "AGE"]).sum().reset_index()
-        data_df = data_df.append(tmp_derived_cols_data_df)
+        data_df = pd.concat([data_df, tmp_derived_cols_df])
     # Deriving New Columns
     derived_cols = _get_mapper_cols_dict("state_2010_2020_total")
     for dsv, sv in derived_cols.items():
-        tmp_derived_cols_data_df = data_df[data_df["SV"].isin(
+        tmp_derived_cols_df = data_df[data_df["SV"].isin(
             sv)][req_cols].reset_index(drop=True)
-        tmp_derived_cols_data_df["SV"] = dsv
-        tmp_derived_cols_data_df = tmp_derived_cols_data_df.groupby(
+        tmp_derived_cols_df["SV"] = dsv
+        tmp_derived_cols_df = tmp_derived_cols_df.groupby(
             ["STATE", "SV", "AGE"]).sum().reset_index()
-        data_df = data_df.append(tmp_derived_cols_data_df)
+        data_df = pd.concat([data_df, tmp_derived_cols_df])
     # Creating SV"s name using SV, Age Column
 
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.AGE),
-                                  axis=1)
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.AGE), axis=1)
     data_df = data_df[req_cols]
     req_cols = [
         col.replace("POPESTIMATE", "").replace("STATE", "Location")
@@ -683,7 +833,7 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     # ["Location", "SV", "AGE", "2010", "2011", "2012",
     # "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
     data_df = pd.melt(data_df,
-                      id_vars=["SV", "Location", "Age"],
+                      id_vars=["SV", "Location", "AGE"],
                       value_vars=req_cols[3:],
                       var_name="Year",
                       value_name="Count_Person")
@@ -790,8 +940,8 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
                       var_name="Age",
                       value_name="Count_Person")
     # Creating SV"s name using SV, Age Column
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
-                                  axis=1)
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     # Creating GeoId"s for State FIPS Code
     data_df["Location"] = "geoId/" + data_df["Location"].astype("str").str.pad(
         width=5, side="left", fillchar="0")
@@ -831,9 +981,11 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
     for idx, val in enumerate(cols):
         cols[idx] = cols_mapper.get(val, val)
     data_df.columns = cols
+    # Adding Leading Zeros for State's Fips Code.
     data_df["STATE"] = data_df["STATE"].astype("str").str.pad(width=2,
                                                               side="left",
                                                               fillchar="0")
+    # Adding Leading Zeros for County's Fips Code.
     data_df["COUNTY"] = data_df["COUNTY"].astype("str").str.pad(width=3,
                                                                 side="left",
                                                                 fillchar="0")
@@ -850,8 +1002,8 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
                       var_name="SV",
                       value_name="Count_Person")
     # Creating SV"s name using SV, Age Column
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
-                                  axis=1)
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     # Deriving Measurement Method for the SV"s
     f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
     data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
@@ -885,9 +1037,11 @@ def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
     for idx, val in enumerate(cols):
         cols[idx] = cols_mapper.get(val, val)
     data_df.columns = cols
+    # Adding Leading Zeros for State's Fips Code.
     data_df["STATE"] = data_df["STATE"].astype("str").str.pad(width=2,
                                                               side="left",
                                                               fillchar="0")
+    # Adding Leading Zeros for County's Fips Code.
     data_df["COUNTY"] = data_df["COUNTY"].astype("str").str.pad(width=3,
                                                                 side="left",
                                                                 fillchar="0")
@@ -905,21 +1059,12 @@ def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
                       var_name="SV",
                       value_name="Count_Person")
     # Creating SV"s name using SV, Age Column
-    data_df["SV"] = data_df.apply(lambda row: _create_sv(row.SV, row.Age),
-                                  axis=1)
+    data_df["SV"] = data_df.apply(
+        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
     # Deriving Measurement Method for the SV"s
     data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
     return data_df[f_cols]
-
-
-def _derive_nationals(data_df: pd.DataFrame) -> pd.DataFrame:
-    data_df["Location"] = "country/USA"
-    data_df = data_df.groupby(
-        by=["Year", "Location", "SV", "Measurement_Method"]).agg({
-            "Count_Person": "sum"
-        }).reset_index()
-    return data_df
 
 
 def _generate_mcf(sv_list, mcf_file_path) -> None:
@@ -931,49 +1076,45 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
     Returns:
         None
     """
-    mcf_template = """Node: dcid:{}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person{}{}{}{}
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-"""
-    final_mcf_template = ""
+
+    mcf_nodes = []
     for sv in sv_list:
         if "Total" in sv:
             continue
-        age = ""
-        enthnicity = ""
-        gender = ""
-        race = ""
+        pvs = []
+        dcid = sv
+        race_idx = 0
         sv_prop = sv.split("_")
         for prop in sv_prop:
             if prop in ["Count", "Person"]:
                 continue
             if "Years" in prop:
                 if "OrMoreYears" in prop:
-                    age = "\nage: [" + prop.replace("OrMoreYears",
-                                                    "") + " - Years]" + "\n"
+                    pvs.append("age: [" + prop.replace("OrMoreYears", "") +
+                               " - Years]")
                 elif "To" in prop:
-                    age = "\nage: [" + prop.replace("Years", "").replace(
-                        "To", " ") + " Years]" + "\n"
+                    pvs.append("age: [" +
+                               prop.replace("Years", "").replace("To", " ") +
+                               " Years]")
                 else:
-                    age = "\nage: [Years " + prop.replace("Years",
-                                                          "") + "]" + "\n"
+                    pvs.append("age: [Years " + prop.replace("Years", "") + "]")
             elif "Male" in prop or "Female" in prop:
-                gender = "gender: dcs:" + prop
+                pvs.append("gender: dcs:" + prop)
             else:
 
                 if "race" in race:
-                    race = race.strip() + "__" + prop + "\n"
+                    race = pvs.pop(race_idx) + "__" + prop
+                    pvs.append(race)
                 else:
-                    race = "race: dcs:" + prop + "\n"
-        if gender == "":
-            race = race.strip()
-        final_mcf_template += mcf_template.format(sv, age, enthnicity, race,
-                                                  gender) + "\n"
+                    race = "race: dcs:" + prop
+                    race_idx = len(pvs)
+                    pvs.append(race)
+        node = _MCF_TEMPLATE.format(dcid=dcid, xtra_pvs='\n'.join(pvs))
+        mcf_nodes.append(node)
     # Writing Genereated MCF to local path.
+    mcf = '\n'.join(mcf_nodes)
     with open(mcf_file_path, "w+", encoding="utf-8") as f_out:
-        f_out.write(final_mcf_template.rstrip("\n"))
+        f_out.write(mcf.rstrip("\n"))
 
 
 def _generate_tmcf(tmcf_file_path) -> None:
@@ -985,19 +1126,9 @@ def _generate_tmcf(tmcf_file_path) -> None:
     Returns:
         None
     """
-    tmcf_template = """Node: E:USA_Population_ASRH->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: C:USA_Population_ASRH->SV
-measurementMethod: C:USA_Population_ASRH->Measurement_Method
-observationAbout: C:USA_Population_ASRH->Location
-observationDate: C:USA_Population_ASRH->Year
-observationPeriod: \"P1Y\"
-value: C:USA_Population_ASRH->Count_Person 
-"""
-
     # Writing Genereated TMCF to local path.
     with open(tmcf_file_path, "w+", encoding="utf-8") as f_out:
-        f_out.write(tmcf_template.rstrip("\n"))
+        f_out.write(_TMCF_TEMPLATE.rstrip("\n"))
 
 
 def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
@@ -1010,18 +1141,16 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     if not os.path.exists(output_path):
         os.mkdir(output_path)
     sv_list = []
-    f_names = []
     data_df = pd.DataFrame(columns=[[
         "Year", "Location", "SV", "Measurement_Method", "Count_Person"
     ]])
     data_df.to_csv(cleaned_csv_file_path, index=False)
     for file_path in input_files:
         data_df = None
-        f_names.append(file_path)
         if "sasr" in file_path:
             data_df = _process_state_1990_1999(file_path)
             if "sasrh" in file_path:
-                nat_data_df = _derive_nationals(deepcopy(data_df))
+                nat_data_df = _derive_nationals_1990_1999(deepcopy(data_df))
                 data_df = pd.concat([data_df, nat_data_df], axis=0)
         elif "st-est00int-alldata" in file_path:
             data_df = _process_state_2000_2010(file_path)
@@ -1041,8 +1170,8 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
             data_df = _process_county_2000_2009(file_path)
         elif "CC-EST2020" in file_path:
             data_df = _process_county_2010_2020(file_path)
-
         data_df = _convert_to_int(data_df)
+
         data_df.to_csv(cleaned_csv_file_path,
                        mode="a",
                        header=False,
@@ -1050,16 +1179,25 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
         sv_list += data_df["SV"].to_list()
     sv_list = list(set(sv_list))
     sv_list.sort()
+    data_df = pd.read_csv(cleaned_csv_file_path, header=0)
+    data_df = _measurement_method(data_df)
+    data_df.to_csv(cleaned_csv_file_path, index=False)
     _generate_mcf(sv_list, mcf_file_path)
     _generate_tmcf(tmcf_file_path)
 
 
 def main(_):
-    input_path = FLAGS.input_path
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
+    ip_files = []
+    for dir_path in INPUT_DIRS:
+        files_dir = os.path.join(_CODEDIR, TEST_DATA_DIR, dir_path)
+        print(files_dir)
+        ip_files += [
+            os.path.join(files_dir, file)
+            for file in sorted(os.listdir(files_dir))
+        ]
+    #sys.exit(0)
     data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output"
+        os.path.abspath(__file__)) + os.sep + "output_files_test"
 
     # Defining Output Files
     cleaned_csv_path = data_file_path + os.sep + "usa_population_asrh.csv"
