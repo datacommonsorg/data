@@ -3,7 +3,6 @@ import os
 from dcid_existance import check_dcid_existance
 
 
-
 #Return a list containing every occurrence of "ai":
 def _generate_mcf(sv_list, mcf_file_path) -> None:
     """
