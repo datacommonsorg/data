@@ -45,7 +45,7 @@ _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "{pv14}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Person{pv2}{pv3}{pv4}{pv5}"
-                 "{pv6}{pv7}{pv8}{pv9}{pv10}{pv11}{pv12}{pv13}\n"
+                 "{pv6}{pv7}{pv8}{pv9}{pv10}{pv11}{pv12}{pv13}{pv15}\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:count\n")
 
@@ -607,6 +607,40 @@ def _dailypractice_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def _walkingcycling_atleast30mins_by_sex_education(df: pd.DataFrame)\
+                                                    -> pd.DataFrame:
+    """
+    Cleans the file walkingcycling_atleast30mins_by_sex_education for 
+    concatenation in Final CSV.
+
+    Args:
+        df (pd.DataFrame): the raw df as the input
+
+    Returns:
+        df (pd.DataFrame): provides the cleaned df as output
+    """
+    cols = [
+        'isced11,sex,age,unit,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK', 'DE',
+        'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU',
+        'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO', 
+        'RS', 'TR'
+    ]
+    df.columns = cols
+    df = _split_column(df, cols[0])
+    # Filtering out the wanted rows and columns.
+    df = df[df['age'] == 'TOTAL']
+    df = df.drop(columns=['EU27_2020'])
+    df = _replace_isced11(df)
+    df = _replace_sex(df)
+    df['SV'] = 'Percent_' + 'AtLeast30MinutesPerDay' + '_WalkingOrCycling_' +\
+        'PhysicalActivity' + '_In_Count_Person_' + df['isced11'] +\
+            '_' + df['sex']
+    df.drop(columns=['age', 'isced11', 'sex'], inplace=True)
+    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+        ,value_name='observation')
+    return df
+
+
 class EuroStatPhysicalActivity:
     """
     This Class has requried methods to generate Cleaned CSV,
@@ -653,7 +687,7 @@ class EuroStatPhysicalActivity:
                 continue
             incomequin = gender = education = healthbehavior = exercise = ''
             residence = activity = duration = countryofbirth = citizenship = ''
-            lev_limit = bmi = sv_name = ''
+            lev_limit = bmi = sv_name = frequency = ''
 
             sv_temp = sv.split("_In_")
             denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
@@ -701,6 +735,9 @@ class EuroStatPhysicalActivity:
                     + prop.replace("ModerateActivityOrHeavyActivity",
                         "ModerateActivityLevel__HeavyActivity")+"Level"
                     sv_name = sv_name + prop + ", "
+                elif "AtLeast30MinutesPerDay" in prop:
+                    frequency = "\nactivityFrequency: dcs:" + prop
+                    sv_name = sv_name + prop + ", "
                 elif "Minutes" in prop:
                     sv_name = sv_name + prop + ", "
                     if "OrMoreMinutes" in prop:
@@ -735,7 +772,8 @@ class EuroStatPhysicalActivity:
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
             sv_name = "name: \"" + sv_name + " Population\""
             sv_name = sv_name.replace("To299", "To 299").replace(
-                "To149", "To 149").replace("ACitizen", "A Citizen")
+                "To149", "To 149").replace("ACitizen", "A Citizen").replace(
+                    "Least30", "Least 30")
 
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv14=sv_name,
@@ -750,7 +788,8 @@ class EuroStatPhysicalActivity:
                                                        pv10=gender,
                                                        pv11=countryofbirth,
                                                        pv12=citizenship,
-                                                       pv13=lev_limit) + "\n"
+                                                       pv13=lev_limit,
+                                                       pv15=frequency) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
@@ -813,7 +852,9 @@ class EuroStatPhysicalActivity:
                 "hlth_ehis_pe2m":
                     _healthenhancing_nonworkrelated_by_sex_bmi,
                 "hlth_ehis_de9":
-                    _dailypractice_by_sex_education
+                    _dailypractice_by_sex_education,
+                "hlth_ehis_pe6e":
+                    _walkingcycling_atleast30mins_by_sex_education
             }
             df = function_dict[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')

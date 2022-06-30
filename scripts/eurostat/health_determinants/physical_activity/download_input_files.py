@@ -60,7 +60,8 @@ def download_files(download_directory: str) -> None:
         "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_pe9c.tsv.gz",
         "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_pe9d.tsv.gz",
         "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_pe2m.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_de9.tsv.gz"
+        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_de9.tsv.gz",
+        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_pe6e.tsv.gz"
     ]
 
     download.download_file(INPUT_URLS, download_directory)

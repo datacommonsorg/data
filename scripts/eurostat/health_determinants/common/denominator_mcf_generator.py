@@ -1,5 +1,7 @@
 import re
 import os
+from dcid_existance import check_dcid_existance
+
 
 
 #Return a list containing every occurrence of "ai":
@@ -130,5 +132,10 @@ with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     for deno in deno_matched:
         f_deno.append(deno[1])
     f_deno = list(set(f_deno))
+    node_status = check_dcid_existance(f_deno)
+    f_deno = []
+    for node, status in node_status.items():
+        if not status:
+            f_deno.append(node)
     f_deno.sort()
     _generate_mcf(f_deno, _OUTPUT_MCF_FILE_PATH)
