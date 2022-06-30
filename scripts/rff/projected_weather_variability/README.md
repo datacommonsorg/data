@@ -1,6 +1,7 @@
 # Importing Forecasted Raster of RFF Weather Variability Data
 
-This directory imports RFF's Forecasted rasters of weather variability data
+This directory imports RFF's Forecasted rasters of weather variability data 
+with 0.25 degree spatial resolution.
 
 The script generates:
 - WeatherVariability_Forecast.csv
