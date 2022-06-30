@@ -370,7 +370,8 @@ class EuroStatSocialEnvironment:
             # to make SV look more like a name.
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
             sv_name = "name: \"" + sv_name + " Population\""
-            sv_name = sv_name.replace('AWeek', 'A Week').replace('ACitizen','A Citizen')
+            sv_name = sv_name.replace('AWeek',
+                                      'A Week').replace('ACitizen', 'A Citizen')
 
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv2=sv_name,
