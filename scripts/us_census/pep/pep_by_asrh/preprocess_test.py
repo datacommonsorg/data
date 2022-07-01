@@ -23,7 +23,7 @@ import tempfile
 _MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, _MODULE_DIR)
 from preprocess import process
-from constants import INPUT_DIR, INPUT_DIRS
+from constants import INPUT_DIRS
 # _MODULE_DIR is the path to where this test is running from.
 
 _TEST_DATA_FOLDER = os.path.join(_MODULE_DIR, "test_data")
