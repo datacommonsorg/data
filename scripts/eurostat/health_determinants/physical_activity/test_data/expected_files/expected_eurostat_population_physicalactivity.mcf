@@ -4974,6 +4974,155 @@ citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_Female
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+gender: dcs:Female
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+gender: dcs:Female
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+gender: dcs:Male
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_Male
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Male
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+gender: dcs:Male
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_TertiaryEducation
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation
+educationalAttainment: dcs:TertiaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_TertiaryEducation_Female
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+educationalAttainment: dcs:TertiaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+gender: dcs:Female
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_TertiaryEducation_Male
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
+educationalAttainment: dcs:TertiaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+gender: dcs:Male
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+gender: dcs:Female
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+gender: dcs:Male
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_Cycling_NonWorkRelatedPhysicalActivity_In_Count_Person
 name: "Percentage Cycling, Non Work Related Physical Activity Among Population"
 typeOf: dcs:StatisticalVariable
