@@ -54,7 +54,7 @@ _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                  "populationType: dcs:Person\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:count\n"
-                 "{xtra_pv}")
+                 "{xtra_pvs}")
 
 _TMCF_TEMPLATE = (
     "Node: E:USA_Population_ASRH->E0\n"
@@ -1081,6 +1081,7 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
             continue
         pvs = []
         dcid = sv
+        race = ""
         race_idx = 0
         sv_prop = sv.split("_")
         for prop in sv_prop:
