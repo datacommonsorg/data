@@ -59,6 +59,19 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop(df[(df['SV'].str.contains('PrescribedFire')) |
                     (df['SV'].str.contains('Wildfire')) |
                     (df['SV'].str.contains('Miscellaneous'))].index)
+    # Replacing the columns for grouping as per
+    # StationaryFuelCombustion -    FuelCombustionElectricUtility
+    #                               FuelCombustionIndustrial
+    #                               FuelCombustionOther
+    # IndustrialAndOtherProcesses - ChemicalAndAlliedProductManufacturing
+    #                               MetalsProcessing
+    #                               PetroleumAndRelatedIndustries
+    #                               OtherIndustrialProcesses
+    #                               SolventUtilization
+    #                               StorageAndTransport
+    #                               WasteDisposalAndRecycling
+ 	# Transportation -              OnRoadVehicles
+    #                               NonRoadEnginesAndVehicles
 
     df['SV'] = (df['SV'].str.replace(
         'FuelCombustionElectricUtility',
@@ -172,18 +185,24 @@ def _state_emissions(file_path: str) -> pd.DataFrame:
     """
     sheet = 'State_Trends'
     df = pd.read_excel(file_path, sheet, skiprows=1, header=0)
+    # Adding geoId/ and making the State FIPS code of 2 numbers
+    # Eg - 1 -> geoId/01
     df['geo_ID'] = [f'{x:02}' for x in df['State FIPS']]
     df['geo_ID'] = 'geoId/' + df['geo_ID']
+    # Dropping Unwanted Columns
     df = df.drop(columns=['State FIPS', 'State', 'Tier 1 Code'])
     df = _replace_pollutant(df, 'Pollutant')
     df = _replace_source_category(df, 'Tier 1 Description')
     df['SV'] = 'Amount_Annual_Emissions_' + df['Tier 1 Description'] +\
             '_NonBiogenic_' + df['Pollutant']
     df = df.drop(columns=['Tier 1 Description', 'Pollutant'])
+    # Changing the years present as columns into row values.
     df = df.melt(id_vars=['SV', 'geo_ID'],
                  var_name='year',
                  value_name='observation')
     df['year'] = (df['year'].str[-2:]).astype(int)
+    # As 2001 is available as 01 and 1999 is available as 99,
+    # Putting a logic to change it to proper year
     df['year'] = df['year'] + np.where(df['year'] >= 90, 1900, 2000)
     # Making copy and using group by to get Aggregated Values.
     df_agg = _add_missing_columns(df)
@@ -207,7 +226,9 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
         'CO', 'NOX', 'PM10Primary', 'PM25Primary', 'SO2', 'VOC', 'NH3'
     ]
     final_df = pd.DataFrame()
+    # Reading different sheets of Excel one at a time
     for sheet in _sheets_national:
+        # Number of rows to skip vary by sheet, inserting if-else for the same.
         skiphead = 6 if sheet == 'NH3' else 5
         skipfoot = 0 if sheet in ['PM10Primary', 'PM25Primary'] else 5
         df = pd.read_excel(file_path,
@@ -215,20 +236,26 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
                            skiprows=skiphead,
                            skipfooter=skipfoot,
                            header=0)
+        # NA values are present as 'NA ' and also as '', removing 'NA '
+        # to process the column.
         df = df.replace('NA ', np.NaN)
+        # Dropping rows with only Null Values.
         df = df.dropna(how='all')
+        # Dropping unwanted rows left.
         df = df.drop(
             df[(df['Source Category'] == 'Total') |
                (df['Source Category'] == 'Total without wildfires') |
                (df['Source Category'] == 'Miscellaneous without wildfires') |
                (df['Source Category'] == 'Total without miscellaneous') |
                (df['Source Category'] == 'Miscellaneous')].index)
+        # Addition of pollutant type to the df by taking sheet name.
         df['pollutant'] = sheet
         df = _replace_pollutant(df, 'pollutant')
         df = _replace_source_category(df, 'Source Category')
         df['SV'] = 'Amount_Annual_Emissions_' + df['Source Category'] +\
                 '_NonBiogenic_' + df['pollutant']
         df = df.drop(columns=['Source Category', 'pollutant'])
+        # Changing the years present as columns into row values.
         df = df.melt(id_vars=['SV'], var_name='year', value_name='observation')
         final_df = pd.concat([final_df, df])
 
@@ -305,7 +332,7 @@ class USAirPollutionEmissionTrends:
         for file_path in self._input_files:
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
-            # Read till -4 inorder to remove the .tsv extension
+            # Read till -5 inorder to remove the .tsv extension
             file_name = file_path.split("/")[-1][:-5]
             function_dict = {
                 "national_tier1_caps": _national_emissions,
