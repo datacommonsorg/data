@@ -56,7 +56,7 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     Returns: df (pd.DataFrame): modified df as output
     """
 
-    df = df.drop(df[(df['SV'].str.contains('Prescribedfire')) |
+    df = df.drop(df[(df['SV'].str.contains('PrescribedFire')) |
                     (df['SV'].str.contains('Wildfire')) |
                     (df['SV'].str.contains('Miscellaneous'))].index)
 
