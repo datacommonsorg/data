@@ -70,9 +70,8 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     #                               SolventUtilization
     #                               StorageAndTransport
     #                               WasteDisposalAndRecycling
- 	# Transportation -              OnRoadVehicles
+    # Transportation -              OnRoadVehicles
     #                               NonRoadEnginesAndVehicles
-
     df['SV'] = (df['SV'].str.replace(
         'FuelCombustionElectricUtility',
         'StationaryFuelCombustion').str.replace(
