@@ -45,7 +45,7 @@ import pandas as pd
 import numpy as np
 from absl import app
 from cols_map import _get_mapper_cols_dict
-from constants import INPUT_DIRS, TEST_DATA_DIR
+from constants import INPUT_DIRS
 
 _CODEDIR = os.path.dirname(__file__)
 
@@ -175,14 +175,12 @@ def _measurement_conditions(sv: str, year: int) -> str:
     Divides the Races before and after 2000, by using different measurement
     methods.
     Args:
-        x (str) : String from DataFrame Values in a Column.
-        x (str) : String from DataFrame Values in a Column.
+        sv (str)  : SV Name
+        int (str) : Year
     Returns:
-        str
+        measurement_method (str) : Returns Measurement Method
     """
     measurement_method = ""
-    #print(sv)
-    #Count_Person_0To4Years_Male_WhiteAloneNotHispanicOrLatino
     if ((not sv.lower().endswith('male')) and
         (not sv.lower().endswith('latino') or
          "WhiteAloneNot" in sv)) and year >= 2000:
@@ -1189,15 +1187,14 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
 def main(_):
     ip_files = []
     for dir_path in INPUT_DIRS:
-        files_dir = os.path.join(_CODEDIR, TEST_DATA_DIR, dir_path)
-        print(files_dir)
+        files_dir = os.path.join(_CODEDIR, INPUT_DIRS, dir_path)
         ip_files += [
             os.path.join(files_dir, file)
             for file in sorted(os.listdir(files_dir))
         ]
     #sys.exit(0)
     data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output_files_test"
+        os.path.abspath(__file__)) + os.sep + "output_files"
 
     # Defining Output Files
     cleaned_csv_path = data_file_path + os.sep + "usa_population_asrh.csv"
