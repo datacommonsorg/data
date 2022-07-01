@@ -15,13 +15,10 @@
 This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
-from ast import Not
+
 import os
 from sre_constants import IN
-import sys
-import re
 from absl import app, flags
-# For import common.replacement_functions
 import pandas as pd
 import numpy as np
 
@@ -48,6 +45,45 @@ _TMCF_TEMPLATE = (
     "observationDate: C:airpollution_emission_trends_tier1->year\n"
     "scalingFactor: 1000\n"
     "value: C:airpollution_emission_trends_tier1->observation\n")
+
+
+def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Aggregates the columns based on SV
+
+    Args: df (pd.DataFrame): df as the input, to aggregate values
+
+    Returns: df (pd.DataFrame): modified df as output
+    """
+
+    df = df.drop(df[(df['SV'].str.contains('Prescribedfire')) |
+                    (df['SV'].str.contains('Wildfire')) |
+                    (df['SV'].str.contains('Miscellaneous'))].index)
+
+    df['SV'] = (df['SV'].str.replace(
+        'FuelCombustionElectricUtility',
+        'StationaryFuelCombustion').str.replace(
+            'FuelCombustionIndustrial', 'StationaryFuelCombustion').str.replace(
+                'FuelCombustionOther', 'StationaryFuelCombustion').str.replace(
+                    'ChemicalAndAlliedProductManufacturing',
+                    'IndustrialAndOtherProcesses').str.replace(
+                        'MetalsProcessing',
+                        'IndustrialAndOtherProcesses').str.replace(
+                            'PetroleumAndRelatedIndustries',
+                            'IndustrialAndOtherProcesses').str.replace(
+                                'OtherIndustrialProcesses',
+                                'IndustrialAndOtherProcesses').str.replace(
+                                    'SolventUtilization',
+                                    'IndustrialAndOtherProcesses').str.replace(
+                                        'StorageAndTransport',
+                                        'IndustrialAndOtherProcesses').str.
+                replace('WasteDisposalAndRecycling',
+                        'IndustrialAndOtherProcesses').str.replace(
+                            'OnRoadVehicles', 'Transportation').str.replace(
+                                'NonRoadEnginesAndVehicles', 'Transportation'))
+    df = df.groupby(['year', 'geo_ID', 'SV']).sum().reset_index()
+    df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
+    return df
 
 
 def _replace_pollutant(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
@@ -111,13 +147,13 @@ def _replace_source_category(df: pd.DataFrame, column_name: str) ->\
             'OFF-HIGHWAY':
                 'NonRoadEnginesAndVehicles',
             'MISCELLANEOUS':
-                'Miscellaneous',
+                'MiscellaneousEmissionSource',
             'Wildfires':
-                'WildFires',
+                'Wildfire',
             'WILDFIRES':
-                'WildFires',
+                'Wildfire',
             'PRESCRIBED FIRES':
-                'PrescribedFires'
+                'PrescribedFire'
         }
     })
     return df
@@ -149,6 +185,10 @@ def _state_emissions(file_path: str) -> pd.DataFrame:
                  value_name='observation')
     df['year'] = (df['year'].str[-2:]).astype(int)
     df['year'] = df['year'] + np.where(df['year'] >= 90, 1900, 2000)
+    # Making copy and using group by to get Aggregated Values.
+    df_agg = _add_missing_columns(df)
+    df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
+    df = pd.concat([df, df_agg])
     return df
 
 
@@ -175,6 +215,7 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
                            skiprows=skiphead,
                            skipfooter=skipfoot,
                            header=0)
+        df = df.replace('NA ', np.NaN)
         df = df.dropna(how='all')
         df = df.drop(
             df[(df['Source Category'] == 'Total') |
@@ -190,7 +231,11 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
         df = df.drop(columns=['Source Category', 'pollutant'])
         df = df.melt(id_vars=['SV'], var_name='year', value_name='observation')
         final_df = pd.concat([final_df, df])
+
     final_df['geo_ID'] = 'country/USA'
+    final_df_agg = _add_missing_columns(final_df)
+    final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
+    final_df = pd.concat([final_df, final_df_agg])
     return final_df
 
 
@@ -273,7 +318,6 @@ class USAirPollutionEmissionTrends:
         final_df = final_df.sort_values(
             by=['geo_ID', 'year', 'SV', 'observation'])
         final_df['observation'].replace('', np.nan, inplace=True)
-        final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         final_df.dropna(subset=['observation'], inplace=True)
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
