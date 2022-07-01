@@ -49,7 +49,8 @@ class TestPreprocess(unittest.TestCase):
 
             test_files = []
             for dir_path in INPUT_DIRS:
-                files_dir = os.path.join(_MODULE_DIR, _TEST_DATA_FOLDER, "datasets", dir_path)
+                files_dir = os.path.join(_MODULE_DIR, _TEST_DATA_FOLDER,
+                                         "datasets", dir_path)
                 test_files += [
                     os.path.join(files_dir, file)
                     for file in sorted(os.listdir(files_dir))
@@ -72,11 +73,13 @@ class TestPreprocess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        expected_mcf_file_path = os.path.join(
-            _TEST_DATA_FOLDER, "expected_files", "usa_population_asrh.mcf")
+        expected_mcf_file_path = os.path.join(_TEST_DATA_FOLDER,
+                                              "expected_files",
+                                              "usa_population_asrh.mcf")
 
-        expected_tmcf_file_path = os.path.join(
-            _TEST_DATA_FOLDER, "expected_files", "usa_population_asrh.tmcf")
+        expected_tmcf_file_path = os.path.join(_TEST_DATA_FOLDER,
+                                               "expected_files",
+                                               "usa_population_asrh.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -96,8 +99,9 @@ class TestPreprocess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(
-            _TEST_DATA_FOLDER, "expected_files", "usa_population_asrh.csv")
+        expected_csv_file_path = os.path.join(_TEST_DATA_FOLDER,
+                                              "expected_files",
+                                              "usa_population_asrh.csv")
 
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
