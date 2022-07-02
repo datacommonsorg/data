@@ -295,8 +295,7 @@ def daily_smokers_cigarettes_education_attainment_level(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_TobaccoSmoking'+\
-        '_'+df['smoking']+'_Daily_Cigarettes'+\
+    df['SV'] = 'Percent_Daily_'+df['smoking']+'_TobaccoSmoking'+'_Cigarettes'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['smoking', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -321,8 +320,8 @@ def daily_smokers_cigarettes_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_TobaccoSmoking'+\
-        '_'+df['smoking']+'_Daily_Cigarettes'+\
+    df['SV'] = 'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
+        '_Cigarettes'+\
         '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
     df.drop(columns=['smoking', 'quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -353,8 +352,8 @@ def daily_smokers_cigarettes_degree_of_urbanisation(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_TobaccoSmoking'+\
-        '_'+df['smoking']+'_Daily_Cigarettes'+\
+    df['SV'] = 'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
+        '_Cigarettes'+\
         '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     df.drop(columns=['smoking', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -381,8 +380,7 @@ def daily_exposure_tobacco_smoke_indoors_education_attainment_level(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_ExposureToTobaccoSmoke'+\
-        '_'+df['frequenc']+\
+    df['SV'] = 'Percent'+'_'+df['frequenc']+'_ExposureToTobaccoSmoke'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['frequenc', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -414,8 +412,7 @@ def daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_ExposureToTobaccoSmoke'+\
-        '_'+df['frequenc']+\
+    df['SV'] = 'Percent'+'_'+df['frequenc']+'_ExposureToTobaccoSmoke'+\
         '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
     df.drop(columns=['frequenc', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -447,8 +444,8 @@ def duration_daily_tobacco_smoking_education_attainment_level(
     df = _replace_sex(df)
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_TobaccoSmoking_'+\
-        df['duration']+'_Daily_TobaccoProducts'+\
+    df['SV'] = 'Percent_Daily_TobaccoSmoking_'+\
+        df['duration']+'_TobaccoProducts'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['duration', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -507,8 +504,8 @@ def daily_smokers_cigarettes_history_education_attainment_level(
     df = _replace_isced11(df)
     df = _replace_sex(df)
     df.drop(columns=['age'], inplace=True)
-    df['SV'] = 'Percent_TobaccoSmoking'+\
-        '_Daily_Cigarettes'+\
+    df['SV'] = 'Percent_Daily_TobaccoSmoking'+\
+        '_Cigarettes'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -535,8 +532,8 @@ def daily_smokers_cigarettes_history_income_quintile(
     df = _replace_quant_inc(df)
     df = _replace_sex(df)
     df.drop(columns=['age'], inplace=True)
-    df['SV'] = 'Percent_TobaccoSmoking'+\
-        '_Daily_Cigarettes'+\
+    df['SV'] = 'Percent_Daily_TobaccoSmoking'+\
+        '_Cigarettes'+\
         '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
     df.drop(columns=['quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -564,8 +561,8 @@ def dsmokers_number_of_cigarettes_history_education_attainment_level(
     df = _replace_smoking(df)
     df = _replace_sex(df)
     df.drop(columns=['age'], inplace=True)
-    df['SV'] = 'Percent_TobaccoSmoking'+\
-        '_'+df['smoking']+'_Daily_Cigarettes'+\
+    df['SV'] = 'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
+        '_Cigarettes'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']
     df.drop(columns=['smoking', 'isced11', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -709,9 +706,9 @@ class EuroStatTobaccoConsumption:
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv14=sv_name,
                                                        pv2=denominator,
-                                                       pv3=activity,
+                                                       pv3=frequenc,
                                                        pv4=gender,
-                                                       pv5=frequenc,
+                                                       pv5=activity,
                                                        pv6=education,
                                                        pv7=incomequin,
                                                        pv8=residence,
