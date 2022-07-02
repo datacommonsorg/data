@@ -1,0 +1,11 @@
+Year,geo_ID,Count_Person_WhiteAlone,Count_Person_BlackOrAfricanAmericanAlone,Count_Person_AmericanIndianAndAlaskaNativeAlone,Count_Person_AsianAlone,Count_Person_NativeHawaiianAndOtherPacificIslanderAlone,Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces,Count_Person_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces,Count_Person_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces,Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces,Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces,Count_Person_AsianOrPacificIslander,Count_Person_TwoOrMoreRaces,Count_Person_NonWhite
+2010,country/USA,242235328.0,40355385.0,3752274.0,15261408.0,678046.0,,,,,,,,
+2011,country/USA,243292145.0,40783547.0,3801451.0,15721072.0,692216.0,,,,,,,,
+2012,country/USA,244354778.0,41225339.0,3853222.0,16195092.0,706660.0,,,,,,,,
+2013,country/USA,245308889.0,41651863.0,3902766.0,16679752.0,721575.0,,,,,,,,
+2014,country/USA,246350641.0,42090120.0,3953354.0,17203569.0,735273.0,,,,,,,,
+2015,country/USA,247382690.0,42532491.0,4004358.0,17752744.0,750159.0,,,,,,,,
+2016,country/USA,248413058.0,42970183.0,4054740.0,18279949.0,765814.0,,,,,,,,
+2017,country/USA,249270773.0,43374142.0,4101605.0,18764237.0,780316.0,,,,,,,,
+2018,country/USA,249961025.0,43732024.0,4145811.0,19134105.0,793787.0,,,,,,,,
+2019,country/USA,250522190.0,44075086.0,4188092.0,19504862.0,806937.0,,,,,,,,

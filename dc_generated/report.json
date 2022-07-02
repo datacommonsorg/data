@@ -1,0 +1,506 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "20",
+        "NumPVSuccesses": "990",
+        "Existence_NumChecks": "1133",
+        "NumNodeSuccesses": "110",
+        "Existence_NumDcCalls": "2"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StrSplit_EmptyToken_value": "150",
+        "Sanity_MissingOrEmpty_value": "150"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E9'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E9', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AsianOrPacificIslander', property: 'value', node: 'E:USA_Population_Count_by_Race->E10'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E10', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_NonWhite', property: 'value', node: 'E:USA_Population_Count_by_Race->E12'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E12', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E9'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E9', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AsianOrPacificIslander', property: 'value', node: 'E:USA_Population_Count_by_Race->E10'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E10', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_NonWhite', property: 'value', node: 'E:USA_Population_Count_by_Race->E12'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E12', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E9'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E9', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AsianOrPacificIslander', property: 'value', node: 'E:USA_Population_Count_by_Race->E10'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E10', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_NonWhite', property: 'value', node: 'E:USA_Population_Count_by_Race->E12'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E12', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E9'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E9', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AsianOrPacificIslander', property: 'value', node: 'E:USA_Population_Count_by_Race->E10'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E10', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_NonWhite', property: 'value', node: 'E:USA_Population_Count_by_Race->E12'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E12', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces', property: 'value', node: 'E:USA_Population_Count_by_Race->E9'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "USA_Population_Count_by_Race_National_2000.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:USA_Population_Count_by_Race->E9', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

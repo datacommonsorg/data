@@ -19,9 +19,11 @@
 """
 import os
 import re
-from sys import path
+import sys
 # For import util.alpha2_to_dcid
-path.insert(1, '../../../../')
+_COMMON_PATH = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '../../../../'))
+sys.path.insert(1, _COMMON_PATH)
 
 import pandas as pd
 from absl import app
@@ -85,7 +87,7 @@ def _clean_xls_file(df: pd.DataFrame, file: str) -> pd.DataFrame:
     df['Year'] = df['level_0'].str[-4:]
     df = df.drop(['level_0', 0, 1, 2, 3, 4, 5, 6], axis=1)
     df.columns = df.columns.str.replace('NAME', 'Geographic Area')
-    print(df.columns)
+    # print(df.columns)
     return df
 
 
@@ -160,7 +162,7 @@ def _clean_county_70_xls_file(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _clean_county_80_xls_file(df: pd.DataFrame) -> pd.DataFrame:
+def _clean_county_80_xls_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a xls file format.
     Also, Performs transformations on the data.
@@ -203,17 +205,17 @@ def _clean_county_80_xls_file(df: pd.DataFrame) -> pd.DataFrame:
     df = df.groupby(['Year','geo_ID']).sum().\
         reset_index()
     df.drop(columns=['Total'], inplace=True)
-    df.columns = df.columns.str.replace('White Alone',
-                                        'Count_Person_WhiteAlone')
-    df.columns = df.columns.str.replace('Black or African American Alone',\
-            'Count_Person_BlackOrAfricanAmericanAlone')
+    # df.columns = df.columns.str.replace('White Alone',
+    #                                     'Count_Person_WhiteAlone')
+    # df.columns = df.columns.str.replace('Black or African American Alone',\
+    #         'Count_Person_BlackOrAfricanAmericanAlone')
     df_temp = pd.DataFrame()
     df_temp = pd.concat([df, df_temp])
     df_temp['geo_ID'] = "country/USA"
     df_temp = df_temp.groupby(['Year','geo_ID']).sum().\
         reset_index()
-    df = pd.concat([df, df_temp])
-    df.to_csv("output/USA_Population_Count_by_Race_National_State_1980.csv")
+    final_df = pd.concat([final_df,df, df_temp])
+    final_df = final_df.drop_duplicates()
     return final_df
 
 
@@ -410,7 +412,7 @@ def _clean_county_2010_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     # drop unwanted columns
     df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
         inplace=True)
-    print(df)
+    # print(df)
     df = df.loc[:, :'NAC_FEMALE']
     df['Year'] = df['YEAR']
     df.drop(columns=['YEAR'], inplace=True)
@@ -695,7 +697,7 @@ class CensusUSAPopulationByRace:
         """
         df = None
         self.file_name = os.path.basename(file)
-        print(file)
+        # print(file)
         if ".xls" in file:
             if "pe-19" in file:
                 df = pd.read_excel(file)
@@ -708,7 +710,7 @@ class CensusUSAPopulationByRace:
                 df = _clean_county_70_xls_file(df)
             elif "pe-02" in file:
                 df = pd.read_excel(file)
-                df = _clean_county_80_xls_file(df)
+                df = _clean_county_80_xls_file(df,self.cleaned_csv_file_path)
             else:
                 df = pd.read_excel(file)
                 df = _clean_xls_file(df, file)
@@ -754,7 +756,7 @@ class CensusUSAPopulationByRace:
             df (DataFrame) : DataFrame.
         """
         # Finding the Dir Path
-        file_dir = os.path.dirname(self.cleaned_csv_file_path)
+        file_dir = self.cleaned_csv_file_path
         if not os.path.exists(file_dir):
             os.mkdir(file_dir)
         df = _transform_df(df)
@@ -802,7 +804,12 @@ class CensusUSAPopulationByRace:
             "InCombinationWithOneOrMoreOtherRaces",\
             "Count_Person_AsianOrPacificIslander",\
             "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"]]
-        self.df.to_csv(self.cleaned_csv_file_path, index=False)
+        df_before_2000 = self.df[self.df["Year"]<2000]
+        df_after_2000 = self.df[(self.df["Year"]>=2000)&(self.df["geo_ID"]!="country/USA")]
+        df_national_2000 = self.df[(self.df["Year"]>=2000)&(self.df["geo_ID"]=="country/USA")]
+        df_before_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_before_2000.csv"), index=False)
+        df_after_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_after_2000.csv"), index=False)
+        df_national_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_2000.csv"), index=False)
 
     def process(self):
         """
@@ -811,17 +818,32 @@ class CensusUSAPopulationByRace:
         cleaned CSV file, MCF file and TMCF file.
         """
         for file in self.input_files:
+            print(file)
             df = self._load_data(file)
             self._transform_data(df)
-        name = ""
-        self._generate_mcf(self.df.columns, name)
-        self._generate_tmcf(self.df.columns, name)
-        name = "USA_Population_Count_by_Race_National_State_1980"
-        self.df1=pd.read_csv\
-            ("output/USA_Population_Count_by_Race_National_State_1980.csv")
-        self.df1.drop(columns=["Unnamed: 0"], inplace=True)
-        self._generate_mcf(self.df1.columns, name)
-        self._generate_tmcf(self.df1.columns, name)
+        name = "USA_Population_Count_by_Race_before_2000"
+        generator_df=pd.read_csv\
+            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_before_2000.csv"))
+        self._generate_mcf(generator_df.columns, name)
+        self._generate_tmcf(generator_df.columns, name)
+
+        name = "USA_Population_Count_by_Race_after_2000"
+        generator_df=pd.read_csv\
+            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_after_2000.csv"))
+        self._generate_mcf(generator_df.columns, name)
+        self._generate_tmcf(generator_df.columns, name)
+
+        name = "USA_Population_Count_by_Race_National_2000"
+        generator_df=pd.read_csv\
+            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_2000.csv"))
+        self._generate_mcf(generator_df.columns, name)
+        self._generate_tmcf(generator_df.columns, name)
+
+        # name = "USA_Population_Count_by_Race_National_State_1980"
+        # generator_df=pd.read_csv\
+        #     (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_State_1980.csv"))
+        # self._generate_mcf(generator_df.columns, name)
+        # self._generate_tmcf(generator_df.columns, name)
 
     # Generating MCF files
     def _generate_mcf(self, df_cols: list, name: str) -> None:
@@ -855,11 +877,8 @@ class CensusUSAPopulationByRace:
 
         # Writing Genereated MCF to local path.
         # suffix = _mcf_path(flag)
-        if name == "USA_Population_Count_by_Race_National_State_1980":
-            suffix = "_State1980.mcf"
-        else:
-            suffix = ".mcf"
-        with open(self.mcf_file_path+suffix,\
+        suffix = name + ".mcf"
+        with open(os.path.join(self.mcf_file_path,suffix),\
             'w+', encoding='utf-8') as f_out:
             f_out.write(mcf.rstrip('\n'))
 
@@ -895,21 +914,25 @@ class CensusUSAPopulationByRace:
             ]:
                 continue
             if name == "USA_Population_Count_by_Race_National_State_1980":
-                measure = "dcAggregate/CensusPEPSurvey"
-            else:
-                measure = "CensusPEPSurvey"
+                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
+            # Giving a different measurementMethod for the statistical Variables which are being.
+            elif name == "USA_Population_Count_by_Race_before_2000":
+                if col in ["Count_Person_WhiteAlone","Count_Person_BlackOrAfricanAmericanAlone" ]:
+                    measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
+                else:
+                    measure = "CensusPEPSurvey_RaceUpto1999"
+            elif name == "USA_Population_Count_by_Race_after_2000":
+                measure = "CensusPEPSurvey_Race2000Onwards"
+            elif name == "USA_Population_Count_by_Race_National_2000": 
+                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards"
             tmcf = tmcf + tmcf_template.format(i, col, measure, col) + "\n"
             i = i + 1
 
         # Writing Genereated TMCF to local path.
-        if name == "USA_Population_Count_by_Race_National_State_1980":
-            with open(self.tmcf_file_path+"_State1980.tmcf",\
-                 'w+', encoding='utf-8') as f_out:
-                f_out.write(tmcf.rstrip('\n'))
-        else:
-            with open(self.tmcf_file_path+".tmcf",\
-                 'w+', encoding='utf-8') as f_out:
-                f_out.write(tmcf.rstrip('\n'))
+        suffix = name + ".tmcf"
+        with open(os.path.join(self.tmcf_file_path,suffix),\
+            'w+', encoding='utf-8') as f_out:
+            f_out.write(tmcf.rstrip('\n'))
 
 
 # The outputs are loaded into
@@ -920,14 +943,10 @@ def main(_):
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
     # Defining Output file names
-    data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output"
-    cleaned_csv_path = data_file_path + os.sep +\
-        "USA_Population_Count_by_Race.csv"
-    mcf_path = data_file_path + os.sep + "USA_Population_Count_by_Race"
-    tmcf_path = data_file_path + os.sep + \
-        "USA_Population_Count_by_Race"
-    loader = CensusUSAPopulationByRace(ip_files, cleaned_csv_path, mcf_path,
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)) , "output")
+    mcf_path = data_file_path 
+    tmcf_path = data_file_path 
+    loader = CensusUSAPopulationByRace(ip_files, data_file_path, mcf_path,
                                        tmcf_path)
     loader.process()
 
