@@ -40,7 +40,6 @@ import sys
 import json
 import pandas as pd
 from absl import app
-from absl import flags
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _MODULE_DIR)
@@ -49,6 +48,10 @@ sys.path.insert(1, _MODULE_DIR)
 from clean import (clean_data_df, clean_1970_1989_county_txt,
                    process_states_1900_1969, process_states_1970_1979,
                    process_states_1980_1989, process_states_1990_1999)
+
+from constants import (INPUT_DIRS, OUTPUT_DIR, SCALING_FACTOR_STATE_1900_1960,
+                       USA, USA_GEO_ID, DISTRICT_OF_COLUMBIA_STATE_CODE,
+                       DISTRICT_OF_COLUMBIA_COUNTY_CODE, INPUT_DIR)
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2todcid
@@ -60,17 +63,6 @@ import util.county_to_dcid as countytodcid
 USSTATE_MAP = alpha2todcid.USSTATE_MAP
 COUNTY_MAP = countytodcid.COUNTY_MAP
 _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
-_SCALING_FACTOR_STATE_1900_1960 = 1000
-_USA = "United States"
-_USA_GEO_ID = "country/USA"
-_DISTRICT_OF_COLUMBIA_STATE_CODE = 11
-_DISTRICT_OF_COLUMBIA_COUNTY_CODE = 1
-
-FLAGS = flags.FLAGS
-_DEFAULT_INPUT_PATH = _MODULE_DIR + os.sep + "input_files"
-
-flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
-                    "Import Data File's List")
 
 _STATE_CONFIG_PATH = os.path.join(_MODULE_DIR, "states_config.json")
 with open(_STATE_CONFIG_PATH, encoding="utf-8") as states_file:
@@ -319,7 +311,6 @@ def _process_nationals_1980_1989(ip_file: str) -> pd.DataFrame:
                 usa_cleaned_row = [
                     int(val) for val in usa_rows.split(" ") if val.isnumeric()
                 ]
-        print(usa_cleaned_row)
         year = [
             "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987",
             "1988", "1989"
@@ -371,7 +362,7 @@ def _process_nationals_2010_2020(ip_file: str, op_file: str) -> None:
             for line in ipfile.readlines():
                 if line.find("POPESTIMATE2010") != -1:
                     header = line.strip('\n').split(",")
-                elif line.find(_USA) != -1:
+                elif line.find(USA) != -1:
                     values = line.strip('\n').split(",")
         for k, v in dict(zip(header, values)).items():
             if k.find('POPESTIMATE2') != -1:
@@ -398,12 +389,12 @@ def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
     ]
     df_cols = ["Region", "042000"] + pop_cols + ["042010", "072010"]
     data_df.columns = df_cols
-    data_df = data_df[data_df["Region"] == _USA]
+    data_df = data_df[data_df["Region"] == USA]
     for col in pop_cols:
         data_df[col] = data_df[col].str.replace(",", "")
 
     data_df = _unpivot_data_df(data_df, ["Region"], pop_cols)
-    data_df["Location"] = _USA_GEO_ID
+    data_df["Location"] = USA_GEO_ID
     return data_df
 
 
@@ -441,9 +432,9 @@ def _process_nationals_2021(file_path: str) -> pd.DataFrame:
     data_df = _load_data_df(path=file_path, file_format="xlsx", header=3)
     df_cols = ["Location", "042020", "072020", "2021"]
     data_df.columns = df_cols
-    data_df = data_df[data_df["Location"] == _USA]
+    data_df = data_df[data_df["Location"] == USA]
     data_df = _unpivot_data_df(data_df, ["Location"], ["2021"])
-    data_df["Location"] = _USA_GEO_ID
+    data_df["Location"] = USA_GEO_ID
     return data_df
 
 
@@ -562,8 +553,8 @@ def _process_county_coest2020(file_path: str) -> pd.DataFrame:
     data_df = data_df[cols]
     # Modifying actual city name for State: District of Columbia
     # and City Name: District of Columbia. This is havind duplicate
-    idx = data_df[(data_df["STATE"] == _DISTRICT_OF_COLUMBIA_STATE_CODE) &
-                  (data_df["COUNTY"] == _DISTRICT_OF_COLUMBIA_COUNTY_CODE)]\
+    idx = data_df[(data_df["STATE"] == DISTRICT_OF_COLUMBIA_STATE_CODE) &
+                  (data_df["COUNTY"] == DISTRICT_OF_COLUMBIA_COUNTY_CODE)]\
                       .index.values[0]
     data_df.loc[idx, "CTYNAME"] = "Washington County"
 
@@ -815,7 +806,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
                 "st4049ts.txt", "st5060ts.txt", "st6070ts.txt"
         ]:
             data_df = process_states_1900_1969(_STATE_CONFIG, file, file_name,
-                                               _SCALING_FACTOR_STATE_1900_1960)
+                                               SCALING_FACTOR_STATE_1900_1960)
         elif "st7080ts" in file:
             data_df = process_states_1970_1979(file)
         elif "st8090ts" in file:
@@ -848,11 +839,15 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
 
 
 def main(_):
-    input_path = FLAGS.input_path
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
+    ip_files = []
+    for dir_path in INPUT_DIRS:
+        files_dir = os.path.join(_MODULE_DIR, INPUT_DIR, dir_path)
+        ip_files += [
+            os.path.join(files_dir, file)
+            for file in sorted(os.listdir(files_dir))
+        ]
     # Defining Output file names
-    data_file_path = _MODULE_DIR + os.sep + "output_files"
+    data_file_path = _MODULE_DIR + os.sep + OUTPUT_DIR
     cleaned_csv_path = data_file_path + os.sep + "usa_annual_population.csv"
     mcf_path = data_file_path + os.sep + "usa_annual_population.mcf"
     tmcf_path = data_file_path + os.sep + "usa_annual_population.tmcf"
