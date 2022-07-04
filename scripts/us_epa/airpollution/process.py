@@ -331,7 +331,7 @@ class USAirPollutionEmissionTrends:
         for file_path in self._input_files:
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
-            # Read till -5 inorder to remove the .tsv extension
+            # Read till -5 inorder to remove the .xlsx extension
             file_name = file_path.split("/")[-1][:-5]
             function_dict = {
                 "national_tier1_caps": _national_emissions,
