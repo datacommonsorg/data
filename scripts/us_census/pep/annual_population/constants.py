@@ -24,12 +24,12 @@ OUTPUT_DIR = 'output_files'
 TEST_DATA_DIR = "test_data"
 
 INPUT_DIRS = [
-    "1970_1979/county/","1980_1989/county/","1990_1999/county/",
-    "2000_2009/county/","2010_2020/county/","2021/county/",
-    "1900_1989/state/","1990_1999/state/","2000_2009/state/",
-    "2010_2020/state/","2021/state/","1900_1979/national/",
-    "1980_1989/national/","1990_1999/national/","2000_2009/national/",
-    "2010_2020/national/","2021/national/"
+    "1970_1979/county/", "1980_1989/county/", "1990_1999/county/",
+    "2000_2009/county/", "2010_2020/county/", "2021/county/",
+    "1900_1989/state/", "1990_1999/state/", "2000_2009/state/",
+    "2010_2020/state/", "2021/state/", "1900_1979/national/",
+    "1980_1989/national/", "1990_1999/national/", "2000_2009/national/",
+    "2010_2020/national/", "2021/national/"
 ]
 
 SCALING_FACTOR_STATE_1900_1960 = 1000
