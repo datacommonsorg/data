@@ -5,4 +5,5 @@ measurementMethod: C:airpollution_emission_trends_tier1->Measurement_Method
 observationAbout: C:airpollution_emission_trends_tier1->geo_ID
 observationDate: C:airpollution_emission_trends_tier1->year
 scalingFactor: 1000
+unit: Tons
 value: C:airpollution_emission_trends_tier1->observation
