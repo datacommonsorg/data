@@ -18,12 +18,16 @@ Script to automate the testing for USA Population preprocess script.
 import os
 import unittest
 import tempfile
-# pylint: disable=import-error
-from preprocess import process
-# pylint: enable=import-error
+import sys
 # _MODULE_DIR is the path to where this test is running from.
 _MODULE_DIR = os.path.dirname(__file__)
 _TEST_DATA_FOLDER = os.path.join(_MODULE_DIR, "test_data")
+sys.path.insert(0, _MODULE_DIR)
+# pylint: disable=import-error
+# pylint: disable=wrong-import-position
+from preprocess import process
+# pylint: enable=import-error
+# pylint: disable=wrong-import-position
 
 
 class TestPreprocess(unittest.TestCase):
@@ -36,15 +40,16 @@ class TestPreprocess(unittest.TestCase):
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
-        ip_data_path = [os.path.join(_TEST_DATA_FOLDER, "test_input_data.csv")]
+        ip_dir = os.path.join(_TEST_DATA_FOLDER, "datasets")
 
+        ip_files = [os.path.join(ip_dir, file) for file in os.listdir(ip_dir)]
         with tempfile.TemporaryDirectory() as tmp_dir:
             cleaned_csv_file_path = os.path.join(tmp_dir,
                                                  "test_output_data.csv")
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            process(ip_data_path, cleaned_csv_file_path, mcf_file_path,
+            process(ip_files, cleaned_csv_file_path, mcf_file_path,
                     tmcf_file_path)
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
@@ -62,10 +67,10 @@ class TestPreprocess(unittest.TestCase):
         expected results.
         """
         expected_mcf_file_path = os.path.join(
-            _TEST_DATA_FOLDER, "excepted_usa_annual_population.mcf")
+            _TEST_DATA_FOLDER, "expected_usa_annual_population.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            _TEST_DATA_FOLDER, "excepted_usa_annual_population.tmcf")
+            _TEST_DATA_FOLDER, "expected_usa_annual_population.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -86,7 +91,7 @@ class TestPreprocess(unittest.TestCase):
         expected CSV result.
         """
         expected_csv_file_path = os.path.join(
-            _TEST_DATA_FOLDER, "expected_usa_population_count.csv")
+            _TEST_DATA_FOLDER, "expected_usa_annual_population.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,

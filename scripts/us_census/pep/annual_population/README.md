@@ -1,7 +1,7 @@
 # US Census PEP: National Population Count
 
 ## About the Dataset
-This dataset has Annual Population Estimates from the year 1900 to 2020 for different geographic level such as National, State, County, and Cities.
+This dataset has Annual Population Estimates from the year 1900 to 2021 for different geographic level such as National, State, County, and Cities.
 
 The population is categorized by [Count_Person](https://datacommons.org/browser/Count_Person) StatVar in Datacommons.org
 
@@ -25,8 +25,8 @@ Cleaned data will be inside [Output/USA_Annual_Population.csv] as a CSV file wit
 
 
 #### MCFs and Template MCFs
-- [Output/USA_Annual_Population.mcf]
-- [Output/USA_Annual_Population.tmcf]
+- [output_files/USA_Annual_Population.mcf]
+- [output_files/USA_Annual_Population.tmcf]
 
 ### Running Tests
 
