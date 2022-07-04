@@ -44,7 +44,7 @@ _TMCF_TEMPLATE = (
     "observationAbout: C:airpollution_emission_trends_tier1->geo_ID\n"
     "observationDate: C:airpollution_emission_trends_tier1->year\n"
     "scalingFactor: 1000\n"
-    "unit: Tons\n"
+    "unit: Ton\n"
     "value: C:airpollution_emission_trends_tier1->observation\n")
 
 

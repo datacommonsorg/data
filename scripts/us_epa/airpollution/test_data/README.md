@@ -48,7 +48,7 @@ Run the test cases
 
 ### Import Procedure
 
-The below script will download the data and extract it.
+The below script will download the data.
 
 `/bin/python3 scripts/us_epa/airpollution/download.py`
 
