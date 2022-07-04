@@ -214,7 +214,7 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _download(download_path: str, file_urls: list) -> None:
+def download(download_path: str, file_urls: list) -> None:
     """
     This method iterates on each url and calls the above defined
     functions to download and clean the data.
@@ -236,7 +236,7 @@ def main(_):
     file_urls = _FLAGS.us_census_pep_monthly_pop_estimate_url
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                         "input_data")
-    _download(path, file_urls)
+    download(path, file_urls)
 
 
 if __name__ == "__main__":

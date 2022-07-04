@@ -18,7 +18,7 @@ Script to automate the testing for USA Population preprocess script.
 import os
 import unittest
 from os import path
-from download import _download
+from download import download
 import pandas as pd
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -38,7 +38,7 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like XLSX
         """
         ip_data_path = [os.path.join(_TEST_DATA_FOLDER, "test_census_data.csv")]
-        _download(_OP_DATA_FOLDER, ip_data_path)
+        download(_OP_DATA_FOLDER, ip_data_path)
         expected_xlsx_file_path = os.path.join(
             _TEST_DATA_FOLDER, "download_expected_USA_Population_Count.xlsx")
 

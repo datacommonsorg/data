@@ -245,7 +245,7 @@ class CensusUSACountryPopulation:
                 'int') - df['Resident Population'].astype('int')
         computed_cols = ["Date", "Count_Person_InUSArmedForcesOverseas"]
 
-        # Selecting Coumputed and Final Columns from the DF.
+        # Selecting Computed and Final Columns from the DF.
         df = df[computed_cols + final_cols]
 
         # Renaming DF Headers with ref to SV's Naming Standards.
