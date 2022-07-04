@@ -5,7 +5,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -17,7 +17,7 @@ measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -29,7 +29,7 @@ measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducat
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -42,7 +42,7 @@ educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSeco
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -55,7 +55,7 @@ educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSeco
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -67,7 +67,7 @@ measurementDenominator: dcs:Count_Person_Male
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -79,7 +79,7 @@ measurementDenominator: dcs:Count_Person_Rural
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -92,7 +92,7 @@ placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -105,7 +105,7 @@ placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -117,7 +117,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -130,7 +130,7 @@ placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -143,7 +143,7 @@ placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -155,7 +155,7 @@ measurementDenominator: dcs:Count_Person_TertiaryEducation
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -168,7 +168,7 @@ educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -181,7 +181,7 @@ educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -193,7 +193,7 @@ measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryN
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -206,7 +206,7 @@ educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEduc
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -219,7 +219,7 @@ educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEduc
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -231,7 +231,7 @@ measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -244,7 +244,7 @@ placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -257,7 +257,7 @@ placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:NonRelatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -267,7 +267,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
 socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -278,7 +278,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -289,7 +289,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -301,7 +301,7 @@ measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducat
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -313,7 +313,7 @@ measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducat
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -324,7 +324,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -335,7 +335,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -347,7 +347,7 @@ measurementDenominator: dcs:Count_Person_Rural_Female
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -359,7 +359,7 @@ measurementDenominator: dcs:Count_Person_Rural_Male
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -370,7 +370,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -382,7 +382,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban_Female
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -394,7 +394,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban_Male
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -405,7 +405,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_TertiaryEducation
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -417,7 +417,7 @@ measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -429,7 +429,7 @@ measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -440,7 +440,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -452,7 +452,7 @@ measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryN
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -464,7 +464,7 @@ measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryN
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -475,7 +475,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:NotProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -487,7 +487,7 @@ measurementDenominator: dcs:Count_Person_Urban_Female
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -499,7 +499,7 @@ measurementDenominator: dcs:Count_Person_Urban_Male
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:NotProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -509,7 +509,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
 socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -520,7 +520,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -531,7 +531,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -543,7 +543,7 @@ measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducat
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -555,7 +555,7 @@ measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducat
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -566,7 +566,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Male
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -577,7 +577,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Rural
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -589,7 +589,7 @@ measurementDenominator: dcs:Count_Person_Rural_Female
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -601,7 +601,7 @@ measurementDenominator: dcs:Count_Person_Rural_Male
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -612,7 +612,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -624,7 +624,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban_Female
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -636,7 +636,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban_Male
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -647,7 +647,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_TertiaryEducation
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -659,7 +659,7 @@ measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -671,7 +671,7 @@ measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -682,7 +682,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -694,7 +694,7 @@ measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryN
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -706,7 +706,7 @@ measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryN
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -717,7 +717,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -729,7 +729,7 @@ measurementDenominator: dcs:Count_Person_Urban_Female
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -741,7 +741,7 @@ measurementDenominator: dcs:Count_Person_Urban_Male
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -752,7 +752,7 @@ populationType: dcs:Person
 measurementDenominator: dcs:Count_Person
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -764,7 +764,7 @@ measurementDenominator: dcs:Count_Person_Female
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -776,7 +776,7 @@ measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducat
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -789,7 +789,7 @@ educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSeco
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -802,7 +802,7 @@ educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSeco
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -814,7 +814,7 @@ measurementDenominator: dcs:Count_Person_Male
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -826,7 +826,7 @@ measurementDenominator: dcs:Count_Person_Rural
 placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -839,7 +839,7 @@ placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -852,7 +852,7 @@ placeOfResidenceClassification: dcs:Rural
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -864,7 +864,7 @@ measurementDenominator: dcs:Count_Person_SemiUrban
 placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -877,7 +877,7 @@ placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -890,7 +890,7 @@ placeOfResidenceClassification: dcs:SemiUrban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -902,7 +902,7 @@ measurementDenominator: dcs:Count_Person_TertiaryEducation
 educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -915,7 +915,7 @@ educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -928,7 +928,7 @@ educationalAttainment: dcs:TertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -940,7 +940,7 @@ measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryN
 educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -953,7 +953,7 @@ educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEduc
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -966,7 +966,7 @@ educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEduc
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -978,7 +978,7 @@ measurementDenominator: dcs:Count_Person_Urban
 placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -991,7 +991,7 @@ placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Female
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -1004,7 +1004,7 @@ placeOfResidenceClassification: dcs:Urban
 socialSupportType: dcs:ProvidingInformalCare
 gender: dcs:Male
 socialSupportBeneficiaryType: dcs:Relatives
-activityFrequency: "AtLeastOnceAWeek"
+activityFrequency: dcs:AtLeastOnceAWeek
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
