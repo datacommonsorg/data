@@ -140,6 +140,7 @@ def _process_national_2000_2010(url):
     df = df.drop(columns=['index', 'BothSexes'])
 
     df.drop(df[df['Year'] == "2010"].index, inplace=True)
+
     return df
 
 

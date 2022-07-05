@@ -17,6 +17,7 @@ for county 1990-2000 and Count_Person_Male
 and Count_person_Female are aggregated for this file.
 """
 
+from typing import final
 import pandas as pd
 
 
@@ -32,7 +33,7 @@ def _process_county_1990_2000(url):
     """
     final_df = pd.DataFrame()
     # 1 to 57 as state goes till 56
-    for i in range(1, 57):
+    for i in range(1,57):
 
         # states not available for these values
         if i not in [3, 7, 14, 43, 52]:
@@ -77,24 +78,21 @@ def _process_county_1990_2000(url):
                 ,15,16,17],inplace=True)
 
             # changing the column values as per metadata
-            df = df.replace({
-                'RACE': {
-                    1: 'Count_Person_Male_WhiteAlone',
-                    2: 'Count_Person_Female_WhiteAlone',
-                    3: 'Count_Person_Male_WhiteAlone',
-                    4: 'Count_Person_Female_WhiteAlone',
-                    5: 'Count_Person_Male_BlackOrAfricanAmericanAlone',
-                    6: 'Count_Person_Female_BlackOrAfricanAmericanAlone',
-                    7: 'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
-                    8: 'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
-                    9: 'Count_Person_Male_AsianOrPacificIslander',
-                    10: 'Count_Person_Female_AsianOrPacificIslander'
-                }
-            })
+            df=df.replace({'Race':{1: 'Count_Person_Male_WhiteAlone',
+            2: 'Count_Person_Female_WhiteAlone',
+            3: 'Count_Person_Male_WhiteAlone',
+            4: 'Count_Person_Female_WhiteAlone',
+            5:'Count_Person_Male_BlackOrAfricanAmericanAlone',
+            6:'Count_Person_Female_BlackOrAfricanAmericanAlone',
+            7:'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
+            8:'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
+            9:'Count_Person_Male_AsianOrPacificIslander',
+            10:'Count_Person_Female_AsianOrPacificIslander'}})
 
             # extracting year
             df['Year'] = df['Year'].astype(str) + "-" + df['geo_ID'].astype(str)
             df.drop(columns=['geo_ID'], inplace=True)
+            
 
             # it groups the df as per columns provided
             # performs the provided functions on the data
@@ -104,6 +102,7 @@ def _process_county_1990_2000(url):
             # splitting column into geoId and Year
             df['geo_ID'] = df['Year'].str.split('-', expand=True)[1]
             df['Year'] = df['Year'].str.split('-', expand=True)[0]
+            
 
             # dropping unwanted column
             df.drop(columns=['level_0'], inplace=True)
@@ -113,19 +112,7 @@ def _process_county_1990_2000(url):
 
     # creating proper geoId
     final_df['geo_ID'] = 'geoId/' + final_df['geo_ID'].astype("str")
-
-    # providing proper name to cloumns
-    final_df.columns = [
-        'Year', 'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
-        'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
-        'Count_Person_Female_AsianOrPacificIslander',
-        'Count_Person_Male_AsianOrPacificIslander',
-        'Count_Person_Female_BlackOrAfricanAmericanAlone',
-        'Count_Person_Male_BlackOrAfricanAmericanAlone',
-        'Count_Person_Female_WhiteAlone', 'Count_Person_Male_WhiteAlone',
-        'geo_ID'
-    ]
-
+    
     # aggregating required columns to get Count_Person_Male
     final_df["Count_Person_Male"] = final_df.loc[:,['Count_Person_Male_'+\
             'WhiteAlone',
@@ -139,6 +126,11 @@ def _process_county_1990_2000(url):
         'Count_Person_Female_BlackOrAfricanAmericanAlone',
         'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
         'Count_Person_Female_AsianOrPacificIslander']].sum(axis=1)
+    final_df = final_df.fillna(-1)
+    float_col = final_df.select_dtypes(include=['float64'])
+    for col in float_col.columns.values:
+        final_df[col] = final_df[col].astype('int64')
+        final_df[col] = final_df[col].astype("str").str.replace("-1","")
 
     return final_df
 

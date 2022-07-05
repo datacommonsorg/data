@@ -116,6 +116,7 @@ def _process_national_1900_1970(ip_files):
         final_df2[col] = final_df2[col].str.replace(",", "")
         if col not in ["Year", "geo_ID"]:
             final_df2[col] = final_df2[col].astype("int")
+  
 
     return final_df, final_df2
 

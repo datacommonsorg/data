@@ -20,7 +20,6 @@ and generate final csv, MCF, TMCF file
 
 import pandas as pd
 
-
 def create_single_csv(output_files_names):
     """
     Function generate 3 csv
@@ -38,14 +37,20 @@ def create_single_csv(output_files_names):
 
     # list of output files which are having aggregation Count_Person_Male
     # and Count_Person_Female
-    aggregate_output_files = output_files_names[2]
+    aggregate_output_files_before = output_files_names[2]
+
+    # list of output files which are having aggregation Count_Person_Male
+    # and Count_Person_Female
+    aggregate_output_files_after = output_files_names[3]
 
     # aggregated State values 2010-2020 from County 2010-2020 data
-    geo_aggregate_output_files = output_files_names[3]
+    geo_aggregate_output_files = output_files_names[4]
 
     df1 = pd.DataFrame()
     df3 = pd.DataFrame()
     df5 = pd.DataFrame()
+    df7 = pd.DataFrame()
+
     column_names = {}
     # aggregating the files which are processed as is
     # to final output csv
@@ -60,7 +65,8 @@ def create_single_csv(output_files_names):
         df1['Year'] = df1['Year'].astype(float).astype(int)
 
         # dropping unwanted column
-        df1.drop(columns=['Unnamed: 0'], inplace=True)
+        df1 = df1.drop(columns=['Unnamed: 0','Count_Person_Male',\
+            'Count_Person_Female'])
 
         # making geoid uniform
         df1['geo_ID'] = df1['geo_ID'].str.strip()
@@ -80,8 +86,8 @@ def create_single_csv(output_files_names):
     # aggregating the files which are having
     # aggregation Count_Person_Male and Count_Person_Female
     # to final output csv
-    if len(aggregate_output_files) > 0:
-        for i in aggregate_output_files:
+    if len(aggregate_output_files_before) > 0:
+        for i in aggregate_output_files_before:
             df2 = pd.read_csv(i, header=0)
             for col in df2.columns:
                 df2[col] = df2[col].astype("str")
@@ -89,6 +95,9 @@ def create_single_csv(output_files_names):
 
         # coverting year values to int
         df3['Year'] = df3['Year'].astype(float).astype(int)
+
+        # dropping unwanted column
+        df3 = df3.drop(columns=['Count_Person_Male','Count_Person_Female'])
 
         # making geoid uniform
         df3['geo_ID'] = df3['geo_ID'].str.strip()
@@ -105,17 +114,50 @@ def create_single_csv(output_files_names):
             'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
             'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
             'Count_Person_Male_AsianOrPacificIslander',
-            'Count_Person_Female_AsianOrPacificIslander', 'Count_Person_Male',
-            'Count_Person_Female'
+            'Count_Person_Female_AsianOrPacificIslander'
         ]]
 
         df3 = df3.replace('nan', '')
-        df3.to_csv("postprocess_aggregate.csv", index=False)
+        float_col = df3.select_dtypes(include=['float64'])
+        for col in float_col.columns.values:
+            df3[col] = df3[col].astype('int64')
+
+        df3.to_csv("sex_race_aggregate_before.csv", index=False)
 
         # collecting all the column headers
-        columns_of_aggregate_output_files = df3.columns.to_list()
+        columns_of_aggregate_output_files_before = df3.columns.to_list()
 
-        column_names[2] = columns_of_aggregate_output_files
+        column_names[2] = columns_of_aggregate_output_files_before
+
+    if len(aggregate_output_files_after) > 0:
+        for i in aggregate_output_files_after:
+            df6 = pd.read_csv(i, header=0)
+            for col in df6.columns:
+                df6[col] = df6[col].astype("str")
+            df7 = pd.concat([df6, df7], ignore_index=True)
+
+        # coverting year values to int
+        df7['Year'] = df7['Year'].astype(float).astype(int)
+
+        # dropping unwanted column
+        df7 = df7.drop(columns=['Unnamed: 0','Count_Person_Male',\
+            'Count_Person_Female'])
+
+        # making geoid uniform
+        df7['geo_ID'] = df7['geo_ID'].str.strip()
+
+        # sorting the values based on year and geoid
+        df7.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+
+        df7 = df7.replace('nan', '')
+        # writing output to final csv
+        df7.to_csv("sex_race_aggregate_after.csv", index=False)
+
+        # collecting all the column headers
+        columns_of_as_is_output_files_after = df7.columns.to_list()
+
+        column_names[3] = columns_of_as_is_output_files_after
+
 
     # aggregating the files which are aggregated
     # from different geo granularity
@@ -137,16 +179,16 @@ def create_single_csv(output_files_names):
         df5.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
 
         # dropping unwanted column
-        df5.drop(columns=['Unnamed: 0'], inplace=True)
+        df5 = df5.drop(columns=['Unnamed: 0','Count_Person_Male',\
+            'Count_Person_Female'])
 
         # writing output to final csv
-        df5.to_csv("postprocess_aggregate_state_2010_2020.csv", index=False)
+        df5.to_csv("sex_race_aggregate_national_after.csv", index=False)
 
         # collecting all the column headers
         columns_of_geo_aggregate_output_files = df5.columns.to_list()
 
-        column_names[3] = columns_of_geo_aggregate_output_files
-
+        column_names[4] = columns_of_geo_aggregate_output_files
     return column_names
 
 
@@ -203,10 +245,13 @@ measuredProperty: dcs:count
         with open("sex_race.mcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     elif flag1 == 2:
-        with open("sex_race_aggregate.mcf", 'w+', encoding='utf-8') as f_out:
+        with open("sex_race_aggregate_before.mcf", 'w+', encoding='utf-8') as f_out:
+            f_out.write(final_mcf_template.rstrip('\n'))
+    elif flag1 == 3:
+        with open("sex_race_aggregate_after.mcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     else:
-        with open("sex_race_aggregate_state_2010_2020.mcf",\
+        with open("sex_race_aggregate_national_after.mcf",\
              'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
 
@@ -252,16 +297,27 @@ value: C:postprocess->{}
         if "geo_ID" in cols:
             continue
         if flag2 == 1:
-            measure = "CensusPEPSurvey"
-        elif flag2 == 2:
-            if cols == "Count_Person_Male":
-                measure = "dcAggregate/CensusPEPSurvey"
-            elif cols == "Count_Person_Female":
-                measure = "dcAggregate/CensusPEPSurvey"
+            if cols.lower().endswith('male'):
+                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate"
+            elif cols.lower().endswith('nonwhite'):
+                measure = "CensusPEPSurvey_RaceUpto1999"
             else:
-                measure = "CensusPEPSurvey"
+                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
+        elif flag2 == 2:
+            if cols.lower().endswith('male'):
+                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate"
+            else:
+                measure = "CensusPEPSurvey_RaceUpto1999"
+        elif flag2 == 3:
+            if cols.lower().endswith('male'):
+                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate"
+            else:
+                measure = "CensusPEPSurvey_Race2000Onwards"
         else:
-            measure = "dcAggregate/CensusPEPSurvey"
+            if cols.lower().endswith('male'):
+                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate"
+            else:
+                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards" 
         tmcf = tmcf + tmcf_template.format(j, cols, measure, cols) + "\n"
         j = j + 1
     # Writing Genereated TMCF to local path.
@@ -269,9 +325,12 @@ value: C:postprocess->{}
         with open("sex_race.tmcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     elif flag2 == 2:
-        with open("sex_race_aggregate.tmcf", 'w+', encoding='utf-8') as f_out:
+        with open("sex_race_aggregate_before.tmcf", 'w+', encoding='utf-8') as f_out:
+            f_out.write(tmcf.rstrip('\n'))
+    elif flag2 == 3:
+        with open("sex_race_aggregate_after.tmcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     else:
-        with open("sex_race_aggregate_state_2010_2020.tmcf"\
+        with open("sex_race_aggregate_national_after.tmcf"\
                 , 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))

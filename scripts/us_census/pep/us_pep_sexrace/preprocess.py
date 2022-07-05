@@ -27,6 +27,7 @@ from national.national_1980_1990 import process_national_1980_1990
 from national.national_1990_2000 import process_national_1990_2000
 from national.national_2000_2010 import process_national_2000_2010
 from national.national_2010_2020 import process_national_2010_2020
+#from national.national_2021 import process_national_2021
 from state.state_1970_1979 import process_state_1970_1979
 from state.state_1980_1990 import process_state_1980_1990
 from state.state_1990_2000 import process_state_1990_2000
@@ -44,7 +45,6 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "config_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-
 def _get_urls(json_file_path, key):
     """
     Extracting dataset urls from json_config_files
@@ -59,7 +59,6 @@ def _get_urls(json_file_path, key):
         url_json = json.load(file)
     urls = url_json[key]
     return urls
-
 
 def process(config_files, output_files_names=None):
     """
@@ -106,42 +105,38 @@ def process(config_files, output_files_names=None):
 
     if output_files_names is None:
         # list of output files which are processed as is
-        as_is_output_files = [
-            "nationals_result_1900_1959.csv", "nationals_result_1960_1979.csv",
-            "nationals_result_2000_2010.csv", "state_result_2000_2010.csv",
-            "state_result_2010_2020.csv", "county_result_2000_2009.csv",
-            "county_result_2010_2020.csv"
-        ]
+        as_is_output_files = ["nationals_result_1900_1959.csv",
+            "nationals_result_1960_1979.csv","nationals_result_1980_1990.csv",
+            "nationals_result_1990_2000.csv"
+            ]
 
         # list of output files which are having aggregation
         # E.g., Count_Person_Male and Count_Person_Female
-        aggregate_output_files = [
-            "state_result_1970_1979.csv", "state_result_1980_1990.csv",
-            "state_result_1990_2000.csv", "county_result_1970_1979.csv",
-            "county_result_1980_1989.csv", "county_result_1990_2000.csv"
-        ]
+        aggregate_output_files_before = ["state_result_1970_1979.csv",
+            "state_result_1980_1990.csv","state_result_1990_2000.csv",
+            "county_result_1970_1979.csv","county_result_1980_1989.csv",
+            "county_result_1990_2000.csv"]
+
+        aggregate_output_files_after = ["state_result_2000_2010.csv",
+            "state_result_2010_2020.csv","county_result_2000_2009.csv",
+            "county_result_2010_2020.csv"]
 
         # list of files which are aggregated from state
-        geo_aggregate_output_files = [
-            "nationals_result_1980_1990.csv", "nationals_result_1990_2000.csv",
-            "nationals_result_2010_2020.csv"
-        ]
+        geo_aggregate_output_files = ["nationals_result_2000_2010.csv",
+            "nationals_result_2010_2020.csv"]
     else:
         as_is_output_files = output_files_names[0]
-        aggregate_output_files = output_files_names[1]
-        geo_aggregate_output_files = output_files_names[2]
+        aggregate_output_files_before = output_files_names[1]
+        aggregate_output_files_after = output_files_names[2]
+        geo_aggregate_output_files = output_files_names[3]
 
-    output_files_names = {
-        1: as_is_output_files,
-        2: aggregate_output_files,
-        3: geo_aggregate_output_files
-    }
+    output_files_names = {1:as_is_output_files, 2:aggregate_output_files_before,
+        3:aggregate_output_files_after,4:geo_aggregate_output_files}
     column_names = create_single_csv(output_files_names)
 
-    for flag, columns in column_names.items():
+    for flag,columns in column_names.items():
         generate_mcf(columns, flag)
         generate_tmcf(columns, flag)
-
 
 def main(_):
     """
@@ -153,7 +148,6 @@ def main(_):
     ip_files = [input_path + os.sep + file for file in ip_files]
 
     process(ip_files)
-
 
 if __name__ == "__main__":
     app.run(main)

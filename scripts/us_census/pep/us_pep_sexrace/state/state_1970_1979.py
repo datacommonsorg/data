@@ -103,6 +103,7 @@ def _process_state_1970_1979(url):
         'Count_Person_Male_OtherRaces', 'Count_Person_Female_OtherRaces'
     ])
 
+
     return df
 
 

@@ -103,6 +103,11 @@ def _process_county_1980_1989(url):
         'Count_Person_Male_OtherRaces', 'Count_Person_Female_OtherRaces'
     ])
     df['geo_ID'] = 'geoId/' + df['geo_ID']
+    float_col = df.select_dtypes(include=['float64'])
+    for col in float_col.columns.values:
+        df[col] = df[col].astype('int64')
+    
+
 
     return df
 

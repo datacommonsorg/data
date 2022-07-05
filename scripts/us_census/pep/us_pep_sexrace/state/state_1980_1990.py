@@ -37,7 +37,7 @@ def _process_state_1980_1990(url):
     # 16 = Ages 80-84, 17 = Ages 85+
 
     # COLUMNS_TO_SUM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,\
-    #  11, 12, 13, 14, 15, 16, 17]
+      #  11, 12, 13, 14, 15, 16, 17]
     _cols = ['Info', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,\
         11, 12, 13, 14, 15, 16, 17]
     # _cols = ['Info', 'COLUMNS_TO_SUM']
@@ -67,19 +67,9 @@ def _process_state_1980_1990(url):
     # extracting sex and race from the columns
     df['Race'] = df['Info'].str[3]
     df['Sex'] = df['Info'].str[4]
-    df = df.replace({'Sex': {'1': 'Male', '2': 'Female'}})
-    df = df.replace({
-        'Race': {
-            '1': 'W',
-            '2': 'B',
-            '3': 'AI',
-            '4': 'AP',
-            '5': 'W',
-            '6': 'B',
-            '7': 'AI',
-            '8': 'AP'
-        }
-    })
+    df = df.replace({'Sex':{'1':'Male', '2':'Female'}})
+    df = df.replace({'Race':{'1':'W', '2': 'B', '3': 'AI',
+    '4': 'AP', '5': 'W', '6':'B', '7':'AI', '8':'AP'}})
     df['SR'] = df['Sex'] + ' ' + df['Race']
     df.drop(columns=['Info', 'Sex', 'Race'], inplace=True)
 
@@ -121,8 +111,8 @@ def _process_state_1980_1990(url):
         'Count_Person_Female_AsianOrPacificIslander',
         'Count_Person_Female_BlackOrAfricanAmericanAlone',
         'Count_Person_Female_WhiteAlone']].sum(axis=1)
-    return df
 
+    return df
 
 def process_state_1980_1990(url):
     """

@@ -68,9 +68,9 @@ def _process_state_2010_2020(url):
     # to remove numeric thousand seperator
     for sv in ['YEAR', 'TOT_MALE', 'TOT_FEMALE',\
         'WA_MALE', 'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE',\
-            'IA_FEMALE', 'AA_MALE', 'AA_FEMALE', 'NA_MALE', 'NA_FEMALE'\
+            'IA_FEMALE', 'AA_MALE', 'AA_FEMALE', 'NA_MALE', 'NA_FEMALE',\
                 'TOM_MALE', 'TOM_FEMALE', 'WAC_MALE', 'WAC_FEMALE',\
-                    'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE'\
+                    'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE',\
                         'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE']:
         df[sv] = df[sv].astype(int)
 
@@ -109,6 +109,7 @@ def _process_state_2010_2020(url):
             'OrInCombinationWithOneOrMoreOtherRaces',
         'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
             'OrInCombinationWithOneOrMoreOtherRaces']
+
 
     return df
 
