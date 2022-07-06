@@ -18,9 +18,11 @@ and Count_person_Female are aggregated for this file.
 """
 
 import pandas as pd
+import os
 
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
-def _process_state_1980_1990(url):
+def process_state_1980_1990(url):
     """
     Function Loads input txt datasets
     from 1980-1990 on a State Level,
@@ -36,11 +38,9 @@ def _process_state_1980_1990(url):
     # 12 = Ages 60-64, 13 = Ages 65-69, 14 = Ages 70-74, 15 = Ages 75-79
     # 16 = Ages 80-84, 17 = Ages 85+
 
-    # COLUMNS_TO_SUM = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,\
-      #  11, 12, 13, 14, 15, 16, 17]
-    _cols = ['Info', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,\
-        11, 12, 13, 14, 15, 16, 17]
-    # _cols = ['Info', 'COLUMNS_TO_SUM']
+    COLUMNS_TO_SUM = list(range(18))
+    _cols = ['Info']
+    _cols.extend(COLUMNS_TO_SUM)
 
     # reading the csv input file
     df = pd.read_table(url,
@@ -50,14 +50,10 @@ def _process_state_1980_1990(url):
                        names=_cols)
 
     # adding all the ages to get total value
-    #df['Total'] = df[COLUMNS_TO_SUM].sum(axis=1)
-    df['Total']=df[0]+df[1]+df[2]+df[3]+df[4]+df[5]+df[6]\
-        +df[7]+df[8]+df[9]+df[10]+df[11]+df[12]+df[13]+df[14]\
-        +df[15]+df[16]+df[17]
+    df['Total'] = df[COLUMNS_TO_SUM].sum(axis=1)
 
     # dropping unwanted columns
-    df.drop(columns=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,\
-        12, 13, 14, 15, 16, 17], inplace=True)
+    df.drop(columns=COLUMNS_TO_SUM, inplace=True)
 
     # extracting year and geoid from Info column
     df['Info'] = [f'{x:05}' for x in df['Info']]
@@ -87,44 +83,27 @@ def _process_state_1980_1990(url):
     df.drop(columns=['level_0'], inplace=True)
 
     # providing proper column names
-    df.columns = [
-        'Year', 'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
+    female_columns = [
+        'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
         'Count_Person_Female_AsianOrPacificIslander',
         'Count_Person_Female_BlackOrAfricanAmericanAlone',
-        'Count_Person_Female_WhiteAlone',
+        'Count_Person_Female_WhiteAlone'
+    ]
+
+    male_columns = [
         'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
         'Count_Person_Male_AsianOrPacificIslander',
         'Count_Person_Male_BlackOrAfricanAmericanAlone',
-        'Count_Person_Male_WhiteAlone', 'geo_ID'
+        'Count_Person_Male_WhiteAlone'
     ]
 
+    df.columns = ['Year'] + female_columns + male_columns + ['geo_ID']
+
     # aggregating columns to get Count_Person_Male
-    df["Count_Person_Male"] = df.loc[:,['Count_Person_Male_'+\
-        'AmericanIndianAndAlaskaNativeAlone',
-        'Count_Person_Male_AsianOrPacificIslander',
-        'Count_Person_Male_BlackOrAfricanAmericanAlone',
-        'Count_Person_Male_WhiteAlone']].sum(axis=1)
+    df["Count_Person_Male"] = df[male_columns].sum(axis=1)
 
     # aggregating columns to get Count_Person_Female
-    df["Count_Person_Female"] = df.loc[:,['Count_Person_Female_'+\
-        'AmericanIndianAndAlaskaNativeAlone',
-        'Count_Person_Female_AsianOrPacificIslander',
-        'Count_Person_Female_BlackOrAfricanAmericanAlone',
-        'Count_Person_Female_WhiteAlone']].sum(axis=1)
+    df["Count_Person_Female"] = df[female_columns].sum(axis=1)
 
-    return df
-
-def process_state_1980_1990(url):
-    """
-    Function writes the output
-    dataframe generated to csv
-    and return column names.
-    Args:
-        url: url of the dataset
-    Returns:
-        Column of cleaned Dataframe
-    """
-    df = _process_state_1980_1990(url)
-    # writing the dataframe to output csv
-    df.to_csv("state_result_1980_1990.csv")
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" + "state_result_1980_1990.csv")
     return df.columns

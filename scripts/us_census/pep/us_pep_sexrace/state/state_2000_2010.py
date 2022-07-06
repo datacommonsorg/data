@@ -18,9 +18,12 @@ is processed as is.
 """
 
 import pandas as pd
+import os
+
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def _process_state_2000_2010(url):
+def process_state_2000_2010(url):
     """
     Function Loads input csv datasets
     from 2000-2010 on a State Level,
@@ -52,15 +55,21 @@ def _process_state_2000_2010(url):
 
     # total population is not required
     # sex = 0 is total
-    df = df.query("SEX !=0")
+    df = df.query("SEX != 0")
 
     # changing values of column as per the metadata
-    df = df.replace({'SEX':{1:'Male', 2:'Female'}})
-    df = df.replace({'RACE':{0:'All_Races_Combined',
-    1:'WhiteAlone', 2: 'BlackOrAfricanAmericanAlone',
-    3: 'AmericanIndianAndAlaskaNativeAlone',
-    4: 'AsianAlone', 5: 'NativeHawaiianAndOtherPacificIslanderAlone',
-    6:'TwoOrMoreRaces'}})
+    df = df.replace({'SEX': {1: 'Male', 2: 'Female'}})
+    df = df.replace({
+        'RACE': {
+            0: 'All_Races_Combined',
+            1: 'WhiteAlone',
+            2: 'BlackOrAfricanAmericanAlone',
+            3: 'AmericanIndianAndAlaskaNativeAlone',
+            4: 'AsianAlone',
+            5: 'NativeHawaiianAndOtherPacificIslanderAlone',
+            6: 'TwoOrMoreRaces'
+        }
+    })
 
     df['INFO'] = "Count_Person_" + df['SEX'] + '_' + df['RACE']
     df['INFO'] = df['INFO'].astype(str).str.replace('_All_Races_Combined', '')
@@ -93,21 +102,6 @@ def _process_state_2000_2010(url):
     df = df.rename(columns={"STATE": "geo_ID"})
     df['geo_ID'] = 'geoId/' + df['geo_ID']
 
-
-    return df
-
-
-def process_state_2000_2010(url):
-    """
-    Function writes the output
-    dataframe generated to csv
-    and return column names.
-    Args:
-        url: url of the dataset
-    Returns:
-        Column of cleaned Dataframe
-    """
-    df = _process_state_2000_2010(url)
-    # writing the dataframe to output csv
-    df.to_csv("state_result_2000_2010.csv")
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+              "state_result_2000_2010.csv")
     return df.columns

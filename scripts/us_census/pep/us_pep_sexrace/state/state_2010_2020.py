@@ -18,9 +18,12 @@ is processed as is.
 """
 
 import pandas as pd
+import os
+
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def _process_state_2010_2020(url):
+def process_state_2010_2020(url):
     """
     Function Loads input csv datasets
     from 2010-2020 on a State Level,
@@ -39,11 +42,13 @@ def _process_state_2010_2020(url):
     df = df.query("AGEGRP == 0")
 
     # year starting from 3 so need to convert it to 2010s
-    df['YEAR'] = df['YEAR'] + 2010 - 3
+    # df['YEAR'] = df['YEAR'] + 2010 - 3
+    df.loc[:, 'YEAR'] = df.loc[:, 'YEAR'] + 2010 - 3
 
     # add fips code for location
-    df['geo_ID'] = 'geoId/' + (df['STATE']\
-        .map(str)).str.zfill(2) + (df['COUNTY'].map(str)).str.zfill(3)
+    df.loc[:,
+           'geo_ID'] = 'geoId/' + (df.loc[:, 'STATE'].map(str)).str.zfill(2) + (
+               df.loc[:, 'COUNTY'].map(str)).str.zfill(3)
 
     # drop unwanted columns
     df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
@@ -66,12 +71,13 @@ def _process_state_2010_2020(url):
     ])
 
     # to remove numeric thousand seperator
-    for sv in ['YEAR', 'TOT_MALE', 'TOT_FEMALE',\
-        'WA_MALE', 'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE',\
-            'IA_FEMALE', 'AA_MALE', 'AA_FEMALE', 'NA_MALE', 'NA_FEMALE',\
-                'TOM_MALE', 'TOM_FEMALE', 'WAC_MALE', 'WAC_FEMALE',\
-                    'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE',\
-                        'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE']:
+    for sv in [
+            'YEAR', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE', 'WA_FEMALE', 'BA_MALE',
+            'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE', 'AA_FEMALE',
+            'NA_MALE', 'NA_FEMALE', 'TOM_MALE', 'TOM_FEMALE', 'WAC_MALE',
+            'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE',
+            'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE'
+    ]:
         df[sv] = df[sv].astype(int)
 
     # extracting geoid
@@ -110,21 +116,7 @@ def _process_state_2010_2020(url):
         'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
             'OrInCombinationWithOneOrMoreOtherRaces']
 
-
-    return df
-
-
-def process_state_2010_2020(url):
-    """
-    Function writes the output
-    dataframe generated to csv
-    and return column names.
-    Args:
-        url: url of the dataset
-    Returns:
-        Column of cleaned Dataframe
-    """
-    df = _process_state_2010_2020(url)
-    # writing output to csv
-    df.to_csv('state_result_2010_2020.csv', index=False)
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+              'state_result_2010_2020.csv',
+              index=False)
     return df.columns

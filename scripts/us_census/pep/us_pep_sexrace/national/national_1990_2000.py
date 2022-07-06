@@ -18,9 +18,12 @@ from state 1990-2000 file.
 """
 
 import pandas as pd
+import os
+
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def _process_national_1990_2000(urls):
+def process_national_1990_2000(urls):
     """
     Function Loads input txt datasets
     from 1990-2000 on a National Level,
@@ -51,36 +54,31 @@ def _process_national_1990_2000(urls):
         # HAIANM = Hispanic American Indian and Alaska Native Male,
         # HAIANF = Hispanic American Indian and Alaska Native Female,
         # HAPIM = Hispanic Asian and Pacific Islander Male,
-        # HAPIF = Hispanic Asian and Pacific Islander Female,
-        df.columns = [
-            'Year', 'geo_ID', 'Age', 'NHWM', 'NHWF', 'NHBM', 'NHBF', 'NHAIANM',
-            'NHAIANF', 'NHAPIM', 'NHAPIF', 'HWM', 'HWF', 'HBM', 'HBF', 'HAIANM',
-            'HAIANF', 'HAPIM', 'HAPIF'
+        # HAPIF = Hispanic Asian and Pacific Islander Female
+
+        srh_columns = [
+            'NHWM', 'NHWF', 'NHBM', 'NHBF', 'NHAIANM', 'NHAIANF', 'NHAPIM',
+            'NHAPIF', 'HWM', 'HWF', 'HBM', 'HBF', 'HAIANM', 'HAIANF', 'HAPIM',
+            'HAPIF'
         ]
 
-        # adding hispanic and non-hispanic columns to get total values
-        df['Count_Person_Male_WhiteAlone'] = df["NHWM"] + df["HWM"]
-        df['Count_Person_Female_WhiteAlone'] = df["NHWF"] + df["HWF"]
-        df['Count_Person_Male_BlackOrAfricanAmericanAlone'] = df["NHBM"] + df[
-            "HBM"]
-        df['Count_Person_Female_BlackOrAfricanAmericanAlone']\
-            =df["NHBF"]+df["HBF"]
-        df['Count_Person_Male_AmericanIndianAndAlaskaNativeAlone']\
-            =df["NHAIANM"]+df["HAIANM"]
-        df['Count_Person_Female_AmericanIndianAndAlaskaNativeAlone']\
-            =df["NHAIANF"]+df["HAIANF"]
-        df['Count_Person_Male_AsianOrPacificIslander'] = df["NHAPIM"] + df[
-            "HAPIM"]
-        df['Count_Person_Female_AsianOrPacificIslander']\
-            = df["NHAPIF"] + df["HAPIF"]
+        df.columns = ['Year', 'geo_ID', 'Age'] + srh_columns
+
+        agg_columns = {
+            'Count_Person_Male_WhiteAlone': 'WM',
+            'Count_Person_Female_WhiteAlone': 'WF',
+            'Count_Person_Male_BlackOrAfricanAmericanAlone': 'BM',
+            'Count_Person_Female_BlackOrAfricanAmericanAlone': 'BF',
+            'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone': 'AIANM',
+            'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone': 'AIANF',
+            'Count_Person_Male_AsianOrPacificIslander': 'APIM',
+            'Count_Person_Female_AsianOrPacificIslander': 'APIF',
+        }
+        for k, v in agg_columns.items():
+            df[k] = df['NH' + v] + df['H' + v]
 
         # dropping unwanted columns which are having origin
-        df.drop(columns=[
-            'Age', 'NHWM', 'NHWF', 'NHBM', 'NHBF', 'NHAIANM', 'NHAIANF',
-            'NHAPIM', 'NHAPIF', 'HWM', 'HWF', 'HBM', 'HBF', 'HAIANM', 'HAIANF',
-            'HAPIM', 'HAPIF'
-        ],
-                inplace=True)
+        df.drop(columns=['Age'] + srh_columns, inplace=True)
 
         # providing geoId to the dataframe
         # and making the geoId of 2 digit as state
@@ -97,8 +95,9 @@ def _process_national_1990_2000(urls):
     final_df.drop(columns=['geo_ID'], inplace=True)
 
     final_df = final_df.groupby(['Year']).sum().reset_index()
+
     # aggregating columns to get Count_Person_Male
-    final_df["Count_Person_Male"] = final_df.loc[:, [
+    final_df["Count_Person_Male"] = final_df[[
         'Count_Person_Male_WhiteAlone',
         'Count_Person_Male_BlackOrAfricanAmericanAlone',
         'Count_Person_Male_AmericanIndianAndAlaskaNativeAlone',
@@ -106,7 +105,7 @@ def _process_national_1990_2000(urls):
     ]].sum(axis=1)
 
     # aggregating columns to get Count_Person_Female
-    final_df["Count_Person_Female"] = final_df.loc[:, [
+    final_df["Count_Person_Female"] = final_df[[
         'Count_Person_Female_WhiteAlone',
         'Count_Person_Female_BlackOrAfricanAmericanAlone',
         'Count_Person_Female_AmericanIndianAndAlaskaNativeAlone',
@@ -116,21 +115,6 @@ def _process_national_1990_2000(urls):
     # inserting geoid in columns
     final_df.insert(0, 'geo_ID', 'country/USA', True)
 
-
-    return final_df
-
-
-def process_national_1990_2000(urls):
-    """
-    Function writes the output
-    dataframe generated to csv
-    and return column names.
-    Args:
-        url: url of the dataset
-    Returns:
-        Column of cleaned Dataframe
-    """
-    final_df = _process_national_1990_2000(urls)
-    # writing the dataframe to output csv
-    final_df.to_csv("nationals_result_1990_2000.csv")
+    final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+                    "nationals_result_1990_2000.csv")
     return final_df.columns

@@ -19,6 +19,9 @@ and generate final csv, MCF, TMCF file
 """
 
 import pandas as pd
+import os
+
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 def create_single_csv(output_files_names):
     """
@@ -56,7 +59,7 @@ def create_single_csv(output_files_names):
     # to final output csv
     if len(as_is_output_files) > 0:
         for i in as_is_output_files:
-            df = pd.read_csv(i, header=0)
+            df = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i, header=0)
             for col in df.columns:
                 df[col] = df[col].astype("str")
             df1 = pd.concat([df, df1], ignore_index=True)
@@ -76,7 +79,7 @@ def create_single_csv(output_files_names):
 
         df1 = df1.replace('nan', '')
         # writing output to final csv
-        df1.to_csv("postprocess.csv", index=False)
+        df1.to_csv(_CODEDIR + "/output_files/final/" + "postprocess.csv", index=False)
 
         # collecting all the column headers
         columns_of_as_is_output_files = df1.columns.to_list()
@@ -88,7 +91,7 @@ def create_single_csv(output_files_names):
     # to final output csv
     if len(aggregate_output_files_before) > 0:
         for i in aggregate_output_files_before:
-            df2 = pd.read_csv(i, header=0)
+            df2 = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i, header=0)
             for col in df2.columns:
                 df2[col] = df2[col].astype("str")
             df3 = pd.concat([df2, df3], ignore_index=True)
@@ -122,7 +125,7 @@ def create_single_csv(output_files_names):
         for col in float_col.columns.values:
             df3[col] = df3[col].astype('int64')
 
-        df3.to_csv("sex_race_aggregate_before.csv", index=False)
+        df3.to_csv(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_before.csv", index=False)
 
         # collecting all the column headers
         columns_of_aggregate_output_files_before = df3.columns.to_list()
@@ -131,7 +134,7 @@ def create_single_csv(output_files_names):
 
     if len(aggregate_output_files_after) > 0:
         for i in aggregate_output_files_after:
-            df6 = pd.read_csv(i, header=0)
+            df6 = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i, header=0)
             for col in df6.columns:
                 df6[col] = df6[col].astype("str")
             df7 = pd.concat([df6, df7], ignore_index=True)
@@ -151,7 +154,7 @@ def create_single_csv(output_files_names):
 
         df7 = df7.replace('nan', '')
         # writing output to final csv
-        df7.to_csv("sex_race_aggregate_after.csv", index=False)
+        df7.to_csv(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_after.csv", index=False)
 
         # collecting all the column headers
         columns_of_as_is_output_files_after = df7.columns.to_list()
@@ -164,7 +167,7 @@ def create_single_csv(output_files_names):
     # to final output csv
     if len(geo_aggregate_output_files) > 0:
         for i in geo_aggregate_output_files:
-            df4 = pd.read_csv(i, header=0)
+            df4 = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i, header=0)
             for col in df4.columns:
                 df4[col] = df4[col].astype("str")
             df5 = pd.concat([df4, df5], ignore_index=True)
@@ -183,7 +186,7 @@ def create_single_csv(output_files_names):
             'Count_Person_Female'])
 
         # writing output to final csv
-        df5.to_csv("sex_race_aggregate_national_after.csv", index=False)
+        df5.to_csv(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_national_after.csv", index=False)
 
         # collecting all the column headers
         columns_of_geo_aggregate_output_files = df5.columns.to_list()
@@ -242,16 +245,16 @@ measuredProperty: dcs:count
         final_mcf_template += mcf_template.format(sv, race, gender) + "\n"
     # Writing Genereated MCF to local path.
     if flag1 == 1:
-        with open("sex_race.mcf", 'w+', encoding='utf-8') as f_out:
+        with open(_CODEDIR + "/output_files/final/" + "sex_race.mcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     elif flag1 == 2:
-        with open("sex_race_aggregate_before.mcf", 'w+', encoding='utf-8') as f_out:
+        with open(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_before.mcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     elif flag1 == 3:
-        with open("sex_race_aggregate_after.mcf", 'w+', encoding='utf-8') as f_out:
+        with open(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_after.mcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     else:
-        with open("sex_race_aggregate_national_after.mcf",\
+        with open(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_national_after.mcf",\
              'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
 
@@ -322,15 +325,15 @@ value: C:postprocess->{}
         j = j + 1
     # Writing Genereated TMCF to local path.
     if flag2 == 1:
-        with open("sex_race.tmcf", 'w+', encoding='utf-8') as f_out:
+        with open(_CODEDIR + "/output_files/final/" + "sex_race.tmcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     elif flag2 == 2:
-        with open("sex_race_aggregate_before.tmcf", 'w+', encoding='utf-8') as f_out:
+        with open(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_before.tmcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     elif flag2 == 3:
-        with open("sex_race_aggregate_after.tmcf", 'w+', encoding='utf-8') as f_out:
+        with open(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_after.tmcf", 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     else:
-        with open("sex_race_aggregate_national_after.tmcf"\
+        with open(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_national_after.tmcf"\
                 , 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))

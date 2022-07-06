@@ -18,9 +18,12 @@ and Count_person_Female are aggregated for this file.
 """
 
 import pandas as pd
+import os
+
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def _process_state_1970_1979(url):
+def process_state_1970_1979(url):
     """
     Function Loads input csv datasets
     from 1970-1979 on a State Level,
@@ -56,7 +59,7 @@ def _process_state_1970_1979(url):
     df['geo_ID'] = [f'{x:02}' for x in df['geo_ID']]
 
     # dropping unwanted columns
-    df = df.drop(columns=(COLUMNS_TO_SUM))
+    df = df.drop(columns=COLUMNS_TO_SUM)
 
     # providing geoId to the dataframe and making the geoId of 2 digit as state
     df['Year'] = df['Year'].astype(str) + '-' + df['geo_ID'].astype(str)
@@ -85,39 +88,22 @@ def _process_state_1970_1979(url):
     df['geo_ID'] = 'geoId/' + df['geo_ID']
 
     # aggregating columns to get Count_Person_Male
-    df["Count_Person_Male"] = df.loc[:, [
+    df["Count_Person_Male"] = df[[
         'Count_Person_Male_WhiteAlone',
         "Count_Person_Male_BlackOrAfricanAmericanAlone",
-        "Count_Person_Male_OtherRaces"
-    ]].sum(axis=1)
+        "Count_Person_Male_OtherRaces"]].sum(axis=1)
 
     # aggregating columns to get Count_Person_Female
-    df["Count_Person_Female"] = df.loc[:, [
+    df["Count_Person_Female"] = df[[
         'Count_Person_Female_WhiteAlone',
         "Count_Person_Female_BlackOrAfricanAmericanAlone",
-        'Count_Person_Female_OtherRaces'
-    ]].sum(axis=1)
+        'Count_Person_Female_OtherRaces']].sum(axis=1)
 
     # dropping unwanted columns
     df = df.drop(columns=[
         'Count_Person_Male_OtherRaces', 'Count_Person_Female_OtherRaces'
     ])
 
-
-    return df
-
-
-def process_state_1970_1979(url):
-    """
-    Function writes the output
-    dataframe generated to csv
-    and return column names.
-    Args:
-        url: url of the dataset
-    Returns:
-        Column of cleaned Dataframe
-    """
-    df = _process_state_1970_1979(url)
-    # writing the dataframe to output csv
-    df.to_csv("state_result_1970_1979.csv")
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+              "state_result_1970_1979.csv")
     return df.columns

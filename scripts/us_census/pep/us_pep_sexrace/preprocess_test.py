@@ -21,8 +21,10 @@ from preprocess import process
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
+
+expected_data_folder = os.path.join(module_dir_, "test_data/expected_output_files")
+actual_data_folder = os.path.join(module_dir_, "output_files/final")
 test_data_folder = os.path.join(module_dir_, "test_data")
-op_data_folder = os.path.join(module_dir_, "test_output_data")
 
 
 class TestPreprocess(unittest.TestCase):
@@ -35,59 +37,72 @@ class TestPreprocess(unittest.TestCase):
     config_files = []
     for file in ip_files:
         config_files.append(ip_config_files + os.sep + file)
-    process(
-        config_files,
-        [["county_result_2010_2020.csv", "state_result_2000_2010.csv"],
-         ["county_result_1970_1979.csv", "state_result_1990_2000.csv"],
-         ["nationals_result_1980_1990.csv", "nationals_result_1990_2000.csv"]])
+    
+    process(config_files, test=True)
 
     def test_mcf_tmcf_files(self):
         """
         This method is required to test between output generated
         preprocess script and excepted output files like MCF and TMCF File
         """
-        exp_files_mcf = ["expected_sex_race_aggregate_state_2010_2020.mcf"]
-        exp_files_tmcf = ["expected_sex_race_aggregate_state_2010_2020.tmcf"]
-        oup_files_mcf = ["sex_race_aggregate_state_2010_2020.mcf"]
-        oup_files_tmcf = ["sex_race_aggregate_state_2010_2020.tmcf"]
-        for exp_file_mcf, oup_file_mcf in zip(exp_files_mcf, oup_files_mcf):
-            expected_mcf_file_path = os.path.join(test_data_folder,
-                                                  exp_file_mcf)
+        mcf_files = [
+            "sex_race_aggregate_after.mcf", "sex_race_aggregate_before.mcf",
+            "sex_race_aggregate_national_after.mcf", "sex_race.mcf"
+        ]
+
+        for mcf_file in mcf_files:
+            expected_mcf_file_path = os.path.join(expected_data_folder,
+                                                  mcf_file)
             with open(expected_mcf_file_path,
                       encoding="UTF-8") as expected_mcf_file:
                 expected_mcf_data = expected_mcf_file.read()
-            with open(oup_file_mcf, encoding="UTF-8") as mcf_file:
-                mcf_data = mcf_file.read()
-            self.assertEqual(expected_mcf_data.strip(), mcf_data.strip())
 
-        for exp_file_tmcf, oup_file_tmcf in zip(exp_files_tmcf, oup_files_tmcf):
-            expected_tmcf_file_path = os.path.join(test_data_folder,
-                                                   exp_file_tmcf)
+            actual_mcf_file_path = os.path.join(actual_data_folder, mcf_file)
+            with open(actual_mcf_file_path,
+                      encoding="UTF-8") as actual_mcf_file:
+                actual_mcf_data = actual_mcf_file.read()
+
+            self.assertEqual(expected_mcf_data.strip(), actual_mcf_data.strip())
+
+        tmcf_files = [
+            "sex_race_aggregate_after.tmcf", "sex_race_aggregate_before.tmcf",
+            "sex_race_aggregate_national_after.tmcf", "sex_race.tmcf"
+        ]
+
+        for tmcf_file in tmcf_files:
+            expected_tmcf_file_path = os.path.join(expected_data_folder,
+                                                   tmcf_file)
             with open(expected_tmcf_file_path,
                       encoding="UTF-8") as expected_tmcf_file:
                 expected_tmcf_data = expected_tmcf_file.read()
-            with open(oup_file_tmcf, encoding="UTF-8") as tmcf_file:
-                tmcf_data = tmcf_file.read()
-            self.assertEqual(expected_tmcf_data.strip(), tmcf_data.strip())
+
+            actual_tmcf_file_path = os.path.join(actual_data_folder, tmcf_file)
+            with open(actual_tmcf_file_path,
+                      encoding="UTF-8") as actual_tmcf_file:
+                actual_tmcf_data = actual_tmcf_file.read()
+            self.assertEqual(expected_tmcf_data.strip(),
+                             actual_tmcf_data.strip())
 
     def test_create_csv(self):
         """
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        self.maxDiff = None
-        exp_files = ["expected_postprocess_aggregate_state_2010_2020.csv"]
-        oup_files = ["postprocess_aggregate_state_2010_2020.csv"]
-        for exp_file, oup_file in zip(exp_files, oup_files):
+        # self.maxDiff = None
+        output_csv_files = [
+            "postprocess.csv", "sex_race_aggregate_after.csv",
+            "sex_race_aggregate_before.csv",
+            "sex_race_aggregate_national_after.csv"
+        ]
 
-            expected_csv_file_path = os.path.join(test_data_folder, exp_file)
-
-            expected_csv_data = ""
+        for output_csv_file in output_csv_files:
+            expected_csv_file_path = os.path.join(expected_data_folder, output_csv_file)
             with open(expected_csv_file_path,
                       encoding="utf-8-sig") as expected_csv_file:
                 expected_csv_data = expected_csv_file.read()
+            
+            actual_csv_file_path = os.path.join(actual_data_folder, output_csv_file)
+            with open(actual_csv_file_path, encoding="utf-8-sig") as actual_csv_file:
+                actual_csv_data = actual_csv_file.read()
 
-            with open(oup_file, encoding="utf-8-sig") as csv_file:
-                csv_data = csv_file.read()
-
-            self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+            self.assertEqual(expected_csv_data.strip(), actual_csv_data.strip())

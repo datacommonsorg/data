@@ -18,9 +18,11 @@ and Count_person_Female are aggregated for this file.
 """
 
 import pandas as pd
+import os
 
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
-def _process_county_1980_1989(url):
+def process_county_1980_1989(url):
     """
     Function Loads input csv datasets
     from 1980-1989 on a County Level,
@@ -107,22 +109,5 @@ def _process_county_1980_1989(url):
     for col in float_col.columns.values:
         df[col] = df[col].astype('int64')
     
-
-
-    return df
-
-
-def process_county_1980_1989(url):
-    """
-    Function writes the output
-    dataframe generated to csv
-    and return column names.
-    Args:
-        url: url of the dataset
-    Returns:
-        Column names of cleaned Dataframe
-    """
-    df = _process_county_1980_1989(url)
-    # writing the dataframe to output csv
-    df.to_csv("county_result_1980_1989.csv")
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" + "county_result_1980_1989.csv")
     return df.columns

@@ -18,9 +18,12 @@ is processed as is.
 """
 
 import pandas as pd
+import os
+
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def _process_national_1900_1970(ip_files):
+def process_national_1900_1970(ip_files):
     """
     Function Loads input csv datasets
     from 1900-1979 on a National Level,
@@ -104,7 +107,7 @@ def _process_national_1900_1970(ip_files):
                 final_df2 = final_df2.sort_values('Year')
 
     if final_df.shape[1] > 0:
-        # inseting geoId to the final dataframe
+        # inserting geoId to the final dataframe
         final_df.insert(1, 'geo_ID', 'country/USA', True)
     if final_df2.shape[1] > 0:
         final_df2.insert(1, 'geo_ID', 'country/USA', True)
@@ -116,23 +119,12 @@ def _process_national_1900_1970(ip_files):
         final_df2[col] = final_df2[col].str.replace(",", "")
         if col not in ["Year", "geo_ID"]:
             final_df2[col] = final_df2[col].astype("int")
-  
 
-    return final_df, final_df2
-
-
-def process_national_1900_1970(ip_files):
-    """
-    Function writes the output
-    dataframe generated to csv
-    and return column names.
-    Args:
-        url: url of the dataset
-    Returns:
-        Column of cleaned Dataframe
-    """
-    final_df, final_df2 = _process_national_1900_1970(ip_files)
-    # writing final dataframe to output csv
-    final_df.to_csv("nationals_result_1900_1959.csv", index=False)
-    final_df2.to_csv("nationals_result_1960_1979.csv", index=False)
+    final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+                    "nationals_result_1900_1959.csv",
+                    index=False)
+    final_df2.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+                     "nationals_result_1960_1979.csv",
+                     index=False)
+    
     return final_df.columns, final_df2.columns

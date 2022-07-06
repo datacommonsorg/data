@@ -18,15 +18,19 @@ is processed as is.
 """
 
 import pandas as pd
+import os
 
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
-def _process_county_2010_2020(url):
+def process_county_2010_2020(url):
     """
     Function Loads input csv datasets
     from 2010-2020 on a County Level,
     cleans it and return cleaned dataframe.
+
     Args:
         url: url of the dataset
+    
     Returns:
         Cleaned Dataframe
     """
@@ -38,14 +42,14 @@ def _process_county_2010_2020(url):
     df = df.query("AGEGRP == 0 & YEAR not in [1, 2]")
 
     # year value starting from 3-13 so need to convet it to 2010-2020
-    df['YEAR'] = df['YEAR'] + 2010 - 3
+    df.loc[:, 'YEAR'] = df.loc[:, 'YEAR'] + 2010 - 3
 
     # add fips code for location
     df.insert(6, 'geo_ID', 'geoId/', True)
 
     # extracting geoid from state and county column
-    df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)\
-        + (df['COUNTY'].map(str)).str.zfill(3)
+    df.loc[:, 'geo_ID'] = 'geoId/' + (df.loc[:, 'STATE'].map(str)).str.zfill(2)\
+        + (df.loc[:, 'COUNTY'].map(str)).str.zfill(3)
 
     # drop unwanted columns
     df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME',\
@@ -96,21 +100,5 @@ def _process_county_2010_2020(url):
         'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
             'OrInCombinationWithOneOrMoreOtherRaces']
  
-
-    return df
-
-
-def process_county_2010_2020(url):
-    """
-    Function writes the output
-    dataframe generated to csv
-    and return column names.
-    Args:
-        url: url of the dataset
-    Returns:
-        Column of cleaned Dataframe
-    """
-    df = _process_county_2010_2020(url)
-    # write to final file
-    df.to_csv('county_result_2010_2020.csv', index=False)
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" + 'county_result_2010_2020.csv', index=False)
     return df.columns

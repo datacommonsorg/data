@@ -18,8 +18,12 @@ and Count_person_Female are aggregated for this file.
 """
 
 import pandas as pd
+import os
 
-def _process_county_1970_1979(url):
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
+
+
+def process_county_1970_1979(url):
     """
     Function Loads input csv datasets
     from 1970-1979 on a County Level,
@@ -32,15 +36,6 @@ def _process_county_1970_1979(url):
     # reading the csv input file
     df = pd.read_csv(url, header=None)
 
-    # providing column headers
-    df.columns=["Year","geo_ID","Race/Sex code",\
-        "0-4 year olds","5 to 9 years",   "10 to 14 years",
-        "15 to 19 years",   "20 to 24 years",   "25 to 29 years",
-        "30 to 34 years",   "35 to 39 years",   "40 to 44 years",
-        "45 to 49 years",   "50 to 54 years",   "55 to 59 years",
-        "60 to 64 years",   "65 to 69 years",   "70 to 74 years",
-        "75 to 79 years",   "80 to 84 years",   "85 years and over"]
-
     # listing the columns to be dropped as age gaps are not required
     COLUMNS_TO_SUM = [
         '0-4 year olds', '5 to 9 years', '10 to 14 years', '15 to 19 years',
@@ -49,6 +44,9 @@ def _process_county_1970_1979(url):
         '60 to 64 years', '65 to 69 years', '70 to 74 years', '75 to 79 years',
         '80 to 84 years', '85 years and over'
     ]
+
+    # providing column headers
+    df.columns = ["Year", "geo_ID", "Race/Sex code"] + COLUMNS_TO_SUM
 
     # summing all the ages value as age is not required as
     # the dataset deals with sex and race
@@ -63,12 +61,16 @@ def _process_county_1970_1979(url):
     df = df.drop(columns=COLUMNS_TO_SUM)
 
     # changing the column values as per metadata
-    df=df.replace({'Race/Sex code':{1: 'Count_Person_Male_WhiteAlone',
-    2: 'Count_Person_Female_WhiteAlone',
-    3:'Count_Person_Male_BlackOrAfricanAmericanAlone',
-    4:'Count_Person_Female_BlackOrAfricanAmericanAlone',
-    5:'Count_Person_Male_OtherRaces',
-    6:'Count_Person_Female_OtherRaces'}})
+    df = df.replace({
+        'Race/Sex code': {
+            1: 'Count_Person_Male_WhiteAlone',
+            2: 'Count_Person_Female_WhiteAlone',
+            3: 'Count_Person_Male_BlackOrAfricanAmericanAlone',
+            4: 'Count_Person_Female_BlackOrAfricanAmericanAlone',
+            5: 'Count_Person_Male_OtherRaces',
+            6: 'Count_Person_Female_OtherRaces'
+        }
+    })
 
     # grouping the df as per columns provided
     # performs the provided functions on the data
@@ -91,14 +93,14 @@ def _process_county_1970_1979(url):
     ])
 
     # aggregating columns to get Count_Person_Male
-    df["Count_Person_Male"] = df.loc[:, [
+    df["Count_Person_Male"] = df[[
         'Count_Person_Male_WhiteAlone',
         "Count_Person_Male_BlackOrAfricanAmericanAlone",
         'Count_Person_Male_OtherRaces'
     ]].sum(axis=1)
 
     # aggregating columns to get Count_Person_Female
-    df["Count_Person_Female"] = df.loc[:, [
+    df["Count_Person_Female"] = df[[
         'Count_Person_Female_WhiteAlone',
         "Count_Person_Female_BlackOrAfricanAmericanAlone",
         'Count_Person_Female_OtherRaces'
@@ -112,21 +114,6 @@ def _process_county_1970_1979(url):
     # creating geoId
     df['geo_ID'] = 'geoId/' + df['geo_ID']
 
-
-    return df
-
-
-def process_county_1970_1979(url):
-    """
-    Function writes the output
-    dataframe generated to csv
-    and return column names.
-    Args:
-        url: url of the dataset
-    Returns:
-        Column names of cleaned Dataframe
-    """
-    df = _process_county_1970_1979(url)
-    # writing the dataframe to output csv
-    df.to_csv("county_result_1970_1979.csv")
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+              "county_result_1970_1979.csv")
     return df.columns

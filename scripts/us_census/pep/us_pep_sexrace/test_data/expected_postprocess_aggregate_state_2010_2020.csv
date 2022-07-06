@@ -1,6 +1,0 @@
-geo_ID,Year,Count_Person_Male_WhiteAlone,Count_Person_Female_WhiteAlone,Count_Person_Male_BlackOrAfricanAmericanAlone,Count_Person_Female_BlackOrAfricanAmericanAlone,Count_Person_Male_AmericanIndianAndAlaskaNativeAlone,Count_Person_Female_AmericanIndianAndAlaskaNativeAlone,Count_Person_Male_AsianOrPacificIslander,Count_Person_Female_AsianOrPacificIslander,Count_Person_Male,Count_Person_Female
-country/USA,1981,1407855,1487993,464849,537013,4276,4196,5360,6978,1882340,2036180
-country/USA,1982,1409130,1491229,464290,537942,4619,4542,5927,7539,1883966,2041252
-country/USA,1983,1413211,1494123,464245,538112,5006,4912,6462,8038,1888924,2045185
-country/USA,1984,1420040,1501535,464567,539428,5391,5324,6986,8563,1896984,2054850
-country/USA,1991,1463795,1550841,477002,559748,8189,8380,10775,12295,1959761,2131264
