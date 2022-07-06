@@ -162,7 +162,7 @@ def _replace_source_category(df: pd.DataFrame, column_name: str) ->\
             'OFF-HIGHWAY':
                 'NonRoadEnginesAndVehicles',
             'MISCELLANEOUS':
-                'MiscellaneousEmissionSource',
+                'EPA_MiscellaneousEmissionSource',
             'Wildfires':
                 'Wildfire',
             'WILDFIRES':
