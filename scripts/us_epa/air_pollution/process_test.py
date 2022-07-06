@@ -39,10 +39,10 @@ class TestProcess(unittest.TestCase):
     It will be generating CSV, MCF and TMCF files based on the sample input.
     Comparing the data with the expected files.
     """
-    test_data_files = os.listdir(TEST_DATASET_DIR)
-    ip_data = [
+    _TEST_DATA_FILES = os.listdir(TEST_DATASET_DIR)
+    _IP_DATA = [
         os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in test_data_files
+        for file_name in _TEST_DATA_FILES
     ]
 
     def __init__(self, methodName: str = ...) -> None:
@@ -53,7 +53,7 @@ class TestProcess(unittest.TestCase):
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            base = USAirPollutionEmissionTrends(self.ip_data,
+            base = USAirPollutionEmissionTrends(self._IP_DATA,
                                                 cleaned_csv_file_path,
                                                 mcf_file_path, tmcf_file_path)
             base.process()

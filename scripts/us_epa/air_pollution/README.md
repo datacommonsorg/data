@@ -28,7 +28,7 @@ These are the attributes that we will use
 Cleaned data will be inside [output/airpollution_emission_trends_tier1.csv] as a CSV file with the following columns.
 
 - year
-- geo_ID
+- geo_Id
 - SV
 - Measurement_Method
 - observation
@@ -43,15 +43,15 @@ Cleaned data will be inside [output/airpollution_emission_trends_tier1.csv] as a
 
 Run the test cases
 
-`/bin/python3 -m unittest scripts/us_epa/airpollution/process_test.py`
+`python3 -m unittest process_test.py`
 
 
 ### Import Procedure
 
 The below script will download the data.
 
-`/bin/python3 scripts/us_epa/airpollution/download.py`
+`python3 download.py`
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 
-`/bin/python3 scripts/us_epa/airpollution/process.py`
+`python3 process.py`

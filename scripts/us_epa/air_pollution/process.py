@@ -41,7 +41,7 @@ _TMCF_TEMPLATE = (
     "variableMeasured: C:airpollution_emission_trends_tier1->SV\n"
     "measurementMethod: C:airpollution_emission_trends_tier1->"
     "Measurement_Method\n"
-    "observationAbout: C:airpollution_emission_trends_tier1->geo_ID\n"
+    "observationAbout: C:airpollution_emission_trends_tier1->geo_Id\n"
     "observationDate: C:airpollution_emission_trends_tier1->year\n"
     "scalingFactor: 1000\n"
     "unit: Ton\n"
@@ -56,7 +56,9 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
 
     Returns: df (pd.DataFrame): modified df as output
     """
-
+    # Dropping the rows which contain PrescribedFire, Wildfire or Miscellaneous.
+    # As they are not a part of StationaryFuelCombustion, 
+    # IndustrialAndOtherProcesses or Transportation group.
     df = df.drop(df[(df['SV'].str.contains('PrescribedFire')) |
                     (df['SV'].str.contains('Wildfire')) |
                     (df['SV'].str.contains('Miscellaneous'))].index)
@@ -94,7 +96,7 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
                         'IndustrialAndOtherProcesses').str.replace(
                             'OnRoadVehicles', 'Transportation').str.replace(
                                 'NonRoadEnginesAndVehicles', 'Transportation'))
-    df = df.groupby(['year', 'geo_ID', 'SV']).sum().reset_index()
+    df = df.groupby(['year', 'geo_Id', 'SV']).sum().reset_index()
     df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
     return df
 
@@ -187,8 +189,8 @@ def _state_emissions(file_path: str) -> pd.DataFrame:
     df = pd.read_excel(file_path, sheet, skiprows=1, header=0)
     # Adding geoId/ and making the State FIPS code of 2 numbers
     # Eg - 1 -> geoId/01
-    df['geo_ID'] = [f'{x:02}' for x in df['State FIPS']]
-    df['geo_ID'] = 'geoId/' + df['geo_ID']
+    df['geo_Id'] = [f'{x:02}' for x in df['State FIPS']]
+    df['geo_Id'] = 'geoId/' + df['geo_Id']
     # Dropping Unwanted Columns
     df = df.drop(columns=['State FIPS', 'State', 'Tier 1 Code'])
     df = _replace_pollutant(df, 'Pollutant')
@@ -197,7 +199,7 @@ def _state_emissions(file_path: str) -> pd.DataFrame:
             '_NonBiogenic_' + df['Pollutant']
     df = df.drop(columns=['Tier 1 Description', 'Pollutant'])
     # Changing the years present as columns into row values.
-    df = df.melt(id_vars=['SV', 'geo_ID'],
+    df = df.melt(id_vars=['SV', 'geo_Id'],
                  var_name='year',
                  value_name='observation')
     df['year'] = (df['year'].str[-2:]).astype(int)
@@ -259,7 +261,7 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
         df = df.melt(id_vars=['SV'], var_name='year', value_name='observation')
         final_df = pd.concat([final_df, df])
 
-    final_df['geo_ID'] = 'country/USA'
+    final_df['geo_Id'] = 'country/USA'
     final_df_agg = _add_missing_columns(final_df)
     final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
     final_df = pd.concat([final_df, final_df_agg])
@@ -322,7 +324,7 @@ class USAirPollutionEmissionTrends:
         cleaned CSV, MCF, and TMCF file.
         """
 
-        final_df = pd.DataFrame(columns=['geo_ID', 'year', 'SV', 'observation'])
+        final_df = pd.DataFrame(columns=['geo_Id', 'year', 'SV', 'observation'])
         # Creating Output Directory
         output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
@@ -343,7 +345,7 @@ class USAirPollutionEmissionTrends:
             sv_list += df["SV"].to_list()
 
         final_df = final_df.sort_values(
-            by=['geo_ID', 'year', 'SV', 'observation'])
+            by=['geo_Id', 'year', 'SV', 'observation'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
@@ -359,15 +361,15 @@ def main(_):
         os.mkdir(input_path)
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+    output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "output")
     # Defining Output Files
     csv_name = "airpollution_emission_trends_tier1.csv"
     mcf_name = "airpollution_emission_trends_tier1.mcf"
     tmcf_name = "airpollution_emission_trends_tier1.tmcf"
-    cleaned_csv_path = os.path.join(data_file_path, csv_name)
-    mcf_path = os.path.join(data_file_path, mcf_name)
-    tmcf_path = os.path.join(data_file_path, tmcf_name)
+    cleaned_csv_path = os.path.join(output_file_path, csv_name)
+    mcf_path = os.path.join(output_file_path, mcf_name)
+    tmcf_path = os.path.join(output_file_path, tmcf_name)
     loader = USAirPollutionEmissionTrends(ip_files, cleaned_csv_path, mcf_path,\
         tmcf_path)
     loader.process()
