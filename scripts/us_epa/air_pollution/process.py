@@ -75,27 +75,21 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     #                               WasteDisposalAndRecycling
     # Transportation -              OnRoadVehicles
     #                               NonRoadEnginesAndVehicles
-    df['SV'] = (df['SV'].str.replace(
-        'FuelCombustionElectricUtility',
-        'StationaryFuelCombustion').str.replace(
-            'FuelCombustionIndustrial', 'StationaryFuelCombustion').str.replace(
-                'FuelCombustionOther', 'StationaryFuelCombustion').str.replace(
-                    'ChemicalAndAlliedProductManufacturing',
-                    'IndustrialAndOtherProcesses').str.replace(
-                        'MetalsProcessing',
-                        'IndustrialAndOtherProcesses').str.replace(
-                            'PetroleumAndRelatedIndustries',
-                            'IndustrialAndOtherProcesses').str.replace(
-                                'OtherIndustrialProcesses',
-                                'IndustrialAndOtherProcesses').str.replace(
-                                    'SolventUtilization',
-                                    'IndustrialAndOtherProcesses').str.replace(
-                                        'StorageAndTransport',
-                                        'IndustrialAndOtherProcesses').str.
-                replace('WasteDisposalAndRecycling',
-                        'IndustrialAndOtherProcesses').str.replace(
-                            'OnRoadVehicles', 'Transportation').str.replace(
-                                'NonRoadEnginesAndVehicles', 'Transportation'))
+    sourcegroups = {
+        'FuelCombustionElectricUtility': 'StationaryFuelCombustion',
+        'FuelCombustionIndustrial': 'StationaryFuelCombustion',
+        'FuelCombustionOther': 'StationaryFuelCombustion',
+        'ChemicalAndAlliedProductManufacturing': 'IndustrialAndOtherProcesses',
+        'MetalsProcessing': 'IndustrialAndOtherProcesses',
+        'PetroleumAndRelatedIndustries': 'IndustrialAndOtherProcesses',
+        'OtherIndustrialProcesses': 'IndustrialAndOtherProcesses',
+        'SolventUtilization': 'IndustrialAndOtherProcesses',
+        'StorageAndTransport': 'IndustrialAndOtherProcesses',
+        'WasteDisposalAndRecycling': 'IndustrialAndOtherProcesses',
+        'OnRoadVehicles': 'Transportation',
+        'NonRoadEnginesAndVehicles': 'Transportation'
+    }
+    df['SV'] = df['SV'].replace(sourcegroups, regex=True)
     df = df.groupby(['year', 'geo_Id', 'SV']).sum().reset_index()
     df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
     return df
