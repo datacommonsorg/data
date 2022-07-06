@@ -17,6 +17,7 @@ and generates cleaned CSV, MCF, TMCF file.
 """
 
 import os
+import sys
 from sre_constants import IN
 from absl import app, flags
 import pandas as pd
@@ -351,9 +352,11 @@ class USAirPollutionEmissionTrends:
 
 def main(_):
     input_path = FLAGS.input_path
-    if not os.path.exists(input_path):
-        os.mkdir(input_path)
-    ip_files = os.listdir(input_path)
+    try:
+        ip_files = os.listdir(input_path)
+    except:
+        print("Run the download script first.\n")
+        sys.exit(1)
     ip_files = [input_path + os.sep + file for file in ip_files]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
