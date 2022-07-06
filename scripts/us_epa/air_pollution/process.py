@@ -57,7 +57,7 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     Returns: df (pd.DataFrame): modified df as output
     """
     # Dropping the rows which contain PrescribedFire, Wildfire or Miscellaneous.
-    # As they are not a part of StationaryFuelCombustion, 
+    # As they are not a part of StationaryFuelCombustion,
     # IndustrialAndOtherProcesses or Transportation group.
     df = df.drop(df[(df['SV'].str.contains('PrescribedFire')) |
                     (df['SV'].str.contains('Wildfire')) |
@@ -362,7 +362,7 @@ def main(_):
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output")
+                                    "output")
     # Defining Output Files
     csv_name = "airpollution_emission_trends_tier1.csv"
     mcf_name = "airpollution_emission_trends_tier1.mcf"
