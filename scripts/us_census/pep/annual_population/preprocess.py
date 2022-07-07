@@ -847,10 +847,10 @@ def main(_):
             for file in sorted(os.listdir(files_dir))
         ]
     # Defining Output file names
-    data_file_path = _MODULE_DIR + os.sep + OUTPUT_DIR
-    cleaned_csv_path = data_file_path + os.sep + "usa_annual_population.csv"
-    mcf_path = data_file_path + os.sep + "usa_annual_population.mcf"
-    tmcf_path = data_file_path + os.sep + "usa_annual_population.tmcf"
+    data_file_path = os.path.join(_MODULE_DIR, OUTPUT_DIR)
+    cleaned_csv_path = os.path.join(data_file_path, "usa_annual_population.csv")
+    mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
+    tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
 
     process(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
 
