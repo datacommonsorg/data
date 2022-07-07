@@ -16,7 +16,7 @@ This Python Script is for State Level Data 2010-2020.
 '''
 import os
 import pandas as pd
-from common_functions import _input_url, _gender_based_grouping
+from common_functions import input_url, gender_based_grouping
 
 
 def state2010(url_file: str, output_folder: str):
@@ -24,7 +24,7 @@ def state2010(url_file: str, output_folder: str):
    This Python Script Loads csv datasets from 2010-2020 on a State Level,
    cleans it and create a cleaned csv.
    '''
-    _url = _input_url(url_file, "2010-20")
+    _url = input_url(url_file, "2010-20")
     df = pd.read_csv(_url, encoding='ISO-8859-1')
 
     # Filter years 3 - 13.
@@ -80,7 +80,7 @@ def state2010(url_file: str, output_folder: str):
     df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
     df_as = df_as[~df_as["SVs"].str.contains("Total")]
     # DF sent to an external function for aggregation based on gender.
-    df_as = _gender_based_grouping(df_as)
+    df_as = gender_based_grouping(df_as)
     df['SVs'] = df['SVs'].str.replace('_Total', '')
     df = pd.concat([df, df_as])
     df.to_csv(

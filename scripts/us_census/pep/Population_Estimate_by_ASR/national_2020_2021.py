@@ -16,7 +16,7 @@ This Python Script is for National Level Data 2010-2019.
 '''
 import os
 import pandas as pd
-from common_functions import _input_url
+from common_functions import input_url
 
 
 def national2020(url_file: str, output_folder: str):
@@ -25,7 +25,7 @@ def national2020(url_file: str, output_folder: str):
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
-    _url = _input_url(url_file, "2020-21")
+    _url = input_url(url_file, "2020-21")
     df = pd.read_csv(_url, header=0)
     df.drop(df[(df['SEX'] == 0) | (df['AGE'] == 999)].index, inplace=True)
     df = df.replace({'SEX': {2: 'Female', 1: 'Male'}})

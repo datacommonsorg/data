@@ -16,8 +16,8 @@ This Python Script is for State Level Data 1970-1979.
 '''
 import os
 import pandas as pd
-from common_functions import (_input_url, _gender_based_grouping,
-                              _race_based_grouping)
+from common_functions import (input_url, gender_based_grouping,
+                              race_based_grouping)
 
 
 def state1970(url_file: str, output_folder: str):
@@ -26,7 +26,7 @@ def state1970(url_file: str, output_folder: str):
       cleans it and create a cleaned csv.
       '''
 
-    _url = _input_url(url_file, "1970-79")
+    _url = input_url(url_file, "1970-79")
     df = pd.read_csv(_url, skiprows=5, encoding='ISO-8859-1')
     df.insert(1, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['FIPS State Code'].map(str)).str.zfill(2)
@@ -87,10 +87,10 @@ def state1970(url_file: str, output_folder: str):
     df_ar = pd.concat([df_ar, df])
     final_df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on gender.
-    df = _gender_based_grouping(df)
+    df = gender_based_grouping(df)
     df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on race.
-    df_ar = _race_based_grouping(df_ar)
+    df_ar = race_based_grouping(df_ar)
     df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     final_df = pd.concat([final_df, df_ar, df])
     final_df = final_df[~final_df.SVs.str.contains('OtherRaces')]

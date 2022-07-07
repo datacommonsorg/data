@@ -16,7 +16,7 @@ This Python Script is for National Level Data 2000-2010.
 '''
 import os
 import pandas as pd
-from common_functions import _input_url, _race_based_grouping
+from common_functions import input_url, race_based_grouping
 
 
 def national2000(url_file: str, output_folder: str):
@@ -25,7 +25,7 @@ def national2000(url_file: str, output_folder: str):
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
-    _url = _input_url(url_file, "2000-10")
+    _url = input_url(url_file, "2000-10")
     # Reading the csv format input file and converting it to a dataframe.
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
     # Removing the unwanted rows.
@@ -82,7 +82,7 @@ def national2000(url_file: str, output_folder: str):
     df_ar = pd.DataFrame()
     df_ar = pd.concat([df_ar, df])
     # DF sent to an external function for aggregation based on race.
-    df_ar = _race_based_grouping(df_ar)
+    df_ar = race_based_grouping(df_ar)
     df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     df_ar = df_ar[df_ar.SVs.str.contains('Years_')]
     df = pd.concat([df_ar, df])

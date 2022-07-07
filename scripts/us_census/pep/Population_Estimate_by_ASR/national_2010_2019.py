@@ -16,7 +16,7 @@ This Python Script is for National Level Data 2010-2019.
 '''
 import os
 import pandas as pd
-from common_functions import _input_url
+from common_functions import input_url
 
 
 def national2010(url_file: str, output_folder: str):
@@ -25,8 +25,8 @@ def national2010(url_file: str, output_folder: str):
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
-    _urls = _input_url(url_file, "2010-19")
-    _sheets = _input_url(url_file, "2010-19sheets")
+    _urls = input_url(url_file, "2010-19")
+    _sheets = input_url(url_file, "2010-19sheets")
     # Used to collect data after every loop for every file's df.
     df_final = pd.DataFrame()
     for sheet in _sheets:

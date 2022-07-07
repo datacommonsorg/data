@@ -6,7 +6,7 @@ import os
 import pandas as pd
 
 
-def _input_url(file_name: str, key_name: str):
+def input_url(file_name: str, key_name: str):
     """
     Take the File Name and Key as input
     and provide the URLs of the specified year/geo as output.
@@ -20,7 +20,7 @@ def _input_url(file_name: str, key_name: str):
     return _url
 
 
-def _replace_age(df: pd.DataFrame):
+def replace_age(df: pd.DataFrame):
     """
     Replaces the columns of DF as per metadata
     """
@@ -48,7 +48,7 @@ def _replace_age(df: pd.DataFrame):
     return df
 
 
-def _gender_based_grouping(df: pd.DataFrame):
+def gender_based_grouping(df: pd.DataFrame):
     """
     Aggregates the columns based on gender by removing race from SV
     """
@@ -65,7 +65,7 @@ def _gender_based_grouping(df: pd.DataFrame):
     return df
 
 
-def _race_based_grouping(df: pd.DataFrame):
+def race_based_grouping(df: pd.DataFrame):
     """
     Aggregates the columns based on race by removing gender from SV
     """

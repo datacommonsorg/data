@@ -17,7 +17,7 @@ This Python Script is for County Level Data 2010-2020.
 import os
 import numpy as np
 import pandas as pd
-from common_functions import _input_url
+from common_functions import input_url
 
 
 def county2010(url_file: str, output_folder: str):
@@ -25,7 +25,7 @@ def county2010(url_file: str, output_folder: str):
     This Python Script Loads csv datasets from 2010-2020 on a County Level,
     cleans it and create a cleaned csv.
     '''
-    _url = _input_url(url_file, "2010-20")
+    _url = input_url(url_file, "2010-20")
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
     # Filter by agegrp = 0.
     df = df.query("YEAR not in [1, 2, 13]")

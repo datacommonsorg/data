@@ -17,8 +17,8 @@ This Python Script is for County Level Data 1990-2000.
 import os
 import numpy as np
 import pandas as pd
-from common_functions import (_replace_age, _gender_based_grouping,
-                              _race_based_grouping)
+from common_functions import (replace_age, gender_based_grouping,
+                              race_based_grouping)
 
 
 def county1990(output_folder: str):
@@ -56,7 +56,7 @@ def county1990(output_folder: str):
             # Providing geoId to the dataframe.
             df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]
             # Replacing the numbers with more understandable metadata headings.
-            df = _replace_age(df)
+            df = replace_age(df)
 
             # Columns after 11 where having origin.
             df.drop(df[df['Race'] >= 11].index, inplace=True)
@@ -93,10 +93,10 @@ def county1990(output_folder: str):
     df_as = pd.concat([final_df, df_as])
     df_ar = pd.concat([df_ar, final_df])
     # DF sent to an external function for aggregation based on gender.
-    df_as = _gender_based_grouping(df_as)
+    df_as = gender_based_grouping(df_as)
     df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on race.
-    df_ar = _race_based_grouping(df_ar)
+    df_ar = race_based_grouping(df_ar)
     df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     final_df = pd.concat([final_df, df_ar, df_as])
 

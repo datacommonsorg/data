@@ -16,8 +16,8 @@ This Python Script is for County Level Data 1970-1979
 '''
 import os
 import pandas as pd
-from common_functions import (_input_url, _replace_age, _gender_based_grouping,
-                              _race_based_grouping)
+from common_functions import (input_url, replace_age, gender_based_grouping,
+                              race_based_grouping)
 
 
 def county1970(url_file: str, output_folder: str):
@@ -26,7 +26,7 @@ def county1970(url_file: str, output_folder: str):
    cleans it and create a cleaned csv
    '''
     # Getting input URL from the JSON file.
-    _url = _input_url(url_file, "1970-79")
+    _url = input_url(url_file, "1970-79")
     _cols=['Year','geo_ID','Race',0,1,2,3,4,5,6,7\
                       ,8,9,10,11,12,13,14,15,16,17]
     # Contains the final data which has been taken directly and aggregated.
@@ -50,7 +50,7 @@ def county1970(url_file: str, output_folder: str):
         }
     })
     # Replacing the numbers with more understandable metadata headings.
-    df = _replace_age(df)
+    df = replace_age(df)
     df = df.melt(id_vars=['Year','geo_ID' ,'Race'], var_name='sv' ,\
        value_name='observation')
     df['SVs'] = 'Count_Person_' + df['sv'] + '_' + df['Race']
@@ -61,10 +61,10 @@ def county1970(url_file: str, output_folder: str):
     df_ar = pd.concat([df_ar, df])
     final_df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on gender.
-    df = _gender_based_grouping(df)
+    df = gender_based_grouping(df)
     df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on race.
-    df_ar = _race_based_grouping(df_ar)
+    df_ar = race_based_grouping(df_ar)
     df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     final_df = pd.concat([final_df, df_ar, df])
     final_df = final_df[~final_df.SVs.str.contains('OtherRaces')]

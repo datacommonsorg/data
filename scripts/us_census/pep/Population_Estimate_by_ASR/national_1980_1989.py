@@ -20,7 +20,7 @@ from zipfile import ZipFile
 from urllib.request import urlopen
 import pandas as pd
 import numpy as np
-from common_functions import _input_url
+from common_functions import input_url
 
 
 def column_naming(df: pd.DataFrame):
@@ -59,7 +59,7 @@ def national1980(url_file: str, output_folder: str):
     # Getting list of URLs from JSON file.
     _ZIP_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             'Zip1980-90')
-    _urls = _input_url(url_file, "1980-90")
+    _urls = input_url(url_file, "1980-90")
 
     # Creation of a folder if it does not exist.
     if not os.path.exists(_ZIP_DIR):
@@ -73,7 +73,7 @@ def national1980(url_file: str, output_folder: str):
             # unzipping the dataset
             with ZipFile(BytesIO(resp.read()), 'r') as zipfile:
                 zipfile.extractall()
-    _urls = _urls = _input_url(url_file, "1980-90files")
+    _urls = _urls = input_url(url_file, "1980-90files")
 
     cols = ["0", "1", "2", "3", "4", "5", "6", "7",\
                         "8", "9", "10", "11","12", "13", "14", "15",\
