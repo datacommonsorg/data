@@ -14,12 +14,5 @@ scripts/india_udise/common/data/3109_*.json
 scripts/india_udise/common/data/3031_*.json
 scripts/us_epa/superfund/**/output
 **/tmp/
-scripts/**
-!scripts/rff
-!scripts/rff/**
-scripts/rff/raw_data/**
-!scripts/rff/raw_data/us_vectors/**
-!scripts/rff/raw_data/prism/daily/county/**
-!scripts/rff/raw_data/prism/daily/4km/** 
 .git-rewrite
 .git-rewrite/**

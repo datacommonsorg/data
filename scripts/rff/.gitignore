@@ -1,0 +1,4 @@
+raw_data/**
+!raw_data/us_vectors/**
+!raw_data/prism/daily/county/**
+!raw_data/prism/daily/4km/** 
