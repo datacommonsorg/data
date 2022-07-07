@@ -57,14 +57,14 @@ def national1980(url_file: str, output_folder: str):
     cleans it and create a cleaned csv.
     '''
     # Getting list of URLs from JSON file.
-    _ZIP_DIR = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + 'Zip1980-90'
+    _ZIP_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            'Zip1980-90')
     _urls = _input_url(url_file, "1980-90")
 
     # Creation of a folder if it does not exist.
     if not os.path.exists(_ZIP_DIR):
         os.mkdir(_ZIP_DIR)
-    current_dir = os.path.dirname(os.path.abspath(__file__)) + os.sep
+    current_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(_ZIP_DIR)
 
     # Extraction of ZIP files.

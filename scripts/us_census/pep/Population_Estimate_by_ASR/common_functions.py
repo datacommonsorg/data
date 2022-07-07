@@ -11,8 +11,8 @@ def _input_url(file_name: str, key_name: str):
     Take the File Name and Key as input
     and provide the URLs of the specified year/geo as output.
     """
-    _URLS_JSON_PATH = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + file_name
+    _URLS_JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   file_name)
     _URLS_JSON = None
     with open(_URLS_JSON_PATH, encoding="UTF-8") as file:
         _URLS_JSON = json.load(file)
