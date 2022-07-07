@@ -14,5 +14,3 @@ scripts/india_udise/common/data/3109_*.json
 scripts/india_udise/common/data/3031_*.json
 scripts/us_epa/superfund/**/output
 **/tmp/
-.git-rewrite
-.git-rewrite/**
