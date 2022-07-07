@@ -214,7 +214,7 @@ def _clean_county_80_xls_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
     df_temp['geo_ID'] = "country/USA"
     df_temp = df_temp.groupby(['Year','geo_ID']).sum().\
         reset_index()
-    final_df = pd.concat([final_df,df, df_temp])
+    final_df = pd.concat([final_df, df, df_temp])
     final_df = final_df.drop_duplicates()
     return final_df
 
@@ -711,7 +711,7 @@ class CensusUSAPopulationByRace:
                 df = _clean_county_70_xls_file(df)
             elif "pe-02" in file:
                 df = pd.read_excel(file)
-                df = _clean_county_80_xls_file(df,self.cleaned_csv_file_path)
+                df = _clean_county_80_xls_file(df, self.cleaned_csv_file_path)
             else:
                 df = pd.read_excel(file)
                 df = _clean_xls_file(df, file)
@@ -735,7 +735,8 @@ class CensusUSAPopulationByRace:
                     reset_index()
                 # aggregating County data to obtain State data for 2010-2020
                 df_state = df.copy()
-                df_state['geo_ID'] = (df['geo_ID'].map(str)).str[:len('geoId/NN')]
+                df_state['geo_ID'] = (
+                    df['geo_ID'].map(str)).str[:len('geoId/NN')]
                 df_state = df_state.groupby(['Year', 'geo_ID']).sum().\
                     reset_index()
                 df = df.append(df_state, ignore_index=True)
@@ -823,13 +824,26 @@ class CensusUSAPopulationByRace:
             "InCombinationWithOneOrMoreOtherRaces",\
             "Count_Person_AsianOrPacificIslander",\
             "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"]]
-        df_before_2000 = self.df[self.df["Year"]<2000]
-        df_county_after_2000 = self.df[(self.df["Year"]>=2000)&(self.df["geo_ID"]!="country/USA")&(self.df["geo_ID"].str.len()>9)]
-        df_national_state_2000 = self.df[(self.df["Year"]>=2000)&((self.df["geo_ID"].str.len()<=9)|(self.df["geo_ID"]=="country/USA"))]
+        df_before_2000 = self.df[self.df["Year"] < 2000]
+        df_county_after_2000 = self.df[(self.df["Year"] >= 2000) &
+                                       (self.df["geo_ID"] != "country/USA") &
+                                       (self.df["geo_ID"].str.len() > 9)]
+        df_national_state_2000 = self.df[(self.df["Year"] >= 2000) &
+                                         ((self.df["geo_ID"].str.len() <= 9) |
+                                          (self.df["geo_ID"] == "country/USA"))]
         # &(self.df["geo_ID"]=="country/USA")
-        df_before_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_before_2000.csv"), index=False)
-        df_county_after_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_county_after_2000.csv"), index=False)
-        df_national_state_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_state_2000.csv"), index=False)
+        df_before_2000.to_csv(os.path.join(
+            self.cleaned_csv_file_path,
+            "USA_Population_Count_by_Race_before_2000.csv"),
+                              index=False)
+        df_county_after_2000.to_csv(os.path.join(
+            self.cleaned_csv_file_path,
+            "USA_Population_Count_by_Race_county_after_2000.csv"),
+                                    index=False)
+        df_national_state_2000.to_csv(os.path.join(
+            self.cleaned_csv_file_path,
+            "USA_Population_Count_by_Race_National_state_2000.csv"),
+                                      index=False)
 
     def process(self):
         """
@@ -930,13 +944,16 @@ class CensusUSAPopulationByRace:
                 continue
             # Giving a different measurementMethod for the statistical Variables which are being.
             if name == "USA_Population_Count_by_Race_before_2000":
-                if col in ["Count_Person_WhiteAlone","Count_Person_BlackOrAfricanAmericanAlone" ]:
+                if col in [
+                        "Count_Person_WhiteAlone",
+                        "Count_Person_BlackOrAfricanAmericanAlone"
+                ]:
                     measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
                 else:
                     measure = "CensusPEPSurvey_RaceUpto1999"
             elif name == "USA_Population_Count_by_Race_county_after_2000":
                 measure = "CensusPEPSurvey_PartialAggregate_Race2000Onwards"
-            elif name == "USA_Population_Count_by_Race_National_state_2000": 
+            elif name == "USA_Population_Count_by_Race_National_state_2000":
                 measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards"
             tmcf = tmcf + tmcf_template.format(i, col, measure, col) + "\n"
             i = i + 1
@@ -956,9 +973,10 @@ def main(_):
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
     # Defining Output file names
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)) , "output")
-    mcf_path = data_file_path 
-    tmcf_path = data_file_path 
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "output")
+    mcf_path = data_file_path
+    tmcf_path = data_file_path
     loader = CensusUSAPopulationByRace(ip_files, data_file_path, mcf_path,
                                        tmcf_path)
     loader.process()

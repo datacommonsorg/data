@@ -36,9 +36,9 @@ class TestPreprocess(unittest.TestCase):
     mcf_file_path = OP_DATA_FOLDER
     tmcf_file_path = OP_DATA_FOLDER
 
-    ip_files = os.listdir(os.path.join(TEST_DATA_FOLDER,"test_files"))
+    ip_files = os.listdir(os.path.join(TEST_DATA_FOLDER, "test_files"))
     ip_data_path = [
-        os.path.join(os.path.join(TEST_DATA_FOLDER,"test_files"), file_name)
+        os.path.join(os.path.join(TEST_DATA_FOLDER, "test_files"), file_name)
         for file_name in ip_files
     ]
 
@@ -51,29 +51,35 @@ class TestPreprocess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        files = ["USA_Population_Count_by_Race_before_2000",
-        "USA_Population_Count_by_Race_county_after_2000",
-        "USA_Population_Count_by_Race_National_state_2000"]
+        files = [
+            "USA_Population_Count_by_Race_before_2000",
+            "USA_Population_Count_by_Race_county_after_2000",
+            "USA_Population_Count_by_Race_National_state_2000"
+        ]
         for file in files:
-            temp_mcf_file  = file + ".mcf"
-            expected_mcf_file_path = os.path.join(
-                TEST_DATA_FOLDER, "expected_files", temp_mcf_file)
+            temp_mcf_file = file + ".mcf"
+            expected_mcf_file_path = os.path.join(TEST_DATA_FOLDER,
+                                                  "expected_files",
+                                                  temp_mcf_file)
 
             with open(expected_mcf_file_path,
-                    encoding="UTF-8") as expected_mcf_file:
+                      encoding="UTF-8") as expected_mcf_file:
                 expected_mcf_data = expected_mcf_file.read()
 
-            temp_tmcf_file  = file + ".tmcf"
-            expected_tmcf_file_path = os.path.join(
-                TEST_DATA_FOLDER, "expected_files", temp_tmcf_file)
+            temp_tmcf_file = file + ".tmcf"
+            expected_tmcf_file_path = os.path.join(TEST_DATA_FOLDER,
+                                                   "expected_files",
+                                                   temp_tmcf_file)
             with open(expected_tmcf_file_path,
-                    encoding="UTF-8") as expected_tmcf_file:
+                      encoding="UTF-8") as expected_tmcf_file:
                 expected_tmcf_data = expected_tmcf_file.read()
-        
-            with open(os.path.join(self.mcf_file_path ,temp_mcf_file), encoding="UTF-8") as mcf_file:
+
+            with open(os.path.join(self.mcf_file_path, temp_mcf_file),
+                      encoding="UTF-8") as mcf_file:
                 mcf_data = mcf_file.read()
 
-            with open(os.path.join(self.tmcf_file_path ,temp_tmcf_file), encoding="UTF-8") as tmcf_file:
+            with open(os.path.join(self.tmcf_file_path, temp_tmcf_file),
+                      encoding="UTF-8") as tmcf_file:
                 tmcf_data = tmcf_file.read()
 
             self.assertEqual(expected_mcf_data.strip(), mcf_data.strip())
@@ -89,18 +95,21 @@ class TestPreprocess(unittest.TestCase):
             TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race.csv")
 
         expected_csv_data = ""
-        files = ["USA_Population_Count_by_Race_before_2000",
-        "USA_Population_Count_by_Race_county_after_2000",
-        "USA_Population_Count_by_Race_National_state_2000"]
+        files = [
+            "USA_Population_Count_by_Race_before_2000",
+            "USA_Population_Count_by_Race_county_after_2000",
+            "USA_Population_Count_by_Race_National_state_2000"
+        ]
         for file in files:
-            temp_csv_file  = file + ".csv"
-            expected_csv_file_path = os.path.join(
-                TEST_DATA_FOLDER, "expected_files", temp_csv_file)
+            temp_csv_file = file + ".csv"
+            expected_csv_file_path = os.path.join(TEST_DATA_FOLDER,
+                                                  "expected_files",
+                                                  temp_csv_file)
             with open(expected_csv_file_path,
-                    encoding="utf-8-sig") as expected_csv_file:
+                      encoding="utf-8-sig") as expected_csv_file:
                 expected_csv_data = expected_csv_file.read()
-            with open(os.path.join(self.cleaned_csv_file_path ,temp_csv_file), encoding="UTF-8") as csv_file:
+            with open(os.path.join(self.cleaned_csv_file_path, temp_csv_file),
+                      encoding="UTF-8") as csv_file:
                 csv_data = csv_file.read()
 
             self.assertEqual(expected_csv_data.strip(), csv_data.strip())
-        
