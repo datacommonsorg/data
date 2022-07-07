@@ -1,0 +1,5 @@
+raw_data/prism/daily/county/** filter=lfs diff=lfs merge=lfs -text
+raw_data/prism/daily/4km/** filter=lfs diff=lfs merge=lfs -text
+raw_data/us_vectors/** filter=lfs diff=lfs merge=lfs -text
+historical_weather_variability/4km/*.csv filter=lfs diff=lfs merge=lfs -text
+historical_weather_variability/county/*.csv filter=lfs diff=lfs merge=lfs -text
