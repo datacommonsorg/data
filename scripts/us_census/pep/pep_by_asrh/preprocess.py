@@ -45,7 +45,7 @@ import pandas as pd
 import numpy as np
 from absl import app
 from cols_map import _get_mapper_cols_dict
-from constants import INPUT_DIRS
+from constants import INPUT_DIRS, INPUT_DIR
 
 _CODEDIR = os.path.dirname(__file__)
 
@@ -86,8 +86,7 @@ def _derive_cols(data_df: pd.DataFrame, derived_cols: dict) -> pd.DataFrame:
         pd.DataFrame: DataFrame
     """
     for dsv, sv in derived_cols.items():
-        data_df[dsv] = data_df.loc[:, sv].apply(pd.to_numeric,
-                                                errors="coerce").sum(axis=1)
+        data_df[dsv] = data_df.loc[:, sv].apply(pd.to_numeric).sum(axis=1)
     return data_df
 
 
@@ -354,6 +353,22 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     pop_cols = [
         val for val in cols + list(derived_cols.keys()) if "Hispanic" in val
     ]
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Age"],
                       value_vars=pop_cols,
@@ -421,6 +436,22 @@ def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
         val for val in cols_with_full_name + list(derived_cols.keys())
         if "Hispanic" in val
     ]
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Age"],
                       value_vars=pop_cols,
@@ -465,6 +496,22 @@ def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
         col for col in cols + list(derived_cols.keys()) if "Hispanic" in col
     ]
     data_df = data_df[cols]
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Age"],
                       value_vars=cols[2:],
@@ -497,6 +544,7 @@ def _process_state_1980_1989(file_path: str) -> str:
     """
     data_df = _load_data_df(path=file_path, file_format="txt", header=None)
     # Adding Leading Zeros for Fips Code in the zeroth column.
+    #  Before padding STATE = 1006, After padding STATE = 01006
     data_df[0] = data_df[0].astype("str").str.pad(width=5,
                                                   side="left",
                                                   fillchar="0")
@@ -535,7 +583,7 @@ def _process_state_1980_1989(file_path: str) -> str:
     data_df["SV"] = data_df["Sex"] + "_" + data_df["Race"]
     # Deriving New Columns
     # Type Casting the pop_cols to integer/float using pd.to_numeric function
-    data_df[pop_cols] = data_df[pop_cols].apply(pd.to_numeric, errors="coerce")
+    data_df[pop_cols] = data_df[pop_cols].apply(pd.to_numeric)
     derived_cols = _get_mapper_cols_dict("state_1980_1989")
     data_df = data_df[["Year", "Location", "SV"] + pop_cols]
     for dsv, sv in derived_cols.items():
@@ -545,6 +593,22 @@ def _process_state_1980_1989(file_path: str) -> str:
         tmp_derived_cols_df = tmp_derived_cols_df.groupby(
             ["Year", "Location", "SV"]).sum().reset_index()
         data_df = pd.concat([data_df, tmp_derived_cols_df])
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Location", "SV"],
                       value_vars=pop_cols,
@@ -600,6 +664,7 @@ def _process_state_1990_1999(file_path):
     data_df = _derive_cols(data_df, derived_cols)
 
     # Adding Leading Zeros for State"s Fips Code.
+    # Before padding Location = 6, After padding Location = 06
     data_df["Location"] = data_df["Location"].astype("str").str.pad(
         width=2, side="left", fillchar="0")
     # Creating GeoId"s using Fips Code
@@ -608,6 +673,22 @@ def _process_state_1990_1999(file_path):
     pop_cols = [
         val for val in cols + list(derived_cols.keys()) if "Hispanic" in val
     ]
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Location", "Age"],
                       value_vars=pop_cols,
@@ -696,6 +777,7 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
     data_df["SV"] = data_df["SV"].str.replace("empty_",
                                               "").str.replace("_empty", "")
     # Adding Leading Zeros for State"s Fips Code.
+    # Before padding STATE = 6, After padding STATE = 06
     data_df["Location"] = "geoId/" + data_df["STATE"].astype("str").str.pad(
         width=2, side="left", fillchar="0")
     # data_df.columns
@@ -719,10 +801,25 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
         if col.startswith("POPESTIMATE")
     ]
     data_df.columns = data_df.columns.str.replace("POPESTIMATE", "")
-    #print(data_df.columns)
-    # DataFrame Columns or Cols
+    # data_df Columns
     # ["Location", "SV", "2000", "2001", "2002", "2003",
     # "2004", "2005", "2006", "2007", "2008", "2009"]
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["Location", "SV"],
                       value_vars=pop_cols,
@@ -754,6 +851,7 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
                       (data_df["ORIGIN"] != 0)].reset_index(drop=True)
 
     # Creating GeoId"s for State FIPS Code
+    # Before padding STATE = 6, After padding STATE = 06
     data_df["STATE"] = "geoId/" + data_df["STATE"].astype("str").str.pad(
         width=2, side="left", fillchar="0")
     gender_mapper = {1: "Male", 2: "Female"}
@@ -774,7 +872,7 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     data_df["SV"] = data_df["SV"].str.replace("NotHispanicOrLatino_WhiteAlone",
                                               "WhiteAloneNotHispanicOrLatino")
     cols = list(data_df.columns)
-    # DataFrame Columns
+    # data_df Columns
     # ["SUMLEV", "REGION", "DIVISION", "STATE", "NAME", "SEX", "ORIGIN",
     # "RACE", "AGE", "CENSUS2010POP", "ESTIMATESBASE2010", "POPESTIMATE2010",
     # "POPESTIMATE2011", "POPESTIMATE2012", "POPESTIMATE2013",
@@ -799,7 +897,7 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     pop_cols = [val for val in req_cols if "POPESTIMATE" in val]
     # Deriving New Columns
     # Type Casting the pop_cols to integer/float using pd.to_numeric function
-    data_df[pop_cols] = data_df[pop_cols].apply(pd.to_numeric, errors="coerce")
+    data_df[pop_cols] = data_df[pop_cols].apply(pd.to_numeric)
     derived_cols = _get_mapper_cols_dict("state_2010_2020_hispanic")
     for dsv, sv in derived_cols.items():
         tmp_derived_cols_df = data_df[data_df["SV"].isin(
@@ -827,9 +925,25 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
         for col in req_cols
     ]
     data_df.columns = req_cols
-    # DataFrame Columns or req_cols are below
+    # data_df Columns or req_cols are below
     # ["Location", "SV", "AGE", "2010", "2011", "2012",
     # "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["SV", "Location", "AGE"],
                       value_vars=req_cols[3:],
@@ -922,7 +1036,7 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
     data_df["SV"] = data_df["SV"].map(sv_mapper)
     skipped_data_df["SV"] = skipped_data_df["SV"].map(sv_mapper)
     derived_cols = _get_mapper_cols_dict("county_1900_1999")
-    data_df[pop_cols] = data_df[pop_cols].apply(pd.to_numeric, errors="coerce")
+    data_df[pop_cols] = data_df[pop_cols].apply(pd.to_numeric)
     data = None
     for dsv, sv in derived_cols.items():
         data = data_df[data_df["SV"].isin(sv)].reset_index(drop=True)
@@ -931,7 +1045,22 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
         data_df = pd.concat([data_df, data])
     data_df = pd.concat([data_df, skipped_data_df])
     data_df = data_df.dropna()
-
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Location", "SV"],
                       value_vars=pop_cols,
@@ -940,7 +1069,8 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
     # Creating SV"s name using SV, Age Column
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
-    # Creating GeoId"s for State FIPS Code
+    # Creating GeoId"s for County FIPS Code
+    # Before padding Location = 1001, After padding Location = 01001
     data_df["Location"] = "geoId/" + data_df["Location"].astype("str").str.pad(
         width=5, side="left", fillchar="0")
     # Deriving Measurement Method for the SV"s
@@ -980,10 +1110,12 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
         cols[idx] = cols_mapper.get(val, val)
     data_df.columns = cols
     # Adding Leading Zeros for State's Fips Code.
+    # Before padding STATE = 6, After padding STATE = 06
     data_df["STATE"] = data_df["STATE"].astype("str").str.pad(width=2,
                                                               side="left",
                                                               fillchar="0")
     # Adding Leading Zeros for County's Fips Code.
+    # Before padding COUNTY = 20, After padding COUNTY = 020
     data_df["COUNTY"] = data_df["COUNTY"].astype("str").str.pad(width=3,
                                                                 side="left",
                                                                 fillchar="0")
@@ -994,6 +1126,22 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
     cols = cols + list(derived_cols.keys())
     data_df["Age"] = data_df["AGEGRP"].apply(_get_age_grp_county_2000_2009)
     f_cols = [val for val in cols if "Hispanic" in val]
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Location", "Age"],
                       value_vars=f_cols,
@@ -1036,10 +1184,12 @@ def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
         cols[idx] = cols_mapper.get(val, val)
     data_df.columns = cols
     # Adding Leading Zeros for State's Fips Code.
+    #  Before padding STATE = 6, After padding STATE = 06
     data_df["STATE"] = data_df["STATE"].astype("str").str.pad(width=2,
                                                               side="left",
                                                               fillchar="0")
     # Adding Leading Zeros for County's Fips Code.
+    # Before padding COUNTY = 20, After padding COUNTY = 020
     data_df["COUNTY"] = data_df["COUNTY"].astype("str").str.pad(width=3,
                                                                 side="left",
                                                                 fillchar="0")
@@ -1051,6 +1201,22 @@ def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
     f_cols = [val for val in cols if "Hispanic" in val]
     data_df["Age"] = data_df["AGEGRP"].apply(_get_age_grp)
     data_df["Age"] = data_df["Age"].str.replace("85To89", "85")
+    # Melt method example
+    # df Before Melt
+    # A  B  C
+    # a  1  2
+    # b  3  4
+    # c  5  6
+    # After Melt
+    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
+    #    var_name='myVarname', value_name='myValname')
+    # A myVarname  myValname
+    # a         B          1
+    # b         B          3
+    # c         B          5
+    # a         C          2
+    # b         C          4
+    # c         C          6
     data_df = pd.melt(data_df,
                       id_vars=["Year", "Location", "Age"],
                       value_vars=f_cols,
@@ -1188,19 +1354,19 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
 def main(_):
     ip_files = []
     for dir_path in INPUT_DIRS:
-        files_dir = os.path.join(_CODEDIR, INPUT_DIRS, dir_path)
+        files_dir = os.path.join(_CODEDIR, INPUT_DIR, dir_path)
         ip_files += [
             os.path.join(files_dir, file)
             for file in sorted(os.listdir(files_dir))
         ]
     #sys.exit(0)
-    data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output_files"
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "output_files")
 
     # Defining Output Files
-    cleaned_csv_path = data_file_path + os.sep + "usa_population_asrh.csv"
-    mcf_path = data_file_path + os.sep + "usa_population_asrh.mcf"
-    tmcf_path = data_file_path + os.sep + "usa_population_asrh.tmcf"
+    cleaned_csv_path = os.path.join(data_file_path, "usa_population_asrh.csv")
+    mcf_path = os.path.join(data_file_path, "usa_population_asrh.mcf")
+    tmcf_path = os.path.join(data_file_path, "usa_population_asrh.tmcf")
     process(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
 
 
