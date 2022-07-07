@@ -10,7 +10,7 @@ This directory uses a csv file at [`data/measurement_sites.csv`](data/measuremen
 `containedInPlace` - refers to the superfund site where the measurement site is present. This column is filled with the `**EPA ID**` of the superfund site, prefixed with `epaSuperfundSiteId/`. 
 `dcid` - refers to the unique id on the KG for the measurement site. The convention for constructing this ID is explained in the example below.
 
-#### Example to add a new measurement site to the measurement_sites csv
+#### Example to add a new measurement site to the `measurement_sites` csv
 In this section, we add a new site to the [`data/measurement_sites.csv`](data/measurement_sites.csv) file.
 
 In this example, we add a new measurement site in the [Tar Creek](https://en.wikipedia.org/wiki/Tar_Creek_Superfund_site) superfund site. Tar Creek has measurement sites which are sampling wells and in this example, we add a new well to the [`data/measurement_sites.csv`](data/measurement_sites.csv) file.
@@ -39,7 +39,7 @@ python3 generate_mcf.py --input_file=data/measurement_sites.csv --output_path=da
 
 This script also generated the `dcid` for each measurement site.
 
-In the context of the Data Commons knowledge graph, the `dcid` is a unique `id` associated with a node or entity in the graph. In the context of measurement_sites dataset, each measurement site irrespective of it's type is a node. The `dcid` for a measurement site is constructed with three parts which are joined using `/`. The three parts constituting the dcid are:
+In the context of the Data Commons knowledge graph, the `dcid` is a unique `id` associated with a node or entity in the graph. In the context of `measurement_sites dataset`, each measurement site irrespective of it's type is a node. The `dcid` for a measurement site is constructed with three parts which are joined using `/`. The three parts constituting the dcid are:
 
 1. Common identifying prefix: `epaSuperfundMeasurementSite`
 2. The superfund site's EPA ID where the measurement site is present
