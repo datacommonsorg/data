@@ -51,7 +51,9 @@ class TestPreprocess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        files = ["USA_Population_Count_by_Race_before_2000","USA_Population_Count_by_Race_after_2000","USA_Population_Count_by_Race_National_2000"]
+        files = ["USA_Population_Count_by_Race_before_2000",
+        "USA_Population_Count_by_Race_county_after_2000",
+        "USA_Population_Count_by_Race_National_state_2000"]
         for file in files:
             temp_mcf_file  = file + ".mcf"
             expected_mcf_file_path = os.path.join(
@@ -87,7 +89,9 @@ class TestPreprocess(unittest.TestCase):
             TEST_DATA_FOLDER, "expected_USA_Population_Count_by_Race.csv")
 
         expected_csv_data = ""
-        files = ["USA_Population_Count_by_Race_before_2000","USA_Population_Count_by_Race_after_2000","USA_Population_Count_by_Race_National_2000"]
+        files = ["USA_Population_Count_by_Race_before_2000",
+        "USA_Population_Count_by_Race_county_after_2000",
+        "USA_Population_Count_by_Race_National_state_2000"]
         for file in files:
             temp_csv_file  = file + ".csv"
             expected_csv_file_path = os.path.join(

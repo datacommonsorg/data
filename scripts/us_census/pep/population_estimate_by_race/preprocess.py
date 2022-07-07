@@ -31,7 +31,7 @@ from absl import flags
 from util.alpha2_to_dcid import USSTATE_MAP
 from states_to_shortform import get_states
 
-pd.set_option("display.max_columns", None)
+# pd.set_option("display.max_columns", None)
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
@@ -365,7 +365,7 @@ def _clean_county_2010_csv_file(df: pd.DataFrame) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for csv dataset.
     '''
     # filter by agegrp = 0
-    df = df.query("YEAR not in [1, 2, 13]")
+    df = df.query("YEAR not in [1, 2]")
     df = df.query("AGEGRP == 0")
     # filter years 3 - 14
     df['YEAR'] = df['YEAR'].astype(str)
@@ -380,11 +380,11 @@ def _clean_county_2010_csv_file(df: pd.DataFrame) -> pd.DataFrame:
         '10': '2017',
         '11': '2018',
         '12': '2019',
-        '14': '2020'
+        '13': '2020'
     }
     df = df.replace({'YEAR': conversion_of_year_to_value})
     df.insert(6, 'geo_ID', 'geoId/', True)
-    df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + \
+    df['geo_ID'] = 'geoId/' +(df['STATE'].map(str)).str.zfill(2) + \
         (df['COUNTY'].map(str)).str.zfill(3)
     df['AGEGRP'] = df['AGEGRP'].astype(str)
     # Replacing the numbers with more understandable metadata headings
@@ -550,6 +550,7 @@ def _clean_county_90_txt_file(file: str) -> pd.DataFrame:
     df["geo_ID"] = "geoId/" + df["FIPS"]
     df.drop(columns=["FIPS", 1, 2, 3], inplace=True)
     df["Year"] = "19" + file[-6:-4]
+    df = df.drop(df[(df['geo_ID'].str.endswith('000'))].index)
     return df
 
 
@@ -682,7 +683,7 @@ class CensusUSAPopulationByRace:
         self.mcf_file_path = mcf_file_path
         self.tmcf_file_path = tmcf_file_path
         self.df = None
-        self.df1 = None
+        self.df_national = None
         self.file_name = None
 
     def _load_data(self, file: str) -> pd.DataFrame:
@@ -721,9 +722,27 @@ class CensusUSAPopulationByRace:
                 df = _clean_csv2_file(df)
             elif "co-est00" in file:
                 df = _clean_county_20_csv_file(file)
+                float_col = df.select_dtypes(include=['float64'])
+                for col in float_col.columns.values:
+                    df[col] = df[col].astype('int64')
             elif "CC-EST2020" in file:
                 df = pd.read_csv(file, encoding='ISO-8859-1', low_memory=False)
                 df = _clean_county_2010_csv_file(df)
+                # aggregating County data to obtain National data for 2010-2020
+                df_national = df.copy()
+                df_national['geo_ID'] = "country/USA"
+                df_national = df_national.groupby(['Year','geo_ID']).sum().\
+                    reset_index()
+                # aggregating County data to obtain State data for 2010-2020
+                df_state = df.copy()
+                df_state['geo_ID'] = (df['geo_ID'].map(str)).str[:len('geoId/NN')]
+                df_state = df_state.groupby(['Year', 'geo_ID']).sum().\
+                    reset_index()
+                df = df.append(df_state, ignore_index=True)
+                df = df.append(df_national, ignore_index=True)
+                float_col = df.select_dtypes(include=['float64'])
+                for col in float_col.columns.values:
+                    df[col] = df[col].astype('int64')
             else:
                 df = pd.read_csv(file)
                 df = _clean_csv_file(df)
@@ -805,11 +824,12 @@ class CensusUSAPopulationByRace:
             "Count_Person_AsianOrPacificIslander",\
             "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"]]
         df_before_2000 = self.df[self.df["Year"]<2000]
-        df_after_2000 = self.df[(self.df["Year"]>=2000)&(self.df["geo_ID"]!="country/USA")]
-        df_national_2000 = self.df[(self.df["Year"]>=2000)&(self.df["geo_ID"]=="country/USA")]
+        df_county_after_2000 = self.df[(self.df["Year"]>=2000)&(self.df["geo_ID"]!="country/USA")&(self.df["geo_ID"].str.len()>9)]
+        df_national_state_2000 = self.df[(self.df["Year"]>=2000)&((self.df["geo_ID"].str.len()<=9)|(self.df["geo_ID"]=="country/USA"))]
+        # &(self.df["geo_ID"]=="country/USA")
         df_before_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_before_2000.csv"), index=False)
-        df_after_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_after_2000.csv"), index=False)
-        df_national_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_2000.csv"), index=False)
+        df_county_after_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_county_after_2000.csv"), index=False)
+        df_national_state_2000.to_csv(os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_state_2000.csv"), index=False)
 
     def process(self):
         """
@@ -821,29 +841,24 @@ class CensusUSAPopulationByRace:
             print(file)
             df = self._load_data(file)
             self._transform_data(df)
+        # print(df)
         name = "USA_Population_Count_by_Race_before_2000"
         generator_df=pd.read_csv\
             (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_before_2000.csv"))
         self._generate_mcf(generator_df.columns, name)
         self._generate_tmcf(generator_df.columns, name)
 
-        name = "USA_Population_Count_by_Race_after_2000"
+        name = "USA_Population_Count_by_Race_county_after_2000"
         generator_df=pd.read_csv\
-            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_after_2000.csv"))
+            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_county_after_2000.csv"))
         self._generate_mcf(generator_df.columns, name)
         self._generate_tmcf(generator_df.columns, name)
 
-        name = "USA_Population_Count_by_Race_National_2000"
+        name = "USA_Population_Count_by_Race_National_state_2000"
         generator_df=pd.read_csv\
-            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_2000.csv"))
+            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_state_2000.csv"))
         self._generate_mcf(generator_df.columns, name)
         self._generate_tmcf(generator_df.columns, name)
-
-        # name = "USA_Population_Count_by_Race_National_State_1980"
-        # generator_df=pd.read_csv\
-        #     (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_State_1980.csv"))
-        # self._generate_mcf(generator_df.columns, name)
-        # self._generate_tmcf(generator_df.columns, name)
 
     # Generating MCF files
     def _generate_mcf(self, df_cols: list, name: str) -> None:
@@ -913,17 +928,15 @@ class CensusUSAPopulationByRace:
                     "geographic area", "year", "short_form", "geo_id"
             ]:
                 continue
-            if name == "USA_Population_Count_by_Race_National_State_1980":
-                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
             # Giving a different measurementMethod for the statistical Variables which are being.
-            elif name == "USA_Population_Count_by_Race_before_2000":
+            if name == "USA_Population_Count_by_Race_before_2000":
                 if col in ["Count_Person_WhiteAlone","Count_Person_BlackOrAfricanAmericanAlone" ]:
                     measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
                 else:
                     measure = "CensusPEPSurvey_RaceUpto1999"
-            elif name == "USA_Population_Count_by_Race_after_2000":
-                measure = "CensusPEPSurvey_Race2000Onwards"
-            elif name == "USA_Population_Count_by_Race_National_2000": 
+            elif name == "USA_Population_Count_by_Race_county_after_2000":
+                measure = "CensusPEPSurvey_PartialAggregate_Race2000Onwards"
+            elif name == "USA_Population_Count_by_Race_National_state_2000": 
                 measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards"
             tmcf = tmcf + tmcf_template.format(i, col, measure, col) + "\n"
             i = i + 1
