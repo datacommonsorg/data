@@ -660,7 +660,9 @@ class EuroStatTobaccoConsumption:
                     ("From1To5Years","[Years 1 5]")\
                     .replace("From5To10Years","[Years 5 10]").\
                     replace("10YearsOrOver","[10 - Years]")
-                    sv_name = sv_name + prop + ", "
+                    sv_name = sv_name + prop.replace("From","From ").\
+                        replace("To"," To ").replace("Years"," Years").\
+                            replace("Than","Than ")+ ", "
 
             sv_name = sv_name + "Among"
             for prop in sv_prop1:
