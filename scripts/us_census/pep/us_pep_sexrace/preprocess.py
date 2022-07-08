@@ -15,7 +15,7 @@
 This script runs
 all the national state and
 county python script and generate
-three output csv, mcf and tmcf
+three output csv, mcf and tmcf.
 """
 
 import os
