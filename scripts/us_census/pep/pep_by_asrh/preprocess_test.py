@@ -22,8 +22,10 @@ import tempfile
 
 _MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, _MODULE_DIR)
+# pylint: disable = wrong-import-position
 from preprocess import process
 from constants import INPUT_DIRS
+# pylint: enable = wrong-import-position
 # _MODULE_DIR is the path to where this test is running from.
 
 _TEST_DATA_FOLDER = os.path.join(_MODULE_DIR, "test_data")
@@ -40,7 +42,7 @@ class TestPreprocess(unittest.TestCase):
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
-
+        print("init")
         with tempfile.TemporaryDirectory() as tmp_dir:
             cleaned_csv_file_path = os.path.join(tmp_dir,
                                                  "test_output_data.csv")
@@ -55,10 +57,8 @@ class TestPreprocess(unittest.TestCase):
                     os.path.join(files_dir, file)
                     for file in sorted(os.listdir(files_dir))
                 ]
-
             process(test_files, cleaned_csv_file_path, mcf_file_path,
                     tmcf_file_path)
-
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                 self._actual_mcf_data = mcf_file.read()
 
@@ -68,11 +68,16 @@ class TestPreprocess(unittest.TestCase):
             with open(cleaned_csv_file_path, encoding="utf-8") as csv_file:
                 self._actual_csv_data = csv_file.read()
 
-    def test_mcf_tmcf_files(self):
+    def test_csv_mcf_tmcf_files(self):
         """
         This method is required to test between output generated
-        preprocess script and excepted output files like MCF File
+        preprocess script and excepted output files like
+        CSV, MCF, and TMCF Files
         """
+        expected_csv_file_path = os.path.join(_TEST_DATA_FOLDER,
+                                              "expected_files",
+                                              "usa_population_asrh.csv")
+
         expected_mcf_file_path = os.path.join(_TEST_DATA_FOLDER,
                                               "expected_files",
                                               "usa_population_asrh.mcf")
@@ -80,6 +85,10 @@ class TestPreprocess(unittest.TestCase):
         expected_tmcf_file_path = os.path.join(_TEST_DATA_FOLDER,
                                                "expected_files",
                                                "usa_population_asrh.tmcf")
+
+        with open(expected_csv_file_path,
+                  encoding="utf-8") as expected_csv_file:
+            expected_csv_data = expected_csv_file.read()
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -89,23 +98,10 @@ class TestPreprocess(unittest.TestCase):
                   encoding="UTF-8") as expected_tmcf_file:
             expected_tmcf_data = expected_tmcf_file.read()
 
+        self.assertEqual(expected_csv_data.strip(),
+                         self._actual_csv_data.strip())
+
         self.assertEqual(expected_mcf_data.strip(),
                          self._actual_mcf_data.strip())
         self.assertEqual(expected_tmcf_data.strip(),
                          self._actual_tmcf_data.strip())
-
-    def test_create_csv(self):
-        """
-        This method is required to test between output generated
-        preprocess script and excepted output files like CSV
-        """
-        expected_csv_file_path = os.path.join(_TEST_DATA_FOLDER,
-                                              "expected_files",
-                                              "usa_population_asrh.csv")
-
-        with open(expected_csv_file_path,
-                  encoding="utf-8") as expected_csv_file:
-            expected_csv_data = expected_csv_file.read()
-
-        self.assertEqual(expected_csv_data.strip(),
-                         self._actual_csv_data.strip())

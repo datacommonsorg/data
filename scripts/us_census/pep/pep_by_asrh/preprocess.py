@@ -31,7 +31,7 @@ National
 Also SV aggregation are produced while processing above files.
 E.g., Count_Person_10Years_White_HispanicOrLatino is calulated by addding
 Count_Person_10Years_Male_WhiteHispanicOrLatino and
-Count_Person_10Years_Male_WhiteHispanicOrLatino
+Count_Person_10Years_Female_WhiteHispanicOrLatino
 Before running this module, run download.sh script, it downloads required
 input files, creates necessary folders for processing.
 Folder information
@@ -143,6 +143,67 @@ def _get_age_grp_county_2000_2009(age_grp: enumerate) -> str:
     return f"{start}To{end}"
 
 
+_COUNTY_2000_2009_INFO = {
+    "year_range": "2000_2009",
+    "exclude_year": [1, 12, 13],
+    "exclude_age_grp": 99,
+    "add_base_year": 1998,
+    "derived_cols_string": "county_2000_2009",
+    "replace_age_grp_from": "85To89",
+    "replace_age_grp_to": "85",
+    "age_grp_func": _get_age_grp_county_2000_2009
+}
+
+_COUNTY_2010_2020_INFO = {
+    "year_range": "2010_2020",
+    "exclude_year": [1, 2, 13],
+    "exclude_age_grp": 0,
+    "replace_year_from": "14",
+    "replace_year_to": "13",
+    "add_base_year": 2007,
+    "derived_cols_string": "county_2010_2020",
+    "replace_age_grp_from": "85To89",
+    "replace_age_grp_to": "85",
+    "age_grp_func": _get_age_grp
+}
+
+
+def _unpivot_df(df: pd.DataFrame,
+                id_col: list,
+                data_cols: list,
+                default_col="SV") -> pd.DataFrame:
+    """
+    Unpivot a DataFrame from wide to long format
+    Before Transpose,
+    df:
+    Year    Location   HispaicOrLatino_Male  HispaicOrLatino_Female
+    1999    geoId/01   14890                  15678
+    1999    geoId/02   13452                  11980
+    id_col: ["Year", "Location"]
+    data_cols: ["HispaicOrLatino_Male", "HispaicOrLatino_Female"]
+    default_col: "SV"
+    Result df:
+    Year    Location   SV                       Count_Person
+    1999    geoId/01   HispaicOrLatino_Male     14890
+    1999    geoId/02   HispaicOrLatino_Male     13452
+    1999    geoId/01   HispaicOrLatino_Female   15678
+    1999    geoId/02   HispaicOrLatino_Female   11980
+    Args:
+        df (pd.DataFrame): Dataframe with cleaned data
+        common_col (list): Dataframe Column list
+        data_cols (list): Dataframe Column list
+    Returns:
+        pd.DataFrame: Dataframe
+    """
+    res_df = pd.DataFrame()
+    res_df = pd.melt(df,
+                     id_vars=id_col,
+                     value_vars=data_cols,
+                     var_name=default_col,
+                     value_name='Count_Person')
+    return res_df
+
+
 def _add_measurement_method(data_df: pd.DataFrame, src_col: str,
                             tgt_col: str) -> pd.DataFrame:
     """Adds Measurement Method either CensusPEPSurvey or
@@ -193,14 +254,14 @@ def _measurement_conditions(sv: str, year: int) -> str:
     return measurement_method
 
 
-def _measurement_aggregate(df: pd.DataFrame) -> list:
+def _measurement_aggregate(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Checks for aggregations done and makes all the years of that race and area
-    as Aggregated
+    Checks for aggregations done and makes all the years of that race and
+    geographic location as Aggregated
     Args:
-        df (Pandas Dataframe) : Divided Dataframe to check
+        df (pd.DataFrame) : Divided Dataframe to check
     Returns:
-        list
+        df (pd.DataFrame) : DataFrame with Measurement Method
     """
     derived_df = df[df['Measurement_Method'].str.contains('dcAggregate')]
     aggregated_rows = set(derived_df['SV'] + derived_df['Location'])
@@ -217,9 +278,9 @@ def _measurement_method(df: pd.DataFrame) -> pd.DataFrame:
     """
     Generates measurement method based on provided guidlines.
     Args:
-        df (Pandas Dataframe) : Dataframe to add columns
+        df (pd.DataFrame) : Dataframe to add columns
     Returns:
-        df (Pandas Dataframe) : Dataframe with added columns
+        df (pd.DataFrame) : Dataframe with added columns
     """
 
     df = _measurement_aggregate(df)
@@ -353,27 +414,7 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     pop_cols = [
         val for val in cols + list(derived_cols.keys()) if "Hispanic" in val
     ]
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["Year", "Age"],
-                      value_vars=pop_cols,
-                      var_name="SV",
-                      value_name="Count_Person")
+    data_df = _unpivot_df(data_df, ["Year", "Age"], pop_cols)
     # Creating SV"s name using SV, Age Column
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -436,27 +477,7 @@ def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
         val for val in cols_with_full_name + list(derived_cols.keys())
         if "Hispanic" in val
     ]
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["Year", "Age"],
-                      value_vars=pop_cols,
-                      var_name="SV",
-                      value_name="Count_Person")
+    data_df = _unpivot_df(data_df, ["Year", "Age"], pop_cols)
     # Creating SV"s name using SV, Age Columns
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -496,27 +517,7 @@ def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
         col for col in cols + list(derived_cols.keys()) if "Hispanic" in col
     ]
     data_df = data_df[cols]
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["Year", "Age"],
-                      value_vars=cols[2:],
-                      var_name="SV",
-                      value_name="Count_Person")
+    data_df = _unpivot_df(data_df, ["Year", "Age"], cols[2:])
     # Creating SV"s name using SV, Age Column
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -593,27 +594,7 @@ def _process_state_1980_1989(file_path: str) -> str:
         tmp_derived_cols_df = tmp_derived_cols_df.groupby(
             ["Year", "Location", "SV"]).sum().reset_index()
         data_df = pd.concat([data_df, tmp_derived_cols_df])
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["Year", "Location", "SV"],
-                      value_vars=pop_cols,
-                      var_name="Age",
-                      value_name="Count_Person")
+    data_df = _unpivot_df(data_df, ["Year", "Location", "SV"], pop_cols, "Age")
     # Creating SV"s name using SV, Age Column
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -673,27 +654,7 @@ def _process_state_1990_1999(file_path):
     pop_cols = [
         val for val in cols + list(derived_cols.keys()) if "Hispanic" in val
     ]
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["Year", "Location", "Age"],
-                      value_vars=pop_cols,
-                      var_name="SV",
-                      value_name="Count_Person")
+    data_df = _unpivot_df(data_df, ["Year", "Location", "Age"], pop_cols)
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     final_cols = [
@@ -804,28 +765,7 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
     # data_df Columns
     # ["Location", "SV", "2000", "2001", "2002", "2003",
     # "2004", "2005", "2006", "2007", "2008", "2009"]
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["Location", "SV"],
-                      value_vars=pop_cols,
-                      var_name="Year",
-                      value_name="Count_Person")
-
+    data_df = _unpivot_df(data_df, ["Location", "SV"], pop_cols, "Year")
     data_df = data_df[["Year", "Location", "SV", "Count_Person"]]
     # Deriving Measurement Method for the SV"s
     data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
@@ -928,27 +868,8 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     # data_df Columns or req_cols are below
     # ["Location", "SV", "AGE", "2010", "2011", "2012",
     # "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["SV", "Location", "AGE"],
-                      value_vars=req_cols[3:],
-                      var_name="Year",
-                      value_name="Count_Person")
+    data_df = _unpivot_df(data_df, ["SV", "Location", "AGE"], req_cols[3:],
+                          "Year")
     f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
     data_df["Count_Person"] = data_df["Count_Person"].astype("int")
     # Deriving Measurement Method for the SV"s
@@ -1045,27 +966,7 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
         data_df = pd.concat([data_df, data])
     data_df = pd.concat([data_df, skipped_data_df])
     data_df = data_df.dropna()
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["Year", "Location", "SV"],
-                      value_vars=pop_cols,
-                      var_name="Age",
-                      value_name="Count_Person")
+    data_df = _unpivot_df(data_df, ["Year", "Location", "SV"], pop_cols, "Age")
     # Creating SV"s name using SV, Age Column
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -1081,10 +982,11 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
     return data_df
 
 
-def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
+def _process_county_2000_2020(file_path: str,
+                              county_conf: dict) -> pd.DataFrame:
     """
     Returns the Cleaned DataFrame consists
-    county data for the year 2000-2009.
+    county data for the year 2000-2020.
 
     Args:
         file_path (str): Input File Path
@@ -1096,87 +998,14 @@ def _process_county_2000_2009(file_path: str) -> pd.DataFrame:
                             file_format="csv",
                             header=0,
                             encoding="latin-1")
-    # Skipping Below Year Values
-    # 1 = 4/1/2000 resident population estimates base
-    # 12 = 4/1/2010 resident 2010 Census population
-    # 13 = 7/1/2010 resident population estimate
-    data_df = data_df[(~data_df["YEAR"].isin([1, 12, 13])) &
-                      (data_df["AGEGRP"] != 99)].reset_index(drop=True)
-    data_df["YEAR"] = 1998 + data_df["YEAR"]
-    cols = list(data_df.columns)
-    # Mapping Dataset Headers to its FullForm
-    cols_mapper = _get_mapper_cols_dict("header_mappers")
-    for idx, val in enumerate(cols):
-        cols[idx] = cols_mapper.get(val, val)
-    data_df.columns = cols
-    # Adding Leading Zeros for State's Fips Code.
-    # Before padding STATE = 6, After padding STATE = 06
-    data_df["STATE"] = data_df["STATE"].astype("str").str.pad(width=2,
-                                                              side="left",
-                                                              fillchar="0")
-    # Adding Leading Zeros for County's Fips Code.
-    # Before padding COUNTY = 20, After padding COUNTY = 020
-    data_df["COUNTY"] = data_df["COUNTY"].astype("str").str.pad(width=3,
-                                                                side="left",
-                                                                fillchar="0")
-    data_df["Location"] = "geoId/" + data_df["STATE"] + data_df["COUNTY"]
-    # Deriving New Columns
-    derived_cols = _get_mapper_cols_dict("county_2000_2009")
-    data_df = _derive_cols(data_df, derived_cols)
-    cols = cols + list(derived_cols.keys())
-    data_df["Age"] = data_df["AGEGRP"].apply(_get_age_grp_county_2000_2009)
-    f_cols = [val for val in cols if "Hispanic" in val]
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["Year", "Location", "Age"],
-                      value_vars=f_cols,
-                      var_name="SV",
-                      value_name="Count_Person")
-    # Creating SV"s name using SV, Age Column
-    data_df["SV"] = data_df.apply(
-        lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
-    # Deriving Measurement Method for the SV"s
-    f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
-    data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
-    return data_df[f_cols]
-
-
-def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
-    """
-    Returns the Cleaned DataFrame consists
-    county data for the year 2010-2020.
-
-    Args:
-        file_path (str): Input File Path
-
-    Returns:
-        pd.DataFrame: Cleaned DataFrame
-    """
-
-    data_df = _load_data_df(path=file_path,
-                            file_format="csv",
-                            header=0,
-                            encoding="latin-1")
-    data_df = data_df[(~data_df["YEAR"].isin([1, 2, 13])) &
-                      (data_df["AGEGRP"] != 0)].reset_index(drop=True)
-    data_df["YEAR"] = data_df["YEAR"].astype("str").str.replace(
-        "14", "13").astype("int")
-    data_df["YEAR"] = 2007 + data_df["YEAR"]
+    data_df = data_df[(~data_df["YEAR"].isin(county_conf["exclude_year"])) & (
+        data_df["AGEGRP"] != county_conf["exclude_age_grp"])].reset_index(
+            drop=True)
+    if "replace_year_from" in county_conf.keys():
+        data_df["YEAR"] = data_df["YEAR"].astype("str").str.replace(
+            county_conf["replace_year_from"],
+            county_conf["replace_year_to"]).astype("int")
+    data_df["YEAR"] = county_conf["add_base_year"] + data_df["YEAR"]
     # Mapping Dataset Headers to its FullForm
     cols_mapper = _get_mapper_cols_dict("header_mappers")
     cols = data_df.columns.to_list()
@@ -1195,34 +1024,16 @@ def _process_county_2010_2020(file_path: str) -> pd.DataFrame():
                                                                 fillchar="0")
     data_df["Location"] = "geoId/" + data_df["STATE"] + data_df["COUNTY"]
     # Deriving New Columns
-    derived_cols = _get_mapper_cols_dict("county_2010_2020")
+    derived_cols = _get_mapper_cols_dict(county_conf["derived_cols_string"])
     data_df = _derive_cols(data_df, derived_cols)
     cols = cols + list(derived_cols.keys())
     f_cols = [val for val in cols if "Hispanic" in val]
-    data_df["Age"] = data_df["AGEGRP"].apply(_get_age_grp)
-    data_df["Age"] = data_df["Age"].str.replace("85To89", "85")
-    # Melt method example
-    # df Before Melt
-    # A  B  C
-    # a  1  2
-    # b  3  4
-    # c  5  6
-    # After Melt
-    # pd.melt(df, id_vars=['A'], value_vars=['B', 'C'],
-    #    var_name='myVarname', value_name='myValname')
-    # A myVarname  myValname
-    # a         B          1
-    # b         B          3
-    # c         B          5
-    # a         C          2
-    # b         C          4
-    # c         C          6
-    data_df = pd.melt(data_df,
-                      id_vars=["Year", "Location", "Age"],
-                      value_vars=f_cols,
-                      var_name="SV",
-                      value_name="Count_Person")
-    # Creating SV"s name using SV, Age Column
+    data_df["Age"] = data_df["AGEGRP"].apply(county_conf["age_grp_func"])
+    if "replace_age_grp_from" in county_conf.keys():
+        data_df["Age"] = data_df["Age"].str.replace(
+            county_conf["replace_age_grp_from"],
+            county_conf["replace_age_grp_to"])
+    data_df = _unpivot_df(data_df, ["Year", "Location", "Age"], f_cols)
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
@@ -1332,9 +1143,11 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
         elif "casrh" in file_path:
             data_df = _process_county_1990_1999(file_path)
         elif "co-est00int-alldata" in file_path:
-            data_df = _process_county_2000_2009(file_path)
+            data_df = _process_county_2000_2020(file_path,
+                                                _COUNTY_2000_2009_INFO)
         elif "CC-EST2020" in file_path:
-            data_df = _process_county_2010_2020(file_path)
+            data_df = _process_county_2000_2020(file_path,
+                                                _COUNTY_2010_2020_INFO)
         data_df = _convert_to_int(data_df)
 
         data_df.to_csv(cleaned_csv_file_path,
