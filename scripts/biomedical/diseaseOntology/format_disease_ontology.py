@@ -29,6 +29,7 @@ import pandas as pd
 import re
 import numpy as np
 import datacommons as dc
+import csv
 import sys
 
 
@@ -157,13 +158,17 @@ def col_string(df):
         col_rep = str(newcol) + ":" + "nan"
         df[newcol] = df[newcol].replace(col_rep, np.nan)
     col_names = [
-        'hasAlternativeId', 'hasExactSynonym', 'label', 'ICDO', 'MESH', 'NCI',
-        'SNOMEDCTUS20200901', 'UMLSCUI', 'ICD10CM', 'ICD9CM',
+        'hasAlternativeId', 'hasExactSynonym', 'label', 'ICDO', 'MESH', 'NCI', 
+        'SNOMEDCTUS20200901', 'ICD10CM', 'ICD9CM',
         'SNOMEDCTUS20200301', 'ORDO', 'SNOMEDCTUS20180301', 'GARD', 'OMIM',
         'EFO', 'KEGG', 'MEDDRA', 'SNOMEDCTUS20190901'
     ]
     for col in col_names:
         df.update('"' + df[[col]].astype(str) + '"')
+    df['UMLSCUI'] = df['UMLSCUI'].astype(str)
+    df['UMLSCUI'] = df['UMLSCUI'].str.split(':').str[-1]
+    df['ICD9CM'] = df['ICD9CM'].astype(str)
+    df['ICD9CM'] = df['ICD9CM'].str.split(':').str[-1]
 
 
 def mesh_query(df):
@@ -185,14 +190,14 @@ def mesh_query(df):
         WHERE {{
         ?element typeOf MeSHDescriptor .
         ?element dcid ?id .
-        ?element name ?element_name .
-        ?element name {0} .
+        ?element descriptorID ?element_name .
+        ?element descriptorID {0} .
         }}
         """.format(arr_mesh[i])
-        result = dc.query(query_str)
-        result_df = pd.DataFrame(result)
-        result_df.columns = ['id', 'element_name']
-        df.MESH.update(df.MESH.map(result_df.set_index('element_name').id))
+    result = dc.query(query_str)
+    result_df = pd.DataFrame(result)
+    result_df.columns = ['MESH_id', 'element_name']
+    df = pd.merge(result_df, df, left_on='element_name', right_on='MESH', how = "right")
     return df
 
 
@@ -218,11 +223,11 @@ def icd10_query(df):
         ?element dcid {0} .
         }}
         """.format(arr_icd10[i])
-        result1 = dc.query(query_str)
-        result1_df = pd.DataFrame(result1)
-        result1_df['element'] = result1_df['?id'].str.split(pat="/").str[1]
-        result1_df.columns = ['id', 'element']
-        df.ICD10CM.update(df.ICD10CM.map(result1_df.set_index('element').id))
+    result1 = dc.query(query_str)
+    result1_df = pd.DataFrame(result1)
+    result1_df['element'] = result1_df['?id'].str.split(pat="/").str[1]
+    result1_df.columns = ['ICD10_id', 'element']
+    df = pd.merge(result1_df, df, left_on='element', right_on='ICD10CM', how = "right")
     return df
 
 
@@ -232,14 +237,10 @@ def remove_newline(df):
     df.loc[2895, 'IAO_0000115'] = df.loc[2895, 'IAO_0000115'].replace("\\n", "")
     df.loc[2934, 'IAO_0000115'] = df.loc[2934, 'IAO_0000115'].replace("\\n", "")
     df.loc[3036, 'IAO_0000115'] = df.loc[3036, 'IAO_0000115'].replace("\\n", "")
-    df.loc[11305, 'IAO_0000115'] = df.loc[11305,
-                                          'IAO_0000115'].replace("\\n", "")
     return df
 
 
-def wrapper_fun(file_input, file_output):
-    file_input = sys.argv[1]
-    file_output = sys.argv[2]
+def wrapper_fun(file_input):
     # Read disease ontology .owl file
     tree = ElementTree.parse(file_input)
     # Get file root
@@ -249,7 +250,7 @@ def wrapper_fun(file_input, file_output):
     # Parse owl classes to human-readble dictionary format
     parsed_owl_classes = []
     for owl_class in all_classes:
-        info = list(owl_class.getiterator())
+        info = list(owl_class.iter())
         parsed_owl_classes.append(parse_do_info(info))
     # Convert to pandas Dataframe
     df_do = pd.DataFrame(parsed_owl_classes)
@@ -269,19 +270,24 @@ def wrapper_fun(file_input, file_output):
     df_do = df_do.drop_duplicates(subset='id', keep="last")
     df_do = df_do.reset_index(drop=True)
     df_do = df_do.replace('"nan"', np.nan)
+    df_do = df_do.replace("nan", np.nan)
     #generate dcids
     df_do['id'] = "bio/" + df_do['id']
-    ##df_do.loc[2505, 'IAO_0000115'] = df_do.loc[2505, 'IAO_0000115'].replace("\\n", "")
-    df_do = remove_newline(df_do)
-    df_do['IAO_0000115'] = df_do['IAO_0000115'].str.replace("_", " ")
-    df_do.to_csv(file_output)
-
+    df_do['subClassOf'] = "bio/" + df_do['subClassOf']
+    df_do['ICD9CM'] = "ICD10/" + df_do['ICD9CM'].apply(str)
+    return df_do
 
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
-    wrapper_fun(file_input, file_output)
+    df = wrapper_fun(file_input)
+    df = remove_newline(df)
+    df['IAO_0000115'] = df['IAO_0000115'].str.replace("_", " ")
+    df.to_csv(file_output)
 
 
 if __name__ == '__main__':
     main()
+
+
+
