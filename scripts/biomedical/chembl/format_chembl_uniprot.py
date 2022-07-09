@@ -13,7 +13,7 @@
 # limitations under the License.
 '''
 Author: Suhana Bedi
-Date: 01/01/2021
+Date: 01/01/2022
 Name: format_chembl_uniprot.py
 Description: Add dcids for all the proteins and format uniprot IDs and protein type
 @file_input: .txt input file with chembl-uniprot mapping

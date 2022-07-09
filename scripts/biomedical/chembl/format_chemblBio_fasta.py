@@ -23,6 +23,7 @@ import sys
 import pandas as pd
 import re
 import csv
+import Bio
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 
 

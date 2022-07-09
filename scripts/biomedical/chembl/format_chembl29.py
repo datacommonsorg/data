@@ -45,12 +45,12 @@ def main():
     df.update('""' +
               df[['canonical_smiles', 'standard_inchi', 'standard_inchi_key'
                  ]].astype(str) + '""')
-
     df.to_csv(file_output,
               index=None,
               quoting=csv.QUOTE_NONE,
               quotechar="",
               escapechar="\\")
+    
 
 
 if __name__ == '__main__':
