@@ -28,10 +28,12 @@ def process_national_2010_2020(url):
     Function Loads input csv datasets
     from 2010-2020 on a National Level,
     cleans it and return cleaned dataframe.
+
     Args:
         url: url of the dataset
+
     Returns:
-        Cleaned Dataframe
+        df.columns: Coulumn names of cleaned dataframe
     """
     # reading input file to dataframe
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)

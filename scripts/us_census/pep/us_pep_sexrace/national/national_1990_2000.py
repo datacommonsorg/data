@@ -28,10 +28,12 @@ def process_national_1990_2000(urls):
     Function Loads input txt datasets
     from 1990-2000 on a National Level,
     cleans it and return cleaned dataframe.
+
     Args:
         url: url of the dataset
+
     Returns:
-        Cleaned Dataframe
+        df.columns: Coulumn names of cleaned dataframe
     """
     final_df = pd.DataFrame()
     for url in urls:

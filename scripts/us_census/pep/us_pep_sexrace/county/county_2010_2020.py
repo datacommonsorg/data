@@ -30,9 +30,9 @@ def process_county_2010_2020(url):
 
     Args:
         url: url of the dataset
-    
+
     Returns:
-        Cleaned Dataframe
+        df: Coulumn names of cleaned dataframe
     """
     # reading the csv input file
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)

@@ -28,10 +28,12 @@ def process_state_2000_2010(url):
     Function Loads input csv datasets
     from 2000-2010 on a State Level,
     cleans it and return cleaned dataframe.
+
     Args:
         url: url of the dataset
+
     Returns:
-        Cleaned Dataframe
+        df.columns: Coulumn names of cleaned dataframe
     """
     # reading the csv input file
     df = pd.read_csv(url, header=0)

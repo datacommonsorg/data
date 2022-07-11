@@ -27,10 +27,12 @@ def process_national_2000_2010(url):
     Function Loads input csv datasets
     from 2000-2009 on a National Level,
     cleans it and return cleaned dataframe.
+
     Args:
         url: url of the dataset
+
     Returns:
-        Cleaned Dataframe
+        df.columns: Coulumn names of cleaned dataframe
     """
     # reading the csv format input file and converting it to a dataframe
     # skipping unwanted rows from top and bottom

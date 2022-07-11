@@ -27,7 +27,6 @@ from national.national_1980_1990 import process_national_1980_1990
 from national.national_1990_2000 import process_national_1990_2000
 from national.national_2000_2010 import process_national_2000_2010
 from national.national_2010_2020 import process_national_2010_2020
-#from national.national_2021 import process_national_2021
 from state.state_1970_1979 import process_state_1970_1979
 from state.state_1980_1990 import process_state_1980_1990
 from state.state_1990_2000 import process_state_1990_2000
@@ -50,9 +49,11 @@ _MODULE_DIR = os.path.dirname(__file__)
 def _get_urls(json_file_path, key, test):
     """
     Extracting dataset urls from json_config_files
+
     Args:
         json_file_path: path to config json files
         key: provies the key for json file
+
     Returns:
         urls: dataset url
     """
@@ -74,6 +75,7 @@ def process(config_files, test=False):
     """
     This method calls the required methods
     and generate final csv, mcf and tmcf
+
     Args:
         config_files: list of json files containing dataset url
         output_files_names: list of output file names
@@ -117,26 +119,26 @@ def process(config_files, test=False):
         elif "county_2010_2020.json" in config_file:
             process_county_2010_2020(files)
 
-    # list of output files which are processed as is
+    # list of national output files before year 2000
     as_is_output_files = [
         "nationals_result_1900_1959.csv", "nationals_result_1960_1979.csv",
         "nationals_result_1980_1990.csv", "nationals_result_1990_2000.csv"
     ]
 
-    # list of output files which are having aggregation
-    # E.g., Count_Person_Male and Count_Person_Female
+    # list of state and county output files before year 2000
     aggregate_output_files_before = [
         "state_result_1970_1979.csv", "state_result_1980_1990.csv",
         "state_result_1990_2000.csv", "county_result_1970_1979.csv",
         "county_result_1980_1989.csv", "county_result_1990_2000.csv"
     ]
 
+    # list of state and county output files before after 2000
     aggregate_output_files_after = [
         "state_result_2000_2010.csv", "state_result_2010_2020.csv",
         "county_result_2000_2009.csv", "county_result_2010_2020.csv"
     ]
 
-    # list of files which are aggregated from state
+    # list of national output files after year 2000
     geo_aggregate_output_files = [
         "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv"
     ]

@@ -28,10 +28,12 @@ def process_county_1970_1979(url):
     Function Loads input csv datasets
     from 1970-1979 on a County Level,
     cleans it and return cleaned dataframe.
+
     Args:
         url: url of the dataset
+
     Returns:
-        Cleaned Dataframe
+        df.columns: Coulumn names of cleaned dataframe
     """
     # reading the csv input file
     df = pd.read_csv(url, header=None)

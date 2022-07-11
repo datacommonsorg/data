@@ -27,10 +27,12 @@ def process_county_2000_2009(url):
     Function Loads input csv datasets
     from 2000-2009 on a County Level,
     cleans it and return cleaned dataframe.
+
     Args:
         url: url of the dataset
+
     Returns:
-        Cleaned Dataframe
+        df.columns: Coulumn names of cleaned dataframe
     """
     final_df = pd.DataFrame()
     # 1 to 57 as state goes till 56

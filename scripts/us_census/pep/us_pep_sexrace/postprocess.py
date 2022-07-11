@@ -31,9 +31,9 @@ def create_single_csv(output_files_names):
         are having Count Person Male/Female aggregated.
     3. preprocess_aggregate_state_2010_2020.csv : for the files
         which are aggregated from different geo granularity.
-    args:
-        output_files_names: nested list of output
-        file names generated.
+
+    Args:
+        output_files_names: nested list of output file names generated.
     """
     # list of output files which are having no aggregation
     as_is_output_files = output_files_names[1]
@@ -204,7 +204,8 @@ def generate_mcf(statvar_names: list, flag1: int) -> None:
         are having Count Person Male/Female aggregated.
     3. sex_race_aggregate_state_2010_2020.mcf : for the files
         which are aggregated from different geo granularity.
-    Arguments:
+
+    Args:
         sv_names (list) : List of DataFrame Columns
         flag1 (int) : flag value helps in generating
         output files. Possible values are 1,2 and 3.
@@ -213,6 +214,7 @@ def generate_mcf(statvar_names: list, flag1: int) -> None:
         Count_Person_Male and Count_Person_Female aggregated
         3 - generate mcf for files which are aggregated
         from different geo granulartiy.
+
     Returns:
         None
     """
@@ -268,7 +270,8 @@ def generate_tmcf(df_cols: list, flag2: int) -> None:
         are having Count Person Male/Female aggregated.
     3. sex_race_aggregate_state_2010_2020.tmcf : for the files
         which are aggregated from different geo granularity.
-    Arguments:
+
+    Args:
         df_cols (list) : List of DataFrame Columns
         flag2 (int) : flag value helps in generating
         output files. Possible values are 1,2 and 3.
@@ -277,6 +280,7 @@ def generate_tmcf(df_cols: list, flag2: int) -> None:
         Count_Person_Male and Count_Person_Female aggregated
         3 - generate tmcf for files which are aggregated
         from different geo granulartiy.
+
     Returns:
         None
     """

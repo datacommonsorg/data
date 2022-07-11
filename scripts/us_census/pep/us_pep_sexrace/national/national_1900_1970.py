@@ -28,10 +28,12 @@ def process_national_1900_1970(ip_files):
     Function Loads input csv datasets
     from 1900-1979 on a National Level,
     cleans it and return cleaned dataframe.
+
     Args:
         url: url of the dataset
+
     Returns:
-        Cleaned Dataframe
+        df.columns: Coulumn names of cleaned dataframe
     """
     final_df = pd.DataFrame()
     final_df2 = pd.DataFrame()
