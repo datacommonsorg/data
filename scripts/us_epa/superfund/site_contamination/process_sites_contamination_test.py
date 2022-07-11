@@ -25,7 +25,7 @@ _EXPECTED_SITE_COUNT = 1
 
 class ProcessTest(unittest.TestCase):
 
-    def test_e2e(self):
+    def test_e2e_superfund_site_contamination(self):
         self.maxDiff = None
         base_path = os.path.dirname(__file__)
         base_path = os.path.join(base_path, './data/test_data')

@@ -1,0 +1,6 @@
+Node: dcid:WeatherVariability_Counties->dcid
+typeOf: dcs:GeoGridPlace_4KM
+latitude: C:WeatherVariability_4km->latitude
+longitude: C:WeatherVariability_4km->longitude
+name: C:WeatherVariability_4km->dcid
+containedInPlace: C:WeatherVariability_4km->containedInPlace
