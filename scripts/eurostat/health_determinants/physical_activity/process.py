@@ -168,24 +168,19 @@ def _workrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
-    cols = [
-        'unit,levels,isced11,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG',
-        'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'UK', 'TR'
-    ]
+    cols = ['unit,levels,isced11,sex,age,geo', '2019', '2014']
     df.columns = cols
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
+    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
     df = _replace_isced11(df)
     df = _replace_sex(df)
     df = _replace_levels(df)
     df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity' + '_' + df['levels']+\
         '_In_Count_Person_' + df['isced11'] + '_'+ df['sex']
     df.drop(columns=['unit', 'age', 'levels', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
+    df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
     return df
 
@@ -873,7 +868,7 @@ class EuroStatPhysicalActivity:
             'u')]
         u_rows = list(derived_df['SV'] + derived_df['geo'])
         final_df['info'] = final_df['SV'] + final_df['geo']
-        # Adding Measurement Method based on a condition, whereever u is found
+        # Adding Measurement Method based on a condition, wherever u is found
         # in an observation. The corresponding measurement method for all the
         # years of that perticular SV/Country is made as Low Reliability.
         # Eg: 2014

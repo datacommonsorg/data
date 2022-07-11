@@ -70,7 +70,7 @@ class TestProcess(unittest.TestCase):
     def test_mcf_tmcf_files(self):
         """
         This method is required to test between output generated
-        preprocess script and excepted output files like MCF File
+        preprocess script and expected output files like MCF File
         """
         expected_mcf_file_path = os.path.join(
             EXPECTED_FILES_DIR,
@@ -96,7 +96,7 @@ class TestProcess(unittest.TestCase):
     def test_create_csv(self):
         """
         This method is required to test between output generated
-        preprocess script and excepted output files like CSV
+        preprocess script and expected output files like CSV
         """
         expected_csv_file_path = os.path.join(
             EXPECTED_FILES_DIR,
