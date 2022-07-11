@@ -1,0 +1,8 @@
+Node: E:population_estimate_by_srh->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:population_estimate_by_srh->SV
+observationAbout: C:population_estimate_by_srh->LOCATION
+observationDate: C:population_estimate_by_srh->YEAR
+observationPeriod: "P1Y"
+measurementMethod: C:population_estimate_by_srh->MEASUREMENT_METHOD
+value: C:population_estimate_by_srh->OBSERVATION
