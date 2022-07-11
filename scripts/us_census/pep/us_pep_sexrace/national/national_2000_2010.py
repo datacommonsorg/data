@@ -22,6 +22,7 @@ import os
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
+
 def process_national_2000_2010(url):
     """
     Function Loads input csv datasets
@@ -145,5 +146,6 @@ def process_national_2000_2010(url):
 
     df.drop(df[df['Year'] == "2010"].index, inplace=True)
 
-    df.to_csv(_CODEDIR + "/../output_files/intermediate/" + "nationals_result_2000_2010.csv")
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+              "nationals_result_2000_2010.csv")
     return df.columns

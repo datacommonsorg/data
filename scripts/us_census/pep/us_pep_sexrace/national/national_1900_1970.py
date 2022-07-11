@@ -128,5 +128,5 @@ def process_national_1900_1970(ip_files):
     final_df2.to_csv(_CODEDIR + "/../output_files/intermediate/" +
                      "nationals_result_1960_1979.csv",
                      index=False)
-    
+
     return final_df.columns, final_df2.columns

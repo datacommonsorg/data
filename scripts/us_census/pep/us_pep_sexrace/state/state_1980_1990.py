@@ -22,6 +22,7 @@ import os
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
+
 def process_state_1980_1990(url):
     """
     Function Loads input txt datasets
@@ -65,9 +66,19 @@ def process_state_1980_1990(url):
     # extracting sex and race from the columns
     df['Race'] = df['Info'].str[3]
     df['Sex'] = df['Info'].str[4]
-    df = df.replace({'Sex':{'1':'Male', '2':'Female'}})
-    df = df.replace({'Race':{'1':'W', '2': 'B', '3': 'AI',
-    '4': 'AP', '5': 'W', '6':'B', '7':'AI', '8':'AP'}})
+    df = df.replace({'Sex': {'1': 'Male', '2': 'Female'}})
+    df = df.replace({
+        'Race': {
+            '1': 'W',
+            '2': 'B',
+            '3': 'AI',
+            '4': 'AP',
+            '5': 'W',
+            '6': 'B',
+            '7': 'AI',
+            '8': 'AP'
+        }
+    })
     df['SR'] = df['Sex'] + ' ' + df['Race']
     df.drop(columns=['Info', 'Sex', 'Race'], inplace=True)
 
@@ -107,5 +118,6 @@ def process_state_1980_1990(url):
     # aggregating columns to get Count_Person_Female
     df["Count_Person_Female"] = df[female_columns].sum(axis=1)
 
-    df.to_csv(_CODEDIR + "/../output_files/intermediate/" + "state_result_1980_1990.csv")
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+              "state_result_1980_1990.csv")
     return df.columns

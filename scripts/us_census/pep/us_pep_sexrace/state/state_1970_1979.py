@@ -93,13 +93,15 @@ def process_state_1970_1979(url):
     df["Count_Person_Male"] = df[[
         'Count_Person_Male_WhiteAlone',
         "Count_Person_Male_BlackOrAfricanAmericanAlone",
-        "Count_Person_Male_OtherRaces"]].sum(axis=1)
+        "Count_Person_Male_OtherRaces"
+    ]].sum(axis=1)
 
     # aggregating columns to get Count_Person_Female
     df["Count_Person_Female"] = df[[
         'Count_Person_Female_WhiteAlone',
         "Count_Person_Female_BlackOrAfricanAmericanAlone",
-        'Count_Person_Female_OtherRaces']].sum(axis=1)
+        'Count_Person_Female_OtherRaces'
+    ]].sum(axis=1)
 
     # dropping unwanted columns
     df = df.drop(columns=[

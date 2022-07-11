@@ -82,7 +82,7 @@ def process_national_1980_1990(url):
     df.drop(columns=['Info', 'Sex', 'Race'], inplace=True)
 
     # group the df as per columns provided
-    df = df.groupby(['Year','SR']).sum().transpose().stack(0).reset_index()
+    df = df.groupby(['Year', 'SR']).sum().transpose().stack(0).reset_index()
 
     # splitting year and geoId
     df['geo_ID'] = df['Year'].str.split('-', expand=True)[0]
@@ -111,7 +111,7 @@ def process_national_1980_1990(url):
 
     # aggregating columns to get Count_Person_Male
     df["Count_Person_Male"] = df[male_columns].sum(axis=1)
-    
+
     # aggregating columns to get Count_Person_Female
     df["Count_Person_Female"] = df[female_columns].sum(axis=1)
 

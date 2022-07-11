@@ -22,6 +22,7 @@ import os
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
+
 def process_county_2010_2020(url):
     """
     Function Loads input csv datasets
@@ -99,6 +100,8 @@ def process_county_2010_2020(url):
             'OrInCombinationWithOneOrMoreOtherRaces',
         'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
             'OrInCombinationWithOneOrMoreOtherRaces']
- 
-    df.to_csv(_CODEDIR + "/../output_files/intermediate/" + 'county_result_2010_2020.csv', index=False)
+
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+              'county_result_2010_2020.csv',
+              index=False)
     return df.columns

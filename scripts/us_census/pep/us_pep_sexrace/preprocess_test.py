@@ -22,7 +22,8 @@ from preprocess import process
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 
-expected_data_folder = os.path.join(module_dir_, "test_data/expected_output_files")
+expected_data_folder = os.path.join(module_dir_,
+                                    "test_data/expected_output_files")
 actual_data_folder = os.path.join(module_dir_, "output_files/final")
 test_data_folder = os.path.join(module_dir_, "test_data")
 
@@ -37,7 +38,7 @@ class TestPreprocess(unittest.TestCase):
     config_files = []
     for file in ip_files:
         config_files.append(ip_config_files + os.sep + file)
-    
+
     process(config_files, test=True)
 
     def test_mcf_tmcf_files(self):
@@ -96,13 +97,16 @@ class TestPreprocess(unittest.TestCase):
         ]
 
         for output_csv_file in output_csv_files:
-            expected_csv_file_path = os.path.join(expected_data_folder, output_csv_file)
+            expected_csv_file_path = os.path.join(expected_data_folder,
+                                                  output_csv_file)
             with open(expected_csv_file_path,
                       encoding="utf-8-sig") as expected_csv_file:
                 expected_csv_data = expected_csv_file.read()
-            
-            actual_csv_file_path = os.path.join(actual_data_folder, output_csv_file)
-            with open(actual_csv_file_path, encoding="utf-8-sig") as actual_csv_file:
+
+            actual_csv_file_path = os.path.join(actual_data_folder,
+                                                output_csv_file)
+            with open(actual_csv_file_path,
+                      encoding="utf-8-sig") as actual_csv_file:
                 actual_csv_data = actual_csv_file.read()
 
             self.assertEqual(expected_csv_data.strip(), actual_csv_data.strip())

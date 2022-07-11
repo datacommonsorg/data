@@ -22,6 +22,7 @@ import os
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
+
 def process_county_2000_2009(url):
     """
     Function Loads input csv datasets
@@ -54,9 +55,20 @@ def process_county_2000_2009(url):
             df = df.query("AGEGRP == 99")
 
             # converting year value from 3-11 to 2000-2009 as per metadata
-            df=df.replace({'YEAR':{2: '2000', 3: '2001', 4: '2002',
-            5: '2003', 6:'2004', 7:'2005', 8:'2006', 9:'2007', 10:'2008',
-            11:'2009'}})
+            df = df.replace({
+                'YEAR': {
+                    2: '2000',
+                    3: '2001',
+                    4: '2002',
+                    5: '2003',
+                    6: '2004',
+                    7: '2005',
+                    8: '2006',
+                    9: '2007',
+                    10: '2008',
+                    11: '2009'
+                }
+            })
 
             # dropping unwanted columns
             df = df.drop(columns=[
@@ -95,9 +107,9 @@ def process_county_2000_2009(url):
         'Count_Person_Male_TwoOrMoreRaces', 'Count_Person_Female_TwoOrMoreRaces'
     ]
 
-    final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" + "county_result_2000_2009.csv")
+    final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
+                    "county_result_2000_2009.csv")
     return final_df.columns
-
 
 
 # def process_county_2000_2009(url):
