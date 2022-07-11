@@ -37,7 +37,7 @@ National
 Also SV aggregation are produced while processing above files.
 E.g., Count_Person_White_HispanicOrLatino is calulated by addding
 Count_Person_Male_WhiteHispanicOrLatino and
-Count_Person_Male_WhiteHispanicOrLatino
+Count_Person_Female_WhiteHispanicOrLatino
 
 Before running this module, run download.sh script, it downloads required
 input files, creates necessary folders for processing.
@@ -99,6 +99,8 @@ def _calculate_agg_measure_method(year, sv):
     """
     for r in RACE:
         if r in sv:
+            if not sv.endswith(r):
+                print(sv)
             if year < 2000:
                 return 'dcs:dcAggregate/CensusPEPSurvey_RaceUpto1999'
             elif year >= 2000:

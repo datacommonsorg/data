@@ -47,7 +47,7 @@ Census PEP files to folder download_files.
 process.py
 ```
 Reads downloaded files from download_files folder, prepares consolidated 
-(National, State, County) output files for as-is (population_estimate_by_srh_agg.csv) and aggregated (population_estimate_by_srh.csv) in output_files folder
+(National, State, County) output files for as-is (population_estimate_by_srh.csv) and aggregated (population_estimate_by_srh_agg.csv) in output_files folder
 
 
 ```
