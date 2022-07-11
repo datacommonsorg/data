@@ -98,9 +98,12 @@ def _calculate_agg_measure_method(year, sv):
       Measurement Method
     """
     for r in RACE:
-        if r in sv:
-            if not sv.endswith(r):
-                print(sv)
+        # if r in sv:
+        if sv.endswith(r) or sv in [
+                'dcid:Count_Person_WhiteAloneNotHispanicOrLatino',
+                'dcid:Count_Person_Male_WhiteAloneNotHispanicOrLatino',
+                'dcid:Count_Person_Female_WhiteAloneNotHispanicOrLatino'
+        ]:
             if year < 2000:
                 return 'dcs:dcAggregate/CensusPEPSurvey_RaceUpto1999'
             elif year >= 2000:
@@ -126,7 +129,12 @@ def _calculate_asis_measure_method(year, sv):
       Measurement Method
     """
     for r in RACE:
-        if r in sv:
+        # if r in sv:
+        if sv.endswith(r) or sv in [
+                'dcid:Count_Person_WhiteAloneNotHispanicOrLatino',
+                'dcid:Count_Person_Male_WhiteAloneNotHispanicOrLatino',
+                'dcid:Count_Person_Female_WhiteAloneNotHispanicOrLatino'
+        ]:
             if year < 2000:
                 return 'dcs:CensusPEPSurvey_RaceUpto1999'
             elif year >= 2000:
