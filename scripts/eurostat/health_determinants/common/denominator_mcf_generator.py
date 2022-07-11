@@ -131,10 +131,8 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
         f_out.write(final_mcf_template.rstrip('\n'))
 
 
-_COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(1, _COMMON_PATH)
-_MODULE_DIR = "/physical_activity/"
-print(os.getcwd())
+_MODULE_DIR = "scripts/eurostat/health_determinants/physical_activity/"
+
 _INPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output",
                                     "eurostat_population_physicalactivity.mcf")
 _OUTPUT_MCF_FILE_PATH = os.path.join(
