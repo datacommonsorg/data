@@ -102,7 +102,9 @@ _PLACE_MAP = {
     "Vt.": "geoId/50",
     "MID. ATLANTIC": "usc/MiddleAtlanticDivision",
     "N.J.": "geoId/34",
+    # geoId/36 is not used for resolution since it was unclear whether upstate New York was New York State (geoId/36) + New York City (geoId/3651000)
     "N.Y. (Upstate)": "",
+    # geoId/3651000 is not used for resolution because the boundaries of NY City was unclear in the dataset's context
     "N.Y. City": "",
     "Pa.": "geoId/42",
     "E.N. CENTRAL": "usc/EastNorthCentralDivision",
