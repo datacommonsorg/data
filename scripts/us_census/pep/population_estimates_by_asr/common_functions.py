@@ -48,6 +48,38 @@ def replace_age(df: pd.DataFrame):
     return df
 
 
+def replace_agegrp(df: pd.DataFrame, inp_flag: int):
+    if inp_flag == 1:
+        df = df.replace({"AGEGRP": {'1': '0To4Years'}})
+    else:
+        df = df.replace({"AGEGRP": {
+            '0': '0Years',
+            '1': '1To4Years',
+        }})
+    df = df.replace({
+        "AGEGRP": {
+            '2': '5To9Years',
+            '3': '10To14Years',
+            '4': '15To19Years',
+            '5': '20To24Years',
+            '6': '25To29Years',
+            '7': '30To34Years',
+            '8': '35To39Years',
+            '9': '40To44Years',
+            '10': '45To49Years',
+            '11': '50To54Years',
+            '12': '55To59Years',
+            '13': '60To64Years',
+            '14': '65To69Years',
+            '15': '70To74Years',
+            '16': '75To79Years',
+            '17': '80To84Years',
+            '18': '85OrMoreYears'
+        }
+    })
+    return df
+
+
 def gender_based_grouping(df: pd.DataFrame):
     """
     Aggregates the columns based on gender by removing race from SV

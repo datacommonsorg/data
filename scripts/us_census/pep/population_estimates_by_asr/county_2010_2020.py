@@ -17,7 +17,7 @@ This Python Script is for County Level Data 2010-2020.
 import os
 import numpy as np
 import pandas as pd
-from common_functions import input_url
+from common_functions import input_url, replace_agegrp
 
 
 def county2010(url_file: str, output_folder: str):
@@ -52,28 +52,8 @@ def county2010(url_file: str, output_folder: str):
         (df['COUNTY'].map(str)).str.zfill(3)
     df['AGEGRP'] = df['AGEGRP'].astype(str)
     # Replacing the numbers with more understandable metadata headings.
-    df = df.replace({
-        "AGEGRP": {
-            '1': '0To4Years',
-            '2': '5To9Years',
-            '3': '10To14Years',
-            '4': '15To19Years',
-            '5': '20To24Years',
-            '6': '25To29Years',
-            '7': '30To34Years',
-            '8': '35To39Years',
-            '9': '40To44Years',
-            '10': '45To49Years',
-            '11': '50To54Years',
-            '12': '55To59Years',
-            '13': '60To64Years',
-            '14': '65To69Years',
-            '15': '70To74Years',
-            '16': '75To79Years',
-            '17': '80To84Years',
-            '18': '85OrMoreYears'
-        }
-    })
+    # Code 0 is sent if AGEGRP starts from 0 and 1 if it starts from 0To4
+    df = replace_agegrp(df, 1)
     # Drop unwanted columns.
     df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
         inplace=True)

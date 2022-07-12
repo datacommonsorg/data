@@ -99,7 +99,7 @@ def _measurement_aggregate(df: pd.DataFrame) -> list:
 
 def _measurement_method(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Generates measurement method based on provided guidlines.
+    Generates measurement method based on provided guidelines.
 
     Args:
         df (Pandas Dataframe) : Dataframe to add columns
