@@ -91,6 +91,7 @@ def _consumption_fruit_vegetables_edu(df: pd.DataFrame) -> pd.DataFrame:
   df = df.melt(id_vars=['SV','geo'], var_name='time'\
           ,value_name='observation')
   return df
+
 def _consumption_fruit_vegetables_inc(df: pd.DataFrame) -> pd.DataFrame:
   """
   Cleans the file hlth_ehis_fv3i for concatenation in Final CSV.
@@ -155,8 +156,8 @@ def _frequency_fruit_vegetables_edu(df: pd.DataFrame) -> pd.DataFrame:
   df = _replace_sex(df)
   df = _replace_isced11(df)
   df = _replace_frequenc(df)
-  df['SV'] = 'Percent_'  + df['frequenc'] + '_' +df['coicop'] + '_'+\
-    'In_Count_Person_' +df['isced11'] +'_' + df['sex']
+  df['SV'] = 'Percent_'  + df['frequenc'] + '_asFrequencyof_' +df['coicop'] +\
+  '_'+'In_Count_Person_' +df['isced11'] +'_' + df['sex']
   df.drop(columns=['unit','age','isced11','coicop','frequenc','sex'],\
        inplace=True)
   df = df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -352,7 +353,7 @@ def _frequency_fruit_vegetables_inc(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_quant_inc(df)
     df.drop(columns=['EU27_2020'],inplace=True)
-    df['SV'] = 'Percent_'+df['frequenc'] +'_'+ df['coicop'] +\
+    df['SV'] = 'Percent_'+df['frequenc'] +'_asFrequencyof_'+ df['coicop'] +\
      '_'+'In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['unit','age','quant_inc','coicop','frequenc','sex'],\
         inplace=True)
@@ -377,7 +378,7 @@ def _frequency_fruit_vegetables_bmi(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_bmi(df)
     df.drop(columns=['EU27_2020'],inplace=True)
-    df['SV'] = 'Percent_'+df['frequenc']+'_'+ df['coicop']+\
+    df['SV'] = 'Percent_'+df['frequenc']+'_asFrequencyof_'+ df['coicop']+\
         '_'+'In_Count_Person_'+ df['sex']+'_'+df['bmi']
     df.drop(columns=['unit','age','bmi','coicop','frequenc','sex'],inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -481,6 +482,7 @@ def _drinking_sugar_sweeetened_inc(df: pd.DataFrame) -> pd.DataFrame:
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
             ,value_name='observation')
     return df
+    
 def _frequency_drinking_pure_juice_edu(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file hlth_ehis_fv5e for concatenation in Final CSV.
