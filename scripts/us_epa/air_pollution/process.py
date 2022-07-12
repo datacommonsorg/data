@@ -90,7 +90,7 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
         'OnRoadVehicles': 'Transportation',
         'NonRoadEnginesAndVehicles': 'Transportation'
     }
-    df['SV'] = df['SV'].replace(sourcegroups, regex=True)
+    df.loc[:,('SV')] = df['SV'].replace(sourcegroups, regex=True)
     df = df.groupby(['year', 'geo_Id', 'SV']).sum().reset_index()
     df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
     return df
