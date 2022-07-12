@@ -168,42 +168,6 @@ _COUNTY_2010_2020_INFO = {
 }
 
 
-def _unpivot_df(df: pd.DataFrame,
-                id_col: list,
-                data_cols: list,
-                default_col="SV") -> pd.DataFrame:
-    """
-    Unpivot a DataFrame from wide to long format
-    Before Transpose,
-    df:
-    Year    Location   HispaicOrLatino_Male  HispaicOrLatino_Female
-    1999    geoId/01   14890                  15678
-    1999    geoId/02   13452                  11980
-    id_col: ["Year", "Location"]
-    data_cols: ["HispaicOrLatino_Male", "HispaicOrLatino_Female"]
-    default_col: "SV"
-    Result df:
-    Year    Location   SV                       Count_Person
-    1999    geoId/01   HispaicOrLatino_Male     14890
-    1999    geoId/02   HispaicOrLatino_Male     13452
-    1999    geoId/01   HispaicOrLatino_Female   15678
-    1999    geoId/02   HispaicOrLatino_Female   11980
-    Args:
-        df (pd.DataFrame): Dataframe with cleaned data
-        common_col (list): Dataframe Column list
-        data_cols (list): Dataframe Column list
-    Returns:
-        pd.DataFrame: Dataframe
-    """
-    res_df = pd.DataFrame()
-    res_df = pd.melt(df,
-                     id_vars=id_col,
-                     value_vars=data_cols,
-                     var_name=default_col,
-                     value_name='Count_Person')
-    return res_df
-
-
 def _add_measurement_method(data_df: pd.DataFrame, src_col: str,
                             tgt_col: str) -> pd.DataFrame:
     """Adds Measurement Method either CensusPEPSurvey or
@@ -414,7 +378,26 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     pop_cols = [
         val for val in cols + list(derived_cols.keys()) if "Hispanic" in val
     ]
-    data_df = _unpivot_df(data_df, ["Year", "Age"], pop_cols)
+    # Unpivot a DataFrame from wide to long format
+    # Before Transpose,
+    # df:
+    # Year    Age   HispaicOrLatino_Male  HispaicOrLatino_Female
+    # 1999    1                    14890                   15678
+    # 1999    2                    13452                   11980
+    # id_col: ["Year", "Age"]
+    # data_cols: ["HispaicOrLatino_Male", "HispaicOrLatino_Female"]
+    # default_col: "SV"
+    # Result df:
+    # Year    Age                     SV  Count_Person
+    # 1999    1     HispaicOrLatino_Male         14890
+    # 1999    2     HispaicOrLatino_Male         13452
+    # 1999    1   HispaicOrLatino_Female         15678
+    # 1999    2   HispaicOrLatino_Female         11980
+    data_df = pd.melt(data_df,
+                      id_vars=["Year", "Age"],
+                      value_vars=pop_cols,
+                      var_name="SV",
+                      value_name='Count_Person')
     # Creating SV"s name using SV, Age Column
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -477,7 +460,11 @@ def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
         val for val in cols_with_full_name + list(derived_cols.keys())
         if "Hispanic" in val
     ]
-    data_df = _unpivot_df(data_df, ["Year", "Age"], pop_cols)
+    data_df = pd.melt(data_df,
+                      id_vars=["Year", "Age"],
+                      value_vars=pop_cols,
+                      var_name="SV",
+                      value_name='Count_Person')
     # Creating SV"s name using SV, Age Columns
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -517,7 +504,11 @@ def _process_nationals_2010_2021(file_path: str) -> pd.DataFrame:
         col for col in cols + list(derived_cols.keys()) if "Hispanic" in col
     ]
     data_df = data_df[cols]
-    data_df = _unpivot_df(data_df, ["Year", "Age"], cols[2:])
+    data_df = pd.melt(data_df,
+                      id_vars=["Year", "Age"],
+                      value_vars=cols[2:],
+                      var_name="SV",
+                      value_name='Count_Person')
     # Creating SV"s name using SV, Age Column
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -594,7 +585,11 @@ def _process_state_1980_1989(file_path: str) -> str:
         tmp_derived_cols_df = tmp_derived_cols_df.groupby(
             ["Year", "Location", "SV"]).sum().reset_index()
         data_df = pd.concat([data_df, tmp_derived_cols_df])
-    data_df = _unpivot_df(data_df, ["Year", "Location", "SV"], pop_cols, "Age")
+    data_df = pd.melt(data_df,
+                      id_vars=["Year", "Location", "SV"],
+                      value_vars=pop_cols,
+                      var_name="Age",
+                      value_name='Count_Person')
     # Creating SV"s name using SV, Age Column
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -654,7 +649,11 @@ def _process_state_1990_1999(file_path):
     pop_cols = [
         val for val in cols + list(derived_cols.keys()) if "Hispanic" in val
     ]
-    data_df = _unpivot_df(data_df, ["Year", "Location", "Age"], pop_cols)
+    data_df = pd.melt(data_df,
+                      id_vars=["Year", "Location", "Age"],
+                      value_vars=pop_cols,
+                      var_name="SV",
+                      value_name='Count_Person')
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     final_cols = [
@@ -765,7 +764,11 @@ def _process_state_2000_2010(file_path: str) -> pd.DataFrame:
     # data_df Columns
     # ["Location", "SV", "2000", "2001", "2002", "2003",
     # "2004", "2005", "2006", "2007", "2008", "2009"]
-    data_df = _unpivot_df(data_df, ["Location", "SV"], pop_cols, "Year")
+    data_df = pd.melt(data_df,
+                      id_vars=["Location", "SV"],
+                      value_vars=pop_cols,
+                      var_name="Year",
+                      value_name='Count_Person')
     data_df = data_df[["Year", "Location", "SV", "Count_Person"]]
     # Deriving Measurement Method for the SV"s
     data_df = _add_measurement_method(data_df, "SV", "Measurement_Method")
@@ -868,8 +871,11 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     # data_df Columns or req_cols are below
     # ["Location", "SV", "AGE", "2010", "2011", "2012",
     # "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]
-    data_df = _unpivot_df(data_df, ["SV", "Location", "AGE"], req_cols[3:],
-                          "Year")
+    data_df = pd.melt(data_df,
+                      id_vars=["SV", "Location", "AGE"],
+                      value_vars=req_cols[3:],
+                      var_name="Year",
+                      value_name='Count_Person')
     f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]
     data_df["Count_Person"] = data_df["Count_Person"].astype("int")
     # Deriving Measurement Method for the SV"s
@@ -966,7 +972,11 @@ def _process_county_1990_1999(file_path: str) -> pd.DataFrame:
         data_df = pd.concat([data_df, data])
     data_df = pd.concat([data_df, skipped_data_df])
     data_df = data_df.dropna()
-    data_df = _unpivot_df(data_df, ["Year", "Location", "SV"], pop_cols, "Age")
+    data_df = pd.melt(data_df,
+                      id_vars=["Year", "Location", "SV"],
+                      value_vars=pop_cols,
+                      var_name="Age",
+                      value_name='Count_Person')
     # Creating SV"s name using SV, Age Column
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
@@ -1033,7 +1043,11 @@ def _process_county_2000_2020(file_path: str,
         data_df["Age"] = data_df["Age"].str.replace(
             county_conf["replace_age_grp_from"],
             county_conf["replace_age_grp_to"])
-    data_df = _unpivot_df(data_df, ["Year", "Location", "Age"], f_cols)
+    data_df = pd.melt(data_df,
+                      id_vars=["Year", "Location", "Age"],
+                      value_vars=f_cols,
+                      var_name="SV",
+                      value_name='Count_Person')
     data_df["SV"] = data_df.apply(
         lambda row: _create_sv_with_age(row.SV, row.Age), axis=1)
     f_cols = ["Year", "Location", "SV", "Measurement_Method", "Count_Person"]

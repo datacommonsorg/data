@@ -42,7 +42,6 @@ class TestPreprocess(unittest.TestCase):
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
-        print("init")
         with tempfile.TemporaryDirectory() as tmp_dir:
             cleaned_csv_file_path = os.path.join(tmp_dir,
                                                  "test_output_data.csv")
