@@ -378,7 +378,7 @@ def _process_nationals_1980_1989(file_path: str) -> pd.DataFrame:
     pop_cols = [
         val for val in cols + list(derived_cols.keys()) if "Hispanic" in val
     ]
-    # Unpivot a DataFrame from wide to long format
+    # Unpivot a DataFrame from wide to long format.
     # Before Transpose,
     # df:
     # Year    Age   HispaicOrLatino_Male  HispaicOrLatino_Female

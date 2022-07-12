@@ -71,7 +71,7 @@ class TestPreprocess(unittest.TestCase):
         """
         This method is required to test between output generated
         preprocess script and excepted output files like
-        CSV, MCF, and TMCF Files
+        CSV, MCF, and TMCF Files.
         """
         expected_csv_file_path = os.path.join(_TEST_DATA_FOLDER,
                                               "expected_files",
