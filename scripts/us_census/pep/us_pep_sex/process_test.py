@@ -45,6 +45,7 @@ class TestProcess(unittest.TestCase):
         os.path.join(TEST_DATASET_DIR, file_name)
         for file_name in test_data_files
     ]
+
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
@@ -54,7 +55,7 @@ class TestProcess(unittest.TestCase):
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
             base = PopulationEstimateBySex(self.ip_data, cleaned_csv_file_path,
-                                            mcf_file_path, tmcf_file_path)
+                                           mcf_file_path, tmcf_file_path)
             base.process()
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
@@ -72,12 +73,10 @@ class TestProcess(unittest.TestCase):
         preprocess script and expected output files like MCF File
         """
         expected_mcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR,
-            "expected_population_estimate_sex.mcf")
+            EXPECTED_FILES_DIR, "expected_population_estimate_sex.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR,
-            "expected_population_estimate_sex.tmcf")
+            EXPECTED_FILES_DIR, "expected_population_estimate_sex.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -98,8 +97,7 @@ class TestProcess(unittest.TestCase):
         preprocess script and expected output files like CSV
         """
         expected_csv_file_path = os.path.join(
-            EXPECTED_FILES_DIR,
-            "expected_population_estimate_sex.csv")
+            EXPECTED_FILES_DIR, "expected_population_estimate_sex.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
