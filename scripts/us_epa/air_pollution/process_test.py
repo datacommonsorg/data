@@ -91,7 +91,7 @@ class TestProcess(unittest.TestCase):
         self.assertEqual(expected_tmcf_data.strip(),
                          self.actual_tmcf_data.strip())
 
-    def test_create_csv(self):
+    def test_observation_data(self):
         """
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
@@ -99,7 +99,6 @@ class TestProcess(unittest.TestCase):
         expected_csv_file_path = os.path.join(
             EXPECTED_FILES_DIR, "airpollution_emission_trends_tier1.csv")
 
-        expected_csv_data = ""
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()

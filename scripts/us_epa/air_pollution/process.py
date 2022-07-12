@@ -16,9 +16,9 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 
+from asyncio.log import logger
 import os
 import sys
-from sre_constants import IN
 from absl import app, flags
 import pandas as pd
 import numpy as np
@@ -66,11 +66,11 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     # Replacing the columns for grouping as per
     # StationaryFuelCombustion -    FuelCombustionElectricUtility
     #                               FuelCombustionIndustrial
-    #                               FuelCombustionOther
+    #                               EPA_FuelCombustionOther
     # IndustrialAndOtherProcesses - ChemicalAndAlliedProductManufacturing
     #                               MetalsProcessing
     #                               PetroleumAndRelatedIndustries
-    #                               OtherIndustrialProcesses
+    #                               EPA_OtherIndustrialProcesses
     #                               SolventUtilization
     #                               StorageAndTransport
     #                               WasteDisposalAndRecycling
@@ -79,11 +79,11 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     sourcegroups = {
         'FuelCombustionElectricUtility': 'StationaryFuelCombustion',
         'FuelCombustionIndustrial': 'StationaryFuelCombustion',
-        'FuelCombustionOther': 'StationaryFuelCombustion',
+        'EPA_FuelCombustionOther': 'StationaryFuelCombustion',
         'ChemicalAndAlliedProductManufacturing': 'IndustrialAndOtherProcesses',
         'MetalsProcessing': 'IndustrialAndOtherProcesses',
         'PetroleumAndRelatedIndustries': 'IndustrialAndOtherProcesses',
-        'OtherIndustrialProcesses': 'IndustrialAndOtherProcesses',
+        'EPA_OtherIndustrialProcesses': 'IndustrialAndOtherProcesses',
         'SolventUtilization': 'IndustrialAndOtherProcesses',
         'StorageAndTransport': 'IndustrialAndOtherProcesses',
         'WasteDisposalAndRecycling': 'IndustrialAndOtherProcesses',
@@ -137,7 +137,7 @@ def _replace_source_category(df: pd.DataFrame, column_name: str) ->\
             'FUEL COMB. INDUSTRIAL':
                 'FuelCombustionIndustrial',
             'FUEL COMB. OTHER':
-                'FuelCombustionOther',
+                'EPA_FuelCombustionOther',
             'CHEMICAL & ALLIED PRODUCT MFG':
                 'ChemicalAndAlliedProductManufacturing',
             'METALS PROCESSING':
@@ -145,7 +145,7 @@ def _replace_source_category(df: pd.DataFrame, column_name: str) ->\
             'PETROLEUM & RELATED INDUSTRIES':
                 'PetroleumAndRelatedIndustries',
             'OTHER INDUSTRIAL PROCESSES':
-                'OtherIndustrialProcesses',
+                'EPA_OtherIndustrialProcesses',
             'SOLVENT UTILIZATION':
                 'SolventUtilization',
             'STORAGE & TRANSPORT':
@@ -331,11 +331,11 @@ class USAirPollutionEmissionTrends:
             # Used -1 to pickup the last part which is file name
             # Read till -5 inorder to remove the .xlsx extension
             file_name = file_path.split("/")[-1][:-5]
-            function_dict = {
+            source_file_to_method_mapping = {
                 "national_tier1_caps": _national_emissions,
                 "state_tier1_caps": _state_emissions
             }
-            df = function_dict[file_name](file_path)
+            df = source_file_to_method_mapping[file_name](file_path)
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
 
@@ -354,8 +354,8 @@ def main(_):
     input_path = FLAGS.input_path
     try:
         ip_files = os.listdir(input_path)
-    except:
-        print("Run the download script first.\n")
+    except Exception:
+        logger.info("Run the download.py script first.")
         sys.exit(1)
     ip_files = [input_path + os.sep + file for file in ip_files]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
