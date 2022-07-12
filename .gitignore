@@ -17,9 +17,5 @@ scripts/us_epa/superfund/**/output
 scripts/**
 !scripts/rff
 !scripts/rff/**
-scripts/rff/raw_data/**
-!scripts/rff/raw_data/us_vectors/**
-!scripts/rff/raw_data/prism/daily/county/**
-!scripts/rff/raw_data/prism/daily/4km/** 
 .git-rewrite
 .git-rewrite/**
