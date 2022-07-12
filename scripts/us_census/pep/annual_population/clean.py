@@ -136,13 +136,13 @@ def _get_numeric_index(data_df: pd.DataFrame, column: str) -> pd.DataFrame:
 
 def _get_char_index_in_col(data_df: pd.DataFrame, col: str) -> pd.DataFrame:
     return data_df[data_df[col].str.replace(
-        ".", "").apply(lambda row: row.isalpha())].index.values
+        ".", "", regex=False).apply(lambda row: row.isalpha())].index.values
 
 
 def _merge_rows(data_df: pd.DataFrame, index_list: list, f_idx: int,
                 left_idx: int, right_idx: int) -> pd.DataFrame:
     """
-    Merge two rows from index list and fro m columns left_idx to right_idx
+    Merge two rows from index list and from columns left_idx to right_idx
 
     Some rows in DataFrame is merged as they were splitted into two rows
        Fips_Code Location extra_Location   1970  1971   1972  1973 \
@@ -435,7 +435,6 @@ def process_states_1970_1979(file_path: str) -> pd.DataFrame:
                     cols = ["1976", "1977", "1978", "1979"]
                     continue
                 if flag:
-                    #print(line)
                     data = line.split(" ")
                     data = [
                         val.strip()
@@ -485,7 +484,6 @@ def process_states_1980_1989(file_path: str) -> pd.DataFrame:
                     cols = ["1985", "1986", "1987", "1988", "1989"]
                     continue
                 if flag:
-                    #print(line)
                     data = line.split(" ")
                     loc = data[0]
                     if loc == "US":
@@ -498,9 +496,7 @@ def process_states_1980_1989(file_path: str) -> pd.DataFrame:
                     if not data[1].isnumeric():
                         continue
 
-                    #loc = "geoId/" + f"{int(data[0]):02d}"
                     for year, val in dict(zip(cols, data)).items():
-                        #print(f"{year},{loc},{val}")
                         outfile.write(f"{year},{loc},{val}\n")
         data_df = pd.read_csv("out.csv", header=0)
         os.remove("out.csv")

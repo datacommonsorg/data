@@ -45,8 +45,6 @@ do
           -o ./input_files/1990_1999/county/${file})
 done
 
-sleep 5
-
 for file in $(cat download_county_2000_2009.txt)
 do
     $(curl https://www2.census.gov/programs-surveys/popest/tables/2000-2010/intercensal/county/${file} \
@@ -64,8 +62,6 @@ do
     $(curl https://www2.census.gov/programs-surveys/popest/tables/2020-2021/counties/totals/${file} \
           -o ./input_files/2021/county/${file})
 done
-
-sleep 5
 
 for file in $(cat download_state_1900_1989.txt)
 do
@@ -96,8 +92,6 @@ do
     $(curl https://www2.census.gov/programs-surveys/popest/tables/2020-2021/state/totals/${file} \
           -o ./input_files/2021/state/${file})
 done
-
-sleep 5
 
 for file in $(cat download_national_1900_1979.txt)
 do

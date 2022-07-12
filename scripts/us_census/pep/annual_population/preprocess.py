@@ -24,7 +24,9 @@ State
     1900 - 2020     Processed As Is
 
 National
-    1900 - 1999     Processed As Is
+    1900 - 1979     Processed As Is
+    1980 - 1989     Data is available in County File in the year 1980-1989
+    1990 - 1999     Data is available in State File in the year 1990-1999
     2000 - 2009     Data is available in State File in the year 2000-2009
     2010 - 2020     Processed As Is
 
@@ -116,7 +118,7 @@ def _load_data_df(path: str,
     return data_df
 
 
-def _geo_id(val: str) -> str:
+def _geo_id(val: pd.Series) -> str:
     """
     Returns GeoID for State Or County.
     Args:
@@ -284,7 +286,7 @@ def _process_nationals_1900_1979(ip_file: str, op_file: str) -> None:
                     # and 14 to 30 provides the population count
                     year = int(line[9:13])
                     if year >= 1980:
-                        break
+                        continue
                     national_pop_stats.write(
                         "\n" + str(year) + ",country/USA," +
                         line[14:30].replace(",", "").lstrip().rstrip())
@@ -346,7 +348,8 @@ def _process_nationals_1990_1999(ip_file: str) -> pd.DataFrame:
     data_df = data_df.drop(
         columns=["Age", "Count_Person_Male", "Count_Person_Female"])
     data_df["Location"] = "country/USA"
-    return data_df[["Year", "Location", "Count_Person"]]
+    data_df = data_df[["Year", "Location", "Count_Person"]]
+    return data_df
 
 
 def _process_nationals_2010_2020(ip_file: str, op_file: str) -> None:
