@@ -1,0 +1,98 @@
+{
+    "populationType": {
+        "Incidents": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "Offenses": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "Victims": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "KnownOffender": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offender",
+            "offenderType": "KnownOffender",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "pvs": {
+        "comment": "skipping total because it is brought in by table1.",
+        "total": "skip",
+        "crimes against persons": {
+            "crimeType": "CrimeAgainstPerson"
+        },
+        "crimes against property": {
+            "crimeType": "CrimeAgainstProperty"
+        },
+        "murder and nonnegligent manslaughter": {
+            "crimeType": "MurderAndNonNegligentManslaughter"
+        },
+        "rape": {
+            "crimeType": "ForcibleRape"
+        },
+        "rape (revised definition)": {
+            "crimeType": "ForcibleRape"
+        },
+        "forcible rape": {
+            "crimeType": "ForcibleRape"
+        },
+        "aggravated assault": {
+            "crimeType": "AggravatedAssault"
+        },
+        "simple assault": {
+            "crimeType": "SimpleAssault"
+        },
+        "intimidation": {
+            "crimeType": "Intimidation"
+        },
+        "human trafficking, commercial sex acts": {
+            "crimeType": "HumanTrafficking_CommercialSexActs"
+        },
+        "other crimes against person": {
+            "crimeType": "UCR_OtherCrimesAgainstPerson"
+        },
+        "other crimes against property": {
+            "crimeType": "UCR_OtherCrimesAgainstProperty"
+        },
+        "robbery": {
+            "crimeType": "Robbery"
+        },
+        "burglary": {
+            "crimeType": "Burglary"
+        },
+        "larceny-theft": {
+            "crimeType": "LarcenyTheft"
+        },
+        "motor vehicle theft": {
+            "crimeType": "MotorVehicleTheft"
+        },
+        "arson": {
+            "crimeType": "Arson"
+        },
+        "destruction/damage/vandalism": {
+            "crimeType": "DestructionOrDamageOrVandalismOfProperty"
+        },
+        "crimes against society": {
+            "crimeType": "CrimeAgainstSociety"
+        }
+    },
+    "dpv": []
+}
