@@ -285,6 +285,7 @@ class CensusPrimaryReligiousDataLoader():
             constraints_array.append("literacyStatus: dcs:Illiterate")
 
         if row["workerStatus"] == "Worker":
+            constraints_array.append("workerStatus: dcs:Worker")
             if row["workerClassification"] == "MainWorker":
                 name_array.append("MainWorker")
                 constraints_array.append("workerClassification: dcs:MainWorker")
