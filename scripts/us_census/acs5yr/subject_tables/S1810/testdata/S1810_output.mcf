@@ -1,0 +1,1186 @@
+Node: dcid:Count_Person_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_WhiteAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_WhiteAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_BlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_AmericanIndianOrAlaskaNativeAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_AmericanIndianOrAlaskaNativeAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_AsianAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_AsianAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_NativeHawaiianOrOtherPacificIslanderAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_NativeHawaiianOrOtherPacificIslanderAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_SomeOtherRaceAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_SomeOtherRaceAlone
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_TwoOrMoreRaces
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_TwoOrMoreRaces
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_WhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_HispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrLessYears_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrLessYears_WithDisability
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To34Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To34Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To64Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To64Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_WithDisability
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrLessYears_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrLessYears_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrLessYears_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To34Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To34Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To64Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To64Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_HearingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:HearingDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrLessYears_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5OrLessYears_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5OrLessYears_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [- 5 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To34Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To34Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To64Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To64Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_VisionDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:VisionDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrLessYears_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To34Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To34Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To64Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To64Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrLessYears_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To34Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To34Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To64Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To64Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18OrLessYears_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18OrLessYears_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [- 18 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To34Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To34Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To64Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To64Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To34Years_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To34Years_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [18 34 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To64Years_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To64Years_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [35 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [65 74 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_IndependentLivingDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:IndependentLivingDifficulty
+age: [75 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_CognitiveDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:CognitiveDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_AmbulatoryDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:AmbulatoryDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_5To17Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_5To17Years_SelfCareDifficulty
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:SelfCareDifficulty
+age: [5 17 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_18To64Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_WithDisability
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [18 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_WithDisability
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_WithDisability
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+age: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDisability_OneRace
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDisability_OneRace
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+disabilityStatus: dcs:WithDisability
+race: dcs:OneRace
+typeOf: dcs:StatisticalVariable
+

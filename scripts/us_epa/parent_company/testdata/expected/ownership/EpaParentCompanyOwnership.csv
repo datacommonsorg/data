@@ -1,0 +1,10 @@
+dcid,epaGhgrpFacilityId,year,ownership
+EpaParentCompany/NationalFuelGasCo,epaGhgrpFacilityId/1001829,,100
+EpaParentCompany/UsGovernment,epaGhgrpFacilityId/1001818,2012,100
+EpaParentCompany/UsGovernment,epaGhgrpFacilityId/1001818,2014,100
+EpaParentCompany/UsGovernment,epaGhgrpFacilityId/1001818,2015,100
+EpaParentCompany/BrownAndProvidencePlantations,epaGhgrpFacilityId/1001811,2020,100
+EpaParentCompany/ChevronUsa,epaGhgrpFacilityId/1001799,2013,1.2
+EpaParentCompany/ConocophillipsAlaskaInc,epaGhgrpFacilityId/1001799,2013,36.1
+EpaParentCompany/BpAmericaInc,epaGhgrpFacilityId/1001799,2013,26.4
+EpaParentCompany/ExxonmobilCorp,epaGhgrpFacilityId/1001799,2013,36.4

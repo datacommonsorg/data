@@ -1,0 +1,362 @@
+{
+	"populationType": {
+		"_DEFAULT": "Person"
+	},
+	"measurement": {
+		"_DEFAULT": {
+			"measuredProperty": "count",
+			"statType": "measuredValue"
+		},
+		"Margin of Error": {
+			"measuredProperty": "count",
+			"statType": "marginOfError"
+		}
+	},
+	"pvs": {
+		"age": {
+			"Population 15 to 19 years": "[15 19 Years]",
+			"Population 16 to 19 years": "[16 19 Years]",
+			"Population 15 to 19 years in households": "[15 19 Years]"
+		},
+		"gender": {
+			"Male": "Male",
+			"Female": "Female"
+		},
+		"maritalStatus": {
+			"Ever married": "EverMarried"
+		},
+		"schoolEnrollment": {
+			"Enrolled in school": "EnrolledInSchool",
+			"Public": "EnrolledInPublicSchool",
+			"Private": "EnrolledInPrivateSchool",
+			"Not enrolled in school": "NotEnrolledInSchool",
+			"Not enrolled in school and not in the labor force": "NotEnrolledInSchool"
+		},
+		"employmentStatus": {
+			"In the labor force": "BLS_InLaborForce",
+			"Not enrolled in school and not in the labor force": "BLS_NotInLaborForce"
+		},
+		"birthEventStatus": {
+			"Female with a birth in the past 12 months": "BirthInThePast12Months"
+		},
+		"householdType": {
+			"In married-couple family households": "MarriedCoupleFamilyHousehold",
+			"In male householder, no spouse present, family households": "SingleFatherFamilyHousehold",
+			"In male householder, no wife present, family households": "SingleFatherFamilyHousehold",
+			"In female householder, no spouse present, family households": "SingleMotherFamilyHousehold",
+			"In female householder, no husband present, family households": "SingleMotherFamilyHousehold",
+			"In nonfamily households": "NonfamilyHousehold"
+		},
+		"race": {
+			"Black or African American": "BlackOrAfricanAmericanAlone",
+			"Black or African American MOE": "BlackOrAfricanAmericanAlone",
+			"Hispanic or Latino (of any race)": "HispanicOrLatino",
+			"Hispanic or Latino origin (of any race)": "HispanicOrLatino",
+			"Hispanic or Latino (of any race) MOE": "HispanicOrLatino",
+			"Hispanic or Latino origin (of any race) MOE": "HispanicOrLatino",
+			"White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino",
+			"White alone, not Hispanic or Latino MOE": "WhiteAloneNotHispanicOrLatino"
+		},
+		"residenceType": {
+			"Population 15 to 19 years in households": "Household"
+		}
+	},
+	"inferredSpec": {
+		"schoolEnrollment": {
+			"age": "[15 19 Years]"
+		},
+		"gender": {
+			"age": "[15 19 Years]"
+		},
+		"employmentStatus": {
+			"age": "[16 19 Years]"
+		},
+		"householdType": {
+			"age": "[15 19 Years]",
+			"residenceType": "Household"
+		}
+	},
+	"universePVs":[{
+		"populationType": "Person",
+		"constraintProperties": ["birthEventStatus"],
+		"dependentPV":{
+			"gender": "Female"
+		}
+	}],
+	"ignoreColumns": [
+		"id",
+		"Geographic Area Name",
+		"Total",
+		"Total MOE"
+	],
+	"denominators": {
+		"White alone, not Hispanic or Latino!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school": [
+			"White alone, not Hispanic or Latino!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"White alone, not Hispanic or Latino!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
+			"White alone, not Hispanic or Latino!!Margin of Error!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"White alone, not Hispanic or Latino!!Margin of Error!!SCHOOL ENROLLMENT!!Enrolled in school!!Private"
+		],
+		"Estimate!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school": [
+			"Estimate!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Estimate!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
+			"Margin of Error!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Margin of Error!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Private"
+		],
+		"White alone, not Hispanic or Latino!!Estimate!!MARITAL STATUS AND FERTILITY!!Male": [
+			"White alone, not Hispanic or Latino!!Estimate!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
+			"White alone, not Hispanic or Latino!!Margin of Error!!MARITAL STATUS AND FERTILITY!!Male!!Ever married"
+		],
+		"Estimate!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male": [
+			"Estimate!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
+			"Margin of Error!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married"
+		],
+		"White alone, not Hispanic or Latino!!Estimate!!MARITAL STATUS AND FERTILITY!!Female": [
+			"White alone, not Hispanic or Latino!!Estimate!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"White alone, not Hispanic or Latino!!Estimate!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
+			"White alone, not Hispanic or Latino!!Margin of Error!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"White alone, not Hispanic or Latino!!Margin of Error!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months"
+		],
+		"Estimate!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female": [
+			"Estimate!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Estimate!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
+			"Margin of Error!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Margin of Error!!White alone, not Hispanic or Latino!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months"
+		],
+		"White alone, not Hispanic or Latino!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households": [
+			"White alone, not Hispanic or Latino!!Estimate!!HOUSEHOLD TYPE!!In married-couple family households",
+			"White alone, not Hispanic or Latino!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"White alone, not Hispanic or Latino!!Estimate!!HOUSEHOLD TYPE!!In male householder, no wife present, family households",
+			"White alone, not Hispanic or Latino!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"White alone, not Hispanic or Latino!!Estimate!!HOUSEHOLD TYPE!!In female householder, no husband present, family households",
+			"White alone, not Hispanic or Latino!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"White alone, not Hispanic or Latino!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"White alone, not Hispanic or Latino!!Estimate!!HOUSEHOLD TYPE!!In nonfamily households",
+			"White alone, not Hispanic or Latino!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"White alone, not Hispanic or Latino!!Margin of Error!!HOUSEHOLD TYPE!!In married-couple family households",
+			"White alone, not Hispanic or Latino!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"White alone, not Hispanic or Latino!!Margin of Error!!HOUSEHOLD TYPE!!In male householder, no wife present, family households",
+			"White alone, not Hispanic or Latino!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"White alone, not Hispanic or Latino!!Margin of Error!!HOUSEHOLD TYPE!!In female householder, no husband present, family households",
+			"White alone, not Hispanic or Latino!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"White alone, not Hispanic or Latino!!Margin of Error!!HOUSEHOLD TYPE!!In nonfamily households"
+		],
+		"Estimate!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households": [
+			"Estimate!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Estimate!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Estimate!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no spouse present, family households",
+			"Estimate!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Estimate!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no spouse present, family households",
+			"Estimate!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Margin of Error!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Margin of Error!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no spouse present, family households",
+			"Margin of Error!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no spouse present, family households",
+			"Margin of Error!!White alone, not Hispanic or Latino!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households"
+		],
+		"White alone, not Hispanic or Latino!!Estimate!!Population 16 to 19 years": [
+			"White alone, not Hispanic or Latino!!Estimate!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"White alone, not Hispanic or Latino!!Estimate!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"White alone, not Hispanic or Latino!!Estimate!!LABOR FORCE STATUS!!In the labor force",
+			"White alone, not Hispanic or Latino!!Margin of Error!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"White alone, not Hispanic or Latino!!Margin of Error!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"White alone, not Hispanic or Latino!!Margin of Error!!LABOR FORCE STATUS!!In the labor force"
+		],
+		"Estimate!!White alone, not Hispanic or Latino!!Population 16 to 19 years": [
+			"Estimate!!White alone, not Hispanic or Latino!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Estimate!!White alone, not Hispanic or Latino!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Margin of Error!!White alone, not Hispanic or Latino MOE!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force",
+			"Margin of Error!!White alone, not Hispanic or Latino!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Margin of Error!!White alone, not Hispanic or Latino!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force"
+		],
+		"Black or African American!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school": [
+			"Black or African American!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Black or African American!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
+			"Black or African American!!Margin of Error!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Black or African American!!Margin of Error!!SCHOOL ENROLLMENT!!Enrolled in school!!Private"
+		],
+		"Estimate!!Black or African American!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school": [
+			"Estimate!!Black or African American!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Estimate!!Black or African American!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
+			"Margin of Error!!Black or African American MOE!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Margin of Error!!Black or African American MOE!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
+			"Margin of Error!!Black or African American!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Margin of Error!!Black or African American!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Private"
+		],
+		"Black or African American!!Estimate!!MARITAL STATUS AND FERTILITY!!Male": [
+			"Black or African American!!Estimate!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
+			"Black or African American!!Margin of Error!!MARITAL STATUS AND FERTILITY!!Male!!Ever married"
+		],
+		"Estimate!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male": [
+			"Estimate!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
+			"Margin of Error!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
+			"Margin of Error!!Black or African American MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married"
+		],
+
+		"Black or African American!!Estimate!!MARITAL STATUS AND FERTILITY!!Female": [
+			"Black or African American!!Estimate!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Black or African American!!Estimate!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
+			"Black or African American!!Margin of Error!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Black or African American!!Margin of Error!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months"
+		],
+		"Estimate!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female": [
+			"Estimate!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Estimate!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
+			"Margin of Error!!Black or African American MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Margin of Error!!Black or African American MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
+			"Margin of Error!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Margin of Error!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months"
+		],
+
+
+		"Black or African American!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households": [
+			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!In married-couple family households",
+			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!In male householder, no wife present, family households",
+			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!In female householder, no husband present, family households",
+			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!In nonfamily households",
+			"Black or African American!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Black or African American!!Margin of Error!!HOUSEHOLD TYPE!!In married-couple family households",
+			"Black or African American!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Black or African American!!Margin of Error!!HOUSEHOLD TYPE!!In male householder, no wife present, family households",
+			"Black or African American!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Black or African American!!Margin of Error!!HOUSEHOLD TYPE!!In female householder, no husband present, family households",
+			"Black or African American!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Black or African American!!Margin of Error!!HOUSEHOLD TYPE!!In nonfamily households"
+		],
+		"Estimate!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households": [
+			"Estimate!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Estimate!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Estimate!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no spouse present, family households",
+			"Estimate!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Estimate!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no spouse present, family households",
+			"Estimate!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Margin of Error!!Black or African American MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Margin of Error!!Black or African American MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Margin of Error!!Black or African American MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Margin of Error!!Black or African American MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Margin of Error!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Margin of Error!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no spouse present, family households",
+			"Margin of Error!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no spouse present, family households",
+			"Margin of Error!!Black or African American!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households"
+		],
+		"Black or African American!!Estimate!!Population 16 to 19 years": [
+			"Black or African American!!Estimate!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Black or African American!!Estimate!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Black or African American!!Estimate!!LABOR FORCE STATUS!!In the labor force",
+			"Black or African American!!Margin of Error!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Black or African American!!Margin of Error!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Black or African American!!Margin of Error!!LABOR FORCE STATUS!!In the labor force"
+		],
+
+		"Estimate!!Black or African American!!Population 16 to 19 years": [
+			"Estimate!!Black or African American!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Estimate!!Black or African American!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force",
+			"Margin of Error!!Black or African American MOE!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Margin of Error!!Black or African American MOE!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force",
+			"Margin of Error!!Black or African American!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Margin of Error!!Black or African American!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force"
+		],
+
+		"Hispanic or Latino origin (of any race)!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school": [
+			"Hispanic or Latino origin (of any race)!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Hispanic or Latino origin (of any race)!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!SCHOOL ENROLLMENT!!Enrolled in school!!Private"
+		],
+		"Estimate!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school": [
+			"Estimate!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Estimate!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!SCHOOL ENROLLMENT!!Enrolled in school!!Private"
+		],
+		"Hispanic or Latino origin (of any race)!!Estimate!!MARITAL STATUS AND FERTILITY!!Male": [
+			"Hispanic or Latino origin (of any race)!!Estimate!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!MARITAL STATUS AND FERTILITY!!Male!!Ever married"
+		],
+		"Estimate!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male": [
+			"Estimate!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married"
+		],
+		"Hispanic or Latino origin (of any race)!!Estimate!!MARITAL STATUS AND FERTILITY!!Female": [
+			"Hispanic or Latino origin (of any race)!!Estimate!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Hispanic or Latino origin (of any race)!!Estimate!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months"
+		],
+		"Estimate!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female": [
+			"Estimate!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Estimate!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months"
+		],
+		"Hispanic or Latino origin (of any race)!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households": [
+			"Hispanic or Latino origin (of any race)!!Estimate!!HOUSEHOLD TYPE!!In married-couple family households",
+			"Hispanic or Latino origin (of any race)!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Hispanic or Latino origin (of any race)!!Estimate!!HOUSEHOLD TYPE!!In male householder, no wife present, family households",
+			"Hispanic or Latino origin (of any race)!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Hispanic or Latino origin (of any race)!!Estimate!!HOUSEHOLD TYPE!!In female householder, no husband present, family households",
+			"Hispanic or Latino origin (of any race)!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Hispanic or Latino origin (of any race)!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Hispanic or Latino origin (of any race)!!Estimate!!HOUSEHOLD TYPE!!In nonfamily households",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!HOUSEHOLD TYPE!!In married-couple family households",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!HOUSEHOLD TYPE!!In male householder, no wife present, family households",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!HOUSEHOLD TYPE!!In female householder, no husband present, family households",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!HOUSEHOLD TYPE!!In nonfamily households"
+		],
+		"Estimate!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households": [
+			"Estimate!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Estimate!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Estimate!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no spouse present, family households",
+			"Estimate!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Estimate!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no spouse present, family households",
+			"Estimate!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no wife present, family households",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no husband present, family households",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In male householder, no spouse present, family households",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In female householder, no spouse present, family households",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In nonfamily households"
+		],
+		"Hispanic or Latino origin (of any race)!!Estimate!!Population 16 to 19 years": [
+			"Hispanic or Latino origin (of any race)!!Estimate!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Hispanic or Latino origin (of any race)!!Estimate!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Hispanic or Latino origin (of any race)!!Estimate!!LABOR FORCE STATUS!!In the labor force",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Hispanic or Latino origin (of any race)!!Margin of Error!!LABOR FORCE STATUS!!In the labor force"
+		],
+		"Estimate!!Hispanic or Latino origin (of any race)!!Population 16 to 19 years": [
+			"Estimate!!Hispanic or Latino origin (of any race)!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Estimate!!Hispanic or Latino origin (of any race)!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Margin of Error!!Hispanic or Latino origin (of any race) MOE!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
+			"Margin of Error!!Hispanic or Latino origin (of any race)!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force"
+		]
+
+	}
+}
+
