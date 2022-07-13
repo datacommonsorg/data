@@ -814,7 +814,7 @@ class EuroStatPhysicalActivity:
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .tsv extension
             file_name = file_path.split("/")[-1][:-4]
-            function_dict = {
+            source_file_to_method_mapping = {
                 "hlth_ehis_pe9e":
                     _healthenhancing_by_sex_education,
                 "hlth_ehis_pe9i":
@@ -852,7 +852,7 @@ class EuroStatPhysicalActivity:
                 "hlth_ehis_pe6e":
                     _walkingcycling_atleast30mins_by_sex_education
             }
-            df = function_dict[file_name](df)
+            df = source_file_to_method_mapping[file_name](df)
             df['SV'] = df['SV'].str.replace('_Total', '')
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
