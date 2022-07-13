@@ -1,9 +1,29 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+Constant value used in processing US Tract are defined here.
+This module also consists of mapping between various forms of column names
+found in downloaded files and its corresponding SV name.
+While preprocessing files column names are changed to SV names as used in
+DC import
+"""
 MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
-                 "typeOf: dcs:StatisticalVariable\n"
-                 "populationType: dcs:Household\n"
-                 "statType: dcs:meanValue\n"
-                 "measurementQualifier:  dcs:Weekday\n"
-                 "{xtra_pvs}\n")
+                "typeOf: dcs:StatisticalVariable\n"
+                "populationType: dcs:Household\n"
+                "statType: dcs:meanValue\n"
+                "measurementQualifier:  dcs:Weekday\n"
+                "{xtra_pvs}\n")
 
 TMCF_TEMPLATE = (
     "Node: E:us_transportation_household->E0\n"
