@@ -1,8 +1,25 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import re
 import os
+import sys
+
+_COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
+sys.path.insert(1, _COMMON_PATH)
+from dcid_existance import check_dcid_existance
 
 
-#Return a list containing every occurrence of "ai":
 def _generate_mcf(sv_list, mcf_file_path) -> None:
     """
     This method generates MCF file w.r.t
@@ -38,8 +55,6 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
         lev_limit = ''
         sv_name = ''
 
-        #sv_temp = sv.split("_AsAFractionOf_")
-        #denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
         sv_prop = sv.split("_")
 
         for prop in sv_prop:
@@ -116,21 +131,24 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
         f_out.write(final_mcf_template.rstrip('\n'))
 
 
-_MODULE_DIR = "/Users/chharish/datacommonsEU/data/scripts/"+\
-    "eurostat/health_determinants/tobacco_consumption/"
-_INPUT_MCF_FILE_PATH = os.path.join(
-    _MODULE_DIR, "output", "eurostat_population_tobaccoconsumption.mcf")
+
+
+_INPUT_MCF_FILE_PATH = os.path.join("output",
+                                    "eurostat_population_tobaccoconsumption.mcf")
 _OUTPUT_MCF_FILE_PATH = os.path.join(
-    _MODULE_DIR, "output",
-    "eurostat_population_tobaccoconsumption_denominator.mcf")
+     "output", "eurostat_population_tobaccoconsumption_denominator.mcf")
 
 with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     mcf = mcf_file.read()
-    #print(mcf)
     deno_matched = re.findall("(measurementDenominator: dcs:)(\w+)", mcf)
     f_deno = []
     for deno in deno_matched:
         f_deno.append(deno[1])
     f_deno = list(set(f_deno))
+    node_status = check_dcid_existance(f_deno)
+    f_deno = []
+    for node, status in node_status.items():
+        if not status:
+            f_deno.append(node)
     f_deno.sort()
     _generate_mcf(f_deno, _OUTPUT_MCF_FILE_PATH)

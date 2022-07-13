@@ -90,7 +90,7 @@ def smoking_tobaccoproducts_county_of_birth(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(columns=['unit', 'age'], inplace=True)
     df['SV'] = 'Percent'+\
         '_'+df['smoking']+"_"+'TobaccoProducts'+\
-        '_In_Count_Person_'+df['c_birth']+'_'+df['sex']
+        '_In_Count_Person_'+df['sex']+'_'+df['c_birth']
     df.drop(columns=['smoking', 'c_birth', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -176,7 +176,7 @@ def smoking_tobaccoproducts_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(columns=['unit', 'age'], inplace=True)
     df['SV'] = 'Percent'+\
         '_'+df['smoking']+'_TobaccoProducts'+\
-        '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['smoking', 'quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
@@ -239,7 +239,7 @@ def former_daily_tobacco_smoker_income_quintile(
     df = _replace_smoking(df)
     df.drop(columns=['unit', 'age'], inplace=True)
     df['SV'] = 'Percent_FormerSmoker_Daily_TobaccoProducts'+\
-        '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')
@@ -322,7 +322,7 @@ def daily_smokers_cigarettes_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
     df.drop(columns=['unit', 'age'], inplace=True)
     df['SV'] = 'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
         '_Cigarettes'+\
-        '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['smoking', 'quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
         ,value_name='observation')
@@ -534,7 +534,7 @@ def daily_smokers_cigarettes_history_income_quintile(
     df.drop(columns=['age'], inplace=True)
     df['SV'] = 'Percent_Daily_TobaccoSmoking'+\
         '_Cigarettes'+\
-        '_In_Count_Person_'+df['quant_inc']+'_'+df['sex']
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
     df.drop(columns=['quant_inc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
         ,value_name='observation')

@@ -81,11 +81,11 @@ class TestProcess(unittest.TestCase):
         """
         expected_mcf_file_path = os.path.join(
             EXPECTED_FILES_DIR,
-            "expected_eurostat_population_tobaccoconsumption.mcf")
+            "eurostat_population_tobaccoconsumption.mcf")
 
         expected_tmcf_file_path = os.path.join(
             EXPECTED_FILES_DIR,
-            "expected_eurostat_population_tobaccoconsumption.tmcf")
+            "eurostat_population_tobaccoconsumption.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -107,7 +107,7 @@ class TestProcess(unittest.TestCase):
         """
         expected_csv_file_path = os.path.join(
             EXPECTED_FILES_DIR,
-            "expected_eurostat_population_tobaccoconsumption.csv")
+            "eurostat_population_tobaccoconsumption.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
