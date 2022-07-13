@@ -809,6 +809,7 @@ class EuroStatPhysicalActivity:
         sv_list = []
 
         for file_path in self._input_files:
+            print(file_path)
             df = pd.read_csv(file_path, sep='\t', header=0)
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name

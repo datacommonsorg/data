@@ -11,6 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+This file takes the generated MCF file and makes a new MCF file which would have
+Stat Vars for the measurement denominator property values. 
+"""
 import re
 import os
 import sys
@@ -25,7 +29,9 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
     This method generates MCF file w.r.t
     dataframe headers and defined MCF template
     Arguments:
-        df_cols (list) : List of DataFrame Columns
+        sv_list (list) : List of DataFrame Columns
+        mcf_file_path (str) : Location of the current MCF file, from which the
+                            denominators MCFs are needed to be formed.
     Returns:
         None
     """

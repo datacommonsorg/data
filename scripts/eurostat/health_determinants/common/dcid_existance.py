@@ -11,6 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+This function is called inorder to check if some Stat Vars are already present
+in the DataCommons present MCF files, so that one SV is not added again.
+"""
 import datacommons
 
 
