@@ -131,12 +131,10 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
         f_out.write(final_mcf_template.rstrip('\n'))
 
 
-
-
-_INPUT_MCF_FILE_PATH = os.path.join("output",
-                                    "eurostat_population_tobaccoconsumption.mcf")
+_INPUT_MCF_FILE_PATH = os.path.join(
+    "output", "eurostat_population_tobaccoconsumption.mcf")
 _OUTPUT_MCF_FILE_PATH = os.path.join(
-     "output", "eurostat_population_tobaccoconsumption_denominator.mcf")
+    "output", "eurostat_population_tobaccoconsumption_denominator.mcf")
 
 with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     mcf = mcf_file.read()
