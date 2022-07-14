@@ -1,0 +1,63 @@
+Node: dcid:Count_BirthControlEvent_Vasectomy
+name: "Number of vasectomies conducted"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthControlEvent_Vasectomy
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthControlEvent_Tubectomy
+name: "Number of tubectomies conducted"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthControlEvent_Tubectomy
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthControlEvent_Sterilisation
+name: "Total sterilisation conducted"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthControlEvent_Sterilisation
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
+name: "Percent of male vasectomies to total sterilisations"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthControlEvent_Vasectomy_AsFractionOf_Count_BirthControlEvent_Sterlization
+statType: dcs:measuredValue
+
+Node: dcid:Count_Death_BirthControlSterilisation
+name: "Total cases of deaths following sterlisation ( male + female)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Death_BirthControlSterilisation
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthControlEvent_IUCDInsertion
+name: "Total IUCD insertions done(public+private)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthControlEvent_IUCDInsertion
+statType: dcs:measuredValue
+
+Node: dcid:Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent
+name: "Percent of IUCD insertions in public plus private institutions to all family planning methods ( iucd plus permanent)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthControlEvent_IUCDInsertion_AsFractionOf_Count_BirthControlEvent
+statType: dcs:measuredValue
+
+Node: dcid:Count_ContraceptiveDistribution_OralPill
+name: "Oral pills distributed"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_ContraceptiveDistribution_OralPill
+statType: dcs:measuredValue
+
+Node: dcid:Count_ContraceptiveDistribution_Condom
+name: "Condom pieces distributed"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_ContraceptiveDistribution_Condom
+statType: dcs:measuredValue
+

@@ -1,0 +1,72 @@
+Node: dcid:Count_BirthEvent_LiveBirth
+name: "Total number of reported live births"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthEvent_LiveBirth
+statType: dcs:measuredValue
+Node: dcid:Count_BirthEvent_StillBirth
+name: "Total number of reported still births"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthEvent_StillBirth
+statType: dcs:measuredValue
+Node: dcid:Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent
+name: "% total reported live births to total deliveries"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_BirthEvent_LiveBirth_AsFractionOf_Count_ChildDeliveryEvent
+statType: dcs:measuredValue
+Node: dcid:Count_Infant_VaccineAdministered_BCG
+name: "Number of infants given bcg"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Infant_VaccineAdministered_BCG
+statType: dcs:measuredValue
+Node: dcid:Count_Infant_VaccineAdministered_OPV
+name: "Number of infants given opv 0 (birth dose)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Infant_VaccineAdministered_OPV
+statType: dcs:measuredValue
+Node: dcid:Count_Infant_VaccineAdministered_DPTDose1
+name: "Number of infants given dpt1"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Infant_VaccineAdministered_DPTDose1
+statType: dcs:measuredValue
+Node: dcid:Count_Infant_VaccineAdministered_DPTDose2
+name: "Number of infants given dpt2"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Infant_VaccineAdministered_DPTDose2
+statType: dcs:measuredValue
+Node: dcid:Count_Infant_VaccineAdministered_DPTDose3
+name: "Number of infants given dpt3"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Infant_VaccineAdministered_DPTDose3
+statType: dcs:measuredValue
+Node: dcid:Count_ChildVaccinationEvent_MMR
+name: "Number of infants given measles"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_ChildVaccinationEvent_MMR
+statType: dcs:measuredValue
+Node: dcid:Count_Infant_VaccineSideEffect_Adverse_Deaths
+name: "Adverse events following imunisation (deaths)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Infant_VaccineSideEffect_Adverse_Deaths
+statType: dcs:measuredValue
+Node: dcid:Count_Infant_VaccineSideEffect_Adverse_Others
+name: "Adverse events following imunisation (others)"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Infant_VaccineSideEffect_Adverse_Others
+statType: dcs:measuredValue
+Node: dcid:Count_Death_Infant
+name: "Total number of infant deaths reported"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:Count_Death_Infant
+statType: dcs:measuredValue
