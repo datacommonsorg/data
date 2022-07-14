@@ -81,28 +81,32 @@ COUNTY_MAP: dict = {
         "Walker County": "geoId/01127",
         "Washington County": "geoId/01129",
         "Wilcox County": "geoId/01131",
-        "Winston County": "geoId/01133",
-        "Alabama": "geoId/01"
+        "Winston County": "geoId/01133"
     },
     "AK": {
         "Aleutians East Borough": "geoId/02013",
         "Aleutians East": "geoId/02013",
         "Aleutians West Borough": "geoId/02016",
         "Aleutians West": "geoId/02016",
+        "Aleutians West Census Area": "geoId/02016",
         "Anchorage Borough": "geoId/02020",
         "Anchorage": "geoId/02020",
+        "Anchorage Municipality": "geoId/02020",
         "Bethel Borough": "geoId/02050",
         "Bethel": "geoId/02050",
+        "Bethel Census Area": "geoId/02050",
         "Bristol Bay Borough": "geoId/02060",
         "Bristol Bay": "geoId/02060",
         "Denali Borough": "geoId/02068",
         "Denali": "geoId/02068",
         "Dillingham Borough": "geoId/02070",
         "Dillingham": "geoId/02070",
+        "Dillingham Census Area": "geoId/02070",
         "Fairbanks North Star Borough": "geoId/02090",
         "Fairbanks North Star": "geoId/02090",
         "Haines Borough": "geoId/02100",
         "Haines": "geoId/02100",
+        "Hoonah-Angoon Census Area": "geoId/02105",
         "Juneau Borough": "geoId/02110",
         "Juneau": "geoId/02110",
         "Kenai Peninsula Borough Borough": "geoId/02122",
@@ -112,56 +116,43 @@ COUNTY_MAP: dict = {
         "Ketchikan Gateway": "geoId/02130",
         "Kodiak Island Borough": "geoId/02150",
         "Kodiak Island": "geoId/02150",
+        "Kusilvak Census Area": "geoId/02158",
         "Lake and Peninsula Borough": "geoId/02164",
         "Lake and Peninsula": "geoId/02164",
         "Matanuska-Susitna Borough": "geoId/02170",
         "Matanuska-Susitna": "geoId/02170",
         "Nome Borough": "geoId/02180",
         "Nome": "geoId/02180",
+        "Nome Census Area": "geoId/02180",
         "North Slope Borough": "geoId/02185",
         "North Slope": "geoId/02185",
         "Northwest Arctic Borough": "geoId/02188",
         "Northwest Arctic": "geoId/02188",
+        "Petersburg Census Area": "geoId/02280",
+        "Prince of Wales- Hyder Census Area": "geoId/02198",
         "Prince of Wales-Outer Ketchikan Borough": "geoId/02201",
         "Prince of Wales-Outer Ketchikan": "geoId/02201",
         "Sitka Borough": "geoId/02220",
         "Sitka": "geoId/02220",
+        "Skagway Municipality": "geoId/02230",
         "Skagway-Hoonah-Angoon Borough": "geoId/02232",
         "Skagway-Hoonah-Angoon": "geoId/02232",
         "Southeast Fairbanks Borough": "geoId/02240",
         "Southeast Fairbanks": "geoId/02240",
+        "Southeast Fairbanks Census Area": "geoId/02240",
         "Valdez-Cordova Borough": "geoId/02261",
         "Valdez-Cordova": "geoId/02261",
         "Wade Hampton Borough": "geoId/02270",
         "Wade Hampton": "geoId/02270",
+        "Valdez-Cordova Census Area": "geoId/02270",
         "Wrangell-Petersburg Borough": "geoId/02280",
+        "Wrangell Borough": "geoId/0227586420",
         "Wrangell-Petersburg": "geoId/02280",
         "Yakutat Borough": "geoId/02282",
         "Yakutat": "geoId/02282",
         "Yukon-Koyukuk Borough": "geoId/02290",
-        "Yukon-Koyukuk": "geoId/02290",
-        "Alaska": "geoId/02",
-        "Aleutians West Census Area": "geoId/02016",
-        "Anchorage Municipality": "geoId/02020",
-        "Bethel Census Area": "geoId/02050",
-        "Chugach Census Area": "geoId/02063",
-        "Copper River Census Area": "geoId/02066",
-        "Dillingham Census Area": "geoId/02070",
-        "Hoonah-Angoon Census Area": "geoId/02105",
-        "Juneau City and Borough": "geoId/02110",
-        "Kusilvak Census Area": "geoId/02158",
-        "Nome Census Area": "geoId/02180",
-        "Petersburg Borough": "geoId/02195",
-        "Petersburg Census Area": "geoId/02195",
-        "Prince of Wales-Hyder Census Area": "geoId/02198",
-        "Sitka City and Borough": "geoId/02220",
-        "Skagway Municipality": "geoId/02230",
-        "Southeast Fairbanks Census Area": "geoId/02240",
-        "Valdez-Cordova Census Area": "geoId/02261",
-        "Wrangell City and Borough": "geoId/02275",
-        "Wade Hampton Census Area": "geoId/02270",
-        "Yakutat City and Borough": "geoId/02282",
-        "Yukon-Koyukuk Census Area": "geoId/02290"
+        "Yukon-Koyukuk Census Area": "geoId/02290",
+        "Yukon-Koyukuk": "geoId/02290"
     },
     "AZ": {
         "Apache County": "geoId/04001",
@@ -178,8 +169,7 @@ COUNTY_MAP: dict = {
         "Pinal County": "geoId/04021",
         "Santa Cruz County": "geoId/04023",
         "Yavapai County": "geoId/04025",
-        "Yuma County": "geoId/04027",
-        "Arizona": "geoId/04"
+        "Yuma County": "geoId/04027"
     },
     "AR": {
         "Arkansas County": "geoId/05001",
@@ -256,8 +246,7 @@ COUNTY_MAP: dict = {
         "Washington County": "geoId/05143",
         "White County": "geoId/05145",
         "Woodruff County": "geoId/05147",
-        "Yell County": "geoId/05149",
-        "Arkansas": "geoId/05"
+        "Yell County": "geoId/05149"
     },
     "CA": {
         "Alameda County": "geoId/06001",
@@ -317,8 +306,7 @@ COUNTY_MAP: dict = {
         "Tuolumne County": "geoId/06109",
         "Ventura County": "geoId/06111",
         "Yolo County": "geoId/06113",
-        "Yuba County": "geoId/06115",
-        "California": "geoId/06"
+        "Yuba County": "geoId/06115"
     },
     "CO": {
         "Adams County": "geoId/08001",
@@ -384,8 +372,7 @@ COUNTY_MAP: dict = {
         "Teller County": "geoId/08119",
         "Washington County": "geoId/08121",
         "Weld County": "geoId/08123",
-        "Yuma County": "geoId/08125",
-        "Colorado": "geoId/08"
+        "Yuma County": "geoId/08125"
     },
     "CT": {
         "Fairfield County": "geoId/09001",
@@ -395,19 +382,16 @@ COUNTY_MAP: dict = {
         "New Haven County": "geoId/09009",
         "New London County": "geoId/09011",
         "Tolland County": "geoId/09013",
-        "Windham County": "geoId/09015",
-        "Connecticut": "geoId/09"
+        "Windham County": "geoId/09015"
     },
     "DE": {
         "Kent County": "geoId/10001",
         "New Castle County": "geoId/10003",
-        "Sussex County": "geoId/10005",
-        "Delaware": "geoId/10"
+        "Sussex County": "geoId/10005"
     },
     "DC": {
         "Washington County": "geoId/11001",
-        "District of Columbia": "geoId/11",
-        "Washington D.C": "geoId/11001"
+        "District of Columbia": "geoId/11001"
     },
     "FL": {
         "Alachua County": "geoId/12001",
@@ -422,6 +406,7 @@ COUNTY_MAP: dict = {
         "Clay County": "geoId/12019",
         "Collier County": "geoId/12021",
         "Columbia County": "geoId/12023",
+        "Dade County": "geoId/12086",
         "De Soto County": "geoId/12027",
         "DeSoto County": "geoId/12027",
         "Dixie County": "geoId/12029",
@@ -477,8 +462,7 @@ COUNTY_MAP: dict = {
         "Volusia County": "geoId/12127",
         "Wakulla County": "geoId/12129",
         "Walton County": "geoId/12131",
-        "Washington County": "geoId/12133",
-        "Florida": "geoId/12"
+        "Washington County": "geoId/12133"
     },
     "GA": {
         "Appling County": "geoId/13001",
@@ -640,15 +624,13 @@ COUNTY_MAP: dict = {
         "Wilcox County": "geoId/13315",
         "Wilkes County": "geoId/13317",
         "Wilkinson County": "geoId/13319",
-        "Worth County": "geoId/13321",
-        "Georgia": "geoId/13"
+        "Worth County": "geoId/13321"
     },
     "HI": {
         "Hawaii County": "geoId/15001",
         "Honolulu County": "geoId/15003",
         "Kauai County": "geoId/15007",
         "Maui County": "geoId/15009",
-        "Hawaii": "geoId/15",
         "Kalawao County": "geoId/15005"
     },
     "ID": {
@@ -695,8 +677,7 @@ COUNTY_MAP: dict = {
         "Teton County": "geoId/16081",
         "Twin Falls County": "geoId/16083",
         "Valley County": "geoId/16085",
-        "Washington County": "geoId/16087",
-        "Idaho": "geoId/16"
+        "Washington County": "geoId/16087"
     },
     "IL": {
         "Adams County": "geoId/17001",
@@ -803,8 +784,7 @@ COUNTY_MAP: dict = {
         "Will County": "geoId/17197",
         "Williamson County": "geoId/17199",
         "Winnebago County": "geoId/17201",
-        "Woodford County": "geoId/17203",
-        "Illinois": "geoId/17"
+        "Woodford County": "geoId/17203"
     },
     "IN": {
         "Adams County": "geoId/18001",
@@ -901,8 +881,7 @@ COUNTY_MAP: dict = {
         "Wayne County": "geoId/18177",
         "Wells County": "geoId/18179",
         "White County": "geoId/18181",
-        "Whitley County": "geoId/18183",
-        "Indiana": "geoId/18"
+        "Whitley County": "geoId/18183"
     },
     "IA": {
         "Adair County": "geoId/19001",
@@ -922,6 +901,7 @@ COUNTY_MAP: dict = {
         "Cass County": "geoId/19029",
         "Cedar County": "geoId/19031",
         "Cerro Gordo County": "geoId/19033",
+        "Cerro County": "geoId/19033",
         "Cherokee County": "geoId/19035",
         "Chickasaw County": "geoId/19037",
         "Clarke County": "geoId/19039",
@@ -934,6 +914,7 @@ COUNTY_MAP: dict = {
         "Decatur County": "geoId/19053",
         "Delaware County": "geoId/19055",
         "Des Moines County": "geoId/19057",
+        "Des County": "geoId/19057",
         "Dickinson County": "geoId/19059",
         "Dubuque County": "geoId/19061",
         "Emmet County": "geoId/19063",
@@ -980,6 +961,7 @@ COUNTY_MAP: dict = {
         "Osceola County": "geoId/19143",
         "Page County": "geoId/19145",
         "Palo Alto County": "geoId/19147",
+        "Palo County": "geoId/19147",
         "Plymouth County": "geoId/19149",
         "Pocahontas County": "geoId/19151",
         "Polk County": "geoId/19153",
@@ -994,6 +976,7 @@ COUNTY_MAP: dict = {
         "Tama County": "geoId/19171",
         "Taylor County": "geoId/19173",
         "Union County": "geoId/19175",
+        "Van County": "geoId/19177",
         "Van Buren County": "geoId/19177",
         "Wapello County": "geoId/19179",
         "Warren County": "geoId/19181",
@@ -1004,8 +987,7 @@ COUNTY_MAP: dict = {
         "Winneshiek County": "geoId/19191",
         "Woodbury County": "geoId/19193",
         "Worth County": "geoId/19195",
-        "Wright County": "geoId/19197",
-        "Iowa": "geoId/19"
+        "Wright County": "geoId/19197"
     },
     "KS": {
         "Allen County": "geoId/20001",
@@ -1112,8 +1094,7 @@ COUNTY_MAP: dict = {
         "Wichita County": "geoId/20203",
         "Wilson County": "geoId/20205",
         "Woodson County": "geoId/20207",
-        "Wyandotte County": "geoId/20209",
-        "Kansas": "geoId/20"
+        "Wyandotte County": "geoId/20209"
     },
     "KY": {
         "Adair County": "geoId/21001",
@@ -1235,8 +1216,7 @@ COUNTY_MAP: dict = {
         "Webster County": "geoId/21233",
         "Whitley County": "geoId/21235",
         "Wolfe County": "geoId/21237",
-        "Woodford County": "geoId/21239",
-        "Kentucky": "geoId/21"
+        "Woodford County": "geoId/21239"
     },
     "LA": {
         "Acadia Parish": "geoId/22001",
@@ -1271,6 +1251,7 @@ COUNTY_MAP: dict = {
         "Lafayette Parish": "geoId/22055",
         "Lafourche Parish": "geoId/22057",
         "La Salle Parish": "geoId/22059",
+        "LaSalle Parish": "geoId/22059",
         "Lincoln Parish": "geoId/22061",
         "Livingston Parish": "geoId/22063",
         "Madison Parish": "geoId/22065",
@@ -1307,9 +1288,7 @@ COUNTY_MAP: dict = {
         "West Baton Rouge Parish": "geoId/22121",
         "West Carroll Parish": "geoId/22123",
         "West Feliciana Parish": "geoId/22125",
-        "Winn Parish": "geoId/22127",
-        "LaSalle Parish": "geoId/22059",
-        "Louisiana": "geoId/22"
+        "Winn Parish": "geoId/22127"
     },
     "ME": {
         "Androscoggin County": "geoId/23001",
@@ -1327,14 +1306,15 @@ COUNTY_MAP: dict = {
         "Somerset County": "geoId/23025",
         "Waldo County": "geoId/23027",
         "Washington County": "geoId/23029",
-        "York County": "geoId/23031",
-        "Maine": "geoId/23"
+        "York County": "geoId/23031"
     },
     "MD": {
         "Allegany County": "geoId/24001",
         "Anne Arundel County": "geoId/24003",
         "Baltimore County": "geoId/24005",
+        "Baltimore city": "geoId/24510",
         "Baltimore": "geoId/2404000",
+        "Baltimore city": "geoId/24510",
         "Calvert County": "geoId/24009",
         "Caroline County": "geoId/24011",
         "Carroll County": "geoId/24013",
@@ -1357,8 +1337,6 @@ COUNTY_MAP: dict = {
         "Washington County": "geoId/24043",
         "Wicomico County": "geoId/24045",
         "Worcester County": "geoId/24047",
-        "Baltimore city": "geoId/24510",
-        "Maryland": "geoId/24"
     },
     "MA": {
         "Barnstable County": "geoId/25001",
@@ -1374,8 +1352,7 @@ COUNTY_MAP: dict = {
         "Norfolk County": "geoId/25021",
         "Plymouth County": "geoId/25023",
         "Suffolk County": "geoId/25025",
-        "Worcester County": "geoId/25027",
-        "Massachusetts": "geoId/25"
+        "Worcester County": "geoId/25027"
     },
     "MI": {
         "Alcona County": "geoId/26001",
@@ -1460,8 +1437,7 @@ COUNTY_MAP: dict = {
         "Van Buren County": "geoId/26159",
         "Washtenaw County": "geoId/26161",
         "Wayne County": "geoId/26163",
-        "Wexford County": "geoId/26165",
-        "Michigan": "geoId/26"
+        "Wexford County": "geoId/26165"
     },
     "MN": {
         "Aitkin County": "geoId/27001",
@@ -1550,8 +1526,7 @@ COUNTY_MAP: dict = {
         "Wilkin County": "geoId/27167",
         "Winona County": "geoId/27169",
         "Wright County": "geoId/27171",
-        "Yellow Medicine County": "geoId/27173",
-        "Minnesota": "geoId/27"
+        "Yellow Medicine County": "geoId/27173"
     },
     "MS": {
         "Adams County": "geoId/28001",
@@ -1636,8 +1611,7 @@ COUNTY_MAP: dict = {
         "Wilkinson County": "geoId/28157",
         "Winston County": "geoId/28159",
         "Yalobusha County": "geoId/28161",
-        "Yazoo County": "geoId/28163",
-        "Mississippi": "geoId/28"
+        "Yazoo County": "geoId/28163"
     },
     "MO": {
         "Adair County": "geoId/29001",
@@ -1737,6 +1711,8 @@ COUNTY_MAP: dict = {
         "Ste. Genevieve County": "geoId/29186",
         "St. Francois County": "geoId/29187",
         "St. Louis County": "geoId/29189",
+        "St. Louis": "geoId/29510",
+        "St. Louis city": "geoId/29510",
         "Saline County": "geoId/29195",
         "Schuyler County": "geoId/29197",
         "Scotland County": "geoId/29199",
@@ -1754,10 +1730,7 @@ COUNTY_MAP: dict = {
         "Wayne County": "geoId/29223",
         "Webster County": "geoId/29225",
         "Worth County": "geoId/29227",
-        "Wright County": "geoId/29229",
-        "St. Louis": "geoId/29510",
-        "Missouri": "geoId/29",
-        "St. Louis city": "geoId/29510"
+        "Wright County": "geoId/29229"
     },
     "MT": {
         "Beaverhead County": "geoId/30001",
@@ -1816,8 +1789,7 @@ COUNTY_MAP: dict = {
         "Wheatland County": "geoId/30107",
         "Wibaux County": "geoId/30109",
         "Yellowstone County": "geoId/30111",
-        "Yellowstone Nat Park County": "geoId/30113",
-        "Montana": "geoId/30"
+        "Yellowstone Nat Park County": "geoId/30113"
     },
     "NE": {
         "Adams County": "geoId/31001",
@@ -1893,6 +1865,7 @@ COUNTY_MAP: dict = {
         "Platte County": "geoId/31141",
         "Polk County": "geoId/31143",
         "Red Willow County": "geoId/31145",
+        "Red County": "geoId/31145",
         "Richardson County": "geoId/31147",
         "Rock County": "geoId/31149",
         "Saline County": "geoId/31151",
@@ -1912,10 +1885,10 @@ COUNTY_MAP: dict = {
         "Wayne County": "geoId/31179",
         "Webster County": "geoId/31181",
         "Wheeler County": "geoId/31183",
-        "York County": "geoId/31185",
-        "Nebraska": "geoId/31"
+        "York County": "geoId/31185"
     },
     "NV": {
+        "Carson County": "geoId/32510",
         "Churchill County": "geoId/32001",
         "Clark County": "geoId/32003",
         "Douglas County": "geoId/32005",
@@ -1932,8 +1905,7 @@ COUNTY_MAP: dict = {
         "Storey County": "geoId/32029",
         "Washoe County": "geoId/32031",
         "White Pine County": "geoId/32033",
-        "Carson City": "geoId/32510",
-        "Nevada": "geoId/32"
+        "Carson City": "geoId/32510"
     },
     "NH": {
         "Belknap County": "geoId/33001",
@@ -1945,8 +1917,7 @@ COUNTY_MAP: dict = {
         "Merrimack County": "geoId/33013",
         "Rockingham County": "geoId/33015",
         "Strafford County": "geoId/33017",
-        "Sullivan County": "geoId/33019",
-        "New Hampshire": "geoId/33"
+        "Sullivan County": "geoId/33019"
     },
     "NJ": {
         "Atlantic County": "geoId/34001",
@@ -1969,8 +1940,7 @@ COUNTY_MAP: dict = {
         "Somerset County": "geoId/34035",
         "Sussex County": "geoId/34037",
         "Union County": "geoId/34039",
-        "Warren County": "geoId/34041",
-        "New Jersey": "geoId/34"
+        "Warren County": "geoId/34041"
     },
     "NM": {
         "Bernalillo County": "geoId/35001",
@@ -1997,6 +1967,7 @@ COUNTY_MAP: dict = {
         "Quay County": "geoId/35037",
         "Rio Arriba County": "geoId/35039",
         "Roosevelt County": "geoId/35041",
+        "Roosevelt  County": "geoId/35041",
         "Sandoval County": "geoId/35043",
         "San Juan County": "geoId/35045",
         "San Miguel County": "geoId/35047",
@@ -2006,8 +1977,7 @@ COUNTY_MAP: dict = {
         "Taos County": "geoId/35055",
         "Torrance County": "geoId/35057",
         "Union County": "geoId/35059",
-        "Valencia County": "geoId/35061",
-        "New Mexico": "geoId/35"
+        "Valencia County": "geoId/35061"
     },
     "NY": {
         "Albany County": "geoId/36001",
@@ -2071,8 +2041,7 @@ COUNTY_MAP: dict = {
         "Wayne County": "geoId/36117",
         "Westchester County": "geoId/36119",
         "Wyoming County": "geoId/36121",
-        "Yates County": "geoId/36123",
-        "New York": "geoId/36"
+        "Yates County": "geoId/36123"
     },
     "NC": {
         "Alamance County": "geoId/37001",
@@ -2174,8 +2143,7 @@ COUNTY_MAP: dict = {
         "Wilkes County": "geoId/37193",
         "Wilson County": "geoId/37195",
         "Yadkin County": "geoId/37197",
-        "Yancey County": "geoId/37199",
-        "North Carolina": "geoId/37"
+        "Yancey County": "geoId/37199"
     },
     "ND": {
         "Adams County": "geoId/38001",
@@ -2201,6 +2169,7 @@ COUNTY_MAP: dict = {
         "Hettinger County": "geoId/38041",
         "Kidder County": "geoId/38043",
         "La Moure County": "geoId/38045",
+        "LaMoure County": "geoId/38045",
         "Logan County": "geoId/38047",
         "McHenry County": "geoId/38049",
         "McIntosh County": "geoId/38051",
@@ -2230,9 +2199,7 @@ COUNTY_MAP: dict = {
         "Walsh County": "geoId/38099",
         "Ward County": "geoId/38101",
         "Wells County": "geoId/38103",
-        "Williams County": "geoId/38105",
-        "LaMoure County": "geoId/38045",
-        "North Dakota": "geoId/38"
+        "Williams County": "geoId/38105"
     },
     "OH": {
         "Adams County": "geoId/39001",
@@ -2322,8 +2289,7 @@ COUNTY_MAP: dict = {
         "Wayne County": "geoId/39169",
         "Williams County": "geoId/39171",
         "Wood County": "geoId/39173",
-        "Wyandot County": "geoId/39175",
-        "Ohio": "geoId/39"
+        "Wyandot County": "geoId/39175"
     },
     "OK": {
         "Adair County": "geoId/40001",
@@ -2402,8 +2368,7 @@ COUNTY_MAP: dict = {
         "Washington County": "geoId/40147",
         "Washita County": "geoId/40149",
         "Woods County": "geoId/40151",
-        "Woodward County": "geoId/40153",
-        "Oklahoma": "geoId/40"
+        "Woodward County": "geoId/40153"
     },
     "OR": {
         "Baker County": "geoId/41001",
@@ -2441,8 +2406,7 @@ COUNTY_MAP: dict = {
         "Wasco County": "geoId/41065",
         "Washington County": "geoId/41067",
         "Wheeler County": "geoId/41069",
-        "Yamhill County": "geoId/41071",
-        "Oregon": "geoId/41"
+        "Yamhill County": "geoId/41071"
     },
     "PA": {
         "Adams County": "geoId/42001",
@@ -2511,16 +2475,14 @@ COUNTY_MAP: dict = {
         "Wayne County": "geoId/42127",
         "Westmoreland County": "geoId/42129",
         "Wyoming County": "geoId/42131",
-        "York County": "geoId/42133",
-        "Pennsylvania": "geoId/42"
+        "York County": "geoId/42133"
     },
     "RI": {
         "Bristol County": "geoId/44001",
         "Kent County": "geoId/44003",
         "Newport County": "geoId/44005",
         "Providence County": "geoId/44007",
-        "Washington County": "geoId/44009",
-        "Rhode Island": "geoId/44"
+        "Washington County": "geoId/44009"
     },
     "SC": {
         "Abbeville County": "geoId/45001",
@@ -2568,8 +2530,7 @@ COUNTY_MAP: dict = {
         "Sumter County": "geoId/45085",
         "Union County": "geoId/45087",
         "Williamsburg County": "geoId/45089",
-        "York County": "geoId/45091",
-        "South Carolina": "geoId/45"
+        "York County": "geoId/45091"
     },
     "SD": {
         "Aurora County": "geoId/46003",
@@ -2638,8 +2599,7 @@ COUNTY_MAP: dict = {
         "Union County": "geoId/46127",
         "Walworth County": "geoId/46129",
         "Yankton County": "geoId/46135",
-        "Ziebach County": "geoId/46137",
-        "South Dakota": "geoId/46"
+        "Ziebach County": "geoId/46137"
     },
     "TN": {
         "Anderson County": "geoId/47001",
@@ -2737,8 +2697,7 @@ COUNTY_MAP: dict = {
         "Weakley County": "geoId/47183",
         "White County": "geoId/47185",
         "Williamson County": "geoId/47187",
-        "Wilson County": "geoId/47189",
-        "Tennessee": "geoId/47"
+        "Wilson County": "geoId/47189"
     },
     "TX": {
         "Anderson County": "geoId/48001",
@@ -2884,6 +2843,7 @@ COUNTY_MAP: dict = {
         "Lamb County": "geoId/48279",
         "Lampasas County": "geoId/48281",
         "La Salle County": "geoId/48283",
+        "La County": "geoId/48283",
         "LaSalle County": "geoId/48283",
         "Lavaca County": "geoId/48285",
         "Lee County": "geoId/48287",
@@ -2996,8 +2956,7 @@ COUNTY_MAP: dict = {
         "Yoakum County": "geoId/48501",
         "Young County": "geoId/48503",
         "Zapata County": "geoId/48505",
-        "Zavala County": "geoId/48507",
-        "Texas": "geoId/48"
+        "Zavala County": "geoId/48507"
     },
     "UT": {
         "Beaver County": "geoId/49001",
@@ -3029,7 +2988,7 @@ COUNTY_MAP: dict = {
         "Washington County": "geoId/49053",
         "Wayne County": "geoId/49055",
         "Weber County": "geoId/49057",
-        "Utah": "geoId/49"
+        "Wayne         County": "geoId/49055"
     },
     "VT": {
         "Addison County": "geoId/50001",
@@ -3045,8 +3004,7 @@ COUNTY_MAP: dict = {
         "Rutland County": "geoId/50021",
         "Washington County": "geoId/50023",
         "Windham County": "geoId/50025",
-        "Windsor County": "geoId/50027",
-        "Vermont": "geoId/50"
+        "Windsor County": "geoId/50027"
     },
     "VA": {
         "Accomack County": "geoId/51001",
@@ -3147,11 +3105,13 @@ COUNTY_MAP: dict = {
         "Wythe County": "geoId/51197",
         "York County": "geoId/51199",
         "Alexandria": "geoId/51510",
+        "Alexandria city": "geoId/51510",
         "Bedford": "geoId/51515",
         "Bristol": "geoId/51520",
         "Buena Vista": "geoId/51530",
         "Charlottesville": "geoId/51540",
         "Chesapeake": "geoId/51550",
+        "Chesapeake city": "geoId/51550",
         "Clifton Forge": "geoId/51560",
         "Colonial Heights": "geoId/51570",
         "Covington": "geoId/51580",
@@ -3161,6 +3121,7 @@ COUNTY_MAP: dict = {
         "Fredericksburg": "geoId/51630",
         "Galax": "geoId/51640",
         "Hampton": "geoId/51650",
+        "Hampton city": "geoId/51650",
         "Harrisonburg": "geoId/51660",
         "Hopewell": "geoId/51670",
         "Lexington": "geoId/51678",
@@ -3169,62 +3130,58 @@ COUNTY_MAP: dict = {
         "Manassas Park": "geoId/51685",
         "Martinsville": "geoId/51690",
         "Newport News": "geoId/51700",
+        "Newport News city": "geoId/51700",
         "Norfolk": "geoId/51710",
+        "Norfolk city": "geoId/51710",
         "Norton": "geoId/51720",
         "Petersburg": "geoId/51730",
         "Poquoson": "geoId/51735",
         "Portsmouth": "geoId/51740",
+        "Portsmouth city": "geoId/51740",
         "Radford": "geoId/51750",
         "Richmond": "geoId/51760",
+        "Richmond city": "geoId/51760",
         "Roanoke": "geoId/51770",
         "Salem": "geoId/51775",
         "South Boston": "geoId/51780",
         "Staunton": "geoId/51790",
         "Suffolk": "geoId/51800",
         "Virginia Beach": "geoId/51810",
+        "Virginia Beach city": "geoId/51810",
         "Waynesboro": "geoId/51820",
         "Williamsburg": "geoId/51830",
         "Winchester": "geoId/51840",
-        "Alexandria city": "geoId/51510",
-        "Bedford city": "geoId/5105544",
-        "Bristol city": "geoId/51520",
-        "Buena Vista city": "geoId/51530",
-        "Charlottesville city": "geoId/51540",
-        "Chesapeake city": "geoId/51550",
-        "Colonial Heights city": "geoId/51570",
-        "Covington city": "geoId/51580",
-        "Danville city": "geoId/51590",
-        "Emporia city": "geoId/51595",
-        "Fairfax city": "geoId/51600",
+        "Colonial Heights County": "geoId/51570",
+        "Fairfax city": "geoId/5126496",
         "Falls Church city": "geoId/51610",
-        "Franklin city": "geoId/51620",
         "Fredericksburg city": "geoId/51630",
-        "Galax city": "geoId/51640",
-        "Hampton city": "geoId/51650",
-        "Harrisonburg city": "geoId/51660",
         "Hopewell city": "geoId/51670",
-        "Lexington city": "geoId/51678",
-        "Lynchburg city": "geoId/51680",
-        "Manassas Park city": "geoId/51685",
         "Manassas city": "geoId/51683",
-        "Martinsville city": "geoId/51690",
-        "Newport News city": "geoId/51700",
-        "Norfolk city": "geoId/51710",
-        "Norton city": "geoId/51720",
+        "Manassas Park city": "geoId/51685",
         "Petersburg city": "geoId/51730",
         "Poquoson city": "geoId/51735",
-        "Portsmouth city": "geoId/51740",
-        "Radford city": "geoId/51750",
-        "Richmond city": "geoId/51760",
+        "Suffolk city": "geoId/51800",
+        "Williamsburg city": "geoId/51830",
+        "Bedford city": "geoId/51515",
+        "Bristol city": "geoId/51520",
+        "Lynchburg city": "geoId/51680",
         "Roanoke city": "geoId/51770",
         "Salem city": "geoId/51775",
+        "Charlottesville city": "geoId/51540",
+        "Harrisonburg city": "geoId/51660",
+        "Radford city": "geoId/51750",
         "Staunton city": "geoId/51790",
-        "Suffolk city": "geoId/51800",
-        "Virginia": "geoId/51",
-        "Virginia Beach city": "geoId/51810",
         "Waynesboro city": "geoId/51820",
-        "Williamsburg city": "geoId/51830",
-        "Winchester city": "geoId/51840"
+        "Winchester city": "geoId/51840",
+        "Danville city": "geoId/51590",
+        "Martinsville city": "geoId/51690",
+        "Norton city": "geoId/51720",
+        "Buena Vista city": "geoId/51530",
+        "Covington city": "geoId/51580",
+        "Emporia city": "geoId/51595",
+        "Franklin city": "geoId/51620",
+        "Galax city": "geoId/51640",
+        "Lexington city": "geoId/51678"
     },
     "WA": {
         "Adams County": "geoId/53001",
@@ -3265,8 +3222,7 @@ COUNTY_MAP: dict = {
         "Walla Walla County": "geoId/53071",
         "Whatcom County": "geoId/53073",
         "Whitman County": "geoId/53075",
-        "Yakima County": "geoId/53077",
-        "Washington": "geoId/53"
+        "Yakima County": "geoId/53077"
     },
     "WV": {
         "Barbour County": "geoId/54001",
@@ -3323,8 +3279,7 @@ COUNTY_MAP: dict = {
         "Wetzel County": "geoId/54103",
         "Wirt County": "geoId/54105",
         "Wood County": "geoId/54107",
-        "Wyoming County": "geoId/54109",
-        "West Virginia": "geoId/54"
+        "Wyoming County": "geoId/54109"
     },
     "WI": {
         "Adams County": "geoId/55001",
@@ -3398,8 +3353,7 @@ COUNTY_MAP: dict = {
         "Waupaca County": "geoId/55135",
         "Waushara County": "geoId/55137",
         "Winnebago County": "geoId/55139",
-        "Wood County": "geoId/55141",
-        "Wisconsin": "geoId/55"
+        "Wood County": "geoId/55141"
     },
     "WY": {
         "Albany County": "geoId/56001",
@@ -3424,8 +3378,7 @@ COUNTY_MAP: dict = {
         "Teton County": "geoId/56039",
         "Uinta County": "geoId/56041",
         "Washakie County": "geoId/56043",
-        "Weston County": "geoId/56045",
-        "Wyoming": "geoId/56"
+        "Weston County": "geoId/56045"
     },
     "AS": {
         "Unknown County": "geoId/60010",
