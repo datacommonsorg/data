@@ -205,7 +205,7 @@ def process_non_infectious_data(input_path:str, sheet_name:str, schema_map_path:
     etiology_status_df = generate_aggregates(df, groupby_cols=['observationDate', 'observationAbout', 'Primary Mode', 'Etiology', 'Etiology Status'])
     etiology_status_df['agg_by'] = 'Etiology Status'
 
-    clean_df = pd.concat([trans_mode_df, etiology_df, etiology_status_df], ignore_index=True)
+    clean_df = pd.concat([trans_mode_df, etiology_df, etiology_status_df], join='outer', ignore_index=True)
     clean_df = clean_df[['observationDate', 'observationPeriod', 'measurementMethod', 'observationAbout','value', 'variable', 'Primary Mode', 'Etiology', 'Etiology Status', 'agg_by']]
     sv_df = clean_df[['variable', 'Primary Mode', 'Etiology', 'Etiology Status']]
     sv_df = sv_df.drop_duplicates()

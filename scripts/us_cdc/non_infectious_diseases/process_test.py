@@ -49,7 +49,6 @@ class ProcessTest(unittest.TestCase):
         f = open(os.path.join(test_path, 'NORS_NonInfectious_Disease_expected.mcf'), 'r')
         expected_mcf = f.read()
         f.close()
-
         self.assertEqual(test_mcf, expected_mcf)
 
         ## validate the template mcf
@@ -64,9 +63,9 @@ class ProcessTest(unittest.TestCase):
         self.assertEqual(test_tmcf, expected_tmcf)
 
         # clean up
-        #os.remove(os.path.join(test_path, 'NORS_NonInfectious_Disease.csv'))
-        #os.remove(os.path.join(test_path, 'NORS_NonInfectious_Disease.tmcf'))
-        #os.remove(os.path.join(test_path, 'NORS_NonInfectious_Disease.mcf'))
+        os.remove(os.path.join(test_path, 'NORS_NonInfectious_Disease.csv'))
+        os.remove(os.path.join(test_path, 'NORS_NonInfectious_Disease.tmcf'))
+        os.remove(os.path.join(test_path, 'NORS_NonInfectious_Disease.mcf'))
 
 
 if __name__ == '__main__':
