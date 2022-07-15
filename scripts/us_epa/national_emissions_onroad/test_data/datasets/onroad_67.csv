@@ -1,0 +1,1000 @@
+epa region code,state,fips state code,tribal name,fips code,county,data category,emissions type code,scc,sector,aetc,reporting period,emissions operating type,pollutant code,pollutant desc,pollutant type(s),total emissions,emissions uom,data set
+06,LA,22,,22027,Claiborne,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,.2879692,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50000,Formaldehyde,HAP,.4912992,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,71432,Benzene,HAP,.8214566,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.0002698636,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.0015305446,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.0002600708,TON,2017NEI_Apr2020
+06,LA,22,,22025,Catahoula,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,.01727095,LB,2017NEI_Apr2020
+06,LA,22,,22025,Catahoula,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.0008489577,TON,2017NEI_Apr2020
+06,LA,22,,22023,Cameron,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,.08594364,LB,2017NEI_Apr2020
+06,LA,22,,22023,Cameron,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,.09199406,LB,2017NEI_Apr2020
+06,LA,22,,22023,Cameron,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,108883,Toluene,HAP,.1481116,LB,2017NEI_Apr2020
+06,LA,22,,22023,Cameron,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.0006097844,LB,2017NEI_Apr2020
+06,LA,22,,22023,Cameron,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.00006491128,LB,2017NEI_Apr2020
+06,LA,22,,22023,Cameron,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CH4,Methane,GHG,.0002383984,TON,2017NEI_Apr2020
+06,LA,22,,22017,Caddo,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,85018,Phenanthrene,HAP,1.1025402,LB,2017NEI_Apr2020
+06,LA,22,,22017,Caddo,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,9.900192,LB,2017NEI_Apr2020
+06,LA,22,,22017,Caddo,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.004541496,TON,2017NEI_Apr2020
+07,NE,31,,31091,Hooker,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,.13514394,LB,2017NEI_Apr2020
+07,NE,31,,31091,Hooker,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,.18425098,LB,2017NEI_Apr2020
+07,NE,31,,31091,Hooker,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.00016260702,LB,2017NEI_Apr2020
+07,NE,31,,31091,Hooker,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,.018676898,LB,2017NEI_Apr2020
+07,NE,31,,31091,Hooker,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.000184975,TON,2017NEI_Apr2020
+07,NE,31,,31089,Holt,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,.3316648,LB,2017NEI_Apr2020
+07,NE,31,,31089,Holt,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.001406435,LB,2017NEI_Apr2020
+07,NE,31,,31089,Holt,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.04816186,LB,2017NEI_Apr2020
+07,NE,31,,31089,Holt,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50000,Formaldehyde,HAP,6.698718,LB,2017NEI_Apr2020
+07,NE,31,,31089,Holt,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.00019371312,LB,2017NEI_Apr2020
+07,NE,31,,31089,Holt,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.003514032,LB,2017NEI_Apr2020
+07,NE,31,,31089,Holt,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.0002098958,TON,2017NEI_Apr2020
+07,NE,31,,31079,Hall,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,120127,Anthracene,HAP,.14079988,LB,2017NEI_Apr2020
+07,NE,31,,31079,Hall,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.4045514,LB,2017NEI_Apr2020
+07,NE,31,,31079,Hall,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,3.259352,LB,2017NEI_Apr2020
+07,NE,31,,31079,Hall,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,71432,Benzene,HAP,3.866034,LB,2017NEI_Apr2020
+07,NE,31,,31079,Hall,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.02635118,LB,2017NEI_Apr2020
+07,NE,31,,31079,Hall,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.12775532,LB,2017NEI_Apr2020
+07,NE,31,,31079,Hall,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.009023472,TON,2017NEI_Apr2020
+07,MO,29,,29189,St. Louis,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,5.110948,LB,2017NEI_Apr2020
+07,MO,29,,29189,St. Louis,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,29.69526,TON,2017NEI_Apr2020
+07,MO,29,,29189,St. Louis,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0001713729,TON,2017NEI_Apr2020
+07,MO,29,,29189,St. Louis,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,1.209779,TON,2017NEI_Apr2020
+07,MO,29,,29189,St. Louis,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.002031872,TON,2017NEI_Apr2020
+07,MO,29,,29187,St. Francois,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.02111002,LB,2017NEI_Apr2020
+07,MO,29,,29187,St. Francois,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,3.530682,LB,2017NEI_Apr2020
+07,MO,29,,29187,St. Francois,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.9856322,LB,2017NEI_Apr2020
+07,MO,29,,29187,St. Francois,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,17.427,LB,2017NEI_Apr2020
+07,MO,29,,29187,St. Francois,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.6837745,TON,2017NEI_Apr2020
+07,MO,29,,29187,St. Francois,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.02074743,TON,2017NEI_Apr2020
+07,MO,29,,29183,St. Charles,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,1.698761,TON,2017NEI_Apr2020
+07,MO,29,,29183,St. Charles,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NH3,Ammonia,CAP,3.165398,TON,2017NEI_Apr2020
+07,MO,29,,29183,St. Charles,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,338.9114,LB,2017NEI_Apr2020
+07,MO,29,,29183,St. Charles,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,51.4231,LB,2017NEI_Apr2020
+07,MO,29,,29183,St. Charles,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,44.47264,LB,2017NEI_Apr2020
+07,MO,29,,29177,Ray,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.000005210878,LB,2017NEI_Apr2020
+07,MO,29,,29177,Ray,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,299.4997,TON,2017NEI_Apr2020
+07,MO,29,,29177,Ray,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,.128223,TON,2017NEI_Apr2020
+06,LA,22,,22015,Bossier,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,3343.578,LB,2017NEI_Apr2020
+06,LA,22,,22015,Bossier,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,82130.38,LB,2017NEI_Apr2020
+06,LA,22,,22015,Bossier,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.014749234,LB,2017NEI_Apr2020
+06,LA,22,,22015,Bossier,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440020,Nickel,HAP,1.843639,LB,2017NEI_Apr2020
+06,LA,22,,22015,Bossier,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,86737,Fluorene,HAP,48.4677,LB,2017NEI_Apr2020
+06,LA,22,,22015,Bossier,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,291635.6,TON,2017NEI_Apr2020
+06,LA,22,,22015,Bossier,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,24.96639,TON,2017NEI_Apr2020
+06,LA,22,,22015,Bossier,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.2334935,TON,2017NEI_Apr2020
+06,LA,22,,22011,Beauregard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.2106306,LB,2017NEI_Apr2020
+06,LA,22,,22011,Beauregard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,28.45346,LB,2017NEI_Apr2020
+06,LA,22,,22011,Beauregard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,.3743078,TON,2017NEI_Apr2020
+06,LA,22,,22011,Beauregard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.04489026,TON,2017NEI_Apr2020
+06,LA,22,,22011,Beauregard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.008881178,TON,2017NEI_Apr2020
+07,KS,20,,20141,Osborne,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,.018597752,LB,2017NEI_Apr2020
+07,KS,20,,20141,Osborne,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.00012513396,LB,2017NEI_Apr2020
+07,KS,20,,20141,Osborne,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.000008827392,LB,2017NEI_Apr2020
+07,KS,20,,20141,Osborne,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.0002870374,TON,2017NEI_Apr2020
+07,KS,20,,20139,Osage,ON,,2201000062,Gas Stations,,A,R,71432,Benzene,HAP,86.12212,LB,2017NEI_Apr2020
+07,KS,20,,20135,Ness,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,.2019612,LB,2017NEI_Apr2020
+07,KS,20,,20135,Ness,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,.4748812,LB,2017NEI_Apr2020
+07,KS,20,,20135,Ness,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.0014686398,LB,2017NEI_Apr2020
+07,KS,20,,20135,Ness,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.000001223682,LB,2017NEI_Apr2020
+07,KS,20,,20135,Ness,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.019350954,LB,2017NEI_Apr2020
+07,KS,20,,20135,Ness,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,.04342444,LB,2017NEI_Apr2020
+07,KS,20,,20135,Ness,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,46.5938,TON,2017NEI_Apr2020
+07,KS,20,,20135,Ness,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,.2757768,TON,2017NEI_Apr2020
+07,KS,20,,20135,Ness,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.02301977,TON,2017NEI_Apr2020
+07,KS,20,,20131,Nemaha,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,.04893444,LB,2017NEI_Apr2020
+07,KS,20,,20131,Nemaha,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,129000,Pyrene,HAP,.00081837,LB,2017NEI_Apr2020
+07,KS,20,,20131,Nemaha,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.002442662,LB,2017NEI_Apr2020
+07,KS,20,,20131,Nemaha,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.001002539,TON,2017NEI_Apr2020
+07,KS,20,,20131,Nemaha,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.0009879061,TON,2017NEI_Apr2020
+07,KS,20,,20131,Nemaha,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.000884955,TON,2017NEI_Apr2020
+07,KS,20,,20131,Nemaha,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.00002122202,TON,2017NEI_Apr2020
+07,KS,20,,20131,Nemaha,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.0280372,TON,2017NEI_Apr2020
+07,NE,31,,31077,Greeley,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,10.939498,LB,2017NEI_Apr2020
+07,NE,31,,31077,Greeley,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,3.427024,LB,2017NEI_Apr2020
+07,NE,31,,31077,Greeley,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.0348373,LB,2017NEI_Apr2020
+07,NE,31,,31077,Greeley,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.007576738,LB,2017NEI_Apr2020
+07,NE,31,,31077,Greeley,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,16.55349,TON,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.000005306124,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.0007644512,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.0007635198,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,71432,Benzene,HAP,2.05388,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.02621439,TON,2017NEI_Apr2020
+07,MO,29,,29175,Randolph,ON,,2202000062,Gas Stations,,A,R,110543,Hexane,HAP,49.92152,LB,2017NEI_Apr2020
+07,MO,29,,29175,Randolph,ON,,2202000062,Gas Stations,,A,R,1330207,Xylenes (Mixed Isomers),HAP,56.69512,LB,2017NEI_Apr2020
+07,MO,29,,29175,Randolph,ON,,2202000062,Gas Stations,,A,R,540841,"2,2,4-Trimethylpentane",HAP,45.18866,LB,2017NEI_Apr2020
+07,MO,29,,29171,Putnam,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,.0019492158,LB,2017NEI_Apr2020
+07,MO,29,,29171,Putnam,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,108883,Toluene,HAP,.2292162,LB,2017NEI_Apr2020
+07,MO,29,,29171,Putnam,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.00000003112312,LB,2017NEI_Apr2020
+07,MO,29,,29171,Putnam,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.00004474938,LB,2017NEI_Apr2020
+07,MO,29,,29171,Putnam,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.000386206,LB,2017NEI_Apr2020
+07,MO,29,,29171,Putnam,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.00001312825,TON,2017NEI_Apr2020
+07,MO,29,,29171,Putnam,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0000002399941,TON,2017NEI_Apr2020
+07,MO,29,,29171,Putnam,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.0002256148,TON,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,16.415132,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,.5399112,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,61.15428,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.00000964754,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.03367642,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.10542986,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.006124532,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.0001809478,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,71432,Benzene,HAP,25.18508,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,1.2022824,LB,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,9.931297,TON,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.001993103,TON,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,.8424415,TON,2017NEI_Apr2020
+06,LA,22,,22007,Assumption,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.04159913,TON,2017NEI_Apr2020
+06,LA,22,,22001,Acadia,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,10706.484,LB,2017NEI_Apr2020
+06,LA,22,,22001,Acadia,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,268.194,LB,2017NEI_Apr2020
+06,LA,22,,22001,Acadia,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,4.06833,LB,2017NEI_Apr2020
+06,LA,22,,22001,Acadia,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439965,Manganese,HAP,2.731948,LB,2017NEI_Apr2020
+06,LA,22,,22001,Acadia,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,13.33566,TON,2017NEI_Apr2020
+07,KS,20,,20123,Mitchell,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,.0404586,LB,2017NEI_Apr2020
+07,KS,20,,20123,Mitchell,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.002702132,LB,2017NEI_Apr2020
+07,KS,20,,20123,Mitchell,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.000249234,LB,2017NEI_Apr2020
+07,KS,20,,20123,Mitchell,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,.18127826,LB,2017NEI_Apr2020
+07,KS,20,,20123,Mitchell,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,.04538616,TON,2017NEI_Apr2020
+07,KS,20,,20123,Mitchell,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,22.23342,TON,2017NEI_Apr2020
+07,KS,20,,20123,Mitchell,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.004864731,TON,2017NEI_Apr2020
+07,KS,20,,20123,Mitchell,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.0101662,TON,2017NEI_Apr2020
+07,KS,20,,20119,Meade,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.001586944,TON,2017NEI_Apr2020
+07,KS,20,,20119,Meade,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.008574689,TON,2017NEI_Apr2020
+07,KS,20,,20119,Meade,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.017681128,LB,2017NEI_Apr2020
+07,KS,20,,20119,Meade,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,7.832692,LB,2017NEI_Apr2020
+07,KS,20,,20117,Marshall,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.08306756,LB,2017NEI_Apr2020
+07,KS,20,,20117,Marshall,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.0440268,LB,2017NEI_Apr2020
+07,KS,20,,20117,Marshall,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,1.4883088,LB,2017NEI_Apr2020
+07,KS,20,,20117,Marshall,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.01799054,LB,2017NEI_Apr2020
+07,KS,20,,20117,Marshall,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,2.336647,TON,2017NEI_Apr2020
+07,KS,20,,20117,Marshall,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.3010341,TON,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,9.205972,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,.11140856,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.0000015936854,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.007680316,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.02399472,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.00004374394,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,16.820252,LB,2017NEI_Apr2020
+07,NE,31,,31075,Grant,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,71432,Benzene,HAP,7.125144,LB,2017NEI_Apr2020
+07,NE,31,,31073,Gosper,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.00000229499,LB,2017NEI_Apr2020
+07,NE,31,,31073,Gosper,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.00003000222,LB,2017NEI_Apr2020
+07,NE,31,,31073,Gosper,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.00078788,TON,2017NEI_Apr2020
+07,NE,31,,31073,Gosper,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.00006848194,TON,2017NEI_Apr2020
+07,NE,31,,31073,Gosper,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.0001008971,TON,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,47.9526,LB,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,2.058578,LB,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,.4930442,LB,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,397.9344,LB,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.10593378,LB,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,1.2079568,LB,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,122.9265,TON,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,.2690136,TON,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.004404637,TON,2017NEI_Apr2020
+07,NE,31,,31065,Furnas,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,1.579501,TON,2017NEI_Apr2020
+07,MO,29,,29149,Oregon,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,.4717272,TON,2017NEI_Apr2020
+07,MO,29,,29149,Oregon,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0009288156,TON,2017NEI_Apr2020
+07,MO,29,,29149,Oregon,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,18.87257,LB,2017NEI_Apr2020
+07,MO,29,,29149,Oregon,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,8.68876,LB,2017NEI_Apr2020
+07,MO,29,,29149,Oregon,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,129000,Pyrene,HAP,3.181398,LB,2017NEI_Apr2020
+07,MO,29,,29149,Oregon,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.04622646,LB,2017NEI_Apr2020
+07,MO,29,,29149,Oregon,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,7439965,Manganese,HAP,.0649011,LB,2017NEI_Apr2020
+07,KS,20,,20111,Lyon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,4.759252,LB,2017NEI_Apr2020
+07,KS,20,,20111,Lyon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,.2141428,LB,2017NEI_Apr2020
+07,KS,20,,20111,Lyon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,1.3578306,LB,2017NEI_Apr2020
+07,KS,20,,20111,Lyon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,.1093171,TON,2017NEI_Apr2020
+07,KS,20,,20111,Lyon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.01425715,TON,2017NEI_Apr2020
+06,NM,35,,35003,Catron,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.00002463022,LB,2017NEI_Apr2020
+06,NM,35,,35003,Catron,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.00002463022,LB,2017NEI_Apr2020
+06,NM,35,,35003,Catron,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.00000004996294,LB,2017NEI_Apr2020
+06,NM,35,,35003,Catron,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.0000009552828,LB,2017NEI_Apr2020
+06,NM,35,,35003,Catron,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,.017299062,LB,2017NEI_Apr2020
+06,NM,35,,35003,Catron,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.0002970802,LB,2017NEI_Apr2020
+06,NM,35,,35003,Catron,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.00009342008,LB,2017NEI_Apr2020
+06,NM,35,,35003,Catron,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.000000004983698,LB,2017NEI_Apr2020
+06,NM,35,,35003,Catron,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.00003926044,TON,2017NEI_Apr2020
+07,NE,31,,31061,Franklin,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,.09127514,LB,2017NEI_Apr2020
+07,NE,31,,31061,Franklin,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.00013256298,LB,2017NEI_Apr2020
+07,NE,31,,31061,Franklin,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.000005644768,LB,2017NEI_Apr2020
+07,NE,31,,31061,Franklin,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,.2348498,LB,2017NEI_Apr2020
+07,NE,31,,31061,Franklin,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.02145346,LB,2017NEI_Apr2020
+07,NE,31,,31061,Franklin,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.00007053748,TON,2017NEI_Apr2020
+07,NE,31,,31061,Franklin,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.000004331064,TON,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,62.9956,LB,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.4971474,LB,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.04228766,LB,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.00096869,LB,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.0005737194,LB,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440020,Nickel,HAP,.00715372,LB,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,86737,Fluorene,HAP,.2210922,LB,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.01186846,TON,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.02215148,TON,2017NEI_Apr2020
+07,NE,31,,31057,Dundy,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.01144801,TON,2017NEI_Apr2020
+07,NE,31,,31053,Dodge,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NH3,Ammonia,CAP,4.539242,TON,2017NEI_Apr2020
+07,NE,31,,31053,Dodge,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,3.200424,TON,2017NEI_Apr2020
+07,NE,31,,31053,Dodge,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,99.31851,TON,2017NEI_Apr2020
+07,NE,31,,31053,Dodge,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,4764.122,LB,2017NEI_Apr2020
+07,NE,31,,31053,Dodge,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,129000,Pyrene,HAP,8.798228,LB,2017NEI_Apr2020
+07,NE,31,,31053,Dodge,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50000,Formaldehyde,HAP,1501.6966,LB,2017NEI_Apr2020
+07,NE,31,,31053,Dodge,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,1862.8236,LB,2017NEI_Apr2020
+07,NE,31,,31051,Dixon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.006671582,LB,2017NEI_Apr2020
+07,NE,31,,31051,Dixon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439965,Manganese,HAP,.0014236472,LB,2017NEI_Apr2020
+07,NE,31,,31051,Dixon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,6.709052,LB,2017NEI_Apr2020
+07,NE,31,,31051,Dixon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.00002493444,TON,2017NEI_Apr2020
+07,NE,31,,31051,Dixon,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.008551294,TON,2017NEI_Apr2020
+07,NE,31,,31045,Dawes,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,.04088332,LB,2017NEI_Apr2020
+07,NE,31,,31045,Dawes,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,.06591174,LB,2017NEI_Apr2020
+07,NE,31,,31045,Dawes,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,.539349,LB,2017NEI_Apr2020
+07,NE,31,,31045,Dawes,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0013324968,LB,2017NEI_Apr2020
+07,NE,31,,31045,Dawes,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,86737,Fluorene,HAP,.0005538414,LB,2017NEI_Apr2020
+07,NE,31,,31045,Dawes,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.0005158429,TON,2017NEI_Apr2020
+07,NE,31,,31045,Dawes,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NH3,Ammonia,CAP,.001127289,TON,2017NEI_Apr2020
+07,NE,31,,31045,Dawes,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.0006660881,TON,2017NEI_Apr2020
+07,MO,29,,29143,New Madrid,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,13.449262,LB,2017NEI_Apr2020
+07,MO,29,,29143,New Madrid,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.6908482,LB,2017NEI_Apr2020
+07,MO,29,,29143,New Madrid,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.7503617,TON,2017NEI_Apr2020
+07,MO,29,,29143,New Madrid,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.05956085,TON,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,2.986806,LB,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,4.38502,LB,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.013573728,LB,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,1.0784656,LB,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,2.585566,LB,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,1.620005,LB,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,.02307622,TON,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,438.9993,TON,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.001529834,TON,2017NEI_Apr2020
+07,MO,29,,29139,Montgomery,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.1798387,TON,2017NEI_Apr2020
+07,MO,29,,29135,Moniteau,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,71432,Benzene,HAP,5.354082,LB,2017NEI_Apr2020
+07,MO,29,,29135,Moniteau,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,6.274014,LB,2017NEI_Apr2020
+07,MO,29,,29135,Moniteau,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,.14457442,LB,2017NEI_Apr2020
+07,MO,29,,29129,Mercer,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,5.347658,LB,2017NEI_Apr2020
+07,MO,29,,29129,Mercer,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,7.896492,LB,2017NEI_Apr2020
+07,MO,29,,29129,Mercer,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.01251223,LB,2017NEI_Apr2020
+07,MO,29,,29129,Mercer,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.001527824,TON,2017NEI_Apr2020
+07,MO,29,,29129,Mercer,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.00002210902,TON,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,129000,Pyrene,HAP,.595606,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0016321042,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.0005636394,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.00002930972,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,44.45694,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NH3,Ammonia,CAP,.02781877,TON,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,1.6405536,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.005243844,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,.2722858,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.001104815,TON,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.1560684,TON,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,2.484538,TON,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,88.78626,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.2188906,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,105.5375,LB,2017NEI_Apr2020
+06,NM,35,,35011,De Baca,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440020,Nickel,HAP,.013651268,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,52.22148,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,86.50578,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,102.92136,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.0413248,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50000,Formaldehyde,HAP,3466.288,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.02278618,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,2.092274,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,71432,Benzene,HAP,253.6096,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.0008183234,LB,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,63932.02,TON,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,5.319958,TON,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.5254114,TON,2017NEI_Apr2020
+06,NM,35,,35007,Colfax,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.5435721,TON,2017NEI_Apr2020
+06,NM,35,,35005,Chaves,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.0006688388,LB,2017NEI_Apr2020
+06,NM,35,,35005,Chaves,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,14.14325,LB,2017NEI_Apr2020
+06,NM,35,,35005,Chaves,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0007069528,TON,2017NEI_Apr2020
+06,NM,35,,35005,Chaves,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.05671667,TON,2017NEI_Apr2020
+06,NM,35,,35005,Chaves,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,2.618062,LB,2017NEI_Apr2020
+06,NM,35,,35005,Chaves,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,120127,Anthracene,HAP,.14676424,LB,2017NEI_Apr2020
+06,NM,35,,35005,Chaves,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,.7415534,LB,2017NEI_Apr2020
+07,NE,31,,31047,Dawson,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,.5548486,LB,2017NEI_Apr2020
+07,NE,31,,31047,Dawson,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.007833494,LB,2017NEI_Apr2020
+07,NE,31,,31047,Dawson,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,7.012076,LB,2017NEI_Apr2020
+07,NE,31,,31047,Dawson,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.0005402327,TON,2017NEI_Apr2020
+07,NE,31,,31047,Dawson,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.0001863635,TON,2017NEI_Apr2020
+07,NE,31,,31039,Cuming,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.00018347624,LB,2017NEI_Apr2020
+07,NE,31,,31039,Cuming,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.008152461,TON,2017NEI_Apr2020
+07,NE,31,,31039,Cuming,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,108883,Toluene,HAP,74.25176,LB,2017NEI_Apr2020
+07,NE,31,,31039,Cuming,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,18.170452,LB,2017NEI_Apr2020
+07,NE,31,,31039,Cuming,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.0000015725068,LB,2017NEI_Apr2020
+07,NE,31,,31039,Cuming,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.007991072,LB,2017NEI_Apr2020
+07,NE,31,,31039,Cuming,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.004797906,LB,2017NEI_Apr2020
+07,MO,29,,29127,Marion,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0529555,LB,2017NEI_Apr2020
+07,MO,29,,29127,Marion,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,1.621089,LB,2017NEI_Apr2020
+07,MO,29,,29127,Marion,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.01586426,TON,2017NEI_Apr2020
+07,MO,29,,29127,Marion,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.7980277,TON,2017NEI_Apr2020
+07,MO,29,,29113,Lincoln,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,4.09835,LB,2017NEI_Apr2020
+07,MO,29,,29113,Lincoln,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,120127,Anthracene,HAP,.17765938,LB,2017NEI_Apr2020
+07,MO,29,,29113,Lincoln,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.4541966,LB,2017NEI_Apr2020
+07,MO,29,,29113,Lincoln,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.03705963,TON,2017NEI_Apr2020
+07,MO,29,,29113,Lincoln,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.1979924,TON,2017NEI_Apr2020
+07,MO,29,,29113,Lincoln,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.01712962,TON,2017NEI_Apr2020
+07,MO,29,,29105,Laclede,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.00002191168,LB,2017NEI_Apr2020
+07,MO,29,,29105,Laclede,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440020,Nickel,HAP,.002738966,LB,2017NEI_Apr2020
+07,MO,29,,29105,Laclede,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,.09828668,LB,2017NEI_Apr2020
+07,MO,29,,29105,Laclede,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.006625485,TON,2017NEI_Apr2020
+06,AR,05,,05051,Garland,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,71432,Benzene,HAP,20931.84,LB,2017NEI_Apr2020
+06,AR,05,,05051,Garland,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.12582566,LB,2017NEI_Apr2020
+06,AR,05,,05051,Garland,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,246229.2,TON,2017NEI_Apr2020
+06,AR,05,,05039,Dallas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,1335.827,LB,2017NEI_Apr2020
+06,AR,05,,05039,Dallas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,129000,Pyrene,HAP,3.750306,LB,2017NEI_Apr2020
+06,AR,05,,05039,Dallas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,4918.936,LB,2017NEI_Apr2020
+06,AR,05,,05039,Dallas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,1.6909756,LB,2017NEI_Apr2020
+06,AR,05,,05039,Dallas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.555355,LB,2017NEI_Apr2020
+06,AR,05,,05039,Dallas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,1.681258,TON,2017NEI_Apr2020
+06,AR,05,,05039,Dallas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,38.03433,TON,2017NEI_Apr2020
+06,AR,05,,05009,Boone,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,.3712744,LB,2017NEI_Apr2020
+06,AR,05,,05009,Boone,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.11149828,LB,2017NEI_Apr2020
+06,AR,05,,05009,Boone,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.02769966,LB,2017NEI_Apr2020
+06,AR,05,,05009,Boone,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,.3432164,TON,2017NEI_Apr2020
+06,AR,05,,05009,Boone,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.06114615,TON,2017NEI_Apr2020
+06,AR,05,,05007,Benton,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,85018,Phenanthrene,HAP,30.93112,LB,2017NEI_Apr2020
+06,AR,05,,05007,Benton,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,17.152968,LB,2017NEI_Apr2020
+06,AR,05,,05007,Benton,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,53.17089,TON,2017NEI_Apr2020
+06,AR,05,,05007,Benton,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.08278808,TON,2017NEI_Apr2020
+06,AR,05,,05007,Benton,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,1.415174,TON,2017NEI_Apr2020
+06,AR,05,,05007,Benton,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,7.99931,LB,2017NEI_Apr2020
+06,AR,05,,05007,Benton,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,120127,Anthracene,HAP,.298897,LB,2017NEI_Apr2020
+06,AR,05,,05007,Benton,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.002186408,LB,2017NEI_Apr2020
+06,AR,05,,05007,Benton,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,.699806,LB,2017NEI_Apr2020
+06,AR,05,,05001,Arkansas,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.4813616,LB,2017NEI_Apr2020
+06,AR,05,,05001,Arkansas,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.3614206,LB,2017NEI_Apr2020
+06,AR,05,,05001,Arkansas,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.14055094,LB,2017NEI_Apr2020
+06,AR,05,,05001,Arkansas,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.5444968,LB,2017NEI_Apr2020
+06,AR,05,,05001,Arkansas,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,4.46203,LB,2017NEI_Apr2020
+06,AR,05,,05001,Arkansas,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.1197875,TON,2017NEI_Apr2020
+06,AR,05,,05145,White,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.002143027,TON,2017NEI_Apr2020
+06,AR,05,,05145,White,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,81.53794,LB,2017NEI_Apr2020
+06,AR,05,,05145,White,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.04491762,LB,2017NEI_Apr2020
+06,AR,05,,05145,White,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.576046,LB,2017NEI_Apr2020
+06,AR,05,,05145,White,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,105.92048,LB,2017NEI_Apr2020
+06,AR,05,,05145,White,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0002156657,TON,2017NEI_Apr2020
+06,AR,05,,05143,Washington,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,55.73924,LB,2017NEI_Apr2020
+06,AR,05,,05143,Washington,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.0016713432,LB,2017NEI_Apr2020
+06,AR,05,,05143,Washington,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.6075436,LB,2017NEI_Apr2020
+06,AR,05,,05143,Washington,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,18.24233,TON,2017NEI_Apr2020
+06,AR,05,,05133,Sevier,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,.639169,LB,2017NEI_Apr2020
+06,AR,05,,05133,Sevier,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.0202493,TON,2017NEI_Apr2020
+06,AR,05,,05133,Sevier,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.00241508,TON,2017NEI_Apr2020
+06,AR,05,,05133,Sevier,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.162412,TON,2017NEI_Apr2020
+06,AR,05,,05131,Sebastian,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,1.9976594,LB,2017NEI_Apr2020
+06,AR,05,,05131,Sebastian,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.5760624,LB,2017NEI_Apr2020
+06,AR,05,,05131,Sebastian,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,206440,Fluoranthene,HAP,3.396882,LB,2017NEI_Apr2020
+06,AR,05,,05131,Sebastian,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50000,Formaldehyde,HAP,700.257,LB,2017NEI_Apr2020
+06,AR,05,,05131,Sebastian,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,121.72662,LB,2017NEI_Apr2020
+06,AR,05,,05131,Sebastian,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,1.564295,TON,2017NEI_Apr2020
+06,AR,05,,05131,Sebastian,ON,,2201000062,Gas Stations,,A,R,540841,"2,2,4-Trimethylpentane",HAP,4730.89,LB,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.006259412,LB,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.00008040046,LB,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.016811054,LB,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,.2194608,TON,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,11.0605,TON,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,.1843094,TON,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,22.4074,LB,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.10360512,LB,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.02463374,LB,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.06989404,LB,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CH4,Methane,GHG,.01958895,TON,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,27.77146,TON,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,1356.91,TON,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.02529454,TON,2017NEI_Apr2020
+06,AR,05,,05125,Saline,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,NH3,Ammonia,CAP,.03530514,TON,2017NEI_Apr2020
+06,AR,05,,05115,Pope,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,22.98912,LB,2017NEI_Apr2020
+06,AR,05,,05115,Pope,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,3.899094,LB,2017NEI_Apr2020
+06,AR,05,,05115,Pope,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,334.1522,LB,2017NEI_Apr2020
+06,AR,05,,05115,Pope,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NH3,Ammonia,CAP,.2916622,TON,2017NEI_Apr2020
+06,AR,05,,05115,Pope,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,2.294436,TON,2017NEI_Apr2020
+06,AR,05,,05115,Pope,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,4.268558,TON,2017NEI_Apr2020
+06,AR,05,,05115,Pope,ON,,2201000062,Gas Stations,,A,R,540841,"2,2,4-Trimethylpentane",HAP,2695.25,LB,2017NEI_Apr2020
+06,AR,05,,05101,Newton,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,.002349442,LB,2017NEI_Apr2020
+06,AR,05,,05101,Newton,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.00005628526,LB,2017NEI_Apr2020
+06,AR,05,,05101,Newton,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,71432,Benzene,HAP,.09467536,LB,2017NEI_Apr2020
+06,AR,05,,05101,Newton,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.0000016488918,LB,2017NEI_Apr2020
+06,AR,05,,05101,Newton,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CH4,Methane,GHG,.0001131357,TON,2017NEI_Apr2020
+06,AR,05,,05101,Newton,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.00002266241,TON,2017NEI_Apr2020
+06,AR,05,,05089,Marion,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,.5354544,LB,2017NEI_Apr2020
+06,AR,05,,05089,Marion,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,1.7515362,LB,2017NEI_Apr2020
+06,AR,05,,05089,Marion,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.0901879,LB,2017NEI_Apr2020
+06,AR,05,,05089,Marion,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.003723994,LB,2017NEI_Apr2020
+06,AR,05,,05089,Marion,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.0018746438,LB,2017NEI_Apr2020
+06,AR,05,,05089,Marion,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,86737,Fluorene,HAP,.09216148,LB,2017NEI_Apr2020
+06,AR,05,,05089,Marion,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.0008658587,TON,2017NEI_Apr2020
+06,AR,05,,05089,Marion,ON,,2201000062,Gas Stations,,A,R,71432,Benzene,HAP,61.32138,LB,2017NEI_Apr2020
+06,AR,05,,05083,Logan,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,.8996464,TON,2017NEI_Apr2020
+06,AR,05,,05083,Logan,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.002447748,TON,2017NEI_Apr2020
+06,AR,05,,05083,Logan,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,1.4979332,LB,2017NEI_Apr2020
+06,AR,05,,05083,Logan,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,3.469378,LB,2017NEI_Apr2020
+06,AR,05,,05083,Logan,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,3.541752,LB,2017NEI_Apr2020
+06,AR,05,,05083,Logan,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.2004804,LB,2017NEI_Apr2020
+06,AR,05,,05083,Logan,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,5.243176,LB,2017NEI_Apr2020
+06,AR,05,,05083,Logan,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,.02390246,TON,2017NEI_Apr2020
+06,AR,05,,05083,Logan,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,2.383261,TON,2017NEI_Apr2020
+06,AR,05,,05065,Izard,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,7440020,Nickel,HAP,.002565776,LB,2017NEI_Apr2020
+06,AR,05,,05065,Izard,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,.02010668,TON,2017NEI_Apr2020
+06,AR,05,,05061,Howard,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,2.877196,LB,2017NEI_Apr2020
+06,AR,05,,05061,Howard,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.18187212,LB,2017NEI_Apr2020
+06,AR,05,,05061,Howard,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.015682002,LB,2017NEI_Apr2020
+06,AR,05,,05061,Howard,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,11.503104,LB,2017NEI_Apr2020
+06,AR,05,,05061,Howard,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,3.471557,TON,2017NEI_Apr2020
+06,AR,05,,05061,Howard,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.2958156,TON,2017NEI_Apr2020
+06,OK,40,,40035,Craig,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,232.7094,LB,2017NEI_Apr2020
+06,OK,40,,40035,Craig,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,71432,Benzene,HAP,166.72202,LB,2017NEI_Apr2020
+06,OK,40,,40035,Craig,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,1.881203,TON,2017NEI_Apr2020
+06,OK,40,,40035,Craig,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,145.60746,LB,2017NEI_Apr2020
+06,OK,40,,40035,Craig,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,2.592932,LB,2017NEI_Apr2020
+06,OK,40,,40035,Craig,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,1052.8696,LB,2017NEI_Apr2020
+06,OK,40,,40035,Craig,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,.11504434,LB,2017NEI_Apr2020
+06,OK,40,,40035,Craig,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.06544194,LB,2017NEI_Apr2020
+06,OK,40,,40023,Choctaw,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,17.512684,LB,2017NEI_Apr2020
+06,OK,40,,40023,Choctaw,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,45.3453,LB,2017NEI_Apr2020
+06,OK,40,,40023,Choctaw,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,4.663392,LB,2017NEI_Apr2020
+06,OK,40,,40023,Choctaw,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.9365274,LB,2017NEI_Apr2020
+06,OK,40,,40023,Choctaw,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.04437736,LB,2017NEI_Apr2020
+06,OK,40,,40023,Choctaw,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.07895967,TON,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.0005900356,LB,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.0003679456,LB,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.0003465368,LB,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.0008482404,LB,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.004647366,LB,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,.3805219,TON,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.000001921028,TON,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.0000206099,TON,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,.019559472,LB,2017NEI_Apr2020
+07,MO,29,,29075,Gentry,ON,,2201420080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,.5330776,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,88.46538,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.000392774,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.02465888,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,10.134108,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,2.496732,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,130.80368,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,40224.48,TON,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,3.197446,TON,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NH3,Ammonia,CAP,.6228653,TON,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.6384087,TON,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,3.453894,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,1.2841274,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.505797,LB,2017NEI_Apr2020
+07,MO,29,,29063,DeKalb,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,1.536627,TON,2017NEI_Apr2020
+06,NM,35,,35055,Taos,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.1905491,LB,2017NEI_Apr2020
+06,NM,35,,35055,Taos,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.000002638604,LB,2017NEI_Apr2020
+06,NM,35,,35055,Taos,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.0005517036,LB,2017NEI_Apr2020
+06,NM,35,,35055,Taos,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,3.46952,LB,2017NEI_Apr2020
+06,NM,35,,35055,Taos,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.037913,TON,2017NEI_Apr2020
+06,NM,35,,35055,Taos,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.0003081631,TON,2017NEI_Apr2020
+06,NM,35,,35055,Taos,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.05165808,TON,2017NEI_Apr2020
+06,NM,35,,35055,Taos,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.1910112,TON,2017NEI_Apr2020
+06,NM,35,,35049,Santa Fe,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,36.943,LB,2017NEI_Apr2020
+06,NM,35,,35049,Santa Fe,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.02930994,LB,2017NEI_Apr2020
+06,NM,35,,35049,Santa Fe,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.0006317964,LB,2017NEI_Apr2020
+06,NM,35,,35049,Santa Fe,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.07496404,TON,2017NEI_Apr2020
+06,NM,35,,35049,Santa Fe,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.003174789,TON,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,.07417676,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0000822176,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.00042229,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.0128981,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.00005759434,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.00000012697662,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,.010936194,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.00001295905,TON,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,.08912394,TON,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,.4442736,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,1.0323654,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,.966372,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.0000911056,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.000019491856,LB,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,.00472296,TON,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.001163554,TON,2017NEI_Apr2020
+06,NM,35,,35047,San Miguel,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.002321802,TON,2017NEI_Apr2020
+06,NM,35,,35045,San Juan,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.04388499,TON,2017NEI_Apr2020
+06,NM,35,,35045,San Juan,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,56.94454,LB,2017NEI_Apr2020
+06,NM,35,,35045,San Juan,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,120127,Anthracene,HAP,2.577582,LB,2017NEI_Apr2020
+06,NM,35,,35045,San Juan,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,18.398768,LB,2017NEI_Apr2020
+06,NM,35,,35045,San Juan,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.02699322,LB,2017NEI_Apr2020
+06,NM,35,,35045,San Juan,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,30.29563,TON,2017NEI_Apr2020
+06,NM,35,,35045,San Juan,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,2.602184,TON,2017NEI_Apr2020
+06,NM,35,,35033,Mora,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,7.035588,LB,2017NEI_Apr2020
+06,NM,35,,35033,Mora,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50000,Formaldehyde,HAP,2438.242,LB,2017NEI_Apr2020
+06,NM,35,,35033,Mora,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,71432,Benzene,HAP,176.6578,LB,2017NEI_Apr2020
+06,NM,35,,35033,Mora,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.3090318,LB,2017NEI_Apr2020
+06,NM,35,,35033,Mora,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,132.3943,TON,2017NEI_Apr2020
+07,MO,29,,29037,Cass,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,14.478874,LB,2017NEI_Apr2020
+07,MO,29,,29037,Cass,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,120127,Anthracene,HAP,3.70779,LB,2017NEI_Apr2020
+07,MO,29,,29037,Cass,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.03260388,LB,2017NEI_Apr2020
+07,MO,29,,29037,Cass,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.0002929664,LB,2017NEI_Apr2020
+07,MO,29,,29037,Cass,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,7.4666,LB,2017NEI_Apr2020
+07,MO,29,,29037,Cass,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,2.845375,TON,2017NEI_Apr2020
+07,MO,29,,29037,Cass,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.1298251,TON,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.3883667,TON,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.04430181,TON,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,264.3326,LB,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.0002484262,LB,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.4316992,LB,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,2.338278,LB,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,86737,Fluorene,HAP,.8744294,LB,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,4331.502,LB,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,1076.8734,LB,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,.7920038,LB,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.271575,LB,2017NEI_Apr2020
+06,LA,22,,22127,Winn,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,20.58453,TON,2017NEI_Apr2020
+06,LA,22,,22119,Webster,ON,,2201000062,Gas Stations,,A,R,100414,Ethyl Benzene,HAP,1316.346,LB,2017NEI_Apr2020
+06,LA,22,,22119,Webster,ON,,2201000062,Gas Stations,,A,R,VOC,Volatile Organic Compounds,CAP,38.24366,TON,2017NEI_Apr2020
+06,LA,22,,22115,Vernon,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,1.6855442,LB,2017NEI_Apr2020
+06,LA,22,,22115,Vernon,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.010407156,LB,2017NEI_Apr2020
+06,LA,22,,22115,Vernon,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,1.0027112,LB,2017NEI_Apr2020
+06,LA,22,,22115,Vernon,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,34.25694,LB,2017NEI_Apr2020
+06,LA,22,,22115,Vernon,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.01045715,TON,2017NEI_Apr2020
+06,LA,22,,22115,Vernon,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.0245874,TON,2017NEI_Apr2020
+06,NM,35,,35039,Rio Arriba,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.006705106,LB,2017NEI_Apr2020
+06,NM,35,,35039,Rio Arriba,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.006705106,LB,2017NEI_Apr2020
+06,NM,35,,35039,Rio Arriba,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.007904014,LB,2017NEI_Apr2020
+06,NM,35,,35039,Rio Arriba,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.00004553548,TON,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,26.58702,LB,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,13.118298,LB,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,88.4028,LB,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.08528274,LB,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,6.66233,LB,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,71432,Benzene,HAP,242.5302,LB,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.0009281288,LB,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.3879382,LB,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,7.805568,LB,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,57.90368,TON,2017NEI_Apr2020
+06,NM,35,,35031,McKinley,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,122.6447,TON,2017NEI_Apr2020
+06,NM,35,,35027,Lincoln,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.00004061004,LB,2017NEI_Apr2020
+06,NM,35,,35027,Lincoln,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,.0434401,TON,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.00008056336,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,1.1516252,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,63.61071,TON,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.01259359,TON,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,.0678703,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.013900266,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,.007145862,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,.004387982,TON,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.00001858444,TON,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,.07389788,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.00003453034,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,.0222265,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.003162986,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.012352734,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,108883,Toluene,HAP,.03585254,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,120127,Anthracene,HAP,.00000900225,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.000017737206,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.00000010618932,LB,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,.05537634,TON,2017NEI_Apr2020
+07,NE,31,,31175,Valley,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.000009131214,TON,2017NEI_Apr2020
+07,NE,31,,31173,Thurston,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,11.924526,LB,2017NEI_Apr2020
+07,NE,31,,31173,Thurston,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.002837356,LB,2017NEI_Apr2020
+07,NE,31,,31173,Thurston,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.127467,TON,2017NEI_Apr2020
+07,NE,31,,31173,Thurston,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0003286245,TON,2017NEI_Apr2020
+07,MO,29,,29025,Caldwell,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,95.9012,LB,2017NEI_Apr2020
+07,MO,29,,29025,Caldwell,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,4.319972,LB,2017NEI_Apr2020
+07,MO,29,,29025,Caldwell,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,1.8011694,LB,2017NEI_Apr2020
+07,MO,29,,29025,Caldwell,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,1.548953,LB,2017NEI_Apr2020
+07,MO,29,,29025,Caldwell,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.11431048,LB,2017NEI_Apr2020
+07,MO,29,,29025,Caldwell,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.00695765,LB,2017NEI_Apr2020
+07,MO,29,,29025,Caldwell,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,23.84088,TON,2017NEI_Apr2020
+07,MO,29,,29025,Caldwell,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,593.901,TON,2017NEI_Apr2020
+07,MO,29,,29025,Caldwell,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.006229727,TON,2017NEI_Apr2020
+07,MO,29,,29023,Butler,ON,,2205000062,Gas Stations,,A,R,1330207,Xylenes (Mixed Isomers),HAP,8.139316,LB,2017NEI_Apr2020
+07,MO,29,,29023,Butler,ON,,2205000062,Gas Stations,,A,R,540841,"2,2,4-Trimethylpentane",HAP,7.1885,LB,2017NEI_Apr2020
+07,MO,29,,29023,Butler,ON,,2205000062,Gas Stations,,A,R,VOC,Volatile Organic Compounds,CAP,.1835676,TON,2017NEI_Apr2020
+06,LA,22,,22107,Tensas,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.1041356,TON,2017NEI_Apr2020
+06,LA,22,,22107,Tensas,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,4.455872,LB,2017NEI_Apr2020
+06,LA,22,,22107,Tensas,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.5498708,LB,2017NEI_Apr2020
+06,LA,22,,22107,Tensas,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,3.42879,LB,2017NEI_Apr2020
+06,LA,22,,22105,Tangipahoa,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,8473.144,LB,2017NEI_Apr2020
+06,LA,22,,22105,Tangipahoa,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.6000164,LB,2017NEI_Apr2020
+06,LA,22,,22105,Tangipahoa,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.2254308,LB,2017NEI_Apr2020
+06,LA,22,,22105,Tangipahoa,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439965,Manganese,HAP,.04184416,LB,2017NEI_Apr2020
+06,LA,22,,22105,Tangipahoa,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.03788638,LB,2017NEI_Apr2020
+06,LA,22,,22105,Tangipahoa,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,24.24386,LB,2017NEI_Apr2020
+06,LA,22,,22105,Tangipahoa,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,5.755773,TON,2017NEI_Apr2020
+06,LA,22,,22105,Tangipahoa,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.05787114,TON,2017NEI_Apr2020
+06,NM,35,,35029,Luna,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.00000945793,LB,2017NEI_Apr2020
+06,NM,35,,35029,Luna,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.06591104,LB,2017NEI_Apr2020
+06,NM,35,,35029,Luna,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,125.9987,LB,2017NEI_Apr2020
+06,NM,35,,35029,Luna,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,74.90584,LB,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,45.2163,LB,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.007603936,LB,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,24.06304,TON,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,.4293831,TON,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.01218183,TON,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,10.4222,TON,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.2093676,LB,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,3.227576,LB,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.0007474522,LB,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.2078602,LB,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,1.12899,LB,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,1233.977,TON,2017NEI_Apr2020
+06,NM,35,,35028,Los Alamos,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,2.563883,TON,2017NEI_Apr2020
+06,NM,35,,35023,Hidalgo,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,13.396404,LB,2017NEI_Apr2020
+06,NM,35,,35023,Hidalgo,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,2.745126,LB,2017NEI_Apr2020
+06,NM,35,,35023,Hidalgo,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50000,Formaldehyde,HAP,275.9348,LB,2017NEI_Apr2020
+06,NM,35,,35023,Hidalgo,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.3071524,TON,2017NEI_Apr2020
+06,NM,35,,35013,Dona Ana,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.003094172,LB,2017NEI_Apr2020
+06,NM,35,,35013,Dona Ana,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.2168633,TON,2017NEI_Apr2020
+06,NM,35,,35013,Dona Ana,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.001849194,TON,2017NEI_Apr2020
+06,NM,35,,35013,Dona Ana,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.003318951,TON,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.0003655294,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.0008392434,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,.001717009,TON,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.000001648329,TON,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,.02234554,TON,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,.004100342,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50000,Formaldehyde,HAP,.2780858,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.0002222776,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0001828493,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50000,Formaldehyde,HAP,4.05024,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,.09380146,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.009881052,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,.4677552,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CH4,Methane,GHG,.0000788246,TON,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.04678876,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.00002045989,TON,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.001081304,TON,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.00001041591,TON,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.00128847,TON,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.10849,TON,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,3.754976,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,1.413813,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,.0015626534,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.008417204,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.003162438,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.001307163,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.0017013848,LB,2017NEI_Apr2020
+07,NE,31,,31165,Sioux,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.19486748,LB,2017NEI_Apr2020
+07,NE,31,,31165,Sioux,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440020,Nickel,HAP,.04287168,LB,2017NEI_Apr2020
+07,NE,31,,31165,Sioux,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.06573714,LB,2017NEI_Apr2020
+07,NE,31,,31161,Sheridan,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,.02770818,LB,2017NEI_Apr2020
+07,NE,31,,31161,Sheridan,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,.06699318,LB,2017NEI_Apr2020
+07,NE,31,,31161,Sheridan,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,108883,Toluene,HAP,.05249584,LB,2017NEI_Apr2020
+07,NE,31,,31161,Sheridan,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,.04587754,LB,2017NEI_Apr2020
+07,NE,31,,31161,Sheridan,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.002865862,LB,2017NEI_Apr2020
+07,NE,31,,31161,Sheridan,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,.004313982,TON,2017NEI_Apr2020
+07,NE,31,,31161,Sheridan,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.004964031,TON,2017NEI_Apr2020
+07,NE,31,,31157,Scotts Bluff,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,86737,Fluorene,HAP,.002072006,LB,2017NEI_Apr2020
+07,NE,31,,31157,Scotts Bluff,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,.02958668,LB,2017NEI_Apr2020
+07,NE,31,,31157,Scotts Bluff,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,129000,Pyrene,HAP,.0019508922,LB,2017NEI_Apr2020
+07,NE,31,,31157,Scotts Bluff,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50000,Formaldehyde,HAP,1.7222638,LB,2017NEI_Apr2020
+07,NE,31,,31157,Scotts Bluff,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.001872475,LB,2017NEI_Apr2020
+07,NE,31,,31157,Scotts Bluff,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,71432,Benzene,HAP,2.826248,LB,2017NEI_Apr2020
+07,NE,31,,31153,Sarpy,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,2.326504,LB,2017NEI_Apr2020
+07,NE,31,,31153,Sarpy,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.350897,LB,2017NEI_Apr2020
+07,NE,31,,31153,Sarpy,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,91203,Naphthalene,HAP,4.610068,LB,2017NEI_Apr2020
+07,NE,31,,31153,Sarpy,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,221.0287,TON,2017NEI_Apr2020
+07,NE,31,,31153,Sarpy,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.1342579,TON,2017NEI_Apr2020
+07,NE,31,,31153,Sarpy,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.1070182,TON,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,16.32792,TON,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.00413265,TON,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.0149656,TON,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,3.426262,TON,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,1.1587736,LB,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.07274656,LB,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.0201044,LB,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.0006270992,LB,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.02017976,LB,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.0002419422,LB,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.06975934,LB,2017NEI_Apr2020
+07,MO,29,,29017,Bollinger,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.3790416,LB,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,.00533167,LB,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.0008519638,LB,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2205320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.0005432579,TON,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,37.19486,LB,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.6715166,LB,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50000,Formaldehyde,HAP,556.0876,LB,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.02294424,LB,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,1304.833,LB,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,83329,Acenaphthene,HAP,1.918357,LB,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NH3,Ammonia,CAP,2.095204,TON,2017NEI_Apr2020
+07,MO,29,,29015,Benton,ON,,2201210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.3870295,TON,2017NEI_Apr2020
+06,LA,22,,22095,St. John the Baptist,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,122.30698,LB,2017NEI_Apr2020
+06,LA,22,,22095,St. John the Baptist,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,746.5154,LB,2017NEI_Apr2020
+06,LA,22,,22095,St. John the Baptist,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,1995.4716,LB,2017NEI_Apr2020
+06,LA,22,,22095,St. John the Baptist,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.2390452,LB,2017NEI_Apr2020
+06,LA,22,,22095,St. John the Baptist,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.2391318,LB,2017NEI_Apr2020
+06,LA,22,,22095,St. John the Baptist,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,71432,Benzene,HAP,902.6638,LB,2017NEI_Apr2020
+06,LA,22,,22095,St. John the Baptist,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.00773485,LB,2017NEI_Apr2020
+06,LA,22,,22095,St. John the Baptist,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440020,Nickel,HAP,.09644814,LB,2017NEI_Apr2020
+06,LA,22,,22095,St. John the Baptist,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,.6267748,TON,2017NEI_Apr2020
+06,LA,22,,22089,St. Charles,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,6.749878,TON,2017NEI_Apr2020
+06,LA,22,,22089,St. Charles,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NH3,Ammonia,CAP,.8734142,TON,2017NEI_Apr2020
+06,LA,22,,22089,St. Charles,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.03547985,TON,2017NEI_Apr2020
+06,LA,22,,22089,St. Charles,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,10.78971,TON,2017NEI_Apr2020
+06,LA,22,,22089,St. Charles,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.6092456,LB,2017NEI_Apr2020
+06,LA,22,,22089,St. Charles,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,12.009968,LB,2017NEI_Apr2020
+06,LA,22,,22089,St. Charles,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,6.453286,LB,2017NEI_Apr2020
+06,LA,22,,22089,St. Charles,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.0008262812,LB,2017NEI_Apr2020
+06,LA,22,,22081,Red River,ON,,2202000062,Gas Stations,,A,R,100414,Ethyl Benzene,HAP,5.38242,LB,2017NEI_Apr2020
+07,KS,20,,20199,Wallace,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.003264576,LB,2017NEI_Apr2020
+07,KS,20,,20199,Wallace,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.0024651,LB,2017NEI_Apr2020
+07,KS,20,,20199,Wallace,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.000010303388,LB,2017NEI_Apr2020
+07,KS,20,,20199,Wallace,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.004061038,LB,2017NEI_Apr2020
+07,KS,20,,20199,Wallace,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CH4,Methane,GHG,.0002338981,TON,2017NEI_Apr2020
+07,KS,20,,20199,Wallace,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,9.188773,TON,2017NEI_Apr2020
+07,KS,20,,20199,Wallace,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.002295788,TON,2017NEI_Apr2020
+07,KS,20,,20199,Wallace,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.00007831586,TON,2017NEI_Apr2020
+07,KS,20,,20199,Wallace,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.00008824766,TON,2017NEI_Apr2020
+07,KS,20,,20195,Trego,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.3691645,TON,2017NEI_Apr2020
+07,KS,20,,20195,Trego,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.04194987,TON,2017NEI_Apr2020
+07,KS,20,,20195,Trego,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,1.3082582,LB,2017NEI_Apr2020
+07,KS,20,,20195,Trego,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,7.394176,LB,2017NEI_Apr2020
+07,KS,20,,20195,Trego,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.9631912,LB,2017NEI_Apr2020
+07,KS,20,,20195,Trego,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,6.779916,LB,2017NEI_Apr2020
+07,KS,20,,20195,Trego,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.002938476,LB,2017NEI_Apr2020
+07,KS,20,,20195,Trego,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.5062254,LB,2017NEI_Apr2020
+07,KS,20,,20195,Trego,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.014952598,LB,2017NEI_Apr2020
+07,KS,20,,20193,Thomas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,592.6532,LB,2017NEI_Apr2020
+07,KS,20,,20193,Thomas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,78.87336,LB,2017NEI_Apr2020
+07,KS,20,,20193,Thomas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,2.380962,LB,2017NEI_Apr2020
+07,KS,20,,20193,Thomas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,1.5177906,LB,2017NEI_Apr2020
+07,KS,20,,20193,Thomas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.5739698,LB,2017NEI_Apr2020
+07,KS,20,,20193,Thomas,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,1214.005,TON,2017NEI_Apr2020
+07,KS,20,,20193,Thomas,ON,,2201000062,Gas Stations,,A,R,1330207,Xylenes (Mixed Isomers),HAP,1733.7444,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.0001371494,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CH4,Methane,GHG,.0001342497,TON,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,.6469725,TON,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.00221193,TON,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,.0890396,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.000243226,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,.2926304,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.0006283868,LB,2017NEI_Apr2020
+07,KS,20,,20189,Stevens,ON,,2201510080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.00000325728,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,108883,Toluene,HAP,.06069696,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,71432,Benzene,HAP,.07296752,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.00005572068,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CH4,Methane,GHG,.0004898718,TON,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.002212838,TON,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.002536376,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.003877294,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.0604012,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,4.895408,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,71432,Benzene,HAP,19.092724,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,1.7661748,LB,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,.05730925,TON,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0002797038,TON,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,3.61293,TON,2017NEI_Apr2020
+07,KS,20,,20187,Stanton,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.1827741,TON,2017NEI_Apr2020
+07,NE,31,,31149,Rock,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,1.060042,LB,2017NEI_Apr2020
+07,NE,31,,31149,Rock,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,.00008144866,LB,2017NEI_Apr2020
+07,NE,31,,31149,Rock,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0004645004,LB,2017NEI_Apr2020
+07,NE,31,,31149,Rock,ON,,2205210080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.00007127004,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,2.797946,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.00316558,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,289.0585,TON,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.04794152,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.5748142,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.1843717,TON,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.01467659,TON,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,2.49604,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,14.161404,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,120127,Anthracene,HAP,.6497998,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,1.9144718,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,13.139552,LB,2017NEI_Apr2020
+07,NE,31,,31139,Pierce,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.006023756,LB,2017NEI_Apr2020
+07,MO,29,,29001,Adair,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,29.15926,LB,2017NEI_Apr2020
+07,MO,29,,29001,Adair,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,2.244872,LB,2017NEI_Apr2020
+07,MO,29,,29001,Adair,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.05131602,LB,2017NEI_Apr2020
+07,MO,29,,29001,Adair,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.02581746,LB,2017NEI_Apr2020
+07,MO,29,,29001,Adair,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.4936008,LB,2017NEI_Apr2020
+07,MO,29,,29001,Adair,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,19765.88,LB,2017NEI_Apr2020
+07,MO,29,,29001,Adair,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,130.05392,LB,2017NEI_Apr2020
+07,MO,29,,29001,Adair,ON,,2201310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,332.5046,LB,2017NEI_Apr2020
+06,LA,22,,22073,Ouachita,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,38.24724,LB,2017NEI_Apr2020
+06,LA,22,,22073,Ouachita,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,369.32,LB,2017NEI_Apr2020
+06,LA,22,,22073,Ouachita,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,18.529938,LB,2017NEI_Apr2020
+06,LA,22,,22073,Ouachita,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,23.39055,TON,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,16.90478,LB,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,16.818874,LB,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,12.52156,LB,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,2.697582,TON,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,49.31783,TON,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.3452749,TON,2017NEI_Apr2020
+06,LA,22,,22067,Morehouse,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,.0008239492,LB,2017NEI_Apr2020
+06,LA,22,,22067,Morehouse,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0000156606,LB,2017NEI_Apr2020
+06,LA,22,,22067,Morehouse,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.000005883932,LB,2017NEI_Apr2020
+06,LA,22,,22067,Morehouse,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.000003330356,LB,2017NEI_Apr2020
+06,LA,22,,22067,Morehouse,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.00002331282,LB,2017NEI_Apr2020
+06,LA,22,,22067,Morehouse,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.000002722772,LB,2017NEI_Apr2020
+06,LA,22,,22067,Morehouse,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.000005825386,LB,2017NEI_Apr2020
+06,LA,22,,22067,Morehouse,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,.003992422,LB,2017NEI_Apr2020
+06,LA,22,,22067,Morehouse,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.00002529826,TON,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2205000062,Gas Stations,,A,R,100414,Ethyl Benzene,HAP,1.2315702,LB,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2205000062,Gas Stations,,A,R,540841,"2,2,4-Trimethylpentane",HAP,3.687136,LB,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2205000062,Gas Stations,,A,R,71432,Benzene,HAP,1.02632,LB,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,4.794221,TON,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,26.71432,LB,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,5.1991,LB,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.3451382,LB,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202610080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,4.620528,TON,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,.5099494,LB,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.0268458,LB,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.0002753045,TON,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.00467043,TON,2017NEI_Apr2020
+06,LA,22,,22065,Madison,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.0004297969,TON,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.004190442,TON,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.0001927601,TON,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,.02687762,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,.07266602,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,191242,"Benzo[g,h,i,]Perylene",HAP,.0000391145,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.0005033808,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.00015461684,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.00006326202,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,85018,Phenanthrene,HAP,.010756536,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2202510080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,22.47238,TON,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,.12926192,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.0017996194,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.02424272,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.0026369,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.0017569844,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,71432,Benzene,HAP,4.60983,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,1.6711364,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,1.65837,TON,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,.1385137,TON,2017NEI_Apr2020
+07,KS,20,,20177,Shawnee,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",HAP,.01867333,LB,2017NEI_Apr2020
+07,KS,20,,20177,Shawnee,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.010034058,LB,2017NEI_Apr2020
+07,KS,20,,20177,Shawnee,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,4.133322,LB,2017NEI_Apr2020
+07,KS,20,,20177,Shawnee,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.9501788,LB,2017NEI_Apr2020
+07,KS,20,,20177,Shawnee,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,6.639537,TON,2017NEI_Apr2020
+07,KS,20,,20177,Shawnee,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NH3,Ammonia,CAP,.04731766,TON,2017NEI_Apr2020
+07,KS,20,,20167,Russell,ON,,2205000062,Gas Stations,,A,R,110543,Hexane,HAP,.7219112,LB,2017NEI_Apr2020
+07,KS,20,,20167,Russell,ON,,2205000062,Gas Stations,,A,R,VOC,Volatile Organic Compounds,CAP,.05926995,TON,2017NEI_Apr2020
+07,NE,31,,31119,Madison,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.0050079,LB,2017NEI_Apr2020
+07,NE,31,,31119,Madison,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,159.0857,TON,2017NEI_Apr2020
+07,NE,31,,31119,Madison,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,.03433546,TON,2017NEI_Apr2020
+07,NE,31,,31119,Madison,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,.5605707,TON,2017NEI_Apr2020
+07,NE,31,,31119,Madison,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.03662199,TON,2017NEI_Apr2020
+07,NE,31,,31119,Madison,ON,,2202530080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.07371922,TON,2017NEI_Apr2020
+07,MO,29,,29510,St. Louis city,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,2.180994,LB,2017NEI_Apr2020
+07,MO,29,,29510,St. Louis city,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,6.483344,LB,2017NEI_Apr2020
+07,MO,29,,29510,St. Louis city,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,.4196146,LB,2017NEI_Apr2020
+07,MO,29,,29510,St. Louis city,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,7.639932,LB,2017NEI_Apr2020
+07,MO,29,,29510,St. Louis city,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.00013863148,LB,2017NEI_Apr2020
+07,MO,29,,29510,St. Louis city,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,100.2888,LB,2017NEI_Apr2020
+07,MO,29,,29510,St. Louis city,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.02097717,TON,2017NEI_Apr2020
+06,LA,22,,22059,La Salle,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,3.489126,LB,2017NEI_Apr2020
+06,LA,22,,22059,La Salle,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.0011601512,LB,2017NEI_Apr2020
+06,LA,22,,22059,La Salle,ON,,2201430080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CO,Carbon Monoxide,CAP,1.375238,TON,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,77.65942,LB,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,275.9246,LB,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50000,Formaldehyde,HAP,4468.902,LB,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,1.3719904,LB,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,109101.1,TON,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202620080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,6.255831,TON,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.3072646,TON,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,SO2,Sulfur Dioxide,CAP,.009040544,TON,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,1.456262,TON,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,19.363472,LB,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,108883,Toluene,HAP,13.197126,LB,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.2242148,LB,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.018997808,LB,2017NEI_Apr2020
+06,LA,22,,22055,Lafayette,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,1.9216132,LB,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100425,Styrene,HAP,3.01291,LB,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,2.058926,LB,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.14413866,LB,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.03099824,LB,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NH3,Ammonia,CAP,.05024941,TON,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.6222795,TON,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2202430080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.09037166,TON,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.03437538,TON,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.0414594,LB,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,71432,Benzene,HAP,215.5636,LB,2017NEI_Apr2020
+06,LA,22,,22053,Jefferson Davis,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439965,Manganese,HAP,.008798728,LB,2017NEI_Apr2020
+07,NE,31,,31117,McPherson,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.02011432,LB,2017NEI_Apr2020
+07,NE,31,,31117,McPherson,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.02023447,TON,2017NEI_Apr2020
+07,NE,31,,31113,Logan,ON,,2202000062,Gas Stations,,A,R,540841,"2,2,4-Trimethylpentane",HAP,3.577456,LB,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.2224748,LB,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.004804348,LB,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,2.937952,LB,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.375964,LB,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,54.13762,LB,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.002564757,TON,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,190.74274,LB,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,4.307476,LB,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.016718132,LB,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CH4,Methane,GHG,.1761191,TON,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.05622892,TON,2017NEI_Apr2020
+07,NE,31,,31109,Lancaster,ON,,2201520080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,3.975364,TON,2017NEI_Apr2020
+07,MO,29,,29219,Warren,ON,,2201000062,Gas Stations,,A,R,1330207,Xylenes (Mixed Isomers),HAP,4228.342,LB,2017NEI_Apr2020
+06,LA,22,,22047,Iberville,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,127.22848,LB,2017NEI_Apr2020
+06,LA,22,,22047,Iberville,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,1984.3026,LB,2017NEI_Apr2020
+06,LA,22,,22047,Iberville,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.2923198,LB,2017NEI_Apr2020
+06,LA,22,,22047,Iberville,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,300.6282,LB,2017NEI_Apr2020
+06,LA,22,,22047,Iberville,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,4.87438,LB,2017NEI_Apr2020
+06,LA,22,,22047,Iberville,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,46.66198,LB,2017NEI_Apr2020
+06,LA,22,,22047,Iberville,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,12902.12,TON,2017NEI_Apr2020
+06,LA,22,,22047,Iberville,ON,,2201320080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.1729418,TON,2017NEI_Apr2020
+06,LA,22,,22045,Iberia,ON,,2201000062,Gas Stations,,A,R,108883,Toluene,HAP,12400.112,LB,2017NEI_Apr2020
+06,LA,22,,22045,Iberia,ON,,2201000062,Gas Stations,,A,R,71432,Benzene,HAP,327.0426,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,10.848726,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,18.818,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,49.07776,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,4.181662,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,50000,Formaldehyde,HAP,748.6144,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.0019822186,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,18.601594,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,7439965,Manganese,HAP,.07421488,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,85018,Phenanthrene,HAP,6.527116,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,82.44538,LB,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,DIESEL-PM10,PM10-Primary from certain diesel engines,,.5180568,TON,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NH3,Ammonia,CAP,.1448304,TON,2017NEI_Apr2020
+06,LA,22,,22043,Grant,ON,,2202310080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,13.20212,TON,2017NEI_Apr2020
+06,LA,22,,22037,East Feliciana,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.0008040155,TON,2017NEI_Apr2020
+06,LA,22,,22037,East Feliciana,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,.11608666,LB,2017NEI_Apr2020
+06,LA,22,,22037,East Feliciana,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50000,Formaldehyde,HAP,2.187894,LB,2017NEI_Apr2020
+06,LA,22,,22037,East Feliciana,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,.05160204,LB,2017NEI_Apr2020
+06,LA,22,,22037,East Feliciana,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.00002137813,TON,2017NEI_Apr2020
+06,LA,22,,22033,East Baton Rouge,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,108883,Toluene,HAP,14.127404,LB,2017NEI_Apr2020
+06,LA,22,,22033,East Baton Rouge,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.010821844,LB,2017NEI_Apr2020
+06,LA,22,,22033,East Baton Rouge,ON,,2201610080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,NH3,Ammonia,CAP,.02335903,TON,2017NEI_Apr2020
+07,NE,31,,31101,Keith,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.02014572,LB,2017NEI_Apr2020
+07,NE,31,,31101,Keith,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.0002265324,LB,2017NEI_Apr2020
+07,NE,31,,31101,Keith,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.004330974,LB,2017NEI_Apr2020
+07,NE,31,,31101,Keith,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.03155526,LB,2017NEI_Apr2020
+07,NE,31,,31101,Keith,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,816.8682,TON,2017NEI_Apr2020
+07,NE,31,,31101,Keith,ON,,2201530080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.05818998,LB,2017NEI_Apr2020
+07,NE,31,,31099,Kearney,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,.012670746,LB,2017NEI_Apr2020
+07,NE,31,,31099,Kearney,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.003498416,LB,2017NEI_Apr2020
+07,NE,31,,31099,Kearney,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50000,Formaldehyde,HAP,.5033122,LB,2017NEI_Apr2020
+07,NE,31,,31099,Kearney,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,DIESEL-PM25,PM25-Primary from certain diesel engines,,.00123732,TON,2017NEI_Apr2020
+07,NE,31,,31099,Kearney,ON,,2202420080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.0007573776,TON,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,1.1059028,LB,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.0009617404,LB,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7440382,Arsenic,HAP,.0011684488,LB,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,.05882016,LB,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.002584168,TON,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,110543,Hexane,HAP,.8853422,LB,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2205310080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.0008547358,LB,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,107028,Acrolein,HAP,7.232396,LB,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,205992,Benzo[b]Fluoranthene,HAP,.02424654,LB,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,218019,Chrysene,HAP,.1534101,LB,2017NEI_Apr2020
+07,NE,31,,31087,Hitchcock,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.004477518,LB,2017NEI_Apr2020
+07,MO,29,,29215,Texas,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,12.584962,LB,2017NEI_Apr2020
+07,MO,29,,29215,Texas,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,26.82696,LB,2017NEI_Apr2020
+07,MO,29,,29215,Texas,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,56553,Benz[a]Anthracene,HAP,.004624036,LB,2017NEI_Apr2020
+07,MO,29,,29215,Texas,ON,,2201540080,Mobile - On-Road non-Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,.3422623,TON,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,110543,Hexane,HAP,1.2300782,LB,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50000,Formaldehyde,HAP,48.88306,LB,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,53703,"Dibenzo[a,h]Anthracene",HAP,.0019048146,LB,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,540841,"2,2,4-Trimethylpentane",HAP,1.1667048,LB,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439965,Manganese,HAP,.0177717,LB,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,83329,Acenaphthene,HAP,.17580892,LB,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CH4,Methane,GHG,.007957824,TON,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,CO2,Carbon Dioxide,GHG,709.3767,TON,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0008015251,TON,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.3404987,TON,2017NEI_Apr2020
+07,MO,29,,29207,Stoddard,ON,,2202410080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,VOC,Volatile Organic Compounds,CAP,.3006392,TON,2017NEI_Apr2020
+07,MO,29,,29203,Shannon,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7439976,Mercury,HAP,.00003136568,LB,2017NEI_Apr2020
+07,MO,29,,29203,Shannon,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440020,Nickel,HAP,.018381012,LB,2017NEI_Apr2020
+07,MO,29,,29203,Shannon,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,7440382,Arsenic,HAP,.006558382,LB,2017NEI_Apr2020
+07,MO,29,,29203,Shannon,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,.9603824,LB,2017NEI_Apr2020
+07,MO,29,,29203,Shannon,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,NOX,Nitrogen Oxides,CAP,5.851967,TON,2017NEI_Apr2020
+07,MO,29,,29203,Shannon,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,120127,Anthracene,HAP,.4825828,LB,2017NEI_Apr2020
+07,MO,29,,29203,Shannon,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.004345504,LB,2017NEI_Apr2020
+07,MO,29,,29203,Shannon,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,208968,Acenaphthylene,HAP,.7262654,LB,2017NEI_Apr2020
+07,MO,29,,29203,Shannon,ON,,2202520080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,50328,Benzo[a]Pyrene,HAP,.10642074,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,206440,Fluoranthene,HAP,.102571,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,207089,Benzo[k]Fluoranthene,HAP,.000362034,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,86737,Fluorene,HAP,.09817758,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,100414,Ethyl Benzene,HAP,.4310942,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,108883,Toluene,HAP,.7246618,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,123386,Propionaldehyde,HAP,.751185,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,129000,Pyrene,HAP,.1344148,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,1330207,Xylenes (Mixed Isomers),HAP,.6462098,LB,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,N2O,Nitrous Oxide,GHG,.0001435831,TON,2017NEI_Apr2020
+06,LA,22,,22027,Claiborne,ON,,2202540080,Mobile - On-Road Diesel Heavy Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.02765128,TON,2017NEI_Apr2020
+06,LA,22,,22025,Catahoula,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.0000002562844,LB,2017NEI_Apr2020
+06,LA,22,,22025,Catahoula,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,218019,Chrysene,HAP,.00010786092,LB,2017NEI_Apr2020
+06,LA,22,,22025,Catahoula,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,91203,Naphthalene,HAP,.07691738,LB,2017NEI_Apr2020
+06,LA,22,,22025,Catahoula,ON,,2202210080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,SO4,Sulfate Portion of PM2.5-PRI,,.00002345309,TON,2017NEI_Apr2020
+06,LA,22,,22019,Calcasieu,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,120127,Anthracene,HAP,.6118432,LB,2017NEI_Apr2020
+06,LA,22,,22019,Calcasieu,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,18540299,Chromium (VI),HAP,.0002690984,LB,2017NEI_Apr2020
+06,LA,22,,22019,Calcasieu,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439965,Manganese,HAP,.06571766,LB,2017NEI_Apr2020
+06,LA,22,,22019,Calcasieu,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,7439976,Mercury,HAP,.002697648,LB,2017NEI_Apr2020
+06,LA,22,,22019,Calcasieu,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,CH4,Methane,GHG,.4174709,TON,2017NEI_Apr2020
+06,LA,22,,22019,Calcasieu,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,NH3,Ammonia,CAP,.5923636,TON,2017NEI_Apr2020
+06,LA,22,,22019,Calcasieu,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.1707725,TON,2017NEI_Apr2020
+06,LA,22,,22019,Calcasieu,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.500435,TON,2017NEI_Apr2020
+06,LA,22,,22019,Calcasieu,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.310056,TON,2017NEI_Apr2020
+06,LA,22,,22017,Caddo,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,100425,Styrene,HAP,8.389848,LB,2017NEI_Apr2020
+06,LA,22,,22017,Caddo,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,106990,"1,3-Butadiene",HAP,19.553152,LB,2017NEI_Apr2020
+06,LA,22,,22017,Caddo,ON,,2202320080,Mobile - On-Road Diesel Light Duty Vehicles,,A,R,75070,Acetaldehyde,HAP,304.8136,LB,2017NEI_Apr2020
+07,NE,31,,31095,Jefferson,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,107028,Acrolein,HAP,.5752978,LB,2017NEI_Apr2020
+07,NE,31,,31095,Jefferson,ON,,2201110080,Mobile - On-Road non-Diesel Light Duty Vehicles,,A,R,108883,Toluene,HAP,427.9658,LB,2017NEI_Apr2020

@@ -1,0 +1,8 @@
+Node: E:national_emission_onroad->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:national_emission_onroad->SV
+measurementMethod: C:national_emission_onroad->Measurement_Method
+observationAbout: C:national_emission_onroad->geo_Id
+observationDate: C:national_emission_onroad->year
+unit: C:national_emission_onroad->unit
+value: C:national_emission_onroad->observation
