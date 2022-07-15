@@ -64,22 +64,21 @@ _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
 
-_MCF_TEMPLATE = """Node: dcid:{dcid}
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-{xtra_pvs}
-"""
+_MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
+                 "typeOf: dcs:StatisticalVariable\n"
+                 "populationType: dcs:Person\n"
+                 "statType: dcs:measuredValue\n"
+                 "measuredProperty: dcs:count\n"
+                 "{xtra_pvs}\n")
 
-_TMCF_TEMPLATE = """Node: E:EuroStat_Population_PhysicalActivity->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: C:EuroStat_Population_PhysicalActivity->SV
-measurementMethod: C:EuroStat_Population_PhysicalActivity->Measurement_Method
-observationAbout: C:EuroStat_Population_PhysicalActivity->geo
-observationDate: C:EuroStat_Population_PhysicalActivity->time
-value: C:EuroStat_Population_PhysicalActivity->observation
-"""
+_TMCF_TEMPLATE = (
+    "Node: E:eurostat_population_bmi->E0\n"
+    "typeOf: dcs:StatVarObservation\n"
+    "variableMeasured: C:eurostat_population_bmi->SV\n"
+    "measurementMethod: C:eurostat_population_bmi->Measurement_Method\n"
+    "observationAbout: C:eurostat_population_bmi->geo\n"
+    "observationDate: C:eurostat_population_bmi->time\n"
+    "value: C:eurostat_population_bmi->observation\n")
 
 _INCOME_QUINTILE_VALUES = {
     "IncomeOf0To20Percentile": "[0 20 Percentile]",
@@ -97,13 +96,6 @@ _EXISTING_SV_DEG_URB_GENDER = {
 }
 
 _SV_DENOMINATOR = 1
-
-
-def _replace_prop(sv: str):
-    return sv.replace("CountryOfBirth", "")\
-             .replace("Citizenship", "")\
-             .replace("Count_", "")\
-             .replace("Person_", "")\
 
 
 def _age_sex_education(data_df: pd.DataFrame) -> pd.DataFrame:
@@ -410,7 +402,8 @@ def _generate_mcf(sv_list: list, mcf_file_path: str) -> None:
     # pylint: disable=too-many-statements
     mcf_nodes = []
     for sv in sv_list:
-        pvs = name_pv = []
+        pvs = []
+        name_pv = []
         dcid = sv
         sv_denominator = sv.split("_In_")[_SV_DENOMINATOR]
         denominator_value = _EXISTING_SV_DEG_URB_GENDER.get(
@@ -418,9 +411,11 @@ def _generate_mcf(sv_list: list, mcf_file_path: str) -> None:
         pvs.append(f"measurementDenominator: dcs:{denominator_value}")
         sv_prop = [prop for prop in sv.split("_") if sv.strip()]
         for prop in sv_prop:
-            if prop in ["Count", "Person"]:
+            if prop in ["Count"]:
                 continue
-            if prop == "Percent":
+            if prop in ["Person"]:
+                name_pv.insert(0, "Population:")
+            elif prop == "Percent":
                 name_pv.append("Percentage")
             elif prop == "In":
                 name_pv.append("Among")
@@ -453,7 +448,6 @@ def _generate_mcf(sv_list: list, mcf_file_path: str) -> None:
                 or "Obese" in prop or "Obesity" in prop:
                 pvs.append(f"healthBehavior: dcs:{prop}")
                 name_pv.append(f"{prop}")
-        name_pv.append("Population")
         name_prop = ", ".join(name_pv)
         name_prop = name_prop.replace(", Among", " Among")
         name_prop = name_prop.rstrip(', ')
@@ -461,8 +455,11 @@ def _generate_mcf(sv_list: list, mcf_file_path: str) -> None:
         # Adding spaces before every capital letter,
         # to make SV look more like a name.
         name_prop = re.sub(r"(\w)([A-Z])", r"\1 \2", name_prop)
-        name_prop = name_prop.replace("ACitizen", "A Citizen")
         name_prop = "name: \"" + name_prop + "\""
+        name_prop = name_prop.replace("Percentage,", "Percentage")
+        name_prop = name_prop.replace("Population:,", "Population:")
+        name_prop = name_prop.replace("Among,", "Among")
+        name_prop = name_prop.replace("ACitizen", "A Citizen")
         pvs.append(name_prop)
         mcf_nodes.append(
             _MCF_TEMPLATE.format(dcid=dcid, xtra_pvs='\n'.join(pvs)))
@@ -513,7 +510,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     derived_df = final_df[final_df['observation'].astype(str).str.contains('u')]
     u_rows = list(derived_df['SV'] + derived_df['geo'])
     final_df['info'] = final_df['SV'] + final_df['geo']
-    # Adding Measurement Method based on a condition
+    # Promoting Measurement Method based on a condition
     final_df['Measurement_Method'] = np.where(
         final_df['info'].isin(u_rows),
         'EurostatRegionalStatistics_LowReliability',

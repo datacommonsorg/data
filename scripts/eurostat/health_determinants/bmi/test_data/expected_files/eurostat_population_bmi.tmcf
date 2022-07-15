@@ -1,7 +1,7 @@
-Node: E:EuroStat_Population_PhysicalActivity->E0
+Node: E:eurostat_population_bmi->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: C:EuroStat_Population_PhysicalActivity->SV
-measurementMethod: C:EuroStat_Population_PhysicalActivity->Measurement_Method
-observationAbout: C:EuroStat_Population_PhysicalActivity->geo
-observationDate: C:EuroStat_Population_PhysicalActivity->time
-value: C:EuroStat_Population_PhysicalActivity->observation
+variableMeasured: C:eurostat_population_bmi->SV
+measurementMethod: C:eurostat_population_bmi->Measurement_Method
+observationAbout: C:eurostat_population_bmi->geo
+observationDate: C:eurostat_population_bmi->time
+value: C:eurostat_population_bmi->observation
