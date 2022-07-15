@@ -948,13 +948,13 @@ class CensusUSAPopulationByRace:
                         "Count_Person_WhiteAlone",
                         "Count_Person_BlackOrAfricanAmericanAlone"
                 ]:
-                    measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_Race_YearsUpTo1999"
+                    measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
                 else:
-                    measure = "CensusPEPSurvey_Race_YearsUpTo1999"
+                    measure = "CensusPEPSurvey_RaceUpto1999"
             elif name == "USA_Population_Count_by_Race_county_after_2000":
-                measure = "CensusPEPSurvey_Race_Years2000Onwards"
+                measure = "CensusPEPSurvey_Race2000Onwards"
             elif name == "USA_Population_Count_by_Race_National_state_2000":
-                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_Race_Years2000Onwards"
+                measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_Race2000Onwards"
             tmcf = tmcf + tmcf_template.format(i, col, measure, col) + "\n"
             i = i + 1
 
