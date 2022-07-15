@@ -158,8 +158,7 @@ def _national_1990_2000(file_path: str) -> pd.DataFrame:
         'Year', 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female'
     ]
     df = df[(df["Age"] == "All Age") &
-                      (df["Year"].str.startswith("July"))].reset_index(
-                          drop=True)
+            (df["Year"].str.startswith("July"))].reset_index(drop=True)
     df["Year"] = df["Year"].str.replace("July 1, ", "")
     df = df.drop(columns=['Total', 'Age'])
     df.insert(0, 'geo_ID', 'country/USA', True)
@@ -864,7 +863,7 @@ class PopulationEstimateBySex:
                 "pe-02-1": _county_1980_1990,
                 "stch-icen1": _county_1990_2000,
                 "co-est00int-agesex-": _county_2000_2010,
-                "CC-EST2020-AGESEX-": _county_2010_2020,                
+                "CC-EST2020-AGESEX-": _county_2010_2020,
                 "cc-est2021-agesex-": _county_2021
             }
             df = file_to_function_mapping[file_name](file_path)
