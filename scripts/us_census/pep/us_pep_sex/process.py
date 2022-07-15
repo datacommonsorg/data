@@ -81,7 +81,7 @@ def _add_geo_id(data_df: pd.DataFrame, data_col: str,
     return data_df
 
 
-def _national_1900_1979(file_path: str):
+def _national_1900_1979(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for national 1900 to 1979.
 
@@ -143,7 +143,7 @@ def _national_1900_1979(file_path: str):
     return df
 
 
-def _national_1990_2000(file_path: str):
+def _national_1990_2000(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for national 1990 to 2000.
 
@@ -157,9 +157,10 @@ def _national_1990_2000(file_path: str):
     df.columns = [
         'Year', 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female'
     ]
-    df = df[df['Year'].str.contains("July 1")]
-    df = df.query('Age=="All Age"')
-    df['Year'] = df['Year'].str.replace("July 1, ", "")
+    df = df[(df["Age"] == "All Age") &
+                      (df["Year"].str.startswith("July"))].reset_index(
+                          drop=True)
+    df["Year"] = df["Year"].str.replace("July 1, ", "")
     df = df.drop(columns=['Total', 'Age'])
     df.insert(0, 'geo_ID', 'country/USA', True)
     float_col = df.select_dtypes(include=['float64'])
@@ -169,7 +170,7 @@ def _national_1990_2000(file_path: str):
     return df
 
 
-def _national_2000_2010(file_path: str):
+def _national_2000_2010(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for national 2000 to 2010.
 
@@ -205,7 +206,7 @@ def _national_2000_2010(file_path: str):
     return df
 
 
-def _national_2010_2020(file_path: str):
+def _national_2010_2020(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for national 2010 to 2020.
 
@@ -243,7 +244,7 @@ def _national_2010_2020(file_path: str):
     return df
 
 
-def _national_2021(file_path: str):
+def _national_2021(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for national 2021.
 
@@ -267,7 +268,7 @@ def _national_2021(file_path: str):
     return df
 
 
-def _state_1970_1980(file_path: str):
+def _state_1970_1980(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for state 1970 to 1980.
 
@@ -305,7 +306,7 @@ def _state_1970_1980(file_path: str):
     return df
 
 
-def _state_1980_1990(file_path: str):
+def _state_1980_1990(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for state 1980 to 1990 and also aggregate
     state values to get national 1980 to 1990.
@@ -344,7 +345,7 @@ def _state_1980_1990(file_path: str):
     return df
 
 
-def _state_2000_2010(file_path: str):
+def _state_2000_2010(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for state 2000 to 2010.
 
@@ -383,7 +384,7 @@ def _state_2000_2010(file_path: str):
     return df
 
 
-def _state_2010_2020(file_path: str):
+def _state_2010_2020(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for state 2010 to 2020.
 
@@ -449,7 +450,7 @@ def _state_2010_2020(file_path: str):
     return df
 
 
-def _state_2021(file_path: str):
+def _state_2021(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for state 2021.
 
@@ -480,7 +481,7 @@ def _state_2021(file_path: str):
     return df
 
 
-def _county_1970_1980(file_path: str):
+def _county_1970_1980(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for county 1970 to 1980.
 
@@ -522,7 +523,7 @@ def _county_1970_1980(file_path: str):
     return df
 
 
-def _county_1980_1990(file_path: str):
+def _county_1980_1990(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for county 1980 to 1990.
 
@@ -560,7 +561,7 @@ def _county_1980_1990(file_path: str):
     return df
 
 
-def _county_1990_2000(file_path: str):
+def _county_1990_2000(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for county 1990 to 2000 and also aggregate
     county values to get state 1990 to 2000.
@@ -605,7 +606,7 @@ def _county_1990_2000(file_path: str):
     return df
 
 
-def _county_2000_2010(file_path: str):
+def _county_2000_2010(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for county 2000 to 2010.
 
@@ -648,7 +649,7 @@ def _county_2000_2010(file_path: str):
     return df
 
 
-def _county_2010_2020(file_path: str):
+def _county_2010_2020(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for county 2010 to 2020.
 
@@ -715,7 +716,7 @@ def _county_2010_2020(file_path: str):
     return df
 
 
-def _county_2021(file_path: str):
+def _county_2021(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for county 2021.
 
@@ -853,17 +854,17 @@ class PopulationEstimateBySex:
                 "us-est00int": _national_2000_2010,
                 "nc-est2020-agesex-": _national_2010_2020,
                 "nc-est2021-agesex-": _national_2021,
+                "pe": _state_1970_1980,
+                "stiag": _state_1980_1990,
                 "st-est00int-02": _state_2000_2010,
                 "SC-EST2020-AGESEX": _state_2010_2020,
-                "sc-est2021-syasex-": _state_2021,
                 "sc-est2021-syasex-01%2": _state_2021,
-                "pe-02-1": _county_1980_1990,
-                "co-est00int-agesex-": _county_2000_2010,
-                "CC-EST2020-AGESEX-": _county_2010_2020,
-                "stch-icen1": _county_1990_2000,
-                "stiag": _state_1980_1990,
-                "pe": _state_1970_1980,
+                "sc-est2021-syasex-": _state_2021,
                 "co-asr-1": _county_1970_1980,
+                "pe-02-1": _county_1980_1990,
+                "stch-icen1": _county_1990_2000,
+                "co-est00int-agesex-": _county_2000_2010,
+                "CC-EST2020-AGESEX-": _county_2010_2020,                
                 "cc-est2021-agesex-": _county_2021
             }
             df = file_to_function_mapping[file_name](file_path)
@@ -879,19 +880,21 @@ class PopulationEstimateBySex:
             var_name="SV",
             value_name="observation")
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
-        sv_list = ['Count_Person_Male', 'Count_Person_Female']
-        sv_list = list(set(sv_list))
-        sv_list.sort()
+        sv_list = ['Count_Person_Female', 'Count_Person_Male']
         self._generate_mcf(sv_list)
         self._generate_tmcf()
 
 
 def main(_):
     input_path = _FLAGS.input_path
-    ip_files = os.listdir(input_path)
+    try:
+        ip_files = os.listdir(input_path)
+    except Exception:
+        print("Run the download.py script first.")
+        sys.exit(1)
     ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.dirname(
-        os.path.abspath(__file__)) + os.sep + "output"
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "output")
     # Defining Output Files
     csv_name = "population_estimate_sex.csv"
     mcf_name = "population_estimate_sex.mcf"
