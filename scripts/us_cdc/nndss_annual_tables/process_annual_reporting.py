@@ -1,4 +1,3 @@
-
 import numpy as np
 import os
 import sys
@@ -14,14 +13,19 @@ from absl import app, flags
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 from place_map import get_place_dcid
+
 sys.path.append(os.path.join(_SCRIPT_PATH,
-                            '../../../../util/'))  # for statvar_dcid_generator
+                             '../../../../util/'))  # for statvar_dcid_generator
 
 from statvar_dcid_generator import get_statvar_dcid
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('weekly_nndss_input', './data/nndss_annual_data_all', 'Path to the directory with weekly data scrapped from NNDSS')
-flags.DEFINE_string('weekly_nndss_output', './data/output', 'Path to the directory where generated files are to be stored.')
+flags.DEFINE_string(
+    'weekly_nndss_input', './data/nndss_annual_data_all',
+    'Path to the directory with weekly data scrapped from NNDSS')
+flags.DEFINE_string(
+    'weekly_nndss_output', './data/output',
+    'Path to the directory where generated files are to be stored.')
 
 _PREFIX = 'cdc_nndss_annual_by_reporting_area_tables'
 
@@ -37,120 +41,120 @@ observationPeriod: C:NNDSWeekly->observationPeriod
 
 #NOTE: At the moment, we are ignoring the non-integer value of reported disease incidents.
 _FORMAT_UNREPORTED_CASES = {
-'-': '',
-'U': '',
-'N': '',
-'NN': '',
-'NP': '',
-'NC': '',
-'P': '',
-'\*\*': ''
+    '-': '',
+    'U': '',
+    'N': '',
+    'NN': '',
+    'NP': '',
+    'NC': '',
+    'P': '',
+    '\*\*': ''
 }
 
 #NOTE: A map for different
 _PV_MAP = {
-'confirmed': {
-    'medicalStatus': 'dcs:ConfirmedCase'
-},
-'probable': {
-    'medicalStatus': 'dcs:ProbableCase'
-},
-'pediatric mortality': {
-    'medicalStatus': 'dcs:PediatricMortality'
-},
-'deaths': {
-'medicalStatus': 'dcs:PatientDeceased'
-},
-'age <5': {
-    'age': '[- 5 Years]'
-},
-'age < 5': {
-    'age': '[- 5 Years]'
-},
-'age <5 years': {
-    'age': '[- 5 Years]'
-},
-'age < 5 years': {
-    'age': '[- 5 Years]'
-},
-'all serotypes': {
-    'serotype': 'dcs:AllSerotypes'
-},
-'serotype b': {
-    'serotype': 'dcs:SerotypeB'
-},
-'unknown serotype': {
-    'serotype': 'dcs:UnknownSerotype'
-},
-'non-b serotype': {
-    'serotype': 'dcs:NonSerotypeB'
-},
-'other serogroups': {
-    'serogroup': 'dcs:OtherSerogroups'
-},
-'nontypeable': {
-    'serogroup': 'dcs:OtherSerogroups'
-},
-'unknown serogroup': {
-    'serogroup': 'dcs:UnknownSerogroups'
-},
-'all groups': {
-    'serogroup': 'dcs:AllSerogroups'
-},
-'all serogroups': {
-    'serogroup': 'dcs:AllSerogroups'
-},
-'serogroups acwy': {
-    'serogroup': 'dcs:ACWYSerogroup'
-},
-'serogroup b': {
-    'serogroup': 'dcs:SerogroupB'
-},
-'group a': {
-    'serogroup': 'dcs:SerogroupA'
-},
-'perinatal infection': {
-    'medicalCondition': 'dcs:PerinatalInfection'
-},
-'acute': {
-    'medicalCondition': 'dcs:AcuteCondition'
-},
-'chronic': {
-    'medicalCondition': 'dcs:ChronicCondition'
-},
-'imported': {
-    'medicalStatus': 'dcs:ImportedCase'
-},
-'indigenous': {
-    'medicalStatus': 'dcs:IndigenousCase'
-},
-'clinical': {
-    'medicalStatus': 'dcs:ClinicalCase'
-},
-'neuroinvasive': {
-    'medicalCondition': 'dcs:NeuroinvasiveDisease'
-},
-'non-neuroinvasive': {
-    'medicalCondition': 'dcs:NonNeuroinvasiveDisease'
-}, 
-'congenital': {
-    'medicalCondition': 'dcs:CongenitalDisease'
-},
-'non-congenital': {
-    'medicalCondition': 'dcs:NonCongenitalDisease'
-},
-'drug resistant': {
-    'medicalCondition': 'dcs:DrugResistantDisease'
-},
-'nondrug resistant': {
-    'medicalCondition': 'dcs:NonDrugResistantDisease'
-},
-'invasive disease': {
-    'medicalCondition': 'dcs:InvasiveDisease'
-},
-'post-diarrheal': {
-    'medicalCondition': 'dcs:PostDiarrheal'
-}
+    'confirmed': {
+        'medicalStatus': 'dcs:ConfirmedCase'
+    },
+    'probable': {
+        'medicalStatus': 'dcs:ProbableCase'
+    },
+    'pediatric mortality': {
+        'medicalStatus': 'dcs:PediatricMortality'
+    },
+    'deaths': {
+        'medicalStatus': 'dcs:PatientDeceased'
+    },
+    'age <5': {
+        'age': '[- 5 Years]'
+    },
+    'age < 5': {
+        'age': '[- 5 Years]'
+    },
+    'age <5 years': {
+        'age': '[- 5 Years]'
+    },
+    'age < 5 years': {
+        'age': '[- 5 Years]'
+    },
+    'all serotypes': {
+        'serotype': 'dcs:AllSerotypes'
+    },
+    'serotype b': {
+        'serotype': 'dcs:SerotypeB'
+    },
+    'unknown serotype': {
+        'serotype': 'dcs:UnknownSerotype'
+    },
+    'non-b serotype': {
+        'serotype': 'dcs:NonSerotypeB'
+    },
+    'other serogroups': {
+        'serogroup': 'dcs:OtherSerogroups'
+    },
+    'nontypeable': {
+        'serogroup': 'dcs:OtherSerogroups'
+    },
+    'unknown serogroup': {
+        'serogroup': 'dcs:UnknownSerogroups'
+    },
+    'all groups': {
+        'serogroup': 'dcs:AllSerogroups'
+    },
+    'all serogroups': {
+        'serogroup': 'dcs:AllSerogroups'
+    },
+    'serogroups acwy': {
+        'serogroup': 'dcs:ACWYSerogroup'
+    },
+    'serogroup b': {
+        'serogroup': 'dcs:SerogroupB'
+    },
+    'group a': {
+        'serogroup': 'dcs:SerogroupA'
+    },
+    'perinatal infection': {
+        'medicalCondition': 'dcs:PerinatalInfection'
+    },
+    'acute': {
+        'medicalCondition': 'dcs:AcuteCondition'
+    },
+    'chronic': {
+        'medicalCondition': 'dcs:ChronicCondition'
+    },
+    'imported': {
+        'medicalStatus': 'dcs:ImportedCase'
+    },
+    'indigenous': {
+        'medicalStatus': 'dcs:IndigenousCase'
+    },
+    'clinical': {
+        'medicalStatus': 'dcs:ClinicalCase'
+    },
+    'neuroinvasive': {
+        'medicalCondition': 'dcs:NeuroinvasiveDisease'
+    },
+    'non-neuroinvasive': {
+        'medicalCondition': 'dcs:NonNeuroinvasiveDisease'
+    },
+    'congenital': {
+        'medicalCondition': 'dcs:CongenitalDisease'
+    },
+    'non-congenital': {
+        'medicalCondition': 'dcs:NonCongenitalDisease'
+    },
+    'drug resistant': {
+        'medicalCondition': 'dcs:DrugResistantDisease'
+    },
+    'nondrug resistant': {
+        'medicalCondition': 'dcs:NonDrugResistantDisease'
+    },
+    'invasive disease': {
+        'medicalCondition': 'dcs:InvasiveDisease'
+    },
+    'post-diarrheal': {
+        'medicalCondition': 'dcs:PostDiarrheal'
+    }
 }
 
 #TODO: Resolve path based on the script path for tests
@@ -158,7 +162,6 @@ _PV_MAP = {
 
 _DISEASE_DCID_DF = pd.read_csv("./data/annual_tables_counts.csv")
 _DISEASE_DCID_DF = _DISEASE_DCID_DF[_DISEASE_DCID_DF['replacement'] != 'NAN']
-
 
 # def resolve_reporting_places_to_dcids(place, _PLACE_DCID_DF):
 #     try:
@@ -173,6 +176,7 @@ _DISEASE_DCID_DF = _DISEASE_DCID_DF[_DISEASE_DCID_DF['replacement'] != 'NAN']
 #         # return empty string when no matches are found.
 #         return ''
 
+
 def format_column_header(column_list):
     # for all other columns update using _DISEASE_DCID_DF
     rename_map = {}
@@ -182,8 +186,10 @@ def format_column_header(column_list):
 
     for col in column_list[1:]:
         try:
-            match = difflib.get_close_matches(col, _DISEASE_DCID_DF['original'].astype(str), cutoff=0.9)[0]
-            rename_map[col] = _DISEASE_DCID_DF.loc[_DISEASE_DCID_DF['original'] == match, 'replacement'].values[0]
+            match = difflib.get_close_matches(
+                col, _DISEASE_DCID_DF['original'].astype(str), cutoff=0.9)[0]
+            rename_map[col] = _DISEASE_DCID_DF.loc[
+                _DISEASE_DCID_DF['original'] == match, 'replacement'].values[0]
         except IndexError:
             # Occurs for three columns which describe the species of the bacteria which is not captured in a statvar at the moment.
             continue
@@ -195,8 +201,9 @@ def concat_rows_with_column_headers(rows_with_col_names, df_column_list):
     rows_with_col_names = rows_with_col_names.fillna('')
 
     # works with table structure where column=0 is always the 'Reporting Area' and the the other columns are the case counts with different aggregations
-    rows_with_col_names = rows_with_col_names.groupby(df_column_list[0])[
-        df_column_list[1:]].agg(lambda d: ';'.join(d.drop_duplicates())).reset_index()
+    rows_with_col_names = rows_with_col_names.groupby(
+        df_column_list[0])[df_column_list[1:]].agg(
+            lambda d: ';'.join(d.drop_duplicates())).reset_index()
 
     ## some csvs do not have data and need will throw an exception when column names are flattened.
     try:
@@ -208,6 +215,7 @@ def concat_rows_with_column_headers(rows_with_col_names, df_column_list):
         # Dataframe does not have any data points and is pobably a note.
         return []
 
+
 def process_nndss_current_weekly(input_filepath: str):
     ## from the csv files get the year, and week count
     filename = input_filepath.split('/')[-1]
@@ -217,11 +225,11 @@ def process_nndss_current_weekly(input_filepath: str):
 
     ## fix the column names of the file - the head of the dataframe has all the rows that have the column name
     rows_with_col_names = df[(df[0] == 'Reporting Area') |
-                                (df[0] == 'Reporting  Area') |
-                                (df[0] == 'Reporting area') |
-                                (df[0] == 'Reporting  area')]
+                             (df[0] == 'Reporting  Area') |
+                             (df[0] == 'Reporting area') |
+                             (df[0] == 'Reporting  area')]
     column_list = concat_rows_with_column_headers(rows_with_col_names,
-                                                    df.columns.tolist())
+                                                  df.columns.tolist())
     # remove rows starting with 'Notes' or 'Total' or 'Notice'
     if df.shape[0] > 5:
         # some csv files have column indices as the first row, which need to be removed
@@ -232,7 +240,7 @@ def process_nndss_current_weekly(input_filepath: str):
         df = df[~df.isin(rows_with_col_names)].dropna()
         del rows_with_col_names
         # replace double spaces with a single space
-        column_list = [c.replace('  ',  ' ') for c in column_list]
+        column_list = [c.replace('  ', ' ') for c in column_list]
         # update columns of the dataframe
         df.columns = column_list
 
@@ -248,9 +256,9 @@ def process_nndss_current_weekly(input_filepath: str):
 
         # un-pivot the dataframe to place, column, value
         df = df.melt(id_vars=['Reporting Area'],
-                        value_vars=selected_cols,
-                        var_name='column_name',
-                        value_name='value')
+                     value_vars=selected_cols,
+                     var_name='column_name',
+                     value_name='value')
 
         # add the observation date to the dataframe
         df['observationDate'] = year
@@ -258,11 +266,13 @@ def process_nndss_current_weekly(input_filepath: str):
         # add the observation period based on the column names
         df['observationPeriod'] = 'P1Y'
         # convert the place names to geoIds
-        df['observationAbout'] = df['Reporting Area'].apply(lambda x: get_place_dcid(x))
+        df['observationAbout'] = df['Reporting Area'].apply(
+            lambda x: get_place_dcid(x))
 
         # fix the value column based on the data notes mentioned in NNDSS
         df = df[df['value'].str.contains('\\d', regex=True)]
         return df
+
 
 def make_name_str(column_components, dcid):
     pv_str = []
@@ -270,25 +280,23 @@ def make_name_str(column_components, dcid):
     age_pv = ''
     # collect all pvs
     for component in column_components:
-            if '<' not in component:
-                pv_str.append(component)
-            else:
-                # extract the age in years from column. Expected form is <{age}
-                age_num = component.split('<')[1].split(' ')[0]
-                age_pv = f', age {age_num} or less years'
-
+        if '<' not in component:
+            pv_str.append(component)
+        else:
+            # extract the age in years from column. Expected form is <{age}
+            age_num = component.split('<')[1].split(' ')[0]
+            age_pv = f', age {age_num} or less years'
 
     # Drop diseases from pv_str
     pv_str = ', '.join(pv_str)
     pv_str = pv_str.replace('disease', '')
 
-
     # construct the sv name
     name = "\"Count of "
     name = (name + pv_str + ' ') if len(pv_str) > 0 else name
-    name = (name + 'incidents ') #if len(disease_match) > 0 else name
+    name = (name + 'incidents ')  #if len(disease_match) > 0 else name
     name = (name + resident_status + ' ') if len(resident_status) > 0 else name
-    name = (name + age_pv + '\"') if len(age_pv) > 0 else (name.strip()+ '\"')
+    name = (name + age_pv + '\"') if len(age_pv) > 0 else (name.strip() + '\"')
     # fix the casing in serotypes
     if 'Serotype b' in name:
         name = name.replace('Serotype b', 'Serotype B')
@@ -306,8 +314,6 @@ def make_name_str(column_components, dcid):
     return name
 
 
-
-
 def generate_statvar_map_for_columns(column_list, place_list):
 
     sv_map = {}
@@ -322,8 +328,8 @@ def generate_statvar_map_for_columns(column_list, place_list):
         svdict['measuredProperty'] = 'dcs:count'
 
         # map to disease
-        mapped_disease = _DISEASE_DCID_DF.loc[
-                    _DISEASE_DCID_DF['replacement'] == column, :]
+        mapped_disease = _DISEASE_DCID_DF.loc[_DISEASE_DCID_DF['replacement'] ==
+                                              column, :]
         mapped_disease = mapped_disease.drop_duplicates(keep='first')
 
         # column names have multiple pvs which are joined with ';'
@@ -334,7 +340,6 @@ def generate_statvar_map_for_columns(column_list, place_list):
             'U.S. Residents, excluding U.S. Territories': 'dcs:USResident',
             'US Residents': 'dcs:USResident',
             'Non-U.S. Residents': 'dcs:NonUSResident'
-
         }
 
         # when we have the best match i.e, only one row
@@ -356,14 +361,18 @@ def generate_statvar_map_for_columns(column_list, place_list):
                                 svdict[p] = svdict[p] + "__" + v[4:]
                             else:
                                 svdict[p] = v
-            
+
             # check if residentStatus property is applicable
             resident_status = ''
             for place in place_list:
-                resident_status_place = [substr for substr in list(patterns_for_resident_pvs.keys()) if substr in place]
+                resident_status_place = [
+                    substr for substr in list(patterns_for_resident_pvs.keys())
+                    if substr in place
+                ]
 
                 if len(resident_status_place) > 0:
-                    resident_status = patterns_for_resident_pvs[resident_status_place[0]]
+                    resident_status = patterns_for_resident_pvs[
+                        resident_status_place[0]]
 
                 # add residentStatus pv to the svdict
                 if resident_status:
@@ -416,15 +425,16 @@ def generate_statvar_map_for_columns(column_list, place_list):
 
     return sv_map, dcid_df
 
+
 def generate_processed_csv(input_path):
     processed_dataframe_list = []
     #TODO: Parallelize this step
     # for all files in the data directory process the files and append to a common dataframe
     file_list = [f for f in sorted(os.listdir(input_path)) if 'table_2' in f]
     for filename in file_list:
-            file_inputpath = os.path.join(input_path, filename)
-            df = process_nndss_current_weekly(file_inputpath)
-            processed_dataframe_list.append(df)
+        file_inputpath = os.path.join(input_path, filename)
+        df = process_nndss_current_weekly(file_inputpath)
+        processed_dataframe_list.append(df)
 
     # concat list of all processed data frames
     cleaned_dataframe = pd.concat(processed_dataframe_list, ignore_index=False)
@@ -443,13 +453,12 @@ def generate_processed_csv(input_path):
 
     return cleaned_dataframe
 
+
 def main(_) -> None:
     input_path = FLAGS.weekly_nndss_input
     output_path = FLAGS.weekly_nndss_output
 
-
     cleaned_dataframe = generate_processed_csv(input_path)
-
 
     # for each unique column generate the statvar with constraints
     unique_columns = cleaned_dataframe['column_name'].unique().tolist()
@@ -457,13 +466,13 @@ def main(_) -> None:
 
     # column - statvar dictionary map
     sv_map, dcid_df = generate_statvar_map_for_columns(unique_columns,
-                                                        unique_places)
+                                                       unique_places)
 
     # map the statvars to column names
     cleaned_dataframe = pd.merge(cleaned_dataframe,
-                                    dcid_df,
-                                    on=['Reporting Area', 'column_name'],
-                                    how='left')
+                                 dcid_df,
+                                 on=['Reporting Area', 'column_name'],
+                                 how='left')
 
     #TODO: 2. If reporting area is US Territories, drop observation and make a sum of case counts across US States with mMethod = dc/Aggregate
 
@@ -489,11 +498,12 @@ def main(_) -> None:
     f.close()
 
     # write csv
-    cleaned_dataframe = cleaned_dataframe[['observationDate', 'observationAbout', 'observationPeriod', 'variableMeasured', 'value', 'measurementMethod', 'column_name']]
-    cleaned_dataframe.to_csv(
-        os.path.join(output_path, f'{_PREFIX}.csv'),
-        index=False
-    )
+    cleaned_dataframe = cleaned_dataframe[[
+        'observationDate', 'observationAbout', 'observationPeriod',
+        'variableMeasured', 'value', 'measurementMethod', 'column_name'
+    ]]
+    cleaned_dataframe.to_csv(os.path.join(output_path, f'{_PREFIX}.csv'),
+                             index=False)
 
 
 if __name__ == '__main__':

@@ -22,12 +22,11 @@ from absl import flags, app
 from bs4 import BeautifulSoup
 
 _START = 2016
-_END = 2020 #to make the last year inclusive, add +1 to last year. Here 2019 + 1 = 2020
+_END = 2020  #to make the last year inclusive, add +1 to last year. Here 2019 + 1 = 2020
 
 _BASE_URL = "https://wonder.cdc.gov/nndss/"
 _FILENAME_TEMPLATE = "mmwr_year_{year}_mmwr_table_{id}"
-_BAD_URLS = [
-]
+_BAD_URLS = []
 
 
 def parse_html_table(table_url: str, file_path: str) -> None:
@@ -100,12 +99,11 @@ def scrape_table_links_from_page(page_url: str,
             # extract year, week, table_id from link
             filename_components = table_link.split('/')[-1].split(
                 '.html')[0].split('-')
-            
+
             filename = _FILENAME_TEMPLATE.format(
                 year=filename_components[0],
                 id=filename_components[1].split('table')[1])
             extract_table_from_link(table_url, filename, output_path, update)
-
 
 
 def download_annual_nnds_data_across_years(year_range: str,

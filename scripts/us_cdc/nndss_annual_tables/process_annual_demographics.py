@@ -9,7 +9,7 @@ from absl import app, flags
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
-'../../../../util/'))  # for statvar_dcid_generator
+                             '../../../../util/'))  # for statvar_dcid_generator
 
 from statvar_dcid_generator import get_statvar_dcid
 
@@ -30,134 +30,182 @@ observationPeriod: C:NNDSWeekly->observationPeriod
 
 #NOTE: A map for different
 _PV_MAP = {
-'confirmed': {
-'medicalStatus': 'dcs:ConfirmedCase'
-},
-'probable': {
-'medicalStatus': 'dcs:ProbableCase'
-},
-'deaths': {
-'medicalStatus': 'dcs:PatientDeceased'
-},
-'pediatric mortality': {
-'medicalStatus': 'dcs:PediatricMortality'
-},
-'all serotypes': {
-'serotype': 'dcs:AllSerotypes'
-},
-'serotype b': {
-'serotype': 'dcs:SerotypeB'
-},
-'unknown serotype': {
-'serotype': 'dcs:UnknownSerotype'
-},
-'non-b serotype': {
-'serotype': 'dcs:NonSerotypeB'
-},
-'other serogroups': {
-'serogroup': 'dcs:OtherSerogroups'
-},
-'nontypeable': {
-'serogroup': 'dcs:OtherSerogroups'
-},
-'unknown serogroup': {
-'serogroup': 'dcs:UnknownSerogroups'
-},
-'all groups': {
-'serogroup': 'dcs:AllSerogroups'
-},
-'all serogroups': {
-'serogroup': 'dcs:AllSerogroups'
-},
-'serogroups acwy': {
-'serogroup': 'dcs:ACWYSerogroup'
-},
-'serogroup b': {
-'serogroup': 'dcs:SerogroupB'
-},
-'group a': {
-'serogroup': 'dcs:SerogroupA'
-},
-'perinatal infection': {
-'medicalCondition': 'dcs:PerinatalInfection'
-},
-'acute': {
-'medicalCondition': 'dcs:AcuteCondition'
-},
-'chronic': {
-'medicalCondition': 'dcs:ChronicCondition'
-},
-'imported': {
-'medicalStatus': 'dcs:ImportedCase'
-},
-'indigenous': {
-'medicalStatus': 'dcs:IndigenousCase'
-},
-'clinical': {
-'medicalStatus': 'dcs:ClinicalCase'
-},
-'neuroinvasive': {
-'medicalCondition': 'dcs:NeuroinvasiveDisease'
-},
-'non-neuroinvasive': {
-'medicalCondition': 'dcs:NonNeuroinvasiveDisease'
-}, 
-'congenital': {
-'medicalCondition': 'dcs:CongenitalDisease'
-},
-'non-congenital': {
-'medicalCondition': 'dcs:NonCongenitalDisease'
-},
-'drug resistant': {
-'medicalCondition': 'dcs:DrugResistantDisease'
-},
-'nondrug resistant': {
-'medicalCondition': 'dcs:NonDrugResistantDisease'
-},
-'invasive disease': {
-'medicalCondition': 'dcs:InvasiveDisease'
-},
-'post-diarrheal': {
-'medicalCondition': 'dcs:PostDiarrheal'
-},
-'<1 yr': {'age': '[- 1 Years]'},
-'1-4 yrs': {'age': '[1 4 Years]'},
-'5-14 yrs': {'age': '[5 14 Years]'},
-'15-24 yrs': {'age': '[15 24 Years]'},
-'25-39 yrs': {'age': '[25 39 Years]'},
-'40-64 yrs': {'age': '[40 64 Years]'},
-'≥65 yrs': {'age': '[65 - Years]'},
-'age <5 years': {'age': '[- 5 Years]'},
-'age not stated': {'age': 'dcs:USC_AgeNotStated'},
-'male': {'gender': 'dcs:Male'},
-'female': {'gender': 'dcs:Female'},
-'sex not stated': {'gender': 'dcs:CDC_GenderUnknownOrNotStated'},
-'american indian or alaska native': {'race': 'dcs:AmericanIndianAndAlaskaNativeAlone'},
-'american indian or  alaska native': {'race': 'dcs:AmericanIndianAndAlaskaNativeAlone'},
-'asian or pacific islander': {'race': 'dcs:AsianOrPacificIslander'},
-'asian or pacific  islander': {'race': 'dcs:AsianOrPacificIslander'},
-'black': {'race': 'dcs:BlackOrAfricanAmericanAlone'},
-'white': {'race': 'dcs:WhiteAlone'},
-'other race': {'race': 'dcs:CDC_OtherRace'},
-'race not stated': {'race': 'dcs:CDC_RaceUnknownOrNotStated'},
-'hispanic': {'ethnicity': 'dcs:HispanicOrLatino'},
-'non-hispanic': {'ethnicity': 'dcs:NotHispanicOrLatino'},
-'ethnicity not stated': {'ethnicity': 'dcs:CDC_EthnicityUnknownOrNotStated'}
+    'confirmed': {
+        'medicalStatus': 'dcs:ConfirmedCase'
+    },
+    'probable': {
+        'medicalStatus': 'dcs:ProbableCase'
+    },
+    'deaths': {
+        'medicalStatus': 'dcs:PatientDeceased'
+    },
+    'pediatric mortality': {
+        'medicalStatus': 'dcs:PediatricMortality'
+    },
+    'all serotypes': {
+        'serotype': 'dcs:AllSerotypes'
+    },
+    'serotype b': {
+        'serotype': 'dcs:SerotypeB'
+    },
+    'unknown serotype': {
+        'serotype': 'dcs:UnknownSerotype'
+    },
+    'non-b serotype': {
+        'serotype': 'dcs:NonSerotypeB'
+    },
+    'other serogroups': {
+        'serogroup': 'dcs:OtherSerogroups'
+    },
+    'nontypeable': {
+        'serogroup': 'dcs:OtherSerogroups'
+    },
+    'unknown serogroup': {
+        'serogroup': 'dcs:UnknownSerogroups'
+    },
+    'all groups': {
+        'serogroup': 'dcs:AllSerogroups'
+    },
+    'all serogroups': {
+        'serogroup': 'dcs:AllSerogroups'
+    },
+    'serogroups acwy': {
+        'serogroup': 'dcs:ACWYSerogroup'
+    },
+    'serogroup b': {
+        'serogroup': 'dcs:SerogroupB'
+    },
+    'group a': {
+        'serogroup': 'dcs:SerogroupA'
+    },
+    'perinatal infection': {
+        'medicalCondition': 'dcs:PerinatalInfection'
+    },
+    'acute': {
+        'medicalCondition': 'dcs:AcuteCondition'
+    },
+    'chronic': {
+        'medicalCondition': 'dcs:ChronicCondition'
+    },
+    'imported': {
+        'medicalStatus': 'dcs:ImportedCase'
+    },
+    'indigenous': {
+        'medicalStatus': 'dcs:IndigenousCase'
+    },
+    'clinical': {
+        'medicalStatus': 'dcs:ClinicalCase'
+    },
+    'neuroinvasive': {
+        'medicalCondition': 'dcs:NeuroinvasiveDisease'
+    },
+    'non-neuroinvasive': {
+        'medicalCondition': 'dcs:NonNeuroinvasiveDisease'
+    },
+    'congenital': {
+        'medicalCondition': 'dcs:CongenitalDisease'
+    },
+    'non-congenital': {
+        'medicalCondition': 'dcs:NonCongenitalDisease'
+    },
+    'drug resistant': {
+        'medicalCondition': 'dcs:DrugResistantDisease'
+    },
+    'nondrug resistant': {
+        'medicalCondition': 'dcs:NonDrugResistantDisease'
+    },
+    'invasive disease': {
+        'medicalCondition': 'dcs:InvasiveDisease'
+    },
+    'post-diarrheal': {
+        'medicalCondition': 'dcs:PostDiarrheal'
+    },
+    '<1 yr': {
+        'age': '[- 1 Years]'
+    },
+    '1-4 yrs': {
+        'age': '[1 4 Years]'
+    },
+    '5-14 yrs': {
+        'age': '[5 14 Years]'
+    },
+    '15-24 yrs': {
+        'age': '[15 24 Years]'
+    },
+    '25-39 yrs': {
+        'age': '[25 39 Years]'
+    },
+    '40-64 yrs': {
+        'age': '[40 64 Years]'
+    },
+    '≥65 yrs': {
+        'age': '[65 - Years]'
+    },
+    'age <5 years': {
+        'age': '[- 5 Years]'
+    },
+    'age not stated': {
+        'age': 'dcs:USC_AgeNotStated'
+    },
+    'male': {
+        'gender': 'dcs:Male'
+    },
+    'female': {
+        'gender': 'dcs:Female'
+    },
+    'sex not stated': {
+        'gender': 'dcs:CDC_GenderUnknownOrNotStated'
+    },
+    'american indian or alaska native': {
+        'race': 'dcs:AmericanIndianAndAlaskaNativeAlone'
+    },
+    'american indian or  alaska native': {
+        'race': 'dcs:AmericanIndianAndAlaskaNativeAlone'
+    },
+    'asian or pacific islander': {
+        'race': 'dcs:AsianOrPacificIslander'
+    },
+    'asian or pacific  islander': {
+        'race': 'dcs:AsianOrPacificIslander'
+    },
+    'black': {
+        'race': 'dcs:BlackOrAfricanAmericanAlone'
+    },
+    'white': {
+        'race': 'dcs:WhiteAlone'
+    },
+    'other race': {
+        'race': 'dcs:CDC_OtherRace'
+    },
+    'race not stated': {
+        'race': 'dcs:CDC_RaceUnknownOrNotStated'
+    },
+    'hispanic': {
+        'ethnicity': 'dcs:HispanicOrLatino'
+    },
+    'non-hispanic': {
+        'ethnicity': 'dcs:NotHispanicOrLatino'
+    },
+    'ethnicity not stated': {
+        'ethnicity': 'dcs:CDC_EthnicityUnknownOrNotStated'
+    }
 }
+
 
 def rename_columns(df_column_list):
     for idx in range(len(df_column_list)):
         if df_column_list[idx] == 'Disease;Disease':
             df_column_list[idx] = 'Disease'
-        else: 
+        else:
             column = df_column_list[idx]
             if ';No.' in column:
                 df_column_list[idx] = column.replace(';No.', '')
 
             if 'No.;' in column:
                 df_column_list[idx] = column.replace('No.;', '')
-            
+
     return df_column_list
+
 
 def make_name_str(column_components, disease_match, dcid):
     pv_str = []
@@ -181,8 +229,9 @@ def make_name_str(column_components, disease_match, dcid):
     # construct the sv name
     name = "\"Count of "
     name = (name + pv_str + ' ') if len(pv_str) > 0 else name
-    name = (name + disease_match + ' incidents ') if len(disease_match) > 0 else name
-    name = (name + age_pv + '\"') if len(age_pv) > 0 else (name.strip()+ '\"')
+    name = (name + disease_match +
+            ' incidents ') if len(disease_match) > 0 else name
+    name = (name + age_pv + '\"') if len(age_pv) > 0 else (name.strip() + '\"')
 
     # fix the casing in serotypes
     if 'Serotype b' in name:
@@ -214,7 +263,7 @@ def map_pvs_from_column_name(row):
     row['sv_dict'] = {}
     if row['ignore_label'] == 'X':
         return row
-    
+
     sv_dict = {}
     # initialize the base dict
     sv_dict['Node'] = ''
@@ -227,16 +276,17 @@ def map_pvs_from_column_name(row):
     for component in column_components:
         if component.lower() in _PV_MAP.keys():
             pv_dict = _PV_MAP[component.lower()]
-            for p,v in pv_dict.items():
+            for p, v in pv_dict.items():
                 #if property exists, concat the value with __
                 if p in sv_dict.keys():
                     sv_dict[p] = sv_dict[p] + "__" + v[4:]
                 else:
                     sv_dict[p] = v
-                    
+
     # add the medical condition
     if 'medicalCondition' in sv_dict.keys():
-        sv_dict['medicalCondition'] = sv_dict['medicalCondition'] + "__" + row['dcid']
+        sv_dict['medicalCondition'] = sv_dict['medicalCondition'] + "__" + row[
+            'dcid']
     else:
         sv_dict['medicalCondition'] = 'dcs:' + row['dcid']
 
@@ -257,13 +307,18 @@ def map_pvs_from_column_name(row):
     row['sv_dict'] = sv_dict
     return row
 
+
 def clean_single_dataframe(df, year, table):
 
     # flatten multi-indexed columns
     df.columns = df.columns.to_flat_index().str.join(';')
 
     # get columns of interest
-    column_list = [column for column in df.columns.tolist() if ((('No.' in column) and ('Total' not in column)) or ('Disease' in column))]
+    column_list = [
+        column for column in df.columns.tolist()
+        if ((('No.' in column) and
+             ('Total' not in column)) or ('Disease' in column))
+    ]
     df = df[column_list]
 
     del column_list
@@ -273,22 +328,29 @@ def clean_single_dataframe(df, year, table):
     # handle the empty values
     df = df.fillna('')
 
-    diseases_map = _DISEASE_DCID_DF[(_DISEASE_DCID_DF['table'] == int(table)) & (_DISEASE_DCID_DF['year'] == int(year))]
+    diseases_map = _DISEASE_DCID_DF[(_DISEASE_DCID_DF['table'] == int(table)) &
+                                    (_DISEASE_DCID_DF['year'] == int(year))]
     for col in df.columns.tolist():
         diseases_map[col] = df[col].values.tolist()
     del df
 
-    diseases_map = diseases_map.melt(id_vars=diseases_map.columns.tolist()[:7], value_vars=diseases_map.columns.tolist()[7:], ignore_index=True)
+    diseases_map = diseases_map.melt(
+        id_vars=diseases_map.columns.tolist()[:7],
+        value_vars=diseases_map.columns.tolist()[7:],
+        ignore_index=True)
 
     # add additional columns to resolve the disease name and dcid
     diseases_map = diseases_map.drop_duplicates(keep='first')
     diseases_map = diseases_map[diseases_map['Replacement'] != 'NAN']
     diseases_map = diseases_map.dropna(subset=['name', 'dcid'])
-    diseases_map['variable'] = diseases_map['Replacement'] + ';' + diseases_map['variable']
-    diseases_map = diseases_map.drop(columns=['Disease', 'sameAs', 'table', 'Replacement'])
+    diseases_map['variable'] = diseases_map['Replacement'] + ';' + diseases_map[
+        'variable']
+    diseases_map = diseases_map.drop(
+        columns=['Disease', 'sameAs', 'table', 'Replacement'])
 
     # fix the value column based on the data notes mentioned in NNDSS
-    diseases_map = diseases_map[diseases_map['value'].str.contains('\\d', regex=True)]
+    diseases_map = diseases_map[diseases_map['value'].str.contains('\\d',
+                                                                   regex=True)]
 
     diseases_map.rename(columns={'year': 'observationDate'}, inplace=True)
     diseases_map['observationAbout'] = 'country/USA'
@@ -296,17 +358,21 @@ def clean_single_dataframe(df, year, table):
     diseases_map['measurementMethod'] = 'dcs:CDC_NNDSS_Diseases_AnnualTables'
 
     if table == '4':
-        
-        diseases_map['ignore_label'] = diseases_map['variable'].apply(lambda e: 'X' if 'Age <5 years' in e else '')
+
+        diseases_map['ignore_label'] = diseases_map['variable'].apply(
+            lambda e: 'X' if 'Age <5 years' in e else '')
     else:
-        
+
         diseases_map['ignore_label'] = ''
 
-
     sv_df = diseases_map[['variable', 'name', 'dcid']]
-    diseases_map = diseases_map[[col for col in diseases_map.columns.tolist() if col not in ['name', 'dcid']]]
+    diseases_map = diseases_map[[
+        col for col in diseases_map.columns.tolist()
+        if col not in ['name', 'dcid']
+    ]]
     sv_df = sv_df.drop_duplicates(keep='first')
     return diseases_map, sv_df
+
 
 def process_table_4(file_list):
     """
@@ -319,13 +385,14 @@ def process_table_4(file_list):
         input_filepath = os.path.join(file_list, filename)
         year = filename.split('_')[2]
 
-        df = pd.read_csv(input_filepath, header=[0,1])
+        df = pd.read_csv(input_filepath, header=[0, 1])
         df, sv_df = clean_single_dataframe(df, year, '4')
 
         # add processed dataframe to the clean_csv
         clean_dataframe = pd.concat([clean_dataframe, df], ignore_index=True)
         full_sv_df = pd.concat([full_sv_df, sv_df], ignore_index=True)
     return clean_dataframe, full_sv_df
+
 
 def process_table_5(file_list):
     """
@@ -338,12 +405,13 @@ def process_table_5(file_list):
         input_filepath = os.path.join(file_list, filename)
         year = filename.split('_')[2]
 
-        df = pd.read_csv(input_filepath, header=[0,1])
+        df = pd.read_csv(input_filepath, header=[0, 1])
         df, sv_df = clean_single_dataframe(df, year, '5')
         # add processed dataframe to the clean_csv
         clean_dataframe = pd.concat([clean_dataframe, df], ignore_index=True)
         full_sv_df = pd.concat([full_sv_df, sv_df], ignore_index=True)
     return clean_dataframe, full_sv_df
+
 
 def process_table_6(file_list):
     """
@@ -356,12 +424,13 @@ def process_table_6(file_list):
         input_filepath = os.path.join(file_list, filename)
         year = filename.split('_')[2]
 
-        df = pd.read_csv(input_filepath, header=[0,1])
+        df = pd.read_csv(input_filepath, header=[0, 1])
         df, sv_df = clean_single_dataframe(df, year, '6')
         # add processed dataframe to the clean_csv
         clean_dataframe = pd.concat([clean_dataframe, df], ignore_index=True)
         full_sv_df = pd.concat([full_sv_df, sv_df], ignore_index=True)
     return clean_dataframe, full_sv_df
+
 
 def process_table_7(file_list):
     """
@@ -374,7 +443,7 @@ def process_table_7(file_list):
         input_filepath = os.path.join(file_list, filename)
         year = filename.split('_')[2]
 
-        df = pd.read_csv(input_filepath, header=[0,1])
+        df = pd.read_csv(input_filepath, header=[0, 1])
         df, sv_df = clean_single_dataframe(df, year, '7')
         # add processed dataframe to the clean_csv
         clean_dataframe = pd.concat([clean_dataframe, df], ignore_index=True)
@@ -383,8 +452,11 @@ def process_table_7(file_list):
 
 
 def generate_statvars(full_sv_df):
-    full_sv_df = full_sv_df.apply(map_pvs_from_column_name, axis=1, result_type='expand')
+    full_sv_df = full_sv_df.apply(map_pvs_from_column_name,
+                                  axis=1,
+                                  result_type='expand')
     return full_sv_df
+
 
 def write_svdicts_to_file(dict_list, file_path):
     unique_dict = [dict(tup) for tup in {tuple(d.items()) for d in dict_list}]
@@ -401,11 +473,11 @@ def write_svdicts_to_file(dict_list, file_path):
 
 def main(_) -> None:
     flags.DEFINE_string(
-    'input_path', './data/nndss_annual_data_all',
-    'Path to the directory with weekly data scrapped from NNDSS')
+        'input_path', './data/nndss_annual_data_all',
+        'Path to the directory with weekly data scrapped from NNDSS')
     flags.DEFINE_string(
-    'output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+        'output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
 
     file_list = FLAGS.input_path
     output_path = FLAGS.output_path
@@ -422,7 +494,10 @@ def main(_) -> None:
     full_sv_df = full_sv_df.drop_duplicates(keep='first')
     del tab4, tab5, tab6, tab7, sv4, sv5, sv6, sv7
     # associate the disease name and dcid to clean_dataframe
-    cleaned_dataframe = pd.merge(cleaned_dataframe, full_sv_df, on='variable', how='left')
+    cleaned_dataframe = pd.merge(cleaned_dataframe,
+                                 full_sv_df,
+                                 on='variable',
+                                 how='left')
     del full_sv_df
     # statvar dataframe with all constraints
     full_sv_df = cleaned_dataframe[['ignore_label', 'variable', 'name', 'dcid']]
@@ -430,14 +505,21 @@ def main(_) -> None:
     # generate statvars from full_sv_df
     full_sv_df = generate_statvars(full_sv_df)
     # merge statvar dcid with full df
-    cleaned_dataframe = pd.merge(cleaned_dataframe, full_sv_df, on=['ignore_label', 'variable', 'name', 'dcid'], how='left')
+    cleaned_dataframe = pd.merge(
+        cleaned_dataframe,
+        full_sv_df,
+        on=['ignore_label', 'variable', 'name', 'dcid'],
+        how='left')
     # filter rows that have a defined statvar dcid
     cleaned_dataframe = cleaned_dataframe[cleaned_dataframe['sv_dcid'] != '']
-    obs_df = cleaned_dataframe[['observationAbout', 'observationDate', 'sv_dcid', 'measurementMethod', 'value', 'observationPeriod', 'variable']]
+    obs_df = cleaned_dataframe[[
+        'observationAbout', 'observationDate', 'sv_dcid', 'measurementMethod',
+        'value', 'observationPeriod', 'variable'
+    ]]
     obs_df.rename(columns={'sv_dcid': 'variableMeasured'}, inplace=True)
     # setup the output directory
     if not os.path.exists(output_path):
-     os.makedirs(output_path)
+        os.makedirs(output_path)
 
     file_prefix = 'cdc_nndss_annual_by_demographics'
     # write statvar_dct to mcf file
@@ -452,6 +534,7 @@ def main(_) -> None:
 
     # TODO: Write to csv + tmcf + sv mcf (can be global)
     obs_df.to_csv(os.path.join(output_path, f'{file_prefix}.csv'), index=False)
+
 
 if __name__ == '__main__':
     app.run(main)
