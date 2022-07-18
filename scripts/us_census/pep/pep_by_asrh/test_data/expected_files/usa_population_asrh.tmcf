@@ -1,0 +1,8 @@
+Node: E:USA_Population_ASRH->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:USA_Population_ASRH->SV
+measurementMethod: C:USA_Population_ASRH->Measurement_Method
+observationAbout: C:USA_Population_ASRH->Location
+observationDate: C:USA_Population_ASRH->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_ASRH->Count_Person
