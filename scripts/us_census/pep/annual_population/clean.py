@@ -364,7 +364,6 @@ def _create_final_file(op_tmp_file: str, search_string: str,
     with open(op_file + ".csv", 'a', encoding='utf-8') as op:
         for state in states:
             items = dict(zip(header, state))
-            # state_name = items['Location']
             state_name = alpha2todcid.USSTATE_MAP\
                             .get(items['Location'], items['Location'])
             for k, v in items.items():

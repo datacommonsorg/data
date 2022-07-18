@@ -5,6 +5,11 @@ set -x
 rm -rf ./input_files/
 rm -rf ./output_files/
 
+mkdir -p ./input_files/1990_1999/city/
+mkdir -p ./input_files/2000_2009/city/
+mkdir -p ./input_files/2010_2019/city/
+mkdir -p ./input_files/2020_2021/city/
+
 mkdir -p ./input_files/1970_1979/county/
 mkdir -p ./input_files/1980_1989/county/
 mkdir -p ./input_files/1990_1999/county/
@@ -26,6 +31,30 @@ mkdir -p ./input_files/2010_2020/national/
 mkdir -p ./input_files/2021/national/
 
 mkdir -p ./output_files/
+
+for file in $(cat download_city_1990_1999.txt)
+do
+    $(curl https://www2.census.gov/programs-surveys/popest/tables/1990-2000/cities/totals/${file} \
+          -o ./input_files/1990_1999/city/${file})
+done
+
+for file in $(cat download_city_2000_2009.txt)
+do
+    $(curl https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/cities/${file} \
+          -o ./input_files/2000_2009/city/${file})
+done
+
+for file in $(cat download_city_2010_2019.txt)
+do
+    $(curl https://www2.census.gov/programs-surveys/popest/datasets/2010-2020/cities/${file} \
+          -o ./input_files/2010_2019/city/${file})
+done
+
+for file in $(cat download_city_2020_2021.txt)
+do
+    $(curl https://www2.census.gov/programs-surveys/popest/datasets/2020-2021/cities/totals/${file} \
+          -o ./input_files/2020_2021/city/${file})
+done
 
 for file in $(cat download_county_1970_1979.txt)
 do

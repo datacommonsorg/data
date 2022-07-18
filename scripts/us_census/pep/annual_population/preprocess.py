@@ -310,9 +310,9 @@ def _process_nationals_1980_1989(ip_file: str) -> pd.DataFrame:
         for line in data:
             if "United States" in line:
                 usa_rows += line.replace("00000", "").strip() + " "
-                usa_cleaned_row = [
-                    int(val) for val in usa_rows.split(" ") if val.isnumeric()
-                ]
+        usa_cleaned_row = [
+            int(val) for val in usa_rows.split(" ") if val.isnumeric()
+        ]
         year = [
             "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987",
             "1988", "1989"
@@ -363,12 +363,12 @@ def _process_nationals_2010_2020(ip_file: str, op_file: str) -> None:
         national_pop_stats.write("Year,Location,Count_Person")
         with open(ip_file, encoding='utf-8') as ipfile:
             for line in ipfile.readlines():
-                if line.find("POPESTIMATE2010") != -1:
+                if "POPESTIMATE2010" in line:
                     header = line.strip('\n').split(",")
-                elif line.find(USA) != -1:
+                elif USA in line:
                     values = line.strip('\n').split(",")
         for k, v in dict(zip(header, values)).items():
-            if k.find('POPESTIMATE2') != -1:
+            if "POPESTIMATE2" in k:
                 # k contains values such as POPESTIMATE2010,POPESTIMATE2011,
                 # POPESTIMATE2012 and index at [-4:] provides year value
                 national_pop_stats.write("\n" + k[-4:] + ",country/USA," + v)
@@ -411,12 +411,12 @@ def _process_states_2000_2009(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Cleaned DataFrame
     """
     data_df = pd.DataFrame()
-    data_df = _load_data_df(path=file_path, file_format="csv", header=8)
+    data_df = _load_data_df(
+        path=file_path,
+        file_format="csv",
+    )
 
-    pop_cols = [
-        "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008",
-        "2009"
-    ]
+    pop_cols = [str(yr) for yr in range(2000, 2010)]
     df_cols = ["Region", "042000"] + pop_cols + ["042010", "072010"]
     data_df.columns = df_cols
     for col in pop_cols:
@@ -567,13 +567,15 @@ def _process_county_coest2020(file_path: str) -> pd.DataFrame:
     data_df['STATE'] = data_df['STATE'].astype('str').str.pad(2,
                                                               side='left',
                                                               fillchar='0')
-    data_df['Location'] = data_df[["STATE", "COUNTY"]].apply(_geo_id, axis=1)
+
+    data_df.insert(0, 'Location', data_df[["STATE", "COUNTY"]].apply(_geo_id,
+                                                                     axis=1))
     data_df.columns = data_df.columns.str.replace('POPESTIMATE', '')
 
     # Dropping Unwanted Columns
     data_df = data_df.drop(
         columns=["STATE", "COUNTY", "STNAME", "CTYNAME", "042020"])
-    data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[:-1])
+    data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[1:])
     return data_df
 
 
@@ -599,15 +601,15 @@ def _process_counties(file_path: str) -> pd.DataFrame:
     elif "co-est2021" in file_path:
         data_df = _load_data_df(file_path, "xlsx", header=4)
 
-        data_df.columns = ["Region", "04_2020", "07_2020", "2021"]
-        data_df = data_df.dropna(subset=["2021"])
+        data_df.columns = ["Region", "04_2020", "2020", "2021"]
+        data_df = data_df.dropna(subset=["04_2020"])
         data_df["Region"] = data_df["Region"].apply(_remove_initial_dot_values)
         data_df["County"] = data_df["Region"].str.split(", ").str[0]
         data_df["State"] = data_df["Region"].str.split(", ").str[1]
         data_df = _states_full_to_short_form(data_df, "State", "State")
         data_df["Location"] = data_df.apply(
             lambda x: _county_to_dcid(COUNTY_MAP, x.State, x.County), axis=1)
-        data_df = _unpivot_data_df(data_df, ["Location"], ["2021"])
+        data_df = _unpivot_data_df(data_df, ["Location"], ["2020", "2021"])
     elif "co-est" in file_path:
         data_df = _load_data_df(file_path, "csv", encoding='ISO-8859-1')
         data_df = clean_data_df(data_df, "csv")
@@ -696,7 +698,7 @@ def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
         return data_df
 
 
-def _process_cities(file_path: str, file_name: str) -> pd.DataFrame:
+def _process_cities(file_path: str) -> pd.DataFrame:
     """
     Process DataFrame of Cities dataset
     Args:
@@ -707,9 +709,13 @@ def _process_cities(file_path: str, file_name: str) -> pd.DataFrame:
         pd.DataFrame: Processed City DataFrame
     """
     data_df = None
-    if file_name in ['su-99-7_us.txt']:
+    file_name_with_ext = os.path.basename(file_path)
+    file_name_without_ext = os.path.splitext(file_name_with_ext)[0]
+    if file_name_without_ext == 'su-99-7_us':
         data_df = _process_city_1990_1999(file_path)
-    if "sub-est2010-alt" in file_name or "sub-est2019_all" in file_name:
+    if file_name_without_ext in [
+            "sub-est2010-alt", "SUB-EST2020_ALL", "sub-est2021_all"
+    ]:
         data_df = _load_data_df(file_path,
                                 file_format="csv",
                                 header=0,
@@ -722,29 +728,29 @@ def _process_cities(file_path: str, file_name: str) -> pd.DataFrame:
                                                                   side='left',
                                                                   fillchar='0')
         data_df["Location"] = "geoId/" + data_df["STATE"] + data_df["PLACE"]
-        key = "POPESTIMATE07"
-        final_cols = [
-            "Location", "2000", "2001", "2002", "2003", "2004", "2005", "2006",
-            "2007", "2008", "2009"
-        ]
-        if "sub-est2019_all" in file_name:
-            key = "POPESTIMATE"
-            final_cols = [
-                "Location", "2010", "2011", "2012", "2013", "2014", "2015",
-                "2016", "2017", "2018", "2019"
+        if "sub-est2010-alt" == file_name_without_ext:
+            key = "POPESTIMATE07"
+            pop_cols = [
+                "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007",
+                "2008", "2009"
             ]
+            final_cols = ["Location"] + pop_cols
+        elif "SUB-EST2020_ALL" == file_name_without_ext:
+            key = "POPESTIMATE"
+            pop_cols = [
+                "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017",
+                "2018", "2019"
+            ]
+            final_cols = ["Location"] + pop_cols
+        elif "sub-est2021_all" == file_name_without_ext:
+            key = "POPESTIMATE"
+            pop_cols = ["2020", "2021"]
+            final_cols = ["Location"] + pop_cols
 
         data_df.columns = data_df.columns.str.replace(key, '')
         data_df = data_df[final_cols]
-        data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[1:])
+        data_df = _unpivot_data_df(data_df, ["Location"], pop_cols)
     return data_df
-
-
-def _transform_data_df(data_df: pd.DataFrame, area: str) -> pd.DataFrame:
-    data_df = _process_csv_file(data_df, area)
-    data_df = _states_full_to_short_form(data_df, "Location", "Short_Form")
-    data_df = _add_geo_id(data_df, "Short_Form", "Location")
-    return data_df[["Year", "Location", "Count_Person"]]
 
 
 def _generate_mcf(mcf_file_path) -> None:
@@ -828,9 +834,10 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
                           ] or "co-est" in file_name:
             data_df = _process_counties(file)
         elif file_name in [
-                'su-99-7_us.txt', "sub-est2010-alt.csv", "sub-est2019_all.csv"
+                'su-99-7_us.txt', "sub-est2010-alt.csv", "SUB-EST2020_ALL.csv",
+                "sub-est2021_all.csv"
         ]:
-            data_df = _process_cities(file, file_name)
+            data_df = _process_cities(file)
         final_df = pd.concat([final_df, data_df], axis=0)
     final_df = final_df.sort_values(by=["Location", "Year"])
     final_df = final_df.drop_duplicates(["Year", "Location"])

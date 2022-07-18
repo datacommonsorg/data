@@ -24,6 +24,7 @@ OUTPUT_DIR = 'output_files'
 TEST_DATA_DIR = "test_data"
 
 INPUT_DIRS = [
+    "1990_1999/city/", "2000_2009/city/", "2010_2019/city/", "2020_2021/city/",
     "1970_1979/county/", "1980_1989/county/", "1990_1999/county/",
     "2000_2009/county/", "2010_2020/county/", "2021/county/",
     "1900_1989/state/", "1990_1999/state/", "2000_2009/state/",
