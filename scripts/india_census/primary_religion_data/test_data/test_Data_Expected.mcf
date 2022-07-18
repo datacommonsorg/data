@@ -677,7 +677,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Hinduism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Male
 
 Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Male
@@ -687,7 +687,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Islam
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Male
 
 Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Male
@@ -697,7 +697,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Christianity
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Male
 
 Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Male
@@ -707,7 +707,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Sikhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Male
 
 Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Male
@@ -717,7 +717,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Buddhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Male
 
 Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Male
@@ -727,7 +727,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Jainism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Male
 
 Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Male
@@ -737,7 +737,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Male
 
 Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Male
@@ -747,7 +747,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Male
 
 Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Urban_Male
@@ -757,7 +757,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Hinduism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
@@ -768,7 +768,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Islam
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
@@ -779,7 +779,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Christianity
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
@@ -790,7 +790,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Sikhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
@@ -801,7 +801,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Buddhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
@@ -812,7 +812,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Jainism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
@@ -823,7 +823,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
@@ -834,7 +834,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
@@ -845,7 +845,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Hinduism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
@@ -856,7 +856,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Islam
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
@@ -867,7 +867,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Christianity
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
@@ -878,7 +878,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Sikhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
@@ -889,7 +889,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Buddhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
@@ -900,7 +900,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Jainism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
@@ -911,7 +911,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
@@ -922,7 +922,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
@@ -933,7 +933,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Hinduism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Female
 
 Node: dcid:indianCensus/Count_Person_Religion_Muslim_NonWorker_Female
@@ -943,7 +943,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Islam
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Female
 
 Node: dcid:indianCensus/Count_Person_Religion_Christian_NonWorker_Female
@@ -953,7 +953,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Christianity
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Female
 
 Node: dcid:indianCensus/Count_Person_Religion_Sikh_NonWorker_Female
@@ -963,7 +963,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Sikhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Female
 
 Node: dcid:indianCensus/Count_Person_Religion_Buddhist_NonWorker_Female
@@ -973,7 +973,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Buddhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Female
 
 Node: dcid:indianCensus/Count_Person_Religion_Jain_NonWorker_Female
@@ -983,7 +983,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Jainism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Female
 
 Node: dcid:indianCensus/Count_Person_Religion_OtherReligionsAndPersuasions_NonWorker_Female
@@ -993,7 +993,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Female
 
 Node: dcid:indianCensus/Count_Person_Religion_ReligionNotStated_NonWorker_Female
@@ -1003,7 +1003,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 gender: schema:Female
 
 Node: dcid:indianCensus/Count_Person_Religion_Hindu_NonWorker_Urban_Female
@@ -1013,7 +1013,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Hinduism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
@@ -1024,7 +1024,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Islam
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
@@ -1035,7 +1035,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Christianity
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
@@ -1046,7 +1046,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Sikhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
@@ -1057,7 +1057,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Buddhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
@@ -1068,7 +1068,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Jainism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
@@ -1079,7 +1079,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
@@ -1090,7 +1090,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
@@ -1101,7 +1101,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Hinduism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
@@ -1112,7 +1112,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Islam
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
@@ -1123,7 +1123,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Christianity
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
@@ -1134,7 +1134,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Sikhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
@@ -1145,7 +1145,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Buddhism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
@@ -1156,7 +1156,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:Jainism
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
@@ -1167,7 +1167,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:IndiaCensus_OtherReligionAndPersuasions
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
@@ -1178,7 +1178,7 @@ populationType: dcs:Person
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 religion: dcs:ReligionNotStated
-workerStatus: dcs:NonWorker
+workerClassification: dcs:NonWorker
 placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 

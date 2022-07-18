@@ -285,7 +285,6 @@ class CensusPrimaryReligiousDataLoader():
             constraints_array.append("literacyStatus: dcs:Illiterate")
 
         if row["workerStatus"] == "Worker":
-            constraints_array.append("workerStatus: dcs:Worker")
             if row["workerClassification"] == "MainWorker":
                 name_array.append("MainWorker")
                 constraints_array.append("workerClassification: dcs:MainWorker")
@@ -314,10 +313,11 @@ class CensusPrimaryReligiousDataLoader():
 
             else:
                 name_array.append("Workers")
+                constraints_array.append("workerClassification: dcs:Worker")
 
         elif row["workerStatus"] == "NonWorker":
             name_array.append("NonWorker")
-            constraints_array.append("workerStatus: dcs:NonWorker")
+            constraints_array.append("workerClassification: dcs:NonWorker")
 
         if place_of_residence == "Urban":
             name_array.append("Urban")
