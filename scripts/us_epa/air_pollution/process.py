@@ -33,6 +33,7 @@ _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "populationType: dcs:Emissions\n"
                  "emissionSourceType: dcs:NonBiogenicEmissionSource\n"
                  "measurementQualifier: dcs:Annual{pv2}{pv3}\n"
+                 "emissionType: dcs:CriteriaAirPollutants\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:amount\n")
 
@@ -53,9 +54,11 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     """
     Aggregates the columns based on SV
 
-    Args: df (pd.DataFrame): df as the input, to aggregate values
+    Args: 
+        df (pd.DataFrame): df as the input, to aggregate values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     # Dropping the rows which contain PrescribedFire, Wildfire or Miscellaneous.
     # As they are not a part of StationaryFuelCombustion,
@@ -101,9 +104,11 @@ def _replace_pollutant(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         column_name: {
@@ -126,9 +131,11 @@ def _replace_source_category(df: pd.DataFrame, column_name: str) ->\
     Replaces values of a single column into true values
     from metadata returns the DF.
 
-    Args: df (pd.DataFrame): df as the input, to change column values
+    Args:
+        df (pd.DataFrame): df as the input, to change column values
 
-    Returns: df (pd.DataFrame): modified df as output
+    Returns:
+        df (pd.DataFrame): modified df as output
     """
     df = df.replace({
         column_name: {
@@ -280,8 +287,10 @@ class USAirPollutionEmissionTrends:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
+
         Args:
             None
+
         Returns:
             None
         """
@@ -304,7 +313,13 @@ class USAirPollutionEmissionTrends:
         final_mcf_template = ""
         for sv in sv_list:
             sv_property = sv.split("_")
-            source = '\nemissionSource: dcs:' + sv_property[-3]
+            if ("OtherIndustrialProcesses" in sv_property[-3] or
+                "MiscellaneousEmissionSource" in sv_property[-3] or
+                "FuelCombustionOther" in sv_property[-3]):
+                source = ('\nemissionSource: dcs:' + sv_property[-4] + "_" +
+                    sv_property[-3])
+            else:
+                source = '\nemissionSource: dcs:' + sv_property[-3]
             pollutant = '\nemittedThing: dcs:' + sv_property[-1]
             final_mcf_template += _MCF_TEMPLATE.format(
                 pv1=sv, pv2=source, pv3=pollutant) + "\n"
@@ -317,6 +332,12 @@ class USAirPollutionEmissionTrends:
         """
         This Method calls the required methods to generate
         cleaned CSV, MCF, and TMCF file.
+
+        Args:
+            None
+            
+        Returns:
+            None
         """
 
         final_df = pd.DataFrame(columns=['geo_Id', 'year', 'SV', 'observation'])
