@@ -1,3 +1,22 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Change the description
+This script generates the import artefacts for the prevalence of asthma in adults and children at a county-level in the United States.
+
+The dataset is extracted from the Interactive Maps of States and District of Columbia Visualizing Six-Level Urban-Rural Classification of
+Counties and County-Equivalents with Corresponding Current Asthma Prevalence, 2016–2018 report.
+"""
 import re
 import os
 import sys
@@ -5,6 +24,9 @@ import difflib
 import string
 import pandas as pd
 from absl import app, flags
+
+from .config import _PV_MAP
+
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -27,170 +49,6 @@ variableMeasured: C:NNDSWeekly->variableMeasured
 value: C:NNDSWeekly->value
 observationPeriod: C:NNDSWeekly->observationPeriod
 """
-
-#NOTE: A map for different
-_PV_MAP = {
-    'confirmed': {
-        'medicalStatus': 'dcs:ConfirmedCase'
-    },
-    'probable': {
-        'medicalStatus': 'dcs:ProbableCase'
-    },
-    'deaths': {
-        'medicalStatus': 'dcs:PatientDeceased'
-    },
-    'pediatric mortality': {
-        'medicalStatus': 'dcs:PediatricMortality'
-    },
-    'all serotypes': {
-        'serotype': 'dcs:AllSerotypes'
-    },
-    'serotype b': {
-        'serotype': 'dcs:SerotypeB'
-    },
-    'unknown serotype': {
-        'serotype': 'dcs:UnknownSerotype'
-    },
-    'non-b serotype': {
-        'serotype': 'dcs:NonSerotypeB'
-    },
-    'other serogroups': {
-        'serogroup': 'dcs:OtherSerogroups'
-    },
-    'nontypeable': {
-        'serogroup': 'dcs:OtherSerogroups'
-    },
-    'unknown serogroup': {
-        'serogroup': 'dcs:UnknownSerogroups'
-    },
-    'all groups': {
-        'serogroup': 'dcs:AllSerogroups'
-    },
-    'all serogroups': {
-        'serogroup': 'dcs:AllSerogroups'
-    },
-    'serogroups acwy': {
-        'serogroup': 'dcs:ACWYSerogroup'
-    },
-    'serogroup b': {
-        'serogroup': 'dcs:SerogroupB'
-    },
-    'group a': {
-        'serogroup': 'dcs:SerogroupA'
-    },
-    'perinatal infection': {
-        'medicalCondition': 'dcs:PerinatalInfection'
-    },
-    'acute': {
-        'medicalCondition': 'dcs:AcuteCondition'
-    },
-    'chronic': {
-        'medicalCondition': 'dcs:ChronicCondition'
-    },
-    'imported': {
-        'medicalStatus': 'dcs:ImportedCase'
-    },
-    'indigenous': {
-        'medicalStatus': 'dcs:IndigenousCase'
-    },
-    'clinical': {
-        'medicalStatus': 'dcs:ClinicalCase'
-    },
-    'neuroinvasive': {
-        'medicalCondition': 'dcs:NeuroinvasiveDisease'
-    },
-    'non-neuroinvasive': {
-        'medicalCondition': 'dcs:NonNeuroinvasiveDisease'
-    },
-    'congenital': {
-        'medicalCondition': 'dcs:CongenitalDisease'
-    },
-    'non-congenital': {
-        'medicalCondition': 'dcs:NonCongenitalDisease'
-    },
-    'drug resistant': {
-        'medicalCondition': 'dcs:DrugResistantDisease'
-    },
-    'nondrug resistant': {
-        'medicalCondition': 'dcs:NonDrugResistantDisease'
-    },
-    'invasive disease': {
-        'medicalCondition': 'dcs:InvasiveDisease'
-    },
-    'post-diarrheal': {
-        'medicalCondition': 'dcs:PostDiarrheal'
-    },
-    '<1 yr': {
-        'age': '[- 1 Years]'
-    },
-    '1-4 yrs': {
-        'age': '[1 4 Years]'
-    },
-    '5-14 yrs': {
-        'age': '[5 14 Years]'
-    },
-    '15-24 yrs': {
-        'age': '[15 24 Years]'
-    },
-    '25-39 yrs': {
-        'age': '[25 39 Years]'
-    },
-    '40-64 yrs': {
-        'age': '[40 64 Years]'
-    },
-    '≥65 yrs': {
-        'age': '[65 - Years]'
-    },
-    'age <5 years': {
-        'age': '[- 5 Years]'
-    },
-    'age not stated': {
-        'age': 'dcs:USC_AgeNotStated'
-    },
-    'male': {
-        'gender': 'dcs:Male'
-    },
-    'female': {
-        'gender': 'dcs:Female'
-    },
-    'sex not stated': {
-        'gender': 'dcs:CDC_GenderUnknownOrNotStated'
-    },
-    'american indian or alaska native': {
-        'race': 'dcs:AmericanIndianAndAlaskaNativeAlone'
-    },
-    'american indian or  alaska native': {
-        'race': 'dcs:AmericanIndianAndAlaskaNativeAlone'
-    },
-    'asian or pacific islander': {
-        'race': 'dcs:AsianOrPacificIslander'
-    },
-    'asian or pacific  islander': {
-        'race': 'dcs:AsianOrPacificIslander'
-    },
-    'black': {
-        'race': 'dcs:BlackOrAfricanAmericanAlone'
-    },
-    'white': {
-        'race': 'dcs:WhiteAlone'
-    },
-    'other race': {
-        'race': 'dcs:CDC_OtherRace'
-    },
-    'race not stated': {
-        'race': 'dcs:CDC_RaceUnknownOrNotStated'
-    },
-    'hispanic': {
-        'ethnicity': 'dcs:HispanicOrLatino'
-    },
-    'non-hispanic': {
-        'ethnicity': 'dcs:NotHispanicOrLatino'
-    },
-    'ethnicity not stated': {
-        'ethnicity': 'dcs:CDC_EthnicityUnknownOrNotStated'
-    }
-}
-
 
 def rename_columns(df_column_list):
     for idx in range(len(df_column_list)):
