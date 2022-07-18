@@ -91,8 +91,12 @@ def _national_1900_1979(file_path: str) -> pd.DataFrame:
     Returns:
         df (pd.DataFrame) : cleaned dataframe.
     """
+
+    # extracting year from file path.
     year = file_path[-8:-4]
+    # schema is changing after 1960
     if int(year) < 1960:
+        # schema is changing after 1940
         if int(year) < 1940:
             df = pd.read_csv(file_path,
                              thousands=',',
@@ -132,11 +136,13 @@ def _national_1900_1979(file_path: str) -> pd.DataFrame:
             'Black Male', 'Black Female', 'OtherRace Total', 'OtherRace Male',
             'OtherRace Female'
         ]
+        # dropping unwanted columns
         df = df.drop(columns=[
             'Age', 'Total', 'White Total', 'White Male', 'White Female',
             'Black Total', 'Black Male', 'Black Female', 'OtherRace Total',
             'OtherRace Male', 'OtherRace Female'
         ])
+        # adding geoid, year and measurement method
         df['Year'] = year
         df.insert(0, 'geo_ID', 'country/USA', True)
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
@@ -157,9 +163,11 @@ def _national_1990_2000(file_path: str) -> pd.DataFrame:
     df.columns = [
         'Year', 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female'
     ]
+    # total age is required as we are bring age in a seperate import
     df = df[(df["Age"] == "All Age") &
             (df["Year"].str.startswith("July"))].reset_index(drop=True)
     df["Year"] = df["Year"].str.replace("July 1, ", "")
+    # dropping unwanted columns
     df = df.drop(columns=['Total', 'Age'])
     df.insert(0, 'geo_ID', 'country/USA', True)
     float_col = df.select_dtypes(include=['float64'])
@@ -185,12 +193,16 @@ def _national_2000_2010(file_path: str) -> pd.DataFrame:
         '2006', '2007', '2008', '2009', 'April2010', '2010'
     ]
     df = df.query('SEX=="MALE" or SEX=="FEMALE"')
+    # dropping unwanted columns
     df = df.drop(columns=['April2000', 'April2010', '2010'])
     df = df.replace(
         {'SEX': {
             'MALE': 'Count_Person_Male',
             'FEMALE': 'Count_Person_Female'
         }})
+    # replacing rows with columns
+    # making the first row as column name
+    # to get all dataframe in one formate
     df = df.transpose().reset_index()
     df.columns = df.iloc[0]
     df = df[1:]
@@ -216,8 +228,11 @@ def _national_2010_2020(file_path: str) -> pd.DataFrame:
         df (pd.DataFrame) : cleaned dataframe.
     """
     df = pd.read_csv(file_path)
+    # to get total age present at age = 999
     df = df.query("AGE == 999")
+    # total is not required in gender
     df = df.query("SEX != 0")
+    # dropping unwanted column
     df = df.drop(columns=['CENSUS2010POP', 'ESTIMATESBASE2010', 'AGE'])
     df = df.replace({'SEX': {1: 'Count_Person_Male', 2: 'Count_Person_Female'}})
     df.rename(columns={
@@ -235,6 +250,9 @@ def _national_2010_2020(file_path: str) -> pd.DataFrame:
         'SEX': 'Year'
     },
               inplace=True)
+    # replacing rows with columns
+    # making the first row as column name
+    # to get all dataframe in one formate
     df = df.transpose().reset_index()
     df.columns = df.iloc[0]
     df = df[1:]
@@ -254,11 +272,16 @@ def _national_2021(file_path: str) -> pd.DataFrame:
         df (pd.DataFrame) : cleaned dataframe.
     """
     df = pd.read_csv(file_path)
+    # total is not required in gender
     df = df.query("SEX !=0")
+    # to get total age present at age = 999
     df = df.query("AGE == 999")
     df = df.replace({'SEX': {1: 'Count_Person_Male', 2: 'Count_Person_Female'}})
     df.rename(columns={'POPESTIMATE2021': '2021', 'SEX': 'Year'}, inplace=True)
     df = df.drop(columns=['AGE', 'ESTIMATESBASE2020', 'POPESTIMATE2020'])
+    # replacing rows with columns
+    # making the first row as column name
+    # to get all dataframe in one formate
     df = df.transpose().reset_index()
     df.columns = df.iloc[0]
     df = df[1:]
@@ -297,6 +320,8 @@ def _state_1970_1980(file_path: str) -> pd.DataFrame:
     df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(2)
     df['geo_ID'] = df['geo_ID'] + '-' + df['Year'].astype(str)
     df = df.drop(columns=['Year', 'State Name'])
+    # replacing rows with columns
+    # to get all dataframe in one formate
     df = df.groupby(['geo_ID','Race/Sex Indicator']).sum().transpose()\
         .stack(0).reset_index()
     df[['geo_ID', 'Year']] = df['geo_ID'].str.split('-', expand=True)
@@ -316,6 +341,7 @@ def _state_1980_1990(file_path: str) -> pd.DataFrame:
     Returns:
         df (pd.DataFrame) : cleaned dataframe.
     """
+    # extracting year from file path
     year = file_path[-6:-4]
     year = 1900 + int(year)
     column_names = [
@@ -336,6 +362,7 @@ def _state_1980_1990(file_path: str) -> pd.DataFrame:
     df['Year'] = year
     df = df.drop(columns=['CountyCode', 'Age', 'Total'])
     df = df.groupby(['Year', 'geo_ID']).sum().reset_index()
+    # aggregating state data to get national data
     df_national = df.copy()
     df_national['geo_ID'] = "country/USA"
     df_national = df_national.groupby(['Year', 'geo_ID']).sum().reset_index()
@@ -354,6 +381,7 @@ def _state_2000_2010(file_path: str) -> pd.DataFrame:
     Returns:
         df (pd.DataFrame) : cleaned dataframe.
     """
+    # extract geoid from the file path
     geoid = file_path[-6:-4]
     column_name = [
         'AgeSex', 'April2000', '2000', '2001', '2002', '2003', '2004', '2005',
@@ -369,6 +397,9 @@ def _state_2000_2010(file_path: str) -> pd.DataFrame:
         }
     })
     df = df.drop(columns=['April2000', 'April2010', '2010'])
+    # replacing rows with columns
+    # making the first row as column name
+    # to get all dataframe in one formate
     df = df.transpose().reset_index()
     df.columns = df.iloc[0]
     df = df[1:]
@@ -466,6 +497,7 @@ def _state_2021(file_path: str) -> pd.DataFrame:
     ]
     df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
     df.columns = column_name
+    # extract geoid from file path
     geoid = file_path[-7:-5]
     if geoid == "0.":
         geoid = "01"
@@ -495,6 +527,7 @@ def _county_1970_1980(file_path: str) -> pd.DataFrame:
     float_col = df.select_dtypes(include=['float64'])
     for col in float_col.columns.values:
         df[col] = df[col].astype('int64')
+    # adding age groups to get total value
     df['Total'] = df[_COLUMNS_TO_SUM].sum(axis=1)
     df = df.drop(columns=_COLUMNS_TO_SUM)
     df = df.replace({
@@ -514,6 +547,8 @@ def _county_1970_1980(file_path: str) -> pd.DataFrame:
     df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(5)
     df['geo_ID'] = df['geo_ID'] + '-' + df['Year'].astype(str)
     df = df.drop(columns=['Year'])
+    # replacing rows with columns
+    # to get all dataframe in one formate
     df = df.groupby(['geo_ID','Race/Sex Indicator']).sum().transpose()\
         .stack(0).reset_index()
     df[['geo_ID', 'Year']] = df['geo_ID'].str.split('-', expand=True)
@@ -533,6 +568,7 @@ def _county_1980_1990(file_path: str) -> pd.DataFrame:
         df (pd.DataFrame) : cleaned dataframe.
     """
     df = pd.read_csv(file_path, skiprows=5)
+    # adding age groups to get total value
     df['Total'] = df[_COLUMNS_TO_SUM].sum(axis=1)
     df = df.drop(columns=_COLUMNS_TO_SUM)
     df = df.replace({
@@ -552,6 +588,8 @@ def _county_1980_1990(file_path: str) -> pd.DataFrame:
     df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(5)
     df['geo_ID'] = df['geo_ID'] + '-' + df['Year'].astype(str)
     df = df.drop(columns=['Year'])
+    # replacing rows with columns
+    # to get all dataframe in one formate
     df = df.groupby(['geo_ID','Race/Sex Indicator']).sum().transpose()\
         .stack(0).reset_index()
     df[['geo_ID', 'Year']] = df['geo_ID'].str.split('-', expand=True)
@@ -591,10 +629,13 @@ def _county_1990_2000(file_path: str) -> pd.DataFrame:
     })
     df['geo_ID'] = df['geo_ID'] + '-' + df['Year'].astype(str)
     df = df.drop(columns=['Year'])
+    # replacing rows with columns
+    # to get all dataframe in one formate
     df = df.groupby(['geo_ID','Race-Sex']).sum().transpose()\
         .stack(0).reset_index()
     df[['geo_ID', 'Year']] = df['geo_ID'].str.split('-', expand=True)
     df = df.drop(columns=['level_0'])
+    # aggregating county data to get state data
     df_state = df.copy()
     df_state['geo_ID'] = (df['geo_ID'].map(str)).str[:len('geoId/NN')]
     df_state = df_state.groupby(['Year', 'geo_ID']).sum().reset_index()
@@ -638,6 +679,8 @@ def _county_2000_2010(file_path: str) -> pd.DataFrame:
         'POPESTIMATE2009': '2009'
     },
               inplace=True)
+    # replacing rows with columns
+    # to get all dataframe in one formate
     df = df.groupby(['geo_ID', 'SEX']).sum().transpose().stack(0).reset_index()
     df = df.rename(columns={'level_0': 'Year'})
     float_col = df.select_dtypes(include=['float64'])
