@@ -73,9 +73,11 @@ _TMCF_TEMPLATE = (
 def _alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file alcoholconsumption_by_sex_education
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -105,9 +107,11 @@ def _alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
 def _alcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file alcoholconsumption_by_sex_income
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -138,9 +142,11 @@ def _alcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
 def _alcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file alcoholconsumption_by_sex_urbanisation
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -175,9 +181,11 @@ def _alcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
 def _bingedrinking_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file bingedrinking_by_sex_education
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -206,9 +214,11 @@ def _bingedrinking_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
 
 def _bingedrinking_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Cleans the file bingedrinking_by_sex_income for concatenation in Final CSV
+    Cleans the file bingedrinking_by_sex_income for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -239,9 +249,11 @@ def _bingedrinking_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
 def _bingedrinking_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file bingedrinking_by_sex_urbanisation
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -276,9 +288,11 @@ def _hazardousalcoholconsumption_by_sex_education(df: pd.DataFrame)\
     -> pd.DataFrame:
     """
     Cleans the file hazardousalcoholconsumption_by_sex_education
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -312,9 +326,11 @@ def _hazardousalcoholconsumption_by_sex_income(df: pd.DataFrame)\
     -> pd.DataFrame:
     """
     Cleans the file hazardousalcoholconsumption_by_sex_income
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -348,9 +364,11 @@ def _hazardousalcoholconsumption_by_sex_urbanisation(df: pd.DataFrame)\
     -> pd.DataFrame:
     """
     Cleans the file hazardousalcoholconsumption_by_sex_urbanisation
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -384,9 +402,11 @@ def _alcoholconsumption_by_sex_country_of_birth(df: pd.DataFrame)\
     -> pd.DataFrame:
     """
     Cleans the file alcoholconsumption_by_sex_country_of_birth
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -421,9 +441,11 @@ def _alcoholconsumption_by_sex_country_of_birth(df: pd.DataFrame)\
 def _alcoholconsumption_by_sex_citizen(df: pd.DataFrame) -> pd.DataFrame:
     """
     Cleans the file alcoholconsumption_by_sex_citizen
-    for concatenation in Final CSV
+    for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -459,8 +481,10 @@ def _historical_alcoholconsumption_by_sex_education(df: pd.DataFrame)\
     """
     Cleans the file historical_alcoholconsumption_by_sex_education
     for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -493,8 +517,10 @@ def _historical_bingedrinking_by_sex_education(df: pd.DataFrame)\
     """
     Cleans the file historical_bingedrinking_by_sex_education
     for concatenation in Final CSV.
+
     Args:
         df (pd.DataFrame): The raw df as the input
+
     Returns:
         df (pd.DataFrame): provides the cleaned df as output
     """
@@ -539,8 +565,10 @@ class EuroStatAlcoholConsumption:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
+
         Args:
             None
+
         Returns:
             None
         """
@@ -552,8 +580,10 @@ class EuroStatAlcoholConsumption:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
+
         Args:
-            df_cols (list) : List of DataFrame Columns
+            sv_list (list) : List of DataFrame Columns
+
         Returns:
             None
         """
@@ -653,8 +683,10 @@ class EuroStatAlcoholConsumption:
         """
         This Method calls the required methods to generate
         cleaned CSV, MCF, and TMCF file.
+
         Args:
             None
+
         Returns:
             None
         """

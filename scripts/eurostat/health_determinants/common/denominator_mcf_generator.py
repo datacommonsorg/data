@@ -24,8 +24,10 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
     """
     This method generates MCF file w.r.t
     dataframe headers and defined MCF template
-    Arguments:
-        df_cols (list) : List of DataFrame Columns
+
+    Args:
+        sv_list (list) : List of DataFrame Columns
+
     Returns:
         None
     """
@@ -133,8 +135,8 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
 
 _MODULE_DIR = "scripts/eurostat/health_determinants/alcohol_consumption/"
 
-_INPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output",
-                                    "eurostat_population_alcoholconsumption.mcf")
+_INPUT_MCF_FILE_PATH = os.path.join(
+    _MODULE_DIR, "output", "eurostat_population_alcoholconsumption.mcf")
 _OUTPUT_MCF_FILE_PATH = os.path.join(
     _MODULE_DIR, "output", "eurostat_population_alcoholconsumption_deno.mcf")
 
