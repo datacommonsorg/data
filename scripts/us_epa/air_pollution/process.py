@@ -314,10 +314,10 @@ class USAirPollutionEmissionTrends:
         for sv in sv_list:
             sv_property = sv.split("_")
             if ("OtherIndustrialProcesses" in sv_property[-3] or
-                "MiscellaneousEmissionSource" in sv_property[-3] or
-                "FuelCombustionOther" in sv_property[-3]):
+                    "MiscellaneousEmissionSource" in sv_property[-3] or
+                    "FuelCombustionOther" in sv_property[-3]):
                 source = ('\nemissionSource: dcs:' + sv_property[-4] + "_" +
-                    sv_property[-3])
+                          sv_property[-3])
             else:
                 source = '\nemissionSource: dcs:' + sv_property[-3]
             pollutant = '\nemittedThing: dcs:' + sv_property[-1]
