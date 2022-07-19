@@ -18,11 +18,18 @@ found in downloaded files and its corresponding SV name.
 While preprocessing files column names are changed to SV names as used in
 DC import
 """
+DEFAULT_SV_PROP = {
+    "typeOf": "dcs:StatisticalVariable",
+    "populationType": "dcs:Household",
+    "statType": "dcs:meanValue",
+    "measurementQualifier": "dcs:EveryWeekday"
+}
+
 MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                 "typeOf: dcs:StatisticalVariable\n"
                 "populationType: dcs:Household\n"
                 "statType: dcs:meanValue\n"
-                "measurementQualifier:  dcs:Weekday\n"
+                "measurementQualifier: dcs:EveryWeekday\n"
                 "{xtra_pvs}\n")
 
 TMCF_TEMPLATE = (
@@ -37,18 +44,18 @@ TMCF_TEMPLATE = (
 HOUSEHOLD_PV = "[Person {person}]"
 NUM_OF_VEHICLES_PV = "[AvailableVehicles {vehicle}]"
 HEADERMAP = {
-    "est_pmiles2007_11": "PersonMiles",
-    "est_pmiles": "PersonMiles",
-    "pmiles": "PersonMiles",
+    "est_pmiles2007_11": "PersonMilesTraveled",
+    "est_pmiles": "PersonMilesTraveled",
+    "pmiles": "PersonMilesTraveled",
     "est_ptrp2007_11": "PersonTrips",
     "est_ptrp": "PersonTrips",
     "ptrp": "PersonTrips",
     "est_vtrp2007_11": "VehicleTrips",
     "est_vtrp": "VehicleTrips",
     "vtrp": "VehicleTrips",
-    "est_vmiles2007_11": "VehicleMiles",
-    "est_vmiles": "VehicleMiles",
-    "vmiles": "VehicleMiles",
+    "est_vmiles2007_11": "VehicleMilesTraveled",
+    "est_vmiles": "VehicleMilesTraveled",
+    "vmiles": "VehicleMilesTraveled",
 }
 ACS_LT_MOR = {0: '', 1: '_MarginOfErrorMoreThanACSSurvey'}
 INCOMPLETE_ACS = {0: '', 1: '_IncompleteACSSurvey'}

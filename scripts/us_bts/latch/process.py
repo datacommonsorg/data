@@ -24,20 +24,28 @@ input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
 """
 
+from copy import deepcopy
 import os
-import re
 import sys
+import re
 import pandas as pd
-from absl import app
-from absl import flags
+import numpy as np
+from absl import app, flags
 
-_CODEDIR = os.path.basename(__file__)
+_CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
 
 # pylint: disable=wrong-import-position
 from constants import (TMCF_TEMPLATE, MCF_TEMPLATE, INCOMPLETE_ACS,
                        HOUSEHOLD_PV, NUM_OF_VEHICLES_PV, HEADERMAP, URBAN,
-                       CONF_2009_FILE, CONF_2017_FILE, ACS_LT_MOR)
+                       CONF_2009_FILE, CONF_2017_FILE, ACS_LT_MOR,
+                       DEFAULT_SV_PROP)
+
+sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
+
+# pylint: disable=import-error
+from statvar_dcid_generator import get_statvar_dcid
+# pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
 _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -47,13 +55,42 @@ flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
 
 
+def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Promote Measurement method for SV's having two different
+    measurement methods for same year and place.
+
+    Args:
+        data_df (pd.DataFrame): _description_
+
+    Returns:
+        pd.DataFrame: _description_
+    """
+    acs_survey_df = data_df[
+        data_df["measurement_method"] ==
+        "NationalHouseholdTransportationSurveyEstimates" + \
+            "_MarginOfErrorMoreThanACSSurvey"].reset_index(
+            drop=True)
+    acs_survey_rows = list(acs_survey_df['location'] + '_' +
+                           acs_survey_df['sv'])
+    data_df['info'] = data_df['location'] + '_' + data_df['sv']
+    # Adding Measurement Method based on a condition
+    data_df['measurement_method'] = np.where(
+        data_df['info'].isin(acs_survey_rows),
+        'NationalHouseholdTransportationSurveyEstimates' + \
+            '_MarginOfErrorMoreThanACSSurvey',
+        data_df['measurement_method'])
+    data_df = data_df.drop(columns=["info"])
+    return data_df
+
+
 def _update_headers(headers: list) -> list:
     """
     Updating header values in headers to its complete form.
     Example:
         short form                           full form
-    pmiles_3mem_2veh         PersonMiles__With2AvailableVehicles_3Person
-     vtrip_5mem_1veh        VehicleTrips__With1AvailableVehicles_5Person
+    pmiles_3mem_2veh      PersonMilesTraveled__With2AvailableVehicles_3Person
+     vtrip_5mem_1veh     VehicleTripsTraveled__With1AvailableVehicles_5Person
     Args:
         headers (list): List of header values in short form
 
@@ -74,24 +111,25 @@ def _update_headers(headers: list) -> list:
     return updated_headers
 
 
+# pylint: disable=line-too-long
 def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
     """
     Updates sv column in data_df dataframe.
     Example:
     Input: data_df[['sv']]
-                                             sv
-                                    PersonMiles
-                                   VehicleTrips
-     PersonTrips_With1AvailableVehicles_2Person
-    VehicleMiles_With4AvailableVehicles_4Person
+                                                      sv
+                                     PersonMilesTraveled
+                                            VehicleTrips
+              PersonTrips_With1AvailableVehicles_2Person
+     VehicleMilesTraveled_With4AvailableVehicles_4Person
 
     In-Processing: data_df[[ "sv", "sv_first_part", "sv_last_part"]]
 
-                                                 sv   sv_first_part
-                                        PersonMiles     PersonMiles
-                                       VehicleTrips    VehicleTrips
-         PersonTrips_With1AvailableVehicles_2Person     PersonTrips
-        VehicleMiles_With4AvailableVehicles_4Person    VehicleMiles
+                                                      sv            sv_first_part
+                                     PersonMilesTraveled      PersonMilesTraveled
+                                            VehicleTrips             VehicleTrips
+              PersonTrips_With1AvailableVehicles_2Person              PersonTrips
+     VehicleMilesTraveled_With4AvailableVehicles_4Person     VehicleMilesTraveled
 
                                   sv_last_part
 
@@ -100,11 +138,11 @@ def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
                 With4AvailableVehicles_4Person
 
     Output: data_df[["sv"]]
-                                                                          sv
-                                    Mean_PersonMiles_Household_Weekday_Urban
-                                   Mean_VehicleTrips_Household_Weekday_Urban
-     Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_2Person_Urban
-    Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_4Person_Urban
+                                                                                  sv
+                                    Mean_PersonMilesTraveled_Household_Weekday_Urban
+                                           Mean_VehicleTrips_Household_Weekday_Urban
+             Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_2Person_Urban
+    Mean_VehicleMilesTraveled_Household_Weekday_With4AvailableVehicles_4Person_Urban
 
     Args:
         data_df (pd.DataFrame): Input DataFrame
@@ -112,16 +150,19 @@ def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         data_df (pd.DataFrame): DataFrame with updated sv column
     """
-    data_df["sv_first_part"] = data_df["sv"].str.split("_With").str[0]
-    data_df["sv_last_part"] = data_df["sv"]\
-                                .str.replace("PersonMiles", "")\
+    data_df["measuredProperty"] = data_df["sv"].str.split("_With").str[0]
+    data_df["householdSize_numberOfVehicles"] = data_df["sv"]\
+                                .str.replace("PersonMilesTraveled", "")\
                                 .str.replace("PersonTrips", "")\
-                                .str.replace("VehicleMiles", "")\
+                                .str.replace("VehicleMilesTraveled", "")\
                                 .str.replace("VehicleTrips", "")
-    data_df['sv'] = "Mean_" + data_df[
-        'sv_first_part'] + "_Household" + "_Weekday" + data_df[
-            'sv_last_part'] + "_" + data_df['urban_group']
+    data_df['sv'] = data_df['measuredProperty'] + "_Household" + data_df[
+        'householdSize_numberOfVehicles'] + "_" + data_df[
+            'urban_group'] + "_EveryWeekday_" + "Mean"
     return data_df
+
+
+# pylint: enable=line-too-long
 
 
 def _additional_process_2017(data_df: pd.DataFrame) -> pd.DataFrame:
@@ -212,39 +253,44 @@ def _generate_mcf(sv_list: list, mcf_file_path: str) -> None:
         mcf_file_path (str): Output MCF File Path
     """
     mcf_nodes = []
+    dcid_nodes = {}
     for sv in sv_list:
         pvs = []
-        name_pv = []
         dcid = sv
         sv_prop = [prop.strip() for prop in sv.split("_")]
+        sv_pvs = deepcopy(DEFAULT_SV_PROP)
         for prop in sv_prop:
             if prop in [
-                    "PersonMiles", "PersonTrips", "VehicleTrips", "VehicleMiles"
+                    "PersonMilesTraveled", "PersonTrips", "VehicleTrips",
+                    "VehicleMilesTraveled"
             ]:
                 prop = prop[0].lower() + prop[1:]
                 pvs.append(f"measuredProperty: dcs:{prop}")
-                name_pv.append(f"{prop}")
+                sv_pvs["measuredProperty"] = f"dcs:{prop}"
             elif prop in [
                     "1Person", "2Person", "3Person", "4Person", "5Person"
             ]:
                 pv = HOUSEHOLD_PV.format(person=prop.replace('Person', ''))
                 pvs.append(f"householdSize: {pv}")
-                name_pv.append(f"{prop}")
+                sv_pvs["householdSize"] = f"{pv}"
             elif "AvailableVehicles" in prop:
                 prop = prop.replace("With", "")\
                     .replace("AvailableVehicles", "")
                 pv = NUM_OF_VEHICLES_PV.format(vehicle=prop)
                 pvs.append(f"numberOfVehicles: {pv}")
-                name_pv.append(f"{prop}")
+                sv_pvs["numberOfVehicles"] = f"{pv}"
             elif prop in ["Urban", "Rural", "SemiUrban"]:
                 pvs.append(f"placeOfResidenceClassification: dcs:{prop}")
-                name_pv.append(f"{prop}")
-        mcf_nodes.append(MCF_TEMPLATE.format(dcid=dcid,
-                                             xtra_pvs='\n'.join(pvs)))
+                sv_pvs["placeOfResidenceClassification"] = f"dcs:{prop}"
+        resolved_dcid = get_statvar_dcid(sv_pvs)
+        dcid_nodes[dcid] = resolved_dcid
+        mcf_nodes.append(
+            MCF_TEMPLATE.format(dcid=resolved_dcid, xtra_pvs='\n'.join(pvs)))
     mcf = '\n'.join(mcf_nodes)
     # Writing Genereated MCF to local path.
     with open(mcf_file_path, 'w+', encoding='utf-8') as f_out:
         f_out.write(mcf.rstrip('\n'))
+    return dcid_nodes
 
 
 def _generate_tmcf(tmcf_file_path: str) -> None:
@@ -276,11 +322,13 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
         data_df = data_df.dropna(subset=["observation"])
         final_df = pd.concat([final_df, data_df[final_cols]])
         sv_list += data_df["sv"].to_list()
-    final_df.to_csv(cleaned_csv_file_path, index=False)
+    final_df = _promote_measurement_method(final_df)
     sv_list = list(set(sv_list))
     sv_list.sort()
-    _generate_mcf(sv_list, mcf_file_path)
+    updated_sv = _generate_mcf(sv_list, mcf_file_path)
+    final_df["sv"] = final_df["sv"].map(updated_sv)
     _generate_tmcf(tmcf_file_path)
+    final_df.to_csv(cleaned_csv_file_path, index=False)
 
 
 def main(_):

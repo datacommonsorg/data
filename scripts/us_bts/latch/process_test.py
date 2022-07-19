@@ -46,20 +46,20 @@ class TestProcess(unittest.TestCase):
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            _CLEANED_CSV_FILE_PATH = os.path.join(tmp_dir, "data.csv")
-            _MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
-            _TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
+            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
+            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
+            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            process(self.ip_data, _CLEANED_CSV_FILE_PATH, _MCF_FILE_PATH,
-                    _TMCF_FILE_PATH)
+            process(self.ip_data, cleaned_csv_file_path, mcf_file_path,
+                    tmcf_file_path)
 
-            with open(_MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
+            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                 self._actual_mcf_data = mcf_file.read()
 
-            with open(_TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
+            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
                 self._actual_tmcf_data = tmcf_file.read()
 
-            with open(_CLEANED_CSV_FILE_PATH, encoding="UTF-8") as csv_file:
+            with open(cleaned_csv_file_path, encoding="UTF-8") as csv_file:
                 self._actual_csv_data = csv_file.read()
 
     def test_csv_mcf_tmcf_files(self):

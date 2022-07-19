@@ -26,7 +26,7 @@ from absl import app, flags
 # For import common.download
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
-from common import download
+from download import download_file
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
@@ -109,7 +109,7 @@ def download_files(download_directory: str) -> None:
     """
     # List to provide the URLs of input files to download script.
     input_urls = _STATES_2009_URLS + _STATES_2017_URLS
-    download.download_file(input_urls, download_directory)
+    download_file(input_urls, download_directory)
 
 
 def main(_):

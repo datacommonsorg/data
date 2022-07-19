@@ -1,3094 +1,3094 @@
-Node: dcid:Mean_PersonMiles_Household_Weekday_Rural
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_Urban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_5Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With0AvailableVehicles_5Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_1Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_1Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_1Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_2Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_2Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_2Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_3Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_3Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_3Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_4Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_4Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_4Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_5Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_5Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With1AvailableVehicles_5Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 1]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_1Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_1Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_1Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_2Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_2Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_2Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_3Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_3Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_3Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_4Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_4Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_4Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_5Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_5Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With2AvailableVehicles_5Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 2]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_1Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_1Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_1Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_2Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_2Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_2Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_3Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_3Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_3Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_4Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_4Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_4Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_5Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_5Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With3AvailableVehicles_5Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 3]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_1Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_1Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_1Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_2Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_2Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_2Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_3Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_3Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_3Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_4Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_4Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_4Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_5Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_5Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonMiles_Household_Weekday_With4AvailableVehicles_5Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personMiles
-numberOfVehicles: [AvailableVehicles 4]
-householdSize: [Person 5]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_1Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_1Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_1Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 1]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_2Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_2Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_2Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 2]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_3Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_3Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_3Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 3]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_4Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Rural
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_4Person_SemiUrban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:SemiUrban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_4Person_Urban
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
-numberOfVehicles: [AvailableVehicles 0]
-householdSize: [Person 4]
-placeOfResidenceClassification: dcs:Urban
-
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_5Person_Rural
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Household
-statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:personTrips
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With0AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With1AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With1AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With1AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With1AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With1AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With1AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With1AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With1AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With1AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With1AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With1AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With1AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With1AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With1AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With1AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 1]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With2AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With2AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With2AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With2AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With2AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With2AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With2AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With2AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With2AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With2AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With2AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With2AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With2AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With2AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With2AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 2]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With3AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With3AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With3AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With3AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With3AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With3AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With3AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With3AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With3AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With3AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With3AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With3AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With3AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With3AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With3AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 3]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With4AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With4AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With4AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With4AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With4AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With4AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With4AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With4AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With4AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With4AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With4AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With4AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With4AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With4AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With4AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personMilesTraveled
+numberOfVehicles: [AvailableVehicles 4]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With0AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With0AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With0AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 1]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With0AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With0AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With0AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 2]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With0AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With0AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With0AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 3]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With0AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With0AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:SemiUrban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With0AvailableVehicles_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 4]
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With0AvailableVehicles_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:personTrips
+numberOfVehicles: [AvailableVehicles 0]
+householdSize: [Person 5]
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With0AvailableVehicles_SemiUrban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:meanValue
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With0AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With2AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With3AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_PersonTrips_Household_Weekday_With4AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With0AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With1AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With2AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With3AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleMiles_Household_Weekday_With4AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
-measuredProperty: dcs:vehicleMiles
+measurementQualifier: dcs:EveryWeekday
+measuredProperty: dcs:vehicleMilesTraveled
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With0AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With0AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With0AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With0AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 0]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With1AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With1AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With1AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With1AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 1]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With2AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With2AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With2AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With2AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 2]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With3AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With3AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With3AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With3AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 3]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_1Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_1Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_1Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 1]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_2Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_2Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_2Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 2]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_3Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_3Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_3Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 3]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_4Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_4Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_4Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 4]
 placeOfResidenceClassification: dcs:Urban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_5Person_Rural
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With4AvailableVehicles_Rural
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:Rural
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_5Person_SemiUrban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With4AvailableVehicles_SemiUrban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 5]
 placeOfResidenceClassification: dcs:SemiUrban
 
-Node: dcid:Mean_VehicleTrips_Household_Weekday_With4AvailableVehicles_5Person_Urban
+Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With4AvailableVehicles_Urban
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Household
 statType: dcs:meanValue
-measurementQualifier:  dcs:Weekday
+measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
 numberOfVehicles: [AvailableVehicles 4]
 householdSize: [Person 5]
