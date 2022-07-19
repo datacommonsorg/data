@@ -21,40 +21,38 @@ The actual URLs are listed in download_input_files.py.
 These are the attributes that we will use
 | Attribute      					| Description                                                 				|
 |-------------------------------------------------------|---------------------------------------------------------------------------------------|
-| time       					| The Year of the population estimates provided. 				|
-| geo       					| The Area of the population estimates provided. 				|
-| bmi                           | Different BMI levels
-| Educational Attainment level   	| The level of education of the population.  |
-| Sex   				| Gender either Male or Female. 							|
-| Income Quintile 				| The slab of income of the population.						|
-| Degree of Urbanisation   				| The type of residence (rural/urban/semiurban) of the population.					|
-| Country of Birth   				| The nativity of the population.						|
-| Country of Citizenship   				| The citizenship of the population.						|
-| Degree of Activity Limitation   				|  Different Activity Levels							|
-
+| geo code, geoid      					| The Area of the population estimates provided. 				|
+| est_pmiles2007_11, est_pmiles                         | Miles traveled by a Person.
+| est_ptrp2007_11, est_ptrp   	| Trips made by a Person.  |
+| est_vmiles2007_11, est_vmiles 				| Miles traveled by a Vehicle.					|
+| est_vtrp2007_11, est_vtrp 				| Trips made by a Vehicle. 							|
+| pmiles_(p)mem_(v)veh   				|  Miles traveled by a 'p' Persons in 'v' Vehicles.					|
+| ptrp_(p)mem_(v)veh   				|  Trips made by a 'p' Persons in 'v' Vehicles.					|
+| vmiles_(p)mem_(v)veh   				|  Miles traveled in 'v' Vehicles of 'p' Persons.							|
+| vtrp_(p)mem_(v)veh   				|  Trips made in 'v' Vehicles of 'p' Persons.				|
 
 
 
 #### Cleaned Data
-Cleaned data will be inside [output_files/eurostat_population_bmi.csv] as a CSV file with the following columns.
+Cleaned data will be inside [output_files/us_transportation_household.csv] as a CSV file with the following columns.
 
-- time
-- geo
-- SV
-- Measurement_Method
+- year
+- location
+- sv
+- measurement_method
 - observation
 
 
 
 #### MCFs and Template MCFs
-- [output_files/eurostat_population_bmi.mcf]
-- [output_files/eurostat_population_bmi.tmcf]
+- [output_files/us_transportation_household.mcf]
+- [output_files/us_transportation_household.tmcf]
 
 ### Running Tests
 
 Run the test cases
 
-`/bin/python3 -m unittest scripts/eurostat/health_determinants/bmi/process_test.py`
+`/bin/python3 -m unittest scripts/us_bts/latch/process_test.py`
 
 
 
@@ -63,8 +61,8 @@ Run the test cases
 
 The below script will download the data and saves to local folder **input_files**.
 
-`/bin/python3 scripts/eurostat/health_determinants/bmi/download_input_files.py`
+`/bin/python3 scripts/us_bts/latch/download_input_files.py`
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 
-`/bin/python3 scripts/eurostat/health_determinants/bmi/process.py`
+`/bin/python3 sscripts/us_bts/latch/process.py`
