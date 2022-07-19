@@ -12,9 +12,8 @@ includes local-id references to contained-in places.
 
 For sample input/output CSVs, see the `.csv` files in `place_name_resolver/testdata` directory.
 
-NOTE: If the `--generate_place_id` is set, then in place of DCIDs, Maps placeIDs
-are returned. This is useful when you cannot access the GCS bucket storing the
-placeID to DCID map.
+NOTE: If the `--generate_place_id` is set, then in place of DCIDs, placeIDs
+are returned.
 
 ## Usage
 
