@@ -20,9 +20,8 @@ import urllib.request
 import zipfile
 import shutil
 
-from numpy import source
-
 _DOWNLOAD_PATH = os.path.join(os.path.dirname((__file__)), 'input_files')
+
 
 def download_files() -> None:
     """
@@ -47,7 +46,6 @@ def download_files() -> None:
     os.chdir(_DOWNLOAD_PATH)
     for url in INPUT_URLS:
         year = url.split("/")[5]
-        print(year)
         # Download and unzip files.
         zip_path, _ = urllib.request.urlretrieve(url)
         zipdata = zipfile.ZipFile(zip_path)
@@ -56,13 +54,16 @@ def download_files() -> None:
             # This will do the renaming
             zipinfo.filename = year + '_' + zipinfo.filename
             zipdata.extract(zipinfo)
-    # Move files in specific folders to input_files
-    folders = ['2014_2014neiv2_onroad_byregions','2008_2008neiv3_onroad_byregions']
-    for folder in folders:    
-        files = os.listdir(os.path.join(_DOWNLOAD_PATH,folder))
+    # Move files in specific folders to input_files folder
+    folders = [
+        '2014_2014neiv2_onroad_byregions', '2008_2008neiv3_onroad_byregions'
+    ]
+    for folder in folders:
+        files = os.listdir(os.path.join(_DOWNLOAD_PATH, folder))
         for file in files:
-            file_name = os.path.join(_DOWNLOAD_PATH,folder,file)
+            file_name = os.path.join(_DOWNLOAD_PATH, folder, file)
             shutil.move(file_name, _DOWNLOAD_PATH)
+        os.rmdir(os.path.join(_DOWNLOAD_PATH, folder))
 
     files = os.listdir(_DOWNLOAD_PATH)
     # Delete metadata files present in the folder.
