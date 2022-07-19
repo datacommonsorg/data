@@ -52,7 +52,7 @@ _TMCF_TEMPLATE = (
     "observationAbout: C:population_estimate_sex->geo_ID\n"
     "observationDate: C:population_estimate_sex->Year\n"
     "observationPeriod: \"P1Y\"\n"
-    "value: C:population_estimate_sex->observation\n")
+    "value: C:population_estimate_sex->Observation\n")
 
 _COLUMNS_TO_SUM = [
     'Under 5 years', '5 to 9 years', '10 to 14 years', '15 to 19 years',
@@ -920,7 +920,7 @@ class PopulationEstimateBySex:
             id_vars=["Year", "geo_ID", "Measurement_Method"],
             value_vars=['Count_Person_Male', 'Count_Person_Female'],
             var_name="SV",
-            value_name="observation")
+            value_name="Observation")
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = ['Count_Person_Female', 'Count_Person_Male']
         self._generate_mcf(sv_list)

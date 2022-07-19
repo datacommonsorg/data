@@ -1,4 +1,4 @@
-Year,geo_ID,Measurement_Method,SV,observation
+Year,geo_ID,Measurement_Method,SV,Observation
 1980,country/USA,dcAggregate/CensusPEPSurvey_PartialAggregate,Count_Person_Male,1874613
 1980,geoId/01,dcAggregate/CensusPEPSurvey_PartialAggregate,Count_Person_Male,1874613
 1981,country/USA,dcAggregate/CensusPEPSurvey_PartialAggregate,Count_Person_Male,1882346
