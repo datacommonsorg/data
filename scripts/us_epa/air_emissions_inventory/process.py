@@ -23,6 +23,12 @@ from absl import app, flags
 import pandas as pd
 import numpy as np
 
+sys.path.insert(
+    1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+
+# pylint: disable=import-error
+from util.statvar_dcid_generator import get_statvar_dcid
+
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
@@ -197,8 +203,8 @@ def _state_emissions(file_path: str) -> pd.DataFrame:
     df = df.drop(columns=['State FIPS', 'State', 'Tier 1 Code'])
     df = _replace_pollutant(df, 'Pollutant')
     df = _replace_source_category(df, 'Tier 1 Description')
-    df['SV'] = 'Amount_Annual_Emissions_' + df['Tier 1 Description'] +\
-            '_NonBiogenic_' + df['Pollutant']
+    df['SV'] = 'Annual_Amount_Emissions_' + df['Tier 1 Description'] +\
+            '_NonBiogenicEmissionSource_CriteriaAirPollutants_' + df['Pollutant']
     df = df.drop(columns=['Tier 1 Description', 'Pollutant'])
     # Changing the years present as columns into row values.
     df = df.melt(id_vars=['SV', 'geo_Id'],
@@ -256,8 +262,8 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
         df['pollutant'] = sheet
         df = _replace_pollutant(df, 'pollutant')
         df = _replace_source_category(df, 'Source Category')
-        df['SV'] = 'Amount_Annual_Emissions_' + df['Source Category'] +\
-                '_NonBiogenic_' + df['pollutant']
+        df['SV'] = 'Annual_Amount_Emissions_' + df['Source Category'] +\
+                '_NonBiogenicEmissionSource_CriteriaAirPollutants_' + df['pollutant']
         df = df.drop(columns=['Source Category', 'pollutant'])
         # Changing the years present as columns into row values.
         df = df.melt(id_vars=['SV'], var_name='year', value_name='observation')
@@ -307,26 +313,46 @@ class USAirPollutionEmissionTrends:
             df_cols (list) : List of DataFrame Columns
 
         Returns:
-            None
+            sv_replacement (dict) : Dictionary to replace SV names 
+                                    with SV generator names
         """
 
         final_mcf_template = ""
+        sv_replacement = {}
+        sv_checker = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Emissions",
+            "emissionSourceType": "dcs:NonBiogenicEmissionSource",
+            "measurementQualifier": "dcs:Annual",
+            "emissionType": "dcs:CriteriaAirPollutants",
+            "statType": "dcs:measuredValue",
+            "measuredProperty": "dcs:amount"
+        }
         for sv in sv_list:
             sv_property = sv.split("_")
-            if ("OtherIndustrialProcesses" in sv_property[-3] or
-                    "MiscellaneousEmissionSource" in sv_property[-3] or
-                    "FuelCombustionOther" in sv_property[-3]):
-                source = ('\nemissionSource: dcs:' + sv_property[-4] + "_" +
-                          sv_property[-3])
+            if ("OtherIndustrialProcesses" in sv_property[-4] or
+                    "MiscellaneousEmissionSource" in sv_property[-4] or
+                    "FuelCombustionOther" in sv_property[-4]):
+                source = ('\nemissionSource: dcs:' + sv_property[-5] + "_" +
+                          sv_property[-4])
+                sv_checker['emissionSource'] = 'dcs:' + sv_property[
+                    -5] + "_" + sv_property[-4]
             else:
-                source = '\nemissionSource: dcs:' + sv_property[-3]
+                source = '\nemissionSource: dcs:' + sv_property[-4]
+                sv_checker['emissionSource'] = sv_property[-4]
             pollutant = '\nemittedThing: dcs:' + sv_property[-1]
+            sv_checker['emittedThing'] = 'dcs:' + sv_property[-1]
+
+            generated_sv = get_statvar_dcid(sv_checker)
+            if (generated_sv != sv):
+                sv_replacement[sv] = generated_sv
             final_mcf_template += _MCF_TEMPLATE.format(
-                pv1=sv, pv2=source, pv3=pollutant) + "\n"
+                pv1=generated_sv, pv2=source, pv3=pollutant) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
+        return sv_replacement
 
     def process(self):
         """
@@ -364,11 +390,13 @@ class USAirPollutionEmissionTrends:
             by=['geo_Id', 'year', 'SV', 'observation'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
-        final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
-        self._generate_mcf(sv_list)
+        sv_replacement = self._generate_mcf(sv_list)
         self._generate_tmcf()
+        final_df.loc[:, ('SV')] = final_df['SV'].replace(sv_replacement,
+                                                         regex=True)
+        final_df.to_csv(self._cleaned_csv_file_path, index=False)
 
 
 def main(_):
