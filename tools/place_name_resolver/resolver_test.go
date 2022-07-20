@@ -7,10 +7,22 @@ import (
 	"testing"
 )
 
-type MockPlaceId2Dcid struct{}
+type MockResolveApi struct{}
 
-func (m *MockPlaceId2Dcid) Read() ([]byte, error) {
-	return ioutil.ReadFile("testdata/placeid2dcid.json")
+func (m *MockResolveApi) Resolve(req *resolveReq) (*resolveResp, error) {
+	mockResp := &resolveResp{
+		Entities: []resolveRespEntity{
+			resolveRespEntity{
+				InId:   "ChIJwe1EZjDG5zsRaYxkjY_tpF0",
+				OutIds: []string{"wikidataId/Q1156"},
+			},
+			resolveRespEntity{
+				InId:   "ChIJkbeSa_BfYzARphNChaFPjNc",
+				OutIds: []string{"country/IND"},
+			},
+		},
+	}
+	return mockResp, nil
 }
 
 type MockMapsClient struct {
@@ -69,7 +81,7 @@ func TestMain(t *testing.T) {
 		{"input_containment.csv", "expected_output_containment.csv", "actual_output_containment.csv", getMockGeocodesContainment()},
 	}
 	for _, t := range table {
-		err := resolvePlacesByName("testdata/"+t.in, "testdata/"+t.got, false, &MockPlaceId2Dcid{}, t.mapCli)
+		err := resolvePlacesByName("testdata/"+t.in, "testdata/"+t.got, false, &MockResolveApi{}, t.mapCli)
 		if err != nil {
 			log.Fatal(err)
 		}
