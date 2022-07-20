@@ -43,7 +43,7 @@ Cleaned data will be inside [output/airpollution_emission_trends_tier1.csv] as a
 
 Run the test cases
 
-`python3 -m unittest process_test.py`
+`run_tests.sh -p scripts/us_epa/airpollution/`
 
 
 ### Import Procedure

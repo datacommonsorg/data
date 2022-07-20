@@ -26,7 +26,6 @@ import numpy as np
 sys.path.insert(
     1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
 
-# pylint: disable=import-error
 from util.statvar_dcid_generator import get_statvar_dcid
 
 FLAGS = flags.FLAGS
