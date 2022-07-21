@@ -36,30 +36,30 @@ class TestProcess(unittest.TestCase):
     It will generate and test CSV, MCF and TMCF files for given test input files
     and comapre it with expected results.
     """
-    test_data_files = os.listdir(_TEST_DATASET_DIR)
-    ip_data = [
+    TEST_DATA_FILES = os.listdir(_TEST_DATASET_DIR)
+    IP_DATA = [
         os.path.join(_TEST_DATASET_DIR, file_name)
-        for file_name in test_data_files
+        for file_name in TEST_DATA_FILES
     ]
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+            self.cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
+            self.mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
+            self.tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            process(self.ip_data, cleaned_csv_file_path, mcf_file_path,
-                    tmcf_file_path)
+            process(self.IP_DATA, self.cleaned_csv_file_path,
+                    self.mcf_file_path, self.tmcf_file_path)
 
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+            with open(self.mcf_file_path, encoding="UTF-8") as mcf_file:
                 self._actual_mcf_data = mcf_file.read()
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+            with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
                 self._actual_tmcf_data = tmcf_file.read()
 
-            with open(cleaned_csv_file_path, encoding="UTF-8") as csv_file:
+            with open(self.cleaned_csv_file_path, encoding="UTF-8") as csv_file:
                 self._actual_csv_data = csv_file.read()
 
     def test_csv_mcf_tmcf_files(self):

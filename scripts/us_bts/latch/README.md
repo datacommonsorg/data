@@ -1,4 +1,4 @@
-# EuroStat: Health Determinants based on BMI
+# US Latch: Transportation Statictics for Household
 
 ## About the Dataset
 This dataset has US Tract Transportation Statistics for Household for years 2009,2017.
@@ -52,7 +52,7 @@ Cleaned data will be inside [output_files/us_transportation_household.csv] as a 
 
 Run the test cases
 
-`/bin/python3 -m unittest scripts/us_bts/latch/process_test.py`
+`sh run_tests.sh -p /scripts/us_bts/latch`
 
 
 
@@ -61,8 +61,8 @@ Run the test cases
 
 The below script will download the data and saves to local folder **input_files**.
 
-`/bin/python3 scripts/us_bts/latch/download_input_files.py`
+`python3 scripts/us_bts/latch/download_input_files.py`
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 
-`/bin/python3 sscripts/us_bts/latch/process.py`
+`python3 sscripts/us_bts/latch/process.py`

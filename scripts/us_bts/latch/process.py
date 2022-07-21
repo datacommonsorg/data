@@ -23,11 +23,12 @@ Folder information
 input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
 """
-
-from copy import deepcopy
+from asyncio.log import logger
 import os
 import sys
 import re
+
+from copy import deepcopy
 import pandas as pd
 import numpy as np
 from absl import app, flags
@@ -41,7 +42,7 @@ from constants import (TMCF_TEMPLATE, MCF_TEMPLATE, INCOMPLETE_ACS,
                        CONF_2009_FILE, CONF_2017_FILE, ACS_LT_MOR,
                        DEFAULT_SV_PROP)
 
-sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
+sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
 # pylint: disable=import-error
 from statvar_dcid_generator import get_statvar_dcid
@@ -61,10 +62,10 @@ def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
     measurement methods for same year and place.
 
     Args:
-        data_df (pd.DataFrame): _description_
+        data_df (pd.DataFrame): Input DataFrame
 
     Returns:
-        pd.DataFrame: _description_
+        pd.DataFrame: DataFrame
     """
     acs_survey_df = data_df[
         data_df["measurement_method"] ==
@@ -244,17 +245,17 @@ def _process_household_transportation(input_file: str,
     return data_df
 
 
-def _generate_mcf(sv_list: list, mcf_file_path: str) -> None:
+def _generate_mcf(sv_names: list, mcf_file_path: str) -> None:
     """
     This method generates MCF file w.r.t
     dataframe headers and defined MCF template
     Args:
-        sv_list (list): List of Statistical Variables
+        sv_names (list): List of Statistical Variables
         mcf_file_path (str): Output MCF File Path
     """
     mcf_nodes = []
     dcid_nodes = {}
-    for sv in sv_list:
+    for sv in sv_names:
         pvs = []
         dcid = sv
         sv_prop = [prop.strip() for prop in sv.split("_")]
@@ -312,7 +313,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     """
     final_cols = ["year", "location", "sv", "observation", "measurement_method"]
     final_df = pd.DataFrame()
-    sv_list = []
+    sv_names = []
     for file_path in input_files:
         if "latch_2017-b" in file_path:
             conf = CONF_2017_FILE
@@ -321,11 +322,11 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
         data_df = _process_household_transportation(file_path, conf)
         data_df = data_df.dropna(subset=["observation"])
         final_df = pd.concat([final_df, data_df[final_cols]])
-        sv_list += data_df["sv"].to_list()
+        sv_names += data_df["sv"].to_list()
     final_df = _promote_measurement_method(final_df)
-    sv_list = list(set(sv_list))
-    sv_list.sort()
-    updated_sv = _generate_mcf(sv_list, mcf_file_path)
+    sv_names = list(set(sv_names))
+    sv_names.sort()
+    updated_sv = _generate_mcf(sv_names, mcf_file_path)
     final_df["sv"] = final_df["sv"].map(updated_sv)
     _generate_tmcf(tmcf_file_path)
     final_df.to_csv(cleaned_csv_file_path, index=False)
@@ -333,20 +334,23 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
 
 def main(_):
     input_path = _FLAGS.input_path
-    ip_files = os.listdir(input_path)
+    try:
+        ip_files = os.listdir(input_path + "abcd")
+    except FileNotFoundError:
+        logger.error("Run the download.py script first.")
+        sys.exit(1)
     ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output_files")
+    output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    "output_files")
     # Creating Output Directory
-    if not os.path.exists(data_file_path):
-        os.mkdir(data_file_path)
+    if not os.path.exists(output_file_path):
+        os.mkdir(output_file_path)
     # Defining Output Files
-    cleaned_csv_path = data_file_path + os.sep + \
-        "us_transportation_household.csv"
-    mcf_path = data_file_path + os.sep + \
-        "us_transportation_household.mcf"
-    tmcf_path = data_file_path + os.sep + \
-        "us_transportation_household.tmcf"
+    cleaned_csv_path = os.path.join(output_file_path,
+                                    "us_transportation_household.csv")
+    mcf_path = os.path.join(output_file_path, "us_transportation_household.mcf")
+    tmcf_path = os.path.join(output_file_path,
+                             "us_transportation_household.tmcf")
     process(ip_files, cleaned_csv_path, mcf_path,\
         tmcf_path)
 
