@@ -132,6 +132,7 @@ COUNTY_MAP: dict = {
         "Northwest Arctic Borough": "geoId/02188",
         "Northwest Arctic": "geoId/02188",
         "Petersburg Borough": "geoId/02195",
+        "Petersburg Census Area": "geoId/02195",
         "Prince of Wales- Hyder Census Area": "geoId/02198",
         "Prince of Wales-Hyder Census Area": "geoId/02198",
         "Prince of Wales-Outer Ketchikan Borough": "geoId/02201",
@@ -153,15 +154,15 @@ COUNTY_MAP: dict = {
         "Wade Hampton Census Area": "geoId/02270",
         "Wrangell City and Borough": "geoId/02275",
         "Wrangell-Petersburg Borough": "geoId/02280",
-        "Petersburg Census Area": "geoId/02280",
+        "Wrangell-Petersburg Borough": "geoId/02280",
         "Wrangell Borough": "geoId/0227586420",
         "Wrangell-Petersburg": "geoId/02280",
         "Yakutat Borough": "geoId/02282",
         "Yakutat": "geoId/02282",
         "Yakutat City and Borough": "geoId/02282",
         "Yukon-Koyukuk Borough": "geoId/02290",
-        "Yukon-Koyukuk": "geoId/02290",
-        "Yukon-Koyukuk Census Area": "geoId/02290"
+        "Yukon-Koyukuk Census Area": "geoId/02290",
+        "Yukon-Koyukuk": "geoId/02290"
     },
     "AZ": {
         "Apache County": "geoId/04001",
@@ -1324,6 +1325,7 @@ COUNTY_MAP: dict = {
         "Baltimore County": "geoId/24005",
         "Baltimore city": "geoId/24510",
         "Baltimore": "geoId/2404000",
+        "Baltimore city": "geoId/24510",
         "Calvert County": "geoId/24009",
         "Caroline County": "geoId/24011",
         "Carroll County": "geoId/24013",
@@ -1739,7 +1741,7 @@ COUNTY_MAP: dict = {
         "Wayne County": "geoId/29223",
         "Webster County": "geoId/29225",
         "Worth County": "geoId/29227",
-        "Wright County": "geoId/29229",
+        "Wright County": "geoId/29229"
     },
     "MT": {
         "Beaverhead County": "geoId/30001",
