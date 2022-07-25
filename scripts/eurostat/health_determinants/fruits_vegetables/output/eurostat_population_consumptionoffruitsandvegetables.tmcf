@@ -1,8 +1,0 @@
-Node: E:eurostat_population_consumptionoffruitsandvegetables->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: C:eurostat_population_consumptionoffruitsandvegetables->SV
-measurementMethod: C:eurostat_population_consumptionoffruitsandvegetables->Measurement_Method
-observationAbout: C:eurostat_population_consumptionoffruitsandvegetables->geo
-observationDate: C:eurostat_population_consumptionoffruitsandvegetables->time
-scalingFactor: 100
-value: C:eurostat_population_consumptionoffruitsandvegetables->observation

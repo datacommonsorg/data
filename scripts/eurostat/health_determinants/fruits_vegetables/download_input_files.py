@@ -35,8 +35,10 @@ def download_files(download_directory: str) -> None:
     """
     This Method calls the download function from the commons directory
     to download all the input files.
+
     Args:
         download_directory (str):Location where the files need to be downloaded.
+        
     Returns:
         None
     """

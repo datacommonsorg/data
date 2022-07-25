@@ -117,13 +117,13 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
         f_out.write(final_mcf_template.rstrip('\n'))
 
 
-_MODULE_DIR = "/Users/naizam/datacommons/data/scripts/eurostat/"+\
+_MODULE_DIR = "/Users/naizam/datacommons3/data/scripts/eurostat/"+\
 "health_determinants/fruits_vegetables/"
 _INPUT_MCF_FILE_PATH = os.path.join(
-    _MODULE_DIR, "output", "eurostat_population_consumptionoffruitsndvegetables.mcf")
+    _MODULE_DIR, "output", "eurostat_population_consumptionoffruitsandvegetables.mcf")
 _OUTPUT_MCF_FILE_PATH = os.path.join(
     _MODULE_DIR, "output",
-    "eurostat_population_consumptionoffruitsndvegetables_denominator.mcf")
+    "eurostat_population_consumptionoffruitsandvegetables_denominator.mcf")
 
 with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     mcf = mcf_file.read()
