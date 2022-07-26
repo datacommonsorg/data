@@ -43,11 +43,12 @@ def download_files(download_directory: str) -> None:
         None
     """
     # List of file to provide the URLs of input files to download script.
-    files = ['hlth_ehis_ss1e.tsv.gz', 'hlth_ehis_ss1u.tsv.gz',
-             'hlth_ehis_ic1e.tsv.gz', 'hlth_ehis_ic1u.tsv.gz',
-             'hlth_ehis_ss1b.tsv.gz', 'hlth_ehis_ss1c.tsv.gz',
-             'hlth_ehis_ss1d.tsv.gz'
-            ]
+    files = [
+        'hlth_ehis_ss1e.tsv.gz', 'hlth_ehis_ss1u.tsv.gz',
+        'hlth_ehis_ic1e.tsv.gz', 'hlth_ehis_ic1u.tsv.gz',
+        'hlth_ehis_ss1b.tsv.gz', 'hlth_ehis_ss1c.tsv.gz',
+        'hlth_ehis_ss1d.tsv.gz'
+    ]
     INPUT_URLS = ['https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/'+\
         'BulkDownloadListing?file=data/' + file for file in files]
     download.download_file(INPUT_URLS, download_directory)
