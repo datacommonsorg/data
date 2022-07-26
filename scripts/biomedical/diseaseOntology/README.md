@@ -44,11 +44,50 @@ This data is under a Creative Commons Public Domain Dedication [CC0 1.0 Universa
 
 #### Scripts
 
+##### Shell Script
+
+`download.sh`
+
+##### Python Script
+
 `format_disease_ontology.py`
 
-## Examples
+##### Test Script
 
-To generate the formatted csv file from owl:
+`format_disease_ontology_test.py`
+
+#### Files
+
+##### Test File
+
+`input_file.txt`
+
+`expected_output_file.txt`
+
+##### tMCF File
+
+`my_tmcf_file.tmcf`
+
+
+### Examples
+
+#### Run Tests
+
+To test format_refseq_chromosome_id_to_dcid.py run:
+
+```
+python format_disease_ontology.py input_file.owl expected_output.csv
+```
+
+#### Import
+
+1. Download data to scratch/.
+
+```
+bash download.sh
+```
+
+2. Clean and convert the downloaded Disease Ontology data into `.csv` format
 
 ```
 python format_disease_ontology.py humanDO.owl humanDO.csv
