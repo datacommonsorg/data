@@ -4,7 +4,7 @@
 
 - [Importing Medical Subject Headings (MeSH) data from NCBI](#importing-medical-subject-headings-mesh-data-from-ncbi)
   - [About the Dataset](#about-the-dataset)
-    - [Download URL](#download-url)
+    - [Download Data](#download-data)
     - [Overview](#overview)
     - [Notes and Caveats](#notes-and-caveats)
     - [License](#license)
@@ -25,7 +25,7 @@
 
 dbSNP previously accepted, maintained, and supported genetic variants from any and all organisms, however, this ended in December 2018. Now, it only supports new submissions for genetic variants in humans. We have included all human genetic variants from dbSNP in Data Commons supporting both genome assemblies hg19 and hg38.
 
-### Download URL
+### Download Data
 Data was downloaded as VCFs using the [FTP download](https://ftp.ncbi.nih.gov/snp/latest_release/VCF/) functionality. Files for both [hg19](https://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.25.gz) and [hg38](https://ftp.ncbi.nih.gov/snp/latest_release/VCF/GCF_000001405.38.gz) were downloaded, cleaned, and ingested. The current versions of the vcf files for both hg19 and hg38 assemblies can also be downloaded by running [`download.sh`](download.sh).
 
 In addition, to create the key to convert chromosome RefSeq IDs to the corresponding Chromosome dcids in the Biomedical Data Commons graph, data from [NCBI Assembly](https://www.ncbi.nlm.nih.gov/assembly) for [hg19](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.13_GRCh37/GCF_000001405.13_GRCh37_assembly_report.txt) and [hg38](https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26) as well as the most recent patches released for both [hg19](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.25_GRCh37.p13/GCF_000001405.25_GRCh37.p13_assembly_report.txt) and [hg38](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/GCF_000001405.40_GRCh38.p14_assembly_report.txt). Downloading and processing of the data to generate the mapping key as a text file is all accomplished by [`make_refseq_chromosome_to_dcid_key.sh`](make_refseq_chromosome_to_dcid_key.sh).
