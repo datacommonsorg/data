@@ -80,7 +80,7 @@ def _hlth_ehis_ss1e(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_lev_perc(df)
     df = _replace_sex(df)
     df = _replace_isced11(df)
-    df['SV'] = 'Percent_' + df['lev_perc'] + 'SocialSupport_In_Count_Person_'\
+    df['SV'] = 'Percent_Receiving' + df['lev_perc'] + 'SocialSupport_In_Count_Person_'\
         + df['isced11'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'isced11', 'lev_perc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
@@ -113,7 +113,7 @@ def _hlth_ehis_ss1u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_lev_perc(df)
     df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_' + df['lev_perc']+'SocialSupport_In_Count_Person_' +\
+    df['SV'] = 'Percent_Receiving' + df['lev_perc']+'SocialSupport_In_Count_Person_' +\
         df['deg_urb'] + '_' + df['sex']
     df.drop(columns=['lev_perc', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -141,7 +141,7 @@ def _hlth_ehis_ic1e(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_isced11(df)
     df['SV'] = 'Percent_' + 'AtLeastOnceAWeek_' + df['assist'] +\
-        '_In_Count_Person_' + df['isced11']+ '_' + df['sex']
+        'OrAssistance_In_Count_Person_' + df['isced11']+ '_' + df['sex']
     df.drop(columns=['unit', 'age', 'isced11', 'assist', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','geo'], var_name='time'\
             ,value_name='observation')
@@ -173,7 +173,7 @@ def _hlth_ehis_ic1u(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_assist(df)
     df['SV'] = 'Percent_' + 'AtLeastOnceAWeek_' + df['assist'] +\
-        '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
+        'OrAssistance_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'assist', 'deg_urb', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
             ,value_name='observation')
@@ -204,7 +204,7 @@ def _hlth_ehis_ss1b(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_lev_perc(df)
     df = _replace_sex(df)
     df = _replace_c_birth(df)
-    df['SV'] = 'Percent_'+ df['lev_perc'] +'SocialSupport_In_Count_Person_'\
+    df['SV'] = 'Percent_Receiving'+ df['lev_perc'] +'SocialSupport_In_Count_Person_'\
         +df['c_birth']+'_'+df['sex']
     df.drop(columns=['unit', 'age', 'c_birth', 'lev_perc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -236,7 +236,7 @@ def _hlth_ehis_ss1c(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_lev_perc(df)
     df = _replace_sex(df)
     df = _replace_citizen(df)
-    df['SV'] = 'Percent_' + df['lev_perc'] + 'SocialSupport_In_Count_Person_' +\
+    df['SV'] = 'Percent_Receiving' + df['lev_perc'] + 'SocialSupport_In_Count_Person_' +\
         df['citizen'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'citizen', 'lev_perc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV','time'], var_name='geo'\
@@ -268,7 +268,7 @@ def _hlth_ehis_ss1d(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_lev_perc(df)
     df = _replace_sex(df)
     df = _replace_lev_limit(df)
-    df['SV'] = 'Percent_' + df['lev_perc'] + 'SocialSupport_In_Count_Person_' +\
+    df['SV'] = 'Percent_Receiving' + df['lev_perc'] + 'SocialSupport_In_Count_Person_' +\
         df['lev_limit'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'lev_limit', 'lev_perc', 'sex'],
             inplace=True)
