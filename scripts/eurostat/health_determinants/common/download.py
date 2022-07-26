@@ -22,8 +22,10 @@ import urllib.request
 
 def download_file(input_urls: list, current_working_directory: str) -> None:
     """
-    Function to Download and Unzip the file provided in url
+    Function to Download and Unzip the file provided in url.
+
     Args: download_file_url: url of the file to be downloaded as a string
+    
     Returns: None
     """
     # This extracts the filename from the complete URL,

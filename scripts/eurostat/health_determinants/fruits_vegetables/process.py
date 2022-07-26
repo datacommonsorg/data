@@ -736,7 +736,7 @@ class EuroStatConsumptionOfFruitsandVegetables:
     def _generate_mcf(self, sv_list) -> None:
         """
        This method generates MCF file w.r.t
-       dataframe headers and defined MCF template
+       dataframe headers and defined MCF template.
 
         Args:
            df_cols (list) : List of DataFrame Columns

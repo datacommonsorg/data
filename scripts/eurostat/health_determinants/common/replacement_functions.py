@@ -12,7 +12,7 @@ def _replace_sex(df: pd.DataFrame) -> pd.DataFrame:
 
    Args: df (pd.DataFrame): df as the input, to change column values
 
-   Returns: df (pd.DataFrame): modified df as output
+   Returns: df (pd.DataFrame): modified df as output.
    """
     df = df.replace({'sex': {'F': 'Female', 'M': 'Male', 'T': 'Total'}})
     return df

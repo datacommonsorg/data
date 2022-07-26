@@ -54,9 +54,8 @@ class TestProcess(unittest.TestCase):
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            base = EuroStatConsumptionOfFruitsandVegetables(
-                self.ip_data, cleaned_csv_file_path, mcf_file_path,
-                tmcf_file_path)
+            base = EuroStatConsumptionOfFruitsandVegetables(self.ip_data,
+             cleaned_csv_file_path, mcf_file_path, tmcf_file_path)
             base.process()
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
@@ -97,7 +96,7 @@ class TestProcess(unittest.TestCase):
     def test_create_csv(self):
         """
         This method is required to test between output generated
-        preprocess script and expected output files like CSV
+        preprocess script and expected output files like CSV.
         """
         expected_csv_file_path = os.path.join(
             EXPECTED_FILES_DIR,
@@ -109,4 +108,4 @@ class TestProcess(unittest.TestCase):
             expected_csv_data = expected_csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(),
-                         self.actual_csv_data.strip())
+        self.actual_csv_data.strip())

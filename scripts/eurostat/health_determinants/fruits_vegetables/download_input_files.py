@@ -89,7 +89,7 @@ def download_files(download_directory: str) -> None:
         download_directory (str):Location where the files need to be downloaded.
 
     Returns:
-        None
+        None.
     """
     # List to provide the URLs of input files to download script.
 

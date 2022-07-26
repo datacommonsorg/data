@@ -23,7 +23,7 @@ from dcid_existance import check_dcid_existance
 def _generate_mcf(sv_list, mcf_file_path) -> None:
     """
     This method generates MCF file w.r.t
-    dataframe headers and defined MCF template
+    dataframe headers and defined MCF template.
 
     Args:
         sv_list (list) : List of DataFrame Columns
