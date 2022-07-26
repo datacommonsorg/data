@@ -20,7 +20,7 @@ The actual URLs are listed in input_files.py.
 
 
 #### API Output
-These are the attributes that we will use
+These are the attributes that we will use:
 | Attribute      					| Description                                                 				|
 |-------------------------------------------------------|---------------------------------------------------------------------------------------|
 | time       					| The Year of the population estimates provided. 				|
