@@ -974,6 +974,7 @@ class EuroStatConsumptionOfFruitsandVegetables:
 
 def main(_):
     input_path = FLAGS.input_path
+    input_path ='/Users/naizam/datacommons3/data/scripts/eurostat/health_determinants/fruits_vegetables/test_data/datasets'
     if not os.path.exists(input_path):
         os.mkdir(input_path)
     ip_files = os.listdir(input_path)
