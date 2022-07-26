@@ -5,38 +5,36 @@
 - [Importing the Disease Ontology (DO) data](#importing-the-disease-ontology-do-data)
   - [Table of Contents](#table-of-contents)
   - [About the Dataset](#about-the-dataset)
-    - [Download URL](#download-url)
+    - [Download Data](#download-data)
     - [Overview](#overview)
-    - [Schema Overview](#schema-overview)
     - [Notes and Caveats](#notes-and-caveats)
+    - [License](#license)
   - [About the import](#about-the-import)
     - [Artifacts](#artifacts)
       - [Scripts](#scripts)
+      - [Files](#files)
   - [Examples](#examples)
+    -[Run Tests](#run-tests)
+    -[Import](#import)
 
 ## About the Dataset
+[Disease Ontology](https://disease-ontology.org) (DO) is a standardized ontology for human disease that was developed "with the purpose of providing the biomedical community with consistent, reusable and sustainable descriptions of human disease terms, phenotype characteristics and related medical vocabulary disease concepts through collaborative efforts of biomedical researchers, coordinated by the University of Maryland School of Medicine, Institute for Genome Sciences.
 
-### Download URL
+The Disease Ontology semantically integrates disease and medical vocabularies through extensive cross mapping of DO terms to MeSH, ICD, NCI’s thesaurus, SNOMED and OMIM."
+
+### Download Data
 
 The human disease ontology data can be downloaded from their official github repository [here](https://www.vmh.life/#human/all). The data is in `.owl` format and had to be parsed into a `.csv` format (see [Notes and Caveats](#notes-and-caveats) for additional information on formatting).
 
 ### Overview
 
-The Disease Ontology database provides a standardized ontology for human diseases, for the purposes of consistency and reusability. It contains extensive cross mapping of DO terms to other databases, namely, MeSH, ICD, NCI’s thesaurus, SNOMED and OMIM. More information on the database can be found [here](https://disease-ontology.org).
-
-This directory stores the script used to convert the dataset obtained from DO into a modified version, for effective ingestion of data into the Data Commons knowledge graph.
-
-### Schema Overview
-
-The schema representing reaction, metabolite and microbiome data from VMH is defined in [DO.mcf](https://raw.githubusercontent.com/suhana13/ISB-project/main/combined_list.mcf) and [DO.mcf](https://raw.githubusercontent.com/suhana13/ISB-project/main/combined_list_enum.mcf).
-
-This dataset contains several instances of the class `Disease` and it has multiple properties namely, "parent", "diseaseDescription", "alternativeDOIDs", "diseaseSynonym", "commonName", "icdoID", "meshID", "nciID", "snowmedctusID", "umlscuiID", "icd10CMID", "icd9CMID", "orDOID", "gardID", "omimID", "efoID", "keggDiseaseID", and "medDraID"
+This directory stores the script used to download, clean, and convert the Disease Ontology data into a `.csv` format, which is ready for ingestion into the Data Commons knowledge graph alongside a `.tmcf` file that maps the `.csv` to the defined schema. In this import the data is ingested as [Disease](https://datacommons.org/browser/Disease) entities into the graph.
 
 ### Notes and Caveats
 
 The original format of the data was `.owl` and it was converted to a `.csv` file prior to ingestion into Data Commons.
 
-- ### License
+### License
 
 This data is under a Creative Commons Public Domain Dedication [CC0 1.0 Universal license](https://disease-ontology.org/resources/do-resources).
 
