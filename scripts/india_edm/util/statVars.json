@@ -31,14 +31,14 @@
 			"property": "Consumption",
 			"popType": "Fuel",
 			"consumingSector": "True",
-			"unit": "CubicMeter",
-			"scale": "1000000"
+			"unit": "MillionMetricStandardCubicMeters",
+			"scale": "1"
 		},
 		"GrossProduction_MMSCM_M": {
 			"property": "Generation",
 			"popType": "Fuel",
-			"unit": "CubicMeter",
-			"scale": "1000000"
+			"unit": "MillionMetricStandardCubicMeters",
+			"scale": "1"
 		},
 		"Qty_Tonne_Imports": {
 			"property": "Imports",
@@ -49,8 +49,8 @@
 		"GrossProduction_MMSCM": {
 			"property": "Generation",
 			"popType": "Fuel",
-			"unit": "CubicMeter",
-			"scale": "1000000"
+			"unit": "MillionMetricStandardCubicMeters",
+			"scale": "1"
 		}
 	},
 	"Oil": {

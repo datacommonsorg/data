@@ -337,7 +337,7 @@ class EnergyIndiaBase():
                 df = df.rename({statvar: 'value'}, axis=1)
 
                 # Values are multiplied by a scale factor mentioned in `util/statVars.json`
-                # Scale factors are taken from names of units in data files
+                # Scale factors are taken from names of columns in data files
                 df['value'] = df['value'] * int(
                     self.js_statvars[self.cat][statvar]['scale'])
 
