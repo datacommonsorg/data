@@ -92,6 +92,7 @@ def _update_headers(headers: list) -> list:
         short form                           full form
     pmiles_3mem_2veh      PersonMilesTraveled__With2AvailableVehicles_3Person
      vtrip_5mem_1veh     VehicleTripsTraveled__With1AvailableVehicles_5Person
+
     Args:
         headers (list): List of header values in short form
 
@@ -169,6 +170,7 @@ def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
 def _additional_process_2017(data_df: pd.DataFrame) -> pd.DataFrame:
     """
     Performs additional processing on data_df dataframe for the year 2017.
+
     Args:
         data_df (pd.DataFrame): Input DataFrame
 
@@ -197,6 +199,7 @@ def _process_household_transportation(input_file: str,
     """
     Returns the Cleaned DataFrame consists
     transportation household data for years 2009, 2017.
+
     Args:
         input_file (str): DataFrame having raw data
 
@@ -249,6 +252,7 @@ def _generate_mcf(sv_names: list, mcf_file_path: str) -> None:
     """
     This method generates MCF file w.r.t
     dataframe headers and defined MCF template
+
     Args:
         sv_names (list): List of Statistical Variables
         mcf_file_path (str): Output MCF File Path
@@ -298,6 +302,7 @@ def _generate_tmcf(tmcf_file_path: str) -> None:
     """
     This method generates TMCF file w.r.t
     dataframe headers and defined TMCF template.
+
     Args:
         tmcf_file_path (str): Output TMCF File Path
     """
@@ -329,17 +334,18 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     updated_sv = _generate_mcf(sv_names, mcf_file_path)
     final_df["sv"] = final_df["sv"].map(updated_sv)
     _generate_tmcf(tmcf_file_path)
+    final_df = final_df.sort_values(by=["year", "location", "sv"])
     final_df.to_csv(cleaned_csv_file_path, index=False)
 
 
 def main(_):
     input_path = _FLAGS.input_path
     try:
-        ip_files = os.listdir(input_path + "abcd")
+        ip_files = os.listdir(input_path)
     except FileNotFoundError:
         logger.error("Run the download.py script first.")
         sys.exit(1)
-    ip_files = [input_path + os.sep + file for file in ip_files]
+    ip_files = [os.path.join(input_path, file) for file in ip_files]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output_files")
     # Creating Output Directory

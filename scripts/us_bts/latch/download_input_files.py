@@ -34,62 +34,41 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
                     "Directory path where input files need to be downloaded")
 
-# pylint: disable=line-too-long
-_STATES_2009_URLS = [
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_AL.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_AK.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_AZ.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_AR.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_CA.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_CO.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_CT.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_DE.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_DC.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_FL.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_GA.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_HI.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_ID.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_IL.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_IN.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_IA.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_KS.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_KY.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_LA.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_ME.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_MD.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_MA.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_MI.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_MN.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_MS.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_MO.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_MT.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_ND.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_NE.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_NV.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_NH.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_NJ.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_NM.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_NY.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_NC.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_NC.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_OH.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_OK.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_OR.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_PA.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_RI.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_SC.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_SD.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_TN.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_TX.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_UT.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_VT.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_VA.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_WA.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_WV.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_WI.zip',
-    'https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_WY.zip'
+STATE_2009_BASE_URL = ('https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/'
+                       'subject_areas/national_household_travel_survey/')
+
+_STATE_2009_NAMES = [
+    'NHTS_2009_transfer_AL.zip', 'NHTS_2009_transfer_AK.zip',
+    'NHTS_2009_transfer_AZ.zip', 'NHTS_2009_transfer_AR.zip',
+    'NHTS_2009_transfer_CA.zip', 'NHTS_2009_transfer_CO.zip',
+    'NHTS_2009_transfer_CT.zip', 'NHTS_2009_transfer_DE.zip',
+    'NHTS_2009_transfer_DC.zip', 'NHTS_2009_transfer_FL.zip',
+    'NHTS_2009_transfer_GA.zip', 'NHTS_2009_transfer_HI.zip',
+    'NHTS_2009_transfer_ID.zip', 'NHTS_2009_transfer_IL.zip',
+    'NHTS_2009_transfer_IN.zip', 'NHTS_2009_transfer_IA.zip',
+    'NHTS_2009_transfer_KS.zip', 'NHTS_2009_transfer_KY.zip',
+    'NHTS_2009_transfer_LA.zip', 'NHTS_2009_transfer_ME.zip',
+    'NHTS_2009_transfer_MD.zip', 'NHTS_2009_transfer_MA.zip',
+    'NHTS_2009_transfer_MI.zip', 'NHTS_2009_transfer_MN.zip',
+    'NHTS_2009_transfer_MS.zip', 'NHTS_2009_transfer_MO.zip',
+    'NHTS_2009_transfer_MT.zip', 'NHTS_2009_transfer_ND.zip',
+    'NHTS_2009_transfer_NE.zip', 'NHTS_2009_transfer_NV.zip',
+    'NHTS_2009_transfer_NH.zip', 'NHTS_2009_transfer_NJ.zip',
+    'NHTS_2009_transfer_NM.zip', 'NHTS_2009_transfer_NY.zip',
+    'NHTS_2009_transfer_NC.zip', 'NHTS_2009_transfer_NC.zip',
+    'NHTS_2009_transfer_OH.zip', 'NHTS_2009_transfer_OK.zip',
+    'NHTS_2009_transfer_OR.zip', 'NHTS_2009_transfer_PA.zip',
+    'NHTS_2009_transfer_RI.zip', 'NHTS_2009_transfer_SC.zip',
+    'NHTS_2009_transfer_SD.zip', 'NHTS_2009_transfer_TN.zip',
+    'NHTS_2009_transfer_TX.zip', 'NHTS_2009_transfer_UT.zip',
+    'NHTS_2009_transfer_VT.zip', 'NHTS_2009_transfer_VA.zip',
+    'NHTS_2009_transfer_WA.zip', 'NHTS_2009_transfer_WV.zip',
+    'NHTS_2009_transfer_WI.zip', 'NHTS_2009_transfer_WY.zip'
 ]
-# pylint: enable=line-too-long
+
+_STATES_2009_URLS = [
+    STATE_2009_BASE_URL.format(state=state) for state in _STATE_2009_NAMES
+]
 
 _STATES_2017_URLS = [
     "https://www.bts.dot.gov/sites/bts.dot.gov/files/nhts2017/latch_2017-b.csv"
