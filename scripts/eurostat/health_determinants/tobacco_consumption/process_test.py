@@ -28,7 +28,6 @@ from process import EuroStatTobaccoConsumption
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
 EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
-OUTPUT_DATA_DIR = os.path.join(MODULE_DIR, "test_output_data")
 
 
 class TestProcess(unittest.TestCase):
@@ -56,22 +55,22 @@ class TestProcess(unittest.TestCase):
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+            CLEANED_CSV_FILE_PATH = os.path.join(tmp_dir, "data.csv")
+            MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
+            TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
 
             base = EuroStatTobaccoConsumption(self.ip_data,
-                                              cleaned_csv_file_path,
-                                              mcf_file_path, tmcf_file_path)
+                                              CLEANED_CSV_FILE_PATH,
+                                              MCF_FILE_PATH, TMCF_FILE_PATH)
             base.process()
 
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+            with open(MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+            with open(TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
                 self.actual_tmcf_data = tmcf_file.read()
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+            with open(CLEANED_CSV_FILE_PATH, encoding="utf-8-sig") as csv_file:
                 self.actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):

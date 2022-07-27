@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python Script Load the datasets, cleans it
-and generates cleaned CSV, MCF, TMCF file.
+The Python script loads the datasets, 
+cleans them and generates the cleaned CSV, MCF and TMCF file.
 """
 import os
 import sys
@@ -40,7 +40,7 @@ from util.alpha2_to_dcid import COUNTRY_MAP
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
-FLAGS = flags.FLAGS
+_FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
@@ -606,9 +606,6 @@ class EuroStatTobaccoConsumption:
             None
         """
         # pylint: disable=R0914
-        # pylint: disable=R0912
-        # pylint: disable=R0915
-
         final_mcf_template = ""
         for sv in sv_list:
             if "Total" in sv:
@@ -676,7 +673,7 @@ class EuroStatTobaccoConsumption:
                         prop.replace("Or","__")
                     sv_name = sv_name + prop + ", "
                 elif "Percentile" in prop:
-                    incomequin = "\nincome: ["+prop.replace("Percentile",\
+                    incomequin = "\nincome: ["+prop.replace("Percentile",
                         "").replace("IncomeOf","").replace("To"," ")+\
                             " Percentile]"
                     sv_name = sv_name + prop.replace("Of","Of ")\
@@ -724,8 +721,6 @@ class EuroStatTobaccoConsumption:
         with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
         # pylint: enable=R0914
-        # pylint: enable=R0912
-        # pylint: enable=R0915
 
     def process(self):
         """
@@ -735,7 +730,7 @@ class EuroStatTobaccoConsumption:
         Returns: None
         """
 
-        final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
+        final_df = pd.DataFrame(columns=['time','geo','SV','observation',
             'Measurement_Method'])
         # Creating Output Directory
         output_path = os.path.dirname(self.cleaned_csv_file_path)
@@ -747,7 +742,7 @@ class EuroStatTobaccoConsumption:
             print(file_path)
             df = pd.read_csv(file_path, sep='\t', header=0)
             file_name = file_path.split("/")[-1][:-4]
-            function_dict = {
+            tobbaco_consumption = {
                 "hlth_ehis_sk1b":
                     smoking_tobaccoproducts_county_of_birth,
                 "hlth_ehis_sk1c":
@@ -783,7 +778,7 @@ class EuroStatTobaccoConsumption:
                 "hlth_ehis_de5":
                     dsmokers_number_of_cigarettes_history_education_attainment_level
             }
-            df = function_dict[file_name](df)
+            df = tobbaco_consumption[file_name](df)
             # df['file_name'] = file_name
             df['SV'] = df['SV'].str.replace('_Total', '')
             # df["file_name"] = file_name_without_ext
@@ -791,7 +786,7 @@ class EuroStatTobaccoConsumption:
             sv_list += df["SV"].to_list()
 
         final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
-        final_df = final_df.drop_duplicates(subset=['time','geo','SV'],\
+        final_df = final_df.drop_duplicates(subset=['time','geo','SV'],
             keep='first')
         final_df['observation'] = final_df['observation'].astype(str)\
             .str.strip()
@@ -816,6 +811,14 @@ class EuroStatTobaccoConsumption:
         final_df = final_df.sort_values(by=['geo', 'SV'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
+        final_df = final_df.rename(
+            columns={
+                'time': 'Time',
+                'geo': 'Geo',
+                'SV': 'SV',
+                'observation': 'Observation',
+                'Measurement_Method': 'Measurement_Method'
+            })
         final_df.to_csv(self.cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
@@ -824,11 +827,11 @@ class EuroStatTobaccoConsumption:
 
 
 def main(_):
-    input_path = FLAGS.input_path
+    input_path = _FLAGS.input_path
     if not os.path.exists(input_path):
         os.mkdir(input_path)
     ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
+    ip_files = [os.path.join(input_path, file) for file in ip_files]
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "output")
     # Defining Output Files

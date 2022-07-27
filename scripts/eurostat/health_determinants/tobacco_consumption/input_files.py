@@ -45,45 +45,16 @@ def download_files(download_directory: str) -> None:
         None
     """
     # List to provide the URLs of input files to download script.
-    # pylint: disable=invalid-name
-    INPUT_URLS= [
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk1i.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk1e.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk1u.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk3e.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk3i.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk3u.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk4e.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk4u.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk1b.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk1c.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk2i.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk2e.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk5e.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_sk6e.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_de3.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_de4.tsv.gz",
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
-            "/BulkDownloadListing?file=data/hlth_ehis_de5.tsv.gz"
-    ]
+    files = ['hlth_ehis_sk1i.tsv.gz','hlth_ehis_sk1e.tsv.gz',
+    'hlth_ehis_sk1u.tsv.gz','hlth_ehis_sk3e.tsv.gz','hlth_ehis_sk3i.tsv.gz',
+    'hlth_ehis_sk3u.tsv.gz','hlth_ehis_sk4e.tsv.gz','hlth_ehis_sk4u.tsv.gz',
+    'hlth_ehis_sk1b.tsv.gz','hlth_ehis_sk1c.tsv.gz','hlth_ehis_sk2i.tsv.gz',
+    'hlth_ehis_sk2e.tsv.gz','hlth_ehis_sk5e.tsv.gz','hlth_ehis_sk6e.tsv.gz',
+    'hlth_ehis_de3.tsv.gz','hlth_ehis_de4.tsv.gz','hlth_ehis_de5.tsv.gz'] 
+    INPUT_URLS= ["https://ec.europa.eu/eurostat/estat-navtree-portlet-prod"+\
+            "/BulkDownloadListing?file=data/"+ file for file in files]
     download.download_file(INPUT_URLS, download_directory)
-    # # pylint: enable=invalid-name
+
 
 
 def main(_):

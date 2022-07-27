@@ -33,8 +33,8 @@ The actual URLs are listed in input_files.py.
 These are the attributes that will be used
 | Attribute      		                        | Description                                                   |
 |-------------------------------------------------------|---------------------------------------------------------------|
-| time       					| The Year of the population estimates provided. 	                |
-| geo       					| The Area of the population estimates provided. 			|
+| Time       					| The Year of the population estimates provided. 	                |
+| Geo       					| The Area of the population estimates provided. 			|
 | Tobacco Consumption  				| The type of Tobacco Consumption. 					|
 | Educational Attainment level   	| The level of education of the population.  |
 | Sex   				| Gender either Male or Female. 						|
@@ -50,11 +50,11 @@ These are the attributes that will be used
 #### Cleaned Data
 Cleaned data will be inside [output/eurostat_population_tobaccoconsumption.csv] as a CSV file with the following columns.
 
-- time
-- geo
+- Time
+- Geo
 - SV
 - Measurement_Method
-- observation
+- Observation
 
 
 
