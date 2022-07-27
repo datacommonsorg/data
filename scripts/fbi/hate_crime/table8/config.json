@@ -1,0 +1,96 @@
+{
+    "populationType": {
+        "total incidents": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "individual": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "victimType": "Person",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "business": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "victimType": "Business",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "government": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "victimType": "Government",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "religious organization": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "victimType": "ReligiousOrganization",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "society": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "victimType": "Society",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "other/unknown/multiple": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "victimType": "UCR_OtherVictimType__UCR_UnknownVictimType__MultipleVictimType",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "pvs": {
+        "Total": {},
+        "Single-Bias Incidents": {
+            "biasMotivation": "SingleBias"
+        },
+        "Race/Ethnicity/Ancestry": {
+            "biasMotivation": "RaceOrEthnicity"
+        },
+        "Race": {
+            "biasMotivation": "race"
+        },
+        "Ethnicity": {
+            "biasMotivation": "ethnicity"
+        },
+        "Ethnicity/National Origin": {
+            "biasMotivation": "ethnicity"
+        },
+        "Religion": {
+            "biasMotivation": "religion"
+        },
+        "Sexual Orientation": {
+            "biasMotivation": "sexualOrientation"
+        },
+        "Disability": {
+            "biasMotivation": "disabilityStatus"
+        },
+        "Gender": {
+            "biasMotivation": "gender"
+        },
+        "Gender Identity": {
+            "biasMotivation": "TransgenderOrGenderNonConforming"
+        },
+        "Multiple-Bias Incidents": {
+            "biasMotivation": "MultipleBias"
+        }
+    },
+    "dpv": []
+}

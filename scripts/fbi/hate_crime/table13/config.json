@@ -1,0 +1,127 @@
+{
+    "populationType": {
+        "r/e/a": {
+            "Node": "Count_CriminalIncidents_BiasMotivationRaceOrEthnicity_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "RaceOrEthnicity",
+            "observationPeriod": "P1Y",
+            "isQuarter": "False"
+        },
+        "religion": {
+            "Node": "Count_CriminalIncidents_BiasMotivationReligion_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "religion",
+            "observationPeriod": "P1Y",
+            "isQuarter": "False"
+        },
+        "sexual orientation": {
+            "Node": "Count_CriminalIncidents_BiasMotivationSexualOrientation_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "sexualOrientation",
+            "observationPeriod": "P1Y",
+            "isQuarter": "False"
+        },
+        "disability": {
+            "Node": "Count_CriminalIncidents_BiasMotivationDisabilityStatus_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "disabilityStatus",
+            "observationPeriod": "P1Y",
+            "isQuarter": "False"
+        },
+        "gender": {
+            "Node": "Count_CriminalIncidents_BiasMotivationGender_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "gender",
+            "observationPeriod": "P1Y",
+            "isQuarter": "False"
+        },
+        "gender identity": {
+            "Node": "Count_CriminalIncidents_BiasMotivationTransgenderOrGenderNonConforming_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "gender",
+            "targetedGender": "TransgenderOrGenderNonConforming",
+            "observationPeriod": "P1Y",
+            "isQuarter": "False"
+        },
+        "race": {
+            "Node": "Count_CriminalIncidents_BiasMotivationRace_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "race",
+            "observationPeriod": "P1Y",
+            "isQuarter": "False"
+        },
+        "ethnicity": {
+            "Node": "Count_CriminalIncidents_BiasMotivationEthnicity_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "biasMotivation": "ethnicity",
+            "observationPeriod": "P1Y",
+            "isQuarter": "False"
+        },
+        "1st quarter": {
+            "Node": "Count_CriminalIncidents_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "observationPeriod": "P3M",
+            "endingMonth": "03",
+            "isQuarter": "True"
+        }, 
+        "2nd quarter": {
+            "Node": "Count_CriminalIncidents_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "observationPeriod": "P3M",
+            "endingMonth": "06",
+            "isQuarter": "True"
+        }, 
+        "3rd quarter": {
+            "Node": "Count_CriminalIncidents_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "observationPeriod": "P3M",
+            "endingMonth": "09",
+            "isQuarter": "True"
+        },
+        "4th quarter": {
+            "Node": "Count_CriminalIncidents_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable",
+            "observationPeriod": "P3M",
+            "endingMonth": "12",
+            "isQuarter": "True"
+        }
+    },
+    "pvs": {},
+    "dpv": []
+}
