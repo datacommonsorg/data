@@ -105,31 +105,24 @@ def _save_data(_url: str, download_local_path: str) -> None:
                 df = pd.read_csv(_url, on_bad_lines='skip', names=cols)
             df.to_excel(download_local_path + os.sep + file_name,\
                 index=False,engine='xlsxwriter')
-        elif "co-est00int-alldata" in _url:
-            df = pd.read_csv(_url,
-                             on_bad_lines='skip',
-                             encoding='ISO-8859-1',
-                             low_memory=False)
-            df.to_csv(download_local_path + os.sep + file_name, index=False)
-        elif "CC-EST2020-ALLDATA" in _url:
+        elif "co-est00int-alldata" in _url or "CC-EST2020-ALLDATA" in _url:
             df = pd.read_csv(_url,
                              on_bad_lines='skip',
                              encoding='ISO-8859-1',
                              low_memory=False)
             df.to_csv(download_local_path + os.sep + file_name, index=False)
 
-    elif ".txt" in _url:
-        if "srh" in _url:
-            if "crh" in _url:
-                file_name = file_name.replace("crh", "USCounty")
-                df = pd.read_table(_url, index_col=False, engine='python')
-                df.to_csv(download_local_path + os.sep + file_name, index=False)
-            else:
-                cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                df = pd.read_table(_url,index_col=False,delim_whitespace=True\
-                    ,engine='python',skiprows=14,names=cols)
-                file_name = file_name.replace(".txt", ".csv")
-                df.to_csv(download_local_path + os.sep + file_name, index=False)
+    elif ".txt" in _url and "srh" in _url:
+        if "crh" in _url:
+            file_name = file_name.replace("crh", "USCounty")
+            df = pd.read_table(_url, index_col=False, engine='python')
+            df.to_csv(download_local_path + os.sep + file_name, index=False)
+        else:
+            cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            df = pd.read_table(_url,index_col=False,delim_whitespace=True\
+                ,engine='python',skiprows=14,names=cols)
+            file_name = file_name.replace(".txt", ".csv")
+            df.to_csv(download_local_path + os.sep + file_name, index=False)
 
     elif "xlsx" in _url:
         df = pd.read_excel(_url, skiprows=2, header=0)

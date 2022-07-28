@@ -64,8 +64,9 @@ def _clean_xls_file(df: pd.DataFrame, file: str) -> pd.DataFrame:
      According to dataset, origin=0, sex=0
      considered as they hold the total value.
     """
-    #index=0
     if "2020" in file:
+    # "2020" refers to the file name: "CC-EST2020" which carries a different 
+    # format hence, extra rows/columns needed to be dropped from the file.
         df.drop(df[df['ORIGIN'] != 0].index, inplace=True)
         df.drop(df[df['SEX'] != 0].index, inplace=True)
         df = df.drop(['STATE','DIVISION','SUMLEV','SEX','ORIGIN'\
@@ -87,9 +88,7 @@ def _clean_xls_file(df: pd.DataFrame, file: str) -> pd.DataFrame:
     df['Year'] = df['level_0'].str[-4:]
     df = df.drop(['level_0', 0, 1, 2, 3, 4, 5, 6], axis=1)
     df.columns = df.columns.str.replace('NAME', 'Geographic Area')
-    # print(df.columns)
     return df
-
 
 def _clean_xlsx_file(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -105,14 +104,11 @@ def _clean_xlsx_file(df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop(['Census', 'Estimates Base'], axis=1)
     df = df.drop([1], axis=0)
     df.drop(df.index[7:], inplace=True)
-    #print(df.columns)
     df['Unnamed: 0'] = df['Unnamed: 0'].str.replace(".", "")
     df['Geographic Area'] = 'United States'
 
     # it groups the df as per columns provided
     # performs the provided functions on the data
-
-
     df = df.groupby(['Geographic Area','Unnamed: 0']).sum()\
         .transpose().stack(0).reset_index()
     df.columns = df.columns.str.replace('level_0', 'Year')
@@ -129,7 +125,6 @@ def _clean_xlsx_file(df: pd.DataFrame) -> pd.DataFrame:
     df.columns = df.columns.str.replace('Asian', 'Asian Alone')
 
     df['Total'] = pd.to_numeric(df['Total'])
-    # print(df)
     return df
 
 
@@ -205,10 +200,6 @@ def _clean_county_80_xls_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
     df = df.groupby(['Year','geo_ID']).sum().\
         reset_index()
     df.drop(columns=['Total'], inplace=True)
-    # df.columns = df.columns.str.replace('White Alone',
-    #                                     'Count_Person_WhiteAlone')
-    # df.columns = df.columns.str.replace('Black or African American Alone',\
-    #         'Count_Person_BlackOrAfricanAmericanAlone')
     df_temp = pd.DataFrame()
     df_temp = pd.concat([df, df_temp])
     df_temp['geo_ID'] = "country/USA"
@@ -339,7 +330,6 @@ def _clean_county_20_csv_file(file_path: str) -> pd.DataFrame:
         (width=2, side="left", fillchar="0")
     df["COUNTY"] = df["COUNTY"].astype('str').str.pad\
         (width=3, side="left", fillchar="0")
-    # print(df)
     final_df = pd.DataFrame()
     for col in final_cols:
         if col == "Year":
@@ -348,7 +338,6 @@ def _clean_county_20_csv_file(file_path: str) -> pd.DataFrame:
             final_df[col] = "geoId/" + df["STATE"] + df["COUNTY"]
         else:
             final_df[col] = df.loc[:, cols_dict[col]].sum(axis=1).astype('int')
-    # print(final_df)
     return final_df
 
 
@@ -412,7 +401,6 @@ def _clean_county_2010_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     # drop unwanted columns
     df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
         inplace=True)
-    # print(df)
     df = df.loc[:, :'NAC_FEMALE']
     df['Year'] = df['YEAR']
     df.drop(columns=['YEAR'], inplace=True)
@@ -483,7 +471,6 @@ def _clean_csv2_file(df: pd.DataFrame) -> pd.DataFrame:
     df.columns = df.columns.str.replace('7', 'Total Asian & Pacific Islander')
 
     df["Geographic Area"] = [x.title() for x in df["Geographic Area"]]
-    #print(df)
     return df
 
 
@@ -698,7 +685,6 @@ class CensusUSAPopulationByRace:
         """
         df = None
         self.file_name = os.path.basename(file)
-        # print(file)
         if ".xls" in file:
             if "pe-19" in file:
                 df = pd.read_excel(file)
@@ -780,7 +766,6 @@ class CensusUSAPopulationByRace:
         if not os.path.exists(file_dir):
             os.mkdir(file_dir)
         df = _transform_df(df)
-        # print(df)
         if 'geo_ID' not in df.columns:
             df = _add_geo_id(df)
         if self.df is None:
@@ -831,7 +816,6 @@ class CensusUSAPopulationByRace:
         df_national_state_2000 = self.df[(self.df["Year"] >= 2000) &
                                          ((self.df["geo_ID"].str.len() <= 9) |
                                           (self.df["geo_ID"] == "country/USA"))]
-        # &(self.df["geo_ID"]=="country/USA")
         df_before_2000.to_csv(os.path.join(
             self.cleaned_csv_file_path,
             "USA_Population_Count_by_Race_before_2000.csv"),
@@ -852,25 +836,26 @@ class CensusUSAPopulationByRace:
         cleaned CSV file, MCF file and TMCF file.
         """
         for file in self.input_files:
-            print(file)
             df = self._load_data(file)
             self._transform_data(df)
-        # print(df)
         name = "USA_Population_Count_by_Race_before_2000"
         generator_df=pd.read_csv\
-            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_before_2000.csv"))
+            (os.path.join(self.cleaned_csv_file_path,
+                "USA_Population_Count_by_Race_before_2000.csv"))
         self._generate_mcf(generator_df.columns, name)
         self._generate_tmcf(generator_df.columns, name)
 
         name = "USA_Population_Count_by_Race_county_after_2000"
         generator_df=pd.read_csv\
-            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_county_after_2000.csv"))
+            (os.path.join(self.cleaned_csv_file_path,
+            "USA_Population_Count_by_Race_county_after_2000.csv"))
         self._generate_mcf(generator_df.columns, name)
         self._generate_tmcf(generator_df.columns, name)
 
         name = "USA_Population_Count_by_Race_National_state_2000"
         generator_df=pd.read_csv\
-            (os.path.join(self.cleaned_csv_file_path,"USA_Population_Count_by_Race_National_state_2000.csv"))
+            (os.path.join(self.cleaned_csv_file_path,
+            "USA_Population_Count_by_Race_National_state_2000.csv"))
         self._generate_mcf(generator_df.columns, name)
         self._generate_tmcf(generator_df.columns, name)
 
@@ -905,7 +890,6 @@ class CensusUSAPopulationByRace:
             mcf = mcf + mcf_template.format(col, race) + "\n"
 
         # Writing Genereated MCF to local path.
-        # suffix = _mcf_path(flag)
         suffix = name + ".mcf"
         with open(os.path.join(self.mcf_file_path,suffix),\
             'w+', encoding='utf-8') as f_out:
