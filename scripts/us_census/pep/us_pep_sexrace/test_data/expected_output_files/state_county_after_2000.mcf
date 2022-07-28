@@ -1,4 +1,4 @@
-Node: dcid:Count_Person_Male_WhiteAlone.
+Node: dcid:Count_Person_Male_WhiteAlone
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 race: dcs:WhiteAlone

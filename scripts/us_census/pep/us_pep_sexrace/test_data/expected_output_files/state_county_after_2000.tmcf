@@ -1,4 +1,4 @@
-Node: E:postprocess->E0.
+Node: E:postprocess->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Male_WhiteAlone
 measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
