@@ -210,7 +210,7 @@ def create_single_csv(output_files_names: list):
     return column_names
 
 
-def generate_mcf(statvar_names: list, flag1: int) -> None:
+def generate_mcf(statvar_names: list, flag: int) -> None:
     """
     This method generates 3 MCF file w.r.t
     dataframe headers and defined MCF template
@@ -222,7 +222,7 @@ def generate_mcf(statvar_names: list, flag1: int) -> None:
 
     Args:
         sv_names (list) : List of DataFrame Columns
-        flag1 (int) : flag value helps in generating
+        flag (int) : flag value helps in generating
         output files. Possible values are 1,2 and 3.
         1 - generate mcf for files which are processed as is
         2 - generate mcf for files which are having
@@ -261,19 +261,19 @@ measuredProperty: dcs:count
                 race = "race: dcs:" + prop + "\n"
         final_mcf_template += mcf_template.format(sv, race, gender) + "\n"
     # Writing Genereated MCF to local path.
-    if flag1 == 1:
+    if flag == 1:
         with open(_CODEDIR + "/output_files/final/" +
                   "national_before_2000.mcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
-    elif flag1 == 2:
+    elif flag == 2:
         with open(_CODEDIR + "/output_files/final/" +
                   "state_county_before_2000.mcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
-    elif flag1 == 3:
+    elif flag == 3:
         with open(_CODEDIR + "/output_files/final/" +
                   "state_county_after_2000.mcf",
                   'w+',
@@ -285,7 +285,7 @@ measuredProperty: dcs:count
             f_out.write(final_mcf_template.rstrip('\n'))
 
 
-def generate_tmcf(df_cols: list, flag2: int) -> None:
+def generate_tmcf(df_cols: list, flag: int) -> None:
     """
             This method generates 3 TMCF file w.r.t
     dataframe headers and defined TMCF template
@@ -297,7 +297,7 @@ def generate_tmcf(df_cols: list, flag2: int) -> None:
 
     Args:
         df_cols (list) : List of DataFrame Columns
-        flag2 (int) : flag value helps in generating
+        flag (int) : flag value helps in generating
         output files. Possible values are 1,2 and 3.
         1 - generate tmcf for files which are processed as is
         2 - generate tmcf for files which are having
@@ -327,19 +327,19 @@ value: C:postprocess->{}
             continue
         if "geo_ID" in cols:
             continue
-        if flag2 == 1:
+        if flag == 1:
             if cols.lower().endswith('male'):
                 measure = "dcAggregate/CensusPEPSurvey_PartialAggregate"
             elif cols.lower().endswith('nonwhite'):
                 measure = "CensusPEPSurvey_RaceUpto1999"
             else:
                 measure = "dcAggregate/CensusPEPSurvey_PartialAggregate_RaceUpto1999"
-        elif flag2 == 2:
+        elif flag == 2:
             if cols.lower().endswith('male'):
                 measure = "dcAggregate/CensusPEPSurvey_PartialAggregate"
             else:
                 measure = "CensusPEPSurvey_RaceUpto1999"
-        elif flag2 == 3:
+        elif flag == 3:
             if cols.lower().endswith('male'):
                 measure = "dcAggregate/CensusPEPSurvey_PartialAggregate"
             else:
@@ -352,19 +352,19 @@ value: C:postprocess->{}
         tmcf = tmcf + tmcf_template.format(j, cols, measure, cols) + "\n"
         j = j + 1
     # Writing Genereated TMCF to local path.
-    if flag2 == 1:
+    if flag == 1:
         with open(_CODEDIR + "/output_files/final/" +
                   "national_before_2000.tmcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
-    elif flag2 == 2:
+    elif flag == 2:
         with open(_CODEDIR + "/output_files/final/" +
                   "state_county_before_2000.tmcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
-    elif flag2 == 3:
+    elif flag == 3:
         with open(_CODEDIR + "/output_files/final/" +
                   "state_county_after_2000.tmcf",
                   'w+',
