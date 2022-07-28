@@ -119,34 +119,34 @@ def process(config_files: list, test=False):
             process_county_2010_2020(files)
 
     # list of national output files before year 2000
-    as_is_output_files = [
+    national_before_2000 = [
         "nationals_result_1900_1959.csv", "nationals_result_1960_1979.csv",
         "nationals_result_1980_1990.csv", "nationals_result_1990_2000.csv"
     ]
 
     # list of state and county output files before year 2000
-    aggregate_output_files_before = [
+    state_county_before_2000 = [
         "state_result_1970_1979.csv", "state_result_1980_1990.csv",
         "state_result_1990_2000.csv", "county_result_1970_1979.csv",
         "county_result_1980_1989.csv", "county_result_1990_2000.csv"
     ]
 
     # list of state and county output files before after 2000
-    aggregate_output_files_after = [
+    state_county_after_2000 = [
         "state_result_2000_2010.csv", "state_result_2010_2020.csv",
         "county_result_2000_2009.csv", "county_result_2010_2020.csv"
     ]
 
     # list of national output files after year 2000
-    geo_aggregate_output_files = [
+    national_after_2000 = [
         "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv"
     ]
 
     output_files_names = {
-        1: as_is_output_files,
-        2: aggregate_output_files_before,
-        3: aggregate_output_files_after,
-        4: geo_aggregate_output_files
+        1: national_before_2000,
+        2: state_county_before_2000,
+        3: state_county_after_2000,
+        4: national_after_2000
     }
     column_names = create_single_csv(output_files_names)
 

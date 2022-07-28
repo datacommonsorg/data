@@ -39,19 +39,17 @@ def create_single_csv(output_files_names: list):
     Return:
         column_name (List) : list of all the column names
     """
-    # list of output files which are having no aggregation
-    as_is_output_files = output_files_names[1]
+    # list of output files for national before the yearc2000
+    national_before_2000 = output_files_names[1]
 
-    # list of output files which are having aggregation Count_Person_Male
-    # and Count_Person_Female
-    aggregate_output_files_before = output_files_names[2]
+    # list of output files for state and county before the year 2000
+    state_county_before_2000 = output_files_names[2]
 
-    # list of output files which are having aggregation Count_Person_Male
-    # and Count_Person_Female
-    aggregate_output_files_after = output_files_names[3]
+    # list of output files for state and county after the year 2000
+    state_county_after_2000 = output_files_names[3]
 
-    # aggregated State values 2010-2020 from County 2010-2020 data
-    geo_aggregate_output_files = output_files_names[4]
+    # list of output files for national after the yearc2000
+    national_after_2000 = output_files_names[4]
 
     df1 = pd.DataFrame()
     df3 = pd.DataFrame()
@@ -59,10 +57,11 @@ def create_single_csv(output_files_names: list):
     df7 = pd.DataFrame()
 
     column_names = {}
-    # aggregating the files which are processed as is
+
+    # aggregating the files which are having national data before the year 2000
     # to final output csv
-    if len(as_is_output_files) > 0:
-        for i in as_is_output_files:
+    if len(national_before_2000) > 0:
+        for i in national_before_2000:
             df = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i,
                              header=0)
             for col in df.columns:
@@ -90,20 +89,17 @@ def create_single_csv(output_files_names: list):
 
         # collecting all the column headers
         columns_of_as_is_output_files = df1.columns.to_list()
-
         column_names[1] = columns_of_as_is_output_files
 
-    # aggregating the files which are having
-    # aggregation Count_Person_Male and Count_Person_Female
-    # to final output csv
-    if len(aggregate_output_files_before) > 0:
-        for i in aggregate_output_files_before:
+    # aggregating the files which are having state and county data before the 
+    # year 2000 to final output csv
+    if len(state_county_before_2000) > 0:
+        for i in state_county_before_2000:
             df2 = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i,
                               header=0)
             for col in df2.columns:
                 df2[col] = df2[col].astype("str")
             df3 = pd.concat([df2, df3], ignore_index=True)
-
         # coverting year values to int
         df3['Year'] = df3['Year'].astype(float).astype(int)
 
@@ -139,11 +135,12 @@ def create_single_csv(output_files_names: list):
 
         # collecting all the column headers
         columns_of_aggregate_output_files_before = df3.columns.to_list()
-
         column_names[2] = columns_of_aggregate_output_files_before
 
-    if len(aggregate_output_files_after) > 0:
-        for i in aggregate_output_files_after:
+    # aggregating the files which are having state and county data after the 
+    # year 2000 to final output csv
+    if len(state_county_after_2000) > 0:
+        for i in state_county_after_2000:
             df6 = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i,
                               header=0)
             for col in df6.columns:
@@ -171,14 +168,12 @@ def create_single_csv(output_files_names: list):
 
         # collecting all the column headers
         columns_of_as_is_output_files_after = df7.columns.to_list()
-
         column_names[3] = columns_of_as_is_output_files_after
 
-    # aggregating the files which are aggregated
-    # from different geo granularity
+    # aggregating the files which are having national data after the year 2000
     # to final output csv
-    if len(geo_aggregate_output_files) > 0:
-        for i in geo_aggregate_output_files:
+    if len(national_after_2000) > 0:
+        for i in national_after_2000:
             df4 = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i,
                               header=0)
             for col in df4.columns:
@@ -205,7 +200,6 @@ def create_single_csv(output_files_names: list):
 
         # collecting all the column headers
         columns_of_geo_aggregate_output_files = df5.columns.to_list()
-
         column_names[4] = columns_of_geo_aggregate_output_files
     return column_names
 
