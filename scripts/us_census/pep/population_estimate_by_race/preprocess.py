@@ -65,8 +65,8 @@ def _clean_xls_file(df: pd.DataFrame, file: str) -> pd.DataFrame:
      considered as they hold the total value.
     """
     if "2020" in file:
-    # "2020" refers to the file name: "CC-EST2020" which carries a different 
-    # format hence, extra rows/columns needed to be dropped from the file.
+        # "2020" refers to the file name: "CC-EST2020" which carries a different
+        # format hence, extra rows/columns needed to be dropped from the file.
         df.drop(df[df['ORIGIN'] != 0].index, inplace=True)
         df.drop(df[df['SEX'] != 0].index, inplace=True)
         df = df.drop(['STATE','DIVISION','SUMLEV','SEX','ORIGIN'\
@@ -89,6 +89,7 @@ def _clean_xls_file(df: pd.DataFrame, file: str) -> pd.DataFrame:
     df = df.drop(['level_0', 0, 1, 2, 3, 4, 5, 6], axis=1)
     df.columns = df.columns.str.replace('NAME', 'Geographic Area')
     return df
+
 
 def _clean_xlsx_file(df: pd.DataFrame) -> pd.DataFrame:
     """
