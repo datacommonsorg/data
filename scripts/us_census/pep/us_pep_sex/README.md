@@ -11,7 +11,7 @@ These are the attributes that will be used
 | Attribute                                     | Description                                                   	|
 |-----------------------------------------------|----------------------------------------------------------------------	|
 | Year                          		| The Year of the population estimates provided.                	|
-| geo                           		| The Area of the population estimates provided.            		|
+| Geo                           		| The Area of the population estimates provided.            		|
 | Sex                   			| Gender either Male or Female.                         		|
 
 
