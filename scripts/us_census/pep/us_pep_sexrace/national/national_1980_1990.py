@@ -23,17 +23,17 @@ import os
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def process_national_1980_1990(url):
+def process_national_1980_1990(url: str) -> pd.DataFrame:
     """
     Function Loads input txt datasets
     from 1980-1990 on a National Level,
     cleans it and return cleaned dataframe.
 
     Args:
-        url: url of the dataset
+        url (str) : url of the dataset
 
     Returns:
-        df.columns: Coulumn names of cleaned dataframe
+        df.columns (pd.DataFrame) : Coulumn names of cleaned dataframe
     """
     # 0 = Ages 0-4, 1 = Ages 5-9, 2 = Ages 10-14, 3 = Ages 15-19
     # 4 = Ages 20-24, 5 = Ages 25-29, 6 = Ages 30-34, 7 = Ages 35-39

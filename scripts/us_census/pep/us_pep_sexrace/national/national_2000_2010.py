@@ -23,17 +23,17 @@ import os
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def process_national_2000_2010(url):
+def process_national_2000_2010(url: str) -> pd.DataFrame:
     """
     Function Loads input csv datasets
     from 2000-2009 on a National Level,
     cleans it and return cleaned dataframe.
 
     Args:
-        url: url of the dataset
+        url (str) : url of the dataset
 
     Returns:
-        df.columns: Coulumn names of cleaned dataframe
+        df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     # reading the csv format input file and converting it to a dataframe
     # skipping unwanted rows from top and bottom

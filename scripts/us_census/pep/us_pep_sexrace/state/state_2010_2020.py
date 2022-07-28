@@ -23,17 +23,17 @@ import os
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def process_state_2010_2020(url):
+def process_state_2010_2020(url: str) -> pd.DataFrame:
     """
     Function Loads input csv datasets
     from 2010-2020 on a State Level,
     cleans it and return cleaned dataframe.
 
     Args:
-        url: url of the dataset
+        url (str) : url of the dataset
 
     Returns:
-        df.columns: Coulumn names of cleaned dataframe
+        df.columns (pd.DataFrame) : Coulumn names of cleaned dataframe
     """
     # reading input file to dataframe
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)

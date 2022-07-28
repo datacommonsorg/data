@@ -24,7 +24,7 @@ import os
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def create_single_csv(output_files_names):
+def create_single_csv(output_files_names: list):
     """
     Function generate 3 csv
     1. preprocess.csv : for the files which are processed as is.
@@ -34,7 +34,10 @@ def create_single_csv(output_files_names):
         which are aggregated from different geo granularity.
 
     Args:
-        output_files_names: nested list of output file names generated.
+        output_files_names (List) : nested list of output file names generated.
+
+    Return:
+        column_name (List) : list of all the column names
     """
     # list of output files which are having no aggregation
     as_is_output_files = output_files_names[1]

@@ -71,14 +71,13 @@ def _get_urls(json_file_path, key, test):
     return urls
 
 
-def process(config_files, test=False):
+def process(config_files: list, test=False):
     """
     This method calls the required methods
     and generate final csv, mcf and tmcf
 
     Args:
-        config_files: list of json files containing dataset url
-        output_files_names: list of output file names
+        config_files (List) : list of json files containing dataset url
     """
     flag = None
 

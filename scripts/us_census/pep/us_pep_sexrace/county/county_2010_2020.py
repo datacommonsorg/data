@@ -22,18 +22,17 @@ import os
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
-
-def process_county_2010_2020(url):
+def process_county_2010_2020(url: str) -> pd.DataFrame:
     """
     Function Loads input csv datasets
     from 2010-2020 on a County Level,
     cleans it and return cleaned dataframe.
 
     Args:
-        url: url of the dataset
+        url (str) : url of the dataset
 
     Returns:
-        df: Coulumn names of cleaned dataframe
+        df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     # reading the csv input file
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
@@ -100,8 +99,6 @@ def process_county_2010_2020(url):
             'OrInCombinationWithOneOrMoreOtherRaces',
         'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
             'OrInCombinationWithOneOrMoreOtherRaces']
-
-    df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
-              'county_result_2010_2020.csv',
-              index=False)
+ 
+    df.to_csv(_CODEDIR + "/../output_files/intermediate/" + 'county_result_2010_2020.csv', index=False)
     return df.columns

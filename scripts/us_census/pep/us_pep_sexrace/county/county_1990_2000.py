@@ -24,17 +24,17 @@ import os
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def process_county_1990_2000(url):
+def process_county_1990_2000(url: str) -> pd.DataFrame:
     """
     Function Loads input csv datasets
     from 1990-2000 on a County Level,
     cleans it and return cleaned dataframe.
 
     Args:
-        url: url of the dataset
+        url (str) : url of the dataset
 
     Returns:
-        df.columns: Coulumn names of cleaned dataframe
+        df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     final_df = pd.DataFrame()
     # 1 to 57 as state goes till 56
