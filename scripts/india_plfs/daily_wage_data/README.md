@@ -6,6 +6,27 @@ Average wage earnings (Rs. 0.00) per day from casual labour work other than publ
 
 ### Download Data
 
+#### PLES July 2020 - Jun 2021
+Wage data from PLES July 2020 - Jun 2021 is available as embedded tables inside the [PDF](https://dge.gov.in/dge/sites/default/files/Anual%20report/Annual%20Report%20PLFS%202020-21.pdf). Standard table format.
+
+```
+wget https://dge.gov.in/dge/sites/default/files/Anual%20report/Annual%20Report%20PLFS%202020-21.pdf -O Annual_Report_PLFS_2020-21.pdf
+```
+
+* Page 391 has the data for July-Sep 2020
+* Page 392 has the data for Oct-Dec 2020
+* Page 393 has the data for Jan-Mar2021
+* Page 394 has the data for Apr-Jun 2021
+
+Extracted as XLSX using [tabula](https://github.com/tabulapdf/tabula) by running the command
+
+```
+java -jar tabula-java.jar --lattice -a 24.731,106.819,519.359,637.228 -p 391 Annual_Report_PLFS_2020-21.pdf -o Table_43_07_09_2020.csv
+java -jar tabula-java.jar --lattice  -a 24.731,106.819,519.359,637.228 -p 392 Annual_Report_PLFS_2020-21.pdf -o Table_43_10_12_2020.csv
+java -jar tabula-java.jar --lattice -a 24.731,106.819,519.359,637.228 -p 393 Annual_Report_PLFS_2020-21.pdf -o Table_43_01_03_2021.csv
+java -jar tabula-java.jar --lattice -a 24.731,106.819,519.359,637.228 -p 394 Annual_Report_PLFS_2020-21.pdf -o Table_43_04_06_2021.csv
+```
+
 #### PLES July 2019 - Jun 2020
 Wage data from PLES July 2019 - Jun 2020 is available as embedded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual_Report_PLFS_2019_20.pdf). Standard table format.
 
