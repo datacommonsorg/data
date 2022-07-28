@@ -103,7 +103,7 @@ CONF_2009_FILE = {
         "est_pmiles2007_11", "est_ptrp2007_11", "est_vmiles2007_11",
         "est_vtrp2007_11"
     ],
-    "extra_cols": [COMMON_COLS, ADDITIONAL_2009_FILE_COLS],
+    "extra_cols": COMMON_COLS + ADDITIONAL_2009_FILE_COLS,
     "year": 2009
 }
 CONF_2017_FILE = {
@@ -113,7 +113,7 @@ CONF_2017_FILE = {
         "flag_manhattan_trt"
     ],
     "pop_cols": ["est_pmiles", "est_ptrp", "est_vmiles", "est_vtrp"],
-    "extra_cols": [COMMON_COLS],
+    "extra_cols": COMMON_COLS,
     "year": 2017,
     "additional_process": True
 }

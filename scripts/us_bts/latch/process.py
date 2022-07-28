@@ -165,8 +165,6 @@ def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
 
 
 # pylint: enable=line-too-long
-
-
 def _additional_process_2017(data_df: pd.DataFrame) -> pd.DataFrame:
     """
     Performs additional processing on data_df dataframe for the year 2017.
@@ -210,10 +208,7 @@ def _process_household_transportation(input_file: str,
                           sep=file_conf["input_file_delimiter"])
     basic_cols = file_conf["basic_cols"]
     # Creating Population Columns
-    pop_cols = []
-    pop_cols += file_conf["pop_cols"]
-    for xtra_cols in file_conf["extra_cols"]:
-        pop_cols += xtra_cols
+    pop_cols = file_conf["pop_cols"] + file_conf["extra_cols"]
     req_cols = basic_cols + pop_cols
     data_df = data_df[req_cols]
     # Checking additional_process in the dictionary,
@@ -357,8 +352,7 @@ def main(_):
     mcf_path = os.path.join(output_file_path, "us_transportation_household.mcf")
     tmcf_path = os.path.join(output_file_path,
                              "us_transportation_household.tmcf")
-    process(ip_files, cleaned_csv_path, mcf_path,\
-        tmcf_path)
+    process(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
 
 
 if __name__ == "__main__":
