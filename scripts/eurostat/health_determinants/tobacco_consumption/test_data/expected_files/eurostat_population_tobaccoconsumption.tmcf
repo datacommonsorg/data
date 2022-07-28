@@ -2,7 +2,7 @@ Node: E:EuroStat_Population_TobaccoConsumption->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:EuroStat_Population_TobaccoConsumption->SV
 measurementMethod: C:EuroStat_Population_TobaccoConsumption->Measurement_Method
-observationAbout: C:EuroStat_Population_TobaccoConsumption->geo
-observationDate: C:EuroStat_Population_TobaccoConsumption->time
+observationAbout: C:EuroStat_Population_TobaccoConsumption->Geo
+observationDate: C:EuroStat_Population_TobaccoConsumption->Time
 scalingFactor: 100
-value: C:EuroStat_Population_TobaccoConsumption->observation
+value: C:EuroStat_Population_TobaccoConsumption->Observation

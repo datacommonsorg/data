@@ -60,10 +60,10 @@ _TMCF_TEMPLATE = (
     "variableMeasured: C:EuroStat_Population_TobaccoConsumption->SV\n"
     "measurementMethod: C:EuroStat_Population_TobaccoConsumption->"
     "Measurement_Method\n"
-    "observationAbout: C:EuroStat_Population_TobaccoConsumption->geo\n"
-    "observationDate: C:EuroStat_Population_TobaccoConsumption->time\n"
+    "observationAbout: C:EuroStat_Population_TobaccoConsumption->Geo\n"
+    "observationDate: C:EuroStat_Population_TobaccoConsumption->Time\n"
     "scalingFactor: 100\n"
-    "value: C:EuroStat_Population_TobaccoConsumption->observation\n")
+    "value: C:EuroStat_Population_TobaccoConsumption->Observation\n")
 
 
 def smoking_tobaccoproducts_county_of_birth(df: pd.DataFrame) -> pd.DataFrame:
@@ -730,8 +730,8 @@ class EuroStatTobaccoConsumption:
         Returns: None
         """
 
-        final_df = pd.DataFrame(columns=['time','geo','SV','observation',
-            'Measurement_Method'])
+        final_df = pd.DataFrame(
+            columns=['time', 'geo', 'SV', 'observation', 'Measurement_Method'])
         # Creating Output Directory
         output_path = os.path.dirname(self.cleaned_csv_file_path)
         if not os.path.exists(output_path):
@@ -786,8 +786,8 @@ class EuroStatTobaccoConsumption:
             sv_list += df["SV"].to_list()
 
         final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
-        final_df = final_df.drop_duplicates(subset=['time','geo','SV'],
-            keep='first')
+        final_df = final_df.drop_duplicates(subset=['time', 'geo', 'SV'],
+                                            keep='first')
         final_df['observation'] = final_df['observation'].astype(str)\
             .str.strip()
         # derived_df generated to get the year/SV/location sets
@@ -828,6 +828,7 @@ class EuroStatTobaccoConsumption:
 
 def main(_):
     input_path = _FLAGS.input_path
+    input_path = "/Users/chharish/datacommonsEU/data/scripts/eurostat/health_determinants/tobacco_consumption/test_data/datasets"
     if not os.path.exists(input_path):
         os.mkdir(input_path)
     ip_files = os.listdir(input_path)
