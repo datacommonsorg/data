@@ -81,7 +81,8 @@ def create_single_csv(output_files_names):
 
         df1 = df1.replace('nan', '')
         # writing output to final csv
-        df1.to_csv(_CODEDIR + "/output_files/final/" + "postprocess.csv",
+        df1.to_csv(_CODEDIR + "/output_files/final/" +
+                   "national_before_2000.csv",
                    index=False)
 
         # collecting all the column headers
@@ -130,7 +131,7 @@ def create_single_csv(output_files_names):
             df3[col] = df3[col].astype('int64')
 
         df3.to_csv(_CODEDIR + "/output_files/final/" +
-                   "sex_race_aggregate_before.csv",
+                   "state_county_before_2000.csv",
                    index=False)
 
         # collecting all the column headers
@@ -162,7 +163,7 @@ def create_single_csv(output_files_names):
         df7 = df7.replace('nan', '')
         # writing output to final csv
         df7.to_csv(_CODEDIR + "/output_files/final/" +
-                   "sex_race_aggregate_after.csv",
+                   "state_county_after_2000.csv",
                    index=False)
 
         # collecting all the column headers
@@ -196,7 +197,7 @@ def create_single_csv(output_files_names):
 
         # writing output to final csv
         df5.to_csv(_CODEDIR + "/output_files/final/" +
-                   "sex_race_aggregate_national_after.csv",
+                   "national_after_2000.csv",
                    index=False)
 
         # collecting all the column headers
@@ -258,24 +259,25 @@ measuredProperty: dcs:count
         final_mcf_template += mcf_template.format(sv, race, gender) + "\n"
     # Writing Genereated MCF to local path.
     if flag1 == 1:
-        with open(_CODEDIR + "/output_files/final/" + "sex_race.mcf",
+        with open(_CODEDIR + "/output_files/final/" +
+                  "national_before_2000.mcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     elif flag1 == 2:
         with open(_CODEDIR + "/output_files/final/" +
-                  "sex_race_aggregate_before.mcf",
+                  "state_county_before_2000.mcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     elif flag1 == 3:
         with open(_CODEDIR + "/output_files/final/" +
-                  "sex_race_aggregate_after.mcf",
+                  "state_county_after_2000.mcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
     else:
-        with open(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_national_after.mcf",\
+        with open(_CODEDIR + "/output_files/final/" + "national_after_2000.mcf",\
              'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
 
@@ -310,7 +312,7 @@ variableMeasured: dcs:{}
 measurementMethod: dcs:{}
 observationAbout: C:postprocess->geo_ID
 observationDate: C:postprocess->Year
-observationPeriod: \"P1Y\"
+observationPeriod: "P1Y"
 value: C:postprocess->{} 
 
 """
@@ -348,23 +350,24 @@ value: C:postprocess->{}
         j = j + 1
     # Writing Genereated TMCF to local path.
     if flag2 == 1:
-        with open(_CODEDIR + "/output_files/final/" + "sex_race.tmcf",
+        with open(_CODEDIR + "/output_files/final/" +
+                  "national_before_2000.tmcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     elif flag2 == 2:
         with open(_CODEDIR + "/output_files/final/" +
-                  "sex_race_aggregate_before.tmcf",
+                  "state_county_before_2000.tmcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     elif flag2 == 3:
         with open(_CODEDIR + "/output_files/final/" +
-                  "sex_race_aggregate_after.tmcf",
+                  "state_county_after_2000.tmcf",
                   'w+',
                   encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
     else:
-        with open(_CODEDIR + "/output_files/final/" + "sex_race_aggregate_national_after.tmcf"\
+        with open(_CODEDIR + "/output_files/final/" + "national_after_2000.tmcf"\
                 , 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))

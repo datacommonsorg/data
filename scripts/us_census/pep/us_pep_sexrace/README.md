@@ -24,8 +24,6 @@ Cleaned data will be inside [Output/postprocess.csv] as a CSV file with the foll
 
 - Year
 - geo_ID
-- Count_Person_Male
-- Count_Person_Female
 - Count_Person_Male_WhiteAlone
 - Count_Person_Male_BlackOrAfricanAmericanAlone
 - Count_Person_Male_AsianAlone
@@ -54,21 +52,25 @@ Cleaned data will be inside [Output/postprocess.csv] as a CSV file with the foll
 - Count_Person_Female_NonWhite
 
 #### MCFs and Template MCFs
-These files are genrated for the datasets which are processed as is.
-- [preprocess/Sex_Race.mcf]
-- [preprocess/Sex_Race.tmcf]
+These files contain data for national level before the year 2000.
+- [national_before_2000.mcf]
+- [national_before_2000.tmcf]
 
-These files are genrated for the datasets which are having aggregated Statvar Count_Person_Male and Count_Person_Female.
-- [preprocess/Sex_Race_aggregate.mcf]
-- [preprocess/Sex_Race_aggregate.tmcf]
+These files contain data for national level after the year 2000.
+- [national_after_2000.mcf]
+- [national_after_2000.tmcf]
 
-These files are genrated for the datasets which are aggregated from different geo granularity.
-- [preprocess/Sex_Race_aggregate_state_2010_2020.mcf]
-- [preprocess/Sex_Race_aggregate_state_20102_2020.tmcf]
+These files contain data for state and county level before the year 2000.
+- [state_county_before_2000.mcf]
+- [state_county_before_2000.tmcf]
+
+These files contain data for state and county level after the year 2000.
+- [state_county_after_2000.mcf]
+- [state_county_after_2000.tmcf]
 
 
 ### Running Tests
 The below command will run preprocess_test.py `python3 -m unittest script/us_census/pep/population_estimate_by_sr/preprocess_test.py`
 
 ### Import Procedure
-The below command will run preprocess.py and generate three output csv, mcf and tmcf.  `python script/us_census/pep/population_estimate_by_sr/preprocess.py`
+The below command will run preprocess.py and generate three output csv, mcf and tmcf.  `python3 script/us_census/pep/population_estimate_by_sr/preprocess.py`

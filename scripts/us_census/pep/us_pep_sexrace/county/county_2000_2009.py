@@ -110,19 +110,3 @@ def process_county_2000_2009(url):
     final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
                     "county_result_2000_2009.csv")
     return final_df.columns
-
-
-# def process_county_2000_2009(url):
-#     """
-#     Function writes the output
-#     dataframe generated to csv
-#     and return column names.
-#     Args:
-#         url: url of the dataset
-#     Returns:
-#         Column of cleaned Dataframe
-#     """
-#     final_df = _process_county_2000_2009(url)
-#     # writing the output to final csv
-#     final_df.to_csv(_CODEDIR + "/../output_files/intermediate/" + "county_result_2000_2009.csv")
-#     return final_df.columns

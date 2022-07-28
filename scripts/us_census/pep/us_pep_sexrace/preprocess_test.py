@@ -47,8 +47,8 @@ class TestPreprocess(unittest.TestCase):
         preprocess script and excepted output files like MCF and TMCF File
         """
         mcf_files = [
-            "sex_race_aggregate_after.mcf", "sex_race_aggregate_before.mcf",
-            "sex_race_aggregate_national_after.mcf", "sex_race.mcf"
+            "state_county_after_2000.mcf", "state_county_before_2000.mcf",
+            "national_after_2000.mcf", "national_before_2000.mcf"
         ]
 
         for mcf_file in mcf_files:
@@ -66,8 +66,8 @@ class TestPreprocess(unittest.TestCase):
             self.assertEqual(expected_mcf_data.strip(), actual_mcf_data.strip())
 
         tmcf_files = [
-            "sex_race_aggregate_after.tmcf", "sex_race_aggregate_before.tmcf",
-            "sex_race_aggregate_national_after.tmcf", "sex_race.tmcf"
+            "state_county_after_2000.tmcf", "state_county_before_2000.tmcf",
+            "national_after_2000.tmcf", "national_before_2000.tmcf"
         ]
 
         for tmcf_file in tmcf_files:
@@ -91,9 +91,8 @@ class TestPreprocess(unittest.TestCase):
         """
         # self.maxDiff = None
         output_csv_files = [
-            "postprocess.csv", "sex_race_aggregate_after.csv",
-            "sex_race_aggregate_before.csv",
-            "sex_race_aggregate_national_after.csv"
+            "state_county_after_2000.csv", "state_county_before_2000.csv",
+            "national_after_2000.csv", "national_before_2000.csv"
         ]
 
         for output_csv_file in output_csv_files:
