@@ -23,6 +23,7 @@ import os
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
+
 def create_single_csv(output_files_names: list):
     """
     Function generate 4 CSV
@@ -39,7 +40,7 @@ def create_single_csv(output_files_names: list):
     Return:
         column_name (List) : list of all the column names
     """
-    # list of output files for national before the yearc2000
+    # list of output files for national before the year 2000
     national_before_2000 = output_files_names[1]
 
     # list of output files for state and county before the year 2000
@@ -48,7 +49,7 @@ def create_single_csv(output_files_names: list):
     # list of output files for state and county after the year 2000
     state_county_after_2000 = output_files_names[3]
 
-    # list of output files for national after the yearc2000
+    # list of output files for national after the year 2000
     national_after_2000 = output_files_names[4]
 
     df1 = pd.DataFrame()
@@ -63,7 +64,7 @@ def create_single_csv(output_files_names: list):
     if len(national_before_2000) > 0:
         for i in national_before_2000:
             df = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i,
-                            header=0)
+                             header=0)
             for col in df.columns:
                 df[col] = df[col].astype("str")
             df1 = pd.concat([df, df1], ignore_index=True)
@@ -84,15 +85,15 @@ def create_single_csv(output_files_names: list):
         df1 = df1.replace('nan', '')
         # writing output to final csv
         df1.to_csv(_CODEDIR + "/output_files/final/" +
-                "national_before_2000.csv",
-                index=False)
+                   "national_before_2000.csv",
+                   index=False)
 
         # collecting all the column headers
         columns_of_national_before_2000 = df1.columns.to_list()
         column_names[1] = columns_of_national_before_2000
         return column_names
 
-    # aggregating the files which are having state and county data before the 
+    # aggregating the files which are having state and county data before the
     # year 2000 to final output csv
     if len(state_county_before_2000) > 0:
         for i in state_county_before_2000:
@@ -138,7 +139,7 @@ def create_single_csv(output_files_names: list):
         columns_of_state_county_before_2000 = df3.columns.to_list()
         column_names[2] = columns_of_state_county_before_2000
 
-    # aggregating the files which are having state and county data after the 
+    # aggregating the files which are having state and county data after the
     # year 2000 to final output csv
     if len(state_county_after_2000) > 0:
         for i in state_county_after_2000:
