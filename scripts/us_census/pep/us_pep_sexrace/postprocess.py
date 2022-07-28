@@ -23,15 +23,15 @@ import os
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
-
 def create_single_csv(output_files_names: list):
     """
-    Function generate 3 csv
-    1. preprocess.csv : for the files which are processed as is.
-    2. preprocess_aggregate.csv : for the files which
-        are having Count Person Male/Female aggregated.
-    3. preprocess_aggregate_state_2010_2020.csv : for the files
-        which are aggregated from different geo granularity.
+    Function generate 4 CSV
+    1. national_before_2000.csv : for the natioanl files before the year 2000.
+    2. state_county_before_2000.csv : for the state and county files before
+    the year 2000.
+    3. state_county_after_2000.csv : for the state and county files after
+    the year 2000.
+    4. national_after_2000.csv : for the natioanl files after the year 2000.
 
     Args:
         output_files_names (List) : nested list of output file names generated.
@@ -63,7 +63,7 @@ def create_single_csv(output_files_names: list):
     if len(national_before_2000) > 0:
         for i in national_before_2000:
             df = pd.read_csv(_CODEDIR + "/output_files/intermediate/" + i,
-                             header=0)
+                            header=0)
             for col in df.columns:
                 df[col] = df[col].astype("str")
             df1 = pd.concat([df, df1], ignore_index=True)
@@ -84,12 +84,13 @@ def create_single_csv(output_files_names: list):
         df1 = df1.replace('nan', '')
         # writing output to final csv
         df1.to_csv(_CODEDIR + "/output_files/final/" +
-                   "national_before_2000.csv",
-                   index=False)
+                "national_before_2000.csv",
+                index=False)
 
         # collecting all the column headers
-        columns_of_as_is_output_files = df1.columns.to_list()
-        column_names[1] = columns_of_as_is_output_files
+        columns_of_national_before_2000 = df1.columns.to_list()
+        column_names[1] = columns_of_national_before_2000
+        return column_names
 
     # aggregating the files which are having state and county data before the 
     # year 2000 to final output csv
@@ -134,8 +135,8 @@ def create_single_csv(output_files_names: list):
                    index=False)
 
         # collecting all the column headers
-        columns_of_aggregate_output_files_before = df3.columns.to_list()
-        column_names[2] = columns_of_aggregate_output_files_before
+        columns_of_state_county_before_2000 = df3.columns.to_list()
+        column_names[2] = columns_of_state_county_before_2000
 
     # aggregating the files which are having state and county data after the 
     # year 2000 to final output csv
@@ -167,8 +168,8 @@ def create_single_csv(output_files_names: list):
                    index=False)
 
         # collecting all the column headers
-        columns_of_as_is_output_files_after = df7.columns.to_list()
-        column_names[3] = columns_of_as_is_output_files_after
+        columns_of_state_county_after_2000 = df7.columns.to_list()
+        column_names[3] = columns_of_state_county_after_2000
 
     # aggregating the files which are having national data after the year 2000
     # to final output csv
@@ -199,30 +200,29 @@ def create_single_csv(output_files_names: list):
                    index=False)
 
         # collecting all the column headers
-        columns_of_geo_aggregate_output_files = df5.columns.to_list()
-        column_names[4] = columns_of_geo_aggregate_output_files
+        columns_of_national_after_2000 = df5.columns.to_list()
+        column_names[4] = columns_of_national_after_2000
     return column_names
 
 
 def generate_mcf(statvar_names: list, flag: int) -> None:
     """
-    This method generates 3 MCF file w.r.t
-    dataframe headers and defined MCF template
-    1. sex_race.mcf : for the files which are processed as is.
-    2. sex_race_aggregate.mcf : for the files which
-        are having Count Person Male/Female aggregated.
-    3. sex_race_aggregate_state_2010_2020.mcf : for the files
-        which are aggregated from different geo granularity.
+    Function generate 4 MCF
+    1. national_before_2000.mcf : for the natioanl files before the year 2000.
+    2. state_county_before_2000.mcf : for the state and county files before
+    the year 2000.
+    3. state_county_after_2000.mcf : for the state and county files after
+    the year 2000.
+    4. national_after_2000.mcf : for the natioanl files after the year 2000.
 
     Args:
         sv_names (list) : List of DataFrame Columns
-        flag (int) : flag value helps in generating
-        output files. Possible values are 1,2 and 3.
-        1 - generate mcf for files which are processed as is
-        2 - generate mcf for files which are having
-        Count_Person_Male and Count_Person_Female aggregated
-        3 - generate mcf for files which are aggregated
-        from different geo granulartiy.
+        flag (int) : flag value helps in generating output files.
+        Possible values are 1,2,3 and 4.
+        1 - generate mcf for files natioanl before the year 2000.
+        2 - generate mcf for files state and county after the year 2000.
+        3 - generate mcf for files state and county after the year 2000.
+        4 - generate mcf for files natioanl after the year 2000.
 
     Returns:
         None
@@ -281,23 +281,22 @@ measuredProperty: dcs:count
 
 def generate_tmcf(df_cols: list, flag: int) -> None:
     """
-            This method generates 3 TMCF file w.r.t
-    dataframe headers and defined TMCF template
-    1. Sex_Rcae.tmcf : for the files which are processed as is.
-    2. sex_race_aggregate.tmcf : for the files which
-        are having Count Person Male/Female aggregated.
-    3. sex_race_aggregate_state_2010_2020.tmcf : for the files
-        which are aggregated from different geo granularity.
+    Function generate 4 TMCF
+    1. national_before_2000.tmcf : for the natioanl files before the year 2000.
+    2. state_county_before_2000.tmcf : for the state and county files before
+    the year 2000.
+    3. state_county_after_2000.tmcf : for the state and county files after
+    the year 2000.
+    4. national_after_2000.tmcf : for the natioanl files after the year 2000.
 
     Args:
         df_cols (list) : List of DataFrame Columns
-        flag (int) : flag value helps in generating
-        output files. Possible values are 1,2 and 3.
-        1 - generate tmcf for files which are processed as is
-        2 - generate tmcf for files which are having
-        Count_Person_Male and Count_Person_Female aggregated
-        3 - generate tmcf for files which are aggregated
-        from different geo granulartiy.
+        flag (int) : flag value helps in generating output files.
+        Possible values are 1,2,3 and 4.
+        1 - generate tmcf for files natioanl before the year 2000.
+        2 - generate tmcf for files state and county after the year 2000.
+        3 - generate tmcf for files state and county after the year 2000.
+        4 - generate tmcf for files natioanl after the year 2000.
 
     Returns:
         None
