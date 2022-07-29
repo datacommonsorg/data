@@ -23,16 +23,16 @@ National
     2014, 2019 -      BMI, Age, Sex, Citizenship Country Combination
     2014, 2019 -      BMI, Age, Sex, Level Of Activity Limitation Combination
 
-Before running this module, run input_files.py script, it downloads required
-input files, creates necessary folders for processing.
+Before running this module, run download_input_files.py script, it downloads
+required input files, creates necessary folders for processing.
 Folder information
 input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
 """
 
 import os
+from pyclbr import Function
 import sys
-import re
 import pandas as pd
 import numpy as np
 from absl import app
@@ -47,6 +47,9 @@ from common.replacement_functions import (_replace_sex, _replace_isced11,
                                           _replace_c_birth, _replace_citizen,
                                           _replace_lev_limit, _replace_bmi,
                                           _split_column)
+
+from common.denominator_mcf_generator import (generate_mcf_template,
+                                              write_to_mcf_path)
 
 # For import util.alpha2_to_dcid
 _UTIL_MODULE_DIR = os.path.join(os.path.dirname(__file__), '..', '..', '..',
@@ -64,12 +67,12 @@ _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
 
-_MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
-                 "typeOf: dcs:StatisticalVariable\n"
-                 "populationType: dcs:Person\n"
-                 "statType: dcs:measuredValue\n"
-                 "measuredProperty: dcs:count\n"
-                 "{xtra_pvs}\n")
+MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
+                "typeOf: dcs:StatisticalVariable\n"
+                "populationType: dcs:Person\n"
+                "statType: dcs:measuredValue\n"
+                "measuredProperty: dcs:count\n"
+                "{xtra_pvs}\n")
 
 _TMCF_TEMPLATE = (
     "Node: E:eurostat_population_bmi->E0\n"
@@ -80,14 +83,6 @@ _TMCF_TEMPLATE = (
     "observationDate: C:eurostat_population_bmi->time\n"
     "value: C:eurostat_population_bmi->observation\n")
 
-_INCOME_QUINTILE_VALUES = {
-    "IncomeOf0To20Percentile": "[0 20 Percentile]",
-    "IncomeOf20To40Percentile": "[20 40 Percentile]",
-    "IncomeOf40To60Percentile": "[40 60 Percentile]",
-    "IncomeOf60To80Percentile": "[60 80 Percentile]",
-    "IncomeOf80To100Percentile": "[80 100 Percentile]",
-}
-
 _EXISTING_SV_DEG_URB_GENDER = {
     "Count_Person_Female_Rural": "Count_Person_Rural_Female",
     "Count_Person_Male_Rural": "Count_Person_Rural_Male",
@@ -96,6 +91,31 @@ _EXISTING_SV_DEG_URB_GENDER = {
 }
 
 _SV_DENOMINATOR = 1
+
+
+def _common_transformations(data_df: pd.DataFrame, split_mulit_cols: str,
+                            replace_func: Function) -> pd.DataFrame:
+    """
+    Process the input dataframe data_df and applies transformations
+    such as replacing values, splitting mulitple columns.
+
+    Args:
+        data_df (pd.DataFrame): Input DataFrame
+        split_mulit_cols (str): Multiple Columns List
+        replace_func (Function): Replace Function
+
+    Returns:
+        pd.DataFrame: Cleaned DataFrame
+    """
+    # Splits the DataFrame having mulitple column data
+    # in a single column and creates them as Individual Columns
+    data_df = _split_column(data_df, split_mulit_cols)
+    # Filtering out the required rows and columns
+    data_df = data_df[data_df['age'] == 'TOTAL']
+    data_df = _replace_bmi(data_df)
+    data_df = _replace_sex(data_df)
+    data_df = replace_func(data_df)
+    return data_df
 
 
 def _age_sex_education(data_df: pd.DataFrame) -> pd.DataFrame:
@@ -110,16 +130,11 @@ def _age_sex_education(data_df: pd.DataFrame) -> pd.DataFrame:
     """
     df_cols = ['unit,bmi,isced11,sex,age,geo', '2019', '2014']
     data_df.columns = df_cols
-    multiple_cols = "unit,bmi,isced11,sex,age,geo"
-    # Splits the DataFrame having mulitple column data
-    # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, multiple_cols)
+    data_df = _common_transformations(data_df=data_df,
+                                      split_mulit_cols=df_cols[0],
+                                      replace_func=_replace_isced11)
     # Filtering out the required rows and columns
-    data_df = data_df[data_df['age'] == 'TOTAL']
     data_df = data_df[~(data_df['geo'].isin(['EU27_2020', 'EU28']))]
-    data_df = _replace_bmi(data_df)
-    data_df = _replace_sex(data_df)
-    data_df = _replace_isced11(data_df)
     # Creating SV using the DataFrame Values
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + data_df['isced11'] +\
@@ -145,15 +160,10 @@ def _age_sex_education_history(data_df: pd.DataFrame) -> pd.DataFrame:
         'FR', 'CY', 'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK', 'TR'
     ]
     data_df.columns = df_cols
-    # Splits the DataFrame having mulitple column data
-    # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, df_cols[0])
-    # Filtering out the required rows and columns
-    data_df = data_df[data_df['age'] == 'TOTAL']
-    data_df = _replace_bmi(data_df)
-    data_df = _replace_sex(data_df)
-    data_df = _replace_isced11(data_df)
-    data_df['SV'] = 'Percent_'+ data_df['bmi'] +'_' + \
+    data_df = _common_transformations(data_df=data_df,
+                                      split_mulit_cols=df_cols[0],
+                                      replace_func=_replace_isced11)
+    data_df['SV'] = 'Percent_' + data_df['bmi'] +'_' + \
                     'In_Count_Person_' + data_df['isced11'] + \
                     '_' + data_df['sex']
     data_df = data_df.drop(columns=['isced11', 'bmi', 'sex', 'age'])
@@ -175,16 +185,12 @@ def _age_sex_income(data_df: pd.DataFrame) -> pd.DataFrame:
     """
     df_cols = ['unit,bmi,quant_inc,sex,age,geo', '2019', '2014']
     data_df.columns = df_cols
-    # Splits the DataFrame having mulitple column data
-    # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, df_cols[0])
+    data_df = _common_transformations(data_df=data_df,
+                                      split_mulit_cols=data_df.columns[0],
+                                      replace_func=_replace_quant_inc)
     # Filtering out the wanted rows and columns
-    data_df = data_df[data_df['age'] == 'TOTAL']
     data_df = data_df[~(data_df['geo'].isin(['EU27_2020', 'EU28']))]
-    data_df = _replace_bmi(data_df)
-    data_df = _replace_sex(data_df)
-    data_df = _replace_quant_inc(data_df)
-    data_df['SV'] = 'Percent_'+ data_df['bmi'] +'_' + \
+    data_df['SV'] = 'Percent_' + data_df['bmi'] +'_' + \
                     'In_Count_Person_' + data_df['sex'] + \
                     '_' + data_df['quant_inc']
 
@@ -210,15 +216,11 @@ def _age_sex_income_history(data_df: pd.DataFrame) -> pd.DataFrame:
         'FR', 'CY', 'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK', 'TR'
     ]
     data_df.columns = df_cols
-    # Splits the DataFrame having mulitple column data
-    # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, df_cols[0])
+    data_df = _common_transformations(data_df=data_df,
+                                      split_mulit_cols=df_cols[0],
+                                      replace_func=_replace_quant_inc)
     # Filtering out the required rows and columns
-    data_df = data_df[(data_df['age'] == 'TOTAL') &
-                      (~(data_df['quant_inc'] == 'UNK'))]
-    data_df = _replace_bmi(data_df)
-    data_df = _replace_sex(data_df)
-    data_df = _replace_quant_inc(data_df)
+    data_df = data_df[(~(data_df['quant_inc'] == 'UNK'))]
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + data_df['sex'] + \
                     '_' + data_df['quant_inc']
@@ -247,15 +249,11 @@ def _age_sex_degree_urbanisation(data_df: pd.DataFrame) -> pd.DataFrame:
         'IS', 'NO', 'UK', 'TR'
     ]
     data_df.columns = df_cols
-    # Splits the DataFrame having mulitple column data
-    # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
-    data_df = data_df[data_df['age'] == 'TOTAL']
     data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
-    data_df = _replace_bmi(data_df)
-    data_df = _replace_sex(data_df)
-    data_df = _replace_deg_urb(data_df)
+    data_df = _common_transformations(data_df=data_df,
+                                      split_mulit_cols=df_cols[0],
+                                      replace_func=_replace_deg_urb)
     data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] +'_' + \
                     'In_Count_Person_' + data_df['deg_urb'] + \
@@ -285,15 +283,11 @@ def _age_sex_birth_country(data_df: pd.DataFrame) -> pd.DataFrame:
         'IS', 'NO', 'UK', 'TR'
     ]
     data_df.columns = df_cols
-    # Splits the DataFrame having mulitple column data
-    # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
-    data_df = data_df[data_df['age'] == 'TOTAL']
     data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
-    data_df = _replace_bmi(data_df)
-    data_df = _replace_sex(data_df)
-    data_df = _replace_c_birth(data_df)
+    data_df = _common_transformations(data_df=data_df,
+                                      split_mulit_cols=df_cols[0],
+                                      replace_func=_replace_c_birth)
     data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + data_df['sex'] + \
@@ -322,16 +316,11 @@ def _age_sex_citizenship_country(data_df: pd.DataFrame) -> pd.DataFrame:
         'IS', 'NO', 'UK', 'TR'
     ]
     data_df.columns = df_cols
-    # Splits the DataFrame having mulitple column data
-    # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
-    data_df = data_df[data_df['age'] == 'TOTAL']
     data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
-    data_df = _replace_bmi(data_df)
-    data_df = _replace_sex(data_df)
-    data_df = _replace_citizen(data_df)
-
+    data_df = _common_transformations(data_df=data_df,
+                                      split_mulit_cols=df_cols[0],
+                                      replace_func=_replace_citizen)
     data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + \
@@ -360,15 +349,11 @@ def _age_sex_acitivity_limitation(data_df: pd.DataFrame) -> pd.DataFrame:
         'SE', 'IS', 'NO', 'UK', 'TR'
     ]
     data_df.columns = df_cols
-    # Splits the DataFrame having mulitple column data
-    # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, df_cols[0])
     # Filtering out the wanted rows and columns
-    data_df = data_df[data_df['age'] == 'TOTAL']
     data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
-    data_df = _replace_bmi(data_df)
-    data_df = _replace_sex(data_df)
-    data_df = _replace_lev_limit(data_df)
+    data_df = _common_transformations(data_df=data_df,
+                                      split_mulit_cols=df_cols[0],
+                                      replace_func=_replace_lev_limit)
     data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + \
@@ -395,79 +380,21 @@ def _generate_mcf(sv_list: list, mcf_file_path: str) -> None:
     """
     This method generates MCF file w.r.t
     dataframe headers and defined MCF template
+
     Args:
         sv_list (list): List of Statistical Variables
         mcf_file_path (str): Output MCF File Path
     """
-    # pylint: disable=too-many-statements
     mcf_nodes = []
     for sv in sv_list:
         pvs = []
-        name_pv = []
-        dcid = sv
         sv_denominator = sv.split("_In_")[_SV_DENOMINATOR]
         denominator_value = _EXISTING_SV_DEG_URB_GENDER.get(
             sv_denominator, sv_denominator)
         pvs.append(f"measurementDenominator: dcs:{denominator_value}")
-        sv_prop = [prop for prop in sv.split("_") if sv.strip()]
-        for prop in sv_prop:
-            if prop in ["Count"]:
-                continue
-            if prop in ["Person"]:
-                name_pv.insert(0, "Population:")
-            elif prop == "Percent":
-                name_pv.append("Percentage")
-            elif prop == "In":
-                name_pv.append("Among")
-            elif "Male" in prop or "Female" in prop:
-                pvs.append(f"gender: dcs:{prop}")
-                name_pv.append(f"{prop}")
-            elif "Education" in prop:
-                pvs.append(
-                    f"educationalAttainment: dcs:{prop.replace('Or', '__')}")
-                name_pv.append(f"{prop}")
-            elif "Percentile" in prop:
-                income_quin = _INCOME_QUINTILE_VALUES[prop]
-                pvs.append(f"income: {income_quin}")
-                prop = prop.replace("Of", "Of ").replace("To", " To ")
-                name_pv.append(f"{prop}")
-            elif "Urban" in prop or "Rural" in prop \
-                or "Rural" in prop:
-                pvs.append(f"placeOfResidenceClassification: dcs:{prop}")
-                name_pv.append(f"{prop}")
-            elif "ForeignBorn" in prop or "Native" in prop:
-                pvs.append(f"nativity: dcs:{prop.replace('CountryOfBirth','')}")
-                name_pv.append(f"{prop}")
-            elif "Citizen" in prop:
-                pvs.append(f"citizenship: dcs:{prop.replace('Citizenship','')}")
-                name_pv.append(f"{prop}")
-            elif "Activity" in prop:
-                pvs.append(f"globalActivityLimitationindicator: dcs:{prop}")
-                name_pv.append(f"{prop}")
-            elif "weight" in prop \
-                or "Obese" in prop or "Obesity" in prop:
-                pvs.append(f"healthBehavior: dcs:{prop}")
-                name_pv.append(f"{prop}")
-        name_prop = ", ".join(name_pv)
-        name_prop = name_prop.replace(", Among", " Among")
-        name_prop = name_prop.rstrip(', ')
-        name_prop = name_prop.rstrip('with')
-        # Adding spaces before every capital letter,
-        # to make SV look more like a name.
-        name_prop = re.sub(r"(\w)([A-Z])", r"\1 \2", name_prop)
-        name_prop = "name: \"" + name_prop + "\""
-        name_prop = name_prop.replace("Percentage,", "Percentage")
-        name_prop = name_prop.replace("Population:,", "Population:")
-        name_prop = name_prop.replace("Among,", "Among")
-        name_prop = name_prop.replace("ACitizen", "A Citizen")
-        pvs.append(name_prop)
-        mcf_nodes.append(
-            _MCF_TEMPLATE.format(dcid=dcid, xtra_pvs='\n'.join(pvs)))
-    mcf = '\n'.join(mcf_nodes)
-    # Writing Genereated MCF to local path.
-    with open(mcf_file_path, 'w+', encoding='utf-8') as f_out:
-        f_out.write(mcf.rstrip('\n'))
-    # pylint: enable=too-many-statements
+        mcf_node = generate_mcf_template(sv, MCF_TEMPLATE, pvs)
+        mcf_nodes.append(mcf_node)
+    write_to_mcf_path(mcf_nodes, mcf_file_path)
 
 
 def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
@@ -533,8 +460,8 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
 
 def main(_):
     input_path = _FLAGS.input_path
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
+    input_files = os.listdir(input_path)
+    input_files = [input_path + os.sep + file for file in input_files]
     data_file_path = os.path.dirname(
         os.path.abspath(__file__)) + os.sep + "output_files"
     # Creating Output Directory
@@ -547,7 +474,7 @@ def main(_):
         "eurostat_population_bmi.mcf"
     tmcf_path = data_file_path + os.sep + \
         "eurostat_population_bmi.tmcf"
-    process(ip_files, cleaned_csv_path, mcf_path,\
+    process(input_files, cleaned_csv_path, mcf_path,\
         tmcf_path)
 
 

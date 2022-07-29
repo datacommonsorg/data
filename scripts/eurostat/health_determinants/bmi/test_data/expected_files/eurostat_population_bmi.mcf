@@ -5,7 +5,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Person
 healthBehavior: dcs:Normalweight
-name: "Population: Percentage Normalweight Among"
+name: "Percentage Normalweight Among Population"
 
 Node: dcid:Percent_Normalweight_In_Count_Person_Citizen
 typeOf: dcs:StatisticalVariable
