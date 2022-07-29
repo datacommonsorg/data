@@ -80,6 +80,7 @@ def _update_name_property(name_prop: str) -> str:
             name_prop = name_prop.replace(key, value)
     return name_prop
 
+
 # pylint: disable = too-many-return-statements
 # pylint: disable = too-many-branches
 def _generate_pv_node(prop: str) -> str:
@@ -122,7 +123,7 @@ def _generate_pv_node(prop: str) -> str:
         if "OrMoreMinutes" in prop:
             return f"duration: [{prop.replace('OrMoreMinutes','')} - Minutes]"
         if "To" in prop:
-            prop = prop.replace('Minutes','').replace('To', ' ')
+            prop = prop.replace('Minutes', '').replace('To', ' ')
             return f"duration: [{prop} Minutes]"
         return f"duration: [Minutes {prop.replace('Minutes','')}]"
     if "ForeignBorn" in prop or "Native" in prop:
@@ -134,6 +135,8 @@ def _generate_pv_node(prop: str) -> str:
       or "Obese" in prop or "Obesity" in prop:
         return f"healthBehavior: dcs:{prop}"
     return None
+
+
 # pylint: enable = too-many-return-statements
 # pylint: enable = too-many-branches
 

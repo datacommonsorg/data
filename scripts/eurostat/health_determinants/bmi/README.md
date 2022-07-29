@@ -19,7 +19,7 @@ Dataset with Degree of Urbanisation, Country of Birth, Country of Citizenship an
 
 ### Download URL
 The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/health/data/database -> 	Health -> Health determinants (hlth_det).
-The actual URLs are listed in input_files.py.
+The actual URLs are listed in download_input_files.py.
 
 
 #### API Output
