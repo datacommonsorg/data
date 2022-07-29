@@ -29,6 +29,7 @@ from process import PopulationEstimateBySex
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
 EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
 
+
 class TestProcess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
