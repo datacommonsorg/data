@@ -164,3 +164,4 @@ def get_place_dcid(place_name: str) -> str:
   Utility wrapper that returns the place dcid given a name
   """
     return _PLACE_MAP.get(place_name, '')
+

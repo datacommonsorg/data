@@ -18,6 +18,7 @@ import unittest
 from .state_division_to_dcid import get_place_dcid
 
 
+
 class PlaceMapTest(unittest.TestCase):
 
     def test_place_id_resolution_by_name(self):
