@@ -185,10 +185,12 @@ def format_descriptor_df(df):
     df_1 = df_1.apply(lambda x: x.explode() if x.name in
                       ['TreeNumber'] else x)
     df_1['Descriptor_dcid'] = 'bio/' + df_1['DescriptorID'].astype(str)
+    df_1['DescriptorName'] = '"' + df_1.DescriptorName + '"'
     df_1['DescriptorParentID'] = df_1['TreeNumber'].str[:-4]
     map_dict = dict(zip(df_1['TreeNumber'], df_1['Descriptor_dcid']))
     df_1 = df_1.replace({"DescriptorParentID": map_dict})
     df_1["DescriptorParentID"] = np.where(df_1['DescriptorParentID'].str[0] == "b", df_1["DescriptorParentID"], np.nan)
+    df_1 = df_1.drop_duplicates()
     return df_1
 
 
@@ -237,6 +239,9 @@ def format_concept_df(df):
     df_3['ScopeNote'] = df_3['ScopeNote'].str.strip()
     df_3 = df_3 = (df_3.set_index('DescriptorID').apply(
         lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
+    col_names_quote = ['ScopeNote', 'ConceptName']
+    for col in col_names_quote:
+        df_3.update('"' + df_3[[col]].astype(str) + '"')
     df_3['Concept_dcid'] = 'bio/' + df_3['ConceptID'].astype(str)
     df_3['Descriptor_dcid'] = 'bio/' + df_3['DescriptorID'].astype(str)
     return df_3
@@ -283,10 +288,10 @@ def mesh_wrapper(file_input):
     df3 = format_concept_df(df)
     df4 = format_term_df(df)
 
-    df1.to_csv('mesh_descriptor.csv')
-    df2.to_csv('mesh_qualifier.csv')
-    df3.to_csv('mesh_concept.csv')
-    df4.to_csv('mesh_term.csv')
+    df1.to_csv('mesh_descriptor.csv', doublequote=False, escapechar='\\')
+    df2.to_csv('mesh_qualifier.csv', doublequote=False, escapechar='\\')
+    df3.to_csv('mesh_concept.csv', doublequote=False, escapechar='\\')
+    df4.to_csv('mesh_term.csv', doublequote=False, escapechar='\\')
 
 
 def main():
