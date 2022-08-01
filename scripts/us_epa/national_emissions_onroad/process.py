@@ -61,7 +61,8 @@ def _replace_metadata(df: pd.DataFrame,column_name: str) -> pd.DataFrame:
     from metadata and returns the DF.
 
     Args:
-        df (pd.DataFrame): df as the input, to change column values
+        df (pd.DataFrame): df as the input, to change column values,
+        column_name (str): column_name as a string, which has to be changed
 
     Returns:
         df (pd.DataFrame): modified df as output
