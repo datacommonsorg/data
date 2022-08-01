@@ -55,7 +55,7 @@ _TMCF_TEMPLATE = ("Node: E:national_emission_onroad->E0\n"
                   "value: C:national_emission_onroad->observation\n")
 
 
-def _replace_metadata(df: pd.DataFrame,column_name: str) -> pd.DataFrame:
+def _replace_metadata(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata and returns the DF.
@@ -113,7 +113,7 @@ def _regularize_columns(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
             'state', 'fips state code', 'data category', 'reporting period',
             'emissions operating type', 'emissions type code', 'pollutant desc'
         ])
-        df = _replace_metadata(df,'fips code')
+        df = _replace_metadata(df, 'fips code')
         df['pollutant type(s)'] = 'nan'
     else:
         df.rename(columns={
@@ -156,10 +156,10 @@ def _onroad(file_path: str) -> pd.DataFrame:
     },
               inplace=True)
     df['year'] = df['year'].str[:4]
-    df = _replace_metadata(df,'unit')
-    df = _replace_metadata(df,'scc')
-    df = _replace_metadata(df,'pollutant code')
-    df = _replace_metadata(df,'pollutant type(s)')
+    df = _replace_metadata(df, 'unit')
+    df = _replace_metadata(df, 'scc')
+    df = _replace_metadata(df, 'pollutant code')
+    df = _replace_metadata(df, 'pollutant type(s)')
     df['SV'] = ('Annual_Amount_Emissions_' + df['scc'].astype(str) + '_' +
                 df['pollutant type(s)'].astype(str) + '_' +
                 df['pollutant code'].astype(str))
@@ -211,12 +211,12 @@ class USAirEmissionTrends:
         final_mcf_template = ""
         for sv in sv_list:
             sv_checker = {
-            "typeOf": "dcs:StatisticalVariable",
-            "populationType": "dcs:Emissions",
-            "measurementQualifier": "dcs:Annual",
-            "statType": "dcs:measuredValue",
-            "measuredProperty": "dcs:amount"
-            }   
+                "typeOf": "dcs:StatisticalVariable",
+                "populationType": "dcs:Emissions",
+                "measurementQualifier": "dcs:Annual",
+                "statType": "dcs:measuredValue",
+                "measuredProperty": "dcs:amount"
+            }
             emission_type = pollutant = ''
             sv_property = sv.split("_")
             source = '\nemissionSource: dcs:' + sv_property[3]
