@@ -1,0 +1,8 @@
+Node: E:USA_Annual_Population->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person
+measurementMethod: dcs:CensusPEPSurvey
+observationAbout: C:USA_Annual_Population->Location
+observationDate: C:USA_Annual_Population->Year
+observationPeriod: "P1Y"
+value: C:USA_Annual_Population->Count_Person 
