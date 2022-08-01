@@ -31,7 +31,7 @@ The MeSH data stores the vocabulary thesaurus used for indexing articles for Pub
 
 ### Notes and Caveats
 
-The data is formatted in XML format. So, it had to be parsed into CSV format, which might have contributed to the extended runtime of the program, depending on the RAM of the user's system.
+The data is formatted in XML format. Therefore, this must be converted into a CSV file, which may contribute to extending the runtime of the program depending on the RAM of the user's system.
 
 ### License
 
