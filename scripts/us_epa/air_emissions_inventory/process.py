@@ -38,7 +38,6 @@ _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "populationType: dcs:Emissions\n"
                  "emissionSourceType: dcs:NonBiogenicEmissionSource\n"
                  "measurementQualifier: dcs:Annual{pv2}{pv3}\n"
-                 "emissionType: dcs:CriteriaAirPollutants\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:amount\n")
 
@@ -203,7 +202,7 @@ def _state_emissions(file_path: str) -> pd.DataFrame:
     df = _replace_pollutant(df, 'Pollutant')
     df = _replace_source_category(df, 'Tier 1 Description')
     df['SV'] = 'Annual_Amount_Emissions_' + df['Tier 1 Description'] +\
-            '_NonBiogenicEmissionSource_CriteriaAirPollutants_' + df['Pollutant']
+            '_NonBiogenicEmissionSource_' + df['Pollutant']
     df = df.drop(columns=['Tier 1 Description', 'Pollutant'])
     # Changing the years present as columns into row values.
     df = df.melt(id_vars=['SV', 'geo_Id'],
@@ -262,7 +261,7 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
         df = _replace_pollutant(df, 'pollutant')
         df = _replace_source_category(df, 'Source Category')
         df['SV'] = 'Annual_Amount_Emissions_' + df['Source Category'] +\
-                '_NonBiogenicEmissionSource_CriteriaAirPollutants_' + df['pollutant']
+                '_NonBiogenicEmissionSource_' + df['pollutant']
         df = df.drop(columns=['Source Category', 'pollutant'])
         # Changing the years present as columns into row values.
         df = df.melt(id_vars=['SV'], var_name='year', value_name='observation')
@@ -323,25 +322,23 @@ class USAirPollutionEmissionTrends:
             "populationType": "dcs:Emissions",
             "emissionSourceType": "dcs:NonBiogenicEmissionSource",
             "measurementQualifier": "dcs:Annual",
-            "emissionType": "dcs:CriteriaAirPollutants",
             "statType": "dcs:measuredValue",
             "measuredProperty": "dcs:amount"
         }
         for sv in sv_list:
             sv_property = sv.split("_")
-            if ("OtherIndustrialProcesses" in sv_property[-4] or
-                    "MiscellaneousEmissionSource" in sv_property[-4] or
-                    "FuelCombustionOther" in sv_property[-4]):
-                source = ('\nemissionSource: dcs:' + sv_property[-5] + "_" +
-                          sv_property[-4])
+            if ("OtherIndustrialProcesses" in sv_property[-3] or
+                    "MiscellaneousEmissionSource" in sv_property[-3] or
+                    "FuelCombustionOther" in sv_property[-3]):
+                source = ('\nemissionSource: dcs:' + sv_property[-4] + "_" +
+                          sv_property[-3])
                 sv_checker['emissionSource'] = 'dcs:' + sv_property[
-                    -5] + "_" + sv_property[-4]
+                    -4] + "_" + sv_property[-3]
             else:
-                source = '\nemissionSource: dcs:' + sv_property[-4]
-                sv_checker['emissionSource'] = sv_property[-4]
+                source = '\nemissionSource: dcs:' + sv_property[-3]
+                sv_checker['emissionSource'] = sv_property[-3]
             pollutant = '\nemittedThing: dcs:' + sv_property[-1]
             sv_checker['emittedThing'] = 'dcs:' + sv_property[-1]
-
             generated_sv = get_statvar_dcid(sv_checker)
             if (generated_sv != sv):
                 sv_replacement[sv] = generated_sv
