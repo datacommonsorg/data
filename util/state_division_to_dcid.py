@@ -123,6 +123,7 @@ _PLACE_MAP = {
     "Fla.": "geoId/12",
     "Ga.": "geoId/13",
     "Md.": "geoId/24",
+    "N.C.": "geoId/37",
     "N.C.": "goId/37",
     "S.C.": "geoId/45",
     "Va.": "geoId/51",
