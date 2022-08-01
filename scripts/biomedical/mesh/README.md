@@ -12,7 +12,7 @@
     - [Artifacts](#artifacts)
       - [Scripts](#scripts)
       - [tMCFs](#tmcfs)
-     - [Schema](#schema)
+    - [Schema](#schema)
   - [Examples](#examples)
 
 ## About the Dataset
