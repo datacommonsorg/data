@@ -120,7 +120,8 @@ _BMI = {
 }
 
 
-def replace_col_values(data_df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+def _replace_col_values(data_df: pd.DataFrame,
+                        column_name: str) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.

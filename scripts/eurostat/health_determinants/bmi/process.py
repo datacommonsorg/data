@@ -41,7 +41,7 @@ _COMMON_MODULE_DIR = os.path.join(os.path.dirname(__file__), '..')
 sys.path.insert(1, _COMMON_MODULE_DIR)
 # pylint: disable=import-error
 # pylint: disable=wrong-import-position
-from common.replacement_functions import (_split_column, replace_col_values)
+from common.replacement_functions import (_split_column, _replace_col_values)
 
 from common.denominator_mcf_generator import (generate_mcf_template,
                                               write_to_mcf_path)
@@ -124,10 +124,7 @@ def _common_transformations(data_df: pd.DataFrame,
     # Filtering out the required rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
     for col_name in col_names:
-        data_df = replace_col_values(data_df, col_name)
-    # data_df = _replace_bmi(data_df)
-    # data_df = _replace_sex(data_df)
-    # data_df = replace_func(data_df)
+        data_df = _replace_col_values(data_df, col_name)
     return data_df
 
 
