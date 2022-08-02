@@ -22,12 +22,7 @@ from absl import app, flags
 # For import common.replacement_functions
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
-from common.replacement_functions import (_replace_sex, _replace_physact,
-                                          _replace_isced11, _replace_quant_inc,
-                                          _replace_deg_urb, _replace_levels,
-                                          _replace_duration, _replace_c_birth,
-                                          _replace_citizen, _replace_lev_limit,
-                                          _replace_bmi, _split_column)
+from common.replacement_functions import (_replace_col_values, _split_column)
 # For import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
@@ -78,9 +73,9 @@ def _healthenhancing_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_isced11(df)
+    df = _replace_col_values(df, 'physact')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'isced11')
     df['SV'] = 'Percent_'+df['physact']+'_'+\
         'HealthEnhancingPhysicalActivity_In_Count_Person_'+\
         df['isced11']+'_'+df['sex']
@@ -112,9 +107,9 @@ def _healthenhancing_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_quant_inc(df)
+    df = _replace_col_values(df, 'physact')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'quant_inc')
     df['SV'] = 'Percent_' + df['physact'] + '_' +\
         'HealthEnhancingPhysicalActivity'+ '_In_Count_Person_' + df['sex']\
         + '_' + df['quant_inc']
@@ -147,9 +142,9 @@ def _healthenhancing_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_deg_urb(df)
+    df = _replace_col_values(df, 'physact')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'deg_urb')
     df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
         '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'deg_urb', 'physact', 'sex'], inplace=True)
@@ -174,9 +169,9 @@ def _workrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_isced11(df)
-    df = _replace_sex(df)
-    df = _replace_levels(df)
+    df = _replace_col_values(df, 'isced11')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'levels')
     df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity' + '_' + df['levels']+\
         '_In_Count_Person_' + df['isced11'] + '_'+ df['sex']
     df.drop(columns=['unit', 'age', 'levels', 'isced11', 'sex'], inplace=True)
@@ -207,9 +202,9 @@ def _workrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_quant_inc(df)
-    df = _replace_sex(df)
-    df = _replace_levels(df)
+    df = _replace_col_values(df, 'quant_inc')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'levels')
     df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity' + '_' + df['levels']+\
         '_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']
     df.drop(columns=['unit', 'age', 'levels', 'quant_inc', 'sex'], inplace=True)
@@ -240,9 +235,9 @@ def _workrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_deg_urb(df)
-    df = _replace_sex(df)
-    df = _replace_levels(df)
+    df = _replace_col_values(df, 'deg_urb')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'levels')
     df.drop(columns=['unit', 'age'], inplace=True)
     df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity_' + df['levels']\
         + '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
@@ -269,9 +264,9 @@ def _nonworkrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_isced11(df)
+    df = _replace_col_values(df, 'physact')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'isced11')
     df['SV'] = 'Percent_' + df['physact'] + '_NonWorkRelatedPhysicalActivity'+\
         '_In_Count_Person_' + df['isced11'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'isced11', 'physact', 'sex'], inplace=True)
@@ -296,9 +291,9 @@ def _nonworkrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_quant_inc(df)
+    df = _replace_col_values(df, 'physact')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'quant_inc')
     df['SV'] = 'Percent_' + df['physact'] + '_NonWorkRelatedPhysicalActivity'+\
         '_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']
     df.drop(columns=['unit', 'age', 'quant_inc', 'physact', 'sex'],
@@ -333,9 +328,9 @@ def _nonworkrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_deg_urb(df)
-    df = _replace_sex(df)
-    df = _replace_physact(df)
+    df = _replace_col_values(df, 'deg_urb')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'physact')
     df.drop(columns=['unit', 'age'], inplace=True)
     df['SV'] = 'Percent_' + df['physact'] + '_' + 'NonWorkRelatedPhysical'+\
         'Activity_In_Count_Person_' + df['deg_urb'] + '_'+df['sex']
@@ -363,9 +358,9 @@ def _healthenhancing_nonworkrelated_by_sex_education(df: pd.DataFrame)\
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_duration(df)
-    df = _replace_sex(df)
-    df = _replace_isced11(df)
+    df = _replace_col_values(df, 'duration')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'isced11')
     df['SV'] = 'Percent_' + df['duration'] + '_' + 'HealthEnhancingPhysical'+\
         'Activity_In_Count_Person_' + df['isced11'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'duration', 'isced11', 'sex'], inplace=True)
@@ -392,9 +387,9 @@ def _healthenhancing_nonworkrelated_by_sex_income(df: pd.DataFrame)\
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_duration(df)
-    df = _replace_sex(df)
-    df = _replace_quant_inc(df)
+    df = _replace_col_values(df, 'duration')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'quant_inc')
     df['SV'] = 'Percent_' + df['duration'] + '_HealthEnhancingPhysical'+\
         'Activity_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']
     df.drop(columns=['unit', 'age', 'duration', 'quant_inc', 'sex'],
@@ -427,9 +422,9 @@ def _healthenhancing_nonworkrelated_by_sex_urbanisation(df: pd.DataFrame)\
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_deg_urb(df)
-    df = _replace_sex(df)
-    df = _replace_duration(df)
+    df = _replace_col_values(df, 'deg_urb')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'duration')
     df['SV'] = 'Percent_' + df['duration'] + '_HealthEnhancingPhysicalActivity'\
         + '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'duration', 'deg_urb', 'sex'], inplace=True)
@@ -460,9 +455,9 @@ def _healthenhancing_by_sex_nativity(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_c_birth(df)
+    df = _replace_col_values(df, 'physact')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'c_birth')
     df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
         '_In_Count_Person_' + df['sex'] + '_' + df['c_birth']
     df.drop(columns=['unit', 'age', 'physact', 'c_birth', 'sex'], inplace=True)
@@ -493,9 +488,9 @@ def _healthenhancing_by_sex_citizenship(df: pd.DataFrame) -> pd.DataFrame:
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_citizen(df)
+    df = _replace_col_values(df, 'physact')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'citizen')
     df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
         '_In_Count_Person_' + df['citizen'] + '_' + df['sex']
     df.drop(columns=['unit', 'age', 'physact', 'citizen', 'sex'], inplace=True)
@@ -527,9 +522,9 @@ def _healthenhancing_by_sex_activitylimitation(
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_physact(df)
-    df = _replace_sex(df)
-    df = _replace_lev_limit(df)
+    df = _replace_col_values(df, 'physact')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'lev_limit')
     df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
         '_In_Count_Person_' + df['sex'] + '_' + df['lev_limit']
     df.drop(columns=['unit', 'age', 'physact', 'lev_limit', 'sex'],
@@ -562,9 +557,9 @@ def _healthenhancing_nonworkrelated_by_sex_bmi(
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020'])
-    df = _replace_duration(df)
-    df = _replace_sex(df)
-    df = _replace_bmi(df)
+    df = _replace_col_values(df, 'duration')
+    df = _replace_col_values(df, 'sex')
+    df = _replace_col_values(df, 'bmi')
     df['SV'] = 'Percent_' + df['duration'] + '_NonWorkRelatedPhysicalActivity'+\
         '_In_Count_Person_' + df['sex'] + '_' + df['bmi']
     df.drop(columns=['unit', 'age', 'bmi', 'duration', 'sex'], inplace=True)
@@ -592,8 +587,8 @@ def _dailypractice_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
     df = _split_column(df, cols[0])
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
-    df = _replace_isced11(df)
-    df = _replace_sex(df)
+    df = _replace_col_values(df, 'isced11')
+    df = _replace_col_values(df, 'sex')
     df['SV'] = 'Percent_' + df['isced11'] + '_PhysicalActivity' +\
         '_In_Count_Person_' + df['sex']
     df.drop(columns=['age', 'isced11', 'sex'], inplace=True)
@@ -625,8 +620,8 @@ def _walkingcycling_atleast30mins_by_sex_education(df: pd.DataFrame)\
     # Filtering out the wanted rows and columns.
     df = df[df['age'] == 'TOTAL']
     df = df.drop(columns=['EU27_2020'])
-    df = _replace_isced11(df)
-    df = _replace_sex(df)
+    df = _replace_col_values(df, 'isced11')
+    df = _replace_col_values(df, 'sex')
     df['SV'] = 'Percent_' + 'AtLeast30MinutesPerDay' + '_WalkingOrCycling_' +\
         'PhysicalActivity' + '_In_Count_Person_' + df['isced11'] +\
             '_' + df['sex']
