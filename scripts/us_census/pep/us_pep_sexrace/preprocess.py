@@ -22,6 +22,7 @@ import os
 import json
 from absl import app
 from absl import flags
+import enum
 from national.national_1900_1970 import process_national_1900_1970
 from national.national_1980_1990 import process_national_1980_1990
 from national.national_1990_2000 import process_national_1990_2000
@@ -38,6 +39,14 @@ from county.county_1990_2000 import process_county_1990_2000
 from county.county_2000_2009 import process_county_2000_2009
 from county.county_2010_2020 import process_county_2010_2020
 from postprocess import create_single_csv, generate_mcf, generate_tmcf
+
+
+class Outputfiles(enum.Enum):
+    NationalBefore2000 = 1
+    StateCountyBefore2000 = 2
+    StateCountyAfter2000 = 3
+    NationalAfter2000 = 4
+
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
@@ -143,10 +152,10 @@ def process(config_files: list, test=False):
     ]
 
     output_files_names = {
-        1: national_before_2000,
-        2: state_county_before_2000,
-        3: state_county_after_2000,
-        4: national_after_2000
+        Outputfiles.NationalBefore2000.value: national_before_2000,
+        Outputfiles.StateCountyBefore2000.value: state_county_before_2000,
+        Outputfiles.StateCountyAfter2000.value: state_county_after_2000,
+        Outputfiles.NationalAfter2000.value: national_after_2000
     }
     column_names = create_single_csv(output_files_names)
 

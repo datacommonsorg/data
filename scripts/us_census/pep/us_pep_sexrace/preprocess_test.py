@@ -17,10 +17,12 @@ Script to automate the testing for USA Population by Sex Race preprocess script.
 
 import os
 import unittest
-from preprocess import process
+import sys
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
+sys.path.insert(0, module_dir_)
+from preprocess import process
 
 expected_data_folder = os.path.join(module_dir_,
                                     "test_data/expected_output_files")

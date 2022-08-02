@@ -20,7 +20,7 @@ These are the attributes that we will use
 | Race					| Races off the population in the US.										|
 
 #### Cleaned Data
-Cleaned data will be inside [Output/postprocess.csv] as a CSV file with the following columns.
+Cleaned data will be inside four CSVs file with the following columns.
 
 - Year
 - geo_ID
