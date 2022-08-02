@@ -31,7 +31,6 @@ output_files - output files (mcf, tmcf and csv are written here)
 """
 
 import os
-from pyclbr import Function
 import sys
 import pandas as pd
 import numpy as np
@@ -42,11 +41,7 @@ _COMMON_MODULE_DIR = os.path.join(os.path.dirname(__file__), '..')
 sys.path.insert(1, _COMMON_MODULE_DIR)
 # pylint: disable=import-error
 # pylint: disable=wrong-import-position
-from common.replacement_functions import (_replace_sex, _replace_isced11,
-                                          _replace_quant_inc, _replace_deg_urb,
-                                          _replace_c_birth, _replace_citizen,
-                                          _replace_lev_limit, _replace_bmi,
-                                          _split_column)
+from common.replacement_functions import (_split_column, replace_col_values)
 
 from common.denominator_mcf_generator import (generate_mcf_template,
                                               write_to_mcf_path)
@@ -90,11 +85,20 @@ _EXISTING_SV_DEG_URB_GENDER = {
     "Count_Person_Male_Urban": "Count_Person_Urban_Male",
 }
 
+_DATASET_COLUMN_HEADER = {
+    'time\\geo': 'time',
+    'geo\\time': 'geo',
+    "quantile": "quant_inc",
+    "isced97": "isced11"
+}
+
 _SV_DENOMINATOR = 1
 
+_MULTI_COL_INDEX = 0
 
-def _common_transformations(data_df: pd.DataFrame, split_mulit_cols: str,
-                            replace_func: Function) -> pd.DataFrame:
+
+def _common_transformations(data_df: pd.DataFrame,
+                            col_names: list) -> pd.DataFrame:
     """
     Process the input dataframe data_df and applies transformations
     such as replacing values, splitting mulitple columns.
@@ -109,12 +113,21 @@ def _common_transformations(data_df: pd.DataFrame, split_mulit_cols: str,
     """
     # Splits the DataFrame having mulitple column data
     # in a single column and creates them as Individual Columns
-    data_df = _split_column(data_df, split_mulit_cols)
+    df_columns = data_df.columns.to_list()
+    for header, value in _DATASET_COLUMN_HEADER.items():
+        if header in df_columns[_MULTI_COL_INDEX]:
+            df_columns[_MULTI_COL_INDEX] = df_columns[_MULTI_COL_INDEX].replace(
+                header, value)
+
+    data_df.columns = df_columns
+    data_df = _split_column(data_df, df_columns[_MULTI_COL_INDEX])
     # Filtering out the required rows and columns
     data_df = data_df[data_df['age'] == 'TOTAL']
-    data_df = _replace_bmi(data_df)
-    data_df = _replace_sex(data_df)
-    data_df = replace_func(data_df)
+    for col_name in col_names:
+        data_df = replace_col_values(data_df, col_name)
+    # data_df = _replace_bmi(data_df)
+    # data_df = _replace_sex(data_df)
+    # data_df = replace_func(data_df)
     return data_df
 
 
@@ -128,11 +141,10 @@ def _age_sex_education(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df_cols = ['unit,bmi,isced11,sex,age,geo', '2019', '2014']
-    data_df.columns = df_cols
-    data_df = _common_transformations(data_df=data_df,
-                                      split_mulit_cols=df_cols[0],
-                                      replace_func=_replace_isced11)
+    data_df = _common_transformations(
+        data_df=data_df,
+        #split_mulit_cols=df_cols[0],
+        col_names=["bmi", "sex", "isced11"])
     # Filtering out the required rows and columns
     data_df = data_df[~(data_df['geo'].isin(['EU27_2020', 'EU28']))]
     # Creating SV using the DataFrame Values
@@ -155,14 +167,10 @@ def _age_sex_education_history(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df_cols = [
-        'isced11,bmi,sex,age,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL', 'ES',
-        'FR', 'CY', 'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK', 'TR'
-    ]
-    data_df.columns = df_cols
-    data_df = _common_transformations(data_df=data_df,
-                                      split_mulit_cols=df_cols[0],
-                                      replace_func=_replace_isced11)
+    data_df = _common_transformations(
+        data_df=data_df,
+        #split_mulit_cols=df_cols[0],
+        col_names=["bmi", "sex", "isced11"])
     data_df['SV'] = 'Percent_' + data_df['bmi'] +'_' + \
                     'In_Count_Person_' + data_df['isced11'] + \
                     '_' + data_df['sex']
@@ -183,11 +191,10 @@ def _age_sex_income(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df_cols = ['unit,bmi,quant_inc,sex,age,geo', '2019', '2014']
-    data_df.columns = df_cols
-    data_df = _common_transformations(data_df=data_df,
-                                      split_mulit_cols=data_df.columns[0],
-                                      replace_func=_replace_quant_inc)
+    data_df = _common_transformations(
+        data_df=data_df,
+        #   split_mulit_cols=data_df.columns[0],
+        col_names=["bmi", "sex", "quant_inc"])
     # Filtering out the wanted rows and columns
     data_df = data_df[~(data_df['geo'].isin(['EU27_2020', 'EU28']))]
     data_df['SV'] = 'Percent_' + data_df['bmi'] +'_' + \
@@ -211,14 +218,10 @@ def _age_sex_income_history(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df_cols = [
-        'bmi,sex,age,quant_inc,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL', 'ES',
-        'FR', 'CY', 'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK', 'TR'
-    ]
-    data_df.columns = df_cols
-    data_df = _common_transformations(data_df=data_df,
-                                      split_mulit_cols=df_cols[0],
-                                      replace_func=_replace_quant_inc)
+    data_df = _common_transformations(
+        data_df=data_df,
+        #   split_mulit_cols=df_cols[0],
+        col_names=["bmi", "sex", "quant_inc"])
     # Filtering out the required rows and columns
     data_df = data_df[(~(data_df['quant_inc'] == 'UNK'))]
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
@@ -242,18 +245,12 @@ def _age_sex_degree_urbanisation(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df_cols = [
-        'bmi,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'UK', 'TR'
-    ]
-    data_df.columns = df_cols
     # Filtering out the wanted rows and columns
     data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
-    data_df = _common_transformations(data_df=data_df,
-                                      split_mulit_cols=df_cols[0],
-                                      replace_func=_replace_deg_urb)
+    data_df = _common_transformations(
+        data_df=data_df,
+        #   split_mulit_cols=df_cols[0],
+        col_names=["bmi", "sex", "deg_urb"])
     data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] +'_' + \
                     'In_Count_Person_' + data_df['deg_urb'] + \
@@ -276,18 +273,12 @@ def _age_sex_birth_country(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df_cols = [
-        'unit,bmi,sex,age,c_birth,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'UK', 'TR'
-    ]
-    data_df.columns = df_cols
     # Filtering out the wanted rows and columns
     data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
-    data_df = _common_transformations(data_df=data_df,
-                                      split_mulit_cols=df_cols[0],
-                                      replace_func=_replace_c_birth)
+    data_df = _common_transformations(
+        data_df=data_df,
+        #   split_mulit_cols=df_cols[0],
+        col_names=["bmi", "sex", "c_birth"])
     data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + data_df['sex'] + \
@@ -309,18 +300,13 @@ def _age_sex_citizenship_country(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df_cols = [
-        'unit,bmi,sex,age,citizen,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'UK', 'TR'
-    ]
-    data_df.columns = df_cols
     # Filtering out the wanted rows and columns
+
     data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
-    data_df = _common_transformations(data_df=data_df,
-                                      split_mulit_cols=df_cols[0],
-                                      replace_func=_replace_citizen)
+    data_df = _common_transformations(
+        data_df=data_df,
+        #   split_mulit_cols=df_cols[0],
+        col_names=["bmi", "sex", "citizen"])
     data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + \
@@ -342,18 +328,12 @@ def _age_sex_acitivity_limitation(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
-    df_cols = [
-        'bmi,lev_limit,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE', 'BG',
-        'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI',
-        'SE', 'IS', 'NO', 'UK', 'TR'
-    ]
-    data_df.columns = df_cols
     # Filtering out the wanted rows and columns
     data_df = data_df.drop(columns=['EU27_2020', 'EU28'])
-    data_df = _common_transformations(data_df=data_df,
-                                      split_mulit_cols=df_cols[0],
-                                      replace_func=_replace_lev_limit)
+    data_df = _common_transformations(
+        data_df=data_df,
+        #   split_mulit_cols=df_cols[0],
+        col_names=["bmi", "sex", "lev_limit"])
     data_df = data_df.drop(columns=['unit', 'age'])
     data_df['SV'] = 'Percent_' + data_df['bmi'] + '_' + \
                     'In_Count_Person_' + \
@@ -408,6 +388,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     sv_list = []
     f_names = []
     for file_path in input_files:
+
         file_name_with_ext = os.path.basename(file_path)
         f_names.append(file_name_with_ext)
         file_name_without_ext = os.path.splitext(file_name_with_ext)[0]
@@ -422,6 +403,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
             "hlth_ehis_de2": _age_sex_income_history
         }
         df = pd.read_csv(file_path, sep='\t', header=0)
+        df.columns = [col.strip() for col in df.columns.to_list()]
         df = file_to_function_mapping[file_name_without_ext](df)
         df['SV'] = df['SV'].str.replace('_Total', '')
         final_df = pd.concat([final_df, df])
