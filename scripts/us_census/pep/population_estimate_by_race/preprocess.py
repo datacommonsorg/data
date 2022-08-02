@@ -20,7 +20,7 @@
 import os
 import re
 import sys
-# For import util.alpha2_to_dcid
+# To import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
 sys.path.insert(1, _COMMON_PATH)
@@ -30,8 +30,6 @@ from absl import app
 from absl import flags
 from util.alpha2_to_dcid import USSTATE_MAP
 from states_to_shortform import get_states
-
-# pd.set_option("display.max_columns", None)
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
