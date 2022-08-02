@@ -52,16 +52,16 @@ _QUANT_INC = {
 }
 
 _FREQUENC = {
-    'DAY': 'DailyUsage',
+    'DAY': 'Daily',
     'LT1M': 'LessThanOnceAMonth',
     'MTH': 'EveryMonth',
-    'NM12': 'NotUsedInTheLast12Months',
-    'NVR': 'NeverUsed',
-    'NVR_NM12': 'NeverUsedOrNotUsedInTheLast12Months',
+    'NM12': 'NotInTheLast12Months',
+    'NVR': 'Never',
+    'NVR_NM12': 'NeverOrNotInTheLast12Months',
     'WEEK': 'EveryWeek',
     'GE1W': 'AtLeastOnceAWeek',
-    'NVR_OCC': 'NeverUsedOrOccasionallyUsage',
-    'NBINGE': 'NeverUsed'
+    'NVR_OCC': 'NeverOrOccasionallyUsage',
+    'NBINGE': 'Never'
 }
 
 _DEG_URB = {
@@ -72,10 +72,10 @@ _DEG_URB = {
 }
 
 _LEVELS = {
-    'HVY': 'HeavyActivityLevel',
-    'MOD': 'ModerateActivityLevel',
-    'MOD_HVY': 'ModerateActivityLevelOrHeavyActivityLevel',
-    'NONE_LGHT': 'NoActivityOrLightActivityLevel'
+    'HVY': 'HeavyActivity',
+    'MOD': 'ModerateActivity',
+    'MOD_HVY': 'ModerateActivityOrHeavyActivity',
+    'NONE_LGHT': 'NoActivityOrLightActivity'
 }
 
 _DURATION = {
@@ -83,7 +83,11 @@ _DURATION = {
     'MN1-149': '1To149Minutes',
     'MN150-299': '150To299Minutes',
     'MN_GE150': '150OrMoreMinutes',
-    'MN_GE300': '300OrMoreMinutes'
+    'MN_GE300': '300OrMoreMinutes',
+    'Y_LT1': 'LessThan1Year',
+    'Y1-5': 'From1To5Years',
+    'Y5-10': 'From5To10Years',
+    'Y_GE10': '10YearsOrOver'
 }
 
 _C_BIRTH = {
@@ -119,13 +123,64 @@ _BMI = {
     'GE30': 'Obesity'
 }
 
+_SMOKING = {
+    'TOTAL': 'Total',
+    'NSM': 'NonSmoker',
+    'SM_CUR': 'TobaccoSmoking',
+    'SM_DAY': 'Daily_TobaccoSmoking',
+    'SM_OCC': 'Occasional_TobaccoSmoking',
+    'SM_LT20D': 'LessThan20CigarettesPerDay',
+    'SM_GE20D': '20OrMoreCigarettesPerDay',
+    'DSM_GE20': '20OrMoreCigarettesPerDay',
+    'DSM_LT20': 'LessThan20CigarettesPerDay'
+}
+
+_FREQUENC_TOBACCO = {
+    'DAY_GE1HD': 'AtLeastOneHourPerDay',
+    'DAY_LT1HD': 'LessThanOneHourPerDay',
+    'LT1W': 'LessThanOnceAWeek',
+    'GE1W': 'AtLeastOnceAWeek',
+    'RAR_NVR': 'RarelyOrNever',
+    'DAY': 'Daily_TobaccoSmoking',
+    'FMR': 'FormerSmoker_Formerly',
+    'OCC': 'Occasional_TobaccoSmoking',
+    'NVR': 'TobaccoSmoking_NeverUsed'
+}
+
+_FREQUENC_ALCOHOL = {
+    'DAY': 'Daily',
+    'LT1M': 'LessThanOnceAMonth',
+    'MTH': 'EveryMonth',
+    'NM12': 'NotInTheLast12Months',
+    'NVR': 'Never',
+    'NVR_NM12': 'NeverOrNotInTheLast12Months',
+    'WEEK': 'EveryWeek',
+    'GE1W': 'AtLeastOnceAWeek',
+    'NVR_OCC': 'NeverOrOccasional',
+    'NBINGE': 'Never'
+}
+
+_N_PORTION = {
+    '0': '0Portions',
+    '1-4': 'From1To4Portions',
+    'GE5': '5PortionsOrMore'
+}
+
+_COICOP = {'CP0116': 'ConsumptionOfFruits', 'CP0117': 'ConsumptionOfVegetables'}
+
+_ISCED97 = {
+    'ED0-2': 'PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation',
+    'ED3_4': 'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
+    'ED5_6': 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
+    'TOTAL': 'Total'
+}
+
 
 def _replace_col_values(data_df: pd.DataFrame,
                         column_name: str) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
-
     Args:
         data_df (pd.DataFrame): data_df as the input, to change column values
         column_name (str): Column values to be replaced
@@ -144,7 +199,13 @@ def _replace_col_values(data_df: pd.DataFrame,
         'c_birth': _C_BIRTH,
         'citizen': _CITIZEN,
         'lev_limit': _LEV_LIMIT,
-        'bmi': _BMI
+        'bmi': _BMI,
+        'smoking': _SMOKING,
+        'frequenc_tobacco': _FREQUENC_TOBACCO,
+        'frequenc_alcohol': _FREQUENC_ALCOHOL,
+        'n_portion': _N_PORTION,
+        'coicop': _COICOP,
+        'isced97': _ISCED97
     }
     return data_df.replace({column_name: mapper[column_name]})
 
@@ -152,10 +213,8 @@ def _replace_col_values(data_df: pd.DataFrame,
 def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
     """
     Divides a single column into multiple columns and returns the DF.
-
     Args:
         df (pd.DataFrame): df as the input, to divide the column
-
     Returns:
         df (pd.DataFrame): modified df as output
     """
