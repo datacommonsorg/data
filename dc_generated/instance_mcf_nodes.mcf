@@ -1,0 +1,2211 @@
+Node: dcid:AtLeastOneHourPerDay
+dcid: "AtLeastOneHourPerDay"
+name: "AtLeastOneHourPerDay"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_OnceADay_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_OnceADay_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+activityFrequency: dcid:OnceADay
+name: "Population: Percentage Once A Day, Consumption Of Fruits Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:IntermediateSocialSupport
+dcid: "IntermediateSocialSupport"
+name: "IntermediateSocialSupport"
+description: "Perceived Intermediate social support."
+typeOf: dcid:SocialSupportLevelEnum
+
+Node: dcid:Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:LessThanOnceAWeek
+name: "Population: Percentage Less Than Once A Week, Consumption Of Vegetables Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:activityFrequency
+dcid: "activityFrequency"
+name: "activityFrequency"
+description: "The interval at which an activity or event takes place."
+rangeIncludes: dcid:QuantityRange, dcid:FrequencyEnum
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_TOTAL
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_TOTAL"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_TOTAL
+name: "Population: Percentage Consumption Of Fruits Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Rarely
+dcid: "Rarely"
+name: "Rarely"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+name: "Population: Percentage Consumption Of Vegetables Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: Percentile40To60
+unit: dcid:Percentile
+dcid: "Percentile40To60"
+endValue: 60
+name: "Percentile 40 To 60"
+startValue: 40
+typeOf: dcid:QuantityRange
+
+Node: Percentile20To40
+unit: dcid:Percentile
+dcid: "Percentile20To40"
+endValue: 40
+name: "Percentile 20 To 40"
+startValue: 20
+typeOf: dcid:QuantityRange
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_ModerateActivityLimitation
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_ModerateActivityLimitation"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_ModerateActivityLimitation
+name: "Population: Percentage Consumption Of Fruits Among Female, Moderate Activity Limitation"
+globalActivityLimitationindicator: dcid:ModerateActivityLimitation
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Vegetables Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:physicalActivityEffortLevel
+dcid: "physicalActivityEffortLevel"
+name: "physicalActivityEffortLevel"
+descriptionUrl: "https://ec.europa.eu/eurostat/cache/metadata/en/hlth_det_esms.htm"
+description: "Effort involved in performing physical activity"
+rangeIncludes: dcid:PhysicalActivityEffortLevelEnum
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:NoActivityLimitation
+dcid: "NoActivityLimitation"
+name: "No Activity Limitation"
+typeOf: dcid:GlobalActivityLimitationindicatorEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Overweight
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Overweight"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Overweight
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_TertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_TertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducation_Female
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducation
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Fruits Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Citizen
+dcid: "Citizen"
+name: "Citizen"
+description: "Citizen of reporting region/country."
+typeOf: dcid:CitizenshipEnum
+
+Node: dcid:Percent_Never_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_Never_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+activityFrequency: dcid:Never
+name: "Population: Percentage Never, Consumption Of Fruits Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Walking
+dcid: "Walking"
+name: "Walking"
+typeOf: dcid:ExerciseTypeEnum
+
+Node: Percentile60To80
+unit: dcid:Percentile
+dcid: "Percentile60To80"
+endValue: 80
+name: "Percentile 60 To 80"
+startValue: 60
+typeOf: dcid:QuantityRange
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_WithinEU28AndNotACitizen_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_WithinEU28AndNotACitizen_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_WithinEU28AndNotACitizen_Female
+citizenship: dcid:WithinEU28AndNotACitizen
+name: "Population: Percentage Consumption Of Fruits Among Within EU28 And Not A Citizen, Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:SocialSupportBeneficiaryTypeEnum
+dcid: "SocialSupportBeneficiaryTypeEnum"
+name: "SocialSupportBeneficiaryTypeEnum"
+description: "Category of people who receives the social support."
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf0To20Percentile
+income: dcid:Percentile0To20
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf0To20Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf0To20Percentile
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female, Income Of 0 To 20 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:LessThanOnceAWeek
+name: "Population: Percentage Less Than Once A Week, Consumption Of Fruits Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:consumptionQuantity
+dcid: "consumptionQuantity"
+name: "consumptionQuantity"
+description: "Quantity or amount of usage of a product or resource."
+rangeIncludes: dcid:QuantityRange
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:Percent_OnceADay_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_OnceADay_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:OnceADay
+name: "Population: Percentage Once A Day, Consumption Of Fruits Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: Percentile80To100
+unit: dcid:Percentile
+dcid: "Percentile80To100"
+endValue: 100
+name: "Percentile 80 To 100"
+startValue: 80
+typeOf: dcid:QuantityRange
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_ForeignBornWithinEU28
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_ForeignBornWithinEU28"
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_ForeignBornWithinEU28
+name: "Population: Percentage Consumption Of Fruits Among Foreign Born Within EU28"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+nativity: dcid:ForeignBornWithinEU28
+
+Node: dcid:Underweight
+dcid: "Underweight"
+name: "Underweight"
+descriptionUrl: "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Underweight"
+description: "A person having body mass index (BMI) smaller than 18.5."
+typeOf: dcid:BodyMassIndexClassificationEnum
+
+Node: dcid:socialSupportType
+dcid: "socialSupportType"
+name: "socialSupportType"
+description: "Type of social support a person is providing."
+rangeIncludes: dcid:SocialSupportTypeEnum
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+name: "Population: Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_PreObese
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_PreObese"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_PreObese
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female, Pre Obese"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks__PreObese
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:LessThanOnceAMonth
+dcid: "LessThanOnceAMonth"
+name: "LessThanOnceAMonth"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:BroadbandAccessLine
+dcid: "BroadbandAccessLine"
+name: "Broadband Access Line"
+description: "Broadband access utility."
+typeOf: dcid:InfrastructureTypeEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_ForeignBornWithinEU28
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_ForeignBornWithinEU28"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_ForeignBornWithinEU28
+name: "Population: Percentage Consumption Of Fruits Among Female, Foreign Born Within EU28"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+nativity: dcid:ForeignBornWithinEU28
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Normalweight
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Normalweight"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Normalweight
+name: "Population: Percentage Consumption Of Fruits Among Female, Normalweig"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__Normalweight
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Normalweight
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Normalweight"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Normalweight
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female, Normalweig"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks__Normalweight
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_OnceADay_ConsumptionOfVegetables_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_OnceADay_ConsumptionOfVegetables_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:OnceADay
+name: "Population: Percentage Once A Day, Consumption Of Vegetables Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_OnceADay_ConsumptionOfFruits_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_OnceADay_ConsumptionOfFruits_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:OnceADay
+name: "Population: Percentage Once A Day, Consumption Of Fruits Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_OnceADay_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_OnceADay_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:OnceADay
+name: "Population: Percentage Once A Day, Consumption Of Fruits Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Never_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_Never_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:Never
+name: "Population: Percentage Never, Consumption Of Fruits Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:SevereActivityLimitation
+dcid: "SevereActivityLimitation"
+name: "Severe Activity Limitation"
+typeOf: dcid:GlobalActivityLimitationindicatorEnum
+
+Node: dcid:Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:LessThanOnceAWeek
+name: "Population: Percentage Less Than Once A Week, Consumption Of Fruits Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:HeavyActivityLevel
+dcid: "HeavyActivityLevel"
+name: "Heavy Activity Level"
+descriptionUrl: "https://ec.europa.eu/eurostat/cache/metadata/en/hlth_det_esms.htm"
+description: "Mostly heavy labour or physically demanding work."
+typeOf: dcid:PhysicalActivityEffortLevelEnum
+
+Node: dcid:MuscleStrengthening
+dcid: "MuscleStrengthening"
+name: "MuscleStrengthening"
+typeOf: dcid:ExerciseTypeEnum
+
+Node: Portions0
+unit: dcid:Portions
+dcid: "Portions0"
+name: "Portions 0"
+value: 0
+typeOf: dcid:Quantity
+
+Node: dcid:AtLeastOnceAWeek
+dcid: "AtLeastOnceAWeek"
+name: "AtLeastOnceAWeek"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBornWithinEU28
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBornWithinEU28"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_ForeignBornWithinEU28
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Foreign Born Within EU28"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+nativity: dcid:ForeignBornWithinEU28
+
+Node: dcid:GlobalActivityLimitationindicatorEnum
+dcid: "GlobalActivityLimitationindicatorEnum"
+name: "GlobalActivityLimitationindicatorEnum"
+descriptionUrl: "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Activity_limitation"
+description: "Activity limitation is a dimension of health/disability capturing long-standing limitation in performing usual activities (due to health problems)."
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+
+Node: dcid:SocialSupportTypeEnum
+dcid: "SocialSupportTypeEnum"
+name: "SocialSupportTypeEnum"
+description: "Type of social support a person is providing."
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+
+Node: dcid:ECigarettes
+dcid: "ECigarettes"
+name: "ECigarettes"
+typeOf: dcid:TobaccoUsageTypeEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_TertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_TertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducation_Female
+name: "Population: Percentage Consumption Of Pure Fruit Or Vegetable Juice Among Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_OnceADay_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_OnceADay_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+activityFrequency: dcid:OnceADay
+name: "Population: Percentage Once A Day, Consumption Of Vegetables Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:NotProvidingInformalCare
+dcid: "NotProvidingInformalCare"
+name: "NotProvidingInformalCare"
+typeOf: dcid:SocialSupportTypeEnum
+
+Node: dcid:FrequencyEnum
+dcid: "FrequencyEnum"
+name: "FrequencyEnum"
+description: "The rate at which something occurs over a particular period of time."
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_NoActivityLimitation
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_NoActivityLimitation"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_NoActivityLimitation
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, No Activity Limitation"
+globalActivityLimitationindicator: dcid:NoActivityLimitation
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:NonRelatives
+dcid: "NonRelatives"
+name: "NonRelatives"
+typeOf: dcid:SocialSupportBeneficiaryTypeEnum
+
+Node: dcid:NotInTheLast12Months
+dcid: "NotInTheLast12Months"
+name: "NotInTheLast12Months"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Cycling
+dcid: "Cycling"
+name: "Cycling"
+typeOf: dcid:ExerciseTypeEnum
+
+Node: dcid:EveryWeek
+dcid: "EveryWeek"
+name: "EveryWeek"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:ModerateActivityLevel
+dcid: "ModerateActivityLevel"
+name: "Moderate Activity Level"
+descriptionUrl: "https://ec.europa.eu/eurostat/cache/metadata/en/hlth_det_esms.htm"
+description: "Mostly walking or tasks involving moderate physical effort."
+typeOf: dcid:PhysicalActivityEffortLevelEnum
+
+Node: dcid:NeverOrOccasionally
+dcid: "NeverOrOccasionally"
+name: "NeverOrOccasionally"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:ExposureToTobaccoSmoke
+dcid: "ExposureToTobaccoSmoke"
+name: "ExposureToTobaccoSmoke"
+description: "Exposure to secondhand tobacco smoke."
+typeOf: dcid:HealthBehaviorEnum
+
+Node: dcid:Percent_Never_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_Never_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:Never
+name: "Population: Percentage Never, Consumption Of Vegetables Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:LessThanOnceAWeek
+name: "Population: Percentage Less Than Once A Week, Consumption Of Fruits Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: Percentile0To20
+unit: dcid:Percentile
+dcid: "Percentile0To20"
+endValue: 20
+name: "Percentile 0 To 20"
+startValue: 0
+typeOf: dcid:QuantityRange
+
+Node: dcid:NonWorkRelatedPhysicalActivity
+dcid: "NonWorkRelatedPhysicalActivity"
+name: "Non Work Related PhysicalActivity"
+typeOf: dcid:PhysicalActivityEnum
+specializationOf: dcid:PhysicalActivity
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Overweight
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Overweight"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Overweight
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Underweight
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Underweight"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Underweight
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+activityFrequency: dcid:LessThanOnceAWeek
+name: "Population: Percentage Less Than Once A Week, Consumption Of Vegetables Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Population: Percentage Consumption Of Pure Fruit Or Vegetable Juice Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:socialSupportLevel
+dcid: "socialSupportLevel"
+name: "socialSupportLevel"
+descriptionUrl: "https://ec.europa.eu/eurostat/cache/metadata/en/hlth_det_esms.htm"
+description: "Level of perceived social support(perception that one has close people to count on, concern shown by other people, practival help from neighbours in case of need)."
+rangeIncludes: dcid:SocialSupportLevelEnum
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf0To20Percentile
+income: dcid:Percentile0To20
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf0To20Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf0To20Percentile
+name: "Population: Percentage Consumption Of Fruits Among Female, Income Of 0 To 20 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+name: "Population: Percentage Consumption Of Vegetables Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Pure Fruit Or Vegetable Juice Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:LessThanOnceAWeek
+name: "Population: Percentage Less Than Once A Week, Consumption Of Vegetables Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:TobaccoSmoking
+dcid: "TobaccoSmoking"
+name: "TobaccoSmoking"
+description: "Smoking of tobacco products."
+typeOf: dcid:HealthBehaviorEnum
+specializationOf: dcid:Smoking
+
+Node: dcid:FormerSmoker
+dcid: "FormerSmoker"
+name: "FormerSmoker"
+description: "Person who was smoking earlier and not currently smoking"
+typeOf: dcid:HealthBehaviorEnum
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Pure Fruit Or Vegetable Juice Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Fruits Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Vegetables Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf40To60Percentile
+income: dcid:Percentile40To60
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf40To60Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf40To60Percentile
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female, Income Of 40 To 60 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:LimitedActivityLimitation
+dcid: "LimitedActivityLimitation"
+name: "Limited Activity Limitation"
+typeOf: dcid:GlobalActivityLimitationindicatorEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_NoActivityLimitation
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_NoActivityLimitation"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_NoActivityLimitation
+name: "Population: Percentage Consumption Of Fruits Among Female, No Activity Limitation"
+globalActivityLimitationindicator: dcid:NoActivityLimitation
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Cigarettes
+dcid: "Cigarettes"
+name: "Cigarettes"
+typeOf: dcid:TobaccoUsageTypeEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Population: Percentage Consumption Of Fruits Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Obesity
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Obesity"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Obesity
+name: "Population: Percentage Consumption Of Fruits Among Female, Obesity"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__Obesity
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Male_ForeignBornWithinEU28
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Male_ForeignBornWithinEU28"
+gender: dcid:Male
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male_ForeignBornWithinEU28
+name: "Population: Percentage Consumption Of Fruits Among Male, Foreign Born Within EU28"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+nativity: dcid:ForeignBornWithinEU28
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_WithinEU28AndNotACitizen_Female
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_WithinEU28AndNotACitizen_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_WithinEU28AndNotACitizen_Female
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+citizenship: dcid:WithinEU28AndNotACitizen
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Within EU28 And Not A Citizen, Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Population: Percentage Consumption Of Fruits Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Aerobic
+dcid: "Aerobic"
+name: "Aerobic"
+typeOf: dcid:ExerciseTypeEnum
+
+Node: dcid:AtLeastOnceADay
+dcid: "AtLeastOnceADay"
+name: "AtLeastOnceADay"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf20To40Percentile
+income: dcid:Percentile20To40
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf20To40Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf20To40Percentile
+name: "Population: Percentage Consumption Of Fruits Among Female, Income Of 20 To 40 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Never_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_Never_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+activityFrequency: dcid:Never
+name: "Population: Percentage Never, Consumption Of Vegetables Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_AtLeastOnceADay_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastOnceADay_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:AtLeastOnceADay
+name: "Population: Percentage At Least Once A Day, Consumption Of Pure Fruit Or Vegetable Juice Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban_Male
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban_Male"
+gender: dcid:Male
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Urban_Male
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Urban, Male"
+placeOfResidenceClassification: dcid:Urban
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Fruits Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:InfrastructureTypeEnum
+dcid: "InfrastructureTypeEnum"
+name: "InfrastructureTypeEnum"
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+
+Node: dcid:minimumWage
+dcid: "minimumWage"
+name: "minimumWage"
+description: "The minimumWage is minimum wage as determined by the administrative authority in that region."
+rangeIncludes: dcid:Number
+typeOf: dcid:Property
+domainIncludes: dcid:AdministrativeArea
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Citizen_Female
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Citizen_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Citizen_Female
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+citizenship: dcid:Citizen
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Citizen, Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:AtleastTwiceADay
+dcid: "AtleastTwiceADay"
+name: "AtleastTwiceADay"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+name: "Population: Percentage Consumption Of Vegetables Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:StrongSocialSupport
+dcid: "StrongSocialSupport"
+name: "StrongSocialSupport"
+description: "Perceived Strong social support."
+typeOf: dcid:SocialSupportLevelEnum
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_IncomeOf0To20Percentile
+income: dcid:Percentile0To20
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_IncomeOf0To20Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf0To20Percentile
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Income Of 0 To 20 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:BodyMassIndexClassificationEnum
+dcid: "BodyMassIndexClassificationEnum"
+name: "BodyMassIndexClassificationEnum"
+descriptionUrl: "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Body_mass_index_(BMI)"
+description: "Body Mass Index(BMI) CLassification."
+typeOf: dcid:Class
+subClassOf: dcid:HealthBehaviorEnum
+
+Node: dcid:PreObese
+dcid: "PreObese"
+name: "PreObese"
+descriptionUrl: "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Pre-obese"
+description: "A person having body mass index (BMI) greater than or equal to 25 and less than 30."
+typeOf: dcid:BodyMassIndexClassificationEnum
+
+Node: dcid:Occasional
+dcid: "Occasional"
+name: "Occasional"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+name: "Population: Percentage Consumption Of Fruits Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:NotACitizen
+dcid: "NotACitizen"
+name: "NotACitizen"
+description: "Citizen of a county other than the reporting region/country."
+typeOf: dcid:CitizenshipEnum
+
+Node: dcid:TelecomInfrastructure
+dcid: "TelecomInfrastructure"
+name: "Telecom Infrastructure"
+subClassOf: dcid:Thing
+typeOf: dcid:Infrastructure
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Obesity
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Obesity"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Obesity
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Obesity"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables__Obesity
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:infrastructureType
+dcid: "infrastructureType"
+name: "infrastructureType"
+rangeIncludes: dcid:InfrastructureTypeEnum
+typeOf: dcid:Property
+domainIncludes: dcid:Infrastructure
+
+Node: dcid:CitizenOutsideEU28
+dcid: "CitizenOutsideEU28"
+name: "CitizenOutsideEU28"
+description: "Citizen of a country outside EU28."
+typeOf: dcid:CitizenshipEnum
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Native
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Native"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Native
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Native"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+nativity: dcid:Native
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Urban_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Urban_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Urban_Female
+name: "Population: Percentage Consumption Of Fruits Among Urban, Female"
+placeOfResidenceClassification: dcid:Urban
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Daily
+dcid: "Daily"
+name: "Daily"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf80To100Percentile
+income: dcid:Percentile80To100
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf80To100Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf80To100Percentile
+name: "Population: Percentage Consumption Of Fruits Among Female, Income Of 80 To 100 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_AtLeastOnceADay_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_TertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastOnceADay_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_TertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducation_Female
+activityFrequency: dcid:AtLeastOnceADay
+name: "Population: Percentage At Least Once A Day, Consumption Of Pure Fruit Or Vegetable Juice Among Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:PhysicalActivityEffortLevelEnum
+dcid: "PhysicalActivityEffortLevelEnum"
+name: "PhysicalActivityEffortLevelEnum"
+description: "Level of effort involved in performing the physical activity."
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+
+Node: dcid:Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Population: Percentage Consumption Of Fruits Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:debtor
+dcid: "debtor"
+name: "debtor"
+rangeIncludes: dcid:Person, dcid:AdministrativeArea
+typeOf: dcid:Property
+domainIncludes: dcid:Debt
+
+Node: dcid:activityDuration
+dcid: "activityDuration"
+name: "activityDuration"
+description: "The duration of performing an activity."
+isPartOf: "http://meta.schema.org"
+rangeIncludes: dcid:Duration, dcid:QuantityRange
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:WorkRelatedPhysicalActivity
+dcid: "WorkRelatedPhysicalActivity"
+name: "Work Related Physical Activity"
+typeOf: dcid:PhysicalActivityEnum
+specializationOf: dcid:PhysicalActivity
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Male_ModerateActivityLimitation
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Male_ModerateActivityLimitation"
+gender: dcid:Male
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male_ModerateActivityLimitation
+name: "Population: Percentage Consumption Of Fruits Among Male, Moderate Activity Limitation"
+globalActivityLimitationindicator: dcid:ModerateActivityLimitation
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_OnceADay_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_OnceADay_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:OnceADay
+name: "Population: Percentage Once A Day, Consumption Of Vegetables Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:WithinEU28AndNotACitizen
+dcid: "WithinEU28AndNotACitizen"
+name: "WithinEU28AndNotACitizen"
+description: "Citizen of a country within EU28 other than the reporting region/country."
+typeOf: dcid:CitizenshipEnum
+specializationOf: dcid:NotACitizen
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf40To60Percentile
+income: dcid:Percentile40To60
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf40To60Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf40To60Percentile
+name: "Population: Percentage Consumption Of Fruits Among Female, Income Of 40 To 60 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Never
+dcid: "Never"
+name: "Never"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf60To80Percentile
+income: dcid:Percentile60To80
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf60To80Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf60To80Percentile
+name: "Population: Percentage Consumption Of Fruits Among Female, Income Of 60 To 80 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_CitizenOutsideEU28_Female
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_CitizenOutsideEU28_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_CitizenOutsideEU28_Female
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+citizenship: dcid:CitizenOutsideEU28
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Citizen Outside EU28, Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_TertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_TertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducation_Female
+activityFrequency: dcid:Never__OccasionallyUsage
+name: "Population: Percentage Never Or Occasionally Usage, Consumption Of Pure Fruit Or Vegetable Juice Among Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:NonSmoker
+dcid: "NonSmoker"
+name: "NonSmoker"
+typeOf: dcid:HealthBehaviorEnum
+
+Node: dcid:ForeignBorn
+dcid: "ForeignBorn"
+name: "ForeignBorn"
+description: "Native to a place other than the reporting region/country."
+typeOf: dcid:NativityEnum
+
+Node: dcid:Percent_Never_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_Never_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:Never
+name: "Population: Percentage Never, Consumption Of Vegetables Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:ConsumptionOfVegetables
+dcid: "ConsumptionOfVegetables"
+name: "ConsumptionOfVegetables"
+typeOf: dcid:HealthBehaviorEnum
+
+Node: dcid:Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Population: Percentage Consumption Of Vegetables Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Population: Percentage Consumption Of Pure Fruit Or Vegetable Juice Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_TertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_TertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducation_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Pure Fruit Or Vegetable Juice Among Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Vegetables Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Native
+dcid: "Native"
+name: "Native"
+description: "Native to the reporting region/country."
+typeOf: dcid:NativityEnum
+
+Node: dcid:Relatives
+dcid: "Relatives"
+name: "Relatives"
+typeOf: dcid:SocialSupportBeneficiaryTypeEnum
+
+Node: dcid:HealthEnhancingPhysicalActivity
+dcid: "HealthEnhancingPhysicalActivity"
+name: "Health Enhancing Physical Activity"
+typeOf: dcid:PhysicalActivityEnum
+specializationOf: dcid:PhysicalActivity
+
+Node: dcid:ProvidingInformalCare
+dcid: "ProvidingInformalCare"
+name: "ProvidingInformalCare"
+description: "Providing care or assistance to persons suffering from some age problem, chronic health condition or infirmity."
+typeOf: dcid:SocialSupportTypeEnum
+
+Node: dcid:socialSupportBeneficiaryType
+dcid: "socialSupportBeneficiaryType"
+name: "socialSupportBeneficiaryType"
+description: "Category of people who receives the social support."
+rangeIncludes: dcid:SocialSupportBeneficiaryTypeEnum
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Population: Percentage Consumption Of Vegetables Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Urban_Male
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Urban_Male"
+gender: dcid:Male
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Urban_Male
+name: "Population: Percentage Consumption Of Fruits Among Urban, Male"
+placeOfResidenceClassification: dcid:Urban
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:EuroStat_Employed
+dcid: "EuroStat_Employed"
+name: "EuroStat_Employed"
+descriptionUrl: "https://ec.europa.eu/eurostat/cache/metadata/en/une_esms.htm"
+description: "Employed persons are all persons (age 15-74) who worked at least one hour for pay or profit during the reference week or were temporarily absent from such work."
+typeOf: dcid:EmploymentEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Population: Percentage Consumption Of Vegetables Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Debt
+dcid: "Debt"
+name: "Debt"
+description: "Amount of money owed."
+typeOf: dcid:Class
+subClassOf: dcid:Thing
+
+Node: dcid:HazardousAlcoholConsumption
+dcid: "HazardousAlcoholConsumption"
+name: "HazardousAlcoholConsumption"
+description: "As per Eurostat Alcohol Consumption is classified as Hazardous when average rate of consumption is more than 20 grams pure alcohol daily for women and more than 40 grams daily for men."
+typeOf: dcid:HealthBehaviorEnum
+specializationOf: dcid:AlcoholConsumption
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Urban
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Urban"
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Urban
+name: "Population: Percentage Consumption Of Fruits Among Urban"
+placeOfResidenceClassification: dcid:Urban
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_AtLeastOnceADay_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastOnceADay_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:AtLeastOnceADay
+name: "Population: Percentage At Least Once A Day, Consumption Of Pure Fruit Or Vegetable Juice Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+dcid: "ConsumptionOfSugarSweetenedSoftDrinks"
+name: "ConsumptionOfSugarSweetenedSoftDrinks"
+typeOf: dcid:HealthBehaviorEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Population: Percentage Consumption Of Vegetables Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_ModerateActivityLimitation
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_ModerateActivityLimitation"
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_ModerateActivityLimitation
+name: "Population: Percentage Consumption Of Fruits Among Moderate Activity Limitation"
+globalActivityLimitationindicator: dcid:ModerateActivityLimitation
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Underweight
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Underweight"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Underweight
+name: "Population: Percentage Consumption Of Fruits Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Overweight
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Overweight"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Overweight
+name: "Population: Percentage Consumption Of Fruits Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:ForeignBornWithinEU28
+dcid: "ForeignBornWithinEU28"
+name: "ForeignBornWithinEU28"
+description: "Native to a place within EU28 other than the reporting region/country."
+typeOf: dcid:NativityEnum
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ModerateActivityLimitation
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ModerateActivityLimitation"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_ModerateActivityLimitation
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Moderate Activity Limitation"
+globalActivityLimitationindicator: dcid:ModerateActivityLimitation
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:From1To3TimesAWeek
+dcid: "From1To3TimesAWeek"
+name: "From1To3TimesAWeek"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:PhysicalActivityEnum
+dcid: "PhysicalActivityEnum"
+name: "PhysicalActivityEnum"
+description: "The type of physical activity performed."
+typeOf: dcid:Class
+subClassOf: dcid:HealthBehaviorEnum
+
+Node: dcid:Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+name: "Population: Percentage Consumption Of Fruits Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:LessThanOneHourPerDay
+dcid: "LessThanOneHourPerDay"
+name: "LessThanOneHourPerDay"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:Never__OccasionallyUsage
+name: "Population: Percentage Never Or Occasionally Usage, Consumption Of Pure Fruit Or Vegetable Juice Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Male_ModerateActivityLimitation
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Male_ModerateActivityLimitation"
+gender: dcid:Male
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male_ModerateActivityLimitation
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Male, Moderate Activity Limitation"
+globalActivityLimitationindicator: dcid:ModerateActivityLimitation
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:AerobicSports
+dcid: "AerobicSports"
+name: "AerobicSports"
+typeOf: dcid:ExerciseTypeEnum
+specializationOf: dcid:Aerobic
+
+Node: dcid:PhysicalActivity
+dcid: "PhysicalActivity"
+name: "Physical Activity"
+typeOf: dcid:PhysicalActivityEnum
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Vegetables Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+activityFrequency: dcid:LessThanOnceAWeek
+name: "Population: Percentage Less Than Once A Week, Consumption Of Fruits Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:NoActivityOrLightActivityLevel
+dcid: "NoActivityOrLightActivityLevel"
+name: "No Activity Or Light Activity Level"
+descriptionUrl: "https://ec.europa.eu/eurostat/cache/metadata/en/hlth_det_esms.htm"
+description: "Either not performing any working tasks or mostly sitting or standing."
+typeOf: dcid:PhysicalActivityEffortLevelEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf60To80Percentile
+income: dcid:Percentile60To80
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf60To80Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf60To80Percentile
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female, Income Of 60 To 80 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_OnceADay_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_OnceADay_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:OnceADay
+name: "Population: Percentage Once A Day, Consumption Of Vegetables Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:LessThanOnceAWeek
+dcid: "LessThanOnceAWeek"
+name: "LessThanOnceAWeek"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Infrastructure
+dcid: "Infrastructure"
+name: "Infrastructure"
+descriptionUrl: "https://en.wikipedia.org/wiki/Infrastructure"
+description: "Infrastructure the fundamental facilities and systems serving a country, city, or other area, including the services and facilities necessary for its economy to function."
+subClassOf: dcid:Thing
+typeOf: dcid:Class
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_CitizenOutsideEU28_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_CitizenOutsideEU28_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_CitizenOutsideEU28_Female
+citizenship: dcid:CitizenOutsideEU28
+name: "Population: Percentage Consumption Of Fruits Among Citizen Outside EU28, Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Citizen_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Citizen_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Citizen_Female
+citizenship: dcid:Citizen
+name: "Population: Percentage Consumption Of Fruits Among Citizen, Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Pure Fruit Or Vegetable Juice Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:LessThanOnceAWeek
+name: "Population: Percentage Less Than Once A Week, Consumption Of Vegetables Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:exerciseType
+dcid: "exerciseType"
+name: "exerciseType"
+description: "Type of exercise."
+rangeIncludes: dcid:ExerciseTypeEnum
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:Percent_Never_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_Never_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:Never
+name: "Population: Percentage Never, Consumption Of Fruits Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Normalweight
+dcid: "Normalweight"
+name: "Normalweight"
+descriptionUrl: "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Normal_weight"
+description: "A person having body mass index (BMI) greater than or equal to 18.5 and less than 25."
+typeOf: dcid:BodyMassIndexClassificationEnum
+
+Node: dcid:ExerciseTypeEnum
+dcid: "ExerciseTypeEnum"
+name: "ExerciseTypeEnum"
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf20To40Percentile
+income: dcid:Percentile20To40
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf20To40Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf20To40Percentile
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female, Income Of 20 To 40 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:PoorSocialSupport
+dcid: "PoorSocialSupport"
+name: "PoorSocialSupport"
+description: "Perceived Poor social support."
+typeOf: dcid:SocialSupportLevelEnum
+
+Node: dcid:Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+name: "Population: Percentage Consumption Of Vegetables Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_NotACitizen_Female
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_NotACitizen_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_NotACitizen_Female
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+citizenship: dcid:NotACitizen
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Not A Citizen, Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:globalActivityLimitationindicator
+dcid: "globalActivityLimitationindicator"
+name: "globalActivityLimitationindicator"
+descriptionUrl: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4426645"
+description: "The Global Activity Limitation Indicator (GALI) refers to a single-item measure of functional status where individuals are asked to rate their long-term limitations in usual activities due to a health problem"
+rangeIncludes: dcid:GlobalActivityLimitationindicatorEnum
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban_Female
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Urban_Female
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Urban, Female"
+placeOfResidenceClassification: dcid:Urban
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:OnceADay
+dcid: "OnceADay"
+name: "OnceADay"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:ModerateActivityLimitation
+dcid: "ModerateActivityLimitation"
+name: "Moderate Activity Limitation"
+typeOf: dcid:GlobalActivityLimitationindicatorEnum
+
+Node: dcid:ConsumptionOfPureFruitOrVegetableJuice
+dcid: "ConsumptionOfPureFruitOrVegetableJuice"
+name: "ConsumptionOfPureFruitOrVegetableJuice"
+typeOf: dcid:HealthBehaviorEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_PreObese
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_PreObese"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_PreObese
+name: "Population: Percentage Consumption Of Fruits Among Female, Pre Obese"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__PreObese
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Never_ConsumptionOfFruits_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_Never_ConsumptionOfFruits_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:Never
+name: "Population: Percentage Never, Consumption Of Fruits Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:ConsumptionOfFruits
+dcid: "ConsumptionOfFruits"
+name: "ConsumptionOfFruits"
+typeOf: dcid:HealthBehaviorEnum
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBornOutsideEU28
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBornOutsideEU28"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_ForeignBornOutsideEU28
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Foreign Born Outside EU28"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+nativity: dcid:ForeignBornOutsideEU28
+
+Node: dcid:ForeignBornOutsideEU28
+dcid: "ForeignBornOutsideEU28"
+name: "ForeignBornOutsideEU28"
+description: "Native to a place outside EU28."
+typeOf: dcid:NativityEnum
+
+Node: TobaccoUsageTypeEnum
+dcid: "TobaccoUsageTypeEnum"
+name: "TobaccoUsageTypeEnum"
+description: "The type of tobacco usage covers the type of tobacco products or the means or method it is used."
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_ModerateActivityLimitation
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_ModerateActivityLimitation"
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_ModerateActivityLimitation
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Moderate Activity Limitation"
+globalActivityLimitationindicator: dcid:ModerateActivityLimitation
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:From4To6TimesAWeek
+name: "Population: Percentage From 4 To 6 Times A Week, Consumption Of Fruits Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
+name: "Population: Percentage Consumption Of Fruits Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:TertiaryEducationStageOne__TertiaryEducationStageTwo
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+activityFrequency: dcid:Never__OccasionallyUsage
+name: "Population: Percentage Never Or Occasionally Usage, Consumption Of Pure Fruit Or Vegetable Juice Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:tobaccoUsageType
+dcid: "tobaccoUsageType"
+name: "tobaccoUsageType"
+description: "Type of tobacco products used or the means or method it is used."
+rangeIncludes: dcid:TobaccoUsageTypeEnum
+typeOf: dcid:Property
+domainIncludes: dcid:Person
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf80To100Percentile
+income: dcid:Percentile80To100
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf80To100Percentile"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_IncomeOf80To100Percentile
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female, Income Of 80 To 100 Percentile"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_ForeignBorn
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_ForeignBorn"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_ForeignBorn
+name: "Population: Percentage Consumption Of Fruits Among Female, Foreign Born"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+nativity: dcid:ForeignBorn
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Underweight
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Underweight"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Underweight
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Never_ConsumptionOfVegetables_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_Never_ConsumptionOfVegetables_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:Never
+name: "Population: Percentage Never, Consumption Of Vegetables Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBorn
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBorn"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_ForeignBorn
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Foreign Born"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+nativity: dcid:ForeignBorn
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Population: Percentage Consumption Of Fruits Among Pre Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:EuroStat_Unemployed
+dcid: "EuroStat_Unemployed"
+name: "EuroStat_Unemployed"
+descriptionUrl: "https://ec.europa.eu/eurostat/cache/metadata/en/une_esms.htm"
+description: "Unemployed persons are all persons (age 15 to 74) who were not employed during the reference week, had actively sought work during the past four weeks and were ready to begin working immediately or within two weeks."
+typeOf: dcid:EmploymentEnum
+
+Node: dcid:SocialSupportLevelEnum
+dcid: "SocialSupportLevelEnum"
+name: "SocialSupportLevelEnum"
+description: "Social support is the perception that one has close people to count on, concern shown by other people, practival help from neighbours in case of need."
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+name: "Population: Percentage Consumption Of Pure Fruit Or Vegetable Juice Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+activityFrequency: dcid:Never__OccasionallyUsage
+name: "Population: Percentage Never Or Occasionally Usage, Consumption Of Pure Fruit Or Vegetable Juice Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Normalweight
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Normalweight"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Normalweight
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Normalweig"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables__Normalweight
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:From4To6TimesAWeek
+dcid: "From4To6TimesAWeek"
+name: "From4To6TimesAWeek"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_AtLeastOnceADay_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_AtLeastOnceADay_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+activityFrequency: dcid:AtLeastOnceADay
+name: "Population: Percentage At Least Once A Day, Consumption Of Pure Fruit Or Vegetable Juice Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfPureFruitOrVegetableJuice
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:EveryMonth
+dcid: "EveryMonth"
+name: "EveryMonth"
+typeOf: dcid:FrequencyEnum
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban"
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Urban
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Urban"
+placeOfResidenceClassification: dcid:Urban
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+name: "Population: Percentage Consumption Of Fruits Among Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:AlcoholConsumption
+dcid: "AlcoholConsumption"
+name: "AlcoholConsumption"
+description: "Consumption of alcoholic drinks."
+typeOf: dcid:HealthBehaviorEnum
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Population: Percentage Consumption Of Fruits Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female"
+measuredProperty: dcid:count
+educationalAttainment: dcid:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_PreObese
+populationType: dcid:Person
+dcid: "Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_PreObese"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_PreObese
+activityFrequency: dcid:Daily
+consumptionQuantity: dcid:Portions0
+name: "Population: Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Pre Obese"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits__ConsumptionOfVegetables__PreObese
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_NotACitizen_Female
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_NotACitizen_Female"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_NotACitizen_Female
+citizenship: dcid:NotACitizen
+name: "Population: Percentage Consumption Of Fruits Among Not A Citizen, Female"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfFruits
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Obesity
+populationType: dcid:Person
+dcid: "Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Obesity"
+gender: dcid:Female
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female_Obesity
+name: "Population: Percentage Consumption Of Sugar Sweetened Soft Drinks Among Female, Obesity"
+measuredProperty: dcid:count
+healthBehavior: dcid:ConsumptionOfSugarSweetenedSoftDrinks__Obesity
+typeOf: dcid:StatisticalVariable
+

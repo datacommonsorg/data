@@ -2,264 +2,777 @@
   "levelSummary": {
     "LEVEL_INFO": {
       "counters": {
-        "NumRowSuccesses": "13377",
-        "NumPVSuccesses": "120393",
-        "Existence_NumChecks": "120393",
-        "NumNodeSuccesses": "13377",
-        "Existence_NumDcCalls": "1"
+        "NumRowSuccesses": "3228",
+        "NumPVSuccesses": "29052",
+        "Existence_NumChecks": "32234",
+        "NumNodeSuccesses": "3228",
+        "Existence_NumDcCalls": "2"
       }
     },
     "LEVEL_WARNING": {
       "counters": {
-        "StatsCheck_MaxPercentFluctuationGreaterThan100": "42",
-        "Existence_MissingReference_variableMeasured": "13377"
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "1",
+        "Existence_MissingReference_educationalAttainment": "49",
+        "Existence_MissingReference_healthBehavior": "28",
+        "Existence_MissingReference_measurementDenominator": "1",
+        "Existence_MissingReference_activityFrequency": "4",
+        "Existence_MissingReference_unit": "22"
+      }
+    },
+    "LEVEL_ERROR": {
+      "counters": {
+        "Sanity_DifferentDcidsForSameStatVar": "8"
       }
     }
   },
   "entries": [{
-    "level": "LEVEL_WARNING",
+    "level": "LEVEL_ERROR",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "2"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "3"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "434"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
       "lineNumber": "435"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Found different curated IDs for same StatVar :: dcid1: 'Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_Female', dcid2: 'Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female'",
+    "counterKey": "Sanity_DifferentDcidsForSameStatVar"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "668"
+    },
+    "userMessage": "Found different curated IDs for same StatVar :: dcid1: 'Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female', dcid2: 'Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Sanity_DifferentDcidsForSameStatVar"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "679"
+    },
+    "userMessage": "Found different curated IDs for same StatVar :: dcid1: 'Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female', dcid2: 'Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Sanity_DifferentDcidsForSameStatVar"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "690"
+    },
+    "userMessage": "Found different curated IDs for same StatVar :: dcid1: 'Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female', dcid2: 'Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female'",
+    "counterKey": "Sanity_DifferentDcidsForSameStatVar"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "935"
+    },
+    "userMessage": "Found different curated IDs for same StatVar :: dcid1: 'Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_Female', dcid2: 'Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_Female', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_Female'",
+    "counterKey": "Sanity_DifferentDcidsForSameStatVar"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "945"
+    },
+    "userMessage": "Found different curated IDs for same StatVar :: dcid1: 'Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female', dcid2: 'Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Sanity_DifferentDcidsForSameStatVar"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "956"
+    },
+    "userMessage": "Found different curated IDs for same StatVar :: dcid1: 'Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female', dcid2: 'Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Sanity_DifferentDcidsForSameStatVar"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "967"
+    },
+    "userMessage": "Found different curated IDs for same StatVar :: dcid1: 'Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female', dcid2: 'Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female'",
+    "counterKey": "Sanity_DifferentDcidsForSameStatVar"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "866"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "134"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_CitizenOutsideEU28_Female'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "867"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "147"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Citizen_Female'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "1298"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "160"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBorn'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "1299"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "173"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBornOutsideEU28'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "1730"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "186"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBornWithinEU28'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "1731"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "199"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_IncomeOf0To20Percentile'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "2159"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "212"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ModerateActivityLimitation'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "2160"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "225"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Native'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "2591"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "238"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_NoActivityLimitation'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "2592"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "275"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Overweight'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "3023"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "299"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Underweight'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "3024"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "311"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "3455"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "324"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Male_ModerateActivityLimitation'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "3456"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "337"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_ModerateActivityLimitation'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "3887"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "349"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_NotACitizen_Female'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "3888"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "362"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "4319"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "374"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban_Female'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "4320"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "387"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban_Male'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "4751"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "400"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_WithinEU28AndNotACitizen_Female'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "4847"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "251"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables__Normalweight', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Normalweight'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "4848"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "263"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables__Obesity', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Obesity'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "5276"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "287"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__ConsumptionOfVegetables__PreObese', property: 'healthBehavior', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_PreObese'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "5277"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "544"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__Normalweight', property: 'healthBehavior', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Normalweight'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "5705"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "554"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__Obesity', property: 'healthBehavior', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_Obesity'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "5706"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "574"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfFruits__PreObese', property: 'healthBehavior', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_PreObese'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-      "lineNumber": "6137"
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "852"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'Percent_AtLeastOnceADay_asFrequencyof_ConsumptionOfFruits_In_Count_Person', property: 'variableMeasured', node: 'E:eurostat_population_consumptionoffruitsandvegetables->E0'",
-    "counterKey": "Existence_MissingReference_variableMeasured"
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfSugarSweetenedSoftDrinks__Normalweight', property: 'healthBehavior', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Normalweight'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "862"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfSugarSweetenedSoftDrinks__Obesity', property: 'healthBehavior', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Obesity'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "882"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'ConsumptionOfSugarSweetenedSoftDrinks__PreObese', property: 'healthBehavior', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_PreObese'",
+    "counterKey": "Existence_MissingReference_healthBehavior"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "584"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_Person_Female_TOTAL', property: 'measurementDenominator', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female_TOTAL'",
+    "counterKey": "Existence_MissingReference_measurementDenominator"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_AtLeastOnceADay_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "311"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_Daily_0Portions_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "614"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "754"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "902"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1036"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_From4To6TimesAWeek_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1224"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1213"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Never__OccasionallyUsage', property: 'activityFrequency', node: 'dcid:Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_Female'",
+    "counterKey": "Existence_MissingReference_activityFrequency"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1224"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Never__OccasionallyUsage', property: 'activityFrequency', node: 'dcid:Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_activityFrequency"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1236"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Never__OccasionallyUsage', property: 'activityFrequency', node: 'dcid:Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_TertiaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_activityFrequency"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1248"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Never__OccasionallyUsage', property: 'activityFrequency', node: 'dcid:Percent_NeverOrOccasionallyUsage_ConsumptionOfPureFruitOrVegetableJuice_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_activityFrequency"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "134"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "147"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "160"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "173"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "186"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "199"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "212"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "225"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "238"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "251"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "263"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "275"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "287"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "299"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "311"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "324"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "337"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "349"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "362"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "374"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "387"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "400"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Portions', property: 'unit', node: 'Portions0'",
+    "counterKey": "Existence_MissingReference_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "58"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "101"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "668"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "945"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "989"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1083"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1130"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1177"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1271"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_Never_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1318"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_Never_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1365"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_OnceADay_ConsumptionOfFruits_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1412"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Percent_OnceADay_ConsumptionOfVegetables_In_Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables_deno.mcf",
+      "lineNumber": "1"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'PrePrimaryEducation__PrimaryEducation__LowerSecondaryEducation', property: 'educationalAttainment', node: 'dcid:Count_Person_PrePrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "69"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_AtLeastTwiceADay_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "112"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_AtLeastTwiceADay_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "679"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "956"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_From1To3TimesWweek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1001"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_From4To6TimesAWeek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1095"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_From4To6TimesAWeek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1142"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_LessThanOnceAWeek_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1189"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_LessThanOnceAWeek_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1283"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_Never_ConsumptionOfFruits_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "eurostat_population_consumptionoffruitsandvegetables.mcf",
+      "lineNumber": "1330"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'TertiaryEducationStageOne__TertiaryEducationStageTwo', property: 'educationalAttainment', node: 'dcid:Percent_Never_ConsumptionOfVegetables_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female'",
+    "counterKey": "Existence_MissingReference_educationalAttainment"
   }],
   "statsCheckSummary": [{
-    "placeDcid": "country/HUN",
-    "statVarDcid": "Percent_NeverOrOccasionally_asFrequencyof_ConsumptionOfFruits_In_Count_Person_TertiaryEducation",
+    "placeDcid": "country/BEL",
+    "statVarDcid": "Percent_From1To3TimesWweek_ConsumptionOfFruits_In_Count_Person_Female",
     "measurementMethod": "EurostatRegionalStatistics",
     "observationPeriod": "",
     "scalingFactor": "100",
@@ -267,295 +780,25 @@
     "validationCounters": [{
       "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
       "problemPoints": [{
-        "date": "2014",
+        "date": "2008",
         "values": [{
-          "value": 3.5,
+          "value": 7.1,
           "locations": [{
             "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "6070"
+            "lineNumber": "123"
           }]
         }]
       }, {
         "date": "2019",
         "values": [{
-          "value": 7.4,
+          "value": 16.5,
           "locations": [{
             "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "6071"
+            "lineNumber": "124"
           }]
         }]
       }],
-      "percentDifference": 111.43
-    }]
-  }, {
-    "placeDcid": "country/HUN",
-    "statVarDcid": "Percent_NeverOrOccasionally_asFrequencyof_ConsumptionOfFruits_In_Count_Person_TertiaryEducation_Male",
-    "measurementMethod": "EurostatRegionalStatistics",
-    "observationPeriod": "",
-    "scalingFactor": "100",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2014",
-        "values": [{
-          "value": 3.7,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "6074"
-          }]
-        }]
-      }, {
-        "date": "2019",
-        "values": [{
-          "value": 9.6,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "6075"
-          }]
-        }]
-      }],
-      "percentDifference": 159.46
-    }]
-  }, {
-    "placeDcid": "country/ISL",
-    "statVarDcid": "Percent_From1To3TimesAWeek_asFrequencyof_ConsumptionOfFruits_In_Count_Person_TertiaryEducation_Female",
-    "measurementMethod": "EurostatRegionalStatistics",
-    "observationPeriod": "",
-    "scalingFactor": "100",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2014",
-        "values": [{
-          "value": 10.3,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "6719"
-          }]
-        }]
-      }, {
-        "date": "2019",
-        "values": [{
-          "value": 21.9,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "6720"
-          }]
-        }]
-      }],
-      "percentDifference": 112.62
-    }]
-  }, {
-    "placeDcid": "country/AUT",
-    "statVarDcid": "Percent_NeverOrOccasionally_asFrequencyof_ConsumptionOfVegetables_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male",
-    "measurementMethod": "EurostatRegionalStatistics",
-    "observationPeriod": "",
-    "scalingFactor": "100",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2014",
-        "values": [{
-          "value": 2.0,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "432"
-          }]
-        }]
-      }, {
-        "date": "2019",
-        "values": [{
-          "value": 4.2,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "433"
-          }]
-        }]
-      }],
-      "percentDifference": 110.0
-    }]
-  }, {
-    "placeDcid": "country/AUT",
-    "statVarDcid": "Percent_NeverOrOccasionally_asFrequencyof_ConsumptionOfVegetables_In_Count_Person_TertiaryEducation_Male",
-    "measurementMethod": "EurostatRegionalStatistics",
-    "observationPeriod": "",
-    "scalingFactor": "100",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2014",
-        "values": [{
-          "value": 0.7,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "425"
-          }]
-        }]
-      }, {
-        "date": "2019",
-        "values": [{
-          "value": 2.0,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "426"
-          }]
-        }]
-      }],
-      "percentDifference": 185.71
-    }]
-  }, {
-    "placeDcid": "country/AUT",
-    "statVarDcid": "Percent_NeverOrOccasionally_asFrequencyof_ConsumptionOfVegetables_In_Count_Person_TertiaryEducation",
-    "measurementMethod": "EurostatRegionalStatistics",
-    "observationPeriod": "",
-    "scalingFactor": "100",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2014",
-        "values": [{
-          "value": 0.6,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "421"
-          }]
-        }]
-      }, {
-        "date": "2019",
-        "values": [{
-          "value": 1.3,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "422"
-          }]
-        }]
-      }],
-      "percentDifference": 116.67
-    }]
-  }, {
-    "placeDcid": "country/GRC",
-    "statVarDcid": "Percent_From4To6TimesAWeek_asFrequencyof_ConsumptionOfVegetables_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female",
-    "measurementMethod": "EurostatRegionalStatistics",
-    "observationPeriod": "",
-    "scalingFactor": "100",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2014",
-        "values": [{
-          "value": 12.4,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "5136"
-          }]
-        }]
-      }, {
-        "date": "2019",
-        "values": [{
-          "value": 26.8,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "5137"
-          }]
-        }]
-      }],
-      "percentDifference": 116.13
-    }]
-  }, {
-    "placeDcid": "country/GRC",
-    "statVarDcid": "Percent_From4To6TimesAWeek_asFrequencyof_ConsumptionOfVegetables_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male",
-    "measurementMethod": "EurostatRegionalStatistics",
-    "observationPeriod": "",
-    "scalingFactor": "100",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2014",
-        "values": [{
-          "value": 16.2,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "5138"
-          }]
-        }]
-      }, {
-        "date": "2019",
-        "values": [{
-          "value": 35.8,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "5139"
-          }]
-        }]
-      }],
-      "percentDifference": 120.99
-    }]
-  }, {
-    "placeDcid": "country/GRC",
-    "statVarDcid": "Percent_From4To6TimesAWeek_asFrequencyof_ConsumptionOfVegetables_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation",
-    "measurementMethod": "EurostatRegionalStatistics",
-    "observationPeriod": "",
-    "scalingFactor": "100",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2014",
-        "values": [{
-          "value": 14.1,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "5134"
-          }]
-        }]
-      }, {
-        "date": "2019",
-        "values": [{
-          "value": 30.7,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "5135"
-          }]
-        }]
-      }],
-      "percentDifference": 117.73
-    }]
-  }, {
-    "placeDcid": "country/NOR",
-    "statVarDcid": "Percent_NeverOrOccasionally_asFrequencyof_ConsumptionOfFruits_In_Count_Person_Female",
-    "measurementMethod": "EurostatRegionalStatistics",
-    "observationPeriod": "",
-    "scalingFactor": "100",
-    "unit": "",
-    "validationCounters": [{
-      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
-      "problemPoints": [{
-        "date": "2014",
-        "values": [{
-          "value": 2.9,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "9916"
-          }]
-        }]
-      }, {
-        "date": "2019",
-        "values": [{
-          "value": 8.0,
-          "locations": [{
-            "file": "eurostat_population_consumptionoffruitsandvegetables.csv",
-            "lineNumber": "9917"
-          }]
-        }]
-      }],
-      "percentDifference": 175.86
+      "percentDifference": 132.39
     }]
   }],
   "commandArgs": {

@@ -62,11 +62,11 @@ _FREQUENC = {
     'GE1W': 'AtLeastOnceAWeek',
     'NVR_OCC': 'NeverOrOccasionallyUsage',
     'NBINGE': 'Never',
-     'GE1D': 'AtLeastOnceADay',
-     'GE2D' : 'AtLeastTwiceADay',
-	'1-3W' : 'From1To3TimesWweek',
-	 '4-6W': 'From4To6TimesAWeek',
-     '1D' : 'OnceADay',
+    'GE1D': 'AtLeastOnceADay',
+    'GE2D' : 'AtLeastTwiceADay',
+    '1-3W' : 'From1To3TimesAWeek',
+	'4-6W': 'From4To6TimesAWeek',
+    '1D' : 'OnceADay',
      'LT1W' : 'LessThanOnceAWeek'
     
 }
