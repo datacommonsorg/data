@@ -61,7 +61,14 @@ _FREQUENC = {
     'WEEK': 'EveryWeek',
     'GE1W': 'AtLeastOnceAWeek',
     'NVR_OCC': 'NeverOrOccasionallyUsage',
-    'NBINGE': 'Never'
+    'NBINGE': 'Never',
+     'GE1D': 'AtLeastOnceADay',
+     'GE2D' : 'AtLeastTwiceADay',
+	'1-3W' : 'From1To3TimesWweek',
+	 '4-6W': 'From4To6TimesAWeek',
+     '1D' : 'OnceADay',
+     'LT1W' : 'LessThanOnceAWeek'
+    
 }
 
 _DEG_URB = {
