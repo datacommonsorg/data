@@ -1,0 +1,13 @@
+Node: E:mesh_pubchem->E1
+typeOf: dcs:MeSHRecord
+dcid: C:mesh_pubchem->Record_dcid
+medicalSubjectHeadingRecordID: C:mesh_pubchem->RecordID
+name: C:mesh_pubchem->RecordName
+
+Node: E:mesh_pubchem->E2
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_pubchem->Descriptor_dcid
+
+Node: E:mesh_pubchem->E3
+typeOf: dcs:pubChemCompoundID
+dcid: C:mesh_pubchem->CID_dcid

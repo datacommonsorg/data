@@ -6,6 +6,6 @@ medicalSubjectHeadingTermID: C:mesh_term->TermID
 medicalSubjectHeadingConceptID: E:mesh_term->E2
 
 Node: E:mesh_term->E2
-typeOf: dcs:mesh_term
+typeOf: dcs:MeSHConcept
 dcid: C:mesh_term->Concept_dcid
 name: C:mesh_term->ConceptName

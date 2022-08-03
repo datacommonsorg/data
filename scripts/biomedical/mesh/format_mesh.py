@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ def format_mesh_xml(mesh_xml):
         df1 = pandas df after parsing
     """
     document = parse(mesh_xml)
+    d = []
     ## column names for parsed xml tags 
     dfcols = [
         'DescriptorID', 'DescriptorName', 'DateCreated-Year',
@@ -146,15 +147,15 @@ def format_mesh_xml(mesh_xml):
                     subtermName.append(c4[j].findtext("String"))
                 termUI.append(subtermUI)
                 termName.append(subtermName)
-        df = df.append(pd.Series([
-            d1, d1_name, d1_created_year, d1_created_month, d1_created_day,
-            d1_revised_year, d1_revised_month, d1_revised_day,
-            d1_established_year, d1_established_month, d1_established_day,
-            qualID, qual_name, qual_abbr, conceptID, conceptName, scopeNote,
-            termUI, termName, tree_num, nlm_num
-        ],
-                                 index=dfcols),
-                       ignore_index=True)
+        d.append({'DescriptorID':d1, 'DescriptorName':d1_name, 'DateCreated-Year':d1_created_year,
+'DateCreated-Month':d1_created_month, 'DateCreated-Day':d1_created_day, 'DateRevised-Year':d1_revised_year,
+'DateRevised-Month':d1_revised_month, 'DateRevised-Day':d1_revised_day, 'DateEstablished-Year':d1_established_year,
+'DateEstablished-Month':d1_established_month, 'DateEstablished-Day':d1_established_day,
+'QualifierID':qualID, 'QualifierName':qual_name, 'QualifierAbbreviation':qual_abbr,
+'ConceptID':conceptID, 'ConceptName':conceptName, 'ScopeNote':scopeNote, 'TermID':termUI,
+'TermName':termName, 'TreeNumber':tree_num, 'NLMClassificationNumber':nlm_num})
+    
+    df = pd.DataFrame(d)
     return df
 
 def date_modify(df1):
@@ -175,6 +176,10 @@ def date_modify(df1):
     df1['DateEstablished'] = df1['DateEstablished-Year'].astype(
         str) + "-" + df1['DateEstablished-Month'].astype(
             str) + "-" + df1['DateEstablished-Day'].astype(str)
+    ## adds quotes from text type columns and replaces "nan" with np.nan
+    col_names_quote = ['DateCreated', 'DateRevised', 'DateEstablished']
+    for col in col_names_quote:
+       df1[col] = df1[col].replace(["nan-nan-nan"],np.nan)
     ## drop repetitive column values
     df1 = df1.drop(columns=[
         'DateCreated-Year', 'DateCreated-Month', 'DateCreated-Day',
