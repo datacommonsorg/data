@@ -1,0 +1,46 @@
+"(CO-99-11)  Population Estimates for Counties by Race and Hispanic Origin:  July 1, 1990"
+"Source:  Population Estimates Program, Population Division, U.S. Census Bureau, Washington, DC  20233"
+"Contact:  Demographic Call Center Staff, 1-866-758-1060 "
+          pop@census.gov (please include a phone number with email correspondence)
+"Internet Release Date:  August 30, 2000"
+                                             Total    Total    White    White    Total    Total    Total    Total
+  FIPS                                                White Hispanic     non-    Black American  Asian & Hispanic
+ State                                                               Hispanic            Indian  Pacific         
+   and                                                                                 & Alaska Islander         
+County Area Name                                                                         Native                  
+  Code                                                                                                           
+ 02000     ALASKA                           553120   422645    13871   408774    22999    86951    20525    17995
+ 02013 Aleutians East Borough                 2460      917      107      810       26     1047      470      180
+ 02016 Aleutians West Census Area             9514     6683      532     6151      687     1110     1034      750
+ 02020 Anchorage Borough                    227583   186261     7345   178916    14922    15014    11386     9397
+ 02050 Bethel Census Area                    13728     2150       45     2105       63    11422       93       81
+ 02060 Bristol Bay Borough                    1380      879       24      855       38      451       12       33
+ 02068 Denali Borough                         1724     1599       26     1573       22       91       12       27
+ 02070 Dillingham Census Area                 4022     1032       24     1008        9     2951       30       48
+ 02090 Fairbanks North Star Borough          78091    64896     2445    62451     5652     5456     2087     2937
+ 02100 Haines Borough                         2115     1821       24     1797        1      276       17       27
+ 02110 Juneau Borough                        27034    21964      506    21458      303     3568     1199      755
+ 02122 Kenai Peninsula Borough               41099    37454      635    36819      207     3001      437      730
+ 02130 Ketchikan Gateway Borough             13956    11478      176    11302       55     1925      498      285
+ 02150 Kodiak Island Borough                 13400     9507      457     9050      137     2187     1569      666
+ 02164 Lake and Peninsula Borough             1673      386        5      381        1     1281        5       24
+ 02170 Matanuska-Susitna Borough             40151    37546      666    36880      320     1980      305      765
+ 02180 Nome Census Area                       8309     2052       76     1976       11     6189       57      104
+ 02185 North Slope Borough                    6043     1325       57     1268       42     4390      286      123
+ 02188 Northwest Arctic Borough               6138      832       16      816       11     5247       48       35
+ 02201 Prince of Wales-Outer Ketchikan Ce     6294     3876       74     3802        9     2380       29      121
+ 02220 Sitka Borough                          8637     6444      137     6307       41     1817      335      210
+ 02232 Skagway-Hoonah-Angoon Census Area      3689     2284       32     2252        6     1374       25       53
+ 02240 Southeast Fairbanks Census Area        5757     4591      121     4470      289      787       90      176
+ 02261 Valdez-Cordova Census Area            10028     8362      200     8162       58     1281      327      268
+ 02270 Wade Hampton Census Area               5817      352        7      345       12     5430       23       17
+ 02280 Wrangell-Petersburg Census Area        7038     5564       91     5473       11     1367       96      117
+ 02282 Yakutat Borough                         727      389        5      384        0      324       14       11
+ 02290 Yukon-Koyukuk Census Area              6713     2001       38     1963       66     4605       41       55
+Note:  Hispanics can be of any race.
+An explanation of the race and Hispanic origin categories used in this table can be found at
+www.census.gov/population/estimates/rho.txt
+The estimates presented here were produced by a method which is still in a developmental stage.  They
+may not be accurate for populations which are very small or have unusual race distributions and they may not
+reflect recent changes in the distribution of the population with respect to race and Hispanic origin.  These
+figures should be used with caution.
