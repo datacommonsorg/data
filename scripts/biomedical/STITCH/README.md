@@ -43,7 +43,7 @@ We created a same_as column in the final CSV of the Chemical Compound DCIDs in w
 chemicals.v5.0.tsv.gz
 This file contained chemical name, molecular weight, and SMILES string. Some of the longer chemical names are truncated. 
 
-After merging the datasets, I added two columns for the corresponding MeSHDescriptor DCIDs and Chemical Compound DCIDs through querying the Biomedical Data Commons. I also formatted the text columns to have double quotes.  
+After merging the datasets, we added two columns for the corresponding MeSHDescriptor DCIDs and ChEMBL DCIDs through querying the Biomedical Data Commons. We also added a new DCID that is based on the PubChem Compound ID formatted as 'chem/CID#'. The text columns have been formatted to have double quotes.  
 
 This import has large data storage and compute requirements to execute. This includes 25 GB for storing the original files.
 
@@ -59,72 +59,31 @@ All data downloaded for this import belongs to STITCH. Any works found on the ST
 ### Scripts
 
 #### Shell Scripts
-[`download.sh`](download.sh) downloads the dbSNP data for hg19 and hg38 and prepares it for data cleaning and processing.
-
-[`make_refseq_chromosome_to_dcid_key.sh`](make_refseq_chromosome_to_dcid_key.sh) downloads NCBI Assembly data for the most recent releases of the hg19 and hg38 assemblies and uses this data to create a mapping key of chromosome RefSeq ID to dcid, which it outputs as a text file.
-
-[`split.sh`](split.sh) splits the dbSNP input file into several hundred files of 1,250,000 lines each to enable parallel processing of the data cleaning and reformatting step.
+[`download.sh`](download.sh) downloads the three STITCH datasets and prepares it for data cleaning and processing.
 
 #### Python Scripts
-
-[`format_refseq_chromosome_id_to_dcid.py`](format_refseq_chromosome_id_to_dcid.py) generates mapping key of chromosome RefSeq ID to corresponding dcid.
-
-[`format_dbsnp.py`](format_dbsnp.py) cleans and converts all dbSNP data to MCF format.
-
-[`format_dbsnp_pos_only.py`](format_dbsnp_pos_only.py) cleans and converts genomic position only for dbSNP genetic variant data to MCF format.
+[`compile_stitch.py`](compile_stitch.py) cleans and merges the three STITCH datasets into one CSV.
 
 #### Test Scripts
+[`test_compile_stitch.py`](test_compile_stitch.py) tests the compile_stitch.py script.
+
 
 ### Files
 
 #### Test Files
+[`test_file1.tsv`](test_file1.tsv) subsetted the sources.tsv file to only include PubChem Compound IDs 1-20
+[`test_file2.tsv`](test_file2.tsv) subsetted the inchikeys.tsv file to only include PubChem Compound CIDs 1-20
+[`test_file3.tsv`](test_file3.tsv) subsetted the chemicals.tsv file to only include PubChem Compound CIDs 1-20
 
-## Schema
-The schema for both the data sources for the allele frequencies of genetic variants and the databases with alternative IDs for genetic variants were generated using scripts. The GenVarSourceEnum for data sources of allele frequencies is generated using [format_dbSNP_GenVarSource_enum_schema.py](schema/format_dbSNP_GenVarSource_enum_schema.py). The GeneticVariant properties for alternative IDs is generated using [format_dbSNP_alt_ID_database_property_schema.py](schema/format_dbSNP_alt_ID_database_property_schema.py).
-
-### Scripts
-[`format_dbSNP_GenVarSource_enum_schema.py`](schema/format_dbSNP_GenVarSource_enum_schema.py) generates the schema ([GenVarSourceEnum](https://datacommons.org/browser/GenVarSourceEnum)) used to represent the population study in which allele frequencies of genetic variants were observed.
-
-[`format_dbSNP_alt_ID_database_property_schema.py`](schema/format_dbSNP_alt_ID_database_property_schema.py) generates [GeneticVariant](https://datacommons.org/browser/GeneticVariant) property values for each alternative database ID associated with one or more genetic variants reported in dbSNP.
-
-### Output Schema MCF Files
-
-[`GeneticVariant_GenVarSource_enums.mcf`](schema/GeneticVariant_GenVarSource_enums.mcf)
-
-[`GeneticVariant_Alt_ID_Database_properties.mcf`](schema/GeneticVariant_Alt_ID_Database_properties.mcf)
 
 ## Examples
 
 ### Run Tests
 
-1. To test [`format_refseq_chromosome_id_to_dcid.py`](format_refseq_chromosome_id_to_dcid.py) run:
+1. To test [`compile_stitch.py`](compile_stitch.py) run:
 
 ```
-python test_chromosome_key_script.py
-```
-
-2. To test [`format_dbsnp.py`](format_dbsnp.py) run:
-
-```
-python test_format_dbsnp.py
-```
-
-3. To test [`format_dbsnp_pos_only.py`](format_dbsnp_pos_only.py) run:
-
-```
-python test_format_dbsnp_pos_only.py
-```
-
-4. To test [`format_dbSNP_GenVarSource_enum_schema.py`](schema/format_dbSNP_GenVarSource_enum_schema.py) run:
-
-```
-python test_GenVarSourceEnum_schema_creation.py
-```
-
-6. To test [`format_dbSNP_alt_ID_database_property_schema.py`](schema/format_dbSNP_alt_ID_database_property_schema.py) run:
-
-```
-python test_alt_database_ID_schema_creation.py
+python test_compile_stitch.py
 ```
 
 ### Import
@@ -135,32 +94,11 @@ python test_alt_database_ID_schema_creation.py
 bash download.sh
 ```
 
-2. Generate the text file that maps Chromosome RefSeq IDs used in dbSNP to corresponding Chromosome dcids in the Data Commons knowledge graph.
+2. Run the script to clean and merge the three datasets into an output CSV, which is needed for import into the graph. 
 
 ```
-bash make_refseq_chromosome_to_dcid_key.sh
-```
-
-3. Split the input files (1,250,000 lines per file) for parallel processing during the data cleaning step.
-
-```
-bash split.sh
-```
-
-4. Parallely run the script to clean and convert hg38 data to an output MCF, which is needed for import into the graph. This script takes records information about the genetic variant in the output MCF.
-
-```
-python format_dbsnp.py 
-  scratch/hg38_subset/hg38_GCF_subset_*.vcf 
-  output/hg38/hg38_subset_output_*.mcf 
-  hg38
-```
-
-5. Parallely run the script to clean and convert hg19 data to an output MCF, which is needed for import into the graph. This script only records information about the hg19 genomic position of the genetic variant in the output MCF.
-
-```
-python format_dbsnp_pos_only.py 
-  scratch/hg19_subset/hg19_GCF_subset_*.vcf 
-  output/hg19/hg19_subset_output_*.mcf 
-  hg19
+python compile_stitch.py 
+  scratch/sources_sorted.tsv 
+  scratch/inchikeys_sorted.tsv
+  scratch/chemicals_no_header.tsv
 ```
