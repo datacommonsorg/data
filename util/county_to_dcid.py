@@ -97,6 +97,8 @@ COUNTY_MAP: dict = {
         "Bethel Census Area": "geoId/02050",
         "Bristol Bay Borough": "geoId/02060",
         "Bristol Bay": "geoId/02060",
+        "Chugach Census Area": "geoId/02063",
+        "Copper River Census Area": "geoId/02066",
         "Denali Borough": "geoId/02068",
         "Denali": "geoId/02068",
         "Dillingham Borough": "geoId/02070",
@@ -108,6 +110,7 @@ COUNTY_MAP: dict = {
         "Haines": "geoId/02100",
         "Hoonah-Angoon Census Area": "geoId/02105",
         "Juneau Borough": "geoId/02110",
+        "Juneau City and Borough": "geoId/02110",
         "Juneau": "geoId/02110",
         "Kenai Peninsula Borough Borough": "geoId/02122",
         "Kenai Peninsula Borough": "geoId/02122",
@@ -128,12 +131,15 @@ COUNTY_MAP: dict = {
         "North Slope": "geoId/02185",
         "Northwest Arctic Borough": "geoId/02188",
         "Northwest Arctic": "geoId/02188",
-        "Petersburg Census Area": "geoId/02280",
+        "Petersburg Borough": "geoId/02195",
+        "Petersburg Census Area": "geoId/02195",
         "Prince of Wales- Hyder Census Area": "geoId/02198",
+        "Prince of Wales-Hyder Census Area": "geoId/02198",
         "Prince of Wales-Outer Ketchikan Borough": "geoId/02201",
         "Prince of Wales-Outer Ketchikan": "geoId/02201",
         "Sitka Borough": "geoId/02220",
         "Sitka": "geoId/02220",
+        "Sitka City and Borough": "geoId/02220",
         "Skagway Municipality": "geoId/02230",
         "Skagway-Hoonah-Angoon Borough": "geoId/02232",
         "Skagway-Hoonah-Angoon": "geoId/02232",
@@ -145,11 +151,15 @@ COUNTY_MAP: dict = {
         "Wade Hampton Borough": "geoId/02270",
         "Wade Hampton": "geoId/02270",
         "Valdez-Cordova Census Area": "geoId/02270",
+        "Wade Hampton Census Area": "geoId/02270",
+        "Wrangell City and Borough": "geoId/02275",
+        "Wrangell-Petersburg Borough": "geoId/02280",
         "Wrangell-Petersburg Borough": "geoId/02280",
         "Wrangell Borough": "geoId/0227586420",
         "Wrangell-Petersburg": "geoId/02280",
         "Yakutat Borough": "geoId/02282",
         "Yakutat": "geoId/02282",
+        "Yakutat City and Borough": "geoId/02282",
         "Yukon-Koyukuk Borough": "geoId/02290",
         "Yukon-Koyukuk Census Area": "geoId/02290",
         "Yukon-Koyukuk": "geoId/02290"
@@ -391,6 +401,7 @@ COUNTY_MAP: dict = {
     },
     "DC": {
         "Washington County": "geoId/11001",
+        "Washington D.C": "geoId/11001",
         "District of Columbia": "geoId/11001"
     },
     "FL": {
@@ -1288,7 +1299,7 @@ COUNTY_MAP: dict = {
         "West Baton Rouge Parish": "geoId/22121",
         "West Carroll Parish": "geoId/22123",
         "West Feliciana Parish": "geoId/22125",
-        "Winn Parish": "geoId/22127"
+        "Winn Parish": "geoId/22127",
     },
     "ME": {
         "Androscoggin County": "geoId/23001",
@@ -2199,7 +2210,7 @@ COUNTY_MAP: dict = {
         "Walsh County": "geoId/38099",
         "Ward County": "geoId/38101",
         "Wells County": "geoId/38103",
-        "Williams County": "geoId/38105"
+        "Williams County": "geoId/38105",
     },
     "OH": {
         "Adams County": "geoId/39001",
