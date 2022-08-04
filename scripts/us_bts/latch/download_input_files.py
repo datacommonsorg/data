@@ -18,8 +18,8 @@ and downloads the files.
 """
 import os
 import sys
-
-from absl import app, flags
+import json
+from absl import app
 
 # pylint: disable=import-error
 # pylint: disable=wrong-import-position
@@ -27,52 +27,38 @@ from absl import app, flags
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 from download import download_file
+
+_CODE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+from constants import INPUT_URLS_CONFIG, BASE_URL, FILE_NAMES
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
+_URLS_CONFIG_FILE = os.path.join(_CODE_DIR, INPUT_URLS_CONFIG)
 
-_FLAGS = flags.FLAGS
-flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
-                    "Directory path where input files need to be downloaded")
 
-STATE_2009_BASE_URL = ('https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/'
-                       'subject_areas/national_household_travel_survey/')
+def _create_urls() -> list:
+    """
+    Read URLS config file(input_urls_config.json) and creates list of
+    urls to be downloaded.
 
-_STATE_2009_NAMES = [
-    'NHTS_2009_transfer_AL.zip', 'NHTS_2009_transfer_AK.zip',
-    'NHTS_2009_transfer_AZ.zip', 'NHTS_2009_transfer_AR.zip',
-    'NHTS_2009_transfer_CA.zip', 'NHTS_2009_transfer_CO.zip',
-    'NHTS_2009_transfer_CT.zip', 'NHTS_2009_transfer_DE.zip',
-    'NHTS_2009_transfer_DC.zip', 'NHTS_2009_transfer_FL.zip',
-    'NHTS_2009_transfer_GA.zip', 'NHTS_2009_transfer_HI.zip',
-    'NHTS_2009_transfer_ID.zip', 'NHTS_2009_transfer_IL.zip',
-    'NHTS_2009_transfer_IN.zip', 'NHTS_2009_transfer_IA.zip',
-    'NHTS_2009_transfer_KS.zip', 'NHTS_2009_transfer_KY.zip',
-    'NHTS_2009_transfer_LA.zip', 'NHTS_2009_transfer_ME.zip',
-    'NHTS_2009_transfer_MD.zip', 'NHTS_2009_transfer_MA.zip',
-    'NHTS_2009_transfer_MI.zip', 'NHTS_2009_transfer_MN.zip',
-    'NHTS_2009_transfer_MS.zip', 'NHTS_2009_transfer_MO.zip',
-    'NHTS_2009_transfer_MT.zip', 'NHTS_2009_transfer_ND.zip',
-    'NHTS_2009_transfer_NE.zip', 'NHTS_2009_transfer_NV.zip',
-    'NHTS_2009_transfer_NH.zip', 'NHTS_2009_transfer_NJ.zip',
-    'NHTS_2009_transfer_NM.zip', 'NHTS_2009_transfer_NY.zip',
-    'NHTS_2009_transfer_NC.zip', 'NHTS_2009_transfer_NC.zip',
-    'NHTS_2009_transfer_OH.zip', 'NHTS_2009_transfer_OK.zip',
-    'NHTS_2009_transfer_OR.zip', 'NHTS_2009_transfer_PA.zip',
-    'NHTS_2009_transfer_RI.zip', 'NHTS_2009_transfer_SC.zip',
-    'NHTS_2009_transfer_SD.zip', 'NHTS_2009_transfer_TN.zip',
-    'NHTS_2009_transfer_TX.zip', 'NHTS_2009_transfer_UT.zip',
-    'NHTS_2009_transfer_VT.zip', 'NHTS_2009_transfer_VA.zip',
-    'NHTS_2009_transfer_WA.zip', 'NHTS_2009_transfer_WV.zip',
-    'NHTS_2009_transfer_WI.zip', 'NHTS_2009_transfer_WY.zip'
-]
+    Returns:
+        list: list of input urls.
+    """
+    urls_config = None
+    with open(_URLS_CONFIG_FILE, "r", encoding="UTF-8") as config:
+        urls_config = json.load(config)
 
-_STATES_2009_URLS = [
-    STATE_2009_BASE_URL.format(state=state) for state in _STATE_2009_NAMES
-]
+    if urls_config is None:
+        return []
 
-_STATES_2017_URLS = [
-    "https://www.bts.dot.gov/sites/bts.dot.gov/files/nhts2017/latch_2017-b.csv"
-]
+    input_files_urls = []
+    for year in urls_config.keys():
+        conf = urls_config[year]
+        base_url = conf[BASE_URL]
+        file_names = conf[FILE_NAMES]
+        input_files_urls += [
+            base_url.format(file_name=file) for file in file_names
+        ]
+    return input_files_urls
 
 
 def download_files(download_directory: str) -> None:
@@ -87,12 +73,12 @@ def download_files(download_directory: str) -> None:
         None
     """
     # List to provide the URLs of input files to download script.
-    input_urls = _STATES_2009_URLS + _STATES_2017_URLS
+    input_urls = _create_urls()
     download_file(input_urls, download_directory)
 
 
 def main(_):
-    download_files(_FLAGS.download_directory)
+    download_files(_CODE_DIR)
 
 
 if __name__ == '__main__':

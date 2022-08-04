@@ -18,6 +18,23 @@ found in downloaded files and its corresponding SV name.
 While preprocessing files column names are changed to SV names as used in
 DC import
 """
+INPUT_URLS_CONFIG = "input_urls_config.json"
+
+BASE_URL = "base_url"
+
+FILE_NAMES = "file_names"
+
+DEFAULT_MEASUREMENT_METHOD = "NationalHouseholdTransportationSurveyEstimates"
+
+ACS_SRUVEY_MEASUREMENT_METHOD = DEFAULT_MEASUREMENT_METHOD \
+                                    + "_MarginOfErrorMoreThanACSSurvey"
+
+DOWNLOAD_DIRECTORY = "input_files"
+
+HOUSEHOLD_PV = "[Person {person}]"
+
+NUM_OF_VEHICLES_PV = "[AvailableVehicles {vehicle}]"
+
 DEFAULT_SV_PROP = {
     "typeOf": "dcs:StatisticalVariable",
     "populationType": "dcs:Household",
@@ -40,26 +57,6 @@ TMCF_TEMPLATE = (
     "observationAbout: C:us_transportation_household->location\n"
     "observationDate: C:us_transportation_household->year\n"
     "value: C:us_transportation_household->observation\n")
-
-HOUSEHOLD_PV = "[Person {person}]"
-NUM_OF_VEHICLES_PV = "[AvailableVehicles {vehicle}]"
-HEADERMAP = {
-    "est_pmiles2007_11": "PersonMilesTraveled",
-    "est_pmiles": "PersonMilesTraveled",
-    "pmiles": "PersonMilesTraveled",
-    "est_ptrp2007_11": "PersonTrips",
-    "est_ptrp": "PersonTrips",
-    "ptrp": "PersonTrips",
-    "est_vtrp2007_11": "VehicleTrips",
-    "est_vtrp": "VehicleTrips",
-    "vtrp": "VehicleTrips",
-    "est_vmiles2007_11": "VehicleMilesTraveled",
-    "est_vmiles": "VehicleMilesTraveled",
-    "vmiles": "VehicleMilesTraveled",
-}
-ACS_LT_MOR = {0: '', 1: '_MarginOfErrorMoreThanACSSurvey'}
-INCOMPLETE_ACS = {0: '', 1: '_IncompleteACSSurvey'}
-URBAN = {1: "Urban", 2: "SemiUrban", 3: "Rural"}
 
 COMMON_COLS = [
     "ptrp_1mem_0veh", "ptrp_1mem_1veh", "ptrp_1mem_2veh", "ptrp_1mem_3veh",
@@ -96,6 +93,40 @@ ADDITIONAL_2009_FILE_COLS = [
     "vmiles_5mem_2veh", "vmiles_5mem_3veh", "vmiles_5mem_4veh"
 ]
 
+FINAL_DATA_COLS = [
+    "year", "location", "sv", "observation", "measurement_method"
+]
+
+HEADERMAP = {
+    "est_pmiles2007_11": "PersonMilesTraveled",
+    "est_pmiles": "PersonMilesTraveled",
+    "pmiles": "PersonMilesTraveled",
+    "est_ptrp2007_11": "PersonTrips",
+    "est_ptrp": "PersonTrips",
+    "ptrp": "PersonTrips",
+    "est_vtrp2007_11": "VehicleTrips",
+    "est_vtrp": "VehicleTrips",
+    "vtrp": "VehicleTrips",
+    "est_vmiles2007_11": "VehicleMilesTraveled",
+    "est_vmiles": "VehicleMilesTraveled",
+    "vmiles": "VehicleMilesTraveled",
+}
+
+ACS_LT_MOR = {0: '', 1: '_MarginOfErrorMoreThanACSSurvey'}
+
+INCOMPLETE_ACS = {0: '', 1: '_IncompleteACSSurvey'}
+
+URBAN = {1: "Urban", 2: "SemiUrban", 3: "Rural"}
+
+HHSIZE_NOOFVEHICLES_MAPPER = {
+    "PersonMilesTraveled": "",
+    "PersonTrips": "",
+    "VehicleMilesTraveled": "",
+    "VehicleTrips": ""
+}
+
+RENAME_COLUMNS = {"geocode": "geoid"}
+
 CONF_2009_FILE = {
     "input_file_delimiter": "\t",
     "basic_cols": ["geoid", "urban_group"],
@@ -104,8 +135,16 @@ CONF_2009_FILE = {
         "est_vtrp2007_11"
     ],
     "extra_cols": COMMON_COLS + ADDITIONAL_2009_FILE_COLS,
+    "measurement_method_col": "measurement_method",
+    "dtype_conv": {
+        "urban_group": "int"
+    },
+    "col_values_mapper": {
+        "urban_group": URBAN
+    },
     "year": 2009
 }
+
 CONF_2017_FILE = {
     "input_file_delimiter": ",",
     "basic_cols": [
@@ -114,6 +153,15 @@ CONF_2017_FILE = {
     ],
     "pop_cols": ["est_pmiles", "est_ptrp", "est_vmiles", "est_vtrp"],
     "extra_cols": COMMON_COLS,
-    "year": 2017,
-    "additional_process": True
+    "measurement_method_cols": ["flag_acs_lt_moe", "flag_incomplete_acs"],
+    "dtype_conv": {
+        "urban_group": "int"
+    },
+    "col_values_mapper": {
+        "flag_acs_lt_moe": ACS_LT_MOR,
+        "flag_incomplete_acs": INCOMPLETE_ACS,
+        "urban_group": URBAN
+    },
+    "additional_process": True,
+    "year": 2017
 }

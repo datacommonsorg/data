@@ -1,0 +1,16 @@
+{
+    "2009" : {
+        "base_url": "https://www.bts.dot.gov/sites/bts.dot.gov/files/legacy/subject_areas/national_household_travel_survey/NHTS_2009_transfer_{file_name}.zip",
+        "file_names": [
+            "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI",
+            "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN",
+            "MS", "MO", "MT", "ND", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "NC",
+            "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA",
+            "WA", "WV", "WI", "WY"
+        ]
+    },
+    "2017": {
+        "base_url": "https://www.bts.dot.gov/sites/bts.dot.gov/files/nhts2017/{file_name}",
+        "file_names": ["latch_2017-b.csv"]
+    }
+}

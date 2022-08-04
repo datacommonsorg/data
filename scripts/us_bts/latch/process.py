@@ -37,10 +37,11 @@ _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
 
 # pylint: disable=wrong-import-position
-from constants import (TMCF_TEMPLATE, MCF_TEMPLATE, INCOMPLETE_ACS,
-                       HOUSEHOLD_PV, NUM_OF_VEHICLES_PV, HEADERMAP, URBAN,
-                       CONF_2009_FILE, CONF_2017_FILE, ACS_LT_MOR,
-                       DEFAULT_SV_PROP)
+from constants import (TMCF_TEMPLATE, MCF_TEMPLATE, HOUSEHOLD_PV,
+                       NUM_OF_VEHICLES_PV, HEADERMAP, CONF_2009_FILE,
+                       CONF_2017_FILE, DEFAULT_SV_PROP, FINAL_DATA_COLS,
+                       HHSIZE_NOOFVEHICLES_MAPPER, DEFAULT_MEASUREMENT_METHOD,
+                       ACS_SRUVEY_MEASUREMENT_METHOD, RENAME_COLUMNS)
 
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
@@ -67,21 +68,29 @@ def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: DataFrame
     """
-    acs_survey_df = data_df[
-        data_df["measurement_method"] ==
-        "NationalHouseholdTransportationSurveyEstimates" + \
-            "_MarginOfErrorMoreThanACSSurvey"].reset_index(
-            drop=True)
+    acs_survey_df = data_df[data_df["measurement_method"] ==
+                            ACS_SRUVEY_MEASUREMENT_METHOD].reset_index(
+                                drop=True)
     acs_survey_rows = list(acs_survey_df['location'] + '_' +
                            acs_survey_df['sv'])
     data_df['info'] = data_df['location'] + '_' + data_df['sv']
     # Adding Measurement Method based on a condition
     data_df['measurement_method'] = np.where(
-        data_df['info'].isin(acs_survey_rows),
-        'NationalHouseholdTransportationSurveyEstimates' + \
-            '_MarginOfErrorMoreThanACSSurvey',
+        data_df['info'].isin(acs_survey_rows), ACS_SRUVEY_MEASUREMENT_METHOD,
         data_df['measurement_method'])
     data_df = data_df.drop(columns=["info"])
+    return data_df
+
+
+def _column_operations(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
+    dtype_conv = conf.get("dtype_conv", {})
+    for col, dtype in dtype_conv.items():
+        data_df[col] = data_df[col].astype(dtype)
+
+    cols_mapper = conf.get("col_values_mapper", {})
+    for col, values_mapper in cols_mapper.items():
+        data_df[col] = data_df[col].map(values_mapper)
+
     return data_df
 
 
@@ -152,12 +161,11 @@ def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         data_df (pd.DataFrame): DataFrame with updated sv column
     """
+
     data_df["measuredProperty"] = data_df["sv"].str.split("_With").str[0]
-    data_df["householdSize_numberOfVehicles"] = data_df["sv"]\
-                                .str.replace("PersonMilesTraveled", "")\
-                                .str.replace("PersonTrips", "")\
-                                .str.replace("VehicleMilesTraveled", "")\
-                                .str.replace("VehicleTrips", "")
+    for old_val, new_val in HHSIZE_NOOFVEHICLES_MAPPER.items():
+        data_df["householdSize_numberOfVehicles"] = data_df["sv"]\
+                                .str.replace(old_val, new_val)
     data_df['sv'] = data_df['measuredProperty'] + "_Household" + data_df[
         'householdSize_numberOfVehicles'] + "_" + data_df[
             'urban_group'] + "_EveryWeekday_" + "Mean"
@@ -165,7 +173,7 @@ def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
 
 
 # pylint: enable=line-too-long
-def _additional_process_2017(data_df: pd.DataFrame) -> pd.DataFrame:
+def _additional_process_2017(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
     """
     Performs additional processing on data_df dataframe for the year 2017.
 
@@ -179,16 +187,11 @@ def _additional_process_2017(data_df: pd.DataFrame) -> pd.DataFrame:
     # Possible values are below
     # 1 = tract in Manhattan, NY; 0 = otherwise
     data_df = data_df[data_df['flag_manhattan_trt'] == 0]
-    data_df = data_df[~data_df['urban_group'].isna()]
-    # Mapping to actual values
-    data_df['flag_acs_lt_moe'] = data_df['flag_acs_lt_moe'].map(ACS_LT_MOR)
-    data_df['flag_incomplete_acs'] = data_df['flag_incomplete_acs'].map(
-        INCOMPLETE_ACS)
     # Creating measurement column
-    data_df['measurement_method'] = \
-            'NationalHouseholdTransportationSurveyEstimates' + \
-                data_df['flag_acs_lt_moe'] + \
-                    data_df['flag_incomplete_acs']
+    mm_cols = conf.get("measurement_method_cols", [])
+    if mm_cols != []:
+        data_df['measurement_method'] = DEFAULT_MEASUREMENT_METHOD + \
+                                        data_df.loc[:,mm_cols].sum(axis=1)
     return data_df
 
 
@@ -206,32 +209,32 @@ def _process_household_transportation(input_file: str,
     """
     data_df = pd.read_csv(filepath_or_buffer=input_file,
                           sep=file_conf["input_file_delimiter"])
-    basic_cols = file_conf["basic_cols"]
+    basic_cols = file_conf.get("basic_cols", [])
     # Creating Population Columns
-    pop_cols = file_conf["pop_cols"] + file_conf["extra_cols"]
-    req_cols = basic_cols + pop_cols
-    data_df = data_df[req_cols]
+    pop_cols = file_conf.get("pop_cols", []) + file_conf.get("extra_cols", [])
+    data_df = data_df[basic_cols + pop_cols]
+    # Removing null values from urban_group column
+    data_df = data_df.dropna(subset=["urban_group"])
+    data_df = _column_operations(data_df, file_conf)
+    data_df['measurement_method'] = DEFAULT_MEASUREMENT_METHOD
     # Checking additional_process in the dictionary,
     # if True then performing additional process
     xtra_process = file_conf.get("additional_process", False)
     if xtra_process:
-        data_df = _additional_process_2017(data_df)
-    else:
-        data_df['measurement_method'] = \
-            'NationalHouseholdTransportationSurveyEstimates'
-    # Removing null values from urban_group column
-    data_df = data_df.dropna(subset=["urban_group"])
-    data_df['urban_group'] = data_df['urban_group'].astype('int').map(URBAN)
+        data_df = _additional_process_2017(data_df, file_conf)
+
     # Updating pop_cols to its complete names
     updated_pop_cols = _update_headers(pop_cols)
     data_df.columns = basic_cols + updated_pop_cols + ['measurement_method']
-    data_df = data_df.rename(columns={"geocode": "geoid"})
+    data_df = data_df.rename(columns=RENAME_COLUMNS)
+
     data_df = data_df.melt(
         id_vars=["geoid", "urban_group", "measurement_method"],
         value_vars=updated_pop_cols,
         var_name="sv",
         value_name="observation")
     data_df = _update_sv_col(data_df)
+
     # Adding Leading Zeros for Fips Code in the geoid column.
     # Before padding STATE = 9009990000
     # After padding STATE = 09009990000
@@ -311,7 +314,6 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     Process Input Raw Files and apply transformations to generate final
     CSV, MCF and TMCF files.
     """
-    final_cols = ["year", "location", "sv", "observation", "measurement_method"]
     final_df = pd.DataFrame()
     sv_names = []
     for file_path in input_files:
@@ -321,7 +323,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
             conf = CONF_2009_FILE
         data_df = _process_household_transportation(file_path, conf)
         data_df = data_df.dropna(subset=["observation"])
-        final_df = pd.concat([final_df, data_df[final_cols]])
+        final_df = pd.concat([final_df, data_df[FINAL_DATA_COLS]])
         sv_names += data_df["sv"].to_list()
     final_df = _promote_measurement_method(final_df)
     sv_names = list(set(sv_names))
