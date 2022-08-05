@@ -37,40 +37,15 @@ sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 from statvar import statvar_col
 # pylint: enable=wrong-import-pos
 
+from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP,_PROP,
+                        _TIME,_INSURANCE)
+
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-
-_MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
-                "typeOf: dcs:StatisticalVariable\n"
-                "populationType: dcs:LivePregnancyEvent\n"
-                "statType: dcs:measuredValue\n"
-                "measuredProperty: dcs:percent\n"
-                "{xtra_pvs}\n")
-
-
-_TMCF_TEMPLATE = (
-    "Node: E:US_Prams->E0\n"
-    "typeOf: dcs:StatVarObservation\n"
-    "variableMeasured: C:US_Prams->SV\n"
-    "measurementMethod: C:US_Prams->"
-    "Measurement_Method\n"
-    "observationAbout: C:US_Prams->Geo\n"
-    "observationDate: C:US_Prams->Time\n"
-    "scalingFactor: 100\n"
-    "value: C:US_Prams->Observation\n")
-
-DEFAULT_SV_PROP = {
-    "typeOf": "dcs:StatisticalVariable",
-    "populationType": "dcs:LivePregnancyEvent",
-    "statType": "dcs:measuredValue",
-    "measuredProperty": "dcs:percent"
-}
 # for index df:
-
-
 
 def prams(input_url: list, statvar_col:dict) -> pd.DataFrame:
     final_df = pd.DataFrame()
@@ -225,37 +200,45 @@ class US_Prams:
         for sv in sv_names:
             pvs = []
             dcid = sv
-            sv_prop = [prop.strip() for prop in sv.split("_")]
+            sv_prop = [prop.strip() for prop in sv.split(" ")]
+            # denominator = "\nmeasurementDenominator: dcs:" + sv_prop[1]
             # print(sv_prop)
             sv_pvs = deepcopy(DEFAULT_SV_PROP)
             for prop in sv_prop:
                 # print("Prop")
                 # print(prop)
-                if "MultivitaminUseMoreThan4TimesAWeek" in prop or "HealthCareVisit"in prop or\
-                        "PrenatalCare" in prop or\
-                        "FluShot"in prop or\
-                        "MaternalCheckup" in prop or\
+                prop1 = deepcopy(prop)
+                prop3 = deepcopy(prop)
+                prop2 = deepcopy(prop)
+                for old,new in _PROP.items():
+                    prop1 = prop1.replace(old,new)
+                for old,new in _TIME.items():
+                    prop3 = prop3.replace(old,new)
+                for old,new in _INSURANCE.items():
+                    prop2 = prop2.replace(old,new)
+                if "MultivitaminUseMoreThan4TimesAWeek" in prop or "HealthCareVisit12MonthsBeforePregnancy"in prop or\
+                        "PrenatalCareInFirstTrimester" in prop or\
+                        "FluShot12MonthsBeforePregnancy"in prop or\
+                        "MaternalCheckupPostpartum" in prop or\
                         "TeethCleanedByDentistOrHygienist" in prop:
                     prop = prop[0].lower() + prop[1:]
-                    pvs.append(f"mothersHealthPrevention: dcs:{prop}")
+                    pvs.append(f"mothersHealthPrevention: dcs:{prop1}")
                     sv_pvs["mothersHealthPrevention"] = f"dcs:{prop}"
-                    if "MultivitaminUseMoreThan4TimesAWeek" in prop:
-                        prop.strip('MoreThan4TimesAWeek')
-                        pvs.append(f"timePeriodRelativeToPregnancy: {prop}")
-                        sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop}"
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
 
                 elif "Underweight" in prop or "Overweight" in prop or\
-                    "Obese" in prop or "CigaretteSmoking" in prop or\
-                    "ECigaretteSmoking" in prop or  "Hookah" in prop or "HeavyDrinking" in prop:
-                    pvs.append(f"mothersHealthBehaviour: {prop}")
+                    "Obese" in prop:
+                    pvs.append(f"mothersHealthBehaviour: {prop1}")
                     sv_pvs["mothersHealthBehaviour"] = f"{prop}"
-
-                elif "Pre-pregnancy Weight" in prop or "Substance Use" in prop or\
-                    "Any breastfeeding" in prop or "Health Care Services" in prop or\
-                        "Self-reported" in prop:
-                    pvs.append(f"timePeriodRelativeToPregnancy: {prop}")
-                    sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop}"
-   
+                
+                elif "CigaretteSmoking3MonthsBeforePregnancy" in prop or\
+                    "CigaretteSmokingLast3MonthsOfPregnancy"in prop or "CigaretteSmokingPostpartum" in prop or\
+                    "ECigaretteSmoking3MonthsBeforePregnancy" in prop or\
+                    "ECigaretteSmokingLast3MonthsOfPregnancy" in prop or\
+                    "HookahInLast2Years" in prop or "HeavyDrinking3MonthsBeforePregnancy" in prop:
+                    pvs.append(f"mothersHealthBehaviour: {prop1}")
+                    sv_pvs["mothersHealthBehaviour"] = f"{prop}"
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
 
                 elif "IntimatePartnerViolenceByCurrentPartnerOrHusband" in prop or\
                     "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband" in prop:
@@ -268,39 +251,41 @@ class US_Prams:
                     sv_pvs["pregnancyIntention"] = f"dcs:{prop}"
 
                 elif "AnyPostpartumFamilyPlanning"in prop or\
-                "MaleOrFemaleSterilization"in prop or\
-                "LongActingReversibleContraceptiveMethods" in prop or\
-                "ModeratelyEffectiveContraceptiveMethods"in prop or\
-                "LeastEffectiveContraceptiveMethods"in prop:
+                    "MaleOrFemaleSterilization"in prop or\
+                    "LongActingReversibleContraceptiveMethods" in prop or\
+                    "ModeratelyEffectiveContraceptiveMethods"in prop or\
+                    "LeastEffectiveContraceptiveMethods"in prop:
                     pvs.append(f"postpartumFamilyPlanning: dcs:{prop}")
                     sv_pvs["postpartumFamilyPlanning"] = f"dcs:{prop}"
 
-                elif "Pre-pregnancy Weight " in prop:
-                    pvs.append(f"mothersHealthCondition: dcs:{prop}")
+                elif "CDC_SelfReportedDepression3MonthsBeforePregnancy" in prop or\
+                    "CDC_SelfReportedDepressionDuringPregnancy" in prop or\
+                    "CDC_SelfReportedDepressionPostpartum" in prop:
+                    pvs.append(f"mothersHealthCondition: dcs:{prop1}")
                     sv_pvs["mothersHealthCondition"] = f"dcs:{prop}"
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
 
-                elif "Depression" in prop:
-                    pvs.append(f"mothersHealthCondition: dcs:{prop}")
-                    sv_pvs["mothersHealthCondition"] = f"dcs:{prop}"
 
-                elif "MaleOrFemaleSterilization" in prop :
-                    pvs.append(f"postpartumFamilyPlanning: dcs:{prop}")
-                    sv_pvs["postpartumFamilyPlanning"] = f"dcs:{prop}"
-
-                elif "healthInsuranceStatusOneMonthBeforePregnancy"in prop :
-                    print(prop)
-                    pvs.append(f"healthInsuranceStatusOneMonthBeforePregnancy: dcs:{prop}")
+                elif "healthInsuranceStatusOneMonthBeforePregnancyprivateinsurance"in prop or\
+                    "healthInsuranceStatusOneMonthBeforePregnancyMedicaid" in prop or\
+                    "healthInsuranceStatusOneMonthBeforePregnancyNoInsurance" in prop :
+                    pvs.append(f"healthInsuranceStatusOneMonthBeforePregnancy: dcs:{prop1}")
                     sv_pvs["healthInsuranceStatusOneMonthBeforePregnancy"] = f"dcs:{prop}"
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
 
-                elif "for Prenatal Care"in prop :
-                    str(prop).replace("-private-insurance","_private_insurance")
-                    pvs.append(f"healthInsuranceStatusForPrenatalCare: dcs:{prop}")
+                elif "healthInsuranceStatusForPrenatalCareprivateinsurance"in prop or\
+                    "healthInsuranceStatusForPrenatalCareMedicaid" in prop or\
+                        "healthInsuranceStatusForPrenatalCareNoInsurance" in prop:
+                    pvs.append(f"healthInsuranceStatusForPrenatalCare: dcs:{prop1}")
                     sv_pvs["healthInsuranceStatusForPrenatalCare"] = f"dcs:{prop}"
 
-                elif "Postpartum" in prop :
-                    pvs.append(f"healthInsuranceStatusPostpartum: dcs:{prop}")
+                elif "healthInsuranceStatusPostpartumprivateinsurance" in prop or\
+                    "healthInsuranceStatusPostpartumMedicaid" in prop or\
+                        "healthInsuranceStatusPostpartumNoInsurance" in prop:
+                    pvs.append(f"healthInsuranceStatusPostpartum: dcs:{prop2}")
                     sv_pvs["healthInsuranceStatusPostpartum"] = f"dcs:{prop}"
-                
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+
                 elif "BabyMostOftenLaidOnBackToSleep" in prop :
                     pvs.append(f"infantSleepPractice: dcs:{prop}")
                     sv_pvs["infantSleepPractice"] = f"dcs:{prop}"
