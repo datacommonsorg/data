@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 Author: Suhana Bedi
-Date: 08/03/2021
+Date: 08/05/2022
 Name: format_disease_ontology
 Description: converts a .owl disease ontology file into
 a csv format, creates dcids for each disease and links the dcids
@@ -28,8 +28,6 @@ from collections import defaultdict
 import pandas as pd
 import re
 import numpy as np
-import datacommons as dc
-import csv
 import sys
 
 
@@ -97,9 +95,10 @@ def format_cols(df):
         df[col] = df[col].astype(str)
         df[col] = df[col].map(lambda x: re.sub(r'[\([{})\]]', '', x))
         df.iloc[:, i] = df.iloc[:, i].str.replace("'", '')
-        df.iloc[:, i] = df.iloc[:, i].str.replace('"', '')
         df[col] = df[col].replace('nan', np.nan)
     df['id'] = df['id'].str.replace(':', '_')
+    df['hasAlternativeId'] = df['hasAlternativeId'].str.replace(':', '_')
+    
 
 
 def col_explode(df):
@@ -120,6 +119,9 @@ def col_explode(df):
         df[newcol] = np.nan
         df[newcol] = np.where(df['A'] == newcol, df['B'], np.nan)
         df[newcol] = df[newcol].astype(str).replace("nan", np.nan)
+    df['hasAlternativeId'] = df['hasAlternativeId'].str.split(',')
+    df = df.explode('hasAlternativeId')
+    
     return df
 
 
@@ -143,6 +145,22 @@ def shard(list_to_shard, shard_size):
         sharded_list.append(arr)
     return sharded_list
 
+def mesh_separator(df):
+    """
+    Splits the mesh column into mesh descriptor and concept ID
+    Args:
+        df: pandas dataframe with mesh column 
+
+    Returns:
+        df: dataframe with split mesh column 
+    """
+    
+    df['meshDescriptor'] = np.where(df['MESH'].str[0] == 'D', df['MESH'], np.nan)
+    df['meshDescriptor'] = "bio/" + df['meshDescriptor']
+    df['meshConcept'] = np.where(df['MESH'].str[0] == 'C', df['MESH'], np.nan)
+    df['meshConcept'] = "bio/" + df['meshConcept']
+    df = df.drop(['MESH'], axis = 1)
+    return df
 
 def col_string(df):
     """
@@ -152,84 +170,11 @@ def col_string(df):
     Returns:
         None
     """
-    col_add = list(df['A'].unique())
-    for newcol in col_add:
-        df[newcol] = str(newcol) + ":" + df[newcol].astype(str)
-        col_rep = str(newcol) + ":" + "nan"
-        df[newcol] = df[newcol].replace(col_rep, np.nan)
-    col_names = [
-        'hasAlternativeId', 'hasExactSynonym', 'label', 'ICDO', 'MESH', 'NCI', 
-        'SNOMEDCTUS20200901', 'ICD10CM', 'ICD9CM',
-        'SNOMEDCTUS20200301', 'ORDO', 'SNOMEDCTUS20180301', 'GARD', 'OMIM',
-        'EFO', 'KEGG', 'MEDDRA', 'SNOMEDCTUS20190901'
-    ]
+    col_names = ['hasExactSynonym', 'label', 'IAO_0000115']
     for col in col_names:
         df.update('"' + df[[col]].astype(str) + '"')
-    df['UMLSCUI'] = df['UMLSCUI'].astype(str)
-    df['UMLSCUI'] = df['UMLSCUI'].str.split(':').str[-1]
-    df['ICD9CM'] = df['ICD9CM'].astype(str)
-    df['ICD9CM'] = df['ICD9CM'].str.split(':').str[-1]
-
-
-def mesh_query(df):
-    """
-    Queries the MESH ids present in the dataframe,
-    on datacommons, fetches their dcids and adds
-    it to the same column. 
-    Args:
-        df = dataframe to change
-    Returns
-        df = modified dataframe with MESH dcid added
-    """
-    df_temp = df[df.MESH.notnull()]
-    list_mesh = list(df_temp['MESH'])
-    arr_mesh = shard(list_mesh, 1000)
-    for i in range(len(arr_mesh)):
-        query_str = """
-        SELECT DISTINCT ?id ?element_name
-        WHERE {{
-        ?element typeOf MeSHDescriptor .
-        ?element dcid ?id .
-        ?element descriptorID ?element_name .
-        ?element descriptorID {0} .
-        }}
-        """.format(arr_mesh[i])
-    result = dc.query(query_str)
-    result_df = pd.DataFrame(result)
-    result_df.columns = ['MESH_id', 'element_name']
-    df = pd.merge(result_df, df, left_on='element_name', right_on='MESH', how = "right")
+        df[col] = df[col].replace(["\"nan\""],np.nan)
     return df
-
-
-def icd10_query(df):
-    """
-    Queries the ICD10 ids present in the dataframe,
-    on datacommons, fetches their dcids and adds
-    it to the same column. 
-    Args:
-        df = dataframe to change
-    Returns
-        df = modified dataframe with ICD dcid added
-    """
-    df_temp = df[df.ICD10CM.notnull()]
-    list_icd10 = "ICD10/" + df_temp['ICD10CM'].astype(str)
-    arr_icd10 = shard(list_icd10, 1000)
-    for i in range(len(arr_icd10)):
-        query_str = """
-        SELECT DISTINCT ?id 
-        WHERE {{
-        ?element typeOf ICD10Code .
-        ?element dcid ?id .
-        ?element dcid {0} .
-        }}
-        """.format(arr_icd10[i])
-    result1 = dc.query(query_str)
-    result1_df = pd.DataFrame(result1)
-    result1_df['element'] = result1_df['?id'].str.split(pat="/").str[1]
-    result1_df.columns = ['ICD10_id', 'element']
-    df = pd.merge(result1_df, df, left_on='element', right_on='ICD10CM', how = "right")
-    return df
-
 
 def remove_newline(df):
     df.loc[2505, 'IAO_0000115'] = df.loc[2505, 'IAO_0000115'].replace("\\n", "")
@@ -237,6 +182,18 @@ def remove_newline(df):
     df.loc[2895, 'IAO_0000115'] = df.loc[2895, 'IAO_0000115'].replace("\\n", "")
     df.loc[2934, 'IAO_0000115'] = df.loc[2934, 'IAO_0000115'].replace("\\n", "")
     df.loc[3036, 'IAO_0000115'] = df.loc[3036, 'IAO_0000115'].replace("\\n", "")
+    df.loc[11305, 'IAO_0000115'] = df.loc[11305,
+                                          'IAO_0000115'].replace("\\n", "")
+    return df
+
+def create_dcid(df):
+    ##df[newcol] = np.where(df['A'] == newcol, df['B'], np.nan)
+    col_names = ['id', 'subClassOf', 'hasAlternativeId']
+    for col in col_names:
+        df[col] = "bio/" + df[col]
+        df[col] = df[col].replace(["bio/nan"],np.nan)
+    df['ICD10CM'] = "ICD10/" + df['ICD9CM'].astype(str)
+    df['ICD10CM'] = df["ICD10/"].replace(["ICD10/nan"], np.nan)
     return df
 
 
@@ -263,27 +220,23 @@ def wrapper_fun(file_input):
     ],
                        axis=1)
     df_do = col_explode(df_do)
-    df_do = mesh_query(df_do)
-    df_do = icd10_query(df_do)
-    col_string(df_do)
+    df_do = mesh_separator(df_do)
+    df_do = col_string(df_do)
     df_do = df_do.drop(['A', 'B', 'nan', 'hasDbXref', 'KEGG'], axis=1)
     df_do = df_do.drop_duplicates(subset='id', keep="last")
     df_do = df_do.reset_index(drop=True)
     df_do = df_do.replace('"nan"', np.nan)
-    df_do = df_do.replace("nan", np.nan)
-    #generate dcids
-    df_do['id'] = "bio/" + df_do['id']
-    df_do['subClassOf'] = "bio/" + df_do['subClassOf']
-    df_do['ICD9CM'] = "ICD10/" + df_do['ICD9CM'].apply(str)
+    df_do = create_dcid(df_do)
+    df_do = remove_newline(df_do)
+    df_do['IAO_0000115'] = df_do['IAO_0000115'].str.replace("_", " ")
     return df_do
 
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
     df = wrapper_fun(file_input)
-    df = remove_newline(df)
-    df['IAO_0000115'] = df['IAO_0000115'].str.replace("_", " ")
-    df.to_csv(file_output)
+    df.columns = ['diseaseDescription' if x=='IAO_0000115' else x for x in df.columns]
+    df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 
 if __name__ == '__main__':
