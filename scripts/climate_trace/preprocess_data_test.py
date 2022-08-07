@@ -6,9 +6,11 @@ expected output.
 import unittest
 import os
 import pandas as pd
-import preprocess_data
+import sys
 
 module_dir_ = os.path.dirname(__file__)
+sys.path.insert(0, module_dir_)
+import preprocess_data
 
 
 def _GetTestPath(relative_path):
