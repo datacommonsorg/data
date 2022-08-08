@@ -15,7 +15,7 @@
 """Tests for place_map."""
 
 import unittest
-from place_map import get_place_dcid
+from util.state_division_to_dcid import get_place_dcid
 
 
 class PlaceMapTest(unittest.TestCase):
@@ -24,6 +24,9 @@ class PlaceMapTest(unittest.TestCase):
         self.assertEqual(get_place_dcid('United States'), 'country/USA')
         self.assertEqual(get_place_dcid('California'), 'geoId/06')
         self.assertEqual(get_place_dcid('Calif.'), 'geoId/06')
+        self.assertEqual(get_place_dcid('MultiState'), '')
+        self.assertEqual(get_place_dcid('Total'), '')
+        self.assertEqual(get_place_dcid('Multistate'), '')
 
 
 if __name__ == '__main__':
