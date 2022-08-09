@@ -31,10 +31,6 @@ ACS_SRUVEY_MEASUREMENT_METHOD = DEFAULT_MEASUREMENT_METHOD \
 
 DOWNLOAD_DIRECTORY = "input_files"
 
-HOUSEHOLD_PV = "[Person {person}]"
-
-NUM_OF_VEHICLES_PV = "[AvailableVehicles {vehicle}]"
-
 DEFAULT_SV_PROP = {
     "typeOf": "dcs:StatisticalVariable",
     "populationType": "dcs:Household",
@@ -127,6 +123,12 @@ HHSIZE_NOOFVEHICLES_MAPPER = {
 
 RENAME_COLUMNS = {"geocode": "geoid"}
 
+PADDING = {"width": 11, "side": "left", "fillchar": "0"}
+
+FORM_SV = ("col:measuredProperty", "str:_", "str:Household",
+           "col:householdSize_numberOfVehicles", "str:_", "col:urban_group",
+           "str:_", "str:EveryWeekday", "str:_", "str:Mean")
+
 CONF_2009_FILE = {
     "input_file_delimiter": "\t",
     "basic_cols": ["geoid", "urban_group"],
@@ -141,6 +143,9 @@ CONF_2009_FILE = {
     },
     "col_values_mapper": {
         "urban_group": URBAN
+    },
+    "filters": {
+        "dropna": ["urban_group"]
     },
     "year": 2009
 }
@@ -161,6 +166,12 @@ CONF_2017_FILE = {
         "flag_acs_lt_moe": ACS_LT_MOR,
         "flag_incomplete_acs": INCOMPLETE_ACS,
         "urban_group": URBAN
+    },
+    "filters": {
+        "equals": {
+            "flag_manhattan_trt": 0
+        },
+        "dropna": ["urban_group"]
     },
     "additional_process": True,
     "year": 2017

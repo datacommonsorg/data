@@ -37,11 +37,13 @@ _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
 
 # pylint: disable=wrong-import-position
-from constants import (TMCF_TEMPLATE, MCF_TEMPLATE, HOUSEHOLD_PV,
-                       NUM_OF_VEHICLES_PV, HEADERMAP, CONF_2009_FILE,
+from constants import (TMCF_TEMPLATE, MCF_TEMPLATE, HEADERMAP, CONF_2009_FILE,
                        CONF_2017_FILE, DEFAULT_SV_PROP, FINAL_DATA_COLS,
                        HHSIZE_NOOFVEHICLES_MAPPER, DEFAULT_MEASUREMENT_METHOD,
-                       ACS_SRUVEY_MEASUREMENT_METHOD, RENAME_COLUMNS)
+                       ACS_SRUVEY_MEASUREMENT_METHOD, RENAME_COLUMNS, PADDING,
+                       FORM_SV)
+
+from mcf_config import MCF_TEMPLATE_MAPPER
 
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
@@ -99,8 +101,8 @@ def _update_headers(headers: list) -> list:
     Updating header values in headers to its complete form.
     Example:
         short form                           full form
-    pmiles_3mem_2veh      PersonMilesTraveled__With2AvailableVehicles_3Person
-     vtrip_5mem_1veh     VehicleTripsTraveled__With1AvailableVehicles_5Person
+    pmiles_3mem_2veh      PersonMilesTraveled__With2AvailableVehicles_3Persons
+    vtrip_5mem_1veh      VehicleTripsTraveled__With1AvailableVehicles_5Persons
 
     Args:
         headers (list): List of header values in short form
@@ -115,7 +117,7 @@ def _update_headers(headers: list) -> list:
             updated_headers.append((
                 f"{HEADERMAP[matchobj.group(1)]}_" + \
                     f"With{matchobj.group(5)}AvailableVehicles_" + \
-                        f"{matchobj.group(3)}Person"
+                        f"{matchobj.group(3)}Persons"
             ))
         else:
             updated_headers.append(HEADERMAP[header])
@@ -126,34 +128,6 @@ def _update_headers(headers: list) -> list:
 def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
     """
     Updates sv column in data_df dataframe.
-    Example:
-    Input: data_df[['sv']]
-                                                      sv
-                                     PersonMilesTraveled
-                                            VehicleTrips
-              PersonTrips_With1AvailableVehicles_2Person
-     VehicleMilesTraveled_With4AvailableVehicles_4Person
-
-    In-Processing: data_df[[ "sv", "sv_first_part", "sv_last_part"]]
-
-                                                      sv            sv_first_part
-                                     PersonMilesTraveled      PersonMilesTraveled
-                                            VehicleTrips             VehicleTrips
-              PersonTrips_With1AvailableVehicles_2Person              PersonTrips
-     VehicleMilesTraveled_With4AvailableVehicles_4Person     VehicleMilesTraveled
-
-                                  sv_last_part
-
-
-                With1AvailableVehicles_2Person
-                With4AvailableVehicles_4Person
-
-    Output: data_df[["sv"]]
-                                                                                  sv
-                                    Mean_PersonMilesTraveled_Household_Weekday_Urban
-                                           Mean_VehicleTrips_Household_Weekday_Urban
-             Mean_PersonTrips_Household_Weekday_With1AvailableVehicles_2Person_Urban
-    Mean_VehicleMilesTraveled_Household_Weekday_With4AvailableVehicles_4Person_Urban
 
     Args:
         data_df (pd.DataFrame): Input DataFrame
@@ -162,13 +136,43 @@ def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
         data_df (pd.DataFrame): DataFrame with updated sv column
     """
 
-    data_df["measuredProperty"] = data_df["sv"].str.split("_With").str[0]
+    data_df["measuredProperty"] = data_df[
+        "householdSize_numberOfVehicles"].str.split("_With").str[0]
     for old_val, new_val in HHSIZE_NOOFVEHICLES_MAPPER.items():
-        data_df["householdSize_numberOfVehicles"] = data_df["sv"]\
+        data_df["householdSize_numberOfVehicles"] = data_df["householdSize_numberOfVehicles"]\
                                 .str.replace(old_val, new_val)
-    data_df['sv'] = data_df['measuredProperty'] + "_Household" + data_df[
-        'householdSize_numberOfVehicles'] + "_" + data_df[
-            'urban_group'] + "_EveryWeekday_" + "Mean"
+    data_df["sv"] = ""
+    for spec in FORM_SV:
+        spec_type = spec.split(":", maxsplit=1)[0]
+        if spec_type == "col":
+            data_df['sv'] += data_df[spec.split(":")[1]]
+        else:
+            data_df['sv'] += spec.split(":")[1]
+    return data_df
+
+
+def _filter_equals(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
+
+    filter_equals = conf.get("equals", False)
+    if filter_equals:
+        for col, value in filter_equals.items():
+            data_df = data_df[data_df[col] == value]
+    return data_df
+
+
+def _filter_dropna(data_df: pd.DataFrame, conf: dict):
+    filter_dropna = conf.get("dropna", False)
+    if filter_dropna:
+        data_df = data_df.dropna(subset=filter_dropna)
+    return data_df
+
+
+def _apply_filters(data_df, file_conf):
+    # Removing null values from urban_group column
+    filters = file_conf.get("filters", False)
+    if filters:
+        data_df = _filter_equals(data_df, file_conf["filters"])
+        data_df = _filter_dropna(data_df, file_conf["filters"])
     return data_df
 
 
@@ -186,7 +190,6 @@ def _additional_process_2017(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
     # Filtering flag_manhattan_trt column with 0 value,
     # Possible values are below
     # 1 = tract in Manhattan, NY; 0 = otherwise
-    data_df = data_df[data_df['flag_manhattan_trt'] == 0]
     # Creating measurement column
     mm_cols = conf.get("measurement_method_cols", [])
     if mm_cols != []:
@@ -213,8 +216,8 @@ def _process_household_transportation(input_file: str,
     # Creating Population Columns
     pop_cols = file_conf.get("pop_cols", []) + file_conf.get("extra_cols", [])
     data_df = data_df[basic_cols + pop_cols]
-    # Removing null values from urban_group column
-    data_df = data_df.dropna(subset=["urban_group"])
+    data_df = _apply_filters(data_df, file_conf)
+
     data_df = _column_operations(data_df, file_conf)
     data_df['measurement_method'] = DEFAULT_MEASUREMENT_METHOD
     # Checking additional_process in the dictionary,
@@ -227,20 +230,20 @@ def _process_household_transportation(input_file: str,
     updated_pop_cols = _update_headers(pop_cols)
     data_df.columns = basic_cols + updated_pop_cols + ['measurement_method']
     data_df = data_df.rename(columns=RENAME_COLUMNS)
-
     data_df = data_df.melt(
         id_vars=["geoid", "urban_group", "measurement_method"],
         value_vars=updated_pop_cols,
-        var_name="sv",
+        var_name="householdSize_numberOfVehicles",
         value_name="observation")
     data_df = _update_sv_col(data_df)
 
     # Adding Leading Zeros for Fips Code in the geoid column.
     # Before padding STATE = 9009990000
     # After padding STATE = 09009990000
-    data_df["geoid"] = data_df["geoid"].astype("str").str.pad(width=11,
-                                                              side="left",
-                                                              fillchar="0")
+    data_df["geoid"] = data_df["geoid"].astype("str").str.pad(
+        width=PADDING["width"],
+        side=PADDING["side"],
+        fillchar=PADDING["fillchar"])
     data_df["location"] = "geoId/" + data_df["geoid"]
     data_df["year"] = file_conf["year"]
     return data_df
@@ -259,34 +262,18 @@ def _generate_mcf(sv_names: list, mcf_file_path: str) -> None:
     dcid_nodes = {}
     for sv in sv_names:
         pvs = []
-        dcid = sv
-        sv_prop = [prop.strip() for prop in sv.split("_")]
         sv_pvs = deepcopy(DEFAULT_SV_PROP)
-        for prop in sv_prop:
-            if prop in [
-                    "PersonMilesTraveled", "PersonTrips", "VehicleTrips",
-                    "VehicleMilesTraveled"
-            ]:
-                prop = prop[0].lower() + prop[1:]
-                pvs.append(f"measuredProperty: dcs:{prop}")
-                sv_pvs["measuredProperty"] = f"dcs:{prop}"
-            elif prop in [
-                    "1Person", "2Person", "3Person", "4Person", "5Person"
-            ]:
-                pv = HOUSEHOLD_PV.format(person=prop.replace('Person', ''))
-                pvs.append(f"householdSize: {pv}")
-                sv_pvs["householdSize"] = f"{pv}"
-            elif "AvailableVehicles" in prop:
-                prop = prop.replace("With", "")\
-                    .replace("AvailableVehicles", "")
-                pv = NUM_OF_VEHICLES_PV.format(vehicle=prop)
-                pvs.append(f"numberOfVehicles: {pv}")
-                sv_pvs["numberOfVehicles"] = f"{pv}"
-            elif prop in ["Urban", "Rural", "SemiUrban"]:
-                pvs.append(f"placeOfResidenceClassification: dcs:{prop}")
-                sv_pvs["placeOfResidenceClassification"] = f"dcs:{prop}"
+        for prop, prop_conf in MCF_TEMPLATE_MAPPER.items():
+            if prop in sv:
+                regex = prop_conf.get("regex", False)
+                if regex:
+                    prop_val = regex(sv)
+                prop_key = prop_conf["key"]
+                prop_val = prop_conf["value"](prop_val)
+                pvs.append(prop_conf["format"](prop_key, prop_val))
+                sv_pvs[prop_key] = prop_val
         resolved_dcid = get_statvar_dcid(sv_pvs)
-        dcid_nodes[dcid] = resolved_dcid
+        dcid_nodes[sv] = resolved_dcid
         mcf_nodes.append(
             MCF_TEMPLATE.format(dcid=resolved_dcid, xtra_pvs='\n'.join(pvs)))
     mcf = '\n'.join(mcf_nodes)
@@ -317,6 +304,8 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     final_df = pd.DataFrame()
     sv_names = []
     for file_path in input_files:
+        print("--------")
+        print(os.path.basename(file_path))
         if "latch_2017-b" in file_path:
             conf = CONF_2017_FILE
         elif "NHTS_2009_transfer" in file_path:
@@ -343,6 +332,7 @@ def main(_):
         logger.error("Run the download.py script first.")
         sys.exit(1)
     ip_files = [os.path.join(input_path, file) for file in ip_files]
+    # ip_files = [ip_files[0]]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output_files")
     # Creating Output Directory
