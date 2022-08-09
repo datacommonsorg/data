@@ -1,0 +1,70 @@
+Census Bureau Region and Division Codes and Federal Information Processing System (FIPS) Codes for States,,,
+,,,
+"Source: U.S. Census Bureau, Population Division",,,
+Internet Release Date: May 2019,,,
+,,,
+Region,Division,State (FIPS),Name
+1,0,00,Northeast Region
+1,1,00,New England Division
+1,1,09,Connecticut
+1,1,23,Maine
+1,1,25,Massachusetts
+1,1,33,New Hampshire
+1,1,44,Rhode Island
+1,1,50,Vermont
+1,2,00,Middle Atlantic Division
+1,2,34,New Jersey
+1,2,36,New York
+1,2,42,Pennsylvania
+2,0,00,Midwest Region
+2,3,00,East North Central Division
+2,3,17,Illinois
+2,3,18,Indiana
+2,3,26,Michigan
+2,3,39,Ohio
+2,3,55,Wisconsin
+2,4,00,West North Central Division
+2,4,19,Iowa
+2,4,20,Kansas
+2,4,27,Minnesota
+2,4,29,Missouri
+2,4,31,Nebraska
+2,4,38,North Dakota
+2,4,46,South Dakota
+3,0,00,South Region
+3,5,00,South Atlantic Division
+3,5,10,Delaware
+3,5,11,District of Columbia
+3,5,12,Florida
+3,5,13,Georgia
+3,5,24,Maryland
+3,5,37,North Carolina
+3,5,45,South Carolina
+3,5,51,Virginia
+3,5,54,West Virginia
+3,6,00,East South Central Division
+3,6,01,Alabama
+3,6,21,Kentucky
+3,6,28,Mississippi
+3,6,47,Tennessee
+3,7,00,West South Central Division
+3,7,05,Arkansas
+3,7,22,Louisiana
+3,7,40,Oklahoma
+3,7,48,Texas
+4,0,00,West Region
+4,8,00,Mountain Division
+4,8,04,Arizona
+4,8,08,Colorado
+4,8,16,Idaho
+4,8,30,Montana
+4,8,32,Nevada
+4,8,35,New Mexico
+4,8,49,Utah
+4,8,56,Wyoming
+4,9,00,Pacific Division
+4,9,02,Alaska
+4,9,06,California
+4,9,15,Hawaii
+4,9,41,Oregon
+4,9,53,Washington

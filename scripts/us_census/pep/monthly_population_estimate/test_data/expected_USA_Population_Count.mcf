@@ -1,0 +1,36 @@
+Node: dcid:Count_Person_InUSArmedForcesOverseas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+residentStatus: dcs:InUSArmedForcesOverseas
+armedForcesStatus: dcs:InArmedForces
+
+Node: dcid:Count_Person_USResident
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+residentStatus: dcs:USResident
+
+Node: dcid:Count_Person_USResidentOrInUSArmedForcesOverseas
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+residentStatus: dcs:USResident__InUSArmedForcesOverseas
+
+Node: dcid:Count_Person_Civilian
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+armedForcesStatus: dcs:Civilian
+
+Node: dcid:Count_Person_Civilian_NonInstitutionalized
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+armedForcesStatus: dcs:Civilian
+institutionalization: dcs:USC_NonInstitutionalized

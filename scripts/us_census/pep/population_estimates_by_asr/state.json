@@ -1,0 +1,13 @@
+{"1970-79":"https://www2.census.gov/programs-surveys/popest/tables/1900-1980/state/asrh/pe-19.csv",
+"1990-00":["https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh90.txt",
+    "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh91.txt",
+    "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh92.txt",
+    "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh93.txt",
+    "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh94.txt",
+    "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh95.txt",
+    "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh96.txt",
+    "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh97.txt",
+    "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh98.txt",
+    "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh99.txt"],
+"2000-10":"https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/state/st-est00int-alldata.csv",
+"2010-20":"https://www2.census.gov/programs-surveys/popest/datasets/2010-2020/state/asrh/SC-EST2020-ALLDATA6.csv"}

@@ -59,6 +59,9 @@ There are a couple of ways to map the statistical variables with TMCF:
    column. For an example, see [this TMCF](https://github.com/datacommonsorg/data/blob/master/scripts/india_census/primary_census_abstract_data/IndiaCensus2011_Primary_Abstract_Data.tmcf)
    and the [corresponding CSV](https://github.com/datacommonsorg/data/blob/master/scripts/india_census/primary_census_abstract_data/IndiaCensus2011_Primary_Abstract_Data.csv).
 
+TIP: To represent DC strings and repeated values in a CSV field, refer to these
+[CSV Formatting Tips](formatting_tips.md).
+
 ## Validate the artifacts
 
 Use the [`dc-import`](https://github.com/datacommonsorg/import#using-import-tool) tool to validate the artifacts. When you run it, it will generate `report.json` and `summary_report.html` with counters representing warnings/errors and summary statistics.
