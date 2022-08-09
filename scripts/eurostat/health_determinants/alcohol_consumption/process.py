@@ -370,7 +370,7 @@ def _hazardousalcoholconsumption_by_sex_urbanisation(df: pd.DataFrame)\
         df (pd.DataFrame): The raw df as the input
 
     Returns:
-        df (pd.DataFrame): provides the cleaned df as output
+        df (pd.DataFrame): provides the cleaned df as output.
     """
     # providing column names
     columns = [
