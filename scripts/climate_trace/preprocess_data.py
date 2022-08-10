@@ -8,6 +8,7 @@ output_files directory.
 """
 from absl import app
 from datetime import datetime
+import numpy as np
 import pandas as pd
 import statvar_mapping
 
@@ -21,25 +22,44 @@ def _ExtractDate(dt_str):
 
 
 def MergeAndProcessData(forest_df, other_data_df):
-    """Merge the two data frames and output a processed data frame."""
-    sub_sector_df = pd.concat([other_data_df, forest_df], ignore_index=True)
-    sub_sector_df["year"] = sub_sector_df["start"].apply(_ExtractDate).apply(
+    """Merge the two data frames and output processed data frames for country and sectors."""
+    base_df = pd.concat([other_data_df, forest_df], ignore_index=True)
+    column_list = [
+        "country", "year", "statvar", "measurement_method", "Tonnes Co2e"
+    ]
+    # drop all rows with missing values
+    base_df["Tonnes Co2e"].replace('', np.nan, inplace=True)
+    base_df.dropna(subset=["Tonnes Co2e"], inplace=True)
+
+    base_df["year"] = base_df["start"].apply(_ExtractDate).apply(
         lambda x: x.year)
 
     # Get per sector aggregates
-    sector_df = sub_sector_df.groupby(["country", "year", "sector"
-                                      ])["Tonnes Co2e"].sum().reset_index()
+    sector_df = base_df.groupby(["country", "year",
+                                 "sector"])["Tonnes Co2e"].sum().reset_index()
     sector_df["statvar"] = (
         statvar_mapping.STATVAR_PREFIX +
         sector_df["sector"].apply(statvar_mapping.SECTOR_VAR_MAP.get))
-    sector_df = sector_df[["country", "year", "statvar", "Tonnes Co2e"]]
+    sector_df["measurement_method"] = statvar_mapping.MEASUREMENT_METHOD_SECTORS
+    sector_df = sector_df[column_list]
 
+    sub_sector_df = base_df
     sub_sector_df["statvar"] = (
         statvar_mapping.STATVAR_PREFIX +
-        sub_sector_df["subsector"].apply(statvar_mapping.SUBSECTOR_VAR_MAP.get))
-    sub_sector_df = sub_sector_df[["country", "year", "statvar", "Tonnes Co2e"]]
+        base_df["subsector"].apply(statvar_mapping.SUBSECTOR_VAR_MAP.get))
+    sub_sector_df[
+        "measurement_method"] = statvar_mapping.MEASUREMENT_METHOD_SECTORS
+    sub_sector_df = sub_sector_df[column_list]
 
-    return pd.concat([sector_df, sub_sector_df], ignore_index=True)
+    # Get per country aggregates
+    country_df = base_df.groupby(["country",
+                                  "year"])["Tonnes Co2e"].sum().reset_index()
+    country_df["statvar"] = statvar_mapping.STATVAR_COUNTRY_METRICS
+    country_df[
+        "measurement_method"] = statvar_mapping.MEASUREMENT_METHOD_COUNTRIES
+    country_df = country_df[column_list]
+
+    return pd.concat([sector_df, sub_sector_df, country_df], ignore_index=True)
 
 
 def main(_):

@@ -25,12 +25,12 @@ class PreprocessDataTest(unittest.TestCase):
         forest_df = pd.read_csv(_GetTestPath("test_data/forest.csv"))
         df = pd.read_csv(_GetTestPath("test_data/other_sectors.csv"))
         processed = preprocess_data.MergeAndProcessData(forest_df, df)
-        sort_column_list = ["country", "year", "statvar"]
-        self.assertTrue(
-            processed.sort_values(
-                by=sort_column_list, ignore_index=True).equals(
-                    expected_df.sort_values(by=sort_column_list,
-                                            ignore_index=True)))
+        sort_column_list = ["country", "year", "statvar", "measurement_method"]
+        self.assertIsNone(
+            pd.testing.assert_frame_equal(
+                processed.sort_values(by=sort_column_list, ignore_index=True),
+                expected_df.sort_values(by=sort_column_list,
+                                        ignore_index=True)))
 
 
 if __name__ == "__main__":

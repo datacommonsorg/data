@@ -3,8 +3,13 @@
 It is used by the preproccess_data.py file to find stat-vars for sectors and
 sub-sectors.
 """
+MEASUREMENT_METHOD_SECTORS = "ClimateTraceEstimate"
+
+MEASUREMENT_METHOD_COUNTRIES = "dcAggregate/ClimateTraceEstimate"
 
 STATVAR_PREFIX = "Annual_Emissions_GreenhouseGas_"
+
+STATVAR_COUNTRY_METRICS = "Annual_Emissions_GreenhouseGas"
 
 # Sub-sector mapping
 SUBSECTOR_VAR_MAP = {
