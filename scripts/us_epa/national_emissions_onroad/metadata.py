@@ -192,379 +192,379 @@ replace_metadata = {
     'LB':
         'Pound',
     2205320080:
-        'SCC/MobileLightCommercialTruckE85',
+        'MobileLightCommercialTruckE85',
     2202410080:
-        'SCC/MobileIntercityBusDiesel',
+        'MobileIntercityBusDiesel',
     2201110080:
-        'SCC/MobileMotorcycleGas',
+        'MobileMotorcycleGas',
     2202430080:
-        'SCC/MobileSchoolBusDiesel',
+        'MobileSchoolBusDiesel',
     2202420080:
-        'SCC/MobileTransitBusDiesel',
+        'MobileTransitBusDiesel',
     2202540080:
-        'SCC/MobileMotorHomeDiesel',
+        'MobileMotorHomeDiesel',
     2202320080:
-        'SCC/MobileLightCommercialTruckDiesel',
+        'MobileLightCommercialTruckDiesel',
     2202530080:
-        'SCC/MobileSingleUnitLonghaulTruckDiesel',
+        'MobileSingleUnitLonghaulTruckDiesel',
     2201520080:
-        'SCC/MobileSingleUnitShorthaulTruckGas',
+        'MobileSingleUnitShorthaulTruckGas',
     2201510080:
-        'SCC/MobileRefuseTruckGas',
+        'MobileRefuseTruckGas',
     2202510080:
-        'SCC/MobileRefuseTruckDiesel',
+        'MobileRefuseTruckDiesel',
     2205310080:
-        'SCC/MobilePassengerTruckE85',
+        'MobilePassengerTruckE85',
     2205210080:
-        'SCC/MobilePassengerCarE85',
+        'MobilePassengerCarE85',
     2201310080:
-        'SCC/MobilePassengerTruckGas',
+        'MobilePassengerTruckGas',
     2201430080:
-        'SCC/MobileSchoolBusGas',
+        'MobileSchoolBusGas',
     2201000062:
-        'SCC/MobileRefuelingGas',
+        'MobileRefuelingGas',
     2201530080:
-        'SCC/MobileSingleUnitLonghaulTruckGas',
+        'MobileSingleUnitLonghaulTruckGas',
     2202310080:
-        'SCC/MobilePassengerTruckDiesel',
+        'MobilePassengerTruckDiesel',
     2201210080:
-        'SCC/MobilePassengerCarGas',
+        'MobilePassengerCarGas',
     2201610080:
-        'SCC/MobileCombinationShorthaulTruckGas',
+        'MobileCombinationShorthaulTruckGas',
     2202210080:
-        'SCC/MobilePassengerCarDiesel',
+        'MobilePassengerCarDiesel',
     2202620080:
-        'SCC/MobileCombinationLonghaulTruckDiesel',
+        'MobileCombinationLonghaulTruckDiesel',
     2202520080:
-        'SCC/MobileSingleUnitShorthaulTruckDiesel',
+        'MobileSingleUnitShorthaulTruckDiesel',
     2202610080:
-        'SCC/MobileCombinationShorthaulTruckDiesel',
+        'MobileCombinationShorthaulTruckDiesel',
     2202000062:
-        'SCC/MobileRefuelingDiesel',
+        'MobileRefuelingDiesel',
     2201540080:
-        'SCC/MobileMotorHomeGas',
+        'MobileMotorHomeGas',
     2201420080:
-        'SCC/MobileTransitBusGas',
+        'MobileTransitBusGas',
     2205000062:
-        'SCC/MobileRefuelingEthanol',
+        'MobileRefuelingEthanol',
     2201320080:
-        'SCC/MobileLightCommercialTruckGas',
+        'MobileLightCommercialTruckGas',
     2203420080:
-        'SCC/MobileTransitBusCNG',
+        'MobileTransitBusCNG',
     2209310080:
-        'SCC/MobilePassengerTruckElectric',
+        'MobilePassengerTruckElectric',
     2209210080:
-        'SCC/MobilePassengerCarElectric',
+        'MobilePassengerCarElectric',
     2201001110:
-        "SCC/MobileLDGVGasRuralInterstate",
+        "MobileLDGVGasRuralInterstate",
     2201001130:
-        "SCC/MobileLDGVGasRuralOtherPrincipalArterial",
+        "MobileLDGVGasRuralOtherPrincipalArterial",
     2201001150:
-        "SCC/MobileLDGVGasRuralMinorArterial",
+        "MobileLDGVGasRuralMinorArterial",
     2201001170:
-        "SCC/MobileLDGVGasRuralMajorCollector",
+        "MobileLDGVGasRuralMajorCollector",
     2201001190:
-        "SCC/MobileLDGVGasRuralMinorCollector",
+        "MobileLDGVGasRuralMinorCollector",
     2201001210:
-        "SCC/MobileLDGVGasRuralLocal",
+        "MobileLDGVGasRuralLocal",
     2201001230:
-        "SCC/MobileLDGVGasUrbanInterstate",
+        "MobileLDGVGasUrbanInterstate",
     2201001250:
-        "SCC/MobileLDGVGasUrbanOtherFreewaysandExpressways",
+        "MobileLDGVGasUrbanOtherFreewaysandExpressways",
     2201001270:
-        "SCC/MobileLDGVGasUrbanOtherPrincipalArterial",
+        "MobileLDGVGasUrbanOtherPrincipalArterial",
     2201001290:
-        "SCC/MobileLDGVGasUrbanMinorArterial",
+        "MobileLDGVGasUrbanMinorArterial",
     2201001310:
-        "SCC/MobileLDGVGasUrbanCollector",
+        "MobileLDGVGasUrbanCollector",
     2201001330:
-        "SCC/MobileLDGVGasUrbanLocal",
+        "MobileLDGVGasUrbanLocal",
     2201001390:
-        "SCC/MobileLDGVGasParkingArea",
+        "MobileLDGVGasParkingArea",
     2201020110:
-        "SCC/MobileLDGT1GasRuralInterstate",
+        "MobileLDGT1GasRuralInterstate",
     2201020130:
-        "SCC/MobileLDGT1GasRuralOtherPrincipalArterial",
+        "MobileLDGT1GasRuralOtherPrincipalArterial",
     2201020150:
-        "SCC/MobileLDGT1GasRuralMinorArterial",
+        "MobileLDGT1GasRuralMinorArterial",
     2201020170:
-        "SCC/MobileLDGT1GasRuralMajorCollector",
+        "MobileLDGT1GasRuralMajorCollector",
     2201020190:
-        "SCC/MobileLDGT1GasRuralMinorCollector",
+        "MobileLDGT1GasRuralMinorCollector",
     2201020210:
-        "SCC/MobileLDGT1GasRuralLocal",
+        "MobileLDGT1GasRuralLocal",
     2201020230:
-        "SCC/MobileLDGT1GasUrbanInterstate",
+        "MobileLDGT1GasUrbanInterstate",
     2201020250:
-        "SCC/MobileLDGT1GasUrbanOtherFreewaysandExpressways",
+        "MobileLDGT1GasUrbanOtherFreewaysandExpressways",
     2201020270:
-        "SCC/MobileLDGT1GasUrbanOtherPrincipalArterial",
+        "MobileLDGT1GasUrbanOtherPrincipalArterial",
     2201020290:
-        "SCC/MobileLDGT1GasUrbanMinorArterial",
+        "MobileLDGT1GasUrbanMinorArterial",
     2201020310:
-        "SCC/MobileLDGT1GasUrbanCollector",
+        "MobileLDGT1GasUrbanCollector",
     2201020330:
-        "SCC/MobileLDGT1GasUrbanLocal",
+        "MobileLDGT1GasUrbanLocal",
     2201020390:
-        "SCC/MobileLDGT1GasParkingArea",
+        "MobileLDGT1GasParkingArea",
     2201040110:
-        "SCC/MobileLDGT2GasRuralInterstate",
+        "MobileLDGT2GasRuralInterstate",
     2201040130:
-        "SCC/MobileLDGT2GasRuralOtherPrincipalArterial",
+        "MobileLDGT2GasRuralOtherPrincipalArterial",
     2201040150:
-        "SCC/MobileLDGT2GasRuralMinorArterial",
+        "MobileLDGT2GasRuralMinorArterial",
     2201040170:
-        "SCC/MobileLDGT2GasRuralMajorCollector",
+        "MobileLDGT2GasRuralMajorCollector",
     2201040190:
-        "SCC/MobileLDGT2GasRuralMinorCollector",
+        "MobileLDGT2GasRuralMinorCollector",
     2201040210:
-        "SCC/MobileLDGT2GasRuralLocal",
+        "MobileLDGT2GasRuralLocal",
     2201040230:
-        "SCC/MobileLDGT2GasUrbanInterstate",
+        "MobileLDGT2GasUrbanInterstate",
     2201040250:
-        "SCC/MobileLDGT2GasUrbanOtherFreewaysandExpressways",
+        "MobileLDGT2GasUrbanOtherFreewaysandExpressways",
     2201040270:
-        "SCC/MobileLDGT2GasUrbanOtherPrincipalArterial",
+        "MobileLDGT2GasUrbanOtherPrincipalArterial",
     2201040290:
-        "SCC/MobileLDGT2GasUrbanMinorArterial",
+        "MobileLDGT2GasUrbanMinorArterial",
     2201040310:
-        "SCC/MobileLDGT2GasUrbanCollector",
+        "MobileLDGT2GasUrbanCollector",
     2201040330:
-        "SCC/MobileLDGT2GasUrbanLocal",
+        "MobileLDGT2GasUrbanLocal",
     2201040390:
-        "SCC/MobileLDGT2GasParkingArea",
+        "MobileLDGT2GasParkingArea",
     2201070110:
-        "SCC/MobileHDGVGasRuralInterstate",
+        "MobileHDGVGasRuralInterstate",
     2201070130:
-        "SCC/MobileHDGVGasRuralOtherPrincipalArterial",
+        "MobileHDGVGasRuralOtherPrincipalArterial",
     2201070150:
-        "SCC/MobileHDGVGasRuralMinorArterial",
+        "MobileHDGVGasRuralMinorArterial",
     2201070170:
-        "SCC/MobileHDGVGasRuralMajorCollector",
+        "MobileHDGVGasRuralMajorCollector",
     2201070190:
-        "SCC/MobileHDGVGasRuralMinorCollector",
+        "MobileHDGVGasRuralMinorCollector",
     2201070210:
-        "SCC/MobileHDGVGasRuralLocal",
+        "MobileHDGVGasRuralLocal",
     2201070230:
-        "SCC/MobileHDGVGasUrbanInterstate",
+        "MobileHDGVGasUrbanInterstate",
     2201070250:
-        "SCC/MobileHDGVGasUrbanOtherFreewaysandExpressways",
+        "MobileHDGVGasUrbanOtherFreewaysandExpressways",
     2201070270:
-        "SCC/MobileHDGVGasUrbanOtherPrincipalArterial",
+        "MobileHDGVGasUrbanOtherPrincipalArterial",
     2201070290:
-        "SCC/MobileHDGVGasUrbanMinorArterial",
+        "MobileHDGVGasUrbanMinorArterial",
     2201070310:
-        "SCC/MobileHDGVGasUrbanCollector",
+        "MobileHDGVGasUrbanCollector",
     2201070330:
-        "SCC/MobileHDGVGasUrbanLocal",
+        "MobileHDGVGasUrbanLocal",
     2201070390:
-        "SCC/MobileHDGVGasParkingArea",
+        "MobileHDGVGasParkingArea",
     2201080110:
-        "SCC/MobileMotocycleGasRuralInterstate",
+        "MobileMotocycleGasRuralInterstate",
     2201080130:
-        "SCC/MobileMotocycleGasRuralOtherPrincipalArterial",
+        "MobileMotocycleGasRuralOtherPrincipalArterial",
     2201080150:
-        "SCC/MobileMotocycleGasRuralMinorArterial",
+        "MobileMotocycleGasRuralMinorArterial",
     2201080170:
-        "SCC/MobileMotocycleGasRuralMajorCollector",
+        "MobileMotocycleGasRuralMajorCollector",
     2201080190:
-        "SCC/MobileMotocycleGasRuralMinorCollector",
+        "MobileMotocycleGasRuralMinorCollector",
     2201080210:
-        "SCC/MobileMotocycleGasRuralLocal",
+        "MobileMotocycleGasRuralLocal",
     2201080230:
-        "SCC/MobileMotocycleGasUrbanInterstate",
+        "MobileMotocycleGasUrbanInterstate",
     2201080250:
-        "SCC/MobileMotocycleGasUrbanOtherFreewaysandExpressways",
+        "MobileMotocycleGasUrbanOtherFreewaysandExpressways",
     2201080270:
-        "SCC/MobileMotocycleGasUrbanOtherPrincipalArterial",
+        "MobileMotocycleGasUrbanOtherPrincipalArterial",
     2201080290:
-        "SCC/MobileMotocycleGasUrbanMinorArterial",
+        "MobileMotocycleGasUrbanMinorArterial",
     2201080310:
-        "SCC/MobileMotocycleGasUrbanCollector",
+        "MobileMotocycleGasUrbanCollector",
     2201080330:
-        "SCC/MobileMotocycleGasUrbanLocal",
+        "MobileMotocycleGasUrbanLocal",
     2201080390:
-        "SCC/MobileMotocycleGasParkingArea",
+        "MobileMotocycleGasParkingArea",
     2230001110:
-        "SCC/MobileLDDVDieselRuralInterstate",
+        "MobileLDDVDieselRuralInterstate",
     2230001130:
-        "SCC/MobileLDDVDieselRuralOtherPrincipalArterial",
+        "MobileLDDVDieselRuralOtherPrincipalArterial",
     2230001150:
-        "SCC/MobileLDDVDieselRuralMinorArterial",
+        "MobileLDDVDieselRuralMinorArterial",
     2230001170:
-        "SCC/MobileLDDVDieselRuralMajorCollector",
+        "MobileLDDVDieselRuralMajorCollector",
     2230001190:
-        "SCC/MobileLDDVDieselRuralMinorCollector",
+        "MobileLDDVDieselRuralMinorCollector",
     2230001210:
-        "SCC/MobileLDDVDieselRuralLocal",
+        "MobileLDDVDieselRuralLocal",
     2230001230:
-        "SCC/MobileLDDVDieselUrbanInterstate",
+        "MobileLDDVDieselUrbanInterstate",
     2230001250:
-        "SCC/MobileLDDVDieselUrbanOtherFreewaysandExpressways",
+        "MobileLDDVDieselUrbanOtherFreewaysandExpressways",
     2230001270:
-        "SCC/MobileLDDVDieselUrbanOtherPrincipalArterial",
+        "MobileLDDVDieselUrbanOtherPrincipalArterial",
     2230001290:
-        "SCC/MobileLDDVDieselUrbanMinorArterial",
+        "MobileLDDVDieselUrbanMinorArterial",
     2230001310:
-        "SCC/MobileLDDVDieselUrbanCollector",
+        "MobileLDDVDieselUrbanCollector",
     2230001330:
-        "SCC/MobileLDDVDieselUrbanLocal",
+        "MobileLDDVDieselUrbanLocal",
     2230001390:
-        "SCC/MobileLDDVDieselParkingArea",
+        "MobileLDDVDieselParkingArea",
     2230060110:
-        "SCC/MobileLDDTDieselRuralInterstate",
+        "MobileLDDTDieselRuralInterstate",
     2230060130:
-        "SCC/MobileLDDTDieselRuralOtherPrincipalArterial",
+        "MobileLDDTDieselRuralOtherPrincipalArterial",
     2230060150:
-        "SCC/MobileLDDTDieselRuralMinorArterial",
+        "MobileLDDTDieselRuralMinorArterial",
     2230060170:
-        "SCC/MobileLDDTDieselRuralMajorCollector",
+        "MobileLDDTDieselRuralMajorCollector",
     2230060190:
-        "SCC/MobileLDDTDieselRuralMinorCollector",
+        "MobileLDDTDieselRuralMinorCollector",
     2230060210:
-        "SCC/MobileLDDTDieselRuralLocal",
+        "MobileLDDTDieselRuralLocal",
     2230060230:
-        "SCC/MobileLDDTDieselUrbanInterstate",
+        "MobileLDDTDieselUrbanInterstate",
     2230060250:
-        "SCC/MobileLDDTDieselUrbanOtherFreewaysandExpressways",
+        "MobileLDDTDieselUrbanOtherFreewaysandExpressways",
     2230060270:
-        "SCC/MobileLDDTDieselUrbanOtherPrincipalArterial",
+        "MobileLDDTDieselUrbanOtherPrincipalArterial",
     2230060290:
-        "SCC/MobileLDDTDieselUrbanMinorArterial",
+        "MobileLDDTDieselUrbanMinorArterial",
     2230060310:
-        "SCC/MobileLDDTDieselUrbanCollector",
+        "MobileLDDTDieselUrbanCollector",
     2230060330:
-        "SCC/MobileLDDTDieselUrbanLocal",
+        "MobileLDDTDieselUrbanLocal",
     2230060390:
-        "SCC/MobileLDDTDieselParkingArea",
+        "MobileLDDTDieselParkingArea",
     2230071110:
-        "SCC/MobileHDDV2BDieselRuralInterstate",
+        "MobileHDDV2BDieselRuralInterstate",
     2230071130:
-        "SCC/MobileHDDV2BDieselRuralOtherPrincipalArterial",
+        "MobileHDDV2BDieselRuralOtherPrincipalArterial",
     2230071150:
-        "SCC/MobileHDDV2BDieselRuralMinorArterial",
+        "MobileHDDV2BDieselRuralMinorArterial",
     2230071170:
-        "SCC/MobileHDDV2BDieselRuralMajorCollector",
+        "MobileHDDV2BDieselRuralMajorCollector",
     2230071190:
-        "SCC/MobileHDDV2BDieselRuralMinorCollector",
+        "MobileHDDV2BDieselRuralMinorCollector",
     2230071210:
-        "SCC/MobileHDDV2BDieselRuralLocal",
+        "MobileHDDV2BDieselRuralLocal",
     2230071230:
-        "SCC/MobileHDDV2BDieselUrbanInterstate",
+        "MobileHDDV2BDieselUrbanInterstate",
     2230071250:
-        "SCC/MobileHDDV2BDieselUrbanOtherFreewaysandExpressways",
+        "MobileHDDV2BDieselUrbanOtherFreewaysandExpressways",
     2230071270:
-        "SCC/MobileHDDV2BDieselUrbanOtherPrincipalArterial",
+        "MobileHDDV2BDieselUrbanOtherPrincipalArterial",
     2230071290:
-        "SCC/MobileHDDV2BDieselUrbanMinorArterial",
+        "MobileHDDV2BDieselUrbanMinorArterial",
     2230071310:
-        "SCC/MobileHDDV2BDieselUrbanCollector",
+        "MobileHDDV2BDieselUrbanCollector",
     2230071330:
-        "SCC/MobileHDDV2BDieselUrbanLocal",
+        "MobileHDDV2BDieselUrbanLocal",
     2230071390:
-        "SCC/MobileHDDV2BDieselParkingArea",
+        "MobileHDDV2BDieselParkingArea",
     2230072110:
-        "SCC/MobileHDDV345DieselRuralInterstate",
+        "MobileHDDV345DieselRuralInterstate",
     2230072130:
-        "SCC/MobileHDDV345DieselRuralOtherPrincipalArterial",
+        "MobileHDDV345DieselRuralOtherPrincipalArterial",
     2230072150:
-        "SCC/MobileHDDV345DieselRuralMinorArterial",
+        "MobileHDDV345DieselRuralMinorArterial",
     2230072170:
-        "SCC/MobileHDDV345DieselRuralMajorCollector",
+        "MobileHDDV345DieselRuralMajorCollector",
     2230072190:
-        "SCC/MobileHDDV345DieselRuralMinorCollector",
+        "MobileHDDV345DieselRuralMinorCollector",
     2230072210:
-        "SCC/MobileHDDV345DieselRuralLocal",
+        "MobileHDDV345DieselRuralLocal",
     2230072230:
-        "SCC/MobileHDDV345DieselUrbanInterstate",
+        "MobileHDDV345DieselUrbanInterstate",
     2230072250:
-        "SCC/MobileHDDV345DieselUrbanOtherFreewaysandExpressways",
+        "MobileHDDV345DieselUrbanOtherFreewaysandExpressways",
     2230072270:
-        "SCC/MobileHDDV345DieselUrbanOtherPrincipalArterial",
+        "MobileHDDV345DieselUrbanOtherPrincipalArterial",
     2230072290:
-        "SCC/MobileHDDV345DieselUrbanMinorArterial",
+        "MobileHDDV345DieselUrbanMinorArterial",
     2230072310:
-        "SCC/MobileHDDV345DieselUrbanCollector",
+        "MobileHDDV345DieselUrbanCollector",
     2230072330:
-        "SCC/MobileHDDV345DieselUrbanLocal",
+        "MobileHDDV345DieselUrbanLocal",
     2230072390:
-        "SCC/MobileHDDV345DieselParkingArea",
+        "MobileHDDV345DieselParkingArea",
     2230073110:
-        "SCC/MobileHDDV67DieselRuralInterstate",
+        "MobileHDDV67DieselRuralInterstate",
     2230073130:
-        "SCC/MobileHDDV67DieselRuralOtherPrincipalArterial",
+        "MobileHDDV67DieselRuralOtherPrincipalArterial",
     2230073150:
-        "SCC/MobileHDDV67DieselRuralMinorArterial",
+        "MobileHDDV67DieselRuralMinorArterial",
     2230073170:
-        "SCC/MobileHDDV67DieselRuralMajorCollector",
+        "MobileHDDV67DieselRuralMajorCollector",
     2230073190:
-        "SCC/MobileHDDV67DieselRuralMinorCollector",
+        "MobileHDDV67DieselRuralMinorCollector",
     2230073210:
-        "SCC/MobileHDDV67DieselRuralLocal",
+        "MobileHDDV67DieselRuralLocal",
     2230073230:
-        "SCC/MobileHDDV67DieselUrbanInterstate",
+        "MobileHDDV67DieselUrbanInterstate",
     2230073250:
-        "SCC/MobileHDDV67DieselUrbanOtherFreewaysandExpressways",
+        "MobileHDDV67DieselUrbanOtherFreewaysandExpressways",
     2230073270:
-        "SCC/MobileHDDV67DieselUrbanOtherPrincipalArterial",
+        "MobileHDDV67DieselUrbanOtherPrincipalArterial",
     2230073290:
-        "SCC/MobileHDDV67DieselUrbanMinorArterial",
+        "MobileHDDV67DieselUrbanMinorArterial",
     2230073310:
-        "SCC/MobileHDDV67DieselUrbanCollector",
+        "MobileHDDV67DieselUrbanCollector",
     2230073330:
-        "SCC/MobileHDDV67DieselUrbanLocal",
+        "MobileHDDV67DieselUrbanLocal",
     2230073390:
-        "SCC/MobileHDDV67DieselParkingArea",
+        "MobileHDDV67DieselParkingArea",
     2230074110:
-        "SCC/MobileHDDV8DieselRuralInterstate",
+        "MobileHDDV8DieselRuralInterstate",
     2230074130:
-        "SCC/MobileHDDV8DieselRuralOtherPrincipalArterial",
+        "MobileHDDV8DieselRuralOtherPrincipalArterial",
     2230074150:
-        "SCC/MobileHDDV8DieselRuralMinorArterial",
+        "MobileHDDV8DieselRuralMinorArterial",
     2230074170:
-        "SCC/MobileHDDV8DieselRuralMajorCollector",
+        "MobileHDDV8DieselRuralMajorCollector",
     2230074190:
-        "SCC/MobileHDDV8DieselRuralMinorCollector",
+        "MobileHDDV8DieselRuralMinorCollector",
     2230074210:
-        "SCC/MobileHDDV8DieselRuralLocal",
+        "MobileHDDV8DieselRuralLocal",
     2230074230:
-        "SCC/MobileHDDV8DieselUrbanInterstate",
+        "MobileHDDV8DieselUrbanInterstate",
     2230074250:
-        "SCC/MobileHDDV8DieselUrbanOtherFreewaysandExpressways",
+        "MobileHDDV8DieselUrbanOtherFreewaysandExpressways",
     2230074270:
-        "SCC/MobileHDDV8DieselUrbanOtherPrincipalArterial",
+        "MobileHDDV8DieselUrbanOtherPrincipalArterial",
     2230074290:
-        "SCC/MobileHDDV8DieselUrbanMinorArterial",
+        "MobileHDDV8DieselUrbanMinorArterial",
     2230074310:
-        "SCC/MobileHDDV8DieselUrbanCollector",
+        "MobileHDDV8DieselUrbanCollector",
     2230074330:
-        "SCC/MobileHDDV8DieselUrbanLocal",
+        "MobileHDDV8DieselUrbanLocal",
     2230074390:
-        "SCC/MobileHDDV8DieselParkingArea",
+        "MobileHDDV8DieselParkingArea",
     2230075110:
-        "SCC/MobileBusDieselRuralInterstate",
+        "MobileBusDieselRuralInterstate",
     2230075130:
-        "SCC/MobileBusDieselRuralOtherPrincipalArterial",
+        "MobileBusDieselRuralOtherPrincipalArterial",
     2230075150:
-        "SCC/MobileBusDieselRuralMinorArterial",
+        "MobileBusDieselRuralMinorArterial",
     2230075170:
-        "SCC/MobileBusDieselRuralMajorCollector",
+        "MobileBusDieselRuralMajorCollector",
     2230075190:
-        "SCC/MobileBusDieselRuralMinorCollector",
+        "MobileBusDieselRuralMinorCollector",
     2230075210:
-        "SCC/MobileBusDieselRuralLocal",
+        "MobileBusDieselRuralLocal",
     2230075230:
-        "SCC/MobileBusDieselUrbanInterstate",
+        "MobileBusDieselUrbanInterstate",
     2230075250:
-        "SCC/MobileBusDieselUrbanOtherFreewaysandExpressways",
+        "MobileBusDieselUrbanOtherFreewaysandExpressways",
     2230075270:
-        "SCC/MobileBusDieselUrbanOtherPrincipalArterial",
+        "MobileBusDieselUrbanOtherPrincipalArterial",
     2230075290:
-        "SCC/MobileBusDieselUrbanMinorArterial",
+        "MobileBusDieselUrbanMinorArterial",
     2230075310:
-        "SCC/MobileBusDieselUrbanCollector",
+        "MobileBusDieselUrbanCollector",
     2230075330:
-        "SCC/MobileBusDieselUrbanLocal",
+        "MobileBusDieselUrbanLocal",
     2230075390:
-        "SCC/MobileBusDieselParkingArea"
+        "MobileBusDieselParkingArea"
 }

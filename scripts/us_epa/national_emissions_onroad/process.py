@@ -147,7 +147,17 @@ def _onroad(file_path: str) -> pd.DataFrame:
     df = pd.read_csv(file_path, header=0, low_memory=False)
     df = _regularize_columns(df, file_path)
     df['pollutant code'] = df['pollutant code'].astype(str)
-    df['geo_Id'] = [f'{x:05}' for x in df['fips code']]
+    df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
+    # 
+    # Remove if Tribal Details are needed
+    # 
+    df['geo_Id'] = df['geo_Id'].astype(int)
+    df = df.drop(df[df.geo_Id > 80000].index)
+    df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
+    df['geo_Id'] = df['geo_Id'].astype(str)
+    #
+    # Remove if Tribal Details are needed
+    # 
     df['geo_Id'] = 'geoId/' + df['geo_Id']
     df.rename(columns={
         'emissions uom': 'unit',
@@ -159,9 +169,7 @@ def _onroad(file_path: str) -> pd.DataFrame:
     df = _replace_metadata(df, 'unit')
     df = _replace_metadata(df, 'scc')
     df = _replace_metadata(df, 'pollutant code')
-    df = _replace_metadata(df, 'pollutant type(s)')
     df['SV'] = ('Annual_Amount_Emissions_' + df['scc'].astype(str) + '_' +
-                df['pollutant type(s)'].astype(str) + '_' +
                 df['pollutant code'].astype(str))
     df['SV'] = df['SV'].str.replace('_nan', '')
     df = df.drop(
@@ -221,15 +229,8 @@ class USAirEmissionTrends:
             sv_property = sv.split("_")
             source = '\nemissionSource: dcs:' + sv_property[3]
             sv_checker['emissionSource'] = 'dcs:' + sv_property[3]
-            if 'AirPollutants' in sv_property[4] or 'Greenhouse' in sv_property[
-                    4]:
-                emission_type = '\nemissionType: dcs:' + sv_property[4]
-                sv_checker['emissionType'] = 'dcs:' + sv_property[4]
-                for i in sv_property[5:]:
-                    pollutant = pollutant + i + '_'
-            else:
-                for i in sv_property[4:]:
-                    pollutant = pollutant + i + '_'
+            for i in sv_property[4:]:
+                pollutant = pollutant + i + '_'
             sv_checker['emittedThing'] = 'dcs:' + pollutant.rstrip('_')
             pollutant = '\nemittedThing: dcs:' + pollutant.rstrip('_')
             generated_sv = get_statvar_dcid(sv_checker)
@@ -263,7 +264,6 @@ class USAirEmissionTrends:
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .csv extension
             file_name = file_path.split("/")[-1][:-4]
-            file_name = file_name.split("_")[0]
             df = _onroad(file_path)
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
@@ -272,6 +272,7 @@ class USAirEmissionTrends:
             by=['geo_Id', 'year', 'SV', 'observation'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
+        final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
