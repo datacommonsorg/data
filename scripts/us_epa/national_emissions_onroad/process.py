@@ -148,16 +148,16 @@ def _onroad(file_path: str) -> pd.DataFrame:
     df = _regularize_columns(df, file_path)
     df['pollutant code'] = df['pollutant code'].astype(str)
     df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
-    # 
+    #
     # Remove if Tribal Details are needed
-    # 
+    #
     df['geo_Id'] = df['geo_Id'].astype(int)
     df = df.drop(df[df.geo_Id > 80000].index)
     df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
     df['geo_Id'] = df['geo_Id'].astype(str)
     #
     # Remove if Tribal Details are needed
-    # 
+    #
     df['geo_Id'] = 'geoId/' + df['geo_Id']
     df.rename(columns={
         'emissions uom': 'unit',
