@@ -28,7 +28,7 @@ statType: dcs:measuredValue
 {consumingSector}
 
 """
-TYPE = "energySource: dcs:{}"
+TYPE = "fuelType: dcs:{}"
 SECTOR = "consumingSector: dcs:{}"
 
 # Packaging template strings into single dictionary

@@ -4,7 +4,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:ElectricityGeneration
 
 Node: dcid:Annual_Consumption_Fuel_Industry_NaturalGas
@@ -13,7 +13,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:Industry
 
 Node: dcid:Annual_Consumption_Fuel_Manufacturing_NaturalGas
@@ -22,7 +22,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:Manufacturing
 
 Node: dcid:Annual_Consumption_Fuel_CommerceAndPublicServices_NaturalGas
@@ -31,7 +31,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:CommerceAndPublicServices
 
 Node: dcid:Annual_Consumption_Fuel_TeaIndustry_NaturalGas
@@ -40,7 +40,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:TeaIndustry
 
 Node: dcid:Annual_Consumption_Fuel_EnergyIndustryOwnUse_NaturalGas
@@ -49,7 +49,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:EnergyIndustryOwnUse
 
 Node: dcid:Annual_Consumption_Fuel_OilRefineries_NaturalGas
@@ -58,7 +58,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:OilRefineries
 
 Node: dcid:Annual_Consumption_Fuel_IndiaEDM_UnspecifiedSector_NaturalGas
@@ -67,7 +67,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:IndiaEDM_UnspecifiedSector
 
 Node: dcid:Annual_Consumption_Fuel_FertilizerIndustry_NaturalGas
@@ -76,7 +76,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:FertilizerIndustry
 
 Node: dcid:Annual_Consumption_Fuel_ChemicalPetrochemicalIndustry_NaturalGas
@@ -85,7 +85,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:ChemicalPetrochemicalIndustry
 
 Node: dcid:Annual_Consumption_Fuel_IronSteel_NaturalGas
@@ -94,7 +94,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:IronSteel
 
 Node: dcid:Annual_Consumption_Fuel_OilGasExtraction_NaturalGas
@@ -103,7 +103,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:OilGasExtraction
 
 Node: dcid:Annual_Consumption_Fuel_Households_NaturalGas
@@ -112,7 +112,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:Households
 
 Node: dcid:Annual_Consumption_Fuel_TransportIndustry_NaturalGas
@@ -121,7 +121,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:TransportIndustry
 
 Node: dcid:Annual_Consumption_Fuel_Agriculture_NaturalGas
@@ -130,7 +130,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:consumption
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 consumingSector: dcs:Agriculture
 
 Node: dcid:Monthly_Generation_Fuel_NaturalGas
@@ -139,7 +139,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Monthly
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 
 Node: dcid:Monthly_Generation_Fuel_EIA_CoalDerivedSynthesisGas
 typeOf: dcs:StatisticalVariable
@@ -147,7 +147,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Monthly
 statType: dcs:measuredValue
-energySource: dcs:EIA_CoalDerivedSynthesisGas
+fuelType: dcs:EIA_CoalDerivedSynthesisGas
 
 Node: dcid:Annual_Imports_Fuel_NaturalGasLiquids
 typeOf: dcs:StatisticalVariable
@@ -155,7 +155,7 @@ populationType: dcs:Fuel
 measuredProperty: dcs:imports
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGasLiquids
+fuelType: dcs:NaturalGasLiquids
 
 Node: dcid:Annual_Generation_Fuel_NaturalGas
 typeOf: dcs:StatisticalVariable
@@ -163,5 +163,5 @@ populationType: dcs:Fuel
 measuredProperty: dcs:generation
 measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
-energySource: dcs:NaturalGas
+fuelType: dcs:NaturalGas
 
