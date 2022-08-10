@@ -91,13 +91,13 @@ class EnergyIndiaBase():
         Method to collate all csv files under the data/{category}/ directory 
 	and return a single dataframe
         """
-        
+
         zipfile_path = os.path.join(module_dir, 'data/zipped_data.zip')
         extracted_path = os.path.join(module_dir, 'data/')
-        
+
         with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
             zip_ref.extractall(extracted_path)
-    
+
         data_path = os.path.join(module_dir, 'data/{}/'.format(self.cat))
 
         # Concatenate all csvs into one dataframe
