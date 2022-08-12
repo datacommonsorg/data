@@ -32,7 +32,7 @@ MANUAL_OVERRIDE = {
     },
     "chhattisgarh": {
         "gaurella pendra marwahi": "gaurela-pendra-marwahi",
-        "baloda bazar" : "baloda bazar - bhatapara"
+        "baloda bazar": "baloda bazar - bhatapara"
     },
     "gujarat": {
         "chhotaudepur": "chhota udaipur",
@@ -206,7 +206,8 @@ class LocalGovermentDirectoryDistrictsDataLoader:
                 LocalGovermentDirectoryDistrictsDataLoader.format_title)
 
     def save(self):
-        self.clean_df.sort_values(by=["LGDStateCode","LGDDistrictCode"], inplace=True)
+        self.clean_df.sort_values(by=["LGDStateCode", "LGDDistrictCode"],
+                                  inplace=True)
         self.clean_df.to_csv(self.clean_csv, index=False, header=True)
 
 
