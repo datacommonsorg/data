@@ -27,9 +27,10 @@ def MergeAndProcessData(forest_df, other_data_df):
     column_list = [
         "country", "year", "statvar", "measurement_method", "Tonnes Co2e"
     ]
-    # drop all rows with missing values
+    # drop all rows with missing or zero values
     base_df["Tonnes Co2e"].replace('', np.nan, inplace=True)
     base_df.dropna(subset=["Tonnes Co2e"], inplace=True)
+    base_df = base_df[base_df["Tonnes Co2e"] != 0]
 
     base_df["year"] = base_df["start"].apply(_ExtractDate).apply(
         lambda x: x.year)
