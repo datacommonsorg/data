@@ -362,7 +362,7 @@ def extract_properties_from_ind_hazard_row(row):
 
     # impacted_thing might be "population" or "population equivalence"
     if "Population" in impacted_thing:
-        impacted_thing = "People"
+        impacted_thing = "Person"
 
     return {
         "hazard_type": hazard_type,
