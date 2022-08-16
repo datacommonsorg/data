@@ -22,9 +22,7 @@ DC import
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                 "typeOf: dcs:StatisticalVariable\n"
                 "populationType: dcs:LivePregnancyEvent\n"
-                # "measurementDenominator: dcs:{denominator}\n"
-                "statType: dcs:measuredValue\n"
-                "measuredProperty: dcs:percent\n"
+                "measurementDenominator: dcs:Count_BirthEvent_LiveBirth\n"
                 "{xtra_pvs}\n")
 
 
@@ -35,15 +33,23 @@ _TMCF_TEMPLATE = (
     "measurementMethod: C:US_Prams->"
     "Measurement_Method\n"
     "observationAbout: C:US_Prams->Geo\n"
-    "observationDate: C:US_Prams->Time\n"
+    "observationDate: C:US_Prams->Year\n"
     "scalingFactor: 100\n"
     "value: C:US_Prams->Observation\n")
 
 DEFAULT_SV_PROP = {
     "typeOf": "dcs:StatisticalVariable",
-    "populationType": "dcs:LivePregnancyEvent",
-    "statType": "dcs:measuredValue",
-    "measuredProperty": "dcs:percent"
+    # "populationType": "dcs:LivePregnancyEvent",
+    # "statType": "dcs:confidenceIntervalLowerLimit",
+    # "measuredProperty": "dcs:count",
+    "measurementDenominator": "dcs:Count_BirthEvent_LiveBirth"
+}
+
+_PV_PROP = {
+    "SampleSize_Count_LivePregnancyEvent_":"sampleSize",
+    "Percent_LivePregnancyEvent_":"measuredValue",
+    "ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_":"confidenceIntervalLowerLimit",
+    "ConfidenceIntervalUpperLimit_Count_LivePregnancyEvent_":"confidenceIntervalUpperLimit"
 }
 
 _PROP = {
@@ -57,7 +63,11 @@ _PROP = {
     "DuringPregnancy":"",
     "12MonthsBeforePregnancy":"",
     "InFirstTrimester":"",
-    "NoInsurance":""
+    "NoInsurance":"",
+    "SampleSize_Count_LivePregnancyEvent_":"",
+    "Percent_LivePregnancyEvent_":"",
+    "ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_":"",
+    "ConfidenceIntervalUpperLimit_Count_LivePregnancyEvent_":""
 }
 
 _TIME = {
@@ -77,11 +87,27 @@ _TIME = {
     "healthInsuranceStatusOneMonthBeforePregnancyNoInsurance":"OneMonthBeforePregnancy",
     "healthInsuranceStatusPostpartumprivateinsurance":"Postpartum",
     "healthInsuranceStatusPostpartumMedicaid":"Postpartum",
-    "healthInsuranceStatusPostpartumNoInsurance":"Postpartum"
+    "healthInsuranceStatusPostpartumNoInsurance":"Postpartum",
+    "SampleSize_Count_LivePregnancyEvent_":"",
+    "SampleSize_Count_LivePregnancyvent_MoreThan4TimesAWeek":"",
+    "Percent_LivePregnancyEvent_":"",
+    "ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_":"",
+    "ConfidenceIntervalUpperLimit_Count_LivePregnancyEvent_":""
 }
 
 _INSURANCE = {
     "privateinsurance":"",
     "Medicaid":"",
-    "NoInsurance":""
+    "NoInsurance":"",
+    "SampleSize_Count_LivePregnancyEvent_":"",
+    "Percent_LivePregnancyEvent_":"",
+    "ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_":"",
+    "ConfidenceIntervalUpperLimit_Count_LivePregnancyEvent_":""
+}
+
+_PROP4 = {
+    "SampleSize_Count_LivePregnancyEvent_":"",
+    "Percent_LivePregnancyEvent_":"",
+    "ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_":"",
+    "ConfidenceIntervalUpperLimit_Count_LivePregnancyEvent_":""
 }

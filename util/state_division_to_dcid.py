@@ -30,7 +30,7 @@ _PLACE_MAP = {
     "New Jersey": "geoId/34",
     "New York": "geoId/36",
     "New York (excluding New York City)": "",
-    "New York City": "",
+    "New York City": "geoId/3651000",
     "Pennsylvania": "geoId/42",
     "East North Central": "usc/EastNorthCentralDivision",
     "Illinois": "geoId/17",
