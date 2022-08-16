@@ -65,491 +65,46 @@ _TMCF_TEMPLATE = (
     "scalingFactor: 100\n"
     "value: C:EuroStat_Population_AlcoholConsumption->observation\n")
 
+file_to_sv_mapping = {
+        "hlth_ehis_al1c": "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_AlcoholConsumption' + '_In_Count_Person_' + df['citizen']"+\
+                "+ '_' + df['sex']",
+        "hlth_ehis_al1u": "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_AlcoholConsumption' + '_In_Count_Person_' + df['deg_urb']"+\
+                "+ '_' + df['sex']",
+        "hlth_ehis_al1e": "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_AlcoholConsumption' + '_In_Count_Person_' + df['isced11']"+\
+                " + '_' + df['sex']",
+        "hlth_ehis_de10": "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_AlcoholConsumption' + '_In_Count_Person_' + df['isced11']"+\
+                " + '_' + df['sex']",
+        "hlth_ehis_al1b": "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_AlcoholConsumption' + '_In_Count_Person_' + df['sex']"+\
+                " + '_' + df['c_birth']",
+        "hlth_ehis_al1i": "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_AlcoholConsumption' + '_In_Count_Person_' + df['sex']"+\
+                " + '_' + df['quant_inc']",
 
-def _alcoholconsumption_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file alcoholconsumption_by_sex_education
-    for concatenation in Final CSV.
+        "hlth_ehis_al3u": "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_BingeDrinking' + '_In_Count_Person_' + df['deg_urb']"+\
+                " + '_' + df['sex']",
+        "hlth_ehis_al3e": "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_BingeDrinking' + '_In_Count_Person_' + df['isced11']"+\
+                " + '_' + df['sex']",
+        "hlth_ehis_de6" : "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_BingeDrinking' + '_In_Count_Person_' + df['isced11']"+\
+                " + '_' + df['sex']",
+        "hlth_ehis_al3i": "'Percent_' + df['frequenc_alcohol']"+\
+            " + '_BingeDrinking' + '_In_Count_Person_' + df['sex']"+\
+                " + '_' + df['quant_inc']",
 
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = ['unit,frequenc_alcohol,isced11,sex,age,geo', '2019', '2014']
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "unit,frequenc_alcohol,isced11,sex,age,geo"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'isced11')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_AlcoholConsumption'\
-        +'_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    # dropping unwanted columns
-    df.drop(columns=['unit', 'age', 'isced11', 'frequenc_alcohol', 'sex'],
-            inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-
-def _alcoholconsumption_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file alcoholconsumption_by_sex_income
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = ['unit,quant_inc,frequenc_alcohol,sex,age,geo', '2019', '2014']
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "unit,quant_inc,frequenc_alcohol,sex,age,geo"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'quant_inc')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_AlcoholConsumption'\
-        +'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    # dropping unwanted columns
-    df.drop(columns=['quant_inc', 'frequenc_alcohol', 'sex', 'age', 'unit'],
-            inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-        ,value_name='observation')
-    return df
-
-
-def _alcoholconsumption_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file alcoholconsumption_by_sex_urbanisation
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = [
-        'frequenc_alcohol,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE',
-        'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'UK', 'TR'
-    ]
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "frequenc_alcohol,deg_urb,sex,age,unit,time"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'deg_urb')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_AlcoholConsumption'\
-        +'_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
-    # dropping unwanted columns
-    df.drop(columns=['frequenc_alcohol', 'deg_urb', 'sex', 'unit', 'age'],
-            inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _bingedrinking_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file bingedrinking_by_sex_education
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = ['unit,frequenc_alcohol,isced11,sex,age,geo', '2019', '2014']
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "unit,frequenc_alcohol,isced11,sex,age,geo"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'isced11')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_BingeDrinking'\
-        +'_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    # dropping unwanted columns
-    df.drop(columns=['unit', 'age', 'isced11', 'frequenc_alcohol', 'sex'],
-            inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-
-def _bingedrinking_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file bingedrinking_by_sex_income for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = ['unit,quant_inc,frequenc_alcohol,sex,age,geo', '2019', '2014']
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "unit,quant_inc,frequenc_alcohol,sex,age,geo"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'quant_inc')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_BingeDrinking'\
-        +'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    # dropping unwanted columns
-    df.drop(columns=['unit', 'age', 'quant_inc', 'frequenc_alcohol', 'sex'],
-            inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-
-def _bingedrinking_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file bingedrinking_by_sex_urbanisation
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = [
-        'frequenc_alcohol,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE',
-        'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'UK', 'TR'
-    ]
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "frequenc_alcohol,deg_urb,sex,age,unit,time"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'deg_urb')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_BingeDrinking'\
-        +'_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
-    # dropping unwanted columns
-    df.drop(columns=['frequenc_alcohol', 'deg_urb', 'sex', 'unit', 'age'],
-            inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-def _hazardousalcoholconsumption_by_sex_education(df: pd.DataFrame)\
-    -> pd.DataFrame:
-    """
-    Cleans the file hazardousalcoholconsumption_by_sex_education
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = [
-        'unit,isced11,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU',
-        'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO',
-        'UK', 'TR'
-    ]
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "unit,isced11,sex,age,time"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'isced11')
-    # giving proper statvar name
-    df['SV'] = 'Percent_HazardousAlcoholConsumption_In_Count_Person_'\
-        +df['isced11']+'_'+df['sex']
-    # dropping unwanted columns
-    df.drop(columns=['unit', 'age', 'isced11', 'sex'], inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-            ,value_name='observation')
-    return df
-
-def _hazardousalcoholconsumption_by_sex_income(df: pd.DataFrame)\
-    -> pd.DataFrame:
-    """
-    Cleans the file hazardousalcoholconsumption_by_sex_income
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = [
-        'unit,quant_inc,sex,age,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU',
-        'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO',
-        'UK', 'TR'
-    ]
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "unit,quant_inc,sex,age,time"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'quant_inc')
-    # giving proper statvar name
-    df['SV'] = 'Percent_HazardousAlcoholConsumption_In_Count_Person_'\
-        +df['sex']+'_'+df['quant_inc']
-    # dropping unwanted columns
-    df.drop(columns=['unit', 'age', 'quant_inc', 'sex'], inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-            ,value_name='observation')
-    return df
-
-def _hazardousalcoholconsumption_by_sex_urbanisation(df: pd.DataFrame)\
-    -> pd.DataFrame:
-    """
-    Cleans the file hazardousalcoholconsumption_by_sex_urbanisation
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output.
-    """
-    # providing column names
-    columns = [
-        'deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU',
-        'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO',
-        'UK', 'TR'
-    ]
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "deg_urb,sex,age,unit,time"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'deg_urb')
-    df = _replace_col_values(df, 'sex')
-    # giving proper statvar name
-    df['SV'] = 'Percent_HazardousAlcoholConsumption_In_Count_Person_'\
-        +df['deg_urb']+'_'+df['sex']
-    # dropping unwanted columns
-    df.drop(columns=['deg_urb', 'sex', 'unit', 'age'], inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-def _alcoholconsumption_by_sex_country_of_birth(df: pd.DataFrame)\
-    -> pd.DataFrame:
-    """
-    Cleans the file alcoholconsumption_by_sex_country_of_birth
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = [
-        'unit,frequenc_alcohol,sex,age,c_birth,time', 'EU27_2020', 'EU28', 'BE',
-        'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'UK', 'TR'
-    ]
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "unit,frequenc_alcohol,sex,age,c_birth,time"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'c_birth')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_AlcoholConsumption'\
-        +'_In_Count_Person_'+df['sex']+'_'+df['c_birth']
-    # dropping unwanted columns
-    df.drop(columns=['frequenc_alcohol', 'c_birth', 'sex', 'unit', 'age'],
-            inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _alcoholconsumption_by_sex_citizen(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file alcoholconsumption_by_sex_citizen
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = [
-        'unit,frequenc_alcohol,sex,age,citizen,time', 'EU27_2020', 'EU28', 'BE',
-        'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'UK', 'TR'
-    ]
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "unit,frequenc_alcohol,sex,age,citizen,time"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'citizen')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_AlcoholConsumption'\
-        +'_In_Count_Person_'+df['citizen']+'_'+df['sex']
-    # dropping unwanted columns
-    df.drop(columns=['frequenc_alcohol', 'citizen', 'sex', 'unit', 'age'],
-            inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-def _historical_alcoholconsumption_by_sex_education(df: pd.DataFrame)\
-    -> pd.DataFrame:
-    """
-    Cleans the file historical_alcoholconsumption_by_sex_education
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = [
-        'sex,age,isced11,frequenc_alcohol,unit,time', 'BE', 'BG', 'CZ', 'EL',
-        'ES', 'FR', 'CY', 'LV', 'HU', 'MT', 'PL', 'RO', 'SI', 'SK', 'TR'
-    ]
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "sex,age,isced11,frequenc_alcohol,unit,time"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = _replace_col_values(df, 'isced11')
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    df = _replace_col_values(df, 'sex')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_AlcoholConsumption'\
-        +'_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    # dropping unwanted columns
-    df.drop(columns=['isced11', 'sex', 'age', 'frequenc_alcohol', 'unit'],
-            inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-def _historical_bingedrinking_by_sex_education(df: pd.DataFrame)\
-    -> pd.DataFrame:
-    """
-    Cleans the file historical_bingedrinking_by_sex_education
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): The raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    # providing column names
-    columns = [
-        'frequenc_alcohol,sex,age,isced11,time', 'BE', 'BG', 'CZ', 'EL', 'ES',
-        'CY', 'LV', 'HU', 'MT', 'RO', 'SI', 'SK'
-    ]
-    df.columns = columns
-    # spliting the first column to multiple columns
-    split_columns = "frequenc_alcohol,sex,age,isced11,time"
-    df = _split_column(df, split_columns)
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = _replace_col_values(df, 'isced11')
-    df = _replace_col_values(df, 'frequenc_alcohol')
-    df = _replace_col_values(df, 'sex')
-    # giving proper statvar name
-    df['SV'] = 'Percent_'+df['frequenc_alcohol']+'_BingeDrinking'\
-        +'_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    # dropping unwanted columns
-    df.drop(columns=['isced11', 'sex', 'age', 'frequenc_alcohol'], inplace=True)
-    # arraning the dataframe in long format
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+        "hlth_ehis_al2u": "'Percent_HazardousAlcoholConsumption"+\
+            "_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']",
+        "hlth_ehis_al2e": "'Percent_HazardousAlcoholConsumption"+\
+            "_In_Count_Person_' + df['isced11'] + '_' + df['sex']",
+        "hlth_ehis_al2i": "'Percent_HazardousAlcoholConsumption"+\
+            "_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']",
+}
 
 
 class EuroStatAlcoholConsumption:
@@ -595,8 +150,9 @@ class EuroStatAlcoholConsumption:
         for sv in sv_list:
             if "Total" in sv:
                 continue
-            incomequin = gender = education = frequenc_alcohol = healthbehavior =\
-            residence = countryofbirth = citizenship = sv_name = ''
+            incomequin = gender = education = frequenc_alcohol =\
+                healthbehavior = residence = countryofbirth = citizenship =\
+                    sv_name = ''
 
             sv_temp = sv.split("_In_")
             denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
@@ -682,6 +238,52 @@ class EuroStatAlcoholConsumption:
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
         # pylint: enable=R0914
+
+    def parse_file(self, file_name: str, df: pd.DataFrame) -> pd.DataFrame:
+        split_columns = df.columns.values.tolist()[0]
+        df = _split_column(df, split_columns)
+        split_columns = split_columns.replace('frequenc', 'frequenc_alcohol')\
+            .replace('isced97', 'isced11').replace('geo\time','geo')\
+                .replace('geo\\time','geo').replace('time\geo','time')\
+                    .replace('time\\geo','time')
+        df.rename(columns={
+            'geo\time': 'geo',
+            'geo\\time': 'geo',
+            'time\geo': 'time',
+            'time\\geo': 'time',
+            'frequenc': 'frequenc_alcohol',
+            'isced97': 'isced11'
+        },
+                  inplace=True)
+        df = df[df['age'] == 'TOTAL']
+
+        for col in [
+                'sex', 'quant_inc', 'frequenc_alcohol', 'isced11', 'deg_urb',
+                'c_birth', 'citizen'
+        ]:
+            if col in df.columns.values.tolist():
+                df = _replace_col_values(df, col)
+
+        df['SV'] = eval(file_to_sv_mapping[file_name])
+
+        split_columns_list = split_columns.split(',')
+        if 'time' in split_columns_list:
+            split_columns_list.remove('time')
+            id_vars = ['SV', 'time']
+            var_name = 'geo'
+        if 'geo' in split_columns_list:
+            split_columns_list.remove('geo')
+            id_vars = ['SV', 'geo']
+            var_name = 'time'
+
+        df.drop(columns=split_columns_list, inplace=True)
+        df = df.melt(id_vars=id_vars,
+                     var_name=var_name,
+                     value_name='observation')
+        df = df[df['geo'] != 'EU27_2020']
+        df = df[df['geo'] != 'EU28']
+        return df
+
     def process(self):
         """
         This Method calls the required methods to generate
@@ -693,9 +295,8 @@ class EuroStatAlcoholConsumption:
         Returns:
             None
         """
-
-        final_df = pd.DataFrame(columns=['time','geo','SV','observation',\
-            'Measurement_Method'])
+        final_df = pd.DataFrame(
+            columns=['time', 'geo', 'SV', 'observation', 'Measurement_Method'])
         # Creating Output Directory
         output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
@@ -704,48 +305,18 @@ class EuroStatAlcoholConsumption:
 
         for file_path in self._input_files:
             df = pd.read_csv(file_path, sep='\t', header=0)
-            # Taking the File name out of the complete file address
-            # Used -1 to pickup the last part which is file name
-            # Read till -4 inorder to remove the .tsv extension
             file_name = file_path.split("/")[-1][:-4]
-            file_to_function_mapping = {
-                "hlth_ehis_al1b":
-                    _alcoholconsumption_by_sex_country_of_birth,
-                "hlth_ehis_al1c":
-                    _alcoholconsumption_by_sex_citizen,
-                "hlth_ehis_al1e":
-                    _alcoholconsumption_by_sex_education,
-                "hlth_ehis_al1i":
-                    _alcoholconsumption_by_sex_income,
-                "hlth_ehis_al1u":
-                    _alcoholconsumption_by_sex_urbanisation,
-                "hlth_ehis_al2e":
-                    _hazardousalcoholconsumption_by_sex_education,
-                "hlth_ehis_al2i":
-                    _hazardousalcoholconsumption_by_sex_income,
-                "hlth_ehis_al2u":
-                    _hazardousalcoholconsumption_by_sex_urbanisation,
-                "hlth_ehis_al3e":
-                    _bingedrinking_by_sex_education,
-                "hlth_ehis_al3i":
-                    _bingedrinking_by_sex_income,
-                "hlth_ehis_al3u":
-                    _bingedrinking_by_sex_urbanisation,
-                "hlth_ehis_de6":
-                    _historical_bingedrinking_by_sex_education,
-                "hlth_ehis_de10":
-                    _historical_alcoholconsumption_by_sex_education
-            }
-            df = file_to_function_mapping[file_name](df)
+            df.columns = df.columns.str.strip()
+            df = self.parse_file(file_name, df)
             df['SV'] = df['SV'].str.replace('_Total', '')
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
 
         final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
-        final_df = final_df.drop_duplicates(subset=['time','geo','SV'],\
-            keep='first')
-        final_df['observation'] = final_df['observation'].astype(str)\
-            .str.strip()
+        final_df = final_df.drop_duplicates(subset=['time', 'geo', 'SV'],
+                                            keep='first')
+        final_df['observation'] = final_df['observation'].astype(
+            str).str.strip()
         # derived_df generated to get the year/SV/location sets
         # where 'u' exist
         derived_df = final_df[final_df['observation'].astype(str).str.contains(
