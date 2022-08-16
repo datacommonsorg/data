@@ -67,7 +67,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcs:{statvar_dcid}
 observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
 observationDate: "{obs_date}"
-value: C:FEMA_NRI_Counties->{field_name} 
+value: C:FEMA_NRI_Counties->{field_name}
 """
 
 SCHEMA_OUTPUT_PREFIX = """

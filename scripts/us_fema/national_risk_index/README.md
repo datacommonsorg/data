@@ -13,23 +13,14 @@ https://hazards.fema.gov/nri/Content/StaticDocuments/DataDownload//NRI_Table_Cen
 
 ## Generating Artifacts
 
-To generate the schema and the TMCF for the import, run
-```
-python3 generate_schema_and_tmcf.py
-```
+Run `sh/generate.sh`
 
-To clean the source data, run
-```
-python3 process_data.py
-```
-
-Running these 2 commands will generate the following files under the `output`
-directory
+This will generate the following files under the `output` directory
 
 1. `fema_nri_schema.mcf` holds the Schema for the StatisticalVariables in the
 dataset
 1. `fema_nri_counties.tmcf` holds the TMCF nodes for importing the dataset at
-the county level (a.k.a. `NRI_Table_Counties.csv`)
+the county level (a.k.a. `nri_table_counties.csv`)
 1. `nri_table_counties.csv` holds the actual NRI study data, cleaned and
 prepared to be imported
 1. `nri_table_tracts.csv` is same as above, but for census tracts
@@ -41,7 +32,7 @@ in the base of the repo.
 
 ## Running Tests
 
-Follow instructions in the root of the repo, namely, run 
+Follow instructions in the root of the repo, namely, run
 ```
 python3 -m unittest discover -v -s ../ -p "*_test.py"
 ```
@@ -49,7 +40,7 @@ in this folder.
 
 To replace the test goldens under `test_data` with the format `expected_test_*`,
 run `sh/gen_test_golden.sh` while the current directory is `data/scripts/fema/nri`
- 
+
 # Folder Structure
 
 `source_data` holds original files downloaded from

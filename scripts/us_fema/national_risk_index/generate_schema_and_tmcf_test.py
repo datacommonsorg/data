@@ -23,7 +23,7 @@ def check_function_on_file_gives_goldens(fn, inp_f, golden_f_1, golden_f_2,
     Given a function fn that takes an input file location inp_f and an output
     location, calls the function with the input file path string and 3 temporary
     output locations.
-    
+
     Checks if the output files are equivalent to the golden_fs passed in
 
     Returns True if the check passes, False otherwise.
@@ -53,6 +53,8 @@ def check_function_on_file_gives_goldens(fn, inp_f, golden_f_1, golden_f_2,
                 with open(expected_csv_file, "r") as expect_f:
                     expect_str: str = expect_f.read()
                     if not (result_str == expect_str):
+                        print(result_csv_file, expected_csv_file)
+                        print(expect_str, result_str)
                         check_is_good = False
 
         return check_is_good
