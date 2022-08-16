@@ -219,11 +219,10 @@ def normalize_unit_for_measured_property(measured_property, unit):
     Returns the normalized measured_property and unit as a tuple.
     """
 
-    if measured_property == "expectedLoss":
-        if unit != "FemaNationalRiskScore":
+    if unit != "FemaNationalRiskScore":
+        if measured_property == "expectedLoss":
             unit = "dcid:USDollar"
-    else:
-        if unit != "FemaNationalRiskScore":
+        else:
             unit = ""
 
     return measured_property, unit
@@ -340,6 +339,10 @@ def extract_properties_from_ind_hazard_row(row):
 
     unit = ""
     # we want to cut off score/rating from measured_property and make it a unit
+    # Examples:
+    # Format is <measured_property_in>  -> <measured_property_out>, <unit_out>
+    # "Expected Annual Loss"            -> "expectedLoss", "USDollar"
+    # "Expected Annual Loss Score"      -> "expectedLoss", "FemaNationalRiskScore"
     if "Score" in measured_property or "Rating" in measured_property:
         unit = measured_property.split(' ')[-1]
         measured_property = apply_datacommon_alias(
