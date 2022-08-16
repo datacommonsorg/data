@@ -358,6 +358,14 @@ def extract_properties_from_ind_hazard_row(row):
     measured_property = drop_spaces(measured_property)
 
     impacted_thing = ""
+    # "Field Alias" for individual rows contains 2 dashes when in contains the
+    # impacted thing, and 1 otherwise.
+    #
+    # Example of field alias with impacted thing:
+    # Avalanche - Historic Loss Ratio - Population
+    #
+    # Example of field alias without impacted thing:
+    # Avalanche - Number of Events
     if row["Field Alias"].count("-") > 1:
         impacted_thing = drop_spaces(get_nth_dash_from_field_alias(row, 2))
         if impacted_thing == "Total":
