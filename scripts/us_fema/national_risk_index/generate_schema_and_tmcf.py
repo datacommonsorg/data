@@ -82,9 +82,7 @@ DATACOMMONS_ALIASES = {
     "SocialVulnerability": "femaSocialVulnerability",
     "CommunityResilience": "femaCommunityResilience",
     "HazardTypeRiskIndex": "femaNaturalHazardRiskIndex",
-    "Hazard Type Risk Index": "femaNaturalHazardRiskIndex",
     "NationalRiskIndex": "femaNaturalHazardRiskIndex",
-    "Expected Annual Loss": "expectedLoss",
     "ExpectedAnnualLoss": "expectedLoss"
 }
 
@@ -119,6 +117,8 @@ def apply_datacommon_alias(string):
 	If no alias is found, returns the string as is.
 	"""
     string = string.strip()
+    string = string.replace(" ", "") # drop spaces when keying into DATACOMMONS_ALIASES
+
     if string in DATACOMMONS_ALIASES:
         return DATACOMMONS_ALIASES[string]
     else:
