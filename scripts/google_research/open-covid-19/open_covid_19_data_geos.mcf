@@ -1,0 +1,852 @@
+Node: GB-SCT
+typeOf: schema:Place
+isoCode: "GB-SCT"
+
+Node: GB-NIR
+typeOf: schema:Place
+isoCode: "GB-NIR"
+
+Node: GB-ENG
+typeOf: schema:Place
+isoCode: "GB-ENG"
+
+Node: ES-AN
+typeOf: schema:Place
+isoCode: "ES-AN"
+
+Node: ES-AR
+typeOf: schema:Place
+isoCode: "ES-AR"
+
+Node: ES-AS
+typeOf: schema:Place
+isoCode: "ES-AS"
+
+Node: ES-IB
+typeOf: schema:Place
+isoCode: "ES-IB"
+
+Node: ES-CN
+typeOf: schema:Place
+isoCode: "ES-CN"
+
+Node: ES-CB
+typeOf: schema:Place
+isoCode: "ES-CB"
+
+Node: ES-CM
+typeOf: schema:Place
+isoCode: "ES-CM"
+
+Node: ES-CL
+typeOf: schema:Place
+isoCode: "ES-CL"
+
+Node: ES-CT
+typeOf: schema:Place
+isoCode: "ES-CT"
+
+Node: ES-CE
+typeOf: schema:Place
+isoCode: "ES-CE"
+
+Node: ES-VC
+typeOf: schema:Place
+isoCode: "ES-VC"
+
+Node: ES-EX
+typeOf: schema:Place
+isoCode: "ES-EX"
+
+Node: ES-GA
+typeOf: schema:Place
+isoCode: "ES-GA"
+
+Node: ES-MD
+typeOf: schema:Place
+isoCode: "ES-MD"
+
+Node: ES-ML
+typeOf: schema:Place
+isoCode: "ES-ML"
+
+Node: ES-MC
+typeOf: schema:Place
+isoCode: "ES-MC"
+
+Node: ES-NC
+typeOf: schema:Place
+isoCode: "ES-NC"
+
+Node: ES-PV
+typeOf: schema:Place
+isoCode: "ES-PV"
+
+Node: ES-RI
+typeOf: schema:Place
+isoCode: "ES-RI"
+
+Node: FR-01
+typeOf: schema:Place
+isoCode: "FR-01"
+
+Node: FR-02
+typeOf: schema:Place
+isoCode: "FR-02"
+
+Node: FR-03
+typeOf: schema:Place
+isoCode: "FR-03"
+
+Node: FR-04
+typeOf: schema:Place
+isoCode: "FR-04"
+
+Node: FR-05
+typeOf: schema:Place
+isoCode: "FR-05"
+
+Node: FR-06
+typeOf: schema:Place
+isoCode: "FR-06"
+
+Node: FR-07
+typeOf: schema:Place
+isoCode: "FR-07"
+
+Node: FR-08
+typeOf: schema:Place
+isoCode: "FR-08"
+
+Node: FR-09
+typeOf: schema:Place
+isoCode: "FR-09"
+
+Node: FR-10
+typeOf: schema:Place
+isoCode: "FR-10"
+
+Node: FR-11
+typeOf: schema:Place
+isoCode: "FR-11"
+
+Node: FR-12
+typeOf: schema:Place
+isoCode: "FR-12"
+
+Node: FR-13
+typeOf: schema:Place
+isoCode: "FR-13"
+
+Node: FR-14
+typeOf: schema:Place
+isoCode: "FR-14"
+
+Node: FR-15
+typeOf: schema:Place
+isoCode: "FR-15"
+
+Node: FR-16
+typeOf: schema:Place
+isoCode: "FR-16"
+
+Node: FR-17
+typeOf: schema:Place
+isoCode: "FR-17"
+
+Node: FR-18
+typeOf: schema:Place
+isoCode: "FR-18"
+
+Node: FR-19
+typeOf: schema:Place
+isoCode: "FR-19"
+
+Node: FR-21
+typeOf: schema:Place
+isoCode: "FR-21"
+
+Node: FR-22
+typeOf: schema:Place
+isoCode: "FR-22"
+
+Node: FR-23
+typeOf: schema:Place
+isoCode: "FR-23"
+
+Node: FR-24
+typeOf: schema:Place
+isoCode: "FR-24"
+
+Node: FR-25
+typeOf: schema:Place
+isoCode: "FR-25"
+
+Node: FR-26
+typeOf: schema:Place
+isoCode: "FR-26"
+
+Node: FR-27
+typeOf: schema:Place
+isoCode: "FR-27"
+
+Node: FR-28
+typeOf: schema:Place
+isoCode: "FR-28"
+
+Node: FR-29
+typeOf: schema:Place
+isoCode: "FR-29"
+
+Node: FR-30
+typeOf: schema:Place
+isoCode: "FR-30"
+
+Node: FR-31
+typeOf: schema:Place
+isoCode: "FR-31"
+
+Node: FR-32
+typeOf: schema:Place
+isoCode: "FR-32"
+
+Node: FR-33
+typeOf: schema:Place
+isoCode: "FR-33"
+
+Node: FR-34
+typeOf: schema:Place
+isoCode: "FR-34"
+
+Node: FR-35
+typeOf: schema:Place
+isoCode: "FR-35"
+
+Node: FR-36
+typeOf: schema:Place
+isoCode: "FR-36"
+
+Node: FR-37
+typeOf: schema:Place
+isoCode: "FR-37"
+
+Node: FR-38
+typeOf: schema:Place
+isoCode: "FR-38"
+
+Node: FR-39
+typeOf: schema:Place
+isoCode: "FR-39"
+
+Node: FR-40
+typeOf: schema:Place
+isoCode: "FR-40"
+
+Node: FR-41
+typeOf: schema:Place
+isoCode: "FR-41"
+
+Node: FR-42
+typeOf: schema:Place
+isoCode: "FR-42"
+
+Node: FR-43
+typeOf: schema:Place
+isoCode: "FR-43"
+
+Node: FR-44
+typeOf: schema:Place
+isoCode: "FR-44"
+
+Node: FR-45
+typeOf: schema:Place
+isoCode: "FR-45"
+
+Node: FR-46
+typeOf: schema:Place
+isoCode: "FR-46"
+
+Node: FR-47
+typeOf: schema:Place
+isoCode: "FR-47"
+
+Node: FR-48
+typeOf: schema:Place
+isoCode: "FR-48"
+
+Node: FR-49
+typeOf: schema:Place
+isoCode: "FR-49"
+
+Node: FR-50
+typeOf: schema:Place
+isoCode: "FR-50"
+
+Node: FR-51
+typeOf: schema:Place
+isoCode: "FR-51"
+
+Node: FR-52
+typeOf: schema:Place
+isoCode: "FR-52"
+
+Node: FR-53
+typeOf: schema:Place
+isoCode: "FR-53"
+
+Node: FR-54
+typeOf: schema:Place
+isoCode: "FR-54"
+
+Node: FR-55
+typeOf: schema:Place
+isoCode: "FR-55"
+
+Node: FR-56
+typeOf: schema:Place
+isoCode: "FR-56"
+
+Node: FR-57
+typeOf: schema:Place
+isoCode: "FR-57"
+
+Node: FR-58
+typeOf: schema:Place
+isoCode: "FR-58"
+
+Node: FR-59
+typeOf: schema:Place
+isoCode: "FR-59"
+
+Node: FR-60
+typeOf: schema:Place
+isoCode: "FR-60"
+
+Node: FR-61
+typeOf: schema:Place
+isoCode: "FR-61"
+
+Node: FR-62
+typeOf: schema:Place
+isoCode: "FR-62"
+
+Node: FR-63
+typeOf: schema:Place
+isoCode: "FR-63"
+
+Node: FR-64
+typeOf: schema:Place
+isoCode: "FR-64"
+
+Node: FR-65
+typeOf: schema:Place
+isoCode: "FR-65"
+
+Node: FR-66
+typeOf: schema:Place
+isoCode: "FR-66"
+
+Node: FR-67
+typeOf: schema:Place
+isoCode: "FR-67"
+
+Node: FR-68
+typeOf: schema:Place
+isoCode: "FR-68"
+
+Node: FR-69
+typeOf: schema:Place
+isoCode: "FR-69"
+
+Node: FR-70
+typeOf: schema:Place
+isoCode: "FR-70"
+
+Node: FR-71
+typeOf: schema:Place
+isoCode: "FR-71"
+
+Node: FR-72
+typeOf: schema:Place
+isoCode: "FR-72"
+
+Node: FR-73
+typeOf: schema:Place
+isoCode: "FR-73"
+
+Node: FR-74
+typeOf: schema:Place
+isoCode: "FR-74"
+
+Node: FR-75
+typeOf: schema:Place
+isoCode: "FR-75"
+
+Node: FR-76
+typeOf: schema:Place
+isoCode: "FR-76"
+
+Node: FR-77
+typeOf: schema:Place
+isoCode: "FR-77"
+
+Node: FR-78
+typeOf: schema:Place
+isoCode: "FR-78"
+
+Node: FR-79
+typeOf: schema:Place
+isoCode: "FR-79"
+
+Node: FR-80
+typeOf: schema:Place
+isoCode: "FR-80"
+
+Node: FR-81
+typeOf: schema:Place
+isoCode: "FR-81"
+
+Node: FR-82
+typeOf: schema:Place
+isoCode: "FR-82"
+
+Node: FR-83
+typeOf: schema:Place
+isoCode: "FR-83"
+
+Node: FR-84
+typeOf: schema:Place
+isoCode: "FR-84"
+
+Node: FR-85
+typeOf: schema:Place
+isoCode: "FR-85"
+
+Node: FR-86
+typeOf: schema:Place
+isoCode: "FR-86"
+
+Node: FR-87
+typeOf: schema:Place
+isoCode: "FR-87"
+
+Node: FR-88
+typeOf: schema:Place
+isoCode: "FR-88"
+
+Node: FR-89
+typeOf: schema:Place
+isoCode: "FR-89"
+
+Node: FR-90
+typeOf: schema:Place
+isoCode: "FR-90"
+
+Node: FR-91
+typeOf: schema:Place
+isoCode: "FR-91"
+
+Node: FR-92
+typeOf: schema:Place
+isoCode: "FR-92"
+
+Node: FR-93
+typeOf: schema:Place
+isoCode: "FR-93"
+
+Node: FR-94
+typeOf: schema:Place
+isoCode: "FR-94"
+
+Node: FR-95
+typeOf: schema:Place
+isoCode: "FR-95"
+
+Node: FR-2A
+typeOf: schema:Place
+isoCode: "FR-2A"
+
+Node: FR-2B
+typeOf: schema:Place
+isoCode: "FR-2B"
+
+Node: FR-GUA
+typeOf: schema:Place
+isoCode: "FR-GUA"
+
+Node: FR-MQ
+typeOf: schema:Place
+isoCode: "FR-MQ"
+
+Node: FR-GF
+typeOf: schema:Place
+isoCode: "FR-GF"
+
+Node: FR-LRE
+typeOf: schema:Place
+isoCode: "FR-LRE"
+
+Node: FR-MAY
+typeOf: schema:Place
+isoCode: "FR-MAY"
+
+Node: FR-ARA
+typeOf: schema:Place
+isoCode: "FR-ARA"
+
+Node: FR-BFC
+typeOf: schema:Place
+isoCode: "FR-BFC"
+
+Node: FR-BRE
+typeOf: schema:Place
+isoCode: "FR-BRE"
+
+Node: FR-COR
+typeOf: schema:Place
+isoCode: "FR-COR"
+
+Node: FR-CVL
+typeOf: schema:Place
+isoCode: "FR-CVL"
+
+Node: FR-GES
+typeOf: schema:Place
+isoCode: "FR-GES"
+
+Node: FR-HDF
+typeOf: schema:Place
+isoCode: "FR-HDF"
+
+Node: FR-IDF
+typeOf: schema:Place
+isoCode: "FR-IDF"
+
+Node: FR-NAQ
+typeOf: schema:Place
+isoCode: "FR-NAQ"
+
+Node: FR-NOR
+typeOf: schema:Place
+isoCode: "FR-NOR"
+
+Node: FR-OCC
+typeOf: schema:Place
+isoCode: "FR-OCC"
+
+Node: FR-PAC
+typeOf: schema:Place
+isoCode: "FR-PAC"
+
+Node: FR-PDL
+typeOf: schema:Place
+isoCode: "FR-PDL"
+
+Node: US-WY
+typeOf: schema:Place
+isoCode: "US-WY"
+
+Node: US-WV
+typeOf: schema:Place
+isoCode: "US-WV"
+
+Node: US-WI
+typeOf: schema:Place
+isoCode: "US-WI"
+
+Node: US-WA
+typeOf: schema:Place
+isoCode: "US-WA"
+
+Node: US-VT
+typeOf: schema:Place
+isoCode: "US-VT"
+
+Node: US-VI
+typeOf: schema:Place
+isoCode: "US-VI"
+
+Node: US-VA
+typeOf: schema:Place
+isoCode: "US-VA"
+
+Node: US-UT
+typeOf: schema:Place
+isoCode: "US-UT"
+
+Node: US-TX
+typeOf: schema:Place
+isoCode: "US-TX"
+
+Node: US-TN
+typeOf: schema:Place
+isoCode: "US-TN"
+
+Node: US-SD
+typeOf: schema:Place
+isoCode: "US-SD"
+
+Node: US-SC
+typeOf: schema:Place
+isoCode: "US-SC"
+
+Node: US-RI
+typeOf: schema:Place
+isoCode: "US-RI"
+
+Node: US-PR
+typeOf: schema:Place
+isoCode: "US-PR"
+
+Node: US-PA
+typeOf: schema:Place
+isoCode: "US-PA"
+
+Node: US-OR
+typeOf: schema:Place
+isoCode: "US-OR"
+
+Node: US-OK
+typeOf: schema:Place
+isoCode: "US-OK"
+
+Node: US-OH
+typeOf: schema:Place
+isoCode: "US-OH"
+
+Node: US-NY
+typeOf: schema:Place
+isoCode: "US-NY"
+
+Node: US-NV
+typeOf: schema:Place
+isoCode: "US-NV"
+
+Node: US-NM
+typeOf: schema:Place
+isoCode: "US-NM"
+
+Node: US-NJ
+typeOf: schema:Place
+isoCode: "US-NJ"
+
+Node: US-NH
+typeOf: schema:Place
+isoCode: "US-NH"
+
+Node: US-NE
+typeOf: schema:Place
+isoCode: "US-NE"
+
+Node: US-ND
+typeOf: schema:Place
+isoCode: "US-ND"
+
+Node: US-NC
+typeOf: schema:Place
+isoCode: "US-NC"
+
+Node: US-MT
+typeOf: schema:Place
+isoCode: "US-MT"
+
+Node: US-MS
+typeOf: schema:Place
+isoCode: "US-MS"
+
+Node: US-MP
+typeOf: schema:Place
+isoCode: "US-MP"
+
+Node: US-MO
+typeOf: schema:Place
+isoCode: "US-MO"
+
+Node: US-MN
+typeOf: schema:Place
+isoCode: "US-MN"
+
+Node: US-MI
+typeOf: schema:Place
+isoCode: "US-MI"
+
+Node: US-ME
+typeOf: schema:Place
+isoCode: "US-ME"
+
+Node: US-MD
+typeOf: schema:Place
+isoCode: "US-MD"
+
+Node: US-MA
+typeOf: schema:Place
+isoCode: "US-MA"
+
+Node: US-LA
+typeOf: schema:Place
+isoCode: "US-LA"
+
+Node: US-KY
+typeOf: schema:Place
+isoCode: "US-KY"
+
+Node: US-KS
+typeOf: schema:Place
+isoCode: "US-KS"
+
+Node: US-IN
+typeOf: schema:Place
+isoCode: "US-IN"
+
+Node: US-IL
+typeOf: schema:Place
+isoCode: "US-IL"
+
+Node: US-ID
+typeOf: schema:Place
+isoCode: "US-ID"
+
+Node: US-IA
+typeOf: schema:Place
+isoCode: "US-IA"
+
+Node: US-HI
+typeOf: schema:Place
+isoCode: "US-HI"
+
+Node: US-GU
+typeOf: schema:Place
+isoCode: "US-GU"
+
+Node: US-GA
+typeOf: schema:Place
+isoCode: "US-GA"
+
+Node: US-FL
+typeOf: schema:Place
+isoCode: "US-FL"
+
+Node: US-DE
+typeOf: schema:Place
+isoCode: "US-DE"
+
+Node: US-DC
+typeOf: schema:Place
+isoCode: "US-DC"
+
+Node: US-CT
+typeOf: schema:Place
+isoCode: "US-CT"
+
+Node: US-CO
+typeOf: schema:Place
+isoCode: "US-CO"
+
+Node: US-CA
+typeOf: schema:Place
+isoCode: "US-CA"
+
+Node: US-AZ
+typeOf: schema:Place
+isoCode: "US-AZ"
+
+Node: US-AS
+typeOf: schema:Place
+isoCode: "US-AS"
+
+Node: US-AR
+typeOf: schema:Place
+isoCode: "US-AR"
+
+Node: US-AL
+typeOf: schema:Place
+isoCode: "US-AL"
+
+Node: US-AK
+typeOf: schema:Place
+isoCode: "US-AK"
+
+Node: IT-65
+typeOf: schema:Place
+isoCode: "IT-65"
+
+Node: IT-77
+typeOf: schema:Place
+isoCode: "IT-77"
+
+Node: IT-78
+typeOf: schema:Place
+isoCode: "IT-78"
+
+Node: IT-72
+typeOf: schema:Place
+isoCode: "IT-72"
+
+Node: IT-45
+typeOf: schema:Place
+isoCode: "IT-45"
+
+Node: IT-36
+typeOf: schema:Place
+isoCode: "IT-36"
+
+Node: IT-62
+typeOf: schema:Place
+isoCode: "IT-62"
+
+Node: IT-42
+typeOf: schema:Place
+isoCode: "IT-42"
+
+Node: IT-25
+typeOf: schema:Place
+isoCode: "IT-25"
+
+Node: IT-57
+typeOf: schema:Place
+isoCode: "IT-57"
+
+Node: IT-67
+typeOf: schema:Place
+isoCode: "IT-67"
+
+Node: IT-BZ
+typeOf: schema:Place
+isoCode: "IT-BZ"
+
+Node: IT-TN
+typeOf: schema:Place
+isoCode: "IT-TN"
+
+Node: IT-21
+typeOf: schema:Place
+isoCode: "IT-21"
+
+Node: IT-75
+typeOf: schema:Place
+isoCode: "IT-75"
+
+Node: IT-88
+typeOf: schema:Place
+isoCode: "IT-88"
+
+Node: IT-82
+typeOf: schema:Place
+isoCode: "IT-82"
+
+Node: IT-52
+typeOf: schema:Place
+isoCode: "IT-52"
+
+Node: IT-55
+typeOf: schema:Place
+isoCode: "IT-55"
+
+Node: IT-23
+typeOf: schema:Place
+isoCode: "IT-23"
+
+Node: IT-34
+typeOf: schema:Place
+isoCode: "IT-34"
+

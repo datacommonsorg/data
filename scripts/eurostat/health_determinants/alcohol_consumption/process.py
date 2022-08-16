@@ -42,8 +42,8 @@ from util.alpha2_to_dcid import COUNTRY_MAP
 # pylint: enable=wrong-import-position
 
 _FLAGS = flags.FLAGS
-default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "input_files")
+default_input_path = os.path.dirname(
+    os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -805,15 +805,15 @@ def main(_):
     input_path = _FLAGS.input_path
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output")
+    data_file_path = os.path.dirname(
+        os.path.abspath(__file__)) + os.sep + "output"
     # Defining Output Files
     csv_name = "eurostat_population_alcoholconsumption.csv"
     mcf_name = "eurostat_population_alcoholconsumption.mcf"
     tmcf_name = "eurostat_population_alcoholconsumption.tmcf"
-    cleaned_csv_path = os.path.join(data_file_path, csv_name)
-    mcf_path = os.path.join(data_file_path, mcf_name)
-    tmcf_path = os.path.join(data_file_path, tmcf_name)
+    cleaned_csv_path = data_file_path + os.sep + csv_name
+    mcf_path = data_file_path + os.sep + mcf_name
+    tmcf_path = data_file_path + os.sep + tmcf_name
     loader = EuroStatAlcoholConsumption(ip_files, cleaned_csv_path,\
         mcf_path, tmcf_path)
     loader.process()
