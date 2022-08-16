@@ -468,7 +468,6 @@ def generate_schema_and_tmcf_from_file(input_data_dictionary,
 
     extracted_properties = []
     for index, row in dd.iterrows():
-        skipped = False
 
         should_skip_component = any([
             eal_comp in row["Field Alias"]
@@ -479,10 +478,9 @@ def generate_schema_and_tmcf_from_file(input_data_dictionary,
                 f"Skipping individual hazard row {row['Field Alias']}"
                 " because it is an EAL component and FLAG_SKIP_EAL_COMPONENTS is "
                 f"{FLAG_SKIP_EAL_COMPONENTS}"))
-            skipped = True
+            continue
 
-        if not skipped:
-            extracted_properties.append(extract_properties_from_row(row))
+        extracted_properties.append(extract_properties_from_row(row))
 
     schemas = []
     tmcfs = []
