@@ -56,579 +56,47 @@ _TMCF_TEMPLATE = (
     "value: C:eurostat_population_physicalactivity->observation\n")
 
 
-def _healthenhancing_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_by_sex_education for concatenation
-    in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'physact')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'isced11')
-    df['SV'] = 'Percent_'+df['physact']+'_'+\
-        'HealthEnhancingPhysicalActivity_In_Count_Person_'+\
-        df['isced11']+'_'+df['sex']
-    df.drop(columns=['unit', 'age', 'isced11', 'physact', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-
-def _healthenhancing_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_by_sex_income for concatenation
-    in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'unit,physact,quant_inc,sex,age,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'physact')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'quant_inc')
-    df['SV'] = 'Percent_' + df['physact'] + '_' +\
-        'HealthEnhancingPhysicalActivity'+ '_In_Count_Person_' + df['sex']\
-        + '_' + df['quant_inc']
-    df.drop(columns=['unit', 'age', 'quant_inc', 'physact', 'sex'],
-            inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _healthenhancing_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_by_sex_urbanisation
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'physact,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'physact')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'deg_urb')
-    df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
-    df.drop(columns=['unit', 'age', 'deg_urb', 'physact', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _workrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file workrelated_by_sex_education for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = ['unit,levels,isced11,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'isced11')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'levels')
-    df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity' + '_' + df['levels']+\
-        '_In_Count_Person_' + df['isced11'] + '_'+ df['sex']
-    df.drop(columns=['unit', 'age', 'levels', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-        ,value_name='observation')
-    return df
-
-
-def _workrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file workrelated_by_sex_income for concatenation
-    in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'unit,levels,quant_inc,sex,age,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'quant_inc')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'levels')
-    df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity' + '_' + df['levels']+\
-        '_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']
-    df.drop(columns=['unit', 'age', 'levels', 'quant_inc', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _workrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file workrelated_by_sex_urbanisation for concatenation
-    in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'levels,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'deg_urb')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'levels')
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_' + 'WorkRelatedPhysicalActivity_' + df['levels']\
-        + '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
-    df.drop(columns=['levels', 'deg_urb', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _nonworkrelated_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file nonworkrelated_by_sex_education for concatenation
-    in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = ['unit,physact,isced11,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'physact')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'isced11')
-    df['SV'] = 'Percent_' + df['physact'] + '_NonWorkRelatedPhysicalActivity'+\
-        '_In_Count_Person_' + df['isced11'] + '_' + df['sex']
-    df.drop(columns=['unit', 'age', 'isced11', 'physact', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-
-def _nonworkrelated_by_sex_income(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file nonworkrelated_by_sex_income for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = ['unit,physact,quant_inc,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'physact')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'quant_inc')
-    df['SV'] = 'Percent_' + df['physact'] + '_NonWorkRelatedPhysicalActivity'+\
-        '_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']
-    df.drop(columns=['unit', 'age', 'quant_inc', 'physact', 'sex'],
-            inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    df = df.drop(df[(df['SV'] == 'Percent_Cycling_NonWorkRelated'
-                     'PhysicalActivity_In_Count_Person_Female_Total') &
-                    (df['geo'] == 'BE') & (df['time'] == '2014')].index)
-    return df
-
-
-def _nonworkrelated_by_sex_urbanisation(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file nonworkrelated_by_sex_urbanisation
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'physact,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'deg_urb')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'physact')
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_' + df['physact'] + '_' + 'NonWorkRelatedPhysical'+\
-        'Activity_In_Count_Person_' + df['deg_urb'] + '_'+df['sex']
-    df.drop(columns=['physact', 'deg_urb', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _healthenhancing_nonworkrelated_by_sex_education(df: pd.DataFrame)\
-                                                -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_nonworkrelated_by_sex_education
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = ['unit,duration,isced11,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'duration')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'isced11')
-    df['SV'] = 'Percent_' + df['duration'] + '_' + 'HealthEnhancingPhysical'+\
-        'Activity_In_Count_Person_' + df['isced11'] + '_' + df['sex']
-    df.drop(columns=['unit', 'age', 'duration', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-
-def _healthenhancing_nonworkrelated_by_sex_income(df: pd.DataFrame)\
-                                                -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_nonworkrelated_by_sex_income
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = ['unit,quant_inc,duration,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_col_values(df, 'duration')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'quant_inc')
-    df['SV'] = 'Percent_' + df['duration'] + '_HealthEnhancingPhysical'+\
-        'Activity_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']
-    df.drop(columns=['unit', 'age', 'duration', 'quant_inc', 'sex'],
-            inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-            ,value_name='observation')
-    return df
-
-
-def _healthenhancing_nonworkrelated_by_sex_urbanisation(df: pd.DataFrame)\
-                                                    -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_nonworkrelated_by_sex_urbanisation
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'duration,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'deg_urb')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'duration')
-    df['SV'] = 'Percent_' + df['duration'] + '_HealthEnhancingPhysicalActivity'\
-        + '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']
-    df.drop(columns=['unit', 'age', 'duration', 'deg_urb', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _healthenhancing_by_sex_nativity(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_by_sex_nativity for concatenation
-    in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'unit,physact,c_birth,sex,age,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'physact')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'c_birth')
-    df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_' + df['sex'] + '_' + df['c_birth']
-    df.drop(columns=['unit', 'age', 'physact', 'c_birth', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _healthenhancing_by_sex_citizenship(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_by_sex_citizenship
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'unit,physact,sex,age,citizen,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'physact')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'citizen')
-    df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_' + df['citizen'] + '_' + df['sex']
-    df.drop(columns=['unit', 'age', 'physact', 'citizen', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _healthenhancing_by_sex_activitylimitation(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_by_sex_activitylimitation
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'unit,physact,sex,age,lev_limit,time', 'EU27_2020', 'EU28', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_col_values(df, 'physact')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'lev_limit')
-    df['SV'] = 'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+\
-        '_In_Count_Person_' + df['sex'] + '_' + df['lev_limit']
-    df.drop(columns=['unit', 'age', 'physact', 'lev_limit', 'sex'],
-            inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _healthenhancing_nonworkrelated_by_sex_bmi(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file healthenhancing_nonworkrelated_by_sex_bmi
-    for concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'unit,duration,bmi,sex,age,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK',
-        'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU',
-        'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'SE', 'IS', 'NO',
-        'RS', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020'])
-    df = _replace_col_values(df, 'duration')
-    df = _replace_col_values(df, 'sex')
-    df = _replace_col_values(df, 'bmi')
-    df['SV'] = 'Percent_' + df['duration'] + '_NonWorkRelatedPhysicalActivity'+\
-        '_In_Count_Person_' + df['sex'] + '_' + df['bmi']
-    df.drop(columns=['unit', 'age', 'bmi', 'duration', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _dailypractice_by_sex_education(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file dailypractice_by_sex_education for concatenation
-    in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'sex,age,isced11,time', 'BG', 'CZ', 'EL', 'ES', 'CY', 'LV', 'HU', 'MT',
-        'AT', 'PL', 'RO', 'SK'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = _replace_col_values(df, 'isced11')
-    df = _replace_col_values(df, 'sex')
-    df['SV'] = 'Percent_' + df['isced11'] + '_PhysicalActivity' +\
-        '_In_Count_Person_' + df['sex']
-    df.drop(columns=['age', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def _walkingcycling_atleast30mins_by_sex_education(df: pd.DataFrame)\
-                                                    -> pd.DataFrame:
-    """
-    Cleans the file walkingcycling_atleast30mins_by_sex_education for 
-    concatenation in Final CSV.
-
-    Args:
-        df (pd.DataFrame): the raw df as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    cols = [
-        'isced11,sex,age,unit,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK', 'DE',
-        'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU',
-        'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO',
-        'RS', 'TR'
-    ]
-    df.columns = cols
-    df = _split_column(df, cols[0])
-    # Filtering out the wanted rows and columns.
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020'])
-    df = _replace_col_values(df, 'isced11')
-    df = _replace_col_values(df, 'sex')
-    df['SV'] = 'Percent_' + 'AtLeast30MinutesPerDay' + '_WalkingOrCycling_' +\
-        'PhysicalActivity' + '_In_Count_Person_' + df['isced11'] +\
-            '_' + df['sex']
-    df.drop(columns=['age', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+file_to_sv_mapping = {
+        "hlth_ehis_pe9e": "'Percent_'+df['physact']+'_'+"\
+            "'HealthEnhancingPhysicalActivity_In_Count_Person_'+"\
+            "df['isced11']+'_'+df['sex']",
+        "hlth_ehis_pe9i": "'Percent_' + df['physact'] + '_' +"\
+        "'HealthEnhancingPhysicalActivity'+ '_In_Count_Person_' + df['sex']"\
+        "+ '_' + df['quant_inc']",
+        "hlth_ehis_pe9u": "'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+"\
+        "'_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']",
+        "hlth_ehis_pe1e": "'Percent_' + 'WorkRelatedPhysicalActivity' + '_' + df['levels']+"\
+        "'_In_Count_Person_' + df['isced11'] + '_'+ df['sex']",
+        "hlth_ehis_pe1i": "'Percent_' + 'WorkRelatedPhysicalActivity' + '_' + df['levels']+"\
+        "'_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']",
+        "hlth_ehis_pe1u": "'Percent_' + 'WorkRelatedPhysicalActivity_' + df['levels']"\
+        "+ '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']",
+        "hlth_ehis_pe3e": "'Percent_' + df['physact'] + '_NonWorkRelatedPhysicalActivity'+"\
+        "'_In_Count_Person_' + df['isced11'] + '_' + df['sex']",
+        "hlth_ehis_pe3i": "'Percent_' + df['physact'] + '_NonWorkRelatedPhysicalActivity'+"\
+        "'_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']",
+        "hlth_ehis_pe3u" : "'Percent_' + df['physact'] + '_' + 'NonWorkRelatedPhysical'+"\
+        "'Activity_In_Count_Person_' + df['deg_urb'] + '_'+df['sex']",
+        "hlth_ehis_pe2e": "'Percent_' + df['duration'] + '_' + 'HealthEnhancingPhysical'+"\
+        "'Activity_In_Count_Person_' + df['isced11'] + '_' + df['sex']",
+        "hlth_ehis_pe2i": "'Percent_' + df['duration'] + '_HealthEnhancingPhysical'+"\
+        "'Activity_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']",
+        "hlth_ehis_pe2u": "'Percent_' + df['duration'] + '_HealthEnhancingPhysicalActivity'"\
+        "+ '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']",
+        "hlth_ehis_pe9b": "'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+"\
+        "'_In_Count_Person_' + df['sex'] + '_' + df['c_birth']",
+        "hlth_ehis_pe9c":"'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+"\
+        "'_In_Count_Person_' + df['citizen'] + '_' + df['sex']",
+        "hlth_ehis_pe9d":"'Percent_' + df['physact'] + '_HealthEnhancingPhysicalActivity'+"\
+        "'_In_Count_Person_' + df['sex'] + '_' + df['lev_limit']",
+        "hlth_ehis_pe2m":"'Percent_' + df['duration'] + '_NonWorkRelatedPhysicalActivity'+"\
+        "'_In_Count_Person_' + df['sex'] + '_' + df['bmi']",
+        "hlth_ehis_de9":"'Percent_' + df['isced11'] + '_PhysicalActivity' +"\
+        "'_In_Count_Person_' + df['sex']",
+        "hlth_ehis_pe6e":"'Percent_' + 'AtLeast30MinutesPerDay' + '_WalkingOrCycling_' +"\
+        "'PhysicalActivity' + '_In_Count_Person_' + df['isced11'] +"\
+        "'_' + df['sex']"
+}
 
 
 class EuroStatPhysicalActivity:
@@ -788,6 +256,51 @@ class EuroStatPhysicalActivity:
         # pylint: enable=R0914
         # pylint: enable=R0912
         # pylint: enable=R0915
+    
+    def parse_file(self, file_name: str, df: pd.DataFrame) -> pd.DataFrame:
+        split_columns = df.columns.values.tolist()[0]
+        df = _split_column(df, split_columns)
+        split_columns = split_columns.replace('isced97', 'isced11')\
+            .replace('geo\time','geo').replace('geo\\time','geo')\
+            .replace('time\geo','time').replace('time\\geo','time')
+        df.rename(columns={
+            'geo\time': 'geo',
+            'geo\\time': 'geo',
+            'time\geo': 'time',
+            'time\\geo': 'time',
+            'isced97': 'isced11'
+        },
+                  inplace=True)
+        df = df[df['age'] == 'TOTAL']
+
+        for col in [
+                'sex', 'quant_inc', 'frequenc', 'isced11', 'deg_urb','bmi','duration',
+                'c_birth', 'citizen', 'physact', 'lev_limit', 'levels'
+        ]:
+            if col in df.columns.values.tolist():
+                df = _replace_col_values(df, col)
+
+        df['SV'] = eval(file_to_sv_mapping[file_name])
+
+        split_columns_list = split_columns.split(',')
+        if 'time' in split_columns_list:
+            split_columns_list.remove('time')
+            id_vars = ['SV', 'time']
+            var_name = 'geo'
+        if 'geo' in split_columns_list:
+            split_columns_list.remove('geo')
+            id_vars = ['SV', 'geo']
+            var_name = 'time'
+
+        df.drop(columns=split_columns_list, inplace=True)
+        df = df.melt(id_vars=id_vars,
+                     var_name=var_name,
+                     value_name='observation')
+        df['geo'] = df['geo'].str.strip()
+        df['time'] = df['time'].str.strip()
+        df = df[df['geo'] != 'EU27_2020']
+        df = df[df['geo'] != 'EU28']
+        return df
 
     def process(self):
         """
@@ -809,45 +322,7 @@ class EuroStatPhysicalActivity:
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .tsv extension
             file_name = file_path.split("/")[-1][:-4]
-            source_file_to_method_mapping = {
-                "hlth_ehis_pe9e":
-                    _healthenhancing_by_sex_education,
-                "hlth_ehis_pe9i":
-                    _healthenhancing_by_sex_income,
-                "hlth_ehis_pe9u":
-                    _healthenhancing_by_sex_urbanisation,
-                "hlth_ehis_pe1e":
-                    _workrelated_by_sex_education,
-                "hlth_ehis_pe1i":
-                    _workrelated_by_sex_income,
-                "hlth_ehis_pe1u":
-                    _workrelated_by_sex_urbanisation,
-                "hlth_ehis_pe3e":
-                    _nonworkrelated_by_sex_education,
-                "hlth_ehis_pe3i":
-                    _nonworkrelated_by_sex_income,
-                "hlth_ehis_pe3u":
-                    _nonworkrelated_by_sex_urbanisation,
-                "hlth_ehis_pe2e":
-                    _healthenhancing_nonworkrelated_by_sex_education,
-                "hlth_ehis_pe2i":
-                    _healthenhancing_nonworkrelated_by_sex_income,
-                "hlth_ehis_pe2u":
-                    _healthenhancing_nonworkrelated_by_sex_urbanisation,
-                "hlth_ehis_pe9b":
-                    _healthenhancing_by_sex_nativity,
-                "hlth_ehis_pe9c":
-                    _healthenhancing_by_sex_citizenship,
-                "hlth_ehis_pe9d":
-                    _healthenhancing_by_sex_activitylimitation,
-                "hlth_ehis_pe2m":
-                    _healthenhancing_nonworkrelated_by_sex_bmi,
-                "hlth_ehis_de9":
-                    _dailypractice_by_sex_education,
-                "hlth_ehis_pe6e":
-                    _walkingcycling_atleast30mins_by_sex_education
-            }
-            df = source_file_to_method_mapping[file_name](df)
+            df = self.parse_file(file_name, df)
             df['SV'] = df['SV'].str.replace('_Total', '')
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
