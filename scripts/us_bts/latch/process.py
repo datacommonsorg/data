@@ -26,9 +26,8 @@ output_files - output files (mcf, tmcf and csv are written here)
 from asyncio.log import logger
 import os
 import sys
-import re
+import json
 
-from copy import deepcopy
 import pandas as pd
 import numpy as np
 from absl import app, flags
@@ -37,13 +36,13 @@ _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
 
 # pylint: disable=wrong-import-position
-from constants import (TMCF_TEMPLATE, MCF_TEMPLATE, HEADERMAP, CONF_2009_FILE,
-                       CONF_2017_FILE, DEFAULT_SV_PROP, FINAL_DATA_COLS,
-                       HHSIZE_NOOFVEHICLES_MAPPER, DEFAULT_MEASUREMENT_METHOD,
-                       ACS_SRUVEY_MEASUREMENT_METHOD, RENAME_COLUMNS, PADDING,
-                       FORM_SV)
+# pylint: disable=wildcard-import
+# pylint: disable=unused-wildcard-import
+from constants import *
+# pylint: enable=wildcard-import
+# pylint: enable=unused-wildcard-import
 
-from mcf_config import MCF_TEMPLATE_MAPPER
+# from mcf_config import MCF_TEMPLATE_MAPPER
 
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
@@ -73,106 +72,78 @@ def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
     acs_survey_df = data_df[data_df["measurement_method"] ==
                             ACS_SRUVEY_MEASUREMENT_METHOD].reset_index(
                                 drop=True)
+
     acs_survey_rows = list(acs_survey_df['location'] + '_' +
                            acs_survey_df['sv'])
+
     data_df['info'] = data_df['location'] + '_' + data_df['sv']
+
     # Adding Measurement Method based on a condition
     data_df['measurement_method'] = np.where(
         data_df['info'].isin(acs_survey_rows), ACS_SRUVEY_MEASUREMENT_METHOD,
         data_df['measurement_method'])
+
     data_df = data_df.drop(columns=["info"])
+
     return data_df
 
 
 def _column_operations(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
+    """
+    Performs Column operations such as data type conversion,
+    values mapping to original metadata.
+
+    Args:
+        data_df (pd.DataFrame): Input DataFrame
+        conf (dict): Config
+
+    Returns:
+        pd.DataFrame: _description_
+    """
+
     dtype_conv = conf.get("dtype_conv", {})
+
     for col, dtype in dtype_conv.items():
         data_df[col] = data_df[col].astype(dtype)
 
     cols_mapper = conf.get("col_values_mapper", {})
+
     for col, values_mapper in cols_mapper.items():
         data_df[col] = data_df[col].map(values_mapper)
 
     return data_df
 
 
-def _update_headers(headers: list) -> list:
-    """
-    Updating header values in headers to its complete form.
-    Example:
-        short form                           full form
-    pmiles_3mem_2veh      PersonMilesTraveled__With2AvailableVehicles_3Persons
-    vtrip_5mem_1veh      VehicleTripsTraveled__With1AvailableVehicles_5Persons
-
-    Args:
-        headers (list): List of header values in short form
-
-    Returns:
-        list: List of header values in complete form
-    """
-    updated_headers = []
-    for header in headers:
-        matchobj = re.match(r'(\w+)(_)(\d)(mem_)(\d)(veh)', header, re.M | re.I)
-        if matchobj is not None:
-            updated_headers.append((
-                f"{HEADERMAP[matchobj.group(1)]}_" + \
-                    f"With{matchobj.group(5)}AvailableVehicles_" + \
-                        f"{matchobj.group(3)}Persons"
-            ))
-        else:
-            updated_headers.append(HEADERMAP[header])
-    return updated_headers
-
-
-# pylint: disable=line-too-long
-def _update_sv_col(data_df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Updates sv column in data_df dataframe.
-
-    Args:
-        data_df (pd.DataFrame): Input DataFrame
-
-    Returns:
-        data_df (pd.DataFrame): DataFrame with updated sv column
-    """
-
-    data_df["measuredProperty"] = data_df[
-        "householdSize_numberOfVehicles"].str.split("_With").str[0]
-    for old_val, new_val in HHSIZE_NOOFVEHICLES_MAPPER.items():
-        data_df["householdSize_numberOfVehicles"] = data_df["householdSize_numberOfVehicles"]\
-                                .str.replace(old_val, new_val)
-    data_df["sv"] = ""
-    for spec in FORM_SV:
-        spec_type = spec.split(":", maxsplit=1)[0]
-        if spec_type == "col":
-            data_df['sv'] += data_df[spec.split(":")[1]]
-        else:
-            data_df['sv'] += spec.split(":")[1]
-    return data_df
-
-
 def _filter_equals(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
 
     filter_equals = conf.get("equals", False)
+
     if filter_equals:
         for col, value in filter_equals.items():
             data_df = data_df[data_df[col] == value]
+
     return data_df
 
 
 def _filter_dropna(data_df: pd.DataFrame, conf: dict):
+
     filter_dropna = conf.get("dropna", False)
+
     if filter_dropna:
         data_df = data_df.dropna(subset=filter_dropna)
+
     return data_df
 
 
 def _apply_filters(data_df, file_conf):
+
     # Removing null values from urban_group column
     filters = file_conf.get("filters", False)
+
     if filters:
         data_df = _filter_equals(data_df, file_conf["filters"])
         data_df = _filter_dropna(data_df, file_conf["filters"])
+
     return data_df
 
 
@@ -191,10 +162,11 @@ def _additional_process_2017(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
     # Possible values are below
     # 1 = tract in Manhattan, NY; 0 = otherwise
     # Creating measurement column
-    mm_cols = conf.get("measurement_method_cols", [])
+    mm_cols = conf.get("cols_for_measurement_method", [])
     if mm_cols != []:
         data_df['measurement_method'] = DEFAULT_MEASUREMENT_METHOD + \
                                         data_df.loc[:,mm_cols].sum(axis=1)
+
     return data_df
 
 
@@ -212,30 +184,37 @@ def _process_household_transportation(input_file: str,
     """
     data_df = pd.read_csv(filepath_or_buffer=input_file,
                           sep=file_conf["input_file_delimiter"])
+
     basic_cols = file_conf.get("basic_cols", [])
     # Creating Population Columns
     pop_cols = file_conf.get("pop_cols", []) + file_conf.get("extra_cols", [])
+
     data_df = data_df[basic_cols + pop_cols]
+    data_df = data_df.rename(columns=RENAME_COLUMNS)
+
+    columns_info = [basic_cols, pop_cols]
+    for column_var in columns_info:
+        for idx, column in enumerate(column_var):
+            column_var[idx] = RENAME_COLUMNS.get(column, column)
+
     data_df = _apply_filters(data_df, file_conf)
 
     data_df = _column_operations(data_df, file_conf)
+
     data_df['measurement_method'] = DEFAULT_MEASUREMENT_METHOD
+
     # Checking additional_process in the dictionary,
     # if True then performing additional process
     xtra_process = file_conf.get("additional_process", False)
     if xtra_process:
         data_df = _additional_process_2017(data_df, file_conf)
 
-    # Updating pop_cols to its complete names
-    updated_pop_cols = _update_headers(pop_cols)
-    data_df.columns = basic_cols + updated_pop_cols + ['measurement_method']
-    data_df = data_df.rename(columns=RENAME_COLUMNS)
-    data_df = data_df.melt(
-        id_vars=["geoid", "urban_group", "measurement_method"],
-        value_vars=updated_pop_cols,
-        var_name="householdSize_numberOfVehicles",
-        value_name="observation")
-    data_df = _update_sv_col(data_df)
+    id_vars = [col for col in data_df.columns if col not in pop_cols]
+
+    data_df = data_df.melt(id_vars=id_vars,
+                           value_vars=pop_cols,
+                           var_name=MELT_VAR_COL,
+                           value_name=MELT_OBV_COL)
 
     # Adding Leading Zeros for Fips Code in the geoid column.
     # Before padding STATE = 9009990000
@@ -244,43 +223,12 @@ def _process_household_transportation(input_file: str,
         width=PADDING["width"],
         side=PADDING["side"],
         fillchar=PADDING["fillchar"])
+
     data_df["location"] = "geoId/" + data_df["geoid"]
+
     data_df["year"] = file_conf["year"]
+
     return data_df
-
-
-def _generate_mcf(sv_names: list, mcf_file_path: str) -> None:
-    """
-    This method generates MCF file w.r.t
-    dataframe headers and defined MCF template
-
-    Args:
-        sv_names (list): List of Statistical Variables
-        mcf_file_path (str): Output MCF File Path
-    """
-    mcf_nodes = []
-    dcid_nodes = {}
-    for sv in sv_names:
-        pvs = []
-        sv_pvs = deepcopy(DEFAULT_SV_PROP)
-        for prop, prop_conf in MCF_TEMPLATE_MAPPER.items():
-            if prop in sv:
-                regex = prop_conf.get("regex", False)
-                if regex:
-                    prop_val = regex(sv)
-                prop_key = prop_conf["key"]
-                prop_val = prop_conf["value"](prop_val)
-                pvs.append(prop_conf["format"](prop_key, prop_val))
-                sv_pvs[prop_key] = prop_val
-        resolved_dcid = get_statvar_dcid(sv_pvs)
-        dcid_nodes[sv] = resolved_dcid
-        mcf_nodes.append(
-            MCF_TEMPLATE.format(dcid=resolved_dcid, xtra_pvs='\n'.join(pvs)))
-    mcf = '\n'.join(mcf_nodes)
-    # Writing Genereated MCF to local path.
-    with open(mcf_file_path, 'w+', encoding='utf-8') as f_out:
-        f_out.write(mcf.rstrip('\n'))
-    return dcid_nodes
 
 
 def _generate_tmcf(tmcf_file_path: str) -> None:
@@ -295,6 +243,157 @@ def _generate_tmcf(tmcf_file_path: str) -> None:
         f_out.write(TMCF_TEMPLATE.rstrip('\n'))
 
 
+def _apply_regex(data_df: pd.DataFrame, conf: dict, curr_prop_column: str):
+    """
+    Extracts the required words using regex.
+
+    Args:
+        data_df (pd.DataFrame): _description_
+        conf (dict): _description_
+        curr_prop_column (str): _description_
+
+    Returns:
+        _type_: _description_
+    """
+
+    regex = conf.get("regex", False)
+
+    if regex:
+        pattern = regex["pattern"]
+        position = regex["position"]
+        data_df[curr_prop_column] = data_df[curr_prop_column].str.split(
+            pattern, expand=True)[position]
+
+    return data_df
+
+
+def _generate_stat_var(data_df):
+    """
+    Generates the stat vars.
+
+    Args:
+        data_df (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+
+    prop_cols = ["prop_" + col for col in SV_PROP_ORDER]
+
+    data_df = data_df.replace('', np.nan)
+
+    data_df['prop_Node'] = '{' + \
+                            data_df[prop_cols].apply(
+                            lambda x: ','.join(x.dropna().astype(str)),
+                            axis=1) + \
+                            '}'
+
+    data_df['prop_Node'] = data_df['prop_Node'].apply(json.loads)
+    data_df['sv'] = data_df['prop_Node'].apply(get_statvar_dcid)
+    data_df['prop_Node'] = data_df['sv'].apply(SV_NODE_FORMAT)
+
+    return data_df
+
+
+def _generate_prop(data_df: pd.DataFrame):
+    """
+    Generate property columns in the dataframe data_df
+
+    Args:
+        data_df (pd.DataFrame): Input DataFrame
+
+    Returns:
+        _type_: _description_
+    """
+
+    form_stat_var = FORM_STATVAR
+
+    for prop_ in DF_DEFAULT_MCF_PROP:
+        data_df[prop_["column_name"]] = prop_["column_value"]
+
+    for prop, conf in form_stat_var.items():
+        data_df["curr_prop"] = prop
+        column = conf["column"]
+        curr_value_column = "prop_" + prop
+        data_df[curr_value_column] = data_df[column]
+        data_df = _apply_regex(data_df, conf, curr_value_column)
+        data_df[curr_value_column] = data_df[curr_value_column].apply(
+            conf["update_value"])
+        data_df[curr_value_column] = data_df[["curr_prop", curr_value_column
+                                             ]].apply(conf["pv_format"], axis=1)
+
+    return data_df
+
+
+def _generate_mcfs(data_df: pd.DataFrame):
+    """
+    Generate MCF nodes in the DataFrame data_df.
+
+    Args:
+        data_df (pd.DataFrame): Input DataFrame
+
+    Returns:
+        _type_: _description_
+    """
+
+    prop_cols = ["prop_" + col for col in SV_PROP_ORDER]
+
+    data_df['mcf'] = data_df['prop_Node'] + \
+                    '\n' + \
+                    data_df[prop_cols].apply(
+                    func=lambda x: '\n'.join(x.dropna()),
+                    axis=1).str.replace('"', '')
+
+    data_df = data_df.drop(columns=prop_cols).reset_index(drop=True)
+
+    return data_df
+
+
+def _write_to_mcf_file(data_df: pd.DataFrame, mcf_file_path):
+
+    unique_nodes_df = data_df.drop_duplicates(subset=["prop_Node"]).reset_index(
+        drop=True)
+
+    mcf_ = unique_nodes_df.sort_values(by=["prop_Node"])["mcf"].tolist()
+    mcf_ = "\n\n".join(mcf_)
+
+    with open(mcf_file_path, "w", encoding="UTF-8") as file:
+        file.write(mcf_)
+
+
+def _post_process(data_df: pd.DataFrame,cleaned_csv_file_path: str,
+                  mcf_file_path: str, tmcf_file_path: str):
+    """
+    Post Processing on the transformed dataframe such as
+    1. Create stat-vars
+    2. Create mcf file
+    3. Create tmcf file
+
+    Args:
+        data_df (pd.DataFrame): _description_
+        cleaned_csv_file_path (str): _description_
+        mcf_file_path (str): _description_
+        tmcf_file_path (str): _description_
+    """
+    print("generating prop")
+    data_df = _generate_prop(data_df)
+    print("generating stat var")
+    data_df = _generate_stat_var(data_df)
+    print("generating mcf")
+    data_df = _generate_mcfs(data_df)
+    print("writing to file")
+    _write_to_mcf_file(data_df, mcf_file_path)
+
+    _generate_tmcf(tmcf_file_path)
+
+    data_df = _promote_measurement_method(data_df)
+
+    data_df = data_df.sort_values(by=["year", "location", "sv"])
+    f_cols = ["year", "location", "sv", "observation", "measurement_method"]
+
+    data_df[f_cols].to_csv(cleaned_csv_file_path, index=False)
+
+
 def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
             tmcf_file_path: str):
     """
@@ -302,26 +401,19 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     CSV, MCF and TMCF files.
     """
     final_df = pd.DataFrame()
-    sv_names = []
+
     for file_path in input_files:
-        print("--------")
-        print(os.path.basename(file_path))
         if "latch_2017-b" in file_path:
             conf = CONF_2017_FILE
         elif "NHTS_2009_transfer" in file_path:
             conf = CONF_2009_FILE
+
         data_df = _process_household_transportation(file_path, conf)
         data_df = data_df.dropna(subset=["observation"])
-        final_df = pd.concat([final_df, data_df[FINAL_DATA_COLS]])
-        sv_names += data_df["sv"].to_list()
-    final_df = _promote_measurement_method(final_df)
-    sv_names = list(set(sv_names))
-    sv_names.sort()
-    updated_sv = _generate_mcf(sv_names, mcf_file_path)
-    final_df["sv"] = final_df["sv"].map(updated_sv)
-    _generate_tmcf(tmcf_file_path)
-    final_df = final_df.sort_values(by=["year", "location", "sv"])
-    final_df.to_csv(cleaned_csv_file_path, index=False)
+        final_df = pd.concat([final_df, data_df])
+
+    _post_process(final_df, cleaned_csv_file_path, mcf_file_path,
+                  tmcf_file_path)
 
 
 def main(_):

@@ -18,6 +18,7 @@ found in downloaded files and its corresponding SV name.
 While preprocessing files column names are changed to SV names as used in
 DC import
 """
+
 INPUT_URLS_CONFIG = "input_urls_config.json"
 
 BASE_URL = "base_url"
@@ -31,6 +32,32 @@ ACS_SRUVEY_MEASUREMENT_METHOD = DEFAULT_MEASUREMENT_METHOD \
 
 DOWNLOAD_DIRECTORY = "input_files"
 
+MELT_VAR_COL = "householdSize_numberOfVehicles"
+
+MELT_OBV_COL = "observation"
+
+_HOUSEHOLD_PV = "[Person {person}]"
+
+_NUM_OF_VEHICLES_PV = "[AvailableVehicles {vehicle}]"
+
+# pylint: disable=unnecessary-lambda-assignment
+# pylint: disable=line-too-long
+_PV_FORMAT = lambda prop_val: f'"{prop_val[0]}": "dcs:{prop_val[1]}"' if 'None' not in prop_val[
+    1] else ""
+_PV_FORMAT_NUMBERS = lambda prop_val: f'"{prop_val[0]}": "{prop_val[1]}"' if 'None' not in prop_val[
+    1] else ""
+SV_NODE_FORMAT = lambda prop_val: f'Node: dcid:{prop_val}'
+
+_MEASURED_PROP = lambda prop: MEASUREDPROP_MAPPER[prop]
+
+_HOUSEHOLD_PROP = lambda prop: _HOUSEHOLD_PV.format(person=prop)
+
+_NOOFVEHICLES_PROP = lambda prop: _NUM_OF_VEHICLES_PV.format(vehicle=prop)
+
+_DEFAULT_PROP = lambda prop: prop
+# pylint: enable=unnecessary-lambda-assignment
+# pylint: enable=line-too-long
+
 DEFAULT_SV_PROP = {
     "typeOf": "dcs:StatisticalVariable",
     "populationType": "dcs:Household",
@@ -43,6 +70,7 @@ MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                 "populationType: dcs:Household\n"
                 "statType: dcs:meanValue\n"
                 "measurementQualifier: dcs:EveryWeekday\n"
+                "transportationType: dcs:LocalAreaTransportation\n"
                 "{xtra_pvs}\n")
 
 TMCF_TEMPLATE = (
@@ -93,19 +121,11 @@ FINAL_DATA_COLS = [
     "year", "location", "sv", "observation", "measurement_method"
 ]
 
-HEADERMAP = {
-    "est_pmiles2007_11": "PersonMilesTraveled",
-    "est_pmiles": "PersonMilesTraveled",
-    "pmiles": "PersonMilesTraveled",
-    "est_ptrp2007_11": "PersonTrips",
-    "est_ptrp": "PersonTrips",
-    "ptrp": "PersonTrips",
-    "est_vtrp2007_11": "VehicleTrips",
-    "est_vtrp": "VehicleTrips",
-    "vtrp": "VehicleTrips",
-    "est_vmiles2007_11": "VehicleMilesTraveled",
-    "est_vmiles": "VehicleMilesTraveled",
-    "vmiles": "VehicleMilesTraveled",
+MEASUREDPROP_MAPPER = {
+    "pmiles": "personMilesTraveled",
+    "ptrp": "personTrips",
+    "vtrp": "vehicleTrips",
+    "vmiles": "vehicleMilesTraveled",
 }
 
 ACS_LT_MOR = {0: '', 1: '_MarginOfErrorMoreThanACSSurvey'}
@@ -121,7 +141,17 @@ HHSIZE_NOOFVEHICLES_MAPPER = {
     "VehicleTrips": ""
 }
 
-RENAME_COLUMNS = {"geocode": "geoid"}
+RENAME_COLUMNS = {
+    "geocode": "geoid",
+    "est_pmiles": "pmiles",
+    "est_pmiles2007_11": "pmiles",
+    "est_ptrp": "ptrp",
+    "est_ptrp2007_11": "ptrp",
+    "est_vtrp": "vtrp",
+    "est_vtrp2007_11": "vtrp",
+    "est_vmiles": "vmiles",
+    "est_vmiles2007_11": "vmiles"
+}
 
 PADDING = {"width": 11, "side": "left", "fillchar": "0"}
 
@@ -137,7 +167,6 @@ CONF_2009_FILE = {
         "est_vtrp2007_11"
     ],
     "extra_cols": COMMON_COLS + ADDITIONAL_2009_FILE_COLS,
-    "measurement_method_col": "measurement_method",
     "dtype_conv": {
         "urban_group": "int"
     },
@@ -158,7 +187,7 @@ CONF_2017_FILE = {
     ],
     "pop_cols": ["est_pmiles", "est_ptrp", "est_vmiles", "est_vtrp"],
     "extra_cols": COMMON_COLS,
-    "measurement_method_cols": ["flag_acs_lt_moe", "flag_incomplete_acs"],
+    "cols_for_measurement_method": ["flag_acs_lt_moe", "flag_incomplete_acs"],
     "dtype_conv": {
         "urban_group": "int"
     },
@@ -176,3 +205,58 @@ CONF_2017_FILE = {
     "additional_process": True,
     "year": 2017
 }
+
+FORM_STATVAR = {
+    "placeOfResidenceClassification": {
+        "column": "urban_group",
+        "update_value": _DEFAULT_PROP,
+        "pv_format": _PV_FORMAT
+    },
+    "numberOfVehicles": {
+        "column": MELT_VAR_COL,
+        "regex": {
+            "pattern": r"(\d)(veh)",
+            "position": 1
+        },
+        "update_value": _NOOFVEHICLES_PROP,
+        "pv_format": _PV_FORMAT_NUMBERS
+    },
+    "householdSize": {
+        "column": MELT_VAR_COL,
+        "regex": {
+            "pattern": r"(\d)(mem)",
+            "position": 1
+        },
+        "update_value": _HOUSEHOLD_PROP,
+        "pv_format": _PV_FORMAT_NUMBERS
+    },
+    "measuredProperty": {
+        "column": MELT_VAR_COL,
+        "regex": {
+            "pattern": r"(pmiles|vtrp|ptrp|vmiles)",
+            "position": 1
+        },
+        "update_value": _MEASURED_PROP,
+        "pv_format": _PV_FORMAT
+    }
+}
+
+DF_DEFAULT_MCF_PROP = [{
+    "column_name": "prop_typeOf",
+    "column_value": '"typeOf": "dcs:StatisticalVariable"'
+}, {
+    "column_name": "prop_populationType",
+    "column_value": '"populationType": "dcs:Household"'
+}, {
+    "column_name": "prop_statType",
+    "column_value": '"statType": "dcs:meanValue"'
+}, {
+    "column_name": "prop_measurementQualifier",
+    "column_value": '"measurementQualifier": "dcs:EveryWeekday"'
+}]
+
+SV_PROP_ORDER = [
+    "typeOf", "populationType", "statType", "measurementQualifier",
+    "measuredProperty", "householdSize", "numberOfVehicles",
+    "placeOfResidenceClassification"
+]
