@@ -4,7 +4,7 @@ import numpy as np
 
 INPUT_TO_OUTPUT_PATHS = {
     "source_data/NRI_Table_Counties.csv": "output/nri_counties_table.csv",
-    # "source_data/NRI_Table_CensusTracts.csv": "output/nri_tracts_table.csv",
+    "source_data/NRI_Table_CensusTracts.csv": "output/nri_tracts_table.csv",
 }
 
 
