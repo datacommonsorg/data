@@ -116,15 +116,15 @@ def apply_datacommon_alias(string):
 	Given a string, returns the defined alias for the Data Commons import.
 	If no alias is found, returns the string as is.
 	"""
-    string = string.strip()
-    string = string.replace(
-        " ", "")  # drop spaces when keying into DATACOMMONS_ALIASES
+    key = string.strip().replace(" ", "")
 
-    if string in DATACOMMONS_ALIASES:
-        return DATACOMMONS_ALIASES[string]
-    else:
-        logging.info(f"could not find alias for {string.replace(' ', '!')}")
-        return string
+    if key in DATACOMMONS_ALIASES:
+        return DATACOMMONS_ALIASES[key]
+
+    logging.info(f"could not find alias for {string}, canonalized key was {key}")
+
+    # return input string as is if not found
+    return string
 
 
 def get_nth_dash_from_field_alias(row, i):
