@@ -4,8 +4,8 @@ tmp="source_data_tmp" # where to store temporary artifacts
 dest="source_data" # where to put the final files
 
 # Make directories
-mkdir "$tmp"
-mkdir "$dest"
+mkdir -p "$tmp"
+mkdir -p "$dest"
 
 # Download data files
 ## Links copied from https://hazards.fema.gov/nri/data-resources
