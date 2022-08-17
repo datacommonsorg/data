@@ -164,7 +164,7 @@ replace_metadata = {
     '108383':
         '1_3_Xylene',
     '130498292':
-        'PAH_Total',
+        'PolycyclicAromaticHydrocarbons_Total',
     '1634044':
         '2_Methoxy_2_Methylpropane',
     '91576':
