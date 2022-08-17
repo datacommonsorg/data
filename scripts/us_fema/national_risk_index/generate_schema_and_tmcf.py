@@ -121,7 +121,8 @@ def apply_datacommon_alias(string):
     if key in DATACOMMONS_ALIASES:
         return DATACOMMONS_ALIASES[key]
 
-    logging.info(f"could not find alias for {string}, canonalized key was {key}")
+    logging.info(
+        f"could not find alias for {string}, canonalized key was {key}")
 
     # return input string as is if not found
     return string
