@@ -42,9 +42,9 @@ def fips_to_geoid(row):
 def process_csv(input_path, output_path, csv_structure_f):
     data_table = pd.read_csv(input_path)
 
-    # we want to replace empty cells with 0s so that the import tool does not
-    # have to assume what this is about [citation needed (snny)]
-    data_table = data_table.fillna(0)
+    # TODO: interpret empty values. semantics of empty values is described in
+    # Table 2 of the Technical Documentation available at:
+    # https://www.fema.gov/sites/default/files/documents/fema_national-risk-index_technical-documentation.pdf
 
     # the column structure should be the same between the county and tract tables
     # so we normalize it with the list of fields "csv_structure"
