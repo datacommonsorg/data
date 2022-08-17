@@ -89,7 +89,7 @@ DATACOMMONS_ALIASES = {
 
 def prune_list_dupes(l):
     """
-    Given a list L, computes a new list K where the duplicate 
+    Given a list L, computes a new list K where the duplicate
     items in L are omitted, but all other items keep their
     initial ordering.
 
@@ -204,7 +204,7 @@ def schema_and_tmcf_from_properties(properties, index):
 
 def is_composite_row(row):
     """
-	Given a row of NRIDataDictionary, computes whether that row is a measure of 
+	Given a row of NRIDataDictionary, computes whether that row is a measure of
         all hazards in aggregate (composite).
 	Returns boolean True if so, False otherwise.
 	"""
@@ -216,7 +216,7 @@ def normalize_unit_for_measured_property(measured_property, unit):
     Given a measured_property and unit, normalize it to KG terms.
     If m_prop is Expected Loss, makes the unit be USD if it is not Score.
     Otherwise, makes the unit empty if it is not Score.
-    
+
     Returns the normalized measured_property and unit as a tuple.
     """
 
@@ -293,7 +293,7 @@ def format_composite_field_properties_to_schema(properties):
     """
     Given properties of a composite field, formats a valid Schema for the
     StatisticalVariable representing that field.
-    
+
     Returns the tuple:
         (Schema MCF in string format, the dcid of the StatVar)
     """

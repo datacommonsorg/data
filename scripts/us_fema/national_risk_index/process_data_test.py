@@ -40,9 +40,9 @@ def check_function_on_file_gives_golden(fn, inp_f, inp_csv_f, golden_f):
     - input file location `inp_f`
     - output file location (not passed in as an argument to this function)
     - input CSV file location `inp_csv_f`
-   
+
     Calls the function with those inputs.
-    
+
     Checks if the output file is equivalent to the golden_f passed in
 
     Returns True if the check passes, False otherwise.
