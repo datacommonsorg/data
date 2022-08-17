@@ -46,6 +46,7 @@ DEFAULT_SV_PROP = {
 }
 
 _PV_PROP = {
+    "OneMonth":"1Month",
     "SampleSize_Count_LivePregnancyEvent_":"sampleSize",
     "Percent_LivePregnancyEvent_":"measuredValue",
     "ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_":"confidenceIntervalLowerLimit",
@@ -53,17 +54,25 @@ _PV_PROP = {
 }
 
 _PROP = {
+    "OneMonth":"1Month",
     "MoreThan4TimesAWeek":"",
     "InLast2Years":"",
     "3MonthsBeforePregnancy":"",
     "Last3MonthsOfPregnancy":"",
     "Postpartum":"",
-    "privateinsurance":"",
-    "Medicaid":"",
+    "Hookah":"HookahUsage",
+    "Obese":"Obesity",
+    "healthInsuranceStatus1MonthBeforePregnancyprivateinsurance":"WithPrivateHealthInsurance",
+    "healthInsuranceStatus1MonthBeforePregnancyMedicaid":"Medicaid",
+    "healthInsuranceStatus1MonthBeforePregnancyNoInsurance":"NoHealthInsurance",
+    "healthInsuranceStatusForPrenatalCareprivateinsurance":"WithPrivateHealthInsurance",
+    "healthInsuranceStatusForPrenatalCareMedicaid":"Medicaid",
+    "healthInsuranceStatusForPrenatalCareNoInsurance":"NoHealthInsurance",
     "DuringPregnancy":"",
     "12MonthsBeforePregnancy":"",
     "InFirstTrimester":"",
-    "NoInsurance":"",
+    "ECigaretteSmoking":"Smoking",
+    "CigaretteSmoking" :"Smoking",
     "SampleSize_Count_LivePregnancyEvent_":"",
     "Percent_LivePregnancyEvent_":"",
     "ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_":"",
@@ -71,20 +80,21 @@ _PROP = {
 }
 
 _TIME = {
+    "OneMonth":"1Month",
     "MultivitaminUse":"",
-    "PrenatalCare":"",
+    "PrenatalCareIn":"",
     "FluShot":"",
     "MaternalCheckup":"",
     "TeethCleanedByDentistOrHygienist":"",
     "HealthCareVisit":"",
-    "CigaretteSmoking":"",
     "ECigaretteSmoking":"",
-    "HookahIn":"",
+    "CigaretteSmoking":"",
+    "HookahInLast2Years":"Last2YearsBeforePregnancy",
     "HeavyDrinking":"",
     "CDC_SelfReportedDepression":"",
-    "healthInsuranceStatusOneMonthBeforePregnancyprivateinsurance":"OneMonthBeforePregnancy",
-    "healthInsuranceStatusOneMonthBeforePregnancyMedicaid":"OneMonthBeforePregnancy",
-    "healthInsuranceStatusOneMonthBeforePregnancyNoInsurance":"OneMonthBeforePregnancy",
+    "healthInsuranceStatus1MonthBeforePregnancyprivateinsurance":"1MonthBeforePregnancy",
+    "healthInsuranceStatus1MonthBeforePregnancyMedicaid":"1MonthBeforePregnancy",
+    "healthInsuranceStatus1MonthBeforePregnancyNoInsurance":"1MonthBeforePregnancy",
     "healthInsuranceStatusPostpartumprivateinsurance":"Postpartum",
     "healthInsuranceStatusPostpartumMedicaid":"Postpartum",
     "healthInsuranceStatusPostpartumNoInsurance":"Postpartum",
@@ -96,9 +106,10 @@ _TIME = {
 }
 
 _INSURANCE = {
-    "privateinsurance":"",
-    "Medicaid":"",
-    "NoInsurance":"",
+    "OneMonth":"1Month",
+    "healthInsuranceStatusPostpartumprivateinsurance":"WithPrivateHealthInsurance",
+    "healthInsuranceStatusPostpartumMedicaid":"Medicaid",
+    "healthInsuranceStatusPostpartumNoInsurance":"NoHealthInsurance",
     "SampleSize_Count_LivePregnancyEvent_":"",
     "Percent_LivePregnancyEvent_":"",
     "ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_":"",
@@ -106,8 +117,39 @@ _INSURANCE = {
 }
 
 _PROP4 = {
+    "ECigaretteSmoking3MonthsBeforePregnancy":"ECigarettes",
+    "ECigaretteSmokingLast3MonthsOfPregnancy":"ECigarettes",
+    "CigaretteSmoking3MonthsBeforePregnancy" :"Cigarettes",
+    "CigaretteSmokingLast3MonthsOfPregnancy":"Cigarettes",
+    "CigaretteSmokingPostpartum":"Cigarettes",
     "SampleSize_Count_LivePregnancyEvent_":"",
     "Percent_LivePregnancyEvent_":"",
     "ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_":"",
     "ConfidenceIntervalUpperLimit_Count_LivePregnancyEvent_":""
+}
+
+_YEAR = {
+    '2016_sampleSize':'2016',
+    '2017_sampleSize':'2017',
+    '2018_sampleSize':'2018',
+    '2019_sampleSize':'2019', 
+    '2020_sampleSize':'2020', 
+    '2016_CI_PERCENT':'2016',
+    '2016_CI_LOWER':'2016', 
+    '2016_CI_UPPER':'2016', 
+    '2017_CI_PERCENT':'2017', 
+    '2017_CI_LOWER':'2017',
+    '2017_CI_UPPER':'2017', 
+    '2018_CI_PERCENT':'2018', 
+    '2018_CI_LOWER':'2018', 
+    '2018_CI_UPPER':'2018',
+    '2019_CI_PERCENT':'2019', 
+    '2019_CI_LOWER':'2019', 
+    '2019_CI_UPPER':'2019', 
+    '2020_CI_PERCENT':'2020',
+    '2020_CI_LOWER':'2020', 
+    '2020_CI_UPPER':'2020', 
+    'Overall_2020_CI_PERCENT':'2020',
+    'Overall_2020_CI_LOWER':'2020',
+    'Overall_2020_CI_UPPER':'2020'
 }

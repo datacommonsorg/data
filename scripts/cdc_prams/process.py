@@ -39,7 +39,7 @@ from statvar import statvar_col
 # pylint: enable=wrong-import-pos
 
 from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP,_PROP,
-                        _TIME,_INSURANCE,_PROP4,_PV_PROP)
+                        _TIME,_INSURANCE,_PROP4,_PV_PROP,_YEAR)
 
 # sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
 
@@ -53,14 +53,6 @@ flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 def prams(input_url: list, statvar_col:dict) -> pd.DataFrame:
     final_df = pd.DataFrame()
-    # statVar = [['Geo','SV', '2016_sampleSize','2017_sampleSize',
-    #     '2018_sampleSize','2019_sampleSize',
-    #     '2020_sampleSize','2016_CI_PERCENT',
-    #     '2016_CI_LOWER','2016_CI_UPPER',
-    #     '2017_CI_PERCENT','2017_CI_LOWER','2017_CI_UPPER','2018_CI_PERCENT','2018_CI_LOWER',
-    #     '2018_CI_UPPER','2019_CI_PERCENT','2019_CI_LOWER','2019_CI_UPPER','2020_CI_PERCENT',
-    #     '2020_CI_LOWER','2020_CI_UPPER','Overall_2020_CI_PERCENT',
-    #     'Overall_2020_CI_LOWER','Overall_2020_CI_UPPER']]
     statVar = [['Geo','SV','Year','Observation']]
     df3 = pd.DataFrame(columns=statVar)
     df3 = df3.to_csv('PRAMS.csv', index=False)
@@ -78,7 +70,6 @@ def prams(input_url: list, statvar_col:dict) -> pd.DataFrame:
         '2018_sampleSize', '2018_CI', '2019_sampleSize', '2019_CI', 
         '2020_sampleSize', '2020_CI', 'Overall_2020_CI','Geo']
         df.insert(1,'2016_sampleSize', np.NaN)
-        # final_df = pd.concat([final_df,df])
         final_df = df.copy()
         final_df['statVar'] = final_df['statVar'].str.replace('• ', '')
 
@@ -162,13 +153,11 @@ def prams(input_url: list, statvar_col:dict) -> pd.DataFrame:
         df2['sub_header'] = df2['sub_header'].fillna("")
 
         df2['newStatVar'] = df2['main_header']+"_"+df2['sub_header']+"_"+df2['statVar']
-        # print(df2.head())
         df2 = df2.loc[(df2['main_header_delete_flag']=='')]
         df2 = df2.loc[(df2['sub_header_delete_flag']=='')]
         df2 = df2.drop(columns=['statVar','main_header_delete_flag','sub_header','main_header','sub_header_delete_flag'])
         df2['SV'] = df2['newStatVar']
         df2 = df2.replace({'SV': statvar_col})
-        # print(df2['SV'].count())
         df2 = df2.replace({'Geo': _PLACE_MAP})
         df2 = df2.reset_index(drop=True)
         split_col = ['2016_CI','2017_CI','2018_CI','2019_CI','2020_CI','Overall_2020_CI']
@@ -239,13 +228,14 @@ def prams(input_url: list, statvar_col:dict) -> pd.DataFrame:
                 i = i.melt(id_vars=['Geo','SV'], var_name='Year'\
                         ,value_name='observation')
             df_all = pd.concat([df_all,i],axis=0)
-
+        # Replacing Year column with the correct Values.
+        for old,new in _YEAR.items():
+            df_all['Year'] = df_all['Year'].replace(old,new)
         df_all.reset_index(drop=True, inplace=True)
         df_all = df_all.sort_values(by=['Geo'], kind="stable")
         df_all.to_csv('PRAMS.csv', mode="a", index=False,header=False)
         sv_names += df_all["SV"].to_list()
         sv_names = list(set(sv_names))
-        # sv_names.sort()
     return sv_names    
 
 class US_Prams:
@@ -308,7 +298,6 @@ class US_Prams:
                 for old,new in _PV_PROP.items():
                     prop5 = prop5.replace(old,new)
 
-
                 if "SampleSize" in prop :
                     sv_pvs["measuredProperty"] = f"dcs:count"
                     pvs.append(f"measuredProperty: dcs:count")
@@ -359,10 +348,17 @@ class US_Prams:
                 elif "CigaretteSmoking3MonthsBeforePregnancy" in prop or\
                     "CigaretteSmokingLast3MonthsOfPregnancy"in prop or "CigaretteSmokingPostpartum" in prop or\
                     "ECigaretteSmoking3MonthsBeforePregnancy" in prop or\
-                    "ECigaretteSmokingLast3MonthsOfPregnancy" in prop or\
-                    "HookahInLast2Years" in prop or "HeavyDrinking3MonthsBeforePregnancy" in prop:
-                    pvs.append(f"mothersHealthBehaviour: {prop1}")
-                    sv_pvs["mothersHealthBehaviour"] = f"{prop1}"
+                    "ECigaretteSmokingLast3MonthsOfPregnancy" in prop:
+                    pvs.append(f"tobaccoUsageType: dcs:{prop4}")
+                    sv_pvs["tobaccoUsageType"] = f"dcs:{prop4}"
+                    pvs.append(f"mothersHealthBehaviour: dcs:{prop1}")
+                    sv_pvs["mothersHealthBehaviour"] = f"dcs:{prop1}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop3}"
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+
+                elif "HookahInLast2Years" in prop or "HeavyDrinking3MonthsBeforePregnancy" in prop:
+                    pvs.append(f"mothersHealthBehaviour: dcs:{prop1}")
+                    sv_pvs["mothersHealthBehaviour"] = f"dcs:{prop1}"
                     sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop3}"
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
 
