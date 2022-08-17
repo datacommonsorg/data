@@ -361,7 +361,7 @@ def _write_to_mcf_file(data_df: pd.DataFrame, mcf_file_path):
         file.write(mcf_)
 
 
-def _post_process(data_df: pd.DataFrame,cleaned_csv_file_path: str,
+def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
                   mcf_file_path: str, tmcf_file_path: str):
     """
     Post Processing on the transformed dataframe such as
