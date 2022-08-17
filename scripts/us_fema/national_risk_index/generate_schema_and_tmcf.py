@@ -215,8 +215,9 @@ def is_composite_row(row):
 def normalize_unit_for_measured_property(measured_property, unit):
     """
     Given a measured_property and unit, normalize it to KG terms.
-    If m_prop is Expected Loss, makes the unit be USD if it is not Score.
-    Otherwise, makes the unit empty if it is not Score.
+
+    Returns input as-is when unit is Score. Otherwise, makes the unit USD when
+    m_prop == Expected Loss and empty otherwise.
 
     Returns the normalized measured_property and unit as a tuple.
     """
@@ -360,7 +361,7 @@ def extract_properties_from_ind_hazard_row(row):
     measured_property = drop_spaces(measured_property)
 
     impacted_thing = ""
-    # "Field Alias" for individual rows contains 2 dashes when in contains the
+    # "Field Alias" for individual rows contains 2 dashes when it contains the
     # impacted thing, and 1 otherwise.
     #
     # Example of field alias with impacted thing:
