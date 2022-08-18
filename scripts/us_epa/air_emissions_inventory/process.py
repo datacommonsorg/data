@@ -103,7 +103,7 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _replace_pollutant(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+def _replace_metadata(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
@@ -116,33 +116,24 @@ def _replace_pollutant(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     """
     df = df.replace({
         column_name: {
-            'CO': 'CarbonMonoxide',
-            'NOX': 'OxidesOfNitrogen',
-            'PM10Primary': 'PM10',
-            'PM25Primary': 'PM2.5',
-            'PM10-PRI': 'PM10',
-            'PM25-PRI': 'PM2.5',
-            'SO2': 'SulfurDioxide',
-            'VOC': 'VolatileOrganicCompound',
-            'NH3': 'Ammonia'
-        }
-    })
-    return df
-
-def _replace_source_category(df: pd.DataFrame, column_name: str) ->\
-                            pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata returns the DF.
-
-    Args:
-        df (pd.DataFrame): df as the input, to change column values
-
-    Returns:
-        df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({
-        column_name: {
+            'CO':
+                'CarbonMonoxide',
+            'NOX':
+                'OxidesOfNitrogen',
+            'PM10Primary':
+                'PM10',
+            'PM25Primary':
+                'PM2.5',
+            'PM10-PRI':
+                'PM10',
+            'PM25-PRI':
+                'PM2.5',
+            'SO2':
+                'SulfurDioxide',
+            'VOC':
+                'VolatileOrganicCompound',
+            'NH3':
+                'Ammonia',
             'FUEL COMB. ELEC. UTIL.':
                 'FuelCombustionElectricUtility',
             'FUEL COMB. INDUSTRIAL':
@@ -199,10 +190,9 @@ def _state_emissions(file_path: str) -> pd.DataFrame:
     df['geo_Id'] = 'geoId/' + df['geo_Id']
     # Dropping Unwanted Columns
     df = df.drop(columns=['State FIPS', 'State', 'Tier 1 Code'])
-    df = _replace_pollutant(df, 'Pollutant')
-    df = _replace_source_category(df, 'Tier 1 Description')
-    df['SV'] = 'Annual_Amount_Emissions_' + df['Tier 1 Description'] +\
-            '_NonBiogenicEmissionSource_' + df['Pollutant']
+    df = _replace_metadata(df, 'Pollutant')
+    df = _replace_metadata(df, 'Tier 1 Description')
+    df['SV'] = df['Tier 1 Description'] + '-' + df['Pollutant']
     df = df.drop(columns=['Tier 1 Description', 'Pollutant'])
     # Changing the years present as columns into row values.
     df = df.melt(id_vars=['SV', 'geo_Id'],
@@ -258,10 +248,9 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
                (df['Source Category'] == 'Miscellaneous')].index)
         # Addition of pollutant type to the df by taking sheet name.
         df['pollutant'] = sheet
-        df = _replace_pollutant(df, 'pollutant')
-        df = _replace_source_category(df, 'Source Category')
-        df['SV'] = 'Annual_Amount_Emissions_' + df['Source Category'] +\
-                '_NonBiogenicEmissionSource_' + df['pollutant']
+        df = _replace_metadata(df, 'pollutant')
+        df = _replace_metadata(df, 'Source Category')
+        df['SV'] = df['Source Category'] + "-" + df['pollutant']
         df = df.drop(columns=['Source Category', 'pollutant'])
         # Changing the years present as columns into row values.
         df = df.melt(id_vars=['SV'], var_name='year', value_name='observation')
@@ -326,22 +315,13 @@ class USAirPollutionEmissionTrends:
             "measuredProperty": "dcs:amount"
         }
         for sv in sv_list:
-            sv_property = sv.split("_")
-            if ("OtherIndustrialProcesses" in sv_property[-3] or
-                    "MiscellaneousEmissionSource" in sv_property[-3] or
-                    "FuelCombustionOther" in sv_property[-3]):
-                source = ('\nemissionSource: dcs:' + sv_property[-4] + "_" +
-                          sv_property[-3])
-                sv_checker['emissionSource'] = 'dcs:' + sv_property[
-                    -4] + "_" + sv_property[-3]
-            else:
-                source = '\nemissionSource: dcs:' + sv_property[-3]
-                sv_checker['emissionSource'] = sv_property[-3]
-            pollutant = '\nemittedThing: dcs:' + sv_property[-1]
-            sv_checker['emittedThing'] = 'dcs:' + sv_property[-1]
+            sv_property = sv.split("-")
+            source = '\nemissionSource: dcs:' + sv_property[0]
+            sv_checker['emissionSource'] = sv_property[0]
+            pollutant = '\nemittedThing: dcs:' + sv_property[1]
+            sv_checker['emittedThing'] = 'dcs:' + sv_property[1]
             generated_sv = get_statvar_dcid(sv_checker)
-            if (generated_sv != sv):
-                sv_replacement[sv] = generated_sv
+            sv_replacement[sv] = generated_sv
             final_mcf_template += _MCF_TEMPLATE.format(
                 pv1=generated_sv, pv2=source, pv3=pollutant) + "\n"
 
