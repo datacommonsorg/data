@@ -1,0 +1,70 @@
+Sort,Field Name,Field Alias,Type,Length,Relevant Layer,Metric Type,Version
+1,OBJECTID,OBJECTID,Integer,4,n/a,n/a,November 2021
+2,Shape,Shape,Geometry,n/a,n/a,n/a,November 2021
+3,Shape_Length,Shape_Length,Double,8,n/a,n/a,November 2021
+4,Shape_Area,Shape_Area,Double,8,n/a,n/a,November 2021
+5,STATE,State Name,String,250,All,n/a,November 2021
+6,STATEABBRV,State Name Abbreviation,String,20,All,n/a,November 2021
+7,STATEFIPS,State FIPS Code,String,20,All,n/a,November 2021
+8,COUNTY,County Name,String,250,All,n/a,November 2021
+9,COUNTYTYPE,County Type,String,250,All,n/a,November 2021
+10,COUNTYFIPS,County FIPS Code,String,20,All,n/a,November 2021
+11,STCOFIPS,State-County FIPS Code,String,20,All,n/a,November 2021
+12,TRACT,Census Tract,String,20,All,n/a,November 2021
+13,TRACTFIPS,Census Tract FIPS Code,String,20,All,n/a,November 2021
+14,NRI_ID,National Risk Index ID,String,20,All,n/a,November 2021
+15,POPULATION,Population (2016),Integer,4,All,n/a,November 2021
+16,BUILDVALUE,Building Value ($),Double,8,All,n/a,November 2021
+17,AGRIVALUE,Agriculture Value ($),Double,8,All,n/a,November 2021
+18,AREA,Area (sq mi),Double,8,All,n/a,November 2021
+19,RISK_SCORE,National Risk Index - Score - Composite,Double,8,National Risk Index,Score,November 2021
+20,RISK_RATNG,National Risk Index - Rating - Composite,String,50,National Risk Index,Rating,November 2021
+21,RISK_NPCTL,National Risk Index - National Percentile - Composite,Double,8,National Risk Index,National Percentile,November 2021
+22,RISK_SPCTL,National Risk Index - State Percentile - Composite,Double,8,National Risk Index,State Percentile,November 2021
+23,EAL_SCORE,Expected Annual Loss - Score - Composite,Double,8,Expected Annual Loss,Score,November 2021
+24,EAL_RATNG,Expected Annual Loss - Rating - Composite,String,50,Expected Annual Loss,Rating,November 2021
+25,EAL_NPCTL,Expected Annual Loss - National Percentile - Composite,Double,8,Expected Annual Loss,National Percentile,November 2021
+26,EAL_SPCTL,Expected Annual Loss - State Percentile - Composite,Double,8,Expected Annual Loss,State Percentile,November 2021
+27,EAL_VALT,Expected Annual Loss - Total - Composite,Double,8,Expected Annual Loss,Value,November 2021
+28,EAL_VALB,Expected Annual Loss - Building Value - Composite,Double,8,Expected Annual Loss,Value,November 2021
+29,EAL_VALP,Expected Annual Loss - Population - Composite,Double,8,Expected Annual Loss,Value,November 2021
+30,EAL_VALPE,Expected Annual Loss - Population Equivalence - Composite,Double,8,Expected Annual Loss,Value,November 2021
+31,EAL_VALA,Expected Annual Loss - Agriculture Value - Composite,Double,8,Expected Annual Loss,Value,November 2021
+32,SOVI_SCORE,Social Vulnerability - Score,Double,8,Social Vulnerability,Score,November 2021
+33,SOVI_RATNG,Social Vulnerability - Rating,String,50,Social Vulnerability,Rating,November 2021
+34,SOVI_NPCTL,Social Vulnerability - National Percentile,Double,8,Social Vulnerability,National Percentile,November 2021
+35,SOVI_SPCTL,Social Vulnerability - State Percentile,Double,8,Social Vulnerability,State Percentile,November 2021
+36,SOVI_VALUE,Social Vulnerability - Value,Double,8,Social Vulnerability,Value,November 2021
+37,RESL_SCORE,Community Resilience - Score,Double,8,Community Resilience,Score,November 2021
+38,RESL_RATNG,Community Resilience - Rating,String,50,Community Resilience,Rating,November 2021
+39,RESL_NPCTL,Community Resilience - National Percentile,Double,8,Community Resilience,National Percentile,November 2021
+40,RESL_SPCTL,Community Resilience - State Percentile,Double,8,Community Resilience,State Percentile,November 2021
+41,RESL_VALUE,Community Resilience - Value,Double,8,Community Resilience,Value,November 2021
+42,AVLN_EVNTS,Avalanche - Number of Events,Double,8,Avalanche,Number of Events,November 2021
+43,AVLN_AFREQ,Avalanche - Annualized Frequency,Double,8,Avalanche,Annualized Frequency,November 2021
+44,AVLN_EXPB,Avalanche - Exposure - Building Value,Double,8,Avalanche,Exposure - Building Value,November 2021
+45,AVLN_EXPP,Avalanche - Exposure - Population,Double,8,Avalanche,Exposure - Population,November 2021
+46,AVLN_EXPPE,Avalanche - Exposure - Population Equivalence,Double,8,Avalanche,Exposure - Population Equivalence,November 2021
+47,AVLN_EXPT,Avalanche - Exposure - Total,Double,8,Avalanche,Exposure - Total,November 2021
+48,AVLN_HLRB,Avalanche - Historic Loss Ratio - Buildings,Double,8,Avalanche,Historic Loss Ratio - Buildings,November 2021
+49,AVLN_HLRP,Avalanche - Historic Loss Ratio - Population,Double,8,Avalanche,Historic Loss Ratio - Population,November 2021
+50,AVLN_HLRR,Avalanche - Historic Loss Ratio - Total Rating,String,50,Avalanche,Historic Loss Ratio - Total Rating,November 2021
+51,AVLN_EALB,Avalanche - Expected Annual Loss - Building Value,Double,8,Avalanche,Expected Annual Loss - Building Value,November 2021
+52,AVLN_EALP,Avalanche - Expected Annual Loss - Population,Double,8,Avalanche,Expected Annual Loss - Population,November 2021
+53,AVLN_EALPE,Avalanche - Expected Annual Loss - Population Equivalence,Double,8,Avalanche,Expected Annual Loss - Population Equivalence,November 2021
+54,AVLN_EALT,Avalanche - Expected Annual Loss - Total,Double,8,Avalanche,Expected Annual Loss - Total,November 2021
+55,AVLN_EALS,Avalanche - Expected Annual Loss Score,Double,8,Avalanche,Expected Annual Loss Score,November 2021
+56,AVLN_EALR,Avalanche - Expected Annual Loss Rating,String,50,Avalanche,Expected Annual Loss Rating,November 2021
+57,AVLN_RISKS,Avalanche - Hazard Type Risk Index Score,Double,8,Avalanche,Hazard Type Risk Index Score,November 2021
+58,AVLN_RISKR,Avalanche - Hazard Type Risk Index Rating,String,50,Avalanche,Hazard Type Risk Index Rating,November 2021
+59,CFLD_EVNTS,Coastal Flooding - Number of Events,Double,8,Coastal Flooding,Number of Events,November 2021
+60,CFLD_AFREQ,Coastal Flooding - Annualized Frequency,Double,8,Coastal Flooding,Annualized Frequency,November 2021
+61,CFLD_EXPB,Coastal Flooding - Exposure - Building Value,Double,8,Coastal Flooding,Exposure - Building Value,November 2021
+62,CFLD_EXPP,Coastal Flooding - Exposure - Population,Double,8,Coastal Flooding,Exposure - Population,November 2021
+63,CFLD_EXPPE,Coastal Flooding - Exposure - Population Equivalence,Double,8,Coastal Flooding,Exposure - Population Equivalence,November 2021
+64,CFLD_EXPT,Coastal Flooding - Exposure - Total,Double,8,Coastal Flooding,Exposure - Total,November 2021
+65,CFLD_HLRB,Coastal Flooding - Historic Loss Ratio - Buildings,Double,8,Coastal Flooding,Historic Loss Ratio - Buildings,November 2021
+66,CFLD_HLRP,Coastal Flooding - Historic Loss Ratio - Population,Double,8,Coastal Flooding,Historic Loss Ratio - Population,November 2021
+67,CFLD_HLRR,Coastal Flooding - Historic Loss Ratio - Total Rating,String,50,Coastal Flooding,Historic Loss Ratio - Total Rating,November 2021
+68,CFLD_EALB,Coastal Flooding - Expected Annual Loss - Building Value,Double,8,Coastal Flooding,Expected Annual Loss - Building Value,November 2021
+69,CFLD_EALP,Coastal Flooding - Expected Annual Loss - Population,Double,8,Coastal Flooding,Expected Annual Loss - Population,November 2021
