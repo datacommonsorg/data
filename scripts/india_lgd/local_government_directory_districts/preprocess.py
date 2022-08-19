@@ -151,6 +151,12 @@ class LocalGovermentDirectoryDistrictsDataLoader:
             get_census2001_code(row),
             axis=1)
 
+    def _get_district_dcid(self, row):
+        return "wikidataId/{0}".format(row["WikiDataId"])
+
+    def _get_state_dcid(self, row):
+        return "wikidataId/{0}".format(self.format_wikidataid(row["state"]))
+
     def _load_and_format_wikidata(self):
         self.wikidata_df = pd.read_csv(self.wikidata_csv, dtype=str)
 
@@ -204,6 +210,12 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         self.clean_df["districtLabelTitleCase"] = self.clean_df[
             "districtLabel"].apply(
                 LocalGovermentDirectoryDistrictsDataLoader.format_title)
+
+        # Format the DCIDs
+        self.clean_df['StateDCID'] = self.clean_df.apply(
+            lambda row: self._get_state_dcid(row), axis=1)
+        self.clean_df['DistrictDCID'] = self.clean_df.apply(
+            lambda row: self._get_district_dcid(row), axis=1)
 
     def save(self):
         self.clean_df.sort_values(by=["LGDStateCode", "LGDDistrictCode"],
