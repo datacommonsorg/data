@@ -47,13 +47,14 @@ _NAME_PROP_REPLACEMENTS = {
     "Among,": "Among",
     "ACitizen": "A Citizen",
     "To": "To ",
-    "Of": "Of "
+    "Of": "Of ",
+    "To299": "To 299",
+    "To149": "To 149",
+    "Least30": "Least 30",
+    "Normalweight": "Normal Weight"
 }
 
-_ADDITIONAL_NAME_PROP_REPLACEMENTS = {
-    'Population: ': '',
-    'Among"': 'Among Population"'
-}
+_ADDITIONAL_NAME_PROP_REPLACEMENTS = {' Among': ''}
 
 
 def _update_name_property(name_prop: str) -> str:
