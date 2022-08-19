@@ -74,3 +74,53 @@ The below command will run preprocess_test.py `python3 -m unittest script/us_cen
 
 ### Import Procedure
 The below command will run preprocess.py and generate three output csv, mcf and tmcf.  `python3 script/us_census/pep/population_estimate_by_sr/preprocess.py`
+
+### Additional Notes
+This import has seperate .py script for different year ranges. They are as follow:
+
+1. county_1970_1979.py 
+- This script process as is data for county from year 1970 to 1979.
+
+2. county_1980_1989.py 
+- This script process as is data for county from year 1980 to 1989.
+
+3. county_1990_2000.py 
+- This script process as is data for county from year 1990 to 2000.
+
+4. county_2000_2009.py 
+- This script process as is data for county from year 2000 to 2009.
+
+5. county_2010_2020.py 
+- This script process as is data for county from year 2010 to 2020.
+
+6. state_1970_1979.py 
+- This script process as is data for state from year 1970 to 1979.
+
+7. state_1980_1990.py 
+- This script process as is data for state from year 1980 to 1990.
+
+8. state_1990_2000.py 
+- This script process as is data for state from year 1990 to 2000.
+
+9. state_2000_2010.py 
+- This script process as is data for state from year 2000 to 2010.
+
+10. state_2010_2020.py 
+- This script aggregates data from county level to state level from year 2010 to 2020.
+
+11. national_1900_1970.py 
+- This script process as is data for national from year 1900 to 1970.
+
+12. national_1980_1990.py 
+- This script aggregates data from state level to national level from year 1980 to 1990.
+
+13. national_1990_2000.py 
+- This script aggregates data from state level to national level from year 1990 to 2000.
+
+14. national_2000_2010.py 
+- This script process as is data for national from year 2000 to 2010.
+
+15. national_2010_2020.py 
+- This script aggregates data from state level to national level from year 2010 to 2020.
+
+All these scripts are processed by running preprocess.py script.
