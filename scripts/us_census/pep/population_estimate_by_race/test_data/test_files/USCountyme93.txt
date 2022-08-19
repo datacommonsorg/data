@@ -1,0 +1,35 @@
+"(CO-99-11)  Population Estimates for Counties by Race and Hispanic Origin:  July 1, 1993"
+"Source:  Population Estimates Program, Population Division, U.S. Census Bureau, Washington, DC  20233"
+"Contact:  Demographic Call Center Staff, 1-866-758-1060 "
+          pop@census.gov (please include a phone number with email correspondence)
+"Internet Release Date:  August 30, 2000"
+                                             Total    Total    White    White    Total    Total    Total    Total
+  FIPS                                                White Hispanic     non-    Black American  Asian & Hispanic
+ State                                                               Hispanic            Indian  Pacific         
+   and                                                                                 & Alaska Islander         
+County Area Name                                                                         Native                  
+  Code                                                                                                           
+ 23000     MAINE                           1238256  1219379     6509  1212870     5278     5971     7628     7176
+ 23001 Androscoggin County                  103725   102340      724   101616      512      237      636      846
+ 23003 Aroostook County                      85993    83825      508    83317      952      762      454      573
+ 23005 Cumberland County                    244893   240303     1418   238885     1519      646     2425     1621
+ 23007 Franklin County                       29067    28852      110    28742       32       85       98      112
+ 23009 Hancock County                        48508    48058      286    47772      111      175      164      297
+ 23011 Kennebec County                      116923   115691      507   115184      270      374      588      537
+ 23013 Knox County                           37121    36842      143    36699       64      117       98      145
+ 23015 Lincoln County                        30843    30699      117    30582       21       80       43      118
+ 23017 Oxford County                         52744    52428      197    52231       68      101      147      212
+ 23019 Penobscot County                     146980   144087      675   143412      555     1271     1067      739
+ 23021 Piscataquis County                    18714    18566       66    18500       19       72       57       67
+ 23023 Sagadahoc County                      33800    33102      303    32799      329       76      293      341
+ 23025 Somerset County                       50984    50615      177    50438       75      161      133      191
+ 23027 Waldo County                          34688    34467      165    34302       50       85       86      178
+ 23029 Washington County                     36080    34515      141    34374       79     1395       91      148
+ 23031 York County                          167193   164989      972   164017      622      334     1248     1051
+Note:  Hispanics can be of any race.
+An explanation of the race and Hispanic origin categories used in this table can be found at
+www.census.gov/population/estimates/rho.txt
+The estimates presented here were produced by a method which is still in a developmental stage.  They
+may not be accurate for populations which are very small or have unusual race distributions and they may not
+reflect recent changes in the distribution of the population with respect to race and Hispanic origin.  These
+figures should be used with caution.
