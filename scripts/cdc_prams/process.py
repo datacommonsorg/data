@@ -24,7 +24,6 @@ import numpy as np
 from absl import app, flags
 # from util.alpha2_to_dcid import COUNTRY_MAP
 import tabula as tb
-from download import download_file
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
@@ -41,9 +40,6 @@ from statvar import statvar_col
 from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP,_PROP,
                         _TIME,_INSURANCE,_PROP4,_PV_PROP,_YEAR)
 
-# sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
-
-
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
@@ -53,23 +49,22 @@ flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 def prams(input_url: list, statvar_col:dict) -> pd.DataFrame:
     final_df = pd.DataFrame()
-    statVar = [['Geo','SV','Year','Observation']]
-    df3 = pd.DataFrame(columns=statVar)
-    df3 = df3.to_csv('PRAMS.csv', index=False)
+    df_all = pd.DataFrame()
     sv_names = []
     for file in input_url:
         data = tb.read_pdf(file, pages = 'all')
         df = pd.concat(data)
         file_name = os.path.basename(file)
         df['Geo'] = file_name.replace('-PRAMS-MCH-Indicators-508.pdf','').\
-            replace('-',' ').replace('District Columbia','District of Columbia')
+        replace('-',' ').replace('District Columbia','District of Columbia')\
+        .replace('New York City','geoId/3651000').replace('All Sites','country/USA')
         print(file_name.replace('-PRAMS-MCH-Indicators-508.pdf',''))
         df.reset_index(drop=True, inplace=True)
         df = df.drop(['Unnamed: 0','Unnamed: 1','Unnamed: 2','Unnamed: 3','Unnamed: 4'], 1)
         df.columns = ['statVar', '2016_CI', '2017_sampleSize', '2017_CI', 
         '2018_sampleSize', '2018_CI', '2019_sampleSize', '2019_CI', 
         '2020_sampleSize', '2020_CI', 'Overall_2020_CI','Geo']
-        df.insert(1,'2016_sampleSize', np.NaN)
+        df.insert(1,'2016_sampleSize', np.NaN)   
         final_df = df.copy()
         final_df['statVar'] = final_df['statVar'].str.replace('• ', '')
 
@@ -147,7 +142,6 @@ def prams(input_url: list, statvar_col:dict) -> pd.DataFrame:
         df2['sub_header_delete_flag'] = df2['sub_header']
         df2['sub_header_delete_flag'] = df2['sub_header_delete_flag'].fillna("")
         df2['sub_header'] = df2['sub_header'].fillna(method='ffill', limit=2)
-
         index = df2[df2['statVar']=='Postpartum'].index.values[0]
         df2.loc[index,'sub_header'] = "Any cigarette smoking"
         df2['sub_header'] = df2['sub_header'].fillna("")
@@ -155,12 +149,13 @@ def prams(input_url: list, statvar_col:dict) -> pd.DataFrame:
         df2['newStatVar'] = df2['main_header']+"_"+df2['sub_header']+"_"+df2['statVar']
         df2 = df2.loc[(df2['main_header_delete_flag']=='')]
         df2 = df2.loc[(df2['sub_header_delete_flag']=='')]
-        df2 = df2.drop(columns=['statVar','main_header_delete_flag','sub_header','main_header','sub_header_delete_flag'])
+        df2 = df2.drop(columns=['statVar','main_header_delete_flag','sub_header'
+        ,'main_header','sub_header_delete_flag'])
         df2['SV'] = df2['newStatVar']
         df2 = df2.replace({'SV': statvar_col})
         df2 = df2.replace({'Geo': _PLACE_MAP})
         df2 = df2.reset_index(drop=True)
-        split_col = ['2016_CI','2017_CI','2018_CI','2019_CI','2020_CI','Overall_2020_CI']
+        split_col = ['2016_CI','2017_CI','2018_CI','2019_CI','2020_CI']
         for i in split_col:
             df2[i] = df2[i].fillna(pd.NA)
             temp_df = df2[i].str.split(r"\s+|-", expand=True)
@@ -174,69 +169,62 @@ def prams(input_url: list, statvar_col:dict) -> pd.DataFrame:
                 temp_df[i+'_LOWER'] = temp_df[i+'_LOWER'].str.replace('(','')
                 temp_df[i+'_UPPER'] = temp_df[i+'_UPPER'].str.replace(')','')
             df2 = pd.concat([df2,temp_df],axis=1)
-
-        df2 = df2.drop(columns=['newStatVar','2016_CI','2017_CI','2018_CI','2019_CI','2020_CI','Overall_2020_CI'])
+        df2 = df2.drop(columns=['newStatVar','2016_CI','2017_CI','2018_CI','2019_CI','2020_CI','Overall_2020_CI'])  
         df2 = df2[['Geo', 'SV','2016_sampleSize', '2017_sampleSize', '2018_sampleSize',
-       '2019_sampleSize', '2020_sampleSize',  '2016_CI_PERCENT',
-       '2016_CI_LOWER', '2016_CI_UPPER', '2017_CI_PERCENT', '2017_CI_LOWER',
-       '2017_CI_UPPER', '2018_CI_PERCENT', '2018_CI_LOWER', '2018_CI_UPPER',
-       '2019_CI_PERCENT', '2019_CI_LOWER', '2019_CI_UPPER', '2020_CI_PERCENT',
-       '2020_CI_LOWER', '2020_CI_UPPER', 'Overall_2020_CI_PERCENT',
-       'Overall_2020_CI_LOWER', 'Overall_2020_CI_UPPER']]
+        '2019_sampleSize', '2020_sampleSize',  '2016_CI_PERCENT',
+        '2016_CI_LOWER', '2016_CI_UPPER', '2017_CI_PERCENT', '2017_CI_LOWER',
+        '2017_CI_UPPER', '2018_CI_PERCENT', '2018_CI_LOWER', '2018_CI_UPPER',
+        '2019_CI_PERCENT', '2019_CI_LOWER', '2019_CI_UPPER', '2020_CI_PERCENT',
+        '2020_CI_LOWER', '2020_CI_UPPER']]
+        df2['2018_CI_UPPER'] = df2['2018_CI_UPPER'].replace('.','0.0')
+        df2['2018_CI_LOWER'] = df2['2018_CI_LOWER'].replace('.','0.0')
         sv_melt = ['sample_size','percent_sv','lower_level','upper_level']
-        df_all = pd.DataFrame([])
         for i1 in sv_melt:
-            i = df2.copy()
+            temp_df1 = df2.copy()
             if i1=="sample_size":
-                i['SV'] = 'SampleSize_Count_LivePregnancyEvent_'+df2['SV']
-                i = i.drop(columns=['2016_CI_PERCENT','2017_CI_PERCENT',
-                '2019_CI_PERCENT','2020_CI_PERCENT','Overall_2020_CI_PERCENT',
+                temp_df1['SV'] = 'SampleSize_Count'+df2['SV']
+                temp_df1 = temp_df1.drop(columns=['2016_CI_PERCENT','2017_CI_PERCENT',
+                '2019_CI_PERCENT','2020_CI_PERCENT',
                 '2018_CI_PERCENT','2016_CI_LOWER','2016_CI_UPPER','2017_CI_LOWER',
                 '2017_CI_UPPER','2018_CI_LOWER','2018_CI_UPPER','2019_CI_LOWER',
-                '2019_CI_UPPER','2020_CI_LOWER','2020_CI_UPPER',
-                'Overall_2020_CI_LOWER','Overall_2020_CI_UPPER'	])
-                i = i.melt(id_vars=['Geo','SV'], var_name='Year'\
-                        ,value_name='observation')
+                '2019_CI_UPPER','2020_CI_LOWER','2020_CI_UPPER'])
+                temp_df1 = temp_df1.melt(id_vars=['Geo','SV'], var_name='Year'\
+                        ,value_name='Observation')
             elif i1=="percent_sv":
-                i['SV'] = 'Percent_LivePregnancyEvent_'+df2['SV']
-                i = i.drop(columns=['2016_sampleSize','2017_sampleSize',
+                temp_df1['SV'] = 'Percent'+df2['SV']
+                temp_df1 = temp_df1.drop(columns=['2016_sampleSize','2017_sampleSize',
                 '2018_sampleSize','2019_sampleSize','2020_sampleSize',
                 '2016_CI_LOWER','2016_CI_UPPER','2017_CI_LOWER','2017_CI_UPPER',
                 '2018_CI_LOWER','2018_CI_UPPER','2019_CI_LOWER','2019_CI_UPPER',
-                '2020_CI_LOWER','2020_CI_UPPER','Overall_2020_CI_LOWER',
-                'Overall_2020_CI_UPPER'])
-                i = i.melt(id_vars=['Geo','SV'], var_name='Year'\
-                        ,value_name='observation')
+                '2020_CI_LOWER','2020_CI_UPPER'])
+                temp_df1 = temp_df1.melt(id_vars=['Geo','SV'], var_name='Year'\
+                        ,value_name='Observation')
             elif i1=="lower_level":
-                i['SV'] = 'ConfidenceIntervalLowerLimit_Count_LivePregnancyEvent_'+df2['SV']
-                i = i.drop(columns=['2016_sampleSize','2017_sampleSize',
+                temp_df1['SV'] = 'ConfidenceIntervalLowerLimit_Count'+df2['SV']
+                temp_df1 = temp_df1.drop(columns=['2016_sampleSize','2017_sampleSize',
                 '2018_sampleSize','2019_sampleSize','2020_sampleSize',
                 '2016_CI_UPPER','2017_CI_UPPER','2018_CI_UPPER','2019_CI_UPPER',
-                '2020_CI_UPPER','Overall_2020_CI_UPPER','2016_CI_PERCENT',
+                '2020_CI_UPPER','2016_CI_PERCENT',
                 '2017_CI_PERCENT','2019_CI_PERCENT','2020_CI_PERCENT',
-                '2018_CI_PERCENT','Overall_2020_CI_PERCENT'])
-                i = i.melt(id_vars=['Geo','SV'], var_name='Year'\
-                        ,value_name='observation')
+                '2018_CI_PERCENT'])
+                temp_df1 = temp_df1.melt(id_vars=['Geo','SV'], var_name='Year'\
+                        ,value_name='Observation')
             elif i1=="upper_level":
-                i['SV'] = 'ConfidenceIntervalUpperLimit_Count_LivePregnancyEvent_'+df2['SV']
-                i = i.drop(columns=['2016_sampleSize','2017_sampleSize',
+                temp_df1['SV'] = 'ConfidenceIntervalUpperLimit_Count'+df2['SV']
+                temp_df1 = temp_df1.drop(columns=['2016_sampleSize','2017_sampleSize',
                 '2018_sampleSize','2019_sampleSize','2020_sampleSize',
                 '2016_CI_LOWER','2017_CI_LOWER','2018_CI_LOWER','2019_CI_LOWER',
-                '2020_CI_LOWER','Overall_2020_CI_LOWER','2016_CI_PERCENT',
+                '2020_CI_LOWER','2016_CI_PERCENT',
                 '2017_CI_PERCENT','2019_CI_PERCENT','2020_CI_PERCENT',
-                '2018_CI_PERCENT','Overall_2020_CI_PERCENT'])
-                i = i.melt(id_vars=['Geo','SV'], var_name='Year'\
-                        ,value_name='observation')
-            df_all = pd.concat([df_all,i],axis=0)
+                '2018_CI_PERCENT'])
+                temp_df1 = temp_df1.melt(id_vars=['Geo','SV'], var_name='Year'\
+                        ,value_name='Observation')
+            df_all = pd.concat([df_all,temp_df1],axis=0)
         # Replacing Year column with the correct Values.
         for old,new in _YEAR.items():
             df_all['Year'] = df_all['Year'].replace(old,new)
         df_all.reset_index(drop=True, inplace=True)
-        df_all = df_all.sort_values(by=['Geo'], kind="stable")
-        df_all.to_csv('PRAMS.csv', mode="a", index=False,header=False)
-        sv_names += df_all["SV"].to_list()
-        sv_names = list(set(sv_names))
-    return sv_names    
+    return df_all    
 
 class US_Prams:
     """
@@ -331,8 +319,8 @@ class US_Prams:
 
                 if "Underweight" in prop or "Overweight" in prop or\
                     "Obese" in prop:
-                    pvs.append(f"mothersHealthBehaviour: dcs:{prop1}")
-                    sv_pvs["mothersHealthBehaviour"] = f"dcs:{prop1}"
+                    pvs.append(f"mothersHealthBehavior: dcs:{prop1}")
+                    sv_pvs["mothersHealthBehavior"] = f"dcs:{prop1}"
 
                 if "HealthCareVisit12MonthsBeforePregnancy"in prop or\
                         "PrenatalCareInFirstTrimester" in prop or\
@@ -351,21 +339,22 @@ class US_Prams:
                     "ECigaretteSmokingLast3MonthsOfPregnancy" in prop:
                     pvs.append(f"tobaccoUsageType: dcs:{prop4}")
                     sv_pvs["tobaccoUsageType"] = f"dcs:{prop4}"
-                    pvs.append(f"mothersHealthBehaviour: dcs:{prop1}")
-                    sv_pvs["mothersHealthBehaviour"] = f"dcs:{prop1}"
+                    pvs.append(f"mothersHealthBehavior: dcs:{prop1}")
+                    sv_pvs["mothersHealthBehavior"] = f"dcs:{prop1}"
                     sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop3}"
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
 
                 elif "HookahInLast2Years" in prop or "HeavyDrinking3MonthsBeforePregnancy" in prop:
-                    pvs.append(f"mothersHealthBehaviour: dcs:{prop1}")
-                    sv_pvs["mothersHealthBehaviour"] = f"dcs:{prop1}"
+                    pvs.append(f"mothersHealthBehavior: dcs:{prop1}")
+                    sv_pvs["mothersHealthBehavior"] = f"dcs:{prop1}"
                     sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop3}"
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
 
-                elif "IntimatePartnerViolenceByCurrentPartnerOrHusband" in prop or\
-                    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband" in prop:
-                    pvs.append(f"intimatePartnerViolence: dcs:{prop4}")
-                    sv_pvs["intimatePartnerViolence"] = f"dcs:{prop4}"
+                elif "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband" in prop:
+                    pvs.append(f"intimatePartnerViolence: dcs:{prop1}")
+                    sv_pvs["intimatePartnerViolence"] = f"dcs:{prop1}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop3}"
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
 
                 elif "MistimedPregnancy" in prop or "UnwantedPregnancy" in prop or\
                     "UnsureIfWantedPregnancy" in prop or "IntendedPregnancy" in prop :
@@ -424,7 +413,7 @@ class US_Prams:
                 _MCF_TEMPLATE.format(dcid=resolved_dcid, xtra_pvs='\n'.join(pvs)))
         mcf = '\n'.join(mcf_nodes)
         # Writing Genereated MCF to local path.
-        with open(mcf_file_path, 'w+', encoding='utf-8') as f_out:
+        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(mcf.rstrip('\n'))
         return dcid_nodes
 
@@ -435,23 +424,31 @@ class US_Prams:
         Arguments: None
         Returns: None
         """
+        sv_names = []
+        df_all = prams(self.input_files,statvar_col)
+        sv_names += df_all["SV"].to_list()
+        sv_names = list(set(sv_names))
+        sv_names.sort()
+        updated_sv = self._generate_mcf(sv_names, self.mcf_file_path)
+        df_all["SV"] = df_all["SV"].map(updated_sv)
         # Creating Output Directory
         output_path = os.path.dirname(self.cleaned_csv_file_path)
         if not os.path.exists(output_path):
             os.mkdir(output_path)
-        sv_list = prams(self.input_files,statvar_col)
-        # df2.to_csv(self.cleaned_csv_file_path, index=False,header=False)
-        self._generate_mcf(sv_list,self.mcf_file_path)
         self._generate_tmcf()
+        df_all = df_all.sort_values(by=["Geo"])
+        df_all.to_csv(self.cleaned_csv_file_path, index=False)
 
 def main(_):
     input_path = _FLAGS.input_path
+    input_path = "/Users/chharish/us_prams/data/scripts/cdc_prams/input_files_copy"
+    # input_path = "/Users/chharish/us_prams/data/scripts/cdc_prams/test_data/datasets"
     if not os.path.exists(input_path):
         os.mkdir(input_path)
-    ip_files = os.listdir(input_path)
-    ip_files = [os.path.join(input_path, file) for file in ip_files]
-    # ip_files = ["/Users/chharish/us_prams/data/scripts/cdc_prams/input_files/"+
-    #     "Alabama-PRAMS-MCH-Indicators-508.pdf"]
+    ip_files_copy = os.listdir(input_path)
+    ip_files_copy = [os.path.join(input_path, file) for file in ip_files_copy]
+    # ip_files_copy = ["/Users/chharish/us_prams/data/scripts/cdc_prams/input_files/"+
+    # "Iowa-PRAMS-MCH-Indicators-508.pdf"]
     # Defining Output Files
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "output")
@@ -461,7 +458,7 @@ def main(_):
     tmcf_path = os.path.join(data_file_path, tmcf_name)
     mcf_path = os.path.join(data_file_path, mcf_name)
     cleaned_csv_path = os.path.join(data_file_path, csv_name)
-    loader = US_Prams(ip_files, cleaned_csv_path,mcf_path,tmcf_path)
+    loader = US_Prams(ip_files_copy, cleaned_csv_path,mcf_path,tmcf_path)
     loader.process()
 
 if __name__ == "__main__":

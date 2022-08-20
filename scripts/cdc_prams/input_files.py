@@ -33,6 +33,7 @@ flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
 
 def download_files(download_directory: str) -> None:
     input_url = [
+        'All-Sites-PRAMS-MCH-Indicators-508.pdf',
         'Alabama-PRAMS-MCH-Indicators-508.pdf',
         'Alaska-PRAMS-MCH-Indicators-508.pdf',
         'Arizona-PRAMS-MCH-Indicators-508.pdf',

@@ -2,21 +2,20 @@
   "levelSummary": {
     "LEVEL_INFO": {
       "counters": {
-        "Existence_NumChecks": "2945",
-        "Existence_NumDcCalls": "2"
+        "NumRowSuccesses": "40320",
+        "NumPVSuccesses": "262080",
+        "Existence_NumChecks": "232205",
+        "NumNodeSuccesses": "32760",
+        "Existence_NumDcCalls": "3"
       }
     },
     "LEVEL_WARNING": {
       "counters": {
-        "Existence_MissingReference_statType": "44",
-        "Existence_MissingReference_healthInsuranceStatusOneMonthBeforePregnancy": "4",
-        "Existence_MissingReference_populationType": "176",
-        "Existence_MissingTriple_domainIncludes": "132",
-        "API_EmptyDcCallResponse": "1",
-        "Existence_MissingReference_healthInsuranceStatusForPrenatalCare": "4",
-        "Existence_MissingReference_healthInsuranceStatusPostpartum": "4",
-        "Existence_MissingReference_Property": "40",
-        "Existence_MissingReference_timePeriodRelativeToPregnancy": "12"
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "23",
+        "Existence_MissingTriple_domainIncludes": "126",
+        "StrSplit_EmptyToken_value": "7560",
+        "Sanity_MissingOrEmpty_value": "7560",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "3"
       }
     }
   },
@@ -24,1154 +23,1217 @@
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "144"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:SampleSize_Count_WithPrivateHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "243"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:Percent_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "353"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:SampleSize_Count_NoHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "494"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "688"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_NoHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "741"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_WithPrivateHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "884"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_NoHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "980"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1059"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:Percent_NoHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1229"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:Percent_WithPrivateHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1287"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_WithPrivateHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1320"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: '1MonthBeforePregnancy', property: 'timePeriodRelativeToPregnancy', node: 'dcid:SampleSize_Count_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_timePeriodRelativeToPregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
       "lineNumber": "1"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_WithPrivateHealthInsurance_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband_12MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
       "lineNumber": "10"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:Percent_Medicaid_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_HeavyDrinking_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
       "lineNumber": "19"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_PrenatalCare_FirstTrimester_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_Overweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "28"
+      "lineNumber": "35"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:Percent_LiveBirthPregnancyEvent_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "38"
+      "lineNumber": "45"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_Smoking_Last3MonthsOfPregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_SelfReportedDepression_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "48"
+      "lineNumber": "54"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_AnyPostpartumFamilyPlanning_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:Percent_LiveBirthPregnancyEvent_HealthCareVisit_12MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "56"
+      "lineNumber": "63"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "64"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_SelfReportedDepression_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "73"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_IntendedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_FluShot_12MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
       "lineNumber": "81"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_Smoking_Postpartum_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_UnsureIfWantedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "91"
+      "lineNumber": "98"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_TeethCleanedByDentistOrHygienist_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_AnyPostpartumFamilyPlanning_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "100"
+      "lineNumber": "106"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Smoking_3MonthsBeforePregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "110"
+      "lineNumber": "116"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_HealthCareVisit_12MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_UnwantedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "119"
+      "lineNumber": "124"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_LongActingReversibleContraceptiveMethods_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_LongActingReversibleContraceptiveMethods_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "127"
+      "lineNumber": "132"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_MistimedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:Percent_LiveBirthPregnancyEvent_IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "135"
+      "lineNumber": "150"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:Percent_TeethCleanedByDentistOrHygienist_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_UnsureIfWantedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "144"
+      "lineNumber": "168"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_WithPrivateHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:Percent_LiveBirthPregnancyEvent_Obesity_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "153"
+      "lineNumber": "219"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_UnsureIfWantedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_MoreThan4TimesAWeek_MultivitaminUse_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "161"
+      "lineNumber": "228"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_Underweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_Smoking_3MonthsBeforePregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "169"
+      "lineNumber": "238"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_ModeratelyEffectiveContraceptiveMethods_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "176"
+      "lineNumber": "254"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_BabyMostOftenLaidOnBackToSleep_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:Percent_LiveBirthPregnancyEvent_HookahUsage_Last2YearsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "184"
+      "lineNumber": "263"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:Percent_WithPrivateHealthInsurance_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_Smoking_Last3MonthsOfPregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "193"
+      "lineNumber": "273"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:Percent_Underweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_Obesity_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "201"
+      "lineNumber": "281"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:Percent_BabyMostOftenLaidOnBackToSleep_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:Percent_LiveBirthPregnancyEvent_ModeratelyEffectiveContraceptiveMethods_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "209"
+      "lineNumber": "307"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Overweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_Smoking_Last3MonthsOfPregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "217"
+      "lineNumber": "317"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Smoking_Last3MonthsOfPregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "227"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:SampleSize_Count_BabyMostOftenLaidOnBackToSleep_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "235"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_AnyPostpartumFamilyPlanning_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "243"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:Percent_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "252"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'LivePregnancyEvent', property: 'populationType', node: 'dcid:Percent_AnyBreastfeedingAt8Weeks_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_populationType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "10"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusPostpartum', node: 'dcid:Percent_Medicaid_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusPostpartum"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "243"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusOneMonthBeforePregnancy', node: 'dcid:Percent_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusOneMonthBeforePregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "494"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusOneMonthBeforePregnancy', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusOneMonthBeforePregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "613"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusForPrenatalCare', node: 'dcid:SampleSize_Count_Medicaid_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusForPrenatalCare"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "621"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusForPrenatalCare', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_Medicaid_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusForPrenatalCare"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "851"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusForPrenatalCare', node: 'dcid:Percent_Medicaid_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusForPrenatalCare"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "980"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusOneMonthBeforePregnancy', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusOneMonthBeforePregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1068"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusPostpartum', node: 'dcid:SampleSize_Count_Medicaid_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusPostpartum"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1077"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusPostpartum', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_Medicaid_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusPostpartum"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1320"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusOneMonthBeforePregnancy', node: 'dcid:SampleSize_Count_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusOneMonthBeforePregnancy"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1438"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusForPrenatalCare', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Medicaid_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusForPrenatalCare"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1464"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'Medicaid', property: 'healthInsuranceStatusPostpartum', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Medicaid_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_healthInsuranceStatusPostpartum"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "28"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:SampleSize_Count_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "38"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:SampleSize_Count_Smoking_Last3MonthsOfPregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "81"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:SampleSize_Count_Smoking_Postpartum_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "100"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Smoking_3MonthsBeforePregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "161"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:SampleSize_Count_Underweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "193"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:Percent_Underweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "209"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Overweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "217"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Smoking_Last3MonthsOfPregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "318"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_HookahUsage_Last2YearsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "388"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_HeavyDrinking_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "397"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:Percent_Smoking_3MonthsBeforePregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "434"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:SampleSize_Count_Overweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "474"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:SampleSize_Count_Smoking_3MonthsBeforePregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "484"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_Smoking_Postpartum_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "527"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_HeavyDrinking_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "544"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:Percent_HeavyDrinking_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "569"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_Smoking_Last3MonthsOfPregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "604"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:SampleSize_Count_HookahUsage_Last2YearsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "647"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Underweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "706"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:Percent_Overweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "722"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_Smoking_3MonthsBeforePregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "750"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Smoking_Postpartum_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "792"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:SampleSize_Count_Smoking_3MonthsBeforePregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "811"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Obesity_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "819"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:Percent_Obesity_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "918"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Smoking_3MonthsBeforePregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "962"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:Percent_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "989"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_Smoking_3MonthsBeforePregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "999"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_Overweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1024"
-    },
-    "userMessage": "Failed reference existence check :: property-ref: 'mothersHealthBehaviour', node: 'dcid:Percent_Smoking_Postpartum_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_Property"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_WithPrivateHealthInsurance_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "28"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "38"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_Smoking_Last3MonthsOfPregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "48"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_AnyPostpartumFamilyPlanning_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "56"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "81"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_Smoking_Postpartum_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "127"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_MistimedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "144"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_WithPrivateHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "153"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_UnsureIfWantedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "161"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_Underweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "227"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_BabyMostOftenLaidOnBackToSleep_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "277"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_LongActingReversibleContraceptiveMethods_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:Percent_LiveBirthPregnancyEvent_Smoking_3MonthsBeforePregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
       "lineNumber": "327"
     },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_ModeratelyEffectiveContraceptiveMethods_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "335"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_PrenatalCare_FirstTrimester_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "353"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_NoHealthInsurance_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "425"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_MaternalCheckup_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "434"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_Overweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "442"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "474"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_Smoking_3MonthsBeforePregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "604"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_HookahUsage_Last2YearsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "613"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_Medicaid_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "629"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_SelfReportedDepression_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "775"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_AnyBreastfeedingAt8Weeks_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "783"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_HealthCareVisit_12MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "792"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_Smoking_3MonthsBeforePregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "859"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_MaleOrFemaleSterilization_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "875"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_NoHealthInsurance_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "901"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_TeethCleanedByDentistOrHygienist_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "953"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_SelfReportedDepression_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "1034"
-    },
-    "userMessage": "Failed reference existence check :: value-ref: 'sampleSize', property: 'statType', node: 'dcid:SampleSize_Count_IntendedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingReference_statType"
-  }, {
-    "level": "LEVEL_WARNING",
-    "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "10"
-    },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_Medicaid_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_HookahUsage_Last2YearsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
     "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "19"
+      "lineNumber": "336"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_PrenatalCare_FirstTrimester_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_TeethCleanedByDentistOrHygienist_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
     "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "64"
+      "lineNumber": "355"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_SelfReportedDepression_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_HealthCareVisit_12MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
     "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "73"
+      "lineNumber": "364"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_IntendedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:Percent_LiveBirthPregnancyEvent_MaleOrFemaleSterilization_AsAFractionOf_Count_BirthEvent_LiveBirth'",
     "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "91"
+      "lineNumber": "372"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_TeethCleanedByDentistOrHygienist_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_PrenatalCare_FirstTrimester_AsAFractionOf_Count_BirthEvent_LiveBirth'",
     "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "PRAMS.mcf",
-      "lineNumber": "100"
+      "lineNumber": "381"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Smoking_3MonthsBeforePregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
+    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LiveBirthPregnancyEvent', node: 'dcid:Percent_LiveBirthPregnancyEvent_PrenatalCare_FirstTrimester_AsAFractionOf_Count_BirthEvent_LiveBirth'",
     "counterKey": "Existence_MissingTriple_domainIncludes"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "110"
+      "file": "PRAMS.csv",
+      "lineNumber": "1682"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_HealthCareVisit_12MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "119"
+      "file": "PRAMS.csv",
+      "lineNumber": "1682"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_LongActingReversibleContraceptiveMethods_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "135"
+      "file": "PRAMS.csv",
+      "lineNumber": "1683"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_TeethCleanedByDentistOrHygienist_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "169"
+      "file": "PRAMS.csv",
+      "lineNumber": "1683"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "176"
+      "file": "PRAMS.csv",
+      "lineNumber": "1684"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_BabyMostOftenLaidOnBackToSleep_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "184"
+      "file": "PRAMS.csv",
+      "lineNumber": "1684"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_WithPrivateHealthInsurance_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "193"
+      "file": "PRAMS.csv",
+      "lineNumber": "1685"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_Underweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "201"
+      "file": "PRAMS.csv",
+      "lineNumber": "1685"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_BabyMostOftenLaidOnBackToSleep_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "209"
+      "file": "PRAMS.csv",
+      "lineNumber": "1686"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Overweight_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "217"
+      "file": "PRAMS.csv",
+      "lineNumber": "1686"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_Smoking_Last3MonthsOfPregnancy_Cigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "235"
+      "file": "PRAMS.csv",
+      "lineNumber": "1687"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_AnyPostpartumFamilyPlanning_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "243"
+      "file": "PRAMS.csv",
+      "lineNumber": "1687"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_Medicaid_1MonthBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "252"
+      "file": "PRAMS.csv",
+      "lineNumber": "1688"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_AnyBreastfeedingAt8Weeks_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "260"
+      "file": "PRAMS.csv",
+      "lineNumber": "1688"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_UnwantedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "268"
+      "file": "PRAMS.csv",
+      "lineNumber": "1689"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_HealthCareVisit_12MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "285"
+      "file": "PRAMS.csv",
+      "lineNumber": "1689"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_WithPrivateHealthInsurance_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "293"
+      "file": "PRAMS.csv",
+      "lineNumber": "1690"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_SelfReportedDepression_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "302"
+      "file": "PRAMS.csv",
+      "lineNumber": "1690"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_UnsureIfWantedPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "310"
+      "file": "PRAMS.csv",
+      "lineNumber": "1691"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalUpperLimit_Percent_MaleOrFemaleSterilization_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "318"
+      "file": "PRAMS.csv",
+      "lineNumber": "1691"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_HookahUsage_Last2YearsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "344"
+      "file": "PRAMS.csv",
+      "lineNumber": "1692"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_SelfReportedDepression_Postpartum_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "362"
+      "file": "PRAMS.csv",
+      "lineNumber": "1692"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:Percent_MoreThan4TimesAWeek_MultivitaminUse_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "371"
+      "file": "PRAMS.csv",
+      "lineNumber": "1693"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_SelfReportedDepression_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
   }, {
     "level": "LEVEL_WARNING",
     "location": {
-      "file": "PRAMS.mcf",
-      "lineNumber": "380"
+      "file": "PRAMS.csv",
+      "lineNumber": "1693"
     },
-    "userMessage": "Failed triple existence check :: subject: 'percent', predicate: 'domainIncludes', object: 'LivePregnancyEvent', node: 'dcid:ConfidenceIntervalLowerLimit_Percent_LeastEffectiveContraceptiveMethods_AsAFractionOf_Count_BirthEvent_LiveBirth'",
-    "counterKey": "Existence_MissingTriple_domainIncludes"
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1694"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1694"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1695"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1695"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1696"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1696"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1697"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1697"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1698"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1698"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1699"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1699"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1700"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1700"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1701"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1701"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1702"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1702"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1703"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1703"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1704"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1704"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1705"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1705"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1706"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1706"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1707"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1707"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1708"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1708"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1709"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1709"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1710"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1710"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1711"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Observation', property: 'value', node: 'E:US_Prams->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "PRAMS.csv",
+      "lineNumber": "1711"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:US_Prams->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "geoId/19",
+    "statVarDcid": "Percent_LiveBirthPregnancyEvent_NoHealthInsurance_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.6",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "331"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3.6",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "373"
+          }]
+        }]
+      }],
+      "percentDifference": 125.0
+    }]
+  }, {
+    "placeDcid": "geoId/19",
+    "statVarDcid": "ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_NoHealthInsurance_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.5",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "751"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "6.6",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "793"
+          }]
+        }]
+      }],
+      "percentDifference": 164.0
+    }]
+  }, {
+    "placeDcid": "geoId/19",
+    "statVarDcid": "ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_HeavyDrinking_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.7",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "432"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.3",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "474"
+          }]
+        }]
+      }],
+      "percentDifference": 228.57
+    }]
+  }, {
+    "placeDcid": "geoId/19",
+    "statVarDcid": "Percent_LiveBirthPregnancyEvent_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.3",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "304"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.8",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "346"
+          }]
+        }]
+      }],
+      "percentDifference": 500.0
+    }]
+  }, {
+    "placeDcid": "geoId/19",
+    "statVarDcid": "ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.0",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "514"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.8",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "556"
+          }]
+        }]
+      }],
+      "percentDifference": 8.0E7
+    }]
+  }, {
+    "placeDcid": "geoId/19",
+    "statVarDcid": "Percent_LiveBirthPregnancyEvent_HeavyDrinking_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.4",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "222"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3.8",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "264"
+          }]
+        }]
+      }],
+      "percentDifference": 171.43
+    }]
+  }, {
+    "placeDcid": "geoId/19",
+    "statVarDcid": "ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_HeavyDrinking_3MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.8",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "642"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "6.2",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "684"
+          }]
+        }]
+      }],
+      "percentDifference": 121.43
+    }]
+  }, {
+    "placeDcid": "geoId/19",
+    "statVarDcid": "ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_Underweight_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.8",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "423"
+          }]
+        }]
+      }, {
+        "date": "2017",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3.8",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "465"
+          }]
+        }]
+      }],
+      "percentDifference": 111.11
+    }]
+  }, {
+    "placeDcid": "geoId/19",
+    "statVarDcid": "ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.9",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "724"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "4.3",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "766"
+          }]
+        }]
+      }],
+      "percentDifference": 126.32
+    }]
+  }, {
+    "placeDcid": "geoId/10",
+    "statVarDcid": "Percent_LiveBirthPregnancyEvent_IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband_12MonthsBeforePregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2019",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.0",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "2869"
+          }]
+        }]
+      }, {
+        "date": "2020",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "4.3",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "2911"
+          }]
+        }]
+      }],
+      "percentDifference": 115.0
+    }]
+  }, {
+    "placeDcid": "geoId/10",
+    "statVarDcid": "ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband_DuringPregnancy_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2019",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.0",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "3290"
+          }]
+        }]
+      }, {
+        "date": "2020",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "4.2",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "3332"
+          }]
+        }]
+      }],
+      "percentDifference": 110.0
+    }]
+  }, {
+    "placeDcid": "geoId/10",
+    "statVarDcid": "ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.2",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "3034"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.3",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "3076"
+          }]
+        }]
+      }],
+      "percentDifference": 550.0
+    }]
+  }, {
+    "placeDcid": "geoId/3651000",
+    "statVarDcid": "ConfidenceIntervalLowerLimit_Percent_LiveBirthPregnancyEvent_Smoking_Last3MonthsOfPregnancy_ECigarettes_AsAFractionOf_Count_BirthEvent_LiveBirth",
+    "measurementMethod": "",
+    "observationPeriod": "",
+    "scalingFactor": "100",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.0",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "28234"
+          }]
+        }]
+      }, {
+        "date": "2019",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.2",
+            "column": "Observation"
+          },
+          "locations": [{
+            "file": "PRAMS.csv",
+            "lineNumber": "28276"
+          }]
+        }]
+      }],
+      "percentDifference": 2.0E7
+    }]
   }],
   "commandArgs": {
     "existenceChecks": true,
