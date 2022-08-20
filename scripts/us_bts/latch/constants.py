@@ -58,21 +58,6 @@ _DEFAULT_PROP = lambda prop: prop
 # pylint: enable=unnecessary-lambda-assignment
 # pylint: enable=line-too-long
 
-DEFAULT_SV_PROP = {
-    "typeOf": "dcs:StatisticalVariable",
-    "populationType": "dcs:Household",
-    "statType": "dcs:meanValue",
-    "measurementQualifier": "dcs:EveryWeekday"
-}
-
-MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
-                "typeOf: dcs:StatisticalVariable\n"
-                "populationType: dcs:Household\n"
-                "statType: dcs:meanValue\n"
-                "measurementQualifier: dcs:EveryWeekday\n"
-                "transportationType: dcs:LocalAreaTransportation\n"
-                "{xtra_pvs}\n")
-
 TMCF_TEMPLATE = (
     "Node: E:us_transportation_household->E0\n"
     "typeOf: dcs:StatVarObservation\n"
@@ -134,13 +119,6 @@ INCOMPLETE_ACS = {0: '', 1: '_IncompleteACSSurvey'}
 
 URBAN = {1: "Urban", 2: "SemiUrban", 3: "Rural"}
 
-HHSIZE_NOOFVEHICLES_MAPPER = {
-    "PersonMilesTraveled": "",
-    "PersonTrips": "",
-    "VehicleMilesTraveled": "",
-    "VehicleTrips": ""
-}
-
 RENAME_COLUMNS = {
     "geocode": "geoid",
     "est_pmiles": "pmiles",
@@ -154,10 +132,6 @@ RENAME_COLUMNS = {
 }
 
 PADDING = {"width": 11, "side": "left", "fillchar": "0"}
-
-FORM_SV = ("col:measuredProperty", "str:_", "str:Household",
-           "col:householdSize_numberOfVehicles", "str:_", "col:urban_group",
-           "str:_", "str:EveryWeekday", "str:_", "str:Mean")
 
 CONF_2009_FILE = {
     "input_file_delimiter": "\t",
@@ -206,12 +180,27 @@ CONF_2017_FILE = {
     "year": 2017
 }
 
+DF_DEFAULT_MCF_PROP = [
+    ('statType', 'meanValue', _PV_FORMAT),
+    ('populationType', 'Household', _PV_FORMAT),
+    ('typeOf', 'StatisticalVariable', _PV_FORMAT),
+    ('measurementQualifier', 'EveryWeekday', _PV_FORMAT),
+    ('transportationType', 'LocalAreaTransportation', _PV_FORMAT),
+]
+
+SV_PROP_ORDER = [
+    "typeOf", "populationType", "statType", "measurementQualifier",
+    "measuredProperty", "householdSize", "numberOfVehicles",
+    "transportationType"
+]
+# "transportationType"
+
 FORM_STATVAR = {
-    "placeOfResidenceClassification": {
-        "column": "urban_group",
-        "update_value": _DEFAULT_PROP,
-        "pv_format": _PV_FORMAT
-    },
+    # "placeOfResidenceClassification": {
+    #     "column": "urban_group",
+    #     "update_value": _DEFAULT_PROP,
+    #     "pv_format": _PV_FORMAT
+    # },
     "numberOfVehicles": {
         "column": MELT_VAR_COL,
         "regex": {
@@ -240,23 +229,3 @@ FORM_STATVAR = {
         "pv_format": _PV_FORMAT
     }
 }
-
-DF_DEFAULT_MCF_PROP = [{
-    "column_name": "prop_typeOf",
-    "column_value": '"typeOf": "dcs:StatisticalVariable"'
-}, {
-    "column_name": "prop_populationType",
-    "column_value": '"populationType": "dcs:Household"'
-}, {
-    "column_name": "prop_statType",
-    "column_value": '"statType": "dcs:meanValue"'
-}, {
-    "column_name": "prop_measurementQualifier",
-    "column_value": '"measurementQualifier": "dcs:EveryWeekday"'
-}]
-
-SV_PROP_ORDER = [
-    "typeOf", "populationType", "statType", "measurementQualifier",
-    "measuredProperty", "householdSize", "numberOfVehicles",
-    "placeOfResidenceClassification"
-]

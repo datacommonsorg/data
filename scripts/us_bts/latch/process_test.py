@@ -46,8 +46,8 @@ class TestProcess(unittest.TestCase):
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
+
             self.cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            # t = "/usr/local/google/home/rpatnala/datacommons/git_scripts/area_transportation/data/scripts/us_bts/latch"
             self.mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             self.tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 

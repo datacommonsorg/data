@@ -42,8 +42,6 @@ from constants import *
 # pylint: enable=wildcard-import
 # pylint: enable=unused-wildcard-import
 
-# from mcf_config import MCF_TEMPLATE_MAPPER
-
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
 # pylint: disable=import-error
@@ -100,14 +98,11 @@ def _column_operations(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
     Returns:
         pd.DataFrame: _description_
     """
-
     dtype_conv = conf.get("dtype_conv", {})
-
     for col, dtype in dtype_conv.items():
         data_df[col] = data_df[col].astype(dtype)
 
     cols_mapper = conf.get("col_values_mapper", {})
-
     for col, values_mapper in cols_mapper.items():
         data_df[col] = data_df[col].map(values_mapper)
 
@@ -117,7 +112,6 @@ def _column_operations(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
 def _filter_equals(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
 
     filter_equals = conf.get("equals", False)
-
     if filter_equals:
         for col, value in filter_equals.items():
             data_df = data_df[data_df[col] == value]
@@ -128,7 +122,6 @@ def _filter_equals(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
 def _filter_dropna(data_df: pd.DataFrame, conf: dict):
 
     filter_dropna = conf.get("dropna", False)
-
     if filter_dropna:
         data_df = data_df.dropna(subset=filter_dropna)
 
@@ -225,7 +218,6 @@ def _process_household_transportation(input_file: str,
         fillchar=PADDING["fillchar"])
 
     data_df["location"] = "geoId/" + data_df["geoid"]
-
     data_df["year"] = file_conf["year"]
 
     return data_df
@@ -255,7 +247,6 @@ def _apply_regex(data_df: pd.DataFrame, conf: dict, curr_prop_column: str):
     Returns:
         _type_: _description_
     """
-
     regex = conf.get("regex", False)
 
     if regex:
@@ -263,34 +254,6 @@ def _apply_regex(data_df: pd.DataFrame, conf: dict, curr_prop_column: str):
         position = regex["position"]
         data_df[curr_prop_column] = data_df[curr_prop_column].str.split(
             pattern, expand=True)[position]
-
-    return data_df
-
-
-def _generate_stat_var(data_df):
-    """
-    Generates the stat vars.
-
-    Args:
-        data_df (_type_): _description_
-
-    Returns:
-        _type_: _description_
-    """
-
-    prop_cols = ["prop_" + col for col in SV_PROP_ORDER]
-
-    data_df = data_df.replace('', np.nan)
-
-    data_df['prop_Node'] = '{' + \
-                            data_df[prop_cols].apply(
-                            lambda x: ','.join(x.dropna().astype(str)),
-                            axis=1) + \
-                            '}'
-
-    data_df['prop_Node'] = data_df['prop_Node'].apply(json.loads)
-    data_df['sv'] = data_df['prop_Node'].apply(get_statvar_dcid)
-    data_df['prop_Node'] = data_df['sv'].apply(SV_NODE_FORMAT)
 
     return data_df
 
@@ -305,45 +268,102 @@ def _generate_prop(data_df: pd.DataFrame):
     Returns:
         _type_: _description_
     """
+    for prop_, val_, format_ in DF_DEFAULT_MCF_PROP:
+        data_df["prop_" + prop_] = format_((prop_, val_))
 
-    form_stat_var = FORM_STATVAR
+    for prop_ in SV_PROP_ORDER:
+        if "prop_" + prop_ in data_df.columns.values.tolist():
+            continue
 
-    for prop_ in DF_DEFAULT_MCF_PROP:
-        data_df[prop_["column_name"]] = prop_["column_value"]
-
-    for prop, conf in form_stat_var.items():
-        data_df["curr_prop"] = prop
+        conf = FORM_STATVAR[prop_]
+        data_df["curr_prop"] = prop_
         column = conf["column"]
-        curr_value_column = "prop_" + prop
-        data_df[curr_value_column] = data_df[column]
-        data_df = _apply_regex(data_df, conf, curr_value_column)
-        data_df[curr_value_column] = data_df[curr_value_column].apply(
+        curr_value_column = "prop_" + prop_
+        unique_rows = data_df.drop_duplicates(subset=[column]).reset_index(
+            drop=True)
+        unique_rows[curr_value_column] = unique_rows[column]
+        unique_rows = _apply_regex(unique_rows, conf, curr_value_column)
+        unique_rows[curr_value_column] = unique_rows[curr_value_column].apply(
             conf["update_value"])
-        data_df[curr_value_column] = data_df[["curr_prop", curr_value_column
-                                             ]].apply(conf["pv_format"], axis=1)
+        unique_rows[curr_value_column] = unique_rows[[
+            "curr_prop", curr_value_column
+        ]].apply(conf["pv_format"], axis=1)
+
+        curr_val_mapper = dict(
+            zip(unique_rows[column], unique_rows[curr_value_column]))
+        data_df[curr_value_column] = data_df[column].map(curr_val_mapper)
 
     return data_df
 
 
-def _generate_mcfs(data_df: pd.DataFrame):
+def _generate_stat_vars(data_df: pd.DataFrame, prop_cols: str) -> pd.DataFrame:
     """
-    Generate MCF nodes in the DataFrame data_df.
+    Generates statvars using property columns.
 
     Args:
         data_df (pd.DataFrame): Input DataFrame
+        prop_cols (str): property columns
+
+    Returns:
+        pd.DataFrame: DataFrame including statvar column
+    """
+    data_df['prop_Node'] = '{' + \
+                                data_df[prop_cols].apply(
+                                lambda x: ','.join(x.dropna().astype(str)),
+                                axis=1) + \
+                                '}'
+
+    data_df['prop_Node'] = data_df['prop_Node'].apply(json.loads)
+    data_df['sv'] = data_df['prop_Node'].apply(get_statvar_dcid)
+    data_df['prop_Node'] = data_df['sv'].apply(SV_NODE_FORMAT)
+
+    stat_var_with_dcs = dict(zip(data_df["all_prop"], data_df['prop_Node']))
+    stat_var_without_dcs = dict(zip(data_df["all_prop"], data_df['sv']))
+
+    return (stat_var_with_dcs, stat_var_without_dcs)
+
+
+def _generate_mcf(data_df: pd.DataFrame, prop_cols: list) -> pd.DataFrame:
+
+    data_df['mcf'] = data_df['prop_Node'] + \
+                '\n' + \
+                data_df[prop_cols].apply(
+                func=lambda x: '\n'.join(x.dropna()),
+                axis=1).str.replace('"', '')
+    mcf_mapper = dict(zip(data_df["all_prop"], data_df['mcf']))
+
+    return mcf_mapper
+
+
+def _generate_stat_var_and_mcf(data_df: pd.DataFrame):
+    """
+    Generates the stat vars.
+
+    Args:
+        data_df (_type_): _description_
 
     Returns:
         _type_: _description_
     """
-
     prop_cols = ["prop_" + col for col in SV_PROP_ORDER]
 
-    data_df['mcf'] = data_df['prop_Node'] + \
-                    '\n' + \
-                    data_df[prop_cols].apply(
-                    func=lambda x: '\n'.join(x.dropna()),
-                    axis=1).str.replace('"', '')
+    data_df["all_prop"] = ""
+    for col in prop_cols:
+        data_df["all_prop"] += '_' + data_df[col]
+    unique_props = data_df.drop_duplicates(subset=["all_prop"]).reset_index(
+        drop=True)
 
+    unique_props = unique_props.replace('', np.nan)
+
+    stat_var_with_dcs, stat_var_without_dcs = _generate_stat_vars(
+        unique_props, prop_cols)
+    mcf_mapper = _generate_mcf(unique_props, prop_cols)
+
+    data_df["prop_Node"] = data_df["all_prop"].map(stat_var_with_dcs)
+    data_df["sv"] = data_df["all_prop"].map(stat_var_without_dcs)
+    data_df["mcf"] = data_df["all_prop"].map(mcf_mapper)
+
+    data_df = data_df.drop(columns=["all_prop"]).reset_index(drop=True)
     data_df = data_df.drop(columns=prop_cols).reset_index(drop=True)
 
     return data_df
@@ -375,23 +395,17 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
         mcf_file_path (str): _description_
         tmcf_file_path (str): _description_
     """
-    print("generating prop")
+
     data_df = _generate_prop(data_df)
-    print("generating stat var")
-    data_df = _generate_stat_var(data_df)
-    print("generating mcf")
-    data_df = _generate_mcfs(data_df)
-    print("writing to file")
+    data_df = _generate_stat_var_and_mcf(data_df)
     _write_to_mcf_file(data_df, mcf_file_path)
 
     _generate_tmcf(tmcf_file_path)
 
     data_df = _promote_measurement_method(data_df)
-
     data_df = data_df.sort_values(by=["year", "location", "sv"])
-    f_cols = ["year", "location", "sv", "observation", "measurement_method"]
 
-    data_df[f_cols].to_csv(cleaned_csv_file_path, index=False)
+    data_df[FINAL_DATA_COLS].to_csv(cleaned_csv_file_path, index=False)
 
 
 def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
@@ -403,6 +417,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     final_df = pd.DataFrame()
 
     for file_path in input_files:
+
         if "latch_2017-b" in file_path:
             conf = CONF_2017_FILE
         elif "NHTS_2009_transfer" in file_path:
@@ -417,6 +432,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
 
 
 def main(_):
+
     input_path = _FLAGS.input_path
     try:
         ip_files = os.listdir(input_path)
