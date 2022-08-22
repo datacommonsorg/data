@@ -12,8 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-The Python script loads the datasets, 
-cleans them and generates the cleaned CSV, MCF and TMCF file.
+This Python Script Load the datasets, cleans it
+and generates cleaned CSV, MCF, TMCF file.
+Before running this module, run download_input_files.py script, it downloads
+required input files, creates necessary folders for processing.
+Folder information
+input_files - downloaded files (from US census website) are placed here
+output_files - output files (mcf, tmcf and csv are written here)
 """
 import os
 import sys
@@ -21,23 +26,19 @@ import re
 import pandas as pd
 import numpy as np
 from absl import app, flags
+
 # For import common.replacement_functions
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
-# pylint: disable=import-error
 # pylint: disable=wrong-import-position
-from common.replacement_functions import (_replace_sex, _replace_isced11,
-                                          _replace_deg_urb, _replace_quant_inc,
-                                          _replace_duration, _replace_c_birth,
-                                          _replace_citizen, _replace_smoking,
-                                          _replace_smoking_frequenc,
-                                          _split_column)
+from common.replacement_functions import (_split_column, _replace_col_values)
+
 # For import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
 sys.path.insert(1, _COMMON_PATH)
+
 from util.alpha2_to_dcid import COUNTRY_MAP
-# pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
 _FLAGS = flags.FLAGS
@@ -46,13 +47,12 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
-                 "{pv14}\n"
+                 "{pv11}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Person{pv2}{pv3}{pv4}{pv5}"
-                 "{pv6}{pv7}{pv8}{pv9}{pv10}{pv11}{pv12}{pv13}\n"
+                 "{pv6}{pv7}{pv8}{pv9}{pv10}\n"
                  "statType: dcs:measuredValue\n"
-                 "measuredProperty: dcs:count\n"
-                 "")
+                 "measuredProperty: dcs:count\n")
 
 _TMCF_TEMPLATE = (
     "Node: E:EuroStat_Population_TobaccoConsumption->E0\n"
@@ -60,514 +60,73 @@ _TMCF_TEMPLATE = (
     "variableMeasured: C:EuroStat_Population_TobaccoConsumption->SV\n"
     "measurementMethod: C:EuroStat_Population_TobaccoConsumption->"
     "Measurement_Method\n"
-    "observationAbout: C:EuroStat_Population_TobaccoConsumption->Geo\n"
-    "observationDate: C:EuroStat_Population_TobaccoConsumption->Time\n"
+    "observationAbout: C:EuroStat_Population_TobaccoConsumption->geo\n"
+    "observationDate: C:EuroStat_Population_TobaccoConsumption->time\n"
     "scalingFactor: 100\n"
-    "value: C:EuroStat_Population_TobaccoConsumption->Observation\n")
+    "value: C:EuroStat_Population_TobaccoConsumption->observation\n")
 
+file_to_sv_mapping = {
+        "hlth_ehis_sk1b": "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['c_birth']+ '_' + df['sex']",
 
-def smoking_tobaccoproducts_county_of_birth(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'unit,smoking,sex,age,c_birth,time', 'EU27_2020', 'EU28', 'BE', 'BG',
-        'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI',
-        'SE', 'IS', 'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    col1 = "unit,smoking,sex,age,c_birth,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_c_birth(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent'+\
-        '_'+df['smoking']+"_"+'TobaccoProducts'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['c_birth']
-    df.drop(columns=['smoking', 'c_birth', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+        "hlth_ehis_sk1c": "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'+\
+        '_In_Count_Person_'+df['citizen']+'_'+df['sex']",
 
-
-def smoking_tobaccoproducts_country_of_citizenship(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'unit,smoking,sex,age,citizen,time', 'EU27_2020', 'EU28', 'BE', 'BG',
-        'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI',
-        'SE', 'IS', 'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    col1 = "unit,smoking,sex,age,citizen,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_citizen(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent'+\
-        '_'+df['smoking']+"_"+'TobaccoProducts'+\
-        '_In_Count_Person_'+df['citizen']+'_'+df['sex']
-    df.drop(columns=['smoking', 'citizen', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def smoking_tobaccoproducts_education_attainment_level(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,smoking,isced11,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    col1 = "unit,smoking,isced11,sex,age,geo"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_isced11(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent'+\
+        "hlth_ehis_sk1e": "'Percent'+\
         '_'+df['smoking']+'_TobaccoProducts'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['smoking', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-        ,value_name='observation')
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-    return df
-
-
-def smoking_tobaccoproducts_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,smoking,quant_inc,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    col1 = "unit,smoking,quant_inc,sex,age,geo"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[(df['age'] == 'TOTAL') & (~(df['quant_inc'] == 'UNK'))]
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_quant_inc(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent'+\
+        "hlth_ehis_sk1i": " 'Percent'+\
         '_'+df['smoking']+'_TobaccoProducts'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['smoking', 'quant_inc', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-        ,value_name='observation')
-    return df
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
 
-
-def smoking_tobaccoproducts_degree_of_urbanisation(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'smoking,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE', 'BG',
-        'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI',
-        'SE', 'IS', 'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    col1 = "smoking,deg_urb,sex,age,unit,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_deg_urb(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent'+\
+        "hlth_ehis_sk1u": "'Percent'+\
         '_'+df['smoking']+'_TobaccoProducts'+\
-        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
-    df.drop(columns=['smoking', 'deg_urb', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']",
 
+        "hlth_ehis_sk2i": "'Percent_FormerSmoker_Daily_TobaccoProducts'+\
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
 
-def former_daily_tobacco_smoker_income_quintile(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'unit,sex,age,quant_inc,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK',
-        'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU',
-        'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS',
-        'NO', 'RS', 'TR'
-    ]
-    df.columns = cols
-    col1 = "unit,sex,age,quant_inc,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[(df['age'] == 'TOTAL') & (~(df['quant_inc'] == 'UNK'))]
-    df = df.drop(columns=['EU27_2020'])
-    df = _replace_quant_inc(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_FormerSmoker_Daily_TobaccoProducts'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['quant_inc', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+        "hlth_ehis_sk2e": "'Percent_FormerSmoker_Daily_TobaccoProducts'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
+        "hlth_ehis_sk3e": "'Percent_Daily_'+df['smoking']+'_TobaccoSmoking'+'_Cigarettes'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-def former_daily_tobacco_smoker_education_attainment_level(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'unit,sex,age,isced11,time', 'EU27_2020', 'BE', 'BG', 'CZ', 'DK', 'DE',
-        'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU',
-        'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'IS', 'NO',
-        'RS', 'TR'
-    ]
-    df.columns = cols
-    col1 = "unit,sex,age,isced11,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020'])
-    df = _replace_isced11(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_FormerSmoker_Daily_TobaccoProducts'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def daily_smokers_cigarettes_education_attainment_level(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,smoking,isced11,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    col1 = "unit,smoking,isced11,sex,age,geo"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_isced11(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_Daily_'+df['smoking']+'_TobaccoSmoking'+'_Cigarettes'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['smoking', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-        ,value_name='observation')
-    return df
-
-
-def daily_smokers_cigarettes_income_quintile(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,smoking,quant_inc,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    col1 = "unit,smoking,quant_inc,sex,age,geo"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[(df['age'] == 'TOTAL') & (~(df['quant_inc'] == 'UNK'))]
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_quant_inc(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
+        "hlth_ehis_sk3i" : "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
         '_Cigarettes'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['smoking', 'quant_inc', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-        ,value_name='observation')
-    return df
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
 
-
-def daily_smokers_cigarettes_degree_of_urbanisation(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'smoking,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE', 'BG',
-        'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI',
-        'SE', 'IS', 'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    col1 = "smoking,deg_urb,sex,age,unit,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_deg_urb(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
+        "hlth_ehis_sk3u": "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
         '_Cigarettes'+\
-        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
-    df.drop(columns=['smoking', 'deg_urb', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']",
 
+        "hlth_ehis_sk4e": "'Percent'+'_'+df['frequenc_tobacco']+'_ExposureToTobaccoSmoke'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-def daily_exposure_tobacco_smoke_indoors_education_attainment_level(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = ['unit,frequenc,isced11,sex,age,geo', '2019', '2014']
-    df.columns = cols
-    col1 = "unit,frequenc,isced11,sex,age,geo"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df[(df['geo'] != 'EU27_2020') & (df['geo'] != 'EU28')]
-    df = _replace_isced11(df)
-    df = _replace_smoking_frequenc(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent'+'_'+df['frequenc']+'_ExposureToTobaccoSmoke'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['frequenc', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','geo'], var_name='time'\
-        ,value_name='observation')
-    return df
+        "hlth_ehis_sk4u": "'Percent'+'_'+df['frequenc_tobacco']+'_ExposureToTobaccoSmoke'+\
+        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']",
 
-
-def daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'frequenc,deg_urb,sex,age,unit,time', 'EU27_2020', 'EU28', 'BE', 'BG',
-        'CZ', 'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV',
-        'LT', 'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI',
-        'SE', 'IS', 'NO', 'UK', 'TR'
-    ]
-    df.columns = cols
-    col1 = "frequenc,deg_urb,sex,age,unit,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020', 'EU28'])
-    df = _replace_deg_urb(df)
-    df = _replace_smoking_frequenc(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent'+'_'+df['frequenc']+'_ExposureToTobaccoSmoke'+\
-        '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']
-    df.drop(columns=['frequenc', 'deg_urb', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def duration_daily_tobacco_smoking_education_attainment_level(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'unit,duration,sex,age,isced11,time', 'EU27_2020', 'BE', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'RS', 'TR'
-    ]
-    df.columns = cols
-    col1 = "unit,duration,sex,age,isced11,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020'])
-    df = _replace_isced11(df)
-    df = _replace_duration(df)
-    df = _replace_sex(df)
-    df = _replace_smoking(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_Daily_TobaccoSmoking_'+\
+        "hlth_ehis_sk5e": "'Percent_Daily_TobaccoSmoking_'+\
         df['duration']+'_TobaccoProducts'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['duration', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
+        "hlth_ehis_sk6e":"'Percent_'\
+        +df['frequenc_tobacco']+'_'+'ECigarettes'+\
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-def ecigarettes_similar_elecdevices_education_attainment_level(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'unit,frequenc,sex,age,isced11,time', 'EU27_2020', 'BE', 'BG', 'CZ',
-        'DK', 'DE', 'EE', 'IE', 'EL', 'ES', 'FR', 'HR', 'IT', 'CY', 'LV', 'LT',
-        'LU', 'HU', 'MT', 'NL', 'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE',
-        'IS', 'NO', 'RS', 'TR'
-    ]
-    df.columns = cols
-    col1 = "unit,frequenc,sex,age,isced11,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = df.drop(columns=['EU27_2020'])
-    df = _replace_isced11(df)
-    df = _replace_smoking_frequenc(df)
-    df = _replace_sex(df)
-    df.drop(columns=['unit', 'age'], inplace=True)
-    df['SV'] = 'Percent_'\
-        +df['frequenc']+'_'+'ECigarettes'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['frequenc', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
-
-
-def daily_smokers_cigarettes_history_education_attainment_level(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'sex,age,isced11,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL', 'ES', 'CY',
-        'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK'
-    ]
-    df.columns = cols
-    col1 = "sex,age,isced11,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = _replace_isced11(df)
-    df = _replace_sex(df)
-    df.drop(columns=['age'], inplace=True)
-    df['SV'] = 'Percent_Daily_TobaccoSmoking'+\
+        "hlth_ehis_de3":"'Percent_Daily_TobaccoSmoking'+\
         '_Cigarettes'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-
-def daily_smokers_cigarettes_history_income_quintile(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'sex,age,quant_inc,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL', 'ES',
-        'CY', 'LV', 'HU', 'MT', 'AT', 'PL', 'RO', 'SI', 'SK'
-    ]
-    df.columns = cols
-    col1 = "sex,age,quant_inc,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[(df['age'] == 'TOTAL') & (~(df['quant_inc'] == 'UNK'))]
-    df = _replace_quant_inc(df)
-    df = _replace_sex(df)
-    df.drop(columns=['age'], inplace=True)
-    df['SV'] = 'Percent_Daily_TobaccoSmoking'+\
+        "hlth_ehis_de4":"'Percent_Daily_TobaccoSmoking'+\
         '_Cigarettes'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']
-    df.drop(columns=['quant_inc', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+        '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
 
-
-def dsmokers_number_of_cigarettes_history_education_attainment_level(
-        df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Cleans the file hlth_ehis_pe1e for concatenation in Final CSV
-    Input Taken: DF
-    Output Provided: DF
-    """
-    cols = [
-        'sex,age,smoking,isced11,time', 'BE', 'BG', 'CZ', 'DE', 'EE', 'EL',
-        'ES', 'CY', 'LV', 'HU', 'MT', 'PL', 'RO', 'SI', 'SK'
-    ]
-    df.columns = cols
-    col1 = "sex,age,smoking,isced11,time"
-    df = _split_column(df, col1)
-    # Filtering out the wanted rows and columns
-    df = df[df['age'] == 'TOTAL']
-    df = _replace_isced11(df)
-    df = _replace_smoking(df)
-    df = _replace_sex(df)
-    df.drop(columns=['age'], inplace=True)
-    df['SV'] = 'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
+        "hlth_ehis_de5":"'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
         '_Cigarettes'+\
-        '_In_Count_Person_'+df['isced11']+'_'+df['sex']
-    df.drop(columns=['smoking', 'isced11', 'sex'], inplace=True)
-    df = df.melt(id_vars=['SV','time'], var_name='geo'\
-        ,value_name='observation')
-    return df
+        '_In_Count_Person_'+df['isced11']+'_'+df['sex']"
+}
 
 
 class EuroStatTobaccoConsumption:
@@ -575,25 +134,26 @@ class EuroStatTobaccoConsumption:
     This Class has requried methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
-
     def __init__(self, input_files: list, csv_file_path: str,\
         mcf_file_path: str, tmcf_file_path: str) -> None:
-        self.input_files = input_files
-        self.cleaned_csv_file_path = csv_file_path
-        self.mcf_file_path = mcf_file_path
-        self.tmcf_file_path = tmcf_file_path
+        self._input_files = input_files
+        self._cleaned_csv_file_path = csv_file_path
+        self._mcf_file_path = mcf_file_path
+        self._tmcf_file_path = tmcf_file_path
 
     def _generate_tmcf(self) -> None:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
-        Arguments:
+
+        Args:
             None
+
         Returns:
             None
         """
         # Writing Genereated TMCF to local path.
-        with open(self.tmcf_file_path, 'w+', encoding="UTF-8") as f_out:
+        with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
 
     def _generate_mcf(self, sv_list) -> None:
@@ -610,7 +170,7 @@ class EuroStatTobaccoConsumption:
         for sv in sv_list:
             if "Total" in sv:
                 continue
-            incomequin = gender = education = frequenc = activity =\
+            incomequin = gender = education = frequenc_tobacco = activity =\
             residence = countryofbirth = citizenship = substance\
             = quantity = history = sv_name = ''
 
@@ -628,12 +188,12 @@ class EuroStatTobaccoConsumption:
                 elif "Daily" in prop or "Occasional" in prop\
                      or "AtLeastOneHourPerDay" in prop or \
                     "LessThanOneHourPerDay" in prop:
-                    frequenc = "\nactivityFrequency: dcs:" + prop.replace(
+                    frequenc_tobacco = "\nactivityFrequency: dcs:" + prop.replace(
                         "Or", "__")
                     sv_name = sv_name + prop + ", "
                 elif "LessThanOnceAWeek" in prop or "AtLeastOnceAWeek" in\
                     prop or "RarelyOrNever" in prop :
-                    frequenc = "\nactivityFrequency: dcs:" + prop.replace(
+                    frequenc_tobacco = "\nactivityFrequency: dcs:" + prop.replace(
                         "Or", "__")
                     sv_name = sv_name + prop + ", "
                 elif "LessThan20CigarettesPerDay"in prop or \
@@ -705,7 +265,7 @@ class EuroStatTobaccoConsumption:
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv14=sv_name,
                                                        pv2=denominator,
-                                                       pv3=frequenc,
+                                                       pv3=frequenc_tobacco,
                                                        pv4=gender,
                                                        pv5=activity,
                                                        pv6=education,
@@ -718,108 +278,139 @@ class EuroStatTobaccoConsumption:
                                                        pv13=history) + "\n"
 
         # Writing Genereated MCF to local path.
-        with open(self.mcf_file_path, 'w+', encoding='utf-8') as f_out:
+        with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(final_mcf_template.rstrip('\n'))
         # pylint: enable=R0914
+
+    def parse_file(self, file_name: str, df: pd.DataFrame) -> pd.DataFrame:
+        split_columns = df.columns.values.tolist()[0]
+        df = _split_column(df, split_columns)
+        split_columns = split_columns.replace('frequenc', 'frequenc_tobacco')\
+            .replace('isced97', 'isced11').replace('geo\time','geo')\
+                .replace('geo\\time','geo').replace('time\geo','time')\
+                    .replace('time\\geo','time').replace('quantile','quant_inc')
+        df.rename(columns={
+            'geo\time': 'geo',
+            'geo\\time': 'geo',
+            'time\geo': 'time',
+            'time\\geo': 'time',
+            'frequenc': 'frequenc_tobacco',
+            'isced97': 'isced11',
+            'quantile':'quant_inc'
+        },
+                  inplace=True)
+
+        df = df[df['age'] == 'TOTAL']
+
+        for col in [
+                'sex', 'quant_inc', 'frequenc_tobacco', 'isced11', 'deg_urb',
+                'c_birth', 'citizen','smoking','duration'
+        ]:
+            if col in df.columns.values.tolist():
+                df = _replace_col_values(df, col)
+
+        df['SV'] = eval(file_to_sv_mapping[file_name])
+
+        split_columns_list = split_columns.split(',')
+        if 'time' in split_columns_list:
+            split_columns_list.remove('time')
+            id_vars = ['SV', 'time']
+            var_name = 'geo'
+        if 'geo' in split_columns_list:
+            split_columns_list.remove('geo')
+            id_vars = ['SV', 'geo']
+            var_name = 'time'
+
+        df.drop(columns=split_columns_list, inplace=True)
+        df = df.melt(id_vars=id_vars,
+                     var_name=var_name,
+                     value_name='observation')
+        df = df[df['geo'] != 'EU27_2020']
+        df = df[df['geo'] != 'EU28']
+        return df
 
     def process(self):
         """
         This Method calls the required methods to generate
         cleaned CSV, MCF, and TMCF file.
-        Arguments: None
-        Returns: None
-        """
 
+        Args:
+            None
+
+        Returns:
+            None
+        """
         final_df = pd.DataFrame(
             columns=['time', 'geo', 'SV', 'observation', 'Measurement_Method'])
         # Creating Output Directory
-        output_path = os.path.dirname(self.cleaned_csv_file_path)
+        output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
             os.mkdir(output_path)
         sv_list = []
 
-        for file_path in self.input_files:
-            print(file_path)
+        for file_path in self._input_files:
             df = pd.read_csv(file_path, sep='\t', header=0)
             file_name = file_path.split("/")[-1][:-4]
-            tobbaco_consumption = {
-                "hlth_ehis_sk1b":
-                    smoking_tobaccoproducts_county_of_birth,
-                "hlth_ehis_sk1c":
-                    smoking_tobaccoproducts_country_of_citizenship,
-                "hlth_ehis_sk1e":
-                    smoking_tobaccoproducts_education_attainment_level,
-                "hlth_ehis_sk1i":
-                    smoking_tobaccoproducts_income_quintile,
-                "hlth_ehis_sk1u":
-                    smoking_tobaccoproducts_degree_of_urbanisation,
-                "hlth_ehis_sk2i":
-                    former_daily_tobacco_smoker_income_quintile,
-                "hlth_ehis_sk2e":
-                    former_daily_tobacco_smoker_education_attainment_level,
-                "hlth_ehis_sk3e":
-                    daily_smokers_cigarettes_education_attainment_level,
-                "hlth_ehis_sk3i":
-                    daily_smokers_cigarettes_income_quintile,
-                "hlth_ehis_sk3u":
-                    daily_smokers_cigarettes_degree_of_urbanisation,
-                "hlth_ehis_sk4e":
-                    daily_exposure_tobacco_smoke_indoors_education_attainment_level,
-                "hlth_ehis_sk4u":
-                    daily_exposure_tobacco_smoke_indoors_degree_of_urbanisation,
-                "hlth_ehis_sk5e":
-                    duration_daily_tobacco_smoking_education_attainment_level,
-                "hlth_ehis_sk6e":
-                    ecigarettes_similar_elecdevices_education_attainment_level,
-                "hlth_ehis_de3":
-                    daily_smokers_cigarettes_history_education_attainment_level,
-                "hlth_ehis_de4":
-                    daily_smokers_cigarettes_history_income_quintile,
-                "hlth_ehis_de5":
-                    dsmokers_number_of_cigarettes_history_education_attainment_level
-            }
-            df = tobbaco_consumption[file_name](df)
-            # df['file_name'] = file_name
+            df.columns = df.columns.str.strip()
+            df = self.parse_file(file_name, df)
             df['SV'] = df['SV'].str.replace('_Total', '')
-            # df["file_name"] = file_name_without_ext
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
 
         final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
         final_df = final_df.drop_duplicates(subset=['time', 'geo', 'SV'],
                                             keep='first')
-        final_df['observation'] = final_df['observation'].astype(str)\
-            .str.strip()
+        final_df['observation'] = final_df['observation'].astype(
+            str).str.strip()
         # derived_df generated to get the year/SV/location sets
         # where 'u' exist
         derived_df = final_df[final_df['observation'].astype(str).str.contains(
             'u')]
         u_rows = list(derived_df['SV'] + derived_df['geo'])
         final_df['info'] = final_df['SV'] + final_df['geo']
-        # Adding Measurement Method based on a condition
+        # Adding Measurement Method based on a condition, whereever u is found
+        # in an observation. The corresponding measurement method for all the
+        # years of that perticular SV/Country is made as Low Reliability.
+        # Eg: 2014
+        #   country/BEL
+        #   Percent_AlcoholConsumption_Daily_In_Count_Person
+        #   14.2 u,
+        # so measurement method for all 2008, 2014 and 2019 years shall be made
+        # low reliability.
         final_df['Measurement_Method'] = np.where(
             final_df['info'].isin(u_rows),
             'EurostatRegionalStatistics_LowReliability',
             'EurostatRegionalStatistics')
+        derived_df = final_df[final_df['observation'].astype(str).str.contains(
+            'd')]
+        u_rows = list(derived_df['SV'] + derived_df['geo'])
+        final_df['info'] = final_df['SV'] + final_df['geo']
+        # Adding Measurement Method based on a condition, whereever d is found
+        # in an observation. The corresponding measurement method for all the
+        # years of that perticular SV/Country is made as Definition Differs.
+        # Eg: 2014
+        #   country/ITA
+        #   Percent_AlcoholConsumption_Daily_In_Count_Person
+        #   14.1 d,
+        # so measurement method for both 2014 and 2019 years shall be made
+        # Definition Differs.
+        final_df['Measurement_Method'] = np.where(
+            final_df['info'].isin(u_rows),
+            'EurostatRegionalStatistics_DefinitionDiffers',
+            final_df['Measurement_Method'])
         final_df.drop(columns=['info'], inplace=True)
         final_df['observation'] = (
             final_df['observation'].astype(str).str.replace(
-                ':', '').str.replace(' ', '').str.replace('u', ''))
+                ':', '').str.replace(' ',
+                                     '').str.replace('u',
+                                                     '').str.replace('d', ''))
         final_df['observation'] = pd.to_numeric(final_df['observation'],
                                                 errors='coerce')
         final_df = final_df.replace({'geo': COUNTRY_MAP})
         final_df = final_df.sort_values(by=['geo', 'SV'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
-        final_df = final_df.rename(
-            columns={
-                'time': 'Time',
-                'geo': 'Geo',
-                'SV': 'SV',
-                'observation': 'Observation',
-                'Measurement_Method': 'Measurement_Method'
-            })
-        final_df.to_csv(self.cleaned_csv_file_path, index=False)
+        final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
         self._generate_mcf(sv_list)
@@ -829,10 +420,8 @@ class EuroStatTobaccoConsumption:
 def main(_):
     input_path = _FLAGS.input_path
     input_path = "/Users/chharish/datacommonsEU/data/scripts/eurostat/health_determinants/tobacco_consumption/test_data/datasets"
-    if not os.path.exists(input_path):
-        os.mkdir(input_path)
     ip_files = os.listdir(input_path)
-    ip_files = [os.path.join(input_path, file) for file in ip_files]
+    ip_files = [input_path + os.sep + file for file in ip_files]
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "output")
     # Defining Output Files
@@ -842,8 +431,8 @@ def main(_):
     cleaned_csv_path = os.path.join(data_file_path, csv_name)
     mcf_path = os.path.join(data_file_path, mcf_name)
     tmcf_path = os.path.join(data_file_path, tmcf_name)
-    loader = EuroStatTobaccoConsumption(ip_files, cleaned_csv_path, mcf_path,
-                                        tmcf_path)
+    loader = EuroStatTobaccoConsumption(ip_files, cleaned_csv_path,\
+        mcf_path, tmcf_path)
     loader.process()
 
 

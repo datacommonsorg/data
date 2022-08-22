@@ -19,13 +19,14 @@ _COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(1, _COMMON_PATH)
 from dcid_existence import check_dcid_existence
 
-
 def _generate_mcf(sv_list, mcf_file_path) -> None:
     """
-    This method generates denominator MCF file w.r.t
+    This method generates MCF file w.r.t
     dataframe headers and defined MCF template
-    Arguments:
+
+    Args:
         sv_list (list) : List of DataFrame Columns
+
     Returns:
         None
     """
@@ -131,10 +132,12 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
         f_out.write(final_mcf_template.rstrip('\n'))
 
 
+_MODULE_DIR = "scripts/eurostat/health_determinants/tobacco_consumption/"
+
 _INPUT_MCF_FILE_PATH = os.path.join(
-    "output", "eurostat_population_tobaccoconsumption.mcf")
+    _MODULE_DIR, "output", "eurostat_population_tobaccoconsumption.mcf")
 _OUTPUT_MCF_FILE_PATH = os.path.join(
-    "output", "eurostat_population_tobaccoconsumption_denominator.mcf")
+    _MODULE_DIR, "output", "eurostat_population_tobaccoconsumption_denominator.mcf")
 
 with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     mcf = mcf_file.read()
@@ -143,7 +146,6 @@ with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     for deno in deno_matched:
         f_deno.append(deno[1])
     f_deno = list(set(f_deno))
-    print(f_deno)
     node_status = check_dcid_existence(f_deno)
     f_deno = []
     for node, status in node_status.items():
