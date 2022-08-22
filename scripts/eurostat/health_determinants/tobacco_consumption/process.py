@@ -66,64 +66,65 @@ _TMCF_TEMPLATE = (
     "value: C:EuroStat_Population_TobaccoConsumption->observation\n")
 
 file_to_sv_mapping = {
-        "hlth_ehis_sk1b": "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'+\
+    "hlth_ehis_sk1b":
+        "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'+\
         '_In_Count_Person_'+df['sex']+'_'+df['c_birth']+ '_' + df['sex']",
-
-        "hlth_ehis_sk1c": "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'+\
+    "hlth_ehis_sk1c":
+        "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'+\
         '_In_Count_Person_'+df['citizen']+'_'+df['sex']",
-
-        "hlth_ehis_sk1e": "'Percent'+\
+    "hlth_ehis_sk1e":
+        "'Percent'+\
         '_'+df['smoking']+'_TobaccoProducts'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
-
-        "hlth_ehis_sk1i": " 'Percent'+\
+    "hlth_ehis_sk1i":
+        " 'Percent'+\
         '_'+df['smoking']+'_TobaccoProducts'+\
         '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
-
-        "hlth_ehis_sk1u": "'Percent'+\
+    "hlth_ehis_sk1u":
+        "'Percent'+\
         '_'+df['smoking']+'_TobaccoProducts'+\
         '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']",
-
-        "hlth_ehis_sk2i": "'Percent_FormerSmoker_Daily_TobaccoProducts'+\
+    "hlth_ehis_sk2i":
+        "'Percent_FormerSmoker_Daily_TobaccoProducts'+\
         '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
-
-        "hlth_ehis_sk2e": "'Percent_FormerSmoker_Daily_TobaccoProducts'+\
+    "hlth_ehis_sk2e":
+        "'Percent_FormerSmoker_Daily_TobaccoProducts'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
-
-        "hlth_ehis_sk3e": "'Percent_Daily_'+df['smoking']+'_TobaccoSmoking'+'_Cigarettes'+\
+    "hlth_ehis_sk3e":
+        "'Percent_Daily_'+df['smoking']+'_TobaccoSmoking'+'_Cigarettes'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
-
-        "hlth_ehis_sk3i" : "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
+    "hlth_ehis_sk3i":
+        "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
         '_Cigarettes'+\
         '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
-
-        "hlth_ehis_sk3u": "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
+    "hlth_ehis_sk3u":
+        "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
         '_Cigarettes'+\
         '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']",
-
-        "hlth_ehis_sk4e": "'Percent'+'_'+df['frequenc_tobacco']+'_ExposureToTobaccoSmoke'+\
+    "hlth_ehis_sk4e":
+        "'Percent'+'_'+df['frequenc_tobacco']+'_ExposureToTobaccoSmoke'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
-
-        "hlth_ehis_sk4u": "'Percent'+'_'+df['frequenc_tobacco']+'_ExposureToTobaccoSmoke'+\
+    "hlth_ehis_sk4u":
+        "'Percent'+'_'+df['frequenc_tobacco']+'_ExposureToTobaccoSmoke'+\
         '_In_Count_Person_'+df['deg_urb']+'_'+df['sex']",
-
-        "hlth_ehis_sk5e": "'Percent_Daily_TobaccoSmoking_'+\
+    "hlth_ehis_sk5e":
+        "'Percent_Daily_TobaccoSmoking_'+\
         df['duration']+'_TobaccoProducts'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
-
-        "hlth_ehis_sk6e":"'Percent_'\
+    "hlth_ehis_sk6e":
+        "'Percent_'\
         +df['frequenc_tobacco']+'_'+'ECigarettes'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
-
-        "hlth_ehis_de3":"'Percent_Daily_TobaccoSmoking'+\
+    "hlth_ehis_de3":
+        "'Percent_Daily_TobaccoSmoking'+\
         '_Cigarettes'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']",
-
-        "hlth_ehis_de4":"'Percent_Daily_TobaccoSmoking'+\
+    "hlth_ehis_de4":
+        "'Percent_Daily_TobaccoSmoking'+\
         '_Cigarettes'+\
         '_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
-
-        "hlth_ehis_de5":"'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
+    "hlth_ehis_de5":
+        "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+\
         '_Cigarettes'+\
         '_In_Count_Person_'+df['isced11']+'_'+df['sex']"
 }
@@ -296,7 +297,7 @@ class EuroStatTobaccoConsumption:
             'time\\geo': 'time',
             'frequenc': 'frequenc_tobacco',
             'isced97': 'isced11',
-            'quantile':'quant_inc'
+            'quantile': 'quant_inc'
         },
                   inplace=True)
 
@@ -304,7 +305,7 @@ class EuroStatTobaccoConsumption:
 
         for col in [
                 'sex', 'quant_inc', 'frequenc_tobacco', 'isced11', 'deg_urb',
-                'c_birth', 'citizen','smoking','duration'
+                'c_birth', 'citizen', 'smoking', 'duration'
         ]:
             if col in df.columns.values.tolist():
                 df = _replace_col_values(df, col)

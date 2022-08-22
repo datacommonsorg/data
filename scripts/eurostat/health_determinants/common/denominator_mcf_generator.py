@@ -19,6 +19,7 @@ _COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(1, _COMMON_PATH)
 from dcid_existence import check_dcid_existence
 
+
 def _generate_mcf(sv_list, mcf_file_path) -> None:
     """
     This method generates MCF file w.r.t
@@ -137,7 +138,8 @@ _MODULE_DIR = "scripts/eurostat/health_determinants/tobacco_consumption/"
 _INPUT_MCF_FILE_PATH = os.path.join(
     _MODULE_DIR, "output", "eurostat_population_tobaccoconsumption.mcf")
 _OUTPUT_MCF_FILE_PATH = os.path.join(
-    _MODULE_DIR, "output", "eurostat_population_tobaccoconsumption_denominator.mcf")
+    _MODULE_DIR, "output",
+    "eurostat_population_tobaccoconsumption_denominator.mcf")
 
 with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     mcf = mcf_file.read()
