@@ -20,20 +20,18 @@ DC import
 """
 # ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_Obesity_AsAFractionOf_Count_BirthEvent_LiveBirth
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
-                "typeOf: dcs:StatisticalVariable\n"
-                "populationType: dcs:LiveBirthPregnancyEvent\n"
-                "measurementDenominator: dcs:Count_BirthEvent_LiveBirth\n"
-                "{xtra_pvs}\n")
+                 "typeOf: dcs:StatisticalVariable\n"
+                 "populationType: dcs:LiveBirthPregnancyEvent\n"
+                 "measurementDenominator: dcs:Count_BirthEvent_LiveBirth\n"
+                 "{xtra_pvs}\n")
 
-
-_TMCF_TEMPLATE = (
-    "Node: E:US_Prams->E0\n"
-    "typeOf: dcs:StatVarObservation\n"
-    "variableMeasured: C:US_Prams->SV\n"
-    "observationAbout: C:US_Prams->Geo\n"
-    "observationDate: C:US_Prams->Year\n"
-    "scalingFactor: 100\n"
-    "value: C:US_Prams->Observation\n")
+_TMCF_TEMPLATE = ("Node: E:US_Prams->E0\n"
+                  "typeOf: dcs:StatVarObservation\n"
+                  "variableMeasured: C:US_Prams->SV\n"
+                  "observationAbout: C:US_Prams->Geo\n"
+                  "observationDate: C:US_Prams->Year\n"
+                  "scalingFactor: 100\n"
+                  "value: C:US_Prams->Observation\n")
 
 DEFAULT_SV_PROP = {
     "typeOf": "dcs:StatisticalVariable",
@@ -42,116 +40,174 @@ DEFAULT_SV_PROP = {
 }
 
 _PV_PROP = {
-    "OneMonth":"1Month",
-    "SampleSize_Count":"sampleSize",
-    "Percent":"measuredValue",
-    "ConfidenceIntervalLowerLimit_Count":"confidenceIntervalLowerLimit",
-    "ConfidenceIntervalUpperLimit_Count":"confidenceIntervalUpperLimit"
+    "OneMonth": "1Month",
+    "SampleSize_Count": "sampleSize",
+    "Percent": "measuredValue",
+    "ConfidenceIntervalLowerLimit_Count": "confidenceIntervalLowerLimit",
+    "ConfidenceIntervalUpperLimit_Count": "confidenceIntervalUpperLimit"
 }
 
 _PROP = {
-    "OneMonth":"1Month",
-    "MoreThan4TimesAWeek":"",
-    "InLast2Years":"",
-    "3MonthsBeforePregnancy":"",
-    "Last3MonthsOfPregnancy":"",
-    "Postpartum":"",
-    "Hookah":"HookahUsage",
-    "Obese":"Obesity",
-    "healthInsuranceStatus1MonthBeforePregnancyprivateinsurance":"WithPrivateHealthInsurance",
-    "healthInsuranceStatus1MonthBeforePregnancyMedicaid":"medicaid",
-    "healthInsuranceStatus1MonthBeforePregnancyNoInsurance":"NoHealthInsurance",
-    "healthInsuranceStatusForPrenatalCareprivateinsurance":"WithPrivateHealthInsurance",
-    "healthInsuranceStatusForPrenatalCareMedicaid":"medicaid",
-    "healthInsuranceStatusForPrenatalCareNoInsurance":"NoHealthInsurance",
-    "DuringPregnancy":"",
-    "12MonthsBeforePregnancy":"",
-    "InFirstTrimester":"",
-    "ECigaretteSmoking":"Smoking",
-    "CigaretteSmoking" :"Smoking",
-    "SampleSize_Count":"",
-    "Percent":"",
-    "ConfidenceIntervalLowerLimit_Count":"",
-    "ConfidenceIntervalUpperLimit_Count":"",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband12MonthsBeforePregnancy":"IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusbandDuringPregnancy":"IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"
+    "OneMonth":
+        "1Month",
+    "MoreThan4TimesAWeek":
+        "",
+    "InLast2Years":
+        "",
+    "3MonthsBeforePregnancy":
+        "",
+    "Last3MonthsOfPregnancy":
+        "",
+    "Postpartum":
+        "",
+    "Hookah":
+        "HookahUsage",
+    "Obese":
+        "Obesity",
+    "healthInsuranceStatus1MonthBeforePregnancyprivateinsurance":
+        "WithPrivateHealthInsurance",
+    "healthInsuranceStatus1MonthBeforePregnancyMedicaid":
+        "medicaid",
+    "healthInsuranceStatus1MonthBeforePregnancyNoInsurance":
+        "NoHealthInsurance",
+    "healthInsuranceStatusForPrenatalCareprivateinsurance":
+        "WithPrivateHealthInsurance",
+    "healthInsuranceStatusForPrenatalCareMedicaid":
+        "medicaid",
+    "healthInsuranceStatusForPrenatalCareNoInsurance":
+        "NoHealthInsurance",
+    "DuringPregnancy":
+        "",
+    "12MonthsBeforePregnancy":
+        "",
+    "InFirstTrimester":
+        "",
+    "ECigaretteSmoking":
+        "Smoking",
+    "CigaretteSmoking":
+        "Smoking",
+    "SampleSize_Count":
+        "",
+    "Percent":
+        "",
+    "ConfidenceIntervalLowerLimit_Count":
+        "",
+    "ConfidenceIntervalUpperLimit_Count":
+        "",
+    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband12MonthsBeforePregnancy":
+        "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband",
+    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusbandDuringPregnancy":
+        "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"
 }
 
 _TIME = {
-    "OneMonth":"1Month",
-    "MultivitaminUse":"",
-    "PrenatalCareIn":"",
-    "FluShot":"",
-    "MaternalCheckup":"",
-    "TeethCleanedByDentistOrHygienist":"",
-    "HealthCareVisit":"",
-    "ECigaretteSmoking":"",
-    "CigaretteSmoking":"",
-    "HookahInLast2Years":"Last2YearsBeforePregnancy",
-    "HeavyDrinking":"",
-    "CDC_SelfReportedDepression":"",
-    "healthInsuranceStatus1MonthBeforePregnancyprivateinsurance":"1MonthBeforePregnancy",
-    "healthInsuranceStatus1MonthBeforePregnancyMedicaid":"1MonthBeforePregnancy",
-    "healthInsuranceStatus1MonthBeforePregnancyNoInsurance":"1MonthBeforePregnancy",
-    "healthInsuranceStatusPostpartumprivateinsurance":"Postpartum",
-    "healthInsuranceStatusPostpartumMedicaid":"Postpartum",
-    "healthInsuranceStatusPostpartumNoInsurance":"Postpartum",
-    "SampleSize_Count":"",
-    "SampleSize_Count_LivePregnancyvent_MoreThan4TimesAWeek":"",
-    "Percent":"",
-    "ConfidenceIntervalLowerLimit_Count":"",
-    "ConfidenceIntervalUpperLimit_Count":"",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband12MonthsBeforePregnancy":"12MonthsBeforePregnancy",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusbandDuringPregnancy":"DuringPregnancy"
+    "OneMonth":
+        "1Month",
+    "MultivitaminUse":
+        "",
+    "PrenatalCareIn":
+        "",
+    "FluShot":
+        "",
+    "MaternalCheckup":
+        "",
+    "TeethCleanedByDentistOrHygienist":
+        "",
+    "HealthCareVisit":
+        "",
+    "ECigaretteSmoking":
+        "",
+    "CigaretteSmoking":
+        "",
+    "HookahInLast2Years":
+        "Last2YearsBeforePregnancy",
+    "HeavyDrinking":
+        "",
+    "CDC_SelfReportedDepression":
+        "",
+    "healthInsuranceStatus1MonthBeforePregnancyprivateinsurance":
+        "1MonthBeforePregnancy",
+    "healthInsuranceStatus1MonthBeforePregnancyMedicaid":
+        "1MonthBeforePregnancy",
+    "healthInsuranceStatus1MonthBeforePregnancyNoInsurance":
+        "1MonthBeforePregnancy",
+    "healthInsuranceStatusPostpartumprivateinsurance":
+        "Postpartum",
+    "healthInsuranceStatusPostpartumMedicaid":
+        "Postpartum",
+    "healthInsuranceStatusPostpartumNoInsurance":
+        "Postpartum",
+    "SampleSize_Count":
+        "",
+    "SampleSize_Count_LivePregnancyvent_MoreThan4TimesAWeek":
+        "",
+    "Percent":
+        "",
+    "ConfidenceIntervalLowerLimit_Count":
+        "",
+    "ConfidenceIntervalUpperLimit_Count":
+        "",
+    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband12MonthsBeforePregnancy":
+        "12MonthsBeforePregnancy",
+    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusbandDuringPregnancy":
+        "DuringPregnancy"
 }
 
 _INSURANCE = {
-    "OneMonth":"1Month",
-    "healthInsuranceStatusPostpartumprivateinsurance":"WithPrivateHealthInsurance",
-    "healthInsuranceStatusPostpartumMedicaid":"medicaid",
-    "healthInsuranceStatusPostpartumNoInsurance":"NoHealthInsurance",
-    "SampleSize_Count":"",
-    "Percent":"",
-    "ConfidenceIntervalLowerLimit_Count":"",
-    "ConfidenceIntervalUpperLimit_Count":""
+    "OneMonth":
+        "1Month",
+    "healthInsuranceStatusPostpartumprivateinsurance":
+        "WithPrivateHealthInsurance",
+    "healthInsuranceStatusPostpartumMedicaid":
+        "medicaid",
+    "healthInsuranceStatusPostpartumNoInsurance":
+        "NoHealthInsurance",
+    "SampleSize_Count":
+        "",
+    "Percent":
+        "",
+    "ConfidenceIntervalLowerLimit_Count":
+        "",
+    "ConfidenceIntervalUpperLimit_Count":
+        ""
 }
 
 _PROP4 = {
-    "ECigaretteSmoking3MonthsBeforePregnancy":"ECigarettes",
-    "ECigaretteSmokingLast3MonthsOfPregnancy":"ECigarettes",
-    "CigaretteSmoking3MonthsBeforePregnancy" :"Cigarettes",
-    "CigaretteSmokingLast3MonthsOfPregnancy":"Cigarettes",
-    "CigaretteSmokingPostpartum":"Cigarettes",
-    "SampleSize_Count":"",
-    "Percent":"",
-    "ConfidenceIntervalLowerLimit_Count":"",
-    "ConfidenceIntervalUpperLimit_Count":""
+    "ECigaretteSmoking3MonthsBeforePregnancy": "ECigarettes",
+    "ECigaretteSmokingLast3MonthsOfPregnancy": "ECigarettes",
+    "CigaretteSmoking3MonthsBeforePregnancy": "Cigarettes",
+    "CigaretteSmokingLast3MonthsOfPregnancy": "Cigarettes",
+    "CigaretteSmokingPostpartum": "Cigarettes",
+    "SampleSize_Count": "",
+    "Percent": "",
+    "ConfidenceIntervalLowerLimit_Count": "",
+    "ConfidenceIntervalUpperLimit_Count": ""
 }
 
 _YEAR = {
-    '2016_sampleSize':'2016',
-    '2017_sampleSize':'2017',
-    '2018_sampleSize':'2018',
-    '2019_sampleSize':'2019', 
-    '2020_sampleSize':'2020', 
-    '2016_CI_PERCENT':'2016',
-    '2016_CI':'2016',
-    '2017_CI':'2017',
-    '2018_CI':'2018',
-    '2019_CI':'2019',
-    '2020_CI':'2020',
-    '2016_CI_LOWER':'2016', 
-    '2016_CI_UPPER':'2016', 
-    '2017_CI_PERCENT':'2017', 
-    '2017_CI_LOWER':'2017',
-    '2017_CI_UPPER':'2017', 
-    '2018_CI_PERCENT':'2018', 
-    '2018_CI_LOWER':'2018', 
-    '2018_CI_UPPER':'2018',
-    '2019_CI_PERCENT':'2019', 
-    '2019_CI_LOWER':'2019', 
-    '2019_CI_UPPER':'2019', 
-    '2020_CI_PERCENT':'2020',
-    '2020_CI_LOWER':'2020', 
-    '2020_CI_UPPER':'2020'
+    '2016_sampleSize': '2016',
+    '2017_sampleSize': '2017',
+    '2018_sampleSize': '2018',
+    '2019_sampleSize': '2019',
+    '2020_sampleSize': '2020',
+    '2016_CI_PERCENT': '2016',
+    '2016_CI': '2016',
+    '2017_CI': '2017',
+    '2018_CI': '2018',
+    '2019_CI': '2019',
+    '2020_CI': '2020',
+    '2016_CI_LOWER': '2016',
+    '2016_CI_UPPER': '2016',
+    '2017_CI_PERCENT': '2017',
+    '2017_CI_LOWER': '2017',
+    '2017_CI_UPPER': '2017',
+    '2018_CI_PERCENT': '2018',
+    '2018_CI_LOWER': '2018',
+    '2018_CI_UPPER': '2018',
+    '2019_CI_PERCENT': '2019',
+    '2019_CI_LOWER': '2019',
+    '2019_CI_UPPER': '2019',
+    '2020_CI_PERCENT': '2020',
+    '2020_CI_LOWER': '2020',
+    '2020_CI_UPPER': '2020'
 }

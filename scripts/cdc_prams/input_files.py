@@ -31,27 +31,28 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
                     "Directory path where input files need to be downloaded")
 
+
 def download_files(download_directory: str) -> None:
     input_url = [
         'All-Sites-PRAMS-MCH-Indicators-508.pdf',
         'Alabama-PRAMS-MCH-Indicators-508.pdf',
         'Alaska-PRAMS-MCH-Indicators-508.pdf',
         'Arizona-PRAMS-MCH-Indicators-508.pdf',
-        'Arkansas-PRAMS-MCH-Indicators-508.pdf',  
+        'Arkansas-PRAMS-MCH-Indicators-508.pdf',
         'Colorado-PRAMS-MCH-Indicators-508.pdf',
         'Connecticut-PRAMS-MCH-Indicators-508.pdf',
-        'Delaware-PRAMS-MCH-Indicators-508.pdf', 
+        'Delaware-PRAMS-MCH-Indicators-508.pdf',
         'District-Columbia-PRAMS-MCH-Indicators-508.pdf',
         'Florida-PRAMS-MCH-Indicators-508.pdf',
         'Georgia-PRAMS-MCH-Indicators-508.pdf',
         'Hawaii-PRAMS-MCH-Indicators-508.pdf',
         'Illinois-PRAMS-MCH-Indicators-508.pdf',
-        'Indiana-PRAMS-MCH-Indicators-508.pdf', 
-        'Iowa-PRAMS-MCH-Indicators-508.pdf', 
+        'Indiana-PRAMS-MCH-Indicators-508.pdf',
+        'Iowa-PRAMS-MCH-Indicators-508.pdf',
         'Kansas-PRAMS-MCH-Indicators-508.pdf',
         'Kentucky-PRAMS-MCH-Indicators-508.pdf',
-        'Louisiana-PRAMS-MCH-Indicators-508.pdf', 
-        'Maine-PRAMS-MCH-Indicators-508.pdf',  
+        'Louisiana-PRAMS-MCH-Indicators-508.pdf',
+        'Maine-PRAMS-MCH-Indicators-508.pdf',
         'Maryland-PRAMS-MCH-Indicators-508.pdf',
         'Massachusetts-PRAMS-MCH-Indicators-508.pdf',
         'Michigan-PRAMS-MCH-Indicators-508.pdf',
@@ -60,11 +61,11 @@ def download_files(download_directory: str) -> None:
         'Missouri-PRAMS-MCH-Indicators-508.pdf',
         'Montana-PRAMS-MCH-Indicators-508.pdf',
         'Nebraska-PRAMS-MCH-Indicators-508.pdf',
-        'New-Hampshire-PRAMS-MCH-Indicators-508.pdf', 
+        'New-Hampshire-PRAMS-MCH-Indicators-508.pdf',
         'New-Jersey-PRAMS-MCH-Indicators-508.pdf',
         'New-Mexico-PRAMS-MCH-Indicators-508.pdf',
         'New-York-City-PRAMS-MCH-Indicators-508.pdf',
-        'New-York-PRAMS-MCH-Indicators-508.pdf', 
+        'New-York-PRAMS-MCH-Indicators-508.pdf',
         'North-Carolina-PRAMS-MCH-Indicators-508.pdf',
         'North-Dakota-PRAMS-MCH-Indicators-508.pdf',
         'Oklahoma-PRAMS-MCH-Indicators-508.pdf',
@@ -74,18 +75,20 @@ def download_files(download_directory: str) -> None:
         'Rhode-Island-PRAMS-MCH-Indicators-508.pdf',
         'South-Dakota-PRAMS-MCH-Indicators-508.pdf',
         'Tennessee-PRAMS-MCH-Indicators-508.pdf',
-        'Texas-PRAMS-MCH-Indicators-508.pdf', 
+        'Texas-PRAMS-MCH-Indicators-508.pdf',
         'Utah-PRAMS-MCH-Indicators-508.pdf',
-        'Vermont-PRAMS-MCH-Indicators-508.pdf', 
-        'Virginia-PRAMS-MCH-Indicators-508.pdf', 
+        'Vermont-PRAMS-MCH-Indicators-508.pdf',
+        'Virginia-PRAMS-MCH-Indicators-508.pdf',
         'Washington-PRAMS-MCH-Indicators-508.pdf',
-        'West-Virginia-PRAMS-MCH-Indicators-508.pdf', 
+        'West-Virginia-PRAMS-MCH-Indicators-508.pdf',
         'Wisconsin-PRAMS-MCH-Indicators-508.pdf',
-        'Wyoming-PRAMS-MCH-Indicators-508.pdf' 
+        'Wyoming-PRAMS-MCH-Indicators-508.pdf'
     ]
-    INPUT_URL = ['https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/' + file for file in input_url]
+    INPUT_URL = [
+        'https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/' +
+        file for file in input_url
+    ]
     download_file(INPUT_URL, download_directory)
-
 
 
 def main(_):

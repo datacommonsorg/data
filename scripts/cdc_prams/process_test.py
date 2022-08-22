@@ -40,13 +40,13 @@ class TestProcess(unittest.TestCase):
     Comparing the data with the expected files.
     """
     test_data_files = [
-        'Alabama-PRAMS-MCH-Indicators-508.pdf', 
-        'Connecticut-PRAMS-MCH-Indicators-508.pdf', 
+        'Alabama-PRAMS-MCH-Indicators-508.pdf',
+        'Connecticut-PRAMS-MCH-Indicators-508.pdf',
         'Hawaii-PRAMS-MCH-Indicators-508.pdf'
-        # 'Maryland-PRAMS-MCH-Indicators-508.pdf', 
-        # 'Mississippi-PRAMS-MCH-Indicators-508.pdf', 
+        # 'Maryland-PRAMS-MCH-Indicators-508.pdf',
+        # 'Mississippi-PRAMS-MCH-Indicators-508.pdf',
         # 'North-Carolina-PRAMS-MCH-Indicators-508.pdf',
-        # 'Oregon-PRAMS-MCH-Indicators-508.pdf', 
+        # 'Oregon-PRAMS-MCH-Indicators-508.pdf',
         # 'Puerto-Rico-PRAMS-MCH-Indicators-508.pdf',
         # 'Vermont-PRAMS-MCH-Indicators-508.pdf',
         # 'Wisconsin-PRAMS-MCH-Indicators-508.pdf'
@@ -57,7 +57,7 @@ class TestProcess(unittest.TestCase):
     ]
     ip_data = os.listdir(TEST_DATASET_DIR)
     ip_data = [os.path.join(TEST_DATASET_DIR, file) for file in ip_data]
-    
+
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
@@ -66,9 +66,8 @@ class TestProcess(unittest.TestCase):
             MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
             TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
 
-            base = US_Prams(self.ip_data,
-                                              CLEANED_CSV_FILE_PATH,
-                                              MCF_FILE_PATH, TMCF_FILE_PATH)
+            base = US_Prams(self.ip_data, CLEANED_CSV_FILE_PATH, MCF_FILE_PATH,
+                            TMCF_FILE_PATH)
             base.process()
 
             with open(MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
@@ -85,11 +84,9 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        expected_mcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "PRAMS.mcf")
+        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.mcf")
 
-        expected_tmcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "PRAMS.tmcf")
+        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -109,8 +106,7 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "PRAMS.csv")
+        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR, "PRAMS.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
