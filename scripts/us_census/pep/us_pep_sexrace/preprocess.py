@@ -22,7 +22,6 @@ import os
 import json
 from absl import app
 from absl import flags
-import enum
 from national.national_1900_1970 import process_national_1900_1970
 from national.national_1980_1990 import process_national_1980_1990
 from national.national_1990_2000 import process_national_1990_2000
@@ -39,13 +38,7 @@ from county.county_1990_2000 import process_county_1990_2000
 from county.county_2000_2009 import process_county_2000_2009
 from county.county_2010_2020 import process_county_2010_2020
 from postprocess import create_single_csv, generate_mcf, generate_tmcf
-
-
-class Outputfiles(enum.Enum):
-    NationalBefore2000 = 1
-    StateCountyBefore2000 = 2
-    StateCountyAfter2000 = 3
-    NationalAfter2000 = 4
+from common import Outputfiles,_OUTPUTFINAL,_OUTPUTINTERMEDIATE
 
 
 FLAGS = flags.FLAGS
@@ -90,9 +83,9 @@ def process(config_files: list, test=False):
     """
     flag = None
 
-    os.system("mkdir -p " + os.path.join(_MODULE_DIR, 'output_files/final/'))
+    os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTFINAL))
     os.system("mkdir -p " +
-              os.path.join(_MODULE_DIR, 'output_files/intermediate/'))
+              os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE))
 
     for config_file in config_files:
         files = _get_urls(config_file, "urls", test)
