@@ -5,9 +5,6 @@ medicalSubjectHeadingRecordID: C:mesh_pubchem->RecordID
 name: C:mesh_pubchem->RecordName
 
 Node: E:mesh_pubchem->E2
-typeOf: dcs:MeSHDescriptor
-dcid: C:mesh_pubchem->Descriptor_dcid
-
-Node: E:mesh_pubchem->E3
-typeOf: dcs:pubChemCompoundID
+typeOf: dcs:ChemicalCompound
 dcid: C:mesh_pubchem->CID_dcid
+medicalSubjectHeadingRecordID: E:mesh_pubchem->E2
