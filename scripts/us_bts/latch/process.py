@@ -151,10 +151,6 @@ def _additional_process_2017(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Output DataFrame
     """
-    # Filtering flag_manhattan_trt column with 0 value,
-    # Possible values are below
-    # 1 = tract in Manhattan, NY; 0 = otherwise
-    # Creating measurement column
     mm_cols = conf.get("cols_for_measurement_method", [])
     if mm_cols != []:
         data_df['measurement_method'] = DEFAULT_MEASUREMENT_METHOD + \
@@ -369,12 +365,21 @@ def _generate_stat_var_and_mcf(data_df: pd.DataFrame):
     return data_df
 
 
-def _write_to_mcf_file(data_df: pd.DataFrame, mcf_file_path):
+def _write_to_mcf_file(data_df: pd.DataFrame, mcf_file_path: str):
+    """
+    Writing MCF nodes to a local file.
+    Args:
+        data_df (pd.DataFrame): Input DataFrame
+        mcf_file_path (str): MCF file
+    """
 
     unique_nodes_df = data_df.drop_duplicates(subset=["prop_Node"]).reset_index(
         drop=True)
 
     mcf_ = unique_nodes_df.sort_values(by=["prop_Node"])["mcf"].tolist()
+    if URBAN_RURAL_MCF_NODE:
+        mcf_.append(URBAN_RURAL_MCF_NODE)
+
     mcf_ = "\n\n".join(mcf_)
 
     with open(mcf_file_path, "w", encoding="UTF-8") as file:
@@ -404,7 +409,6 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
 
     data_df = _promote_measurement_method(data_df)
     data_df = data_df.sort_values(by=["year", "location", "sv"])
-
     data_df[FINAL_DATA_COLS].to_csv(cleaned_csv_file_path, index=False)
 
 
@@ -440,13 +444,13 @@ def main(_):
         logger.error("Run the download.py script first.")
         sys.exit(1)
     ip_files = [os.path.join(input_path, file) for file in ip_files]
-    # ip_files = [ip_files[0]]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output_files")
     # Creating Output Directory
     if not os.path.exists(output_file_path):
         os.mkdir(output_file_path)
     # Defining Output Files
+
     cleaned_csv_path = os.path.join(output_file_path,
                                     "us_transportation_household.csv")
     mcf_path = os.path.join(output_file_path, "us_transportation_household.mcf")

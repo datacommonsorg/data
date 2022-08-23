@@ -36,9 +36,9 @@ MELT_VAR_COL = "householdSize_numberOfVehicles"
 
 MELT_OBV_COL = "observation"
 
-_HOUSEHOLD_PV = "[Person {person}]"
+_HOUSEHOLD_PV = "[dcs:Person {person}]"
 
-_NUM_OF_VEHICLES_PV = "[AvailableVehicles {vehicle}]"
+_NUM_OF_VEHICLES_PV = "[dcs:AvailableVehicles {vehicle}]"
 
 # pylint: disable=unnecessary-lambda-assignment
 # pylint: disable=line-too-long
@@ -58,8 +58,22 @@ _DEFAULT_PROP = lambda prop: prop
 # pylint: enable=unnecessary-lambda-assignment
 # pylint: enable=line-too-long
 
+URBAN_RURAL_MCF_NODE = (
+    "Node: dcid:Place_Type_PlaceofResidenceClassification\n"
+    "populationType: dcs:Place\n"
+    "typeOf: dcs:StatisticalVariable\n"
+    "statType: dcs:measurementResult\n"
+    "measuredProperty: dcs:placeOfResidenceClassification\n")
+
 TMCF_TEMPLATE = (
     "Node: E:us_transportation_household->E0\n"
+    "typeOf: dcs:StatVarObservation\n"
+    "variableMeasured: dcs:Place_Type_PlaceofResidenceClassification\n"
+    "value: C:us_transportation_household->urban_group\n"
+    "observationAbout: C:us_transportation_household->location\n"
+    "observationDate: C:us_transportation_household->year\n"
+    "\n"
+    "Node: E:us_transportation_household->E1\n"
     "typeOf: dcs:StatVarObservation\n"
     "variableMeasured: C:us_transportation_household->sv\n"
     "measurementMethod: C:us_transportation_household->measurement_method\n"
@@ -103,7 +117,7 @@ ADDITIONAL_2009_FILE_COLS = [
 ]
 
 FINAL_DATA_COLS = [
-    "year", "location", "sv", "observation", "measurement_method"
+    "year", "location", "urban_group", "sv", "observation", "measurement_method"
 ]
 
 MEASUREDPROP_MAPPER = {
@@ -193,7 +207,6 @@ SV_PROP_ORDER = [
     "measuredProperty", "householdSize", "numberOfVehicles",
     "transportationType"
 ]
-# "transportationType"
 
 FORM_STATVAR = {
     # "placeOfResidenceClassification": {

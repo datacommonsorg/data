@@ -12,8 +12,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With1AvailableVehicles_LocalAreaTransportation
@@ -22,8 +22,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With2AvailableVehicles_LocalAreaTransportation
@@ -32,8 +32,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With3AvailableVehicles_LocalAreaTransportation
@@ -42,8 +42,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With1Person_With4AvailableVehicles_LocalAreaTransportation
@@ -52,8 +52,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With0AvailableVehicles_LocalAreaTransportation
@@ -62,8 +62,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With1AvailableVehicles_LocalAreaTransportation
@@ -72,8 +72,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With2AvailableVehicles_LocalAreaTransportation
@@ -82,8 +82,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With3AvailableVehicles_LocalAreaTransportation
@@ -92,8 +92,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With2Person_With4AvailableVehicles_LocalAreaTransportation
@@ -102,8 +102,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With0AvailableVehicles_LocalAreaTransportation
@@ -112,8 +112,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With1AvailableVehicles_LocalAreaTransportation
@@ -122,8 +122,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With2AvailableVehicles_LocalAreaTransportation
@@ -132,8 +132,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With3AvailableVehicles_LocalAreaTransportation
@@ -142,8 +142,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With3Person_With4AvailableVehicles_LocalAreaTransportation
@@ -152,8 +152,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With0AvailableVehicles_LocalAreaTransportation
@@ -162,8 +162,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With1AvailableVehicles_LocalAreaTransportation
@@ -172,8 +172,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With2AvailableVehicles_LocalAreaTransportation
@@ -182,8 +182,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With3AvailableVehicles_LocalAreaTransportation
@@ -192,8 +192,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With4Person_With4AvailableVehicles_LocalAreaTransportation
@@ -202,8 +202,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With0AvailableVehicles_LocalAreaTransportation
@@ -212,8 +212,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With1AvailableVehicles_LocalAreaTransportation
@@ -222,8 +222,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With2AvailableVehicles_LocalAreaTransportation
@@ -232,8 +232,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With3AvailableVehicles_LocalAreaTransportation
@@ -242,8 +242,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonMilesTraveled_Household_With5Person_With4AvailableVehicles_LocalAreaTransportation
@@ -252,8 +252,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_LocalAreaTransportation
@@ -270,8 +270,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With1AvailableVehicles_LocalAreaTransportation
@@ -280,8 +280,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With2AvailableVehicles_LocalAreaTransportation
@@ -290,8 +290,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With3AvailableVehicles_LocalAreaTransportation
@@ -300,8 +300,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With1Person_With4AvailableVehicles_LocalAreaTransportation
@@ -310,8 +310,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With0AvailableVehicles_LocalAreaTransportation
@@ -320,8 +320,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With1AvailableVehicles_LocalAreaTransportation
@@ -330,8 +330,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With2AvailableVehicles_LocalAreaTransportation
@@ -340,8 +340,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With3AvailableVehicles_LocalAreaTransportation
@@ -350,8 +350,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With2Person_With4AvailableVehicles_LocalAreaTransportation
@@ -360,8 +360,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With0AvailableVehicles_LocalAreaTransportation
@@ -370,8 +370,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With1AvailableVehicles_LocalAreaTransportation
@@ -380,8 +380,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With2AvailableVehicles_LocalAreaTransportation
@@ -390,8 +390,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With3AvailableVehicles_LocalAreaTransportation
@@ -400,8 +400,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With3Person_With4AvailableVehicles_LocalAreaTransportation
@@ -410,8 +410,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With0AvailableVehicles_LocalAreaTransportation
@@ -420,8 +420,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With1AvailableVehicles_LocalAreaTransportation
@@ -430,8 +430,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With2AvailableVehicles_LocalAreaTransportation
@@ -440,8 +440,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With3AvailableVehicles_LocalAreaTransportation
@@ -450,8 +450,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With4Person_With4AvailableVehicles_LocalAreaTransportation
@@ -460,8 +460,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With0AvailableVehicles_LocalAreaTransportation
@@ -470,8 +470,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With1AvailableVehicles_LocalAreaTransportation
@@ -480,8 +480,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With2AvailableVehicles_LocalAreaTransportation
@@ -490,8 +490,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With3AvailableVehicles_LocalAreaTransportation
@@ -500,8 +500,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_PersonTrips_Household_With5Person_With4AvailableVehicles_LocalAreaTransportation
@@ -510,8 +510,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:personTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_LocalAreaTransportation
@@ -528,8 +528,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With1AvailableVehicles_LocalAreaTransportation
@@ -538,8 +538,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With2AvailableVehicles_LocalAreaTransportation
@@ -548,8 +548,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With3AvailableVehicles_LocalAreaTransportation
@@ -558,8 +558,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With1Person_With4AvailableVehicles_LocalAreaTransportation
@@ -568,8 +568,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With0AvailableVehicles_LocalAreaTransportation
@@ -578,8 +578,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With1AvailableVehicles_LocalAreaTransportation
@@ -588,8 +588,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With2AvailableVehicles_LocalAreaTransportation
@@ -598,8 +598,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With3AvailableVehicles_LocalAreaTransportation
@@ -608,8 +608,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With2Person_With4AvailableVehicles_LocalAreaTransportation
@@ -618,8 +618,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With0AvailableVehicles_LocalAreaTransportation
@@ -628,8 +628,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With1AvailableVehicles_LocalAreaTransportation
@@ -638,8 +638,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With2AvailableVehicles_LocalAreaTransportation
@@ -648,8 +648,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With3AvailableVehicles_LocalAreaTransportation
@@ -658,8 +658,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With3Person_With4AvailableVehicles_LocalAreaTransportation
@@ -668,8 +668,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With0AvailableVehicles_LocalAreaTransportation
@@ -678,8 +678,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With1AvailableVehicles_LocalAreaTransportation
@@ -688,8 +688,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With2AvailableVehicles_LocalAreaTransportation
@@ -698,8 +698,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With3AvailableVehicles_LocalAreaTransportation
@@ -708,8 +708,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With4Person_With4AvailableVehicles_LocalAreaTransportation
@@ -718,8 +718,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With0AvailableVehicles_LocalAreaTransportation
@@ -728,8 +728,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With1AvailableVehicles_LocalAreaTransportation
@@ -738,8 +738,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With2AvailableVehicles_LocalAreaTransportation
@@ -748,8 +748,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With3AvailableVehicles_LocalAreaTransportation
@@ -758,8 +758,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleMilesTraveled_Household_With5Person_With4AvailableVehicles_LocalAreaTransportation
@@ -768,8 +768,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleMilesTraveled
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_LocalAreaTransportation
@@ -786,8 +786,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With1AvailableVehicles_LocalAreaTransportation
@@ -796,8 +796,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With2AvailableVehicles_LocalAreaTransportation
@@ -806,8 +806,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With3AvailableVehicles_LocalAreaTransportation
@@ -816,8 +816,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With1Person_With4AvailableVehicles_LocalAreaTransportation
@@ -826,8 +826,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 1]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 1]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With0AvailableVehicles_LocalAreaTransportation
@@ -836,8 +836,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With1AvailableVehicles_LocalAreaTransportation
@@ -846,8 +846,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With2AvailableVehicles_LocalAreaTransportation
@@ -856,8 +856,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With3AvailableVehicles_LocalAreaTransportation
@@ -866,8 +866,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With2Person_With4AvailableVehicles_LocalAreaTransportation
@@ -876,8 +876,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 2]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 2]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With0AvailableVehicles_LocalAreaTransportation
@@ -886,8 +886,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With1AvailableVehicles_LocalAreaTransportation
@@ -896,8 +896,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With2AvailableVehicles_LocalAreaTransportation
@@ -906,8 +906,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With3AvailableVehicles_LocalAreaTransportation
@@ -916,8 +916,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With3Person_With4AvailableVehicles_LocalAreaTransportation
@@ -926,8 +926,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 3]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 3]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With0AvailableVehicles_LocalAreaTransportation
@@ -936,8 +936,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With1AvailableVehicles_LocalAreaTransportation
@@ -946,8 +946,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With2AvailableVehicles_LocalAreaTransportation
@@ -956,8 +956,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With3AvailableVehicles_LocalAreaTransportation
@@ -966,8 +966,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With4Person_With4AvailableVehicles_LocalAreaTransportation
@@ -976,8 +976,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 4]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 4]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With0AvailableVehicles_LocalAreaTransportation
@@ -986,8 +986,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 0]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 0]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With1AvailableVehicles_LocalAreaTransportation
@@ -996,8 +996,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 1]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 1]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With2AvailableVehicles_LocalAreaTransportation
@@ -1006,8 +1006,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 2]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 2]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With3AvailableVehicles_LocalAreaTransportation
@@ -1016,8 +1016,8 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 3]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 3]
 transportationType: dcs:LocalAreaTransportation
 
 Node: dcid:EveryWeekday_Mean_VehicleTrips_Household_With5Person_With4AvailableVehicles_LocalAreaTransportation
@@ -1026,6 +1026,12 @@ populationType: dcs:Household
 statType: dcs:meanValue
 measurementQualifier: dcs:EveryWeekday
 measuredProperty: dcs:vehicleTrips
-householdSize: [Person 5]
-numberOfVehicles: [AvailableVehicles 4]
+householdSize: [dcs:Person 5]
+numberOfVehicles: [dcs:AvailableVehicles 4]
 transportationType: dcs:LocalAreaTransportation
+
+Node: dcid:Place_Type_PlaceofResidenceClassification
+populationType: dcs:Place
+typeOf: dcs:StatisticalVariable
+statType: dcs:measurementResult
+measuredProperty: dcs:placeOfResidenceClassification

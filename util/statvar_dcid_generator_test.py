@@ -138,6 +138,17 @@ class TestStatVarDcidGenerator(unittest.TestCase):
         expected_dcid = 'Count_Person_20Years_Female'
         self.assertEqual(dcid, expected_dcid)
 
+        statvar_dict3 = {
+            'statType': 'dcs:measuredValue',
+            'measuredProperty': 'count',
+            'populationType': 'Person',
+            'gender': 'Female',
+            'age': '[dcs:Years 20]'
+        }
+        dcid = statvar_dcid_generator.get_statvar_dcid(statvar_dict3)
+        expected_dcid = 'Count_Person_20Years_Female'
+        self.assertEqual(dcid, expected_dcid)
+
     def test_quantity_range_name_generation(self):
         statvar_dict1 = {
             'statType': 'measuredValue',
