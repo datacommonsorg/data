@@ -5,6 +5,7 @@ medicalSubjectHeadingRecordID: C:mesh_record->RecordID
 name: C:mesh_record->RecordName
 dateCreated: C:mesh_record->DateCreated
 dateRevised: C:mesh_record->DateRevised
+medicalSubjectHeadingDescriptorID: E:mesh_record->E2
 
 Node: E:mesh_record->E2
 typeOf: dcs:MeSHDescriptor
