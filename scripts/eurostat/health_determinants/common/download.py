@@ -37,8 +37,9 @@ def download_file(input_urls: list, current_working_directory: str) -> None:
     path = current_working_directory + '/input_files/'
     for download_file_url in input_urls:
         file_name = download_file_url.split("/")[-1][:-3]
-        if not os.path.exists(path):
-            os.mkdir(path)
+        os.makedirs(path, exist_ok=True)
+        # if not os.path.exists(path):
+        #     os.mkdir(path)
         out_file = path + file_name
 
         with urllib.request.urlopen(download_file_url) as response:

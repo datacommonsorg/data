@@ -24,18 +24,20 @@ from absl import app, flags
 # pylint: disable=import-error
 # pylint: disable=wrong-import-position
 # For import common.download
+
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
-from common import download
+from common import import_download_details, download
+
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
-
 _FLAGS = flags.FLAGS
-flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
-                    "Directory path where input files need to be downloaded")
+flags.DEFINE_string("import_name", "alcohol_consumption",
+                    "Import name for which input files will be downloaded")
 
 
-def download_files(download_directory: str) -> None:
+def download_files(download_directory: str, filenames: str, input_url: str,
+                   file_extension: str) -> None:
     """
     This Method calls the download function from the commons directory
     to download all the input files.
@@ -46,22 +48,20 @@ def download_files(download_directory: str) -> None:
     Returns:
         None
     """
-    # List to provide the URLs of input files to download script.
-    filenames = [
-        "al1e", "al1i", "al1u", "al3e", "al3i", "al3u", "al2e", "al2i", "al2u",
-        "al1b", "al1c", "de10", "de6"
-    ]
     # pylint: disable=invalid-name
     for file in filenames:
-        INPUT_URLS = [
-        "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-            "BulkDownloadListing?file=data/hlth_ehis_"+ str(file) + ".tsv.gz"]
+        INPUT_URLS = [input_url + str(file) + file_extension]
         download.download_file(INPUT_URLS, download_directory)
     # pylint: enable=invalid-name
 
 
 def main(_):
-    download_files(_FLAGS.download_directory)
+    download_details = import_download_details.download_details[
+        _FLAGS.import_name]
+    download_path = os.path.dirname((__file__)) + "/../" + _FLAGS.import_name
+    download_files(download_path, download_details["filenames"],
+                   download_details["input_url"],
+                   download_details["file_extension"])
 
 
 if __name__ == '__main__':

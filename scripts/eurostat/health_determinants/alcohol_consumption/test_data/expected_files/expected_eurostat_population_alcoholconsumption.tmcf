@@ -1,8 +1,8 @@
-Node: E:EuroStat_Population_AlcoholConsumption->E0
+Node: E:eurostat_population_alcohol_consumption->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: C:EuroStat_Population_AlcoholConsumption->SV
-measurementMethod: C:EuroStat_Population_AlcoholConsumption->Measurement_Method
-observationAbout: C:EuroStat_Population_AlcoholConsumption->geo
-observationDate: C:EuroStat_Population_AlcoholConsumption->time
+variableMeasured: C:eurostat_population_alcohol_consumption->SV
+measurementMethod: C:eurostat_population_alcohol_consumption->Measurement_Method
+observationAbout: C:eurostat_population_alcohol_consumption->geo
+observationDate: C:eurostat_population_alcohol_consumption->time
 scalingFactor: 100
-value: C:EuroStat_Population_AlcoholConsumption->observation
+value: C:eurostat_population_alcohol_consumption->observation
