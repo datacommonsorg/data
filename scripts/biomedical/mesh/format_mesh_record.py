@@ -139,8 +139,8 @@ def format_pubchem_mesh_mapping(pubchem_file, df_mesh):
     df_pubchem = pd.read_csv(pubchem_file, on_bad_lines='skip', sep='\t', header = None, names = ['CID', 'CompoundName'])
     df_pubchem['CompoundName'] = '"' + df_pubchem.CompoundName + '"'
     df_match = pd.merge(df_mesh, df_pubchem, left_on='RecordName', right_on='CompoundName', how = 'inner')
-    df_match = df_match.filter(['DescriptorID','CID', 'RecordID', 'RecordName', 'Record_dcid', 'Descriptor_dcid'], axis=1)
-    df_match['CID_dcid'] = 'chem/' + df_match['CID'].astype(str)
+    df_match = df_match.filter(['CID', 'RecordID', 'RecordName', 'Record_dcid'], axis=1)
+    df_match['CID_dcid'] = 'chem/CID' + df_match['CID'].astype(str)
     return df_match
 
 def main():
