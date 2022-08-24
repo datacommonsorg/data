@@ -46,7 +46,7 @@ class TestPreprocess(unittest.TestCase):
     def test_mcf_tmcf_files(self):
         """
         This method is required to test between output generated
-        preprocess script and excepted output files like MCF and TMCF File
+        preprocess script and excepted output files like MCF and TMCF File.
         """
         mcf_files = [
             "state_county_after_2000.mcf", "state_county_before_2000.mcf",
