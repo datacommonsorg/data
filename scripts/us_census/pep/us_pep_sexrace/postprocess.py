@@ -15,18 +15,18 @@
 Script to read all
 the generated csv for
 National, State and County
-and generate final csv, MCF, TMCF file
+and generate final CSV, MCF, TMCF file.
 """
 
 import pandas as pd
 import os
-from common import Outputfiles,_OUTPUTFINAL,_OUTPUTINTERMEDIATE
-
+from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
+
 def write_to_tmcf(filename: str, tmcf: str):
-   # os.path.join(_MODULE_DIR, 'output_files/intermediate/'))
+    # os.path.join(_MODULE_DIR, 'output_files/intermediate/'))
     with open(os.path.join(_CODEDIR, _OUTPUTFINAL, filename + ".tmcf"),
               'w+',
               encoding='utf-8') as f_out:
@@ -57,7 +57,7 @@ def process_national_before_2000(df: pd.DataFrame):
     df = df.replace('nan', '')
     # writing output to final csv
     df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL, "national_before_2000.csv"),
-               index=False)
+              index=False)
 
     # collecting all the column headers
     columns_of_national_before_2000 = df.columns.to_list()
@@ -95,8 +95,8 @@ def process_state_county_before_2000(df: pd.DataFrame):
         df[col] = df[col].astype('int64')
 
     df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
-               "state_county_before_2000.csv"),
-               index=False)
+                           "state_county_before_2000.csv"),
+              index=False)
 
     # collecting all the column headers
     columns_of_state_county_before_2000 = df.columns.to_list()
@@ -120,8 +120,8 @@ def process_state_county_after_2000(df: pd.DataFrame):
     df = df.replace('nan', '')
     # writing output to final csv
     df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
-               "state_county_after_2000.csv"),
-               index=False)
+                           "state_county_after_2000.csv"),
+              index=False)
 
     # collecting all the column headers
     columns_of_state_county_after_2000 = df.columns.to_list()
@@ -144,7 +144,7 @@ def process_national_after_2000(df: pd.DataFrame):
 
     # writing output to final csv
     df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL, "national_after_2000.csv"),
-               index=False)
+              index=False)
 
     # collecting all the column headers
     columns_of_national_after_2000 = df.columns.to_list()
@@ -165,7 +165,7 @@ def create_single_csv(output_files_names: list):
         output_files_names (List) : nested list of output file names generated.
 
     Return:
-        column_name (List) : list of all the column names
+        column_name (List) : list of all the column names.
     """
     df1 = pd.DataFrame()
     df3 = pd.DataFrame()

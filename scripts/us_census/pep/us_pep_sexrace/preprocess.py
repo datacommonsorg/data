@@ -15,7 +15,7 @@
 This script runs
 all the national state and
 county python script and generate
-three output csv, mcf and tmcf.
+four output CSV, MCF and TMCF.
 """
 
 import os
@@ -38,8 +38,7 @@ from county.county_1990_2000 import process_county_1990_2000
 from county.county_2000_2009 import process_county_2000_2009
 from county.county_2010_2020 import process_county_2010_2020
 from postprocess import create_single_csv, generate_mcf, generate_tmcf
-from common import Outputfiles,_OUTPUTFINAL,_OUTPUTINTERMEDIATE
-
+from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
@@ -50,14 +49,14 @@ _MODULE_DIR = os.path.dirname(__file__)
 
 def _get_urls(json_file_path, key, test):
     """
-    Extracting dataset urls from json_config_files
+    Extracting dataset urls from json_config_files.
 
     Args:
-        json_file_path: path to config json files
-        key: provies the key for json file
+        json_file_path: path to config json files.
+        key: provies the key for json file.
 
     Returns:
-        urls: dataset url
+        urls: dataset url.
     """
     url_json = None
     with open(json_file_path, encoding="UTF-8") as file:
@@ -76,16 +75,18 @@ def _get_urls(json_file_path, key, test):
 def process(config_files: list, test=False):
     """
     This method calls the required methods
-    and generate final csv, mcf and tmcf
+    and generate final csv, mcf and tmcf.
 
     Args:
-        config_files (List) : list of json files containing dataset url
+        config_files (List) : list of json files containing dataset url.
+
+    Returns:
+        None.
     """
     flag = None
 
     os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTFINAL))
-    os.system("mkdir -p " +
-              os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE))
+    os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE))
 
     for config_file in config_files:
         files = _get_urls(config_file, "urls", test)
@@ -159,7 +160,7 @@ def process(config_files: list, test=False):
 
 def main(_):
     """
-    creating and processing input files
+    Creating and processing input files
     """
     input_path = FLAGS.input_path
 
