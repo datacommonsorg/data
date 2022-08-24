@@ -22,7 +22,6 @@ DC import
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:LiveBirthPregnancyEvent\n"
-                 "measurementDenominator: dcs:Count_BirthEvent_LiveBirth\n"
                  "{xtra_pvs}\n")
 
 _TMCF_TEMPLATE = ("Node: E:US_Prams->E0\n"
@@ -36,7 +35,6 @@ _TMCF_TEMPLATE = ("Node: E:US_Prams->E0\n"
 DEFAULT_SV_PROP = {
     "typeOf": "dcs:StatisticalVariable",
     "populationType": "dcs:LiveBirthPregnancyEvent",
-    "measurementDenominator": "dcs:Count_BirthEvent_LiveBirth"
 }
 
 _PV_PROP = {

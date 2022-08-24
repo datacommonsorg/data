@@ -62,20 +62,19 @@ def prams(input_url: list, statvar_col: dict) -> pd.DataFrame:
         df['Geo'] = file_name.replace('-PRAMS-MCH-Indicators-508.pdf','').\
         replace('-',' ').replace('District Columbia','District of Columbia')\
         .replace('New York City','geoId/3651000').replace('All Sites','country/USA')
-        print(file_name.replace('-PRAMS-MCH-Indicators-508.pdf', ''))
+        # print(file_name.replace('-PRAMS-MCH-Indicators-508.pdf', ''))
         df.reset_index(drop=True, inplace=True)
         if flag == "States":
             df = df.drop([
                 'Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3',
                 'Unnamed: 4'
-            ], 1)
+            ], axis=1)
             df.columns = [
                 'statVar', '2016_CI', '2017_sampleSize', '2017_CI',
                 '2018_sampleSize', '2018_CI', '2019_sampleSize', '2019_CI',
                 '2020_sampleSize', '2020_CI', 'Overall_2020_CI', 'Geo'
             ]
         elif flag == "National":
-            # print(df.columns)
             df.columns = [
                 'statVar', '2016_CI', '2017_sampleSize', '2017_Nan', '2017_CI',
                 '2018_sampleSize', '2018_Nan', '2018_CI', '2019_sampleSize',
@@ -236,9 +235,9 @@ def prams(input_url: list, statvar_col: dict) -> pd.DataFrame:
                             temp_df.columns[2]: i + '_UPPER'
                         })
                     temp_df[i + '_LOWER'] = temp_df[i + '_LOWER'].str.replace(
-                        '(', '')
+                        '(', '',regex=False)
                     temp_df[i + '_UPPER'] = temp_df[i + '_UPPER'].str.replace(
-                        ')', '')
+                        ')', '',regex=False)
                 df2 = pd.concat([df2, temp_df], axis=1)
             df2 = df2.drop(columns=[
                 'newStatVar', '2016_CI', '2017_CI', '2018_CI', '2019_CI',
@@ -403,21 +402,27 @@ class US_Prams:
 
                 if "Percent" in prop:
                     sv_pvs["measuredProperty"] = f"dcs:percent"
-                    pvs.append(f"measuredProperty: dcs:percent")
+                    pvs.append(f"measuredProperty: dcs:count")
                     pvs.append(f"statType: dcs:measuredValue")
                     sv_pvs["statType"] = f"dcs:measuredValue"
+                    pvs.append(f"measurementDenominator: dcs:Count_BirthEvent_LiveBirth")
+                    sv_pvs["measurementDenominator"]= f"dcs:Count_BirthEvent_LiveBirth"
 
                 if "ConfidenceIntervalLowerLimit" in prop:
                     sv_pvs["measuredProperty"] = f"dcs:percent"
-                    pvs.append(f"measuredProperty: dcs:percent")
+                    pvs.append(f"measuredProperty: dcs:count")
                     pvs.append(f"statType: dcs:confidenceIntervalLowerLimit")
                     sv_pvs["statType"] = f"dcs:confidenceIntervalLowerLimit"
+                    pvs.append(f"measurementDenominator: dcs:Count_BirthEvent_LiveBirth")
+                    sv_pvs["measurementDenominator"]= f"dcs:Count_BirthEvent_LiveBirth"
 
                 if "ConfidenceIntervalUpperLimit" in prop:
                     sv_pvs["measuredProperty"] = f"dcs:percent"
-                    pvs.append(f"measuredProperty: dcs:percent")
+                    pvs.append(f"measuredProperty: dcs:count")
                     pvs.append(f"statType: dcs:confidenceIntervalUpperLimit")
                     sv_pvs["statType"] = f"dcs:confidenceIntervalUpperLimit"
+                    pvs.append(f"measurementDenominator: dcs:Count_BirthEvent_LiveBirth")
+                    sv_pvs["measurementDenominator"]= f"dcs:Count_BirthEvent_LiveBirth"
 
                 if "MultivitaminUseMoreThan4TimesAWeek" in prop:
                     prop = prop[0].lower() + prop[1:]
@@ -557,8 +562,8 @@ class US_Prams:
 
 def main(_):
     input_path = _FLAGS.input_path
-    # input_path = "/Users/chharish/us_prams/data/scripts/cdc_prams/test_data/datasets"
     ip_files = os.listdir(input_path)
+    ip_files = ["/Users/chharish/us_prams/data/scripts/cdc_prams/input_files/Arizona-PRAMS-MCH-Indicators-508.pdf"]
     ip_files = [os.path.join(input_path, file) for file in ip_files]
     # Defining Output Files
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
