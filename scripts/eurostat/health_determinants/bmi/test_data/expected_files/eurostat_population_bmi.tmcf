@@ -5,3 +5,4 @@ measurementMethod: C:eurostat_population_bmi->Measurement_Method
 observationAbout: C:eurostat_population_bmi->geo
 observationDate: C:eurostat_population_bmi->time
 value: C:eurostat_population_bmi->observation
+scalingFactor: 100

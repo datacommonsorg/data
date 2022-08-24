@@ -23,7 +23,7 @@ import tempfile
 _MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, _MODULE_DIR)
 # pylint: disable=wrong-import-position
-from process import process
+from process import EuroStatAlcoholConsumption
 # pylint: enable=wrong-import-position
 
 _TEST_DATASET_DIR = os.path.join(_MODULE_DIR, "test_data", "datasets")
@@ -46,20 +46,24 @@ class TestProcess(unittest.TestCase):
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            _CLEANED_CSV_FILE_PATH = os.path.join(tmp_dir, "data.csv")
-            _MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
-            _TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
+            self._cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
+            self._mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
+            self._tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            process(self.ip_data, _CLEANED_CSV_FILE_PATH, _MCF_FILE_PATH,
-                    _TMCF_FILE_PATH)
+            loader = EuroStatAlcoholConsumption(self.ip_data,
+                                                self._cleaned_csv_file_path,
+                                                self._mcf_file_path,
+                                                self._tmcf_file_path)
+            loader.process()
 
-            with open(_MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
+            with open(self._mcf_file_path, encoding="UTF-8") as mcf_file:
                 self._actual_mcf_data = mcf_file.read()
 
-            with open(_TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
+            with open(self._tmcf_file_path, encoding="UTF-8") as tmcf_file:
                 self._actual_tmcf_data = tmcf_file.read()
 
-            with open(_CLEANED_CSV_FILE_PATH, encoding="UTF-8") as csv_file:
+            with open(self._cleaned_csv_file_path,
+                      encoding="UTF-8") as csv_file:
                 self._actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):

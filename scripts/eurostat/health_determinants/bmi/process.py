@@ -63,7 +63,8 @@ _TMCF_TEMPLATE = (
     "measurementMethod: C:eurostat_population_bmi->Measurement_Method\n"
     "observationAbout: C:eurostat_population_bmi->geo\n"
     "observationDate: C:eurostat_population_bmi->time\n"
-    "value: C:eurostat_population_bmi->observation\n")
+    "value: C:eurostat_population_bmi->observation\n"
+    "scalingFactor: 100\n")
 
 file_to_sv_mapping = {
         "hlth_ehis_bm1e": "'Percent_' + df['bmi']"+\
