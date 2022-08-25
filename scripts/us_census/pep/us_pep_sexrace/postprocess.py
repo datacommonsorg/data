@@ -26,7 +26,6 @@ _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
 def write_to_tmcf(filename: str, tmcf: str):
-    # os.path.join(_MODULE_DIR, 'output_files/intermediate/'))
     with open(os.path.join(_CODEDIR, _OUTPUTFINAL, filename + ".tmcf"),
               'w+',
               encoding='utf-8') as f_out:
