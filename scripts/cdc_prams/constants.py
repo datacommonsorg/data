@@ -29,7 +29,7 @@ _TMCF_TEMPLATE = ("Node: E:US_Prams->E0\n"
                   "variableMeasured: C:US_Prams->SV\n"
                   "observationAbout: C:US_Prams->Geo\n"
                   "observationDate: C:US_Prams->Year\n"
-                  "scalingFactor: 100\n"
+                  "scalingFactor: C:US_Prams->ScalingFactor\n"
                   "value: C:US_Prams->Observation\n")
 
 DEFAULT_SV_PROP = {
