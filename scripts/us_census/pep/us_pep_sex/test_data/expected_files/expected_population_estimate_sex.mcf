@@ -1,0 +1,13 @@
+Node: dcid:Count_Person_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count

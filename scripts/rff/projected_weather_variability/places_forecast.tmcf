@@ -1,0 +1,6 @@
+Node: dcid:places_forecast->dcid
+typeOf: dcs:GeoGridPlace_0.25Deg
+latitude: C:places_forecast->latitude
+longitude: C:places_forecast->longitude
+name: C:places_forecast->dcid
+containedInPlace: C:places_forecast->containedInPlace

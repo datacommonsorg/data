@@ -115,7 +115,7 @@ def _replace_frequenc(df: pd.DataFrame) -> pd.DataFrame:
 
     Args:
         df (pd.DataFrame): df as the input, to change column values
-
+       
     Returns:
         df (pd.DataFrame): modified df as output
     """
@@ -328,7 +328,7 @@ def _replace_smoking_frequenc(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF
-
+    
     Args:
         df (pd.DataFrame): df as the input, to change column values
 
@@ -375,7 +375,7 @@ def _replace_assist(df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
-
+    
     Args:
         df (pd.DataFrame): df as the input, to change column values
 

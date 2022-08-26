@@ -1,0 +1,8 @@
+Node: E:usa_population_asr->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:usa_population_asr->SVs
+measurementMethod: C:usa_population_asr->Measurement_Method
+observationAbout: C:usa_population_asr->geo_ID
+observationDate: C:usa_population_asr->Year
+observationPeriod: "P1Y"
+value: C:usa_population_asr->observation
