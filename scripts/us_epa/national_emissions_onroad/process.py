@@ -30,7 +30,7 @@ from util.statvar_dcid_generator import get_statvar_dcid
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
-from metadata import replace_metadata
+from metadata import replace_metadata, replace_source_metadata
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -38,6 +38,7 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
+                 "name: \"Annual Amount Emissions {pv5}\"\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Emissions\n"
                  "measurementQualifier: dcs:Annual{pv2}{pv3}{pv4}\n"
@@ -167,10 +168,10 @@ def _onroad(file_path: str) -> pd.DataFrame:
               inplace=True)
     df['year'] = df['year'].str[:4]
     df = _replace_metadata(df, 'unit')
-    df = _replace_metadata(df, 'scc')
+    # df = _replace_metadata(df, 'scc')
     df = _replace_metadata(df, 'pollutant code')
-    df['SV'] = ('Annual_Amount_Emissions_' + df['scc'].astype(str) + '_' +
-                df['pollutant code'].astype(str))
+    df['SV'] = ('Annual_Amount_Emissions_' + df['pollutant code'].astype(str) +
+                '_SCC_' + df['scc'].astype(str))
     df['SV'] = df['SV'].str.replace('_nan', '')
     df = df.drop(
         columns=['scc', 'pollutant code', 'pollutant type(s)', 'fips code'])
@@ -227,19 +228,27 @@ class USAirEmissionTrends:
             }
             emission_type = pollutant = ''
             sv_property = sv.split("_")
-            source = '\nemissionSource: dcs:' + sv_property[3]
-            sv_checker['emissionSource'] = 'dcs:' + sv_property[3]
-            for i in sv_property[4:]:
+            source = '\nepaSccCode: ' + sv_property[-1]
+            scc_name = replace_source_metadata[sv_property[-1]]
+            scc_name = scc_name + " (" + sv_property[-1] + ")"
+            sv_checker['epaSccCode'] = sv_property[-1]
+
+            for i in sv_property[3:-2]:
                 pollutant = pollutant + i + '_'
             sv_checker['emittedThing'] = 'dcs:' + pollutant.rstrip('_')
-            pollutant = '\nemittedThing: dcs:' + pollutant.rstrip('_')
+            pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')
+            pollutant_name = replace_metadata[pollutant.rstrip('_')]
             generated_sv = get_statvar_dcid(sv_checker)
             if (generated_sv != sv):
                 print(generated_sv)
                 print(sv)
                 print()
             final_mcf_template += _MCF_TEMPLATE.format(
-                pv1=sv, pv2=source, pv3=pollutant, pv4=emission_type) + "\n"
+                pv1=sv,
+                pv2=source,
+                pv3=pollutant_value,
+                pv4=emission_type,
+                pv5=pollutant_name + ", " + scc_name) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:

@@ -19,11 +19,12 @@ import os
 import urllib.request
 import zipfile
 import shutil
+import subprocess
 
 _DOWNLOAD_PATH = os.path.join(os.path.dirname((__file__)), 'input_files')
 
 
-def download_files() -> None:
+def download_files(INPUT_URLS, folders) -> None:
     """
     This Method calls the download function from the commons directory
     to download all the input files.
@@ -34,13 +35,7 @@ def download_files() -> None:
     Returns:
         None
     """
-    # List to provide the URLs of input files to download script.
-    INPUT_URLS = [
-        "https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiApr_onroad_byregions.zip",
-        "https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_onroad_byregions.zip",
-        "https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_onroad_byregions.zip",
-        "https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_onroad_byregions.zip"
-    ]
+
     if not os.path.exists(_DOWNLOAD_PATH):
         os.mkdir(_DOWNLOAD_PATH)
     os.chdir(_DOWNLOAD_PATH)
@@ -48,16 +43,20 @@ def download_files() -> None:
         year = url.split("/")[5]
         # Download and unzip files.
         zip_path, _ = urllib.request.urlretrieve(url)
-        zipdata = zipfile.ZipFile(zip_path)
-        zipinfos = zipdata.infolist()
-        for zipinfo in zipinfos:
-            # This will do the renaming
-            zipinfo.filename = year + '_' + zipinfo.filename
-            zipdata.extract(zipinfo)
-    # Move files in specific folders to input_files folder
-    folders = [
-        '2014_2014neiv2_onroad_byregions', '2008_2008neiv3_onroad_byregions'
-    ]
+        if "2017neiJan_facility_process" in url:
+            subprocess.run(["unzip", zip_path])
+            point2017 = os.listdir()
+            for file in point2017:
+                os.rename(file,year+file)
+        else:
+            zipdata = zipfile.ZipFile(zip_path)
+            zipinfos = zipdata.infolist()
+            for zipinfo in zipinfos:
+                # This will do the renaming
+                zipinfo.filename = year + '_' + zipinfo.filename
+                zipdata.extract(zipinfo)
+        # Move files in specific folders to input_files folder
+    
     for folder in folders:
         files = os.listdir(os.path.join(_DOWNLOAD_PATH, folder))
         for file in files:
@@ -68,9 +67,5 @@ def download_files() -> None:
     files = os.listdir(_DOWNLOAD_PATH)
     # Delete metadata files present in the folder.
     for file in files:
-        if file.endswith(".txt") or file.endswith(".xlsx"):
+        if file.endswith(".txt") or file.endswith(".xlsx") or file.endswith(".pdf"):
             os.remove(os.path.join(_DOWNLOAD_PATH, file))
-
-
-if __name__ == '__main__':
-    download_files()
