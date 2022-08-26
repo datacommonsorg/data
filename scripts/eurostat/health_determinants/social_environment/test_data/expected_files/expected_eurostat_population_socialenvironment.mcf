@@ -1,5 +1,5 @@
 Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCareOrAssistance_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage At Least Once A Week, Not Providing Informal Care Or Assistance Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+name: "Population: Percentage At Least Once A Week, Not Providing Informal Care Or Assistance, Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
@@ -11,7 +11,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCareOrAssistance_In_Count_Person_SemiUrban_Female
-name: "Percentage At Least Once A Week, Not Providing Informal Care Or Assistance Among Semi Urban, Female Population"
+name: "Population: Percentage At Least Once A Week, Not Providing Informal Care Or Assistance, Among Semi Urban, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Female
@@ -23,7 +23,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCareOrAssistance_In_Count_Person_SemiUrban_Male
-name: "Percentage At Least Once A Week, Not Providing Informal Care Or Assistance Among Semi Urban, Male Population"
+name: "Population: Percentage At Least Once A Week, Not Providing Informal Care Or Assistance, Among Semi Urban, Male"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Male
@@ -35,7 +35,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCareOrAssistance_In_Count_Person_Urban
-name: "Percentage At Least Once A Week, Not Providing Informal Care Or Assistance Among Urban Population"
+name: "Population: Percentage At Least Once A Week, Not Providing Informal Care Or Assistance, Among Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
@@ -46,7 +46,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCareOrAssistance_In_Count_Person_Urban_Female
-name: "Percentage At Least Once A Week, Not Providing Informal Care Or Assistance Among Urban, Female Population"
+name: "Population: Percentage At Least Once A Week, Not Providing Informal Care Or Assistance, Among Urban, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Female
@@ -58,7 +58,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCareOrAssistance_In_Count_Person_Urban_Male
-name: "Percentage At Least Once A Week, Not Providing Informal Care Or Assistance Among Urban, Male Population"
+name: "Population: Percentage At Least Once A Week, Not Providing Informal Care Or Assistance, Among Urban, Male"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Male
@@ -70,7 +70,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_CitizenOutsideEU28_Female
-name: "Percentage Receiving Intermediate Social Support Among Citizen Outside EU28, Female Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Citizen Outside EU28, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
@@ -81,7 +81,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Citizen_Female
-name: "Percentage Receiving Intermediate Social Support Among Citizen, Female Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Citizen, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Female
@@ -92,7 +92,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Citizen_Male
-name: "Percentage Receiving Intermediate Social Support Among Citizen, Male Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Citizen, Male"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Citizen_Male
@@ -102,74 +102,96 @@ citizenship: dcs:Citizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_ForeignBornOutsideEU28_Female
-name: "Percentage Receiving Intermediate Social Support Among Foreign Born Outside EU28, Female Population"
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_ForeignBorn
+name: "Population: Percentage Receiving Intermediate Social Support, Among Female, Foreign Born"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28_Female
-socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Female
-nativity: dcs:ForeignBornOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_ForeignBornOutsideEU28_Male
-name: "Percentage Receiving Intermediate Social Support Among Foreign Born Outside EU28, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignBornOutsideEU28_Male
-socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Male
-nativity: dcs:ForeignBornOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_ForeignBornWithinEU28_Female
-name: "Percentage Receiving Intermediate Social Support Among Foreign Born Within EU28, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28_Female
-socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Female
-nativity: dcs:ForeignBornWithinEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_ForeignBornWithinEU28_Male
-name: "Percentage Receiving Intermediate Social Support Among Foreign Born Within EU28, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignBornWithinEU28_Male
-socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Male
-nativity: dcs:ForeignBornWithinEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_ForeignBorn_Female
-name: "Percentage Receiving Intermediate Social Support Among Foreign Born, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignBorn_Female
+measurementDenominator: dcs:Count_Person_Female_ForeignBorn
 socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
 gender: dcs:Female
 nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_ForeignBorn_Male
-name: "Percentage Receiving Intermediate Social Support Among Foreign Born, Male Population"
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_ForeignBornOutsideEU28
+name: "Population: Percentage Receiving Intermediate Social Support, Among Female, Foreign Born Outside EU28"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ForeignBorn_Male
+measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
 socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Male
-nativity: dcs:ForeignBorn
+gender: dcs:Female
+nativity: dcs:ForeignBornOutsideEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_ForeignBornWithinEU28
+name: "Population: Percentage Receiving Intermediate Social Support, Among Female, Foreign Born Within EU28"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_LimitedActivityLimitation
+name: "Population: Percentage Receiving Intermediate Social Support, Among Female, Limited Activity Limitation"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_LimitedActivityLimitation
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_ModerateActivityLimitation
+name: "Population: Percentage Receiving Intermediate Social Support, Among Female, Moderate Activity Limitation"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_Native
+name: "Population: Percentage Receiving Intermediate Social Support, Among Female, Native"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_Native
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Female
+nativity: dcs:Native
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_NoActivityLimitation
+name: "Population: Percentage Receiving Intermediate Social Support, Among Female, No Activity Limitation"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_NoActivityLimitation
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:NoActivityLimitation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_SevereActivityLimitation
+name: "Population: Percentage Receiving Intermediate Social Support, Among Female, Severe Activity Limitation"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_SevereActivityLimitation
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage Receiving Intermediate Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
@@ -179,96 +201,96 @@ gender: dcs:Female
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_LimitedActivityLimitation_Female
-name: "Percentage Receiving Intermediate Social Support Among Limited Activity Limitation, Female Population"
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Male_ForeignBorn
+name: "Population: Percentage Receiving Intermediate Social Support, Among Male, Foreign Born"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_LimitedActivityLimitation_Female
+measurementDenominator: dcs:Count_Person_Male_ForeignBorn
 socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Female
-globalActivityLimitationindicator: dcs:LimitedActivityLimitation
+gender: dcs:Male
+nativity: dcs:ForeignBorn
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_LimitedActivityLimitation_Male
-name: "Percentage Receiving Intermediate Social Support Among Limited Activity Limitation, Male Population"
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Male_ForeignBornOutsideEU28
+name: "Population: Percentage Receiving Intermediate Social Support, Among Male, Foreign Born Outside EU28"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_LimitedActivityLimitation_Male
+measurementDenominator: dcs:Count_Person_Male_ForeignBornOutsideEU28
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Male
+nativity: dcs:ForeignBornOutsideEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Male_ForeignBornWithinEU28
+name: "Population: Percentage Receiving Intermediate Social Support, Among Male, Foreign Born Within EU28"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Male_ForeignBornWithinEU28
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Male
+nativity: dcs:ForeignBornWithinEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Male_LimitedActivityLimitation
+name: "Population: Percentage Receiving Intermediate Social Support, Among Male, Limited Activity Limitation"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Male_LimitedActivityLimitation
 socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:LimitedActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_ModerateActivityLimitation_Female
-name: "Percentage Receiving Intermediate Social Support Among Moderate Activity Limitation, Female Population"
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Male_ModerateActivityLimitation
+name: "Population: Percentage Receiving Intermediate Social Support, Among Male, Moderate Activity Limitation"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ModerateActivityLimitation_Female
-socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Female
-globalActivityLimitationindicator: dcs:ModerateActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_ModerateActivityLimitation_Male
-name: "Percentage Receiving Intermediate Social Support Among Moderate Activity Limitation, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_ModerateActivityLimitation_Male
+measurementDenominator: dcs:Count_Person_Male_ModerateActivityLimitation
 socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
 gender: dcs:Male
 globalActivityLimitationindicator: dcs:ModerateActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Native_Female
-name: "Percentage Receiving Intermediate Social Support Among Native, Female Population"
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Male_Native
+name: "Population: Percentage Receiving Intermediate Social Support, Among Male, Native"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Native_Female
-socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Female
-nativity: dcs:Native
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Native_Male
-name: "Percentage Receiving Intermediate Social Support Among Native, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Native_Male
+measurementDenominator: dcs:Count_Person_Male_Native
 socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
 gender: dcs:Male
 nativity: dcs:Native
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_NoActivityLimitation_Female
-name: "Percentage Receiving Intermediate Social Support Among No Activity Limitation, Female Population"
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Male_NoActivityLimitation
+name: "Population: Percentage Receiving Intermediate Social Support, Among Male, No Activity Limitation"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_NoActivityLimitation_Female
+measurementDenominator: dcs:Count_Person_Male_NoActivityLimitation
 socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Female
+gender: dcs:Male
 globalActivityLimitationindicator: dcs:NoActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_NoActivityLimitation_Male
-name: "Percentage Receiving Intermediate Social Support Among No Activity Limitation, Male Population"
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Male_SevereActivityLimitation
+name: "Population: Percentage Receiving Intermediate Social Support, Among Male, Severe Activity Limitation"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_NoActivityLimitation_Male
+measurementDenominator: dcs:Count_Person_Male_SevereActivityLimitation
 socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
 gender: dcs:Male
-globalActivityLimitationindicator: dcs:NoActivityLimitation
+globalActivityLimitationindicator: dcs:SevereActivityLimitation
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_NotACitizen_Female
-name: "Percentage Receiving Intermediate Social Support Among Not A Citizen, Female Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Not A Citizen, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Female
@@ -279,7 +301,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_NotACitizen_Male
-name: "Percentage Receiving Intermediate Social Support Among Not A Citizen, Male Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Not A Citizen, Male"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_NotACitizen_Male
@@ -290,7 +312,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_SemiUrban
-name: "Percentage Receiving Intermediate Social Support Among Semi Urban Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Semi Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban
@@ -300,7 +322,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_SemiUrban_Female
-name: "Percentage Receiving Intermediate Social Support Among Semi Urban, Female Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Semi Urban, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Female
@@ -311,7 +333,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_SemiUrban_Male
-name: "Percentage Receiving Intermediate Social Support Among Semi Urban, Male Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Semi Urban, Male"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_SemiUrban_Male
@@ -321,30 +343,8 @@ gender: dcs:Male
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_SevereActivityLimitation_Female
-name: "Percentage Receiving Intermediate Social Support Among Severe Activity Limitation, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_SevereActivityLimitation_Female
-socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Female
-globalActivityLimitationindicator: dcs:SevereActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_SevereActivityLimitation_Male
-name: "Percentage Receiving Intermediate Social Support Among Severe Activity Limitation, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_SevereActivityLimitation_Male
-socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
-gender: dcs:Male
-globalActivityLimitationindicator: dcs:SevereActivityLimitation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Urban
-name: "Percentage Receiving Intermediate Social Support Among Urban Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Urban"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban
@@ -354,7 +354,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Urban_Female
-name: "Percentage Receiving Intermediate Social Support Among Urban, Female Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Urban, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Female
@@ -365,7 +365,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Urban_Male
-name: "Percentage Receiving Intermediate Social Support Among Urban, Male Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Urban, Male"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_Urban_Male
@@ -376,7 +376,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_WithinEU28AndNotACitizen_Female
-name: "Percentage Receiving Intermediate Social Support Among Within EU28 And Not A Citizen, Female Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Within EU28 And Not A Citizen, Female"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
@@ -387,7 +387,7 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 
 Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_WithinEU28AndNotACitizen_Male
-name: "Percentage Receiving Intermediate Social Support Among Within EU28 And Not A Citizen, Male Population"
+name: "Population: Percentage Receiving Intermediate Social Support, Among Within EU28 And Not A Citizen, Male"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Male

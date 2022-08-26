@@ -215,7 +215,7 @@ def _socialsupport_by_countryofbirth_sex(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_c_birth(df)
     df['SV'] = 'Percent_Receiving'+ df['lev_perc'] +'SocialSupport_In_Count_Person_'\
-        +df['c_birth']+'_'+df['sex']
+        +df['sex']+'_'+df['c_birth']
     df.drop(columns=['unit', 'age', 'c_birth', 'lev_perc', 'sex'], inplace=True)
     df = df.melt(id_vars=['SV', 'time'],
                  var_name='geo',
@@ -283,14 +283,13 @@ def _socialsupportassistance_by_sex(df: pd.DataFrame) -> pd.DataFrame:
     df = _replace_sex(df)
     df = _replace_lev_limit(df)
     df['SV'] = 'Percent_Receiving' + df['lev_perc'] + 'SocialSupport_In_Count_Person_' +\
-        df['lev_limit'] + '_' + df['sex']
+        df['sex'] + '_' + df['lev_limit']
     df.drop(columns=['unit', 'age', 'lev_limit', 'lev_perc', 'sex'],
             inplace=True)
     df = df.melt(id_vars=['SV', 'time'],
                  var_name='geo',
                  value_name='observation')
     return df
-
 
 class EuroStatSocialEnvironment:
     """
@@ -378,15 +377,15 @@ class EuroStatSocialEnvironment:
             # Making the changes to the SV Name,
             # Removing any extra commas, with keyword and
             # adding Population in the end
-            sv_name = sv_name.replace(", Among", " Among")
             sv_name = sv_name.rstrip(', ')
             sv_name = sv_name.rstrip('with')
             # Adding spaces before every capital letter,
             # to make SV look more like a name.
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
-            sv_name = "name: \"" + sv_name + " Population\""
+            sv_name = "name: \"Population: " + sv_name +"\""
             sv_name = sv_name.replace('AWeek',
-                                      'A Week').replace('ACitizen', 'A Citizen')
+                                      'A Week').replace('ACitizen',
+                                      'A Citizen').replace(', Among"', '"')
 
             final_mcf_template += _MCF_TEMPLATE.format(pv1=sv,
                                                        pv2=sv_name,
