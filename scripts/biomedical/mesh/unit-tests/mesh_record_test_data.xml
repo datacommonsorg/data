@@ -1,0 +1,606 @@
+<?xml version="1.0"?>
+<!DOCTYPE SupplementalRecordSet SYSTEM "https://www.nlm.nih.gov/databases/dtd/nlmsupplementalrecordset_20220101.dtd">
+<SupplementalRecordSet LanguageCode = "eng">
+<SupplementalRecord SCRClass = "1">
+  <SupplementalRecordUI>C114158</SupplementalRecordUI>
+  <SupplementalRecordName>
+   <String>quantum dye macrocyclic europium-chelate</String>
+  </SupplementalRecordName>
+  <DateCreated>
+   <Year>1998</Year>
+   <Month>09</Month>
+   <Day>14</Day>
+  </DateCreated>
+  <DateRevised>
+   <Year>2003</Year>
+   <Month>08</Month>
+   <Day>08</Day>
+  </DateRevised>
+  <Note>a macrocyclic europium-chelate; structure in first source
+  </Note>
+  <Frequency>2</Frequency>
+  <HeadingMappedToList>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>*D005063</DescriptorUI>
+     <DescriptorName>
+      <String>Europium</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+   </HeadingMappedTo>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>*D009942</DescriptorUI>
+     <DescriptorName>
+      <String>Organometallic Compounds</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+   </HeadingMappedTo>
+  </HeadingMappedToList>
+  <SourceList>
+   <Source>Glycobiology 1998 Sep;8(9):849-56</Source>
+  </SourceList>
+  <ConceptList>
+   <Concept PreferredConceptYN="Y">
+    <ConceptUI>M0294520</ConceptUI>
+    <ConceptName>
+     <String>quantum dye macrocyclic europium-chelate</String>
+    </ConceptName>
+    <RegistryNumber>0</RegistryNumber>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="Y">
+      <TermUI>T324525</TermUI>
+      <String>quantum dye macrocyclic europium-chelate</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1998)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+     <Term  ConceptPreferredTermYN="N"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="N">
+      <TermUI>T324524</TermUI>
+      <String>QD macrocyclic</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1998)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+  </ConceptList>
+ </SupplementalRecord>
+<SupplementalRecord SCRClass = "1">
+  <SupplementalRecordUI>C008718</SupplementalRecordUI>
+  <SupplementalRecordName>
+   <String>osteoclast activating factor</String>
+  </SupplementalRecordName>
+  <DateCreated>
+   <Year>1974</Year>
+   <Month>01</Month>
+   <Day>01</Day>
+  </DateCreated>
+  <DateRevised>
+   <Year>1982</Year>
+   <Month>07</Month>
+   <Day>28</Day>
+  </DateRevised>
+  <Note>found in supernatants of cultured human leukocytes; assayed by ability to stimulate bone resorption in organ culture in mechanism of localized bone loss
+  </Note>
+  <Frequency>83</Frequency>
+  <HeadingMappedToList>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>*D008222</DescriptorUI>
+     <DescriptorName>
+      <String>Lymphokines</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+   </HeadingMappedTo>
+  </HeadingMappedToList>
+  <IndexingInformationList>
+   <IndexingInformation>
+     <DescriptorReferredTo>
+    <DescriptorUI>D001862</DescriptorUI>
+     <DescriptorName>
+      <String>Bone Resorption</String>
+      </DescriptorName>
+     </DescriptorReferredTo>
+   </IndexingInformation>
+   <IndexingInformation>
+     <DescriptorReferredTo>
+    <DescriptorUI>D010010</DescriptorUI>
+     <DescriptorName>
+      <String>Osteoclasts</String>
+      </DescriptorName>
+     </DescriptorReferredTo>
+   </IndexingInformation>
+  </IndexingInformationList>
+  <SourceList>
+   <Source>Ann N Y Acad Sci 230(0):474;1974</Source>
+   <Source>Ann N Y Acad Sci 256(0):133;1975</Source>
+   <Source>Calcif Tissue Int 1979;29(3):201</Source>
+   <Source>Calcif Tissue Res 1979;28(1):23</Source>
+   <Source>Cell Immunol 1980;49(1):74</Source>
+   <Source>Eur J Immunol 6:732;1976</Source>
+   <Source>J Clin Invest 64(1):337;1979</Source>
+   <Source>J Exp Med 149(1):279;1979</Source>
+   <Source>J Lab Clin Med 92(5):772;1978</Source>
+   <Source>Surg Clin North America 57(3):543;1977</Source>
+   <Source>WE 200 M486:127;1977</Source>
+   <Source>WE 200 M486:13;1977</Source>
+   <Source>WE 200 M486:319;1977</Source>
+  </SourceList>
+  <ConceptList>
+   <Concept PreferredConceptYN="Y">
+    <ConceptUI>M0052808</ConceptUI>
+    <ConceptName>
+     <String>osteoclast activating factor</String>
+    </ConceptName>
+    <RegistryNumber>64060-24-8</RegistryNumber>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="Y">
+      <TermUI>T082811</TermUI>
+      <String>osteoclast activating factor</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1974)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+  </ConceptList>
+ </SupplementalRecord>
+<SupplementalRecord SCRClass = "1">
+  <SupplementalRecordUI>C008720</SupplementalRecordUI>
+  <SupplementalRecordName>
+   <String>otoline</String>
+  </SupplementalRecordName>
+  <DateCreated>
+   <Year>1974</Year>
+   <Month>01</Month>
+   <Day>01</Day>
+  </DateCreated>
+  <DateRevised>
+   <Year>1995</Year>
+   <Month>07</Month>
+   <Day>21</Day>
+  </DateRevised>
+  <Note>analog of cpd 48-80; oligomeric product (n-6-8); Russian drug
+  </Note>
+  <Frequency>1</Frequency>
+  <HeadingMappedToList>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>*D011108</DescriptorUI>
+     <DescriptorName>
+      <String>Polymers</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+   </HeadingMappedTo>
+  </HeadingMappedToList>
+  <IndexingInformationList>
+   <IndexingInformation>
+     <DescriptorReferredTo>
+    <DescriptorUI>D006636</DescriptorUI>
+     <DescriptorName>
+      <String>Histamine Release</String>
+      </DescriptorName>
+     </DescriptorReferredTo>
+    <QualifierReferredTo>
+    <QualifierUI>Q000187</QualifierUI>
+     <QualifierName>
+      <String>drug effects</String>
+      </QualifierName>
+     </QualifierReferredTo>
+   </IndexingInformation>
+  </IndexingInformationList>
+  <SourceList>
+   <Source>Farmakol Toksikol 36(5):614;1973</Source>
+  </SourceList>
+  <ConceptList>
+   <Concept PreferredConceptYN="Y">
+    <ConceptUI>M0052812</ConceptUI>
+    <ConceptName>
+     <String>otoline</String>
+    </ConceptName>
+    <RegistryNumber>50643-04-4</RegistryNumber>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="Y">
+      <TermUI>T082815</TermUI>
+      <String>otoline</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1974)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+  </ConceptList>
+ </SupplementalRecord>
+<SupplementalRecord SCRClass = "1">
+  <SupplementalRecordUI>C002540</SupplementalRecordUI>
+  <SupplementalRecordName>
+   <String>miracil A</String>
+  </SupplementalRecordName>
+  <DateCreated>
+   <Year>1972</Year>
+   <Month>01</Month>
+   <Day>01</Day>
+  </DateCreated>
+  <DateRevised>
+   <Year>2003</Year>
+   <Month>08</Month>
+   <Day>08</Day>
+  </DateRevised>
+  <Note>structure in first source
+  </Note>
+  <Frequency>1</Frequency>
+  <PreviousIndexingList>
+   <PreviousIndexing>*ETHYLENEDIAMINES (72-75)</PreviousIndexing>
+   <PreviousIndexing>*XANTHENES (72-75)</PreviousIndexing>
+  </PreviousIndexingList>
+  <HeadingMappedToList>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>D008154</DescriptorUI>
+     <DescriptorName>
+      <String>Lucanthone</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+    <QualifierReferredTo>
+     <QualifierUI>*Q000031</QualifierUI>
+     <QualifierName>
+      <String>analogs &amp; derivatives</String>
+     </QualifierName>
+    </QualifierReferredTo>
+   </HeadingMappedTo>
+  </HeadingMappedToList>
+  <SourceList>
+   <Source>Prog Drug Res 16:11;1972</Source>
+  </SourceList>
+  <ConceptList>
+   <Concept PreferredConceptYN="Y">
+    <ConceptUI>M0043189</ConceptUI>
+    <ConceptName>
+     <String>miracil A</String>
+    </ConceptName>
+    <CASN1Name>9H-Xanthen-9-one, 1-((2-(diethylamino)ethyl)amino)-4-methyl-</CASN1Name>
+    <RegistryNumber>3569-84-4</RegistryNumber>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="Y">
+      <TermUI>T073192</TermUI>
+      <String>miracil A</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1972)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+  </ConceptList>
+ </SupplementalRecord>
+<SupplementalRecord SCRClass = "1">
+  <SupplementalRecordUI>C055240</SupplementalRecordUI>
+  <SupplementalRecordName>
+   <String>Leakadine</String>
+  </SupplementalRecordName>
+  <DateCreated>
+   <Year>1988</Year>
+   <Month>04</Month>
+   <Day>20</Day>
+  </DateCreated>
+  <DateRevised>
+   <Year>2001</Year>
+   <Month>02</Month>
+   <Day>06</Day>
+  </DateRevised>
+  <Note>may contain 2-carbamoylaziridine
+  </Note>
+  <Frequency>8</Frequency>
+  <HeadingMappedToList>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>*D001388</DescriptorUI>
+     <DescriptorName>
+      <String>Aziridines</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+   </HeadingMappedTo>
+  </HeadingMappedToList>
+  <SourceList>
+   <Source>Vopr Onkol 1988;34(2):192</Source>
+  </SourceList>
+  <ConceptList>
+   <Concept PreferredConceptYN="Y">
+    <ConceptUI>M0155620</ConceptUI>
+    <ConceptName>
+     <String>Leakadine</String>
+    </ConceptName>
+    <RegistryNumber>91433-16-8</RegistryNumber>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="TRD"  RecordPreferredTermYN="Y">
+      <TermUI>T185625</TermUI>
+      <String>Leakadine</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1988)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+     <Term  ConceptPreferredTermYN="N"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="N">
+      <TermUI>T185624</TermUI>
+      <String>Leakadin</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1988)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+     <Term  ConceptPreferredTermYN="N"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="N">
+      <TermUI>T185623</TermUI>
+      <String>Leacadin</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1988)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+  </ConceptList>
+ </SupplementalRecord>
+<SupplementalRecord SCRClass = "1">
+  <SupplementalRecordUI>C060863</SupplementalRecordUI>
+  <SupplementalRecordName>
+   <String>conduritol aziridine</String>
+  </SupplementalRecordName>
+  <DateCreated>
+   <Year>1989</Year>
+   <Month>10</Month>
+   <Day>04</Day>
+  </DateCreated>
+  <DateRevised>
+   <Year>2005</Year>
+   <Month>11</Month>
+   <Day>03</Day>
+  </DateRevised>
+  <Note>inhibits both alpha- and beta-glucosidases; structure given in first source
+  </Note>
+  <Frequency>2</Frequency>
+  <HeadingMappedToList>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>*D001388</DescriptorUI>
+     <DescriptorName>
+      <String>Aziridines</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+   </HeadingMappedTo>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>D007294</DescriptorUI>
+     <DescriptorName>
+      <String>Inositol</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+    <QualifierReferredTo>
+     <QualifierUI>*Q000031</QualifierUI>
+     <QualifierName>
+      <String>analogs &amp; derivatives</String>
+     </QualifierName>
+    </QualifierReferredTo>
+   </HeadingMappedTo>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>D050112</DescriptorUI>
+     <DescriptorName>
+      <String>Imino Pyranoses</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+   </HeadingMappedTo>
+  </HeadingMappedToList>
+  <IndexingInformationList>
+   <IndexingInformation>
+     <DescriptorReferredTo>
+    <DescriptorUI>D001617</DescriptorUI>
+     <DescriptorName>
+      <String>beta-Glucosidase</String>
+      </DescriptorName>
+     </DescriptorReferredTo>
+    <QualifierReferredTo>
+    <QualifierUI>Q000037</QualifierUI>
+     <QualifierName>
+      <String>antagonists &amp; inhibitors</String>
+      </QualifierName>
+     </QualifierReferredTo>
+   </IndexingInformation>
+  </IndexingInformationList>
+  <SourceList>
+   <Source>Biochem Biophys Res Commun 1989;163(1):495</Source>
+  </SourceList>
+  <ConceptList>
+   <Concept PreferredConceptYN="Y">
+    <ConceptUI>M0168905</ConceptUI>
+    <ConceptName>
+     <String>conduritol aziridine</String>
+    </ConceptName>
+    <CASN1Name>7-Azabicyclo(4.1.0)heptane-2,3,4,5-tetrol, (1alpha,2alpha,3beta,4alpha,5beta,6alpha)-</CASN1Name>
+    <RegistryNumber>123788-61-4</RegistryNumber>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="Y">
+      <TermUI>T198910</TermUI>
+      <String>conduritol aziridine</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1989)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+     <Term  ConceptPreferredTermYN="N"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="N">
+      <TermUI>T198909</TermUI>
+      <String>1,2-dideoxy-1,2-iminoinositol</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1989)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+     <Term  ConceptPreferredTermYN="N"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="N">
+      <TermUI>T198908</TermUI>
+      <String>1,2-dideoxy-1,2-epimino-myo-inositol</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1989)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+  </ConceptList>
+ </SupplementalRecord>
+<SupplementalRecord SCRClass = "1">
+  <SupplementalRecordUI>C008725</SupplementalRecordUI>
+  <SupplementalRecordName>
+   <String>1-oxacephalothin</String>
+  </SupplementalRecordName>
+  <DateCreated>
+   <Year>1975</Year>
+   <Month>01</Month>
+   <Day>01</Day>
+  </DateCreated>
+  <Note>structure
+  </Note>
+  <Frequency>1</Frequency>
+  <HeadingMappedToList>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>D002512</DescriptorUI>
+     <DescriptorName>
+      <String>Cephalothin</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+    <QualifierReferredTo>
+     <QualifierUI>*Q000031</QualifierUI>
+     <QualifierName>
+      <String>analogs &amp; derivatives</String>
+     </QualifierName>
+    </QualifierReferredTo>
+   </HeadingMappedTo>
+  </HeadingMappedToList>
+  <SourceList>
+   <Source>J Am Chem Soc 96(24):7582;1974</Source>
+  </SourceList>
+  <ConceptList>
+   <Concept PreferredConceptYN="Y">
+    <ConceptUI>M0052819</ConceptUI>
+    <ConceptName>
+     <String>1-oxacephalothin</String>
+    </ConceptName>
+    <CASN1Name>5-Oxa-1-azabicyclo(4.2.0)oct-2-ene-2-carboxylic acid, 3-((acetyloxy)methyl)-8-oxo-7-((2-thienylacetyl)amino)-, monosodium salt, trans-(+-)-</CASN1Name>
+    <RegistryNumber>54214-84-5</RegistryNumber>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="Y">
+      <TermUI>T082822</TermUI>
+      <String>1-oxacephalothin</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1975)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+  </ConceptList>
+ </SupplementalRecord>
+<SupplementalRecord SCRClass = "1">
+  <SupplementalRecordUI>C008727</SupplementalRecordUI>
+  <SupplementalRecordName>
+   <String>oxaluric acid</String>
+  </SupplementalRecordName>
+  <DateCreated>
+   <Year>1974</Year>
+   <Month>01</Month>
+   <Day>01</Day>
+  </DateCreated>
+  <DateRevised>
+   <Year>1990</Year>
+   <Month>09</Month>
+   <Day>28</Day>
+  </DateRevised>
+  <Frequency>12</Frequency>
+  <PreviousIndexingList>
+   <PreviousIndexing>*OXALATES (74-75)</PreviousIndexing>
+   <PreviousIndexing>AMIDES (74-75)</PreviousIndexing>
+   <PreviousIndexing>CARBAMATES (74-82)</PreviousIndexing>
+  </PreviousIndexingList>
+  <HeadingMappedToList>
+   <HeadingMappedTo>
+    <DescriptorReferredTo>
+     <DescriptorUI>D010072</DescriptorUI>
+     <DescriptorName>
+      <String>Oxamic Acid</String>
+     </DescriptorName>
+    </DescriptorReferredTo>
+    <QualifierReferredTo>
+     <QualifierUI>*Q000031</QualifierUI>
+     <QualifierName>
+      <String>analogs &amp; derivatives</String>
+     </QualifierName>
+    </QualifierReferredTo>
+   </HeadingMappedTo>
+  </HeadingMappedToList>
+  <SourceList>
+   <Source>J Bacteriol 117(3):1240;1974</Source>
+  </SourceList>
+  <ConceptList>
+   <Concept PreferredConceptYN="Y">
+    <ConceptUI>M0052823</ConceptUI>
+    <ConceptName>
+     <String>oxaluric acid</String>
+    </ConceptName>
+    <RegistryNumber>585-05-7</RegistryNumber>
+    <ConceptRelationList>
+     <ConceptRelation RelationName="NRW">
+     <Concept1UI>M0052823</Concept1UI>
+     <Concept2UI>M0052821</Concept2UI>
+     </ConceptRelation>
+     <ConceptRelation RelationName="NRW">
+     <Concept1UI>M0052823</Concept1UI>
+     <Concept2UI>M0052822</Concept2UI>
+     </ConceptRelation>
+    </ConceptRelationList>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="Y">
+      <TermUI>T082826</TermUI>
+      <String>oxaluric acid</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1974)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+   <Concept PreferredConceptYN="N">
+    <ConceptUI>M0052821</ConceptUI>
+    <ConceptName>
+     <String>carbamoyloxamic acid</String>
+    </ConceptName>
+    <ConceptRelationList>
+     <ConceptRelation RelationName="NRW">
+     <Concept1UI>M0052823</Concept1UI>
+     <Concept2UI>M0052821</Concept2UI>
+     </ConceptRelation>
+    </ConceptRelationList>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="N">
+      <TermUI>T082824</TermUI>
+      <String>carbamoyloxamic acid</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1974)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+   <Concept PreferredConceptYN="N">
+    <ConceptUI>M0052822</ConceptUI>
+    <ConceptName>
+     <String>oxalurate</String>
+    </ConceptName>
+    <ConceptRelationList>
+     <ConceptRelation RelationName="NRW">
+     <Concept1UI>M0052823</Concept1UI>
+     <Concept2UI>M0052822</Concept2UI>
+     </ConceptRelation>
+    </ConceptRelationList>
+    <TermList>
+     <Term  ConceptPreferredTermYN="Y"  IsPermutedTermYN="N"  LexicalTag="NON"  RecordPreferredTermYN="N">
+      <TermUI>T082825</TermUI>
+      <String>oxalurate</String>
+      <ThesaurusIDlist>
+       <ThesaurusID>NLM (1974)</ThesaurusID>
+      </ThesaurusIDlist>
+     </Term>
+    </TermList>
+   </Concept>
+  </ConceptList>
+ </SupplementalRecord>
+</SupplementalRecordSet>
