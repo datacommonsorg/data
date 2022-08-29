@@ -33,6 +33,9 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
+# Data provided in 1000s of Tons.
+_SCALING_FACTOR = 1000
+
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Emissions\n"
@@ -49,7 +52,6 @@ _TMCF_TEMPLATE = (
     "Measurement_Method\n"
     "observationAbout: C:airpollution_emission_trends_tier1->geo_Id\n"
     "observationDate: C:airpollution_emission_trends_tier1->year\n"
-    "scalingFactor: 1000\n"
     "unit: Ton\n"
     "value: C:airpollution_emission_trends_tier1->observation\n")
 
@@ -372,6 +374,7 @@ class USAirPollutionEmissionTrends:
         self._generate_tmcf()
         final_df.loc[:, ('SV')] = final_df['SV'].replace(sv_replacement,
                                                          regex=True)
+        final_df['observation'] = final_df['observation'].astype(float) * _SCALING_FACTOR
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
 
 
