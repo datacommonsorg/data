@@ -1,153 +1,153 @@
 DescriptorID,QualifierID,QualifierName,QualifierAbbreviation,DateCreated,DateRevised,DateEstablished,Qualifier_dcid,Descriptor_dcid
-D000001,Q000302,isolation & purification,IP,1974-11-19,2016-05-27,1984-01-01,bio/Q000302,bio/D000001
-D000001,Q000276,immunology,IM,,,,bio/Q000276,bio/D000001
-D000001,Q000493,pharmacokinetics,PK,,,,bio/Q000493,bio/D000001
-D000001,Q000096,biosynthesis,BI,,,,bio/Q000096,bio/D000001
-D000001,Q000627,therapeutic use,TU,,,,bio/Q000627,bio/D000001
-D000001,Q000819,agonists,AG,,,,bio/Q000819,bio/D000001
-D000001,Q000097,blood,BL,,,,bio/Q000097,bio/D000001
-D000001,Q000134,cerebrospinal fluid,CF,,,,bio/Q000134,bio/D000001
-D000001,Q000138,chemical synthesis,CS,,,,bio/Q000138,bio/D000001
-D000001,Q000737,chemistry,CH,,,,bio/Q000737,bio/D000001
-D000001,Q000652,urine,UR,,,,bio/Q000652,bio/D000001
-D000001,Q000528,radiation effects,RE,,,,bio/Q000528,bio/D000001
-D000001,Q000266,history,HI,,,,bio/Q000266,bio/D000001
-D000001,Q000032,analysis,AN,,,,bio/Q000032,bio/D000001
-D000001,Q000145,classification,CL,,,,bio/Q000145,bio/D000001
-D000001,Q000191,economics,EC,,,,bio/Q000191,bio/D000001
-D000001,Q000494,pharmacology,PD,,,,bio/Q000494,bio/D000001
-D000001,Q000592,standards,ST,,,,bio/Q000592,bio/D000001
-D000001,Q000008,administration & dosage,AD,,,,bio/Q000008,bio/D000001
-D000001,Q000037,antagonists & inhibitors,AI,,,,bio/Q000037,bio/D000001
-D000001,Q000031,analogs & derivatives,AA,,,,bio/Q000031,bio/D000001
-D000001,Q000600,supply & distribution,SD,,,,bio/Q000600,bio/D000001
-D000001,Q000506,poisoning,PO,,,,bio/Q000506,bio/D000001
-D000001,Q000009,adverse effects,AE,,,,bio/Q000009,bio/D000001
-D000001,Q000633,toxicity,TO,,,,bio/Q000633,bio/D000001
-D000001,Q000378,metabolism,ME,,,,bio/Q000378,bio/D000001
-D000002,Q000302,isolation & purification,IP,1999-01-01,2013-07-08,1991-01-01,bio/Q000302,bio/D000002
-D000002,Q000276,immunology,IM,,,,bio/Q000276,bio/D000002
-D000002,Q000493,pharmacokinetics,PK,,,,bio/Q000493,bio/D000002
-D000002,Q000627,therapeutic use,TU,,,,bio/Q000627,bio/D000002
-D000002,Q000819,agonists,AG,,,,bio/Q000819,bio/D000002
-D000002,Q000097,blood,BL,,,,bio/Q000097,bio/D000002
-D000002,Q000134,cerebrospinal fluid,CF,,,,bio/Q000134,bio/D000002
-D000002,Q000138,chemical synthesis,CS,,,,bio/Q000138,bio/D000002
-D000002,Q000737,chemistry,CH,,,,bio/Q000737,bio/D000002
-D000002,Q000652,urine,UR,,,,bio/Q000652,bio/D000002
-D000002,Q000528,radiation effects,RE,,,,bio/Q000528,bio/D000002
-D000002,Q000266,history,HI,,,,bio/Q000266,bio/D000002
-D000002,Q000032,analysis,AN,,,,bio/Q000032,bio/D000002
-D000002,Q000145,classification,CL,,,,bio/Q000145,bio/D000002
-D000002,Q000191,economics,EC,,,,bio/Q000191,bio/D000002
-D000002,Q000494,pharmacology,PD,,,,bio/Q000494,bio/D000002
-D000002,Q000592,standards,ST,,,,bio/Q000592,bio/D000002
-D000002,Q000008,administration & dosage,AD,,,,bio/Q000008,bio/D000002
-D000002,Q000037,antagonists & inhibitors,AI,,,,bio/Q000037,bio/D000002
-D000002,Q000031,analogs & derivatives,AA,,,,bio/Q000031,bio/D000002
-D000002,Q000600,supply & distribution,SD,,,,bio/Q000600,bio/D000002
-D000002,Q000009,adverse effects,AE,,,,bio/Q000009,bio/D000002
-D000002,Q000633,toxicity,TO,,,,bio/Q000633,bio/D000002
-D000002,Q000378,metabolism,ME,,,,bio/Q000378,bio/D000002
-D000003,Q000941,ethics,ES,1999-01-01,2016-06-08,1966-01-01,bio/Q000941,bio/D000003
-D000003,Q000639,trends,TD,,,,bio/Q000639,bio/D000003
-D000003,Q000266,history,HI,,,,bio/Q000266,bio/D000003
-D000003,Q000145,classification,CL,,,,bio/Q000145,bio/D000003
-D000003,Q000191,economics,EC,,,,bio/Q000191,bio/D000003
-D000003,Q000592,standards,ST,,,,bio/Q000592,bio/D000003
-D000003,Q000458,organization & administration,OG,,,,bio/Q000458,bio/D000003
-D000003,Q000331,legislation & jurisprudence,LJ,,,,bio/Q000331,bio/D000003
-D000003,Q000600,supply & distribution,SD,,,,bio/Q000600,bio/D000003
-D000003,Q000706,statistics & numerical data,SN,,,,bio/Q000706,bio/D000003
+D000001,Q000302,"""isolation & purification""","""IP""",1974-11-19,2016-05-27,1984-01-01,bio/Q000302,bio/D000001
+D000001,Q000276,"""immunology""","""IM""",,,,bio/Q000276,bio/D000001
+D000001,Q000493,"""pharmacokinetics""","""PK""",,,,bio/Q000493,bio/D000001
+D000001,Q000096,"""biosynthesis""","""BI""",,,,bio/Q000096,bio/D000001
+D000001,Q000627,"""therapeutic use""","""TU""",,,,bio/Q000627,bio/D000001
+D000001,Q000819,"""agonists""","""AG""",,,,bio/Q000819,bio/D000001
+D000001,Q000097,"""blood""","""BL""",,,,bio/Q000097,bio/D000001
+D000001,Q000134,"""cerebrospinal fluid""","""CF""",,,,bio/Q000134,bio/D000001
+D000001,Q000138,"""chemical synthesis""","""CS""",,,,bio/Q000138,bio/D000001
+D000001,Q000737,"""chemistry""","""CH""",,,,bio/Q000737,bio/D000001
+D000001,Q000652,"""urine""","""UR""",,,,bio/Q000652,bio/D000001
+D000001,Q000528,"""radiation effects""","""RE""",,,,bio/Q000528,bio/D000001
+D000001,Q000266,"""history""","""HI""",,,,bio/Q000266,bio/D000001
+D000001,Q000032,"""analysis""","""AN""",,,,bio/Q000032,bio/D000001
+D000001,Q000145,"""classification""","""CL""",,,,bio/Q000145,bio/D000001
+D000001,Q000191,"""economics""","""EC""",,,,bio/Q000191,bio/D000001
+D000001,Q000494,"""pharmacology""","""PD""",,,,bio/Q000494,bio/D000001
+D000001,Q000592,"""standards""","""ST""",,,,bio/Q000592,bio/D000001
+D000001,Q000008,"""administration & dosage""","""AD""",,,,bio/Q000008,bio/D000001
+D000001,Q000037,"""antagonists & inhibitors""","""AI""",,,,bio/Q000037,bio/D000001
+D000001,Q000031,"""analogs & derivatives""","""AA""",,,,bio/Q000031,bio/D000001
+D000001,Q000600,"""supply & distribution""","""SD""",,,,bio/Q000600,bio/D000001
+D000001,Q000506,"""poisoning""","""PO""",,,,bio/Q000506,bio/D000001
+D000001,Q000009,"""adverse effects""","""AE""",,,,bio/Q000009,bio/D000001
+D000001,Q000633,"""toxicity""","""TO""",,,,bio/Q000633,bio/D000001
+D000001,Q000378,"""metabolism""","""ME""",,,,bio/Q000378,bio/D000001
+D000002,Q000302,"""isolation & purification""","""IP""",1999-01-01,2013-07-08,1991-01-01,bio/Q000302,bio/D000002
+D000002,Q000276,"""immunology""","""IM""",,,,bio/Q000276,bio/D000002
+D000002,Q000493,"""pharmacokinetics""","""PK""",,,,bio/Q000493,bio/D000002
+D000002,Q000627,"""therapeutic use""","""TU""",,,,bio/Q000627,bio/D000002
+D000002,Q000819,"""agonists""","""AG""",,,,bio/Q000819,bio/D000002
+D000002,Q000097,"""blood""","""BL""",,,,bio/Q000097,bio/D000002
+D000002,Q000134,"""cerebrospinal fluid""","""CF""",,,,bio/Q000134,bio/D000002
+D000002,Q000138,"""chemical synthesis""","""CS""",,,,bio/Q000138,bio/D000002
+D000002,Q000737,"""chemistry""","""CH""",,,,bio/Q000737,bio/D000002
+D000002,Q000652,"""urine""","""UR""",,,,bio/Q000652,bio/D000002
+D000002,Q000528,"""radiation effects""","""RE""",,,,bio/Q000528,bio/D000002
+D000002,Q000266,"""history""","""HI""",,,,bio/Q000266,bio/D000002
+D000002,Q000032,"""analysis""","""AN""",,,,bio/Q000032,bio/D000002
+D000002,Q000145,"""classification""","""CL""",,,,bio/Q000145,bio/D000002
+D000002,Q000191,"""economics""","""EC""",,,,bio/Q000191,bio/D000002
+D000002,Q000494,"""pharmacology""","""PD""",,,,bio/Q000494,bio/D000002
+D000002,Q000592,"""standards""","""ST""",,,,bio/Q000592,bio/D000002
+D000002,Q000008,"""administration & dosage""","""AD""",,,,bio/Q000008,bio/D000002
+D000002,Q000037,"""antagonists & inhibitors""","""AI""",,,,bio/Q000037,bio/D000002
+D000002,Q000031,"""analogs & derivatives""","""AA""",,,,bio/Q000031,bio/D000002
+D000002,Q000600,"""supply & distribution""","""SD""",,,,bio/Q000600,bio/D000002
+D000002,Q000009,"""adverse effects""","""AE""",,,,bio/Q000009,bio/D000002
+D000002,Q000633,"""toxicity""","""TO""",,,,bio/Q000633,bio/D000002
+D000002,Q000378,"""metabolism""","""ME""",,,,bio/Q000378,bio/D000002
+D000003,Q000941,"""ethics""","""ES""",1999-01-01,2016-06-08,1966-01-01,bio/Q000941,bio/D000003
+D000003,Q000639,"""trends""","""TD""",,,,bio/Q000639,bio/D000003
+D000003,Q000266,"""history""","""HI""",,,,bio/Q000266,bio/D000003
+D000003,Q000145,"""classification""","""CL""",,,,bio/Q000145,bio/D000003
+D000003,Q000191,"""economics""","""EC""",,,,bio/Q000191,bio/D000003
+D000003,Q000592,"""standards""","""ST""",,,,bio/Q000592,bio/D000003
+D000003,Q000458,"""organization & administration""","""OG""",,,,bio/Q000458,bio/D000003
+D000003,Q000331,"""legislation & jurisprudence""","""LJ""",,,,bio/Q000331,bio/D000003
+D000003,Q000600,"""supply & distribution""","""SD""",,,,bio/Q000600,bio/D000003
+D000003,Q000706,"""statistics & numerical data""","""SN""",,,,bio/Q000706,bio/D000003
 D000004,,,,1999-01-01,2017-06-30,1960-01-01,bio/nan,bio/D000004
-D000005,Q000469,parasitology,PS,1999-01-01,2016-08-09,1966-01-01,bio/Q000469,bio/D000005
-D000005,Q000002,abnormalities,AB,,,,bio/Q000002,bio/D000005
-D000005,Q000382,microbiology,MI,,,,bio/Q000382,bio/D000005
-D000005,Q000000981,diagnostic imaging,DG,,,,bio/Q000000981,bio/D000005
-D000005,Q000502,physiology,PH,,,,bio/Q000502,bio/D000005
-D000005,Q000503,physiopathology,PP,,,,bio/Q000503,bio/D000005
-D000005,Q000294,innervation,IR,,,,bio/Q000294,bio/D000005
-D000005,Q000821,virology,VI,,,,bio/Q000821,bio/D000005
-D000005,Q000528,radiation effects,RE,,,,bio/Q000528,bio/D000005
-D000005,Q000098,blood supply,BS,,,,bio/Q000098,bio/D000005
-D000005,Q000196,embryology,EM,,,,bio/Q000196,bio/D000005
-D000005,Q000033,anatomy & histology,AH,,,,bio/Q000033,bio/D000005
-D000005,Q000473,pathology,PA,,,,bio/Q000473,bio/D000005
-D000005,Q000601,surgery,SU,,,,bio/Q000601,bio/D000005
-D000005,Q000254,growth & development,GD,,,,bio/Q000254,bio/D000005
-D001583,Q000302,isolation & purification,IP,1999-01-01,2020-05-27,1966-01-01,bio/Q000302,bio/D001583
-D001583,Q000276,immunology,IM,,,,bio/Q000276,bio/D001583
-D001583,Q000493,pharmacokinetics,PK,,,,bio/Q000493,bio/D001583
-D001583,Q000627,therapeutic use,TU,,,,bio/Q000627,bio/D001583
-D001583,Q000819,agonists,AG,,,,bio/Q000819,bio/D001583
-D001583,Q000097,blood,BL,,,,bio/Q000097,bio/D001583
-D001583,Q000134,cerebrospinal fluid,CF,,,,bio/Q000134,bio/D001583
-D001583,Q000138,chemical synthesis,CS,,,,bio/Q000138,bio/D001583
-D001583,Q000737,chemistry,CH,,,,bio/Q000737,bio/D001583
-D001583,Q000652,urine,UR,,,,bio/Q000652,bio/D001583
-D001583,Q000528,radiation effects,RE,,,,bio/Q000528,bio/D001583
-D001583,Q000266,history,HI,,,,bio/Q000266,bio/D001583
-D001583,Q000032,analysis,AN,,,,bio/Q000032,bio/D001583
-D001583,Q000145,classification,CL,,,,bio/Q000145,bio/D001583
-D001583,Q000191,economics,EC,,,,bio/Q000191,bio/D001583
-D001583,Q000494,pharmacology,PD,,,,bio/Q000494,bio/D001583
-D001583,Q000592,standards,ST,,,,bio/Q000592,bio/D001583
-D001583,Q000008,administration & dosage,AD,,,,bio/Q000008,bio/D001583
-D001583,Q000037,antagonists & inhibitors,AI,,,,bio/Q000037,bio/D001583
-D001583,Q000600,supply & distribution,SD,,,,bio/Q000600,bio/D001583
-D001583,Q000506,poisoning,PO,,,,bio/Q000506,bio/D001583
-D001583,Q000009,adverse effects,AE,,,,bio/Q000009,bio/D001583
-D001583,Q000633,toxicity,TO,,,,bio/Q000633,bio/D001583
-D001583,Q000378,metabolism,ME,,,,bio/Q000378,bio/D001583
-D008462,Q000941,ethics,ES,1999-01-01,1997-06-20,1966-01-01,bio/Q000941,bio/D008462
-D008462,Q000639,trends,TD,,,,bio/Q000639,bio/D008462
-D008462,Q000266,history,HI,,,,bio/Q000266,bio/D008462
-D008462,Q000145,classification,CL,,,,bio/Q000145,bio/D008462
-D008462,Q000191,economics,EC,,,,bio/Q000191,bio/D008462
-D008462,Q000193,education,ED,,,,bio/Q000193,bio/D008462
-D008462,Q000295,instrumentation,IS,,,,bio/Q000295,bio/D008462
-D008462,Q000379,methods,MT,,,,bio/Q000379,bio/D008462
-D008462,Q000592,standards,ST,,,,bio/Q000592,bio/D008462
-D008462,Q000458,organization & administration,OG,,,,bio/Q000458,bio/D008462
-D008462,Q000331,legislation & jurisprudence,LJ,,,,bio/Q000331,bio/D008462
-D008462,Q000706,statistics & numerical data,SN,,,,bio/Q000706,bio/D008462
+D000005,Q000469,"""parasitology""","""PS""",1999-01-01,2016-08-09,1966-01-01,bio/Q000469,bio/D000005
+D000005,Q000002,"""abnormalities""","""AB""",,,,bio/Q000002,bio/D000005
+D000005,Q000382,"""microbiology""","""MI""",,,,bio/Q000382,bio/D000005
+D000005,Q000000981,"""diagnostic imaging""","""DG""",,,,bio/Q000000981,bio/D000005
+D000005,Q000502,"""physiology""","""PH""",,,,bio/Q000502,bio/D000005
+D000005,Q000503,"""physiopathology""","""PP""",,,,bio/Q000503,bio/D000005
+D000005,Q000294,"""innervation""","""IR""",,,,bio/Q000294,bio/D000005
+D000005,Q000821,"""virology""","""VI""",,,,bio/Q000821,bio/D000005
+D000005,Q000528,"""radiation effects""","""RE""",,,,bio/Q000528,bio/D000005
+D000005,Q000098,"""blood supply""","""BS""",,,,bio/Q000098,bio/D000005
+D000005,Q000196,"""embryology""","""EM""",,,,bio/Q000196,bio/D000005
+D000005,Q000033,"""anatomy & histology""","""AH""",,,,bio/Q000033,bio/D000005
+D000005,Q000473,"""pathology""","""PA""",,,,bio/Q000473,bio/D000005
+D000005,Q000601,"""surgery""","""SU""",,,,bio/Q000601,bio/D000005
+D000005,Q000254,"""growth & development""","""GD""",,,,bio/Q000254,bio/D000005
+D001583,Q000302,"""isolation & purification""","""IP""",1999-01-01,2020-05-27,1966-01-01,bio/Q000302,bio/D001583
+D001583,Q000276,"""immunology""","""IM""",,,,bio/Q000276,bio/D001583
+D001583,Q000493,"""pharmacokinetics""","""PK""",,,,bio/Q000493,bio/D001583
+D001583,Q000627,"""therapeutic use""","""TU""",,,,bio/Q000627,bio/D001583
+D001583,Q000819,"""agonists""","""AG""",,,,bio/Q000819,bio/D001583
+D001583,Q000097,"""blood""","""BL""",,,,bio/Q000097,bio/D001583
+D001583,Q000134,"""cerebrospinal fluid""","""CF""",,,,bio/Q000134,bio/D001583
+D001583,Q000138,"""chemical synthesis""","""CS""",,,,bio/Q000138,bio/D001583
+D001583,Q000737,"""chemistry""","""CH""",,,,bio/Q000737,bio/D001583
+D001583,Q000652,"""urine""","""UR""",,,,bio/Q000652,bio/D001583
+D001583,Q000528,"""radiation effects""","""RE""",,,,bio/Q000528,bio/D001583
+D001583,Q000266,"""history""","""HI""",,,,bio/Q000266,bio/D001583
+D001583,Q000032,"""analysis""","""AN""",,,,bio/Q000032,bio/D001583
+D001583,Q000145,"""classification""","""CL""",,,,bio/Q000145,bio/D001583
+D001583,Q000191,"""economics""","""EC""",,,,bio/Q000191,bio/D001583
+D001583,Q000494,"""pharmacology""","""PD""",,,,bio/Q000494,bio/D001583
+D001583,Q000592,"""standards""","""ST""",,,,bio/Q000592,bio/D001583
+D001583,Q000008,"""administration & dosage""","""AD""",,,,bio/Q000008,bio/D001583
+D001583,Q000037,"""antagonists & inhibitors""","""AI""",,,,bio/Q000037,bio/D001583
+D001583,Q000600,"""supply & distribution""","""SD""",,,,bio/Q000600,bio/D001583
+D001583,Q000506,"""poisoning""","""PO""",,,,bio/Q000506,bio/D001583
+D001583,Q000009,"""adverse effects""","""AE""",,,,bio/Q000009,bio/D001583
+D001583,Q000633,"""toxicity""","""TO""",,,,bio/Q000633,bio/D001583
+D001583,Q000378,"""metabolism""","""ME""",,,,bio/Q000378,bio/D001583
+D008462,Q000941,"""ethics""","""ES""",1999-01-01,1997-06-20,1966-01-01,bio/Q000941,bio/D008462
+D008462,Q000639,"""trends""","""TD""",,,,bio/Q000639,bio/D008462
+D008462,Q000266,"""history""","""HI""",,,,bio/Q000266,bio/D008462
+D008462,Q000145,"""classification""","""CL""",,,,bio/Q000145,bio/D008462
+D008462,Q000191,"""economics""","""EC""",,,,bio/Q000191,bio/D008462
+D008462,Q000193,"""education""","""ED""",,,,bio/Q000193,bio/D008462
+D008462,Q000295,"""instrumentation""","""IS""",,,,bio/Q000295,bio/D008462
+D008462,Q000379,"""methods""","""MT""",,,,bio/Q000379,bio/D008462
+D008462,Q000592,"""standards""","""ST""",,,,bio/Q000592,bio/D008462
+D008462,Q000458,"""organization & administration""","""OG""",,,,bio/Q000458,bio/D008462
+D008462,Q000331,"""legislation & jurisprudence""","""LJ""",,,,bio/Q000331,bio/D008462
+D008462,Q000706,"""statistics & numerical data""","""SN""",,,,bio/Q000706,bio/D008462
 D009275,,,,1999-01-01,2017-07-03,1966-01-01,bio/nan,bio/D009275
-D060726,Q000469,parasitology,PS,2011-06-24,nan-nan-nan,2012-01-01,bio/Q000469,bio/D060726
-D060726,Q000002,abnormalities,AB,,,,bio/Q000002,bio/D060726
-D060726,Q000382,microbiology,MI,,,,bio/Q000382,bio/D060726
-D060726,Q000000981,diagnostic imaging,DG,,,,bio/Q000000981,bio/D060726
-D060726,Q000502,physiology,PH,,,,bio/Q000502,bio/D060726
-D060726,Q000503,physiopathology,PP,,,,bio/Q000503,bio/D060726
-D060726,Q000294,innervation,IR,,,,bio/Q000294,bio/D060726
-D060726,Q000821,virology,VI,,,,bio/Q000821,bio/D060726
-D060726,Q000528,radiation effects,RE,,,,bio/Q000528,bio/D060726
-D060726,Q000098,blood supply,BS,,,,bio/Q000098,bio/D060726
-D060726,Q000196,embryology,EM,,,,bio/Q000196,bio/D060726
-D060726,Q000293,injuries,IN,,,,bio/Q000293,bio/D060726
-D060726,Q000033,anatomy & histology,AH,,,,bio/Q000033,bio/D060726
-D060726,Q000473,pathology,PA,,,,bio/Q000473,bio/D060726
-D060726,Q000601,surgery,SU,,,,bio/Q000601,bio/D060726
-D060726,Q000254,growth & development,GD,,,,bio/Q000254,bio/D060726
-D063086,Q000302,isolation & purification,IP,2012-07-03,nan-nan-nan,2013-01-01,bio/Q000302,bio/D063086
-D063086,Q000276,immunology,IM,,,,bio/Q000276,bio/D063086
-D063086,Q000493,pharmacokinetics,PK,,,,bio/Q000493,bio/D063086
-D063086,Q000627,therapeutic use,TU,,,,bio/Q000627,bio/D063086
-D063086,Q000819,agonists,AG,,,,bio/Q000819,bio/D063086
-D063086,Q000097,blood,BL,,,,bio/Q000097,bio/D063086
-D063086,Q000134,cerebrospinal fluid,CF,,,,bio/Q000134,bio/D063086
-D063086,Q000138,chemical synthesis,CS,,,,bio/Q000138,bio/D063086
-D063086,Q000737,chemistry,CH,,,,bio/Q000737,bio/D063086
-D063086,Q000652,urine,UR,,,,bio/Q000652,bio/D063086
-D063086,Q000528,radiation effects,RE,,,,bio/Q000528,bio/D063086
-D063086,Q000266,history,HI,,,,bio/Q000266,bio/D063086
-D063086,Q000032,analysis,AN,,,,bio/Q000032,bio/D063086
-D063086,Q000145,classification,CL,,,,bio/Q000145,bio/D063086
-D063086,Q000191,economics,EC,,,,bio/Q000191,bio/D063086
-D063086,Q000494,pharmacology,PD,,,,bio/Q000494,bio/D063086
-D063086,Q000592,standards,ST,,,,bio/Q000592,bio/D063086
-D063086,Q000008,administration & dosage,AD,,,,bio/Q000008,bio/D063086
-D063086,Q000037,antagonists & inhibitors,AI,,,,bio/Q000037,bio/D063086
-D063086,Q000600,supply & distribution,SD,,,,bio/Q000600,bio/D063086
-D063086,Q000009,adverse effects,AE,,,,bio/Q000009,bio/D063086
-D063086,Q000633,toxicity,TO,,,,bio/Q000633,bio/D063086
-D063086,Q000378,metabolism,ME,,,,bio/Q000378,bio/D063086
+D060726,Q000469,"""parasitology""","""PS""",2011-06-24,,2012-01-01,bio/Q000469,bio/D060726
+D060726,Q000002,"""abnormalities""","""AB""",,,,bio/Q000002,bio/D060726
+D060726,Q000382,"""microbiology""","""MI""",,,,bio/Q000382,bio/D060726
+D060726,Q000000981,"""diagnostic imaging""","""DG""",,,,bio/Q000000981,bio/D060726
+D060726,Q000502,"""physiology""","""PH""",,,,bio/Q000502,bio/D060726
+D060726,Q000503,"""physiopathology""","""PP""",,,,bio/Q000503,bio/D060726
+D060726,Q000294,"""innervation""","""IR""",,,,bio/Q000294,bio/D060726
+D060726,Q000821,"""virology""","""VI""",,,,bio/Q000821,bio/D060726
+D060726,Q000528,"""radiation effects""","""RE""",,,,bio/Q000528,bio/D060726
+D060726,Q000098,"""blood supply""","""BS""",,,,bio/Q000098,bio/D060726
+D060726,Q000196,"""embryology""","""EM""",,,,bio/Q000196,bio/D060726
+D060726,Q000293,"""injuries""","""IN""",,,,bio/Q000293,bio/D060726
+D060726,Q000033,"""anatomy & histology""","""AH""",,,,bio/Q000033,bio/D060726
+D060726,Q000473,"""pathology""","""PA""",,,,bio/Q000473,bio/D060726
+D060726,Q000601,"""surgery""","""SU""",,,,bio/Q000601,bio/D060726
+D060726,Q000254,"""growth & development""","""GD""",,,,bio/Q000254,bio/D060726
+D063086,Q000302,"""isolation & purification""","""IP""",2012-07-03,,2013-01-01,bio/Q000302,bio/D063086
+D063086,Q000276,"""immunology""","""IM""",,,,bio/Q000276,bio/D063086
+D063086,Q000493,"""pharmacokinetics""","""PK""",,,,bio/Q000493,bio/D063086
+D063086,Q000627,"""therapeutic use""","""TU""",,,,bio/Q000627,bio/D063086
+D063086,Q000819,"""agonists""","""AG""",,,,bio/Q000819,bio/D063086
+D063086,Q000097,"""blood""","""BL""",,,,bio/Q000097,bio/D063086
+D063086,Q000134,"""cerebrospinal fluid""","""CF""",,,,bio/Q000134,bio/D063086
+D063086,Q000138,"""chemical synthesis""","""CS""",,,,bio/Q000138,bio/D063086
+D063086,Q000737,"""chemistry""","""CH""",,,,bio/Q000737,bio/D063086
+D063086,Q000652,"""urine""","""UR""",,,,bio/Q000652,bio/D063086
+D063086,Q000528,"""radiation effects""","""RE""",,,,bio/Q000528,bio/D063086
+D063086,Q000266,"""history""","""HI""",,,,bio/Q000266,bio/D063086
+D063086,Q000032,"""analysis""","""AN""",,,,bio/Q000032,bio/D063086
+D063086,Q000145,"""classification""","""CL""",,,,bio/Q000145,bio/D063086
+D063086,Q000191,"""economics""","""EC""",,,,bio/Q000191,bio/D063086
+D063086,Q000494,"""pharmacology""","""PD""",,,,bio/Q000494,bio/D063086
+D063086,Q000592,"""standards""","""ST""",,,,bio/Q000592,bio/D063086
+D063086,Q000008,"""administration & dosage""","""AD""",,,,bio/Q000008,bio/D063086
+D063086,Q000037,"""antagonists & inhibitors""","""AI""",,,,bio/Q000037,bio/D063086
+D063086,Q000600,"""supply & distribution""","""SD""",,,,bio/Q000600,bio/D063086
+D063086,Q000009,"""adverse effects""","""AE""",,,,bio/Q000009,bio/D063086
+D063086,Q000633,"""toxicity""","""TO""",,,,bio/Q000633,bio/D063086
+D063086,Q000378,"""metabolism""","""ME""",,,,bio/Q000378,bio/D063086

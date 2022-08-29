@@ -1,18 +1,18 @@
 DescriptorID,ConceptID,ConceptName,ScopeNote,DateCreated,DateRevised,DateEstablished,Concept_dcid,Descriptor_dcid
-D000001,M0000001,Calcimycin,"An ionophorous, polyether antibiotic from Streptomyces chartreusensis. It binds and transports CALCIUM and other divalent cations across membranes and uncouples oxidative phosphorylation while inhibiting ATPase of rat liver mitochondria. The substance is used mostly as a biochemical tool to study the role of divalent cations in various biological systems.",1974-11-19,2016-05-27,1984-01-01,bio/M0000001,bio/D000001
-D000001,M0353609,A-23187,,,,,bio/M0353609,bio/D000001
-D000002,M0000002,Temefos,An organothiophosphate insecticide.,1999-01-01,2013-07-08,1991-01-01,bio/M0000002,bio/D000002
-D000002,M0352201,Abate,,,,,bio/M0352201,bio/D000002
-D000002,M0352200,Difos,,,,,bio/M0352200,bio/D000002
-D000003,M0000003,Abattoirs,Places where animals are slaughtered and dressed for market.,1999-01-01,2016-06-08,1966-01-01,bio/M0000003,bio/D000003
-D000004,M0000004,Abbreviations as Topic,Works about shortened forms of written words or phrases used for brevity.,1999-01-01,2017-06-30,1960-01-01,bio/M0000004,bio/D000004
-D000004,M0511063,Acronyms as Topic,,,,,bio/M0511063,bio/D000004
-D000005,M0000005,Abdomen,That portion of the body that lies between the THORAX and the PELVIS.,1999-01-01,2016-08-09,1966-01-01,bio/M0000005,bio/D000005
-D001583,M0002373,Benzoxazoles,,1999-01-01,2020-05-27,1966-01-01,bio/M0002373,bio/D001583
-D008462,M0013157,Meat-Packing Industry,The aggregate enterprise of technically producing packaged meat.,1999-01-01,1997-06-20,1966-01-01,bio/M0013157,bio/D008462
-D009275,M0014449,Names,"Personal names, given or surname, as cultural characteristics, as ethnological or religious patterns, as indications of the geographic distribution of families and inbreeding, etc. Analysis of isonymy, the quality of having the same or similar names, is useful in the study of population genetics. NAMES is used also for the history of names or name changes of corporate bodies, such as medical societies, universities, hospitals, government agencies, etc.",1999-01-01,2017-07-03,1966-01-01,bio/M0014449,bio/D009275
-D009275,M0014450,Isonymy,,,,,bio/M0014450,bio/D009275
-D060726,M0555064,Torso,The central part of the body to which the neck and limbs are attached.,2011-06-24,nan-nan-nan,2012-01-01,bio/M0555064,bio/D060726
-D063086,M0571059,Organothiophosphates,"Carbon-containing thiophosphoric acid derivatives. Included under this heading are compounds that have carbon bound to either SULFUR atom, or the OXYGEN atom of the SPO3 core structure.",2012-07-03,nan-nan-nan,2013-01-01,bio/M0571059,bio/D063086
-D063086,M0571060,Organodithiophosphates,,,,,bio/M0571060,bio/D063086
-D063086,M0021372,Thiophosphoric Acid Esters,,,,,bio/M0021372,bio/D063086
+D000001,M0000001,"""Calcimycin""","""An ionophorous, polyether antibiotic from Streptomyces chartreusensis. It binds and transports CALCIUM and other divalent cations across membranes and uncouples oxidative phosphorylation while inhibiting ATPase of rat liver mitochondria. The substance is used mostly as a biochemical tool to study the role of divalent cations in various biological systems.""",1974-11-19,2016-05-27,1984-01-01,bio/M0000001,bio/D000001
+D000001,M0353609,"""A-23187""",,,,,bio/M0353609,bio/D000001
+D000002,M0000002,"""Temefos""","""An organothiophosphate insecticide.""",1999-01-01,2013-07-08,1991-01-01,bio/M0000002,bio/D000002
+D000002,M0352201,"""Abate""",,,,,bio/M0352201,bio/D000002
+D000002,M0352200,"""Difos""",,,,,bio/M0352200,bio/D000002
+D000003,M0000003,"""Abattoirs""","""Places where animals are slaughtered and dressed for market.""",1999-01-01,2016-06-08,1966-01-01,bio/M0000003,bio/D000003
+D000004,M0000004,"""Abbreviations as Topic""","""Works about shortened forms of written words or phrases used for brevity.""",1999-01-01,2017-06-30,1960-01-01,bio/M0000004,bio/D000004
+D000004,M0511063,"""Acronyms as Topic""",,,,,bio/M0511063,bio/D000004
+D000005,M0000005,"""Abdomen""","""That portion of the body that lies between the THORAX and the PELVIS.""",1999-01-01,2016-08-09,1966-01-01,bio/M0000005,bio/D000005
+D001583,M0002373,"""Benzoxazoles""",,1999-01-01,2020-05-27,1966-01-01,bio/M0002373,bio/D001583
+D008462,M0013157,"""Meat-Packing Industry""","""The aggregate enterprise of technically producing packaged meat.""",1999-01-01,1997-06-20,1966-01-01,bio/M0013157,bio/D008462
+D009275,M0014449,"""Names""","""Personal names, given or surname, as cultural characteristics, as ethnological or religious patterns, as indications of the geographic distribution of families and inbreeding, etc. Analysis of isonymy, the quality of having the same or similar names, is useful in the study of population genetics. NAMES is used also for the history of names or name changes of corporate bodies, such as medical societies, universities, hospitals, government agencies, etc.""",1999-01-01,2017-07-03,1966-01-01,bio/M0014449,bio/D009275
+D009275,M0014450,"""Isonymy""",,,,,bio/M0014450,bio/D009275
+D060726,M0555064,"""Torso""","""The central part of the body to which the neck and limbs are attached.""",2011-06-24,,2012-01-01,bio/M0555064,bio/D060726
+D063086,M0571059,"""Organothiophosphates""","""Carbon-containing thiophosphoric acid derivatives. Included under this heading are compounds that have carbon bound to either SULFUR atom, or the OXYGEN atom of the SPO3 core structure.""",2012-07-03,,2013-01-01,bio/M0571059,bio/D063086
+D063086,M0571060,"""Organodithiophosphates""",,,,,bio/M0571060,bio/D063086
+D063086,M0021372,"""Thiophosphoric Acid Esters""",,,,,bio/M0021372,bio/D063086

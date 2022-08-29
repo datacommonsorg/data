@@ -32,13 +32,15 @@ class TestParseMesh(unittest.TestCase):
         df2_expected = pd.read_csv('unit-tests/mesh_qualifier_test.csv')
         df3_expected = pd.read_csv('unit-tests/mesh_concept_test.csv')
         df4_expected = pd.read_csv('unit-tests/mesh_term_test.csv')
-        df_actual = format_mesh_xml('unit-tests/test-file.xml')
+        df_actual = format_mesh_xml('unit-tests/mesh_test_data.xml')
+        
         # Run all the functions in format_mesh.py 
         df1_actual = date_modify(df_actual)
         df1_actual = format_descriptor_df(df1_actual)
         df2_actual = format_qualifier_df(df_actual)
         df3_actual = format_concept_df(df_actual)
         df4_actual = format_term_df(df_actual)
+        
         # Compare expected and actual output files
         assert_frame_equal(df1_expected.reset_index(drop=True), df1_actual.reset_index(drop=True))
         assert_frame_equal(df2_expected.reset_index(drop=True), df2_actual.reset_index(drop=True))
