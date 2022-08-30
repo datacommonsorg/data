@@ -47,10 +47,10 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
-                 "{pv11}\n"
+                 "{pv14}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Person{pv2}{pv3}{pv4}{pv5}"
-                 "{pv6}{pv7}{pv8}{pv9}{pv10}\n"
+                 "{pv6}{pv7}{pv8}{pv9}{pv10}{pv11}{pv12}{pv13}\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:count\n")
 
@@ -68,7 +68,7 @@ _TMCF_TEMPLATE = (
 file_to_sv_mapping = {
     "hlth_ehis_sk1b":
         "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'+\
-        '_In_Count_Person_'+df['sex']+'_'+df['c_birth']+ '_' + df['sex']",
+        '_In_Count_Person_'+df['sex']+'_'+df['c_birth']",
     "hlth_ehis_sk1c":
         "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'+\
         '_In_Count_Person_'+df['citizen']+'_'+df['sex']",
@@ -302,6 +302,9 @@ class EuroStatTobaccoConsumption:
                   inplace=True)
 
         df = df[df['age'] == 'TOTAL']
+
+        if 'quant_inc' in df.columns.values.tolist():
+            df = df[(~(df['quant_inc'] == 'UNK'))]
 
         for col in [
                 'sex', 'quant_inc', 'frequenc_tobacco', 'isced11', 'deg_urb',

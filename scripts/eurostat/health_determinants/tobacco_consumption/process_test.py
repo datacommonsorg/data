@@ -46,6 +46,7 @@ class TestProcess(unittest.TestCase):
         'hlth_ehis_sk5e.tsv', 'hlth_ehis_sk6e.tsv', 'hlth_ehis_de3.tsv',
         'hlth_ehis_de4.tsv', 'hlth_ehis_de5.tsv'
     ]
+    
     ip_data = [
         os.path.join(TEST_DATASET_DIR, file_name)
         for file_name in test_data_files
