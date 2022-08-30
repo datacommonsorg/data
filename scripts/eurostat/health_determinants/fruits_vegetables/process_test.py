@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for EuroStat Physical Activity process script.
+Script to automate the testing for EuroStat BMI process script.
 """
 
 import os
@@ -21,9 +21,12 @@ import sys
 import tempfile
 # module_dir is the path to where this test is running from.
 MODULE_DIR = os.path.dirname(__file__)
-sys.path.insert(0, MODULE_DIR)
+# sys.path.insert(0, MODULE_DIR)
 # pylint: disable=wrong-import-position
-from process import EuroStatConsumptionOfFruitsandVegetables
+# from process import EuroStatAlcoholConsumption
+_COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(1, _COMMON_PATH)
+from process import EuroStatFruitsVegetables
 # pylint: enable=wrong-import-position
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
@@ -35,50 +38,51 @@ class TestProcess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
     properties which further requried for unit testing.
-    The test will be conducted for EuroStat Physical Activity Sample Datasets,
+    The test will be conducted for EuroStat BMI Sample Datasets,
     It will be generating CSV, MCF and TMCF files based on the sample input.
     Comparing the data with the expected files.
     """
-    test_data_files = os.listdir(TEST_DATASET_DIR)
-
-    ip_data = [
-        os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in test_data_files
-    ]
+    ip_data = os.listdir(TEST_DATASET_DIR)
+    ip_data = [TEST_DATASET_DIR + os.sep + file for file in ip_data]
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+            # pylint: disable=invalid-name
+            _CLEANED_CSV_FILE_PATH = os.path.join(tmp_dir, "data.csv")
+            _MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
+            _TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
 
-            base = EuroStatConsumptionOfFruitsandVegetables(self.ip_data,
-             cleaned_csv_file_path, mcf_file_path, tmcf_file_path)
-            base.process()
+            base = EuroStatFruitsVegetables(self.ip_data, _CLEANED_CSV_FILE_PATH,
+                            _MCF_FILE_PATH, _TMCF_FILE_PATH,
+                            "fruits_vegetables")
+            sv_list = base.process()
+            base.generate_mcf(sv_list)
+            base.generate_tmcf()
 
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+            with open(_MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+            with open(_TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
                 self.actual_tmcf_data = tmcf_file.read()
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+            with open(_CLEANED_CSV_FILE_PATH, encoding="UTF-8") as csv_file:
                 self.actual_csv_data = csv_file.read()
+            # pylint: enable=invalid-name
 
     def test_mcf_tmcf_files(self):
         """
         This method is required to test between output generated
-        preprocess script and expected output files like MCF File
+        preprocess script and excepted output files like MCF File.
         """
         expected_mcf_file_path = os.path.join(
             EXPECTED_FILES_DIR,
-            "eurostat_population_consumptionoffruitsandvegetables.mcf")
+            "eurostat_population_fruitsvegetables.mcf")
 
         expected_tmcf_file_path = os.path.join(
             EXPECTED_FILES_DIR,
-            "eurostat_population_consumptionoffruitsandvegetables.tmcf")
+            "eurostat_population_fruitsvegetables.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -96,16 +100,16 @@ class TestProcess(unittest.TestCase):
     def test_create_csv(self):
         """
         This method is required to test between output generated
-        preprocess script and expected output files like CSV.
+        preprocess script and excepted output files like CSV.
         """
         expected_csv_file_path = os.path.join(
             EXPECTED_FILES_DIR,
-            "eurostat_population_consumptionoffruitsandvegetables.csv")
+            "eurostat_population_fruitsvegetables.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
-                  encoding="utf-8") as expected_csv_file:
+                  encoding="UTF-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
         self.assertEqual(expected_csv_data.strip(),
-        self.actual_csv_data.strip())
+                         self.actual_csv_data.strip())

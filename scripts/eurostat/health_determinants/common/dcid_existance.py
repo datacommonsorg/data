@@ -11,17 +11,31 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+"""_summary_
+Script to check the property/dcid/nodes existance in datacommons.org.
+"""
 import datacommons
 
 
-def check_dcid_existance(nodes):
+def check_dcid_existance(nodes: list) -> dict:
+    """
+    Checks the existance of dcid nodes in autopush.
+    True: Available
+    False: Unavailable
+    Args:
+        nodes (list): Dcid Nodes List
+
+    Returns:
+        dict: Status dictionary.
+    """
+    # pylint: disable=protected-access
     nodes_response = datacommons.get_property_values(
         nodes,
         "typeOf",
         out=True,
         value_type=None,
         limit=datacommons.utils._MAX_LIMIT)
+    # pylint: enable=protected-access
     node_status = {}
     for node, value in nodes_response.items():
         if value == []:

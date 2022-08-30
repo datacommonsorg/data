@@ -23,7 +23,7 @@ from dcid_existance import check_dcid_existance
 def _generate_mcf(sv_list, mcf_file_path) -> None:
     """
     This method generates MCF file w.r.t
-    dataframe headers and defined MCF template.
+    dataframe headers and defined MCF template
 
     Args:
         sv_list (list) : List of DataFrame Columns
@@ -133,18 +133,16 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
         f_out.write(final_mcf_template.rstrip('\n'))
 
 
-_MODULE_DIR = "scripts/eurostat/health_determinants/fruits_vegetables/"
+_MODULE_DIR = "scripts/eurostat/health_determinants/fruits_vegetablesn/"
 
 _INPUT_MCF_FILE_PATH = os.path.join(
-    _MODULE_DIR, "output",
-    "eurostat_population_consumptionoffruitsandvegetables.mcf")
+    _MODULE_DIR, "output", "eurostat_population_fruitsvegetables.mcf")
 _OUTPUT_MCF_FILE_PATH = os.path.join(
-    _MODULE_DIR, "output",
-    "eurostat_population_consumptionoffruitsandvegetables_deno.mcf")
+    _MODULE_DIR, "output", "eurostat_population_fruitsvegetables_deno.mcf")
 
 with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
     mcf = mcf_file.read()
-    deno_matched = re.findall(r"(measurementDenominator: dcs:)(\w+)", mcf)
+    deno_matched = re.findall("(measurementDenominator: dcs:)(\w+)", mcf)
     f_deno = []
     for deno in deno_matched:
         f_deno.append(deno[1])

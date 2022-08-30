@@ -61,14 +61,7 @@ _FREQUENC = {
     'WEEK': 'EveryWeek',
     'GE1W': 'AtLeastOnceAWeek',
     'NVR_OCC': 'NeverOrOccasionallyUsage',
-    'NBINGE': 'Never',
-    'GE1D': 'AtLeastOnceADay',
-    'GE2D' : 'AtLeastTwiceADay',
-    '1-3W' : 'From1To3TimesAWeek',
-	'4-6W': 'From4To6TimesAWeek',
-    '1D' : 'OnceADay',
-     'LT1W' : 'LessThanOnceAWeek'
-    
+    'NBINGE': 'Never'
 }
 
 _DEG_URB = {
@@ -182,15 +175,37 @@ _ISCED97 = {
     'TOTAL': 'Total'
 }
 
+_FREQUENC_FRUITS_VEGETABLES = {
+    
+    'DAY': 'Daily',
+    'LT1M': 'LessThanOnceAMonth',
+    'MTH': 'EveryMonth',
+    'NM12': 'NotInTheLast12Months',
+    'NVR': 'Never',
+    'NVR_NM12': 'NeverOrNotInTheLast12Months',
+    'WEEK': 'EveryWeek',
+    'GE1W': 'AtLeastOnceAWeek',
+    'NVR_OCC': 'NeverOrOccasionallyUsage',
+    'NBINGE': 'Never',
+    'GE1D': 'AtLeastOnceADay',
+    'GE2D' : 'AtLeastTwiceADay',
+    '1-3W' : 'From1To3TimesAWeek',
+	'4-6W': 'From4To6TimesAWeek',
+    '1D' : 'OnceADay',
+     'LT1W' : 'LessThanOnceAWeek'
+}
+
 
 def _replace_col_values(data_df: pd.DataFrame,
                         column_name: str) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
+
     Args:
         data_df (pd.DataFrame): data_df as the input, to change column values
         column_name (str): Column values to be replaced
+
     Returns:
         (pd.DataFrame): Updated DataFrame
     """
@@ -212,7 +227,9 @@ def _replace_col_values(data_df: pd.DataFrame,
         'frequenc_alcohol': _FREQUENC_ALCOHOL,
         'n_portion': _N_PORTION,
         'coicop': _COICOP,
-        'isced97': _ISCED97
+        'isced97': _ISCED97,
+        'frequenc_fruits_vegetables': _FREQUENC_FRUITS_VEGETABLES
+
     }
     return data_df.replace({column_name: mapper[column_name]})
 
@@ -220,8 +237,10 @@ def _replace_col_values(data_df: pd.DataFrame,
 def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
     """
     Divides a single column into multiple columns and returns the DF.
+
     Args:
         df (pd.DataFrame): df as the input, to divide the column
+
     Returns:
         df (pd.DataFrame): modified df as output
     """
