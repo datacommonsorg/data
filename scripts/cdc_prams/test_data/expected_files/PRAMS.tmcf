@@ -3,5 +3,5 @@ typeOf: dcs:StatVarObservation
 variableMeasured: C:US_Prams->SV
 observationAbout: C:US_Prams->Geo
 observationDate: C:US_Prams->Year
-scalingFactor: 100
+scalingFactor: C:US_Prams->ScalingFactor
 value: C:US_Prams->Observation

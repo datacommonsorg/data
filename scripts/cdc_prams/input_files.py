@@ -17,7 +17,6 @@ the download script takes INPUT_URLs and current directory as input
 and downloads the files.
 """
 import os
-import sys
 from absl import app, flags
 # For import common.download
 # pylint: disable=import-error
@@ -33,6 +32,16 @@ flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
 
 
 def download_files(download_directory: str) -> None:
+    '''
+     This Method calls the download function from the commons directory
+    to download all the input files.
+
+    Args:
+        download_directory (str):Location where the files need to be downloaded.
+
+    Returns:
+        None
+    '''
     input_url = [
         'All-Sites-PRAMS-MCH-Indicators-508.pdf',
         'Alabama-PRAMS-MCH-Indicators-508.pdf',
@@ -85,7 +94,7 @@ def download_files(download_directory: str) -> None:
         'Wyoming-PRAMS-MCH-Indicators-508.pdf'
     ]
     INPUT_URL = [
-        'https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/' +
+        'https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/'+
         file for file in input_url
     ]
     download_file(INPUT_URL, download_directory)

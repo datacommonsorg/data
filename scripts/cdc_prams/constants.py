@@ -12,13 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Constant value used in processing US Tract are defined here.
+Constant value used in processing US Prams are defined here.
 This module also consists of mapping between various forms of column names
 found in downloaded files and its corresponding SV name.
 While preprocessing files column names are changed to SV names as used in
 DC import
 """
-# ConfidenceIntervalUpperLimit_Percent_LiveBirthPregnancyEvent_Obesity_AsAFractionOf_Count_BirthEvent_LiveBirth
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:LiveBirthPregnancyEvent\n"
@@ -78,6 +77,8 @@ _PROP = {
         "",
     "12MonthsBeforePregnancy":
         "",
+    "12MonthsBeforeDelivery":
+        "",
     "InFirstTrimester":
         "",
     "ECigaretteSmoking":
@@ -92,9 +93,11 @@ _PROP = {
         "",
     "ConfidenceIntervalUpperLimit_Count":
         "",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband12MonthsBeforePregnancy":
+    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"+\
+        "12MonthsBeforePregnancy":
         "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusbandDuringPregnancy":
+    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"+\
+        "DuringPregnancy":
         "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"
 }
 
@@ -105,8 +108,8 @@ _TIME = {
         "",
     "PrenatalCareIn":
         "",
-    "FluShot":
-        "",
+    "FluShot12MonthsBeforeDelivery":
+        "12MonthsBeforeBirth",
     "MaternalCheckup":
         "",
     "TeethCleanedByDentistOrHygienist":
@@ -145,10 +148,13 @@ _TIME = {
         "",
     "ConfidenceIntervalUpperLimit_Count":
         "",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband12MonthsBeforePregnancy":
+    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusband"+\
+        "12MonthsBeforePregnancy":
         "12MonthsBeforePregnancy",
-    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOrExHusbandDuringPregnancy":
-        "DuringPregnancy"
+    "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOr"+\
+        "ExHusbandDuringPregnancy":
+        "DuringPregnancy",
+    "AnyBreastfeedingAt8Weeks":"8WeeksAfterPregnancy"
 }
 
 _INSURANCE = {

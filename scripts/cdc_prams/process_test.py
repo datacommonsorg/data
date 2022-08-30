@@ -23,7 +23,7 @@ import tempfile
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
 # pylint: disable=wrong-import-position
-from process import US_Prams
+from process import UsPrams
 # pylint: enable=wrong-import-position
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
@@ -66,7 +66,7 @@ class TestProcess(unittest.TestCase):
             MCF_FILE_PATH = os.path.join(tmp_dir, "test_census.mcf")
             TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
 
-            base = US_Prams(self.ip_data, CLEANED_CSV_FILE_PATH, MCF_FILE_PATH,
+            base = UsPrams(self.ip_data, CLEANED_CSV_FILE_PATH, MCF_FILE_PATH,
                             TMCF_FILE_PATH)
             base.process()
 
