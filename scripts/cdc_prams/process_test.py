@@ -66,7 +66,7 @@ class TestProcess(unittest.TestCase):
             TMCF_FILE_PATH = os.path.join(tmp_dir, "test_census.tmcf")
 
             base = UsPrams(self.ip_data, CLEANED_CSV_FILE_PATH, MCF_FILE_PATH,
-                            TMCF_FILE_PATH)
+                           TMCF_FILE_PATH)
             base.process()
 
             with open(MCF_FILE_PATH, encoding="UTF-8") as mcf_file:

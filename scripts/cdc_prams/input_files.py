@@ -94,7 +94,7 @@ def download_files(download_directory: str) -> None:
         'Wyoming-PRAMS-MCH-Indicators-508.pdf'
     ]
     INPUT_URL = [
-        'https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/'+
+        'https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/' +
         file for file in input_url
     ]
     download_file(INPUT_URL, download_directory)

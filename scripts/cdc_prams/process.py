@@ -44,6 +44,7 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
+
 def _multiline(final_df, flag):
     '''
     StatVar column which are present in multiline format
@@ -85,6 +86,7 @@ def _multiline(final_df, flag):
                 break
     return df1
 
+
 def _split_statvar_value(df1, flag):
     '''
     The values are seperated from the statvar and given into the next column
@@ -107,6 +109,7 @@ def _split_statvar_value(df1, flag):
             df1.loc[i, 'Overall_2020_CI'] = df1.loc[i, 'statVar'][:12]
             df1.loc[i, 'statVar'] = df1.loc[i, 'statVar'][13:]
     return df1
+
 
 def _cleaning_national(df1, flag):
     '''
@@ -150,7 +153,8 @@ def _cleaning_national(df1, flag):
                 break
     return df1
 
-def _header(df2)-> pd.DataFrame:
+
+def _header(df2) -> pd.DataFrame:
     '''
     The source file has main headers,sub headers and statvar.
     All the headers and statvars are combined into one
@@ -206,6 +210,7 @@ def _header(df2)-> pd.DataFrame:
     # Creating a new column named as 'ScalingFactor'
     df2.insert(1, 'ScalingFactor', np.NaN)
     return df2
+
 
 def _splitting_ci_columns(df2, flag):
     '''
@@ -263,13 +268,13 @@ def _splitting_ci_columns(df2, flag):
             '2017_CI_PERCENT', '2017_CI_LOWER', '2017_CI_UPPER',
             '2018_CI_PERCENT', '2018_CI_LOWER', '2018_CI_UPPER',
             '2019_CI_PERCENT', '2019_CI_LOWER', '2019_CI_UPPER',
-            '2020_CI_PERCENT', '2020_CI_LOWER', '2020_CI_UPPER', 
-            'ScalingFactor'
+            '2020_CI_PERCENT', '2020_CI_LOWER', '2020_CI_UPPER', 'ScalingFactor'
         ]]
-            # The Distric of Columbia has characters : (.-.)
+        # The Distric of Columbia has characters : (.-.)
         df2['2018_CI_UPPER'] = df2['2018_CI_UPPER'].replace('.', '0.0')
         df2['2018_CI_LOWER'] = df2['2018_CI_LOWER'].replace('.', '0.0')
     return df2
+
 
 def _stat_var(df2, flag):
     '''
@@ -346,6 +351,7 @@ def _stat_var(df2, flag):
         df_all = pd.concat([df_all, temp_df], axis=0)
         df_all = df_all[['Geo', 'SV', 'Year', 'Observation', 'ScalingFactor']]
     return df_all
+
 
 def prams(input_url: list) -> pd.DataFrame:
     '''
@@ -605,7 +611,7 @@ class UsPrams:
                     "healthInsuranceStatusOneMonthBeforePregnancy"+\
                         "NoInsurance" in prop :
                     pvs.append(
-                    f"healthInsuranceStatusOneMonthBeforePregnancy: dcs:{prop1}"
+                        f"healthInsuranceStatusOneMonthBeforePregnancy: dcs:{prop1}"
                     )
                     sv_pvs["healthInsuranceStatusOneMonthBeforePregnancy"]\
                     = f"dcs:{prop1}"

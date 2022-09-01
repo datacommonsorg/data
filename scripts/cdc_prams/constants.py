@@ -154,7 +154,7 @@ _TIME = {
     "IntimatePartnerViolenceByCurrentOrExPartnerOrCurrentOr"+\
         "ExHusbandDuringPregnancy":
         "DuringPregnancy",
-    "AnyBreastfeedingAt8Weeks":"8WeeksAfterPregnancy"
+    "AnyBreastfeedingAt8Weeks": "8WeeksAfterPregnancy"
 }
 
 _INSURANCE = {
