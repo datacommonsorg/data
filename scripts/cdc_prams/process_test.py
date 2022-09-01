@@ -43,13 +43,12 @@ class TestProcess(unittest.TestCase):
         'Alabama-PRAMS-MCH-Indicators-508.pdf',
         'Connecticut-PRAMS-MCH-Indicators-508.pdf',
         'Hawaii-PRAMS-MCH-Indicators-508.pdf'
-        # 'Maryland-PRAMS-MCH-Indicators-508.pdf',
-        # 'Mississippi-PRAMS-MCH-Indicators-508.pdf',
-        # 'North-Carolina-PRAMS-MCH-Indicators-508.pdf',
-        # 'Oregon-PRAMS-MCH-Indicators-508.pdf',
-        # 'Puerto-Rico-PRAMS-MCH-Indicators-508.pdf',
-        # 'Vermont-PRAMS-MCH-Indicators-508.pdf',
-        # 'Wisconsin-PRAMS-MCH-Indicators-508.pdf'
+        'Maine-PRAMS-MCH-Indicators-508.pdf',
+        'Massachusetts-PRAMS-MCH-Indicators-508.pdf',
+        'Montana-PRAMS-MCH-Indicators-508.pdf',
+        'Rhode-Island-PRAMS-MCH-Indicators-508.pdf',
+        'West-Virginia-PRAMS-MCH-Indicators-508.pdf',
+        'Wyoming-PRAMS-MCH-Indicators-508.pdf'
     ]
     ip_data = [
         os.path.join(TEST_DATASET_DIR, file_name)

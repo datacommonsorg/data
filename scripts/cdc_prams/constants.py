@@ -64,13 +64,13 @@ _PROP = {
     "healthInsuranceStatus1MonthBeforePregnancyprivateinsurance":
         "WithPrivateHealthInsurance",
     "healthInsuranceStatus1MonthBeforePregnancyMedicaid":
-        "medicaid",
+        "WithMedicaid",
     "healthInsuranceStatus1MonthBeforePregnancyNoInsurance":
         "NoHealthInsurance",
     "healthInsuranceStatusForPrenatalCareprivateinsurance":
         "WithPrivateHealthInsurance",
     "healthInsuranceStatusForPrenatalCareMedicaid":
-        "medicaid",
+        "WithMedicaid",
     "healthInsuranceStatusForPrenatalCareNoInsurance":
         "NoHealthInsurance",
     "DuringPregnancy":
@@ -163,7 +163,7 @@ _INSURANCE = {
     "healthInsuranceStatusPostpartumprivateinsurance":
         "WithPrivateHealthInsurance",
     "healthInsuranceStatusPostpartumMedicaid":
-        "medicaid",
+        "WithMedicaid",
     "healthInsuranceStatusPostpartumNoInsurance":
         "NoHealthInsurance",
     "SampleSize_Count":
