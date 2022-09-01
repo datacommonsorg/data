@@ -1,0 +1,23 @@
+Node: E:protein_drug_interactions->E1
+typeOf: dcs:Protein
+dcid: C:protein_drug_interactions->protein
+
+Node: E:protein_drug_interactions->E2
+typeOf: dcs:Drug
+dcid: C:protein_drug_interactions->chemical
+
+Node: E:protein_drug_interactions->E3
+typeOf: dcs:ChemicalCompoundProteinInteraction
+name: C:protein_drug_interactions->name_interaction
+dcid: C:protein_drug_interactions->dcid
+experimentalDirectScore: C:protein_drug_interactions->experimental_direct
+experimentalTransferredScore: C:protein_drug_interactions->experimental_transferred
+predictionDirectScore: C:protein_drug_interactions->prediction_direct
+predictionTransferredScore: C:protein_drug_interactions->prediction_transferred
+databaseDirectScore: C:protein_drug_interactions->database_direct
+databaseTransferredScore: C:protein_drug_interactions->database_transferred
+textminingDirectScore: C:protein_drug_interactions->textmining_direct
+textminingTransferredScore: C:protein_drug_interactions->textmining_transferred
+combinedScore: C:protein_drug_interactions->combined_score
+proteinID: E:protein_drug_interactions->E1
+compoundID: E:protein_drug_interactions->E2

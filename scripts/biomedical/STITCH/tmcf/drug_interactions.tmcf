@@ -1,0 +1,19 @@
+Node: E:drug_interactions->E1
+typeOf: dcs:Drug
+dcid: C:drug_interactions->chemical1
+
+Node: E:drug_interactions->E2
+typeOf: dcs:Drug
+dcid: C:drug_interactions->chemical2
+
+Node: E:drug_interactions->E3
+typeOf: dcs:ChemicalCompoundChemicalCompoundInteraction
+name: C:drug_interactions->pubchem_combined
+dcid: C:drug_interactions->pubchem_dcid
+similarity: C:drug_interactions->similarity
+chemicalExperimentalScore: C:drug_interactions->experimental
+databaseScore: C:drug_interactions->database
+textminingScore: C:drug_interactions->textmining
+combinedScore: C:drug_interactions->combined_score
+interactingDrug: E:drug_interactions->E1
+interactingDrug: E:drug_interactions->E2
