@@ -12,13 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python Script Load the datasets, cleans it
-and generates cleaned CSV, MCF, TMCF file.
-Before running this module, run download_input_files.py script, it downloads
-required input files, creates necessary folders for processing.
-Folder information
-input_files - downloaded files (from US census website) are placed here
-output_files - output files (mcf, tmcf and csv are written here)
+This Python module is generalized to work with different Eurostat import such as
+Physical Activity, BMI, Alcohol Consumption, Tobacco Consumption...
+
+EuroStat class in this module provides methods to generate processed CSV, MCF &
+tMCF files.
+
+_propety_correction() and _sv_name_correction() are abstract methods, these 
+method needs to implemented by Subclasses.
 """
 import os
 import sys
@@ -31,7 +32,7 @@ from absl import app, flags
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
-from common.replacement_functions import (_split_column, _replace_col_values)
+from common.replacement_functions import (split_column, replace_col_values)
 from common.sv_config import file_to_sv_mapping
 
 # For import util.alpha2_to_dcid
@@ -47,14 +48,6 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-_MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
-                 "{pv11}\n"
-                 "typeOf: dcs:StatisticalVariable\n"
-                 "populationType: dcs:Person{pv2}{pv3}{pv4}{pv5}"
-                 "{pv6}{pv7}{pv8}{pv9}{pv10}\n"
-                 "statType: dcs:measuredValue\n"
-                 "measuredProperty: dcs:count\n")
-
 _TMCF_TEMPLATE = ("Node: E:eurostat_population_{import_name}->E0\n"
                   "typeOf: dcs:StatVarObservation\n"
                   "variableMeasured: C:eurostat_population_{import_name}->SV\n"
@@ -68,23 +61,34 @@ _TMCF_TEMPLATE = ("Node: E:eurostat_population_{import_name}->E0\n"
 
 class EuroStat:
     """
-    This Class has requried methods to generate Cleaned CSV,
-    MCF and TMCF Files.
+    EuroStat is a base class which provides common implementation for generating 
+    CSV, MCF and tMCF files.
     """
+    # Below variables will be initialized by sub-class (import specific)
+    _import_name  = ""
+    _mcf_template = ""
+    _sv_value_to_property_mapping = {}
+    _sv_properties_template = {}
+    _sv_properties = {}
 
     def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str,
-                 import_name: str) -> None:
+                 mcf_file_path: str, tmcf_file_path: str) -> None:
         self._input_files = input_files
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
-        self._import_name = import_name
+        self._df = pd.DataFrame()
 
+    def _propety_correction(self):
+        None
+    
+    def _sv_name_correction(self, sv_name: str) -> str:
+        None
+    
     def _parse_file(self, file_name: str, df: pd.DataFrame,
                     import_name: dict) -> pd.DataFrame:
         split_columns = df.columns.values.tolist()[0]
-        df = _split_column(df, split_columns)
+        df = split_column(df, split_columns)
 
         split_columns = split_columns.replace('isced97', 'isced11')\
                 .replace('geo\time','geo').replace('geo\\time','geo')\
@@ -116,6 +120,8 @@ class EuroStat:
                 'quantile': 'quant_inc'
             },
                       inplace=True)
+            if 'quant_inc' in df.columns.values.tolist():
+                df = df[(~(df['quant_inc'] == 'UNK'))]
         elif import_name == "bmi":
             if 'quant_inc' in df.columns.values.tolist():
                 df = df[(~(df['quant_inc'] == 'UNK'))]
@@ -129,7 +135,7 @@ class EuroStat:
                 'lev_limit', 'levels'
         ]:
             if col in df.columns.values.tolist():
-                df = _replace_col_values(df, col)
+                df = replace_col_values(df, col)
 
         df['SV'] = eval(file_to_sv_mapping[import_name][file_name])
 
@@ -151,7 +157,7 @@ class EuroStat:
         df = df[df['geo'] != 'EU28']
         return df
 
-    def process(self) -> list:
+    def generate_csv(self) -> pd.DataFrame:
         """
         This Method calls the required methods to generate
         cleaned CSV, MCF, and TMCF file.
@@ -160,7 +166,7 @@ class EuroStat:
             None
 
         Returns:
-            None
+            pd.DataFrame
         """
         final_df = pd.DataFrame(
             columns=['time', 'geo', 'SV', 'observation', 'Measurement_Method'])
@@ -168,7 +174,6 @@ class EuroStat:
         output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
             os.mkdir(output_path)
-        sv_list = []
 
         for file_path in self._input_files:
             df = pd.read_csv(file_path, sep='\t', header=0)
@@ -177,7 +182,6 @@ class EuroStat:
             df = self._parse_file(file_name, df, self._import_name)
             df['SV'] = df['SV'].str.replace('_Total', '')
             final_df = pd.concat([final_df, df])
-            sv_list += df["SV"].to_list()
 
         final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
         final_df = final_df.drop_duplicates(subset=['time', 'geo', 'SV'],
@@ -232,12 +236,12 @@ class EuroStat:
         final_df = final_df.sort_values(by=['geo', 'SV'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
+        self._df = final_df
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
-        sv_list = list(set(sv_list))
-        sv_list.sort()
-        return sv_list
+        return self._df
 
-    def generate_mcf(self, sv_list) -> None:
+
+    def generate_mcf(self) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
@@ -250,92 +254,51 @@ class EuroStat:
         """
         # pylint: disable=R0914
         final_mcf_template = ""
+        sv_list = list(set(self._df["SV"].to_list()))
+        sv_list.sort()
+
         for sv in sv_list:
+            self._sv_properties = self._sv_properties_template
+            self._sv_properties = dict.fromkeys(self._sv_properties, "")
             if "Total" in sv:
                 continue
-            incomequin = gender = education = frequenc_alcohol =\
-                healthbehavior = residence = countryofbirth = citizenship =\
-                    sv_name = ''
+            sv_name = ""
 
             sv_temp = sv.split("_In_")
             denominator = "\nmeasurementDenominator: dcs:" + sv_temp[1]
             sv_prop = sv_temp[0].split("_")
-            sv_prop1 = sv_temp[1].split("_")
+            sv_prop.append("Among")
+            sv_prop.extend(sv_temp[1].split("_"))
+
             for prop in sv_prop:
-                if prop in ["Percent"]:
-                    sv_name = sv_name + "Percentage "
-                if "AlcoholConsumption" in prop or "BingeDrinking" in prop\
-                    or "HazardousAlcoholConsumption" in prop:
-                    healthbehavior = "\nhealthBehavior: dcs:" + prop
-                    sv_name = sv_name + prop + ", "
-                elif "Daily" in prop or "LessThanOnceAMonth" in prop \
-                    or "EveryMonth" in prop or "NotInTheLast12Months" in prop\
-                    or "Never" in prop:
-                    frequenc_alcohol = "\nactivityFrequency: dcs:" + prop\
-                        .replace("Or","__")
-                    sv_name = sv_name + prop + ", "
-                elif "NeverOrNotInTheLast12Months" in\
-                    prop or "EveryWeek" in prop or "AtLeastOnceAWeek" in prop\
-                    or "NeverOrOccasional" in prop:
-                    frequenc_alcohol = "\nactivityFrequency: dcs:" + prop\
-                        .replace("Or","__")
-                    sv_name = sv_name + prop + ", "
-            sv_name = sv_name + "Among "
-            for prop in sv_prop1:
                 if prop in ["Count", "Person"]:
                     continue
-                if "Male" in prop or "Female" in prop:
-                    gender = "\ngender: dcs:" + prop
-                    sv_name = sv_name + prop + ", "
-                elif "Education" in prop:
-                    education = "\neducationalAttainment: dcs:" + \
-                        prop.replace("Or","__")
-                    sv_name = sv_name + prop + ", "
-                elif "Percentile" in prop:
-                    incomequin = "\nincome: ["+prop.replace("Percentile",\
-                        "").replace("IncomeOf","").replace("To"," ")\
-                            +" Percentile]"
-                    sv_name = sv_name + prop.replace("Of","Of ")\
-                        .replace("To"," To ") + ", "
-                elif "Urban" in prop or "SemiUrban" in prop \
-                    or "Rural" in prop:
-                    residence = "\nplaceOfResidenceClassification: dcs:" + prop
-                    sv_name = sv_name + prop + ", "
-                elif "ForeignBorn" in prop or "Native" in prop:
-                    countryofbirth = "\nnativity: dcs:" + \
-                        prop.replace("CountryOfBirth","")
-                    sv_name = sv_name + prop + ", "
-                elif "WithinEU28AndNotACitizen" in prop or\
-                    "CitizenOutsideEU28" in prop or "Citizen"\
-                        in prop or "NotACitizen" in prop:
-                    citizenship = "\ncitizenship: dcs:"+\
-                    prop.replace("Citizenship","")
+                elif prop in ["Percent"]:
+                    sv_name = sv_name + "Percentage "
+                else:
                     sv_name = sv_name + prop + ", "
 
-            sv_name = sv_name.replace(", Among", " Among")
-            sv_name = sv_name.rstrip(', ')
-            sv_name = sv_name.rstrip('with')
+                for p in self._sv_value_to_property_mapping.keys():
+                    if p in prop:
+                        self._sv_properties[self._sv_value_to_property_mapping[p]] = self._sv_properties_template[self._sv_value_to_property_mapping[p]].format(proprty_value=prop)
+
+            sv_name = sv_name.replace(", Among,", "Among").rstrip(', ').rstrip('with')
             # Adding spaces before every capital letter,
             # to make SV look more like a name.
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
             sv_name = "name: \"" + sv_name + " Population\""
-            sv_name = sv_name.replace("AWeek","A Week")\
-                .replace("Last12","Last 12").replace("ACitizen","A Citizen")\
-                    .replace("AMonth","A Month")
 
-            final_mcf_template += _MCF_TEMPLATE.format(
-                pv1=sv,
-                pv11=sv_name,
-                pv2=denominator,
-                pv3=healthbehavior,
-                pv4=gender,
-                pv5=frequenc_alcohol,
-                pv6=education,
-                pv7=incomequin,
-                pv8=residence,
-                pv9=countryofbirth,
-                pv10=citizenship,
-            ) + "\n"
+            self._propety_correction()
+            sv_name = self._sv_name_correction(sv_name)
+
+            mcf_template_parameters = {
+                "sv": sv,
+                "sv_name": sv_name,
+                "denominator": denominator
+            }
+
+            mcf_template_parameters.update(self._sv_properties)
+            final_mcf_template += self._mcf_template.format(**mcf_template_parameters) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:

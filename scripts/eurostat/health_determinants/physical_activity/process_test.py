@@ -11,104 +11,31 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-Script to automate the testing for EuroStat Physical Activity process script.
-"""
 
 import os
-import unittest
 import sys
-import tempfile
-# module_dir is the path to where this test is running from.
-MODULE_DIR = os.path.dirname(__file__)
-sys.path.insert(0, MODULE_DIR)
-# pylint: disable=wrong-import-position
+
+_COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(1, _COMMON_PATH)
 from process import EuroStatPhysicalActivity
-# pylint: enable=wrong-import-position
-
-TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
-EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
-OUTPUT_DATA_DIR = os.path.join(MODULE_DIR, "test_output_data")
+from common.unitest_common_methods import CommonTestClass
 
 
-class TestProcess(unittest.TestCase):
-    """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing.
-    The test will be conducted for EuroStat Physical Activity Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
-    Comparing the data with the expected files.
-    """
-    test_data_files = os.listdir(TEST_DATASET_DIR)
+class PhysicalActivityTestInit:
 
-    ip_data = [
-        os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in test_data_files
-    ]
+    def __init__(self):
+        MODULE_DIR = os.path.dirname(__file__)
+        test_input_files_directory = os.path.join(MODULE_DIR, "test_files",
+                                                  "input_files")
+        self.ip_test_files = os.listdir(test_input_files_directory)
+        self.ip_test_files = [
+            test_input_files_directory + os.sep + file
+            for file in self.ip_test_files
+        ]
+        self.expected_files_directory = os.path.join(MODULE_DIR, "test_files",
+                                                     "expected_files")
+        self.import_class = EuroStatPhysicalActivity
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
-
-            base = EuroStatPhysicalActivity(self.ip_data, cleaned_csv_file_path,
-                                            mcf_file_path, tmcf_file_path,
-                                            "physical_activity")
-            sv_list = base.process()
-            base.generate_mcf(sv_list)
-            base.generate_tmcf()
-
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
-                self.actual_mcf_data = mcf_file.read()
-
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_data = tmcf_file.read()
-
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
-
-    def test_mcf_tmcf_files(self):
-        """
-        This method is required to test between output generated
-        preprocess script and expected output files like MCF File
-        """
-        expected_mcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR,
-            "expected_eurostat_population_physicalactivity.mcf")
-
-        expected_tmcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR,
-            "expected_eurostat_population_physicalactivity.tmcf")
-
-        with open(expected_mcf_file_path,
-                  encoding="UTF-8") as expected_mcf_file:
-            expected_mcf_data = expected_mcf_file.read()
-
-        with open(expected_tmcf_file_path,
-                  encoding="UTF-8") as expected_tmcf_file:
-            expected_tmcf_data = expected_tmcf_file.read()
-
-        self.assertEqual(expected_mcf_data.strip(),
-                         self.actual_mcf_data.strip())
-        self.assertEqual(expected_tmcf_data.strip(),
-                         self.actual_tmcf_data.strip())
-
-    def test_create_csv(self):
-        """
-        This method is required to test between output generated
-        preprocess script and expected output files like CSV
-        """
-        expected_csv_file_path = os.path.join(
-            EXPECTED_FILES_DIR,
-            "expected_eurostat_population_physicalactivity.csv")
-
-        expected_csv_data = ""
-        with open(expected_csv_file_path,
-                  encoding="utf-8") as expected_csv_file:
-            expected_csv_data = expected_csv_file.read()
-
-        self.assertEqual(expected_csv_data.strip(),
-                         self.actual_csv_data.strip())
+class PhysicalActivityTest(CommonTestClass.CommonTestCases):
+    klass = PhysicalActivityTestInit

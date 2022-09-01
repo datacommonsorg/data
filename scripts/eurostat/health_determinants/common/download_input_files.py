@@ -36,7 +36,7 @@ flags.DEFINE_string("import_name", "alcohol_consumption",
                     "Import name for which input files will be downloaded")
 
 
-def download_files(download_directory: str, filenames: str, input_url: str,
+def download_files(download_directory: str, filenames: list, input_url: str,
                    file_extension: str) -> None:
     """
     This Method calls the download function from the commons directory

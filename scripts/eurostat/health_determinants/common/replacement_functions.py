@@ -176,7 +176,7 @@ _ISCED97 = {
 }
 
 
-def _replace_col_values(data_df: pd.DataFrame,
+def replace_col_values(data_df: pd.DataFrame,
                         column_name: str) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
@@ -212,7 +212,7 @@ def _replace_col_values(data_df: pd.DataFrame,
     return data_df.replace({column_name: mapper[column_name]})
 
 
-def _split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
+def split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
     """
     Divides a single column into multiple columns and returns the DF.
 
