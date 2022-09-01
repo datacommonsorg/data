@@ -78,49 +78,19 @@ The below command will run preprocess.py and generate three output csv, mcf and 
 ### Additional Notes
 This import has seperate .py script for different year ranges. They are as follow:
 
-1. county_1970_1979.py 
-- This script process as is data for county from year 1970 to 1979.
+1. county_1970_1979.py, county_1980_1989.py, county_1990_2000.py, county_2000_2009.py, county_2010_2020.py
+- These scripts process as is data for County from year 1970 to 2020. Different python modules are written as schema changes across decades. 
 
-2. county_1980_1989.py 
-- This script process as is data for county from year 1980 to 1989.
+2. state_1970_1979.py, state_1980_1990.py, state_1990_2000.py, state_2000_2010.py
+- These scripts process as is data for State from year 1970 to 2000. Different python modules are written as schema changes across decades.
 
-3. county_1990_2000.py 
-- This script process as is data for county from year 1990 to 2000.
+3. state_2010_2020.py 
+- This script aggregates data from county level to state level from year 2010 to 2020 as the    intercensal files were not availabel for this year range at state level.
 
-4. county_2000_2009.py 
-- This script process as is data for county from year 2000 to 2009.
+4. national_1900_1970.py, national_1980_1990.py, national_1990_2000.py, national_2000_2010.py
+- These scripts process as is data for National from year 1900 to 2000. Different python modules are written as schema changes across decades.
 
-5. county_2010_2020.py 
-- This script process as is data for county from year 2010 to 2020.
-
-6. state_1970_1979.py 
-- This script process as is data for state from year 1970 to 1979.
-
-7. state_1980_1990.py 
-- This script process as is data for state from year 1980 to 1990.
-
-8. state_1990_2000.py 
-- This script process as is data for state from year 1990 to 2000.
-
-9. state_2000_2010.py 
-- This script process as is data for state from year 2000 to 2010.
-
-10. state_2010_2020.py 
-- This script aggregates data from county level to state level from year 2010 to 2020.
-
-11. national_1900_1970.py 
-- This script process as is data for national from year 1900 to 1970.
-
-12. national_1980_1990.py 
-- This script aggregates data from state level to national level from year 1980 to 1990.
-
-13. national_1990_2000.py 
-- This script aggregates data from state level to national level from year 1990 to 2000.
-
-14. national_2000_2010.py 
-- This script process as is data for national from year 2000 to 2010.
-
-15. national_2010_2020.py 
-- This script aggregates data from state level to national level from year 2010 to 2020.
+5. national_2010_2020.py 
+- This script aggregates data from  state level to national level from year 2010 to 2020 as the    intercensal files were not availabel for this year range at state level.
 
 All these scripts are processed by running preprocess.py script.
