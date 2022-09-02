@@ -1,0 +1,186 @@
+Node: dcid:CID24759
+dcid: "CID24759"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID24759_CID24759
+combinedScore: 900
+dcid: "chem/CID24759_CID24759"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID24759, dcid:CID24759
+name: "CID24759_CID24759"
+databaseScore: 900
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 0
+
+Node: dcid:CID107694
+dcid: "CID107694"
+typeOf: dcid:Drug
+
+Node: dcid:CID91758695
+dcid: "CID91758695"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758695_CID107694
+combinedScore: 230
+dcid: "chem/CID91758695_CID107694"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID91758695, dcid:CID107694
+name: "CID91758695_CID107694"
+databaseScore: 0
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 230
+
+Node: dcid:CID11013287
+dcid: "CID11013287"
+typeOf: dcid:Drug
+
+Node: dcid:CID91758695
+dcid: "CID91758695"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758695_CID11013287
+combinedScore: 230
+dcid: "chem/CID91758695_CID11013287"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID91758695, dcid:CID11013287
+name: "CID91758695_CID11013287"
+databaseScore: 0
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 230
+
+Node: dcid:CID11980957
+dcid: "CID11980957"
+typeOf: dcid:Drug
+
+Node: dcid:CID91758695
+dcid: "CID91758695"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758695_CID11980957
+combinedScore: 328
+dcid: "chem/CID91758695_CID11980957"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID91758695, dcid:CID11980957
+name: "CID91758695_CID11980957"
+databaseScore: 0
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 328
+
+Node: dcid:CID13078
+dcid: "CID13078"
+typeOf: dcid:Drug
+
+Node: dcid:CID91758695
+dcid: "CID91758695"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758695_CID13078
+combinedScore: 162
+dcid: "chem/CID91758695_CID13078"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID91758695, dcid:CID13078
+name: "CID91758695_CID13078"
+databaseScore: 0
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 162
+
+Node: dcid:CID13109
+dcid: "CID13109"
+typeOf: dcid:Drug
+
+Node: dcid:CID91758695
+dcid: "CID91758695"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758695_CID13109
+combinedScore: 468
+dcid: "chem/CID91758695_CID13109"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID91758695, dcid:CID13109
+name: "CID91758695_CID13109"
+databaseScore: 0
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 468
+
+Node: dcid:CID167486
+dcid: "CID167486"
+typeOf: dcid:Drug
+
+Node: dcid:CID91758695
+dcid: "CID91758695"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758695_CID167486
+combinedScore: 194
+dcid: "chem/CID91758695_CID167486"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID91758695, dcid:CID167486
+name: "CID91758695_CID167486"
+databaseScore: 0
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 194
+
+Node: dcid:CID24706
+dcid: "CID24706"
+typeOf: dcid:Drug
+
+Node: dcid:CID91758695
+dcid: "CID91758695"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758695_CID24706
+combinedScore: 452
+dcid: "chem/CID91758695_CID24706"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID91758695, dcid:CID24706
+name: "CID91758695_CID24706"
+databaseScore: 0
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 452
+
+Node: dcid:CID24883487
+dcid: "CID24883487"
+typeOf: dcid:Drug
+
+Node: dcid:CID91758695
+dcid: "CID91758695"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758695_CID24883487
+combinedScore: 271
+dcid: "chem/CID91758695_CID24883487"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID91758695, dcid:CID24883487
+name: "CID91758695_CID24883487"
+databaseScore: 0
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 271
+
+Node: dcid:CID40973
+dcid: "CID40973"
+typeOf: dcid:Drug
+
+Node: dcid:CID91758695
+dcid: "CID91758695"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758695_CID40973
+combinedScore: 505
+dcid: "chem/CID91758695_CID40973"
+similarity: 0
+chemicalExperimentalScore: 0
+interactingDrug: dcid:CID91758695, dcid:CID40973
+name: "CID91758695_CID40973"
+databaseScore: 0
+typeOf: dcid:ChemicalCompoundChemicalCompoundInteraction
+textminingScore: 505
+

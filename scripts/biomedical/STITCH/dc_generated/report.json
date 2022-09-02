@@ -1,0 +1,268 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "35",
+        "NumPVSuccesses": "245",
+        "Existence_NumChecks": "280",
+        "NumNodeSuccesses": "35",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "API_EmptyDcCallResponse": "1",
+        "Existence_MissingReference_Property": "105"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "mapping_expected.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'alternateEnsemblProteinID', node: 'E:mapping->E1'",
+    "counterKey": "Existence_MissingReference_Property"
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true,
+    "observationAbout": false,
+    "allowNanSvobs": false
+  }
+}

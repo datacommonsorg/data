@@ -1,0 +1,240 @@
+Node: dcid:chem/CID91758680_APJ_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/APJ_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 214
+experimentalTransferredScore: 0
+combinedScore: 279
+dcid: "chem/CID91758680_APJ_HUMAN"
+textminingDirectScore: 109
+name: "CID91758680_APJ_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758680
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/APJ_HUMAN
+dcid: "bio/APJ_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758680
+dcid: "chem/CID91758680"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758680_TRIM8_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/TRIM8_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 0
+experimentalTransferredScore: 0
+combinedScore: 154
+dcid: "chem/CID91758680_TRIM8_HUMAN"
+textminingDirectScore: 154
+name: "CID91758680_TRIM8_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758680
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/TRIM8_HUMAN
+dcid: "bio/TRIM8_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758680
+dcid: "chem/CID91758680"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758408_RHBD2_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/RHBD2_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 225
+experimentalTransferredScore: 0
+combinedScore: 225
+dcid: "chem/CID91758408_RHBD2_HUMAN"
+textminingDirectScore: 0
+name: "CID91758408_RHBD2_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758408
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/RHBD2_HUMAN
+dcid: "bio/RHBD2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758408
+dcid: "chem/CID91758408"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758408_ARHG5_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/ARHG5_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 178
+experimentalTransferredScore: 0
+combinedScore: 178
+dcid: "chem/CID91758408_ARHG5_HUMAN"
+textminingDirectScore: 0
+name: "CID91758408_ARHG5_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758408
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/ARHG5_HUMAN
+dcid: "bio/ARHG5_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758408
+dcid: "chem/CID91758408"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758408_RHBD3_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/RHBD3_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 225
+experimentalTransferredScore: 0
+combinedScore: 225
+dcid: "chem/CID91758408_RHBD3_HUMAN"
+textminingDirectScore: 0
+name: "CID91758408_RHBD3_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758408
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/RHBD3_HUMAN
+dcid: "bio/RHBD3_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758408
+dcid: "chem/CID91758408"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758408_CASPE_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/CASPE_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 151
+experimentalTransferredScore: 0
+combinedScore: 151
+dcid: "chem/CID91758408_CASPE_HUMAN"
+textminingDirectScore: 0
+name: "CID91758408_CASPE_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758408
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/CASPE_HUMAN
+dcid: "bio/CASPE_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758408
+dcid: "chem/CID91758408"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758408_MFN2_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/MFN2_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 162
+experimentalTransferredScore: 0
+combinedScore: 162
+dcid: "chem/CID91758408_MFN2_HUMAN"
+textminingDirectScore: 0
+name: "CID91758408_MFN2_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758408
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/MFN2_HUMAN
+dcid: "bio/MFN2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758408
+dcid: "chem/CID91758408"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758408_H2A1B_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/H2A1B_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 194
+experimentalTransferredScore: 0
+combinedScore: 194
+dcid: "chem/CID91758408_H2A1B_HUMAN"
+textminingDirectScore: 0
+name: "CID91758408_H2A1B_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758408
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/H2A1B_HUMAN
+dcid: "bio/H2A1B_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758408
+dcid: "chem/CID91758408"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758408_GLIS2_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/GLIS2_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 0
+experimentalTransferredScore: 0
+combinedScore: 169
+dcid: "chem/CID91758408_GLIS2_HUMAN"
+textminingDirectScore: 169
+name: "CID91758408_GLIS2_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758408
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/GLIS2_HUMAN
+dcid: "bio/GLIS2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758408
+dcid: "chem/CID91758408"
+typeOf: dcid:Drug
+
+Node: dcid:chem/CID91758408_M10L1_HUMAN
+experimentalDirectScore: 0
+predictionDirectScore: 0
+proteinID: dcid:bio/M10L1_HUMAN
+predictionTransferredScore: 0
+databaseTransferredScore: 0
+textminingTransferredScore: 163
+experimentalTransferredScore: 0
+combinedScore: 163
+dcid: "chem/CID91758408_M10L1_HUMAN"
+textminingDirectScore: 0
+name: "CID91758408_M10L1_HUMAN"
+databaseDirectScore: 0
+compoundID: dcid:chem/CID91758408
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:bio/M10L1_HUMAN
+dcid: "bio/M10L1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID91758408
+dcid: "chem/CID91758408"
+typeOf: dcid:Drug
+

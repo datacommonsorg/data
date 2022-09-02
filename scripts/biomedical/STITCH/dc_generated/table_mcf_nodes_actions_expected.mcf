@@ -1,0 +1,180 @@
+Node: dcid:chem/CID49862664_MC3R_HUMAN
+score: 207
+chemicalIsActing: False
+proteinID: dcid:bio/MC3R_HUMAN
+dcid: "chem/CID49862664_MC3R_HUMAN"
+uniProtID: dcid:bio/MC3R_HUMAN
+name: "CID49862664_MC3R_HUMAN"
+enzymaticReactionEffect: "NULL"
+chemicalInteractionMode: "ChemicalInteractionModePredictedToBind"
+compoundID: dcid:chem/CID49862664
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:chem/CID49862664
+dcid: "chem/CID49862664"
+typeOf: dcid:Drug
+
+Node: dcid:bio/MC3R_HUMAN
+dcid: "bio/MC3R_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID9996838_DRD4_HUMAN
+score: 450
+chemicalIsActing: True
+proteinID: dcid:bio/DRD4_HUMAN
+dcid: "chem/CID9996838_DRD4_HUMAN"
+uniProtID: dcid:bio/DRD4_HUMAN
+name: "CID9996838_DRD4_HUMAN"
+enzymaticReactionEffect: "NULL"
+chemicalInteractionMode: "ChemicalInteractionModeBinding"
+compoundID: dcid:chem/CID9996838
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:chem/CID9996838
+dcid: "chem/CID9996838"
+typeOf: dcid:Drug
+
+Node: dcid:bio/DRD4_HUMAN
+dcid: "bio/DRD4_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID9996838_DRD4_HUMAN
+score: 450
+chemicalIsActing: False
+proteinID: dcid:bio/DRD4_HUMAN
+dcid: "chem/CID9996838_DRD4_HUMAN"
+uniProtID: dcid:bio/DRD4_HUMAN
+name: "CID9996838_DRD4_HUMAN"
+enzymaticReactionEffect: "NULL"
+chemicalInteractionMode: "ChemicalInteractionModeBinding"
+compoundID: dcid:chem/CID9996838
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:chem/CID9996838
+dcid: "chem/CID9996838"
+typeOf: dcid:Drug
+
+Node: dcid:bio/DRD4_HUMAN
+dcid: "bio/DRD4_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID9877229_PRTN3_HUMAN
+score: 256
+chemicalIsActing: False
+proteinID: dcid:bio/PRTN3_HUMAN
+dcid: "chem/CID9877229_PRTN3_HUMAN"
+uniProtID: dcid:bio/PRTN3_HUMAN
+name: "CID9877229_PRTN3_HUMAN"
+enzymaticReactionEffect: "EnzymaticReactionEffectActivation"
+chemicalInteractionMode: "ChemicalInteractionModeActivation"
+compoundID: dcid:chem/CID9877229
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:chem/CID9877229
+dcid: "chem/CID9877229"
+typeOf: dcid:Drug
+
+Node: dcid:bio/PRTN3_HUMAN
+dcid: "bio/PRTN3_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID15625_SYMM_HUMAN
+score: 150
+chemicalIsActing: True
+proteinID: dcid:bio/SYMM_HUMAN
+dcid: "chem/CID15625_SYMM_HUMAN"
+uniProtID: dcid:bio/SYMM_HUMAN
+name: "CID15625_SYMM_HUMAN"
+enzymaticReactionEffect: "NULL"
+chemicalInteractionMode: "ChemicalInteractionModeExpression"
+compoundID: dcid:chem/CID15625
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:chem/CID15625
+dcid: "chem/CID15625"
+typeOf: dcid:Drug
+
+Node: dcid:bio/SYMM_HUMAN
+dcid: "bio/SYMM_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID45271437_GP101_HUMAN
+score: 341
+chemicalIsActing: True
+proteinID: dcid:bio/GP101_HUMAN
+dcid: "chem/CID45271437_GP101_HUMAN"
+uniProtID: dcid:bio/GP101_HUMAN
+name: "CID45271437_GP101_HUMAN"
+enzymaticReactionEffect: "NULL"
+chemicalInteractionMode: "ChemicalInteractionModeBinding"
+compoundID: dcid:chem/CID45271437
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:chem/CID45271437
+dcid: "chem/CID45271437"
+typeOf: dcid:Drug
+
+Node: dcid:bio/GP101_HUMAN
+dcid: "bio/GP101_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID37529533_DHB1_HUMAN
+score: 280
+chemicalIsActing: True
+proteinID: dcid:bio/DHB1_HUMAN
+dcid: "chem/CID37529533_DHB1_HUMAN"
+uniProtID: dcid:bio/DHB1_HUMAN
+name: "CID37529533_DHB1_HUMAN"
+enzymaticReactionEffect: "NULL"
+chemicalInteractionMode: "ChemicalInteractionModeBinding"
+compoundID: dcid:chem/CID37529533
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:chem/CID37529533
+dcid: "chem/CID37529533"
+typeOf: dcid:Drug
+
+Node: dcid:bio/DHB1_HUMAN
+dcid: "bio/DHB1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID37529533_DHB1_HUMAN
+score: 280
+chemicalIsActing: False
+proteinID: dcid:bio/DHB1_HUMAN
+dcid: "chem/CID37529533_DHB1_HUMAN"
+uniProtID: dcid:bio/DHB1_HUMAN
+name: "CID37529533_DHB1_HUMAN"
+enzymaticReactionEffect: "NULL"
+chemicalInteractionMode: "ChemicalInteractionModeBinding"
+compoundID: dcid:chem/CID37529533
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:chem/CID37529533
+dcid: "chem/CID37529533"
+typeOf: dcid:Drug
+
+Node: dcid:bio/DHB1_HUMAN
+dcid: "bio/DHB1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:chem/CID24729233_AT1A4_HUMAN
+score: 313
+chemicalIsActing: False
+proteinID: dcid:bio/AT1A4_HUMAN
+dcid: "chem/CID24729233_AT1A4_HUMAN"
+uniProtID: dcid:bio/AT1A4_HUMAN
+name: "CID24729233_AT1A4_HUMAN"
+enzymaticReactionEffect: "EnzymaticReactionEffectInihibition"
+chemicalInteractionMode: "ChemicalInteractionModeInhibition"
+compoundID: dcid:chem/CID24729233
+typeOf: dcid:ChemicalCompoundProteinInteraction
+
+Node: dcid:chem/CID24729233
+dcid: "chem/CID24729233"
+typeOf: dcid:Drug
+
+Node: dcid:bio/AT1A4_HUMAN
+dcid: "bio/AT1A4_HUMAN"
+typeOf: dcid:Protein
+

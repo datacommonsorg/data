@@ -1,0 +1,315 @@
+Node: dcid:bio/APJ_HUMAN
+ensemblProteinID: "ENSP00000475344"
+alternateEnsemblProteinID: "ENSP00000257254.3", "ENSP00000475344.1"
+dcid: "bio/APJ_HUMAN"
+string: "9606.ENSP00000475344"
+uniProtID: "APJ_HUMAN"
+name: "APJ_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/APJ_HUMAN
+ensemblProteinID: "ENSP00000257254"
+alternateEnsemblProteinID: "ENSP00000257254.3", "ENSP00000475344.1"
+dcid: "bio/APJ_HUMAN"
+string: "9606.ENSP00000475344"
+uniProtID: "APJ_HUMAN"
+name: "APJ_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/ARHG5_HUMAN
+ensemblProteinID: "ENSP00000056217"
+alternateEnsemblProteinID: "ENSP00000056217.5"
+dcid: "bio/ARHG5_HUMAN"
+string: "9606.ENSP00000056217"
+uniProtID: "ARHG5_HUMAN"
+name: "ARHG5_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/ARHG5_HUMAN
+ensemblProteinID: "ENSP00000418227"
+alternateEnsemblProteinID: "ENSP00000056217.5"
+dcid: "bio/ARHG5_HUMAN"
+string: "9606.ENSP00000056217"
+uniProtID: "ARHG5_HUMAN"
+name: "ARHG5_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/AT1A4_HUMAN
+ensemblProteinID: "ENSP00000357060"
+alternateEnsemblProteinID: "ENSP00000357060.4"
+dcid: "bio/AT1A4_HUMAN"
+string: "9606.ENSP00000357060"
+uniProtID: "AT1A4_HUMAN"
+name: "AT1A4_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/AT1A4_HUMAN
+ensemblProteinID: "ENSP00000433094"
+alternateEnsemblProteinID: "ENSP00000357060.4"
+dcid: "bio/AT1A4_HUMAN"
+string: "9606.ENSP00000357060"
+uniProtID: "AT1A4_HUMAN"
+name: "AT1A4_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/CASPE_HUMAN
+ensemblProteinID: "ENSP00000393417"
+alternateEnsemblProteinID: "ENSP00000393417.2"
+dcid: "bio/CASPE_HUMAN"
+string: "9606.ENSP00000393417"
+uniProtID: "CASPE_HUMAN"
+name: "CASPE_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/CASPE_HUMAN
+ensemblProteinID: "ENSP00000221740"
+alternateEnsemblProteinID: "ENSP00000393417.2"
+dcid: "bio/CASPE_HUMAN"
+string: "9606.ENSP00000393417"
+uniProtID: "CASPE_HUMAN"
+name: "CASPE_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/DHB1_HUMAN
+ensemblProteinID: "ENSP00000466799"
+alternateEnsemblProteinID: "ENSP00000466799.1"
+dcid: "bio/DHB1_HUMAN"
+string: "9606.ENSP00000466799"
+uniProtID: "DHB1_HUMAN"
+name: "DHB1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/DRD4_HUMAN
+ensemblProteinID: "ENSP00000176183"
+alternateEnsemblProteinID: "ENSP00000176183.5", "ENSP00000478431.1"
+dcid: "bio/DRD4_HUMAN"
+string: "9606.ENSP00000176183"
+uniProtID: "DRD4_HUMAN"
+name: "DRD4_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/GLIS2_HUMAN
+ensemblProteinID: "ENSP00000262366"
+alternateEnsemblProteinID: "ENSP00000262366.3", "ENSP00000395547.1", "ENSP00000484027.1", "ENSP00000488242.1"
+dcid: "bio/GLIS2_HUMAN"
+string: "9606.ENSP00000262366"
+uniProtID: "GLIS2_HUMAN"
+name: "GLIS2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/GLIS2_HUMAN
+ensemblProteinID: "ENSP00000395547"
+alternateEnsemblProteinID: "ENSP00000262366.3", "ENSP00000395547.1", "ENSP00000484027.1", "ENSP00000488242.1"
+dcid: "bio/GLIS2_HUMAN"
+string: "9606.ENSP00000262366"
+uniProtID: "GLIS2_HUMAN"
+name: "GLIS2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/GP101_HUMAN
+ensemblProteinID: "ENSP00000298110"
+alternateEnsemblProteinID: "ENSP00000498972.1"
+dcid: "bio/GP101_HUMAN"
+string: "9606.ENSP00000298110"
+uniProtID: "GP101_HUMAN"
+name: "GP101_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/H2A1B_HUMAN
+ensemblProteinID: "ENSP00000303373"
+alternateEnsemblProteinID: "ENSP00000303373.2", "ENSP00000483842.2"
+dcid: "bio/H2A1B_HUMAN"
+string: "9606.ENSP00000303373"
+uniProtID: "H2A1B_HUMAN"
+name: "H2A1B_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/H2A1B_HUMAN
+ensemblProteinID: "ENSP00000259791"
+alternateEnsemblProteinID: "ENSP00000303373.2", "ENSP00000483842.2"
+dcid: "bio/H2A1B_HUMAN"
+string: "9606.ENSP00000303373"
+uniProtID: "H2A1B_HUMAN"
+name: "H2A1B_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/M10L1_HUMAN
+ensemblProteinID: "ENSP00000262794"
+alternateEnsemblProteinID: "ENSP00000262794.5", "ENSP00000438978.1"
+dcid: "bio/M10L1_HUMAN"
+string: "9606.ENSP00000262794"
+uniProtID: "M10L1_HUMAN"
+name: "M10L1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/M10L1_HUMAN
+ensemblProteinID: "ENSP00000438978"
+alternateEnsemblProteinID: "ENSP00000262794.5", "ENSP00000438978.1"
+dcid: "bio/M10L1_HUMAN"
+string: "9606.ENSP00000262794"
+uniProtID: "M10L1_HUMAN"
+name: "M10L1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/M10L1_HUMAN
+ensemblProteinID: "ENSP00000379184"
+alternateEnsemblProteinID: "ENSP00000262794.5", "ENSP00000438978.1"
+dcid: "bio/M10L1_HUMAN"
+string: "9606.ENSP00000262794"
+uniProtID: "M10L1_HUMAN"
+name: "M10L1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/M10L1_HUMAN
+ensemblProteinID: "ENSP00000438542"
+alternateEnsemblProteinID: "ENSP00000262794.5", "ENSP00000438978.1"
+dcid: "bio/M10L1_HUMAN"
+string: "9606.ENSP00000262794"
+uniProtID: "M10L1_HUMAN"
+name: "M10L1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/M10L1_HUMAN
+ensemblProteinID: "ENSP00000379193"
+alternateEnsemblProteinID: "ENSP00000262794.5", "ENSP00000438978.1"
+dcid: "bio/M10L1_HUMAN"
+string: "9606.ENSP00000262794"
+uniProtID: "M10L1_HUMAN"
+name: "M10L1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/M10L1_HUMAN
+ensemblProteinID: "ENSP00000379199"
+alternateEnsemblProteinID: "ENSP00000262794.5", "ENSP00000438978.1"
+dcid: "bio/M10L1_HUMAN"
+string: "9606.ENSP00000262794"
+uniProtID: "M10L1_HUMAN"
+name: "M10L1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/M10L1_HUMAN
+ensemblProteinID: "ENSP00000346917"
+alternateEnsemblProteinID: "ENSP00000262794.5", "ENSP00000438978.1"
+dcid: "bio/M10L1_HUMAN"
+string: "9606.ENSP00000262794"
+uniProtID: "M10L1_HUMAN"
+name: "M10L1_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/MC3R_HUMAN
+ensemblProteinID: "ENSP00000243911"
+alternateEnsemblProteinID: "ENSP00000243911.2"
+dcid: "bio/MC3R_HUMAN"
+string: "9606.ENSP00000243911"
+uniProtID: "MC3R_HUMAN"
+name: "MC3R_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/MFN2_HUMAN
+ensemblProteinID: "ENSP00000235329"
+alternateEnsemblProteinID: "ENSP00000235329.5", "ENSP00000416338.1", "ENSP00000502185.1", "ENSP00000502151.1", "ENSP00000501716.1", "ENSP00000501646.1", "ENSP00000502623.1", "ENSP00000502404.1", "ENSP00000501776.1", "ENSP00000502362.1"
+dcid: "bio/MFN2_HUMAN"
+string: "9606.ENSP00000235329"
+uniProtID: "MFN2_HUMAN"
+name: "MFN2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/MFN2_HUMAN
+ensemblProteinID: "ENSP00000416338"
+alternateEnsemblProteinID: "ENSP00000235329.5", "ENSP00000416338.1", "ENSP00000502185.1", "ENSP00000502151.1", "ENSP00000501716.1", "ENSP00000501646.1", "ENSP00000502623.1", "ENSP00000502404.1", "ENSP00000501776.1", "ENSP00000502362.1"
+dcid: "bio/MFN2_HUMAN"
+string: "9606.ENSP00000235329"
+uniProtID: "MFN2_HUMAN"
+name: "MFN2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/PRTN3_HUMAN
+ensemblProteinID: "ENSP00000234347"
+alternateEnsemblProteinID: "ENSP00000234347.3", "ENSP00000478977.1"
+dcid: "bio/PRTN3_HUMAN"
+string: "9606.ENSP00000234347"
+uniProtID: "PRTN3_HUMAN"
+name: "PRTN3_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/RHBD2_HUMAN
+ensemblProteinID: "ENSP00000006777"
+alternateEnsemblProteinID: "ENSP00000006777.6"
+dcid: "bio/RHBD2_HUMAN"
+string: "9606.ENSP00000006777"
+uniProtID: "RHBD2_HUMAN"
+name: "RHBD2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/RHBD2_HUMAN
+ensemblProteinID: "ENSP00000458945"
+alternateEnsemblProteinID: "ENSP00000006777.6"
+dcid: "bio/RHBD2_HUMAN"
+string: "9606.ENSP00000006777"
+uniProtID: "RHBD2_HUMAN"
+name: "RHBD2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/RHBD2_HUMAN
+ensemblProteinID: "ENSP00000461474"
+alternateEnsemblProteinID: "ENSP00000006777.6"
+dcid: "bio/RHBD2_HUMAN"
+string: "9606.ENSP00000006777"
+uniProtID: "RHBD2_HUMAN"
+name: "RHBD2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/RHBD2_HUMAN
+ensemblProteinID: "ENSP00000314144"
+alternateEnsemblProteinID: "ENSP00000006777.6"
+dcid: "bio/RHBD2_HUMAN"
+string: "9606.ENSP00000006777"
+uniProtID: "RHBD2_HUMAN"
+name: "RHBD2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/RHBD2_HUMAN
+ensemblProteinID: "ENSP00000391232"
+alternateEnsemblProteinID: "ENSP00000006777.6"
+dcid: "bio/RHBD2_HUMAN"
+string: "9606.ENSP00000006777"
+uniProtID: "RHBD2_HUMAN"
+name: "RHBD2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/RHBD2_HUMAN
+ensemblProteinID: "ENSP00000458798"
+alternateEnsemblProteinID: "ENSP00000006777.6"
+dcid: "bio/RHBD2_HUMAN"
+string: "9606.ENSP00000006777"
+uniProtID: "RHBD2_HUMAN"
+name: "RHBD2_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/RHBD3_HUMAN
+ensemblProteinID: "ENSP00000216085"
+alternateEnsemblProteinID: "ENSP00000216085.7"
+dcid: "bio/RHBD3_HUMAN"
+string: "9606.ENSP00000216085"
+uniProtID: "RHBD3_HUMAN"
+name: "RHBD3_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/SYMM_HUMAN
+ensemblProteinID: "ENSP00000282276"
+alternateEnsemblProteinID: "ENSP00000282276.6"
+dcid: "bio/SYMM_HUMAN"
+string: "9606.ENSP00000282276"
+uniProtID: "SYMM_HUMAN"
+name: "SYMM_HUMAN"
+typeOf: dcid:Protein
+
+Node: dcid:bio/TRIM8_HUMAN
+ensemblProteinID: "ENSP00000302120"
+alternateEnsemblProteinID: "ENSP00000496301.1"
+dcid: "bio/TRIM8_HUMAN"
+string: "9606.ENSP00000302120"
+uniProtID: "TRIM8_HUMAN"
+name: "TRIM8_HUMAN"
+typeOf: dcid:Protein
+
