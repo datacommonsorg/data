@@ -178,7 +178,7 @@ python protein_actions.py
 
 ```
 
-5. 
+7. 
   
 ```
 python protein_actions.py 
@@ -186,7 +186,7 @@ python protein_actions.py
   scratch/protein_chemical_interactions.tsv 
 ```
 
-6. 
+8. 
   
 ```
 python protein_actions.py 
