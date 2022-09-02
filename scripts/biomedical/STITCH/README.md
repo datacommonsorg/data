@@ -18,7 +18,6 @@
   - [Examples](#examples)
     - [Run Tests](#run-testers)
     - [Import](#import)
-    - [Schema Generation](#schema-generation)  
 
 # About the Dataset
 [STITCH](http://stitch.embl.de/cgi/input.pl?UserId=f68rPwGhmUhl&sessionId=URI01tKFfMAQ) ('Search Tool for Interacting Chemicals') is a public-domain database of 430,000 chemicals. It contains "known and predicted interactions between chemicals and proteins. The interactions include direct (physical) and indirect (functional) associations; they stem from computational prediction, from knowledge transfer between organisms, and from interactions aggregated from other (primary) databases." The last time the database was updated was in 2016. 
