@@ -27,7 +27,7 @@ The majority of the data was downloaded as TSVs from the [STITCH website](http:/
 
 ### Overview
 
-This directory stores the scripts used to download, clean, and convert the STITCH datasets into four CSV files. The files being drugs.csv, drug_interactions.csv, protein_drug_interactions.csv, and protein_actions.csv. There is also a mapping file, mapping_protein_names.csv, created from UniProt and Ensembl data to map Ensembl IDs to the protein name. This file was needed to create the protein_drug_interactions.csv and protein_actions.csv.
+This directory stores the scripts used to download, clean, and convert the STITCH datasets into four CSV files. The files being drugs.csv, drug_interactions.csv, protein_drug_interactions.csv, and actions.csv. There is also a mapping file, mapping_protein_names.csv, created from UniProt and Ensembl data to map Ensembl IDs to the protein name. This file was needed to create the protein_drug_interactions.csv and actions.csv.
 
 ### Notes and Caveats
 
@@ -105,7 +105,7 @@ All data downloaded for this import belongs to STITCH. Any works found on the ST
 [`chemicals_test.tsv`](chemicals_test.tsv) subsetted the chemicals.tsv file to only include PubChem Compound IDs 1-20
 [`drug_interactions_test.tsv`](drug_interactions_test.tsv) subsetted the chemical_chemical_interactions.tsv file to include 10 drug-drug interactions
 [`protein_drug_interactions_test.tsv`](protein_drug_interactions_test.tsv) subsetted the protein_chemical_interactions.tsv file to include 10 protein-drug interactions
-[`actions_test.tsv`](actions_test.tsv) subsetted the protein_actions.tsv file to include 10 protein-drug interactions
+[`actions_test.tsv`](actions_test.tsv) subsetted the actions.tsv file to include 10 protein-drug interactions
 [`uniprot_name_mapping.dat`](uniprot_name_mapping.dat) 
 [`archived_accessions.txt`](archived_accessions.txt)
 [`archived_emsembls.txt`](archived_ensembls.txt)
@@ -181,7 +181,7 @@ python protein_drug_interactions.py
 6. 
   
 ```
-python protein_actions.py 
-  scratch/chemical_chemical_interactions.tsv
+python actions.py 
+  scratch/actions.tsv
   scratch/mapping_protein_names.csv
 ```
