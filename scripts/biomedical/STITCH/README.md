@@ -172,24 +172,16 @@ python create_mapping_file.py
 
 5.
 ```
-python protein_actions.py 
-  scratch/actions.tsv
-  scratch/uniprot_mapped_ids.dat
+python protein_drug_interactions.py 
+  scratch/protein_chemical_interactions.tsv
+  scratch/mapping_protein_names.csv
 
 ```
 
-7. 
+6. 
   
 ```
 python protein_actions.py 
   scratch/chemical_chemical_interactions.tsv
-  scratch/protein_chemical_interactions.tsv 
-```
-
-8. 
-  
-```
-python protein_actions.py 
-  scratch/chemical_chemical_interactions.tsv
-  scratch/protein_chemical_interactions.tsv 
+  scratch/mapping_protein_names.csv
 ```
