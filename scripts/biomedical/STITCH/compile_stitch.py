@@ -313,9 +313,9 @@ def merge_dfs(PATH_SOURCES, PATH_INCHIKEYS, PATH_CHEMICALS):
 
     Parameters:
     ----------
-    sources_df: pandas dataframe
-    inchikeys_df: pandas dataframe
-    chemicals_df: pandas dataframe
+    PATH_SOURCES: str
+    PATH_INCHIKEYS: str
+    PATH_CHEMICALS: str
     
     Returns:
     --------
@@ -511,8 +511,34 @@ def format_df(merged_df):
     final_df['stereo_chemical_id'].replace('', np.nan, inplace=True)
     final_df.dropna(subset=['stereo_chemical_id'], inplace=True)
     final_df['source_cid'] = final_df['source_cid'].astype(float).astype('Int64')
+    final_df.drop('chembl_dcid', axis=1, inplace=True)
+    final_df['chembl_id'] = final_df["same_as"].str.replace("bio/","") 
+    final_df = final_df.rename(columns = {'stereo_chemical_id': 'stereo_cid',\
+        'flat_chemical_id': 'flat_cid'})
     return(final_df)
 
+def compile_drug_info(PATH_SOURCES, PATH_INCHIKEYS, PATH_CHEMICALS): 
+    """
+    Compile drug information from three files and formats the merged df
+    
+    Parameters:
+    ----------
+    PATH_SOURCES: str
+        file path for sources.tsv
+    PATH_INCHIKEYS: str
+        file path for inchikeys.tsv
+    PATH_CHEMICALS: str
+        file path for chemicals.tsv
+        
+    Returns:
+    --------
+    Pandas dataframe 
+    """
+    merged_drug_df = merge_dfs(PATH_SOURCES, PATH_INCHIKEYS, PATH_CHEMICALS)  
+    final_df = find_IDs(merged_drug_df)
+    final_df_formatted = format_df(final_df)
+    return(final_df_formatted)
+        
 def main():
     PATH_SOURCES = sys.argv[1]
     PATH_INCHIKEYS = sys.argv[2]
@@ -520,7 +546,7 @@ def main():
     merged_df = merge_dfs(PATH_SOURCES, PATH_INCHIKEYS, PATH_CHEMICALS)  
     final_df = find_IDs(merged_df)
     final_df_formatted = format_df(final_df)
-    final_df_formatted.to_csv('drugs.csv')  
+    final_df_formatted.to_csv('drugs.csv', index=False)  
     
 if __name__ == '__main__':
     main()
