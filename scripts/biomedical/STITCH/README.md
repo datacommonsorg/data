@@ -175,7 +175,6 @@ python create_mapping_file.py
 python protein_drug_interactions.py 
   scratch/protein_chemical_interactions.tsv
   scratch/mapping_protein_names.csv
-
 ```
 
 6. 
