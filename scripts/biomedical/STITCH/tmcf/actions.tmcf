@@ -14,6 +14,5 @@ chemicalInteractionMode: C:actions->mode
 score: C:actions->score
 enzymaticReactionEffect: C:actions->action
 chemicalIsActing: C:actions->chemical_is_acting
-uniProtID: E:actions->E1
 proteinID: E:actions->E1
 compoundID: E:actions->E2
