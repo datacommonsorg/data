@@ -16,7 +16,7 @@ Author: Mariam Benazouz
 Date: 08/24/2022
 Name: test_stitch.py
 Description: runs unit tests for compile_stitch.py, drug_interactions.py, 
-    create_mapping_file.py, protein_mapping2.py, protein_actions.py
+    create_mapping_file.py, protein_drug_interactions.py, protein_actions.py
 Run: python3 stitch_test.py
 '''
 import unittest
