@@ -416,8 +416,8 @@ def pubchem_id(merged_df):
     merged_df['pubchem_ID'] = merged_df["stereo_chemical_id"].str.replace("CIDs","")
     merged_df['pubchem_ID'] = [ele.lstrip('0') for ele in merged_df['pubchem_ID']]
     merged_df['pubchem_ID']= 'CID' + merged_df['pubchem_ID']
+    merged_df['pubchem_dcid']='chem/' + merged_df['pubchem_ID']
     merged_df['pubchem_ID']='"' + merged_df['pubchem_ID'] + '"'
-    merged_df['pubchem_dcid']='chem/'+merged_df['pubchem_ID']
     return(merged_df)
 
 def find_IDs(merged_df):
