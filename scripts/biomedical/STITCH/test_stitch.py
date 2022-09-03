@@ -16,7 +16,7 @@ Author: Mariam Benazouz
 Date: 08/24/2022
 Name: test_stitch.py
 Description: runs unit tests for compile_stitch.py, drug_interactions.py, 
-    create_mapping_file.py, protein_drug_interactions.py, protein_actions.py
+    create_mapping_file.py, protein_mapping2.py, protein_actions.py
 Run: python3 stitch_test.py
 '''
 import unittest
@@ -47,13 +47,20 @@ class TestStitch(unittest.TestCase):
         drug_df_expected=pd.read_csv('test-data/drugs_expected.csv', 
             dtype={'source_cid': pd.Int64Dtype(), 'BindingDB_code':object, 
             'molecular_weight':object}, keep_default_na=False)
-        drug_interactions_expected=pd.read_csv('test-data/drug_interactions_expected.csv', keep_default_na=False)
-        mapping_df_expected=pd.read_csv('test-data/mapping_expected.csv', keep_default_na=False)
-        mapping_df_expected1=pd.read_csv('test-data/mapping_expected.csv', keep_default_na=False)
-        mapping_df_expected['sort'] = mapping_df_expected['Protein stable ID'].str.extract('(\d+)', expand=False).astype(int)
+        drug_interactions_expected=pd.read_csv(
+            'test-data/drug_interactions_expected.csv', keep_default_na=False)
+        mapping_df_expected=pd.read_csv('test-data/mapping_expected.csv', 
+            keep_default_na=False)
+        mapping_df_expected1=pd.read_csv('test-data/mapping_expected.csv', 
+            keep_default_na=False)
+        mapping_df_expected['sort'] = mapping_df_expected[
+            'Protein stable ID'].str.extract('(\d+)', expand=False).astype(int)
         mapping_df_expected.sort_values('sort',inplace=True, ascending=True)
         mapping_df_expected = mapping_df_expected.drop('sort', axis=1)
-        protein_drug_interactions_expected=pd.read_csv('test-data/protein_drug_interactions_expected.csv', keep_default_na=False)         actions_df_expected = pd.read_csv('test-data/actions_expected.csv', keep_default_na=False)
+        protein_drug_interactions_expected=pd.read_csv(
+            'test-data/protein_drug_interactions_expected.csv', keep_default_na=False)         
+        actions_df_expected = pd.read_csv('test-data/actions_expected.csv', 
+            keep_default_na=False)
     
         # Run all the functions in compile_drugs.py 
         drug_df_actual = compile_drug_info(PATH_SOURCES, PATH_INCHIKEYS, PATH_CHEMICALS)  
@@ -67,7 +74,8 @@ class TestStitch(unittest.TestCase):
         mapping_df_actual = combine_dfs(df_ensembls, uniprot_with_old_accessions)
         mapping_df_actual = mapping_df_actual.drop_duplicates(keep = 'first')
         mapping_df_actual['dcid'] = 'bio/' + mapping_df_actual['UniProtKB-ID']
-        mapping_df_actual['sort'] = mapping_df_actual['Protein stable ID'].str.extract('(\d+)', expand=False).astype(int)
+        mapping_df_actual['sort'] = mapping_df_actual[
+            'Protein stable ID'].str.extract('(\d+)', expand=False).astype(int)
         mapping_df_actual.sort_values('sort',inplace = True, ascending = True)
         mapping_df_actual = mapping_df_actual.drop('sort', axis=1)
         
