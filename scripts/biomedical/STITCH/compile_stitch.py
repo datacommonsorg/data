@@ -514,6 +514,10 @@ def format_df(merged_df):
     final_df['source_cid'] = final_df['source_cid'].astype(float).astype('Int64')
     final_df.drop('chembl_dcid', axis=1, inplace=True)
     final_df['chembl_id'] = final_df["same_as"].str.replace("bio/","") 
+    final_df['chembl_id']='"' + final_df['chembl_id'] + '"'
+    #remove empty double quotes
+    replacer = lambda x: x.replace('""','')
+    final_df = final_df.apply(replacer)
     final_df = final_df.rename(columns = {'stereo_chemical_id': 'stereo_cid',\
         'flat_chemical_id': 'flat_cid'})
     return(final_df)
