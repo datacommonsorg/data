@@ -21,21 +21,6 @@ from process import EuroStatBMI
 from common.unitest_common_methods import CommonTestClass
 
 
-class BMITestInit:
-
-    def __init__(self):
-        MODULE_DIR = os.path.dirname(__file__)
-        test_input_files_directory = os.path.join(MODULE_DIR, "test_files",
-                                                  "input_files")
-        self.ip_test_files = os.listdir(test_input_files_directory)
-        self.ip_test_files = [
-            test_input_files_directory + os.sep + file
-            for file in self.ip_test_files
-        ]
-        self.expected_files_directory = os.path.join(MODULE_DIR, "test_files",
-                                                     "expected_files")
-        self.import_class = EuroStatBMI
-
-
 class BMITest(CommonTestClass.CommonTestCases):
-    klass = BMITestInit
+    _import_class = EuroStatBMI
+    _test_module_directory = os.path.dirname(__file__)
