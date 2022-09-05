@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 Replacement Functions for specific Column Values
-which are common for all the Eurostat Health Inputs
+which are common for all the Eurostat Health Inputs.
 """
 import pandas as pd
 

@@ -16,7 +16,7 @@ This Python module is generalized to work with different Eurostat import such as
 Physical Activity, BMI, Alcohol Consumption, Tobacco Consumption...
 
 EuroStat class in this module provides methods to generate processed CSV, MCF &
-tMCF files.
+TMCF files.
 
 _propety_correction() and _sv_name_correction() are abstract methods, these 
 method needs to implemented by Subclasses.
