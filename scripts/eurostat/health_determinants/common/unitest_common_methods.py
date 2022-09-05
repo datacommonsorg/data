@@ -35,17 +35,16 @@ class CommonTestClass:
         def __init__(self, methodName: str = ...) -> None:
             super().__init__(methodName)
 
-            test_input_files_directory = os.path.join(self._test_module_directory, "test_files",
-                                                      "input_files")
+            test_input_files_directory = os.path.join(
+                self._test_module_directory, "test_files", "input_files")
             ip_test_files = os.listdir(test_input_files_directory)
             ip_test_files = [
                 test_input_files_directory + os.sep + file
                 for file in ip_test_files
             ]
-            expected_files_directory = os.path.join(
-                self._test_module_directory, "test_files", "expected_files")
-            
-            # 
+            expected_files_directory = os.path.join(self._test_module_directory,
+                                                    "test_files",
+                                                    "expected_files")
 
             for file_name in os.listdir(expected_files_directory):
                 if file_name.endswith(".csv"):
@@ -77,7 +76,7 @@ class CommonTestClass:
                 tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
                 ob = self._import_class(ip_test_files, cleaned_csv_file_path,
-                                      mcf_file_path, tmcf_file_path)
+                                        mcf_file_path, tmcf_file_path)
                 ob.generate_csv()
                 ob.generate_mcf()
                 ob.generate_tmcf()

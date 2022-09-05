@@ -65,7 +65,7 @@ class EuroStat:
     CSV, MCF and tMCF files.
     """
     # Below variables will be initialized by sub-class (import specific)
-    _import_name  = ""
+    _import_name = ""
     _mcf_template = ""
     _sv_value_to_property_mapping = {}
     _sv_properties_template = {}
@@ -81,10 +81,10 @@ class EuroStat:
 
     def _propety_correction(self):
         None
-    
+
     def _sv_name_correction(self, sv_name: str) -> str:
         None
-    
+
     def _parse_file(self, file_name: str, df: pd.DataFrame,
                     import_name: dict) -> pd.DataFrame:
         split_columns = df.columns.values.tolist()[0]
@@ -128,8 +128,16 @@ class EuroStat:
 
         df = df[df['age'] == 'TOTAL']
         df = replace_col_values(df)
-        
-        df['SV'] = eval(file_to_sv_mapping[import_name][file_name])
+
+        if file_name in file_to_sv_mapping[import_name]:
+            df['SV'] = eval(file_to_sv_mapping[import_name][file_name])
+        else:
+            print(
+                '#########\nERROR: File (', file_name,
+                ') to SV mapping missing',
+                '\nAdd a File - SV mapping statement in common/sv_config.py.',
+                '\n#########')
+            exit(1)
 
         split_columns_list = split_columns.split(',')
         if 'time' in split_columns_list:
@@ -167,13 +175,15 @@ class EuroStat:
         if not os.path.exists(output_path):
             os.mkdir(output_path)
 
+        dfs = []
         for file_path in self._input_files:
             df = pd.read_csv(file_path, sep='\t', header=0)
             file_name = file_path.split("/")[-1][:-4]
             df.columns = df.columns.str.strip()
             df = self._parse_file(file_name, df, self._import_name)
             df['SV'] = df['SV'].str.replace('_Total', '')
-            final_df = pd.concat([final_df, df])
+            dfs.append(df)
+        final_df = pd.concat(dfs, axis=0)
 
         final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
         final_df = final_df.drop_duplicates(subset=['time', 'geo', 'SV'],
@@ -217,17 +227,20 @@ class EuroStat:
             'EurostatRegionalStatistics_DefinitionDiffers',
             final_df['Measurement_Method'])
         final_df.drop(columns=['info'], inplace=True)
-        for drop_obs_char in [':', ' ', 'u', 'd']:
-            final_df['observation'] = final_df['observation'].astype(str).str.replace(drop_obs_char, '')
-        final_df['observation'] = pd.to_numeric(final_df['observation'],errors='coerce')
+        for drop_obs_char in [':', ' ', 'u', 'd', 'c']:
+            final_df['observation'] = final_df['observation'].astype(
+                str).str.replace(drop_obs_char, '')
+        final_df['observation'] = pd.to_numeric(final_df['observation'])
         final_df = final_df.replace({'geo': COUNTRY_MAP})
         final_df = final_df.sort_values(by=['geo', 'SV'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
         self._df = final_df
-        final_df.to_csv(self._cleaned_csv_file_path, index=False)
+        final_df.to_csv(
+            self._cleaned_csv_file_path,
+            columns=['time', 'geo', 'SV', 'observation', 'Measurement_Method'],
+            index=False)
         return self._df
-
 
     def generate_mcf(self) -> None:
         """
@@ -268,9 +281,13 @@ class EuroStat:
 
                 for p in self._sv_value_to_property_mapping.keys():
                     if p in prop:
-                        self._sv_properties[self._sv_value_to_property_mapping[p]] = self._sv_properties_template[self._sv_value_to_property_mapping[p]].format(proprty_value=prop)
+                        self._sv_properties[self._sv_value_to_property_mapping[
+                            p]] = self._sv_properties_template[
+                                self._sv_value_to_property_mapping[p]].format(
+                                    proprty_value=prop)
 
-            sv_name = sv_name.replace(", Among,", "Among").rstrip(', ').rstrip('with')
+            sv_name = sv_name.replace(", Among,",
+                                      "Among").rstrip(', ').rstrip('with')
             # Adding spaces before every capital letter,
             # to make SV look more like a name.
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
@@ -286,7 +303,8 @@ class EuroStat:
             }
 
             mcf_template_parameters.update(self._sv_properties)
-            final_mcf_template += self._mcf_template.format(**mcf_template_parameters) + "\n"
+            final_mcf_template += self._mcf_template.format(
+                **mcf_template_parameters) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:

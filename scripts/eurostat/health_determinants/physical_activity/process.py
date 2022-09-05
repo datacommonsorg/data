@@ -118,7 +118,7 @@ class EuroStatPhysicalActivity(EuroStat):
                     self._sv_properties["activity"] = ""
                 else:
                     self._sv_properties["activity"] = self._sv_properties[
-                        "activity_temp"]
+                        "activity_temp"].replace("ModerateActivityOr","ModerateActivityLevel__")
             elif k == "duration_temp" and v:
                 if "OrMoreMinutes" in self._sv_properties["duration_temp"]:
                     self._sv_properties[
@@ -130,19 +130,21 @@ class EuroStatPhysicalActivity(EuroStat):
                         "duration"] = "\nactivityDuration: [" + self._sv_properties[
                             "duration_temp"].replace("Minutes", "").replace(
                                 "To", " ") + " Minute]"
+                elif self._sv_properties["frequency"]:
+                    self._sv_properties["duration"] = ""
                 else:
                     self._sv_properties[
                         "duration"] = "\nactivityDuration: [Minute " + self._sv_properties[
                             "duration_temp"].replace("Minutes", "") + "]"
             self._sv_properties[k] = v\
+                .replace("ModerateActivityOrHeavyActivity","ModerateActivityLevel__HeavyActivityLevel")\
                 .replace("Or", "__")\
                 .replace("CountryOfBirth","")\
                 .replace("Citizenship", "")\
                 .replace("Percentile", " Percentile")\
                 .replace("IncomeOf", "")\
                 .replace("To", " ")\
-                .replace("EducationalAttainment","")\
-                .replace("ModerateActivityOrHeavyActivity", "ModerateActivityLevel__HeavyActivity")
+                .replace("EducationalAttainment","")
 
     # over-ridden parent abstract method
     def _sv_name_correction(self, sv_name: str) -> str:
@@ -156,6 +158,8 @@ class EuroStatPhysicalActivity(EuroStat):
             .replace("ACitizen","A Citizen")\
             .replace("Least30", "Least 30")\
             .replace("Normalweig", "Normalweight")\
+            .replace("Underweig", "Underweight")\
+            .replace("Overweig", "Overweight")\
             .replace("To"," To ")\
             .replace("Of","Of ")\
             .replace("  "," ")
