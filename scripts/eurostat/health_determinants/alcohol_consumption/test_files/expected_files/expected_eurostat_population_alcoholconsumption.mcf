@@ -760,6 +760,54 @@ placeOfResidenceClassification: dcs:Urban
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
+Node: dcid:Percent_LessThanOnceAMonth_AlcoholConsumption_In_Count_Person_Female_ForeignBorn
+name: "Percentage Less Than Once A Month, Alcohol Consumption Among Female, Foreign Born Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ForeignBorn
+healthBehavior: dcs:AlcoholConsumption
+gender: dcs:Female
+activityFrequency: dcs:LessThanOnceAMonth
+nativity: dcs:ForeignBorn
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_LessThanOnceAMonth_AlcoholConsumption_In_Count_Person_Female_ForeignBornOutsideEU28
+name: "Percentage Less Than Once A Month, Alcohol Consumption Among Female, Foreign Born Outside EU28 Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
+healthBehavior: dcs:AlcoholConsumption
+gender: dcs:Female
+activityFrequency: dcs:LessThanOnceAMonth
+nativity: dcs:ForeignBornOutsideEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_LessThanOnceAMonth_AlcoholConsumption_In_Count_Person_Female_ForeignBornWithinEU28
+name: "Percentage Less Than Once A Month, Alcohol Consumption Among Female, Foreign Born Within EU28 Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
+healthBehavior: dcs:AlcoholConsumption
+gender: dcs:Female
+activityFrequency: dcs:LessThanOnceAMonth
+nativity: dcs:ForeignBornWithinEU28
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_LessThanOnceAMonth_AlcoholConsumption_In_Count_Person_Female_Native
+name: "Percentage Less Than Once A Month, Alcohol Consumption Among Female, Native Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_Native
+healthBehavior: dcs:AlcoholConsumption
+gender: dcs:Female
+activityFrequency: dcs:LessThanOnceAMonth
+nativity: dcs:Native
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
 Node: dcid:Percent_Never_AlcoholConsumption_In_Count_Person_Female
 name: "Percentage Never, Alcohol Consumption Among Female Population"
 typeOf: dcs:StatisticalVariable

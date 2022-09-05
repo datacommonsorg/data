@@ -176,8 +176,7 @@ _ISCED97 = {
 }
 
 
-def replace_col_values(data_df: pd.DataFrame,
-                        column_name: str) -> pd.DataFrame:
+def replace_col_values(data_df: pd.DataFrame) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
@@ -209,7 +208,12 @@ def replace_col_values(data_df: pd.DataFrame,
         'coicop': _COICOP,
         'isced97': _ISCED97
     }
-    return data_df.replace({column_name: mapper[column_name]})
+    df_columns = data_df.columns.to_list()
+    for column, replacements in mapper.items():
+       if column in df_columns:
+            data_df = data_df.replace({column: replacements})
+
+    return data_df
 
 
 def split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:

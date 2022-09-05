@@ -96,6 +96,7 @@ class EuroStatAlcoholConsumption(EuroStat):
     def _sv_name_correction(self, sv_name: str) -> str:
         return sv_name\
             .replace("AWeek","A Week")\
+            .replace("AMonth","A Month")\
             .replace("Last12","Last 12")\
             .replace("ACitizen","A Citizen")\
             .replace("To"," To ")\

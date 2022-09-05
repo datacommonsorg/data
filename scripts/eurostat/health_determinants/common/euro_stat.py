@@ -127,16 +127,10 @@ class EuroStat:
                 df = df[(~(df['quant_inc'] == 'UNK'))]
 
         df = df[df['age'] == 'TOTAL']
-
-        for col in [
-                'sex', 'quant_inc', 'frequenc', 'frequenc_alcohol',
-                'frequenc_tobacco', 'isced11', 'deg_urb', 'bmi', 'duration',
-                'c_birth', 'citizen', 'smoking', 'duration', 'physact',
-                'lev_limit', 'levels'
-        ]:
-            if col in df.columns.values.tolist():
-                df = replace_col_values(df, col)
-
+        df = replace_col_values(df)
+        
+        assert import_name in file_to_sv_mapping, f'import {import_name} is not available in file_to_sv_mapping in common/sv_config.py'
+        assert file_name in file_to_sv_mapping[import_name], f'file {file_name} is not available for import {import_name} in file_to_sv_mapping in common/sv_config.py'
         df['SV'] = eval(file_to_sv_mapping[import_name][file_name])
 
         split_columns_list = split_columns.split(',')
@@ -225,13 +219,9 @@ class EuroStat:
             'EurostatRegionalStatistics_DefinitionDiffers',
             final_df['Measurement_Method'])
         final_df.drop(columns=['info'], inplace=True)
-        final_df['observation'] = (
-            final_df['observation'].astype(str).str.replace(
-                ':', '').str.replace(' ',
-                                     '').str.replace('u',
-                                                     '').str.replace('d', ''))
-        final_df['observation'] = pd.to_numeric(final_df['observation'],
-                                                errors='coerce')
+        for drop_obs_char in [':', ' ', 'u', 'd']:
+            final_df['observation'] = final_df['observation'].astype(str).str.replace(drop_obs_char, '')
+        final_df['observation'] = pd.to_numeric(final_df['observation'],errors='coerce')
         final_df = final_df.replace({'geo': COUNTRY_MAP})
         final_df = final_df.sort_values(by=['geo', 'SV'])
         final_df['observation'].replace('', np.nan, inplace=True)
