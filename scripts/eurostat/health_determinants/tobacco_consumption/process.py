@@ -110,13 +110,14 @@ class EuroStatTobaccoConsumption(EuroStat):
                     .replace("DailyCigaretteSmokerLessThan20PerDay","[- 20 Cigarettes]")
             else:
                 self._sv_properties[k] = v\
+                    .replace("10YearsOrOver","[10 - Years]")\
                     .replace("Or", "__")\
                     .replace("CountryOfBirth","")\
                     .replace("Citizenship", "")\
                     .replace("LessThan1Year","[- 1 Year]")\
                     .replace("From1To5Years","[Years 1 5]")\
-                    .replace("From5To10Years","[Years 5 10]")\
-                    .replace("10YearsOrOver","[10 - Years]")
+                    .replace("From5To10Years","[Years 5 10]")
+                    
 
     # over-ridden parent abstract method
     def _sv_name_correction(self, sv_name: str) -> str:
@@ -133,6 +134,8 @@ class EuroStatTobaccoConsumption(EuroStat):
             .replace("Than","Than ")\
             .replace("  "," ")\
             .replace(", Tobacco Products", "")\
+            .replace(", Never Used","")\
+            .replace(", Formerly","")
 
 
 if __name__ == '__main__':

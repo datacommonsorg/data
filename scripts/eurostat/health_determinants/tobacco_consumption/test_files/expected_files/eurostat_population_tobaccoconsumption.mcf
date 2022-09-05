@@ -974,3 +974,50 @@ healthBehavior: dcs:NonSmoker
 citizenship: dcs:WithinEU28AndNotACitizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count
+
+Node: dcid:Percent_TobaccoSmoking_NeverUsed_ECigarettes_In_Count_Person_Female
+name: "Percentage Tobacco Smoking, E Cigarettes Among Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female
+gender: dcs:Female
+healthBehavior: dcs:TobaccoSmoking
+tobaccoUsageType: dcs:ECigarettes
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_TobaccoSmoking_NeverUsed_ECigarettes_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Tobacco Smoking, E Cigarettes Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+gender: dcs:Female
+healthBehavior: dcs:TobaccoSmoking
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+tobaccoUsageType: dcs:ECigarettes
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_TobaccoSmoking_NeverUsed_ECigarettes_In_Count_Person_TertiaryEducation_Female
+name: "Percentage Tobacco Smoking, E Cigarettes Among Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
+gender: dcs:Female
+healthBehavior: dcs:TobaccoSmoking
+educationalAttainment: dcs:TertiaryEducation
+tobaccoUsageType: dcs:ECigarettes
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_TobaccoSmoking_NeverUsed_ECigarettes_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+name: "Percentage Tobacco Smoking, E Cigarettes Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+gender: dcs:Female
+healthBehavior: dcs:TobaccoSmoking
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+tobaccoUsageType: dcs:ECigarettes
+statType: dcs:measuredValue
+measuredProperty: dcs:count

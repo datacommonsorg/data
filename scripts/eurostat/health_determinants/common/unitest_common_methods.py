@@ -25,21 +25,29 @@ class CommonTestClass:
     class CommonTestCases(unittest.TestCase):
         """
         Provides generic implementation for testing csv, mcf and tmcf files.
-        
-        klass variable is initialized with test input files directory,
-        expected files directory and class of data import
 
         Limitation: Expected files directory should consist of single *.csv, 
         *.mcf and *.tmcf file.
         """
-        klass = None
+        _import_class = None
+        _test_module_directory = ""
 
         def __init__(self, methodName: str = ...) -> None:
             super().__init__(methodName)
 
-            obj = self.klass()
+            test_input_files_directory = os.path.join(self._test_module_directory, "test_files",
+                                                      "input_files")
+            ip_test_files = os.listdir(test_input_files_directory)
+            ip_test_files = [
+                test_input_files_directory + os.sep + file
+                for file in ip_test_files
+            ]
+            expected_files_directory = os.path.join(
+                self._test_module_directory, "test_files", "expected_files")
+            
+            # 
 
-            for file_name in os.listdir(obj.expected_files_directory):
+            for file_name in os.listdir(expected_files_directory):
                 if file_name.endswith(".csv"):
                     expected_csv_file = file_name
                 elif file_name.endswith(".mcf"):
@@ -47,17 +55,17 @@ class CommonTestClass:
                 elif file_name.endswith(".tmcf"):
                     expected_tmcf_file = file_name
 
-            expected_csv_file_path = os.path.join(obj.expected_files_directory,
+            expected_csv_file_path = os.path.join(expected_files_directory,
                                                   expected_csv_file)
             with open(expected_csv_file_path, encoding="UTF-8") as expected_csv:
                 self.expected_csv_data = expected_csv.read()
 
-            expected_mcf_file_path = os.path.join(obj.expected_files_directory,
+            expected_mcf_file_path = os.path.join(expected_files_directory,
                                                   expected_mcf_file)
             with open(expected_mcf_file_path, encoding="UTF-8") as expected_mcf:
                 self.expected_mcf_data = expected_mcf.read()
 
-            expected_tmcf_file_path = os.path.join(obj.expected_files_directory,
+            expected_tmcf_file_path = os.path.join(expected_files_directory,
                                                    expected_tmcf_file)
             with open(expected_tmcf_file_path,
                       encoding="UTF-8") as expected_tmcf:
@@ -68,7 +76,7 @@ class CommonTestClass:
                 mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
                 tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-                ob = obj.import_class(obj.ip_test_files, cleaned_csv_file_path,
+                ob = self._import_class(ip_test_files, cleaned_csv_file_path,
                                       mcf_file_path, tmcf_file_path)
                 ob.generate_csv()
                 ob.generate_mcf()
