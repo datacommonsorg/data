@@ -129,8 +129,6 @@ class EuroStat:
         df = df[df['age'] == 'TOTAL']
         df = replace_col_values(df)
         
-        assert import_name in file_to_sv_mapping, f'import {import_name} is not available in file_to_sv_mapping in common/sv_config.py'
-        assert file_name in file_to_sv_mapping[import_name], f'file {file_name} is not available for import {import_name} in file_to_sv_mapping in common/sv_config.py'
         df['SV'] = eval(file_to_sv_mapping[import_name][file_name])
 
         split_columns_list = split_columns.split(',')
