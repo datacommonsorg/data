@@ -22,6 +22,7 @@ def check_dcid_existance(nodes: list) -> dict:
     Checks the existance of dcid nodes in autopush.
     True: Available
     False: Unavailable
+
     Args:
         nodes (list): Dcid Nodes List
 

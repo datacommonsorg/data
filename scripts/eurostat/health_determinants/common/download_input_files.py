@@ -18,7 +18,6 @@ and downloads the files.
 """
 import os
 import sys
-
 from absl import app, flags
 
 # pylint: disable=import-error

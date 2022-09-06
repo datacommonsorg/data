@@ -11,14 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+"""
+Script to automate the testing for EuroStat BMI (Body Mass Index) process script.
+"""
 import os
 import sys
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
+# pylint: disable=wrong-import-position
 from process import EuroStatBMI
 from common.unitest_common_methods import CommonTestClass
+# pylint: enable=wrong-import-position
 
 
 class BMITest(CommonTestClass.CommonTestCases):

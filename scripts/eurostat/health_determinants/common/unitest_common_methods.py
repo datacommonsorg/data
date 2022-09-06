@@ -21,17 +21,20 @@ import tempfile
 
 
 class CommonTestClass:
+    """
+    """
 
     class CommonTestCases(unittest.TestCase):
         """
         Provides generic implementation for testing csv, mcf and tmcf files.
 
-        Limitation: Expected files directory should consist of single *.csv, 
+        Limitation: Expected files directory should consist of single *.csv,
         *.mcf and *.tmcf file.
         """
         _import_class = None
         _test_module_directory = ""
 
+        # pylint: disable=too-many-locals
         def __init__(self, methodName: str = ...) -> None:
             super().__init__(methodName)
 
@@ -74,13 +77,13 @@ class CommonTestClass:
                 cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
                 mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
                 tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
-
+                # pylint: disable=not-callable
                 ob = self._import_class(ip_test_files, cleaned_csv_file_path,
                                         mcf_file_path, tmcf_file_path)
                 ob.generate_csv()
                 ob.generate_mcf()
                 ob.generate_tmcf()
-
+                # pylint: enable=not-callable
                 with open(cleaned_csv_file_path, encoding="UTF-8") as csv_file:
                     self.actual_csv_data = csv_file.read()
 
@@ -90,6 +93,8 @@ class CommonTestClass:
                 with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
                     self.actual_tmcf_data = tmcf_file.read()
 
+        # pylint: enable=too-many-locals
+        # pylint: disable=deprecated-method
         def test_csv(self):
             self.assertEquals(self.expected_csv_data, self.actual_csv_data)
 
@@ -98,3 +103,5 @@ class CommonTestClass:
 
         def test_tmcf(self):
             self.assertEquals(self.expected_tmcf_data, self.actual_tmcf_data)
+
+        # pylint: enable=deprecated-method

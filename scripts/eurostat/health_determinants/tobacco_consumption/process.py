@@ -11,16 +11,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-import os, sys
+"""
+This Python Script Load the datasets, cleans it
+and generates cleaned CSV, MCF, TMCF file.
+"""
+import os
+import sys
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
+# pylint: disable=wrong-import-position
 from common.euro_stat import EuroStat
+# pylint: enable=wrong-import-position
 
 
 class EuroStatTobaccoConsumption(EuroStat):
-
+    """
+    This Class has requried methods to generate Cleaned CSV,
+    MCF and TMCF Files.
+    """
     _import_name = "tobacco_consumption"
 
     _mcf_template = ("Node: dcid:{sv}\n"
@@ -96,6 +105,9 @@ class EuroStatTobaccoConsumption(EuroStat):
 
     # over-ridden parent abstract method
     def _propety_correction(self):
+        """
+        Correcting the property values.
+        """
         for k, v in self._sv_properties.items():
             if k == "incomequin":
                 self._sv_properties[k] = v\
@@ -106,8 +118,10 @@ class EuroStatTobaccoConsumption(EuroStat):
                 self._sv_properties[k] = v\
                     .replace("LessThan20CigarettesPerDay","[- 20 Cigarettes]")\
                     .replace("20OrMoreCigarettesPerDay","[20 - Cigarettes]")\
-                    .replace("DailyCigaretteSmoker20OrMorePerDay","[20 - Cigarettes]")\
-                    .replace("DailyCigaretteSmokerLessThan20PerDay","[- 20 Cigarettes]")
+                    .replace("DailyCigaretteSmoker20OrMorePerDay",
+                        "[20 - Cigarettes]")\
+                    .replace("DailyCigaretteSmokerLessThan20PerDay",
+                        "[- 20 Cigarettes]")
             else:
                 self._sv_properties[k] = v\
                     .replace("10YearsOrOver","[10 - Years]")\
@@ -117,9 +131,9 @@ class EuroStatTobaccoConsumption(EuroStat):
                     .replace("LessThan1Year","[- 1 Year]")\
                     .replace("From1To5Years","[Years 1 5]")\
                     .replace("From5To10Years","[Years 5 10]")
-                    
 
     # over-ridden parent abstract method
+    # pylint: disable=no-self-use
     def _sv_name_correction(self, sv_name: str) -> str:
         return sv_name\
             .replace("AWeek","A Week")\
@@ -136,6 +150,8 @@ class EuroStatTobaccoConsumption(EuroStat):
             .replace(", Tobacco Products", "")\
             .replace(", Never Used","")\
             .replace(", Formerly","")
+
+    # pylint: enable=no-self-use
 
 
 if __name__ == '__main__':

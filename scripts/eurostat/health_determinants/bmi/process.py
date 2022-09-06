@@ -11,12 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-import os, sys
+"""
+This Python Script Load the datasets, cleans it
+and generates cleaned CSV, MCF, TMCF file.
+"""
+import os
+import sys
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
+# pylint: disable=wrong-import-position
 from common.euro_stat import EuroStat
+# pylint: enable=wrong-import-position
 
 
 class EuroStatBMI(EuroStat):
@@ -109,6 +115,9 @@ class EuroStatBMI(EuroStat):
 
     # over-ridden parent abstract method
     def _propety_correction(self):
+        """
+        Correcting the property values.
+        """
         for k, v in self._sv_properties.items():
             if k == "healthbehavior_bmi":
                 self._sv_properties["healthbehavior"] += self._sv_properties[
@@ -122,17 +131,20 @@ class EuroStatBMI(EuroStat):
             elif k == "duration_temp" and v:
                 if "OrMoreMinutes" in self._sv_properties["duration_temp"]:
                     self._sv_properties[
-                        "duration"] = "\nactivityDuration: [" + self._sv_properties[
+                        "duration"] = "\nactivityDuration: ["\
+                            + self._sv_properties[
                             "duration_temp"].replace("OrMoreMinutes",
                                                      "") + " - Minute]"
                 elif "To" in self._sv_properties["duration_temp"]:
                     self._sv_properties[
-                        "duration"] = "\nactivityDuration: [" + self._sv_properties[
+                        "duration"] = "\nactivityDuration: ["\
+                            + self._sv_properties[
                             "duration_temp"].replace("Minutes", "").replace(
                                 "To", " ") + " Minute]"
                 else:
                     self._sv_properties[
-                        "duration"] = "\nactivityDuration: [Minute " + self._sv_properties[
+                        "duration"] = "\nactivityDuration: [Minute "\
+                            + self._sv_properties[
                             "duration_temp"].replace("Minutes", "") + "]"
             self._sv_properties[k] = v\
                 .replace("Or", "__")\
@@ -142,9 +154,11 @@ class EuroStatBMI(EuroStat):
                 .replace("IncomeOf", "")\
                 .replace("To", " ")\
                 .replace("EducationalAttainment","")\
-                .replace("ModerateActivityOrHeavyActivity", "ModerateActivityLevel__HeavyActivity")
+                .replace("ModerateActivityOrHeavyActivity",
+                "ModerateActivityLevel__HeavyActivity")
 
     # over-ridden parent abstract method
+    # pylint: disable=no-self-use
     def _sv_name_correction(self, sv_name: str) -> str:
         return sv_name\
             .replace("AWeek","A Week")\
@@ -163,6 +177,8 @@ class EuroStatBMI(EuroStat):
             .replace(" Population","")\
             .replace('name: "','name: "Population: ')\
             .replace("  "," ")
+
+    # pylint: enable=no-self-use
 
 
 if __name__ == '__main__':

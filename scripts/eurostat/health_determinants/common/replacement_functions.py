@@ -210,7 +210,7 @@ def replace_col_values(data_df: pd.DataFrame) -> pd.DataFrame:
     }
     df_columns = data_df.columns.to_list()
     for column, replacements in mapper.items():
-       if column in df_columns:
+        if column in df_columns:
             data_df = data_df.replace({column: replacements})
 
     return data_df

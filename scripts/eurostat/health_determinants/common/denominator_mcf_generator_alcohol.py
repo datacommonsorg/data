@@ -11,13 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+Script to generate denominator MCF.
+"""
 import re
 import os
 import sys
 
 _COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(1, _COMMON_PATH)
+# pylint: disable=wrong-import-position
 from dcid_existance import check_dcid_existance
+# pylint: enable=wrong-import-position
 
 
 def _generate_mcf(sv_list, mcf_file_path) -> None:
@@ -62,7 +67,7 @@ def _generate_mcf(sv_list, mcf_file_path) -> None:
         for prop in sv_prop:
             if prop in ["Count"]:
                 continue
-            elif prop in ["Person"]:
+            if prop in ["Person"]:
                 sv_name = sv_name + "Population: "
             if "PhysicalActivity" in prop:
                 healthbehavior = "\nhealthBehavior: dcs:" + prop
@@ -140,9 +145,9 @@ _INPUT_MCF_FILE_PATH = os.path.join(
 _OUTPUT_MCF_FILE_PATH = os.path.join(
     _MODULE_DIR, "output", "eurostat_population_alcoholconsumption_deno.mcf")
 
-with open(_INPUT_MCF_FILE_PATH, "r") as mcf_file:
+with open(_INPUT_MCF_FILE_PATH, "r", encoding="UTF-8") as mcf_file:
     mcf = mcf_file.read()
-    deno_matched = re.findall("(measurementDenominator: dcs:)(\w+)", mcf)
+    deno_matched = re.findall(r"(measurementDenominator: dcs:)(\w+)", mcf)
     f_deno = []
     for deno in deno_matched:
         f_deno.append(deno[1])

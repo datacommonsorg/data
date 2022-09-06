@@ -18,7 +18,7 @@ Physical Activity, BMI, Alcohol Consumption, Tobacco Consumption...
 EuroStat class in this module provides methods to generate processed CSV, MCF &
 TMCF files.
 
-_propety_correction() and _sv_name_correction() are abstract methods, these 
+_propety_correction() and _sv_name_correction() are abstract methods, these
 method needs to implemented by Subclasses.
 """
 import os
@@ -26,7 +26,7 @@ import sys
 import re
 import pandas as pd
 import numpy as np
-from absl import app, flags
+from absl import flags
 
 # For import common.replacement_functions
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -39,9 +39,10 @@ from common.sv_config import file_to_sv_mapping
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
 sys.path.insert(1, _COMMON_PATH)
-
+# pylint: disable=wrong-import-order
 from util.alpha2_to_dcid import COUNTRY_MAP
 # pylint: enable=wrong-import-position
+# pylint: enable=wrong-import-order
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -61,7 +62,7 @@ _TMCF_TEMPLATE = ("Node: E:eurostat_population_{import_name}->E0\n"
 
 class EuroStat:
     """
-    EuroStat is a base class which provides common implementation for generating 
+    EuroStat is a base class which provides common implementation for generating
     CSV, MCF and tMCF files.
     """
     # Below variables will be initialized by sub-class (import specific)
@@ -79,17 +80,36 @@ class EuroStat:
         self._tmcf_file_path = tmcf_file_path
         self._df = pd.DataFrame()
 
+    # pylint: disable=pointless-statement
+    # pylint: disable=no-self-use
+    # pylint: disable=unused-argument
+
     def _propety_correction(self):
         None
 
     def _sv_name_correction(self, sv_name: str) -> str:
         None
 
+    # pylint: enable=pointless-statement
+    # pylint: enable=unused-argument
     def _parse_file(self, file_name: str, df: pd.DataFrame,
                     import_name: dict) -> pd.DataFrame:
+        """
+        Parsing the input file, loading to dataframe and cleaning it.
+
+        Args:
+            file_name (str): name of the input file.
+            df (pd.DataFrame):
+            import_name (dictonary): dictonary of all eurostat imports.
+
+        Returns:
+            df (pd.DataFrame):
+        """
         split_columns = df.columns.values.tolist()[0]
         df = split_column(df, split_columns)
 
+        # pylint: disable=anomalous-backslash-in-string
+        # pylint: enable=no-self-use
         split_columns = split_columns.replace('isced97', 'isced11')\
                 .replace('geo\time','geo').replace('geo\\time','geo')\
                 .replace('time\geo','time').replace('time\\geo','time')\
@@ -104,7 +124,7 @@ class EuroStat:
             'quantile': 'quant_inc'
         },
                   inplace=True)
-
+        # pylint: enable=anomalous-backslash-in-string
         if import_name == "alcohol_consumption":
             split_columns = split_columns.replace('frequenc',
                                                   'frequenc_alcohol')
@@ -261,8 +281,6 @@ class EuroStat:
         for sv in sv_list:
             self._sv_properties = self._sv_properties_template
             self._sv_properties = dict.fromkeys(self._sv_properties, "")
-            if "Total" in sv:
-                continue
             sv_name = ""
 
             sv_temp = sv.split("_In_")
@@ -274,7 +292,7 @@ class EuroStat:
             for prop in sv_prop:
                 if prop in ["Count", "Person"]:
                     continue
-                elif prop in ["Percent"]:
+                if prop in ["Percent"]:
                     sv_name = sv_name + "Percentage "
                 else:
                     sv_name = sv_name + prop + ", "

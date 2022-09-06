@@ -11,15 +11,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-import os, sys
+"""
+This Python Script Load the datasets, cleans it
+and generates cleaned CSV, MCF, TMCF file.
+"""
+import os
+import sys
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
+# pylint: disable=wrong-import-position
 from common.euro_stat import EuroStat
+# pylint: enable=wrong-import-position
 
 
 class EuroStatAlcoholConsumption(EuroStat):
+    """
+    This Class has requried methods to generate Cleaned CSV,
+    MCF and TMCF Files.
+    """
     _import_name = "alcohol_consumption"
 
     _mcf_template = ("Node: dcid:{sv}\n"
@@ -93,6 +103,7 @@ class EuroStatAlcoholConsumption(EuroStat):
                     .replace("Citizenship", "")\
 
     # over-ridden parent abstract method
+    # pylint: disable=no-self-use
     def _sv_name_correction(self, sv_name: str) -> str:
         return sv_name\
             .replace("AWeek","A Week")\
@@ -102,6 +113,8 @@ class EuroStatAlcoholConsumption(EuroStat):
             .replace("To"," To ")\
             .replace("Of","Of ")\
             .replace("  "," ")
+
+    # pylint: enable=no-self-use
 
 
 if __name__ == '__main__':

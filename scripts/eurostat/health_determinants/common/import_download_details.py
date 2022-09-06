@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 This module provide metadata information for downloading files from Eurostat
 website.
@@ -24,7 +23,7 @@ it in import specific folder's input_files directory.
 Dictionary structure:
 { <import_name>: {  "file_names": [file1, ...]
                     "import_url": "url"
-                    "file_extension": <file-extension>" 
+                    "file_extension": <file-extension>"
                  }
 E.g., for one of the file (hlth_ehis_al1e.tsv.gz) download url:
 https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_al1e.tsv.gz
@@ -37,7 +36,8 @@ download_details = {
             "al2u", "al1b", "al1c", "de10", "de6"
         ],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+                "BulkDownloadListing?file=data/hlth_ehis_",
         "file_extension":
             ".tsv.gz"
     },
@@ -46,7 +46,8 @@ download_details = {
             "bm1e", "bm1i", "bm1u", "bm1b", "bm1c", "bm1d", "de1", "de2"
         ],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+                "BulkDownloadListing?file=data/hlth_ehis_",
         "file_extension":
             ".tsv.gz"
     },
@@ -57,7 +58,8 @@ download_details = {
             "de9", "pe6e"
         ],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+                "BulkDownloadListing?file=data/hlth_ehis_",
         "file_extension":
             ".tsv.gz"
     },
@@ -67,16 +69,16 @@ download_details = {
             "sk1b", "sk1c", "sk2i", "sk2e", "sk5e", "sk6e", "de3", "de4", "de5"
         ],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+                "BulkDownloadListing?file=data/hlth_ehis_",
         "file_extension":
             ".tsv.gz"
     },
     "social_environment": {
-        "filenames": [
-            "ss1e", "ss1u", "ic1e", "ic1u", "ss1b", "ss1c", "ss1d"
-        ],
+        "filenames": ["ss1e", "ss1u", "ic1e", "ic1u", "ss1b", "ss1c", "ss1d"],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+                "BulkDownloadListing?file=data/hlth_ehis_",
         "file_extension":
             ".tsv.gz"
     }

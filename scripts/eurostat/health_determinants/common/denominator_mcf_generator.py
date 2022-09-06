@@ -60,8 +60,10 @@ _ADDITIONAL_NAME_PROP_REPLACEMENTS = {' Among': ''}
 def _update_name_property(name_prop: str) -> str:
     """
     Updates the name property.
+
     Args:
         name_prop (str): name property
+
     Returns:
         str: updated name property
     """
@@ -85,8 +87,10 @@ def _update_name_property(name_prop: str) -> str:
 def _generate_pv_node(prop: str) -> str:
     """
     Returns the PV for the sv property.
+
     Args:
         prop (str): property
+
     Returns:
         str: property-value
     """
@@ -142,11 +146,13 @@ def generate_mcf_template(stat_var: str, mcf_template: str,
                           xtra_pvs: list) -> str:
     """
     This method generates MCF String w.r.t
-    dataframe headers and defined MCF template
+    dataframe headers and defined MCF template.
+
     Args:
         stat_var (str): StatVar Name
         mcf_template (str): Input MCF Template
         xtra_pvs (list): List of additional property values
+
     Returns:
         str: String of Generated MCF
     """
