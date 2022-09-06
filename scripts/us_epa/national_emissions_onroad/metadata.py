@@ -1,4 +1,9 @@
 replace_metadata = {
+    "PM-CON":"PMCondensible",
+    "PM10-FIL":"PM10Filterable",
+    "PM25-FIL":"PM2.5Filterable",
+    "132649":"Dibenzofurans",
+    "98862":"1_Phenylethanone",
     "100414":
         "EthylBenzene",
     "123386":
@@ -339,6 +344,11 @@ replace_metadata = {
         "2-Methoxy-2-Methylpropane",
     "2_Methylnaphthalene":
         "2-Methylnaphthalene",
+    "PMCondensible":"PM Condensible",
+    "PM10Filterable":"PM10Filterable",
+    "PM2.5Filterable":"PM2.5Filterable",
+    "Dibenzofurans":"Dibenzofurans",
+    "1_Phenylethanone":"1-Phenylethanone",
     'HAP':
         'HazardousAirPollutants',
     'GHG':

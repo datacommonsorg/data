@@ -45,15 +45,15 @@ _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:amount\n")
 
-_TMCF_TEMPLATE = ("Node: E:national_emission_onroad->E0\n"
+_TMCF_TEMPLATE = ("Node: E:national_emissions->E0\n"
                   "typeOf: dcs:StatVarObservation\n"
-                  "variableMeasured: C:national_emission_onroad->SV\n"
-                  "measurementMethod: C:national_emission_onroad->"
+                  "variableMeasured: C:national_emissions->SV\n"
+                  "measurementMethod: C:national_emissions->"
                   "Measurement_Method\n"
-                  "observationAbout: C:national_emission_onroad->geo_Id\n"
-                  "observationDate: C:national_emission_onroad->year\n"
-                  "unit: C:national_emission_onroad->unit\n"
-                  "value: C:national_emission_onroad->observation\n")
+                  "observationAbout: C:national_emissions->geo_Id\n"
+                  "observationDate: C:national_emissions->year\n"
+                  "unit: Ton\n"
+                  "value: C:national_emissions->observation\n")
 
 
 def _replace_metadata(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
@@ -134,7 +134,7 @@ def _regularize_columns(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
     return df
 
 
-def _onroad(file_path: str) -> pd.DataFrame:
+def _national_emissions(file_path: str) -> pd.DataFrame:
     """
     Reads the file for national emissions data and cleans it for concatenation
     in Final CSV.
@@ -228,21 +228,21 @@ class USAirEmissionTrends:
             }
             emission_type = pollutant = ''
             sv_property = sv.split("_")
-            source = '\nepaSccCode: ' + sv_property[-1]
+            source = '\nepaSccCode: dcs:EPA_SCC/' + sv_property[-1]
             scc_name = replace_source_metadata[sv_property[-1]]
             scc_name = scc_name + " (" + sv_property[-1] + ")"
-            sv_checker['epaSccCode'] = sv_property[-1]
+            # sv_checker['epaSccCode'] = sv_property[-1]
 
             for i in sv_property[3:-2]:
                 pollutant = pollutant + i + '_'
-            sv_checker['emittedThing'] = 'dcs:' + pollutant.rstrip('_')
+            # sv_checker['emittedThing'] = 'dcs:' + pollutant.rstrip('_')
             pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')
             pollutant_name = replace_metadata[pollutant.rstrip('_')]
-            generated_sv = get_statvar_dcid(sv_checker)
-            if (generated_sv != sv):
-                print(generated_sv)
-                print(sv)
-                print()
+            # generated_sv = get_statvar_dcid(sv_checker)
+            # if (generated_sv != sv):
+            #     print(generated_sv)
+            #     print(sv)
+            #     print()
             final_mcf_template += _MCF_TEMPLATE.format(
                 pv1=sv,
                 pv2=source,
@@ -273,7 +273,8 @@ class USAirEmissionTrends:
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .csv extension
             file_name = file_path.split("/")[-1][:-4]
-            df = _onroad(file_path)
+            print(file_name)
+            df = _national_emissions(file_path)
             final_df = pd.concat([final_df, df])
             sv_list += df["SV"].to_list()
 
@@ -281,6 +282,11 @@ class USAirEmissionTrends:
             by=['geo_Id', 'year', 'SV', 'observation'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
+        final_df['observation'] = np.where(
+            final_df['unit']=='Pound',
+            final_df['observation']/2000,
+            final_df['observation'])
+        final_df = final_df.groupby(['geo_Id', 'year', 'SV']).sum().reset_index()
         final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
@@ -300,9 +306,9 @@ def main(_):
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
     # Defining Output Files
-    csv_name = "national_emission_onroad.csv"
-    mcf_name = "national_emission_onroad.mcf"
-    tmcf_name = "national_emission_onroad.tmcf"
+    csv_name = "national_emissionsNR.csv"
+    mcf_name = "national_emissionsNR.mcf"
+    tmcf_name = "national_emissionsNR.tmcf"
     cleaned_csv_path = os.path.join(output_file_path, csv_name)
     mcf_path = os.path.join(output_file_path, mcf_name)
     tmcf_path = os.path.join(output_file_path, tmcf_name)
