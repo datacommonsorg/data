@@ -1,0 +1,5 @@
+CSV_FILE_NAME = "us_nces_private_school.csv"
+MCF_FILE_NAME = "us_nces_private_school.mcf"
+TMCF_FILE_NAME = "us_nces_private_school.tmcf"
+SCHOOL_TYPE = "privateschool"
+SPLIT_HEADER_ON_SCHOOL_TYPE = "[Private School]"

@@ -31,8 +31,8 @@ import pandas as pd
 import numpy as np
 from absl import app, flags
 
-from replacement_functions import replace_values
-from prop_conf import *
+from common.replacement_functions import replace_values
+from common.prop_conf import *
 
 CODEDIR = os.path.dirname(__file__)
 # For import common.replacement_functions
@@ -44,7 +44,7 @@ default_input_path = os.path.join(CODEDIR, "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _TMCF_TEMPLATE = ("{school_type}")
-SPLIT_HEADER_ON_SCHOOL_TYPE = "[Private School]"
+
 
 
 class USEducation:
@@ -55,6 +55,7 @@ class USEducation:
     # Below variables will be initialized by sub-class (import specific)
     _school_type = ""
     _default_mcf_template = ""
+    _split_headers_using_school_type = ""
 
     def __init__(self, input_files: list, csv_file_path: str,
                  mcf_file_path: str, tmcf_file_path: str) -> None:
@@ -63,6 +64,8 @@ class USEducation:
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
         self._df = pd.DataFrame()
+        if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
+            os.mkdir(os.path.dirname(self._cleaned_csv_file_path))
 
     def input_file_to_df(self, f_path: str) -> pd.DataFrame:
         """Convert a file path to a dataframe."""
@@ -103,7 +106,7 @@ class USEducation:
         cleaned_columns = []
         for col in raw_df.columns.values.tolist():
             cleaned_columns.append(
-                col.split(SPLIT_HEADER_ON_SCHOOL_TYPE)[0].strip())
+                col.split(self._split_headers_using_school_type)[0].strip())
         raw_df.columns = cleaned_columns
         return raw_df
 
@@ -151,10 +154,10 @@ class USEducation:
             unique_rows = data_df.drop_duplicates(subset=[column]).reset_index(
                 drop=True)
             unique_rows[curr_value_column] = unique_rows[column]
-            print(unique_rows[["curr_prop", curr_value_column]])
+            # print(unique_rows[["curr_prop", curr_value_column]])
             unique_rows = self._apply_regex(unique_rows, conf,
                                             curr_value_column)
-            print(unique_rows[["curr_prop", curr_value_column]])
+            # print(unique_rows[["curr_prop", curr_value_column]])
 
             # unique_rows[curr_value_column] = unique_rows[curr_value_column].apply(
             #     conf["update_value"])
@@ -177,25 +180,25 @@ class USEducation:
         Returns:
             pd.DataFrame: DataFrame including statvar column
         """
-        data_df['prop_Node'] = '{' + \
+        data_df['prop_node'] = '{' + \
                                     data_df[prop_cols].apply(
                                     lambda x: ','.join(x.dropna().astype(str)),
                                     axis=1) + \
                                     '}'
 
-        data_df['prop_Node'] = data_df['prop_Node'].apply(json.loads)
-        data_df['sv'] = data_df['prop_Node'].apply(get_statvar_dcid)
-        data_df['prop_Node'] = data_df['sv'].apply(SV_NODE_FORMAT)
+        data_df['prop_node'] = data_df['prop_node'].apply(json.loads)
+        data_df['sv_name'] = data_df['prop_node'].apply(get_statvar_dcid)
+        data_df['prop_node'] = data_df['sv_name'].apply(SV_NODE_FORMAT)
 
-        stat_var_with_dcs = dict(zip(data_df["all_prop"], data_df['prop_Node']))
-        stat_var_without_dcs = dict(zip(data_df["all_prop"], data_df['sv']))
+        stat_var_with_dcs = dict(zip(data_df["all_prop"], data_df['prop_node']))
+        stat_var_without_dcs = dict(zip(data_df["all_prop"], data_df['sv_name']))
 
         return (stat_var_with_dcs, stat_var_without_dcs)
 
-    def _generate_mcf(self, data_df: pd.DataFrame,
+    def _generate_mcf_data(self, data_df: pd.DataFrame,
                       prop_cols: list) -> pd.DataFrame:
 
-        data_df['mcf'] = data_df['prop_Node'] + \
+        data_df['mcf'] = data_df['prop_node'] + \
                     '\n' + \
                     data_df[prop_cols].apply(
                     func=lambda x: '\n'.join(x.dropna()),
@@ -224,33 +227,16 @@ class USEducation:
 
         stat_var_with_dcs, stat_var_without_dcs = self._generate_stat_vars(
             unique_props, prop_cols)
-        mcf_mapper = self._generate_mcf(unique_props, prop_cols)
+        mcf_mapper = self._generate_mcf_data(unique_props, prop_cols)
 
-        data_df["prop_Node"] = data_df["all_prop"].map(stat_var_with_dcs)
-        data_df["sv"] = data_df["all_prop"].map(stat_var_without_dcs)
+        data_df["prop_node"] = data_df["all_prop"].map(stat_var_with_dcs)
+        data_df["sv_name"] = data_df["all_prop"].map(stat_var_without_dcs)
         data_df["mcf"] = data_df["all_prop"].map(mcf_mapper)
 
         data_df = data_df.drop(columns=["all_prop"]).reset_index(drop=True)
         data_df = data_df.drop(columns=prop_cols).reset_index(drop=True)
 
         return data_df
-
-    def _write_to_mcf_file(self, data_df: pd.DataFrame, mcf_file_path: str):
-        """
-        Writing MCF nodes to a local file.
-        Args:
-            data_df (pd.DataFrame): Input DataFrame
-            mcf_file_path (str): MCF file
-        """
-
-        unique_nodes_df = data_df.drop_duplicates(
-            subset=["prop_Node"]).reset_index(drop=True)
-
-        mcf_ = unique_nodes_df.sort_values(by=["prop_Node"])["mcf"].tolist()
-        mcf_ = "\n\n".join(mcf_)
-
-        with open(mcf_file_path, "w", encoding="UTF-8") as file:
-            file.write(mcf_)
 
     def _parse_file(self, raw_df: pd.DataFrame,
                     school_type: str) -> pd.DataFrame:
@@ -268,7 +254,7 @@ class USEducation:
         df_cleaned["school_state_code"] = df_cleaned[[
             "School ID - NCES Assigned", "ANSI/FIPS State Code"
         ]].apply("_".join, axis=1)
-
+        
         df_cleaned = df_cleaned.melt(
             id_vars=['school_state_code', 'year'],
             value_vars=[
@@ -278,14 +264,14 @@ class USEducation:
             ],
             var_name='sv_name',
             value_name='observation')
-
+        
         df_cleaned['observation'] = pd.to_numeric(df_cleaned['observation'],
                                                   errors='coerce')
         df_cleaned = replace_values(df_cleaned)
-
         df_cleaned["observation"] = df_cleaned["observation"].replace(
             to_replace={'': pd.NA})
         df_cleaned = df_cleaned.dropna(subset=['observation'])
+
         return df_cleaned
 
     def _merge_csvs_helper(self, df_left, df_right):
@@ -325,23 +311,19 @@ class USEducation:
         Returns:
             pd.DataFrame
         """
+        
         dfs = []
         df_parsed = None
         join_col = self.get_join_col()
         for input_file in self._input_files:
             raw_df = self.input_file_to_df(input_file)
             df_parsed = self._parse_file(raw_df, self._school_type)
+
         df_parsed = self._generate_prop(df_parsed)
         df_parsed = self._generate_stat_var_and_mcf(df_parsed)
-        self._write_to_mcf_file(
-            df_parsed,
-            "scripts/us_nces/demographics/private_school/Education.mcf")
-        df_cleaned.to_csv("Education.csv", index=False)
-        # df_parsed = df_parsed.set_index(join_col)
-        # dfs.append(df)
-
-        # merged_df = functools.reduce(self._merge_csvs_helper, dfs)
-        return self._df
+        df_final = df_parsed[["school_state_code","year","sv_name","observation"]]
+        df_final.to_csv(self._cleaned_csv_file_path, index=False)
+        self._df = df_parsed
 
     def generate_mcf(self) -> None:
         """
@@ -354,7 +336,14 @@ class USEducation:
         Returns:
             None    
         """
-        pass
+        unique_nodes_df = self._df.drop_duplicates(
+            subset=["prop_node"]).reset_index(drop=True)
+
+        mcf_ = unique_nodes_df.sort_values(by=["prop_node"])["mcf"].tolist()
+        mcf_ = "\n\n".join(mcf_)
+
+        with open(self._mcf_file_path, "w", encoding="UTF-8") as file:
+            file.write(mcf_)
 
     def generate_tmcf(self) -> None:
         """

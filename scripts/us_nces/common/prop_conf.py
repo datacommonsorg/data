@@ -19,7 +19,7 @@ While preprocessing files column names are changed to SV names as used in
 DC import
 """
 
-MELT_VAR_COL = "SV"
+MELT_VAR_COL = "sv_name"
 # _PV_FORMAT1 = lambda prop_val: print("1", prop_val[0], "2", prop_val[1]) if 'None' not in prop_val[1] else ""
 _PV_FORMAT = lambda prop_val: f'"{prop_val[0]}": "dcs:{prop_val[1]}"' if 'None' not in prop_val[1] else ""
 

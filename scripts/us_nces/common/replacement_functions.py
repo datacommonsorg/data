@@ -104,7 +104,7 @@ def replace_values(data_df: pd.DataFrame):
         "School Type": _SCHOOL_TYPE,
         "School Level": _SCHOOL_LEVEL,
         # "Race": _RACE_,
-        "SV": [_RACE_, _SCHOOL_GRADE]
+        "sv_name": [_RACE_, _SCHOOL_GRADE]
     }
 
     df_columns = data_df.columns.to_list()
