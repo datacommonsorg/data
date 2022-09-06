@@ -1,0 +1,440 @@
+StateName,DistrictName,StationName,WaterStationLatitude,WaterStationLongitude,DistrictCode,dcid,WaterSource
+Andhra Pradesh,Anantapur,Tadipatri,14.25,78.0,502,india_wris/502_Tadipatri,dcs:SurfaceWater
+Andhra Pradesh,East Godavari,Polavaram,17.24583333,81.65972222,505,india_wris/505_Polavaram,dcs:SurfaceWater
+Andhra Pradesh,Guntur,Vijayawada,16.50111111,80.625,506,india_wris/506_Vijayawada,dcs:SurfaceWater
+Andhra Pradesh,Guntur,Wadenepally,16.79416667,80.07305556,506,india_wris/506_Wadenepally,dcs:SurfaceWater
+Andhra Pradesh,Krishna,Keesara,16.71472222,80.32027778,510,india_wris/510_Keesara,dcs:SurfaceWater
+Andhra Pradesh,Krishna,Paleru Bridge,16.94888889,80.04916667,510,india_wris/510_PaleruBridge,dcs:SurfaceWater
+Andhra Pradesh,Spsr Nellore,Naidupet,13.94833333,79.89611111,515,india_wris/515_Naidupet,dcs:SurfaceWater
+Andhra Pradesh,Spsr Nellore,Nellore Cwc,14.45,79.98333333,515,india_wris/515_NelloreCwc,dcs:SurfaceWater
+Andhra Pradesh,Spsr Nellore,Sulurpet,13.70777778,80.01,515,india_wris/515_Sulurpet,dcs:SurfaceWater
+Andhra Pradesh,Srikakulam,Srikakulam,18.31333333,83.88833333,519,india_wris/519_Srikakulam,dcs:SurfaceWater
+Andhra Pradesh,Y.S.R.,Alladupalli,14.25,78.66666667,504,india_wris/504_Alladupalli,dcs:SurfaceWater
+Andhra Pradesh,Y.S.R.,Chennur,14.57388889,78.77166667,504,india_wris/504_Chennur,dcs:SurfaceWater
+Andhra Pradesh,Y.S.R.,Kamalapuram,14.59277778,78.17583333,504,india_wris/504_Kamalapuram,dcs:SurfaceWater
+Andhra Pradesh,Y.S.R.,Nandipalli,14.71527778,79.01777778,504,india_wris/504_Nandipalli,dcs:SurfaceWater
+Andhra Pradesh,Y.S.R.,Singavaram,14.63333333,78.16666667,504,india_wris/504_Singavaram,dcs:SurfaceWater
+Arunachal Pradesh,Changlang,Miao,27.48694444,96.20944444,229,india_wris/229_Miao,dcs:SurfaceWater
+Arunachal Pradesh,East Kameng,Seppa,27.35583333,93.04527778,231,india_wris/231_Seppa,dcs:SurfaceWater
+Arunachal Pradesh,East Siang,Passighat,28.07305556,95.34027778,232,india_wris/232_Passighat,dcs:SurfaceWater
+Arunachal Pradesh,Lohit,Tezu,27.91083333,96.17055556,234,india_wris/234_Tezu,dcs:SurfaceWater
+Arunachal Pradesh,Lower Subansiri,Yazali,27.38388889,93.7575,236,india_wris/236_Yazali,dcs:SurfaceWater
+Arunachal Pradesh,Namsai,Namsai,27.66611111,95.83027778,678,india_wris/678_Namsai,dcs:SurfaceWater
+Arunachal Pradesh,Upper Siang,Tuting,28.99055556,94.895,240,india_wris/240_Tuting,dcs:SurfaceWater
+Arunachal Pradesh,Upper Subansiri,Daporizo,27.98944444,94.22805556,241,india_wris/241_Daporizo,dcs:SurfaceWater
+Arunachal Pradesh,Upper Subansiri,Lemeking,28.37194444,93.56666667,241,india_wris/241_Lemeking,dcs:SurfaceWater
+Arunachal Pradesh,West Siang,Kabu Basti (Kambang),28.19277778,94.77027778,243,india_wris/243_KabuBastiKambang,dcs:SurfaceWater
+Assam,Baksa,Drf,26.8,91.7,616,india_wris/616_Drf,dcs:SurfaceWater
+Assam,Baksa,Matunga,26.77055556,91.55,616,india_wris/616_Matunga,dcs:SurfaceWater
+Assam,Barpeta,Beki Road Bridge,26.49444444,90.91527778,280,india_wris/280_BekiRoadBridge,dcs:SurfaceWater
+Assam,Bongaigaon,Manas N H Crossing,26.46416667,90.74888889,281,india_wris/281_ManasNHCrossing,dcs:SurfaceWater
+Assam,Cachar,Annapurnaghat,24.83138889,92.79611111,282,india_wris/282_Annapurnaghat,dcs:SurfaceWater
+Assam,Cachar,Ap Ghat,24.83277778,92.79166667,282,india_wris/282_ApGhat,dcs:SurfaceWater
+Assam,Cachar,B.P.Ghat,24.87555556,92.58333333,282,india_wris/282_BPGhat,dcs:SurfaceWater
+Assam,Cachar,Dholai,24.58611111,92.84222222,282,india_wris/282_Dholai,dcs:SurfaceWater
+Assam,Cachar,Fulertal,24.78861111,93.01888889,282,india_wris/282_Fulertal,dcs:SurfaceWater
+Assam,Cachar,Gumra,25.01194444,92.51,282,india_wris/282_Gumra,dcs:SurfaceWater
+Assam,Cachar,Monierkhal,24.6375,92.90416667,282,india_wris/282_Monierkhal,dcs:SurfaceWater
+Assam,Cachar,Tulargram,24.71194444,92.88388889,282,india_wris/282_Tulargram,dcs:SurfaceWater
+Assam,Darrang,Suklai,26.63777778,91.71527778,283,india_wris/283_Suklai,dcs:SurfaceWater
+Assam,Dibrugarh,Chenimari (Khowang),27.31143889,94.88262222,286,india_wris/286_ChenimariKhowang,dcs:SurfaceWater
+Assam,Dibrugarh,Dibrugarh,27.49888889,94.85583333,286,india_wris/286_Dibrugarh,dcs:SurfaceWater
+Assam,Dibrugarh,Dillighat,27.14,95.37,286,india_wris/286_Dillighat,dcs:SurfaceWater
+Assam,Dibrugarh,Naharkatia,27.30045833,95.33081389,286,india_wris/286_Naharkatia,dcs:SurfaceWater
+Assam,Goalpara,Dudhnai,25.97916667,90.79444444,287,india_wris/287_Dudhnai,dcs:SurfaceWater
+Assam,Goalpara,Pancharatna,26.19888889,90.57722222,287,india_wris/287_Pancharatna,dcs:SurfaceWater
+Assam,Golaghat,Gelabil,26.2375,93.98361111,288,india_wris/288_Gelabil,dcs:SurfaceWater
+Assam,Golaghat,Golaghat,26.50332778,93.95188333,288,india_wris/288_Golaghat,dcs:SurfaceWater
+Assam,Golaghat,Numaligarh,26.63118056,93.73041944,288,india_wris/288_Numaligarh,dcs:SurfaceWater
+Assam,Hailakandi,Matijuri,24.64805556,92.61138889,289,india_wris/289_Matijuri,dcs:SurfaceWater
+Assam,Hailakandi,Matizuri,24.66666667,92.61277778,289,india_wris/289_Matizuri,dcs:SurfaceWater
+Assam,Jorhat,Neamatighat,26.87,94.25222222,290,india_wris/290_Neamatighat,dcs:SurfaceWater
+Assam,Kamrup,Kulsi,25.97916667,91.39166667,291,india_wris/291_Kulsi,dcs:SurfaceWater
+Assam,Kamrup Metro,Sonapur,26.11527778,91.98472222,618,india_wris/618_Sonapur,dcs:SurfaceWater
+Assam,Kamrup,Pandu,26.16833333,91.67166667,291,india_wris/291_Pandu,dcs:SurfaceWater
+Assam,Kamrup,Puthimari Nh Rd Xing,26.3675,91.65194444,291,india_wris/291_PuthimariNhRdXing,dcs:SurfaceWater
+Assam,Karbi Anglong,Bokajan,26.01611111,93.78722222,292,india_wris/292_Bokajan,dcs:SurfaceWater
+Assam,Karbi Anglong,Kheronighat,25.84833333,92.88833333,292,india_wris/292_Kheronighat,dcs:SurfaceWater
+Assam,Karimganj,Anipur,24.54416667,92.33166667,293,india_wris/293_Anipur,dcs:SurfaceWater
+Assam,Karimganj,Badarpurghat,24.86666667,92.51666667,293,india_wris/293_Badarpurghat,dcs:SurfaceWater
+Assam,Karimganj,Fakirabazar,24.85166667,92.34555556,293,india_wris/293_Fakirabazar,dcs:SurfaceWater
+Assam,Kokrajhar,Kokrajhar,26.39694444,90.255,294,india_wris/294_Kokrajhar,dcs:SurfaceWater
+Assam,Lakhimpur,Badatighat,26.93472222,93.96222222,295,india_wris/295_Badatighat,dcs:SurfaceWater
+Assam,Lakhimpur,Chouldhowaghat,27.4475,94.25277778,295,india_wris/295_Chouldhowaghat,dcs:SurfaceWater
+Assam,Lakhimpur,Ranganadi Nt Road Crossing,27.204275,94.05960556,295,india_wris/295_RanganadiNtRoadCrossing,dcs:SurfaceWater
+Assam,Marigaon,Dharamtul,26.16621389,92.35544167,296,india_wris/296_Dharamtul,dcs:SurfaceWater
+Assam,Marigaon,Jagibhakatgaon,26.17756944,92.21705833,296,india_wris/296_Jagibhakatgaon,dcs:SurfaceWater
+Assam,Nagaon,Kampur,26.15279444,92.65360833,297,india_wris/297_Kampur,dcs:SurfaceWater
+Assam,Nalbari,Pagladiya N T Road Crossing,26.44944444,91.46416667,298,india_wris/298_PagladiyaNTRoadCrossing,dcs:SurfaceWater
+Assam,Sivasagar,Bihubar,26.85583333,94.79944444,300,india_wris/300_Bihubar,dcs:SurfaceWater
+Assam,Sivasagar,Desangpani,27.04722222,94.9125,300,india_wris/300_Desangpani,dcs:SurfaceWater
+Assam,Sivasagar,Nanglamoraghat,26.98500556,94.77708056,300,india_wris/300_Nanglamoraghat,dcs:SurfaceWater
+Assam,Sivasagar,Sivasagar,26.98194444,94.57916667,300,india_wris/300_Sivasagar,dcs:SurfaceWater
+Assam,Sonitpur,Bhalukpong,27.01444444,92.64972222,301,india_wris/301_Bhalukpong,dcs:SurfaceWater
+Assam,Sonitpur,Bhomoraguri,26.61027778,92.86027778,301,india_wris/301_Bhomoraguri,dcs:SurfaceWater
+Assam,Sonitpur,Nt Road Crossing Jia-Bharali,26.80976389,92.87663611,301,india_wris/301_NtRoadCrossingJiaBharali,dcs:SurfaceWater
+Assam,Sonitpur,Tezpur,26.61555556,92.79666667,301,india_wris/301_Tezpur,dcs:SurfaceWater
+Assam,Tinsukia,Dholabazar,27.75666667,95.60055556,302,india_wris/302_Dholabazar,dcs:SurfaceWater
+Assam,Tinsukia,Margherita,27.28361111,95.66277778,302,india_wris/302_Margherita,dcs:SurfaceWater
+Assam,Tinsukia,Udaipur,27.33714722,95.85018056,302,india_wris/302_Udaipur,dcs:SurfaceWater
+Bihar,Bhojpur,Koelwar,25.5725,84.79583333,193,india_wris/193_Koelwar,dcs:SurfaceWater
+Bihar,Buxar,Buxar,25.56666667,83.96666667,194,india_wris/194_Buxar,dcs:SurfaceWater
+Bihar,Darbhanga,Ekmighat,26.21666667,85.88333333,195,india_wris/195_Ekmighat,dcs:SurfaceWater
+Bihar,Darbhanga,Hayaghat,26.0525,85.87444444,195,india_wris/195_Hayaghat,dcs:SurfaceWater
+Bihar,Gaya,Gaya,24.795,85.01583333,196,india_wris/196_Gaya,dcs:SurfaceWater
+Bihar,Katihar,Labha,25.43027778,87.76722222,201,india_wris/201_Labha,dcs:SurfaceWater
+Bihar,Lakhisarai,Lakhisarai,25.17583333,86.10111111,204,india_wris/204_Lakhisarai,dcs:SurfaceWater
+Bihar,Madhubani,Jainagar,26.57138889,86.22583333,206,india_wris/206_Jainagar,dcs:SurfaceWater
+Bihar,Madhubani,Jhanjharpur,26.23333333,86.26666667,206,india_wris/206_Jhanjharpur,dcs:SurfaceWater
+Bihar,Muzaffarpur,Sikandarpur (Muzzafarpur),26.13333333,85.4,208,india_wris/208_SikandarpurMuzzafarpur,dcs:SurfaceWater
+Bihar,Patna,Hathidah,25.385,85.9875,212,india_wris/212_Hathidah,dcs:SurfaceWater
+Bihar,Patna,Patna Gandhighat,25.61666667,85.1725,212,india_wris/212_PatnaGandhighat,dcs:SurfaceWater
+Bihar,Patna,Sripalpur,25.50027778,85.10944444,212,india_wris/212_Sripalpur,dcs:SurfaceWater
+Bihar,Patna,Triveni,27.44166667,83.91666667,212,india_wris/212_Triveni,dcs:SurfaceWater
+Bihar,Purnia,Azamabad,25.86666667,87.28333333,214,india_wris/214_Azamabad,dcs:SurfaceWater
+Bihar,Saharsa,Baltara,25.66666667,86.5,216,india_wris/216_Baltara,dcs:SurfaceWater
+Bihar,Sitamarhi,Dheng Bridge,26.72861111,85.32222222,221,india_wris/221_DhengBridge,dcs:SurfaceWater
+Bihar,Vaishali,Lalganj,25.85194444,85.16305556,224,india_wris/224_Lalganj,dcs:SurfaceWater
+Chhattisgarh,Baloda Bazar,Simga,21.63308056,81.68486944,644,india_wris/644_Simga,dcs:SurfaceWater
+Chhattisgarh,Bastar,Jagdalpur,19.08333333,82.05,374,india_wris/374_Jagdalpur,dcs:SurfaceWater
+Chhattisgarh,Bijapur,Pathagudem,18.7,80.3,636,india_wris/636_Pathagudem,dcs:SurfaceWater
+Chhattisgarh,Bilaspur,Ghatora,22.048592,82.22195611,375,india_wris/375_Ghatora,dcs:SurfaceWater
+Chhattisgarh,Bilaspur,Jondhra,21.71249167,82.33310611,375,india_wris/375_Jondhra,dcs:SurfaceWater
+Chhattisgarh,Bilaspur,Rampur,21.64719167,82.51616389,375,india_wris/375_Rampur,dcs:SurfaceWater
+Chhattisgarh,Durg,Andhiyar Khore,21.83388889,81.5975,378,india_wris/378_AndhiyarKhore,dcs:SurfaceWater
+Chhattisgarh,Durg,Kotni,21.24,81.25027778,378,india_wris/378_Kotni,dcs:SurfaceWater
+Chhattisgarh,Gariyaband,Rajim,20.97507778,81.88103889,645,india_wris/645_Rajim,dcs:SurfaceWater
+Chhattisgarh,Janjgir-Champa,Bamnidhi,21.90848611,82.71364,379,india_wris/379_Bamnidhi,dcs:SurfaceWater
+Chhattisgarh,Janjgir-Champa,Basantpur,21.7385,82.78594167,379,india_wris/379_Basantpur,dcs:SurfaceWater
+Chhattisgarh,Janjgir-Champa,Seorinarayan,21.718535,82.59754306,379,india_wris/379_Seorinarayan,dcs:SurfaceWater
+Chhattisgarh,Korea,Manendragarh,23.20536111,82.21640111,384,india_wris/384_Manendragarh,dcs:SurfaceWater
+Chhattisgarh,Raigarh,Kurubhata,21.98127778,83.2106,386,india_wris/386_Kurubhata,dcs:SurfaceWater
+Chhattisgarh,Raipur,Baronda,20.91,81.88805556,387,india_wris/387_Baronda,dcs:SurfaceWater
+Chhattisgarh,Raipur,Pathardihi,21.34080278,81.59498889,387,india_wris/387_Pathardihi,dcs:SurfaceWater
+Delhi,North,Delhi Railway Bridge,28.65916667,77.245,080,india_wris/080_DelhiRailwayBridge,dcs:SurfaceWater
+Delhi,North West,Palla,28.82944444,77.22416667,082,india_wris/082_Palla,dcs:SurfaceWater
+Gujarat,Ahmadabad,Vautha,22.64972222,72.53555556,438,india_wris/438_Vautha,dcs:SurfaceWater
+Gujarat,Amreli,Lowara,21.44333333,71.56166667,439,india_wris/439_Lowara,dcs:SurfaceWater
+Gujarat,Anand,Khanpur,22.53194444,73.14083333,440,india_wris/440_Khanpur,dcs:SurfaceWater
+Gujarat,Banas Kantha,Chitrasani,24.28888889,72.49833333,441,india_wris/441_Chitrasani,dcs:SurfaceWater
+Gujarat,Narmada,Garudeshwar,22.265,73.72722222,452,india_wris/452_Garudeshwar,dcs:SurfaceWater
+Gujarat,Rajkot,Ganod,21.66472222,70.18111111,457,india_wris/457_Ganod,dcs:SurfaceWater
+Gujarat,Sabar Kantha,Derol Bridge,23.57333333,72.80694444,458,india_wris/458_DerolBridge,dcs:SurfaceWater
+Gujarat,Surat,Mahuwa,21.01444444,73.14027778,459,india_wris/459_Mahuwa,dcs:SurfaceWater
+Gujarat,Surat,Motinaroli,21.23777778,72.96333333,459,india_wris/459_Motinaroli,dcs:SurfaceWater
+Himachal Pradesh,Sirmaur,Paonta,30.43055556,77.59111111,024,india_wris/024_Paonta,dcs:SurfaceWater
+Himachal Pradesh,Solan,Yaswant Nagar,30.88638889,77.20194444,025,india_wris/025_YaswantNagar,dcs:SurfaceWater
+Jharkhand,Dumka,Maharo,24.31666667,87.23333333,326,india_wris/326_Maharo,dcs:SurfaceWater
+Jharkhand,East Singhbum,Ghatsila,22.58416667,86.46694444,327,india_wris/327_Ghatsila,dcs:SurfaceWater
+Jharkhand,East Singhbum,Jamshedpur,22.81666667,86.21083333,327,india_wris/327_Jamshedpur,dcs:SurfaceWater
+Jharkhand,Hazaribagh,Hendegir,23.69583333,85.17944444,332,india_wris/332_Hendegir,dcs:SurfaceWater
+Jharkhand,Jamtara,Jamtara,23.97777778,86.855,333,india_wris/333_Jamtara,dcs:SurfaceWater
+Jharkhand,Palamu,Japla,24.56805556,83.975,338,india_wris/338_Japla,dcs:SurfaceWater
+Jharkhand,Palamu,Mohammad Ganj,24.2,83.95,338,india_wris/338_MohammadGanj,dcs:SurfaceWater
+Jharkhand,Ramgarh,Ramgarh,23.64166667,85.51305556,607,india_wris/607_Ramgarh,dcs:SurfaceWater
+Jharkhand,Saraikela Kharsawan,Adityapur,22.7875,86.17388889,341,india_wris/341_Adityapur,dcs:SurfaceWater
+Jharkhand,Simdega,Tilga,22.62361111,84.41722222,342,india_wris/342_Tilga,dcs:SurfaceWater
+Karnataka,Ballari,T. Ramapuram,15.66111111,76.96555556,528,india_wris/528_TRamapuram,dcs:SurfaceWater
+Karnataka,Bidar,Saigaon,18.05,77.05,529,india_wris/529_Saigaon,dcs:SurfaceWater
+Karnataka,Chamarajanagara,Biligundulu,12.18222222,77.72388889,531,india_wris/531_Biligundulu,dcs:SurfaceWater
+Karnataka,Chamarajanagara,Kudlur,11.84055556,77.46277778,531,india_wris/531_Kudlur,dcs:SurfaceWater
+Karnataka,Dakshina Kannada,Addoor,12.92888889,74.95388889,534,india_wris/534_Addoor,dcs:SurfaceWater
+Karnataka,Dakshina Kannada,Bantwal,12.88083333,75.04111111,534,india_wris/534_Bantwal,dcs:SurfaceWater
+Karnataka,Kalaburagi,Malkhed,17.20333333,77.15638889,538,india_wris/538_Malkhed,dcs:SurfaceWater
+Karnataka,Raichur,Huvinhedigi,16.49027778,76.92305556,546,india_wris/546_Huvinhedigi,dcs:SurfaceWater
+Karnataka,Raichur,Mantralayam,15.95,77.43333333,546,india_wris/546_Mantralayam,dcs:SurfaceWater
+Karnataka,Udupi,Avershe,13.52138889,74.88,549,india_wris/549_Avershe,dcs:SurfaceWater
+Karnataka,Udupi,Haladi,13.58166667,74.85777778,549,india_wris/549_Haladi,dcs:SurfaceWater
+Karnataka,Udupi,Yennehole,13.29416667,74.98055556,549,india_wris/549_Yennehole,dcs:SurfaceWater
+Karnataka,Uttara Kannada,Santeguli,14.43444444,74.58888889,550,india_wris/550_Santeguli,dcs:SurfaceWater
+Karnataka,Yadgir,Yadgir,16.7375,77.12527778,635,india_wris/635_Yadgir,dcs:SurfaceWater
+Kerala,Ernakulam,Kalampur,9.990555556,76.63222222,555,india_wris/555_Kalampur,dcs:SurfaceWater
+Kerala,Ernakulam,Neeleeswaram,10.18333333,76.49555556,555,india_wris/555_Neeleeswaram,dcs:SurfaceWater
+Kerala,Ernakulam,Ramamangalam,9.943611111,76.47833333,555,india_wris/555_Ramamangalam,dcs:SurfaceWater
+Kerala,Idukki,Vandiperiyar,9.573333333,77.09055556,556,india_wris/556_Vandiperiyar,dcs:SurfaceWater
+Kerala,Kannur,Perumannu,11.98083333,75.57777778,557,india_wris/557_Perumannu,dcs:SurfaceWater
+Kerala,Kasaragod,Erinjipuzha,12.49583333,75.15694444,558,india_wris/558_Erinjipuzha,dcs:SurfaceWater
+Kerala,Kollam,Pattazhy,9.072777778,76.76111111,559,india_wris/559_Pattazhy,dcs:SurfaceWater
+Kerala,Kottayam,Kidangoor,9.675,76.60277778,560,india_wris/560_Kidangoor,dcs:SurfaceWater
+Kerala,Kozhikode,Kuttyadi,11.65083333,75.75833333,561,india_wris/561_Kuttyadi,dcs:SurfaceWater
+Kerala,Malappuram,Karathodu,11.05694444,76.03944444,562,india_wris/562_Karathodu,dcs:SurfaceWater
+Kerala,Malappuram,Kumbidi,10.85444444,76.02,562,india_wris/562_Kumbidi,dcs:SurfaceWater
+Kerala,Malappuram,Kuniyil,11.23944444,76.02333333,562,india_wris/562_Kuniyil,dcs:SurfaceWater
+Kerala,Malappuram,Pulamanthole,10.89805556,76.19194444,562,india_wris/562_Pulamanthole,dcs:SurfaceWater
+Kerala,Palakkad,Mankara,10.76111111,76.48611111,563,india_wris/563_Mankara,dcs:SurfaceWater
+Kerala,Palakkad,Pudur,10.7775,76.51222222,563,india_wris/563_Pudur,dcs:SurfaceWater
+Kerala,Pathanamthitta,Kallooppara,9.436944444,76.65027778,564,india_wris/564_Kallooppara,dcs:SurfaceWater
+Kerala,Pathanamthitta,Malakkara,9.3325,76.66305556,564,india_wris/564_Malakkara,dcs:SurfaceWater
+Kerala,Pathanamthitta,Thumpamon,9.225,76.71444444,564,india_wris/564_Thumpamon,dcs:SurfaceWater
+Kerala,Thiruvananthapuram,Ayilam,8.715,76.83333333,565,india_wris/565_Ayilam,dcs:SurfaceWater
+Kerala,Thrissur,Arangali,10.28611111,76.32222222,566,india_wris/566_Arangali,dcs:SurfaceWater
+Madhya Pradesh,Balaghat,Kumhari,21.88416667,80.17666667,392,india_wris/392_Kumhari,dcs:SurfaceWater
+Madhya Pradesh,Balaghat,Rajegaon,21.62555556,80.25388889,392,india_wris/392_Rajegaon,dcs:SurfaceWater
+Madhya Pradesh,Barwani,Pati,21.94361111,74.745,393,india_wris/393_Pati,dcs:SurfaceWater
+Madhya Pradesh,Burhanpur,Burhanpur,21.29833333,76.23611111,397,india_wris/397_Burhanpur,dcs:SurfaceWater
+Madhya Pradesh,Chhatarpur,Garrauli,25.06666667,79.35,398,india_wris/398_Garrauli,dcs:SurfaceWater
+Madhya Pradesh,Chhindwara,Ramakona,21.72,78.82416667,399,india_wris/399_Ramakona,dcs:SurfaceWater
+Madhya Pradesh,Datia,Seondha,26.16666667,78.78333333,401,india_wris/401_Seondha,dcs:SurfaceWater
+Madhya Pradesh,Dhar,Dhulsar,22.20555556,74.85166667,403,india_wris/403_Dhulsar,dcs:SurfaceWater
+Madhya Pradesh,Dindori,Dindori,22.94805556,81.07611111,404,india_wris/404_Dindori,dcs:SurfaceWater
+Madhya Pradesh,Guna,A.B.Road X-Ing,24.36666667,77.08333333,406,india_wris/406_ABRoadXIng,dcs:SurfaceWater
+Madhya Pradesh,Harda,Handia,22.49027778,76.99361111,408,india_wris/408_Handia,dcs:SurfaceWater
+Madhya Pradesh,Hoshangabad,Chhidgaon,22.40583333,77.30777778,409,india_wris/409_Chhidgaon,dcs:SurfaceWater
+Madhya Pradesh,Hoshangabad,Sandia,22.91583333,78.3475,409,india_wris/409_Sandia,dcs:SurfaceWater
+Madhya Pradesh,Jabalpur,Patan,23.31166667,79.66277778,411,india_wris/411_Patan,dcs:SurfaceWater
+Madhya Pradesh,Khargone,Kogaon,22.10166667,75.68388889,414,india_wris/414_Kogaon,dcs:SurfaceWater
+Madhya Pradesh,Khargone,Mandleshwar,22.17166667,75.66083333,414,india_wris/414_Mandleshwar,dcs:SurfaceWater
+Madhya Pradesh,Khargone,Mortakka,22.22638889,76.04722222,414,india_wris/414_Mortakka,dcs:SurfaceWater
+Madhya Pradesh,Mandla,Bamni,22.48416667,80.37805556,415,india_wris/415_Bamni,dcs:SurfaceWater
+Madhya Pradesh,Mandla,Manot,22.73555556,80.51222222,415,india_wris/415_Manot,dcs:SurfaceWater
+Madhya Pradesh,Mandla,Mohgaon,22.76583333,80.62277778,415,india_wris/415_Mohgaon,dcs:SurfaceWater
+Madhya Pradesh,Morena,Dholpur,26.65,77.9,417,india_wris/417_Dholpur,dcs:SurfaceWater
+Madhya Pradesh,Narsinghpur,Barmanghat,23.03111111,79.01555556,418,india_wris/418_Barmanghat,dcs:SurfaceWater
+Madhya Pradesh,Narsinghpur,Belkhedi,22.92777778,79.33972222,418,india_wris/418_Belkhedi,dcs:SurfaceWater
+Madhya Pradesh,Narsinghpur,Gadarwara,22.92388889,78.79166667,418,india_wris/418_Gadarwara,dcs:SurfaceWater
+Madhya Pradesh,Panna,Madla,24.73333333,80.2,420,india_wris/420_Madla,dcs:SurfaceWater
+Madhya Pradesh,Ratlam,Mataji,23.34916667,74.72527778,423,india_wris/423_Mataji,dcs:SurfaceWater
+Madhya Pradesh,Ratlam,Tal,23.71666667,75.35,423,india_wris/423_Tal,dcs:SurfaceWater
+Madhya Pradesh,Sagar,Natunhat,23.54555556,78.90694444,425,india_wris/425_Natunhat,dcs:SurfaceWater
+Madhya Pradesh,Satna,Satna (Panna-Khajuraho Bridge),24.56213889,80.90745556,426,india_wris/426_SatnaPannaKhajurahoBridge,dcs:SurfaceWater
+Madhya Pradesh,Sehore,Hoshangabad,22.75611111,77.73416667,427,india_wris/427_Hoshangabad,dcs:SurfaceWater
+Madhya Pradesh,Seoni,Keolari,22.38055556,79.9,428,india_wris/428_Keolari,dcs:SurfaceWater
+Madhya Pradesh,Shahdol,Govardheghat,23.69055556,81.24638889,429,india_wris/429_Govardheghat,dcs:SurfaceWater
+Madhya Pradesh,Shivpuri,Pachawali,25.16666667,77.71666667,432,india_wris/432_Pachawali,dcs:SurfaceWater
+Madhya Pradesh,Sidhi,Kuldah Bridge,24.41666667,81.68333333,433,india_wris/433_KuldahBridge,dcs:SurfaceWater
+Madhya Pradesh,Singrauli,Jhoku,24.42777778,82.20694444,638,india_wris/638_Jhoku,dcs:SurfaceWater
+Madhya Pradesh,Ujjain,Mahidpur,23.48333333,75.63333333,435,india_wris/435_Mahidpur,dcs:SurfaceWater
+Madhya Pradesh,Ujjain,Ujjain,23.16666667,75.76666667,435,india_wris/435_Ujjain,dcs:SurfaceWater
+Maharashtra,Ahmednagar,Kopergaon,19.9,74.5,466,india_wris/466_Kopergaon,dcs:SurfaceWater
+Maharashtra,Ahmednagar,Pachegaon,19.53333333,74.88333333,466,india_wris/466_Pachegaon,dcs:SurfaceWater
+Maharashtra,Akola,Gopalkheda,20.87416667,76.99138889,467,india_wris/467_Gopalkheda,dcs:SurfaceWater
+Maharashtra,Bhandara,Pauni,20.79611111,79.64222222,471,india_wris/471_Pauni,dcs:SurfaceWater
+Maharashtra,Buldhana,Yerli,20.93638889,76.47416667,472,india_wris/472_Yerli,dcs:SurfaceWater
+Maharashtra,Chandrapur,Ashti,19.68666667,79.78694444,473,india_wris/473_Ashti,dcs:SurfaceWater
+Maharashtra,Chandrapur,Bamni (Balharsha),19.81472222,79.37944444,473,india_wris/473_BamniBalharsha,dcs:SurfaceWater
+Maharashtra,Chandrapur,Sakmur/Sirpur,19.56138889,79.61333333,473,india_wris/473_SakmurSirpur,dcs:SurfaceWater
+Maharashtra,Gadchiroli,Tekra,18.97833333,79.94694444,475,india_wris/475_Tekra,dcs:SurfaceWater
+Maharashtra,Gadchiroli,Wairagarh,20.43333333,80.1,475,india_wris/475_Wairagarh,dcs:SurfaceWater
+Maharashtra,Kolhapur,Kurundwad,16.68361111,74.60305556,480,india_wris/480_Kurundwad,dcs:SurfaceWater
+Maharashtra,Nagpur,Satrapur/K.R.Bridge,21.21666667,79.23305556,484,india_wris/484_SatrapurKRBridge,dcs:SurfaceWater
+Maharashtra,Nanded,Betmogra,18.71666667,77.53333333,485,india_wris/485_Betmogra,dcs:SurfaceWater
+Maharashtra,Nanded,Degloor,18.54555556,77.5775,485,india_wris/485_Degloor,dcs:SurfaceWater
+Maharashtra,Nanded,Nanded,19.15305556,77.34277778,485,india_wris/485_Nanded,dcs:SurfaceWater
+Maharashtra,Nanded,Yelli,19.03527778,77.46666667,485,india_wris/485_Yelli,dcs:SurfaceWater
+Maharashtra,Nandurbar,Sarangkheda,21.42833333,74.52722222,486,india_wris/486_Sarangkheda,dcs:SurfaceWater
+Maharashtra,Nashik,Chanwada,20.05,73.46611111,487,india_wris/487_Chanwada,dcs:SurfaceWater
+Maharashtra,Parbhani,Dhalegaon,19.2,76.36666667,489,india_wris/489_Dhalegaon,dcs:SurfaceWater
+Maharashtra,Parbhani,G.R.Bridge,19.01666667,76.71666667,489,india_wris/489_GRBridge,dcs:SurfaceWater
+Maharashtra,Parbhani,Purrna,19.18333333,77.03333333,489,india_wris/489_Purrna,dcs:SurfaceWater
+Maharashtra,Parbhani,Zari,19.39472222,76.77333333,489,india_wris/489_Zari,dcs:SurfaceWater
+Maharashtra,Pune,Phulgaon,18.6625,74.02,490,india_wris/490_Phulgaon,dcs:SurfaceWater
+Maharashtra,Pune,Sarati,17.91194444,75.0075,490,india_wris/490_Sarati,dcs:SurfaceWater
+Maharashtra,Raigad,Mangaon,18.23361111,73.285,491,india_wris/491_Mangaon,dcs:SurfaceWater
+Maharashtra,Sangli,Arjunwad (Seasonal),16.78666667,74.63333333,493,india_wris/493_ArjunwadSeasonal,dcs:SurfaceWater
+Maharashtra,Sangli,Samdoli (Seasonal),16.855,74.49722222,493,india_wris/493_SamdoliSeasonal,dcs:SurfaceWater
+Maharashtra,Satara,Karad,17.3,74.06666667,494,india_wris/494_Karad,dcs:SurfaceWater
+Maharashtra,Satara,Warunji,17.26666667,74.16666667,494,india_wris/494_Warunji,dcs:SurfaceWater
+Maharashtra,Solapur,Takli,17.43055556,75.85,496,india_wris/496_Takli,dcs:SurfaceWater
+Maharashtra,Solapur,Wadakbal,17.53333333,75.88333333,496,india_wris/496_Wadakbal,dcs:SurfaceWater
+Maharashtra,Thane,Badlapur,19.16222222,73.25444444,497,india_wris/497_Badlapur,dcs:SurfaceWater
+Maharashtra,Thane,Durvesh,19.7125,72.93055556,497,india_wris/497_Durvesh,dcs:SurfaceWater
+Maharashtra,Wardha,Hivra,20.54777778,78.325,498,india_wris/498_Hivra,dcs:SurfaceWater
+Maharashtra,Wardha,Nandgaon,20.53333333,78.82583333,498,india_wris/498_Nandgaon,dcs:SurfaceWater
+Maharashtra,Yavatmal,P.G. Bridge,19.8175,78.57777778,500,india_wris/500_PGBridge,dcs:SurfaceWater
+Meghalaya,East Khasi Hills,Therriaghat,25.18,91.76777778,274,india_wris/274_Therriaghat,dcs:SurfaceWater
+Meghalaya,Ri Bhoi,Byrnihat,26.04034722,91.86588056,276,india_wris/276_Byrnihat,dcs:SurfaceWater
+Meghalaya,South Garo Hills,Dimapara,25.23083333,90.25,277,india_wris/277_Dimapara,dcs:SurfaceWater
+Meghalaya,South Garo Hills,Sibbari,25.18055556,90.50833333,277,india_wris/277_Sibbari,dcs:SurfaceWater
+Meghalaya,West Jaintia Hills,Kharkhana,25.15833333,92.21444444,275,india_wris/275_Kharkhana,dcs:SurfaceWater
+Mizoram,Aizawl,Sairang,23.80777778,92.64611111,261,india_wris/261_Sairang,dcs:SurfaceWater
+Mizoram,Aizawl,Turial,23.71944444,92.79972222,261,india_wris/261_Turial,dcs:SurfaceWater
+Odisha,Anugul,Talcher,20.91888889,85.24027778,344,india_wris/344_Talcher,dcs:SurfaceWater
+Odisha,Anugul,Tikarpara,20.59944444,84.78166667,344,india_wris/344_Tikarpara,dcs:SurfaceWater
+Odisha,Balangir,Kesinga,20.28583056,83.22133333,345,india_wris/345_Kesinga,dcs:SurfaceWater
+Odisha,Balangir,Salebhata,20.98333333,83.53944444,345,india_wris/345_Salebhata,dcs:SurfaceWater
+Odisha,Baleshwar,Govindapur (Nh5 Road Bridge),21.54861111,86.91805556,346,india_wris/346_GovindapurNh5RoadBridge,dcs:SurfaceWater
+Odisha,Boudh,Kantamal,20.65833333,83.73206944,349,india_wris/349_Kantamal,dcs:SurfaceWater
+Odisha,Gajapati,Kashinagar,18.85777778,83.86138889,353,india_wris/353_Kashinagar,dcs:SurfaceWater
+Odisha,Gajapati,Mahendragarh,19.22305556,84.26444444,353,india_wris/353_Mahendragarh,dcs:SurfaceWater
+Odisha,Ganjam,Purushottampur,19.505,84.86555556,354,india_wris/354_Purushottampur,dcs:SurfaceWater
+Odisha,Jajapur,Jenapur,20.87916667,86.01444444,356,india_wris/356_Jenapur,dcs:SurfaceWater
+Odisha,Kendujhar,Anandapur,21.21055556,86.11972222,361,india_wris/361_Anandapur,dcs:SurfaceWater
+Odisha,Kendujhar,Champua,22.06916667,85.67083333,361,india_wris/361_Champua,dcs:SurfaceWater
+Odisha,Nabarangpur,Nowrangpur,19.22666667,82.54,366,india_wris/366_Nowrangpur,dcs:SurfaceWater
+Odisha,Rayagada,Gunupur,19.09222222,83.81277778,370,india_wris/370_Gunupur,dcs:SurfaceWater
+Odisha,Sundargarh,Gomlai,21.835,84.9075,373,india_wris/373_Gomlai,dcs:SurfaceWater
+Odisha,Sundargarh,Jarikela,22.32583333,85.07972222,373,india_wris/373_Jarikela,dcs:SurfaceWater
+Odisha,Sundargarh,Sundergarh,22.10972222,84.03,373,india_wris/373_Sundergarh,dcs:SurfaceWater
+Puducherry,Karaikal,Nallathur,11.00222222,79.75027778,598,india_wris/598_Nallathur,dcs:SurfaceWater
+Puducherry,Pondicherry,Kumarapalayam,11.98333333,79.68055556,600,india_wris/600_Kumarapalayam,dcs:SurfaceWater
+Rajasthan,Chittorgarh,Chittorgarh,24.83333333,74.63333333,095,india_wris/095_Chittorgarh,dcs:SurfaceWater
+Rajasthan,Dungarpur,Paderdibadi,23.75944444,74.13222222,099,india_wris/099_Paderdibadi,dcs:SurfaceWater
+Rajasthan,Dungarpur,Rangeli,23.87277778,74.22361111,099,india_wris/099_Rangeli,dcs:SurfaceWater
+Rajasthan,Jhalawar,Aklera,24.41666667,76.58333333,105,india_wris/105_Aklera,dcs:SurfaceWater
+Rajasthan,Kota,Barod,25.38333333,76.33333333,109,india_wris/109_Barod,dcs:SurfaceWater
+Rajasthan,Kota,Khatoli,25.68333333,76.48333333,109,india_wris/109_Khatoli,dcs:SurfaceWater
+Rajasthan,Kota,Sangod,24.96666667,76.28333333,109,india_wris/109_Sangod,dcs:SurfaceWater
+Rajasthan,Sawai Madhopur,Baranwada,26.0,76.66666667,113,india_wris/113_Baranwada,dcs:SurfaceWater
+Rajasthan,Tonk,Tonk,26.2,75.58333333,116,india_wris/116_Tonk,dcs:SurfaceWater
+StateName,DistrictName,StationName,SurfaceWaterStationLatitude,SurfaceWaterStationLongitude,DistrictCode,dcid,dcs:SurfaceWater
+Tamil Nadu,Coimbatore,Ambarampalayam,10.63138889,76.94611111,569,india_wris/569_Ambarampalayam,dcs:SurfaceWater
+Tamil Nadu,Coimbatore,Gandhavayal,11.37416667,76.99222222,569,india_wris/569_Gandhavayal,dcs:SurfaceWater
+Tamil Nadu,Coimbatore,Nellithurai,11.28777778,76.89111111,569,india_wris/569_Nellithurai,dcs:SurfaceWater
+Tamil Nadu,Cuddalore,Kudalaiyathur,11.42222222,79.47083333,570,india_wris/570_Kudalaiyathur,dcs:SurfaceWater
+Tamil Nadu,Dharmapuri,Hogenakkal,12.12111111,77.78194444,571,india_wris/571_Hogenakkal,dcs:SurfaceWater
+Tamil Nadu,Dharmapuri,Thoppur,11.93833333,78.05722222,571,india_wris/571_Thoppur,dcs:SurfaceWater
+Tamil Nadu,Erode,Elunuthimangalam,11.03166667,77.8875,573,india_wris/573_Elunuthimangalam,dcs:SurfaceWater
+Tamil Nadu,Erode,Savandapur,11.52138889,77.51,573,india_wris/573_Savandapur,dcs:SurfaceWater
+Tamil Nadu,Erode,Thengumarahada,11.57277778,76.91916667,573,india_wris/573_Thengumarahada,dcs:SurfaceWater
+Tamil Nadu,Erode,Urachikottai,11.47777778,77.7,573,india_wris/573_Urachikottai,dcs:SurfaceWater
+Tamil Nadu,Kanchipuram,Chengalpet,12.65,79.94722222,574,india_wris/574_Chengalpet,dcs:SurfaceWater
+Tamil Nadu,Kanchipuram,Magaral,12.70944444,79.74916667,574,india_wris/574_Magaral,dcs:SurfaceWater
+Tamil Nadu,Kanniyakumari,Ashramam,8.159166666,77.45888889,575,india_wris/575_Ashramam,dcs:SurfaceWater
+Tamil Nadu,Kanniyakumari,Kuzhithurai,8.305833333,77.19722222,575,india_wris/575_Kuzhithurai,dcs:SurfaceWater
+Tamil Nadu,Karur,Musiri,10.935,78.435,576,india_wris/576_Musiri,dcs:SurfaceWater
+Tamil Nadu,Karur,Nallamaranpatty,10.88083333,77.98472222,576,india_wris/576_Nallamaranpatty,dcs:SurfaceWater
+Tamil Nadu,Krishnagiri,Gummanur,12.555,78.13833333,577,india_wris/577_Gummanur,dcs:SurfaceWater
+Tamil Nadu,Krishnagiri,Singasadanapalli,12.86694444,77.84083333,577,india_wris/577_Singasadanapalli,dcs:SurfaceWater
+Tamil Nadu,Nagapattinam,Gopurajapuram,10.85138889,79.8,579,india_wris/579_Gopurajapuram,dcs:SurfaceWater
+Tamil Nadu,Nagapattinam,Porakudi,10.90388889,79.70722222,579,india_wris/579_Porakudi,dcs:SurfaceWater
+Tamil Nadu,Namakkal,Kodumudi,11.08111111,77.89027778,580,india_wris/580_Kodumudi,dcs:SurfaceWater
+Tamil Nadu,Ramanathapuram,Paramakudi,9.553333333,78.58638889,583,india_wris/583_Paramakudi,dcs:SurfaceWater
+Tamil Nadu,Salem,Thevur,11.52722222,77.75083333,584,india_wris/584_Thevur,dcs:SurfaceWater
+Tamil Nadu,Theni,Ambasamudram,9.925555555,77.51166667,588,india_wris/588_Ambasamudram,dcs:SurfaceWater
+Tamil Nadu,Theni,Theni,10.00111111,77.485,588,india_wris/588_Theni,dcs:SurfaceWater
+Tamil Nadu,Theni,Vaigai Dam,10.07611111,77.66833333,588,india_wris/588_VaigaiDam,dcs:SurfaceWater
+Tamil Nadu,Thiruvarur,Annavasal,10.975,79.75375,590,india_wris/590_Annavasal,dcs:SurfaceWater
+Tamil Nadu,Thiruvarur,Menangudi,10.94888889,79.70388889,590,india_wris/590_Menangudi,dcs:SurfaceWater
+Tamil Nadu,Thiruvarur,Peralam,10.96631944,79.66125,590,india_wris/590_Peralam,dcs:SurfaceWater
+Tamil Nadu,Thiruvarur,Thengudi,10.91666667,79.63888889,590,india_wris/590_Thengudi,dcs:SurfaceWater
+Tamil Nadu,Tirunelveli,A.P.Puram,8.901388889,77.64861111,592,india_wris/592_APPuram,dcs:SurfaceWater
+Tamil Nadu,Tuticorin,Murappanadu,8.714444444,77.835,594,india_wris/594_Murappanadu,dcs:SurfaceWater
+Tamil Nadu,Vellore,Arcot,12.91388889,79.33333333,595,india_wris/595_Arcot,dcs:SurfaceWater
+Tamil Nadu,Vellore,Avarankuppam,12.68416667,78.53944444,595,india_wris/595_Avarankuppam,dcs:SurfaceWater
+Tamil Nadu,Villupuram,Vazhavachanur,12.06583333,78.97805556,596,india_wris/596_Vazhavachanur,dcs:SurfaceWater
+Tamil Nadu,Villupuram,Villupuram,11.87055556,79.45944444,596,india_wris/596_Villupuram,dcs:SurfaceWater
+Tamil Nadu,Virudhunagar,Irrukkankudi,9.324166667,77.99055556,597,india_wris/597_Irrukkankudi,dcs:SurfaceWater
+Telangana,Adilabad,Bhatpalli,19.33055556,79.50388889,501,india_wris/501_Bhatpalli,dcs:SurfaceWater
+Telangana,Bhadradri Kothagudem,Bhadrachalam,17.66583333,80.88388889,690,india_wris/690_Bhadrachalam,dcs:SurfaceWater
+Telangana,Khammam,Konta,17.8,81.38333333,509,india_wris/509_Konta,dcs:SurfaceWater
+Telangana,Khammam,Madhira,16.91805556,80.35888889,509,india_wris/509_Madhira,dcs:SurfaceWater
+Telangana,Mahabubnagar,Bawapuram,15.8825,77.95722222,512,india_wris/512_Bawapuram,dcs:SurfaceWater
+Telangana,Mahabubnagar,K. Agraharam,16.25777778,77.84027778,512,india_wris/512_KAgraharam,dcs:SurfaceWater
+Telangana,Mancherial,Mancherial,18.85027778,79.44444444,684,india_wris/684_Mancherial,dcs:SurfaceWater
+Telangana,Nalgonda,Dameracherla,16.73916667,79.66972222,514,india_wris/514_Dameracherla,dcs:SurfaceWater
+Telangana,Nalgonda,Halia,16.79027778,79.33861111,514,india_wris/514_Halia,dcs:SurfaceWater
+Telangana,Nizamabad,Gandlapet,17.0,80.0,516,india_wris/516_Gandlapet,dcs:SurfaceWater
+Telangana,Warangal Rural,Perur,18.55,80.36666667,522,india_wris/522_Perur,dcs:SurfaceWater
+Telangana,Warangal Rural,Sangam,17.6,80.81666667,522,india_wris/522_Sangam,dcs:SurfaceWater
+The Dadra And Nagar Haveli And Daman And Diu,Daman,Pingalwada,20.41138889,72.83638889,463,india_wris/463_Pingalwada,dcs:SurfaceWater
+Tripura,Dhalai,Kamalpur Gds Site,24.18888889,91.83083333,269,india_wris/269_KamalpurGdsSite,dcs:SurfaceWater
+Tripura,Khowai,Khowai,24.07888889,91.59194444,652,india_wris/652_Khowai,dcs:SurfaceWater
+Tripura,Sepahijala,Sonamura,23.4875,91.27222222,653,india_wris/653_Sonamura,dcs:SurfaceWater
+Tripura,South Tripura,Belonia,23.25055556,91.4625,271,india_wris/271_Belonia,dcs:SurfaceWater
+Tripura,South Tripura,Nutanbazar Gd Site,23.42666667,91.7525,271,india_wris/271_NutanbazarGdSite,dcs:SurfaceWater
+Tripura,Unakoti,Kailashahar,24.325,92.00833333,655,india_wris/655_Kailashahar,dcs:SurfaceWater
+Tripura,Unakoti,Kailashahar Gdsq Site,24.32166667,92.01,655,india_wris/655_KailashaharGdsqSite,dcs:SurfaceWater
+Tripura,Unakoti,Kumarghat Gd Site,24.20472222,92.02722222,655,india_wris/655_KumarghatGdSite,dcs:SurfaceWater
+Tripura,West Tripura,Gajaraia,23.64555556,91.24833333,272,india_wris/272_Gajaraia,dcs:SurfaceWater
+Tripura,West Tripura,Haora,23.82277778,91.27055556,272,india_wris/272_Haora,dcs:SurfaceWater
+Uttarakhand,Chamoli,Karnprayag Confluence D/S,30.26388889,79.2175,047,india_wris/047_KarnprayagConfluenceDS,dcs:SurfaceWater
+Uttarakhand,Chamoli,Karnprayag U/S,30.25222222,79.2225,047,india_wris/047_KarnprayagUS,dcs:SurfaceWater
+Uttarakhand,Champawat,Ghat,29.5,80.11666667,048,india_wris/048_Ghat,dcs:SurfaceWater
+Uttarakhand,Champawat,Pancheshwar,29.42333333,80.24416667,048,india_wris/048_Pancheshwar,dcs:SurfaceWater
+Uttarakhand,Dehradun,Haridwar D/S,29.96277778,78.17305556,049,india_wris/049_HaridwarDS,dcs:SurfaceWater
+Uttarakhand,Dehradun,Haridwar U/S,29.9675,78.17638889,049,india_wris/049_HaridwarUS,dcs:SurfaceWater
+Uttarakhand,Dehradun,Rishikesh D/S,30.07583333,78.28694444,049,india_wris/049_RishikeshDS,dcs:SurfaceWater
+Uttarakhand,Dehradun,Rishikesh U/S,30.07583333,78.28694444,049,india_wris/049_RishikeshUS,dcs:SurfaceWater
+Uttarakhand,Dehradun,Tuini (Tons),30.93972222,77.85666667,049,india_wris/049_TuiniTons,dcs:SurfaceWater
+Uttarakhand,Haridwar,Haridwar,29.97564444,78.18751389,050,india_wris/050_Haridwar,dcs:SurfaceWater
+Uttarakhand,Haridwar,Roorkee D/S,29.88027778,77.8975,050,india_wris/050_RoorkeeDS,dcs:SurfaceWater
+Uttarakhand,Haridwar,Roorkee U/S,29.88638889,77.89083333,050,india_wris/050_RoorkeeUS,dcs:SurfaceWater
+Uttarakhand,Pauri Garhwal,Deoprayag (G),30.13527778,78.59694444,052,india_wris/052_DeoprayagG,dcs:SurfaceWater
+Uttarakhand,Pauri Garhwal,Kirtinagar D/S,30.22888889,78.72972222,052,india_wris/052_KirtinagarDS,dcs:SurfaceWater
+Uttarakhand,Pauri Garhwal,Rishikesh,30.10293333,78.30388333,052,india_wris/052_Rishikesh,dcs:SurfaceWater
+Uttarakhand,Pauri Garhwal,Rudraprayag (A),30.28792778,78.9842,052,india_wris/052_RudraprayagA,dcs:SurfaceWater
+Uttarakhand,Pauri Garhwal,Satpuli D/S,29.9375,78.70222222,052,india_wris/052_SatpuliDS,dcs:SurfaceWater
+Uttarakhand,Pauri Garhwal,Satpuli U/S,29.91888889,78.70722222,052,india_wris/052_SatpuliUS,dcs:SurfaceWater
+Uttarakhand,Pauri Garhwal,Srinagar,30.22683056,78.78596944,052,india_wris/052_Srinagar,dcs:SurfaceWater
+Uttarakhand,Pithoragarh,Bangapani (Munsyari),29.95944444,80.30416667,053,india_wris/053_BangapaniMunsyari,dcs:SurfaceWater
+Uttarakhand,Rudra Prayag,Augustmuni D/S,30.39222222,79.02194444,054,india_wris/054_AugustmuniDS,dcs:SurfaceWater
+Uttarakhand,Rudra Prayag,Augustmuni U/S,30.41666667,79.04166667,054,india_wris/054_AugustmuniUS,dcs:SurfaceWater
+Uttarakhand,Tehri Garhwal,Kirtinagar U/S,30.22972222,78.76694444,055,india_wris/055_KirtinagarUS,dcs:SurfaceWater
+Uttarakhand,Tehri Garhwal,Koteshwar,30.26277778,78.50055556,055,india_wris/055_Koteshwar,dcs:SurfaceWater
+Uttarakhand,Uttar Kashi,Uttarkashi,30.72833333,78.44583333,057,india_wris/057_Uttarkashi,dcs:SurfaceWater
+Uttar Pradesh,Agra,Agra(J.B.),27.26666667,78.03333333,118,india_wris/118_AgraJB,dcs:SurfaceWater
+Uttar Pradesh,Agra,Agra(Poiyaghat),27.26666667,78.03333333,118,india_wris/118_AgraPoiyaghat,dcs:SurfaceWater
+Uttar Pradesh,Ambedkar Nagar,Akbarpur,26.43333333,82.53333333,121,india_wris/121_Akbarpur,dcs:SurfaceWater
+Uttar Pradesh,Amroha,Garhmukteshwar,28.77074,78.14232,154,india_wris/154_Garhmukteshwar,dcs:SurfaceWater
+Uttar Pradesh,Auraiya,Auraiya,26.43333333,79.41666667,122,india_wris/122_Auraiya,dcs:SurfaceWater
+Uttar Pradesh,Ayodhya,Ayodhya,26.78333333,82.2,140,india_wris/140_Ayodhya,dcs:SurfaceWater
+Uttar Pradesh,Bahraich,B.K.Ghat,28.25,81.1,125,india_wris/125_BKGhat,dcs:SurfaceWater
+Uttar Pradesh,Bahraich,Elginbridge,27.08333333,81.48333333,125,india_wris/125_Elginbridge,dcs:SurfaceWater
+Uttar Pradesh,Balrampur,Balrampur,27.45,82.21666667,127,india_wris/127_Balrampur,dcs:SurfaceWater
+Uttar Pradesh,Banda,Banda,25.48333333,80.31666667,128,india_wris/128_Banda,dcs:SurfaceWater
+Uttar Pradesh,Bareilly,Bareilly,28.2952,79.36935,130,india_wris/130_Bareilly,dcs:SurfaceWater
+Uttar Pradesh,Basti,Basti,26.76666667,82.7,131,india_wris/131_Basti,dcs:SurfaceWater
+Uttar Pradesh,Budaun,Kachhlabridge,27.93267,78.86328,133,india_wris/133_Kachhlabridge,dcs:SurfaceWater
+Uttar Pradesh,Chandauli,Narhan,25.20916667,83.32666667,135,india_wris/135_Narhan,dcs:SurfaceWater
+Uttar Pradesh,Chitrakoot,Regauli,26.76666667,83.3,136,india_wris/136_Regauli,dcs:SurfaceWater
+Uttar Pradesh,Deoria,Turtipar,26.16666667,83.88333333,137,india_wris/137_Turtipar,dcs:SurfaceWater
+Uttar Pradesh,Etawah,Etawah,26.75,78.98333333,139,india_wris/139_Etawah,dcs:SurfaceWater
+Uttar Pradesh,Etawah,Udi,26.71666667,78.93333333,139,india_wris/139_Udi,dcs:SurfaceWater
+Uttar Pradesh,Farrukhabad,Dabri,27.49725,79.36935,141,india_wris/141_Dabri,dcs:SurfaceWater
+Uttar Pradesh,Farrukhabad,Fatehgarh,27.39902,79.6266,141,india_wris/141_Fatehgarh,dcs:SurfaceWater
+Uttar Pradesh,Fatehpur,Bhitaura,26.047,80.87241,142,india_wris/142_Bhitaura,dcs:SurfaceWater
+Uttar Pradesh,Fatehpur,Kora-Old,26.11666667,80.41666667,142,india_wris/142_KoraOld,dcs:SurfaceWater
+Uttar Pradesh,Ghazipur,Ghazipur (Jamalpur Bridge),25.58545556,83.60672778,146,india_wris/146_GhazipurJamalpurBridge,dcs:SurfaceWater
+Uttar Pradesh,Gonda,Mohna,28.66666667,77.46666667,147,india_wris/147_Mohna,dcs:SurfaceWater
+Uttar Pradesh,Gorakhpur,Birdghat,26.76666667,83.35,148,india_wris/148_Birdghat,dcs:SurfaceWater
+Uttar Pradesh,Hamirpur,Hamirpur,25.95,80.15,149,india_wris/149_Hamirpur,dcs:SurfaceWater
+Uttar Pradesh,Hamirpur,Mohana,25.71666667,79.38333333,149,india_wris/149_Mohana,dcs:SurfaceWater
+Uttar Pradesh,Hamirpur,Shahijina,25.95,80.15,149,india_wris/149_Shahijina,dcs:SurfaceWater
+Uttar Pradesh,Hardoi,Ankinghat,26.92766,80.04271,150,india_wris/150_Ankinghat,dcs:SurfaceWater
+Uttar Pradesh,Jaunpur,Jaunpur,25.75,82.61666667,152,india_wris/152_Jaunpur,dcs:SurfaceWater
+Uttar Pradesh,Jaunpur,Jaunpur (Mg Marg Bridge),25.74417222,82.69008889,152,india_wris/152_JaunpurMgMargBridge,dcs:SurfaceWater
+Uttar Pradesh,Jaunpur,Maighat,25.63333333,82.85,152,india_wris/152_Maighat,dcs:SurfaceWater
+Uttar Pradesh,Kanpur Nagar,Kanpur,26.46948,80.37562,157,india_wris/157_Kanpur,dcs:SurfaceWater
+Uttar Pradesh,Kaushambi,Pratappur,25.36666667,81.66666667,158,india_wris/158_Pratappur,dcs:SurfaceWater
+Uttar Pradesh,Kaushambi,Rajapur,25.4,81.18333333,158,india_wris/158_Rajapur,dcs:SurfaceWater
+Uttar Pradesh,Kaushambi,Shahjadpur,25.66666667,81.41666667,158,india_wris/158_Shahjadpur,dcs:SurfaceWater
+Uttar Pradesh,Kheri,Paliakalan,28.38333333,80.55,159,india_wris/159_Paliakalan,dcs:SurfaceWater
+Uttar Pradesh,Lalitpur,Rajghat,24.83333333,78.2,161,india_wris/161_Rajghat,dcs:SurfaceWater
+Uttar Pradesh,Lucknow,Lucknow (Hanuman Setu),26.86147,80.94656,162,india_wris/162_LucknowHanumanSetu,dcs:SurfaceWater
+Uttar Pradesh,Mainpuri,Bewar,27.23577,79.32977,166,india_wris/166_Bewar,dcs:SurfaceWater
+Uttar Pradesh,Mathura,Mathura (Gokul Barrage),27.43333333,77.73333333,167,india_wris/167_MathuraGokulBarrage,dcs:SurfaceWater
+Uttar Pradesh,Mathura,Mathura (Prayag Ghat),27.5,77.71666667,167,india_wris/167_MathuraPrayagGhat,dcs:SurfaceWater
+Uttar Pradesh,Meerut,Galeta,29.07555556,77.47833333,169,india_wris/169_Galeta,dcs:SurfaceWater
+Uttar Pradesh,Mirzapur,Mirzapur,25.15,82.53333333,170,india_wris/170_Mirzapur,dcs:SurfaceWater
+Uttar Pradesh,Moradabad,Gagan Moradabad,28.82159,78.71962,171,india_wris/171_GaganMoradabad,dcs:SurfaceWater
+Uttar Pradesh,Moradabad,Moradabad,28.82666667,78.80111111,171,india_wris/171_Moradabad,dcs:SurfaceWater
+Uttar Pradesh,Muzaffarnagar,Mawi,29.38527778,77.165,172,india_wris/172_Mawi,dcs:SurfaceWater
+Uttar Pradesh,Pilibhit,Kabir Ganj,28.50194444,80.37944444,173,india_wris/173_KabirGanj,dcs:SurfaceWater
+Uttar Pradesh,Pratapgarh,Pratapgarh,25.93333333,82.0,174,india_wris/174_Pratapgarh,dcs:SurfaceWater
+Uttar Pradesh,Prayagraj,Allahabad,25.4,81.91666667,120,india_wris/120_Allahabad,dcs:SurfaceWater
+Uttar Pradesh,Prayagraj,Meja Road,25.23333333,82.03333333,120,india_wris/120_MejaRoad,dcs:SurfaceWater
+Uttar Pradesh,Prayagraj,Shastri Bridge,25.4366,81.88918056,120,india_wris/120_ShastriBridge,dcs:SurfaceWater
+Uttar Pradesh,Rampur,Rampur,28.786843,78.986678,176,india_wris/176_Rampur,dcs:SurfaceWater
+Uttar Pradesh,Saharanpur,Kalanaur,30.06805556,77.36444444,177,india_wris/177_Kalanaur,dcs:SurfaceWater
+Uttar Pradesh,Shravasti,Bhinga,27.66666667,81.85,181,india_wris/181_Bhinga,dcs:SurfaceWater
+Uttar Pradesh,Siddharth Nagar,Bansi,27.18333333,82.96666667,182,india_wris/182_Bansi,dcs:SurfaceWater
+Uttar Pradesh,Siddharth Nagar,Biskohar,27.37944444,82.55194444,182,india_wris/182_Biskohar,dcs:SurfaceWater
+Uttar Pradesh,Siddharth Nagar,Chandradeepghat,27.13333333,82.55,182,india_wris/182_Chandradeepghat,dcs:SurfaceWater
+Uttar Pradesh,Sitapur,Neemsar,27.34579,80.48034,183,india_wris/183_Neemsar,dcs:SurfaceWater
+Uttar Pradesh,Sonbhadra,Chopan,24.53333333,83.05,184,india_wris/184_Chopan,dcs:SurfaceWater
+Uttar Pradesh,Sonbhadra,Dudhhi,24.22722222,83.27472222,184,india_wris/184_Dudhhi,dcs:SurfaceWater
+Uttar Pradesh,Sultanpur,Sultanpur,26.28333333,82.13333333,185,india_wris/185_Sultanpur,dcs:SurfaceWater
+Uttar Pradesh,Varanasi,Baluaghat,25.42081389,83.18372222,187,india_wris/187_Baluaghat,dcs:SurfaceWater
+Uttar Pradesh,Varanasi,Varanasi,25.31666667,83.03333333,187,india_wris/187_Varanasi,dcs:SurfaceWater
+Uttar Pradesh,Varanasi,V S Bridge,25.25519167,83.02541389,187,india_wris/187_VSBridge,dcs:SurfaceWater
+West Bengal,Birbhum,Tilpara Mihirlal Barrage,23.93333333,87.55,307,india_wris/307_TilparaMihirlalBarrage,dcs:SurfaceWater
+West Bengal,Maldah,Englishbazar,24.99472222,88.14916667,316,india_wris/316_Englishbazar,dcs:SurfaceWater
+West Bengal,Murshidabad,Berhampore,24.09111111,88.24305556,319,india_wris/319_Berhampore,dcs:SurfaceWater
+West Bengal,Murshidabad,Farakka,24.80388889,87.93111111,319,india_wris/319_Farakka,dcs:SurfaceWater
+West Bengal,Murshidabad,Farakka(Hr),24.80222222,87.92166667,319,india_wris/319_FarakkaHr,dcs:SurfaceWater
+West Bengal,Nadia,Chapra,23.50805556,88.54361111,320,india_wris/320_Chapra,dcs:SurfaceWater
+West Bengal,Nadia,Hanskhali,23.35527778,88.60611111,320,india_wris/320_Hanskhali,dcs:SurfaceWater
+West Bengal,Purba Bardhaman,Kalna (Ebb),23.22472222,88.37416667,306,india_wris/306_KalnaEbb,dcs:SurfaceWater
+West Bengal,Purba Bardhaman,Kalna (Flow),23.22472222,88.37416667,306,india_wris/306_KalnaFlow,dcs:SurfaceWater
+West Bengal,Purba Bardhaman,Katwa,23.64861111,88.13888889,306,india_wris/306_Katwa,dcs:SurfaceWater
+West Bengal,Purulia,Muri,23.36666667,85.87527778,321,india_wris/321_Muri,dcs:SurfaceWater

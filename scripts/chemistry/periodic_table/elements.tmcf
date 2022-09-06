@@ -1,0 +1,8 @@
+
+Node: E:Elements->E0
+typeOf: dcs:ChemicalElement
+name: C:Elements->Element
+chemicalName: C:Elements->Element
+chemicalSymbol: C:Elements->Symbol
+atomicNumber: C:Elements->AtomicNumber
+chemicalSubstanceType: C:Elements->Type

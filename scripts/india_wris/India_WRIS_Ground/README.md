@@ -17,7 +17,7 @@ The quality parameters represented in this dataset are:
 - Nitrate (NO3)
 - Residual Sodium Carbonate
 - Sodium (Na)
-- Sodium absorption ratio (SAR)
+- Sodium adsorption ratio (SAR)
 - Sulfate (SO4)
 - Silicon dioxide(SiO2)
 - Hardness Total

@@ -1,33 +1,33 @@
-Node: E:India_WRIS_Rainfall->E0
+Node: E:IndiaWRIS_Rainfall->E0
 typeOf: dcs:AdministrativeArea2
-dcid: C:India_WRIS_Rainfall->lgdCode
+dcid: C:IndiaWRIS_Rainfall->lgdCode
 
-Node: E:India_WRIS_Rainfall->E1
-observationDate: E:India_WRIS_Rainfall->ObsMonth
-observationAbout: E:India_WRIS_Rainfall->lgdCode
+Node: E:IndiaWRIS_Rainfall->E1
+observationDate: E:IndiaWRIS_Rainfall->ObsMonth
+observationAbout: E:IndiaWRIS_Rainfall->lgdCode
 observationPeriod: "P1M"
 unit: dcid:Millimeter
 variableMeasured: dcid:rainfall
-measurementMethod: dcid:India_WRIS
-value: E:India_WRIS_Rainfall->Rainfall Actuall
+measurementMethod: dcid:IndiaWRIS
+value: E:IndiaWRIS_Rainfall->Rainfall Actuall
 typeOf: dcid:StatVarObservation
 
-Node: E:India_WRIS_Rainfall->E2
-observationDate: E:India_WRIS_Rainfall->ObsMonth
-observationAbout: E:India_WRIS_Rainfall->lgdCode
+Node: E:IndiaWRIS_Rainfall->E2
+observationDate: E:IndiaWRIS_Rainfall->ObsMonth
+observationAbout: E:IndiaWRIS_Rainfall->lgdCode
 observationPeriod: "P1M"
 unit: dcid:Millimeter
 variableMeasured: dcid:rainfallAverage
-measurementMethod: dcid:India_WRIS
-value: E:India_WRIS_Rainfall->Rainfall Normal
+measurementMethod: dcid:IndiaWRIS
+value: E:IndiaWRIS_Rainfall->Rainfall Normal
 typeOf: dcid:StatVarObservation
 
-Node: E:India_WRIS_Rainfall->E3
-observationDate: E:India_WRIS_Rainfall->ObsMonth
-observationAbout: E:India_WRIS_Rainfall->lgdCode
+Node: E:IndiaWRIS_Rainfall->E3
+observationDate: E:IndiaWRIS_Rainfall->ObsMonth
+observationAbout: E:IndiaWRIS_Rainfall->lgdCode
 observationPeriod: "P1M"
 unit: dcid:Percent
 variableMeasured: dcid:rainfallDeviation
-measurementMethod: dcid:India_WRIS
-value: E:India_WRIS_Rainfall->Rainfall Deviation
+measurementMethod: dcid:IndiaWRIS
+value: E:IndiaWRIS_Rainfall->Rainfall Deviation
 typeOf: dcid:StatVarObservation

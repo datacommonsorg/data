@@ -1,0 +1,14 @@
+Node: E:WaterQualityStation->E0
+dcid: C:WaterQualityStation->dcid
+typeOf: dcs:WaterQualitySite
+containedIn: E:WaterQualityStation->E1
+latitude: C:WaterQualityStation->WaterStationLatitude
+longitude: C:WaterQualityStation->WaterStationLongitude
+waterSource: C:WaterQualityStation->WaterSource
+name: C:WaterQualityStation->StationName
+
+Node: E:WaterQualityStation->E1
+typeOf: dcs:Place
+lgdCode: C:WaterQualityStation->DistrictCode
+
+
