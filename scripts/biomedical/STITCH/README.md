@@ -38,14 +38,13 @@ This file contained different source codes for various chemicals including: ChEM
 
 chemicals.inchikeys.v5.0.tsv 
 There were some mismatched compound stereo IDs and compound flat IDs included in the inchikeys.tsv file, so these rows from the dataset were excluded. 
-We created a same_as column in the final CSV of the Chemical Compound DCIDs in which the InChIKey in the dataset matches the InChIKey in Data Commons. The value in that column is left blank if the InChIkey in that corresponding row does not match any InChIKey found in Data Commons.
 
 chemicals.v5.0.tsv.gz
 This file contained chemical name, molecular weight, and SMILES string. Some of the longer chemical names are truncated. 
 
 After merging the datasets, we added two columns for the corresponding MeSHDescriptor DCIDs and ChEMBL DCIDs through querying the Biomedical Data Commons. We also added a new DCID that is based on the PubChem Compound ID formatted as 'chem/CID#'. The text columns have been formatted to have double quotes.  
 
-We found that sometimes there was more than 1 ChEMBL ID per PubChem Compound ID, or that the ChEMBL ID in STITCH did not match the ChEMBL ID listed in Data Commons. To account for this, we queried Data Commons for the ChEMBL ID using the InChIKey from STITCH. We included a 'same_as' column to indicate the matching ChEMBL ID found in Data Commons and the ChEMBL ID in STITCH.
+We found that sometimes there was more than 1 ChEMBL ID per PubChem Compound ID. To account for this, we queried Data Commons for the ChEMBL ID using the InChIKey from STITCH. We included a 'same_as' column to indicate the ChEMBL ID found in Data Commons according to the matching InChIKey. The value in that column is left blank if the InChIkey in that corresponding row does not match any InChIKey found in Data Commons.
 
 This import has large data storage and compute requirements to execute. This includes 25 GB for storing the original files.
 
