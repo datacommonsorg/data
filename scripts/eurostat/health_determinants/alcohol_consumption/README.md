@@ -26,6 +26,7 @@ Input files are available for download from url: https://ec.europa.eu/eurostat/w
 The below script will download the data and extract it.
 
 `python scripts/eurostat/health_determinants/common/download_eurostat_input_files.py --import_name alcohol_consumption`
+
 Files are created inside 'input_files' directory.
 
 
