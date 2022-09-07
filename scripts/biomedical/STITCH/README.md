@@ -44,7 +44,7 @@ This file contained chemical name, molecular weight, and SMILES string. Some of 
 
 After merging the datasets, we added two columns for the corresponding MeSHDescriptor DCIDs and ChEMBL DCIDs through querying the Biomedical Data Commons. We also added a new DCID that is based on the PubChem Compound ID formatted as 'chem/CID#'. The text columns have been formatted to have double quotes.  
 
-We found that sometimes there was more than 1 ChEMBL ID per PubChem Compound ID. To account for this, we queried Data Commons for the ChEMBL ID using the InChIKey from STITCH. We included a 'same_as' column to indicate the ChEMBL ID found in Data Commons according to the matching InChIKey. The value in that column is left blank if the InChIkey in that corresponding row does not match any InChIKey found in Data Commons.
+We found that sometimes there was more than 1 ChEMBL ID per PubChem Compound ID. To account for this, we queried Data Commons for the ChEMBL ID using the InChIKey from STITCH. We included a 'same_as' column to indicate the ChEMBL ID found in Data Commons according to the matching InChIKey from STITCH. The value in that column is left blank if the InChIkey in that corresponding row does not match any InChIKey found in Data Commons.
 
 This import has large data storage and compute requirements to execute. This includes 25 GB for storing the original files.
 
