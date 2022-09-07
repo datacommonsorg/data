@@ -20,12 +20,16 @@ The population is categorized by various set of combinations as below:
         
 
 ### Download URL
-The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/health/data/database -> 	Health -> Health determinants (hlth_det).
-The actual URLs are listed in download_input_files.py.
+Input files are available for download from url: https://ec.europa.eu/eurostat/web/health/data/database -> Health -> Health determinants (hlth_det).
+
+### Import Procedure
+The below script will download the data and extract it.
+`python scripts/eurostat/health_determinants/common/download_eurostat_input_files.py --import_name alcohol_consumption`
+Files are created inside 'input_files' directory.
 
 
-#### API Output
-These are the attributes that will be used
+#### Output
+Statistical variables for alcohol consumption are based on below properties available in input files.
 | Attribute                                     | Description                                                   	|
 |-----------------------------------------------|----------------------------------------------------------------------	|
 | time                          		| The Year of the population estimates provided.                	|
@@ -39,8 +43,12 @@ These are the attributes that will be used
 | Country of Citizenship                	| The citizenship of the population.                			|
 
 
-#### Cleaned Data
-Cleaned data will be inside [output/eurostat_population_alcoholconsumption.csv] as a CSV file with the following columns.
+Below script will generate cleansed observation file (csv), mcf and tmcf files.
+`python scripts/eurostat/health_determinants/alcohol_consumption/process.py`
+
+
+#### Cleaned Observation File
+Cleaned data will be persisted as a CSV file in output/eurostat_population_alcohol_consumption.csv with the following columns.
 
 - time
 - geo
@@ -49,24 +57,13 @@ Cleaned data will be inside [output/eurostat_population_alcoholconsumption.csv] 
 - observation
 
 
-#### MCFs and Template MCFs
-- [output/eurostat_population_alcoholconsumption.mcf]
-- [output/eurostat_population_alcoholconsumption.tmcf]
+#### MCFs and Template MCFs File
+MCF and tMCF files are presisted in below mentioned path.
+- [output/eurostat_population_alcohol_consumption.mcf]
+- [output/eurostat_population_alcohol_consumption.tmcf]
 
 
 ### Running Tests
 
 Run the test cases
-
-`python3 -m unittest scripts/eurostat/health_determinants/alcohol_consumption/process_test.py`
-
-
-### Import Procedure
-
-The below script will download the data and extract it.
-
-`/bin/python scripts/eurostat/health_determinants/alcohol_consumption/download_input_files.py`
-
-The below script will clean the data, Also generate final csv, mcf and tmcf files.
-
-`/bin/python scripts/eurostat/health_determinants/alcohol_consumption/process.py`
+`python3 -m unittest discover -v -s scripts/eurostat/health_determinants/alcohol_consumption/ -p process_test.py`
