@@ -24,6 +24,7 @@ Input files are available for download from url: https://ec.europa.eu/eurostat/w
 
 ### Import Procedure
 The below script will download the data and extract it.
+
 `python scripts/eurostat/health_determinants/common/download_eurostat_input_files.py --import_name alcohol_consumption`
 Files are created inside 'input_files' directory.
 
@@ -44,6 +45,7 @@ Statistical variables for alcohol consumption are based on below properties avai
 
 
 Below script will generate cleansed observation file (csv), mcf and tmcf files.
+
 `python scripts/eurostat/health_determinants/alcohol_consumption/process.py`
 
 
@@ -66,4 +68,5 @@ MCF and tMCF files are presisted in below mentioned path.
 ### Running Tests
 
 Run the test cases
+
 `python3 -m unittest discover -v -s scripts/eurostat/health_determinants/alcohol_consumption/ -p process_test.py`
