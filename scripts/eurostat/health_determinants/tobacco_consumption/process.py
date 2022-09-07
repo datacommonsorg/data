@@ -19,7 +19,6 @@ import os
 import sys
 import pandas as pd
 
-
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
@@ -151,7 +150,7 @@ class EuroStatTobaccoConsumption(EuroStat):
             .replace(", Tobacco Products", "")\
             .replace(", Never Used","")\
             .replace(", Formerly","")
-    
+
     # over-ridden parent abstract method
     def _rename_frequency_column(self, df: pd.DataFrame) -> pd.DataFrame:
         return df.rename(columns={'frequenc': 'frequenc_tobacco'})

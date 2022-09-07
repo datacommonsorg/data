@@ -51,7 +51,7 @@ class EuroStatBMI(EuroStat):
                      "{lev_limit}"
                      "{frequency}"
                      "\n{sv_name}\n")
-    
+
     # Temporary keys (activity_temp and duration_temp are used here.
     # As we do correction to property in _property_correction method, we cannot
     # replace value for activity and duration key at the same time when we are

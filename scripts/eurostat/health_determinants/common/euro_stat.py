@@ -72,8 +72,11 @@ class EuroStat:
     _sv_properties_template = {}
     _sv_properties = {}
 
-    def __init__(self, input_files: list, csv_file_path: str=None,
-                 mcf_file_path: str=None, tmcf_file_path: str=None) -> None:
+    def __init__(self,
+                 input_files: list,
+                 csv_file_path: str = None,
+                 mcf_file_path: str = None,
+                 tmcf_file_path: str = None) -> None:
         self._input_files = input_files
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
@@ -98,7 +101,7 @@ class EuroStat:
 
     def _sv_name_correction(self, sv_name: str) -> str:
         None
-    
+
     def _rename_frequency_column(self, df: pd.DataFrame) -> pd.DataFrame:
         return df
 
@@ -127,8 +130,9 @@ class EuroStat:
             'time\\geo': 'time',
             'isced97': 'isced11',
             'quantile': 'quant_inc'
-        }, inplace=True)
-        
+        },
+                  inplace=True)
+
         df = self._rename_frequency_column(df)
 
         if 'quant_inc' in df.columns.values.tolist():
@@ -252,7 +256,7 @@ class EuroStat:
             index=False)
         return self._df
 
-    def generate_mcf(self, df: pd.DataFrame=None) -> None:
+    def generate_mcf(self, df: pd.DataFrame = None) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
