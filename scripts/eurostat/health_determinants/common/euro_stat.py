@@ -84,9 +84,6 @@ class EuroStat:
     # pylint: disable=no-self-use
     # pylint: disable=unused-argument
 
-    def _property_correction(self):
-        None
-
     def set_cleansed_csv_file_path(self, cleansed_csv_file_path: str) -> None:
         self._cleaned_csv_file_path = cleansed_csv_file_path
 

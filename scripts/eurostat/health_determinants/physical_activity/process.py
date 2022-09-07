@@ -113,7 +113,7 @@ class EuroStatPhysicalActivity(EuroStat):
     }
 
     # over-ridden parent abstract method
-    def _propety_correction(self):
+    def _property_correction(self):
         """
         Correcting the property values.
         """
