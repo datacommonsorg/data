@@ -38,7 +38,7 @@ This file contained different source codes for various chemicals including: ChEM
 
 chemicals.inchikeys.v5.0.tsv 
 There were some mismatched compound stereo IDs and compound flat IDs included in the inchikeys.tsv file, so these rows from the dataset were excluded. 
-We created a same_as column in the final CSV of the Chemical Compound DCIDs in which the InChIkey in the dataset matches the InChIkey in Data Commons. The value in that column is left blank if the InChIkey in that corresponding row does not match any InChIkey found in Data Commons.
+We created a same_as column in the final CSV of the Chemical Compound DCIDs in which the InChIKey in the dataset matches the InChIKey in Data Commons. The value in that column is left blank if the InChIkey in that corresponding row does not match any InChIKey found in Data Commons.
 
 chemicals.v5.0.tsv.gz
 This file contained chemical name, molecular weight, and SMILES string. Some of the longer chemical names are truncated. 
