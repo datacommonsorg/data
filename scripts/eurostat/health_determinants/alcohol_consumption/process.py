@@ -11,12 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 """
 This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 import os
 import sys
+import pandas as pd
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
@@ -32,10 +34,10 @@ class EuroStatAlcoholConsumption(EuroStat):
     """
     _import_name = "alcohol_consumption"
 
-    _mcf_template = ("Node: dcid:{sv}\n"
-                     "{sv_name}\n"
-                     "typeOf: dcs:StatisticalVariable\n"
-                     "populationType: dcs:Person"
+    _mcf_template = ("Node: dcid:{sv}"
+                     "\n{sv_name}"
+                     "\ntypeOf: dcs:StatisticalVariable"
+                     "\npopulationType: dcs:Person"
                      "{denominator}"
                      "{healthbehavior}"
                      "{gender}"
@@ -45,9 +47,8 @@ class EuroStatAlcoholConsumption(EuroStat):
                      "{residence}"
                      "{countryofbirth}"
                      "{citizenship}"
-                     "\n"
-                     "statType: dcs:measuredValue\n"
-                     "measuredProperty: dcs:count\n")
+                     "\nstatType: dcs:measuredValue"
+                     "\nmeasuredProperty: dcs:count\n")
 
     _sv_properties_template = {
         "healthbehavior": "\nhealthBehavior: dcs:{proprty_value}",
@@ -89,7 +90,7 @@ class EuroStatAlcoholConsumption(EuroStat):
     }
 
     # over-ridden parent abstract method
-    def _propety_correction(self):
+    def _property_correction(self):
         for k, v in self._sv_properties.items():
             if k == "incomequin":
                 self._sv_properties[k] = v\
@@ -115,6 +116,8 @@ class EuroStatAlcoholConsumption(EuroStat):
             .replace("  "," ")
 
     # pylint: enable=no-self-use
+    def _rename_frequency_column(self, df: pd.DataFrame) -> pd.DataFrame:
+        return df.rename(columns={'frequenc': 'frequenc_alcohol'})
 
 
 if __name__ == '__main__':

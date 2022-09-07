@@ -17,6 +17,8 @@ and generates cleaned CSV, MCF, TMCF file.
 """
 import os
 import sys
+import pandas as pd
+
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
@@ -32,10 +34,10 @@ class EuroStatTobaccoConsumption(EuroStat):
     """
     _import_name = "tobacco_consumption"
 
-    _mcf_template = ("Node: dcid:{sv}\n"
-                     "{sv_name}\n"
-                     "typeOf: dcs:StatisticalVariable\n"
-                     "populationType: dcs:Person"
+    _mcf_template = ("Node: dcid:{sv}"
+                     "\n{sv_name}"
+                     "\ntypeOf: dcs:StatisticalVariable"
+                     "\npopulationType: dcs:Person"
                      "{denominator}"
                      "{frequenc_tobacco}"
                      "{gender}"
@@ -48,9 +50,8 @@ class EuroStatTobaccoConsumption(EuroStat):
                      "{substance}"
                      "{quantity}"
                      "{history}"
-                     "\n"
-                     "statType: dcs:measuredValue\n"
-                     "measuredProperty: dcs:count\n")
+                     "\nstatType: dcs:measuredValue"
+                     "\nmeasuredProperty: dcs:count\n")
 
     _sv_properties_template = {
         "activity": "\nhealthBehavior: dcs:{proprty_value}",
@@ -150,6 +151,10 @@ class EuroStatTobaccoConsumption(EuroStat):
             .replace(", Tobacco Products", "")\
             .replace(", Never Used","")\
             .replace(", Formerly","")
+    
+    # over-ridden parent abstract method
+    def _rename_frequency_column(self, df: pd.DataFrame) -> pd.DataFrame:
+        return df.rename(columns={'frequenc': 'frequenc_tobacco'})
 
     # pylint: enable=no-self-use
 

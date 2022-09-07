@@ -23,6 +23,7 @@ import tempfile
 class CommonTestClass:
     """
     """
+    _df = None
 
     class CommonTestCases(unittest.TestCase):
         """
@@ -45,63 +46,64 @@ class CommonTestClass:
                 test_input_files_directory + os.sep + file
                 for file in ip_test_files
             ]
-            expected_files_directory = os.path.join(self._test_module_directory,
-                                                    "test_files",
-                                                    "expected_files")
+            self._expected_files_directory = os.path.join(
+                self._test_module_directory, "test_files", "expected_files")
 
-            for file_name in os.listdir(expected_files_directory):
+            for file_name in os.listdir(self._expected_files_directory):
                 if file_name.endswith(".csv"):
-                    expected_csv_file = file_name
+                    self._expected_csv_file = file_name
                 elif file_name.endswith(".mcf"):
-                    expected_mcf_file = file_name
+                    self._expected_mcf_file = file_name
                 elif file_name.endswith(".tmcf"):
-                    expected_tmcf_file = file_name
+                    self._expected_tmcf_file = file_name
 
-            expected_csv_file_path = os.path.join(expected_files_directory,
-                                                  expected_csv_file)
+            self._ob = self._import_class(ip_test_files)
+
+        def test_csv(self):
+            expected_csv_file_path = os.path.join(
+                self._expected_files_directory, self._expected_csv_file)
+
             with open(expected_csv_file_path, encoding="UTF-8") as expected_csv:
-                self.expected_csv_data = expected_csv.read()
-
-            expected_mcf_file_path = os.path.join(expected_files_directory,
-                                                  expected_mcf_file)
-            with open(expected_mcf_file_path, encoding="UTF-8") as expected_mcf:
-                self.expected_mcf_data = expected_mcf.read()
-
-            expected_tmcf_file_path = os.path.join(expected_files_directory,
-                                                   expected_tmcf_file)
-            with open(expected_tmcf_file_path,
-                      encoding="UTF-8") as expected_tmcf:
-                self.expected_tmcf_data = expected_tmcf.read()
+                expected_csv_data = expected_csv.read()
 
             with tempfile.TemporaryDirectory() as tmp_dir:
-                cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-                mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-                tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
-                # pylint: disable=not-callable
-                ob = self._import_class(ip_test_files, cleaned_csv_file_path,
-                                        mcf_file_path, tmcf_file_path)
-                ob.generate_csv()
-                ob.generate_mcf()
-                ob.generate_tmcf()
-                # pylint: enable=not-callable
-                with open(cleaned_csv_file_path, encoding="UTF-8") as csv_file:
-                    self.actual_csv_data = csv_file.read()
+                csv_file_path = os.path.join(tmp_dir, "test_census.csv")
+                self._ob.set_cleansed_csv_file_path(csv_file_path)
+                CommonTestClass._df = self._ob.generate_csv()
+                with open(csv_file_path, encoding="UTF-8") as csv_file:
+                    actual_csv_data = csv_file.read()
 
-                with open(mcf_file_path, encoding="UTF-8") as mcf_file:
-                    self.actual_mcf_data = mcf_file.read()
-
-                with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                    self.actual_tmcf_data = tmcf_file.read()
-
-        # pylint: enable=too-many-locals
-        # pylint: disable=deprecated-method
-        def test_csv(self):
-            self.assertEquals(self.expected_csv_data, self.actual_csv_data)
+                self.assertEquals(expected_csv_data, actual_csv_data)
 
         def test_mcf(self):
-            self.assertEquals(self.expected_mcf_data, self.actual_mcf_data)
+            expected_mcf_file_path = os.path.join(
+                self._expected_files_directory, self._expected_mcf_file)
+
+            with open(expected_mcf_file_path, encoding="UTF-8") as expected_mcf:
+                expected_mcf_data = expected_mcf.read()
+
+            with tempfile.TemporaryDirectory() as tmp_dir:
+                mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
+                self._ob.set_mcf_file_path(mcf_file_path)
+                self._ob.generate_mcf(CommonTestClass._df)
+                with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+                    actual_mcf_data = mcf_file.read()
+
+                self.assertEquals(expected_mcf_data, actual_mcf_data)
 
         def test_tmcf(self):
-            self.assertEquals(self.expected_tmcf_data, self.actual_tmcf_data)
+            expected_tmcf_file_path = os.path.join(
+                self._expected_files_directory, self._expected_tmcf_file)
 
-        # pylint: enable=deprecated-method
+            with open(expected_tmcf_file_path,
+                      encoding="UTF-8") as expected_tmcf:
+                expected_tmcf_data = expected_tmcf.read()
+
+            with tempfile.TemporaryDirectory() as tmp_dir:
+                tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+                self._ob.set_tmcf_file_path(tmcf_file_path)
+                self._ob.generate_tmcf()
+                with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+                    actual_tmcf_data = tmcf_file.read()
+
+                self.assertEquals(expected_tmcf_data, actual_tmcf_data)

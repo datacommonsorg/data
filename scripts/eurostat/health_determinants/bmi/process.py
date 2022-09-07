@@ -32,11 +32,11 @@ class EuroStatBMI(EuroStat):
     """
     _import_name = "bmi"
 
-    _mcf_template = ("Node: dcid:{sv}\n"
-                     "typeOf: dcs:StatisticalVariable\n"
-                     "populationType: dcs:Person\n"
-                     "statType: dcs:measuredValue\n"
-                     "measuredProperty: dcs:count"
+    _mcf_template = ("Node: dcid:{sv}"
+                     "\ntypeOf: dcs:StatisticalVariable"
+                     "\npopulationType: dcs:Person"
+                     "\nstatType: dcs:measuredValue"
+                     "\nmeasuredProperty: dcs:count"
                      "{denominator}"
                      "{healthbehavior}"
                      "{education}"
@@ -50,9 +50,12 @@ class EuroStatBMI(EuroStat):
                      "{countryofbirth}"
                      "{lev_limit}"
                      "{frequency}"
-                     "\n{sv_name}"
-                     "\n")
-
+                     "\n{sv_name}\n")
+    
+    # Temporary keys (activity_temp and duration_temp are used here.
+    # As we do correction to property in _property_correction method, we cannot
+    # replace value for activity and duration key at the same time when we are
+    # reading it in loop. Hence temp keys are used.
     _sv_properties_template = {
         "healthbehavior":
             "\nhealthBehavior: dcs:{proprty_value}",
@@ -169,10 +172,9 @@ class EuroStatBMI(EuroStat):
             .replace("To149","To 149")\
             .replace("ACitizen","A Citizen")\
             .replace("Least30", "Least 30")\
-            .replace("Normalweig", "Normalweight")\
             .replace("To"," To ")\
             .replace("Of","Of ")\
-            .replace("Normalweightht","Normal Weight")\
+            .replace("Normalweight","Normal Weight")\
             .replace(" Among Population","")\
             .replace(" Population","")\
             .replace('name: "','name: "Population: ')\

@@ -32,10 +32,10 @@ class EuroStatPhysicalActivity(EuroStat):
     """
     _import_name = "physical_activity"
 
-    _mcf_template = ("Node: dcid:{sv}\n"
-                     "{sv_name}\n"
-                     "typeOf: dcs:StatisticalVariable\n"
-                     "populationType: dcs:Person"
+    _mcf_template = ("Node: dcid:{sv}"
+                     "\n{sv_name}"
+                     "\ntypeOf: dcs:StatisticalVariable"
+                     "\npopulationType: dcs:Person"
                      "{denominator}"
                      "{incomequin}"
                      "{education}"
@@ -49,9 +49,8 @@ class EuroStatPhysicalActivity(EuroStat):
                      "{citizenship}"
                      "{lev_limit}"
                      "{frequency}"
-                     "\n"
-                     "statType: dcs:measuredValue\n"
-                     "measuredProperty: dcs:count\n")
+                     "\nstatType: dcs:measuredValue"
+                     "\nmeasuredProperty: dcs:count\n")
 
     _sv_properties_template = {
         "healthbehavior":
@@ -120,8 +119,9 @@ class EuroStatPhysicalActivity(EuroStat):
         """
         for k, v in self._sv_properties.items():
             if k == "healthbehavior_bmi":
-                self._sv_properties["healthbehavior"] += self._sv_properties[
-                    "healthbehavior_bmi"]
+                self._sv_properties["healthbehavior"] = self._sv_properties[
+                    "healthbehavior"].rstrip(
+                        "\n") + self._sv_properties["healthbehavior_bmi"]
             elif k == "activity_temp":
                 if self._sv_properties["lev_limit"]:
                     self._sv_properties["activity"] = ""

@@ -72,8 +72,8 @@ class EuroStat:
     _sv_properties_template = {}
     _sv_properties = {}
 
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
+    def __init__(self, input_files: list, csv_file_path: str=None,
+                 mcf_file_path: str=None, tmcf_file_path: str=None) -> None:
         self._input_files = input_files
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
@@ -84,11 +84,26 @@ class EuroStat:
     # pylint: disable=no-self-use
     # pylint: disable=unused-argument
 
-    def _propety_correction(self):
+    def _property_correction(self):
+        None
+
+    def set_cleansed_csv_file_path(self, cleansed_csv_file_path: str) -> None:
+        self._cleaned_csv_file_path = cleansed_csv_file_path
+
+    def set_mcf_file_path(self, mcf_file_path: str) -> None:
+        self._mcf_file_path = mcf_file_path
+
+    def set_tmcf_file_path(self, tmcf_file_path: str) -> None:
+        self._tmcf_file_path = tmcf_file_path
+
+    def _property_correction(self):
         None
 
     def _sv_name_correction(self, sv_name: str) -> str:
         None
+    
+    def _rename_frequency_column(self, df: pd.DataFrame) -> pd.DataFrame:
+        return df
 
     # pylint: enable=pointless-statement
     # pylint: enable=unused-argument
@@ -105,15 +120,8 @@ class EuroStat:
         Returns:
             df (pd.DataFrame):
         """
-        split_columns = df.columns.values.tolist()[0]
-        df = split_column(df, split_columns)
-
-        # pylint: disable=anomalous-backslash-in-string
-        # pylint: enable=no-self-use
-        split_columns = split_columns.replace('isced97', 'isced11')\
-                .replace('geo\time','geo').replace('geo\\time','geo')\
-                .replace('time\geo','time').replace('time\\geo','time')\
-                .replace('quantile', 'quant_inc')
+        original_df_columns = df.columns
+        df = split_column(df, df.columns.values.tolist()[0])
 
         df.rename(columns={
             'geo\time': 'geo',
@@ -122,29 +130,12 @@ class EuroStat:
             'time\\geo': 'time',
             'isced97': 'isced11',
             'quantile': 'quant_inc'
-        },
-                  inplace=True)
-        # pylint: enable=anomalous-backslash-in-string
-        if import_name == "alcohol_consumption":
-            split_columns = split_columns.replace('frequenc',
-                                                  'frequenc_alcohol')
-            df.rename(columns={
-                'frequenc': 'frequenc_alcohol',
-            }, inplace=True)
-        elif import_name == "tobacco_consumption":
-            split_columns = split_columns.replace('frequenc',
-                                                  'frequenc_tobacco').replace(
-                                                      'quantile', 'quant_inc')
-            df.rename(columns={
-                'frequenc': 'frequenc_tobacco',
-                'quantile': 'quant_inc'
-            },
-                      inplace=True)
-            if 'quant_inc' in df.columns.values.tolist():
-                df = df[(~(df['quant_inc'] == 'UNK'))]
-        elif import_name == "bmi":
-            if 'quant_inc' in df.columns.values.tolist():
-                df = df[(~(df['quant_inc'] == 'UNK'))]
+        }, inplace=True)
+        
+        df = self._rename_frequency_column(df)
+
+        if 'quant_inc' in df.columns.values.tolist():
+            df = df[(~(df['quant_inc'] == 'UNK'))]
 
         df = df[df['age'] == 'TOTAL']
         df = replace_col_values(df)
@@ -159,17 +150,19 @@ class EuroStat:
                 '\n#########')
             exit(1)
 
-        split_columns_list = split_columns.split(',')
-        if 'time' in split_columns_list:
-            split_columns_list.remove('time')
+        del_columns = list(df.columns.difference(original_df_columns))
+        if 'time' in del_columns:
+            del_columns.remove('time')
             id_vars = ['SV', 'time']
             var_name = 'geo'
-        if 'geo' in split_columns_list:
-            split_columns_list.remove('geo')
+        elif 'geo' in del_columns:
+            del_columns.remove('geo')
             id_vars = ['SV', 'geo']
             var_name = 'time'
+        del_columns.remove('SV')
 
-        df.drop(columns=split_columns_list, inplace=True)
+        df.drop(columns=del_columns, inplace=True)
+
         df = df.melt(id_vars=id_vars,
                      var_name=var_name,
                      value_name='observation')
@@ -262,7 +255,7 @@ class EuroStat:
             index=False)
         return self._df
 
-    def generate_mcf(self) -> None:
+    def generate_mcf(self, df: pd.DataFrame=None) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
@@ -274,6 +267,9 @@ class EuroStat:
             None
         """
         # pylint: disable=R0914
+        if df is not None:
+            self._df = df
+
         final_mcf_template = ""
         sv_list = list(set(self._df["SV"].to_list()))
         sv_list.sort()
@@ -311,7 +307,7 @@ class EuroStat:
             sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
             sv_name = "name: \"" + sv_name + " Population\""
 
-            self._propety_correction()
+            self._property_correction()
             sv_name = self._sv_name_correction(sv_name)
 
             mcf_template_parameters = {

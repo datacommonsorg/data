@@ -31,36 +31,27 @@ from common import import_download_details, download
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
-flags.DEFINE_string("import_name", "alcohol_consumption",
-                    "Import name for which input files will be downloaded")
-
-
-def download_files(download_directory: str, filenames: list, input_url: str,
-                   file_extension: str) -> None:
-    """
-    This Method calls the download function from the commons directory
-    to download all the input files.
-
-    Args:
-        download_directory (str):Location where the files need to be downloaded.
-
-    Returns:
-        None
-    """
-    # pylint: disable=invalid-name
-    for file in filenames:
-        INPUT_URLS = [input_url + str(file) + file_extension]
-        download.download_file(INPUT_URLS, download_directory)
-    # pylint: enable=invalid-name
+flags.DEFINE_enum(
+    "import_name", None,
+    ["alcohol_consumption", "tobacco_consumption", "physical_activity", "bmi"],
+    "Import name for which input files to be downloaded")
+flags.mark_flag_as_required("import_name")
 
 
 def main(_):
     download_details = import_download_details.download_details[
         _FLAGS.import_name]
-    download_path = os.path.dirname((__file__)) + "/../" + _FLAGS.import_name
-    download_files(download_path, download_details["filenames"],
-                   download_details["input_url"],
-                   download_details["file_extension"])
+    download_path = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), '..', _FLAGS.import_name,
+                     "input_files"))
+    os.makedirs(download_path, exist_ok=True)
+
+    for file in download_details["filenames"]:
+        download_files_urls = [
+            download_details["input_url"] + str(file) +
+            download_details["file_extension"]
+        ]
+        download.download_files(download_files_urls, download_path)
 
 
 if __name__ == '__main__':
