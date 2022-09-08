@@ -47,7 +47,7 @@ def download_files(INPUT_URLS, folders) -> None:
             subprocess.run(["unzip", zip_path])
             point2017 = os.listdir()
             for file in point2017:
-                os.rename(file,year+file)
+                os.rename(file, year + file)
         else:
             zipdata = zipfile.ZipFile(zip_path)
             zipinfos = zipdata.infolist()
@@ -56,7 +56,7 @@ def download_files(INPUT_URLS, folders) -> None:
                 zipinfo.filename = year + '_' + zipinfo.filename
                 zipdata.extract(zipinfo)
         # Move files in specific folders to input_files folder
-    
+
     for folder in folders:
         files = os.listdir(os.path.join(_DOWNLOAD_PATH, folder))
         for file in files:
@@ -67,5 +67,6 @@ def download_files(INPUT_URLS, folders) -> None:
     files = os.listdir(_DOWNLOAD_PATH)
     # Delete metadata files present in the folder.
     for file in files:
-        if file.endswith(".txt") or file.endswith(".xlsx") or file.endswith(".pdf"):
+        if file.endswith(".txt") or file.endswith(".xlsx") or file.endswith(
+                ".pdf"):
             os.remove(os.path.join(_DOWNLOAD_PATH, file))

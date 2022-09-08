@@ -41,7 +41,7 @@ _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "name: \"Annual Amount Emissions {pv5}\"\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Emissions\n"
-                 "measurementQualifier: dcs:Annual{pv2}{pv3}{pv4}\n"
+                 "measurementQualifier: dcs:Annual{pv2}{pv3}{pv4}{pv6}\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:amount\n")
 
@@ -56,7 +56,7 @@ _TMCF_TEMPLATE = ("Node: E:national_emissions->E0\n"
                   "value: C:national_emissions->observation\n")
 
 
-def _replace_metadata(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+def _data_standardize(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata and returns the DF.
@@ -92,29 +92,28 @@ def _regularize_columns(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
             'data_set_short_name': 'data set',
             'pollutant_cd': 'pollutant code',
             'uom': 'emissions uom',
-            'total_emissions': 'total emissions'
+            'total_emissions': 'total emissions',
+            'emissions_type_code': 'emissions type code'
         },
                   inplace=True)
         df = df.drop(columns=[
             'tribal_name', 'st_usps_cd', 'county_name', 'data_category_cd',
-            'description', 'emissions_type_code', 'aircraft_engine_type_cd',
-            'emissions_op_type_code'
+            'description', 'aircraft_engine_type_cd', 'emissions_op_type_code'
         ])
         df['pollutant type(s)'] = 'nan'
     elif '2017' in file_path:
         df = df.drop(columns=[
-            'epa region code', 'state', 'fips state code', 'county',
-            'emissions type code', 'aetc', 'reporting period',
-            'emissions operating type', 'sector', 'tribal name',
-            'pollutant desc', 'data category'
+            'epa region code', 'state', 'fips state code', 'county', 'aetc',
+            'reporting period', 'sector', 'tribal name', 'pollutant desc',
+            'data category'
         ])
     elif 'tribes' in file_path:
         df.rename(columns={'tribal name': 'fips code'}, inplace=True)
         df = df.drop(columns=[
             'state', 'fips state code', 'data category', 'reporting period',
-            'emissions operating type', 'emissions type code', 'pollutant desc'
+            'emissions operating type', 'pollutant desc'
         ])
-        df = _replace_metadata(df, 'fips code')
+        df = _data_standardize(df, 'fips code')
         df['pollutant type(s)'] = 'nan'
     else:
         df.rename(columns={
@@ -122,13 +121,14 @@ def _regularize_columns(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
             'data_set': 'data set',
             'pollutant_cd': 'pollutant code',
             'uom': 'emissions uom',
-            'total_emissions': 'total emissions'
+            'total_emissions': 'total emissions',
+            'emissions_type_code': 'emissions type code'
         },
                   inplace=True)
         df = df.drop(columns=[
             'tribal_name', 'fips_state_code', 'st_usps_cd', 'county_name',
             'data_category', 'emission_operating_type', 'pollutant_desc',
-            'emissions_type_code', 'emissions_operating_type'
+            'emissions_operating_type'
         ])
         df['pollutant type(s)'] = 'nan'
     return df
@@ -167,15 +167,30 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
     },
               inplace=True)
     df['year'] = df['year'].str[:4]
-    df = _replace_metadata(df, 'unit')
-    # df = _replace_metadata(df, 'scc')
-    df = _replace_metadata(df, 'pollutant code')
+    df = _data_standardize(df, 'unit')
+    # df = _data_standardize(df, 'scc')
+    df = _data_standardize(df, 'pollutant code')
+    df_emissions_code = df[df['emissions type code'] != '']
+    df_emissions_code = df_emissions_code[
+        df_emissions_code['emissions type code'].notnull()]
+    if df_emissions_code.empty == False:
+        df_emissions_code = _data_standardize(df_emissions_code,
+                                              'emissions type code')
+        df_emissions_code['SV'] = (
+            'Annual_Amount_Emissions_' +
+            df_emissions_code['emissions type code'] + '_' +
+            df_emissions_code['pollutant code'].astype(str) + '_SCC_' +
+            df_emissions_code['scc'].astype(str))
+        print(df_emissions_code)
     df['SV'] = ('Annual_Amount_Emissions_' + df['pollutant code'].astype(str) +
                 '_SCC_' + df['scc'].astype(str))
+    df = pd.concat([df, df_emissions_code])
     df['SV'] = df['SV'].str.replace('_nan', '')
-    df = df.drop(
-        columns=['scc', 'pollutant code', 'pollutant type(s)', 'fips code'])
-
+    df = df.drop(columns=[
+        'scc', 'pollutant code', 'emissions type code', 'pollutant type(s)',
+        'fips code'
+    ])
+    print(df)
     return df
 
 
@@ -226,14 +241,20 @@ class USAirEmissionTrends:
                 "statType": "dcs:measuredValue",
                 "measuredProperty": "dcs:amount"
             }
-            emission_type = pollutant = ''
+            emission_type = pollutant = code = ''
             sv_property = sv.split("_")
             source = '\nepaSccCode: dcs:EPA_SCC/' + sv_property[-1]
             scc_name = replace_source_metadata[sv_property[-1]]
             scc_name = scc_name + " (" + sv_property[-1] + ")"
             # sv_checker['epaSccCode'] = sv_property[-1]
-
-            for i in sv_property[3:-2]:
+            pollutant_start = 3
+            if sv_property[3] in [
+                    'Exhaust', 'Evaporation', 'Refueling', 'BName', 'TName'
+            ]:
+                code = "\nemissionTypeCode: dcs:" + sv_property[3]
+                scc_name = scc_name + ", " + sv_property[3]
+                pollutant_start = 4
+            for i in sv_property[pollutant_start:-2]:
                 pollutant = pollutant + i + '_'
             # sv_checker['emittedThing'] = 'dcs:' + pollutant.rstrip('_')
             pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')
@@ -248,7 +269,8 @@ class USAirEmissionTrends:
                 pv2=source,
                 pv3=pollutant_value,
                 pv4=emission_type,
-                pv5=pollutant_name + ", " + scc_name) + "\n"
+                pv5=pollutant_name + ", " + scc_name,
+                pv6=code) + "\n"
 
         # Writing Genereated MCF to local path.
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
@@ -276,17 +298,19 @@ class USAirEmissionTrends:
             print(file_name)
             df = _national_emissions(file_path)
             final_df = pd.concat([final_df, df])
-            sv_list += df["SV"].to_list()
 
+        sv_list = final_df["SV"].to_list()
         final_df = final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'observation'])
         final_df['observation'].replace('', np.nan, inplace=True)
         final_df.dropna(subset=['observation'], inplace=True)
-        final_df['observation'] = np.where(
-            final_df['unit']=='Pound',
-            final_df['observation']/2000,
-            final_df['observation'])
-        final_df = final_df.groupby(['geo_Id', 'year', 'SV']).sum().reset_index()
+        final_df['observation'] = np.where(final_df['unit'] == 'Pound',
+                                           final_df['observation'] / 2000,
+                                           final_df['observation'])
+        print(final_df)
+        final_df = final_df.groupby(['geo_Id', 'year',
+                                     'SV']).sum().reset_index()
+        print(final_df)
         final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
@@ -312,8 +336,8 @@ def main(_):
     cleaned_csv_path = os.path.join(output_file_path, csv_name)
     mcf_path = os.path.join(output_file_path, mcf_name)
     tmcf_path = os.path.join(output_file_path, tmcf_name)
-    loader = USAirEmissionTrends(ip_files, cleaned_csv_path, mcf_path,\
-        tmcf_path)
+    loader = USAirEmissionTrends(ip_files, cleaned_csv_path, mcf_path,
+                                 tmcf_path)
     loader.process()
 
 

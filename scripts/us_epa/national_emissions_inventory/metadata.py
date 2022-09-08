@@ -1,4 +1,9 @@
 replace_metadata = {
+    "R":"Refueling",
+    "E":"Evaporation",
+    "X":"Exhaust",
+    "B":"BName",
+    "T":"TName",
     "PM-CON":"PMCondensible",
     "PM10-FIL":"PM10Filterable",
     "PM25-FIL":"PM2.5Filterable",
