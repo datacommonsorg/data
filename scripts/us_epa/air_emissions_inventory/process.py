@@ -56,7 +56,7 @@ _TMCF_TEMPLATE = (
     "value: C:airpollution_emission_trends_tier1->observation\n")
 
 
-def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
+def _aggregate_columns(df: pd.DataFrame) -> pd.DataFrame:
     """
     Aggregates the columns based on SV
 
@@ -105,7 +105,7 @@ def _add_missing_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def _replace_metadata(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+def _data_standardize(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     """
     Replaces values of a single column into true values
     from metadata returns the DF.
@@ -192,8 +192,8 @@ def _state_emissions(file_path: str) -> pd.DataFrame:
     df['geo_Id'] = 'geoId/' + df['geo_Id']
     # Dropping Unwanted Columns
     df = df.drop(columns=['State FIPS', 'State', 'Tier 1 Code'])
-    df = _replace_metadata(df, 'Pollutant')
-    df = _replace_metadata(df, 'Tier 1 Description')
+    df = _data_standardize(df, 'Pollutant')
+    df = _data_standardize(df, 'Tier 1 Description')
     df['SV'] = df['Tier 1 Description'] + '-' + df['Pollutant']
     df = df.drop(columns=['Tier 1 Description', 'Pollutant'])
     # Changing the years present as columns into row values.
@@ -205,7 +205,7 @@ def _state_emissions(file_path: str) -> pd.DataFrame:
     # Putting a logic to change it to proper year
     df['year'] = df['year'] + np.where(df['year'] >= 90, 1900, 2000)
     # Making copy and using group by to get Aggregated Values.
-    df_agg = _add_missing_columns(df)
+    df_agg = _aggregate_columns(df)
     df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
     df = pd.concat([df, df_agg])
     return df
@@ -250,8 +250,8 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
                (df['Source Category'] == 'Miscellaneous')].index)
         # Addition of pollutant type to the df by taking sheet name.
         df['pollutant'] = sheet
-        df = _replace_metadata(df, 'pollutant')
-        df = _replace_metadata(df, 'Source Category')
+        df = _data_standardize(df, 'pollutant')
+        df = _data_standardize(df, 'Source Category')
         df['SV'] = df['Source Category'] + "-" + df['pollutant']
         df = df.drop(columns=['Source Category', 'pollutant'])
         # Changing the years present as columns into row values.
@@ -259,7 +259,7 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
         final_df = pd.concat([final_df, df])
 
     final_df['geo_Id'] = 'country/USA'
-    final_df_agg = _add_missing_columns(final_df)
+    final_df_agg = _aggregate_columns(final_df)
     final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
     final_df = pd.concat([final_df, final_df_agg])
     return final_df
@@ -293,7 +293,7 @@ class USAirPollutionEmissionTrends:
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
 
-    def _generate_mcf(self, sv_list) -> None:
+    def _generate_mcf(self, sv_list: list) -> dict:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
@@ -350,20 +350,19 @@ class USAirPollutionEmissionTrends:
         if not os.path.exists(output_path):
             os.mkdir(output_path)
         sv_list = []
-
+        source_file_to_method_mapping = {
+            "national_tier1_caps": _national_emissions,
+            "state_tier1_caps": _state_emissions
+        }
         for file_path in self._input_files:
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
             # Read till -5 inorder to remove the .xlsx extension
             file_name = file_path.split("/")[-1][:-5]
-            source_file_to_method_mapping = {
-                "national_tier1_caps": _national_emissions,
-                "state_tier1_caps": _state_emissions
-            }
             df = source_file_to_method_mapping[file_name](file_path)
             final_df = pd.concat([final_df, df])
-            sv_list += df["SV"].to_list()
 
+        sv_list = final_df["SV"].to_list()
         final_df = final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'observation'])
         final_df['observation'].replace('', np.nan, inplace=True)
@@ -374,7 +373,8 @@ class USAirPollutionEmissionTrends:
         self._generate_tmcf()
         final_df.loc[:, ('SV')] = final_df['SV'].replace(sv_replacement,
                                                          regex=True)
-        final_df['observation'] = final_df['observation'].astype(float) * _SCALING_FACTOR
+        final_df['observation'] = final_df['observation'].astype(
+            float) * _SCALING_FACTOR
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
 
 
@@ -383,8 +383,10 @@ def main(_):
     try:
         ip_files = os.listdir(input_path)
     except Exception:
-        logger.info("Run the download.py script first.")
-        sys.exit(1)
+        download_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                     "download.py")
+        os.system("python " + download_file)
+        ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
@@ -395,8 +397,8 @@ def main(_):
     cleaned_csv_path = os.path.join(output_file_path, csv_name)
     mcf_path = os.path.join(output_file_path, mcf_name)
     tmcf_path = os.path.join(output_file_path, tmcf_name)
-    loader = USAirPollutionEmissionTrends(ip_files, cleaned_csv_path, mcf_path,\
-        tmcf_path)
+    loader = USAirPollutionEmissionTrends(ip_files, cleaned_csv_path, mcf_path,
+                                          tmcf_path)
     loader.process()
 
 
