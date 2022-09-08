@@ -1,0 +1,5 @@
+CSV_FILE_NAME = "us_nces_public_school.csv"
+MCF_FILE_NAME = "us_nces_public_school.mcf"
+TMCF_FILE_NAME = "us_nces_public_school.tmcf"
+SCHOOL_TYPE = "publicschool"
+SPLIT_HEADER_ON_SCHOOL_TYPE = "[Public School]"
