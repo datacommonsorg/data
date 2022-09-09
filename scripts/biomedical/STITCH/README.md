@@ -48,8 +48,6 @@ We found that sometimes there was more than 1 ChEMBL ID per STITCH ID. To accoun
 
 We also found that there was multiple PubChem Substance and Compound IDs per STITCH ID. A lot of these IDs were similar, but not exact matches to the chemical compound in a given row. We decided to consider the "PS" and "PC" columns to be the PubChem IDs of similar substances and compounds. Because of this, we removed the PubChem Compound ID values that were an exact match to the STITCH ID of the particular chemical on a given row.
 
-This import has large data storage and compute requirements to execute. This includes 25 GB for storing the original files.
-
 `chemical_chemical.links.detailed.v5.0.tsv`
 This file contained informtion about drug-drug interactions and various scores. 
 
@@ -68,6 +66,9 @@ This file contains  the archived UniProt accession IDs that are no longer includ
 `archived_ensembls.txt`
 This file contains the archived Ensembl Protein IDs that are no longer included the Ensembl database. 
 
+STITCH identified proteins through their STRING ID (which is derived from the Ensembl Protein ID), but a number of these IDs were deprecated and no longer maintained in the last few versions of Ensembl. This means that we were unable to map a few hundred out of 15 million protein Ensembl IDs back to its UniProt name. 
+
+This import has large data storage and compute requirements to execute. This includes 25 GB for storing the original files.
 
 ### License
 
