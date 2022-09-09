@@ -96,7 +96,7 @@ All data downloaded for this import belongs to STITCH. Any works found on the ST
 
 
 #### Test Scripts
-[`test_compile_stitch.py`](test_compile_stitch.py) tests the compile_stitch.py script.
+[`test_compile_stitch.py`](test_stitch.py) tests compile_stitch.py, drug_interactions.py, create_mapping_file.py, protein_drug_interactions.py, and  protein_actions.py scripts.
 
 
 ### Files
