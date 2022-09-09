@@ -103,13 +103,21 @@ All data downloaded for this import belongs to STITCH. Any works found on the ST
 
 #### Test Files
 [`sources_test.tsv`](test-data/sources_test.tsv) subsetted the sources.tsv file to only include PubChem Compound IDs 1-20
+
 [`inchikeys_test.tsv`](test-data/inchikeys_test.tsv) subsetted the inchikeys.tsv file to only include PubChem Compound IDs 1-20
+
 [`chemicals_test.tsv`](test-data/chemicals_test.tsv) subsetted the chemicals.tsv file to only include PubChem Compound IDs 1-20
+
 [`drug_interactions_test.tsv`](test-data/drug_interactions_test.tsv) subsetted the chemical_chemical_interactions.tsv file to include 10 drug-drug interactions
+
 [`protein_drug_interactions_test.tsv`](test-data/protein_drug_interactions_test.tsv) subsetted the protein_chemical_interactions.tsv file to include 10 protein-drug interactions
+
 [`actions_test.tsv`](test-data/actions_test.tsv) subsetted the actions.tsv file to include 10 protein-drug interactions
+
 [`uniprot_id_mapping_test.csv`](test-data/uniprot_id_mapping_test.csv) subsetted only the UniProt names needed for the [`actions_test.tsv`](test-data/actions_test.tsv) and [`protein_drug_interactions_test.tsv`](test-data/protein_drug_interactions_test.tsv)
+
 [`archived_accessions_test.csv`](test-data/archived_accessions_test.csv) subsetted only the UniProt accession IDs needed for the [`actions_test.tsv`](test-data/actions_test.tsv) and [`protein_drug_interactions_test.tsv`](test-data/protein_drug_interactions_test.tsv)
+
 [`archived_emsembls_test.csv`](test-data/archived_emsembls_test.csv) subsetted only the Ensembl Protein IDs contained in [`actions_test.tsv`](test-data/actions_test.tsv) and [`protein_drug_interactions_test.tsv`](test-data/protein_drug_interactions_test.tsv)
 
 
