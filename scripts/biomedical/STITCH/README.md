@@ -108,9 +108,9 @@ All data downloaded for this import belongs to STITCH. Any works found on the ST
 [`drug_interactions_test.tsv`](drug_interactions_test.tsv) subsetted the chemical_chemical_interactions.tsv file to include 10 drug-drug interactions
 [`protein_drug_interactions_test.tsv`](protein_drug_interactions_test.tsv) subsetted the protein_chemical_interactions.tsv file to include 10 protein-drug interactions
 [`actions_test.tsv`](actions_test.tsv) subsetted the actions.tsv file to include 10 protein-drug interactions
-[`uniprot_name_mapping_test.dat`](uniprot_name_mapping.dat) subsetted only the UniProt names needed for the `actions_test.tsv` and `protein_drug_interactions_test.tsv`
-[`archived_accessions_test.txt`](archived_accessions.txt) subsetted only the UniProt accession IDs needed for the `actions_test.tsv` and `protein_drug_interactions_test.tsv`
-[`archived_emsembls_test.txt`](archived_ensembls.txt) subsetted only the Ensembl Protein IDs contained in `actions_test.tsv` and `protein_drug_interactions_test.tsv`
+[`uniprot_id_mapping_test.csv`](uniprot_id_mapping_test.csv) subsetted only the UniProt names needed for the `actions_test.tsv` and `protein_drug_interactions_test.tsv`
+[`archived_accessions_test.txt`](archived_accessions.csv) subsetted only the UniProt accession IDs needed for the `actions_test.tsv` and `protein_drug_interactions_test.tsv`
+[`archived_emsembls_test.txt`](archived_ensembls.csv) subsetted only the Ensembl Protein IDs contained in `actions_test.tsv` and `protein_drug_interactions_test.tsv`
 
 
 ## Schema
