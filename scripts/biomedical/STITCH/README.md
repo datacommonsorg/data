@@ -119,7 +119,7 @@ The schema for the data sources for the drug information, drug interactions, and
 ### tMCFs
 [`drugs.tmcf`](tmcf/drugs.tmcf)
 
-[`mapping.tmcf`](tmcf/mapping.tmcf)
+[`mapping_protein_names.tmcf`](tmcf/mapping_protein_names.tmcf)
 
 [`drug_interactions.tmcf`](tmcf/drug_interactions.tmcf)
 
@@ -129,17 +129,17 @@ The schema for the data sources for the drug information, drug interactions, and
 
 ### Output Schema MCF Files
 
-[`drugs.mcf`](schema/drugs.mcf)
+[`drugs.mcf`](https://github.com/mariam16548/schema/blob/main/biomedical_schema/drugs.mcf)
 
-[`mapping.mcf`](schema/mapping.mcf)
+[`mapping_protein_names.mcf`](https://github.com/mariam16548/schema/blob/main/biomedical_schema/mapping_protein_names.mcf)
 
 [`drug_interactions.mcf`](https://github.com/mariam16548/schema/blob/main/biomedical_schema/drug_interactions.mcf)
 
-[`protein_drug_interactions.mcf`](schema/protein_drug_interactions.mcf)
+[`protein_drug_interactions.mcf`](https://github.com/mariam16548/schema/blob/main/biomedical_schema/protein_drug_interactions.mcf)
 
-[`actions.mcf`](schema/actions.mcf)
+[`actions.mcf`](https://github.com/mariam16548/schema/blob/main/biomedical_schema/actions.mcf)
 
-[`actions_enum.mcf`](schema/actions_enum.mcf)
+[`actions_enum.mcf`](https://github.com/mariam16548/schema/blob/main/biomedical_schema/actions_enum.mcf)
 
 
 ## Examples
