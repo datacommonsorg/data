@@ -27,19 +27,19 @@ The majority of the data was downloaded as TSVs from the [STITCH website](http:/
 
 ### Overview
 
-This directory stores the scripts used to download, clean, and convert the STITCH datasets into four CSV files. The files being drugs.csv, drug_interactions.csv, protein_drug_interactions.csv, and actions.csv. There is also a mapping file, mapping_protein_names.csv, created from UniProt and Ensembl data to map Ensembl IDs to the protein name. This file was needed to create the protein_drug_interactions.csv and actions.csv.
+This directory stores the scripts used to download, clean, and convert the STITCH datasets into four CSV files. The files being `drugs.csv`, `drug_interactions.csv`, `protein_drug_interactions.csv`, and `actions.csv`. There is also a mapping file, `mapping_protein_names.csv`, created from UniProt and Ensembl data to map Ensembl IDs to the protein name. This file was needed to create the `protein_drug_interactions.csv` and `actions.csv`.
 
 ### Notes and Caveats
 
 All three datasets have stereo compound IDs (CID) and flat CIDs, which is what we used to merge them. 
 
-chemical.sources.v5.0.tsv
+`chemical.sources.v5.0.tsv`
 This file contained different source codes for various chemicals including: ChEMBL, ChEBI, ATC, BindingDB, KEGG, PS (PubChem Substance IDs of similar compounds), and PC (PubChem Compound IDs of similar compounds). We removed the PC values that were an exact match to the CID of the particular chemical on a given row.
 
-chemicals.inchikeys.v5.0.tsv 
+`chemicals.inchikeys.v5.0.tsv`
 There were some mismatched compound stereo IDs and compound flat IDs included in the inchikeys.tsv file, so these rows from the dataset were excluded. 
 
-chemicals.v5.0.tsv.gz
+`chemicals.v5.0.tsv.gz`
 This file contained chemical name, molecular weight, and SMILES string. Some of the longer chemical names are truncated. 
 
 After merging the datasets, we added two columns for the corresponding MeSHDescriptor DCIDs and ChEMBL DCIDs through querying the Biomedical Data Commons. We also added a new DCID that is based on the PubChem Compound ID formatted as 'chem/CID#'. The text columns have been formatted to have double quotes.  
@@ -48,22 +48,22 @@ We found that sometimes there was more than 1 ChEMBL ID per PubChem Compound ID.
 
 This import has large data storage and compute requirements to execute. This includes 25 GB for storing the original files.
 
-chemical_chemical.links.detailed.v5.0.tsv
+`chemical_chemical.links.detailed.v5.0.tsv`
 This file contained informtion about drug-drug interactions and various scores. 
 
-protein_chemical.links.transfer.v5.0.tsv
+`protein_chemical.links.transfer.v5.0.tsv`
 This file contained informtion about protein-drug interactions and various scores. 
 
-actions.v5.0.tsv
+`actions.v5.0.tsv`
 This file contained informtion about protein-drug interactions and what the effects of these interactions were.
 
-uniprot_mapped_ids.dat
+`uniprot_mapped_ids.dat`
 This file contains information about the different IDs included in the UniProt database.
 
-uniprot_archived_ids.txt
+`uniprot_archived_ids.txt`
 This file contains  the archived UniProt accession IDs that are no longer included the UniProt database and their respective updated accession ID.
 
-archived_ensembls.txt
+`archived_ensembls.txt`
 This file contains  the archived Ensembl Protein IDs that are no longer included the Ensembl database. 
 
 
