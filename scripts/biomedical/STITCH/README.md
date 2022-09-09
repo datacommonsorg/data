@@ -146,7 +146,7 @@ The schema for the data sources for the drug information, drug interactions, and
 
 ### Run Tests
 
-1. To test [`compile_stitch.py`](compile_stitch.py), ['create_mapping_file.py'](create_mapping_file.py), ['drug_interactions.py'](drug_interactions.py), ['protein_drug_interactions.py'](protein_drug_interactions.py), ['actions.py'](actions.py) run:
+1. To test [`compile_stitch.py`](compile_stitch.py), [`create_mapping_file.py`](create_mapping_file.py), [`drug_interactions.py`](drug_interactions.py), [`protein_drug_interactions.py`](protein_drug_interactions.py), [`actions.py`](actions.py) run:
 
 ```
 python test_stitch.py
