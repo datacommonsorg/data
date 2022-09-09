@@ -34,7 +34,7 @@ This directory stores the scripts used to download, clean, and convert the STITC
 All three datasets have stereo compound IDs (CID) and flat CIDs, which is what we used to merge them. 
 
 `chemical.sources.v5.0.tsv`
-This file contained different source codes for various chemicals including: ChEMBL, ChEBI, ATC, BindingDB, KEGG, PS (PubChem Substance IDs of similar compounds), and PC (PubChem Compound IDs of similar compounds). We removed the PC values that were an exact match to the CID of the particular chemical on a given row.
+This file contained different source codes for various chemicals including: ChEMBL, ChEBI, ATC, BindingDB, KEGG, PS (PubChem Substance ID), and PC (PubChem Compound ID). 
 
 `chemicals.inchikeys.v5.0.tsv`
 There were some mismatched compound stereo IDs and compound flat IDs included in the inchikeys.tsv file, so these rows from the dataset were excluded. 
@@ -44,7 +44,9 @@ This file contained chemical name, molecular weight, and SMILES string. Some of 
 
 After merging the datasets, we added two columns for the corresponding MeSHDescriptor DCIDs and ChEMBL DCIDs through querying the Biomedical Data Commons. We also added a new DCID that is based on the PubChem Compound ID formatted as 'chem/CID#'. The text columns have been formatted to have double quotes.  
 
-We found that sometimes there was more than 1 ChEMBL ID per PubChem Compound ID. To account for this, we queried Data Commons for the ChEMBL ID using the InChIKey from STITCH. We included a 'same_as' column to indicate the ChEMBL ID found in Data Commons according to the matching InChIKey from STITCH. The value in that column is left blank if the InChIkey in that corresponding row does not match any InChIKey found in Data Commons.
+We found that sometimes there was more than 1 ChEMBL ID per STITCH ID. To account for this, we queried Data Commons for the ChEMBL ID using the InChIKey from STITCH. We included a 'same_as' column to indicate the ChEMBL ID found in Data Commons according to the matching InChIKey from STITCH. The value in that column is left blank if the InChIkey in that corresponding row does not match any InChIKey found in Data Commons.
+
+We also found that there was multiple PubChem Substance and Compound IDs per STITCH ID. A lot of these IDs were similar, but not exact matches to the chemical compound in a given row. We decided to consider the "PS" and "PC" columns to be the PubChem IDs of similar substances and compounds. Because of this, we removed the PubChem Compound ID values that were an exact match to the STITCH ID of the particular chemical on a given row.
 
 This import has large data storage and compute requirements to execute. This includes 25 GB for storing the original files.
 
@@ -64,7 +66,7 @@ This file contains information about the different IDs included in the UniProt d
 This file contains  the archived UniProt accession IDs that are no longer included the UniProt database and their respective updated accession ID.
 
 `archived_ensembls.txt`
-This file contains  the archived Ensembl Protein IDs that are no longer included the Ensembl database. 
+This file contains the archived Ensembl Protein IDs that are no longer included the Ensembl database. 
 
 
 ### License
