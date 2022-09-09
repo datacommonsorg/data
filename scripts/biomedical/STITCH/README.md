@@ -13,7 +13,7 @@
       - [Scripts](#scripts)
       - [Files](#files)
      - [Schema Artifacts](#schema)
-       - [Scripts](#scripts)
+       - [tMCF Files](#tmcf-files)
        - [Output Schema MCF Files](#output-schema-mcf-files)
   - [Examples](#examples)
     - [Run Tests](#run-testers)
@@ -116,7 +116,7 @@ All data downloaded for this import belongs to STITCH. Any works found on the ST
 ## Schema
 The schema for the data sources for the drug information, drug interactions, and the mapping file to get protein names were generated without any scripts. 
 
-### tMCFs
+### tMCF Files
 [`drugs.tmcf`](tmcf/drugs.tmcf)
 
 [`mapping_protein_names.tmcf`](tmcf/mapping_protein_names.tmcf)
