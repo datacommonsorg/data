@@ -129,7 +129,7 @@ The schema for the data sources for the drug information, drug interactions, and
 
 ### Output Schema MCF Files
 
-[`drugs.mcf`]
+[`drugs.mcf`](schema/drugs.mcf)
 
 [`mapping.mcf`](schema/mapping.mcf)
 
