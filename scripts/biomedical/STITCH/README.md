@@ -118,7 +118,7 @@ All data downloaded for this import belongs to STITCH. Any works found on the ST
 
 [`archived_uniprot_test.csv`](test-data/archived_uniprot_test.csv) subsetted only the UniProt archived accession IDs needed for the [`actions_test.tsv`](test-data/actions_test.tsv) and [`protein_drug_interactions_test.tsv`](test-data/protein_drug_interactions_test.tsv)
 
-[`archived_emsembls_test.csv`](test-data/archived_emsembls_test.csv) subsetted only the Ensembl Protein IDs contained in [`actions_test.tsv`](test-data/actions_test.tsv) and [`protein_drug_interactions_test.tsv`](test-data/protein_drug_interactions_test.tsv)
+[`archived_ensembls_test.csv`](test-data/archived_ensembls_test.csv) subsetted only the Ensembl Protein IDs contained in [`actions_test.tsv`](test-data/actions_test.tsv) and [`protein_drug_interactions_test.tsv`](test-data/protein_drug_interactions_test.tsv)
 
 
 ## Schema
