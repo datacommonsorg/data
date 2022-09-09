@@ -133,7 +133,7 @@ The schema for the data sources for the drug information, drug interactions, and
 
 [`mapping.mcf`](schema/mapping.mcf)
 
-[`drug_interactions.mcf`](schema/drug_interactions.mcf)
+[`drug_interactions.mcf`](https://github.com/mariam16548/schema/blob/main/biomedical_schema/drug_interactions.mcf)
 
 [`protein_drug_interactions.mcf`](schema/protein_drug_interactions.mcf)
 
