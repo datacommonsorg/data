@@ -108,9 +108,9 @@ All data downloaded for this import belongs to STITCH. Any works found on the ST
 [`drug_interactions_test.tsv`](drug_interactions_test.tsv) subsetted the chemical_chemical_interactions.tsv file to include 10 drug-drug interactions
 [`protein_drug_interactions_test.tsv`](protein_drug_interactions_test.tsv) subsetted the protein_chemical_interactions.tsv file to include 10 protein-drug interactions
 [`actions_test.tsv`](actions_test.tsv) subsetted the actions.tsv file to include 10 protein-drug interactions
-[`uniprot_name_mapping.dat`](uniprot_name_mapping.dat) 
-[`archived_accessions.txt`](archived_accessions.txt)
-[`archived_emsembls.txt`](archived_ensembls.txt)
+[`uniprot_name_mapping_test.dat`](uniprot_name_mapping.dat) subsetted only the UniProt names needed for the `actions_test.tsv` and `protein_drug_interactions_test.tsv`
+[`archived_accessions_test.txt`](archived_accessions.txt) subsetted only the UniProt accession IDs needed for the `actions_test.tsv` and `protein_drug_interactions_test.tsv`
+[`archived_emsembls_test.txt`](archived_ensembls.txt) subsetted only the Ensembl Protein IDs contained in `actions_test.tsv` and `protein_drug_interactions_test.tsv`
 
 
 ## Schema
@@ -161,7 +161,7 @@ python test_stitch.py
 bash download.sh
 ```
 
-2. Run the script to clean and merge the three datasets into an output CSV, which is needed for import into the graph. 
+2. Run the script to clean and merge the three datasets into `drugs.csv`. 
 
 ```
 python compile_stitch.py 
@@ -170,29 +170,29 @@ python compile_stitch.py
   scratch/chemicals_no_header.tsv
 ```
 
-3. 
+3. Run the script to clean and format drug-drug interactions data and output `drug_interactions.csv`.
   
 ```
 python drug_interactions.py 
   scratch/chemical_chemical_interactions.tsv
 ```
 
-4. 
+4. Run the script to clean and merge UniProt and Ensembl data and output `mapping_protein_names.csv`.
 ```
 python create_mapping_file.py 
+  scratch/archived_emsembls.txt
   scratch/uniprot_mapped_ids.dat
   scratch/uniprot_archived_ids.txt
 ```
 
-5.
+5. Run the script to clean and map protein names in the protein-drug interactions data and output `protein_drug_interactions.csv`.
 ```
 python protein_drug_interactions.py 
   scratch/protein_chemical_interactions.tsv
   scratch/mapping_protein_names.csv
 ```
 
-6. 
-  
+6. Run the script to clean and map protein names in the protein-drug interactions data and output `protein_actions.csv`.
 ```
 python actions.py 
   scratch/actions.tsv
