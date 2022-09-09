@@ -116,9 +116,20 @@ All data downloaded for this import belongs to STITCH. Any works found on the ST
 ## Schema
 The schema for the data sources for the drug information, drug interactions, and the mapping file to get protein names were generated without any scripts. 
 
+### tMCFs
+[`drugs.tmcf`](tmcf/drugs.tmcf)
+
+[`mapping.tmcf`](tmcf/mapping.tmcf)
+
+[`drug_interactions.tmcf`](tmcf/drug_interactions.tmcf)
+
+[`protein_drug_interactions.tmcf`](tmcf/protein_drug_interactions.tmcf)
+
+[`actions.tmcf`](tmcf/actions.tmcf)
+
 ### Output Schema MCF Files
 
-[`drugs.mcf`](schema/drugs.mcf)
+[`drugs.mcf`]
 
 [`mapping.mcf`](schema/mapping.mcf)
 
