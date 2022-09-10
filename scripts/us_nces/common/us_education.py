@@ -31,6 +31,8 @@ import pandas as pd
 import numpy as np
 from absl import app, flags
 
+pd.set_option("display.max_columns", None)
+
 from common.replacement_functions import replace_values
 from common.prop_conf import *
 
@@ -58,17 +60,16 @@ class USEducation:
     _split_headers_using_school_type = ""
     _possible_data_columns = None
     _exclude_data_columns = None
-    _additional_mcf_nodes = None
 
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
-        self._input_files = input_files
-        self._cleaned_csv_file_path = csv_file_path
-        self._mcf_file_path = mcf_file_path
-        self._tmcf_file_path = tmcf_file_path
+    def __init__(self, input_path: list, output_dir: str, csv_file_name: str,
+                 mcf_file_name: str, tmcf_file_name: str) -> None:
+        self._input_files = [os.path.join(input_path, file) for file in os.listdir(input_path) if file != ".DS_Store"]
+        self._cleaned_csv_file_path = os.path.join(output_dir, csv_file_name)
+        self._mcf_file_path = os.path.join(output_dir, mcf_file_name)
+        self._tmcf_file_path = os.path.join(output_dir, tmcf_file_name)
         self._df = pd.DataFrame()
-        if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
-            os.mkdir(os.path.dirname(self._cleaned_csv_file_path))
+        if not os.path.exists(output_dir):
+            os.mkdir(output_dir)
 
     def input_file_to_df(self, f_path: str) -> pd.DataFrame:
         """Convert a file path to a dataframe."""
@@ -135,7 +136,6 @@ class USEducation:
                 data_df[curr_prop_column] = data_df[curr_prop_column].fillna('None')
             else:
                 data_df[curr_prop_column] = 'None'
-
         return data_df
 
     def _generate_prop(self, data_df: pd.DataFrame):
@@ -157,21 +157,27 @@ class USEducation:
             data_df["curr_prop"] = prop_
             column = conf["column"]
             curr_value_column = "prop_" + prop_
+
             unique_rows = data_df.drop_duplicates(subset=[column]).reset_index(
                 drop=True)
             unique_rows[curr_value_column] = unique_rows[column]
             unique_rows = self._apply_regex(unique_rows, conf,
                                             curr_value_column)
-            
 
+            if conf.get("update_value", False):
+                unique_rows[curr_value_column] = unique_rows[curr_value_column].apply(
+                conf["update_value"])
+            
             unique_rows[curr_value_column] = unique_rows[[
                 "curr_prop", curr_value_column
             ]].apply(conf["pv_format"], axis=1)
+
+            unique_rows[[curr_value_column]] = replace_values(unique_rows[[curr_value_column]], replace_with_all_mappers=True)
+
             curr_val_mapper = dict(
                 zip(unique_rows[column], unique_rows[curr_value_column]))
-            data_df[curr_value_column] = data_df[column].map(curr_val_mapper)
 
-        print(data_df)
+            data_df[curr_value_column] = data_df[column].map(curr_val_mapper)
         return data_df
 
     def _generate_stat_vars(self, data_df: pd.DataFrame,
@@ -188,7 +194,7 @@ class USEducation:
                                     data_df[prop_cols].apply(
                                     lambda x: ','.join(x.dropna().astype(str)),
                                     axis=1) + \
-                                    '}'
+                                '}'
 
         data_df['prop_node'] = data_df['prop_node'].apply(json.loads)
         data_df['sv_name'] = data_df['prop_node'].apply(get_statvar_dcid)
@@ -232,7 +238,6 @@ class USEducation:
             drop=True)
 
         unique_props = unique_props.replace('', np.nan)
-        # unique_props["prop_measuredProperty"] = np.where(unique_props["prop_measurementDenominator"].isin(["None"]), unique_props["prop_measurementDenominator"], '"measuredProperty": "dcs:percent"' )
         stat_var_with_dcs, stat_var_without_dcs = self._generate_stat_vars(
             unique_props, prop_cols)
         mcf_mapper = self._generate_mcf_data(unique_props, prop_cols)
@@ -268,55 +273,25 @@ class USEducation:
             r = re.compile(pattern)
             data_cols += list(filter(r.match, curr_cols))
 
-        for col in self._exclude_data_columns:
-            if col in data_cols:
-                data_cols.remove(col)
+        for pattern in self._exclude_data_columns:
+            pat = f"^((?!{pattern}).)*$"
+            r = re.compile(pat)
+            data_cols = list(filter(r.match, data_cols))
         
-        print(data_cols)
         df_cleaned = df_cleaned.melt(
             id_vars=['school_state_code', 'year'],
             value_vars=data_cols,
             var_name='sv_name',
             value_name='observation')
         
-        
         df_cleaned['observation'] = pd.to_numeric(df_cleaned['observation'],
                                                   errors='coerce')
-        print(set(df_cleaned["sv_name"].values.tolist()))
-        print(df_cleaned["sv_name"].head())
-        df_cleaned = replace_values(df_cleaned)
-        print(df_cleaned["sv_name"].head())
+
         df_cleaned["observation"] = df_cleaned["observation"].replace(
             to_replace={'': pd.NA})
         df_cleaned = df_cleaned.dropna(subset=['observation'])
 
         return df_cleaned
-
-    def _merge_csvs_helper(self, df_left, df_right):
-        cols_only_in_right = df_right.columns.difference(df_left.columns)
-        return pd.merge(df_left,
-                        df_right[cols_only_in_right],
-                        left_index=True,
-                        right_index=True,
-                        how='outer')
-
-    def get_join_col(self):
-        """Get the join column for a given school type."""
-
-        school_type_to_join_col = {
-            'district': [
-                'Agency ID - NCES Assigned [District] Latest available year'
-            ],
-            'publicschool': [
-                'School ID - NCES Assigned [Public School] Latest available year'
-            ],
-            'privateschool': [
-                'School ID - NCES Assigned [Private School] Latest available year'
-            ],
-        }
-        if self._school_type in school_type_to_join_col:
-            return school_type_to_join_col[self._school_type]
-        raise ValueError(f'Invalid school_type {(self._school_type)}')
 
     def generate_csv(self) -> pd.DataFrame:
         """
@@ -332,22 +307,21 @@ class USEducation:
         
         dfs = []
         df_parsed = None
-        join_col = self.get_join_col()
+        df_merged = pd.DataFrame()
         for input_file in self._input_files:
             raw_df = self.input_file_to_df(input_file)
             df_parsed = self._parse_file(raw_df, self._school_type)
-            def _parse_teacher_cols(raw_df):
-                
-            df_teachers = self._parse_teacher_cols(raw_df, self._school_type)
-            
+            dfs.append(df_parsed)
+        for df in dfs:
+            df_merged = pd.concat([df_merged, df]) 
+        df_merged = self._generate_prop(df_merged)
+        df_parsed.to_csv("t.csv", index=False)
+        df_merged = self._generate_stat_var_and_mcf(df_merged)
 
-        df_parsed = self._generate_prop(df_parsed)
-        df_parsed = self._generate_stat_var_and_mcf(df_parsed)
 
-
-        df_final = df_parsed[["school_state_code","year","sv_name","observation"]]
+        df_final = df_merged[["school_state_code","year","sv_name","observation"]]
         df_final.to_csv(self._cleaned_csv_file_path, index=False)
-        self._df = df_parsed
+        self._df = df_merged
 
     def generate_mcf(self) -> None:
         """
@@ -364,12 +338,6 @@ class USEducation:
             subset=["prop_node"]).reset_index(drop=True)
 
         mcf_ = unique_nodes_df.sort_values(by=["prop_node"])["mcf"].tolist()
-        
-
-        if self._additional_mcf_nodes:
-            for xtra_node in self._additional_mcf_nodes:
-                mcf_.append(xtra_node)
-
         mcf_ = "\n\n".join(mcf_)
 
         with open(self._mcf_file_path, "w", encoding="UTF-8") as file:

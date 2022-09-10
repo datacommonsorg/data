@@ -30,91 +30,92 @@ _RELIGIOUS = {
 }
 
 _SCHOOL_TYPE = {
-    "1-Regular Elementary or Secondary": \
+    "1-Regular Elementary or Secondary":
         "NCES_PrivateSchoolTypeRegularElementaryOrSecondary",
-    "2-Montessori": \
+    "2-Montessori":
         "NCES_PrivateSchoolTypeMontessori",
-    "3-Special Program Emphasis": \
+    "3-Special Program Emphasis":
         "NCES_PrivateSchoolTypeSpecialProgramEmphasis",
-    "4-Special Education": \
+    "4-Special Education":
         "NCES_PrivateSchoolTypeSpecialEducation",
-    "5-Career/technical/vocational": \
+    "5-Career/technical/vocational":
         "NCES_PrivateSchoolTypeCareerOrTechnicalOrVocational",
-    "6-Alternative/other": \
+    "6-Alternative/other":
         "NCES_PrivateSchoolTypeAlternativeOrOther",
-    "7-Early Childhood Program/child care center": \
+    "7-Early Childhood Program/child care center":
         "NCES_PrivateSchoolTypeEarlyChildhoodProgramOrChildCareCenter",
-    "†": "NCES_PrivateSchoolTypeDataMissing"
+    "†":
+        "NCES_PrivateSchoolTypeDataMissing"
 }
 
 _SCHOOL_GRADE = {
-    "Grade 5 Students [Private School] 1997-98"
     "Prekindergarten": "PreKindergarten",
-    "Prekindergarten Students":"PreKindergarten",
     "Kindergarten": "Kindergarten",
-    "Kindergarten Students":  "Kindergarten",
     "Transitional Kindergarten": "TransitionalKindergarten",
     "1st grade": "SchoolGrade1",
-    "Grade 1 Students": "SchoolGrade1",
+    "Grade 1": "SchoolGrade1",
     "2nd grade": "SchoolGrade2",
-    "Grade 2 Students": "SchoolGrade2",
+    "Grade 2": "SchoolGrade2",
     "3rd grade": "SchoolGrade3",
-    "Grade 3 Students": "SchoolGrade3",
+    "Grade 3": "SchoolGrade3",
     "4th grade": "SchoolGrade4",
-    "Grade 4 Students": "SchoolGrade4",
+    "Grade 4": "SchoolGrade4",
     "5th grade": "SchoolGrade5",
-    "Grade 5 Students": "SchoolGrade5",
+    "Grade 5": "SchoolGrade5",
     "6th grade": "SchoolGrade6",
-    "Grade 6 Students": "SchoolGrade6",
+    "Grade 6": "SchoolGrade6",
     "7th grade": "SchoolGrade7",
-    "Grade 7 Students": "SchoolGrade7",
+    "Grade 7": "SchoolGrade7",
     "8th grade": "SchoolGrade8",
-    "Grade 8 Students": "SchoolGrade8",
+    "Grade 8": "SchoolGrade8",
     "9th grade": "SchoolGrade9",
-    "Grade 9 Students": "SchoolGrade9",
+    "Grade 9": "SchoolGrade9",
     "10th grade": "SchoolGrade10",
-    "Grade 10 Students": "SchoolGrade10",
+    "Grade 10": "SchoolGrade10",
     "11th grade": "SchoolGrade11",
-    "Grade 11 Students": "SchoolGrade11",
+    "Grade 11": "SchoolGrade11",
     "12th grade": "SchoolGrade12",
-    "Grade 12 Students": "SchoolGrade12",
+    "Grade 12": "SchoolGrade12",
     "13th grade": "SchoolGrade13",
+    "Grade 13": "SchoolGrade13",
     "†": "YetToDefine",
     "All Ungraded": "AllUngrade",
-   
-    
+    "Adult Education": "AdultEducation"
 }
 
+# pylint:disable=line-too-long
 _SCHOOL_LEVEL = {
-    "1-Elementary (school has one or more of grades K-6 and does not have any grade higher than the 8th grade).": "ElementarySchool",
-    "2-Secondary (school has one or more of grades 7-12 and does not have any grade lower than 7th grade).": "SecondarySchool",
-    "3-Combined (school has one or more of grades K-6 and one or more of grades 9-12. Schools in which all students are ungraded are also classified as combined).": "ElementarySchool__SecondarySchool"
+    "1-Elementary (school has one or more of grades K-6 and does not have any grade higher than the 8th grade).":
+        "ElementarySchool",
+    "2-Secondary (school has one or more of grades 7-12 and does not have any grade lower than 7th grade).":
+        "SecondarySchool",
+    "3-Combined (school has one or more of grades K-6 and one or more of grades 9-12. Schools in which all students are ungraded are also classified as combined).":
+        "ElementarySchool__SecondarySchool"
 }
+# pylint:enable=line-too-long
 
 _RACE_ = {
-    "American Indian/Alaska Native Students": "AmericanIndianOrAlaskaNative",
-    "Percentage of American Indian/Alaska Native Students": "Percent_AmericanIndianOrAlaskaNative",
-    "Asian or Asian/Pacific Islander Students": "AsianOrPacificIslander",
-    "Percentage of Asian or Asian/Pacific Islander Students": "Percent_AsianOrPacificIslander",
-    "Black or African American Students":"BlackOrAfricanAmericanAlone",
-    "Percentage of Black Students":"Percent_BlackOrAfricanAmericanAlone",
-    'Nat. Hawaiian or Other Pacific Isl. Students':'HawaiianNativeOrPacificIslander',
-    'Percentage of Nat. Hawaiian or Other Pacific Isl. Students':'Percent_HawaiianNativeOrPacificIslander',
-    "Hispanic Students":"HispanicOrLatino",
-    "Percentage of Hispanic Students":"Percent_HispanicOrLatino",
-    'Two or More Races Students':'TwoOrMoreRaces',
-    'Percentage of Two or More Races Students':'Percent_TwoOrMoreRaces',
-    'White Students':'White',
-    'Percentage of White Students':'Percent_White'
+    "American Indian/Alaska Native": "AmericanIndianOrAlaskaNative",
+    "Asian or Asian/Pacific Islander": "AsianOrPacificIslander",
+    "Black or African American": "BlackOrAfricanAmericanAlone",
+    'Nat. Hawaiian or Other Pacific Isl.': 'HawaiianNativeOrPacificIslander',
+    "Hispanic": "HispanicOrLatino",
+    'White': 'White',
+    "Two or More Races": "TwoOrMoreRaces",
+    "Black": "BlackAlone"
 }
 
-_TEACHER = { 
-    "Pupil/Teacher Ratio": "Percent_Student_AsAFractionOf_Count_Teacher",
-    "Full-Time Equivalent (FTE) Teachers": "Count_Teacher"
+_LUNCH = {
+    "Reduced-price Lunch": "ReducedLunch",
+    "Free and Reduced Lunch": "FreeOrReducedLunch",
+    "Free Lunch": "FreeLunch"
 }
 
-def replace_values(data_df: pd.DataFrame):
 
+def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
+    """
+    Replaces columns values with the defined mappers.
+    """
     cols_mapper = {
         "Coeducational": _COEDUCATIONAL,
         "School's Religious Affiliation or Orientation": _RELIGIOUS,
@@ -122,13 +123,16 @@ def replace_values(data_df: pd.DataFrame):
         "Highest Grade Taught": _SCHOOL_GRADE,
         "School Type": _SCHOOL_TYPE,
         "School Level": _SCHOOL_LEVEL,
-        # "Race": _RACE_,
-        "sv_name": [_RACE_, _SCHOOL_GRADE, _TEACHER]
+        "Race": _RACE_,
+        "Lunch": _LUNCH
     }
 
     df_columns = data_df.columns.to_list()
     for column, replacements in cols_mapper.items():
-       if column in df_columns:
+        if replace_with_all_mappers:
+            data_df = data_df.replace(replacements, regex=True)
+            continue
+        if column in df_columns:
             if isinstance(replacements, list):
                 for replacement in replacements:
                     data_df = data_df.replace({column: replacement})

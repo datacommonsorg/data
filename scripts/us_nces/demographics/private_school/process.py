@@ -44,23 +44,16 @@ class NCESPrivateSchool(USEducation):
     _split_headers_using_school_type = SPLIT_HEADER_ON_SCHOOL_TYPE
     _possible_data_columns = POSSIBLE_DATA_COLUMNS
     _exclude_data_columns = EXCLUDE_DATA_COLUMNS
-    _additional_mcf_nodes = ADDITIONAL_MCF_NODES
 
 if __name__ == '__main__':
     input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "input_files")
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files if file != ".DS_Store"]
 
     # Defining Output Files
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+    output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "output_files")
 
-    cleaned_csv_path = os.path.join(data_file_path, CSV_FILE_NAME)
-    mcf_path = os.path.join(data_file_path, MCF_FILE_NAME)
-    tmcf_path = os.path.join(data_file_path, TMCF_FILE_NAME)
-
-    loader = NCESPrivateSchool(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
+    loader = NCESPrivateSchool(input_path, output_file_path, CSV_FILE_NAME, MCF_FILE_NAME, TMCF_FILE_NAME)
     loader.generate_csv()
     loader.generate_mcf()
     # loader.generate_tmcf()
