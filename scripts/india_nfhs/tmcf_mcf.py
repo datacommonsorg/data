@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import csv
 import pandas as pd
 import os
 import json
@@ -78,6 +79,8 @@ dict_isoCode = {
     "All India": "IN"
 }
 
+csv_path = "data/6821/6821_source_data.csv"
+
 TMCF_ISOCODE = """Node: E:{dataset_name}->E0
 typeOf: schema:Place
 isoCode: C:{dataset_name}->isoCode
@@ -103,6 +106,11 @@ measuredProperty: dcs:{statvar}
 statType: dcs:measuredValue
 """
 
+with open('india_nfhs.json') as json_file:
+    cols_to_nodes = json.load(json_file)
+
+module_dir = os.path.dirname(__file__)
+
 class NFHSDataLoaderBase(object):
     """
     An object to clean .xls files under 'data/' folder and convert it to csv
@@ -127,7 +135,22 @@ class NFHSDataLoaderBase(object):
         self.cols_to_extract = list(self.cols_dict.keys())[3:]
 
     def generate_csv(self):
-        pass
+        df = pd.read_csv(csv_path)
+        for i in df['srcStateName']:
+            # print(i)
+            for j in dict_isoCode.keys():
+                state = i.lower()
+                if i.lower() == j.lower():
+                    df['srcStateName'] = df['srcStateName'].str.replace(i, dict_isoCode[j])
+
+        for i in df['Year']:
+            if i == '2019-20':
+                df['Year'] = df['Year'].str.replace(i, '2020')
+            else:
+                df['Year'] = df['Year'].str.replace(i, '2016')
+        
+        df.rename(columns=cols_to_nodes,inplace=True)
+        df.to_csv('DataComplete.csv', index=False)
 
     def create_mcf_tmcf(self):
         """
@@ -161,11 +184,6 @@ class NFHSDataLoaderBase(object):
 
                     statvars_written.append(self.cols_dict[variable])
 
-with open('india_nfhs.json') as json_file:
-    cols_to_nodes = json.load(json_file)
-
-module_dir = os.path.dirname(__file__)
-
 if __name__ == '__main__':
     dataset_name = "NFHS_Health"
     data_folder = os.path.join(module_dir, '../data/')
@@ -175,3 +193,4 @@ if __name__ == '__main__':
                                module_dir=module_dir)
 
     loader.create_mcf_tmcf()
+    # loader.generate_csv()
