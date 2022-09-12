@@ -172,7 +172,9 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
     df = _data_standardize(df, 'pollutant code')
     df_emissions_code = df[df['emissions type code'] != '']
     df_emissions_code = df_emissions_code[
-        df_emissions_code['emissions type code'].notnull()]
+        (df_emissions_code['emissions type code'].notnull()) &
+        (df_emissions_code['emissions type code'] != "B") &
+        (df_emissions_code['emissions type code'] != "T")]
     if df_emissions_code.empty == False:
         df_emissions_code = _data_standardize(df_emissions_code,
                                               'emissions type code')
