@@ -269,6 +269,19 @@ class USAirPollutionEmissionTrends:
             f_out.write(final_mcf_template.rstrip('\n'))
         return sv_replacement
 
+    def generate_csv(self, final_df: pd.DataFrame) -> None:
+        """
+        This method generates CSV file w.r.t dataframe.
+
+        Args:
+            final_df (pd.DataFrame): df as the input, to generate csv.
+
+        Returns:
+            None
+        """
+        # Writing Genereated Final DF to local path as CSV.
+        final_df.to_csv(self._cleaned_csv_file_path, index=False)
+
     def process(self):
         """
         This Method calls the required methods to generate
@@ -312,7 +325,7 @@ class USAirPollutionEmissionTrends:
                                                          regex=True)
         final_df['observation'] = final_df['observation'].astype(
             float) * _SCALING_FACTOR
-        final_df.to_csv(self._cleaned_csv_file_path, index=False)
+        self.generate_csv(final_df)
 
 
 def main(_):
