@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python Script is config file
-for us nces demographic private school.
+Script to automate the testing for EuroStat Alcohol Consumption process script.
 """
+import os
+import sys
 
-CSV_FILE_NAME = "us_nces_demographics_private_school.csv"
-MCF_FILE_NAME = "us_nces_demographics_private_school.mcf"
-TMCF_FILE_NAME = "us_nces_demographics_private_school.tmcf"
-SCHOOL_TYPE = "private_school"
-SPLIT_HEADER_ON_SCHOOL_TYPE = "[Private School]"
+_COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(1, _COMMON_PATH)
+# pylint: disable=wrong-import-position
+from process import EuroStatAlcoholConsumption
+from common.unitest_common_methods import CommonTestClass
+# pylint: enable=wrong-import-position
 
-POSSIBLE_DATA_COLUMNS = [".*Students.*", ".*Teacher.*", "Percentage.*"]
 
-EXCLUDE_DATA_COLUMNS = [
-    "Total Students", "Prekindergarten and Kindergarten Students",
-    "Ungraded Students", "Grades 1-8 Students", "Grades 9-12 Students"
-]
+class AlcoholConsumptionTest(CommonTestClass.CommonTestCases):
+    _import_class = EuroStatAlcoholConsumption
+    _test_module_directory = os.path.dirname(__file__)

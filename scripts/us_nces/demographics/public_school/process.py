@@ -31,29 +31,46 @@ sys.path.insert(1, MODULE_DIR + '/../..')
 # pylint:disable=wildcard-import
 from common.us_education import USEducation
 from config import *
+
 # pylint:enable=wrong-import-position
 # pylint:enable=import-error
 # pylint:disable=wildcard-import
 
+
+# pylint:disable=too-few-public-methods
 class NCESPublicSchool(USEducation):
     """
     This Class has requried methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
-    _school_type = SCHOOL_TYPE
+    _import_name = SCHOOL_TYPE
     _split_headers_using_school_type = SPLIT_HEADER_ON_SCHOOL_TYPE
     _exclude_data_columns = EXCLUDE_DATA_COLUMNS
     _possible_data_columns = POSSIBLE_DATA_COLUMNS
+
+
+# pylint:enable=too-few-public-methods
 
 if __name__ == '__main__':
     input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "input_files")
 
+    input_files = [
+        os.path.join(input_path, file)
+        for file in sorted(os.listdir(input_path))
+        if file != ".DS_Store"
+    ]
+
     # Defining Output Files
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output_files")
+                                    "output_files")
 
-    loader = NCESPublicSchool(input_path, output_file_path, CSV_FILE_NAME, MCF_FILE_NAME, TMCF_FILE_NAME)
+    cleaned_csv_path = os.path.join(output_file_path, CSV_FILE_NAME)
+    mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
+    tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
+
+    loader = NCESPublicSchool(input_files, cleaned_csv_path, mcf_path,
+                              tmcf_path)
     loader.generate_csv()
     loader.generate_mcf()
-    # loader.generate_tmcf()
+    loader.generate_tmcf()

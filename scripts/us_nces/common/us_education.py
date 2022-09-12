@@ -12,24 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-This Python module is generalized to work with different Eurostat import such as
-Physical Activity, BMI, Alcohol Consumption, Tobacco Consumption...
+This Python module is generalized to work with different USEducation import
+such as Private Education & Public Education.
 
-EuroStat class in this module provides methods to generate processed CSV, MCF &
+USEducation class in this module provides methods to generate processed CSV, MCF &
 TMCF files.
-
-_propety_correction() and _sv_name_correction() are abstract methods, these 
-method needs to implemented by Subclasses.
 """
-import functools
 import io
 import json
 import os
 import sys
 import re
+from telnetlib import TM
 import pandas as pd
 import numpy as np
-from absl import app, flags
 
 pd.set_option("display.max_columns", None)
 
@@ -41,35 +37,40 @@ CODEDIR = os.path.dirname(__file__)
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))
 from util.statvar_dcid_generator import get_statvar_dcid
 
-_FLAGS = flags.FLAGS
-default_input_path = os.path.join(CODEDIR, "input_files")
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
-
-_TMCF_TEMPLATE = ("{school_type}")
-
-
 
 class USEducation:
     """
-    USEducation is a base class which provides common implementation for generating 
-    CSV, MCF and tMCF files.
+    USEducation is a base class which provides common implementation for
+    generating CSV, MCF and tMCF files.
     """
     # Below variables will be initialized by sub-class (import specific)
-    _school_type = ""
+    _import_name = ""
     _default_mcf_template = ""
     _split_headers_using_school_type = ""
     _possible_data_columns = None
     _exclude_data_columns = None
 
-    def __init__(self, input_path: list, output_dir: str, csv_file_name: str,
-                 mcf_file_name: str, tmcf_file_name: str) -> None:
-        self._input_files = [os.path.join(input_path, file) for file in os.listdir(input_path) if file != ".DS_Store"]
-        self._cleaned_csv_file_path = os.path.join(output_dir, csv_file_name)
-        self._mcf_file_path = os.path.join(output_dir, mcf_file_name)
-        self._tmcf_file_path = os.path.join(output_dir, tmcf_file_name)
+    def __init__(self,
+                 input_files: list,
+                 cleaned_csv_path: str = None,
+                 mcf_file_path: str = None,
+                 tmcf_file_path: str = None) -> None:
+        self._input_files = input_files
+        self._cleaned_csv_file_path = cleaned_csv_path
+        self._mcf_file_path = mcf_file_path
+        self._tmcf_file_path = tmcf_file_path
         self._df = pd.DataFrame()
-        if not os.path.exists(output_dir):
-            os.mkdir(output_dir)
+        if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
+            os.mkdir(os.path.dirname(self._cleaned_csv_file_path))
+
+    def set_cleansed_csv_file_path(self, cleansed_csv_file_path: str) -> None:
+        self._cleaned_csv_file_path = cleansed_csv_file_path
+
+    def set_mcf_file_path(self, mcf_file_path: str) -> None:
+        self._mcf_file_path = mcf_file_path
+
+    def set_tmcf_file_path(self, tmcf_file_path: str) -> None:
+        self._tmcf_file_path = tmcf_file_path
 
     def input_file_to_df(self, f_path: str) -> pd.DataFrame:
         """Convert a file path to a dataframe."""
@@ -83,7 +84,7 @@ class USEducation:
             return pd.read_csv(f_content)
 
     def _extract_year_from_headers(self, headers: list) -> str:
-        year_pattern = r"(\[(Private|Public) School\])(\s)(?P<year>\d\d\d\d-\d\d)"
+        year_pattern = r"(\[District||(Private|Public) School\])(\s)(?P<year>\d\d\d\d-\d\d)"
         for header in headers:
             match = re.search(year_pattern, header)
             if match:
@@ -130,10 +131,12 @@ class USEducation:
         if regex:
             pattern = regex["pattern"]
             position = regex["position"]
-            if True in data_df[curr_prop_column].str.contains(pattern).values.tolist():
+            if True in data_df[curr_prop_column].str.contains(
+                    pattern).values.tolist():
                 data_df[curr_prop_column] = data_df[curr_prop_column].str.split(
                     pattern, expand=True)[position]
-                data_df[curr_prop_column] = data_df[curr_prop_column].fillna('None')
+                data_df[curr_prop_column] = data_df[curr_prop_column].fillna(
+                    'None')
             else:
                 data_df[curr_prop_column] = 'None'
         return data_df
@@ -165,14 +168,15 @@ class USEducation:
                                             curr_value_column)
 
             if conf.get("update_value", False):
-                unique_rows[curr_value_column] = unique_rows[curr_value_column].apply(
-                conf["update_value"])
-            
+                unique_rows[curr_value_column] = unique_rows[
+                    curr_value_column].apply(conf["update_value"])
+
             unique_rows[curr_value_column] = unique_rows[[
                 "curr_prop", curr_value_column
             ]].apply(conf["pv_format"], axis=1)
-
-            unique_rows[[curr_value_column]] = replace_values(unique_rows[[curr_value_column]], replace_with_all_mappers=True)
+            unique_rows[[curr_value_column
+                        ]] = replace_values(unique_rows[[curr_value_column]],
+                                            replace_with_all_mappers=True)
 
             curr_val_mapper = dict(
                 zip(unique_rows[column], unique_rows[curr_value_column]))
@@ -198,19 +202,21 @@ class USEducation:
 
         data_df['prop_node'] = data_df['prop_node'].apply(json.loads)
         data_df['sv_name'] = data_df['prop_node'].apply(get_statvar_dcid)
-        data_df["sv_name"] = np.where(data_df["prop_measurementDenominator"].isin([np.nan]), 
-                            data_df["sv_name"],
-                            data_df["sv_name"].str.replace("Count", "Percent", n=1)
-                            )
+        data_df["sv_name"] = np.where(
+            data_df["prop_measurementDenominator"].isin([np.nan]),
+            data_df["sv_name"], data_df["sv_name"].str.replace("Count",
+                                                               "Percent",
+                                                               n=1))
         data_df['prop_node'] = data_df['sv_name'].apply(SV_NODE_FORMAT)
 
         stat_var_with_dcs = dict(zip(data_df["all_prop"], data_df['prop_node']))
-        stat_var_without_dcs = dict(zip(data_df["all_prop"], data_df['sv_name']))
+        stat_var_without_dcs = dict(zip(data_df["all_prop"],
+                                        data_df['sv_name']))
 
         return (stat_var_with_dcs, stat_var_without_dcs)
 
     def _generate_mcf_data(self, data_df: pd.DataFrame,
-                      prop_cols: list) -> pd.DataFrame:
+                           prop_cols: list) -> pd.DataFrame:
 
         data_df['mcf'] = data_df['prop_node'] + \
                     '\n' + \
@@ -229,7 +235,7 @@ class USEducation:
         Returns:
             _type_: _description_
         """
-        prop_cols = ["prop_" + col for col in SV_PROP_ORDER]
+        prop_cols = ["prop_" + col for col in sorted(SV_PROP_ORDER)]
 
         data_df["all_prop"] = ""
         for col in prop_cols:
@@ -264,26 +270,35 @@ class USEducation:
                 df_cleaned[col].astype('str').str.strip()
 
         df_cleaned = self._clean_columns(df_cleaned)
-        df_cleaned["school_state_code"] = df_cleaned[[
-            "School ID - NCES Assigned", "ANSI/FIPS State Code"
-        ]].apply("_".join, axis=1)
+
+        if self._import_name == "private_school":
+            df_cleaned["school_state_code"] = \
+                "nces/" + df_cleaned["School ID - NCES Assigned"] + \
+                df_cleaned["ANSI/FIPS State Code"]
+        elif self._import_name == "public_school":
+            df_cleaned["school_state_code"] = \
+                "nces/" + df_cleaned["School ID - NCES Assigned"]
+        elif self._import_name == "district_school":
+            df_cleaned["school_state_code"] = \
+                "geoId/sch" + df_cleaned["Agency ID - NCES Assigned"]
+
         curr_cols = df_cleaned.columns.values.tolist()
         data_cols = []
-        for pattern in self._possible_data_columns:
-            r = re.compile(pattern)
-            data_cols += list(filter(r.match, curr_cols))
 
         for pattern in self._exclude_data_columns:
             pat = f"^((?!{pattern}).)*$"
             r = re.compile(pat)
-            data_cols = list(filter(r.match, data_cols))
-        
-        df_cleaned = df_cleaned.melt(
-            id_vars=['school_state_code', 'year'],
-            value_vars=data_cols,
-            var_name='sv_name',
-            value_name='observation')
-        
+            curr_cols = list(filter(r.match, curr_cols))
+
+        for pattern in self._possible_data_columns:
+            r = re.compile(pattern)
+            data_cols += list(filter(r.match, curr_cols))
+
+        df_cleaned = df_cleaned.melt(id_vars=['school_state_code', 'year'],
+                                     value_vars=data_cols,
+                                     var_name='sv_name',
+                                     value_name='observation')
+
         df_cleaned['observation'] = pd.to_numeric(df_cleaned['observation'],
                                                   errors='coerce')
 
@@ -304,22 +319,32 @@ class USEducation:
         Returns:
             pd.DataFrame
         """
-        
+
         dfs = []
         df_parsed = None
         df_merged = pd.DataFrame()
+        c = 0
+
         for input_file in self._input_files:
+            c += 1
+            print(f"{c} - {os.path.basename(input_file)}")
+
             raw_df = self.input_file_to_df(input_file)
-            df_parsed = self._parse_file(raw_df, self._school_type)
+            df_parsed = self._parse_file(raw_df, self._import_name)
             dfs.append(df_parsed)
+
         for df in dfs:
-            df_merged = pd.concat([df_merged, df]) 
+            df_merged = pd.concat([df_merged, df])
+        # sv_names = set(df_merged["sv_name"].values.tolist())
+        # print(len(sv_names))
+        df_merged = df_merged.sort_values(
+            by=["year", "sv_name", "school_state_code"])
         df_merged = self._generate_prop(df_merged)
-        df_parsed.to_csv("t.csv", index=False)
         df_merged = self._generate_stat_var_and_mcf(df_merged)
 
-
-        df_final = df_merged[["school_state_code","year","sv_name","observation"]]
+        df_final = df_merged[[
+            "school_state_code", "year", "sv_name", "observation"
+        ]]
         df_final.to_csv(self._cleaned_csv_file_path, index=False)
         self._df = df_merged
 
@@ -354,8 +379,8 @@ class USEducation:
         Returns:
             None
         """
-        pass
-        # tmcf = _TMCF_TEMPLATE.format(import_name=self._school_type)
-        # # Writing Genereated TMCF to local path.
-        # with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-        #     f_out.write(tmcf.rstrip('\n'))
+
+        tmcf = TMCF_TEMPLATE.format(import_name=self._import_name)
+        # Writing Genereated TMCF to local path.
+        with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(tmcf.rstrip('\n'))

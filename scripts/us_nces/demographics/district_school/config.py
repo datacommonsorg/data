@@ -13,22 +13,24 @@
 # limitations under the License.
 """
 This Python Script is config file
-for us nces demographic private school.
+for us nces demographic district school.
 """
-CSV_FILE_NAME = "us_nces_demographics_public_school.csv"
-MCF_FILE_NAME = "us_nces_demographics_public_school.mcf"
-TMCF_FILE_NAME = "us_nces_demographics_public_school.tmcf"
-SCHOOL_TYPE = "public_school"
-SPLIT_HEADER_ON_SCHOOL_TYPE = "[Public School]"
+CSV_FILE_NAME = "us_nces_demographics_district_school.csv"
+MCF_FILE_NAME = "us_nces_demographics_district_school.mcf"
+TMCF_FILE_NAME = "us_nces_demographics_district_school.tmcf"
+SCHOOL_TYPE = "district_school"
+SPLIT_HEADER_ON_SCHOOL_TYPE = "[District]"
 
 POSSIBLE_DATA_COLUMNS = [
-    ".*Students.*", ".*Lunch.*", ".*Teacher.*", ".*American.*", ".*Asian.*",
-    ".*Hispanic.*", ".*Black.*", ".*White.*", ".*Adult Education.*"
+    ".*Students.*", ".*Teacher.*", ".*American.*", ".*Asian.*", ".*Hispanic.*",
+    ".*Black.*", ".*White.*", ".*Adult Education.*"
+    ".*Staff.*", ".*Admin.*", ".*Counselor.*", ".*Psychologist.*"
 ]
 
 EXCLUDE_DATA_COLUMNS = [
-    'Migrant Students',
-    'Total Students - Calculated Sum of Reported Grade Totals',
-    'Total Students All Grades', 'Ungraded', 'Unknown', 'unknown',
-    'Total Race/Ethnicity', 'Grades 1-8 Students', 'Grades 9-12 Students'
+    "Individualized Education Program Students",
+    "Grades 1-8 Students",
+    "Grades 9-12 Students",
+    ".*Ungraded.*",
+    ".*Total.*",
 ]

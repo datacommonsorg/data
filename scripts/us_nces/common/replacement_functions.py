@@ -49,6 +49,10 @@ _SCHOOL_TYPE = {
 }
 
 _SCHOOL_GRADE = {
+    # "Elementary": "Elementary",
+    # "Secondary": "Secondary",
+    "Elementary Teachers": "Elementary",
+    "Secondary Teachers": "Secondary",
     "Prekindergarten": "PreKindergarten",
     "Kindergarten": "Kindergarten",
     "Transitional Kindergarten": "TransitionalKindergarten",
@@ -102,7 +106,7 @@ _RACE_ = {
     "Hispanic": "HispanicOrLatino",
     'White': 'White',
     "Two or More Races": "TwoOrMoreRaces",
-    "Black": "BlackAlone"
+    "Black": "BlackOrAfricanAmericanAlone"
 }
 
 _LUNCH = {
@@ -110,6 +114,41 @@ _LUNCH = {
     "Free and Reduced Lunch": "FreeOrReducedLunch",
     "Free Lunch": "FreeLunch"
 }
+
+_SCHOOL_STAFF = {
+    "Paraprofessionals/Instructional Aides":
+        "ParaprofessionalsAidesOrInstructionalAides",
+    "Instructional Coordinators":
+        "InstructionalCoordinators",
+    "Elementary School Counselor":
+        "ElementarySchoolCounselor",
+    "Secondary School Counselor":
+        "SecondarySchoolCounselor",
+    "Other Guidance Counselors":
+        "SchoolOtherGuidanceCounselors",
+    "Total Guidance Counselors":
+        "TotalGuidanceCounselors",
+    "Librarians/media specialists":
+        "LibrariansSpecialistsOrMediaSpecialists",
+    "Media Support Staff":
+        "MediaSupportStaff",
+    "LEA Administrators":
+        "LEAAdministrators",
+    "LEA Administrative Support Staff":
+        "LEAAdministrativeSupportStaff",
+    "School Administrators":
+        "SchoolAdministrators",
+    "School Administrative Support Staff":
+        "SchoolAdministrativeSupportStaff",
+    "Student Support Services Staff":
+        "StudentSupportServicesStaff",
+    "School Psychologist":
+        "SchoolPsychologist",
+    "Other Support Services Staff":
+        "SchoolOtherSupportServicesStaff"
+}
+
+_GENDER = {"female": "Female", "male": "Male"}
 
 
 def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
@@ -124,7 +163,9 @@ def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
         "School Type": _SCHOOL_TYPE,
         "School Level": _SCHOOL_LEVEL,
         "Race": _RACE_,
-        "Lunch": _LUNCH
+        "Lunch": _LUNCH,
+        "SchoolStaff": _SCHOOL_STAFF,
+        "Gender": _GENDER
     }
 
     df_columns = data_df.columns.to_list()

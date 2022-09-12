@@ -38,15 +38,15 @@ from config import *
 
 
 # pylint:disable=too-few-public-methods
-class NCESPrivateSchool(USEducation):
+class NCESDistrictSchool(USEducation):
     """
     This Class has requried methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
     _import_name = SCHOOL_TYPE
     _split_headers_using_school_type = SPLIT_HEADER_ON_SCHOOL_TYPE
-    _possible_data_columns = POSSIBLE_DATA_COLUMNS
     _exclude_data_columns = EXCLUDE_DATA_COLUMNS
+    _possible_data_columns = POSSIBLE_DATA_COLUMNS
 
 
 # pylint:enable=too-few-public-methods
@@ -54,6 +54,7 @@ class NCESPrivateSchool(USEducation):
 if __name__ == '__main__':
     input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "input_files")
+
     input_files = [
         os.path.join(input_path, file)
         for file in sorted(os.listdir(input_path))
@@ -68,8 +69,8 @@ if __name__ == '__main__':
     mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
     tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
 
-    loader = NCESPrivateSchool(input_files, cleaned_csv_path, mcf_path,
-                               tmcf_path)
+    loader = NCESDistrictSchool(input_files, cleaned_csv_path, mcf_path,
+                                tmcf_path)
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()
