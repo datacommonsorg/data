@@ -180,7 +180,7 @@ class EuroStat:
             None
 
         Returns:
-            pd.DataFrame
+            df (pd.DataFrame)
         """
         final_df = pd.DataFrame(
             columns=['time', 'geo', 'SV', 'observation', 'Measurement_Method'])
@@ -262,7 +262,7 @@ class EuroStat:
         dataframe headers and defined MCF template
 
         Args:
-            sv_list (list) : List of DataFrame Columns
+            df (pd.DataFrame) :
 
         Returns:
             None

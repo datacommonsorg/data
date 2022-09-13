@@ -22,8 +22,10 @@ import urllib.request
 def download_gz_file(download_file_url: str, download_path: str) -> None:
     """
     Function to download and unzip the file.
+
     Args:
-        download_file_url: url of the file to be downloaded as a string
+        download_file_url (str): url of the file to be downloaded as a string
+        download_path (str): local directory to dlownload the file
 
     Returns:
         None
@@ -62,7 +64,8 @@ def download_files(download_files_url: list, download_path: str) -> None:
     to download all the input files.
 
     Args:
-        download_directory (str):Location where the files need to be downloaded.
+        download_file_url (str): url of the file to be downloaded as a string
+        download_path (str): local directory to dlownload the file
 
     Returns:
         None

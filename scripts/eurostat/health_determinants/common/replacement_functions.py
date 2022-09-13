@@ -183,10 +183,9 @@ def replace_col_values(data_df: pd.DataFrame) -> pd.DataFrame:
 
     Args:
         data_df (pd.DataFrame): data_df as the input, to change column values
-        column_name (str): Column values to be replaced
 
     Returns:
-        (pd.DataFrame): Updated DataFrame
+        data_df (pd.DataFrame): Updated DataFrame
     """
     mapper = {
         'sex': _SEX,
@@ -222,6 +221,7 @@ def split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
 
     Args:
         df (pd.DataFrame): df as the input, to divide the column
+        col (str) : column names
 
     Returns:
         df (pd.DataFrame): modified df as output
