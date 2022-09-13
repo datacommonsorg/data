@@ -38,3 +38,13 @@ Provide configuration details of how to form SV names from key properties availa
 
 scripts/eurostat/health_determinants/common/replacement_functions.py
 Data standardization rules for various properites (columns).
+
+
+### Denominator SV's MCF generator script
+scripts/eurostat/health_determinants/common/denominator_mcf_generator.py module provides common methods to generate mcf file for the denominator statvar's for the MCF file generated from process.py script.
+Depending on statvar node availability in the autopush environment, final MCF nodes are created for measurementDenominator statvars.
+1. Update the original MCF File to _INPUT_MCF_FILE_PATH variable and output MCF File to _OUTPUT_MCF_FILE_PATH variable in the script.
+2. Make sure MCF file is generated through process.py and must contain measurementDenominator property for statvar nodes.
+3. Run below command to generate the new MCF file for measurementDenominator statvars.
+
+`python scripts/eurostat/health_determinants/common/denominator_mcf_generator.py`

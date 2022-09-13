@@ -17,7 +17,7 @@ Script to check the property/dcid/nodes existance in datacommons.org.
 import datacommons
 
 
-def check_dcid_existance(nodes: list) -> dict:
+def check_dcid_existence(nodes: list) -> dict:
     """
     Checks the existance of dcid nodes in autopush.
     True: Available

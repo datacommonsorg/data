@@ -22,7 +22,7 @@ import sys
 # pylint: disable = wrong-import-position
 _COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(1, _COMMON_PATH)
-from dcid_existance import check_dcid_existance
+from dcid_existence import check_dcid_existence
 # pylint: enable = wrong-import-position
 
 _MODULE_DIR = os.path.join(_COMMON_PATH, "..", "bmi")
@@ -203,7 +203,7 @@ if __name__ == '__main__':
         for deno in deno_matched:
             f_deno.append(deno[1])
         f_deno = list(set(f_deno))
-        node_status = check_dcid_existance(f_deno)
+        node_status = check_dcid_existence(f_deno)
         f_deno = []
         for node, status in node_status.items():
             if not status:

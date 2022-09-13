@@ -66,7 +66,7 @@ Run the test cases
 
 ### Import Procedure
 
-The below script will download the data and saves to local folder **input_files**.
+The below script will download the data and save it to local folder **input_files**.
 
 `/bin/python3 scripts/eurostat/health_determinants/bmi/download_input_files.py`
 
