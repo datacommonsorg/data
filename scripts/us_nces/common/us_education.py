@@ -18,14 +18,15 @@ such as Private Education & Public Education.
 USEducation class in this module provides methods to generate processed CSV, MCF &
 TMCF files.
 """
-import glob
+
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+
 import io
 import json
 import os
-import shutil
 import sys
 import re
-from telnetlib import TM
 import pandas as pd
 import numpy as np
 
@@ -329,58 +330,43 @@ class USEducation:
             "school_state_code", "year", "sv_name", "observation"
         ])
         df_merged.to_csv(self._cleaned_csv_file_path, index=False)
-        c = 0
-        # tmp_dir = os.path.join(os.path.dirname(self._cleaned_csv_file_path), 'tmp_dir')
-        # if os.path.exists(tmp_dir):
-        #     shutil.rmtree(tmp_dir)
-        # # if not os.path.exists(tmp_dir):
-        # os.mkdir(tmp_dir)
+
         unique_sv_names = []
         for input_file in self._input_files:
-            c += 1
-            print(f"{c} - {os.path.basename(input_file)}")
 
             raw_df = self.input_file_to_df(input_file)
+
             df_parsed = self._parse_file(raw_df, self._import_name)
 
             if df_parsed.shape[0] > 0:
                 df_parsed = df_parsed.sort_values(
                 by=["year", "sv_name", "school_state_code"])
+
                 df_parsed = self._generate_prop(df_parsed)
                 df_parsed = self._generate_stat_var_and_mcf(df_parsed)
+
                 for col in df_parsed.columns.values.tolist():
                     df_parsed[col] = df_parsed[col].astype('str').str.replace("FeMale", "Female")
+
                 df_final = df_parsed[[
                 "school_state_code", "year", "sv_name", "observation"
                 ]]
                 df_final.to_csv(self._cleaned_csv_file_path, header=False, index=False, mode='a')
 
                 df_parsed = df_parsed.drop_duplicates(subset=["sv_name"]).reset_index(drop=True)
-                curr_sv_names = df_parsed["sv_name"].values.tolist()
-                new_sv_names = list(set(curr_sv_names) - set(unique_sv_names))
-                unique_sv_names = unique_sv_names + new_sv_names
 
+                curr_sv_names = df_parsed["sv_name"].values.tolist()
+
+                new_sv_names = list(set(curr_sv_names) - set(unique_sv_names))
+
+                unique_sv_names = unique_sv_names + new_sv_names
                 df_mcf = df_parsed[df_parsed["sv_name"].isin(new_sv_names)].reset_index(drop=False)
 
                 dfs.append(df_mcf)
-        # l = [pd.read_csv(filename) for filename in glob.glob(f"/{tmp_dir}/*.csv")]
-        # df_merged = pd.concat(l, axis=0)
-        # shutil.rmtree(tmp_dir)
+
         df_merged = pd.DataFrame()
-        print(unique_sv_names)
         for df in dfs:
             df_merged = pd.concat([df_merged, df])
-        # sv_names = set(df_merged["sv_name"].values.tolist())
-        # print(len(sv_names))
-        # df_merged = df_merged.sort_values(
-        #     by=["year", "sv_name", "school_state_code"])
-        # df_merged = self._generate_prop(df_merged)
-        # df_merged = self._generate_stat_var_and_mcf(df_merged)
-
-        # df_final = df_merged[[
-        #     "school_state_code", "year", "sv_name", "observation"
-        # ]]
-        # df_final.to_csv(self._cleaned_csv_file_path, index=False, mode='a')
         self._df = df_merged
 
     def generate_mcf(self) -> None:
@@ -414,7 +400,6 @@ class USEducation:
         Returns:
             None
         """
-
         tmcf = TMCF_TEMPLATE.format(import_name=self._import_name)
         # Writing Genereated TMCF to local path.
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
