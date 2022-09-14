@@ -45,9 +45,18 @@ class NCESPrivateSchool(USEducation):
     """
     _import_name = SCHOOL_TYPE
     _split_headers_using_school_type = SPLIT_HEADER_ON_SCHOOL_TYPE
-    _possible_data_columns = POSSIBLE_DATA_COLUMNS
-    _exclude_data_columns = EXCLUDE_DATA_COLUMNS
+    _include_columns = POSSIBLE_DATA_COLUMNS
+    _exclude_columns = EXCLUDE_DATA_COLUMNS
+    _generate_statvars = True
 
+    def set_include_columns(self, columns: list):
+        self._include_columns = columns
+
+    def set_exclude_columns(self, columns: list):
+        self._exclude_columns = columns
+
+    def set_generate_statvars_flag(self, flag: bool):
+        self._generate_statvars = flag
 
 # pylint:enable=too-few-public-methods
 
@@ -70,6 +79,10 @@ if __name__ == '__main__':
 
     loader = NCESPrivateSchool(input_files, cleaned_csv_path, mcf_path,
                                tmcf_path)
-    loader.generate_csv()
-    loader.generate_mcf()
-    loader.generate_tmcf()
+    # loader.generate_csv()
+    # loader.generate_mcf()
+    # loader.generate_tmcf()
+    loader.set_include_columns(POSSIBLE_PLACE_COLUMNS)
+    loader.set_exclude_columns(EXCLUDE_PLACE_COLUMNS)
+    loader.set_generate_statvars_flag(False)
+    loader.create_place_nodes()

@@ -28,3 +28,7 @@ EXCLUDE_DATA_COLUMNS = [
     "Total Students", "Prekindergarten and Kindergarten Students",
     "Ungraded Students", "Grades 1-8 Students", "Grades 9-12 Students"
 ]
+
+POSSIBLE_PLACE_COLUMNS = [".*Lowest.*", ".*Highest.*", "Physical.*"]
+
+EXCLUDE_PLACE_COLUMNS = []

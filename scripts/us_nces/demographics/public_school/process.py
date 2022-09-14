@@ -45,8 +45,8 @@ class NCESPublicSchool(USEducation):
     """
     _import_name = SCHOOL_TYPE
     _split_headers_using_school_type = SPLIT_HEADER_ON_SCHOOL_TYPE
-    _exclude_data_columns = EXCLUDE_DATA_COLUMNS
-    _possible_data_columns = POSSIBLE_DATA_COLUMNS
+    _exclude_columns = EXCLUDE_DATA_COLUMNS
+    _include_columns = POSSIBLE_DATA_COLUMNS
 
 
 # pylint:enable=too-few-public-methods

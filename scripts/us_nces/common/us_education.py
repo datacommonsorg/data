@@ -33,6 +33,7 @@ pd.set_option("display.max_columns", None)
 
 from common.replacement_functions import replace_values
 from common.prop_conf import *
+from common.place_conf import *
 
 CODEDIR = os.path.dirname(__file__)
 # For import common.replacement_functions
@@ -49,8 +50,9 @@ class USEducation:
     _import_name = ""
     _default_mcf_template = ""
     _split_headers_using_school_type = ""
-    _possible_data_columns = None
-    _exclude_data_columns = None
+    _include_columns = None
+    _exclude_columns = None
+    _generate_statvars = True
 
     def __init__(self,
                  input_files: list,
@@ -144,7 +146,8 @@ class USEducation:
                 data_df[curr_prop_column] = 'None'
         return data_df
 
-    def _generate_prop(self, data_df: pd.DataFrame):
+    def _generate_prop(self, data_df: pd.DataFrame,default_mcf_prop: list=None,
+                        sv_prop_order: list=None, node_configs: dict=None):
         """
         Generate property columns in the dataframe data_df
         Args:
@@ -152,14 +155,14 @@ class USEducation:
         Returns:
             _type_: _description_
         """
-        for prop_, val_, format_ in DF_DEFAULT_MCF_PROP:
+        for prop_, val_, format_ in default_mcf_prop:
             data_df["prop_" + prop_] = format_((prop_, val_))
 
-        for prop_ in SV_PROP_ORDER:
+        for prop_ in sv_prop_order:
             if "prop_" + prop_ in data_df.columns.values.tolist():
                 continue
 
-            conf = FORM_STATVAR[prop_]
+            conf = node_configs[prop_]
             data_df["curr_prop"] = prop_
             column = conf["column"]
             curr_value_column = "prop_" + prop_
@@ -188,7 +191,7 @@ class USEducation:
         return data_df
 
     def _generate_stat_vars(self, data_df: pd.DataFrame,
-                            prop_cols: str) -> pd.DataFrame:
+                            prop_cols: str, sv_node_column: str) -> pd.DataFrame:
         """
         Generates statvars using property columns.
         Args:
@@ -197,22 +200,22 @@ class USEducation:
         Returns:
             pd.DataFrame: DataFrame including statvar column
         """
-        data_df['prop_node'] = '{' + \
+        data_df[sv_node_column] = '{' + \
                                     data_df[prop_cols].apply(
                                     lambda x: ','.join(x.dropna().astype(str)),
                                     axis=1) + \
                                 '}'
 
-        data_df['prop_node'] = data_df['prop_node'].apply(json.loads)
-        data_df['sv_name'] = data_df['prop_node'].apply(get_statvar_dcid)
+        data_df[sv_node_column] = data_df[sv_node_column].apply(json.loads)
+        data_df['sv_name'] = data_df[sv_node_column].apply(get_statvar_dcid)
         data_df["sv_name"] = np.where(
             data_df["prop_measurementDenominator"].isin([np.nan]),
             data_df["sv_name"], data_df["sv_name"].str.replace("Count",
                                                                "Percent",
                                                                n=1))
-        data_df['prop_node'] = data_df['sv_name'].apply(SV_NODE_FORMAT)
+        data_df[sv_node_column] = data_df['sv_name'].apply(SV_NODE_FORMAT)
 
-        stat_var_with_dcs = dict(zip(data_df["all_prop"], data_df['prop_node']))
+        stat_var_with_dcs = dict(zip(data_df["all_prop"], data_df[sv_node_column]))
         stat_var_without_dcs = dict(zip(data_df["all_prop"],
                                         data_df['sv_name']))
 
@@ -221,8 +224,7 @@ class USEducation:
     def _generate_mcf_data(self, data_df: pd.DataFrame,
                            prop_cols: list) -> pd.DataFrame:
 
-        data_df['mcf'] = data_df['prop_node'] + \
-                    '\n' + \
+        data_df['mcf'] = \
                     data_df[prop_cols].apply(
                     func=lambda x: '\n'.join(x.dropna()),
                     axis=1).str.replace('"', '')
@@ -230,7 +232,7 @@ class USEducation:
 
         return mcf_mapper
 
-    def _generate_stat_var_and_mcf(self, data_df: pd.DataFrame):
+    def _generate_stat_var_and_mcf(self, data_df: pd.DataFrame, sv_prop_order: list=None):
         """
         Generates the stat vars.
         Args:
@@ -238,21 +240,25 @@ class USEducation:
         Returns:
             _type_: _description_
         """
-        prop_cols = ["prop_" + col for col in sorted(SV_PROP_ORDER)]
+        prop_cols = ["prop_" + col for col in sorted(sv_prop_order)]
 
         data_df["all_prop"] = ""
         for col in prop_cols:
             data_df["all_prop"] += '_' + data_df[col]
+        sv_node_column = "prop_sv_node"
+        data_df["prop_sv_node"] = ""
         unique_props = data_df.drop_duplicates(subset=["all_prop"]).reset_index(
             drop=True)
 
         unique_props = unique_props.replace('', np.nan)
-        stat_var_with_dcs, stat_var_without_dcs = self._generate_stat_vars(
-            unique_props, prop_cols)
-        mcf_mapper = self._generate_mcf_data(unique_props, prop_cols)
+        if self._generate_statvars:
+            stat_var_with_dcs, stat_var_without_dcs = self._generate_stat_vars(
+                unique_props, prop_cols, sv_node_column)
+            prop_cols.insert(0, sv_node_column)
+            data_df["prop_node"] = data_df["all_prop"].map(stat_var_with_dcs)
+            data_df["sv_name"] = data_df["all_prop"].map(stat_var_without_dcs)
 
-        data_df["prop_node"] = data_df["all_prop"].map(stat_var_with_dcs)
-        data_df["sv_name"] = data_df["all_prop"].map(stat_var_without_dcs)
+        mcf_mapper = self._generate_mcf_data(unique_props, prop_cols)
         data_df["mcf"] = data_df["all_prop"].map(mcf_mapper)
 
         data_df = data_df.drop(columns=["all_prop"]).reset_index(drop=True)
@@ -260,8 +266,7 @@ class USEducation:
 
         return data_df
 
-    def _parse_file(self, raw_df: pd.DataFrame,
-                    school_type: str) -> pd.DataFrame:
+    def _parse_file(self, raw_df: pd.DataFrame) -> pd.DataFrame:
 
         self._year = self._extract_year_from_headers(raw_df.columns.values.tolist())
         raw_df["year"] = "20" + self._year[-2:]
@@ -287,15 +292,17 @@ class USEducation:
 
         curr_cols = df_cleaned.columns.values.tolist()
         data_cols = []
-
-        for pattern in self._exclude_data_columns:
+        for pattern in self._exclude_columns:
             pat = f"^((?!{pattern}).)*$"
             r = re.compile(pat)
             curr_cols = list(filter(r.match, curr_cols))
 
-        for pattern in self._possible_data_columns:
+        for pattern in self._include_columns:
             r = re.compile(pattern)
             data_cols += list(filter(r.match, curr_cols))
+
+        if not self._generate_statvars:
+            return df_cleaned[data_cols]
 
         df_cleaned = df_cleaned.melt(id_vars=['school_state_code', 'year'],
                                      value_vars=data_cols,
@@ -336,29 +343,30 @@ class USEducation:
             print(f"{c} - {os.path.basename(input_file)}")
 
             raw_df = self.input_file_to_df(input_file)
-            df_parsed = self._parse_file(raw_df, self._import_name)
-
+            df_parsed = self._parse_file(raw_df)
             if df_parsed.shape[0] > 0:
-                df_parsed = df_parsed.sort_values(
-                by=["year", "sv_name", "school_state_code"])
-                df_parsed = self._generate_prop(df_parsed)
-                df_parsed = self._generate_stat_var_and_mcf(df_parsed)
-                for col in df_parsed.columns.values.tolist():
-                    df_parsed[col] = df_parsed[col].astype('str').str.replace("FeMale", "Female")
-                df_parsed["scaling_factor"] = np.where(df_parsed["sv_name"].str.contains("Percent"),
-                                                       100,'')
-                df_final = df_parsed[[
-                "school_state_code", "year", "sv_name", "observation", "scaling_factor"
-                ]]
-                df_final.to_csv(self._cleaned_csv_file_path, header=False, index=False, mode='a')
+                if self._generate_statvars:
+                    df_parsed = df_parsed.sort_values(
+                    by=["year", "sv_name", "school_state_code"])
+                    df_parsed = self._generate_prop(df_parsed, DF_DEFAULT_MCF_PROP, 
+                                                    SV_PROP_ORDER, FORM_STATVAR)
+                    df_parsed = self._generate_stat_var_and_mcf(df_parsed, SV_PROP_ORDER)
+                    for col in df_parsed.columns.values.tolist():
+                        df_parsed[col] = df_parsed[col].astype('str').str.replace("FeMale", "Female")
+                    df_parsed["scaling_factor"] = np.where(df_parsed["sv_name"].str.contains("Percent"),
+                                                        100,'')
+                    df_final = df_parsed[[
+                    "school_state_code", "year", "sv_name", "observation", "scaling_factor"
+                    ]]
+                    df_final.to_csv(self._cleaned_csv_file_path, header=False, index=False, mode='a')
 
-                df_parsed = df_parsed.drop_duplicates(subset=["sv_name"]).reset_index(drop=True)
-                curr_sv_names = df_parsed["sv_name"].values.tolist()
-                new_sv_names = list(set(curr_sv_names) - set(unique_sv_names))
-                unique_sv_names = unique_sv_names + new_sv_names
+                    df_parsed = df_parsed.drop_duplicates(subset=["sv_name"]).reset_index(drop=True)
+                    curr_sv_names = df_parsed["sv_name"].values.tolist()
+                    new_sv_names = list(set(curr_sv_names) - set(unique_sv_names))
+                    unique_sv_names = unique_sv_names + new_sv_names
 
-                df_mcf = df_parsed[df_parsed["sv_name"].isin(new_sv_names)].reset_index(drop=False)
-                dfs.append(df_mcf)
+                    df_parsed = df_parsed[df_parsed["sv_name"].isin(new_sv_names)].reset_index(drop=False)
+                dfs.append(df_parsed)
 
         df_merged = pd.DataFrame()
 
@@ -402,3 +410,11 @@ class USEducation:
         # Writing Genereated TMCF to local path.
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
+
+    def create_place_nodes(self):
+        self.generate_csv()
+        df_parsed = self._df
+        df_parsed = self._generate_prop(df_parsed, [], 
+                        SV_PROP_ORDER_PLACE, PLACE_STATVAR)
+        
+        df_parsed = self._generate_stat_var_and_mcf(df_parsed, SV_PROP_ORDER_PLACE)
