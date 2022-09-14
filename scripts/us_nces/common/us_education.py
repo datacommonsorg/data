@@ -18,7 +18,6 @@ such as Private Education & Public Education.
 USEducation class in this module provides methods to generate processed CSV, MCF &
 TMCF files.
 """
-
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -278,7 +277,7 @@ class USEducation:
         if self._import_name == "private_school":
             df_cleaned["school_state_code"] = \
                 "nces/" + df_cleaned["School ID - NCES Assigned"] + \
-                df_cleaned["ANSI/FIPS State Code"]
+                '_' + df_cleaned["ANSI/FIPS State Code"]
         elif self._import_name == "public_school":
             df_cleaned["school_state_code"] = \
                 "nces/" + df_cleaned["School ID - NCES Assigned"]
@@ -327,44 +326,42 @@ class USEducation:
         dfs = []
         df_parsed = None
         df_merged = pd.DataFrame(columns=[
-            "school_state_code", "year", "sv_name", "observation"
+            "school_state_code", "year", "sv_name", "observation", "scaling_factor"
         ])
         df_merged.to_csv(self._cleaned_csv_file_path, index=False)
-
+        c = 0
         unique_sv_names = []
-        for input_file in self._input_files:
+        for input_file in sorted(self._input_files):
+            c += 1
+            print(f"{c} - {os.path.basename(input_file)}")
 
             raw_df = self.input_file_to_df(input_file)
-
             df_parsed = self._parse_file(raw_df, self._import_name)
 
             if df_parsed.shape[0] > 0:
                 df_parsed = df_parsed.sort_values(
                 by=["year", "sv_name", "school_state_code"])
-
                 df_parsed = self._generate_prop(df_parsed)
                 df_parsed = self._generate_stat_var_and_mcf(df_parsed)
-
                 for col in df_parsed.columns.values.tolist():
                     df_parsed[col] = df_parsed[col].astype('str').str.replace("FeMale", "Female")
-
+                df_parsed["scaling_factor"] = np.where(df_parsed["sv_name"].str.contains("Percent"),
+                                                       100,'')
                 df_final = df_parsed[[
-                "school_state_code", "year", "sv_name", "observation"
+                "school_state_code", "year", "sv_name", "observation", "scaling_factor"
                 ]]
                 df_final.to_csv(self._cleaned_csv_file_path, header=False, index=False, mode='a')
 
                 df_parsed = df_parsed.drop_duplicates(subset=["sv_name"]).reset_index(drop=True)
-
                 curr_sv_names = df_parsed["sv_name"].values.tolist()
-
                 new_sv_names = list(set(curr_sv_names) - set(unique_sv_names))
-
                 unique_sv_names = unique_sv_names + new_sv_names
-                df_mcf = df_parsed[df_parsed["sv_name"].isin(new_sv_names)].reset_index(drop=False)
 
+                df_mcf = df_parsed[df_parsed["sv_name"].isin(new_sv_names)].reset_index(drop=False)
                 dfs.append(df_mcf)
 
         df_merged = pd.DataFrame()
+
         for df in dfs:
             df_merged = pd.concat([df_merged, df])
         self._df = df_merged
@@ -400,6 +397,7 @@ class USEducation:
         Returns:
             None
         """
+
         tmcf = TMCF_TEMPLATE.format(import_name=self._import_name)
         # Writing Genereated TMCF to local path.
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
