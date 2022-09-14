@@ -106,7 +106,17 @@ measuredProperty: dcs:{statvar}
 statType: dcs:measuredValue
 """
 
-with open('india_nfhs.json') as json_file:
+MCF_NODES_DENOMINATOR = """
+Node: dcid:{statvar}
+description: "{description}"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:{statvar}
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+"""
+
+with open('col_to_statvar_mappings.json') as json_file:
     cols_to_nodes = json.load(json_file)
 
 module_dir = os.path.dirname(__file__)
@@ -176,11 +186,21 @@ class NFHSDataLoaderBase(object):
                                           index=idx + 1,
                                           statvar=self.cols_dict[variable]))
                     # Writing MCF
-                    mcf.write(
-                        MCF_NODES.format(
+                    index = self.cols_dict[variable].find("AsFractionOf_Count_Household")
+                    if index != -1:
+                        mcf.write(
+                        MCF_NODES_DENOMINATOR.format(
                             statvar=self.cols_dict[variable],
                             # descript=self.cols_dict[variable].replace('_', ' '),
                             description = re.sub(r"(\w)([A-Z])", r"\1 \2", self.cols_dict[variable].replace('_', ' '))))
+
+                    else:
+
+                        mcf.write(
+                            MCF_NODES.format(
+                                statvar=self.cols_dict[variable],
+                                # descript=self.cols_dict[variable].replace('_', ' '),
+                                description = re.sub(r"(\w)([A-Z])", r"\1 \2", self.cols_dict[variable].replace('_', ' '))))
 
                     statvars_written.append(self.cols_dict[variable])
 
