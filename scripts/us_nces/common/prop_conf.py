@@ -22,11 +22,10 @@ TMCF_TEMPLATE = (
     "Node: E:us_nces_demographics_{import_name}->E0\n"
     "typeOf: dcs:StatVarObservation\n"
     "variableMeasured: C:us_nces_demographics_{import_name}->sv_name\n"
-    "measurementMethod: C:us_nces_demographics_{import_name}->"
-    "Measurement_Method\n"
+    "measurementMethod: dcs:us_nces_demographics\n"
     "observationAbout: C:us_nces_demographics_{import_name}->school_state_code\n"
     "observationDate: C:us_nces_demographics_{import_name}->year\n"
-    "scalingFactor: 100\n"
+    "scalingFactor: C:us_nces_demographics_{import_name}->scaling_factor\n"
     "value: C:us_nces_demographics_{import_name}->observation\n")
 
 _DENOMINATOR_PROP = {
