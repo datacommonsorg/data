@@ -1,0 +1,7 @@
+SCHOOL = ["PrivateSchool"]
+
+YEARS_SELECTED = ["2019-20"]
+
+DEFAULT_COLUMNS_SELECTED = ["staticName","defaultName"]
+
+COLUMNS_TO_DOWNLOAD = ["43163","43162","43222"]
