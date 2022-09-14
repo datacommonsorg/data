@@ -1,0 +1,18 @@
+﻿ELSI Export
+
+National Center for Education Statistics - http://nces.ed.gov/ccd/elsi/
+
+This is a Public School based table with the following filters applied: State(s) (All Years): All 50 + DC
+
+School Name,State Name [Public School] Latest available year,State Name [Public School] 2014-15,School Name [Public School] 2014-15,School ID - NCES Assigned [Public School] Latest available year,Agency Name [Public School] 2014-15,Agency ID - NCES Assigned [Public School] Latest available year,County Number [Public School] 2014-15,ANSI/FIPS State Code [Public School] Latest available year,Mailing ZIP [Public School] 2014-15,Phone Number [Public School] 2014-15,Total Students All Grades (Excludes AE) [Public School] 2014-15,Total Students All Grades (Includes AE) [Public School] 2014-15,Free Lunch Eligible [Public School] 2014-15,Reduced-price Lunch Eligible Students [Public School] 2014-15,Free and Reduced Lunch Students [Public School] 2014-15,Grades 1-8 Students [Public School] 2014-15,Grades 9-12 Students [Public School] 2014-15,Prekindergarten Students [Public School] 2014-15,Kindergarten Students [Public School] 2014-15,Grade 1 Students [Public School] 2014-15,Grade 2 Students [Public School] 2014-15,Grade 3 Students [Public School] 2014-15,Grade 4 Students [Public School] 2014-15,Grade 5 Students [Public School] 2014-15,Grade 6 Students [Public School] 2014-15,Grade 7 Students [Public School] 2014-15,Grade 8 Students [Public School] 2014-15,Grade 9 Students [Public School] 2014-15,Grade 10 Students [Public School] 2014-15,Grade 11 Students [Public School] 2014-15,Grade 12 Students [Public School] 2014-15,Grade 13 Students [Public School] 2014-15,Ungraded Students [Public School] 2014-15,Adult Education Students [Public School] 2014-15,Male Students [Public School] 2014-15,Female Students [Public School] 2014-15,American Indian/Alaska Native Students [Public School] 2014-15,Asian or Asian/Pacific Islander Students [Public School] 2014-15,Hispanic Students [Public School] 2014-15,Black or African American Students [Public School] 2014-15,White Students [Public School] 2014-15,Nat. Hawaiian or Other Pacific Isl. Students [Public School] 2014-15,Two or More Races Students [Public School] 2014-15,Total Race/Ethnicity [Public School] 2014-15,Full-Time Equivalent (FTE) Teachers [Public School] 2014-15,Pupil/Teacher Ratio [Public School] 2014-15
+CONWAY ADULT EDUCATION CENTER,Arkansas,ARKANSAS,CONWAY ADULT EDUCATION CENTER,="050459001482",CONWAY SCHOOL DISTRICT,="0504590",="05045",="05",72032,5014504810,†,="0",="0",="0",="0",†,†,†,†,†,†,†,†,†,†,†,†,†,†,†,†,†,†,="0",†,†,†,†,†,†,†,†,†,="0",–,–
+WEST SONOMA COUNTY CONSORTIUM,California,CALIFORNIA,West Sonoma County Consortium,="060267012473",West Sonoma County Union High,="0602670",="06097",="06",95472,7078247911,43,43,7,4,11,29,11,†,3,4,3,4,6,2,2,3,5,2,3,3,3,†,†,="0",25,18,="0",="0",19,="0",23,="0",1,43,4.00,10.75
+PALM CANYON,California,CALIFORNIA,Palm Canyon,="061632513034",Hacienda la Puente Unified,="0616325",="06037",="06",91745,6269336507,18,18,11,="0",11,†,18,†,†,†,†,†,†,†,†,†,†,7,1,2,8,†,†,="0",11,7,="0",4,9,4,1,="0",="0",18,2.00,9.00
+GRANVILLE EARLY COLLEGE HIGH,North Carolina,NORTH CAROLINA,Granville Early College High,370180003142,Granville County Schools,3701800,37077,37,27522,9195285583,218,218,64,21,85,†,200,†,†,†,†,†,†,†,†,†,†,57,45,54,44,18,†,†,80,138,1,1,35,67,104,="0",10,218,7.00,31.14
+
+
+Data Source: U.S. Department of Education National Center for Education Statistics Common Core of Data (CCD) "Public Elementary/Secondary School Universe Survey" 2010-11 v.2a  2020-21 v.1a.
+
+† indicates that the data are not applicable.
+– indicates that the data are missing.
+‡ indicates that the data do not meet NCES data quality standards.

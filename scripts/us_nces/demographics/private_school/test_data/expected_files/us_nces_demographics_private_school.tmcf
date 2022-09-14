@@ -1,0 +1,8 @@
+Node: E:us_nces_demographics_private_school->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:us_nces_demographics_private_school->sv_name
+measurementMethod: dcs:us_nces_demographics
+observationAbout: C:us_nces_demographics_private_school->school_state_code
+observationDate: C:us_nces_demographics_private_school->year
+scalingFactor: C:us_nces_demographics_private_school->scaling_factor
+value: C:us_nces_demographics_private_school->observation
