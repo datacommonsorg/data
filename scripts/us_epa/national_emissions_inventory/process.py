@@ -89,7 +89,6 @@ def _regularize_columns(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
     if '2008' in file_path or '2011' in file_path:
         df.rename(columns={
             'state_and_county_fips_code': 'fips code',
-            'data_set_short_name': 'data set',
             'pollutant_cd': 'pollutant code',
             'uom': 'emissions uom',
             'total_emissions': 'total emissions',
@@ -98,27 +97,33 @@ def _regularize_columns(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
                   inplace=True)
         df = df.drop(columns=[
             'tribal_name', 'st_usps_cd', 'county_name', 'data_category_cd',
-            'description', 'aircraft_engine_type_cd', 'emissions_op_type_code'
+            'description', 'aircraft_engine_type_cd', 'emissions_op_type_code',
+            'data_set_short_name'
         ])
         df['pollutant type(s)'] = 'nan'
+        if '2008' in file_path:
+            df['year'] = '2008'
+        else:
+            df['year'] = '2011'
     elif '2017' in file_path:
         df = df.drop(columns=[
             'epa region code', 'state', 'fips state code', 'county', 'aetc',
             'reporting period', 'sector', 'tribal name', 'pollutant desc',
-            'data category'
+            'data category', 'data set'
         ])
+        df['year'] = '2017'
     elif 'tribes' in file_path:
         df.rename(columns={'tribal name': 'fips code'}, inplace=True)
         df = df.drop(columns=[
             'state', 'fips state code', 'data category', 'reporting period',
-            'emissions operating type', 'pollutant desc'
+            'emissions operating type', 'pollutant desc', 'data set'
         ])
         df = _data_standardize(df, 'fips code')
         df['pollutant type(s)'] = 'nan'
+        df['year'] = '2014'
     else:
         df.rename(columns={
             'state_and_county_fips_code': 'fips code',
-            'data_set': 'data set',
             'pollutant_cd': 'pollutant code',
             'uom': 'emissions uom',
             'total_emissions': 'total emissions',
@@ -128,9 +133,10 @@ def _regularize_columns(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df = df.drop(columns=[
             'tribal_name', 'fips_state_code', 'st_usps_cd', 'county_name',
             'data_category', 'emission_operating_type', 'pollutant_desc',
-            'emissions_operating_type'
+            'emissions_operating_type', 'data_set'
         ])
         df['pollutant type(s)'] = 'nan'
+        df['year'] = '2014'
     return df
 
 
@@ -166,7 +172,6 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
         'data set': 'year'
     },
               inplace=True)
-    df['year'] = df['year'].str[:4]
     df = _data_standardize(df, 'unit')
     # df = _data_standardize(df, 'scc')
     df = _data_standardize(df, 'pollutant code')
@@ -183,7 +188,6 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
             df_emissions_code['emissions type code'] + '_' +
             df_emissions_code['pollutant code'].astype(str) + '_SCC_' +
             df_emissions_code['scc'].astype(str))
-        print(df_emissions_code)
     df['SV'] = ('Annual_Amount_Emissions_' + df['pollutant code'].astype(str) +
                 '_SCC_' + df['scc'].astype(str))
     df = pd.concat([df, df_emissions_code])
@@ -251,7 +255,8 @@ class USAirEmissionTrends:
             # sv_checker['epaSccCode'] = sv_property[-1]
             pollutant_start = 3
             if sv_property[3] in [
-                    'Exhaust', 'Evaporation', 'Refueling', 'BName', 'TName'
+                    'Exhaust', 'Evaporation', 'Refueling', 'BName', 'TName',
+                    'Cruise', 'Maneuvering', 'ReducedSpeedZone', 'Hotelling'
             ]:
                 code = "\nemissionTypeCode: dcs:" + sv_property[3]
                 scc_name = scc_name + ", " + sv_property[3]
@@ -297,7 +302,6 @@ class USAirEmissionTrends:
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .csv extension
             file_name = file_path.split("/")[-1][:-4]
-            print(file_name)
             df = _national_emissions(file_path)
             final_df = pd.concat([final_df, df])
 
@@ -309,10 +313,8 @@ class USAirEmissionTrends:
         final_df['observation'] = np.where(final_df['unit'] == 'Pound',
                                            final_df['observation'] / 2000,
                                            final_df['observation'])
-        print(final_df)
         final_df = final_df.groupby(['geo_Id', 'year',
                                      'SV']).sum().reset_index()
-        print(final_df)
         final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
@@ -332,9 +334,9 @@ def main(_):
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
     # Defining Output Files
-    csv_name = "national_emissionsNR.csv"
-    mcf_name = "national_emissionsNR.mcf"
-    tmcf_name = "national_emissionsNR.tmcf"
+    csv_name = "national_emissionsNP.csv"
+    mcf_name = "national_emissionsNP.mcf"
+    tmcf_name = "national_emissionsNP.tmcf"
     cleaned_csv_path = os.path.join(output_file_path, csv_name)
     mcf_path = os.path.join(output_file_path, mcf_name)
     tmcf_path = os.path.join(output_file_path, tmcf_name)
