@@ -173,7 +173,6 @@ def _national_emissions(file_path: str) -> pd.DataFrame:
     },
               inplace=True)
     df = _data_standardize(df, 'unit')
-    # df = _data_standardize(df, 'scc')
     df = _data_standardize(df, 'pollutant code')
     df_emissions_code = df[df['emissions type code'] != '']
     df_emissions_code = df_emissions_code[
@@ -213,7 +212,7 @@ class USAirEmissionTrends:
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
 
-    def _generate_tmcf(self) -> None:
+    def generate_tmcf(self) -> None:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
@@ -226,7 +225,7 @@ class USAirEmissionTrends:
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
 
-    def _generate_mcf(self, sv_list) -> None:
+    def generate_mcf(self, sv_list) -> None:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
@@ -319,8 +318,8 @@ class USAirEmissionTrends:
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
-        self._generate_mcf(sv_list)
-        self._generate_tmcf()
+        self.generate_mcf(sv_list)
+        self.generate_tmcf()
 
 
 def main(_):

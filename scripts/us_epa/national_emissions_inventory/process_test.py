@@ -72,10 +72,10 @@ class TestProcess(unittest.TestCase):
         preprocess script and excepted output files like MCF File
         """
         expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                              "national_emission_onroad.mcf")
+                                              "national_emissions.mcf")
 
         expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                               "national_emission_onroad.tmcf")
+                                               "national_emissions.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -96,7 +96,7 @@ class TestProcess(unittest.TestCase):
         preprocess script and excepted output files like CSV
         """
         expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                              "national_emission_onroad.csv")
+                                              "national_emissions.csv")
 
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
