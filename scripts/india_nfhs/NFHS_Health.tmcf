@@ -13,48 +13,48 @@ value: C:NFHS_Health->Count_Person_Female_SavingsAccount_Personal_AsFractionOf_C
 
 Node: E:NFHS_Health->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:AdolescentFertilityRate_15to19years_Person_Female
+variableMeasured: dcs:AdolescentFertilityRate_15to19yearsAge_Person_Female
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->AdolescentFertilityRate_15to19years_Person_Female
+value: C:NFHS_Health->AdolescentFertilityRate_15to19yearsAge_Person_Female
 
 Node: E:NFHS_Health->E3
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Female_Anaemic_15to19years_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Person_Female_Anaemic_15to19yearsAge_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Female_Anaemic_15to19years_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Person_Female_Anaemic_15to19yearsAge_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E4
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Female_Anaemic_15to49years_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Person_Female_Anaemic_15to49yearsAge_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Female_Anaemic_15to49years_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Person_Female_Anaemic_15to49yearsAge_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E5
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Female_15to49years_usingFamilyPlanningMethods_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Person_Female_15to49yearsAge_usingFamilyPlanningMethods_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Female_15to49years_usingFamilyPlanningMethods_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Person_Female_15to49yearsAge_usingFamilyPlanningMethods_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E6
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Female_15to49years_usingFamilyPlanningMethods__Modern_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Person_Female_15to49yearsAge_usingFamilyPlanningMethods__Modern_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Female_15to49years_usingFamilyPlanningMethods__Modern_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Person_Female_15to49yearsAge_usingFamilyPlanningMethods__Modern_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E7
 typeOf: dcs:StatVarObservation
@@ -580,12 +580,12 @@ value: C:NFHS_Health->Count_Person_Male_15to49yearsAge_WhoAreAnaemic_AsFractionO
 
 Node: E:NFHS_Health->E65
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Male_25to29yearsAge_MarriedBefore21yearsAge_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Person_Male_25to29yearsAge_MarriedBefore21years_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Male_25to29yearsAge_MarriedBefore21yearsAge_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Person_Male_25to29yearsAge_MarriedBefore21years_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E66
 typeOf: dcs:StatVarObservation
@@ -598,12 +598,12 @@ value: C:NFHS_Health->Count_Person_Male_Overweight_Obese_AsFractionOf_Count_Hous
 
 Node: E:NFHS_Health->E67
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Male_WhoHave_ComprehensiveKnowledgeOfHIV-AIDS_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Person_Male_WhoHave_ComprehensiveKnowledgeOfHIVAIDS_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Male_WhoHave_ComprehensiveKnowledgeOfHIV-AIDS_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Person_Male_WhoHave_ComprehensiveKnowledgeOfHIVAIDS_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E68
 typeOf: dcs:StatVarObservation
@@ -769,12 +769,12 @@ value: C:NFHS_Health->Count_Death_28Days_AsFractionOf_Count_BirthEvent_LiveBirth
 
 Node: E:NFHS_Health->E86
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Children_6to23months_NonBreastfeeding_ReceivingAnAdequateDiet_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Children_6to23monthsAge_NonBreastfeeding_ReceivingAnAdequateDiet_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Children_6to23months_NonBreastfeeding_ReceivingAnAdequateDiet_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Children_6to23monthsAge_NonBreastfeeding_ReceivingAnAdequateDiet_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E87
 typeOf: dcs:StatVarObservation
@@ -913,12 +913,12 @@ value: C:NFHS_Health->Count_Person_Female_Married_15to49yearsAge_UnmetNeedForFam
 
 Node: E:NFHS_Health->E102
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Death_Under5Years_AsFractionOf_Count_BirthEvent_LiveBirth
+variableMeasured: dcs:Count_Death_Under5YearsAge_AsFractionOf_Count_BirthEvent_LiveBirth
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Death_Under5Years_AsFractionOf_Count_BirthEvent_LiveBirth
+value: C:NFHS_Health->Count_Death_Under5YearsAge_AsFractionOf_Count_BirthEvent_LiveBirth
 
 Node: E:NFHS_Health->E103
 typeOf: dcs:StatVarObservation
@@ -967,12 +967,12 @@ value: C:NFHS_Health->Count_Person_Female_15to24yearsAge_UsingHygenicMethodsOfPr
 
 Node: E:NFHS_Health->E108
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Female_20to24yearsAge_MarriedBefore18yearsAge_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Person_Female_20to24yearsAge_MarriedBefore18years_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Female_20to24yearsAge_MarriedBefore18yearsAge_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Person_Female_20to24yearsAge_MarriedBefore18years_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E109
 typeOf: dcs:StatVarObservation
@@ -1021,12 +1021,12 @@ value: C:NFHS_Health->Count_Person_Female_Overweight_Obese_AsFractionOf_Count_Ho
 
 Node: E:NFHS_Health->E114
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Female_ComprehensiveKnowledgeOfHIV_AIDS_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Person_Female_ComprehensiveKnowledgeOfHIVAIDS_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Female_ComprehensiveKnowledgeOfHIV_AIDS_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Person_Female_ComprehensiveKnowledgeOfHIVAIDS_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E115
 typeOf: dcs:StatVarObservation

@@ -116,6 +116,27 @@ statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Household
 """
 
+MCF_NODES_AGE = """
+Node: dcid:{statvar}
+description: "{description}"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:{statvar}
+statType: dcs:measuredValue
+age: dcs:{age}
+"""
+
+MCF_NODES_COMMON = """
+Node: dcid:{statvar}
+description: "{description}"
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:{statvar}
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Household
+age: dcs:{age}
+"""
+
 with open('col_to_statvar_mappings.json') as json_file:
     cols_to_nodes = json.load(json_file)
 
@@ -185,22 +206,46 @@ class NFHSDataLoaderBase(object):
                         TMCF_NODES.format(dataset_name=self.dataset_name,
                                           index=idx + 1,
                                           statvar=self.cols_dict[variable]))
+
                     # Writing MCF
-                    index = self.cols_dict[variable].find("AsFractionOf_Count_Household")
-                    if index != -1:
+                    index1 = self.cols_dict[variable].find("AsFractionOf_Count_Household")
+                    index2 = self.cols_dict[variable].find("Age")
+                    description = re.sub(r"(\w)([A-Z])", r"\1 \2", self.cols_dict[variable].replace('_', ' '))
+                    list = description.split(" ")
+                    for i in range(0, len(list)):
+                        if list[i] == 'Age':
+                            age = list[i-1]
+                    if index1 != -1 and index2 == -1:
                         mcf.write(
                         MCF_NODES_DENOMINATOR.format(
                             statvar=self.cols_dict[variable],
                             # descript=self.cols_dict[variable].replace('_', ' '),
-                            description = re.sub(r"(\w)([A-Z])", r"\1 \2", self.cols_dict[variable].replace('_', ' '))))
+                            description = description))
+                            
+                    elif index2 != -1 and index1 == -1:
+                        mcf.write(
+                            MCF_NODES_AGE.format(
+                                statvar=self.cols_dict[variable],
+                                # descript=self.cols_dict[variable].replace('_', ' '),
+                                description = description,
+                                age = age 
+                            ))
 
+                    elif index1 != -1 and index2 != -1:
+                        mcf.write(
+                            MCF_NODES_COMMON.format(
+                                statvar=self.cols_dict[variable],
+                                # descript=self.cols_dict[variable].replace('_', ' '),
+                                description = description,
+                                age = age
+                            ))
+                            
                     else:
-
                         mcf.write(
                             MCF_NODES.format(
                                 statvar=self.cols_dict[variable],
                                 # descript=self.cols_dict[variable].replace('_', ' '),
-                                description = re.sub(r"(\w)([A-Z])", r"\1 \2", self.cols_dict[variable].replace('_', ' '))))
+                                description = description))
 
                     statvars_written.append(self.cols_dict[variable])
 
