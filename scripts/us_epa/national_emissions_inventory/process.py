@@ -30,7 +30,7 @@ from util.statvar_dcid_generator import get_statvar_dcid
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
-from metadata import replace_metadata, replace_source_metadata
+from config import *
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -56,149 +56,6 @@ _TMCF_TEMPLATE = ("Node: E:national_emissions->E0\n"
                   "value: C:national_emissions->observation\n")
 
 
-def _data_standardize(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
-    """
-    Replaces values of a single column into true values
-    from metadata and returns the DF.
-
-    Args:
-        df (pd.DataFrame): df as the input, to change column values,
-        column_name (str): column_name as a string, which has to be changed
-
-    Returns:
-        df (pd.DataFrame): modified df as output
-    """
-    df = df.replace({column_name: replace_metadata})
-    return df
-
-
-def _regularize_columns(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
-    """
-    Reads the file for national emissions data and regularizes the files into a 
-    single structure so that it can be processed at once. This includes dropping
-    additional columns, renaming the columns and adding the columns with null if
-    not present.
-
-    Args:
-        df (pd.DataFrame): provides the df as input
-        file_path (str): path to excel file as the input
-
-    Returns:
-        df (pd.DataFrame): provides the regularized df as output
-    """
-    if '2008' in file_path or '2011' in file_path:
-        df.rename(columns={
-            'state_and_county_fips_code': 'fips code',
-            'pollutant_cd': 'pollutant code',
-            'uom': 'emissions uom',
-            'total_emissions': 'total emissions',
-            'emissions_type_code': 'emissions type code'
-        },
-                  inplace=True)
-        df = df.drop(columns=[
-            'tribal_name', 'st_usps_cd', 'county_name', 'data_category_cd',
-            'description', 'aircraft_engine_type_cd', 'emissions_op_type_code',
-            'data_set_short_name'
-        ])
-        df['pollutant type(s)'] = 'nan'
-        if '2008' in file_path:
-            df['year'] = '2008'
-        else:
-            df['year'] = '2011'
-    elif '2017' in file_path:
-        df = df.drop(columns=[
-            'epa region code', 'state', 'fips state code', 'county', 'aetc',
-            'reporting period', 'sector', 'tribal name', 'pollutant desc',
-            'data category', 'data set'
-        ])
-        df['year'] = '2017'
-    elif 'tribes' in file_path:
-        df.rename(columns={'tribal name': 'fips code'}, inplace=True)
-        df = df.drop(columns=[
-            'state', 'fips state code', 'data category', 'reporting period',
-            'emissions operating type', 'pollutant desc', 'data set'
-        ])
-        df = _data_standardize(df, 'fips code')
-        df['pollutant type(s)'] = 'nan'
-        df['year'] = '2014'
-    else:
-        df.rename(columns={
-            'state_and_county_fips_code': 'fips code',
-            'pollutant_cd': 'pollutant code',
-            'uom': 'emissions uom',
-            'total_emissions': 'total emissions',
-            'emissions_type_code': 'emissions type code'
-        },
-                  inplace=True)
-        df = df.drop(columns=[
-            'tribal_name', 'fips_state_code', 'st_usps_cd', 'county_name',
-            'data_category', 'emission_operating_type', 'pollutant_desc',
-            'emissions_operating_type', 'data_set'
-        ])
-        df['pollutant type(s)'] = 'nan'
-        df['year'] = '2014'
-    return df
-
-
-def _national_emissions(file_path: str) -> pd.DataFrame:
-    """
-    Reads the file for national emissions data and cleans it for concatenation
-    in Final CSV.
-
-    Args:
-        file_path (str): path to excel file as the input
-
-    Returns:
-        df (pd.DataFrame): provides the cleaned df as output
-    """
-    df = pd.read_csv(file_path, header=0, low_memory=False)
-    df = _regularize_columns(df, file_path)
-    df['pollutant code'] = df['pollutant code'].astype(str)
-    df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
-    #
-    # Remove if Tribal Details are needed
-    #
-    df['geo_Id'] = df['geo_Id'].astype(int)
-    df = df.drop(df[df.geo_Id > 80000].index)
-    df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
-    df['geo_Id'] = df['geo_Id'].astype(str)
-    #
-    # Remove if Tribal Details are needed
-    #
-    df['geo_Id'] = 'geoId/' + df['geo_Id']
-    df.rename(columns={
-        'emissions uom': 'unit',
-        'total emissions': 'observation',
-        'data set': 'year'
-    },
-              inplace=True)
-    df = _data_standardize(df, 'unit')
-    df = _data_standardize(df, 'pollutant code')
-    df_emissions_code = df[df['emissions type code'] != '']
-    df_emissions_code = df_emissions_code[
-        (df_emissions_code['emissions type code'].notnull()) &
-        (df_emissions_code['emissions type code'] != "B") &
-        (df_emissions_code['emissions type code'] != "T")]
-    if df_emissions_code.empty == False:
-        df_emissions_code = _data_standardize(df_emissions_code,
-                                              'emissions type code')
-        df_emissions_code['SV'] = (
-            'Annual_Amount_Emissions_' +
-            df_emissions_code['emissions type code'] + '_' +
-            df_emissions_code['pollutant code'].astype(str) + '_SCC_' +
-            df_emissions_code['scc'].astype(str))
-    df['SV'] = ('Annual_Amount_Emissions_' + df['pollutant code'].astype(str) +
-                '_SCC_' + df['scc'].astype(str))
-    df = pd.concat([df, df_emissions_code])
-    df['SV'] = df['SV'].str.replace('_nan', '')
-    df = df.drop(columns=[
-        'scc', 'pollutant code', 'emissions type code', 'pollutant type(s)',
-        'fips code'
-    ])
-    print(df)
-    return df
-
-
 class USAirEmissionTrends:
     """
     This Class has requried methods to generate Cleaned CSV,
@@ -211,6 +68,109 @@ class USAirEmissionTrends:
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
+
+    def data_standardize(self, df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+        """
+        Replaces values of a single column into true values
+        from metadata and returns the DF.
+
+        Args:
+            df (pd.DataFrame): df as the input, to change column values,
+            column_name (str): column_name as a string, which has to be changed
+
+        Returns:
+            df (pd.DataFrame): modified df as output
+        """
+        df = df.replace({column_name: replace_metadata})
+        return df
+    
+    def regularize_columns(self, df: pd.DataFrame, file_path: str) -> pd.DataFrame:
+        """
+        Reads the file for national emissions data and regularizes the files into a 
+        single structure so that it can be processed at once. This includes dropping
+        additional columns, renaming the columns and adding the columns with null if
+        not present.
+
+        Args:
+            df (pd.DataFrame): provides the df as input
+            file_path (str): path to excel file as the input
+
+        Returns:
+            df (pd.DataFrame): provides the regularized df as output
+        """
+        if '2008' in file_path or '2011' in file_path:
+            df.rename(columns= replacement_08_11, inplace=True)
+            df = df.drop(columns=drop_08_11)
+            df['pollutant type(s)'] = 'nan'
+            if '2008' in file_path:
+                df['year'] = '2008'
+            else:
+                df['year'] = '2011'
+        elif '2017' in file_path:
+            df = df.drop(columns=drop_17)
+            df['year'] = '2017'
+        elif 'tribes' in file_path:
+            df.rename(columns=replacement_tribes, inplace=True)
+            df = df.drop(columns=drop_tribes)
+            df = self.data_standardize(df, 'fips code')
+            df['pollutant type(s)'] = 'nan'
+            df['year'] = '2014'
+        else:
+            df.rename(columns=replacement_14, inplace=True)
+            df = df.drop(columns=drop_14)
+            df['pollutant type(s)'] = 'nan'
+            df['year'] = '2014'
+        return df
+
+    def national_emissions(self,file_path: str) -> pd.DataFrame:
+        """
+        Reads the file for national emissions data and cleans it for concatenation
+        in Final CSV.
+
+        Args:
+            file_path (str): path to excel file as the input
+
+        Returns:
+            df (pd.DataFrame): provides the cleaned df as output
+        """
+        df = pd.read_csv(file_path, header=0, low_memory=False)
+        df = self.regularize_columns(df, file_path)
+        df['pollutant code'] = df['pollutant code'].astype(str)
+        df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
+        #
+        # Remove if Tribal Details are needed
+        #
+        df['geo_Id'] = df['geo_Id'].astype(int)
+        df = df.drop(df[df.geo_Id > 80000].index)
+        df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
+        df['geo_Id'] = df['geo_Id'].astype(str)
+        #
+        # Remove if Tribal Details are needed
+        #
+        df['geo_Id'] = 'geoId/' + df['geo_Id']
+        df.rename(columns=replacement_17,
+                inplace=True)
+        df = self.data_standardize(df, 'unit')
+        df = self.data_standardize(df, 'pollutant code')
+        df_emissions_code = df[df['emissions type code'] != '']
+        df_emissions_code = df_emissions_code[
+            (df_emissions_code['emissions type code'].notnull()) &
+            (df_emissions_code['emissions type code'] != "B") &
+            (df_emissions_code['emissions type code'] != "T")]
+        if df_emissions_code.empty == False:
+            df_emissions_code = self.data_standardize(df_emissions_code,
+                                                'emissions type code')
+            df_emissions_code['SV'] = (
+                'Annual_Amount_Emissions_' +
+                df_emissions_code['emissions type code'] + '_' +
+                df_emissions_code['pollutant code'].astype(str) + '_SCC_' +
+                df_emissions_code['scc'].astype(str))
+        df['SV'] = ('Annual_Amount_Emissions_' + df['pollutant code'].astype(str) +
+                    '_SCC_' + df['scc'].astype(str))
+        df = pd.concat([df, df_emissions_code])
+        df['SV'] = df['SV'].str.replace('_nan', '')
+        df = df.drop(columns=drop_df)
+        return df
 
     def generate_tmcf(self) -> None:
         """
@@ -301,7 +261,7 @@ class USAirEmissionTrends:
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .csv extension
             file_name = file_path.split("/")[-1][:-4]
-            df = _national_emissions(file_path)
+            df = self.national_emissions(file_path)
             final_df = pd.concat([final_df, df])
 
         sv_list = final_df["SV"].to_list()

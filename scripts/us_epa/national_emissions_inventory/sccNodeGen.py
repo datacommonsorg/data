@@ -14,6 +14,7 @@
 
 import pandas as pd
 import numpy as np
+import os
 
 _SCHEMA_TEMPLATE = ("Node: dcid:EPA_SCC/{pv1}\n"
                     "typeOf: dcs:EpaSccCodeEnum\n{pv2}"
@@ -33,28 +34,43 @@ def make_schema(df,level):
             e2 = "specializationOf: dcid:" + df['specialization'][ind] + "\n"
         final_schema += _SCHEMA_TEMPLATE.format(
                 pv1=e1, pv2=e2, pv3=e3) + "\n"
-    with open("scripts/us_epa/national_emissions_inventory/output/scc"+level+".mcf", 'w+', encoding='utf-8') as f_out:
+    output_file_name = "scc" + level + ".mcf"
+    output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"output",output_file_name)
+    with open(output_file_path, 'w+', encoding='utf-8') as f_out:
         f_out.write(final_schema.rstrip('\n'))
 
+if __name__ == "__main__":
+    input_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"scc_list")
+    input_file_name = "SCCDownload.xlsx"
 
-df = pd.read_excel("scripts/us_epa/national_emissions_inventory/scc_list/SCCDownload.xlsx")
-# df = df.drop(df[df.status != 'Active'].index)
-# df = df.drop(columns=['status'])
-df['SCC'] = df['SCC'].astype(str)
-df['SCC_L1'] = np.where(df['SCC'].str.len() == 8, df['SCC'].str[:1],df['SCC'].str[:2])
-df['SCC_L2'] = np.where(df['SCC'].str.len() == 8, df['SCC'].str[:3],df['SCC'].str[:4])
-df['SCC_L3'] = np.where(df['SCC'].str.len() == 8, df['SCC'].str[:6],df['SCC'].str[:7])
-# Remove if specialization needed at L1
-df['data category'] = ''
-#
-df_temp = df[['SCC_L1','scc level one','data category']]
-make_schema(df_temp,"L1")
-df['SCC_L1'] = 'EPA_SCC/' + df['SCC_L1']
-df_temp = df[['SCC_L2','scc level two','SCC_L1']]
-make_schema(df_temp,"L2")
-df['SCC_L2'] = 'EPA_SCC/' + df['SCC_L2']
-df_temp = df[['SCC_L3','scc level three','SCC_L2']]
-make_schema(df_temp,"L3")
-df['SCC_L3'] = 'EPA_SCC/' + df['SCC_L3']
-df_temp = df[['SCC','scc level four','SCC_L3']]
-make_schema(df_temp,"L4")
+    df = pd.read_excel(os.path.join(input_file_path,input_file_name))
+
+    # Seperate SCC Levels based on Length of String
+    # Length = 8 :  L1 - 1 digit
+    #               L2 - L1 + 2 digits
+    #               L3 - L2 + 3 digits
+    #               L4 - L3 + 2 digits
+    # Length = 10 : L1 - 2 digits
+    #               L2 - L1 + 2 digits
+    #               L3 - L2 + 3 digits
+    #               L4 - L3 + 3 digits
+    df['SCC'] = df['SCC'].astype(str)
+    df['SCC_L1'] = np.where(df['SCC'].str.len() == 8, df['SCC'].str[:1],df['SCC'].str[:2])
+    df['SCC_L2'] = np.where(df['SCC'].str.len() == 8, df['SCC'].str[:3],df['SCC'].str[:4])
+    df['SCC_L3'] = np.where(df['SCC'].str.len() == 8, df['SCC'].str[:6],df['SCC'].str[:7])
+
+    # Remove if specialization needed at L1
+    df['data category'] = ''
+    #
+
+    df_temp = df[['SCC_L1','scc level one','data category']]
+    make_schema(df_temp,"L1")
+    df['SCC_L1'] = 'EPA_SCC/' + df['SCC_L1']
+    df_temp = df[['SCC_L2','scc level two','SCC_L1']]
+    make_schema(df_temp,"L2")
+    df['SCC_L2'] = 'EPA_SCC/' + df['SCC_L2']
+    df_temp = df[['SCC_L3','scc level three','SCC_L2']]
+    make_schema(df_temp,"L3")
+    df['SCC_L3'] = 'EPA_SCC/' + df['SCC_L3']
+    df_temp = df[['SCC','scc level four','SCC_L3']]
+    make_schema(df_temp,"L4")
