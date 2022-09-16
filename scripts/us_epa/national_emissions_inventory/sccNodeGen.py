@@ -22,6 +22,16 @@ _SCHEMA_TEMPLATE = ("Node: dcid:EPA_SCC/{pv1}\n"
 )
 
 def make_schema(df,level):
+    """
+    Generates MCF file for the schema of SCCs according 
+    to the DF provided.
+
+    Args:
+        df (pd.DataFrame): df as the input, to generate SCC schema.
+        level (str): A string indicating what level of SCCs are provided.
+    Returns:
+        None
+    """
     df = df.drop_duplicates()
     df = df.rename(columns={df.columns[0]:"code", df.columns[1]:"name", df.columns[2]:"specialization"})
     final_schema = ''
@@ -62,7 +72,7 @@ if __name__ == "__main__":
     # Remove if specialization needed at L1
     df['data category'] = ''
     #
-
+    # Calls to the above Function for different Levels of Schema
     df_temp = df[['SCC_L1','scc level one','data category']]
     make_schema(df_temp,"L1")
     df['SCC_L1'] = 'EPA_SCC/' + df['SCC_L1']
