@@ -120,7 +120,7 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
                            ('mcf')] = self._final_df['mcf'].replace(mcf,
                                                                     regex=True)
 
-    def state_emissions(self, file_path: str) -> pd.DataFrame:
+    def _state_emissions(self, file_path: str) -> pd.DataFrame:
         """
         Reads the file for state emissions data and cleans it for concatenation
         in Final CSV.
@@ -158,7 +158,7 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
         df = pd.concat([df, df_agg])
         return df
 
-    def national_emissions(self, file_path: str) -> pd.DataFrame:
+    def _national_emissions(self, file_path: str) -> pd.DataFrame:
         """
         Reads the file for national emissions data and cleans it for concatenation
         in Final CSV.
@@ -226,8 +226,8 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             None
         """
         source_file_to_method_mapping = {
-            "national_tier1_caps": self.national_emissions,
-            "state_tier1_caps": self.state_emissions
+            "national_tier1_caps": self._national_emissions,
+            "state_tier1_caps": self._state_emissions
         }
         for file_path in self._input_files:
             # Taking the File name out of the complete file address
