@@ -1,18 +1,19 @@
 Node: E:DiseaseOntology->E1
 typeOf: dcs:Disease
-dcid: C:DiseaseOntology->dcid
+dcid: C:DiseaseOntology->id
 name: C:DiseaseOntology->label
 parent: C:DiseaseOntology->subClassOf
-description: C:DiseaseOntology->IAO_0000115
+description: C:DiseaseOntology->diseaseDescription
 alternativeDiseaseOntologyID : C:DiseaseOntology->hasAlternativeId 
 diseaseSynonym: C:DiseaseOntology->hasExactSynonym
 internationalClassificationOfDiseaseID: C:DiseaseOntology->ICDO
-medicalSubjectHeadingDescriptorID: C:DiseaseOntology->MESH
+medicalSubjectHeadingDescriptorID: C:DiseaseOntology->meshDescriptor
+medicalSubjectHeadingConceptID: C:DiseaseOntology->meshConcept
 nationalCancerInstituteID: C:DiseaseOntology->NCI
-snowmedCT: C:DiseaseOntology->SNOMEDCTUS20200901
+snowmedCT: C:DiseaseOntology->SNOMEDCTUS20210731
 snowmedCT: C:DiseaseOntology->SNOMEDCTUS20200301
-snowmedCT: C:DiseaseOntology->SNOMEDCTUS20180301
-snowmedCT: C:DiseaseOntology->SNOMEDCTUS20190901
+snowmedCT: C:DiseaseOntology->SNOMEDCTUS20200901
+snowmedCT: C:DiseaseOntology->SNOMEDCTUS20220630
 unifiedMedicalLanguageSystemConceptUniqueIdentifier: C:DiseaseOntology->UMLSCUI
 icd10CMCode: C:DiseaseOntology->ICD10CM
 icd9CMCode: C:DiseaseOntology->ICD9CM
@@ -21,3 +22,4 @@ geneticAndRareDiseasesID: C:DiseaseOntology->GARD
 omimID: C:DiseaseOntology->OMIM
 experimentalFactorOntologyID: C:DiseaseOntology->EFO
 medDraID: C:DiseaseOntology->MEDDRA
+
