@@ -182,7 +182,7 @@ def remove_newline(df):
     df.loc[2895, 'IAO_0000115'] = df.loc[2895, 'IAO_0000115'].replace("\\n", "")
     df.loc[2934, 'IAO_0000115'] = df.loc[2934, 'IAO_0000115'].replace("\\n", "")
     df.loc[3036, 'IAO_0000115'] = df.loc[3036, 'IAO_0000115'].replace("\\n", "")
-    df.loc[11305, 'IAO_0000115'] = df.loc[11305,
+    df.loc[11305, 'IAO_0000115'] = df.loc[11304,
                                           'IAO_0000115'].replace("\\n", "")
     return df
 
