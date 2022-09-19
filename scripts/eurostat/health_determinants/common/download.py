@@ -42,22 +42,6 @@ def download_gz_file(download_file_url: str, download_path: str) -> None:
         f.write(file_content)
 
 
-def download_txt_file(download_file_url: str, download_path: str) -> None:
-    download_raw_files(download_file_url, download_path)
-
-
-def download_csv_file(download_file_url: str, download_path: str) -> None:
-    download_raw_files(download_file_url, download_path)
-
-
-def download_pdf_file(download_file_url: str, download_path: str) -> None:
-    download_raw_files(download_file_url, download_path)
-
-
-def download_raw_files(download_file_url: str, download_path: str) -> None:
-    None
-
-
 def download_files(download_files_url: list, download_path: str) -> None:
     """
     This Method calls the download function from the commons directory

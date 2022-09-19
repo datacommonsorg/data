@@ -53,17 +53,17 @@ class EuroStatTobaccoConsumption(EuroStat):
                      "\nmeasuredProperty: dcs:count\n")
 
     _sv_properties_template = {
-        "activity": "\nhealthBehavior: dcs:{proprty_value}",
-        "frequenc_tobacco": "\nactivityFrequency: dcs:{proprty_value}",
-        "quantity": "\nconsumptionQuantity: {proprty_value}",
-        "substance": "\ntobaccoUsageType: dcs:{proprty_value}",
-        "history": "\nactivityDuration: {proprty_value}",
-        "gender": "\ngender: dcs:{proprty_value}",
-        "education": "\neducationalAttainment: dcs:{proprty_value}",
-        "incomequin": "\nincome: [{proprty_value}]",
-        "residence": "\nplaceOfResidenceClassification: dcs:{proprty_value}",
-        "countryofbirth": "\nnativity: dcs:{proprty_value}",
-        "citizenship": "\ncitizenship: dcs:{proprty_value}",
+        "activity": "\nhealthBehavior: dcs:{property_value}",
+        "frequenc_tobacco": "\nactivityFrequency: dcs:{property_value}",
+        "quantity": "\nconsumptionQuantity: {property_value}",
+        "substance": "\ntobaccoUsageType: dcs:{property_value}",
+        "history": "\nactivityDuration: {property_value}",
+        "gender": "\ngender: dcs:{property_value}",
+        "education": "\neducationalAttainment: dcs:{property_value}",
+        "incomequin": "\nincome: [{property_value}]",
+        "residence": "\nplaceOfResidenceClassification: dcs:{property_value}",
+        "countryofbirth": "\nnativity: dcs:{property_value}",
+        "citizenship": "\ncitizenship: dcs:{property_value}",
     }
 
     _sv_value_to_property_mapping = {

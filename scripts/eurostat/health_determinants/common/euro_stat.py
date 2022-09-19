@@ -97,10 +97,22 @@ class EuroStat:
         self._tmcf_file_path = tmcf_file_path
 
     def _property_correction(self):
-        None
+        """
+        Abstract method
+        Sub class will override this method to standardize / correct proprties 
+        of an SV.
+
+        _sv_properties state will be modified in through this method.
+        """
+        pass
 
     def _sv_name_correction(self, sv_name: str) -> str:
-        None
+        """
+        Abstract method
+        Sub class will override this method, to correct / standardize SV names 
+        constructed from data files.
+        """
+        pass
 
     def _rename_frequency_column(self, df: pd.DataFrame) -> pd.DataFrame:
         return df
@@ -124,10 +136,8 @@ class EuroStat:
         df = split_column(df, df.columns.values.tolist()[0])
 
         df.rename(columns={
-            'geo\time': 'geo',
-            'geo\\time': 'geo',
-            'time\geo': 'time',
-            'time\\geo': 'time',
+            r'geo\time': 'geo',
+            r'time\geo': 'time',
             'isced97': 'isced11',
             'quantile': 'quant_inc'
         },
@@ -296,10 +306,10 @@ class EuroStat:
 
                 for p in self._sv_value_to_property_mapping.keys():
                     if p in prop:
-                        self._sv_properties[self._sv_value_to_property_mapping[
-                            p]] = self._sv_properties_template[
-                                self._sv_value_to_property_mapping[p]].format(
-                                    proprty_value=prop)
+                        sv_property = self._sv_value_to_property_mapping[p]
+                        self._sv_properties[
+                            sv_property] = self._sv_properties_template[
+                                sv_property].format(property_value=prop)
 
             sv_name = sv_name.replace(", Among,",
                                       "Among").rstrip(', ').rstrip('with')

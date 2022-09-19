@@ -54,35 +54,35 @@ class EuroStatPhysicalActivity(EuroStat):
 
     _sv_properties_template = {
         "healthbehavior":
-            "\nhealthBehavior: dcs:{proprty_value}",
+            "\nhealthBehavior: dcs:{property_value}",
         "gender":
-            "\ngender: dcs:{proprty_value}",
+            "\ngender: dcs:{property_value}",
         "exercise":
-            "\nexerciseType: dcs:{proprty_value}",
+            "\nexerciseType: dcs:{property_value}",
         "education":
-            "\neducationalAttainment: dcs:{proprty_value}",
+            "\neducationalAttainment: dcs:{property_value}",
         "incomequin":
-            "\nincome: [{proprty_value}]",
+            "\nincome: [{property_value}]",
         "residence":
-            "\nplaceOfResidenceClassification: dcs:{proprty_value}",
+            "\nplaceOfResidenceClassification: dcs:{property_value}",
         "lev_limit":
-            "\nglobalActivityLimitationindicator: dcs:{proprty_value}",
+            "\nglobalActivityLimitationindicator: dcs:{property_value}",
         "activity":
             "",
         "activity_temp":
-            "\nphysicalActivityEffortLevel: dcs:{proprty_value}Level",
+            "\nphysicalActivityEffortLevel: dcs:{property_value}Level",
         "frequency":
-            "\nactivityFrequency: dcs:{proprty_value}",
+            "\nactivityFrequency: dcs:{property_value}",
         "duration":
             "",
         "duration_temp":
-            "{proprty_value}",
+            "{property_value}",
         "countryofbirth":
-            "\nnativity: dcs:{proprty_value}",
+            "\nnativity: dcs:{property_value}",
         "citizenship":
-            "\ncitizenship: dcs:{proprty_value}",
+            "\ncitizenship: dcs:{property_value}",
         "healthbehavior_bmi":
-            "__{proprty_value}",
+            "__{property_value}",
     }
 
     _sv_value_to_property_mapping = {
