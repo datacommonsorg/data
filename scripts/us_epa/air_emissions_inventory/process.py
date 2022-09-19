@@ -54,12 +54,12 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
     """
 
     _mcf_template = ("Node: dcid:{sv}\n"
-                 "typeOf: dcs:StatisticalVariable\n"
-                 "populationType: dcs:Emissions\n"
-                 "emissionSourceType: dcs:NonBiogenicEmissionSource\n"
-                 "measurementQualifier: dcs:Annual{source}{pollutant}\n"
-                 "statType: dcs:measuredValue\n"
-                 "measuredProperty: dcs:amount\n")
+                     "typeOf: dcs:StatisticalVariable\n"
+                     "populationType: dcs:Emissions\n"
+                     "emissionSourceType: dcs:NonBiogenicEmissionSource\n"
+                     "measurementQualifier: dcs:Annual{source}{pollutant}\n"
+                     "statType: dcs:measuredValue\n"
+                     "measuredProperty: dcs:amount\n")
 
     _tmcf_template = (
         "Node: E:airpollution_emission_trends_tier1->E0\n"
@@ -119,7 +119,6 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
         self._final_df.loc[:,
                            ('mcf')] = self._final_df['mcf'].replace(mcf,
                                                                     regex=True)
-    
 
     def state_emissions(self, file_path: str) -> pd.DataFrame:
         """
@@ -152,7 +151,9 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
         # Putting a logic to change it to proper year
         df['year'] = df['year'] + np.where(df['year'] >= 90, 1900, 2000)
         # Making copy and using group by to get Aggregated Values.
-        df_agg = self.aggregate_columns(df, ['PrescribedFire', 'Wildfire', 'Miscellaneous'], 'dcAggregate/EPA_NationalEmissionInventory')
+        df_agg = self.aggregate_columns(
+            df, ['PrescribedFire', 'Wildfire', 'Miscellaneous'],
+            'dcAggregate/EPA_NationalEmissionInventory')
         df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         df = pd.concat([df, df_agg])
         return df
@@ -206,7 +207,9 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             final_df = pd.concat([final_df, df])
 
         final_df['geo_Id'] = 'country/USA'
-        final_df_agg = self.aggregate_columns(final_df, ['PrescribedFire', 'Wildfire', 'Miscellaneous'], 'dcAggregate/EPA_NationalEmissionInventory')
+        final_df_agg = self.aggregate_columns(
+            final_df, ['PrescribedFire', 'Wildfire', 'Miscellaneous'],
+            'dcAggregate/EPA_NationalEmissionInventory')
         final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         final_df = pd.concat([final_df, final_df_agg])
         return final_df

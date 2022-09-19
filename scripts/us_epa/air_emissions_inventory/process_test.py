@@ -25,6 +25,7 @@ from common.unitest_common_methods import CommonTestClass
 # pylint: enable=wrong-import-position
 
 
-class USAirPollutionEmissionTrendsNationalAndStateTest(CommonTestClass.CommonTestCases):
+class USAirPollutionEmissionTrendsNationalAndStateTest(
+        CommonTestClass.CommonTestCases):
     _import_class = USAirPollutionEmissionTrendsNationalAndState
     _test_module_directory = os.path.dirname(__file__)
