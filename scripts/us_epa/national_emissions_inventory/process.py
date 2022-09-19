@@ -68,8 +68,12 @@ class USAirEmissionTrends:
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
+        self.final_df = pd.DataFrame(
+            columns=['geo_Id', 'year', 'SV', 'observation', 'unit'])
+        self.final_mcf_template = ""
 
-    def data_standardize(self, df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+    def data_standardize(self, df: pd.DataFrame,
+                         column_name: str) -> pd.DataFrame:
         """
         Replaces values of a single column into true values
         from metadata and returns the DF.
@@ -83,8 +87,9 @@ class USAirEmissionTrends:
         """
         df = df.replace({column_name: replace_metadata})
         return df
-    
-    def regularize_columns(self, df: pd.DataFrame, file_path: str) -> pd.DataFrame:
+
+    def regularize_columns(self, df: pd.DataFrame,
+                           file_path: str) -> pd.DataFrame:
         """
         Reads the file for national emissions data and regularizes the files into a 
         single structure so that it can be processed at once. This includes dropping
@@ -99,7 +104,7 @@ class USAirEmissionTrends:
             df (pd.DataFrame): provides the regularized df as output
         """
         if '2008' in file_path or '2011' in file_path:
-            df.rename(columns= replacement_08_11, inplace=True)
+            df.rename(columns=replacement_08_11, inplace=True)
             df = df.drop(columns=drop_08_11)
             df['pollutant type(s)'] = 'nan'
             if '2008' in file_path:
@@ -122,7 +127,7 @@ class USAirEmissionTrends:
             df['year'] = '2014'
         return df
 
-    def national_emissions(self,file_path: str) -> pd.DataFrame:
+    def national_emissions(self, file_path: str) -> pd.DataFrame:
         """
         Reads the file for national emissions data and cleans it for concatenation
         in Final CSV.
@@ -148,8 +153,7 @@ class USAirEmissionTrends:
         # Remove if Tribal Details are needed
         #
         df['geo_Id'] = 'geoId/' + df['geo_Id']
-        df.rename(columns=replacement_17,
-                inplace=True)
+        df.rename(columns=replacement_17, inplace=True)
         df = self.data_standardize(df, 'unit')
         df = self.data_standardize(df, 'pollutant code')
         df_emissions_code = df[df['emissions type code'] != '']
@@ -159,53 +163,43 @@ class USAirEmissionTrends:
             (df_emissions_code['emissions type code'] != "T")]
         if df_emissions_code.empty == False:
             df_emissions_code = self.data_standardize(df_emissions_code,
-                                                'emissions type code')
+                                                      'emissions type code')
             df_emissions_code['SV'] = (
                 'Annual_Amount_Emissions_' +
                 df_emissions_code['emissions type code'] + '_' +
                 df_emissions_code['pollutant code'].astype(str) + '_SCC_' +
                 df_emissions_code['scc'].astype(str))
-        df['SV'] = ('Annual_Amount_Emissions_' + df['pollutant code'].astype(str) +
-                    '_SCC_' + df['scc'].astype(str))
+        df['SV'] = ('Annual_Amount_Emissions_' +
+                    df['pollutant code'].astype(str) + '_SCC_' +
+                    df['scc'].astype(str))
         df = pd.concat([df, df_emissions_code])
         df['SV'] = df['SV'].str.replace('_nan', '')
         df = df.drop(columns=drop_df)
         return df
 
-    def generate_tmcf(self) -> None:
+    def _mcf_property_generator(self) -> None:
         """
-        This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template.
-        Args:
-            None
-        Returns:
-            None
-        """
-        # Writing Genereated TMCF to local path.
-        with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
-
-    def generate_mcf(self, sv_list) -> None:
-        """
-        This method generates MCF file w.r.t
-        dataframe headers and defined MCF template
+        This method generates mcf properties w.r.t
+        the SVs present. 
 
         Args:
-            df_cols (list) : List of DataFrame Columns
+            None
 
         Returns:
             None
         """
 
-        final_mcf_template = ""
+        sv_list = self.final_df["SV"].to_list()
+        sv_list = list(set(sv_list))
+        sv_list.sort()
         for sv in sv_list:
-            sv_checker = {
-                "typeOf": "dcs:StatisticalVariable",
-                "populationType": "dcs:Emissions",
-                "measurementQualifier": "dcs:Annual",
-                "statType": "dcs:measuredValue",
-                "measuredProperty": "dcs:amount"
-            }
+            # sv_checker = {
+            #     "typeOf": "dcs:StatisticalVariable",
+            #     "populationType": "dcs:Emissions",
+            #     "measurementQualifier": "dcs:Annual",
+            #     "statType": "dcs:measuredValue",
+            #     "measuredProperty": "dcs:amount"
+            # }
             emission_type = pollutant = code = ''
             sv_property = sv.split("_")
             source = '\nepaSccCode: dcs:EPA_SCC/' + sv_property[-1]
@@ -230,7 +224,7 @@ class USAirEmissionTrends:
             #     print(generated_sv)
             #     print(sv)
             #     print()
-            final_mcf_template += _MCF_TEMPLATE.format(
+            self.final_mcf_template += _MCF_TEMPLATE.format(
                 pv1=sv,
                 pv2=source,
                 pv3=pollutant_value,
@@ -238,48 +232,81 @@ class USAirEmissionTrends:
                 pv5=pollutant_name + ", " + scc_name,
                 pv6=code) + "\n"
 
-        # Writing Genereated MCF to local path.
-        with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(final_mcf_template.rstrip('\n'))
-
     def process(self):
         """
-        This Method calls the required methods to generate
-        cleaned CSV, MCF, and TMCF file.
+        This Method processes the input files to generate
+        the final df.
+        Args:
+            None
+        Returns:
+            None
         """
-
-        final_df = pd.DataFrame(
-            columns=['geo_Id', 'year', 'SV', 'observation', 'unit'])
-        # Creating Output Directory
-        output_path = os.path.dirname(self._cleaned_csv_file_path)
-        if not os.path.exists(output_path):
-            os.mkdir(output_path)
-        sv_list = []
-
         for file_path in self._input_files:
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .csv extension
-            file_name = file_path.split("/")[-1][:-4]
             df = self.national_emissions(file_path)
-            final_df = pd.concat([final_df, df])
+            self.final_df = pd.concat([self.final_df, df])
 
-        sv_list = final_df["SV"].to_list()
-        final_df = final_df.sort_values(
+        self.final_df = self.final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'observation'])
-        final_df['observation'].replace('', np.nan, inplace=True)
-        final_df.dropna(subset=['observation'], inplace=True)
-        final_df['observation'] = np.where(final_df['unit'] == 'Pound',
-                                           final_df['observation'] / 2000,
-                                           final_df['observation'])
-        final_df = final_df.groupby(['geo_Id', 'year',
-                                     'SV']).sum().reset_index()
-        final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
-        final_df.to_csv(self._cleaned_csv_file_path, index=False)
-        sv_list = list(set(sv_list))
-        sv_list.sort()
-        self.generate_mcf(sv_list)
-        self.generate_tmcf()
+        self.final_df['observation'].replace('', np.nan, inplace=True)
+        self.final_df.dropna(subset=['observation'], inplace=True)
+        self.final_df['observation'] = np.where(
+            self.final_df['unit'] == 'Pound',
+            self.final_df['observation'] / 2000, self.final_df['observation'])
+        self.final_df = self.final_df.groupby(['geo_Id', 'year',
+                                               'SV']).sum().reset_index()
+        self.final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
+
+    def generate_tmcf(self) -> None:
+        """
+        This method generates TMCF file w.r.t
+        dataframe headers and defined TMCF template.
+        Args:
+            None
+        Returns:
+            None
+        """
+        # Writing Genereated TMCF to local path.
+        with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
+
+    def generate_mcf(self) -> None:
+        """
+        This method generates MCF file w.r.t
+        dataframe headers and defined MCF template
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
+
+        self._mcf_property_generator()
+
+        # Writing Genereated MCF to local path.
+        with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
+            f_out.write(self.final_mcf_template.rstrip('\n'))
+
+    def generate_csv(self) -> None:
+        """
+        This method generates CSV file w.r.t
+        input_files folder.
+        Args:
+            None
+        Returns:
+            None
+        """
+        # Creating Output Directory
+        output_path = os.path.dirname(self._cleaned_csv_file_path)
+        if not os.path.exists(output_path):
+            os.mkdir(output_path)
+
+        self.process()
+
+        self.final_df.to_csv(self._cleaned_csv_file_path, index=False)
 
 
 def main(_):
@@ -293,15 +320,17 @@ def main(_):
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
     # Defining Output Files
-    csv_name = "national_emissionsNP.csv"
-    mcf_name = "national_emissionsNP.mcf"
-    tmcf_name = "national_emissionsNP.tmcf"
+    csv_name = "national_emissions.csv"
+    mcf_name = "national_emissions.mcf"
+    tmcf_name = "national_emissions.tmcf"
     cleaned_csv_path = os.path.join(output_file_path, csv_name)
     mcf_path = os.path.join(output_file_path, mcf_name)
     tmcf_path = os.path.join(output_file_path, tmcf_name)
     loader = USAirEmissionTrends(ip_files, cleaned_csv_path, mcf_path,
                                  tmcf_path)
-    loader.process()
+    loader.generate_csv()
+    loader.generate_mcf()
+    loader.generate_tmcf()
 
 
 if __name__ == "__main__":

@@ -55,7 +55,9 @@ class TestProcess(unittest.TestCase):
 
             base = USAirEmissionTrends(self._IP_DATA, cleaned_csv_file_path,
                                        mcf_file_path, tmcf_file_path)
-            base.process()
+            base.generate_csv()
+            base.generate_mcf()
+            base.generate_tmcf()
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()
