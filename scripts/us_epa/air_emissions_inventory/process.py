@@ -74,6 +74,14 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
 
     def _add_sv_and_mcf_column_to_final_df(self):
         """
+        Generates the MCF data from the provided SV columns
+        based on the properties.
+        
+        Args:
+            None
+        
+        Returns:
+            None
         """
         self._final_df['SV'] = self._final_df['SV_TEMP']
         self._final_df['mcf'] = self._final_df['SV_TEMP']
@@ -204,6 +212,16 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
         return final_df
 
     def _parse_source_files(self):
+        """
+        Reads the files present in the input folder. Calls the appropriate
+        function based on the type of file and procceses it.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         source_file_to_method_mapping = {
             "national_tier1_caps": self.national_emissions,
             "state_tier1_caps": self.state_emissions

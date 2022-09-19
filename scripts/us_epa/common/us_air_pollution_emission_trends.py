@@ -160,6 +160,14 @@ class USAirPollutionEmissionTrends:
 
     def generate_csv(self):
         """
+        This method generates CSV file w.r.t
+        final df generated.
+
+        Args:
+            None
+
+        Returns:
+            None
         """
         # Creating Output Directory
         output_path = os.path.dirname(self._cleaned_csv_file_path)

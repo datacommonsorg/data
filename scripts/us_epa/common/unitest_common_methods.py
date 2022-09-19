@@ -60,6 +60,10 @@ class CommonTestClass:
             self._ob = self._import_class(ip_test_files)
 
         def test_csv(self):
+            """
+            This method is required to test between output generated
+            process script and excepted output files like CSV
+            """
             expected_csv_file_path = os.path.join(
                 self._expected_files_directory, self._expected_csv_file)
 
@@ -76,6 +80,10 @@ class CommonTestClass:
                 self.assertEquals(expected_csv_data.strip(), actual_csv_data.strip())
 
         def test_mcf(self):
+            """
+            This method is required to test between output generated
+            process script and excepted output files like MCF
+            """
             expected_mcf_file_path = os.path.join(
                 self._expected_files_directory, self._expected_mcf_file)
 
@@ -92,6 +100,10 @@ class CommonTestClass:
                 self.assertEquals(expected_mcf_data.strip(), actual_mcf_data.strip())
 
         def test_tmcf(self):
+            """
+            This method is required to test between output generated
+            process script and excepted output files like TMCF
+            """
             expected_tmcf_file_path = os.path.join(
                 self._expected_files_directory, self._expected_tmcf_file)
 
