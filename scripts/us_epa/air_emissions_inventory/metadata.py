@@ -1,18 +1,4 @@
-sourcegroups = {
-    'FuelCombustionElectricUtility': 'StationaryFuelCombustion',
-    'FuelCombustionIndustrial': 'StationaryFuelCombustion',
-    'EPA_FuelCombustionOther': 'StationaryFuelCombustion',
-    'ChemicalAndAlliedProductManufacturing': 'IndustrialAndOtherProcesses',
-    'MetalsProcessing': 'IndustrialAndOtherProcesses',
-    'PetroleumAndRelatedIndustries': 'IndustrialAndOtherProcesses',
-    'EPA_OtherIndustrialProcesses': 'IndustrialAndOtherProcesses',
-    'SolventUtilization': 'IndustrialAndOtherProcesses',
-    'StorageAndTransport': 'IndustrialAndOtherProcesses',
-    'WasteDisposalAndRecycling': 'IndustrialAndOtherProcesses',
-    'OnRoadVehicles': 'Transportation',
-    'NonRoadEnginesAndVehicles': 'Transportation'
-}
-sourcepollutantmetadata = {
+source_pollutant = {
     'CO': 'CarbonMonoxide',
     'NOX': 'OxidesOfNitrogen',
     'PM10Primary': 'PM10',
@@ -43,6 +29,7 @@ sourcepollutantmetadata = {
 sheets_national = [
     'CO', 'NOX', 'PM10Primary', 'PM25Primary', 'SO2', 'VOC', 'NH3'
 ]
+
 skiphead_ammonia_national = 6
 skiphead_others_national = 5
 skipfoot_pm_national = 0

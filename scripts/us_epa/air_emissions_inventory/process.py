@@ -16,12 +16,15 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 
-from asyncio.log import logger
 import os
 import sys
 from absl import app, flags
 import pandas as pd
 import numpy as np
+
+sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                '..')))
+from common.us_air_pollution_emission_trends import USAirPollutionEmissionTrends
 
 sys.path.insert(
     1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
@@ -30,10 +33,9 @@ from util.statvar_dcid_generator import get_statvar_dcid
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
-from metadata import (sourcegroups, sourcepollutantmetadata, sheets_national,
-                      skipfoot_others_national, skipfoot_pm_national,
-                      skiphead_ammonia_national, skiphead_others_national,
-                      sheet_state)
+from metadata import (sheets_national, skipfoot_others_national,
+                      skipfoot_pm_national, skiphead_ammonia_national,
+                      skiphead_others_national, sheet_state, source_pollutant)
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -43,87 +45,73 @@ flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 # Data provided in 1000s of Tons.
 _SCALING_FACTOR = 1000
 
-_MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
-                 "typeOf: dcs:StatisticalVariable\n"
-                 "populationType: dcs:Emissions\n"
-                 "emissionSourceType: dcs:NonBiogenicEmissionSource\n"
-                 "measurementQualifier: dcs:Annual{pv2}{pv3}\n"
-                 "statType: dcs:measuredValue\n"
-                 "measuredProperty: dcs:amount\n")
 
-_TMCF_TEMPLATE = (
-    "Node: E:airpollution_emission_trends_tier1->E0\n"
-    "typeOf: dcs:StatVarObservation\n"
-    "variableMeasured: C:airpollution_emission_trends_tier1->SV\n"
-    "measurementMethod: C:airpollution_emission_trends_tier1->"
-    "Measurement_Method\n"
-    "observationAbout: C:airpollution_emission_trends_tier1->geo_Id\n"
-    "observationDate: C:airpollution_emission_trends_tier1->year\n"
-    "unit: Ton\n"
-    "value: C:airpollution_emission_trends_tier1->observation\n")
-
-
-class USAirPollutionEmissionTrends:
+class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
+                                                  ):
     """
     This Class has requried methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
 
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
-        self._input_files = input_files
-        self._cleaned_csv_file_path = csv_file_path
-        self._mcf_file_path = mcf_file_path
-        self._tmcf_file_path = tmcf_file_path
+    _mcf_template = ("Node: dcid:{sv}\n"
+                 "typeOf: dcs:StatisticalVariable\n"
+                 "populationType: dcs:Emissions\n"
+                 "emissionSourceType: dcs:NonBiogenicEmissionSource\n"
+                 "measurementQualifier: dcs:Annual{source}{pollutant}\n"
+                 "statType: dcs:measuredValue\n"
+                 "measuredProperty: dcs:amount\n")
 
-    def aggregate_columns(self, df: pd.DataFrame) -> pd.DataFrame:
+    _tmcf_template = (
+        "Node: E:airpollution_emission_trends_tier1->E0\n"
+        "typeOf: dcs:StatVarObservation\n"
+        "variableMeasured: C:airpollution_emission_trends_tier1->SV\n"
+        "measurementMethod: C:airpollution_emission_trends_tier1->"
+        "Measurement_Method\n"
+        "observationAbout: C:airpollution_emission_trends_tier1->geo_Id\n"
+        "observationDate: C:airpollution_emission_trends_tier1->year\n"
+        "unit: Ton\n"
+        "value: C:airpollution_emission_trends_tier1->observation\n")
+
+    def _add_sv_and_mcf_column_to_final_df(self):
         """
-        Aggregates the columns based on SV
-
-        Args: 
-            df (pd.DataFrame): df as the input, to aggregate values
-
-        Returns:
-            df (pd.DataFrame): modified df as output
         """
-        # Dropping the rows which contain PrescribedFire, Wildfire or Miscellaneous.
-        # As they are not a part of StationaryFuelCombustion,
-        # IndustrialAndOtherProcesses or Transportation group.
-        df = df.drop(df[(df['SV'].str.contains('PrescribedFire')) |
-                        (df['SV'].str.contains('Wildfire')) |
-                        (df['SV'].str.contains('Miscellaneous'))].index)
-        # Replacing the columns for grouping as per
-        # StationaryFuelCombustion -    FuelCombustionElectricUtility
-        #                               FuelCombustionIndustrial
-        #                               EPA_FuelCombustionOther
-        # IndustrialAndOtherProcesses - ChemicalAndAlliedProductManufacturing
-        #                               MetalsProcessing
-        #                               PetroleumAndRelatedIndustries
-        #                               EPA_OtherIndustrialProcesses
-        #                               SolventUtilization
-        #                               StorageAndTransport
-        #                               WasteDisposalAndRecycling
-        # Transportation -              OnRoadVehicles
-        #                               NonRoadEnginesAndVehicles
-        df.loc[:, ('SV')] = df['SV'].replace(sourcegroups, regex=True)
-        df = df.groupby(['year', 'geo_Id', 'SV']).sum().reset_index()
-        df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
-        return df
+        self._final_df['SV'] = self._final_df['SV_TEMP']
+        self._final_df['mcf'] = self._final_df['SV_TEMP']
 
-    def data_standardize(self, df: pd.DataFrame,
-                         column_name: str) -> pd.DataFrame:
-        """
-        Replaces values of a single column into true values
-        from metadata returns the DF.
+        sv_replacement = {}
+        mcf = {}
+        sv_checker = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Emissions",
+            "emissionSourceType": "dcs:NonBiogenicEmissionSource",
+            "measurementQualifier": "dcs:Annual",
+            "statType": "dcs:measuredValue",
+            "measuredProperty": "dcs:amount"
+        }
 
-        Args:
-            df (pd.DataFrame): df as the input, to change column values
+        sv_list = self._final_df["SV"].to_list()
+        sv_list = list(set(sv_list))
+        sv_list.sort()
 
-        Returns:
-            df (pd.DataFrame): modified df as output
-        """
-        df = df.replace({column_name: sourcepollutantmetadata})
-        return df
+        for sv in sv_list:
+            sv_property = sv.split("-")
+            sv_checker['emissionSource'] = sv_property[0]
+            sv_checker['emittedThing'] = 'dcs:' + sv_property[1]
+            generated_sv = get_statvar_dcid(sv_checker)
+
+            source = '\nemissionSource: dcs:' + sv_property[0]
+            pollutant = '\nemittedThing: dcs:' + sv_property[1]
+
+            sv_replacement[sv] = generated_sv
+            mcf[sv] = self._mcf_template.format(
+                sv=generated_sv, source=source, pollutant=pollutant) + "\n"
+
+        self._final_df.loc[:, ('SV')] = self._final_df['SV'].replace(
+            sv_replacement, regex=True)
+        self._final_df.loc[:,
+                           ('mcf')] = self._final_df['mcf'].replace(mcf,
+                                                                    regex=True)
+    
 
     def state_emissions(self, file_path: str) -> pd.DataFrame:
         """
@@ -143,12 +131,12 @@ class USAirPollutionEmissionTrends:
         df['geo_Id'] = 'geoId/' + df['geo_Id']
         # Dropping Unwanted Columns
         df = df.drop(columns=['State FIPS', 'State', 'Tier 1 Code'])
-        df = self.data_standardize(df, 'Pollutant')
-        df = self.data_standardize(df, 'Tier 1 Description')
-        df['SV'] = df['Tier 1 Description'] + '-' + df['Pollutant']
+        df = self.data_standardize(df, 'Pollutant', source_pollutant)
+        df = self.data_standardize(df, 'Tier 1 Description', source_pollutant)
+        df['SV_TEMP'] = df['Tier 1 Description'] + '-' + df['Pollutant']
         df = df.drop(columns=['Tier 1 Description', 'Pollutant'])
         # Changing the years present as columns into row values.
-        df = df.melt(id_vars=['SV', 'geo_Id'],
+        df = df.melt(id_vars=['SV_TEMP', 'geo_Id'],
                      var_name='year',
                      value_name='observation')
         df['year'] = (df['year'].str[-2:]).astype(int)
@@ -156,7 +144,7 @@ class USAirPollutionEmissionTrends:
         # Putting a logic to change it to proper year
         df['year'] = df['year'] + np.where(df['year'] >= 90, 1900, 2000)
         # Making copy and using group by to get Aggregated Values.
-        df_agg = self.aggregate_columns(df)
+        df_agg = self.aggregate_columns(df, ['PrescribedFire', 'Wildfire', 'Miscellaneous'], 'dcAggregate/EPA_NationalEmissionInventory')
         df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         df = pd.concat([df, df_agg])
         return df
@@ -199,107 +187,23 @@ class USAirPollutionEmissionTrends:
                 (df['Source Category'] == 'Miscellaneous')].index)
             # Addition of pollutant type to the df by taking sheet name.
             df['pollutant'] = sheet
-            df = self.data_standardize(df, 'pollutant')
-            df = self.data_standardize(df, 'Source Category')
-            df['SV'] = df['Source Category'] + "-" + df['pollutant']
+            df = self.data_standardize(df, 'pollutant', source_pollutant)
+            df = self.data_standardize(df, 'Source Category', source_pollutant)
+            df['SV_TEMP'] = df['Source Category'] + "-" + df['pollutant']
             df = df.drop(columns=['Source Category', 'pollutant'])
             # Changing the years present as columns into row values.
-            df = df.melt(id_vars=['SV'],
+            df = df.melt(id_vars=['SV_TEMP'],
                          var_name='year',
                          value_name='observation')
             final_df = pd.concat([final_df, df])
 
         final_df['geo_Id'] = 'country/USA'
-        final_df_agg = self.aggregate_columns(final_df)
+        final_df_agg = self.aggregate_columns(final_df, ['PrescribedFire', 'Wildfire', 'Miscellaneous'], 'dcAggregate/EPA_NationalEmissionInventory')
         final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         final_df = pd.concat([final_df, final_df_agg])
         return final_df
 
-    def generate_tmcf(self) -> None:
-        """
-        This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template.
-
-        Args:
-            None
-
-        Returns:
-            None
-        """
-        # Writing Genereated TMCF to local path.
-        with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
-
-    def generate_mcf(self, sv_list: list) -> dict:
-        """
-        This method generates MCF file w.r.t
-        dataframe headers and defined MCF template
-
-        Args:
-            df_cols (list) : List of DataFrame Columns
-
-        Returns:
-            sv_replacement (dict) : Dictionary to replace SV names 
-                                    with SV generator names
-        """
-
-        final_mcf_template = ""
-        sv_replacement = {}
-        sv_checker = {
-            "typeOf": "dcs:StatisticalVariable",
-            "populationType": "dcs:Emissions",
-            "emissionSourceType": "dcs:NonBiogenicEmissionSource",
-            "measurementQualifier": "dcs:Annual",
-            "statType": "dcs:measuredValue",
-            "measuredProperty": "dcs:amount"
-        }
-        for sv in sv_list:
-            sv_property = sv.split("-")
-            source = '\nemissionSource: dcs:' + sv_property[0]
-            sv_checker['emissionSource'] = sv_property[0]
-            pollutant = '\nemittedThing: dcs:' + sv_property[1]
-            sv_checker['emittedThing'] = 'dcs:' + sv_property[1]
-            generated_sv = get_statvar_dcid(sv_checker)
-            sv_replacement[sv] = generated_sv
-            final_mcf_template += _MCF_TEMPLATE.format(
-                pv1=generated_sv, pv2=source, pv3=pollutant) + "\n"
-
-        # Writing Genereated MCF to local path.
-        with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(final_mcf_template.rstrip('\n'))
-        return sv_replacement
-
-    def generate_csv(self, final_df: pd.DataFrame) -> None:
-        """
-        This method generates CSV file w.r.t dataframe.
-
-        Args:
-            final_df (pd.DataFrame): df as the input, to generate csv.
-
-        Returns:
-            None
-        """
-        # Writing Genereated Final DF to local path as CSV.
-        final_df.to_csv(self._cleaned_csv_file_path, index=False)
-
-    def process(self):
-        """
-        This Method calls the required methods to generate
-        cleaned CSV, MCF, and TMCF file.
-
-        Args:
-            None
-            
-        Returns:
-            None
-        """
-
-        final_df = pd.DataFrame(columns=['geo_Id', 'year', 'SV', 'observation'])
-        # Creating Output Directory
-        output_path = os.path.dirname(self._cleaned_csv_file_path)
-        if not os.path.exists(output_path):
-            os.mkdir(output_path)
-        sv_list = []
+    def _parse_source_files(self):
         source_file_to_method_mapping = {
             "national_tier1_caps": self.national_emissions,
             "state_tier1_caps": self.state_emissions
@@ -310,22 +214,15 @@ class USAirPollutionEmissionTrends:
             # Read till -5 inorder to remove the .xlsx extension
             file_name = file_path.split("/")[-1][:-5]
             df = source_file_to_method_mapping[file_name](file_path)
-            final_df = pd.concat([final_df, df])
+            self._final_df = pd.concat([self._final_df, df])
 
-        sv_list = final_df["SV"].to_list()
-        final_df = final_df.sort_values(
-            by=['geo_Id', 'year', 'SV', 'observation'])
-        final_df['observation'].replace('', np.nan, inplace=True)
-        final_df.dropna(subset=['observation'], inplace=True)
-        sv_list = list(set(sv_list))
-        sv_list.sort()
-        sv_replacement = self.generate_mcf(sv_list)
-        self.generate_tmcf()
-        final_df.loc[:, ('SV')] = final_df['SV'].replace(sv_replacement,
-                                                         regex=True)
-        final_df['observation'] = final_df['observation'].astype(
+        self._final_df = self._final_df.sort_values(
+            by=['geo_Id', 'year', 'SV_TEMP', 'observation'])
+        self._final_df['observation'].replace('', np.nan, inplace=True)
+        self._final_df.dropna(subset=['observation'], inplace=True)
+        self._final_df['observation'] = self._final_df['observation'].astype(
             float) * _SCALING_FACTOR
-        self.generate_csv(final_df)
+        self._add_sv_and_mcf_column_to_final_df()
 
 
 def main(_):
@@ -347,9 +244,11 @@ def main(_):
     cleaned_csv_path = os.path.join(output_file_path, csv_name)
     mcf_path = os.path.join(output_file_path, mcf_name)
     tmcf_path = os.path.join(output_file_path, tmcf_name)
-    loader = USAirPollutionEmissionTrends(ip_files, cleaned_csv_path, mcf_path,
-                                          tmcf_path)
-    loader.process()
+    loader = USAirPollutionEmissionTrendsNationalAndState(
+        ip_files, cleaned_csv_path, mcf_path, tmcf_path)
+    loader.generate_csv()
+    loader.generate_mcf()
+    loader.generate_tmcf()
 
 
 if __name__ == "__main__":
