@@ -1,7 +1,7 @@
 Node: E:mesh_record->E1
-typeOf: dcs:MeSHRecord
+typeOf: dcs:MeSHSupplementaryRecord
 dcid: C:mesh_record->Record_dcid
-medicalSubjectHeadingRecordID: C:mesh_record->RecordID
+medicalSubjectHeadingSupplementaryRecordID: C:mesh_record->RecordID
 name: C:mesh_record->RecordName
 dateCreated: C:mesh_record->DateCreated
 dateRevised: C:mesh_record->DateRevised
