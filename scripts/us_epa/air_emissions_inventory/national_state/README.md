@@ -43,7 +43,7 @@ Cleaned data will be inside [output/airpollution_emission_trends_tier1.csv] as a
 
 Run the test cases
 
-`run_tests.sh -p scripts/us_epa/air_emissions_inventory`
+`run_tests.sh -p scripts/us_epa/air_emissions_inventory/national_state`
 
 
 ### Import Procedure

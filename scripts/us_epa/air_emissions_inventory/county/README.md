@@ -32,7 +32,7 @@ Cleaned data will be inside [output/airpollution_emission_trends_county_tier1.cs
 
 #### Running Tests
 Run the test cases
-`run_tests.sh -p scripts/us_epa/air_emissions_inventory_county`
+`run_tests.sh -p scripts/us_epa/air_emissions_inventory/county`
 
 #### Import Procedure
 - To download the data and generate the required output:
