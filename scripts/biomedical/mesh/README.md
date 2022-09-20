@@ -77,7 +77,7 @@ The tMCF files that map each column in the corresponding CSV file to the appropr
 
 ### Schema
 
-Each of the five csv + tMCF pair generated is an import of the MeSH ontology mapping to one of the four following entities: [MeSHConcept](https://datacommons.org/browser/MeSHConcept), [MeSHDescriptor](https://datacommons.org/browser/MeSHDescriptor), [MeSHQualifier](https://datacommons.org/browser/MeSHQualifier), [MeSHTerm](https://datacommons.org/browser/MeSHTerm), [MeshRecord](https://datacommons.org/browser/MeSHRecord).
+Each of the five csv + tMCF pair generated is an import of the MeSH ontology mapping to one of the four following entities: [MeSHConcept](https://datacommons.org/browser/MeSHConcept), [MeSHDescriptor](https://datacommons.org/browser/MeSHDescriptor), [MeSHQualifier](https://datacommons.org/browser/MeSHQualifier), [MeshSupplementaryRecord](https://datacommons.org/browser/MeSHSupplementaryRecord), and [MeSHTerm](https://datacommons.org/browser/MeSHTerm).
 
 
 ## Examples
