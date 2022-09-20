@@ -210,11 +210,14 @@ class NFHSDataLoaderBase(object):
                     # Writing MCF
                     index1 = self.cols_dict[variable].find("AsFractionOf_Count_Household")
                     index2 = self.cols_dict[variable].find("Age")
-                    description = re.sub(r"(\w)([A-Z])", r"\1 \2", self.cols_dict[variable].replace('_', ' '))
+                    desc = re.sub(r"(\w)([A-Z])", r"\1 \2", self.cols_dict[variable].replace('_', ' '))
+                    description = re.sub('(\d+(\.\d+)?)', r' \1 ', desc)
+                    age_desc = self.cols_dict[variable].split("_")
                     list = description.split(" ")
-                    for i in range(0, len(list)):
-                        if list[i] == 'Age':
-                            age = list[i-1]
+                    for i in range(0, len(age_desc)):
+                        age_ind = age_desc[i].find('Age')
+                        if age_ind != -1:
+                            age = re.sub("Age", "", age_desc[i])
                     if index1 != -1 and index2 == -1:
                         mcf.write(
                         MCF_NODES_DENOMINATOR.format(
