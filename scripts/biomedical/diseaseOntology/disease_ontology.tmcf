@@ -6,7 +6,7 @@ specializationOf: C:DiseaseOntology->subClassOf
 description: C:DiseaseOntology->diseaseDescription
 alternativeDiseaseOntologyID: C:DiseaseOntology->hasAlternativeId 
 diseaseSynonym: C:DiseaseOntology->hasExactSynonym
-internationalClassificationOfDiseaseID: C:DiseaseOntology->ICDO
+internationalClassificationOfDiseasesOntologyID: C:DiseaseOntology->ICDO
 medicalSubjectHeadingDescriptorID: C:DiseaseOntology->meshDescriptor
 medicalSubjectHeadingConceptID: C:DiseaseOntology->meshConcept
 nationalCancerInstituteID: C:DiseaseOntology->NCI
