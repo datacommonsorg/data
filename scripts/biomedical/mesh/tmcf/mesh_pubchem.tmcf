@@ -1,10 +1,10 @@
 Node: E:mesh_pubchem->E1
-typeOf: dcs:MeSHRecord
+typeOf: dcs:MeSHSupplementaryRecord
 dcid: C:mesh_pubchem->Record_dcid
-medicalSubjectHeadingRecordID: C:mesh_pubchem->RecordID
+medicalSubjectHeadingSupplementaryRecordID: C:mesh_pubchem->RecordID
 name: C:mesh_pubchem->RecordName
 
 Node: E:mesh_pubchem->E2
 typeOf: dcs:ChemicalCompound
 dcid: C:mesh_pubchem->CID_dcid
-medicalSubjectHeadingRecordID: E:mesh_pubchem->E2
+medicalSubjectHeadingSupplementaryRecordID: E:mesh_pubchem->E2
