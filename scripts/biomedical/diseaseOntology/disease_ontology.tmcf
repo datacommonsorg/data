@@ -2,9 +2,9 @@ Node: E:DiseaseOntology->E1
 typeOf: dcs:Disease
 dcid: C:DiseaseOntology->id
 name: C:DiseaseOntology->label
-parent: C:DiseaseOntology->subClassOf
+specializationOf: C:DiseaseOntology->subClassOf
 description: C:DiseaseOntology->diseaseDescription
-alternativeDiseaseOntologyID : C:DiseaseOntology->hasAlternativeId 
+alternativeDiseaseOntologyID: C:DiseaseOntology->hasAlternativeId 
 diseaseSynonym: C:DiseaseOntology->hasExactSynonym
 internationalClassificationOfDiseaseID: C:DiseaseOntology->ICDO
 medicalSubjectHeadingDescriptorID: C:DiseaseOntology->meshDescriptor
@@ -19,7 +19,6 @@ icd10CMCode: C:DiseaseOntology->ICD10CM
 icd9CMCode: C:DiseaseOntology->ICD9CM
 orphaNumber: C:DiseaseOntology->ORDO
 geneticAndRareDiseasesID: C:DiseaseOntology->GARD
-omimID: C:DiseaseOntology->OMIM
+onlineMendelianInheritanceInManID: C:DiseaseOntology->OMIM
 experimentalFactorOntologyID: C:DiseaseOntology->EFO
 medDraID: C:DiseaseOntology->MEDDRA
-
