@@ -21,7 +21,7 @@
 
 ## About the Dataset
 
-“The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information”. Data Commons includes the Concept, Descriptor, Qualifier, Record and Term elements of MeSH as described [here](https://www.nlm.nih.gov/mesh/xml_data_elements.html). More information about the dataset can be found on the official National Center for Biotechnology (NCBI) [website](https://www.ncbi.nlm.nih.gov/mesh/).
+“The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information”. Data Commons includes the Concept, Descriptor, Qualifier, Supplementary Record and Term elements of MeSH as described [here](https://www.nlm.nih.gov/mesh/xml_data_elements.html). More information about the dataset can be found on the official National Center for Biotechnology (NCBI) [website](https://www.ncbi.nlm.nih.gov/mesh/).
 Pubchem is one of the largest reservoirs of chemical compound information. It is mapped to many other medical ontologies, including
 MeSH. More information about compound IDs and other properties can be found on their official [website](https://pubchemdocs.ncbi.nlm.nih.gov/compounds).
 
@@ -32,12 +32,12 @@ The csv version of the file containing PubChem Compound ID and names can also be
 
 ### Overview
 
-This directory stores the scripts used to convert the xml obtained from the NCBI webpage into five different csv files, each describing the relation between records, concepts, terms, qualifiers and descriptors, and generating dcids for each.
-The MeSH data stores the vocabulary thesaurus used for indexing articles for PubMed. In addition, the scripts are used to map ther PubChem compound IDs to the MeSH descriptor and record IDs, joining on MeSH record name/PubChem compoundID.
+This directory stores the scripts used to convert the xml obtained from the NCBI webpage into five different csv files, each describing the relation between supplementary records, concepts, terms, qualifiers and descriptors, and generating dcids for each.
+The MeSH data stores the vocabulary thesaurus used for indexing articles for PubMed. In addition, the scripts are used to map ther PubChem compound IDs to the MeSH descriptor and supplementary record IDs, joining on MeSH supplementary record name/PubChem compoundID.
 
-- For mapping the MeSH descriptor ID with the MeSH record ID, the [supplementary file](https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/supp2022.xml) is used.
+- For mapping the MeSH descriptor ID with the MeSH supplementary record ID, the [supplementary file](https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/supp2022.xml) is used.
 - For mapping the MeSH descriptor ID with each of the three other IDs: concept ID, term ID, qualifier ID, the [descriptor file](https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/desc2022.xml) is used.
-- For mapping the PubChem compound ID with the MeSH record and descriptor ID, the [pubchem file](https://ftp.ncbi.nlm.nih.gov/pubchem/Compound/Extras/CID-MeSH) is used.
+- For mapping the PubChem compound ID with the MeSH supplementary record and descriptor ID, the [pubchem file](https://ftp.ncbi.nlm.nih.gov/pubchem/Compound/Extras/CID-MeSH) is used.
 
 ### Notes and Caveats
 
@@ -46,7 +46,7 @@ The main main file and the mesh supplementary file are both XML formatted. In ad
 In order to run the script [`format_mesh.py`](format_mesh.py), the user requires the `mesh.xml` file, which spits out four different
 csv files, each relating to descriptor, concept, qualifier and term.
 In order to run the script [`format_mesh_record.py`](format_mesh_record.py), the user requires the `mesh_record.xml` file and the
-`mesh-pubchem.csv` file which maps the record to descriptor and to the pubchem compound ID, and spits out two csv files. Here, the goal is to map the mesh terms to the pubchem database of compounds. This is accomplished by mapping the mesh record name to the pubchem compound name. In addition, each mesh entity has a descriptor ID which is in turn linked to mesh record ID, and thus ultimately linked to pubchem compound ID. 
+`mesh-pubchem.csv` file which maps the record to descriptor and to the pubchem compound ID, and spits out two csv files. Here, the goal is to map the mesh terms to the pubchem database of compounds. This is accomplished by mapping the mesh record name to the pubchem compound name. In addition, each mesh entity has a descriptor ID which is in turn linked to mesh suplementary record ID, and thus ultimately linked to pubchem compound ID. 
 
 ### License
 
@@ -59,8 +59,8 @@ Any works found on National Library of Medicine (NLM) Web sites may be freely us
 #### Scripts
 
 [`format_mesh.py`](format_mesh.py) converts the original xml into four formatted csv files, which each can be imported alongside it's matching tMCF.
-[`format_mesh_record.py`](format_mesh_record.py) converts the supplementary MeSH record file into a csv mapped to MeSH descriptor ID,
-and it maps the MeSH records to pubchem compound IDs resulting in a second separate csv.
+[`format_mesh_record.py`](format_mesh_record.py) converts the supplementary MeSH supplementary record file into a csv mapped to MeSH descriptor ID,
+and it maps the MeSH supplementary records to pubchem compound IDs resulting in a second separate csv.
 [`download.sh`](download.sh) downloads all the files from the NCBI webpage and stores them in the scratch directory.
 [`mesh_run.sh`](mesh_run.sh) runs all the python commands generating six csv files in total.
 
