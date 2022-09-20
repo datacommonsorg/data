@@ -172,6 +172,7 @@ def col_string(df):
     """
     col_names = ['hasExactSynonym', 'label', 'IAO_0000115']
     for col in col_names:
+        df[col] = df[col].str.replace('"', "")
         df.update('"' + df[[col]].astype(str) + '"')
         df[col] = df[col].replace(["\"nan\""],np.nan)
     return df
