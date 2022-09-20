@@ -54,7 +54,7 @@ class NCESDistrictSchool(USEducation):
 if __name__ == '__main__':
     input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "input_files")
-
+    input_path = "/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/district_school/test_data/datasets"
     input_files = [
         os.path.join(input_path, file)
         for file in sorted(os.listdir(input_path))

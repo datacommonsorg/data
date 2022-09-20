@@ -19,6 +19,7 @@ USEducation class in this module provides methods to generate processed CSV, MCF
 TMCF files.
 """
 import warnings
+
 warnings.filterwarnings("ignore", category=UserWarning)
 
 import io
@@ -52,17 +53,22 @@ class USEducation:
     _split_headers_using_school_type = ""
     _include_columns = None
     _exclude_columns = None
+    if _import_name == "private_school":
+        _include_col = None
+        _exclude_col = None
     _generate_statvars = True
 
     def __init__(self,
                  input_files: list,
                  cleaned_csv_path: str = None,
                  mcf_file_path: str = None,
-                 tmcf_file_path: str = None) -> None:
+                 tmcf_file_path: str = None,
+                 tmcf_file_place: str = None) -> None:
         self._input_files = input_files
         self._cleaned_csv_file_path = cleaned_csv_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
+        self._tmcf_file_place = tmcf_file_place
         self._year = None
         self._df = pd.DataFrame()
         if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
@@ -146,8 +152,11 @@ class USEducation:
                 data_df[curr_prop_column] = 'None'
         return data_df
 
-    def _generate_prop(self, data_df: pd.DataFrame,default_mcf_prop: list=None,
-                        sv_prop_order: list=None, node_configs: dict=None):
+    def _generate_prop(self,
+                       data_df: pd.DataFrame,
+                       default_mcf_prop: list = None,
+                       sv_prop_order: list = None,
+                       node_configs: dict = None):
         """
         Generate property columns in the dataframe data_df
         Args:
@@ -190,8 +199,8 @@ class USEducation:
             data_df[curr_value_column] = data_df[column].map(curr_val_mapper)
         return data_df
 
-    def _generate_stat_vars(self, data_df: pd.DataFrame,
-                            prop_cols: str, sv_node_column: str) -> pd.DataFrame:
+    def _generate_stat_vars(self, data_df: pd.DataFrame, prop_cols: str,
+                            sv_node_column: str) -> pd.DataFrame:
         """
         Generates statvars using property columns.
         Args:
@@ -215,7 +224,8 @@ class USEducation:
                                                                n=1))
         data_df[sv_node_column] = data_df['sv_name'].apply(SV_NODE_FORMAT)
 
-        stat_var_with_dcs = dict(zip(data_df["all_prop"], data_df[sv_node_column]))
+        stat_var_with_dcs = dict(
+            zip(data_df["all_prop"], data_df[sv_node_column]))
         stat_var_without_dcs = dict(zip(data_df["all_prop"],
                                         data_df['sv_name']))
 
@@ -232,7 +242,9 @@ class USEducation:
 
         return mcf_mapper
 
-    def _generate_stat_var_and_mcf(self, data_df: pd.DataFrame, sv_prop_order: list=None):
+    def _generate_stat_var_and_mcf(self,
+                                   data_df: pd.DataFrame,
+                                   sv_prop_order: list = None):
         """
         Generates the stat vars.
         Args:
@@ -268,7 +280,8 @@ class USEducation:
 
     def _parse_file(self, raw_df: pd.DataFrame) -> pd.DataFrame:
 
-        self._year = self._extract_year_from_headers(raw_df.columns.values.tolist())
+        self._year = self._extract_year_from_headers(
+            raw_df.columns.values.tolist())
         raw_df["year"] = "20" + self._year[-2:]
 
         df_cleaned = self._clean_data(raw_df)
@@ -291,15 +304,86 @@ class USEducation:
                 "geoId/sch" + df_cleaned["Agency ID - NCES Assigned"]
 
         curr_cols = df_cleaned.columns.values.tolist()
+        curr_place = curr_cols
         data_cols = []
+        data_place = []
         for pattern in self._exclude_columns:
             pat = f"^((?!{pattern}).)*$"
             r = re.compile(pat)
             curr_cols = list(filter(r.match, curr_cols))
 
+        if self._import_name == "private_school":
+            for pattern in self._exclude_col:
+                pat = f"^((?!{pattern}).)*$"
+                r = re.compile(pat)
+                curr_place = list(filter(r.match, curr_place))
+
         for pattern in self._include_columns:
             r = re.compile(pattern)
             data_cols += list(filter(r.match, curr_cols))
+
+        if self._import_name == "private_school":
+            for pattern in self._include_col:
+                r = re.compile(pattern)
+                data_place += list(filter(r.match, curr_place))
+
+        df_place = df_cleaned[data_place]
+
+        if self._import_name == "private_school":
+            df_place['ZIP'] = pd.to_numeric(df_place['ZIP'], errors='coerce')
+
+            df_place['Phone Number'] = pd.to_numeric(df_place['Phone Number'],
+                                                     errors='coerce')
+
+            df_place['ANSI/FIPS County Code'] = pd.to_numeric(
+                df_place['ANSI/FIPS County Code'], errors='coerce')
+            df_place = df_place.fillna(-1)
+            float_col = df_place.select_dtypes(include=['float64'])
+            for col in float_col.columns.values:
+                df_place[col] = df_place[col].astype('int64')
+                df_place[col] = df_place[col].astype("str").str.replace(
+                    "-1", "")
+
+            df_place['ZIP'] = df_place['ZIP'].astype(str).str.zfill(5)
+            df_place['ContainedInPlace'] = "zip/" + df_place['ZIP']
+            df_place['ContainedInPlace'] = np.where(
+                df_place['ContainedInPlace'] == 'zip/00000',
+                "geoId/" + df_place['ANSI/FIPS State Code'],
+                df_place['ContainedInPlace'])
+            df_place = df_place.loc[:, ~df_place.columns.duplicated()]
+            df_place = replace_values(df_place)
+            df_place = df_place.rename(
+                columns={
+                    "Private School Name":
+                        "Private_School_Name",
+                    "School ID - NCES Assigned":
+                        "SchoolID",
+                    "School Type":
+                        "School_Type",
+                    "School Level":
+                        "School_Level",
+                    "School's Religious Affiliation or Orientation":
+                        "School_Religion",
+                    "Lowest Grade Taught":
+                        "Lowest_Grade",
+                    "Highest Grade Taught":
+                        "Highest_Grade",
+                    "Physical Address":
+                        "Physical_Address",
+                    "Phone Number":
+                        "PhoneNumber",
+                    "ANSI/FIPS County Code":
+                        "County_code"
+                })
+            # df_place["lowestGrade"] = "dcs:" + df_place["lowestGrade"]
+            col_list =  ["School_Type","School_Religion", "School_Level", "Lowest_Grade","Highest_Grade","Coeducational"]
+            for col in col_list:
+                df_place[col] = "dcs:" + df_place[col]
+            df_place = df_place.drop(columns='ANSI/FIPS State Code')
+            # output_file_name = "us_nces_demographics_private_place.csv"
+            # output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"output_place",output_file_name)
+            df_place.to_csv("/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place.csv", index=False)
+            # df_place.to_csv(output_file_path,index=False)
 
         if not self._generate_statvars:
             return df_cleaned[data_cols]
@@ -332,10 +416,12 @@ class USEducation:
 
         dfs = []
         df_parsed = None
-        df_merged = pd.DataFrame(columns=[
-            "school_state_code", "year", "sv_name", "observation", "scaling_factor"
-        ])
-        df_merged.to_csv(self._cleaned_csv_file_path, index=False)
+        if self._generate_statvars:
+            df_merged = pd.DataFrame(columns=[
+                "school_state_code", "year", "sv_name", "observation",
+                "scaling_factor"
+            ])
+            df_merged.to_csv(self._cleaned_csv_file_path, index=False)
         c = 0
         unique_sv_names = []
         for input_file in sorted(self._input_files):
@@ -347,25 +433,35 @@ class USEducation:
             if df_parsed.shape[0] > 0:
                 if self._generate_statvars:
                     df_parsed = df_parsed.sort_values(
-                    by=["year", "sv_name", "school_state_code"])
-                    df_parsed = self._generate_prop(df_parsed, DF_DEFAULT_MCF_PROP, 
+                        by=["year", "sv_name", "school_state_code"])
+                    df_parsed = self._generate_prop(df_parsed,
+                                                    DF_DEFAULT_MCF_PROP,
                                                     SV_PROP_ORDER, FORM_STATVAR)
-                    df_parsed = self._generate_stat_var_and_mcf(df_parsed, SV_PROP_ORDER)
+                    df_parsed = self._generate_stat_var_and_mcf(
+                        df_parsed, SV_PROP_ORDER)
                     for col in df_parsed.columns.values.tolist():
-                        df_parsed[col] = df_parsed[col].astype('str').str.replace("FeMale", "Female")
-                    df_parsed["scaling_factor"] = np.where(df_parsed["sv_name"].str.contains("Percent"),
-                                                        100,'')
+                        df_parsed[col] = df_parsed[col].astype(
+                            'str').str.replace("FeMale", "Female")
+                    df_parsed["scaling_factor"] = np.where(
+                        df_parsed["sv_name"].str.contains("Percent"), 100, '')
                     df_final = df_parsed[[
-                    "school_state_code", "year", "sv_name", "observation", "scaling_factor"
+                        "school_state_code", "year", "sv_name", "observation",
+                        "scaling_factor"
                     ]]
-                    df_final.to_csv(self._cleaned_csv_file_path, header=False, index=False, mode='a')
+                    df_final.to_csv(self._cleaned_csv_file_path,
+                                    header=False,
+                                    index=False,
+                                    mode='a')
 
-                    df_parsed = df_parsed.drop_duplicates(subset=["sv_name"]).reset_index(drop=True)
+                    df_parsed = df_parsed.drop_duplicates(
+                        subset=["sv_name"]).reset_index(drop=True)
                     curr_sv_names = df_parsed["sv_name"].values.tolist()
-                    new_sv_names = list(set(curr_sv_names) - set(unique_sv_names))
+                    new_sv_names = list(
+                        set(curr_sv_names) - set(unique_sv_names))
                     unique_sv_names = unique_sv_names + new_sv_names
 
-                    df_parsed = df_parsed[df_parsed["sv_name"].isin(new_sv_names)].reset_index(drop=False)
+                    df_parsed = df_parsed[df_parsed["sv_name"].isin(
+                        new_sv_names)].reset_index(drop=False)
                 dfs.append(df_parsed)
 
         df_merged = pd.DataFrame()
@@ -385,10 +481,13 @@ class USEducation:
         Returns:
             None    
         """
-        unique_nodes_df = self._df.drop_duplicates(
-            subset=["prop_node"]).reset_index(drop=True)
+        if self._generate_statvars:
+            unique_nodes_df = self._df.drop_duplicates(
+                subset=["prop_node"]).reset_index(drop=True)
 
-        mcf_ = unique_nodes_df.sort_values(by=["prop_node"])["mcf"].tolist()
+            mcf_ = unique_nodes_df.sort_values(by=["prop_node"])["mcf"].tolist()
+        else:
+            mcf_ = self._df["mcf"].tolist()
         mcf_ = "\n\n".join(mcf_)
 
         with open(self._mcf_file_path, "w", encoding="UTF-8") as file:
@@ -411,10 +510,26 @@ class USEducation:
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
 
+    def _generate_tmcf_place(self) -> None:
+        """
+        This method generates TMCF file w.r.t
+        dataframe headers and defined TMCF template
+
+        Args:
+            df_cols (list) : List of DataFrame Columns
+
+        Returns:
+            None
+        """
+
+        with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
+            f_out.write(TMCF_TEMPLATE_PLACE.rstrip('\n'))
+
     def create_place_nodes(self):
         self.generate_csv()
         df_parsed = self._df
-        df_parsed = self._generate_prop(df_parsed, [], 
-                        SV_PROP_ORDER_PLACE, PLACE_STATVAR)
-        
-        df_parsed = self._generate_stat_var_and_mcf(df_parsed, SV_PROP_ORDER_PLACE)
+        df_parsed = self._generate_prop(df_parsed, DF_DEFAULT_TMCF_PROP,
+                                        SV_PROP_ORDER_PLACE, PLACE_STATVAR)
+
+        # df_parsed = self._generate_stat_var_and_mcf(df_parsed, SV_PROP_ORDER_PLACE)
+        self._df = df_parsed

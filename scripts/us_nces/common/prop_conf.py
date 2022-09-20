@@ -28,6 +28,22 @@ TMCF_TEMPLATE = (
     "scalingFactor: C:us_nces_demographics_{import_name}->scaling_factor\n"
     "value: C:us_nces_demographics_{import_name}->observation\n")
 
+TMCF_TEMPLATE_PLACE = (
+        "Node: E:us_nces_demographics_private_place->E0\n"
+        "dcid: C:us_nces_demographics_private_place->school_state_code\n"
+		"typeOf: dcs:PrivateSchool\n"
+		"address: C:us_nces_demographics_private_place->Physical_Address\n"
+		"name: C:us_nces_demographics_private_place->Private_School_Name\n"
+		"ncesId: C:us_nces_demographics_private_place->SchoolID\n"
+		"containedInPlace: C:us_nces_demographics_private_place->ContainedInPlace\n"
+		"telephone: C:us_nces_demographics_private_place->PhoneNumber\n"
+		"lowestGrade: C:us_nces_demographics_private_place->Lowest_Grade\n"
+		"highestGrade: C:us_nces_demographics_private_place->Highest_Grade\n"
+		"schoolGradeLevel: C:us_nces_demographics_private_place->School_Level\n"
+		"privateSchoolType: C:us_nces_demographics_private_place->School_Type\n"
+		"schoolReligiousOrientation: C:us_nces_demographics_private_place->School_Religion\n"
+		"coeducationalType: C:us_nces_demographics_private_place->Coeducational\n")
+
 _DENOMINATOR_PROP = {
     "Pupil/Teacher Ratio": "Count_Teacher",
     "Percent": "Count_Student"

@@ -21,12 +21,14 @@ _COEDUCATIONAL = {
     "1-Coed (school has male and female students)": "Coeducational",
     "2-All-female (school only has all-female students)": "AllFemale",
     "3-All-male (school only has all-male students)": "AllMale",
+    "†": "NULL"
 }
 
 _RELIGIOUS = {
     "1-Catholic": "Catholic",
     "2-Other religious": "Nonsectarian",
-    "3-Nonsectarian": "OtherReligious"
+    "3-Nonsectarian": "OtherReligious",
+    "†": "NULL"
 }
 
 _SCHOOL_TYPE = {
@@ -49,8 +51,6 @@ _SCHOOL_TYPE = {
 }
 
 _SCHOOL_GRADE = {
-    # "Elementary": "Elementary",
-    # "Secondary": "Secondary",
     "Elementary Teachers": "Elementary",
     "Secondary Teachers": "Secondary",
     "Prekindergarten": "PreKindergarten",
@@ -82,10 +82,13 @@ _SCHOOL_GRADE = {
     "Grade 12": "SchoolGrade12",
     "13th grade": "SchoolGrade13",
     "Grade 13": "SchoolGrade13",
-    "†": "YetToDefine",
-    "All Ungraded": "AllUngrade",
-    "Adult Education": "AdultEducation"
+    "†": "NULL",
+    "All Ungraded": "NULL",
+    "Adult Education": "AdultEducation",
+    "Transitional 1st grade":"TransitionalGrade1"
 }
+
+_PHYSICAL_ADD = {"†": "NULL"}
 
 # pylint:disable=line-too-long
 _SCHOOL_LEVEL = {
@@ -94,7 +97,9 @@ _SCHOOL_LEVEL = {
     "2-Secondary (school has one or more of grades 7-12 and does not have any grade lower than 7th grade).":
         "SecondarySchool",
     "3-Combined (school has one or more of grades K-6 and one or more of grades 9-12. Schools in which all students are ungraded are also classified as combined).":
-        "ElementarySchool__SecondarySchool"
+        "ElementarySchool__SecondarySchool",
+    "†":
+        "NULL",
 }
 # pylint:enable=line-too-long
 
@@ -145,7 +150,21 @@ _SCHOOL_STAFF = {
     "School Psychologist":
         "SchoolPsychologist",
     "Other Support Services Staff":
-        "SchoolOtherSupportServicesStaff"
+        "SchoolOtherSupportServicesStaff",
+    "†":
+        "NULL",
+}
+
+COLUMNS = {
+    "Private School Name": "Private_School_Name",
+    "School ID - NCES Assigned": "SchoolID",
+    "School Type": "School_Type",
+    "School Level": "School_Level",
+    "School's Religious Affiliation or Orientation": "School_Religion",
+    "Lowest Grade Taught": "Lowest_Grade",
+    "Highest Grade Taught": "Highest_Grade",
+    "Physical Address": "Physical_Address",
+    "Phone Number": "PhoneNumber"
 }
 
 _GENDER = {"female": "Female", "male": "Male"}
@@ -165,7 +184,8 @@ def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
         "Race": _RACE_,
         "Lunch": _LUNCH,
         "SchoolStaff": _SCHOOL_STAFF,
-        "Gender": _GENDER
+        "Gender": _GENDER,
+        "Physical Address": _PHYSICAL_ADD,
     }
 
     df_columns = data_df.columns.to_list()
