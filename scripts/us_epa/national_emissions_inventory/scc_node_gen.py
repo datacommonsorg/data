@@ -71,26 +71,25 @@ if __name__ == "__main__":
     #               L2 - L1 + 2 digits
     #               L3 - L2 + 3 digits
     #               L4 - L3 + 3 digits
-    df['SCC'] = df['SCC'].astype(str)
-    df['SCC_L1'] = np.where(df['SCC'].str.len() == 8, df['SCC'].str[:1],
-                            df['SCC'].str[:2])
-    df['SCC_L2'] = np.where(df['SCC'].str.len() == 8, df['SCC'].str[:3],
-                            df['SCC'].str[:4])
-    df['SCC_L3'] = np.where(df['SCC'].str.len() == 8, df['SCC'].str[:6],
-                            df['SCC'].str[:7])
+    df['SCC_L4'] = df['SCC'].astype(str)
+    df['SCC_L1'] = np.where(df['SCC_L4'].str.len() == 8, df['SCC_L4'].str[:1],
+                            df['SCC_L4'].str[:2])
+    df['SCC_L2'] = np.where(df['SCC_L4'].str.len() == 8, df['SCC_L4'].str[:3],
+                            df['SCC_L4'].str[:4])
+    df['SCC_L3'] = np.where(df['SCC_L4'].str.len() == 8, df['SCC_L4'].str[:6],
+                            df['SCC_L4'].str[:7])
 
     # Remove if specialization needed at L1
     df['data category'] = ''
     #
     # Calls to the above Function for different Levels of Schema
-    df_temp = df[['SCC_L1', 'scc level one', 'data category']]
-    make_schema(df_temp, "L1")
-    df['SCC_L1'] = 'EPA_SCC/' + df['SCC_L1']
-    df_temp = df[['SCC_L2', 'scc level two', 'SCC_L1']]
-    make_schema(df_temp, "L2")
-    df['SCC_L2'] = 'EPA_SCC/' + df['SCC_L2']
-    df_temp = df[['SCC_L3', 'scc level three', 'SCC_L2']]
-    make_schema(df_temp, "L3")
-    df['SCC_L3'] = 'EPA_SCC/' + df['SCC_L3']
-    df_temp = df[['SCC', 'scc level four', 'SCC_L3']]
-    make_schema(df_temp, "L4")
+    scc_level = [
+        'scc level one', 'scc level one', 'scc level one', 'scc level four'
+    ]
+    for i in range(1, 5):
+        level = 'L' + str(i)
+        scc_code = 'SCC_L' + str(i)
+        specialization = 'data category' if i == 1 else 'SCC_L' + str(i - 1)
+        df_temp = df[[scc_code, scc_level[i - 1], specialization]]
+        make_schema(df_temp, level)
+        df[scc_code] = 'EPA_SCC/' + df[scc_code]
