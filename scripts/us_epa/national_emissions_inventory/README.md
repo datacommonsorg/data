@@ -1,4 +1,4 @@
-# US-EPA: National Air Pollutant Emissions OnRoad Data
+# US-EPA: National Air Pollutant Emissions Data
 
 ## About the Dataset
 This dataset has Air Pollution Emission data for the County and Tribal geographic levels in the United States for the years 2008 to 2017.
@@ -6,7 +6,7 @@ This dataset has Air Pollution Emission data for the County and Tribal geographi
 
 ### Download URL
 The data in zip formats are downloadable from https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei.
-The actual URLs are listed in download.py.
+The actual URLs are listed in download_config.py.
 
 
 #### API Output
