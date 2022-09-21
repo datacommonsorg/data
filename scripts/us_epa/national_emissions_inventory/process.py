@@ -53,6 +53,7 @@ _TMCF_TEMPLATE = ("Node: E:national_emissions->E0\n"
                   "observationAbout: C:national_emissions->geo_Id\n"
                   "observationDate: C:national_emissions->year\n"
                   "unit: Ton\n"
+                  "observationPeriod: \"P1Y\"\n"
                   "value: C:national_emissions->observation\n")
 
 
@@ -72,7 +73,7 @@ class USAirEmissionTrends:
             columns=['geo_Id', 'year', 'SV', 'observation', 'unit'])
         self.final_mcf_template = ""
 
-    def data_standardize(self, df: pd.DataFrame,
+    def _data_standardize(self, df: pd.DataFrame,
                          column_name: str) -> pd.DataFrame:
         """
         Replaces values of a single column into true values
@@ -88,7 +89,7 @@ class USAirEmissionTrends:
         df = df.replace({column_name: replace_metadata})
         return df
 
-    def regularize_columns(self, df: pd.DataFrame,
+    def _regularize_columns(self, df: pd.DataFrame,
                            file_path: str) -> pd.DataFrame:
         """
         Reads the file for national emissions data and regularizes the files into a 
@@ -117,7 +118,7 @@ class USAirEmissionTrends:
         elif 'tribes' in file_path:
             df.rename(columns=replacement_tribes, inplace=True)
             df = df.drop(columns=drop_tribes)
-            df = self.data_standardize(df, 'fips code')
+            df = self._data_standardize(df, 'fips code')
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
         else:
@@ -127,7 +128,7 @@ class USAirEmissionTrends:
             df['year'] = '2014'
         return df
 
-    def national_emissions(self, file_path: str) -> pd.DataFrame:
+    def _national_emissions(self, file_path: str) -> pd.DataFrame:
         """
         Reads the file for national emissions data and cleans it for concatenation
         in Final CSV.
@@ -139,7 +140,7 @@ class USAirEmissionTrends:
             df (pd.DataFrame): provides the cleaned df as output
         """
         df = pd.read_csv(file_path, header=0, low_memory=False)
-        df = self.regularize_columns(df, file_path)
+        df = self._regularize_columns(df, file_path)
         df['pollutant code'] = df['pollutant code'].astype(str)
         df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
         #
@@ -154,15 +155,15 @@ class USAirEmissionTrends:
         #
         df['geo_Id'] = 'geoId/' + df['geo_Id']
         df.rename(columns=replacement_17, inplace=True)
-        df = self.data_standardize(df, 'unit')
-        df = self.data_standardize(df, 'pollutant code')
+        df = self._data_standardize(df, 'unit')
+        df = self._data_standardize(df, 'pollutant code')
         df_emissions_code = df[df['emissions type code'] != '']
         df_emissions_code = df_emissions_code[
             (df_emissions_code['emissions type code'].notnull()) &
             (df_emissions_code['emissions type code'] != "B") &
             (df_emissions_code['emissions type code'] != "T")]
         if df_emissions_code.empty == False:
-            df_emissions_code = self.data_standardize(df_emissions_code,
+            df_emissions_code = self._data_standardize(df_emissions_code,
                                                       'emissions type code')
             df_emissions_code['SV'] = (
                 'Annual_Amount_Emissions_' +
@@ -232,7 +233,7 @@ class USAirEmissionTrends:
                 pv5=pollutant_name + ", " + scc_name,
                 pv6=code) + "\n"
 
-    def process(self):
+    def _process(self):
         """
         This Method processes the input files to generate
         the final df.
@@ -245,7 +246,7 @@ class USAirEmissionTrends:
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .csv extension
-            df = self.national_emissions(file_path)
+            df = self._national_emissions(file_path)
             self.final_df = pd.concat([self.final_df, df])
 
         self.final_df = self.final_df.sort_values(
@@ -304,7 +305,7 @@ class USAirEmissionTrends:
         if not os.path.exists(output_path):
             os.mkdir(output_path)
 
-        self.process()
+        self._process()
 
         self.final_df.to_csv(self._cleaned_csv_file_path, index=False)
 

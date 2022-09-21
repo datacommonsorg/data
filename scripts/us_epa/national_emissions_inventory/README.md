@@ -20,7 +20,7 @@ These are the attributes that we will use
 | pollutant type(s)   				    | The type of Gas generated which pollutes the Air. 			    |
 
 #### Cleaned Data
-Cleaned data will be inside [output/airpollution_emission_trends_tier1.csv] as a CSV file with the following columns.
+Cleaned data will be inside [output/national_emissions.csv] as a CSV file with the following columns.
 
 - year
 - geo_Id
@@ -31,22 +31,25 @@ Cleaned data will be inside [output/airpollution_emission_trends_tier1.csv] as a
 
 
 #### MCFs and Template MCFs
-- [output/national_emission_onroad.mcf]
-- [output/national_emission_onroad.tmcf]
+- [output/national_emissions.mcf]
+- [output/national_emissions.tmcf]
 
 
 ### Running Tests
 
 Run the test cases
 
-`run_tests.sh -p scripts/us_epa/national_emissions_onroad`
+`run_tests.sh -p scripts/us_epa/national_emissions_inventory`
 
 
 ### Import Procedure
 
 The below script will download the data.
 
-`python3 download.py`
+point - `python3 download_input_files.py point`
+nonpoint - `python3 download_input_files.py nonpoint`
+onroad - `python3 download_input_files.py onroad`
+nonroad(default) - `python3 download_input_files.py nonroad`
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 
