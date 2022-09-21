@@ -19,9 +19,7 @@ nonpoint_input_urls = [
     "https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_nonpoint.zip"
 ]
 
-nonpoint_folders = [
-    '2014_2014neiv2_nonpoint', '2008_2008neiv3_nonpoint'
-]
+nonpoint_folders = ['2014_2014neiv2_nonpoint', '2008_2008neiv3_nonpoint']
 
 nonroad_input_urls = [
     "https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiApr_nonroad_byregions.zip",
@@ -49,6 +47,4 @@ point_input_urls = [
     "https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_facility_process_byregions.zip",
     "https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_facility_process_byregions.zip"
 ]
-point_folders = [
-    '2014_2014neiv2_facility_process_byregions'
-]
+point_folders = ['2014_2014neiv2_facility_process_byregions']

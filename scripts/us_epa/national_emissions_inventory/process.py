@@ -37,13 +37,14 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-_MCF_TEMPLATE = ("Node: dcid:{statvar}\n"
-                 "name: \"Annual Amount Emissions {statvar_name}\"\n"
-                 "typeOf: dcs:StatisticalVariable\n"
-                 "populationType: dcs:Emissions\n"
-                 "measurementQualifier: dcs:Annual{scc}{pollutant}{emission_type}\n"
-                 "statType: dcs:measuredValue\n"
-                 "measuredProperty: dcs:amount\n")
+_MCF_TEMPLATE = (
+    "Node: dcid:{statvar}\n"
+    "name: \"Annual Amount Emissions {statvar_name}\"\n"
+    "typeOf: dcs:StatisticalVariable\n"
+    "populationType: dcs:Emissions\n"
+    "measurementQualifier: dcs:Annual{scc}{pollutant}{emission_type}\n"
+    "statType: dcs:measuredValue\n"
+    "measuredProperty: dcs:amount\n")
 
 _TMCF_TEMPLATE = ("Node: E:national_emissions->E0\n"
                   "typeOf: dcs:StatVarObservation\n"
@@ -74,7 +75,7 @@ class USAirEmissionTrends:
         self.final_mcf_template = ""
 
     def _data_standardize(self, df: pd.DataFrame,
-                         column_name: str) -> pd.DataFrame:
+                          column_name: str) -> pd.DataFrame:
         """
         Replaces values of a single column into true values
         from metadata and returns the DF.
@@ -90,7 +91,7 @@ class USAirEmissionTrends:
         return df
 
     def _regularize_columns(self, df: pd.DataFrame,
-                           file_path: str) -> pd.DataFrame:
+                            file_path: str) -> pd.DataFrame:
         """
         Reads the file for national emissions data and regularizes the files into a 
         single structure so that it can be processed at once. This includes dropping
@@ -164,7 +165,7 @@ class USAirEmissionTrends:
             (df_emissions_code['emissions type code'] != "T")]
         if df_emissions_code.empty == False:
             df_emissions_code = self._data_standardize(df_emissions_code,
-                                                      'emissions type code')
+                                                       'emissions type code')
             df_emissions_code['SV'] = (
                 'Annual_Amount_Emissions_' +
                 df_emissions_code['emissions type code'] + '_' +
