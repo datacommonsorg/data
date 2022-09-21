@@ -70,8 +70,9 @@ class USAirEmissionTrends:
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
-        self.final_df = pd.DataFrame(
-            columns=['geo_Id', 'year', 'SV', 'observation', 'unit'])
+        self.final_df = pd.DataFrame(columns=[
+            'geo_Id', 'year', 'SV', 'observation', 'unit', 'Measurement_Method'
+        ])
         self.final_mcf_template = ""
 
     def _data_standardize(self, df: pd.DataFrame,
@@ -171,13 +172,18 @@ class USAirEmissionTrends:
                 df_emissions_code['emissions type code'] + '_' +
                 df_emissions_code['pollutant code'].astype(str) + '_SCC_' +
                 df_emissions_code['scc'].astype(str))
-            df_emissions_code['Measurement_Method'] = 'EPA_NationalEmissionInventory'
+            df_emissions_code[
+                'Measurement_Method'] = 'EPA_NationalEmissionInventory'
         df['SV'] = ('Annual_Amount_Emissions_' +
                     df['pollutant code'].astype(str) + '_SCC_' +
                     df['scc'].astype(str))
-        df['Measurement_Method'] = np.where(df['emissions type code'] != '',
-                                            'dcAggregate/EPA_NationalEmissionInventory',
-                                            'EPA_NationalEmissionInventory')
+
+        df['Measurement_Method'] = np.where(
+            (df['emissions type code'] != '') &
+            (df['emissions type code'].notnull()),
+            'dcAggregate/EPA_NationalEmissionInventory',
+            'EPA_NationalEmissionInventory')
+
         df = pd.concat([df, df_emissions_code])
         df['SV'] = df['SV'].str.replace('_nan', '')
         df = df.drop(columns=drop_df)
@@ -253,15 +259,14 @@ class USAirEmissionTrends:
             self.final_df = pd.concat([self.final_df, df])
 
         self.final_df = self.final_df.sort_values(
-            by=['geo_Id', 'year', 'SV', 'observation'])
+            by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
         self.final_df['observation'].replace('', np.nan, inplace=True)
         self.final_df.dropna(subset=['observation'], inplace=True)
         self.final_df['observation'] = np.where(
             self.final_df['unit'] == 'Pound',
             self.final_df['observation'] / 2000, self.final_df['observation'])
-        self.final_df = self.final_df.groupby(['geo_Id', 'year',
-                                               'SV']).sum().reset_index()
-        self.final_df['Measurement_Method'] = 'EPA_NationalEmissionInventory'
+        self.final_df = self.final_df.groupby(
+            ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
 
     def generate_tmcf(self) -> None:
         """
