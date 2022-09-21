@@ -171,9 +171,13 @@ class USAirEmissionTrends:
                 df_emissions_code['emissions type code'] + '_' +
                 df_emissions_code['pollutant code'].astype(str) + '_SCC_' +
                 df_emissions_code['scc'].astype(str))
+            df_emissions_code['Measurement_Method'] = 'EPA_NationalEmissionInventory'
         df['SV'] = ('Annual_Amount_Emissions_' +
                     df['pollutant code'].astype(str) + '_SCC_' +
                     df['scc'].astype(str))
+        df['Measurement_Method'] = np.where(df['emissions type code'] != '',
+                                            'dcAggregate/EPA_NationalEmissionInventory',
+                                            'EPA_NationalEmissionInventory')
         df = pd.concat([df, df_emissions_code])
         df['SV'] = df['SV'].str.replace('_nan', '')
         df = df.drop(columns=drop_df)
@@ -237,15 +241,14 @@ class USAirEmissionTrends:
         """
         This Method processes the input files to generate
         the final df.
+
         Args:
             None
+
         Returns:
             None
         """
         for file_path in self._input_files:
-            # Taking the File name out of the complete file address
-            # Used -1 to pickup the last part which is file name
-            # Read till -4 inorder to remove the .csv extension
             df = self._national_emissions(file_path)
             self.final_df = pd.concat([self.final_df, df])
 
