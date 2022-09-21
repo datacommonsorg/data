@@ -37,11 +37,11 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-_MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
-                 "name: \"Annual Amount Emissions {pv5}\"\n"
+_MCF_TEMPLATE = ("Node: dcid:{statvar}\n"
+                 "name: \"Annual Amount Emissions {statvar_name}\"\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Emissions\n"
-                 "measurementQualifier: dcs:Annual{pv2}{pv3}{pv4}{pv6}\n"
+                 "measurementQualifier: dcs:Annual{scc}{pollutant}{emission_type}\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:amount\n")
 
@@ -201,7 +201,7 @@ class USAirEmissionTrends:
             #     "statType": "dcs:measuredValue",
             #     "measuredProperty": "dcs:amount"
             # }
-            emission_type = pollutant = code = ''
+            pollutant = code = ''
             sv_property = sv.split("_")
             source = '\nepaSccCode: dcs:EPA_SCC/' + sv_property[-1]
             scc_name = replace_source_metadata[sv_property[-1]]
@@ -226,12 +226,11 @@ class USAirEmissionTrends:
             #     print(sv)
             #     print()
             self.final_mcf_template += _MCF_TEMPLATE.format(
-                pv1=sv,
-                pv2=source,
-                pv3=pollutant_value,
-                pv4=emission_type,
-                pv5=pollutant_name + ", " + scc_name,
-                pv6=code) + "\n"
+                statvar=sv,
+                scc=source,
+                pollutant=pollutant_value,
+                statvar_name=pollutant_name + ", " + scc_name,
+                emission_type=code) + "\n"
 
     def _process(self):
         """

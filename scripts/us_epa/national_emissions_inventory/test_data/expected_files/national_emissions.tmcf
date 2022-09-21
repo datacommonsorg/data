@@ -5,4 +5,5 @@ measurementMethod: C:national_emissions->Measurement_Method
 observationAbout: C:national_emissions->geo_Id
 observationDate: C:national_emissions->year
 unit: Ton
+observationPeriod: "P1Y"
 value: C:national_emissions->observation
