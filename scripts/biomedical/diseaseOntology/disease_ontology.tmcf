@@ -2,6 +2,7 @@ Node: E:DiseaseOntology->E1
 typeOf: dcs:Disease
 dcid: C:DiseaseOntology->id
 name: C:DiseaseOntology->label
+diseaseOntologyID: C:DiseaseOntology->diseaseId
 specializationOf: C:DiseaseOntology->subClassOf
 description: C:DiseaseOntology->diseaseDescription
 alternativeDiseaseOntologyID: C:DiseaseOntology->hasAlternativeId 

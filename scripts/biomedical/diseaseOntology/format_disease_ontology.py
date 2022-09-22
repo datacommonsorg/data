@@ -183,18 +183,19 @@ def remove_newline(df):
     df.loc[2895, 'IAO_0000115'] = df.loc[2895, 'IAO_0000115'].replace("\\n", "")
     df.loc[2934, 'IAO_0000115'] = df.loc[2934, 'IAO_0000115'].replace("\\n", "")
     df.loc[3036, 'IAO_0000115'] = df.loc[3036, 'IAO_0000115'].replace("\\n", "")
-    df.loc[11305, 'IAO_0000115'] = df.loc[11304,
-                                          'IAO_0000115'].replace("\\n", "")
+    df.loc[11304, 'IAO_0000115'] = df.loc[11304, 'IAO_0000115'].replace("\\n", "")
     return df
 
 def create_dcid(df):
-    ##df[newcol] = np.where(df['A'] == newcol, df['B'], np.nan)
+    df['diseaseId'] = df['id']
+    df['diseaseId'] = df['diseaseId'].str.replace("_", ":")
     col_names = ['id', 'subClassOf', 'hasAlternativeId']
     for col in col_names:
         df[col] = "bio/" + df[col]
         df[col] = df[col].replace(["bio/nan"],np.nan)
     df['ICD10CM'] = "ICD10/" + df['ICD10CM'].astype(str)
     df['ICD10CM'] = df['ICD10CM'].replace("ICD10/nan", np.nan)
+    df.update('"' + df[['diseaseId']].astype(str) + '"')
     return df
 
 
@@ -242,6 +243,10 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+
 
 
 
