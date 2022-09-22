@@ -37,14 +37,14 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
-_MCF_TEMPLATE = (
-    "Node: dcid:{statvar}\n"
-    "name: \"Annual Amount Emissions {statvar_name}\"\n"
-    "typeOf: dcs:StatisticalVariable\n"
-    "populationType: dcs:Emissions\n"
-    "measurementQualifier: dcs:Annual{scc}{pollutant}{emission_type}\n"
-    "statType: dcs:measuredValue\n"
-    "measuredProperty: dcs:amount\n")
+_MCF_TEMPLATE = ("Node: dcid:{statvar}\n"
+                 "name: \"Annual Amount Emissions {statvar_name}\"\n"
+                 "typeOf: dcs:StatisticalVariable\n"
+                 "populationType: dcs:Emissions\n"
+                 "measurementQualifier: dcs:Annual{scc}{scc_L1}{scc_L2}{scc_L3}"
+                 "{pollutant}{emission_type}\n"
+                 "statType: dcs:measuredValue\n"
+                 "measuredProperty: dcs:amount\n")
 
 _TMCF_TEMPLATE = ("Node: E:national_emissions->E0\n"
                   "typeOf: dcs:StatVarObservation\n"
@@ -214,6 +214,16 @@ class USAirEmissionTrends:
             # }
             pollutant = code = ''
             sv_property = sv.split("_")
+            scc_code = str(sv_property[-1])
+            #
+            # Remove if SCC Levels are not needed.
+            sccL1 = scc_code[:1] if len(scc_code) == 8 else scc_code[:2]
+            sccL2 = scc_code[:3] if len(scc_code) == 8 else scc_code[:4]
+            sccL3 = scc_code[:6] if len(scc_code) == 8 else scc_code[:7]
+            sccL1 = '\nepaSccCodeLevel1: dcs:EPA_SCC/' + sccL1
+            sccL2 = '\nepaSccCodeLevel2: dcs:EPA_SCC/' + sccL2
+            sccL3 = '\nepaSccCodeLevel3: dcs:EPA_SCC/' + sccL3
+            #
             source = '\nepaSccCode: dcs:EPA_SCC/' + sv_property[-1]
             scc_name = replace_source_metadata[sv_property[-1]]
             scc_name = scc_name + " (" + sv_property[-1] + ")"
@@ -239,6 +249,9 @@ class USAirEmissionTrends:
             self.final_mcf_template += _MCF_TEMPLATE.format(
                 statvar=sv,
                 scc=source,
+                scc_L1=sccL1,
+                scc_L2=sccL2,
+                scc_L3=sccL3,
                 pollutant=pollutant_value,
                 statvar_name=pollutant_name + ", " + scc_name,
                 emission_type=code) + "\n"
