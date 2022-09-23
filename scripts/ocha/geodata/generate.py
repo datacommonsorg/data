@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -75,7 +75,11 @@ _FILE_METADATA = {
 
 # Threshold to DP level map, from
 # scripts/us_census/geojsons_low_res/generate_mcf.py
-_DP_LEVEL_MAP = {1: 0.01, 2: 0.03, 3: 0.05}
+_DP_LEVELS = [(1, 0.01), (2, 0.03), (3, 0.05)]
+
+def _is_bad_feature(f, pcode_key, name_key):
+  return ('properties' not in f or pcode_key not in f['properties'] or
+          name_key not in f['properties'] or 'geometry' not in f)
 
 
 def _process_file(in_fp, md, args):
@@ -97,8 +101,7 @@ def _process_file(in_fp, md, args):
 
     j = json.load(in_fp)
     for f in j['features']:
-        if ('properties' not in f or pcode_key not in f['properties'] or
-                name_key not in f['properties'] or 'geometry' not in f):
+        if (_is_bad_feature(f, pcode_key, name_key)):
             print(f['properties'])
             continue
         pcode_val = f['properties'][pcode_key]
@@ -121,7 +124,7 @@ def _process_file(in_fp, md, args):
                                gj_val=gj))
 
             poly = geometry.shape(f['geometry'])
-            for dp, tolerance in _DP_LEVEL_MAP.items():
+            for dp, tolerance in _DP_LEVELS:
                 spoly = poly.simplify(tolerance)
                 gjs = json.dumps(json.dumps(geometry.mapping(spoly)))
                 simplified_gj_mcf.write(
@@ -161,7 +164,7 @@ def _process(in_pattern, args):
             _process_file(in_fp, _FILE_METADATA[fname], args)
 
 
-def _generate_mcf(in_pattern, id_file, out_dir):
+def generate_mcf(in_pattern, id_file, out_dir):
     id_map = {}
     with open(id_file, 'r') as id_fp:
         csvr = csv.DictReader(id_fp)
@@ -176,7 +179,7 @@ def _generate_mcf(in_pattern, id_file, out_dir):
     })
 
 
-def _generate_id_map(in_pattern, out_dir):
+def generate_id_map(in_pattern, out_dir):
     with open(os.path.join(out_dir, 'id_map.csv'), 'w') as id_fp:
         id_fp.write('ochaPCode,name\n')
         _process(in_pattern, {'generate_id_map': True, 'id_fp': id_fp})
@@ -184,11 +187,11 @@ def _generate_id_map(in_pattern, out_dir):
 
 def main(_):
     if FLAGS.ocha_generate_id_map:
-        _generate_id_map(FLAGS.ocha_input_geojson_pattern,
-                         FLAGS.ocha_output_dir)
+        generate_id_map(FLAGS.ocha_input_geojson_pattern,
+                        FLAGS.ocha_output_dir)
     else:
-        _generate_mcf(FLAGS.ocha_input_geojson_pattern,
-                      FLAGS.ocha_resolved_id_map, FLAGS.ocha_output_dir)
+        generate_mcf(FLAGS.ocha_input_geojson_pattern,
+                     FLAGS.ocha_resolved_id_map, FLAGS.ocha_output_dir)
 
 
 if __name__ == "__main__":

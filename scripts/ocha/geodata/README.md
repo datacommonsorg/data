@@ -23,7 +23,7 @@ This includes geojsons for the following countries:
     ```
     export OUTDIR=scratch/$COUNTRY/output
     mkdir -p "$OUTDIR"
-    python3 generate_mcf.py \
+    python3 generate.py \
       --ocha_input_geojson_pattern=scratch/$COUNTRY/*.geojson \
       --ocha_output_dir="$OUTDIR" \
       --ocha_generate_id_map=True
@@ -44,7 +44,7 @@ This includes geojsons for the following countries:
 5. Generate the MCFs
 
    ```
-   python3 generate_mcf.py \
+   python3 generate.py \
       --ocha_input_geojson_pattern="scratch/$COUNTRY/*.geojson" \
       --ocha_output_dir="$OUTDIR" \
       --ocha_resolved_id_map=<resolved_id_map>
