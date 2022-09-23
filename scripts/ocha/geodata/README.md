@@ -52,4 +52,6 @@ This includes geojsons for the following countries:
 
 ## Testing
 
-TODO: implement me
+```
+python3 -m unittest generate_test.py
+```
