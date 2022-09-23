@@ -72,6 +72,22 @@ DATASETS = [{
     "period": "2020-04",
     "data_file": "Table_43_04_06_2020.csv",
     "data_rows": 38
+}, {
+    "period": "2020-07",
+    "data_file": "Table_43_07_09_2020.csv",
+    "data_rows": 37
+}, {
+    "period": "2020-10",
+    "data_file": "Table_43_10_12_2020.csv",
+    "data_rows": 37
+}, {
+    "period": "2021-01",
+    "data_file": "Table_43_01_03_2021.csv",
+    "data_rows": 37
+}, {
+    "period": "2021-04",
+    "data_file": "Table_43_04_06_2021.csv",
+    "data_rows": 37
 }]
 
 
