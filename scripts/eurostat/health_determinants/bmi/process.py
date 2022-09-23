@@ -25,33 +25,37 @@ from common.euro_stat import EuroStat
 # pylint: enable=wrong-import-position
 
 
-class EuroStatPhysicalActivity(EuroStat):
+class EuroStatBMI(EuroStat):
     """
     This Class has requried methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
-    _import_name = "physical_activity"
+    _import_name = "bmi"
 
     _mcf_template = ("Node: dcid:{sv}"
-                     "\n{sv_name}"
                      "\ntypeOf: dcs:StatisticalVariable"
                      "\npopulationType: dcs:Person"
+                     "\nstatType: dcs:measuredValue"
+                     "\nmeasuredProperty: dcs:count"
                      "{denominator}"
-                     "{incomequin}"
-                     "{education}"
                      "{healthbehavior}"
+                     "{education}"
                      "{exercise}"
                      "{residence}"
                      "{activity}"
                      "{duration}"
-                     "{gender}"
-                     "{countryofbirth}"
                      "{citizenship}"
+                     "{gender}"
+                     "{incomequin}"
+                     "{countryofbirth}"
                      "{lev_limit}"
                      "{frequency}"
-                     "\nstatType: dcs:measuredValue"
-                     "\nmeasuredProperty: dcs:count\n")
+                     "\n{sv_name}\n")
 
+    # Temporary keys (activity_temp and duration_temp are used here.
+    # As we do correction to property in _property_correction method, we cannot
+    # replace value for activity and duration key at the same time when we are
+    # reading it in loop. Hence temp keys are used.
     _sv_properties_template = {
         "healthbehavior":
             "\nhealthBehavior: dcs:{property_value}",
@@ -81,8 +85,6 @@ class EuroStatPhysicalActivity(EuroStat):
             "\nnativity: dcs:{property_value}",
         "citizenship":
             "\ncitizenship: dcs:{property_value}",
-        "healthbehavior_bmi":
-            "__{property_value}",
     }
 
     _sv_value_to_property_mapping = {
@@ -105,11 +107,13 @@ class EuroStatPhysicalActivity(EuroStat):
         "Minutes": "duration_temp",
         "ForeignBorn": "countryofbirth",
         "Native": "countryofbirth",
+        "ForeignWithin": "citizenship",
+        "ForeignOutside": "citizenship",
         "Citizen": "citizenship",
-        "weight": "healthbehavior_bmi",
-        "Normal": "healthbehavior_bmi",
-        "Obese": "healthbehavior_bmi",
-        "Obesity": "healthbehavior_bmi",
+        "weight": "healthbehavior",
+        "Normal": "healthbehavior",
+        "Obese": "healthbehavior",
+        "Obesity": "healthbehavior",
     }
 
     # over-ridden parent abstract method
@@ -119,16 +123,14 @@ class EuroStatPhysicalActivity(EuroStat):
         """
         for k, v in self._sv_properties.items():
             if k == "healthbehavior_bmi":
-                self._sv_properties["healthbehavior"] = self._sv_properties[
-                    "healthbehavior"].rstrip(
-                        "\n") + self._sv_properties["healthbehavior_bmi"]
+                self._sv_properties["healthbehavior"] += self._sv_properties[
+                    "healthbehavior_bmi"]
             elif k == "activity_temp":
                 if self._sv_properties["lev_limit"]:
                     self._sv_properties["activity"] = ""
                 else:
                     self._sv_properties["activity"] = self._sv_properties[
-                        "activity_temp"].replace("ModerateActivityOr",
-                                                 "ModerateActivityLevel__")
+                        "activity_temp"]
             elif k == "duration_temp" and v:
                 if "OrMoreMinutes" in self._sv_properties["duration_temp"]:
                     self._sv_properties[
@@ -142,22 +144,21 @@ class EuroStatPhysicalActivity(EuroStat):
                             + self._sv_properties[
                             "duration_temp"].replace("Minutes", "").replace(
                                 "To", " ") + " Minute]"
-                elif self._sv_properties["frequency"]:
-                    self._sv_properties["duration"] = ""
                 else:
                     self._sv_properties[
                         "duration"] = "\nactivityDuration: [Minute "\
                             + self._sv_properties[
                             "duration_temp"].replace("Minutes", "") + "]"
             self._sv_properties[k] = v\
-                .replace("ModerateActivityOrHeavyActivity","ModerateActivityLevel__HeavyActivityLevel")\
                 .replace("Or", "__")\
                 .replace("CountryOfBirth","")\
                 .replace("Citizenship", "")\
                 .replace("Percentile", " Percentile")\
                 .replace("IncomeOf", "")\
                 .replace("To", " ")\
-                .replace("EducationalAttainment","")
+                .replace("EducationalAttainment","")\
+                .replace("ModerateActivityOrHeavyActivity",
+                "ModerateActivityLevel__HeavyActivity")
 
     # over-ridden parent abstract method
     # pylint: disable=no-self-use
@@ -171,11 +172,12 @@ class EuroStatPhysicalActivity(EuroStat):
             .replace("To149","To 149")\
             .replace("ACitizen","A Citizen")\
             .replace("Least30", "Least 30")\
-            .replace("Normalweig", "Normalweight")\
-            .replace("Underweig", "Underweight")\
-            .replace("Overweig", "Overweight")\
             .replace("To"," To ")\
             .replace("Of","Of ")\
+            .replace("Normalweight","Normal Weight")\
+            .replace(" Among Population","")\
+            .replace(" Population","")\
+            .replace('name: "','name: "Population: ')\
             .replace("  "," ")
 
     # pylint: enable=no-self-use
@@ -191,16 +193,15 @@ if __name__ == '__main__':
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "output")
 
-    csv_name = "eurostat_population_physicalactivity.csv"
-    mcf_name = "eurostat_population_physicalactivity.mcf"
-    tmcf_name = "eurostat_population_physicalactivity.tmcf"
+    csv_name = "eurostat_population_bmi.csv"
+    mcf_name = "eurostat_population_bmi.mcf"
+    tmcf_name = "eurostat_population_bmi.tmcf"
 
     cleaned_csv_path = os.path.join(data_file_path, csv_name)
     mcf_path = os.path.join(data_file_path, mcf_name)
     tmcf_path = os.path.join(data_file_path, tmcf_name)
 
-    loader = EuroStatPhysicalActivity(ip_files, cleaned_csv_path, mcf_path,
-                                      tmcf_path)
+    loader = EuroStatBMI(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()

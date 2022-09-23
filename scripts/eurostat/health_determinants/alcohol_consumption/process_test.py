@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for EuroStat Physical Activity process script.
+Script to automate the testing for EuroStat Alcohol Consumption process script.
 """
 import os
 import sys
@@ -20,11 +20,11 @@ import sys
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
-from process import EuroStatPhysicalActivity
+from process import EuroStatAlcoholConsumption
 from common.unitest_common_methods import CommonTestClass
 # pylint: enable=wrong-import-position
 
 
-class PhysicalActivityTest(CommonTestClass.CommonTestCases):
-    _import_class = EuroStatPhysicalActivity
+class AlcoholConsumptionTest(CommonTestClass.CommonTestCases):
+    _import_class = EuroStatAlcoholConsumption
     _test_module_directory = os.path.dirname(__file__)
