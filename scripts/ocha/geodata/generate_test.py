@@ -34,8 +34,7 @@ class GenerateTest(unittest.TestCase):
     def test_id_map(self):
         self.maxDiff = None
         input_gj_pattern = os.path.join(
-            _TESTDIR,
-            'input/bgd_admbnda_adm2_bbs_20201113.shp.geojson')
+            _TESTDIR, 'input/bgd_admbnda_adm2_bbs_20201113.shp.geojson')
         with tempfile.TemporaryDirectory() as tmp_dir:
             generate.generate_id_map(input_gj_pattern, tmp_dir)
             with open(os.path.join(_TESTDIR, 'expected/id_map.csv')) as wantf:
@@ -45,15 +44,15 @@ class GenerateTest(unittest.TestCase):
     def test_mcf(self):
         self.maxDiff = None
         input_gj_pattern = os.path.join(
-            _TESTDIR,
-            'input/bgd_admbnda_adm2_bbs_20201113.shp.geojson')
-        input_id_map = os.path.join(
-            _TESTDIR, 'input/resolved_id_map.csv')
+            _TESTDIR, 'input/bgd_admbnda_adm2_bbs_20201113.shp.geojson')
+        input_id_map = os.path.join(_TESTDIR, 'input/resolved_id_map.csv')
         with tempfile.TemporaryDirectory() as tmp_dir:
             generate.generate_mcf(input_gj_pattern, input_id_map, tmp_dir)
-            for f in ['Bangladesh_AdministrativeArea2_GeoJSON.mcf',
-                      'Bangladesh_AdministrativeArea2_GeoJSON_Simplified.mcf',
-                      'Bangladesh_AdministrativeArea2_PCode.mcf']:
+            for f in [
+                    'Bangladesh_AdministrativeArea2_GeoJSON.mcf',
+                    'Bangladesh_AdministrativeArea2_GeoJSON_Simplified.mcf',
+                    'Bangladesh_AdministrativeArea2_PCode.mcf'
+            ]:
                 with open(os.path.join(_TESTDIR, 'expected', f)) as wantf:
                     with open(os.path.join(tmp_dir, f)) as gotf:
                         got = gotf.read()

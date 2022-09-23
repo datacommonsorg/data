@@ -77,9 +77,10 @@ _FILE_METADATA = {
 # scripts/us_census/geojsons_low_res/generate_mcf.py
 _DP_LEVELS = [(1, 0.01), (2, 0.03), (3, 0.05)]
 
+
 def _is_bad_feature(f, pcode_key, name_key):
-  return ('properties' not in f or pcode_key not in f['properties'] or
-          name_key not in f['properties'] or 'geometry' not in f)
+    return ('properties' not in f or pcode_key not in f['properties'] or
+            name_key not in f['properties'] or 'geometry' not in f)
 
 
 def _process_file(in_fp, md, args):
@@ -187,8 +188,7 @@ def generate_id_map(in_pattern, out_dir):
 
 def main(_):
     if FLAGS.ocha_generate_id_map:
-        generate_id_map(FLAGS.ocha_input_geojson_pattern,
-                        FLAGS.ocha_output_dir)
+        generate_id_map(FLAGS.ocha_input_geojson_pattern, FLAGS.ocha_output_dir)
     else:
         generate_mcf(FLAGS.ocha_input_geojson_pattern,
                      FLAGS.ocha_resolved_id_map, FLAGS.ocha_output_dir)
