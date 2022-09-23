@@ -57,7 +57,13 @@ _DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
 # specific prefixes followed by an upper case letter or underscore. This helps
 # to avoid false positives like 'USCitizenBornInTheUnitedStates'.
 _CONSTRAINT_PREFIX_REGEX = re.compile(
-    r'(?P<prefix>^(USC|CDC|DAD|BLS|NCES|ACSED))(?P<ucase_uscore>[A-Z_])')
+    r'(?P<prefix>^(USC|CDC|DAD|BLS|NCES|ACSED|UCR))(?P<ucase_uscore>[A-Z_])')
+
+# Mutliple values can be assigned to a property by separating each value with
+# '__' or '&'. To represent ParkOrPlayground for location of crime, we can have
+# p=locationOfCrime and v=Park__Playground or v=Park&Playground.
+# In the dcid, this will be represented as 'ParkOrPlayground'.
+_MULTIPLE_VALUE_SEPARATOR_REGEX = re.compile(r'__|&')
 
 # A mapping of NAICS codes to industry topics
 # This map was generated using the code from the _create_naics_map function at
@@ -226,6 +232,39 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'bachelorsDegreeMajor': {
         'prepend': 'BachelorOf'
+    },
+    'biasMotivation': {
+        'prepend': 'BiasMotivation'
+    },
+    'offenderRace': {
+        'prepend': 'OffenderRace'
+    },
+    'offenderEthnicity': {
+        'prepend': 'OffenderEthnicity'
+    },
+    'locationOfCrime': {
+        'prepend': 'LocationOfCrime'
+    },
+    'victimType': {
+        'prepend': 'VictimType'
+    },
+    'mothersRace': {
+        'prepend': 'Mother'
+    },
+    'mothersEthnicity': {
+        'prepend': 'Mother'
+    },
+    'mothersNativity': {
+        'prepend': 'Mother'
+    },
+    'mothersMaritalStatus': {
+        'prepend': 'Mother'
+    },
+    'mothersAge': {
+        'prepend': 'Mother'
+    },
+    'mothersEducation': {
+        'prepend': 'Mother'
     }
 }
 
@@ -271,8 +310,12 @@ def _capitalize_process(word: str) -> str:
         # Removing namespaces
         word = word[word.find(':') + 1:]
 
-        # Removing constraint prefixes
-        word = _CONSTRAINT_PREFIX_REGEX.sub(r'\g<ucase_uscore>', word)
+        # Removing constraint prefixes and replacing __ or & with 'Or'
+        word_list = _MULTIPLE_VALUE_SEPARATOR_REGEX.split(word)
+        for idx, w in enumerate(word_list):
+            word_list[idx] = _CONSTRAINT_PREFIX_REGEX.sub(
+                r'\g<ucase_uscore>', w)
+        word = 'Or'.join(word_list)
 
         # Removing all underscores
         word = word.replace('_', '')
@@ -525,6 +568,28 @@ def _process_constraint_property(prop: str, value: str) -> str:
 def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     """Generates the dcid given a statistical variable.
 
+    The generated dcid will follow the pattern
+    <statType>_<measuredProp>_<populationType>_<constraintVal1>_<constraintVal2>
+
+    1. measurementQualifier is added as a prefix to the dcid.
+    2. statType is included when it is not measuredValue.
+    3. measurementDenominator is added as a suffix to the dcid.
+    4. Constraints are sorted alphabetically based on the prop and values are
+         added to the dcid.
+    5. Existing dcids may not follow the above conventions. The _LEGACY_MAP maps
+         generated dcids to their existing dcid.
+    6. NAICS and SOC codes are replaced with their industry and occupation names
+         respectively. See _NAICS_MAP and util/soc_codes_names.py for the
+         mapping.
+    7. Boolean constraints are replaced by their populations. For example,
+         p=isInternetUser and v=True/False becomes v=isInternetUser/
+         notInternetUser. See _BOOLEAN_PROPS for the properties that are
+         considered for this renaming.
+    8. Quantities and Quantity Ranges are changed into a name to be used in the
+         dcid. For example p=age and v=[10 20 Years] becomes v=10To20Years.
+    9. Certain variables have text prepended or appended to their constraints to
+         improve readability. See _PREPEND_APPEND_REPLACE_MAP for more details.
+
     Args:
         stat_var_dict: A dictionary with property: value of the statistical
           variable as key-value pairs.
@@ -548,6 +613,22 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
 
     Returns:
         A string representing the dcid of the statistical variable.
+
+    Caveats:
+        1. Currently, there is no support for renaming ICD10 cause of death
+             values and DEA drug names.
+        2. MeasuredProp=InsuredUnemploymentRate is not changed to
+             Rate_InsuredUnemployment.
+        3. The generated dcids can get too long due to the large number of
+             constraint props. In such cases, manual generation or the
+             ignore_props arg can be used to exclude a few props from the
+             generation process. It is recommended to limit the length of
+             statvar dcids to 80 characters or less.
+        4. This function does not differentiate between property names and only
+             uses the values to generate the dcid. Two props having the same
+             value, say p1=fuel, v1=Coal and p2=energy, v2=Coal will result in
+             the same dcid. The _PREPEND_APPEND_REPLACE_MAP can be modified to
+             disambiguate in this case.
     """
 
     # TODO: Renaming cause of death properties
