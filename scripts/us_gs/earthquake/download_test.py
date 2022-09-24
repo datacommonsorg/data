@@ -30,8 +30,7 @@ class USGSEarthquakeDownloadTest(unittest.TestCase):
 
     def test_download_2011_03_11(self):
         date_from = datetime.datetime.strptime('2011-03-11', '%Y-%m-%d').date()
-        date_until = datetime.datetime.strptime('2011-03-12',
-                                                '%Y-%m-%d').date()
+        date_until = datetime.datetime.strptime('2011-03-12', '%Y-%m-%d').date()
         try:
             diff = count_and_download(date_from, date_until, MODULE_DIR)
             self.assertEqual(len(diff), 0)

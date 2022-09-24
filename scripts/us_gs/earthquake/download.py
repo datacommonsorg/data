@@ -33,9 +33,8 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'start_date', '1900-01-01',
-    'When the data should start from. Earliest is 1900-01-01.')
+flags.DEFINE_string('start_date', '1900-01-01',
+                    'When the data should start from. Earliest is 1900-01-01.')
 flags.DEFINE_string('end_date',
                     datetime.date.today().strftime('%Y-%m-%d'),
                     'When the data should end. Format is YYYY-mm-dd.')

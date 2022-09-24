@@ -34,9 +34,8 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../..'))
 from util import latlng_recon_service
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'input', '/tmp/usgs/*.csv',
-    'Glob pattern for a set of raw USGS earthquake CSV files.')
+flags.DEFINE_string('input', '/tmp/usgs/*.csv',
+                    'Glob pattern for a set of raw USGS earthquake CSV files.')
 
 _TODAY = datetime.date.today().strftime('%Y_%m_%d')
 flags.DEFINE_string('output', f'/tmp/usgs/usgs_comcat_1900_01_01_{_TODAY}.mcf',
@@ -52,8 +51,7 @@ flags.DEFINE_string('cache_path',
                     'Path to place resolution cache file.')
 
 # Place cache is a mapping of (lat,lng) -> list of places in Data Commons.
-PlaceCache = NewType('PlaceCache', Dict[latlng_recon_service.LatLng,
-                                        List[str]])
+PlaceCache = NewType('PlaceCache', Dict[latlng_recon_service.LatLng, List[str]])
 
 REVIEW_MAP = {
     'reviewed': 'ReviewedEvent',
@@ -161,8 +159,7 @@ def resolve_affected_places(
             unresolved_id_to_latlng[row['id']] = latlng
 
     logging.info('Num coords to be resolved %s' % len(unresolved_id_to_latlng))
-    newly_resolved = latlng_recon_service.latlng2places(
-        unresolved_id_to_latlng)
+    newly_resolved = latlng_recon_service.latlng2places(unresolved_id_to_latlng)
     resolved_id_to_latlng.update(newly_resolved)
 
     # Transform new id->places to (lat,lng)->places.
