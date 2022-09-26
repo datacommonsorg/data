@@ -189,6 +189,7 @@ def remove_newline(df):
 def create_dcid(df):
     df['diseaseId'] = df['id']
     df['diseaseId'] = df['diseaseId'].str.replace("_", ":")
+    df['hasAlternativeId'] = df['hasAlternativeId'].str.strip()
     col_names = ['id', 'subClassOf', 'hasAlternativeId']
     for col in col_names:
         df[col] = "bio/" + df[col]
