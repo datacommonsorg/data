@@ -78,25 +78,25 @@ class GeoSadakLoader:
         self._make_column_numerical("LgdCode")
         self._make_column_numerical("Category_Count")
 
-    def save(self,output_folder_path):
-        csv_file_path = output_folder_path + self.state_name
+    def save(self,csv_file_path):
         if path.exists(csv_file_path):
-            # If the file exists then remove
-            os.remove(csv_file_path)
-        self.clean_df.to_csv(csv_file_path + ".csv", index=False, header=True)
+            # If the file exists then append to the same
+            self.clean_df.to_csv(csv_file_path,
+                                 mode='a',
+                                 index=False,
+                                 header=False)
+        else:
+            self.clean_df.to_csv(csv_file_path, index=False, header=True)
 
 def main():
 
     """Runs the program."""
    
-    # If the final output folder already exists
+    # If the final csv file already exists
     # Remove it, so that it can be regenerated
-    output_folder_path = os.path.join(os.path.dirname(__file__), "./output/")
-    if not os.path.exists(output_folder_path):
-        os.makedirs(output_folder_path)
-    else:
-        shutil.rmtree(output_folder_path)
-        os.makedirs(output_folder_path)
+    csv_file_path = os.path.join(os.path.dirname(__file__), "./India_GeoSadak.csv")
+    if path.exists(csv_file_path):
+        os.remove(csv_file_path)
 
     files = os.listdir(os.path.join(os.path.dirname(__file__), "./data/facilities/"))
     for file_name in files:
@@ -107,7 +107,7 @@ def main():
         loader = GeoSadakLoader(data_file_path, mapper[file_name])
         loader.load()
         loader.process()
-        loader.save(output_folder_path)
+        loader.save(csv_file_path)
 
 
 if __name__ == "__main__":
