@@ -19,10 +19,12 @@ from os import path
 import geopandas
 import json
 
-mapper = dict()
-df = pd.read_csv(os.path.join(os.path.dirname(__file__), "./data/India_GeoSadak-zipfile_details.csv"))
-for i in range(28):
-    mapper[df.iloc[i]["Facilities"]] = df.iloc[i]["State"]
+def map_names():
+    mapper = dict()
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "./data/India_GeoSadak-zipfile_details.csv"))
+    for i in range(28):
+        mapper[df.iloc[i]["Facilities"]] = df.iloc[i]["State"]
+    return mapper
 
 
 class GeoSadakLoader:
@@ -91,7 +93,9 @@ class GeoSadakLoader:
 def main():
 
     """Runs the program."""
-   
+
+    mapper = map_names()
+
     # If the final csv file already exists
     # Remove it, so that it can be regenerated
     csv_file_path = os.path.join(os.path.dirname(__file__), "./India_GeoSadak.csv")
