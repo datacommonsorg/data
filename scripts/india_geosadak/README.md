@@ -16,7 +16,7 @@ The dataset consists of facility details of each district along with its geometr
 
 
 ### Cleaned data
-- The output data for each state can be found in [output](./output) folder of the repository.
+- The output data for can be found in [India_GeoSadak.csv](./India_GeoSadak.csv).
 
 The cleaned csv has the following columns:
  - LgdCode: District Code
