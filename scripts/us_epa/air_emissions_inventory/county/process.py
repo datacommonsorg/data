@@ -31,7 +31,7 @@ from util.statvar_dcid_generator import get_statvar_dcid
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
                                                 '..')))
 from common.us_air_pollution_emission_trends import USAirPollutionEmissionTrends
-from metadata import source_pollutant, source_category
+from metadata import SOURCE_POLLUTANT, SOURCE_CATEGORY
 
 sys.path.insert(
     1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
@@ -81,8 +81,11 @@ class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
         self._final_df['SV'] = self._final_df['SV_TEMP']
         self._final_df['mcf'] = self._final_df['SV_TEMP']
 
+        # Created to store current SV values as keys and names generated
+        # from sv generator as values for replacement.
         sv_replacement = {}
         mcf = {}
+        # Created to store Property and Values for each unique SV.
         sv_checker = {
             "typeOf": "dcs:StatisticalVariable",
             "populationType": "dcs:Emissions",
@@ -91,8 +94,7 @@ class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
             "measuredProperty": "dcs:amount"
         }
 
-        sv_list = self._final_df["SV"].to_list()
-        sv_list = list(set(sv_list))
+        sv_list = pd.unique(self._final_df['SV'])
         sv_list.sort()
 
         for sv in sv_list:
@@ -145,8 +147,8 @@ class USAirPollutionEmissionTrendsCounty(USAirPollutionEmissionTrends):
         df_final = pd.DataFrame()
         df['geo_Id'] = ''
 
-        df = self.data_standardize(df, 'POLLUTANT', source_pollutant)
-        df = self.data_standardize(df, 'TIER', source_category)
+        df = self.data_standardize(df, 'POLLUTANT', SOURCE_POLLUTANT)
+        df = self.data_standardize(df, 'TIER', SOURCE_CATEGORY)
 
         df = df.rename(columns={'EMISSIONS': 'observation'})
         df['geo_Id'] = 'geoId/' + (df['STATE_FIPS'].map(str)).str.zfill(2)\
