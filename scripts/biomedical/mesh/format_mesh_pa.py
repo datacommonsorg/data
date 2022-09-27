@@ -13,11 +13,10 @@
 # limitations under the License.
 '''
 Author: Suhana Bedi
-Date: 09/26/2022
+Date: 09/17/2021
 Name: format_mesh_pa.py
 Description: converts nested .xml to .csv and further breaks down the csv into 
-two different csvs, each describing relations between parent descriptors and pharmacological
-action descriptor and concept classes
+two different csvs, each describing relations between descriptors and their pharmacological substance records
 @file_input: input .xml downloaded from NCBI 
 '''
 import sys
@@ -69,8 +68,8 @@ def format_mesh_pa(mesh_pa):
                     d2_record_D.append(np.nan)
                     d2_name_D.append(np.nan)
                     d2_name_C.append(str_name.findtext("String"))
-        d.append({'DescriptorID':d1_elem, 'Descriptor-Record':d2_record_D, 'Concept-Record':d2_record_C, 'Descriptor-RecordName':d2_name_D,
-            'Concept-RecordName':d2_name_C})
+        d.append({'DescriptorID':d1_elem, 'Descriptor_Record':d2_record_D, 'Concept_Record':d2_record_C, 'Descriptor_RecordName':d2_name_D,
+            'Concept_RecordName':d2_name_C})
     df = pd.DataFrame(d)
     return df
 
@@ -84,14 +83,14 @@ def format_descriptor_record(df):
         df1_new = df with descriptor properties only
     """
     df1 = df
-    df1 = df1.drop(columns=['Concept-Record', 'Concept-RecordName'])
+    df1 = df1.drop(columns=['Concept_Record', 'Concept_RecordName'])
     df1 = (df1.set_index('DescriptorID').apply(
             lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
+    df1['Descriptor_dcid'] = 'bio/' + df1['Descriptor_Record'].astype(str)
     df1['DescriptorID'] = 'bio/' + df1['DescriptorID'].astype(str)
-    df1['Descriptor-Record'] = 'bio/' + df1['Descriptor-Record'].astype(str)
     df1_new = df1.dropna( how='all',
-                              subset=['Descriptor-Record', 'Descriptor-RecordName'])
-    col_names = ['Descriptor-RecordName']
+                              subset=['Descriptor_Record', 'Descriptor_RecordName'])
+    col_names = ['Descriptor_RecordName']
     for col in col_names:
         df1_new.update('"' + df1_new[[col]].astype(str) + '"')
         df1_new[col] = df1_new[col].replace(["\"nan\""],np.nan)
@@ -108,14 +107,14 @@ def format_concept_record(df):
         df1_new = df with descriptor properties only
     """
     df2 = df
-    df2 = df2.drop(columns=['Descriptor-Record', 'Descriptor-RecordName'])
+    df2 = df2.drop(columns=['Descriptor_Record', 'Descriptor_RecordName'])
     df2 = (df2.set_index('DescriptorID').apply(
             lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
     df2['DescriptorID'] = 'bio/' + df2['DescriptorID'].astype(str)
-    df2['Concept-Record'] = 'bio/' + df2['Concept-Record'].astype(str)
+    df2['ConceptID'] = 'bio/' + df2['Concept_Record'].astype(str)
     df2_new = df2.dropna( how='all',
-                              subset=['Concept-Record', 'Concept-RecordName'])
-    col_names = ['Concept-RecordName']
+                              subset=['Concept_Record', 'Concept_RecordName'])
+    col_names = ['Concept_RecordName']
     for col in col_names:
         df2_new.update('"' + df2_new[[col]].astype(str) + '"')
         df2_new[col] = df2_new[col].replace(["\"nan\""],np.nan)
