@@ -1,0 +1,5 @@
+Node: E:mesh_qualifier->E1
+typeOf: dcs:MeSHQualifier
+dcid: C:mesh_qualifier->Qualifier_dcid
+medicalSubjectHeadingQualifierID: C:mesh_qualifier->QualifierID
+medicalSubjectHeadingTreeNumber: C:mesh_qualifier->TreeNumber

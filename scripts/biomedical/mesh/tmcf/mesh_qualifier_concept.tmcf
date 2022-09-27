@@ -1,0 +1,10 @@
+Node: E:mesh_concept->E1
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_concept->Concept_dcid
+name: C:mesh_concept->ConceptName
+medicalSubjectHeadingConceptID: C:mesh_term->ConceptID
+medicalSubjectHeadingQualifierID: E:mesh_term->E2
+
+Node: E:mesh_term->E2
+typeOf: dcs:MeSHQualifier
+dcid: C:mesh_term->Qualifier_dcid
