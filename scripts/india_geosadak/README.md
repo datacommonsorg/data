@@ -24,9 +24,9 @@ The cleaned csv has the following columns:
  - Category_Count: Indicates the total count of the facility in that particular district
 
 Some of the rows from each state were removed due to improper mapping of the geosadak facilities to the respective districts.
-Total number of rows before removal: 783677
-No of rows removed: 1589
-Total number of rows after removal: 782088
+ - Total number of rows before removal: 783677
+ - No of rows removed: 1589
+ - Total number of rows after removal: 782088
 
 ### TMCF
 - [India_GeoSadak.tmcf](./India_GeoSadak.tmcf)
