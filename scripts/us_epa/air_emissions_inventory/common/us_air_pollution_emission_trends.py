@@ -60,8 +60,8 @@ class USAirPollutionEmissionTrends:
             'geo_Id', 'year', 'SV_TEMP', 'observation', 'Measurement_Method'
         ])
 
-    def set_cleansed_csv_file_path(self, cleansed_csv_file_path: str) -> None:
-        self._cleaned_csv_file_path = cleansed_csv_file_path
+    def set_cleaned_csv_file_path(self, cleaned_csv_file_path: str) -> None:
+        self._cleaned_csv_file_path = cleaned_csv_file_path
 
     def set_mcf_file_path(self, mcf_file_path: str) -> None:
         self._mcf_file_path = mcf_file_path
@@ -107,7 +107,7 @@ class USAirPollutionEmissionTrends:
                          standardize_values: dict) -> pd.DataFrame:
         """
         Replaces values of a single column into true values
-        from metadata returns the DF.
+        from metadata.
 
         Args:
             df (pd.DataFrame): df as the input, to change column values

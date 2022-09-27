@@ -33,9 +33,9 @@ from util.statvar_dcid_generator import get_statvar_dcid
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
-from metadata import (sheets_national, skipfoot_others_national,
-                      skipfoot_pm_national, skiphead_ammonia_national,
-                      skiphead_others_national, sheet_state, source_pollutant)
+from metadata import (SHEETS_NATIONAL, SKIPFOOT_OTHERS_NATIONAL,
+                      SKIPFOOT_PM_NATIONAL, SKIPHEAD_AMMONIA_NATIONAL,
+                      SKIPHEAD_OTHERS_NATIONAL, SHEET_STATE, SOURCE_POLLUTANT)
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -86,7 +86,10 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
         self._final_df['SV'] = self._final_df['SV_TEMP']
         self._final_df['mcf'] = self._final_df['SV_TEMP']
 
+        # Created to store current SV values as keys and names generated
+        # from sv generator as values for replacement.
         sv_replacement = {}
+        # Created to store Property and Values for each unique SV.
         mcf = {}
         sv_checker = {
             "typeOf": "dcs:StatisticalVariable",
@@ -97,8 +100,7 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             "measuredProperty": "dcs:amount"
         }
 
-        sv_list = self._final_df["SV"].to_list()
-        sv_list = list(set(sv_list))
+        sv_list = pd.unique(self._final_df['SV'])
         sv_list.sort()
 
         for sv in sv_list:
@@ -131,15 +133,15 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
         Returns:
             df (pd.DataFrame): provides the cleaned df as output
         """
-        df = pd.read_excel(file_path, sheet_state, skiprows=1, header=0)
+        df = pd.read_excel(file_path, SHEET_STATE, skiprows=1, header=0)
         # Adding geoId/ and making the State FIPS code of 2 numbers
         # Eg - 1 -> geoId/01
         df['geo_Id'] = [f'{x:02}' for x in df['State FIPS']]
         df['geo_Id'] = 'geoId/' + df['geo_Id']
         # Dropping Unwanted Columns
         df = df.drop(columns=['State FIPS', 'State', 'Tier 1 Code'])
-        df = self.data_standardize(df, 'Pollutant', source_pollutant)
-        df = self.data_standardize(df, 'Tier 1 Description', source_pollutant)
+        df = self.data_standardize(df, 'Pollutant', SOURCE_POLLUTANT)
+        df = self.data_standardize(df, 'Tier 1 Description', SOURCE_POLLUTANT)
         df['SV_TEMP'] = df['Tier 1 Description'] + '-' + df['Pollutant']
         df = df.drop(columns=['Tier 1 Description', 'Pollutant'])
         # Changing the years present as columns into row values.
@@ -171,12 +173,12 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
         """
         final_df = pd.DataFrame()
         # Reading different sheets of Excel one at a time
-        for sheet in sheets_national:
+        for sheet in SHEETS_NATIONAL:
             # Number of rows to skip vary by sheet, inserting if-else for the same.
-            skiphead = skiphead_ammonia_national if sheet == 'NH3' else skiphead_others_national
-            skipfoot = skipfoot_pm_national if sheet in [
+            skiphead = SKIPHEAD_AMMONIA_NATIONAL if sheet == 'NH3' else SKIPHEAD_OTHERS_NATIONAL
+            skipfoot = SKIPFOOT_PM_NATIONAL if sheet in [
                 'PM10Primary', 'PM25Primary'
-            ] else skipfoot_others_national
+            ] else SKIPFOOT_OTHERS_NATIONAL
             df = pd.read_excel(file_path,
                                sheet,
                                skiprows=skiphead,
@@ -196,8 +198,8 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
                 (df['Source Category'] == 'Miscellaneous')].index)
             # Addition of pollutant type to the df by taking sheet name.
             df['pollutant'] = sheet
-            df = self.data_standardize(df, 'pollutant', source_pollutant)
-            df = self.data_standardize(df, 'Source Category', source_pollutant)
+            df = self.data_standardize(df, 'pollutant', SOURCE_POLLUTANT)
+            df = self.data_standardize(df, 'Source Category', SOURCE_POLLUTANT)
             df['SV_TEMP'] = df['Source Category'] + "-" + df['pollutant']
             df = df.drop(columns=['Source Category', 'pollutant'])
             # Changing the years present as columns into row values.

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source_pollutant = {
+SOURCE_POLLUTANT = {
     'CO': 'CarbonMonoxide',
     'NOX': 'OxidesOfNitrogen',
     'PM10Primary': 'PM10',
@@ -40,13 +40,13 @@ source_pollutant = {
     'PRESCRIBED FIRES': 'PrescribedFire'
 }
 
-sheets_national = [
+SHEETS_NATIONAL = [
     'CO', 'NOX', 'PM10Primary', 'PM25Primary', 'SO2', 'VOC', 'NH3'
 ]
 
-skiphead_ammonia_national = 6
-skiphead_others_national = 5
-skipfoot_pm_national = 0
-skipfoot_others_national = 5
+SKIPHEAD_AMMONIA_NATIONAL = 6
+SKIPHEAD_OTHERS_NATIONAL = 5
+SKIPFOOT_PM_NATIONAL = 0
+SKIPFOOT_OTHERS_NATIONAL = 5
 
-sheet_state = 'State_Trends'
+SHEET_STATE = 'State_Trends'

@@ -72,7 +72,7 @@ class CommonTestClass:
 
             with tempfile.TemporaryDirectory() as tmp_dir:
                 csv_file_path = os.path.join(tmp_dir, "test_census.csv")
-                self._ob.set_cleansed_csv_file_path(csv_file_path)
+                self._ob.set_cleaned_csv_file_path(csv_file_path)
                 CommonTestClass._df = self._ob.generate_csv()
                 with open(csv_file_path, encoding="UTF-8") as csv_file:
                     actual_csv_data = csv_file.read()
