@@ -60,6 +60,7 @@ class GeoSadakLoader:
         
         fac_state = fac_state.groupby(['LgdCode','FAC_CATEGO']).size().to_frame(name = 'count').reset_index()
         fac_state = fac_state[fac_state["LgdCode"] != '']
+        f.close()
         self.raw_df = fac_state
 
 
