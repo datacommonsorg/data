@@ -42,7 +42,7 @@ def download_files(download_directory: str) -> None:
     Returns:
         None
     '''
-    input_url = [
+    files = [
         'All-Sites-PRAMS-MCH-Indicators-508.pdf',
         'Alabama-PRAMS-MCH-Indicators-508.pdf',
         'Alaska-PRAMS-MCH-Indicators-508.pdf',
@@ -95,7 +95,7 @@ def download_files(download_directory: str) -> None:
     ]
     INPUT_URL = [
         'https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/' +
-        file for file in input_url
+        file for file in files
     ]
     download_file(INPUT_URL, download_directory)
 
