@@ -29,7 +29,10 @@ class TestPreprocess(unittest.TestCase):
         expected_file.close()
 
         loader = GeoSadakLoader(
-            source=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'test/Gujarat.zip',),
+            source=os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                'test/Gujarat.zip',
+            ),
             state_name="Gujarat",
         )
         loader.load()

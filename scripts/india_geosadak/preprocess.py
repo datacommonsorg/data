@@ -19,9 +19,12 @@ from os import path
 import geopandas
 import json
 
+
 def map_names():
     mapper = dict()
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "./data/India_GeoSadak-zipfile_details.csv"))
+    df = pd.read_csv(
+        os.path.join(os.path.dirname(__file__),
+                     "./data/India_GeoSadak-zipfile_details.csv"))
     for i in range(28):
         mapper[df.iloc[i]["Facilities"]] = df.iloc[i]["State"]
     return mapper
@@ -40,7 +43,6 @@ class GeoSadakLoader:
         self.raw_df = None
         self.clean_df = None
 
-
     def load(self):
 
         zipfile = "zip:///" + self.source
@@ -48,7 +50,9 @@ class GeoSadakLoader:
 
         state_name = self.state_name
 
-        f = open(os.path.join(os.path.dirname(__file__), "./data/India_GeoSadak-lgd_fac_data.json"))
+        f = open(
+            os.path.join(os.path.dirname(__file__),
+                         "./data/India_GeoSadak-lgd_fac_data.json"))
         data = json.load(f)
 
         lgdCode = []
@@ -57,12 +61,13 @@ class GeoSadakLoader:
             lgdCode.append(i[fac_id])
         lgdCode = pd.Series(lgdCode)
         fac_state = fac_state.assign(LgdCode=lgdCode.values)
-        
-        fac_state = fac_state.groupby(['LgdCode','FAC_CATEGO']).size().to_frame(name = 'count').reset_index()
+
+        fac_state = fac_state.groupby(
+            ['LgdCode',
+             'FAC_CATEGO']).size().to_frame(name='count').reset_index()
         fac_state = fac_state[fac_state["LgdCode"] != '']
         f.close()
         self.raw_df = fac_state
-
 
     def _make_column_numerical(self, column):
 
@@ -81,7 +86,7 @@ class GeoSadakLoader:
         self._make_column_numerical("LgdCode")
         self._make_column_numerical("Category_Count")
 
-    def save(self,csv_file_path):
+    def save(self, csv_file_path):
         if path.exists(csv_file_path):
             # If the file exists then append to the same
             self.clean_df.to_csv(csv_file_path,
@@ -91,19 +96,21 @@ class GeoSadakLoader:
         else:
             self.clean_df.to_csv(csv_file_path, index=False, header=True)
 
-def main():
 
+def main():
     """Runs the program."""
 
     mapper = map_names()
 
     # If the final csv file already exists
     # Remove it, so that it can be regenerated
-    csv_file_path = os.path.join(os.path.dirname(__file__), "./India_GeoSadak.csv")
+    csv_file_path = os.path.join(os.path.dirname(__file__),
+                                 "./India_GeoSadak.csv")
     if path.exists(csv_file_path):
         os.remove(csv_file_path)
 
-    files = os.listdir(os.path.join(os.path.dirname(__file__), "./data/facilities/"))
+    files = os.listdir(
+        os.path.join(os.path.dirname(__file__), "./data/facilities/"))
     for file_name in files:
         data_file_path = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
