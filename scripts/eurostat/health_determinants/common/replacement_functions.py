@@ -160,6 +160,19 @@ _FREQUENC_ALCOHOL = {
     'NBINGE': 'Never'
 }
 
+_LEV_PERC = {
+    'STR': 'Strong',
+    'INT': 'Intermediate',
+    'POOR': 'Poor'
+}
+
+_ASSIST = {
+    'PROV': 'ProvidingInformalCare',
+    'PROV_R': 'Relatives_ProvidingInformalCare',
+    'PROV_NR': 'NonRelatives_ProvidingInformalCare',
+    'NPROV': 'NotProvidingInformalCare'
+}
+
 _N_PORTION = {
     '0': '0Portions',
     '1-4': 'From1To4Portions',
@@ -203,6 +216,8 @@ def replace_col_values(data_df: pd.DataFrame) -> pd.DataFrame:
         'smoking': _SMOKING,
         'frequenc_tobacco': _FREQUENC_TOBACCO,
         'frequenc_alcohol': _FREQUENC_ALCOHOL,
+        'lev_perc': _LEV_PERC,
+        'assist': _ASSIST,
         'n_portion': _N_PORTION,
         'coicop': _COICOP,
         'isced97': _ISCED97
