@@ -28,7 +28,7 @@ TMCF_TEMPLATE = (
     "scalingFactor: C:us_nces_demographics_{import_name}->scaling_factor\n"
     "value: C:us_nces_demographics_{import_name}->observation\n")
 
-TMCF_TEMPLATE_PLACE = (
+TMCF_TEMPLATE_PLACE_PRIVATE = (
         "Node: E:us_nces_demographics_private_place->E0\n"
         "dcid: C:us_nces_demographics_private_place->school_state_code\n"
 		"typeOf: dcs:PrivateSchool\n"
@@ -37,12 +37,45 @@ TMCF_TEMPLATE_PLACE = (
 		"ncesId: C:us_nces_demographics_private_place->SchoolID\n"
 		"containedInPlace: C:us_nces_demographics_private_place->ContainedInPlace\n"
 		"telephone: C:us_nces_demographics_private_place->PhoneNumber\n"
-		"lowestGrade: C:us_nces_demographics_private_place->Lowest_Grade\n"
-		"highestGrade: C:us_nces_demographics_private_place->Highest_Grade\n"
-		"schoolGradeLevel: C:us_nces_demographics_private_place->School_Level\n"
 		"privateSchoolType: C:us_nces_demographics_private_place->School_Type\n"
 		"schoolReligiousOrientation: C:us_nces_demographics_private_place->School_Religion\n"
 		"coeducationalType: C:us_nces_demographics_private_place->Coeducational\n")
+
+TMCF_TEMPLATE_PLACE_DISTRICT = (
+        "Node: E:us_nces_demographics_district_place->E0\n"
+        "dcid: C:us_nces_demographics_district_place->school_state_code\n"
+		"typeOf: dcs:DistrictSchool\n"
+		"address: C:us_nces_demographics_district_place->Physical_Address\n"
+		"name: C:us_nces_demographics_district_place->District_School_name\n"
+        "geoId: C:us_nces_demographics_district_place->geoID\n"
+		"ncesId: C:us_nces_demographics_district_place->School_ID\n"
+		"containedInPlace: C:us_nces_demographics_district_place->ContainedInPlace\n"
+        "schoolstateId: C:us_nces_demographics_district_place->School_State_ID\n"
+		"telephone: C:us_nces_demographics_district_place->PhoneNumber\n"
+		"lowestGrade: C:us_nces_demographics_district_place->Lowest_Grade\n"
+		"highestGrade: C:us_nces_demographics_district_place->Highest_Grade\n"
+		"schoolGradeLevel: C:us_nces_demographics_district_place->School_Level\n"
+		# "districtSchoolType: C:us_nces_demographics_district_place->School_Type\n"
+		# "coeducationalType: C:us_nces_demographics_district_place->Coeducational\n"
+        "longitude: C:us_nces_demographics_district_place->Longitude\n"
+        "latitude: C:us_nces_demographics_district_place->Latitude\n"
+        "locale: C:us_nces_demographics_district_place->Locale\n")
+
+TMCF_TEMPLATE_PLACE_PUBLIC = (
+        "Node: E:us_nces_demographics_public_place->E0\n"
+        "dcid: C:us_nces_demographics_public_place->school_state_code\n"
+		"typeOf: dcs:PublicSchool\n"
+		"address: C:us_nces_demographics_public_place->Physical_Address\n"
+		"name: C:us_nces_demographics_public_place->Private_School_Name\n"
+		"ncesId: C:us_nces_demographics_public_place->SchoolID\n"
+		"containedInPlace: C:us_nces_demographics_public_place->ContainedInPlace\n"
+		"telephone: C:us_nces_demographics_public_place->PhoneNumber\n"
+		"lowestGrade: C:us_nces_demographics_public_place->Lowest_Grade\n"
+		"highestGrade: C:us_nces_demographics_public_place->Highest_Grade\n"
+		"schoolGradeLevel: C:us_nces_demographics_public_place->School_Level\n"
+		"privateSchoolType: C:us_nces_demographics_public_place->School_Type\n"
+		"schoolReligiousOrientation: C:us_nces_demopublic_district_place->School_Religion\n"
+		"coeducationalType: C:us_nces_demographics_public_place->Coeducational\n")
 
 _DENOMINATOR_PROP = {
     "Pupil/Teacher Ratio": "Count_Teacher",
@@ -102,6 +135,8 @@ _SCHOOL_GRADE_PATTERN = (r"("
                          r"Elementary Teachers"
                          r"|"
                          r"Secondary Teachers"
+                         r"|"
+                         r"Ungraded Students"
                          r"|"
                          r"Adult Education"
                          r")")

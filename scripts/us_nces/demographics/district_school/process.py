@@ -47,6 +47,8 @@ class NCESDistrictSchool(USEducation):
     _split_headers_using_school_type = SPLIT_HEADER_ON_SCHOOL_TYPE
     _exclude_columns = EXCLUDE_DATA_COLUMNS
     _include_columns = POSSIBLE_DATA_COLUMNS
+    _include_col_district = POSSIBLE_PLACE_COLUMNS
+    _exclude_col_district = EXCLUDE_PLACE_COLUMNS
 
 
 # pylint:enable=too-few-public-methods
@@ -54,7 +56,6 @@ class NCESDistrictSchool(USEducation):
 if __name__ == '__main__':
     input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "input_files")
-    input_path = "/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/district_school/test_data/datasets"
     input_files = [
         os.path.join(input_path, file)
         for file in sorted(os.listdir(input_path))
@@ -65,12 +66,17 @@ if __name__ == '__main__':
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output_files")
 
+    output_file_path_place = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    "output_place")
+
     cleaned_csv_path = os.path.join(output_file_path, CSV_FILE_NAME)
     mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
     tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
+    tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
 
     loader = NCESDistrictSchool(input_files, cleaned_csv_path, mcf_path,
-                                tmcf_path)
+                                tmcf_path,tmcf_path_place)
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()
+    loader._generate_tmcf_district()

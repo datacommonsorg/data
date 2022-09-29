@@ -47,8 +47,8 @@ class NCESPrivateSchool(USEducation):
     _split_headers_using_school_type = SPLIT_HEADER_ON_SCHOOL_TYPE
     _include_columns = POSSIBLE_DATA_COLUMNS
     _exclude_columns = EXCLUDE_DATA_COLUMNS
-    _include_col = POSSIBLE_PLACE_COLUMNS
-    _exclude_col = EXCLUDE_PLACE_COLUMNS
+    _include_col_private = POSSIBLE_PLACE_COLUMNS
+    _exclude_col_private = EXCLUDE_PLACE_COLUMNS
     _generate_statvars = True
 
     def set_include_columns(self, columns: list):
@@ -81,6 +81,7 @@ if __name__ == '__main__':
     cleaned_csv_path = os.path.join(output_file_path, CSV_FILE_NAME)
     mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
     tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
+    cleaned_csv_place = os.path.join(output_file_path_place,CSV_FILE_PLACE)
     tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
 
     loader = NCESPrivateSchool(input_files, cleaned_csv_path, mcf_path,
@@ -89,5 +90,6 @@ if __name__ == '__main__':
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()
-    loader._generate_tmcf_place()
+    # loader.generate_csv_place()
+    loader._generate_tmcf_private()
 

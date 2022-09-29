@@ -18,6 +18,7 @@ for us nces demographic district school.
 CSV_FILE_NAME = "us_nces_demographics_district_school.csv"
 MCF_FILE_NAME = "us_nces_demographics_district_school.mcf"
 TMCF_FILE_NAME = "us_nces_demographics_district_school.tmcf"
+TMCF_FILE_PLACE = "us_nces_demographics_district_place.tmcf"
 SCHOOL_TYPE = "district_school"
 SPLIT_HEADER_ON_SCHOOL_TYPE = "[District]"
 
@@ -34,3 +35,10 @@ EXCLUDE_DATA_COLUMNS = [
     ".*Ungraded.*",
     ".*Total.*",
 ]
+
+POSSIBLE_PLACE_COLUMNS = [
+    "school_state_code",".*ZIP.*",".*County.*",".*Agency.*", ".*Lowest.*", ".*Highest.*",
+    "Physical.*", "Phone.*",  "Coeducational", ".*Level.*",".*State.*","Latitude.*","Longitude.*","Locale.*","Location.*"
+]
+
+EXCLUDE_PLACE_COLUMNS = ["State Name","Metro Micro Area Code","Location Address 2","Location Address 3"]

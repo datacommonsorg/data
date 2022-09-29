@@ -21,14 +21,15 @@ _COEDUCATIONAL = {
     "1-Coed (school has male and female students)": "Coeducational",
     "2-All-female (school only has all-female students)": "AllFemale",
     "3-All-male (school only has all-male students)": "AllMale",
-    "†": "NULL"
+    "†": "",
+    "–":""
 }
 
 _RELIGIOUS = {
     "1-Catholic": "Catholic",
     "2-Other religious": "Nonsectarian",
     "3-Nonsectarian": "OtherReligious",
-    "†": "NULL"
+    "†": ""
 }
 
 _SCHOOL_TYPE = {
@@ -47,13 +48,15 @@ _SCHOOL_TYPE = {
     "7-Early Childhood Program/child care center":
         "NCES_PrivateSchoolTypeEarlyChildhoodProgramOrChildCareCenter",
     "†":
-        "NCES_PrivateSchoolTypeDataMissing"
+        "NCES_PrivateSchoolTypeDataMissing",
+    "–":"NCES_PrivateSchoolTypeDataMissing",
 }
 
 _SCHOOL_GRADE = {
     "Elementary Teachers": "Elementary",
     "Secondary Teachers": "Secondary",
     "Prekindergarten": "PreKindergarten",
+    "Ungraded Students":"NCESUngradedClasses",
     "Kindergarten": "Kindergarten",
     "Transitional Kindergarten": "TransitionalKindergarten",
     "1st grade": "SchoolGrade1",
@@ -82,13 +85,14 @@ _SCHOOL_GRADE = {
     "Grade 12": "SchoolGrade12",
     "13th grade": "SchoolGrade13",
     "Grade 13": "SchoolGrade13",
-    "†": "NULL",
-    "All Ungraded": "NULL",
+    "†": "",
+    "–":"",
+    # "All Ungraded": "",
     "Adult Education": "AdultEducation",
     "Transitional 1st grade":"TransitionalGrade1"
 }
 
-_PHYSICAL_ADD = {"†": "NULL"}
+_PHYSICAL_ADD = {"†": "","–":""}
 
 # pylint:disable=line-too-long
 _SCHOOL_LEVEL = {
@@ -99,19 +103,21 @@ _SCHOOL_LEVEL = {
     "3-Combined (school has one or more of grades K-6 and one or more of grades 9-12. Schools in which all students are ungraded are also classified as combined).":
         "ElementarySchool__SecondarySchool",
     "†":
-        "NULL",
+        "",
+    "–":""
 }
 # pylint:enable=line-too-long
 
 _RACE_ = {
     "American Indian/Alaska Native": "AmericanIndianOrAlaskaNative",
-    "Asian or Asian/Pacific Islander": "AsianOrPacificIslander",
-    "Black or African American": "BlackOrAfricanAmericanAlone",
+    "Asian or Asian/Pacific Islander": "Asian",
+    "Black or African American": "Black",
+    "BlackOrAfricanAmericanAlone": "Black",
     'Nat. Hawaiian or Other Pacific Isl.': 'HawaiianNativeOrPacificIslander',
     "Hispanic": "HispanicOrLatino",
     'White': 'White',
     "Two or More Races": "TwoOrMoreRaces",
-    "Black": "BlackOrAfricanAmericanAlone"
+    "Black": "Black"
 }
 
 _LUNCH = {
@@ -152,7 +158,7 @@ _SCHOOL_STAFF = {
     "Other Support Services Staff":
         "SchoolOtherSupportServicesStaff",
     "†":
-        "NULL",
+        "",
 }
 
 COLUMNS = {
@@ -168,6 +174,20 @@ COLUMNS = {
 }
 
 _GENDER = {"female": "Female", "male": "Male"}
+
+_ZIP = {"†":"","–":""}
+
+_PHONE_NUMBER = {"†":"","–":""}
+
+_LOWEST_GRADE = {"†":"","–":""}
+
+_HIGHEST_GRADE = {"†":"","–":""}
+
+_LONGITUDE = {"†":"","–":""}
+
+_LATITUDE = {"†":"","–":""}
+
+_LOCALE = {"†":"","–":""}
 
 
 def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
@@ -186,6 +206,18 @@ def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
         "SchoolStaff": _SCHOOL_STAFF,
         "Gender": _GENDER,
         "Physical Address": _PHYSICAL_ADD,
+        "Physical_Address": _PHYSICAL_ADD,
+        "ZIP": _ZIP,
+        "Phone Number": _PHONE_NUMBER,
+        "Lowest_Grade": _LOWEST_GRADE,
+        "Highest_Grade": _HIGHEST_GRADE,
+        "Latitude": _LATITUDE,
+        "Longitude": _LATITUDE,
+        "Locale": _LOCALE,
+        "School_Type":_LOCALE,
+        "State_school_ID": _LOCALE,
+        "School_level": _LOCALE,
+        "County_code": _LOCALE
     }
 
     df_columns = data_df.columns.to_list()
