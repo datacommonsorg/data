@@ -107,3 +107,4 @@ class CommonTestClass:
                     actual_tmcf_data = tmcf_file.read()
 
                 self.assertEquals(expected_tmcf_data, actual_tmcf_data)
+                

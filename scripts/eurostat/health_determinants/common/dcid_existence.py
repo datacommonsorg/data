@@ -44,3 +44,4 @@ def check_dcid_existence(nodes: list) -> dict:
         else:
             node_status[node] = True
     return node_status
+    

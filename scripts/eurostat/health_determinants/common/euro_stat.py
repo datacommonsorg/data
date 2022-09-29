@@ -351,3 +351,4 @@ class EuroStat:
         # Writing Genereated TMCF to local path.
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
+            

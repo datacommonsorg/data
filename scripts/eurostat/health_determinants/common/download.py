@@ -65,3 +65,4 @@ def download_files(download_files_url: list, download_path: str) -> None:
             download_gz_file(download_file_url, download_path)
         elif file_extension == "pdf":
             download_gz_file(download_file_url, download_path)
+            
