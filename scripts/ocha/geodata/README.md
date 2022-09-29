@@ -11,7 +11,9 @@ This includes geojsons for the following countries:
 
 ## Generation
 
-1. Download and prepare geojsons.  This depends on `ogr2ogr` tool.
+1. Download and prepare geojsons.  This depends on [`ogr2ogr`
+   tool](https://gdal.org/programs/ogr2ogr.html) (available in package
+   `python3-gdal`).
 
    ```
    export COUNTRY=CN   # Options are: BG, CN, NP, PK

@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Generates ID maps and GeoJSON MCF for Pakistan, Nepal and Bangladesh."""
+"""Generates ID maps and GeoJSON MCF for Pakistan, Nepal, Bangladesh, China."""
 
 import csv
 import glob
