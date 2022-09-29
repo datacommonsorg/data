@@ -133,10 +133,10 @@ class EuroStatSocialEnvironment(EuroStat):
                         "duration"] = "\nactivityDuration: [Minute "\
                             + self._sv_properties[
                             "duration_temp"].replace("Minutes", "") + "]"
-            else: 
-                 self._sv_properties["education"] = \
-                 self._sv_properties["education"].replace("Or","__")
-            
+            else:
+                self._sv_properties["education"] = \
+                self._sv_properties["education"].replace("Or","__")
+
             self._sv_properties[k] = v\
                 .replace("CountryOfBirth","")\
                 .replace("Citizenship", "")\
@@ -170,7 +170,8 @@ if __name__ == '__main__':
     mcf_path = os.path.join(data_file_path, mcf_name)
     tmcf_path = os.path.join(data_file_path, tmcf_name)
 
-    loader = EuroStatSocialEnvironment(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
+    loader = EuroStatSocialEnvironment(ip_files, cleaned_csv_path, mcf_path,
+                                       tmcf_path)
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()

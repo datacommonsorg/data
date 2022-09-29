@@ -160,11 +160,7 @@ _FREQUENC_ALCOHOL = {
     'NBINGE': 'Never'
 }
 
-_LEV_PERC = {
-    'STR': 'Strong',
-    'INT': 'Intermediate',
-    'POOR': 'Poor'
-}
+_LEV_PERC = {'STR': 'Strong', 'INT': 'Intermediate', 'POOR': 'Poor'}
 
 _ASSIST = {
     'PROV': 'ProvidingInformalCare',

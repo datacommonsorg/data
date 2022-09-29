@@ -27,10 +27,11 @@ from dcid_existence import check_dcid_existence
 
 _MODULE_DIR = os.path.join(_COMMON_PATH, "..", "social_environment")
 
-_INPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output_files",
-                                    "eurostat_population_social_environment.mcf")
-_OUTPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output_files",
-                                     "eurostat_population_social_environment_deno.mcf")
+_INPUT_MCF_FILE_PATH = os.path.join(
+    _MODULE_DIR, "output_files", "eurostat_population_social_environment.mcf")
+_OUTPUT_MCF_FILE_PATH = os.path.join(
+    _MODULE_DIR, "output_files",
+    "eurostat_population_social_environment_deno.mcf")
 
 _INCOME_QUINTILE_VALUES = {
     "IncomeOf0To20Percentile": "[0 20 Percentile]",
@@ -109,7 +110,7 @@ def _generate_pv_node(prop: str) -> str:
     if "Percentile" in prop:
         income_quin = _INCOME_QUINTILE_VALUES[prop]
         return f"income: {income_quin}"
-    if "Strong" in prop  or "Intermediate" in prop or "Poor" in prop:
+    if "Strong" in prop or "Intermediate" in prop or "Poor" in prop:
         return f"\nsocialSupportLevel: dcs:{prop}"
     if "Relatives" in prop:
         return f"\nsocialSupportBeneficiaryType: dcs:{prop}"
