@@ -55,10 +55,13 @@ _SCHOOL_TYPE = {
 _SCHOOL_GRADE = {
     "Elementary Teachers": "Elementary",
     "Secondary Teachers": "Secondary",
+    "Prekindergarten and Kindergarten": "PreKindergartenAndKindergarten",
     "Prekindergarten": "PreKindergarten",
     "Ungraded Students":"NCESUngradedClasses",
     "Kindergarten": "Kindergarten",
     "Transitional Kindergarten": "TransitionalKindergarten",
+    "Grades 1-8": "SchoolGrade1To8",
+    "Grades 9-12": "SchoolGrade9To12",
     "1st grade": "SchoolGrade1",
     "Grade 1": "SchoolGrade1",
     "2nd grade": "SchoolGrade2",

@@ -350,6 +350,7 @@ class USEducation:
                 data_place += list(filter(r.match, curr_place))
 
         df_place = df_cleaned[data_place]
+
         if self._import_name == "private_school":
             df_place_col = pd.DataFrame(columns=[
             "school_state_code", "ZIP", "County_code", "Private_School_Name",
@@ -445,10 +446,10 @@ class USEducation:
                 "/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/district_school/output_place/us_nces_demographics_district_place.csv",
                 index=False)
 
-        # if self._import_name == "public_school":
-        #     df_place.to_csv(
-        #         "/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/public_school/output_place/us_nces_demographics_public_place.csv",
-        #         index=False,mode='a')
+        if self._import_name == "public_school":
+            df_place.to_csv(
+                "/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/public_school/output_place/us_nces_demographics_public_place.csv",
+                index=False,mode='a')
 
         if not self._generate_statvars:
             return df_cleaned[data_cols]
@@ -458,7 +459,6 @@ class USEducation:
                                      value_vars=data_cols,
                                      var_name='sv_name',
                                      value_name='observation')
-        df_cleaned.to_csv("sv_names.csv")
 
         df_cleaned['observation'] = pd.to_numeric(df_cleaned['observation'],
                                                   errors='coerce')
@@ -511,11 +511,11 @@ class USEducation:
                             'str').str.replace("FeMale", "Female")
                     df_parsed["scaling_factor"] = np.where(
                         df_parsed["sv_name"].str.contains("Percent"), 100, '')
-                    # df_final = df_parsed[[
-                    #     "school_state_code", "year", "sv_name", "observation",
-                    #     "scaling_factor"
-                    # ]]
-                    df_parsed.to_csv(self._cleaned_csv_file_path,
+                    df_final = df_parsed[[
+                        "school_state_code", "year", "sv_name", "observation",
+                        "scaling_factor"
+                    ]]
+                    df_final.to_csv(self._cleaned_csv_file_path,
                                     header=False,
                                     index=False,
                                     mode='a')

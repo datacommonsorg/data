@@ -24,11 +24,10 @@ TMCF_FILE_PLACE = "us_nces_demographics_private_place.tmcf"
 SCHOOL_TYPE = "private_school"
 SPLIT_HEADER_ON_SCHOOL_TYPE = "[Private School]"
 
-POSSIBLE_DATA_COLUMNS = [".*Students.*", ".*Teacher.*", "Percentage.*",".*Ungraded.*"]
+POSSIBLE_DATA_COLUMNS = [".*Students.*", ".*Teacher.*", "Percentage.*",".*Ungraded.*","Grades.*","Prekindergarten and Kindergarten.*"]
 
 EXCLUDE_DATA_COLUMNS = [
-    "(Ungraded & K-12)", "Prekindergarten and Kindergarten Students",
-     "Grades 1-8 Students", "Grades 9-12 Students"
+    "(Ungraded & K-12)"
 ]
 
 POSSIBLE_PLACE_COLUMNS = [
@@ -37,7 +36,8 @@ POSSIBLE_PLACE_COLUMNS = [
 ]
 
 EXCLUDE_PLACE_COLUMNS = [
-    "State Name","County Name", "Total Students","Lowest Grade Taught","Highest Grade Taught", "Prekindergarten and Kindergarten Students",
+    "State Name","County Name", "Total Students","Lowest Grade Taught",
+    "Highest Grade Taught", "Prekindergarten and Kindergarten Students",
     "Grades 1-8 Students", "Grades 9-12 Students", "Prekindergarten Students",
     "Kindergarten Students", "Grade 1 Students", "Grade 2 Students",
     "School Community Type", "Grade 3 Students", "Grade 4 Students",
