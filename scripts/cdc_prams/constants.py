@@ -176,7 +176,7 @@ _INSURANCE = {
         ""
 }
 
-_CIGARETTES= {
+_CIGARETTES = {
     "ECigaretteSmoking3MonthsBeforePregnancy": "ECigarettes",
     "ECigaretteSmokingLast3MonthsOfPregnancy": "ECigarettes",
     "CigaretteSmoking3MonthsBeforePregnancy": "Cigarettes",

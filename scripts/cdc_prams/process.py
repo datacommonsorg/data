@@ -66,21 +66,17 @@ def _merging_multiline_sv(df, geo):
                     f"{df.loc[i,'statVar']}{' '}{df.loc[i + 2,'statVar']}"
                 df.loc[i, '2016_sampleSize'] = df.loc[i + 1, 'statVar']
                 df.loc[i, '2016_CI'] = df.loc[i + 1, '2016_CI']
-                df.loc[i, '2017_sampleSize'] = df.loc[i + 1,
-                                                        '2017_sampleSize']
+                df.loc[i, '2017_sampleSize'] = df.loc[i + 1, '2017_sampleSize']
                 df.loc[i, '2017_CI'] = df.loc[i + 1, '2017_CI']
-                df.loc[i, '2018_sampleSize'] = df.loc[i + 1,
-                                                        '2018_sampleSize']
+                df.loc[i, '2018_sampleSize'] = df.loc[i + 1, '2018_sampleSize']
                 df.loc[i, '2018_CI'] = df.loc[i + 1, '2018_CI']
-                df.loc[i, '2019_sampleSize'] = df.loc[i + 1,
-                                                        '2019_sampleSize']
+                df.loc[i, '2019_sampleSize'] = df.loc[i + 1, '2019_sampleSize']
                 df.loc[i, '2019_CI'] = df.loc[i + 1, '2019_CI']
-                df.loc[i, '2020_sampleSize'] = df.loc[i + 1,
-                                                        '2020_sampleSize']
+                df.loc[i, '2020_sampleSize'] = df.loc[i + 1, '2020_sampleSize']
                 df.loc[i, '2020_CI'] = df.loc[i + 1, '2020_CI']
                 if geo == "State":
                     df.loc[i, 'Overall_2020_CI'] = df.loc[i + 1,
-                                                            'Overall_2020_CI']
+                                                          'Overall_2020_CI']
                 df.drop([i + 1, i + 2], inplace=True)
                 df.reset_index(drop=True, inplace=True)
                 break
@@ -110,11 +106,13 @@ def _split_statvar_value(df, geo):
             df.loc[i, 'statVar'] = df.loc[i, 'statVar'][13:]
     return df
 
+
 national_columns = [
-            'Geo', 'SV', '2016_sampleSize', '2016_CI', '2017_sampleSize',
-            '2017_CI', '2018_sampleSize', '2018_CI', '2019_sampleSize',
-            '2019_CI', '2020_sampleSize', '2020_CI', 'ScalingFactor'
-        ]
+    'Geo', 'SV', '2016_sampleSize', '2016_CI', '2017_sampleSize', '2017_CI',
+    '2018_sampleSize', '2018_CI', '2019_sampleSize', '2019_CI',
+    '2020_sampleSize', '2020_CI', 'ScalingFactor'
+]
+
 
 def _cleaning_national_file(df, geo):
     '''
@@ -128,13 +126,11 @@ def _cleaning_national_file(df, geo):
                 'statVar'] == 'Experienced IPV during the 12 months'+\
                     ' before pregnancy by a':
             if geo == "National":
-                df.loc[i,
-                        'statVar'] = df.loc[i,
-                                             'statVar'].replace('a2.5 ', 'a')
+                df.loc[i, 'statVar'] = df.loc[i,
+                                              'statVar'].replace('a2.5 ', 'a')
                 df.loc[i + 1, '2020_CI'] = 2.5
             df.loc[i + 1,
-                    'statVar'] = df.loc[i, 'statVar'] + df.loc[i + 1,
-                                                                 'statVar']
+                   'statVar'] = df.loc[i, 'statVar'] + df.loc[i + 1, 'statVar']
             df.drop([i], inplace=True)
             df.reset_index(drop=True, inplace=True)
             break
@@ -147,12 +143,12 @@ def _cleaning_national_file(df, geo):
                     'statVar'] == 'Teeth cleaned during pregnancy by'+\
                         ' a dentist or dental':
                 df.loc[i + 1,
-                        'statVar'] = df.loc[i + 1,
-                                             'statVar'].replace('40.0 ', '')
+                       'statVar'] = df.loc[i + 1,
+                                           'statVar'].replace('40.0 ', '')
                 df.loc[i + 1, '2020_CI'] = 40.0
                 df.loc[i + 1,
-                        'statVar'] = df.loc[i, 'statVar'] + df.loc[i + 1,
-                                                                     'statVar']
+                       'statVar'] = df.loc[i, 'statVar'] + df.loc[i + 1,
+                                                                  'statVar']
                 df.drop([i], inplace=True)
                 df.reset_index(drop=True, inplace=True)
                 break
@@ -183,14 +179,14 @@ def _flatten_header_and_sub_header(df) -> pd.DataFrame:
         'Highly effective contraceptive methods'
     ]
 
-    df['main_header'] = np.where(df['statVar'].isin(main_header),
-                                  df['statVar'], pd.NA)
+    df['main_header'] = np.where(df['statVar'].isin(main_header), df['statVar'],
+                                 pd.NA)
     df['main_header_delete_flag'] = df['main_header']
     df['main_header_delete_flag'] = df['main_header_delete_flag'].fillna("")
     df['main_header'] = df['main_header'].fillna(method='ffill')
 
-    df['sub_header'] = np.where(df['statVar'].isin(sub_header),
-                                 df['statVar'], pd.NA)
+    df['sub_header'] = np.where(df['statVar'].isin(sub_header), df['statVar'],
+                                pd.NA)
     df['sub_header_delete_flag'] = df['sub_header']
     df['sub_header_delete_flag'] = df['sub_header_delete_flag'].fillna("")
     df['sub_header'] = df['sub_header'].fillna(method='ffill', limit=2)
@@ -198,8 +194,8 @@ def _flatten_header_and_sub_header(df) -> pd.DataFrame:
     df.loc[index, 'sub_header'] = "Any cigarette smoking"
     df['sub_header'] = df['sub_header'].fillna("")
 
-    df['newStatVar'] = df['main_header'] + "_" + df[
-        'sub_header'] + "_" + df['statVar']
+    df['newStatVar'] = df['main_header'] + "_" + df['sub_header'] + "_" + df[
+        'statVar']
     df = df.loc[(df['main_header_delete_flag'] == '')]
     df = df.loc[(df['sub_header_delete_flag'] == '')]
     df = df.drop(columns=[
@@ -216,15 +212,16 @@ def _flatten_header_and_sub_header(df) -> pd.DataFrame:
     df.insert(1, 'ScalingFactor', np.NaN)
     return df
 
+
 state_columns = [
-            'Geo', 'SV', '2016_sampleSize', '2017_sampleSize',
-            '2018_sampleSize', '2019_sampleSize', '2020_sampleSize',
-            '2016_CI_PERCENT', '2016_CI_LOWER', '2016_CI_UPPER',
-            '2017_CI_PERCENT', '2017_CI_LOWER', '2017_CI_UPPER',
-            '2018_CI_PERCENT', '2018_CI_LOWER', '2018_CI_UPPER',
-            '2019_CI_PERCENT', '2019_CI_LOWER', '2019_CI_UPPER',
-            '2020_CI_PERCENT', '2020_CI_LOWER', '2020_CI_UPPER', 'ScalingFactor'
-        ]
+    'Geo', 'SV', '2016_sampleSize', '2017_sampleSize', '2018_sampleSize',
+    '2019_sampleSize', '2020_sampleSize', '2016_CI_PERCENT', '2016_CI_LOWER',
+    '2016_CI_UPPER', '2017_CI_PERCENT', '2017_CI_LOWER', '2017_CI_UPPER',
+    '2018_CI_PERCENT', '2018_CI_LOWER', '2018_CI_UPPER', '2019_CI_PERCENT',
+    '2019_CI_LOWER', '2019_CI_UPPER', '2020_CI_PERCENT', '2020_CI_LOWER',
+    '2020_CI_UPPER', 'ScalingFactor'
+]
+
 
 def _splitting_ci_columns(df, geo):
     '''
@@ -286,7 +283,7 @@ def _stat_var(df, geo):
     '''
     df_all = pd.DataFrame([])
     sv_columns = ['sample_size', 'percent_sv', 'lower_level', 'upper_level']
-    
+
     for col in sv_columns:
         temp_df = df.copy()
 
@@ -300,13 +297,13 @@ def _stat_var(df, geo):
             elif geo == "State":
                 for year in range(2016, 2021):
                     for col in ['_CI_PERCENT', '_CI_LOWER', '_CI_UPPER']:
-                        drop_columns.append(str(year)+col)
+                        drop_columns.append(str(year) + col)
                 temp_df = temp_df.drop(columns=drop_columns)
 
             temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
                                    var_name='Year',
                                    value_name='Observation')
-        
+
         elif col == "percent_sv":
             temp_df['SV'] = 'Percent' + temp_df['SV']
             temp_df['ScalingFactor'] = 100
@@ -318,39 +315,41 @@ def _stat_var(df, geo):
             elif geo == "State":
                 for year in range(2016, 2021):
                     for col in ['_sampleSize', '_CI_LOWER', '_CI_UPPER']:
-                        drop_columns.append(str(year)+col)
+                        drop_columns.append(str(year) + col)
                 temp_df = temp_df.drop(columns=drop_columns)
 
             temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
                                    var_name='Year',
                                    value_name='Observation')
-        
+
         elif col == "lower_level":
             if geo == "National":
                 continue
             elif geo == "State":
-                temp_df['SV'] = 'ConfidenceIntervalLowerLimit_Count' + temp_df['SV']
+                temp_df[
+                    'SV'] = 'ConfidenceIntervalLowerLimit_Count' + temp_df['SV']
                 for year in range(2016, 2021):
-                    for col in ['_sampleSize', '_CI_UPPER',  '_CI_PERCENT']:
-                        drop_columns.append(str(year)+col)
+                    for col in ['_sampleSize', '_CI_UPPER', '_CI_PERCENT']:
+                        drop_columns.append(str(year) + col)
                 temp_df = temp_df.drop(columns=drop_columns)
 
                 temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
-                                    var_name='Year',
-                                    value_name='Observation')
-        
+                                       var_name='Year',
+                                       value_name='Observation')
+
         elif col == "upper_level":
             if geo == "National":
                 continue
             elif geo == "State":
-                temp_df['SV'] = 'ConfidenceIntervalUpperLimit_Count' + temp_df['SV']
+                temp_df[
+                    'SV'] = 'ConfidenceIntervalUpperLimit_Count' + temp_df['SV']
                 for year in range(2016, 2021):
-                    for col in ['_sampleSize', '_CI_LOWER',  '_CI_PERCENT']:
-                        drop_columns.append(str(year)+col)
+                    for col in ['_sampleSize', '_CI_LOWER', '_CI_PERCENT']:
+                        drop_columns.append(str(year) + col)
                 temp_df = temp_df.drop(columns=drop_columns)
                 temp_df = temp_df.melt(id_vars=['Geo', 'SV', 'ScalingFactor'],
-                                    var_name='Year',
-                                    value_name='Observation')
+                                       var_name='Year',
+                                       value_name='Observation')
 
         df_all = pd.concat([df_all, temp_df], axis=0)
         df_all = df_all[['Geo', 'SV', 'Year', 'Observation', 'ScalingFactor']]
@@ -488,7 +487,7 @@ class USPrams:
                     sv_pvs["measuredProperty"] = f"dcs:count"
                     sv_pvs["statType"] = f"dcs:sampleSize"
                     pvs.append(f"measuredProperty: dcs:count")
-                    pvs.append(f"statType: dcs:sampleSize")                    
+                    pvs.append(f"statType: dcs:sampleSize")
 
                 if "Percent" in prop:
                     sv_pvs["measuredProperty"] = f"dcs:percent"
@@ -627,9 +626,11 @@ class USPrams:
                 elif "healthInsuranceStatusPostpartumprivateinsurance" in prop\
                     or "healthInsuranceStatusPostpartumMedicaid" in prop or\
                     "healthInsuranceStatusPostpartumNoInsurance" in prop:
-                    sv_pvs["healthInsuranceStatusPostpartum"] = f"dcs:{insurance}"
+                    sv_pvs[
+                        "healthInsuranceStatusPostpartum"] = f"dcs:{insurance}"
                     sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
-                    pvs.append(f"healthInsuranceStatusPostpartum: dcs:{insurance}")
+                    pvs.append(
+                        f"healthInsuranceStatusPostpartum: dcs:{insurance}")
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "BabyMostOftenLaidOnBackToSleep" in prop:
@@ -675,14 +676,13 @@ class USPrams:
         output_path = os.path.dirname(self.cleaned_csv_file_path)
         if not os.path.exists(output_path):
             os.mkdir(output_path)
-        
+
         updated_sv = self._generate_mcf(sv_names, self.mcf_file_path)
         # Replacing dummy statvars with the Statistical variables generated from
         # dcid_generator
         df["SV"] = df["SV"].map(updated_sv)
         self._generate_tmcf()
-        df["Observation"] = df["Observation"].replace(
-            to_replace={'': pd.NA})
+        df["Observation"] = df["Observation"].replace(to_replace={'': pd.NA})
         df = df.dropna(subset=['Observation'])
         df.to_csv(self.cleaned_csv_file_path, index=False)
 
