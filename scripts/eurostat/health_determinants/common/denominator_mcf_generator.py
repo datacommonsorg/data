@@ -223,4 +223,3 @@ if __name__ == '__main__':
             sv_mcf = generate_mcf_template(deno, actual_mcf_template, [])
             sv_mcf_nodes.append(sv_mcf)
         write_to_mcf_path(sv_mcf_nodes, _OUTPUT_MCF_FILE_PATH)
-        

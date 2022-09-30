@@ -241,4 +241,3 @@ def split_column(df: pd.DataFrame, col: str) -> pd.DataFrame:
     df[info] = df[col].str.split(',', expand=True)
     df.drop(columns=[col], inplace=True)
     return df
-    
