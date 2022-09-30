@@ -36,7 +36,7 @@ from state_division_to_dcid import _PLACE_MAP
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 from statvar import statvar_col
 from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP, _PROP,
-                       _TIME, _INSURANCE, _PROP4, _PV_PROP, _YEAR)
+                       _TIME, _INSURANCE, _CIGARETTES, _PV_PROP, _YEAR)
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
@@ -45,9 +45,10 @@ default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 
-def _multiline(df, flag):
+def _merging_multiline_sv(df, geo):
     '''
-    StatVar column which are present in multiline format
+    StatVar column which are present in multiline format are converted into
+    one single statvar
     Args: DataFrame, Flag
     Returns: df1: DataFrame
     '''
@@ -77,7 +78,7 @@ def _multiline(df, flag):
                 df.loc[i, '2020_sampleSize'] = df.loc[i + 1,
                                                         '2020_sampleSize']
                 df.loc[i, '2020_CI'] = df.loc[i + 1, '2020_CI']
-                if flag == "States":
+                if geo == "State":
                     df.loc[i, 'Overall_2020_CI'] = df.loc[i + 1,
                                                             'Overall_2020_CI']
                 df.drop([i + 1, i + 2], inplace=True)
@@ -86,7 +87,7 @@ def _multiline(df, flag):
     return df
 
 
-def _split_statvar_value(df, flag):
+def _split_statvar_value(df, geo):
     '''
     The values are seperated from the statvar and given into the next column
     Args: DataFrame, Flag
@@ -94,10 +95,10 @@ def _split_statvar_value(df, flag):
     '''
     for i in range(len(df)):
         if df.loc[i, 'statVar'][-4:].strip().strip('§').isnumeric():
-            if flag == "States":
+            if geo == "State":
                 df.loc[i, '2016_sampleSize'] = df.loc[
                     i, 'statVar'][-4:].strip().strip('§')
-            elif flag == "National":
+            elif geo == "National":
                 df.loc[i, '2016_sampleSize'] = df.loc[
                     i, 'statVar'][-5:].strip().strip('§')
             l1 = len(df.loc[i, 'statVar'])
@@ -109,10 +110,15 @@ def _split_statvar_value(df, flag):
             df.loc[i, 'statVar'] = df.loc[i, 'statVar'][13:]
     return df
 
+national_columns = [
+            'Geo', 'SV', '2016_sampleSize', '2016_CI', '2017_sampleSize',
+            '2017_CI', '2018_sampleSize', '2018_CI', '2019_sampleSize',
+            '2019_CI', '2020_sampleSize', '2020_CI', 'ScalingFactor'
+        ]
 
-def _cleaning_national(df, flag):
+def _cleaning_national_file(df, geo):
     '''
-    The values are seperated from statvar and given into the next column
+    There are certain rows in which specific values are not split as required
     Args: DataFrame, Flag
     Returns: df: DataFrame
     '''
@@ -121,7 +127,7 @@ def _cleaning_national(df, flag):
                 i,
                 'statVar'] == 'Experienced IPV during the 12 months'+\
                     ' before pregnancy by a':
-            if flag == "National":
+            if geo == "National":
                 df.loc[i,
                         'statVar'] = df.loc[i,
                                              'statVar'].replace('a2.5 ', 'a')
@@ -134,7 +140,7 @@ def _cleaning_national(df, flag):
             break
     # The values are seperated from the statvar and given into the next
     # column in the national file.
-    if flag == "National":
+    if geo == "National":
         for i in range(len(df)):
             if df.loc[
                     i,
@@ -210,8 +216,17 @@ def _flatten_header_and_sub_header(df) -> pd.DataFrame:
     df.insert(1, 'ScalingFactor', np.NaN)
     return df
 
+state_columns = [
+            'Geo', 'SV', '2016_sampleSize', '2017_sampleSize',
+            '2018_sampleSize', '2019_sampleSize', '2020_sampleSize',
+            '2016_CI_PERCENT', '2016_CI_LOWER', '2016_CI_UPPER',
+            '2017_CI_PERCENT', '2017_CI_LOWER', '2017_CI_UPPER',
+            '2018_CI_PERCENT', '2018_CI_LOWER', '2018_CI_UPPER',
+            '2019_CI_PERCENT', '2019_CI_LOWER', '2019_CI_UPPER',
+            '2020_CI_PERCENT', '2020_CI_LOWER', '2020_CI_UPPER', 'ScalingFactor'
+        ]
 
-def _splitting_ci_columns(df, flag):
+def _splitting_ci_columns(df, geo):
     '''
     The CI has percent, lower confidence and upper confidence values
     within one column. This method is used to seperated into three
@@ -219,7 +234,7 @@ def _splitting_ci_columns(df, flag):
     Args: DataFrame, Flag
     Returns: df: DataFrame
     '''
-    if flag == "States":
+    if geo == "State":
         split_col = ['2016_CI', '2017_CI', '2018_CI', '2019_CI', '2020_CI']
         for i in split_col:
             df[i] = df[i].fillna(pd.NA)
@@ -234,7 +249,7 @@ def _splitting_ci_columns(df, flag):
                     columns={df_split.columns[0]: i + '_PERCENT'})
                 df_split[i + '_LOWER'] = ""
                 df_split[i + '_UPPER'] = ""
-            # If the column size is 3 and hence it is split
+            # If the column size is 3, it is split into 3 different columns.
             elif siz == 3:
                 df_split = df_split.rename(
                     columns={
@@ -253,29 +268,17 @@ def _splitting_ci_columns(df, flag):
             'Overall_2020_CI'
         ])
         # Redifining columns
-    if flag == "National":
-        df = df[[
-            'Geo', 'SV', '2016_sampleSize', '2016_CI', '2017_sampleSize',
-            '2017_CI', '2018_sampleSize', '2018_CI', '2019_sampleSize',
-            '2019_CI', '2020_sampleSize', '2020_CI', 'ScalingFactor'
-        ]]
-    elif flag == "States":
-        df = df[[
-            'Geo', 'SV', '2016_sampleSize', '2017_sampleSize',
-            '2018_sampleSize', '2019_sampleSize', '2020_sampleSize',
-            '2016_CI_PERCENT', '2016_CI_LOWER', '2016_CI_UPPER',
-            '2017_CI_PERCENT', '2017_CI_LOWER', '2017_CI_UPPER',
-            '2018_CI_PERCENT', '2018_CI_LOWER', '2018_CI_UPPER',
-            '2019_CI_PERCENT', '2019_CI_LOWER', '2019_CI_UPPER',
-            '2020_CI_PERCENT', '2020_CI_LOWER', '2020_CI_UPPER', 'ScalingFactor'
-        ]]
+    if geo == "National":
+        df = df[national_columns]
+    elif geo == "State":
+        df = df[state_columns]
         # The Distric of Columbia has characters : (.-.)
         df['2018_CI_UPPER'] = df['2018_CI_UPPER'].replace('.', '0.0')
         df['2018_CI_LOWER'] = df['2018_CI_LOWER'].replace('.', '0.0')
     return df
 
 
-def _stat_var(df, flag):
+def _stat_var(df, geo):
     '''
         Creating dummy statvars to generate properties
         Args: DataFrame, Flag
@@ -290,24 +293,11 @@ def _stat_var(df, flag):
         drop_columns = []
         if col == "sample_size":
             temp_df['SV'] = 'SampleSize_Count' + temp_df['SV']
-            if flag == "National":
-                # temp_df = temp_df.drop(columns=[
-                #     '2016_CI', '2017_CI', '2018_CI', '2019_CI', '2020_CI'
-                # ])
+            if geo == "National":
                 for year in range(2016, 2021):
-                    drop_columns.append(year + '_CI')
+                    drop_columns.append(str(year) + '_CI')
                 temp_df = temp_df.drop(columns=drop_columns)
-            elif flag == "States":
-                # temp_df = temp_df.drop(columns=[
-                #     '2016_CI_PERCENT', '2017_CI_PERCENT', '2018_CI_PERCENT',
-                #     '2019_CI_PERCENT', '2020_CI_PERCENT', 
-                    
-                #     '2016_CI_LOWER', '2017_CI_LOWER', '2018_CI_LOWER', 
-                #     '2019_CI_LOWER', '2020_CI_LOWER',
-
-                #     '2016_CI_UPPER', '2017_CI_UPPER', '2018_CI_UPPER', 
-                #     '2019_CI_UPPER',  '2020_CI_UPPER'
-                # ])
+            elif geo == "State":
                 for year in range(2016, 2021):
                     for col in ['_CI_PERCENT', '_CI_LOWER', '_CI_UPPER']:
                         drop_columns.append(str(year)+col)
@@ -321,25 +311,11 @@ def _stat_var(df, flag):
             temp_df['SV'] = 'Percent' + temp_df['SV']
             temp_df['ScalingFactor'] = 100
 
-            if flag == "National":
-                # temp_df = temp_df.drop(columns=[
-                #     '2016_sampleSize', '2017_sampleSize', '2018_sampleSize',
-                #     '2019_sampleSize', '2020_sampleSize'
-                # ])
+            if geo == "National":
                 for year in range(2016, 2021):
-                    drop_columns.append(year + '_sampleSize')
+                    drop_columns.append(str(year) + '_sampleSize')
                 temp_df = temp_df.drop(columns=drop_columns)
-            elif flag == "States":
-                # temp_df = temp_df.drop(columns=[
-                #     '2016_sampleSize', '2017_sampleSize', '2018_sampleSize',
-                #     '2019_sampleSize', '2020_sampleSize', 
-                    
-                #     '2016_CI_LOWER', '2017_CI_LOWER', '2018_CI_LOWER',
-                #     '2019_CI_LOWER', '2020_CI_LOWER',
-
-                #     '2016_CI_UPPER', '2017_CI_UPPER', '2018_CI_UPPER', 
-                #     '2019_CI_UPPER',  '2020_CI_UPPER'
-                # ])
+            elif geo == "State":
                 for year in range(2016, 2021):
                     for col in ['_sampleSize', '_CI_LOWER', '_CI_UPPER']:
                         drop_columns.append(str(year)+col)
@@ -350,21 +326,10 @@ def _stat_var(df, flag):
                                    value_name='Observation')
         
         elif col == "lower_level":
-            if flag == "National":
+            if geo == "National":
                 continue
-            elif flag == "States":
+            elif geo == "State":
                 temp_df['SV'] = 'ConfidenceIntervalLowerLimit_Count' + temp_df['SV']
-                # temp_df = temp_df.drop(columns=[
-                #     '2016_sampleSize', '2017_sampleSize', '2018_sampleSize',
-                #     '2019_sampleSize', '2020_sampleSize', 
-                    
-                #     '2016_CI_UPPER',
-                #     '2017_CI_UPPER', '2018_CI_UPPER', '2019_CI_UPPER',
-                #     '2020_CI_UPPER', 
-                    
-                #     '2016_CI_PERCENT', '2017_CI_PERCENT',
-                #     '2019_CI_PERCENT', '2020_CI_PERCENT', '2018_CI_PERCENT'
-                # ])
                 for year in range(2016, 2021):
                     for col in ['_sampleSize', '_CI_UPPER',  '_CI_PERCENT']:
                         drop_columns.append(str(year)+col)
@@ -375,21 +340,10 @@ def _stat_var(df, flag):
                                     value_name='Observation')
         
         elif col == "upper_level":
-            if flag == "National":
+            if geo == "National":
                 continue
-            elif flag == "States":
+            elif geo == "State":
                 temp_df['SV'] = 'ConfidenceIntervalUpperLimit_Count' + temp_df['SV']
-                # temp_df = temp_df.drop(columns=[
-                #     '2016_sampleSize', '2017_sampleSize', '2018_sampleSize',
-                #     '2019_sampleSize', '2020_sampleSize', 
-                    
-                #     '2016_CI_LOWER',
-                #     '2017_CI_LOWER', '2018_CI_LOWER', '2019_CI_LOWER',
-                #     '2020_CI_LOWER', 
-                    
-                #     '2016_CI_PERCENT', '2017_CI_PERCENT',
-                #     '2019_CI_PERCENT', '2020_CI_PERCENT', '2018_CI_PERCENT'
-                # ])
                 for year in range(2016, 2021):
                     for col in ['_sampleSize', '_CI_LOWER',  '_CI_PERCENT']:
                         drop_columns.append(str(year)+col)
@@ -415,9 +369,9 @@ def prams(input_url: list) -> pd.DataFrame:
     # Creatd flag as the format for state and national file are different and
     # requires different modifications.
     for file in input_url:
-        flag = "States"
+        geo = "State"
         if "All-Sites" in file:
-            flag = "National"
+            geo = "National"
         data = tb.read_pdf(file, pages='all')
         df = pd.concat(data)
         file_name = os.path.basename(file)
@@ -428,7 +382,7 @@ def prams(input_url: list) -> pd.DataFrame:
         .replace('New York City','geoId/3651000')\
             .replace('All Sites','country/USA')
         df.reset_index(drop=True, inplace=True)
-        if flag == "States":
+        if geo == "State":
             # dropping unwanted columns
             df = df.drop([
                 'Unnamed: 0', 'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3',
@@ -440,7 +394,7 @@ def prams(input_url: list) -> pd.DataFrame:
                 '2018_sampleSize', '2018_CI', '2019_sampleSize', '2019_CI',
                 '2020_sampleSize', '2020_CI', 'Overall_2020_CI', 'Geo'
             ]
-        elif flag == "National":
+        elif geo == "National":
             df.columns = [
                 'statVar', '2016_CI', '2017_sampleSize', '2017_Nan', '2017_CI',
                 '2018_sampleSize', '2018_Nan', '2018_CI', '2019_sampleSize',
@@ -454,12 +408,12 @@ def prams(input_url: list) -> pd.DataFrame:
         df.insert(1, '2016_sampleSize', np.NaN)
         # Removing unwanted charaters
         df['statVar'] = df['statVar'].str.replace('• ', '')
-        df = _multiline(df, flag)
-        df = _split_statvar_value(df, flag)
-        df = _cleaning_national(df, flag)
+        df = _merging_multiline_sv(df, geo)
+        df = _split_statvar_value(df, geo)
+        df = _cleaning_national_file(df, geo)
         df = _flatten_header_and_sub_header(df)
-        df = _splitting_ci_columns(df, flag)
-        df = _stat_var(df, flag)
+        df = _splitting_ci_columns(df, geo)
+        df = _stat_var(df, geo)
         final_df = pd.concat([final_df, df], axis=0)
         # Replacing Year column with the correct Values.
         for old, new in _YEAR.items():
@@ -514,25 +468,21 @@ class USPrams:
             dcid = sv
             sv_prop = [prop.strip() for prop in sv.split(" ")]
             # Using statistical variable template
+            # deepcopy follows the template and keeps adding the properties.
             sv_pvs = deepcopy(DEFAULT_SV_PROP)
             # Created dictionaries to replace with correct values
             for prop in sv_prop:
-                # prop1 = deepcopy(prop)
-                # prop3 = deepcopy(prop)
-                # prop2 = deepcopy(prop)
-                # prop4 = deepcopy(prop)
-                # prop5 = deepcopy(prop)
-                prop1 = prop2 = prop3 = prop4 = prop5 = prop
+                statVar = insurance = time = cigarettes = prop_val = prop
                 for old, new in _PROP.items():
-                    prop1 = prop1.replace(old, new)
+                    statVar = statVar.replace(old, new)
                 for old, new in _INSURANCE.items():
-                    prop2 = prop2.replace(old, new)
+                    insurance = insurance.replace(old, new)
                 for old, new in _TIME.items():
-                    prop3 = prop3.replace(old, new)
-                for old, new in _PROP4.items():
-                    prop4 = prop4.replace(old, new)
+                    time = time.replace(old, new)
+                for old, new in _CIGARETTES.items():
+                    cigarettes = cigarettes.replace(old, new)
                 for old, new in _PV_PROP.items():
-                    prop5 = prop5.replace(old, new)
+                    prop_val = prop_val.replace(old, new)
 
                 if "SampleSize" in prop:
                     sv_pvs["measuredProperty"] = f"dcs:count"
@@ -581,15 +531,15 @@ class USPrams:
 
                 if "MultivitaminUseMoreThan4TimesAWeek" in prop:
                     prop = prop[0].lower() + prop[1:]
-                    sv_pvs["mothersHealthPrevention"] = f"dcs:{prop1}"
-                    sv_pvs["healthPreventionActionFrequency"] = f"dcs:{prop3}"
-                    pvs.append(f"mothersHealthPrevention: dcs:{prop1}")
-                    pvs.append(f"healthPreventionActionFrequency: dcs:{prop3}")
+                    sv_pvs["mothersHealthPrevention"] = f"dcs:{statVar}"
+                    sv_pvs["healthPreventionActionFrequency"] = f"dcs:{time}"
+                    pvs.append(f"mothersHealthPrevention: dcs:{statVar}")
+                    pvs.append(f"healthPreventionActionFrequency: dcs:{time}")
 
                 if "Underweight" in prop or "Overweight" in prop or\
                     "Obese" in prop:
-                    sv_pvs["mothersHealthBehavior"] = f"dcs:{prop1}"
-                    pvs.append(f"mothersHealthBehavior: dcs:{prop1}")
+                    sv_pvs["mothersHealthBehavior"] = f"dcs:{statVar}"
+                    pvs.append(f"mothersHealthBehavior: dcs:{statVar}")
 
                 if "HealthCareVisit12MonthsBeforePregnancy"in prop or\
                         "PrenatalCareInFirstTrimester" in prop or\
@@ -597,59 +547,59 @@ class USPrams:
                         "MaternalCheckupPostpartum" in prop or\
                         "TeethCleanedByDentistOrHygienist" in prop:
                     prop = prop[0].lower() + prop[1:]
-                    sv_pvs["mothersHealthPrevention"] = f"dcs:{prop1}"
-                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{prop3}"
-                    pvs.append(f"mothersHealthPrevention: dcs:{prop1}")
-                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+                    sv_pvs["mothersHealthPrevention"] = f"dcs:{statVar}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
+                    pvs.append(f"mothersHealthPrevention: dcs:{statVar}")
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "CigaretteSmoking3MonthsBeforePregnancy" in prop or\
                     "CigaretteSmokingLast3MonthsOfPregnancy"in prop or \
                     "CigaretteSmokingPostpartum" in prop or\
                     "ECigaretteSmoking3MonthsBeforePregnancy" in prop or\
                     "ECigaretteSmokingLast3MonthsOfPregnancy" in prop:
-                    sv_pvs["tobaccoUsageType"] = f"dcs:{prop4}"
-                    sv_pvs["mothersHealthBehavior"] = f"dcs:{prop1}"
-                    sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop3}"
-                    pvs.append(f"tobaccoUsageType: dcs:{prop4}")
-                    pvs.append(f"mothersHealthBehavior: dcs:{prop1}")
-                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+                    sv_pvs["tobaccoUsageType"] = f"dcs:{cigarettes}"
+                    sv_pvs["mothersHealthBehavior"] = f"dcs:{statVar}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"{time}"
+                    pvs.append(f"tobaccoUsageType: dcs:{cigarettes}")
+                    pvs.append(f"mothersHealthBehavior: dcs:{statVar}")
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "HookahInLast2Years" in prop or\
                      "HeavyDrinking3MonthsBeforePregnancy" in prop:
-                    sv_pvs["mothersHealthBehavior"] = f"dcs:{prop1}"
-                    sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop3}"
-                    pvs.append(f"mothersHealthBehavior: dcs:{prop1}")
-                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+                    sv_pvs["mothersHealthBehavior"] = f"dcs:{statVar}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"{time}"
+                    pvs.append(f"mothersHealthBehavior: dcs:{statVar}")
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "IntimatePartnerViolenceByCurrentOrExPartnerOr"+\
                     "CurrentOrExHusband" in prop:
-                    sv_pvs["intimatePartnerViolence"] = f"dcs:{prop1}"
-                    sv_pvs["timePeriodRelativeToPregnancy"] = f"{prop3}"
-                    pvs.append(f"intimatePartnerViolence: dcs:{prop1}")
-                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+                    sv_pvs["intimatePartnerViolence"] = f"dcs:{statVar}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"{time}"
+                    pvs.append(f"intimatePartnerViolence: dcs:{statVar}")
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "MistimedPregnancy" in prop or\
                     "UnwantedPregnancy" in prop or\
                     "UnsureIfWantedPregnancy" in prop or\
                      "IntendedPregnancy" in prop :
-                    sv_pvs["pregnancyIntention"] = f"dcs:{prop4}"
-                    pvs.append(f"pregnancyIntention: dcs:{prop4}")
+                    sv_pvs["pregnancyIntention"] = f"dcs:{cigarettes}"
+                    pvs.append(f"pregnancyIntention: dcs:{cigarettes}")
 
                 elif "AnyPostpartumFamilyPlanning"in prop or\
                     "MaleOrFemaleSterilization"in prop or\
                     "LongActingReversibleContraceptiveMethods" in prop or\
                     "ModeratelyEffectiveContraceptiveMethods"in prop or\
                     "LeastEffectiveContraceptiveMethods"in prop:
-                    sv_pvs["postpartumFamilyPlanning"] = f"dcs:{prop4}"
-                    pvs.append(f"postpartumFamilyPlanning: dcs:{prop4}")
+                    sv_pvs["postpartumFamilyPlanning"] = f"dcs:{cigarettes}"
+                    pvs.append(f"postpartumFamilyPlanning: dcs:{cigarettes}")
 
                 elif "CDC_SelfReportedDepression3MonthsBeforePregnancy" in prop\
                      or "CDC_SelfReportedDepressionDuringPregnancy" in prop or\
                     "CDC_SelfReportedDepressionPostpartum" in prop:
-                    sv_pvs["mothersHealthCondition"] = f"dcs:{prop1}"
-                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{prop3}"
-                    pvs.append(f"mothersHealthCondition: dcs:{prop1}")
-                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+                    sv_pvs["mothersHealthCondition"] = f"dcs:{statVar}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
+                    pvs.append(f"mothersHealthCondition: dcs:{statVar}")
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "healthInsuranceStatusOneMonthBeforePregnancy"+\
                     "privateinsurance"in prop or\
@@ -658,43 +608,43 @@ class USPrams:
                     "healthInsuranceStatusOneMonthBeforePregnancy"+\
                         "NoInsurance" in prop :
                     sv_pvs["healthInsuranceStatusOneMonthBeforePregnancy"]\
-                    = f"dcs:{prop1}"
-                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{prop3}"
+                    = f"dcs:{statVar}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
                     pvs.append(
-                        f"healthInsuranceStatusOneMonthBeforePregnancy: dcs:{prop1}"
+                        f"healthInsuranceStatusOneMonthBeforePregnancy: dcs:{statVar}"
                     )
-                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "healthInsuranceStatusForPrenatalCare"+\
                     "privateinsurance"in prop or\
                     "healthInsuranceStatusForPrenatalCareMedicaid" in prop or\
                     "healthInsuranceStatusForPrenatalCareNoInsurance" in prop:
                     sv_pvs[
-                        "healthInsuranceStatusForPrenatalCare"] = f"dcs:{prop1}"
+                        "healthInsuranceStatusForPrenatalCare"] = f"dcs:{statVar}"
                     pvs.append(
-                        f"healthInsuranceStatusForPrenatalCare: dcs:{prop1}")
+                        f"healthInsuranceStatusForPrenatalCare: dcs:{statVar}")
 
                 elif "healthInsuranceStatusPostpartumprivateinsurance" in prop\
                     or "healthInsuranceStatusPostpartumMedicaid" in prop or\
                     "healthInsuranceStatusPostpartumNoInsurance" in prop:
-                    sv_pvs["healthInsuranceStatusPostpartum"] = f"dcs:{prop2}"
-                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{prop3}"
-                    pvs.append(f"healthInsuranceStatusPostpartum: dcs:{prop2}")
-                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+                    sv_pvs["healthInsuranceStatusPostpartum"] = f"dcs:{insurance}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
+                    pvs.append(f"healthInsuranceStatusPostpartum: dcs:{insurance}")
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "BabyMostOftenLaidOnBackToSleep" in prop:
-                    sv_pvs["infantSleepPractice"] = f"dcs:{prop4}"
-                    pvs.append(f"infantSleepPractice: dcs:{prop4}")
+                    sv_pvs["infantSleepPractice"] = f"dcs:{cigarettes}"
+                    pvs.append(f"infantSleepPractice: dcs:{cigarettes}")
 
                 elif "EverBreastfed" in prop:
-                    sv_pvs["breastFeedingPractice"] = f"dcs:{prop4}"
-                    pvs.append(f"breastFeedingPractice: dcs:{prop4}")
+                    sv_pvs["breastFeedingPractice"] = f"dcs:{cigarettes}"
+                    pvs.append(f"breastFeedingPractice: dcs:{cigarettes}")
 
                 elif "AnyBreastfeedingAt8Weeks" in prop:
-                    sv_pvs["breastFeedingPractice"] = f"dcs:{prop4}"
-                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{prop3}"
-                    pvs.append(f"breastFeedingPractice: dcs:{prop4}")
-                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{prop3}")
+                    sv_pvs["breastFeedingPractice"] = f"dcs:{cigarettes}"
+                    sv_pvs["timePeriodRelativeToPregnancy"] = f"dcs:{time}"
+                    pvs.append(f"breastFeedingPractice: dcs:{cigarettes}")
+                    pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
             resolved_dcid = get_statvar_dcid(sv_pvs)
             dcid_nodes[dcid] = resolved_dcid
