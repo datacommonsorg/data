@@ -13,7 +13,7 @@
 # limitations under the License.
 import os
 import unittest
-from preprocess import map_names, GeoSadakLoader
+from india_geosadak.preprocess import map_statvarnames, GeoSadakLoader
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -28,6 +28,8 @@ class TestPreprocess(unittest.TestCase):
         expected_data = expected_file.read()
         expected_file.close()
 
+        fac_mapper = map_statvarnames()
+
         loader = GeoSadakLoader(
             source=os.path.join(
                 os.path.dirname(os.path.abspath(__file__)),
@@ -35,7 +37,7 @@ class TestPreprocess(unittest.TestCase):
             ),
             state_name="Gujarat",
         )
-        loader.load()
+        loader.load(fac_mapper)
         loader.process()
         loader.save(os.path.join(module_dir_, "test/output.csv"))
 

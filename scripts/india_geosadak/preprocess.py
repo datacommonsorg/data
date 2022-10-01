@@ -30,10 +30,20 @@ def map_names():
     return mapper
 
 
+def map_statvarnames():
+    fac_mapper = {
+        "Agro": "Count_CivicStructure_AgriculturalFacility",
+        "Education": "Count_CivicStructure_EducationFacility",
+        "Medical": "Count_CivicStructure_MedicalFacility",
+        "Transport/Admin": "Count_CivicStructure_TransportOrAdminFacility"
+    }
+    return fac_mapper
+
+
 class GeoSadakLoader:
     COLUMN_HEADERS = [
         "LgdCode",
-        "Facility_Category",
+        "StatVar",
         "Category_Count",
     ]
 
@@ -43,7 +53,7 @@ class GeoSadakLoader:
         self.raw_df = None
         self.clean_df = None
 
-    def load(self):
+    def load(self, fac_mapper):
 
         zipfile = "zip:///" + self.source
         fac_state = geopandas.read_file(zipfile)
@@ -66,15 +76,29 @@ class GeoSadakLoader:
             ['LgdCode',
              'FAC_CATEGO']).size().to_frame(name='count').reset_index()
         fac_state = fac_state[fac_state["LgdCode"] != '']
+
+        fac_state.loc[fac_state["FAC_CATEGO"] == "Agro",
+                      "FAC_CATEGO"] = fac_mapper["Agro"]
+        fac_state.loc[fac_state["FAC_CATEGO"] == "Education",
+                      "FAC_CATEGO"] = fac_mapper["Education"]
+        fac_state.loc[fac_state["FAC_CATEGO"] == "Medical",
+                      "FAC_CATEGO"] = fac_mapper["Medical"]
+        fac_state.loc[fac_state["FAC_CATEGO"] == "Transport/Admin",
+                      "FAC_CATEGO"] = fac_mapper["Transport/Admin"]
+
         f.close()
         self.raw_df = fac_state
 
     def _make_column_numerical(self, column):
 
-        self.clean_df[column] = self.clean_df[column].astype(str).str.replace(
-            ",", "")
-        self.clean_df[column] = pd.to_numeric(self.clean_df[column],
-                                              errors="ignore")
+        if column == "LgdCode":
+            self.clean_df[column] = self.clean_df[column].astype(int)
+
+        else:
+            self.clean_df[column] = self.clean_df[column].astype(
+                str).str.replace(",", "")
+            self.clean_df[column] = pd.to_numeric(self.clean_df[column],
+                                                  errors="ignore")
 
     def process(self):
 
@@ -101,6 +125,7 @@ def main():
     """Runs the program."""
 
     mapper = map_names()
+    fac_mapper = map_statvarnames()
 
     # If the final csv file already exists
     # Remove it, so that it can be regenerated
@@ -117,7 +142,7 @@ def main():
             "data/facilities/{data_file}".format(data_file=file_name),
         )
         loader = GeoSadakLoader(data_file_path, mapper[file_name])
-        loader.load()
+        loader.load(fac_mapper)
         loader.process()
         loader.save(csv_file_path)
 

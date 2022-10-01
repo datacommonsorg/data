@@ -1,1 +1,27 @@
-#mcf script for India Geo Sadak Data 
+Node: dcid:Count_CivicStructure_AgriculturalFacility
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+facilityType: dcs:AgriculturalFacility
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_CivicStructure_TransportOrAdminFacility
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+facilityType: dcs:TransportOrAdminFacility
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_CivicStructure_EducationFacility
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+facilityType: dcs:EducationFacility
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_CivicStructure_MedicalFacility
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+facilityType: dcs:MedicalFacility
+measuredProperty: dcs:count
+statType: dcs:measuredValue
