@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import csv
+from importlib.resources import path
 import pandas as pd
 import os
 import json
@@ -79,9 +80,10 @@ dict_isoCode = {
     "All India": "IN"
 }
 
-csv_path_1 = "data/6822/6822_source_data.csv"
-csv_path_2 = "data/7034/7034_source_data.csv"
-csv_path_3 = "data/LGD_District.csv"
+path = "data/"
+csv_path_1 = os.path.join(path, "6822", "6822_source_data.csv")
+csv_path_2 = os.path.join(path, "7034", "7034_source_data.csv")
+csv_path_3 = os.path.join(path, "District_Combined", "LGD_District.csv")
 
 TMCF_ISOCODE = """Node: E:{dataset_name}->E0
 typeOf: schema:Place
@@ -189,7 +191,7 @@ class NFHSDataLoaderBase(object):
                 final_df['Year'] = final_df['Year'].str.replace(i, '2016')
 
         district_dict = dict(zip(df3.District_Name_English, df3.District_Code))
-        print(district_dict)
+        # print(district_dict)
         for i in final_df['srcDistrictName']:
             # print(i)
             for j in district_dict.keys():
@@ -198,7 +200,7 @@ class NFHSDataLoaderBase(object):
                     final_df['srcDistrictName'] = final_df['srcDistrictName'].str.replace(i, str(district_dict[j]))
         
         final_df.rename(columns=cols_to_nodes,inplace=True)
-        final_df.to_csv('./district/District_edited.csv', index=False)
+        final_df.to_csv(os.path.join('district', 'District_edited.csv'), index=False)
 
     def create_mcf_tmcf(self):
         """
