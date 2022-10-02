@@ -279,5 +279,5 @@ if __name__ == '__main__':
                                cols_dict=cols_to_nodes,
                                module_dir=module_dir)
 
-    # loader.create_mcf_tmcf()
+    loader.create_mcf_tmcf()
     loader.generate_csv()

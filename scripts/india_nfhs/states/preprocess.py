@@ -79,7 +79,8 @@ dict_isoCode = {
     "All India": "IN"
 }
 
-csv_path = "data/6821/6821_source_data.csv"
+path = "data/"
+csv_path = os.path.join(path, "6821", "6821_source_data.csv")
 
 TMCF_ISOCODE = """Node: E:{dataset_name}->E0
 typeOf: schema:Place
@@ -181,7 +182,7 @@ class NFHSDataLoaderBase(object):
                 df['Year'] = df['Year'].str.replace(i, '2016')
         
         df.rename(columns=cols_to_nodes,inplace=True)
-        df.to_csv('DataComplete.csv', index=False)
+        df.to_csv(os.path.join('states', 'states_edited.csv'), index=False)
 
     def create_mcf_tmcf(self):
         """
@@ -261,4 +262,4 @@ if __name__ == '__main__':
                                module_dir=module_dir)
 
     loader.create_mcf_tmcf()
-    # loader.generate_csv()
+    loader.generate_csv()
