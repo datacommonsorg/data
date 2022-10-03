@@ -4,7 +4,7 @@ lgdCode: C:India_GeoSadak->LgdCode
 
 Node: E:India_GeoSadak->E1
 typeOf: dcs:StatVarObservation
-observationAbout: dcid:India_GeoSadak->E0
+observationAbout: E:India_GeoSadak->E0
 observationDate: 2022
-variableMeasured: dcid:C:India_GeoSadak->StatVar
+variableMeasured: C:India_GeoSadak->StatVar
 value: C:India_GeoSadak->Category_Count
