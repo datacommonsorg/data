@@ -79,8 +79,8 @@ dict_isoCode = {
     "All India": "IN"
 }
 
-path = "data/"
-csv_path = os.path.join(path, "6821", "6821_source_data.csv")
+path = "data"
+csv_path = os.path.join(os.path.dirname(__file__), "data", "6821_source_data.csv")
 
 TMCF_ISOCODE = """Node: E:{dataset_name}->E0
 typeOf: schema:Place
@@ -138,7 +138,11 @@ measurementDenominator: dcs:Count_Household
 age: dcs:{age}
 """
 
-with open('col_to_statvar_mappings.json') as json_file:
+file_path = 'col_to_statvar_mappings.json'
+# with open('col_to_statvar_mappings.json') as json_file:
+#     cols_to_nodes = json.load(json_file)
+
+with open(os.path.join(os.path.dirname(__file__), file_path)) as json_file:
     cols_to_nodes = json.load(json_file)
 
 module_dir = os.path.dirname(__file__)
@@ -182,7 +186,7 @@ class NFHSDataLoaderBase(object):
                 df['Year'] = df['Year'].str.replace(i, '2016')
         
         df.rename(columns=cols_to_nodes,inplace=True)
-        df.to_csv(os.path.join('states', 'states_edited.csv'), index=False)
+        df.to_csv(os.path.join(os.path.dirname(__file__), 'states.csv'), index=False)
 
     def create_mcf_tmcf(self):
         """

@@ -81,9 +81,9 @@ dict_isoCode = {
 }
 
 path = "data/"
-csv_path_1 = os.path.join(path, "6822", "6822_source_data.csv")
-csv_path_2 = os.path.join(path, "7034", "7034_source_data.csv")
-csv_path_3 = os.path.join(path, "District_Combined", "LGD_District.csv")
+csv_path_1 = os.path.join(os.path.dirname(__file__), "data", "6822_source_data.csv")
+csv_path_2 = os.path.join(os.path.dirname(__file__), "data", "7034_source_data.csv")
+csv_path_3 = os.path.join(os.path.dirname(__file__), "data", "LGD_District.csv")
 
 TMCF_ISOCODE = """Node: E:{dataset_name}->E0
 typeOf: schema:Place
@@ -141,7 +141,11 @@ measurementDenominator: dcs:Count_Household
 age: dcs:{age}
 """
 
-with open('col_to_statvar_mappings.json') as json_file:
+file_path = 'col_to_statvar_mappings.json'
+# with open('col_to_statvar_mappings.json') as json_file:
+#     cols_to_nodes = json.load(json_file)
+
+with open(os.path.join(os.path.dirname(__file__), file_path)) as json_file:
     cols_to_nodes = json.load(json_file)
 
 module_dir = os.path.dirname(__file__)
@@ -195,12 +199,11 @@ class NFHSDataLoaderBase(object):
         for i in final_df['srcDistrictName']:
             # print(i)
             for j in district_dict.keys():
-                # state = i.lower()
                 if i.lower() == j.lower():
                     final_df['srcDistrictName'] = final_df['srcDistrictName'].str.replace(i, str(district_dict[j]))
         
         final_df.rename(columns=cols_to_nodes,inplace=True)
-        final_df.to_csv(os.path.join('district', 'District_edited.csv'), index=False)
+        final_df.to_csv(os.path.join(os.path.dirname(__file__), 'districts.csv'), index=False)
 
     def create_mcf_tmcf(self):
         """
