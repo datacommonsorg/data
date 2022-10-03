@@ -6,5 +6,5 @@ Node: E:India_GeoSadak->E1
 typeOf: dcs:StatVarObservation
 observationAbout: dcid:India_GeoSadak->E0
 observationDate: 2022
-variableMeasured: dcid:Count_CivicStructure_TransportOrAdminFacility
-value: 525
+variableMeasured: dcid:C:India_GeoSadak->StatVar
+value: C:India_GeoSadak->Category_Count
