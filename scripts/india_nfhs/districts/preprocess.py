@@ -203,7 +203,7 @@ class NFHSDataLoaderBase(object):
                     final_df['srcDistrictName'] = final_df['srcDistrictName'].str.replace(i, str(district_dict[j]))
         
         final_df.rename(columns=cols_to_nodes,inplace=True)
-        final_df.to_csv(os.path.join(os.path.dirname(__file__), 'districts.csv'), index=False)
+        final_df.to_csv(os.path.join(os.path.dirname(__file__), 'NFHS_Health.csv'), index=False)
 
     def create_mcf_tmcf(self):
         """

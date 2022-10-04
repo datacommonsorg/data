@@ -186,7 +186,7 @@ class NFHSDataLoaderBase(object):
                 df['Year'] = df['Year'].str.replace(i, '2016')
         
         df.rename(columns=cols_to_nodes,inplace=True)
-        df.to_csv(os.path.join(os.path.dirname(__file__), 'states.csv'), index=False)
+        df.to_csv(os.path.join(os.path.dirname(__file__), 'NFHS_Health.csv'), index=False)
 
     def create_mcf_tmcf(self):
         """
