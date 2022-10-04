@@ -1,0 +1,8 @@
+Node: E:eurostat_population_bmi->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:eurostat_population_bmi->SV
+measurementMethod: C:eurostat_population_bmi->Measurement_Method
+observationAbout: C:eurostat_population_bmi->geo
+observationDate: C:eurostat_population_bmi->time
+scalingFactor: 100
+value: C:eurostat_population_bmi->observation
