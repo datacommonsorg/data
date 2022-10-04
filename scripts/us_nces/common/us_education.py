@@ -352,8 +352,11 @@ class USEducation:
         df_place = df_cleaned[data_place]
 
         if self._import_name == "private_school":
+            output_file_path_place = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    "output_place")
+            df_place['year'] = self._year[0:4].strip()
             df_place_col = pd.DataFrame(columns=[
-            "school_state_code", "ZIP", "County_code", "Private_School_Name",
+            "year","school_state_code", "ZIP", "County_code", "Private_School_Name",
             "SchoolID", "School_Type", "School_Religion",
             "Physical_Address", "PhoneNumber",
             "Coeducational", "ContainedInPlace"])
@@ -385,10 +388,7 @@ class USEducation:
             df_place['ContainedInPlace'] = "zip/" + df_place[
                 'ZIP'] + "," + df_place['ANSI/FIPS State Code']
 
-            df_place['ContainedInPlace'] = np.where(
-                df_place['ContainedInPlace'] == 'zip/,geoId/51',
-                df_place['ANSI/FIPS State Code'],
-                df_place['ContainedInPlace'])
+            df_place["ContainedInPlace"] = df_place["ContainedInPlace"].str.replace("zip/,","")
             df_place = df_place.loc[:, ~df_place.columns.duplicated()]
             df_place = replace_values(df_place)
             df_place = df_place.rename(
@@ -418,7 +418,7 @@ class USEducation:
                 df_place[col] = df_place[col].replace(
                     to_replace={'': pd.NA})
                 df_place[col] = "dcs:" + df_place[col]
-            df_place = df_place[[
+            df_place = df_place[["year",
                 "school_state_code", "ZIP", "County_code",
                 "Private_School_Name", "SchoolID", "School_Type",
                 "School_Religion", "Physical_Address", "PhoneNumber",
@@ -437,19 +437,27 @@ class USEducation:
             df_place = df_place.rename(
                 columns={'Location ZIP':'ZIP', 'County Number':'County_code',
                 'Agency Name':'District_School_name','Agency ID - NCES Assigned':'School_ID',
-                'Agency Type':'School_Type', 'State Agency ID':'State_school_ID',
-            'Agency Level (SY 2017-18 onward)':'School_level', 'Lowest Grade Offered':'Lowest_Grade',
-            'Highest Grade Offered':'Highest_Grade', 'ANSI/FIPS State Code':'State_code',
-            'Location Address 1':'Physical_Address'})
+                'Agency Type':'School_Type','State Agency ID':'State_school_ID',
+                'Phone Number': 'PhoneNumber',
+                'ANSI/FIPS State Code':'State_code',
+                'Location Address 1':'Physical_Address',
+                'Locale':'Locale_temp',
+                'Agency Level (SY 2017-18 onward)':'Agency_level'})
             df_place = replace_values(df_place)
+            df_place['Locale_temp'] = df_place['Locale_temp'].replace(
+                    to_replace={'': pd.NA})
+            df_place['Locale_temp'] = df_place['Locale_temp'].str.replace(": ","")
+            df_place[['Locale1','Locale','Locale2']] = df_place['Locale_temp'].str.split('-', expand=True)
+            df_place = df_place.drop(columns=['Locale_temp','Locale1','Locale2'])
+            df_place['Locale'] = "NCES_" + df_place['Locale']
             df_place.to_csv(
                 "/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/district_school/output_place/us_nces_demographics_district_place.csv",
                 index=False)
 
-        if self._import_name == "public_school":
-            df_place.to_csv(
-                "/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/public_school/output_place/us_nces_demographics_public_place.csv",
-                index=False,mode='a')
+        # if self._import_name == "public_school":
+        #     df_place.to_csv(
+        #         "/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place_temp.csv",
+        #         index=False,mode='a')
 
         if not self._generate_statvars:
             return df_cleaned[data_cols]
@@ -532,6 +540,10 @@ class USEducation:
                 dfs.append(df_parsed)
 
         df_final_private = pd.read_csv("/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place_temp.csv")
+        df_final_private = df_final_private.sort_values(
+                        by=["year"],ascending=False)
+        df_final_private = df_final_private.drop_duplicates(
+                        subset=["Private_School_Name"]).reset_index(drop=True)
         df_final_private.drop_duplicates(inplace=True)
         df_final_private.to_csv("/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place.csv",index=False)
         df_merged = pd.DataFrame()

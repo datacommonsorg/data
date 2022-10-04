@@ -34,22 +34,22 @@ _RELIGIOUS = {
 
 _SCHOOL_TYPE = {
     "1-Regular Elementary or Secondary":
-        "NCES_PrivateSchoolTypeRegularElementaryOrSecondary",
+        "NCES_RegularElementaryOrSecondarySchool",
     "2-Montessori":
-        "NCES_PrivateSchoolTypeMontessori",
+        "NCES_MontessoriSchool",
     "3-Special Program Emphasis":
-        "NCES_PrivateSchoolTypeSpecialProgramEmphasis",
+        "NCES_SpecialProgramEmphasisSchool",
     "4-Special Education":
-        "NCES_PrivateSchoolTypeSpecialEducation",
+        "NCES_SpecialEducationSchool",
     "5-Career/technical/vocational":
-        "NCES_PrivateSchoolTypeCareerOrTechnicalOrVocational",
+        "NCES_CareerOrTechnicalOrVocational",
     "6-Alternative/other":
-        "NCES_PrivateSchoolTypeAlternativeOrOther",
+        "NCES_AlternativeOrOtherSchool",
     "7-Early Childhood Program/child care center":
-        "NCES_PrivateSchoolTypeEarlyChildhoodProgramOrChildCareCenter",
+        "NCES_EarlyChildhoodProgramOrChildCareCenter",
     "†":
-        "NCES_PrivateSchoolTypeDataMissing",
-    "–":"NCES_PrivateSchoolTypeDataMissing",
+        "NCES_DataMissing",
+    "–":"NCES_DataMissing",
 }
 
 _SCHOOL_GRADE = {
@@ -186,11 +186,10 @@ _LOWEST_GRADE = {"†":"","–":""}
 
 _HIGHEST_GRADE = {"†":"","–":""}
 
-_LONGITUDE = {"†":"","–":""}
-
 _LATITUDE = {"†":"","–":""}
 
-_LOCALE = {"†":"","–":""}
+_LOCALE = {"†":"",
+            "–":""}
 
 
 def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
@@ -212,6 +211,8 @@ def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
         "Physical_Address": _PHYSICAL_ADD,
         "ZIP": _ZIP,
         "Phone Number": _PHONE_NUMBER,
+        "PhoneNumber": _PHONE_NUMBER,
+        "Agency_level":_PHONE_NUMBER,
         "Lowest_Grade": _LOWEST_GRADE,
         "Highest_Grade": _HIGHEST_GRADE,
         "Latitude": _LATITUDE,
@@ -220,7 +221,8 @@ def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
         "School_Type":_LOCALE,
         "State_school_ID": _LOCALE,
         "School_level": _LOCALE,
-        "County_code": _LOCALE
+        "County_code": _LOCALE,
+        "Congressional Code":_LOCALE
     }
 
     df_columns = data_df.columns.to_list()

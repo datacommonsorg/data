@@ -37,29 +37,24 @@ TMCF_TEMPLATE_PLACE_PRIVATE = (
 		"ncesId: C:us_nces_demographics_private_place->SchoolID\n"
 		"containedInPlace: C:us_nces_demographics_private_place->ContainedInPlace\n"
 		"telephone: C:us_nces_demographics_private_place->PhoneNumber\n"
-		"privateSchoolType: C:us_nces_demographics_private_place->School_Type\n"
+		"schoolType: C:us_nces_demographics_private_place->School_Type\n"
 		"schoolReligiousOrientation: C:us_nces_demographics_private_place->School_Religion\n"
 		"coeducationalType: C:us_nces_demographics_private_place->Coeducational\n")
 
 TMCF_TEMPLATE_PLACE_DISTRICT = (
         "Node: E:us_nces_demographics_district_place->E0\n"
         "dcid: C:us_nces_demographics_district_place->school_state_code\n"
-		"typeOf: dcs:DistrictSchool\n"
+		"typeOf: dcs:SchoolDistrict\n"
 		"address: C:us_nces_demographics_district_place->Physical_Address\n"
 		"name: C:us_nces_demographics_district_place->District_School_name\n"
         "geoId: C:us_nces_demographics_district_place->geoID\n"
 		"ncesId: C:us_nces_demographics_district_place->School_ID\n"
 		"containedInPlace: C:us_nces_demographics_district_place->ContainedInPlace\n"
-        "schoolstateId: C:us_nces_demographics_district_place->School_State_ID\n"
+        "schoolStateID: C:us_nces_demographics_district_place->school_state_code\n"
 		"telephone: C:us_nces_demographics_district_place->PhoneNumber\n"
-		"lowestGrade: C:us_nces_demographics_district_place->Lowest_Grade\n"
-		"highestGrade: C:us_nces_demographics_district_place->Highest_Grade\n"
-		"schoolGradeLevel: C:us_nces_demographics_district_place->School_Level\n"
-		# "districtSchoolType: C:us_nces_demographics_district_place->School_Type\n"
-		# "coeducationalType: C:us_nces_demographics_district_place->Coeducational\n"
         "longitude: C:us_nces_demographics_district_place->Longitude\n"
         "latitude: C:us_nces_demographics_district_place->Latitude\n"
-        "locale: C:us_nces_demographics_district_place->Locale\n")
+        "ncesLocale: C:us_nces_demographics_district_place->Locale\n")
 
 TMCF_TEMPLATE_PLACE_PUBLIC = (
         "Node: E:us_nces_demographics_public_place->E0\n"
