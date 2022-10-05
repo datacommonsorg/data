@@ -219,7 +219,7 @@ def main(_) -> None:
     pre_2022_df = get_data(PRE_2022_FIRE_LOCATIONS_URL)
     ytd_2022_df = get_data(YTD_2022_FIRE_LOCATIONS_URL)
     df = pd.concat([pre_2022_df, ytd_2022_df], ignore_index=True)
-    df = process_df(df, ll2p)
+    df = process_df(df)
     df.to_csv("processed_data.csv", index=False)
 
 
