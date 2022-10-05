@@ -215,9 +215,7 @@ def process_df(df):
     return df[col_list]
 
 
-def main(argv: Sequence[str]) -> None:
-    if len(argv) > 1:
-        raise app.UsageError("Too many command-line arguments.")
+def main(_) -> None:
     pre_2022_df = get_data(PRE_2022_FIRE_LOCATIONS_URL)
     ytd_2022_df = get_data(YTD_2022_FIRE_LOCATIONS_URL)
     df = pd.concat([pre_2022_df, ytd_2022_df], ignore_index=True)
