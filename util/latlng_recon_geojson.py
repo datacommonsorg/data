@@ -27,6 +27,7 @@ _GJ_PROP = {
     'Country': 'geoJsonCoordinatesDP2',
     # Certain low-res geojsons are malformed for states
     'State': 'geoJsonCoordinates',
+    'County': 'geoJsonCoordinates',
 }
 
 
@@ -54,6 +55,9 @@ class LatLng2Places:
     def __init__(self):
         self._country_geojsons = _get_geojsons('Country', _WORLD)
         self._us_state_geojsons = _get_geojsons('State', _USA)
+        self._us_county_geojsons = {}
+        for state in self._us_state_geojsons.keys():
+            self._us_county_geojsons.update(_get_geojsons('County', state))
         self._continent_map = _get_continent_map(
             [k for k in self._country_geojsons])
         print('Loaded',
@@ -72,6 +76,10 @@ class LatLng2Places:
         cip = []
         if country == _USA:
             for p, gj in self._us_state_geojsons.items():
+                if gj.contains(point):
+                    cip.append(p)
+                    break
+            for p, gj in self._us_county_geojsons.items():
                 if gj.contains(point):
                     cip.append(p)
                     break
