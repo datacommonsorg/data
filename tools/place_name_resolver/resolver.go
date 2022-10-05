@@ -30,6 +30,7 @@ const (
 	batchSize = 50
 	// TODO: Switch to prod
 	dcAPI = "https://autopush.recon.datacommons.org/id/resolve"
+	dcBatchSize = 500
 )
 
 //
@@ -253,41 +254,69 @@ func geocodePlaces(mapCli MapsClient, tinfo *tableInfo) error {
 }
 
 func mapPlaceIDsToDCIDs(rApi ResolveApi, tinfo *tableInfo) error {
-	// Collect all place IDs and build the REST API call.
-	placeID2Idx := map[string]int{}
-	req := &resolveReq{
-		InProp:  "placeId",
-		OutProp: "dcid",
-	}
-	for i, r := range tinfo.rows {
-		if len(r) < 2 {
-			continue
+	// Batch the calls and collect responses.
+	placeID2Idx := map[string][]int{}
+	responses := []*resolveResp{}
+	for i := 0; i < len(tinfo.rows); i += dcBatchSize {
+		req := &resolveReq{
+			InProp:  "placeId",
+			OutProp: "dcid",
 		}
-		placeID := r[len(r)-2]
-		placeID2Idx[placeID] = i
-		req.Ids = append(req.Ids, placeID)
-	}
 
-	resp, err := rApi.Resolve(req)
-	if err != nil {
-		return err
+		limit := i + dcBatchSize
+		if limit > len(tinfo.rows) {
+			limit = len(tinfo.rows)
+		}
+		for j := i; j < limit; j++ {
+			r := tinfo.rows[j]
+			if len(r) < 2 {
+				continue
+			}
+			placeID := r[len(r)-2]
+			if v, ok := placeID2Idx[placeID]; ok {
+				placeID2Idx[placeID] = append(v, j)
+			} else {
+				placeID2Idx[placeID] = []int{j}
+			}
+			req.Ids = append(req.Ids, placeID)
+		}
+
+		resp, err := rApi.Resolve(req)
+		if err != nil {
+			return err
+		}
+
+		responses = append(responses, resp)
 	}
 
 	// Replace all resolved placeIDs with DCIDs
-	for _, ent := range resp.Entities {
-		idx := placeID2Idx[ent.InId]
-		tinfo.rows[idx][len(tinfo.rows[idx])-2] = ent.OutIds[0]
-		placeID2Idx[ent.InId] = -1
+	for _, resp := range responses {
+		for _, ent := range resp.Entities {
+			for _, idx := range placeID2Idx[ent.InId] {
+				l := len(tinfo.rows[idx])
+				if (len(placeID2Idx[ent.InId]) > 1) {
+					tinfo.rows[idx][l-2] = ""
+					tinfo.rows[idx][l-1] = fmt.Sprintf("Duplicate dcid %s", ent.OutIds[0])
+				} else {
+					tinfo.rows[idx][l-2] = ent.OutIds[0]
+				}
+			}
+			placeID2Idx[ent.InId] = nil
+		}
 	}
-	for placeID, idx := range placeID2Idx {
-		if idx == -1 {
+
+	// Mark errors in unresolved entries.
+	for placeID, idxArr := range placeID2Idx {
+		if idxArr == nil {
 			// Resolved entry
 			continue
 		}
-		// Set error.
-		l := len(tinfo.rows[idx])
-		tinfo.rows[idx][l-2] = ""
-		tinfo.rows[idx][l-1] = fmt.Sprintf("Missing dcid for placeId %s", placeID)
+		for _, idx := range idxArr {
+			// Set error.
+			l := len(tinfo.rows[idx])
+			tinfo.rows[idx][l-2] = ""
+			tinfo.rows[idx][l-1] = fmt.Sprintf("Missing dcid for placeId %s", placeID)
+		}
 	}
 	return nil
 }
