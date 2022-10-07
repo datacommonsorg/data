@@ -39,61 +39,61 @@ flags.DEFINE_string('output_dir', '/tmp/gpcc_spi/out',
 
 
 def to_one_degree_grid_place(latlon):
-  """Latlng data to grid format.
+    """Latlng data to grid format.
 
   Change longitude from 0 ~ 360 scale to -180 ~ 180 scale.
   Change coordinate from middle of the grid to north west point of the grid.
   """
-  return f'grid_1/{math.floor(latlon[0])}_{math.floor((latlon[1]+180)%360 - 180)}'
+    return f'grid_1/{math.floor(latlon[0])}_{math.floor((latlon[1]+180)%360 - 180)}'
 
 
 def nc_to_df(nc_path, period, spi_col):
-  """Read a netcdf and parse to df."""
-  ds = xarray.open_dataset(nc_path, engine='netcdf4')
-  df = ds.to_dataframe()
-  # Remove if spi value is missing
-  df = df.dropna()
-  # By default, SPI data has a multi index of ('lat', 'lon', 'time')
-  df = df.reset_index()
-  # Rename the spi col from "spi_01" for example to spi.
-  # This is so that data for all accumulation periods have a standard SPI column
-  # for the tmcf to express.
-  df.rename(columns={spi_col: "spi"}, inplace=True)
-  df['variable'] = f"dcs:standardizedPrecipitationIndex_Atmosphere_{int(period)}MonthPeriod"
-  df['place'] = df[['lat', 'lon']].apply(to_one_degree_grid_place, axis=1)
-  df = df.drop('lat', axis=1)
-  df = df.drop('lon', axis=1)
-  return df
+    """Read a netcdf and parse to df."""
+    ds = xarray.open_dataset(nc_path, engine='netcdf4')
+    df = ds.to_dataframe()
+    # Remove if spi value is missing
+    df = df.dropna()
+    # By default, SPI data has a multi index of ('lat', 'lon', 'time')
+    df = df.reset_index()
+    # Rename the spi col from "spi_01" for example to spi.
+    # This is so that data for all accumulation periods have a standard SPI column
+    # for the tmcf to express.
+    df.rename(columns={spi_col: "spi"}, inplace=True)
+    df['variable'] = f"dcs:standardizedPrecipitationIndex_Atmosphere_{int(period)}MonthPeriod"
+    df['place'] = df[['lat', 'lon']].apply(to_one_degree_grid_place, axis=1)
+    df = df.drop('lat', axis=1)
+    df = df.drop('lon', axis=1)
+    return df
 
 
 def process_one(in_file, output_dir: Optional[str] = None, write: bool = True):
-  print("processing file:  ", in_file, " ", datetime.now().strftime("%H:%M:%S"))
-  path = Path(in_file)
-  period = int(path.stem.split('_')[-1])
-  spi_col = f"spi_{path.stem.split('_')[-1]}"
+    print("processing file:  ", in_file, " ",
+          datetime.now().strftime("%H:%M:%S"))
+    path = Path(in_file)
+    period = int(path.stem.split('_')[-1])
+    spi_col = f"spi_{path.stem.split('_')[-1]}"
 
-  output_path = os.path.join(output_dir, path.with_suffix('.csv').name)
+    output_path = os.path.join(output_dir, path.with_suffix('.csv').name)
 
-  df = nc_to_df(in_file, period, spi_col)
-  if write:
-    df.to_csv(
-        path_or_buf=output_path,
-        columns=['time', 'spi', 'variable', 'place'],
-        index=False)
-    return output_path
-  else:
-    return df
-  print("finished writing csv: ", datetime.now().strftime("%H:%M:%S"))
+    df = nc_to_df(in_file, period, spi_col)
+    if write:
+        df.to_csv(path_or_buf=output_path,
+                  columns=['time', 'spi', 'variable', 'place'],
+                  index=False)
+        return output_path
+    else:
+        return df
+    print("finished writing csv: ", datetime.now().strftime("%H:%M:%S"))
 
 
 def process_main(in_pattern, output_dir: str):
-  for file in sorted(glob.glob(in_pattern)):
-    process_one(file, output_dir)
+    for file in sorted(glob.glob(in_pattern)):
+        process_one(file, output_dir)
 
 
 def main(_):
-  process_main(FLAGS.in_pattern, FLAGS.output_dir)
+    process_main(FLAGS.in_pattern, FLAGS.output_dir)
 
 
 if __name__ == "__main__":
-  app.run(main)
+    app.run(main)

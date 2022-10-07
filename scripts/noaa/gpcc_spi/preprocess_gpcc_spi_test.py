@@ -28,30 +28,32 @@ module_dir = os.path.dirname(__file__)
 
 @dataclass
 class TestCase:
-  input: str
-  expected: str
+    input: str
+    expected: str
 
 
 class GPCCSPIPreprocessTest(unittest.TestCase):
 
-  def test_preprocess(self):
+    def test_preprocess(self):
 
-    test_cases = [
-        TestCase(
-            input=os.path.join(module_dir, 'testdata/gpcc_spi_pearson_12.nc'),
-            expected=os.path.join(module_dir,
-                                  'testdata/expected_gpcc_spi_pearson_12.csv')),
-        TestCase(
-            input=os.path.join(module_dir, 'testdata/gpcc_spi_pearson_72.nc'),
-            expected=os.path.join(module_dir,
-                                  'testdata/expected_gpcc_spi_pearson_72.csv'))
-    ]
+        test_cases = [
+            TestCase(input=os.path.join(module_dir,
+                                        'testdata/gpcc_spi_pearson_12.nc'),
+                     expected=os.path.join(
+                         module_dir,
+                         'testdata/expected_gpcc_spi_pearson_12.csv')),
+            TestCase(input=os.path.join(module_dir,
+                                        'testdata/gpcc_spi_pearson_72.nc'),
+                     expected=os.path.join(
+                         module_dir,
+                         'testdata/expected_gpcc_spi_pearson_72.csv'))
+        ]
 
-    for test_case in test_cases:
-      with tempfile.TemporaryDirectory() as tmp_dir:
-        output_path = process_one(test_case.input, tmp_dir)
-        self.assertTrue(filecmp.cmp(output_path, test_case.expected))
+        for test_case in test_cases:
+            with tempfile.TemporaryDirectory() as tmp_dir:
+                output_path = process_one(test_case.input, tmp_dir)
+                self.assertTrue(filecmp.cmp(output_path, test_case.expected))
 
 
 if __name__ == '__main__':
-  unittest.main()
+    unittest.main()

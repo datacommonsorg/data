@@ -27,26 +27,28 @@ module_dir = os.path.dirname(__file__)
 
 class GPCCSPIAggregationTest(unittest.TestCase):
 
-  def test_process_main(self):
-    with tempfile.TemporaryDirectory() as tmp_dir:
-      place_area_ratio_json_path = os.path.join(
-          module_dir, 'testdata/place_area_ratio.json')
+    def test_process_main(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            place_area_ratio_json_path = os.path.join(
+                module_dir, 'testdata/place_area_ratio.json')
 
-      in_pattern = os.path.join(module_dir,
-                                'testdata/expected_gpcc_spi_pearson*.csv')
+            in_pattern = os.path.join(
+                module_dir, 'testdata/expected_gpcc_spi_pearson*.csv')
 
-      output_paths = run_aggregates(in_pattern, tmp_dir,
-                                    place_area_ratio_json_path)
+            output_paths = run_aggregates(in_pattern, tmp_dir,
+                                          place_area_ratio_json_path)
 
-      in_12 = in_pattern.replace('*', '_12')
-      expected_12 = os.path.join(module_dir, 'testdata/expected_agg_12.csv')
+            in_12 = in_pattern.replace('*', '_12')
+            expected_12 = os.path.join(module_dir,
+                                       'testdata/expected_agg_12.csv')
 
-      self.assertTrue(filecmp.cmp(output_paths[in_12], expected_12))
+            self.assertTrue(filecmp.cmp(output_paths[in_12], expected_12))
 
-      in_72 = in_pattern.replace('*', '_72')
-      expected_72 = os.path.join(module_dir, 'testdata/expected_agg_72.csv')
-      self.assertTrue(filecmp.cmp(output_paths[in_72], expected_72))
+            in_72 = in_pattern.replace('*', '_72')
+            expected_72 = os.path.join(module_dir,
+                                       'testdata/expected_agg_72.csv')
+            self.assertTrue(filecmp.cmp(output_paths[in_72], expected_72))
 
 
 if __name__ == '__main__':
-  unittest.main()
+    unittest.main()
