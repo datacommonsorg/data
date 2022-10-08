@@ -81,8 +81,10 @@ dict_isoCode = {
 }
 
 path = "data/"
-csv_path_1 = os.path.join(os.path.dirname(__file__), "data", "6822_source_data.csv")
-csv_path_2 = os.path.join(os.path.dirname(__file__), "data", "7034_source_data.csv")
+csv_path_1 = os.path.join(os.path.dirname(__file__), "data",
+                          "6822_source_data.csv")
+csv_path_2 = os.path.join(os.path.dirname(__file__), "data",
+                          "7034_source_data.csv")
 csv_path_3 = os.path.join(os.path.dirname(__file__), "data", "LGD_District.csv")
 
 TMCF_ISOCODE = """Node: E:{dataset_name}->E0
@@ -150,6 +152,7 @@ with open(os.path.join(os.path.dirname(__file__), file_path)) as json_file:
 
 module_dir = os.path.dirname(__file__)
 
+
 class NFHSDataLoaderBase(object):
     """
     An object to clean .xls files under 'data/' folder and convert it to csv
@@ -186,7 +189,8 @@ class NFHSDataLoaderBase(object):
             for j in dict_isoCode.keys():
                 state = i.lower()
                 if i.lower() == j.lower():
-                    final_df['srcStateName'] = final_df['srcStateName'].str.replace(i, dict_isoCode[j])
+                    final_df['srcStateName'] = final_df[
+                        'srcStateName'].str.replace(i, dict_isoCode[j])
 
         for i in final_df['Year']:
             if i == '2019-20':
@@ -200,10 +204,13 @@ class NFHSDataLoaderBase(object):
             # print(i)
             for j in district_dict.keys():
                 if i.lower() == j.lower():
-                    final_df['srcDistrictName'] = final_df['srcDistrictName'].str.replace(i, str(district_dict[j]))
-        
-        final_df.rename(columns=cols_to_nodes,inplace=True)
-        final_df.to_csv(os.path.join(os.path.dirname(__file__), 'NFHS_Health.csv'), index=False)
+                    final_df['srcDistrictName'] = final_df[
+                        'srcDistrictName'].str.replace(i, str(district_dict[j]))
+
+        final_df.rename(columns=cols_to_nodes, inplace=True)
+        final_df.to_csv(os.path.join(os.path.dirname(__file__),
+                                     'NFHS_Health.csv'),
+                        index=False)
 
     def create_mcf_tmcf(self):
         """
@@ -230,9 +237,11 @@ class NFHSDataLoaderBase(object):
                                           statvar=self.cols_dict[variable]))
 
                     # Writing MCF
-                    index1 = self.cols_dict[variable].find("AsFractionOf_Count_Household")
+                    index1 = self.cols_dict[variable].find(
+                        "AsFractionOf_Count_Household")
                     index2 = self.cols_dict[variable].find("Age")
-                    desc = re.sub(r"(\w)([A-Z])", r"\1 \2", self.cols_dict[variable].replace('_', ' '))
+                    desc = re.sub(r"(\w)([A-Z])", r"\1 \2",
+                                  self.cols_dict[variable].replace('_', ' '))
                     description = re.sub('(\d+(\.\d+)?)', r' \1 ', desc)
                     age_desc = self.cols_dict[variable].split("_")
                     list = description.split(" ")
@@ -242,45 +251,44 @@ class NFHSDataLoaderBase(object):
                             age = re.sub("Age", "", age_desc[i])
                     if index1 != -1 and index2 == -1:
                         mcf.write(
-                        MCF_NODES_DENOMINATOR.format(
-                            statvar=self.cols_dict[variable],
-                            # descript=self.cols_dict[variable].replace('_', ' '),
-                            description = description))
-                            
+                            MCF_NODES_DENOMINATOR.format(
+                                statvar=self.cols_dict[variable],
+                                # descript=self.cols_dict[variable].replace('_', ' '),
+                                description=description))
+
                     elif index2 != -1 and index1 == -1:
                         mcf.write(
                             MCF_NODES_AGE.format(
                                 statvar=self.cols_dict[variable],
                                 # descript=self.cols_dict[variable].replace('_', ' '),
-                                description = description,
-                                age = age 
-                            ))
+                                description=description,
+                                age=age))
 
                     elif index1 != -1 and index2 != -1:
                         mcf.write(
                             MCF_NODES_COMMON.format(
                                 statvar=self.cols_dict[variable],
                                 # descript=self.cols_dict[variable].replace('_', ' '),
-                                description = description,
-                                age = age
-                            ))
-                            
+                                description=description,
+                                age=age))
+
                     else:
                         mcf.write(
                             MCF_NODES.format(
                                 statvar=self.cols_dict[variable],
                                 # descript=self.cols_dict[variable].replace('_', ' '),
-                                description = description))
+                                description=description))
 
                     statvars_written.append(self.cols_dict[variable])
+
 
 if __name__ == '__main__':
     dataset_name = "NFHS_Health"
     data_folder = os.path.join(module_dir, '../data/')
     loader = NFHSDataLoaderBase(data_folder=data_folder,
-                               dataset_name=dataset_name,
-                               cols_dict=cols_to_nodes,
-                               module_dir=module_dir)
+                                dataset_name=dataset_name,
+                                cols_dict=cols_to_nodes,
+                                module_dir=module_dir)
 
     loader.create_mcf_tmcf()
     loader.generate_csv()
