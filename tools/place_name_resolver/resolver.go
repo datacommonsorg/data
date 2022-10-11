@@ -28,8 +28,7 @@ var (
 const (
 	// Query limit: 50 qps
 	batchSize = 50
-	// TODO: Switch to prod
-	dcAPI = "https://autopush.recon.datacommons.org/id/resolve"
+	dcAPI = "https://api.datacommons.org/v1/recon/resolve/id"
 	dcBatchSize = 500
 )
 
