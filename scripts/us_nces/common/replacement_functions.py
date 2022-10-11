@@ -63,31 +63,45 @@ _SCHOOL_GRADE = {
     "Grades 1-8": "SchoolGrade1To8",
     "Grades 9-12": "SchoolGrade9To12",
     "1st grade": "SchoolGrade1",
+    "1st Grade": "SchoolGrade1",
     "Grade 1": "SchoolGrade1",
     "2nd grade": "SchoolGrade2",
+    "2nd Grade": "SchoolGrade2",
     "Grade 2": "SchoolGrade2",
     "3rd grade": "SchoolGrade3",
+    "3rd Grade": "SchoolGrade3",
     "Grade 3": "SchoolGrade3",
     "4th grade": "SchoolGrade4",
+    "4th Grade": "SchoolGrade4",
     "Grade 4": "SchoolGrade4",
     "5th grade": "SchoolGrade5",
+    "5th Grade": "SchoolGrade5",
     "Grade 5": "SchoolGrade5",
     "6th grade": "SchoolGrade6",
+    "6th Grade": "SchoolGrade6",
     "Grade 6": "SchoolGrade6",
     "7th grade": "SchoolGrade7",
+    "7th Grade": "SchoolGrade7",
     "Grade 7": "SchoolGrade7",
     "8th grade": "SchoolGrade8",
+    "8th Grade": "SchoolGrade8",
     "Grade 8": "SchoolGrade8",
     "9th grade": "SchoolGrade9",
+    "9th Grade": "SchoolGrade9",
     "Grade 9": "SchoolGrade9",
     "10th grade": "SchoolGrade10",
+    "10th Grade": "SchoolGrade10",
     "Grade 10": "SchoolGrade10",
     "11th grade": "SchoolGrade11",
+    "11th Grade": "SchoolGrade11",
     "Grade 11": "SchoolGrade11",
     "12th grade": "SchoolGrade12",
+    "12th Grade": "SchoolGrade12",
     "Grade 12": "SchoolGrade12",
     "13th grade": "SchoolGrade13",
+    "13th Grade": "SchoolGrade13",
     "Grade 13": "SchoolGrade13",
+    "Ungraded":"",
     "†": "",
     "–":"",
     # "All Ungraded": "",
@@ -178,18 +192,8 @@ COLUMNS = {
 
 _GENDER = {"female": "Female", "male": "Male"}
 
-_ZIP = {"†":"","–":""}
-
-_PHONE_NUMBER = {"†":"","–":""}
-
-_LOWEST_GRADE = {"†":"","–":""}
-
-_HIGHEST_GRADE = {"†":"","–":""}
-
-_LATITUDE = {"†":"","–":""}
-
-_LOCALE = {"†":"",
-            "–":""}
+_LOCALE = {"†":"","–":"",": Mid-size":": Midsize"}
+_UNREADABLE_TEXT = {"†":"","–":""}
 
 
 def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
@@ -209,20 +213,22 @@ def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
         "Gender": _GENDER,
         "Physical Address": _PHYSICAL_ADD,
         "Physical_Address": _PHYSICAL_ADD,
-        "ZIP": _ZIP,
-        "Phone Number": _PHONE_NUMBER,
-        "PhoneNumber": _PHONE_NUMBER,
-        "Agency_level":_PHONE_NUMBER,
-        "Lowest_Grade": _LOWEST_GRADE,
-        "Highest_Grade": _HIGHEST_GRADE,
-        "Latitude": _LATITUDE,
-        "Longitude": _LATITUDE,
-        "Locale": _LOCALE,
-        "School_Type":_LOCALE,
-        "State_school_ID": _LOCALE,
-        "School_level": _LOCALE,
-        "County_code": _LOCALE,
-        "Congressional Code":_LOCALE
+        "ZIP": _UNREADABLE_TEXT,
+        "Phone Number": _UNREADABLE_TEXT,
+        "PhoneNumber": _UNREADABLE_TEXT,
+        "Agency_level":_UNREADABLE_TEXT,
+        "Lowest_Grade": _SCHOOL_GRADE,
+        "Highest_Grade": _SCHOOL_GRADE,
+        "Latitude": _UNREADABLE_TEXT,
+        "Longitude": _UNREADABLE_TEXT,
+        "Locale_temp": _LOCALE,
+        "School_Type":_UNREADABLE_TEXT,
+        "State_school_ID": _UNREADABLE_TEXT,
+        "School_level": _UNREADABLE_TEXT,
+        "County_code": _UNREADABLE_TEXT,
+        "City":_UNREADABLE_TEXT,
+        "LowestGrade":_UNREADABLE_TEXT,
+        "HighestGrade":_UNREADABLE_TEXT
     }
 
     df_columns = data_df.columns.to_list()

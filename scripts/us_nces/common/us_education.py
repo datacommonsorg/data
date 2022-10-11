@@ -431,6 +431,7 @@ class USEducation:
                 index=False,header=False,mode='a')
         
         if self._import_name == "district_school":
+            df_place['year'] = self._year[0:4].strip()
             df_place = df_place.loc[:, ~df_place.columns.duplicated()]
             df_place['ContainedInPlace'] = "geoId/" + df_place['ANSI/FIPS State Code']
             df_place['geoID'] = "sch" + df_place['Agency ID - NCES Assigned']
@@ -442,7 +443,10 @@ class USEducation:
                 'ANSI/FIPS State Code':'State_code',
                 'Location Address 1':'Physical_Address',
                 'Locale':'Locale_temp',
-                'Agency Level (SY 2017-18 onward)':'Agency_level'})
+                'Location City':'City',
+                'Agency Level (SY 2017-18 onward)':'Agency_level',
+                "Lowest Grade Offered":"Lowest_Grade",
+                "Highest Grade Offered":"Highest_Grade"})
             df_place = replace_values(df_place)
             df_place['Locale_temp'] = df_place['Locale_temp'].replace(
                     to_replace={'': pd.NA})
@@ -450,6 +454,16 @@ class USEducation:
             df_place[['Locale1','Locale','Locale2']] = df_place['Locale_temp'].str.split('-', expand=True)
             df_place = df_place.drop(columns=['Locale_temp','Locale1','Locale2'])
             df_place['Locale'] = "NCES_" + df_place['Locale']
+            df_place["Locale"] = df_place["Locale"].str.replace("CityMid","CityMidsize")
+            df_place["Locale"] = df_place["Locale"].str.replace("SuburbMid","SuburbMidsize")
+            col_to_dcs = ['school_state_code','Lowest_Grade','Highest_Grade',
+            'Locale']
+            for col in col_to_dcs:
+                df_place[col] = df_place[col].replace(
+                    to_replace={'': pd.NA})
+                df_place[col] = "dcs:" + df_place[col]
+            df_place = df_place.sort_values(
+                        by=["year"],ascending=False)
             df_place.to_csv(
                 "/Users/chharish/us_nces_demographics_education/data/scripts/us_nces/demographics/district_school/output_place/us_nces_demographics_district_place.csv",
                 index=False)

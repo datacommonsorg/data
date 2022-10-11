@@ -37,8 +37,13 @@ EXCLUDE_DATA_COLUMNS = [
 ]
 
 POSSIBLE_PLACE_COLUMNS = [
-    "school_state_code",".*ZIP.*",".*County.*",".*Agency.*",
-    "Physical.*", "Phone.*",  "Coeducational", ".*Level.*",".*State.*","Latitude.*","Longitude.*","Locale.*","Location.*",".*Congress.*"
+    "school_state_code", ".*ZIP.*", ".*County.*", ".*Agency.*", "Physical.*",
+    "Phone.*", "Coeducational", ".*Level.*", ".*State.*", "Latitude.*",
+    "Longitude.*", "Locale.*", "Location.*", ".*Congress.*", "Lowest.*",
+    "Highest.*"
 ]
 
-EXCLUDE_PLACE_COLUMNS = ["State Name","Metro Micro Area Code","Location Address 2","Location Address 3"]
+EXCLUDE_PLACE_COLUMNS = [
+    "State Name", "Metro Micro Area Code", "Location Address 2",
+    "Location Address 3"
+]
