@@ -19,7 +19,7 @@ import unittest
 import os
 import tempfile
 import filecmp
-from .gpcc_spi_aggregation import run_aggregates
+from .gpcc_spi_aggregation import run_gpcc_spi_aggregation
 
 # module_dir is the path to where this test is running from.
 module_dir = os.path.dirname(__file__)
@@ -35,8 +35,8 @@ class GPCCSPIAggregationTest(unittest.TestCase):
             in_pattern = os.path.join(
                 module_dir, 'testdata/expected_gpcc_spi_pearson*.csv')
 
-            output_paths = run_aggregates(in_pattern, tmp_dir,
-                                          place_area_ratio_json_path)
+            output_paths = run_gpcc_spi_aggregation(in_pattern, tmp_dir,
+                                                    place_area_ratio_json_path)
 
             in_12 = in_pattern.replace('*', '_12')
             expected_12 = os.path.join(module_dir,

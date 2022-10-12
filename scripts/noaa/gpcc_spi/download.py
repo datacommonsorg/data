@@ -31,24 +31,36 @@ import os
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('output_dir', '/tmp/gpcc_spi', 'Output directory.')
+
 flags.DEFINE_list('periods', None, (
-    'Comma separated list of periods. A period is the duration in months for a particular SPI value.'
+    'Comma separated list of periods. '
+    'A period is the duration in months for a particular SPI value.'
     'Possible values are 1, 2, 3, 6, 9, 12, 24, 36, 48, 60, and 72, defaults to all.'
 ))
+DEFAULT_PERIODS = ['1', '3', '6', '9', '36', '72']
+
 flags.DEFINE_string('distribution', 'pearson',
                     ('Distribution fucntion used to compute the SPI.'
                      'One of (pearson, gamma). Defaults to pearson.'))
+DEFAULT_DISTRIBUTION = 'pearson'
 
 
 def download_one(url, path: str):
-    logging.info('Starting to download %s to %s' % (url, path))
+    """Download a single spi nc file."""
+    logging.info('Starting to download %s to %s', url, path)
     with urllib.request.urlopen(url) as source:
         with open(path, 'wb') as dest:
             shutil.copyfileobj(source, dest)
-    logging.info('Finished downloading: %s' % path)
+    logging.info('Finished downloading: %s', path)
 
 
-def download_all(output_dir: str, periods: List[str], distribution: str):
+def download_all(output_dir: str, distribution: str, periods: List[str]):
+    """Download spi nc files for all periods."""
+    os.makedirs(output_dir, exist_ok=True)
+
+    if not periods:
+        periods = DEFAULT_PERIODS
+
     with concurrent.futures.ThreadPoolExecutor() as executor:
         futures = []
         for period in periods:
@@ -67,12 +79,8 @@ def download_all(output_dir: str, periods: List[str], distribution: str):
 
 
 def main(_):
-    os.makedirs(FLAGS.output_dir, exist_ok=True)
-
-    periods = FLAGS.periods
-    if not periods:
-        periods = ['1', '2', '3', '6', '9', '12', '24', '36', '48', '60', '72']
-    download_all(FLAGS.output_dir, periods, FLAGS.distribution)
+    """Download all nc files."""
+    download_all(FLAGS.output_dir, FLAGS.periods, FLAGS.distribution)
 
 
 if __name__ == "__main__":

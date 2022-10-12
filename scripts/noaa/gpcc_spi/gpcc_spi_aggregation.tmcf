@@ -5,4 +5,4 @@ observationAbout: C:OneDegreeGridSPI->place
 observationDate: C:OneDegreeGridSPI->time
 typeOf: dcs:StatVarObservation
 accumulationPeriod: C:OneDegreeGridSPI->period
-measurementMethod: dcs:PearsonDistribution
+measurementMethod: dcs:dcAggregate/Pearson

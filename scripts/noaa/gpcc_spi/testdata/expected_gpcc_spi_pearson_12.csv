@@ -1,25 +1,21 @@
-time,spi,variable,place
-1988-01-01,0.6774628,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-02-01,0.7214461,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-03-01,0.36122373,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-04-01,1.1968277,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-05-01,0.5834988,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-06-01,0.77122384,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-07-01,0.7579139,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-08-01,1.0726309,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-09-01,1.2643322,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-10-01,0.98317623,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-11-01,0.3700654,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-12-01,0.2551446,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/37_-118
-1988-01-01,-1.0703964,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-02-01,-0.9358352,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-03-01,-1.3364314,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-04-01,-1.1851333,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-05-01,-1.454038,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-06-01,-1.2386547,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-07-01,-1.674136,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-08-01,-2.3123264,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-09-01,-1.4628884,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-10-01,-1.163474,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-11-01,-1.2074763,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
-1988-12-01,-1.0418444,dcs:standardizedPrecipitationIndex_Atmosphere_12MonthPeriod,grid_1/47_-111
+time,spi,variable,period,place
+1988-02-01,0.7214461,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-03-01,0.36122373,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-04-01,1.1968277,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-05-01,0.5834988,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-06-01,0.77122384,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-07-01,0.7579139,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-08-01,1.0726309,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-09-01,1.2643322,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-10-01,0.98317623,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-11-01,0.3700654,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118
+1988-02-01,-0.9358352,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
+1988-03-01,-1.3364314,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
+1988-04-01,-1.1851333,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
+1988-05-01,-1.454038,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
+1988-06-01,-1.2386547,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
+1988-07-01,-1.674136,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
+1988-08-01,-2.3123264,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
+1988-09-01,-1.4628884,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
+1988-10-01,-1.163474,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
+1988-11-01,-1.2074763,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111
