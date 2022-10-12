@@ -20,13 +20,16 @@
 
 import os
 
-from .download import download_all
-from .download import DEFAULT_DISTRIBUTION
-from .download import DEFAULT_PERIODS
+from download import download_all
+from download import DEFAULT_DISTRIBUTION
+from download import DEFAULT_PERIODS
 
-from .preprocess_gpcc_spi import preprocess_gpcc_spi
-from .gpcc_spi_aggregation import run_gpcc_spi_aggregation
-from .gpcc_spi_aggregation import DEFAULT_PLACE_AREA_RATIO_JSON_PATH
+from preprocess_gpcc_spi import preprocess_gpcc_spi
+from preprocess_gpcc_spi import DEFAULT_START_DATE
+from preprocess_gpcc_spi import DEFAULT_END_DATE
+
+from gpcc_spi_aggregation import run_gpcc_spi_aggregation
+from gpcc_spi_aggregation import DEFAULT_PLACE_AREA_RATIO_JSON_PATH
 
 from absl import flags
 from absl import app
@@ -35,8 +38,12 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string('process_dir', '/tmp/gpcc_spi', 'Directory ')
 
+flags.DEFINE_string('gpcc_spi_start_date', DEFAULT_START_DATE, 'Directory ')
 
-def run(process_dir):
+flags.DEFINE_string('gpcc_spi_end_date', DEFAULT_END_DATE, 'Directory ')
+
+
+def run(start_date, end_date, process_dir: str):
     """Runs download, preprocess, and aggregation in series."""
 
     download_dir = os.path.join(process_dir, 'download')
@@ -47,9 +54,9 @@ def run(process_dir):
 
     aggregations_dir = os.path.join(process_dir, 'aggregations')
 
-    download_all(download_dir, DEFAULT_DISTRIBUTION, DEFAULT_PERIODS)
+    # download_all(download_dir, DEFAULT_DISTRIBUTION, DEFAULT_PERIODS)
 
-    preprocess_gpcc_spi(spi_nc_file_patterns, preprocess_dir)
+    # preprocess_gpcc_spi(start_date, end_date, spi_nc_file_patterns, preprocess_dir)
 
     run_gpcc_spi_aggregation(preprocessed_csv_pattern, aggregations_dir,
                              DEFAULT_PLACE_AREA_RATIO_JSON_PATH)
@@ -57,7 +64,7 @@ def run(process_dir):
 
 def main(_):
     """Entrypoint for running all gpcc spi related."""
-    run(FLAGS.process_dir)
+    run(FLAGS.gpcc_spi_start_date, FLAGS.gpcc_spi_end_date, FLAGS.process_dir)
 
 
 if __name__ == "__main__":

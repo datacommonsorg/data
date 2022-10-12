@@ -30,7 +30,7 @@ import os
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('output_dir', '/tmp/gpcc_spi', 'Output directory.')
+flags.DEFINE_string('download_dir', '/tmp/gpcc_spi', 'Output directory.')
 
 flags.DEFINE_list('periods', None, (
     'Comma separated list of periods. '
@@ -54,9 +54,9 @@ def download_one(url, path: str):
     logging.info('Finished downloading: %s', path)
 
 
-def download_all(output_dir: str, distribution: str, periods: List[str]):
+def download_all(download_dir: str, distribution: str, periods: List[str]):
     """Download spi nc files for all periods."""
-    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(download_dir, exist_ok=True)
 
     if not periods:
         periods = DEFAULT_PERIODS
@@ -68,7 +68,7 @@ def download_all(output_dir: str, distribution: str, periods: List[str]):
                 period
             ) >= 10 else f"0{int(period)}"  # url format is '01' instead '1'
             url = f'https://www.ncei.noaa.gov/pub/data/nidis/gpcc/spi-pearson/gpcc-spi-{distribution}-{p}.nc'
-            dest = os.path.join(output_dir, f'gpcc_spi_{distribution}_{p}.nc')
+            dest = os.path.join(download_dir, f'gpcc_spi_{distribution}_{p}.nc')
             futures.append(executor.submit(download_one, url, dest))
 
         for future in concurrent.futures.as_completed(futures):
@@ -80,7 +80,7 @@ def download_all(output_dir: str, distribution: str, periods: List[str]):
 
 def main(_):
     """Download all nc files."""
-    download_all(FLAGS.output_dir, FLAGS.periods, FLAGS.distribution)
+    download_all(FLAGS.download_dir, FLAGS.periods, FLAGS.distribution)
 
 
 if __name__ == "__main__":

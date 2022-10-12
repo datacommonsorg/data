@@ -34,9 +34,10 @@ from absl import app
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('places_with_csv', 'geojson_data/places_with_geojson.csv',
+flags.DEFINE_string('gpcc_spi_places_with_csv',
+                    'geojson_data/places_with_geojson.csv',
                     'Path to places with geojson.')
-flags.DEFINE_string('output',
+flags.DEFINE_string('gpcc_spi_place_grid_ratio_output_dir',
                     'geojson_data/place_to_one_degree_grid_mapping.json',
                     'Path where the result is written to.')
 
@@ -52,7 +53,6 @@ def construct_one_degree_grid_polygons() -> List[geometry.box]:
     for lat in range(LAT_MIN, LAT_MAX):
         for lng in range(LNG_MIN, LNG_MAX):
             key = f"{lat}^{lng}"
-            north_west = (lat, lng)
             grids[key] = geometry.box(lng, lat, lng + 1, lat + 1)
     return grids
 
@@ -159,8 +159,9 @@ def create_place_to_grid_mapping(places_with_geojson: List[str],
 
 
 def main(_):
-    places_with_geojson = read_input(FLAGS.places_with_csv)
-    create_place_to_grid_mapping(places_with_geojson, FLAGS.output)
+    places_with_geojson = read_input(FLAGS.gpcc_spi_places_with_csv)
+    create_place_to_grid_mapping(places_with_geojson,
+                                 FLAGS.gpcc_spi_place_grid_ratio_output_dir)
 
 
 if __name__ == "__main__":

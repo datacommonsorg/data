@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from genericpath import exists
 import math
 import glob
 import xarray
@@ -31,14 +32,15 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))  # for recon util
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('in_pattern', '/tmp/gpcc_spi/*.nc',
+flags.DEFINE_string('gpcc_spi_input_pattern', '/tmp/gpcc_spi/*.nc',
                     'Input NetCDF4 file(s).')
-flags.DEFINE_string('output_dir', '/tmp/gpcc_spi/out',
+flags.DEFINE_string('gpcc_spi_preprocessed_dir', '/tmp/gpcc_spi/out',
                     'The directory where the output mcf will be generated in.')
-flags.DEFINE_string('start_date', '1900-01-01',
+DEFAULT_START_DATE = '1900-01-01'
+flags.DEFINE_string('start_date', DEFAULT_START_DATE,
                     'Dash separated start date. Defaults to "1900-01-01"')
-flags.DEFINE_string('end_date',
-                    datetime.today().strftime('%Y-%m-%d'),
+DEFAULT_END_DATE = datetime.today().strftime('%Y-%m-%d')
+flags.DEFINE_string('end_date', DEFAULT_END_DATE,
                     'Dash separated start date. Defaults to the running date.')
 
 
@@ -77,7 +79,7 @@ def nc_to_df(nc_path, period, spi_col, start_date, end_date):
 def preprocess_one(start_date,
                    end_date,
                    in_file: str,
-                   output_dir: Optional[str] = None,
+                   preprocessed_dir: Optional[str] = None,
                    write: bool = True):
     """Create a single csv file from a single input nc file."""
     logging.info('processing file:  %s: %s', in_file,
@@ -90,7 +92,7 @@ def preprocess_one(start_date,
     if not write:
         return df
 
-    output_path = os.path.join(output_dir, path.with_suffix('.csv').name)
+    output_path = os.path.join(preprocessed_dir, path.with_suffix('.csv').name)
     df.to_csv(path_or_buf=output_path,
               columns=['time', 'spi', 'variable', 'period', 'place'],
               index=False,
@@ -100,16 +102,20 @@ def preprocess_one(start_date,
     return output_path
 
 
-def preprocess_gpcc_spi(start_date, end_date, in_pattern, output_dir: str):
+def preprocess_gpcc_spi(start_date, end_date, in_pattern,
+                        preprocessed_dir: str):
     """Run preprocess for all input patterns."""
+    os.makedirs(preprocessed_dir, exist_ok=True)
+
     for file in sorted(glob.glob(in_pattern)):
-        preprocess_one(start_date, end_date, file, output_dir)
+        preprocess_one(start_date, end_date, file, preprocessed_dir)
 
 
 def main(_):
     """Run pre-preocess spis with flags."""
-    preprocess_gpcc_spi(FLAGS.start_date, FLAGS.end_date, FLAGS.in_pattern,
-                        FLAGS.output_dir)
+    preprocess_gpcc_spi(FLAGS.start_date, FLAGS.end_date,
+                        FLAGS.gpcc_spi_input_pattern,
+                        FLAGS.gpcc_spi_preprocessed_dir)
 
 
 if __name__ == "__main__":
