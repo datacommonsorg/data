@@ -1,0 +1,116 @@
+Node: E:USA_Population_Count_by_Race->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_WhiteAlone
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_WhiteAlone
+
+Node: E:USA_Population_Count_by_Race->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_BlackOrAfricanAmericanAlone
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_BlackOrAfricanAmericanAlone
+
+Node: E:USA_Population_Count_by_Race->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_AmericanIndianAndAlaskaNativeAlone
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_AmericanIndianAndAlaskaNativeAlone
+
+Node: E:USA_Population_Count_by_Race->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_AsianAlone
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_AsianAlone
+
+Node: E:USA_Population_Count_by_Race->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_NativeHawaiianAndOtherPacificIslanderAlone
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_NativeHawaiianAndOtherPacificIslanderAlone
+
+Node: E:USA_Population_Count_by_Race->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: E:USA_Population_Count_by_Race->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: E:USA_Population_Count_by_Race->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: E:USA_Population_Count_by_Race->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: E:USA_Population_Count_by_Race->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: E:USA_Population_Count_by_Race->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_AsianOrPacificIslander
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_AsianOrPacificIslander
+
+Node: E:USA_Population_Count_by_Race->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_TwoOrMoreRaces
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_TwoOrMoreRaces
+
+Node: E:USA_Population_Count_by_Race->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_NonWhite
+measurementMethod: dcs:CensusPEPSurvey_Race2000Onwards
+observationAbout: C:USA_Population_Count_by_Race->geo_ID
+observationDate: C:USA_Population_Count_by_Race->Year
+observationPeriod: "P1Y"
+value: C:USA_Population_Count_by_Race->Count_Person_NonWhite

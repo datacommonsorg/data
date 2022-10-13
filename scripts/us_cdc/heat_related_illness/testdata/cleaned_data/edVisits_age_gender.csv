@@ -1,0 +1,141 @@
+Year,State,Data Value,Age Group,Gender
+2005,California,55,0 TO 4,Male
+2005,California,42,0 TO 4,Female
+2005,California,141,5 TO 14,Male
+2005,California,123,5 TO 14,Female
+2005,California,777,15 TO 34,Male
+2005,California,353,15 TO 34,Female
+2005,California,894,35 TO 64,Male
+2005,California,443,35 TO 64,Female
+2005,California,282,>= 65,Male
+2005,California,249,>= 65,Female
+2006,California,88,0 TO 4,Male
+2006,California,65,0 TO 4,Female
+2006,California,171,5 TO 14,Male
+2006,California,138,5 TO 14,Female
+2006,California,"1,096",15 TO 34,Male
+2006,California,595,15 TO 34,Female
+2006,California,"1,487",35 TO 64,Male
+2006,California,794,35 TO 64,Female
+2006,California,559,>= 65,Male
+2006,California,662,>= 65,Female
+2007,California,58,0 TO 4,Male
+2007,California,51,0 TO 4,Female
+2007,California,159,5 TO 14,Male
+2007,California,130,5 TO 14,Female
+2007,California,796,15 TO 34,Male
+2007,California,385,15 TO 34,Female
+2007,California,969,35 TO 64,Male
+2007,California,494,35 TO 64,Female
+2007,California,320,>= 65,Male
+2007,California,346,>= 65,Female
+2008,California,83,0 TO 4,Male
+2008,California,54,0 TO 4,Female
+2008,California,187,5 TO 14,Male
+2008,California,171,5 TO 14,Female
+2008,California,902,15 TO 34,Male
+2008,California,491,15 TO 34,Female
+2008,California,"1,095",35 TO 64,Male
+2008,California,562,35 TO 64,Female
+2008,California,397,>= 65,Male
+2008,California,376,>= 65,Female
+2009,California,53,0 TO 4,Male
+2009,California,59,0 TO 4,Female
+2009,California,210,5 TO 14,Male
+2009,California,154,5 TO 14,Female
+2009,California,831,15 TO 34,Male
+2009,California,427,15 TO 34,Female
+2009,California,"1,077",35 TO 64,Male
+2009,California,581,35 TO 64,Female
+2009,California,368,>= 65,Male
+2009,California,312,>= 65,Female
+2010,California,63,0 TO 4,Male
+2010,California,51,0 TO 4,Female
+2010,California,195,5 TO 14,Male
+2010,California,128,5 TO 14,Female
+2010,California,754,15 TO 34,Male
+2010,California,407,15 TO 34,Female
+2010,California,872,35 TO 64,Male
+2010,California,453,35 TO 64,Female
+2010,California,379,>= 65,Male
+2010,California,301,>= 65,Female
+2011,California,59,0 TO 4,Male
+2011,California,45,0 TO 4,Female
+2011,California,191,5 TO 14,Male
+2011,California,146,5 TO 14,Female
+2011,California,854,15 TO 34,Male
+2011,California,494,15 TO 34,Female
+2011,California,960,35 TO 64,Male
+2011,California,535,35 TO 64,Female
+2011,California,303,>= 65,Male
+2011,California,274,>= 65,Female
+2012,California,75,0 TO 4,Male
+2012,California,74,0 TO 4,Female
+2012,California,222,5 TO 14,Male
+2012,California,192,5 TO 14,Female
+2012,California,"1,050",15 TO 34,Male
+2012,California,544,15 TO 34,Female
+2012,California,"1,248",35 TO 64,Male
+2012,California,672,35 TO 64,Female
+2012,California,473,>= 65,Male
+2012,California,409,>= 65,Female
+2013,California,80,0 TO 4,Male
+2013,California,71,0 TO 4,Female
+2013,California,204,5 TO 14,Male
+2013,California,204,5 TO 14,Female
+2013,California,"1,018",15 TO 34,Male
+2013,California,597,15 TO 34,Female
+2013,California,"1,272",35 TO 64,Male
+2013,California,759,35 TO 64,Female
+2013,California,465,>= 65,Male
+2013,California,426,>= 65,Female
+2014,California,80,0 TO 4,Male
+2014,California,73,0 TO 4,Female
+2014,California,237,5 TO 14,Male
+2014,California,200,5 TO 14,Female
+2014,California,"1,045",15 TO 34,Male
+2014,California,557,15 TO 34,Female
+2014,California,"1,332",35 TO 64,Male
+2014,California,693,35 TO 64,Female
+2014,California,479,>= 65,Male
+2014,California,396,>= 65,Female
+2015,California,75,0 TO 4,Male
+2015,California,84,0 TO 4,Female
+2015,California,214,5 TO 14,Male
+2015,California,146,5 TO 14,Female
+2015,California,"1,150",15 TO 34,Male
+2015,California,607,15 TO 34,Female
+2015,California,"1,378",35 TO 64,Male
+2015,California,713,35 TO 64,Female
+2015,California,508,>= 65,Male
+2015,California,434,>= 65,Female
+2016,California,58,0 TO 4,Male
+2016,California,28,0 TO 4,Female
+2016,California,189,5 TO 14,Male
+2016,California,151,5 TO 14,Female
+2016,California,"1,159",15 TO 34,Male
+2016,California,558,15 TO 34,Female
+2016,California,"1,388",35 TO 64,Male
+2016,California,753,35 TO 64,Female
+2016,California,613,>= 65,Male
+2016,California,477,>= 65,Female
+2017,California,67,0 TO 4,Male
+2017,California,61,0 TO 4,Female
+2017,California,293,5 TO 14,Male
+2017,California,226,5 TO 14,Female
+2017,California,"1,563",15 TO 34,Male
+2017,California,850,15 TO 34,Female
+2017,California,"2,023",35 TO 64,Male
+2017,California,"1,151",35 TO 64,Female
+2017,California,"1,011",>= 65,Male
+2017,California,842,>= 65,Female
+2018,California,61,0 TO 4,Male
+2018,California,33,0 TO 4,Female
+2018,California,207,5 TO 14,Male
+2018,California,146,5 TO 14,Female
+2018,California,"1,289",15 TO 34,Male
+2018,California,547,15 TO 34,Female
+2018,California,"1,677",35 TO 64,Male
+2018,California,857,35 TO 64,Female
+2018,California,805,>= 65,Male
+2018,California,653,>= 65,Female

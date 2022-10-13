@@ -19,7 +19,6 @@ import io
 import sys
 import logging
 import json
-import re
 import csv
 from zipfile import ZipFile
 from collections import OrderedDict
@@ -55,7 +54,7 @@ _JSON_KEYS = [
 
 
 # TODO: Extend support to csv file and input directory
-# TODO - add typing hints and document the format of inputs
+# TODO: add typing hints and document the format of inputs
 def process_zip_file(zip_file_path,
                      spec_path,
                      write_output=True,

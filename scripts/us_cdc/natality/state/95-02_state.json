@@ -1,0 +1,105 @@
+{
+    "year_range": "95-20",
+    "data_cols": [
+        "Births"
+    ],
+    "cprop_cols": [],
+    "geo": {
+        "col": "State",
+        "type": "State"
+    },
+    "populationType": {
+        "Births": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "count",
+            "statType": "measuredValue",
+            "medicalStatus": "LiveBirth",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "filename": {
+        "MRace": {
+            "All": {},
+            "1002-5": {
+                "mothersRace": "AmericanIndianOrAlaskaNativeAlone"
+            },
+            "2054-5": {
+                "mothersRace": "BlackOrAfricanAmericanAlone"
+            },
+            "2034-7": {
+                "mothersRace": "Chinese"
+            },
+            "2036-2": {
+                "mothersRace": "Filipino"
+            },
+            "2076-8": {
+                "mothersRace": "NativeHawaiian"
+            },
+            "2039-6": {
+                "mothersRace": "Japanese"
+            },
+            "2028-9": {
+                "mothersRace": "OtherAsian"
+            },
+            "2106-3": {
+                "mothersRace": "WhiteAlone"
+            }
+        },
+        "MAge": {
+            "15": {
+                "mothersAge": "[- 14 Years]"
+            },
+            "All": {},
+            "15-19": {
+                "mothersAge": "[15 19 Years]"
+            },
+            "20-24": {
+                "mothersAge": "[20 24 Years]"
+            },
+            "25-29": {
+                "mothersAge": "[25 29 Years]"
+            },
+            "30-34": {
+                "mothersAge": "[30 34 Years]"
+            },
+            "35-39": {
+                "mothersAge": "[35 39 Years]"
+            },
+            "40-44": {
+                "mothersAge": "[40 44 Years]"
+            },
+            "45-49": {
+                "mothersAge": "[45 49 Years]"
+            },
+            "50+": {
+                "mothersAge": "[50 - Years]"
+            }
+        }
+    },
+    "comment": {
+        "1002-5": {
+            "mothersRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "2054-5": {
+            "mothersRace": "BlackOrAfricanAmericanAlone"
+        },
+        "2034-7": {
+            "mothersRace": "Chinese"
+        },
+        "2036-2": {
+            "mothersRace": "Filipino"
+        },
+        "2076-8": {
+            "mothersRace": "NativeHawaiian"
+        },
+        "2039-6": {
+            "mothersRace": "Japanese"
+        },
+        "2028-9": {
+            "mothersRace": "OtherAsian"
+        },
+        "2106-3": {
+            "mothersRace": "WhiteAlone"
+        }
+    }
+}

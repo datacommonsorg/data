@@ -7,6 +7,27 @@ Average wage/salary earnings (Rs. 0.00) during the preceding calendar month from
 
 ### Download Data
 
+#### PLFS July 2020 - Jun 2021
+Wage data from PLES July 2020 - Jun 2021 is available as embedded tables inside the [PDF](https://dge.gov.in/dge/sites/default/files/Anual%20report/Annual%20Report%20PLFS%202020-21.pdf). Standard table format.
+
+```
+wget https://dge.gov.in/dge/sites/default/files/Anual%20report/Annual%20Report%20PLFS%202020-21.pdf -O Annual_Report_PLFS_2020-21.pdf
+```
+
+* Page 387 has the data for July-Sep 2020
+* Page 388 has the data for Oct-Dec 2020
+* Page 389 has the data for Jan-Mar2021
+* Page 390 has the data for Apr-Jun 2021
+
+Extracted as XLSX using [tabula](https://github.com/tabulapdf/tabula) by running the command
+
+```
+java -jar tabula-java.jar --lattice -a 14.207,102.083,567.77,693.532 -p 387 Annual_Report_PLFS_2020-21.pdf -o Table_42_07_09_2020.csv
+java -jar tabula-java.jar --lattice  -a 14.207,102.083,567.77,693.532 -p 388 Annual_Report_PLFS_2020-21.pdf -o Table_42_10_12_2020.csv
+java -jar tabula-java.jar --lattice -a 14.207,102.083,567.77,693.532 -p 389 Annual_Report_PLFS_2020-21.pdf -o Table_42_01_03_2021.csv
+java -jar tabula-java.jar --lattice -a 14.207,102.083,567.77,693.532 -p 390 Annual_Report_PLFS_2020-21.pdf -o Table_42_04_06_2021.csv
+```
+
 #### PLES July 2019 - Jun 2020
 Wage data from PLES July 2019 - Jun 2020 is available as embedded tables inside the  [PDF](http://mospi.nic.in/sites/default/files/publication_reports/Annual_Report_PLFS_2019_20.pdf). Standard table format.
 

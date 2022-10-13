@@ -247,6 +247,24 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'victimType': {
         'prepend': 'VictimType'
+    },
+    'mothersRace': {
+        'prepend': 'Mother'
+    },
+    'mothersEthnicity': {
+        'prepend': 'Mother'
+    },
+    'mothersNativity': {
+        'prepend': 'Mother'
+    },
+    'mothersMaritalStatus': {
+        'prepend': 'Mother'
+    },
+    'mothersAge': {
+        'prepend': 'Mother'
+    },
+    'mothersEducation': {
+        'prepend': 'Mother'
     }
 }
 

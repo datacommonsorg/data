@@ -264,7 +264,7 @@ Save a copy of the generated spec if it is modified. Running the script again wi
 
 Check the missing_report.json file for list of columns that need attention
 
-The script creates a 'compiled spec' which contains everythin from all the specs present in the spec_dir
+The script creates a 'compiled spec' which contains everything from all the specs present in the spec_dir
 
 It then proceeds to split 'compiled spec' in 2 parts:
 - keeping the parts where token match occours
@@ -274,7 +274,7 @@ It then proceeds to split 'compiled spec' in 2 parts:
 
 To generate a guess spec:
 ```
-python acs_spec_compiler.py --guess_new_spec --zip_list=../sample_data/s1810.zip
+python acs_spec_generator.py --guess_new_spec --zip_list=../sample_data/s1810.zip
 ```
 NOTE: This command creates following important files to lookout for:
 - generate_spec.json: This is the guessed spec for the input file
@@ -284,27 +284,29 @@ NOTE: This command creates following important files to lookout for:
 - union_spec.json: This is the union of all the 
 - discarded_spec_parts.json: This contains parts of the union spec that were not used in the output spec
 
+NOTE: acs_spec_generator.py caches properties and types under `data/scripts/us_census/acs5yr/subject_tables/common/datacommons_api_wrappers/prefetched_outputs`. As new properties and enums are constantly added into DC, this needs to be refreshed regularly. This can be done by deleting the prefetch folder. Once this is done, the script will automatically make calls to the DC REST API and refresh the files during the next guess spec run.
+
 To generate a guess spec with expected properties or population types:
 ```
-python acs_spec_compiler.py --guess_new_spec --zip_list=../sample_data/s1810.zip --expected_populations=Person,Household --expected_properties=occupancyTenure
+python acs_spec_generator.py --guess_new_spec --zip_list=../sample_data/s1810.zip --expected_populations=Person,Household --expected_properties=occupancyTenure
 ```
 This will look for properties on DataCommons API and add placeholders for available enum values
 
 
 To create a union of all specs:
 ```
-python acs_spec_compiler.py --create_union_spec
+python acs_spec_generator.py --create_union_spec
 ```
 NOTE: The output is also stored in file 'union_spec.json'
 
 If the specs are present in some other directory:
 ```
-python acs_spec_compiler.py --create_union_spec --spec_dir=<path to dir>
+python acs_spec_generator.py --create_union_spec --spec_dir=<path to dir>
 ```
 
 To get a list of properties available in the union of all specs:
 ```
-python acs_spec_compiler.py --get_combined_property_list
+python acs_spec_generator.py --get_combined_property_list
 ```
 Other available flags from common_utils:
 - is_metadata

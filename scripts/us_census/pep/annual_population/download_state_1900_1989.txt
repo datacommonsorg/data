@@ -1,0 +1,9 @@
+st0009ts.txt
+st1019ts.txt
+st2029ts.txt
+st3039ts.txt
+st4049ts.txt
+st5060ts.txt
+st6070ts.txt
+st7080ts.txt
+st8090ts.txt
