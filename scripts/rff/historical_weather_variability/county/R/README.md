@@ -10,10 +10,18 @@ take several days to complete on RFF server.
 This will need the following two sets of source data from PRISM:
 
 * PRISM daily tmin, to be extracted under
-  `rff/raw_data/prism/daily/4km/src/tmin`
+  `rff/raw_data/prism/daily/4km/src/tmin`. Daily minimum temperature data from
+  PRISM can be downloaded from https://prism.oregonstate.edu/recent/ for the
+  years 1981 to present.
+  *  Select "minimum temperature" under the Climate variable heading and "daily
+     data" under the Temporal period heading. You can then download one full
+     year of daily values at a time using the "Download All Data for Year
+     (.bil)" button.
+
 * PRISM monthly tmin, tmax, and ppt to be extracted under
-  `rff/raw_data/prism/monthly`
-
-TODO: Add license
-
-TODO: Find pointers for the above datasets
+  `rff/raw_data/prism/monthly`.  Monthly PRISM data can be downloaded from
+  https://prism.oregonstate.edu/recent/ for the years 1981 to present.
+  *  Select the climate variable (precipitation, minimum temperature, or maximum
+     temperature) and then choose "monthly data" under the Temporal period
+     heading.  You can download all monthly values for the 40-year time period
+     at once using the "Download All Data for All Years (.bil)" button.
