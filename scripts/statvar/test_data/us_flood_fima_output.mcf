@@ -1,0 +1,150 @@
+Node: dcid:Annual_InsuranceAmountPaid_CivicStructure_Flood_FloodZoneAE_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:insuranceAmountPaid
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneAE
+insuranceClaimType: dcs:BuildingClaim
+disasterType: dcid:Flood
+
+Node: dcid:Annual_InsuranceAmountPaid_CivicStructure_Flood_FloodZoneAE_ContentsClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:insuranceAmountPaid
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneAE
+insuranceClaimType: dcs:ContentsClaim
+disasterType: dcid:Flood
+
+Node: dcid:Annual_Count_CivicStructure_Flood_FloodZoneAE_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:count
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneAE
+disasterType: dcid:Flood
+insuranceClaimType: dcs:BuildingClaim
+
+Node: dcid:Annual_Count_CivicStructure_Flood_FloodZoneX_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:count
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneX
+disasterType: dcid:Flood
+insuranceClaimType: dcs:BuildingClaim
+
+Node: dcid:Annual_InsuranceAmountPaid_CivicStructure_Flood_FloodZoneA_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:insuranceAmountPaid
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneA
+insuranceClaimType: dcs:BuildingClaim
+disasterType: dcid:Flood
+
+Node: dcid:Annual_Count_CivicStructure_Flood_FloodZoneA_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:count
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneA
+disasterType: dcid:Flood
+insuranceClaimType: dcs:BuildingClaim
+
+Node: dcid:Annual_Count_CivicStructure_Flood_FloodZoneAHB_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:count
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneAHB
+disasterType: dcid:Flood
+insuranceClaimType: dcs:BuildingClaim
+
+Node: dcid:Annual_InsuranceAmountPaid_CivicStructure_Flood_FloodZoneX_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:insuranceAmountPaid
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneX
+insuranceClaimType: dcs:BuildingClaim
+disasterType: dcid:Flood
+
+Node: dcid:Annual_InsuranceAmountPaid_CivicStructure_Flood_FloodZoneA02_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:insuranceAmountPaid
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneA02
+insuranceClaimType: dcs:BuildingClaim
+disasterType: dcid:Flood
+
+Node: dcid:Annual_InsuranceAmountPaid_CivicStructure_Flood_FloodZoneA02_ContentsClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:insuranceAmountPaid
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneA02
+insuranceClaimType: dcs:ContentsClaim
+disasterType: dcid:Flood
+
+Node: dcid:Annual_Count_CivicStructure_Flood_FloodZoneA02_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:count
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneA02
+disasterType: dcid:Flood
+insuranceClaimType: dcs:BuildingClaim
+
+Node: dcid:Annual_InsuranceAmountPaid_CivicStructure_Flood_FloodZoneAOB_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:insuranceAmountPaid
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneAOB
+insuranceClaimType: dcs:BuildingClaim
+disasterType: dcid:Flood
+
+Node: dcid:Annual_Count_CivicStructure_Flood_FloodZoneAOB_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:count
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneAOB
+disasterType: dcid:Flood
+insuranceClaimType: dcs:BuildingClaim
+
+Node: dcid:Annual_Count_CivicStructure_Flood_FloodZoneA06_BuildingClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:count
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneA06
+disasterType: dcid:Flood
+insuranceClaimType: dcs:BuildingClaim
+
+Node: dcid:Annual_InsuranceAmountPaid_CivicStructure_Flood_FloodZoneX_ContentsClaim
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+measuredProperty: dcs:insuranceAmountPaid
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+floodZoneType: dcid:FloodZoneX
+insuranceClaimType: dcs:ContentsClaim
+disasterType: dcid:Flood
+

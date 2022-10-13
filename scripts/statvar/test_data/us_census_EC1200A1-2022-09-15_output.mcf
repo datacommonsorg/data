@@ -1,0 +1,1207 @@
+Node: dcid:Count_USCEstablishment_NAICS/21
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/21
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/21
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/21
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/21
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/21
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/21
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/21
+
+Node: dcid:Count_USCEstablishment_NAICS/22
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/22
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/22
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/22
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/22
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/22
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/22
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/22
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/22
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/22
+
+Node: dcid:Count_USCEstablishment_NAICS/23
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/23
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/23
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/23
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/23
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/23
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/23
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/23
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/23
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/23
+
+Node: dcid:ReceiptsOrRevenue_USCEstablishment_NAICS/23
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+statType: dcs:measuredValue
+naics: dcs:NAICS/23
+
+Node: dcid:Annual_MarginOfError_Payroll_USCEstablishment_NAICS/23
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:marginOfError
+naics: dcs:NAICS/23
+
+Node: dcid:Quarterly_MarginOfError_Payroll_USCEstablishment_NAICS/23
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:marginOfError
+naics: dcs:NAICS/23
+
+Node: dcid:Count_USCEstablishment_NAICS/31_33
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/31-33
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/31_33
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/31-33
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/31_33
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/31-33
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/31_33
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/31-33
+
+Node: dcid:Count_USCEstablishment_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+
+Node: dcid:Count_USCEstablishment_MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices
+
+Node: dcid:Annual_Payroll_USCEstablishment_MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices
+
+Node: dcid:NumberOfEmployees_USCEstablishment_MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:MerchantWholesalersExcludingManufacturerSalesBranchesAndOffices
+
+Node: dcid:Count_USCEstablishment_ManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:ManufacturerSalesBranchesAndOffices
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_ManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:ManufacturerSalesBranchesAndOffices
+
+Node: dcid:Annual_Payroll_USCEstablishment_ManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:ManufacturerSalesBranchesAndOffices
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_ManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:ManufacturerSalesBranchesAndOffices
+
+Node: dcid:NumberOfEmployees_USCEstablishment_ManufacturerSalesBranchesAndOffices_NAICS/42
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/42
+businessOperationType: dcs:ManufacturerSalesBranchesAndOffices
+
+Node: dcid:Count_USCEstablishment_NAICS/44_45
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/44-45
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/44_45
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/44-45
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/44_45
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/44-45
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/44_45
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/44-45
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/44_45
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/44-45
+
+Node: dcid:Count_USCEstablishment_NAICS/48_49__104_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/48-49 (104)
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/48_49__104_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/48-49 (104)
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/48_49__104_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/48-49 (104)
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/48_49__104_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/48-49 (104)
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/48_49__104_
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/48-49 (104)
+
+Node: dcid:Count_USCEstablishment_NAICS/51
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/51
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/51
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/51
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/51
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/51
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/51
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/51
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/51
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/51
+
+Node: dcid:Count_USCEstablishment_NAICS/52
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/52
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/52
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/52
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/52
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/52
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/52
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/52
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/52
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/52
+
+Node: dcid:Count_USCEstablishment_NAICS/53
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/53
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/53
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/53
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/53
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/53
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/53
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/53
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/53
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/53
+
+Node: dcid:Count_USCEstablishment_NAICS/54
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/54
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/54
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/54
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/54
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+
+Node: dcid:Count_USCEstablishment_NAICS/54_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/54_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/54_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/54_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/54_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Count_USCEstablishment_NAICS/54_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/54_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/54_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/54_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/54_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/54
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Count_USCEstablishment_NAICS/55
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/55
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/55
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/55
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/55
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/55
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/55
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/55
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/55
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/55
+
+Node: dcid:Count_USCEstablishment_NAICS/56
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/56
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/56
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/56
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/56
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/56
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/56
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/56
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/56
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/56
+
+Node: dcid:Count_USCEstablishment_NAICS/61
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/61
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/61
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/61
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/61
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+
+Node: dcid:Count_USCEstablishment_NAICS/61_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/61_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/61_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/61_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/61_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Count_USCEstablishment_NAICS/61_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/61_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/61_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/61_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/61_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/61
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Count_USCEstablishment_NAICS/62
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/62
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/62
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/62
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/62
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+
+Node: dcid:Count_USCEstablishment_NAICS/62_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/62_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/62_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/62_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/62_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Count_USCEstablishment_NAICS/62_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/62_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/62_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/62_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/62_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/62
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Count_USCEstablishment_NAICS/71
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/71
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/71
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/71
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/71
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+
+Node: dcid:Count_USCEstablishment_NAICS/71_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/71_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/71_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/71_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/71_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Count_USCEstablishment_NAICS/71_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/71_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/71_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/71_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/71_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/71
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Count_USCEstablishment_NAICS/72
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/72
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/72
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/72
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/72
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/72
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/72
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/72
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/72
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/72
+
+Node: dcid:Count_USCEstablishment_NAICS/81
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/81
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/81
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/81
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/81
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+
+Node: dcid:Count_USCEstablishment_NAICS/81_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/81_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/81_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/81_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/81_SubjectToFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:SubjectToFederalIncomeTax
+
+Node: dcid:Count_USCEstablishment_NAICS/81_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_ReceiptsOrRevenue_USCEstablishment_NAICS/81_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:receiptsOrRevenue
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Annual_Payroll_USCEstablishment_NAICS/81_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:Quarterly_Payroll_USCEstablishment_NAICS/81_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:payroll
+measurementQualifier: dcs:Quarterly
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
+Node: dcid:NumberOfEmployees_USCEstablishment_NAICS/81_ExemptFromFederalIncomeTax
+typeOf: dcs:StatisticalVariable
+populationType: dcs:USCEstablishment
+measuredProperty: dcs:numberOfEmployees
+statType: dcs:measuredValue
+naics: dcs:NAICS/81
+taxStatus: dcs:ExemptFromFederalIncomeTax
+
