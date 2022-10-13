@@ -25,3 +25,9 @@ This will need the following two sets of source data from PRISM:
      temperature) and then choose "monthly data" under the Temporal period
      heading.  You can download all monthly values for the 40-year time period
      at once using the "Download All Data for All Years (.bil)" button.
+
+Terms of Use:
+* When using these data, please clearly and prominently state the PRISM Climate
+  Group and their URL.
+* According to PRISM’s terms of use, these data may be freely reproduced and
+  distributed for non-commercial purposes only.
