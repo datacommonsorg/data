@@ -1,0 +1,61 @@
+Node: dcid:Count_Person_PersonAge_25_30_RaceCode_WH
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcid:Count_Person_PersonAge_25_30_RaceCode_WH
+statType: dcs:measuredValue
+# PersonAge: 25-30
+# RaceCode: WH
+# measuredProperty:dcs:count
+
+Node: dcid:Count_Person_Fraction_PersonAge_25_30_RaceCode_WH
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcid:Count_Person_Fraction_PersonAge_25_30_RaceCode_WH
+statType: dcs:measuredValue
+# PersonAge: 25-30
+# RaceCode: WH
+# Fraction: Fraction
+# measuredProperty:dcs:count
+
+Node: dcid:Count_Person_Male_PersonAge_25_30_RaceCode_A_PI
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcid:Count_Person_Male_PersonAge_25_30_RaceCode_A_PI
+statType: dcs:measuredValue
+gender: dcs:Male
+# PersonAge: 25-30
+# RaceCode: A-PI
+# measuredProperty:dcs:count
+
+Node: dcid:Count_Person_Fraction_Male_PersonAge_25_30_RaceCode_A_PI
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcid:Count_Person_Fraction_Male_PersonAge_25_30_RaceCode_A_PI
+statType: dcs:measuredValue
+gender: dcs:Male
+# PersonAge: 25-30
+# RaceCode: A-PI
+# Fraction: Fraction
+# measuredProperty:dcs:count
+
+Node: dcid:Count_Person_Female_PersonAge_30_35_RaceCode_WH
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcid:Count_Person_Female_PersonAge_30_35_RaceCode_WH
+statType: dcs:measuredValue
+gender: dcs:Female
+# PersonAge: 30-35
+# RaceCode: WH
+# measuredProperty:dcs:count
+
+Node: dcid:Count_Person_Fraction_Female_PersonAge_30_35_RaceCode_WH
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcid:Count_Person_Fraction_Female_PersonAge_30_35_RaceCode_WH
+statType: dcs:measuredValue
+gender: dcs:Female
+# PersonAge: 30-35
+# RaceCode: WH
+# Fraction: Fraction
+# measuredProperty:dcs:count
+
