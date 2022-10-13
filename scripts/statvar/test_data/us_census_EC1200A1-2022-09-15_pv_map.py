@@ -13,9 +13,8 @@
 
     # Column: 2012 NAICS code (NAICS2012)",
     "2012 NAICS code (NAICS2012)": {
-        "naics": "dcs:NAICS/{Data}",
-        #"#Regex": "(?P<NaicsCode>[0-9])",
-        #"#Regex": "(?P<NaicsCode>[0-9]+-[0-9]+)",
+        "naics": "dcs:NAICS/{NaicsCode}",
+        "#Regex": "(?P<NaicsCode>^[0-9]+)",
     },
     "Year (YEAR)": {
         "observationDate": "{@Number}",

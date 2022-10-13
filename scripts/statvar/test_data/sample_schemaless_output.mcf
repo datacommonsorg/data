@@ -1,61 +1,61 @@
-Node: dcid:Count_Person_PersonAge_25_30_RaceCode_WH
+Node: dcid:CountPerson25-30WH_Person_Count_25-30_WH
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measuredProperty: dcid:Count_Person_PersonAge_25_30_RaceCode_WH
+measuredProperty: dcid:Count_Person_25-30_WH
 statType: dcs:measuredValue
 # PersonAge: 25-30
 # RaceCode: WH
 # measuredProperty:dcs:count
 
-Node: dcid:Count_Person_Fraction_PersonAge_25_30_RaceCode_WH
+Node: dcid:CountPersonFraction25-30WH_Person_Fraction_Count_25-30_WH
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measuredProperty: dcid:Count_Person_Fraction_PersonAge_25_30_RaceCode_WH
+measuredProperty: dcid:Count_Person_Fraction_25-30_WH
 statType: dcs:measuredValue
-# PersonAge: 25-30
-# RaceCode: WH
 # Fraction: Fraction
+# PersonAge: 25-30
+# RaceCode: WH
 # measuredProperty:dcs:count
 
-Node: dcid:Count_Person_Male_PersonAge_25_30_RaceCode_A_PI
+Node: dcid:CountPersonMale25-30A-PI_Person_Count_25-30_A-PI_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measuredProperty: dcid:Count_Person_Male_PersonAge_25_30_RaceCode_A_PI
+measuredProperty: dcid:Count_Person_Male_25-30_A-PI
 statType: dcs:measuredValue
 gender: dcs:Male
 # PersonAge: 25-30
 # RaceCode: A-PI
 # measuredProperty:dcs:count
 
-Node: dcid:Count_Person_Fraction_Male_PersonAge_25_30_RaceCode_A_PI
+Node: dcid:CountPersonFractionMale25-30A-PI_Person_Fraction_Count_25-30_A-PI_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measuredProperty: dcid:Count_Person_Fraction_Male_PersonAge_25_30_RaceCode_A_PI
+measuredProperty: dcid:Count_Person_Fraction_Male_25-30_A-PI
 statType: dcs:measuredValue
 gender: dcs:Male
+# Fraction: Fraction
 # PersonAge: 25-30
 # RaceCode: A-PI
-# Fraction: Fraction
 # measuredProperty:dcs:count
 
-Node: dcid:Count_Person_Female_PersonAge_30_35_RaceCode_WH
+Node: dcid:CountPersonFemale30-35WH_Person_Count_30-35_WH_Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measuredProperty: dcid:Count_Person_Female_PersonAge_30_35_RaceCode_WH
+measuredProperty: dcid:Count_Person_Female_30-35_WH
 statType: dcs:measuredValue
 gender: dcs:Female
 # PersonAge: 30-35
 # RaceCode: WH
 # measuredProperty:dcs:count
 
-Node: dcid:Count_Person_Fraction_Female_PersonAge_30_35_RaceCode_WH
+Node: dcid:CountPersonFractionFemale30-35WH_Person_Fraction_Count_30-35_WH_Female
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measuredProperty: dcid:Count_Person_Fraction_Female_PersonAge_30_35_RaceCode_WH
+measuredProperty: dcid:Count_Person_Fraction_Female_30-35_WH
 statType: dcs:measuredValue
 gender: dcs:Female
+# Fraction: Fraction
 # PersonAge: 30-35
 # RaceCode: WH
-# Fraction: Fraction
 # measuredProperty:dcs:count
 

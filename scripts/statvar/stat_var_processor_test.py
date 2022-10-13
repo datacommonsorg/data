@@ -7,20 +7,16 @@ import unittest
 from absl import app
 from absl import logging
 
-from mcf_diff import diff_mcf_files
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
 
-# Allows the following module imports to work when running as a script
-# relative to data/scripts/
-#sys.path.append(
-#    os.path.sep.join([
-#        '..' for x in filter(lambda x: x == os.path.sep,
-#                             os.path.abspath(__file__).split('data/')[1])
-#    ]))
+from mcf_diff import diff_mcf_files
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 
-from stat_var_processor import process
+from stat_var_processor import StatVarDataProcessor, process
 
 class TestStatVarProcessor(unittest.TestCase):
 
@@ -80,7 +76,8 @@ class TestStatVarProcessor(unittest.TestCase):
             test_input = os.path.join(module_dir_, f'{file_prefix}_input.csv')
 
             self.assertTrue(
-                process(input_data=[test_input],
+                process(data_processor_class=StatVarDataProcessor,
+                        input_data=[test_input],
                         output_path=test_output,
                         config_file=test_config,
                         pv_map_files=[test_column_map]),

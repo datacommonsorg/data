@@ -44,6 +44,7 @@ from collections import OrderedDict
 #from pypprof.net_http import start_pprof_server
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.join(_SCRIPT_DIR,
                              '../../util/'))  # for statvar_dcid_generator
@@ -85,7 +86,7 @@ flags.DEFINE_string(
 flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
 flags.DEFINE_string('output_path', '',
                     'File prefix for output mcf, csv and tmcf.')
-flags.DEFINE_integer('parallelism', multiprocessing.cpu_count(),
+flags.DEFINE_integer('parallelism', 0,
                      'Number of parallel processes to use.')
 flags.DEFINE_integer('pprof_port', 0, 'HTTP port for pprof server.')
 flags.DEFINE_bool('debug', False, 'Enable debug messages.')
@@ -2131,7 +2132,7 @@ def process(data_processor_class: StatVarDataProcessor,
     config = get_config_from_file(config_file)
     config_dict = config.get_configs()
     if input_data:
-        config['input_data'] = input_data
+        config_dict['input_data'] = input_data
     input_data = prepare_input_data(config_dict)
     if parallelism <= 1:
         logging.info(f'Processing data {input_data} into {output_path}...')
@@ -2186,7 +2187,7 @@ def process(data_processor_class: StatVarDataProcessor,
         output_mcf_file = f'{output_path}.mcf'
         write_mcf_nodes([statvar_nodes], output_mcf_file)
         logging.info(
-            f'Merged {len(statvar_nodes}} stat var MCF nodes from {mcf_files} into {output_mcf_file}.'
+            f'Merged {len(statvar_nodes)} stat var MCF nodes from {mcf_files} into {output_mcf_file}.'
         )
 
         # Create a common TMCF from output, removing the shard suffix.
