@@ -102,7 +102,7 @@ def load_mcf_nodes(filenames: str, nodes: dict = None) -> dict:
     files = []
     file_names = filenames.split(',')
     for file in file_names:
-      files.extend(glob.glob(file))
+        files.extend(glob.glob(file))
     if nodes is None:
         nodes = {}
     for file in files:
@@ -255,19 +255,21 @@ def write_mcf_nodes(node_dicts: list,
                     filename: str,
                     mode: str = 'w',
                     default_pvs: dict = _DEFAULT_NODE_PVS,
-                    ignore_props=None,
                     header: str = None,
-                    config: dict = None):
+                    sort: bool = False):
     '''Write the nodes to an MCF file.'''
-    if ignore_props is None:
-        ignore_props = []
     with open(filename, mode) as output_f:
         if header is not None:
             output_f.write(header)
             output_f.write('\n')
         for nodes in node_dicts:
-            for dcid in nodes.keys():
+            node_keys = list(nodes.keys())
+            if sort:
+              node_keys = sorted(node_keys)
+            for dcid in node_keys:
                 node = nodes[dcid]
+                if sort:
+                    node = normalize_mcf_node(node)
                 pvs = node_dict_to_text(node, default_pvs)
                 if len(pvs) > 0:
                     output_f.write(pvs)

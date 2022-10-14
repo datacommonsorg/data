@@ -1,3 +1,18 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the 'License');
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an 'AS IS' BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+'''Unit tests for stat_var_processor.py.'''
+
 import os
 import pandas as pd
 import sys
@@ -12,13 +27,23 @@ sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 
 from mcf_diff import diff_mcf_files
-
-# module_dir_ is the path to where this test is running from.
-module_dir_ = os.path.dirname(__file__)
-
 from stat_var_processor import StatVarDataProcessor, process
 
+
 class TestStatVarProcessor(unittest.TestCase):
+
+    def setUp(self):
+        self.data_processor_class = StatVarDataProcessor
+        self.test_files = [
+            os.path.join(_SCRIPT_DIR, 'test_data', 'sample'),
+            os.path.join(_SCRIPT_DIR, 'test_data', 'sample_schemaless'),
+            os.path.join(_SCRIPT_DIR, 'test_data', 'india_census_sample'),
+            os.path.join(_SCRIPT_DIR, 'test_data',
+                         'us_census_EC1200A1-2022-09-15'),
+            os.path.join(_SCRIPT_DIR, 'test_data', 'us_census_B01001'),
+            os.path.join(_SCRIPT_DIR, 'test_data', 'us_flood_fima'),
+        ]
+        self.pv_maps = []
 
     def compare_mcf_files(self, file_pairs: dict):
         '''Compare files with MCF nodes allowing reordering of nodes and properties.'''
@@ -38,13 +63,14 @@ class TestStatVarProcessor(unittest.TestCase):
             df_expected = pd.read_csv(expected_file)
             df_actual = pd.read_csv(actual_file)
             self.assertEqual(
-                df_expected.columns.to_list(),
-                df_actual.columns.to_list(),
+                df_expected.columns.to_list(), df_actual.columns.to_list(),
                 f'Found different columns in CSV files:' +
                 f'expected:{expected_file}:{df_expected.columns.to_list()}, ' +
                 f'actual:{actual_file}:{df_actual.columns.to_list()}, ')
-            df_expected.sort_values(by=df_expected.columns.to_list(), inplace=True)
-            df_actual.sort_values(by=df_expected.columns.to_list(), inplace=True)
+            df_expected.sort_values(by=df_expected.columns.to_list(),
+                                    inplace=True)
+            df_actual.sort_values(by=df_expected.columns.to_list(),
+                                  inplace=True)
             self.assertTrue(
                 df_expected.equals(df_actual), f'Found diffs in CSV rows:' +
                 f'"{actual_file}" vs "{expected_file}":')
@@ -70,19 +96,21 @@ class TestStatVarProcessor(unittest.TestCase):
         test_name = os.path.basename(file_prefix)
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_output = os.path.join(tmp_dir, f'{test_name}_output')
-            test_config = os.path.join(module_dir_, f'{file_prefix}_config.py')
-            test_column_map = os.path.join(module_dir_,
-                                           f'{file_prefix}_pv_map.py')
-            test_input = os.path.join(module_dir_, f'{file_prefix}_input.csv')
+            test_config = os.path.join(_SCRIPT_DIR, f'{file_prefix}_config.py')
+            test_pv_maps = [
+                os.path.join(_SCRIPT_DIR, f'{file_prefix}_pv_map.py')
+            ]
+            test_pv_maps.extend(self.pv_maps)
+            test_input = os.path.join(_SCRIPT_DIR, f'{file_prefix}_input.csv')
 
             self.assertTrue(
-                process(data_processor_class=StatVarDataProcessor,
+                process(data_processor_class=self.data_processor_class,
                         input_data=[test_input],
                         output_path=test_output,
                         config_file=test_config,
-                        pv_map_files=[test_column_map]),
+                        pv_map_files=test_pv_maps),
                 f'Errors in processing {test_input}')
-            expected_test_output = os.path.join(module_dir_,
+            expected_test_output = os.path.join(_SCRIPT_DIR,
                                                 f'{file_prefix}_output')
             output_files = {}
             for output_file in ['.csv', '.tmcf', '.mcf']:
@@ -94,15 +122,7 @@ class TestStatVarProcessor(unittest.TestCase):
 
     # Test processing of sample files.
     def test_process(self):
-        test_files = [
-            'test_data/sample',
-            'test_data/sample_schemaless',
-            'test_data/india_census_sample',
-            'test_data/us_census_EC1200A1-2022-09-15',
-            'test_data/us_census_B01001',
-            'test_data/us_flood_fima',
-        ]
-        for test_file in test_files:
+        for test_file in self.test_files:
             logging.info(f'Testing file {test_file}...')
             self.process_file(test_file)
 

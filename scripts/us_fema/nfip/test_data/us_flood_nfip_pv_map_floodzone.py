@@ -28,9 +28,9 @@
        'naturalHazardType': 'FloodEvent',
        'populationType': 'dcs:NaturalHazardInsurance',
    },
-   #'floodZone' : {
-   #    'floodZoneType': 'FEMAFloodZone{Data}',
-   #},
+   'floodZone' : {
+       'floodZoneType': 'FEMAFloodZone{Data}',
+   },
    'amountPaidOnBuildingClaim': {
        # StatVar PVs
        'measuredProperty': 'dcs:settlementAmount',

@@ -28,9 +28,10 @@
        'naturalHazardType': 'FloodEvent',
        'populationType': 'dcs:NaturalHazardInsurance',
    },
-   #'floodZone' : {
-   #    'floodZoneType': 'FEMAFloodZone{Data}',
-   #},
+   # Column floodZone is looked up in us_flood_nfip_floodzone_pv_map.py
+   'floodZone' : {
+       'floodZoneType': 'FEMAFloodZone{Data}',
+   },
    'amountPaidOnBuildingClaim': {
        # StatVar PVs
        'measuredProperty': 'dcs:settlementAmount',

@@ -30,6 +30,7 @@ sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.join(_SCRIPTS_DIR, "statvar"))
 
 from stat_var_processor import StatVarDataProcessor, process
+from mcf_file_util import strip_namespace
 
 _FLAGS = flags.FLAGS
 
@@ -37,7 +38,7 @@ flags.DEFINE_string(
     'url',
     'https://www.fema.gov/about/reports-and-data/openfema/FimaNfipClaims.csv',
     'URL to download the insurance data.')
-flags.DEFINE_string(input_csv, '/tmp/nfip.csv',
+flags.DEFINE_string('input_csv', '/tmp/nfip.csv',
                     'CSV file containing data to be processed.')
 
 
@@ -46,8 +47,10 @@ class NFIPStatVarDataProcessor(StatVarDataProcessor):
     def __init__(self, config_dict: dict = None, counters_dict: dict = None):
         super().__init__(config_dict=config_dict, counters_dict=counters_dict)
 
-    def preprocess_stat_var_pbs_pvs(self, pvs: dict) -> dict:
-        '''Add additional PVs to the statvar obs.'''
+    def preprocess_stat_var_pbs_pvs(self, pvs: dict) -> list:
+        '''Add observationPeriod PV to the statvar obs based on date.
+        Generate svobs without floodZoneType for aggregated stats.
+        Returns a list of SVObs PV dicts.'''
         # Set observationPeriod based on date.
         if 'observationPeriod' not in pvs:
             date = pvs.get('observationDate', '')
@@ -57,55 +60,43 @@ class NFIPStatVarDataProcessor(StatVarDataProcessor):
                     pvs['observationPeriod'] = '1PY'
                 elif len(date) == len('YYYY-MM'):
                     pvs['observationPeriod'] = '1PM'
-        return pvs
+        svobs_pvs_list = [pvs]
+        # Create aggregate SVObs without floodZoneType PV.
+        if strip_namespace(pvs.get('floodZoneType',
+                                   '')).startswith('FEMAFloodZone'):
+            agg_pvs = dict(pvs)
+            agg_pvs.pop('floodZoneType')
+            svobs_pvs_list.append(agg_pvs)
+            self.add_counter('additional-count-svobs', 1)
+
+        # Generate settlementAmount totals for Building and Contents.
+        for index in range(len(svobs_pvs_list)):
+            svobs_pvs = svobs_pvs_list[index]
+            if strip_namespace(svobs_pvs.get('measuredProperty',
+                                             '')) == 'settlementAmount':
+                if strip_namespace(svobs_pvs.get('insuredThing', '')) in [
+                        'BuildingStructure', 'BuildingContents'
+                ]:
+                    settlement_pvs = dict(svobs_pvs)
+                    settlement_pvs[
+                        'insuredThing'] = 'dcs:BuildingStructureAndContents'
+                    svobs_pvs_list.append(settlement_pvs)
+                    self.add_counter('additional-settlement-svobs', 1)
+        return svobs_pvs_list
 
 
-def download_data_from_url(url: str, data_file: str) -> bool:
-    '''Download data from the URL into the given file.'''
-    logging.info(f'Downloading {url} into {data_file}...')
-    response = requests.get(url)
-    if response.status_code != 200:
-        logging.error(f'Failed to download {url}: {response}')
-        return False
-    with open(data_file, 'w') as output_file:
-        output_file.write(response.text)
-    return True
-
-
-def shard_csv_data(file: str,
-                   column: str = 'state',
-                   prefix_len: int = 2) -> list:
-    '''Shard CSV file by unique values in column.
-    Returns the list of output files.'''
-    df = pd.read_csv(file, dtype=str)
-    shards = set([x[:prefix_len] for x in df[column].unique()])
-    (file_prefix, file_ext) = os.path.splitext(file)
-    output_path = f'{file_prefix}-{column}'
-    logging.info(
-        f'Sharding {file} into {len(shards)} shards by column {column} into {output_path}*.csv.'
-    )
-    output_files = []
-    for s in shards:
-        output_file = f'{output_path}-{s}.csv'
-        df[df[column].str.startswith(s)].to_csv(output_file, index=False)
-        output_files.append(output_file)
-    return True
-
-def process_data(input_data, output_path):
+def process_data():
     process(data_processor_class=NFIPStatVarDataProcessor,
-            input_data=input_data,
-            output_path=output_path,
+            input_data=_FLAGS.input_data,
+            output_path=_FLAGS.output_path,
             config_file=_FLAGS.config,
             pv_map_files=_FLAGS.pv_map,
             parallelism=_FLAGS.parallelism)
 
+
 def main(_):
-  input_data_files = _FLAGS.input_data
-  if not os.path.exists(_FLAGS.input_csv):
-    download_data_from_url(_FLAGS.url, _FLAGS.input_csv)
-    # Shard input csv by state code.
-    input_data_files = shard_csv_data(_FLAGS.input_csv, 'state', 2)
-  process_data(input_data_files, _FLAGS.output_path)
+    process_data()
+
 
 if __name__ == '__main__':
     app.run(main)
