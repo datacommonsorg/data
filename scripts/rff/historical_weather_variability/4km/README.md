@@ -29,3 +29,14 @@ To generate `WeatherVariability_4km.tmcf` and `WeatherVariability_4km.csv`, run:
 ```bash
 python preprocess_4km.py
 ```
+
+## Data Source
+
+The weather variability metrics described above use source data from PRISM
+Climate Group, Oregon State University, http://prism.oregonstate.edu
+
+Terms of Use:
+* When using these data, please clearly and prominently state the PRISM Climate
+  Group and their URL.
+* According to PRISM’s terms of use, these data may be freely reproduced and
+  distributed for non-commercial purposes only.
