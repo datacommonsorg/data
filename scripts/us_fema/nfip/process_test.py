@@ -43,4 +43,5 @@ class TestNFIPStatVarProcessor(TestStatVarProcessor):
           'observationAbout:' + os.path.join(_SCRIPT_DIR, 'us_state_codes.py'),
 
       ]
+      logging.info(f'Setting test files: {self.test_files}, pv_maps: {self.pv_maps}')
 

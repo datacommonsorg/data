@@ -29,7 +29,6 @@ sys.path.append(os.path.dirname(_SCRIPT_DIR))
 from mcf_diff import diff_mcf_files
 from stat_var_processor import StatVarDataProcessor, process
 
-
 class TestStatVarProcessor(unittest.TestCase):
 
     def setUp(self):
@@ -44,6 +43,7 @@ class TestStatVarProcessor(unittest.TestCase):
             os.path.join(_SCRIPT_DIR, 'test_data', 'us_flood_fima'),
         ]
         self.pv_maps = []
+        logging.info(f'Setting test files: {self.test_files}, pv_maps: {self.pv_maps}')
 
     def compare_mcf_files(self, file_pairs: dict):
         '''Compare files with MCF nodes allowing reordering of nodes and properties.'''
@@ -68,9 +68,9 @@ class TestStatVarProcessor(unittest.TestCase):
                 f'expected:{expected_file}:{df_expected.columns.to_list()}, ' +
                 f'actual:{actual_file}:{df_actual.columns.to_list()}, ')
             df_expected.sort_values(by=df_expected.columns.to_list(),
-                                    inplace=True)
+                                    inplace=True, ignore_index=True)
             df_actual.sort_values(by=df_expected.columns.to_list(),
-                                  inplace=True)
+                                  inplace=True, ignore_index=True)
             self.assertTrue(
                 df_expected.equals(df_actual), f'Found diffs in CSV rows:' +
                 f'"{actual_file}" vs "{expected_file}":')
@@ -95,6 +95,7 @@ class TestStatVarProcessor(unittest.TestCase):
     def process_file(self, file_prefix: str):
         test_name = os.path.basename(file_prefix)
         with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_dir = '/tmp/unittest'
             test_output = os.path.join(tmp_dir, f'{test_name}_output')
             test_config = os.path.join(_SCRIPT_DIR, f'{file_prefix}_config.py')
             test_pv_maps = [
@@ -122,6 +123,7 @@ class TestStatVarProcessor(unittest.TestCase):
 
     # Test processing of sample files.
     def test_process(self):
+        logging.info(f'Testing inputs: {self.test_files}')
         for test_file in self.test_files:
             logging.info(f'Testing file {test_file}...')
             self.process_file(test_file)

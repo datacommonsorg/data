@@ -7,6 +7,7 @@
     #    'state',
     #'shard_prefix_length':
     #    2,
+    'parallelism': 0,
     'schemaless':
         False,
     'schemaless_statvar_comment_undefined_pvs':

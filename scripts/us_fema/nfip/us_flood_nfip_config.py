@@ -7,6 +7,9 @@
         'state',
     'shard_prefix_length':
         2,
+    # Process shards in parallel
+    'parallelism':
+        os.cpu_count(),
     'schemaless':
         False,
     'schemaless_statvar_comment_undefined_pvs':

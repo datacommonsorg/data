@@ -34,14 +34,6 @@ from mcf_file_util import strip_namespace
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'url',
-    'https://www.fema.gov/about/reports-and-data/openfema/FimaNfipClaims.csv',
-    'URL to download the insurance data.')
-flags.DEFINE_string('input_csv', '/tmp/nfip.csv',
-                    'CSV file containing data to be processed.')
-
-
 class NFIPStatVarDataProcessor(StatVarDataProcessor):
 
     def __init__(self, config_dict: dict = None, counters_dict: dict = None):
@@ -91,7 +83,8 @@ def process_data():
             output_path=_FLAGS.output_path,
             config_file=_FLAGS.config,
             pv_map_files=_FLAGS.pv_map,
-            parallelism=_FLAGS.parallelism)
+            #parallelism=os.cpu_count())
+            parallelism=0)
 
 
 def main(_):

@@ -28,7 +28,6 @@
        'naturalHazardType': 'FloodEvent',
        'populationType': 'dcs:NaturalHazardInsurance',
    },
-   # Column floodZone is looked up in us_flood_nfip_floodzone_pv_map.py
    'floodZone' : {
        'floodZoneType': 'FEMAFloodZone{Data}',
    },
