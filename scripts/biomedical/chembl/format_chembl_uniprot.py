@@ -23,9 +23,6 @@ Description: Add dcids for all the proteins and format uniprot IDs and protein t
 import sys
 import pandas as pd
 import numpy as np
-import re
-import csv
-
 
 def format_names(df):
     """
@@ -43,7 +40,6 @@ def format_names(df):
     df['Name'] = df['Name'].str.lower()
     return df
 
-
 def format_cols(df):
     """
     Format the columns of the input dataframe
@@ -55,8 +51,12 @@ def format_cols(df):
     df['dcid'] = "bio/" + df['ChemBL'].astype(str)
     df['Protein_Type'] = df['Protein_Type'].str.replace(' ', '_')
     df['Protein_Type'] = df['Protein_Type'].str.lower()
+    col_names = ['Name', 'Protein_Type', 'uniprotID', 'ChemBL']
+    for col in col_names:
+        df[col] = df[col].str.replace('"', "")
+        df.update('"' + df[[col]].astype(str) + '"')
+        df[col] = df[col].replace(["\"nan\""],np.nan)
     return df
-
 
 def main():
     file_input = sys.argv[1]
@@ -64,11 +64,7 @@ def main():
     df = pd.read_csv(file_input, sep='\t', header=None)
     df = format_names(df)
     df = format_cols(df)
-    df.to_csv(file_output,
-              index=None,
-              quoting=csv.QUOTE_NONE,
-              quotechar="",
-              escapechar="\\")
+    df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 
 if __name__ == '__main__':

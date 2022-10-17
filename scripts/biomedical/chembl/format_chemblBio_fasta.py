@@ -23,6 +23,7 @@ import sys
 import pandas as pd
 import re
 import csv
+import numpy as np
 import Bio
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 
@@ -53,7 +54,7 @@ def format_identifier(df):
     Args:
         df = input dataframe
     Returns:
-        df with added chembl, uniprot and name columns 
+        df with added chembl and name columns 
     """
     list_chembl = []
     list_name = []
@@ -110,11 +111,25 @@ def multiple_dcid(df):
                 {
                     'Sequence': df['Sequence'][i],
                     'chembl': new_chembl,
-                    'uniprot': df['uniprot'][i],
                     'name': df['name'][i],
                     'dcid': new_dcid
                 },
                 ignore_index=True)
+    return df
+
+def add_col_quotes(df):
+    """
+    Adds quotes to string columns
+    Args:
+        df = input dataframe
+    Returns:
+        df = output dataframe with string columns formatted
+    """
+    col_names = ['Sequence', 'name']
+    for col in col_names:
+        df[col] = df[col].str.replace('"', "")
+        df.update('"' + df[[col]].astype(str) + '"')
+        df[col] = df[col].replace(["\"nan\""],np.nan)
     return df
 
 
@@ -124,11 +139,12 @@ def main():
     df = fasta_to_df(file_input)
     df = format_identifier(df)
     df = format_cols(df)
-    df.to_csv(
-        file_output,
-        index=None,
-    )
+    df = multiple_dcid(df)
+    df = add_col_quotes(df)
+    df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 
 if __name__ == '__main__':
     main()
+
+

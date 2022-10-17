@@ -13,7 +13,7 @@
 # limitations under the License.
 '''
 Author: Suhana Bedi
-Date: 01/01/2021
+Date: 01/01/2022
 Name: format_chemblBlast_fasta.py
 Description: Add dcids for all the proteins and format the fasta into a csv.
 @file_input: input .fasta from chembl database
@@ -23,17 +23,11 @@ import sys
 import pandas as pd
 import re
 import csv
+import numpy as np
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 
 
 def fasta_to_df(input_file):
-    """
-    Converts the fasta file to a dataframe
-    Args:
-        input file = input .fa file
-    Returns:
-        chembl dataframe with .fa file information
-    """
     with open(input_file) as fasta_file:
         identifiers = []
         lengths = []
@@ -47,13 +41,6 @@ def fasta_to_df(input_file):
 
 
 def format_identifier(df):
-    """
-    Formats the identifier column of the input dataframe
-    Args:
-        df = input dataframe
-    Returns:
-        df with added chembl, uniprot and name columns 
-    """
     list_chembl = []
     list_uniprot = []
     list_name = []
@@ -74,13 +61,6 @@ def format_identifier(df):
 
 
 def format_cols(df):
-    """
-    Formats the columns of the input dataframe
-    Args:
-        df = input dataframe
-    Returns:
-        df with added dcid and formatted name column
-    """
     df['dcid'] = "bio/" + df['chembl']
     df['name'] = df['name'].str.strip()
     df['name'] = df['name'].str.lower()
@@ -89,15 +69,7 @@ def format_cols(df):
     df = df.drop(columns=['Identifier'])
     return df
 
-
 def multiple_dcid(df):
-    """
-    Adds new row to entries with multiple dcids
-    Args:
-        df = input dataframe
-    Returns:
-        df with added rows
-    """
     for i in df.index:
         if "," in df['chembl'][i]:
             old_str = df['chembl'][i]
@@ -108,17 +80,23 @@ def multiple_dcid(df):
             df['chembl'][i] = old_chembl
             df['dcid'][i] = "bio/" + old_chembl
             new_dcid = "bio/" + new_chembl
-            df = df.append(
-                {
-                    'Sequence': df['Sequence'][i],
-                    'chembl': new_chembl,
-                    'uniprot': df['uniprot'][i],
-                    'name': df['name'][i],
-                    'dcid': new_dcid
-                },
-                ignore_index=True)
+            df = df.append({'Sequence': df['Sequence'][i], 'chembl': new_chembl, 'uniprot': df['uniprot'][i], 'name': df['name'][i], 'dcid': new_dcid}, ignore_index=True)
     return df
 
+def add_col_quotes(df):
+    """
+    Adds quotes to string columns
+    Args:
+        df = input dataframe
+    Returns:
+        df = output dataframe with string columns formatted
+    """
+    col_names = ['Sequence', 'chembl', 'uniprot', 'name']
+    for col in col_names:
+        df[col] = df[col].str.replace('"', "")
+        df.update('"' + df[[col]].astype(str) + '"')
+        df[col] = df[col].replace(["\"nan\""],np.nan)
+    return df
 
 def main():
     file_input = sys.argv[1]
@@ -126,7 +104,9 @@ def main():
     df = fasta_to_df(file_input)
     df = format_identifier(df)
     df = format_cols(df)
-    df.to_csv(file_output, index=None)
+    df = multiple_dcid(df)
+    df = add_col_quotes(df)
+    df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 
 if __name__ == '__main__':
