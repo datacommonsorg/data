@@ -27,7 +27,6 @@ This will generate the following outputs:
   <output-prefix>.tmcf: MCF file mapping CSV columns to StatVar PVs.
 '''
 
-import ast
 import csv
 import datetime
 import glob
@@ -39,7 +38,6 @@ import re
 import requests
 import sys
 import time
-import traceback
 
 from absl import app
 from absl import flags
@@ -53,205 +51,16 @@ sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.join(_SCRIPT_DIR,
                              '../../util/'))  # for statvar_dcid_generator
 
+from config import Config, get_py_dict_from_file, get_config_from_file
+from counters import Counters
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
 from mcf_filter import dc_api_get_defined_dcids
 import statvar_dcid_generator
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('config', '', 'File with configuration parameters.')
-flags.DEFINE_list('data_url', '', 'URLs to download the data from.')
-flags.DEFINE_string('shard_input_by_column', '',
-                    'Shard input data by unique values in column.')
-flags.DEFINE_string('shard_prefix_length', '',
-                    'Shard input data by value prefix of given length.')
-flags.DEFINE_list(
-    'pv_map', [],
-    'Comma separated list of namespace:file with property values.')
-flags.DEFINE_list('input_data', [],
-                  'Comma separated list of data files to be processed.')
-flags.DEFINE_integer(
-    'input_rows', -1,
-    'Number of rows per input file to process. Default: -1 for all rows.')
-flags.DEFINE_integer(
-    'skip_rows', 0, 'Number of rows to skip at the begining of the input file.')
-flags.DEFINE_integer(
-    'header_rows', -1,
-    'Number of header rows with property-value mappings for columns. If -1, will lookup PVs for all rows.'
-)
-flags.DEFINE_integer(
-    'header_columns', -1,
-    'Number of header columns with property-value mappings for rows. If -1, will lookup PVs for all columns.'
-)
-flags.DEFINE_string(
-    'aggregate_duplicate_svobs', '',
-    'Aggregate SVObs with same place, date by one of the following: sum, min or max.'
-)
-flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
-flags.DEFINE_string('output_path', '',
-                    'File prefix for output mcf, csv and tmcf.')
-flags.DEFINE_integer('parallelism', 0, 'Number of parallel processes to use.')
-flags.DEFINE_integer('pprof_port', 0, 'HTTP port for pprof server.')
-flags.DEFINE_bool('debug', False, 'Enable debug messages.')
-flags.DEFINE_integer('log_level', logging.INFO,
-                     'Log level messages to be shown.')
-_FLAGS(sys.argv)  # Allow invocation without app.run()
-
 # Enable debug messages
-_DEBUG = True
-
-# Dictionary of config parameters and values.
-_DEFAULT_CONFIG = {
-    # 'config parameter in snake_case': value
-    'ignore_numeric_commas':
-        True,  # Numbers may have commas
-    'input_reference_column':
-        '#input',
-    'input_min_columns_per_row':
-        3,
-    'pv_map_drop_undefined_nodes':
-        False,  # Don't drop undefined PVs in the column PV Map.
-    'duplicate_svobs_key':
-        '#ErrorDuplicateSVObs',
-    'duplicate_statvars_key':
-        '#ErrorDuplicateStatVar',
-    'drop_statvars_without_obs':
-        True,
-    # Aggregate values for duplicate SVObs with the same statvar, place, date
-    # and units with one of the following functions:
-    #   sum: Add all values.
-    #   min: Set the minimum value.
-    #   max: Set the maximum value.
-    # Internal property in PV map to aggregate values for a specific statvar.
-    'aggregate_key':
-        '#Aggregate',
-    # Aggregation type duplicate SVObs for all statvars.
-    'aggregate_duplicate_svobs':
-        None,
-    'merged_pvs_property':
-        '#MergedSVObs',
-
-    # Enable schemaless StatVars,
-    # If True, allow statvars with capitalized property names.
-    # Those properties are commented out when generating MCF but used for
-    # statvar dcid.
-    'schemaless':
-        _FLAGS.schemaless,
-    # Whether to lookup DC API and drop undefined PVs in statvars.
-    'schemaless_statvar_comment_undefined_pvs':
-        False,
-    'default_statvar_pvs':
-        OrderedDict({
-            'typeOf': 'dcs:StatisticalVariable',
-            'measurementQualifier': '',
-            'statType': 'dcs:measuredValue',
-            'measuredProperty': 'dcs:count',
-            'populationType': ''
-        }),
-    'statvar_dcid_ignore_values': ['measuredValue', 'StatisticalVariable'],
-    'default_svobs_pvs':
-        OrderedDict({
-            'typeOf': 'dcs:StatVarObservation',
-            'observationDate': '',
-            'observationAbout': '',
-            'value': '',
-            'observationPeriod': '',
-            'measurementMethod': '',
-            'unit': '',
-            'scalingFactor': '',
-            'variableMeasured': '',
-            '#Aggregate': '',
-        }),
-    'required_statvar_properties': [
-        'measuredProperty',
-        'populationType',
-    ],
-    'required_statvarobs_properties': [
-        'variableMeasured', 'observationAbout', 'observationDate', 'value'
-    ],
-    # Use numeric data in any column as a value.
-    # It may still be dropped if no SVObs can be constructed out of it.
-    # If False, SVObs is only emitted for PVs that have a map for 'value',
-    # for example, 'MyColumn': { 'value': '@Data' }
-    'use_all_numeric_data_values':
-        False,
-    # Word separator, used to split words into phrases for PV map lookups.
-    'word_delimiter':
-        ' ',
-    'show_counters_every_n':
-        0,
-    'show_counters_every_sec':
-        30,
-    # Output options
-    'generate_statvar_mcf':
-        True,  # Generate MCF file with all statvars
-    'generate_csv':
-        True,  # Generate CSV with SVObs
-    'output_csv_mode':
-        'w',  # Overwrite output CSV file.
-    'output_csv_columns':
-        None,  # Emit all SVObs PVs into output csv
-    'generate_tmcf':
-        True,  # Generate tMCF for CSV columns
-    'skip_constant_csv_columns':
-        False,  # Skip emitting columns with constant values in the csv
-
-    # Settings for DC API.
-    'dc_api_root':
-        'http://autopush.api.datacommons.org',
-    'dc_api_use_cache':
-        False,
-    'dc_api_batch_size':
-        100,
-}
-
-
-def _get_config_from_flags() -> dict:
-    '''Returns a dictionary of config options from command line flags.'''
-    _DEBUG = _FLAGS.debug
-    return {
-        # 'flag_name':  _FLAGS.flag_name
-        'pv_map':
-            _FLAGS.pv_map,
-        'data_url':
-            _FLAGS.data_url,
-        'shard_input_by_column':
-            _FLAGS.shard_input_by_column,
-        'shard_prefix_length':
-            _FLAGS.shard_prefix_length,
-        'input_rows':
-            _FLAGS.input_rows,
-        'skip_rows':
-            _FLAGS.skip_rows,
-        'header_rows':
-            _FLAGS.header_rows,
-        'header_columns':
-            _FLAGS.header_columns,
-        'schemaless':
-            _FLAGS.schemaless,
-        'debug':
-            _FLAGS.debug,
-        'log_level':
-            max(_FLAGS.log_level, logging.DEBUG if _FLAGS.debug else 0),
-    }
-
-
-def get_py_dict_from_file(filename: str) -> dict:
-    '''Load a python dict from a file.
-    Args:
-      filename: JSON or a python file containing parameter to value mappings.
-    '''
-    logging.info(f'Loading python dict from {filename}...')
-    with open(filename) as file:
-        pv_map_str = file.read()
-
-
-# Load the map assuming a python dictionary.
-# Can also be used with JSON with trailing commas and comments.
-    param_dict = ast.literal_eval(pv_map_str)
-    _DEBUG and logging.debug(f'Loaded {filename} into dict {param_dict}')
-    return param_dict
-
+_DEBUG = False
 
 def is_valid_property(prop: str, schemaless: bool = False) -> bool:
     '''Returns True if the property begins with a letter, lowercase if schemaless.'''
@@ -355,114 +164,6 @@ def pvs_update(new_pvs: dict, pvs: dict, multi_value_keys: set = {}) -> dict:
     for prop, value in new_pvs.items():
         add_key_value(prop, value, pvs, multi_value_keys)
     return pvs
-
-
-class Config:
-    '''Class to store config mapping of named parameters to values.'''
-
-    def __init__(self, config_dict: dict = None, filename: str = None):
-        self._config_dict = dict(_DEFAULT_CONFIG)
-        self.add_configs(_get_config_from_flags())
-        if config_dict:
-            self._config_dict.update(config_dict)
-        if filename:
-            self.load_config_file(filename)
-        logging.set_verbosity(self.get_config('log_level'))
-        _DEBUG and logging.debug(f'Using config: {self.get_configs()}')
-
-    def load_config_file(self, filename: str):
-        '''Load configs from a file.'''
-        self.add_configs(get_py_dict_from_file(filename))
-
-    def add_configs(self, configs: dict):
-        '''Add new or replace existing config parameters.'''
-        self._config_dict.update(configs)
-
-    def get_config(self, parameter: str, default_value=None) -> str:
-        '''Return the value of a named config parameter.'''
-        return self._config_dict.get(parameter, default_value)
-
-    def get_configs(self) -> dict:
-        return self._config_dict
-
-    def set_config(self, name: str, value):
-        self._config_dict[name] = value
-
-
-def get_config_from_file(filename: str) -> Config:
-    '''Returns configs loaded from a file.'''
-    return Config(filename=filename)
-
-
-class Counters():
-    '''Dictionary of named counters.'''
-
-    def __init__(self,
-                 counters_dict: dict = None,
-                 debug: bool = False,
-                 config_dict: dict = None):
-        self._counters = counters_dict
-        self._debug = debug
-        if counters_dict is None:
-            self._counters = {}
-        self._counter_config = config_dict
-        if config_dict is None:
-            self._counter_config = {}
-        self._num_calls = 0
-        self._show_counters_every_n = self._counter_config.get(
-            'show_counters_every_n', 0)
-        self._show_counters_every_secs = self._counter_config.get(
-            'show_counters_every_sec', 0)
-
-    def add_counter(self, name: str, value: int = 1, context: str = None):
-        '''Increment a named counter by the given value.'''
-        self._counters[name] = self._counters.get(name, 0) + value
-        if context and self._debug:
-            ext_name = f'{name}-{context}'
-            self._counters[ext_name] = self._counters.get(ext_name, 0) + value
-        self._num_calls += 1
-        self.show_counters_periodically()
-
-    def set_counter(self, name: str, value: int, context: str = None):
-        self._counters[name] = 0
-        self.add_counter(name, value, context)
-
-    def get_counters(self):
-        return self._counters
-
-    def get_counter(self, name: str) -> int:
-        return self._counters.get(name, 0)
-
-    def get_counters_string(self) -> str:
-        lines = ['Counters:']
-        for c in sorted(self._counters.keys()):
-            v = self._counters[c]
-            if isinstance(v, int):
-                lines.append(f'{c:>50s} = {v:>10d}')
-            elif isinstance(v, float):
-                lines.append(f'{c:>50s} = {v:>10.2f}')
-            else:
-                lines.append(f'{c:>50s} = {v}')
-
-        return '\n'.join(lines)
-
-    def show_counters(self, file=sys.stderr):
-        print(self.get_counters_string(), file=file)
-
-    def show_counters_periodically(self):
-        # Show counters periodically.
-        if self._show_counters_every_n > 0 and self._num_calls % self._show_counters_every_n:
-            self.show_counters()
-        else:
-            if self._show_counters_every_secs and (
-                    time.perf_counter() -
-                    self._last_display_time) > self._show_counters_every_secs:
-                self.show_counters()
-                self._last_display_time = time.perf_counter()
-
-    def log_counters(self):
-        logging.info(self.get_counters_string())
-
 
 class PropertyValueMapper(Config, Counters):
     '''Class to map strings to set of property values.
@@ -1278,10 +979,10 @@ class StatVarsMap(Config, Counters):
                            header: str = None):
         '''Save the statvars into an MCF file.'''
         if not stat_var_nodes:
-          stat_var_nodes = self._statvars_map
+            stat_var_nodes = self._statvars_map
         commandline = ' '.join(sys.argv)
         if not header:
-          header=f'# Autogenerated using command: "{commandline}" on {datetime.datetime.now()}\n'
+            header = f'# Autogenerated using command: "{commandline}" on {datetime.datetime.now()}\n'
         logging.info(
             f'Generating {len(stat_var_nodes)} statvars into {filename}')
         write_mcf_nodes([stat_var_nodes],
@@ -2070,9 +1771,8 @@ class StatVarDataProcessor(Config, Counters):
         self._statvars_map.drop_invalid_statvars()
         if self.get_config('generate_statvar_mcf', True):
             statvar_mcf_file = output_path + '.mcf'
-            self._statvars_map.write_statvars_mcf(
-                filename=statvar_mcf_file,
-                mode='w')
+            self._statvars_map.write_statvars_mcf(filename=statvar_mcf_file,
+                                                  mode='w')
         if self.get_config('generate_csv', True):
             self._statvars_map.write_statvar_obs_csv(
                 output_path + '.csv',
@@ -2082,7 +1782,7 @@ class StatVarDataProcessor(Config, Counters):
         self.log_counters()
 
 
-def download_data_from_url(urls: list, data_path: str) -> list:
+def download_csv_from_url(urls: list, data_path: str) -> list:
     '''Download data from the URL into the given file.
     Returns a list of files downloaded.'''
     data_files = []
@@ -2090,9 +1790,11 @@ def download_data_from_url(urls: list, data_path: str) -> list:
         urls = [urls]
     for url in urls:
         # Extract the output filename from the URL.
-        data_file = re.search(r'^[a-zA-Z0-9_:/\.-]*/(?P<file>[A-Za-z0-9_\.-]+)',
-                              url).groupdict().get(
-                                  'file', f'input{len(data_files)}.csv')
+        data_file = f'input{len(data_files)}.csv'
+        file_match = re.search(r'^[a-zA-Z0-9_:/\.-]*/(?P<file>[A-Za-z0-9_\.-]+)',
+                              url)
+        if file_match:
+          data_file = file_match.groupdict().get('file', data_file)
         # TODO: retry download on error or timeout.
         output_file = os.path.join(data_path, data_file)
         if not os.path.exists(output_file):
@@ -2165,8 +1867,8 @@ def prepare_input_data(config: dict) -> bool:
     if not data_url:
         logging.fatal(f'Provide data with --data_url or --input_data.')
         return False
-    input_files = download_data_from_url(data_url,
-                                         os.path.dirname(input_data[0]))
+    input_files = download_csv_from_url(data_url,
+                                        os.path.dirname(input_data[0]))
     shard_column = config.get('shard_input_by_column', '')
     if shard_column:
         return shard_csv_data(input_files, shard_column,
@@ -2190,10 +1892,9 @@ def process(data_processor_class: StatVarDataProcessor,
         config_dict['input_data'] = input_data
     input_data = prepare_input_data(config_dict)
     output_dir = os.path.dirname(output_path)
-    traceback.print_stack()
     if output_dir:
-      logging.info(f'Creating output directory: {output_dir}')
-      os.makedirs(output_dir, exist_ok=True)
+        logging.info(f'Creating output directory: {output_dir}')
+        os.makedirs(output_dir, exist_ok=True)
     if parallelism <= 1:
         logging.info(f'Processing data {input_data} into {output_path}...')
         if pv_map_files:
@@ -2245,7 +1946,8 @@ def process(data_processor_class: StatVarDataProcessor,
         mcf_files = f'{output_path}-*-of-*.mcf'
         statvar_nodes = load_mcf_nodes(mcf_files)
         output_mcf_file = f'{output_path}.mcf'
-        self._statvars_map.write_statvars_mcf(filename=output_mcf_file, mode=w,
+        self._statvars_map.write_statvars_mcf(filename=output_mcf_file,
+                                              mode=w,
                                               stat_var_nodes=statvar_nodes)
         logging.info(
             f'Merged {len(statvar_nodes)} stat var MCF nodes from {mcf_files} into {output_mcf_file}.'

@@ -40,7 +40,6 @@ class TestStatVarProcessor(unittest.TestCase):
             os.path.join(_SCRIPT_DIR, 'test_data',
                          'us_census_EC1200A1-2022-09-15'),
             os.path.join(_SCRIPT_DIR, 'test_data', 'us_census_B01001'),
-            os.path.join(_SCRIPT_DIR, 'test_data', 'us_flood_fima'),
         ]
         self.pv_maps = []
         logging.info(f'Setting test files: {self.test_files}, pv_maps: {self.pv_maps}')

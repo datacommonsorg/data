@@ -11,18 +11,46 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-''' Utility function to read/write MCFs in files.'''
+''' Utility function to read/write MCF nodes in files.
+
+Uses a dictionary to process nodes of the form:
+{
+  '<dcid>': OrderedDict( [
+                '<property>': '<value>'
+                ...
+                ])
+}
+where
+  <dcid> is the node dcid with the namespace prefix: 'dcid:'
+  <property> is a property name
+  <value> is a string with a single value or a comma seperated list of values.
+
+  the property:values for a node are in the same order as in the input file.
+
+  Comments in the file are also added as special properties:
+  '# comment<N>' where N is the comment number within a node.
+'''
 
 import csv
 import glob
-import logging
 import os
 
 from collections import OrderedDict
+from absl import logging
 
 
-def add_namespace(value, namespace: str = 'dcid') -> str:
-    '''Returns the value with a namespace prefix for references.'''
+def add_namespace(value: str, namespace: str = 'dcid') -> str:
+    '''Returns the value with a namespace prefix for references.
+    Args:
+      value: string to which namespace is to be added.
+    Returns:
+      value with the namespace prefix if the value is not a quoted string
+      and doesn't have a namespace already.
+      O/w return the value as is.
+
+    Any sequence of letters followed by a ':' is treated as a namespace.
+    Quoted strings are assumed to start with '"' and won't get a namespace.
+    '''
     if value and isinstance(value, str):
         if value[0].isalpha() and value.find(':') < 0:
             return f'{namespace}:{value}'
@@ -30,14 +58,29 @@ def add_namespace(value, namespace: str = 'dcid') -> str:
 
 
 def strip_namespace(value: str) -> str:
-    '''Returns the value without the namespace prefix.'''
-    if value and isinstance(value, str):
+    '''Returns the value without the namespace prefix.
+    Args:
+      value: string from which the namespace prefix is to be removed.
+    Returns:
+      value without the namespace prefix if there was a namespace
+
+    Any sequence of letters followed by a ':' is treated as a namespace.
+    Quoted strings are assumed to start with '"' and won't be filtered.
+    '''
+    if value and isinstance(value, str) and value[0].isalnum():
         return value[value.find(':') + 1:].strip()
     return value
 
 
-def get_pv_from_line(line: str):
-    '''Returns a tuple of property, value from the line.
+def get_pv_from_line(line: str) -> (str, str):
+    '''Returns a tuple of (property, value) from the line.
+    Args:
+      line: a string form an input file.
+    Returns:
+      tuple: (property: str, value: str)
+      removing leading/trailing whitespaces from the propety and value.
+      quoted values will have the quote preserved.
+      In case of a missing ':', the line is returned as value with empty property.
     '''
     pos = line.find(':')
     if pos < 0:
@@ -48,34 +91,60 @@ def get_pv_from_line(line: str):
 
 
 def add_pv_to_node(prop: str, value: str, node: dict) -> dict:
-    '''Add a property: value to the node.
-       If the property exists, the value is added to the existing property with a comma.'''
+    '''Add a property:value to the node dictionary.
+       If the property exists, the value is added to the existing property with a comma.
+    Args:
+      prop: Property string
+      value: Value string
+      node: dictionary to which the property is to be added.
+    Returns:
+      dictionary of property values.
+    '''
     if node is None:
         node = {}
     if prop in node:
-        if value != '' and value not in node[prop]:
+        # Property already exists. Add value to a list if not present.
+        if value and value not in node[prop]:
             node[prop] = f'{node[prop]}, {value}'
     else:
+        # Add a new property:value
         node[prop] = value
     return node
 
 
 def add_comment_to_node(line: str, node: dict) -> dict:
-    '''Add a comment to the node. The comments are preserved in the order read.'''
+    '''Add a comment to the node. The comments are preserved in the order read.
+    Args:
+      line: a comment string
+      node: dictionary to whcih comment is to be added as a key.
+    Returns:
+      dictionary with the comment added.
+
+    Comments are added as a property with a '#' prefix and index suffix,
+    for example, '# comment1', '# comment2'.
+    '''
+    # Count the existing comments in the node.
     comments = [c for c in node.keys() if c and c[0] == '#']
     next_comment_index = len(comments) + 1
+    # Add the new comment with the next index.
     node[f'# comment{next_comment_index}'] = line
-
+    return node
 
 def get_node_dcid(pvs: dict) -> str:
-    '''Returns the dcid of the node without the namespace prefix.'''
+    '''Returns the dcid of the node without the namespace prefix.
+    Args:
+      pvs: dictionary of property:value for the node.
+    Returns:
+      nodes dcid if one is set.
+    dcid is taken from the following properties in order:
+      'dcid'
+      'Node'
+    '''
     if not pvs:
         return None
     dcid = pvs.get('Node', '')
     dcid = pvs.get('dcid', dcid)
-    dcid = dcid.strip()
-    if dcid and dcid[0] == '"':
-        dcid = dcid[1:-1]
+    dcid = dcid.strip(' "')
     return strip_namespace(dcid)
 
 
@@ -98,7 +167,7 @@ def add_mcf_node(pvs: dict, nodes: dict) -> dict:
 def load_mcf_nodes(filenames: str, nodes: dict = None) -> dict:
     '''Return a dict of nodes from the MCF file with the key as the dcid
      and a dict of property:value for each node.
-  '''
+    '''
     files = []
     file_names = filenames.split(',')
     for file in file_names:
@@ -129,8 +198,77 @@ def load_mcf_nodes(filenames: str, nodes: dict = None) -> dict:
                 logging.info(
                     f'Loaded {num_nodes} nodes with {num_props} properties from file {file}'
                 )
-
     return nodes
+
+
+def _pv_list_to_dict(pv_list: list) -> dict:
+    '''Convert a list of property:value into a set of PVs.'''
+    pvs = set()
+    if pv_list:
+        for pv in pv_list:
+            if isinstance(pv, str):
+                if ':' in pv:
+                    prop, value = pv.split(':', 1)
+                else:
+                    prop, value = pv, ''
+                prop = prop.strip()
+                value = normalize_value(value)
+                if prop not in pvs:
+                    pvs[prop] = set()
+                pvs[prop].add(value)
+    return pvs
+
+
+def _is_pv_in_dict(prop: str, value: str, pvs: dict) -> bool:
+    '''Returns true if the property:value or propert is in the pvs dict.'''
+    if not prop:
+        return False
+    prop = prop.strip()
+    if value:
+        value = normalize_value(value)
+    if prop in pvs:
+        if value and value in pvs[prop]:
+            return True
+        if '' in pvs[prop]:
+            return True
+    return False
+
+
+def filter_mcf_nodes(nodes: dict,
+                     allow_dcids: list = None,
+                     allow_nodes_with_pv: list = None,
+                     ignore_nodes_with_pv: list = None) -> dict:
+    '''Filter dictionary of Nodes to a subset of allowed dcids.'''
+    # Normalize ignored PVs.
+    ignored_pvs = set()
+    ignored_pvs = _pv_list_to_dict(ignore_nodes_with_pv)
+    compared_pvs = _pv_list_to_dict(allow_nodes_with_pv)
+    filtered_nodes = {}
+    for k, v in nodes.items():
+        # Drop nodes with dcid not in allowed list.
+        if allow_dcids and strip_namespace(k) in allow_dcids:
+            logging.debug(f'Dropping dcid not in compare_dcid: {k}, {v}')
+            continue
+        # Drop nodes containing any ignored property value.
+        drop_node = False
+        for prop, value in v.items():
+            if prop and prop[0] != '#':
+                if _is_pv_in_dict(prop, value, ignored_pvs):
+                    logging.debug(
+                        f'Dropping dcid with ignored pv {prop}:{value}: {k}, {v}'
+                    )
+                    drop_node = True
+                    break
+                if compared_pvs and not _is_pv_in_dict(prop, value,
+                                                       compared_pvs):
+                    logging.debug(
+                        f'Dropping dcid without any compared pv {prop}:{value}: {k}, {v}'
+                    )
+                    drop_node = True
+                    break
+        if not drop_node:
+            filtered_nodes[k] = v
+    return filtered_nodes
 
 
 _DEFAULT_NODE_PVS = OrderedDict({
@@ -265,7 +403,7 @@ def write_mcf_nodes(node_dicts: list,
         for nodes in node_dicts:
             node_keys = list(nodes.keys())
             if sort:
-              node_keys = sorted(node_keys)
+                node_keys = sorted(node_keys)
             for dcid in node_keys:
                 node = nodes[dcid]
                 if sort:
