@@ -29,6 +29,14 @@ where
 
   Comments in the file are also added as special properties:
   '# comment<N>' where N is the comment number within a node.
+
+This can also be used as a commandline script to merge multiple MCF files into
+a single MCF file with consolidated property:values for each node.
+
+For example:
+```
+python3 mcf_file_util.py --input_mcf=test_data/*.mcf --output_mcf=/tmp/output.mcf
+```
 '''
 
 import csv
@@ -36,8 +44,14 @@ import glob
 import os
 
 from collections import OrderedDict
+from absl import app
+from absl import flags
 from absl import logging
 
+_FLAGS = flags.FLAGS
+
+flags.DEFINE_string('input_mcf', '', 'List of MCF files to load.')
+flags.DEFINE_string('output_mcf', '', 'output MCF nodes loaded into file.')
 
 def add_namespace(value: str, namespace: str = 'dcid') -> str:
     '''Returns the value with a namespace prefix for references.
@@ -396,6 +410,9 @@ def write_mcf_nodes(node_dicts: list,
                     header: str = None,
                     sort: bool = False):
     '''Write the nodes to an MCF file.'''
+    if isinstance(node_dicts, dict):
+      # Caller has a single dict of nodes. Create a list of dicts for it.
+      node_dicts = [node_dicts]
     with open(filename, mode) as output_f:
         if header is not None:
             output_f.write(header)
@@ -412,3 +429,16 @@ def write_mcf_nodes(node_dicts: list,
                 if len(pvs) > 0:
                     output_f.write(pvs)
                     output_f.write('\n\n')
+
+def main(_):
+    if not _FLAGS.input_mcf or not _FLAGS.output_mcf:
+        print(
+            f'Please provide input and output MCF files with --input_mcf and --output_mcf.'
+        )
+        return
+    nodes = load_mcf_nodes(_FLAGS.input_mcf)
+    write_mcf_nodes([nodes], _FLAGS.output_mcf)
+    logging.info(f'{len(nodes)} MCF nodes from {_FLAGS.input_mcf} written to {_FLAGS.output_mcf}')
+
+if __name__ == '__main__':
+    app.run(main)
