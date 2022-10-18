@@ -26,6 +26,7 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 
+from counters import Counters
 from mcf_diff import diff_mcf_files
 from stat_var_processor import StatVarDataProcessor, process
 
@@ -47,13 +48,13 @@ class TestStatVarProcessor(unittest.TestCase):
     def compare_mcf_files(self, file_pairs: dict):
         '''Compare files with MCF nodes allowing reordering of nodes and properties.'''
         for actual_file, expected_file in file_pairs.items():
-            counters = {}
+            counters = Counters()
             diff = diff_mcf_files(actual_file, expected_file,
                                   {'show_diff_nodes_only': True}, counters)
             self.assertEqual(
                 diff, '', f'Found diffs in MCF nodes:' +
                 f'"{actual_file}" vs "{expected_file}":' +
-                f'{diff}\nCounters: {counters}')
+                f'{diff}\nCounters: {counters.get_counters_string()}')
 
     def compare_csv_files(self, file_pairs: dict):
         '''Compare CSV files with statvar obsevration data.'''

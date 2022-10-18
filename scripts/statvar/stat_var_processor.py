@@ -54,13 +54,14 @@ sys.path.append(os.path.join(_SCRIPT_DIR,
 from config import Config, get_py_dict_from_file, get_config_from_file
 from counters import Counters
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
-from mcf_filter import dc_api_get_defined_dcids
+from dc_api_wrapper import dc_api_is_defined_dcid
 import statvar_dcid_generator
 
 _FLAGS = flags.FLAGS
 
 # Enable debug messages
 _DEBUG = False
+
 
 def is_valid_property(prop: str, schemaless: bool = False) -> bool:
     '''Returns True if the property begins with a letter, lowercase if schemaless.'''
@@ -164,6 +165,7 @@ def pvs_update(new_pvs: dict, pvs: dict, multi_value_keys: set = {}) -> dict:
     for prop, value in new_pvs.items():
         add_key_value(prop, value, pvs, multi_value_keys)
     return pvs
+
 
 class PropertyValueMapper(Config, Counters):
     '''Class to map strings to set of property values.
@@ -597,8 +599,8 @@ class StatVarsMap(Config, Counters):
                 _DEBUG and logging.debug(
                     f'Looking up DC API for dcids: {api_lookup_dcids} from PV map.'
                 )
-                schema_nodes = dc_api_get_defined_dcids(api_lookup_dcids,
-                                                        self.get_configs())
+                schema_nodes = dc_api_is_defined_dcid(api_lookup_dcids,
+                                                       self.get_configs())
                 # Update cache
                 self._dc_api_ids_cache.update(schema_nodes)
                 _DEBUG and logging.debug(
@@ -1791,10 +1793,10 @@ def download_csv_from_url(urls: list, data_path: str) -> list:
     for url in urls:
         # Extract the output filename from the URL.
         data_file = f'input{len(data_files)}.csv'
-        file_match = re.search(r'^[a-zA-Z0-9_:/\.-]*/(?P<file>[A-Za-z0-9_\.-]+)',
-                              url)
+        file_match = re.search(
+            r'^[a-zA-Z0-9_:/\.-]*/(?P<file>[A-Za-z0-9_\.-]+)', url)
         if file_match:
-          data_file = file_match.groupdict().get('file', data_file)
+            data_file = file_match.groupdict().get('file', data_file)
         # TODO: retry download on error or timeout.
         output_file = os.path.join(data_path, data_file)
         if not os.path.exists(output_file):

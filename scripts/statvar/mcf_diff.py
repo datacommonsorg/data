@@ -101,13 +101,10 @@ flags.DEFINE_list(
     'Compare nodes containing any of the property:values in the comma separated list.'
 )
 flags.DEFINE_bool('show_diff_nodes_only', True, 'Output nodes with diff only.')
-flags.DEFINE_integer('log_level', logging.INFO,
-                     'Log level messages to be shown.')
 
 
 def get_diff_config() -> dict:
     '''Returns the config for MCF diff from flags.'''
-    logging.set_verbosity(_FLAGS.log_level)
     return {
         'ignore_property': _FLAGS.ignore_property,
         'fingerprint_dcid': _FLAGS.fingerprint_dcid,
