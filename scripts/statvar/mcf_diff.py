@@ -105,17 +105,6 @@ flags.DEFINE_integer('log_level', logging.INFO,
                      'Log level messages to be shown.')
 
 
-def add_counter(counters: dict, name: str, value: int = 1):
-    '''Add a counter to the dict.'''
-    counters[name] = counters.get(name, 0) + value
-
-
-def print_counters(counters: dict):
-    '''Print the counters.'''
-    pp = pprint.PrettyPrinter(indent=4, stream=sys.stderr)
-    pp.pprint(counters)
-
-
 def get_diff_config() -> dict:
     '''Returns the config for MCF diff from flags.'''
     logging.set_verbosity(_FLAGS.log_level)
@@ -131,13 +120,15 @@ def get_diff_config() -> dict:
 
 def diff_mcf_node_pvs(node1: dict,
                       node2: dict,
-                      config: dict,
-                      counters: dict = None) -> (bool, str):
+                      config: dict = None,
+                      counters: Counters = None) -> (bool, str):
     '''Compare PVs in two nodes and report differences in the counter.
     returns the lines with diff marked with '<' or '>' in the beginning.
-    Returns a tuple of bool set to Trus if there is a diff and the diff string.'''
+    Returns a tuple of bool set to True if there is a diff and the diff string.'''
     if counters is None:
-        counters = {}
+        counters = Counters()
+    if config is None:
+        config = {}
     diff_lines = []
     dcid1 = get_node_dcid(node1)
     dcid2 = get_node_dcid(node2)
@@ -203,7 +194,7 @@ def diff_mcf_nodes(nodes1: dict,
         (has_diff, node_diff) = diff_mcf_node_pvs(nodes1.get(dcid, {}),
                                                   nodes2.get(dcid, {}), config,
                                                   counters)
-        if not config.get('show_diff_nodes_only', False) or has_diff:
+        if not config.get('show_diff_nodes_only', True) or has_diff:
             diff_str.append(node_diff)
             diff_str.append('\n')
 
@@ -213,7 +204,6 @@ def diff_mcf_nodes(nodes1: dict,
     for dcid2 in diff:
         counters.add_counter(f'dcid missing in nodes1', 1,
                              f'dcid={dcid2}, PVs={nodes2[dcid2]}')
-    counters.print_counters()
     return ('\n'.join(diff_str))
 
 

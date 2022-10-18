@@ -207,10 +207,47 @@ python3 mcf_file_util.py --input_mcf='test_data/*.mcf' --output_mcf=/tmp/merged.
 ```
 
 ### MCF Diff
+Utility to compare MCF nodes in two files and report any
+additions/deletions/modifications.
+
+The nodes in the MCF are normalized before comparison: the properties are sorted and
+values use a fixed namespace of 'dcid:'.
+
+The folowing utilities can be used to compare MCF nodes:
+ - `diff_mcf_node_pvs(node1: dict, node2: dict) -> (bool, diff_string)`
+    Compare two dictionaries of node property:values and returns a tuple
+    with boolean True if there is diff and the diff string with one PV per line.
+ - `diff_mcf_nodes(nodes1: list, nodes2: list, config: dict) -> diff string`
+   Compares nodes with the same dcid from the two lists of nodes and return
+   the diff string.
+   If `config['show_diff_nodes_only']` is set only nodes having diffs are
+   returned, otherwise all nodes are returned.
+
+The script can also be invoked as follows from commandline to comapre two MCF
+files:
+```
+python3 mcf_diff.py --mcf1=<file1.mcf> --mcf2=<file2.mcf>
+
+```
+It prints out all nodes across the two files highlighting and additions with `+`
+and deletions with `-` and changes with `?` at the begining of the line.
 
 ### MCF Filter
 
-## Other Utility functions
+Utility to filter MCF file removing nodes that are already defined in another
+MCF file or in the DC API.
 
-### DC APi Wrapper
+```
+python3 mcf_filter.py --input_mcf=<mcf-file> \
+  --ignore_mcf=<mcf-file-with-nodes-dropepd> \
+  --ignore_existing_nodes \
+  --output_mcf=<output-mcf-file>
+
+```
+
+### DC API Wrapper
+
+Wrapper utilities for data commons python APIs.
+
+ - `dc_api_wrapper
 

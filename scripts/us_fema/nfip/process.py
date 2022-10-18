@@ -48,10 +48,10 @@ class NFIPStatVarDataProcessor(StatVarDataProcessor):
             date = pvs.get('observationDate', '')
             if date:
                 if len(date) == len('YYYY'):
-                    # Date is just a year: YYYY, Set period as 1PY.
-                    pvs['observationPeriod'] = '1PY'
+                    # Date is just a year: YYYY, Set period as P1Y.
+                    pvs['observationPeriod'] = 'P1Y'
                 elif len(date) == len('YYYY-MM'):
-                    pvs['observationPeriod'] = '1PM'
+                    pvs['observationPeriod'] = 'P1M'
         svobs_pvs_list = [pvs]
         # Create aggregate SVObs without floodZoneType PV.
         if strip_namespace(pvs.get('floodZoneType',

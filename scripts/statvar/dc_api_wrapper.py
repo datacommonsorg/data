@@ -13,6 +13,8 @@
 # limitations under the License.
 '''Wrapper utilities for data commons API.'''
 
+import sys
+import os
 import datacommons as dc
 import requests_cache
 import time
@@ -69,7 +71,9 @@ def dc_api_wrapper(function,
                 logging.debug(
                     f'Invoking DC API {function}, #{attempt} with {args}, retries={retries}'
                 )
-                return function(**args)
+                response = function(**args)
+                logging.debug(f'Got API response {response} for {function}, {args}')
+                return response
             except KeyError:
                 # Exception in case of API error.
                 return None
@@ -85,7 +89,7 @@ def dc_api_wrapper(function,
 
 
 def dc_api_batched_wrapper(function, dcids: list, args: dict,
-                           config: dict) -> dict:
+                           config: dict = None) -> dict:
     '''A wrapper for DC API on dcids with batching support.
     Returns the dictionary result for the function call across all arguments.
   It batches the dcids to make multiple calls to the DC API and merges all results.
@@ -102,11 +106,13 @@ def dc_api_batched_wrapper(function, dcids: list, args: dict,
         dc_api_retries: Number of times an API can be retried.
         dc_api_retry_sec: Interval in seconds between retries.
         dc_api_use_cache: Enable/disable request cache for the DC API call.
-        dc_api_root: The server to use fr the DC API calls.
+        dc_api_root: The server to use for the DC API calls.
 
   Returns:
     Merged function return values across all dcids.
   '''
+    if not config:
+      config = {}
     api_result = {}
     index = 0
     num_dcids = len(dcids)
@@ -129,11 +135,12 @@ def dc_api_batched_wrapper(function, dcids: list, args: dict,
         if batch_result:
             api_result.update(batch_result)
             logging.debug(f'Got DC API result for {function}: {batch_result}')
+    logging.debug(f'Returning response {api_result} for {function}, {dcids}, {args}')
     return api_result
 
 
-def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict) -> dict:
-    '''Returns a dicttionary with dcids mapped to True/False base don whether
+def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict = None) -> dict:
+    '''Returns a dicttionary with dcids mapped to True/False based on whether
     the dcid is defined in the API and has a 'typeOf' property.
        Uses the property_value() DC API to lookup 'typeOf' for each dcid.
        dcids not defined in KG get a value of False.
@@ -152,21 +159,23 @@ def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict) -> dict:
     api_result = dc_api_batched_wrapper(api_function, dcids, args, wrapper_config)
     response = {}
     for dcid in dcids:
-        if dcid in api_result and api_result[dcid]:
+        dcid_stripped = strip_namespace(dcid)
+        if dcid_stripped in api_result and api_result[dcid_stripped]:
             response[dcid] = True
         else:
             response[dcid] = False
     return response
 
 
-def dc_api_get_node_property_values(dcids: list, wrapper_config: dict) -> dict:
+def dc_api_get_node_property_values(dcids: list, wrapper_config: dict = None) -> dict:
     '''Returns all the property values for a set of dcids from the DC API.
     Args:
       dcids: list of dcids to lookup
       wrapper_config: configuration parameters for the wrapper.
          See dc_api_batched_wrapper() and dc_api_wrapper() for details.
     Returns:
-      dictionary with each dcid mapped to a dictionary of property:value.
+      dictionary with each dcid with the namspace 'dcid:' as the key
+      mapped to a dictionary of property:value.
     '''
     predefined_nodes = OrderedDict()
     api_function = dc.get_triples
