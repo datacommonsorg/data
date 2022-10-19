@@ -1,4 +1,19 @@
-cause_dcid_map = {
+# Copyright 2022 Google LLC
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#     https://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Mappings to create CSV for WFIGS data.
+"""
+CAUSE_DCID_MAP = {
     "Human":
         "FireCauseHuman",
     "Natural":
@@ -157,18 +172,18 @@ cause_dcid_map = {
         "YardDebris"
 }
 
-POOState_geoID_map = {
-    "CA-BC": "dcid:wikidataId/Q1974, dcid:country/CAN",
-    "CA-SK": "dcid:wikidataId/Q1989, dcid:country/CAN",
-    "CA-YT": "dcid:wikidataId/Q2009, dcid:country/CAN",
-    "MX-BCN": "dcid:wikidataId/Q58731, dcid:country/MEX",
+POOSTATE_GEOID_MAP = {
+    "CA-BC": "dcid:wikidataId/Q1974",
+    "CA-SK": "dcid:wikidataId/Q1989",
+    "CA-YT": "dcid:wikidataId/Q2009",
+    "MX-BCN": "dcid:wikidataId/Q58731",
     # BC and BCN are both Baja California
-    "MX-BN": "dcid:wikidataId/Q58731, dcid:country/MEX",
-    "MX-CA": "dcid:wikidataId/Q53079, dcid:country/MEX",
-    "MX-CH": "dcid:wikidataId/Q53079, dcid:country/MEX",
-    "MX-SO": "dcid:wikidataId/Q46422, dcid:country/MEX",
-    "MX-SON": "dcid:wikidataId/Q46422, dcid:country/MEX",
-    "MX-TAM": "dcid:wikidataId/Q80007, dcid:country/MEX",
+    "MX-BN": "dcid:wikidataId/Q58731",
+    "MX-CA": "dcid:wikidataId/Q53079",
+    "MX-CH": "dcid:wikidataId/Q53079",
+    "MX-SO": "dcid:wikidataId/Q46422",
+    "MX-SON": "dcid:wikidataId/Q46422",
+    "MX-TAM": "dcid:wikidataId/Q80007",
     "US-AK": "dcid:geoId/02, dcid:country/USA",
     "US-AL": "dcid:geoId/01, dcid:country/USA",
     "US-AR": "dcid:geoId/04, dcid:country/USA",

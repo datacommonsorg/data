@@ -81,7 +81,7 @@ class LatLng2Places:
                     break
             for p, gj in self._us_county_geojsons.items():
                 if gj.contains(point):
-                    cip.append(p)
+                    cip.append(p.zfill(5))
                     break
         if country:
             cip.append(country)
