@@ -60,13 +60,14 @@ def download_files(INPUT_URLS, folders) -> None:
     for folder in folders:
         files = os.listdir(os.path.join(_DOWNLOAD_PATH, folder))
         for file in files:
-            file_name = os.path.join(_DOWNLOAD_PATH, folder, file)
-            shutil.move(file_name, _DOWNLOAD_PATH)
+            if file.endswith(".csv"):
+                file_name = os.path.join(_DOWNLOAD_PATH, folder, file)
+                shutil.move(file_name, _DOWNLOAD_PATH)
         os.rmdir(os.path.join(_DOWNLOAD_PATH, folder))
 
     files = os.listdir(_DOWNLOAD_PATH)
     # Delete metadata files present in the folder.
     for file in files:
         if file.endswith(".txt") or file.endswith(".xlsx") or file.endswith(
-                ".pdf"):
+                ".pdf") or "tribes" in file:
             os.remove(os.path.join(_DOWNLOAD_PATH, file))

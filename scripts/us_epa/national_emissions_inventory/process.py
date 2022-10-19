@@ -106,16 +106,34 @@ class USAirEmissionTrends:
         Returns:
             df (pd.DataFrame): provides the regularized df as output
         """
-        if '2008' in file_path or '2011' in file_path:
+        print(file_path)
+        if '2008' in file_path or '2011' in file_path:   
             df.rename(columns=replacement_08_11, inplace=True)
-            df = df.drop(columns=drop_08_11)
             df['pollutant type(s)'] = 'nan'
+            if 'event' in file_path:
+                df = df.drop(columns=drop_08_11_event)
+                df['emissions type code'] = ''
+            elif 'process' in file_path:
+                df = df.dropna(subset=['fips code'])
+                df = df[['fips code', 'scc', 'pollutant code', 'total emissions', 'emissions uom', 'pollutant type(s)']]
+                df['emissions type code'] = ''
+            else:
+                df = df.drop(columns=drop_08_11)
             if '2008' in file_path:
                 df['year'] = '2008'
             else:
                 df['year'] = '2011'
         elif '2017' in file_path:
-            df = df.drop(columns=drop_17)
+            if 'Event' in file_path:
+                df = df.drop(columns=drop_17_event)
+                df['pollutant type(s)'] = 'nan'
+            elif 'point' in file_path:
+                if 'unknown' in file_path or '678910' in file_path:
+                    df.rename(columns=replacement_point_17, inplace=True)
+                df = df[['fips code', 'scc', 'pollutant code', 'total emissions', 'emissions uom', 'pollutant type(s)']]
+                df['emissions type code'] = ''
+            else:
+                df = df.drop(columns=drop_17)
             df['year'] = '2017'
         elif 'tribes' in file_path:
             df.rename(columns=replacement_tribes, inplace=True)
@@ -125,7 +143,14 @@ class USAirEmissionTrends:
             df['year'] = '2014'
         else:
             df.rename(columns=replacement_14, inplace=True)
-            df = df.drop(columns=drop_14)
+            if 'event' in file_path:
+                df = df.drop(columns=drop_14_event)
+                df['emissions type code'] = ''
+            elif 'process' in file_path:
+                df = df[['fips code', 'scc', 'pollutant code', 'total emissions', 'emissions uom']]
+                df['emissions type code'] = ''
+            else:
+                df = df.drop(columns=drop_14)
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
         return df
@@ -148,45 +173,34 @@ class USAirEmissionTrends:
         #
         # Remove if Tribal Details are needed
         #
-        df['geo_Id'] = df['geo_Id'].astype(int)
+        df['geo_Id'] = df['geo_Id'].astype(float).astype(int)
         df = df.drop(df[df.geo_Id > 80000].index)
         df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
         df['geo_Id'] = df['geo_Id'].astype(str)
         #
         # Remove if Tribal Details are needed
         #
+        df['scc'] = df['scc'].astype(str)
+        df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2], df['scc'].str[0])
         df['geo_Id'] = 'geoId/' + df['geo_Id']
         df.rename(columns=replacement_17, inplace=True)
+        df_pollutants = df[df['pollutant code'].isin(pollutants)]
+        df_pollutants = self._data_standardize(df_pollutants, 'pollutant code')
+        df['pollutant code'] = ''
+        df = pd.concat([df,df_pollutants])
         df = self._data_standardize(df, 'unit')
-        df = self._data_standardize(df, 'pollutant code')
-        df_emissions_code = df[df['emissions type code'] != '']
-        df_emissions_code = df_emissions_code[
-            (df_emissions_code['emissions type code'].notnull()) &
-            (df_emissions_code['emissions type code'] != "B") &
-            (df_emissions_code['emissions type code'] != "T")]
-        if df_emissions_code.empty == False:
-            df_emissions_code = self._data_standardize(df_emissions_code,
-                                                       'emissions type code')
-            df_emissions_code['SV'] = (
-                'Annual_Amount_Emissions_' +
-                df_emissions_code['emissions type code'] + '_' +
-                df_emissions_code['pollutant code'].astype(str) + '_SCC_' +
-                df_emissions_code['scc'].astype(str))
-            df_emissions_code[
-                'Measurement_Method'] = 'EPA_NationalEmissionInventory'
+        df['scc_name'] = df['scc'].astype(str)
+        df = df.replace({'scc_name': replace_source_metadata})
+        df['scc_name'] = df['scc_name'].str.replace(' ','')
         df['SV'] = ('Annual_Amount_Emissions_' +
                     df['pollutant code'].astype(str) + '_SCC_' +
-                    df['scc'].astype(str))
+                    df['scc'].astype(str)) + '_' + df['scc_name']
 
-        df['Measurement_Method'] = np.where(
-            (df['emissions type code'] != '') &
-            (df['emissions type code'].notnull()),
-            'dcAggregate/EPA_NationalEmissionInventory',
-            'EPA_NationalEmissionInventory')
-
-        df = pd.concat([df, df_emissions_code])
-        df['SV'] = df['SV'].str.replace('_nan', '')
+        df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
+        df['SV'] = df['SV'].str.replace('_nan', '').str.replace('__', '_')
         df = df.drop(columns=drop_df)
+        df = df.drop(df[df['observation'] == '.'].index)
+        df['observation'] = df['observation'].astype(float)
         return df
 
     def _mcf_property_generator(self) -> None:
@@ -214,7 +228,7 @@ class USAirEmissionTrends:
             # }
             pollutant = code = ''
             sv_property = sv.split("_")
-            scc_code = str(sv_property[-1])
+            scc_code = str(sv_property[-2])
             #
             # Remove if SCC Levels are not needed.
             sccL1 = scc_code[:1] if len(scc_code) == 8 else scc_code[:2]
@@ -231,23 +245,28 @@ class USAirEmissionTrends:
             sccL2 = '\nepaSccCodeLevel2: dcs:EPA_SCC/' + sccL2 if sccL2 != 0 else ''
             sccL3 = '\nepaSccCodeLevel3: dcs:EPA_SCC/' + sccL3 if sccL3 != 0 else ''
             #
-            source = '\nepaSccCode: dcs:EPA_SCC/' + sv_property[-1]
-            scc_name = replace_source_metadata[sv_property[-1]]
-            scc_name = scc_name + " (" + sv_property[-1] + ")"
+            source = '\nepaSccCode: dcs:EPA_SCC/' + sv_property[-2]
+            scc_name = sv_property[-1]
+            scc_name = scc_name + " (" + sv_property[-2] + ")"
             # sv_checker['epaSccCode'] = sv_property[-1]
-            pollutant_start = 3
+            pollutant_start = 3 if sv_property[3] != 'SCC' else None
             if sv_property[3] in [
                     'Exhaust', 'Evaporation', 'Refueling', 'BName', 'TName',
                     'Cruise', 'Maneuvering', 'ReducedSpeedZone', 'Hotelling'
             ]:
                 code = "\nemissionTypeCode: dcs:" + sv_property[3]
                 scc_name = scc_name + ", " + sv_property[3]
-                pollutant_start = 4
-            for i in sv_property[pollutant_start:-2]:
-                pollutant = pollutant + i + '_'
-            # sv_checker['emittedThing'] = 'dcs:' + pollutant.rstrip('_')
-            pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')
-            pollutant_name = replace_metadata[pollutant.rstrip('_')]
+                pollutant_start = 4 if sv_property[4] != 'SCC' else None
+
+            pollutant_name = ''
+            pollutant_value = ''
+            print(sv)
+            if pollutant_start != None:
+                for i in sv_property[pollutant_start:-3]:
+                    pollutant = pollutant + i + '_'
+                # sv_checker['emittedThing'] = 'dcs:' + pollutant.rstrip('_')
+                pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')
+                pollutant_name = replace_metadata[pollutant.rstrip('_')] + ", "
             # generated_sv = get_statvar_dcid(sv_checker)
             # if (generated_sv != sv):
             #     print(generated_sv)
@@ -260,7 +279,7 @@ class USAirEmissionTrends:
                 scc_L2=sccL2,
                 scc_L3=sccL3,
                 pollutant=pollutant_value,
-                statvar_name=pollutant_name + ", " + scc_name,
+                statvar_name=pollutant_name + scc_name,
                 emission_type=code) + "\n"
     
     def _aggregate_scc(self):
@@ -312,7 +331,7 @@ class USAirEmissionTrends:
             self.final_df['observation'] / 2000, self.final_df['observation'])
         self.final_df = self.final_df.groupby(
             ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
-        self._aggregate_scc()
+        # self._aggregate_scc()
 
     def generate_tmcf(self) -> None:
         """
@@ -372,6 +391,7 @@ def main(_):
         print("Run the download script first.\n")
         sys.exit(1)
     ip_files = [input_path + os.sep + file for file in ip_files]
+    print(ip_files)
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
     # Defining Output Files
