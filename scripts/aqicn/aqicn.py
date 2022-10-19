@@ -17,8 +17,11 @@ Usage: python3 aqicn.py
 '''
 import csv
 import io
+import os
 import urllib.request
 from datetime import datetime
+
+module_dir_ = os.path.dirname(__file__)
 
 URL_PREFIX = 'https://aqicn.org/data-platform/covid19/report/37742-68557380/'
 OUTPUT_PREFIX = 'output_'
@@ -58,7 +61,7 @@ SPECIES = {
 }
 
 CITIES = {}
-f = open('cities.csv')
+f = open(os.path.join(module_dir_, 'cities.csv'))
 reader = csv.DictReader(f)
 for row in reader:
     CITIES[row['name']] = row['dcid']
