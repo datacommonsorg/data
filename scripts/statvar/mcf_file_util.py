@@ -53,6 +53,20 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string('input_mcf', '', 'List of MCF files to load.')
 flags.DEFINE_string('output_mcf', '', 'output MCF nodes loaded into file.')
 
+_DEFAULT_NODE_PVS = OrderedDict({
+    'Node': '',
+    'typeOf': '',
+    'subClassOf': '',
+    'name': '',
+    'description': '',
+    'populationType': '',
+    'measuredProperty': '',
+    'measurementQualifier': '',
+    'statType': '',
+    'measurementDenominator': '',
+})
+
+
 def add_namespace(value: str, namespace: str = 'dcid') -> str:
     '''Returns the value with a namespace prefix for references.
     Args:
@@ -126,10 +140,10 @@ def add_pv_to_node(prop: str, value: str, node: dict) -> dict:
     return node
 
 
-def add_comment_to_node(line: str, node: dict) -> dict:
+def add_comment_to_node(comment: str, node: dict) -> dict:
     '''Add a comment to the node. The comments are preserved in the order read.
     Args:
-      line: a comment string
+      comment: a comment string
       node: dictionary to whcih comment is to be added as a key.
     Returns:
       dictionary with the comment added.
@@ -141,8 +155,9 @@ def add_comment_to_node(line: str, node: dict) -> dict:
     comments = [c for c in node.keys() if c and c[0] == '#']
     next_comment_index = len(comments) + 1
     # Add the new comment with the next index.
-    node[f'# comment{next_comment_index}'] = line
+    node[f'# comment{next_comment_index}'] = comment
     return node
+
 
 def get_node_dcid(pvs: dict) -> str:
     '''Returns the dcid of the node without the namespace prefix.
@@ -155,7 +170,7 @@ def get_node_dcid(pvs: dict) -> str:
       'Node'
     '''
     if not pvs:
-        return None
+        return ''
     dcid = pvs.get('Node', '')
     dcid = pvs.get('dcid', dcid)
     dcid = dcid.strip(' "')
@@ -285,21 +300,7 @@ def filter_mcf_nodes(nodes: dict,
     return filtered_nodes
 
 
-_DEFAULT_NODE_PVS = OrderedDict({
-    'Node': '',
-    'typeOf': '',
-    'subClassOf': '',
-    'name': '',
-    'description': '',
-    'populationType': '',
-    'measuredProperty': '',
-    'measurementQualifier': '',
-    'statType': '',
-    'measurementDenominator': '',
-})
-
-
-def get_prop_value_line(prop, value) -> str:
+def _get_prop_value_line(prop, value) -> str:
     '''Return a text line for a property and value.'''
     if isinstance(value, list):
         value = ','.join([add_namespace(x) for x in value])
@@ -346,7 +347,7 @@ def normalize_pv(prop: str, value: str) -> str:
     return ':'.join([prop.strip(), normalize_value(value)])
 
 
-def normalize_mcf_node(node: dict) -> dict:
+def normalize_mcf_node(node: dict, ignore_comments: bool = True) -> dict:
     '''Returns a normalized MCF node with all PVs in alphabetical order,
     a common namespace of 'dcid' and comma separated lists also sorted.
     '''
@@ -362,7 +363,7 @@ def normalize_mcf_node(node: dict) -> dict:
 
     # Add remaining properties in alphabetical order.
     for p in sorted(props):
-        if p and p[0] == '#':
+        if p and p[0] == '#' and ignore_comments:
             # Ignore comments
             continue
         value = node[p]
@@ -388,7 +389,7 @@ def node_dict_to_text(node: dict, default_pvs: dict = _DEFAULT_NODE_PVS) -> str:
     for prop, default_value in default_pvs.items():
         value = node.get(prop, default_value)
         if value != '':
-            pvs.append(get_prop_value_line(prop, value))
+            pvs.append(_get_prop_value_line(prop, value))
         if prop in props:
             props.remove(prop)
     # Add remaining property values.
@@ -399,7 +400,7 @@ def node_dict_to_text(node: dict, default_pvs: dict = _DEFAULT_NODE_PVS) -> str:
             continue
         value = node.get(prop, '')
         if value != '':
-            pvs.append(get_prop_value_line(prop, value))
+            pvs.append(_get_prop_value_line(prop, value))
     return '\n'.join(pvs)
 
 
@@ -408,11 +409,12 @@ def write_mcf_nodes(node_dicts: list,
                     mode: str = 'w',
                     default_pvs: dict = _DEFAULT_NODE_PVS,
                     header: str = None,
+                    ignore_comments: bool = True,
                     sort: bool = False):
     '''Write the nodes to an MCF file.'''
     if isinstance(node_dicts, dict):
-      # Caller has a single dict of nodes. Create a list of dicts for it.
-      node_dicts = [node_dicts]
+        # Caller has a single dict of nodes. Create a list of dicts for it.
+        node_dicts = [node_dicts]
     with open(filename, mode) as output_f:
         if header is not None:
             output_f.write(header)
@@ -424,11 +426,12 @@ def write_mcf_nodes(node_dicts: list,
             for dcid in node_keys:
                 node = nodes[dcid]
                 if sort:
-                    node = normalize_mcf_node(node)
+                    node = normalize_mcf_node(node, ignore_comments)
                 pvs = node_dict_to_text(node, default_pvs)
                 if len(pvs) > 0:
                     output_f.write(pvs)
                     output_f.write('\n\n')
+
 
 def main(_):
     if not _FLAGS.input_mcf or not _FLAGS.output_mcf:
@@ -438,7 +441,10 @@ def main(_):
         return
     nodes = load_mcf_nodes(_FLAGS.input_mcf)
     write_mcf_nodes([nodes], _FLAGS.output_mcf)
-    logging.info(f'{len(nodes)} MCF nodes from {_FLAGS.input_mcf} written to {_FLAGS.output_mcf}')
+    logging.info(
+        f'{len(nodes)} MCF nodes from {_FLAGS.input_mcf} written to {_FLAGS.output_mcf}'
+    )
+
 
 if __name__ == '__main__':
     app.run(main)

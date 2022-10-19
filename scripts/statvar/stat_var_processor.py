@@ -25,6 +25,8 @@ This will generate the following outputs:
   <output-prefix>.mcf: MCF file with StatVar definitions.
   <output-prefix>.csv: CSV file with StatVarObservations.
   <output-prefix>.tmcf: MCF file mapping CSV columns to StatVar PVs.
+
+For more details on configs and usage, please refer to the README.
 '''
 
 import csv
@@ -43,6 +45,9 @@ from absl import app
 from absl import flags
 from absl import logging
 from collections import OrderedDict
+from typing import Union
+
+# uncomment to run pprof
 #from pypprof.net_http import start_pprof_server
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -60,19 +65,21 @@ import statvar_dcid_generator
 _FLAGS = flags.FLAGS
 
 # Enable debug messages
-_DEBUG = False
+_DEBUG = True
 
 
-def is_valid_property(prop: str, schemaless: bool = False) -> bool:
-    '''Returns True if the property begins with a letter, lowercase if schemaless.'''
+# Local utility functions
+def _is_valid_property(prop: str, schemaless: bool = False) -> bool:
+    '''Returns True if the property begins with a letter, lowercase.
+    If schemaless is true, property can begin with uppercase as well.'''
     if prop and isinstance(prop, str) and prop[0].isalpha():
         if schemaless or prop[0].islower():
             return True
     return False
 
 
-def is_valid_value(value: str) -> bool:
-    '''Returns True is the value is a valid property value without any references.'''
+def _is_valid_value(value: str) -> bool:
+    '''Returns True if the value is valid without any references.'''
     if not value:
         return False
     if isinstance(value, str):
@@ -84,8 +91,8 @@ def is_valid_value(value: str) -> bool:
     return True
 
 
-def is_schema_node(value: str) -> bool:
-    '''Returns True is the value is a schema node reference.'''
+def _is_schema_node(value: str) -> bool:
+    '''Returns True if the value is a schema node reference.'''
     if not value or not isinstance(value, str):
         return False
     if not value[0].isalpha() and value[0] != '[':
@@ -94,14 +101,14 @@ def is_schema_node(value: str) -> bool:
     # Check if string has any non alpha or non numeric codes
     non_alnum_chars = [
         c for c in strip_namespace(value)
-        if not c.isalnum() and c != '_' and c != '/'
+        if not c.isalnum() and c not in ['_', '/', '[', ']', '.']
     ]
     if non_alnum_chars:
         return False
     return True
 
 
-def get_numeric_value(value: str) -> float:
+def _get_numeric_value(value: str) -> Union[int, float, None]:
     '''Returns the float value from string or None.'''
     if isinstance(value, int) or isinstance(value, float):
         return value
@@ -124,28 +131,31 @@ def get_numeric_value(value: str) -> float:
     return None
 
 
-def get_words(value: str, word_delimiter: str) -> list:
+def _get_words(value: str, word_delimiter: str) -> list:
     '''Returns the list of non-empty words separated by the delimiter.'''
     return [w for w in re.split(word_delimiter, value) if w]
 
 
-def add_key_value(key: str,
-                  value: str,
-                  pvs: dict,
-                  multi_value_keys: set = {},
-                  overwrite: bool = True) -> dict:
+def _add_key_value(key: str,
+                   value: str,
+                   pvs: dict,
+                   multi_value_keys: set = {},
+                   overwrite: bool = True) -> dict:
     '''Adds a key:value to the dict.
     If the key already exists, adds value to a list if key is a multi_value key,
-    else replaces the value.'''
+    else replaces the value if overwrite is True.'''
     if key not in pvs:
+        # Add a new key:value
         pvs[key] = value
     else:
+        # Key exists. Check if value can be added.
         if key not in multi_value_keys:
             # Replace existing value with a new one.
             if overwrite:
                 pvs[key] = value
         else:
-            # This key can have multiple values. Add if it doesn't exist already.
+            # This key can have multiple values.
+            # Add to a list of values if it doesn't exist already.
             new_values = set()
             if isinstance(value, list):
                 new_values.update(value)
@@ -160,16 +170,63 @@ def add_key_value(key: str,
     return pvs
 
 
-def pvs_update(new_pvs: dict, pvs: dict, multi_value_keys: set = {}) -> dict:
-    '''Add the key:value pairs from the new_pvs into the pvs.'''
+def _pvs_update(new_pvs: dict, pvs: dict, multi_value_keys: set = {}) -> dict:
+    '''Add the key:value pairs from the new_pvs into the pvs dictionary.'''
     for prop, value in new_pvs.items():
-        add_key_value(prop, value, pvs, multi_value_keys)
+        _add_key_value(prop, value, pvs, multi_value_keys)
     return pvs
+
+
+def _capitalize_first_char(string: str) -> str:
+    '''Returns a string with the first letter capitalized.'''
+    if not string or not isinstance(string, str):
+        return string
+    return string[0].upper() + string[1:]
 
 
 class PropertyValueMapper(Config, Counters):
     '''Class to map strings to set of property values.
   Supports multiple maps with a namespace or context string.
+  Stores string to property:value maps as a dictionary:
+  _pv_map = {
+    'GLOBAL': {
+      '<input-data-string1>': {
+        '<prop1>': '<value1>'
+        '<prop2>': '<value2>'
+        ...
+      },
+      ...
+    },
+    '<namespace>' : {
+      '<input-data-string2>': {
+        '<prop3>': '<value3>'
+        ...
+      },
+      ...
+    },
+  }
+
+  The first level keys in _pv_map are namespaces that are column-headers or 'GLOBAL'.
+  When looking up PVs for an input string, such as a column header or a cell value,
+  first the namespace column-header is tried.
+  If there are no values then other namespacs such as 'GLOBAL are tried.
+
+  <value> within the PV can have a reference to another property.
+  Such reference are replaced with that property's value after
+  all PVs for a data cell have been collected.
+
+  The references are indicated with the syntax '{Variable}' or '@Variable'.
+  where 'Variable' is expected to be another property in the cell's PVs.
+
+  Internal properties that require special processing begin with '#', such as:
+  '#Regex': refers to a regular expression with names match groups
+      to be applied on a cell value
+  '#Format': a format string to be processed with other parameters
+  '#Eval': a python statement to be evaluated. It could have some computations.
+
+  The cell value is mapped to the following default properties:
+  'Data': the string value in the cell
+  'Number': the numeric value if the cell is a number.
   '''
 
     def __init__(self,
@@ -194,9 +251,14 @@ class PropertyValueMapper(Config, Counters):
         )
 
     def load_pvs_from_file(self, filename: str, namespace: str = 'GLOBAL'):
-        '''Loads a map from string -> { P: V }.
+        '''Loads a map of the form 'string -> { P: V }' from a file.
     File is a python dictionary or a JSON file with python equivalents
-    such as True(true), False(false), None(null).'''
+    such as True(true), False(false), None(null).
+    Args:
+      filename: file containing the dictionary of string to dictionary of PVs
+      namespace: the namespace key for the dictionary to be loaded against.
+         the namespace is the first level key in the _pv_map.
+      '''
         _DEBUG and logging.debug(f'Loading PV map from {filename}...')
         if namespace not in self._pv_map:
             self._pv_map[namespace] = {}
@@ -214,6 +276,7 @@ class PropertyValueMapper(Config, Counters):
                 pvs_input = {namespace: pvs_input}
             for p, v in pvs_input.items():
                 if p in pvs_dict:
+                    # A property has multiple values from different configs.
                     # Concatenate new value to existing one with '__'
                     if v not in pvs_dict[p]:
                         pvs_dict[p] = '__'.join(sorted([pvs_dict[p], v]))
@@ -222,7 +285,9 @@ class PropertyValueMapper(Config, Counters):
                 else:
                     pvs_dict[p] = v
                     num_keys_added += 1
-            num_words_key = len(get_words(key, word_delimiter))
+            # Track the max number of words in any of the keys.
+            # This is used when splitting input-string for lookups.
+            num_words_key = len(_get_words(key, word_delimiter))
             self._max_words_in_keys = max(self._max_words_in_keys,
                                           num_words_key)
             _DEBUG and logging.log(2, f'Setting PVMap[{key}] = {pvs_dict}')
@@ -234,18 +299,25 @@ class PropertyValueMapper(Config, Counters):
         _DEBUG and logging.debug(f'Loaded pv map {namespace}:{pv_map_input}')
 
     def get_pv_map(self) -> dict:
+        '''Returns the dictionary mapping input-strings to property:values.'''
         return self._pv_map
 
     def process_pvs_for_data(self, key: str, pvs: dict) -> bool:
-        '''Returns true if PVs are processed successfully.
-      Processes actionable props such as '#Regex', '#Eval', '#Format'.
+        '''Returns true if property:values are processed successfully.
+      Processes values for actionable props such as '#Regex', '#Eval', '#Format'.
+      Args:
+        pvs (input/output) dictionary of property:values
+          Properties such as '#Regex', '#Eval', '#Format' are processed
+          and resulting properties are updated into pvs.
+      Returns:
+         True if any property:values were processed and pvs dict was updated.
       '''
         _DEBUG and logging.debug(f'Processing data PVs:{key}:{pvs}')
         data_key = self.get_config('data_key', '@Data')
         data = pvs.get(data_key, key)
         is_modified = False
 
-        # Process regular expression and collect named group matches in the PV.
+        # Process regular expression and add named group matches to the PV.
         regex_key = self.get_config('regex_key', '#Regex')
         if regex_key in pvs and data:
             re_pattern = pvs[regex_key]
@@ -258,8 +330,8 @@ class PropertyValueMapper(Config, Counters):
             )
             if regex_pvs:
                 self.add_counter('processed-regex', 1, re_pattern)
-                pvs_update(regex_pvs, pvs,
-                           self.get_config('multi_value_properties', {}))
+                _pvs_update(regex_pvs, pvs,
+                            self.get_config('multi_value_properties', {}))
                 pvs.pop(regex_key)
                 is_modified = True
 
@@ -267,11 +339,14 @@ class PropertyValueMapper(Config, Counters):
         format_key = self.get_config('format_key', '#Format')
         if format_key in pvs:
             format_str = pvs[format_key]
-            format_data = format_str.format(**pvs)
-            _DEBUG and logging.debug(
-                f'Processed format {format_str} on {key}:{data} to get {format_data}'
-            )
-            if format_data != data:
+            try:
+                format_data = format_str.format(**pvs)
+                _DEBUG and logging.debug(
+                    f'Processed format {format_str} on {key}:{data} to get {format_data}'
+                )
+            except NameError:
+                format_data = format_str
+            if format_data != data and format_data != format_str:
                 pvs[data_key] = format_data
                 self.add_counter('processed-format', 1, format_str)
                 pvs.pop(format_key)
@@ -281,10 +356,14 @@ class PropertyValueMapper(Config, Counters):
         eval_key = self.get_config('eval_key', '#Eval')
         if eval_key in pvs:
             eval_str = pvs[eval_key]
-            eval_data = eval(eval_str, {}, pvs)
-            _DEBUG and logging.debug(
-                f'Processed eval {eval_str} on {key}:{data} to get {eval_data}')
-            if eval_data != data:
+            try:
+                eval_data = eval(eval_str, {}, pvs)
+                _DEBUG and logging.debug(
+                    f'Processed eval {eval_str} on {key}:{data} to get {eval_data}'
+                )
+            except NameError:
+                eval_data = eval_str
+            if eval_data != data and eval_data != eval_str:
                 pvs[data_key] = eval_data
                 self.add_counter('processed-eval', 1, eval_str)
                 pvs.pop(eval_key)
@@ -292,7 +371,15 @@ class PropertyValueMapper(Config, Counters):
         return is_modified
 
     def get_pvs_for_key(self, key: str, namespace: str = 'GLOBAL') -> dict:
-        '''Return a dict of property-values for the given key.'''
+        '''Return a dict of property-values that are mapped to the given key
+        within the dictionary for the namespace.
+        Args:
+          key: input string to be looked up
+          namespace: the top level dictionary key to get the map
+            within which input-string is looked up.
+        Returns:
+          dictionary of property:values for the input string.
+        '''
         pvs = None
         if namespace in self._pv_map:
             pvs = self._pv_map[namespace].get(key, None)
@@ -303,8 +390,8 @@ class PropertyValueMapper(Config, Counters):
             for namespace, pv_map in self._pv_map.items():
                 if key in pv_map:
                     dicts_with_key.append(namespace)
-                    pvs_update(pv_map[key], pvs,
-                               self.get_config('multi_value_properties', {}))
+                    _pvs_update(pv_map[key], pvs,
+                                self.get_config('multi_value_properties', {}))
             if len(dicts_with_key) > 1:
                 logging.warning(
                     f'Duplicate key {key} in property maps: {dicts_with_key}')
@@ -317,8 +404,9 @@ class PropertyValueMapper(Config, Counters):
         _DEBUG and logging.log(3, f'Got PVs for {key}:{pvs}')
         return pvs
 
-    def is_key_in_value(self, key: str, value: str) -> bool:
-        '''Returns True is key is found inside value string.'''
+    def _is_key_in_value(self, key: str, value: str) -> bool:
+        '''Returns True if key is a substring of the value string.
+        Only substrings separated by the word boundary are considered.'''
         if self.get_config('match_substring_word_boundary', True):
             # Match substring around word boundaries.
             key_pat = f'\\b{key}\\b'
@@ -334,7 +422,17 @@ class PropertyValueMapper(Config, Counters):
     def get_pvs_for_key_substring(self,
                                   value: str,
                                   namespace: str = 'GLOBAL') -> dict:
-        '''Return a dict of property-values for any key is a substring of value.'''
+        '''Return a dict of property-values for any key is a substring of value
+        Args:
+          value: input string to be mapped to property:values
+          namespace: column header or context for the value string
+            used as the key for the first level dictionary in the pv_map.
+        Returns:
+          List of dictionary of property:values that apply to the input string
+          after collecting all PVs for any key that is a substring of the value.
+          '''
+        # Get a list of namespaces to lookup.
+        # If none given, lookup in all namespaces.
         namespaces = []
         if namespace and namespace in self._pv_map:
             namespaces.append(namespace)
@@ -348,7 +446,7 @@ class PropertyValueMapper(Config, Counters):
             pv_map = self._pv_map[n]
             sorted_keys = sorted(pv_map.keys(), key=len, reverse=False)
             for key in sorted_keys:
-                if self.is_key_in_value(key, value):
+                if self._is_key_in_value(key, value):
                     pvs_list.append(pv_map[key])
                     keys_list.append(key)
                     value.replace(key, '')
@@ -361,7 +459,15 @@ class PropertyValueMapper(Config, Counters):
                               value: str,
                               namespace: str = 'GLOBAL',
                               max_fragment_size: int = None) -> list:
-        '''Process a single data cell from a row:column and return set of PVs in the output.'''
+        '''Return a list of property:value dictionaries for an input string.
+      Args:
+        value: input string to be mapped to property:values
+        namespace: context for the input string such as the column header.
+        max_fragment_size: the maximum number of words into which
+          value can be fragmented when looking for matching keys in the pv_map.
+      Returns:
+        a list of dictionary of property:values.
+      '''
         _DEBUG and logging.log(3, f'Looking up PVs for {namespace}:{value}')
         if not value:
             return None
@@ -379,7 +485,7 @@ class PropertyValueMapper(Config, Counters):
         word_delimiter = self.get_config('word_delimiter', ' ')
         word_joiner = word_delimiter.split('|')[0]
         #words = value.split(word_delimiter)
-        words = get_words(value, word_delimiter)
+        words = _get_words(value, word_delimiter)
         if len(words) <= 1:
             return None
         max_fragment_words = len(words) - 1
@@ -421,14 +527,56 @@ class PropertyValueMapper(Config, Counters):
         return None
 
 
-# PVs for StatVarObs ignored when looking for dups
-_IGNORE_SVOBS_KEY_PVS = {
-    'value': '',
-}
-
-
 class StatVarsMap(Config, Counters):
-    '''Class to store statvars and statvar obs in a map.'''
+    '''Class to store StatVars and StatVarObs in a map.
+    _statvar_map: dictionary with dcid as the key mapped
+       to a dictionary of property:values
+    _statvar_obs_map:
+       dictionary with the fingerprint of place+date+variable as key
+       mapped to dictionary of property:values for StatVarObs.
+
+    Both maps may include additional internal properties such as '#Error...',
+    '#input' that are used for validation and debugging.
+
+    Processing options are passed in through a config object.
+    The following configurations are used in this class:
+      - schemaless: bool: to indicate support for schemaless statvars.
+      - statvar_dcid_ignore_values: set of values in data source to be ignored
+          such as 'NA', 'X', etc.
+      - default_statvar_pvs: default property:values applicable to Statvars
+      - default_svobs_pvs: default property:values applicable to StatVarVObs
+      - required_statvar_properties: mandatory properties for a StatVar
+      - required_statvarobs_properties: mandatory properties for a StatVarObs
+      - duplicate_statvars_key: internal property to store a reference to
+         duplicate statvar with same dcid but different properties.
+         Such statVars and corresponding SVObs are dropped from the output.
+         This is usually caused by insufficiently specified StatVar
+         missing some properties.
+      - duplicate_svobs_key: internal property for duplicate SVObs
+          for the same place+year+StatVar but different values.
+          If aggregate_duplicate_svobs is enabled, such duplicates are aggregated.
+          If not this is treated as an error and the SVObs and
+          the corresponding Statvars are dropped from the output.
+      - aggregate_duplicate_svobs: aggregate SVObs with the same
+          place+date+StatVar based on the '#Aggregate' property
+          which indicates type of aggregation such as sum/min/max.
+      - merged_pvs_prop: internal property (#MergedSVObs) to store references
+          to SVObs that were aggregated to obtain the final value.
+      - schemaless_statvar_comment_undefined_pvs: if True, when emitting
+        schemaless statvars, valid properties that are not yet defined
+          in the DC APi are commented out.
+          If any such commented properties exist in a StatVar,
+          it is converted to a schemaless statvar, i.e,
+          its measuredProperty is set to its dcid.
+
+    StatVars and StatVarObs are validated for duplicate values
+    with conflicting dcids before being emited to output files.
+    '''
+
+    # PVs for StatVarObs ignored when looking for dups
+    _IGNORE_SVOBS_KEY_PVS = {
+        'value': '',
+    }
 
     def __init__(self, config_dict: dict = None, counters_dict: dict = None):
         Config.__init__(self, config_dict=config_dict)
@@ -439,24 +587,42 @@ class StatVarsMap(Config, Counters):
         self._statvars_map = {}
         # Dictionary of statvar obs_key->{PVs}
         self._statvar_obs_map = {}
-        self._statvar_obs_props = dict()  # Properties across SVObs.
+        # Unique values seen per SVObs property.
+        self._statvar_obs_props = dict()
         # Cache for DC API lookups.
         self._dc_api_ids_cache = {}
 
-    def add_default_pvs(self, pvs: dict, default_pvs: dict) -> dict:
-        '''Add default values for any missing PVs.'''
+    def add_default_pvs(self, default_pvs: dict, pvs: dict) -> dict:
+        '''Add default values for any missing PVs.
+        Args:
+          default_pvs: dictionary with default property:values.
+            properties with a valid value not in pvs are added to it.
+          pvs: dictionary of property:values to be modified.
+        Returns:
+          dictionary of property:values after addition of default PVs.
+        '''
         for prop, value in default_pvs.items():
-            if is_valid_property(prop, self.get_config(
+            if _is_valid_property(prop, self.get_config(
                     'schemaless', False)) and value and prop not in pvs:
                 pvs[prop] = value
         return pvs
 
     def get_valid_pvs(self, pvs: dict) -> dict:
-        '''Return all valid PVs.'''
+        '''Return all valid property:value in the dictionary.
+        Args:
+          pvs: dictionary of property:value mappings.
+            property is considered valid if if begins with a lower case
+            or config for schemaless statvars is enabled.
+            schemaless statvars can have capitalized properties that are commented
+            out in the mcf.
+            value is considered valid if it has no unresolved references.
+        Returns:
+          dictionary of valid property:value mappings
+        '''
         valid_pvs = {}
         for prop, value in pvs.items():
-            if is_valid_property(prop, self.get_config(
-                    'schemaless', False)) and is_valid_value(value):
+            if _is_valid_property(prop, self.get_config(
+                    'schemaless', False)) and _is_valid_value(value):
                 valid_pvs[prop] = value
         return valid_pvs
 
@@ -466,8 +632,19 @@ class StatVarsMap(Config, Counters):
                         pv_map: dict,
                         duplicate_prop: str = None,
                         allow_equal_pvs: bool = True) -> bool:
-        '''Returns true if the key is added,
-        False if key already exists and values don't match.'''
+        '''Returns true if the key:pvs is added to the pv_map,
+          False if key already exists and values don't match.
+        Args:
+          key: the key to be added to the pv_map
+          pvs: the dictionaty value mapped to the key
+          pv_map: (output) dictionary to which key is to be added.
+          duplicate_prop: In case of duplicate entries, add this
+            duplicate prop mapped to the pvs dict into the existing entry.
+          allow_equal_pvs: If True duplicate pvs with the same property:value
+            is not considered an error.
+        Returns:
+          True if the key:pvs tuple was added to the pv_map.
+        '''
         if key in pv_map:
             if allow_equal_pvs and self.get_valid_pvs(
                     pvs) == self.get_valid_pvs(pv_map[key]):
@@ -484,18 +661,29 @@ class StatVarsMap(Config, Counters):
         pv_map[key] = pvs
         return True
 
-    def get_value_term(self, prop: str, value: str) -> str:
-        '''Returns the dcid term for the value.'''
+    def _get_dcid_term_for_pv(self, prop: str, value: str) -> str:
+        '''Returns the dcid term for the property:value to be used in the node's dcid.
+        Args:
+          prop: the property label
+          value: value of the property
+        Returns:
+          string to be used for this PV in the dcid.
+        For schemaless statvars, the property and value is used for the dcid term.
+        Otherwise the term is constructed from the value.
+        '''
         if not value:
-            return ''
+            return _capitalize_first_char(prop)
         if not isinstance(value, str):
-            return str(value)
+            # For numeric values use the property and value.
+            return _capitalize_first_char(
+                re.sub(r'[^A-Za-z0-9_/]', '_',
+                       f'{prop}_{value}').replace('__', '_'))
         prefix = ''
         if self.get_config('schemaless', False):
             # Add the property prefix for schemaless PVs.
             if prop and isinstance(prop,
                                    str) and prop[0].isupper() and prop != value:
-                prefix = f'{prop}_'
+                prefix = _capitalize_first_char(f'{prop}_')
         value = strip_namespace(value)
         if value[0] == '[':
             # Generate term for quantity range with start and optional end, unit.
@@ -525,15 +713,38 @@ class StatVarsMap(Config, Counters):
                     return prefix + value_term
         return prefix + value[0].upper() + value[1:]
 
-    def generate_statvar_dcid(self, pvs: dict) -> str:
-        '''Return the dcid for the statvar.'''
+    def _get_schemaless_statvar_props(self, pvs: dict) -> list:
+        '''Returns a list of schemaless properties from the dictionary of property:values.
+      Properties not defined in schema can be capitalized or commented.
+      '''
+        schemaless_props = []
+        for prop in pvs.keys():
+            if prop == 'Node' or _is_valid_property(prop, schemaless=False):
+                continue
+            if _is_valid_property(prop,
+                                  schemaless=True) or prop.startswith('# '):
+                schemaless_props.append(prop)
+        return schemaless_props
 
+    def generate_statvar_dcid(self, pvs: dict) -> str:
+        '''Return the dcid for the statvar.
+        Args:
+          pvs: dictionary of property:values
+        Returns:
+          dcid string.
+        For normal statvars, uses statvar_dcid_generator.py
+        For schameless statvars, uses the local implementation to add prop and value.
+        '''
         dcid = pvs.get('Node', '')
         dcid = pvs.get('dcid', dcid)
         if dcid:
             return dcid
+        # Use the statvar_dcid_generator for statvars with defined properties.
+        if not self.get_config(
+                'schemaless',
+                False) or not self._get_schemaless_statvar_props(pvs):
+            return statvar_dcid_generator.get_statvar_dcid(pvs)
         # Create a new dcid from PVs.
-        return statvar_dcid_generator.get_statvar_dcid(pvs)
         dcid_terms = []
         props = list(pvs.keys())
         dcid_ignore_values = self.get_config('statvar_dcid_ignore_values', [])
@@ -542,7 +753,7 @@ class StatVarsMap(Config, Counters):
                 props.remove(p)
                 value = strip_namespace(pvs[p])
                 if value and value not in dcid_ignore_values:
-                    dcid_terms.append(self.get_value_term(p, value))
+                    dcid_terms.append(self._get_dcid_term_for_pv(p, value))
         dcid_suffixes = []
         if 'measurementDenominator' in props:
             dcid_suffixes.append('AsAFractionOf')
@@ -550,9 +761,9 @@ class StatVarsMap(Config, Counters):
             props.remove('measurementDenominator')
         for p in sorted(props, key=str.casefold):
             value = pvs[p]
-            if is_valid_property(p, self.get_config(
-                    'schemaless', False)) and is_valid_value(value):
-                dcid_terms.append(self.get_value_term(p, value))
+            if _is_valid_property(p, self.get_config(
+                    'schemaless', False)) and _is_valid_value(value):
+                dcid_terms.append(self._get_dcid_term_for_pv(p, value))
         dcid_terms.extend(dcid_suffixes)
         dcid = re.sub(r'[^A-Za-z_0-9/]', '_', '_'.join(dcid_terms))
         pvs['Node'] = add_namespace(dcid)
@@ -565,8 +776,21 @@ class StatVarsMap(Config, Counters):
             ignore_props: list = [],
             comment_removed_props: bool = False) -> list:
         '''Remove any property:value tuples with undefined property or values
-        Returns list of properties removed.'''
-        # Collect all PVs to be checked.
+        Returns list of properties removed.
+        Args:
+          pv_map_dict: dictionary of dcids mapped to a dictionary of property:values
+          ignore_props: ignore any of these properties
+          comment_removed_props: if set to True, any property not defined in schema
+            is commented out.
+            This is useful for a schemaless statvar with a mix of
+            defined and undefined properties.
+        Returns:
+          list of properties removed.
+          the pv_map_dict is also updated in place.
+
+        Batches property and values to be looked up in the DC API.
+        '''
+        # Collect all property and values to be checked in schema.
         props_removed = []
         lookup_dcids = set()
         for namespace, pv_map in pv_map_dict.items():
@@ -583,11 +807,11 @@ class StatVarsMap(Config, Counters):
                         value = strip_namespace(value)
                     if prop in ignore_props:
                         continue
-                    if is_valid_property(prop,
-                                         self.get_config('schemaless', False)):
+                    if _is_valid_property(prop,
+                                          self.get_config('schemaless', False)):
                         lookup_dcids.add(prop)
-                    if is_schema_node(value):
-                        lookup_dcids.add(value)
+                        if _is_schema_node(value):
+                            lookup_dcids.add(value)
 
         # Lookup new Ids on the DC API.
         if lookup_dcids:
@@ -600,7 +824,7 @@ class StatVarsMap(Config, Counters):
                     f'Looking up DC API for dcids: {api_lookup_dcids} from PV map.'
                 )
                 schema_nodes = dc_api_is_defined_dcid(api_lookup_dcids,
-                                                       self.get_configs())
+                                                      self.get_configs())
                 # Update cache
                 self._dc_api_ids_cache.update(schema_nodes)
                 _DEBUG and logging.debug(
@@ -610,13 +834,14 @@ class StatVarsMap(Config, Counters):
         # Remove any PVs not in schema.
         counter_prefix = 'error-pvmap-dropped'
         if comment_removed_props:
-            counter_prefix = 'commented-pvmap'
+            counter_prefix = 'warning-commented-pvmap'
         for namespace, pv_map in pv_map_dict.items():
             for key, pvs in pv_map.items():
                 for prop in list(pvs.keys()):
                     if prop in ignore_props:
                         continue
-                    value = strip_namespace(pvs[prop])
+                    value = pvs[prop]
+                    # Remove property looked up in schema but not defined.
                     if prop in lookup_dcids and not self._dc_api_ids_cache.get(
                             prop, False):
                         logging.error(
@@ -627,6 +852,7 @@ class StatVarsMap(Config, Counters):
                             pvs[f'# {prop}: '] = value
                         self.add_counter(f'{counter_prefix}-undefined-property',
                                          1, prop)
+                    # Remove value looked up in schema but not defined.
                     if value in lookup_dcids and not self._dc_api_ids_cache.get(
                             value, False):
                         logging.error(
@@ -643,17 +869,16 @@ class StatVarsMap(Config, Counters):
         return props_removed
 
     def convert_to_schemaless_statvar(self, pvs: dict) -> dict:
-        '''Converts a dictionary of property values to schemaless StatVar
-        and returns True if pvs are modified.
-        If there are properties starting with capital letters,
-        they are commented and measuredProperty is set to the statvar dcid.'''
+        '''Returns the property:values dictionary after converting to schemaless statvar.
+          If there are any properties starting with capital letters,
+          they are commented and measuredProperty is set to the statvar dcid.
+        Args:
+          pvs: dictionary of property:values that is modified.
+        Returns:
+          True if the pvs were converted to schemaless.
+        '''
         _DEBUG and logging.debug(f'Converting to schemaless statvar {pvs}')
-        schemaless_props = []
-        for prop in pvs.keys():
-            if prop != 'Node' and not is_valid_property(
-                    prop, schemaless=False) and is_valid_property(
-                        prop, schemaless=True):
-                schemaless_props.append(prop)
+        schemaless_props = self._get_schemaless_statvar_props(pvs)
 
         # Got some capitalized properties.
         # Convert to schemaless PV:
@@ -661,8 +886,9 @@ class StatVarsMap(Config, Counters):
         # - comment out any capitalized (invalid) property
         dcid = self.generate_statvar_dcid(pvs)
         for prop in schemaless_props:
-            value = pvs.pop(prop)
-            pvs[f'# {prop}: '] = value
+            if prop[0] != '#':
+              value = pvs.pop(prop)
+              pvs[f'# {prop}: '] = value
         # Comment out any PVs with undefined property or value.
         if self.get_config('schemaless_statvar_comment_undefined_pvs', False):
             schemaless_props.extend(
@@ -671,17 +897,23 @@ class StatVarsMap(Config, Counters):
                 }},
                                                  ignore_props=['Node'],
                                                  comment_removed_props=True))
-        _DEBUG and logging.debug(f'Generated schemaless statvar {pvs}')
         if schemaless_props:
             # Found some schemaless properties. Change mProp to statvar dcid.
             if 'measuredProperty' in pvs:
                 pvs['# measuredProperty:'] = pvs.pop('measuredProperty')
             pvs['measuredProperty'] = add_namespace(dcid)
-            return True
-        return False
+        _DEBUG and logging.debug(f'Generated schemaless statvar {pvs}')
+        return len(schemaless_props) > 0
 
     def add_statvar(self, statvar_pvs: dict) -> bool:
-        '''Add unique statvars.'''
+        '''Returns True if the statvar pvs are valid and is added to the map.
+        Args:
+          statvar_pvs: dictionary of property:values for the statvar
+        Returns:
+          True if statvar is valid, not a duplicate and was added to the map.
+          The pvs may also be modified.
+          A dcid is added to the statvar if not already set.
+        '''
         pvs = self.get_valid_pvs(statvar_pvs)
         statvar_dcid = strip_namespace(self.generate_statvar_dcid(pvs))
         is_schemaless = False
@@ -694,7 +926,7 @@ class StatVarsMap(Config, Counters):
             )
             self.add_counter(f'error-duplicate-statvars', 1, statvar_dcid)
             return False
-        # Check if the required properties are present.
+        # Check if all the required statvar properties are present.
         missing_props = set(self.get_config('required_statvar_properties',
                                             [])).difference(set(pvs.keys()))
         if missing_props:
@@ -711,20 +943,34 @@ class StatVarsMap(Config, Counters):
         return True
 
     def get_svobs_key(self, pvs: dict) -> str:
-        '''Returns the key for SVObs concatenating all PVs, except place, date and value.'''
+        '''Returns the key for SVObs concatenating all PVs, except value.
+        Args:
+          pvs: dictionary of property:values for the statvar obs.
+        Returns
+          string fingerprint for the SVobs.
+        '''
         key_pvs = [
             f'{p}={pvs[p]}' for p in sorted(pvs.keys())
-            if is_valid_property(p, self.get_config('schemaless', False)) and
-            p not in _IGNORE_SVOBS_KEY_PVS
+            if _is_valid_property(p, self.get_config('schemaless', False)) and
+            _is_valid_value(pvs[p]) and p not in self._IGNORE_SVOBS_KEY_PVS
         ]
         return ';'.join(key_pvs)
 
     def aggregate_value(self, aggregation_type: str, current_pvs: str,
                         new_pvs: dict, aggregate_property: str):
-        '''Aggregate value for the given aggregate_property from new_pvs into current_pvs.'''
-        current_value = get_numeric_value(current_pvs.get(
-            aggregate_property, 0))
-        new_value = get_numeric_value(new_pvs.get(aggregate_property, 0))
+        '''Aggregate values for the given aggregate_property from new_pvs into current_pvs.
+        Args:
+          aggregation_type: string which is one of the supported aggregation types:
+            sum, min, max, list, first, last
+          current_pvs: Existing property:values in the map.
+          new_pvs: New pvs not in the map.
+          aggregate_property: property whoese values are to be aggregated.
+        Returns:
+          True if aggregation was successful.
+        '''
+        current_value = _get_numeric_value(
+            current_pvs.get(aggregate_property, 0))
+        new_value = _get_numeric_value(new_pvs.get(aggregate_property, 0))
         if current_value is None or new_value is None:
             log.error(
                 f'Invalid values to aggregate in {current_pvs}, {new_pvs}')
@@ -734,6 +980,8 @@ class StatVarsMap(Config, Counters):
             'min': lambda a, b: min(a, b),
             'max': lambda a, b: max(a, b),
             'list': lambda a, b: f'{a},{b}',
+            'first': lambda a, b: a,
+            'last': lambda a, b: b,
             # TODO: support mean with totals and counts
         }
         if aggregation_type not in aggregation_funcs:
@@ -990,6 +1238,7 @@ class StatVarsMap(Config, Counters):
         write_mcf_nodes([stat_var_nodes],
                         filename=filename,
                         mode=mode,
+                        ignore_comments=not self.get_config('schemaless', False),
                         sort=True,
                         header=header)
         self.add_counter('output-statvars-mcf', len(self._statvars_map),
@@ -1018,7 +1267,7 @@ class StatVarsMap(Config, Counters):
             if not self.get_config('debug', False):
                 # Remove debug columns.
                 for col in columns:
-                    if not is_valid_property(
+                    if not _is_valid_property(
                             col, self.get_config('schemaless', False)):
                         columns.remove(col)
                 input_column = self.get_config('input_reference_column')
@@ -1033,7 +1282,8 @@ class StatVarsMap(Config, Counters):
         debug_columns = []
         for col in columns:
             if col not in output_columns:
-                if is_valid_property(col, self.get_config('schemaless', False)):
+                if _is_valid_property(col, self.get_config('schemaless',
+                                                           False)):
                     output_columns.append(col)
                 else:
                     debug_columns.append(col)
@@ -1065,8 +1315,8 @@ class StatVarsMap(Config, Counters):
             for key, svobs in self._statvar_obs_map.items():
                 csv_writer.writerow(svobs)
                 for p, v in svobs.items():
-                    if is_valid_property(p,
-                                         self.get_config('schemaless', False)):
+                    if _is_valid_property(p,
+                                          self.get_config('schemaless', False)):
                         if p not in svobs_unique_values:
                             svobs_unique_values[p] = set()
                         svobs_unique_values[p].add(v)
@@ -1360,11 +1610,12 @@ class StatVarDataProcessor(Config, Counters):
                         )
                         self.add_counter('warning-unresolved-value-ref', 1,
                                          ','.join(unresolved_refs))
-                    add_key_value(prop,
-                                  value,
-                                  pvs,
-                                  self.get_config('multi_value_properties', {}),
-                                  overwrite=False)
+                    _add_key_value(prop,
+                                   value,
+                                   pvs,
+                                   self.get_config('multi_value_properties',
+                                                   {}),
+                                   overwrite=False)
                     _DEBUG and logging.debug(
                         f'Adding {value} for {prop}:{pvs[prop]}')
         _DEBUG and logging.debug(
@@ -1497,7 +1748,7 @@ class StatVarDataProcessor(Config, Counters):
                     f'Got pvs for column:{row_index}:{col_index}:{col_pvs}')
             else:
                 # Column has no PVs. Check if it has a value.
-                col_numeric_val = get_numeric_value(col_value)
+                col_numeric_val = _get_numeric_value(col_value)
                 if col_numeric_val:
                     if self.get_config('use_all_numeric_data_values', False):
                         row_col_pvs[col_index] = {'value': col_numeric_val}
@@ -1564,12 +1815,12 @@ class StatVarDataProcessor(Config, Counters):
                 for prop, value in cell_pvs.items():
                     if value and prop not in self._internal_reference_keys and not self.get_reference_names(
                             value):
-                        add_key_value(
+                        _add_key_value(
                             prop, value, row_pvs,
                             self.get_config('multi_value_properties', {}))
                 for prop, value in row_col_pvs.get(col_index, {}).items():
                     if value and prop not in self._internal_reference_keys:
-                        add_key_value(
+                        _add_key_value(
                             prop, value, row_pvs,
                             self.get_config('multi_value_properties', {}))
         # Process per-column PVs after merging with row-wide PVs.
@@ -1605,9 +1856,9 @@ class StatVarDataProcessor(Config, Counters):
         if not 'value' in pvs:
             return False
         value = pvs['value']
-        if not is_valid_value(value):
+        if not _is_valid_value(value):
             return False
-        numeric_value = get_numeric_value(value)
+        numeric_value = _get_numeric_value(value)
         if numeric_value:
             multiply_prop = self.get_config('multiply_factor', 'MultiplyFactor')
             if multiply_prop in pvs:
@@ -1673,8 +1924,8 @@ class StatVarDataProcessor(Config, Counters):
         for prop, value in pvs.items():
             if prop == self.get_config('aggregate_key', '#Aggregate'):
                 svobs_pvs[prop] = value
-            elif is_valid_property(prop, self.get_config(
-                    'schemaless', False)) and is_valid_value(value):
+            elif _is_valid_property(prop, self.get_config(
+                    'schemaless', False)) and _is_valid_value(value):
                 if prop in self.get_config('default_svobs_pvs'):
                     svobs_pvs[prop] = value
                 else:
@@ -1692,7 +1943,7 @@ class StatVarDataProcessor(Config, Counters):
 
         # Set the dcid for the StatVar
         self._statvars_map.add_default_pvs(
-            statvar_pvs, self.get_config('default_statvar_pvs'))
+            self.get_config('default_statvar_pvs'), statvar_pvs)
         statvar_dcid = strip_namespace(svobs_pvs.get('variableMeasured', None))
         statvar_dcid = strip_namespace(statvar_pvs.get('dcid', statvar_dcid))
         if not statvar_dcid:
@@ -1719,7 +1970,7 @@ class StatVarDataProcessor(Config, Counters):
 
         # Create and add SVObs.
         self._statvars_map.add_default_pvs(
-            svobs_pvs, self.get_config('default_svobs_pvs', {}))
+            self.get_config('default_svobs_pvs', {}), svobs_pvs)
         if not self.resolve_svobs_place(svobs_pvs):
             logging.error(f'Unable to resolve SVObs place in {pvs}')
             return False
@@ -1969,9 +2220,8 @@ def process(data_processor_class: StatVarDataProcessor,
 
 def main(_):
     _DEBUG = _FLAGS.debug
-    # TODO(ajaits): uncomment after fixing google.protobuf import error
-    # if _FLAGS.pprof_port > 0:
-    #     start_pprof_server(port=_FLAGS.pprof_port)
+    # uncomment to run pprof
+    # start_pprof_server(8080)
     process(StatVarDataProcessor,
             input_data=_FLAGS.input_data,
             output_path=_FLAGS.output_path,

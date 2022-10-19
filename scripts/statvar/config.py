@@ -55,7 +55,6 @@ flags.DEFINE_string(
 flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
 flags.DEFINE_string('output_path', '',
                     'File prefix for output mcf, csv and tmcf.')
-flags.mark_flag_as_required('output_path')
 flags.DEFINE_integer('parallelism', 0, 'Number of parallel processes to use.')
 flags.DEFINE_integer('pprof_port', 0, 'HTTP port for pprof server.')
 flags.DEFINE_bool('debug', False, 'Enable debug messages.')

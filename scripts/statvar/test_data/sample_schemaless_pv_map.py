@@ -32,15 +32,17 @@
     },
 
     # Add schemaless property with caps for Person Age.
-    # The age grop goes into statvar but the propoerty starting with caps are
-    # ignores.
+    # The age grop goes into statvar but the proporty starting with caps
+    # are not valid in DC schema, so will be commented out.
     "Person Age": {
         "PersonAge": "{@Data}",
     },
 
     # Race: Mapping for values in Column Person Race
     "Race": {
-        "RaceCode": "{@Data}",
+        # The property 'raceCode' is not defined in schema, so this will be
+        # commented out in the statvar mcf but used in the statvar dcid.
+        "raceCode": "{@Data}",
     },
 
     # Population count observations fom column: "Total Persons".
