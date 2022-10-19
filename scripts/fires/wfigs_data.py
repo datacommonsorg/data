@@ -30,8 +30,9 @@ import datacommons as dc
 import sys
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH)) #for mapping
+sys.path.append(os.path.join(_SCRIPT_PATH))  #for mapping
 import mapping
+
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../util/'))  # for recon util
 import latlng_recon_geojson
 
@@ -132,8 +133,8 @@ def process_df(df):
                 if str(x.InitialLatitude) in _CACHE:
                     if str(x.InitialLongitude) in _CACHE[str(
                             x.InitialLatitude)]:
-                        return _CACHE[str(
-                            x.InitialLatitude)][str(x.InitialLongitude)]
+                        return _CACHE[str(x.InitialLatitude)][str(
+                            x.InitialLongitude)]
                 geoIds = ll2p.resolve(x.InitialLatitude, x.InitialLongitude)
                 for geoId in geoIds:
                     if geoId not in ('northamerica', 'country/CAN',
@@ -208,6 +209,7 @@ def process_df(df):
             return ('fire/IrwinId/%s' % x.CpxID[1:-1].lower())
         else:
             return None
+
     df["FireDiscoveryDateTime"] = df["FireDiscoveryDateTime"].apply(
         get_datetime)
     df["Year"] = df["FireDiscoveryDateTime"].apply(lambda x: x.year)
