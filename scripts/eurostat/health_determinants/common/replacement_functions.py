@@ -184,6 +184,18 @@ _ISCED97 = {
     'TOTAL': 'Total'
 }
 
+_FREQUENC_FRUITS_VEGETABLES = {
+    'DAY': 'Daily',
+    'NVR': 'Never',
+    'NVR_OCC': 'NeverOrOccasionally',
+    'GE1D': 'AtLeastOnceADay',
+    'GE2D': 'AtleastTwiceADay',
+    '1-3W': 'From1To3TimesAWeek',
+    '4-6W': 'From4To6TimesAWeek',
+    '1D': 'OnceADay',
+    'LT1W': 'LessThanOnceAWeek'
+}
+
 
 def replace_col_values(data_df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -212,6 +224,7 @@ def replace_col_values(data_df: pd.DataFrame) -> pd.DataFrame:
         'smoking': _SMOKING,
         'frequenc_tobacco': _FREQUENC_TOBACCO,
         'frequenc_alcohol': _FREQUENC_ALCOHOL,
+        'frequenc_fruitsvegetables': _FREQUENC_FRUITS_VEGETABLES,
         'lev_perc': _LEV_PERC,
         'assist': _ASSIST,
         'n_portion': _N_PORTION,

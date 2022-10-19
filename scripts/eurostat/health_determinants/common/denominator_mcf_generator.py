@@ -41,6 +41,12 @@ _INCOME_QUINTILE_VALUES = {
     "IncomeOf80To100Percentile": "[80 100 Percentile]",
 }
 
+_N_PORTION_VALUES = {
+    "0Portions": "[Portions 0]",
+    "From1To4Portions": "[1 4 Portions]",
+    "5PortionsOrMore": "[5 - Portions]",
+}
+
 _NAME_PROP_REPLACEMENTS = {
     ", Among": " Among",
     "Population:,": "Population:",
@@ -110,6 +116,9 @@ def _generate_pv_node(prop: str) -> str:
     if "Percentile" in prop:
         income_quin = _INCOME_QUINTILE_VALUES[prop]
         return f"income: {income_quin}"
+    if "Portions" in prop:
+        n_portion = _N_PORTION_VALUES[prop]
+        return f"consumptionQuantity {n_portion}"
     if "Strong" in prop or "Intermediate" in prop or "Poor" in prop:
         return f"\nsocialSupportLevel: dcs:{prop}"
     if "Relatives" in prop:
