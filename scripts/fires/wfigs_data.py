@@ -75,15 +75,16 @@ def get_data(url):
     i = 0
     while True:
         r = requests.get("{url}&resultOffset={record_count}".format(
-          url = url,
-          record_count = str(full_page_record_count * i)))
+            url=url, record_count=str(full_page_record_count * i)))
         response_json = r.json()
         for row in response_json["features"]:
             data.append(row["attributes"])
         i += 1
-        full_page_record_count = max(full_page_record_count, len(response_json["features"]))
-        if not((response_json["features"]) and len(response_json["features"]) == full_page_record_count):
-          break
+        full_page_record_count = max(full_page_record_count,
+                                     len(response_json["features"]))
+        if not ((response_json["features"]) and
+                len(response_json["features"]) == full_page_record_count):
+            break
     df = pd.DataFrame(data)
     return df
 
