@@ -39,7 +39,6 @@ import latlng_recon_geojson
 pd.set_option("display.max_columns", None)
 
 PRE_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DiscoveryAcres,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
-YTD_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/CY_WildlandFire_Locations_ToDate/FeatureServer/0/query?where=1%3D1&outFields=FireCauseGeneral,FireCauseSpecific,FireCause,InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,IrwinID,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DiscoveryAcres,DailyAcres,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
 _OUTPUT = "/cns/jv-d/home/datcom/v3_resolved_mcf/fire/wfigs/"
 _CACHE = {}
 
@@ -71,20 +70,20 @@ def get_data(url):
     Returns:
       A Pandas dataframe containing merged historical and YTD data.
     """
-    r = requests.get(url)
-    x = r.json()
     data = []
-    for row in x["features"]:
-        data.append(row["attributes"])
-    max_record_count = len(x["features"])
-    offset_str = "&resultOffset="
-    i = 1
-    while (x["features"]) and len(x["features"]) == max_record_count:
-        r = requests.get(url + offset_str + str(max_record_count * i))
-        x = r.json()
-        for row in x["features"]:
+    full_page_record_count = 0
+    i = 0
+    while True:
+        r = requests.get("{url}&resultOffset={record_count}".format(
+          url = url,
+          record_count = str(full_page_record_count * i)))
+        response_json = r.json()
+        for row in response_json["features"]:
             data.append(row["attributes"])
         i += 1
+        full_page_record_count = max(full_page_record_count, len(response_json["features"]))
+        if not((response_json["features"]) and len(response_json["features"]) == full_page_record_count):
+          break
     df = pd.DataFrame(data)
     return df
 
@@ -261,7 +260,7 @@ def main(_) -> None:
     pre_2022_df = get_data(PRE_2022_FIRE_LOCATIONS_URL)
     df = pre_2022_df
     df = process_df(df)
-    df.to_csv("processed_data.csv", index=False)
+    df.to_csv("final_processed_data.csv", index=False)
     with open('location_file.json', 'w') as locations:
         locations.write(json.dumps(_CACHE))
 
