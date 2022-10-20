@@ -107,8 +107,7 @@ def process_df(df):
     df = df.drop_duplicates()
     logging.info("Initial size: %s, without duplicates: %s" %
                  (initial_size, df.shape[0]))
-    df["POOFips"] = df["POOFips"].apply(
-        lambda x: x.strip() if isinstance(x, str) else x).replace('', None)
+    df["POOFips"] = df["POOFips"].astype(str)
 
     # convert epoch time in milliseconds to datetime
     def get_datetime(x):

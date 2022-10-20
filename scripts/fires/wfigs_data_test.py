@@ -31,7 +31,6 @@ class PreprocessDataTest(unittest.TestCase):
         }
         df = pd.read_csv(_GetTestPath("test_data/historical.csv"),
                          converters=typeDict)
-        df.to_csv("h0.csv", index=False)
         expected_df = pd.read_csv(_GetTestPath("test_data/expected.csv"))
         processed = wfigs_data.process_df(df)
         sort_column_list = [
