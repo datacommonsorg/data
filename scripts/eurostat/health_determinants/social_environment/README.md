@@ -47,7 +47,7 @@ Below script will generate cleansed observation file (csv), mcf and tmcf files.
 
 
 #### Cleaned Observation File
-Cleaned data will be persisted as a CSV file in output/eurostat_population_alcohol_consumption.csv with the following columns.
+Cleaned data will be persisted as a CSV file in output/eurostat_population_social_environment.csv with the following columns.
 
 - time
 - geo
@@ -58,8 +58,8 @@ Cleaned data will be persisted as a CSV file in output/eurostat_population_alcoh
 
 #### MCFs and Template MCFs File
 MCF and tMCF files are presisted in below mentioned path.
-- [output/eurostat_population_socialenvironment.mcf]
-- [output/eurostat_population_socialenvironment.tmcf]
+- [output/eurostat_population_social_environment.mcf]
+- [output/eurostat_population_social_environment.tmcf]
 
 
 ### Running Tests
