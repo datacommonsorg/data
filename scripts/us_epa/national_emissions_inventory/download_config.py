@@ -52,4 +52,4 @@ event_urls = [
     "https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiApr_eventfire_countyscc.zip",
     "https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_eventfire_countyscc.zip",
     "https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_eventfire_countyscc_caphap.zip",
-    ]
+]

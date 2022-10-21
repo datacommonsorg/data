@@ -76,13 +76,17 @@ drop_df = [
     'scc', 'pollutant code', 'emissions type code', 'pollutant type(s)',
     'fips code'
 ]
-df_columns =['year','fips code', 'scc', 'pollutant code', 'total emissions', 'emissions uom', 'pollutant type(s)','emissions type code']
-pollutants = ["50000","57125","67561","67663","71432","75070","91203",
-    "108883","108952","110543","129000","1332214","7439921","7439965",
-    "7439976","7440020","7440382","7440439","7440484","7647010","7664393",
-    "7723140","7782492","7782505","7783064","8007452","16065831",
-    "18540299","CH4","CO","CO2","N2O","NH3","NOX","PM10-PRI","PM25-PRI",
-    "SO2","VOC"]
+df_columns = [
+    'year', 'fips code', 'scc', 'pollutant code', 'total emissions',
+    'emissions uom', 'pollutant type(s)', 'emissions type code'
+]
+pollutants = [
+    "50000", "57125", "67561", "67663", "71432", "75070", "91203", "108883",
+    "108952", "110543", "129000", "1332214", "7439921", "7439965", "7439976",
+    "7440020", "7440382", "7440439", "7440484", "7647010", "7664393", "7723140",
+    "7782492", "7782505", "7783064", "8007452", "16065831", "18540299", "CH4",
+    "CO", "CO2", "N2O", "NH3", "NOX", "PM10-PRI", "PM25-PRI", "SO2", "VOC"
+]
 replace_metadata = {
     "R":
         "Refueling",

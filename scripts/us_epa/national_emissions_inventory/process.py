@@ -107,7 +107,7 @@ class USAirEmissionTrends:
             df (pd.DataFrame): provides the regularized df as output
         """
         print(file_path)
-        if '2008' in file_path or '2011' in file_path:   
+        if '2008' in file_path or '2011' in file_path:
             df.rename(columns=replacement_08_11, inplace=True)
             df['pollutant type(s)'] = 'nan'
             if 'event' in file_path:
@@ -167,17 +167,18 @@ class USAirEmissionTrends:
         # Remove if Tribal Details are needed
         #
         df['scc'] = df['scc'].astype(str)
-        df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2], df['scc'].str[0])
+        df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
+                             df['scc'].str[0])
         df['geo_Id'] = 'geoId/' + df['geo_Id']
         df.rename(columns=replacement_17, inplace=True)
         df_pollutants = df[df['pollutant code'].isin(pollutants)]
         df_pollutants = self._data_standardize(df_pollutants, 'pollutant code')
         df['pollutant code'] = ''
-        df = pd.concat([df,df_pollutants])
+        df = pd.concat([df, df_pollutants])
         df = self._data_standardize(df, 'unit')
         df['scc_name'] = df['scc'].astype(str)
         df = df.replace({'scc_name': replace_source_metadata})
-        df['scc_name'] = df['scc_name'].str.replace(' ','')
+        df['scc_name'] = df['scc_name'].str.replace(' ', '')
         df['SV'] = ('Annual_Amount_Emissions_' +
                     df['pollutant code'].astype(str) + '_SCC_' +
                     df['scc'].astype(str)) + '_' + df['scc_name']
@@ -226,7 +227,7 @@ class USAirEmissionTrends:
                 sccL2 = sccL3 = 0
             elif (scc_code == sccL3):
                 sccL3 = 0
-            
+
             sccL1 = '\nepaSccCodeLevel1: dcs:EPA_SCC/' + sccL1 if sccL1 != 0 else ''
             sccL2 = '\nepaSccCodeLevel2: dcs:EPA_SCC/' + sccL2 if sccL2 != 0 else ''
             sccL3 = '\nepaSccCodeLevel3: dcs:EPA_SCC/' + sccL3 if sccL3 != 0 else ''
@@ -267,7 +268,7 @@ class USAirEmissionTrends:
                 pollutant=pollutant_value,
                 statvar_name=pollutant_name + scc_name,
                 emission_type=code) + "\n"
-    
+
     def _aggregate_scc(self):
         """
         This Method aggregates the SCC's upwards from L4 to L1
@@ -279,19 +280,21 @@ class USAirEmissionTrends:
             None
         """
         scc_typea_len = 10
-        scc_typea_substring = [-3,-3,-2]
-        scc_typeb_substring = [-2,-3,-2]
+        scc_typea_substring = [-3, -3, -2]
+        scc_typeb_substring = [-2, -3, -2]
         df = self.final_df.copy()
-        for i in range(0,3):
+        for i in range(0, 3):
             df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
             df['scc_length'] = ([x.split('_')[-1] for x in df['SV']])
             df['scc_length'] = df['scc_length'].str.len()
-            df['SV'] = np.where(df['scc_length'] == scc_typea_len, df['SV'].str[:scc_typea_substring[i]], df['SV'].str[:scc_typeb_substring[i]])
+            df['SV'] = np.where(df['scc_length'] == scc_typea_len,
+                                df['SV'].str[:scc_typea_substring[i]],
+                                df['SV'].str[:scc_typeb_substring[i]])
             scc_typea_len = scc_typea_len + scc_typea_substring[i]
             df = df.drop(columns=['scc_length'])
-            df = df.groupby(
-                ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
-            self.final_df = pd.concat([self.final_df,df]) 
+            df = df.groupby(['geo_Id', 'year', 'Measurement_Method',
+                             'SV']).sum().reset_index()
+            self.final_df = pd.concat([self.final_df, df])
 
     def _process(self):
         """
