@@ -111,48 +111,34 @@ class USAirEmissionTrends:
             df.rename(columns=replacement_08_11, inplace=True)
             df['pollutant type(s)'] = 'nan'
             if 'event' in file_path:
-                df = df.drop(columns=drop_08_11_event)
                 df['emissions type code'] = ''
             elif 'process' in file_path:
                 df = df.dropna(subset=['fips code'])
-                df = df[['fips code', 'scc', 'pollutant code', 'total emissions', 'emissions uom', 'pollutant type(s)']]
                 df['emissions type code'] = ''
-            else:
-                df = df.drop(columns=drop_08_11)
             if '2008' in file_path:
                 df['year'] = '2008'
             else:
                 df['year'] = '2011'
         elif '2017' in file_path:
             if 'Event' in file_path:
-                df = df.drop(columns=drop_17_event)
                 df['pollutant type(s)'] = 'nan'
             elif 'point' in file_path:
                 if 'unknown' in file_path or '678910' in file_path:
                     df.rename(columns=replacement_point_17, inplace=True)
-                df = df[['fips code', 'scc', 'pollutant code', 'total emissions', 'emissions uom', 'pollutant type(s)']]
                 df['emissions type code'] = ''
-            else:
-                df = df.drop(columns=drop_17)
             df['year'] = '2017'
         elif 'tribes' in file_path:
             df.rename(columns=replacement_tribes, inplace=True)
-            df = df.drop(columns=drop_tribes)
             df = self._data_standardize(df, 'fips code')
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
         else:
             df.rename(columns=replacement_14, inplace=True)
-            if 'event' in file_path:
-                df = df.drop(columns=drop_14_event)
+            if 'event' in file_path or 'process' in file_path:
                 df['emissions type code'] = ''
-            elif 'process' in file_path:
-                df = df[['fips code', 'scc', 'pollutant code', 'total emissions', 'emissions uom']]
-                df['emissions type code'] = ''
-            else:
-                df = df.drop(columns=drop_14)
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
+        df = df[df_columns]
         return df
 
     def _national_emissions(self, file_path: str) -> pd.DataFrame:
