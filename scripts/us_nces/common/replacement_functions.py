@@ -22,14 +22,53 @@ _COEDUCATIONAL = {
     "2-All-female (school only has all-female students)": "AllFemale",
     "3-All-male (school only has all-male students)": "AllMale",
     "†": "",
-    "–":""
+    "–": ""
+}
+
+_RELIGIOUS_AFFLIATION = {
+    "1-Catholic": "Catholic",
+    "2-Other religious": "OtherReligious",
+    "3-Nonsectarian": "Nonsectarian",
+    "†": ""
 }
 
 _RELIGIOUS = {
-    "1-Catholic": "Catholic",
-    "2-Other religious": "Nonsectarian",
-    "3-Nonsectarian": "OtherReligious",
-    "†": ""
+    "–":
+        "",
+    "Lutheran Church – Missouri Synod":
+        "LutheranChurchMissouriSynod",
+    "Christian (no specific denomination)":
+        "Christian",
+    "Roman Catholic":
+        "RomanCatholic",
+    "Greek Orthodox":
+        "GreekOrthodox",
+    "Seventh–Day Adventist":
+        "SeventhDayAdventist",
+    "Church of the Nazarene":
+        "ChurchOfTheNazarene",
+    "Church of Christ":
+        "ChurchOfChrist",
+    "Evangelical Lutheran Church in America (formerly AELC or ALC or LCA)":
+        "EvangelicalLutheranChurchInAmerica",
+    "Wisconsin Evangelical Lutheran Synod":
+        "WisconsinEvangelicalLutheranSynod",
+    "Assembly of God":
+        "AssemblyOfGod",
+    "Church of God":
+        "ChurchOfGod",
+    "African Methodist Episcopal":
+        "AfricanMethodistEpiscopal",
+    "Other Lutheran":
+        "OtherLutheran",
+    "Church of God in Christ":
+        "ChurchOfGodInChrist",
+    "Latter Day Saints":
+        "LatterDaySaints",
+    "Disciples of Christ":
+        "DisciplesOfChrist",
+    "†":
+        ""
 }
 
 _SCHOOL_TYPE = {
@@ -49,7 +88,8 @@ _SCHOOL_TYPE = {
         "NCES_EarlyChildhoodProgramOrChildCareCenter",
     "†":
         "NCES_DataMissing",
-    "–":"NCES_DataMissing",
+    "–":
+        "NCES_DataMissing",
 }
 
 _SCHOOL_GRADE = {
@@ -57,7 +97,7 @@ _SCHOOL_GRADE = {
     "Secondary Teachers": "Secondary",
     "Prekindergarten and Kindergarten": "PreKindergartenAndKindergarten",
     "Prekindergarten": "PreKindergarten",
-    "Ungraded Students":"NCESUngradedClasses",
+    "Ungraded Students": "NCESUngradedClasses",
     "Kindergarten": "Kindergarten",
     "Transitional Kindergarten": "TransitionalKindergarten",
     "Grades 1-8": "SchoolGrade1To8",
@@ -101,15 +141,14 @@ _SCHOOL_GRADE = {
     "13th grade": "SchoolGrade13",
     "13th Grade": "SchoolGrade13",
     "Grade 13": "SchoolGrade13",
-    "Ungraded":"",
     "†": "",
-    "–":"",
-    # "All Ungraded": "",
+    "–": "",
+    "All Ungraded": "",
     "Adult Education": "AdultEducation",
-    "Transitional 1st grade":"TransitionalGrade1"
+    "Transitional 1st grade": "TransitionalGrade1"
 }
 
-_PHYSICAL_ADD = {"†": "","–":""}
+_PHYSICAL_ADD = {"†": "", "–": ""}
 
 # pylint:disable=line-too-long
 _SCHOOL_LEVEL = {
@@ -121,7 +160,8 @@ _SCHOOL_LEVEL = {
         "ElementarySchool__SecondarySchool",
     "†":
         "",
-    "–":""
+    "–":
+        ""
 }
 # pylint:enable=line-too-long
 
@@ -139,7 +179,7 @@ _RACE_ = {
 
 _LUNCH = {
     "Reduced-price Lunch": "ReducedLunch",
-    "Free and Reduced Lunch": "FreeOrReducedLunch",
+    "Free and Reduced Lunch": "DirectCertificationLunch",
     "Free Lunch": "FreeLunch"
 }
 
@@ -192,8 +232,8 @@ COLUMNS = {
 
 _GENDER = {"female": "Female", "male": "Male"}
 
-_LOCALE = {"†":"","–":"",": Mid-size":": Midsize"}
-_UNREADABLE_TEXT = {"†":"","–":""}
+_LOCALE = {"†": "", "–": "", ": Mid-size": ": Midsize"}
+_UNREADABLE_TEXT = {"†": "", "–": ""}
 
 
 def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
@@ -202,7 +242,8 @@ def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
     """
     cols_mapper = {
         "Coeducational": _COEDUCATIONAL,
-        "School's Religious Affiliation or Orientation": _RELIGIOUS,
+        "School's Religious Affiliation or Orientation": _RELIGIOUS_AFFLIATION,
+        "Religious Orientation": _RELIGIOUS,
         "Lowest Grade Taught": _SCHOOL_GRADE,
         "Highest Grade Taught": _SCHOOL_GRADE,
         "School Type": _SCHOOL_TYPE,
@@ -216,19 +257,19 @@ def replace_values(data_df: pd.DataFrame, replace_with_all_mappers=False):
         "ZIP": _UNREADABLE_TEXT,
         "Phone Number": _UNREADABLE_TEXT,
         "PhoneNumber": _UNREADABLE_TEXT,
-        "Agency_level":_UNREADABLE_TEXT,
+        "Agency_level": _UNREADABLE_TEXT,
         "Lowest_Grade": _SCHOOL_GRADE,
         "Highest_Grade": _SCHOOL_GRADE,
         "Latitude": _UNREADABLE_TEXT,
         "Longitude": _UNREADABLE_TEXT,
         "Locale_temp": _LOCALE,
-        "School_Type":_UNREADABLE_TEXT,
+        "School_Type": _UNREADABLE_TEXT,
         "State_school_ID": _UNREADABLE_TEXT,
         "School_level": _UNREADABLE_TEXT,
         "County_code": _UNREADABLE_TEXT,
-        "City":_UNREADABLE_TEXT,
-        "LowestGrade":_UNREADABLE_TEXT,
-        "HighestGrade":_UNREADABLE_TEXT
+        "City": _UNREADABLE_TEXT,
+        "LowestGrade": _UNREADABLE_TEXT,
+        "HighestGrade": _UNREADABLE_TEXT
     }
 
     df_columns = data_df.columns.to_list()

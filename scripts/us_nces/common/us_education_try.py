@@ -514,9 +514,10 @@ class USEducation:
                 "Coeducational", "ContainedInPlace"
             ]]
             df_final_place = pd.concat([df_final_place, df_place])
-            df_final_place.to_csv(self._cleaned_csv_place, index=False,
-            header=False,
-            mode='a')
+            df_final_place.to_csv(self._cleaned_csv_place,
+                                  index=False,
+                                  header=False,
+                                  mode='a')
             df_append.append(df_final_place)
         df_merged = pd.DataFrame()
 

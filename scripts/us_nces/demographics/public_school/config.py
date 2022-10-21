@@ -24,19 +24,32 @@ SPLIT_HEADER_ON_SCHOOL_TYPE = "[Public School]"
 
 POSSIBLE_DATA_COLUMNS = [
     ".*Students.*", ".*Lunch.*", ".*Teacher.*", ".*American.*", ".*Asian.*",
-    ".*Hispanic.*", ".*Black.*", ".*White.*", ".*Adult Education.*",'Ungraded'
+    ".*Hispanic.*", ".*Black.*", ".*White.*", ".*Adult Education.*",
+    "Ungraded.*", "Two or More Races.*", "Nat. Hawaiian or Other Pacific Isl.*"
 ]
 
 EXCLUDE_DATA_COLUMNS = [
-    'Migrant Students',
-    'Total Students - Calculated Sum of Reported Grade Totals',
-    'Unknown', 'unknown',
-    'Total Race/Ethnicity', 'Grades 1-8 Students', 'Grades 9-12 Students'
+    'Migrant Students', '(Includes AE)',
+    'Total Students - Calculated Sum of Reported Grade Totals', 'Unknown',
+    'unknown', 'Total Race/Ethnicity'
 ]
 
 POSSIBLE_PLACE_COLUMNS = [
-     "school_state_code","ZIP",".*County.*",".*School.*", ".*Lowest.*", ".*Highest.*",
-    "Physical.*", "Phone.*",  "Coeducational", ".*Level.*",".*State.*"
+    "school_state_code",
+    "ZIP",
+    ".*County.*",
+    ".*School.*",
+    ".*Lowest.*",
+    ".*Highest.*",
+    "Physical.*",
+    "Phone.*",
+    "Coeducational",
+    ".*Level.*",
+    ".*State.*",
+    "Latitude.*",
+    "Longitude.*",
+    "Locale.*",
+    "Location.*",
 ]
 
-EXCLUDE_PLACE_COLUMNS = ["State Name","Metro Micro Area Code"]
+EXCLUDE_PLACE_COLUMNS = ["State Name", "Metro Micro Area Code"]

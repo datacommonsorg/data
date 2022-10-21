@@ -23,27 +23,24 @@ SCHOOL_TYPE = "district_school"
 SPLIT_HEADER_ON_SCHOOL_TYPE = "[District]"
 
 POSSIBLE_DATA_COLUMNS = [
-    ".*Students.*", ".*Teacher.*", ".*American.*", ".*Asian.*", ".*Hispanic.*",
-    ".*Black.*", ".*White.*", ".*Adult Education.*"
-    ".*Staff.*", ".*Admin.*", ".*Counselor.*", ".*Psychologist.*"
+    "[Public School]", ".*Students.*", ".*Teacher.*", ".*American.*",
+    ".*Asian.*", ".*Hispanic.*", ".*Black.*", ".*White.*", ".*Adult Education.*"
+    ".*Staff.*", ".*Admin.*", ".*Counselor.*", ".*Psychologist.*", "Ungraded.*",
+    "Two or More Races.*", "Nat. Hawaiian or Other Pacific Isl.*", "Grades.*",
+    "Prekindergarten and Kindergarten.*"
 ]
 
 EXCLUDE_DATA_COLUMNS = [
-    "Individualized Education Program Students",
-    "Grades 1-8 Students",
-    "Grades 9-12 Students",
-    ".*Ungraded.*",
-    ".*Total.*",
+    "Individualized Education Program Students", '(Includes AE)'
 ]
 
 POSSIBLE_PLACE_COLUMNS = [
     "school_state_code", ".*ZIP.*", ".*County.*", ".*Agency.*", "Physical.*",
     "Phone.*", "Coeducational", ".*Level.*", ".*State.*", "Latitude.*",
-    "Longitude.*", "Locale.*", "Location.*", ".*Congress.*", "Lowest.*",
-    "Highest.*"
+    "Longitude.*", "Locale.*", "Location.*", "Lowest.*", "Highest.*"
 ]
 
 EXCLUDE_PLACE_COLUMNS = [
     "State Name", "Metro Micro Area Code", "Location Address 2",
-    "Location Address 3"
+    "Location Address 3", ".*Congress.*"
 ]
