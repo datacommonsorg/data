@@ -22,39 +22,60 @@ import sys
 import pandas as pd
 
 def extract_compound_id(x):
+    """
+    Extracts the chembl, chebi and schembl IDs from synonyms
+    Args:
+        x = dataframe with synonyms
+    Returns:
+        dataframe with chembl, chebi and schembl separated out
+    """
     compound_list = x['Name']
     for element in compound_list:
-        if element.startswith("CHEMBL"):
+        if element.startswith("\"CHEMBL"):
             x['Chembl'] = element
             compound_list.remove(element)
-        elif element.startswith("SCHEMBL"):
+        elif element.startswith("\"SCHEMBL"):
             x['SChembl'] = element
             compound_list.remove(element)
-        elif element.startswith("CHEBI"):
+        elif element.startswith("\"CHEBI"):
             x['Chebi'] = element
             compound_list.remove(element)
     return x
 
 def split_synonyms(df):
+    """
+    splits the chembl, chebi and schembl IDs and groups synonyms
+    Args:
+        x = dataframe with synonyms
+    Returns:
+        dataframe with split columns
+    """
     df.columns = ['Id', 'Name']
+    df['Name'] = '"' + df['Name'].astype(str) + '"'
     df = df.groupby(["Id"])['Name'].apply(list)
+    print("Groupby done!")
     df = df.to_frame()
     df = df.apply(extract_compound_id,axis=1)
-    return df
-
-def format_columns(df):
-    df['Name'] = [[f'"{j}"' for j in i] for i in df['Name']]
-    df['Name'] =  df['Name'].apply(lambda x: x.replace('[','').replace(']','')) 
-    df['Id'] = "chem/CID" + df['Id'].astype(str)
+    print("Compound ID extracted!")
     return df
 
 def main():
     file_input = sys.argv[1]
-    df = pd.read_csv(file_input, sep = '\t', header=None)
-    df = split_synonyms(df)
-    df = format_columns(df)
-    df.to_csv('Synonym-mapping.csv', doublequote=False, escapechar='\\')
-    
+    df = pd.read_csv(file_input, sep = '\t', header=None, chunksize = 10000)
+    count = 0
+    df_final = pd.DataFrame()
+    for data in df:
+        if (count == 1):
+            df_data.loc[17597, 'Name'] = df_data.loc[17597, 'Name'].replace('"', '')
+        df_data = split_synonyms(data)
+        df_data['Name'] = df_data['Name'].apply(', '.join)
+        df_data['Id'] = df_data.index
+        df_data['Id'] = "chem/CID" + df_data['Id'].astype(str)
+        df_final = pd.concat([df_final, df_data])
+        count = count + 1
+    df_final.to_csv('Synonym-mapping-1.csv')
+    #df_final.to_csv('Synonym-mapping-1.csv', doublequote=False, escapechar='\\')
+
     
 if __name__ == '__main__':
     main()
