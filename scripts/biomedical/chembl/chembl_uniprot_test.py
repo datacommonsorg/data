@@ -33,6 +33,8 @@ class TestParseMesh(unittest.TestCase):
         # Run all the functions in format_chembl_uniprot.py 
         df_actual = format_names(df_actual)
         df_actual = format_cols(df_actual)
+        ## strips quotes for column value comparison
+        df_actual = df_actual.applymap(lambda x: x.replace('"', '') if (isinstance(x, str)) else x)
         # Compare expected and actual output files
         assert_frame_equal(df_expected.reset_index(drop=True), df_actual.reset_index(drop=True))
 
