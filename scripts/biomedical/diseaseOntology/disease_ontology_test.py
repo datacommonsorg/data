@@ -29,8 +29,40 @@ class TestParseMesh(unittest.TestCase):
     def test_main(self):
         """Test in the main function"""
         # Read in the expected output files into pandas dataframes
-        df1_expected = pd.read_csv('unit-tests/test-output.csv')
-        df_actual = wrapper_fun('unit-tests/test-do.xml')
+        df1_expected = pd.read_csv('unit-tests/test-expected.csv')
+        tree = ElementTree.parse('unit-tests/test-do.xml')
+        # Get file root
+        root = tree.getroot()
+        # Find owl classes elements
+        all_classes = root.findall('{http://www.w3.org/2002/07/owl#}Class')
+        # Parse owl classes to human-readble dictionary format
+        parsed_owl_classes = []
+        for owl_class in all_classes:
+            info = list(owl_class.iter())
+            parsed_owl_classes.append(parse_do_info(info))
+        # Convert to pandas Dataframe
+        df_do = pd.DataFrame(parsed_owl_classes)
+        format_cols(df_do)
+        df_do = df_do.drop([
+            'Class', 'exactMatch', 'deprecated', 'hasRelatedSynonym', 'comment',
+            'OBI_9991118', 'narrowMatch', 'hasBroadSynonym', 'disjointWith',
+            'hasNarrowSynonym', 'broadMatch', 'created_by', 'creation_date',
+            'inSubset', 'hasOBONamespace'
+        ],
+                        axis=1)
+        df_do = col_explode(df_do)
+        df_do = mesh_separator(df_do)
+        df_do = col_string(df_do)
+        df_do = df_do.drop(['A', 'B', 'nan', 'hasDbXref', 'KEGG'], axis=1)
+        df_do = df_do.drop_duplicates(subset='id', keep="last")
+        df_do = df_do.reset_index(drop=True)
+        df_do = df_do.replace('"nan"', np.nan)
+        df_do['IAO_0000115'] = df_do['IAO_0000115'].str.replace("_", " ")
+        df_actual = df_do.applymap(lambda x: x.replace('"', '') if (isinstance(x, str)) else x)
+        ## fixes the float to object type conversion by pandas while reading the dataframe
+        col_list = ['SNOMEDCTUS20200901', 'SNOMEDCTUS20180301', 'SNOMEDCTUS20200301', 'SNOMEDCTUS20190901', 'OMIM', 'ORDO']
+        for i in col_list:
+            df_actual[i] = df_actual[i].astype(float)
         # Run all the functions in format_mesh.py 
         # Compare expected and actual output files
         assert_frame_equal(df1_expected.reset_index(drop=True), df_actual.reset_index(drop=True))
