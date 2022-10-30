@@ -1,0 +1,9 @@
+Node: E:EpaParentCompanyStatVarObs->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:EpaParentCompanyStatVarObs->parent_company_dcid
+variableMeasured: C:EpaParentCompanyStatVarObs->sv_measured
+observationPeriod: C:EpaParentCompanyStatVarObs->obs_period
+unit: dcs:MetricTonCO2e
+measurementMethod: dcs:dcAggregate/EPA_GHGRP
+value: C:EpaParentCompanyStatVarObs->value
+observationDate: C:EpaParentCompanyStatVarObs->year

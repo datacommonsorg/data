@@ -1,0 +1,161 @@
+Node: dcid:Count_Person_HispanicOrLatino_WhiteAlone
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__WhiteAlone
+
+Node: dcid:Count_Person_HispanicOrLatino_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Person_HispanicOrLatino_AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Count_Person_HispanicOrLatino_AsianOrPacificIslander
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__AsianOrPacificIslander
+
+Node: dcid:Count_Person_HispanicOrLatino_AsianAlone
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__AsianAlone
+
+Node: dcid:Count_Person_HispanicOrLatino_NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Person_HispanicOrLatino_TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__TwoOrMoreRaces
+
+Node: dcid:Count_Person_HispanicOrLatino_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: dcid:Count_Person_HispanicOrLatino_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: dcid:Count_Person_HispanicOrLatino_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: dcid:Count_Person_HispanicOrLatino_AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: dcid:Count_Person_HispanicOrLatino_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:HispanicOrLatino__NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: dcid:Count_Person_NotHispanicOrLatino_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Person_NotHispanicOrLatino_AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Count_Person_NotHispanicOrLatino_AsianOrPacificIslander
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__AsianOrPacificIslander
+
+Node: dcid:Count_Person_NotHispanicOrLatino_AsianAlone
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__AsianAlone
+
+Node: dcid:Count_Person_NotHispanicOrLatino_NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Person_NotHispanicOrLatino_TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__TwoOrMoreRaces
+
+Node: dcid:Count_Person_NotHispanicOrLatino_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: dcid:Count_Person_NotHispanicOrLatino_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: dcid:Count_Person_NotHispanicOrLatino_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: dcid:Count_Person_NotHispanicOrLatino_AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+
+Node: dcid:Count_Person_NotHispanicOrLatino_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+populationType: dcs:Person
+race: dcs:NotHispanicOrLatino__NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+

@@ -18,7 +18,7 @@ See latlng_recon_service_test.py for usage example.
 
 import requests
 
-_RECON_ROOT = 'https://staging.recon.datacommons.org/coordinate/resolve'
+_RECON_ROOT = 'https://api.datacommons.org/v1/recon/resolve/coordinate'
 _RECON_COORD_BATCH_SIZE = 50
 
 

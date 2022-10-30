@@ -1,0 +1,78 @@
+Node: E:postprocess->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Male_WhiteAlone
+measurementMethod: dcs:CensusPEPSurvey_RaceUpto1999
+observationAbout: C:postprocess->geo_ID
+observationDate: C:postprocess->Year
+observationPeriod: "P1Y"
+value: C:postprocess->Count_Person_Male_WhiteAlone 
+
+
+Node: E:postprocess->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Female_WhiteAlone
+measurementMethod: dcs:CensusPEPSurvey_RaceUpto1999
+observationAbout: C:postprocess->geo_ID
+observationDate: C:postprocess->Year
+observationPeriod: "P1Y"
+value: C:postprocess->Count_Person_Female_WhiteAlone 
+
+
+Node: E:postprocess->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Male_BlackOrAfricanAmericanAlone
+measurementMethod: dcs:CensusPEPSurvey_RaceUpto1999
+observationAbout: C:postprocess->geo_ID
+observationDate: C:postprocess->Year
+observationPeriod: "P1Y"
+value: C:postprocess->Count_Person_Male_BlackOrAfricanAmericanAlone 
+
+
+Node: E:postprocess->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Female_BlackOrAfricanAmericanAlone
+measurementMethod: dcs:CensusPEPSurvey_RaceUpto1999
+observationAbout: C:postprocess->geo_ID
+observationDate: C:postprocess->Year
+observationPeriod: "P1Y"
+value: C:postprocess->Count_Person_Female_BlackOrAfricanAmericanAlone 
+
+
+Node: E:postprocess->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Male_AmericanIndianAndAlaskaNativeAlone
+measurementMethod: dcs:CensusPEPSurvey_RaceUpto1999
+observationAbout: C:postprocess->geo_ID
+observationDate: C:postprocess->Year
+observationPeriod: "P1Y"
+value: C:postprocess->Count_Person_Male_AmericanIndianAndAlaskaNativeAlone 
+
+
+Node: E:postprocess->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Female_AmericanIndianAndAlaskaNativeAlone
+measurementMethod: dcs:CensusPEPSurvey_RaceUpto1999
+observationAbout: C:postprocess->geo_ID
+observationDate: C:postprocess->Year
+observationPeriod: "P1Y"
+value: C:postprocess->Count_Person_Female_AmericanIndianAndAlaskaNativeAlone 
+
+
+Node: E:postprocess->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Male_AsianOrPacificIslander
+measurementMethod: dcs:CensusPEPSurvey_RaceUpto1999
+observationAbout: C:postprocess->geo_ID
+observationDate: C:postprocess->Year
+observationPeriod: "P1Y"
+value: C:postprocess->Count_Person_Male_AsianOrPacificIslander 
+
+
+Node: E:postprocess->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_Female_AsianOrPacificIslander
+measurementMethod: dcs:CensusPEPSurvey_RaceUpto1999
+observationAbout: C:postprocess->geo_ID
+observationDate: C:postprocess->Year
+observationPeriod: "P1Y"
+value: C:postprocess->Count_Person_Female_AsianOrPacificIslander 

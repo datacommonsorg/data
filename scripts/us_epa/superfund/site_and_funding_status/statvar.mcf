@@ -1,0 +1,6 @@
+Node: dcid:SuperfundFundingStatus_SuperfundSite
+name: "Superfund site funding status or the status of a superfund site on the National Priority List (NPL)"
+measuredProperty: dcs:superfundFundingStatus
+populationType: dcs:SuperfundSite
+statType: dcs:measurementResult
+typeOf: dcs:StatisticalVariable
