@@ -1,0 +1,55 @@
+Node: E:WeatherVariability_Counties->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Intensity_HeatWaveEvent
+observationAbout: C:WeatherVariability_Counties->GeoId
+observationDate: C:WeatherVariability_Counties->Date
+value: C:WeatherVariability_Counties->Heatwave_Intensity
+observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
+Node: E:WeatherVariability_Counties->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumberOfDays_HeatWaveEvent
+observationAbout: C:WeatherVariability_Counties->GeoId
+observationDate: C:WeatherVariability_Counties->Date
+value: C:WeatherVariability_Counties->Heatwave_Length
+observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
+Node: E:WeatherVariability_Counties->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_HeatWaveEvent
+observationAbout: C:WeatherVariability_Counties->GeoId
+observationDate: C:WeatherVariability_Counties->Date
+value: C:WeatherVariability_Counties->Heatwave_Count
+observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
+Node: E:WeatherVariability_Counties->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:StandardizedPrecipitationIndex_Atmosphere
+observationAbout: C:WeatherVariability_Counties->GeoId
+observationDate: C:WeatherVariability_Counties->Date
+value: C:WeatherVariability_Counties->StandardPrecipitationIndex
+observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
+Node: E:WeatherVariability_Counties->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InterannualRange_Monthly_Precipitation
+observationAbout: C:WeatherVariability_Counties->GeoId
+observationDate: C:WeatherVariability_Counties->Date
+value: C:WeatherVariability_Counties->InternannualRange_MonthlyPrecipitation
+observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
+Node: E:WeatherVariability_Counties->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InterannualRange_Monthly_MaxTemperature
+observationAbout: C:WeatherVariability_Counties->GeoId
+observationDate: C:WeatherVariability_Counties->Date
+value: C:WeatherVariability_Counties->InternannualRange_MonthlyMaxTemperature
+observationPeriod: C:WeatherVariability_Counties->TimeIntervalType
+
+Node: E:WeatherVariability_Counties->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:InterannualRange_Monthly_MinTemperature
+observationAbout: C:WeatherVariability_Counties->GeoId
+observationDate: C:WeatherVariability_Counties->Date
+value: C:WeatherVariability_Counties->InternannualRange_MonthlyMinTemperature
+observationPeriod: C:WeatherVariability_Counties->TimeIntervalType

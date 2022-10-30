@@ -66,14 +66,14 @@ class TestPreprocess(unittest.TestCase):
         # `malerkotla` should be mapped to `malerkotla`
         row = clean_df.loc[clean_df["LGDDistrictName"] == "malerkotla"]
         self.assertEqual("malerkotla", row.iloc[0]["closestDistrictLabel"])
-        self.assertEqual("Q1470987", row.iloc[0]["WikiDataId"])
+        self.assertEqual("Q107016021", row.iloc[0]["WikiDataId"])
 
         # `Warangal Urban` renamed `Hanamkonda`
         row = clean_df.loc[clean_df["WikiDataId"] == "Q213077"]
         self.assertEqual("hanumakonda", row.iloc[0]["LGDDistrictName"])
 
         # `Warangal Rural` renamed `Warangal`
-        row = clean_df.loc[clean_df["WikiDataId"] == "Q28169759"]
+        row = clean_df.loc[clean_df["WikiDataId"] == "Q15399"]
         self.assertEqual("warangal", row.iloc[0]["LGDDistrictName"])
 
         os.remove(clean_csv)
