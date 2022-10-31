@@ -36,6 +36,7 @@ DEFAULT_SV_PROP = {
     "populationType": "dcs:LiveBirthPregnancyEvent",
 }
 
+# The change is based on the property values according to the schema.
 _PV_PROP = {
     "OneMonth": "1Month",
     "SampleSize_Count": "sampleSize",
@@ -44,6 +45,7 @@ _PV_PROP = {
     "ConfidenceIntervalUpperLimit_Count": "confidenceIntervalUpperLimit"
 }
 
+# The change is based on the property values according to the schema.
 _PROP = {
     "OneMonth":
         "1Month",
@@ -61,13 +63,13 @@ _PROP = {
         "HookahUsage",
     "Obese":
         "Obesity",
-    "healthInsuranceStatus1MonthBeforePregnancyprivateinsurance":
+    "healthInsuranceStatus1MonthBeforePregnancyPrivateInsurance":
         "WithPrivateHealthInsurance",
     "healthInsuranceStatus1MonthBeforePregnancyMedicaid":
         "WithMedicaid",
     "healthInsuranceStatus1MonthBeforePregnancyNoInsurance":
         "NoHealthInsurance",
-    "healthInsuranceStatusForPrenatalCareprivateinsurance":
+    "healthInsuranceStatusForPrenatalCarePrivateInsurance":
         "WithPrivateHealthInsurance",
     "healthInsuranceStatusForPrenatalCareMedicaid":
         "WithMedicaid",
@@ -126,13 +128,13 @@ _TIME = {
         "",
     "CDC_SelfReportedDepression":
         "",
-    "healthInsuranceStatus1MonthBeforePregnancyprivateinsurance":
+    "healthInsuranceStatus1MonthBeforePregnancyPrivateInsurance":
         "1MonthBeforePregnancy",
     "healthInsuranceStatus1MonthBeforePregnancyMedicaid":
         "1MonthBeforePregnancy",
     "healthInsuranceStatus1MonthBeforePregnancyNoInsurance":
         "1MonthBeforePregnancy",
-    "healthInsuranceStatusPostpartumprivateinsurance":
+    "healthInsuranceStatusPostpartumPrivateInsurance":
         "Postpartum",
     "healthInsuranceStatusPostpartumMedicaid":
         "Postpartum",
@@ -160,7 +162,7 @@ _TIME = {
 _INSURANCE = {
     "OneMonth":
         "1Month",
-    "healthInsuranceStatusPostpartumprivateinsurance":
+    "healthInsuranceStatusPostpartumPrivateInsurance":
         "WithPrivateHealthInsurance",
     "healthInsuranceStatusPostpartumMedicaid":
         "WithMedicaid",

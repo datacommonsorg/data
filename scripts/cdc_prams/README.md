@@ -24,6 +24,7 @@ The population is categorized by various set of combinations as below:
 ### Download URL
 The data in .pdf formats are downloadable from https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/ -> 	State Name.
 The actual URLs are listed in input_files.py.
+Example: "https://www.cdc.gov/prams/prams-data/mch-indicators/states/pdf/2020/Alabama-PRAMS-MCH-Indicators-508.pdf"
 
 
 #### API Output
@@ -68,6 +69,7 @@ Cleaned data will be inside [output/PRAMS.csv] as a CSV file with the following 
 Run the test cases
 
 `python3 -m unittest scripts/cdc_prams/process_test.py`
+`sh ./run_tests.sh -p scripts/cdc_prams`
 
 
 

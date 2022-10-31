@@ -46,7 +46,7 @@ def download_file(input_url: list, download_directory: str) -> None:
         out_file = path + os.sep + file_name_with_compression_ext
         print(download_file_url)
         req = requests.get(download_file_url)
-        if ".zip" not in download_file_url:
+        if not download_file_url.endswith(".zip"):
             with open(out_file, 'wb') as file:
                 file.write(req.content)
         else:

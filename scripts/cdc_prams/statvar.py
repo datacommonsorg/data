@@ -107,19 +107,19 @@ statvar_col = {
         ' dental hygienist':
         'TeethCleanedByDentistOrHygienistDuringPregnancy',
     'Health Insurance Status One Month Before Pregnancy¶¶__Private insurance':
-        'healthInsuranceStatusOneMonthBeforePregnancyprivateinsurance',
+        'healthInsuranceStatusOneMonthBeforePregnancyPrivateInsurance',
     'Health Insurance Status One Month Before Pregnancy¶¶__Medicaid':
         'healthInsuranceStatusOneMonthBeforePregnancyMedicaid',
     'Health Insurance Status One Month Before Pregnancy¶¶__No insurance':
         'healthInsuranceStatusOneMonthBeforePregnancyNoInsurance',
     'Health Insurance Status for Prenatal Care¶¶__Private insurance':
-        'healthInsuranceStatusForPrenatalCareprivateinsurance',
+        'healthInsuranceStatusForPrenatalCarePrivateInsurance',
     'Health Insurance Status for Prenatal Care¶¶__Medicaid':
         'healthInsuranceStatusForPrenatalCareMedicaid',
     'Health Insurance Status for Prenatal Care¶¶__No insurance':
         'healthInsuranceStatusForPrenatalCareNoInsurance',
     'Health Insurance Status Postpartum††¶¶__Private insurance':
-        'healthInsuranceStatusPostpartumprivateinsurance',
+        'healthInsuranceStatusPostpartumPrivateInsurance',
     'Health Insurance Status Postpartum††¶¶__Medicaid':
         'healthInsuranceStatusPostpartumMedicaid',
     'Health Insurance Status Postpartum††¶¶__No insurance':

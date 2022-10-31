@@ -22,13 +22,10 @@ from copy import deepcopy
 import pandas as pd
 import numpy as np
 from absl import app, flags
-# from util.alpha2_to_dcid import COUNTRY_MAP
 import tabula as tb
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
-# pylint: disable=import-error
-# pylint: disable=wrong-import-position
 sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
 from statvar_dcid_generator import get_statvar_dcid
 from state_division_to_dcid import _PLACE_MAP
@@ -37,8 +34,7 @@ sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 from statvar import statvar_col
 from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP, _PROP,
                        _TIME, _INSURANCE, _CIGARETTES, _PV_PROP, _YEAR)
-# pylint: enable=import-error
-# pylint: enable=wrong-import-position
+
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
