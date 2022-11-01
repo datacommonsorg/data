@@ -38,7 +38,9 @@ from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP, _PROP,
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
+input_years = ["2016", "2017", "2018", "2019", "2020"]
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+flags.DEFINE_list("input_years", input_years, "Import Data File's List")
 
 
 def _merging_multiline_sv(df, geo):
@@ -60,16 +62,15 @@ def _merging_multiline_sv(df, geo):
             if df.loc[i, 'statVar'] == line:
                 df.loc[i,'statVar'] = \
                     f"{df.loc[i,'statVar']}{' '}{df.loc[i + 2,'statVar']}"
-                df.loc[i, '2016_sampleSize'] = df.loc[i + 1, 'statVar']
-                df.loc[i, '2016_CI'] = df.loc[i + 1, '2016_CI']
-                df.loc[i, '2017_sampleSize'] = df.loc[i + 1, '2017_sampleSize']
-                df.loc[i, '2017_CI'] = df.loc[i + 1, '2017_CI']
-                df.loc[i, '2018_sampleSize'] = df.loc[i + 1, '2018_sampleSize']
-                df.loc[i, '2018_CI'] = df.loc[i + 1, '2018_CI']
-                df.loc[i, '2019_sampleSize'] = df.loc[i + 1, '2019_sampleSize']
-                df.loc[i, '2019_CI'] = df.loc[i + 1, '2019_CI']
-                df.loc[i, '2020_sampleSize'] = df.loc[i + 1, '2020_sampleSize']
-                df.loc[i, '2020_CI'] = df.loc[i + 1, '2020_CI']
+                for year in _FLAGS.input_years:
+                    if year == "2016":
+                        df.loc[i, year + '_sampleSize'] = df.loc[i + 1,
+                                                                 'statVar']
+                        df.loc[i, year + '_CI'] = df.loc[i + 1, year + '_CI']
+                    else:
+                        df.loc[i, year + '_sampleSize'] = df.loc[i + 1, year +
+                                                                 '_sampleSize']
+                        df.loc[i, year + '_CI'] = df.loc[i + 1, year + '_CI']
                 if geo == "State":
                     df.loc[i, 'Overall_2020_CI'] = df.loc[i + 1,
                                                           'Overall_2020_CI']
@@ -597,7 +598,7 @@ class USPrams:
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "healthInsuranceStatusOneMonthBeforePregnancy"+\
-                    "privateinsurance"in prop or\
+                    "PrivateInsurance"in prop or\
                     "healthInsuranceStatusOneMonthBeforePregnancy"+\
                         "Medicaid" in prop or\
                     "healthInsuranceStatusOneMonthBeforePregnancy"+\
@@ -611,7 +612,7 @@ class USPrams:
                     pvs.append(f"timePeriodRelativeToPregnancy: dcs:{time}")
 
                 elif "healthInsuranceStatusForPrenatalCare"+\
-                    "privateinsurance"in prop or\
+                    "PrivateInsurance"in prop or\
                     "healthInsuranceStatusForPrenatalCareMedicaid" in prop or\
                     "healthInsuranceStatusForPrenatalCareNoInsurance" in prop:
                     sv_pvs[
@@ -619,7 +620,7 @@ class USPrams:
                     pvs.append(
                         f"healthInsuranceStatusForPrenatalCare: dcs:{statVar}")
 
-                elif "healthInsuranceStatusPostpartumprivateinsurance" in prop\
+                elif "healthInsuranceStatusPostpartumPrivateInsurance" in prop\
                     or "healthInsuranceStatusPostpartumMedicaid" in prop or\
                     "healthInsuranceStatusPostpartumNoInsurance" in prop:
                     sv_pvs[
