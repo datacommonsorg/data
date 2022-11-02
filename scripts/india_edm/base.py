@@ -108,7 +108,7 @@ class EnergyIndiaBase():
             if os.path.isfile(os.path.join(module_dir, data_path, f))
         ],
                          join='outer')
-
+        
         return data
 
     def _create_date(self, df):

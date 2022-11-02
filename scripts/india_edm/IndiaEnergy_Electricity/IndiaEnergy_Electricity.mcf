@@ -62,6 +62,13 @@ measurementQualifier: dcs:Annual
 statType: dcs:measuredValue
 energySource: dcs:Nuclear
 
+Node: dcid:Monthly_ElectrifiedHouseholds_Household
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:electrifiedHouseholds
+measurementQualifier: dcs:Monthly
+statType: dcs:measuredValue
+
 Node: dcid:Annual_Count_ElectricityConsumer
 typeOf: dcs:StatisticalVariable
 populationType: dcs:ElectricityConsumer

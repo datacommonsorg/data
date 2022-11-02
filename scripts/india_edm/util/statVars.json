@@ -31,13 +31,13 @@
 			"property": "Consumption",
 			"popType": "Fuel",
 			"consumingSector": "True",
-			"unit": "MillionMetricStandardCubicMeters",
+			"unit": "MillionMetricStandardCubicMeter",
 			"scale": "1"
 		},
 		"GrossProduction_MMSCM_M": {
 			"property": "Generation",
 			"popType": "Fuel",
-			"unit": "MillionMetricStandardCubicMeters",
+			"unit": "MillionMetricStandardCubicMeter",
 			"scale": "1"
 		},
 		"Qty_Tonne_Imports": {
@@ -49,7 +49,7 @@
 		"GrossProduction_MMSCM": {
 			"property": "Generation",
 			"popType": "Fuel",
-			"unit": "MillionMetricStandardCubicMeters",
+			"unit": "MillionMetricStandardCubicMeter",
 			"scale": "1"
 		}
 	},
@@ -100,6 +100,12 @@
 			"popType": "Electricity",
 			"unit": "Megawatt",
 			"scale": "1"
+		},
+		"Electrified_Households": {
+    		"property": "ElectrifiedHouseholds",
+    		"popType": "Household",
+    		"unit": "count",
+    		"scale": "1"
 		},
 		"ConsumerNo": {
 			"property": "Count",
