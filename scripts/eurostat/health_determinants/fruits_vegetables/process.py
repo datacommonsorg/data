@@ -196,7 +196,6 @@ class EuroStatFruitsVegetables(EuroStat):
 if __name__ == '__main__':
     input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               "input_files")
-    input_path = "/Users/naveenkn/social/data/scripts/eurostat/health_determinants/fruits_vegetables/test_files/input_files"
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
 
