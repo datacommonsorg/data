@@ -11,30 +11,16 @@ Make sure you are in virtualenv and inside this directory.
 The source data is downloaded from the USGS [website](https://www.usgs.gov/programs/earthquake-hazards/earthquakes).
 
 ```sh
-python download.py
+./download.sh
 ```
 
-### (Optional) Step 2. Uncompress the place cache.
-
-Note: Place resolution may take hours without the cache.
+### Step 2. Generate preprocessed CSV file.
 
 ```sh
-tar -xzvf place_cache.tar.gz
+python preprocess.py
 ```
 
-### Step 3. Generate MCF file
-
-```sh
-python generate_mcf.py
-```
-
-### Step 4. Compress the place cache.
-
-```sh
-tar -czvf place_cache.tar.gz usgs_comcat_places.cache
-```
-
-### Step 5. Create a PR for the updated place cache file (and any other changes).
+### Step 3. Create a PR for the updated place cache file (and any other changes).
 
 ## Things to note
 

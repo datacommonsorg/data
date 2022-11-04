@@ -1,0 +1,9 @@
+Node: E:Earthquake->E0
+typeOf: dcs:EarthquakeEvent
+name: C:Earthquake->name
+occurrenceTime: C:Earthquake->occurrence_time
+magnitude: C:Earthquake->mag
+magnitudeType: C:Earthquake->mag_type
+location: C:Earthquake->location
+affectedPlace: C:Earthquake->affectedplaces
+reviewStatus: C:Earthquake->reviewed_status

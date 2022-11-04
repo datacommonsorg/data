@@ -8,7 +8,11 @@ frozendict==1.2
 func-timeout==4.3.5
 geojson==2.5.0
 geopandas==0.8.1
+<<<<<<< HEAD
 google-cloud-storage>=2.7.0
+=======
+google-cloud-storage==2.5.0
+>>>>>>> 73e4f21 (Update earthquake script to use tmcf+csv, save cache to gcs)
 lxml==4.9.1
 matplotlib==3.3.0
 netCDF4==1.5.7
