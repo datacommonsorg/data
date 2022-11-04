@@ -50,6 +50,7 @@ point - `python3 download_input_files.py point`
 nonpoint - `python3 download_input_files.py nonpoint`
 onroad - `python3 download_input_files.py onroad`
 nonroad(default) - `python3 download_input_files.py nonroad`
+all - `python3 download_input_files_all.py`
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 

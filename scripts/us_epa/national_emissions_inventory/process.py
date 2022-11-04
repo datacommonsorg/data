@@ -41,7 +41,7 @@ _MCF_TEMPLATE = ("Node: dcid:{statvar}\n"
                  "name: \"Annual Amount Emissions {statvar_name}\"\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Emissions\n"
-                 "measurementQualifier: dcs:Annual{scc}{scc_L1}{scc_L2}{scc_L3}"
+                 "measurementQualifier: dcs:Annual{scc}"
                  "{pollutant}{emission_type}\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:amount\n")
@@ -106,7 +106,6 @@ class USAirEmissionTrends:
         Returns:
             df (pd.DataFrame): provides the regularized df as output
         """
-        print(file_path)
         if '2008' in file_path or '2011' in file_path:
             df.rename(columns=replacement_08_11, inplace=True)
             df['pollutant type(s)'] = 'nan'
@@ -206,36 +205,11 @@ class USAirEmissionTrends:
         sv_list = list(set(sv_list))
         sv_list.sort()
         for sv in sv_list:
-            # sv_checker = {
-            #     "typeOf": "dcs:StatisticalVariable",
-            #     "populationType": "dcs:Emissions",
-            #     "measurementQualifier": "dcs:Annual",
-            #     "statType": "dcs:measuredValue",
-            #     "measuredProperty": "dcs:amount"
-            # }
             pollutant = code = ''
             sv_property = sv.split("_")
-            scc_code = str(sv_property[-2])
-            #
-            # Remove if SCC Levels are not needed.
-            sccL1 = scc_code[:1] if len(scc_code) == 8 else scc_code[:2]
-            sccL2 = scc_code[:3] if len(scc_code) == 8 else scc_code[:4]
-            sccL3 = scc_code[:6] if len(scc_code) == 8 else scc_code[:7]
-            if (scc_code == sccL1):
-                sccL1 = sccL2 = sccL3 = 0
-            elif (scc_code == sccL2):
-                sccL2 = sccL3 = 0
-            elif (scc_code == sccL3):
-                sccL3 = 0
-
-            sccL1 = '\nepaSccCodeLevel1: dcs:EPA_SCC/' + sccL1 if sccL1 != 0 else ''
-            sccL2 = '\nepaSccCodeLevel2: dcs:EPA_SCC/' + sccL2 if sccL2 != 0 else ''
-            sccL3 = '\nepaSccCodeLevel3: dcs:EPA_SCC/' + sccL3 if sccL3 != 0 else ''
-            #
             source = '\nepaSccCode: dcs:EPA_SCC/' + sv_property[-2]
             scc_name = sv_property[-1]
             scc_name = scc_name + " (" + sv_property[-2] + ")"
-            # sv_checker['epaSccCode'] = sv_property[-1]
             pollutant_start = 3 if sv_property[3] != 'SCC' else None
             if sv_property[3] in [
                     'Exhaust', 'Evaporation', 'Refueling', 'BName', 'TName',
@@ -247,54 +221,17 @@ class USAirEmissionTrends:
 
             pollutant_name = ''
             pollutant_value = ''
-            print(sv)
             if pollutant_start != None:
                 for i in sv_property[pollutant_start:-3]:
                     pollutant = pollutant + i + '_'
-                # sv_checker['emittedThing'] = 'dcs:' + pollutant.rstrip('_')
                 pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')
                 pollutant_name = replace_metadata[pollutant.rstrip('_')] + ", "
-            # generated_sv = get_statvar_dcid(sv_checker)
-            # if (generated_sv != sv):
-            #     print(generated_sv)
-            #     print(sv)
-            #     print()
             self.final_mcf_template += _MCF_TEMPLATE.format(
                 statvar=sv,
                 scc=source,
-                scc_L1=sccL1,
-                scc_L2=sccL2,
-                scc_L3=sccL3,
                 pollutant=pollutant_value,
                 statvar_name=pollutant_name + scc_name,
                 emission_type=code) + "\n"
-
-    def _aggregate_scc(self):
-        """
-        This Method aggregates the SCC's upwards from L4 to L1
-
-        Args:
-            None
-
-        Returns:
-            None
-        """
-        scc_typea_len = 10
-        scc_typea_substring = [-3, -3, -2]
-        scc_typeb_substring = [-2, -3, -2]
-        df = self.final_df.copy()
-        for i in range(0, 3):
-            df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
-            df['scc_length'] = ([x.split('_')[-1] for x in df['SV']])
-            df['scc_length'] = df['scc_length'].str.len()
-            df['SV'] = np.where(df['scc_length'] == scc_typea_len,
-                                df['SV'].str[:scc_typea_substring[i]],
-                                df['SV'].str[:scc_typeb_substring[i]])
-            scc_typea_len = scc_typea_len + scc_typea_substring[i]
-            df = df.drop(columns=['scc_length'])
-            df = df.groupby(['geo_Id', 'year', 'Measurement_Method',
-                             'SV']).sum().reset_index()
-            self.final_df = pd.concat([self.final_df, df])
 
     def _process(self):
         """
@@ -320,7 +257,6 @@ class USAirEmissionTrends:
             self.final_df['observation'] / 2000, self.final_df['observation'])
         self.final_df = self.final_df.groupby(
             ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
-        # self._aggregate_scc()
 
     def generate_tmcf(self) -> None:
         """
@@ -380,7 +316,6 @@ def main(_):
         print("Run the download script first.\n")
         sys.exit(1)
     ip_files = [input_path + os.sep + file for file in ip_files]
-    print(ip_files)
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
     # Defining Output Files
