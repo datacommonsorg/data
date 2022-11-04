@@ -73,8 +73,7 @@ def generate(level, parent_level, out_dir):
 
 def main(_):
     generate(level=10, parent_level=9, out_dir=FLAGS.s2_out_dir)
-    generate(level=9, parent_level=7, out_dir=FLAGS.s2_out_dir)
-    generate(level=7, parent_level=-1, out_dir=FLAGS.s2_out_dir)
+    generate(level=9, parent_level=1, out_dir=FLAGS.s2_out_dir)
 
 
 if __name__ == "__main__":
