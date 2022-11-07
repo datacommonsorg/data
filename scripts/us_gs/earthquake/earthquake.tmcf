@@ -5,5 +5,5 @@ occurrenceTime: C:Earthquake->occurrence_time
 magnitude: C:Earthquake->mag
 magnitudeType: C:Earthquake->mag_type
 location: C:Earthquake->location
-affectedPlace: C:Earthquake->affectedplaces
+affectedPlace: C:Earthquake->affected_places
 reviewStatus: C:Earthquake->reviewed_status

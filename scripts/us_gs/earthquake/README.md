@@ -20,8 +20,14 @@ The source data is downloaded from the USGS [website](https://www.usgs.gov/progr
 python preprocess.py
 ```
 
-### Step 3. Create a PR for the updated place cache file (and any other changes).
-
-## Things to note
+## Notes
 
 - For the query params, the data you get is [starttime, endtime). For example, if `starttime=2011-03-11` and `endtime=2011-03-12`, the response contains all data that happens on 2011 March 11 exactly.
+
+- Currently `download.sh` will downlaod all earthquake events from 2022 Oct 7 to the date when the script is run. Since USGS earthquake data is updated at source frequently, running the script at a later time in the day should result in more data.
+
+## Running unit tests.
+
+```bash
+cd scripts/us_gs/earthquake && python3 -m unittest discover -v -s ../ -p "preprocess_test.py"
+```

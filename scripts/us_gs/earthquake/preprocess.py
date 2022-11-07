@@ -14,12 +14,11 @@
 """Script to download and preprocess USGS earthquake data."""
 
 import csv
-import datetime
 import glob
 import os
 import subprocess
 import sys
-from typing import Dict, List, NewType
+from typing import Dict, List, Union
 
 from absl import app
 from absl import flags
@@ -32,12 +31,11 @@ from util import latlng_recon_service
 from util import gcs
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input', '/tmp/usgs/*.csv',
+flags.DEFINE_string('usgs_earthquake_input', '/tmp/usgs/*.csv',
                     'Glob pattern for a set of raw USGS earthquake CSV files.')
 
-_TODAY = datetime.date.today().strftime('%Y_%m_%d')
 flags.DEFINE_string(
-    'output', f'/tmp/usgs/out/usgs_comcat_2022_10_06_{_TODAY}.csv',
+    'usgs_earthquake_output', 'earthquake.csv',
     'Path to the output preprocessed csv that this script will produce.')
 
 # A place resolution cache file is a csv file where first two values
@@ -45,7 +43,7 @@ flags.DEFINE_string(
 # same line are place ids that (lat, lng) resolves to.
 # If the whole line consists of lat,lng then it means that the coordinate
 # does not resolve to places known by Data Commons.
-flags.DEFINE_string('cache_path',
+flags.DEFINE_string('usgs_earthquake_cache_path',
                     'gs://datcom-import-cache/earthquake/place_cache.txt',
                     'Path to place resolution cache file.')
 
@@ -195,16 +193,20 @@ def iter_csv_row(glob_pattern: str) -> None:
 
 
 def resolve_affected_places(
-        input, cache_path: str) -> Dict[str, latlng_recon_service.LatLng]:
+    input_path: str,
+    cache_path: Union[str,
+                      None] = None) -> Dict[str, latlng_recon_service.LatLng]:
     """Returns a mapping of dcid -> resolved places mapping."""
-    place_cache = PlaceCache(cache_path)
-    place_cache.read()
-    latlng_to_places_cache = place_cache.cache
-    logging.info('Num entries in cache: %s' % len(latlng_to_places_cache))
+    latlng_to_places_cache = {}
+    if cache_path:
+        place_cache = PlaceCache(cache_path)
+        place_cache.read()
+        latlng_to_places_cache = place_cache.cache
+        logging.info('Num entries in cache: %s' % len(latlng_to_places_cache))
 
     unresolved_id_to_latlng = dict()
     resolved_id_to_latlng = dict()
-    for row in iter_csv_row(input):
+    for row in iter_csv_row(input_path):
         latlng: latlng_recon_service.LatLng = (float(row['latitude']),
                                                float(row['longitude']))
         if latlng in latlng_to_places_cache:
@@ -216,7 +218,11 @@ def resolve_affected_places(
     newly_resolved = latlng_recon_service.latlng2places(unresolved_id_to_latlng)
     resolved_id_to_latlng.update(newly_resolved)
 
-    # Also update the place cache for future runs.
+    # Ignore cache update if cache path is not specified.
+    if not cache_path:
+        return resolved_id_to_latlng
+
+    # Update the place cache for future runs.
     cache_updates = dict()
     for id, places in newly_resolved.items():
         latlng = unresolved_id_to_latlng[id]
@@ -227,7 +233,9 @@ def resolve_affected_places(
     return resolved_id_to_latlng
 
 
-def preprocess(input_path, output_path, cache_path: str):
+def preprocess(input_path,
+               output_path: str,
+               cache_path: Union[str, None] = None):
     """"""
     # Resolve a list of affected places for each earthquake.
     # Not all coordinates will resolve (ex: in the middle of ocean).
@@ -248,7 +256,8 @@ def main(_) -> None:
         ['chmod', '+x', download_sh_path, '&&', 'bash', download_sh_path])
 
     gcs.init()  # for writing to place cache.
-    preprocess(FLAGS.input, FLAGS.output, FLAGS.cache_path)
+    preprocess(FLAGS.usgs_earthquake_input, FLAGS.usgs_earthquake_output,
+               FLAGS.usgs_earthquake_cache_path)
 
 
 if __name__ == '__main__':
