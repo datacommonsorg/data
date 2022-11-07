@@ -179,7 +179,8 @@ def preprocess_row(row: Dict, affected_places: List[str]) -> str:
         p['location'] = square_bracket(latlng)
 
         affected_places = [dcid(a) for a in affected_places]
-        p['affected_places'] = double_quote(','.join(affected_places))
+        if affected_places:
+            p['affected_places'] = double_quote(','.join(affected_places))
 
     return ','.join([p.get(h, '') for h in CSV_COL_HEADERS])
 
