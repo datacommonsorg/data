@@ -243,7 +243,8 @@ def preprocess(input_path,
     ids_to_resolved_places = resolve_affected_places(input_path, cache_path)
     logging.info("Finished resolving affected places.")
 
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    if os.path.dirname(output_path):
+        os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w') as f:
         f.write(','.join(CSV_COL_HEADERS) + '\n')
         for row in iter_csv_row(input_path):
@@ -253,8 +254,8 @@ def preprocess(input_path,
 
 def main(_) -> None:
     download_sh_path = os.path.join(_SCRIPT_PATH, 'download.sh')
-    subprocess.call(
-        ['chmod', '+x', download_sh_path, '&&', 'bash', download_sh_path])
+    subprocess.call(f'chmod +x {download_sh_path} && sh {download_sh_path}',
+                    shell=True)
 
     gcs.init()  # for writing to place cache.
     preprocess(FLAGS.usgs_earthquake_input, FLAGS.usgs_earthquake_output,
