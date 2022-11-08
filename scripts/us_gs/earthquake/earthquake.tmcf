@@ -1,4 +1,5 @@
 Node: E:Earthquake->E0
+dcid: C:Earthquake->id
 typeOf: dcs:EarthquakeEvent
 name: C:Earthquake->name
 occurrenceTime: C:Earthquake->occurrence_time

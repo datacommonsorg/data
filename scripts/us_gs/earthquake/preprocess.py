@@ -61,11 +61,12 @@ MAGTYPE_REMAP = {
     'Mblg': 'MLg',
     'Ms20': 'Ms',
     'Ms_20': 'Ms',
+    'Mi': 'Mwp',
     'Uk': 'Unknown',
 }
 
 CSV_COL_HEADERS = [
-    'name', 'occurrence_time', 'mag', 'mag_type', 'mag_err', 'location',
+    'id', 'name', 'occurrence_time', 'mag', 'mag_type', 'mag_err', 'location',
     'depth', 'depth_err', 'reviewed_status', 'affected_places'
 ]
 
@@ -144,7 +145,7 @@ def preprocess_row(row: Dict, affected_places: List[str]) -> str:
     """Return preprocessed csv row string from a raw csv row dict."""
     if 'id' not in row:
         logging.info('skipping row, id not found in %s' % str(row))
-    p = {}
+    p = {'id': double_quote('dcid:earthquake/' + row['id'])}
 
     # TODO(alex): custom dcid: node = ['Node: dcid:earthquake/' + row['id']]
 
