@@ -1,5 +1,5 @@
 Node: E:chembl29->E1
-typeOf: dcs:Protein
+typeOf: dcs:ChemicalCompound
 dcid: C:chembl29->dcid
 simplifiedMolecularInputLineEntrySystem: C:chembl29->canonical_smiles
 iupacInternationalChemicalID: C:chembl29->standard_inchi
