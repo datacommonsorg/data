@@ -32,14 +32,14 @@ from state_division_to_dcid import _PLACE_MAP
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 from statvar import statvar_col
-from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP, _PROP,
-                       _TIME, _INSURANCE, _CIGARETTES, _PV_PROP, _YEAR)
+from constants import *
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
-input_years = ["2016", "2017", "2018", "2019", "2020"]
+
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+input_years = ["2016", "2017", "2018", "2019", "2020"]
 flags.DEFINE_list("input_years", input_years, "Import Data File's List")
 
 
@@ -477,7 +477,7 @@ class USPrams:
                     time = time.replace(old, new)
                 for old, new in _CIGARETTES.items():
                     cigarettes = cigarettes.replace(old, new)
-                for old, new in _PV_PROP.items():
+                for old, new in PV_PROP.items():
                     prop_val = prop_val.replace(old, new)
 
                 if "SampleSize" in prop:

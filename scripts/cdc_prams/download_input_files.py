@@ -18,14 +18,8 @@ and downloads the files.
 """
 import os
 from absl import app, flags
-# For import common.download
-# pylint: disable=import-error
-# pylint: disable=wrong-import-position
-# _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-# sys.path.insert(1, _COMMON_PATH)
 from download import download_file
-# pylint: enable=import-error
-# pylint: enable=wrong-import-position
+
 _FLAGS = flags.FLAGS
 flags.DEFINE_string("download_directory", os.path.dirname((__file__)),
                     "Directory path where input files need to be downloaded")

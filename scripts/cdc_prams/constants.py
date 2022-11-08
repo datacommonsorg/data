@@ -36,8 +36,9 @@ DEFAULT_SV_PROP = {
     "populationType": "dcs:LiveBirthPregnancyEvent",
 }
 
-# The change is based on the property values according to the schema.
-_PV_PROP = {
+# The dictionaries are used to replace the present value according
+# to the schema.
+PV_PROP = {
     "OneMonth": "1Month",
     "SampleSize_Count": "sampleSize",
     "Percent": "measuredValue",
@@ -45,7 +46,8 @@ _PV_PROP = {
     "ConfidenceIntervalUpperLimit_Count": "confidenceIntervalUpperLimit"
 }
 
-# The change is based on the property values according to the schema.
+# The change is based on the property values according to the schema by
+#  removing the unwanted keywords from the property value.
 _PROP = {
     "OneMonth":
         "1Month",
