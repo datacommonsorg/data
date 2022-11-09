@@ -57,6 +57,8 @@ _DAILY_ACRES_MAP = "Acre {daily_acres}"
 _INITIAL_RESPONSE_AREA_MAP = "Acre {initial_response_area}"
 _EXPECTED_LOSS_MAP = "USDollar {costs}"
 
+_FIRE_DCID_PREFIX = "fire/irwinId/"
+
 
 def get_data(url):
     """Get data from the API.
@@ -77,13 +79,19 @@ def get_data(url):
         r = requests.get("{url}&resultOffset={record_count}".format(
             url=url, record_count=str(full_page_record_count * i)))
         response_json = r.json()
+        if not (response_json["features"]):
+            break
         for row in response_json["features"]:
             data.append(row["attributes"])
         i += 1
+        # use max to get page size for the first request
+        # the value shouldn't change after first iteration, but keep checking
+        # in case behavior changes in the future.
         full_page_record_count = max(full_page_record_count,
                                      len(response_json["features"]))
-        if not ((response_json["features"]) and
-                len(response_json["features"]) == full_page_record_count):
+        # Exit if latest response has lesser rows than page size, as it
+        # indicates that this is the end of the response.
+        if not (len(response_json["features"]) == full_page_record_count):
             break
     df = pd.DataFrame(data)
     return df
@@ -110,84 +118,82 @@ def process_df(df):
     df["POOFips"] = df["POOFips"].astype(str)
 
     # convert epoch time in milliseconds to datetime
-    def get_datetime(x):
-        if not pd.isna(x):
-            return datetime.datetime.fromtimestamp(x / 1000)
+    def get_datetime(date_val):
+        if not pd.isna(date_val):
+            return datetime.datetime.fromtimestamp(date_val / 1000)
         else:
             return None
 
-    def get_date_str(x):
-        if not pd.isna(x):
-            return x.strftime("%Y-%m-%d")
+    def get_date_str(date_val):
+        if not pd.isna(date_val):
+            return date_val.strftime("%Y-%m-%d")
         return None
 
     # Get location associated with each incident.
-    def get_place(x):
+    def get_place(row):
+        latitude = row.InitialLatitude
+        latitude_str = str(latitude)
+        longitude = row.InitialLongitude
+        longitude_str = str(longitude)
         try:
             geoIds = []
             location = ''
-            if not (pd.isna(x.InitialLatitude) or pd.isna(x.InitialLongitude)
-                   ) and abs(x.InitialLatitude) <= 90 and abs(
-                       x.InitialLongitude) <= 180:
-                if str(x.InitialLatitude) in _CACHE:
-                    if str(x.InitialLongitude) in _CACHE[str(
-                            x.InitialLatitude)]:
-                        return _CACHE[str(x.InitialLatitude)][str(
-                            x.InitialLongitude)]
-                geoIds = ll2p.resolve(x.InitialLatitude, x.InitialLongitude)
+            if not (pd.isna(latitude) or pd.isna(longitude)
+                   ) and abs(latitude) <= 90 and abs(longitude) <= 180:
+                if latitude_str in _CACHE:
+                    if longitude_str in _CACHE[str(latitude)]:
+                        return _CACHE[latitude_str][str(longitude)]
+                geoIds = ll2p.resolve(latitude, longitude)
                 for geoId in geoIds:
                     if geoId not in ('northamerica', 'country/CAN',
                                      'country/MEX'):
                         location += 'dcid:%s, ' % geoId
                 if 'northamerica' in geoIds:
-                    return_val = (location +
-                                  ('[LatLong %s %s]' %
-                                   (x.InitialLatitude, x.InitialLongitude)))
-                    if x.InitialLatitude in _CACHE:
-                        _lat_dict = CACHE[str(x.InitialLatitude)]
-                        _lat_dict[str(x.InitialLongitude)] = return_val
+                    return_val = (location + ('[LatLong %s %s]' %
+                                              (latitude, longitude)))
+                    if latitude in _CACHE:
+                        _lat_dict = CACHE[latitude_str]
+                        _lat_dict[longitude_str] = return_val
                     else:
-                        _CACHE[str(x.InitialLatitude)] = {
-                            str(x.InitialLongitude): return_val
-                        }
+                        _CACHE[latitude_str] = {longitude_str: return_val}
                     return return_val
-            if not x.POOFips or pd.isna(x.POOFips):
-                location = mapping.POOSTATE_GEOID_MAP[x.POOState]
+            if not row.POOFips or pd.isna(row.POOFips):
+                location = mapping.POOSTATE_GEOID_MAP[row.POOState]
                 return location
             else:
                 return None
         except Exception as e:
             logging.debug("Failed resolution for ({0},{1} for fire {2})".format(
-                x.InitialLatitude, x.InitialLongitude, x.UniqueFireIdentifier))
+                latitude, longitude, row.UniqueFireIdentifier))
             return ''
 
     # Get FIPS codes associated with each incident.
-    def get_fips(x):
-        if x.POOFips and not pd.isna(x.POOFips):
-            fips_str = (x.POOFips.zfill(5))
+    def get_fips(row):
+        if row.POOFips and not pd.isna(row.POOFips):
+            fips_str = (row.POOFips.zfill(5))
             return "dcid:%s, dcid:%s, dcid:%s" % (
                 "geoId/" + fips_str[:2], "geoId/" + fips_str, "country/USA")
         else:
             return None
 
     # Write expected loss in an ingest-able format.
-    def get_cost(x):
-        if x and not np.isnan(x):
-            return _EXPECTED_LOSS_MAP.format_map({'costs': x})
+    def get_cost(cost_val):
+        if cost_val and not np.isnan(cost_val):
+            return _EXPECTED_LOSS_MAP.format_map({'costs': cost_val})
         else:
             return None
 
     # Write fire area in an ingest-able format.
-    def get_area(x, label, mapping):
-        if x and not np.isnan(x):
-            return mapping.format_map({label: x})
+    def get_area(area, label, mapping):
+        if area and not np.isnan(area):
+            return mapping.format_map({label: area})
         else:
             return None
 
     # Get cause-dcid for the fire cause.
-    def get_cause(x):
-        if x:
-            cause = x.replace(" ", "").replace("/", "Or")
+    def get_cause(cause_str):
+        if cause_str:
+            cause = cause_str.replace(" ", "").replace("/", "Or")
             if cause in mapping.CAUSE_DCID_MAP:
                 cause = mapping.CAUSE_DCID_MAP[cause]
             return cause
@@ -195,17 +201,18 @@ def process_df(df):
             return None
 
     # get personnel count for the incident.
-    def get_personnel(x):
-        if x and not np.isnan(x):
-            x
+    def get_personnel(personnel_val):
+        if personnel_val and not np.isnan(personnel_val):
+            return personnel_val
         else:
             return None
 
     # If a parent fire exists, associate it with given fire.
-    def get_parent_fire(x):
-        if not (np.isnan(x.IsCpxChild)) and x.IsCpxChild == 1 and x.CpxID:
+    def get_parent_fire(row):
+        if not (np.isnan(row.IsCpxChild)) and row.IsCpxChild == 1 and row.CpxID:
             # remove curly brackets from front and end of string.
-            return ('fire/IrwinId/%s' % x.CpxID[1:-1].lower())
+            return '{prefix}{id}'.format(prefix=_FIRE_DCID_PREFIX,
+                                         id=row.CpxID[1:-1].lower())
         else:
             return None
 
@@ -239,7 +246,8 @@ def process_df(df):
     df["Location"] = df["Location"].fillna(df["FIPS"])
     df.loc[df["Location"] == '', 'Location'] = df["FIPS"]
     df["IrwinID"] = df["IrwinID"].apply(lambda x: x.lower())
-    df["dcid"] = df["IrwinID"].apply(lambda x: "fire/irwinId/%s" % x)
+    df["dcid"] = df["IrwinID"].apply(
+        lambda x: "{prefix}{id}".format(prefix=_FIRE_DCID_PREFIX, id=x))
     df["name"] = df["IncidentName"].apply(lambda x: re.sub(
         ' +', ' ',
         x.replace("\n", "").replace("'", "").replace('"', "").replace('[', ""))
