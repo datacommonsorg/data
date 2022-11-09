@@ -281,25 +281,25 @@ file_to_sv_mapping = {
             "+ '_' + df['coicop'] + '_In_Count_Person_' + df['deg_urb']+ '_' + df['sex']",
 
         "hlth_ehis_fv3b": "'Percent_' + 'Daily_'+df['n_portion']+'_'"+\
-            " +'ConsumptionOfFruitsOrVegetables_' + 'In_Count_Person_' "+\
+            " +'ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
            " +  df['sex']+ '_' + df['c_birth']",
         "hlth_ehis_fv3c": "'Percent_' + 'Daily_'+df['n_portion'] "+\
-            " +'_ConsumptionOfFruitsOrVegetables_' + 'In_Count_Person_' "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
            " +  df['citizen']+ '_' + df['sex']",
         "hlth_ehis_fv3d": "'Percent_' + 'Daily_'+df['n_portion'] "+\
-            " +'_ConsumptionOfFruitsOrVegetables_' + 'In_Count_Person_' "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
            " +  df['sex']+ '_' + df['lev_limit']",
         "hlth_ehis_fv3e": "'Percent_' + 'Daily_'+df['n_portion'] "+\
-            " +'_ConsumptionOfFruitsOrVegetables_' + 'In_Count_Person_' "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
            " +  df['isced11']+ '_' + df['sex']",
         "hlth_ehis_fv3i": "'Percent_' + 'Daily_'+df['n_portion'] "+\
-            " +'_ConsumptionOfFruitsOrVegetables_' + 'In_Count_Person_' "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
            " +  df['sex']+ '_' + df['quant_inc']",
         "hlth_ehis_fv3m": "'Percent_' + 'Daily_'+df['n_portion'] "+\
-            " +'_ConsumptionOfFruitsOrVegetables_' + 'In_Count_Person_' "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
            " +  df['sex']+ '_' + df['bmi']",
         "hlth_ehis_fv3u": "'Percent_' + 'Daily_'+df['n_portion']+'_'"+\
-            " +'ConsumptionOfFruitsOrVegetables_' + 'In_Count_Person_' "+\
+            " +'ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
            " +  df['deg_urb']+ '_' + df['sex']",
 
         "hlth_ehis_fv7e": " 'Percent_'+df['frequenc_fruitsvegetables'] +'_'+'ConsumptionOfSugarSweetenedSoftDrinks_' "+\
@@ -314,7 +314,7 @@ file_to_sv_mapping = {
         "hlth_ehis_de8": " 'Percent_'+ df['frequenc_fruitsvegetables']+ '_'+'ConsumptionOfVegetables_' "+\
                " + 'In_Count_Person_'+ df['isced11']+'_'+ df['sex']",
 
-       "hlth_ehis_fv5e" : " 'Percent_'+ df['frequenc_fruitsvegetables'] + '_' +'ConsumptionOfPureFruitOrVegetableJuice_' "+\
+       "hlth_ehis_fv5e" : " 'Percent_'+ df['frequenc_fruitsvegetables'] + '_' +'ConsumptionOfPureFruitOrConsumptionOfVegetableJuice_' "+\
              " +  'In_Count_Person_' +df['isced11'] +'_' + df['sex']",
     },
 

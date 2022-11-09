@@ -106,7 +106,7 @@ class EuroStatFruitsVegetables(EuroStat):
         "Normal": "healthbehavior_bmi",
         "Obese": "healthbehavior_bmi",
         "Obesity": "healthbehavior_bmi",
-        "Portions": "n_portion",
+        "Portion": "n_portion",
         "ConsumptionOf": "coicop",
     }
 
@@ -116,9 +116,9 @@ class EuroStatFruitsVegetables(EuroStat):
             if k == "n_portion":
                 self._sv_properties[k] = v\
                     .replace("To", " ")\
-                    .replace("Portions", " Portions")\
+                    .replace("Portion", " Portion")\
                     .replace("From", "")\
-                    .replace("PortionsOrMore","")\
+                    .replace("PortionOrMore","")\
 
             elif k == "incomequin":
                 self._sv_properties[k] = v\
@@ -173,8 +173,8 @@ class EuroStatFruitsVegetables(EuroStat):
                 .replace("Citizenship", "")\
                 .replace("IncomeOf", "")\
                 .replace("Percentile", " Percentile")\
-                .replace("Portions", " Portions")\
-                .replace("PortionsOrMore","- Portions")\
+                .replace("Portion", " Portion")\
+                .replace("PortionOrMore","- Portion")\
 
     # over-ridden parent abstract method
     # pylint: disable=no-self-use
@@ -195,7 +195,7 @@ class EuroStatFruitsVegetables(EuroStat):
 
 if __name__ == '__main__':
     input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                              "input_files")
+                              "input_files")                        
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
 

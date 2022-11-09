@@ -170,9 +170,9 @@ _ASSIST = {
 }
 
 _N_PORTION = {
-    '0': '0Portions',
-    '1-4': 'From1To4Portions',
-    'GE5': '5PortionsOrMore'
+    '0': '0Portion',
+    '1-4': 'From1To4Portion',
+    'GE5': '5PortionOrMore'
 }
 
 _COICOP = {'CP0116': 'ConsumptionOfFruits', 'CP0117': 'ConsumptionOfVegetables'}
