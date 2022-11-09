@@ -61,7 +61,7 @@ _EXPECTED_LOSS_MAP = "USDollar {costs}"
 def get_data(url):
     """Get data from the API.
 
-    This method does that by retrieving 32K records(API call return size) in a
+    This method does that by retrieving 32K records (API call return size) in a
     loop till we get to the end of the dataset.
 
     Args:
