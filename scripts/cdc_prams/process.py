@@ -32,7 +32,8 @@ from state_division_to_dcid import _PLACE_MAP
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 from statvar import statvar_col
-from constants import *
+from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP, _PROP,
+                       _TIME, _INSURANCE, _CIGARETTES, PV_PROP, _YEAR)
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -685,7 +686,7 @@ class USPrams:
 
 
 def main(_):
-    input_path = _FLAGS.input_path
+    input_path = FLAGS.input_path
     ip_files = os.listdir(input_path)
     ip_files = [os.path.join(input_path, file) for file in ip_files]
     # Defining Output Files
