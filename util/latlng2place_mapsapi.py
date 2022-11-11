@@ -17,7 +17,7 @@ Currently supports resolution from lat/lng to admin-area2 (county-equivalent)
 places, admin-area1 (state-equivalent) places and countries.
 
 IMPORTANT NOTE: Please do not hardcode the API key in the calling programs,
-instead pass it as arguments while running them.
+instead pass it as flag arguments while running them.
 
 Example:
   ll2p = latlng2place_mapsapi.Resolver(api_key='XYZ')
@@ -25,7 +25,11 @@ Example:
     dcids = ll2p.resolve(12.0, -34.0)
   except:
     logging.error('Failed to resolve 12.0, -34.0')
-  ... more calls to llp.resolve() ...
+  ... more calls to ll2p.resolve() ...
+
+CACHING: If you would like to cache results of lat/lng calls across runs, you
+can set the `cache_file` argument to a file path.
+
 """
 
 import os
@@ -42,7 +46,11 @@ import aa_isocode2dcid
 import alpha2_to_dcid
 
 _LOCK = threading.Lock()
+
+# The MapsAPI place types that we map corresponding DCID to.  This list is
+# ordered.
 _PLACE_TYPES = ['administrative_area2', 'administrative_area1', 'country']
+
 _RECON_ROOT = 'https://api.datacommons.org/v1/recon/resolve/id'
 
 
@@ -65,14 +73,25 @@ def _placeid2dcid(place_id):
 
 
 class Resolver(object):
-    """Resolves lat lngs to DCIDs."""
+    """Resolves lat lngs to DCIDs using Maps API.
+
+    Args:
+        api_key: Maps API key
+        cache_file: Optional path to the cache file
+        cache_only: If true, then only the cache_file is used and
+                    no API calls are made. Requires that cache_file is set.
+    """
 
     def __init__(self, api_key, cache_file='', cache_only=False):
         assert api_key, 'Resolver() needs a valid API key'
         self._api_key = api_key
-        self._cache_file = cache_file
         self._cache_only = cache_only
+
+        # lat/lngs -> list of DCIDs:  map of previous resolutions
         self._latlng2place = {}
+        # Opened cache file
+        self._cf = None
+
         if cache_file:
             try:
                 with open(cache_file, 'r') as cf:
@@ -90,12 +109,13 @@ class Resolver(object):
         return 'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&key=' + self._api_key
 
     def _parse_result(self, result):
-        """Parse resultsf rom Cloud reverse geocoding service."""
+        """Parse results rom Cloud reverse geocoding service."""
         # Find the placeId in the result.
         if 'place_id' not in result or 'types' not in result:
             return []
 
         place_type = ''
+        # Note: _PLACE_TYPES is specifically ordered.
         for pt in _PLACE_TYPES:
             mt = pt.replace('_area', '_area_level_')
             if mt in result['types']:
@@ -106,12 +126,12 @@ class Resolver(object):
         # Extract short-names.
         short_names = {}
         for place in result['address_components']:
-            if 'administrative_area_level_2' in place['types']:
-                short_names['administrative_area2'] = place['short_name']
-            elif 'administrative_area_level_1' in place['types']:
-                short_names['administrative_area1'] = place['short_name']
-            elif 'country' in place['types']:
-                short_names['country'] = place['short_name']
+            # Note: _PLACE_TYPES is specifically ordered.
+            for pt in _PLACE_TYPES:
+                mt = pt.replace('_area', '_area_level_')
+                if mt in place['types']:
+                    short_names[pt] = place['short_name']
+                    break
 
         dcids = {}
         resolved_id = _placeid2dcid(place_id)
@@ -166,6 +186,6 @@ class Resolver(object):
                 raise LookupError('Could not resolve to DCID')
             with _LOCK:
                 self._latlng2place[latlng] = dcids
-                if self._cache_file:
+                if self._cf:
                     self._cf.write(latlng + ',' + ','.join(dcids) + '\n')
         return dcids
