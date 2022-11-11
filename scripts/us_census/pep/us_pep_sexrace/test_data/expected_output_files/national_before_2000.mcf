@@ -1,0 +1,79 @@
+Node: dcid:Count_Person_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_AmericanIndianAndAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AmericanIndianAndAlaskaNativeAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_AmericanIndianAndAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AmericanIndianAndAlaskaNativeAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_AsianOrPacificIslander
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AsianOrPacificIslander
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_AsianOrPacificIslander
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AsianOrPacificIslander
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_NonWhite
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:NonWhite
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_NonWhite
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:NonWhite
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
