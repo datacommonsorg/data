@@ -30,8 +30,9 @@ _PV_FORMAT_WITHOUT_ZIP = lambda prop_val: f'"{prop_val[0]}": "zip/{prop_val[1]}"
 
 DF_DEFAULT_TMCF_PROP = [('typeOf', 'PrivateSchool', _PV_FORMAT_WITHOUT_DCS)]
 
-SV_PROP_ORDER_PLACE = [ "dcid", "typeOf", "address",  "name",
-    "ncesId", "containedInPlace", "telephone", "lowestGrade", "highestGrade", "schoolGradeLevel",
+SV_PROP_ORDER_PLACE = [
+    "dcid", "typeOf", "address", "name", "ncesId", "containedInPlace",
+    "telephone", "lowestGrade", "highestGrade", "schoolGradeLevel",
     "privateSchoolType", "schoolReligiousOrientation", "coeducationalType"
 ]
 
@@ -80,7 +81,7 @@ PLACE_STATVAR = {
         "column": "Coeducational",
         "pv_format": _PV_FORMAT_WITHOUT_DCS
     },
-    "dcid":{
+    "dcid": {
         "column": "school_state_code",
         "pv_format": _PV_FORMAT_WITHOUT_DCS
     }

@@ -53,8 +53,8 @@ class TestProcess(unittest.TestCase):
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            loader = NCESDistrictSchool(self.ip_data,cleaned_csv_file_path,
-            mcf_file_path,tmcf_file_path)
+            loader = NCESDistrictSchool(self.ip_data, cleaned_csv_file_path,
+                                        mcf_file_path, tmcf_file_path)
 
             loader.generate_csv()
             loader.generate_mcf()
@@ -75,12 +75,10 @@ class TestProcess(unittest.TestCase):
         preprocess script and expected output files like MCF File
         """
         expected_mcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR,
-            "us_nces_demographics_district_school.mcf")
+            EXPECTED_FILES_DIR, "us_nces_demographics_district_school.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR,
-            "us_nces_demographics_district_school.tmcf")
+            EXPECTED_FILES_DIR, "us_nces_demographics_district_school.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -101,8 +99,7 @@ class TestProcess(unittest.TestCase):
         preprocess script and expected output files like CSV
         """
         expected_csv_file_path = os.path.join(
-            EXPECTED_FILES_DIR,
-            "us_nces_demographics_district_school.csv")
+            EXPECTED_FILES_DIR, "us_nces_demographics_district_school.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,

@@ -48,12 +48,13 @@ class TestProcess(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
 
-            self.cleaned_csv_file_path = os.path.join(_EXPECTED_FILES_DIR, "data.csv")
+            self.cleaned_csv_file_path = os.path.join(_EXPECTED_FILES_DIR,
+                                                      "data.csv")
             self.mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             self.tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
             loader = NCESPrivateSchool(self.IP_DATA, self.cleaned_csv_file_path,
-                                        self.mcf_file_path, self.tmcf_file_path)
+                                       self.mcf_file_path, self.tmcf_file_path)
 
             loader.generate_csv()
             loader.generate_mcf()
