@@ -40,9 +40,9 @@ TMCF_TEMPLATE_PLACE_PRIVATE = (
     "schoolGradeLevel: C:us_nces_demographics_private_place->SchoolGrade\n"
     "containedInPlace: C:us_nces_demographics_private_place->ContainedInPlace\n"
     "telephone: C:us_nces_demographics_private_place->PhoneNumber\n"
-    "schoolType: C:us_nces_demographics_private_place->School_Type\n"
-    "schoolReligiousOrientation: C:us_nces_demographics_private_place->School_Religion\n"
-    "coeducationalType: C:us_nces_demographics_private_place->Coeducational\n")
+    "educationalMethod: C:us_nces_demographics_private_place->School_Type\n"
+    "religiousOrientation: C:us_nces_demographics_private_place->School_Religion\n"
+    "coeducationStatus: C:us_nces_demographics_private_place->Coeducational\n")
 
 TMCF_TEMPLATE_PLACE_DISTRICT = (
     "Node: E:us_nces_demographics_district_place->E0\n"
@@ -51,13 +51,14 @@ TMCF_TEMPLATE_PLACE_DISTRICT = (
     "address: C:us_nces_demographics_district_place->Physical_Address\n"
     "name: C:us_nces_demographics_district_place->District_School_name\n"
     "geoId: C:us_nces_demographics_district_place->geoID\n"
-    "city: C:us_nces_demographics_district_place->City\n"
+    # "location: C:us_nces_demographics_district_place->City\n"
     "ncesId: C:us_nces_demographics_district_place->School_ID\n"
+    "postalCode: C:us_nces_demographics_district_place->ZIP\n"
     "containedInPlace: C:us_nces_demographics_district_place->ContainedInPlace\n"
-    # "schoolStateID: C:us_nces_demographics_district_place->school_state_code\n"
+    "schoolStateID: C:us_nces_demographics_district_place->State_school_ID\n"
     "telephone: C:us_nces_demographics_district_place->PhoneNumber\n"
-    "lowestGrade: C:us_nces_demographics_district_place->Lowest_Grade\n"
-    "highestGrade: C:us_nces_demographics_district_place->Highest_Grade\n"
+    "lowestGrade: C:us_nces_demographics_district_place->Lowest_Grade_Dist\n"
+    "highestGrade: C:us_nces_demographics_district_place->Highest_Grade_Dist\n"
     "longitude: C:us_nces_demographics_district_place->Longitude\n"
     "latitude: C:us_nces_demographics_district_place->Latitude\n"
     "ncesLocale: C:us_nces_demographics_district_place->Locale\n")
@@ -67,19 +68,27 @@ TMCF_TEMPLATE_PLACE_PUBLIC = (
     "dcid: C:us_nces_demographics_public_place->school_state_code\n"
     "typeOf: dcs:PublicSchool\n"
     "address: C:us_nces_demographics_public_place->Physical_Address\n"
-    "name: C:us_nces_demographics_public_place->Private_School_Name\n"
-    "ncesId: C:us_nces_demographics_public_place->SchoolID\n"
+    "name: C:us_nces_demographics_public_place->Public_School_Name\n"
+    "ncesId: C:us_nces_demographics_public_place->School_Id\n"
     "containedInPlace: C:us_nces_demographics_public_place->ContainedInPlace\n"
     "telephone: C:us_nces_demographics_public_place->PhoneNumber\n"
     "lowestGrade: C:us_nces_demographics_public_place->Lowest_Grade\n"
     "highestGrade: C:us_nces_demographics_public_place->Highest_Grade\n"
     "schoolGradeLevel: C:us_nces_demographics_public_place->School_Level\n"
-    "schoolType: C:us_nces_demographics_public_place->School_Type\n"
-    "schoolReligiousOrientation: C:us_nces_demopublic_district_place->School_Religion\n"
-    "coeducationalType: C:us_nces_demographics_public_place->Coeducational\n"
+    "educationalMethod: C:us_nces_demographics_public_place->School_Type_Public\n"
+    #"schoolReligiousOrientation: C:us_nces_demopublic_district_place->School_Religion\n"
+    #"coeducationalType: C:us_nces_demographics_public_place->Coeducational\n"
     "longitude: C:us_nces_demographics_public_place->Longitude\n"
     "latitude: C:us_nces_demographics_public_place->Latitude\n"
-    "ncesLocale: C:us_nces_demographics_public_place->Locale\n")
+    "ncesLocale: C:us_nces_demographics_public_place->Locale\n"
+    "magnetStatus: C:us_nces_demographics_public_place->Magnet_School\n"
+    "titleISchoolStatus: C:us_nces_demographics_public_place->Title_I_School_Status\n"
+    "charterStatus: C:us_nces_demographics_public_place->Charter_School\n"
+    "nationalSchoolLunchProgram: C:us_nces_demographics_public_place->National_School_Lunch_Program\n"
+    "schoolDistrict: C:us_nces_demographics_public_place->Agency_Name\n"
+    "schoolStateID: C:us_nces_demographics_public_place->State_School_ID\n")
+# "NCES_districtID: C:us_nces_demographics_public_place->State_Agency_ID\n"
+# "stateDistrictID: C:us_nces_demographics_public_place->State_District_ID\n")
 
 _DENOMINATOR_PROP = {
     "Pupil/Teacher Ratio": "Count_Teacher",
@@ -147,6 +156,8 @@ _SCHOOL_GRADE_PATTERN = (r"("
                          r"Secondary Teachers"
                          r"|"
                          r"Ungraded Students"
+                         r"|"
+                         r"Ungraded Teachers"
                          r"|"
                          r"Adult Education"
                          r")")

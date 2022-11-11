@@ -18,6 +18,7 @@ for us nces demographic private school.
 CSV_FILE_NAME = "us_nces_demographics_public_school.csv"
 MCF_FILE_NAME = "us_nces_demographics_public_school.mcf"
 TMCF_FILE_NAME = "us_nces_demographics_public_school.tmcf"
+CSV_FILE_PLACE = "us_nces_demographics_public_place.csv"
 TMCF_FILE_PLACE = "us_nces_demographics_public_place.tmcf"
 SCHOOL_TYPE = "public_school"
 SPLIT_HEADER_ON_SCHOOL_TYPE = "[Public School]"
@@ -31,25 +32,14 @@ POSSIBLE_DATA_COLUMNS = [
 EXCLUDE_DATA_COLUMNS = [
     'Migrant Students', '(Includes AE)',
     'Total Students - Calculated Sum of Reported Grade Totals', 'Unknown',
-    'unknown', 'Total Race/Ethnicity'
+    'unknown', 'Total Race/Ethnicity', 'Agency ID - NCES Assigned'
 ]
 
 POSSIBLE_PLACE_COLUMNS = [
-    "school_state_code",
-    "ZIP",
-    ".*County.*",
-    ".*School.*",
-    ".*Lowest.*",
-    ".*Highest.*",
-    "Physical.*",
-    "Phone.*",
-    "Coeducational",
-    ".*Level.*",
-    ".*State.*",
-    "Latitude.*",
-    "Longitude.*",
-    "Locale.*",
-    "Location.*",
+    "school_state_code", "ZIP", ".*County.*", ".*School.*", ".*Lowest.*",
+    ".*Highest.*", "Physical.*", "Phone.*", "Coeducational", ".*Level.*",
+    ".*State.*", "Latitude.*", "Longitude.*", "Locale.*", "Location.*",
+    "Charter.*", "Magnet.*", "Title.*", "Agency.*"
 ]
 
 EXCLUDE_PLACE_COLUMNS = ["State Name", "Metro Micro Area Code"]

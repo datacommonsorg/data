@@ -40,6 +40,7 @@ CODEDIR = os.path.dirname(__file__)
 # For import common.replacement_functions
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))
 from util.statvar_dcid_generator import get_statvar_dcid
+from common.dcid_existance import *
 
 
 class USEducation:
@@ -55,6 +56,10 @@ class USEducation:
     _exclude_columns = None
     _include_col_private = None
     _exclude_col_private = None
+    _include_col_district = None
+    _exclude_col_district = None
+    _include_col_public = None
+    _exclude_col_public = None
     _generate_statvars = True
 
     def __init__(self,
@@ -68,10 +73,11 @@ class USEducation:
         self._cleaned_csv_file_path = cleaned_csv_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
-        self._cleaned_csv_place = cleaned_csv_place
+        self._csv_file_place = cleaned_csv_place
         self._tmcf_file_place = tmcf_file_place
         self._year = None
         self._df = pd.DataFrame()
+        self._final_df_district = pd.DataFrame()
         if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
             os.mkdir(os.path.dirname(self._cleaned_csv_file_path))
 
@@ -182,7 +188,6 @@ class USEducation:
             unique_rows[curr_value_column] = unique_rows[column]
             unique_rows = self._apply_regex(unique_rows, conf,
                                             curr_value_column)
-
             if conf.get("update_value", False):
                 unique_rows[curr_value_column] = unique_rows[
                     curr_value_column].apply(conf["update_value"])
@@ -193,7 +198,6 @@ class USEducation:
             unique_rows[[curr_value_column
                         ]] = replace_values(unique_rows[[curr_value_column]],
                                             replace_with_all_mappers=True)
-
             curr_val_mapper = dict(
                 zip(unique_rows[column], unique_rows[curr_value_column]))
 
@@ -280,10 +284,12 @@ class USEducation:
         return data_df
 
     def _parse_file(self, raw_df: pd.DataFrame) -> pd.DataFrame:
-
+        df_append = []
+        df_final_place = pd.DataFrame()
         self._year = self._extract_year_from_headers(
             raw_df.columns.values.tolist())
-        raw_df["year"] = "20" + self._year[-2:]
+
+        raw_df["year"] = self._year[0:4].strip()
 
         df_cleaned = self._clean_data(raw_df)
 
@@ -305,8 +311,9 @@ class USEducation:
                 "geoId/sch" + df_cleaned["Agency ID - NCES Assigned"]
 
         curr_cols = df_cleaned.columns.values.tolist()
+        curr_place = curr_cols
         data_cols = []
-
+        data_place = []
         for pattern in self._exclude_columns:
             pat = f"^((?!{pattern}).)*$"
             r = re.compile(pat)
@@ -315,6 +322,218 @@ class USEducation:
         for pattern in self._include_columns:
             r = re.compile(pattern)
             data_cols += list(filter(r.match, curr_cols))
+
+        if self._import_name == "private_school":
+            for pattern in self._exclude_col_private:
+                pat = f"^((?!{pattern}).)*$"
+                r = re.compile(pat)
+                curr_place = list(filter(r.match, curr_place))
+
+            for pattern in self._include_col_private:
+                r = re.compile(pattern)
+                data_place += list(filter(r.match, curr_place))
+
+        if self._import_name == "district_school":
+            for pattern in self._exclude_col_district:
+                pat = f"^((?!{pattern}).)*$"
+                r = re.compile(pat)
+                curr_place = list(filter(r.match, curr_place))
+
+            for pattern in self._include_col_district:
+                r = re.compile(pattern)
+                data_place += list(filter(r.match, curr_place))
+
+        if self._import_name == "public_school":
+            for pattern in self._exclude_col_public:
+                pat = f"^((?!{pattern}).)*$"
+                r = re.compile(pat)
+                curr_place = list(filter(r.match, curr_place))
+
+            for pattern in self._include_col_public:
+                r = re.compile(pattern)
+                data_place += list(filter(r.match, curr_place))
+        df_place = df_cleaned[data_place]
+
+        if self._import_name == "private_school":
+            df_place['year'] = self._year[0:4].strip()
+            df_place_col = pd.DataFrame(columns=[
+                "year", "school_state_code", "ZIP", "ZIP + 4", "County_code",
+                "Private_School_Name", "SchoolID", "School_Type",
+                "Lowest_Grade", "Highest_Grade", "SchoolGrade",
+                "School_Religion", "School_Religion_Affliation",
+                "Physical_Address", "PhoneNumber", "Coeducational", "State_code"
+            ])
+            if not os.path.exists(
+                    "/usr/local/google/home/chharish/us_nces_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place_temp.csv"
+            ):
+
+                df_place_col.to_csv(
+                    "/usr/local/google/home/chharish/us_nces_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place_temp.csv",
+                    index=False)
+            else:
+                df_place.drop_duplicates(inplace=True)
+                df_place_col.to_csv(
+                    "/usr/local/google/home/chharish/us_nces_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place_temp.csv",
+                    index=False,
+                    header=False,
+                    mode='a')
+            df_place['ZIP'] = pd.to_numeric(df_place['ZIP'], errors='coerce')
+            df_place['ANSI/FIPS County Code'] = pd.to_numeric(
+                df_place['ANSI/FIPS County Code'], errors='coerce')
+
+            df_place = df_place.fillna(-1)
+            float_col = df_place.select_dtypes(include=['float64'])
+            for col in float_col.columns.values:
+                df_place[col] = df_place[col].astype('int64')
+                df_place[col] = df_place[col].astype("str").str.replace(
+                    "-1", "")
+            df_place['Phone Number'] = pd.to_numeric(df_place['Phone Number'],
+                                                     errors='coerce')
+
+            df_place['ZIP'] = df_place['ZIP'].astype(str).str.zfill(5)
+            df_place['ZIP'] = "zip/" + df_place['ZIP']
+
+            df_place['State_code'] = "geoId/" + df_place['ANSI/FIPS State Code']
+            df_place['ANSI/FIPS County Code'] = df_place[
+                'ANSI/FIPS County Code'].astype(str).str.zfill(5)
+            df_place['County_code'] = df_place['ANSI/FIPS County Code'].apply(
+                lambda x: 'geoId/' + x if x != '' else '')
+
+            df_place["Physical Address"] = df_place[
+                "Physical Address"] + " " + df_place["City"] + " " + df_place[
+                    "ZIP + 4"]
+
+            df_place = df_place.loc[:, ~df_place.columns.duplicated()]
+            df_place = replace_values(df_place)
+            df_place = df_place.rename(
+                columns={
+                    "Private School Name":
+                        "Private_School_Name",
+                    "School ID - NCES Assigned":
+                        "SchoolID",
+                    "School Type":
+                        "School_Type",
+                    "School's Religious Affiliation or Orientation":
+                        "School_Religion_Affliation",
+                    "Religious Orientation":
+                        "School_Religion",
+                    "Physical Address":
+                        "Physical_Address",
+                    "Phone Number":
+                        "PhoneNumber",
+                    "Lowest Grade Taught":
+                        "Lowest_Grade",
+                    "Highest Grade Taught":
+                        "Highest_Grade",
+                    "School Level":
+                        "SchoolGrade"
+                })
+            col_to_dcs = [
+                "School_Type", "School_Religion", "Coeducational",
+                "Lowest_Grade", "Highest_Grade", "SchoolGrade"
+            ]
+            for col in col_to_dcs:
+                df_place[col] = df_place[col].replace(to_replace={'': pd.NA})
+                df_place[col] = "dcs:" + df_place[col]
+            df_place = df_place[[
+                "year", "school_state_code", "ZIP", "ZIP + 4", "County_code",
+                "Private_School_Name", "SchoolID", "School_Type",
+                "Lowest_Grade", "Highest_Grade", "SchoolGrade",
+                "School_Religion", "School_Religion_Affliation",
+                "Physical_Address", "PhoneNumber", "Coeducational", "State_code"
+            ]]
+
+            df_final_place = pd.concat([df_final_place, df_place])
+            df_place.to_csv(
+                "/usr/local/google/home/chharish/us_nces_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place_temp.csv",
+                index=False,
+                header=False,
+                mode='a')
+
+        # if self._import_name == "district_school":
+        #     df_place['year'] = self._year[0:4].strip()
+        #     df_place = df_place.loc[:, ~df_place.columns.duplicated()]
+        #     df_place['ContainedInPlace'] = "geoId/" + df_place[
+        #         'ANSI/FIPS State Code']
+        #     df_place['geoID'] = "sch" + df_place['Agency ID - NCES Assigned']
+        #     df_place = df_place.rename(
+        #         columns={
+        #             'Location ZIP': 'ZIP',
+        #             'County Number': 'County_code',
+        #             'Agency Name': 'District_School_name',
+        #             'Agency ID - NCES Assigned': 'School_ID',
+        #             'Agency Type': 'School_Type',
+        #             'State Agency ID': 'State_school_ID',
+        #             'Phone Number': 'PhoneNumber',
+        #             'ANSI/FIPS State Code': 'State_code',
+        #             'Location Address 1': 'Physical_Address',
+        #             'Location City': 'City',
+        #             'Agency Level (SY 2017-18 onward)': 'Agency_level',
+        #             "Lowest Grade Offered": "Lowest_Grade",
+        #             "Highest Grade Offered": "Highest_Grade",
+        #             "State Name": "State_Name",
+        #             "Location ZIP4": "Location_ZIP4",
+        #             "State Abbr": "State_Abbr"
+        #         })
+        #     df_place = replace_values(df_place)
+        #     col_to_dcs = ['Lowest_Grade', 'Highest_Grade', 'Locale']
+        #     for col in col_to_dcs:
+        #         df_place[col] = df_place[col].replace(to_replace={'': pd.NA})
+        #         df_place[col] = "dcs:" + df_place[col]
+        #     df_place["Physical_Address"] = df_place[
+        #         "Physical_Address"] + " " + df_place["City"] + "," + df_place[
+        #             "State_Abbr"] + " " + df_place["ZIP"] + "-" + df_place[
+        #                 'Location_ZIP4']
+        #     # df_place['ZIP'] = "zip/" + df_place['ZIP']
+        #     df_place['County_code'] = "geoId/" + df_place['County_code']
+        #     df_place['State_code'] = "geoId/" + df_place['State_code']
+        #     df_place = df_place.sort_values(by=["year"], ascending=False)
+        #     self._final_df_district = pd.concat(
+        #         [self._final_df_district, df_place])
+        # self._final_df_district = self._final_df_district.drop_duplicates(
+        #     subset=["District_School_name"]).reset_index(drop=True)
+        # self._final_df_district.to_csv(
+        #     "/Users/chharish/us_nces_education/data/scripts/us_nces/demographics/district_school/output_place/us_nces_demographics_district_place.csv",
+        #     index=False)
+
+        if self._import_name == "public_school":
+
+            df_place = df_place.loc[:, ~df_place.columns.duplicated()]
+            df_place = df_place.rename(
+                columns={
+                    'County Number': 'County_code',
+                    'School Name': 'Public_School_Name',
+                    'School ID - NCES Assigned': 'School_Id',
+                    'Lowest Grade Offered': 'Lowest_Grade',
+                    'Highest Grade Offered': 'Highest_Grade',
+                    'Phone Number': 'PhoneNumber',
+                    'ANSI/FIPS State Code': 'State_code',
+                    'Location Address 1': 'Physical_Address',
+                    'Location City': 'City',
+                    'Location ZIP': 'ZIP',
+                    'Locale': 'Locale_temp'
+                })
+            df_place = replace_values(df_place)
+            locale = list(pd.unique(df_place['Locale_temp']))
+            print(locale)
+            df_place['Locale_temp'] = df_place['Locale_temp'].replace(
+                to_replace={'': pd.NA})
+            df_place['Locale_temp'] = df_place['Locale_temp'].str.replace(
+                ": ", "")
+            df_place[['Locale1', 'Locale', 'Locale2'
+                     ]] = df_place['Locale_temp'].str.split('-', expand=True)
+            df_place = df_place.drop(
+                columns=['Locale_temp', 'Locale1', 'Locale2'])
+            df_place['Locale'] = "NCES_" + df_place['Locale']
+            df_place["Locale"] = df_place["Locale"].str.replace(
+                "CityMid", "CityMidsize")
+            df_place["Locale"] = df_place["Locale"].str.replace(
+                "SuburbMid", "SuburbMidsize")
+
+            df_place.to_csv(
+                "/usr/local/google/home/chharish/us_nces_education/data/scripts/us_nces/demographics/public_school/output_place/us_nces_demographics_public_place_temp.csv",
+                index=False,
+                mode='a')
 
         if not self._generate_statvars:
             return df_cleaned[data_cols]
@@ -394,134 +613,57 @@ class USEducation:
                     df_parsed = df_parsed[df_parsed["sv_name"].isin(
                         new_sv_names)].reset_index(drop=False)
                 dfs.append(df_parsed)
+        if self._import_name == "private_school":
+            df_final_private = pd.read_csv(
+                "/usr/local/google/home/chharish/us_nces_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place_temp.csv"
+            )
+            df_final_private = df_final_private.sort_values(by=["year"],
+                                                            ascending=False)
 
+            df_final_private['PhoneNumber'] = df_final_private[
+                'PhoneNumber'].astype('Int64').astype(str)
+            df_final_private['PhoneNumber'] = df_final_private[
+                'PhoneNumber'].fillna("", inplace=True)
+            zip_list = list(pd.unique(df_final_private['ZIP']))
+            county_list = list(pd.unique(df_final_private['County_code']))
+
+            config = {
+                'dc_api_batch_size': 200,
+                'dc_api_retries': 3,
+                'dc_api_retry_sec': 5,
+                'dc_api_use_cache': False,
+                'dc_api_root': None
+            }
+            dcid_check_zip = dc_api_get_defined_dcids(zip_list, config)
+            dcid_check_county = dc_api_get_defined_dcids(county_list, config)
+
+            df_final_private['ZIP'] = df_final_private['ZIP'].apply(
+                lambda x: x if dcid_check_zip[x] else '')
+
+            df_final_private['County_code'] = df_final_private[
+                'County_code'].apply(lambda x: x
+                                     if dcid_check_county[x] else '')
+
+            df_final_private['County_code'] = df_final_private[
+                'County_code'].astype(str)
+
+            df_final_private['ContainedInPlace'] = df_final_private[
+                'ZIP'].apply(lambda x: x + ',' if x != '' else ''
+                            ) + df_final_private['County_code'].apply(
+                                lambda x: x + ',' if x != '' else ''
+                            ) + df_final_private['State_code']
+            df_final_private['ContainedInPlace'] = df_final_private[
+                'ContainedInPlace'].astype(str)
+
+            df_final_private = df_final_private.drop_duplicates(
+                subset=["Private_School_Name"]).reset_index(drop=True)
+            df_final_private.drop_duplicates(inplace=True)
+            df_final_private.to_csv(
+                "/usr/local/google/home/chharish/us_nces_education/data/scripts/us_nces/demographics/private_school/output_place/us_nces_demographics_private_place.csv",
+                index=False)
         df_merged = pd.DataFrame()
 
         for df in dfs:
-            df_merged = pd.concat([df_merged, df])
-        self._df = df_merged
-
-    def generate_csv_place(self) -> pd.DataFrame:
-        """
-        This Method calls the required methods to generate
-        cleaned CSV file.
-
-        Args:
-            None
-
-        Returns:
-            pd.DataFrame
-        """
-
-        df_append = []
-        data_place = []
-        df_private = None
-        c = 0
-        # df_place_col = pd.DataFrame(columns=[
-        #     "school_state_code", "ZIP", "County_code", "Private_School_Name",
-        #     "SchoolID", "School_Type", "School_Level", "School_Religion",
-        #     "Lowest_Grade", "Highest_Grade", "Physical_Address", "PhoneNumber",
-        #     "Coeducational", "ContainedInPlace"
-        # ])
-        # df_place_col.to_csv(self._cleaned_csv_place,index=False)
-        df_final_place = pd.DataFrame()
-        for input_file in sorted(self._input_files):
-            c += 1
-            raw_df = self.input_file_to_df(input_file)
-            df_cleaned = self._clean_data(raw_df)
-            for col in df_cleaned.columns.values.tolist():
-                df_cleaned[col] = \
-                df_cleaned[col].astype('str').str.strip()
-            df_private = self._clean_columns(df_cleaned)
-            curr_cols = df_private.columns.values.tolist()
-            curr_place = curr_cols
-            for pattern in self._exclude_col_private:
-                pat = f"^((?!{pattern}).)*$"
-                r = re.compile(pat)
-                curr_place = list(filter(r.match, curr_place))
-
-            for pattern in self._include_col_private:
-                r = re.compile(pattern)
-                data_place += list(filter(r.match, curr_place))
-
-            df_place = df_private[data_place]
-            df_place = replace_values(df_place)
-            df_place['ZIP'] = pd.to_numeric(df_place['ZIP'], errors='coerce')
-
-            df_place['Phone Number'] = pd.to_numeric(df_place['Phone Number'],
-                                                     errors='coerce')
-
-            df_place['ANSI/FIPS County Code'] = pd.to_numeric(
-                df_place['ANSI/FIPS County Code'], errors='coerce')
-            df_place = df_place.fillna(-1)
-            float_col = df_place.select_dtypes(include=['float64'])
-            for col in float_col.columns.values:
-                df_place[col] = df_place[col].astype('int64')
-                df_place[col] = df_place[col].astype("str").str.replace(
-                    "-1", "")
-
-            df_place['ZIP'] = df_place['ZIP'].astype(str).str.zfill(5)
-            df_place['ZIP'] = df_place['ZIP'].replace('00000', '')
-            df_place['ANSI/FIPS State Code'] = "geoId/" + df_place[
-                'ANSI/FIPS State Code']
-            df_place['ContainedInPlace'] = "zip/" + df_place[
-                'ZIP'] + "," + df_place['ANSI/FIPS State Code']
-
-            df_place['ContainedInPlace'] = np.where(
-                df_place['ContainedInPlace'] == 'zip/,geoId/51',
-                df_place['ANSI/FIPS State Code'], df_place['ContainedInPlace'])
-
-            df_place["school_state_code"] = \
-                "nces/" + df_place["School ID - NCES Assigned"] + \
-                '_' + df_place["ANSI/FIPS State Code"]
-
-            df_place = df_place.loc[:, ~df_place.columns.duplicated()]
-            df_place = df_place.rename(
-                columns={
-                    "Private School Name":
-                        "Private_School_Name",
-                    "School ID - NCES Assigned":
-                        "SchoolID",
-                    "School Type":
-                        "School_Type",
-                    "School Level":
-                        "School_Level",
-                    "School's Religious Affiliation or Orientation":
-                        "School_Religion",
-                    "Lowest Grade Taught":
-                        "Lowest_Grade",
-                    "Highest Grade Taught":
-                        "Highest_Grade",
-                    "Physical Address":
-                        "Physical_Address",
-                    "Phone Number":
-                        "PhoneNumber",
-                    "ANSI/FIPS County Code":
-                        "County_code"
-                })
-            col_list = [
-                "School_Type", "School_Religion", "School_Level",
-                "Lowest_Grade", "Highest_Grade", "Coeducational"
-            ]
-            for col in col_list:
-                df_place[col] = df_place[col].replace(to_replace={'': pd.NA})
-                df_place[col] = "dcs:" + df_place[col]
-            df_final_place = df_place[[
-                "school_state_code", "ZIP", "County_code",
-                "Private_School_Name", "SchoolID", "School_Type",
-                "School_Level", "School_Religion", "Lowest_Grade",
-                "Highest_Grade", "Physical_Address", "PhoneNumber",
-                "Coeducational", "ContainedInPlace"
-            ]]
-            df_final_place = pd.concat([df_final_place, df_place])
-            df_final_place.to_csv(self._cleaned_csv_place,
-                                  index=False,
-                                  header=False,
-                                  mode='a')
-            df_append.append(df_final_place)
-        df_merged = pd.DataFrame()
-
-        for df in df_append:
             df_merged = pd.concat([df_merged, df])
         self._df = df_merged
 
@@ -565,7 +707,7 @@ class USEducation:
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
 
-    def _generate_tmcf_place(self) -> None:
+    def _generate_tmcf_private(self) -> None:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template
@@ -576,9 +718,118 @@ class USEducation:
         Returns:
             None
         """
-
         with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
-            f_out.write(TMCF_TEMPLATE_PLACE.rstrip('\n'))
+            f_out.write(TMCF_TEMPLATE_PLACE_PRIVATE.rstrip('\n'))
+
+    def _generate_csv_district(self) -> pd.DataFrame:
+        raw_df = pd.DataFrame()
+        self._year = self._extract_year_from_headers(
+            raw_df.columns.values.tolist())
+
+        raw_df["year"] = self._year[0:4].strip()
+
+        df_cleaned = self._clean_data(raw_df)
+
+        for col in df_cleaned.columns.values.tolist():
+            df_cleaned[col] = \
+                df_cleaned[col].astype('str').str.strip()
+
+        df_cleaned = self._clean_columns(df_cleaned)
+
+        if self._import_name == "district_school":
+            df_cleaned["school_state_code"] = \
+                "geoId/sch" + df_cleaned["Agency ID - NCES Assigned"]
+
+        curr_cols = df_cleaned.columns.values.tolist()
+        curr_place = curr_cols
+        data_cols = []
+        data_place = []
+
+        # if self._import_name == "district_school":
+        for pattern in self._exclude_col_district:
+            pat = f"^((?!{pattern}).)*$"
+            r = re.compile(pat)
+            curr_place = list(filter(r.match, curr_place))
+
+        for pattern in self._include_col_district:
+            r = re.compile(pattern)
+            data_place += list(filter(r.match, curr_place))
+        df_place = df_cleaned[data_place]
+        df_place['year'] = self._year[0:4].strip()
+        df_place = df_place.loc[:, ~df_place.columns.duplicated()]
+        df_place[
+            'ContainedInPlace'] = "geoId/" + df_place['ANSI/FIPS State Code']
+        df_place['geoID'] = "sch" + df_place['Agency ID - NCES Assigned']
+        df_place = df_place.rename(
+            columns={
+                'Location ZIP': 'ZIP',
+                'County Number': 'County_code',
+                'Agency Name': 'District_School_name',
+                'Agency ID - NCES Assigned': 'School_ID',
+                'Agency Type': 'School_Type',
+                'State Agency ID': 'State_school_ID',
+                'Phone Number': 'PhoneNumber',
+                'ANSI/FIPS State Code': 'State_code',
+                'Location Address 1': 'Physical_Address',
+                'Location City': 'City',
+                'Agency Level (SY 2017-18 onward)': 'Agency_level',
+                "Lowest Grade Offered": "Lowest_Grade",
+                "Highest Grade Offered": "Highest_Grade",
+                "State Name": "State_Name",
+                "Location ZIP4": "Location_ZIP4",
+                "State Abbr": "State_Abbr"
+            })
+        df_place = replace_values(df_place)
+        col_to_dcs = ['Lowest_Grade', 'Highest_Grade', 'Locale']
+        for col in col_to_dcs:
+            df_place[col] = df_place[col].replace(to_replace={'': pd.NA})
+            df_place[col] = "dcs:" + df_place[col]
+        df_place[
+            "Physical_Address"] = df_place["Physical_Address"] + " " + df_place[
+                "City"] + "," + df_place["State_Abbr"] + " " + df_place[
+                    "ZIP"] + "-" + df_place['Location_ZIP4']
+        df_place['County_code'] = "geoId/" + df_place['County_code']
+        df_place['State_code'] = "geoId/" + df_place['State_code']
+        df_place = df_place.sort_values(by=["year"], ascending=False)
+        self._final_df_district = pd.concat([self._final_df_district, df_place])
+        self._final_df_district = self._final_df_district.drop_duplicates(
+            subset=["District_School_name"]).reset_index(drop=True)
+        self._final_df_district = self._final_df_district[[
+            "year", "school_state_code", "ZIP", "Location_ZIP4", "County_code",
+            "District_School_name", "School_ID", "State_school_ID",
+            "PhoneNumber", "State_Name", "State_Abbr", "State_code", "Latitude",
+            "Longitude", "Locale", "Physical_Address", "City", "Lowest_Grade",
+            "Highest_Grade", "ContainedInPlace", "geoID"
+        ]]
+        self._final_df_district.to_csv(self._csv_file_place, index=False)
+
+    def _generate_tmcf_district(self) -> None:
+        """
+        This method generates TMCF file w.r.t
+        dataframe headers and defined TMCF template
+
+        Args:
+            df_cols (list) : List of DataFrame Columns
+
+        Returns:
+            None
+        """
+        with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
+            f_out.write(TMCF_TEMPLATE_PLACE_DISTRICT.rstrip('\n'))
+
+    def _generate_tmcf_public(self) -> None:
+        """
+        This method generates TMCF file w.r.t
+        dataframe headers and defined TMCF template
+
+        Args:
+            df_cols (list) : List of DataFrame Columns
+
+        Returns:
+            None
+        """
+        with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
+            f_out.write(TMCF_TEMPLATE_PLACE_PUBLIC.rstrip('\n'))
 
     def create_place_nodes(self):
         self.generate_csv()
