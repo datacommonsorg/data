@@ -18,6 +18,7 @@ Stat Vars for the measurement denominator property values.
 import re
 import os
 import sys
+from absl import flags
 
 # pylint: disable = wrong-import-position
 _COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
@@ -25,13 +26,66 @@ sys.path.insert(1, _COMMON_PATH)
 from dcid_existence import check_dcid_existence
 # pylint: enable = wrong-import-position
 
-_MODULE_DIR = os.path.join(_COMMON_PATH, "..", "social_environment")
+_FLAGS = flags.FLAGS
+import_name = [
+    "social_environment", "bmi", "alcohol_consumption", "tobacco_consumption",
+    "physical_activity", "fruits_vegetables"
+]
+flags.DEFINE_list("import_name", import_name, "Import Data File's List")
+_FLAGS(sys.argv)
+for _import in _FLAGS.import_name:
+    if _import == "social_environment":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
 
-_INPUT_MCF_FILE_PATH = os.path.join(
-    _MODULE_DIR, "output_files", "eurostat_population_social_environment.mcf")
-_OUTPUT_MCF_FILE_PATH = os.path.join(
-    _MODULE_DIR, "output_files",
-    "eurostat_population_social_environment_deno.mcf")
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_social_environment.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_social_environment_deno.mcf")
+    elif _import == "bmi":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output_files",
+                                            "eurostat_population_bmi.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files", "eurostat_population_bmi_deno.mcf")
+    elif _import == "alcohol_consumption":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_alcoholconsumption.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_alcoholconsumption_deno.mcf")
+    elif _import == "tobacco_consumption":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_tobaccoconsumption.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_tobaccoconsumption_deno.mcf")
+    elif _import == "physical_activity":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_physicalactivity.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_physicalactivity_deno.mcf")
+    elif _import == "fruits_vegetables":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_fruits_vegetables.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_fruits_vegetables_deno.mcf")
 
 _INCOME_QUINTILE_VALUES = {
     "IncomeOf0To20Percentile": "[0 20 Percentile]",
@@ -42,9 +96,9 @@ _INCOME_QUINTILE_VALUES = {
 }
 
 _N_PORTION_VALUES = {
-    "0Portions": "[Portions 0]",
-    "From1To4Portions": "[1 4 Portions]",
-    "5PortionsOrMore": "[5 - Portions]",
+    "0Portion": "[Portion 0]",
+    "From1To4Portion": "[1 4 Portion]",
+    "5PortionOrMore": "[5 - Portion]",
 }
 
 _NAME_PROP_REPLACEMENTS = {

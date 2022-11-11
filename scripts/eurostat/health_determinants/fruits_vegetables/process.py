@@ -78,6 +78,7 @@ class EuroStatFruitsVegetables(EuroStat):
             "__{property_value}",
     }
 
+    # mapping values from statvar to mcf property template
     _sv_value_to_property_mapping = {
         "FruitsVegetables": "healthbehavior",
         "Male": "gender",
@@ -99,8 +100,6 @@ class EuroStatFruitsVegetables(EuroStat):
         "ForeignBorn": "countryofbirth",
         "Native": "countryofbirth",
         "Percentile": "incomequin",
-        "ForeignWithin": "citizenship",
-        "ForeignOutside": "citizenship",
         "Citizen": "citizenship",
         "weight": "healthbehavior_bmi",
         "Normal": "healthbehavior_bmi",
