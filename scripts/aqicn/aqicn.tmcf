@@ -1,0 +1,8 @@
+Node: E:aqicn->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:aqicn->variableMeasured
+observationDate: C:aqicn->observationDate
+observationAbout: C:aqicn->observationAbout
+observationPeriod: "P1D"
+value: C:aqicn->value
+unit: C:aqicn->unit
