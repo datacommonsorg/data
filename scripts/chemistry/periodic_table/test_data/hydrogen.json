@@ -1,0 +1,2306 @@
+{
+  "Record": {
+    "RecordType": "AtomicNumber",
+    "RecordNumber": 1,
+    "RecordTitle": "Hydrogen",
+    "Section": [
+      {
+        "TOCHeading": "Identifiers",
+        "Description": "Element names and identifiers, inluding atomic symbol, InChI string and InChI key.",
+        "Section": [
+          {
+            "TOCHeading": "Element Name",
+            "Description": "Element name refers to a formal name for a given elemnt originating from factors such as common usage and the person or place involved in its discovery. Element, also called chemical element, refers to a species of atoms; all atoms with the same number of protons in the atomic nucleus.",
+            "URL": "https://goldbook.iupac.org/html/C/C01022.html",
+            "Information": [
+              {
+                "ReferenceNumber": 1,
+                "Name": "Element Name",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "Hydrogen"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 3,
+                "Name": "Element Name",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "Hydrogen"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Element Symbol",
+            "Description": "Element symbol, Also called atomic symbol, typically consists of one or two letters from the Latin alphabet derived from the element name in one of several languages.",
+            "URL": "https://goldbook.iupac.org/html/A/A00503.html",
+            "Information": [
+              {
+                "ReferenceNumber": 1,
+                "Name": "Element Symbol",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "H"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 3,
+                "Name": "Element Symbol",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "H"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "InChI",
+            "Description": "International Chemical Identifier (InChI) computed from chemical structure using the International Union of Pure and Applied Chemistry (IUPAC) standard.",
+            "URL": "http://www.iupac.org/home/publications/e-resources/inchi.html",
+            "Information": [
+              {
+                "ReferenceNumber": 1,
+                "Name": "InChI",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "InChI=1S/H"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "InChI Key",
+            "Description": "International Chemical Identifier hash (InChIKey) computed from chemical structure using the International Union of Pure and Applied Chemistry (IUPAC) standard.",
+            "URL": "http://www.iupac.org/home/publications/e-resources/inchi.html",
+            "Information": [
+              {
+                "ReferenceNumber": 1,
+                "Name": "InChI Key",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "YZCKVEUIGOORGS-UHFFFAOYSA-N"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TOCHeading": "Properties",
+        "Description": "Element property refers to a set of data elements common to a set of particular properties,  including atomic number, atomic mass, density, melting point, boiling point etc.",
+        "URL": "https://goldbook.iupac.org/html/P/P04883.html",
+        "Section": [
+          {
+            "TOCHeading": "Atomic Weight",
+            "Description": "Also called relative atomic mass, is the ratio of the average mass of the atom to the unified atomic mass unit. The Standard atomic weights refer to recommended values of relative atomic masses of the elements revised biennially by the IUPAC Commission on Atomic Weights and Isotopic Abundances and applicable to elements in any normal sample with a high level of confidence. The number in the parenthesis refers to an uncertainty when exist. The unit of atomic weight is [u] or [da], means unified atomic mass unit or dalton.",
+            "URL": "https://goldbook.iupac.org/html/R/R05258.html",
+            "Information": [
+              {
+                "ReferenceNumber": 3,
+                "Name": "Atomic Weight",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "[1.007 84, 1.008 11]"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1.00794"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 6,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1.008"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 7,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "[1.00784,1.00811]"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Electron Configuration",
+            "Description": "The electron configuration refers a distribution of the electrons of an atom or a molecular entity over a set of one-electron wavefunctions called orbitals, according to the Pauli principle. From one configuration several states with different multiplicities may result.",
+            "URL": "https://goldbook.iupac.org/html/C/C01248.html",
+            "Information": [
+              {
+                "ReferenceNumber": 6,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1s1",
+                      "Markup": [
+                        {
+                          "Start": 2,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Atomic Radius",
+            "Description": "Atomic radius is the distance from the centre of the nucleus to the outermost shell containing electrons.",
+            "URL": "https://en.wikipedia.org/wiki/Atomic_radius",
+            "Information": [
+              {
+                "ReferenceNumber": 6,
+                "Name": "Van der Waals Atomic Radius",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "120 pm (Van der Waals)"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 9,
+                "Name": "Empirical Atomic Radius",
+                "Reference": [
+                  "J.C. Slater, J Chem Phys, 1964, 41(10), 3199-3205. DOI:10.1063/1.1725697"
+                ],
+                "Value": {
+                  "Number": [
+                    25
+                  ],
+                  "Unit": "pm (Empirical)"
+                }
+              },
+              {
+                "ReferenceNumber": 9,
+                "Name": "Covalent Atomic Radius",
+                "Reference": [
+                  "B. Cordero, V. Gómez, A.E. Platero-Prats, M. Revés, J. Echeverría, E. Cremades, F. Barragán, S. Alvarez, Dalton Trans. 2008, 21, 2832-2838. DOI:10.1039/b801115j PMID:18478144."
+                ],
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "31(5) pm (Covalent)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Oxidation States",
+            "Description": "Oxidation state gives the degree of oxidation of an atom in terms of counting electrons.",
+            "URL": "https://goldbook.iupac.org/html/O/O04365.html",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "+1, -1"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 6,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "−1, +1 ​(an amphoteric oxide)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Ground Level",
+            "Description": "Also called ground-state level. The ground state electron configuration is the arrangement of electrons around the nucleus of an atom with lower energy levels.",
+            "URL": "https://physics.nist.gov/PhysRefData/ASD/Html/iehelp.html#IEGROUNDLEV",
+            "Information": [
+              {
+                "ReferenceNumber": 7,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "2S1/2",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 2,
+                          "Length": 3,
+                          "Type": "Subscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Ionization Energy",
+            "Description": "Ionization energy is the minimum energy required to eject an electron out of a neutral atom or molecule in its ground state.",
+            "URL": "https://goldbook.iupac.org/html/I/I03199.html",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "13.598 eV"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 7,
+                "Reference": [
+                  "DOI:10.18434/T4V01G"
+                ],
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "13.598434599702 ± 0.000000000012 eV  (Theoretical value.)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Electronegativity",
+            "Description": "The concept electronegativity was introduced by L. Pauling as the power of an atom to attract electrons to itself.",
+            "URL": "http://dev.goldbook.iupac.org/terms/view/E01990",
+            "Information": [
+              {
+                "ReferenceNumber": 9,
+                "Name": "Pauling Scale Electronegativity",
+                "Reference": [
+                  "A.L. Allred, J. Inorg. Nucl. Chem., 1961, 17(3-4), 215-221. DOI:10.1016/0022-1902(61)80142-5"
+                ],
+                "Value": {
+                  "Number": [
+                    2.2
+                  ],
+                  "Unit": "(Pauling Scale)"
+                }
+              },
+              {
+                "ReferenceNumber": 9,
+                "Name": "Allen Scale Electronegativity",
+                "Reference": [
+                  "L.C. Allen, J. Am. Chem. Soc., 1989, 111, 9003. DOI:10.1021/ja00207a003; J.B. Mann, T.L. Meek and L.C. Allen, J. Am. Chem. Soc., 2000, 122, 2780. DOI:10.1021/ja992866e; J.B. Mann, T.L. Meek, E.T. Knight, J.F. Capitani and L.C Allen, J. Am. Chem. Soc., 2000, 122, 5132. DOI:10.1021/ja9928677"
+                ],
+                "Value": {
+                  "Number": [
+                    2.3
+                  ],
+                  "Unit": "(Allen Scale)"
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Electron Affinity",
+            "Description": "Electron affinity refers to energy required to detach an electron from the singly charged negative ion.",
+            "URL": "http://dev.goldbook.iupac.org/terms/view/E01977",
+            "Information": [
+              {
+                "ReferenceNumber": 9,
+                "Name": "Electron Affinity",
+                "Reference": [
+                  "R.T Myers, J. Chem. Edu., 1990, 67(4), 307. DOI:10.1021/ed067p307"
+                ],
+                "Value": {
+                  "Number": [
+                    0.754
+                  ],
+                  "Unit": "eV"
+                }
+              },
+              {
+                "ReferenceNumber": 9,
+                "Name": "Electron Affinity",
+                "Reference": [
+                  "R.J. Zollweg, J. Chem. Phys., 1969, 50, 4251. DOI:10.1063/1.1670890"
+                ],
+                "Value": {
+                  "Number": [
+                    0.77
+                  ],
+                  "Unit": "eV"
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Atomic Spectra",
+            "Description": "Atomic and ionic spectral lines originate from specified electronic transitions between energy levels of atoms and ions, respectively.",
+            "URL": "https://goldbook.iupac.org/html/A/A00502.html",
+            "Information": [
+              {
+                "ReferenceNumber": 7,
+                "URL": "https://physics.nist.gov/cgi-bin/ASD/lines_hold.pl?el=H",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "Lines Holdings"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 7,
+                "URL": "https://physics.nist.gov/cgi-bin/ASD/levels_hold.pl?el=H",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "Levels Holdings"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Physical Description",
+            "Description": "Physical description, also know as physical characteristics, refers to physical appearance of element substances.",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "Gas"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Element Classification",
+            "Description": "Elements can be classified few groups according to each element's chemical properties.",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "Non-metal"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Element Period Number",
+            "Description": "The element period number refers to a horizontal row of the periodic table. The periodic table has 7 periods.",
+            "URL": "https://www.britannica.com/science/periodic-table-of-the-elements/The-periodic-table#ref80835",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Element Group Number",
+            "Description": "Element group refers to a set of chemical elements in the same vertical column of the periodic table",
+            "URL": "https://www.britannica.com/science/group-periodic-table",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Density",
+            "Description": "Density is a degree of consistency measured by the quantity of mass per unit volume",
+            "URL": "https://goldbook.iupac.org/html/D/D01590.html",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "0.00008988 grams per cubic centimeter"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Melting Point",
+            "Description": "The melting point is the temperature at which a substance changes state from solid to liquid at atmospheric pressure",
+            "URL": "https://www.britannica.com/science/melting-point",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "13.81 K (-259.34°C or -434.81°F)"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 6,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "-259.16°C"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Boiling Point",
+            "Description": "Boiling Point is the temperature at which a substance changes state from liquid to gas at atmospheric pressure",
+            "URL": "https://en.wikipedia.org/wiki/Boiling_point",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "20.28 K (-252.87°C or -423.17°F)"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Estimated Crustal Abundance",
+            "Description": "The estimated element abundance in earth crust",
+            "URL": "https://en.wikipedia.org/wiki/Abundance_of_elements_in_Earth%27s_crust",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1.40×103 milligrams per kilogram",
+                      "Markup": [
+                        {
+                          "Start": 7,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Estimated Oceanic Abundance",
+            "Description": "The estimated element abundance in ocean",
+            "Information": [
+              {
+                "ReferenceNumber": 5,
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1.08×105 milligrams per liter",
+                      "Markup": [
+                        {
+                          "Start": 7,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TOCHeading": "History",
+        "Description": "Element discovery and related information in history",
+        "Information": [
+          {
+            "ReferenceNumber": 3,
+            "Name": "History",
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "The name derives from the Greek hydro for \"water\" and genes for \"forming\" because it burned in air to form water. Hydrogen was discovered by the English physicist Henry Cavendish in 1766.",
+                  "Markup": [
+                    {
+                      "Start": 32,
+                      "Length": 5,
+                      "Type": "Italics"
+                    },
+                    {
+                      "Start": 54,
+                      "Length": 5,
+                      "Type": "Italics"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "ReferenceNumber": 5,
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "Scientists had been producing hydrogen for years before it was recognized as an element. Written records indicate that Robert Boyle produced hydrogen gas as early as 1671 while experimenting with iron and acids. Hydrogen was first recognized as a distinct element by Henry Cavendish in 1766. Composed of a single proton and a single electron, hydrogen is the simplest and most abundant element in the universe. It is estimated that 90% of the visible universe is composed of hydrogen."
+                },
+                {
+                  "String": "Hydrogen is the raw fuel that most stars 'burn' to produce energy. The same process, known as fusion, is being studied as a possible power source for use on earth. The sun's supply of hydrogen is expected to last another 5 billion years."
+                }
+              ]
+            }
+          },
+          {
+            "ReferenceNumber": 6,
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "From the Greek word hydro (water), and genes (forming). Hydrogen was recognized as a distinct substance by Henry Cavendish in 1776. Diagram of a simple hydrogen atom.",
+                  "Markup": [
+                    {
+                      "Start": 20,
+                      "Length": 5,
+                      "Type": "Italics"
+                    },
+                    {
+                      "Start": 39,
+                      "Length": 5,
+                      "Type": "Italics"
+                    }
+                  ]
+                },
+                {
+                  "String": "Hydrogen is the most abundant of all elements in the universe. The heavier elements were originally made from hydrogen atoms or from other elements that were originally made from hydrogen atoms."
+                }
+              ]
+            }
+          }
+        ],
+        "Section": [
+          {
+            "TOCHeading": "Historical Atomic Weights",
+            "Description": "This section provides the historical atomic weights. The atomic weight shown in brackets means the value range while others shown with uncertainty in parenthesis.",
+            "DisplayControls": {
+              "CreateTable": {
+                "FromInformationIn": "ThisSection",
+                "NumberOfColumns": 3,
+                "ColumnsFromNamedLists": {
+                  "Name": [
+                    "Year",
+                    "Atomic Weight (uncertainty) [u]",
+                    "Reference"
+                  ],
+                  "UseNamesAsColumnHeadings": true
+                }
+              }
+            },
+            "Information": [
+              {
+                "ReferenceNumber": 3,
+                "Name": "Year",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "2009"
+                    },
+                    {
+                      "String": "1981"
+                    },
+                    {
+                      "String": "1971"
+                    },
+                    {
+                      "String": "1969"
+                    },
+                    {
+                      "String": "1961"
+                    },
+                    {
+                      "String": "1940"
+                    },
+                    {
+                      "String": "1938"
+                    },
+                    {
+                      "String": "1931"
+                    },
+                    {
+                      "String": "1903"
+                    },
+                    {
+                      "String": "1902"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 3,
+                "Name": "Atomic Weight (uncertainty)",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "[1.007 84, 1.008 11]"
+                    },
+                    {
+                      "String": "1.007 94(7)"
+                    },
+                    {
+                      "String": "1.0079(1)"
+                    },
+                    {
+                      "String": "1.0080(3)"
+                    },
+                    {
+                      "String": "1.007 97(1)"
+                    },
+                    {
+                      "String": "1.0080"
+                    },
+                    {
+                      "String": "1.0081"
+                    },
+                    {
+                      "String": "1.0078"
+                    },
+                    {
+                      "String": "1.008"
+                    },
+                    {
+                      "String": "1.01"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 3,
+                "Name": "Reference",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "doi:10.1351/PAC-REP-10-09-14",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 28,
+                          "URL": "https://doi.org/10.1351/PAC-REP-10-09-14"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1351/pac198355071101",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 27,
+                          "URL": "https://doi.org/10.1351/pac198355071101"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1351/pac197230030637",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 27,
+                          "URL": "https://doi.org/10.1351/pac197230030637"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1351/pac197021010091",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 27,
+                          "URL": "https://doi.org/10.1351/pac197021010091"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1021/ja00881a001",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 23,
+                          "URL": "https://doi.org/10.1021/ja00881a001"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1039/JR9400000475",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 24,
+                          "URL": "https://doi.org/10.1039/JR9400000475"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1039/JR9380001101",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 24,
+                          "URL": "https://doi.org/10.1039/JR9380001101"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1039/JR9310001617",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 24,
+                          "URL": "https://doi.org/10.1039/JR9310001617"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1021/ja02003a001",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 23,
+                          "URL": "https://doi.org/10.1021/ja02003a001"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1007/BF01370337",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 22,
+                          "URL": "https://doi.org/10.1007/BF01370337"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Historical Isotopic Abundances",
+            "Description": "This section provides the historical isotopic abundance information. The abundance value shown in brackets means the value range while others shown with uncertainty in parenthesis.",
+            "DisplayControls": {
+              "CreateTable": {
+                "FromInformationIn": "ThisSection",
+                "NumberOfColumns": 4,
+                "ColumnsFromNamedLists": {
+                  "Name": [
+                    "Year",
+                    "Isotope",
+                    "Abundance (uncertainty)",
+                    "Reference"
+                  ],
+                  "UseNamesAsColumnHeadings": true
+                }
+              }
+            },
+            "Information": [
+              {
+                "ReferenceNumber": 3,
+                "Name": "Year",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "2013"
+                    },
+                    {
+                      "String": "2013"
+                    },
+                    {
+                      "String": "1997"
+                    },
+                    {
+                      "String": "1997"
+                    },
+                    {
+                      "String": "1975"
+                    },
+                    {
+                      "String": "1975"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 3,
+                "Name": "Isotope",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "2H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "1H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "2H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "1H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "2H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 3,
+                "Name": "Abundance (uncertainty)",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "[0.999 72, 0.999 99]"
+                    },
+                    {
+                      "String": "[0.000 01, 0.000 28]"
+                    },
+                    {
+                      "String": "0.999 885(70)"
+                    },
+                    {
+                      "String": "0.000 115(70)"
+                    },
+                    {
+                      "String": "0.999 85"
+                    },
+                    {
+                      "String": "0.000 15"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 3,
+                "Name": "Reference",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "doi:10.1515/pac-2015-0503",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 25,
+                          "URL": "https://doi.org/10.1515/pac-2015-0503"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1515/pac-2015-0503",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 25,
+                          "URL": "https://doi.org/10.1515/pac-2015-0503"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1351/pac199870010217",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 27,
+                          "URL": "https://doi.org/10.1351/pac199870010217"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1351/pac199870010217",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 27,
+                          "URL": "https://doi.org/10.1351/pac199870010217"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1351/pac197647010075",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 27,
+                          "URL": "https://doi.org/10.1351/pac197647010075"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "doi:10.1351/pac197647010075",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 27,
+                          "URL": "https://doi.org/10.1351/pac197647010075"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TOCHeading": "Uses",
+        "Description": "Uses information in industry and other fields",
+        "Information": [
+          {
+            "ReferenceNumber": 5,
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "Hydrogen is a commercially important element. Large amounts of hydrogen are combined with nitrogen from the air to produce ammonia (NH3) through a process called the Haber process. Hydrogen is also added to fats and oils, such as peanut oil, through a process called hydrogenation. Liquid hydrogen is used in the study of superconductors and, when combined with liquid oxygen, makes an excellent rocket fuel.",
+                  "Markup": [
+                    {
+                      "Start": 134,
+                      "Length": 1,
+                      "Type": "Subscript"
+                    }
+                  ]
+                },
+                {
+                  "String": "Hydrogen combines with other elements to form numerous compounds. Some of the common ones are: water (H2O), ammonia (NH3), methane (CH4), table sugar (C12H22O11), hydrogen peroxide (H2O2) and hydrochloric acid (HCl).",
+                  "Markup": [
+                    {
+                      "Start": 103,
+                      "Length": 1,
+                      "Type": "Subscript"
+                    },
+                    {
+                      "Start": 119,
+                      "Length": 1,
+                      "Type": "Subscript"
+                    },
+                    {
+                      "Start": 134,
+                      "Length": 1,
+                      "Type": "Subscript"
+                    },
+                    {
+                      "Start": 152,
+                      "Length": 2,
+                      "Type": "Subscript"
+                    },
+                    {
+                      "Start": 155,
+                      "Length": 2,
+                      "Type": "Subscript"
+                    },
+                    {
+                      "Start": 158,
+                      "Length": 2,
+                      "Type": "Subscript"
+                    },
+                    {
+                      "Start": 183,
+                      "Length": 1,
+                      "Type": "Subscript"
+                    },
+                    {
+                      "Start": 185,
+                      "Length": 1,
+                      "Type": "Subscript"
+                    }
+                  ]
+                },
+                {
+                  "String": "Hydrogen has three common isotopes. The simplest isotope, called protium, is just ordinary hydrogen. The second, a stable isotope called deuterium, was discovered in 1932. The third isotope, tritium, was discovered in 1934."
+                }
+              ]
+            }
+          },
+          {
+            "ReferenceNumber": 6,
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "Great quantities of hydrogen are required commercially for nitrogen fixation using the Haber ammonia process, and for the hydrogenation of fats and oils. It is also used in large quantities in methanol production, in hydrodealkylation, hydrocracking, and hydrodesulfurization. Other uses include rocket fuel, welding, producing hydrochloric acid, reducing metallic ores, and filling balloons."
+                },
+                {
+                  "String": "The lifting power of 1 cubic foot of hydrogen gas is about 0.07 lb at °C, 760 mm pressure."
+                },
+                {
+                  "String": "The hydrogen fuel cell is a developing technology that will allow great amounts of electrical power to be obtained using a source of hydrogen gas."
+                },
+                {
+                  "String": "Consideration is being given to an entire economy based on solar- and nuclear-generated hydrogen. Public acceptance, high capital investment, and the high cost of hydrogen with respect to today's fuels are but a few of the problems facing such an economy. Located in remote regions, power plants would electrolyze seawater; the hydrogen produced would travel to distant cities by pipelines. Pollution-free hydrogen could replace natural gas, gasoline, etc., and could serve as a reducing agent in metallurgy, chemical processing, refining, etc. It could also be used to convert trash into methane and ethylene."
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "TOCHeading": "Sources",
+        "Description": "Sources (where the element come from) information for the given element",
+        "Information": [
+          {
+            "ReferenceNumber": 6,
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "Hydrogen is estimated to make up more than 90% of all the atoms  three quarters of the mass of the universe! This element is found in the stars, and plays an important part in powering the universe through both the proton-proton reaction and carbon-nitrogen cycle. Stellar hydrogen fusion processes release massive amounts of energy by combining hydrogens to form helium."
+                },
+                {
+                  "String": "Production of hydrogen in the U.S. alone amounts to about 3 billion cubic feet per year. Hydrogen is prepared by"
+                },
+                {
+                  "String": "▸ steam on heated carbon,"
+                },
+                {
+                  "String": "▸ decomposition of certain hydrocarbons with heat,"
+                },
+                {
+                  "String": "▸ reaction of sodium or potassium hydroxide on aluminum"
+                },
+                {
+                  "String": "▸ electrolysis of water, or"
+                },
+                {
+                  "String": "▸ displacement from acids by certain metals."
+                },
+                {
+                  "String": "Liquid hydrogen is important in cryogenics and in the study of superconductivity, as its melting point is only 20 degrees above absolute zero."
+                },
+                {
+                  "String": "Tritium is readily produced in nuclear reactors and is used in the production of the hydrogen bomb."
+                },
+                {
+                  "String": "Hydrogen is the primary component of Jupiter and the other gas giant planets. At some depth in the planet's interior the pressure is so great that solid molecular hydrogen is converted to solid metallic hydrogen."
+                },
+                {
+                  "String": "In 1973, a group of Russian experimenters may have produced metallic hydrogen at a pressure of 2.8 Mbar. At the transition the density changed from 1.08 to 1.3 g/cm3. Earlier, in 1972, at Livermore, California, a group also reported on a similar experiment in which they observed a pressure-volume point centered at 2 Mbar. Predictions say that metallic hydrogen may be metastable; others have predicted it would be a superconductor at room temperature.",
+                  "Markup": [
+                    {
+                      "Start": 164,
+                      "Length": 1,
+                      "Type": "Superscript"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "TOCHeading": "Compounds",
+        "Description": "Related compounds information to this element",
+        "Information": [
+          {
+            "ReferenceNumber": 6,
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "Although pure hydrogen is a gas, we find very little of it in our atmosphere. Hydrogen gas is so light that, uncombined, hydrogen will gain enough velocity from collisions with other gases that they will quickly be ejected from the atmosphere. On earth, hydrogen occurs chiefly in combination with oxygen in water, but it is also present in organic matter such as living plants, petroleum, coal, etc. It is present as the free element in the atmosphere, but only less than 1 ppm by volume. The lightest of all gases, hydrogen combines with other elements  sometimes explosively  to form compounds."
+                }
+              ]
+            }
+          },
+          {
+            "ReferenceNumber": 6,
+            "Name": "Molecular Forms",
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "Quite apart from isotopes, it has been shown that under ordinary conditions hydrogen gas is a mixture of two kinds of molecules, known as ortho- and para-hydrogen, which differ from one another by the spins of their electrons and nuclei."
+                },
+                {
+                  "String": "Normal hydrogen at room temperature contains 25% of the para form and 75% of the ortho form. The ortho form cannot be prepared in the pure state. Since the two forms differ in energy, the physical properties also differ. The melting and boiling points of parahydrogen are about 0.1°C lower than those of normal hydrogen."
+                }
+              ]
+            }
+          },
+          {
+            "ReferenceNumber": 8,
+            "Name": "Compounds",
+            "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/Hydrogen",
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "See more information at the Hydrogen compound page."
+                }
+              ]
+            }
+          }
+        ],
+        "Section": [
+          {
+            "TOCHeading": "Element Forms",
+            "Description": "Other element forms, ions, isotopes, etc.",
+            "DisplayControls": {
+              "CreateTable": {
+                "FromInformationIn": "ThisSection",
+                "NumberOfColumns": 5,
+                "ColumnsFromNamedLists": {
+                  "Name": [
+                    "CID",
+                    "Name",
+                    "Formula",
+                    "SMILES",
+                    "Molecular Weight"
+                  ],
+                  "UseNamesAsColumnHeadings": true
+                }
+              }
+            },
+            "Information": [
+              {
+                "ReferenceNumber": 8,
+                "Name": "CID",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1038",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 4,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/1038"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "5460653",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/5460653"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "166653",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 6,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/166653"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "5460634",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/5460634"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "6857428",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/6857428"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "5362549",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/5362549"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "5460632",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/5460632"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "5460633",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/5460633"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "5460635",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/5460635"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "5460654",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/5460654"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "6857427",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/6857427"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "6857429",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 7,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/compound/6857429"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 8,
+                "Name": "Name",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "hydron"
+                    },
+                    {
+                      "String": "proton"
+                    },
+                    {
+                      "String": "hydride"
+                    },
+                    {
+                      "String": "deuteron"
+                    },
+                    {
+                      "String": "deuteride"
+                    },
+                    {
+                      "String": "hydrogen"
+                    },
+                    {
+                      "String": "triton"
+                    },
+                    {
+                      "String": "tritium"
+                    },
+                    {
+                      "String": "deuterium"
+                    },
+                    {
+                      "String": "protium"
+                    },
+                    {
+                      "String": "tritide"
+                    },
+                    {
+                      "String": "protide"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 8,
+                "Name": "Formula",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "H+"
+                    },
+                    {
+                      "String": "H+"
+                    },
+                    {
+                      "String": "H-"
+                    },
+                    {
+                      "String": "H+"
+                    },
+                    {
+                      "String": "H-"
+                    },
+                    {
+                      "String": "H"
+                    },
+                    {
+                      "String": "H+"
+                    },
+                    {
+                      "String": "H"
+                    },
+                    {
+                      "String": "H"
+                    },
+                    {
+                      "String": "H"
+                    },
+                    {
+                      "String": "H-"
+                    },
+                    {
+                      "String": "H-"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 8,
+                "Name": "SMILES",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "[H+]"
+                    },
+                    {
+                      "String": "[1H+]"
+                    },
+                    {
+                      "String": "[H-]"
+                    },
+                    {
+                      "String": "[2H+]"
+                    },
+                    {
+                      "String": "[2H-]"
+                    },
+                    {
+                      "String": "[H]"
+                    },
+                    {
+                      "String": "[3H+]"
+                    },
+                    {
+                      "String": "[3H]"
+                    },
+                    {
+                      "String": "[2H]"
+                    },
+                    {
+                      "String": "[1H]"
+                    },
+                    {
+                      "String": "[3H-]"
+                    },
+                    {
+                      "String": "[1H-]"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 8,
+                "Name": "Molecular Weight",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1.008"
+                    },
+                    {
+                      "String": "1.008"
+                    },
+                    {
+                      "String": "1.008"
+                    },
+                    {
+                      "String": "2.014"
+                    },
+                    {
+                      "String": "2.014"
+                    },
+                    {
+                      "String": "1.008"
+                    },
+                    {
+                      "String": "3.016"
+                    },
+                    {
+                      "String": "3.016"
+                    },
+                    {
+                      "String": "2.014"
+                    },
+                    {
+                      "String": "1.008"
+                    },
+                    {
+                      "String": "3.016"
+                    },
+                    {
+                      "String": "1.008"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "TOCHeading": "Isotopes",
+        "Description": "Isotopes are variants of a chemical element which contain different neutron number. This section provides the isotope information and uses in various fields.",
+        "Information": [
+          {
+            "ReferenceNumber": 5,
+            "Name": "Stable Isotope Count",
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "2"
+                }
+              ]
+            }
+          },
+          {
+            "ReferenceNumber": 6,
+            "Name": "Summary",
+            "Value": {
+              "StringWithMarkup": [
+                {
+                  "String": "The ordinary isotope of hydrogen, H, is known as Protium, the other two isotopes are Deuterium (a proton and a neutron) and Tritium (a protron and two neutrons). Hydrogen is the only element whose isotopes have been given different names. Deuterium and Tritium are both used as fuel in nuclear fusion reactors. One atom of Deuterium is found in about 6000 ordinary hydrogen atoms."
+                },
+                {
+                  "String": "Deuterium is used as a moderator to slow down neutrons. Tritium atoms are also present but in much smaller proportions. Tritium is readily produced in nuclear reactors and is used in the production of the hydrogen (fusion) bomb. It is also used as a radioactive agent in making luminous paints, and as a tracer."
+                }
+              ]
+            }
+          }
+        ],
+        "Section": [
+          {
+            "TOCHeading": "Isotopes in Earth/Planetary Science",
+            "Description": "Isotopes information in Earth/Planetary Science",
+            "Information": [
+              {
+                "ReferenceNumber": 4,
+                "Reference": [
+                  "[13]  M. W. Wieser, T. B. Coplen. Pure Appl Chem.83, 359 (2011).",
+                  "[14]  W. Dansgaard. Tellus16, 436 (1964).",
+                  "[15]  I. D. Clark, P. Fritz. Environmental Isotopes in Hydrogeology, p. 328, Lewis Publishers, New York (1997).",
+                  "[16]  C. Kendall, T. B. Coplen. Hydrol. Processes.15, 1363 (2011).",
+                  "[17]  T. B. Coplen, J. A. Hopple, J. K. Böhlke, H. S. Peiser, S. E. Rieder, H. R. Krouse, K. J. R. Rosman, T. Ding, R. D. Vocke, K. Revesz, A. Lamberty, P. D. P. Taylor, P. D. Bièvre. United States Geological Survey Water-Resources Investigations Report, 01-4222, (2002)."
+                ],
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "Molecules, atoms, and ions of the stable isotopes of hydrogen possess slightly different physical and chemical properties and they are commonly fractionated during physical, chemical, and biological processes, giving rise to variations in isotopic abundances and in atomic weights (Fig. IUPAC.1.1). Hydrogen has the largest relative mass difference among its isotopes and consequently exhibits the largest variation in isotopic composition of any element that does not have radioactive or radiogenic isotopes. Ranges in the stable isotopic composition of naturally occurring hydrogen-bearing materials are shown in Fig. IUPAC.1.1. These variations enable hydrogen isotopes to be used as tracers in environmental studies [13]."
+                    },
+                    {
+                      "String": "A primary use of stable hydrogen isotopes is in isotope hydrology. Although the evolution of the stable hydrogen and oxygen isotopic composition of precipitation begins with the evaporation of water from the oceans, their local and global relationship arises primarily from equilibrium isotopic fractionation of heavier (2H and 18O) and lighter (1H and 16O) isotopes of hydrogen and oxygen during condensation as a tropospheric vapor mass follows a trajectory to higher latitudes and over continents [14], [15]. As a consequence, the hydrogen isotopic composition of precipitation, rivers, and tap waters varies with elevation, season, and distance from the ocean-continent boundary. Figure 4.1.2 shows the variation in the atomic weight of hydrogen in water from rivers across the United States. These variations in the hydrogen isotopic composition of environmental water are often combined with stable oxygen isotopic compositions and have been used to identify the origin of water samples and to investigate the interaction between groundwater and surface water (e.g. lakes, streams, and rivers) [16].",
+                      "Markup": [
+                        {
+                          "Start": 321,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 328,
+                          "Length": 2,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 346,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 353,
+                          "Length": 2,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "          ",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/images/iupac/j_pac-2015-0703_fig_003.jpg",
+                          "Type": "Image",
+                          "Size": "1359x1378",
+                          "Caption": "Fig. IUPAC.1.1: Variation in atomic weight with isotopic composition of selected hydrogen-bearing materials (modified from [13], [17]). "
+                        }
+                      ]
+                    },
+                    {
+                      "String": "          ",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "URL": "https://pubchem.ncbi.nlm.nih.gov/images/iupac/j_pac-2015-0703_fig_004.jpg",
+                          "Type": "Image",
+                          "Size": "1240x649",
+                          "Caption": "Fig. IUPAC.1.2: Variation in atomic weight of hydrogen in river waters across the continental United States (modified from [16]). Blue color indicates waters most depleted in ²H (resulting in lower atomic weight of hydrogen) and brown color indicates those most enriched in ²H (resulting in higher atomic weight of hydrogen). "
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Isotopes in Forensic Science and Anthropology",
+            "Description": "Isotopes information in Forensic Science and Anthropology",
+            "Information": [
+              {
+                "ReferenceNumber": 4,
+                "Reference": [
+                  "[18]  Z. D. Sharp, V. Atudorei, H. O. Panarello, J. Fernández, C. Douthitt. J. Archaeolog. Sci.30, 1709 (2003).",
+                  "[19]  K. A. Hobson. Oecologia120, 314 (1999).",
+                  "[20]  K. A. Hobson, L. I. Wassenaar. Oecologia.109, 142 (1996).",
+                  "[21]  T. B. Coplen, H. Qi. Forensic Sci. Int.266, 222 (2016)."
+                ],
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "Measurements of relative 2H abundances are used to determine the breeding grounds of many species of migrant songbirds. These species of songbirds only grow their feathers before migration, and they grow them on or close to their breeding grounds. Therefore, the isotopic composition of a bird’s feathers correlates to the isotopic composition of the growing season’s precipitation [18], [19], [20].",
+                      "Markup": [
+                        {
+                          "Start": 25,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "Measurements of relative 2H abundances of human hair samples collected at archeological sites are used to determine the geographic region in which a subject lived based on the hydrogen isotopic composition of the water they drank. This is possible because hair stores a daily record of the hydrogen isotopic composition of intake water, which correlates to local meteoric water [18], [21].",
+                      "Markup": [
+                        {
+                          "Start": 25,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Isotopes in Geochronology",
+            "Description": "Isotopes information in Geochronology",
+            "Information": [
+              {
+                "ReferenceNumber": 4,
+                "Reference": [
+                  "[15]  I. D. Clark, P. Fritz. Environmental Isotopes in Hydrogeology, p. 328, Lewis Publishers, New York (1997)."
+                ],
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "3H (tritium), with a half-life of 12.31 years, decays to 3He. The relative variations in n(3He)/n(3H) ratios can be interpreted in terms of elapsed time for dating purposes. The dates of groundwater recharge (water moving downward from the surface), where large amounts of 3H were received from precipitation following thermonuclear bomb test periods, come from the elapsed time since a water mass became isolated from the atmosphere in the time range from the mid-1950s to the present [15].",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 57,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 91,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 98,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 273,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Isotopes in Industry",
+            "Description": "Isotopes use information in Industry",
+            "Information": [
+              {
+                "ReferenceNumber": 4,
+                "Reference": [
+                  "[22]  United States Nuclear Regulatory Commission. NRC: Fact Sheet on Tritium Exit Signs, (2013), November 12; http://www.nrc.gov/reading-rm/doc-collections/fact-sheets/fs-tritium.html.",
+                  "[23]  CANDU Owners Group Inc. CANDU Reactors, CANDU Owners Group Inc (2013), July 30; http://www.candu.org/candu_reactors.html."
+                ],
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "3H is used for self-luminous exit signs in aircraft and commercial buildings. It is found in luminous dials, gauges, wristwatches, and luminous paints [22]. 2H, in the form of heavy water, is used in CANDU (CANada Deuterium Uranium) nuclear reactors as a moderator and coolant [23].",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 157,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Isotopes in Medicine",
+            "Description": "Isotopes use information in Medicine",
+            "Information": [
+              {
+                "ReferenceNumber": 4,
+                "Reference": [
+                  "[24]  S. P. O’Grady, A. R. Wende, C. H. Remien, L. O. Valenzuela, L. E. Enright, L. A. Chesson, E. D. Abel, T. E. Cerling, J. R. Ehleringer. PLoS One5, e11699 (2010). https://doi.org/10.1371/journal.pone.0011699.",
+                  "[25]  M. van Lieshout, C. E. West, R. B. van Breemen. Am. J. Clin. Nutr.77, 12 (2003).",
+                  "[26]  D. A. Schoeller, E. Ravussin, Y. Schutz, K. J. Acheson, P. Baertschi, E. Jequier. Am. J. Physiol. Regul. Integr. Comp. Physiol.250, R823 (1986)."
+                ],
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "2H is used for the isotopic labeling of drugs and nutrients to trace their uptake and metabolism in the human body [24], [25]. 2H, in the form of heavy water, is used to study human metabolism. For example, 2H is used in combination with 18O (double labeled water) to measure energy expenditure [26].",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 127,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 207,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        },
+                        {
+                          "Start": 238,
+                          "Length": 2,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Isotope Mass and Abundance",
+            "Description": "Atomic mass and abundance (composition) information for a given isotope/nulide. The number in the parenthesis refers to an uncertainty when exist. The unit of atomic weight is [u] or [da], means unified atomic mass unit or dalton.",
+            "DisplayControls": {
+              "CreateTable": {
+                "FromInformationIn": "ThisSection",
+                "NumberOfColumns": 3,
+                "ColumnsFromNamedLists": {
+                  "Name": [
+                    "Isotope",
+                    "Atomic Mass (uncertainty) [u]",
+                    "Abundance (uncertainty)"
+                  ],
+                  "UseNamesAsColumnHeadings": true
+                }
+              }
+            },
+            "Information": [
+              {
+                "ReferenceNumber": 3,
+                "Name": "Isotope",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": " 1H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 2,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": " 2H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 2,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 3,
+                "Name": "Atomic Mass (uncertainty)",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1.007 825 0322(6)"
+                    },
+                    {
+                      "String": "2.014 101 7781(8)"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 3,
+                "Name": "Abundance (uncertainty)",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "[0.999 72, 0.999 99]"
+                    },
+                    {
+                      "String": "[0.000 01, 0.000 28]"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 7,
+                "Name": "Isotope",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "2D",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "3T",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 7,
+                "Name": "Atomic Mass (uncertainty) [u]",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1.00782503223(9)"
+                    },
+                    {
+                      "String": "2.01410177812(12)"
+                    },
+                    {
+                      "String": "3.0160492779(24)"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 7,
+                "Name": "Abundance (uncertainty)",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "0.999885(70)"
+                    },
+                    {
+                      "String": "0.000115(70)"
+                    },
+                    {
+                      "String": ""
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "TOCHeading": "Atomic Mass, Half Life, and Decay",
+            "Description": "This section provides the information from the the Atomic Mass Data Center (http://amdc.impcas.ac.cn/). The number after the ± refers to an uncertainty when exist. The unit of atomic weight is [u] or [da], means unified atomic mass unit or dalton. The '?' refers to 'not determined or qualified'.  For further explainations, click read more below.",
+            "URL": "https://pubchemdocs.ncbi.nlm.nih.gov/atomicmass",
+            "DisplayControls": {
+              "CreateTable": {
+                "FromInformationIn": "ThisSection",
+                "NumberOfColumns": 5,
+                "ColumnsFromNamedLists": {
+                  "Name": [
+                    "Nuclide",
+                    "Atomic Mass and Uncertainty [u]",
+                    "Half Life and Uncertainty",
+                    "Discovery Year",
+                    "Decay Modes, Intensities and Uncertainties [%]"
+                  ],
+                  "UseNamesAsColumnHeadings": true
+                }
+              }
+            },
+            "Information": [
+              {
+                "ReferenceNumber": 2,
+                "Name": "Nuclide",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "2H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "3H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "4H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "5H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "6H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "7H",
+                      "Markup": [
+                        {
+                          "Start": 0,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 2,
+                "Name": "Atomic Mass and Uncertainty [u]",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1.007825031898 ± 0.000000000014"
+                    },
+                    {
+                      "String": "2.014101777844 ± 0.000000000015"
+                    },
+                    {
+                      "String": "3.01604928132 ± 0.00000000008"
+                    },
+                    {
+                      "String": "4.026431867 ± 0.000107354"
+                    },
+                    {
+                      "String": "5.035311492 ± 0.00009602"
+                    },
+                    {
+                      "String": "6.044955437 ± 0.000272816"
+                    },
+                    {
+                      "String": "7.052749 ± 0.001078 [Estimated]"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 2,
+                "Name": "Half Life and Uncertainty",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "Stable"
+                    },
+                    {
+                      "String": "Stable"
+                    },
+                    {
+                      "String": "12.32 y ± 0.02"
+                    },
+                    {
+                      "String": "139 ys ± 10"
+                    },
+                    {
+                      "String": "86 ys ± 6"
+                    },
+                    {
+                      "String": "294 ys ± 67"
+                    },
+                    {
+                      "String": "652 ys ± 558"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 2,
+                "Name": "Discovery Year",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "1920"
+                    },
+                    {
+                      "String": "1932"
+                    },
+                    {
+                      "String": "1934"
+                    },
+                    {
+                      "String": "1981"
+                    },
+                    {
+                      "String": "1987"
+                    },
+                    {
+                      "String": "1984"
+                    },
+                    {
+                      "String": "2003"
+                    }
+                  ]
+                }
+              },
+              {
+                "ReferenceNumber": 2,
+                "Name": "Decay Modes, Intensities and Uncertainties [%]",
+                "Value": {
+                  "StringWithMarkup": [
+                    {
+                      "String": "IS=99.9855±7.8%"
+                    },
+                    {
+                      "String": "IS=0.0145±7.8%"
+                    },
+                    {
+                      "String": "β-=100%",
+                      "Markup": [
+                        {
+                          "Start": 1,
+                          "Length": 1,
+                          "Type": "Superscript"
+                        }
+                      ]
+                    },
+                    {
+                      "String": "n=100%"
+                    },
+                    {
+                      "String": "2n=100%"
+                    },
+                    {
+                      "String": "n ?; 3n ?"
+                    },
+                    {
+                      "String": "2n ?"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "Reference": [
+      {
+        "ReferenceNumber": 1,
+        "SourceName": "PubChem",
+        "SourceID": "PubChem",
+        "Description": "Data deposited in or computed by PubChem",
+        "URL": "https://pubchem.ncbi.nlm.nih.gov"
+      },
+      {
+        "ReferenceNumber": 2,
+        "SourceName": "Atomic Mass Data Center (AMDC), International Atomic Energy Agency (IAEA)",
+        "SourceID": "e1",
+        "Name": "H",
+        "Description": "The half-life and atomic mass data was provided by the Atomic Mass Data Center at the International Atomic Energy Agency.",
+        "URL": "https://www-nds.iaea.org/amdc/",
+        "LicenseURL": "https://www-nds.iaea.org/disclaimer.html",
+        "ANID": 6590228
+      },
+      {
+        "ReferenceNumber": 3,
+        "SourceName": "Commission on Isotopic Abundances and Atomic Weights (CIAAW), International Union of Pure and Applied Chemistry (IUPAC)",
+        "SourceID": "a1",
+        "Name": "Hydrogen",
+        "Description": "Element data are cited from the Atomic weights of the elements (an IUPAC Technical Report). The IUPAC periodic table of elements can be found at https://iupac.org/what-we-do/periodic-table-of-elements/. Additional information can be found within IUPAC publication doi:10.1515/pac-2015-0703 Copyright © 2020 International Union of Pure and Applied Chemistry.",
+        "URL": "https://www.ciaaw.org/hydrogen.htm",
+        "LicenseURL": "http://www.ciaaw.org/bylaws.htm",
+        "ANID": 2292382
+      },
+      {
+        "ReferenceNumber": 5,
+        "SourceName": "Jefferson Lab, U.S. Department of Energy",
+        "SourceID": "jlab1",
+        "Name": "Hydrogen",
+        "Description": "Thomas Jefferson National Accelerator Facility (Jefferson Lab) is one of 17 national laboratories funded by the U.S. Department of Energy. The lab's primary mission is to conduct basic research of the atom's nucleus using the lab's unique particle accelerator, known as the Continuous Electron Beam Accelerator Facility (CEBAF). For more information visit https://www.jlab.org/",
+        "URL": "https://education.jlab.org/itselemental/ele001.html",
+        "LicenseNote": "Please see citation and linking information: https://education.jlab.org/faq/index.html",
+        "LicenseURL": "https://www.jlab.org/privacy-and-security-notice",
+        "ANID": 507063
+      },
+      {
+        "ReferenceNumber": 6,
+        "SourceName": "Los Alamos National Laboratory, U.S. Department of Energy",
+        "SourceID": "lanl1",
+        "Name": "Hydrogen",
+        "Description": "The periodic table at the LANL (Los Alamos National Laboratory) contains basic element information together with the history, source, properties, use, handling and more. The provenance data may be found from the link under the source name.",
+        "URL": "https://periodic.lanl.gov/1.shtml",
+        "ANID": 507181
+      },
+      {
+        "ReferenceNumber": 7,
+        "SourceName": "NIST Physical Measurement Laboratory",
+        "SourceID": "e1",
+        "Name": "Hydrogen",
+        "Description": "The periodic table contains NIST's critically-evaluated data on atomic properties of the elements. The provenance data that include data for atomic spectroscopy, X-ray and gamma ray, radiation dosimetry, nuclear physics, and condensed matter physics may be found from the link under the source name. Ref: https://www.nist.gov/pml/atomic-spectra-database",
+        "URL": "https://physics.nist.gov/cgi-bin/Elements/elInfo.pl?element=1",
+        "LicenseURL": "https://www.nist.gov/pml/database-disclaimer",
+        "ANID": 2292618
+      },
+      {
+        "ReferenceNumber": 4,
+        "SourceName": "IUPAC Periodic Table of the Elements and Isotopes (IPTEI)",
+        "SourceID": "p1",
+        "Description": "The information are cited from Pure Appl. Chem. 2018; 90(12): 1833-2092, https://doi.org/10.1515/pac-2015-0703.",
+        "URL": "https://doi.org/10.1515/pac-2015-0703",
+        "LicenseNote": "Copyright © 2020 International Union of Pure and Applied Chemistry.\u000A\u000AThe International Union of Pure and Applied Chemistry (IUPAC) contribution within Pubchem is provided under a CC-BY-NC-ND 4.0 license, unless otherwise stated. \u000Ahttps://creativecommons.org/licenses/by-nc-nd/4.0/",
+        "ANID": 13296406
+      },
+      {
+        "ReferenceNumber": 9,
+        "SourceName": "PubChem Elements",
+        "SourceID": "1",
+        "Name": "H",
+        "Description": "The element property data was retrieved from publications.",
+        "ANID": 7660002
+      },
+      {
+        "ReferenceNumber": 8,
+        "SourceName": "PubChem",
+        "SourceID": "1",
+        "Name": "Hydrogen",
+        "Description": "This section provides all form of data related to element Hydrogen.",
+        "ANID": 694294
+      }
+    ]
+  }
+}

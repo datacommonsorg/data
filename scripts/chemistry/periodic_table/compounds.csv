@@ -1,0 +1,10 @@
+InChIKey|dcid|IUPACName|Name|CommonName|TypeOf|Symbol|InChI|Type|AtomicNumber|CID|SameAs|Input
+CURLTUGMZLYLDI-UHFFFAOYSA-N|CarbonDioxide||CarbonDioxide||dcs:ChemicalCompound|CO2|InChI=1S/CO2/c2-1-3|||280||CarbonDioxide
+VNWKTOKETHGBQD-UHFFFAOYSA-N|Methane|methane|Methane|METHANE|dcs:ChemicalCompound|CH4|InChI=1S/CH4/h1H4|||297||Methane
+GQPLMRYTRLFLPF-UHFFFAOYSA-N|Nitrous_Oxide|nitrous oxide|"nitrous oxide|NitrousOxide"|NITROUS OXIDE|dcs:ChemicalCompound|N2O|InChI=1S/N2O/c1-2-3|||948||Nitrous Oxide
+VTYYLEPIZMXCLO-UHFFFAOYSA-L|Calcium_Carbonate|calcium;carbonate|"calcium;carbonate|CalciumCarbonate"|CALCIUM;CARBONATE|dcs:ChemicalCompound|"CaCO3|CCaO3"|InChI=1S/CH2O3.Ca/c2-1(3)4;/h(H2,2,3,4);/q;+2/p-2|||10112||CalciumCarbonate
+BVKZGUZCCUSVTD-UHFFFAOYSA-L|Carbonate|carbonate|Carbonate|CARBONATE|dcs:ChemicalCompound|CO3-2|InChI=1S/CH2O3/c2-1(3)4/h(H2,2,3,4)/p-2|||19660||Carbonate
+NHNBFGGVMKEFGY-UHFFFAOYSA-N|Nitrate|nitrate|Nitrate|NITRATE|dcs:ChemicalCompound|NO3-|InChI=1S/NO3/c2-1(3)4/q-1|||943||Nitrate
+QAOWNCQODCNURD-UHFFFAOYSA-L|Sulfate|sulfate|Sulfate|SULFATE|dcs:ChemicalCompound|O4S-2|InChI=1S/H2O4S/c1-5(2,3)4/h(H2,1,2,3,4)/p-2|||1117||Sulfate
+VYPSYNLAJGMNEJ-UHFFFAOYSA-N|Dioxosilane|dioxosilane|"dioxosilane|Silica"|DIOXOSILANE|dcs:ChemicalCompound|"SiO2|O2Si"|InChI=1S/O2Si/c1-3-2|||24261||Silica
+CDBYLPFSWZWCQE-UHFFFAOYSA-L|Disodium_Carbonate|disodium;carbonate|"disodium;carbonate|SodiumCarbonate"|DISODIUM;CARBONATE|dcs:ChemicalCompound|"Na2CO3|CNa2O3"|InChI=1S/CH2O3.2Na/c2-1(3)4;;/h(H2,2,3,4);;/q;2*+1/p-2|||10340||Sodium Carbonate

@@ -1,0 +1,9 @@
+CarbonDioxide
+Methane
+Nitrous Oxide
+CalciumCarbonate
+Carbonate
+Nitrate
+Sulfate
+Silica
+Sodium Carbonate
