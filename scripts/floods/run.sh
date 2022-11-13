@@ -63,6 +63,7 @@ function echo_log {
 }
 
 function parse_options {
+  ARGS="$@"
   while (( $# > 0 )); do
     case $1 in
       -g) shift; GCS_PROJECT="$1";;
@@ -82,7 +83,7 @@ function parse_options {
     esac
     shift
   done
-  setup
+  setup $args
 }
 
 
@@ -117,7 +118,7 @@ Install with 'pip install earthengine-api --upgrade'" >&2
   # Setup tmp directory
   mkdir -p $TMP_DIR
   LOG=$TMP_DIR/ee-process-$(date +%Y%m%d-%H%M%S).log
-  echo "Invoked command: $@" >> $LOG
+  echo_log "Invoked command: $ARGS"
 
   # Setup local output directory
   OUTPUT_DIR=${OUTPUT_DIR:-"$TMP_DIR/$GCS_FOLDER"}
@@ -188,9 +189,8 @@ function wait_ee_tasks {
    PROCESSING_TASKS=""
    while [[ -n "$remaining_tasks" ]]; do
      earthengine task list > $ee_tasks_log
-     remaining_tasks=$(egrep "$tasks_pat" $ee_tasks_log | egrep "READY|RUNNING")
      completed_tasks=$(egrep "$tasks_pat" $ee_tasks_log | egrep "COMPLETED" |\
-                        egrep "^[^ ]*")
+                        egrep -o "^[^ ]*")
      for task in $completed_tasks; do
        is_processing=$(echo "$PROCESSING_TASKS" | grep $task)
        if [[ -z "$is_processing" ]]; then
@@ -199,6 +199,7 @@ function wait_ee_tasks {
          sleep_while_active $PARALLELISM
        fi
      done
+     remaining_tasks=$(egrep "$tasks_pat" $ee_tasks_log | egrep "READY|RUNNING")
      if [[ -n "$remaining_tasks" ]]; then
        echo_log "Waiting for tasks:
 $remaining_tasks"
@@ -212,16 +213,18 @@ $remaining_tasks"
 function get_ee_task_image {
   local task="$1"; shift
   task_info=$(earthengine task info $task)
-  echo_log "Fetching output for task: $task_info"
-  output_prefix=$(echo "$task_info" | grep Description | sed -e 's/.*Description: //')
-  output_uri=$(echo "$task_info" | grep "Destination URIs" |
-    sed -e 's,.*google.com/storage/browser/,,;')
-  echo_log "Copying files gs://${output_uri}${output_prefix}* to $OUTPUT_DIR"
-  gsutil -m cp gs://${output_uri}${output_prefix}* $OUTPUT_DIR
-  echo_log "Copied image files:
+  if [[ -n "$task_info" ]]; then
+    echo_log "Fetching output for task: $task_info"
+    output_prefix=$(echo "$task_info" | grep Description | sed -e 's/.*Description: //')
+    output_uri=$(echo "$task_info" | grep "Destination URIs" |
+      sed -e 's,.*google.com/storage/browser/,,;')
+    echo_log "Copying files gs://${output_uri}${output_prefix}* to $OUTPUT_DIR"
+    gsutil -m cp gs://${output_uri}${output_prefix}* $OUTPUT_DIR
+    echo_log "Copied image files:
 $(ls -l $OUTPUT_DIR/${output_prefix}*)"
-  # IMAGE_OUTPUTS="$IMAGE_OUTPUTS $OUTPUT_DIR/${output_prefix}"
-  process_image $OUTPUT_DIR/${output_prefix}
+    # IMAGE_OUTPUTS="$IMAGE_OUTPUTS $OUTPUT_DIR/${output_prefix}"
+    process_image $OUTPUT_DIR/${output_prefix}
+  fi
 }
 
 # Launch EE tasks for all images in the time period.

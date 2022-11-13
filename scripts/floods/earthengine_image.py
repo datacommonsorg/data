@@ -125,7 +125,7 @@ _DEFAULT_DATASETS = {
     }
 }
 
-_DEFAULT_CONFIG = {
+EE_DEFAULT_CONFIG = {
     # Image loading settings.
     'datasets': _DEFAULT_DATASETS,  # Predefined assets
     'ee_dataset': _FLAGS.ee_dataset,  # Reference to an asset in 'datasets'
@@ -183,7 +183,7 @@ def _update_dict(src_dict: dict, dst_dict: dict) -> dict:
     return dst_dict
 
 
-def _load_config(config: str, default_config: dict = _DEFAULT_CONFIG) -> dict:
+def _load_config(config: str, default_config: dict = EE_DEFAULT_CONFIG) -> dict:
     '''Load config from string or file.'''
     config_dict = config
     # Load config from file or a string
@@ -233,26 +233,33 @@ def _advance_date(date_str: str,
     return next_dt.strftime(date_format)
 
 
-def ee_filter_bounds(col: ee.ImageCollection,
-                     config: dict = {}) -> ee.ImageCollection:
-    '''Filter the image or image collection by the bounds in config[ee_bounds].'''
-    bounds = config.get('ee_bounds', '')
+def _get_bbox_coordinates(bounds: str) -> ee.Geometry.BBox:
+    '''Returns a bounding box for the (lat,lngs) points.
+    Creates a bounding box with the min/max of latitudes, longitudes.'''
     if not bounds:
-        return col
+        return None
     # Extract all coordinates.
     coords = list(filter(None, re.split(r'[^0-9\.+-]', bounds)))
     latitudes = [float(coords[l]) for l in range(0, len(coords), 2)]
     longitudes = [float(coords[l]) for l in range(1, len(coords), 2)]
-    # Create bounding box across all coordinates
-    west = min(longitudes)
-    south = min(latitudes)
-    east = max(longitudes)
-    north = max(latitudes)
-    bbox = ee.Geometry.BBox(west, south, east, north)
-    config['ee_bounds_str'] = '_'.join(
-        [f'{p:.2f}' for p in [west, south, east, north]])
-    logging.info(f'Filtering image by bounds: {config["ee_bounds_str"]}')
-    return col.filterBounds(bbox)
+    # Return the min/max latitude,longitude
+    return {
+        'west': min(longitudes),
+        'south': min(latitudes),
+        'east': max(longitudes),
+        'north': max(latitudes),
+    }
+
+
+def ee_filter_bounds(col: ee.ImageCollection,
+                     config: dict = {}) -> ee.ImageCollection:
+    '''Filter the image or image collection by the bounds in config[ee_bounds].'''
+    bbox_coords = _get_bbox_coordinates(config.get('ee_bounds', None))
+    if bbox_coords:
+        logging.info(f'Filtering image by bounds: {bbox_coords}')
+        bbox = ee.Geometry.BBox(**bbox_coords)
+        col = col.filterBounds(bbox)
+    return col
 
 
 def ee_filter_date(col: ee.ImageCollection,
@@ -355,13 +362,13 @@ def ee_filter_band(image: ee.Image, config: dict) -> ee.Image:
     #    mask = image.eq(eq_threshold)
     if max_threshold is not None:
         if min_threshold:
-          image = image.gte(min_threshold).And(image.lte(max_threshold))
+            image = image.gte(min_threshold).And(image.lte(max_threshold))
         else:
-          image = image.lte(max_threshold)
+            image = image.lte(max_threshold)
     elif min_threshold is not None:
-       image = image.gte(min_threshold)
+        image = image.gte(min_threshold)
     elif eq_threshold:
-       image = image.eq(eq_threshold)
+        image = image.eq(eq_threshold)
     logging.info(f'Filtered band image: {image.get("id")}')
     return image
 
@@ -430,6 +437,11 @@ def ee_generate_image(config: dict) -> ee.Image:
 def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
     '''Launch a task to export an EE image.
     View task status on https://code.earthengine.google.com/tasks.'''
+    region_bbox = None
+    bbox_coords = None
+    if config.get('ee_bounds'):
+        bbox_coords = _get_bbox_coordinates(config['ee_bounds'])
+        region_bbox = ee.Geometry.BBox(**bbox_coords)
     file_prefix = config.get('gcs_output')
     if not file_prefix:
         # Create name from config parameters.
@@ -445,7 +457,9 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
         img_config.append(('scale', str(config.get('scale', ''))))
         img_config.append(('from', config.get('start_date', '')))
         img_config.append(('to', config.get('end_date', '')))
-        img_config.append(('bbox', config.get('ee_bounds_str', '')))
+        if bbox_coords:
+            img_config.append(
+                ('bbox', '_'.join([f'{p:.2f}' for p in bbox_coords.values()])))
         file_prefix = '-'.join(
             '_'.join((p, v)) for p, v in img_config if v and isinstance(v, str))
         file_prefix = re.sub(r'[^A-Za-z0-9_-]', '_', file_prefix)
@@ -460,6 +474,7 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
     task = ee.batch.Export.image.toCloudStorage(
         description=file_prefix[:90],
         image=ee_image,
+        region=region_bbox,
         scale=scale,
         bucket=gcs_bucket,
         fileNamePrefix=f'{gcs_folder}{file_prefix}',
@@ -472,6 +487,7 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
 
 def ee_process(config):
     '''Generate earth engine image and export to GCS.'''
+    ee.Initialize()
     config['image_count'] = config.get('image_count', 1)
     while config['image_count'] > 0:
         logging.info(f'Getting image for config: {config}')
@@ -497,7 +513,6 @@ def main(_):
         logging.set_verbosity(2)
     # Authenticate using `earthengine authenticate`
     # ee.Authenticate()
-    ee.Initialize()
     ee_process(config)
 
 

@@ -55,6 +55,7 @@ Additional processing options:
 import ast
 import csv
 import glob
+import math
 import multiprocessing
 import numpy as np
 import os
@@ -182,15 +183,18 @@ _DEFAULT_CONFIG = {
 _DEFAULT_COLUMNS = set({'latitude', 'longitude', 's2CellId', 'date'})
 
 
-def _load_config(config: str, default_config: dict = _DEFAULT_CONFIG) -> dict:
+def load_config(config: str, default_config: dict = _DEFAULT_CONFIG) -> dict:
     '''Load config from string or file.'''
     config_dict = dict(default_config)
     config_str = config
-    if os.path.exists(config):
-        with open(config, 'r') as config_file:
-            config_str = config_file.read()
-    if config_str:
-        config_dict.update(ast.literal_eval(config_str))
+    if isinstance(config, str):
+        if os.path.exists(config):
+            with open(config, 'r') as config_file:
+                config_str = config_file.read()
+        if config_str:
+            config_dict.update(ast.literal_eval(config_str))
+    elif isinstance(config, dict):
+        config_dict.update(config)
     logging.info(f'Using config: {config_dict}')
     return config_dict
 
@@ -361,9 +365,9 @@ def get_raster_data_point(raster: rasterio.io.DatasetReader,
     if lat is None or lng is None:
         (lng, lat) = rasterio.transform.xy(raster.transform, x, y)
     if lat > 90 or lat < -90 or lng > 180 or lng < -180:
-      logging.error(f'Invalid lat,lng [{lat},{lng}] for [{x},{y}].')
-      _add_counter(counter, f'invalid-lat-lng', 1)
-      return None
+        logging.error(f'Invalid lat,lng [{lat},{lng}] for [{x},{y}].')
+        _add_counter(counter, f'invalid-lat-lng', 1)
+        return None
     data['latitude'] = lat
     data['longitude'] = lng
     data['area'] = get_cell_area(lat, lng, raster.res[1], raster.res[0])
@@ -457,15 +461,20 @@ def is_valid_data_point(data_point: dict, filter_params: dict,
     if filter_params:
         for col, params in filter_params.items():
             if col in data_point:
-                value = data_point[col]
+                value = float(data_point[col])
                 if 'min' in params:
                     if value < params['min']:
-                        _add_counter(f'data-dropped-min-{col}', 1)
+                        _add_counter(counter, f'data-dropped-min-{col}', 1)
                         return False
                 if 'max' in params:
                     if value > params['max']:
-                        _add_counter(f'data-dropped-max-{col}', 1)
+                        _add_counter(counter, f'data-dropped-max-{col}', 1)
                         return False
+                if 'eq' in params:
+                    if not math.isclose(value, params['eq']):
+                        _add_counter(counter, f'data-dropped-eq-{col}', 1)
+                        return False
+
     return True
 
 
@@ -555,7 +564,7 @@ def add_data_point(data_dict: dict,
                 new_val = data_point[prop]
                 aggr = filter_params.get(prop, {}).get('aggregate', def_aggr)
                 if aggr == 'sum':
-                    cur_data[prop] = cur_val + new_val
+                    cur_data[prop] = float(cur_val) + float(new_val)
                 elif aggr == 'min':
                     cur_data[prop] = min(cur_val, new_val)
                 elif aggr == 'max':
@@ -1050,7 +1059,11 @@ def filter_data_points(data_points: dict,
     return data_points
 
 
-def process(input_geotiff: str, input_csv: str, output_csv: str, config: dict):
+def process(input_geotiff: str,
+            input_csv: str,
+            output_csv: str,
+            config: dict,
+            counter: dict = None):
     '''Process raster or CSV inputs to generate CSV output.
     Args:
       input_geotiff: comma separated list of input geotiff file patterns
@@ -1059,7 +1072,8 @@ def process(input_geotiff: str, input_csv: str, output_csv: str, config: dict):
       config: dictionary of config parameter:values.
     '''
     data_points = {}
-    counter = {}
+    if counter is None:
+        counter = {}
     _set_counter(counter, 'start_time', time.perf_counter())
     if input_geotiff:
         logging.info(f'Processing raster {input_geotiff}')
@@ -1087,7 +1101,7 @@ def process(input_geotiff: str, input_csv: str, output_csv: str, config: dict):
 
 
 def main(_):
-    config = _load_config(_FLAGS.config)
+    config = load_config(_FLAGS.config)
     if config.get('debug', False):
         logging.set_verbosity(2)
     process(_FLAGS.input_geotiff, _FLAGS.input_csv, _FLAGS.output_csv, config)
