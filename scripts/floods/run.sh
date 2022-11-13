@@ -26,24 +26,30 @@ FLAGS="--ee_mask=land"
 FLAGS="$FLAGS --ee_dataset=dynamic_world"
 FLAGS="$FLAGS --band=water --band_min=0.7 --ee_reducer=max"
 USAGE="Script to launch earth engine tasks to extract geoTIFF images.
-Usage: $(basename $0) -p <gcs-project> [Options]
+Usage: $(basename $0) -g <gcs-project> [Options]
 
 Options:
   -g <gcs-project>   GCS project for expoering images to cloud.
   -b <gcs-bucket>    GCS bucket within the project for images.
                        Bucket can be created with 'gsutil mb gs://<gcs-bucket>/'
-  -e <ee-dataset>    Name of the EarthEngine dataset defined in config.
   -d <folder>        Output directory in GCS for extracted images.
-  -o <name>          Output file prefix for images extarcted.
+  -e <ee-dataset>    Name of the EarthEngine dataset defined in config.
+  -o <name>          Output file prefix for images extracted.
+  -od <dir>          Local output directory for images and CSVs.
+                       Default: $TMP_DIR/<gcs-folder>
+  -date <YYYY-MM-DD> Date to be added into the csv.
+                       Default: Date is extracted from the start date '-st <...>'
   -oi <image>        Process images into csv.
                        If specified, ee tasks are not created.
-  -st <YYYY-MM-DD>   Start date used to filter for images in a colelction.
+  -st <YYYY-MM-DD>   Start date used to filter for images in a collection.
+                       Default: last month ($START_DATE)
   -p <N>[MD]         Time period over which to aggregate data.
                        For example: '1M' for 1 month.
   -n <N>             Number of images to extract starting from start_date
                      at intervals of the time period.
   -m <N>             Number of parallel tasks to run. Default: $PARALLELISM
-  --<flag>=<value>   Additional flags for the script earthengine_image.py
+  --<flag>=<value>   Additional flags for the scripts earthengine_image.py
+                     and raster_to_csv.py.
                         Default: $FLAGS
   -w <task>[,task2]  Wait for EE tasks to complete.
 "
@@ -69,7 +75,8 @@ function parse_options {
       -g) shift; GCS_PROJECT="$1";;
       -d) shift; GCS_FOLDER="$1";;
       -o) shift; OUTPUT_PREFIX="$1";;
-      -od) shift; OUTPUT_DATE="$1";;
+      -od) shift; OUTPUT_DIR="$1";;
+      -da*) shift; OUTPUT_DATE="$1";;
       -oi) shift; IMAGE_OUTPUTS="$IMAGE_OUTPUTS $1";;
       -e) shift; EE_DATASET="$1";;
       -st*) shift; START_DATE="$1";;
