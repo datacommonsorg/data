@@ -29,7 +29,7 @@ To extract flooded regions from the dynamic world dataset, run:
       --band='water' `# Pick water band from dynamic world collection` \
       --band_min=0.7 `# Minimum value for a pixel to be considered flooded` \
       --reducer='max' `# Get the maximal flood extent over the time period` \
-      --ee_mask='land_mask' `# filter by dataset land_mask to remove permanent water `\
+      --ee_mask='land' `# filter by dataset land to remove permanent water `\
       --scale=1000 `# Reduce image to 1000m pixels` \
       |& /tmp/ee.log
 
@@ -51,7 +51,9 @@ from absl import app
 from absl import flags
 from absl import logging
 from datetime import date
+from datetime import datetime
 from datetime import timedelta
+from dateutil.relativedelta import relativedelta
 
 flags.DEFINE_string('config', '',
                     'File with configuration parameters as a dictionary.')
@@ -93,13 +95,16 @@ flags.DEFINE_string(
     'ee_bounds', None,
     'Rectangular bounds as "lat,lng:lat,lng" for filtering images.')
 flags.DEFINE_bool('debug', False, 'Enable debug messages.')
+flags.DEFINE_integer(
+    'image_count', 1,
+    'Number of images to generate, each advanced by --time_period.')
 
 _FLAGS = flags.FLAGS
 _FLAGS(sys.argv)  # Allow invocation without app.run()
 
 _DEFAULT_DATASETS = {
     # Land mask from Hansen global forest cover 2015
-    'land_mask': {
+    'land': {
         'ee_image': 'UMD/hansen/global_forest_change_2015',
         'band': 'datamask',
         'band_eq': 1,
@@ -141,7 +146,7 @@ _DEFAULT_CONFIG = {
     # Filter by band value
     'band_min': _FLAGS.band_min,
     'band_max': _FLAGS.band_max,
-    'band_eq': _FLAGS.band_min,
+    'band_eq': _FLAGS.band_eq,
     # Mask of points to be allowed.
     'ee_mask': _FLAGS.ee_mask,
 
@@ -152,6 +157,7 @@ _DEFAULT_CONFIG = {
     'gcs_folder': _FLAGS.gcs_folder,
     'gcs_bucket': _FLAGS.gcs_bucket,
     'gcs_output': _FLAGS.gcs_output,
+    'image_count': _FLAGS.image_count,
 
     # Debug options
     'debug': _FLAGS.debug,
@@ -196,6 +202,37 @@ def _load_config(config: str, default_config: dict = _DEFAULT_CONFIG) -> dict:
     return config_dict
 
 
+def _parse_time_period(time_period: str) -> (int, str):
+    '''Parse time period into a tuple of (number, unit), for eg: P1M: (1, month).'''
+    re_pat = r'P?(?P<delta>[+-]?[0-9]+)(?P<unit>[A-Z])'
+    m = re.search(re_pat, time_period.upper())
+    if m:
+        m_dict = m.groupdict()
+        delta = int(m_dict.get('delta', '0'))
+        unit = m_dict.get('unit', 'M')
+        period_dict = {'D': 'days', 'M': 'months', 'Y': 'years'}
+        period = period_dict.get(unit, 'day')
+        return (delta, period)
+    return (0, 'days')
+
+
+def _advance_date(date_str: str,
+                  time_period: str,
+                  date_format: str = '%Y-%m-%d') -> str:
+    '''Returns the date advanced by the time period.'''
+    next_date = ''
+    if not date_str:
+        return next_date
+    dt = datetime.strptime(date_str, date_format)
+    (delta, unit) = _parse_time_period(time_period)
+    if not delta or not unit:
+        logging.error(
+            f'Unable to parse time period: {time_period} for date: {date_str}')
+        return next_date
+    next_dt = dt + relativedelta(**{unit: delta})
+    return next_dt.strftime(date_format)
+
+
 def ee_filter_bounds(col: ee.ImageCollection,
                      config: dict = {}) -> ee.ImageCollection:
     '''Filter the image or image collection by the bounds in config[ee_bounds].'''
@@ -228,28 +265,25 @@ def ee_filter_date(col: ee.ImageCollection,
         # No dates in the config. return original collection.
         return col
     time_period = config.get('time_period', 'P1M')
-    if start_date is None:
+    if not start_date:
         # Pick 1 day ago if no start date is specified.
         start_date = (date.today() - timedelta(days=1)).strftime('%Y-%m-%d')
     start_dt = ee.Date(start_date)
     end_dt = None
-    if time_period:
+    if end_date:
+        end_dt = ee.Date(end_date)
+    elif time_period:
         # Extract the delta and units from the period such as 'P1M'.
-        re_pat = r'P?(?P<delta>[+-][0-9]+)(P<unit>[A-Z])'
-        m = re.search(re_pat, time_period.upper())
-        if m:
-            m_dict = m.groupdict()
-            delta = m_dict.get('delta', 0)
-            unit = m_dict.get('unit', 'M')
-            period_dict = {'D': 'day', 'M': 'month', 'Y': 'year'}
-            period = period_dict.get(unit, 'second')
-            end_dt = start_dt.advance(delta, period)
+        end_date = _advance_date(start_date, time_period)
+        config['end_date'] = end_date
+        end_dt = ee.Date(end_date)
     if end_dt is None:
         end_dt = ee.Date(date.today().strftime('%Y-%m-%d'))
+    col = col.filterDate(start_dt, end_dt)
     logging.info(
-        f'Filtering image collection {col.get("id")} by date {start_dt.format()} - {end_dt.format()}'
+        f'Filtering image collection {col.get("id")} by date [{start_date}:{end_date}] {start_dt.format()} - {end_dt.format()}'
     )
-    return col.filterDate(start_dt, end_dt)
+    return col
 
 
 def ee_reduce_image_collection(col: ee.ImageCollection,
@@ -270,7 +304,6 @@ def ee_reduce_image_collection(col: ee.ImageCollection,
                 reducer = 'mean'
         elif 'band_eq' in config:
             reducer = 'last'
-    logging.info(f'Reducing collection {col.get("id")} with reducer: {reducer}')
     _REDUCER_DICT = {
         'min': ee.Reducer.min(),
         'max': ee.Reducer.max(),
@@ -281,7 +314,9 @@ def ee_reduce_image_collection(col: ee.ImageCollection,
         'count': ee.Reducer.count(),
     }
     reducer_fn = _REDUCER_DICT.get(reducer, ee.Reducer.mean())
-    return col.reduce(reducer_fn)
+    col = col.reduce(reducer_fn)
+    logging.info(f'Reduced collection {col.get("id")} with reducer: {reducer}')
+    return col
 
 
 def ee_filter_band(image: ee.Image, config: dict) -> ee.Image:
@@ -302,17 +337,32 @@ def ee_filter_band(image: ee.Image, config: dict) -> ee.Image:
 
     # Remove pixels from image that are outside the band thresholds
     # by using a mask that filters for the band value range.
-    mask = None
-    if min_threshold is not None:
-        mask = image.gte(min_threshold)
+    # mask = None
+    # if min_threshold is not None:
+    #   image = image.gte(min_threshold)
+    # elif max_threshold is not None:
+    #   image = image.lte(max_threshold)
+    # elif eq_threshold is not None:
+    #   image = image.eq(eq_threshold)
+    #if min_threshold is not None:
+    #    mask = image.gte(min_threshold)
+    #if max_threshold is not None:
+    #    if mask:
+    #        mask = mask.And(image.lte(max_threshold))
+    #    else:
+    #        mask = image.lte(max_threshold)
+    #if eq_threshold:
+    #    mask = image.eq(eq_threshold)
     if max_threshold is not None:
-        if mask:
-            mask = mask.mask(image.lte(max_threshold))
+        if min_threshold:
+          image = image.gte(min_threshold).And(image.lte(max_threshold))
         else:
-            mask = image.lte(max_threshold)
-    if eq_threshold:
-        mask = image.eq(eq_threshold)
-    image = image.mask(mask)
+          image = image.lte(max_threshold)
+    elif min_threshold is not None:
+       image = image.gte(min_threshold)
+    elif eq_threshold:
+       image = image.eq(eq_threshold)
+    logging.info(f'Filtered band image: {image.get("id")}')
     return image
 
 
@@ -345,15 +395,15 @@ def ee_generate_image(config: dict) -> ee.Image:
             return None
 
     if config.get('band'):
-        logging.info(
-            f'Selecting band: {config["band"]} from image {img.get("id")}')
         img = img.select(config['band'])
+        logging.info(
+            f'Selected band: {config["band"]} in image {img.get("id")}')
 
     if isinstance(img, ee.ImageCollection):
-        logging.info(f'Filtering image {img.get("id")} by config: {config}')
         img = ee_filter_date(img, config)
         # Filter by bounds.
         img = ee_filter_bounds(img, config)
+        logging.info(f'Filtered image {img.get("id")} by config: {config}')
 
     # Apply the band value threshold
     img = ee_filter_band(img, config)
@@ -371,9 +421,9 @@ def ee_generate_image(config: dict) -> ee.Image:
             # Mask refers to another config dictionary. Load that image.
             mask = ee_generate_image(config['ee_mask'])
         if mask:
+            img = img.updateMask(mask)
             logging.info(
-                f'Applying mask: {mask.id()} for image: {img.get("id")}')
-            img = img.mask(mask)
+                f'Applied mask: {mask.id()} for image: {img.get("id")}')
     return img
 
 
@@ -422,10 +472,23 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
 
 def ee_process(config):
     '''Generate earth engine image and export to GCS.'''
-    logging.info(f'Getting image for config: {config}')
-    img = ee_generate_image(config)
-    logging.info(f'Exporting image {img.get("id")} to GCS')
-    export_ee_image_to_gcs(img, config)
+    config['image_count'] = config.get('image_count', 1)
+    while config['image_count'] > 0:
+        logging.info(f'Getting image for config: {config}')
+        img = ee_generate_image(config)
+        if img:
+            logging.info(f'Exporting image {img.get("id")} to GCS')
+            export_ee_image_to_gcs(img, config)
+        else:
+            logging.error(f'Failed to generate image for config: {config}')
+        # Advance time to next period.
+        time_period = config.get('time_period', 'P1M')
+        for ts in ['start_date', 'end_date']:
+            dt = _advance_date(config.get(ts, ''), time_period)
+            if dt:
+                config[ts] = dt
+        config['image_count'] = config['image_count'] - 1
+        logging.info(f'Advanced dates by {time_period}: {config}')
 
 
 def main(_):

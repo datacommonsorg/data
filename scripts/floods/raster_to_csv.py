@@ -337,7 +337,8 @@ def get_raster_data_point(raster: rasterio.io.DatasetReader,
                           lng: float = None,
                           bands: list = None,
                           nodata_value: int = 0,
-                          config: dict = {}) -> dict:
+                          config: dict = {},
+                          counter: dict = None) -> dict:
     '''Returns the lat/long and data value for each band
     in the raster for a given position index (x, y).
     Args:
@@ -359,6 +360,10 @@ def get_raster_data_point(raster: rasterio.io.DatasetReader,
     data = dict()
     if lat is None or lng is None:
         (lng, lat) = rasterio.transform.xy(raster.transform, x, y)
+    if lat > 90 or lat < -90 or lng > 180 or lng < -180:
+      logging.error(f'Invalid lat,lng [{lat},{lng}] for [{x},{y}].')
+      _add_counter(counter, f'invalid-lat-lng', 1)
+      return None
     data['latitude'] = lat
     data['longitude'] = lng
     data['area'] = get_cell_area(lat, lng, raster.res[1], raster.res[0])
@@ -875,7 +880,7 @@ def process_raster_points(src_r: rasterio.io.DatasetReader,
     _set_counter(counter, 'file_points_processed', 0)
     _set_counter(counter, 'index_data_points', num_points)
     data_filter = config.get('input_data_filter', None)
-    # Get Lat/Lng coordinates for all given x.y points
+    # Get Lat/Lng coordinates for all given x,y points
     # in a batch to reduce number of calls into rasterio.
     latlons = rasterio.transform.xy(src_r.transform, points_index[1],
                                     points_index[2])
@@ -895,7 +900,8 @@ def process_raster_points(src_r: rasterio.io.DatasetReader,
                                      y=y,
                                      lat=lat,
                                      lng=lng,
-                                     config=config)
+                                     config=config,
+                                     counter=counter)
         if data:
             # Check if data point is allowed by the ignore/allow masks.
             if ignore_arr is not None:
