@@ -88,6 +88,11 @@ flags.DEFINE_float('band_min', None,
 flags.DEFINE_float('band_max', None,
                    'Minimum value for the pixels in the band.')
 flags.DEFINE_float('band_eq', None, 'Value for the pixels in the band.')
+flags.DEFINE_bool(
+    'ee_band_bool', True,
+    'Filter band by thresholds into a bool image with 1 where values are met.'
+    'If False, the originals values meeting thresholds are preserved, '
+    'and image set to 0 everywhere else.')
 flags.DEFINE_string(
     'ee_image_eval', None,
     'Get image by evaluating the python statements with ee commands.')
@@ -102,6 +107,7 @@ flags.DEFINE_integer(
 _FLAGS = flags.FLAGS
 _FLAGS(sys.argv)  # Allow invocation without app.run()
 
+# Default Earth Engine datasets with asset name and bands.
 _DEFAULT_DATASETS = {
     # Land mask from Hansen global forest cover 2015
     'land': {
@@ -111,8 +117,11 @@ _DEFAULT_DATASETS = {
     },
 
     # Water band from dynamic world
+    # https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1#bands
     'dynamic_world': {
         'ee_image_collection': 'GOOGLE/DYNAMICWORLD/V1',
+        # 'band': 'water',
+        # 'band_min': 0.7, # Probability of a pixel to be water
     },
 
     # Water from Sentinel-1 SAR GRD
@@ -122,7 +131,14 @@ _DEFAULT_DATASETS = {
             "ee.ImageCollection('COPERNICUS/S1_GRD').filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV')).filter(ee.Filter.eq('instrumentMode', 'IW')).select('VV')",
         # 'band': 'VV',
         # 'band_max': -17,
-    }
+    },
+
+    # NASA FIRMS Fires
+    # https://developers.google.com/earth-engine/datasets/catalog/FIRMS
+    'fires': {
+        'ee_image_collection': 'FIRMS',
+        # 'band': 'T21',  # Brightness temperature of a fire pixel in K
+    },
 }
 
 EE_DEFAULT_CONFIG = {
@@ -147,6 +163,7 @@ EE_DEFAULT_CONFIG = {
     'band_min': _FLAGS.band_min,
     'band_max': _FLAGS.band_max,
     'band_eq': _FLAGS.band_eq,
+    'ee_band_bool': _FLAGS.ee_band_bool,
     # Mask of points to be allowed.
     'ee_mask': _FLAGS.ee_mask,
 
@@ -219,7 +236,7 @@ def _parse_time_period(time_period: str) -> (int, str):
 def _advance_date(date_str: str,
                   time_period: str,
                   date_format: str = '%Y-%m-%d') -> str:
-    '''Returns the date advanced by the time period.'''
+    '''Returns the date string advanced by the time period.'''
     next_date = ''
     if not date_str:
         return next_date
@@ -234,8 +251,8 @@ def _advance_date(date_str: str,
 
 
 def _get_bbox_coordinates(bounds: str) -> ee.Geometry.BBox:
-    '''Returns a bounding box for the (lat,lngs) points.
-    Creates a bounding box with the min/max of latitudes, longitudes.'''
+    '''Returns a bounding box coordinates dictionary for the bounds.
+    bounds is a comma separated list of points of the form [lat,lng...].'''
     if not bounds:
         return None
     # Extract all coordinates.
@@ -253,7 +270,14 @@ def _get_bbox_coordinates(bounds: str) -> ee.Geometry.BBox:
 
 def ee_filter_bounds(col: ee.ImageCollection,
                      config: dict = {}) -> ee.ImageCollection:
-    '''Filter the image or image collection by the bounds in config[ee_bounds].'''
+    '''Retruns image or image collection filtered by the bounds
+    in config[ee_bounds].
+    Args:
+      col: Image Collection
+      config: dictionary with the key 'ee_bounds'
+    Returns:
+      filtered image collection.
+    '''
     bbox_coords = _get_bbox_coordinates(config.get('ee_bounds', None))
     if bbox_coords:
         logging.info(f'Filtering image by bounds: {bbox_coords}')
@@ -264,7 +288,14 @@ def ee_filter_bounds(col: ee.ImageCollection,
 
 def ee_filter_date(col: ee.ImageCollection,
                    config: dict = {}) -> ee.ImageCollection:
-    '''Filter the image collection for the date range.'''
+    '''Returns the image collection filtered for the date range.
+    Args:
+      col: image collection
+      config: dictionary of parameters with keys:
+        start_date, end_date, time_period
+    Returns:
+      filtered image collection.
+    '''
     # Get start date or last week.
     start_date = config.get('start_date', None)
     end_date = config.get('end_date', None)
@@ -295,8 +326,17 @@ def ee_filter_date(col: ee.ImageCollection,
 
 def ee_reduce_image_collection(col: ee.ImageCollection,
                                config: dict = {}) -> ee.Image:
-    '''Reduce an image collection into a single image using the reducer.'''
-    reducer = config.get('ee_reducer', None)
+    '''Returns the image reduced from the image collection.
+    Args:
+      col: image collection
+      config: dictionary of parameters with keys:
+        ee_reducer which is one of (min/max/mean/sum/count/first/last).
+        if ee_reducer is not set, the reducer is inferred from the band thresholds:
+          band_min, band_max, band_eq
+    Returns:
+      image with bands changed to '<band>_<reducer>', eg: 'water_max'
+    '''
+    reducer = config.get('ee_reducer', 'mean')
     if not reducer:
         # Get default reducer based on band value thresholds.
         if 'band_min' in config:
@@ -321,13 +361,21 @@ def ee_reduce_image_collection(col: ee.ImageCollection,
         'count': ee.Reducer.count(),
     }
     reducer_fn = _REDUCER_DICT.get(reducer, ee.Reducer.mean())
-    col = col.reduce(reducer_fn)
-    logging.info(f'Reduced collection {col.get("id")} with reducer: {reducer}')
-    return col
+    img = col.reduce(reducer_fn)
+    logging.info(
+        f'Reduced collection to image {img.get("id")} with reducer: {reducer}')
+    return img
 
 
 def ee_filter_band(image: ee.Image, config: dict) -> ee.Image:
-    '''Get image with pixels within the given band value range.'''
+    '''Returns an image with pixels within the given band value range.
+    Args:
+      image: image to be processed
+      config: dictionary of parameter:values with the following:
+        band_min, band_max, bane_eq
+    Returns:
+      image with value 1 where the band values are in the range.
+    '''
     logging.info(
         f'Filtering band with config {config} on image: {image.get("id")}')
     min_threshold = config.get('band_min', None)
@@ -344,38 +392,48 @@ def ee_filter_band(image: ee.Image, config: dict) -> ee.Image:
 
     # Remove pixels from image that are outside the band thresholds
     # by using a mask that filters for the band value range.
-    # mask = None
-    # if min_threshold is not None:
-    #   image = image.gte(min_threshold)
-    # elif max_threshold is not None:
-    #   image = image.lte(max_threshold)
-    # elif eq_threshold is not None:
-    #   image = image.eq(eq_threshold)
-    #if min_threshold is not None:
-    #    mask = image.gte(min_threshold)
-    #if max_threshold is not None:
-    #    if mask:
-    #        mask = mask.And(image.lte(max_threshold))
-    #    else:
-    #        mask = image.lte(max_threshold)
-    #if eq_threshold:
-    #    mask = image.eq(eq_threshold)
-    if max_threshold is not None:
-        if min_threshold:
-            image = image.gte(min_threshold).And(image.lte(max_threshold))
-        else:
-            image = image.lte(max_threshold)
-    elif min_threshold is not None:
-        image = image.gte(min_threshold)
-    elif eq_threshold:
-        image = image.eq(eq_threshold)
-    logging.info(f'Filtered band image: {image.get("id")}')
+    if config.get('ee_band_bool', True):
+        # Apply the band thresholds to get a bool image
+        # with 1 for points that that meet the thresholds.
+        if eq_threshold:
+            mask = image.eq(eq_threshold)
+        elif max_threshold is not None:
+            if min_threshold:
+                image = image.gte(min_threshold).And(image.lte(max_threshold))
+            else:
+                image = image.lte(max_threshold)
+        elif min_threshold is not None:
+            image = image.gte(min_threshold)
+        logging.info(f'Filtered band to bool image: {image.get("id")}')
+    else:
+        # Apply the threshold as a mask preserving pixel values that satisfy
+        # threshold and setting others to 0.
+        mask = None
+        if min_threshold is not None:
+            mask = image.gte(min_threshold)
+        if max_threshold is not None:
+            if mask:
+                mask = mask.And(image.lte(max_threshold))
+            else:
+                mask = image.lte(max_threshold)
+        if eq_threshold:
+            mask = image.eq(eq_threshold)
+        if mask:
+            image = image.multiply(mask)
+        logging.info(f'Filtered band with mask image: {image.get("id")}')
     return image
 
 
 def ee_generate_image(config: dict) -> ee.Image:
     '''Generate an image from the collection filtered by  the date and period,
-     with the band having values within min and max thresholds.'''
+    with the band having values within min and max thresholds.
+    Args:
+      config: dictionary of parameter:values
+        specifying the asset to load as ee_image or ee_image_collection or ee_dataset
+        and filtering conditions such as date, band, values.
+    Returns:
+      image or image collection.
+    '''
     # If dataset specified, load it.
     img = None
     if config.get('ee_dataset'):
@@ -435,8 +493,19 @@ def ee_generate_image(config: dict) -> ee.Image:
 
 
 def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
-    '''Launch a task to export an EE image.
-    View task status on https://code.earthengine.google.com/tasks.'''
+    '''Launch a task to export an EE image and returns the task id.
+    View task status on https://code.earthengine.google.com/tasks.
+    Assumes ee.Authenticate() has been run and user has access to the gcs_project.
+    Args:
+      ee_image: earth engine image to export
+      config: dictionary with parameter:values including GCS settings
+        gcs_bucket, gcs_folder, gcs_output for name prefix for the image.
+        if 'ee_bounds' is provided, the image only for the region is exported.
+    Returns
+      task for the image.
+      Once complete, the GCS folder will have multiple files with the name prefix.
+    '''
+    # Get the image region to export.
     region_bbox = None
     bbox_coords = None
     if config.get('ee_bounds'):
@@ -453,8 +522,9 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
                             config.get('ee_image_collection', 'ee_image'))))
         ]
         img_config.append(('band', config.get('band', '')))
+        img_config.append(('r', config.get('ee_reducer', '')))
         img_config.append(('mask', config.get('ee_mask', '')))
-        img_config.append(('scale', str(config.get('scale', ''))))
+        img_config.append(('s', str(config.get('scale', ''))))
         img_config.append(('from', config.get('start_date', '')))
         img_config.append(('to', config.get('end_date', '')))
         if bbox_coords:
@@ -483,10 +553,18 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
     task.start()
     print(f'Created EE task: {task}')
     print(f'Visit https://code.earthengine.google.com/tasks to view status.')
+    return task
 
 
 def ee_process(config):
-    '''Generate earth engine image and export to GCS.'''
+    '''Generate earth engine images and export to GCS.
+    Called should wait for the task to complete.
+    Args:
+      config: dictionary with parameter: values.
+        For supported params, refer to _DEFAULT_CONFIG.
+        if image_count > 1, then multiple images are exported with
+        the start_time, end_time advanced by time_period.
+    '''
     ee.Initialize()
     config['image_count'] = config.get('image_count', 1)
     while config['image_count'] > 0:

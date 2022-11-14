@@ -191,7 +191,7 @@ function wait_ee_tasks {
    ee_tasks_log=$TMP_DIR/ee-tasks-$(date +%Y%m%d-%H%M%S).log
    num_tasks=$(echo $tasks | wc -w)
    local tasks_pat=$(echo $tasks | sed -e 's/[ ,]\+/|/g')
-   remaining_tasks=$num_tasks
+   remaining_tasks=$tasks
    completed_tasks=""
    PROCESSING_TASKS=""
    while [[ -n "$remaining_tasks" ]]; do
@@ -222,6 +222,12 @@ function get_ee_task_image {
   task_info=$(earthengine task info $task)
   if [[ -n "$task_info" ]]; then
     echo_log "Fetching output for task: $task_info"
+    has_completed=$(echo "$task_info" | grep "COMPLETED")
+    if [[ -z "$has_completed" ]]; then
+      echo_log "ERROR: Task $task not successful"
+      echo_log "$task_info"
+      return
+    fi
     output_prefix=$(echo "$task_info" | grep Description | sed -e 's/.*Description: //')
     output_uri=$(echo "$task_info" | grep "Destination URIs" |
       sed -e 's,.*google.com/storage/browser/,,;')

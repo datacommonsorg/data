@@ -68,6 +68,7 @@ from absl import app
 from absl import flags
 from absl import logging
 from geopy import distance
+from typing import Union
 
 flags.DEFINE_string('input_geotiff', '', 'GeoTIFF file to process')
 flags.DEFINE_string('ignore_geotiff', '',
@@ -304,6 +305,38 @@ def _get_all_columns(data_points: dict,
     return list(sorted(cols))
 
 
+def _get_numeric_value(value: str) -> Union[int, float, None]:
+    '''Returns the float value from string or None.'''
+    if isinstance(value, int) or isinstance(value, float):
+        return value
+    if value and isinstance(value, str):
+        try:
+            normalized_value = value
+            if (value[0].isdigit() or value[0] == '.' or value[0] == '-' or
+                    value[0] == '+'):
+                # Input looks like a number. Remove allowed extra characters.
+                normalized_value = normalized_value.replace(',', '')
+                if value.count('.') > 1:
+                    # Period may be used instead of commas. Remove it.
+                    normalized_value = normalized_value.replace('.', '')
+            if value.count('.') == 1:
+                return float(normalized_value)
+            return int(normalized_value)
+        except ValueError:
+            # Value is not a number. Ignore it.
+            return None
+    return None
+
+
+def _set_numeric_data(data: dict, config: dict = {}) -> dict:
+    '''Returns dictionary of key:values with values converted fomr string to number.'''
+    for k, v in data.items():
+        numeric_value = _get_numeric_value(v)
+        if numeric_value:
+            data[k] = numeric_value
+    return data
+
+
 def show_raster_info(raster: rasterio.io.DatasetReader):
     '''Print metadata details about the raster.'''
     logging.info(f'Raster files: {raster.files}')
@@ -325,12 +358,16 @@ def get_cell_area(lat: float, lng: float, height: float, width: float) -> float:
       height: height in degrees
     Returns:
       area in square kilometers.'''
-    bottom_left = (lat, lng)
-    top_left = (lat + height, lng)
-    bottom_right = (lat, lng + width)
-    width_km = distance.geodesic(bottom_left, bottom_right).km
-    height_km = distance.geodesic(top_left, bottom_left).km
-    return width_km * height_km
+    try:
+        bottom_left = (lat, lng)
+        top_left = (min(90, lat + height), lng)
+        bottom_right = (lat, min(lng + width, 180))
+        width_km = distance.geodesic(bottom_left, bottom_right).km
+        height_km = distance.geodesic(top_left, bottom_left).km
+        return width_km * height_km
+    except ValueError:
+        logging.error(f'Invalid coordinates for area: {locals()}')
+        return 0
 
 
 def get_raster_data_point(raster: rasterio.io.DatasetReader,
@@ -395,8 +432,9 @@ def get_csv_data_point(input_data: dict, config: dict) -> dict:
     Returns:
       dictionary with values for the data point including area and s2CellId.
     '''
-    lat = float(input_data.get('latitude', 0.0))
-    lng = float(input_data.get('longitude', 0.0))
+    _set_numeric_data(input_data, config)
+    lat = input_data.get('latitude', 0.0)
+    lng = input_data.get('longitude', 0.0)
     input_data['latitude'] = lat
     input_data['longitude'] = lng
     s2_level = config.get('s2_level', None)
@@ -461,7 +499,7 @@ def is_valid_data_point(data_point: dict, filter_params: dict,
     if filter_params:
         for col, params in filter_params.items():
             if col in data_point:
-                value = float(data_point[col])
+                value = data_point[col]
                 if 'min' in params:
                     if value < params['min']:
                         _add_counter(counter, f'data-dropped-min-{col}', 1)
@@ -564,7 +602,7 @@ def add_data_point(data_dict: dict,
                 new_val = data_point[prop]
                 aggr = filter_params.get(prop, {}).get('aggregate', def_aggr)
                 if aggr == 'sum':
-                    cur_data[prop] = float(cur_val) + float(new_val)
+                    cur_data[prop] = cur_val + new_val
                 elif aggr == 'min':
                     cur_data[prop] = min(cur_val, new_val)
                 elif aggr == 'max':
