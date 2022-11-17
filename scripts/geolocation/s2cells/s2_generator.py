@@ -15,22 +15,29 @@
 import csv
 import os
 import sys
+import threading
 
 import s2sphere
+import time
 from absl import app
 from absl import flags
-from datetime import datetime
-from dateutil import parser
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))  # for recon util
 
 import latlng_recon_geojson
+import latlng2place_mapsapi
 
 FLAGS = flags.FLAGS
 
+flags.DEFINE_boolean('no_resolution', False, 'If true, no resolution is done.')
 flags.DEFINE_string('s2_out_dir', 'scratch', 'Output directory path.')
+flags.DEFINE_string('maps_api_key', '', 'Maps API Key.')
+flags.DEFINE_string('placeid2dcid_csv', '', 'CSV of placeid,dcid for efficient '
+                    'resolution with talking to recon API')
+
+_NTHREADS = 10
 
 
 def _llformat(ll):
@@ -43,37 +50,118 @@ def _cid(cell):
     return '{0:#0{1}x}'.format(cell.id(), 18)
 
 
+def _cip(parents):
+    return ','.join(['dcid:' + p for p in parents])
+
+
 def _str(s):
     return '"' + s + '"'
 
 
-def generate(level, parent_level, out_dir):
-  with open(os.path.join(out_dir, 's2_level' + str(level) + '.csv'), 'w') as fp:
-      csvw = csv.writer(fp, doublequote=False, escapechar='\\')
-      csvw.writerow(['dcid', 'name', 'latitude',
-                     'longitude', 'containedInPlace'])
-      print('Creating S2 level ', level)
-      for cell in s2sphere.CellId.walk_fast(level):
-          cid = _cid(cell)
-          latlng = cell.to_lat_lng()
+def _compute_cells(level):
+    country_resolver = latlng_recon_geojson.LatLng2Places(['Country'])
 
-          if parent_level >= 2:
-            pcid = _cid(cell.parent(level - 2))
-            parent_dcid = f'dcid:s2CellId/{pcid}'
-          else:
-            # TODO(shanth): Compute country overlap.
-            parent_dcid = ''
+    cells = {}
+    nproc = 0
+    start = time.time()
+    for cell in s2sphere.CellId.walk_fast(level):
+        cid = _cid(cell)
+        latlng = cell.to_lat_lng()
+        lat = latlng.lat().degrees
+        lng = latlng.lng().degrees
+        if country_resolver.resolve(lat, lng):
+            cells[cid] = (lat, lng, True)
+        else:
+            cells[cid] = (lat, lng, False)
 
-          csvw.writerow([f's2CellId/{cid}',
-                         _str(f'L{level} S2 Cell {cid}'),
-                         _llformat(latlng.lat().degrees),
-                         _llformat(latlng.lng().degrees),
-                         parent_dcid])
+        if nproc % 100000 == 1:
+            end = time.time()
+            print(end - start, nproc)
+            start = end
+        nproc += 1
+
+    print('Computed cells:', len(cells))
+    return cells
+
+
+def _generate_thread(idx, level, cells, filepath, mapsapi_resolver):
+    with open(filepath, 'w') as fp:
+        csvw = csv.writer(fp, doublequote=False, escapechar='\\')
+        csvw.writerow(['dcid', 'name', 'latitude',
+                       'longitude', 'containedInPlace'])
+        start = time.time()
+        i = -1
+        nproc = 0
+        for (cid, (lat, lng, call_maps)) in cells.items():
+            i += 1
+            if i % _NTHREADS != idx:
+                continue
+
+            parents = []
+            if call_maps:
+                try:
+                    parents = mapsapi_resolver.resolve(lat, lng)
+                except Exception as e:
+                    print('ERROR: Unable to resolve (', lat, ',', lng, ')')
+                if nproc % 100 == 1:
+                    end = time.time()
+                    print(end - start, ':', lat, ',', lng, '->', parents)
+                    start = end
+
+            nproc += 1
+            csvw.writerow([f's2CellId/{cid}',
+                           _str(f'L{level} S2 Cell {cid}'),
+                           _llformat(lat),
+                           _llformat(lng),
+                           _cip(parents)])
+
+
+def generate(level, out_dir, maps_api_key, placeid2dcid_csv):
+    print('Creating S2 level ', level)
+    cells = _compute_cells(level)
+    mapsapi_resolver = latlng2place_mapsapi.Resolver(
+        maps_api_key,
+        cache_file=os.path.join(out_dir, 'cache.txt'),
+        placeid2dcid_csv=placeid2dcid_csv)
+    threads = []
+    for i in range(_NTHREADS):
+        fname = 's2_level' + str(level) + '_' + str(i) + '.csv'
+        fpath = os.path.join(out_dir, fname)
+        t = threading.Thread(target=_generate_thread,
+                             args=(i, level, cells, fpath, mapsapi_resolver))
+        t.start()
+        threads.append(t)
+
+    for t in threads:
+        t.join()
+
+
+def generate_noresolution(level, out_dir):
+    print('Creating S2 level ', level)
+    fpath = os.path.join(out_dir, 's2_level' + str(level) + '.csv')
+    with open(fpath, 'w') as fp:
+        csvw = csv.writer(fp, doublequote=False, escapechar='\\')
+        csvw.writerow(['dcid', 'name', 'latitude',
+                       'longitude', 'containedInPlace'])
+        for cell in s2sphere.CellId.walk_fast(level):
+            cid = _cid(cell)
+            latlng = cell.to_lat_lng()
+            csvw.writerow([f's2CellId/{cid}',
+                           _str(f'L{level} S2 Cell {cid}'),
+                           _llformat(latlng.lat().degrees),
+                           _llformat(latlng.lng().degrees),
+                           ''])
 
 
 def main(_):
-    generate(level=10, parent_level=9, out_dir=FLAGS.s2_out_dir)
-    generate(level=9, parent_level=1, out_dir=FLAGS.s2_out_dir)
+    if FLAGS.no_resolution:
+        generate_noresolution(level=10, out_dir=FLAGS.s2_out_dir)
+    else:
+        generate(level=10,
+                 no_resolution=FLAGS.no_resolution,
+                 out_dir=FLAGS.s2_out_dir,
+                 maps_api_key=FLAGS.maps_api_key,
+                 placeid2dcid_csv=FLAGS.placeid2dcid_csv)
 
 
 if __name__ == "__main__":
