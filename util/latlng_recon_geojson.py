@@ -88,4 +88,3 @@ class LatLng2Places:
 
     def _check(self, typ):
         return not self._types or typ in self._types
-

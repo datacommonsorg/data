@@ -34,8 +34,9 @@ FLAGS = flags.FLAGS
 flags.DEFINE_boolean('no_resolution', False, 'If true, no resolution is done.')
 flags.DEFINE_string('s2_out_dir', 'scratch', 'Output directory path.')
 flags.DEFINE_string('maps_api_key', '', 'Maps API Key.')
-flags.DEFINE_string('placeid2dcid_csv', '', 'CSV of placeid,dcid for efficient '
-                    'resolution with talking to recon API')
+flags.DEFINE_string(
+    'placeid2dcid_csv', '', 'CSV of placeid,dcid for efficient '
+    'resolution with talking to recon API')
 
 _NTHREADS = 10
 
@@ -87,8 +88,8 @@ def _compute_cells(level):
 def _generate_thread(idx, level, cells, filepath, mapsapi_resolver):
     with open(filepath, 'w') as fp:
         csvw = csv.writer(fp, doublequote=False, escapechar='\\')
-        csvw.writerow(['dcid', 'name', 'latitude',
-                       'longitude', 'containedInPlace'])
+        csvw.writerow(
+            ['dcid', 'name', 'latitude', 'longitude', 'containedInPlace'])
         start = time.time()
         i = -1
         nproc = 0
@@ -109,11 +110,13 @@ def _generate_thread(idx, level, cells, filepath, mapsapi_resolver):
                     start = end
 
             nproc += 1
-            csvw.writerow([f's2CellId/{cid}',
-                           _str(f'L{level} S2 Cell {cid}'),
-                           _llformat(lat),
-                           _llformat(lng),
-                           _cip(parents)])
+            csvw.writerow([
+                f's2CellId/{cid}',
+                _str(f'L{level} S2 Cell {cid}'),
+                _llformat(lat),
+                _llformat(lng),
+                _cip(parents)
+            ])
 
 
 def generate(level, out_dir, maps_api_key, placeid2dcid_csv):
@@ -141,16 +144,17 @@ def generate_noresolution(level, out_dir):
     fpath = os.path.join(out_dir, 's2_level' + str(level) + '.csv')
     with open(fpath, 'w') as fp:
         csvw = csv.writer(fp, doublequote=False, escapechar='\\')
-        csvw.writerow(['dcid', 'name', 'latitude',
-                       'longitude', 'containedInPlace'])
+        csvw.writerow(
+            ['dcid', 'name', 'latitude', 'longitude', 'containedInPlace'])
         for cell in s2sphere.CellId.walk_fast(level):
             cid = _cid(cell)
             latlng = cell.to_lat_lng()
-            csvw.writerow([f's2CellId/{cid}',
-                           _str(f'L{level} S2 Cell {cid}'),
-                           _llformat(latlng.lat().degrees),
-                           _llformat(latlng.lng().degrees),
-                           ''])
+            csvw.writerow([
+                f's2CellId/{cid}',
+                _str(f'L{level} S2 Cell {cid}'),
+                _llformat(latlng.lat().degrees),
+                _llformat(latlng.lng().degrees), ''
+            ])
 
 
 def main(_):

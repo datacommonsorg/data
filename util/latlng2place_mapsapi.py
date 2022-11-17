@@ -85,7 +85,10 @@ class Resolver(object):
                     no API calls are made. Requires that cache_file is set.
     """
 
-    def __init__(self, api_key, cache_file='', placeid2dcid_csv='',
+    def __init__(self,
+                 api_key,
+                 cache_file='',
+                 placeid2dcid_csv='',
                  cache_only=False):
         assert api_key, 'Resolver() needs a valid API key'
         self._api_key = api_key
