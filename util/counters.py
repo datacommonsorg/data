@@ -151,10 +151,7 @@ class Counters():
                 self.add_counter(counter, value)
         return self
 
-    def set_counter(self,
-                    name: str,
-                    value: int,
-                    debug_context: str = None):
+    def set_counter(self, name: str, value: int, debug_context: str = None):
         '''Set the value of a counter overwriting any previous value.
 
         Args:

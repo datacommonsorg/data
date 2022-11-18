@@ -68,7 +68,7 @@ def _deep_update(src: dict, add_dict: dict) -> dict:
       src dictionary with updated parameters.
 
     Note:
-    Assumes the new dictionary has same type(dict/list) for updated parameters.
+      Assumes the new dictionary has same type(dict/list) for updated parameters.
     '''
     for k, v in add_dict.items():
         if isinstance(v, collections.abc.Mapping):
