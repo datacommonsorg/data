@@ -35,7 +35,15 @@ Usage:
    #   --config_file=<my-config-file.json \
    #   --config_params={'param1': <new-value> }'
    #
-   config_map = ConfigMap()
+   from absl import flags
+
+   flags.DEFINE_string('config_file', '', 'File with configuration parameters.')
+   flags.DEFINE_string('config_params', '', 'Python dictionary as a string ')
+   _FLAGS = flags.FLAGS
+
+   ...
+   config_map = ConfigMap(filename=_FLAGS.config_file,
+                          override_params=_FLAGS.config_params)
    config_map.get('param1', 123) # returns <new-value>
 '''
 
@@ -44,23 +52,9 @@ import collections.abc
 import pprint
 import sys
 
-from absl import app
-from absl import flags
 from absl import logging
 from collections import OrderedDict
 from typing import Union
-
-_FLAGS = flags.FLAGS
-
-flags.DEFINE_string('config_file', '', 'File with configuration parameters.')
-flags.DEFINE_string(
-    'config_params', '',
-    'Python dictionary as a string with config parameters. '
-    'Overrides settings loaded from --config_file.')
-flags.DEFINE_integer('log_level', logging.INFO,
-                     'Log level messages to be shown.')
-
-_FLAGS(sys.argv)  # Allow invocation without app.run()
 
 
 def _deep_update(src: dict, add_dict: dict) -> dict:
@@ -119,9 +113,10 @@ def get_py_dict_from_file(filename: str) -> dict:
 class ConfigMap:
     '''Class to store config mapping of named parameters to values as a dictionary.'''
 
-    def __init__(self, config_dict: dict = None,
-                 filename: str = _FLAGS.config_file,
-                 override_params: str = _FLAGS.config_params):
+    def __init__(self,
+                 config_dict: dict = None,
+                 filename: str = None,
+                 override_params: str = None):
         self._config_dict = dict()
         # Add configs from input args.
         if config_dict:
@@ -130,11 +125,8 @@ class ConfigMap:
         if filename:
             self.load_config_file(filename)
         # Add additional configs from dictionary string.
-        if override_params:
-            param_dict = ast.literal_eval(override_params)
-            self.add_configs(param_dict)
-        logging.set_verbosity(self.get('log_level', _FLAGS.log_level))
-        logging.debug(f'Using config: {self.get_configs()}')
+        self.load_config_string(override_params)
+        logging.debug(f'Loaded ConfigMap: {self.get_configs()}')
 
     def load_config_file(self, filename: str) -> dict:
         '''Load configs from a file overwriting any existing parameter with a new value.
@@ -145,7 +137,22 @@ class ConfigMap:
         Returns:
           dictionary with all config parameters after updates from the file.
           '''
-        self.add_configs(get_py_dict_from_file(filename))
+        if filename:
+            self.add_configs(get_py_dict_from_file(filename))
+        return self._config_dict
+
+    def load_config_string(self, config_params_str: str) -> dict:
+        '''Loads a  JSON config dictionary overriding existing configs.
+
+        Args:
+          config_params_str: JSON string with a dictionary of parameter:value mappings.
+
+        Returns:
+          dictionary with all config parameters after updates.
+        '''
+        if config_params_str:
+            param_dict = ast.literal_eval(config_params_str)
+            self.add_configs(param_dict)
         return self._config_dict
 
     def add_configs(self, configs: dict) -> dict:
