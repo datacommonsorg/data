@@ -77,7 +77,6 @@ class TestConfigMap(unittest.TestCase):
                                override_params='{ "param1": "new-value" }')
             self.assertEqual(config.get('param1'), 'new-value')
 
-
     def test_update_config(self):
         cfg = ConfigMap()
         cfg.add_configs({
