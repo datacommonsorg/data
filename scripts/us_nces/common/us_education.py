@@ -27,6 +27,7 @@ import json
 import os
 import sys
 import re
+import csv
 import pandas as pd
 import numpy as np
 
@@ -41,6 +42,7 @@ CODEDIR = os.path.dirname(__file__)
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))
 from util.statvar_dcid_generator import get_statvar_dcid
 from common.dcid_existance import *
+from common.dcid__mcf_existance import check_dcid_existence
 
 
 class USEducation:
@@ -75,11 +77,7 @@ class USEducation:
             os.path.dirname(cleaned_csv_place),
             "us_nces_demographics_private_place_temp.csv")
         self._year = None
-        self._final_df_public = pd.DataFrame(columns=[
-            'County_code', 'Public_School_Name', 'School_Id', 'Lowest_Grade',
-            'Highest_Grade', 'PhoneNumber', 'State_code', 'Physical_Address',
-            'City', 'ZIP'
-        ])
+        self._final_df_public = pd.DataFrame()
         self._df = pd.DataFrame()
         self._final_df_district = pd.DataFrame()
         if not os.path.exists(os.path.dirname(self._cleaned_csv_file_path)):
@@ -292,11 +290,32 @@ class USEducation:
         data_df = data_df.drop(columns=prop_cols).reset_index(drop=True)
         return data_df
 
+    def _verify_year_uniqueness(self, headers: list) -> bool:
+        year_pattern = r"(\[District||(Private|Public) School\])(\s)(?P<year>\d\d\d\d-\d\d)"
+        year_match = True
+        for header in headers:
+            match = re.search(year_pattern, header)
+            if match:
+                year = match.groupdict()["year"]
+                if year != self._year:
+                    year_match = False
+                    print(
+                        f"Column {header} is not for expectd year {self._year}")
+        return year_match
+
     def _parse_file(self, raw_df: pd.DataFrame) -> pd.DataFrame:
         df_append = []
         df_final_place = pd.DataFrame()
         self._year = self._extract_year_from_headers(
             raw_df.columns.values.tolist())
+        year_check = self._verify_year_uniqueness(
+            raw_df.columns.values.tolist())
+
+        if not year_check:
+            print(
+                "Some columns in file {} is not of expected year- correct the download config. Exiting.."
+            )
+            # exit()
 
         raw_df["year"] = self._year[0:4].strip()
 
@@ -468,13 +487,6 @@ class USEducation:
             for col in col_to_dcs:
                 df_place[col] = df_place[col].replace(to_replace={'': pd.NA})
                 df_place[col] = "dcs:" + df_place[col]
-            df_place["Physical_Address"] = np.where(
-                df_place['Location_ZIP4'] == "",
-                (df_place["Physical_Address"] + " " + df_place["City"] + "," +
-                 df_place["State_Abbr"] + " " + df_place["ZIP"]),
-                (df_place["Physical_Address"] + " " + df_place["City"] + "," +
-                 df_place["State_Abbr"] + " " + df_place["ZIP"] + "-" +
-                 df_place['Location_ZIP4']))
             df_place['County_code'] = "geoId/" + df_place['County_code']
             df_place['State_code'] = "geoId/" + df_place['State_code']
 
@@ -493,9 +505,9 @@ class USEducation:
                     'School ID - NCES Assigned':
                         'School_Id',
                     'Lowest Grade Offered':
-                        'Lowest_Grade',
+                        'Lowest_Grade_Public',
                     'Highest Grade Offered':
-                        'Highest_Grade',
+                        'Highest_Grade_Public',
                     'Phone Number':
                         'PhoneNumber',
                     'ANSI/FIPS State Code':
@@ -529,13 +541,20 @@ class USEducation:
                     'Location ZIP4':
                         'Location_ZIP4',
                     'Agency ID - NCES Assigned':
-                        'State_District_ID'
+                        'State_District_ID',
+                    'School Level':
+                        'School_Level'
                 })
-            df_place = replace_values(df_place)
+            df_place = replace_values(df_place,
+                                      replace_with_all_mappers=False,
+                                      regex_flag=False)
+            df_place["State_District_ID"] = \
+                "geoId/sch" + df_place["State_District_ID"]
             col_to_dcs = [
-                'Lowest_Grade', 'Highest_Grade', 'Locale',
+                'Lowest_Grade_Public', 'Highest_Grade_Public', 'Locale',
                 'National_School_Lunch_Program', 'Magnet_School',
-                'Charter_School', 'School_Type', 'Title_I_School_Status'
+                'Charter_School', 'School_Type', 'Title_I_School_Status',
+                'State_District_ID'
             ]
             for col in col_to_dcs:
                 if col in df_place.columns.to_list():
@@ -546,14 +565,6 @@ class USEducation:
             df_place['State_code'] = "geoId/" + df_place['State_code']
             df_place['County_code'] = df_place['County_code'].apply(
                 lambda x: 'geoId/' + x if x != '' else '')
-
-            df_place["Physical_Address"] = np.where(
-                df_place['Location_ZIP4'] == "",
-                (df_place["Physical_Address"] + " " + df_place["City"] + "," +
-                 df_place["State_Abbr"] + " " + df_place["ZIP"]),
-                (df_place["Physical_Address"] + " " + df_place["City"] + "," +
-                 df_place["State_Abbr"] + " " + df_place["ZIP"] + "-" +
-                 df_place['Location_ZIP4']))
             self._final_df_public = pd.concat([self._final_df_public, df_place])
 
         if not self._generate_statvars:
@@ -619,6 +630,7 @@ class USEducation:
                         "school_state_code", "year", "sv_name", "observation",
                         "scaling_factor"
                     ]]
+                    df_final.drop_duplicates(inplace=True)
                     df_final.to_csv(self._cleaned_csv_file_path,
                                     header=False,
                                     index=False,
@@ -676,7 +688,8 @@ class USEducation:
                 'ContainedInPlace'].astype(str)
             df_final_private["Physical_Address"] = df_final_private[
                 "Physical_Address"].str.title()
-
+            df_final_private["Physical_Address"] = df_final_private[
+                "Physical_Address"].str.replace("Po Box", "PO Box")
             df_final_private["Private_School_Name"] = np.where(
                 df_final_private["Private_School_Name"].str.len() <= 4,
                 df_final_private["Private_School_Name"],
@@ -715,19 +728,49 @@ class USEducation:
                     ) + self._final_df_district['State_code']
             self._final_df_district[
                 "Physical_Address"] = self._final_df_district[
+                    "Physical_Address"] + " " + self._final_df_district["City"]
+            self._final_df_district[
+                "Physical_Address"] = self._final_df_district[
                     "Physical_Address"].str.title()
-
+            self._final_df_district["Physical_Address"] = np.where(
+                self._final_df_district['Location_ZIP4'] == "",
+                (self._final_df_district["Physical_Address"] + " " +
+                 self._final_df_district["State_Abbr"] + " " +
+                 self._final_df_district["ZIP"]),
+                (self._final_df_district["Physical_Address"] + " " +
+                 self._final_df_district["State_Abbr"] + " " +
+                 self._final_df_district["ZIP"] + "-" +
+                 self._final_df_district['Location_ZIP4']))
+            self._final_df_district[
+                "Physical_Address"] = self._final_df_district[
+                    "Physical_Address"].str.replace("Po Box", "PO Box")
             self._final_df_district["District_School_name"] = np.where(
                 self._final_df_district["District_School_name"].str.len() <= 4,
                 self._final_df_district["District_School_name"],
                 self._final_df_district["District_School_name"].str.title())
-            self._final_df_district.to_csv(self._csv_file_place, index=False)
+
+            self._final_df_district.to_csv(self._csv_file_place,
+                                           index=False,
+                                           quoting=csv.QUOTE_NONNUMERIC)
 
         if self._import_name == "public_school":
             self._final_df_public = self._final_df_public.sort_values(
                 by=["year"], ascending=False)
             self._final_df_public = self._final_df_public.drop_duplicates(
                 subset=["School_Id"]).reset_index(drop=True)
+            self._final_df_public["Physical_Address"] = self._final_df_public[
+                "Physical_Address"] + " " + self._final_df_public["City"]
+            self._final_df_public["Physical_Address"] = self._final_df_public[
+                "Physical_Address"].apply(lambda x: x.title())
+            self._final_df_public["Physical_Address"] = np.where(
+                self._final_df_public['Location_ZIP4'] == "",
+                (self._final_df_public["Physical_Address"] + " " +
+                 self._final_df_public["State_Abbr"] + " " +
+                 self._final_df_public["ZIP"]),
+                (self._final_df_public["Physical_Address"] + " " +
+                 self._final_df_public["State_Abbr"] + " " +
+                 self._final_df_public["ZIP"] + "-" +
+                 self._final_df_public['Location_ZIP4']))
             zip_list = list(pd.unique(self._final_df_public['ZIP']))
             county_list = list(pd.unique(self._final_df_public['County_code']))
             if '' in county_list:
@@ -761,7 +804,7 @@ class USEducation:
             self._final_df_public['ContainedInPlace'] = self._final_df_public[
                 'ContainedInPlace'].astype(str)
             self._final_df_public["Physical_Address"] = self._final_df_public[
-                "Physical_Address"].apply(lambda x: x.title())
+                "Physical_Address"].str.replace("Po Box", "PO BOX")
             self._final_df_public["Public_School_Name"] = np.where(
                 self._final_df_public["Public_School_Name"].str.len() <= 4,
                 self._final_df_public["Public_School_Name"],
@@ -792,8 +835,21 @@ class USEducation:
             mcf_ = unique_nodes_df.sort_values(by=["prop_node"])["mcf"].tolist()
         else:
             mcf_ = self._df["mcf"].tolist()
-        mcf_ = "\n\n".join(mcf_)
 
+        f_deno = []
+        for dcnode in mcf_:
+            deno_matched = re.findall("(Node: dcid:)(\w+)", dcnode)[0][1]
+            f_deno.append(deno_matched)
+        node_status = check_dcid_existence(f_deno)
+        f_deno = []
+        for dcnode in mcf_:
+            deno_matched = re.findall("(Node: dcid:)(\w+)", dcnode)[0][1]
+            status = node_status[deno_matched]
+            if not status:
+                f_deno.append(dcnode)
+
+        mcf_ = "\n\n".join(f_deno)
+        # mcf_ = "\n\n".join(mcf_)
         with open(self._mcf_file_path, "w", encoding="UTF-8") as file:
             file.write(mcf_)
 

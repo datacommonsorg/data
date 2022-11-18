@@ -82,6 +82,7 @@ def download():
                 COLUMNS_TO_DOWNLOAD = COLUMNS_TO_DOWNLOAD_PRIVATE[year]
             elif school == "District":
                 COLUMNS_TO_DOWNLOAD = COLUMNS_TO_DOWNLOAD_DISTRICT[year]
+                #primary_key = ["13393"]
             TOTAL_COLUMNS_TO_DOWNLOAD = len(COLUMNS_TO_DOWNLOAD)
             while (columns_selected < len(COLUMNS_TO_DOWNLOAD)):
                 print("--------------------------------------------")
@@ -96,7 +97,8 @@ def download():
                     remaining_columns_to_select,
                     COLUMNS_TO_DOWNLOAD_WITH_SINGLE_API_CALL)
 
-                curr_columns_selected = COLUMNS_TO_DOWNLOAD[start_idx:end_idx]
+                curr_columns_selected = COLUMNS_TO_DOWNLOAD[
+                    start_idx:end_idx]  #+ primary_key
 
                 columns_selected = columns_selected + min(
                     remaining_columns_to_select,

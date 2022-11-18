@@ -53,7 +53,7 @@ class TestProcess(unittest.TestCase):
             self.tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
             loader = NCESPublicSchool(self.IP_DATA, self.cleaned_csv_file_path,
-                                      self.mcf_file_path, self.tmcf_file_path)
+                                        self.mcf_file_path, self.tmcf_file_path)
 
             loader.generate_csv()
             loader.generate_mcf()

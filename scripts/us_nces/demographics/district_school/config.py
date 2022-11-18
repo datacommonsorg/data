@@ -32,7 +32,8 @@ POSSIBLE_DATA_COLUMNS = [
 ]
 
 EXCLUDE_DATA_COLUMNS = [
-    "Individualized Education Program Students", '(Includes AE)', "Phone Number"
+    "Individualized Education Program Students", '(Includes AE)',
+    "Phone Number", "State Agency ID"
 ]
 
 POSSIBLE_PLACE_COLUMNS = [

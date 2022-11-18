@@ -72,8 +72,8 @@ TMCF_TEMPLATE_PLACE_PUBLIC = (
     "ncesId: C:us_nces_demographics_public_place->School_Id\n"
     "containedInPlace: C:us_nces_demographics_public_place->ContainedInPlace\n"
     "telephone: C:us_nces_demographics_public_place->PhoneNumber\n"
-    "lowestGrade: C:us_nces_demographics_public_place->Lowest_Grade\n"
-    "highestGrade: C:us_nces_demographics_public_place->Highest_Grade\n"
+    "lowestGrade: C:us_nces_demographics_public_place->Lowest_Grade_Public\n"
+    "highestGrade: C:us_nces_demographics_public_place->Highest_Grade_Public\n"
     "schoolGradeLevel: C:us_nces_demographics_public_place->School_Level\n"
     "educationalMethod: C:us_nces_demographics_public_place->School_Type_Public\n"
     #"schoolReligiousOrientation: C:us_nces_demopublic_district_place->School_Religion\n"
@@ -85,7 +85,7 @@ TMCF_TEMPLATE_PLACE_PUBLIC = (
     "titleISchoolStatus: C:us_nces_demographics_public_place->Title_I_School_Status\n"
     "charterStatus: C:us_nces_demographics_public_place->Charter_School\n"
     "nationalSchoolLunchProgram: C:us_nces_demographics_public_place->National_School_Lunch_Program\n"
-    "schoolDistrict: C:us_nces_demographics_public_place->Agency_Name\n"
+    "schoolDistrict: C:us_nces_demographics_public_place->State_District_ID\n"
     "schoolStateID: C:us_nces_demographics_public_place->State_School_ID\n")
 # "NCES_districtID: C:us_nces_demographics_public_place->State_Agency_ID\n"
 # "stateDistrictID: C:us_nces_demographics_public_place->State_District_ID\n")
@@ -101,7 +101,26 @@ _POPULATION_PROP = {
     "Prekindergarten Teachers": "Teacher",
     "Secondary Teachers": "Teacher",
     "Kindergarten Teachers": "Teacher",
+    "Ungraded Teachers": "Teacher",
+    "Paraprofessionals/Instructional Aides": "Faculty",
+    "Instructional Coordinators": "Faculty",
+    "Elementary School Counselor": "Faculty",
+    "Secondary School Counselor": "Faculty",
+    "Other Guidance Counselors": "Faculty",
+    "Total Guidance Counselors": "Faculty",
+    "Librarians/media specialists": "Faculty",
+    "Media Support Staff": "Faculty",
+    "LEA Administrators": "Faculty",
+    "LEA Administrative Support Staff": "Faculty",
+    "School Administrators": "Faculty",
+    "School Administrative Support Staff": "Faculty",
+    "Student Support Services Staff": "Faculty",
+    "School Psychologist": "Faculty",
+    "Other Support Services Staff": "Faculty"
 }
+
+_SCHOOL_GRADE_PROP = {"Ungraded Students": "NCESUngradedClasses"}
+
 MELT_VAR_COL = "sv_name"
 
 # pylint:disable=unnecessary-lambda-assignment
@@ -109,6 +128,7 @@ _PV_FORMAT = lambda prop_val: f'"{prop_val[0]}": "dcs:{prop_val[1]}"' \
                         if 'None' not in prop_val[1] else ""
 _UPDATE_MEASUREMENT_DENO = lambda prop: _DENOMINATOR_PROP.get(prop, prop)
 _UPDATE_POPULATION_TYPE = lambda prop: _POPULATION_PROP.get(prop, "Student")
+_UPDATE_GRADE_LEVEL = lambda prop: _SCHOOL_GRADE_PROP.get(prop, prop)
 SV_NODE_FORMAT = lambda prop_val: f'Node: dcid:{prop_val}'
 # pylint:enable=unnecessary-lambda-assignment
 
@@ -119,7 +139,7 @@ DF_DEFAULT_MCF_PROP = [('statType', 'measuredValue', _PV_FORMAT),
 SV_PROP_ORDER = [
     "measuredProperty", "populationType", "statType", "typeOf", "race",
     "schoolGradeLevel", "measurementDenominator", "gender", "lunchEligibility",
-    "schoolStaffCategory"
+    "facultyType"
 ]
 
 _RACE_PATTERN = (r"("
@@ -183,6 +203,37 @@ _POPULATION_TYPE_PATTERN = (r"("
                             r"|"
                             r"Prekindergarten Teachers"
                             r"|"
+                            r"Ungraded Teachers"
+                            r"|"
+                            r"Paraprofessionals/Instructional Aides"
+                            r"|"
+                            r"Instructional Coordinators"
+                            r"|"
+                            r"Elementary School Counselor"
+                            r"|"
+                            r"Secondary School Counselor"
+                            r"|"
+                            r"Other Guidance Counselors"
+                            r"|"
+                            r"Total Guidance Counselors"
+                            r"|"
+                            r"Librarians/media specialists"
+                            r"|"
+                            r"Media Support Staff"
+                            r"|"
+                            r"LEA Administrators"
+                            r"|"
+                            r"LEA Administrative Support Staff"
+                            r"|"
+                            r"Student Support Services Staff"
+                            r"|"
+                            r"School Administrative Support Staff"
+                            r"|"
+                            r"School Administrators"
+                            r"|"
+                            r"School Psychologist"
+                            r"|"
+                            r"Other Support Services Staff"
                             r")")
 
 _GENDER_PATTERN = (r"("
@@ -250,6 +301,7 @@ FORM_STATVAR = {
             "position": 1
         },
         "column": MELT_VAR_COL,
+        "update_value": _UPDATE_GRADE_LEVEL,
         "pv_format": _PV_FORMAT
     },
     "measurementDenominator": {
@@ -286,7 +338,7 @@ FORM_STATVAR = {
         "column": MELT_VAR_COL,
         "pv_format": _PV_FORMAT
     },
-    "schoolStaffCategory": {
+    "facultyType": {
         "regex": {
             "pattern": _SCHOOL_STAFF_PATTERN,
             "position": 1

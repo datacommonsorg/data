@@ -82,9 +82,9 @@ _RELIGIOUS = {
     "Nonsectarian":
         "Nonsectarian",
     "Other":
-        "NCESOtherReligion",
+        "NCES_OtherReligion",
     "Other Lutheran":
-        "NCESOtherLutheran",
+        "NCES_OtherLutheran",
     "Pentecostal":
         "Pentecostalism",
     "Presbyterian":
@@ -107,7 +107,7 @@ _SCHOOL_TYPE = {
     "1-Regular Elementary or Secondary":
         "NCES_Regular",
     "2-Montessori":
-        "NCES_Montessori",
+        "Montessori",
     "3-Special Program Emphasis":
         "NCES_SpecialProgramEmphasis",
     "4-Special Education":
@@ -125,8 +125,8 @@ _SCHOOL_TYPE = {
 }
 
 _SCHOOL_GRADE = {
-    "Elementary Teachers": "ElementaryTeachers",
-    "Secondary Teachers": "SecondaryTeachers",
+    "Elementary Teachers": "ElementaryTeacher",
+    "Secondary Teachers": "SecondaryTeacher",
     "Prekindergarten and Kindergarten": "PreKindergartenAndKindergarten",
     "Prekindergarten": "PreKindergarten",
     "Kindergarten": "Kindergarten",
@@ -177,8 +177,8 @@ _SCHOOL_GRADE = {
     "All Ungraded": "NCESUngradedClasses",
     "Adult Education": "AdultEducation",
     "Transitional 1st grade": "TransitionalGrade1",
-    "Ungraded Students": "UngradedStudents",
-    "Ungraded Teachers": "UngradedTeachers"
+    "Ungraded Students": "UngradedClasses",
+    "Ungraded Teachers": "UngradedTeacher"
 }
 
 _SCHOOL_GRADE_PLACE = {
@@ -236,7 +236,7 @@ _SCHOOL_GRADE_PLACE = {
     "Transitional 1st grade": "TransitionalGrade1"
 }
 
-_PHYSICAL_ADD = {"†": "", "–": ""}
+_PHYSICAL_ADD = {"†": "", "–": "", "Po Box": "PO BOX"}
 
 # pylint:disable=line-too-long
 _SCHOOL_LEVEL = {
@@ -318,9 +318,9 @@ _LUNCH = {
 
 _SCHOOL_STAFF = {
     "Paraprofessionals/Instructional Aides":
-        "ParaprofessionalsAidesOrInstructionalAides",
+        "ParaProfessionalsAidesOrInstructionalAides",
     "Instructional Coordinators":
-        "InstructionalCoordinators",
+        "InstructionalCoordinatorOrSupervisor",
     "Elementary School Counselor":
         "ElementarySchoolCounselor",
     "Secondary School Counselor":
@@ -461,6 +461,8 @@ def replace_values(data_df: pd.DataFrame,
         "City": _CITY,
         "Highest_Grade_Dist": _SCHOOL_GRADE_PLACE,
         "Lowest_Grade_Dist": _SCHOOL_GRADE_PLACE,
+        "Highest_Grade_Public": _SCHOOL_GRADE_PLACE,
+        "Lowest_Grade_Public": _SCHOOL_GRADE_PLACE,
         "Charter_School": _CHARTER,
         "School_Type_Public": _SCHOOL_PUBLIC_TYPE,
         "Title_I_School_Status": _TITLE,
@@ -471,7 +473,11 @@ def replace_values(data_df: pd.DataFrame,
         "prop_schoolGradeLevel": _SCHOOL_GRADE,
         "prop_gender": _GENDER,
         "prop_lunchEligibility": _LUNCH,
-        "prop_schoolStaffCategory": _SCHOOL_STAFF
+        "prop_facultyType": _SCHOOL_STAFF,
+        "Agency_Name": _UNREADABLE_TEXT,
+        "School_Level": _UNREADABLE_TEXT,
+        "State_Agency_ID": _UNREADABLE_TEXT,
+        "State_School_ID": _UNREADABLE_TEXT
     }
 
     df_columns = data_df.columns.to_list()
