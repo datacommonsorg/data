@@ -179,10 +179,13 @@ class EuroStatFruitsVegetables(EuroStat):
     # pylint: disable=no-self-use
     def _sv_name_correction(self, sv_name: str) -> str:
         return sv_name\
-            .replace("AWeek","A Week")\
-            .replace("AMonth","A Month")\
+            .replace("ADay","a Day")\
+            .replace("AWeek","a Week")\
             .replace("Last12","Last 12")\
-            .replace("ACitizen","A Citizen")\
+            .replace("ACitizen","a Citizen")\
+            .replace("From1","From 1")\
+            .replace("From4","From 4")\
+            .replace("Portion", " Portions")\
             .replace("To"," To ")\
             .replace("Of","Of ")\
             .replace("  "," ")
