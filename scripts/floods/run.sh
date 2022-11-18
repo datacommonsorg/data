@@ -56,7 +56,8 @@ Options:
 EE_INTERVAL=60
 SCRIPT_DIR=$(dirname $0)
 # Default flags for raster to csv processing
-DEFAULT_FLAGS_PROCESS="--s2_level=13 --aggregate_s2_level=10 --contained_in_s2_level=10"
+#DEFAULT_FLAGS_PROCESS="--s2_level=13 --aggregate_s2_level=10 --contained_in_s2_level=10"
+DEFAULT_FLAGS_PROCESS=""
 
 function echo_log {
   local msg="[$(date)]: $@"
@@ -93,8 +94,26 @@ function parse_options {
   setup $args
 }
 
-
 function setup {
+  # Setup tmp directory
+  mkdir -p $TMP_DIR
+  LOG=$TMP_DIR/ee-process-$(date +%Y%m%d-%H%M%S).log
+  echo_log "Invoked command: $ARGS"
+
+  # Setup local output directory
+  OUTPUT_DIR=${OUTPUT_DIR:-"$TMP_DIR/$GCS_FOLDER"}
+  mkdir -p $OUTPUT_DIR
+
+  # Set flags
+  if [[ -n "$EE_DATASET" ]]; then
+    FLAGS="$FLAGS --ee_dataset=$EE_DATASET"
+  fi
+  # Add --undefok to allow FLAGS across multiple scripts.
+  local flags=$(echo $FLAGS | egrep -o "\-\-([A-Za-z_]*)" | sed -e 's/--//g;s/ /,/g')
+  FLAGS="$FLAGS --undefok=$(echo $flags | sed -e 's/ /,/g')"
+}
+
+function setup_ee {
   # Check if GCS_PROJECT is set.
   if [[ -z "$GCS_PROJECT" ]]; then
     echo "ERROR: Set GCS project with '-g <project>'" >&2
@@ -121,24 +140,8 @@ Install with 'pip install earthengine-api --upgrade'" >&2
       fi
     fi
   fi
-
-  # Setup tmp directory
-  mkdir -p $TMP_DIR
-  LOG=$TMP_DIR/ee-process-$(date +%Y%m%d-%H%M%S).log
-  echo_log "Invoked command: $ARGS"
-
-  # Setup local output directory
-  OUTPUT_DIR=${OUTPUT_DIR:-"$TMP_DIR/$GCS_FOLDER"}
-  mkdir -p $OUTPUT_DIR
-
-  # Set flags
-  if [[ -n "$EE_DATASET" ]]; then
-    FLAGS="$FLAGS --ee_dataset=$EE_DATASET"
-  fi
-  # Add --undefok to allow FLAGS across multiple scripts.
-  local flags=$(echo $FLAGS | egrep -o "\-\-([A-Za-z_]*)" | sed -e 's/--//g;s/ /,/g')
-  FLAGS="$FLAGS --undefok=$(echo $flags | sed -e 's/ /,/g')"
 }
+
 
 # Run the EE image script.
 # Returns the task ids of all tasks launched if successfull.
@@ -242,6 +245,7 @@ $(ls -l $OUTPUT_DIR/${output_prefix}*)"
 
 # Launch EE tasks for all images in the time period.
 function get_all_ee_images {
+  setup_ee
   if [[ -z "$EE_TASKS" ]]; then
     # No EE tasks, launch them.
     run_ee_image
@@ -312,7 +316,7 @@ function process_image {
     --output_s2_place=$img_dir/place/$img_prefix \
     --output_csv=$img_dir/csv/$img_prefix.csv \
     "
-  echo_log "Processing $img_prefix with command: $cmd ..."
+  echo_log "Processing image $img_prefix with command: $cmd ..."
   $cmd 2>&1 | tee $log
   cat $log >> $LOG
   echo_log "Generated outputs:
@@ -322,6 +326,7 @@ $(ls -l ${img_input}* $OUTPUT_DIR/*${img_prefix}* $OUTPUT_DIR/*/*${img_prefix}* 
 # Process geoTiff images into CSVs launching one process for each image.
 function process_all_images {
   local images="$@"
+  echo_log "Processing images: $images"
   for img in $images; do
     process_image $img &
     sleep_while_active $PARALLELISM
