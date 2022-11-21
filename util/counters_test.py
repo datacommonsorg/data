@@ -20,7 +20,7 @@ import unittest
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 
-from counters import Counters
+from counters import Counters, CounterOptions
 
 
 class TestCounters(unittest.TestCase):
@@ -41,7 +41,7 @@ class TestCounters(unittest.TestCase):
 
     def test_set_counter(self):
         '''Verify set_counter overrides current value.'''
-        counters = Counters(prefix='test2_', options={'debug': True})
+        counters = Counters(prefix='test2_', options=CounterOptions(debug=True))
         counters.add_counter('lines', 1, 'file1')
         counters.add_counter('lines', 10, 'file1')
         counters.print_counters()
@@ -53,7 +53,7 @@ class TestCounters(unittest.TestCase):
 
     def test_debug_counters(self):
         '''Verify counters with debug string suffixes.'''
-        counters = Counters(prefix='test_', options={'debug': True})
+        counters = Counters(prefix='test3_', options=CounterOptions(debug=True))
         counters.add_counter('inputs', 10, 'test-case-2')
         counters.add_counter('inputs', 11, 'file2')
         counters.add_counter('outputs', 2)
@@ -71,11 +71,11 @@ class TestCounters(unittest.TestCase):
 
     def test_show_counters(self):
         counters = Counters(prefix='test-',
-                            options={
-                                'total_counter': 'file-rows',
-                                'processed_counter': 'read-rows',
-                                'show_every_n_sec': 1,
-                            })
+                            options=CounterOptions(
+                                total_counter='file-rows',
+                                processed_counter='read-rows',
+                                show_every_n_sec=1,
+                            ))
         counters.add_counter('file-rows', 100)
         counters.add_counter('read-rows', 10)
         counters.print_counters()

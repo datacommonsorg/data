@@ -71,10 +71,10 @@ class TestConfigMap(unittest.TestCase):
             with open(config_filename, 'w') as cfg_f:
                 cfg_f.write(self._sample_config_json)
 
-            # Load config.
+            # Load config from file with a single param overridden in arg.
             config = ConfigMap({'a': 1},
                                filename=config_filename,
-                               override_params='{ "param1": "new-value" }')
+                               config_string='{ "param1": "new-value" }')
             self.assertEqual(config.get('param1'), 'new-value')
 
     def test_update_config(self):

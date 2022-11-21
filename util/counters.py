@@ -16,6 +16,22 @@
 import sys
 import time
 
+from typing import NamedTuple
+
+
+# Options for counters
+class CounterOptions(NamedTuple):
+    # Enable debug counters with additional suffixes.
+    debug: bool = False
+    # Emit counters once every 30 secs.
+    show_every_n_sec: int = 30
+    # Counter for records processed
+    # used for computing processing rate.
+    processed_counter: str = 'inputs'
+    # Counter for total inputs
+    # Used for computing remaining time.
+    total_counter: str = 'total'
+
 
 class Counters():
     '''Dictionary of named counters.
@@ -34,24 +50,10 @@ class Counters():
     Note: This object is not thread-safe.
     '''
 
-    # Default settings.
-    _default_options = {
-        # Enable debug counters with additional suffixes.
-        'debug': False,
-
-        # emit counters once every 30 secs.
-        'show_every_n_sec': 30,
-
-        # counter for records processed, used for computing processing rate.
-        'processed_counter': 'inputs',
-        # counter with total inputs, used for computing remaining time.
-        'total_counter': 'total',
-    }
-
     def __init__(self,
                  counters_dict: dict = None,
                  prefix: str = '',
-                 options: dict = None):
+                 options: CounterOptions = None):
         '''Initialize the counters.
 
         Args:
@@ -60,62 +62,19 @@ class Counters():
           debug: Enable or disable debug context counters.
           options: Dictionary with parameter:values.
         '''
-        self._counters = counters_dict
         if counters_dict is None:
             self._counters = {}
+        else:
+            self._counters = counters_dict
         self._prefix = prefix
-        self._options = dict(self._default_options)
         if options:
-            self._options.update(options)
+            self._options = options
+        else:
+            self._options = CounterOptions()
 
         # Internal state
+        # Start time for rate counters.
         self._start_time = time.perf_counter()
-
-    def _get_counter_name(self, name: str, debug_context: str = None):
-        '''Returns the name of the counter with debug context.'''
-        name = f'{self._prefix}{name}'
-        if debug_context:
-            name = name + f'_{debug_context}'
-        return name
-
-    def _add_counter(self,
-                     counter_name: str,
-                     value: int = 1,
-                     debug_context: str = ''):
-        '''Incrment counter with name by given value.'''
-        name = self._get_counter_name(counter_name)
-        self._counters[name] = self._counters.get(name, 0) + value
-        if debug_context and self._options.get('debug', False):
-            # Add debug counter with the context message.
-            ext_name = self._get_counter_name(counter_name, debug_context)
-            self._counters[ext_name] = self._counters.get(ext_name, 0) + value
-
-    def _update_processing_rate(self):
-        '''Update the processing rate and remaining time.
-        Uses the option: 'processed' to get the counter for processing rate
-        and option 'inputs' to estimate remaining time.
-        '''
-        time_taken = time.perf_counter() - self._start_time + 0.0001
-        self._add_counter('process_elapsed_time', time_taken)
-        num_processed = self.get_counter(self._options['processed_counter'])
-        rate = 0.0001
-        if num_processed:
-            rate = num_processed / time_taken
-            self._add_counter('processing_rate', rate)
-        totals = self.get_counter(self._options['total_counter'])
-        if totals:
-            self._add_counter('process_remaining_time',
-                              max(0, (totals - num_processed)) / rate)
-
-    def _print_counters_periodically(self):
-        '''Display the counters periodically by time or by number of calls
-        based on the option 'show_counters_every_sec' or 'show_counters_every_n'.
-        '''
-        interval = self._options.get('show_every_n_sec', 30)
-        if interval and isinstance(interval, int):
-            elapsed_time = int(time.perf_counter() - self._start_time)
-            if elapsed_time > 0 and elapsed_time % interval:
-                self.print_counters()
 
     def add_counter(self,
                     counter_name: str,
@@ -205,3 +164,50 @@ class Counters():
         '''
         self._update_processing_rate()
         print(self.get_counters_string(), file=file)
+
+    # Internal functions
+    def _get_counter_name(self, name: str, debug_context: str = None):
+        '''Returns the name of the counter with debug context.'''
+        name = f'{self._prefix}{name}'
+        if debug_context:
+            name = name + f'_{debug_context}'
+        return name
+
+    def _add_counter(self,
+                     counter_name: str,
+                     value: int = 1,
+                     debug_context: str = ''):
+        '''Increment counter with name by given value.'''
+        name = self._get_counter_name(counter_name)
+        self._counters[name] = self._counters.get(name, 0) + value
+        if debug_context and self._options.debug:
+            # Add debug counter with the context message.
+            ext_name = self._get_counter_name(counter_name, debug_context)
+            self._counters[ext_name] = self._counters.get(ext_name, 0) + value
+
+    def _update_processing_rate(self):
+        '''Update the processing rate and remaining time.
+        Uses the option: 'processed' to get the counter for processing rate
+        and option 'inputs' to estimate remaining time.
+        '''
+        time_taken = time.perf_counter() - self._start_time + 0.0001
+        self._add_counter('process_elapsed_time', time_taken)
+        num_processed = self.get_counter(self._options.processed_counter)
+        rate = 0.0001
+        if num_processed:
+            rate = num_processed / time_taken
+            self._add_counter('processing_rate', rate)
+        totals = self.get_counter(self._options.total_counter)
+        if totals:
+            self._add_counter('process_remaining_time',
+                              max(0, (totals - num_processed)) / rate)
+
+    def _print_counters_periodically(self):
+        '''Display the counters periodically by time or by number of calls
+        based on the option 'show_counters_every_sec' or 'show_counters_every_n'.
+        '''
+        interval = self._options.show_every_n_sec
+        if interval and isinstance(interval, int):
+            elapsed_time = int(time.perf_counter() - self._start_time)
+            if elapsed_time > 0 and elapsed_time % interval:
+                self.print_counters()

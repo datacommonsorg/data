@@ -13,38 +13,44 @@
 # limitations under the License.
 '''Class to store configuration parameters as a dictionary.
 
-Creates global flags:
---config_file
---config_params
+The class can load the dictionary from a JSON or a python file.
+The source file can have comments starting with '#' as well as trailing commas.
+
+Note:
+  The file is parsed as python statements, so the following differ from JSON:
+  - boolean values should be True/False (Capitalized) instead of json true/false.
+  - None instead of null
 
 Usage:
    # Load config map from a json file with comments and trailing ,:
-   #   {
-   #     'param1': <value>,
-   #
-   #     # Additional params
-   #     'param2': { 1: 'abc', 2: 'def', },
-   #   }
-   #
-   config_map = get_config_map_from_file('my_config.json')
-   config_map.get('param1', 123) # returns <value>
-   config_map.get('new_param', 'lmn') # returns lmn
+   _CONFIG_MAP_STRING = """
+     {
+       'param1': <value>,  # Some parameter description
 
-   # To load from command-line flags, set the following:
+       # Additional params with trailing commas
+       'param2': { 1: 'abc', 2: 'def', },
+     }
+   """
+   config_map = ConfigMap(config_string=_CONFIG_MAP_STRING)
+   v = config_map.get('param1') # returns <value>
+   v1 = config_map.get('new_param', 'lmn') # returns default value: lmn
+
+   # Example: Load config from command-line flags with an override for a few
+   # params
    #  python3 ... \
    #   --config_file=<my-config-file.json \
-   #   --config_params={'param1': <new-value> }'
+   #   --config_params="{'param1': <new-value> }"
    #
    from absl import flags
 
    flags.DEFINE_string('config_file', '', 'File with configuration parameters.')
-   flags.DEFINE_string('config_params', '', 'Python dictionary as a string ')
+   flags.DEFINE_string('config_params', '', 'Parameters to override from --config_file.')
    _FLAGS = flags.FLAGS
 
    ...
    config_map = ConfigMap(filename=_FLAGS.config_file,
-                          override_params=_FLAGS.config_params)
-   config_map.get('param1', 123) # returns <new-value>
+                          config_string=_FLAGS.config_params)
+   v = config_map.get('param1', 123) # returns <new-value> from override params
 '''
 
 import ast
@@ -57,66 +63,13 @@ from collections import OrderedDict
 from typing import Union
 
 
-def _deep_update(src: dict, add_dict: dict) -> dict:
-    '''Deep update of parameters in add_dict into src.
-
-    Args:
-      src: source dictionary into which new parameters are added.
-      add_dict: dictionary with new parameters to be added.
-
-    Returns:
-      src dictionary with updated parameters.
-
-    Note:
-      Assumes the new dictionary has same type(dict/list) for updated parameters.
-    '''
-    for k, v in add_dict.items():
-        if isinstance(v, collections.abc.Mapping):
-            src[k] = _deep_update(src.get(k, {}), v)
-        elif isinstance(v, list):
-            # TODO: deep update of list
-            src[k].extend(v)
-        elif isinstance(v, set):
-            # TODO: deep update of set
-            src[k].update(v)
-        else:
-            src[k] = v
-    return src
-
-
-def get_py_dict_from_file(filename: str) -> dict:
-    '''Load a python dict from a file.
-
-    Args:
-      filename: JSON or a python file containing dict of parameter to value mappings.
-        The file can have comments and extra commas at the end.
-        Example: '{ 'abc': 123, 'def': 'lmn' }
-        Note: It assumes bools are in Python: True, False and None is used for 'null'.
-
-    Returns:
-      dictionary loaded from the file.
-
-    Raises:
-      exceptions on parsing errors string dict from literal_eval()
-    '''
-    logging.info(f'Loading python dict from {filename}...')
-    with open(filename) as file:
-        dict_str = file.read()
-
-    # Load the map assuming a python dictionary.
-    # Can also be used with JSON with trailing commas and comments.
-    param_dict = ast.literal_eval(dict_str)
-    logging.debug(f'Loaded {filename} into dict {param_dict}')
-    return param_dict
-
-
 class ConfigMap:
     '''Class to store config mapping of named parameters to values as a dictionary.'''
 
     def __init__(self,
                  config_dict: dict = None,
                  filename: str = None,
-                 override_params: str = None):
+                 config_string: str = None):
         self._config_dict = dict()
         # Add configs from input args.
         if config_dict:
@@ -125,7 +78,7 @@ class ConfigMap:
         if filename:
             self.load_config_file(filename)
         # Add additional configs from dictionary string.
-        self.load_config_string(override_params)
+        self.load_config_string(config_string)
         logging.debug(f'Loaded ConfigMap: {self.get_configs()}')
 
     def load_config_file(self, filename: str) -> dict:
@@ -138,7 +91,7 @@ class ConfigMap:
           dictionary with all config parameters after updates from the file.
           '''
         if filename:
-            self.add_configs(get_py_dict_from_file(filename))
+            self.add_configs(_get_py_dict_from_file(filename))
         return self._config_dict
 
     def load_config_string(self, config_params_str: str) -> dict:
@@ -161,8 +114,25 @@ class ConfigMap:
         Nested parameters with dict, or list values are replaced.
         Use update_config() for a deep-update of nested parameters.
 
+        For example, assume config-dict has a nested dict:
+          with an config dict set as follows: self._config_dict = {
+            'int-param': 10,
+            'nested-dict1': {
+              'param1': 123,
+            }
+          }
+          add_config({ 'nested-dict1': { 'param2': abc })
+          will return {
+             'int-param': 10,
+             'nested-dict1': {
+                'param2': abc,  # older key:values from nested-dict removed.
+             }
+          }
+
         Args:
             configs: dictionary with new parameter:value mappings
+              that are updated into existing dict.
+              Nested dict objects within the dict are replaced.
 
         Returns:
             dictionary with all parameter:value mappings.
@@ -173,6 +143,35 @@ class ConfigMap:
 
     def update_config(self, configs: dict) -> dict:
         '''Does a deep update of the dict updating nested dicts as well.
+        For example, assume config-dict has a nested dict:
+          self._config_dict = {
+            'nested-dict1': {
+              'param1': 123,
+              'nested-dict2': {
+                'param2': 345,
+              }
+            }
+          }
+
+          update_config(configs={
+            'nested-dict1': {
+              'param1': 321,
+               'param1-2': 456,
+               'nested-dict2': {
+                 'param2-1': 789,
+               },
+            })
+
+          will result in an updated config_dict:
+          {
+            'nested-dict1': {
+              'param1': 321,  # updated
+               'param1-2': 456,  # added
+               'nested-dict2': {
+                  'param2': 345,  # original
+                 'param2-1': 789, # added
+               },
+           }
 
         Args:
             configs: dictionary with additional parameter:value mappings.
@@ -235,3 +234,56 @@ def get_config_map_from_file(filename: str) -> ConfigMap:
       ConfigMap object with all the parameters loaded into the config_dict.
     '''
     return ConfigMap(filename=filename)
+
+
+def _deep_update(src: dict, add_dict: dict) -> dict:
+    '''Deep update of parameters in add_dict into src.
+
+    Args:
+      src: source dictionary into which new parameters are added.
+      add_dict: dictionary with new parameters to be added.
+
+    Returns:
+      src dictionary with updated parameters.
+
+    Note:
+      Assumes the new dictionary has same type(dict/list) for updated parameters.
+    '''
+    for k, v in add_dict.items():
+        if isinstance(v, collections.abc.Mapping):
+            src[k] = _deep_update(src.get(k, {}), v)
+        elif isinstance(v, list):
+            # TODO: deep update of list
+            src[k].extend(v)
+        elif isinstance(v, set):
+            # TODO: deep update of set
+            src[k].update(v)
+        else:
+            src[k] = v
+    return src
+
+
+def _get_py_dict_from_file(filename: str) -> dict:
+    '''Load a python dict from a file.
+
+    Args:
+      filename: JSON or a python file containing dict of parameter to value mappings.
+        The file can have comments and extra commas at the end.
+        Example: '{ 'abc': 123, 'def': 'lmn' }
+        Note: It assumes bools are in Python: True, False and None is used for 'null'.
+
+    Returns:
+      dictionary loaded from the file.
+
+    Raises:
+      exceptions on parsing errors string dict from literal_eval()
+    '''
+    logging.info(f'Loading python dict from {filename}...')
+    with open(filename) as file:
+        dict_str = file.read()
+
+    # Load the map assuming a python dictionary.
+    # Can also be used with JSON with trailing commas and comments.
+    param_dict = ast.literal_eval(dict_str)
+    logging.debug(f'Loaded {filename} into dict {param_dict}')
+    return param_dict
