@@ -86,7 +86,7 @@ class Counters():
         Args:
             name: Name of the counter to update
             value: value to be added to the counter
-            debug_context: optional suffix for the debuf counter.
+            debug_context: optional suffix for the debug counter.
 
         Returns:
           this Counters object
