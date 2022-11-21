@@ -1,0 +1,178 @@
+Node: dcid:Min_Concentration_AirPollutant_Ozone
+description: "Min ozone concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:minValue
+pollutant: dcs:Ozone
+
+Node: dcid:Median_Concentration_AirPollutant_Ozone
+description: "Median ozone concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:medianValue
+pollutant: dcs:Ozone
+
+Node: dcid:Max_Concentration_AirPollutant_Ozone
+description: "Max ozone concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:Ozone
+
+Node: dcid:Min_Concentration_AirPollutant_SO2
+description: "Min SO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:minValue
+pollutant: dcs:SulfurDioxide
+
+Node: dcid:Median_Concentration_AirPollutant_SO2
+description: "Median SO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:medianValue
+pollutant: dcs:SulfurDioxide
+
+Node: dcid:Max_Concentration_AirPollutant_SO2
+description: "Max SO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:SulfurDioxide
+
+Node: dcid:Min_Concentration_AirPollutant_CO
+description: "Min CO concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:minValue
+pollutant: dcs:CarbonMonoxide
+
+Node: dcid:Median_Concentration_AirPollutant_CO
+description: "Median CO concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:medianValue
+pollutant: dcs:CarbonMonoxide
+
+Node: dcid:Max_Concentration_AirPollutant_CO
+description: "Max CO concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:CarbonMonoxide
+
+Node: dcid:Min_Concentration_AirPollutant_NO2
+description: "Min NO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:minValue
+pollutant: dcs:NitrogenDioxide
+
+Node: dcid:Median_Concentration_AirPollutant_NO2
+description: "Median NO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:medianValue
+pollutant: dcs:NitrogenDioxide
+
+Node: dcid:Max_Concentration_AirPollutant_NO2
+description: "Max NO2 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:NitrogenDioxide
+
+Node: dcid:Min_Concentration_AirPollutant_PM2.5
+description: "Min PM2.5 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:minValue
+pollutant: dcs:PM2.5
+
+Node: dcid:Median_Concentration_AirPollutant_PM2.5
+description: "Median PM2.5 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:medianValue
+pollutant: dcs:PM2.5
+
+Node: dcid:Max_Concentration_AirPollutant_PM2.5
+description: "Max PM2.5 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:PM2.5
+
+Node: dcid:Min_Concentration_AirPollutant_PM10
+description: "Min PM10 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:minValue
+pollutant: dcs:PM10
+
+Node: dcid:Median_Concentration_AirPollutant_PM10
+description: "Median PM10 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:medianValue
+pollutant: dcs:PM10
+
+Node: dcid:Max_Concentration_AirPollutant_PM10
+description: "Max PM10 concentration in air."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:maxValue
+pollutant: dcs:PM10
+
+Node: dcid:Min_AirQualityIndex_AirPollutant
+description: "Min overall air quality index."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:airQualityIndex
+statType: dcs:minValue
+
+Node: dcid:Median_AirQualityIndex_AirPollutant
+description: "Median overall air quality index."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:airQualityIndex
+statType: dcs:medianValue
+
+Node: dcid:Max_AirQualityIndex_AirPollutant
+description: "Max overall air quality index."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:airQualityIndex
+statType: dcs:maxValue
+
+Node: dcid:PartsPerBillion
+typeOf: dcs:ConcentrationUnitOfMeasure
+name: "PartsPerBillion"
+description: "Number of units of mass of something (like pollutant) per billion units of total mass"
+
+Node: dcid:PartsPerMillion
+typeOf: dcs:ConcentrationUnitOfMeasure
+name: "PartsPerMillion"
+description: "Number of units of mass of something (like pollutant) per million units of total mass"
+
+Node: dcid:MicrogramsPerCubicMeter
+typeOf: dcs:ConcentrationUnitOfMeasure
+name: "MicrogramsPerCubicMeter"

@@ -29,6 +29,16 @@ To date, all our util libraries cater to writing MCF.
     100 lat/lngs).  So prefer the `_geojson` version unless you want
     fine-grained geos.
 
+-   `latlng2place_mapsapi`: This library helps map a lat/lng coordinate pair to
+    list of admin-area and country geos by using the Maps API to find the
+    place-ids, and then the DC recon API to map to DCIDs.  The advantage of this
+    over the `latlng_recon_*` APIs is that we do not depend on the existence of
+    GeoJSONs for admin-areas in the KG for resolution.
+
+    NOTE: As of Oct 2022, only a small subset of countries have sub-national
+    geojsons.  So, for resolving non-US lat/lngs to sub-national DCIDs, this is
+    the preferred library to use.
+
 -   `mcf_template_filler`: Much of statistical data falls nicely into
     Schema.org's
     [StatisticalPopulation](https://schema.org/StatisticalPopulation) and
