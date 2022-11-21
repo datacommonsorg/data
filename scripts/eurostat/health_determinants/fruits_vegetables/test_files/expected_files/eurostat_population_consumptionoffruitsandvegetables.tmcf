@@ -1,0 +1,8 @@
+Node: E:eurostat_population_fruits_vegetables->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:eurostat_population_fruits_vegetables->SV
+measurementMethod: C:eurostat_population_fruits_vegetables->Measurement_Method
+observationAbout: C:eurostat_population_fruits_vegetables->geo
+observationDate: C:eurostat_population_fruits_vegetables->time
+scalingFactor: 100
+value: C:eurostat_population_fruits_vegetables->observation
