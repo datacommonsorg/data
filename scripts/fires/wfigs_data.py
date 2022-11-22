@@ -17,6 +17,7 @@ from collections.abc import Sequence
 import datetime
 
 from absl import app
+from absl import flags
 from absl import logging
 import json
 import numpy as np
@@ -38,9 +39,15 @@ import latlng_recon_geojson
 
 pd.set_option("display.max_columns", None)
 
+FLAGS = flags.FLAGS
+
+flags.DEFINE_boolean('save_location_cache', False,
+                     'save location cache to file.')
+
 PRE_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DiscoveryAcres,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
 _OUTPUT = "/cns/jv-d/home/datcom/v3_resolved_mcf/fire/wfigs/"
 _CACHE = {}
+_START_YEAR = 2014
 
 with open(os.path.join(_SCRIPT_PATH, 'location_file.json')) as f:
     data = f.read()
@@ -57,7 +64,7 @@ _DAILY_ACRES_MAP = "Acre {daily_acres}"
 _INITIAL_RESPONSE_AREA_MAP = "Acre {initial_response_area}"
 _EXPECTED_LOSS_MAP = "USDollar {costs}"
 
-_FIRE_DCID_PREFIX = "fire/irwinId/"
+_FIRE_DCID_FORMAT = "fire/irwinId/{id}"
 
 
 def get_data(url):
@@ -118,13 +125,13 @@ def process_df(df):
     df["POOFips"] = df["POOFips"].astype(str)
 
     # convert epoch time in milliseconds to datetime
-    def get_datetime(date_val):
+    def epoch_to_datetime(date_val):
         if not pd.isna(date_val):
             return datetime.datetime.fromtimestamp(date_val / 1000)
         else:
             return None
 
-    def get_date_str(date_val):
+    def convert_date_to_str(date_val):
         if not pd.isna(date_val):
             return date_val.strftime("%Y-%m-%d")
         return None
@@ -211,47 +218,69 @@ def process_df(df):
     def get_parent_fire(row):
         if not (np.isnan(row.IsCpxChild)) and row.IsCpxChild == 1 and row.CpxID:
             # remove curly brackets from front and end of string.
-            return '{prefix}{id}'.format(prefix=_FIRE_DCID_PREFIX,
-                                         id=row.CpxID[1:-1].lower())
+            id_without_brackets = row.CpxID[1:-1].lower()
+            return _FIRE_DCID_FORMAT.format(id=id_without_brackets)
         else:
             return None
 
+    def format_fire_name(name):
+        return (re.sub(
+            ' +', ' ',
+            name.replace("\n", "").replace("'", "").replace('"', "").replace(
+                '[', "")) + ' Fire').title()
+
+    # Convert Fire discovery date to datetime format to string and extract year
     df["FireDiscoveryDateTime"] = df["FireDiscoveryDateTime"].apply(
-        get_datetime)
-    df["Year"] = df["FireDiscoveryDateTime"].apply(lambda x: x.year)
+        epoch_to_datetime)
+    df["FireDiscoveryYear"] = df["FireDiscoveryDateTime"].apply(
+        lambda x: x.year)
     df["FireDiscoveryDateTime"] = df["FireDiscoveryDateTime"].apply(
-        get_date_str)
-    df = df[df["Year"] >= 2014]
+        convert_date_to_str)
+    # Filter to only have data since the configured start year
+    df = df[df["FireDiscoveryYear"] >= _START_YEAR]
+    # Convert containement date to datetime format to string
     df["ContainmentDateTime"] = df["ContainmentDateTime"].apply(
-        get_datetime).apply(get_date_str)
-    df["ControlDateTime"] = df["ControlDateTime"].apply(get_datetime).apply(
-        get_date_str)
+        epoch_to_datetime).apply(convert_date_to_str)
+    # Convert control date to datetime format to string
+    df["ControlDateTime"] = df["ControlDateTime"].apply(
+        epoch_to_datetime).apply(convert_date_to_str)
+    # Convert Initial response date to datetime format to string
     df["InitialResponseDateTime"] = df["InitialResponseDateTime"].apply(
-        get_datetime).apply(get_date_str)
+        epoch_to_datetime).apply(convert_date_to_str)
+    # Convert costs to currency labelled string
     df["Costs"] = df["EstimatedCostToDate"].apply(get_cost)
+    # Convert burned area to Unit labelled string
     df['BurnedArea'] = df['DailyAcres'].apply(get_area,
                                               args=('daily_acres',
                                                     _DAILY_ACRES_MAP))
+    # Causes to Cause Enum IDs
     df["FireCause"] = df["FireCause"].apply(get_cause)
     df["FireCauseGeneral"] = df["FireCauseGeneral"].apply(get_cause)
     df["FireCauseSpecific"] = df["FireCauseSpecific"].apply(get_cause)
+
+    # Set rows with missing incident personnel values to Nulls
     df["TotalIncidentPersonnel"] = df["TotalIncidentPersonnel"].apply(
         get_personnel)
+    # If the fire has a parent fire, get the parent fire ID.
     df["ParentFire"] = df.apply(get_parent_fire, axis=1)
+    # unit labelled string for initial response area.
     df['InitialResponseAcres'] = df['InitialResponseAcres'].apply(
         get_area, args=('initial_response_area', _INITIAL_RESPONSE_AREA_MAP))
 
+    # Based on available data, get Location IDs.
     df["Location"] = df.apply(get_place, axis=1)
+    # If present, get FIPS codes.
     df["FIPS"] = df.apply(get_fips, axis=1)
-    df["Location"] = df["Location"].fillna(df["FIPS"])
+    # In cases where location data is missing, replace it with FIPS code
+    df["Location"] = df["Location"].fillna('')
     df.loc[df["Location"] == '', 'Location'] = df["FIPS"]
+
     df["IrwinID"] = df["IrwinID"].apply(lambda x: x.lower())
-    df["dcid"] = df["IrwinID"].apply(
-        lambda x: "{prefix}{id}".format(prefix=_FIRE_DCID_PREFIX, id=x))
-    df["name"] = df["IncidentName"].apply(lambda x: re.sub(
-        ' +', ' ',
-        x.replace("\n", "").replace("'", "").replace('"', "").replace('[', ""))
-                                          + ' Fire').apply(lambda x: x.title())
+    # Use IrwinID to set dcid.
+    df["dcid"] = df["IrwinID"].apply(lambda x: _FIRE_DCID_FORMAT.format(id=x))
+    # Clean up Incident Name string to uniformly format fire names.
+    df["name"] = df["IncidentName"].apply(lambda x: format_fire_name(x))
+    # Get type of fire - Complex, individual or prescribed.
     df["typeOf"] = df["IncidentTypeCategory"].apply(
         lambda x: _FIRE_INCIDENT_MAP[x])
     df["wfigsFireID"] = df["UniqueFireIdentifier"]
@@ -270,8 +299,9 @@ def main(_) -> None:
     df = pre_2022_df
     df = process_df(df)
     df.to_csv("final_processed_data.csv", index=False)
-    with open('location_file.json', 'w') as locations:
-        locations.write(json.dumps(_CACHE))
+    if FLAGS.save_location_cache:
+        with open('location_file.json', 'w') as locations:
+            locations.write(json.dumps(_CACHE))
 
 
 if __name__ == "__main__":

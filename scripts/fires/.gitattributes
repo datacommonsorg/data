@@ -1,1 +1,2 @@
 *.csv filter=lfs diff=lfs merge=lfs -text
+location_file.json filter=lfs diff=lfs merge=lfs -text

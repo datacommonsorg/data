@@ -41,10 +41,10 @@ class PreprocessDataTest(unittest.TestCase):
             "InitialResponseDateTime", "InitialResponseAcres"
         ]
         self.assertIsNone(
-            pd.testing.assert_frame_equal(
-                processed.sort_values(by=sort_column_list, ignore_index=True),
-                expected_df.sort_values(by=sort_column_list, ignore_index=True),
-                check_dtype=False))
+            pd.testing.assert_frame_equal(processed,
+                                          expected_df,
+                                          check_dtype=False,
+                                          check_like=True))
 
 
 if __name__ == "__main__":
