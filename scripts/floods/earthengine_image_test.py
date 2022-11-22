@@ -31,6 +31,7 @@ _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 class EarthengineImageTest(unittest.TestCase):
   def setUp(self):
     ee.Initialize()
+    self.maxDiff = None
 
   def test_ee_generate_image(self):
     '''Verify creation of an earthengine image object.'''
@@ -46,7 +47,7 @@ class EarthengineImageTest(unittest.TestCase):
     config['time_period'] = 'P1M'
     config['ee_bounds'] = '24.72,83.83,26.06,88.26'
     ee_image = eei.ee_generate_image(config)
-
+    print(ee_image)
     # Compare image id (description) with expected.
     ee_image_id = str(ee_image.id())
     with open(os.path.join(_TESTDIR, 'sample_floods_ee_image_id.txt'), 'r') as exp:

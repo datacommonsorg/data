@@ -60,6 +60,7 @@ import multiprocessing
 import numpy as np
 import os
 import rasterio
+import re
 import s2sphere
 import sys
 import time
@@ -96,8 +97,9 @@ flags.DEFINE_string('output_s2_place', '',
                     'Output prefix for S2 place csv and tmcf.')
 flags.DEFINE_integer('output_upto_s2_level', 10,
                      'Top S2 level place node in --output_s2_place csv.')
-flags.DEFINE_integer('output_contained_s2_level', 10,
-                  'Levels to be added as contained in place nodes into s2 place output.')
+flags.DEFINE_integer(
+    'output_contained_s2_level', 10,
+    'Levels to be added as contained in place nodes into s2 place output.')
 flags.DEFINE_string('aggregate', 'max',
                     'Aggregate function for data values with same key.')
 flags.DEFINE_bool('debug', False, 'Enable debug logs.')
@@ -167,6 +169,9 @@ _DEFAULT_CONFIG = {
         'area': {
             'aggregate': 'sum',
         },
+        'confidence': {
+            'regex': r'[nh]',  # pick normal or high
+        }
         # 'water': {  # band:0
         #     'min': 1.0
         #},
@@ -185,6 +190,8 @@ _DEFAULT_CONFIG = {
 }
 
 _DEFAULT_COLUMNS = set({'latitude', 'longitude', 's2CellId', 'date'})
+
+_EARTH_RADIUS = 6371  # Radius of Earth in Km.
 
 
 def load_config(config: str, default_config: dict = _DEFAULT_CONFIG) -> dict:
@@ -332,7 +339,7 @@ def _get_numeric_value(value: str) -> Union[int, float, None]:
 
 
 def _set_numeric_data(data: dict, config: dict = {}) -> dict:
-    '''Returns dictionary of key:values with values converted fomr string to number.'''
+    '''Returns dictionary of key:values with values converted from string to number.'''
     for k, v in data.items():
         numeric_value = _get_numeric_value(v)
         if numeric_value:
@@ -371,6 +378,20 @@ def get_cell_area(lat: float, lng: float, height: float, width: float) -> float:
     except ValueError:
         logging.error(f'Invalid coordinates for area: {locals()}')
         return 0
+
+
+def get_s2_cell_area(cell_id: s2sphere.CellId) -> float:
+    '''Returns the area of the S2 cel lin sqkm
+
+     Converts the are of the S2 cell into sqkm using a fixed radius of 6371 km.
+
+     Args:
+       cell_id: S2 CellId
+
+     Returns:
+       Area of the cell in sq km.
+     '''
+    return s2sphere.Cell(cell_id).exact_area() * _EARTH_RADIUS * _EARTH_RADIUS
 
 
 def get_raster_data_point(raster: rasterio.io.DatasetReader,
@@ -431,29 +452,40 @@ def get_csv_data_point(input_data: dict, config: dict) -> dict:
     '''Get data for a CSV row.
     Args:
       input_data: dictionary with column:values for a CSV row.
-      assumes to have columns: latitude, longitude
+      assumed to have columns: latitude, longitude
     Returns:
       dictionary with values for the data point including area and s2CellId.
     '''
     _set_numeric_data(input_data, config)
     lat = input_data.get('latitude', 0.0)
     lng = input_data.get('longitude', 0.0)
+    if isinstance(lat, str) or isinstance(lng, str):
+        logging.debug(f'Invalid lat/lng in data {input_data}')
+        return {}
     input_data['latitude'] = lat
     input_data['longitude'] = lng
     s2_level = config.get('s2_level', None)
+    s2_cell = None
     if s2_level:
-        input_data['s2CellId'] = _latlng_s2cell_dcid(lat, lng, s2_level)
+        s2_cell = _s2cell(lat, lng, s2_level)
+        input_data['s2CellId'] = _s2cell_dcid(s2_cell.id())
         input_data['s2Level'] = s2_level
     date = config.get('output_date')
     if 'area' not in input_data:
-        default_cell_area = config.get('default_cell_area', 0)
-        default_cell_width = config.get('default_cell_width', 0)
-        default_cell_height = config.get('default_cell_width', 0)
-        if default_cell_area > 0:
-            input_data['area'] = default_cell_area
-        elif default_cell_width > 0 and default_cell_height > 0:
-            input_data['area'] = get_cell_area(lat, lng, default_cell_height,
-                                               default_cell_width)
+        area = None
+        if s2_cell:
+            area = get_s2_cell_area(s2_cell)
+        else:
+            default_cell_area = config.get('default_cell_area', 0)
+            default_cell_width = config.get('default_cell_width', 0)
+            default_cell_height = config.get('default_cell_width', 0)
+            if default_cell_area > 0:
+                area = default_cell_area
+            elif default_cell_width > 0 and default_cell_height > 0:
+                area = get_cell_area(lat, lng, default_cell_height,
+                                     default_cell_width)
+        if area:
+            input_data['area'] = area
     if date and 'date' not in input_data:
         input_data['date'] = date
     if config.get('ignore_date', False) and 'date' in input_data:
@@ -515,6 +547,11 @@ def is_valid_data_point(data_point: dict, filter_params: dict,
                     if not math.isclose(value, params['eq']):
                         _add_counter(counter, f'data-dropped-eq-{col}', 1)
                         return False
+                if 'regex' in params:
+                    re_pat = params['regex']
+                    if not re.search(re_pat, str(value)):
+                      _add_counter(counter, f'data-dropped-regex-{col}', 1)
+                      return False
 
     return True
 
@@ -676,8 +713,16 @@ def write_data_csv(data_points: dict,
     if not columns:
         columns = config.get('output_columns', None)
     if not columns:
-        columns = _get_all_columns(data_points, config,
+        all_columns = _get_all_columns(data_points, config,
                                    config.get('ignore_commented', True))
+        # Order columns in same order as input.
+        columns = []
+        for col in config.get('input_columns', []):
+          if col in all_columns:
+            columns.append(col)
+        for col in all_columns:
+          if col not in columns:
+            columns.append(col)
     logging.info(
         f'Writing {len(data_points)} rows with columns: {columns} into {filename} ...'
     )
@@ -692,7 +737,10 @@ def write_data_csv(data_points: dict,
     with open(filename, mode=output_mode) as csv_file:
         writer = csv.DictWriter(csv_file,
                                 fieldnames=columns,
-                                extrasaction='ignore')
+                                escapechar='\\',
+                                extrasaction='ignore',
+                                quotechar='"',
+                                quoting=csv.QUOTE_NONNUMERIC)
         if output_mode == 'w':
             writer.writeheader()
         output_date = config.get('output_date', None)
@@ -723,8 +771,11 @@ def write_s2place_csv_tmcf(data_points: dict,
     '''
     s2_places = {}
     top_contained_s2_level = config.get('aggregate_s2_level', 10)
-    top_output_s2_level = config.get('output_upto_s2_level', config.get('s2_level', 10))
-    contained_levels = [config.get('output_contained_s2_level', top_contained_s2_level)]
+    top_output_s2_level = config.get('output_upto_s2_level',
+                                     config.get('s2_level', 10))
+    contained_levels = [
+        config.get('output_contained_s2_level', top_contained_s2_level)
+    ]
     # Collect all S2 cells ids for data points and its parents.
     for data in data_points.values():
         s2cell_dcid = data.get('s2CellId', None)
@@ -748,7 +799,7 @@ def write_s2place_csv_tmcf(data_points: dict,
         s2level = s2cell.level()
         for level in contained_levels:
             if level:
-              contained_in.append(_s2cell_dcid(s2cell.parent(level).id()))
+                contained_in.append(_s2cell_dcid(s2cell.parent(level).id()))
         s2_places[cellid] = {
             's2CellId': _s2cell_dcid(s2cell.id()),
             'typeOf': f'dcid:S2CellLevel{s2cell.level()}',
@@ -759,7 +810,8 @@ def write_s2place_csv_tmcf(data_points: dict,
     os.makedirs(os.path.dirname(output_prefix), exist_ok=True)
     # Generate the place csv
     write_data_csv(s2_places, f'{output_prefix}.csv',
-                   ['s2CellId', 'typeOf', 'containedInPlace', 'name'], config, counter)
+                   ['s2CellId', 'typeOf', 'containedInPlace', 'name'], config,
+                   counter)
 
     # Generate the place tmcf
     logging.info(f'Generating place tmcf {output_prefix}.tmcf')
@@ -1048,10 +1100,11 @@ def process_csv_points(input_csv: str,
         with open(filename) as csvfile:
             logging.info(f'Processing data from file {filename} ...')
             reader = csv.DictReader(csvfile)
+            # Save the input columns
+            config['input_columns'] = reader.fieldnames
+            # Process required number of input rows.
             num_rows = 0
-            max_rows = config.get('limit_points', 0)
-            if not max_rows:
-                max_rows = sys.maxsize
+            max_rows = config.get('limit_points', sys.maxsize)
             for row in reader:
                 num_rows += 1
                 if num_rows > max_rows:
@@ -1059,6 +1112,9 @@ def process_csv_points(input_csv: str,
                 _add_counter(counter, 'csv_input_points', 1)
                 logging.debug(f'Processing CSV row {filename}:{num_rows}:{row}')
                 data = get_csv_data_point(row, config)
+                if not data:
+                  _add_counter(counter, 'csv_input_points_invalid', 1)
+                  continue
                 data_key = _get_data_key(data, add_date=False)
                 if data_key in ignore_points:
                     logging.debug(
