@@ -21,9 +21,8 @@ import logging
 import requests
 from typing import Callable, Dict, List, NewType, TypeVar, Tuple
 
-LatLng = NewType('LatLng', Tuple[float, float])
-DCID = TypeVar('DCID')
-ResolvedLatLng = NewType('ResolvedLatLng', Dict[DCID, List[str]])
+LatLngType = NewType('LatLngType', Tuple[float, float])
+ResolvedLatLngType = NewType('ResolvedLatLngType', Dict[str, List[str]])
 
 _RECON_ROOT = "https://api.datacommons.org/v1/recon/resolve/coordinate"
 _RECON_COORD_BATCH_SIZE = 50
@@ -56,7 +55,7 @@ def _session(retries: int = 5, backoff_factor: int = 0.5) -> 'requests.Session':
     return s
 
 
-def _call_resolve_coordinates(id2latlon: Dict[LatLng, Tuple[str]],
+def _call_resolve_coordinates(id2latlon: Dict[LatLngType, Tuple[str]],
                               filter_fn: Callable, verbose: bool):
     revmap = {}
     coords = []
