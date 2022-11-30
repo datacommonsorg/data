@@ -17,12 +17,17 @@ See latlng_recon_service_test.py for usage example.
 """
 
 import requests
+from typing import Dict, List, NewType, TypeVar, Tuple
 
 LatLngType = NewType('LatLngType', Tuple[float, float])
 ResolvedLatLngType = NewType('ResolvedLatLngType', Dict[str, List[str]])
 
 _RECON_ROOT = "https://api.datacommons.org/v1/recon/resolve/coordinate"
 _RECON_COORD_BATCH_SIZE = 50
+
+LatLng = NewType('LatLng', Tuple[float, float])
+DCID = TypeVar('DCID')
+ResolvedLatLng = NewType('ResolvedLatLng', Dict[DCID, List[str]])
 
 
 def _session(retries: int = 5, backoff_factor: int = 0.5) -> 'requests.Session':

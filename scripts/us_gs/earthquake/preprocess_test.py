@@ -30,6 +30,7 @@ from preprocess import preprocess
 mock_latlng_to_places = {
     (11, -66): [],
     (41.4, -81.9): ['geoId/3956882', 'geoId/39'],
+    (32.6524, -93.9825): ['geoId/2251830'],
     (36.9944992, -118.3001633): ['geoId/06'],
     (31.2593, 131.471): ['country/JPN']
 }

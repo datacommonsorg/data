@@ -28,7 +28,7 @@ from absl import logging
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../..'))
 from util import latlng_recon_service
-from util import gcs
+from util import gcs_file
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('usgs_earthquake_input', '/tmp/usgs/*.csv',
@@ -43,9 +43,31 @@ flags.DEFINE_string(
 # same line are place ids that (lat, lng) resolves to.
 # If the whole line consists of lat,lng then it means that the coordinate
 # does not resolve to places known by Data Commons.
-flags.DEFINE_string('usgs_earthquake_cache_path',
+flags.DEFINE_string('usgs_earthquake_location_cache_path',
                     'gs://datcom-import-cache/earthquake/place_cache.txt',
                     'Path to place resolution cache file.')
+
+# Below are mappings used to map raw data into what is accepted in DC schema.
+#
+# REVIEW_MAP maps earthquake review status in csv to general reviewed statuses
+# in the DC schema. To add a new status, please also upadte the DC schema.
+# Note: statuses not found in REVIEW_MAP will be ignored.
+#
+# MAGTYPE_REMAP remaps some magnitude types into equivelent magnitude types.
+# Remapping is done because some mag types have several names and we try
+# to use only 1 of each unique type to the DC schema.
+# Ex: Ms20, Ms_20, Ms all refer to the same type.
+#
+# To see what mag types are available, see USGS website.
+# https://www.usgs.gov/programs/earthquake-hazards/magnitude-types
+#
+# Note: If you get a validation error due to non-existent mag type,
+# check if it is in the USGS website. If it is there, check if it is
+# another name for an existing mag type. If so, add it to MAGTYPE_REMAP.
+# Otherwise, add the new mag type into DC schema.
+#
+# To see more on DC earthquake schema, see:
+# https://github.com/datacommonsorg/schema/blob/main/core/earthquake.mcf
 
 REVIEW_MAP = {
     'reviewed': 'ReviewedEvent',
@@ -105,13 +127,13 @@ class PlaceCache:
         if self._read:
             return
         try:
-            with gcs.File(self._path, 'r') as file:
+            with gcs_file.GcsFile(self._path, 'r') as file:
                 raw_cache = file.read().decode()
                 for line in raw_cache.split('\n'):
                     latlng, places = self.parse(line)
                     self.cache[latlng] = places
                 self._read = True
-        except gcs.BlobNotFoundError:
+        except gcs_file.BlobNotFoundError:
             self._read = True
 
     def update(self, cache: Dict):
@@ -128,7 +150,7 @@ class PlaceCache:
             line = ','.join([str(latlng[0]), str(latlng[1])] + places)
             lines.append(line)
         # Write to gcs.
-        with gcs.File(self._path, 'w') as file:
+        with gcs_file.GcsFile(self._path, 'w') as file:
             file.write('\n'.join(lines).encode())
             self._updated = True
 
@@ -160,6 +182,11 @@ def preprocess_row(row: Dict, affected_places: List[str]) -> str:
 
     if row.get('magType'):
         mt = row['magType'].capitalize()
+        # When there is a new magnitude type, force the script to be updated.
+        # Otherwise there would be mcf with invalid schema.
+        if mt not in MAGTYPE_REMAP and mt not in list(MAGTYPE_REMAP.values()):
+            raise Exception(
+                f'Invalid magnitude type {mt}, please add it to the dc schema.')
         mt = MAGTYPE_REMAP.get(mt, mt)
         p['mag_type'] = dcs(f'Magnitude{mt}')
 
@@ -258,9 +285,9 @@ def main(_) -> None:
     subprocess.call(f'chmod +x {download_sh_path} && sh {download_sh_path}',
                     shell=True)
 
-    gcs.init()  # for writing to place cache.
+    gcs_file.init()  # for writing to place cache.
     preprocess(FLAGS.usgs_earthquake_input, FLAGS.usgs_earthquake_output,
-               FLAGS.usgs_earthquake_cache_path)
+               FLAGS.usgs_earthquake_location_cache_path)
 
 
 if __name__ == '__main__':

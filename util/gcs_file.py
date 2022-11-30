@@ -11,7 +11,55 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""GCS Filesystem helpers."""
+"""Module for helper functions to read from / write to GCS.
+
+For what is GCS, see https://cloud.google.com/storage for more on GCS.
+
+###############################################################################
+Description
+###############################################################################
+This module wraps gcs python library's fileio module. The fileio module
+provides file like methods for interacting with GCS blobs.
+
+Please use this module to interact with GCS.
+
+###############################################################################
+Assumptions
+###############################################################################
+- GCS bucket is assumed to exist.
+
+- Caller is assumed to have object reader/write permission to read/write.
+
+- All path consumed needs to start with "gs://"
+
+###############################################################################
+Usage
+###############################################################################
+- gcs_file.init() must be called in the main program, this does not have
+to be in the same file from where read/write is done.
+
+- See example usage below for how to read/write.
+
+Note: Only read and write mode is currently supported.
+
+###############################################################################
+Example usage
+###############################################################################
+
+from util import gcs_file
+...
+
+gcs_file.init()
+...
+
+# To read a GCS blob to a string.
+with gcs_file.GcsFile("gs://some-bucket/some-path, 'r') as file:
+    text_string = file.read().decode()
+
+# To write a string into a GCS blob.
+with gcs_file.GcsFile("gs://some-bucket/some-other-path, 'w') as file:
+    file.write("abc".encode())
+"""
 from google.cloud import storage
 
 
@@ -36,7 +84,7 @@ def init():
         _CLIENT = storage.Client()
 
 
-class File:
+class GcsFile:
     """GCS context manager for reading and writing to gcs like local files.
 
     Returns a gcs library blob reader/writer within the context.
@@ -54,7 +102,7 @@ class File:
 
     def __enter__(self):
         if not _CLIENT:
-            raise Exception('gcs.init() must be called to use gcs.File.')
+            raise Exception('gcs.init() must be called to use GcsFile.')
         bucket = _CLIENT.get_bucket(self.bucket)
         blob = bucket.blob(self.path)
 
