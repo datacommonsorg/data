@@ -61,11 +61,6 @@ flags.DEFINE_string('usgs_earthquake_location_cache_path',
 # To see what mag types are available, see USGS website.
 # https://www.usgs.gov/programs/earthquake-hazards/magnitude-types
 #
-# Note: If you get a validation error due to non-existent mag type,
-# check if it is in the USGS website. If it is there, check if it is
-# another name for an existing mag type. If so, add it to MAGTYPE_REMAP.
-# Otherwise, add the new mag type into DC schema.
-#
 # To see more on DC earthquake schema, see:
 # https://github.com/datacommonsorg/schema/blob/main/core/earthquake.mcf
 
@@ -85,6 +80,12 @@ MAGTYPE_REMAP = {
     'Ms_20': 'Ms',
     'Mi': 'Mwp',
     'Uk': 'Unknown',
+}
+
+# The following are magnitude types that exist in the DC schema.
+VALID_MAGTYPES = {
+    'Mfa', 'M', 'Ma', 'Mb', 'Mc', 'Md', 'Mh', 'Ml', 'Mlr', 'Ms', 'MLg', 'Mw',
+    'Mwb', 'Mwc', 'Mwp', 'Mwr', 'Mww', 'Unknown'
 }
 
 CSV_COL_HEADERS = [
@@ -182,13 +183,13 @@ def preprocess_row(row: Dict, affected_places: List[str]) -> str:
 
     if row.get('magType'):
         mt = row['magType'].capitalize()
-        # When there is a new magnitude type, force the script to be updated.
-        # Otherwise there would be mcf with invalid schema.
-        if mt not in MAGTYPE_REMAP and mt not in list(MAGTYPE_REMAP.values()):
-            raise Exception(
-                f'Invalid magnitude type {mt}, please add it to the dc schema.')
         mt = MAGTYPE_REMAP.get(mt, mt)
-        p['mag_type'] = dcs(f'Magnitude{mt}')
+        if mt not in VALID_MAGTYPES:
+            logging.error(
+                f'Earthquake {p["id"]} has invalid magnitude type {mt}, '
+                'please add it to the DC schema. Mag type will not be added.')
+        else:
+            p['mag_type'] = dcs(f'Magnitude{mt}')
 
     if row.get('magError'):
         p['mag_err'] = row['magError']
