@@ -1,23 +1,13 @@
 # Importing USGS earthquake data
 
-This directory containts the import scripts for [global earthquake events](https://www.usgs.gov/programs/earthquake-hazards/what-we-do-earthquake-hazards-program).
+This directory containts the import scripts for [global earthquake events](https://www.usgs.gov/programs/earthquake-hazards/what-we-do-earthquake-hazards-program). The source data is downloaded from the USGS [website](https://www.usgs.gov/programs/earthquake-hazards/earthquakes).
 
 ## Usage
 
-Make sure you are in virtualenv and inside this directory.
-
-### Step 1. Download source data
-
-The source data is downloaded from the USGS [website](https://www.usgs.gov/programs/earthquake-hazards/earthquakes).
+Make sure you are in virtualenv.
 
 ```sh
-./download.sh
-```
-
-### Step 2. Generate preprocessed CSV file.
-
-```sh
-python preprocess.py
+python scripts/us_gs/earthquake/preprocess.py
 ```
 
 ## Notes

@@ -5,6 +5,7 @@ name: C:Earthquake->name
 occurrenceTime: C:Earthquake->occurrence_time
 magnitude: C:Earthquake->mag
 magnitudeType: C:Earthquake->mag_type
+# TODO: magnitudeError -> marginOfError when re-runnning historical earthquakes.
 magnitudeError: C:Earthquake->mag_err
 location: C:Earthquake->location
 affectedPlace: C:Earthquake->affected_places
