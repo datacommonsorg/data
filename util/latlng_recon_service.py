@@ -87,9 +87,9 @@ def _call_resolve_coordinates(id2latlon: Dict[LatLngType, Tuple[str]],
     return result
 
 
-def latlng2places(id2latlon: Dict[DCID, LatLng],
+def latlng2places(id2latlon: Dict[str, LatLngType],
                   filter_fn: Callable = None,
-                  verbose: bool = False) -> Dict[DCID, Tuple[str]]:
+                  verbose: bool = False) -> Dict[str, Tuple[str]]:
     """Given a map of ID->(lat,lng), resolves the lat/lng and returns a list of
        places by calling the Recon service (in a batched way).
 
