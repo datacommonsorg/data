@@ -1,5 +1,5 @@
 Node: E:mesh_concept->E1
-typeOf: dcs:MeSHSupplementaryRecrod
+typeOf: dcs:MeSHSupplementaryRecord
 dcid: C:mesh_concept->ConceptID
 medicalSubjectHeadingSupplementaryRecordID: C:mesh_concept->Concept_Record
 name: C:mesh_concept->Concept_RecordName
