@@ -1,12 +1,12 @@
 Node: E:mesh_concept->E1
-typeOf: dcs:MeSHConcept
-dcid: C:mesh_concept->Concept_dcid
-medicalSubjectHeadingConceptID: C:mesh_concept->ConceptID
-name: C:mesh_concept->ConceptName
-medicalSubjectHeadingTermID: E:mesh_concept->E2
-
-Node: E:mesh_concept->E2
 typeOf: dcs:MeSHTerm
 dcid: C:mesh_concept->Term_dcid
 medicalSubjectHeadingTermID: C:mesh_concept->TermID
 name: C:mesh_concept->TermName
+
+Node: E:mesh_concept->E2
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_concept->Concept_dcid
+medicalSubjectHeadingConceptID: C:mesh_concept->ConceptID
+name: C:mesh_concept->ConceptName
+medicalSubjectHeadingTermID: E:mesh_concept->E1
