@@ -6,6 +6,7 @@ import unittest
 import os
 import pandas as pd
 import sys
+import json
 from datetime import datetime
 
 module_dir_ = os.path.dirname(__file__)
@@ -22,6 +23,11 @@ def _GetTestPath(relative_path):
 class PreprocessDataTest(unittest.TestCase):
     """This class has the method required to test preprocess_data script."""
 
+    def setUp(self):
+        with open(_GetTestPath("test_data/test_cache.json")) as f:
+            data = f.read()
+        wfigs_data._CACHE = json.loads(data)
+
     def test_ProcessDF(self):
         typeDict = {
             "FireCause": str,
@@ -33,13 +39,6 @@ class PreprocessDataTest(unittest.TestCase):
                          converters=typeDict)
         expected_df = pd.read_csv(_GetTestPath("test_data/expected.csv"))
         processed = wfigs_data.process_df(df)
-        sort_column_list = [
-            "dcid", "name", "typeOf", "Location", "FireCause",
-            "FireCauseGeneral", "FireCauseSpecific", "FireDiscoveryDateTime",
-            "ControlDateTime", "ContainmentDateTime", "BurnedArea", "Costs",
-            "TotalIncidentPersonnel", "IrwinID", "wfigsFireID", "ParentFire",
-            "InitialResponseDateTime", "InitialResponseAcres"
-        ]
         self.assertIsNone(
             pd.testing.assert_frame_equal(processed,
                                           expected_df,

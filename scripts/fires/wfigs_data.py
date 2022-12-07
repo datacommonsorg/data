@@ -49,11 +49,6 @@ _OUTPUT = "/cns/jv-d/home/datcom/v3_resolved_mcf/fire/wfigs/"
 _CACHE = {}
 _START_YEAR = 2014
 
-with open(os.path.join(_SCRIPT_PATH, 'location_file.json')) as f:
-    data = f.read()
-
-_CACHE = json.loads(data)
-
 _FIRE_INCIDENT_MAP = {
     'CX': 'FireIncidentComplexEvent',
     'WF': 'WildlandFireEvent',
@@ -297,6 +292,11 @@ def process_df(df):
 def main(_) -> None:
     pre_2022_df = get_data(PRE_2022_FIRE_LOCATIONS_URL)
     df = pre_2022_df
+
+    with open(os.path.join(_SCRIPT_PATH, 'location_file.json')) as f:
+        data = f.read()
+    _CACHE = json.loads(data)
+
     df = process_df(df)
     df.to_csv("final_processed_data.csv", index=False)
     if FLAGS.save_location_cache:
