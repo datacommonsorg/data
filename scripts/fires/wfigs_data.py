@@ -46,7 +46,7 @@ flags.DEFINE_boolean('save_location_cache', False,
 
 PRE_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DiscoveryAcres,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
 _OUTPUT = "/cns/jv-d/home/datcom/v3_resolved_mcf/fire/wfigs/"
-_CACHE = {}
+_LAT_LNG_CACHE = {}
 _START_YEAR = 2014
 
 _FIRE_INCIDENT_MAP = {
@@ -142,9 +142,9 @@ def process_df(df):
             location = ''
             if not (pd.isna(latitude) or pd.isna(longitude)
                    ) and abs(latitude) <= 90 and abs(longitude) <= 180:
-                if latitude_str in _CACHE:
-                    if longitude_str in _CACHE[str(latitude)]:
-                        return _CACHE[latitude_str][str(longitude)]
+                if latitude_str in _LAT_LNG_CACHE:
+                    if longitude_str in _LAT_LNG_CACHE[str(latitude)]:
+                        return _LAT_LNG_CACHE[latitude_str][str(longitude)]
                 geoIds = ll2p.resolve(latitude, longitude)
                 for geoId in geoIds:
                     if geoId not in ('northamerica', 'country/CAN',
@@ -153,11 +153,11 @@ def process_df(df):
                 if 'northamerica' in geoIds:
                     return_val = (location + ('[LatLong %s %s]' %
                                               (latitude, longitude)))
-                    if latitude in _CACHE:
-                        _lat_dict = CACHE[latitude_str]
+                    if latitude in _LAT_LNG_CACHE:
+                        _lat_dict = _LAT_LNG_CACHE[latitude_str]
                         _lat_dict[longitude_str] = return_val
                     else:
-                        _CACHE[latitude_str] = {longitude_str: return_val}
+                        _LAT_LNG_CACHE[latitude_str] = {longitude_str: return_val}
                     return return_val
             if not row.POOFips or pd.isna(row.POOFips):
                 location = mapping.POOSTATE_GEOID_MAP[row.POOState]
@@ -295,13 +295,13 @@ def main(_) -> None:
 
     with open(os.path.join(_SCRIPT_PATH, 'location_file.json')) as f:
         data = f.read()
-    _CACHE = json.loads(data)
+    _LAT_LNG_CACHE = json.loads(data)
 
     df = process_df(df)
     df.to_csv("final_processed_data.csv", index=False)
     if FLAGS.save_location_cache:
         with open('location_file.json', 'w') as locations:
-            locations.write(json.dumps(_CACHE))
+            locations.write(json.dumps(_LAT_LNG_CACHE))
 
 
 if __name__ == "__main__":

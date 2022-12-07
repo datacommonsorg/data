@@ -26,7 +26,7 @@ class PreprocessDataTest(unittest.TestCase):
     def setUp(self):
         with open(_GetTestPath("test_data/test_cache.json")) as f:
             data = f.read()
-        wfigs_data._CACHE = json.loads(data)
+        wfigs_data._LAT_LNG_CACHE = json.loads(data)
 
     def test_ProcessDF(self):
         typeDict = {
