@@ -157,7 +157,9 @@ def process_df(df):
                         _lat_dict = _LAT_LNG_CACHE[latitude_str]
                         _lat_dict[longitude_str] = return_val
                     else:
-                        _LAT_LNG_CACHE[latitude_str] = {longitude_str: return_val}
+                        _LAT_LNG_CACHE[latitude_str] = {
+                            longitude_str: return_val
+                        }
                     return return_val
             if not row.POOFips or pd.isna(row.POOFips):
                 location = mapping.POOSTATE_GEOID_MAP[row.POOState]
