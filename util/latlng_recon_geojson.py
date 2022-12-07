@@ -18,10 +18,14 @@ See latlng_recon_geojson_test.py for usage example.
 
 import datacommons as dc
 import json
+import logging
 from shapely import geometry
+import urllib
 
 _WORLD = 'Earth'
 _USA = 'country/USA'
+_MAX_RETRIES = 3
+_RETRY_DELAY = 15
 
 _GJ_PROP = {
     'Country': 'geoJsonCoordinatesDP2',
@@ -31,15 +35,24 @@ _GJ_PROP = {
 }
 
 
-def _get_geojsons(place_type, parent_place):
-    places = dc.get_places_in([parent_place], place_type)[parent_place]
-    resp = dc.get_property_values(places, _GJ_PROP[place_type])
-    geojsons = {}
-    for p, gj in resp.items():
-        if not gj:
-            continue
-        geojsons[p] = geometry.shape(json.loads(gj[0]))
-    return geojsons
+def _get_geojsons(place_type, parent_place, retry=0):
+    try:
+        places = dc.get_places_in([parent_place], place_type)[parent_place]
+        resp = dc.get_property_values(places, _GJ_PROP[place_type])
+        geojsons = {}
+        for p, gj in resp.items():
+            if not gj:
+                continue
+            geojsons[p] = geometry.shape(json.loads(gj[0]))
+        return geojsons
+    except urllib.error.URLError:
+        if retry > _MAX_RETRIES:
+            logging.error("Exceeded max retries(%s)" % str(_MAX_RETRIES))
+            raise RuntimeError
+        else:
+            # retry after a small delay
+            time.sleep(_RETRY_DELAY)
+            return _get_geojsons(place_type, parent_place, retry + 1)
 
 
 def _get_continent_map(countries):
