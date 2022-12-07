@@ -206,6 +206,7 @@ class EuroStat:
             df.columns = df.columns.str.strip()
             df = self._parse_file(file_name, df, self._import_name)
             df['SV'] = df['SV'].str.replace('_Total', '')
+            df['SV'] = df['SV'].str.replace('_TOTAL', '')
             dfs.append(df)
         final_df = pd.concat(dfs, axis=0)
 

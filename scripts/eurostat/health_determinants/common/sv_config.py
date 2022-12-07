@@ -240,4 +240,83 @@ file_to_sv_mapping = {
                           "+ '_' + df['lev_limit']",
     },
 
+    "social_environment": {
+       "hlth_ehis_ss1e": "'Percent_Receiving' + df['lev_perc']"+\
+                         "+'SocialSupport_In_Count_Person_'+ df['isced11']"+\
+                         "+'_' + df['sex']",
+       "hlth_ehis_ss1u": "'Percent_Receiving' + df['lev_perc']"+\
+                         "+'SocialSupport_In_Count_Person_' "+\
+                         "+df['deg_urb'] + '_' + df['sex']",
+       "hlth_ehis_ss1b": "'Percent_Receiving'+ df['lev_perc']"+\
+                         "+'SocialSupport_In_Count_Person_'"+\
+                         "+df['sex']+'_'+df['c_birth']",
+       "hlth_ehis_ss1c": "'Percent_Receiving' + df['lev_perc']"+\
+                         "+'SocialSupport_In_Count_Person_' "+\
+                         "+df['citizen'] + '_' + df['sex']",
+       "hlth_ehis_ss1d": "'Percent_Receiving' + df['lev_perc']"+\
+                         "+'SocialSupport_In_Count_Person_'" +\
+                         "+df['sex']+ '_' + df['lev_limit']",
+       "hlth_ehis_ic1e": "'Percent_' + 'AtLeastOnceAWeek_' + df['assist']"+\
+                         "+'OrAssistance_In_Count_Person_' + df['isced11']"+\
+                         "+'_' + df['sex']",
+       "hlth_ehis_ic1u": "'Percent_' + 'AtLeastOnceAWeek_' + df['assist']"+\
+                         "+'OrAssistance_In_Count_Person_' + df['deg_urb']"+\
+                         "+'_' + df['sex']",
+   },
+
+    "fruits_vegetables" : {
+        "hlth_ehis_fv1b": "'Percent_' + df['frequenc_fruitsvegetables']"+\
+            "+ '_' + df['coicop'] +'_In_Count_Person_'+df['sex']+ '_'+df['c_birth']",
+        "hlth_ehis_fv1c": "'Percent_' + df['frequenc_fruitsvegetables']"+\
+            "+ '_' + df['coicop'] + '_In_Count_Person_' + df['citizen'] + '_' + df['sex']",
+        "hlth_ehis_fv1d": "'Percent_'+ df['frequenc_fruitsvegetables']"+\
+            "+ '_' + df['coicop'] + '_In_Count_Person_' + df['sex']  + '_' + df['lev_limit']",
+        "hlth_ehis_fv1e": "'Percent_'+ df['frequenc_fruitsvegetables']"+\
+            "+ '_' + df['coicop'] + '_In_Count_Person_' + df['isced11'] + '_' + df['sex']",
+        "hlth_ehis_fv1i": "'Percent_'+  df['frequenc_fruitsvegetables']"+\
+            "+ '_' + df['coicop'] + '_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']",
+        "hlth_ehis_fv1m": "'Percent_'+  df['frequenc_fruitsvegetables']"+\
+            "+ '_' + df['coicop'] + '_In_Count_Person_' + df['sex'] + '_' + df['bmi']",
+        "hlth_ehis_fv1u": "'Percent_'+ df['frequenc_fruitsvegetables']"+\
+            "+ '_' + df['coicop'] + '_In_Count_Person_' + df['deg_urb']+ '_' + df['sex']",
+
+        "hlth_ehis_fv3b": "'Percent_' + 'Daily_'+df['n_portion']+'_'"+\
+            " +'ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
+           " +  df['sex']+ '_' + df['c_birth']",
+        "hlth_ehis_fv3c": "'Percent_' + 'Daily_'+df['n_portion'] "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
+           " +  df['citizen']+ '_' + df['sex']",
+        "hlth_ehis_fv3d": "'Percent_' + 'Daily_'+df['n_portion'] "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
+           " +  df['sex']+ '_' + df['lev_limit']",
+        "hlth_ehis_fv3e": "'Percent_' + 'Daily_'+df['n_portion'] "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
+           " +  df['isced11']+ '_' + df['sex']",
+        "hlth_ehis_fv3i": "'Percent_' + 'Daily_'+df['n_portion'] "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
+           " +  df['sex']+ '_' + df['quant_inc']",
+        "hlth_ehis_fv3m": "'Percent_' + 'Daily_'+df['n_portion'] "+\
+            " +'_ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
+           " +  df['sex']+ '_' + df['bmi']",
+        "hlth_ehis_fv3u": "'Percent_' + 'Daily_'+df['n_portion']+'_'"+\
+            " +'ConsumptionOfFruitsOrConsumptionOfVegetables_' + 'In_Count_Person_' "+\
+           " +  df['deg_urb']+ '_' + df['sex']",
+
+        "hlth_ehis_fv7e": " 'Percent_'+df['frequenc_fruitsvegetables'] +'_'+'ConsumptionOfSugarSweetenedSoftDrinks_' "+\
+                "  + 'In_Count_Person_'+df['isced11']+'_'+df['sex']",
+        "hlth_ehis_fv7i": " 'Percent_'+df['frequenc_fruitsvegetables'] +'_'+'ConsumptionOfSugarSweetenedSoftDrinks_' "+\
+                "  + 'In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
+        "hlth_ehis_fv7m": " 'Percent_'+df['frequenc_fruitsvegetables'] +'_'+'ConsumptionOfSugarSweetenedSoftDrinks_' "+\
+                "  + 'In_Count_Person_'+df['sex']+'_'+df['bmi']",
+
+       "hlth_ehis_de7": " 'Percent_'+ df['frequenc_fruitsvegetables']+ '_'+'ConsumptionOfFruits_' "+\
+               " + 'In_Count_Person_'+ df['isced11']+'_'+ df['sex']",
+        "hlth_ehis_de8": " 'Percent_'+ df['frequenc_fruitsvegetables']+ '_'+'ConsumptionOfVegetables_' "+\
+               " + 'In_Count_Person_'+ df['isced11']+'_'+ df['sex']",
+
+       "hlth_ehis_fv5e" : " 'Percent_'+ df['frequenc_fruitsvegetables'] + '_' +'ConsumptionOfPureFruitOrConsumptionOfVegetableJuice_' "+\
+             " +  'In_Count_Person_' +df['isced11'] +'_' + df['sex']",
+    },
+
+
 }

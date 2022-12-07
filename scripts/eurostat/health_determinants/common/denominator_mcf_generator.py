@@ -18,6 +18,7 @@ Stat Vars for the measurement denominator property values.
 import re
 import os
 import sys
+from absl import flags
 
 # pylint: disable = wrong-import-position
 _COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
@@ -25,12 +26,66 @@ sys.path.insert(1, _COMMON_PATH)
 from dcid_existence import check_dcid_existence
 # pylint: enable = wrong-import-position
 
-_MODULE_DIR = os.path.join(_COMMON_PATH, "..", "bmi")
+_FLAGS = flags.FLAGS
+import_name = [
+    "social_environment", "bmi", "alcohol_consumption", "tobacco_consumption",
+    "physical_activity", "fruits_vegetables"
+]
+flags.DEFINE_list("import_name", import_name, "Import Data File's List")
+_FLAGS(sys.argv)
+for _import in _FLAGS.import_name:
+    if _import == "social_environment":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
 
-_INPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output_files",
-                                    "eurostat_population_bmi.mcf")
-_OUTPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output_files",
-                                     "eurostat_population_bmi_deno.mcf")
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_social_environment.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_social_environment_deno.mcf")
+    elif _import == "bmi":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(_MODULE_DIR, "output_files",
+                                            "eurostat_population_bmi.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files", "eurostat_population_bmi_deno.mcf")
+    elif _import == "alcohol_consumption":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_alcoholconsumption.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_alcoholconsumption_deno.mcf")
+    elif _import == "tobacco_consumption":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_tobaccoconsumption.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_tobaccoconsumption_deno.mcf")
+    elif _import == "physical_activity":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_physicalactivity.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_physicalactivity_deno.mcf")
+    elif _import == "fruits_vegetables":
+        _MODULE_DIR = os.path.join(_COMMON_PATH, "..", _import)
+
+        _INPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_fruits_vegetables.mcf")
+        _OUTPUT_MCF_FILE_PATH = os.path.join(
+            _MODULE_DIR, "output_files",
+            "eurostat_population_fruits_vegetables_deno.mcf")
 
 _INCOME_QUINTILE_VALUES = {
     "IncomeOf0To20Percentile": "[0 20 Percentile]",
@@ -38,6 +93,12 @@ _INCOME_QUINTILE_VALUES = {
     "IncomeOf40To60Percentile": "[40 60 Percentile]",
     "IncomeOf60To80Percentile": "[60 80 Percentile]",
     "IncomeOf80To100Percentile": "[80 100 Percentile]",
+}
+
+_N_PORTION_VALUES = {
+    "0Portion": "[Portion 0]",
+    "From1To4Portion": "[1 4 Portion]",
+    "5PortionOrMore": "[5 - Portion]",
 }
 
 _NAME_PROP_REPLACEMENTS = {
@@ -109,6 +170,17 @@ def _generate_pv_node(prop: str) -> str:
     if "Percentile" in prop:
         income_quin = _INCOME_QUINTILE_VALUES[prop]
         return f"income: {income_quin}"
+    if "Portions" in prop:
+        n_portion = _N_PORTION_VALUES[prop]
+        return f"consumptionQuantity {n_portion}"
+    if "Strong" in prop or "Intermediate" in prop or "Poor" in prop:
+        return f"\nsocialSupportLevel: dcs:{prop}"
+    if "Relatives" in prop:
+        return f"\nsocialSupportBeneficiaryType: dcs:{prop}"
+    if "InformalCare" in prop:
+        return f"\nsocialSupportType: dcs:{prop}"
+    if "AtLeastOnceAWeek" in prop:
+        return f"\nactivityFrequency: dcs:{prop}"
     if "Urban" in prop or "Rural" in prop:
         return f"placeOfResidenceClassification: dcs:{prop}"
     if "Limitation" in prop:
