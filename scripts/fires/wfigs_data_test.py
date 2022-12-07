@@ -35,9 +35,9 @@ class PreprocessDataTest(unittest.TestCase):
             "FireCauseSpecific": str,
             "POOFips": str
         }
-        df = pd.read_csv(_GetTestPath("test_data/historical.csv"),
+        df = pd.read_csv(_GetTestPath("test_data/historical_data.csv"),
                          converters=typeDict)
-        expected_df = pd.read_csv(_GetTestPath("test_data/expected.csv"))
+        expected_df = pd.read_csv(_GetTestPath("test_data/expected_data.csv"))
         processed = wfigs_data.process_df(df)
         self.assertIsNone(
             pd.testing.assert_frame_equal(processed,
