@@ -27,7 +27,11 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
         for row in reader:
             new_row = []
 
-            new_row.append(row[2])
+            #Transform country into DC readable format of "country/ISO"
+            country = pycountry.countries.get(numeric=row[1][1:])
+            if country:
+              row[1]=country.alpha_3
+            new_row.append('country/' + row[1])
             new_row.append(row[3])
             new_row.append(row[5])
 
@@ -37,7 +41,7 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
             else:
               new_row.append(row[8] + '-' + row[9][2:])
 
-            # Define Observation Period:
+            # Define ObservationPeriod
             if row[9] == '7021':
                 new_row.append('P1Y')
             else:
