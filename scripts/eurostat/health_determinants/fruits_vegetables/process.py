@@ -165,6 +165,9 @@ class EuroStatFruitsVegetables(EuroStat):
                 self._sv_properties["n_portion"].replace("From","")
                 self._sv_properties["coicop"] = \
                 self._sv_properties["coicop"].replace("Or","__")
+                self._sv_properties["frequenc_fruitsvegetables"] = \
+                self._sv_properties["frequenc_fruitsvegetables"]\
+                    .replace("Atleast","AtLeast")
 
 
             self._sv_properties[k] = v\
@@ -179,6 +182,7 @@ class EuroStatFruitsVegetables(EuroStat):
     # pylint: disable=no-self-use
     def _sv_name_correction(self, sv_name: str) -> str:
         return sv_name\
+            .replace("Atleast","At Least")\
             .replace("ADay","a Day")\
             .replace("AWeek","a Week")\
             .replace("Last12","Last 12")\
@@ -188,7 +192,8 @@ class EuroStatFruitsVegetables(EuroStat):
             .replace("Portion", " Portions")\
             .replace("To"," To ")\
             .replace("Of","Of ")\
-            .replace("  "," ")
+            .replace("  "," ")\
+            .replace("weig","weight")
 
     # pylint: enable=no-self-use
     def _rename_frequency_column(self, df: pd.DataFrame) -> pd.DataFrame:
