@@ -1,0 +1,58 @@
+{
+   "plus_code" : {
+      "compound_code" : "JPMJ+92M Khur Manian, Punjab, India",
+      "global_code" : "8J3PJPMJ+92M"
+   },
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "Amritsar",
+               "short_name" : "Amritsar",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Punjab",
+               "short_name" : "PB",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "India",
+               "short_name" : "IN",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Amritsar, Punjab, India",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 32.0551474,
+                  "lng" : 75.4042699
+               },
+               "southwest" : {
+                  "lat" : 31.2556301,
+                  "lng" : 74.48673269999999
+               }
+            },
+            "location" : {
+               "lat" : 31.7172683,
+               "lng" : 74.8741045
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 32.0551474,
+                  "lng" : 75.4042699
+               },
+               "southwest" : {
+                  "lat" : 31.2556301,
+                  "lng" : 74.48673269999999
+               }
+            }
+         },
+         "place_id" : "ChIJVXOeVqpkGTkRmwBhHRh_9K4",
+         "types" : [ "administrative_area_level_2", "political" ]
+      }
+   ],
+   "status" : "OK"
+}
