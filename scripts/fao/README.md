@@ -1,5 +1,3 @@
-> This README is a template of what an import's README might look like.
-
 # Importing FAO Exchange Rate and Currency Into Data Commons
 
 Author: lucy-kind
@@ -15,11 +13,11 @@ Author: lucy-kind
 ### Download URL
 
 CSV file is available for download from https://fenixservices.fao.org/faostat/static/bulkdownloads/Exchange_rate_E_All_Data_(Normalized).zip.
-The dataset is called "Exchange_rate_E_All_Data_(Normalized).csv".
+The dataset is called `Exchange_rate_E_All_Data_(Normalized).csv`.
 
 ### Overview
 
-> This import includes the exchange rate of currency broken down by country, currency standardization type (details below), and currency (using ISO 4217 Currency Code). Exchange rates are defined as the price of one country’s currency for another currency. 
+This import includes the exchange rate of currency broken down by country, currency standardization type (details below), and currency (using ISO 4217 Currency Code). Exchange rates are defined as the price of one country’s currency for another currency. 
 
 This dataset includes monthly and annual exchange rates for the currency of each country per USDollar. For each year, this dataset also calculates a Standardized exchange rate which uses that country’s current currency and compares that to the USDollar.
 
@@ -29,8 +27,6 @@ In this dataset, each Country has an associated currency unit. To find the excha
 
 ### Notes and Caveats
 
-> Some example notes/caveats:
-
 - In this dataset, there are inconsistent observation values for XCD currency from 1970-1975 depending on which country the exchange rate of XCD comes from, as well as a single datapoint of inconsistency from SUR in 1990 for the same reason. Assuming that these inconsistencies reflect real world differences in a time before the internet and consistency checking, this does not seem like an issue with the data.
 
 
@@ -39,39 +35,29 @@ In this dataset, each Country has an associated currency unit. To find the excha
 ### Artifacts
 
 #### Raw Data
-- <ExchangeRate_Currency.csv>: <original_csv>
+- [ExchangeRate_Currency.csv](ExchangeRate_Currency.csv)
 
 #### Cleaned Data
-- <output.csv>: <cleaned_csv>
+- [output.csv](output.csv)
 
 #### Template MCFs
-- <expected_output.tmcf>: <template_mcfs>
-- <file_name_with_hyperlink>: <file_description_if_not_obvious_from_name>
+- [expected_output.tmcf](expected_output.tmcf)
 
 #### Scripts
-- <preprocess.py>: <cleaning_script>
+- [preprocess.py](preprocess.py)
 
 
 #### Generating Artifacts:
-
-> Include any commands for running your scripts. This is especially relevant if
-  your code relies on command line options. Also note that you may have
-  kept the data download and cleaning in separate scripts. Here's an example:
 
 `new_nodes.mcf` and `expected_output.tmcf` were handwritten.
 
 To generate `output.csv`, run:
 
 ```bash
-python3 prepreproccess.py
+python3 preproccess.py
 ```
 
 #### Post-Processing Validation
-
-> While writing script tests help make sure processing outputs are as expected,
-  also describe any steps, checks, and scripts you used to validate the
-  resulting artifacts. Here is an example of what someone might have done to
-  validate the artifacts.
 
 - Ran [dc-import tool]
   (https://github.com/datacommonsorg/import/blob/master/docs/usage.md)
