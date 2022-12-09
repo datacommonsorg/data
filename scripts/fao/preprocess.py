@@ -28,10 +28,10 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
         headers[0] = 'Country'
         headers[1] = 'ISOCurrencyCode'
         headers[2] = 'Currency'
-        headers[3] = 'Year-Month'
+        headers[3] = 'YearMonth'
         headers[4] = 'ObservationPeriod'
         headers[5] = 'ExchangeRatePerUSD'
-        headers[6] = 'ExchangeRatePerUSD, Standardized'
+        headers[6] = 'ExchangeRatePerUSD_Standardized'
         headers[7] = '# Comments'
         headers[8:14] = ''
 
@@ -43,7 +43,16 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
 
             #Transform country into DC readable format of "country/ISO"
             country = pycountry.countries.get(numeric=row[1][1:])
-            if country:
+            #Account for dissolved nation needing updated M49
+            if row[1] == '\'200':
+                row[1] = 'CSK'
+            elif row[1] == '\'530':
+                row[1] = 'NLD'
+            elif row[1] == '\'736':
+                row[1] = 'SDN'
+            elif row[1] == '\'890':
+                row[1] = 'YUG'
+            elif country:
               row[1]=country.alpha_3
             new_row.append('country/' + row[1])
             new_row.append(row[3])
