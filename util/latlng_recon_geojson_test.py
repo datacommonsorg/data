@@ -23,7 +23,7 @@ from unittest import mock
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-from util import latlng_recon_geojson
+import latlng_recon_geojson
 
 _SC_COUNTY_GJ_STR = """
 {"type": "Polygon", "coordinates": [[[-122.202653, 37.363046], [-122.026107, 37.16681], [-121.575402, 36.893033], [-121.488949, 36.983148], [-121.215406, 36.961248], [-121.23711, 37.157204], [-121.399019, 37.150135], [-121.45575, 37.24944], [-121.409075, 37.380672], [-121.472952, 37.482333], [-122.115161, 37.46628], [-122.202653, 37.363046]]]}
@@ -38,22 +38,25 @@ def _mock_get_gj(place_type, parent_place):
     # In this test, we pretend USA has the geoshape of SC County!
     if place_type == 'Country':
         return {'country/USA': geometry.shape(json.loads(_SC_COUNTY_GJ_STR))}
-    else:
+    elif place_type == 'State':
         return {'geoId/06': geometry.shape(json.loads(_ZIP_94041_GJ_STR))}
+    else:
+        return {'geoId/06085': geometry.shape(json.loads(_ZIP_94041_GJ_STR))}
 
 
 class LatlngReconGeojsonTest(unittest.TestCase):
 
-    @mock.patch('util.latlng_recon_geojson._get_geojsons')
-    @mock.patch('util.latlng_recon_geojson._get_continent_map')
+    @mock.patch('latlng_recon_geojson._get_geojsons')
+    @mock.patch('latlng_recon_geojson._get_continent_map')
     def test_main(self, mock_cmap, mock_gj):
         mock_cmap.return_value = {'country/USA': ['northamerica']}
         mock_gj.side_effect = _mock_get_gj
 
         ll2p = latlng_recon_geojson.LatLng2Places()
-        # Cascal in MTV exists in both "state" (94041) and "country" (SC county)
-        self.assertEqual(ll2p.resolve(37.391, -122.081),
-                         ['geoId/06', 'country/USA', 'northamerica'])
+        # Cascal in MTV exists in "county", "state" (94041) and "country" (SC county)
+        self.assertEqual(
+            ll2p.resolve(37.391, -122.081),
+            ['geoId/06', 'geoId/06085', 'country/USA', 'northamerica'])
         # Zareen's doesn't exist in the "state".
         self.assertEqual(ll2p.resolve(37.419, -122.079),
                          ['country/USA', 'northamerica'])
