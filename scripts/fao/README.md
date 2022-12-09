@@ -1,5 +1,3 @@
-> This README is a template of what an import's README might look like.
-
 # Importing FAO Exchange Rate and Currency Into Data Commons
 
 Author: lucy-kind
@@ -19,7 +17,7 @@ The dataset is called `Exchange_rate_E_All_Data_(Normalized).csv`.
 
 ### Overview
 
-> This import includes the exchange rate of currency broken down by country, currency standardization type (details below), and currency (using ISO 4217 Currency Code). Exchange rates are defined as the price of one country’s currency for another currency. 
+This import includes the exchange rate of currency broken down by country, currency standardization type (details below), and currency (using ISO 4217 Currency Code). Exchange rates are defined as the price of one country’s currency for another currency. 
 
 This dataset includes monthly and annual exchange rates for the currency of each country per USDollar. For each year, this dataset also calculates a Standardized exchange rate which uses that country’s current currency and compares that to the USDollar.
 
@@ -28,8 +26,6 @@ For example, the "euro” is the standardized currency for Ireland from 1970 to 
 In this dataset, each Country has an associated currency unit. To find the exchange rate, the value of that currency unit at a particular time is represented in comparison to the USDollar.
 
 ### Notes and Caveats
-
-> Some example notes/caveats:
 
 - In this dataset, there are inconsistent observation values for XCD currency from 1970-1975 depending on which country the exchange rate of XCD comes from, as well as a single datapoint of inconsistency from SUR in 1990 for the same reason. Assuming that these inconsistencies reflect real world differences in a time before the internet and consistency checking, this does not seem like an issue with the data.
 
@@ -68,7 +64,7 @@ python3 preproccess.py
   to validate that the resulting CSV and Template MCF artifacts are
   compatible.
 
-  [report.json](validation/report.json)
-  [summary.html](validation/summary.html)
+  - [report.json](validation/report.json)
+  - [summary_report.html](validation/summary_report.html)
 
   Results show only error is due to the inconsistency of exchange rate mentioned in notes/caveats, which reflects real world observational differences.
