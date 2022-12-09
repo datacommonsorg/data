@@ -65,6 +65,6 @@ python3 preproccess.py
   compatible.
 
   - [report.json](validation/report.json)
-  - [summary.html](validation/summary.html)
+  - [summary_report.html](validation/summary_report.html)
 
   Results show only error is due to the inconsistency of exchange rate mentioned in notes/caveats, which reflects real world observational differences.
