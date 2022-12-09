@@ -1,0 +1,17 @@
+Node: E:processed_data->E0
+dcid: C:processed_data->dcid
+typeOf: C:processed_data->typeOf
+name: C:processed_data->name
+irwinID: C:processed_data->IrwinID
+location: C:processed_data->Location
+discoveryDate: C:processed_data->FireDiscoveryDateTime
+controlledDate: C:processed_data->ControlDateTime
+containmentDate: C:processed_data->ContainmentDateTime
+burnedArea: C:processed_data->BurnedArea
+expectedLoss: C:processed_data->Costs
+totalIncidentPersonnel: C:processed_data->TotalIncidentPersonnel
+wfigsFireID: C:processed_data->wfigsFireID
+isPartOf: C:processed_data->ParentFire
+initialResponseDate: C:processed_data->InitialResponseDateTime
+initialResponseArea: C:processed_data->InitialResponseAcres
+
