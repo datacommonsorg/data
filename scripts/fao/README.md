@@ -64,7 +64,7 @@ python3 preproccess.py
   to validate that the resulting CSV and Template MCF artifacts are
   compatible.
 
-  [report.json](validation/report.json)
-  [summary.html](validation/summary.html)
+  - [report.json](validation/report.json)
+  - [summary.html](validation/summary.html)
 
   Results show only error is due to the inconsistency of exchange rate mentioned in notes/caveats, which reflects real world observational differences.
