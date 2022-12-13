@@ -19,6 +19,7 @@ import datetime
 from absl import app
 from absl import flags
 from absl import logging
+from google.cloud import storage
 import json
 import numpy as np
 import os
@@ -45,9 +46,10 @@ flags.DEFINE_boolean('save_location_cache', False,
                      'save location cache to file.')
 
 PRE_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DiscoveryAcres,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
-_OUTPUT = "/cns/jv-d/home/datcom/v3_resolved_mcf/fire/wfigs/"
 _LAT_LNG_CACHE = {}
 _START_YEAR = 2014
+_GCS_BUCKET = "datcom-public"
+_GCS_FILE_PATH = "fires/location_file.json"
 
 _FIRE_INCIDENT_MAP = {
     'CX': 'FireIncidentComplexEvent',
@@ -295,14 +297,15 @@ def main(_) -> None:
     pre_2022_df = get_data(PRE_2022_FIRE_LOCATIONS_URL)
     df = pre_2022_df
 
-    with open(os.path.join(_SCRIPT_PATH, 'location_file.json')) as f:
-        data = f.read()
-    _LAT_LNG_CACHE = json.loads(data)
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(_GCS_BUCKET)
+    blob = bucket.blob(_GCS_FILE_PATH)
+    _LAT_LNG_CACHE = json.loads(blob.download_as_string(client=None))
 
     df = process_df(df)
     df.to_csv("final_processed_data.csv", index=False)
     if FLAGS.save_location_cache:
-        with open('location_file.json', 'w') as locations:
+        with blob.open("w") as locations:
             locations.write(json.dumps(_LAT_LNG_CACHE))
 
 
