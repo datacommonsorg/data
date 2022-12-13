@@ -76,14 +76,18 @@ class EnergyIndiaBase():
         corresponding dcids.
         """
 
-        util_path = os.path.join(module_dir, 'util/')
+        util_path = os.path.join(module_dir, 'util')
+        consuming_sector_path = os.path.join(util_path,
+                                             'consumingSectorTypes.json')
+        statvars_path = os.path.join(util_path, 'statVars.json')
+        statvar_types_path = os.path.join(util_path, self.json_file)
 
-        with open(util_path + 'consumingSectorTypes.json', 'r') as sector, \
-            open(util_path + 'statVars.json', 'r') as statvars:
+        with open(consuming_sector_path, 'r') as sector, \
+            open(statvars_path, 'r') as statvars:
             self.js_sector = json.loads(sector.read())
             self.js_statvars = json.loads(statvars.read())
 
-        with open(util_path + self.json_file, 'r') as types:
+        with open(statvar_types_path, 'r') as types:
             self.js_types = json.loads(types.read())
 
     def _load_data(self):
@@ -92,13 +96,13 @@ class EnergyIndiaBase():
 	and return a single dataframe
         """
 
-        zipfile_path = os.path.join(module_dir, 'data/zipped_data.zip')
-        extracted_path = os.path.join(module_dir, 'data/')
+        zipfile_path = os.path.join(module_dir, 'data', 'zipped_data.zip')
+        extracted_path = os.path.join(module_dir, 'data')
 
         with zipfile.ZipFile(zipfile_path, 'r') as zip_ref:
             zip_ref.extractall(extracted_path)
 
-        data_path = os.path.join(module_dir, 'data/{}/'.format(self.cat))
+        data_path = os.path.join(module_dir, 'data', self.cat)
 
         # Concatenate all csvs into one dataframe
         # Skipping 2 rows since it corresponds to title of the file
@@ -108,7 +112,7 @@ class EnergyIndiaBase():
             if os.path.isfile(os.path.join(module_dir, data_path, f))
         ],
                          join='outer')
-        
+
         return data
 
     def _create_date(self, df):
