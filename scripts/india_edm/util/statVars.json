@@ -21,7 +21,7 @@
 		},
 		"QtyInMillionTonnes_Generation": {
 			"property": "Generation",
-			"popType": "Coal",
+			"popType": "Electricity",
 			"unit": "MetricTon",
 			"scale": "1000000"
 		}
