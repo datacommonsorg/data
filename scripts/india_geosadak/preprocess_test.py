@@ -24,6 +24,10 @@ class TestPreprocess(unittest.TestCase):
     maxDiff = None
 
     def test_create_csv(self):
+        """
+        Unit test to compare the expected output and generated output files
+        in test/ directory
+        """
         expected_file = open(os.path.join(module_dir_, 'test/expected.csv'))
         expected_data = expected_file.read()
         expected_file.close()

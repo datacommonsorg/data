@@ -21,16 +21,25 @@ import json
 
 
 def map_names():
+    """
+    Helper function to map the filenames in data/facilities/ to their corresponding
+    Indian state names
+    """
     mapper = dict()
     df = pd.read_csv(
         os.path.join(os.path.dirname(__file__),
                      "./data/India_GeoSadak-zipfile_details.csv"))
     for i in range(28):
         mapper[df.iloc[i]["Facilities"]] = df.iloc[i]["State"]
+
     return mapper
 
 
 def map_statvarnames():
+    """
+    Helper function to map the category values in source data to
+    StatVar names
+    """
     fac_mapper = {
         "Agro": "Count_CivicStructure_AgriculturalFacility",
         "Education": "Count_CivicStructure_EducationFacility",
@@ -54,10 +63,16 @@ class GeoSadakLoader:
         self.clean_df = None
 
     def load(self, fac_mapper):
+        """
+        Class method that loads zip file for each Indian state.
 
+        This methods extracts and loads the data in zip file and maps the
+        latlongs of civic structures to the district LGD Code the structure
+        is located in. Then, it renames the civic structure category to its
+        appropriate StatVar name
+        """
         zipfile = "zip:///" + self.source
         fac_state = geopandas.read_file(zipfile)
-
         state_name = self.state_name
 
         f = open(
@@ -66,17 +81,22 @@ class GeoSadakLoader:
         data = json.load(f)
 
         lgdCode = []
+
+        # Map civic structure latlongs to district LGD Codes
         for i in data[state_name]:
             fac_id = list(i.keys())[:1][0]
             lgdCode.append(i[fac_id])
+
         lgdCode = pd.Series(lgdCode)
         fac_state = fac_state.assign(LgdCode=lgdCode.values)
 
+        # Groupby LGD Code and civic structure type and get counts
         fac_state = fac_state.groupby(
             ['LgdCode',
              'FAC_CATEGO']).size().to_frame(name='count').reset_index()
         fac_state = fac_state[fac_state["LgdCode"] != '']
 
+        # Map source data's category names to clean DC statvar names
         fac_state.loc[fac_state["FAC_CATEGO"] == "Agro",
                       "FAC_CATEGO"] = fac_mapper["Agro"]
         fac_state.loc[fac_state["FAC_CATEGO"] == "Education",
@@ -90,7 +110,9 @@ class GeoSadakLoader:
         self.raw_df = fac_state
 
     def _make_column_numerical(self, column):
-
+        """
+        Helper method to convert the counts column to 'integer' dtype
+        """
         if column == "LgdCode":
             self.clean_df[column] = self.clean_df[column].astype(int)
 
@@ -101,16 +123,19 @@ class GeoSadakLoader:
                                                   errors="ignore")
 
     def process(self):
-
+        """
+        Class method to preprocess data
+        """
         self.clean_df = self.raw_df
-
-        # Rename columns
         self.clean_df.columns = self.COLUMN_HEADERS
 
         self._make_column_numerical("LgdCode")
         self._make_column_numerical("Category_Count")
 
     def save(self, csv_file_path):
+        """
+        Class method to save the preprocessed file
+        """
         if path.exists(csv_file_path):
             # If the file exists then append to the same
             self.clean_df.to_csv(csv_file_path,
@@ -127,15 +152,13 @@ def main():
     mapper = map_names()
     fac_mapper = map_statvarnames()
 
-    # If the final csv file already exists
-    # Remove it, so that it can be regenerated
     csv_file_path = os.path.join(os.path.dirname(__file__),
                                  "./India_GeoSadak.csv")
-    if path.exists(csv_file_path):
-        os.remove(csv_file_path)
-
     files = os.listdir(
         os.path.join(os.path.dirname(__file__), "./data/facilities/"))
+
+    # For each Indian state, preprocess the corresponding zip file
+    # and save it as CSV
     for file_name in files:
         data_file_path = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
