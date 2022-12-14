@@ -1,0 +1,15 @@
+util/aa_isocode2dcid.py
+util/county_to_dcid.py
+util/soc_codes.py
+
+scripts/*/*/scratch
+scripts/*/*/*/scratch
+scripts/*/*/*/*/scratch
+scripts/*/*/*/*/*/scratch
+
+.env/
+*/.env/
+*/*/.env/
+*/*/*/.env/
+*/*/*/*/.env/
+*/*/*/*/*/.env/
