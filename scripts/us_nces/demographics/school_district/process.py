@@ -38,28 +38,19 @@ from config import *
 
 
 # pylint:disable=too-few-public-methods
-class NCESPrivateSchool(USEducation):
+class NCESDistrictSchool(USEducation):
     """
     This Class has requried methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
     _import_name = SCHOOL_TYPE
     _split_headers_using_school_type = SPLIT_HEADER_ON_SCHOOL_TYPE
-    _include_columns = POSSIBLE_DATA_COLUMNS
     _exclude_columns = EXCLUDE_DATA_COLUMNS
+    _include_columns = POSSIBLE_DATA_COLUMNS
     _include_col_place = POSSIBLE_PLACE_COLUMNS
     _exclude_col_place = EXCLUDE_PLACE_COLUMNS
-    _generate_statvars = True
     _observation_period = OBSERVATION_PERIOD
-
-    def set_include_columns(self, columns: list):
-        self._include_columns = columns
-
-    def set_exclude_columns(self, columns: list):
-        self._exclude_columns = columns
-
-    def set_generate_statvars_flag(self, flag: bool):
-        self._generate_statvars = flag
+    _key_col_place = PLACE_KEY_COLUMNS
 
 
 # pylint:enable=too-few-public-methods
@@ -83,13 +74,12 @@ if __name__ == '__main__':
     cleaned_csv_path = os.path.join(output_file_path, CSV_FILE_NAME)
     mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
     tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
-    cleaned_csv_place = os.path.join(output_file_path_place, CSV_FILE_PLACE)
+    csv_path_place = os.path.join(output_file_path_place, CSV_FILE_PLACE)
     tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
-    loader = NCESPrivateSchool(input_files, cleaned_csv_path, mcf_path,
-                               tmcf_path, cleaned_csv_place, tmcf_path_place)
 
+    loader = NCESDistrictSchool(input_files, cleaned_csv_path, mcf_path,
+                                tmcf_path, csv_path_place, tmcf_path_place)
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()
-    # loader.generate_csv_place()
-    loader._generate_tmcf_private()
+    loader._generate_tmcf_district()

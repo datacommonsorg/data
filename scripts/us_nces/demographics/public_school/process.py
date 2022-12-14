@@ -49,13 +49,16 @@ class NCESPublicSchool(USEducation):
     _include_columns = POSSIBLE_DATA_COLUMNS
     _include_col_place = POSSIBLE_PLACE_COLUMNS
     _exclude_col_place = EXCLUDE_PLACE_COLUMNS
+    _observation_period = OBSERVATION_PERIOD
+    _key_col_place = PLACE_KEY_COLUMNS
 
 
 # pylint:enable=too-few-public-methods
 
 if __name__ == '__main__':
-    input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                              "input_files")
+    # input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+    #                           "input_files")
+    input_path = "/Users/chharish/us_nces_education/data/scripts/us_nces/demographics/public_school/test_data/datasets"
 
     input_files = [
         os.path.join(input_path, file)

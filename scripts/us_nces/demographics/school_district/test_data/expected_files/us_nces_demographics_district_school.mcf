@@ -1,0 +1,251 @@
+Node: dcid:Count_Faculty_ElementarySchoolCounselor
+facultyType: dcs:ElementarySchoolCounselor
+measuredProperty: dcs:count
+populationType: dcs:Faculty
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Faculty_LEAAdministrativeSupportStaff
+facultyType: dcs:LEAAdministrativeSupportStaff
+measuredProperty: dcs:count
+populationType: dcs:Faculty
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Faculty_LEAAdministrators
+facultyType: dcs:LEAAdministrators
+measuredProperty: dcs:count
+populationType: dcs:Faculty
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Faculty_ParaProfessionalsAidesOrInstructionalAides
+facultyType: dcs:ParaProfessionalsAidesOrInstructionalAides
+measuredProperty: dcs:count
+populationType: dcs:Faculty
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Faculty_SchoolAdministrativeSupportStaff
+facultyType: dcs:SchoolAdministrativeSupportStaff
+measuredProperty: dcs:count
+populationType: dcs:Faculty
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Faculty_SchoolAdministrators
+facultyType: dcs:SchoolAdministrators
+measuredProperty: dcs:count
+populationType: dcs:Faculty
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Faculty_SchoolOtherGuidanceCounselors
+facultyType: dcs:SchoolOtherGuidanceCounselors
+measuredProperty: dcs:count
+populationType: dcs:Faculty
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Faculty_SecondarySchoolCounselor
+facultyType: dcs:SecondarySchoolCounselor
+measuredProperty: dcs:count
+populationType: dcs:Faculty
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Faculty_TotalGuidanceCounselors
+facultyType: dcs:TotalGuidanceCounselors
+measuredProperty: dcs:count
+populationType: dcs:Faculty
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Female_AmericanIndianOrAlaskaNative_AdultEducation
+gender: dcs:Female
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:AmericanIndianOrAlaskaNative
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Female_Asian_AdultEducation
+gender: dcs:Female
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:Asian
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Female_Black_AdultEducation
+gender: dcs:Female
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:Black
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Female_HawaiianNativeOrPacificIslander_AdultEducation
+gender: dcs:Female
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:HawaiianNativeOrPacificIslander
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Female_HispanicOrLatino_AdultEducation
+gender: dcs:Female
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:HispanicOrLatino
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Female_TwoOrMoreRaces_AdultEducation
+gender: dcs:Female
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:TwoOrMoreRaces
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Female_White_AdultEducation
+gender: dcs:Female
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:White
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Male_AmericanIndianOrAlaskaNative_AdultEducation
+gender: dcs:Male
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:AmericanIndianOrAlaskaNative
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Male_Asian_AdultEducation
+gender: dcs:Male
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:Asian
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Male_Black_AdultEducation
+gender: dcs:Male
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:Black
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Male_HawaiianNativeOrPacificIslander_AdultEducation
+gender: dcs:Male
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:HawaiianNativeOrPacificIslander
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Male_HispanicOrLatino_AdultEducation
+gender: dcs:Male
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:HispanicOrLatino
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Male_TwoOrMoreRaces_AdultEducation
+gender: dcs:Male
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:TwoOrMoreRaces
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_Male_White_AdultEducation
+gender: dcs:Male
+measuredProperty: dcs:count
+populationType: dcs:Student
+race: dcs:White
+schoolGradeLevel: dcs:AdultEducation
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade1To8
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade1To8
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_SchoolGrade9To12
+measuredProperty: dcs:count
+populationType: dcs:Student
+schoolGradeLevel: dcs:SchoolGrade9To12
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Student_StudentSupportServicesStaff
+facultyType: dcs:StudentSupportServicesStaff
+measuredProperty: dcs:count
+populationType: dcs:Student
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Teacher_ElementaryTeacher
+measuredProperty: dcs:count
+populationType: dcs:Teacher
+schoolGradeLevel: dcs:ElementaryTeacher
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Teacher_Kindergarten
+measuredProperty: dcs:count
+populationType: dcs:Teacher
+schoolGradeLevel: dcs:Kindergarten
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Teacher_PreKindergarten
+measuredProperty: dcs:count
+populationType: dcs:Teacher
+schoolGradeLevel: dcs:PreKindergarten
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Teacher_SecondaryTeacher
+measuredProperty: dcs:count
+populationType: dcs:Teacher
+schoolGradeLevel: dcs:SecondaryTeacher
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Teacher_UngradedTeacher
+measuredProperty: dcs:count
+populationType: dcs:Teacher
+schoolGradeLevel: dcs:UngradedTeacher
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Percent_Student_AsAFractionOf_Count_Teacher
+measuredProperty: dcs:count
+measurementDenominator: dcs:Count_Teacher
+populationType: dcs:Student
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable

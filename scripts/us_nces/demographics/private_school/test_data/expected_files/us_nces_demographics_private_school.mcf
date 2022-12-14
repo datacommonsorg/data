@@ -1,153 +1,21 @@
-Node: dcid:Count_Student_AmericanIndianOrAlaskaNative
+Node: dcid:Count_Student_PreKindergartenAndKindergarten
 measuredProperty: dcs:count
 populationType: dcs:Student
-race: dcs:AmericanIndianOrAlaskaNative
+schoolGradeLevel: dcs:PreKindergartenAndKindergarten
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Student_AsianOrPacificIslander
+Node: dcid:Count_Student_SchoolGrade1To8
 measuredProperty: dcs:count
 populationType: dcs:Student
-race: dcs:AsianOrPacificIslander
+schoolGradeLevel: dcs:SchoolGrade1To8
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Student_BlackOrAfricanAmericanAlone
+Node: dcid:Count_Student_SchoolGrade9To12
 measuredProperty: dcs:count
 populationType: dcs:Student
-race: dcs:BlackOrAfricanAmericanAlone
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_HawaiianNativeOrPacificIslander
-measuredProperty: dcs:count
-populationType: dcs:Student
-race: dcs:HawaiianNativeOrPacificIslander
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_HispanicOrLatino
-measuredProperty: dcs:count
-populationType: dcs:Student
-race: dcs:HispanicOrLatino
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_Kindergarten
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:Kindergarten
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_PreKindergarten
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:PreKindergarten
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade1
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade1
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade10
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade10
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade11
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade11
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade12
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade12
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade2
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade2
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade3
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade3
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade4
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade4
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade5
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade5
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade6
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade6
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade7
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade7
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade8
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade8
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade9
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade9
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_TwoOrMoreRaces
-measuredProperty: dcs:count
-populationType: dcs:Student
-race: dcs:TwoOrMoreRaces
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_White
-measuredProperty: dcs:count
-populationType: dcs:Student
-race: dcs:White
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Teacher
-measuredProperty: dcs:count
-populationType: dcs:Teacher
+schoolGradeLevel: dcs:SchoolGrade9To12
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
@@ -166,19 +34,19 @@ populationType: dcs:Student
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Percent_Student_AsianOrPacificIslander_AsAFractionOf_Count_Student
+Node: dcid:Percent_Student_Asian_AsAFractionOf_Count_Student
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Student
 populationType: dcs:Student
-race: dcs:AsianOrPacificIslander
+race: dcs:Asian
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Percent_Student_BlackOrAfricanAmericanAlone_AsAFractionOf_Count_Student
+Node: dcid:Percent_Student_Black_AsAFractionOf_Count_Student
 measuredProperty: dcs:count
 measurementDenominator: dcs:Count_Student
 populationType: dcs:Student
-race: dcs:BlackOrAfricanAmericanAlone
+race: dcs:Black
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 

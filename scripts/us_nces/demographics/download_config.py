@@ -17,7 +17,7 @@ COLUMNS_SELECTOR = {
     "lYearsSelected": None,
     "lColumnsSelected": None,
     "lFilterNames": [["State", "Static"]],
-    "lFilterData": [["all"]],
+    "lFilterData": [["allplus"]],
     "lFilterYears": [[]],
     "lFilterMasterData": [[]],
     "lFilterTitles": ["State"],
@@ -31,4 +31,7 @@ COMPRESS_FILE = {"sFileName": None}
 
 DOWNLOAD_URL = 'https://nces.ed.gov/{compressed_src_file}'
 
-COLUMNS_TO_DOWNLOAD_WITH_SINGLE_API_CALL = 60
+COLUMNS_TO_DOWNLOAD_WITH_SINGLE_API_CALL = 59
+
+MAX_RETRIES = 5
+RETRY_SLEEP_SECS = 3

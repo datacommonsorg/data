@@ -22,6 +22,7 @@ TMCF_FILE_NAME = "us_nces_demographics_private_school.tmcf"
 CSV_FILE_PLACE = "us_nces_demographics_private_place.csv"
 TMCF_FILE_PLACE = "us_nces_demographics_private_place.tmcf"
 SCHOOL_TYPE = "private_school"
+OBSERVATION_PERIOD = "P2Y"
 SPLIT_HEADER_ON_SCHOOL_TYPE = "[Private School]"
 
 POSSIBLE_DATA_COLUMNS = [

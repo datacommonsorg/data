@@ -21,6 +21,7 @@ TMCF_FILE_NAME = "us_nces_demographics_public_school.tmcf"
 CSV_FILE_PLACE = "us_nces_demographics_public_place.csv"
 TMCF_FILE_PLACE = "us_nces_demographics_public_place.tmcf"
 SCHOOL_TYPE = "public_school"
+OBSERVATION_PERIOD = "P1Y"
 SPLIT_HEADER_ON_SCHOOL_TYPE = "[Public School]"
 
 POSSIBLE_DATA_COLUMNS = [
@@ -39,7 +40,8 @@ POSSIBLE_PLACE_COLUMNS = [
     "school_state_code", "ZIP", ".*County.*", ".*School.*", ".*Lowest.*",
     ".*Highest.*", "Physical.*", "Phone.*", "Coeducational", ".*Level.*",
     ".*State.*", "Latitude.*", "Longitude.*", "Locale.*", "Location.*",
-    "Charter.*", "Magnet.*", "Title.*", "Agency.*"
+    "Charter.*", "Magnet.*", "Title.*", "Agency.*", "State Name"
 ]
 
-EXCLUDE_PLACE_COLUMNS = ["State Name", "Metro Micro Area Code"]
+EXCLUDE_PLACE_COLUMNS = ["Metro Micro Area Code"]
+PLACE_KEY_COLUMNS = ["year", "School ID - NCES Assigned"]

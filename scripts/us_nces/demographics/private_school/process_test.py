@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for US Tract process script.
+Script to automate the testing for EuroStat Physical Activity process script.
 """
 
 import os
@@ -20,71 +20,81 @@ import unittest
 import sys
 import tempfile
 # module_dir is the path to where this test is running from.
-_MODULE_DIR = os.path.dirname(__file__)
-sys.path.insert(0, _MODULE_DIR)
+MODULE_DIR = os.path.dirname(__file__)
+sys.path.insert(0, MODULE_DIR)
 # pylint: disable=wrong-import-position
 from process import NCESPrivateSchool
-
 # pylint: enable=wrong-import-position
 
-_TEST_DATASET_DIR = os.path.join(_MODULE_DIR, "test_data", "datasets")
-_EXPECTED_FILES_DIR = os.path.join(_MODULE_DIR, "test_data", "expected_files")
+TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
+EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
 
 
 class TestProcess(unittest.TestCase):
     """
-    This module is used to test US Tract data processing.
-    It will generate and test CSV, MCF and TMCF files for given test input files
-    and comapre it with expected results.
+    TestPreprocess is inherting unittest class
+    properties which further requried for unit testing.
+    The test will be conducted for EuroStat Physical Activity Sample Datasets,
+    It will be generating CSV, MCF and TMCF files based on the sample input.
+    Comparing the data with the expected files.
     """
-    TEST_DATA_FILES = os.listdir(_TEST_DATASET_DIR)
-    IP_DATA = [
-        os.path.join(_TEST_DATASET_DIR, file_name)
-        for file_name in TEST_DATA_FILES
+    test_data_files = os.listdir(TEST_DATASET_DIR)
+
+    ip_data = [
+        os.path.join(TEST_DATASET_DIR, file_name)
+        for file_name in test_data_files
     ]
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
+            cleaned_csv_file_path = os.path.join(tmp_dir,
+                                                 "test_private_school.csv")
+            mcf_file_path = os.path.join(tmp_dir, "test_private_school.mcf")
+            tmcf_file_path = os.path.join(tmp_dir, "test_private_school.tmcf")
+            csv_path_place = os.path.join(tmp_dir,
+                                          "test_private_school_place.csv")
+            tmcf_path_place = os.path.join(tmp_dir,
+                                           "test_private_school_place.tmcf")
 
-            self.cleaned_csv_file_path = os.path.join(_EXPECTED_FILES_DIR, "data.csv")
-            self.mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            self.tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
-
-            loader = NCESPrivateSchool(self.IP_DATA, self.cleaned_csv_file_path,
-                                        self.mcf_file_path, self.tmcf_file_path)
+            loader = NCESPrivateSchool(self.ip_data, cleaned_csv_file_path,
+                                       mcf_file_path, tmcf_file_path,
+                                       csv_path_place, tmcf_path_place)
 
             loader.generate_csv()
             loader.generate_mcf()
             loader.generate_tmcf()
+            loader._generate_tmcf_private()
 
-            with open(self.mcf_file_path, encoding="UTF-8") as mcf_file:
-                self._actual_mcf_data = mcf_file.read()
+            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+                self.actual_mcf_data = mcf_file.read()
 
-            with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                self._actual_tmcf_data = tmcf_file.read()
+            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+                self.actual_tmcf_data = tmcf_file.read()
 
-            with open(self.cleaned_csv_file_path, encoding="UTF-8") as csv_file:
-                self._actual_csv_data = csv_file.read()
+            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+                self.actual_csv_data = csv_file.read()
 
-    def test_csv_mcf_tmcf_files(self):
+            with open(tmcf_path_place, encoding="UTF-8") as tmcf_file:
+                self.actual_tmcf_place = tmcf_file.read()
+
+            with open(csv_path_place, encoding="utf-8-sig") as csv_file:
+                self.actual_csv_place = csv_file.read()
+
+    def test_mcf_tmcf_files(self):
         """
-        This method tests CSV, MCF, tMCF files generated using process module
-        against expected results.
+        This method is required to test between output generated
+        preprocess script and expected output files like MCF File
         """
-        expected_csv_file_path = os.path.join(
-            _EXPECTED_FILES_DIR, "us_nces_demographics_private_school.csv")
-
         expected_mcf_file_path = os.path.join(
-            _EXPECTED_FILES_DIR, "us_nces_demographics_private_school.mcf")
+            EXPECTED_FILES_DIR, "us_nces_demographics_private_school.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            _EXPECTED_FILES_DIR, "us_nces_demographics_private_school.tmcf")
+            EXPECTED_FILES_DIR, "us_nces_demographics_private_school.tmcf")
 
-        with open(expected_csv_file_path,
-                  encoding="UTF-8") as expected_csv_file:
-            expected_csv_data = expected_csv_file.read()
+        expected_tmcf_place_path = os.path.join(
+            EXPECTED_FILES_DIR, "us_nces_demographics_private_place.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -94,9 +104,44 @@ class TestProcess(unittest.TestCase):
                   encoding="UTF-8") as expected_tmcf_file:
             expected_tmcf_data = expected_tmcf_file.read()
 
-        self.assertEqual(expected_csv_data.strip(),
-                         self._actual_csv_data.strip())
+        with open(expected_tmcf_place_path,
+                  encoding="UTF-8") as expected_tmcf_file_place:
+            expected_tmcf_place = expected_tmcf_file_place.read()
+
         self.assertEqual(expected_mcf_data.strip(),
-                         self._actual_mcf_data.strip())
+                         self.actual_mcf_data.strip())
         self.assertEqual(expected_tmcf_data.strip(),
-                         self._actual_tmcf_data.strip())
+                         self.actual_tmcf_data.strip())
+        self.assertEqual(expected_tmcf_place.strip(),
+                         self.actual_tmcf_place.strip())
+
+    def test_create_csv(self):
+        """
+        This method is required to test between output generated
+        preprocess script and expected output files like CSV
+        """
+        expected_csv_file_path = os.path.join(
+            EXPECTED_FILES_DIR, "us_nces_demographics_private_school.csv")
+
+        expected_csv_data = ""
+        with open(expected_csv_file_path,
+                  encoding="utf-8") as expected_csv_file:
+            expected_csv_data = expected_csv_file.read()
+
+        self.assertEqual(expected_csv_data.strip(),
+                         self.actual_csv_data.strip())
+
+        expected_csv_file_path = os.path.join(
+            EXPECTED_FILES_DIR, "us_nces_demographics_private_place.csv")
+
+        expected_csv_data = ""
+        with open(expected_csv_file_path,
+                  encoding="utf-8") as expected_csv_file:
+            expected_csv_place = expected_csv_file.read()
+
+        self.assertEqual(expected_csv_place.strip(),
+                         self.actual_csv_place.strip())
+
+
+if __name__ == '__main__':
+    unittest.main()

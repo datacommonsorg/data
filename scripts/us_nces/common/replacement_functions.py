@@ -272,6 +272,10 @@ _SCHOOL_LEVEL = {
         "NCES_SchoolLevelOther",
     "Adult Education":
         "AdultEducation",
+    "Ungraded":
+        "UngradedSchool",
+    "Secondary":
+        "SecondarySchool",
     "†":
         "",
     "–":
@@ -427,6 +431,17 @@ _SCHOOL_PUBLIC_TYPE = {
     "–": "NCES_PublicSchoolTypeDataMissing"
 }
 
+_STATE_NAME = {
+    'DODEA (Overseas and Domestic)':
+        'NCES_DepartmentOfDefenseEducationActivity',
+    "Bureau of Indian Education":
+        "NCES_BureauOfIndianEducation",
+    "DEPARTMENT OF DEFENSE EDUCATION ACTIVITY":
+        "NCES_DepartmentOfDefenseEducationActivity",
+    "DEPARTMENT OF DEFENSE":
+        "NCES_DepartmentOfDefenseEducationActivity"
+}
+
 
 def replace_values(data_df: pd.DataFrame,
                    replace_with_all_mappers=False,
@@ -458,6 +473,7 @@ def replace_values(data_df: pd.DataFrame,
         "State_school_ID": _UNREADABLE_TEXT,
         "School_level": _UNREADABLE_TEXT,
         "County_code": _UNREADABLE_TEXT,
+        "ZIP4": _UNREADABLE_TEXT,
         "City": _CITY,
         "Highest_Grade_Dist": _SCHOOL_GRADE_PLACE,
         "Lowest_Grade_Dist": _SCHOOL_GRADE_PLACE,
@@ -475,9 +491,11 @@ def replace_values(data_df: pd.DataFrame,
         "prop_lunchEligibility": _LUNCH,
         "prop_facultyType": _SCHOOL_STAFF,
         "Agency_Name": _UNREADABLE_TEXT,
-        "School_Level": _UNREADABLE_TEXT,
+        "School_Level_17": _SCHOOL_LEVEL,
+        "School_Level_16": _SCHOOL_LEVEL,
         "State_Agency_ID": _UNREADABLE_TEXT,
-        "State_School_ID": _UNREADABLE_TEXT
+        "State_School_ID": _UNREADABLE_TEXT,
+        "State_Name": _STATE_NAME
     }
 
     df_columns = data_df.columns.to_list()

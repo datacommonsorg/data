@@ -26,6 +26,8 @@ TMCF_TEMPLATE = (
     "observationAbout: C:us_nces_demographics_{import_name}->school_state_code\n"
     "observationDate: C:us_nces_demographics_{import_name}->year\n"
     "scalingFactor: C:us_nces_demographics_{import_name}->scaling_factor\n"
+    "unit: C:us_nces_demographics_{import_name}->unit\n"
+    "observationPeriod: \"{observation_period}\"\n"
     "value: C:us_nces_demographics_{import_name}->observation\n")
 
 TMCF_TEMPLATE_PLACE_PRIVATE = (
@@ -61,7 +63,9 @@ TMCF_TEMPLATE_PLACE_DISTRICT = (
     "highestGrade: C:us_nces_demographics_district_place->Highest_Grade_Dist\n"
     "longitude: C:us_nces_demographics_district_place->Longitude\n"
     "latitude: C:us_nces_demographics_district_place->Latitude\n"
-    "ncesLocale: C:us_nces_demographics_district_place->Locale\n")
+    "ncesLocale: C:us_nces_demographics_district_place->Locale\n"
+    "schoolManagement: C:us_nces_demographics_district_place->School_Management\n"
+)
 
 TMCF_TEMPLATE_PLACE_PUBLIC = (
     "Node: E:us_nces_demographics_public_place->E0\n"
@@ -86,7 +90,9 @@ TMCF_TEMPLATE_PLACE_PUBLIC = (
     "charterStatus: C:us_nces_demographics_public_place->Charter_School\n"
     "nationalSchoolLunchProgram: C:us_nces_demographics_public_place->National_School_Lunch_Program\n"
     "schoolDistrict: C:us_nces_demographics_public_place->State_District_ID\n"
-    "schoolStateID: C:us_nces_demographics_public_place->State_School_ID\n")
+    "schoolStateID: C:us_nces_demographics_public_place->State_School_ID\n"
+    "schoolManagement: C:us_nces_demographics_public_place->School_Management\n"
+)
 # "NCES_districtID: C:us_nces_demographics_public_place->State_Agency_ID\n"
 # "stateDistrictID: C:us_nces_demographics_public_place->State_District_ID\n")
 

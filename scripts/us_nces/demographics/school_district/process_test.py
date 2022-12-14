@@ -23,7 +23,7 @@ import tempfile
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
 # pylint: disable=wrong-import-position
-from process import NCESPublicSchool
+from process import NCESDistrictSchool
 # pylint: enable=wrong-import-position
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
@@ -50,22 +50,22 @@ class TestProcess(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             cleaned_csv_file_path = os.path.join(tmp_dir,
-                                                 "test_district_school.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_district_school.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_district_school.tmcf")
+                                                 "test_school_district.csv")
+            mcf_file_path = os.path.join(tmp_dir, "test_school_district.mcf")
+            tmcf_file_path = os.path.join(tmp_dir, "test_school_district.tmcf")
             csv_path_place = os.path.join(tmp_dir,
-                                          "test_district_school_place.csv")
+                                          "test_school_district_place.csv")
             tmcf_path_place = os.path.join(tmp_dir,
-                                           "test_district_school_place.tmcf")
+                                           "test_school_district_place.tmcf")
 
-            loader = NCESPublicSchool(self.ip_data, cleaned_csv_file_path,
-                                      mcf_file_path, tmcf_file_path,
-                                      csv_path_place, tmcf_path_place)
+            loader = NCESDistrictSchool(self.ip_data, cleaned_csv_file_path,
+                                        mcf_file_path, tmcf_file_path,
+                                        csv_path_place, tmcf_path_place)
 
             loader.generate_csv()
             loader.generate_mcf()
             loader.generate_tmcf()
-            loader._generate_tmcf_public()
+            loader._generate_tmcf_district()
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()
@@ -88,13 +88,13 @@ class TestProcess(unittest.TestCase):
         preprocess script and expected output files like MCF File
         """
         expected_mcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_public_school.mcf")
+            EXPECTED_FILES_DIR, "us_nces_demographics_district_school.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_public_school.tmcf")
+            EXPECTED_FILES_DIR, "us_nces_demographics_district_school.tmcf")
 
         expected_tmcf_place_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_public_place.tmcf")
+            EXPECTED_FILES_DIR, "us_nces_demographics_district_place.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -121,7 +121,7 @@ class TestProcess(unittest.TestCase):
         preprocess script and expected output files like CSV
         """
         expected_csv_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_public_school.csv")
+            EXPECTED_FILES_DIR, "us_nces_demographics_district_school.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
@@ -132,7 +132,7 @@ class TestProcess(unittest.TestCase):
                          self.actual_csv_data.strip())
 
         expected_csv_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_public_place.csv")
+            EXPECTED_FILES_DIR, "us_nces_demographics_district_place.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
