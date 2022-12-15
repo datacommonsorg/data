@@ -53,16 +53,16 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
             elif row[1] == '\'890':
                 row[1] = 'YUG'
             elif country:
-              row[1]=country.alpha_3
+                row[1] = country.alpha_3
             new_row.append('country/' + row[1])
             new_row.append(row[3])
             new_row.append(row[5])
 
             # Create Year-Month column
             if row[9] == '7021':
-              new_row.append(row[8])
+                new_row.append(row[8])
             else:
-              new_row.append(row[8] + '-' + row[9][2:])
+                new_row.append(row[8] + '-' + row[9][2:])
 
             # Define ObservationPeriod
             if row[9] == '7021':
@@ -82,6 +82,5 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
 
             # Create a new column called "# Comments" with original row information
             new_row.append("#" + str(reader.line_num) + ' row original')
-
 
             writer.writerow(new_row)
