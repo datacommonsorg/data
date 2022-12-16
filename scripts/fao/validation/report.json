@@ -4,9 +4,9 @@
       "counters": {
         "NumRowSuccesses": "138962",
         "NumPVSuccesses": "2778432",
-        "Existence_NumChecks": "2678408",
+        "Existence_NumChecks": "2678331",
         "NumNodeSuccesses": "416785",
-        "Existence_NumDcCalls": "2"
+        "Existence_NumDcCalls": "1"
       }
     },
     "LEVEL_WARNING": {
@@ -741,14 +741,6 @@
     "userMessage": "Found nodes with different values for the same StatVarObservation :: observationAbout: 'XCD', variableMeasured: 'ExchangeRate_Currency_Local', observationDate: '1975-09', value1: 2.301, value2: 2.3009999",
     "counterKey": "Sanity_InconsistentSvObsValues"
   }, {
-    "level": "LEVEL_ERROR",
-    "location": {
-      "file": "output.csv",
-      "lineNumber": "8024"
-    },
-    "userMessage": "Found nodes with different values for the same StatVarObservation :: observationAbout: 'SUR', variableMeasured: 'ExchangeRate_Currency_Local', observationDate: '1990', value1: 4.3710775, value2: 2.249155",
-    "counterKey": "Sanity_InconsistentSvObsValues"
-  }, {
     "level": "LEVEL_WARNING",
     "location": {
       "file": "output.csv",
@@ -988,6 +980,14 @@
     },
     "userMessage": "Failed reference existence check :: property-ref: 'currencyIsoCode', node: 'E:FAOCurrency->E0'",
     "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_ERROR",
+    "location": {
+      "file": "output.csv",
+      "lineNumber": "8024"
+    },
+    "userMessage": "Found nodes with different values for the same StatVarObservation :: observationAbout: 'SUR', variableMeasured: 'ExchangeRate_Currency_Local', observationDate: '1990', value1: 4.3710775, value2: 2.249155",
+    "counterKey": "Sanity_InconsistentSvObsValues"
   }],
   "statsCheckSummary": [{
     "placeDcid": "ALL",

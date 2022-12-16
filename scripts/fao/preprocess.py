@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """A script that takes in thr .csv file and cleans the data, outputting a
 new .csv file named "output.csv".
 """
@@ -45,9 +44,9 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
         for row in reader:
             new_row = []
 
-            # Transform country into DC readable format of "country/ISO"
-            country = pycountry.countries.get(numeric=row[1][1:]).
-            # Account for dissolved nation needing updated M49
+            # Transform country into DC readable format of "country/ISO".
+            country = pycountry.countries.get(numeric=row[1][1:])
+            # Account for dissolved nation needing updated M49.
             if row[1] == '\'200':
                 row[1] = 'CSK'
             elif row[1] == '\'530':

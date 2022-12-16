@@ -35,13 +35,13 @@ In this dataset, each Country has an associated currency unit. To find the excha
 ### Artifacts
 
 #### Raw Data
-- [ExchangeRate_Currency.csv](ExchangeRate_Currency.csv)
+- [CurrencyFAO.csv](CurrencyFAO.csv)
 
 #### Cleaned Data
 - [output.csv](output.csv)
 
 #### Template MCFs
-- [expected_output.tmcf](expected_output.tmcf)
+- [CurrencyFAO.tmcf](CurrencyFAO.tmcf)
 
 #### Scripts
 - [preprocess.py](preprocess.py)
@@ -49,7 +49,7 @@ In this dataset, each Country has an associated currency unit. To find the excha
 
 #### Generating Artifacts:
 
-`new_nodes.mcf` and `expected_output.tmcf` were handwritten.
+`expected_output.tmcf` was handwritten.
 
 To generate `output.csv`, run:
 

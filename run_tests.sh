@@ -20,7 +20,7 @@ set -e
 PYTHON_FOLDERS="util/ scripts/ import-automation/"
 
 # Flag used signal if Python requirements have already been installed.
-PYTHON_REQUIREMENTS_INSTALLED=false
+PYTHON_REQUIREMENTS_INSTALLED=true
 
 function setup_python {
   python3 -m venv .env
