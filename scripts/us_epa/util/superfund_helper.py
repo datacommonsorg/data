@@ -19,7 +19,7 @@ import json
 import requests
 
 _GEO_COORDS = []
-_DC_RECON_API = "https://staging.recon.datacommons.org/coordinate/resolve"
+_DC_RECON_API = "https://api.datacommons.org/v1/recon/resolve/coordinate"
 
 
 def make_list_of_geos_to_resolve(latitude: np.float64,

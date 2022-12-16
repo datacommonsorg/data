@@ -1,0 +1,9 @@
+Node: E:Fire->E0
+typeOf: dcid:FirePixelDetectionEvent
+S2CellLevel13: C:Fire->s2CellId
+longitude: C:Fire->longitude
+latitude: C:Fire->latitude
+detectionInstrument: C:Fire->instrument
+estimatedSurfaceArea: C:Fire->area
+brightTI4: C:Fire->bright_ti4
+detectionDate: C:Fire->date

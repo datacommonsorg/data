@@ -20,6 +20,10 @@ func (m *MockResolveApi) Resolve(req *resolveReq) (*resolveResp, error) {
 				InId:   "ChIJkbeSa_BfYzARphNChaFPjNc",
 				OutIds: []string{"country/IND"},
 			},
+			resolveRespEntity{
+				InId:   "ChIJg0f4wxyUmjkRUlulOJtaCxE",
+				OutIds: []string{"wikidataId/Q1473962"},
+			},
 		},
 	}
 	return mockResp, nil
@@ -49,6 +53,13 @@ func getMockGeocodesBasic() *MockMapsClient {
 			},
 			"Mumbai": []maps.GeocodingResult{
 				maps.GeocodingResult{PlaceID: "ChIJwe1EZjDG5zsRaYxkjY_tpF0"},
+			},
+			// Return the same placeId for both Pratapgarhs.
+			"Pratapgarh UP": []maps.GeocodingResult{
+				maps.GeocodingResult{PlaceID: "ChIJg0f4wxyUmjkRUlulOJtaCxE"},
+			},
+			"Pratapgarh Rajasthan": []maps.GeocodingResult{
+				maps.GeocodingResult{PlaceID: "ChIJg0f4wxyUmjkRUlulOJtaCxE"},
 			},
 		},
 	}
