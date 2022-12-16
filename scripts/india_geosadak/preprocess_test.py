@@ -38,7 +38,7 @@ class TestPreprocess(unittest.TestCase):
         loader = GeoSadakLoader(
             source=os.path.join(
                 os.path.dirname(os.path.abspath(__file__)),
-                'test/Gujarat.zip',
+                'test/Gujarat-test.zip',
             ),
             state_name="Gujarat",
         )
