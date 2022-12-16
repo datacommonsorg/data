@@ -78,7 +78,9 @@ In the PR, please also include the validation results (`report.json` and `summar
 
 If you introduced new statistical variables, please create a Pull Request for them in the [schema repo](https://github.com/datacommonsorg/schema).
 
-After your PR is reviewed and approved, the Data Commons team will work with you to manifest the data in our internal system.
+## Manifesting Artifacts
+
+After your PR is reviewed and approved, the Data Commons team will work with you to manifest the artifacts you've created in our internal system.
 
 ## Alternate approach: Generate Instance MCF
 
