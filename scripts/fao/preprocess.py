@@ -12,19 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""A script that takes in thr .csv file and cleans the data, outputting a
+new .csv file named "output.csv".
+"""
+
 import csv
 import pycountry
 
-# Open the original .csv file for reading
+# Open the original .csv file for reading.
 with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
-    # Open the new .csv file for writing
+    # Open the new .csv file for writing.
     with open('output.csv', 'w') as csv_out:
-        # Create a reader and writer object
+        # Create a reader and writer object.
         reader = csv.reader(csv_in)
         writer = csv.writer(csv_out)
         headers = next(reader)
 
-        # Define columns for cleaned .csv file
+        # Define columns for cleaned .csv file.
         headers[0] = 'Country'
         headers[1] = 'ISOCurrencyCode'
         headers[2] = 'Currency'
@@ -37,13 +41,13 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
 
         writer.writerow(headers)
 
-        # Clean rows in the original file
+        # Clean rows in the original file.
         for row in reader:
             new_row = []
 
-            #Transform country into DC readable format of "country/ISO"
-            country = pycountry.countries.get(numeric=row[1][1:])
-            #Account for dissolved nation needing updated M49
+            # Transform country into DC readable format of "country/ISO"
+            country = pycountry.countries.get(numeric=row[1][1:]).
+            # Account for dissolved nation needing updated M49
             if row[1] == '\'200':
                 row[1] = 'CSK'
             elif row[1] == '\'530':
@@ -58,19 +62,19 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
             new_row.append(row[3])
             new_row.append(row[5])
 
-            # Create Year-Month column
+            # Create Year-Month column.
             if row[9] == '7021':
                 new_row.append(row[8])
             else:
                 new_row.append(row[8] + '-' + row[9][2:])
 
-            # Define ObservationPeriod
+            # Define ObservationPeriod.
             if row[9] == '7021':
                 new_row.append('P1Y')
             else:
                 new_row.append('P1M')
 
-            # Define value as local or standardized exchange rate per USD
+            # Define value as local or standardized exchange rate per USD.
             if row[3] == 'LCU':
                 new_row.append(row[12])
             else:
@@ -80,7 +84,7 @@ with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
             else:
                 new_row.append('')
 
-            # Create a new column called "# Comments" with original row information
+            # Create a new column called "# Comments" with original row information.
             new_row.append("#" + str(reader.line_num) + ' row original')
 
             writer.writerow(new_row)
