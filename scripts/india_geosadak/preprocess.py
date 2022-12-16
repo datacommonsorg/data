@@ -71,7 +71,7 @@ class GeoSadakLoader:
         is located in. Then, it renames the civic structure category to its
         appropriate StatVar name
         """
-        zipfile = "zip:///" + self.source
+        zipfile = "zip://" + self.source
         fac_state = geopandas.read_file(zipfile)
         state_name = self.state_name
 
