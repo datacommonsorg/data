@@ -50,6 +50,7 @@ class EarthengineImageTest(unittest.TestCase):
 
     # Compare image id (description) with expected.
     ee_image_id = str(ee_image.id())
+    print(f'Generated image: {ee_image_id})
     with open(os.path.join(_TESTDIR, 'sample_ee_image_id.txt'), 'r') as exp:
       expected_id = exp.read().strip()
       self.assertEqual(ee_image_id, expected_id)

@@ -141,6 +141,8 @@ _DEFAULT_DATASETS = {
     },
 }
 
+# Default configuration parameters.
+# override with --config=<file.json> or --config_params='{...}'
 EE_DEFAULT_CONFIG = {
     # Image loading settings.
     'datasets': _DEFAULT_DATASETS,  # Predefined assets
@@ -396,7 +398,7 @@ def ee_filter_band(image: ee.Image, config: dict) -> ee.Image:
         # Apply the band thresholds to get a bool image
         # with 1 for points that that meet the thresholds.
         if eq_threshold:
-            mask = image.eq(eq_threshold)
+            image = image.eq(eq_threshold)
         elif max_threshold is not None:
             if min_threshold:
                 image = image.gte(min_threshold).And(image.lte(max_threshold))
