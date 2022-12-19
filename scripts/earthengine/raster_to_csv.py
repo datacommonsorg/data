@@ -89,8 +89,8 @@ flags.DEFINE_string('output_date', None,
 flags.DEFINE_list('output_columns', [], 'Output columns in the CSV')
 flags.DEFINE_integer('output_precision', 6,
                      'number of precision digits for float data in putput.')
-flags.DEFINE_integer('s2_level', 11, 'S2 Level for S2 cell Id.')
-flags.DEFINE_integer('aggregate_s2_level', 10,
+flags.DEFINE_integer('s2_level', 13, 'S2 Level for S2 cell Id.')
+flags.DEFINE_integer('aggregate_s2_level', 13,
                      'Aggregate data upwards to s2 level.')
 flags.DEFINE_string('output_s2_place', '',
                     'Output prefix for S2 place csv and tmcf.')
@@ -679,7 +679,9 @@ def write_data_csv(data_points: dict,
         f'Writing {len(data_points)} rows with columns: {columns} into {filename} ...'
     )
     # create output directory if needed
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    output_dir = os.path.dirname(filename)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     # Open file in append mode or overwrite mode.
     output_mode = config.get('output_mode', 'w')
     if output_mode == 'a':
@@ -720,7 +722,8 @@ def write_s2place_csv_tmcf(data_points: dict,
     '''
     s2_places = {}
     top_contained_s2_level = config.get('aggregate_s2_level', None)
-    top_output_s2_level = config.get('output_upto_s2_level', top_contained_s2_level)
+    top_output_s2_level = config.get('output_upto_s2_level',
+                                     top_contained_s2_level)
     # Collect all S2 cells ids for data points and its parents.
     for data in data_points.values():
         s2cell_dcid = data.get('s2CellId', None)
@@ -732,8 +735,7 @@ def write_s2place_csv_tmcf(data_points: dict,
         if s2cell.level() < top_output_s2_level:
             continue
         s2_places[s2cell.id()] = {}
-        for level in range(top_output_s2_level, s2cell.level()):
-            s2_places[s2cell.parent(level).id()] = {}
+        s2_places[s2cell.parent(top_output_s2_level).id()] = {}
     logging.info(
         f'Generating place data for {len(s2_places)} places upto level {top_output_s2_level} into {output_prefix}.csv/tmcf'
     )
@@ -751,7 +753,9 @@ def write_s2place_csv_tmcf(data_points: dict,
             'name': f'L{s2level} S2 Cell {s2cell.id():#018x}',
         }
     output_prefix = os.path.splitext(output_prefix)[0]
-    os.makedirs(os.path.dirname(output_prefix), exist_ok=True)
+    output_dir = os.path.dirname(output_prefix)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     # Generate the place csv
     write_data_csv(s2_places, f'{output_prefix}.csv',
                    ['s2CellId', 'typeOf', 'containedInPlace'], config, counter)
@@ -1104,6 +1108,7 @@ def filter_data_points(data_points: dict,
 def process(input_geotiff: str,
             input_csv: str,
             output_csv: str,
+            output_s2_place: str,
             config: dict,
             counter: dict = None):
     '''Process raster or CSV inputs to generate CSV output.
@@ -1111,6 +1116,8 @@ def process(input_geotiff: str,
       input_geotiff: comma separated list of input geotiff file patterns
       input_csv: comma separated list of input csv files.
       output_csv: output csv file to generate
+      output_s2_place: output prefix for S2 cell place data with contianedIn
+        generates .csv and .tmcf files for all S2 cell ids added to output_csv.
       config: dictionary of config parameter:values.
     '''
     data_points = {}
@@ -1136,7 +1143,7 @@ def process(input_geotiff: str,
     filter_data_points(data_points, config.get('output_data_filter', None),
                        config, counter)
     write_data_csv(data_points, output_csv, [], config, counter)
-    s2_place_file = config.get('output_s2_place', None)
+    s2_place_file = config.get('output_s2_place', output_s2_place)
     if s2_place_file:
         write_s2place_csv_tmcf(data_points, s2_place_file, config, counter)
     _show_counters(counter)
