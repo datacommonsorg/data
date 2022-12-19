@@ -307,7 +307,7 @@ def main(_) -> None:
         try:
             _LAT_LNG_CACHE = json.loads(blob.download_as_string(client=None))
         except Exception as e:  # pylint: disable=broad-except
-            logging.info("Reading locations cache failed: %e" % e)
+            logging.error("Reading locations cache failed: %e" % e)
             _LAT_LNG_CACHE = {}
 
     df = process_df(df)
