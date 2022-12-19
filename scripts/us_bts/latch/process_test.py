@@ -95,3 +95,7 @@ class TestProcess(unittest.TestCase):
                          self._actual_mcf_data.strip())
         self.assertEqual(expected_tmcf_data.strip(),
                          self._actual_tmcf_data.strip())
+
+if __name__ == '__main__':
+    unittest.main()
+

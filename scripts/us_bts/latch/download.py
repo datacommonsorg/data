@@ -39,13 +39,13 @@ def download_file(input_urls: list, download_directory: str) -> None:
 
     for download_file_url in input_urls:
         # Example, file_name_with_compression_ext: NHTS_2009_transfer_AL.zip
-        file_name_with_ext = os.path.basename(download_file_url)
+        #file_name_with_ext = os.path.basename(download_file_url)
+        file_name_with_ext = download_file_url.split('/')[-1]
         # Example, file_name_without_compression_ext: NHTS_2009_transfer_AL.txt
         file_name_without_compression_ext = os.path.splitext(
             file_name_with_ext)[0]
 
         if ".zip" in file_name_with_ext:
-            out_file = os.path.join(path, file_name_without_compression_ext)
             req = requests.get(download_file_url)
             with zipfile.ZipFile(io.BytesIO(req.content)) as zipfileout:
                 zipfileout.extractall(path)
