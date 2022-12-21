@@ -297,8 +297,7 @@ def process_df(df):
 
 
 def main(_) -> None:
-    pre_2022_df = get_data(PRE_2022_FIRE_LOCATIONS_URL)
-    df = pre_2022_df
+    df = get_data(PRE_2022_FIRE_LOCATIONS_URL)
 
     storage_client = storage.Client(_GCS_PROJECT_ID)
     bucket = storage_client.bucket(_GCS_BUCKET)
