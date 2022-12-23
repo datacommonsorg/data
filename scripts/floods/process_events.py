@@ -363,8 +363,8 @@ class GeoEventsDict:
         for s2_cell_id in s2_cells:
             if s2_cell_id in self._active_event_by_s2:
                 self._active_event_by_s2.pop(s2_cell_id)
-        self._counters.add_counter('events-deactivated', 1, event_id)
-        self._counters.add_counter('events-s2-cells-deactivated', len(s2_cells),
+        self._counters.add_counter('events_deactivated', 1, event_id)
+        self._counters.add_counter('events_s2_cells_deactivated', len(s2_cells),
                                    event_id)
 
     def add_s2_data(self, s2_cell_id: int, date: str, pvs: dict) -> str:
@@ -418,7 +418,10 @@ class GeoEventsDict:
             event_ids.add(event.event_id())
         return event_ids
 
-    def write_events_csv(self, output_path: str):
+    def write_events_csv(self,
+                         output_path: str,
+                         event_ids: list = None,
+                         output_ended_events: bool = False):
         '''Write the events into a csv file.'''
         output_csv = utils.file_get_name(output_path, 'events', '.csv')
         output_columns = ['eventId', 'typeOf', 'name', 'startDate', 'endDate']
@@ -426,11 +429,9 @@ class GeoEventsDict:
         output_columns.extend(list(self._event_props))
         output_columns.append('s2Cells')
         output_columns.append('subEvents')
-        event_ids = self.get_all_event_ids()
-        logging.info(
-            f'Writing {len(event_ids)} events into {output_csv} with columns: {output_columns}'
-        )
-        output_completed_events = self._config.get('output_ended_events', False)
+        if not event_ids:
+            event_ids = self.get_all_event_ids()
+        num_output_events = 0
         with open(output_csv, 'w') as csv_file:
             writer = csv.DictWriter(csv_file,
                                     fieldnames=output_columns,
@@ -448,8 +449,8 @@ class GeoEventsDict:
                     continue
                 if output_ended_events and self.is_event_active(
                         event_id, self._max_date):
-                    self._counters.add_counter('output-ignored-active-events',
-                                               1, event_id)
+                    self._counters.add_counter(
+                        'output_csv_ignored_active_events', 1, event_id)
                     continue
                 data = dict()
                 data['eventId'] = event_id
@@ -476,15 +477,21 @@ class GeoEventsDict:
                     _format_property_values(
                         event_pvs, self._config.get('property_config', {})))
                 writer.writerow(data)
+                num_output_events += 1
                 self._counters.add_counter('output_events', 1)
                 self._counters.max_counter('max_output_events_dates',
                                            len(dates))
                 self._counters.max_counter('max_output_events_s2_cells',
                                            len(s2_cell_ids))
+        logging.info(
+            f'Wrote {num_output_events} events into {output_csv} with columns: {output_columns}'
+        )
         self._counters.print_counters()
 
     def write_events_svobs(self,
                            output_path: str,
+                           event_ids: list = None,
+                           output_ended_events: bool = False,
                            event_props: list = None,
                            min_date: str = '',
                            max_date: str = ''):
@@ -495,11 +502,8 @@ class GeoEventsDict:
             # No specific properties given. Generate SVObs for all properties.
             event_props = list(self._event_props)
         output_columns.extend(event_props)
-        event_ids = self.get_all_event_ids()
-        logging.info(
-            f'Writing {len(event_ids)} events into {output_csv} with columns: {output_columns}'
-        )
-        output_completed_events = self._config.get('output_ended_events', False)
+        if not event_ids:
+            event_ids = self.get_all_event_ids()
         with open(output_csv, 'w') as csv_file:
             writer = csv.DictWriter(csv_file,
                                     fieldnames=output_columns,
@@ -508,23 +512,24 @@ class GeoEventsDict:
                                     quotechar='"',
                                     quoting=csv.QUOTE_NONNUMERIC)
             writer.writeheader()
+            num_output_events = 0
             for event_id in event_ids:
                 event = self.get_event_by_id(event_id)
                 if not event:
-                    self._counters.add_counter('error-missing-event-for-id', 1,
+                    self._counters.add_counter('error_missing_event_for_id', 1,
                                                event_id)
                     logging.fatal(f'Unable to get event for {event_id}')
                     continue
                 event_dates = event.get_event_dates()
                 if not event_dates:
-                    self._counters.add_counter('ignored-event-no-dates', 1,
+                    self._counters.add_counter('ignored_event_no_dates', 1,
                                                event_id)
                     logging.debug(f'Ignoring event with no dates: {event}')
                     continue
                 if output_ended_events and self.is_event_active(
                         event_id, self._max_date):
-                    self._counters.add_counter('output-ignored-active-events-svobs',
-                                               1, event_id)
+                    self._counters.add_counter(
+                        'output_csv_ignored_active_events_svobs', 1, event_id)
                     continue
                 # Generate observations for each event date.
                 num_output_dates = 0
@@ -553,10 +558,14 @@ class GeoEventsDict:
                                                    value)
                         self._counters.max_counter(f'output_svobs_max_{prop}',
                                                    value)
-                self._counters.add_counter('output_events_with_svobs',
-                                           min(num_output_dates, 1))
-                self._counters.max_counter('max_output_events_svobs_dates',
-                                           num_output_dates)
+                if num_output_dates:
+                    num_output_events += 1
+                    self._counters.add_counter('output_events_with_svobs', 1)
+                    self._counters.max_counter('max_output_events_svobs_dates',
+                                               num_output_dates)
+        logging.info(
+            f'Wrote {num_output_events} events into {output_csv} with columns: {output_columns}'
+        )
         self._counters.print_counters()
 
     def write_active_events(self, filename: str):
@@ -642,8 +651,20 @@ def process_csv(csv_files: list, input_events_file: str, output_path: str,
             logging.info(
                 f'Created {len(s2_events_dict._event_by_id)} events for {num_rows} rows from file: {filename}'
             )
-    s2_events_dict.write_events_csv(output_path)
-    s2_events_dict.write_events_svobs(output_path)
+    # Output all ended events
+    s2_events_dict.write_events_csv(output_path=output_path,
+                                    output_ended_events=True)
+    s2_events_dict.write_events_svobs(output_path=output_path,
+                                      output_ended_events=True)
+    # Output active events into a separate set of files.
+    active_event_ids = s2_events_dict.get_active_event_ids(
+        s2_events_dict._max_date)
+    s2_events_dict.write_events_csv(output_path=output_path + '_active_',
+                                    event_ids=active_event_ids,
+                                    output_ended_events=False)
+    s2_events_dict.write_events_svobs(output_path=output_path + '_active_',
+                                      event_ids=active_event_ids,
+                                      output_ended_events=False)
     if output_events_file:
         s2_events_dict.write_active_events(output_events_file)
 
