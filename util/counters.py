@@ -42,10 +42,16 @@ class Counters():
       counters.add_counter('input_rows')
          .add_counter('output_rows', 10)
 
+      # Min/Max counters
+      counters.min_counter('min_area', some_area)
+      counters.max_counter('max_temp', some_temp)
+
       # Print counters on STDERR
       counters.print_counters()
       #   my_process_input_rows = 1
       #  my_process_output_rows = 10
+      #     my_process_max_temp = 36.5
+      #     my_process_min_area = 12.34
 
     Note: This object is not thread-safe.
     '''
@@ -75,6 +81,7 @@ class Counters():
         # Internal state
         # Start time for rate counters.
         self._start_time = time.perf_counter()
+        self._next_display_time = self._start_time + self._options.show_every_n_sec
 
     def add_counter(self,
                     counter_name: str,
@@ -147,6 +154,34 @@ class Counters():
         '''
         return self._counters.get(self._get_counter_name(name), 0)
 
+    def min_counter(self, name: str, value: int, debug_context: str = None):
+        '''Sets the named counter to the minimum of value.
+
+        Args:
+          name: name of the counter
+          value: new value to consider for minimum.
+          debug_context: Debug context suffix for the counter.
+        Returns:
+          this counter object
+        '''
+        if value <= self._counters.get(self._get_counter_name(name), value):
+            self.set_counter(name, value, debug_context)
+        return self
+
+    def max_counter(self, name: str, value: int, debug_context: str = None):
+        '''Sets the named counter to the maximum of values passed in.
+
+        Args:
+          name: name of the counter
+          value: new value to consider for maximum.
+          debug_context: Debug context suffix for the counter.
+        Returns:
+          this counter object
+        '''
+        if value >= self._counters.get(self._get_counter_name(name), value):
+            self.set_counter(name, value, debug_context)
+        return self
+
     def get_counters_string(self) -> str:
         '''Returns a formatted string of counter and values sorted by name.'''
         lines = ['Counters:']
@@ -202,6 +237,6 @@ class Counters():
         '''
         interval = self._options.show_every_n_sec
         if interval and isinstance(interval, int):
-            elapsed_time = int(time.perf_counter() - self._start_time)
-            if elapsed_time > 0 and elapsed_time % interval == 0:
+            if time.perf_counter() > self._next_display_time:
+                self._next_display_time += interval
                 self.print_counters()
