@@ -650,7 +650,7 @@ def add_data_point(data_dict: dict,
                 elif aggr == 'mean':
                     cur_num = cur_data.get(f'#{prop}:count', 0)
                     new_num = data_point.get(f'#{prop}:count', 1)
-                    cur_data[prop] = ((cur_val * num) +
+                    cur_data[prop] = ((cur_val * cur_num) +
                                       (new_val * new_num)) / (cur_num + new_num)
                     cur_data[f'#{prop}:count'] = cur_num + new_num
             # Update lat/long to centroid.

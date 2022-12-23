@@ -6,3 +6,4 @@ observationAbout: C:Flood->s2CellId
 observationDate: C:Flood->date
 observationPeriod: P1M
 unit: dcs:SquareKilometer
+measurementMethod: dcid:DataCommonsAggregate
