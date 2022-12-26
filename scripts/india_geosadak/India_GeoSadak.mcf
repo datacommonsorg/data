@@ -1,0 +1,27 @@
+Node: dcid:Count_CivicStructure_AgriculturalFacility
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+civicStructureType: dcs:AgriculturalFacility
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_CivicStructure_TransportOrAdminFacility
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+civicStructureType: dcs:TransportOrAdminFacility
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_CivicStructure_EducationFacility
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+civicStructureType: dcs:EducationFacility
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Count_CivicStructure_MedicalFacility
+typeOf: dcs:StatisticalVariable
+populationType: dcs:CivicStructure
+civicStructureType: dcs:MedicalFacility
+measuredProperty: dcs:count
+statType: dcs:measuredValue
