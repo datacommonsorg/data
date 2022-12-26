@@ -16,12 +16,13 @@ Replacement Functions for specific Column Values
 which are common for all the US Education Inputs.
 """
 import pandas as pd
+import numpy as np
 
 _COEDUCATIONAL = {
     "1-Coed (school has male and female students)": "Coeducational",
     "2-All-female (school only has all-female students)": "AllFemale",
     "3-All-male (school only has all-male students)": "AllMale",
-    "†": "",
+    np.nan: "",
     "–": ""
 }
 
@@ -29,7 +30,7 @@ _RELIGIOUS_AFFLIATION = {
     "1-Catholic": "Catholic",
     "2-Other religious": "OtherReligious",
     "3-Nonsectarian": "Nonsectarian",
-    "†": ""
+    np.nan: ""
 }
 
 _RELIGIOUS = {
@@ -97,7 +98,7 @@ _RELIGIOUS = {
         "WisconsinEvangelicalLutheranSynod",
     "Catholic":
         "Catholicism",
-    "†":
+    np.nan:
         ""
 }
 
@@ -118,7 +119,7 @@ _SCHOOL_TYPE = {
         "NCES_AlternativeOrOther",
     "7-Early Childhood Program/child care center":
         "NCES_EarlyChildhoodProgramOrChildCareCenter",
-    "†":
+    np.nan:
         "NCES_DataMissing",
     "–":
         "NCES_DataMissing",
@@ -172,7 +173,7 @@ _SCHOOL_GRADE = {
     "13th grade": "SchoolGrade13",
     "13th Grade": "SchoolGrade13",
     "Grade 13": "SchoolGrade13",
-    "†": "NCES_GradeDataMissing",
+    np.nan: "NCES_GradeDataMissing",
     "–": "NCES_GradeDataMissing",
     "All Ungraded": "NCESUngradedClasses",
     "Adult Education": "AdultEducation",
@@ -230,13 +231,13 @@ _SCHOOL_GRADE_PLACE = {
     "13th grade": "SchoolGrade13",
     "13th Grade": "SchoolGrade13",
     "Grade 13": "SchoolGrade13",
-    "†": "NCES_GradeDataMissing",
+    np.nan: "NCES_GradeDataMissing",
     "–": "NCES_GradeDataMissing",
     "Adult Education": "AdultEducation",
     "Transitional 1st grade": "TransitionalGrade1"
 }
 
-_PHYSICAL_ADD = {"†": "", "–": "", "Po Box": "PO BOX"}
+_PHYSICAL_ADD = {np.nan: "", "–": "", "Po Box": "PO BOX"}
 
 # pylint:disable=line-too-long
 _SCHOOL_LEVEL = {
@@ -276,7 +277,7 @@ _SCHOOL_LEVEL = {
         "UngradedSchool",
     "Secondary":
         "SecondarySchool",
-    "†":
+    np.nan:
         "",
     "–":
         ""
@@ -314,7 +315,7 @@ _LUNCH = {
         "NCES_NationalSchoolLunchProgramYesUnderProvision2",
     "Yes under Provision 3":
         "NCES_NationalSchoolLunchProgramYesUnderProvision3",
-    "†":
+    np.nan:
         "NCES_MagnetDataMissing",
     "–":
         "NCES_MagnetDataMissing"
@@ -322,7 +323,7 @@ _LUNCH = {
 
 _SCHOOL_STAFF = {
     "Paraprofessionals/Instructional Aides":
-        "ParaProfessionalsAidesOrInstructionalAides",
+        "ParaProfessionalsAidesOrInstructionalAide",
     "Instructional Coordinators":
         "InstructionalCoordinatorOrSupervisor",
     "Elementary School Counselor":
@@ -330,19 +331,19 @@ _SCHOOL_STAFF = {
     "Secondary School Counselor":
         "SecondarySchoolCounselor",
     "Other Guidance Counselors":
-        "SchoolOtherGuidanceCounselors",
+        "SchoolOtherGuidanceCounselor",
     "Total Guidance Counselors":
-        "TotalGuidanceCounselors",
+        "TotalGuidanceCounselor",
     "Librarians/media specialists":
-        "LibrariansSpecialistsOrMediaSpecialists",
+        "LibrariansSpecialistsOrMediaSpecialist",
     "Media Support Staff":
         "MediaSupportStaff",
     "LEA Administrators":
-        "LEAAdministrators",
+        "LEAAdministrator",
     "LEA Administrative Support Staff":
         "LEAAdministrativeSupportStaff",
     "School Administrators":
-        "SchoolAdministrators",
+        "SchoolAdministrator",
     "School Administrative Support Staff":
         "SchoolAdministrativeSupportStaff",
     "Student Support Services Staff":
@@ -351,7 +352,13 @@ _SCHOOL_STAFF = {
         "SchoolPsychologist",
     "Other Support Services Staff":
         "SchoolOtherSupportServicesStaff",
-    "†":
+    "Elementary Teachers":
+        "ElementaryTeacher",
+    "Secondary Teachers":
+        "SecondaryTeacher",
+    "Ungraded Teachers":
+        "UngradedTeacher",
+    np.nan:
         "",
 }
 
@@ -382,29 +389,32 @@ _LOCALE = {
     '33-Town: Remote': "NCES_TownRemote",
     '31-Town: Fringe': "NCES_TownFringe",
     '43-Rural: Remote': "NCES_RuralRemote",
-    "†": "NCES_LocaleDataMissing",
+    np.nan: "NCES_LocaleDataMissing",
     "–": "NCES_LocaleDataMissing"
 }
-_UNREADABLE_TEXT = {"†": "", "–": ""}
 
-_CITY = {"†": "", "–": "", " ": ""}
+_UNREADABLE_TEXT = {"–": np.nan, "†": np.nan}
+
+_NAN = {np.nan: "", "nan": ""}
+
+_CITY = {np.nan: "", "–": "", " ": ""}
 
 _MAGNET = {
     "1-Yes": "NCES_MagnetYes",
     "2-No": "NCES_MagnetNo",
-    "†": "NCES_MagnetDataMissing",
+    np.nan: "NCES_MagnetDataMissing",
     "–": "NCES_MagnetDataMissing"
 }
 
 _CHARTER = {
-    "†": "NCES_CharterDataMissing",
+    np.nan: "NCES_CharterDataMissing",
     "1-Yes": "NCES_CharterYes",
     "2-No": "NCES_CharterNo",
     "–": "NCES_CharterDataMissing"
 }
 
 _TITLE = {
-    "†":
+    np.nan:
         "NCES_TitleISchoolStatusDataMissing",
     "–":
         "NCES_TitleISchoolStatusDataMissing",
@@ -427,7 +437,7 @@ _SCHOOL_PUBLIC_TYPE = {
     "4-Alternative/other school": "NCES_PublicSchoolTypeOther",
     "2-Special education school": "NCES_PublicSchoolTypeSpecialEducation",
     "3-Vocational school": "NCES_PublicSchoolTypeVocational",
-    "†": "NCES_PublicSchoolTypeDataMissing",
+    np.nan: "NCES_PublicSchoolTypeDataMissing",
     "–": "NCES_PublicSchoolTypeDataMissing"
 }
 
@@ -440,6 +450,77 @@ _STATE_NAME = {
         "NCES_DepartmentOfDefenseEducationActivity",
     "DEPARTMENT OF DEFENSE":
         "NCES_DepartmentOfDefenseEducationActivity"
+}
+
+RENAMEING_PRIVATE_COLUMNS = {
+    "Private School Name":
+        "Private_School_Name",
+    "School ID - NCES Assigned":
+        "SchoolID",
+    "School Type":
+        "School_Type",
+    "School's Religious Affiliation or Orientation":
+        "School_Religion_Affliation",
+    "Religious Orientation":
+        "School_Religion",
+    "Physical Address":
+        "Physical_Address",
+    "Phone Number":
+        "PhoneNumber",
+    "Lowest Grade Taught":
+        "Lowest_Grade",
+    "Highest Grade Taught":
+        "Highest_Grade",
+    "School Level":
+        "SchoolGrade",
+    "ZIP + 4":
+        "ZIP4"
+}
+
+RENAMING_PUBLIC_COLUMNS = {
+    'County Number': 'County_code',
+    'School Name': 'Public_School_Name',
+    'School ID - NCES Assigned': 'School_Id',
+    'Lowest Grade Offered': 'Lowest_Grade_Public',
+    'Highest Grade Offered': 'Highest_Grade_Public',
+    'Phone Number': 'PhoneNumber',
+    'ANSI/FIPS State Code': 'State_code',
+    'Location Address 1': 'Physical_Address',
+    'Location City': 'City',
+    'Location ZIP': 'ZIP',
+    'Magnet School': 'Magnet_School',
+    'Charter School': 'Charter_School',
+    'School Type': 'School_Type_Public',
+    'Title I School Status': 'Title_I_School_Status',
+    'National School Lunch Program': 'National_School_Lunch_Program',
+    'School Level (SY 2017-18 onward)': 'School_Level_17',
+    'State School ID': 'State_School_ID',
+    'State Agency ID': 'State_Agency_ID',
+    'State Abbr': 'State_Abbr',
+    'Agency Name': 'Agency_Name',
+    'Location ZIP4': 'Location_ZIP4',
+    'Agency ID - NCES Assigned': 'State_District_ID',
+    'School Level': 'School_Level_16',
+    'State Name': 'State_Name'
+}
+
+RENAMING_DISTRICT_COLUMNS = {
+    'Location ZIP': 'ZIP',
+    'County Number': 'County_code',
+    'Agency Name': 'District_School_name',
+    'Agency ID - NCES Assigned': 'School_ID',
+    'Agency Type': 'School_Type',
+    'State Agency ID': 'State_school_ID',
+    'Phone Number': 'PhoneNumber',
+    'ANSI/FIPS State Code': 'State_code',
+    'Location Address 1': 'Physical_Address',
+    'Location City': 'City',
+    'Agency Level (SY 2017-18 onward)': 'Agency_level',
+    "Lowest Grade Offered": "Lowest_Grade_Dist",
+    "Highest Grade Offered": "Highest_Grade_Dist",
+    "State Name": "State_Name",
+    "Location ZIP4": "Location_ZIP4",
+    "State Abbr": "State_Abbr"
 }
 
 
@@ -461,19 +542,19 @@ def replace_values(data_df: pd.DataFrame,
         "Gender": _GENDER,
         "Physical Address": _PHYSICAL_ADD,
         "Physical_Address": _PHYSICAL_ADD,
-        "ZIP": _UNREADABLE_TEXT,
-        "Phone Number": _UNREADABLE_TEXT,
-        "PhoneNumber": _UNREADABLE_TEXT,
-        "Agency_level": _UNREADABLE_TEXT,
+        "ZIP": _NAN,
+        "Phone Number": _NAN,
+        "PhoneNumber": _NAN,
+        "Agency_level": _NAN,
         "Lowest_Grade": _SCHOOL_GRADE,
         "Highest_Grade": _SCHOOL_GRADE,
-        "Latitude": _UNREADABLE_TEXT,
-        "Longitude": _UNREADABLE_TEXT,
+        "Latitude": _NAN,
+        "Longitude": _NAN,
         "Locale": _LOCALE,
-        "State_school_ID": _UNREADABLE_TEXT,
-        "School_level": _UNREADABLE_TEXT,
-        "County_code": _UNREADABLE_TEXT,
-        "ZIP4": _UNREADABLE_TEXT,
+        "State_school_ID": _NAN,
+        "School_level": _NAN,
+        "County_code": _NAN,
+        "ZIP4": _NAN,
         "City": _CITY,
         "Highest_Grade_Dist": _SCHOOL_GRADE_PLACE,
         "Lowest_Grade_Dist": _SCHOOL_GRADE_PLACE,
@@ -484,17 +565,17 @@ def replace_values(data_df: pd.DataFrame,
         "Title_I_School_Status": _TITLE,
         "Magnet_School": _MAGNET,
         "National_School_Lunch_Program": _LUNCH,
-        "Location_ZIP4": _UNREADABLE_TEXT,
+        "Location_ZIP4": _NAN,
         "prop_race": _RACE_,
         "prop_schoolGradeLevel": _SCHOOL_GRADE,
         "prop_gender": _GENDER,
         "prop_lunchEligibility": _LUNCH,
         "prop_facultyType": _SCHOOL_STAFF,
-        "Agency_Name": _UNREADABLE_TEXT,
+        "Agency_Name": _NAN,
         "School_Level_17": _SCHOOL_LEVEL,
         "School_Level_16": _SCHOOL_LEVEL,
-        "State_Agency_ID": _UNREADABLE_TEXT,
-        "State_School_ID": _UNREADABLE_TEXT,
+        "State_Agency_ID": _NAN,
+        "State_School_ID": _NAN,
         "State_Name": _STATE_NAME
     }
 

@@ -33,7 +33,10 @@ import numpy as np
 
 pd.set_option("display.max_columns", None)
 
-from common.replacement_functions import replace_values
+from common.replacement_functions import (replace_values, _UNREADABLE_TEXT,
+                                          RENAMEING_PRIVATE_COLUMNS,
+                                          RENAMING_PUBLIC_COLUMNS,
+                                          RENAMING_DISTRICT_COLUMNS)
 from common.prop_conf import *
 from common.place_conf import *
 
@@ -108,7 +111,6 @@ class USEducation:
             return pd.read_csv(f_content)
 
     def _extract_year_from_headers(self, headers: list) -> str:
-        #year_pattern = r"(\[District||(Private|Public) School\])(\s)(?P<year>\d\d\d\d-\d\d)"
         year_pattern = r"\[(District|((Private|Public) School))\](\s)(?P<year>\d\d\d\d-\d\d)"
         for header in headers:
             match = re.search(year_pattern, header)
@@ -291,7 +293,6 @@ class USEducation:
         return data_df
 
     def _verify_year_uniqueness(self, headers: list) -> bool:
-        #year_pattern = r"(\[District||(Private|Public) School\])(\s)(?P<year>\d\d\d\d-\d\d)"
         year_pattern = r"\[(District|((Private|Public) School))\](\s)(?P<year>\d\d\d\d-\d\d)"
         year_match = True
         for header in headers:
@@ -305,20 +306,8 @@ class USEducation:
         return year_match
 
     def _transform_private_place(self):
-        self._final_df_place['ZIP'] = pd.to_numeric(self._final_df_place['ZIP'],
-                                                    errors='coerce')
         self._final_df_place['ANSI/FIPS County Code'] = pd.to_numeric(
             self._final_df_place['ANSI/FIPS County Code'], errors='coerce')
-
-        self._final_df_place = self._final_df_place.fillna(-1)
-        float_col = self._final_df_place.select_dtypes(include=['float64'])
-        for col in float_col.columns.values:
-            self._final_df_place[col] = self._final_df_place[col].astype(
-                'int64')
-            self._final_df_place[col] = self._final_df_place[col].astype(
-                "str").str.replace("-1", "")
-        self._final_df_place['Phone Number'] = pd.to_numeric(
-            self._final_df_place['Phone Number'], errors='coerce')
 
         self._final_df_place['ZIP'] = self._final_df_place['ZIP'].astype(
             str).str.zfill(5)
@@ -332,50 +321,22 @@ class USEducation:
             'ANSI/FIPS County Code'].apply(lambda x: 'geoId/' + x
                                            if x != '' else '')
         self._final_df_place = self._final_df_place.rename(
-            columns={
-                "Private School Name":
-                    "Private_School_Name",
-                "School ID - NCES Assigned":
-                    "SchoolID",
-                "School Type":
-                    "School_Type",
-                "School's Religious Affiliation or Orientation":
-                    "School_Religion_Affliation",
-                "Religious Orientation":
-                    "School_Religion",
-                "Physical Address":
-                    "Physical_Address",
-                "Phone Number":
-                    "PhoneNumber",
-                "Lowest Grade Taught":
-                    "Lowest_Grade",
-                "Highest Grade Taught":
-                    "Highest_Grade",
-                "School Level":
-                    "SchoolGrade",
-                "ZIP + 4":
-                    "ZIP4"
-            })
-
+            columns=RENAMEING_PRIVATE_COLUMNS)
         self._final_df_place = replace_values(self._final_df_place,
                                               replace_with_all_mappers=False,
                                               regex_flag=False)
         self._final_df_place["Physical_Address"] = self._final_df_place[
-            "Physical_Address"] + " " + self._final_df_place[
-                "City"] + " " + self._final_df_place["ZIP4"]
+            "Physical_Address"].astype(
+                str) + " " + self._final_df_place["City"].astype(
+                    str) + " " + self._final_df_place["ZIP4"].astype(str)
 
         col_to_dcs = [
             "School_Type", "School_Religion", "Coeducational", "Lowest_Grade",
             "Highest_Grade", "SchoolGrade"
         ]
         for col in col_to_dcs:
-            self._final_df_place[col] = self._final_df_place[col].replace(
-                to_replace={'': pd.NA})
-            self._final_df_place[col] = "dcs:" + self._final_df_place[col]
-        self._final_df_place['PhoneNumber'] = self._final_df_place[
-            'PhoneNumber'].astype('Int64').astype(str)
-        self._final_df_place['PhoneNumber'] = self._final_df_place[
-            'PhoneNumber'].replace('<NA>', '', regex=True)
+            self._final_df_place[col] = self._final_df_place[col].apply(
+                lambda x: 'dcs:' + str(x) if x != '' else '')
         zip_list = list(pd.unique(self._final_df_place['ZIP']))
         county_list = list(pd.unique(self._final_df_place['County_code']))
 
@@ -415,61 +376,13 @@ class USEducation:
             self._final_df_place["Private_School_Name"].str.title())
         self._final_df_place = self._final_df_place.sort_values(by=["year"],
                                                                 ascending=False)
+
         self._final_df_place = self._final_df_place.drop_duplicates(
             subset=["school_state_code"]).reset_index(drop=True)
 
     def _transform_public_place(self):
         self._final_df_place = self._final_df_place.rename(
-            columns={
-                'County Number':
-                    'County_code',
-                'School Name':
-                    'Public_School_Name',
-                'School ID - NCES Assigned':
-                    'School_Id',
-                'Lowest Grade Offered':
-                    'Lowest_Grade_Public',
-                'Highest Grade Offered':
-                    'Highest_Grade_Public',
-                'Phone Number':
-                    'PhoneNumber',
-                'ANSI/FIPS State Code':
-                    'State_code',
-                'Location Address 1':
-                    'Physical_Address',
-                'Location City':
-                    'City',
-                'Location ZIP':
-                    'ZIP',
-                'Magnet School':
-                    'Magnet_School',
-                'Charter School':
-                    'Charter_School',
-                'School Type':
-                    'School_Type_Public',
-                'Title I School Status':
-                    'Title_I_School_Status',
-                'National School Lunch Program':
-                    'National_School_Lunch_Program',
-                'School Level (SY 2017-18 onward)':
-                    'School_Level_17',
-                'State School ID':
-                    'State_School_ID',
-                'State Agency ID':
-                    'State_Agency_ID',
-                'State Abbr':
-                    'State_Abbr',
-                'Agency Name':
-                    'Agency_Name',
-                'Location ZIP4':
-                    'Location_ZIP4',
-                'Agency ID - NCES Assigned':
-                    'State_District_ID',
-                'School Level':
-                    'School_Level_16',
-                'State Name':
-                    'State_Name'
-            })
+            columns=RENAMING_PUBLIC_COLUMNS)
         self._final_df_place = replace_values(self._final_df_place,
                                               replace_with_all_mappers=False,
                                               regex_flag=False)
@@ -595,24 +508,7 @@ class USEducation:
         self._final_df_place[
             'geoID'] = "sch" + self._final_df_place['Agency ID - NCES Assigned']
         self._final_df_place = self._final_df_place.rename(
-            columns={
-                'Location ZIP': 'ZIP',
-                'County Number': 'County_code',
-                'Agency Name': 'District_School_name',
-                'Agency ID - NCES Assigned': 'School_ID',
-                'Agency Type': 'School_Type',
-                'State Agency ID': 'State_school_ID',
-                'Phone Number': 'PhoneNumber',
-                'ANSI/FIPS State Code': 'State_code',
-                'Location Address 1': 'Physical_Address',
-                'Location City': 'City',
-                'Agency Level (SY 2017-18 onward)': 'Agency_level',
-                "Lowest Grade Offered": "Lowest_Grade_Dist",
-                "Highest Grade Offered": "Highest_Grade_Dist",
-                "State Name": "State_Name",
-                "Location ZIP4": "Location_ZIP4",
-                "State Abbr": "State_Abbr"
-            })
+            columns=RENAMING_DISTRICT_COLUMNS)
         self._final_df_place = replace_values(self._final_df_place,
                                               replace_with_all_mappers=False,
                                               regex_flag=False)
@@ -701,8 +597,6 @@ class USEducation:
             subset=["school_state_code"]).reset_index(drop=True)
 
     def _parse_file(self, raw_df: pd.DataFrame) -> pd.DataFrame:
-        df_append = []
-        df_final_place = pd.DataFrame()
         self._year = self._extract_year_from_headers(
             raw_df.columns.values.tolist())
         year_check = self._verify_year_uniqueness(
@@ -721,13 +615,15 @@ class USEducation:
         for col in df_cleaned.columns.values.tolist():
             df_cleaned[col] = \
                 df_cleaned[col].astype('str').str.strip()
-
+        sort_list = [
+            "ZIP + 4", "Total Students (Ungraded & PK-12)",
+            "Grades 1-8 Students", "Grades 9-12 Students"
+        ]
         df_cleaned = self._clean_columns(df_cleaned)
 
         if self._import_name == "private_school":
             df_cleaned["school_state_code"] = \
-                "nces/" + df_cleaned["School ID - NCES Assigned"] + \
-                '_' + df_cleaned["ANSI/FIPS State Code"]
+                "nces/" + df_cleaned["School ID - NCES Assigned"]
         elif self._import_name == "public_school":
             df_cleaned["school_state_code"] = \
                 "nces/" + df_cleaned["School ID - NCES Assigned"]
@@ -757,6 +653,11 @@ class USEducation:
             r = re.compile(pattern)
             data_place += list(filter(r.match, curr_place))
 
+        df_cleaned = df_cleaned.replace(_UNREADABLE_TEXT)
+        df_cleaned = df_cleaned.dropna(how='all', subset=data_cols)
+        df_cleaned = df_cleaned.sort_values(by=data_cols, ascending=True)
+        df_cleaned = df_cleaned.drop_duplicates(
+            subset=["School ID - NCES Assigned"], keep="first")
         df_place = df_cleaned[data_place]
 
         if self._import_name in [

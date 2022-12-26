@@ -30,7 +30,9 @@ POSSIBLE_DATA_COLUMNS = [
     "Prekindergarten and Kindergarten.*"
 ]
 
-EXCLUDE_DATA_COLUMNS = ["(Ungraded & K-12)"]
+EXCLUDE_DATA_COLUMNS = [
+    "(Ungraded & K-12)",
+]
 
 POSSIBLE_PLACE_COLUMNS = [
     "school_state_code", "ZIP + 4", "ZIP", ".*County.*", ".*School.*",

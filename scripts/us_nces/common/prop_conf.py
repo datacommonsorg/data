@@ -53,7 +53,6 @@ TMCF_TEMPLATE_PLACE_DISTRICT = (
     "address: C:us_nces_demographics_district_place->Physical_Address\n"
     "name: C:us_nces_demographics_district_place->District_School_name\n"
     "geoId: C:us_nces_demographics_district_place->geoID\n"
-    # "location: C:us_nces_demographics_district_place->City\n"
     "ncesId: C:us_nces_demographics_district_place->School_ID\n"
     "postalCode: C:us_nces_demographics_district_place->ZIP\n"
     "containedInPlace: C:us_nces_demographics_district_place->ContainedInPlace\n"
@@ -80,8 +79,6 @@ TMCF_TEMPLATE_PLACE_PUBLIC = (
     "highestGrade: C:us_nces_demographics_public_place->Highest_Grade_Public\n"
     "schoolGradeLevel: C:us_nces_demographics_public_place->School_Level\n"
     "educationalMethod: C:us_nces_demographics_public_place->School_Type_Public\n"
-    #"schoolReligiousOrientation: C:us_nces_demopublic_district_place->School_Religion\n"
-    #"coeducationalType: C:us_nces_demographics_public_place->Coeducational\n"
     "longitude: C:us_nces_demographics_public_place->Longitude\n"
     "latitude: C:us_nces_demographics_public_place->Latitude\n"
     "ncesLocale: C:us_nces_demographics_public_place->Locale\n"
@@ -93,8 +90,6 @@ TMCF_TEMPLATE_PLACE_PUBLIC = (
     "schoolStateID: C:us_nces_demographics_public_place->State_School_ID\n"
     "schoolManagement: C:us_nces_demographics_public_place->School_Management\n"
 )
-# "NCES_districtID: C:us_nces_demographics_public_place->State_Agency_ID\n"
-# "stateDistrictID: C:us_nces_demographics_public_place->State_District_ID\n")
 
 _DENOMINATOR_PROP = {
     "Pupil/Teacher Ratio": "Count_Teacher",
@@ -177,13 +172,7 @@ _SCHOOL_GRADE_PATTERN = (r"("
                          r"|"
                          r"Grades 9-12"
                          r"|"
-                         r"Elementary Teachers"
-                         r"|"
-                         r"Secondary Teachers"
-                         r"|"
                          r"Ungraded Students"
-                         r"|"
-                         r"Ungraded Teachers"
                          r"|"
                          r"Adult Education"
                          r")")
@@ -288,6 +277,12 @@ _SCHOOL_STAFF_PATTERN = (r"("
                          r"School Administrators"
                          r"|"
                          r"School Psychologist"
+                         r"|"
+                         r"Elementary Teachers"
+                         r"|"
+                         r"Secondary Teachers"
+                         r"|"
+                         r"Ungraded Teachers"
                          r"|"
                          r"Other Support Services Staff"
                          r")")
