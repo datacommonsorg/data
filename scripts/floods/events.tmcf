@@ -1,0 +1,8 @@
+Node: E:Events->E0
+typeOf: C:Events->typeOf
+dcid: C:Events->eventId
+name: C:Events->name
+startDate: C:Events->startDate
+endDate: C:Events->endDate
+startLocation: C:Events->startLocation
+area: C:Events->area
