@@ -1,8 +1,7 @@
 Node: E:FAOCurrency->E0
-typeOf: schema:Currency
+typeOf: dcs:Currency
 dcid: C:FAOCurrency->Currency
 name: C:FAOCurrency->Currency
-currencyIsoCode: C:FAOCurrency->ISOCurrencyCode
 
 
 Node: E:FAOCurrency->E1
