@@ -38,10 +38,10 @@ In this dataset, each Country has an associated currency unit. To find the excha
 - [CurrencyFAO.csv](CurrencyFAO.csv)
 
 #### Cleaned Data
-- [cleaned_output.csv](cleaned_output.csv)
+- [cleaned_output.csv](output/cleaned_output.csv)
 
 #### Template MCFs
-- [CurrencyFAO.tmcf](CurrencyFAO.tmcf)
+- [CurrencyFAO.tmcf](output/CurrencyFAO.tmcf)
 
 #### Scripts
 - [preprocess.py](preprocess.py)
@@ -49,9 +49,9 @@ In this dataset, each Country has an associated currency unit. To find the excha
 
 #### Generating Artifacts:
 
-`expected_output.tmcf` was handwritten.
+`CurrencyFAO.tmcf` was handwritten.
 
-To generate `output.csv`, run:
+To generate `cleaned_output.csv`, run:
 
 ```bash
 python3 preproccess.py
