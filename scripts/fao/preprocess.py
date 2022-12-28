@@ -38,49 +38,50 @@ DISSOLVED_COUNTRIES = {
 
 # Open the original .csv file for reading.
 with open(INPUT_CSV_FILENAME, 'r', encoding='ISO-8859-1') as csv_in:
-  # Open the new .csv file for writing.
-  with open(OUTPUT_CSV_FILENAME, 'w') as csv_out:
-    # Create a reader and writer object.
-    reader = csv.DictReader(csv_in, delimiter=',')
-    writer = csv.DictWriter(csv_out, fieldnames=HEADERS_OUT)
-    writer.writeheader()
-    for row_dict in reader:
-      processed_dict = {}
-      # Create Currency column.
-      processed_dict['Currency'] = row_dict['ISO Currency Code']
+    # Open the new .csv file for writing.
+    with open(OUTPUT_CSV_FILENAME, 'w') as csv_out:
+        # Create a reader and writer object.
+        reader = csv.DictReader(csv_in, delimiter=',')
+        writer = csv.DictWriter(csv_out, fieldnames=HEADERS_OUT)
+        writer.writeheader()
+        for row_dict in reader:
+            processed_dict = {}
+            # Create Currency column.
+            processed_dict['Currency'] = row_dict['ISO Currency Code']
 
-      # Create Year-Month column.
-      if row_dict['Months Code'] == YEAR_CODE:
-        processed_dict['YearMonth'] = row_dict['Year']
-      else:
-        processed_dict['YearMonth'] = '%s-%s' % (
-            row_dict['Year'], row_dict['Months Code'].replace("70", ""))
+            # Create Year-Month column.
+            if row_dict['Months Code'] == YEAR_CODE:
+                processed_dict['YearMonth'] = row_dict['Year']
+            else:
+                processed_dict['YearMonth'] = '%s-%s' % (
+                    row_dict['Year'], row_dict['Months Code'].replace("70", ""))
 
-      # Transform country into DC readable format of "country/ISO".
-      country_iso = "country/"
-      if row_dict['Area Code (M49)'] in DISSOLVED_COUNTRIES:
-        # Account for dissolved nation needing updated M49.
-        country_iso += DISSOLVED_COUNTRIES[row_dict['Area Code (M49)']]
-      else:
-        pycountry_decoded = pycountry.countries.get(
-            numeric=row_dict['Area Code (M49)'].replace("\'", ""))
-        country_iso += pycountry_decoded.alpha_3
-      processed_dict['Country'] = country_iso
+            # Transform country into DC readable format of "country/ISO".
+            country_iso = "country/"
+            if row_dict['Area Code (M49)'] in DISSOLVED_COUNTRIES:
+                # Account for dissolved nation needing updated M49.
+                country_iso += DISSOLVED_COUNTRIES[row_dict['Area Code (M49)']]
+            else:
+                pycountry_decoded = pycountry.countries.get(
+                    numeric=row_dict['Area Code (M49)'].replace("\'", ""))
+                country_iso += pycountry_decoded.alpha_3
+            processed_dict['Country'] = country_iso
 
-      # Define ObservationPeriod.
-      if row_dict['Months Code'] == YEAR_CODE:
-        processed_dict['ObservationPeriod'] = 'P1Y'
-      else:
-        processed_dict['ObservationPeriod'] = 'P1M'
+            # Define ObservationPeriod.
+            if row_dict['Months Code'] == YEAR_CODE:
+                processed_dict['ObservationPeriod'] = 'P1Y'
+            else:
+                processed_dict['ObservationPeriod'] = 'P1M'
 
-      # Define value as local or standardized exchange rate per USD.
-      if row_dict['Element Code'] == 'LCU':
-        processed_dict['ExchangeRatePerUSD'] = row_dict['Value']
-      elif row_dict['Element Code'] == 'SLC':
-        processed_dict['ExchangeRatePerUSD_Standardized'] = row_dict['Value']
+            # Define value as local or standardized exchange rate per USD.
+            if row_dict['Element Code'] == 'LCU':
+                processed_dict['ExchangeRatePerUSD'] = row_dict['Value']
+            elif row_dict['Element Code'] == 'SLC':
+                processed_dict['ExchangeRatePerUSD_Standardized'] = row_dict[
+                    'Value']
 
-      # Create a new column called "# Comments" with original row information.
-      processed_dict['# Comments'] = "#" + str(
-          reader.line_num) + " row original"
+            # Create a new column called "# Comments" with original row information.
+            processed_dict['# Comments'] = "#" + str(
+                reader.line_num) + " row original"
 
-      writer.writerow(processed_dict)
+            writer.writerow(processed_dict)
