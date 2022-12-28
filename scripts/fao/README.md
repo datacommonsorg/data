@@ -38,7 +38,7 @@ In this dataset, each Country has an associated currency unit. To find the excha
 - [CurrencyFAO.csv](CurrencyFAO.csv)
 
 #### Cleaned Data
-- [output.csv](output.csv)
+- [cleaned_output.csv](cleaned_output.csv)
 
 #### Template MCFs
 - [CurrencyFAO.tmcf](CurrencyFAO.tmcf)
