@@ -12,41 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """A script that takes in thr .csv file and cleans the data, outputting a
-new .csv file named "output.csv".
+new .csv file named "cleaned_output.csv" in a new "output/" folder.
 """
-<<<<<<< Updated upstream
-
 import csv
 import pycountry
+import os
 
-# Open the original .csv file for reading.
-with open('ExchangeRate_Currency.csv', 'r', encoding='ISO-8859-1') as csv_in:
-    # Open the new .csv file for writing.
-    with open('output.csv', 'w') as csv_out:
-        # Create a reader and writer object.
-        reader = csv.reader(csv_in)
-        writer = csv.writer(csv_out)
-        headers = next(reader)
-
-        # Define columns for cleaned .csv file.
-        headers[0] = 'Country'
-        headers[1] = 'ISOCurrencyCode'
-        headers[2] = 'Currency'
-        headers[3] = 'YearMonth'
-        headers[4] = 'ObservationPeriod'
-        headers[5] = 'ExchangeRatePerUSD'
-        headers[6] = 'ExchangeRatePerUSD_Standardized'
-        headers[7] = '# Comments'
-        headers[8:14] = ''
-=======
-import csv
-import pycountry
+# Create the output directory if it doesn't already exist.
+if not os.path.exists('output'):
+    os.makedirs('output')
 
 INPUT_CSV_FILENAME = 'CurrencyFAO.csv'
-OUTPUT_CSV_FILENAME = 'cleaned_output.csv'
+OUTPUT_CSV_FILENAME = 'output/cleaned_output.csv'
 
-YEAR_CODE = '7021'  # Variable for representing 'Year' in dataset.
->>>>>>> Stashed changes
+# Variable for representing 'Year' in dataset.
+YEAR_CODE = '7021'
 
 # Define order or headers for output via Dictreader.
 HEADERS_OUT = [
@@ -54,55 +34,6 @@ HEADERS_OUT = [
     'ExchangeRatePerUSD', 'ExchangeRatePerUSD_Standardized', '# Comments'
 ]
 
-<<<<<<< Updated upstream
-        # Clean rows in the original file.
-        for row in reader:
-            new_row = []
-
-            # Transform country into DC readable format of "country/ISO".
-            country = pycountry.countries.get(numeric=row[1][1:])
-            # Account for dissolved nation needing updated M49.
-            if row[1] == '\'200':
-                row[1] = 'CSK'
-            elif row[1] == '\'530':
-                row[1] = 'NLD'
-            elif row[1] == '\'736':
-                row[1] = 'SDN'
-            elif row[1] == '\'890':
-                row[1] = 'YUG'
-            elif country:
-                row[1] = country.alpha_3
-            new_row.append('country/' + row[1])
-            new_row.append(row[3])
-            new_row.append(row[5])
-
-            # Create Year-Month column.
-            if row[9] == '7021':
-                new_row.append(row[8])
-            else:
-                new_row.append(row[8] + '-' + row[9][2:])
-
-            # Define ObservationPeriod.
-            if row[9] == '7021':
-                new_row.append('P1Y')
-            else:
-                new_row.append('P1M')
-
-            # Define value as local or standardized exchange rate per USD.
-            if row[3] == 'LCU':
-                new_row.append(row[12])
-            else:
-                new_row.append('')
-            if row[3] == 'SLC':
-                new_row.append(row[12])
-            else:
-                new_row.append('')
-
-            # Create a new column called "# Comments" with original row information.
-            new_row.append("#" + str(reader.line_num) + ' row original')
-
-            writer.writerow(new_row)
-=======
 # Create Dictionary for ISO code transformations.
 DISSOLVED_COUNTRIES = {
     "'200": 'CSK',
@@ -113,50 +44,50 @@ DISSOLVED_COUNTRIES = {
 
 # Open the original .csv file for reading.
 with open(INPUT_CSV_FILENAME, 'r', encoding='ISO-8859-1') as csv_in:
-  # Open the new .csv file for writing.
-  with open(OUTPUT_CSV_FILENAME, 'w') as csv_out:
-    # Create a reader and writer object.
-    reader = csv.DictReader(csv_in, delimiter=',')
-    writer = csv.DictWriter(csv_out, fieldnames=HEADERS_OUT)
-    writer.writeheader()
-    for row_dict in reader:
-      processed_dict = {}
-      # Create Currency column.
-      processed_dict['Currency'] = row_dict['ISO Currency Code']
+    # Open the new .csv file for writing.
+    with open(OUTPUT_CSV_FILENAME, 'w') as csv_out:
+        # Create a reader and writer object.
+        reader = csv.DictReader(csv_in, delimiter=',')
+        writer = csv.DictWriter(csv_out, fieldnames=HEADERS_OUT)
+        writer.writeheader()
+        for row_dict in reader:
+            processed_dict = {}
+            # Create Currency column.
+            processed_dict['Currency'] = row_dict['ISO Currency Code']
 
-      # Create Year-Month column.
-      if row_dict['Months Code'] == YEAR_CODE:
-        processed_dict['YearMonth'] = row_dict['Year']
-      else:
-        processed_dict['YearMonth'] = '%s-%s' % (
-            row_dict['Year'], row_dict['Months Code'].replace("70", ""))
+            # Create Year-Month column.
+            if row_dict['Months Code'] == YEAR_CODE:
+                processed_dict['YearMonth'] = row_dict['Year']
+            else:
+                processed_dict['YearMonth'] = '%s-%s' % (
+                    row_dict['Year'], row_dict['Months Code'].replace("70", ""))
 
-      # Transform country into DC readable format of "country/ISO".
-      country_iso = "country/"
-      if row_dict['Area Code (M49)'] in DISSOLVED_COUNTRIES:
-        # Account for dissolved nation needing updated M49.
-        country_iso += DISSOLVED_COUNTRIES[row_dict['Area Code (M49)']]
-      else:
-        pycountry_decoded = pycountry.countries.get(
-            numeric=row_dict['Area Code (M49)'].replace("\'", ""))
-        country_iso += pycountry_decoded.alpha_3
-      processed_dict['Country'] = country_iso
+            # Transform country into DC readable format of "country/ISO".
+            country_iso = "country/"
+            if row_dict['Area Code (M49)'] in DISSOLVED_COUNTRIES:
+                # Account for dissolved nation needing updated M49.
+                country_iso += DISSOLVED_COUNTRIES[row_dict['Area Code (M49)']]
+            else:
+                pycountry_decoded = pycountry.countries.get(
+                    numeric=row_dict['Area Code (M49)'].replace("\'", ""))
+                country_iso += pycountry_decoded.alpha_3
+            processed_dict['Country'] = country_iso
 
-      # Define ObservationPeriod.
-      if row_dict['Months Code'] == YEAR_CODE:
-        processed_dict['ObservationPeriod'] = 'P1Y'
-      else:
-        processed_dict['ObservationPeriod'] = 'P1M'
+            # Define ObservationPeriod.
+            if row_dict['Months Code'] == YEAR_CODE:
+                processed_dict['ObservationPeriod'] = 'P1Y'
+            else:
+                processed_dict['ObservationPeriod'] = 'P1M'
 
-      # Define value as local or standardized exchange rate per USD.
-      if row_dict['Element Code'] == 'LCU':
-        processed_dict['ExchangeRatePerUSD'] = row_dict['Value']
-      elif row_dict['Element Code'] == 'SLC':
-        processed_dict['ExchangeRatePerUSD_Standardized'] = row_dict['Value']
+            # Define value as local or standardized exchange rate per USD.
+            if row_dict['Element Code'] == 'LCU':
+                processed_dict['ExchangeRatePerUSD'] = row_dict['Value']
+            elif row_dict['Element Code'] == 'SLC':
+                processed_dict['ExchangeRatePerUSD_Standardized'] = row_dict[
+                    'Value']
 
-      # Create a new column called "# Comments" with original row information.
-      processed_dict['# Comments'] = "#" + str(
-          reader.line_num) + " row original"
+            # Create a new column called "# Comments" with original row information.
+            processed_dict['# Comments'] = "#" + str(
+                reader.line_num) + " row original"
 
-      writer.writerow(processed_dict)
->>>>>>> Stashed changes
+            writer.writerow(processed_dict)
