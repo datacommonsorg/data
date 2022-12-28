@@ -12,15 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """A script that takes in thr .csv file and cleans the data, outputting a
-new .csv file named "output.csv".
+new .csv file named "cleaned_output.csv" in a new "output/" folder.
 """
 import csv
 import pycountry
+import os
+
+# Create the output directory if it doesn't already exist.
+if not os.path.exists('output'):
+    os.makedirs('output')
 
 INPUT_CSV_FILENAME = 'CurrencyFAO.csv'
-OUTPUT_CSV_FILENAME = 'cleaned_output.csv'
+OUTPUT_CSV_FILENAME = 'output/cleaned_output.csv'
 
-YEAR_CODE = '7021'  # Variable for representing 'Year' in dataset.
+# Variable for representing 'Year' in dataset.
+YEAR_CODE = '7021'
 
 # Define order or headers for output via Dictreader.
 HEADERS_OUT = [
