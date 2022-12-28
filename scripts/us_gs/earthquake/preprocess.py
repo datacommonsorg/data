@@ -30,6 +30,8 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../..'))
 from util import latlng_recon_service
 from util import gcs_file
 
+from place_cache import PlaceCache
+
 FLAGS = flags.FLAGS
 flags.DEFINE_string('usgs_earthquake_input', '/tmp/usgs/*.csv',
                     'Glob pattern for a set of raw USGS earthquake CSV files.')
@@ -114,56 +116,6 @@ def dcs(s: str):
     return f'dcs:{s}'
 
 
-class PlaceCache:
-    """Cache of (lat,lng) -> DC places mapping."""
-
-    def __init__(self, path: str):
-        self._path = path
-        self._read = False
-        self._updated = False
-        self.cache = {}
-
-    def read(self) -> None:
-        """Read cache. Can only be called once."""
-        if self._read:
-            return
-        try:
-            with gcs_file.GcsFile(self._path, 'r') as file:
-                raw_cache = file.read().decode()
-                for line in raw_cache.split('\n'):
-                    latlng, places = self.parse(line)
-                    self.cache[latlng] = places
-                self._read = True
-        except gcs_file.BlobNotFoundError:
-            self._read = True
-
-    def update(self, cache: Dict):
-        for k, v in cache.items():
-            self.cache[k] = v
-
-    def write(self):
-        """Append to the existing cache. Can only be called once."""
-        if self._updated:
-            return
-        # Cache dict -> lines of text.
-        lines = []
-        for latlng, places in self.cache.items():
-            line = ','.join([str(latlng[0]), str(latlng[1])] + places)
-            lines.append(line)
-        # Write to gcs.
-        with gcs_file.GcsFile(self._path, 'w') as file:
-            file.write('\n'.join(lines).encode())
-            self._updated = True
-
-    def parse(self, line: str):
-        """lat,lng,place1,place2... -> (lat, lng), [place1, place2 ...]"""
-        vals = line.rstrip().split(',')
-        if len(vals) < 2:
-            raise Exception('Bad cache line %s. Please delete it.' % line)
-        latlng = (float(vals[0]), float(vals[1]))
-        return latlng, vals[2:]
-
-
 def preprocess_row(row: Dict, affected_places: List[str]) -> str:
     """Return preprocessed csv row string from a raw csv row dict."""
     if 'id' not in row:
@@ -183,7 +135,7 @@ def preprocess_row(row: Dict, affected_places: List[str]) -> str:
         mt = row['magType'].capitalize()
         mt = MAGTYPE_REMAP.get(mt, mt)
         if mt not in VALID_MAGTYPES:
-            logging.error(
+            logging.warning(
                 f'Earthquake {p["id"]} has invalid magnitude type {mt}, '
                 'please add it to the DC schema. Mag type will not be added.')
         else:
