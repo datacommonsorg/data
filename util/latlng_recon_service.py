@@ -16,8 +16,9 @@
 See latlng_recon_service_test.py for usage example.
 """
 
+import concurrent.futures
 import requests
-from typing import Dict, List, NewType, TypeVar, Tuple
+from typing import Callable, Dict, List, NewType, TypeVar, Tuple
 
 LatLngType = NewType('LatLngType', Tuple[float, float])
 ResolvedLatLngType = NewType('ResolvedLatLngType', Dict[str, List[str]])
@@ -31,7 +32,7 @@ ResolvedLatLng = NewType('ResolvedLatLng', Dict[DCID, List[str]])
 
 
 def _session(retries: int = 5, backoff_factor: int = 0.5) -> 'requests.Session':
-  """Helper method to retry calling recon service automatically.
+    """Helper method to retry calling recon service automatically.
 
     Args:
         retries: max number of retries allowed.
@@ -44,53 +45,53 @@ def _session(retries: int = 5, backoff_factor: int = 0.5) -> 'requests.Session':
     For more on sessions, see:
     https://requests.readthedocs.io/en/latest/user/advanced/
     """
-  s = requests.Session()
-  retries = requests.adapters.Retry(
-      total=retries,
-      backoff_factor=backoff_factor,
-      # Force retries even for 5xx status codes.
-      status_forcelist=[500, 502, 503, 504],
-      allowed_methods=["GET", "POST"])
-  s.mount('https://', requests.adapters.HTTPAdapter(max_retries=retries))
-  return s
+    s = requests.Session()
+    retries = requests.adapters.Retry(
+        total=retries,
+        backoff_factor=backoff_factor,
+        # Force retries even for 5xx status codes.
+        status_forcelist=[500, 502, 503, 504],
+        allowed_methods=["GET", "POST"])
+    s.mount('https://', requests.adapters.HTTPAdapter(max_retries=retries))
+    return s
 
 
 def _call_resolve_coordinates(id2latlon: Dict[LatLngType, Tuple[str]],
                               filter_fn: Callable, verbose: bool):
-  revmap = {}
-  coords = []
-  for dcid, (lat, lon) in id2latlon.items():
-    coords.append({'latitude': lat, 'longitude': lon})
-    revmap[(lat, lon)] = dcid
-  result = {}
-  if verbose:
-    print('Calling recon API with a lat/lon list of', len(id2latlon))
-  resp = _session().post(_RECON_ROOT, json={'coordinates': coords})
-  resp.raise_for_status()
-  if verbose:
-    print('Got successful recon API response')
-  for coord in resp.json()['placeCoordinates']:
-    # Zero lat/lons are missing
-    # (https://github.com/datacommonsorg/mixer/issues/734)
-    if 'latitude' not in coord:
-      coord['latitude'] = 0.0
-    if 'longitude' not in coord:
-      coord['longitude'] = 0.0
-    key = (coord['latitude'], coord['longitude'])
-    cips = []
-    if 'placeDcids' in coord:
-      cips = coord['placeDcids']
-    if filter_fn:
-      result[revmap[key]] = filter_fn(cips)
-    else:
-      result[revmap[key]] = cips
-  return result
+    revmap = {}
+    coords = []
+    for dcid, (lat, lon) in id2latlon.items():
+        coords.append({'latitude': lat, 'longitude': lon})
+        revmap[(lat, lon)] = dcid
+    result = {}
+    if verbose:
+        print('Calling recon API with a lat/lon list of', len(id2latlon))
+    resp = _session().post(_RECON_ROOT, json={'coordinates': coords})
+    resp.raise_for_status()
+    if verbose:
+        print('Got successful recon API response')
+    for coord in resp.json()['placeCoordinates']:
+        # Zero lat/lons are missing
+        # (https://github.com/datacommonsorg/mixer/issues/734)
+        if 'latitude' not in coord:
+            coord['latitude'] = 0.0
+        if 'longitude' not in coord:
+            coord['longitude'] = 0.0
+        key = (coord['latitude'], coord['longitude'])
+        cips = []
+        if 'placeDcids' in coord:
+            cips = coord['placeDcids']
+        if filter_fn:
+            result[revmap[key]] = filter_fn(cips)
+        else:
+            result[revmap[key]] = cips
+    return result
 
 
 def latlng2places(id2latlon: Dict[str, LatLngType],
                   filter_fn: Callable = None,
                   verbose: bool = False) -> Dict[str, Tuple[str]]:
-  """Given a map of ID->(lat,lng), resolves the lat/lng and returns a list of
+    """Given a map of ID->(lat,lng), resolves the lat/lng and returns a list of
        places by calling the Recon service (in a batched way).
 
     Args:
@@ -104,20 +105,21 @@ def latlng2places(id2latlon: Dict[str, LatLngType],
         A dict keyed by the ID passed in "id2latlon" with value containing a
         list of places.
     """
-  with concurrent.futures.ThreadPoolExecutor() as executor:
-    batch = {}
-    futures = []
-    for dcid, (lat, lon) in id2latlon.items():
-      batch[dcid] = (lat, lon)
-      if len(batch) == _RECON_COORD_BATCH_SIZE:
-        futures.append(
-            executor.submit(_call_resolve_coordinates, batch, filter_fn,
-                            verbose))
+    with concurrent.futures.ThreadPoolExecutor() as executor:
         batch = {}
-    if len(batch) > 0:
-      futures.append(
-          executor.submit(_call_resolve_coordinates, batch, filter_fn, verbose))
-    result = {}
-    for future in concurrent.futures.as_completed(futures):
-      result.update(future.result())
-  return result
+        futures = []
+        for dcid, (lat, lon) in id2latlon.items():
+            batch[dcid] = (lat, lon)
+            if len(batch) == _RECON_COORD_BATCH_SIZE:
+                futures.append(
+                    executor.submit(_call_resolve_coordinates, batch, filter_fn,
+                                    verbose))
+                batch = {}
+        if len(batch) > 0:
+            futures.append(
+                executor.submit(_call_resolve_coordinates, batch, filter_fn,
+                                verbose))
+        result = {}
+        for future in concurrent.futures.as_completed(futures):
+            result.update(future.result())
+    return result
