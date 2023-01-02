@@ -51,6 +51,9 @@ class NCESDistrictSchool(USEducation):
     _exclude_col_place = EXCLUDE_PLACE_COLUMNS
     _observation_period = OBSERVATION_PERIOD
     _key_col_place = PLACE_KEY_COLUMNS
+    _exclude_list = EXCLUDE_LIST
+    _drop_by_value = DROP_BY_VALUE
+    _renaming_columns = RENAMING_DISTRICT_COLUMNS
 
 
 # pylint:enable=too-few-public-methods
@@ -82,4 +85,3 @@ if __name__ == '__main__':
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()
-    loader._generate_tmcf_district()

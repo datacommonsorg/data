@@ -34,7 +34,7 @@ POSSIBLE_DATA_COLUMNS = [
 
 EXCLUDE_DATA_COLUMNS = [
     "Individualized Education Program Students", '(Includes AE)',
-    "Phone Number", "State Agency ID"
+    "Phone Number", "State Agency ID", "State Name"
 ]
 
 POSSIBLE_PLACE_COLUMNS = [
@@ -49,3 +49,29 @@ EXCLUDE_PLACE_COLUMNS = [
 ]
 
 PLACE_KEY_COLUMNS = ["year", "Agency ID - NCES Assigned"]
+
+EXCLUDE_LIST = [
+    'school_state_code', 'Agency Name', 'Agency ID - NCES Assigned',
+    'ANSI/FIPS State Code'
+]
+
+DROP_BY_VALUE = "Agency ID - NCES Assigned"
+
+RENAMING_DISTRICT_COLUMNS = {
+    'Location ZIP': 'ZIP',
+    'County Number': 'County_code',
+    'Agency Name': 'District_School_name',
+    'Agency ID - NCES Assigned': 'School_ID',
+    'Agency Type': 'School_Type',
+    'State Agency ID': 'State_school_ID',
+    'Phone Number': 'PhoneNumber',
+    'ANSI/FIPS State Code': 'State_code',
+    'Location Address 1': 'Physical_Address',
+    'Location City': 'City',
+    'Agency Level (SY 2017-18 onward)': 'Agency_level',
+    "Lowest Grade Offered": "Lowest_Grade_Dist",
+    "Highest Grade Offered": "Highest_Grade_Dist",
+    "State Name": "State_Name",
+    "Location ZIP4": "Location_ZIP4",
+    "State Abbr": "State_Abbr"
+}

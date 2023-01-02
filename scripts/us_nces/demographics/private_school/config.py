@@ -61,3 +61,41 @@ EXCLUDE_PLACE_COLUMNS = [
     "Two or More Races Students", "Percentage of Two or More Races Students",
     "Pupil/Teacher Ratio", "Full-Time Equivalent", "year"
 ]
+
+EXCLUDE_LIST = [
+    "school_state_code", "Private School Name", "ANSI/FIPS State Code",
+    "School ID - NCES Assigned", "State Abbr"
+]
+
+DROP_BY_VALUE = "School ID - NCES Assigned"
+
+RENAMEING_PRIVATE_COLUMNS = {
+    "Private School Name":
+        "Private_School_Name",
+    "School ID - NCES Assigned":
+        "SchoolID",
+    "School Type":
+        "School_Type",
+    "School's Religious Affiliation or Orientation":
+        "School_Religion_Affliation",
+    "Religious Orientation":
+        "School_Religion",
+    "Physical Address":
+        "Physical_Address",
+    "Phone Number":
+        "PhoneNumber",
+    "Lowest Grade Taught":
+        "Lowest_Grade",
+    "Highest Grade Taught":
+        "Highest_Grade",
+    "School Level":
+        "SchoolGrade",
+    "ZIP + 4":
+        "ZIP4",
+    "ANSI/FIPS County Code":
+        "County_code",
+    "ANSI/FIPS State Code":
+        "State_code",
+    "State Abbr":
+        "State_Abbr"
+}

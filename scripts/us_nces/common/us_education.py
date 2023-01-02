@@ -33,10 +33,7 @@ import numpy as np
 
 pd.set_option("display.max_columns", None)
 
-from common.replacement_functions import (replace_values, _UNREADABLE_TEXT,
-                                          RENAMEING_PRIVATE_COLUMNS,
-                                          RENAMING_PUBLIC_COLUMNS,
-                                          RENAMING_DISTRICT_COLUMNS)
+from common.replacement_functions import (replace_values, _UNREADABLE_TEXT)
 from common.prop_conf import *
 from common.place_conf import *
 
@@ -65,6 +62,9 @@ class USEducation:
     _generate_statvars = True
     _observation_period = None
     _key_col_place = None
+    _exclude_list = None
+    _drop_by_value = None
+    _renaming_columns = None
 
     def __init__(self,
                  input_files: list,
@@ -111,6 +111,7 @@ class USEducation:
             return pd.read_csv(f_content)
 
     def _extract_year_from_headers(self, headers: list) -> str:
+        """Extracting year from the headers."""
         year_pattern = r"\[(District|((Private|Public) School))\](\s)(?P<year>\d\d\d\d-\d\d)"
         for header in headers:
             match = re.search(year_pattern, header)
@@ -120,6 +121,15 @@ class USEducation:
         return year
 
     def _clean_data(self, raw_df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Extracts the required words using regex.
+        Args:
+            data_df (pd.DataFrame): _description_
+            conf (dict): _description_
+            curr_prop_column (str): _description_
+        Returns:
+            raw_df: DataFrame
+        """
         regex_patterns = [(r'^=\"(.*)\"$', r'\1'),
                           (r'^-(-?)(\s?)([a-zA-Z0-9\s]*)(-?)$', r'\3')]
 
@@ -293,6 +303,14 @@ class USEducation:
         return data_df
 
     def _verify_year_uniqueness(self, headers: list) -> bool:
+        """
+        Checks for particual year in the file which is being executed and
+        gives an error if any other year column is being executed.
+        Args:
+            headers: list
+        Returns:
+            bool: _description_
+        """
         year_pattern = r"\[(District|((Private|Public) School))\](\s)(?P<year>\d\d\d\d-\d\d)"
         year_match = True
         for header in headers:
@@ -306,30 +324,39 @@ class USEducation:
         return year_match
 
     def _transform_private_place(self):
-        self._final_df_place['ANSI/FIPS County Code'] = pd.to_numeric(
-            self._final_df_place['ANSI/FIPS County Code'], errors='coerce')
-
+        """
+        
+        """
+        # Renaming column names in the dataframe.
+        self._final_df_place = self._final_df_place.rename(
+            columns=self._renaming_columns)
+        # Filling zip and county numbers upto 5 digits and adding prefixes.
         self._final_df_place['ZIP'] = self._final_df_place['ZIP'].astype(
             str).str.zfill(5)
         self._final_df_place['ZIP'] = "zip/" + self._final_df_place['ZIP']
-
-        self._final_df_place['State_code'] = "geoId/" + self._final_df_place[
-            'ANSI/FIPS State Code']
-        self._final_df_place['ANSI/FIPS County Code'] = self._final_df_place[
-            'ANSI/FIPS County Code'].astype(str).str.zfill(5)
         self._final_df_place['County_code'] = self._final_df_place[
-            'ANSI/FIPS County Code'].apply(lambda x: 'geoId/' + x
-                                           if x != '' else '')
-        self._final_df_place = self._final_df_place.rename(
-            columns=RENAMEING_PRIVATE_COLUMNS)
+            'County_code'].astype(str).str.zfill(5)
+        self._final_df_place['County_code'] = self._final_df_place[
+            'County_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
+        self._final_df_place[
+            'State_code'] = "geoId/" + self._final_df_place['State_code']
+        # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
                                               replace_with_all_mappers=False,
                                               regex_flag=False)
+        self._final_df_place["ZIP4"] = np.where(
+            (self._final_df_place["ZIP4"].str.len() > 5),
+            (self._final_df_place["ZIP4"].str.split()),
+            (self._final_df_place["ZIP4"]))
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].astype(
-                str) + " " + self._final_df_place["City"].astype(
-                    str) + " " + self._final_df_place["ZIP4"].astype(str)
-
+                str) + " " + self._final_df_place["City"].astype(str)
+        self._final_df_place["Physical_Address"] = self._final_df_place[
+            "Physical_Address"].str.title()
+        self._final_df_place["Physical_Address"] = self._final_df_place[
+            "Physical_Address"].astype(str) + " " + self._final_df_place[
+                'State_Abbr'] + " " + self._final_df_place["ZIP4"].astype(str)
+        # List of columns to be considered under 'dcs'
         col_to_dcs = [
             "School_Type", "School_Religion", "Coeducational", "Lowest_Grade",
             "Highest_Grade", "SchoolGrade"
@@ -337,9 +364,9 @@ class USEducation:
         for col in col_to_dcs:
             self._final_df_place[col] = self._final_df_place[col].apply(
                 lambda x: 'dcs:' + str(x) if x != '' else '')
+        # Creating a unique list for zip and county
         zip_list = list(pd.unique(self._final_df_place['ZIP']))
         county_list = list(pd.unique(self._final_df_place['County_code']))
-
         config = {
             'dc_api_batch_size': 200,
             'dc_api_retries': 3,
@@ -347,53 +374,56 @@ class USEducation:
             'dc_api_use_cache': False,
             'dc_api_root': None
         }
+        # Passing the list through API call for checking its existance.
         dcid_check_zip = dc_api_get_defined_dcids(zip_list, config)
         dcid_check_county = dc_api_get_defined_dcids(county_list, config)
-
+        # Considering only the existing zip and county codes.
         self._final_df_place['ZIP'] = self._final_df_place['ZIP'].apply(
             lambda x: x if dcid_check_zip[x] else '')
-
         self._final_df_place['County_code'] = self._final_df_place[
             'County_code'].apply(lambda x: x if dcid_check_county[x] else '')
-
-        self._final_df_place['County_code'] = self._final_df_place[
-            'County_code'].astype(str)
-
+        # Generating a column for place property.
         self._final_df_place['ContainedInPlace'] = self._final_df_place[
             'ZIP'].apply(lambda x: x + ',' if x != '' else ''
                         ) + self._final_df_place['County_code'].apply(
                             lambda x: x + ',' if x != '' else ''
                         ) + self._final_df_place['State_code']
-        self._final_df_place['ContainedInPlace'] = self._final_df_place[
-            'ContainedInPlace'].astype(str)
-        self._final_df_place["Physical_Address"] = self._final_df_place[
-            "Physical_Address"].str.title()
+        # Camel casing Physical Address and School Name.
+
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.replace("Po Box", "PO Box")
         self._final_df_place["Private_School_Name"] = np.where(
             self._final_df_place["Private_School_Name"].str.len() <= 4,
             self._final_df_place["Private_School_Name"],
             self._final_df_place["Private_School_Name"].str.title())
+        # Sorting values in descending order and dropping duplicates.
         self._final_df_place = self._final_df_place.sort_values(by=["year"],
                                                                 ascending=False)
-
         self._final_df_place = self._final_df_place.drop_duplicates(
             subset=["school_state_code"]).reset_index(drop=True)
 
     def _transform_public_place(self):
+        """
+        
+        """
+        # Renaming Column Names
         self._final_df_place = self._final_df_place.rename(
-            columns=RENAMING_PUBLIC_COLUMNS)
+            columns=self._renaming_columns)
+        # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
                                               replace_with_all_mappers=False,
                                               regex_flag=False)
-
+        # Files before the year 2017 and files 2017 onwards have different
+        # column name for the same entity'School_Level'. Hence, combining both
+        # columns under one common column.
         self._final_df_place['School_Level'] = np.where(
             self._final_df_place['School_Level_17'].isin([np.nan]),
             self._final_df_place['School_Level_16'],
             (self._final_df_place['School_Level_17']))
-
+        # Restructing School District ID according Data Commons.
         self._final_df_place["State_District_ID"] = \
                 "geoId/sch" + self._final_df_place["State_District_ID"]
+        # List of columns to be considered under 'dcs'
         col_to_dcs = [
             'Lowest_Grade_Public', 'Highest_Grade_Public', 'Locale',
             'National_School_Lunch_Program', 'Magnet_School', 'Charter_School',
@@ -405,31 +435,36 @@ class USEducation:
                 self._final_df_place[col] = self._final_df_place[col].replace(
                     to_replace={'': pd.NA})
                 self._final_df_place[col] = "dcs:" + self._final_df_place[col]
+        # Adding prefixes to ZIP, State and County code.
         self._final_df_place['ZIP'] = 'zip/' + self._final_df_place['ZIP']
         self._final_df_place['County_code'] = self._final_df_place[
             'County_code'].astype(str)
         self._final_df_place['State_code'] = self._final_df_place[
             'State_code'].astype(str)
-
-        self._final_df_place['State_code'] = self._final_df_place.apply(
-            lambda row: row['State_code']
-            if row['State_code'] == row['County_code'][0:2].strip() else row[
-                'County_code'][0:2].strip(),
-            axis=1)
+        # In some cases The state code is not valid or is not a state.
+        # For example: state_code:59, 63
+        # In such cases, the state code is replaced with first 2 characters of
+        # its respective county code
+        self._final_df_place["State_code"] = np.where(
+            self._final_df_place["State_code"].str.contains("59|63"),
+            (self._final_df_place['County_code'].astype(str).str[:2]),
+            (self._final_df_place["State_code"]))
 
         self._final_df_place['County_code'] = self._final_df_place[
             'County_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
         self._final_df_place['State_code'] = self._final_df_place[
             'State_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
-
+        # Generates State code by mapping state abbrevation and USSTATE map
+        # to fill the empty values in the state code column.
         self._final_df_place['State_code'] = np.where(
             self._final_df_place['State_code'] == "",
             (self._final_df_place['State_Abbr'].map(USSTATE_MAP)),
             (self._final_df_place['State_code']))
-
+        # Creating a unique list for zip,state and county.
         zip_list = list(pd.unique((self._final_df_place['ZIP'])))
         county_list = list(pd.unique(self._final_df_place['County_code']))
         state_list = list(pd.unique(self._final_df_place['State_code']))
+        # removing empty values from the list which are from source.
         if '' in county_list:
             county_list.remove("")
         if '' in state_list:
@@ -442,12 +477,14 @@ class USEducation:
             'dc_api_use_cache': False,
             'dc_api_root': None
         }
+        # Passing the list through API call for checking its existance.
         dcid_check_zip = dc_api_get_defined_dcids(zip_list, config)
         dcid_check_county = dc_api_get_defined_dcids(county_list, config)
         dcid_check_state = dc_api_get_defined_dcids(state_list, config)
+        # After passing through check, the empty values are assigned as False.
         dcid_check_county[""] = False
         dcid_check_state[""] = False
-
+        # Considering only the existing zip, state and county codes.
         self._final_df_place['ZIP'] = self._final_df_place['ZIP'].apply(
             lambda x: x if dcid_check_zip[x] else '')
 
@@ -456,11 +493,12 @@ class USEducation:
 
         self._final_df_place['State_code'] = self._final_df_place[
             'State_code'].apply(lambda x: x if dcid_check_state[x] else '')
-
+        # Reverse mapping State abbrevations from the current state_code
+        # column to combine Physical Address with State Abbrevation.
         state_abbr = {v: k for k, v in USSTATE_MAP.items()}
         self._final_df_place['Validated_State_Abbr'] = self._final_df_place[
             'State_code'].replace(state_abbr)
-
+        # Generating a column for place property.
         self._final_df_place['ContainedInPlace'] = self._final_df_place[
             'ZIP'].apply(lambda x: x + ',' if x != '' else ''
                         ) + self._final_df_place['County_code'].apply(
@@ -471,18 +509,24 @@ class USEducation:
             "zip/", "")
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"] + " " + self._final_df_place["City"]
+        # Camel casing Physical Address
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.title()
+        # Created a column School_Management for State Name as NCES_BureauOfIndianEducation
+        # and NCES_DepartmentOfDefenseEducationActivity as they are outlyin areas of United States.
         self._final_df_place["School_Management"] = np.where(
             self._final_df_place["State_Name"].str.contains(
                 "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity"
             ), self._final_df_place["State_Name"], '')
+        # Checking if state code is not null and respectively adding state
+        # abbrevation to physical address.
         self._final_df_place["Physical_Address"] = np.where(
             self._final_df_place['State_code'] == "",
             (self._final_df_place["Physical_Address"]),
             (self._final_df_place["Physical_Address"] + " " +
              self._final_df_place["Validated_State_Abbr"]))
-
+        # Checking if ZIP4 is not null and respectively adding it
+        # to physical address.
         self._final_df_place["Physical_Address"] = np.where(
             self._final_df_place['Location_ZIP4'] == "",
             (self._final_df_place["Physical_Address"] + " " +
@@ -493,22 +537,28 @@ class USEducation:
 
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].str.replace("Po Box", "PO BOX")
+        # Camel casing Public School Name and if the length of the school name
+        # is less than 4 then the school name remains the same. Most of them
+        # are abbrevations.
         self._final_df_place["Public_School_Name"] = np.where(
             self._final_df_place["Public_School_Name"].str.len() <= 4,
             self._final_df_place["Public_School_Name"],
             self._final_df_place["Public_School_Name"].astype(str).apply(
                 lambda x: x.title()))
+        # Sorting the values by descending order in year and dropping duplicates.
         self._final_df_place = self._final_df_place.sort_values(by=["year"],
                                                                 ascending=False)
         self._final_df_place = self._final_df_place.drop_duplicates(
             subset=["school_state_code"]).reset_index(drop=True)
 
     def _transform_district_place(self):
-
+        """
+        
+        """
         self._final_df_place[
             'geoID'] = "sch" + self._final_df_place['Agency ID - NCES Assigned']
         self._final_df_place = self._final_df_place.rename(
-            columns=RENAMING_DISTRICT_COLUMNS)
+            columns=self._renaming_columns)
         self._final_df_place = replace_values(self._final_df_place,
                                               replace_with_all_mappers=False,
                                               regex_flag=False)
@@ -517,11 +567,10 @@ class USEducation:
         self._final_df_place['State_code'] = self._final_df_place[
             'State_code'].astype(str)
 
-        self._final_df_place['State_code'] = self._final_df_place.apply(
-            lambda row: row['State_code']
-            if row['State_code'] == row['County_code'][0:2].strip() else row[
-                'County_code'][0:2].strip(),
-            axis=1)
+        self._final_df_place["State_code"] = np.where(
+            self._final_df_place["State_code"].str.contains("59|63"),
+            (self._final_df_place['County_code'].astype(str).str[:2]),
+            (self._final_df_place["State_code"]))
 
         self._final_df_place['County_code'] = self._final_df_place[
             'County_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
@@ -615,10 +664,7 @@ class USEducation:
         for col in df_cleaned.columns.values.tolist():
             df_cleaned[col] = \
                 df_cleaned[col].astype('str').str.strip()
-        sort_list = [
-            "ZIP + 4", "Total Students (Ungraded & PK-12)",
-            "Grades 1-8 Students", "Grades 9-12 Students"
-        ]
+
         df_cleaned = self._clean_columns(df_cleaned)
 
         if self._import_name == "private_school":
@@ -653,17 +699,32 @@ class USEducation:
             r = re.compile(pattern)
             data_place += list(filter(r.match, curr_place))
 
+        # Creating a list which is used to check for null values
+        col_list = [*data_cols, *data_place]
+        col_list = list(set(col_list))
+        # Creating an exclude_list which has columns that will not be null.
+        # Creating a drop_list through which the exclude_list items will be
+        # removed
+        drop_list = [
+            item for item in col_list if item not in self._exclude_list
+        ]
+        # Replacing '–','†' with nan values.
         df_cleaned = df_cleaned.replace(_UNREADABLE_TEXT)
-        df_cleaned = df_cleaned.dropna(how='all', subset=data_cols)
-        df_cleaned = df_cleaned.sort_values(by=data_cols, ascending=True)
-        df_cleaned = df_cleaned.drop_duplicates(
-            subset=["School ID - NCES Assigned"], keep="first")
+        # Dropping school IDs whose entities are null based on the drop_list
+        df_duplicate = df_cleaned.copy()
+        df_duplicate = df_duplicate[df_duplicate.duplicated()]
+        df_duplicate.to_csv("duplicate_schools.csv", index=False)
+        df_cleaned = df_cleaned.dropna(how='all', subset=drop_list)
+        # Passing data_place list that contain columns required for place entities.
         df_place = df_cleaned[data_place]
+        df_cleaned = df_cleaned.sort_values(by=data_cols, ascending=True)
+        # Dropping Duplicate Schools based on School ID which is sort_value.
+        df_cleaned = df_cleaned.drop_duplicates(subset=self._drop_by_value,
+                                                keep="first")
 
         if self._import_name in [
                 "private_school", "district_school", "public_school"
         ]:
-            #df_place['year'] = self._year[0:4].strip()
             df_place.loc[:, 'year'] = self._year[0:4].strip()
 
             df_place = df_place.loc[:, ~df_place.columns.duplicated()]
@@ -819,7 +880,6 @@ class USEducation:
         """
         This method generates MCF file w.r.t
         dataframe headers and defined MCF template
-
         Args:
             sv_list (list) : List of DataFrame Columns
 
@@ -838,6 +898,8 @@ class USEducation:
         for dcnode in mcf_:
             deno_matched = re.findall("(Node: dcid:)(\w+)", dcnode)[0][1]
             f_deno.append(deno_matched)
+        # Passes the Node through check_dcid_existance to check if the SV is
+        # already existing.
         node_status = check_dcid_existence(f_deno)
         f_deno = []
         for dcnode in mcf_:
@@ -847,7 +909,6 @@ class USEducation:
                 f_deno.append(dcnode)
 
         mcf_ = "\n\n".join(f_deno)
-        # mcf_ = "\n\n".join(mcf_)
         with open(self._mcf_file_path, "w", encoding="UTF-8") as file:
             file.write(mcf_)
 
@@ -855,7 +916,6 @@ class USEducation:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
-
         Args:
             None
 
@@ -869,53 +929,15 @@ class USEducation:
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
 
-    def _generate_tmcf_private(self) -> None:
-        """
-        This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template
+        # Generating tmcf file for NCES place entities
+        if self._import_name == "private_school":
+            with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
+                f_out.write(TMCF_TEMPLATE_PLACE_PRIVATE.rstrip('\n'))
 
-        Args:
-            df_cols (list) : List of DataFrame Columns
+        if self._import_name == "district_school":
+            with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
+                f_out.write(TMCF_TEMPLATE_PLACE_DISTRICT.rstrip('\n'))
 
-        Returns:
-            None
-        """
-        with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
-            f_out.write(TMCF_TEMPLATE_PLACE_PRIVATE.rstrip('\n'))
-
-    def _generate_tmcf_district(self) -> None:
-        """
-        This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template
-
-        Args:
-            df_cols (list) : List of DataFrame Columns
-
-        Returns:
-            None
-        """
-        with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
-            f_out.write(TMCF_TEMPLATE_PLACE_DISTRICT.rstrip('\n'))
-
-    def _generate_tmcf_public(self) -> None:
-        """
-        This method generates TMCF file w.r.t
-        dataframe headers and defined TMCF template
-
-        Args:
-            df_cols (list) : List of DataFrame Columns
-
-        Returns:
-            None
-        """
-        with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
-            f_out.write(TMCF_TEMPLATE_PLACE_PUBLIC.rstrip('\n'))
-
-    def create_place_nodes(self):
-        self.generate_csv()
-        df_parsed = self._df
-        df_parsed = self._generate_prop(df_parsed, DF_DEFAULT_TMCF_PROP,
-                                        SV_PROP_ORDER_PLACE, PLACE_STATVAR)
-
-        # df_parsed = self._generate_stat_var_and_mcf(df_parsed, SV_PROP_ORDER_PLACE)
-        self._df = df_parsed
+        if self._import_name == "public_school":
+            with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
+                f_out.write(TMCF_TEMPLATE_PLACE_PUBLIC.rstrip('\n'))
