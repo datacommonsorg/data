@@ -19,6 +19,7 @@ import datetime
 from absl import app
 from absl import flags
 from absl import logging
+from google.cloud import storage
 import json
 import numpy as np
 import os
@@ -26,7 +27,6 @@ import pandas as pd
 import pickle
 import re
 import requests
-import logging
 import datacommons as dc
 import sys
 
@@ -41,13 +41,20 @@ pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
 
+flags.DEFINE_boolean('read_location_cache', True,
+                     'save location cache to file.')
+
 flags.DEFINE_boolean('save_location_cache', False,
                      'save location cache to file.')
 
-PRE_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DiscoveryAcres,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
-_OUTPUT = "/cns/jv-d/home/datcom/v3_resolved_mcf/fire/wfigs/"
+# FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&returnGeometry=false&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
+# Only download data from Oct 10, 2022 to make auto refresh manageable.
+POST_OCT_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=FireDiscoveryDateTime>'2022-10-10'&outFields=*&outSR=4326&f=json"
 _LAT_LNG_CACHE = {}
 _START_YEAR = 2014
+_GCS_PROJECT_ID = "datcom-204919"
+_GCS_BUCKET = "datcom-import-cache"
+_GCS_FILE_PATH = "fires/location_file.json"
 
 _FIRE_INCIDENT_MAP = {
     'CX': 'FireIncidentComplexEvent',
@@ -292,17 +299,22 @@ def process_df(df):
 
 
 def main(_) -> None:
-    pre_2022_df = get_data(PRE_2022_FIRE_LOCATIONS_URL)
-    df = pre_2022_df
+    df = get_data(POST_OCT_2022_FIRE_LOCATIONS_URL)
 
-    with open(os.path.join(_SCRIPT_PATH, 'location_file.json')) as f:
-        data = f.read()
-    _LAT_LNG_CACHE = json.loads(data)
+    storage_client = storage.Client(_GCS_PROJECT_ID)
+    bucket = storage_client.bucket(_GCS_BUCKET)
+    blob = bucket.blob(_GCS_FILE_PATH)
+    if FLAGS.read_location_cache:
+        try:
+            _LAT_LNG_CACHE = json.loads(blob.download_as_string(client=None))
+        except Exception as e:  # pylint: disable=broad-except
+            logging.error("Reading locations cache failed: %e" % e)
+            _LAT_LNG_CACHE = {}
 
     df = process_df(df)
     df.to_csv("final_processed_data.csv", index=False)
     if FLAGS.save_location_cache:
-        with open('location_file.json', 'w') as locations:
+        with blob.open("w") as locations:
             locations.write(json.dumps(_LAT_LNG_CACHE))
 
 

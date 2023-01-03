@@ -1,0 +1,12 @@
+Node: E:Earthquake->E0
+dcid: C:Earthquake->id
+typeOf: dcs:EarthquakeEvent
+name: C:Earthquake->name
+occurrenceTime: C:Earthquake->occurrence_time
+magnitude: C:Earthquake->mag
+magnitudeType: C:Earthquake->mag_type
+# TODO: magnitudeError -> marginOfError when re-runnning historical earthquakes.
+magnitudeError: C:Earthquake->mag_err
+location: C:Earthquake->location
+affectedPlace: C:Earthquake->affected_places
+reviewStatus: C:Earthquake->reviewed_status
