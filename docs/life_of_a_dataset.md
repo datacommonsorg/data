@@ -10,6 +10,14 @@ As a prerequisite, you should understand the dataset, and have an idea of how
 to map location entities in your dataset to Data Commons entities and measures
 in your dataset to Data Commons statistical variables.
 
+## Import Design Review
+
+Begin by making sure you've completed the import document template (as per the 
+[README.md](README.md)) and worked with the DC team to review your design. Once 
+your schema mapping/statistical variable (SV) categories have been reviewed and 
+finalized, proceed to the next section on how to define your SVs. 
+
+
 ## Define Statistical Variables
 
 If you are adding new types of data to the knowledge graph, you might need to
@@ -80,7 +88,7 @@ If you introduced new statistical variables, please create a Pull Request for th
 
 ## Manifesting Artifacts
 
-After your PR is reviewed and approved, the Data Commons team will work with you to manifest the artifacts you've created in our internal system.
+After your PR is reviewed and approved, the Data Commons team will work with you to manifest (e.g. generate for inclusion in our model) the artifacts you've created in our internal system. Only after the artifacts are manifested will they be added to the KG and be accessible?
 
 ## Alternate approach: Generate Instance MCF
 
