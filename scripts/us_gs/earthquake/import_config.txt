@@ -1,0 +1,8 @@
+import: {
+    import_name: "USGS_Earthquake"
+    provenance_url: "https://www.usgs.gov/programs/earthquake-hazards/earthquakes"
+    provenance_description: "USGS earthquake data for historical earthquake events globally."
+    mcf_url: "gs://resolved_mcf/external_tables/earthquake/nodes.mcf-00000-of-00001"
+    start_date: "2022-10-07"
+    update_frequency: "P1D"
+}
