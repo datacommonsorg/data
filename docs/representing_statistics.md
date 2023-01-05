@@ -40,7 +40,7 @@ gender: dcs:Female
 ```
 
 Before we get into the sematics of the above representation, as a quick primer
-to the MCF syntax: `Node` is a sentinel that defines a node in the KG (Knowledge Graph), the left hand-side
+to the MCF syntax: `Node` is a sentinel that defines a node in the Data Commons Graph, the left hand-side
 things (`typeOf`, `measuredProperty`, etc.) are DC Property entities, the right hand-side
 things (`Median_Age_Person_Female`, `geoId/4865000`, etc.) are corresponding
 values of those properties.  Values that refer to other DC entities include
