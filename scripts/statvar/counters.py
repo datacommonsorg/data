@@ -11,103 +11,135 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Class for named counters.'''
+'''Class for dictionary of named counters.'''
 
 import sys
+import time
 
-from absl import logging
+from typing import NamedTuple
+
+
+# Options for counters
+class CountersOptions(NamedTuple):
+    # Enable debug counters with additional suffixes.
+    debug: bool = False
+    # Emit counters once every 30 secs.
+    show_every_n_sec: int = 30
+    # Counter for records processed
+    # used for computing processing rate.
+    processed_counter: str = 'inputs'
+    # Counter for total inputs
+    # Used for computing remaining time.
+    total_counter: str = 'total'
+
 
 class Counters():
-    '''Dictionary of named counters.'''
+    '''Dictionary of named counters.
+
+    Example usage:
+      counters = Counters(prefix='my_process')
+      ...
+      counters.add_counter('input_rows')
+         .add_counter('output_rows', 10)
+
+      # Print counters on STDERR
+      counters.print_counters()
+      #   my_process_input_rows = 1
+      #  my_process_output_rows = 10
+
+    Note: This object is not thread-safe.
+    '''
 
     def __init__(self,
                  counters_dict: dict = None,
-                 debug: bool = False,
-                 config_dict: dict = None):
+                 prefix: str = '',
+                 options: CountersOptions = None):
         '''Initialize the counters.
+
         Args:
-          counters_dict: dictionary of pre-existing counters to load.
+          counters_dict: dictionary of pre-existing counters to updated.
+            Note that it updates existing reference to counters.
           debug: Enable or disable debug context counters.
-          config_dict: Dictionary with config parameter:values.
+          options: Dictionary with parameter:values.
         '''
-        self._counters = counters_dict
-        self._debug = debug
         if counters_dict is None:
             self._counters = {}
-        self._counter_config = config_dict
-        if config_dict is None:
-            self._counter_config = {}
-        # Parameters to show counters periodically.
-        self._num_calls = 0
-        self._show_counters_every_n = self._counter_config.get(
-            'show_counters_every_n', 0)
-        self._show_counters_every_secs = self._counter_config.get(
-            'show_counters_every_sec', 0)
+        else:
+            self._counters = counters_dict
+        self._prefix = prefix
+        if options:
+            self._options = options
+        else:
+            self._options = CountersOptions()
 
-    def _get_debug_counter(self, name: str, debug_context: str):
-        '''Returns the name of the counter with debug context.'''
-        return f'{name}-{debug_context}'
+        # Internal state
+        # Start time for rate counters.
+        self._start_time = time.time()
 
     def add_counter(self,
-                    name: str,
+                    counter_name: str,
                     value: int = 1,
-                    debug_context: str = None) -> int:
-        '''Increment a named counter by the given value.
+                    debug_context: str = None):
+        '''Increment a named counter and degun counter by the given value.
+        Also displays counters periodically based on option 'show_every_n_sec'.
+
         Args:
             name: Name of the counter to update
             value: value to be added to the counter
-            context: debug string added to the counter.
-        Returns:
-          current value of the counter after update.
-        '''
-        self._counters[name] = self._counters.get(name, 0) + value
-        if self._debug and debug_context:
-            # Add debug counter with the context message.
-            ext_name = self._get_debug_counter(name, debug_context)
-            self._counters[ext_name] = self._counters.get(ext_name, 0) + value
-        # Diplay all counters if required.
-        self.show_counters_periodically()
-        return self._counters[name]
+            debug_context: optional suffix for the debug counter.
 
-    def add_counters(self, counters_dict: dict) -> dict:
+        Returns:
+          this Counters object
+        '''
+        self._add_counter(counter_name, value, debug_context)
+        # Diplay all counters if required.
+        self._print_counters_periodically()
+        return self
+
+    def add_counters(self, counters_dict: dict):
         '''Add all counters from the given dict.
+
         Args:
           counters_dict: dictionary of counter values.
+
         Returns:
-          dictionary with all counter:values.
+          this Counters object
         '''
         if counters_dict:
             for counter, value in counters_dict.items():
                 self.add_counter(counter, value)
-        return self._counters
+        return self
 
-    def set_counter(self,
-                    name: str,
-                    value: int,
-                    debug_context: str = None) -> int:
+    def set_counter(self, name: str, value: int, debug_context: str = None):
         '''Set the value of a counter overwriting any previous value.
+
         Args:
           name: Name of the counter to set.
           value: counter value to set it to.
           debug_context: Debug context for the counter.
+
+        Returns:
+          this Counters object
         '''
-        self._counters[name] = 0
+        self._counters[self._get_counter_name(name)] = value
         if debug_context:
-            self._counters[self._get_debug_counter(name, debug_context)] = 0
-        self.add_counter(name, value, debug_context)
+            self._counters[self._get_counter_name(name, debug_context)] = value
+        return self
 
     def get_counters(self) -> dict:
         '''Return the dictionary of all counter:values.'''
         return self._counters
 
     def get_counter(self, name: str) -> int:
-        '''Return the value of a counter.
+        '''Return the value of a named counter.
+
         Args:
           name: Name of the counter to lookup.
+
         Returns:
           value if the counter if it exists, 0 otherwise.
         '''
-        return self._counters.get(name, 0)
+        return self._counters.get(self._get_counter_name(name), 0)
 
     def get_counters_string(self) -> str:
         '''Returns a formatted string of counter and values sorted by name.'''
@@ -126,25 +158,56 @@ class Counters():
         '''Print the counter values.
         If a file is specified, emits the counters to the file.
         If no file is specified, displays on error console.
+
         Args:
             file: file handle to emit counters string.
         '''
+        self._update_processing_rate()
         print(self.get_counters_string(), file=file)
 
-    def show_counters_periodically(self):
-        '''Show the counters periodically by time or by number of calls
-        based on the config 'show_counters_every_sec' or 'show_counters_every_n'.
-        '''
-        self._num_calls += 1
-        if self._show_counters_every_n > 0 and (self._num_calls %
-                                                self._show_counters_every_n):
-            self.print_counters()
-        else:
-            if self._show_counters_every_secs and (
-                    time.perf_counter() -
-                    self._last_display_time) > self._show_counters_every_secs:
-                self.print_counters()
-                self._last_display_time = time.perf_counter()
+    # Internal functions
+    def _get_counter_name(self, name: str, debug_context: str = None):
+        '''Returns the name of the counter with debug context.'''
+        name = f'{self._prefix}{name}'
+        if debug_context:
+            name = name + f'_{debug_context}'
+        return name
 
-    def log_counters(self):
-        logging.info(self.get_counters_string())
+    def _add_counter(self,
+                     counter_name: str,
+                     value: int = 1,
+                     debug_context: str = ''):
+        '''Increment counter with name by given value.'''
+        name = self._get_counter_name(counter_name)
+        self._counters[name] = self._counters.get(name, 0) + value
+        if debug_context and self._options.debug:
+            # Add debug counter with the context message.
+            ext_name = self._get_counter_name(counter_name, debug_context)
+            self._counters[ext_name] = self._counters.get(ext_name, 0) + value
+
+    def _update_processing_rate(self):
+        '''Update the processing rate and remaining time.
+        Uses the option: 'processed' to get the counter for processing rate
+        and option 'inputs' to estimate remaining time.
+        '''
+        time_taken = time.time() - self._start_time + 0.0001
+        self.set_counter('process_elapsed_time', time_taken)
+        num_processed = self.get_counter(self._options.processed_counter)
+        rate = 0.0001
+        if num_processed:
+            rate = num_processed / time_taken
+            self.set_counter('processing_rate', rate)
+        totals = self.get_counter(self._options.total_counter)
+        if totals:
+            self.set_counter('process_remaining_time',
+                              max(0, (totals - num_processed)) / rate)
+
+    def _print_counters_periodically(self):
+        '''Display the counters periodically by time or by number of calls
+        based on the option 'show_counters_every_sec' or 'show_counters_every_n'.
+        '''
+        interval = self._options.show_every_n_sec
+        if interval and isinstance(interval, int):
+            elapsed_time = int(time.time() - self._start_time)
+            if elapsed_time > 0 and elapsed_time % interval == 0:
+                self.print_counters()

@@ -42,11 +42,13 @@ python3 mcf_file_util.py --input_mcf=test_data/*.mcf --output_mcf=/tmp/output.mc
 import csv
 import glob
 import os
+import re
 
 from collections import OrderedDict
 from absl import app
 from absl import flags
 from absl import logging
+from typing import Union
 
 _FLAGS = flags.FLAGS
 
@@ -133,7 +135,7 @@ def add_pv_to_node(prop: str, value: str, node: dict) -> dict:
     if prop in node:
         # Property already exists. Add value to a list if not present.
         if value and value not in node[prop]:
-            node[prop] = f'{node[prop]}, {value}'
+            node[prop] = f'{node[prop]},{value}'
     else:
         # Add a new property:value
         node[prop] = value
@@ -309,33 +311,93 @@ def _get_prop_value_line(prop, value) -> str:
     return f'{prop}: {value}'
 
 
+def get_numeric_value(value: str) -> Union[int, float, None]:
+    '''Returns the float value from string or None.'''
+    if isinstance(value, int) or isinstance(value, float):
+        return value
+    if value and isinstance(value, str):
+        try:
+            normalized_value = value
+            if (value[0].isdigit() or value[0] == '.' or value[0] == '-' or
+                    value[0] == '+'):
+                # Input looks like a number. Remove allowed extra characters.
+                normalized_value = normalized_value.replace(',', '')
+                if value.count('.') > 1:
+                    # Period may be used instead of commas. Remove it.
+                    normalized_value = normalized_value.replace('.', '')
+            if value.count('.') == 1:
+                return float(normalized_value)
+            return int(normalized_value)
+        except ValueError:
+            # Value is not a number. Ignore it.
+            return None
+    return None
+
+
+def normalize_list(val: str) -> str:
+    '''Normalize a comma separated list sorting items.'''
+    if ',' in val:
+        # Sort comma separated text values.
+        value_list = [
+            '"{}"'.format(v.strip()) for v in list(
+                csv.reader(
+                    [val], delimiter=',', quotechar='"', skipinitialspace=True))
+            [0]
+        ]
+        values = sorted(value_list)
+        return ','.join(values)
+    else:
+        return val
+
+
+def normalize_range(val: str) -> str:
+    '''Normalize a quantity range into [<N> <M> Unit].'''
+    # Extract start, end and unit for the quantity range
+    quantity_pat = r'\[ *(?P<unit1>[A-Z][A-Za-z0-9_/]*)? *(?P<start>[0-9\.]+|-)? *(?P<end>[0-9\.]+|-)? *(?P<unit2>[A-Z][A-Za-z0-9_]*)? *\]'
+    matches = re.search(quantity_pat, val)
+    if not matches:
+        return val
+
+    match_dict = matches.groupdict()
+    if not match_dict:
+        return val
+
+    logging.debug(f'Matched range: {match_dict}')
+
+    start = match_dict.get('start', '')
+    end = match_dict.get('end', '')
+    unit = match_dict.get('unit1', '')
+    unit2 = match_dict.get('unit2', unit)
+    if unit2:
+        unit = unit2
+    return f'[{start} {end} {unit}]'
+
+
 def normalize_value(val) -> str:
     '''Normalize a property value adding a standard namespace prefix 'dcid:'.'''
     if val:
         if isinstance(val, str):
+            val = val.strip()
             # TODO: handle a mix of quoted strings and dcids.
             if val[0] == '"':
-                if ',' in val:
-                    # Sort comma separated text values.
-                    value_list = [
-                        '"{}"'.format(v.strip()) for v in list(
-                            csv.reader([val],
-                                       delimiter=',',
-                                       quotechar='"',
-                                       skipinitialspace=True))[0]
-                    ]
-                    values = sorted(value_list)
-                    return ','.join(values)
-                else:
-                    return val
+                return normalize_list(val)
             elif ',' in val:
                 # Sort comma separated dcids.
-                values = sorted(
-                    [add_namespace(strip_namespace(x)) for x in val.split(',')])
+                values = sorted([normalize_value(x) for x in val.split(',')])
                 return ','.join(values)
+            elif val[0] == '[':
+                return normalize_range(val)
             else:
+                # Check if string is a numeric value.
+                number = get_numeric_value(val)
+                if number:
+                    return normalize_value(number)
+                # Normalize string with a standardized namespace prefix.
                 return add_namespace(strip_namespace(val))
-        if isinstance(val, list):
+        elif isinstance(val, float):
+            # Return a fixed precision float string.
+            return f'{val}'
+        elif isinstance(val, list):
             # Sort a list of values normalizing the namespace prefix.
             values = sorted([normalize_value(x) for x in val])
             return ','.join(values)

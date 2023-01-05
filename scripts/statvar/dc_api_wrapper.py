@@ -26,7 +26,19 @@ from collections import OrderedDict
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 
+from download_util import request_url
 from mcf_file_util import add_namespace, strip_namespace
+
+# Path for reconciliation API in the dc.utils._API_ROOT
+# For more details, please refer to:
+# https://github.com/datacommonsorg/reconciliation#usage
+# Resolve Id
+# https://api.datacommons.org/v1/recon/resolve/id
+_DC_API_PATH_RESOLVE_ID = '/v1/recon/resolve/id'
+# Resolve latlng coordinate
+# https://api.datacommons.org/v1/recon/resolve/coordinate
+_DC_API_PATH_RESOLVE_COORD = '/v1/recon/resolve/coordinate'
+
 
 def dc_api_wrapper(function,
                    args: dict,
@@ -72,7 +84,8 @@ def dc_api_wrapper(function,
                     f'Invoking DC API {function}, #{attempt} with {args}, retries={retries}'
                 )
                 response = function(**args)
-                logging.debug(f'Got API response {response} for {function}, {args}')
+                logging.debug(
+                    f'Got API response {response} for {function}, {args}')
                 return response
             except KeyError:
                 # Exception in case of API error.
@@ -88,7 +101,9 @@ def dc_api_wrapper(function,
     return None
 
 
-def dc_api_batched_wrapper(function, dcids: list, args: dict,
+def dc_api_batched_wrapper(function,
+                           dcids: list,
+                           args: dict,
                            config: dict = None) -> dict:
     '''A wrapper for DC API on dcids with batching support.
     Returns the dictionary result for the function call across all arguments.
@@ -112,12 +127,12 @@ def dc_api_batched_wrapper(function, dcids: list, args: dict,
     Merged function return values across all dcids.
   '''
     if not config:
-      config = {}
+        config = {}
     api_result = {}
     index = 0
     num_dcids = len(dcids)
     api_batch_size = config.get('dc_api_batch_size', 10)
-    logging.info(
+    logging.debug(
         f'Calling DC API {function} on {len(dcids)} dcids in batches of {api_batch_size} with args: {args}...'
     )
     while index < num_dcids:
@@ -135,7 +150,8 @@ def dc_api_batched_wrapper(function, dcids: list, args: dict,
         if batch_result:
             api_result.update(batch_result)
             logging.debug(f'Got DC API result for {function}: {batch_result}')
-    logging.debug(f'Returning response {api_result} for {function}, {dcids}, {args}')
+    logging.debug(
+        f'Returning response {api_result} for {function}, {dcids}, {args}')
     return api_result
 
 
@@ -156,7 +172,8 @@ def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict = None) -> dict:
         'prop': 'typeOf',
         'out': True,
     }
-    api_result = dc_api_batched_wrapper(api_function, dcids, args, wrapper_config)
+    api_result = dc_api_batched_wrapper(api_function, dcids, args,
+                                        wrapper_config)
     response = {}
     for dcid in dcids:
         dcid_stripped = strip_namespace(dcid)
@@ -167,7 +184,8 @@ def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict = None) -> dict:
     return response
 
 
-def dc_api_get_node_property_values(dcids: list, wrapper_config: dict = None) -> dict:
+def dc_api_get_node_property_values(dcids: list,
+                                    wrapper_config: dict = None) -> dict:
     '''Returns all the property values for a set of dcids from the DC API.
     Args:
       dcids: list of dcids to lookup
@@ -179,7 +197,8 @@ def dc_api_get_node_property_values(dcids: list, wrapper_config: dict = None) ->
     '''
     predefined_nodes = OrderedDict()
     api_function = dc.get_triples
-    api_triples = dc_api_batched_wrapper(api_function, dcids, {}, wrapper_config)
+    api_triples = dc_api_batched_wrapper(api_function, dcids, {},
+                                         wrapper_config)
     if api_triples:
         for dcid, triples in api_triples.items():
             pvs = {}
@@ -190,3 +209,65 @@ def dc_api_get_node_property_values(dcids: list, wrapper_config: dict = None) ->
                     pvs['Node'] = add_namespace(dcid)
                 predefined_nodes[add_namespace(dcid)] = pvs
     return predefined_nodes
+
+
+def dc_api_resolve_placeid(dcids: list) -> dict:
+    '''Returns the resolved dcid for each of the placeid.
+
+    Args:
+      dcids: list of placeids to be resolved.
+
+    Returns:
+      dictionary keyed by input placeid with reoslved dcid as value.
+    '''
+    data = {'in_prop': 'placeId', 'out_prop': 'dcid'}
+    data['ids'] = dcids
+    num_ids = len(dcids)
+    api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_ID
+    logging.debug(
+        f'Looking up {api_url} dcids for {num_ids} placeids: {data["ids"]}')
+    recon_resp = request_url(url=api_url,
+                             params=data,
+                             method='POST',
+                             output='json')
+    # Extract the dcid for each place from the response
+    results = {}
+    if recon_resp:
+        for entity in recon_resp.get('entities', []):
+            place_id = entity.get('inId', '')
+            dcids = entity.get('outIds', None)
+            if place_id and dcids:
+                results[place_id] = dcids[0]
+    return results
+
+
+def dc_api_resolve_latlng(dcids: list) -> dict:
+    '''Returns the resolved dcid for each of the placeid.
+
+    Args:
+      dcids: list of placeids to be resolved.
+
+    Returns:
+      dictionary keyed by input placeid with reoslved dcid as value.
+    '''
+    data = {}
+    data['coordinates'] = dcids
+    num_ids = len(dcids)
+    api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_COORD
+    logging.debug(
+        f'Looking up {api_url} coordinates for {num_ids} placeids: {data}')
+    recon_resp = request_url(url=api_url,
+                             params=data,
+                             method='POST',
+                             output='json')
+    # Extract the dcids for each place from the response
+    results = {}
+    if recon_resp:
+        for entity in recon_resp.get('placeCoordinates', []):
+            dcids = entity.get('placeDcids', '')
+            lat = entity.get("latitude", "")
+            lng = entity.get("longitude", "")
+            place_id = f'{lat}{lng}'
+            if place_id and dcids:
+                results[place_id] = entity
+    return results
