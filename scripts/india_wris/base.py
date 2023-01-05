@@ -113,7 +113,7 @@ class WaterQualityBase():
                 re.split('\W+', x['Station Name']))
         ]),
                                         axis=1)
-        
+
         latitude_col = [col for col in self.df.columns if 'Latitude' in col]
         longitude_col = [col for col in self.df.columns if 'Longitude' in col]
         self.df['LatLong'] = self.df.apply(lambda x: \
