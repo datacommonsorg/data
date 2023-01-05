@@ -88,7 +88,7 @@ If you introduced new statistical variables, please create a Pull Request for th
 
 ## Manifesting Artifacts
 
-After your PR is reviewed and approved, the Data Commons team will work with you to manifest (e.g. generate for inclusion in our model) the artifacts you've created in our internal system. Only after the artifacts are manifested will they be added to the KG and be accessible?
+After your PR is reviewed and approved, the Data Commons team will work with you to manifest (e.g. generate for inclusion in our model) the artifacts you've created in our internal system. Only after the artifacts are manifested will they be added to the Data Commons graph and be accessible.
 
 ## Alternate approach: Generate Instance MCF
 
