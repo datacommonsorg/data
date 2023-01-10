@@ -153,10 +153,17 @@ _DEFAULT_CONFIG = {
     # Word separator, used to split words into phrases for PV map lookups.
     'word_delimiter':
         ' ',
+    # List of default PVS maps to lookup column values if there is no map for a
+    # column name.
+    'default_pv_maps': ['GLOBAL'],
+
     'show_counters_every_n':
         0,
     'show_counters_every_sec':
         30,
+    # Resolve places with Maps API.
+    # Set the Maps API key with --maps_api_key
+    'resolve_places': False,
     # Output options
     'generate_statvar_mcf':
         True,  # Generate MCF file with all statvars
@@ -232,7 +239,8 @@ class Config:
             self.add_configs(config_dict)
         if filename:
             self.load_config_file(filename)
-        logging.set_verbosity(self.get_config('log_level'))
+        #logging.set_verbosity(self.get_config('log_level'))
+        logging.set_verbosity(3)
         logging.debug(f'Using config: {self.get_configs()}')
 
     def get_config_from_flags(self) -> dict:

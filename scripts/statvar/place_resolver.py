@@ -234,7 +234,7 @@ class PlaceResolver:
 
         # Lookup Google Maps API.
         if not self._maps_api_key:
-            logging.fatal(
+            logging.error(
                 f'No maps key. Please set --maps_api_key for place lookup.')
         params = {
             'key': self._maps_api_key,

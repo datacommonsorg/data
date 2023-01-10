@@ -384,7 +384,7 @@ class PropertyValueMapper(Config, Counters):
                 format_data = format_str
                 self.add_counter('error-process-format', 1, format_str)
                 _DEBUG and logging.debug(
-                    f'Failed to format {format_prop}={strf} on {key}:{data} to get {format_data}'
+                    f'Failed to format {format_prop}={strf} on {key}:{data} with {pvs}'
                 )
             if format_prop != data_key and format_data != format_str:
                 pvs[format_prop] = format_data
@@ -433,17 +433,22 @@ class PropertyValueMapper(Config, Counters):
           dictionary of property:values for the input string.
         '''
         pvs = None
+        _DEBUG and logging.log(3, f'Search PVs for {namespace}:{key}')
         if namespace in self._pv_map:
             pvs = self._pv_map[namespace].get(key, None)
         else:
             # Check if key is unique and exists in any other map.
             dicts_with_key = []
             pvs = {}
-            for namespace, pv_map in self._pv_map.items():
-                if key in pv_map:
-                    dicts_with_key.append(namespace)
-                    _pvs_update(pv_map[key], pvs,
-                                self.get_config('multi_value_properties', {}))
+            namespaces = self.get_config('default_pv_maps', ['GLOBAL'])
+            for namespace in namespaces:
+                _DEBUG and logging.log(3, f'Search PVs for {namespace}:{key}')
+                if namespace in self._pv_map.keys():
+                  pv_map = self._pv_map[namespace]
+                  if key in pv_map:
+                      dicts_with_key.append(namespace)
+                      _pvs_update(pv_map[key], pvs,
+                                  self.get_config('multi_value_properties', {}))
             if len(dicts_with_key) > 1:
                 logging.warning(
                     f'Duplicate key {key} in property maps: {dicts_with_key}')
@@ -526,7 +531,7 @@ class PropertyValueMapper(Config, Counters):
         pvs = self.get_pvs_for_key(value, namespace)
         if pvs:
             return [pvs]
-        # Check if GLOBAL map has key namesapce:column-value
+        # Check if GLOBAL map has key namespace:column-value
         pvs = self.get_pvs_for_key(f'{namespace}:{value}')
         if pvs:
             return [pvs]
@@ -1528,15 +1533,17 @@ class StatVarDataProcessor(Config, Counters):
             self._statvars_map.remove_undefined_properties(
                 self._pv_mapper.get_pv_map())
         # Place resolver
-        self._place_resolver = PlaceResolver(config_dict=config_dict,
+        self._place_resolver = PlaceResolver(maps_api_key=self.get_config(
+            'maps_api_key', ''),
+                                             config_dict=config_dict,
                                              counters_dict=self.get_counters())
         # Regex for references within values, such as, '@Variable' or '{Variable}'
         self._reference_pattern = re.compile(
             r'@([a-zA-Z0-9_]+)\b|{([a-zA-Z0-9_]+)}')
         # Internal PVs created implicitly.
         self._internal_reference_keys = [
-            self.get_config('data_key', '@Data'),
-            self.get_config('numeric_data_key', '@Number')
+            self.get_config('data_key', 'Data'),
+            self.get_config('numeric_data_key', 'Number')
         ]
 
     # Functions that can be overridden by child classes.
@@ -1910,7 +1917,7 @@ class StatVarDataProcessor(Config, Counters):
                         row_col_pvs[col_index] = {'value': col_numeric_val}
                     else:
                         row_col_pvs[col_index] = {
-                            self.get_config('numeric_data_key', '@Number'):
+                            self.get_config('numeric_data_key', 'Number'):
                                 col_numeric_val
                         }
                     _DEBUG and logging.debug(
@@ -2165,18 +2172,23 @@ class StatVarDataProcessor(Config, Counters):
             place_dcid = place_id.get('observationAbout', '')
         if place_dcid == strip_namespace(place_dcid):
             # Place is not resolved yet. Try resolving through Maps API.
-            resolved_place = self._place_resolver.resolve_name({
-                place_dcid: {
-                    'name': place_dcid,
-                    'country': pvs.get('country', None),
-                    'administrative_area': pvs.get('administrative_area', None)
-                }
-            })
-            resolved_dcid = resolved_place.get(place_dcid, {}).get('dcid', None)
-            _DEBUG and logging.debug(
-                f'Got place dcid: {resolved_dcid} for place {place}')
-            if resolved_dcid:
-                place_dcid = add_namespace(resolved_dcid)
+            if self.get_config('resolve_places', False):
+                resolved_place = self._place_resolver.resolve_name({
+                    place_dcid: {
+                        'name':
+                            place_dcid,
+                        'country':
+                            pvs.get('country', None),
+                        'administrative_area':
+                            pvs.get('administrative_area', None)
+                    }
+                })
+                resolved_dcid = resolved_place.get(place_dcid,
+                                                   {}).get('dcid', None)
+                _DEBUG and logging.debug(
+                    f'Got place dcid: {resolved_dcid} for place {place}')
+                if resolved_dcid:
+                    place_dcid = add_namespace(resolved_dcid)
         if place_dcid:
             pvs['observationAbout'] = place_dcid
             _DEBUG and logging.debug(f'Resolved place {place} to {place_dcid}')
@@ -2288,7 +2300,8 @@ def prepare_input_data(config: dict) -> bool:
     shard_column = config.get('shard_input_by_column', '')
     if config.get('parallelism', 0) > 0 and shard_column:
         return shard_csv_data(input_files, shard_column,
-                              config.get('shard_prefix_length', sys.maxsize), True)
+                              config.get('shard_prefix_length', sys.maxsize),
+                              True)
     return input_files
 
 
@@ -2324,7 +2337,6 @@ def parallel_process(data_processor_class: StatVarDataProcessor,
             task = pool.apply_async(process, kwds=process_args)
         pool.close()
         pool.join()
-
 
     # Merge statvar mcf files into a single mcf output.
     mcf_files = f'{output_path}-*-of-*.mcf'
