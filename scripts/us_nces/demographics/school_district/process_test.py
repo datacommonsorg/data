@@ -57,15 +57,17 @@ class TestProcess(unittest.TestCase):
                                           "test_school_district_place.csv")
             tmcf_path_place = os.path.join(tmp_dir,
                                            "test_school_district_place.tmcf")
+            dup_csv_path_place = os.path.join(
+                tmp_dir, "test_private_school_place_dup.csv")
 
             loader = NCESDistrictSchool(self.ip_data, cleaned_csv_file_path,
                                         mcf_file_path, tmcf_file_path,
-                                        csv_path_place, tmcf_path_place)
+                                        csv_path_place, dup_csv_path_place,
+                                        tmcf_path_place)
 
             loader.generate_csv()
             loader.generate_mcf()
             loader.generate_tmcf()
-            loader._generate_tmcf_district()
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()

@@ -35,7 +35,6 @@ pd.set_option("display.max_columns", None)
 
 from common.replacement_functions import (replace_values, _UNREADABLE_TEXT)
 from common.prop_conf import *
-from common.place_conf import *
 
 CODEDIR = os.path.dirname(__file__)
 # For import common.replacement_functions
@@ -63,7 +62,7 @@ class USEducation:
     _observation_period = None
     _key_col_place = None
     _exclude_list = None
-    _drop_by_value = None
+    _school_id = None
     _renaming_columns = None
 
     def __init__(self,
@@ -72,12 +71,14 @@ class USEducation:
                  mcf_file_path: str = None,
                  tmcf_file_path: str = None,
                  cleaned_csv_place: str = None,
+                 duplicate_csv_place: str = None,
                  tmcf_file_place: str = None) -> None:
         self._input_files = input_files
         self._cleaned_csv_file_path = cleaned_csv_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
         self._csv_file_place = cleaned_csv_place
+        self._duplicate_csv_place = duplicate_csv_place
         self._tmcf_file_place = tmcf_file_place
         self._year = None
         self._df = pd.DataFrame()
@@ -86,6 +87,8 @@ class USEducation:
             os.mkdir(os.path.dirname(self._cleaned_csv_file_path))
         if not os.path.exists(os.path.dirname(self._csv_file_place)):
             os.mkdir(os.path.dirname(self._csv_file_place))
+        if not os.path.exists(os.path.dirname(self._duplicate_csv_place)):
+            os.mkdir(os.path.dirname(self._duplicate_csv_place))
 
     def set_cleansed_csv_file_path(self, cleansed_csv_file_path: str) -> None:
         self._cleaned_csv_file_path = cleansed_csv_file_path
@@ -346,7 +349,8 @@ class USEducation:
                                               regex_flag=False)
         self._final_df_place["ZIP4"] = np.where(
             (self._final_df_place["ZIP4"].str.len() > 5),
-            (self._final_df_place["ZIP4"].str.split()),
+            (self._final_df_place["ZIP4"].str[:5] + '-' +
+             self._final_df_place["ZIP4"].str[5:]),
             (self._final_df_place["ZIP4"]))
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"].astype(
@@ -710,16 +714,22 @@ class USEducation:
         ]
         # Replacing '–','†' with nan values.
         df_cleaned = df_cleaned.replace(_UNREADABLE_TEXT)
-        # Dropping school IDs whose entities are null based on the drop_list
+        # Writing duplicate school IDs to a file.
         df_duplicate = df_cleaned.copy()
-        df_duplicate = df_duplicate[df_duplicate.duplicated()]
-        df_duplicate.to_csv("duplicate_schools.csv", index=False)
+        df_duplicate = df_duplicate[df_duplicate.duplicated(
+            subset=self._school_id)]
+        if df_duplicate.shape[0] >= 1:
+            df_duplicate.to_csv(self._duplicate_csv_place,
+                                index=False,
+                                mode='a',
+                                header=False)
+        # Dropping school IDs whose entities are null based on the drop_list
         df_cleaned = df_cleaned.dropna(how='all', subset=drop_list)
         # Passing data_place list that contain columns required for place entities.
         df_place = df_cleaned[data_place]
         df_cleaned = df_cleaned.sort_values(by=data_cols, ascending=True)
         # Dropping Duplicate Schools based on School ID which is sort_value.
-        df_cleaned = df_cleaned.drop_duplicates(subset=self._drop_by_value,
+        df_cleaned = df_cleaned.drop_duplicates(subset=self._school_id,
                                                 keep="first")
 
         if self._import_name in [

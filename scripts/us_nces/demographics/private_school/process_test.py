@@ -57,15 +57,20 @@ class TestProcess(unittest.TestCase):
                                           "test_private_school_place.csv")
             tmcf_path_place = os.path.join(tmp_dir,
                                            "test_private_school_place.tmcf")
+            dup_csv_path_place = os.path.join(
+                tmp_dir, "test_private_school_place_dup.csv")
 
             loader = NCESPrivateSchool(self.ip_data, cleaned_csv_file_path,
                                        mcf_file_path, tmcf_file_path,
-                                       csv_path_place, tmcf_path_place)
+                                       csv_path_place, dup_csv_path_place,
+                                       tmcf_path_place)
 
             loader.generate_csv()
             loader.generate_mcf()
             loader.generate_tmcf()
-            loader._generate_tmcf_private()
+
+            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+                self.actual_csv_data = csv_file.read()
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()
@@ -73,14 +78,11 @@ class TestProcess(unittest.TestCase):
             with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
                 self.actual_tmcf_data = tmcf_file.read()
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
+            with open(csv_path_place, encoding="utf-8-sig") as csv_file:
+                self.actual_csv_place = csv_file.read()
 
             with open(tmcf_path_place, encoding="UTF-8") as tmcf_file:
                 self.actual_tmcf_place = tmcf_file.read()
-
-            with open(csv_path_place, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_place = csv_file.read()
 
     def test_mcf_tmcf_files(self):
         """

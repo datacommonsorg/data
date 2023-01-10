@@ -52,7 +52,7 @@ class NCESPrivateSchool(USEducation):
     _generate_statvars = True
     _observation_period = OBSERVATION_PERIOD
     _exclude_list = EXCLUDE_LIST
-    _drop_by_value = DROP_BY_VALUE
+    _school_id = DROP_BY_VALUE
     _renaming_columns = RENAMEING_PRIVATE_COLUMNS
 
     def set_include_columns(self, columns: list):
@@ -87,9 +87,12 @@ if __name__ == '__main__':
     mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
     tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
     cleaned_csv_place = os.path.join(output_file_path_place, CSV_FILE_PLACE)
+    duplicate_csv_place = os.path.join(output_file_path_place,
+                                       CSV_DUPLICATE_NAME)
     tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
     loader = NCESPrivateSchool(input_files, cleaned_csv_path, mcf_path,
-                               tmcf_path, cleaned_csv_place, tmcf_path_place)
+                               tmcf_path, cleaned_csv_place,
+                               duplicate_csv_place, tmcf_path_place)
 
     loader.generate_csv()
     loader.generate_mcf()

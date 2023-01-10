@@ -4,24 +4,3 @@ measuredProperty: dcs:count
 populationType: dcs:Student
 statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade1To8
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade1To8
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Student_SchoolGrade9To12
-measuredProperty: dcs:count
-populationType: dcs:Student
-schoolGradeLevel: dcs:SchoolGrade9To12
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Percent_Student_AsAFractionOf_Count_Teacher
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Teacher
-populationType: dcs:Student
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable

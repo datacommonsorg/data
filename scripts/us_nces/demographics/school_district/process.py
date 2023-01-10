@@ -52,7 +52,7 @@ class NCESDistrictSchool(USEducation):
     _observation_period = OBSERVATION_PERIOD
     _key_col_place = PLACE_KEY_COLUMNS
     _exclude_list = EXCLUDE_LIST
-    _drop_by_value = DROP_BY_VALUE
+    _school_id = DROP_BY_VALUE
     _renaming_columns = RENAMING_DISTRICT_COLUMNS
 
 
@@ -78,10 +78,13 @@ if __name__ == '__main__':
     mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
     tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
     csv_path_place = os.path.join(output_file_path_place, CSV_FILE_PLACE)
+    duplicate_csv_place = os.path.join(output_file_path_place,
+                                       CSV_DUPLICATE_NAME)
     tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
 
     loader = NCESDistrictSchool(input_files, cleaned_csv_path, mcf_path,
-                                tmcf_path, csv_path_place, tmcf_path_place)
+                                tmcf_path, csv_path_place, duplicate_csv_place,
+                                tmcf_path_place)
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()
