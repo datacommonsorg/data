@@ -239,8 +239,8 @@ class Config:
             self.add_configs(config_dict)
         if filename:
             self.load_config_file(filename)
-        #logging.set_verbosity(self.get_config('log_level'))
-        logging.set_verbosity(3)
+        logging.set_verbosity(self.get_config('log_level'))
+        #logging.set_verbosity(3)
         logging.debug(f'Using config: {self.get_configs()}')
 
     def get_config_from_flags(self) -> dict:

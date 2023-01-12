@@ -444,11 +444,12 @@ class PropertyValueMapper(Config, Counters):
             for namespace in namespaces:
                 _DEBUG and logging.log(3, f'Search PVs for {namespace}:{key}')
                 if namespace in self._pv_map.keys():
-                  pv_map = self._pv_map[namespace]
-                  if key in pv_map:
-                      dicts_with_key.append(namespace)
-                      _pvs_update(pv_map[key], pvs,
-                                  self.get_config('multi_value_properties', {}))
+                    pv_map = self._pv_map[namespace]
+                    if key in pv_map:
+                        dicts_with_key.append(namespace)
+                        _pvs_update(
+                            pv_map[key], pvs,
+                            self.get_config('multi_value_properties', {}))
             if len(dicts_with_key) > 1:
                 logging.warning(
                     f'Duplicate key {key} in property maps: {dicts_with_key}')
@@ -1688,9 +1689,8 @@ class StatVarDataProcessor(Config, Counters):
                 # Empty column without any PVs could be a multi-column-span
                 # header. Carry over previous column PVs if any.
                 col_pvs = prev_col_pvs
-            if col_pvs:
-                self.set_column_header_pvs(row_index, col_index, column_value,
-                                           col_pvs, column_headers)
+            self.set_column_header_pvs(row_index, col_index, column_value,
+                                       col_pvs, column_headers)
             prev_col_pvs = col_pvs
         _DEBUG and logging.debug(f'Setting column headers: {column_headers}')
 
