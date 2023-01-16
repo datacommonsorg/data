@@ -1912,7 +1912,7 @@ class StatVarDataProcessor(Config, Counters):
             else:
                 # Column has no PVs. Check if it has a value.
                 col_numeric_val = get_numeric_value(col_value)
-                if col_numeric_val:
+                if col_numeric_val is not None:
                     if self.get_config('use_all_numeric_data_values', False):
                         row_col_pvs[col_index] = {'value': col_numeric_val}
                     else:
@@ -2022,7 +2022,7 @@ class StatVarDataProcessor(Config, Counters):
         if not _is_valid_value(value):
             return False
         numeric_value = get_numeric_value(value)
-        if numeric_value:
+        if numeric_value is not None:
             multiply_prop = self.get_config('multiply_factor', 'MultiplyFactor')
             if multiply_prop in pvs:
                 multiply_factor = pvs[multiply_prop]
