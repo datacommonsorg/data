@@ -11,88 +11,161 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+Author: Suhana Bedi
+Date: 01/10/2023
+Name: format_usan
+Description: converts a .csv file containing USAN (United States Adopted Names) approved stems into a formatted .csv with stems and substems differentiated and dcids created.  
+@file_input: input .csv from USAN database
+@file_output: formatted .csv with USAN approved stems and substems
+"""
 
+# import the required packages
 import pandas as pd
 import numpy as np
 import sys
-import csv 
+
+#Disable false positive index chaining warnings
+pd.options.mode.chained_assignment = None
 
 def remove_null_entries(df):
+	"""Drop specific null entries from dataframe
+	Args:
+		df: dataframe with null entries 
+	Returns:
+		df: dataframe with null entries removed 
+	
+	"""
 	df = df.dropna(how='all') ## drop all rows with all empty values
 	df = df.iloc[:, [0, 1, 2, 3]] ## drop all columns with all empty values
-	mask = df.drop("Stem",axis=1).isna().all(1) & df['Stem'].notna() ## Drop rows where stem is not null but rest of the columns are null
+	mask = df.drop("Stem",axis=1).isna().all(1) & df['Stem'].notna() ## Drop rows where the column `stem` is not null but rest of the columns are null
 	df = df[~mask]
+	df = df.replace(r'\r+|\n+|\t+','', regex=True) ## remove endline and tab chars
 	return df
 
-def isNaN(num):
-	return num != num
+def isNaN(var):
+	"""Determines whether a variable is null or not 
+	Args:
+		num: string value
+	Returns:
+		boolean whether the variable is null (True) or not (False)
+	
+	"""
+	return var != var
 
 def format_stem_definitions(df):
-	df['Stem'] = df['Stem'].str.replace(r"\(.*\)","") ## removes text in parantheses
-	df['Definition'] = df['Definition'].str.replace(r"\(.*\)","")
-	df['Definition'] = df['Definition'].replace('',np.nan,regex = True)
-	df = df.assign(Stem=df.Stem.str.split(",")).explode('Stem')
-	df = df.assign(Stem=df.Stem.str.split("/")).explode('Stem')
-	df = df.replace(r'\r+|\n+|\t+','', regex=True) ## remove endline and tab chars
-	df['Stem'] = df['Stem'].str.replace('\W', '')
+	"""Formats the USAN stem and definitions
+	Args:
+		df: dataframe with USAN stem and definition columns
+	Returns:
+		df: dataframe with formatted USAN stem and definition columns
+	
+	"""
+	df[['Stem', 'Definition']] = df[['Stem', 'Definition']].astype(str).replace(r"\(.*\)","", regex=True) ## removes text from paranthesis
+	df['Definition'] = df['Definition'].replace('',np.nan,regex = True) ## replace empty string with np.nan
+	df = df.assign(Stem=df.Stem.str.split("[,/]")).explode('Stem') ## Explode Stem column based on comma and forward slash
+	df['Stem'] = df['Stem'].str.replace('\W', '', regex=True) ## retain only text chars from stem columns
 	return df
 
 def format_empty_rows(df):
-	df = df.reset_index(drop=True)
+	"""Fills empty rows with important data once certain conditions are met
+	Args:
+		df: dataframe with empty row values
+	Returns:
+		df: dataframe with populated row values
+	
+	"""
+	df = df.reset_index(drop=True) ## reindexes the dataframe
+	df = df.astype(object).replace('nan', np.nan) ## replace 'nan strings with np.nan'
 	for index,row in df.iterrows():
 		val = df.loc[index,'Definition']
 		val1 = df.loc[index,'Stem']
-		if(isNaN(val) & isNaN(val1)):
-			df.loc[index,'Definition'] = df.loc[index-1,'Definition']
-			df.loc[index,'Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)'] = df.loc[index-1,'Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)']
-			df.loc[index,'Stem'] = df.loc[index-1,'Stem']
+		if(isNaN(val) & isNaN(val1)): ## if both definition and stem values are empty for a row
+			cols = ['Definition', 'Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)', 'Stem']
+			for i in cols:
+				df.loc[index,i] = df.loc[index-1,i] ## fetches the definition, prefix and stem from the previous row
 	return df
 
 def format_word_stem(df):
+	"""Determines the word stem enum for each of the rows
+	Args:
+		df: dataframe without word stem categories
+	Returns:
+		df: dataframe with word stem categories
+	
+	"""
 	df['WordStem'] = np.nan
 	for index,row in df.iterrows():
 		val = df.loc[index,'Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)']
-		if(~isNaN(val)):
+		if(~isNaN(val)): ## evaluate word stem based on non-empty value
 			val = str(val)
-			if((val[0] == "-") & (val[-1] == "-")):
+			if((val[0] == "-") & (val[-1] == "-")): ## if the word starts and ends with a hyphen, it's an infix
 				df.loc[index,'WordStem'] = "WordStemInfix"
 			elif(val[0] == "-"):
-				df.loc[index,'WordStem'] = "WordStemPrefix"
+				df.loc[index,'WordStem'] = "WordStemPrefix" ## else, if the word starts with a hyphen, it's a prefix
 			else:
-				df.loc[index,'WordStem'] = "WordStemSuffix"
+				df.loc[index,'WordStem'] = "WordStemSuffix" ## if none of the above apply, it's a suffix
 	return df 
 
 def format_usan_specialization(df):
+	"""Determines the word specialization for each stem word
+	Args:
+		df: dataframe without word specialization
+	Returns:
+		df: dataframe with word specialization
+	
+	"""
 	df['SpecializationOf'] = np.nan
 	for index,row in df.iterrows():
 		val = df.loc[index,'Stem']
-		if(isNaN(val)):
-			if(isNaN(df.loc[index-1,'SpecializationOf'])):
+		if(isNaN(val)): ## if word stem is absent, it implies specialization is needed
+			if(isNaN(df.loc[index-1,'SpecializationOf'])): ## if there's no specialization for the previous row, the previous stem is a specialization of the current one
 				df.loc[index,'SpecializationOf'] = df.loc[index-1,'Stem']
 			else:
-				df.loc[index,'SpecializationOf'] = df.loc[index-1,'SpecializationOf']
+				df.loc[index,'SpecializationOf'] = df.loc[index-1,'SpecializationOf'] ## else specializations are same for the previous and current rows
 	return df
 
 def format_dcid(df):
+	"""Formats dcid for each stem word
+	Args:
+		df: dataframe without dcid
+	Returns:
+		df: dataframe with dcid
+	
+	"""
 	df['dcid'] = df['Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)'].str.split(' ').str[0]
-	df['dcid'] = df['dcid'].str.split().str[0]
-	df['dcid'] = df['dcid'].str.replace('\W', '')
-	df = df.dropna(subset=['dcid'])
+	df['dcid'] = df['dcid'].str.split().str[0] ## performs a split to retain only first substring
+	df['dcid'] = df['dcid'].str.replace('\W', '', regex=True) ## retains only characters 
+	df = df.dropna(subset=['dcid']) ## drops rows with empty dcids
 	df['name'] = df['dcid']
 	df['dcid'] = 'chem/' +  df['dcid']
 	df['SpecializationOf'] = "chem/" + df['SpecializationOf'].dropna().astype(str)	       
 	return df
 
 def format_chembl(df_chembl):
-	df_chembl = df_chembl.iloc[:, [5,6]]
-	df_chembl.rename(columns={'USAN Stem': 'dcid', 'USAN Year':'year'}, inplace=True)
-	df_chembl = df_chembl.assign(dcid=df_chembl.dcid.str.split(";")).explode('dcid')
-	df_chembl['dcid'] = df_chembl['dcid'].str.replace('\W', '')
+	"""Fetches USAN stem and year from chembl dataframe
+	Args:
+		df: chembl dataframe
+	Returns:
+		df: chembl dataframe with only USAN years and stems
+	
+	"""
+	df_chembl = df_chembl.iloc[:, [5,6]] ## only selects stem and year columns
+	df_chembl.rename(columns={'USAN Stem': 'dcid', 'USAN Year':'year'}, inplace=True) ## renames the columns
+	df_chembl = df_chembl.assign(dcid=df_chembl.dcid.str.split(";")).explode('dcid') ## explodes column on semi-colon
+	df_chembl['dcid'] = df_chembl['dcid'].str.replace('\W', '', regex=True) ## retains only characters
 	df_chembl = df_chembl.dropna()
-	df_chembl['dcid'] = "chem/" + df_chembl['dcid']
+	df_chembl['dcid'] = "chem/" + df_chembl['dcid'] ## creates dcid
 	return df_chembl
 
 def format_year(df, df_chembl):
+	"""Formats the USAN year from df_chembl and joins with df on column year
+	Args:
+		df: chembl dataframe
+	Returns:
+		df: chembl dataframe with only USAN years and stems
+	
+	"""
 	df1 = pd.merge(df, df_chembl, on=['dcid'], how='left')
 	df1.rename(columns={'Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)': 'StemType'}, inplace=True)
 	df1['year'] = df1['year'].astype(str).apply(lambda x: x.replace('.0',''))
@@ -122,7 +195,7 @@ def main():
 	df = pd.read_csv(file_input, low_memory=False)
 	df_chembl = pd.read_csv(file_chembl, sep = "\t")
 	df_final = driver_function(df, df_chembl)
-	df_final.to_csv('usan_output.csv', doublequote=False, escapechar='\\')
+	df_final.to_csv(file_output, doublequote=False, escapechar='\\')
 	
 
 if __name__ == '__main__':
