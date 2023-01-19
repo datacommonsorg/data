@@ -198,7 +198,7 @@ def process_df(df):
     # Write fire area in an ingest-able format.
     def get_area(area, label, mapping):
         if area and not np.isnan(area):
-            return mapping.format_map({label: area*_ACRE_TO_SQ_KM_MULTIPLIER})
+            return mapping.format_map({label: area * _ACRE_TO_SQ_KM_MULTIPLIER})
         else:
             return None
 
