@@ -1,0 +1,39 @@
+Node: dcid:WHO/ABC
+name: "WHO GHO Indicator ABC"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/ABC
+statType: dcs:measuredValue
+memberOf: dcid:WHO/g/CategoryOne
+
+Node: dcid:WHO/ABC_SOMETHING
+name: "WHO GHO Indicator ABC Specialized with Something"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/ABC
+statType: dcs:measuredValue
+memberOf: dcid:WHO/g/CategoryOne
+
+Node: dcid:WHO/XYZ
+name: "WHO GHO Indicator XYZ"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/XYZ
+statType: dcs:measuredValue
+memberOf: dcid:WHO/g/CategoryTwo
+
+Node: dcid:WHO/XYZ_SOMETHING
+name: "WHO GHO Indicator XYZ Specialized with Something And Existing Category"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/XYZ
+statType: dcs:measuredValue
+memberOf: dcid:WHO/g/CategoryTwo
+
+Node: dcid:WHO/NonExistent
+name: "WHO GHO Indicator not found"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/NonExistent
+statType: dcs:measuredValue
+memberOf: dcid:WHO/g/Other

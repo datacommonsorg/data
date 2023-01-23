@@ -1,0 +1,254 @@
+Node: dcid:dc/g/WHO/Root
+typeOf: dcs:StatVarGroup
+name: "Global Health Observatory"
+specializationOf: dcid:dc/g/Uncategorized
+
+Node: dcid:WHO/g/AmrGasp
+typeOf: dcs:StatVarGroup
+name: "Amr Gasp"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/AmrGlass
+typeOf: dcs:StatVarGroup
+name: "Amr Glass"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/ChildHealth
+typeOf: dcs:StatVarGroup
+name: "Child Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/DemographicAndSocioeconomicStatistics
+typeOf: dcs:StatVarGroup
+name: "Demographic And Socioeconomic Statistics"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/EssentialHealthTechnologies
+typeOf: dcs:StatVarGroup
+name: "Essential Health Technologies"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/FinancialProtection
+typeOf: dcs:StatVarGroup
+name: "Financial Protection"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/GlobalObservatoryForEhealthGoe
+typeOf: dcs:StatVarGroup
+name: "Global Observatory For Ehealth (Goe)"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/HealthEquityMonitor
+typeOf: dcs:StatVarGroup
+name: "Health Equity Monitor"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/HealthSystems
+typeOf: dcs:StatVarGroup
+name: "Health Systems"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/HealthWorkforce
+typeOf: dcs:StatVarGroup
+name: "Health Workforce"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/HivAidsAndOtherStis
+typeOf: dcs:StatVarGroup
+name: "Hiv/Aids And Other Stis"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Icd
+typeOf: dcs:StatVarGroup
+name: "Icd"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Immunization
+typeOf: dcs:StatVarGroup
+name: "Immunization"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/InfectiousDiseases
+typeOf: dcs:StatVarGroup
+name: "Infectious Diseases"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Infrastructure
+typeOf: dcs:StatVarGroup
+name: "Infrastructure"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/InjuriesAndViolence
+typeOf: dcs:StatVarGroup
+name: "Injuries And Violence"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/InsecticideResistance
+typeOf: dcs:StatVarGroup
+name: "Insecticide Resistance"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/InternationalHealthRegulations2005MonitoringFramework
+typeOf: dcs:StatVarGroup
+name: "International Health Regulations (2005) Monitoring Framework"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Malaria
+typeOf: dcs:StatVarGroup
+name: "Malaria"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/MedicalEquipment
+typeOf: dcs:StatVarGroup
+name: "Medical Equipment"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/MillenniumDevelopmentGoalsMdgs
+typeOf: dcs:StatVarGroup
+name: "Millennium Development Goals (Mdgs)"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/MortalityAndGlobalHealthEstimates
+typeOf: dcs:StatVarGroup
+name: "Mortality And Global Health Estimates"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/NegelectedTropicalDiseases
+typeOf: dcs:StatVarGroup
+name: "Negelected Tropical Diseases"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/NeglectedTropicalDiseases
+typeOf: dcs:StatVarGroup
+name: "Neglected Tropical Diseases"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Nlis
+typeOf: dcs:StatVarGroup
+name: "Nlis"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/NoncommunicableDiseases
+typeOf: dcs:StatVarGroup
+name: "Noncommunicable Diseases"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/NoncommunicableDiseasesAndMentalHealth
+typeOf: dcs:StatVarGroup
+name: "Noncommunicable Diseases And Mental Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/NoncommunicableDiseasesCcs
+typeOf: dcs:StatVarGroup
+name: "Noncommunicable Diseases Ccs"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Nutrition
+typeOf: dcs:StatVarGroup
+name: "Nutrition"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/OralHealth
+typeOf: dcs:StatVarGroup
+name: "Oral Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Other
+typeOf: dcs:StatVarGroup
+name: "Other"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/PublicHealthAndEnvironment
+typeOf: dcs:StatVarGroup
+name: "Public Health And Environment"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudGovernance
+typeOf: dcs:StatVarGroup
+name: "Rsud: Governance"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudHumanResources
+typeOf: dcs:StatVarGroup
+name: "Rsud: Human Resources"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudInformationSystems
+typeOf: dcs:StatVarGroup
+name: "Rsud: Information Systems"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudServiceOrganizationAndDeliveryPharmacologicalTreatment
+typeOf: dcs:StatVarGroup
+name: "Rsud: Service Organization And Delivery: Pharmacological Treatment"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudServiceOrganizationAndDeliveryPreventionProgramsAndProviders
+typeOf: dcs:StatVarGroup
+name: "Rsud: Service Organization And Delivery: Prevention Programs And Providers"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudServiceOrganizationAndDeliveryScreeningAndBriefInterventions
+typeOf: dcs:StatVarGroup
+name: "Rsud: Service Organization And Delivery: Screening And Brief Interventions"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudServiceOrganizationAndDeliverySpecialProgrammesAndServices
+typeOf: dcs:StatVarGroup
+name: "Rsud: Service Organization And Delivery: Special Programmes And Services"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudServiceOrganizationAndDeliveryTreatmentCapacityAndTreatmentCoverage
+typeOf: dcs:StatVarGroup
+name: "Rsud: Service Organization And Delivery: Treatment Capacity And Treatment Coverage"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudServiceOrganizationAndDeliveryTreatmentSectorsAndProviders
+typeOf: dcs:StatVarGroup
+name: "Rsud: Service Organization And Delivery: Treatment Sectors And Providers"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RsudYouth
+typeOf: dcs:StatVarGroup
+name: "Rsud: Youth"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/SexualAndReproductiveHealth
+typeOf: dcs:StatVarGroup
+name: "Sexual And Reproductive Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/SubstanceUseAndMentalHealth
+typeOf: dcs:StatVarGroup
+name: "Substance Use And Mental Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/SustainableDevelopmentGoals
+typeOf: dcs:StatVarGroup
+name: "Sustainable Development Goals"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Tobacco
+typeOf: dcs:StatVarGroup
+name: "Tobacco"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Tuberculosis
+typeOf: dcs:StatVarGroup
+name: "Tuberculosis"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/UniversalHealthCoverage
+typeOf: dcs:StatVarGroup
+name: "Universal Health Coverage"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/UrbanHealth
+typeOf: dcs:StatVarGroup
+name: "Urban Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/WorldHealthStatistics
+typeOf: dcs:StatVarGroup
+name: "World Health Statistics"
+specializationOf: dcid:dc/g/WHO/Root
