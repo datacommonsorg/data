@@ -28,10 +28,10 @@ To extract flooded regions from the dynamic world dataset, run:
       --end_date='2022-10-31' \
       --band='water' `# Pick water band from dynamic world collection` \
       --band_min=0.7 `# Minimum value for a pixel to be considered flooded` \
-      --reducer='max' `# Get the maximal flood extent over the time period` \
+      --ee_reducer='max' `# Get the maximal flood extent over the time period` \
       --ee_mask='land' `# filter by dataset land to remove permanent water `\
       --scale=1000 `# Reduce image to 1000m pixels` \
-      |& /tmp/ee.log
+      |& tee /tmp/ee.log
 
 This creates a task on Earth Engine.
 To view task status, visit https://code.earthengine.google.com/tasks
@@ -44,8 +44,9 @@ import datetime
 import ee
 import glob
 import os
-import sys
 import re
+import sys
+import time
 
 from absl import app
 from absl import flags
@@ -99,10 +100,15 @@ flags.DEFINE_string(
 flags.DEFINE_string(
     'ee_bounds', None,
     'Rectangular bounds as "lat,lng:lat,lng" for filtering images.')
-flags.DEFINE_bool('debug', False, 'Enable debug messages.')
+flags.DEFINE_string(
+    'ee_output_data_type', None,
+    'Convert output band values to the given type, such as float, int.')
 flags.DEFINE_integer(
-    'image_count', 1,
+    'ee_image_count', 1,
     'Number of images to generate, each advanced by --time_period.')
+flags.DEFINE_bool('ee_export_image', True,
+                  'If true, submit a task to export image.')
+flags.DEFINE_bool('debug', False, 'Enable debug messages.')
 
 _FLAGS = flags.FLAGS
 _FLAGS(sys.argv)  # Allow invocation without app.run()
@@ -139,6 +145,17 @@ _DEFAULT_DATASETS = {
         'ee_image_collection': 'FIRMS',
         # 'band': 'T21',  # Brightness temperature of a fire pixel in K
     },
+
+    # ERA5 Monthly Aggregates
+    # https://developers.google.com/earth-engine/datasets/catalog/ECMWF_ERA5_MONTHLY#bands
+    'era5_monthly': {
+        'ee_image_collection': 'ECMWF/ERA5/MONTHLY',
+    },
+    'nasa_gfs_realtime': {
+        # Get NASA GFS mages with forecast_hours as 0
+        'ee_image_eval':
+            "ee.ImageCollection('NOAA/GFS0P25').filter(ee.Filter.eq('forecast_hours', 0))",
+    },
 }
 
 EE_DEFAULT_CONFIG = {
@@ -169,12 +186,14 @@ EE_DEFAULT_CONFIG = {
 
     # Output image settings
     'scale': _FLAGS.scale,
+    'ee_output_data_type': _FLAGS.ee_output_data_type,
     # GCS setting to export images
     'gcs_project': _FLAGS.gcs_project,
     'gcs_folder': _FLAGS.gcs_folder,
     'gcs_bucket': _FLAGS.gcs_bucket,
     'gcs_output': _FLAGS.gcs_output,
-    'image_count': _FLAGS.image_count,
+    'ee_export_image': _FLAGS.ee_export_image,
+    'ee_image_count': _FLAGS.ee_image_count,
 
     # Debug options
     'debug': _FLAGS.debug,
@@ -313,7 +332,6 @@ def ee_filter_date(col: ee.ImageCollection,
     elif time_period:
         # Extract the delta and units from the period such as 'P1M'.
         end_date = _advance_date(start_date, time_period)
-        config['end_date'] = end_date
         end_dt = ee.Date(end_date)
     if end_dt is None:
         end_dt = ee.Date(date.today().strftime('%Y-%m-%d'))
@@ -333,37 +351,56 @@ def ee_reduce_image_collection(col: ee.ImageCollection,
         ee_reducer which is one of (min/max/mean/sum/count/first/last).
         if ee_reducer is not set, the reducer is inferred from the band thresholds:
           band_min, band_max, band_eq
+        If multiple reducers are set, then all are applied in sequence.
     Returns:
       image with bands changed to '<band>_<reducer>', eg: 'water_max'
     '''
-    reducer = config.get('ee_reducer', 'mean')
-    if not reducer:
-        # Get default reducer based on band value thresholds.
-        if 'band_min' in config:
-            # Get max value to filter by min threshold.
-            reducer = 'max'
-        if 'band_max' in config:
-            if not reducer:
-                # Get min value to filter by max threshold alone.
-                reducer = 'min'
-            else:
-                # Get mean value if both min/max thresholds are set.
-                reducer = 'mean'
-        elif 'band_eq' in config:
-            reducer = 'last'
+    if not isinstance(col, ee.ImageCollection):
+        logging.error(f'Cannot reduce image: {col.id()} with config: {config}')
+        return col
+
     _REDUCER_DICT = {
         'min': ee.Reducer.min(),
         'max': ee.Reducer.max(),
+        'minMax': ee.Reducer.minMax(),
         'mean': ee.Reducer.mean(),
         'sum': ee.Reducer.sum(),
         'first': ee.Reducer.first(),
         'last': ee.Reducer.last(),
         'count': ee.Reducer.count(),
     }
-    reducer_fn = _REDUCER_DICT.get(reducer, ee.Reducer.mean())
-    img = col.reduce(reducer_fn)
+
+    reducers = config.get('ee_reducer', 'mean').split(',')
+    if isinstance(reducers, str):
+        reducers = reducers.split(',')
+    if not reducers:
+        # Get default reducer based on band value thresholds.
+        if 'band_min' in config:
+            # Get max value to filter by min threshold.
+            reducers = ['max']
+        if 'band_max' in config:
+            if not reducer:
+                # Get min value to filter by max threshold alone.
+                reducer = ['min']
+            else:
+                # Get mean value if both min/max thresholds are set.
+                reducer = ['mean']
+        elif 'band_eq' in config:
+            reducer = ['last']
+    img = ee.Image()
+    for reducer in reducers:
+        if reducer not in _REDUCER_DICT:
+            logging.fatal(
+                f'Unknown reducer: {reducer} not one of {_REDUCER_DICT.keys()}')
+        reducer_fn = _REDUCER_DICT[reducer]
+        reduced_img = col.reduce(reducer_fn)
+        logging.info(
+            f'Reduced image from coll: {reduced_img.get("id")} using reducer: {reducer}'
+        )
+        img = img.addBands(reduced_img)
     logging.info(
-        f'Reduced collection to image {img.get("id")} with reducer: {reducer}')
+        f'Reduced collection to image {img.get("id")} with reducers: {reducers}'
+    )
     return img
 
 
@@ -422,6 +459,29 @@ def ee_filter_band(image: ee.Image, config: dict) -> ee.Image:
             image = image.multiply(mask)
         logging.info(f'Filtered band with mask image: {image.get("id")}')
     return image
+
+
+def ee_convert_band_output_type(img: ee.Image, config: dict) -> ee.Image:
+    '''Returns an image with bands converted to a consistent type
+    as set in config 'ee_output_data_type'.
+    Args:
+      img: Image with bands to be converted
+      config: dictionary of parameter:values with the parameters:
+        ee_output_data_type: set to one of int/float.
+    Returns:
+      image with bands set to the given output type.
+    '''
+    data_type = config.get('ee_output_data_type', None)
+    if not data_type:
+        return img
+    data_type = data_type.lower()
+    logging.info(f'Changing bands in image to {data_type}: {img.get("id")}')
+    if data_type == 'float':
+        return img.toFloat()
+    if data_type == 'int':
+        return img.toInt()
+    logging.fatal(f'Unsupported data type: {data_type}')
+    return img
 
 
 def ee_generate_image(config: dict) -> ee.Image:
@@ -486,9 +546,17 @@ def ee_generate_image(config: dict) -> ee.Image:
             # Mask refers to another config dictionary. Load that image.
             mask = ee_generate_image(config['ee_mask'])
         if mask:
+            if isinstance(img, ee.ImageCollection):
+                # Reduce input image collection to an image.
+                img = ee_reduce_image_collection(img, config)
             img = img.updateMask(mask)
             logging.info(
                 f'Applied mask: {mask.id()} for image: {img.get("id")}')
+
+    # Change all output bands to a consistent type.
+    if config.get('ee_output_data_type', None):
+        img = ee_convert_band_output_type(img, config)
+
     return img
 
 
@@ -522,7 +590,9 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
                             config.get('ee_image_collection', 'ee_image'))))
         ]
         img_config.append(('band', config.get('band', '')))
-        img_config.append(('r', config.get('ee_reducer', '')))
+        reducers = config.get('ee_reducer')
+        if reducers:
+            img_config.append(('r', str(reducers)))
         img_config.append(('mask', config.get('ee_mask', '')))
         img_config.append(('s', str(config.get('scale', ''))))
         img_config.append(('from', config.get('start_date', '')))
@@ -556,23 +626,29 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
     return task
 
 
-def ee_process(config):
+def ee_process(config) -> list:
     '''Generate earth engine images and export to GCS.
     Called should wait for the task to complete.
     Args:
       config: dictionary with parameter: values.
         For supported params, refer to _DEFAULT_CONFIG.
-        if image_count > 1, then multiple images are exported with
+        if ee_image_count > 1, then multiple images are exported with
         the start_time, end_time advanced by time_period.
     '''
+    ee_tasks = []
     ee.Initialize()
-    config['image_count'] = config.get('image_count', 1)
-    while config['image_count'] > 0:
+    config['ee_image_count'] = config.get('ee_image_count', 1)
+    while config['ee_image_count'] > 0:
         logging.info(f'Getting image for config: {config}')
         img = ee_generate_image(config)
+        if isinstance(img, ee.ImageCollection):
+            # Reduce input image collection to an image.
+            img = ee_reduce_image_collection(img, config)
         if img:
-            logging.info(f'Exporting image {img.get("id")} to GCS')
-            export_ee_image_to_gcs(img, config)
+            logging.info(f'Generated image {img.get("id")}')
+            if config.get('ee_export_image', True):
+                task = export_ee_image_to_gcs(img, config)
+                ee_tasks.append(task)
         else:
             logging.error(f'Failed to generate image for config: {config}')
         # Advance time to next period.
@@ -581,8 +657,21 @@ def ee_process(config):
             dt = _advance_date(config.get(ts, ''), time_period)
             if dt:
                 config[ts] = dt
-        config['image_count'] = config['image_count'] - 1
+        config['ee_image_count'] = config['ee_image_count'] - 1
         logging.info(f'Advanced dates by {time_period}: {config}')
+
+    # Wait for tasks to complete
+    if config.get('ee_wait_task', True):
+        pending_tasks = set(ee_tasks)
+        while len(pending_tasks) > 0:
+            task = pending_tasks.pop()
+            if task.active():
+                pending_tasks.add(task)
+                logging.info(f'Waiting for task: {task}')
+                time.sleep(10)
+            else:
+                task_status = ee.data.getTaskStatus(task.id)
+                logging.info(f'EE task completed: {task_status}')
 
 
 def main(_):

@@ -6,3 +6,6 @@ startDate: C:Events->startDate
 endDate: C:Events->endDate
 startLocation: C:Events->startLocation
 area: C:Events->area
+affectedPlace: C:Events->affectedPlace
+containedInPlace: C:Events->containedInPlace
+observationPeriod: C:Events->dutation
