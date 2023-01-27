@@ -1,0 +1,182 @@
+Node: E:India_AQI->E0
+dcid: C:India_AQI->dcid
+typeOf: dcs:AirQualitySite
+
+Node: E:India_AQI->E1
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_PM2.5
+measuredProperty: dcs:concentration
+value: C:India_AQI->PM25
+
+Node: E:India_AQI->E2
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_PM10
+measuredProperty: dcs:concentration
+value: C:India_AQI->PM10
+
+Node: E:India_AQI->E3
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_NO2
+measuredProperty: dcs:concentration
+value: C:India_AQI->NO2
+
+Node: E:India_AQI->E4
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_Ammonia
+measuredProperty: dcs:concentration
+value: C:India_AQI->NH3
+unit: dcid:MicrogramsPerCubicMeter
+
+Node: E:India_AQI->E5
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_SO2
+measuredProperty: dcs:concentration
+value: C:India_AQI->SO2
+
+Node: E:India_AQI->E6
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_CO
+measuredProperty: dcs:concentration
+value: C:India_AQI->CO
+
+Node: E:India_AQI->E7
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_Ozone
+measuredProperty: dcs:concentration
+value: C:India_AQI->O3
+
+Node: E:India_AQI->E8
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Temperature
+measuredProperty: dcs:temperature
+value: C:India_AQI->AT
+
+Node: E:India_AQI->E9
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_BarometricPressure
+measuredProperty: dcs:barometricPressure
+value: C:India_AQI->BP
+
+Node: E:India_AQI->E10
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_SolarInsolation
+measuredProperty: dcs:solarInsolation
+value: C:India_AQI->SR
+
+Node: E:India_AQI->E11
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Humidity_RelativeHumidity
+measuredProperty: dcs:humidity
+value: C:India_AQI->RH
+
+Node: E:India_AQI->E12
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_WindDirection
+measuredProperty: dcs:windDirection
+value: C:India_AQI->WD
+
+Node: E:India_AQI->E13
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_NitrogenMonoxide
+measuredProperty: dcs:concentration
+value: C:India_AQI->NO
+unit: dcid:MicrogramsPerCubicMeter
+
+Node: E:India_AQI->E14
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_OxidesOfNitrogen
+measuredProperty: dcs:concentration
+value: C:India_AQI->NOx
+unit: dcid:PartsPerBillion
+
+Node: E:India_AQI->E15
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_Benzene
+measuredProperty: dcs:concentration
+value: C:India_AQI->Benzene
+unit: dcid:MicrogramsPerCubicMeter
+
+Node: E:India_AQI->E16
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_Toluene
+measuredProperty: dcs:concentration
+value: C:India_AQI->Toluene
+unit: dcid:MicrogramsPerCubicMeter
+
+Node: E:India_AQI->E17
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_Xylene
+measuredProperty: dcs:concentration
+value: C:India_AQI->Xylene
+unit: dcid:MicrogramsPerCubicMeter
+
+Node: E:India_AQI->E18
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_MPXylene
+measuredProperty: dcs:concentration
+value: C:India_AQI->MP_Xylene
+unit: dcid:MicrogramsPerCubicMeter
+
+Node: E:India_AQI->E19
+typeOf: dcid:StatVarObservation
+observationDate: C:India_AQI->Date
+observationAbout: E:India_AQI->E0
+observationPeriod: "P4H"
+variableMeasured: dcid:Mean_Concentration_AirPollutant_EthylBenzene
+measuredProperty: dcs:concentration
+value: C:India_AQI->Eth_Benzene
+unit: dcid:MicrogramsPerCubicMeter
