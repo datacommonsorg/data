@@ -1,0 +1,13 @@
+Node: E:atc_output->E1
+typeOf: dcs:AnatomicalTherapeuticChemicalCode
+dcid: C:atc_output->dcid
+name: C:atc_output->atc_name
+averageDailyDosage: C:atc_output->ddd
+unitOfMeasure: C:atc_output->uom
+routeOfAdministration: C:atc_output->adm_r
+note: C:atc_output->note
+anatomicalTherapeuticChemicalCodeLevel1: C:atc_output->atc_level1
+anatomicalTherapeuticChemicalCodeLevel2: C:atc_output->atc_level2
+anatomicalTherapeuticChemicalCodeLevel3: C:atc_output->atc_level3
+anatomicalTherapeuticChemicalCodeLevel4: C:atc_output->atc_level4
+anatomicalTherapeuticChemicalCodeLevel5: C:atc_output->atc_level5
