@@ -243,7 +243,6 @@ class Counters():
         '''Returns the counter prefix.'''
         return self._prefix
 
-
     # Internal functions
     def _get_counter_name(self, name: str, debug_context: str = None):
         '''Returns the name of the counter with debug context.'''
