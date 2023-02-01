@@ -9,7 +9,7 @@ The data in zip formats are downloadable from https://www.epa.gov/air-emissions-
 The actual URLs are listed in download_config.py.
 
 
-#### API Output
+### API Output
 These are the attributes that we will use
 | Attribute      				| Description                                               |
 |-------------------------------|-----------------------------------------------------------|
@@ -19,7 +19,7 @@ These are the attributes that we will use
 | pollutant code   				    | The Gas generated which pollutes the Air. 			    |
 | pollutant type(s)   				    | The type of Gas generated which pollutes the Air. 			    |
 
-#### Cleaned Data
+### Cleaned Data
 Cleaned data will be inside [output/national_emissions.csv] as a CSV file with the following columns.
 
 - year
@@ -30,7 +30,7 @@ Cleaned data will be inside [output/national_emissions.csv] as a CSV file with t
 - unit
 
 
-#### MCFs and Template MCFs
+### MCFs and Template MCFs
 - [output/national_emissions.mcf]
 - [output/national_emissions.tmcf]
 

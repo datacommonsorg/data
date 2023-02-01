@@ -55,8 +55,8 @@ def download_files(INPUT_URLS, folders) -> None:
                 # This will do the renaming
                 zipinfo.filename = year + '_' + zipinfo.filename
                 zipdata.extract(zipinfo)
-        # Move files in specific folders to input_files folder
 
+# Move files in specific folders to input_files folder
     for folder in folders:
         files = os.listdir(os.path.join(_DOWNLOAD_PATH, folder))
         for file in files:

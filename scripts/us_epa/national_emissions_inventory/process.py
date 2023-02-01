@@ -57,6 +57,8 @@ _TMCF_TEMPLATE = ("Node: E:national_emissions->E0\n"
                   "observationPeriod: \"P1Y\"\n"
                   "value: C:national_emissions->observation\n")
 
+TRIBAL_GEOCODE_START_RANGE = 80000
+
 
 class USAirEmissionTrends:
     """
@@ -159,7 +161,7 @@ class USAirEmissionTrends:
         # Remove if Tribal Details are needed
         #
         df['geo_Id'] = df['geo_Id'].astype(float).astype(int)
-        df = df.drop(df[df.geo_Id > 80000].index)
+        df = df.drop(df[df.geo_Id > TRIBAL_GEOCODE_START_RANGE].index)
         df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
         df['geo_Id'] = df['geo_Id'].astype(str)
         #
@@ -215,7 +217,7 @@ class USAirEmissionTrends:
                     'Exhaust', 'Evaporation', 'Refueling', 'BName', 'TName',
                     'Cruise', 'Maneuvering', 'ReducedSpeedZone', 'Hotelling'
             ]:
-                code = "\nemissionTypeCode: dcs:" + sv_property[3]
+                code = "emissionTypeCode: dcs:" + sv_property[3]
                 scc_name = scc_name + ", " + sv_property[3]
                 pollutant_start = 4 if sv_property[4] != 'SCC' else None
 

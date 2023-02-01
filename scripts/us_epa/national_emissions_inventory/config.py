@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Replacing values for the year 2008 and 2011
 replacement_08_11 = {
     'state_and_county_fips_code': 'fips code',
     'pollutant_cd': 'pollutant code',
@@ -19,15 +20,21 @@ replacement_08_11 = {
     'total_emissions': 'total emissions',
     'emissions_type_code': 'emissions type code'
 }
+
+# dropping unwanted values for the year 2008 and 2011
 drop_08_11 = [
     'tribal_name', 'st_usps_cd', 'county_name', 'data_category_cd',
     'description', 'aircraft_engine_type_cd', 'emissions_op_type_code',
     'data_set_short_name'
 ]
+
+# dropping unwanted values for the year 2008 and 2011
 drop_08_11_event = [
     'st_usps_cd', 'county_name', 'SCC_Level_One', 'SCC_Level_Two',
     'SCC_Level_Three', 'SCC_Level_Four', 'EI_Sector', 'description'
 ]
+
+# replacement for the year 2014
 replacement_14 = {
     'state_and_county_fips_code': 'fips code',
     'fips': 'fips code',
@@ -37,18 +44,25 @@ replacement_14 = {
     'total_emissions': 'total emissions',
     'emissions_type_code': 'emissions type code'
 }
+
+# dropping unwanted values for the year 2014
 drop_14 = [
     'tribal_name', 'fips_state_code', 'st_usps_cd', 'county_name',
     'data_category', 'emission_operating_type', 'pollutant_desc',
     'emissions_operating_type', 'data_set'
 ]
+
+# dropping unwanted values for the year 2014
 drop_14_event = ['state', 'county', 'fire_type', 'pollutant desc']
 
+# replacing for the year 2017
 replacement_17 = {
     'emissions uom': 'unit',
     'total emissions': 'observation',
     'data set': 'year'
 }
+
+# replacing for the year 2017
 replacement_point_17 = {
     'fips': 'fips code',
     'pollutant_code': 'pollutant code',
@@ -57,11 +71,15 @@ replacement_point_17 = {
     'total emissions': 'observation',
     'pollutant_type': 'pollutant type(s)'
 }
+
+# dropping unwanted values for the year 2017
 drop_17 = [
     'epa region code', 'state', 'fips state code', 'county', 'aetc',
     'reporting period', 'sector', 'tribal name', 'pollutant desc',
     'data category', 'data set'
 ]
+
+# dropping unwanted value for 2017
 drop_17_event = [
     'state', 'fips state code', 'tribal name', 'county', 'data category',
     'reporting period', 'emissions operating type', 'pollutant desc', 'data set'
