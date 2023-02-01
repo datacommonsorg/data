@@ -19,7 +19,8 @@ The source file can have comments starting with '#' as well as trailing commas.
 Note:
   The file is parsed as python statements, so the following differ from JSON:
   - boolean values should be True/False (Capitalized) instead of json true/false.
-  - None instead of null
+  - None instead of null.
+  - Allows trailing ',' without a next element.
 
 Usage:
    # Load config map from a json file with comments and trailing ,:
