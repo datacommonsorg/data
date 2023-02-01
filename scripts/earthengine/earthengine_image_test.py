@@ -47,11 +47,10 @@ class EarthengineImageTest(unittest.TestCase):
     config['time_period'] = 'P1M'
     config['ee_bounds'] = '24.72,83.83,26.06,88.26'
     ee_image = eei.ee_generate_image(config)
-
+    print(ee_image)
     # Compare image id (description) with expected.
     ee_image_id = str(ee_image.id())
-    print(f'Generated image: {ee_image_id})
-    with open(os.path.join(_TESTDIR, 'sample_ee_image_id.txt'), 'r') as exp:
+    with open(os.path.join(_TESTDIR, 'sample_floods_ee_image_id.txt'), 'r') as exp:
       expected_id = exp.read().strip()
       self.assertEqual(ee_image_id, expected_id)
 

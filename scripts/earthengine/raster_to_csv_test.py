@@ -21,9 +21,14 @@ import unittest
 from absl import logging
 
 # Allows the following module imports to work when running as a script
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_SCRIPTS_DIR = os.path.dirname(os.path.dirname(__file__))
+sys.path.append(_SCRIPTS_DIR)
+sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 
 import raster_to_csv as r2c
+
+from util.config_map import ConfigMap
+from util.counters import Counters
 
 _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         'test_data')
@@ -46,9 +51,9 @@ class RasterToCsvTest(unittest.TestCase):
     def test_process_geotiff(self):
         '''Verify generation of place and data CSVs.'''
         with tempfile.TemporaryDirectory() as tmp_dir:
-            input_geotiff = os.path.join(_TESTDIR, 'sample.tif')
+            input_geotiff = os.path.join(_TESTDIR, 'sample_floods.tif')
             place_output_prefix = os.path.join(tmp_dir, 'sample_flood_place')
-            process_config = r2c.load_config({
+            process_config = ConfigMap(config_dict={
                 's2_level': 13,
                 'aggregate_s2_level': 10,
                 'contained_in_s2_level': 10,
@@ -60,7 +65,7 @@ class RasterToCsvTest(unittest.TestCase):
                 'output_s2_place': place_output_prefix,
             })
             output_csv = os.path.join(tmp_dir, 'sample_flood_output.csv')
-            counter = {}
+            counter = Counters()
             # Process raster into csv data points.
             r2c.process(input_geotiff=input_geotiff,
                         input_csv=None,
@@ -68,19 +73,19 @@ class RasterToCsvTest(unittest.TestCase):
                         config=process_config,
                         counter=counter)
             self.compare_files(
-                os.path.join(_TESTDIR, 'sample_output.csv'), output_csv)
+                os.path.join(_TESTDIR, 'sample_floods_output.csv'), output_csv)
             self.compare_files(
-                os.path.join(_TESTDIR, 'sample_output_places.csv'),
+                os.path.join(_TESTDIR, 'sample_floods_output_places.csv'),
                 f'{place_output_prefix}.csv')
             self.compare_files(
-                os.path.join(_TESTDIR, 'sample_output_places.tmcf'),
+                os.path.join(_TESTDIR, 'sample_floods_output_places.tmcf'),
                 f'{place_output_prefix}.tmcf')
 
     def test_process_csv(self):
         '''Verify re-processing of CSV file.'''
         with tempfile.TemporaryDirectory() as tmp_dir:
-            input_csv = os.path.join(_TESTDIR, 'sample_output.csv')
-            process_config = r2c.load_config({
+            input_csv = os.path.join(_TESTDIR, 'sample_floods_output.csv')
+            process_config = ConfigMap(config_dict={
                 's2_level': 13,
                 'aggregate_s2_level': 10,
                 'aggregate': 'sum',
@@ -97,7 +102,7 @@ class RasterToCsvTest(unittest.TestCase):
             })
             output_csv = os.path.join(tmp_dir,
                                       'sample_flood_output_filtered.csv')
-            counter = {}
+            counter = Counters()
             # Process raster into csv data points.
             r2c.process(input_geotiff=None,
                         input_csv=input_csv,
@@ -105,5 +110,5 @@ class RasterToCsvTest(unittest.TestCase):
                         config=process_config,
                         counter=counter)
             self.compare_files(
-                os.path.join(_TESTDIR, 'sample_output_filtered.csv'),
+                os.path.join(_TESTDIR, 'sample_floods_output_filtered.csv'),
                 output_csv)
