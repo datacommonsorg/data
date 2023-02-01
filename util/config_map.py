@@ -71,6 +71,12 @@ class ConfigMap:
                  config_dict: dict = None,
                  filename: str = None,
                  config_string: str = None):
+        '''Create a Config Map object.
+        Args:
+          config_dict: dictionary with key:values to be loaded into the config map.
+          filename: override the dictionary with key:values from the file.
+          config_string: string of dictionary parameters to override key:values.
+        '''
         self._config_dict = dict()
         # Add configs from input args.
         if config_dict:
