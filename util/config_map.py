@@ -91,7 +91,7 @@ class ConfigMap:
           dictionary with all config parameters after updates from the file.
           '''
         if filename:
-            self.add_configs(_get_py_dict_from_file(filename))
+            self.add_configs(read_py_dict_from_file(filename))
         return self._config_dict
 
     def load_config_string(self, config_params_str: str) -> dict:
@@ -212,7 +212,7 @@ class ConfigMap:
 
     def get_config_str(self) -> str:
         '''Returns the config dictionary as a pretty string.'''
-        return pprint.format(self._config_dict, indent=4)
+        return pprint.pformat(self._config_dict, indent=4)
 
     def write_config(filename: str):
         '''Write the config dictionary into a file.
@@ -263,8 +263,8 @@ def _deep_update(src: dict, add_dict: dict) -> dict:
     return src
 
 
-def _get_py_dict_from_file(filename: str) -> dict:
-    '''Load a python dict from a file.
+def read_py_dict_from_file(filename: str) -> dict:
+    '''Read a python dict from a file.
 
     Args:
       filename: JSON or a python file containing dict of parameter to value mappings.
@@ -278,7 +278,7 @@ def _get_py_dict_from_file(filename: str) -> dict:
     Raises:
       exceptions on parsing errors string dict from literal_eval()
     '''
-    logging.info(f'Loading python dict from {filename}...')
+    logging.info(f'Reading python dict from {filename}...')
     with open(filename) as file:
         dict_str = file.read()
 
@@ -287,3 +287,15 @@ def _get_py_dict_from_file(filename: str) -> dict:
     param_dict = ast.literal_eval(dict_str)
     logging.debug(f'Loaded {filename} into dict {param_dict}')
     return param_dict
+
+
+def write_py_dict_to_file(py_dict: dict, filename: str):
+    '''Write a python dict into a file.
+
+    Args:
+      py_dict: Dictionary to save into the file.
+      filename: file to write into.
+    '''
+    logging.info(f'Writing python dict into {filename}')
+    with open(filename, 'w') as file:
+        file.write(pprint.pformat(py_dict, indent=4))
