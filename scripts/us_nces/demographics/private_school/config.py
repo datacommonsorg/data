@@ -15,7 +15,7 @@
 This Python Script is config file
 for us nces demographic private school.
 """
-
+# Defining file names.
 CSV_FILE_NAME = "us_nces_demographics_private_school.csv"
 MCF_FILE_NAME = "us_nces_demographics_private_school.mcf"
 TMCF_FILE_NAME = "us_nces_demographics_private_school.tmcf"
@@ -26,21 +26,22 @@ SCHOOL_TYPE = "private_school"
 OBSERVATION_PERIOD = "P2Y"
 SPLIT_HEADER_ON_SCHOOL_TYPE = "[Private School]"
 
+# Considering the required columns for Demographics Data.
 POSSIBLE_DATA_COLUMNS = [
     ".*Students.*", ".*Teacher.*", "Percentage.*", ".*Ungraded.*", "Grades.*",
     "Prekindergarten and Kindergarten.*"
 ]
-
+# Excluding the unwanted columns.
 EXCLUDE_DATA_COLUMNS = [
     "(Ungraded & K-12)",
 ]
-
+# Considering the required columns for Place Data.
 POSSIBLE_PLACE_COLUMNS = [
     "school_state_code", "ZIP + 4", "ZIP", ".*County.*", ".*School.*",
     "Lowest Grade.*", "Highest Grade.*", "Physical.*", "Phone.*",
     "Coeducational", "School Level.*", ".*State.*", "City.*", "Religious.*"
 ]
-
+# Excluding the unwanted columns.
 EXCLUDE_PLACE_COLUMNS = [
     "State Name", "County Name", "Total Students",
     "Prekindergarten and Kindergarten Students", "Grades 1-8 Students",
@@ -62,14 +63,14 @@ EXCLUDE_PLACE_COLUMNS = [
     "Two or More Races Students", "Percentage of Two or More Races Students",
     "Pupil/Teacher Ratio", "Full-Time Equivalent", "year"
 ]
-
+# Set of columns to exclude while checking for duplicate School IDs
 EXCLUDE_LIST = [
     "school_state_code", "Private School Name", "ANSI/FIPS State Code",
     "School ID - NCES Assigned", "State Abbr"
 ]
-
+# Dropping the Duplicate entries based on School ID
 DROP_BY_VALUE = "School ID - NCES Assigned"
-
+# Renaming column name.
 RENAMEING_PRIVATE_COLUMNS = {
     "Private School Name":
         "Private_School_Name",

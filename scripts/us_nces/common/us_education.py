@@ -148,6 +148,14 @@ class USEducation:
         return raw_df
 
     def _clean_columns(self, raw_df: pd.DataFrame) -> pd.DataFrame:
+        '''
+        Extracts the required name from the column name
+        ex: 'State Name [Private School] Latest available year' -> 'State Name'
+        Args:
+            raw_df (pd.DataFrame): Input DataFrame
+        Returns:
+            raw_df (pd.DataFrame): cleaned header DataFrame
+        '''
         cleaned_columns = []
         for col in raw_df.columns.values.tolist():
             cleaned_columns.append(
@@ -262,13 +270,22 @@ class USEducation:
 
     def _generate_mcf_data(self, data_df: pd.DataFrame,
                            prop_cols: list) -> pd.DataFrame:
+        '''
+        Mapps the property according to the value from prop_conf file from 
+        common folder.
+        Args:
+            data_df (pd.DataFrame): Input DataFrame
+            prop_cols (list): property columns
+        Returns:
+            mcf_mapper (dict): property mapped columns
+            data_df (pd.DataFrame): new mcf column which consists the dictionary
+        '''
 
         data_df['mcf'] = \
                     data_df[prop_cols].apply(
                     func=lambda x: '\n'.join(x.dropna()),
                     axis=1).str.replace('"', '')
         mcf_mapper = dict(zip(data_df["all_prop"], data_df['mcf']))
-
         return mcf_mapper
 
     def _generate_stat_var_and_mcf(self,
@@ -308,7 +325,7 @@ class USEducation:
     def _verify_year_uniqueness(self, headers: list) -> bool:
         """
         Checks for particual year in the file which is being executed and
-        gives an error if any other year column is being executed.
+        gives an error if any other 'year column' is being executed.
         Args:
             headers: list
         Returns:
@@ -328,7 +345,7 @@ class USEducation:
 
     def _transform_private_place(self):
         """
-        
+        The Data for Place Entities is cleaned and written to a file.
         """
         # Renaming column names in the dataframe.
         self._final_df_place = self._final_df_place.rename(
@@ -408,7 +425,7 @@ class USEducation:
 
     def _transform_public_place(self):
         """
-        
+        The Data for Place Entities is cleaned and written to a file.
         """
         # Renaming Column Names
         self._final_df_place = self._final_df_place.rename(
@@ -557,12 +574,13 @@ class USEducation:
 
     def _transform_district_place(self):
         """
-        
+        The Data for Place Entities is cleaned and written to a file.
         """
         self._final_df_place[
             'geoID'] = "sch" + self._final_df_place['Agency ID - NCES Assigned']
         self._final_df_place = self._final_df_place.rename(
             columns=self._renaming_columns)
+        # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
                                               replace_with_all_mappers=False,
                                               regex_flag=False)
@@ -570,7 +588,10 @@ class USEducation:
             'County_code'].astype(str)
         self._final_df_place['State_code'] = self._final_df_place[
             'State_code'].astype(str)
-
+        # In some cases The state code is not valid or is not a state.
+        # For example: state_code:59, 63
+        # In such cases, the state code is replaced with first 2 characters of
+        # its respective county code
         self._final_df_place["State_code"] = np.where(
             self._final_df_place["State_code"].str.contains("59|63"),
             (self._final_df_place['County_code'].astype(str).str[:2]),
@@ -580,12 +601,13 @@ class USEducation:
             'County_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
         self._final_df_place['State_code'] = self._final_df_place[
             'State_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
-
+        # Generates State code by mapping state abbrevation and USSTATE map
+        # to fill the empty values in the state code column.
         self._final_df_place['State_code'] = np.where(
             self._final_df_place['State_code'] == "",
             (self._final_df_place['State_Abbr'].map(USSTATE_MAP)),
             (self._final_df_place['State_code']))
-
+        # Creating a unique list of Sate Code and removing null values from source.
         state_list = list(pd.unique(self._final_df_place['State_code']))
         if '' in state_list:
             state_list.remove("")
@@ -598,14 +620,15 @@ class USEducation:
         }
         dcid_check_state = dc_api_get_defined_dcids(state_list, config)
         dcid_check_state[""] = False
-
+        # Generating a column for place property.
         self._final_df_place['ContainedInPlace'] = self._final_df_place[
             'State_code'].apply(lambda x: x if dcid_check_state[x] else '')
-
+        # Reverse mapping State abbrevations from the current state_code
+        # column to combine Physical Address with State Abbrevation.
         state_abbr = {v: k for k, v in USSTATE_MAP.items()}
         self._final_df_place['Validated_State_Abbr'] = self._final_df_place[
             'State_code'].replace(state_abbr)
-
+        # Camel casing Physical Address
         self._final_df_place["Physical_Address"] = self._final_df_place[
             "Physical_Address"] + " " + self._final_df_place["City"]
         self._final_df_place["Physical_Address"] = self._final_df_place[
@@ -630,7 +653,8 @@ class USEducation:
             self._final_df_place["District_School_name"].str.len() <= 4,
             self._final_df_place["District_School_name"],
             self._final_df_place["District_School_name"].str.title())
-
+        # Created a column School_Management for State Name as NCES_BureauOfIndianEducation
+        # and NCES_DepartmentOfDefenseEducationActivity as they are outlyin areas of United States.
         self._final_df_place["School_Management"] = np.where(
             self._final_df_place["State_Name"].str.contains(
                 "NCES_BureauOfIndianEducation|NCES_DepartmentOfDefenseEducationActivity"
@@ -650,17 +674,28 @@ class USEducation:
             subset=["school_state_code"]).reset_index(drop=True)
 
     def _parse_file(self, raw_df: pd.DataFrame) -> pd.DataFrame:
+        '''
+        This method combines and melts all the columns to one Final DataFrame.
+        The final dataframe consists the preferred columns based on place or 
+        demographics data.
+        Args:
+            raw_df (pd.DataFrame): cleaned Dataframes
+        Returns:
+            pd.DataFrame
+        '''
+        # Extracting year from the input file
         self._year = self._extract_year_from_headers(
             raw_df.columns.values.tolist())
+        # Checks for a different year column in the input file and print the
+        # below statement.
         year_check = self._verify_year_uniqueness(
             raw_df.columns.values.tolist())
-
         if not year_check:
             print(
                 "Some columns in file {} is not of expected year- correct the download config. Exiting.."
             )
             exit()
-
+        # Extracting the lower interval year as per DataCommons K12 Import.
         raw_df["year"] = self._year[0:4].strip()
 
         df_cleaned = self._clean_data(raw_df)
@@ -670,7 +705,7 @@ class USEducation:
                 df_cleaned[col].astype('str').str.strip()
 
         df_cleaned = self._clean_columns(df_cleaned)
-
+        # Adding prefix to the SchoolID as per DataCommons
         if self._import_name == "private_school":
             df_cleaned["school_state_code"] = \
                 "nces/" + df_cleaned["School ID - NCES Assigned"]
@@ -685,20 +720,21 @@ class USEducation:
         curr_place = curr_cols
         data_cols = []
         data_place = []
+        # Excludes the column name that are not required for Demographics.
         for pattern in self._exclude_columns:
             pat = f"^((?!{pattern}).)*$"
             r = re.compile(pat)
             curr_cols = list(filter(r.match, curr_cols))
-
+        # Consideres only the column name patterns required for Demographics.
         for pattern in self._include_columns:
             r = re.compile(pattern)
             data_cols += list(filter(r.match, curr_cols))
-
+        # Excludes the column name that are not required for Place Data.
         for pattern in self._exclude_col_place:
             pat = f"^((?!{pattern}).)*$"
             r = re.compile(pat)
             curr_place = list(filter(r.match, curr_place))
-
+        # Consideres only the column name patterns required for Place Data.
         for pattern in self._include_col_place:
             r = re.compile(pattern)
             data_place += list(filter(r.match, curr_place))
@@ -782,7 +818,7 @@ class USEducation:
 
         if not self._generate_statvars:
             return df_cleaned[data_cols]
-
+        # Melting all the columns to its respective observation.
         df_cleaned = df_cleaned.melt(id_vars=['school_state_code', 'year'],
                                      value_vars=data_cols,
                                      var_name='sv_name',
@@ -790,7 +826,7 @@ class USEducation:
 
         df_cleaned['observation'] = pd.to_numeric(df_cleaned['observation'],
                                                   errors='coerce')
-
+        # Dropping empty obsevation values.
         df_cleaned["observation"] = df_cleaned["observation"].replace(
             to_replace={'': pd.NA})
         df_cleaned = df_cleaned.dropna(subset=['observation'])
@@ -837,6 +873,8 @@ class USEducation:
                     for col in df_parsed.columns.values.tolist():
                         df_parsed[col] = df_parsed[col].astype(
                             'str').str.replace("FeMale", "Female")
+                # Adding new columns scaling_factor:100 and unit:dcs:Percent
+                #  wherever the SV is Percent.
                     df_parsed["scaling_factor"] = np.where(
                         df_parsed["sv_name"].str.contains("Percent"), 100, '')
                     df_parsed["unit"] = np.where(
@@ -846,12 +884,13 @@ class USEducation:
                         "school_state_code", "year", "sv_name", "observation",
                         "scaling_factor", "unit"
                     ]]
+                    # Dropping Duplicates and writing to a file
                     df_final.drop_duplicates(inplace=True)
                     df_final.to_csv(self._cleaned_csv_file_path,
                                     header=False,
                                     index=False,
                                     mode='a')
-
+                    # The column unique SVs are extracted for MCF properties.
                     df_parsed = df_parsed.drop_duplicates(
                         subset=["sv_name"]).reset_index(drop=True)
                     curr_sv_names = df_parsed["sv_name"].values.tolist()
@@ -862,7 +901,8 @@ class USEducation:
                     df_parsed = df_parsed[df_parsed["sv_name"].isin(
                         new_sv_names)].reset_index(drop=False)
                 dfs.append(df_parsed)
-
+        # Based on the import_name, the place data is executed and written to a
+        # file.
         if self._import_name == "private_school":
             self._transform_private_place()
             self._final_df_place.to_csv(self._csv_file_place,
@@ -939,7 +979,7 @@ class USEducation:
         with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write(tmcf.rstrip('\n'))
 
-        # Generating tmcf file for NCES place entities
+        # Generating tmcf file for NCES place entities based on the import name.
         if self._import_name == "private_school":
             with open(self._tmcf_file_place, 'w+', encoding='utf-8') as f_out:
                 f_out.write(TMCF_TEMPLATE_PLACE_PRIVATE.rstrip('\n'))

@@ -1,6 +1,0 @@
-Node: dcid:Count_Student_ReducedLunch
-lunchEligibility: dcs:ReducedLunch
-measuredProperty: dcs:count
-populationType: dcs:Student
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable

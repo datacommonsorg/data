@@ -18,6 +18,7 @@ found in downloaded files and its corresponding SV name.
 While preprocessing files column names are changed to SV names as used in
 DC import
 """
+# TMCF template for Demographics data. It changes based on import name.
 TMCF_TEMPLATE = (
     "Node: E:us_nces_demographics_{import_name}->E0\n"
     "typeOf: dcs:StatVarObservation\n"
@@ -30,6 +31,7 @@ TMCF_TEMPLATE = (
     "observationPeriod: \"{observation_period}\"\n"
     "value: C:us_nces_demographics_{import_name}->observation\n")
 
+# TMCF template for Private School Place.
 TMCF_TEMPLATE_PLACE_PRIVATE = (
     "Node: E:us_nces_demographics_private_place->E0\n"
     "dcid: C:us_nces_demographics_private_place->school_state_code\n"
@@ -46,6 +48,7 @@ TMCF_TEMPLATE_PLACE_PRIVATE = (
     "religiousOrientation: C:us_nces_demographics_private_place->School_Religion\n"
     "coeducationStatus: C:us_nces_demographics_private_place->Coeducational\n")
 
+# TMCF template for School District Place.
 TMCF_TEMPLATE_PLACE_DISTRICT = (
     "Node: E:us_nces_demographics_district_place->E0\n"
     "dcid: C:us_nces_demographics_district_place->school_state_code\n"
@@ -66,6 +69,7 @@ TMCF_TEMPLATE_PLACE_DISTRICT = (
     "schoolManagement: C:us_nces_demographics_district_place->School_Management\n"
 )
 
+# TMCF template for Public School Place.
 TMCF_TEMPLATE_PLACE_PUBLIC = (
     "Node: E:us_nces_demographics_public_place->E0\n"
     "dcid: C:us_nces_demographics_public_place->school_state_code\n"
@@ -91,11 +95,13 @@ TMCF_TEMPLATE_PLACE_PUBLIC = (
     "schoolManagement: C:us_nces_demographics_public_place->School_Management\n"
 )
 
+# Denominator Property for SVs which have percent or ratio.
 _DENOMINATOR_PROP = {
     "Pupil/Teacher Ratio": "Count_Teacher",
     "Percent": "Count_Student"
 }
 
+# Property map to which the Faculty anf Teacher columns are considered.
 _POPULATION_PROP = {
     "Full-Time Equivalent": "Teacher",
     "Elementary Teachers": "Teacher",
@@ -119,12 +125,13 @@ _POPULATION_PROP = {
     "School Psychologist": "Faculty",
     "Other Support Services Staff": "Faculty"
 }
-
+# One specific column comes under school grade property.
 _SCHOOL_GRADE_PROP = {"Ungraded Students": "NCESUngradedClasses"}
-
+# melting the columns based on sv_name column.
 MELT_VAR_COL = "sv_name"
 
 # pylint:disable=unnecessary-lambda-assignment
+# Creating property pattern and the pattern is modified if required based on column.
 _PV_FORMAT = lambda prop_val: f'"{prop_val[0]}": "dcs:{prop_val[1]}"' \
                         if 'None' not in prop_val[1] else ""
 _UPDATE_MEASUREMENT_DENO = lambda prop: _DENOMINATOR_PROP.get(prop, prop)
@@ -132,17 +139,17 @@ _UPDATE_POPULATION_TYPE = lambda prop: _POPULATION_PROP.get(prop, "Student")
 _UPDATE_GRADE_LEVEL = lambda prop: _SCHOOL_GRADE_PROP.get(prop, prop)
 SV_NODE_FORMAT = lambda prop_val: f'Node: dcid:{prop_val}'
 # pylint:enable=unnecessary-lambda-assignment
-
+# Default property for every node.
 DF_DEFAULT_MCF_PROP = [('statType', 'measuredValue', _PV_FORMAT),
                        ('measuredProperty', 'count', _PV_FORMAT),
                        ('typeOf', 'StatisticalVariable', _PV_FORMAT)]
-
+# The order in which the property should be arranged.
 SV_PROP_ORDER = [
     "measuredProperty", "populationType", "statType", "typeOf", "race",
     "schoolGradeLevel", "measurementDenominator", "gender", "lunchEligibility",
     "facultyType"
 ]
-
+# Patterns of every property and its respective columns.
 _RACE_PATTERN = (r"("
                  r"American Indian/Alaska Native"
                  r"|"
@@ -286,7 +293,7 @@ _SCHOOL_STAFF_PATTERN = (r"("
                          r"|"
                          r"Other Support Services Staff"
                          r")")
-
+# Based on the above patterns, properties are mapped to values.
 FORM_STATVAR = {
     "race": {
         "regex": {
