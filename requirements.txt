@@ -1,6 +1,7 @@
 # Requirements for all Python code in this repo, except for import-automation
 
 absl-py==0.9.0
+arcgis2geojson
 chembl-webresource-client>=0.10.2
 dataclasses==0.6
 datacommons==1.4.3
