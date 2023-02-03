@@ -343,8 +343,8 @@ def grid_to_polygon(grid: str) -> Polygon:
 def place_id_to_lat_lng(placeid: str,
                         dc_api_lookup: bool = True) -> (float, float):
     '''Returns the lat/lng degrees for the place.'''
-    lat = 0
-    lng = 0
+    lat = None
+    lng = None
     if is_s2_cell_id(placeid):
         s2_cell = s2_cell_from_dcid(placeid)
         point = s2_cell.to_lat_lng()
@@ -599,20 +599,26 @@ def add_namespace(dcid: str, prefix: str = 'dcid:') -> str:
     return f'{prefix}{strip_namespace(dcid)}'
 
 
-def str_get_numeric_value(value: str) -> Union[int, float, None]:
-    '''Returns the float value from string or None.'''
+def str_get_numeric_value(
+        value: Union[str, list, int, float]) -> Union[int, float, None]:
+    '''Returns the numeric value from input string or None.'''
+    if isinstance(value, list):
+        value = value[0]
     if isinstance(value, int) or isinstance(value, float):
         return value
     if value and isinstance(value, str):
+        normalized_value = value.strip()
+        if not normalized_value:
+            return None
+        if (normalized_value[0].isdigit() or normalized_value[0] == '.' or
+                normalized_value[0] == '-' or normalized_value[0] == '+'):
+            # Input looks like a number. Remove allowed extra characters.
+            # Parse numbers of the form 10,000,000 or 20,00,000.
+            normalized_value = normalized_value.replace(',', '')
+            if normalized_value.count('.') > 1:
+                # Period may be used instead of commas. Remove it.
+                normalized_value = normalized_value.replace('.', '')
         try:
-            normalized_value = value.strip()
-            if (normalized_value[0].isdigit() or normalized_value[0] == '.' or
-                    normalized_value[0] == '-' or normalized_value[0] == '+'):
-                # Input looks like a number. Remove allowed extra characters.
-                normalized_value = normalized_value.replace(',', '')
-                if normalized_value.count('.') > 1:
-                    # Period may be used instead of commas. Remove it.
-                    normalized_value = normalized_value.replace('.', '')
             if normalized_value.count('.') == 1:
                 return float(normalized_value)
             if normalized_value.startswith('0x'):

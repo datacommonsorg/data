@@ -369,5 +369,7 @@ class StrUtilsTest(unittest.TestCase):
         self.assertEqual(2100, utils.str_get_numeric_value('2.1e+3'))
         self.assertEqual(2748, utils.str_get_numeric_value('0xabc'))
         self.assertEqual(1234567, utils.str_get_numeric_value('1.234.567'))
+        self.assertEqual(1.23, utils.str_get_numeric_value(['1.23', '4.56']))
+        self.assertEqual(2.34, utils.str_get_numeric_value([2.34, 5.67]))
         self.assertEqual(None, utils.str_get_numeric_value('abc'))
         self.assertEqual(None, utils.str_get_numeric_value('123abc'))

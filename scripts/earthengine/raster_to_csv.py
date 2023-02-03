@@ -551,7 +551,7 @@ def write_s2place_csv_tmcf(data_points: dict,
       counter: dictionary of named counters
     '''
     s2_places = {}
-    contained_levels = config.get('output_contained_s2_level')
+    contained_levels = config.get('output_contained_s2_level', [10])
     # Collect all S2 cells ids for data points and its parents.
     for data in data_points.values():
         s2cell_dcid = data.get('s2CellId', None)
@@ -562,7 +562,7 @@ def write_s2place_csv_tmcf(data_points: dict,
             continue
         s2_places[s2cell.id()] = {}
     logging.info(
-        f'Generating place data for {len(s2_places)} places upto level {top_output_s2_level} into {output_prefix}.csv/tmcf'
+        f'Generating place data for {len(s2_places)} places upto level {contained_levels} into {output_prefix}.csv/tmcf'
     )
     # Add containedInPlace and Types for each s2 cell.
     for cellid in s2_places.keys():

@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Test for process_events.py"""
+"""Test for events_processor.py"""
 
 import math
 import os
@@ -34,7 +34,7 @@ import utils
 _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         'test_data')
 
-from process_events import process_csv
+from process_events import process
 
 from util.config_map import ConfigMap
 
@@ -55,11 +55,11 @@ class ProcessEventsTest(unittest.TestCase):
             output_prefix = os.path.join(tmp_dir, 'events_test_')
             test_prefix = os.path.join(_TESTDIR, 'sample_floods_')
             # Process flood s2 cells into events.
-            process_csv(
+            process(
                 csv_files='sample_flood_output_filtered.csv',
                 output_path=output_prefix,
                 config=ConfigMap(
-                    filename=os.path.join(_MODULE_DIR, 'event_config.py')))
+                    filename=os.path.join(_TESTDIR, 'event_config.py')))
             # Verify generated events.
             for file in [
                     'events.csv', 'events.tmcf', 'svobs.csv', 'svobs.tmcf'
