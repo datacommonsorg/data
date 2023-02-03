@@ -1,0 +1,4 @@
+Node: E:processed_data->E0
+dcid: C:processed_data->fire_id
+typeOf: C:processed_data->typeOf
+firePerimeter:  C:processed_data->geojson_dp1
