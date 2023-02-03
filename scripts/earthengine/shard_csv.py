@@ -84,6 +84,7 @@ def shard_csv_file(filenames: str,
     logging.info(f'Generated {len(shard_files)} shard files in {output_path}')
     counters.print_counters()
 
+
 def _get_s2_shard_for_data(data_pvs: dict, s2_shard_level: int) -> str:
     '''Returns the shard for the data dictionary.
   If the data includes s2CellId, uses the s2_shard_level parent as the shard.
@@ -95,7 +96,6 @@ def _get_s2_shard_for_data(data_pvs: dict, s2_shard_level: int) -> str:
                                                data_pvs.get('longitude', 0),
                                                s2_shard_level)
     return utils.s2_cell_to_hex_str(data_s2_cell.parent(s2_shard_level).id())
-
 
 
 def _get_shard_csv_writer(file_prefix: str, shard_id: str,

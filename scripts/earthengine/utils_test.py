@@ -338,8 +338,8 @@ class FileUtilsTest(unittest.TestCase):
         self.assertEqual(test_dict, read_pkl_dict)
         # check pkl and py files are different.
         self.assertTrue(
-            os.path.getsize(tmp_pkl_filename) != os.path.getsize(tmp_py_filename)
-        )
+            os.path.getsize(tmp_pkl_filename) != os.path.getsize(
+                tmp_py_filename))
 
 
 class StrUtilsTest(unittest.TestCase):
