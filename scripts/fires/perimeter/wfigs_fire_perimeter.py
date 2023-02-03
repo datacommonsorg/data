@@ -23,7 +23,7 @@ from arcgis2geojson import arcgis2geojson
 
 _FIRE_DCID_FORMAT = "fire/irwinId/{id}"
 _PERIMETER_DCID_FORMAT = "firePerimeter/irwinId/{id}/date/{perimeter_date}"
-_DP_LEVELS = [(1, 0.01)]
+_DP1_TOLERANCE = 0.01
 _PERIMETER_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Perimeters_Public/FeatureServer/0/query?where=1%3D1&outFields=irwin_IrwinID,irwin_IncidentTypeCategory,poly_DateCurrent,poly_CreateDate&outSR=4326&f=json"
 
 _FIRE_INCIDENT_MAP = {
@@ -77,9 +77,8 @@ def get_data(url):
 
 def get_gj_dp(gj):
     poly = geometry.shape(arcgis2geojson(gj))
-    for dp, tolerance in _DP_LEVELS:
-        spoly = poly.simplify(tolerance)
-        gjs = json.dumps(json.dumps(geometry.mapping(spoly)))
+    spoly = poly.simplify(_DP1_TOLERANCE)
+    gjs = json.dumps(json.dumps(geometry.mapping(spoly)))
     return gjs
 
 
