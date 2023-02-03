@@ -11,21 +11,79 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Library to download URLs.'''
+'''Library to download URLs.
 
+This contains the following utilities to download data from URLS:
+1. request_url()
+  This is a wrapper around requests.request with some additional features such as:
+  - retry downloads with timeouts
+  - use caches for frequently accessed URLs.
+  - URLs with 'http://', 'https://' or 'gs://'
+    For URLs with 'gs://' clients can authenticate with Google Cloud Service
+    using 'gcloud auth login'.
+  - http methods: GET or POST
+
+  Example:
+  To download a list of all countries in DataCommons:
+     import download_util
+     countries_dcid = download_util.request_url(
+                          url='https://api.datacommons.org/node/places-in',
+                          params={'dcids': 'Earth', 'placeType': 'Country'},
+                          output='JSON')
+
+  To download a list of all countries in DataCommons:
+     response_json = download_util.request_url(
+                          url='https://httpbin.org/post',
+                          params={'param1': 'value1'},
+                          method='POST',
+                          output='JSON')
+
+2. download_file_from_url()
+  Download a file from a URL.
+  If the URL ends with a '.gz', it downloads the compressed file, inflates it
+  and returns the uncompressed file.
+
+  Example: To download csv with the latest population for all states in India:
+    filename = download_util.download_file_from_url(
+        url='https://autopush.datacommons.org/api/csv/within',
+        params={
+            'parentPlace': 'country/IND',
+            'childType': 'AdministrativeArea1',
+            'statVars': ['Count_Person']
+        },
+        method='POST',
+        output_file='india_state_population.csv')
+
+3. set_test_response():
+  For tests that use the above functions, use this to seed the response for a URL.
+  When the caller requests for the URL later, the pre-filled response is returned.
+
+   class MyTest(unittest.TestCase):
+      def setUp():
+        # Setup response for a test URL.
+        download_util.test_set_response(
+          'http://myserver.com', {'name': 'abc'},
+          {'dcid': '123'})
+
+      def test_my_function(self):
+          ...
+          server_resp = download_util.request_url('http://myserver.com', {'name': 'abc'})
+          # server_resp will be set to {'dcid': '123'} set earlier.
+  '''
+
+import gzip
 import json
+import os
 import requests
 import requests_cache
-import urllib
-import gzip
-import os
 import time
+import urllib
 
 from absl import logging
 from google.cloud import storage
 from typing import Union
 
-# Response prefilled for tests.
+# Response pre-filled for tests.
 _PREFILLED_RESPONSE = {}
 
 
@@ -56,23 +114,23 @@ def request_url(url: str,
       str, JSON or bytes
     '''
     # Check if the response is pre-filled for tests.
-    key = url
-    key += '&'.join([f'{p}={v}' for p, v in params.items()])
+    key = _get_prefilled_key(url, params)
     if key in _PREFILLED_RESPONSE:
         return _PREFILLED_RESPONSE[key]
 
     if url.startswith('gs:'):
-      # Download GCS URL using Google Cloud Storage APIs.
-      logging.info(f'Downloading GCS file: {url} with params: {params}')
-      return download_gcs_file(url=url, params=params)
+        # Download GCS URL using Google Cloud Storage APIs.
+        logging.info(f'Downloading GCS file: {url} with params: {params}')
+        return download_gcs_file(url=url, params=params)
     elif os.path.exists(url):
-      # URL is a local file. Return its contents.
-      logging.info(f'Reading local file: {url}')
-      with open(url, 'r') as file:
-        return file.read()
+        # URL is a local file. Return its contents.
+        logging.info(f'Reading local file: {url}')
+        with open(url, 'r') as file:
+            return file.read()
 
     # Download URL
-    logging.info(f'Downloading URL: {url} with params: {params}, method: {method}')
+    logging.info(
+        f'Downloading URL: {url} with params: {params}, method: {method}')
     if not retries or retries <= 0:
         retries = 1
     # Setup request cache
@@ -136,8 +194,8 @@ def download_gcs_file(url: str, params: dict = {}) -> bytes:
     gcs_project_id = params.get('gcs_project', '')
     gcs_bucket_name = params.get('gcs_bucket', gcs_path_params[2])
     if ':' in gcs_bucket_name:
-      # Bucket has both project and bucket.
-      gcs_project_id, gcs_bucket_name = gcs_bucket_name.split(':', 1)
+        # Bucket has both project and bucket.
+        gcs_project_id, gcs_bucket_name = gcs_bucket_name.split(':', 1)
     blob_path = gcs_path_params[3]
     logging.debug(
         f'Reading GCS file from project:{gcs_project_id}, bucket:{gcs_bucket_name}, path:{blob_path}'
@@ -156,7 +214,7 @@ def download_file_from_url(url: str,
                            timeout: int = 30,
                            retries: int = 3,
                            retry_secs: int = 5,
-                           output_file: str = '',
+                           output_file: str = None,
                            overwrite: bool = True) -> str:
     '''Download a URL and save it as output_file.
     If the url is compressed, the output_file is uncompressed.
@@ -170,12 +228,13 @@ def download_file_from_url(url: str,
       retry_sec: Interval in seconds between retries for which caller is blocked.
       output_file: filename to save the output.
         if not specified, the filename if picked from the url.
+        if set to empty string '', the downloaded content is returned as a string.
       overwrite: If set to False, will not download url if the output_file exists.
 
     Returns:
       filename if the file is downloaded successfully.
     '''
-    if not output_file:
+    if output_file is None:
         # Get output file from the URL after stripping any params.
         url_path = url.split('?', maxsplit=1)[0].split('#', maxsplit=1)[0]
         output_file = url_path[url_path.rfind('/') + 1:]
@@ -186,19 +245,19 @@ def download_file_from_url(url: str,
         return output_file
 
     content = request_url(url=url,
-                        params=params,
-                        method=method,
-                        timeout=timeout,
-                        retries=retries,
-                        retry_secs=retry_secs,
-                        output='bytes')
+                          params=params,
+                          method=method,
+                          timeout=timeout,
+                          retries=retries,
+                          retry_secs=retry_secs,
+                          output='bytes')
 
     if content is None:
         logging.error(f'Failed to download {output_file} from {url}, {params}')
         return None
 
     if not output_file:
-      return content
+        return content
 
     logging.info(f'Saving {len(content)} bytes from {url} into {output_file}')
     output_dir = os.path.dirname(output_file)
@@ -219,3 +278,21 @@ def download_file_from_url(url: str,
             fp.write(uncompressed_content)
 
     return output_file
+
+
+def set_test_response(url: str, params: dict, response: str):
+    '''Sets a pre-filled response for tests.
+    Args:
+      url: string with the URL without parameters.
+      params: dictionary of {parameter:value} for the URL request
+      response: string to be returned as response for request to this URL.
+    '''
+    key = _get_prefilled_key(url, params)
+    _PREFILLED_RESPONSE[key] = response
+
+
+def _get_prefilled_key(url: str, params: dict) -> str:
+    '''Returns the key for the URL with params.'''
+    key = url
+    key += '&'.join([f'{p}={params[p]}' for p in sorted(params.keys())])
+    return key
