@@ -31,7 +31,10 @@ from geopy import distance
 from s2sphere import LatLng, CellId
 from shapely.geometry import Polygon, mapping
 from typing import Union
-from pypprof.net_http import start_pprof_server
+
+# Setup pprof
+#os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
+#from pypprof.net_http import start_pprof_server
 
 flags.DEFINE_string('input_csv', '',
                     'CSV with place data to process into events')
@@ -1406,13 +1409,13 @@ def main(_):
     _DEBUG = _FLAGS.debug
     if _DEBUG:
         logging.set_verbosity(2)
-    if _FLAGS.pprof_port > 0:
-        # Enable pprof server.
-        # To see pprof features, visit http://localhost:8081/debug/pprof
-        # To collect a trace, run:
-        # curl 'http://localhost:8081/debug/pprof/profile?seconds=30' -o py-profile
-        # To generate the profile chart, run: pprof -pdf py-profile
-        start_pprof_server(port=_FLAGS.pprof_port)
+    #if _FLAGS.pprof_port > 0:
+    # Enable pprof server.
+    # To see pprof features, visit http://localhost:8081/debug/pprof
+    # To collect a trace, run:
+    # curl 'http://localhost:8081/debug/pprof/profile?seconds=30' -o py-profile
+    # To generate the profile chart, run: pprof -pdf py-profile
+    #    start_pprof_server(port=_FLAGS.pprof_port)
     config = ConfigMap(config_dict=_DEFAULT_CONFIG,
                        filename=_FLAGS.config,
                        config_string=_FLAGS.config_string)

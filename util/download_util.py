@@ -280,7 +280,7 @@ def download_file_from_url(url: str,
     return output_file
 
 
-def set_test_response(url: str, params: dict, response: str):
+def set_test_url_download_response(url: str, params: dict, response: str):
     '''Sets a pre-filled response for tests.
     Args:
       url: string with the URL without parameters.

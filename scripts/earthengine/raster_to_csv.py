@@ -66,7 +66,7 @@ from absl import logging
 from geopy import distance
 from typing import Union
 
-_SCRIPTS_DIR = os.path.dirname(os.path.dirname(__file__))
+_SCRIPTS_DIR = os.path.dirname(__file__)
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
@@ -507,7 +507,9 @@ def write_data_csv(data_points: dict,
         f'Writing {len(data_points)} rows with columns: {columns} into {filename} ...'
     )
     # create output directory if needed
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    dirname = os.path.dirname(filename)
+    if dirname:
+        os.makedirs(dirname, exist_ok=True)
     # Open file in append mode or overwrite mode.
     output_mode = config.get('output_mode', 'w')
     if output_mode == 'a':
@@ -580,7 +582,9 @@ def write_s2place_csv_tmcf(data_points: dict,
             'name': f'Level {s2level} S2 Cell {s2cell.id():#018x}',
         }
     output_prefix = os.path.splitext(output_prefix)[0]
-    os.makedirs(os.path.dirname(output_prefix), exist_ok=True)
+    output_dir = os.path.dirname(output_prefix)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     # Generate the place csv
     counter.set_prefix('8:output_places_csv:')
     write_data_csv(s2_places, f'{output_prefix}.csv',
@@ -905,11 +909,14 @@ def process(input_geotiff: str,
             processed_counter='processed_points', total_counter='total_points'))
     counter.set_counter('start_time', time.perf_counter())
     if input_geotiff:
-        logging.info(f'Processing raster {input_geotiff}')
+        logging.info(
+            f'Processing raster {input_geotiff} with config: {config.get_configs()}'
+        )
         for geotiff_file in utils.file_get_matching(input_geotiff):
             process_raster(geotiff_file, config, data_points, counter)
     if input_csv:
-        logging.info(f'Processing csv {input_csv}')
+        logging.info(
+            f'Processing csv {input_csv} with config: {config.get_configs()}')
         process_csv_points(input_csv=input_csv,
                            ignore_csv=config.get('ignore_csv', None),
                            allow_csv=config.get('allow_csv', None),
@@ -935,7 +942,7 @@ def _get_data_key(data: dict, add_date: bool = True) -> str:
     along with the date.'''
     key = data.get('s2CellId', None)
     if not key:
-        key = data.get('latitude', '') + data.get('longitude', '')
+        key = str(data.get('latitude', '')) + str(data.get('longitude', ''))
     if add_date:
         key += data.get('date', '')
     return key

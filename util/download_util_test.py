@@ -28,9 +28,10 @@ class TestCounters(unittest.TestCase):
 
     def setUp(self):
         # Setup a response for non-existant URL for latest tests
-        download_util.set_test_response('http://test.case.com/', {'id': 123},
-                                        {"name": "abc"})
-        download_util.set_test_response(
+        download_util.set_test_url_download_response('http://test.case.com/',
+                                                     {'id': 123},
+                                                     {"name": "abc"})
+        download_util.set_test_url_download_response(
             url='gs://myproject/mybucket/config.json',
             params={},
             response=b'{"param": "value"}')

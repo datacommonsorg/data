@@ -27,7 +27,9 @@ from absl import flags
 from absl import logging
 from io import StringIO
 
-flags.DEFINE_string('config_path', '', 'Path to JSON file with configurations.')
+flags.DEFINE_string('config_path',
+                    'gs://datcom-import-cache/fires/firms/firms_config.py',
+                    'Path to JSON file with configurations.')
 
 _FLAGS = flags.FLAGS
 
@@ -39,6 +41,7 @@ sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 
 from earthengine import raster_to_csv as r2csv
 from util import download_util
+from util.config_map import ConfigMap
 
 
 def _download_fires_csv(urls: list, output_csv: str):
@@ -68,7 +71,7 @@ def _download_fires_csv(urls: list, output_csv: str):
                 logging.debug(f'Failed to download csv data. retrying.')
                 time.sleep(100)
             else:
-              break
+                break
             logging.debug(f'Got {len(csv_data)} bytes from {url}')
         # Load CSV data downloaded into a DataFrame.
         dfs.append(pd.read_csv(StringIO(csv_data), dtype=str))
@@ -79,23 +82,22 @@ def _download_fires_csv(urls: list, output_csv: str):
 
 
 def process_fires_data(config_path: str):
-    config_dict = r2csv.load_config(download_util.request_url(config_path))
-    if config_dict.get('debug', False):
+    config = ConfigMap(config_dict=r2csv._DEFAULT_CONFIG,
+                       config_string=download_util.request_url(config_path))
+    if config.get('debug', False):
         logging.set_verbosity(2)
 
-    urls = config_dict.get('url', '')
-    csv_input_data = config_dict.get('csv_data', 'nasa_firms_input_data.csv')
+    urls = config.get('url', '')
+    csv_input_data = config.get('csv_data', 'nasa_firms_input_data.csv')
     if urls:
         _download_fires_csv(urls, csv_input_data)
 
     # Process the CSV data into S2 cells.
     r2csv.process(input_geotiff='',
                   input_csv=csv_input_data,
-                  output_csv=config_dict.get('output_csv',
-                                             'fires_s2_cell_areas.csv'),
-                  output_s2_place=config_dict.get('output_s2_place',
-                                                  's2_cell_places'),
-                  config=config_dict)
+                  output_csv=config.get('output_csv',
+                                        'fires_s2_cell_areas.csv'),
+                  config=config)
 
 
 def main(_):

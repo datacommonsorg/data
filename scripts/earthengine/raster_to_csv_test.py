@@ -37,6 +37,9 @@ _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 class RasterToCsvTest(unittest.TestCase):
 
     def setUp(self):
+        logging.set_verbosity(2)
+        # Display longer diff string on error.
+        self.maxDiff = None
         return
 
     def compare_files(self, expected: str, actual: str):
@@ -44,8 +47,8 @@ class RasterToCsvTest(unittest.TestCase):
         logging.info(f'Comparing files: expected:{expected}, actual: {actual}')
         with open(expected, 'r') as exp:
             with open(actual, 'r') as act:
-                exp_lines = exp.readlines().sort()
-                act_lines = act.readlines().sort()
+                exp_lines = sorted(exp.readlines())
+                act_lines = sorted(act.readlines())
                 self.assertEqual(exp_lines, act_lines)
 
     def test_process_geotiff(self):
@@ -53,18 +56,19 @@ class RasterToCsvTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             input_geotiff = os.path.join(_TESTDIR, 'sample_floods.tif')
             place_output_prefix = os.path.join(tmp_dir, 'sample_flood_place')
-            process_config = ConfigMap(config_dict={
-                's2_level': 13,
-                'aggregate_s2_level': 10,
-                'contained_in_s2_level': 10,
-                'aggregate': 'sum',
-                'rename_columns': {
-                    'band:0': 'water'
-                },
-                'output_date': '2022-10',
-                'output_s2_place': place_output_prefix,
-            })
-            output_csv = os.path.join(tmp_dir, 'sample_flood_output.csv')
+            process_config = ConfigMap(
+                config_dict={
+                    's2_level': 13,
+                    'aggregate_s2_level': 10,
+                    'contained_in_s2_level': 10,
+                    'aggregate': 'sum',
+                    'rename_columns': {
+                        'band:0': 'water'
+                    },
+                    'output_date': '2022-10',
+                    'output_s2_place': place_output_prefix,
+                })
+            output_csv = os.path.join(tmp_dir, 'sample_floods_output.csv')
             counter = Counters()
             # Process raster into csv data points.
             r2c.process(input_geotiff=input_geotiff,
@@ -85,21 +89,21 @@ class RasterToCsvTest(unittest.TestCase):
         '''Verify re-processing of CSV file.'''
         with tempfile.TemporaryDirectory() as tmp_dir:
             input_csv = os.path.join(_TESTDIR, 'sample_floods_output.csv')
-            process_config = ConfigMap(config_dict={
-                's2_level': 13,
-                'aggregate_s2_level': 10,
-                'aggregate': 'sum',
-                'input_data_filter': {
-                    'area': {
-                        'min': 1.0
+            process_config = ConfigMap(
+                config_dict={
+                    's2_level': 13,
+                    'aggregate': 'sum',
+                    'input_data_filter': {
+                        'area': {
+                            'min': 1.0
+                        },
+                        # Use only level-13 from csv and aggregate
+                        's2Level': {
+                            'eq': 13,
+                        }
                     },
-                    # use only level-13 from csv and aggregate
-                    's2level': {
-                        'eq': 13,
-                    }
-                },
-                'aggregate_s2_level': 5,
-            })
+                    'aggregate_s2_level': 5,
+                })
             output_csv = os.path.join(tmp_dir,
                                       'sample_flood_output_filtered.csv')
             counter = Counters()

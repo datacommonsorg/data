@@ -2,7 +2,7 @@
 {
     # Input settings.
     # Columms of input_csv that are added as event properties
-    'data_columns': ['area', 'frp', 'bright_ti4', 'bright_ti5', 'confidence' ],
+    'data_columns': ['area', 'frp', 'bright_ti4', 'bright_ti5', 'confidence'],
     # Columns of input_csv that contains the s2 cell id.
     's2_cell_column': 's2CellId',
     # Input column for date.
@@ -14,10 +14,10 @@
     # Maximum number of cells of same level in between 2 events to be merged.
     'max_overlap_distance_cell': 1,
     # S2 level to which data is aggregated.
-    's2_level': 10, # Events are at resolution of level-10 S2 cells.
+    's2_level': 10,  # Events are at resolution of level-10 S2 cells.
     'aggregate': 'sum',  # default aggregation for all properties
     # Per property filter params for input data.
-    'input_filter_config' : {
+    'input_filter_config': {
         'confidence': {
             'regex': '[nh]',
         }
