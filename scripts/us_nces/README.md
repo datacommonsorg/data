@@ -108,7 +108,7 @@ Cleaned data will be inside as a CSV file with the following paths.
 - public_school:
 [public_school/output_place/us_nces_demographics_public_place.csv]
 
-If there are Duplicate School IDs present in place, they would we inside the same output folder
+If there are Duplicate School IDs present in School Place, they will be saved inside the same output path as that of csv and tmcf file.
 - [scripts/us_nces/demographics/private_school/output_place/dulicate_id_us_nces_demographics_private_place.csv]
 - [scripts/us_nces/demographics/school_district/output_place/dulicate_id_us_nces_demographics_district_place.csv]
 - [scripts/us_nces/demographics/public_school/output_place/dulicate_id_us_nces_demographics_public_place.csv]
