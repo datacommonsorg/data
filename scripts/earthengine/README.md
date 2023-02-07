@@ -2,15 +2,15 @@ This directory contains scripts to extract gridded data from EarthEngine using
 data sets like
 [Dynamic
 World](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1),
-and convert them into data files per S2 cell, statvar observations
-aggregated to different levels of S2 cells, and events.
+and convert them into data files per grid region, such as [S2 cell](https://s2geometry.io/devguide/s2cell_hierarchy), aggregated statvar observations and events.
 
 ## Setup
 
 The scripts use [Google Earth Engine](https://earthengine.google.com/)
 [Python APIs](https://developers.google.com/earth-engine/guides/python_install)
 to extract flooded regions as a [geoTIFF](https://en.wikipedia.org/wiki/GeoTIFF)
-file.  These `.tif` files are exported to Google Cloud Storage (GCS).
+file.  These `.tif` files are exported to [Google Cloud
+Storage](https://cloud.google.com/storage) (GCS).
 The raster files are then copied over using `gsutil` to be processed into `.csv` locally.
 
 
@@ -36,7 +36,7 @@ earthengine authenticate --quiet
 ```
 
 ### Google Cloud SDK
-The scripts use the `gsutil` command to copy files form GCS to the local
+Install the `gsutil` command to copy files from GCS to the local
 machine.
 
 1. Install GCS tools using the command:
@@ -60,8 +60,8 @@ gsutil mb gs://<GCS-BUCKET-NAME>/
 
 ## Extract geoTIFF from EarthEngine (EE)
 The script `earthengine_image.py` generates geoTIFF raster files from
-EarthEngine for selected bands from an image collection from the EarthEngine data
-catelog.
+EarthEngine for selected bands from an image collection from the [EarthEngine data
+catelog](https://developers.google.com/earth-engine/datasets).
 
 For example, to extract regions with water from the EarthEngine's [Dynamic
 World](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) dataset, run the following:
@@ -89,13 +89,14 @@ python3 earthengine_image.py  \
 The script `raster_to_csv.py` converts the geoTiff from the previous step into a
 CSV file with a row per [S2
 cell](https://s2geometry.io/devguide/s2cell_hierarchy) with columns for each of
-the band in the geoTiff.
+the band in the geoTiff. The geenrated csv can be processed
+using the
+[import tool](https://github.com/datacommonsorg/import/blob/master/docs/usage.md) into StatVarObservation MCF nodes.
 
 For example, to extract S2 cells with water from the geoTiff generated 
-in the previous step into a csv that can be processed with `s2cell_svobs.tmcf`
-into StatVarObservation MCF nodes for
-[Area_FloodEvent](https://datacommons.org/browser/Area_FloodEvent) using the
-[import tool](https://github.com/datacommonsorg/import/blob/master/docs/usage.md).
+in the previous step into a StatVarObservation MCF nodes for
+[Area_FloodEvent](https://datacommons.org/browser/Area_FloodEvent), run the
+following:
 ```
 # Download the geoTiff from GCS
 gsutil cp gs://<GCS_BUCKET>/<GCS_FOLDER>/*.tif .

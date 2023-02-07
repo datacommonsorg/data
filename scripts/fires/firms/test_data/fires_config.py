@@ -9,7 +9,6 @@
     ],
     # File to save data downloaded from the URLs above.
     'csv_data': 'sample-fires.csv',
-
     's2_level': 13,
     'rename_columns': {
         'acq_date': 'date',

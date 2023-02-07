@@ -124,7 +124,8 @@ class ProcessEventsTest(unittest.TestCase):
         self.assertEqual(1, len(active_events))
         event_id = active_events[0]
         event = events_processor.get_event_by_id(event_id)
-        self.assertTrue('floodEvent/2022-10_s2CellId/0x89c2590000000000', event.event_id())
+        self.assertTrue('floodEvent/2022-10_s2CellId/0x89c2590000000000',
+                        event.event_id())
         event_pvs = events_processor.get_event_output_properties(event_id)
         self.assertTrue(event_data['s2CellId'] in event_pvs['affectedPlace'])
         self.assertEqual(0.5, event_pvs['AreaSqKm'])
@@ -135,9 +136,12 @@ class ProcessEventsTest(unittest.TestCase):
         self.assertTrue(events_processor.process_event_data(event_data2))
 
         # Verify both cells are in affected place
-        updated_event_pvs = events_processor.get_event_output_properties(event_id)
-        self.assertTrue(event_data['s2CellId'] in updated_event_pvs['affectedPlace'])
-        self.assertTrue(event_data2['s2CellId'] in updated_event_pvs['affectedPlace'])
+        updated_event_pvs = events_processor.get_event_output_properties(
+            event_id)
+        self.assertTrue(
+            event_data['s2CellId'] in updated_event_pvs['affectedPlace'])
+        self.assertTrue(
+            event_data2['s2CellId'] in updated_event_pvs['affectedPlace'])
         self.assertEqual(1.0, updated_event_pvs['AreaSqKm'])
 
         # Add data for place too far away that is not aggregated.
@@ -147,8 +151,10 @@ class ProcessEventsTest(unittest.TestCase):
         active_events = events_processor.get_active_event_ids('2022-10')
         self.assertEqual(2, len(active_events))
 
-        updated_event_pvs = events_processor.get_event_output_properties(event_id)
-        self.assertFalse(event_data3['s2CellId'] in updated_event_pvs['affectedPlace'])
+        updated_event_pvs = events_processor.get_event_output_properties(
+            event_id)
+        self.assertFalse(
+            event_data3['s2CellId'] in updated_event_pvs['affectedPlace'])
         self.assertEqual(1.0, updated_event_pvs['AreaSqKm'])
 
         # Add a neighbouring place with more recent date that is added to
@@ -159,8 +165,10 @@ class ProcessEventsTest(unittest.TestCase):
         self.assertTrue(events_processor.process_event_data(event_data4))
         active_events = events_processor.get_active_event_ids('2022-11')
         self.assertEqual(2, len(active_events))
-        updated_event_pvs = events_processor.get_event_output_properties(event_id)
-        self.assertTrue(event_data4['s2CellId'] in updated_event_pvs['affectedPlace'])
+        updated_event_pvs = events_processor.get_event_output_properties(
+            event_id)
+        self.assertTrue(
+            event_data4['s2CellId'] in updated_event_pvs['affectedPlace'])
         self.assertEqual(1.5, updated_event_pvs['AreaSqKm'])
         self.assertEqual('P32D', updated_event_pvs['observationPeriod'])
 
@@ -178,6 +186,8 @@ class ProcessEventsTest(unittest.TestCase):
         old_event_pvs = events_processor.get_event_output_properties(event_id)
         self.assertEqual(old_event_pvs, updated_event_pvs)
         # Verify new event has a single place.
-        new_event_pvs = events_processor.get_event_output_properties(active_events[0])
+        new_event_pvs = events_processor.get_event_output_properties(
+            active_events[0])
         self.assertEqual(1, new_event_pvs['AffectedPlaceCount'])
-        self.assertEqual('floodEvent/2023-01_0x89c2f90000000000', new_event_pvs['dcid'])
+        self.assertEqual('floodEvent/2023-01_0x89c2f90000000000',
+                         new_event_pvs['dcid'])
