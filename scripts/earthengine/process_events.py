@@ -770,10 +770,10 @@ class GeoEventsProcessor:
                                                 event_pvs['endDate'])
             event_pvs['observationPeriod'] = f'P{duration_days}D'
             event_pvs['DurationDays'] = duration_days
-            self._counters.max_counter('max_output_events_dates',
-                                           len(dates))
+            self._counters.max_counter('max_output_events_dates', len(dates))
         # Set the start location from the place with the earliest date
-        start_place_ids = event.get_event_places({event_pvs.get('startDate', None)})
+        start_place_ids = event.get_event_places(
+            {event_pvs.get('startDate', None)})
         if start_place_ids:
             # Set lat/lng for start location.
             # Compute for grid from dcid or lookup using the DC API
@@ -790,7 +790,7 @@ class GeoEventsProcessor:
         allow_pvs = utils.dict_filter_values(
             event_data, self._config.get('output_events_filter_config', {}))
         if not allow_pvs:
-          return None
+            return None
         # Save area as a number without units
         area_sqkm = event_data.get('area', 0)
         if area_sqkm:
@@ -809,8 +809,7 @@ class GeoEventsProcessor:
                 geo_json = mapping(event_polygon)
                 if geo_json:
                     event_pvs[polygon_prop] = geo_json
-                    self._counters.add_counter('output_events_with_polygon',
-                                               1)
+                    self._counters.add_counter('output_events_with_polygon', 1)
         if not event_pvs.get('name', None):
             event_pvs['name'] = self._get_event_name(event_pvs)
         # Set the affectedPlace and containedInPlace for the event.
