@@ -56,6 +56,7 @@ def download_files(INPUT_URLS, folders) -> None:
                 zipinfo.filename = year + '_' + zipinfo.filename
                 zipdata.extract(zipinfo)
 
+
 # Move files in specific folders to input_files folder
     for folder in folders:
         files = os.listdir(os.path.join(_DOWNLOAD_PATH, folder))
