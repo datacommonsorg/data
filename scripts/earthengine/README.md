@@ -1,10 +1,9 @@
-# Floods
-This directory contains scripts to extract flood data from EarthEngine using
+This directory contains scripts to extract gridded data from EarthEngine using
 data sets like
 [Dynamic
-World](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) 
-and generate data files statvar observations on monthly flooded areas
-aggregated to different levels of S2 cells.
+World](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1),
+and convert them into data files per S2 cell, statvar observations
+aggregated to different levels of S2 cells, and events.
 
 ## Setup
 
@@ -60,28 +59,90 @@ gsutil mb gs://<GCS-BUCKET-NAME>/
 ```
 
 ## Extract geoTIFF from EarthEngine (EE)
-Run the following command to extract flood regions as a `.tif` file from
-EarthEngine into GCS, replacing `<GCS-PROJECT>` with the GCS project
-authenticated to earlier, `<GCS-BUCKET-NAME>` with the GCS bucket created in
-the step above. The `<GCS-DIRECTORY>` will be created if it doesn't already
-exist.
+The script `earthengine_image.py` generates geoTIFF raster files from
+EarthEngine for selected bands from an image collection from the EarthEngine data
+catelog.
+
+For example, to extract regions with water from the EarthEngine's [Dynamic
+World](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1) dataset, run the following:
 ```
-./run.sh -g <GCS-PROJECT> -b <GCS-BUCKET-NAME> -d <GCS-DIRECTORY>
+# Download monthly images for the last 12 months.
+# Project and bucket on Google Could Storage to save the geoTiff from EE
+GCS_BUCKET='<YOUR_BUCKET>' 
+GCS_FOLDER='earth-engine-exports'
+python3 earthengine_image.py  \
+   --gcs_bucket="$GCS_BUCKET" \
+   --gcs_folder="$GCS_FOLDER" \
+   --start_date=2022-01-01 \
+   --time_period=P1M  \
+   --ee_image_count=12 \
+   --ee_mask=land \
+   --ee_dataset=dynamic_world \
+   --band=water \
+   --band_min=0.7 \
+   --ee_reducer=max
+# Once it it completes, the images would be available on
+# gs://<GCS_BUCKET>/<GCS_FOLDER>/*.tif
 ```
 
-This invokes the script `earthengine_image.py` to extract the raster image and
-`raster_to_csv.py` to process the image into data CSVs.
-The earth engine export tasks can be viewed on [Earth Engine Task
-manager](https://code.earthengine.google.com/tasks) and may take some time (over
-30 mins) to complete.
+## Process GeoTIFF files into gridded data CSVs
+The script `raster_to_csv.py` converts the geoTiff from the previous step into a
+CSV file with a row per [S2
+cell](https://s2geometry.io/devguide/s2cell_hierarchy) with columns for each of
+the band in the geoTiff.
 
-For more options, such as extracting images for multiple months or
-processing images from past EE export tasks, please use `./run.sh -h`.
+For example, to extract S2 cells with water from the geoTiff generated 
+in the previous step into a csv that can be processed with `s2cell_svobs.tmcf`
+into StatVarObservation MCF nodes for
+[Area_FloodEvent](https://datacommons.org/browser/Area_FloodEvent) using the
+[import tool](https://github.com/datacommonsorg/import/blob/master/docs/usage.md).
+```
+# Download the geoTiff from GCS
+gsutil cp gs://<GCS_BUCKET>/<GCS_FOLDER>/*.tif .
+# Convert the geoTiff into raster
+python3 raster_to_csv.py \
+  --input_geotiff=ee_image_dynamic_world-band_water-r_max-mask_land-s_1000-from_2022-01-01.tif \
+  --output_date=2022-01 \
+  --output_csv=flood_s2_cells_svobs.csv
+
+# Creates flooded_s2_cells.csv with the following columns:
+# area,date,latitude,longitude,s2CellId,s2Level,water
+# This can be procesed with s2cells_svobs.tmcf using dc-import
+dc-import genmcf flood_s2_cells_svobs.csv s2cell_svobs.tmcf
+```
+
+The `raster_to_csv.py` script can also process other csv data files with columns for `latitude,longitude` into CSV for StatVarObservations by S2 cells.
+```
+python3 raster_to_csv.py \
+  --input_csv=<CSV file with a row for each lat/lng> \
+  --output_csv=s2_cells_svobs.csv \
+```
+
+## Generate events for places
+The script `process_events.csv` converts a csv file with observations for a
+place, such as an s2 cell, into events aggregated over space and time.
+
+For example, the flood_s2_cells_svobs.csv generated in the earlier step,
+can be converted into [FloodEvent](http://daatcommons.org/browser/FloodEvent) nodes
+with properties such as `startDate`, `endDate` and `affectedPlaces` using the
+following command:
+```
+# Update the event_config.py with settings for the data set.
+python3 process_events.py \
+  --config=event_config.py \
+  --input_csv=flood_s2_cells_svobs.csv \
+  --output_path=flood_ \
+
+# This generates the following files:
+# - flood_events.{csv,tmcf}: Event nodes
+# - flood_svobs.{csv}: Observations for each event
+```
 
 
 ## Testing
-
+To test the scripts in this folder, run the commands:
 ```
 python3 -m unittest earthengine_image.py
 python3 -m unittest raster_to_csv.py
+python3 -m unittest process_events.py
 ```

@@ -367,8 +367,6 @@ class GeoEventsProcessor:
         self._event_by_id = dict()
         # Dictionary of active events keyed by place_id
         self._active_event_by_place = dict()
-        # Properties across all events.
-        self._event_props = set()
         # Max date seen across all events.
         self._max_date = ''
         self._counters = counters
@@ -390,6 +388,13 @@ class GeoEventsProcessor:
         self._ll2p = None
         if self._config.get('lookup_contained_for_place', False):
             self._ll2p = LatLng2Places()
+        # Get properties for events
+        rename_columns = self._config.get('input_rename_columns', {})
+        self._event_props = set(rename_columns.values())
+        data_columns = self._config.get('data_columns', [])
+        for prop in data_columns:
+            self._event_props.add(rename_columns.get(prop, prop))
+        self._event_props.add('area')
 
     def add_geo_event(self, geo_event: GeoEvent):
         '''Add a geo event to the dict.'''
@@ -527,7 +532,7 @@ class GeoEventsProcessor:
             else:
                 # Event ended too long ago. Remove from active s2 cells.
                 _DEBUG and logging.debug(
-                    f'Deactivating event: {event_id} with end: {event_end_date} older than {min_date}'
+                    f'Deactivating event: {event_id} with end date older than {min_date}'
                 )
                 self.remove_event_from_place_index(event_id)
         return active_ids
@@ -698,20 +703,35 @@ class GeoEventsProcessor:
             self._counters.add_counter(f'cache_place_property_{prop}_miss', 1)
         return value
 
-    def set_place_property(self, placeid: str, prop: str, value: str):
+    def set_place_property(self, placeid: str, prop: str, value: str) -> bool:
         '''Set the property for the place id.'''
+        if prop is None or value is None:
+            return
+        value_added = False
+        if prop not in self._place_property_cache:
+            self._place_property_cache[prop] = dict()
         cache_dict = self._place_property_cache.get(prop, {})
+        # Convert value to be added into a list
         if not isinstance(value, list):
             if not isinstance(value, str):
                 value = str(value)
             value = [value]
-        if placeid in cache_dict:
-            cache_dict[placeid].extend(value)
-        else:
+        # Add value to existing property values for the place
+        cache_values = cache_dict.get(placeid, None)
+        if cache_values is None:
             cache_dict[placeid] = value
-        self._place_property_cache[prop] = cache_dict
-        self._place_cache_modified = True
-        self._counters.add_counter(f'place_cache_add_{prop}', 1)
+            value_added = True
+        else:
+            # Add any new values not in cache.
+            new_values = set(cache_values)
+            new_values.update(value)
+            if len(new_values) != len(cache_values):
+                cache_dict[placeid] = list(new_values)
+                value_added = True
+        if value_added:
+            self._place_cache_modified = True
+            self._counters.add_counter(f'place_cache_add_{prop}', 1)
+        return value_added
 
     def get_event_polygon(self, event_id: str) -> Polygon:
         '''Returns the polygon for the events affected area.
@@ -729,6 +749,73 @@ class GeoEventsProcessor:
         if simplification:
             event_polygon = event_polygon.simplify(simplification)
         return event_polygon
+
+    def get_event_output_properties(self, event_id: str) -> dict:
+        '''Returns the output properties for an event.'''
+        event = self.get_event_by_id(event_id)
+        if not event:
+            self._counters.add_counter('error-missing-event-for-id', 1,
+                                       event_id)
+            logging.fatal(f'Unable to get event for {event_id}')
+            return None
+        event_pvs = dict()
+        event_pvs['dcid'] = event_id
+        event_pvs['typeOf'] = self._config.get('event_type', 'FloodEvent')
+        # Set event duration from dates across all places in the event.
+        dates = event.get_event_dates()
+        if dates:
+            event_pvs['startDate'] = dates[0]
+            event_pvs['endDate'] = dates[-1]
+            duration_days = _get_dates_duration(event_pvs['startDate'],
+                                                event_pvs['endDate'])
+            event_pvs['observationPeriod'] = f'P{duration_days}D'
+            event_pvs['DurationDays'] = duration_days
+            self._counters.max_counter('max_output_events_dates',
+                                           len(dates))
+        # Set the start location from the place with the earliest date
+        start_place_ids = event.get_event_places({event_pvs.get('startDate', None)})
+        if start_place_ids:
+            # Set lat/lng for start location.
+            # Compute for grid from dcid or lookup using the DC API
+            placeid = start_place_ids[0]
+            lat, lng = self._get_place_lat_lng(placeid)
+            if lat is None or lng is None:
+                # No location available. Use the placeid itself
+                event_pvs['startLocation'] = utils.add_namespace(placeid)
+                self._counters.add_counter('events_without_lat_lng', 1)
+            else:
+                # Got lat long for place. Cache it
+                event_pvs['startLocation'] = f'[LatLong {lat:.5f} {lng:.5f}]'
+        event_data = event.get_event_properties()
+        allow_pvs = utils.dict_filter_values(
+            event_data, self._config.get('output_events_filter_config', {}))
+        if not allow_pvs:
+          return None
+        # Save area as a number without units
+        area_sqkm = event_data.get('area', 0)
+        if area_sqkm:
+            event_pvs['AreaSqKm'] = area_sqkm
+        # Transform values into quantity ranges
+        format_config = self._config.get('property_config', {})
+        per_date_config = self._config.get('property_config_per_date', {})
+        if per_date_config:
+            format_config.update(per_date_config)
+        event_pvs.update(_format_property_values(event_data, format_config))
+        # Generate polygon for the event
+        polygon_prop = self._config.get('output_affected_place_polygon', '')
+        if polygon_prop:
+            event_polygon = self.get_event_polygon(event_id)
+            if event_polygon:
+                geo_json = mapping(event_polygon)
+                if geo_json:
+                    event_pvs[polygon_prop] = geo_json
+                    self._counters.add_counter('output_events_with_polygon',
+                                               1)
+        if not event_pvs.get('name', None):
+            event_pvs['name'] = self._get_event_name(event_pvs)
+        # Set the affectedPlace and containedInPlace for the event.
+        self._set_event_places(event, event_pvs)
+        return event_pvs
 
     def write_events_csv(self,
                          output_path: str,
@@ -765,13 +852,10 @@ class GeoEventsProcessor:
         if event_ids is None:
             event_ids = self.get_all_event_ids()
         counter_stage = self._counters.get_prefix()
+        # Prefetch properties for event places.
         self.cache_event_place_property(event_ids)
         _set_counter_stage(self._counters, utils.strip_namespace(counter_stage))
         num_output_events = 0
-        format_config = self._config.get('property_config', {})
-        per_date_config = self._config.get('property_config_per_date', {})
-        if per_date_config:
-            format_config.update(per_date_config)
         # Generate a csv row for each event
         with open(output_csv, 'w') as csv_file:
             writer = csv.DictWriter(csv_file,
@@ -783,80 +867,14 @@ class GeoEventsProcessor:
             writer.writeheader()
             self._counters.set_counter('total', len(event_ids))
             for event_id in event_ids:
-                # Check if event can be output
-                event = self.get_event_by_id(event_id)
-                if not event:
-                    self._counters.add_counter('error-missing-event-for-id', 1,
-                                               event_id)
-                    logging.fatal(f'Unable to get event for {event_id}')
-                    continue
-                if output_ended_events and self.is_event_active(
-                        event_id, self._max_date):
-                    self._counters.add_counter(
-                        'output_csv_ignored_active_events', 1, event_id)
-                    continue
-
-                # Collect all event properties for output
-                data = dict()
-                data['dcid'] = event_id
-                data['typeOf'] = self._config.get('event_type', 'FloodEvent')
-                # Set event duration from dates across all places in the event.
-                dates = event.get_event_dates()
-                if dates:
-                    data['startDate'] = dates[0]
-                    data['endDate'] = dates[-1]
-                    duration_days = _get_dates_duration(data['startDate'],
-                                                        data['endDate'])
-                    data['observationPeriod'] = f'P{duration_days}D'
-                    data['DurationDays'] = duration_days
-                # Set the start location from the place with the earliest date
-                start_place_ids = event.get_event_places(
-                    {data.get('startDate', None)})
-                if start_place_ids:
-                    # Set lat/lng for start location.
-                    # Compute for grid from dcid or lookup using the DC API
-                    placeid = start_place_ids[0]
-                    lat, lng = self._get_place_lat_lng(placeid)
-                    if lat is None or lng is None:
-                        # No location available. Use the placeid itself
-                        data['startLocation'] = utils.add_namespace(placeid)
-                        self._counters.add_counter('events_without_lat_lng', 1)
-                    else:
-                        # Got lat long for place. Cache it
-                        data['startLocation'] = f'[LatLong {lat:.5f} {lng:.5f}]'
-                event_pvs = event.get_event_properties()
-                allow_pvs = utils.dict_filter_values(
-                    event_pvs,
-                    self._config.get('output_events_filter_config', {}))
-                if allow_pvs:
-                    # Save area as a number without units
-                    area_sqkm = event_pvs.get('area', 0)
-                    if area_sqkm:
-                        data['AreaSqKm'] = area_sqkm
-                    # Generate polygon for the event
-                    if polygon_prop:
-                        event_polygon = self.get_event_polygon(event_id)
-                        if event_polygon:
-                            geo_json = mapping(event_polygon)
-                            if geo_json:
-                                data[polygon_prop] = geo_json
-                                self._counters.add_counter(
-                                    'output_events_with_polygon', 1)
-                    # Transform values into quantity ranges
-                    data.update(
-                        _format_property_values(event_pvs, format_config))
-                    if not data.get('name', None):
-                        data['name'] = self._get_event_name(data)
-                    # Set the affectedPlace and containedInPlace for the event.
-                    self._set_event_places(event, data)
-                    writer.writerow(data)
+                event_pvs = self.get_event_output_properties(event_id)
+                if event_pvs:
+                    writer.writerow(event_pvs)
                     self._counters.add_counter('output_events', 1)
                 else:
                     self._counters.add_counter('output_events_filtered', 1)
                 num_output_events += 1
                 self._counters.add_counter('processed', 1)
-                self._counters.max_counter('max_output_events_dates',
-                                           len(dates))
         logging.info(
             f'Wrote {num_output_events} events into {output_csv} with columns: {output_columns}'
         )
@@ -1028,14 +1046,6 @@ class GeoEventsProcessor:
          '''
         if input_events_file:
             self.read_active_events(input_events_file)
-        rename_columns = self._config.get('input_rename_columns', {})
-        event_props = set(rename_columns.values())
-        event_props.add('area')
-        data_columns = self._config.get('data_columns', [])
-        for prop in data_columns:
-            event_props.add(rename_columns.get(prop, prop))
-        place_column = self._config.get('place_column', 'observationAbout')
-        date_column = self._config.get('date_column', 'observationDate')
         _set_counter_stage(self._counters, 'process_csv_')
         input_files = utils.file_get_matching(csv_files)
         for filename in input_files:
@@ -1044,99 +1054,24 @@ class GeoEventsProcessor:
         logging.info(
             f'Processing data from files: {input_files} with config: {self._config.get_configs()}'
         )
-        input_filter = self._config.get('input_filter_config', None)
-        input_column_renames = self._config.get('input_rename_columns', {})
         for filename in input_files:
             logging.info(f'Processing csv data file: {filename}')
             with open(filename) as csvfile:
                 reader = csv.DictReader(csvfile)
-                if not event_props:
-                    event_props.update(reader.fieldnames)
+                if len(self._event_props) <= 1:
+                    # No event properties from config. Add all input properties.
+                    self._event_props.update(reader.fieldnames)
                 logging.info(
-                    f'Processing columns: {event_props} from {filename}')
+                    f'Processing columns: {self._event_props} from {filename}')
                 self._counters.add_counter('input_files', 1, filename)
                 num_rows = 0
                 for input_row in reader:
                     num_rows += 1
                     if num_rows > self._config.get('input_rows', sys.maxsize):
                         break
-                    self._counters.add_counter('processed', 1, filename)
-                    self._counters.add_counter('input_csv_rows', 1, filename)
-                    row = rename_dict_keys(input_row, input_column_renames)
-                    data_pvs = {}
-                    place_id = utils.strip_namespace(row.get(place_column, ''))
-                    if utils.is_s2_cell_id(place_id):
-                        # Place is an s2 cell. Convert to the right s2 level.
-                        s2_cell = utils.s2_cell_from_dcid(place_id)
-                        s2_cell_level = s2_cell.level()
-                        output_s2_level = self._config.get(
-                            's2_level', s2_cell_level)
-                        if s2_cell_level > output_s2_level:
-                            # Incoming S2 cell is too small.
-                            # Convert it to a higher level.
-                            # Data from mutiple input cells mapping to same
-                            # output cell will be aggregated.
-                            data_pvs['affectedPlace'] = place_id
-                            place_id = utils.s2_cell_to_dcid(
-                                s2_cell.parent(output_s2_level))
-                            self._counters.add_counter(
-                                f's2_{s2_cell_level}_converted_to_{output_s2_level}',
-                                1)
-                    elif not utils.is_grid_id(
-                            place_id) and not utils.is_ipcc_id(place_id):
-                        if self._config.get('convert_place_to_grid', False):
-                            # Converting a non-grid place to a grid_1 place.
-                            # Multiple places mapping to same grid will be
-                            # aggregated using 'property_config_per_date'.
-                            lat, lng = self._get_place_lat_lng(place_id)
-                            if lat is not None and lng is not None:
-                                # Got a location. Convert it to a grid.
-                                grid_id = utils.grid_id_from_lat_lng(
-                                    1, int(lat), int(lng))
-                                data_pvs['affectedPlace'] = place_id
-                                place_id = grid_id
-                                self._counters.add_counter(
-                                    f'place_converted_to_grid_1', 1)
-                            else:
-                                self._counters.add_counter(
-                                    f'place_without_lat_lng', 1)
-                    if not place_id:
-                        self._counters.add_counter(
-                            'input_dropped_invalid_placeid', 1)
-                        continue
-                    place_id = utils.strip_namespace(place_id)
-                    date = row.get(date_column, '')
-                    if not date:
-                        self._counters.add_counter(
-                            'error_input_rows_missing_date', 1)
-                        logging.error(
-                            f'Missing date in row:{filename}:{num_rows}:{row}')
-                        continue
-                    if date < self._max_date:
-                        self._counters.add_counter(
-                            'error_input_rows_date_out_of_order', 1)
-                        logging.error(
-                            f'Old date in row:{filename}:{num_rows}:{row}')
-                        continue
-                    prev_date = date
-                    for p in event_props:
-                        if p in row:
-                            data = utils.str_get_numeric_value(row[p])
-                            if data is not None:
-                                data_pvs[p] = data
-                            else:
-                                data_pvs[p] = row[p]
-                    # Compute area if required.
-                    if 'area' in event_props and 'area' not in data_pvs:
-                        area = utils.place_area(place_id)
-                        if area > 0:
-                            data_pvs['area'] = area
-                    # Check if row passes input filters.
-                    if not input_filter or utils.dict_filter_values(
-                            data_pvs, input_filter):
-                        self.add_place_data(place_id, date, data_pvs)
-                    else:
-                        self._counters.add_counter('input_dropped_by_filter', 1)
+                    self._counters.add_counter(f'csv_rows-{filename}', 1)
+                    self._counters.add_counter('processed', 1)
+                    self.process_event_data(input_row)
                 # Deactivate old events before moving to next CSV file.
                 # Assumes event files are in increasing order by date.
                 self.deactivate_old_events(self.get_active_event_ids(),
@@ -1144,6 +1079,95 @@ class GeoEventsProcessor:
                 logging.info(
                     f'Created {len(self._event_by_id)} events for {num_rows} rows from file: {filename}'
                 )
+        self.output_events(output_path, output_active_events_path,
+                           output_active_events_state)
+        self.save_place_cache_file()
+
+    def process_event_data(self, data: dict) -> bool:
+        '''Process an input event with a dictionary of properties.
+        The event is added to existing events or a new event is created if it is valid.
+        Args:
+          data: dictionary of property:values for the event.
+        '''
+        # Collect property:values for the event to be added.
+        data_pvs = {}
+        row = _rename_dict_keys(data,
+                                self._config.get('input_rename_columns', {}))
+        place_column = self._config.get('place_column', 'observationAbout')
+        place = utils.strip_namespace(row.get(place_column, ''))
+        place_id = self.get_place_id_for_event(place)
+        if not place_id:
+            self._counters.add_counter('input_dropped_invalid_placeid', 1)
+            return False
+        data_pvs['affectedPlace'] = place
+        date_column = self._config.get('date_column', 'observationDate')
+        date = row.get(date_column, '')
+        if not date:
+            self._counters.add_counter('error_input_rows_missing_date', 1)
+            logging.error(f'Missing date in row:{filename}:{num_rows}:{row}')
+            return False
+        if date < self._max_date:
+            self._counters.add_counter('error_input_rows_date_out_of_order', 1)
+            logging.error(f'Old date in row:{filename}:{num_rows}:{row}')
+            return False
+        prev_date = date
+        for p in self._event_props:
+            if p in row:
+                data = utils.str_get_numeric_value(row[p])
+                if data is not None:
+                    data_pvs[p] = data
+                else:
+                    data_pvs[p] = row[p]
+        # Compute area if required.
+        if 'area' in self._event_props and 'area' not in data_pvs:
+            area = utils.place_area(place_id)
+            if area > 0:
+                data_pvs['area'] = area
+        # Check if row passes input filters.
+        input_filter = self._config.get('input_filter_config', None)
+        if not input_filter or utils.dict_filter_values(data_pvs, input_filter):
+            self.add_place_data(place_id, date, data_pvs)
+        else:
+            self._counters.add_counter('input_dropped_by_filter', 1)
+            return False
+        self._counters.add_counter('events_added', 1)
+        return True
+
+    def get_place_id_for_event(self, place_id: str) -> str:
+        '''Returns the place_id for the event data.'''
+        if not utils.is_grid_id(place_id) and self._config.get(
+                'convert_place_to_grid', False):
+            # Converting a non-grid place to a grid_1 place.
+            # Multiple places mapping to same grid will be
+            # aggregated using 'property_config_per_date'.
+            lat, lng = self._get_place_lat_lng(place_id)
+            if lat is not None and lng is not None:
+                # Got a location. Convert it to a grid.
+                grid_id = utils.grid_id_from_lat_lng(1, int(lat), int(lng))
+                place_id = grid_id
+                self._counters.add_counter(f'place_converted_to_grid_1', 1)
+            else:
+                self._counters.add_counter(f'place_without_lat_lng', 1)
+        if utils.is_s2_cell_id(place_id):
+            # Place is an s2 cell. Convert to the right s2 level.
+            s2_cell = utils.s2_cell_from_dcid(place_id)
+            s2_cell_level = s2_cell.level()
+            output_s2_level = self._config.get('s2_level', s2_cell_level)
+            if s2_cell_level > output_s2_level:
+                # Incoming S2 cell is too small.
+                # Convert it to a higher level.
+                # Data from mutiple input cells mapping to same
+                # output cell will be aggregated.
+                place_id = utils.s2_cell_to_dcid(
+                    s2_cell.parent(output_s2_level))
+                self._counters.add_counter(
+                    f's2_{s2_cell_level}_converted_to_{output_s2_level}', 1)
+        return utils.strip_namespace(place_id)
+
+    def output_events(self,
+                      output_path: str,
+                      output_active_events_path: str = None,
+                      output_active_events_state: str = None):
         # Output all ended events
         output_ended_events = False
         if output_active_events_path:
@@ -1178,7 +1202,6 @@ class GeoEventsProcessor:
         if output_active_events_state:
             _set_counter_stage(self._counters, 'emit_active_events_data_')
             self.write_active_events(output_active_events_state)
-        self.save_place_cache_file()
 
     def _get_date_with_interval(self, date: str) -> str:
         '''Returns the date with the interval 'max_event_interval_days' applied.'''
@@ -1302,6 +1325,9 @@ class GeoEventsProcessor:
 
     def _get_place_lat_lng(self, placeid: str) -> (float, float):
         placeid = utils.strip_namespace(placeid)
+        lat, lng = utils.place_id_to_lat_lng(placeid, dc_api_lookup=False)
+        if lat is not None and lng is not None:
+            return (lat, lng)
         lat = self.get_place_property(placeid, 'latitude')
         lng = self.get_place_property(placeid, 'longitude')
         if lat and lng:
@@ -1319,7 +1345,7 @@ class GeoEventsProcessor:
         return (lat, lng)
 
 
-def rename_dict_keys(pvs: dict, rename_keys: dict) -> dict:
+def _rename_dict_keys(pvs: dict, rename_keys: dict) -> dict:
     '''Returns a dict with keys renamed.'''
     if not rename_keys:
         return pvs

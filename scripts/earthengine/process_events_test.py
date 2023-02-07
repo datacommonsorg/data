@@ -35,12 +35,16 @@ import utils
 _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         'test_data')
 
-from process_events import process
+from process_events import process, GeoEventsProcessor
 
 from util.config_map import ConfigMap
 
 
 class ProcessEventsTest(unittest.TestCase):
+
+    def setUp(self):
+        self._config = ConfigMap(
+            filename=os.path.join(_TESTDIR, 'event_config.py'))
 
     def compare_files(self, expected: str, actual: str):
         '''Compare lines in files after sorting.'''
@@ -92,8 +96,7 @@ class ProcessEventsTest(unittest.TestCase):
             process(
                 csv_files=[os.path.join(_TESTDIR, 'sample_floods_output.csv')],
                 output_path=output_prefix,
-                config=ConfigMap(
-                    filename=os.path.join(_TESTDIR, 'event_config.py')))
+                config=self._config)
             # Verify generated events.
             for file in [
                     'events.csv', 'events.tmcf', 'svobs.csv', 'svobs.tmcf'
@@ -105,3 +108,76 @@ class ProcessEventsTest(unittest.TestCase):
                                            ['geoJsonCoordinatesDP1'])
                 else:
                     self.compare_files(test_prefix + file, output_prefix + file)
+
+    def test_process_event_data(self):
+        '''Verify events can be added by date.'''
+        events_processor = GeoEventsProcessor(self._config)
+        event_data = {
+            's2CellId': 's2CellId/0x89c2590000000000',
+            'area': 0.5,
+            'water': 1,
+            'date': '2022-10',
+        }
+        logging.set_verbosity(1)
+        self.assertTrue(events_processor.process_event_data(event_data))
+        active_events = events_processor.get_active_event_ids('2022-10')
+        self.assertEqual(1, len(active_events))
+        event_id = active_events[0]
+        event = events_processor.get_event_by_id(event_id)
+        self.assertTrue('floodEvent/2022-10_s2CellId/0x89c2590000000000', event.event_id())
+        event_pvs = events_processor.get_event_output_properties(event_id)
+        self.assertTrue(event_data['s2CellId'] in event_pvs['affectedPlace'])
+        self.assertEqual(0.5, event_pvs['AreaSqKm'])
+
+        # Add data for neighbouring place that should get aggregated into event.
+        event_data2 = dict(event_data)
+        event_data2['s2CellId'] = 's2CellId/0x89c2570000000000'
+        self.assertTrue(events_processor.process_event_data(event_data2))
+
+        # Verify both cells are in affected place
+        updated_event_pvs = events_processor.get_event_output_properties(event_id)
+        self.assertTrue(event_data['s2CellId'] in updated_event_pvs['affectedPlace'])
+        self.assertTrue(event_data2['s2CellId'] in updated_event_pvs['affectedPlace'])
+        self.assertEqual(1.0, updated_event_pvs['AreaSqKm'])
+
+        # Add data for place too far away that is not aggregated.
+        event_data3 = dict(event_data)
+        event_data3['s2CellId'] = 's2CellId/0x89c3ab0000000000'
+        self.assertTrue(events_processor.process_event_data(event_data3))
+        active_events = events_processor.get_active_event_ids('2022-10')
+        self.assertEqual(2, len(active_events))
+
+        updated_event_pvs = events_processor.get_event_output_properties(event_id)
+        self.assertFalse(event_data3['s2CellId'] in updated_event_pvs['affectedPlace'])
+        self.assertEqual(1.0, updated_event_pvs['AreaSqKm'])
+
+        # Add a neighbouring place with more recent date that is added to
+        # existing event.
+        event_data4 = dict(event_data)
+        event_data4['s2CellId'] = 's2CellId/0x89c2f70000000000'
+        event_data4['date'] = '2022-11'
+        self.assertTrue(events_processor.process_event_data(event_data4))
+        active_events = events_processor.get_active_event_ids('2022-11')
+        self.assertEqual(2, len(active_events))
+        updated_event_pvs = events_processor.get_event_output_properties(event_id)
+        self.assertTrue(event_data4['s2CellId'] in updated_event_pvs['affectedPlace'])
+        self.assertEqual(1.5, updated_event_pvs['AreaSqKm'])
+        self.assertEqual('P32D', updated_event_pvs['observationPeriod'])
+
+        # Add a neighbouring place with recent date too new
+        # that is not added to existing event.
+        event_data5 = dict(event_data)
+        event_data5['s2CellId'] = 's2CellId/0x89c2f90000000000'
+        event_data5['date'] = '2023-01'
+        self.assertTrue(events_processor.process_event_data(event_data5))
+        # All older events are deactivated and a new event is added for
+        # event_data5
+        active_events = events_processor.get_active_event_ids('2023-01')
+        self.assertEqual(1, len(active_events))
+        # Verify older event is not modified.
+        old_event_pvs = events_processor.get_event_output_properties(event_id)
+        self.assertEqual(old_event_pvs, updated_event_pvs)
+        # Verify new event has a single place.
+        new_event_pvs = events_processor.get_event_output_properties(active_events[0])
+        self.assertEqual(1, new_event_pvs['AffectedPlaceCount'])
+        self.assertEqual('floodEvent/2023-01_0x89c2f90000000000', new_event_pvs['dcid'])

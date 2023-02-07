@@ -87,7 +87,7 @@ flags.DEFINE_string(
 flags.DEFINE_float('band_min', None,
                    'Minimum value for the pixels in the band.')
 flags.DEFINE_float('band_max', None,
-                   'Minimum value for the pixels in the band.')
+                   'Maximum value for the pixels in the band.')
 flags.DEFINE_float('band_eq', None, 'Value for the pixels in the band.')
 flags.DEFINE_bool(
     'ee_band_bool', True,
