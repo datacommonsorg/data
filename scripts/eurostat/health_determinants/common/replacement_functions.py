@@ -160,10 +160,19 @@ _FREQUENC_ALCOHOL = {
     'NBINGE': 'Never'
 }
 
+_LEV_PERC = {'STR': 'Strong', 'INT': 'Intermediate', 'POOR': 'Poor'}
+
+_ASSIST = {
+    'PROV': 'ProvidingInformalCare',
+    'PROV_R': 'Relatives_ProvidingInformalCare',
+    'PROV_NR': 'NonRelatives_ProvidingInformalCare',
+    'NPROV': 'NotProvidingInformalCare'
+}
+
 _N_PORTION = {
-    '0': '0Portions',
-    '1-4': 'From1To4Portions',
-    'GE5': '5PortionsOrMore'
+    '0': '0Portion',
+    '1-4': 'From1To4Portion',
+    'GE5': '5PortionOrMore'
 }
 
 _COICOP = {'CP0116': 'ConsumptionOfFruits', 'CP0117': 'ConsumptionOfVegetables'}
@@ -173,6 +182,18 @@ _ISCED97 = {
     'ED3_4': 'UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation',
     'ED5_6': 'TertiaryEducationStageOneOrTertiaryEducationStageTwo',
     'TOTAL': 'Total'
+}
+
+_FREQUENC_FRUITS_VEGETABLES = {
+    'DAY': 'Daily',
+    'NVR': 'Never',
+    'NVR_OCC': 'NeverOrOccasionally',
+    'GE1D': 'AtLeastOnceADay',
+    'GE2D': 'AtLeastTwiceADay',
+    '1-3W': 'From1To3TimesAWeek',
+    '4-6W': 'From4To6TimesAWeek',
+    '1D': 'OnceADay',
+    'LT1W': 'LessThanOnceAWeek'
 }
 
 
@@ -203,6 +224,9 @@ def replace_col_values(data_df: pd.DataFrame) -> pd.DataFrame:
         'smoking': _SMOKING,
         'frequenc_tobacco': _FREQUENC_TOBACCO,
         'frequenc_alcohol': _FREQUENC_ALCOHOL,
+        'frequenc_fruitsvegetables': _FREQUENC_FRUITS_VEGETABLES,
+        'lev_perc': _LEV_PERC,
+        'assist': _ASSIST,
         'n_portion': _N_PORTION,
         'coicop': _COICOP,
         'isced97': _ISCED97

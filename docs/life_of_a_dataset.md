@@ -10,6 +10,14 @@ As a prerequisite, you should understand the dataset, and have an idea of how
 to map location entities in your dataset to Data Commons entities and measures
 in your dataset to Data Commons statistical variables.
 
+## Import Design Review
+
+Begin by making sure you've completed the import document template (as per the 
+[README.md](README.md)) and worked with the DC team to review your design. Once 
+your schema mapping/statistical variable (SV) categories have been reviewed and 
+finalized, proceed to the next section on how to define your SVs. 
+
+
 ## Define Statistical Variables
 
 If you are adding new types of data to the knowledge graph, you might need to
@@ -21,7 +29,11 @@ The statistical variable DCIDs should be human-readable, encapsulating the
 meaning of its triples.  The naming rules are summarized in [this
 doc](https://docs.google.com/document/d/1YtmQu_gOXENt4W2lmlK-8Mtnw_XB3kZlLBjSN-gT0oE/preview#bookmark=kix.bdksa8hbv3si).
 
-When the variables are finalized, they get checked into the [schema
+You'll need approval from the Data Commons team on any new variables (see the 
+"Defining location and schema mapping" section 
+[here](https://github.com/datacommonsorg/data/blob/master/docs/README.md)). 
+
+When the variables are finalized, they get checked into the [schema 
 repo](https://github.com/datacommonsorg/schema/tree/main/stat_vars).
 
 ## Template MCF with tabular data (CSV)
@@ -36,7 +48,7 @@ example simple cleaning script is
 [here](https://github.com/datacommonsorg/data/blob/master/scripts/covid_tracking_project/historic_state_data/preprocess_csv.py).
 
 There are no restrictions on your approach for this step, but the only
-requirement is that a property value in the TMCF map to a single CSV column (as
+requirement is that a property value in the TMCF maps to a single CSV column (as
 illustrated in the examples in [MCF format](mcf_format.md)).
 
 The general guidelines are:
@@ -73,6 +85,10 @@ Create a Pull Request (PR) with the Template MCF file together with the cleaned 
 In the PR, please also include the validation results (`report.json` and `summary_report.html`).
 
 If you introduced new statistical variables, please create a Pull Request for them in the [schema repo](https://github.com/datacommonsorg/schema).
+
+## Manifesting Artifacts
+
+After your PR is reviewed and approved, the Data Commons team will work with you to manifest (e.g. generate for inclusion in our model) the artifacts you've created in our internal system. Only after the artifacts are manifested will they be added to the Data Commons graph and be accessible.
 
 ## Alternate approach: Generate Instance MCF
 

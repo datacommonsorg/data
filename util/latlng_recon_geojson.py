@@ -18,27 +18,41 @@ See latlng_recon_geojson_test.py for usage example.
 
 import datacommons as dc
 import json
+import logging
 from shapely import geometry
+import urllib
 
 _WORLD = 'Earth'
 _USA = 'country/USA'
+_MAX_RETRIES = 3
+_RETRY_DELAY = 15
 
 _GJ_PROP = {
     'Country': 'geoJsonCoordinatesDP2',
     # Certain low-res geojsons are malformed for states
     'State': 'geoJsonCoordinates',
+    'County': 'geoJsonCoordinates',
 }
 
 
-def _get_geojsons(place_type, parent_place):
-    places = dc.get_places_in([parent_place], place_type)[parent_place]
-    resp = dc.get_property_values(places, _GJ_PROP[place_type])
-    geojsons = {}
-    for p, gj in resp.items():
-        if not gj:
-            continue
-        geojsons[p] = geometry.shape(json.loads(gj[0]))
-    return geojsons
+def _get_geojsons(place_type, parent_place, retry=0):
+    try:
+        places = dc.get_places_in([parent_place], place_type)[parent_place]
+        resp = dc.get_property_values(places, _GJ_PROP[place_type])
+        geojsons = {}
+        for p, gj in resp.items():
+            if not gj:
+                continue
+            geojsons[p] = geometry.shape(json.loads(gj[0]))
+        return geojsons
+    except urllib.error.URLError:
+        if retry > _MAX_RETRIES:
+            logging.error("Exceeded max retries(%s)" % str(_MAX_RETRIES))
+            raise RuntimeError
+        else:
+            # retry after a small delay
+            time.sleep(_RETRY_DELAY)
+            return _get_geojsons(place_type, parent_place, retry + 1)
 
 
 def _get_continent_map(countries):
@@ -54,6 +68,9 @@ class LatLng2Places:
     def __init__(self):
         self._country_geojsons = _get_geojsons('Country', _WORLD)
         self._us_state_geojsons = _get_geojsons('State', _USA)
+        self._us_county_geojsons = {}
+        for state in self._us_state_geojsons.keys():
+            self._us_county_geojsons.update(_get_geojsons('County', state))
         self._continent_map = _get_continent_map(
             [k for k in self._country_geojsons])
         print('Loaded',
@@ -74,6 +91,10 @@ class LatLng2Places:
             for p, gj in self._us_state_geojsons.items():
                 if gj.contains(point):
                     cip.append(p)
+                    break
+            for p, gj in self._us_county_geojsons.items():
+                if gj.contains(point):
+                    cip.append(p.zfill(5))
                     break
         if country:
             cip.append(country)

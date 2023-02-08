@@ -1,0 +1,5 @@
+time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,status,locationSource,magSource
+1900-10-29T09:11:00.000Z,11,-66,0,7.7,mw,,,,,iscgem,iscgem16957719,2020-07-09T21:50:47.628Z,"83 km NE of Guatire, Venezuela",earthquake,,,,,automatic,iscgem,iscgem
+1900-04-09T14:00:00.000Z,41.4,-81.9,,3.4,fa,,,,,ushis,ushis388,2018-06-04T20:43:44.000Z,"2 km SE of North Olmsted, Ohio",earthquake,,,,,reviewed,ushis,bar
+2022-11-13T18:43:11.714Z,32.6524,-93.9825,5,3,mb_lg,26,130,0.417,0.45,us,us7000iphl,2022-11-17T01:28:08.189Z,"4 km SSW of Mooringsport, Louisiana",earthquake,4.33,1.99,0.071,124,reviewed,us,us
+2022-11-13T18:43:11.714Z,32.6524,-93.9825,5,3,ms_20,26,130,0.417,0.45,us,us7000iphl,2022-11-17T01:28:08.189Z,"4 km SSW of Mooringsport, Louisiana",earthquake,4.33,1.99,0.071,124,automatic,us,us
