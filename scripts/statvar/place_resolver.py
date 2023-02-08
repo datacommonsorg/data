@@ -30,9 +30,15 @@ _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('maps_api_key', '', 'Google Maps API key')
 
-from counters import Counters
-from config import Config
 
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
+
+from counters import Counters
+from config_map import ConfigMap
 from download_util import request_url
 from dc_api_wrapper import dc_api_batched_wrapper, dc_api_resolve_placeid
 from dc_api_wrapper import dc_api_resolve_latlng
@@ -64,9 +70,9 @@ class PlaceResolver:
                  config_dict: dict = {},
                  counters_dict: dict = None):
         self._maps_api_key = maps_api_key
-        self._config = Config(config_dict)
+        self._config = ConfigMap(config_dict)
         if not self._maps_api_key:
-            self._maps_api_key = self._config.get_config('maps_api_key', '')
+            self._maps_api_key = self._config.get('maps_api_key', '')
         self._counters = Counters(counters_dict)
         self._load_cache()
 
@@ -190,7 +196,7 @@ class PlaceResolver:
                 function=dc_api_resolve_latlng,
                 dcids=resolve_places,
                 args={},
-                config=self._config.get_configs())
+                config=self._config.gets())
 
         # Retrieve resolved dcids into results.
         if resolved_place_ids:
@@ -266,7 +272,7 @@ class PlaceResolver:
                             result.update(first_result['geometry']['location'])
             # Cache the response
             self._maps_cache[place_key] = result
-            self._save_cache(self._config.get_config('cache_save_interval', 30))
+            self._save_cache(self._config.get('cache_save_interval', 30))
             return result
 
         return None
@@ -290,18 +296,18 @@ class PlaceResolver:
     def _load_cache(self):
         '''Load cache from file.'''
         self._maps_cache = _read_dict_from_file(
-            self._config.get_config('maps_api_cache'))
+            self._config.get('maps_api_cache'))
         self._place_cache = _read_dict_from_file(
-            self._config.get_config('place_resolver_cache'))
+            self._config.get('place_resolver_cache'))
         self._cache_save_timestamp = time.perf_counter()
 
     def _save_cache(self, time_interval: int = 0):
         '''Periodically save cache of maps API and resolve API call responses'''
         if self._cache_save_timestamp + time_interval <= time.perf_counter():
             _write_dict_to_file(self._maps_cache,
-                                self._config.get_config('maps_api_cache'))
+                                self._config.get('maps_api_cache'))
             _write_dict_to_file(self._place_cache,
-                                self._config.get_config('place_resolver_cache'))
+                                self._config.get('place_resolver_cache'))
             self._cache_save_timestamp = time.perf_counter()
 
     def _get_cache_value(self, cache_dict: dict, cache_key: str) -> dict:
@@ -363,7 +369,7 @@ def process(input_filenames: list,
       output_filename: output csv with additional columns.
       config_file: file with dictionary of config parameters for resolution.
     '''
-    config = Config(filename=config_file)
+    config = ConfigMap(filename=config_file)
     logging.info(f'Using config from {config_file}: {config.get_configs()}')
     counters = Counters()
     pr = PlaceResolver(maps_api_key=maps_api_key,
@@ -383,7 +389,7 @@ def process(input_filenames: list,
             columns.update(reader.fieldnames)
             for row in reader:
                 num_inputs += 1
-                if num_inputs > config.get_config('input_rows', sys.maxsize):
+                if num_inputs > config.get('input_rows', sys.maxsize):
                     break
                 if 'name' in row:
                     place_names[num_inputs] = row

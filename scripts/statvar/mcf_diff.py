@@ -103,7 +103,7 @@ flags.DEFINE_list(
 flags.DEFINE_bool('show_diff_nodes_only', True, 'Output nodes with diff only.')
 
 _FLAGS = flags.FLAGS
-_FLAGS(sys.argv)  # Allow invocation without app.run()
+#_FLAGS(sys.argv)  # Allow invocation without app.run()
 
 
 def get_diff_config() -> dict:

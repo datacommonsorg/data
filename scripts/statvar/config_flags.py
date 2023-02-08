@@ -24,6 +24,14 @@ from absl import logging
 from collections import OrderedDict
 from typing import Union
 
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
+
+from config_map import ConfigMap
+
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('config', '', 'File with configuration parameters.')
@@ -188,155 +196,16 @@ _DEFAULT_CONFIG = {
 }
 
 
-def _deep_update(src: dict, upd: dict) -> dict:
-    '''Deep update of parameters in upd into src.
-    Args:
-      src: source dictionary into which new parameters are added.
-      upd: dictionary with new parameters to be added.
-    Returns:
-      src dictionary with updated parameters.
-
-    Note:
-    Assumes the new dictionary has same type(dict/list) for updated parameters.
-    '''
-    for k, v in upd.items():
-        if isinstance(v, collections.abc.Mapping):
-            src[k] = _deep_update(src.get(k, {}), v)
-        elif isinstance(v, list):
-            src[k].extend(v)
-        else:
-            src[k] = v
-    return src
-
-
-def get_py_dict_from_file(filename: str) -> dict:
-    '''Load a python dict from a file.
-    Args:
-      filename: JSON or a python file containing parameter to value mappings.
-    Returns:
-      dictionary loaded from the file.
-    '''
-    if not filename or not os.path.exists(filename):
-        return {}
-    logging.info(f'Loading python dict from {filename}...')
-    with open(filename) as file:
-        pv_map_str = file.read()
-
-    # Load the map assuming a python dictionary.
-    # Can also be used with JSON with trailing commas and comments.
-    param_dict = ast.literal_eval(pv_map_str)
-    logging.debug(f'Loaded {filename} into dict {param_dict}')
-    return param_dict
-
-
-class Config:
-    '''Class to store config mapping of named parameters to values as a dictoinary.'''
-
-    def __init__(self, config_dict: dict = None, filename: str = None):
-        self._config_dict = dict(_DEFAULT_CONFIG)
-        self.add_configs(self.get_config_from_flags())
-        if config_dict:
-            self.add_configs(config_dict)
-        if filename:
-            self.load_config_file(filename)
-        logging.set_verbosity(self.get_config('log_level'))
-        #logging.set_verbosity(3)
-        logging.debug(f'Using config: {self.get_configs()}')
-
-    def get_config_from_flags(self) -> dict:
-        '''Returns a dictionary of config options from command line flags.'''
-        return {
-            # 'flag_name':  _FLAGS.flag_name
-            'pv_map':
-                _FLAGS.pv_map,
-            'data_url':
-                _FLAGS.data_url,
-            'shard_input_by_column':
-                _FLAGS.shard_input_by_column,
-            'shard_prefix_length':
-                _FLAGS.shard_prefix_length,
-            'input_rows':
-                _FLAGS.input_rows,
-            'skip_rows':
-                _FLAGS.skip_rows,
-            'header_rows':
-                _FLAGS.header_rows,
-            'header_columns':
-                _FLAGS.header_columns,
-            'existing_statvar_mcf':
-                _FLAGS.existing_statvar_mcf,
-            'schemaless':
-                _FLAGS.schemaless,
-            'parallelism':
-                _FLAGS.parallelism,
-            'resume':
-                _FLAGS.resume,
-            'debug':
-                _FLAGS.debug,
-            'log_level':
-                max(_FLAGS.log_level, logging.DEBUG if _FLAGS.debug else 0),
-        }
-
-    def load_config_file(self, filename: str) -> dict:
-        '''Load configs from a file overwriting any existing parameter with a new value.
-        Args:
-            filename: a py or json file with a dictionary of parameter:value mappings.
-        Returns:
-          The config dictionary.
-          '''
-        self.add_configs(get_py_dict_from_file(filename))
-        return self._config_dict
-
-    def add_configs(self, configs: dict) -> dict:
-        '''Add new or replace existing config parameters
-        Args:
-            configs: dictionary with new parameter:value mappings
-        Returns:
-            dictionary with all parameter:value mappings.
-        '''
-        if configs:
-            self._config_dict.update(configs)
-        return self._config_dict
-
-    def update_config(self, configs: dict) -> dict:
-        '''Does a deep update of the dict updating nested dicts as well.
-        Args:
-            configs: dictionary with additional parameter:value mappings.
-        Returns:
-            dictionary with all parameter:value mappings.
-        '''
-        return _deep_update(self._config_dict, configs)
-
-    def get_config(self,
-                   parameter: str,
-                   default_value=None) -> Union[str, int, float, list, dict]:
-        '''Return the value of a named config parameter.
-        Args:
-            parameter: name of the parameter to lookup
-            default_value: Default value to be returned if the parameter doesn't exist.
-        Returns:
-            value of the parameter in the config dict if it exists or the default_value.
-        '''
-        return self._config_dict.get(parameter, default_value)
-
-    def get_configs(self) -> dict:
-        '''Return the config dictionary with all the parameter and values.'''
-        return self._config_dict
-
-    def set_config(self, parameter: str, value):
-        '''Set the value for a parameter overwriting one if it already exists
-        Args:
-          parameter: Name of the parameter
-          value: Value to be set.
-        '''
-        self._config_dict[parameter] = value
-
-
-def get_config_from_file(filename: str) -> Config:
+def get_config_from_flags(filename: str=None) -> ConfigMap:
     '''Returns a Config object with parameters loaded from a file.
     Args:
       filename: name of the file to load.
     Returns:
       Config object with all the parameters loaded into the config_dict.
     '''
-    return Config(filename=filename)
+    if _FLAGS.debug:
+      logging.set_verbosity(2)
+    if _FLAGS.log_level:
+      logging.set_verbosity(_FLAGS.log_level)
+
+    return ConfigMap(config_dict=_DEFAULT_CONFIG, filename=filename)
