@@ -19,8 +19,6 @@ from download_config import RETRY_SLEEP_SECS
 
 from download_files_details import DEFAULT_COLUMNS_SELECTED
 from download_files_details import COLUMNS_TO_DOWNLOAD_PUBLIC, COLUMNS_TO_DOWNLOAD_PRIVATE, COLUMNS_TO_DOWNLOAD_DISTRICT
-from download_files_details import SCHOOL
-from download_files_details import YEARS_SELECTED
 from download_files_details import KEY_COLUMNS_PRIVATE
 from download_files_details import KEY_COLUMNS_PUBLIC
 from download_files_details import KEY_COLUMNS_DISTRICT
@@ -95,7 +93,18 @@ def _call_download_api(compressed_src_file: str, year: str) -> int:
         compressed_src_file=compressed_src_file))
     if res.status_code == 200:
         with zipfile.ZipFile(io.BytesIO(res.content)) as zipfileout:
-            zipfileout.extractall(f"scripts/us_nces/input_files/{year}")
+            # Writing private input files to Private school directory
+            if _FLAGS.import_name == "PrivateSchool":
+                zipfileout.extractall(
+                    f"scripts/us_nces/demographics/private_school/input_files")
+        # Writing district input files to  school district directory
+            elif _FLAGS.import_name == "District":
+                zipfileout.extractall(
+                    f"scripts/us_nces/demographics/school_district/input_files")
+        # Writing public input files to Public school directory
+            elif _FLAGS.import_name == "PublicSchool":
+                zipfileout.extractall(
+                    f"scripts/us_nces/demographics/public_school/input_files")
         return 0
     else:
         return 1
@@ -165,9 +174,6 @@ def nces_elsi_file_download(school, year, curr_columns_selected):
             if download_ret != 0:
                 raise Exception("Download Failure")
 
-
-#if __name__ == '__main__':
-#    download()
 
 if __name__ == "__main__":
     app.run(main)

@@ -1,16 +1,7 @@
-SCHOOL = ["PublicSchool"]  #"PrivateSchool", "PublicSchool", "District"]
-
-YEARS_SELECTED = ["2020-21"]
-#     "2010-11", "2009-10", "2007-08", "2005-06", "2003-04", "2001-02", "1999-00",
-#     "1997-98"
-# ]
-#     "2020-21", "2019-20", "2018-19", "2017-18", "2016-17", "2015-16", "2014-15",
-#     "2013-14", "2012-13", "2011-12", "2010-11", "2009-10", "2007-08", "2005-06",
-#     "2003-04", "2001-02", "1999-00", "1997-98"
-# ]
-
+# default columns present in every file.
 DEFAULT_COLUMNS_SELECTED = ["staticName", "defaultName"]
 
+# column values for private schools
 COLUMNS_TO_DOWNLOAD_PRIVATE = {
     "2019-20": [
         "43222", "16664", "43158", "43163", "43162", "43167", "43160", "43161",
@@ -116,6 +107,7 @@ COLUMNS_TO_DOWNLOAD_PRIVATE = {
     ]
 }
 
+# column values for district schools
 COLUMNS_TO_DOWNLOAD_DISTRICT = {
     "2020-21": [
         "42156", "42142", "42141", "42148", "42147", "42150", "42128", "42135",
@@ -775,15 +767,9 @@ COLUMNS_TO_DOWNLOAD_DISTRICT = {
         "15249", "15295", "15253", "15241", "15242", "15238", "15239", "15247",
         "15248", "15252", "15244"
     ],
-    "2009-10": [],
-    "2007-08": [],
-    "2005-06": [],
-    "2003-04": [],
-    "2001-02": [],
-    "1999-00": [],
-    "1997-98": []
 }
 
+# column values for public school
 COLUMNS_TO_DOWNLOAD_PUBLIC = {
     "2020-21": [
         "45785", "45331", "45336", "45332", "45335", "15188", "45571", "45652",
@@ -1433,6 +1419,7 @@ COLUMNS_TO_DOWNLOAD_PUBLIC = {
     ]
 }
 
+# primary key for respective schools.
 KEY_COLUMNS_PRIVATE = ["13391"]
 KEY_COLUMNS_PUBLIC = ["13392"]
 KEY_COLUMNS_DISTRICT = ["13393"]

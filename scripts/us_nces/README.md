@@ -70,11 +70,10 @@ Cleaned data will be saved as a CSV file within the following paths.
 - district_school -> [school_district/output_files/us_nces_demographics_district_school.csv]
 - public_school -> [public_school/output_files/us_nces_demographics_public_school.csv]
 
-The Columns for the csv files are as 
-- time
-- geo
-- SV
-- Measurement_Method
+The Columns for the csv files are as follows
+- school_state_code 
+- year
+- sv_name
 - observation
 - scaling_factor
 - unit
@@ -139,8 +138,9 @@ The below script will download the data and extract it.
 
 `/bin/python3 scripts/us_nces/demographics/download.py --import_name={"PrivateSchool"(or)"District"(or)"PublicSchool"} --years_to_download= "{select the available years mentioned under each school type}"`
 
-- The input files would download under its respective year. Keep all one type of school input files under one folder named "input_files". Place the input_files under its respective import name folder.
-- For example, after downlading input file for Private School, keep only the files in input_files folder and place it in `scripts/us_nces/demographics/private_school/`.
+For Example:  `/bin/python3 scripts/us_nces/demographics/download.py --import_name="PublicSchool" --years_to_download="2019-20","2017-18"`.
+- The input_files folder containing all the files will be present in: 
+`scripts/us_nces/demographics/public_school/input_files`
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 - for Private Schools:
