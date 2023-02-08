@@ -81,5 +81,13 @@ download_details = {
                 "BulkDownloadListing?file=data/hlth_ehis_",
         "file_extension":
             ".tsv.gz"
+    },
+    "fruits_vegetables": {
+        "filenames": ["fv1b","fv1c","fv1d","fv1e","fv1i","fv1m","fv1u","fv3b","fv3c","fv3d","fv3e","fv3i","fv3m","fv3u","fv7e","fv7i","fv7m","de7","de8","fv5e"],
+        "input_url":
+            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
+                "BulkDownloadListing?file=data/hlth_ehis_",
+        "file_extension":
+            ".tsv.gz"
     }
 }

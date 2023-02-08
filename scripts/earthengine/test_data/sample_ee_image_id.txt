@@ -1,0 +1,205 @@
+ee.String({
+  "functionInvocationValue": {
+    "functionName": "Image.id",
+    "arguments": {
+      "element": {
+        "functionInvocationValue": {
+          "functionName": "Image.updateMask",
+          "arguments": {
+            "image": {
+              "functionInvocationValue": {
+                "functionName": "Image.gte",
+                "arguments": {
+                  "image1": {
+                    "functionInvocationValue": {
+                      "functionName": "ImageCollection.reduce",
+                      "arguments": {
+                        "collection": {
+                          "functionInvocationValue": {
+                            "functionName": "Collection.filter",
+                            "arguments": {
+                              "collection": {
+                                "functionInvocationValue": {
+                                  "functionName": "Collection.filter",
+                                  "arguments": {
+                                    "collection": {
+                                      "functionInvocationValue": {
+                                        "functionName": "Collection.map",
+                                        "arguments": {
+                                          "baseAlgorithm": {
+                                            "functionDefinitionValue": {
+                                              "argumentNames": [
+                                                "_MAPPING_VAR_0_0"
+                                              ],
+                                              "body": {
+                                                "functionInvocationValue": {
+                                                  "functionName": "Image.select",
+                                                  "arguments": {
+                                                    "bandSelectors": {
+                                                      "constantValue": [
+                                                        "water"
+                                                      ]
+                                                    },
+                                                    "input": {
+                                                      "argumentReference": "_MAPPING_VAR_0_0"
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "collection": {
+                                            "functionInvocationValue": {
+                                              "functionName": "ImageCollection.load",
+                                              "arguments": {
+                                                "id": {
+                                                  "constantValue": "GOOGLE/DYNAMICWORLD/V1"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "filter": {
+                                      "functionInvocationValue": {
+                                        "functionName": "Filter.dateRangeContains",
+                                        "arguments": {
+                                          "leftValue": {
+                                            "functionInvocationValue": {
+                                              "functionName": "DateRange",
+                                              "arguments": {
+                                                "end": {
+                                                  "functionInvocationValue": {
+                                                    "functionName": "Date",
+                                                    "arguments": {
+                                                      "value": {
+                                                        "constantValue": "2022-11-01"
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "start": {
+                                                  "functionInvocationValue": {
+                                                    "functionName": "Date",
+                                                    "arguments": {
+                                                      "value": {
+                                                        "constantValue": "2022-10-01"
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "rightField": {
+                                            "constantValue": "system:time_start"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "filter": {
+                                "functionInvocationValue": {
+                                  "functionName": "Filter.intersects",
+                                  "arguments": {
+                                    "leftField": {
+                                      "constantValue": ".all"
+                                    },
+                                    "rightValue": {
+                                      "functionInvocationValue": {
+                                        "functionName": "Feature",
+                                        "arguments": {
+                                          "geometry": {
+                                            "functionInvocationValue": {
+                                              "functionName": "GeometryConstructors.Polygon",
+                                              "arguments": {
+                                                "coordinates": {
+                                                  "constantValue": [
+                                                    [
+                                                      [
+                                                        83.83,
+                                                        26.06
+                                                      ],
+                                                      [
+                                                        83.83,
+                                                        24.72
+                                                      ],
+                                                      [
+                                                        88.26,
+                                                        24.72
+                                                      ],
+                                                      [
+                                                        88.26,
+                                                        26.06
+                                                      ]
+                                                    ]
+                                                  ]
+                                                },
+                                                "geodesic": {
+                                                  "constantValue": false
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "reducer": {
+                          "functionInvocationValue": {
+                            "functionName": "Reducer.max",
+                            "arguments": {}
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "image2": {
+                    "functionInvocationValue": {
+                      "functionName": "Image.constant",
+                      "arguments": {
+                        "value": {
+                          "constantValue": 0.7
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "mask": {
+              "functionInvocationValue": {
+                "functionName": "Image.select",
+                "arguments": {
+                  "bandSelectors": {
+                    "constantValue": [
+                      "datamask"
+                    ]
+                  },
+                  "input": {
+                    "functionInvocationValue": {
+                      "functionName": "Image.load",
+                      "arguments": {
+                        "id": {
+                          "constantValue": "UMD/hansen/global_forest_change_2015"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+})
