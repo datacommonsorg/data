@@ -1,0 +1,175 @@
+Node: dcid:Count_Person_Male_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:WhiteAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:WhiteAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_AmericanIndianAndAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AmericanIndianAndAlaskaNativeAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_AmericanIndianAndAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AmericanIndianAndAlaskaNativeAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_AsianAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AsianAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_AsianAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AsianAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_NativeHawaiianAndOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:NativeHawaiianAndOtherPacificIslanderAlone
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:NativeHawaiianAndOtherPacificIslanderAlone
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:TwoOrMoreRaces
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:TwoOrMoreRaces
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:AsianAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Male_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Male
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+race: dcs:NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count

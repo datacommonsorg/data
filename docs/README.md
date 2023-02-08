@@ -44,8 +44,8 @@ Links:
 
 Once the entity and schema mapping have been finalized, you prepare the artifacts.  This includes:
 
-1. StatisticalVariable MCF nodes (if any) checked into [schema repo](https://github.com/datacommonsorg/schema/tree/main/stat_vars)
-2. Template MCF and corresponding cleaned tabular files (typically CSV)
+1. StatisticalVariable MCF nodes (if any) checked into [schema repo](https://github.com/datacommonsorg/schema/tree/main/stat_vars). These nodes may be written by hand when there are only a handful in number. Otherwise, these nodes can be generated via scripts.
+2. Template MCF and corresponding cleaned tabular files (typically CSV). Like StatisticalVariable MCF nodes, the Template MCF nodes can also be hand-written or script-generated depending on number of nodes.
 3. Data cleaning code (along with README) checked into [data repo](https://github.com/datacommonsorg/data)
 4. Validation results for the artifacts (from running [`dc-import`](https://github.com/datacommonsorg/import#using-import-tool) tool)
 
