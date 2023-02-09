@@ -61,11 +61,13 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
+import eval_functions
+
+from config_flags import get_config_from_flags
 from mcf_file_util import get_numeric_value
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
 from mcf_diff import fingerprint_node, fingerprint_mcf_nodes
 from place_resolver import PlaceResolver
-import config_flags
 
 # imports from ../../util
 from config_map import ConfigMap, read_py_dict_from_file
@@ -77,35 +79,7 @@ from statvar_dcid_generator import get_statvar_dcid
 _FLAGS = flags.FLAGS
 
 # Enable debug messages
-_DEBUG = False
-
-# Global utility functions
-
-
-def format_date(date_str: str, format_str: str = '%Y-%m-%d') -> str:
-    '''Parse the date string and return formated date string.
-
-  Args:
-    date_str: Input date string to be parsed.
-    format_str: output format for date
-  Returns:
-    date formatted by the format_str.
-    In case of parse error, returns the original date_str.
-  Raises
-    NameError in case of any expcetions in parsing.
-    This will cause any Eval using it to fail.
-  '''
-    try:
-        return dateutil.parser.parse(date_str).strftime(format_str)
-    except dateutil.parser._parser.ParserError:
-        raise NameError
-
-
-_EVAL_GLOBALS = {
-    'dateutil_parser_parse': dateutil.parser.parse,
-    'format_date': format_date,
-    're': re,
-}
+_DEBUG = True
 
 
 # Local utility functions
@@ -400,26 +374,13 @@ class PropertyValueMapper:
         # Evaluate the expression properties as local variables.
         eval_key = self._config.get('eval_key', '#Eval')
         if eval_key in pvs:
-            eval_prop = data_key
             eval_str = pvs[eval_key]
-            if '=' in eval_str:
-                eval_prop, eval_str = eval_str.split('=', 1)
-                eval_prop = eval_prop.strip()
-                try:
-                    eval_data = eval(
-                        eval_str, self._config.get('eval_globals',
-                                                   _EVAL_GLOBALS), pvs)
-                    _DEBUG and logging.debug(
-                        f'Processed eval {eval_prop}={eval_str} with {pvs} to get {eval_data}'
-                    )
-                except (NameError, ValueError) as e:
-                    self._counters.add_counter('error-processing-eval', 1,
-                                               eval_str)
-                    eval_data = eval_str
-                    _DEBUG and logging.debug(
-                        f'Error processing eval {eval_prop}={eval_str} with {pvs}'
-                    )
-            if eval_prop != data_key and eval_data != eval_str:
+            eval_prop, eval_data = eval_functions.evaluate_statement(
+                eval_str, pvs,
+                self._config.get('eval_globals', eval_functions.EVAL_GLOBALS))
+            if not eval_prop:
+                eval_prop = data_key
+            if eval_data and eval_data != eval_str:
                 pvs[eval_prop] = eval_data
                 self._counters.add_counter('processed-eval', 1, eval_str)
                 pvs.pop(eval_key)
@@ -547,6 +508,9 @@ class PropertyValueMapper:
             return [pvs]
         # Split the value into n-grams and lookup PVs for each fragment.
         word_delimiter = self._config.get('word_delimiter', ' ')
+        if not word_delimiter:
+            # Splitting of words is disabled. Don't match substrings.
+            return None
         word_joiner = word_delimiter.split('|')[0]
         #words = value.split(word_delimiter)
         words = _get_words(value, word_delimiter)
@@ -842,12 +806,13 @@ class StatVarsMap:
             props.remove('measurementDenominator')
         for p in sorted(props, key=str.casefold):
             if p not in dcid_ignore_props:
-              value = pvs[p]
-              if _is_valid_property(p, self._config.get(
-                      'schemaless', False)) and _is_valid_value(value):
-                  dcid_terms.append(self._get_dcid_term_for_pv(p, value))
+                value = pvs[p]
+                if _is_valid_property(p, self._config.get(
+                        'schemaless', False)) and _is_valid_value(value):
+                    dcid_terms.append(self._get_dcid_term_for_pv(p, value))
         dcid_terms.extend(dcid_suffixes)
-        dcid = re.sub(r'[^A-Za-z_0-9/]', '_', '_'.join(dcid_terms))
+        dcid = re.sub(r'[^A-Za-z_0-9/_]+', '_', '_'.join(dcid_terms))
+        dcid = re.sub(r'_$', '', dcid)
         pvs['Node'] = add_namespace(dcid)
         _DEBUG and logging.debug(f'Generated dcid {dcid} for {pvs}')
         return dcid
@@ -1813,20 +1778,22 @@ class StatVarDataProcessor:
                 logging.info(f'Skipping processing as {outputs} exist')
                 return
         # Expand any wildcard in filenames
+        encoding = self._config.get('input_encoding', 'utf-8')
         files = _get_matching_files(filenames)
         for file in files:
-            self._counters.add_counter('total', _estimate_num_rows(file))
+            self._counters.add_counter('total',
+                                       _estimate_num_rows(file, encoding))
         # Process all input data files, one at a time.
         for filename in files:
-            logging.info(f'Processing input data file {filename}...')
+            logging.info(
+                f'Processing input data file {filename} with encoding:{encoding}...'
+            )
             file_start_time = time.perf_counter()
-            with open(filename,
-                      newline='',
-                      encoding=self._config.get("input_encoding",
-                                                "utf-8")) as csvfile:
+            with open(filename, newline='', encoding=encoding) as csvfile:
                 self._counters.add_counter('input-files-processed', 1)
-                self._counters.add_counter(f'total-rows-{filename}',
-                                           _estimate_num_rows(filename))
+                self._counters.add_counter(
+                    f'total-rows-{filename}',
+                    _estimate_num_rows(filename, encoding))
                 # Guess the input format.
                 try:
                     dialect = csv.Sniffer().sniff(csvfile.read(5024))
@@ -2420,13 +2387,16 @@ def process(data_processor_class: StatVarDataProcessor,
     '''Process all input_data files to extract StatVars and StatvarObs.
     Emit the StatVars and StataVarObs into output mcf and csv files.
     '''
-    logging.info(f'Processing data {input_data} into {output_path}...')
-    config = config_flags.get_config_from_flags(config_file)
+    config = get_config_from_flags(config_file)
     config_dict = config.get_configs()
     if input_data:
         config_dict['input_data'] = input_data
     if config_dict.get('debug', False):
         _DEBUG = True
+        logging.set_verbosity(2)
+    logging.info(
+        f'Processing data {input_data} into {output_path} using config: {config_dict}...'
+    )
     input_data = prepare_input_data(config_dict)
     input_files = _get_matching_files(input_data)
     num_inputs = len(input_files)
@@ -2466,17 +2436,16 @@ def process(data_processor_class: StatVarDataProcessor,
     return True
 
 
-def _estimate_num_rows(filename: str) -> int:
+def _estimate_num_rows(filename: str, encoding: str = 'utf-8') -> int:
     '''Returns the estimated number of rows based on size of the first few rows.'''
     filesize = os.path.getsize(filename)
-    with open(filename) as fp:
+    with open(filename, encoding=encoding) as fp:
         lines = fp.read(4000)
     line_size = len(lines) / (lines.count('\n') + 1)
     return filesize / line_size
 
 
 def main(_):
-    _DEBUG = _FLAGS.debug
     # uncomment to run pprof
     start_pprof_server(port=8123)
     process(StatVarDataProcessor,

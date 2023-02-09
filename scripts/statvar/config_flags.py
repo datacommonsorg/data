@@ -58,7 +58,7 @@ flags.DEFINE_integer(
     'Number of header columns with property-value mappings for rows. If -1, will lookup PVs for all columns.'
 )
 flags.DEFINE_string(
-    'aggregate_duplicate_svobs', '',
+    'aggregate_duplicate_svobs', None,
     'Aggregate SVObs with same place, date by one of the following: sum, min or max.'
 )
 flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
@@ -103,7 +103,7 @@ _DEFAULT_CONFIG = {
         '#Aggregate',
     # Aggregation type duplicate SVObs for all statvars.
     'aggregate_duplicate_svobs':
-        None,
+        _FLAGS.aggregate_duplicate_svobs,
     'merged_pvs_property':
         '#MergedSVObs',
 
@@ -148,7 +148,7 @@ _DEFAULT_CONFIG = {
 
     # Settings to compare StatVars with existing statvars to reuse dcids.
     'existing_statvar_mcf':
-        '',
+        _FLAGS.existing_statvar_mcf,
     'statvar_fingerprint_ignore_props': ['dcid', 'name', 'description'],
     'statvar_fingerprint_include_props': [],
 
@@ -193,6 +193,16 @@ _DEFAULT_CONFIG = {
         False,
     'dc_api_batch_size':
         100,
+
+    # Settings from flags
+    'pv_map': _FLAGS.pv_map,
+    'input_rows': _FLAGS.input_rows,
+    'skip_rows': _FLAGS.skip_rows,
+    'header_rows': _FLAGS.header_rows,
+    'header_columns': _FLAGS.header_columns,
+    'parallelism': _FLAGS.parallelism,
+    'debug': _FLAGS.debug,
+    'log_level': _FLAGS.log_level,
 }
 
 
