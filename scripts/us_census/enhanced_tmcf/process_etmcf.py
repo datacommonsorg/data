@@ -171,6 +171,8 @@ def _write_modified_csv(original_csv_path, output_csv_path,
 
             # The first row after the header is special because it contains
             # more column metadata (specific to Census) and it can be ignored.
+            # TODO: this should be set in the etmcf file. Remomve this check
+            # when the data start row number can be read from the etmc file.
             if row_counter < 2:
                 continue
 
