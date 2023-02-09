@@ -88,8 +88,9 @@ def _get_geoId_column(input_csv_filepath: str) -> List[str]:
     return geoIds
 
 
-def _process_new_column(var_measured_str: str,
-                        new_csv_columns: List[NewCSVColumn]) -> NewCSVColumn:
+def _process_var_measured_new_column(
+        var_measured_str: str,
+        new_csv_columns: List[NewCSVColumn]) -> NewCSVColumn:
     # Example of line: "T:ESTAB?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP"
 
     # Step 0: split on "?"
@@ -270,7 +271,8 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
                 line_split = line.split(" ")
                 var_measured_str = _replace_t_with_T_path(line_split[1],
                                                           T).replace("\n", "")
-                new_col = _process_new_column(var_measured_str, new_csv_columns)
+                new_col = _process_var_measured_new_column(
+                    var_measured_str, new_csv_columns)
                 out_line = line_split[0] + " C:T->" + new_col.name + "\n"
 
             # If the line has 'geoId:', replace it with 'dcid:'
