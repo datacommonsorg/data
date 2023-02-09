@@ -41,7 +41,8 @@ class TestCounters(unittest.TestCase):
 
     def test_set_counter(self):
         '''Verify set_counter overrides current value.'''
-        counters = Counters(prefix='test2_', options=CountersOptions(debug=True))
+        counters = Counters(prefix='test2_',
+                            options=CountersOptions(debug=True))
         counters.add_counter('lines', 1, 'file1')
         counters.add_counter('lines', 10, 'file1')
         counters.print_counters()
@@ -53,7 +54,8 @@ class TestCounters(unittest.TestCase):
 
     def test_debug_counters(self):
         '''Verify counters with debug string suffixes.'''
-        counters = Counters(prefix='test3_', options=CountersOptions(debug=True))
+        counters = Counters(prefix='test3_',
+                            options=CountersOptions(debug=True))
         counters.add_counter('inputs', 10, 'test-case-2')
         counters.add_counter('inputs', 11, 'file2')
         counters.add_counter('outputs', 2)

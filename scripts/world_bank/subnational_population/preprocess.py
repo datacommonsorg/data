@@ -20,7 +20,6 @@ import csv
 import unicodedata
 import os
 import sys
-import pandas as pd
 from absl import app
 from absl import flags
 
@@ -92,8 +91,7 @@ def normalize(s):
 # Reading the file which was generated using place resolver.
 place_generated = pd.read_csv(f'{MODULE_DIR}/dcid_resolve/place_dcid.csv')
 # Reading the file which has all the AdministrativeArea1 dcids with place from DataCommons
-dcid_datacommons = pd.read_csv(
-    f'{MODULE_DIR}/dcid_resolve/tmp_country_level1_map.csv')
+dcid_datacommons = pd.read_csv(f'{MODULE_DIR}/dcid_resolve/country_AA1_map.csv')
 
 # Using the above mentioned normalise function to the required columns.
 dcid_datacommons['lower_place'] = dcid_datacommons['leve2_geo_name'].apply(

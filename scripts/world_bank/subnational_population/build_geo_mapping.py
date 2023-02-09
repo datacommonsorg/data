@@ -29,7 +29,7 @@ default_output_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    "dcid_resolve")
 
 tmp_out_file = os.path.join(default_output_path, 'tmp_geo_map.csv')
-tmp_map_file = os.path.join(default_output_path, 'tmp_country_level1_map.csv')
+tmp_map_file = os.path.join(default_output_path, 'country_AA1_map.csv')
 
 if not os.path.exists(default_output_path):
     os.mkdir(default_output_path)

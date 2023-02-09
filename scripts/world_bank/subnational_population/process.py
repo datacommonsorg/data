@@ -73,7 +73,7 @@ class Subnational(StatVarDataProcessor):
             return row
         pvs = self._pv_mapper.get_pvs_for_key(place_value, 'observationAbout')
         # To filter out the Place which do not have mapping dcid and writing it
-        # to a file.
+        # to a file. These dcids are manually mapped if exist.
         if pvs is None:
             with open(unmapped_path, 'a') as file:
                 file.write(row[3])

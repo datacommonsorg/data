@@ -200,7 +200,7 @@ class Counters():
         totals = self.get_counter(self._options.total_counter)
         if totals:
             self.set_counter('process_remaining_time',
-                              max(0, (totals - num_processed)) / rate)
+                             max(0, (totals - num_processed)) / rate)
 
     def _print_counters_periodically(self):
         '''Display the counters periodically by time or by number of calls
