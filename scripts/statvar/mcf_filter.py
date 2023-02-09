@@ -55,7 +55,6 @@ from mcf_file_util import load_mcf_nodes, add_namespace, strip_namespace, write_
 from mcf_diff import diff_mcf_node_pvs, get_diff_config
 
 
-
 def drop_mcf_nodes(input_nodes: dict,
                    ignore_nodes: dict,
                    config: dict,

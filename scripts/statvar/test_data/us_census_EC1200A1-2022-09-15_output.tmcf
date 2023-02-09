@@ -1,7 +1,0 @@
-Node: E:us_census_EC1200A1-2022-09-15_output->E0
-observationDate: C:us_census_EC1200A1-2022-09-15_output->observationDate
-value: C:us_census_EC1200A1-2022-09-15_output->value
-unit: C:us_census_EC1200A1-2022-09-15_output->unit
-variableMeasured: C:us_census_EC1200A1-2022-09-15_output->variableMeasured
-typeOf: dcs:StatVarObservation
-observationAbout: dcs:country/USA

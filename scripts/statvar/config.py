@@ -14,6 +14,8 @@
 '''Class to store configuration parameters as a dictionary.'''
 
 import ast
+import collections.abc
+import os
 import sys
 
 from absl import app
@@ -28,16 +30,15 @@ flags.DEFINE_string('config', '', 'File with configuration parameters.')
 flags.DEFINE_list('data_url', '', 'URLs to download the data from.')
 flags.DEFINE_string('shard_input_by_column', '',
                     'Shard input data by unique values in column.')
-flags.DEFINE_string('shard_prefix_length', '',
-                    'Shard input data by value prefix of given length.')
+flags.DEFINE_integer('shard_prefix_length', sys.maxsize,
+                     'Shard input data by value prefix of given length.')
 flags.DEFINE_list(
     'pv_map', [],
     'Comma separated list of namespace:file with property values.')
 flags.DEFINE_list('input_data', [],
                   'Comma separated list of data files to be processed.')
-flags.DEFINE_integer(
-    'input_rows', -1,
-    'Number of rows per input file to process. Default: -1 for all rows.')
+flags.DEFINE_integer('input_rows', sys.maxsize,
+                     'Number of rows per input file to process.')
 flags.DEFINE_integer(
     'skip_rows', 0, 'Number of rows to skip at the begining of the input file.')
 flags.DEFINE_integer(
@@ -55,11 +56,16 @@ flags.DEFINE_string(
 flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
 flags.DEFINE_string('output_path', '',
                     'File prefix for output mcf, csv and tmcf.')
+flags.DEFINE_string('existing_statvar_mcf', '',
+                    'StatVar MCF files for any existing nodes to be resused.')
 flags.DEFINE_integer('parallelism', 0, 'Number of parallel processes to use.')
 flags.DEFINE_integer('pprof_port', 0, 'HTTP port for pprof server.')
 flags.DEFINE_bool('debug', False, 'Enable debug messages.')
 flags.DEFINE_integer('log_level', logging.INFO,
                      'Log level messages to be shown.')
+flags.DEFINE_bool(
+    'resume', False,
+    'Resume processing to create output files not yet generated.')
 _FLAGS(sys.argv)  # Allow invocation without app.run()
 
 # Dictionary of config parameters and values.
@@ -131,6 +137,13 @@ _DEFAULT_CONFIG = {
     'required_statvarobs_properties': [
         'variableMeasured', 'observationAbout', 'observationDate', 'value'
     ],
+
+    # Settings to compare StatVars with existing statvars to reuse dcids.
+    'existing_statvar_mcf':
+        '',
+    'statvar_fingerprint_ignore_props': ['dcid', 'name', 'description'],
+    'statvar_fingerprint_include_props': [],
+
     # Use numeric data in any column as a value.
     # It may still be dropped if no SVObs can be constructed out of it.
     # If False, SVObs is only emitted for PVs that have a map for 'value',
@@ -140,10 +153,17 @@ _DEFAULT_CONFIG = {
     # Word separator, used to split words into phrases for PV map lookups.
     'word_delimiter':
         ' ',
+    # List of default PVS maps to lookup column values if there is no map for a
+    # column name.
+    'default_pv_maps': ['GLOBAL'],
     'show_counters_every_n':
         0,
     'show_counters_every_sec':
         30,
+    # Resolve places with Maps API.
+    # Set the Maps API key with --maps_api_key
+    'resolve_places':
+        False,
     # Output options
     'generate_statvar_mcf':
         True,  # Generate MCF file with all statvars
@@ -168,6 +188,27 @@ _DEFAULT_CONFIG = {
 }
 
 
+def _deep_update(src: dict, upd: dict) -> dict:
+    '''Deep update of parameters in upd into src.
+    Args:
+      src: source dictionary into which new parameters are added.
+      upd: dictionary with new parameters to be added.
+    Returns:
+      src dictionary with updated parameters.
+
+    Note:
+    Assumes the new dictionary has same type(dict/list) for updated parameters.
+    '''
+    for k, v in upd.items():
+        if isinstance(v, collections.abc.Mapping):
+            src[k] = _deep_update(src.get(k, {}), v)
+        elif isinstance(v, list):
+            src[k].extend(v)
+        else:
+            src[k] = v
+    return src
+
+
 def get_py_dict_from_file(filename: str) -> dict:
     '''Load a python dict from a file.
     Args:
@@ -175,6 +216,8 @@ def get_py_dict_from_file(filename: str) -> dict:
     Returns:
       dictionary loaded from the file.
     '''
+    if not filename or not os.path.exists(filename):
+        return {}
     logging.info(f'Loading python dict from {filename}...')
     with open(filename) as file:
         pv_map_str = file.read()
@@ -197,6 +240,7 @@ class Config:
         if filename:
             self.load_config_file(filename)
         logging.set_verbosity(self.get_config('log_level'))
+        #logging.set_verbosity(3)
         logging.debug(f'Using config: {self.get_configs()}')
 
     def get_config_from_flags(self) -> dict:
@@ -219,8 +263,14 @@ class Config:
                 _FLAGS.header_rows,
             'header_columns':
                 _FLAGS.header_columns,
+            'existing_statvar_mcf':
+                _FLAGS.existing_statvar_mcf,
             'schemaless':
                 _FLAGS.schemaless,
+            'parallelism':
+                _FLAGS.parallelism,
+            'resume':
+                _FLAGS.resume,
             'debug':
                 _FLAGS.debug,
             'log_level':
@@ -247,6 +297,15 @@ class Config:
         if configs:
             self._config_dict.update(configs)
         return self._config_dict
+
+    def update_config(self, configs: dict) -> dict:
+        '''Does a deep update of the dict updating nested dicts as well.
+        Args:
+            configs: dictionary with additional parameter:value mappings.
+        Returns:
+            dictionary with all parameter:value mappings.
+        '''
+        return _deep_update(self._config_dict, configs)
 
     def get_config(self,
                    parameter: str,

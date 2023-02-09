@@ -1,0 +1,22 @@
+{
+    "default_statvar_pvs": {
+        "populationType": "dcs:Person",
+        "typeOf": "dcs:StatisticalVariable",
+        "measurementQualifier": "",
+        "statType": "dcs:measuredValue",
+        "measuredProperty": "dcs:count"
+    },
+    "default_svobs_pvs": {
+        "typeOf": "dcs:StatVarObservation",
+        "observationDate": "",
+        "observationAbout": "",
+        "value": "",
+        "observationPeriod": "P1Y",
+        "measurementMethod": "dcs:WorldBankSubnationalPopulationEstimate",
+        "unit": "",
+        "scalingFactor": "",
+        "variableMeasured": "",
+        "#Aggregate": ""
+    },
+    "skip_constant_csv_columns": 1
+}

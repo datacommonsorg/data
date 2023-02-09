@@ -89,5 +89,5 @@ class TestMCFFileUtil(unittest.TestCase):
             self.assertTrue(expected_node != old_node)
             self.assertTrue(expected_node != new_node)
             diff_str = diff_mcf_nodes({dcid: expected_node},
-                                                  {dcid: mcf_nodes[dcid]})
+                                      {dcid: mcf_nodes[dcid]})
             self.assertEqual(diff_str, '')

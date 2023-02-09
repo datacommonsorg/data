@@ -31,6 +31,7 @@ For more details on configs and usage, please refer to the README.
 
 import csv
 import datetime
+import dateutil
 import glob
 import itertools
 import multiprocessing
@@ -45,6 +46,8 @@ from absl import app
 from absl import flags
 from absl import logging
 from collections import OrderedDict
+from dateutil import parser
+from dateutil.parser import parse
 from typing import Union
 
 # uncomment to run pprof
@@ -57,15 +60,49 @@ sys.path.append(os.path.join(_SCRIPT_DIR,
                              '../../util/'))  # for statvar_dcid_generator
 
 from config import Config, get_py_dict_from_file, get_config_from_file
-from counters import Counters
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
+from counters import Counters, CountersOptions
 from dc_api_wrapper import dc_api_is_defined_dcid
+from download_util import download_file_from_url
+from mcf_file_util import get_numeric_value
+from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
+from mcf_diff import fingerprint_node, fingerprint_mcf_nodes
+from place_resolver import PlaceResolver
 import statvar_dcid_generator
 
 _FLAGS = flags.FLAGS
 
+# Globals for evals
+
 # Enable debug messages
 _DEBUG = True
+
+# Global utility functions
+
+
+def format_date(date_str: str, format_str: str = '%Y-%m-%d') -> str:
+    '''Parse the date string and return formated date string.
+
+  Args:
+    date_str: Input date string to be parsed.
+    format_str: output format for date
+  Returns:
+    date formatted by the format_str.
+    In case of parse error, returns the original date_str.
+  Raises
+    NameError in case of any expcetions in parsing.
+    This will cause any Eval using it to fail.
+  '''
+    try:
+        return dateutil.parser.parse(date_str).strftime(format_str)
+    except dateutil.parser._parser.ParserError:
+        raise NameError
+
+
+_EVAL_GLOBALS = {
+    'dateutil_parser_parse': dateutil.parser.parse,
+    'format_date': format_date,
+    're': re,
+}
 
 
 # Local utility functions
@@ -106,29 +143,6 @@ def _is_schema_node(value: str) -> bool:
     if non_alnum_chars:
         return False
     return True
-
-
-def _get_numeric_value(value: str) -> Union[int, float, None]:
-    '''Returns the float value from string or None.'''
-    if isinstance(value, int) or isinstance(value, float):
-        return value
-    if value and isinstance(value, str):
-        try:
-            normalized_value = value
-            if (value[0].isdigit() or value[0] == '.' or value[0] == '-' or
-                    value[0] == '+'):
-                # Input looks like a number. Remove allowed extra characters.
-                normalized_value = normalized_value.replace(',', '')
-                if value.count('.') > 1:
-                    # Period may be used instead of commas. Remove it.
-                    normalized_value = normalized_value.replace('.', '')
-            if value.count('.') == 1:
-                return float(normalized_value)
-            return int(normalized_value)
-        except ValueError:
-            # Value is not a number. Ignore it.
-            return None
-    return None
 
 
 def _get_words(value: str, word_delimiter: str) -> list:
@@ -184,6 +198,24 @@ def _capitalize_first_char(string: str) -> str:
     return string[0].upper() + string[1:]
 
 
+def _get_matching_files(paths: list) -> list:
+    '''Returns a list of files matching paths.'''
+    files = []
+    for path in paths:
+        file_paths = path.split(',')
+        for file_path in file_paths:
+            files.extend(glob.glob(file_path))
+    return files
+
+
+def _get_variable_expr(stmt: str, default_var: str = 'Data') -> (str, str):
+    '''Parses a statement of the form <variable>=<expr> and returns variable, expr.'''
+    if '=' in stmt:
+        (var, expr) = stmt.split('=', 1)
+        return (var.strip(), expr)
+    return (default_var, stmt)
+
+
 class PropertyValueMapper(Config, Counters):
     '''Class to map strings to set of property values.
   Supports multiple maps with a namespace or context string.
@@ -222,7 +254,9 @@ class PropertyValueMapper(Config, Counters):
   '#Regex': refers to a regular expression with names match groups
       to be applied on a cell value
   '#Format': a format string to be processed with other parameters
-  '#Eval': a python statement to be evaluated. It could have some computations.
+  '#Eval': a python statement to be evaluated. It could have some computations
+    of the form <prop>=<expr> where the '<expr>' is evaluated and
+    assgned to property <prop> or to 'Data'.
 
   The cell value is mapped to the following default properties:
   'Data': the string value in the cell
@@ -234,9 +268,10 @@ class PropertyValueMapper(Config, Counters):
                  config_dict: dict = None,
                  counters_dict: dict = None):
         Config.__init__(self, config_dict=config_dict)
-        Counters.__init__(self,
-                          counters_dict=counters_dict,
-                          debug=self.get_config('debug', False))
+        Counters.__init__(
+            self,
+            counters_dict=counters_dict,
+            options=CountersOptions(debug=self.get_config('debug', False)))
         # Map from a namespace to dictionary of string-> { p:v}
         self._pv_map = OrderedDict({'GLOBAL': {}})
         self._num_pv_map_keys = 0
@@ -339,15 +374,20 @@ class PropertyValueMapper(Config, Counters):
         format_key = self.get_config('format_key', '#Format')
         if format_key in pvs:
             format_str = pvs[format_key]
+            (format_prop, strf) = _get_variable_expr(format_str, data_key)
             try:
-                format_data = format_str.format(**pvs)
+                format_data = strf.format(**pvs)
                 _DEBUG and logging.debug(
-                    f'Processed format {format_str} on {key}:{data} to get {format_data}'
+                    f'Processed format {format_prop}={strf} on {key}:{data} to get {format_data}'
                 )
-            except NameError:
+            except (KeyError, ValueError) as e:
                 format_data = format_str
-            if format_data != data and format_data != format_str:
-                pvs[data_key] = format_data
+                self.add_counter('error-process-format', 1, format_str)
+                _DEBUG and logging.debug(
+                    f'Failed to format {format_prop}={strf} on {key}:{data} with {pvs}'
+                )
+            if format_prop != data_key and format_data != format_str:
+                pvs[format_prop] = format_data
                 self.add_counter('processed-format', 1, format_str)
                 pvs.pop(format_key)
                 is_modified = True
@@ -355,19 +395,31 @@ class PropertyValueMapper(Config, Counters):
         # Evaluate the expression properties as local variables.
         eval_key = self.get_config('eval_key', '#Eval')
         if eval_key in pvs:
+            eval_prop = data_key
             eval_str = pvs[eval_key]
-            try:
-                eval_data = eval(eval_str, {}, pvs)
-                _DEBUG and logging.debug(
-                    f'Processed eval {eval_str} on {key}:{data} to get {eval_data}'
-                )
-            except NameError:
-                eval_data = eval_str
-            if eval_data != data and eval_data != eval_str:
-                pvs[data_key] = eval_data
+            if '=' in eval_str:
+                eval_prop, eval_str = eval_str.split('=', 1)
+                eval_prop = eval_prop.strip()
+                try:
+                    eval_data = eval(
+                        eval_str, self.get_config('eval_globals',
+                                                  _EVAL_GLOBALS), pvs)
+                    _DEBUG and logging.debug(
+                        f'Processed eval {eval_prop}={eval_str} with {pvs} to get {eval_data}'
+                    )
+                except (NameError, ValueError) as e:
+                    self.add_counter('error-processing-eval', 1, eval_str)
+                    eval_data = eval_str
+                    _DEBUG and logging.debug(
+                        f'Error processing eval {eval_prop}={eval_str} with {pvs}'
+                    )
+            if eval_prop != data_key and eval_data != eval_str:
+                pvs[eval_prop] = eval_data
                 self.add_counter('processed-eval', 1, eval_str)
                 pvs.pop(eval_key)
                 is_modified = True
+        _DEBUG and logging.debug(
+            f'Processed data PVs:{is_modified}:{key}:{pvs}')
         return is_modified
 
     def get_pvs_for_key(self, key: str, namespace: str = 'GLOBAL') -> dict:
@@ -381,17 +433,23 @@ class PropertyValueMapper(Config, Counters):
           dictionary of property:values for the input string.
         '''
         pvs = None
+        _DEBUG and logging.log(3, f'Search PVs for {namespace}:{key}')
         if namespace in self._pv_map:
             pvs = self._pv_map[namespace].get(key, None)
         else:
             # Check if key is unique and exists in any other map.
             dicts_with_key = []
             pvs = {}
-            for namespace, pv_map in self._pv_map.items():
-                if key in pv_map:
-                    dicts_with_key.append(namespace)
-                    _pvs_update(pv_map[key], pvs,
-                                self.get_config('multi_value_properties', {}))
+            namespaces = self.get_config('default_pv_maps', ['GLOBAL'])
+            for namespace in namespaces:
+                _DEBUG and logging.log(3, f'Search PVs for {namespace}:{key}')
+                if namespace in self._pv_map.keys():
+                    pv_map = self._pv_map[namespace]
+                    if key in pv_map:
+                        dicts_with_key.append(namespace)
+                        _pvs_update(
+                            pv_map[key], pvs,
+                            self.get_config('multi_value_properties', {}))
             if len(dicts_with_key) > 1:
                 logging.warning(
                     f'Duplicate key {key} in property maps: {dicts_with_key}')
@@ -474,7 +532,7 @@ class PropertyValueMapper(Config, Counters):
         pvs = self.get_pvs_for_key(value, namespace)
         if pvs:
             return [pvs]
-        # Check if GLOBAL map has key namesapce:column-value
+        # Check if GLOBAL map has key namespace:column-value
         pvs = self.get_pvs_for_key(f'{namespace}:{value}')
         if pvs:
             return [pvs]
@@ -580,11 +638,16 @@ class StatVarsMap(Config, Counters):
 
     def __init__(self, config_dict: dict = None, counters_dict: dict = None):
         Config.__init__(self, config_dict=config_dict)
-        Counters.__init__(self,
-                          counters_dict=counters_dict,
-                          debug=self.get_config('debug', False))
+        Counters.__init__(
+            self,
+            counters_dict=counters_dict,
+            options=CountersOptions(debug=self.get_config('debug', False)))
         # Dictionary of statvar dcid->{PVs}
         self._statvars_map = {}
+        # Dictionary of existing statvars keyed by fingerprint
+        self._existing_statvar_nodes = self._load_existing_statvars(
+            self.get_config('existing_statvar_mcf', None))
+
         # Dictionary of statvar obs_key->{PVs}
         self._statvar_obs_map = {}
         # Unique values seen per SVObs property.
@@ -673,21 +736,25 @@ class StatVarsMap(Config, Counters):
         '''
         if not value:
             return _capitalize_first_char(prop)
+
         if not isinstance(value, str):
             # For numeric values use the property and value.
             return _capitalize_first_char(
                 re.sub(r'[^A-Za-z0-9_/]', '_',
                        f'{prop}_{value}').replace('__', '_'))
         prefix = ''
+        value = strip_namespace(value)
         if self.get_config('schemaless', False):
             # Add the property prefix for schemaless PVs.
-            if prop and isinstance(prop,
-                                   str) and prop[0].isupper() and prop != value:
-                prefix = _capitalize_first_char(f'{prop}_')
-        value = strip_namespace(value)
+            if not _is_valid_property(prop,
+                                      schemaless=False) and _is_valid_property(
+                                          prop, schemaless=True):
+                prop = prop.removeprefix('# ')
+                if prop != value:
+                    prefix = _capitalize_first_char(f'{prop}_')
         if value[0] == '[':
             # Generate term for quantity range with start and optional end, unit.
-            quantity_pat = r'\[ *(?P<unit1>[A-Z][A-Za-z0-9_/]*)? *(?P<start>[0-9]+|-)? *(?P<end>[0-9]+|-)? *(?P<unit2>[A-Z][A-Za-z0-9_]*)? *\]'
+            quantity_pat = r'\[ *(?P<unit1>[A-Z][A-Za-z0-9_/]*)? *(?P<start>[0-9\.]+|-)? *(?P<end>[0-9\.]+|-)? *(?P<unit2>[A-Z][A-Za-z0-9_]*)? *\]'
             matches = re.search(quantity_pat, value)
             if matches:
                 match_dict = matches.groupdict()
@@ -711,7 +778,7 @@ class StatVarsMap(Config, Counters):
                         value_term = f'{start}To{end}'
                     value_term += unit
                     return prefix + value_term
-        return prefix + value[0].upper() + value[1:]
+        return prefix + _capitalize_first_char(value)
 
     def _get_schemaless_statvar_props(self, pvs: dict) -> list:
         '''Returns a list of schemaless properties from the dictionary of property:values.
@@ -723,6 +790,7 @@ class StatVarsMap(Config, Counters):
                 continue
             if _is_valid_property(prop,
                                   schemaless=True) or prop.startswith('# '):
+                # TODO: skip internal props '#...' instead of checking prefix '# '
                 schemaless_props.append(prop)
         return schemaless_props
 
@@ -735,10 +803,16 @@ class StatVarsMap(Config, Counters):
         For normal statvars, uses statvar_dcid_generator.py
         For schameless statvars, uses the local implementation to add prop and value.
         '''
-        dcid = pvs.get('Node', '')
-        dcid = pvs.get('dcid', dcid)
+        dcid = pvs.get('dcid', pvs.get('Node', ''))
         if dcid:
             return dcid
+        # Check if a statvar already exists.
+        pvs = self._get_exisisting_statvar(pvs)
+        dcid = pvs.get('dcid', pvs.get('Node', ''))
+        if dcid:
+            logging.debug(f'Resuing existing statvar {dcid} for {pvs}')
+            return dcid
+
         # Use the statvar_dcid_generator for statvars with defined properties.
         if not self.get_config(
                 'schemaless',
@@ -887,8 +961,8 @@ class StatVarsMap(Config, Counters):
         dcid = self.generate_statvar_dcid(pvs)
         for prop in schemaless_props:
             if prop[0] != '#':
-              value = pvs.pop(prop)
-              pvs[f'# {prop}: '] = value
+                value = pvs.pop(prop)
+                pvs[f'# {prop}: '] = value
         # Comment out any PVs with undefined property or value.
         if self.get_config('schemaless_statvar_comment_undefined_pvs', False):
             schemaless_props.extend(
@@ -938,6 +1012,8 @@ class StatVarsMap(Config, Counters):
             return False
         _DEBUG and logging.debug(f'Adding statvar {pvs}')
         self.add_counter('generated-statvars', 1, statvar_dcid)
+        self.set_counter('generated-unique-statvars', len(self._statvars_map),
+                         statvar_dcid)
         if is_schemaless:
             self.add_counter('generated-statvars-schemaless', 1, statvar_dcid)
         return True
@@ -968,9 +1044,9 @@ class StatVarsMap(Config, Counters):
         Returns:
           True if aggregation was successful.
         '''
-        current_value = _get_numeric_value(
-            current_pvs.get(aggregate_property, 0))
-        new_value = _get_numeric_value(new_pvs.get(aggregate_property, 0))
+        current_value = get_numeric_value(current_pvs.get(
+            aggregate_property, 0))
+        new_value = get_numeric_value(new_pvs.get(aggregate_property, 0))
         if current_value is None or new_value is None:
             log.error(
                 f'Invalid values to aggregate in {current_pvs}, {new_pvs}')
@@ -982,21 +1058,35 @@ class StatVarsMap(Config, Counters):
             'list': lambda a, b: f'{a},{b}',
             'first': lambda a, b: a,
             'last': lambda a, b: b,
-            # TODO: support mean with totals and counts
         }
-        if aggregation_type not in aggregation_funcs:
-            log.error(
+        if aggregation_type == 'mean':
+            count_property = f'#Count-{aggregate_property}'
+            current_count = current_pvs.get(count_property, 1)
+            updated_value = (new_value + current_value * current_count) / (
+                current_count + 1)
+            current_pvs[aggregate_property] = updated_value
+            current_pvs[count_property] = current_count + 1
+            current_pvs['statType'] = 'dcs:meanValue'
+        elif aggregation_type in aggregation_funcs:
+            updated_value = aggregation_funcs[aggregation_type](current_value,
+                                                                new_value)
+            current_pvs[aggregate_property] = updated_value
+        else:
+            logging.error(
                 f'Unsupported aggregation {aggregation_type} for {current_pvs}, {new_pvs}'
             )
             return False
-        updated_value = aggregation_funcs[aggregation_type](current_value,
-                                                            new_value)
-        current_pvs[aggregate_property] = updated_value
         merged_pvs_prop = self.get_config('merged_pvs_property', '#MergedSVObs')
         if merged_pvs_prop:
             if merged_pvs_prop not in current_pvs:
                 current_pvs[merged_pvs_prop] = []
             current_pvs[merged_pvs_prop].append(new_pvs)
+        # Set measurement method
+        mmethod = current_pvs.get('measurementMethod', '')
+        if not mmethod:
+            current_pvs['measurementMethod'] = 'dcs:DataCommonsAggregate'
+        elif not strip_namespace(mmethod).startswith('dcAggregate/'):
+            current_pvs['measurementMethod'] = f'dcs:dcAggregate/{mmethod}'
         dup_svobs_key = self.get_config('duplicate_svobs_key')
         if dup_svobs_key in current_pvs:
             # Dups have been merged for this SVObs.
@@ -1041,16 +1131,18 @@ class StatVarsMap(Config, Counters):
                              statvar_dcid)
             return
         # Add the duplicate SVObs to the statvar
-        statvar = self._statvars_map[statvar_dcid]
-        if dup_svobs_key not in statvar:
-            statvar[dup_svobs_key] = []
-            self.add_counter('error-statvar-with-dup-svobs', 1, statvar_dcid)
-        if not svobs_key:
-            svobs_key = self.get_svobs_key(svobs)
-        statvar[dup_svobs_key].append(svobs_key)
-        _DEBUG and logging.debug(
-            f'Added duplicate SVObs to statvar {statvar_dcid}: {statvar[dup_svobs_key]}'
-        )
+        if self.get_config('drop_statvars_with_dup_svobs', True):
+            statvar = self._statvars_map[statvar_dcid]
+            if dup_svobs_key not in statvar:
+                statvar[dup_svobs_key] = []
+                self.add_counter('error-statvar-with-dup-svobs', 1,
+                                 statvar_dcid)
+            if not svobs_key:
+                svobs_key = self.get_svobs_key(svobs)
+            statvar[dup_svobs_key].append(svobs_key)
+            _DEBUG and logging.debug(
+                f'Added duplicate SVObs to statvar {statvar_dcid}: {statvar[dup_svobs_key]}'
+            )
 
     def add_statvar_obs(self, pvs: dict):
         # Check if the required properties are present.
@@ -1232,15 +1324,16 @@ class StatVarsMap(Config, Counters):
             stat_var_nodes = self._statvars_map
         commandline = ' '.join(sys.argv)
         if not header:
-            header = f'# Autogenerated using command: "{commandline}" on {datetime.datetime.now()}\n'
+            header = f'# Auto generated using command: "{commandline}" on {datetime.datetime.now()}\n'
         logging.info(
             f'Generating {len(stat_var_nodes)} statvars into {filename}')
-        write_mcf_nodes([stat_var_nodes],
-                        filename=filename,
-                        mode=mode,
-                        ignore_comments=not self.get_config('schemaless', False),
-                        sort=True,
-                        header=header)
+        write_mcf_nodes(
+            [stat_var_nodes],
+            filename=filename,
+            mode=mode,
+            ignore_comments=not self.get_config('schemaless', False),
+            sort=True,
+            header=header)
         self.add_counter('output-statvars-mcf', len(self._statvars_map),
                          os.path.basename(filename))
 
@@ -1263,7 +1356,10 @@ class StatVarsMap(Config, Counters):
         '''Returns the list of columns for statvar Obs.'''
         columns = self.get_config('output_columns', None)
         if not columns:
-            columns = self.get_multi_value_svobs_pvs()
+            if self.get_config('skip_constant_csv_columns', False):
+                columns = self.get_multi_value_svobs_pvs()
+            else:
+                columns = list(self._statvar_obs_props)
             if not self.get_config('debug', False):
                 # Remove debug columns.
                 for col in columns:
@@ -1315,8 +1411,8 @@ class StatVarsMap(Config, Counters):
             for key, svobs in self._statvar_obs_map.items():
                 csv_writer.writerow(svobs)
                 for p, v in svobs.items():
-                    if _is_valid_property(p,
-                                          self.get_config('schemaless', False)):
+                    if p in columns or _is_valid_property(
+                            p, self.get_config('schemaless', False)):
                         if p not in svobs_unique_values:
                             svobs_unique_values[p] = set()
                         svobs_unique_values[p].add(v)
@@ -1337,39 +1433,74 @@ class StatVarsMap(Config, Counters):
                                constant_pvs: dict = None,
                                dataset_name: str = None):
         '''Generate the tMCF for the listed StatVar observation columns.'''
-        if not dataset_name:
-            dataset, ext = os.path.splitext(filename)
-            dataset_name = os.path.basename(dataset)
-        if not columns:
-            columns = self.get_multi_value_svobs_pvs()
-        if not constant_pvs and self.get_config('skip_constant_csv_columns',
-                                                False):
-            constant_pvs = self.get_constant_svobs_pvs()
+        output_tmcf = self.get_config('output_tmcf', None)
+        if not output_tmcf:
+            if not dataset_name:
+                dataset, ext = os.path.splitext(filename)
+                dataset_name = os.path.basename(dataset)
+            if not columns:
+                columns = self.get_multi_value_svobs_pvs()
+            if not constant_pvs and self.get_config('skip_constant_csv_columns',
+                                                    False):
+                constant_pvs = self.get_constant_svobs_pvs()
 
-        logging.info(
-            f'Writing SVObs tmcf {filename} with {columns} into {filename}.')
+            logging.info(
+                f'Writing SVObs tmcf {filename} with {columns} into {filename}.'
+            )
 
-        tmcf = [f'Node: E:{dataset_name}->E0']
-        default_svobs_pvs = dict(self.get_config('default_svobs_pvs', {}))
-        for prop in columns:
-            # Emit any SVObs columns. Others are ignored.
-            if prop in default_svobs_pvs:
-                tmcf.append(f'{prop}: C:{dataset_name}->{prop}')
-                default_svobs_pvs.pop(prop)
-                if constant_pvs and prop in constant_pvs:
-                    constant_pvs.pop(prop)
-        if constant_pvs:
-            for prop, value in constant_pvs.items():
-                tmcf.append(f'{prop}: {value}')
-                default_svobs_pvs.pop(prop)
-        # Add any remaining default PVs
-        for prop, value in default_svobs_pvs.items():
-            if value:
-                tmcf.append(f'{prop}: {value}')
+            tmcf = [f'Node: E:{dataset_name}->E0']
+            default_svobs_pvs = dict(self.get_config('default_svobs_pvs', {}))
+            for prop in columns:
+                # Emit any SVObs columns. Others are ignored.
+                if prop in default_svobs_pvs:
+                    tmcf.append(f'{prop}: C:{dataset_name}->{prop}')
+                    default_svobs_pvs.pop(prop)
+                    if constant_pvs and prop in constant_pvs:
+                        constant_pvs.pop(prop)
+            if constant_pvs:
+                for prop, value in constant_pvs.items():
+                    tmcf.append(f'{prop}: {value}')
+                    default_svobs_pvs.pop(prop)
+            # Add any remaining default PVs
+            for prop, value in default_svobs_pvs.items():
+                if value:
+                    tmcf.append(f'{prop}: {value}')
+            output_tmcf = '\n'.join(tmcf) + '\n'
 
         with open(filename, mode, newline='') as f_out_tmcf:
-            f_out_tmcf.write('\n'.join(tmcf))
-            f_out_tmcf.write('\n')
+            f_out_tmcf.write(output_tmcf)
+
+    def _load_existing_statvars(self, mcf_file: list) -> dict:
+        fp_nodes = {}
+        if mcf_file:
+            statvar_nodes = load_mcf_nodes(mcf_file)
+            fp_nodes = fingerprint_mcf_nodes(
+                statvar_nodes,
+                self.get_config('statvar_fingerprint_ignore_props', []),
+                self.get_config('statvar_fingerprint_include_props', []))
+            logging.info(
+                f'Loaded {len(fp_nodes)} existing statvars from {mcf_file}')
+            _DEBUG and logging.debug(f'Existing statvars: {fp_nodes}')
+        return fp_nodes
+
+    def _get_exisisting_statvar(self, pvs: dict) -> dict:
+        '''Returns an existing statvar with the same PVs.
+      Args:
+        pvs: dictionary of statvar property:values
+      Returns:
+        updated dictionary of statvar pvs if one exists already.
+      '''
+        fp = fingerprint_node(
+            pvs, self.get_config('statvar_fingerprint_ignore_props', []),
+            self.get_config('statvar_fingerprint_include_props', []))
+        existing_node = self._existing_statvar_nodes.get(fp, None)
+        if existing_node:
+            _DEBUG and logging.debug(
+                f'Reusing existing statvar {fp}:{existing_node} for {pvs}')
+            pvs.update(existing_node)
+        else:
+            _DEBUG and logging.debug(f'No existing statvar for {fp}:{pvs}')
+        return pvs
 
 
 class StatVarDataProcessor(Config, Counters):
@@ -1382,7 +1513,10 @@ class StatVarDataProcessor(Config, Counters):
         Config.__init__(self, config_dict=config_dict)
         Counters.__init__(self,
                           counters_dict=counters_dict,
-                          debug=self.get_config('debug', False))
+                          options=CountersOptions(
+                              debug=self.get_config('debug', False),
+                              processed_counter='input-lines',
+                              total_counter='total-rows'))
         if not pv_mapper:
             pv_map_files = self.get_config('pv_map', [])
             _DEBUG and logging.debug(
@@ -1399,13 +1533,18 @@ class StatVarDataProcessor(Config, Counters):
         if self.get_config('pv_map_drop_undefined_nodes', False):
             self._statvars_map.remove_undefined_properties(
                 self._pv_mapper.get_pv_map())
+        # Place resolver
+        self._place_resolver = PlaceResolver(maps_api_key=self.get_config(
+            'maps_api_key', ''),
+                                             config_dict=config_dict,
+                                             counters_dict=self.get_counters())
         # Regex for references within values, such as, '@Variable' or '{Variable}'
         self._reference_pattern = re.compile(
             r'@([a-zA-Z0-9_]+)\b|{([a-zA-Z0-9_]+)}')
         # Internal PVs created implicitly.
         self._internal_reference_keys = [
-            self.get_config('data_key', '@Data'),
-            self.get_config('numeric_data_key', '@Number')
+            self.get_config('data_key', 'Data'),
+            self.get_config('numeric_data_key', 'Number')
         ]
 
     # Functions that can be overridden by child classes.
@@ -1415,7 +1554,7 @@ class StatVarDataProcessor(Config, Counters):
       To ignore the row, return an empty list.'''
         return row
 
-    def preprocess_stat_var_pbs_pvs(self, pvs: dict) -> dict:
+    def preprocess_stat_var_obs_pvs(self, pvs: dict) -> dict:
         '''Modify the PVs for a stat var and stat var observation.
       New PVs can be added or PVs can be removed.
       Return an empty dict to ignore the PVs.'''
@@ -1550,9 +1689,8 @@ class StatVarDataProcessor(Config, Counters):
                 # Empty column without any PVs could be a multi-column-span
                 # header. Carry over previous column PVs if any.
                 col_pvs = prev_col_pvs
-            if col_pvs:
-                self.set_column_header_pvs(row_index, col_index, column_value,
-                                           col_pvs, column_headers)
+            self.set_column_header_pvs(row_index, col_index, column_value,
+                                       col_pvs, column_headers)
             prev_col_pvs = col_pvs
         _DEBUG and logging.debug(f'Setting column headers: {column_headers}')
 
@@ -1576,13 +1714,15 @@ class StatVarDataProcessor(Config, Counters):
         if not pvs_list:
             return {}
         pvs = dict()
+        resolved_props = set()
+        unresolved_refs = set()
         for d in reversed(pvs_list):
             for prop, value_list in d.items():
                 if not isinstance(value_list, list):
                     value_list = [value_list]
                 for value in value_list:
                     # Check if the value has any references with @
-                    unresolved_refs = []
+                    value_unresolved_refs = []
                     refs = self.get_reference_names(value)
                     # Replace each reference with its value.
                     for ref in refs:
@@ -1592,7 +1732,7 @@ class StatVarDataProcessor(Config, Counters):
                                 replacement = str(pvs[ref_key])
                             elif ref_key in d:
                                 replacement = str(d[ref_key])
-                        if replacement:
+                        if replacement is not None:
                             _DEBUG and logging.debug(
                                 f'Replacing reference {ref} with {replacement} for {prop}:{value}'
                             )
@@ -1603,13 +1743,17 @@ class StatVarDataProcessor(Config, Counters):
                                                           '@' + ref,
                                                           replacement)
                         else:
-                            unresolved_refs.append(ref)
-                    if unresolved_refs:
+                            value_unresolved_refs.append(ref)
+                    if value_unresolved_refs:
+                        unresolved_refs.update(value_unresolved_refs)
                         _DEBUG and logging.debug(
-                            f'Unresolved refs {unresolved_refs} remain in {prop}:{value} at {self._file_context}'
+                            f'Unresolved refs {value_unresolved_refs} remain in {prop}:{value} at {self._file_context}'
                         )
                         self.add_counter('warning-unresolved-value-ref', 1,
-                                         ','.join(unresolved_refs))
+                                         ','.join(value_unresolved_refs))
+                    else:
+                        resolved_props.add(prop)
+
                     _add_key_value(prop,
                                    value,
                                    pvs,
@@ -1619,7 +1763,14 @@ class StatVarDataProcessor(Config, Counters):
                     _DEBUG and logging.debug(
                         f'Adding {value} for {prop}:{pvs[prop]}')
         _DEBUG and logging.debug(
-            f'Resolved references in {pvs_list} into {pvs}')
+            f'Resolved references in {pvs_list} into {pvs} with unresolved: {unresolved_refs}'
+        )
+        resolvable_refs = resolved_props.intersection(unresolved_refs)
+        if resolvable_refs:
+            # Additional unresolved props can be resolved.
+            _DEBUG and logging.debug(
+                f'Re-resolving references {resolvable_refs} in {pvs}')
+            pvs = self.resolve_value_references([pvs], process_pvs=False)
         if process_pvs:
             if self._pv_mapper.process_pvs_for_data(key=None, pvs=pvs):
                 # PVs were processed. Resolve any references again.
@@ -1629,22 +1780,34 @@ class StatVarDataProcessor(Config, Counters):
     def process_data_files(self, filenames: list):
         '''Process a data file to generate statvars.'''
         time_start = time.perf_counter()
+        # Check if output already exists.
+        if self.get_config('resume', False):
+            outputs = self.get_output_files()
+            missing_outputs = [
+                file for file in outputs if not os.path.exists(file)
+            ]
+            if not missing_outputs:
+                logging.info(f'Skipping processing as {outputs} exist')
+                return
         # Expand any wildcard in filenames
-        files = []
-        for file_pat in filenames:
-            files.extend(glob.glob(file_pat))
+        files = _get_matching_files(filenames)
+        print(files)
         # Process all input data files, one at a time.
         for filename in files:
             logging.info(f'Processing input data file {filename}...')
             file_start_time = time.perf_counter()
-            with open(filename, newline='', encoding="utf-8") as csvfile:
+            self.add_counter('total-rows', _estimate_num_rows(filename))
+            with open(filename,
+                      newline='',
+                      encoding=self.get_config("input_encoding",
+                                               "utf-8")) as csvfile:
                 self.add_counter('input-files-processed', 1)
                 # Guess the input format.
                 try:
                     dialect = csv.Sniffer().sniff(csvfile.read(5024))
                 except csv.Error:
                     dialect = self.get_config('input_data_dialect', 'excel')
-                max_rows_per_file = self.get_config('input_rows', -1)
+                max_rows_per_file = self.get_config('input_rows', sys.maxsize)
                 csvfile.seek(0)
                 reader = csv.reader(csvfile, dialect)
                 line_number = 0
@@ -1669,11 +1832,12 @@ class StatVarDataProcessor(Config, Counters):
             time_taken = time_end - time_start
             self.set_counter('processing-time-seconds', time_taken, filename)
             line_rate = line_number / (time_end - file_start_time)
-            self.log_counters()
+            self.print_counters()
             logging.info(
                 f'Processed {line_number} lines from {filename} @ {line_rate:.2f} lines/sec.'
             )
             self.set_counter(f'processing-input-rows-rate', line_rate, filename)
+        # TODO: resolve svobs place in batch mode.
         time_end = time.perf_counter()
         rows_processed = self.get_counter('input-rows-processed')
         time_taken = time_end - time_start
@@ -1748,13 +1912,13 @@ class StatVarDataProcessor(Config, Counters):
                     f'Got pvs for column:{row_index}:{col_index}:{col_pvs}')
             else:
                 # Column has no PVs. Check if it has a value.
-                col_numeric_val = _get_numeric_value(col_value)
-                if col_numeric_val:
+                col_numeric_val = get_numeric_value(col_value)
+                if col_numeric_val is not None:
                     if self.get_config('use_all_numeric_data_values', False):
                         row_col_pvs[col_index] = {'value': col_numeric_val}
                     else:
                         row_col_pvs[col_index] = {
-                            self.get_config('numeric_data_key', '@Number'):
+                            self.get_config('numeric_data_key', 'Number'):
                                 col_numeric_val
                         }
                     _DEBUG and logging.debug(
@@ -1858,8 +2022,8 @@ class StatVarDataProcessor(Config, Counters):
         value = pvs['value']
         if not _is_valid_value(value):
             return False
-        numeric_value = _get_numeric_value(value)
-        if numeric_value:
+        numeric_value = get_numeric_value(value)
+        if numeric_value is not None:
             multiply_prop = self.get_config('multiply_factor', 'MultiplyFactor')
             if multiply_prop in pvs:
                 multiply_factor = pvs[multiply_prop]
@@ -1884,7 +2048,8 @@ class StatVarDataProcessor(Config, Counters):
 
         # Flatten all list PVs.
         _DEBUG and logging.debug(
-            f'Flattening list values for keys: {list_keys} in PVs:{pvs}')
+            f'Flattening list values for keys: {list_keys} in PVs:{pvs} for {self._file_context}'
+        )
         status = True
         list_values = [pvs[key] for key in list_keys]
         for items in itertools.product(*list_values):
@@ -1896,13 +2061,13 @@ class StatVarDataProcessor(Config, Counters):
 
     def process_stat_var_obs(self, pvs: dict) -> bool:
         '''Process PV for a statvar obs.'''
-        svobs_pvs_list = self.preprocess_stat_var_pbs_pvs(pvs)
+        svobs_pvs_list = self.preprocess_stat_var_obs_pvs(pvs)
         if not svobs_pvs_list:
             _DEBUG and logging.debug(
                 f'Preprocess dropping SVObs PVs for {self._file_context}')
             return False
         _DEBUG and logging.debug(
-            f'Got {len(svobs_pvs_list)} SVOVs pvs after preprocess: {svobs_pvs_list}'
+            f'Got {len(svobs_pvs_list)} SVObs pvs after preprocess: {svobs_pvs_list} for {self._file_context}'
         )
         status = True
         for svobs_pvs in svobs_pvs_list:
@@ -1999,12 +2164,35 @@ class StatVarDataProcessor(Config, Counters):
             # Place is a resolved dcid or a place property.
             return True
 
+        _DEBUG and logging.debug(f'Resolving place: {place} in {pvs}')
         # Lookup dcid for the place.
+        place_dcid = place
         place_id = self.resolve_value_references(
             self._pv_mapper.get_all_pvs_for_value(place, 'observationAbout'))
         if place_id:
-            pvs.update(place_id)
-            _DEBUG and logging.debug(f'Resolved place {place} to {place_id}')
+            place_dcid = place_id.get('observationAbout', '')
+        if place_dcid == strip_namespace(place_dcid):
+            # Place is not resolved yet. Try resolving through Maps API.
+            if self.get_config('resolve_places', False):
+                resolved_place = self._place_resolver.resolve_name({
+                    place_dcid: {
+                        'name':
+                            place_dcid,
+                        'country':
+                            pvs.get('country', None),
+                        'administrative_area':
+                            pvs.get('administrative_area', None)
+                    }
+                })
+                resolved_dcid = resolved_place.get(place_dcid,
+                                                   {}).get('dcid', None)
+                _DEBUG and logging.debug(
+                    f'Got place dcid: {resolved_dcid} for place {place}')
+                if resolved_dcid:
+                    place_dcid = add_namespace(resolved_dcid)
+        if place_dcid:
+            pvs['observationAbout'] = place_dcid
+            _DEBUG and logging.debug(f'Resolved place {place} to {place_dcid}')
             self.add_counter(f'resolved-places', 1)
             return True
 
@@ -2012,11 +2200,6 @@ class StatVarDataProcessor(Config, Counters):
         self.add_counter(f'warning-unresolved-place', 1,
                          pvs.get('variableMeasured', ''))
         return False
-
-    def merge_outputs(self,
-                      statvars: dict = None,
-                      statvar_obs: dict = None) -> bool:
-        '''Merge statvars and statvar obs from other runs.'''
 
     def write_outputs(self, output_path: str):
         '''Generate output mcf, csv and tmcf.'''
@@ -2032,7 +2215,18 @@ class StatVarDataProcessor(Config, Counters):
                 mode=self.get_config('output_csv_mode', 'w'),
                 columns=self.get_config('output_csv_columns', None),
                 output_tmcf=self.get_config('generate_tmcf', True))
-        self.log_counters()
+        self.print_counters()
+
+    def get_output_files(self, output_path: str) -> list:
+        '''Returns the list of output file names.'''
+        outputs = []
+        if self.get_config('generate_statvar_mcf', True):
+            outputs.append(output_path + '.mcf')
+        if self.get_config('generate_csv', True):
+            outputs.append(output_path + '.csv')
+        if self.get_config('generate_tmcf', True):
+            outputs.append(output_path + '.tmcf')
+        return outputs
 
 
 def download_csv_from_url(urls: list, data_path: str) -> list:
@@ -2042,30 +2236,17 @@ def download_csv_from_url(urls: list, data_path: str) -> list:
     if not isinstance(urls, list):
         urls = [urls]
     for url in urls:
-        # Extract the output filename from the URL.
-        data_file = f'input{len(data_files)}.csv'
-        file_match = re.search(
-            r'^[a-zA-Z0-9_:/\.-]*/(?P<file>[A-Za-z0-9_\.-]+)', url)
-        if file_match:
-            data_file = file_match.groupdict().get('file', data_file)
-        # TODO: retry download on error or timeout.
-        output_file = os.path.join(data_path, data_file)
-        if not os.path.exists(output_file):
-            logging.info(f'Downloading {url} into {output_file}...')
-            response = requests.get(url)
-            if response.status_code != 200:
-                logging.error(f'Failed to download {url}: {response}')
-                return []
-            with open(output_file, 'w') as output_data:
-                output_data.write(response.text)
-        data_files.append(output_file)
+        output_file = download_file_from_url(url=url, overwrite=False)
+        if output_file:
+            data_files.append(output_file)
     logging.info(f'Downloaded {urls} into {data_files}.')
     return data_files
 
 
 def shard_csv_data(files: list,
                    column: str = None,
-                   prefix_len: int = 2) -> list:
+                   prefix_len: int = sys.maxsize,
+                   keep_existing_files: bool = True) -> list:
     '''Shard CSV file by unique values in column.
     Returns the list of output files.'''
     logging.info(
@@ -2077,8 +2258,8 @@ def shard_csv_data(files: list,
     if not column:
         # Pick the first column.
         column = list(df.columns)[0]
-    # Convert nan to empty string to sharding doesn't drop any rows.
-    # df[column] = df[column],fillna('')
+    # Convert nan to empty string so sharding doesn't drop any rows.
+    #df[column] = df[column].fillna('')
     # Get unique shard prefix values from column.
     shards = list(
         sorted(set([str(x)[:prefix_len] for x in df[column].unique()])))
@@ -2092,15 +2273,15 @@ def shard_csv_data(files: list,
     num_shards = len(shards)
     for shard_index in range(num_shards):
         shard_value = shards[shard_index]
-        suffix = re.sub(r'[^A-Za-z0-9_-]', '-', shard_value)
-        output_file = f'{output_path}-{suffix}-{shard_index:05d}-of-{num_shards:05d}.csv'
+        output_file = f'{output_path}-{shard_index:05d}-of-{num_shards:05d}.csv'
         logging.info(
             f'Sharding by {column}:{shard_value} into {output_file}...')
-        if shard_value:
-            df[df[column].str.startswith(shard_value)].to_csv(output_file,
-                                                              index=False)
-        else:
-            df[df[column] == ''].to_csv(output_file, index=False)
+        if not os.path.exists(output_file) or not keep_existing_files:
+            if shard_value:
+                df[df[column].str.startswith(shard_value)].to_csv(output_file,
+                                                                  index=False)
+            else:
+                df[df[column] == ''].to_csv(output_file, index=False)
         output_files.append(output_file)
     return output_files
 
@@ -2108,25 +2289,80 @@ def shard_csv_data(files: list,
 def prepare_input_data(config: dict) -> bool:
     '''Prepare the input data, download and shard if needed.'''
     input_data = config.get('input_data', '')
-    input_files = []
-    for file in input_data:
-        input_files.extend(glob.glob(file))
-    if input_files:
-        # Input files already exist. Nothing to download.
-        return input_files
-
-    # Download data from the URL.
-    data_url = config.get('data_url', '')
-    if not data_url:
-        logging.fatal(f'Provide data with --data_url or --input_data.')
-        return False
-    input_files = download_csv_from_url(data_url,
-                                        os.path.dirname(input_data[0]))
+    input_files = _get_matching_files(input_data)
+    if not input_files:
+        # Download input data from the URL.
+        data_url = config.get('data_url', '')
+        if not data_url:
+            logging.fatal(f'Provide data with --data_url or --input_data.')
+            return False
+        input_files = download_csv_from_url(data_url,
+                                            os.path.dirname(input_data[0]))
     shard_column = config.get('shard_input_by_column', '')
-    if shard_column:
+    if config.get('parallelism', 0) > 0 and shard_column:
         return shard_csv_data(input_files, shard_column,
-                              config.get('shard_prefix_length', 100))
+                              config.get('shard_prefix_length', sys.maxsize),
+                              True)
     return input_files
+
+
+def parallel_process(data_processor_class: StatVarDataProcessor,
+                     input_data: list,
+                     output_path: str,
+                     config_file: str,
+                     pv_map_files: list,
+                     counters: dict = None,
+                     parallelism: int = 0) -> bool:
+    '''Process files in parallel, calling process() for each input file.'''
+    if not parallelism:
+        parallelism = os.cpu_count()
+    logging.info(
+        f'Processing {input_data} with {parallelism} parallel processes.')
+    # Invoke process() for each input file in parallel.
+    input_files = _get_matching_files(input_data)
+    num_inputs = len(input_files)
+    with multiprocessing.Pool(parallelism) as pool:
+        for input_index in range(num_inputs):
+            input_file = input_files[input_index]
+            output_file_path = f'{output_path}-{input_index:05d}-of-{num_inputs:05d}'
+            logging.info(f'Processing {input_file} into {output_file_path}...')
+            process_args = {
+                'data_processor_class': data_processor_class,
+                'input_data': [input_file],
+                'output_path': output_file_path,
+                'config_file': config_file,
+                'pv_map_files': pv_map_files,
+                'counters': counters,
+                'parallelism': 0,
+            }
+            task = pool.apply_async(process, kwds=process_args)
+        pool.close()
+        pool.join()
+
+    # Merge statvar mcf files into a single mcf output.
+    mcf_files = f'{output_path}-*-of-*.mcf'
+    statvar_nodes = load_mcf_nodes(mcf_files)
+    output_mcf_file = f'{output_path}.mcf'
+    commandline = ' '.join(sys.argv)
+    header = f'# Auto generated using command: "{commandline}" on {datetime.datetime.now()}\n'
+    write_mcf_nodes(node_dicts=[statvar_nodes],
+                    filename=output_mcf_file,
+                    mode='w',
+                    sort=True,
+                    header=header)
+    logging.info(
+        f'Merged {len(statvar_nodes)} stat var MCF nodes from {mcf_files} into {output_mcf_file}.'
+    )
+
+    # Create a common TMCF from output, removing the shard suffix.
+    with open(f'{output_path}-00000-of-{num_inputs:05d}.tmcf',
+              mode='r') as tmcf:
+        tmcf_node = tmcf.read()
+        tmcf_node = re.sub(r'-[0-9]*-of-[0-9]*', '', tmcf_node)
+        with open(f'{output_path}.tmcf', mode='w') as output_tmcf:
+            output_tmcf.write(tmcf_node)
+    logging.info(f'Generated TMCF {output_path}.tmcf')
+    return True
 
 
 def process(data_processor_class: StatVarDataProcessor,
@@ -2139,17 +2375,22 @@ def process(data_processor_class: StatVarDataProcessor,
     '''Process all input_data files to extract StatVars and StatvarObs.
     Emit the StatVars and StataVarObs into output mcf and csv files.
     '''
+    logging.info(f'Processing data {input_data} into {output_path}...')
     config = get_config_from_file(config_file)
     config_dict = config.get_configs()
     if input_data:
         config_dict['input_data'] = input_data
+    if config_dict.get('debug', False):
+        _DEBUG = True
     input_data = prepare_input_data(config_dict)
+    input_files = _get_matching_files(input_data)
+    num_inputs = len(input_files)
     output_dir = os.path.dirname(output_path)
     if output_dir:
         logging.info(f'Creating output directory: {output_dir}')
         os.makedirs(output_dir, exist_ok=True)
-    if parallelism <= 1:
-        logging.info(f'Processing data {input_data} into {output_path}...')
+    if parallelism <= 1 or len(input_files) <= 1:
+        logging.info(f'Processing data {input_files} into {output_path}...')
         if pv_map_files:
             config_dict['pv_map'] = pv_map_files
         if counters is None:
@@ -2159,7 +2400,7 @@ def process(data_processor_class: StatVarDataProcessor,
 
         data_processor = data_processor_class(config_dict=config_dict,
                                               counters_dict=counters)
-        data_processor.process_data_files(input_data)
+        data_processor.process_data_files(input_files)
         data_processor.write_outputs(output_path)
         # Check if there were any errors.
         error_counters = [
@@ -2169,53 +2410,24 @@ def process(data_processor_class: StatVarDataProcessor,
             logging.info(f'Error Counters: {error_counters}')
             return False
     else:
-        # Process files in parallel, one per process.
-        logging.info(
-            f'Processing {input_data} with {parallelism} parallel proceses.')
-        input_files = []
-        for input_path in input_data:
-            input_files.extend(glob.glob(input_path))
-        num_inputs = len(input_files)
-        with multiprocessing.Pool(parallelism) as pool:
-            for input_index in range(num_inputs):
-                input_file = input_files[input_index]
-                output_file_path = f'{output_path}-{input_index:05d}-of-{num_inputs:05d}'
-                logging.info(
-                    f'Processing {input_file} into {output_file_path}...')
-                process_args = {
-                    'data_processor_class': data_processor_class,
-                    'input_data': [input_file],
-                    'output_path': output_file_path,
-                    'config_file': config_file,
-                    'pv_map_files': pv_map_files,
-                    'counters': counters,
-                    'parallelism': 0
-                }
-                pool.apply_async(process, kwds=process_args)
-            pool.close()
-            pool.join()
-
-        # Merge statvar mcf files into a single mcf output.
-        mcf_files = f'{output_path}-*-of-*.mcf'
-        statvar_nodes = load_mcf_nodes(mcf_files)
-        output_mcf_file = f'{output_path}.mcf'
-        self._statvars_map.write_statvars_mcf(filename=output_mcf_file,
-                                              mode=w,
-                                              stat_var_nodes=statvar_nodes)
-        logging.info(
-            f'Merged {len(statvar_nodes)} stat var MCF nodes from {mcf_files} into {output_mcf_file}.'
-        )
-
-        # Create a common TMCF from output, removing the shard suffix.
-        with open(f'{output_path}-00000-of-{num_inputs:05d}.tmcf',
-                  mode='r') as tmcf:
-            tmcf_node = tmcf.read()
-            tmcf_node = re.sub(r'-[0-9]*-of-[0-9]*', '', tmcf_node)
-            with open(f'{output_path}.tmcf', mode='w') as output_tmcf:
-                output_tmcf.write(tmcf_node)
-        logging.info(f'Generated TMCF {output_path}.tmcf')
-
+        return parallel_process(data_processor_class=data_processor_class,
+                                input_data=input_files,
+                                output_path=output_path,
+                                config_file=config_file,
+                                pv_map_files=pv_map_files,
+                                counters=counters,
+                                parallelism=parallelism)
     return True
+
+
+def _estimate_num_rows(filename: str) -> int:
+    '''Returns the estimated number of rows based on size of the first few rows.'''
+    filesize = os.path.getsize(filename)
+    print(filename)
+    with open(filename) as fp:
+        lines = fp.read(4000)
+    line_size = len(lines) / (lines.count('\n') + 1)
+    return filesize / line_size
 
 
 def main(_):
