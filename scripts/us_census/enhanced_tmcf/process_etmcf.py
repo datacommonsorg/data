@@ -127,7 +127,7 @@ def _process_var_measured_new_column(
         query_format = query_format[:-1]
 
     # TODO: remove these checks when a better format for opaque mapping is agreed.
-    query_format = query_format.replace("?", "~~")
+    query_format = query_format.replace("?", "__")
     query_format = query_format.replace("=", "--")
 
     # Verify that such a new column does not already exist.
