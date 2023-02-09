@@ -34,6 +34,10 @@ _FIRE_INCIDENT_MAP = {
 
 pd.set_option("display.max_columns", None)
 
+def merge_dictionaries(dict1, dict2):
+    res = {**dict1, **dict2}
+    return res
+
 
 def get_data(url):
     """Get data from the API.
@@ -60,7 +64,7 @@ def get_data(url):
             if "geometry" in row:
                 geometry = (row['geometry'])
                 geojson = {'geojson': geometry}
-                data.append(row["attributes"] | geojson)
+                data.append(merge_dictionaries(geojson, row["attributes"]))
         i += 1
         # use max to get page size for the first request
         # the value shouldn't change after first iteration, but keep checking
