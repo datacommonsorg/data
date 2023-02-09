@@ -292,14 +292,3 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
     # and a list of geoIds not found to produce the processed (traditional) TMCF and corresponding CSV.
     _write_modified_csv(input_csv_filepath, csv_out, new_csv_columns,
                         geo_ids_to_dcids, geo_ids_not_found)
-
-
-_CODEDIR = os.path.dirname(os.path.realpath(__file__))
-_INPUT_DIR = os.path.join(_CODEDIR, 'testdata', 'input')
-_OUTPUT_DIR = os.path.join(_CODEDIR, 'testdata', 'output')
-
-input_etmcf = 'ECNBASIC2012.EC1200A1'
-input_csv = 'ECNBASIC2012.EC1200A1-Data'
-output_tmcf = "ECNBASIC2012.EC1200A1_processed"
-output_csv = "ECNBASIC2012.EC1200A1_processed"
-process_enhanced_tmcf(_INPUT_DIR, _OUTPUT_DIR, input_etmcf, input_csv, output_tmcf, output_csv)
