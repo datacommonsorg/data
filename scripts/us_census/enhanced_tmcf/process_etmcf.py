@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
 GEO_ID_COLUMN = 'GEO_ID'
+NUM_DCIDS_TO_QUERY = 50
 
 
 @dataclass
@@ -23,7 +24,9 @@ class NewCSVColumn:
 
 
 def _replace_ce_t_with_filename(line: str, csv_out_name: str) -> str:
-    return line.replace(":T", ":" + csv_out_name)
+    if "C:T" in line or "E:T" in line:
+        return line.replace(":T", ":" + csv_out_name)
+    return line
 
 
 def _replace_t_with_T_path(line: str, T: str) -> str:
@@ -45,6 +48,7 @@ def _split_source_query_portions(input: str) -> Tuple[str, str]:
     return (source_str, opaque_portion)
 
 
+# TODO: remove this function after adding censusGeoId as a property.
 def _census_geoId_to_dcid(census_geoids: List[str]) -> Dict[str, str]:
     geoId_to_dcid = {}
     for census_geoId in census_geoids:
@@ -61,11 +65,10 @@ def _census_geoId_to_dcid(census_geoids: List[str]) -> Dict[str, str]:
 def _get_places_not_found(census_geoids: List[str]) -> List[str]:
     geoId_to_dcids = _census_geoId_to_dcid(census_geoids)
     geoIds_not_found = []
-    # Process 10 at a time.
-    num_to_process = 10
+
     geo_ids = list(geoId_to_dcids.keys())
-    for i in range(0, len(geo_ids), num_to_process):
-        selected_geo_ids = geo_ids[i:i + num_to_process]
+    for i in range(0, len(geo_ids), NUM_DCIDS_TO_QUERY):
+        selected_geo_ids = geo_ids[i:i + NUM_DCIDS_TO_QUERY]
         selected_dcids = [geoId_to_dcids[g] for g in selected_geo_ids]
         res = dc.get_property_values(selected_dcids, 'name')
         for index in range(len(selected_dcids)):
@@ -240,6 +243,7 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
         output_started = False
         for line in lines:
             out_line = line
+            # TODO: should check that "Namespace:" comes immediately before T= line.
             if line.startswith("Namespace:"):
                 continue
             elif line.startswith("T="):
