@@ -200,7 +200,7 @@ def main(_):
         process_etmcf.process_enhanced_tmcf(
             input_path, output_path, FLAGS.input_etmcf_filename, csv_filename,
             FLAGS.input_etmcf_filename + "_processed",
-            csv_filename + "_processed")
+            csv_filename.replace("$", "_") + "_processed")
         print("**************************************************")
         count += 1
 
