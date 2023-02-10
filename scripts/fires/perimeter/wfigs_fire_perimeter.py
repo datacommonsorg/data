@@ -34,6 +34,7 @@ _FIRE_INCIDENT_MAP = {
 
 pd.set_option("display.max_columns", None)
 
+
 def merge_dictionaries(dict1, dict2):
     res = {**dict1, **dict2}
     return res
