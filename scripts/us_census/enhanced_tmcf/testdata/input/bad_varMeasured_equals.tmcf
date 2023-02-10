@@ -1,0 +1,19 @@
+Namespace:
+T=http://data.census.gov/table/EC1200A1
+
+DATAFILES=<server location>/ECNBASIC2012.EC1200A1.datafile.txt
+
+Node: E:T->E0
+typeOf: schema:Place
+geoId: C:T->GEO_ID
+name: C:T->NAME
+footnote: C:T->GEO_ID_F
+
+Node: E:T->E1
+typeOf: schema:StatVarObservation
+name: Number of establishments
+value: C:T->ESTAB
+# More than one = between &.
+variableMeasured: T:ESTAB?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT=typop=C:T->TYPOP
+observationAbout: E:T->E0
+observationDate: C:T->YEAR
