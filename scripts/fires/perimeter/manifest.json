@@ -4,7 +4,7 @@
             "import_name": "FirePerimetersWFIGS",
             "curator_emails": ["sachdevapulkit@google.com"],
             "provenance_url": "https://data-nifc.opendata.arcgis.com/",
-            "provenance_description": "The Wildland Fire Interagency Geospatial Services (WFIGS) Group provides authoritative geospatial data products under the interagency Wildland Fire Data Program. This dataset provides perimeters for all reported wildland fires in the United States. We simplify those parameters by using Ramer-Douglas-Peucker algorithm on geoJsonCoordinates with epsilon of 0.01.",
+            "provenance_description": "The Wildland Fire Interagency Geospatial Services (WFIGS) Group provides authoritative geospatial data products under the interagency Wildland Fire Data Program for the USA. This dataset provides perimeters for all reported wildland fires in the United States. We simplify those parameters by using Ramer-Douglas-Peucker algorithm on geoJsonCoordinates with epsilon of 0.01.",
             "scripts": ["wfigs_fire_perimeter.py"],
             "import_inputs": [{
                 "template_mcf": "fire_geojson.tmcf",
