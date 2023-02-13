@@ -24,7 +24,7 @@ format can be used for other imports as well.
 0. To run unit tests:
 
       ```
-      python3 -m unittest discover -v -s ../ -p "*etcmf_test.py"
+      python3 -m unittest discover -v -s ../ -p "*etmcf_test.py"
       ```
 
 1. Ensure that a `data_directory` exists with an `input_directory` which has a mappings text file (e.g. `mappings.txt`) and a super/enhanced TMCF file (e.g. `input.tcmf`). See `sample_input_tmcf.tmcf` and `sample_census_mappings.txt` as samples files.
