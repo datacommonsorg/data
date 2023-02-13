@@ -16,33 +16,52 @@ This Python Script downloads the datasets in a gzip format,
 Unzips it and makes it available for further processing
 """
 import gzip
-import os
 import urllib.request
 
 
-def download_file(input_urls: list, current_working_directory: str) -> None:
+def download_gz_file(download_file_url: str, download_path: str) -> None:
     """
-    Function to Download and Unzip the file provided in url
+    Function to download and unzip the file.
 
-    Args: download_file_url: url of the file to be downloaded as a string
+    Args:
+        download_file_url (str): url of the file to be downloaded as a string
+        download_path (str): local directory to dlownload the file
 
-    Returns: None
+    Returns:
+        None
     """
-    # This extracts the filename from the complete URL,
-    # also removes the .gz extension.
-    # Example - ....-prod/BulkDownloadListing?file=data/hlth_ehis_pe9e.tsv.gz
-    # is made hlth_ehis_pe9e.tsv
-    path = current_working_directory + '/input_files/'
-    for download_file_url in input_urls:
-        file_name = download_file_url.split("/")[-1][:-3]
-        if not os.path.exists(path):
-            os.mkdir(path)
-        out_file = path + file_name
+    file_name = download_file_url.split("/")[-1][:-3]
+    output_file = download_path + "/" + file_name
 
-        with urllib.request.urlopen(download_file_url) as response:
-            with gzip.GzipFile(fileobj=response) as uncompressed:
-                file_content = uncompressed.read()
+    with urllib.request.urlopen(download_file_url) as response:
+        with gzip.GzipFile(fileobj=response) as uncompressed:
+            file_content = uncompressed.read()
 
-        # write to file in binary mode 'wb'
-        with open(out_file, 'wb') as f:
-            f.write(file_content)
+    # write to file in binary mode 'wb'
+    with open(output_file, 'wb') as f:
+        f.write(file_content)
+
+
+def download_files(download_files_url: list, download_path: str) -> None:
+    """
+    This Method calls the download function from the commons directory
+    to download all the input files.
+
+    Args:
+        download_file_url (str): url of the file to be downloaded as a string
+        download_path (str): local directory to dlownload the file
+
+    Returns:
+        None
+    """
+    for download_file_url in download_files_url:
+        file_extension = download_file_url.split(".")[-1]
+
+        if file_extension == "gz":
+            download_gz_file(download_file_url, download_path)
+        elif file_extension == "txt":
+            download_gz_file(download_file_url, download_path)
+        elif file_extension == "csv":
+            download_gz_file(download_file_url, download_path)
+        elif file_extension == "pdf":
+            download_gz_file(download_file_url, download_path)

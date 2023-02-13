@@ -1,0 +1,13 @@
+Node: E:Events->E0
+dcid: C:Events->dcid
+typeOf: C:Events->typeOf
+name: C:Events->name
+startDate: C:Events->startDate
+endDate: C:Events->endDate
+observationPeriod: C:Events->observationPeriod
+startLocation: C:Events->startLocation
+affectedPlace: C:Events->affectedPlace
+area: C:Events->area
+subEvents: C:Events->subEvents
+observationDate: C:Events->observationDate
+geoJsonCoordinatesDP1: C:Events->geoJsonCoordinatesDP1

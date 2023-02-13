@@ -31,7 +31,8 @@ MANUAL_OVERRIDE = {
         "karbi anglong": "east karbi anglong"
     },
     "chhattisgarh": {
-        "gaurella pendra marwahi": "gaurela-pendra-marwahi"
+        "gaurella pendra marwahi": "gaurela-pendra-marwahi",
+        "baloda bazar": "baloda bazar - bhatapara"
     },
     "gujarat": {
         "chhotaudepur": "chhota udaipur",
@@ -130,7 +131,10 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         # Convert name to lower case for matching
         self.lgd_df['LGDDistrictName'] = self.lgd_df[
             'LGDDistrictName'].str.lower()
+        self.lgd_df['LGDDistrictName'] = self.lgd_df[
+            'LGDDistrictName'].str.strip()
         self.lgd_df['LGDStateName'] = self.lgd_df['LGDStateName'].str.lower()
+        self.lgd_df['LGDStateName'] = self.lgd_df['LGDStateName'].str.strip()
         self.lgd_df['LGDStateName'] = self.lgd_df['LGDStateName'].str.replace(
             "the ", "")
 
@@ -147,17 +151,15 @@ class LocalGovermentDirectoryDistrictsDataLoader:
             get_census2001_code(row),
             axis=1)
 
+    def _get_district_dcid(self, row):
+        return "wikidataId/{0}".format(row["WikiDataId"])
+
+    def _get_state_dcid(self, row):
+        return "wikidataId/{0}".format(self.format_wikidataid(row["state"]))
+
     def _load_and_format_wikidata(self):
         self.wikidata_df = pd.read_csv(self.wikidata_csv, dtype=str)
-        # Note: Currently malerkotla is not mapped as district in wikidata
-        # Hence I am adding it manually, here
 
-        self.wikidata_df.loc[len(self.wikidata_df.index)] = [
-            "http://www.wikidata.org/entity/Q1470987", "malerkotla",
-            "malerkotla"
-            "http://www.wikidata.org/entity/Q22424", "punjab", "punjab",
-            "punjab", None
-        ]
         self.wikidata_df.fillna('', inplace=True)
 
         # Convert name to lower case for matching
@@ -179,10 +181,10 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         # Compare the number of states to validate
         lgd_df_states = sorted(self.lgd_df['LGDStateName'].unique())
         wikidata_df_states = sorted(self.wikidata_df['stateLabel'].unique())
-
         if lgd_df_states == wikidata_df_states:
             pass
         else:
+            print(list(set(wikidata_df_states).difference(set(lgd_df_states))))
             raise Exception("States in LGD and Wikidata doesn't match.")
 
         # Add the matched Wikidata district label into lgd_df data
@@ -209,7 +211,15 @@ class LocalGovermentDirectoryDistrictsDataLoader:
             "districtLabel"].apply(
                 LocalGovermentDirectoryDistrictsDataLoader.format_title)
 
+        # Format the DCIDs
+        self.clean_df['StateDCID'] = self.clean_df.apply(
+            lambda row: self._get_state_dcid(row), axis=1)
+        self.clean_df['DistrictDCID'] = self.clean_df.apply(
+            lambda row: self._get_district_dcid(row), axis=1)
+
     def save(self):
+        self.clean_df.sort_values(by=["LGDStateCode", "LGDDistrictCode"],
+                                  inplace=True)
         self.clean_df.to_csv(self.clean_csv, index=False, header=True)
 
 
