@@ -1,0 +1,99 @@
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0100000US",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0200000US1",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0200000US2",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0200000US3",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0200000US4",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0100000US$0400000",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0100000US$0500000",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0100000US$3100000",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0100000US$3140000",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0100000US$3300000",
+    "codeset": "naics~N0000.00"
+  }
+}
+
+POST https://data.census.gov/api/access/table/download
+{
+  "request": {
+    "id": "ECNBASIC2012.EC1200A1",
+    "g": "0100000US$E600000",
+    "codeset": "naics~N0000.00"
+  }
+}
+
