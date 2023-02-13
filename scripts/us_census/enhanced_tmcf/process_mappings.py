@@ -11,7 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Processing the mappings + enhanced TMCF for US Census.'''
+'''Processing the mappings + enhanced TMCF for US Census.
+
+The following steps are followed:
+
+1. Using the FLAGS provided, first check that the input TMCF + mappings files are found. Note: there are sample files provided (in this same directory) for the mappings and super/enhanced TMCF for one US Census table.
+2. Use the mappings file to download all the zip files (if not already done).
+3. Unzip the downloaded zip files and keep the CSV file with the relevant Data (identified by the `data_csv_file_unique_substring` flag).
+4. Write all downloaded data CSV files to the input directory.
+5. Process the super/enhanced TMCF file along with all the CSV files downloaded. It is assumed that all CSV files correspond to the same super/enhanced TMCF.
+6. Parse all the CSV files with the super/enhanced TMCF and produce one (traditional) TMCF file with modified CSV files.
+7. The output directory contains all the produced output files (one TMCF and processed CSV files). They can now be validated with the dc-import tool.
+'''
 
 import json
 import os
@@ -32,13 +43,23 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('zip_download_path', 'data/zip_download',
-                    'Zip file download directory')
-flags.DEFINE_string('input_directory', 'data/input', 'Inputs directory')
-flags.DEFINE_string('output_directory', 'data/output', 'Inputs directory')
+flags.DEFINE_string(
+    'data_directory', 'data',
+    'Data directory (full path OR path relative to current working directory)')
+flags.DEFINE_string(
+    'zip_download_path', 'zip_download',
+    'Zip file download directory (contained in the data_directory)')
+flags.DEFINE_string('input_directory', 'input',
+                    'Inputs directory (contained in the data_directory)')
+flags.DEFINE_string('output_directory', 'output',
+                    'Inputs directory (contained in the data_directory)')
 flags.DEFINE_string('mappings_file', 'mappings.txt', 'Mappings File.')
 flags.DEFINE_string('input_etmcf_filename', 'input_etmcf',
                     'Enhanced TMCF filename.')
+flags.DEFINE_string(
+    'data_csv_file_unique_substring', 'Data.csv',
+    'The unique substring in the name of the data CSV file, e.g. Data.csv for ABC_Data.csv This is used to keep only the relevant CSV file from the zip download.'
+)
 
 NUM_RETRIES = 10
 
@@ -70,17 +91,17 @@ def _read_write_files_from_zip(zip_filepath, unzipped_data_path,
         for zip_file in z.namelist():
             if not os.path.exists(os.path.join(unzipped_data_path,
                                                csv_filename)):
-                if "Data.csv" in zip_file:
+                if FLAGS.data_csv_file_unique_substring in zip_file:
                     unzip_files = True
                     csv_files.append(zip_file)
 
         if len(csv_files) > 1:
             raise Exception(
-                "Zip archive file cannot have more than one file with name ending with Data.csv"
+                f"Zip archive file cannot have more than one file with name containing {FLAGS.data_csv_file_unique_substring}"
             )
         if unzip_files and not csv_files:
             raise Exception(
-                f"No CSV files were found to download. Check zip file: {zip_filepath}"
+                f"No CSV files (with names containing {FLAGS.data_csv_file_unique_substring}) were found to download. Check zip file: {zip_filepath}"
             )
         if unzip_files:
             print(f"Unzipping/Extracting files from: {zip_filepath}")
@@ -159,19 +180,51 @@ def _download_mapping_file(post_req: Dict, data_path: str,
 
 def main(_):
     # Validate the Flags.
-    assert FLAGS.zip_download_path and os.path.exists(FLAGS.zip_download_path)
-    assert FLAGS.input_directory and os.path.exists(FLAGS.input_directory)
-    assert FLAGS.output_directory and os.path.exists(FLAGS.output_directory)
+    assert FLAGS.data_directory
+    assert FLAGS.zip_download_path
+    assert FLAGS.input_directory
+    assert FLAGS.output_directory
+    assert FLAGS.data_csv_file_unique_substring
 
-    mappings_filepath = os.path.join(FLAGS.input_directory, FLAGS.mappings_file)
-    assert os.path.exists(mappings_filepath)
-    input_etmcf_filepath = os.path.join(FLAGS.input_directory,
+    # Check that the data_directory and input_path are valid.
+    if not os.path.exists(FLAGS.data_directory):
+        raise Exception(
+            f"data_directory must exist. Provided: {FLAGS.data_directory}")
+
+    input_path = os.path.join(FLAGS.data_directory, FLAGS.input_directory)
+    if not os.path.exists(input_path):
+        raise Exception(
+            f"input_directory must exist. Provided: {FLAGS.input_directory}. Resolved to path: {input_path}"
+        )
+
+    # If the zip directory or output directory are not found, create them.
+    zip_download_path = os.path.join(FLAGS.data_directory,
+                                     FLAGS.zip_download_path)
+    output_path = os.path.join(FLAGS.data_directory, FLAGS.output_directory)
+
+    if not os.path.exists(zip_download_path):
+        print(
+            f"zip_download_path does not exist. Creating it: {zip_download_path}"
+        )
+        os.mkdir(zip_download_path)
+
+    if not os.path.exists(output_path):
+        print(f"output_path does not exist. Creating it: {output_path}")
+        os.mkdir(output_path)
+
+    # Check that the mappings and TMCF files (after resolving the paths) are valid.
+    mappings_filepath = os.path.join(input_path, FLAGS.mappings_file)
+    if not os.path.exists(mappings_filepath):
+        raise Exception(
+            f"mappings_file must exist. Provided: {FLAGS.mappings_file}. Resolved to path: {mappings_filepath}"
+        )
+
+    input_etmcf_filepath = os.path.join(input_path,
                                         FLAGS.input_etmcf_filename + ".tmcf")
-    assert os.path.exists(input_etmcf_filepath)
-
-    zip_download_path = os.path.join(FLAGS.zip_download_path)
-    input_path = os.path.join(FLAGS.input_directory)
-    output_path = os.path.join(FLAGS.output_directory)
+    if not os.path.exists(input_etmcf_filepath):
+        raise Exception(
+            f"input_etmcf_filename (.tmcf) must exist. Provided: {FLAGS.input_etmcf_filename}. Resolved to path: {input_etmcf_filepath}"
+        )
 
     # Reading the post reqs file.
     print("Reading the post reqs (mappings) file.")
