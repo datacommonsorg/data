@@ -26,11 +26,18 @@ class PreprocessDataTest(unittest.TestCase):
         output = io.StringIO()
         writer = csv.DictWriter(output, fieldnames=FIELDNAMES)
         writer.writeheader()
-        for file in os.listdir(test_dir):
-            if not file.endswith('.json'):
-                continue
-            with open(os.path.join(test_dir, file)) as f:
-                write_emissions(writer, json.load(f))
+        
+        # Test Earth
+        with open(os.path.join(test_dir, 'earth.json')) as f:
+            write_emissions(writer, json.load(f))
+
+        # Test continents
+        with open(os.path.join(test_dir, 'europe.json')) as f:
+            write_emissions(writer, json.load(f))
+
+        # Test countries
+        with open(os.path.join(test_dir, 'usa.json')) as f:
+            write_emissions(writer, json.load(f))
 
         with open(os.path.join(test_dir, 'expected_output.csv')) as f:
             self.assertEqual(output.getvalue().replace('\r', ''), f.read())
