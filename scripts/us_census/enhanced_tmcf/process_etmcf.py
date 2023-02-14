@@ -173,6 +173,16 @@ def _process_name_new_column(
         name_str: str, cols_to_secondary_names: Dict[str, str],
         new_csv_columns: List[NewCSVColumn]) -> NewCSVColumn:
     # Example of line: "T:ESTAB?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL"
+    # Example output name: """First-quarter payroll ($1,000): Wholesale trade (2012 NAICS code); All establishments (Tax status code); Merchant wholesalers, except manufacturers' sales branches and offices (Type of operation code)"""
+    #   Explanation:
+    #       1. The first part before the : comes from T:ESTAB (for which the secondary row is used to get "First-quarter payroll ($1,000)")
+    #       2. The remaining parts are ; delimited
+    #       3. Each component (separated by ?) in the remaining parts is constructed using <key>=<val> as follows:
+    #               <val column's entry in the data row> (<key column's entry in the secondary row>)
+    #               e.g. Wholesale trade (2012 NAICS code)
+    #               where "Wholesale trade" is the NAICS2012_LABEL column's entry in that data row and
+    #                     "(2012 NAICS code)" is the secondary row entry for the NAICS2012 column.
+    #   Note that the secondary column refers to the row of strings corresponding to the header (usually assumed to be in the second row).
 
     # Step 0: split on "?"
     (source_str, opaque_portion) = _split_source_query_portions(name_str)
@@ -184,7 +194,9 @@ def _process_name_new_column(
         raise Exception(
             f"<col_name> in T:<col_name> must exist in the input CSV. <col_name> = {source_str}, name line = {name_str}"
         )
-
+    # The 'source_str' is assumed to be a column in the CSV but it is replaced with
+    # the value in the secondary row.
+    # This means that it will be the same for ALL rows (i.e. it won't need to be added in the new column).
     source_val_str = cols_to_secondary_names[source_str]
     query_format = "\"" + source_val_str + ":"
 
@@ -195,6 +207,11 @@ def _process_name_new_column(
     ordered_csv_column_names = []
     index = 0
     for param_and_val in query_split:
+        # Extract both key and value. Both are assumed to be columns in the CSV.
+        # The 'key' column will be replaced by the value in the secondary row for the 'key' column.
+        #   This means that it will be the same for ALL rows (i.e. it won't need to be added in the new column).
+        # The 'value' column will be replaced by the value in the data row for the 'value' column.
+        #   This means that it will be different for each data row (i.e. it needs to be added in the new column).
         key_val_split = param_and_val.split("=")
         if len(key_val_split) != 2:
             raise Exception(
@@ -349,7 +366,9 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
             # Reaching here means the traditional TMCF can now start
             output_started = True
 
-            # Detect opaque mapping for dcid.
+            # Detect opaque mapping for dcid or measuredProperty. It is assumed
+            # that this is part of the opaque mapping for the variableMeasured (which
+            # points to this Node in the super/enhanced TMCF file).
             if (line.startswith("dcid:") or line.startswith("measuredProperty:")
                ) and _detect_opaque_mapping(line):
                 # Split on " " (space)
