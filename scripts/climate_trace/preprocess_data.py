@@ -5,7 +5,6 @@ It imports data from Climate Trace URLs and creates a cleaned 'output.csv'
 import csv
 import datetime
 import requests
-
 from .statvar_mapping import *
 
 YEAR = datetime.date.today().year
