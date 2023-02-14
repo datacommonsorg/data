@@ -172,7 +172,7 @@ def _process_var_measured_new_column(
 def _process_name_new_column(
         name_str: str, cols_to_secondary_names: Dict[str, str],
         new_csv_columns: List[NewCSVColumn]) -> NewCSVColumn:
-    # Example of line: "T:ESTAB?C:T->NAICS2012_LABEL&C:T->TAXSTAT_LABEL&C:T->TYPOP_LABEL"
+    # Example of line: "T:ESTAB?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL"
 
     # Step 0: split on "?"
     (source_str, opaque_portion) = _split_source_query_portions(name_str)
