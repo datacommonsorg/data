@@ -1,0 +1,7 @@
+{
+  "co2": "CarbonDioxide",
+  "ch4": "Methane",
+  "n20": "NitrousOxide",
+  "co2100": "CarbonDioxideEquivalent100YearGlobalWarmingPotential",
+  "co220": "CarbonDioxideEquivalent20YearGlobalWarmingPotential"
+}

@@ -1,36 +1,33 @@
-"""This script has the tests for preproccess_data.py.
+"""This script contains tests for preproccess_data.py.
 
-It imports two test datasets and checks if the processed output matches the
+It processes three sample API responses and checks if the output matches the
 expected output.
 """
-import unittest
+import csv
+import io
 import os
-import pandas as pd
-import sys
+import unittest
+from .preprocess_data import *
 
-module_dir_ = os.path.dirname(__file__)
-sys.path.insert(0, module_dir_)
-import preprocess_data
-
-
-def _GetTestPath(relative_path):
-    return os.path.join(module_dir_, relative_path)
+FIELDNAMES = [
+    'observation_about', 'observation_date', 'variable_measured', 'value'
+]
 
 
 class PreprocessDataTest(unittest.TestCase):
-    """This class has the method required to test preprocess_data script."""
 
-    def test_MergeAndProcessData(self):
-        expected_df = pd.read_csv(_GetTestPath("test_data/expected_output.csv"))
-        forest_df = pd.read_csv(_GetTestPath("test_data/forest.csv"))
-        df = pd.read_csv(_GetTestPath("test_data/other_sectors.csv"))
-        processed = preprocess_data.MergeAndProcessData(forest_df, df)
-        sort_column_list = ["country", "year", "statvar", "measurement_method"]
-        self.assertIsNone(
-            pd.testing.assert_frame_equal(
-                processed.sort_values(by=sort_column_list, ignore_index=True),
-                expected_df.sort_values(by=sort_column_list,
-                                        ignore_index=True)))
+    def test_write_emissions(self):
+        output = io.StringIO()
+        writer = csv.DictWriter(output, fieldnames=FIELDNAMES)
+        writer.writeheader()
+        for file in os.listdir('test_data'):
+            if not file.endswith('.json'):
+                continue
+            with open('test_data/' + file) as f:
+                write_emissions(writer, json.load(f))
+
+        with open('test_data/expected_output.csv') as f:
+            self.assertEqual(output.getvalue().replace('\r', ''), f.read())
 
 
 if __name__ == "__main__":
