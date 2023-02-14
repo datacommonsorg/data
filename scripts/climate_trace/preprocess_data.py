@@ -4,12 +4,9 @@ It imports data from Climate Trace URLs and creates a cleaned 'output.csv'
 """
 import csv
 import datetime
-import json
-import os
 import requests
-import sys
 
-sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
+from .statvar_mapping import *
 
 YEAR = datetime.date.today().year
 URL = 'https://api.dev.climatetrace.org/v3/emissions/timeseries/sectors{sector}?since=2010&to={year}{continents}{countries}'
@@ -34,15 +31,8 @@ def get_definition(param):
 
 CONTINENTS = get_definition('continents')
 COUNTRIES = [x['alpha3'] for x in get_definition('countries')]
-SECTORS = get_definition('sectors')
-SUBSECTORS = get_definition('subsectors')
-
-with open('sectors.json') as sectors:
-    S = json.load(sectors)
-with open('subsectors.json') as subsectors:
-    S.update(json.load(subsectors))
-with open('gases.json') as gases:
-    GASES = json.load(gases)
+S = SECTORS.copy()
+S.update(SUBSECTORS)
 
 
 def get_observation_about(name):
@@ -140,7 +130,7 @@ if __name__ == "__main__":
         continents = ','.join(CONTINENTS)
         countries = ','.join(COUNTRIES)
 
-        for sector in [''] + SECTORS:
+        for sector in [''] + list(SECTORS.keys()):
             # 'fluorinated-gases' is both a sector and subsector, so don't duplicate.
             if sector == 'fluorinated-gases':
                 continue
