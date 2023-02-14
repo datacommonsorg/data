@@ -28,7 +28,7 @@ class PreprocessDataTest(unittest.TestCase):
         for file in os.listdir(os.path.join(module_dir_, 'test_data')):
             if not file.endswith('.json'):
                 continue
-            with open('test_data/' + file) as f:
+            with open(os.path.join(module_dir_, 'test_data', file)) as f:
                 write_emissions(writer, json.load(f))
 
         with open('test_data/expected_output.csv') as f:
