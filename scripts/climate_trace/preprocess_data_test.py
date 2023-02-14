@@ -22,16 +22,17 @@ FIELDNAMES = [
 class PreprocessDataTest(unittest.TestCase):
 
     def test_write_emissions(self):
+        test_dir = os.path.join(module_dir_, 'test_data')
         output = io.StringIO()
         writer = csv.DictWriter(output, fieldnames=FIELDNAMES)
         writer.writeheader()
-        for file in os.listdir(os.path.join(module_dir_, 'test_data')):
+        for file in os.listdir(test_dir):
             if not file.endswith('.json'):
                 continue
-            with open(os.path.join(module_dir_, 'test_data', file)) as f:
+            with open(os.path.join(test_dir, file)) as f:
                 write_emissions(writer, json.load(f))
 
-        with open('test_data/expected_output.csv') as f:
+        with open(os.path.join(test_dir, 'expected_output.csv')) as f:
             self.assertEqual(output.getvalue().replace('\r', ''), f.read())
 
 
