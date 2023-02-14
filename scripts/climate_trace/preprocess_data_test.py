@@ -6,12 +6,8 @@ expected output.
 import csv
 import io
 import os
-import sys
 import unittest
 from .preprocess_data import *
-
-module_dir_ = os.path.dirname(__file__)
-sys.path.insert(0, module_dir_)
 
 FIELDNAMES = [
     'observation_about', 'observation_date', 'variable_measured', 'value'

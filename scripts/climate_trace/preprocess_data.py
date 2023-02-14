@@ -5,7 +5,11 @@ It imports data from Climate Trace URLs and creates a cleaned 'output.csv'
 import csv
 import datetime
 import json
+import os
 import requests
+import sys
+
+sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
 YEAR = datetime.date.today().year
 URL = 'https://api.dev.climatetrace.org/v3/emissions/timeseries/sectors{sector}?since=2010&to={year}{continents}{countries}'
