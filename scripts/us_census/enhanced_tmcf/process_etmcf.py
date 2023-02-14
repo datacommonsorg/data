@@ -294,7 +294,10 @@ def _write_modified_csv(original_csv_path, output_csv_path,
             output_rows.append(row_dict)
 
     with open(output_csv_path, 'w', newline='') as output_csv:
-        writer = csv.DictWriter(output_csv, fieldnames=csv_column_names)
+        writer = csv.DictWriter(output_csv,
+                                fieldnames=csv_column_names,
+                                doublequote=False,
+                                escapechar='\\')
         writer.writeheader()
         for row_dict in output_rows:
             writer.writerow(row_dict)
@@ -406,3 +409,13 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
     _write_modified_csv(input_csv_filepath, csv_out, new_csv_columns,
                         geo_ids_to_dcids, geo_ids_not_found)
 
+
+input_path = os.path.join('testdata', 'input')
+output_path = os.path.join('testdata', 'output')
+input_etmcf_filename = 'ECNBASIC2012.EC1200A1'
+csv_filename = 'ECNBASIC2012.EC1200A1'
+output_tmcf_filename = input_etmcf_filename + "_processed"
+output_csv_filename = csv_filename + "_processed"
+process_enhanced_tmcf(input_path, output_path, input_etmcf_filename,
+                      csv_filename + '-Data', output_tmcf_filename,
+                      output_csv_filename)
