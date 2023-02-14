@@ -26,7 +26,7 @@ class PreprocessDataTest(unittest.TestCase):
         output = io.StringIO()
         writer = csv.DictWriter(output, fieldnames=FIELDNAMES)
         writer.writeheader()
-        
+
         # Test Earth
         with open(os.path.join(test_dir, 'earth.json')) as f:
             write_emissions(writer, json.load(f))
