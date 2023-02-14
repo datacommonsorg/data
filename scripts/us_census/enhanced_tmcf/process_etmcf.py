@@ -300,6 +300,10 @@ def _write_modified_csv(original_csv_path, output_csv_path,
                                 escapechar='\\')
         writer.writeheader()
         for row_dict in output_rows:
+            # Ensure all string types are escaped properly.
+            if "NAME" in row_dict and isinstance(row_dict["NAME"], str):
+                row_dict["NAME"] = "\"" + str(row_dict["NAME"]) + "\""
+
             writer.writerow(row_dict)
 
 
