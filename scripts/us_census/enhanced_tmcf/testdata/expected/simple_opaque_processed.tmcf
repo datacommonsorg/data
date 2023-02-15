@@ -5,7 +5,7 @@ name: C:simple_opaque_processed->NAME
 
 Node: E:simple_opaque_processed->E1
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: C:simple_opaque_processed->new_col_0
 name: C:simple_opaque_processed->new_col_1
 populationType: schema:Thing

@@ -11,7 +11,7 @@ footnote: C:T->GEO_ID_F
 
 Node: E:T->E1
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: T:ESTAB?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP                                           
 name: T:ESTAB?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL
 populationType: schema:Thing

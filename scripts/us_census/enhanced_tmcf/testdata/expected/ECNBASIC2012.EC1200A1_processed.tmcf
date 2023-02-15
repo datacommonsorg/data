@@ -12,7 +12,7 @@ observationDate: C:ECNBASIC2012.EC1200A1_processed->YEAR
 
 Node: E:ECNBASIC2012.EC1200A1_processed->E1.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: C:ECNBASIC2012.EC1200A1_processed->new_col_0
 name: C:ECNBASIC2012.EC1200A1_processed->new_col_1
 populationType: schema:Thing
@@ -28,7 +28,7 @@ stdError: C:ECNBASIC2012.EC1200A1_processed->RCPTOT_S
 
 Node: E:ECNBASIC2012.EC1200A1_processed->E2.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: C:ECNBASIC2012.EC1200A1_processed->new_col_2
 name: C:ECNBASIC2012.EC1200A1_processed->new_col_3
 populationType: schema:Thing
@@ -44,7 +44,7 @@ stdError: C:ECNBASIC2012.EC1200A1_processed->PAYANN_S
 
 Node: E:ECNBASIC2012.EC1200A1_processed->E3.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: C:ECNBASIC2012.EC1200A1_processed->new_col_4
 name: C:ECNBASIC2012.EC1200A1_processed->new_col_5
 populationType: schema:Thing
@@ -60,7 +60,7 @@ stdError: C:ECNBASIC2012.EC1200A1_processed->EMP_S
 
 Node: E:ECNBASIC2012.EC1200A1_processed->E4.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: C:ECNBASIC2012.EC1200A1_processed->new_col_6
 name: C:ECNBASIC2012.EC1200A1_processed->new_col_7
 populationType: schema:Thing
@@ -76,7 +76,7 @@ stdError: C:ECNBASIC2012.EC1200A1_processed->PAYQTR1_S
 
 Node: E:ECNBASIC2012.EC1200A1_processed->E5.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: C:ECNBASIC2012.EC1200A1_processed->new_col_8
 name: C:ECNBASIC2012.EC1200A1_processed->new_col_9
 populationType: schema:Thing

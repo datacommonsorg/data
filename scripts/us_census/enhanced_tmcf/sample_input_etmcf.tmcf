@@ -18,7 +18,7 @@ observationDate: C:T->YEAR
 
 Node: E:T->E1.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: T:ESTAB?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP                                           
 name: T:ESTAB?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL
 populationType: schema:Thing
@@ -34,7 +34,7 @@ stdError: C:T->RCPTOT_S
 
 Node: E:T->E2.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: T:RCPTOT?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP                                           
 name: T:RCPTOT?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL
 populationType: schema:Thing
@@ -50,7 +50,7 @@ stdError: C:T->PAYANN_S
 
 Node: E:T->E3.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: T:PAYANN?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP                                           
 name: T:PAYANN?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL
 populationType: schema:Thing
@@ -66,7 +66,7 @@ stdError: C:T->EMP_S
 
 Node: E:T->E4.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: T:EMP?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP                                           
 name: T:EMP?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL
 populationType: schema:Thing
@@ -82,7 +82,7 @@ stdError: C:T->PAYQTR1_S
 
 Node: E:T->E5.5
 typeOf: dcs:StatisticalVariable
-statType: measurementResult
+statType: measuredValue
 dcid: T:PAYQTR1?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP                                           
 name: T:PAYQTR1?C:T->NAICS2012=C:T->NAICS2012_LABEL&C:T->TAXSTAT=C:T->TAXSTAT_LABEL&C:T->TYPOP=C:T->TYPOP_LABEL
 populationType: schema:Thing
