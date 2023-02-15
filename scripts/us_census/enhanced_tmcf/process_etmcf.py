@@ -162,7 +162,7 @@ def _process_var_measured_new_column(
 
     # TODO: remove these checks when a better format for opaque mapping is agreed.
     query_format = query_format.replace("?", "__")
-    query_format = query_format.replace("&", "++")
+    query_format = query_format.replace("&", "%%")
     query_format = query_format.replace("=", "--")
 
     return _verify_return_new_col(query_format, new_csv_columns,
