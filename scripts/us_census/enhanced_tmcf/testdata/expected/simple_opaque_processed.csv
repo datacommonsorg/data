@@ -1,0 +1,4 @@
+GEO_ID,NAICS2012,TAXSTAT,TYPOP,YEAR,ESTAB,new_col_0
+country/USA,21,0,0,2012,25417,data.census.gov/table/EC1200A1/variable/ESTAB__naics2012--21++taxstat--0++typop--0
+country/USA,22,0,0,2012,17595,data.census.gov/table/EC1200A1/variable/ESTAB__naics2012--22++taxstat--0++typop--0
+country/USA,23,0,0,2012,598065,data.census.gov/table/EC1200A1/variable/ESTAB__naics2012--23++taxstat--0++typop--0

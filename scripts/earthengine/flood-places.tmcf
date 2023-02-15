@@ -1,0 +1,5 @@
+Node: E:Place->E0
+dcid: C:Place->s2CellId
+typeOf: C:Place->typeOf
+containedInPlace: C:Place->containedInPlace
+name: C:Place->name
