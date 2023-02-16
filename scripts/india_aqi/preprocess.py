@@ -21,7 +21,7 @@ import zipfile
 module_dir = os.path.dirname(__file__)
 
 # AQI_STATIONS_FILE has list of Air Quality stations along with its DCIDs
-AQI_STATIONS_FILE = "India_AQI-stations_dcids_lgd.csv"
+AQI_STATIONS_FILE = "CPCB_AirQualitySites.csv"
 
 
 class AQIDataLoader:

@@ -42,8 +42,8 @@ class TestPreprocess(unittest.TestCase):
         result_data = result_file.read()
         result_file.close()
 
-        os.remove(os.path.join(module_dir_, "test/output.csv"))
         loader._delete_extracted_files(extract_path)
+        os.remove(os.path.join(module_dir_, "test/output.csv"))
 
         self.assertEqual(u'{}'.format(expected_data), result_data)
 
