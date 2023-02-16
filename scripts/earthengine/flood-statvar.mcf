@@ -1,0 +1,6 @@
+Node: dcid:Area_FloodEvent
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FloodEvent
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+

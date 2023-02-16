@@ -1,0 +1,54 @@
+Namespace:
+T=http://data.census.gov/table/EC1200A1
+
+DATAFILES=<server location>/ECNBASIC2012.EC1200A1.datafile.txt
+
+Node: E:T->E0
+typeOf: schema:Place
+geoId: C:T->GEO_ID
+name: C:T->NAME
+footnote: C:T->GEO_ID_F
+
+Node: E:T->E1
+typeOf: schema:StatVarObservation
+name: Number of establishments
+value: C:T->ESTAB
+variableMeasured: T:ESTAB?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP
+observationAbout: E:T->E0
+observationDate: C:T->YEAR
+
+Node: E:T->E2
+typeOf: schema:StatVarObservation
+name: Sales, value of shipments, or revenue ($1,000)
+value: C:T->RCPTOT
+variableMeasured: T:RCPTOT?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP
+observationAbout: E:T->E0
+observationDate: C:T->YEAR
+stdError: C:T->RCPTOT_S
+
+Node: E:T->E3
+typeOf: schema:StatVarObservation
+name: Annual payroll ($1,000)
+value: C:T->PAYANN
+variableMeasured: T:PAYANN?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP
+observationAbout: E:T->E0
+observationDate: C:T->YEAR
+stdError: C:T->PAYANN_S
+
+Node: E:T->E4
+typeOf: schema:StatVarObservation
+name: Number of employees
+value: C:T->EMP
+variableMeasured: T:EMP?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP
+observationAbout: E:T->E0
+observationDate: C:T->YEAR
+stdError: C:T->EMP_S
+
+Node: E:T->E5
+typeOf: schema:StatVarObservation
+name: First-quarter payroll ($1,000)
+value: C:T->PAYQTR1
+variableMeasured: T:PAYQTR1?naics2012=C:T->NAICS2012&taxstat=C:T->TAXSTAT&typop=C:T->TYPOP
+observationAbout: E:T->E0
+observationDate: C:T->YEAR
+stdError: C:T->PAYQTR1_S
