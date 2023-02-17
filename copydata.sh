@@ -26,7 +26,7 @@ declare -A foldermap
 foldermap["scripts/stanford"]="gs://datcom-stanford-resources/imports"
 
 
-# This function run "git diff" between latest and the previosu commit on the
+# This function run "git diff" between latest and the previous commit on the
 # specified folder (from function argument $1) and output a list of file names.
 changes() {
   git diff --name-only --diff-filter=AMDR --cached HEAD^ $1
@@ -44,7 +44,7 @@ for folder in ${!foldermap[@]}; do
       import_group=$(basename $dir)
       echo $import_group
       # Should only copy content under /data folder for each import group.
-      # In GCS, there are /internal folders that should not be overwrite.
+      # In GCS, there are /internal folders that should not be overwritten.
       # TODO(shifucun): Handle copy GCS reference. In this case, user would
       # store a link but not actual data in this repo.
       gsutil cp -r "$folder/$import_group/data/*" "$gcs_path/$import_group/data/"
