@@ -37,7 +37,7 @@ The Columns for the csv files are as follows
 
 Run the test cases
 
-- `/bin/python3 -m unittest scripts/world_bank/subnational_population/process_test.py`
+- `/bin/python3 scripts/world_bank/subnational_population/process_test.py`
 
 ### Import Procedure
 
@@ -54,4 +54,4 @@ In the above mentioned link slect the following give:
 
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
-- `/bin/python3 scripts/world_bank/subnational_population/process.py`
+- `/bin/python3 scripts/world_bank/subnational_population/process.py 2>&1 | tee subnational.log`
