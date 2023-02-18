@@ -210,7 +210,8 @@ def process_dimensions(cprop_mapping, value_mapping, person_dimensions, entry,
     return sv_dcid, has_empty_mapped_val
 
 
-def generate_csv_and_sv(data_files, schema_mapping, sv_dcid_mapping, output_dir):
+def generate_csv_and_sv(data_files, schema_mapping, sv_dcid_mapping,
+                        output_dir):
     """ Generate the csv and stat var mcf files.
   Args:
       data_files: list of the raw data json files
@@ -305,7 +306,8 @@ def generate_csv_and_sv(data_files, schema_mapping, sv_dcid_mapping, output_dir)
                     ])
         with open(os.path.join(output_dir, "who_sv.mcf"), "w+") as mcf_file:
             mcf_file.write("\n".join(mcf_result))
-        with open(os.path.join(output_dir, "skipped_mcf_sv.json"), "w+") as skipped_file:
+        with open(os.path.join(output_dir, "skipped_mcf_sv.json"),
+                  "w+") as skipped_file:
             skipped_mcf_sv_result = {}
             for sv in skipped_mcf_sv:
                 skipped_mcf_sv_result[sv] = list(skipped_mcf_sv[sv])

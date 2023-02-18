@@ -42,7 +42,8 @@ flags.DEFINE_string(
 )
 
 
-def import_data(data_files, curated_dim_file, curated_sv_file, output_dir, artifact_dir):
+def import_data(data_files, curated_dim_file, curated_sv_file, output_dir,
+                artifact_dir):
     schema_mapping = generate_schema(data_files, curated_dim_file, artifact_dir,
                                      output_dir)
     sv_dcid_mapping = {}
@@ -57,8 +58,8 @@ def main(args):
     if FLAGS.data_dir:
         for f in os.listdir(data_dir):
             data_files.append(os.path.join(data_dir, f))
-    import_data(data_files, FLAGS.curated_dim_file, FLAGS.curated_sv_file, FLAGS.output_dir,
-                FLAGS.artifact_dir)
+    import_data(data_files, FLAGS.curated_dim_file, FLAGS.curated_sv_file,
+                FLAGS.output_dir, FLAGS.artifact_dir)
 
 
 if __name__ == '__main__':

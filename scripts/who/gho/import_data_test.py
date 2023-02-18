@@ -37,14 +37,17 @@ class TestImportData(unittest.TestCase):
             os.path.join(TEST_DATA_DIR, "Adult_curr_cig_smoking.json")
         ]
         curated_dim_map = os.path.join(MODULE_DIR, "curated_dim_map.json")
-        curated_sv_map = os.path.join(TEST_DATA_DIR, "test_curated_sv_dcid_map.json")
+        curated_sv_map = os.path.join(TEST_DATA_DIR,
+                                      "test_curated_sv_dcid_map.json")
         expected_csv = os.path.join(TEST_DATA_DIR, "expected_csv.csv")
         expected_sv_mcf = os.path.join(TEST_DATA_DIR, "expected_sv.mcf")
         expected_generated_schema_mcf = os.path.join(
             TEST_DATA_DIR, "expected_generated_schema.mcf")
-        expected_skipped_mcf_sv = os.path.join(TEST_DATA_DIR, "expected_skipped_mcf_sv.json")
+        expected_skipped_mcf_sv = os.path.join(TEST_DATA_DIR,
+                                               "expected_skipped_mcf_sv.json")
 
-        import_data(data_files, curated_dim_map, curated_sv_map, TEST_DATA_DIR, "")
+        import_data(data_files, curated_dim_map, curated_sv_map, TEST_DATA_DIR,
+                    "")
 
         # check csv.
         with open(os.path.join(TEST_DATA_DIR, "who.csv"), 'r+') as actual_f:
@@ -75,6 +78,7 @@ class TestImportData(unittest.TestCase):
         with open(expected_skipped_mcf_sv, 'r+') as expected_f:
             expected: str = expected_f.read()
         self.assertEqual(actual, expected)
+
 
 if __name__ == "__main__":
     unittest.main()
