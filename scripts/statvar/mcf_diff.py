@@ -324,6 +324,7 @@ def diff_mcf_files(file1: str,
     diff_str = diff_mcf_nodes(nodes1, nodes2, config, counters)
     counters.print_counters()
     print(f'Diff:{file1} vs {file2}:\n{diff_str}')
+    return diff_str
 
 
 def main(_):
