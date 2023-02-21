@@ -872,7 +872,7 @@ class StatVarsMap:
                     f'Looking up DC API for dcids: {api_lookup_dcids} from PV map.'
                 )
                 schema_nodes = dc_api_is_defined_dcid(api_lookup_dcids,
-                                                      self._config.gets())
+                                                      self._config.get_configs())
                 # Update cache
                 self._dc_api_ids_cache.update(schema_nodes)
                 _DEBUG and logging.debug(
