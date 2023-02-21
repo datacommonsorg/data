@@ -79,7 +79,7 @@ class TestProcess(unittest.TestCase):
                     pv_map_files=_pv_map)
 
             with open(MCF_FILE_PATH, encoding="UTF-8") as mcf_file:
-                self.actual_mcf_data = mcf_file.read()
+                self.actual_mcf_data = mcf_file.read()[1:]
 
             with open(TMCF_FILE_PATH, encoding="UTF-8") as tmcf_file:
                 self.actual_tmcf_data = tmcf_file.readlines()
@@ -94,13 +94,16 @@ class TestProcess(unittest.TestCase):
         """
         expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
                                               "subnational.mcf")
+        with open(expected_mcf_file_path,
+                  encoding="UTF-8") as expected_mcf_file:
+            expected_mcf_data = expected_mcf_file.read()
 
         counters = Counters()
-        diff_mcf = diff_mcf_files(expected_mcf_file_path, self.actual_mcf_data,
+        diff_mcf = diff_mcf_files(expected_mcf_data, self.actual_mcf_data,
                                   {'show_diff_nodes_only': True}, counters)
         self.assertEqual(
-            diff_mcf, None, f'Found diffs in MCF nodes:' +
-            f'"{self.actual_mcf_data}" vs "{expected_mcf_file_path}":' +
+            diff_mcf, '', f'Found diffs in MCF nodes:' +
+            f'"{expected_mcf_data}" vs "{self.actual_mcf_data}":' +
             f'{diff_mcf}\nCounters: {counters.get_counters_string()}')
         # Creating expected tmcf file
         expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
