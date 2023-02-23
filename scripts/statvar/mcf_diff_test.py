@@ -23,6 +23,9 @@ from absl import logging
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 _TEST_DIR = os.path.join(_SCRIPT_DIR, 'test_data')
 
@@ -127,7 +130,8 @@ class TestMCFDiff(unittest.TestCase):
 
         counters = Counters()
         diff_str = mcf_diff.diff_mcf_files(self._sample_mcf_file, mcf_file2,
-                                           mcf_diff.get_diff_config(), counters)
+                                           {'ignore_property': ['name']},
+                                           counters)
         expected_diff_str = '''- 
 + Node: dcid:Node1
 + typeOf: dcid:Class
@@ -139,6 +143,6 @@ class TestMCFDiff(unittest.TestCase):
 
 '''
         self.assertEqual(diff_str, expected_diff_str)
-        self.assertEqual(counters.get_counter('nodes matched'), 2)
-        self.assertEqual(counters.get_counter('PVs matched'), 8)
-        self.assertEqual(counters.get_counter('dcid missing in nodes1'), 1)
+        self.assertEqual(counters.get_counter('nodes-matched'), 2)
+        self.assertEqual(counters.get_counter('PVs-matched'), 9)
+        self.assertEqual(counters.get_counter('dcid-missing-in-nodes1'), 1)

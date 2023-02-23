@@ -30,12 +30,12 @@ _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('maps_api_key', '', 'Google Maps API key')
 
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 from counters import Counters
 from config_map import ConfigMap
@@ -181,7 +181,7 @@ class PlaceResolver:
                     })
                     coords_to_key[place_key] = key
             else:
-              logging.debug(f'Skipping empty lat/lng in {key}:{place}')
+                logging.debug(f'Skipping empty lat/lng in {key}:{place}')
 
         # Resolve any remaining lat/lng places.
         resolved_place_ids = {}
@@ -205,7 +205,8 @@ class PlaceResolver:
                     [resolved_place['latitude'], resolved_place['longitude']])
                 input_key = coords_to_key.get(place_key, '')
                 dcids = resolved_place.get('placeDcids', '')
-                self._set_cache_value(self._place_cache, place_key, resolved_place)
+                self._set_cache_value(self._place_cache, place_key,
+                                      resolved_place)
                 if dcids and input_key in results:
                     results[input_key]['placeDcids'] = dcids
         logging.debug(f'Returning resolved latlngs {results}')
@@ -314,7 +315,7 @@ class PlaceResolver:
         '''Returns the value in the cache dictionary for the key.'''
         return cache_dict.get(self._get_cache_key(cache_key), None)
 
-    def _set_cache_value(self, cache_dict: dict, cache_key: str, value:dict):
+    def _set_cache_value(self, cache_dict: dict, cache_key: str, value: dict):
         '''Set the result into the cache to be used for future lookups.'''
         cache_dict[cache_key] = value
 

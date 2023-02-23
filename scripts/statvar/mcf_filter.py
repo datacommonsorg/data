@@ -48,6 +48,9 @@ flags.DEFINE_bool('ignore_existing_nodes', True,
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 from counters import Counters
 from dc_api_wrapper import dc_api_get_node_property_values
