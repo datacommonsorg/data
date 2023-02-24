@@ -14,7 +14,6 @@
 
 import os
 import unittest
-import zipfile
 from india_aqi.preprocess import AQIDataLoader
 
 module_dir_ = os.path.dirname(__file__)
@@ -34,7 +33,7 @@ class TestPreprocess(unittest.TestCase):
         extract_path = os.path.join(module_dir_, "./data/")
         loader = AQIDataLoader(source=os.path.join(module_dir_,
                                                    'test/input.csv'),)
-        loader.load()
+        loader.load(module_dir_)
         loader.process()
         loader.save(os.path.join(module_dir_, "test/output.csv"))
 
