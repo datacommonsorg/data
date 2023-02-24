@@ -33,7 +33,7 @@ class TestPreprocess(unittest.TestCase):
         extract_path = os.path.join(module_dir_, "./data/")
         loader = AQIDataLoader(source=os.path.join(module_dir_,
                                                    'test/input.csv'),)
-        loader.load(module_dir_)
+        loader.load()
         loader.process()
         loader.save(os.path.join(module_dir_, "test/output.csv"))
 

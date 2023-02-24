@@ -98,13 +98,13 @@ class AQIDataLoader:
             if file.startswith('Table'):
                 os.remove(os.path.join(extracted_path, file))
 
-    def load(self, MODULE):
+    def load(self):
         """
         This function reads the source file, and loads and transforms the source data
         as a part of the pre processing step. 
         """
         df = pd.read_csv(self.source_file)
-        dcid_file_path = os.path.join(MODULE, 'data', AQI_STATIONS_FILE)
+        dcid_file_path = os.path.join(module_dir, 'data', AQI_STATIONS_FILE)
         dcid_df = pd.read_csv(dcid_file_path)
 
         # Converting the date and time columns in source data to
@@ -168,7 +168,7 @@ def main():
         # All the extracted data file names start with 'Table'
         if file.startswith('Table'):
             loader = AQIDataLoader(source=source_file)
-            loader.load(module_dir)
+            loader.load()
             loader.process()
             loader.save(csv_file_path)
 
