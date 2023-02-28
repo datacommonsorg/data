@@ -49,6 +49,7 @@ The following steps resolve place and create mapping dcids for place.
 
 ### Import Procedure
 
-The below script will .
+The below script will run the preprocess script and generate mapped places.
+Give the api key and run the code.
 
-`/bin/python3 scripts/world_bank/subnational_population/preprocess.py`
+`/bin/python3 scripts/world_bank/subnational_population/preprocess.py --maps_key=''`

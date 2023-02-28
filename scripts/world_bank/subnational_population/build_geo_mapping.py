@@ -60,7 +60,6 @@ def build_admin_area_dict(country_df: pd.DataFrame) -> pd.DataFrame:
         for key, val_list in resp.items():
             temp_df = pd.DataFrame(val_list)
             temp_df["parent_dc_id"] = key
-            #print(temp_df)
             contained_in_df = pd.concat([contained_in_df, temp_df],
                                         ignore_index=True,
                                         axis=0)
@@ -77,10 +76,8 @@ def build_admin_area_dict(country_df: pd.DataFrame) -> pd.DataFrame:
         lambda x: pd.Series(x['leve2_geo_name'], dtype='string'),
         axis=1).stack().reset_index(level=1, drop=True)
     level2name_series.name = 'leve2_geo_name'
-    print(level2name_series)
     contained_in_df = contained_in_df.drop('leve2_geo_name',
                                            axis=1).join(level2name_series)
-    print(contained_in_df.head())
     return (contained_in_df)
 
 
@@ -107,10 +104,8 @@ def map_admin_area(row) -> str:
     x = admin1_df.loc[(admin1_df['country_name'] == row['level_name']) &
                       (admin1_df['leve2_geo_name'] == row['geo_name']),
                       'leve2_geo_id']
-    #print(f"type:{type(x)}, value:{x}")
     if len(x) > 0:
         return (x[0])
-        print(f"{row['level_name']} , {row['geo_name']} -{x[0]}")
     else:
         return np.nan
 
@@ -126,7 +121,6 @@ def map_country(row) -> str:
 def dcid_resolve():
     global country_df, admin1_df, input_geo_df
     country_df = read_country_file()
-    print(f"country columns {country_df.columns.to_list()}")
     admin1_df = build_admin_area_dict(country_df)
     admin1_df.to_csv(tmp_map_file, index=False)
 
