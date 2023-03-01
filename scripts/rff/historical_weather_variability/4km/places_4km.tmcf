@@ -1,0 +1,6 @@
+Node: dcid:places_4km->dcid
+typeOf: dcs:GeoGridPlace_4KM
+latitude: C:places_4km->latitude
+longitude: C:places_4km->longitude
+name: C:places_4km->dcid
+containedInPlace: C:places_4km->containedInPlace

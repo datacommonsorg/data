@@ -1,0 +1,223 @@
+{
+    "populationType": {
+        "total offenses": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "white": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "WhiteAlone",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "black or african american": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "BlackOrAfricanAmericanAlone",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "american indian or alaska native": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "AmericanIndianOrAlaskaNativeAlone",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "asian": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "AsianAlone",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "asian or pacific islander": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "AsianOrPacificIslander",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "native hawaiian or other pacific islander": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "NativeHawaiianOrOtherPacificIslanderAlone",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "multiple races": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderRace",
+            "offenderRace": "TwoOrMoreRaces",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "unknown race": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "UnknownOffender",
+            "offenderRace": "UnknownRace",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "hispanic or latino": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderEthnicity",
+            "offenderEthnicity": "HispanicOrLatino",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "not hispanic or latino": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderEthnicity",
+            "offenderEthnicity": "NotHispanicOrLatino",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "group of multiple ethnicities": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "KnownOffenderEthnicity",
+            "offenderEthnicity": "UCR_MultipleEthnicity",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "unknown ethnicity": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "UnknownOffender",
+            "offenderEthnicity": "UCR_UnknownEthnicity",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "unknown offender": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Offense",
+            "offenderType": "UnknownOffender",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "pvs": {
+        "total": {},
+        "crimes against persons": {
+            "crimeType": "CrimeAgainstPerson"
+        },
+        "crimes against persons:": {
+            "crimeType": "CrimeAgainstPerson"
+        },
+        "crimes against property": {
+            "crimeType": "CrimeAgainstProperty"
+        },
+        "murder and nonnegligent manslaughter": {
+            "crimeType": "MurderAndNonNegligentManslaughter"
+        },
+        "rape": {
+            "crimeType": "ForcibleRape"
+        },
+        "rape (revised definition)": {
+            "crimeType": "ForcibleRape"
+        },
+        "forcible rape": {
+            "crimeType": "ForcibleRape"
+        },
+        "aggravated assault": {
+            "crimeType": "AggravatedAssault"
+        },
+        "simple assault": {
+            "crimeType": "SimpleAssault"
+        },
+        "intimidation": {
+            "crimeType": "Intimidation"
+        },
+        "human trafficking, commercial sex acts": {
+            "crimeType": "HumanTrafficking_CommercialSexActs"
+        },
+        "other crimes against person": {
+            "crimeType": "UCR_OtherCrimesAgainstPerson"
+        },
+        "other crimes against property": {
+            "crimeType": "UCR_OtherCrimesAgainstProperty"
+        },
+        "robbery": {
+            "crimeType": "Robbery"
+        },
+        "burglary": {
+            "crimeType": "Burglary"
+        },
+        "larceny-theft": {
+            "crimeType": "LarcenyTheft"
+        },
+        "motor vehicle theft": {
+            "crimeType": "MotorVehicleTheft"
+        },
+        "arson": {
+            "crimeType": "Arson"
+        },
+        "destruction/damage/vandalism": {
+            "crimeType": "DestructionOrDamageOrVandalismOfProperty"
+        },
+        "destruction/damage/ vandalism": {
+            "crimeType": "DestructionOrDamageOrVandalismOfProperty"
+        },
+        "crimes against society": {
+            "crimeType": "CrimeAgainstSociety"
+        }
+    },
+    "dpv": [
+        {
+            "cprop": "offenderRace",
+            "dpv": {
+                "prop": "offenderType",
+                "val": "KnownOffenderRace"
+            }
+        },
+        {
+            "cprop": "offenderEthnicity",
+            "dpv": {
+                "prop": "offenderType",
+                "val": "KnownOffenderEthnicity"
+            }
+        }
+    ]
+}

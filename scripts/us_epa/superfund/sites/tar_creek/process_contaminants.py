@@ -20,6 +20,14 @@ import numpy as np
 import pandas as pd
 from absl import app, flags
 
+FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    'report_input_file', './data/tar_creek_2020_corrected.csv',
+    'Location of the intermediate csv file from process_report2020.py script')
+flags.DEFINE_string(
+    'processed_output_path', './data/output',
+    'Path to the directory where generated files are to be stored.')
+
 _UNIT_MAP = {
     "Cond.": "dcs:MicroseimensPerCentimeter",
     "pH": "",
@@ -82,7 +90,7 @@ _BASE_SV_MAP = {
     "Zinc": {
         "populationType": "BodyOfWater",
         "contaminatedThing": "GroundWater",
-        "contaminant": "inChIKey/HCHKCACWOHOZIP-UHFFFAOYSA-N",
+        "contaminant": "ZincElement",
         "measuredProperty": "concentration"
     },
     "Cadmium": {
@@ -116,7 +124,7 @@ def gen_statvar_dcid(sv_dict: dict) -> str:
         dcid_str.append(sv_dict['contaminantStatus'])
     if 'contaminant' in sv_dict.keys():
         # Handle the case where for contaminant = zinc, dcid is the name and not the InChiKey
-        if sv_dict['contaminant'] == 'inChIKey/HCHKCACWOHOZIP-UHFFFAOYSA-N':
+        if sv_dict['contaminant'] == 'ZincElement':
             dcid_str.append('Zinc')
         else:
             dcid_str.append(sv_dict['contaminant'])
@@ -131,6 +139,11 @@ def gen_statvar_dcid(sv_dict: dict) -> str:
     if dcid_str == 'Concentration_BodyOfWater_GroundWater':
         return 'DissolvedOxygen_BodyOfWater_GroundWater'
     return dcid_str
+
+
+#TODO[sharadshriram]: Complete the implementation
+def gen_stavar_name(sv_dict: dict) -> str:
+    pass
 
 
 def make_stat_var_dict(contaminant_type: list,
@@ -150,6 +163,8 @@ def make_stat_var_dict(contaminant_type: list,
                 if contaminant_state == 'Dissolved':
                     base_sv['contaminantStatus'] = 'DissolvedContaminant'
                 dcid_str = gen_statvar_dcid(base_sv)
+                if 'ZincElement' in dcid_str:
+                    dcid_str = dcid_str.replace('ZincElement', 'Zinc')
                 key = 'Node: dcid:' + dcid_str
                 base_sv['typeOf'] = 'StatisticalVariable'
                 base_sv['statType'] = 'measuredValue'
@@ -244,15 +259,8 @@ def process_intermediate_csv(input_file: str, output_path: str) -> None:
 
 
 def main(_) -> None:
-    FLAGS = flags.FLAGS
-    flags.DEFINE_string(
-        'input_file', './data/tar_creek_2020_corrected.csv',
-        'Location of the intermediate csv file from process_report2020.py script'
-    )
-    flags.DEFINE_string(
-        'output_path', './data/output',
-        'Path to the directory where generated files are to be stored.')
-    process_intermediate_csv(FLAGS.input_path, FLAGS.output_path)
+    process_intermediate_csv(FLAGS.report_input_file,
+                             FLAGS.processed_output_path)
 
 
 if __name__ == '__main__':

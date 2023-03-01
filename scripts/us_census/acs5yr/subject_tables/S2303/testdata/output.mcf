@@ -1,0 +1,2126 @@
+Node: dcid:Count_Person_16To64Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To64Years
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerYear40To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 49 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerYear40To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 49 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [27 39 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [27 39 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [14 26 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [14 26 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [1 13 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [1 13 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DidNotWork
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:DidNotWork
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DidNotWork
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:DidNotWork
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek35OrMoreHour
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek35OrMoreHour
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek15To34Hour
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek15To34Hour
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek15To34Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek15To34Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek15To34Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek15To34Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek1To14Hour
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek1To14Hour
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek1To14Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek1To14Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek1To14Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek1To14Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_UsualHoursWorked_Person_WorkedInThePast12Months
+measuredProperty: dcs:usualHoursWorked
+statType: dcs:meanValue
+populationType: dcs:Person
+workStatus: dcs:WorkedInThePast12Months
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To64Years_Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To64Years_Male
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerYear40To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 49 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerYear40To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 49 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [27 39 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [27 39 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [14 26 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [14 26 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [1 13 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [1 13 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_DidNotWork
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:DidNotWork
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_DidNotWork
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:DidNotWork
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek35OrMoreHour
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek35OrMoreHour
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek15To34Hour
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek15To34Hour
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek1To14Hour
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek1To14Hour
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_UsualHoursWorked_Person_Male_WorkedInThePast12Months
+measuredProperty: dcs:usualHoursWorked
+statType: dcs:meanValue
+populationType: dcs:Person
+gender: dcs:Male
+workStatus: dcs:WorkedInThePast12Months
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_16To64Years_Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_16To64Years_Female
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerYear40To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 49 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerYear40To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 49 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [27 39 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [27 39 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [14 26 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [14 26 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [1 13 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [1 13 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_DidNotWork
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:DidNotWork
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_DidNotWork
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:DidNotWork
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek35OrMoreHour
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek35OrMoreHour
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek15To34Hour
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek15To34Hour
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek1To14Hour
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek1To14Hour
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear40OrMoreWeek
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 - Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear50To52Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [50 52 Week]
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_UsualHoursWorked_Person_Female_WorkedInThePast12Months
+measuredProperty: dcs:usualHoursWorked
+statType: dcs:meanValue
+populationType: dcs:Person
+gender: dcs:Female
+workStatus: dcs:WorkedInThePast12Months
+age: [16 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek35OrMoreHour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek15To34Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek15To34Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek15To34Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek15To34Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek15To34Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek15To34Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek15To34Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek15To34Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek15To34Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek15To34Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek1To14Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek1To14Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek1To14Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek1To14Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek1To14Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek1To14Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek1To14Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek1To14Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WorkPerWeek1To14Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WorkPerWeek1To14Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_WorkedInThePast12Months
+measuredProperty: dcs:age
+statType: dcs:medianValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: [16 64 Years]
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek35OrMoreHour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek15To34Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_WorkPerWeek1To14Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Male_WorkedInThePast12Months
+measuredProperty: dcs:age
+statType: dcs:medianValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Male_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Male
+age: [16 64 Years]
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek35OrMoreHour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [35 - Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek15To34Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [15 34 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear48To49Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [48 49 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear40To47Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [40 47 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear27To39Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [27 39 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear14To26Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [14 26 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_WorkPerWeek1To14Hour_WorkPerYear1To13Week
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+usualHoursWorked: [1 14 Hour]
+workPeriod: [1 13 Week]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Female_WorkedInThePast12Months
+measuredProperty: dcs:age
+statType: dcs:medianValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:WorkedInThePast12Months
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Female_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Female_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+gender: dcs:Female
+age: [16 64 Years]
+workStatus: dcs:USC_FullTimeYearRoundWorker
+typeOf: dcs:StatisticalVariable
+

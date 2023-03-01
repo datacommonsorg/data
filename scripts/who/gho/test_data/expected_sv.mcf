@@ -14,14 +14,6 @@ emfExposureGroup: dcs:WHO/Public
 emfFrequency: dcs:WHO/Static
 populationType: dcs:Thing
 
-Node: dcid:WHO/EMFLIMITELECTRIC_Workers_Static
-typeOf: dcs:StatisticalVariable
-measuredProperty: dcs:who/EMFLIMITELECTRIC
-statType: dcs:measurementResult
-emfExposureGroup: dcs:WHO/Workers
-emfFrequency: dcs:WHO/Static
-populationType: dcs:Thing
-
 Node: dcid:WHO/WSH_8
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:who/WSH_8

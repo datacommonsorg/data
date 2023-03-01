@@ -1,0 +1,1939 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "1676160",
+        "NumPVSuccesses": "19667272",
+        "Existence_NumChecks": "17208863",
+        "NumNodeSuccesses": "2458409",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "14",
+        "StatsCheck_3_Sigma": "17",
+        "StrSplit_EmptyToken_value": "9274711",
+        "Sanity_MissingOrEmpty_value": "9274711",
+        "Existence_MissingReference_variableMeasured": "817284",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "14",
+        "StatsCheck_Data_Holes": "2"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_an.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ad.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_am.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ae.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ag.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aj.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_af.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ah.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ao.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ai.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aj.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_af.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aj.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyPrecipitation', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyPrecipitation', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyPrecipitation', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_af.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyPrecipitation', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyPrecipitation', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aj.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_af.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Count', property: 'value', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ac.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Count', property: 'value', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aj.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Count', property: 'value', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Length', property: 'value', node: 'E:WeatherVariability_Counties->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_af.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Count', property: 'value', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Count', property: 'value', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aj.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Length', property: 'value', node: 'E:WeatherVariability_Counties->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ac.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Intensity', property: 'value', node: 'E:WeatherVariability_Counties->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ah.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aj.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Length', property: 'value', node: 'E:WeatherVariability_Counties->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ah.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'InternannualRange_MonthlyPrecipitation', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_af.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Heatwave_Intensity', property: 'value', node: 'E:WeatherVariability_Counties->E0'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ai.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aj.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ah.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E0', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ad.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_af.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ae.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ao.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Count_HeatWaveEvent', property: 'variableMeasured', node: 'E:WeatherVariability_Counties->E2'",
+    "counterKey": "Existence_MissingReference_variableMeasured"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "geoId/39015",
+    "statVarDcid": "Count_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1990",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0",
+            "column": "Heatwave_Count"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "29954"
+          }]
+        }]
+      }, {
+        "date": "1991",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3",
+            "column": "Heatwave_Count"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "33058"
+          }]
+        }]
+      }],
+      "percentDifference": 3.0E8
+    }]
+  }, {
+    "placeDcid": "geoId/39015",
+    "statVarDcid": "NumberOfDays_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2014",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+            "lineNumber": "4450"
+          }]
+        }]
+      }, {
+        "date": "2015",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "6",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+            "lineNumber": "7554"
+          }]
+        }]
+      }],
+      "percentDifference": 200.0
+    }]
+  }, {
+    "placeDcid": "geoId/39015",
+    "statVarDcid": "Intensity_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1990",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.309037983417511",
+            "column": "Heatwave_Intensity"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "29954"
+          }]
+        }]
+      }, {
+        "date": "1991",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.03018763065338",
+            "column": "Heatwave_Intensity"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "33058"
+          }]
+        }]
+      }],
+      "percentDifference": 233.35
+    }]
+  }, {
+    "placeDcid": "geoId/39015",
+    "statVarDcid": "StandardizedPrecipitationIndex_Atmosphere",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1995",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.01388195200052",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "45474"
+          }]
+        }]
+      }, {
+        "date": "1996",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.94314862143175",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "48578"
+          }]
+        }]
+      }],
+      "percentDifference": 13897.66
+    }]
+  }, {
+    "placeDcid": "geoId/39015",
+    "statVarDcid": "StandardizedPrecipitationIndex_Atmosphere",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1995-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.00337362461066696",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ag.csv",
+            "lineNumber": "56962"
+          }]
+        }]
+      }, {
+        "date": "1995-05",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.15044358603997",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ag.csv",
+            "lineNumber": "60066"
+          }]
+        }]
+      }],
+      "percentDifference": 34001.11
+    }]
+  }, {
+    "placeDcid": "geoId/37001",
+    "statVarDcid": "Count_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1985",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0",
+            "column": "Heatwave_Count"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "14274"
+          }]
+        }]
+      }, {
+        "date": "1986",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3",
+            "column": "Heatwave_Count"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "17378"
+          }]
+        }]
+      }],
+      "percentDifference": 3.0E8
+    }]
+  }, {
+    "placeDcid": "geoId/37001",
+    "statVarDcid": "Intensity_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1985",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.241763210296631",
+            "column": "Heatwave_Intensity"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "14274"
+          }]
+        }]
+      }, {
+        "date": "1986",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.996070180620466",
+            "column": "Heatwave_Intensity"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "17378"
+          }]
+        }]
+      }],
+      "percentDifference": 312.0
+    }]
+  }, {
+    "placeDcid": "geoId/37001",
+    "statVarDcid": "InterannualRange_Monthly_Precipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1999",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "335.651302882603",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "57730"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2014",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "68.9891250474112",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+            "lineNumber": "4290"
+          }]
+        }]
+      }, {
+        "date": "2015",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "154.455981799534",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ab.csv",
+            "lineNumber": "7394"
+          }]
+        }]
+      }],
+      "percentDifference": 123.88
+    }]
+  }, {
+    "placeDcid": "geoId/37001",
+    "statVarDcid": "StandardizedPrecipitationIndex_Atmosphere",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2006",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.1012646049732",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "79458"
+          }]
+        }]
+      }, {
+        "date": "2007",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-2.40619848936303",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "82562"
+          }]
+        }]
+      }],
+      "percentDifference": -2476.15
+    }]
+  }, {
+    "placeDcid": "geoId/37001",
+    "statVarDcid": "StandardizedPrecipitationIndex_Atmosphere",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2000-10",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-4.42691081040378",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ai.csv",
+            "lineNumber": "61666"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2020-07",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-0.000772002279428589",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+            "lineNumber": "97314"
+          }]
+        }]
+      }, {
+        "date": "2020-08",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.26458282857639",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aq.csv",
+            "lineNumber": "418"
+          }]
+        }]
+      }],
+      "percentDifference": 163905.58
+    }]
+  }, {
+    "placeDcid": "geoId/18019",
+    "statVarDcid": "Count_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1984",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0",
+            "column": "Heatwave_Count"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "9986"
+          }]
+        }]
+      }, {
+        "date": "1985",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3",
+            "column": "Heatwave_Count"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "13090"
+          }]
+        }]
+      }],
+      "percentDifference": 3.0E8
+    }]
+  }, {
+    "placeDcid": "geoId/18019",
+    "statVarDcid": "NumberOfDays_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1982",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "3778"
+          }]
+        }]
+      }, {
+        "date": "1983",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "6",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "6882"
+          }]
+        }]
+      }],
+      "percentDifference": 200.0
+    }]
+  }, {
+    "placeDcid": "geoId/18019",
+    "statVarDcid": "Intensity_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1984",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.357774353027344",
+            "column": "Heatwave_Intensity"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "9986"
+          }]
+        }]
+      }, {
+        "date": "1985",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.07163248223773",
+            "column": "Heatwave_Intensity"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "13090"
+          }]
+        }]
+      }],
+      "percentDifference": 199.53
+    }]
+  }, {
+    "placeDcid": "geoId/18019",
+    "statVarDcid": "InterannualRange_Monthly_Precipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1994",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "87.3325757172148",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "41026"
+          }]
+        }]
+      }, {
+        "date": "1995",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "230.595966662391",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "44130"
+          }]
+        }]
+      }],
+      "percentDifference": 164.04
+    }]
+  }, {
+    "placeDcid": "geoId/18019",
+    "statVarDcid": "StandardizedPrecipitationIndex_Atmosphere",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1995",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-0.00371791512287838",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "44130"
+          }]
+        }]
+      }, {
+        "date": "1996",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.95018769620165",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "47234"
+          }]
+        }]
+      }],
+      "percentDifference": 52553.8
+    }]
+  }, {
+    "placeDcid": "geoId/18019",
+    "statVarDcid": "StandardizedPrecipitationIndex_Atmosphere",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2004-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-3.94949238193601",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+            "lineNumber": "6370"
+          }]
+        }]
+      }, {
+        "date": "2006-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3.40800845720706",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ak.csv",
+            "lineNumber": "80866"
+          }]
+        }]
+      }, {
+        "date": "2010-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-3.44285704291638",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_am.csv",
+            "lineNumber": "29858"
+          }]
+        }]
+      }, {
+        "date": "2019-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-3.45731789068053",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+            "lineNumber": "65090"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-08",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-0.00604538622580429",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+            "lineNumber": "89506"
+          }]
+        }]
+      }, {
+        "date": "2009-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.94601203696826",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_al.csv",
+            "lineNumber": "92610"
+          }]
+        }]
+      }],
+      "percentDifference": 48831.58
+    }]
+  }, {
+    "placeDcid": "geoId/30073",
+    "statVarDcid": "Count_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1993",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0",
+            "column": "Heatwave_Count"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "38850"
+          }]
+        }]
+      }, {
+        "date": "1994",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3",
+            "column": "Heatwave_Count"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "41954"
+          }]
+        }]
+      }],
+      "percentDifference": 3.0E8
+    }]
+  }, {
+    "placeDcid": "geoId/30073",
+    "statVarDcid": "NumberOfDays_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2007",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "10",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "82306"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1982",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "4706"
+          }]
+        }]
+      }, {
+        "date": "1983",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "5",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "7810"
+          }]
+        }]
+      }],
+      "percentDifference": 150.0
+    }]
+  }, {
+    "placeDcid": "geoId/30073",
+    "statVarDcid": "Intensity_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1982",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "0.920544367703525",
+            "column": "Heatwave_Intensity"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "4706"
+          }]
+        }]
+      }, {
+        "date": "1983",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.57587786205744",
+            "column": "Heatwave_Intensity"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "7810"
+          }]
+        }]
+      }],
+      "percentDifference": 179.82
+    }]
+  }, {
+    "placeDcid": "geoId/30073",
+    "statVarDcid": "InterannualRange_Monthly_Precipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1984",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "50.1037152759099",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "10914"
+          }]
+        }]
+      }, {
+        "date": "1985",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "128.338928946802",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "14018"
+          }]
+        }]
+      }],
+      "percentDifference": 156.15
+    }]
+  }, {
+    "placeDcid": "geoId/30073",
+    "statVarDcid": "StandardizedPrecipitationIndex_Atmosphere",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 1981-01, 1981-02, 1981-03, 1981-04, 1981-05, 1981-06, 1981-07, 1981-08, 1981-09, 1981-10, 1981-11, 1981-12, 1982-01, 1982-02, 1982-03, 1982-04, 1982-05, 1982-06, 1982-07, 1982-08, 1982-09, 1982-10, 1982-11, 1982-12, 1983-01, 1983-02, 1983-03, 1983-04, 1983-05, 1983-06, 1983-07, 1983-08, 1983-09, 1983-10, 1983-11, 1983-12, 1984-01, 1984-02, 1984-03, 1984-04, 1984-05, 1984-06, 1984-07, 1984-08, 1984-09, 1984-10, 1984-11, 1984-12, 1985-01, 1985-02, 1985-03, 1985-04, 1985-05, 1985-06, 1985-07, 1985-08, 1985-09, 1985-10, 1985-11, 1985-12, 1986-01, 1986-02, 1986-03, 1986-04, 1986-05, 1986-06, 1986-07, 1986-08, 1986-09, 1986-10, 1986-11, 1986-12, 1987-01, 1987-02, 1987-03, 1987-04, 1987-05, 1987-06, 1987-07, 1987-08, 1987-09, 1987-10, 1987-11, 1987-12, 1988-01, 1988-02, 1988-03, 1988-04, 1988-05, 1988-06, 1988-07, 1988-08, 1988-09, 1988-10, 1988-11, 1988-12, 1989-01, 1989-02, 1989-03, 1989-04, 1989-05, 1989-06, 1989-07, 1989-08, 1989-09, 1989-10, 1989-11, 1989-12, 1990-01, 1990-02, 1990-03, 1990-04, 1990-05, 1990-06, 1990-07, 1990-08, 1990-09, 1990-10, 1990-11, 1990-12, 1991-01, 1991-02, 1991-03, 1991-04, 1991-05, 1991-06, 1991-07, 1991-08, 1991-09, 1991-10, 1991-11, 1991-12, 1992-01, 1992-02, 1992-03, 1992-04, 1992-05, 1992-06, 1992-07, 1992-08, 1992-09, 1992-10, 1992-11, 1992-12, 1993-01, 1993-02, 1993-03, 1993-04, 1993-05, 1993-06, 1993-07, 1993-08, 1993-09, 1993-10, 1993-11, 1993-12, 1994-01, 1994-02, 1994-03, 1994-04, 1994-05, 1994-06, 1994-07, 1994-08, 1994-09, 1994-10, 1994-11, 1994-12, 1995-01, 1995-02, 1995-03, 1995-04, 1995-05, 1995-06, 1995-07, 1995-08, 1995-09, 1995-10, 1995-11, 1995-12, 1996-01, 1996-02, 1996-03, 1996-04, 1996-05, 1996-06, 1996-07, 1996-08, 1996-09, 1996-10, 1996-11, 1996-12, 1997-01, 1997-02, 1997-03, 1997-04, 1997-05, 1997-06, 1997-07, 1997-08, 1997-09, 1997-10, 1997-11, 1997-12, 1998-01, 1998-02, 1998-03, 1998-04, 1998-05, 1998-06, 1998-07, 1998-08, 1998-09, 1998-10, 1998-11, 1998-12, 1999-01, 1999-02, 1999-03, 1999-04, 1999-05, 1999-06, 1999-07, 1999-08, 1999-09, 1999-10, 1999-11, 1999-12, 2000-01, 2000-02, 2000-03, 2000-04, 2000-05, 2000-06, 2000-07, 2000-08, 2000-09, 2000-10, 2000-11, 2000-12, 2001-01, 2001-02, 2001-03, 2001-04, 2001-05, 2001-06, 2001-07, 2001-08, 2001-09, 2001-10, 2001-11, 2002-01, 2002-02, 2002-03, 2002-04, 2002-05, 2002-06, 2002-07, 2002-08, 2002-09, 2002-10, 2002-11, 2002-12, 2003-01, 2003-02, 2003-03, 2003-04, 2003-05, 2003-06, 2003-07, 2003-08, 2003-09, 2003-10, 2003-11, 2003-12, 2004-01, 2004-03, 2004-04, 2004-05, 2004-06, 2004-07, 2004-08, 2004-09, 2004-10, 2004-12, 2005-01, 2005-03, 2005-04, 2005-05, 2005-06, 2005-07, 2005-08, 2005-09, 2005-10, 2005-11, 2005-12, 2006-01, 2006-02, 2006-03, 2006-04, 2006-05, 2006-06, 2006-07, 2006-08, 2006-09, 2006-10, 2006-11, 2006-12, 2007-01, 2007-02, 2007-03, 2007-04, 2007-05, 2007-06, 2007-07, 2007-08, 2007-09, 2007-10, 2007-11, 2007-12, 2008-01, 2008-02, 2008-03, 2008-04, 2008-05, 2008-06, 2008-07, 2008-08, 2008-09, 2008-10, 2008-11, 2008-12, 2009-01, 2009-02, 2009-03, 2009-04, 2009-05, 2009-06, 2009-07, 2009-08, 2009-09, 2009-10, 2009-12, 2010-01, 2010-02, 2010-03, 2010-04, 2010-05, 2010-06, 2010-07, 2010-08, 2010-09, 2010-10, 2010-11, 2010-12, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-03, 2016-04, 2016-05, 2016-06, 2016-07, 2016-08, 2016-09, 2016-10, 2016-11, 2016-12, 2017-01, 2017-02, 2017-03, 2017-04, 2017-05, 2017-06, 2017-07, 2017-08, 2017-09, 2017-10, 2017-11, 2017-12, 2018-01, 2018-02, 2018-03, 2018-04, 2018-05, 2018-06, 2018-07, 2018-08, 2018-09, 2018-10, 2018-11, 2018-12, 2019-01, 2019-02, 2019-03, 2019-04, 2019-05, 2019-06, 2019-07, 2019-08, 2019-09, 2019-10, 2019-11, 2019-12, 2020-01, 2020-02, 2020-03, 2020-04, 2020-05, 2020-06, 2020-07, 2020-08, 2020-09, 2020-10, 2020-11, 2020-12, 2021-01, 2021-02, 2021-03, 2021-04, 2021-05, 2021-06, 2021-07, 2021-08, 2021-09, 2021-10, 2021-11, 2021-12"
+    }, {
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2001-05",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-2.89019961895397",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ai.csv",
+            "lineNumber": "83138"
+          }]
+        }]
+      }, {
+        "date": "2018-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.94376271508276",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+            "lineNumber": "7042"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2015-07",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-0.000518257325019662",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ao.csv",
+            "lineNumber": "10818"
+          }]
+        }]
+      }, {
+        "date": "2015-08",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-0.542201308006044",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ao.csv",
+            "lineNumber": "13922"
+          }]
+        }]
+      }],
+      "percentDifference": -104520.1
+    }]
+  }, {
+    "placeDcid": "geoId/20149",
+    "statVarDcid": "NumberOfDays_HeatWaveEvent",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1999",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "7",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "56802"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1998",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "53698"
+          }]
+        }]
+      }, {
+        "date": "1999",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "7",
+            "column": "Heatwave_Length"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "56802"
+          }]
+        }]
+      }],
+      "percentDifference": 133.33
+    }]
+  }, {
+    "placeDcid": "geoId/20149",
+    "statVarDcid": "InterannualRange_Monthly_MinTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1983",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "37.4353233721616",
+            "column": "InternannualRange_MonthlyMinTemperature"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "7138"
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "placeDcid": "geoId/20149",
+    "statVarDcid": "InterannualRange_Monthly_MaxTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1983",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "42.7359497015425",
+            "column": "InternannualRange_MonthlyMaxTemperature"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "7138"
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "placeDcid": "geoId/20149",
+    "statVarDcid": "InterannualRange_Monthly_Precipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1993",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "385.614259568907",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "38178"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1994",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "122.572625633624",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "41282"
+          }]
+        }]
+      }, {
+        "date": "1995",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "284.736481481319",
+            "column": "InternannualRange_MonthlyPrecipitation"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aa.csv",
+            "lineNumber": "44386"
+          }]
+        }]
+      }],
+      "percentDifference": 132.3
+    }]
+  }, {
+    "placeDcid": "geoId/20149",
+    "statVarDcid": "StandardizedPrecipitationIndex_Atmosphere",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_Data_Holes",
+      "additionalDetails": "Possible data hole found. Dates in this series: 1981-01, 1981-02, 1981-03, 1981-04, 1981-05, 1981-06, 1981-07, 1981-08, 1981-09, 1981-10, 1981-11, 1981-12, 1982-01, 1982-02, 1982-03, 1982-04, 1982-05, 1982-06, 1982-07, 1982-08, 1982-09, 1982-10, 1982-11, 1982-12, 1983-01, 1983-02, 1983-03, 1983-04, 1983-05, 1983-06, 1983-07, 1983-08, 1983-09, 1983-10, 1983-11, 1983-12, 1984-01, 1984-02, 1984-03, 1984-04, 1984-05, 1984-06, 1984-07, 1984-08, 1984-09, 1984-10, 1984-11, 1984-12, 1985-01, 1985-02, 1985-03, 1985-04, 1985-05, 1985-06, 1985-07, 1985-08, 1985-09, 1985-10, 1985-11, 1985-12, 1986-01, 1986-02, 1986-03, 1986-04, 1986-05, 1986-06, 1986-07, 1986-08, 1986-09, 1986-10, 1986-11, 1986-12, 1987-01, 1987-02, 1987-03, 1987-04, 1987-05, 1987-06, 1987-07, 1987-08, 1987-09, 1987-10, 1987-11, 1987-12, 1988-01, 1988-02, 1988-03, 1988-04, 1988-05, 1988-06, 1988-07, 1988-08, 1988-09, 1988-10, 1988-11, 1988-12, 1989-01, 1989-02, 1989-03, 1989-04, 1989-05, 1989-06, 1989-07, 1989-08, 1989-09, 1989-10, 1989-11, 1989-12, 1990-01, 1990-02, 1990-03, 1990-04, 1990-05, 1990-06, 1990-07, 1990-08, 1990-09, 1990-10, 1990-11, 1990-12, 1991-01, 1991-02, 1991-03, 1991-04, 1991-05, 1991-06, 1991-07, 1991-08, 1991-09, 1991-10, 1991-11, 1991-12, 1992-01, 1992-02, 1992-03, 1992-04, 1992-05, 1992-06, 1992-07, 1992-08, 1992-09, 1992-10, 1992-11, 1992-12, 1993-01, 1993-02, 1993-03, 1993-04, 1993-05, 1993-06, 1993-07, 1993-08, 1993-09, 1993-10, 1993-11, 1993-12, 1994-01, 1994-02, 1994-03, 1994-04, 1994-05, 1994-06, 1994-07, 1994-08, 1994-09, 1994-10, 1994-11, 1994-12, 1995-01, 1995-02, 1995-03, 1995-04, 1995-05, 1995-06, 1995-07, 1995-08, 1995-09, 1995-10, 1995-11, 1995-12, 1996-01, 1996-02, 1996-03, 1996-04, 1996-05, 1996-06, 1996-07, 1996-08, 1996-09, 1996-10, 1996-11, 1996-12, 1997-01, 1997-02, 1997-03, 1997-04, 1997-05, 1997-06, 1997-07, 1997-08, 1997-09, 1997-10, 1997-11, 1997-12, 1998-01, 1998-02, 1998-03, 1998-04, 1998-05, 1998-06, 1998-07, 1998-08, 1998-09, 1998-10, 1998-11, 1998-12, 1999-01, 1999-02, 1999-03, 1999-04, 1999-05, 1999-06, 1999-07, 1999-08, 1999-09, 1999-10, 1999-11, 1999-12, 2000-01, 2000-02, 2000-03, 2000-04, 2000-05, 2000-06, 2000-07, 2000-08, 2000-09, 2000-10, 2000-11, 2000-12, 2001-01, 2001-02, 2001-03, 2001-04, 2001-05, 2001-06, 2001-07, 2001-08, 2001-09, 2001-10, 2001-11, 2001-12, 2002-01, 2002-02, 2002-03, 2002-04, 2002-05, 2002-06, 2002-07, 2002-08, 2002-09, 2002-10, 2002-11, 2003-01, 2003-02, 2003-03, 2003-04, 2003-05, 2003-06, 2003-07, 2003-08, 2003-09, 2003-10, 2003-11, 2003-12, 2004-01, 2004-02, 2004-03, 2004-04, 2004-05, 2004-06, 2004-07, 2004-08, 2004-09, 2004-10, 2004-11, 2004-12, 2005-01, 2005-02, 2005-03, 2005-04, 2005-05, 2005-06, 2005-07, 2005-08, 2005-09, 2005-10, 2005-11, 2005-12, 2006-01, 2006-03, 2006-04, 2006-05, 2006-06, 2006-07, 2006-08, 2006-09, 2006-10, 2006-11, 2006-12, 2007-01, 2007-02, 2007-03, 2007-04, 2007-05, 2007-06, 2007-07, 2007-08, 2007-09, 2007-10, 2007-11, 2007-12, 2008-01, 2008-02, 2008-03, 2008-04, 2008-05, 2008-06, 2008-07, 2008-08, 2008-09, 2008-10, 2008-11, 2008-12, 2009-01, 2009-02, 2009-03, 2009-04, 2009-05, 2009-06, 2009-07, 2009-08, 2009-09, 2009-10, 2009-11, 2009-12, 2010-01, 2010-02, 2010-03, 2010-04, 2010-05, 2010-06, 2010-07, 2010-08, 2010-09, 2010-10, 2010-11, 2011-01, 2011-02, 2011-03, 2011-04, 2011-05, 2011-06, 2011-07, 2011-08, 2011-09, 2011-10, 2011-11, 2011-12, 2012-01, 2012-02, 2012-03, 2012-04, 2012-05, 2012-06, 2012-07, 2012-08, 2012-09, 2012-10, 2012-11, 2012-12, 2013-01, 2013-02, 2013-03, 2013-04, 2013-05, 2013-06, 2013-07, 2013-08, 2013-09, 2013-10, 2013-11, 2013-12, 2014-01, 2014-02, 2014-03, 2014-04, 2014-05, 2014-06, 2014-07, 2014-08, 2014-09, 2014-10, 2014-11, 2014-12, 2015-01, 2015-02, 2015-03, 2015-04, 2015-05, 2015-06, 2015-07, 2015-08, 2015-09, 2015-10, 2015-11, 2015-12, 2016-01, 2016-02, 2016-03, 2016-04, 2016-05, 2016-06, 2016-07, 2016-08, 2016-09, 2016-10, 2016-11, 2016-12, 2017-01, 2017-02, 2017-03, 2017-04, 2017-05, 2017-06, 2017-07, 2017-08, 2017-09, 2017-10, 2017-11, 2017-12, 2018-01, 2018-02, 2018-03, 2018-04, 2018-05, 2018-06, 2018-07, 2018-08, 2018-09, 2018-10, 2018-11, 2018-12, 2019-01, 2019-02, 2019-03, 2019-04, 2019-05, 2019-06, 2019-07, 2019-08, 2019-09, 2019-10, 2019-11, 2019-12, 2020-01, 2020-02, 2020-03, 2020-04, 2020-05, 2020-06, 2020-07, 2020-08, 2020-09, 2020-10, 2020-11, 2020-12, 2021-01, 2021-02, 2021-03, 2021-04, 2021-05, 2021-06, 2021-07, 2021-08, 2021-09, 2021-10, 2021-11, 2021-12"
+    }, {
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1983-07",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-2.92568462815538",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ac.csv",
+            "lineNumber": "18210"
+          }]
+        }]
+      }, {
+        "date": "2001-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "3.15443771115654",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ai.csv",
+            "lineNumber": "73154"
+          }]
+        }]
+      }, {
+        "date": "2002-06",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-3.09083559950958",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_aj.csv",
+            "lineNumber": "22818"
+          }]
+        }]
+      }, {
+        "date": "2019-08",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.97306657354857",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_ap.csv",
+            "lineNumber": "62242"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2014-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "-0.00186003931108176",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_an.csv",
+            "lineNumber": "79106"
+          }]
+        }]
+      }, {
+        "date": "2014-10",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.0465371940062",
+            "column": "StandardPrecipitationIndex"
+          },
+          "locations": [{
+            "file": "WeatherVariability_Additional_Counties_shard_an.csv",
+            "lineNumber": "82210"
+          }]
+        }]
+      }],
+      "percentDifference": 56364.25
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 16,
+    "statChecks": true,
+    "observationAbout": false,
+    "allowNanSvobs": false
+  }
+}

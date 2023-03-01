@@ -24,11 +24,11 @@ year,period,country,statVar,value
 2016,P1Y,dcid:country/RUS,dcs:WHO/EMFLIMITELECTRIC_Public_LowFrequency,0.5
 2014,P1Y,dcid:country/TUR,dcs:WHO/EMFLIMITELECTRIC_Public_LowFrequency,'[15]'
 2016,P1Y,dcid:country/RUS,dcs:WHO/EMFLIMITELECTRIC_Public_Static,15
-2017,P1Y,dcid:country/ARG,dcs:WHO/EMFLIMITELECTRIC_Workers_Static,25
-2017,P1Y,dcid:country/BGR,dcs:WHO/EMFLIMITELECTRIC_Workers_Static,25
-2017,P1Y,dcid:country/CHE,dcs:WHO/EMFLIMITELECTRIC_Workers_Static,40
-2017,P1Y,dcid:country/DEU,dcs:WHO/EMFLIMITELECTRIC_Workers_Static,28
-2017,P1Y,dcid:country/USA,dcs:WHO/EMFLIMITELECTRIC_Workers_Static,'[25]'
+2017,P1Y,dcid:country/ARG,dcs:test_dcid,25
+2017,P1Y,dcid:country/BGR,dcs:test_dcid,25
+2017,P1Y,dcid:country/CHE,dcs:test_dcid,40
+2017,P1Y,dcid:country/DEU,dcs:test_dcid,28
+2017,P1Y,dcid:country/USA,dcs:test_dcid,'[25]'
 2004,P1Y,dcid:country/AFG,dcs:WHO/WSH_8,48345.23
 2004,P1Y,dcid:country/ALB,dcs:WHO/WSH_8,1851.94
 2004,P1Y,dcid:country/DZA,dcs:WHO/WSH_8,3710.93

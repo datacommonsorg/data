@@ -1,0 +1,7 @@
+id,name,occurrence_time,mag,mag_type,mag_err,location,depth,depth_err,reviewed_status,affected_places
+"dcid:earthquake/iscgem16957719","83 km NE of Guatire, Venezuela","1900-10-29T09:11:00",7.7,dcs:MagnitudeMw,,[LatLong 11 -66],[0 Kilometer],,dcs:UnreviewedAutomatedEvent,
+"dcid:earthquake/ushis388","2 km SE of North Olmsted, Ohio","1900-04-09T14:00:00",3.4,dcs:MagnitudeMfa,,[LatLong 41.4 -81.9],,,dcs:ReviewedEvent,"dcid:geoId/3956882,dcid:geoId/39"
+"dcid:earthquake/us7000iphl","4 km SSW of Mooringsport, Louisiana","2022-11-13T18:43:11",3,dcs:MagnitudeMLg,0.071,[LatLong 32.6524 -93.9825],[5 Kilometer],[1.99 Kilometer],dcs:ReviewedEvent,"dcid:geoId/2251830"
+"dcid:earthquake/us7000iphl","4 km SSW of Mooringsport, Louisiana","2022-11-13T18:43:11",3,dcs:MagnitudeMs,0.071,[LatLong 32.6524 -93.9825],[5 Kilometer],[1.99 Kilometer],dcs:UnreviewedAutomatedEvent,"dcid:geoId/2251830"
+"dcid:earthquake/nc73636175","19km S of Big Pine, CA","2021-10-06T14:25:27",3.52,dcs:MagnitudeMw,,[LatLong 36.9944992 -118.3001633],[5.58 Kilometer],[0.84 Kilometer],dcs:ReviewedEvent,"dcid:geoId/06"
+"dcid:earthquake/us6000fs8m","33 km SE of Kushima, Japan","2021-10-06T08:12:55",5.4,dcs:MagnitudeMww,0.061,[LatLong 31.2593 131.471],[35 Kilometer],[1.9 Kilometer],dcs:ReviewedEvent,"dcid:country/JPN"
