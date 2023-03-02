@@ -135,8 +135,7 @@ class WaterQualityBase():
         # Mapping district names to LGD Codes
         district_mapper = IndiaDistrictsMapper()
         state_mapper = IndiaStatesMapper()
-        df_map = self.df[['StateName',
-                          'DistrictName']].drop_duplicates()
+        df_map = self.df[['StateName', 'DistrictName']].drop_duplicates()
 
         df_map['LGDCode'] = df_map.apply(
             lambda x: self._map_district_to_lgdcodes(
@@ -145,7 +144,9 @@ class WaterQualityBase():
             axis=1)
 
         # Merging LGD codes with original df and creating dcids
-        self.df = self.df.merge(df_map, on=['StateName', 'DistrictName'], how='left')
+        self.df = self.df.merge(df_map,
+                                on=['StateName', 'DistrictName'],
+                                how='left')
         self.df['dcid'] = self.df.apply(lambda x: ''.join([
             'indiaWris/',
             str(x['LGDCode']), '_', ''.join(re.split('\W+', x['StationName']))
