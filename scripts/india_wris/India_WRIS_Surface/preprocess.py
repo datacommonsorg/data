@@ -26,7 +26,7 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:SurfaceWater
 contaminant: dcs:{variable}
 measuredProperty: dcs:concentration
-measurementMethod: dcs:WRIS_India
+measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 
 """
@@ -37,41 +37,42 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:SurfaceWater
 measuredProperty: dcs:{dcid}
-measurementMethod: dcs:WRIS_India
+measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 
 """
 
-TMCF_ISOCODE = """Node: E:{dataset_name}->E0
-dcid: C:{dataset_name}->dcid
-typeOf: dcs:WaterQualitySite
+STATION_TMCF_NODES = """Node: E:{dataset_name}->E0
+typeOf: dcs:AdministrativeArea
+lgdCode: C:{dataset_name}->LGDCode
 
 Node: E:{dataset_name}->E1
-typeOf: dcs:Place
-lgdCode: C:{dataset_name}->DistrictCode
-
+dcid: C:{dataset_name}->dcid
+typeOf: dcs:WaterQualitySite
+name: E:{dataset_name}->StationNameLong
+waterSource: dcs:SurfaceWater
+location: C:{dataset_name}->LatLong
 """
+
 
 SOLUTE_TMCF_NODES = """Node: E:{dataset_name}->E{index}
 typeOf: dcid:StatVarObservation
 observationDate: C:{dataset_name}->Month
-observationAbout: E:{dataset_name}->E0
-containedIn: E:{dataset_name}->E1
+observationAbout: C:{dataset_name}->dcid
 observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_{variable}_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
-value: C:{dataset_name}->"{name}"
+value: C:{dataset_name}->{name}
 """
 
 CHEMPROP_TMCF_NODES = """Node: E:{dataset_name}->E{index}
 typeOf: dcid:StatVarObservation
 observationDate: C:{dataset_name}->Month
-observationAbout: E:{dataset_name}->E0
-containedIn: E:{dataset_name}->E1
+observationAbout: C:{dataset_name}->dcid
 observationPeriod: "P1M"
 variableMeasured: dcid:{variable}_BodyOfWater_SurfaceWater
 measuredProperty: dcs:{dcid}
-value: C:{dataset_name}->"{name}"
+value: C:{dataset_name}->{name}
 """
 
 UNIT = """unit: dcid:{unit}
@@ -83,7 +84,7 @@ template_strings = {
     'solute_tmcf': SOLUTE_TMCF_NODES,
     'chemprop_mcf': CHEMPROP_MCF_NODES,
     'chemprop_tmcf': CHEMPROP_TMCF_NODES,
-    'site_dcid': TMCF_ISOCODE,
+    'station_tmcf': STATION_TMCF_NODES,
     'unit_node': UNIT
 }
 
