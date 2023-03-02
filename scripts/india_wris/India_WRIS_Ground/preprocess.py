@@ -26,7 +26,6 @@ populationType: dcs:BodyOfWater
 contaminatedThing: dcs:GroundWater
 contaminant: dcs:{variable}
 measuredProperty: dcs:concentration
-measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 
 """
@@ -37,7 +36,6 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:BodyOfWater
 waterSource: dcs:GroundWater
 measuredProperty: dcs:{dcid}
-measurementMethod: dcs:IndiaWRIS
 statType: dcs:measuredValue
 
 """
@@ -63,6 +61,7 @@ observationPeriod: "P1Y"
 variableMeasured: dcid:Concentration_{variable}_BodyOfWater_GroundWater
 measuredProperty: dcs:concentration
 value: C:{dataset_name}->{name}
+measurementMethod: dcs:IndiaWRIS
 """
 
 CHEMPROP_TMCF_NODES = """Node: E:{dataset_name}->E{index}
@@ -73,6 +72,7 @@ observationPeriod: "P1Y"
 variableMeasured: dcid:{variable}_BodyOfWater_GroundWater
 measuredProperty: dcs:{dcid}
 value: C:{dataset_name}->{name}
+measurementMethod: dcs:IndiaWRIS
 """
 
 UNIT = """unit: dcid:{unit}

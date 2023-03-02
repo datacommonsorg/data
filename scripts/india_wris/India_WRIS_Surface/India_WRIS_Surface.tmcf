@@ -6,6 +6,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Aluminum_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Aluminium(Al)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E3
@@ -16,6 +17,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Arsenic_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Arsenic(As)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E4
@@ -26,6 +28,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Cyanide_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->cyanides(CN)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E5
@@ -36,6 +39,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Carbonate(CO3)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E6
@@ -46,6 +50,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Calcium_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Calcium(Ca)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E7
@@ -56,6 +61,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Chloride_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Chloride(Cl)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E8
@@ -66,6 +72,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Fluorine_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Fluorine(F)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E9
@@ -76,6 +83,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Iron_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Iron(Fe)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E10
@@ -86,6 +94,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_HydrogenCarbonate_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Hydrogencarbonate(HCO3)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E11
@@ -96,6 +105,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Mercury_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Mercury(Hg)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E12
@@ -106,6 +116,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Potassium_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Potassium(K)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E13
@@ -116,6 +127,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Magnesium_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Magnesium(Mg)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E14
@@ -126,6 +138,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Ammonia_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->ammonia(NH3)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E15
@@ -136,6 +149,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Nitrate_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Nitrate(NO3)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E16
@@ -146,6 +160,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Lead_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Lead(Pb)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E17
@@ -156,6 +171,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Silver_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Silver(Ag)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E18
@@ -166,6 +182,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Sulfate_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Sulfate(SO4)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E19
@@ -176,6 +193,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Dioxosilane_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Silicondioxide(SiO2)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E20
@@ -186,6 +204,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:Concentration_Zinc_BodyOfWater_SurfaceWater
 measuredProperty: dcs:concentration
 value: C:India_WRIS_Surface->Zinc(Zn)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MicrogramsPerLitre
 
 Node: E:India_WRIS_Surface->E21
@@ -196,6 +215,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:DissolvedOxygen_BodyOfWater_SurfaceWater
 measuredProperty: dcs:dissolvedOxygen
 value: C:India_WRIS_Surface->DisolvedOxygen(DO)
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E22
@@ -206,6 +226,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:ElectricalConductivity_BodyOfWater_SurfaceWater
 measuredProperty: dcs:electricalConductivity
 value: C:India_WRIS_Surface->ElectricalConductivity
+measurementMethod: dcs:IndiaWRIS
 
 Node: E:India_WRIS_Surface->E23
 typeOf: dcid:StatVarObservation
@@ -215,6 +236,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:WaterHardness_BodyOfWater_SurfaceWater
 measuredProperty: dcs:waterHardness
 value: C:India_WRIS_Surface->HardnessTotal
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsCaCO3PerLitre
 
 Node: E:India_WRIS_Surface->E24
@@ -225,6 +247,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:WaterAlkalinity_BodyOfWater_SurfaceWater
 measuredProperty: dcs:waterAlkalinity
 value: C:India_WRIS_Surface->AlkalinityTotal
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsCaCO3PerLitre
 
 Node: E:India_WRIS_Surface->E25
@@ -235,6 +258,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:ResidualSodiumCarbonate_BodyOfWater_SurfaceWater
 measuredProperty: dcs:residualSodiumCarbonate
 value: C:India_WRIS_Surface->ResidualSodiumCarbonate
+measurementMethod: dcs:IndiaWRIS
 
 Node: E:India_WRIS_Surface->E26
 typeOf: dcid:StatVarObservation
@@ -244,6 +268,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:SodiumAdsorptionRatio_BodyOfWater_SurfaceWater
 measuredProperty: dcs:sodiumAdsorptionRatio
 value: C:India_WRIS_Surface->Sodiumabsorptionratio(SAR)
+measurementMethod: dcs:IndiaWRIS
 
 Node: E:India_WRIS_Surface->E27
 typeOf: dcid:StatVarObservation
@@ -253,6 +278,7 @@ observationPeriod: "P1M"
 variableMeasured: dcid:TotalDissolvedSolids_BodyOfWater_SurfaceWater
 measuredProperty: dcs:totalDissolvedSolids
 value: C:India_WRIS_Surface->TotalDissolvedSolids
+measurementMethod: dcs:IndiaWRIS
 unit: dcid:MilligramsPerLitre
 
 Node: E:India_WRIS_Surface->E28
@@ -263,4 +289,5 @@ observationPeriod: "P1M"
 variableMeasured: dcid:PotentialOfHydrogen_BodyOfWater_SurfaceWater
 measuredProperty: dcs:potentialOfHydrogen
 value: C:India_WRIS_Surface->PotentialofHydrogen(pH)
+measurementMethod: dcs:IndiaWRIS
 
