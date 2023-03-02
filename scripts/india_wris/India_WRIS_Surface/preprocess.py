@@ -47,7 +47,7 @@ lgdCode: C:{dataset_name}->LGDCode
 Node: E:{dataset_name}->E1
 dcid: C:{dataset_name}->dcid
 typeOf: dcs:WaterQualitySite
-name: E:{dataset_name}->StationNameLong
+name: C:{dataset_name}->StationNameLong
 waterSource: dcs:SurfaceWater
 location: C:{dataset_name}->LatLong
 """
