@@ -52,7 +52,6 @@ waterSource: dcs:SurfaceWater
 location: C:{dataset_name}->LatLong
 """
 
-
 SOLUTE_TMCF_NODES = """Node: E:{dataset_name}->E{index}
 typeOf: dcid:StatVarObservation
 observationDate: C:{dataset_name}->Month
