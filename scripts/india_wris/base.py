@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import dateutil
-import dateutil.parser
+import datetime
 import json
 import os
 import pandas as pd
@@ -171,10 +170,10 @@ class WaterQualityBase():
                               self.solute_tmcf)
         date_column = date_line.groupdict()['date']
 
-        # Fix the date column to ISO format
+        # Fix the date column from MMM-YY to ISO format: YYYY-MM
         if date_column == 'Month':
             self.df[date_column] = self.df[date_column].apply(
-                lambda x: dateutil.parser.parse(x).strftime('%Y-%m'))
+                lambda x: datetime.datetime.strptime(x, '%b-%y').strftime('%Y-%m'))
 
         # Drop duplicate rows for the same place and date
         self.df.drop_duplicates(subset=['dcid', date_column],
