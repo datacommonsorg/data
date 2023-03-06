@@ -1,0 +1,6 @@
+year,period,country,statVar,value
+2017,P1Y,dcid:country/ARG,dcs:test_dcid,25
+2017,P1Y,dcid:country/BGR,dcs:test_dcid,25
+2017,P1Y,dcid:country/CHE,dcs:test_dcid,40
+2017,P1Y,dcid:country/DEU,dcs:test_dcid,28
+2017,P1Y,dcid:country/USA,dcs:test_dcid,"[25]"
