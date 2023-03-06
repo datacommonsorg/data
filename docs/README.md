@@ -46,7 +46,7 @@ For datasets with complex schema or ones that we want to import quickly, we can 
 
 Links:
 * [Schema-less Import Guide](https://docs.datacommons.org/import_dataset/schema_less_guide.html)
-* Suggested [import document template](https://docs.google.com/document/d/1GC7DTpxXo_3zreDRt7wFuURBfA1T275p-qx1N-VIdGM/)
+* [Import document template](https://docs.google.com/document/d/1GC7DTpxXo_3zreDRt7wFuURBfA1T275p-qx1N-VIdGM/)
 * [Example](https://docs.google.com/document/d/e/2PACX-1vS6ItxH7T_XvYuz4-xeO9LKoYlrXr-YkrwiclRWcdtYm11J8OQHUwDw4E66uaTQA7yTdwLXfrNBdKgz/pub)
 
 ## Preparing artifacts
