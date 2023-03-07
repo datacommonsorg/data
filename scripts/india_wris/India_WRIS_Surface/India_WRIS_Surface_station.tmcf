@@ -1,0 +1,10 @@
+Node: E:India_WRIS_Surface->E0
+typeOf: dcs:AdministrativeArea
+lgdCode: C:India_WRIS_Surface->LGDCode
+
+Node: E:India_WRIS_Surface->E1
+dcid: C:India_WRIS_Surface->dcid
+typeOf: dcs:WaterQualitySite
+name: C:India_WRIS_Surface->StationNameLong
+waterSource: dcs:SurfaceWater
+location: C:India_WRIS_Surface->LatLong

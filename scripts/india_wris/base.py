@@ -12,11 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import datetime
+import json
 import os
 import pandas as pd
-import json
 import re
 from india.geo.districts import IndiaDistrictsMapper
+from india.geo.states import IndiaStatesMapper
 
 
 class WaterQualityBase():
@@ -51,8 +53,8 @@ class WaterQualityBase():
         self.chemprop_tmcf = template_strings['chemprop_tmcf']
         assert self.chemprop_tmcf != ""
 
-        self.site_dcid = template_strings['site_dcid']
-        assert self.site_dcid != ""
+        self.station_tmcf = template_strings['station_tmcf']
+        assert self.station_tmcf != ""
 
         self.unit_node = template_strings['unit_node']
         assert self.unit_node != ""
@@ -60,7 +62,7 @@ class WaterQualityBase():
     def _drop_all_empty_rows(self, df):
         """
         Helper method to drop rows with all empty values.
-        
+
         Some rows in df can have just place names and latlong without any
         water quality data. Those rows are dropped here.
         """
@@ -71,17 +73,52 @@ class WaterQualityBase():
 
         return df.dropna(thresh=max_na)
 
-    def _map_district_to_lgdcodes(self, mapper, state, district):
+    def _remove_column_header_spaces(self, df):
+        """Remove spaces in column names."""
+        rename_columns = {}
+        for column_name in df.columns:
+            rename_columns[column_name] = re.sub(' ', '', column_name)
+        df.rename(columns=rename_columns, inplace=True)
+
+    def _map_district_to_lgdcodes(self, district_mapper, state_mapper, district,
+                                  state):
+        lgd_code = state_mapper.get_state_name_to_lgd_code_mapping(state)
+        if district and not pd.isnull(district):
+            try:
+                lgd_code = district_mapper.get_district_name_to_lgd_code_mapping(
+                    state, district)
+            except Exception:
+                return lgd_code
+        return lgd_code
+
+    def _lat_long_quantity_range(self, latitude, longitude):
+        "Returns the location quantity range [LatLong <lat> <lng>]" ""
         try:
-            return mapper.get_district_name_to_lgd_code_mapping(state, district)
-        except Exception:
-            return district
+            lat = float(latitude)
+            lng = float(longitude)
+            return f'[LatLong {lat:.5f} {lng:.5f}]'
+        except ValueError:
+            # LatLong is not float.
+            return ''
+
+    def _get_station_name(self, station, state, district):
+        """Returns the station name with district and state."""
+        names = []
+        if '(' in station and ')' not in station:
+            # Add closing parenthesis for station names without one.
+            station += ')'
+        names.append(station)
+        if not pd.isnull(district):
+            names.append(district)
+        if state:
+            names.append(state)
+        return ', '.join(names)
 
     def create_dcids_in_csv(self):
         """
         Method to map the district names to LGD District Codes
         Mapped codes are used to create dcids for water quality stations
-        
+
         Format of dcid for a station:
             'india_wris/<lgd_code_of_district>_<name_of_station>'
         Example: 'india_wris/579_Velanganni' for Velanganni station in
@@ -92,37 +129,56 @@ class WaterQualityBase():
             os.path.join(self.module_dir,
                          'data/{}.csv'.format(self.util_names)))
         self.df = self._drop_all_empty_rows(self.df)
+        self._remove_column_header_spaces(self.df)
 
         # Mapping district names to LGD Codes
-        mapper = IndiaDistrictsMapper()
-        df_map = self.df[['StateName',
-                          'DistrictName']].drop_duplicates().dropna()
+        district_mapper = IndiaDistrictsMapper()
+        state_mapper = IndiaStatesMapper()
+        df_map = self.df[['StateName', 'DistrictName']].drop_duplicates()
 
-        df_map['DistrictCode'] = df_map.apply(
-            lambda x: self._map_district_to_lgdcodes(mapper, x['StateName'], x[
-                'DistrictName']),
+        df_map['LGDCode'] = df_map.apply(
+            lambda x: self._map_district_to_lgdcodes(
+                district_mapper, state_mapper, x['DistrictName'], x['StateName'
+                                                                   ]),
             axis=1)
 
         # Merging LGD codes with original df and creating dcids
-        self.df = self.df.merge(df_map.drop('StateName', axis=1),
-                                on='DistrictName',
+        self.df = self.df.merge(df_map,
+                                on=['StateName', 'DistrictName'],
                                 how='left')
         self.df['dcid'] = self.df.apply(lambda x: ''.join([
             'indiaWris/',
-            str(x['DistrictCode']), '_', ''.join(
-                re.split('\W+', x['Station Name']))
+            str(x['LGDCode']), '_', ''.join(re.split('\W+', x['StationName']))
         ]),
                                         axis=1)
 
         latitude_col = [col for col in self.df.columns if 'Latitude' in col]
         longitude_col = [col for col in self.df.columns if 'Longitude' in col]
-        self.df['LatLong'] = self.df.apply(lambda x: \
-                                           '[LatLong {} {}]'.format(
-                                                            x[latitude_col[0]],
-                                                            x[longitude_col[0]]
-                                                                ),
-                                           axis=1
-                                            )
+        self.df['LatLong'] = self.df.apply(
+            lambda x: self._lat_long_quantity_range(x[latitude_col[0]], x[
+                longitude_col[0]]),
+            axis=1)
+
+        # Create a column for station name with district, state
+        self.df['StationNameLong'] = self.df.apply(
+            lambda x: self._get_station_name(x['StationName'], x['StateName'],
+                                             x['DistrictName']),
+            axis=1)
+
+        # Get the date column
+        date_line = re.search('observationDate:.*->(?P<date>[A-Za-z]*)',
+                              self.solute_tmcf)
+        date_column = date_line.groupdict()['date']
+
+        # Fix the date column from MMM-YY to ISO format: YYYY-MM
+        if date_column == 'Month':
+            self.df[date_column] = self.df[date_column].apply(
+                lambda x: datetime.datetime.strptime(x, '%b-%y').strftime('%Y-%m'))
+
+        # Drop duplicate rows for the same place and date
+        self.df.drop_duplicates(subset=['dcid', date_column],
+                                keep='first',
+                                inplace=True)
 
         # Saving the df with codes and dcids in `csv_save_path`
         csv_save_path = os.path.join(self.module_dir,
@@ -157,7 +213,6 @@ class WaterQualityBase():
         with open(mcf_file, 'w') as mcf, open(tmcf_file, 'w') as tmcf:
 
             # Writing TMCF Location Nodes
-            tmcf.write(self.site_dcid.format(dataset_name=self.dataset_name))
 
             # Pollutant nodes are written first
             for pollutant in pollutants['Pollutant']:
@@ -208,3 +263,10 @@ class WaterQualityBase():
                     tmcf.write('\n')
 
                 idx += 1
+
+        ## Writing MCF and TMCF files
+        station_tmcf_file = os.path.join(
+            self.module_dir, '{}'.format(self.dataset_name),
+            "{}_station.tmcf".format(self.dataset_name))
+        with open(station_tmcf_file, 'w') as tmcf:
+            tmcf.write(self.station_tmcf.format(dataset_name=self.dataset_name))
