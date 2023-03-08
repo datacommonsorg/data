@@ -7,7 +7,7 @@ location: C:processed_data->Location
 discoveryDate: C:processed_data->FireDiscoveryDateTime
 controlledDate: C:processed_data->ControlDateTime
 containmentDate: C:processed_data->ContainmentDateTime
-burnedArea: C:processed_data->BurnedArea
+area: C:processed_data->BurnedArea
 expectedLoss: C:processed_data->Costs
 totalIncidentPersonnel: C:processed_data->TotalIncidentPersonnel
 wfigsFireID: C:processed_data->wfigsFireID

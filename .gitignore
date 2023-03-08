@@ -9,3 +9,5 @@ __pycache__/
 *.iml
 **/tmp/
 dc_generated/
+# Ignore the data folder under the un_census/enhanced_tmcf/ directory.
+*/*/*/data/*

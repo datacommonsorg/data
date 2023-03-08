@@ -40,12 +40,21 @@ Links:
 * [Example1](https://docs.google.com/document/d/e/2PACX-1vScfoVm36L7x1p4Bqh82JmDmsumhqiPz_w6zX7wzy0nX8kDLxMJw44hOBgB6CDd2o0kYKekdgNWIR1f/pub)
 * [Example2](https://docs.google.com/document/d/e/2PACX-1vS9R0eZO-AhQ19jQcLyOyYODn3dF8wGjytro0nFTjp4MsoFvsAgD7mayppcseLvNSCO6Ac4-8b2SXe4/pub)
 
+## Schema-less imports
+
+For datasets with complex schema or ones that we want to import quickly, we can start with a schema-less import, and iteratively add schema. The “schema-less” part of this framework means that the SV is not yet fully defined. This lets us get the dataset into Data Commons without blocking on schema definition.
+
+Links:
+* [Schema-less Import Guide](https://docs.datacommons.org/import_dataset/schema_less_guide.html)
+* [Import document template](https://docs.google.com/document/d/1GC7DTpxXo_3zreDRt7wFuURBfA1T275p-qx1N-VIdGM/)
+* [Example](https://docs.google.com/document/d/e/2PACX-1vS6ItxH7T_XvYuz4-xeO9LKoYlrXr-YkrwiclRWcdtYm11J8OQHUwDw4E66uaTQA7yTdwLXfrNBdKgz/pub)
+
 ## Preparing artifacts
 
 Once the entity and schema mapping have been finalized, you prepare the artifacts.  This includes:
 
-1. StatisticalVariable MCF nodes (if any) checked into [schema repo](https://github.com/datacommonsorg/schema/tree/main/stat_vars)
-2. Template MCF and corresponding cleaned tabular files (typically CSV)
+1. StatisticalVariable MCF nodes (if any) checked into [schema repo](https://github.com/datacommonsorg/schema/tree/main/stat_vars). These nodes may be written by hand when there are only a handful in number. Otherwise, these nodes can be generated via scripts.
+2. Template MCF and corresponding cleaned tabular files (typically CSV). Like StatisticalVariable MCF nodes, the Template MCF nodes can also be hand-written or script-generated depending on number of nodes.
 3. Data cleaning code (along with README) checked into [data repo](https://github.com/datacommonsorg/data)
 4. Validation results for the artifacts (from running [`dc-import`](https://github.com/datacommonsorg/import#using-import-tool) tool)
 
