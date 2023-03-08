@@ -189,7 +189,7 @@ _FREQUENC_FRUITS_VEGETABLES = {
     'NVR': 'Never',
     'NVR_OCC': 'NeverOrOccasionally',
     'GE1D': 'AtLeastOnceADay',
-    'GE2D': 'AtleastTwiceADay',
+    'GE2D': 'AtLeastTwiceADay',
     '1-3W': 'From1To3TimesAWeek',
     '4-6W': 'From4To6TimesAWeek',
     '1D': 'OnceADay',
