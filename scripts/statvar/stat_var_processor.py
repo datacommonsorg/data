@@ -1652,7 +1652,7 @@ class StatVarDataProcessor:
         return self._section_column_pvs.get(column_index, {})
 
     def add_column_header_pvs(self, row_index: int, row_col_pvs: dict,
-                              resolved_col_pvs: dict, columns: list):
+                              columns: list):
         '''Add PVs per column as file column header or section column headers.'''
         column_headers = self._column_pvs
         num_svobs = self._counters.get_counter('output-svobs-' +
@@ -1669,12 +1669,6 @@ class StatVarDataProcessor:
         for col_index in range(0, len(columns)):
             # Get all PVs for the column from the pv-map.
             col_pvs = dict(row_col_pvs.get(col_index, {}))
-            # Add all resolved PVs for the cell.
-            for prop, value in resolved_col_pvs.get(col_index, {}).items():
-                if prop not in col_pvs:
-                    if _is_valid_property(prop,
-                                          True) and _is_valid_value(value):
-                        col_pvs[prop] = value
             # Remove any empty @Data PVs.
             data_key = self._config.get('data_key', '@Data')
             if data_key in col_pvs and not col_pvs[data_key]:
@@ -2024,8 +2018,7 @@ class StatVarDataProcessor:
             # Any column with PVs must be a header applicable to entire column.
             _DEBUG and logging.debug(
                 f'Setting column header PVs for row:{row_index}:{row_col_pvs}')
-            self.add_column_header_pvs(row_index, row_col_pvs, resolved_col_pvs,
-                                       row)
+            self.add_column_header_pvs(row_index, row_col_pvs, row)
             self._counters.add_counter(f'input-header-rows', 1,
                                        self.get_current_filename())
         else:
@@ -2198,10 +2191,9 @@ class StatVarDataProcessor:
                         else:
                             selected_props.add(prop)
                     if not selected_props:
-                      selected_props.update(statvar_pvs.keys())
+                        selected_props.update(statvar_pvs.keys())
                     selected_props.update(additional_props)
-                    selected_props = selected_props.difference(
-                        exclude_props)
+                    selected_props = selected_props.difference(exclude_props)
                     # Create a new statvar for the selected PVs
                     new_statvar_pvs = {}
                     for sv_prop in selected_props:
