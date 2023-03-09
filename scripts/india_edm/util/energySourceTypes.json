@@ -1,0 +1,24 @@
+{
+    "EnergySource": {
+        "BIOMASS": "OtherBiomass",
+        "SMALL HYDRO": "SmallHydroelectric",
+        "SOLAR": "Solar",
+        "WASTE": "NonRenewableWaste",
+        "WIND": "Wind",
+        "COGENERATION-BAGASSE": "Bagasse",
+        "COAL": "Coal",
+        "HYDRO": "ConventionalHydroelectric",
+        "BIOMASS-BAGASSE": "Bagasse",
+        "RENEWABLES": "RenewableEnergy",
+        "DIESEL": "DieselOil",
+        "NATURAL GAS": "NaturalGas",
+        "NUCLEAR": "Nuclear",
+        "LIGNITE": "LigniteCoal",
+        "NAPHTHA": "Naphtha",
+        "THERMAL": "ThermalElectricity",
+        "WASTE HEAT RECOVERY": "OtherGases",
+        "WASTE GAS": "IndiaEDM_OtherRecoveredGases",
+        "IMPORTED COAL": "Coal",
+        "R-LNG": "NaturalGasLiquids"
+    }
+}
