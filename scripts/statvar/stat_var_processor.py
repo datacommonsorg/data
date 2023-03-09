@@ -604,6 +604,7 @@ class StatVarsMap:
     # PVs for StatVarObs ignored when looking for dups
     _IGNORE_SVOBS_KEY_PVS = {
         'value': '',
+        'measurementResult': '',
     }
 
     def __init__(self, config_dict: dict = None, counters_dict: dict = None):
@@ -633,10 +634,11 @@ class StatVarsMap:
         Returns:
           dictionary of property:values after addition of default PVs.
         '''
-        for prop, value in default_pvs.items():
-            if _is_valid_property(prop, self._config.get(
-                    'schemaless', False)) and value and prop not in pvs:
-                pvs[prop] = value
+        if default_pvs:
+            for prop, value in default_pvs.items():
+                if _is_valid_property(prop, self._config.get(
+                        'schemaless', False)) and value and prop not in pvs:
+                    pvs[prop] = value
         return pvs
 
     def get_valid_pvs(self, pvs: dict) -> dict:
@@ -871,8 +873,8 @@ class StatVarsMap:
                 _DEBUG and logging.debug(
                     f'Looking up DC API for dcids: {api_lookup_dcids} from PV map.'
                 )
-                schema_nodes = dc_api_is_defined_dcid(api_lookup_dcids,
-                                                      self._config.get_configs())
+                schema_nodes = dc_api_is_defined_dcid(
+                    api_lookup_dcids, self._config.get_configs())
                 # Update cache
                 self._dc_api_ids_cache.update(schema_nodes)
                 _DEBUG and logging.debug(
@@ -1650,7 +1652,7 @@ class StatVarDataProcessor:
         return self._section_column_pvs.get(column_index, {})
 
     def add_column_header_pvs(self, row_index: int, row_col_pvs: dict,
-                              columns: list):
+                              resolved_col_pvs: dict, columns: list):
         '''Add PVs per column as file column header or section column headers.'''
         column_headers = self._column_pvs
         num_svobs = self._counters.get_counter('output-svobs-' +
@@ -1665,7 +1667,14 @@ class StatVarDataProcessor:
         # Save the column header PVs.
         prev_col_pvs = {}
         for col_index in range(0, len(columns)):
-            col_pvs = row_col_pvs.get(col_index, {})
+            # Get all PVs for the column from the pv-map.
+            col_pvs = dict(row_col_pvs.get(col_index, {}))
+            # Add all resolved PVs for the cell.
+            for prop, value in resolved_col_pvs.get(col_index, {}).items():
+                if prop not in col_pvs:
+                    if _is_valid_property(prop,
+                                          True) and _is_valid_value(value):
+                        col_pvs[prop] = value
             # Remove any empty @Data PVs.
             data_key = self._config.get('data_key', '@Data')
             if data_key in col_pvs and not col_pvs[data_key]:
@@ -1977,7 +1986,8 @@ class StatVarDataProcessor:
             cell_pvs[self._config.get(
                 'input_reference_column')] = self._file_context
             column_pvs[col_index] = cell_pvs
-            if 'value' not in cell_pvs:
+            if ('value' not in cell_pvs) and ('measurementResult'
+                                              not in cell_pvs):
                 # Carry forward the non-SVObs PVs to the next column.
                 # Collect resolved PVs or PVs with references for a cell
                 # to be applied to the whole row.
@@ -1998,12 +2008,14 @@ class StatVarDataProcessor:
             f'Looking for SVObs in row:{row_index}: with row PVs: {row_pvs}, column PVs: {column_pvs}'
         )
         row_svobs = 0
+        resolved_col_pvs = dict()
         for col_index, col_pvs in column_pvs.items():
             self._set_input_context(column_number=col_index)
             merged_col_pvs = self.resolve_value_references([row_pvs, col_pvs],
                                                            process_pvs=True)
             merged_col_pvs[self._config.get(
                 'input_reference_column')] = self._file_context
+            resolved_col_pvs[col_index] = merged_col_pvs
             if self.process_stat_var_obs_pvs(merged_col_pvs):
                 row_svobs += 1
         # If row has no SVObs but has PVs, it must be a header.
@@ -2012,7 +2024,8 @@ class StatVarDataProcessor:
             # Any column with PVs must be a header applicable to entire column.
             _DEBUG and logging.debug(
                 f'Setting column header PVs for row:{row_index}:{row_col_pvs}')
-            self.add_column_header_pvs(row_index, row_col_pvs, row)
+            self.add_column_header_pvs(row_index, row_col_pvs, resolved_col_pvs,
+                                       row)
             self._counters.add_counter(f'input-header-rows', 1,
                                        self.get_current_filename())
         else:
@@ -2023,9 +2036,12 @@ class StatVarDataProcessor:
 
     def process_stat_var_obs_value(self, pvs: dict) -> bool:
         '''Process the value applying any multiplication factor if required.'''
-        if not 'value' in pvs:
+        if ('value' not in pvs) and ('measurementResult' not in pvs):
             return False
-        value = pvs['value']
+        measurement_result = pvs.get('measurementResult', '')
+        if _is_valid_value(measurement_result):
+            return True
+        value = pvs.get('value', '')
         if not _is_valid_value(value):
             return False
         numeric_value = get_numeric_value(value)
@@ -2113,32 +2129,15 @@ class StatVarDataProcessor:
             if p in statvar_pvs:
                 statvar_pvs.pop(p)
 
-        # Set the dcid for the StatVar
-        self._statvars_map.add_default_pvs(
-            self._config.get('default_statvar_pvs'), statvar_pvs)
-        statvar_dcid = strip_namespace(svobs_pvs.get('variableMeasured', None))
-        statvar_dcid = strip_namespace(statvar_pvs.get('dcid', statvar_dcid))
+        self.generate_dependant_stat_vars(statvar_pvs, svobs_pvs)
+        statvar_dcid = self.process_stat_var_pvs(
+            statvar_pvs, strip_namespace(svobs_pvs.get('variableMeasured',
+                                                       None)))
         if not statvar_dcid:
-            statvar_dcid = strip_namespace(
-                self._statvars_map.generate_statvar_dcid(statvar_pvs))
-        if not statvar_dcid or not statvar_pvs:
-            logging.error(
-                f'Unable to get statvar:{statvar_dcid}:{statvar_pvs} for SVObs {pvs} in {self._file_context}'
-            )
-            self._counters.add_counter(f'error-missing-statvar-in-svobs', 1)
             return False
         svobs_pvs['variableMeasured'] = add_namespace(statvar_dcid)
         svobs_pvs[self._config.get(
             'input_reference_column')] = self._file_context
-
-        # Create and add StatVar.
-        if not self._statvars_map.add_statvar(statvar_pvs):
-            logging.error(
-                f'Dropping SVObs {svobs_pvs} for invalid statvar {statvar_pvs} in {self._file_context}'
-            )
-            self._counters.add_counter(f'dropped-svobs-with-invalid-statvar', 1,
-                                       statvar_dcid)
-            return False
 
         # Create and add SVObs.
         self._statvars_map.add_default_pvs(
@@ -2160,6 +2159,97 @@ class StatVarDataProcessor:
         _DEBUG and logging.debug(
             f'Added SVObs {svobs_pvs} in {self._file_context}')
         return True
+
+    def generate_dependant_stat_vars(self, statvar_pvs: dict, svobs_pvs: dict):
+        '''Create stat vars dcids for properties referring to statvars,
+        such as, variableMeasured or measurementDenominator.
+
+        The value of this property is a comma separated list of property name=values
+        to be used to generate the dcid.
+
+        If the property name begins with '-' it is excluded and
+        if it if begins with '+' it is included additionally to existing properties.
+        '''
+        statvar_ref_props = self._config.get(
+            'properties_with_statvars',
+            ['measurementDenominator', 'variableMeasured'])
+        for statvar_prop in statvar_ref_props:
+            for pvs in [statvar_pvs, svobs_pvs]:
+                if pvs and statvar_prop in pvs:
+                    prop_value = strip_namespace(pvs[statvar_prop])
+                    if not prop_value or prop_value[0].isupper():
+                        # Property is already a reference to a DCID. skip it.
+                        continue
+
+                    # Property has a reference to other properties.
+                    # Get a set of selected properties to generate DCID.
+                    selected_props = set()
+                    additional_props = set()
+                    exclude_props = set(statvar_ref_props)
+                    for prop in prop_value.split(','):
+                        prop = prop.strip()
+                        if not prop:
+                            continue
+                        if prop[0] == '-':
+                            # Exclude the prop
+                            exclude_props.add(prop[1:])
+                        elif prop[0] == '+':
+                            additional_props.add(prop[1:])
+                        else:
+                            selected_props.add(prop)
+                    if not selected_props:
+                      selected_props.update(statvar_pvs.keys())
+                    selected_props.update(additional_props)
+                    selected_props = selected_props.difference(
+                        exclude_props)
+                    # Create a new statvar for the selected PVs
+                    new_statvar_pvs = {}
+                    for sv_prop in selected_props:
+                        if sv_prop in statvar_pvs and sv_prop not in new_statvar_pvs:
+                            new_statvar_pvs[sv_prop] = statvar_pvs[sv_prop]
+                        elif '=' in sv_prop:
+                            prop, value = sv_prop.split('=', 1)
+                            new_statvar_pvs[prop] = value
+                    _DEBUG and logging.debug(
+                        'Generating statvar for {statvar_prop}:{prop_value} with {new_statvar_pvs} from {pvs}'
+                    )
+                    statvar_dcid = self.process_stat_var_pvs(new_statvar_pvs)
+                    if statvar_dcid:
+                        pvs[statvar_prop] = add_namespace(statvar_dcid)
+                    else:
+                        self.add_counter(
+                            f'error_generating_statvar_dcid_{statvar_prop}', 1,
+                            value)
+
+    def process_stat_var_pvs(self,
+                             statvar_pvs: dict,
+                             statvar_dcid: str = '') -> str:
+        '''Returns the dcid of the StatVar if processed successfully.'''
+        # Set the dcid for the StatVar
+        self._statvars_map.add_default_pvs(
+            self._config.get('default_statvar_pvs'), statvar_pvs)
+        if not statvar_dcid:
+            statvar_dcid = strip_namespace(statvar_pvs.get(
+                'dcid', statvar_dcid))
+        if not statvar_dcid:
+            statvar_dcid = strip_namespace(
+                self._statvars_map.generate_statvar_dcid(statvar_pvs))
+        if not statvar_dcid or not statvar_pvs:
+            logging.error(
+                f'Unable to get statvar:{statvar_dcid}:{statvar_pvs} for SVObs {pvs} in {self._file_context}'
+            )
+            self._counters.add_counter(f'error-missing-statvar-in-svobs', 1)
+            return None
+
+        # Create and add StatVar.
+        if not self._statvars_map.add_statvar(statvar_pvs):
+            logging.error(
+                f'Dropping SVObs {svobs_pvs} for invalid statvar {statvar_pvs} in {self._file_context}'
+            )
+            self._counters.add_counter(f'dropped-svobs-with-invalid-statvar', 1,
+                                       statvar_dcid)
+            return None
+        return statvar_dcid
 
     def resolve_svobs_place(self, pvs: dict) -> bool:
         '''Resolve any references in the StatVarObs PVs, such as places.'''

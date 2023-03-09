@@ -16,7 +16,7 @@
   The functions can be invoked within '#Eval' in the pv_map.py.
   For Example, for format values in 'DateTime' column into ISO-8601 format:
   'DateTime': {
-    '#Eval': 'observationAbout=format_date("{Data}")',
+    '#Eval': 'observationDate=format_date("{Data}")',
    }
 '''
 

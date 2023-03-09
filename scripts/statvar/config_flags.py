@@ -136,6 +136,7 @@ _DEFAULT_CONFIG = {
             'unit': '',
             'scalingFactor': '',
             'variableMeasured': '',
+            'measurementResult': '',
             '#Aggregate': '',
         }),
     'required_statvar_properties': [

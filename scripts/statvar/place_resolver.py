@@ -29,6 +29,12 @@ from typing import Union
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('maps_api_key', '', 'Google Maps API key')
+flags.DEFINE_list('resolve_input_csv', '',
+                  'Input csv with places to resolve under column "name".')
+flags.DEFINE_string('resolve_output_csv', '', 'Output csv with place dcids.')
+flags.DEFINE_string(
+    'resolve_config', '',
+    'Config setting for place resolution as json or python dict.')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -412,7 +418,9 @@ def process(input_filenames: list,
     logging.info(
         f'Writing {len(resolved_places)} rows with columns: {columns} into {output_filename}'
     )
-    os.makedirs(os.path.dirname(output_filename), exist_ok=True)
+    output_dir = os.path.dirname(output_filename)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
     with open(output_filename, 'w') as output_fp:
         writer = csv.DictWriter(output_fp,
                                 escapechar='\\',
@@ -429,8 +437,8 @@ def process(input_filenames: list,
 
 
 def main(_):
-    process(_FLAGS.input_data, _FLAGS.output_path, _FLAGS.maps_api_key,
-            _FLAGS.config)
+    process(_FLAGS.resolve_input_csv, _FLAGS.resolve_output_csv,
+            _FLAGS.maps_api_key, _FLAGS.resolve_config)
 
 
 if __name__ == '__main__':
