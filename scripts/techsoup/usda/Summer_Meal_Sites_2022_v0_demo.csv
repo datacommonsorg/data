@@ -1,0 +1,5 @@
+mealSiteDcid,mealSiteDayDcid,X,Y,siteCity,siteState,siteZip,startDate,endDate,daysofOperation,breakfastTime,lunchTime,snackTimeAM,snackTimePM,dinnerSupperTime,Season,County
+"usdaMealSite/-149.9256286_61.18804024","usdaMealSite/-149.9256286_61.18804024_mtwthf",-149.9256286,61.18804024,Anchorage,AK,99517,2022/05/20 12:00:00+00,2022/08/17 12:00:00+00,"M,T,W,TH,F",,12:00-12:30,,4:00-4:30,,2022,Anchorage
+"usdaMealSite/-145.7572342_60.5429198","usdaMealSite/-145.7572342_60.5429198_mtwthf",-145.7572342,60.5429198,Cordova,AK,99574,2022/06/01 12:00:00+00,2022/08/12 12:00:00+00,"M,T,W,TH,F",8:00-10:00,11:00-1:00,,,,2022,Valdez-Cordova
+"usdaMealSite/-149.43749_61.58500751","usdaMealSite/-149.43749_61.58500751_mtwthf",-149.43749,61.58500751,Wasilla,AK,99654,2022/05/23 12:00:00+00,2022/08/18 12:00:00+00,"M,T,W,TH,F",,11:00-1:00,,,,2022,Matanuska-Susitna
+"usdaMealSite/-70.06993077_41.76163589","usdaMealSite/-70.06993077_41.76163589_mtwthf",-70.06993077,41.76163589,Brewster,MA,2631,2022/07/05 12:00:00+00,2022/08/12 12:00:00+00,"M,T,W,TH,F",,11:15:00 PM,,,,2022,Barnstable
