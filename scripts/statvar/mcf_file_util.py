@@ -97,15 +97,22 @@ def strip_namespace(value: str) -> str:
     Any sequence of letters followed by a ':' is treated as a namespace.
     Quoted strings are assumed to start with '"' and won't be filtered.
     '''
-    if value and isinstance(value, str) and value[0].isalnum():
-        return value[value.find(':') + 1:].strip()
+    if value and isinstance(value, str):
+        pos = 0
+        len_value = len(value)
+        while (pos < len_value):
+            if not value[pos].isalpha():
+                break
+            pos += 1
+        if pos < len_value and value[pos] == ':':
+            return value[pos + 1:].strip()
     return value
 
 
 def get_pv_from_line(line: str) -> (str, str):
     '''Returns a tuple of (property, value) from the line.
     Args:
-      line: a string form an input file.
+      line: a string form an input file of the form <prop>:<value>.
     Returns:
       tuple: (property: str, value: str)
       removing leading/trailing whitespaces from the propety and value.

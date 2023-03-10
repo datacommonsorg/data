@@ -106,8 +106,17 @@ class PlaceResolver:
          '''
         logging.debug(f'Resolving places: {places}...')
         results = {}
-        # Get the maps placeId for each place.
+        unresolved_places = {}
         for key, place in places.items():
+            cached_place_dcid = self._get_cache_value(self._place_cache, key)
+            if cached_place_dcid:
+                self._counters.add_counter(f'place-resolver-name-cache-hits', 1)
+                results[key] = {'dcid': cached_place_dcid}
+            else:
+                unresolved_places[key] = place
+
+        # Get the maps placeId for each remaining place.
+        for key, place in unresolved_places.items():
             maps_result = self.get_maps_placeid(
                 name=place.get('name', ''),
                 country=place.get('country', None),
@@ -118,15 +127,18 @@ class PlaceResolver:
         # Collect all placeIds to be resolved that are not in cache.
         places_ids = {}
         for key, result in results.items():
-            if 'placeId' in result:
-                place_id = result['placeId']
-                if place_id in self._place_cache:
-                    # PlaceId is already resolved, use the cached result.
-                    results[key]['dcid'] = self._place_cache[place_id]
-                    self._counters.add_counter(
-                        'dc-api-resolve-placeid-cache-hits', 1)
-                else:
-                    places_ids[result['placeId']] = key
+            if 'dcid' not in result:
+                if 'placeId' in result:
+                    place_id = result['placeId']
+                    cached_place_dcid = self._get_cache_value(
+                        self._place_cache, place_id)
+                    if cached_place_dcid:
+                        # PlaceId is already resolved, use the cached result.
+                        results[key]['dcid'] = cached_place_dcid
+                        self._counters.add_counter(
+                            'dc-api-resolve-placeid-cache-hits', 1)
+                    else:
+                        places_ids[result['placeId']] = key
 
         lookup_placeids = list(places_ids.keys())
         if lookup_placeids:
@@ -146,6 +158,7 @@ class PlaceResolver:
                     results[key]['dcid'] = dcid
                     # Cache the response for future requests.
                     self._set_cache_value(self._place_cache, place_id, dcid)
+                    self._set_cache_value(self._place_cache, key, dcid)
         logging.debug(f'Resolved place dcids: {results}')
         return results
 
@@ -304,6 +317,7 @@ class PlaceResolver:
         '''Load cache from file.'''
         self._maps_cache = _read_dict_from_file(
             self._config.get('maps_api_cache'))
+        # Dictionary { <place>: <dcid> }
         self._place_cache = _read_dict_from_file(
             self._config.get('place_resolver_cache'))
         self._cache_save_timestamp = time.perf_counter()
@@ -338,6 +352,8 @@ def _read_dict_from_file(filename: str) -> dict:
     logging.info(f'Loading python dict from {filename}...')
     with open(filename) as file:
         pv_map_str = file.read()
+    if not pv_map_str:
+        return {}
 
     # Load the map assuming a python dictionary.
     # Can also be used with JSON with trailing commas and comments.

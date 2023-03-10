@@ -124,6 +124,21 @@ def _is_schema_node(value: str) -> bool:
     return True
 
 
+def _has_namespace(value: str) -> bool:
+    '''Returns True if the value has a namespace of letters followed by ':'.'''
+    if not value or not isinstance(value, str):
+        return False
+    len_value = len(value)
+    pos = 0
+    while (pos < len_value):
+        if not value[pos].isalpha():
+            break
+        pos += 1
+    if pos < len_value and value[pos] == ':':
+        return True
+    return False
+
+
 def _get_words(value: str, word_delimiter: str) -> list:
     '''Returns the list of non-empty words separated by the delimiter.'''
     return [w for w in re.split(word_delimiter, value) if w]
@@ -956,7 +971,7 @@ class StatVarsMap:
         _DEBUG and logging.debug(f'Generated schemaless statvar {pvs}')
         return len(schemaless_props) > 0
 
-    def add_statvar(self, statvar_pvs: dict) -> bool:
+    def add_statvar(self, statvar_dcid: str, statvar_pvs: dict) -> bool:
         '''Returns True if the statvar pvs are valid and is added to the map.
         Args:
           statvar_pvs: dictionary of property:values for the statvar
@@ -966,7 +981,8 @@ class StatVarsMap:
           A dcid is added to the statvar if not already set.
         '''
         pvs = self.get_valid_pvs(statvar_pvs)
-        statvar_dcid = strip_namespace(self.generate_statvar_dcid(pvs))
+        if not statvar_dcid:
+            statvar_dcid = strip_namespace(self.generate_statvar_dcid(pvs))
         is_schemaless = False
         if self._config.get('schemaless', False):
             is_schemaless = self.convert_to_schemaless_statvar(pvs)
@@ -979,16 +995,18 @@ class StatVarsMap:
                                        statvar_dcid)
             return False
         # Check if all the required statvar properties are present.
-        missing_props = set(self._config.get('required_statvar_properties',
-                                             [])).difference(set(pvs.keys()))
-        if missing_props:
-            logging.error(
-                f'Missing statvar properties {missing_props} in {pvs}')
-            self._counters.add_counter(
-                f'error-statvar-missing-property', 1,
-                f'{statvar_dcid}:missing-{missing_props}')
-            pvs['#ErrorMissingStatVarProperties'] = missing_props
-            return False
+        if statvar_pvs:
+            missing_props = set(
+                self._config.get('required_statvar_properties',
+                                 [])).difference(set(pvs.keys()))
+            if missing_props:
+                logging.error(
+                    f'Missing statvar properties {missing_props} in {pvs}')
+                self._counters.add_counter(
+                    f'error-statvar-missing-property', 1,
+                    f'{statvar_dcid}:missing-{missing_props}')
+                pvs['#ErrorMissingStatVarProperties'] = missing_props
+                return False
         _DEBUG and logging.debug(f'Adding statvar {pvs}')
         self._counters.add_counter('generated-statvars', 1, statvar_dcid)
         self._counters.set_counter('generated-unique-statvars',
@@ -2127,6 +2145,11 @@ class StatVarDataProcessor:
             statvar_pvs, strip_namespace(svobs_pvs.get('variableMeasured',
                                                        None)))
         if not statvar_dcid:
+            logging.error(
+                f'Dropping SVObs {svobs_pvs} for invalid statvar {statvar_pvs} in {self._file_context}'
+            )
+            self._counters.add_counter(f'dropped-svobs-with-invalid-statvar', 1,
+                                       statvar_dcid)
             return False
         svobs_pvs['variableMeasured'] = add_namespace(statvar_dcid)
         svobs_pvs[self._config.get(
@@ -2169,11 +2192,11 @@ class StatVarDataProcessor:
         for statvar_prop in statvar_ref_props:
             for pvs in [statvar_pvs, svobs_pvs]:
                 if pvs and statvar_prop in pvs:
-                    prop_value = strip_namespace(pvs[statvar_prop])
-                    if not prop_value or prop_value[0].isupper():
-                        # Property is already a reference to a DCID. skip it.
+                    prop_value = pvs[statvar_prop]
+                    if (not prop_value) or (prop_value[0].isupper()) or (
+                            _has_namespace(prop_value)):
+                        # Property value is a reference to a DCID, skip it.
                         continue
-
                     # Property has a reference to other properties.
                     # Get a set of selected properties to generate DCID.
                     selected_props = set()
@@ -2209,14 +2232,15 @@ class StatVarDataProcessor:
                     if statvar_dcid:
                         pvs[statvar_prop] = add_namespace(statvar_dcid)
                     else:
-                        self.add_counter(
-                            f'error_generating_statvar_dcid_{statvar_prop}', 1,
-                            value)
+                        self._counters.add_counter(
+                            f'error_generating_statvar_dcid_{statvar_prop}', 1)
 
     def process_stat_var_pvs(self,
                              statvar_pvs: dict,
-                             statvar_dcid: str = '') -> str:
+                             statvar_dcid: str = None) -> str:
         '''Returns the dcid of the StatVar if processed successfully.'''
+        if statvar_dcid and not statvar_pvs:
+            return statvar_dcid
         # Set the dcid for the StatVar
         self._statvars_map.add_default_pvs(
             self._config.get('default_statvar_pvs'), statvar_pvs)
@@ -2226,21 +2250,10 @@ class StatVarDataProcessor:
         if not statvar_dcid:
             statvar_dcid = strip_namespace(
                 self._statvars_map.generate_statvar_dcid(statvar_pvs))
-        if not statvar_dcid or not statvar_pvs:
-            logging.error(
-                f'Unable to get statvar:{statvar_dcid}:{statvar_pvs} for SVObs {pvs} in {self._file_context}'
-            )
-            self._counters.add_counter(f'error-missing-statvar-in-svobs', 1)
-            return None
-
-        # Create and add StatVar.
-        if not self._statvars_map.add_statvar(statvar_pvs):
-            logging.error(
-                f'Dropping SVObs {svobs_pvs} for invalid statvar {statvar_pvs} in {self._file_context}'
-            )
-            self._counters.add_counter(f'dropped-svobs-with-invalid-statvar', 1,
-                                       statvar_dcid)
-            return None
+        if statvar_dcid:
+            # Add StatVar to the global map.
+            if not self._statvars_map.add_statvar(statvar_dcid, statvar_pvs):
+                return None
         return statvar_dcid
 
     def resolve_svobs_place(self, pvs: dict) -> bool:
@@ -2258,11 +2271,11 @@ class StatVarDataProcessor:
         _DEBUG and logging.debug(f'Resolving place: {place} in {pvs}')
         # Lookup dcid for the place.
         place_dcid = place
-        place_id = self.resolve_value_references(
+        place_pvs = self.resolve_value_references(
             self._pv_mapper.get_all_pvs_for_value(place, 'observationAbout'))
-        if place_id:
-            place_dcid = place_id.get('observationAbout', '')
-        if place_dcid == strip_namespace(place_dcid):
+        if place_pvs:
+            place_dcid = place_pvs.get('observationAbout', '')
+        if not _has_namespace(place_dcid):
             # Place is not resolved yet. Try resolving through Maps API.
             if self._config.get('resolve_places', False):
                 resolved_place = self._place_resolver.resolve_name({
@@ -2270,9 +2283,13 @@ class StatVarDataProcessor:
                         'name':
                             place_dcid,
                         'country':
-                            pvs.get('country', None),
+                            pvs.get('#country',
+                                    self._config.get('maps_api_country', None)),
                         'administrative_area':
-                            pvs.get('administrative_area', None)
+                            pvs.get(
+                                '#administrative_area',
+                                self._config.get('maps_api_administrative_area',
+                                                 None))
                     }
                 })
                 resolved_dcid = resolved_place.get(place_dcid,
