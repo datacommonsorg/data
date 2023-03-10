@@ -2397,6 +2397,29 @@ def shard_csv_data(files: list,
     return output_files
 
 
+def convert_xls_to_csv(filenames: list, sheets: list) -> list:
+    '''Returns a list of csv files extracted from the sheets within the xls.'''
+    csv_files = []
+    for file in filenames:
+        filename, ext = os.path.splitext(file)
+        logging.info(f'Converting {filename}{ext} into csv for {sheets}')
+        if '.xls' in ext:
+            # Convert the xls file into csv file per sheet.
+            xls = pd.ExcelFile(file)
+            for sheet in xls.sheet_names:
+                # Read each sheet as a Pandas DataFrame and save it as csv
+                if not sheets or sheet in sheets:
+                    df = pd.read_excel(xls, sheet_name=sheet, dtype=str)
+                    csv_filename = re.sub('[^A-Za-z0-9_.-]+', '_',
+                                          f'{filename}_{sheet}.csv')
+                    df.to_csv(csv_filename, index=False)
+                    logging.info(f'Converted {file}:{sheet} into csv {csv_filename}')
+                    csv_files.append(csv_filename)
+        else:
+          csv_files.append(file)
+    return csv_files
+
+
 def prepare_input_data(config: dict) -> bool:
     '''Prepare the input data, download and shard if needed.'''
     input_data = config.get('input_data', '')
@@ -2409,6 +2432,7 @@ def prepare_input_data(config: dict) -> bool:
             return False
         input_files = download_csv_from_url(data_url,
                                             os.path.dirname(input_data[0]))
+    input_files = convert_xls_to_csv(input_files, config.get('input_sheets', []))
     shard_column = config.get('shard_input_by_column', '')
     if config.get('parallelism', 0) > 0 and shard_column:
         return shard_csv_data(input_files, shard_column,

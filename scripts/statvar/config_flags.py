@@ -45,6 +45,8 @@ flags.DEFINE_list(
     'Comma separated list of namespace:file with property values.')
 flags.DEFINE_list('input_data', [],
                   'Comma separated list of data files to be processed.')
+flags.DEFINE_list('input_sheets', [],
+                  'Comma separated list of sheets within xls files to be processed.')
 flags.DEFINE_integer('input_rows', sys.maxsize,
                      'Number of rows per input file to process.')
 flags.DEFINE_integer(
@@ -85,6 +87,8 @@ _DEFAULT_CONFIG = {
         '#input',
     'input_min_columns_per_row':
         3,
+    'input_data': _FLAGS.input_data,
+    'input_sheets': _FLAGS.input_sheets,
     'pv_map_drop_undefined_nodes':
         False,  # Don't drop undefined PVs in the column PV Map.
     'duplicate_svobs_key':
