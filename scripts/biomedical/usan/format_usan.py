@@ -28,6 +28,16 @@ import sys
 #Disable false positive index chaining warnings
 pd.options.mode.chained_assignment = None
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+        
 def remove_null_entries(df):
 	"""Drop specific null entries from dataframe
 	Args:
@@ -186,6 +196,7 @@ def driver_function(df, df_chembl):
 	df = format_dcid(df)
 	df_chembl = format_chembl(df_chembl)
 	df_final = format_year(df, df_chembl)
+	df_final.apply(check_for_illegal_charc)
 	return df_final
 
 def main():
