@@ -35,8 +35,8 @@ class TestEvalFunctions(unittest.TestCase):
             ('num', 3),
             eval_functions.evaluate_statement('num=1+Number', {'Number': 2}))
         self.assertEqual(
-            ('', 4),
-            eval_functions.evaluate_statement('2*Number', {'Number': 2}))
+            ('', 4), eval_functions.evaluate_statement('2*Number',
+                                                       {'Number': 2}))
         # Verify None is returned on error in statement
         self.assertEqual(
             ('name', None),

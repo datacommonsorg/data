@@ -115,7 +115,6 @@ def drop_existing_mcf_nodes(input_nodes: dict,
         counters = Counters()
     existing_nodes = dc_api_get_node_property_values(list(input_nodes.keys()),
                                                      config)
-    logging.info(f'DELETE: filtering input: {input_nodes} with {existing_nodes}')
     counters.add_counter('existing-nodes-from-api', len(existing_nodes))
     return drop_mcf_nodes(input_nodes, existing_nodes, config, counters)
 
@@ -141,7 +140,6 @@ def filter_mcf_file(input_mcf_files: str,
     if not counters:
         counters = Counters()
     input_nodes = load_mcf_nodes(input_mcf_files)
-    logging.info(f'DELETE: input nodes: {input_nodes}')
     ignore_nodes = load_mcf_nodes(ignore_mcf_files)
     counters.add_counter('input-nodes', len(input_nodes))
     counters.add_counter('ignore-nodes-loaded', len(input_nodes))

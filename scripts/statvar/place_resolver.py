@@ -368,7 +368,7 @@ def _write_dict_to_file(cache_dict: dict, filename: str):
         logging.info(f'Saving dict to {filename}')
         dirname = os.path.dirname(filename)
         if dirname:
-          os.makedirs(dirname, exist_ok=True)
+            os.makedirs(dirname, exist_ok=True)
         with open(filename, 'w') as fp:
             pp.pprint(cache_dict, stream=fp)
 

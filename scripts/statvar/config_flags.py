@@ -28,7 +28,8 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 from config_map import ConfigMap
 
@@ -39,14 +40,15 @@ flags.DEFINE_list('data_url', '', 'URLs to download the data from.')
 flags.DEFINE_string('shard_input_by_column', '',
                     'Shard input data by unique values in column.')
 flags.DEFINE_integer('shard_prefix_length', sys.maxsize,
-                    'Shard input data by value prefix of given length.')
+                     'Shard input data by value prefix of given length.')
 flags.DEFINE_list(
     'pv_map', [],
     'Comma separated list of namespace:file with property values.')
 flags.DEFINE_list('input_data', [],
                   'Comma separated list of data files to be processed.')
-flags.DEFINE_list('input_sheets', [],
-                  'Comma separated list of sheets within xls files to be processed.')
+flags.DEFINE_list(
+    'input_sheets', [],
+    'Comma separated list of sheets within xls files to be processed.')
 flags.DEFINE_integer('input_rows', sys.maxsize,
                      'Number of rows per input file to process.')
 flags.DEFINE_integer(
@@ -87,8 +89,10 @@ _DEFAULT_CONFIG = {
         '#input',
     'input_min_columns_per_row':
         3,
-    'input_data': _FLAGS.input_data,
-    'input_sheets': _FLAGS.input_sheets,
+    'input_data':
+        _FLAGS.input_data,
+    'input_sheets':
+        _FLAGS.input_sheets,
     'pv_map_drop_undefined_nodes':
         False,  # Don't drop undefined PVs in the column PV Map.
     'duplicate_svobs_key':
@@ -169,14 +173,14 @@ _DEFAULT_CONFIG = {
     # List of default PVS maps to lookup column values if there is no map for a
     # column name.
     'default_pv_maps': ['GLOBAL'],
-
     'show_counters_every_n':
         0,
     'show_counters_every_sec':
         30,
     # Resolve places with Maps API.
     # Set the Maps API key with --maps_api_key
-    'resolve_places': False,
+    'resolve_places':
+        False,
     # Output options
     'generate_statvar_mcf':
         True,  # Generate MCF file with all statvars
@@ -190,7 +194,8 @@ _DEFAULT_CONFIG = {
         True,  # Generate tMCF for CSV columns
     'skip_constant_csv_columns':
         False,  # Skip emitting columns with constant values in the csv
-    'output_only_new_statvars': False,  # Drop existing statvars from output
+    'output_only_new_statvars':
+        False,  # Drop existing statvars from output
 
     # Settings for DC API.
     'dc_api_root':
@@ -201,18 +206,26 @@ _DEFAULT_CONFIG = {
         100,
 
     # Settings from flags
-    'pv_map': _FLAGS.pv_map,
-    'input_rows': _FLAGS.input_rows,
-    'skip_rows': _FLAGS.skip_rows,
-    'header_rows': _FLAGS.header_rows,
-    'header_columns': _FLAGS.header_columns,
-    'parallelism': _FLAGS.parallelism,
-    'debug': _FLAGS.debug,
-    'log_level': _FLAGS.log_level,
+    'pv_map':
+        _FLAGS.pv_map,
+    'input_rows':
+        _FLAGS.input_rows,
+    'skip_rows':
+        _FLAGS.skip_rows,
+    'header_rows':
+        _FLAGS.header_rows,
+    'header_columns':
+        _FLAGS.header_columns,
+    'parallelism':
+        _FLAGS.parallelism,
+    'debug':
+        _FLAGS.debug,
+    'log_level':
+        _FLAGS.log_level,
 }
 
 
-def get_config_from_flags(filename: str=None) -> ConfigMap:
+def get_config_from_flags(filename: str = None) -> ConfigMap:
     '''Returns a Config object with parameters loaded from a file.
     Args:
       filename: name of the file to load.
@@ -220,8 +233,8 @@ def get_config_from_flags(filename: str=None) -> ConfigMap:
       Config object with all the parameters loaded into the config_dict.
     '''
     if _FLAGS.debug:
-      logging.set_verbosity(2)
+        logging.set_verbosity(2)
     if _FLAGS.log_level:
-      logging.set_verbosity(_FLAGS.log_level)
+        logging.set_verbosity(_FLAGS.log_level)
 
     return ConfigMap(config_dict=_DEFAULT_CONFIG, filename=filename)

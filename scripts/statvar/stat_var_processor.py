@@ -1332,13 +1332,15 @@ class StatVarsMap:
             stat_var_nodes = drop_existing_mcf_nodes(
                 stat_var_nodes,
                 self._config.get(
-                    'statvar_diff_config', {
+                    'statvar_diff_config',
+                    {
                         # Ignore properties that don't affect statvar dcid.
                         'ignore_property': [
                             'name', 'description', 'constraintProperties',
                             'memberOf', 'provenance'
                         ]
-                    }), self._counters)
+                    }),
+                self._counters)
             removed_statvars = num_statvars - len(stat_var_nodes)
             logging.info(
                 f'Removed {removed_statvars} existing nodes from {num_statvars} statvars'
