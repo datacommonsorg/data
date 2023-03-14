@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Tests for config.py'''
+'''Tests for mcf_diff.py'''
 
 import os
 import sys

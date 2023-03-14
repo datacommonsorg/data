@@ -113,8 +113,9 @@ def drop_existing_mcf_nodes(input_nodes: dict,
     '''
     if not counters:
         counters = Counters()
-    existing_nodes = dc_api_get_node_property_values(list(input_nodes.keys()),
-                                                     config)
+    # Get the property-values from DC API for all nodes
+    dcids = [strip_namespace(dcid) for dcid in list(input_nodes.keys()) if dcid]
+    existing_nodes = dc_api_get_node_property_values(dcids, config)
     counters.add_counter('existing-nodes-from-api', len(existing_nodes))
     return drop_mcf_nodes(input_nodes, existing_nodes, config, counters)
 
@@ -154,7 +155,7 @@ def filter_mcf_file(input_mcf_files: str,
     # Save the filtered nodes into an MCF file.
     if output_mcf:
         write_mcf_nodes([output_nodes], output_mcf)
-        print(f'Wrote {len(output_nodes)} nodes to {output_mcf}')
+        logging.info(f'Wrote {len(output_nodes)} nodes to {output_mcf}')
     counters.add_counter(f'output-nodes', len(output_nodes))
     counters.print_counters()
     return output_nodes
