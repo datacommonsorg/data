@@ -39,3 +39,10 @@ kubectl annotate serviceaccount \
   --overwrite \
   import-automation-ksa \
   iam.gke.io/gcp-service-account=datcom-website-dev@appspot.gserviceaccount.com
+
+# Set the oauth env vars before running the script
+# export OAUTH_CLIENT_ID=
+# export OAUTH_CLIENT_SECRET=$
+kubectl create secret generic import-automation-iap-secret \
+  --from-literal=client_id=$OAUTH_CLIENT_ID \
+  --from-literal=client_secret=$OAUTH_CLIENT_SECRET
