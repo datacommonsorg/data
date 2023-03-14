@@ -136,6 +136,7 @@ def start():
     """Handles start up calls from App Engine."""
     return ''
 
+
 @FLASK_APP.route('/healthz')
 def healthz():
     """Healthcheck endpoint"""
