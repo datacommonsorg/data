@@ -1342,9 +1342,15 @@ class StatVarsMap:
                     }),
                 self._counters)
             removed_statvars = num_statvars - len(stat_var_nodes)
+            self._counters.add_counter('dropped-output-statvars-mcf',
+                                       removed_statvars)
             logging.info(
                 f'Removed {removed_statvars} existing nodes from {num_statvars} statvars'
             )
+
+        if not stat_var_nodes:
+            # No new statvars to output.
+            return
 
         commandline = ' '.join(sys.argv)
         if not header:
