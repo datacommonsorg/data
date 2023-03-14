@@ -190,6 +190,7 @@ _DEFAULT_CONFIG = {
         True,  # Generate tMCF for CSV columns
     'skip_constant_csv_columns':
         False,  # Skip emitting columns with constant values in the csv
+    'output_only_new_statvars': False,  # Drop existing statvars from output
 
     # Settings for DC API.
     'dc_api_root':

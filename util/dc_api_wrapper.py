@@ -202,7 +202,8 @@ def dc_api_get_node_property_values(dcids: list,
         for dcid, triples in api_triples.items():
             pvs = {}
             for d, prop, val in triples:
-                pvs[prop] = val
+                if d == dcid:
+                    pvs[prop] = val
             if len(pvs) > 0:
                 if 'Node' not in pvs:
                     pvs['Node'] = _add_namespace(dcid)

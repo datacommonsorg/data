@@ -66,6 +66,7 @@ import eval_functions
 from config_flags import get_config_from_flags
 from mcf_file_util import get_numeric_value
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
+from mcf_filter import drop_existing_mcf_nodes
 from mcf_diff import fingerprint_node, fingerprint_mcf_nodes
 from place_resolver import PlaceResolver
 
@@ -1326,11 +1327,29 @@ class StatVarsMap:
         '''Save the statvars into an MCF file.'''
         if not stat_var_nodes:
             stat_var_nodes = self._statvars_map
+        if self._config.get('output_only_new_statvars', True):
+            num_statvars = len(stat_var_nodes)
+            stat_var_nodes = drop_existing_mcf_nodes(
+                stat_var_nodes,
+                self._config.get(
+                    'statvar_diff_config', {
+                        # Ignore properties that don't affect statvar dcid.
+                        'ignore_property': [
+                            'name', 'description', 'constraintProperties',
+                            'memberOf', 'provenance'
+                        ]
+                    }), self._counters)
+            removed_statvars = num_statvars - len(stat_var_nodes)
+            logging.info(
+                f'Removed {removed_statvars} existing nodes from {num_statvars} statvars'
+            )
+
         commandline = ' '.join(sys.argv)
         if not header:
             header = f'# Auto generated using command: "{commandline}" on {datetime.datetime.now()}\n'
         logging.info(
             f'Generating {len(stat_var_nodes)} statvars into {filename}')
+
         write_mcf_nodes(
             [stat_var_nodes],
             filename=filename,
@@ -2413,10 +2432,11 @@ def convert_xls_to_csv(filenames: list, sheets: list) -> list:
                     csv_filename = re.sub('[^A-Za-z0-9_.-]+', '_',
                                           f'{filename}_{sheet}.csv')
                     df.to_csv(csv_filename, index=False)
-                    logging.info(f'Converted {file}:{sheet} into csv {csv_filename}')
+                    logging.info(
+                        f'Converted {file}:{sheet} into csv {csv_filename}')
                     csv_files.append(csv_filename)
         else:
-          csv_files.append(file)
+            csv_files.append(file)
     return csv_files
 
 
@@ -2432,7 +2452,8 @@ def prepare_input_data(config: dict) -> bool:
             return False
         input_files = download_csv_from_url(data_url,
                                             os.path.dirname(input_data[0]))
-    input_files = convert_xls_to_csv(input_files, config.get('input_sheets', []))
+    input_files = convert_xls_to_csv(input_files,
+                                     config.get('input_sheets', []))
     shard_column = config.get('shard_input_by_column', '')
     if config.get('parallelism', 0) > 0 and shard_column:
         return shard_csv_data(input_files, shard_column,
