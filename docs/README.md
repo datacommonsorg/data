@@ -40,6 +40,15 @@ Links:
 * [Example1](https://docs.google.com/document/d/e/2PACX-1vScfoVm36L7x1p4Bqh82JmDmsumhqiPz_w6zX7wzy0nX8kDLxMJw44hOBgB6CDd2o0kYKekdgNWIR1f/pub)
 * [Example2](https://docs.google.com/document/d/e/2PACX-1vS9R0eZO-AhQ19jQcLyOyYODn3dF8wGjytro0nFTjp4MsoFvsAgD7mayppcseLvNSCO6Ac4-8b2SXe4/pub)
 
+## Schema-less imports
+
+For datasets with complex schema or ones that we want to import quickly, we can start with a schema-less import, and iteratively add schema. The “schema-less” part of this framework means that the SV is not yet fully defined. This lets us get the dataset into Data Commons without blocking on schema definition.
+
+Links:
+* [Schema-less Import Guide](https://docs.datacommons.org/import_dataset/schema_less_guide.html)
+* [Import document template](https://docs.google.com/document/d/1GC7DTpxXo_3zreDRt7wFuURBfA1T275p-qx1N-VIdGM/)
+* [Example](https://docs.google.com/document/d/e/2PACX-1vS6ItxH7T_XvYuz4-xeO9LKoYlrXr-YkrwiclRWcdtYm11J8OQHUwDw4E66uaTQA7yTdwLXfrNBdKgz/pub)
+
 ## Preparing artifacts
 
 Once the entity and schema mapping have been finalized, you prepare the artifacts.  This includes:
