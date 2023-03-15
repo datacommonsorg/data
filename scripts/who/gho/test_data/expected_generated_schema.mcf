@@ -13557,6 +13557,13 @@ typeOf: schema:Property
 domainIncludes: dcs:Thing
 rangeIncludes: schema:Number, schema:Text
 
+Node: dcid:who/CCH_SURVEY_MULTISTAKEHOLDER_MECHANISM_EXISTS
+name: "who/CCH_SURVEY_MULTISTAKEHOLDER_MECHANISM_EXISTS"
+description: "Existence of a multi-stakeholder mechanism on health and climate change"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
+
 Node: dcid:who/IHRSPAR_CAPACITY07
 name: "who/IHRSPAR_CAPACITY07"
 description: "Human Resources (SPAR)"
@@ -13893,6 +13900,13 @@ typeOf: schema:Property
 domainIncludes: dcs:Thing
 rangeIncludes: schema:Number, schema:Text
 
+Node: dcid:who/CCH_SURVEY_AGREEMENT_MOH_OTHERSECTORS
+name: "who/CCH_SURVEY_AGREEMENT_MOH_OTHERSECTORS"
+description: "Agreement in place between the Ministry of Health and other sector(s) in relation to health and climate change policy or programs"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
+
 Node: dcid:who/GASPRP
 name: "who/GASPRP"
 description: "Reporting countries"
@@ -14089,6 +14103,13 @@ typeOf: schema:Property
 domainIncludes: dcs:Thing
 rangeIncludes: schema:Number, schema:Text
 
+Node: dcid:who/CCH_SURVEY_PLAN_STRATEGY_DEVELOPED
+name: "who/CCH_SURVEY_PLAN_STRATEGY_DEVELOPED"
+description: "National health and climate change plan or strategy developed"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
+
 Node: dcid:who/NCD_HYP_PREVALENCE_A
 name: "who/NCD_HYP_PREVALENCE_A"
 description: "Prevalence of hypertension among adults aged 30-79 years, age-standardized"
@@ -14148,6 +14169,13 @@ rangeIncludes: schema:Number, schema:Text
 Node: dcid:who/MALARIA_INDIG_STATUS
 name: "who/MALARIA_INDIG_STATUS"
 description: "Status of indigenous malaria cases"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
+
+Node: dcid:who/CCH_SURVEY_MOH_FOCALPOINT
+name: "who/CCH_SURVEY_MOH_FOCALPOINT"
+description: "Designation of a focal point responsible for health and climate change within the Ministry of Health"
 typeOf: schema:Property
 domainIncludes: dcs:Thing
 rangeIncludes: schema:Number, schema:Text
@@ -15034,6 +15062,13 @@ typeOf: schema:Property
 domainIncludes: dcs:Thing
 rangeIncludes: schema:Number, schema:Text
 
+Node: dcid:who/CCH_SURVEY_SURVEILLANCE_WHICH_METEOROLOGICAL
+name: "who/CCH_SURVEY_SURVEILLANCE_WHICH_METEOROLOGICAL"
+description: "Existence of a health surveillance system which includes meteorological information"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
+
 Node: dcid:who/NCD_CCS_PA_MGMT_GUIDE
 name: "who/NCD_CCS_PA_MGMT_GUIDE"
 description: "Existence of evidence-based national guidelines/protocols/standards for the management of physical inactivity"
@@ -15156,6 +15191,13 @@ rangeIncludes: schema:Number, schema:Text
 Node: dcid:who/NCD_CHOL_MEANTOTALCHOL_A
 name: "who/NCD_CHOL_MEANTOTALCHOL_A"
 description: "Mean total cholesterol,  age-standardized"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
+
+Node: dcid:who/CCH_SURVEY_SURVEILLANCE_SYSTEM_EXISTS
+name: "who/CCH_SURVEY_SURVEILLANCE_SYSTEM_EXISTS"
+description: "Existence of an health surveillance system"
 typeOf: schema:Property
 domainIncludes: dcs:Thing
 rangeIncludes: schema:Number, schema:Text
@@ -15772,6 +15814,13 @@ rangeIncludes: schema:Number, schema:Text
 Node: dcid:who/FINPROTECTION_IMP_PREL_LEVEL_SH
 name: "who/FINPROTECTION_IMP_PREL_LEVEL_SH"
 description: "Total population pushed  further  below a relative poverty line by household health expenditures (60% of median daily per capita consumption or income) (%)"
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: schema:Number, schema:Text
+
+Node: dcid:who/CCH_SURVEY_VULNERABILITY_ADAPTATION_ASSESSMENT
+name: "who/CCH_SURVEY_VULNERABILITY_ADAPTATION_ASSESSMENT"
+description: "Climate change and health vulnerability and adaptation assessment conducted"
 typeOf: schema:Property
 domainIncludes: dcs:Thing
 rangeIncludes: schema:Number, schema:Text
