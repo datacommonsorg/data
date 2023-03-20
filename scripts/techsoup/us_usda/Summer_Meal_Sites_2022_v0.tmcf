@@ -1,18 +1,18 @@
 Node: E:Data->E1
-typeOf: UsdaSummerMealSite
-day: E:Data->E2
+typeOf: dcs:UsdaSummerMealSite
+dcid: C:Data->mealSiteDcid
 longitude: C:Data->X
 latitude: C:Data->Y
 city: C:Data->siteCity
 state: C:Data->siteState
 zip: C:Data->siteZip
 county: C:Data->County
-season: C:Data->Season
 
 Node: E:Data->E2
-dcid: <summer-meal-site-dcid>-<day>
-typeOf: UsdaSummerMealSiteDay
-day: C:daysofOperation
+typeOf: dcs:UsdaSummerMealSiteOperations
+dcid: C:Data->mealSiteOperationsDcid
+mealSite: E:Data->E1
+daysOfOperation: C:Data->daysOfOperation
 breakfastHours: C:Data->breakfastTime
 lunchHours: C:Data->lunchTime
 morningSnackHours: C:Data->snackTimeAM
@@ -20,3 +20,4 @@ afternoonSnackHours: C:Data->snackTimePM
 dinnerHours: C:Data->dinnerSupperTime
 startDate: C:Data->startDate
 endDate: C:Data->endDate
+season: C:Data->Season
