@@ -1,5 +1,5 @@
 
-# Importing ontology dataset of molecular interaction from the European Bioinformatics Institute (EMBL-EBI)
+# Importing Master Species List and Virus Metadata Resource from the International Committee on Taxonomy of Viruses (ICTV)
 
 ## Table of Contents
 
@@ -38,7 +38,7 @@ This directory stores all scripts used to import data on viurses and virus isola
 
 ### License
 
-The data is published under the Creative Commons Attribution ShareAlike 4.0 International [(CC BY-SA 4.0)] (https://creativecommons.org/licenses/by-sa/4.0/).
+The data is published under the Creative Commons Attribution ShareAlike 4.0 International [(CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/).
  
 ### Dataset Documentation and Relevant Links
 
