@@ -15,10 +15,12 @@
     3. [Tests](#tests)
 
 
-## About the Dataset
+## About the Datasets
 “The [International Committee on Taxonomy of Viruses (ICTV)](https://ictv.global/) authorizes and organizes the taxonomic classification of and the nomenclatures for viruses. The ICTV has developed a universal taxonomic scheme for viruses, and thus has the means to appropriately describe, name, and classify every virus that affects living organisms. The members of the International Committee on Taxonomy of Viruses are considered expert virologists. The ICTV was formed from and is governed by the Virology Division of the International Union of Microbiological Societies. Detailed work, such as delimiting the boundaries of species within a family, typically is performed by study groups of experts in the families.” Description from [Wikipedia](https://en.wikipedia.org/wiki/International_Committee_on_Taxonomy_of_Viruses).
 
 The ICTV Master Species List is curated by virology experts, which have established over 100 international study groups, which organize discussions on emerging taxonomic issues in their field, oversee the submission of proposals for new taxonomy, and prepare or revise the relevant chapter(s) in ICTV reports. ICTV is open to submissions of proposals for taxonomic changes from an individual, however in practice proposals are usually submitted by members of the relevant study groups.
+
+The ICTV chooses an exemplar virus for each species and the Virus Metadata Resource provides a list of these exemplars. An exemplar virus serves as an example of a well-characterized virus isolate of that species and includes the GenBank accession number for the genomic sequence of the isolate as well as the virus name, isolate designation, suggested abbreviation, genome composition, and host source.
 
 ### Download URLs
 
