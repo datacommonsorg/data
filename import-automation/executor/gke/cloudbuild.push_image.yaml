@@ -22,7 +22,7 @@ steps:
         DOCKER_BUILDKIT=1 docker build -f Dockerfile --tag gcr.io/$_PROJECT_ID/datacommons-import-automation-executor:${_TAG} .
         docker push gcr.io/$_PROJECT_ID/datacommons-import-automation-executor:${_TAG}
 
-timeout: 3600s
+timeout: 600s
 options:
   dynamic_substitutions: true
   machineType: "E2_HIGHCPU_8"

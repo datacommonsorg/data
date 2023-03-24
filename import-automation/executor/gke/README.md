@@ -2,7 +2,7 @@ Deploy to GKE
 
 Import-automation executor can also be deployed to gke. After committing new changes, please do the following to deploy.
 
-1. cd to executor dir.
+1. From repo root, run: `cd import-automation/executor`
 
 2. build and push image: `./gke/push_image.sh`
 
