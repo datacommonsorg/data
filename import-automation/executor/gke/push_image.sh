@@ -25,4 +25,4 @@ gcloud builds submit . \
   --async \
   --project=$PROJECT_ID \
   --config=gke/cloudbuild.push_image.yaml \
-  --substitutions=_TAG=$(git rev-parse --short=7 HEAD),_PROJECT_ID=$PROJECT_ID
+  --substitutions=_TAG="prod",_PROJECT_ID=$PROJECT_ID
