@@ -39,7 +39,9 @@ class TestImportData(unittest.TestCase):
         curated_dim_map = os.path.join(MODULE_DIR, "curated_dim_map.json")
         curated_sv_map = os.path.join(TEST_DATA_DIR,
                                       "test_curated_sv_dcid_map.json")
-        expected_csv = os.path.join(TEST_DATA_DIR, "expected_csv.csv")
+        expected_schemaless_csv = os.path.join(TEST_DATA_DIR,
+                                               "expected_schemaless.csv")
+        expected_schema_csv = os.path.join(TEST_DATA_DIR, "expected_schema.csv")
         expected_sv_mcf = os.path.join(TEST_DATA_DIR, "expected_sv.mcf")
         expected_generated_schema_mcf = os.path.join(
             TEST_DATA_DIR, "expected_generated_schema.mcf")
@@ -49,10 +51,19 @@ class TestImportData(unittest.TestCase):
         import_data(data_files, curated_dim_map, curated_sv_map, TEST_DATA_DIR,
                     "")
 
-        # check csv.
-        with open(os.path.join(TEST_DATA_DIR, "who.csv"), 'r+') as actual_f:
+        # check schemaless csv.
+        with open(os.path.join(TEST_DATA_DIR, "who_schemaless.csv"),
+                  'r+') as actual_f:
             actual: str = actual_f.read()
-        with open(expected_csv, 'r+') as expected_f:
+        with open(expected_schemaless_csv, 'r+') as expected_f:
+            expected: str = expected_f.read()
+        self.assertEqual(actual, expected)
+
+        # check schema csv.
+        with open(os.path.join(TEST_DATA_DIR, "who_schema.csv"),
+                  'r+') as actual_f:
+            actual: str = actual_f.read()
+        with open(expected_schema_csv, 'r+') as expected_f:
             expected: str = expected_f.read()
         self.assertEqual(actual, expected)
 
