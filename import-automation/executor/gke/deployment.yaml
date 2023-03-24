@@ -42,9 +42,10 @@ metadata:
   name: backendconfig
   namespace: import-automation
 spec:
-  timeoutSec: 60
+  # Note that this timeout must account for the entire duration of preprocess scripts.
+  timeoutSec: 600
   connectionDraining:
-    drainingTimeoutSec: 60
+    drainingTimeoutSec: 600
   healthCheck:
     checkIntervalSec: 15
     port: 8080
@@ -93,22 +94,17 @@ spec:
           env:
             - name: EXECUTOR_PRODUCTION
               value: "True"
-            - name: TMPDIR
-              value: "/datacommons/tmp"
             - name: PORT
               value: "8080"
-          image: gcr.io/datcom-ci/datacommons-import-automation-executor:b6500dc
+          image: gcr.io/datcom-ci/datacommons-import-automation-executor:prod
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /healthz
               port: 8080
+            periodSeconds: 60
           ports:
             - containerPort: 8080
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
           resources:
             limits:
               memory: 20G
@@ -119,11 +115,5 @@ spec:
             httpGet:
               path: /healthz
               port: 8080
-          volumeMounts:
-            - mountPath: /datacommons/tmp
-              name: tmpdir-volume
       serviceAccountName: import-automation-ksa
-      volumes:
-      - name: tmpdir-volume
-        emptyDir:
-          sizeLimit: 10Gi
+

@@ -25,4 +25,4 @@ RUN pip install -r /app/requirements.txt
 
 ADD . /app
 
-CMD gunicorn --timeout 1800 -b :$PORT app.main:FLASK_APP
+CMD gunicorn --timeout 1800 --workers 5 -b :$PORT app.main:FLASK_APP

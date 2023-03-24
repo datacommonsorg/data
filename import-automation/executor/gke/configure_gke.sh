@@ -41,6 +41,6 @@ kubectl annotate serviceaccount \
 # Set the oauth env vars before running the script
 # export OAUTH_CLIENT_ID=<fill>
 # export OAUTH_CLIENT_SECRET=<fill>
-kubectl -n import automation create secret generic import-automation-iap-secret \
+kubectl -n import-automation create secret generic import-automation-iap-secret \
   --from-literal=client_id=$OAUTH_CLIENT_ID \
   --from-literal=client_secret=$OAUTH_CLIENT_SECRET
