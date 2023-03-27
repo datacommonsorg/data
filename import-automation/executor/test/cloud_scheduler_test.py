@@ -28,15 +28,13 @@ class CloudSchedulerTest(unittest.TestCase):
         schedule = "0 5 * * *"
         json_encoded_job_body = '{"k":"v"}'
 
-        got = cloud_scheduler.appengine_job_request(
-            absolute_import_name,
-            schedule,
-            json_encoded_job_body
-        )
+        got = cloud_scheduler.appengine_job_request(absolute_import_name,
+                                                    schedule,
+                                                    json_encoded_job_body)
         want = {
             'name': 'scripts_preprocess_A_GAE',
             'description': 'scripts/preprocess:A',
-            'schedule':  "0 5 * * *",
+            'schedule': "0 5 * * *",
             'time_zone': 'Etc/UTC',
             'retry_config': {
                 'retry_count': 2,
@@ -61,17 +59,13 @@ class CloudSchedulerTest(unittest.TestCase):
         }
         assert DeepDiff(got, want) == {}
 
-
     def test_http_job_request(self):
         absolute_import_name = "scripts/preprocess:A"
         schedule = "0 5 * * *"
         json_encoded_job_body = '{"k":"v"}'
 
-        got = cloud_scheduler.http_job_request(
-            absolute_import_name,
-            schedule,
-            json_encoded_job_body
-        )
+        got = cloud_scheduler.http_job_request(absolute_import_name, schedule,
+                                               json_encoded_job_body)
         want = {
             'name': 'scripts_preprocess_A_GKE',
             'description': 'scripts/preprocess:A',
@@ -86,7 +80,7 @@ class CloudSchedulerTest(unittest.TestCase):
             'attempt_deadline': {
                 'seconds': 24 * 60 * 60
             },
-            'http_request':  {
+            'http_request': {
                 'url': 'import.datacommons.dev/update',
                 'http_method': 'POST',
                 'headers': {

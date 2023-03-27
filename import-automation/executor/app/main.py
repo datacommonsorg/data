@@ -127,17 +127,19 @@ def schedule_data_refresh_cron_jobs():
         return 'COMMIT_SHA not found'
     task_configs = task_info.get('configs', {})
     config = configs.ExecutorConfig(**task_configs)
-    github=github_api.GitHubRepoAPI(
-            repo_owner_username=config.github_repo_owner_username,
-            repo_name=config.github_repo_name,
-            auth_username=config.github_auth_username,
-            auth_access_token=config.github_auth_access_token)
+    github = github_api.GitHubRepoAPI(
+        repo_owner_username=config.github_repo_owner_username,
+        repo_name=config.github_repo_name,
+        auth_username=config.github_auth_username,
+        auth_access_token=config.github_auth_access_token)
 
     res = import_executor.run_and_handle_exception(
-        None, # run_id
-        None, # dashboard
-        schedule_on_commit, github, config, task_info['COMMIT_SHA']
-    )
+        None,  # run_id
+        None,  # dashboard
+        schedule_on_commit,
+        github,
+        config,
+        task_info['COMMIT_SHA'])
     return dataclasses.asdict(res)
 
 
@@ -157,5 +159,6 @@ def main():
     """Runs the app locally."""
     FLASK_APP.run(host='127.0.0.1', port=8080, debug=True)
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     main()

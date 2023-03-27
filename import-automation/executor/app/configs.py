@@ -137,7 +137,9 @@ class ExecutorConfig:
             'gcs_project_id',
             'storage_prod_bucket_name',
         ])
-        return {k:v for k,v in dataclasses.asdict(self).items() if k in fields}
+        return {
+            k: v for k, v in dataclasses.asdict(self).items() if k in fields
+        }
 
 
 def _setup_logging():

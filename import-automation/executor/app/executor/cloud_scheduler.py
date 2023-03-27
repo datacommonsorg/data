@@ -26,7 +26,6 @@ from google.cloud import scheduler_v1
 from google.protobuf import json_format
 from google.api_core.exceptions import AlreadyExists
 
-
 GKE_SERVICE_DOMAIN = os.getenv('GKE_SERVICE_DOMAIN', 'import.datacommons.dev')
 GKE_CALLER_SERVICE_ACCOUNT = os.getenv('GKE_CALLER_SERVICE_ACCOUNT')
 GKE_OAUTH_AUDIENCE = os.getenv('GKE_OAUTH_AUDIENCE')
@@ -54,10 +53,10 @@ def _base_job_request(absolute_import_name, schedule: str):
     }
 
 
-def http_job_request(
-    absolute_import_name, schedule, json_encoded_job_body: str) -> Dict:
+def http_job_request(absolute_import_name, schedule,
+                     json_encoded_job_body: str) -> Dict:
     """Cloud Scheduler request that targets executors launched in GKE."""
-    job =  _base_job_request(absolute_import_name, schedule)
+    job = _base_job_request(absolute_import_name, schedule)
     job['name'] = f'{job["name"]}_GKE'
     job['http_target'] = {
         'uri': f'https://{GKE_SERVICE_DOMAIN}/update',
@@ -74,10 +73,10 @@ def http_job_request(
     return job
 
 
-def appengine_job_request(
-    absolute_import_name, schedule, json_encoded_job_body: str) -> Dict:
+def appengine_job_request(absolute_import_name, schedule,
+                          json_encoded_job_body: str) -> Dict:
     """Cloud Scheduler request that targets executors launched in GAE."""
-    job =  _base_job_request(absolute_import_name, schedule)
+    job = _base_job_request(absolute_import_name, schedule)
     job['name'] = f'{job["name"]}_GAE'
     job['app_engine_http_target'] = {
         'http_method': 'POST',
@@ -93,10 +92,7 @@ def appengine_job_request(
     return job
 
 
-
-def create_job(
-    project_id, location: str,
-    job: Dict) -> Dict:
+def create_job(project_id, location: str, job: Dict) -> Dict:
     """Creates/updates a Cloud Scheduler job.
 
     Args:
@@ -117,19 +113,17 @@ def create_job(
         job = client.create_job(
             scheduler_v1.CreateJobRequest(parent=parent, job=job))
     except AlreadyExists:
-        job = client.update_job(
-            scheduler_v1.UpdateJobRequest(job=job))
+        job = client.update_job(scheduler_v1.UpdateJobRequest(job=job))
 
-    scheduled = json_format.MessageToDict(
-        job._pb, preserving_proto_field_name=True)
+    scheduled = json_format.MessageToDict(job._pb,
+                                          preserving_proto_field_name=True)
 
     if 'app_engine_http_target' in job:
         scheduled['app_engine_http_target']['body'] = json.loads(
             job.app_engine_http_target.body)
 
     if 'http_target' in job:
-        scheduled['http_target']['body'] = json.loads(
-            job.http_target.body)
+        scheduled['http_target']['body'] = json.loads(job.http_target.body)
 
     return scheduled
 
