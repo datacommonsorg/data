@@ -1,3 +1,4 @@
+deepdiff==6.3.0
 requests
 protobuf
 google-auth
