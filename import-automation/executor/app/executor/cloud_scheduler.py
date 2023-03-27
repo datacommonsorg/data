@@ -12,14 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Interface for cloud
+Interface for Cloud Scheduler API.
+
+This module contains:
+- How to format a request (GKE, GAE http requests are supported)
+- How to call cloud Scheduler API (create_or_update is supported)
 """
 import json
 import os
 from typing import Dict
 
-from google.cloud import scheduler
+from google.cloud import scheduler_v1
 from google.protobuf import json_format
+from google.api_core.exceptions import AlreadyExists
 
 
 GKE_SERVICE_DOMAIN = os.getenv('GKE_SERVICE_DOMAIN', 'import.datacommons.dev')
@@ -40,8 +45,8 @@ def _base_job_request(absolute_import_name, schedule: str):
             }
         },
         'attempt_deadline': {
-            # 24h
-            'seconds': 24 * 60 * 60
+            # 30m is the max allowed deadline
+            'seconds': 60 * 30
         }
         # <'http_request'|'appengine_job_request'>: {...}
     }
@@ -50,25 +55,29 @@ def _base_job_request(absolute_import_name, schedule: str):
 def http_job_request(
     absolute_import_name, schedule, json_encoded_job_body: str) -> Dict:
     """Cloud Scheduler request that targets executors launched in GKE."""
-    req =  _base_job_request(absolute_import_name, schedule)
-    req['name'] = f'{req["name"]}_GKE'
-    req['http_request'] = {
-        'url': GKE_SERVICE_DOMAIN + '/update',
+    job =  _base_job_request(absolute_import_name, schedule)
+    job['name'] = f'{job["name"]}_GKE'
+    job['http_target'] = {
+        'uri': f'https://{GKE_SERVICE_DOMAIN}/update',
         'http_method': 'POST',
         'headers': {
             'Content-Type': 'application/json',
         },
-        'body': json_encoded_job_body
+        'body': json_encoded_job_body,
+        'oidc_token': {
+            'service_account_email': 'datcom-store-dev.google.com@appspot.gserviceaccount.com',
+            'audience': '496370955550-ahtr555a5d8uri3fucg1hoas97j7k5n8.apps.googleusercontent.com',
+        }
     }
-    return req
+    return job
 
 
 def appengine_job_request(
     absolute_import_name, schedule, json_encoded_job_body: str) -> Dict:
     """Cloud Scheduler request that targets executors launched in GAE."""
-    req =  _base_job_request(absolute_import_name, schedule)
-    req['name'] = f'{req["name"]}_GAE'
-    req['app_engine_http_target'] = {
+    job =  _base_job_request(absolute_import_name, schedule)
+    job['name'] = f'{job["name"]}_GAE'
+    job['app_engine_http_target'] = {
         'http_method': 'POST',
         'app_engine_routing': {
             'service': 'default',
@@ -79,14 +88,14 @@ def appengine_job_request(
         },
         'body': json_encoded_job_body
     }
-    return req
+    return job
 
 
 
 def create_job(
     project_id, location: str,
-    job_req: Dict) -> Dict:
-    """Creates a Cloud Scheduler job.
+    job: Dict) -> Dict:
+    """Creates/updates a Cloud Scheduler job.
 
     Args:
         project_id: GCP project id of the scheduler
@@ -97,23 +106,28 @@ def create_job(
     Returns:
         json transcoded cloud scheduler job created.
     """
-    client = scheduler.CloudSchedulerClient()
-    location_path = client.location_path(project_id, location)
+    client = scheduler_v1.CloudSchedulerClient()
     # Name requires the full GCP resource path.
-    job_req['name'] = f'projects/{project_id}/locations/{location}/jobs/{job_req["name"]}'
+    parent = f'projects/{project_id}/locations/{location}'
+    job['name'] = f'{parent}/jobs/{job["name"]}'
 
-    job = client.create_job(location_path, job_req)
+    try:
+        job = client.create_job(
+            scheduler_v1.CreateJobRequest(parent=parent, job=job))
+    except AlreadyExists:
+        job = client.update_job(
+            scheduler_v1.UpdateJobRequest(job=job))
 
     scheduled = json_format.MessageToDict(
-        job, preserving_proto_field_name=True)
+        job._pb, preserving_proto_field_name=True)
 
-    if 'app_engine_http_target' in job_req:
+    if 'app_engine_http_target' in job:
         scheduled['app_engine_http_target']['body'] = json.loads(
             job.app_engine_http_target.body)
 
-    if 'http_request' in job_req:
-        scheduled['http_request']['body'] = json.loads(
-            job.http_request.body)
+    if 'http_target' in job:
+        scheduled['http_target']['body'] = json.loads(
+            job.http_target.body)
 
     return scheduled
 

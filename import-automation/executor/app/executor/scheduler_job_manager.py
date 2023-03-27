@@ -11,7 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Module for managing Cloud Scheduler jobs """
+"""Module scheduling cron jobs.
+
+Currently scheduling can only occur through commit messages
+in the format of "SCHEDULES=<target1>,<target2>,...
+
+where a <target> is in the format of <path/to/manifest.json>:<import name>
+
+Example commit message:
+"
+This change schedules the cron of india covid stats
+
+SCHEDULES=IMPORTS=scripts/covid19_india/cases_count_states_data:covid19IndiaCasesCountStatesData
+"
+"""
 
 from dataclasses import dataclass
 import os
@@ -38,12 +51,14 @@ def schedule_on_commit(
     if not targets:
         return import_executor.ExecutionResult(
             'pass', [], 'No import target specified in commit message')
+    logging.info('Found targets in commit message: %s', ",".join(targets))
     manifest_dirs = github.find_dirs_in_commit_containing_file(
         commit_sha, config.manifest_filename)
 
     with tempfile.TemporaryDirectory() as tmpdir:
         repo_dir = github.download_repo(
             tmpdir, commit_sha, config.repo_download_timeout)
+        logging.info('Downloaded repo with commit: %s', commit_sha)
 
         imports_to_execute = import_target.find_imports_to_execute(
             targets=targets,
@@ -93,7 +108,9 @@ def create_data_refresh_scheduler_job(
         req = cloud_scheduler.appengine_job_request(
             absolute_import_name, schedule, json_encoded_job_body)
     else:
-        raise
+        raise Exception(
+            "Invalid executor_type %s, expects one of ('GKE', 'GAE')",
+            config.executor_type)
 
     return cloud_scheduler.create_job(
         config.gcp_project_id, config.scheduler_location, req)
