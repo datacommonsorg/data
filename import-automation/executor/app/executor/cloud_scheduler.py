@@ -98,7 +98,6 @@ def create_or_update_job(project_id, location: str, job: Dict) -> Dict:
     Args:
         project_id: GCP project id of the scheduler
         location:   GCP location of the scheduler
-        absolute_import_name: ex: scripts/covid19_india/cases_count_states_data:covid19IndiaCasesCountStatesData
         job_req:    appengine_job_request(...) or http_job_request(...)
 
     Returns:

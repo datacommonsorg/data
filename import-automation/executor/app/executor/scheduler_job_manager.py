@@ -76,7 +76,7 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
                     relative_dir, spec['import_name'])
                 logging.info('Scheduling a data update job for %s',
                              absolute_import_name)
-                job = create_or_update_import_schedule(absolute_import_name,
+                job = _create_or_update_import_schedule(absolute_import_name,
                                                        schedule, config)
                 scheduled.append(job)
             except Exception:
@@ -87,7 +87,7 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
                                                'No issues')
 
 
-def create_or_update_import_schedule(absolute_import_name, schedule: str,
+def _create_or_update_import_schedule(absolute_import_name, schedule: str,
                                      config: configs.ExecutorConfig):
     """Create/Update the import schedule for 1 import."""
     # Note: this is the content of what is passed to /update API
