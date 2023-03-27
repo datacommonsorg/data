@@ -92,7 +92,7 @@ def appengine_job_request(absolute_import_name, schedule,
     return job
 
 
-def create_job(project_id, location: str, job: Dict) -> Dict:
+def create_or_update_job(project_id, location: str, job: Dict) -> Dict:
     """Creates/updates a Cloud Scheduler job.
 
     Args:

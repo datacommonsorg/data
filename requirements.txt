@@ -5,6 +5,8 @@ arcgis2geojson
 chembl-webresource-client>=0.10.2
 dataclasses==0.6
 datacommons==1.4.3
+deepdiff==6.3.0
+flask_restful==0.3.9
 frozendict==1.2
 func-timeout==4.3.5
 geojson==2.5.0

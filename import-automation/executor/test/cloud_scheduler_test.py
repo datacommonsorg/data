@@ -15,6 +15,7 @@
 Tests for cloud_scheduler.py.
 """
 
+import os
 import unittest
 from deepdiff.diff import DeepDiff
 
@@ -43,7 +44,7 @@ class CloudSchedulerTest(unittest.TestCase):
                 }
             },
             'attempt_deadline': {
-                'seconds': 24 * 60 * 60
+                'seconds': 60 * 30
             },
             'app_engine_http_target': {
                 'http_method': 'POST',
@@ -63,6 +64,8 @@ class CloudSchedulerTest(unittest.TestCase):
         absolute_import_name = "scripts/preprocess:A"
         schedule = "0 5 * * *"
         json_encoded_job_body = '{"k":"v"}'
+        cloud_scheduler.GKE_CALLER_SERVICE_ACCOUNT = 'account'
+        cloud_scheduler.GKE_OAUTH_AUDIENCE = 'audience'
 
         got = cloud_scheduler.http_job_request(absolute_import_name, schedule,
                                                json_encoded_job_body)
@@ -78,15 +81,19 @@ class CloudSchedulerTest(unittest.TestCase):
                 }
             },
             'attempt_deadline': {
-                'seconds': 24 * 60 * 60
+                'seconds': 60 * 30
             },
-            'http_request': {
-                'url': 'import.datacommons.dev/update',
+            'http_target': {
+                'uri': 'https://import.datacommons.dev/update',
                 'http_method': 'POST',
                 'headers': {
                     'Content-Type': 'application/json',
                 },
-                'body': '{"k":"v"}'
+                'body': '{"k":"v"}',
+                'oidc_token': {
+                    'service_account_email': 'account',
+                    'audience': 'audience',
+                }
             }
         }
         assert DeepDiff(got, want) == {}

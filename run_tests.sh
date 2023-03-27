@@ -17,7 +17,7 @@
 set -e
 
 # Array of top-level folders with Python code.
-PYTHON_FOLDERS="util/ scripts/ import-automation/"
+PYTHON_FOLDERS="util/ scripts/ import-automation/executor"
 
 # Flag used signal if Python requirements have already been installed.
 PYTHON_REQUIREMENTS_INSTALLED=false
