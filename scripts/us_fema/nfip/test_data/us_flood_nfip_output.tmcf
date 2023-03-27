@@ -1,0 +1,10 @@
+Node: E:us_flood_nfip_output->E0
+observationDate: C:us_flood_nfip_output->observationDate
+observationAbout: C:us_flood_nfip_output->observationAbout
+value: C:us_flood_nfip_output->value
+unit: C:us_flood_nfip_output->unit
+observationPeriod: C:us_flood_nfip_output->observationPeriod
+variableMeasured: C:us_flood_nfip_output->variableMeasured
+measurementMethod: dcs:dcAggregate/NFIPInsuranceClaims
+typeOf: dcs:StatVarObservation
+#Aggregate: sum

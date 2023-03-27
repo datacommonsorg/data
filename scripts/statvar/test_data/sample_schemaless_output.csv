@@ -1,0 +1,13 @@
+observationDate,observationAbout,value,variableMeasured
+2020,dcid:geoId/6223,23456.0,dcid:Count_Person_PersonAge_25_30_WH
+2020,dcid:geoId/6223,10.1,dcid:Count_Person_Fraction_PersonAge_25_30_WH
+2021,dcid:geoId/6223,24567.0,dcid:Count_Person_PersonAge_25_30_WH
+2021,dcid:geoId/6223,10.1,dcid:Count_Person_Fraction_PersonAge_25_30_WH
+2020,dcid:geoId/6123,12345.0,dcid:Count_Person_Male_PersonAge_25_30_A_PI
+2020,dcid:geoId/6123,10.1,dcid:Count_Person_Fraction_Male_PersonAge_25_30_A_PI
+2021,dcid:geoId/6123,13345.0,dcid:Count_Person_Male_PersonAge_25_30_A_PI
+2021,dcid:geoId/6123,10.5,dcid:Count_Person_Fraction_Male_PersonAge_25_30_A_PI
+2020,dcid:geoId/6123,12345.0,dcid:Count_Person_Female_PersonAge_30_35_WH
+2020,dcid:geoId/6123,10.1,dcid:Count_Person_Fraction_Female_PersonAge_30_35_WH
+2021,dcid:geoId/6123,14456.0,dcid:Count_Person_Female_PersonAge_30_35_WH
+2021,dcid:geoId/6123,11.3,dcid:Count_Person_Fraction_Female_PersonAge_30_35_WH
