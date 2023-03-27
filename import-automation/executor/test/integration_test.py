@@ -50,6 +50,7 @@ class GCSFileUploaderMock:
         assert dest.endswith('/latest_version.txt')
         assert string == '2020_07_15T12_07_17_365264_07_00'
 
+
 # Note: Integration tests here are skipped because it is linked to a personal directory
 # TODO: change CONFIGs to main repo and fix integration test.
 @SkipTest
@@ -116,6 +117,7 @@ class StandaloneUpdateTest(unittest.TestCase):
             'message': 'No issues'
         }
         self.assertEqual(expected_result, response.json)
+
 
 @SkipTest
 @mock.patch('app.service.import_service.ImportServiceClient', mock.MagicMock())

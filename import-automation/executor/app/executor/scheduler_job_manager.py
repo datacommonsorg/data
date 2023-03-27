@@ -77,7 +77,7 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
                 logging.info('Scheduling a data update job for %s',
                              absolute_import_name)
                 job = create_or_update_import_schedule(absolute_import_name,
-                                                        schedule, config)
+                                                       schedule, config)
                 scheduled.append(job)
             except Exception:
                 raise import_executor.ExecutionError(
@@ -88,7 +88,7 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
 
 
 def create_or_update_import_schedule(absolute_import_name, schedule: str,
-                                      config: configs.ExecutorConfig):
+                                     config: configs.ExecutorConfig):
     """Create/Update the import schedule for 1 import."""
     # Note: this is the content of what is passed to /update API
     # inside each cronjob http calls.
@@ -110,4 +110,4 @@ def create_or_update_import_schedule(absolute_import_name, schedule: str,
             config.executor_type)
 
     return cloud_scheduler.create_or_update_job(config.gcp_project_id,
-                                      config.scheduler_location, req)
+                                                config.scheduler_location, req)
