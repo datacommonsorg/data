@@ -28,6 +28,8 @@ from google.api_core.exceptions import AlreadyExists
 
 
 GKE_SERVICE_DOMAIN = os.getenv('GKE_SERVICE_DOMAIN', 'import.datacommons.dev')
+GKE_CALLER_SERVICE_ACCOUNT = os.getenv('GKE_CALLER_SERVICE_ACCOUNT')
+GKE_OAUTH_AUDIENCE = os.getenv('GKE_OAUTH_AUDIENCE')
 
 
 def _base_job_request(absolute_import_name, schedule: str):
@@ -65,8 +67,8 @@ def http_job_request(
         },
         'body': json_encoded_job_body,
         'oidc_token': {
-            'service_account_email': 'datcom-store-dev.google.com@appspot.gserviceaccount.com',
-            'audience': '496370955550-ahtr555a5d8uri3fucg1hoas97j7k5n8.apps.googleusercontent.com',
+            'service_account_email': GKE_CALLER_SERVICE_ACCOUNT,
+            'audience': GKE_OAUTH_AUDIENCE,
         }
     }
     return job
