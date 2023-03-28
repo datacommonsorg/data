@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 steps:
-  - id: push-web-server
+  - id: push-import-automation-executor
     name: gcr.io/cloud-builders/docker
     entrypoint: "bash"
     args:
