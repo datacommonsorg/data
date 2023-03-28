@@ -67,9 +67,9 @@ GenomeCoverageEnum, VirusGenomeCompositionEnum, VirusHostEnum, VirusSourceEnum
 
 #### Schema MCFs
 
-[ICTV_schema.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema.mcf)
-[ICTV_schema_enum.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema_enum.mcf)
-[ICTV_schema_taxonomic_ranking_enum.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema_taxonomic_ranking_enum.mcf
+- [ICTV_schema.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema.mcf)
+- [ICTV_schema_enum.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema_enum.mcf)
+- [ICTV_schema_taxonomic_ranking_enum.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema_taxonomic_ranking_enum.mcf)
 
 #### tMCFs
 
