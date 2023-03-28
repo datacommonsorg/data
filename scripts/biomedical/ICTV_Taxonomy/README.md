@@ -65,6 +65,10 @@ Virus, VirusIsolate, VirusGenomeSegment
 
 GenomeCoverageEnum, VirusGenomeCompositionEnum, VirusHostEnum, VirusSourceEnum
 
+#### New Enumerations Generated Via Script
+
+VirusRealmEnum, VirusSubrealmEnum, VirusKingdomEnum, VirusSubkingdomEnum, VirusPhylumEnum, VirusSubphylumEnum, VirusClassEnum, VirusSubclassEnum, VirusOrderEnum, VirusSuborderEnum, VirusFamilyEnum, VirusSubfamilyEnum, VirusGenusEnum, VirusSubgenusEnum
+
 #### Schema MCFs
 
 - [ICTV_schema.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema.mcf)
@@ -86,7 +90,7 @@ GenomeCoverageEnum, VirusGenomeCompositionEnum, VirusHostEnum, VirusSourceEnum
 
 #### Log Files
 
-- [format_virus_metadata_resource.log](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/format_virus_metadata_resource.log)
+- [format_virus_metadata_resource.log](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/logs/format_virus_metadata_resource.log)
 
 ### Import Procedure
 
