@@ -5,11 +5,15 @@ arcgis2geojson
 chembl-webresource-client>=0.10.2
 dataclasses==0.6
 datacommons==1.4.3
+deepdiff==6.3.0
+flask_restful==0.3.9
 frozendict==1.2
 func-timeout==4.3.5
 geojson==2.5.0
 geopandas==0.8.1
 google-cloud-storage>=2.7.0
+google-cloud-logging==3.4.0
+google-cloud-scheduler==2.10.0
 lxml==4.9.1
 matplotlib==3.3.0
 netCDF4==1.5.7
