@@ -69,28 +69,45 @@ GenomeCoverageEnum, VirusGenomeCompositionEnum, VirusHostEnum, VirusSourceEnum
 
 [ICTV_schema.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema.mcf)
 [ICTV_schema_enum.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema_enum.mcf)
+[ICTV_schema_taxonomic_ranking_enum.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema_taxonomic_ranking_enum.mcf
 
 #### tMCFs
 
-- [VirusMasterSpeciesList.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCF/VirusMasterSpeciesList.tmcf)
-- [VirusTaxonomy.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCF/VirusTaxonomy.tmcf)
-- [VirusGenomeSegmeng.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCF/VirusGenomeSegment.tmcf)
+- [VirusMasterSpeciesList.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusMasterSpeciesList.tmcf)
+- [VirusTaxonomy.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusTaxonomy.tmcf)
+- [VirusGenomeSegmeng.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusGenomeSegment.tmcf)
 
 #### Scripts 
 
-- [download.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/download.sh)
-- [format_virus_master_species_list.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/format_virus_master_species_list.py)
-- [format_virus_metadata_resource.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/format_virus_metadata_resource.py)
+- [download.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/download.sh)
+- [create_virus_taxonomic_ranking_enums.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/create_virus_taxonomic_ranking_enums.py)
+- [format_virus_master_species_list.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_master_species_list.py)
+- [format_virus_metadata_resource.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_metadata_resource.py)
+
+#### Log Files
+
+- [format_virus_metadata_resource.log](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/format_virus_metadata_resource.log)
 
 ### Import Procedure
 
-To download the most recent versions of the Master Species List and Virus Metadata Resource from ICTV run:
+Download the most recent versions of the Master Species List and Virus Metadata Resource from ICTV by running:
 
 ```bash
 download.sh
 ```
 
-To test the script, run:
+Generate the enummeration schema MCF, which represents virus taxonomic ranks by running:
+
+```bash
+python3 scripts/create_virus_taxonomic_ranking_enums.py import_files/ICTV_Master_Species_List_2021_v3.xlsx ICTV_schema_taxonomic_ranking_enum.mcf
+```
+
+Clean and format Master Species List as a CSV that matches the corresponding tMCF by running:
+
+```bash
+```
+
+Clean and format Virus Metadata Resource as a CSV that matches the corresponding tMCF by running:
 
 ```bash
 ```
@@ -102,17 +119,17 @@ To test the script, run:
 To test the import to evaluate whether the data is formatted as expected or if changes were made in the formatting in the most recent release run the following commands to evaluate each cleaned csv individually.
 
 VirusSpecies:
-'''bash
-'''
+```bash
+```
 
 VirusIsolates:
-'''bash
-'''
+```bash
+```
 
 VirusGenomeSegment:
-'''bash
-'''
+```bash
+```
 
 #### Data Commons Import Tests
 
-Please run all cleaned CSV + tMCF pairs through our Data Commons import tool to run general Data Commons formatting tests.
+Please run all cleaned CSV + tMCF pairs through our lint test using our Data Commons import tool, which conducts general formatting tests.
