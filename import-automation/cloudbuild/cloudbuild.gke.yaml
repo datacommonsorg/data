@@ -1,17 +1,20 @@
 steps:
 # Create a Cloud Tasks task that passes information
-# about the commit to the GAE executor.
-# Reference: https://cloud.google.com/sdk/gcloud/reference/tasks/create-app-engine-task
+# about the commit to the GKE executor.
+# Reference: https://cloud.google.com/sdk/gcloud/reference/tasks/create-http-task
 - name: 'gcr.io/cloud-builders/gcloud'
   args: [
     'tasks',
-    'create-app-engine-task',
+    'create-http-task',
     '$COMMIT_SHA',
+    '--project=$_GCP_PROJECT_ID',
+    '--location=us-central1',
     '--queue=$_TASK_QUEUE_NAME',
+    '--url=$_URL_TO_SCHEDULING_ENDPOINT',
     '--header=Content-Type: application/json',
     '--method=POST',
-    '--relative-uri=$_HANDLER_URI',
-    '--routing=service:$_HANDLER_SERVICE',
+    '--oidc-service-account-email=$_OIDC_SERVICE_ACCOUNT_EMAIL',
+    '--oidc-token-audience=$_OIDC_TOKEN_AUDIENCE',
     '--body-content={
         "COMMIT_SHA": "$COMMIT_SHA",
         "REPO_NAME": "$REPO_NAME",
@@ -20,6 +23,7 @@ steps:
         "BASE_BRANCH": "$_BASE_BRANCH",
         "PR_NUMBER": "$_PR_NUMBER",
         "configs": {
+            "gcp_project_id": "$_GCP_PROJECT_ID",
             "dashboard_oauth_client_id": "$_DASHBOARD_OAUTH_CLIENT_ID",
             "importer_oauth_client_id": "$_IMPORTER_OAUTH_CLIENT_ID",
             "github_auth_username": "$_GITHUB_AUTH_USERNAME",
@@ -29,7 +33,8 @@ steps:
             "email_account": "$_EMAIL_ACCOUNT",
             "email_token": "$_EMAIL_TOKEN",
             "gcs_project_id": "$_GCS_PROJECT",
-            "storage_prod_bucket_name": "$_STORAGE_PROD_BUKCET_NAME"
+            "storage_prod_bucket_name": "$_STORAGE_PROD_BUKCET_NAME",
+            "executor_type": "GKE"
         }
     }'
 ]
