@@ -28,7 +28,7 @@ from google.cloud import scheduler
 
 from app import configs
 from app.executor import validation
-from app.executor import update_scheduler
+from app.executor.scheduler_job_manager import schedule_on_commit
 from app.executor import import_executor
 from app.service import file_uploader
 from app.service import dashboard_api
@@ -111,24 +111,36 @@ def scheduled_updates():
 
 
 @FLASK_APP.route('/schedule', methods=['POST'])
-def schedule_crons():
+def schedule_data_refresh_cron_jobs():
     """Endpoint for scheduling cron jobs for updating imports upon
-    GitHub commits."""
+    GitHub commits.
+
+    How configs are passed around:
+    import-automation/cloudbuild/cloudbuild*.yaml schedules how this
+    endpoint is called and what config is used.
+
+    The config is then passed down to the data refresh cron jobs
+    scheduled by this endpoint.
+    """
     task_info = flask.request.get_json(force=True)
     if 'COMMIT_SHA' not in task_info:
         return 'COMMIT_SHA not found'
     task_configs = task_info.get('configs', {})
     config = configs.ExecutorConfig(**task_configs)
-    import_scheduler = update_scheduler.UpdateScheduler(
-        client=scheduler.CloudSchedulerClient(),
-        github=github_api.GitHubRepoAPI(
-            repo_owner_username=config.github_repo_owner_username,
-            repo_name=config.github_repo_name,
-            auth_username=config.github_auth_username,
-            auth_access_token=config.github_auth_access_token),
-        config=config)
-    return dataclasses.asdict(
-        import_scheduler.schedule_on_commit(task_info['COMMIT_SHA']))
+    github = github_api.GitHubRepoAPI(
+        repo_owner_username=config.github_repo_owner_username,
+        repo_name=config.github_repo_name,
+        auth_username=config.github_auth_username,
+        auth_access_token=config.github_auth_access_token)
+
+    res = import_executor.run_and_handle_exception(
+        None,  # run_id
+        None,  # dashboard
+        schedule_on_commit,
+        github,
+        config,
+        task_info['COMMIT_SHA'])
+    return dataclasses.asdict(res)
 
 
 @FLASK_APP.route('/_ah/start')
@@ -146,3 +158,7 @@ def healthz():
 def main():
     """Runs the app locally."""
     FLASK_APP.run(host='127.0.0.1', port=8080, debug=True)
+
+
+if __name__ == '__main__':
+    main()

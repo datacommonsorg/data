@@ -93,6 +93,10 @@ class SchedulerJobMock(dict):
     """Mock class for google.cloud.scheduler.types.Job."""
 
     @property
+    def http_target(self):
+        return SchedulerJobMock(self.__getitem__('http_target'))
+
+    @property
     def app_engine_http_target(self):
         return SchedulerJobMock(self.__getitem__('app_engine_http_target'))
 
