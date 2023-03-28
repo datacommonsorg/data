@@ -51,21 +51,25 @@ The data is published under the Creative Commons Attribution ShareAlike 4.0 Inte
 
 ### Artifacts
 
-#### New Classes
+#### New Schema
+
+Classes, properties, and enumerations that were added in this import to represent the data
+
+##### Classes
 
 Virus, VirusIsolate, VirusGenomeSegment
 
-#### New Properties
+##### Properties
 
 - Virus: proposalForLastChange, taxonHistoryURL, versionOfLastChange, virusGenomeComposition, virusHost, virusLastTaxonomicChange, virusSource, virusRealm, virusSubrealm, virusKingdom, virusSubkingdom, virusPhylum, virusSubphylum, virusClass, virusSubclass, virusOrder, virusSuborder, virusFamily, virusSubfamily, virusGenus, virusSubgenus, virusSpecies
 - VirusIsolate: genomeCoverage, isExemplarVirusIsolate, ofVirusSpecies, virusIsolateDesignation
 - VirusGenomeSegment: genomeSegmentOf
 
-#### New Enumerations
+##### Enumerations
 
 GenomeCoverageEnum, VirusGenomeCompositionEnum, VirusHostEnum, VirusSourceEnum
 
-#### New Enumerations Generated Via Script
+##### Enumerations Generated Via Script
 
 VirusRealmEnum, VirusSubrealmEnum, VirusKingdomEnum, VirusSubkingdomEnum, VirusPhylumEnum, VirusSubphylumEnum, VirusClassEnum, VirusSubclassEnum, VirusOrderEnum, VirusSuborderEnum, VirusFamilyEnum, VirusSubfamilyEnum, VirusGenusEnum, VirusSubgenusEnum
 
