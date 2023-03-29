@@ -40,8 +40,8 @@ gender: dcs:Female
 ```
 
 Before we get into the sematics of the above representation, as a quick primer
-to the MCF syntax: `Node` is a sentinel that defines a node in the KG, the LHS
-things (`typeOf`, `measuredProperty`, etc.) are DC Property entities, the RHS
+to the MCF syntax: `Node` is a sentinel that defines a node in the Data Commons Graph, the left hand-side
+things (`typeOf`, `measuredProperty`, etc.) are DC Property entities, the right hand-side
 things (`Median_Age_Person_Female`, `geoId/4865000`, etc.) are corresponding
 values of those properties.  Values that refer to other DC entities include
 namespace prefixes, such as `dcid:` (DC identifier), `dcs:` (aka DC Schema ID)
@@ -52,14 +52,14 @@ on a set of things of a certain type ("people") that satisfy some set of
 constraints ("gender is female").  Correspondingly, `StatisticalVariable` types
 have the following properties:
 
-- `populationType`: specifies the type of thing being measured (here, `Person`)
+- `populationType`: specifies the type of thing being measured (here, `Person`). This property takes a Class as its value.
 - `measuredProperty`: specifies the property being measured. This property is of
   the type defined in `populationType` (here, `age`).
-- `statType` (optional): specifies the type of statistic (here, `medianValue`). The default is `measuredValue`.
+- `statType` (optional): specifies the type of statistic (here, `medianValue`). The default is `measuredValue`. Others include `meanValue`, `minValue`, etc.
 - `measurementQualifier` (optional): additional qualifiers of the variable;
-  e.g., "Nominal" for GDP.
+  e.g., `Nominal` for GDP.
 - `measurementDenominator` (optional): for percentages or ratios, this refers
-  to another `StatisticalVariable` node.
+  to another `StatisticalVariable` node. E.g. for per-capita, the `measurementDenominator` is `Count_Person`.
 
 Additionally, there can be a number of property-value (PV) pairs representing
 the constraints on the type identified by `populationType`.  In this example,

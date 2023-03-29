@@ -1,1 +1,3 @@
 scripts/india_geosadak/data/facilities/*.zip filter=lfs diff=lfs merge=lfs -text
+scripts/india_wris/data/groundWater.csv filter=lfs diff=lfs merge=lfs -text
+scripts/india_wris/data/surfaceWater.csv filter=lfs diff=lfs merge=lfs -text

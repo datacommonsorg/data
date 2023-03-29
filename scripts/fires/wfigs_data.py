@@ -47,12 +47,15 @@ flags.DEFINE_boolean('read_location_cache', True,
 flags.DEFINE_boolean('save_location_cache', False,
                      'save location cache to file.')
 
-FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&returnGeometry=false&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
+# FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&returnGeometry=false&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
+# Only download data from Oct 10, 2022 to make auto refresh manageable.
+POST_OCT_2022_FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=FireDiscoveryDateTime>'2022-10-10'&outFields=*&outSR=4326&f=json"
 _LAT_LNG_CACHE = {}
 _START_YEAR = 2014
 _GCS_PROJECT_ID = "datcom-204919"
 _GCS_BUCKET = "datcom-import-cache"
 _GCS_FILE_PATH = "fires/location_file.json"
+_ACRE_TO_SQ_KM_MULTIPLIER = 0.00404686
 
 _FIRE_INCIDENT_MAP = {
     'CX': 'FireIncidentComplexEvent',
@@ -60,8 +63,8 @@ _FIRE_INCIDENT_MAP = {
     'RX': 'PrescribedFireEvent'
 }
 
-_DAILY_ACRES_MAP = "Acre {daily_acres}"
-_INITIAL_RESPONSE_AREA_MAP = "Acre {initial_response_area}"
+_DAILY_ACRES_MAP = "SquareKilometer {daily_acres}"
+_INITIAL_RESPONSE_AREA_MAP = "SquareKilometer {initial_response_area}"
 _EXPECTED_LOSS_MAP = "USDollar {costs}"
 
 _FIRE_DCID_FORMAT = "fire/irwinId/{id}"
@@ -195,7 +198,7 @@ def process_df(df):
     # Write fire area in an ingest-able format.
     def get_area(area, label, mapping):
         if area and not np.isnan(area):
-            return mapping.format_map({label: area})
+            return mapping.format_map({label: area * _ACRE_TO_SQ_KM_MULTIPLIER})
         else:
             return None
 
@@ -297,7 +300,7 @@ def process_df(df):
 
 
 def main(_) -> None:
-    df = get_data(FIRE_LOCATIONS_URL)
+    df = get_data(POST_OCT_2022_FIRE_LOCATIONS_URL)
 
     storage_client = storage.Client(_GCS_PROJECT_ID)
     bucket = storage_client.bucket(_GCS_BUCKET)
