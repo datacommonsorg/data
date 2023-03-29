@@ -94,7 +94,7 @@ def _create_or_update_import_schedule(absolute_import_name, schedule: str,
     # inside each cronjob http calls.
     json_encoded_job_body = json.dumps({
         'absolute_import_name': absolute_import_name,
-        'config': config.get_data_refresh_config()
+        'configs': config.get_data_refresh_config()
     }).encode()
 
     if config.executor_type == "GKE":

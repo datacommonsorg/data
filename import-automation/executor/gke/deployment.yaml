@@ -96,6 +96,14 @@ spec:
               value: "True"
             - name: PORT
               value: "8080"
+            - name: CLOUD_SCHEDULER_CALLER_SA
+              configMapKeyRef:
+                  name: cluster-oauth-configmap
+                  key: cloud-scheduler-caller-sa
+            - name: CLOUD_SCHEDULER_CALLER_OAUTH_AUDIENCE
+              configMapKeyRef:
+                  name: cluster-oauth-configmap
+                  key: cloud-scheduler-caller-oauth-audience
           image: gcr.io/datcom-ci/datacommons-import-automation-executor:prod
           imagePullPolicy: Always
           livenessProbe:
