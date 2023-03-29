@@ -17,7 +17,6 @@ See latlng_recon_service_test.py for usage example.
 """
 
 import concurrent.futures
-import logging
 import requests
 from typing import Callable, Dict, List, NewType, TypeVar, Tuple
 
@@ -27,7 +26,9 @@ ResolvedLatLngType = NewType('ResolvedLatLngType', Dict[str, List[str]])
 _RECON_ROOT = "https://api.datacommons.org/v1/recon/resolve/coordinate"
 _RECON_COORD_BATCH_SIZE = 50
 
-logger = logging.getLogger(__file__)
+LatLng = NewType('LatLng', Tuple[float, float])
+DCID = TypeVar('DCID')
+ResolvedLatLng = NewType('ResolvedLatLng', Dict[DCID, List[str]])
 
 
 def _session(retries: int = 5, backoff_factor: int = 0.5) -> 'requests.Session':
@@ -95,7 +96,7 @@ def latlng2places(id2latlon: Dict[str, LatLngType],
 
     Args:
         id2latlon: A dict from any distinct ID to lat/lng. The response uses the
-                   same ID as key
+                   same ID as key.
         filter_fn: An optional function that takes a list of place DCIDs and
                    may return a subset of them.  For example, if you want to
                    filter out only countries.

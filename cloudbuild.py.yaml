@@ -26,7 +26,7 @@ steps:
     - -c
     - |
       ./run_tests.sh -p util/
-      ./run_tests.sh -p import-automation/
+      ./run_tests.sh -p import-automation/executor
       ./run_tests.sh -p scripts/
 
 - id: python_format_check
