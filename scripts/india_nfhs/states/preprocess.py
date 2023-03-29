@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import csv
 import pandas as pd
 import os
 import json
@@ -140,8 +139,6 @@ age: dcs:{age}
 """
 
 file_path = 'col_to_statvar_mappings.json'
-# with open('col_to_statvar_mappings.json') as json_file:
-#     cols_to_nodes = json.load(json_file)
 
 with open(os.path.join(os.path.dirname(__file__), file_path)) as json_file:
     cols_to_nodes = json.load(json_file)
