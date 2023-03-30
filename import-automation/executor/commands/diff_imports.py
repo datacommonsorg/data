@@ -46,28 +46,27 @@ flags.DEFINE_list(name='abs_import_names',
                   default=None,
                   help=('Comma separated list of absolute import names '
                         'to run the diff on. Follows the format: '
-                        f'{_IMPORT_NAME_FORM}.'),
-                  short_name='i')
+                        f'{_IMPORT_NAME_FORM}.'))
 
 flags.DEFINE_string(name='executor_type',
                     default="GKE",
                     help=('One of GKE, GAE'))
 
-flags.DEFINE_string(name='base_bucket',
+flags.DEFINE_string(name='prod_bucket',
                     default="datcom-prod-imports",
                     help=('GCS bucket name of live data'))
 
-flags.DEFINE_string(name='base_bucket_project_id',
+flags.DEFINE_string(name='prod_bucket_project_id',
                     default="datcom-204919",
-                    help=('GCP project id for base_bucket'))
+                    help=('GCP project id for prod_bucket'))
 
-flags.DEFINE_string(name='head_bucket',
+flags.DEFINE_string(name='dev_bucket',
                     default="datcom-dev-imports",
                     help=('GCS bucket name of test data'))
 
-flags.DEFINE_string(name='head_bucket_project_id',
+flags.DEFINE_string(name='dev_bucket_project_id',
                     default="google.com:datcom-store-dev",
-                    help=('GCP project id for head_bucket'))
+                    help=('GCP project id for dev_bucket'))
 
 
 def _get_file_hashes(abs_import_name, bucket_project_id,
@@ -92,24 +91,24 @@ def _get_file_hashes(abs_import_name, bucket_project_id,
     return file_hashes
 
 
-def _diff_file_hashes(abs_import_name, base_project_id, base_bucket,
-                      head_project_id, head_bucket: str):
+def _diff_file_hashes(abs_import_name, prod_project_id, prod_bucket,
+                      dev_project_id, dev_bucket: str):
     """Returns error if there is diff of import between base_bucket and head_bucket."""
-    base_file_hashes = _get_file_hashes(abs_import_name, base_project_id,
-                                        base_bucket)
-    head_file_hashes = _get_file_hashes(abs_import_name, head_project_id,
-                                        head_bucket)
+    prod_file_hashes = _get_file_hashes(abs_import_name, prod_project_id,
+                                        prod_bucket)
+    dev_file_hashes = _get_file_hashes(abs_import_name, dev_project_id,
+                                       dev_bucket)
 
     has_diff, missing, unexpected = [], [], []
 
-    for name, hash in base_file_hashes.items():
-        if name not in head_file_hashes:
+    for name, hash in prod_file_hashes.items():
+        if name not in dev_file_hashes:
             missing.append(name)
-        elif hash != head_file_hashes[name]:
+        elif hash != dev_file_hashes[name]:
             has_diff.append(name)
 
-    for name in head_file_hashes:
-        if name not in base_file_hashes:
+    for name in dev_file_hashes:
+        if name not in prod_file_hashes:
             unexpected.append(name)
 
     return has_diff, missing, unexpected
@@ -142,8 +141,8 @@ def main(argv):
 
     for abs_import_name in FLAGS.abs_import_names:
         has_diff, missing, unexpected = _diff_file_hashes(
-            abs_import_name, FLAGS.base_bucket_project_id, FLAGS.base_bucket,
-            FLAGS.head_bucket_project_id, FLAGS.head_bucket)
+            abs_import_name, FLAGS.prod_bucket_project_id, FLAGS.prod_bucket,
+            FLAGS.dev_bucket_project_id, FLAGS.dev_bucket)
 
         for name in has_diff:
             print(f'Content diff found in {name}')
