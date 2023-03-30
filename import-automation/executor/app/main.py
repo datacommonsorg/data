@@ -103,7 +103,6 @@ def scheduled_updates():
             repo_name=config.github_repo_name,
             auth_username=config.github_auth_username,
             auth_access_token=config.github_auth_access_token),
-        dashboard=dashboard_api.DashboardAPI(config.dashboard_oauth_client_id),
         config=config)
     result = executor.execute_imports_on_update(
         task_info['absolute_import_name'])

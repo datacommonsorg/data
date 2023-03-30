@@ -44,3 +44,9 @@ kubectl annotate serviceaccount \
 kubectl -n import-automation create secret generic import-automation-iap-secret \
   --from-literal=client_id=$OAUTH_CLIENT_ID \
   --from-literal=client_secret=$OAUTH_CLIENT_SECRET
+
+# Also set what identity will cloud scheduler call as by running:
+# export CLOUD_SCHEDULER_CALLER_SA=<fill>
+kubectl -n import-automation create configmap cluster-oauth-configmap \
+  --from-literal=cloud-scheduler-caller-sa=$CLOUD_SCHEDULER_CALLER_SA \
+  --from-literal=cloud-scheduler-caller-oauth-audience=$OAUTH_CLIENT_ID
