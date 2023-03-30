@@ -132,11 +132,12 @@ def main(argv):
         )
 
     # There is no way to know when a job triggered by Cloud Scheduler finishes.
-    # Change
     # Since the timeout is 30min, we sleep for 30min + some buffer time to wait
     # for all jobs to finish.
+    # If you know that the imports being diffed takes much less time, feel
+    # free to adjust the time below.
     print('Waiting for jobs to complete')
-    time.sleep(60 * 10)  # 10 minutes
+    time.sleep(60 * 35)  # 35 minutes
     print('Done for jobs to complete')
 
     for abs_import_name in FLAGS.abs_import_names:
