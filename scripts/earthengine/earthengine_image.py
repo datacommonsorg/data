@@ -56,8 +56,18 @@ from datetime import datetime
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 
-flags.DEFINE_string('config', '',
-                    'File with configuration parameters as a dictionary.')
+_SCRIPTS_DIR = os.path.dirname(__file__)
+sys.path.append(_SCRIPTS_DIR)
+sys.path.append(os.path.dirname(_SCRIPTS_DIR))
+sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
+
+import common_flags
+import utils
+
+from counters import Counters
+
 flags.DEFINE_string('ee_dataset', '',
                     'Load earth engine data set define in config datasets.')
 flags.DEFINE_string('gcs_output', '', 'Prefix for output file names on GCS.')
@@ -108,7 +118,6 @@ flags.DEFINE_integer(
     'Number of images to generate, each advanced by --time_period.')
 flags.DEFINE_bool('ee_export_image', True,
                   'If true, submit a task to export image.')
-flags.DEFINE_bool('debug', False, 'Enable debug messages.')
 
 _FLAGS = flags.FLAGS
 _FLAGS(sys.argv)  # Allow invocation without app.run()
@@ -238,37 +247,6 @@ def _load_config(config: str, default_config: dict = EE_DEFAULT_CONFIG) -> dict:
     return config_dict
 
 
-def _parse_time_period(time_period: str) -> (int, str):
-    '''Parse time period into a tuple of (number, unit), for eg: P1M: (1, month).'''
-    re_pat = r'P?(?P<delta>[+-]?[0-9]+)(?P<unit>[A-Z])'
-    m = re.search(re_pat, time_period.upper())
-    if m:
-        m_dict = m.groupdict()
-        delta = int(m_dict.get('delta', '0'))
-        unit = m_dict.get('unit', 'M')
-        period_dict = {'D': 'days', 'M': 'months', 'Y': 'years'}
-        period = period_dict.get(unit, 'day')
-        return (delta, period)
-    return (0, 'days')
-
-
-def _advance_date(date_str: str,
-                  time_period: str,
-                  date_format: str = '%Y-%m-%d') -> str:
-    '''Returns the date string advanced by the time period.'''
-    next_date = ''
-    if not date_str:
-        return next_date
-    dt = datetime.strptime(date_str, date_format)
-    (delta, unit) = _parse_time_period(time_period)
-    if not delta or not unit:
-        logging.error(
-            f'Unable to parse time period: {time_period} for date: {date_str}')
-        return next_date
-    next_dt = dt + relativedelta(**{unit: delta})
-    return next_dt.strftime(date_format)
-
-
 def _get_bbox_coordinates(bounds: str) -> ee.Geometry.BBox:
     '''Returns a bounding box coordinates dictionary for the bounds.
     bounds is a comma separated list of points of the form [lat,lng...].'''
@@ -331,7 +309,7 @@ def ee_filter_date(col: ee.ImageCollection,
         end_dt = ee.Date(end_date)
     elif time_period:
         # Extract the delta and units from the period such as 'P1M'.
-        end_date = _advance_date(start_date, time_period)
+        end_date = utils.date_advance_by_period(start_date, time_period)
         end_dt = ee.Date(end_date)
     if end_dt is None:
         end_dt = ee.Date(date.today().strftime('%Y-%m-%d'))
@@ -634,11 +612,18 @@ def ee_process(config) -> list:
         For supported params, refer to _DEFAULT_CONFIG.
         if ee_image_count > 1, then multiple images are exported with
         the start_time, end_time advanced by time_period.
+    Returns:
+      List of competed task status with gfs_file set to the image generated
+      if config['ee_wait_task'] is True, else a list of tasks launched.
     '''
     ee_tasks = []
     ee.Initialize()
     config['ee_image_count'] = config.get('ee_image_count', 1)
-    while config['ee_image_count'] > 0:
+    cur_date = utils.date_today()
+    counters = Counters()
+    # Get images by count or until yesterday
+    while (config['ee_image_count'] > 0) and (config.get('start_date', '') <
+                                              cur_date):
         logging.info(f'Getting image for config: {config}')
         img = ee_generate_image(config)
         if isinstance(img, ee.ImageCollection):
@@ -649,29 +634,54 @@ def ee_process(config) -> list:
             if config.get('ee_export_image', True):
                 task = export_ee_image_to_gcs(img, config)
                 ee_tasks.append(task)
+                counters.add_counter('total', 1)
         else:
             logging.error(f'Failed to generate image for config: {config}')
         # Advance time to next period.
         time_period = config.get('time_period', 'P1M')
         for ts in ['start_date', 'end_date']:
-            dt = _advance_date(config.get(ts, ''), time_period)
+            dt = utils.date_advance_by_period(config.get(ts, ''), time_period)
             if dt:
                 config[ts] = dt
         config['ee_image_count'] = config['ee_image_count'] - 1
         logging.info(f'Advanced dates by {time_period}: {config}')
 
+    completed_tasks = []
+    if not config.get('ee_wait_task', True):
+        return ee_tasks
+
     # Wait for tasks to complete
-    if config.get('ee_wait_task', True):
-        pending_tasks = set(ee_tasks)
-        while len(pending_tasks) > 0:
-            task = pending_tasks.pop()
-            if task.active():
-                pending_tasks.add(task)
-                logging.info(f'Waiting for task: {task}')
-                time.sleep(10)
-            else:
-                task_status = ee.data.getTaskStatus(task.id)
-                logging.info(f'EE task completed: {task_status}')
+    pending_tasks = set(ee_tasks)
+    while len(pending_tasks) > 0:
+        task = pending_tasks.pop()
+        if task.active():
+            pending_tasks.add(task)
+            logging.info(f'Waiting for task: {task}')
+            time.sleep(10)
+        else:
+            task_status = ee.data.getTaskStatus(task.id)
+            logging.info(f'EE task completed: {task_status}')
+            for status in task_status:
+                # Get the destination file for each completed task.
+                image_file = status.get('description', '')
+                gcs_path = status.get('destination_uris', [])[0]
+                if gcs_path and image_file:
+                    gcs_path = re.sub('https.*storage/browser/', 'gs://',
+                                      gcs_path)
+                    status['output_file'] = f'{gcs_path}{image_file}.tif'
+                completed_tasks.append(status)
+            counters.add_counter('processed', 1)
+    return completed_tasks
+
+
+def get_date_from_filename(filename: str, time_period: str = '') -> str:
+    '''Returns the date from the filename.'''
+    matches = re.search(r'from_(?P<date>[0-9]{4}[0-9-]{2}[0-9-]{0,2})',
+                        filename)
+    if matches:
+        return utils.date_format_by_time_period(
+            matches.groupdict().get('date', ''), time_period)
+    return ''
 
 
 def main(_):

@@ -70,18 +70,21 @@ _SCRIPTS_DIR = os.path.dirname(__file__)
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
+import common_flags
+import file_util
 import utils
 
-from util.config_map import ConfigMap
-from util.counters import Counters, CounterOptions
+from config_map import ConfigMap
+from counters import Counters, CounterOptions
 
 flags.DEFINE_string('input_geotiff', '', 'GeoTIFF file to process')
 flags.DEFINE_string('ignore_geotiff', '',
                     'GeoTIFF with points to be ignored set as data.')
 flags.DEFINE_string('allow_geotiff', '',
                     'GeoTIFF with points to be used set as data.')
-flags.DEFINE_string('input_csv', '', 'CSV file to process')
 flags.DEFINE_string('ignore_csv', '',
                     'CSV with points to be ignored set as data.')
 flags.DEFINE_string('allow_csv', '', 'CSV with points to be used set as data.')
@@ -103,11 +106,9 @@ flags.DEFINE_list(
     'Levels to be added as contained in place nodes into s2 place output.')
 flags.DEFINE_string('aggregate', 'max',
                     'Aggregate function for data values with same key.')
-flags.DEFINE_bool('debug', False, 'Enable debug logs.')
 flags.DEFINE_integer('log_every_n', 10000, 'Print logs every N records.')
 flags.DEFINE_float('default_cell_area', 0,
                    'Area of the cell if the raster input is not provided.')
-flags.DEFINE_string('config', '', 'Config dictionary with parameter settings.')
 
 _FLAGS = flags.FLAGS
 _FLAGS(sys.argv)  # Allow invocation without app.run()
@@ -463,6 +464,9 @@ def load_raster_geotiff(filename: str) -> rasterio.io.DatasetReader:
       raster data set for the file.
     '''
     logging.info(f'Loading raster GeoTiff File: {filename}')
+    if file_util.file_is_gcs(filename):
+        # RasterIO doesn't support GCS files. Copy over to a local file.
+        filename = file_util.file_copy(filename)
     src = rasterio.open(filename)
     _log_raster_info(src)
     return src
@@ -516,7 +520,7 @@ def write_data_csv(data_points: dict,
         if not os.path.exists(filename):
             # File doesn't exist yet. Open in write mode and add column headers.
             output_mode = 'w'
-    with open(filename, mode=output_mode) as csv_file:
+    with file_util.FileIO(filename, mode=output_mode) as csv_file:
         writer = csv.DictWriter(csv_file,
                                 fieldnames=columns,
                                 escapechar='\\',
@@ -598,7 +602,7 @@ def write_s2place_csv_tmcf(data_points: dict,
     place_tmcf.append('typeOf: C:Place->typeOf')
     place_tmcf.append('containedInPlace: C:Place->containedInPlace')
     place_tmcf.append('name: C:Place->name')
-    with open(f'{output_prefix}.tmcf', 'w') as tmcf_file:
+    with file_util.FileIO(f'{output_prefix}.tmcf', 'w') as tmcf_file:
         tmcf_file.write('\n'.join(place_tmcf))
         tmcf_file.write('\n')
 
@@ -815,15 +819,15 @@ def process_csv_points(input_csv: str,
         logging.info(
             f'Loaded {len(allow_points)} allow points from {allow_csv}')
     data_filter = config.get('input_data_filter', {})
-    input_csv_files = utils.file_get_matching(input_csv)
+    input_csv_files = file_util.file_get_matching(input_csv)
     logging.info(f'Processing csv files: {input_csv_files}')
     counter.set_prefix('1:process_csv:')
     for filename in input_csv_files:
         counter.add_counter('total_points',
-                            utils.file_estimate_num_rows(filename))
+                            file_util.file_estimate_num_rows(filename))
     for filename in input_csv_files:
         counter.add_counter('input_csv_files', 1)
-        with open(filename) as csvfile:
+        with file_util.FileIO(filename) as csvfile:
             logging.info(f'Processing data from file {filename} ...')
             reader = csv.DictReader(csvfile)
             # Save the input columns
@@ -912,7 +916,7 @@ def process(input_geotiff: str,
         logging.info(
             f'Processing raster {input_geotiff} with config: {config.get_configs()}'
         )
-        for geotiff_file in utils.file_get_matching(input_geotiff):
+        for geotiff_file in file_util.file_get_matching(input_geotiff):
             process_raster(geotiff_file, config, data_points, counter)
     if input_csv:
         logging.info(

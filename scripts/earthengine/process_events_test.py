@@ -31,6 +31,7 @@ sys.path.append(os.path.dirname(_MODULE_DIR))
 sys.path.append(os.path.dirname(os.path.dirname((_MODULE_DIR))))
 
 import utils
+import file_util
 
 _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         'test_data')
@@ -52,8 +53,8 @@ class ProcessEventsTest(unittest.TestCase):
         file, ext = os.path.splitext(expected)
         if ext == '.csv':
             self.compare_csv_files(expected, actual)
-        with open(expected, 'r') as exp:
-            with open(actual, 'r') as act:
+        with file_util.FileIO(expected, 'r') as exp:
+            with file_util.FileIO(actual, 'r') as act:
                 exp_lines = sorted(exp.readlines())
                 act_lines = sorted(act.readlines())
                 self.assertEqual(exp_lines, act_lines)
@@ -99,7 +100,12 @@ class ProcessEventsTest(unittest.TestCase):
                 config=self._config)
             # Verify generated events.
             for file in [
-                    'events.csv', 'events.tmcf', 'svobs.csv', 'svobs.tmcf'
+                    'events.csv',
+                    'events.tmcf',
+                    'svobs.csv',
+                    'svobs.tmcf',
+                    'place_svobs.csv',
+                    'place_svobs.tmcf',
             ]:
                 if file.endswith('.csv'):
                     # compare csv output without geoJson that is not deterministic

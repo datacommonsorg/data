@@ -296,52 +296,6 @@ class GridCellUtilsTest(unittest.TestCase):
                 utils.place_to_polygon('s2CellId/0x1128250000000000')))
 
 
-class FileUtilsTest(unittest.TestCase):
-
-    def test_file_get_matching(self):
-        files = utils.file_get_matching(os.path.join(_TESTDIR, 'sample*.csv'))
-        self.assertTrue(len(files) > 2)
-        for file in files:
-            self.assertTrue(os.path.exists(file))
-
-    def test_file_get_estimate_num_rows(self):
-        files = utils.file_get_matching(os.path.join(_TESTDIR, 'sample*.csv'))
-        for file in files:
-            estimate_rows = utils.file_estimate_num_rows(file)
-            with open(file, 'r') as fp:
-                num_lines = len(fp.readlines())
-                self.assertTrue(
-                    math.isclose(num_lines, estimate_rows, rel_tol=1))
-
-    def test_file_load_csv_dict(self):
-        csv_dict = utils.file_load_csv_dict(
-            os.path.join(_TESTDIR, 'sample_output.csv'), 's2CellId')
-        self.assertTrue(len(csv_dict) > 0)
-        test_key = 'dcid:s2CellId/0x39925b1c00000000'
-        self.assertTrue(test_key in csv_dict)
-        self.assertEqual('1', csv_dict[test_key]['water'])
-        self.assertEqual('13', csv_dict[test_key]['s2Level'])
-
-    def test_file_write_load_py_dict(self):
-        test_dict = {'test_key': 'test_value', 'int_key': 10, 'list': [1, 2, 3]}
-        # read/write dict as a py file
-        fd, tmp_py_filename = tempfile.mkstemp(suffix='.py')
-        utils.file_write_py_dict(test_dict, tmp_py_filename)
-        self.assertTrue(os.path.getsize(tmp_py_filename) > 10)
-        read_dict = utils.file_load_py_dict(tmp_py_filename)
-        self.assertEqual(test_dict, read_dict)
-        # Repeat test with pkl file.
-        fd, tmp_pkl_filename = tempfile.mkstemp(suffix='.pkl')
-        utils.file_write_py_dict(test_dict, tmp_pkl_filename)
-        self.assertTrue(os.path.getsize(tmp_pkl_filename) > 10)
-        read_pkl_dict = utils.file_load_py_dict(tmp_pkl_filename)
-        self.assertEqual(test_dict, read_pkl_dict)
-        # check pkl and py files are different.
-        self.assertTrue(
-            os.path.getsize(tmp_pkl_filename) != os.path.getsize(
-                tmp_py_filename))
-
-
 class StrUtilsTest(unittest.TestCase):
 
     def test_strip_namespace(self):
