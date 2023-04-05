@@ -58,16 +58,27 @@ class FileIO:
             for row in csv_reader:
                 print(row)
 
-        Note:
-        FileIO creates a local temporary copy of file opened for read/write.
-        This is required for utilities like csv.DictReader that use file IO
-        operations not supported on GCS blob.
+       To read a CSV file from a google spreadsheet:
+         with FileIO('https://docs.google.com/spreadsheet/d/123456', 'r') as file:
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                print(row)
 
-        To avoid creating temporary copies for operations on blob, such as read(),
-        set use_tempfile=False with binary mode:
-          with FileIO('gc://<my-gcf-file', mode='rb', use_tempfile=False) as file:
-            # Get content as bytes
-            contents = file.read()
+
+       Note:
+         FileIO creates a local temporary copy of remote files opened for read.
+         This is required for utilities like csv.DictReader that use file IO
+         operations not supported on GCS blob.
+         FileIO also uses a local temporary file for writes that is copied/moved to
+         the required destination filename after write is done.
+         This keeps writes 'atomic', ie., if the program is terminated during a write
+         before the file is closed, the destination file does not have partial content.
+         
+         To avoid creating temporary copies for operations on blob, such as read(),
+         set use_tempfile=False with binary mode:
+           with FileIO('gc://<my-gcf-file', mode='rb', use_tempfile=False) as file:
+             # Get content as bytes
+             contents = file.read()
     '''
 
     def __init__(self,
@@ -441,6 +452,22 @@ def file_load_csv_dict(filename: str,
     '''Returns a dictionary loaded from a CSV file.
   Each row is added to the dict with value from column 'key_column' as key
   and  value from 'value_column.
+  For example, reading a CSV file with the following rows:
+    name,dcid,latitude,longitude,containedInPlace
+    India,country/IND,20.59,78.96,"asia,Earth"
+    USA,country/USA,37.09,-95.71,Earth
+
+  Returns the following dictionary:
+    {'India': { 'dcid': 'country/IND',
+                'latitude': '20.59',
+                'longitude': '78.96',
+                'containedInPlace': 'asia,Earth' },
+      'USA': { 'dcid: 'country/USA',
+                'latitude': '37.09',
+                'longitude': '-95.71',
+                'containedInPlace': 'Earth' },
+    }
+
   Args:
     filename: csv file name to be loaded into the dict.
       it can be a comma separated list of file patterns as well.
@@ -508,6 +535,26 @@ def file_write_csv_dict(py_dict: dict,
                         filename: str,
                         columns: list = None) -> str:
     '''Returns the filename after writing py_dict with a csv row per item.
+    Each dictionary items is written as a row in the CSV file.
+
+    For example, the dictionary:
+    my_dict = { 1: { 'dcid': 'Count_Person',
+                      'typeOf': 'StatisticalVariable',
+                      'populationType': 'Person',
+                      'measuredProperty': 'count' },
+                 2: { 'dcid': 'Count_Farm',
+                      'typeOf': 'StatisticalVariable',
+                      'populationType': 'Farm',
+                      'measuredProperty': 'count',
+                      'statType': 'measuredValue' }
+               }
+    file_write_csv_dict(my_dict, filename='my-file.csv')
+    generates the following CSV rows:
+      dcid,typeOf,populationType,measuredProperty,statType
+      Count_Person,StatisticalVariable,Person,count,
+      Count_Farm,StatisticalVariable,Farm,count,measuredValue
+
+
     Args:
       py_dict: dictionary to be written into the CSV file.
         each key:value in the dict is written as a row in the CSV.
