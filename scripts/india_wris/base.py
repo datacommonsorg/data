@@ -108,11 +108,21 @@ class WaterQualityBase():
                                 on='DistrictName',
                                 how='left')
         self.df['dcid'] = self.df.apply(lambda x: ''.join([
-            'india_wris/',
+            'indiaWris/',
             str(x['DistrictCode']), '_', ''.join(
                 re.split('\W+', x['Station Name']))
         ]),
                                         axis=1)
+
+        latitude_col = [col for col in self.df.columns if 'Latitude' in col]
+        longitude_col = [col for col in self.df.columns if 'Longitude' in col]
+        self.df['LatLong'] = self.df.apply(lambda x: \
+                                           '[LatLong {} {}]'.format(
+                                                            x[latitude_col[0]],
+                                                            x[longitude_col[0]]
+                                                                ),
+                                           axis=1
+                                            )
 
         # Saving the df with codes and dcids in `csv_save_path`
         csv_save_path = os.path.join(self.module_dir,

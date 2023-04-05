@@ -31,10 +31,10 @@ from common import import_download_details, download
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
-flags.DEFINE_enum(
-    "import_name", None,
-    ["alcohol_consumption", "tobacco_consumption", "physical_activity", "bmi"],
-    "Import name for which input files to be downloaded")
+flags.DEFINE_enum("import_name", None, [
+    "alcohol_consumption", "tobacco_consumption", "physical_activity", "bmi",
+    "social_environment", "fruits_vegetables"
+], "Import name for which input files to be downloaded")
 flags.mark_flag_as_required("import_name")
 
 

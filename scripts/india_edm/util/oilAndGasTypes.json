@@ -1,0 +1,28 @@
+{
+    "OilType": {
+        "LPG": "LiquefiedPetroleumGas",
+        "PETROL": "PetroleumLiquids",
+        "NAPHTHA": "Naphtha",
+        "SKO (KEROSENE)": "EIA_Kerosene",
+        "ATF/RTF/JET": "GasolineJetFuel",
+        "DIESEL/ HSD": "DieselOil",
+        "BITUMEN": "OilShaleAndTarSands",
+        "OTHERS": "IndiaEDM_OtherOilProducts",
+        "FUEL OIL": "FuelOil",
+        "MOTOR SPIRIT (PETROL)": "MotorGasoline",
+        "LUBES/GREASES": "Lubricants",
+        "CRUDE OIL": "CrudeOil",
+        "PETROLEUM PRODUCTS": "PetroleumLiquids",
+        "LDO": "EIA_DistillateFuelOil",
+        "FURNACE OIL": "FurnaceOil",
+        "LSHS/HHS/RFO": "FuelOil",
+        "PETROLEUM COKE": "PetroleumCoke",
+        "WAXES": "ParaffinWaxes"
+    },
+    
+    "GasType": {
+        "NATURAL GAS": "NaturalGas",
+        "LIQUIFIED NATURAL GAS (LNG)": "NaturalGasLiquids",
+        "COAL BED METHANE (CBM)": "EIA_CoalDerivedSynthesisGas"
+    }
+}

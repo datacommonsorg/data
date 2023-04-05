@@ -1,0 +1,22 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "USGS_Earthquake",
+            "curator_emails": [
+                "alexyfchen@google.com"
+            ],
+            "provenance_url": "https://www.usgs.gov/programs/earthquake-hazards/earthquakes",
+            "provenance_description": "USGS earthquake data for historical earthquake events globally.",
+            "scripts": [
+                "preprocess.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "earthquake.tmcf",
+                    "cleaned_csv": "earthquake.csv"
+                }
+            ],
+            "cron_schedule": "0 */3 * * *"
+        }
+    ]
+}

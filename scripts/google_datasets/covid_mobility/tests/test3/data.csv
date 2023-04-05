@@ -1,0 +1,4 @@
+country_region_code,country_region,sub_region_1,sub_region_2,metro_area,iso_3166_2_code,census_fips_code,date,retail_and_recreation_percent_change_from_baseline,grocery_and_pharmacy_percent_change_from_baseline,parks_percent_change_from_baseline,transit_stations_percent_change_from_baseline,workplaces_percent_change_from_baseline,residential_percent_change_from_baseline
+US,United States,Florida,Miami-Dade County,,,12086,2020-02-25,,,,,,
+US,United States,Florida,Miami-Dade County,,,12086,2020-02-26,,-2,-15,1,2,0
+US,United States,Florida,Miami-Dade County,,,12086,2020-02-27,4,5,,-1,2,0
