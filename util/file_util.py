@@ -914,9 +914,8 @@ def _dict_aggregate_values(src: dict, dst: dict, config: dict) -> dict:
 
 
 def _add_to_list(comma_string: str, items_list: list) -> list:
-  '''Add items from the comma separated string to the items list.'''
-  for item in comma_string.split(','):
-    if item not in items_list:
-      items_list.append(item)
-  return items_list
-
+    '''Add items from the comma separated string to the items list.'''
+    for item in comma_string.split(','):
+        if item not in items_list:
+            items_list.append(item)
+    return items_list
