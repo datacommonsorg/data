@@ -28,6 +28,7 @@ import tempfile
 
 from absl import logging
 from google.cloud import storage
+from typing import Union
 
 
 class FileIO:
@@ -276,7 +277,7 @@ def file_get_gcs_blob(filename: str, exists: bool = True) -> storage.blob.Blob:
     return None
 
 
-def file_get_matching(filepat: str) -> list:
+def file_get_matching(filepat: Union[str, list]) -> list:
     '''Returns a list of files that match the file pattern.
     Args:
       filepat: string with comma separated list of file patterns to lookup
@@ -292,9 +293,7 @@ def file_get_matching(filepat: str) -> list:
     if isinstance(input_files, list):
         for files in input_files:
             if isinstance(files, str):
-                for file in files.split(','):
-                    if file not in input_files:
-                        input_files.append(file)
+                _add_to_list(files, input_files)
             elif isinstance(files, list):
                 input_files.extend(files)
     # Get all matching files for each file pattern.
@@ -328,10 +327,10 @@ def file_get_matching(filepat: str) -> list:
     return sorted(files)
 
 
-def file_get_size(filename: str) -> int:
+def file_get_size(filename: Union[str, list]) -> int:
     '''Returns the size of the file in bytes.
     Args:
-      filename: string filename for a local or GCS file.
+      filename: string or a list of local or GCS filenames.
     Returns
       file size in bytes if the file exists.
       else 0.
@@ -348,7 +347,7 @@ def file_get_size(filename: str) -> int:
     return size
 
 
-def file_estimate_num_rows(filename: str) -> int:
+def file_estimate_num_rows(filename: Union[str, list]) -> int:
     '''Returns an estimated number of rows based on size of the first few rows.
     Args:
       filename: string name of the file.
@@ -912,3 +911,12 @@ def _dict_aggregate_values(src: dict, dst: dict, config: dict) -> dict:
                 f'Failed to aggregate values for {prop}: {new_val}, {cur_val}, Error: {e}'
             )
     return dst
+
+
+def _add_to_list(comma_string: str, items_list: list) -> list:
+  '''Add items from the comma separated string to the items list.'''
+  for item in comma_string.split(','):
+    if item not in items_list:
+      items_list.append(item)
+  return items_list
+

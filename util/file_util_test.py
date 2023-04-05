@@ -84,14 +84,12 @@ class FileUtilsTest(unittest.TestCase):
                 'https://docs.google.com/spreadsheets/d/some-sheet-id/edit#gid=12345'
             ))
         self.assertFalse(
-            file_util.file_is_google_spreadsheet(
-                'gs://folders/some-path'))
+            file_util.file_is_google_spreadsheet('gs://folders/some-path'))
         self.assertFalse(
             file_util.file_is_google_spreadsheet(
                 'http://drive.google.com/folders/some-path'))
         self.assertFalse(
-            file_util.file_is_google_spreadsheet(
-                '/folders/some-path'))
+            file_util.file_is_google_spreadsheet('/folders/some-path'))
 
     def test_file_get_estimate_num_rows(self):
         files = file_util.file_get_matching(
