@@ -30,6 +30,8 @@ from absl import logging
 from google.cloud import storage
 from typing import Union
 
+from aggregation_util import aggregate_value, aggregate_dict
+
 
 class FileIO:
     '''Class for file IO with support for context manager.
@@ -477,7 +479,7 @@ def file_load_csv_dict(filename: str,
       If not set, value is a dict of all remaining columns.
     config: dictionary of aggregation settings in case there are
       multiple rows with the same key.
-      refer to _dict_aggregate_values() for config settings.
+      refer to aggregation_util.aggregate_dict for config settings.
 
   Returns:
     dictionary of {key:value} loaded from the CSV file.
@@ -519,10 +521,10 @@ def file_load_csv_dict(filename: str,
                     # Key already exists. Merge values.
                     old_value = csv_dict[key]
                     if isinstance(old_value, dict):
-                        _dict_aggregate_values(row, old_value, config)
+                        aggregate_dict(row, old_value, config)
                     else:
                         aggr = config.get(prop, config).get('aggregate', 'sum')
-                        value = _aggregate_value(old_value, value, aggr)
+                        value = aggregate_value(old_value, value, aggr)
                         csv_dict[key] = value
                 else:
                     csv_dict[key] = value
@@ -877,87 +879,6 @@ def _copy_file_chunks(src, dst, chunk_size=1000000):
     while (len(buf)):
         dst.write(buf)
         buf = src.read(chunk_size)
-
-
-def _aggregate_value(value1: str, value2: str, aggregate: str = 'sum') -> str:
-    '''Return value aggregated from value1 and value2 as per the aggregate setting.
-    Args:
-      value1: value to be aggregated from source
-      value2: value to be aggregated into from destination
-      aggregate: string setting for aggregation method which is one of
-        sum, min, max, list
-    Returns:
-      aggregated value
-    '''
-    value = None
-    if isinstance(value1, str) or isinstance(value2, str):
-        if aggregate == 'sum':
-            # Use list for combining string values.
-            aggregate = 'list'
-    if isinstance(value1, set) or isinstance(value2, set):
-        aggregate = 'set'
-    if aggregate == 'sum':
-        value = value1 + value2
-    elif aggregate == 'min':
-        value = min(value1, value2)
-    elif aggregate == 'max':
-        value = max(value1, value2)
-    elif aggregate == 'list':
-        # Create a comma separated list of unique values combining lists.
-        value = set(str(value1).split(','))
-        value.update(str(value2).split(','))
-        value = ','.join(sorted(value))
-    elif aggregate == 'set':
-        value = set(value1)
-        value.update(value2)
-    else:
-        logging.fatal(
-            f'Unsupported aggregation: {aggregate} for {value1}, {value2}')
-    return value
-
-
-def _dict_aggregate_values(src: dict, dst: dict, config: dict) -> dict:
-    '''Aggregate values for keys in src dict into dst.
-  The mode of aggregation (sum, mean, min, max) per property is
-  defined in the config.
-  Assumes properties to be aggregated have numeric values.
-
-  Args:
-    src: dictionary with property:value to be aggregated into dst
-    dst: dictionary with property:value which is updated.
-    config: dictionary with aggregation settings per property.
-  Returns:
-    dst dictionary with updated property:values.
-  '''
-    if config is None:
-        config = {}
-    default_aggr = config.get('aggregate', 'sum')
-    for prop, new_val in src.items():
-        try:
-            if prop not in dst:
-                # Add new property to dst without any aggregation.
-                dst[prop] = new_val
-            else:
-                # Combine new value in src with current value in dst by aggregation.
-                aggr = config.get(prop, {}).get('aggregate', default_aggr)
-                cur_val = dst[prop]
-                if isinstance(cur_val, str) or isinstance(new_val, str):
-                    if aggr == 'mean':
-                        # Use list for combining string values.
-                        aggr = 'list'
-                if aggr == 'mean':
-                    cur_num = dst.get(f'#{prop}:count', 1)
-                    new_num = src.get(f'#{prop}:count', 1)
-                    dst[prop] = ((cur_val * cur_num) +
-                                 (new_val * new_num)) / (cur_num + new_num)
-                    dst[f'#{prop}:count'] = cur_num + new_num
-                else:
-                    dst[prop] = _aggregate_value(cur_val, new_val, aggr)
-        except TypeError as e:
-            logging.fatal(
-                f'Failed to aggregate values for {prop}: {new_val}, {cur_val}, Error: {e}'
-            )
-    return dst
 
 
 def _add_to_list(comma_string: str, items_list: list) -> list:
