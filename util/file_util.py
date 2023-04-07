@@ -26,6 +26,7 @@ import pprint
 import sys
 import tempfile
 
+from absl import app
 from absl import logging
 from google.cloud import storage
 from typing import Union
@@ -113,9 +114,9 @@ class FileIO:
             elif file_is_google_spreadsheet(self._filename):
                 # Copy over spreadsheet to local CSV file.
                 fd, self._tmp_filename = tempfile.mkstemp()
-                file_copy_from_spreadsheets(url=self._filename,
-                                            worksheet_title=None,
-                                            dst_filename=self._tmp_filename)
+                file_copy_from_spreadsheet(url=self._filename,
+                                           worksheet_title=None,
+                                           dst_filename=self._tmp_filename)
 
         # Create a local temporary file for writes.
         # The temp file is renamed or copied to the original filename after write.
@@ -123,7 +124,7 @@ class FileIO:
             dirname = None
             if file_is_local(self._filename):
                 # Create the local directory for output if required.
-                file_makedirs(self._filename)
+                dirname = file_makedirs(self._filename)
             # Create a tmp file for writing that will be renamed to
             # the given filename on close.
             # Use the output directory for local temporary files
@@ -437,7 +438,20 @@ def file_copy(src_filename: str, dst_filename: str = '') -> str:
         # Create a filename for destination with a '-copy' suffix.
         basename = os.path.basename(src_filename)
         dst_filename = file_get_name(basename, suffix='-copy')
-    # Open both files and copy content
+
+    # Copy from or to a spreadsheet.
+    if file_is_google_spreadsheet(dst_filename):
+        return file_copy_to_spreadsheet(src_filename, dst_filename)
+    if file_is_google_spreadsheet(src_filename):
+        return file_copy_from_spreadsheet(url=src_filename,
+                                          dst_filename=dst_filename)
+
+    # Source and target is not a spreadsheet.
+    # Open both files and copy content over.
+    if dst_filename.endswith('/'):
+        # Destination is a directory. Create file with source filename.
+        dst_filename = os.path.join(dst_filename,
+                                    os.path.basename(src_filename))
     file_makedirs(dst_filename)
     with FileIO(filename=src_filename, mode='rb', use_tempfile=False) as src:
         with FileIO(filename=dst_filename, mode='wb',
@@ -761,9 +775,9 @@ def file_get_gspread_worksheet(
     return None
 
 
-def file_copy_from_spreadsheets(url: str,
-                                worksheet_title: str = None,
-                                dst_filename: str = '') -> list[str]:
+def file_copy_from_spreadsheet(url: str,
+                               worksheet_title: str = None,
+                               dst_filename: str = '') -> list[str]:
     '''Copies the spreadsheet to a local file and returns the filename.
 
     Args:
@@ -784,13 +798,13 @@ def file_copy_from_spreadsheets(url: str,
         return filenames
 
     # Get the spreadsheet handle.
-    gs = _file_get_gspread_client().open_by_url(url)
+    gs = file_open_google_spreadsheet(url)
     if not gs:
         logging.fatal(f'Unable to open the Spreadsheet: {url}')
 
     # Get all the sheets to be copied.
     worksheets = []
-    if worksheet_title:
+    if worksheet_title or '#gid=' in url:
         ws = file_get_gspread_worksheet(url, worksheet_title=worksheet_title)
         if ws:
             worksheets.append(ws)
@@ -802,6 +816,11 @@ def file_copy_from_spreadsheets(url: str,
     if not dst_filename:
         # Remove spaces from the filename
         dst_filename = gs.title.replace(' ', '_')
+    elif dst_filename.endswith('/'):
+        # Destination is a directory. Use the spreadsheet title as filename.
+        dst_filename = file_get_name(dst_filename,
+                                     suffix=gs.title.replace(' ', '_'),
+                                     file_ext='.csv')
     file_makedirs(dst_filename)
 
     # Read each sheet as csv and save it to the file.
@@ -810,10 +829,10 @@ def file_copy_from_spreadsheets(url: str,
         filename = dst_filename
         if len(worksheets) > 1:
             # create a dst filename for the sheet.
-            suffix = '-' + ws.title.replace(' ', '_')
+            suffix = '-' + ws_title.replace(' ', '_')
             filename = file_get_name(dst_filename,
                                      suffix=suffix,
-                                     file_ext='csv')
+                                     file_ext='.csv')
         with FileIO(filename, mode='w') as file:
             # Write each row from the worksheet into the csv file
             logging.debug(
@@ -887,3 +906,41 @@ def _add_to_list(comma_string: str, items_list: list) -> list:
         if item not in items_list:
             items_list.append(item)
     return items_list
+
+
+def main(_):
+    if len(sys.argv) > 1:
+        args = sys.argv[1:]
+        if sys.argv[1] == 'cp':
+            # Copy files: <src_file1> <src_file2>... <dst>
+            if len(args) >= 3:
+                target = args[-1]
+                src_files = args[1:-1]
+                if len(src_files) > 1:
+                    if file_is_google_spreadsheet(target):
+                        logging.error(
+                            f'Cannot copy multiple files {src_files} to a spreadsheet {target}'
+                        )
+                    else:
+                        # In case of multiple source files,
+                        # target is assumed to be a directory.
+                        # Copy all files to the target directory.
+                        if not target.endswith('/'):
+                            target = target + '/'
+                        for src_file in src_files:
+                            dst = file_copy(src_file, target)
+                            logging.info(f'Copied {src_file} to {dst}')
+                else:
+                    src_file = src_files[0]
+                    dst = file_copy(src_files[0], target)
+                    logging.info(f'Copied {src_files[0]} to {dst}')
+            else:
+                logging.error(
+                    f'Expected one or more source files and a destination file.'
+                )
+        else:
+            logging.error(f'Unsupported command: {sys.argv[1]}')
+
+
+if __name__ == '__main__':
+    app.run(main)
