@@ -8,6 +8,7 @@ domainIncludes: dcs:Thing
 rangeIncludes: dcs:{enum}
 name: "{dcid}"
 description: "{name}"
+isProvisional: dcs:True
 '''
 
 enum_template = '''
@@ -15,12 +16,14 @@ Node: dcid:{enum}
 typeOf: schema:Class
 subClassOf: schema:Enumeration
 name: "{enum}"
+isProvisional: dcs:True
 '''
 
 value_template = '''
 Node: dcid:{enum}_{dcid}
 typeOf: dcs:{enum}
 name: "{name}"
+isProvisional: dcs:True
 '''
 
 skipped_attributes = {
@@ -28,15 +31,15 @@ skipped_attributes = {
     'Reporting Type', 'UnitMultiplier', 'Units'
 }
 
-# Use existing property enums when they exist.
+# Use existing properties when they exist.
 # Ideally the enum values should also be mapped to existing ones,
 # but currently always generate a new node.
 mapped_attributes = {
-    'Age': 'AgeStatusEnum',
-    'Cause of death': 'CauseOfDeathAndDisabilityEnum',
-    'Disability status': 'USC_DisabilityStatusEnum',
-    'Education level': 'SchoolGradeLevelEnum',
-    'Sex': 'GenderType'
+    'Age',
+    'Cause of death',
+    'Disability status',
+    'Education level',
+    'Sex',
 }
 
 
@@ -56,10 +59,10 @@ with open('attribute.csv') as f:
     reader = csv.DictReader(f)
     concepts = collections.defaultdict(set)
     for row in reader:
-        # Skip attributes that swill be modeled differently.
+        # Skip since these should be observationAbout
         if row['concept_id'] in skipped_attributes:
             continue
-        # Skip totals.
+        # Skip totals
         if row['code_sdmx'] == '_T':
             continue
         concepts[row['concept_id']].add(
@@ -68,18 +71,16 @@ with open('attribute.csv') as f:
 
 with open('schema.mcf', 'w') as f:
     for concept in concepts:
-        if concept in mapped_attributes:
-            enum = mapped_attributes[concept]
-        else:
-            prop = make_property(concept)
-            enum = prop + 'Enum'
+        prop = make_property(concept)
+        enum = prop + 'Enum'
+        if concept not in mapped_attributes:
             f.write(
                 property_template.format_map({
                     'dcid': prop[0].lower() + prop[1:],
                     'name': concept,
                     'enum': enum
                 }))
-            f.write(enum_template.format_map({'enum': enum}))
+        f.write(enum_template.format_map({'enum': enum}))
         for v in sorted(concepts[concept]):
             f.write(
                 value_template.format_map({
