@@ -58,7 +58,8 @@ with open('sv.mcf', 'w') as f_out:
                     svs.add(sv)
                     description = re.sub(
                         '[\(\[].*?[\)\]]', '',
-                        row['SeriesDescription']).split(', by')[0].strip()
+                        row['SeriesDescription']).split(', by')[0].replace(
+                            ' , ', ', ').strip().removesuffix(',')
                     pvs = ', '.join(
                         attr[row[i]] for i in properties if row[i] in attr)
                     if pvs:
