@@ -70,7 +70,7 @@ with value `Female`. The constraint property values are typically Enumerations
 ## `StatVarObservation`
 
 Each `StatisticalVariable` node is an abstract specification about which we can
-make observations that are grounded at a particular location and time. These is
+make observations that are grounded at a particular location and time. These are
 represented by the
 [`StatVarObservation`](https://datacommons.org/browser/StatVarObservation) type.
 
