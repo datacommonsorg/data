@@ -255,7 +255,7 @@ stricter syntax described above does work.
 
 #### Skip global prefix on known ref properties
 
-For well-known properties that are known to have referencess as values, the
+For well-known properties that are known to have references as values, the
 global reference prefixes (`dcs:`, `schema:`, `dcid:`) for their values can be
 dropped.
 
@@ -332,7 +332,7 @@ typeOf: State
 motto: "Eureka"
 ```
 
-As long as each MCF node unambiguously refers to the same entity, once injested,
+As long as each MCF node unambiguously refers to the same entity, once ingested,
 the entity corresponding to `geoId/06` will have all the properties: `typeOf`,
 `name`, `containedInPlace`, and `motto`.
 
