@@ -2,11 +2,11 @@ import collections
 import csv
 
 property_template = '''
-Node: dcid:SDG_{dcid}
+Node: dcid:sdg_{dcid}
 typeOf: schema:Property
 domainIncludes: dcs:Thing
-rangeIncludes: dcs:{enum}
-name: "SDG_{dcid}"
+rangeIncludes: dcs:SDG_{enum}
+name: "sdg_{dcid}"
 description: "{name}"
 isProvisional: dcs:True
 '''
@@ -15,7 +15,7 @@ enum_template = '''
 Node: dcid:SDG_{enum}
 typeOf: schema:Class
 subClassOf: schema:Enumeration
-name: "SDG_{enum}"
+name: "{enum}"
 isProvisional: dcs:True
 '''
 
