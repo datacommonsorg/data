@@ -21,7 +21,7 @@ isProvisional: dcs:True
 
 value_template = '''
 Node: dcid:SDG_{enum}_{dcid}
-typeOf: dcs:{enum}
+typeOf: dcs:SDG_{enum}
 name: "{name}"
 isProvisional: dcs:True
 '''
