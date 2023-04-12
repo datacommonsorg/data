@@ -909,37 +909,42 @@ def _add_to_list(comma_string: str, items_list: list) -> list:
 
 
 def main(_):
-    if len(sys.argv) > 1:
-        args = sys.argv[1:]
-        if sys.argv[1] == 'cp':
-            # Copy files: <src_file1> <src_file2>... <dst>
-            if len(args) >= 3:
-                target = args[-1]
-                src_files = args[1:-1]
-                if len(src_files) > 1:
-                    if file_is_google_spreadsheet(target):
-                        logging.error(
-                            f'Cannot copy multiple files {src_files} to a spreadsheet {target}'
-                        )
-                    else:
-                        # In case of multiple source files,
-                        # target is assumed to be a directory.
-                        # Copy all files to the target directory.
-                        if not target.endswith('/'):
-                            target = target + '/'
-                        for src_file in src_files:
-                            dst = file_copy(src_file, target)
-                            logging.info(f'Copied {src_file} to {dst}')
-                else:
-                    src_file = src_files[0]
-                    dst = file_copy(src_files[0], target)
-                    logging.info(f'Copied {src_files[0]} to {dst}')
-            else:
-                logging.error(
-                    f'Expected one or more source files and a destination file.'
-                )
+    if len(sys.argv) <= 1:
+        logging.error('No arguments given.')
+        logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
+        return
+    if sys.argv[1] != 'cp':
+        logging.error(f'Unsupported command: {sys.argv[1]}')
+        logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
+        return
+
+    # Copy files: <src_file1> <src_file2>... <dst>
+    args = sys.argv[1:]
+    if len(args) >= 3:
+        logging.error(
+            'Expected one or more source files and a destination file.')
+        logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
+        return
+    target = args[-1]
+    src_files = args[1:-1]
+    if len(src_files) > 1:
+        if file_is_google_spreadsheet(target):
+            logging.error(
+                f'Cannot copy multiple files {src_files} to a spreadsheet {target}'
+            )
         else:
-            logging.error(f'Unsupported command: {sys.argv[1]}')
+            # In case of multiple source files,
+            # target is assumed to be a directory.
+            # Copy all files to the target directory.
+            if not target.endswith('/'):
+                target = target + '/'
+            for src_file in src_files:
+                dst = file_copy(src_file, target)
+                logging.info(f'Copied {src_file} to {dst}')
+    else:
+        src_file = src_files[0]
+        dst = file_copy(src_files[0], target)
+        logging.info(f'Copied {src_files[0]} to {dst}')
 
 
 if __name__ == '__main__':

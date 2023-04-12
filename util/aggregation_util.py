@@ -14,47 +14,49 @@
 """Utility functions for aggregations on dictionaries and strings."""
 
 from absl import logging
+from typng import Union
 
 
-def aggregate_value(value1: str, value2: str, aggregate: str = 'sum') -> str:
-    '''Return value aggregated from value1 and value2 as per the aggregate setting.
+def aggregate_value(src: Union[str, int, float, list, set],
+                    dst: Union[str, int, float, list, set],
+                    aggregate: str = 'sum') -> str:
+    '''Return value aggregated from src and dst as per the aggregate setting.
     Args:
-      value1: value to be aggregated from source
-      value2: value to be aggregated into from destination
+      src: value to be aggregated from source
+      dst: value to be aggregated into from destination
       aggregate: string setting for aggregation method which is one of
         sum, min, max, list, first, last
     Returns:
       aggregated value
     '''
     value = None
-    if isinstance(value1, str) or isinstance(value2, str):
+    if isinstance(src, str) or isinstance(dst, str):
         if aggregate == 'sum':
             # Use list for combining string values.
             aggregate = 'list'
-    if isinstance(value1, set) or isinstance(value2, set):
+    elif isinstance(src, set) or isinstance(dst, set):
         # If values are sets, use set aggregation
         aggregate = 'set'
     if aggregate == 'sum':
-        value = value1 + value2
+        value = src + dst
     elif aggregate == 'min':
-        value = min(value1, value2)
+        value = min(src, dst)
     elif aggregate == 'max':
-        value = max(value1, value2)
+        value = max(src, dst)
     elif aggregate == 'list':
         # Create a comma separated list of unique values combining lists.
-        value = set(str(value1).split(','))
-        value.update(str(value2).split(','))
+        value = set(str(src).split(','))
+        value.update(str(dst).split(','))
         value = ','.join(sorted(value))
     elif aggregate == 'set':
-        value = set(value1)
-        value.update(value2)
+        value = set(src)
+        value.update(dst)
     elif aggregate == 'first':
-        return value1
+        return src
     elif aggregate == 'last':
-        return value2
+        return dst
     else:
-        logging.fatal(
-            f'Unsupported aggregation: {aggregate} for {value1}, {value2}')
+        logging.fatal(f'Unsupported aggregation: {aggregate} for {src}, {dst}')
     return value
 
 
