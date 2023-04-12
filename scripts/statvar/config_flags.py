@@ -101,7 +101,7 @@ _DEFAULT_CONFIG = {
     'input_reference_column':
         '#input',
     'input_min_columns_per_row':
-        3,
+        2,
     'input_data':
         _FLAGS.input_data,
     'input_xls':

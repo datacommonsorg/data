@@ -20,11 +20,15 @@ import os
 import pprint as pp
 import sys
 import time
+import re
 
 from absl import app
 from absl import flags
 from absl import logging
 from typing import Union
+
+# uncomment to run pprof
+from pypprof.net_http import start_pprof_server
 
 _FLAGS = flags.FLAGS
 
@@ -35,9 +39,9 @@ flags.DEFINE_string('resolve_output_csv', '', 'Output csv with place dcids.')
 flags.DEFINE_string(
     'resolve_config', '',
     'Config setting for place resolution as json or python dict.')
-flags.DEFINE_string(
+flags.DEFINE_list(
     'place_names_csv', '',
-    'CSV with place properties including name, dcid, containedInPlace'
+    'CSV files with place properties including name, dcid, containedInPlace'
     'used by the place_name_matcher')
 flags.DEFINE_list(
     'place_names_within', '',
@@ -56,6 +60,8 @@ flags.DEFINE_string('place_resolver_cache', '',
                     'Cache file to save resolved places.')
 flags.DEFINE_string('maps_api_cache', '',
                     'Cache file to save responses from maps API.')
+flags.DEFINE_integer('place_pprof_port', 0,
+                     'HTTP port for running pprof server.')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -106,6 +112,7 @@ class PlaceResolver:
             self._maps_api_key = self._config.get('maps_api_key', '')
         self._place_name_matcher = PlaceNameMatcher(
             config=self._config.get_configs())
+        self._cache_modified = False
         self._load_cache()
 
     def __del__(self):
@@ -153,8 +160,7 @@ class PlaceResolver:
             if 'dcid' not in result:
                 if 'placeId' in result:
                     place_id = result['placeId']
-                    cached_place = self._get_cache_value(
-                        self._place_cache, place_id)
+                    cached_place = self._get_cache_value(place_id, 'dcid')
                     if cached_place:
                         # PlaceId is already resolved, use the cached result.
                         results[key].update(cached_place)
@@ -180,12 +186,10 @@ class PlaceResolver:
                 if place_id and dcid and key:
                     results[key]['dcid'] = dcid
                     # Cache the response for future requests.
-                    cache_value = {'dcid': dcid, 'placeId': place_id }
-                    self._set_cache_value(self._maps_cache, place_id,
-                                          cache_value)
+                    cache_value = {'dcid': dcid, 'placeId': place_id}
+                    self._set_cache_value(place_id, cache_value)
                     place_name = self._get_lookup_name(key, places[key])
-                    self._set_cache_value(self._place_cache, place_name,
-                                          cache_value)
+                    self._set_cache_value(place_name, cache_value)
         logging.debug(f'Resolved place dcids: {results}')
 
         # Get any remaining unresolved places.
@@ -195,6 +199,8 @@ class PlaceResolver:
             logging.debug(
                 f'Looking up unresolved places in name matcher: {unresolved_places}'
             )
+            self._counters.add_counter('dc-api-unresolved-places',
+                                       len(unresolved_places))
             name_results = self.lookup_names(unresolved_places)
             results.update(name_results)
 
@@ -227,8 +233,7 @@ class PlaceResolver:
             lng = place.get(longitude_key, '')
             if lat and lng:
                 place_key = self._get_cache_key([lat, lng])
-                cached_place = self._get_cache_value(self._place_cache,
-                                                     place_key)
+                cached_place = self._get_cache_value(place_key, 'latitude')
                 if cached_place:
                     self._counters.add_counter(
                         f'dc-api-resolve-latlng-cache-hits', 1)
@@ -264,8 +269,7 @@ class PlaceResolver:
                     [resolved_place['latitude'], resolved_place['longitude']])
                 input_key = coords_to_key.get(place_key, '')
                 dcids = resolved_place.get('placeDcids', '')
-                self._set_cache_value(self._place_cache, place_key,
-                                      resolved_place)
+                self._set_cache_value(place_key, resolved_place)
                 if dcids and input_key in results:
                     results[input_key]['placeDcids'] = dcids
         logging.debug(f'Returning resolved latlngs {results}')
@@ -304,7 +308,7 @@ class PlaceResolver:
         if not place_types:
             place_types = self._config.get('place_type', [])
         if not places_within:
-          places_within = self._config.get('places_within', [])
+            places_within = self._config.get('places_within', [])
         property_filters = {}
         if place_types:
             property_filters['typeOf'] = place_types
@@ -327,8 +331,7 @@ class PlaceResolver:
             if place_result:
                 results[key] = place
                 results[key].update(place_result)
-                self._set_cache_value(self._place_cache, place_name,
-                                      place_result)
+                self._set_cache_value(place_name, place_result)
                 self._counters.add_counter(f'place-name-match-results', 1)
             self._counters.add_counter(f'place-name-match-lookups', 1)
         return results
@@ -356,9 +359,9 @@ class PlaceResolver:
 
         # Check if the place is in the maps cache.
         place_key = self._get_cache_key([name, country, admin_area])
-        if place_key in self._maps_cache:
-            self._counters.add_counter('maps-cache-hits', 1)
-            return self._maps_cache[place_key]
+        cached_place = self._get_cache_value(place_key, 'placeId')
+        if cached_place:
+            return cached_place
 
         # Lookup Google Maps API.
         if not self._maps_api_key:
@@ -392,8 +395,11 @@ class PlaceResolver:
                     if 'geometry' in first_result:
                         if 'location' in first_result['geometry']:
                             result.update(first_result['geometry']['location'])
+                    if result:
+                        self._counters.add_counter('maps-api-geocode-results',
+                                                   1)
             # Cache the response
-            self._set_cache_value(self._maps_cache, place_key, result)
+            self._set_cache_value(place_key, result)
             return result
 
         return None
@@ -420,10 +426,10 @@ class PlaceResolver:
         '''
         for key, place in places.items():
             # Lookup cache by key and name
-            cached_place = self._get_cache_value(self._place_cache, key)
+            cached_place = self._get_cache_value(key, 'dcid')
             if not cached_place:
                 cached_place = self._get_cache_value(
-                    self._place_cache, self._get_lookup_name(key, place))
+                    self._get_lookup_name(key, place), 'dcid')
             if cached_place:
                 self._counters.add_counter(f'place-resolver-name-cache-hits', 1)
                 resolved_places[key] = place
@@ -435,7 +441,9 @@ class PlaceResolver:
         '''Returns a key for the place lookup in the maps cache.'''
         tokens = []
         if isinstance(items, str):
-            # Items is a string, use it as cache key.
+            # Normalize string to lower case, remove extra
+            # spaces and characters.
+            #return re.sub(r'[^A-Za-z0-9\.,-]*', ' ', items)
             return items
         # Concatenate list of items to get the key.
         if isinstance(items, list):
@@ -450,8 +458,6 @@ class PlaceResolver:
 
     def _load_cache(self):
         '''Load cache from file.'''
-        self._maps_cache = file_util.file_load_py_dict(
-            self._config.get('maps_api_cache'))
         # Dictionary { <place>: <dcid> }
         self._place_cache = file_util.file_load_py_dict(
             self._config.get('places_resolved_csv'))
@@ -459,20 +465,26 @@ class PlaceResolver:
 
     def _save_cache(self, time_interval: int = 0):
         '''Periodically save cache of maps API and resolve API call responses'''
-        if self._cache_save_timestamp + time_interval <= time.perf_counter():
-            file_util.file_write_py_dict(self._maps_cache,
-                                         self._config.get('maps_api_cache'))
+        if self._cache_modified and (self._cache_save_timestamp + time_interval
+                                     <= time.perf_counter()):
             file_util.file_write_py_dict(
-                self._place_cache, self._config.get('place_resolver_cache'))
+                self._place_cache, self._config.get('places_resolved_csv'))
             self._cache_save_timestamp = time.perf_counter()
 
-    def _get_cache_value(self, cache_dict: dict, cache_key: str) -> dict:
-        '''Returns the value in the cache dictionary for the key.'''
-        return cache_dict.get(self._get_cache_key(cache_key), None)
+    def _get_cache_value(self, cache_key: str, prop: str = '') -> dict:
+        '''Returns the value in the cache dictionary for the key
+        if it has the property.'''
+        cached_entry = self._place_cache.get(self._get_cache_key(cache_key), {})
+        if prop and prop in cached_entry:
+            self._counters.add_counter(f'cache-hit-{prop}', 1)
+            return dict(cached_entry)
+        self._counters.add_counter(f'cache-miss-{prop}', 1)
+        return None
 
-    def _set_cache_value(self, cache_dict: dict, cache_key: str, value: dict):
+    def _set_cache_value(self, cache_key: str, value: dict):
         '''Set the result into the cache to be used for future lookups.'''
-        cache_dict[cache_key] = value
+        self._place_cache[cache_key] = dict(value)
+        self._cache_modified = True
         self._save_cache(self._config.get('cache_save_interval', 30))
 
 
@@ -573,6 +585,9 @@ def main(_):
     config.set_config('places_resolved_csv', _FLAGS.place_resolver_cache)
     config.set_config('maps_api_key', _FLAGS.maps_key)
     config.set_config('maps_api_cache', _FLAGS.maps_api_cache)
+    # uncomment to run pprof
+    if _FLAGS.place_pprof_port:
+        start_pprof_server(port=FLAGS.place_pprof_port)
     process(_FLAGS.resolve_input_csv, _FLAGS.resolve_output_csv,
             _FLAGS.maps_key, config)
 

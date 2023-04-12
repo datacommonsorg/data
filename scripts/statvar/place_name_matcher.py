@@ -74,7 +74,8 @@ flags.DEFINE_string('input_name_column', 'name',
                     'CSV column for names in the input_csv.')
 flags.DEFINE_list('place_within', '',
                   'Comma separated list of parent places, eg: country/BRA.')
-flags.DEFINE_string('ngram_matcher_config', '', 'Configuration settings for ngram matcher.')
+flags.DEFINE_string('ngram_matcher_config', '',
+                    'Configuration settings for ngram matcher.')
 flags.DEFINE_list('lookup_names', '',
                   'Comma separated list of places to lookup.')
 flags.DEFINE_string('output_csv', '', 'Output CSV with place dcids added.')
@@ -120,8 +121,7 @@ class PlaceNameMatcher:
         self._config = dict(_DEFAULT_CONFIG)
         if config:
             self._config.update(config)
-        logging.info(
-            f'Setting up PlaceNameMatcher with config: {self._config}')
+        logging.info(f'Setting up PlaceNameMatcher with config: {self._config}')
 
         # Dictionary of place dcid to set of property-values
         # { 'country/IND': {
@@ -131,7 +131,8 @@ class PlaceNameMatcher:
         # }
         self._places_dict = dict()
         place_files = [place_file]
-        place_files.extend(self._config.get('places_csv', []))
+        place_files.extend(
+            file_util.file_get_matching(self._config.get('places_csv', [])))
         places_within.extend(self._config.get('places_within', []))
         self._load_places_dict(place_files, places_within)
 
@@ -311,8 +312,8 @@ def main(_):
     config = {}
     if _FLAGS.ngram_matcher_config:
         config = ast.literal_eval(_FLAGS.ngram_matcher_config)
-    place_name_matcher = PlaceNameMatcher(_FLAGS.place_csv,
-                                          _FLAGS.place_within, config)
+    place_name_matcher = PlaceNameMatcher(_FLAGS.place_csv, _FLAGS.place_within,
+                                          config)
     if _FLAGS.input_csv:
         place_name_matcher.process_csv(input_csv=_FLAGS.input_csv,
                                        name_column=_FLAGS.input_name_column,

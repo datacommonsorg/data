@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -19,14 +19,19 @@ import gspread
 import os
 import re
 import sys
+import subprocess
+import cgi
+import time
+import threading
+import socket
 
 from absl import app
 from absl import flags
 from absl import logging
+from http import server
+from urllib import parse
 
-_FLAGS = flags.FLAGS
-
-flags.DEFINE_string('input_sheet', '', 'Spreadsheet to process.')
+flags.DEFINE_string('input_sheet', '', 'URL of spreadsheet to process')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -38,7 +43,10 @@ sys.path.append(
 import stat_var_processor
 import file_util
 import config_flags
+import process_http_server
 
+
+_FLAGS = flags.FLAGS
 
 def process_spreadsheets(
         data_processor_class: stat_var_processor.StatVarDataProcessor,
@@ -163,6 +171,11 @@ def _add_worksheet(gs: gspread.spreadsheet.Spreadsheet,
 
 
 def main(_):
+    # Launch a web server if --http_port is set.
+    process_http_server.run_http_server(script=__file__,
+                                        module=__name__)
+
+    # Process the spreadsheet specified
     process_spreadsheets(stat_var_processor.StatVarDataProcessor,
                          input_file=_FLAGS.input_sheet,
                          output_path=_FLAGS.output_path,

@@ -50,6 +50,8 @@ from dateutil import parser
 from dateutil.parser import parse
 from typing import Union
 
+import process_http_server
+
 # uncomment to run pprof
 os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
 from pypprof.net_http import start_pprof_server
@@ -1357,7 +1359,7 @@ class StatVarsMap:
         '''Save the statvars into an MCF file.'''
         if not stat_var_nodes:
             stat_var_nodes = self._statvars_map
-        if self._config.get('output_only_new_statvars', True):
+        if self._config.get('output_only_new_statvars', False):
             num_statvars = len(stat_var_nodes)
             stat_var_nodes = drop_existing_mcf_nodes(
                 stat_var_nodes,
@@ -2021,7 +2023,7 @@ class StatVarDataProcessor:
                                        self.get_current_filename())
             return
         if not row or len(row) < self._config.get('input_min_columns_per_row',
-                                                  3):
+                                                  2):
             logging.level_debug() and logging.debug(
                 f'Ignoring row with too few columns: {row}')
             self._counters.add_counter('input-rows-ignored-too-few-columns', 1,
@@ -2180,8 +2182,7 @@ class StatVarDataProcessor:
             return False
         numeric_value = get_numeric_value(value)
         if numeric_value is not None:
-            multiply_prop = self._config.get('multiply_factor',
-                                             '#Multiply')
+            multiply_prop = self._config.get('multiply_factor', '#Multiply')
             if multiply_prop in pvs:
                 multiply_factor = get_numeric_value(pvs[multiply_prop])
                 pvs['value'] = numeric_value * multiply_factor
@@ -2697,6 +2698,11 @@ def process(data_processor_class: StatVarDataProcessor,
 def main(_):
     # uncomment to run pprof
     start_pprof_server(port=8123)
+
+    # Launch a web server with a form for commandline args
+    # if the command line flag --http_port is set.
+    process_http_server.run_http_server(http_port=_FLAGS.http_port,
+                                        script=__file__, module=config_flags)
     process(StatVarDataProcessor,
             input_data=_FLAGS.input_data,
             output_path=_FLAGS.output_path,
