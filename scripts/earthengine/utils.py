@@ -37,93 +37,13 @@ _SCRIPTS_DIR = os.path.dirname(__file__)
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)),
-                             'util'))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 from config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
 from dc_api_wrapper import dc_api_wrapper
 
-
 # Utilities for dicts.
-def aggregate_value(value1: str, value2: str, aggregate: str = 'sum') -> str:
-    '''Return value aggregated from value1 and value2 as per the aggregate setting.
-    Args:
-      value1: value to be aggegated from source
-      value2: value to be aggregated into from destination
-      aggregate: string setting for aggregation method which is one of
-        sum, min, max, list
-    Returns:
-      aggregated value
-    '''
-    value = None
-    if isinstance(value1, str) or isinstance(value2, str):
-        if aggregate == 'sum':
-            # Use list for combining string values.
-            aggregate = 'list'
-    if isinstance(value1, set) or isinstance(value2, set):
-        aggregate = 'set'
-    if aggregate == 'sum':
-        value = value1 + value2
-    elif aggregate == 'min':
-        value = min(value1, value2)
-    elif aggregate == 'max':
-        value = max(value1, value2)
-    elif aggregate == 'list':
-        # Create a comma seperated list of unique values combining lists.
-        value = set(str(value1).split(','))
-        value.update(str(value2).split(','))
-        value = ','.join(sorted(value))
-    elif aggregate == 'set':
-        value = set(value1)
-        value.update(value2)
-    else:
-        logging.fatal(
-            f'Unsupported aggregation: {aggregate} for {value1}, {value2}')
-    return value
-
-
-def dict_aggregate_values(src: dict, dst: dict, config: dict) -> dict:
-    '''Aggregate values for keys in src dict into dst.
-  The mode of aggregation (sum, mean, min, max) per property is
-  defined in the config.
-  Assumes properties to be aggregated have numeric values.
-
-  Args:
-    src: dictionary with property:value to be aggregated into dst
-    dst: dictionary with property:value which is updated.
-    config: dictionary with aggregation settings per property.
-  Returns:
-    dst dictionary with updated property:values.
-  '''
-    if config is None:
-        config = {}
-    default_aggr = config.get('aggregate', 'sum')
-    for prop, new_val in src.items():
-        try:
-            if prop not in dst:
-                # Add new property to dst without any aggregation.
-                dst[prop] = new_val
-            else:
-                # Combine new value in src with current value in dst by aggregation.
-                aggr = config.get(prop, {}).get('aggregate', default_aggr)
-                cur_val = dst[prop]
-                if isinstance(cur_val, str) or isinstance(new_val, str):
-                    if aggr == 'mean':
-                        # Use list for combining string values.
-                        aggr = 'list'
-                if aggr == 'mean':
-                    cur_num = dst.get(f'#{prop}:count', 1)
-                    new_num = src.get(f'#{prop}:count', 1)
-                    dst[prop] = ((cur_val * cur_num) +
-                                 (new_val * new_num)) / (cur_num + new_num)
-                    dst[f'#{prop}:count'] = cur_num + new_num
-                else:
-                    dst[prop] = aggregate_value(cur_val, new_val, aggr)
-        except TypeError as e:
-            logging.fatal(
-                f'Failed to aggregate values for {prop}: {new_val}, {cur_val}, Error: {e}'
-            )
-    return dst
 
 
 def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
@@ -139,6 +59,8 @@ def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
           'regex': <regex pattern>',
         },
       }
+  Returns:
+    True if the key:values in pvs meet all config criteria.
   '''
     props = list(pvs.keys())
     is_allowed = True
@@ -174,7 +96,17 @@ def is_s2_cell_id(dcid: str) -> bool:
     return strip_namespace(dcid).startswith('s2CellId/')
 
 
-def s2_cell_from_latlng(lat: float, lng: float, level: int) -> s2sphere.CellId:
+def s2_cell_from_latlng(lat: float, lng: float, level: int) -> CellId:
+    '''Returns an S2 CellId object of level for the given location lat/lng.
+
+    Args:
+      lat: Latitude in degrees
+      lng: Longitude in degrees
+      level: desired S2 level for cell id in the range 0-30
+
+    Returns:
+      CellId object oof the desired level that contains the lat/lng point.
+    '''
     assert level >= 0 and level <= 30
     ll = s2sphere.LatLng.from_degrees(lat, lng)
     cell = s2sphere.CellId.from_lat_lng(ll)
@@ -183,19 +115,22 @@ def s2_cell_from_latlng(lat: float, lng: float, level: int) -> s2sphere.CellId:
     return cell
 
 
-def s2_cell_to_hex_str(s2cell_id: int) -> str:
+def s2_cell_to_hex_str(s2cell_id: Union[int, CellId]) -> str:
+    '''Returns the s2 cell id in hex.'''
     if isinstance(s2cell_id, CellId):
         s2cell_id = s2cell_id.id()
     return f'{s2cell_id:#018x}'
 
 
-def s2_cell_to_dcid(s2cell_id: int) -> str:
+def s2_cell_to_dcid(s2cell_id: Union[int, CellId]) -> str:
+    '''Returns the dcid for the s2 cell of the form s2CellId/0x1234.'''
     if isinstance(s2cell_id, CellId):
         s2cell_id = s2cell_id.id()
     return 'dcid:s2CellId/' + s2_cell_to_hex_str(s2cell_id)
 
 
-def s2_cell_from_dcid(s2_dcid: str) -> s2sphere.CellId:
+def s2_cell_from_dcid(s2_dcid: Union[str, int, CellId]) -> CellId:
+    '''Returns the s2 CellId object for the s2 cell.'''
     if isinstance(s2_dcid, str):
         return s2sphere.CellId(int(s2_dcid[s2_dcid.find('/') + 1:], 16))
     if isinstance(s2_dcid, int):
@@ -206,11 +141,12 @@ def s2_cell_from_dcid(s2_dcid: str) -> s2sphere.CellId:
 
 
 def s2_cell_latlng_dcid(lat: float, lng: float, level: int) -> str:
+    '''Returns dcid of the s2 cell of given level containing the point lat/lng.'''
     return s2_cell_to_dcid(s2_cell_from_latlng(lat, lng, level).id())
 
 
 def s2_cells_distance(cell_id1: int, cell_id2: int) -> float:
-    '''Returns the distance between the centroid of the S2 cells.'''
+    '''Returns the distance between the centroid of two S2 cells in kilometers.'''
     p1 = CellId(cell_id1).to_lat_lng()
     p2 = CellId(cell_id2).to_lat_lng()
     return distance.distance((p1.lat().degrees, p1.lng().degrees),
@@ -233,8 +169,8 @@ def s2_cell_area(cell_id: s2sphere.CellId) -> float:
     return s2sphere.Cell(s2_cell).exact_area() * _EARTH_RADIUS * _EARTH_RADIUS
 
 
-def s2_cell_get_neighbor_ids(s2_cell_id: str) -> str:
-    '''Returns the neighbouring cell ids for a given s2 cell dcid.'''
+def s2_cell_get_neighbor_ids(s2_cell_id: str) -> list:
+    '''Returns a list of upto 8 neighbouring cell dcids for a given s2 cell dcid.'''
     s2_cell = s2_cell_from_dcid(s2_cell_id)
     return [
         s2_cell_to_dcid(cell)
@@ -243,6 +179,7 @@ def s2_cell_get_neighbor_ids(s2_cell_id: str) -> str:
 
 
 def s2_cell_to_polygon(s2_cell_id: str) -> Polygon:
+    '''Returns the polygon with 4 vertices for an s2 cell.'''
     s2_cell = Cell(s2_cell_from_dcid(s2_cell_id))
     if not s2_cell:
         return None
@@ -259,10 +196,10 @@ def s2_cell_to_polygon(s2_cell_id: str) -> Polygon:
 
 def latlng_cell_area(lat: float, lng: float, height: float,
                      width: float) -> float:
-    '''Returns the area of the rectangular cell in km2.
+    '''Returns the area of the rectangular region in sqkm.
     Args:
-      lat: latitude of a corner.
-      lng: Longitude of a corner
+      lat: latitude of a corner in degrees
+      lng: Longitude of a corner in degrees
       width: width in degrees
       height: height in degrees
     Returns:
@@ -507,6 +444,7 @@ def date_today(date_format: str = '%Y-%m-%d') -> str:
     '''Returns today's date in the given format.'''
     return date.today().strftime(date_format)
 
+
 def date_yesterday(date_format: str = '%Y-%m-%d') -> str:
     '''Returns today's date in the given format.'''
     return date_advance_by_period(date_today(date_format), '-1d', date_format)
@@ -542,16 +480,16 @@ def date_advance_by_period(date_str: str,
     next_dt = dt + relativedelta(**{unit: delta})
     return next_dt.strftime(date_format)
 
-def date_format_by_time_period(date_str: str, time_period: str) -> str:
-  '''Returns date in the format of the timeperiod.
-  If returns YYYY for 'years', 'YYYY-MM' for 'months' and 'YYYY-MM-DD' for days.'''
-  if not time_period:
-    return date_str
-  (delta, unit) = date_parse_time_period(time_period)
-  date_parts = date_str.split('-')
-  if unit == 'years':
-    return date_parts[0]
-  if unit == 'months':
-    return '-'.join(date_parts[0:1])
-  return date_str
 
+def date_format_by_time_period(date_str: str, time_period: str) -> str:
+    '''Returns date in the format of the timeperiod.
+  If returns YYYY for 'years', 'YYYY-MM' for 'months' and 'YYYY-MM-DD' for days.'''
+    if not time_period:
+        return date_str
+    (delta, unit) = date_parse_time_period(time_period)
+    date_parts = date_str.split('-')
+    if unit == 'years':
+        return date_parts[0]
+    if unit == 'months':
+        return '-'.join(date_parts[0:2])
+    return date_str

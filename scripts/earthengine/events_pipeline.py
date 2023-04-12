@@ -577,8 +577,9 @@ class BigQueryExportRunner(StageRunner):
             f'Got response: {result}, state: {result.state}, errors: {result.errors} for query: {query}'
         )
         if result.errors:
-          logging.fatal(f'Failed to run query:{query}, Error: {result.errors}')
-          return []
+            logging.fatal(
+                f'Failed to run query:{query}, Error: {result.errors}')
+            return []
 
         # Get the output files.
         output_files = file_util.file_get_matching(output)

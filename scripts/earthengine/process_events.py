@@ -69,6 +69,7 @@ import common_flags
 import file_util
 import utils
 
+from aggregation_util import aggregate_dict
 from counters import Counters
 from latlng_recon_geojson import LatLng2Places
 from config_map import ConfigMap
@@ -232,7 +233,7 @@ class GeoEvent:
             place_dates[date] = dict()
         self.end_date = max(self.end_date, date)
         place_date_pvs = place_dates[date]
-        utils.dict_aggregate_values(
+        aggregate_dict(
             pvs, place_date_pvs,
             self._config.get('property_config_per_date',
                              self._config.get('property_config', {})))
@@ -303,12 +304,12 @@ class GeoEvent:
             per_place_pvs = {}
             for date, date_pvs in date_pvs.items():
                 if not dates or date in dates:
-                    utils.dict_aggregate_values(
+                    aggregate_dict(
                         date_pvs, per_place_pvs,
                         self._config.get(
                             'property_config_across_dates',
                             self._config.get('property_config', {})))
-            utils.dict_aggregate_values(
+            aggregate_dict(
                 per_place_pvs, pvs,
                 self._config.get('property_config_per_date',
                                  self._config.get('property_config', {})))
@@ -337,7 +338,7 @@ class GeoEvent:
                 if date not in pvs_by_dates:
                     pvs_by_dates[date] = dict()
                 pvs_for_date = pvs_by_dates[date]
-                utils.dict_aggregate_values(
+                aggregate_dict(
                     pvs, pvs_for_date,
                     self._config.get('property_config_per_date',
                                      self._config.get('property_config', {})))
@@ -1193,9 +1194,8 @@ class GeoEventsProcessor:
                     if key not in place_date_pvs:
                         place_date_pvs[key] = dict(date_pvs)
                     else:
-                        utils.dict_aggregate_values(date_pvs,
-                                                    place_date_pvs[key],
-                                                    property_config_per_date)
+                        aggregate_dict(date_pvs, place_date_pvs[key],
+                                       property_config_per_date)
         logging.info(
             f'Generated {len(place_date_pvs)} svobs for event places and dates')
 
@@ -1215,9 +1215,8 @@ class GeoEventsProcessor:
                     if key not in place_date_pvs:
                         place_date_pvs[key] = dict(pvs)
                     else:
-                        utils.dict_aggregate_values(
-                            pvs, place_date_pvs[key],
-                            property_config_across_dates)
+                        aggregate_dict(pvs, place_date_pvs[key],
+                                       property_config_across_dates)
         logging.info(
             f'Generated {len(place_date_pvs)} svobs for dates: {date_formats}')
 
@@ -1247,7 +1246,7 @@ class GeoEventsProcessor:
                     if key not in place_date_pvs:
                         place_date_pvs[key] = dict(pvs)
                     else:
-                        utils.dict_aggregate_values(
+                        aggregate_dict(
                             pvs, place_date_pvs[key],
                             self._config.get('property_config_per_date',
                                              {'aggregate': 'sum'}))
