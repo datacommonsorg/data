@@ -18,4 +18,3 @@ from absl import flags
 flags.DEFINE_string('input_csv', '', 'CSV file to process')
 flags.DEFINE_string('config', '', 'Config dictionary with parameter settings.')
 flags.DEFINE_bool('debug', False, 'Enable debug messages.')
-
