@@ -1,0 +1,202 @@
+
+Node: E:ClimateWildfireSmoke->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:BurnedArea_FireEvent_Forest
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->forest_burned_acres
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Percent_BurnedArea_FireEvent_Forest
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->pct_forest_burned
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Area_Forest
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->area_burned
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Percent_BurnedArea_FireEvent_Forest_HighSeverity
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->pct_high_severity
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Percent_Area_FireEvent
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->pct_area_burned
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_PalmerDroughtSeverityIndex_Forest
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->mean_pdsi_forestarea
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_MaxTemperature_Forest
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->mean_tmax_forestarea
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_VaporPressureDeficit_Forest
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->mean_vpd_forestarea
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_VaporPressureDeficit
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->mean_vpd_county
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_PalmerDroughtSeverityIndex
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->mean_pdsi_county
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_MaxTemperature
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->mean_tmax_county
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PopulationWeighted_Intensity_HeatWaveEvent
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->Heatwave_Intensity_popw
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PopulationWeighted_NumerOfDays_HeatWaveEvent
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->Heatwave_Length_popw
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PopulationWeighted_Count_HeatWaveEvent
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->Heatwave_Count_popw
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_PopulationWeighted_Concentration_AirPollutant_SmokePM25
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->ann_mean_smokePM_popw
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_PopulationWeighted_Concentration_AirPollutant_SmokePM25
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->ann_max_smokePM_popw
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Concentration_AirPollutant_SmokePM25
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->ann_mean_smokePM
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E17
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Max_Concentration_AirPollutant_SmokePM25
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->ann_max_smokePM
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E18
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumberOfDays_Concentration_PM25_Above12PPM
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->daysAbove12
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E19
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumberOfDays_Concentration_PM25_Above35PPM
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->daysAbove35
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E20
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumberOfDays_Concentration_PM25_Above55PPM
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->daysAbove55
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E21
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumberOfDays_Concentration_PM25_Above150PPM
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->daysAbove150
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E22
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:NumberOfDays_Concentration_PM25_Above250PPM
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->daysAbove250
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+
+Node: E:ClimateWildfireSmoke->E23
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Concentration_AirPollutant_SmokePM25
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->smokePM_pred
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+measurementMethod: dcs:RFFInferredMetric
+
+Node: E:ClimateWildfireSmoke->E24
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:PopulationWeighted_Concentration_AirPollutant_SmokePM25
+observationAbout: C:ClimateWildfireSmoke->Geoid
+observationDate: C:ClimateWildfireSmoke->Date
+value: C:ClimateWildfireSmoke->PM25_pop_pred
+observationPeriod: C:ClimateWildfireSmoke->TimeIntervalType
+measurementMethod: dcs:RFFInferredMetric

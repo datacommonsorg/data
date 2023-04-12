@@ -76,7 +76,7 @@ class FileIO:
          the required destination filename after write is done.
          This keeps writes 'atomic', ie., if the program is terminated during a write
          before the file is closed, the destination file does not have partial content.
-         
+
          To avoid creating temporary copies for operations on blob, such as read(),
          set use_tempfile=False with binary mode:
            with FileIO('gc://<my-gcf-file', mode='rb', use_tempfile=False) as file:
@@ -253,6 +253,7 @@ def file_get_gcs_bucket(filename: str) -> storage.bucket.Bucket:
 
     Args:
         filename: string filename that begins with 'gs://'
+
     Returns:
       GCS bucket for the file.
     '''
@@ -731,6 +732,9 @@ def file_open_google_spreadsheet(url: str) -> gspread.spreadsheet.Spreadsheet:
 
     Args:
       url: URL for the spreadsheet to be opened.
+
+    Returns:
+      google spreadsheet object for the given url
     '''
     # Get a handle for the whole spreadsheet
     gs = _file_get_gspread_client().open_by_url(url)
@@ -747,6 +751,7 @@ def file_get_gspread_worksheet(
       url: the url for the spreadsheet.
       worksheet_title: title of the worksheet to be opened.
         If not set, pics the worksheet id from the URL if any.
+
     Returns:
       Worksheet object for the specific sheet.
     '''
@@ -858,6 +863,7 @@ def file_copy_to_spreadsheet(filename: str,
       url: Url for the spreadsheet into which file is copied.
       worksheet: worksheet title into whcih file is copied.
         If not set, the file is copied into the first sheet.
+
     Returns:
       the url for the worksheet into whcih file was copied.
     '''
@@ -909,37 +915,42 @@ def _add_to_list(comma_string: str, items_list: list) -> list:
 
 
 def main(_):
-    if len(sys.argv) > 1:
-        args = sys.argv[1:]
-        if sys.argv[1] == 'cp':
-            # Copy files: <src_file1> <src_file2>... <dst>
-            if len(args) >= 3:
-                target = args[-1]
-                src_files = args[1:-1]
-                if len(src_files) > 1:
-                    if file_is_google_spreadsheet(target):
-                        logging.error(
-                            f'Cannot copy multiple files {src_files} to a spreadsheet {target}'
-                        )
-                    else:
-                        # In case of multiple source files,
-                        # target is assumed to be a directory.
-                        # Copy all files to the target directory.
-                        if not target.endswith('/'):
-                            target = target + '/'
-                        for src_file in src_files:
-                            dst = file_copy(src_file, target)
-                            logging.info(f'Copied {src_file} to {dst}')
-                else:
-                    src_file = src_files[0]
-                    dst = file_copy(src_files[0], target)
-                    logging.info(f'Copied {src_files[0]} to {dst}')
-            else:
-                logging.error(
-                    f'Expected one or more source files and a destination file.'
-                )
+    if len(sys.argv) <= 1:
+        logging.error('No arguments given.')
+        logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
+        return
+    if sys.argv[1] != 'cp':
+        logging.error(f'Unsupported command: {sys.argv[1]}')
+        logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
+        return
+
+    # Copy files: <src_file1> <src_file2>... <dst>
+    args = sys.argv[1:]
+    if len(args) >= 3:
+        logging.error(
+            'Expected one or more source files and a destination file.')
+        logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
+        return
+    target = args[-1]
+    src_files = file_get_matching(args[1:-1])
+    if len(src_files) > 1:
+        if file_is_google_spreadsheet(target):
+            logging.error(
+                f'Cannot copy multiple files {src_files} to a spreadsheet {target}'
+            )
         else:
-            logging.error(f'Unsupported command: {sys.argv[1]}')
+            # In case of multiple source files,
+            # target is assumed to be a directory.
+            # Copy all files to the target directory.
+            if not target.endswith('/'):
+                target = target + '/'
+            for src_file in src_files:
+                dst = file_copy(src_file, target)
+                logging.info(f'Copied {src_file} to {dst}')
+    else:
+        src_file = src_files[0]
+        dst = file_copy(src_files[0], target)
+        logging.info(f'Copied {src_files[0]} to {dst}')
 
 
 if __name__ == '__main__':
