@@ -75,9 +75,11 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_integer('http_port', 0, 'HTTP port to listen for URLs.')
 flags.DEFINE_integer(
     'http_server_threads', 10,
-    'Number of http listner threads for simultaneous requests.')
+    'Number of http listener threads for simultaneous requests.')
 flags.DEFINE_string('http_config', '',
-                    'File with configrations for the HTTP server.')
+                    'File with configurations for the HTTP server.')
+flags.DEFINE_integer('http_server_timeout', sys.maxsize,
+                     'Maximum duration in seconds to run the web server.')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -250,18 +252,26 @@ class ThreadedHTTPListner(threading.Thread):
         self._addr = addr
         self._handler = handler
         self.daemon = True
+        self._httpd = None
         self.start()
 
     def run(self):
-        httpd = server.HTTPServer(self._addr, self._handler, False)
+        self._httpd = server.HTTPServer(self._addr, self._handler, False)
         # Prevent the HTTP server from re-binding every handler.
         # https://stackoverflow.com/questions/46210672/
-        httpd.socket = self._sock
-        httpd.server_bind = self.server_close = lambda self: None
+        self._httpd.socket = self._sock
+        self._httpd.server_bind = self.server_close = lambda self: None
         logging.info(
-            f'Created http listner {self._thread_num} with {self._handler} on address {self._addr}'
+            f'Created http listener {self._thread_num} with {self._handler} on address {self._addr}'
         )
-        httpd.serve_forever()
+        self._httpd.serve_forever()
+
+    def shutdown(self):
+        if self._httpd is not None:
+            logging.info(f'Shutting down listener {self._thread_num}')
+            self._httpd.shutdown()
+            logging.info(f'Listener {self._thread_num} terminated')
+            self._httpd = None
 
 
 # WebServer with multiple threads to handle requests in parallel.
@@ -277,8 +287,8 @@ class ThreadedHTTPServer:
         self._sock.bind(self._addr)
         self._sock.listen(5)
 
-    def serve_forever(self):
-        '''Launch the server with listner threads and block.
+    def serve_forever(self, timeout: int = sys.maxsize):
+        '''Launch the server with listener threads and block.
         '''
         threads = []
         for i in range(self._num_threads):
@@ -288,7 +298,11 @@ class ThreadedHTTPServer:
             threads.append(thread)
 
         # Block forever.
-        time.sleep(9e9)
+        time.sleep(timeout)
+
+        # Shutdown the server threads.
+        for thread in threads:
+            thread.shutdown()
 
 
 def _get_form_config(config: dict = None) -> dict:
@@ -310,7 +324,7 @@ def run_http_server(http_port: int = 0,
     if http_port <= 0:
         http_port = _FLAGS.http_port
         if http_port <= 0:
-            return
+            return False
     global _HTTP_CONFIG
     if not config:
         config = ConfigMap(_FLAGS.http_config).get_configs()
@@ -343,7 +357,8 @@ def run_http_server(http_port: int = 0,
                                handler=ProcessHandler,
                                num_threads=config.get(
                                    'http_threads', _FLAGS.http_server_threads))
-    httpd.serve_forever()
+    httpd.serve_forever(_FLAGS.http_server_timeout)
+    return True
 
 
 def main(_):

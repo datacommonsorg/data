@@ -172,8 +172,9 @@ def _add_worksheet(gs: gspread.spreadsheet.Spreadsheet,
 
 def main(_):
     # Launch a web server if --http_port is set.
-    process_http_server.run_http_server(script=__file__,
-                                        module=__name__)
+    if process_http_server.run_http_server(script=__file__,
+                                           module=__name__):
+      return
 
     # Process the spreadsheet specified
     process_spreadsheets(stat_var_processor.StatVarDataProcessor,
