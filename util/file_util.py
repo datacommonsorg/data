@@ -932,7 +932,7 @@ def main(_):
         logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
         return
     target = args[-1]
-    src_files = args[1:-1]
+    src_files = file_get_matching(args[1:-1])
     if len(src_files) > 1:
         if file_is_google_spreadsheet(target):
             logging.error(
