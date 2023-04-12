@@ -1,3 +1,7 @@
+# Climate/Wildfire/Smoke Data Processing Scripts
+
+The scripts in this folder are used to process the source data described below in order to produce the final csv output to be used together with the tmcf file. The scripts are numbered to indicate the execution order, this is further described along with input/output files for each script in a table below.
+
 **Data Sources**
 
 1. Temperature, precipitation, and vapor pressure deficit data were obtained from PRISM Climate Group, Oregon State University. Available at: [https://prism.oregonstate.edu/recent/](https://prism.oregonstate.edu/recent/)
