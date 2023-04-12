@@ -14,7 +14,7 @@
 """Utility functions for aggregations on dictionaries and strings."""
 
 from absl import logging
-from typng import Union
+from typing import Union
 
 
 def aggregate_value(src: Union[str, int, float, list, set],
