@@ -2,25 +2,25 @@ import collections
 import csv
 
 property_template = '''
-Node: dcid:{dcid}
+Node: dcid:SDG_{dcid}
 typeOf: schema:Property
 domainIncludes: dcs:Thing
 rangeIncludes: dcs:{enum}
-name: "{dcid}"
+name: "SDG_{dcid}"
 description: "{name}"
 isProvisional: dcs:True
 '''
 
 enum_template = '''
-Node: dcid:{enum}
+Node: dcid:SDG_{enum}
 typeOf: schema:Class
 subClassOf: schema:Enumeration
-name: "{enum}"
+name: "SDG_{enum}"
 isProvisional: dcs:True
 '''
 
 value_template = '''
-Node: dcid:{enum}_{dcid}
+Node: dcid:SDG_{enum}_{dcid}
 typeOf: dcs:{enum}
 name: "{name}"
 isProvisional: dcs:True
@@ -59,10 +59,10 @@ with open('attribute.csv') as f:
     reader = csv.DictReader(f)
     concepts = collections.defaultdict(set)
     for row in reader:
-        # Skip since these should be observationAbout
+        # Skip since these will be modeled diffferently.
         if row['concept_id'] in skipped_attributes:
             continue
-        # Skip totals
+        # Skip totals.
         if row['code_sdmx'] == '_T':
             continue
         concepts[row['concept_id']].add(
