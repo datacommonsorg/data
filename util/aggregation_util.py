@@ -21,11 +21,13 @@ def aggregate_value(src: Union[str, int, float, list, set],
                     dst: Union[str, int, float, list, set],
                     aggregate: str = 'sum') -> str:
     '''Return value aggregated from src and dst as per the aggregate setting.
+
     Args:
       src: value to be aggregated from source
       dst: value to be aggregated into from destination
       aggregate: string setting for aggregation method which is one of
         sum, min, max, list, first, last
+
     Returns:
       aggregated value
     '''
