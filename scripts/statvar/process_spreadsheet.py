@@ -15,15 +15,16 @@
 For more details on configs and usage, please refer to the README.
 '''
 
+import cgi
+import copy
 import gspread
 import os
 import re
-import sys
-import subprocess
-import cgi
-import time
-import threading
 import socket
+import subprocess
+import sys
+import threading
+import time
 
 from absl import app
 from absl import flags
@@ -98,7 +99,7 @@ def process_spreadsheets(
                 continue
 
             # Setup config with data from metadata sheet
-            data_config = dict(config_dict)
+            data_config = copy.deepcopy(config_dict)
             metadata_sheet = data.get('metadata',
                                       data_sets.get(0, {}).get('metadata', ''))
             if metadata_sheet:
@@ -113,9 +114,9 @@ def process_spreadsheets(
             data_config['input_data'] = [input_file]
             pv_map = data.get('pvmap', '')
             if pv_map:
-                pv_maps = config_dict.get('pv_map', [])
+                pv_maps = data_config.get('pv_map', [])
                 pv_maps.append(pv_map)
-                config_dict['pv_map'] = pv_maps
+                data_config['pv_map'] = pv_maps
             if output_path:
                 # Generate output into the output path
                 data_config[

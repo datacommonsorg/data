@@ -523,7 +523,7 @@ def process(input_filenames: list,
     place_name_column = config.get('place_name_column', 'name')
     place_location_column = config.get('place_latitude_column', 'latitude')
     for filename in file_util.file_get_matching(input_filenames):
-        with open(filename) as csvfile:
+        with file_util.FileIO(filename) as csvfile:
             logging.info(f'Loading places from csv file {filename}...')
             reader = csv.DictReader(csvfile)
             columns.update(reader.fieldnames)
@@ -557,7 +557,7 @@ def process(input_filenames: list,
     output_dir = os.path.dirname(output_filename)
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
-    with open(output_filename, 'w') as output_fp:
+    with file_util.FileIO(output_filename, mode='w') as output_fp:
         writer = csv.DictWriter(output_fp,
                                 escapechar='\\',
                                 fieldnames=columns,

@@ -204,7 +204,7 @@ class PlaceNameMatcher:
 
     def process_csv(self, input_csv: str, name_column: str, output_csv: str):
         counters = Counters()
-        with open(output_csv, 'w') as csv_output:
+        with file_util.FileIO(output_csv, mode='w') as csv_output:
             csv_writer = csv.writer(csv_output)
             # Process each input file
             files = file_util.file_get_matching(input_csv)
@@ -213,7 +213,7 @@ class PlaceNameMatcher:
                                      file_util.file_estimate_num_rows(file))
             for file in files:
                 logging.info(f'Looking up dcids for places in {file}')
-                with open(file) as csvfile:
+                with file_util.FileIO(file) as csvfile:
                     csv_reader = csv.reader(csvfile)
                     name_column_index = None
                     num_results = self._config.get('num_results', 10)
