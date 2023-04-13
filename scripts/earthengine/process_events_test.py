@@ -90,7 +90,6 @@ class ProcessEventsTest(unittest.TestCase):
 
     def test_process(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            tmp_dir = '/tmp'
             output_prefix = os.path.join(tmp_dir, 'events_test_')
             test_prefix = os.path.join(_TESTDIR, 'sample_floods_')
             # Process flood s2 cells into events.

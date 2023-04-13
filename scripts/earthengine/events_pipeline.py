@@ -297,20 +297,18 @@ class StageRunner:
             output_dir = os.path.join(import_dir, self.name)
             self.set_config('output_dir', output_dir)
 
-    def get_output_dir(self) -> str:
-        return self.get_config('output_dir', '')
+    def get_output_dir(self, config_dict: dict = {}) -> str:
+        return self.get_config('output_dir', '', config_dict)
 
     def get_output_filename(self,
                             input_filename: str = '',
                             config_dict: dict = {},
                             file_ext: str = '.csv') -> str:
         '''Returns the file name from the config.'''
-        filename = self.config.get('output_file', '')
-        if not filename:
-            filename = self.get_config('output_file', '')
+        filename = self.get_config('output_file', '', config_dict)
         if not filename:
             # Create filename from GCS settings.
-            output_dir = self.get_output_dir()
+            output_dir = self.get_output_dir(config_dict)
             stage_name = self.get_name()
             if not output_dir:
                 gcs_bucket = self.get_config('gcs_bucket', '')
@@ -668,10 +666,10 @@ class EventsRunner(StageRunner):
             counters: Counters = None) -> list:
         '''Process data for places into events.'''
         config = ConfigMap(config_dict=config_dict)
-        output_path = self.get_output_dir()
-        process_events.process(csv_files=input_files,
-                               output_path=output_path,
-                               config=config)
+        output_path = self.get_output_dir(config_dict)
+        return process_events.process(csv_files=input_files,
+                                      output_path=output_path,
+                                      config=config)
 
 
 _STAGE_RUNNERS = {
@@ -744,7 +742,14 @@ class EventPipeline(StageRunner):
             f'Created pipeline with {len(self.stage_runners)} stages: {stage_names}'
         )
 
-    def run(self, run_stages: list = []):
+    def run_stage(self, stage_name: str, input_files: list = []) -> list:
+        '''Run a single stage and return the output files generated.'''
+        for stage_runner in self.stage_runners:
+            if stage_name == stage_runner.get_name():
+                return stage_runner.run_stage(input_files)
+        return []
+
+    def run(self, run_stages: list = []) -> list:
         '''Run all the stages in the pipeline.'''
         stage_count = 0
         output_files = []
@@ -760,6 +765,7 @@ class EventPipeline(StageRunner):
         if output_files:
             # Update the process state
             self.set_pipeline_state('last_input_date', utils.date_yesterday())
+        return output_files
 
 
 def _merge_dicts(config_dicts: list) -> dict:

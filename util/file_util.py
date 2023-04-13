@@ -926,7 +926,7 @@ def main(_):
 
     # Copy files: <src_file1> <src_file2>... <dst>
     args = sys.argv[1:]
-    if len(args) >= 3:
+    if len(args) < 3:
         logging.error(
             'Expected one or more source files and a destination file.')
         logging.error('Usage: python file_util.py cp <src-file> <dst-file>')

@@ -861,7 +861,7 @@ class GeoEventsProcessor:
         # Save area as a number without units
         area_sqkm = event_data.get('area', 0)
         if area_sqkm:
-            event_pvs['AreaSqKm'] = area_sqkm
+            event_pvs['AreaSqKm'] = round(area_sqkm, 5)
         # Transform values into quantity ranges
         format_config = self._config.get('property_config', {})
         per_date_config = self._config.get('property_config_per_date', {})
@@ -907,7 +907,7 @@ class GeoEventsProcessor:
     def write_events_csv(self,
                          output_path: str,
                          event_ids: list = None,
-                         output_ended_events: bool = False):
+                         output_ended_events: bool = False) -> str:
         '''Write the events into a csv file.'''
         output_csv = file_util.file_get_name(output_path, 'events', '.csv')
         # Default output columns for events
@@ -960,7 +960,7 @@ class GeoEventsProcessor:
             for event_id in event_ids:
                 event_pvs = self.get_event_output_properties(event_id)
                 if event_pvs:
-                    writer.writerow(event_pvs)
+                    writer.writerow(_format_property_values(event_pvs))
                     self._counters.add_counter('output_events', 1)
                 else:
                     self.delete_event(event_id)
@@ -973,12 +973,13 @@ class GeoEventsProcessor:
         self.write_tmcf(file_util.file_get_name(output_path, 'events', '.tmcf'),
                         output_columns)
         self._counters.print_counters()
+        return output_csv
 
     def write_tmcf(self,
                    output_file: str,
                    columns: list,
                    fixed_props: dict = None,
-                   prefix: str = 'Events'):
+                   prefix: str = 'Events') -> str:
         '''Generate tMCF for columns with valid schema.'''
         if not prefix:
             prefix = 'Events'
@@ -1001,13 +1002,15 @@ class GeoEventsProcessor:
         logging.info(
             f'Wrote tMCF: {output_file} with properties:{output_prop}, skipped properties: {skipped_prop}'
         )
+        return output_file
 
     def write_events_svobs(self,
                            output_path: str,
                            event_ids: list = None,
                            output_ended_events: bool = False,
-                           event_props: list = None):
+                           event_props: list = None) -> list:
         '''Write SVObs for all events into a CSV.'''
+        output_files = []
         output_csv = file_util.file_get_name(output_path, 'svobs', '.csv')
         output_columns = ['dcid', 'observationDate']
         if not event_props:
@@ -1065,7 +1068,8 @@ class GeoEventsProcessor:
                                                    len(date_pvs), event_id)
                         date_pvs['dcid'] = event_id
                         date_pvs['observationDate'] = date
-                        writer.writerow(date_pvs)
+                        writer.writerow(
+                            _format_property_values(date_pvs, digits=3))
                         self._counters.add_counter('processed', 1)
                     # Track min/max counters for properties
                     for prop, value in date_pvs.items():
@@ -1078,15 +1082,18 @@ class GeoEventsProcessor:
                     self._counters.add_counter('output_events_with_svobs', 1)
                     self._counters.max_counter('max_output_events_svobs_dates',
                                                num_output_dates)
+        output_files.append(output_csv)
         logging.info(
             f'Wrote {num_output_events} events into {output_csv} with columns: {output_columns}'
         )
-        self.write_tmcf(file_util.file_get_name(output_path, 'svobs',
-                                                '.tmcf'), output_columns,
-                        {'typeOf': 'dcid:StatVarObservation'}, 'SVObs')
+        output_tmcf = self.write_tmcf(
+            file_util.file_get_name(output_path, 'svobs', '.tmcf'),
+            output_columns, {'typeOf': 'dcid:StatVarObservation'}, 'SVObs')
+        output_files.append(output_tmcf)
         self._counters.print_counters()
+        return output_files
 
-    def write_active_events(self, filename: str):
+    def write_active_events(self, filename: str) -> str:
         '''Save active events into a file.'''
         # Get a dict of all active events by id.
         active_events = {}
@@ -1099,6 +1106,7 @@ class GeoEventsProcessor:
         # Save the active events into a file.
         file_util.file_write_py_dict(active_events, filename)
         self._counters.set_counter('active_events', len(active_events))
+        return filename
 
     def read_active_events(self, filename: str):
         '''Load active events from a file.'''
@@ -1133,7 +1141,7 @@ class GeoEventsProcessor:
             output_path: str,
             event_ids: list = None,
             event_props: list = ['area', 'count'],
-            date_formats: list = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY']):
+            date_formats: list = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY']) -> list:
         '''Generate CSV with SVObs for affected places of events.'''
         if not event_ids:
             event_ids = self.get_all_event_ids()
@@ -1264,6 +1272,7 @@ class GeoEventsProcessor:
             output_columns.append('count')
         if 'area' in event_props:
             output_columns.append(f'area')
+        output_files = []
         logging.info(
             f'Writing {len(place_date_pvs)} place svobs with columns {output_columns} into {output_csv}'
         )
@@ -1298,7 +1307,8 @@ class GeoEventsProcessor:
                 for prop in event_props:
                     if prop in pvs:
                         row_dict[prop] = pvs[prop]
-                writer.writerow(row_dict)
+                writer.writerow(_format_property_values(row_dict, digits=3))
+        output_files.append(output_csv)
 
         # Generate tmcf for place svobs.
         tmcf_nodes = []
@@ -1331,14 +1341,15 @@ class GeoEventsProcessor:
         )
         with file_util.FileIO(output_tmcf, 'w') as tmcf_file:
             tmcf_file.write('\n\n'.join(tmcf_nodes))
-        return
+        output_files.append(output_tmcf)
+        return output_files
 
     def process_csv(self,
                     csv_files: list,
                     output_path: str,
                     input_events_file: str = None,
                     output_active_events_path: str = None,
-                    output_active_events_state: str = None):
+                    output_active_events_state: str = None) -> list:
         '''Process CSV files with data for places into events.
          Places can be s2 cells or grids with lat/lng.
          '''
@@ -1379,9 +1390,11 @@ class GeoEventsProcessor:
                 logging.info(
                     f'Created {len(self._event_by_id)} events for {num_rows} rows from file: {filename}'
                 )
-        self.output_events(output_path, output_active_events_path,
-                           output_active_events_state)
+        output_files = self.output_events(output_path,
+                                          output_active_events_path,
+                                          output_active_events_state)
         self.save_place_cache_file()
+        return output_files
 
     def process_event_data(self,
                            data: dict,
@@ -1480,7 +1493,8 @@ class GeoEventsProcessor:
     def output_events(self,
                       output_path: str,
                       output_active_events_path: str = None,
-                      output_active_events_state: str = None):
+                      output_active_events_state: str = None) -> list:
+        output_files = []
         # Output all ended events
         output_ended_events = False
         if output_active_events_path:
@@ -1489,20 +1503,24 @@ class GeoEventsProcessor:
             output_ended_events = True
         if self._config.get('output_events', True):
             _set_counter_stage(self._counters, 'emit_events_csv_')
-            self.write_events_csv(output_path=output_path,
-                                  output_ended_events=output_ended_events)
+            output_files.append(
+                self.write_events_csv(output_path=output_path,
+                                      output_ended_events=output_ended_events))
         if self._config.get('output_svobs', False):
             _set_counter_stage(self._counters, 'emit_events_svobs_')
-            self.write_events_svobs(output_path=output_path,
-                                    output_ended_events=output_ended_events)
+            output_files.extend(
+                self.write_events_svobs(
+                    output_path=output_path,
+                    output_ended_events=output_ended_events))
         if self._config.get('output_place_svobs', False):
-            self.write_events_place_svobs(
-                output_path=output_path,
-                event_props=self._config.get('output_place_svobs_properties',
-                                             ['area', 'count']),
-                date_formats=self._config.get(
-                    'output_place_svobs_dates',
-                    ['YYYY-MM-DD', 'YYYY-MM', 'YYYY']))
+            output_files.extend(
+                self.write_events_place_svobs(
+                    output_path=output_path,
+                    event_props=self._config.get(
+                        'output_place_svobs_properties', ['area', 'count']),
+                    date_formats=self._config.get(
+                        'output_place_svobs_dates',
+                        ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'])))
         # Output active events into a separate set of files.
         active_event_ids = self.get_active_event_ids(self._max_date)
         self._counters.set_counter('active_events', len(active_event_ids))
@@ -1512,17 +1530,22 @@ class GeoEventsProcessor:
             )
             if self._config.get('output_active_events', False):
                 _set_counter_stage(self._counters, 'emit_active_events_csv_')
-                self.write_events_csv(output_path=output_active_events_path,
-                                      event_ids=active_event_ids,
-                                      output_ended_events=False)
+                output_files.append(
+                    self.write_events_csv(output_path=output_active_events_path,
+                                          event_ids=active_event_ids,
+                                          output_ended_events=False))
             if self._config.get('output_active_svobs', False):
                 _set_counter_stage(self._counters, 'emit_active_events_svobs_')
-                self.write_events_svobs(output_path=output_active_events_path,
-                                        event_ids=active_event_ids,
-                                        output_ended_events=False)
+                output_files.extend(
+                    self.write_events_svobs(
+                        output_path=output_active_events_path,
+                        event_ids=active_event_ids,
+                        output_ended_events=False))
         if output_active_events_state:
             _set_counter_stage(self._counters, 'emit_active_events_data_')
-            self.write_active_events(output_active_events_state)
+            output_files.append(
+                self.write_active_events(output_active_events_state))
+        return output_files
 
     def _get_date_with_interval(self, date: str) -> str:
         '''Returns the date with the interval 'max_event_interval_days' applied.'''
@@ -1561,11 +1584,12 @@ class GeoEventsProcessor:
                     new_parents = self._latlng_to_place_cache[placeid].split(
                         ',')
                 elif self._config.get('lookup_contained_for_place', False):
-                    lat, lng = utils.placeid_to_lat_lng(
+                    lat, lng = utils.place_id_to_lat_lng(
                         placeid, self._config.get('dc_api_enabled', True))
-                    geo_ids = self._ll2p.resolve(lat, lng)
-                    self._latlng_to_place_cache[placeid] = geo_ids
-                    self._counters.add_counter('latlng_place_lookups', 1)
+                    if lat is not None and lng is not None:
+                        new_parents = self._ll2p.resolve(lat, lng)
+                        self._latlng_to_place_cache[placeid] = new_parents
+                        self._counters.add_counter('latlng_place_lookups', 1)
             if new_parents:
                 # Get a list of place ids splitting comma separated strings.
                 new_parents = ','.join(new_parents).split(',')
@@ -1639,7 +1663,7 @@ class GeoEventsProcessor:
                 # TODO: Create a property for containedInPlaces for Events
                 # Until then affectedPlace is used for place aggregation.
                 # data['affectedPlace'] = ','.join(affected_places)
-                data['affectedPlace'] = ','.join(contained_places)
+                data['affectedPlace'] = ','.join(sorted(contained_places))
                 data['AffectedPlaceCount'] = len(affected_places)
                 data['ContainedInPlaceCount'] = len(contained_places)
         self._counters.max_counter('max_output_events_places', len(place_ids))
@@ -1686,14 +1710,16 @@ def _first(s: set):
     return item
 
 
-def _format_property_values(pvs: dict, config: dict) -> dict:
+def _format_property_values(pvs: dict,
+                            config: dict = {},
+                            digits: int = 5) -> dict:
     '''Returns a set of properties with formatted values.'''
     fmt_pvs = {}
     for prop, value in pvs.items():
         fmt_value = value
         if isinstance(value, float):
             # Round floats to 5 decimal places
-            fmt_value = round(value, 5)
+            fmt_value = round(value, digits)
         prop_config = config.get(prop, None)
         if prop_config:
             prop_unit = prop_config.get('unit', None)
@@ -1776,14 +1802,15 @@ def process(csv_files: list,
             input_events_file: str = None,
             output_active_events_path: str = None,
             output_active_events_state: str = None,
-            config: ConfigMap = None):
+            config: ConfigMap = None) -> list:
     counters = Counters()
     if config is None:
         config = ConfigMap(config_dict=_DEFAULT_CONFIG)
     events_processor = GeoEventsProcessor(config, counters)
-    events_processor.process_csv(csv_files, output_path, input_events_file,
-                                 output_active_events_path,
-                                 output_active_events_state)
+    return events_processor.process_csv(csv_files, output_path,
+                                        input_events_file,
+                                        output_active_events_path,
+                                        output_active_events_state)
 
 
 def main(_):
