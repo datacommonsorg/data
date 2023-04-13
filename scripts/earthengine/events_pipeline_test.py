@@ -86,8 +86,8 @@ class EventsPipelineTest(unittest.TestCase):
 
     def setUp(self):
         self.maxDiff = None
-        self._config = ConfigMap(
-            filename=os.path.join(_TESTDIR, 'sample_fires_event_pipeline_config.py'))
+        self._config = ConfigMap(filename=os.path.join(
+            _TESTDIR, 'sample_fires_event_pipeline_config.py'))
 
         # Setup download URL response to the test input.
         self.test_input_file = os.path.join(_TESTDIR, 'sample_fires_input.csv')
