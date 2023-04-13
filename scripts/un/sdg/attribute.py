@@ -35,11 +35,11 @@ skipped_attributes = {
 # Ideally the enum values should also be mapped to existing ones,
 # but currently always generate a new node.
 mapped_attributes = {
-    'Age',
-    'Cause of death',
-    'Disability status',
-    'Education level',
-    'Sex',
+    'Age': 'age',
+    'Cause of death': 'causeOfDeath',
+    'Disability status': 'disabilityStatus',
+    'Education level': 'educationalAttainment',
+    'Sex': 'gender',
 }
 
 
