@@ -102,7 +102,8 @@ def s2_cell_from_latlng(lat: float, lng: float, level: int) -> CellId:
     Args:
       lat: Latitude in degrees
       lng: Longitude in degrees
-      level: desired S2 level for cell id in the range 0-30
+      level: desired S2 level for cell id.
+        Should be <30, the max s2 level supported.
 
     Returns:
       CellId object oof the desired level that contains the lat/lng point.
@@ -170,7 +171,10 @@ def s2_cell_area(cell_id: s2sphere.CellId) -> float:
 
 
 def s2_cell_get_neighbor_ids(s2_cell_id: str) -> list:
-    '''Returns a list of upto 8 neighbouring cell dcids for a given s2 cell dcid.'''
+    '''Returns a list of neighbouring cell dcids for a given s2 cell dcid.
+    An interior cell will have 8 neighbours: 3 above, 1 left, 1 right and 3 below.
+    A cell near the edge may have a subset of these.
+    '''
     s2_cell = s2_cell_from_dcid(s2_cell_id)
     return [
         s2_cell_to_dcid(cell)
@@ -353,7 +357,7 @@ def place_distance(place1: str, place2: str) -> float:
 
 
 def place_area(place: str) -> float:
-    '''Returns the area for the place.'''
+    '''Returns the area for the place in sqkm.'''
     if is_s2_cell_id(place):
         s2_cell = s2_cell_from_dcid(place)
         return s2_cell_area(s2_cell)
@@ -451,13 +455,19 @@ def date_yesterday(date_format: str = '%Y-%m-%d') -> str:
 
 
 def date_parse_time_period(time_period: str) -> (int, str):
-    '''Parse time period into a tuple of (number, unit), for eg: P1M: (1, month).'''
+    '''Parse time period into a tuple of (number, unit),
+    for eg: for 'P1M' returns (1, month).
+    Time period is assumed to be of the form: P<Nunmber><Duration>
+    where duration is a letter: D: days, M; months, Y: years.
+    .'''
+    # Extract the number and duration letter from the time period.
     re_pat = r'P?(?P<delta>[+-]?[0-9]+)(?P<unit>[A-Z])'
     m = re.search(re_pat, time_period.upper())
     if m:
         m_dict = m.groupdict()
         delta = int(m_dict.get('delta', '0'))
         unit = m_dict.get('unit', 'M')
+        # Convert the duration letter to unit: days/months/years
         period_dict = {'D': 'days', 'M': 'months', 'Y': 'years'}
         period = period_dict.get(unit, 'day')
         return (delta, period)
@@ -468,22 +478,23 @@ def date_advance_by_period(date_str: str,
                            time_period: str,
                            date_format: str = '%Y-%m-%d') -> str:
     '''Returns the date string advanced by the time period.'''
-    next_date = ''
     if not date_str:
-        return next_date
+        return ''
     dt = datetime.strptime(date_str, date_format)
     (delta, unit) = date_parse_time_period(time_period)
     if not delta or not unit:
         logging.error(
             f'Unable to parse time period: {time_period} for date: {date_str}')
-        return next_date
+        return ''
     next_dt = dt + relativedelta(**{unit: delta})
     return next_dt.strftime(date_format)
 
 
 def date_format_by_time_period(date_str: str, time_period: str) -> str:
-    '''Returns date in the format of the timeperiod.
-  If returns YYYY for 'years', 'YYYY-MM' for 'months' and 'YYYY-MM-DD' for days.'''
+    '''Returns date in the format of the time_period: P<N><L>
+      If the last letter in the time_period is Y, returns date in YYYY,
+      for 'M', returns date as YYYY-MM, for D returns date as YYYY-MM-DD.
+    '''
     if not time_period:
         return date_str
     (delta, unit) = date_parse_time_period(time_period)

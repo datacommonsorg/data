@@ -7,7 +7,7 @@
         'place_property_cache_file': 'test_data/test_s2_cells_properties.pkl',
     },
     'pipeline_state_file':
-        '/tmp/t.py',  # Set by the test
+        '',  # Set by the test
     'stages': [
         {
             'stage': 'download',
@@ -27,6 +27,7 @@
                     'aggregate': 'max'
                 },
             },
+            'input_files': '{tmp_dir}/download/{year}/*.csv',
             'output_dir': '{tmp_dir}/{stage}/{year}',
         },
         {

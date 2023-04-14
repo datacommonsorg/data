@@ -67,6 +67,7 @@ sys.path.append(
 
 import common_flags
 import file_util
+import statvar_dcid_generator
 import utils
 
 from aggregation_util import aggregate_dict
@@ -74,113 +75,6 @@ from counters import Counters
 from latlng_recon_geojson import LatLng2Places
 from config_map import ConfigMap
 from dc_api_wrapper import dc_api_batched_wrapper
-
-_DEFAULT_CONFIG = {
-    # Input settings.
-    # Columms of input_csv that are added as event properties
-    'input_columns': [],
-    'input_delimiter': ',',
-    # Columns of input_csv that contains the place such as s2 cell id.
-    'place_column': 's2CellId',
-    # Input column for date.
-    'date_column': 'observationDate',
-    # Rename input columns to output columns.
-    'input_rename_columns': {
-        # Only output columns starting with lower case are added to tmcf.
-        # '<input-column>': '<output-column>'
-        #'date': 'observationDate',
-    },
-
-    # Processing settings
-    # Maximum distance within which 2 events are merged.
-    'max_overlap_distance_km': 10,
-    # S2 level to which data is aggregated.
-    's2_level': 10,  # Events are at resolution of level-10 S2 cells.
-    'aggregate': 'sum',  # default aggregation for all properties
-    # Per property filter params for input data.
-    'input_filter_config': {
-        # '<prop>' : {
-        #   'min': <min>,
-        #   'max': <max>,
-        #   'regex': '<regex>',
-        # },
-    },
-    # Per property filter params for output events
-    # Applied when output_events is True
-    # Event is dropped if any property fails the filter.
-    'output_events_filter_config': {
-        # '<prop>' : {
-        #   'min': <min>,
-        #   'max': <max>,
-        #   'regex': '<regex>',
-        # },
-    },
-    # Per property aggregation settings for an event across places and dates.
-    # For different  per-date and per-place aggregations, use the settings
-    # 'property_config_per_date' and 'property_config_across_dates'.
-    'property_config': {
-        'aggregate': 'max',
-        'area': {
-            'aggregate': 'sum',
-            'unit': 'SquareKilometer',
-        },
-        'affectedPlace': {
-            'aggregate': 'list',
-        },
-    },
-    # Per property aggregation settings for a date across multiple places.
-    # Falls back to 'property_config' if not set.
-    # 'property_config_per_date': {
-    #     # Default aggregation for all properties: pick max value across cells.
-    #     'aggregate': 'max',
-    #     'area': {
-    #         'aggregate': 'sum',
-    #         'unit': 'SquareKilometer',
-    #     },
-    #     's2CellId': {
-    #         'aggregate': 'list',
-    #     },
-    # },
-    # Per property aggregation settings across multiple dates.
-    # Falls back to 'property_config' if not set.
-    # 'property_config_across_dates': {
-    #     # Default aggregation for all properties: pick max value across cells.
-    #     'aggregate': 'max',
-    #     'area': {
-    #         'aggregate': 'max',
-    #         'unit': 'SquareKilometer',
-    #     },
-    #     's2CellId': {
-    #         'aggregate': 'list',
-    #     },
-    # },
-    # Threshold for dates and places in events
-    # Treat events at the same location more than 90 days apart as separate events.
-    'max_event_interval_days': 90,
-    'max_event_duration_days': 90,
-    'max_event_places': 10000,
-
-    # Output settings.
-    'event_type': 'FloodEvent',
-    'output_delimiter': ',',
-    'resolve_affected_place_latlng': True,
-    'output_affected_place_polygon': 'geoJsonCoordinatesDP1',
-    'polygon_simplification_factor': 0.1,
-
-    # Output svobs per place
-    'output_place_svobs': True,
-    # Generate property aggregations by containedInPlaces such as
-    # country,continent
-    'aggregate_by_contained_in_place': True,
-    'output_place_svobs_properties': ['area', 'count'],
-    'output_place_svobs_format': ['YYYY-MM-DD', 'YYYY-MM'],
-
-    # Disable svobs output until it can be used in UI
-    'output_svobs': False,
-    'output_active_svobs': False,
-    # Disable place lookups for s2 cells to be added to affectedPlace.
-    'lookup_contained_for_place': False,
-}
 
 
 class GeoEvent:
@@ -601,8 +495,26 @@ class GeoEventsProcessor:
                 self._active_event_by_place.pop(place_id)
 
     def merge_events(self, event_ids: list) -> GeoEvent:
-        '''returns root_event, which is the earliest event in the events_list and 
-        merges all other events in the events_list into the root event.'''
+        '''Returns a merged event combining all event_ids.
+
+        This is called with a list of events_ids that have places that
+        have started to overlap or have expanded to come close enough to each other
+        with addition of new places to some of these events.
+        They are merged into a single large event.
+        The 'root_event' is the event id into whcih others events are merged.
+        The event with the alphabetically sorted first event id,
+        which would be the earliest since the start date is the event id prefix,
+        is used as the root and others events are merged into it.
+
+        Args:
+          event_ids: list of events ids to be merged into a single event.
+            The event with the lowest event_id is picked as the root
+            and other events are merged into it.
+            The places from all other events are added to the root event.
+            References to the merged event in place map is also removed.
+        Returns:
+          the merged event.
+          '''
         # Merge all events with into a root event with the earliest date.
         sorted_ids = sorted(list(event_ids))
         logging.level_debug() and logging.debug(f'Merging events: {sorted_ids}')
@@ -904,6 +816,142 @@ class GeoEventsProcessor:
         self._deleted_events[event_id] = event
         self._counters.add_counter('events-deleted', 1)
 
+    def get_place_date_output_properties(self, event_ids: list,
+                                         event_props: list) -> dict:
+        '''Returns a dict event properties {(place, date): {'area': NN},... }
+
+        Args:
+          event_ids: list of event ids to be used.
+          event_props: List of event properties to add per place,date.
+            Example: ['area', 'count']
+
+        Returns:
+          dictionary keyed by string '<place-dcid>,YYYY-MM-DD' with
+            event property values, such as { 'area': 100 } aggregated
+            by place and date
+        '''
+        # Collect data for each event's (place, date)
+        # as a dict: {(place, date): {'area': NN},... }
+        place_date_pvs = dict()
+        _set_counter_stage(self._counters, 'collect_place_date_svobs_')
+        self._counters.set_counter('total', len(event_ids))
+        for event_id in event_ids:
+            self._counters.add_counter('processed', 1)
+            event = self.get_event_by_id(event_id)
+            if not event:
+                self._counters.add_counter(
+                    'error_place_svobs_missing_event_for_id', 1, event_id)
+                logging.debug(f'Unable to get event for {event_id}')
+                continue
+
+            # Process all places with property:values per date for the event.
+            for placeid, date_pvs in event.get_places().items():
+                for date, pvs in date_pvs.items():
+                    # Collect all property:values for a given place and date.
+                    key = f'{placeid},{date}'
+                    date_pvs = {}
+                    if 'count' in event_props:
+                        # Collect unique event ids to generate counts
+                        date_pvs['EventId'] = set(
+                            {utils.strip_namespace(event_id)})
+                    for p, v in pvs.items():
+                        if p in event_props:
+                            date_pvs[p] = v
+                    if key not in place_date_pvs:
+                        place_date_pvs[key] = dict(date_pvs)
+                    else:
+                        aggregate_dict(date_pvs, place_date_pvs[key],
+                                       property_config_per_date)
+        logging.info(
+            f'Generated {len(place_date_pvs)} svobs for event places and dates')
+        return place_date_pvs
+
+    def aggregate_by_time_period(self, place_date_pvs: dict,
+                                 date_formats: list):
+        '''Aggregates the properties across dates for each place.
+
+        Args:
+          place_date_pvs: dictionary of property:values keyed by '<dcid>,date>'
+          date_formats: list of date formats to aggregate by, such as,
+            ['YYYY', 'YYYY-MM' ]
+        Returns:
+          dictionary of properties keyed by 'place id,date'.
+        '''
+        if not date_formats:
+            # No aggregation by time period.
+            return
+        # Aggregation settings for event properties across dates for a place.
+        property_config_across_dates = {
+            'aggregate': 'max',
+            'area': {
+                'aggregate': 'max'
+            },
+            'EventId': {
+                'aggregate': 'set'
+            }
+        }
+        property_config_across_dates.update(
+            self._config.get('property_config_across_dates', {}))
+
+        _set_counter_stage(self._counters, 'aggregate_by_date_')
+        self._counters.set_counter('total', len(place_date_pvs))
+        num_svobs = 0
+        for place_date in list(place_date_pvs.keys()):
+            self._counters.add_counter('processed', 1)
+            pvs = place_date_pvs[place_date]
+            placeid, date = place_date.split(',', 1)
+            for date_format in date_formats:
+                date_str = _get_date_by_format(date, date_format)
+                if date_str and date_str != date:
+                    key = f'{placeid},{date_str}'
+                    if key == place_date:
+                        continue
+                    if key not in place_date_pvs:
+                        place_date_pvs[key] = dict(pvs)
+                        num_svobs += 1
+                    else:
+                        aggregate_dict(pvs, place_date_pvs[key],
+                                       property_config_across_dates)
+        logging.info(
+            f'Generated {num_svobs} SVObs for time periods: {date_formats}')
+
+    def aggregate_by_contained_in_place(self, place_date_pvs: dict):
+        '''Aggregate dictionary by containedInPlace parent of each place.
+        Dictionary is of the form { '<place>,<date>': { 'area': NN' } }
+        The property:values for a place,date are aggregated into
+        each of it's parent places for the same set of dates.
+        '''
+        _set_counter_stage(self._counters, 'aggregate_by_place_')
+        self._counters.set_counter('total', len(place_date_pvs))
+        num_parents = 0
+        for place_date in list(place_date_pvs.keys()):
+            self._counters.add_counter('processed', 1)
+            pvs = place_date_pvs[place_date]
+            placeid, date = place_date.split(',', 1)
+            parent_places = self.get_place_property(placeid, 'containedInPlace')
+            if not parent_places:
+                self._counters.add_counter('aggr-no-parent-places', 1)
+                continue
+            parents = set(parent_places)
+            if placeid in parents:
+                parents.remove(placeid)
+            # Add an entry for each parent place
+            for parent_place in parents:
+                if not parent_place:
+                    continue
+                key = f'{parent_place},{date}'
+                if key == place_date:
+                    continue
+                if key not in place_date_pvs:
+                    place_date_pvs[key] = dict(pvs)
+                    num_parents += 1
+                else:
+                    aggregate_dict(
+                        pvs, place_date_pvs[key],
+                        self._config.get('property_config_per_date',
+                                         {'aggregate': 'sum'}))
+        logging.info(f'Generated {num_parents} SVObs for parent places,dates')
+
     def write_events_csv(self,
                          output_path: str,
                          event_ids: list = None,
@@ -1136,143 +1184,14 @@ class GeoEventsProcessor:
         logging.info(
             f'Loaded {len(active_events)} events from file: {filename}')
 
-    def write_events_place_svobs(
-            self,
-            output_path: str,
-            event_ids: list = None,
-            event_props: list = ['area', 'count'],
-            date_formats: list = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY']) -> list:
-        '''Generate CSV with SVObs for affected places of events.'''
-        if not event_ids:
-            event_ids = self.get_all_event_ids()
-        logging.info(
-            f'Generating place svobs for {len(event_ids)} events for dates: {date_formats}'
-        )
-
-        # Aggregation settings for event properties across places for a date.
-        property_config_per_date = {
-            'aggregate': 'sum',
-            'area': {
-                'aggregate': 'sum'
-            },
-            'EventId': {
-                'aggregate': 'set'
-            }
-        }
-        property_config_per_date.update(
-            self._config.get('property_config_per_date', {}))
-
-        # Aggregation settings for event properties across dates for a place.
-        property_config_across_dates = {
-            'aggregate': 'max',
-            'area': {
-                'aggregate': 'max'
-            },
-            'EventId': {
-                'aggregate': 'set'
-            }
-        }
-        property_config_across_dates.update(
-            self._config.get('property_config_across_dates', {}))
-
-        # Collect data for each event place and date
-        # as a dict: {(place, date): {'area': NN},... }
-        place_date_pvs = dict()
-        _set_counter_stage(self._counters, 'collect_place_date_svobs_')
-        self._counters.set_counter('total', len(event_ids))
-        for event_id in event_ids:
-            self._counters.add_counter('processed', 1)
-            event = self.get_event_by_id(event_id)
-            if not event:
-                self._counters.add_counter(
-                    'error_place_svobs_missing_event_for_id', 1, event_id)
-                logging.debug(f'Unable to get event for {event_id}')
-                continue
-            for placeid, date_pvs in event.get_places().items():
-                for date, pvs in date_pvs.items():
-                    key = f'{placeid},{date}'
-                    date_pvs = {}
-                    if 'count' in event_props:
-                        # Collect unique event ids to generate counts
-                        date_pvs['EventId'] = set(
-                            {utils.strip_namespace(event_id)})
-                    for p, v in pvs.items():
-                        if p in event_props:
-                            date_pvs[p] = v
-                    if key not in place_date_pvs:
-                        place_date_pvs[key] = dict(date_pvs)
-                    else:
-                        aggregate_dict(date_pvs, place_date_pvs[key],
-                                       property_config_per_date)
-        logging.info(
-            f'Generated {len(place_date_pvs)} svobs for event places and dates')
-
-        # Aggregate by place across dates
-        _set_counter_stage(self._counters, 'aggregate_by_date_')
-        self._counters.set_counter('total', len(place_date_pvs))
-        for place_date in list(place_date_pvs.keys()):
-            self._counters.add_counter('processed', 1)
-            pvs = place_date_pvs[place_date]
-            placeid, date = place_date.split(',', 1)
-            for date_format in date_formats:
-                date_str = _get_date_by_format(date, date_format)
-                if date_str and date_str != date:
-                    key = f'{placeid},{date_str}'
-                    if key == place_date:
-                        continue
-                    if key not in place_date_pvs:
-                        place_date_pvs[key] = dict(pvs)
-                    else:
-                        aggregate_dict(pvs, place_date_pvs[key],
-                                       property_config_across_dates)
-        logging.info(
-            f'Generated {len(place_date_pvs)} svobs for dates: {date_formats}')
-
-        # Aggregate by parent places
-        if self._config.get('aggregate_by_contained_in_place', True):
-            _set_counter_stage(self._counters, 'aggregate_by_place_')
-            self._counters.set_counter('total', len(place_date_pvs))
-            for place_date in list(place_date_pvs.keys()):
-                self._counters.add_counter('processed', 1)
-                pvs = place_date_pvs[place_date]
-                placeid, date = place_date.split(',', 1)
-                parent_places = self.get_place_property(placeid,
-                                                        'containedInPlace')
-                if not parent_places:
-                    self._counters.add_counter('aggr-no-parent-places', 1)
-                    continue
-                parents = set(parent_places)
-                if placeid in parents:
-                    parents.remove(placeid)
-                # Add an entry for each parent place
-                for parent_place in parents:
-                    if not parent_place:
-                        continue
-                    key = f'{parent_place},{date}'
-                    if key == place_date:
-                        continue
-                    if key not in place_date_pvs:
-                        place_date_pvs[key] = dict(pvs)
-                    else:
-                        aggregate_dict(
-                            pvs, place_date_pvs[key],
-                            self._config.get('property_config_per_date',
-                                             {'aggregate': 'sum'}))
-        logging.info(
-            f'Generated {len(place_date_pvs)} svobs for parent places,dates')
-
-        # Write the place svobs.
-        output_csv = file_util.file_get_name(output_path, 'place_svobs', '.csv')
+    def write_place_svobs_csv(self, place_date_pvs: dict, event_props: list,
+                              output_path: str) -> str:
+        '''Returns the filename into which the svobs_pvs dict is written as CSV.'''
         output_columns = [
             'observationAbout', 'observationDate', 'observationPeriod'
         ]
-        event_type = utils.strip_namespace(
-            self._config.get('event_type', 'FloodEvent'))
-        if 'count' in event_props:
-            output_columns.append('count')
-        if 'area' in event_props:
-            output_columns.append(f'area')
-        output_files = []
+        output_columns.extend(event_props)
+        output_csv = file_util.file_get_name(output_path, 'place_svobs', '.csv')
         logging.info(
             f'Writing {len(place_date_pvs)} place svobs with columns {output_columns} into {output_csv}'
         )
@@ -1308,22 +1227,52 @@ class GeoEventsProcessor:
                     if prop in pvs:
                         row_dict[prop] = pvs[prop]
                 writer.writerow(_format_property_values(row_dict, digits=3))
-        output_files.append(output_csv)
+        return output_csv
 
-        # Generate tmcf for place svobs.
+    def write_place_svobs_tmcf(self, event_props: list,
+                               output_path: str) -> str:
+        '''Returns the filename into which the tMCF for the SVObs for places
+        is generated.
+
+        ArgsL
+         event_props: list of event properties for whcih SVObs are generated.
+           each property is converted into a statvar.
+
+        Returns:
+          output tMCF filename with the reference to all columns in the SVObs csv
+        '''
+        event_type = utils.strip_namespace(
+            self._config.get('event_type', 'FloodEvent'))
         tmcf_nodes = []
         tmcf_prefix = 'EventPlaces'
         format_config = self._config.get('property_config',
                                          _DEFAULT_CONFIG.get('property_config'))
+        # Get common PVs for the statvars
+        # measuredProperty is set to each event_prop
+        default_statvar_pvs = self._config.get('default_statvar_pvs', {
+            'typeOf': 'dcs:StatistcalVariable',
+            'statType': 'measuredValue',
+        })
+        if 'populationType' not in default_statvar_pvs:
+            default_statvar_pvs['populationType'] = event_type
+
         for prop in event_props:
             if not prop[0].islower():
                 # ignore invalid properties that don't begin with a lower case
                 continue
-            statvar = prop[0].upper() + prop[1:] + '_' + event_type
+            # Generate the statvar dcid with the event_prop as mProp
+            statvar_pvs = dict(default_statvar_pvs)
+            statvar_pvs['measuredProperty'] = prop
+            statvar_dcid = statvar_pvs.get('Node', statvar_pvs.get('dcid', ''))
+            if not statvar_dcid:
+                statvar_dcid = statvar_dcid_generator.get_statvar_dcid(
+                    statvar_pvs)
+
+            # Generate the tMCF node for the statvar referring to the prop
             node = []
             node.append(f'Node: E:{tmcf_prefix}->E{len(tmcf_nodes)}')
             node.append(f'typeOf: dcs:StatVarObservation')
-            node.append(f'variableMeasured: dcs:{statvar}')
+            node.append(f'variableMeasured: dcs:{statvar_dcid}')
             node.append(f'observationAbout: C:{tmcf_prefix}->observationAbout')
             node.append(f'observationDate: C:{tmcf_prefix}->observationDate')
             node.append(
@@ -1337,11 +1286,87 @@ class GeoEventsProcessor:
         output_tmcf = file_util.file_get_name(output_path, 'place_svobs',
                                               '.tmcf')
         logging.info(
-            f'Writing tmcf with {len(tmcf_nodes)} nodes for place svobs columns {output_columns} into {output_tmcf}'
+            f'Writing tmcf with {len(tmcf_nodes)} nodes for place svobs columns {event_props} into {output_tmcf}'
         )
         with file_util.FileIO(output_tmcf, 'w') as tmcf_file:
             tmcf_file.write('\n\n'.join(tmcf_nodes))
-        output_files.append(output_tmcf)
+        return output_tmcf
+
+    def write_events_place_svobs(
+            self,
+            output_path: str,
+            event_ids: list = None,
+            event_props: list = ['area', 'count'],
+            date_formats: list = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY']) -> list:
+        '''Returns a list of generated CSV/tMCF files with SVObs for
+        the affected places of events.
+
+        It aggregates event properties by place,date for all affected places
+        and generates SVObs for each property in event_props with observationAbout as
+        the place.
+
+        If a list of date_formats are given, it also aggregates properties
+        for each place across all dates in the time period, such as month or year
+        using the property aggregation settings in 'property_config_across_dates'.
+
+        If aggregate_by_contained_in_place is set in the config,
+        the event porperties are also aggregated across all parent places for
+        all dates using the property aggregation settings in config
+        'property_config_across_dates'.
+
+        Args:
+          output_path: string file prefix for output files.
+            It is combined with a suffix such as 'place_svobs.csv', 'place_svobs.tmcf'
+          event_ids: A list of event ids to be processed into the output files.
+          event_props: List of event properties for which SVObs are generated.
+            properties that being with a Capital letter are considered internal
+            and are ignored in the output.
+          date_formats: List of date formats, such as , 'YYYY' for year,
+            'YYYY-MM' for months into whcih properties are aggregated.
+
+        Returns:
+         a list of filenames for CSV and tMCF generated.
+        '''
+        if not event_ids:
+            event_ids = self.get_all_event_ids()
+        logging.info(
+            f'Generating place svobs for {len(event_ids)} events for dates: {date_formats}'
+        )
+
+        # Aggregation settings for event properties across places for a date.
+        property_config_per_date = {
+            'aggregate': 'sum',
+            'area': {
+                'aggregate': 'sum'
+            },
+            'EventId': {
+                'aggregate': 'set'
+            }
+        }
+        property_config_per_date.update(
+            self._config.get('property_config_per_date', {}))
+
+        # Collect data for each event place and date
+        # as a dict: {(place, date): {'area': NN},... }
+        place_date_pvs = self.get_place_date_output_properties(
+            event_ids, event_props)
+
+        # Aggregate property values by place across time periods
+        self.aggregate_by_time_period(place_date_pvs, date_formats)
+
+        # Aggregate by parent places
+        if self._config.get('aggregate_by_contained_in_place', False):
+            self.aggregate_by_contained_in_place(place_date_pvs)
+
+        output_files = []
+        # Write the place svobs.
+        output_files.append(
+            self.write_place_svobs_csv(place_date_pvs, event_props,
+                                       output_path))
+
+        # Generate tmcf for place svobs.
+        output_files.append(
+            self.write_place_svobs_tmcf(event_props, output_path))
         return output_files
 
     def process_csv(self,
@@ -1797,6 +1822,9 @@ def _set_counter_stage(counters: Counters, name: str):
     counters.set_prefix(f'{stage_count}:{name}')
 
 
+_DEFAULT_CONFIG = {}
+
+
 def process(csv_files: list,
             output_path: str,
             input_events_file: str = None,
@@ -1805,6 +1833,11 @@ def process(csv_files: list,
             config: ConfigMap = None) -> list:
     counters = Counters()
     if config is None:
+        global _DEFAULT_CONFIG
+        if not _DEFAULT_CONFIG:
+            # Load default config from event_config.py
+            _DEFAULT_CONFIG = file_util.file_load_py_dict(
+                os.path.join(os.path.dirname(__file__), 'event_config.py'))
         config = ConfigMap(config_dict=_DEFAULT_CONFIG)
     events_processor = GeoEventsProcessor(config, counters)
     return events_processor.process_csv(csv_files, output_path,

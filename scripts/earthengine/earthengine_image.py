@@ -208,6 +208,9 @@ EE_DEFAULT_CONFIG = {
     'debug': _FLAGS.debug,
 }
 
+# Interval in secs to cehck for EE task status
+_EE_TASK_WAIT_INTERVAL = 10
+
 
 def _update_dict(src_dict: dict, dst_dict: dict) -> dict:
     '''Merge the src and dst dict, merging dictionary values instead of overwriting.'''
@@ -559,35 +562,16 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
         region_bbox = ee.Geometry.BBox(**bbox_coords)
     file_prefix = config.get('gcs_output')
     if not file_prefix:
-        # Create name from config parameters.
-        img_config = [
-            ('ee_image',
-             config.get(
-                 'ee_dataset',
-                 config.get('ee_image',
-                            config.get('ee_image_collection', 'ee_image'))))
-        ]
-        img_config.append(('band', config.get('band', '')))
-        reducers = config.get('ee_reducer')
-        if reducers:
-            img_config.append(('r', str(reducers)))
-        img_config.append(('mask', config.get('ee_mask', '')))
-        img_config.append(('s', str(config.get('scale', ''))))
-        img_config.append(('from', config.get('start_date', '')))
-        img_config.append(('to', config.get('end_date', '')))
-        if bbox_coords:
-            img_config.append(
-                ('bbox', '_'.join([f'{p:.2f}' for p in bbox_coords.values()])))
-        file_prefix = '-'.join(
-            '_'.join((p, v)) for p, v in img_config if v and isinstance(v, str))
-        file_prefix = re.sub(r'[^A-Za-z0-9_-]', '_', file_prefix)
+        # Create output filename prefix from config parameters.
+        # Large images may be sharded across multiple tif files.
+        file_prefix = get_file_prefix_from_config(config, bbox_coords)
     scale = config.get('scale', 1000)
     gcs_bucket = config.get('gcs_bucket', '')
     gcs_folder = config.get('gcs_folder', '')
     if gcs_folder and gcs_folder[-1] != '/':
         gcs_folder = gcs_folder + '/'
     logging.info(
-        f'Exporting image: {ee_image.id()} to GCS bucket:{gcs_bucket}, {gcs_folder}{file_prefix}'
+        f'Exporting image: {ee_image.id()} to GCS bucket:{gcs_bucket}, {gcs_folder}{file_prefix}*.tif'
     )
     task = ee.batch.Export.image.toCloudStorage(
         description=file_prefix[:90],
@@ -622,8 +606,8 @@ def ee_process(config) -> list:
     cur_date = utils.date_today()
     counters = Counters()
     # Get images by count or until yesterday
-    while (config['ee_image_count'] > 0) and (config.get('start_date', '') <
-                                              cur_date):
+    while (config['ee_image_count'] and
+           (config.get('start_date', '') < cur_date)):
         logging.info(f'Getting image for config: {config}')
         img = ee_generate_image(config)
         if isinstance(img, ee.ImageCollection):
@@ -657,7 +641,7 @@ def ee_process(config) -> list:
         if task.active():
             pending_tasks.add(task)
             logging.info(f'Waiting for task: {task}')
-            time.sleep(10)
+            time.sleep(_EE_TASK_WAIT_INTERVAL)
         else:
             task_status = ee.data.getTaskStatus(task.id)
             logging.info(f'EE task completed: {task_status}')
@@ -674,11 +658,55 @@ def ee_process(config) -> list:
     return completed_tasks
 
 
+def get_file_prefix_from_config(config: dict,
+                                bbox_coords: ee.Geometry.BBox) -> str:
+    '''Returns the file name prefix from the config settings.
+    The filename is of the form:
+      ee_image-<dataset>-band_<name>-r_<reducer>-mask_<dataset>
+        -s_<scale>-from_<YYYY-MM-DD>-to_YYYY-MM-DD
+    '''
+    # Collect all config tuples (parameter, value) to be addd to the filename
+    img_config = [('ee_image',
+                   config.get(
+                       'ee_dataset',
+                       config.get('ee_image',
+                                  config.get('ee_image_collection',
+                                             'ee_image'))))]
+    img_config.append(('band', config.get('band', '')))
+    reducers = config.get('ee_reducer')
+    if reducers:
+        img_config.append(('r', str(reducers)))
+    img_config.append(('mask', config.get('ee_mask', '')))
+    img_config.append(('s', str(config.get('scale', ''))))
+    img_config.append(('from', config.get('start_date', '')))
+    img_config.append(('to', config.get('end_date', '')))
+    if bbox_coords is not None:
+        # Add bounding box if specified
+        img_config.append(
+            ('bbox', '_'.join([f'{p:.2f}' for p in bbox_coords.values()])))
+
+    # Merge all parameters with non-empty values.
+    file_prefix = '-'.join(
+        '_'.join((p, v)) for p, v in img_config if v and isinstance(v, str))
+
+    # Remove any special characters
+    file_prefix = re.sub(r'[^A-Za-z0-9_-]', '_', file_prefix)
+    return file_prefix
+
+
 def get_date_from_filename(filename: str, time_period: str = '') -> str:
-    '''Returns the date from the filename.'''
+    '''Returns the date from the filename.
+    GeoTifs generated by EE may not have the date as a band.
+    Args:
+      filename: string of the form '*_from_<YYYY-MM-DD>_*.tif',
+        the filename for generated geoTifs from get_file_prefix_from_config().
+      time_period: string of the form P<N><L>, for eg: P1D.
+     '''
+    # Get the date from the filename
     matches = re.search(r'from_(?P<date>[0-9]{4}[0-9-]{2}[0-9-]{0,2})',
                         filename)
     if matches:
+        # format the date string into YYYY-MM or YYYY by the time period.
         return utils.date_format_by_time_period(
             matches.groupdict().get('date', ''), time_period)
     return ''
