@@ -5,10 +5,12 @@ name: C:Events->name
 startDate: C:Events->startDate
 endDate: C:Events->endDate
 observationPeriod: C:Events->observationPeriod
+numberOfDays: C:Events->numberOfDays
 startLocation: C:Events->startLocation
 affectedPlace: C:Events->affectedPlace
 area: C:Events->area
 subEvents: C:Events->subEvents
 confidence: C:Events->confidence
 frp: C:Events->frp
+observationDate: C:Events->observationDate
 geoJsonCoordinatesDP1: C:Events->geoJsonCoordinatesDP1

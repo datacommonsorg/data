@@ -753,6 +753,7 @@ class GeoEventsProcessor:
                                                 event_pvs['endDate'])
             event_pvs['observationPeriod'] = f'P{duration_days}D'
             event_pvs['DurationDays'] = duration_days
+            event_pvs['numberOfDays'] = len(dates)
             self._counters.max_counter('max_output_events_dates', len(dates))
         # Set the start location from the place with the earliest date
         start_place_ids = event.get_event_places(
@@ -967,6 +968,7 @@ class GeoEventsProcessor:
             'endDate',
             'observationPeriod',
             'DurationDays',
+            'numberOfDays',
             'startLocation',
             'affectedPlace',
             'AffectedPlaceCount',
@@ -1825,6 +1827,18 @@ def _set_counter_stage(counters: Counters, name: str):
 _DEFAULT_CONFIG = {}
 
 
+def get_default_config() -> dict:
+    '''Returns dictionary with the default config GeoEventsProcessor
+    from event_config.py.
+    '''
+    global _DEFAULT_CONFIG
+    if not _DEFAULT_CONFIG:
+        # Load default config from event_config.py
+        _DEFAULT_CONFIG = file_util.file_load_py_dict(
+            os.path.join(os.path.dirname(__file__), 'event_config.py'))
+    return _DEFAULT_CONFIG
+
+
 def process(csv_files: list,
             output_path: str,
             input_events_file: str = None,
@@ -1833,12 +1847,7 @@ def process(csv_files: list,
             config: ConfigMap = None) -> list:
     counters = Counters()
     if config is None:
-        global _DEFAULT_CONFIG
-        if not _DEFAULT_CONFIG:
-            # Load default config from event_config.py
-            _DEFAULT_CONFIG = file_util.file_load_py_dict(
-                os.path.join(os.path.dirname(__file__), 'event_config.py'))
-        config = ConfigMap(config_dict=_DEFAULT_CONFIG)
+        config = ConfigMap(config_dict=get_default_config())
     events_processor = GeoEventsProcessor(config, counters)
     return events_processor.process_csv(csv_files, output_path,
                                         input_events_file,
