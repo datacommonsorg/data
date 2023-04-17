@@ -9,7 +9,6 @@ numberOfDays: C:Events->numberOfDays
 startLocation: C:Events->startLocation
 affectedPlace: C:Events->affectedPlace
 area: C:Events->area
-subEvents: C:Events->subEvents
 confidence: C:Events->confidence
 frp: C:Events->frp
 observationDate: C:Events->observationDate

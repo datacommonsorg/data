@@ -79,8 +79,10 @@ class RasterCSVRunner(StageRunner):
                                               config_dict))
                 if output_date:
                     self.set_config('output_date', output_date)
+            config = self.get_configs()
+            config.update(config_dict)
             raster_to_csv.process(input_geotif, input_csv, output_filename,
-                                  ConfigMap(config_dict=config_dict),
+                                  ConfigMap(config_dict=config),
                                   self.counters)
             output_files.append(output_filename)
         return output_files

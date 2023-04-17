@@ -1442,6 +1442,8 @@ class GeoEventsProcessor:
             self._counters.add_counter('input_dropped_invalid_placeid', 1)
             return False
         data_pvs['affectedPlace'] = place
+        if place_id != place:
+            data_pvs['affectedPlace'] += f',{place_id}'
         date_column = self._config.get('date_column', 'observationDate')
         date = row.get(date_column, '')
         if not date:
@@ -1462,7 +1464,9 @@ class GeoEventsProcessor:
                     data_pvs[p] = row[p]
         # Compute area if required.
         if 'area' in self._event_props and 'area' not in data_pvs:
-            area = utils.place_area(place_id)
+            area = utils.place_area(place)
+            if not area:
+                area = utils.place_area(place_id)
             if area > 0:
                 data_pvs['area'] = area
         # Check if row passes input filters.
@@ -1618,7 +1622,9 @@ class GeoEventsProcessor:
                         self._counters.add_counter('latlng_place_lookups', 1)
             if new_parents:
                 # Get a list of place ids splitting comma separated strings.
-                new_parents = ','.join(new_parents).split(',')
+                if isinstance(new_parents, list):
+                    new_parents = ','.join(new_parents)
+                new_parents = new_parents.split(',')
                 for new_place in new_parents:
                     if new_place and new_place not in parent_places:
                         new_places.add(new_place)

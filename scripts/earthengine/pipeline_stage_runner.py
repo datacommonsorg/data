@@ -136,7 +136,7 @@ class StageRunner:
 
         # Get resolved config for running stage.
         self.config.update(self.state)
-        config = _get_resolved_dict(self.config)
+        config = self.get_configs()
 
         # Run the stage
         logging.info(
@@ -161,11 +161,14 @@ class StageRunner:
         Gets files matching the pattern in the config for 'input_files'
         and the patter in the inputs list.
         '''
-        input_list = inputs
+        # Get inputs from previous stage output and config.
+        input_list = []
+        if inputs:
+          input_list.extend(inputs)
         config_inputs = self.get_config('input_files', '')
         if config_inputs:
             input_list.append(config_inputs)
-        # Replace any reference to other config parameters.
+        # Get list of existing files for the patterns.
         input_pat = _format(','.join(input_list), self.config)
         return file_util.file_get_matching(input_pat)
 
