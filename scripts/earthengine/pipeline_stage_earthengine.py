@@ -55,6 +55,8 @@ class EarthEngineRunner(StageRunner):
         # Generate ee images
         ee_tasks = earthengine_image.ee_process(config_dict)
         if not ee_tasks:
+            logging.info(
+                f'No tasks or images returned for config:{config_dict}')
             return None
         # Return the list of output files.
         image_files = []

@@ -64,6 +64,7 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
+import file_util
 import utils
 
 from counters import Counters
@@ -560,26 +561,29 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
     if config.get('ee_bounds'):
         bbox_coords = _get_bbox_coordinates(config['ee_bounds'])
         region_bbox = ee.Geometry.BBox(**bbox_coords)
-    file_prefix = config.get('gcs_output')
-    if not file_prefix:
-        # Create output filename prefix from config parameters.
-        # Large images may be sharded across multiple tif files.
-        file_prefix = get_file_prefix_from_config(config, bbox_coords)
-    scale = config.get('scale', 1000)
+    # Create output filename prefix from config parameters.
+    # Large images may be sharded across multiple tif files.
     gcs_bucket = config.get('gcs_bucket', '')
-    gcs_folder = config.get('gcs_folder', '')
-    if gcs_folder and gcs_folder[-1] != '/':
-        gcs_folder = gcs_folder + '/'
+    file_prefix = get_gcs_file_prefix_from_config(config, bbox_coords)
+    if config.get('skip_existing_output', True):
+        gcs_path = f'gs://{gcs_bucket}/{file_prefix}*.tif'
+        existing_images = file_util.file_get_matching(gcs_path)
+        if existing_images:
+            logging.info(
+                f'Skipping ee image generation for existing files: {existing_images}'
+            )
+            return None
+    scale = config.get('scale', 1000)
     logging.info(
-        f'Exporting image: {ee_image.id()} to GCS bucket:{gcs_bucket}, {gcs_folder}{file_prefix}*.tif'
+        f'Exporting image: {ee_image.id()} to GCS bucket:{gcs_bucket}, {file_prefix}*.tif'
     )
     task = ee.batch.Export.image.toCloudStorage(
-        description=file_prefix[:90],
+        description=file_prefix.split('/')[-1][:90],
         image=ee_image,
         region=region_bbox,
         scale=scale,
         bucket=gcs_bucket,
-        fileNamePrefix=f'{gcs_folder}{file_prefix}',
+        fileNamePrefix=f'{file_prefix}',
         maxPixels=10000000000000,
         fileFormat='GeoTIFF')
     task.start()
@@ -603,7 +607,8 @@ def ee_process(config) -> list:
     ee_tasks = []
     ee.Initialize()
     config['ee_image_count'] = config.get('ee_image_count', 1)
-    cur_date = utils.date_today()
+    time_period = config.get('time_period', 'P1M')
+    cur_date = utils.date_format_by_time_period(utils.date_today(), time_period)
     counters = Counters()
     # Get images by count or until yesterday
     while (config['ee_image_count'] and
@@ -617,12 +622,12 @@ def ee_process(config) -> list:
             logging.info(f'Generated image {img.get("id")}')
             if config.get('ee_export_image', True):
                 task = export_ee_image_to_gcs(img, config)
-                ee_tasks.append(task)
+                if task is not None:
+                    ee_tasks.append(task)
                 counters.add_counter('total', 1)
         else:
             logging.error(f'Failed to generate image for config: {config}')
         # Advance time to next period.
-        time_period = config.get('time_period', 'P1M')
         for ts in ['start_date', 'end_date']:
             dt = utils.date_advance_by_period(config.get(ts, ''), time_period)
             if dt:
@@ -630,6 +635,7 @@ def ee_process(config) -> list:
         config['ee_image_count'] = config['ee_image_count'] - 1
         logging.info(f'Advanced dates by {time_period}: {config}')
 
+    logging.info(f'Created ee tasks: {ee_tasks}')
     completed_tasks = []
     if not config.get('ee_wait_task', True):
         return ee_tasks
@@ -658,13 +664,18 @@ def ee_process(config) -> list:
     return completed_tasks
 
 
-def get_file_prefix_from_config(config: dict,
-                                bbox_coords: ee.Geometry.BBox) -> str:
+def get_gcs_file_prefix_from_config(config: dict,
+                                    bbox_coords: ee.Geometry.BBox) -> str:
     '''Returns the file name prefix from the config settings.
     The filename is of the form:
-      ee_image-<dataset>-band_<name>-r_<reducer>-mask_<dataset>
+      {gcs_folder}/ee_image-<dataset>-band_<name>-r_<reducer>-mask_<dataset>
         -s_<scale>-from_<YYYY-MM-DD>-to_YYYY-MM-DD
+      The GCS bucket is added by the caller to get the full path.
     '''
+    # Return the file prefix set in the config.
+    file_prefix = config.get('gcs_output')
+    if file_prefix:
+        return file_prefix
     # Collect all config tuples (parameter, value) to be addd to the filename
     img_config = [('ee_image',
                    config.get(
@@ -691,7 +702,10 @@ def get_file_prefix_from_config(config: dict,
 
     # Remove any special characters
     file_prefix = re.sub(r'[^A-Za-z0-9_-]', '_', file_prefix)
-    return file_prefix
+    gcs_folder = config.get('gcs_folder', '')
+    if gcs_folder and gcs_folder[-1] != '/':
+        gcs_folder = gcs_folder + '/'
+    return f'{gcs_folder}{file_prefix}'
 
 
 def get_date_from_filename(filename: str, time_period: str = '') -> str:
