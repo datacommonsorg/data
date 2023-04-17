@@ -164,7 +164,7 @@ class StageRunner:
         # Get inputs from previous stage output and config.
         input_list = []
         if inputs:
-          input_list.extend(inputs)
+            input_list.extend(inputs)
         config_inputs = self.get_config('input_files', '')
         if config_inputs:
             input_list.append(config_inputs)
