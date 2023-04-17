@@ -206,9 +206,11 @@ decade_us = mtbs_us %>%
   filter(Date != 1984)
 
 decade_mtbs = bind_rows(decade_us, decade_region, decade_state, decade_county)
-bind_mtbs = bind_rows(mtbs_us, mtbs_region, mtbs_state, mtbs_county) %>% 
+bind_mtbs = bind_rows(mtbs_us, mtbs_state, mtbs_county) %>% 
   mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid)) %>% rename(Date = year)
-bind_mtbs = bind_rows(decade_mtbs, bind_mtbs) %>%
+mtbs_region = mtbs_region %>% 
+  mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:usc/', Geoid)) %>% rename(Date = year)
+bind_mtbs = bind_rows(decade_mtbs, bind_mtbs, mtbs_region) %>%
   mutate(pct_area_burned = area_burned / area * 100) %>% select(-area)
 
 
@@ -264,5 +266,5 @@ merge12 = merge(merge11, smoke_pm25, by = c('Geoid', 'Date', 'TimeIntervalType')
 merge4 = merge(merge12, pm25_smokepm25_merged, by = c('Geoid', 'Date', 'TimeIntervalType'), all = TRUE)
 
 
-write_csv(merge4, "output/all_merged.csv", na="")
+write.csv(merge4, "output/all_merged.csv", na="")
 
