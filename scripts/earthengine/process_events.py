@@ -976,7 +976,6 @@ class GeoEventsProcessor:
             'ContainedInPlaceCount',
             'area',
             'AreaSqKm',
-            'subEvents',
         ]
         # Output additional event specific properties from data source
         for prop in sorted(list(self._event_props)):
