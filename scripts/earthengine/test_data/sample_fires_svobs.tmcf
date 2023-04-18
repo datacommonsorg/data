@@ -6,4 +6,3 @@ affectedPlace: C:SVObs->affectedPlace
 area: C:SVObs->area
 confidence: C:SVObs->confidence
 frp: C:SVObs->frp
-observationDate: C:SVObs->observationDate

@@ -187,8 +187,7 @@ class GeoEvent:
             for date, pvs in date_pvs.items():
                 if not dates or date in dates:
                     place_ids.add(place_id)
-                if 'affectedPlace' in pvs:
-                    place_ids.update(pvs.get('affectedPlace', '').split(','))
+                place_ids.update(_get_list(pvs.get('affectedPlace', '')))
         return sorted(list(place_ids))
 
     def get_event_properties(self, dates: set = {}) -> dict:
@@ -626,7 +625,7 @@ class GeoEventsProcessor:
                 'containedInPlace', {})
             for place_id, contained_place_ids in contained_place_dict.items():
                 if contained_place_ids:
-                    lookup_names.update(contained_place_ids)
+                  lookup_names.update(_get_list(contained_place_ids))
             self._counters.add_counter('total', len(lookup_places))
             self.prefetch_placeid_property('name', lookup_names)
             self.prefetch_placeid_property('typeOf', lookup_names)
@@ -644,7 +643,7 @@ class GeoEventsProcessor:
         cache_dict = self._place_property_cache.get(prop, {})
         lookup_places = []
         for place in place_ids:
-            places = place.split(',')
+            places = _get_list(place)
             for placeid in places:
                 placeid = utils.strip_namespace(placeid)
                 if placeid not in cache_dict:
@@ -686,6 +685,10 @@ class GeoEventsProcessor:
             self._counters.add_counter(f'cache_place_property_{prop}_miss', 1)
         return value
 
+    def get_place_property_list(self, placeid: str, prop: str) -> list:
+        '''Returns the property values for the place as a list.'''
+        return _get_list(self.get_place_property(placeid, prop))
+
     def set_place_property(self, placeid: str, prop: str, value: str) -> bool:
         '''Set the property for the place id.'''
         if prop is None or value is None:
@@ -700,16 +703,16 @@ class GeoEventsProcessor:
                 value = str(value)
             value = [value]
         # Add value to existing property values for the place
-        cache_values = cache_dict.get(placeid, None)
+        cache_values = _get_list(cache_dict.get(placeid, None))
         if cache_values is None:
             cache_dict[placeid] = value
             value_added = True
         else:
             # Add any new values not in cache.
             new_values = set(cache_values)
-            new_values.update(value)
+            new_values.update(_get_list(value))
             if len(new_values) != len(cache_values):
-                cache_dict[placeid] = list(new_values)
+                cache_dict[placeid] = ','.join(new_values)
                 value_added = True
         if value_added:
             self._place_cache_modified = True
@@ -754,6 +757,7 @@ class GeoEventsProcessor:
             event_pvs['observationPeriod'] = f'P{duration_days}D'
             event_pvs['DurationDays'] = duration_days
             event_pvs['numberOfDays'] = len(dates)
+            event_pvs['observationDate'] = ','.join(dates)
             self._counters.max_counter('max_output_events_dates', len(dates))
         # Set the start location from the place with the earliest date
         start_place_ids = event.get_event_places(
@@ -929,11 +933,11 @@ class GeoEventsProcessor:
             self._counters.add_counter('processed', 1)
             pvs = place_date_pvs[place_date]
             placeid, date = place_date.split(',', 1)
-            parent_places = self.get_place_property(placeid, 'containedInPlace')
+            parent_places = self.get_place_property_list(placeid, 'containedInPlace')
             if not parent_places:
                 self._counters.add_counter('aggr-no-parent-places', 1)
                 continue
-            parents = set(parent_places)
+            parents = set(_get_list(parent_places))
             if placeid in parents:
                 parents.remove(placeid)
             # Add an entry for each parent place
@@ -973,7 +977,6 @@ class GeoEventsProcessor:
             'affectedPlace',
             'AffectedPlaceCount',
             #'containedInPlace',
-            'ContainedInPlaceCount',
             'area',
             'AreaSqKm',
         ]
@@ -1065,7 +1068,9 @@ class GeoEventsProcessor:
         if not event_props:
             # No specific properties given. Generate SVObs for all properties.
             event_props = sorted(list(self._event_props))
-        output_columns.extend(event_props)
+        for prop in event_props:
+          if prop not in output_columns:
+            output_columns.append(prop)
         if not event_ids:
             event_ids = self.get_all_event_ids()
         with file_util.FileIO(output_csv, 'w') as csv_file:
@@ -1441,9 +1446,9 @@ class GeoEventsProcessor:
         if not place_id:
             self._counters.add_counter('input_dropped_invalid_placeid', 1)
             return False
-        data_pvs['affectedPlace'] = place
+        data_pvs['affectedPlace'] = utils.add_namespace(place)
         if place_id != place:
-            data_pvs['affectedPlace'] += f',{place_id}'
+          data_pvs['affectedPlace'] += ',' + utils.add_namespace(place_id)
         date_column = self._config.get('date_column', 'observationDate')
         date = row.get(date_column, '')
         if not date:
@@ -1592,14 +1597,14 @@ class GeoEventsProcessor:
             min_date = date
         return min_date
 
-    def _get_contained_for_place(self, place_id: int) -> list:
+    def _get_contained_for_place(self, place_id: str) -> list:
         '''Returns a list of containdInPlace dcids for a place.'''
         new_places = set({place_id})
         parent_places = set()
         # Lookup parent places for all parents.
         while len(new_places) > 0:
             placeid = new_places.pop()
-            new_parents = self.get_place_property(placeid, 'containedInPlace')
+            new_parents = self.get_place_property_list(placeid, 'containedInPlace')
             if not new_parents:
                 # No containedInPlace for place.
                 # Lookup place by lat/lng.
@@ -1611,8 +1616,7 @@ class GeoEventsProcessor:
                         new_parents = [f'country/{suffix}']
                 elif placeid in self._latlng_to_place_cache:
                     self._counters.add_counter('latlng_place_cache_hits', 1)
-                    new_parents = self._latlng_to_place_cache[placeid].split(
-                        ',')
+                    new_parents = self._latlng_to_place_cache[placeid]
                 elif self._config.get('lookup_contained_for_place', False):
                     lat, lng = utils.place_id_to_lat_lng(
                         placeid, self._config.get('dc_api_enabled', True))
@@ -1620,16 +1624,13 @@ class GeoEventsProcessor:
                         new_parents = self._ll2p.resolve(lat, lng)
                         self._latlng_to_place_cache[placeid] = new_parents
                         self._counters.add_counter('latlng_place_lookups', 1)
+                new_parents = _get_list(new_parents)
             if new_parents:
-                # Get a list of place ids splitting comma separated strings.
-                if isinstance(new_parents, list):
-                    new_parents = ','.join(new_parents)
-                new_parents = new_parents.split(',')
+                # Collect all new parent places to be looked up again.
                 for new_place in new_parents:
                     if new_place and new_place not in parent_places:
                         new_places.add(new_place)
                         parent_places.add(new_place)
-        parent_places.add('Earth')
         contained_places = sorted(list(parent_places))
         self.set_place_property(place_id, 'containedInPlace', contained_places)
         return contained_places
@@ -1642,7 +1643,7 @@ class GeoEventsProcessor:
         # Get a named location for the event
         start_location = event_pvs.get('startLocation')
         if not locations:
-            locations = event_pvs.get('affectedPlace', '').split(',')
+          locations = _get_list(event_pvs.get('affectedPlace', ''))
         location_name = ''
         for placeid in locations:
             placeid = utils.strip_namespace(placeid)
@@ -1697,7 +1698,6 @@ class GeoEventsProcessor:
                 # data['affectedPlace'] = ','.join(affected_places)
                 data['affectedPlace'] = ','.join(sorted(contained_places))
                 data['AffectedPlaceCount'] = len(affected_places)
-                data['ContainedInPlaceCount'] = len(contained_places)
         self._counters.max_counter('max_output_events_places', len(place_ids))
 
     def _get_place_lat_lng(self, placeid: str) -> (float, float):
@@ -1827,6 +1827,17 @@ def _set_counter_stage(counters: Counters, name: str):
         stage_count = int(counter_prefix)
     stage_count += 1
     counters.set_prefix(f'{stage_count}:{name}')
+
+
+def _get_list(items: str)-> list:
+  '''Returns a list of unique items, splitting comma separated strings.'''
+  items_set = set()
+  if items:
+    if isinstance(items, str):
+      items = items.split(',')
+    for item in items:
+      items_set.update(item.split(','))
+  return sorted(items_set)
 
 
 _DEFAULT_CONFIG = {}
