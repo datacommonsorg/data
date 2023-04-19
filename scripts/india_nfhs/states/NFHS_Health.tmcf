@@ -481,12 +481,12 @@ value: C:NFHS_Health->Count_Household_WithAnyMember_CoveredUnderHealthInsuranceO
 
 Node: E:NFHS_Health->E54
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Female_Married_Years15To49Age_Using IntrauterineDevice( IUD )or PostpartumIntrauterine ContraceptiveDevice ( PPIUD)_AsFractionOf_Count_Household
+variableMeasured: dcs:Count_Person_Female_Married_Years15To49Age_UsingIntrauterineDeviceorPostpartumIntrauterineContraceptiveDevice_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Female_Married_Years15To49Age_Using IntrauterineDevice( IUD )or PostpartumIntrauterine ContraceptiveDevice ( PPIUD)_AsFractionOf_Count_Household
+value: C:NFHS_Health->Count_Person_Female_Married_Years15To49Age_UsingIntrauterineDeviceorPostpartumIntrauterineContraceptiveDevice_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E55
 typeOf: dcs:StatVarObservation
@@ -1066,12 +1066,12 @@ value: C:NFHS_Health->Count_Person_Female_10YearsOrMore_Schooling_AsFractionOf_C
 
 Node: E:NFHS_Health->E119
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Female_SufferingFrom_High_BloodSugarLevel_AsFractionOf_Count_ Household
+variableMeasured: dcs:Count_Person_Female_SufferingFrom_High_BloodSugarLevel_AsFractionOf_Count_Household
 measurementMethod: dcs:NHM_HealthInformationManagementSystem
 observationAbout: E:NFHS_Health->E0
 observationDate: C:NFHS_Health->Date
 observationPeriod: "P1Y"
-value: C:NFHS_Health->Count_Person_Female_SufferingFrom_High_BloodSugarLevel_AsFractionOf_Count_ Household
+value: C:NFHS_Health->Count_Person_Female_SufferingFrom_High_BloodSugarLevel_AsFractionOf_Count_Household
 
 Node: E:NFHS_Health->E120
 typeOf: dcs:StatVarObservation

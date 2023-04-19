@@ -100,6 +100,7 @@ value: C:{dataset_name}->{statvar}
 
 MCF_NODES = """
 Node: dcid:{statvar}
+name: "{name}"
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
@@ -109,6 +110,7 @@ statType: dcs:measuredValue
 
 MCF_NODES_DENOMINATOR = """
 Node: dcid:{statvar}
+name: "{name}"
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
@@ -119,6 +121,7 @@ measurementDenominator: dcs:Count_Household
 
 MCF_NODES_AGE = """
 Node: dcid:{statvar}
+name: "{name}"
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
@@ -129,6 +132,7 @@ age: dcs:{age}
 
 MCF_NODES_COMMON = """
 Node: dcid:{statvar}
+name: "{name}"
 description: "{description}"
 typeOf: dcs:StatisticalVariable
 populationType: schema:Person
@@ -230,14 +234,14 @@ class NFHSDataLoaderBase(object):
                         mcf.write(
                             MCF_NODES_DENOMINATOR.format(
                                 statvar=self.cols_dict[variable],
-                                # descript=self.cols_dict[variable].replace('_', ' '),
+                                name=variable,
                                 description=description))
 
                     elif index2 != -1 and index1 == -1:
                         mcf.write(
                             MCF_NODES_AGE.format(
                                 statvar=self.cols_dict[variable],
-                                # descript=self.cols_dict[variable].replace('_', ' '),
+                                name=variable,
                                 description=description,
                                 age=age))
 
@@ -245,7 +249,7 @@ class NFHSDataLoaderBase(object):
                         mcf.write(
                             MCF_NODES_COMMON.format(
                                 statvar=self.cols_dict[variable],
-                                # descript=self.cols_dict[variable].replace('_', ' '),
+                                name=variable,
                                 description=description,
                                 age=age))
 
@@ -253,7 +257,7 @@ class NFHSDataLoaderBase(object):
                         mcf.write(
                             MCF_NODES.format(
                                 statvar=self.cols_dict[variable],
-                                # descript=self.cols_dict[variable].replace('_', ' '),
+                                name=variable,
                                 description=description))
 
                     statvars_written.append(self.cols_dict[variable])
