@@ -26,9 +26,9 @@ forest_burned_acres_west_decadal <- read_csv("forest_burned_acres/forest_burned_
   rename(forest_burned_acres = variable, Date = decade) %>% 
   mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:usc/WestRegion', Date = as.numeric(substr(Date, 1, 4)))
 
-forest_burned_acres =  bind_rows(forest_burned_acres_county, forest_burned_acres_county_decadal, 
-                                  forest_burned_acres_state, forest_burned_acres_state_decadal,
-                                  forest_burned_acres_west, forest_burned_acres_west_decadal)
+forest_burned_acres =  bind_rows(forest_burned_acres_county, forest_burned_acres_county_decadal %>% filter(Date != '2014'), 
+                                  forest_burned_acres_state, forest_burned_acres_state_decadal %>% filter(Date != '2014'),
+                                  forest_burned_acres_west, forest_burned_acres_west_decadal %>% filter(Date != '2014'))
 
 pct_forest_burned_county <- read_csv("pct_forest_burned/pct_forest_burned_county") %>% select(-1) %>%
   rename(Date = year, Geoid = countyfips) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid), pct_forest_burned = pct_forest_burned * 100)
@@ -51,9 +51,9 @@ pct_forest_burned_west_decadal <- read_csv("pct_forest_burned/pct_forest_burned_
   rename(pct_forest_burned = variable, Date = decade) %>% 
   mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:usc/WestRegion', Date = as.numeric(substr(Date, 1, 4)), pct_forest_burned = pct_forest_burned * 100)
 
-pct_forest_burned =  bind_rows(pct_forest_burned_county, pct_forest_burned_county_decadal, 
-                                 pct_forest_burned_state, pct_forest_burned_state_decadal,
-                                 pct_forest_burned_west, pct_forest_burned_west_decadal)
+pct_forest_burned =  bind_rows(pct_forest_burned_county, pct_forest_burned_county_decadal %>% filter(Date != '2014'), 
+                                 pct_forest_burned_state, pct_forest_burned_state_decadal %>% filter(Date != '2014'),
+                                 pct_forest_burned_west, pct_forest_burned_west_decadal %>% filter(Date != '2014'))
 
 pct_high_severity_county <- read_csv("pct_high_severity/pct_high_severity_county") %>% select(-1) %>%
   rename(Date = year, Geoid = countyfips) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid), pct_high_severity = pct_high_severity * 100)
@@ -76,9 +76,9 @@ pct_high_severity_west_decadal <- read_csv("pct_high_severity/pct_high_severity_
   rename(Date = decade, pct_high_severity = variable) %>% mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:usc/WestRegion', 
                                                                  pct_high_severity = pct_high_severity * 100, Date = as.numeric(substr(Date, 1, 4)))
 
-pct_high_severity =  bind_rows(pct_high_severity_county, pct_high_severity_county_decadal,
-                               pct_high_severity_state, pct_high_severity_state_decadal,
-                               pct_high_severity_west, pct_high_severity_west_decadal)
+pct_high_severity =  bind_rows(pct_high_severity_county, pct_high_severity_county_decadal %>% filter(Date != '2014'),
+                               pct_high_severity_state, pct_high_severity_state_decadal %>% filter(Date != '2014'),
+                               pct_high_severity_west, pct_high_severity_west_decadal %>% filter(Date != '2014'))
 
 PDSI_county <- read_csv("climate/PDSI_county.csv") %>%
   rename(Date = year, Geoid = county, mean_pdsi_forestarea = mean_pdsi) %>% mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:geoId/', Geoid))
@@ -176,7 +176,7 @@ decade_county = mtbs_county %>%
   mutate(decade = paste(range(year), collapse="-")) %>% 
   group_by(decade, Geoid) %>% summarise(area_burned=mean(area_burned), area=mean(area)) %>% 
   mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:geoId/', Geoid), Date = as.numeric(substr(decade, 1, 4))) %>%
-  filter(Date != 1984) %>%
+  filter(Date != 1984) %>% filter(Date != 2015) %>%
   ungroup %>% select(-decade)
 
 decade_state = mtbs_state %>% 
@@ -185,7 +185,7 @@ decade_state = mtbs_state %>%
   mutate(decade = paste(range(year), collapse="-")) %>% 
   group_by(decade, Geoid) %>% summarise(area_burned=mean(area_burned), area=mean(area)) %>% 
   mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:geoId/', Geoid), Date = as.numeric(substr(decade, 1, 4))) %>%
-  filter(Date != 1984) %>%
+  filter(Date != 1984) %>% filter(Date != 2015) %>%
   ungroup %>% select(-decade)
 
 decade_region = mtbs_region %>% 
@@ -194,7 +194,7 @@ decade_region = mtbs_region %>%
   mutate(decade = paste(range(year), collapse="-")) %>% 
   group_by(decade, Geoid) %>% summarise(area_burned=mean(area_burned), area=mean(area)) %>% 
   mutate(TimeIntervalType = 'P10Y', Geoid = str_c('dcid:usc/', Geoid), Date = as.numeric(substr(decade, 1, 4))) %>%
-  filter(Date != 1984) %>%
+  filter(Date != 1984) %>% filter(Date != 2015) %>%
   ungroup %>% select(-decade)
 
 decade_us = mtbs_us %>% 
@@ -203,7 +203,7 @@ decade_us = mtbs_us %>%
   mutate(decade = paste(range(year), collapse="-")) %>% 
   group_by(decade) %>% summarise(area_burned=mean(area_burned), area=mean(area)) %>% 
   mutate(TimeIntervalType = 'P10Y', Geoid = 'dcid:country/USA', Date = as.numeric(substr(decade, 1, 4))) %>% select(-decade) %>%
-  filter(Date != 1984)
+  filter(Date != 1984) %>% filter(Date != 2015)
 
 decade_mtbs = bind_rows(decade_us, decade_region, decade_state, decade_county)
 bind_mtbs = bind_rows(mtbs_us, mtbs_state, mtbs_county) %>% 
@@ -212,7 +212,6 @@ mtbs_region = mtbs_region %>%
   mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:usc/', Geoid)) %>% rename(Date = year)
 bind_mtbs = bind_rows(decade_mtbs, bind_mtbs, mtbs_region) %>%
   mutate(pct_area_burned = area_burned / area * 100) %>% select(-area)
-
 
 heatwave <- read_csv("climate/national_heatwave.csv") %>% select(-1) %>%
   mutate(TimeIntervalType = 'P1Y', Geoid = str_c('dcid:country/USA')) %>%
