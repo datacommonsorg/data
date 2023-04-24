@@ -21,8 +21,7 @@ from unittest import mock
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-
-import latlng_recon_service
+from util import latlng_recon_service
 
 
 class LatlngReconServiceTest(unittest.TestCase):

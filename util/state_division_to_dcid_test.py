@@ -15,7 +15,7 @@
 """Tests for place_map."""
 
 import unittest
-from state_division_to_dcid import get_place_dcid
+from util.state_division_to_dcid import get_place_dcid
 
 
 class PlaceMapTest(unittest.TestCase):

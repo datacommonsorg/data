@@ -19,7 +19,7 @@
 
 import unittest
 import re
-import statvar_dcid_generator
+from util import statvar_dcid_generator
 
 
 class TestStatVarDcidGenerator(unittest.TestCase):
