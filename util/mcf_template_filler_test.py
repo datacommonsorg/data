@@ -20,7 +20,7 @@
 from __future__ import absolute_import
 import unittest
 
-from util import mcf_template_filler
+import mcf_template_filler
 
 POP_TEMPLATE = """
 Node: Pop_payroll_est_{geo_id}_{naics_code}_{operation_type}_{tax_status}

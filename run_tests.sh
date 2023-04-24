@@ -66,7 +66,7 @@ function help {
   echo "Usage: $0 -rplaf"
   echo "-r       Install Python requirements"
   echo "-l       Test lint on Python code"
-  echo "-p       Run Python tests in specified folder, e.g. ./run_test.sh -p util"
+  echo "-p       Run Python tests in specified folder, e.g. ./run_tests.sh -p util"
   echo "-a       Run all tests"
   echo "-f       Fix lint"
   exit 1
