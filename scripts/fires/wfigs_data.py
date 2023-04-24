@@ -148,8 +148,8 @@ def process_df(df):
         try:
             geoIds = []
             location = ''
-            if not (pd.isna(latitude) or pd.isna(longitude)
-                   ) and abs(latitude) <= 90 and abs(longitude) <= 180:
+            if not (pd.isna(latitude) or pd.isna(longitude)) and abs(
+                    latitude) <= 90 and abs(longitude) <= 180:
                 if latitude_str in _LAT_LNG_CACHE:
                     if longitude_str in _LAT_LNG_CACHE[str(latitude)]:
                         return _LAT_LNG_CACHE[latitude_str][str(longitude)]

@@ -1536,8 +1536,8 @@ def _add_offender_category(row):
     row['OFFENDER_CATEGORY'] = 'UnknownOffender'
 
     # If offender's age, race or ethnicity is known, then it is a known offender
-    if (row['ADULT_OFFENDER_COUNT'] !=
-            np.nan) or (row['JUVENILE_OFFENDER_COUNT'] != np.nan) or (
+    if (row['ADULT_OFFENDER_COUNT']
+            != np.nan) or (row['JUVENILE_OFFENDER_COUNT'] != np.nan) or (
                 (row['OFFENDER_RACE'] != np.nan) and
                 (row['OFFENDER_RACE'] != 'Unknown')) or (
                     (row['OFFENDER_ETHNICITY'] != np.nan) and

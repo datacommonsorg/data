@@ -41,5 +41,10 @@
     'output_svobs': True,
     'output_active_svobs': True,
     'output_affected_place_polygon': 'geoJsonCoordinatesDP1',
+    'output_geojson_string': True,
     'place_property_cache_file': '/tmp/s2_cell_place_properties.py',
+    # Output svobs per place
+    'output_place_svobs': True,
+    'output_place_svobs_properties': ['area', 'count'],
+    'output_place_svobs_dates': ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'],
 }
