@@ -45,7 +45,7 @@ function run_py_lint_test {
   setup_python
   echo "#### Testing Python lint"
   if ! yapf -r --diff -p --style=google $PYTHON_FOLDERS; then
-    echo "ERROR: Fix lint errors by running ./run_test.sh -f" >&2
+    echo "ERROR: Fix lint errors by running ./run_tests.sh -f" >&2
     exit 1
   fi
 }
