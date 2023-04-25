@@ -193,7 +193,8 @@ def handle_genBank_missing_exception(n, virus_dcid, virus_name):
 	if ';' in n:
 		n = n.split(';')[0]
 	dcid = virus_dcid + pascalcase(n)
-	dcid=dcid.replace("'","").replace('–', '-')
+	dcid = dcid.replace("'", "")
+	dcid = dcid.replace('–', '-')
 	name = virus_name + n
 	return dcid, name
 
@@ -217,7 +218,6 @@ def format_isolate_designation_for_dcid(des):
 	des = str(des)
 	des = des.replace(':', '_')
 	des = des.replace(';', '_')
-	des = des.replace(' ', '_')
 	des = des.replace('[', '(')
 	des = des.replace(']', ')')
 	des = des.replace('-', '_')
@@ -250,6 +250,7 @@ def declare_isolate_dcid(n, genBank, virus_dcid, virus_name, virus_abrv, isolate
 	else:
 		dcid = virus_dcid + '_' + genBank
 		name = virus_name + ' ' + genBank
+	dcid = dcid.replace(' ', '')
 	dcid = unidecode.unidecode(dcid)
 	dcid, list_isolate_dcids = verify_isolate_dcid_uniqueness(dcid, list_isolate_dcids, genBank, virus_abrv)
 	return dcid, name, list_isolate_dcids
@@ -278,6 +279,7 @@ def handle_genome_segments(df_segment, virus_dcid, virus_name, isolate_dcid, gen
 		name = name.strip()
 		gb = gb.strip()
 		d['dcid'] = virus_dcid + gb
+		check_for_illegal_charc(virus_dcid + gb)
 		d['name'] = virus_name + ' Segment ' + name
 		d['genBankAccession'] = gb
 		d['genomeSegmentOf'] = isolate_dcid
