@@ -129,7 +129,7 @@ Classes, properties, and enumerations that were added in this import to represen
 Download the most recent versions of the Master Species List and Virus Metadata Resource from ICTV by running:
 
 ```bash
-download.sh
+sh download.sh
 ```
 
 Generate the enummeration schema MCF, which represents virus taxonomic ranks by running:
