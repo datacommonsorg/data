@@ -58,7 +58,7 @@ Note: This resulted in collisions for four VirusIsolates. These errors were reco
 The GenBank Accession number for a VirusGenomeSegment was tacked onto the corresponding VirusIsolate dcid to generate a unique VirusGenomeSegment dcid (i.e. <VirusIsolate_dcid><GenBankAccession>).
 
 ####Illegal Characters
-Only ASCII characters are allowed to be used in dcids. Additionally, the following characters are illegal to be included in the dcid: :, ;, <space>, [, ], -, –, ‘, #. They were replaced in place with the following characters specified below:
+Only ASCII characters are allowed to be used in dcids. Additionally, a number of characters that are illegal to include in the dcid were replaced in place with the following characters specified below:
 
 | Illegal Character | Replacement Character |
 | ----------------- | --------------------- |
