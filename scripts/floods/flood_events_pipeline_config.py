@@ -14,7 +14,7 @@
     },
     # State of previous run of the pipeline with input/output for each stage.
     'pipeline_state_file':
-    'gs://datcom-prod-imports/scripts/floods/flood_event_pipeline_state_{year}.py',
+        'gs://datcom-prod-imports/scripts/floods/flood_event_pipeline_state_{year}.py',
 
     # Pipeline stages to generate flood events.
     'stages': [
@@ -76,7 +76,7 @@
             'input_files':
                 'gs://{gcs_bucket}/{gcs_folder}/raster_csv/*{year}*raster_csv.csv',
             'output_dir':
-            'gs://{gcs_bucket}/{gcs_folder}/{stage}/{import_name}-{stage}-{year}-',
+                'gs://{gcs_bucket}/{gcs_folder}/{stage}/{import_name}-{stage}-{year}-',
             'event_type':
                 'FloodEvent',
 
@@ -127,7 +127,7 @@
             # Cache file for place properties like name, location, typeOf
             # Cache is updated with new places looked up.
             'place_property_cache_file':
-              'gs://datcom-prod-imports/place_cache/place_properties_cache_with_s2_10.pkl',
+                'gs://datcom-prod-imports/place_cache/place_properties_cache_with_s2_10.pkl',
 
             # Output settings.
             #'output_delimiter': ';',
@@ -147,6 +147,11 @@
                 True,
             'output_place_svobs_properties': ['area', 'count'],
             'output_place_svobs_dates': ['YYYY-MM-DD', 'YYYY-MM', 'YYYY'],
+            # Generate stats for all containedInPlaces for the event.
+            # Uses the containedInPlace property in the
+            # place_property_cache_file.
+            'aggregate_by_contained_in_place':
+                True,
         },
     ],
 }
