@@ -1,0 +1,8 @@
+Node: E:eurostat_population_social_environment->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:eurostat_population_social_environment->SV
+measurementMethod: C:eurostat_population_social_environment->Measurement_Method
+observationAbout: C:eurostat_population_social_environment->geo
+observationDate: C:eurostat_population_social_environment->time
+scalingFactor: 100
+value: C:eurostat_population_social_environment->observation

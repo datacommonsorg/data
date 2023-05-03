@@ -17,7 +17,7 @@
 set -e
 
 # Array of top-level folders with Python code.
-PYTHON_FOLDERS="util/ scripts/ import-automation/"
+PYTHON_FOLDERS="util/ scripts/ import-automation/executor"
 
 # Flag used signal if Python requirements have already been installed.
 PYTHON_REQUIREMENTS_INSTALLED=false
@@ -45,7 +45,7 @@ function run_py_lint_test {
   setup_python
   echo "#### Testing Python lint"
   if ! yapf -r --diff -p --style=google $PYTHON_FOLDERS; then
-    echo "ERROR: Fix lint errors by running ./run_test.sh -f" >&2
+    echo "ERROR: Fix lint errors by running ./run_tests.sh -f" >&2
     exit 1
   fi
 }
@@ -66,7 +66,7 @@ function help {
   echo "Usage: $0 -rplaf"
   echo "-r       Install Python requirements"
   echo "-l       Test lint on Python code"
-  echo "-p       Run Python tests in specified folder, e.g. ./run_test.sh -p util"
+  echo "-p       Run Python tests in specified folder, e.g. ./run_tests.sh -p util"
   echo "-a       Run all tests"
   echo "-f       Fix lint"
   exit 1
