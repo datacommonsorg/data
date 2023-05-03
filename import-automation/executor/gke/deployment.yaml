@@ -1,0 +1,131 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: import-automation
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: import-automation-ingress
+  namespace: import-automation
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: dc-import-automation-executor-ip
+    ingress.gcp.kubernetes.io/pre-shared-cert: dc-import-automation-executor-cert
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: import-automation-executor-service
+              port:
+                number: 8080
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: backendconfig
+  namespace: import-automation
+spec:
+  # Note that this timeout must account for the entire duration of preprocess scripts.
+  timeoutSec: 600
+  connectionDraining:
+    drainingTimeoutSec: 600
+  healthCheck:
+    checkIntervalSec: 15
+    port: 8080
+    type: HTTP
+    requestPath: /healthz
+  iap:
+    enabled: true
+    oauthclientCredentials:
+      secretName: import-automation-iap-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: import-automation-executor-service
+  namespace: import-automation
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {"8080":"backendconfig"}}'
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: import-automation-executor-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: import-executor-app
+  namespace: import-automation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  import-automation-executor-app
+  template:
+    metadata:
+      labels:
+        app: import-automation-executor-app
+    spec:
+      containers:
+        - name: app
+          args: []
+          env:
+            - name: EXECUTOR_PRODUCTION
+              value: "True"
+            - name: PORT
+              value: "8080"
+            - name: BOUNCE
+              value: "1"
+            - name: CLOUD_SCHEDULER_CALLER_SA
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-oauth-configmap
+                  key: cloud-scheduler-caller-sa
+            - name: CLOUD_SCHEDULER_CALLER_OAUTH_AUDIENCE
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-oauth-configmap
+                  key: cloud-scheduler-caller-oauth-audience
+          image: gcr.io/datcom-ci/datacommons-import-automation-executor:prod
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            periodSeconds: 60
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: 20G
+            requests:
+              memory: 20G
+          startupProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /healthz
+              port: 8080
+      serviceAccountName: import-automation-ksa
+

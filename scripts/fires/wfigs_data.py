@@ -55,6 +55,7 @@ _START_YEAR = 2014
 _GCS_PROJECT_ID = "datcom-204919"
 _GCS_BUCKET = "datcom-import-cache"
 _GCS_FILE_PATH = "fires/location_file.json"
+_ACRE_TO_SQ_KM_MULTIPLIER = 0.00404686
 
 _FIRE_INCIDENT_MAP = {
     'CX': 'FireIncidentComplexEvent',
@@ -62,8 +63,8 @@ _FIRE_INCIDENT_MAP = {
     'RX': 'PrescribedFireEvent'
 }
 
-_DAILY_ACRES_MAP = "Acre {daily_acres}"
-_INITIAL_RESPONSE_AREA_MAP = "Acre {initial_response_area}"
+_DAILY_ACRES_MAP = "SquareKilometer {daily_acres}"
+_INITIAL_RESPONSE_AREA_MAP = "SquareKilometer {initial_response_area}"
 _EXPECTED_LOSS_MAP = "USDollar {costs}"
 
 _FIRE_DCID_FORMAT = "fire/irwinId/{id}"
@@ -147,8 +148,8 @@ def process_df(df):
         try:
             geoIds = []
             location = ''
-            if not (pd.isna(latitude) or pd.isna(longitude)
-                   ) and abs(latitude) <= 90 and abs(longitude) <= 180:
+            if not (pd.isna(latitude) or pd.isna(longitude)) and abs(
+                    latitude) <= 90 and abs(longitude) <= 180:
                 if latitude_str in _LAT_LNG_CACHE:
                     if longitude_str in _LAT_LNG_CACHE[str(latitude)]:
                         return _LAT_LNG_CACHE[latitude_str][str(longitude)]
@@ -197,7 +198,7 @@ def process_df(df):
     # Write fire area in an ingest-able format.
     def get_area(area, label, mapping):
         if area and not np.isnan(area):
-            return mapping.format_map({label: area})
+            return mapping.format_map({label: area * _ACRE_TO_SQ_KM_MULTIPLIER})
         else:
             return None
 

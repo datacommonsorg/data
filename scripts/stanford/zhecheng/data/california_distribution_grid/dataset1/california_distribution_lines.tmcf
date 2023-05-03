@@ -1,0 +1,13 @@
+Node: E:data->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:data->blockgroup_FIPS
+observationDate: 2021
+variableMeasured: Total_Distribution_Power_Line_Length
+value: C:data->total_distribution_power_line_length
+
+Node: E:data->E1
+typeOf: dcs:StatVarObservation
+observationAbout: C:data->blockgroup_FIPS
+observationDate: 2021
+variableMeasured: Cost_Per_Household_For_undergrounding_Fire_Prone_Lines
+value: C:data->cost_per_household_for_undergrounding_fire_prone_lines

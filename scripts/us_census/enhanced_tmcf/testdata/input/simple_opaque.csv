@@ -1,0 +1,5 @@
+GEO_ID,NAICS2012,TAXSTAT,TYPOP,YEAR,ESTAB
+Geographic identifier code,2012 NAICS code,Tax status code,Type of operation code,Year,Number of establishments
+0100000US,21,0,0,2012,25417
+0100000US,22,0,0,2012,17595
+0100000US,23,0,0,2012,598065

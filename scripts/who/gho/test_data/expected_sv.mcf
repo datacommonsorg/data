@@ -14,19 +14,35 @@ emfExposureGroup: dcs:WHO/Public
 emfFrequency: dcs:WHO/Static
 populationType: dcs:Thing
 
-Node: dcid:WHO/EMFLIMITELECTRIC_Workers_Static
-typeOf: dcs:StatisticalVariable
-measuredProperty: dcs:who/EMFLIMITELECTRIC
-statType: dcs:measurementResult
-emfExposureGroup: dcs:WHO/Workers
-emfFrequency: dcs:WHO/Static
-populationType: dcs:Thing
-
 Node: dcid:WHO/WSH_8
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:who/WSH_8
 statType: dcs:measuredValue
 populationType: dcs:Thing
+
+Node: dcid:WHO/Adult_curr_cig_smoking_Male_Under5Years
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:who/Adult_curr_cig_smoking
+statType: dcs:measuredValue
+gender: schema:Male
+age: [- 5 Years]
+populationType: dcs:Person
+
+Node: dcid:WHO/Adult_curr_cig_smoking_Male_60To69Years
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:who/Adult_curr_cig_smoking
+statType: dcs:measuredValue
+gender: schema:Male
+age: [60 69 Years]
+populationType: dcs:Person
+
+Node: dcid:WHO/Adult_curr_cig_smoking_Male_85PlusYears
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:who/Adult_curr_cig_smoking
+statType: dcs:measuredValue
+gender: schema:Male
+age: [85 - Years]
+populationType: dcs:Person
 
 Node: dcid:WHO/Adult_curr_cig_smoking_Male
 typeOf: dcs:StatisticalVariable

@@ -147,8 +147,9 @@ def create_combined_spec(all_specs: list,
                     if enum_token not in out_spec['enumSpecializations']:
                         out_spec['enumSpecializations'][enum_token] = cur_spec[
                             'enumSpecializations'][enum_token]
-                    elif out_spec['enumSpecializations'][enum_token] != cur_spec[
-                            'enumSpecializations'][enum_token]:
+                    elif out_spec['enumSpecializations'][
+                            enum_token] != cur_spec['enumSpecializations'][
+                                enum_token]:
                         print('Error:', enum_token,
                               'already assigned to enumSpecialization',
                               out_spec['enumSpecializations'][enum_token],

@@ -1,0 +1,15 @@
+Namespace:
+T=http://census.gov/B01001
+
+DATAFILES=<server location>/ECNBASIC2012.EC1200A1.datafile.txt
+
+Node: E:T->E0
+typeOf: schema:Place
+geoId: C:T->GEO_ID
+
+Node: E:T->E1
+typeOf: schema:StatVarObservation
+value: C:T->B01001_001E
+variableMeasured: T:Estimate!!Total
+observationAbout: E:T->E0
+observationDate: "2020"
