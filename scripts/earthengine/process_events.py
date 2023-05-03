@@ -58,7 +58,7 @@ flags.DEFINE_integer('pprof_port', 8081, 'HTTP port for pprof server.')
 
 _FLAGS = flags.FLAGS
 
-_SCRIPTS_DIR = os.path.dirname(os.path.dirname(__file__))
+_SCRIPTS_DIR = os.path.dirname(__file__)
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
@@ -835,6 +835,19 @@ class GeoEventsProcessor:
             event property values, such as { 'area': 100 } aggregated
             by place and date
         '''
+        # Aggregation settings for event properties across places for a date.
+        property_config_per_date = {
+            'aggregate': 'sum',
+            'area': {
+                'aggregate': 'sum'
+            },
+            'EventId': {
+                'aggregate': 'set'
+            }
+        }
+        property_config_per_date.update(
+            self._config.get('property_config_per_date', {}))
+
         # Collect data for each event's (place, date)
         # as a dict: {(place, date): {'area': NN},... }
         place_date_pvs = dict()
@@ -1340,19 +1353,6 @@ class GeoEventsProcessor:
             f'Generating place svobs for {len(event_ids)} events for dates: {date_formats}'
         )
 
-        # Aggregation settings for event properties across places for a date.
-        property_config_per_date = {
-            'aggregate': 'sum',
-            'area': {
-                'aggregate': 'sum'
-            },
-            'EventId': {
-                'aggregate': 'set'
-            }
-        }
-        property_config_per_date.update(
-            self._config.get('property_config_per_date', {}))
-
         # Collect data for each event place and date
         # as a dict: {(place, date): {'area': NN},... }
         place_date_pvs = self.get_place_date_output_properties(
@@ -1546,12 +1546,14 @@ class GeoEventsProcessor:
             _set_counter_stage(self._counters, 'emit_events_svobs_')
             output_files.extend(
                 self.write_events_svobs(
-                    output_path=output_path,
+                    output_path=_get_output_subdir_path(output_path,
+                                                        'event_svobs'),
                     output_ended_events=output_ended_events))
         if self._config.get('output_place_svobs', False):
             output_files.extend(
                 self.write_events_place_svobs(
-                    output_path=output_path,
+                    output_path=_get_output_subdir_path(output_path,
+                                                        'place_svobs'),
                     event_props=self._config.get(
                         'output_place_svobs_properties', ['area', 'count']),
                     date_formats=self._config.get(
@@ -1840,6 +1842,15 @@ def _get_list(items: str) -> list:
         for item in items:
             items_set.update(item.split(','))
     return sorted(items_set)
+
+
+def _get_output_subdir_path(path: str, sub_dir: str) -> str:
+    '''Adds a sub directory for the path prefix.'''
+    dirname = os.path.dirname(path)
+    basename = os.path.basename(path)
+    if dirname:
+        sub_dir = os.path.join(dirname, sub_dir)
+    return os.path.join(sub_dir, basename)
 
 
 _DEFAULT_CONFIG = {}
