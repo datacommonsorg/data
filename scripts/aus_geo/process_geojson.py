@@ -50,6 +50,8 @@ flags.DEFINE_list('properties', [],
 flags.DEFINE_string('key_property', '', 'Property to use as key.')
 flags.DEFINE_list('place_name_properties', [],
                   'List of properties used to create the full place name.')
+flags.DEFINE_string('new_dcid_template', '',
+                    'Template to generate dcid for unresolved places.')
 flags.DEFINE_string('output_csv', '', 'Output path for generated files.')
 flags.DEFINE_string(
     'output_mcf_prefix', 'output',
@@ -61,6 +63,10 @@ flags.DEFINE_list(
     'properties  such as  "area:[{AREASQKM21} SquareKilometer]"')
 flags.DEFINE_string('places_csv', 'resolved_places.csv',
                     'CSV file with columns place_name and dcid.')
+flags.DEFINE_list(
+    'simplification_levels', [':0', 'DP1:0.01', 'DP2:0.03', 'DP3:0.05'],
+    'List of property <suffix>:<tolerance> for Douglas Pecker simplification of geoJson coordinates.'
+)
 
 # Optional flags
 flags.DEFINE_boolean('debug', False, 'Enable debug log messages.')
@@ -73,31 +79,24 @@ import file_util
 
 from counters import Counters
 
-# Polygon simplification levels in the form of tuples: (<level>, <tolerance>)
+# Polygon simplification levels in the form of tuples: '<level>:<tolerance>'
 # Simplified polygon is added as property: geoJsonCoordinates<level>
-_SIMPLIFICATION_LEVELS = [('', 0), ('DP1', 0.01), ('DP2', 0.03), ('DP3', 0.05)]
+_SIMPLIFICATION_LEVELS = [':0', 'DP1:0.01', 'DP2:0.03', 'DP3:0.05']
 
 _MCF_TEMPLATE = '''
 Node: dcid:{dcid}
+typeOf: dcid:{typeof}
 geoJsonCoordinates{level}: {polygon}'''
 
 
-def process_geojson(
-    geo_json: dict,
-    properties: list = None,
-    key_prop: str = '',
-    place_name_props: list = [],
-    output_dict: dict = None,
-    places_dcid: dict = {},
-    output_mcf_prefix: str = '',
-    output_mcf_props: list = [],
-    counters: Counters = Counters()) -> dict:
-    '''Extract properties from geoJson into a dict.'''
-
+def open_output_files(simplification_levels: list,
+                      output_mcf_prefix: str) -> list:
     # Open file handles for MCF outputs for each simplification level.
     mcf_outputs = []
+    output_files = []
     if output_mcf_prefix:
-        for level, tolerance in _SIMPLIFICATION_LEVELS:
+        for index in range(len(simplification_levels)):
+            level, tolerance = simplification_levels[index].split(':', 1)
             suffix = ''
             if level:
                 suffix = f'_simplified_{level}'
@@ -105,7 +104,25 @@ def process_geojson(
                                                suffix=suffix,
                                                file_ext='.mcf')
             mcf_outputs.append(file_util.FileIO(filename, mode='w'))
+            output_files.append(filename)
+        logging.info('Opened MCF files: {output_files}')
+    return mcf_outputs
 
+
+def process_geojson(
+    geo_json: dict,
+    properties: list = None,
+    key_prop: str = '',
+    place_name_props: list = [],
+    dcid_template: str = '',
+    output_dict: dict = None,
+    places_dcid: dict = {},
+    mcf_outputs: list = [],
+    output_mcf_props: list = [],
+    simplification_levels: list = _SIMPLIFICATION_LEVELS,
+    counters: Counters = Counters()
+) -> dict:
+    '''Extract properties from geoJson into a dict.'''
     # Create a dictionary of place->properties.
     geojson_dict = output_dict
     if geojson_dict is None:
@@ -145,12 +162,28 @@ def process_geojson(
                     if prop == key_prop:
                         key = value
             if row:
+                # Set empty value for missing properties.
+                for prop in properties:
+                    if prop not in row:
+                        row[prop] = ''
                 # Concatenate required properties to get the place name
                 # Use the place_name to lookup the dcid from the places_csv.
                 if place_name_props:
                     row['place_name'] = _get_place_name(row, place_name_props)
-                    row['dcid'] = _get_place_dcid(row, place_name_props,
-                                                  places_dcid)
+                    place_props = _get_place_props(row, place_name_props,
+                                                   places_dcid)
+                    for p, v in place_props.items():
+                        if p not in row and v:
+                            row[p] = v
+                dcid = row.get('dcid')
+                if not dcid:
+                    # Generate new DCID
+                    if dcid_template:
+                        dcid = _format_pv(dcid_template, row)
+                        if dcid:
+                            row['dcid'] = dcid
+                            counters.add_counter('generated-dcids', 1, dcid)
+                            logging.info(f'Generated dcid: {row}')
                 num_features += 1
                 if not key:
                     key = row.get('dcid')
@@ -161,8 +194,9 @@ def process_geojson(
                     geojson_dict[key] = row
                     # Emit MCFs for the polygon for each simplification level.
                     geo_polygon = feature.get('geometry')
-                    write_place_output_mcf(row, geo_polygon, mcf_outputs,
-                                           output_mcf_props, counters)
+                    write_place_output_mcf(geojson_dict, row, geo_polygon,
+                                           mcf_outputs, output_mcf_props,
+                                           simplification_levels, counters)
                 else:
                     # Ignore duplicate entry for existing place key.
                     logging.error(
@@ -172,41 +206,49 @@ def process_geojson(
             counters.add_counter('processed', 1)
 
     logging.info(
-        f'Extracted {num_props} properties for {num_features} features from geojson with {len(features)} features.'
+        f'Extracted {num_props} properties for {num_features} features from geojson with {len(features)} features'
     )
-    for file in mcf_outputs:
-        del file
     return geojson_dict
 
 
 def process_geojson_files(input_files: list, properties: list,
                           key_property: str, place_name_props: str,
-                          output_csv_file: str, place_csv_file: str,
-                          output_mcf_prefix: str, output_mcf_props):
+                          dcid_template: str, output_csv_file: str,
+                          place_csv_file: str, output_mcf_prefix: str,
+                          output_mcf_props: list, simplification_levels: list):
     '''Process geoJSON files.'''
     counters = Counters()
     place_dict = dict()
     if place_csv_file:
         place_dict = file_util.file_load_csv_dict(filename=place_csv_file,
                                                   key_column='place_name',
-                                                  value_column='dcid')
+                                                  value_column=None)
         counters.add_counter(f'places_dcid', len(place_dict))
 
+    mcf_outputs = open_output_files(simplification_levels, output_mcf_prefix)
     geojson_dict = dict()
-    for file in file_util.file_get_matching(input_files):
-        with file_util.FileIO(file) as fp:
-            logging.info(f'Loading geoJson from file:{file}')
-            geo_json = json.load(fp)
-            if geo_json:
-                process_geojson(geo_json, properties, key_property,
-                                place_name_props, geojson_dict, place_dict,
-                                output_mcf_prefix, output_mcf_props, counters)
+    for input_file in input_files:
+        for file in file_util.file_get_matching(input_file):
+            with file_util.FileIO(file) as fp:
+                logging.info(f'Loading geoJson from file:{file}')
+                geo_json = json.load(fp)
+                if geo_json:
+                    process_geojson(geo_json, properties, key_property,
+                                    place_name_props, dcid_template,
+                                    geojson_dict, place_dict, mcf_outputs,
+                                    output_mcf_props, simplification_levels,
+                                    counters)
     if output_csv_file:
         file_util.file_write_csv_dict(geojson_dict, output_csv_file)
 
+    # Close any open mcf output files.
+    for mcf_file in mcf_outputs:
+        del mcf_file
 
-def write_place_output_mcf(place_pvs: dict, place_geojson: dict,
-                           output_mcf_files: list, output_mcf_props: list,
+
+def write_place_output_mcf(geojson_dict: dict, place_pvs: dict,
+                           place_geojson: dict, output_mcf_files: list,
+                           output_mcf_props: list, simplification_levels: list,
                            counters: Counters):
     '''Write the place properties to the output mcf file.'''
     if not output_mcf_files:
@@ -214,6 +256,8 @@ def write_place_output_mcf(place_pvs: dict, place_geojson: dict,
 
     # Emit MCFs for the polygon for each simplification level.
     dcid = place_pvs.get('dcid')
+    typeof = place_pvs.get('typeOf', 'Place')
+    polygon = None
     if not dcid:
         logging.info(f'Ignoring place without dcid {place_pvs}')
         counters.add_counter(f'ignore-place-without-dcid', 1,
@@ -224,52 +268,117 @@ def write_place_output_mcf(place_pvs: dict, place_geojson: dict,
                              place_pvs.get('place_name'))
     else:
         # Emit the MCF for the polygon
+        logging.debug(f'Writing geometry for place {dcid}: {place_pvs}')
+        counters.add_counter(f'output-mcf-prop-typeOf-{typeof}', 1)
         polygon = geometry.shape(place_geojson)
-        for index in range(len(_SIMPLIFICATION_LEVELS)):
-            level, tolerance = _SIMPLIFICATION_LEVELS[index]
-            node_mcf_str = ''
-            if not level or not tolerance:
+        lat = place_pvs.get('latitude')
+        lng = place_pvs.get('longitude')
+        if not lat:
+            # Add Lat/Lng properties.
+            lat, lng = _get_latlng(polygon)
+        if lat is not None:
+            place_pvs['latitude'] = float(lat)
+        if lng is not None:
+            place_pvs['longitude'] = float(lng)
+        # Get the contained in parent polygons.
+        place_pvs['polygon'] = polygon
+        parents = get_contained_polygons(dcid, polygon, geojson_dict)
+        if parents:
+            # parents.extend(place_pvs.get('containedInPlace', '').split(','))
+            place_pvs['containedInPlace'] = ','.join(parents)
+        for index in range(len(simplification_levels)):
+            level, tolerance = simplification_levels[index].split(':', 1)
+            tolerance = float(tolerance)
+            node_mcf = []
+            if not tolerance:
                 # No simplification needed. Emit polygon.
-                node_mcf = []
                 gjs = json.dumps(json.dumps(place_geojson))
                 node_mcf.append(
                     _MCF_TEMPLATE.format(dcid=dcid,
-                                         level='',
-                                         polygon=place_geojson))
-                # Add any additional properties.
+                                         typeof=typeof,
+                                         level=level,
+                                         polygon=gjs))
+            else:
+                # Simplify polygon to the desired level.
+                spolygon = polygon.simplify(tolerance)
+                gjs = json.dumps(json.dumps(geometry.mapping(spolygon)))
+                node_mcf.append(
+                    _MCF_TEMPLATE.format(dcid=dcid,
+                                         typeof=typeof,
+                                         level=level,
+                                         polygon=gjs))
+                counters.add_counter(f'output-mcf-geometry-{level}', 1)
+            if index == 0:
+                # Add place properties from geojson into the first mcf
                 for format_pv in output_mcf_props:
                     prop_value = _format_pv(format_pv, place_pvs)
                     if prop_value:
                         node_mcf.append(prop_value)
                         out_prop = prop_value.split(':', 1)[0]
                         counters.add_counter(f'output-mcf-prop-{out_prop}', 1)
-                node_mcf_str = '\n'.join(node_mcf)
                 counters.add_counter(f'output-mcf-geometry', 1)
-            else:
-                # Simplify polygon to the desired level.
-                spolygon = polygon.simplify(tolerance)
-                gjs = json.dumps(json.dumps(geometry.mapping(spolygon)))
-                node_mcf_str = _MCF_TEMPLATE.format(dcid=dcid,
-                                                    level=level,
-                                                    polygon=gjs)
-                counters.add_counter(f'output-mcf-geometry-{level}', 1)
-            if node_mcf_str:
+            if node_mcf:
                 # Emit the MCF with the polygon to the output file.
                 output_mcf_files[index].write('\n')
-                output_mcf_files[index].write(node_mcf_str)
+                output_mcf_files[index].write('\n'.join(node_mcf))
+    return polygon
+
+
+def get_contained_polygons(dcid: str, polygon, geojson_dict: dict) -> list:
+    '''Returns a list of keys which contain the polygon.'''
+    parents = []
+    for place_key, place_pvs in geojson_dict.items():
+        if place_key != dcid:
+            place_polygon = place_pvs.get('polygon')
+            if place_polygon and place_polygon.contains(polygon):
+                parents.append(place_key)
+    if parents:
+      logging.info(f'Place {dcid} is containedIn parents {parents}')
+    return parents
 
 
 def _format_pv(format_str: str, pvs: dict) -> str:
     '''Returns a formatted string with values applied from the pvs dict.'''
-    try:
-        return format_str.format(**pvs)
-    except KeyError as e:
-        logging.debug(f'Missing prop in format {format_str}, {e}')
+    # Get all property references with {<prop1>,<prop2>} to be substituted
+    props = []
+    for prop_match in re.finditer(r'{[^}]*}', format_str):
+        props.append(format_str[prop_match.start():prop_match.end()])
+
+    # Lookup each property value and replace string.
+    pv_str = format_str
+    for ref_props in props:
+        # Get the value of the first valid referred property
+        if ':' in ref_props:
+            prop, opt = ref_props[1:-1].split(':', 1)
+            opt = ':' + opt
+        else:
+            prop = ref_props[1:-1]
+            opt = ''
+        for p in prop.split('|'):
+            if p in pvs:
+                prop = p
+                break
+        prop_value = pvs.get(prop)
+        if prop_value:
+            value_fmt = '{' + opt + '}'
+            res_value = value_fmt.format(prop_value)
+            pv_str = pv_str.replace(ref_props, res_value)
+
+    pv_str = pv_str.strip()
+    prop_value = pvs.get(pv_str)
+    if prop_value:
+        pv_str = f'{pv_str}: {prop_value}'
+    logging.level_debug() and logging.debug(
+        f'Resolved {format_str} into {pv_str} using {pvs}')
+
+    if '{' in pv_str:
+        # Unresolved references remain. Ignore this prop
         return ''
+    return pv_str
 
 
-def _get_place_dcid(pvs: dict, place_name_props: list,
-                    place_to_dcid: dict) -> str:
+def _get_place_props(pvs: dict, place_name_props: list,
+                     place_to_dcid: dict) -> str:
     '''Returns the dcid for the place with property values in pvs.
   Uses the place_props to get the dcid from the place_to_dcid map.'''
     dcid = pvs.get('dcid', '')
@@ -278,10 +387,7 @@ def _get_place_dcid(pvs: dict, place_name_props: list,
 
     # Lookup dcid for the place name
     place_name = _get_place_name(pvs, place_name_props)
-    dcid = place_to_dcid.get(place_name, '')
-    if dcid:
-        pvs['dcid'] = dcid
-    return dcid
+    return place_to_dcid.get(place_name, {})
 
 
 def _get_place_name(pvs: dict, place_props: list) -> str:
@@ -294,14 +400,22 @@ def _get_place_name(pvs: dict, place_props: list) -> str:
     return ', '.join(place_names)
 
 
+def _get_latlng(polygon) -> (float, float):
+    if not polygon:
+        return None, None
+    xy = polygon.centroid.coords.xy
+    return (xy[1][0], xy[0][0])
+
+
 def main(_):
     if _FLAGS.debug:
         logging.set_verbosity(2)
     output_props = {}
     process_geojson_files(_FLAGS.input_geojson, _FLAGS.properties,
                           _FLAGS.key_property, _FLAGS.place_name_properties,
-                          _FLAGS.output_csv, _FLAGS.places_csv,
-                          _FLAGS.output_mcf_prefix, _FLAGS.output_mcf_pvs)
+                          _FLAGS.new_dcid_template, _FLAGS.output_csv,
+                          _FLAGS.places_csv, _FLAGS.output_mcf_prefix,
+                          _FLAGS.output_mcf_pvs, _FLAGS.simplification_levels)
 
 
 if __name__ == '__main__':
