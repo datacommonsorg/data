@@ -142,7 +142,7 @@ class PlaceNameMatcher:
     def _load_places_dict(self, place_csv: str, places_within: list):
         '''Add place names from csv to the name matcher.'''
         for file in file_util.file_get_matching(place_csv):
-            places_dict = file_util.file_load_csv_dict(file)
+            places_dict = file_util.file_load_csv_dict(file, key_column='dcid')
             places_filter = set(places_within)
             for placeid, pvs in places_dict.items():
                 # Check if the place is within places of interest
@@ -182,15 +182,18 @@ class PlaceNameMatcher:
                place_name: str,
                num_results: int = None,
                property_filters: dict = {}) -> list:
+        '''Returns dcids that match the place name.'''
         if num_results is None:
             num_results = self._config.get('num_results', 10)
         matches = self._ngram_matcher.lookup(key=place_name,
                                              num_results=num_results,
                                              config=self._config)
+        logging.debug(
+            f'Got {len(matches)} lookup results for {place_name}: {matches}')
+        # Filter results for matching properties such as typeOf.
         if not property_filters:
             property_filters = self._config.get('match_filters', None)
         if property_filters:
-            # Filter results for matching type of.
             filtered_matches = []
             for name, dcid in matches:
                 for prop, values in property_filters.items():
@@ -200,6 +203,18 @@ class PlaceNameMatcher:
                             filtered_matches.append((name, dcid))
                             break
             matches = filtered_matches
+
+        # Get unique dcids.
+        dcids = set()
+        unique_matches = []
+        for name, dcid in matches:
+            if dcid not in dcids:
+                unique_matches.append((name, dcid))
+                dcids.add(dcid)
+        matches = unique_matches
+        logging.debug(
+            f'Got {len(matches)} matches for {place_name} with {property_filters}: {matches}'
+        )
         return matches
 
     def process_csv(self, input_csv: str, name_column: str, output_csv: str):

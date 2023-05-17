@@ -396,6 +396,8 @@ def file_get_name(file_path: str,
       file name combined from path, suffix and extension.
     '''
     # Create the file directory if it doesn't exist.
+    if file_is_google_spreadsheet(file_path):
+        return file_path
     file_makedirs(file_path)
     file_prefix, ext = os.path.splitext(file_path)
     if file_prefix.endswith(suffix):
@@ -503,7 +505,6 @@ def file_load_csv_dict(filename: str,
     input_files = file_get_matching(filename)
     logging.debug(f'Loading dict from csv files: {input_files}')
     for filename in input_files:
-        logging.info(f'Loading csv data file: {filename}')
         num_rows = 0
         # Load each CSV file
         with FileIO(filename) as csvfile:
@@ -516,6 +517,9 @@ def file_load_csv_dict(filename: str,
                 if not value_column and len(reader.fieldnames) == 2:
                     # Use second column as value if there are only two columns.
                     value_column = reader.fieldnames[1]
+            logging.info(
+                f'Loading dict from file: {filename} with key: {key_column}, value: {value_column}'
+            )
             # Process each row from the csv file
             for row in reader:
                 # Get the key for the row.
@@ -538,7 +542,7 @@ def file_load_csv_dict(filename: str,
                     if isinstance(old_value, dict):
                         aggregate_dict(row, old_value, config)
                     else:
-                        aggr = config.get(prop, config).get('aggregate', 'sum')
+                        aggr = config.get(key, config).get('aggregate', 'sum')
                         value = aggregate_value(old_value, value, aggr)
                         csv_dict[key] = value
                 else:
@@ -926,7 +930,7 @@ def main(_):
 
     # Copy files: <src_file1> <src_file2>... <dst>
     args = sys.argv[1:]
-    if len(args) >= 3:
+    if len(args) < 3:
         logging.error(
             'Expected one or more source files and a destination file.')
         logging.error('Usage: python file_util.py cp <src-file> <dst-file>')

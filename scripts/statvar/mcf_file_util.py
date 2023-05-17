@@ -149,7 +149,7 @@ def add_pv_to_node(prop: str, value: str, node: dict) -> dict:
     '''
     if node is None:
         node = {}
-    if prop in node:
+    if prop in node and prop != 'Node' and prop != 'dcid':
         # Property already exists. Add value to a list if not present.
         if value and value not in node[prop]:
             node[prop] = f'{node[prop]},{value}'
@@ -394,7 +394,15 @@ def normalize_range(val: str) -> str:
     unit2 = match_dict.get('unit2', unit)
     if unit2:
         unit = unit2
-    return f'[{start} {end} {unit}]'
+    normalized_range = f'['
+    if start:
+        normalized_range += start + ' '
+    if end:
+        normalized_range += end + ' '
+    if unit:
+        normalized_range += unit
+    normalized_range += ']'
+    return normalized_range
 
 
 def normalize_value(val) -> str:

@@ -18,6 +18,8 @@ import sys
 import tempfile
 import unittest
 
+from collections import OrderedDict
+
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
@@ -50,6 +52,31 @@ class TestMCFFileUtil(unittest.TestCase):
                          'dcs:Count_Person')
         self.assertEqual(mcf_file_util.add_namespace('"abc 123"'), '"abc 123"')
         self.assertEqual(mcf_file_util.add_namespace(10), 10)
+
+    def test_normalize_mcf_node(self):
+        mcf_dict = {
+            '#': 'Comment',
+            'Node': 'dcid:Count_Person_10Years',
+            'typeOf': 'dcs:StatisticalVariable',
+            'populationType': 'schema:Person',
+            'measuredProperty': 'count',
+            'age': '[10 Years]',
+            # List of values are sorted
+            'name': ['"Count of children"', '"Child Population"'],
+            # String value with , is not sorted.
+            'description': '"people of 10 years,number of children"',
+        }
+        normalized_node = mcf_file_util.normalize_mcf_node(mcf_dict)
+        # Properties are ordered aphabetically.
+        expected_node = OrderedDict([
+            ('Node', 'dcid:Count_Person_10Years'), ('age', '[10 Years]'),
+            ('description', '"people of 10 years,number of children"'),
+            ('measuredProperty', 'dcid:count'),
+            ('name', '"Child Population","Count of children"'),
+            ('populationType', 'dcid:Person'),
+            ('typeOf', 'dcid:StatisticalVariable')
+        ])
+        self.assertEqual(expected_node, normalized_node)
 
     def test_load_mcf_file(self):
         mcf_nodes = mcf_file_util.load_mcf_nodes(

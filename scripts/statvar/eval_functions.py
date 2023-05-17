@@ -41,7 +41,7 @@ def format_date(date_str: str, format_str: str = '%Y-%m-%d') -> str:
     date formatted by the format_str.
     In case of parse error, returns the original date_str.
   Raises
-    NameError in case of any expcetions in parsing.
+    NameError in case of any exceptions in parsing.
     This will cause any Eval using it to fail.
   '''
     try:

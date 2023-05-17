@@ -103,6 +103,8 @@ def dc_api_wrapper(function,
 def dc_api_batched_wrapper(function,
                            dcids: list,
                            args: dict,
+                           dcid_arg_kw:str = 'dcid',
+                           headers: dict = {},
                            config: dict = None) -> dict:
     '''A wrapper for DC API on dcids with batching support.
     Returns the dictionary result for the function call across all arguments.

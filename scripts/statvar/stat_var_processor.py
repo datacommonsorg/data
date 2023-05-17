@@ -53,8 +53,8 @@ from typing import Union
 import process_http_server
 
 # uncomment to run pprof
-os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
-from pypprof.net_http import start_pprof_server
+#os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
+#from pypprof.net_http import start_pprof_server
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -291,18 +291,33 @@ class PropertyValueMapper:
                                         skipinitialspace=True,
                                         escapechar='\\')
                 for row in csv_reader:
+                    # Drop trailing empty columns in the row
+                    last_col = len(row) - 1
+                    while last_col >= 0 and row[last_col].strip() == '':
+                        last_col -= 1
+                    row = row[:last_col + 1]
                     if not row:
                         continue
                     key = row[0]
-                    if row[0] in self._config.get_configs():
-                        # Add to the config.
+                    if key in self._config.get_configs():
+                        # Add value to the config with same type as original.
                         value = ','.join(row[1:])
-                        self._config.set_config(key, value)
-                        logging.debug(f'Setting config {key}={value}')
+                        config_flags.set_config_value(key, value, self._config)
                     else:
                         # Row is a pv map
+                        pvs_list = row[1:]
+                        if len(pvs_list) == 1:
+                            # PVs list has no property, just a value.
+                            # Use the namespace as the property
+                            pvs_list = [namespace]
+                            pvs_list.append(row[1])
+                        if len(pvs_list) % 2 != 0:
+                            logging.fatal(
+                                f'Invalid list of property value: {row} in {filename}'
+                            )
                         pvs = {
-                            row[i]: row[i + 1] for i in range(1, len(row), 2)
+                            pvs_list[i].strip(): pvs_list[i + 1].strip()
+                            for i in range(0, len(pvs_list), 2)
                         }
                         pv_map_input[key] = pvs
         else:
@@ -668,6 +683,12 @@ class StatVarsMap:
         self._statvar_obs_props = dict()
         # Cache for DC API lookups.
         self._dc_api_ids_cache = {}
+        # Mapping of statvar DCIDs to be renamed.
+        self._statvar_dcid_remap = file_util.file_load_csv_dict(
+            filename=self._config.get('statvar_dcid_remap_csv', ''),
+            value_column='dcid')
+        logging.info(
+            f'Loaded remapped statvar dcid: {self._statvar_dcid_remap}')
 
     def add_default_pvs(self, default_pvs: dict, pvs: dict) -> dict:
         '''Add default values for any missing PVs.
@@ -825,40 +846,54 @@ class StatVarsMap:
         pvs = self._get_exisisting_statvar(pvs)
         dcid = pvs.get('dcid', pvs.get('Node', ''))
         if dcid:
-            logging.debug(f'Resuing existing statvar {dcid} for {pvs}')
+            logging.level_debug() and logging.debug(
+                f'Reusing existing statvar {dcid} for {pvs}')
             return dcid
 
         # Use the statvar_dcid_generator for statvars with defined properties.
         if not self._config.get(
                 'schemaless',
                 False) or not self._get_schemaless_statvar_props(pvs):
-            return get_statvar_dcid(pvs)
-        # Create a new dcid from PVs.
-        dcid_terms = []
-        props = list(pvs.keys())
-        dcid_ignore_values = self._config.get('statvar_dcid_ignore_values', [])
-        dcid_ignore_props = self._config.get('statvar_dcid_ignore_properties',
-                                             ['description', 'name'])
-        for p in self._config.get('default_statvar_pvs', {}).keys():
-            if p in props and p not in dcid_ignore_props:
-                props.remove(p)
-                value = strip_namespace(pvs[p])
-                if value and value not in dcid_ignore_values:
-                    dcid_terms.append(self._get_dcid_term_for_pv(p, value))
-        dcid_suffixes = []
-        if 'measurementDenominator' in props:
-            dcid_suffixes.append('AsAFractionOf')
-            dcid_suffixes.append(strip_namespace(pvs['measurementDenominator']))
-            props.remove('measurementDenominator')
-        for p in sorted(props, key=str.casefold):
-            if p not in dcid_ignore_props:
-                value = pvs[p]
-                if _is_valid_property(p, self._config.get(
-                        'schemaless', False)) and _is_valid_value(value):
-                    dcid_terms.append(self._get_dcid_term_for_pv(p, value))
-        dcid_terms.extend(dcid_suffixes)
-        dcid = re.sub(r'[^A-Za-z_0-9/_]+', '_', '_'.join(dcid_terms))
-        dcid = re.sub(r'_$', '', dcid)
+            dcid = get_statvar_dcid(pvs)
+        if not dcid:
+            # Create a new dcid from PVs.
+            dcid_terms = []
+            props = list(pvs.keys())
+            dcid_ignore_values = self._config.get('statvar_dcid_ignore_values',
+                                                  [])
+            dcid_ignore_props = self._config.get(
+                'statvar_dcid_ignore_properties', ['description', 'name'])
+            for p in self._config.get('default_statvar_pvs', {}).keys():
+                if p in props and p not in dcid_ignore_props:
+                    props.remove(p)
+                    value = strip_namespace(pvs[p])
+                    if value and value not in dcid_ignore_values:
+                        dcid_terms.append(self._get_dcid_term_for_pv(p, value))
+            dcid_suffixes = []
+            if 'measurementDenominator' in props:
+                dcid_suffixes.append('AsAFractionOf')
+                dcid_suffixes.append(
+                    strip_namespace(pvs['measurementDenominator']))
+                props.remove('measurementDenominator')
+            for p in sorted(props, key=str.casefold):
+                if p not in dcid_ignore_props:
+                    value = pvs[p]
+                    if _is_valid_property(
+                            p, self._config.get(
+                                'schemaless',
+                                False)) and _is_valid_value(value):
+                        dcid_terms.append(self._get_dcid_term_for_pv(p, value))
+            dcid_terms.extend(dcid_suffixes)
+            dcid = re.sub(r'[^A-Za-z_0-9/_]+', '_', '_'.join(dcid_terms))
+            dcid = re.sub(r'_$', '', dcid)
+
+        # Check if the dcid is remapped.
+        remap_dcid = self._statvar_dcid_remap.get(strip_namespace(dcid), '')
+        if remap_dcid:
+            logging.level_debug() and logging.debug(
+                f'Remapped {dcid} to {remap_dcid} for {pvs}')
+            self._counters.add_counter(f'remapped-statvar-dcid', 1, remap_dcid)
+            dcid = remap_dcid
         pvs['Node'] = add_namespace(dcid)
         logging.level_debug() and logging.debug(
             f'Generated dcid {dcid} for {pvs}')
@@ -1637,7 +1672,8 @@ class StatVarDataProcessor:
                 if isinstance(mapped_columns, str):
                     mapped_columns = mapped_columns.split(',')
                 elif isinstance(mapped_columns, int):
-                    mapped_columns_indices.append(mapped_columns)
+                    mapped_columns_indices.append(
+                        list(range(1, mapped_columns + 1)))
             for col in mapped_columns:
                 if isinstance(col, str) and col:
                     if col[0].isalpha():
@@ -1664,9 +1700,10 @@ class StatVarDataProcessor:
                         f'Setting config to list: {prop}={value_list}')
 
         # Enable place resolution if place_csv is provided.
-        if self._config.get('maps_api_key', '') or self._config.get(
-                'places_csv', '') or self._config.get('places_resolved_csv',
-                                                      ''):
+        if self._config.get('dc_api_key', '') or self._config.get(
+                'maps_api_key', '') or self._config.get(
+                    'places_csv', '') or self._config.get(
+                        'places_resolved_csv', ''):
             logging.info(f'Enabling place name resolution: resolve_places=True')
             self._config.set_config('resolve_places', True)
         logging.level_debug() and logging.debug(
@@ -1930,7 +1967,8 @@ class StatVarDataProcessor:
                     dialect = csv.Sniffer().sniff(csvfile.read(5024))
                 except csv.Error:
                     dialect = self._config.get('input_data_dialect', 'excel')
-                max_rows_per_file = self._config.get('input_rows', sys.maxsize)
+                max_rows_per_file = int(
+                    self._config.get('input_rows', sys.maxsize))
                 csvfile.seek(0)
                 reader = csv.reader(csvfile, dialect)
                 line_number = 0
@@ -1997,7 +2035,7 @@ class StatVarDataProcessor:
         if column_header and column_header in self._pv_mapper.get_pv_map():
             # Column header has a PV mapping file. Allow PV lookup.
             return True
-        return lookup_pv_rows <= 0 and lookup_pv_columns <= 0
+        return not lookup_pv_rows and not lookup_pv_columns
 
     def is_header_index(self, row_index: int, column_index: int) -> bool:
         '''Returns True if the row and columns can be a header.'''
@@ -2388,7 +2426,7 @@ class StatVarDataProcessor:
             self._counters.add_counter(f'warning-svobs-missing-place', 1,
                                        pvs.get('variableMeasured', ''))
             return False
-        if ':' in place:
+        if _is_place_dcid(place):
             # Place is a resolved dcid or a place property.
             return True
 
@@ -2400,12 +2438,12 @@ class StatVarDataProcessor:
             self._pv_mapper.get_all_pvs_for_value(place, 'observationAbout'))
         if place_pvs:
             place_dcid = place_pvs.get('observationAbout', '')
-        if not _has_namespace(place_dcid):
+        if not _is_place_dcid(place_dcid):
             # Place is not resolved yet. Try resolving through Maps API.
             if self._config.get('resolve_places', False):
                 resolved_place = self._place_resolver.resolve_name({
                     place_dcid: {
-                        'name':
+                        'place_name':
                             place_dcid,
                         'country':
                             pvs.get('#country',
@@ -2420,10 +2458,11 @@ class StatVarDataProcessor:
                 resolved_dcid = resolved_place.get(place_dcid,
                                                    {}).get('dcid', None)
                 logging.level_debug() and logging.debug(
-                    f'Got place dcid: {resolved_dcid} for place {place}')
+                    f'Got place dcid: {resolved_dcid} for place {place} from {resolved_place}'
+                )
                 if resolved_dcid:
                     place_dcid = add_namespace(resolved_dcid)
-        if place_dcid:
+        if place_dcid and ':' in place_dcid:
             pvs['observationAbout'] = place_dcid
             logging.level_debug() and logging.debug(
                 f'Resolved place {place} to {place_dcid}')
@@ -2431,8 +2470,7 @@ class StatVarDataProcessor:
             return True
 
         logging.warning(f'Unable to resolve place {place} in {pvs}')
-        self._counters.add_counter(f'warning-unresolved-place', 1,
-                                   pvs.get('variableMeasured', ''))
+        self._counters.add_counter(f'error-unresolved-place', 1, place_dcid)
         return False
 
     def write_outputs(self, output_path: str):
@@ -2457,7 +2495,7 @@ class StatVarDataProcessor:
             self._statvars_map.write_statvar_obs_csv(
                 output_csv,
                 mode=self._config.get('output_csv_mode', 'w'),
-                columns=self._config.get('output_csv_columns', None),
+                columns=self._config.get('output_columns', []),
                 output_tmcf_file=output_tmcf_file)
         self._counters.print_counters()
 
@@ -2473,6 +2511,18 @@ class StatVarDataProcessor:
         if self._config.get('generate_tmcf', True):
             outputs.append(output_path + '.tmcf')
         return outputs
+
+
+def _is_place_dcid(place: str) -> bool:
+    '''Returns True if the input string is a dcid without extra characters.'''
+    if place and isinstance(place, str):
+        # Check if all characters are alpha or digits.
+        for c in place:
+            if not c.isalnum():
+                if c != '/' and c != ':' and c != '_':
+                    return False
+        return '/' in place
+    return False
 
 
 def download_csv_from_url(urls: list, data_path: str) -> list:
@@ -2697,12 +2747,13 @@ def process(data_processor_class: StatVarDataProcessor,
 
 def main(_):
     # uncomment to run pprof
-    start_pprof_server(port=8123)
+    #start_pprof_server(port=8123)
 
     # Launch a web server with a form for commandline args
     # if the command line flag --http_port is set.
     process_http_server.run_http_server(http_port=_FLAGS.http_port,
-                                        script=__file__, module=config_flags)
+                                        script=__file__,
+                                        module=config_flags)
     process(StatVarDataProcessor,
             input_data=_FLAGS.input_data,
             output_path=_FLAGS.output_path,

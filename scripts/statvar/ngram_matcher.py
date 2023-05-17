@@ -59,7 +59,6 @@ class NgramMatcher:
         # { '<ngram>': { (id1, pos1), (id2, pos2), ...}, ...}
         self._ngram_dict = {}
 
-
     def add_key_value(self, key: str, value):
         '''Add a key and value.
     When the key matches a lookup string, the key and corresponding value is returned.
@@ -125,8 +124,9 @@ class NgramMatcher:
 
         # Order key_index by decreasing number of matches.
         key_len = len(normalized_key)
-        match_indices.sort(key=lambda x: self._get_ngram_match_score(x[1], key_len),
-                           reverse=True)
+        match_indices.sort(
+            key=lambda x: self._get_ngram_match_score(x[1], key_len),
+            reverse=True)
         _DEBUG and logging.debug(f'Sorted matches for {key}: {match_indices}')
 
         # Collect results in sorted order
@@ -148,8 +148,8 @@ class NgramMatcher:
 
     def _get_ngrams(self, key: str) -> list:
         '''Returns a list of ngrams for the key.'''
-        ngrams = list()
         normalized_key = self._normalize_string(key)
+        ngrams = normalized_key.split(' ')
         max_index = max(len(normalized_key) - self._ngram_size, 0) + 1
         for pos in range(max_index):
             ngram = normalized_key[pos:pos + self._ngram_size]
@@ -161,6 +161,7 @@ class NgramMatcher:
         '''Adds the key into the ngrams index.'''
         # Remove extra characters and convert to lower case.
         normalized_key = self._normalize_string(key)
+        # index by all unique ngrams in the key
         ngrams = self._get_ngrams(normalized_key)
         for ngram in ngrams:
             if ngram not in self._ngram_dict:

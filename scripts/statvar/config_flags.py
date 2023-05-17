@@ -32,6 +32,7 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 from config_map import ConfigMap
+from mcf_file_util import get_numeric_value
 
 _FLAGS = flags.FLAGS
 
@@ -77,14 +78,15 @@ flags.DEFINE_integer('log_level', logging.INFO,
                      'Log level messages to be shown.')
 
 # Flags for place name resolution
+flags.DEFINE_string('dc_api_key', '',
+                    'DataCommons v2 API key used for APIs such as v2/resolve')
 flags.DEFINE_string('maps_api_key', '',
                     'Maps API key for place lookup by name.')
 flags.DEFINE_list('places_csv', [],
                   'CSV file with place names and dcids to match.')
 flags.DEFINE_string('places_resolved_csv', '',
                     'CSV file with resolved place names and dcids to match.')
-flags.DEFINE_list('place_type', [],
-                  'List of places types for name reoslution.')
+flags.DEFINE_list('place_type', [], 'List of places types for name reoslution.')
 flags.DEFINE_list('places_within', [],
                   'List of places types for name reoslution.')
 
@@ -112,8 +114,8 @@ _DEFAULT_CONFIG = {
         '#ErrorDuplicateSVObs',
     'duplicate_statvars_key':
         '#ErrorDuplicateStatVar',
-    'drop_statvars_without_obs':
-        True,
+    'drop_statvars_without_svobs':
+        1,
     # Aggregate values for duplicate SVObs with the same statvar, place, date
     # and units with one of the following functions:
     #   sum: Add all values.
@@ -171,8 +173,15 @@ _DEFAULT_CONFIG = {
     # Settings to compare StatVars with existing statvars to reuse dcids.
     'existing_statvar_mcf':
         _FLAGS.existing_statvar_mcf,
-    'statvar_fingerprint_ignore_props': ['dcid', 'name', 'description', 'provenance', 'memberOf'],
+    'statvar_fingerprint_ignore_props': [
+        'dcid', 'name', 'description', 'provenance', 'memberOf'
+    ],
     'statvar_fingerprint_include_props': [],
+    # File with generated DCIDs remapped to existing dcids.
+    # This is used for schemaless statvars that can't be matched with
+    # existing statvars using property:value
+    'statvar_dcid_remap_csv':
+        '',
 
     # Use numeric data in any column as a value.
     # It may still be dropped if no SVObs can be constructed out of it.
@@ -181,8 +190,10 @@ _DEFAULT_CONFIG = {
     'use_all_numeric_data_values':
         False,
     # Number format in input.
-    'number_decimal': '.', # decimal character
-    'number_seperator': ', ', # seperators stripped.
+    'number_decimal':
+        '.',  # decimal character
+    'number_separator':
+        ', ',  # separators stripped.
 
     # Word separator, used to split words into phrases for PV map lookups.
     'word_delimiter':
@@ -191,20 +202,28 @@ _DEFAULT_CONFIG = {
     # column name.
     'default_pv_maps': ['GLOBAL'],
     # Row and column indices with content to be looked up in pv_maps.
-    'mapped_rows': 0,
-    'mapped_columns': 0,
+    'mapped_rows':
+        0,
+    'mapped_columns': [],
     'show_counters_every_n':
         0,
     'show_counters_every_sec':
         30,
     # Settings for place name resolution
-    'maps_api_key': _FLAGS.maps_api_key,
+    'dc_api_key':
+        _FLAGS.dc_api_key,
+    'maps_api_key':
+        _FLAGS.maps_api_key,
     'resolve_places':
         False,
-    'places_csv': _FLAGS.places_csv,
-    'places_resolved_csv': _FLAGS.places_resolved_csv,
-    'place_type': _FLAGS.place_type,
-    'places_within': _FLAGS.places_within,
+    'places_csv':
+        _FLAGS.places_csv,
+    'places_resolved_csv':
+        _FLAGS.places_resolved_csv,
+    'place_type':
+        _FLAGS.place_type,
+    'places_within':
+        _FLAGS.places_within,
 
     # Output options
     'generate_statvar_mcf':
@@ -213,8 +232,7 @@ _DEFAULT_CONFIG = {
         True,  # Generate CSV with SVObs
     'output_csv_mode':
         'w',  # Overwrite output CSV file.
-    'output_csv_columns':
-        None,  # Emit all SVObs PVs into output csv
+    'output_columns': [],  # Emit all SVObs PVs into output csv
     'generate_tmcf':
         True,  # Generate tMCF for CSV columns
     'skip_constant_csv_columns':
@@ -263,6 +281,57 @@ def get_config_from_flags(filename: str = None) -> ConfigMap:
         logging.set_verbosity(_FLAGS.log_level)
     config_dict = dict(_DEFAULT_CONFIG)
     if isinstance(filename, dict):
-      config_dict.update(filename)
-      filename = None
+        config_dict.update(filename)
+        filename = None
     return ConfigMap(config_dict=config_dict, filename=filename)
+
+
+def set_config_value(param: str, value: str, config: dict):
+    '''Set the config value for the param with the original type.'''
+    if param is None:
+        return
+    if isinstance(config, ConfigMap):
+        config = config.get_configs()
+    orig_value = config.get(param)
+    if orig_value is not None:
+        value = _get_value_type(value, type(orig_value))
+    config[param] = value
+
+
+def update_config(new_config: dict, config: dict) -> dict:
+    '''Add values from the new_config into config and return the updated dict.'''
+    for key, value in new_config.items():
+        set_config_value(key, value, config)
+    return config
+
+
+def _get_value_type(value: str, value_type: type):
+    '''Returns value in the type of value_type.'''
+    if value is None:
+        return value
+    if value_type is list:
+        # Convert value to list
+        if isinstance(value, list):
+            return value
+        return [v.strip() for v in str(value).split(',')]
+    if value_type is str:
+        return str(value).strip()
+    if value_type is int or value_type is float:
+        return get_numeric_value(value)
+    if value_type is bool:
+        return get_numeric_value(value) > 0
+    if value_type is dict or value_type is OrderedDict:
+        if isinstance(value, str):
+            logging.info(f'Converting {value} to dict')
+            value = value.strip()
+            if value and value[0] == '{':
+                value = ast.literal_eval(value)
+            elif '=' in value:
+                # Dict is a list of key=value, pairs.
+                pv = {}
+                for prop_value in value.split(','):
+                    prop, val = prop_value.split('=', 1)
+                    prop = prop.strip()
+                    pv[prop] = val.strip()
+                value = pv
+    return value

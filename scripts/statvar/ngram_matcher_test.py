@@ -20,20 +20,22 @@ from absl import logging
 
 import ngram_matcher
 
+
 class NgramMatcherTest(unittest.TestCase):
 
-  def setUp(self):
-    ngram_matcher._DEBUG = True
-    logging.set_verbosity(2)
+    def setUp(self):
+        ngram_matcher._DEBUG = True
+        logging.set_verbosity(2)
 
-  def test_lookup_string(self):
-    matcher = ngram_matcher.NgramMatcher(ngram_size=4)
-    matcher.add_key_value('Test Key 1', 1)
-    matcher.add_key_value('TESTKeyTwo', 'two')
-    matches = matcher.lookup('Test')
-    self.assertEqual([('Test Key 1', 1), ('TESTKeyTwo', 'two')], matches)
-    self.assertTrue(matcher.lookup('Tester'))
-    self.assertFalse(matcher.lookup('ABCDEF'))
+    def test_lookup_string(self):
+        matcher = ngram_matcher.NgramMatcher(ngram_size=4)
+        matcher.add_key_value('Test Key 1', 1)
+        matcher.add_key_value('TESTKeyTwo', 'two')
+        matches = matcher.lookup('Test')
+        self.assertEqual([('Test Key 1', 1), ('TESTKeyTwo', 'two')], matches)
+        self.assertTrue(matcher.lookup('Tester'))
+        self.assertFalse(matcher.lookup('ABCDEF'))
+
 
 if __name__ == '__main__':
     app.run()

@@ -59,7 +59,6 @@ instead of a changed node.
 
 import difflib
 import os
-import pprint
 import sys
 
 from absl import app
