@@ -1,13 +1,22 @@
 Node: E:atc_output->E1
+typeOf: dcs:Quantity
+dcid: C:atc_output->quantity_dcid
+name: C:atc_output->quantity_name
+unitOfMeasure: E2
+value: C:atc_output->ddd
+
+Node: E:atc_output->E2
+typeOf: dcs:UnitOfMeasure
+dcid: C:atc_output->uom
+
+Node: E:atc_output->E3
 typeOf: dcs:AnatomicalTherapeuticChemicalCode
 dcid: C:atc_output->dcid
 name: C:atc_output->atc_name
-averageDailyDosage: C:atc_output->ddd
-unitOfMeasure: C:atc_output->uom
-routeOfAdministration: C:atc_output->adm_r
+averageDailyDosage: E1
+administrationRoute: C:atc_output->adm_r_enum
+atcCode: C:atc_output->atc_code
+dosageForm: C:atc_output->dosageForm
 note: C:atc_output->note
-anatomicalTherapeuticChemicalCodeLevel1: C:atc_output->atc_level1
-anatomicalTherapeuticChemicalCodeLevel2: C:atc_output->atc_level2
-anatomicalTherapeuticChemicalCodeLevel3: C:atc_output->atc_level3
-anatomicalTherapeuticChemicalCodeLevel4: C:atc_output->atc_level4
-anatomicalTherapeuticChemicalCodeLevel5: C:atc_output->atc_level5
+specializationOf: C:atc_output->specialization
+
