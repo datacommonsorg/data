@@ -47,63 +47,6 @@ class DictUtilsTest(unittest.TestCase):
         'string_key2': 'Value1',
     }
 
-    def setUp(self):
-        return
-
-    def test_dict_aggregate_values(self):
-        '''Test aggreation of dictionaries with dict_aggregate_test().'''
-        dict2 = {
-            'int_key1': 11,
-            'int_key2': 2,
-            'float_key2': 4.56,
-            'float_key3': 44.44,
-            'string_key1': 'Value2',
-            'string_key2': 'Value1,StrValue2',
-            'string_key3': 'New String',
-        }
-
-        config = {
-            'aggregate': 'sum',  # default aggregate
-            'int_key2': {
-                'aggregate': 'max'
-            },
-            'float_key2': {
-                'aggregate': 'min'
-            },
-            'float_key3': {
-                'aggregate': 'mean'
-            },
-            'string_key2': {
-                'aggregate': 'list'
-            },
-        }
-
-        merged_dict = dict(dict2)
-        utils.dict_aggregate_values(self.dict1, merged_dict, config)
-        expected_dict = {
-            'int_key1': self.dict1['int_key1'] + dict2['int_key1'],
-            'int_key2': max(self.dict1['int_key2'], dict2['int_key2']),
-            'int_key3': self.dict1['int_key3'],
-            'float_key1': self.dict1['float_key1'],
-            'float_key2': min(self.dict1['float_key2'], dict2['float_key2']),
-            'float_key3': (self.dict1['float_key3'] + dict2['float_key3']) / 2,
-            '#float_key3:count': 2,
-            'string_key1': 'Value2String Value',  # sum
-            'string_key2': 'StrValue2,Value1',  # list
-            'string_key3': 'New String',
-        }
-        self.assertEqual(expected_dict, merged_dict)
-
-        utils.dict_aggregate_values(dict2, merged_dict, config)
-        expected_dict['int_key1'] += dict2['int_key1']
-        expected_dict['float_key3'] = (self.dict1['float_key3'] +
-                                       2 * dict2['float_key3']) / 3
-        expected_dict['#float_key3:count'] = 3
-        expected_dict['string_key1'] = 'Value2String ValueValue2'
-        expected_dict['string_key2'] = 'StrValue2,Value1'
-        expected_dict['string_key3'] = 'New StringNew String'
-        self.assertEqual(expected_dict, merged_dict)
-
     def test_dict_filter_values(self):
         filter_config = {
             'int_key1': {
@@ -296,52 +239,6 @@ class GridCellUtilsTest(unittest.TestCase):
                 utils.place_to_polygon('s2CellId/0x1128250000000000')))
 
 
-class FileUtilsTest(unittest.TestCase):
-
-    def test_file_get_matching(self):
-        files = utils.file_get_matching(os.path.join(_TESTDIR, 'sample*.csv'))
-        self.assertTrue(len(files) > 2)
-        for file in files:
-            self.assertTrue(os.path.exists(file))
-
-    def test_file_get_estimate_num_rows(self):
-        files = utils.file_get_matching(os.path.join(_TESTDIR, 'sample*.csv'))
-        for file in files:
-            estimate_rows = utils.file_estimate_num_rows(file)
-            with open(file, 'r') as fp:
-                num_lines = len(fp.readlines())
-                self.assertTrue(
-                    math.isclose(num_lines, estimate_rows, rel_tol=1))
-
-    def test_file_load_csv_dict(self):
-        csv_dict = utils.file_load_csv_dict(
-            os.path.join(_TESTDIR, 'sample_output.csv'), 's2CellId')
-        self.assertTrue(len(csv_dict) > 0)
-        test_key = 'dcid:s2CellId/0x39925b1c00000000'
-        self.assertTrue(test_key in csv_dict)
-        self.assertEqual('1', csv_dict[test_key]['water'])
-        self.assertEqual('13', csv_dict[test_key]['s2Level'])
-
-    def test_file_write_load_py_dict(self):
-        test_dict = {'test_key': 'test_value', 'int_key': 10, 'list': [1, 2, 3]}
-        # read/write dict as a py file
-        fd, tmp_py_filename = tempfile.mkstemp(suffix='.py')
-        utils.file_write_py_dict(test_dict, tmp_py_filename)
-        self.assertTrue(os.path.getsize(tmp_py_filename) > 10)
-        read_dict = utils.file_load_py_dict(tmp_py_filename)
-        self.assertEqual(test_dict, read_dict)
-        # Repeat test with pkl file.
-        fd, tmp_pkl_filename = tempfile.mkstemp(suffix='.pkl')
-        utils.file_write_py_dict(test_dict, tmp_pkl_filename)
-        self.assertTrue(os.path.getsize(tmp_pkl_filename) > 10)
-        read_pkl_dict = utils.file_load_py_dict(tmp_pkl_filename)
-        self.assertEqual(test_dict, read_pkl_dict)
-        # check pkl and py files are different.
-        self.assertTrue(
-            os.path.getsize(tmp_pkl_filename) != os.path.getsize(
-                tmp_py_filename))
-
-
 class StrUtilsTest(unittest.TestCase):
 
     def test_strip_namespace(self):
@@ -373,3 +270,36 @@ class StrUtilsTest(unittest.TestCase):
         self.assertEqual(2.34, utils.str_get_numeric_value([2.34, 5.67]))
         self.assertEqual(None, utils.str_get_numeric_value('abc'))
         self.assertEqual(None, utils.str_get_numeric_value('123abc'))
+
+
+class DateUtilsTest(unittest.TestCase):
+
+    def test_date_parse_time_period(self):
+        self.assertEqual((1, 'days'), utils.date_parse_time_period('P1D'))
+        self.assertEqual((10, 'days'), utils.date_parse_time_period('10D'))
+        self.assertEqual((-7, 'days'), utils.date_parse_time_period('-7D'))
+
+        self.assertEqual((1, 'months'), utils.date_parse_time_period('P1M'))
+        self.assertEqual((3, 'months'), utils.date_parse_time_period('3M'))
+
+        self.assertEqual((1, 'years'), utils.date_parse_time_period('P1Y'))
+        self.assertEqual((5, 'years'), utils.date_parse_time_period('5Y'))
+
+    def test_date_advance_by_time_period(self):
+        self.assertEqual(
+            utils.date_today(),
+            utils.date_advance_by_period(utils.date_yesterday(), 'P1D'))
+        self.assertEqual('2023-04-10',
+                         utils.date_advance_by_period('2023-04-20', 'P-10D'))
+        self.assertEqual(
+            '2023-06', utils.date_advance_by_period('2023-04', 'P2M', '%Y-%m'))
+        self.assertEqual('2033',
+                         utils.date_advance_by_period('2023', '10Y', '%Y'))
+
+    def test_date_format_by_time_period(self):
+        self.assertEqual('2023-04-10',
+                         utils.date_format_by_time_period('2023-04-10', 'P1D'))
+        self.assertEqual('2022-04',
+                         utils.date_format_by_time_period('2022-04-10', 'P3M'))
+        self.assertEqual('2021',
+                         utils.date_format_by_time_period('2021-01-10', '1Y'))

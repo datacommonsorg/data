@@ -24,11 +24,11 @@ from typing import Dict
 
 from google.cloud import scheduler_v1
 from google.protobuf import json_format
-from google.api_core.exceptions import AlreadyExists
+from google.api_core.exceptions import AlreadyExists, NotFound
 
 GKE_SERVICE_DOMAIN = os.getenv('GKE_SERVICE_DOMAIN', 'import.datacommons.dev')
-GKE_CALLER_SERVICE_ACCOUNT = os.getenv('GKE_CALLER_SERVICE_ACCOUNT')
-GKE_OAUTH_AUDIENCE = os.getenv('GKE_OAUTH_AUDIENCE')
+GKE_CALLER_SERVICE_ACCOUNT = os.getenv('CLOUD_SCHEDULER_CALLER_SA')
+GKE_OAUTH_AUDIENCE = os.getenv('CLOUD_SCHEDULER_CALLER_OAUTH_AUDIENCE')
 
 
 def _base_job_request(absolute_import_name, schedule: str):
@@ -125,6 +125,26 @@ def create_or_update_job(project_id, location: str, job: Dict) -> Dict:
         scheduled['http_target']['body'] = json.loads(job.http_target.body)
 
     return scheduled
+
+
+def trigger_job(project_id, location, absolute_import_name, job_id_suffix: str):
+    """Triggers a Cloud Scheduler job.
+
+    This is equivalent to the "Force run" action on the UI.
+    Note that there is no way to know the status of the actual job
+    triggered from Cloud Scheduler API.
+
+    Callers should wait for an atribtuary amount of time, up to 30min.
+    """
+    client = scheduler_v1.CloudSchedulerClient()
+    job_id = f'{_fix_absolute_import_name(absolute_import_name)}{job_id_suffix}'
+    job_name = f'projects/{project_id}/locations/{location}/jobs/{job_id}'
+    try:
+        job = client.run_job(scheduler_v1.RunJobRequest(name=job_name))
+    except NotFound:
+        raise Exception('Attempted to trigger non-existing job %s.'
+                        'Please check Cloud Scheduler on UI to see '
+                        'if the job exists' % job_name)
 
 
 def _fix_absolute_import_name(absolute_import_name: str) -> str:
