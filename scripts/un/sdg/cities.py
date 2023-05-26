@@ -21,7 +21,7 @@ we tried manually searching for the dcid and filled these into the file.
 There are a few city names that are still missing - these are left blank.
 **This script ideally shouldn't need to be run again.**
 
-Usage: python3 cities.py
+Usage: python3 cities.py <API_KEY>
 '''
 import csv
 import requests
@@ -29,6 +29,47 @@ import os
 import sys
 
 BATCH = 20
+
+
+def get_cities(json, api_key):
+    '''Applies find entities API for given json.
+
+    Args:
+        json: Input json.
+        api_key: API key.
+
+    Returns:
+        API response.
+    '''
+    return requests.post('https://api.datacommons.org/v1/bulk/find/entities',
+                         headers={
+                             'X-API-Key': api_key
+                         },
+                         json=json).json()
+
+
+def write_cities(file, cities, api_key):
+    '''Writes city dcids and names to file.
+
+    Args:
+        file: Output file path.
+        cities: List of city dcids to process. 
+        api_key: API key.
+    '''
+    with open(file, 'w') as f:
+        writer = csv.DictWriter(f, fieldnames=['name', 'dcid'])
+        writer.writeheader()
+        for i in range(0, len(cities), BATCH):
+            json = {
+                'entities': [{
+                    'description': city
+                } for city in cities[i:i + BATCH]]
+            }
+            response = get_cities(json, api_key)
+            for entity in response['entities']:
+                dcid = entity['dcids'][0] if 'dcids' in entity else ''
+                writer.writerow({'name': entity['description'], 'dcid': dcid})
+
 
 if __name__ == '__main__':
     cities = set()
@@ -38,23 +79,8 @@ if __name__ == '__main__':
             reader = csv.DictReader(f)
             if '[Cities]' in reader.fieldnames:
                 for row in reader:
-                    cities.add(row['[Cities]'].replace('_', ' ').title() + ', ' +
-                            row['GeoAreaName'])
+                    cities.add(row['[Cities]'].replace('_', ' ').title() +
+                               ', ' + row['GeoAreaName'])
     cities = sorted(cities)
 
-    with open('preprocessed/cities.csv', 'w') as f:
-        writer = csv.DictWriter(f, fieldnames=['name', 'dcid'])
-        writer.writeheader()
-        for i in range(0, len(cities), BATCH):
-            json = {
-                'entities': [{
-                    'description': city
-                } for city in cities[i:i + BATCH]]
-            }
-            response = requests.post(
-                'https://api.datacommons.org/v1/bulk/find/entities',
-                headers={'X-API-Key': sys.argv[1]},
-                json=json).json()
-            for entity in response['entities']:
-                dcid = entity['dcids'][0] if 'dcids' in entity else ''
-                writer.writerow({'name': entity['description'], 'dcid': dcid})
+    write_cities('preprocessed/cities.csv', cities, sys.argv[1])
