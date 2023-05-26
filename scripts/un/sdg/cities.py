@@ -1,34 +1,60 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+'''Finds dcids for cities in input files.
+
+Produces:
+* preprocessed/cities.csv: dcid for each city name
+
+Note: For cities where the find entities API did not return a dcid,
+we tried manually searching for the dcid and filled these into the file.
+There are a few city names that are still missing - these are left blank.
+**This script ideally shouldn't need to be run again.**
+
+Usage: python3 cities.py
+'''
 import csv
 import requests
 import os
+import sys
 
 BATCH = 20
 
-cities = set()
-for file in sorted(os.listdir('input')):
-    code = file.removesuffix('.csv')
-    with open('input/' + file) as f:
-        reader = csv.DictReader(f)
-        if '[Cities]' in reader.fieldnames:
-            for row in reader:
-                cities.add(row['[Cities]'].replace('_', ' ').title() + ', ' +
-                           row['GeoAreaName'])
-cities = sorted(cities)
+if __name__ == '__main__':
+    cities = set()
+    for file in sorted(os.listdir('input')):
+        code = file.removesuffix('.csv')
+        with open('input/' + file) as f:
+            reader = csv.DictReader(f)
+            if '[Cities]' in reader.fieldnames:
+                for row in reader:
+                    cities.add(row['[Cities]'].replace('_', ' ').title() + ', ' +
+                            row['GeoAreaName'])
+    cities = sorted(cities)
 
-with open('cities.csv', 'w') as f:
-    writer = csv.DictWriter(f, fieldnames=['name', 'dcid'])
-    writer.writeheader()
-    headers = {'X-API-Key': 'AIzaSyCTI4Xz-UW_G2Q2RfknhcfdAnTHq5X5XuI'}
-    for i in range(0, len(cities), BATCH):
-        json = {
-            'entities': [{
-                'description': city
-            } for city in cities[i:i + BATCH]]
-        }
-        response = requests.post(
-            'https://api.datacommons.org/v1/bulk/find/entities',
-            headers=headers,
-            json=json).json()
-        for entity in response['entities']:
-            dcid = entity['dcids'][0] if 'dcids' in entity else ''
-            writer.writerow({'name': entity['description'], 'dcid': dcid})
+    with open('preprocessed/cities.csv', 'w') as f:
+        writer = csv.DictWriter(f, fieldnames=['name', 'dcid'])
+        writer.writeheader()
+        for i in range(0, len(cities), BATCH):
+            json = {
+                'entities': [{
+                    'description': city
+                } for city in cities[i:i + BATCH]]
+            }
+            response = requests.post(
+                'https://api.datacommons.org/v1/bulk/find/entities',
+                headers={'X-API-Key': sys.argv[1]},
+                json=json).json()
+            for entity in response['entities']:
+                dcid = entity['dcids'][0] if 'dcids' in entity else ''
+                writer.writerow({'name': entity['description'], 'dcid': dcid})
