@@ -34,12 +34,6 @@ def get_measurement_method(row, concepts):
     return (mmethod, description)
 
 
-def format_unit_name(dcid):
-    if dcid in FORMATTED_UNITS:
-        return FORMATTED_UNITS[dcid]
-    return dcid.lower().replace('_', ' ').replace('1000000', '1M').replace('100000', '100K').replace('10000', '10k')
-
-
 concepts = collections.defaultdict(dict)
 with open('preprocessed/attributes.csv') as f:
     reader = csv.reader(f)

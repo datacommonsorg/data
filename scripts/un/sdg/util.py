@@ -161,3 +161,18 @@ def make_value(s):
     return s.replace('<=', 'LEQ').replace('<',
                                           'LT').replace('+', 'GEQ').replace(
                                               ' ', '').replace('_', '')
+
+
+def format_unit_name(dcid):
+    '''Formats unit name stirng.
+
+  Args:
+    dcid: Input dcid.
+
+  Retuns:
+    Formatted string.
+  '''
+    if dcid in FORMATTED_UNITS:
+        return FORMATTED_UNITS[dcid]
+    return dcid.lower().replace('_', ' ').replace('1000000', '1M').replace(
+        '100000', '100K').replace('10000', '10k')

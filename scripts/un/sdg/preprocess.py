@@ -32,9 +32,10 @@ from util import *
 
 API_PREFIX = 'https://unstats.un.org/SDGAPI/v1/sdg/Series/'
 HEADERS = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Accept': 'application/octet-stream'
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Accept': 'application/octet-stream'
 }
+
 
 def add_concepts(code, concept, concept_set):
     '''Adds concepts from given series code to concept_set.
@@ -47,7 +48,9 @@ def add_concepts(code, concept, concept_set):
     response = requests.get(f'{API_PREFIX}{code}/{concept}').json()
     for entry in response:
         for c in entry['codes']:
-            concept_set.add((entry['id'], c['code'], c['description'], c['sdmx']))
+            concept_set.add(
+                (entry['id'], c['code'], c['description'], c['sdmx']))
+
 
 def write_concepts(file, concept_set):
     '''Writes concepts from concept_set to file.
@@ -60,6 +63,7 @@ def write_concepts(file, concept_set):
         writer = csv.writer(f)
         for row in sorted(concept_set):
             writer.writerow(list(row))
+
 
 if __name__ == '__main__':
     if not os.path.exists('input'):
@@ -74,19 +78,22 @@ if __name__ == '__main__':
 
     attributes = set()
     dimensions = set()
-    with open('output/series.mcf', 'w') as f_series: 
+    with open('output/series.mcf', 'w') as f_series:
         for code in sorted(codes):
             print(code)
             data = {'seriesCodes': code}
-            text = requests.post(f'{API_PREFIX}DataCSV', data=data, headers=HEADERS).text.rstrip('\x00')
+            text = requests.post(f'{API_PREFIX}DataCSV',
+                                 data=data,
+                                 headers=HEADERS).text.rstrip('\x00')
             with open(f'input/{code}.csv', 'w') as f_code:
                 f_code.write(text)
             add_concepts(code, 'Attributes', attributes)
             add_concepts(code, 'Dimensions', dimensions)
-            f_series.write(SERIES_TEMPLATE.format_map({
-                'dcid': 'SDG_' + code,
-                'description': format_description(codes[code])
-            }))
+            f_series.write(
+                SERIES_TEMPLATE.format_map({
+                    'dcid': 'SDG_' + code,
+                    'description': format_description(codes[code])
+                }))
 
     write_concepts('preprocessed/attributes.csv', attributes)
     write_concepts('preprocessed/dimensions.csv', dimensions)
