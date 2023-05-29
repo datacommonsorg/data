@@ -833,6 +833,24 @@ class USEducation:
 
         return df_cleaned
 
+    def dropping_scalingFactor_unit(self, df: pd.DataFrame) -> pd.DataFrame:
+        '''
+        Dropping the scalingFactor and unit for Pupil/Teacher Ratio variable.
+        The values are not multiples of 100.
+        Args:
+            raw_df (pd.DataFrame): cleaned Dataframes
+        Returns:
+            pd.DataFrame
+        '''
+        df["scaling_factor"] = np.where(
+            df["sv_name"].str.contains(
+                "Percent_Student_AsAFractionOf_Count_Teacher"), '',
+            df["scaling_factor"])
+        df["unit"] = np.where(
+            df["sv_name"].str.contains(
+                "Percent_Student_AsAFractionOf_Count_Teacher"), '', df["unit"])
+        return df
+
     def generate_csv(self) -> pd.DataFrame:
         """
         This Method calls the required methods to generate
@@ -880,7 +898,8 @@ class USEducation:
                     df_parsed["unit"] = np.where(
                         df_parsed["sv_name"].str.contains("Percent"),
                         "dcs:Percent", '')
-                    df_final = df_parsed[[
+                    df_clean = self.dropping_scalingFactor_unit(df_parsed)
+                    df_final = df_clean[[
                         "school_state_code", "year", "sv_name", "observation",
                         "scaling_factor", "unit"
                     ]]
