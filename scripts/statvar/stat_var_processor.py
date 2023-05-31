@@ -70,8 +70,9 @@ import config_flags
 from mcf_file_util import get_numeric_value
 from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
 from mcf_filter import drop_existing_mcf_nodes
-from mcf_diff import fingerprint_node, fingerprint_mcf_nodes
+from mcf_diff import fingerprint_node, fingerprint_mcf_nodes, diff_mcf_node_pvs
 from place_resolver import PlaceResolver
+from json_to_csv import file_json_to_csv
 
 # imports from ../../util
 from config_map import ConfigMap, read_py_dict_from_file
@@ -484,7 +485,7 @@ class PropertyValueMapper:
                 3, f'Missing key {key} in property maps')
             self._counters.add_counter(f'warning-missing-property-key', 1, key)
             return pvs
-        logging.level_debug() and logging.log(3, f'Got PVs for {key}:{pvs}')
+        logging.level_debug() and logging.debug(f'Got PVs for {key}:{pvs}')
         return pvs
 
     def _is_key_in_value(self, key: str, value: str) -> bool:
@@ -735,7 +736,7 @@ class StatVarsMap:
           False if key already exists and values don't match.
         Args:
           key: the key to be added to the pv_map
-          pvs: the dictionaty value mapped to the key
+          pvs: the dictionary value mapped to the key
           pv_map: (output) dictionary to which key is to be added.
           duplicate_prop: In case of duplicate entries, add this
             duplicate prop mapped to the pvs dict into the existing entry.
@@ -745,12 +746,13 @@ class StatVarsMap:
           True if the key:pvs tuple was added to the pv_map.
         '''
         if key in pv_map:
-            if allow_equal_pvs and self.get_valid_pvs(
-                    pvs) == self.get_valid_pvs(pv_map[key]):
+            has_diff, diff_str = diff_mcf_node_pvs(
+                self.get_valid_pvs(pvs), self.get_valid_pvs(pv_map[key]))
+            if allow_equal_pvs and not has_diff:
                 return True
             else:
                 logging.level_debug() and logging.debug(
-                    f'Duplicate entry {key} in map for {pvs}')
+                    f'Duplicate entry {key} in map for {pvs}, diff: {diff_str}')
                 if duplicate_prop:
                     map_pvs = pv_map[key]
                     if duplicate_prop not in map_pvs:
@@ -1956,6 +1958,10 @@ class StatVarDataProcessor:
                 f'Processing input data file {filename} with encoding:{encoding}...'
             )
             file_start_time = time.perf_counter()
+            if filename.endswith('.json'):
+              # Convert json to csv file.
+              logging.info(f'Converting json file {filename} into csv')
+              filename = file_json_to_csv(filename)
             with file_util.FileIO(filename, newline='',
                                   encoding=encoding) as csvfile:
                 self._counters.add_counter('input-files-processed', 1)
@@ -2227,6 +2233,13 @@ class StatVarDataProcessor:
                 pvs.pop(multiply_prop)
         return True
 
+    def should_ignore_stat_var_obs_pvs(self, pvs: dict) -> bool:
+        '''Returns True if the pvs should be ignored.'''
+        # TODO(ajaits): add a config to filter pvs.
+        if '#ignore' in pvs:
+            return True
+        return False
+
     def process_stat_var_obs_pvs(self, pvs: dict) -> bool:
         '''Process a set of SVObs PVs flattening list values.'''
         logging.level_debug() and logging.debug(
@@ -2275,6 +2288,13 @@ class StatVarDataProcessor:
             # No values in this data cell. May be a header.
             logging.level_debug() and logging.debug(
                 f'No SVObs value in dict {pvs} in {self._file_context}')
+            return False
+
+        if self.should_ignore_stat_var_obs_pvs(pvs):
+            # Ignore these PVs.
+            logging.level_debug() and logging.debug(
+                f'Ignoring SVObs PVs {pvs} in {self._file_context}')
+            self._counters.add_counter(f'ignored-svobs-pvs', 1)
             return False
 
         logging.level_debug() and logging.debug(
@@ -2651,7 +2671,7 @@ def parallel_process(data_processor_class: StatVarDataProcessor,
                 'data_processor_class': data_processor_class,
                 'input_data': [input_file],
                 'output_path': output_file_path,
-                'config_file': config_file,
+                'config_file': config,
                 'pv_map_files': pv_map_files,
                 'counters': counters,
                 'parallelism': 0,

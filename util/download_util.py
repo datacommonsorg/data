@@ -173,7 +173,7 @@ def request_url(url: str,
                 # Exception in case of API error.
                 return None
             except (requests.exceptions.ConnectTimeout,
-                    urllib.error.URLError) as e:
+                    urllib.error.URLError, urllib.error.HTTPError) as e:
                 logging.debug(f'Got exception {e} for {url}, {params}')
 
             # retry in case of errors

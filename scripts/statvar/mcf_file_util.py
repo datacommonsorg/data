@@ -196,14 +196,18 @@ def get_node_dcid(pvs: dict) -> str:
     return strip_namespace(dcid)
 
 
-def add_mcf_node(pvs: dict, nodes: dict) -> dict:
+def add_mcf_node(pvs: dict, nodes: dict, strip_namespaces: bool = False) -> dict:
     '''Add a node with property values into the nodes dict
        If the node exists, the PVs are added to the existing node.'''
     if pvs is None or len(pvs) == 0:
         return
-    dcid = add_namespace(get_node_dcid(pvs))
+    dcid = get_node_dcid(pvs)
     if dcid == '':
         logging.warning(f'Ignoring node without a dcid: {pvs}')
+    if strip_namespaces:
+        dcid = strip_namespace(dcid)
+    else:
+        dcid = add_namespace(dcid)
     if dcid not in nodes:
         nodes[dcid] = {}
     node = nodes[dcid]
@@ -212,7 +216,9 @@ def add_mcf_node(pvs: dict, nodes: dict) -> dict:
     return nodes
 
 
-def load_mcf_nodes(filenames: str, nodes: dict = None) -> dict:
+def load_mcf_nodes(filenames: str,
+                   nodes: dict = None,
+                   strip_namespaces: bool = False) -> dict:
     '''Return a dict of nodes from the MCF file with the key as the dcid
      and a dict of property:value for each node.
     '''
@@ -231,17 +237,19 @@ def load_mcf_nodes(filenames: str, nodes: dict = None) -> dict:
                 for line in input_f:
                     line = line.strip()
                     if line == '':
-                        add_mcf_node(pvs, nodes)
+                        add_mcf_node(pvs, nodes, strip_namespace)
                         num_nodes += 1
                         pvs = {}
                     elif line[0] == '#':
                         add_comment_to_node(line, pvs)
                     else:
                         prop, value = get_pv_from_line(line)
+                        if strip_namespaces:
+                            value = strip_namespace(value)
                         add_pv_to_node(prop, value, pvs)
                         num_props += 1
                 if pvs:
-                    add_mcf_node(pvs, nodes)
+                    add_mcf_node(pvs, nodes, strip_namespaces)
                     num_nodes += 1
                 logging.info(
                     f'Loaded {num_nodes} nodes with {num_props} properties from file {file}'

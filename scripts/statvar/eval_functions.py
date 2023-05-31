@@ -20,13 +20,16 @@
    }
 '''
 
+import datetime
 import dateutil
 import os
 import re
 import sys
 
 from dateutil import parser
+from dateutil.relativedelta import relativedelta
 from absl import logging
+from datetime import datetime
 
 # String utility functions
 
@@ -75,6 +78,9 @@ EVAL_GLOBALS = {
     # date time functions
     'dateutil_parser_parse': dateutil.parser.parse,
     'format_date': format_date,
+    'datetime': datetime,
+    'datetime_strptime': datetime.strptime,
+    'relativedelta': relativedelta,
 
     # string functions
     'str_to_camel_case': str_to_camel_case,

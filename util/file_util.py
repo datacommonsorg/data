@@ -18,6 +18,7 @@ Supports local files, files on Google Cloud Storage (GCS) and Google Spreadsheet
 import ast
 import csv
 import fnmatch
+import json
 import glob
 import gspread
 import os
@@ -404,6 +405,8 @@ def file_get_name(file_path: str,
         # Suffix already present in name, ignore it.
         suffix = ''
     # Set the file extension
+    if not file_ext:
+        file_ext = ext
     if file_ext and file_ext[0] != '.':
         file_ext = '.' + file_ext
     return file_prefix + suffix + file_ext
@@ -451,7 +454,7 @@ def file_copy(src_filename: str, dst_filename: str = '') -> str:
 
     # Source and target is not a spreadsheet.
     # Open both files and copy content over.
-    if dst_filename.endswith('/'):
+    if dst_filename.endswith(os.sep):
         # Destination is a directory. Create file with source filename.
         dst_filename = os.path.join(dst_filename,
                                     os.path.basename(src_filename))
@@ -669,7 +672,22 @@ def file_load_py_dict(dict_filename: str) -> dict:
             if dict_str:
                 # Load the map assuming a python dictionary.
                 # Can also be used with JSON with trailing commas and comments.
-                py_dict.update(ast.literal_eval(dict_str))
+                try:
+                    file_dict = ast.literal_eval(dict_str)
+                except (NameError, ValueError) as e:
+                    logging.debug(
+                        f'Got exception in loading {filename} with ast: {e}')
+                    # AST didn't parse the file. Try loading as json.
+                    file_dict = json.loads(dict_str)
+                if not py_dict:
+                    py_dict = file_dict
+                else:
+                    if isinstance(file_dict, list):
+                        # Add each list item as value in the dict with index key
+                        for item in file_dict:
+                            py_dict[len(py_dict)] = item
+                    else:
+                        py_dict.update(file_dict)
     return py_dict
 
 
@@ -946,8 +964,8 @@ def main(_):
             # In case of multiple source files,
             # target is assumed to be a directory.
             # Copy all files to the target directory.
-            if not target.endswith('/'):
-                target = target + '/'
+            if not target.endswith(os.sep):
+                target = target + os.sep
             for src_file in src_files:
                 dst = file_copy(src_file, target)
                 logging.info(f'Copied {src_file} to {dst}')

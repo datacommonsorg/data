@@ -142,8 +142,6 @@ def diff_mcf_node_pvs(node_1: dict,
         prefixed with '+' or '-' when there is a diff and
         '?' to highlight position of the diff.
     '''
-    if counters is None:
-        counters = Counters()
     if config is None:
         config = {}
     dcid1 = get_node_dcid(node_1)
@@ -176,23 +174,23 @@ def diff_mcf_node_pvs(node_1: dict,
     for d in diff:
         diff_str.append(d)
         if d[0] == ' ':
-            counters.add_counter(f'PVs-matched', 1)
+            counters and counters.add_counter(f'PVs-matched', 1)
         elif d[0] == '-':
             has_diff = True
-            counters.add_counter(f'missing-pvs-in-mcf1', 1)
+            counters and counters.add_counter(f'missing-pvs-in-mcf1', 1)
         elif d[0] == '+':
             has_diff = True
-            counters.add_counter(f'missing pvs-in-mcf2', 1)
+            counters and counters.add_counter(f'missing pvs-in-mcf2', 1)
     if has_diff:
         if len(node1) > 0:
             if len(node2) > 0:
-                counters.add_counter(f'nodes-with-diff', 1)
+                counters and counters.add_counter(f'nodes-with-diff', 1)
             else:
-                counters.add_counter(f'nodes-missing-in-mcf2', 1)
+                counters and counters.add_counter(f'nodes-missing-in-mcf2', 1)
         else:
-            counters.add_counter(f'nodes-missing-in-mcf1', 1)
+            counters and counters.add_counter(f'nodes-missing-in-mcf1', 1)
     else:
-        counters.add_counter(f'nodes-matched', 1)
+        counters and counters.add_counter(f'nodes-matched', 1)
     return has_diff, '\n'.join(diff_str)
 
 
