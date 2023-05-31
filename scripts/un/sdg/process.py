@@ -25,11 +25,18 @@ Usage: python3 preprocess.py
 import collections
 import csv
 import os
+import sys
 
 from util import *
 
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+
+module_dir_ = os.path.dirname(__file__)
+
 # Create map of M49 -> ISO-alpha3 for countries.
-with open('m49.csv') as f:
+with open(os.path.join(module_dir_,'m49.csv')) as f:
     PLACES = {}
     reader = csv.DictReader(f, delimiter='\t')
     for row in reader:
@@ -38,7 +45,7 @@ with open('m49.csv') as f:
         PLACES[int(row['M49 code'])] = row['ISO-alpha3 code']
 
 # Create map of name -> dcid for supported cities.
-with open('preprocessed/cities.csv') as f:
+with open(os.path.join(module_dir_, 'preprocessed/cities.csv')) as f:
     reader = csv.DictReader(f)
     CITIES = {row['name']: row['dcid'] for row in reader}
 

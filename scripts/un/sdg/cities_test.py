@@ -20,7 +20,7 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
-import cities
+from . import cities
 
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
