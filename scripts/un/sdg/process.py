@@ -36,7 +36,7 @@ sys.path.append(
 module_dir_ = os.path.dirname(__file__)
 
 # Create map of M49 -> ISO-alpha3 for countries.
-with open(os.path.join(module_dir_,'m49.csv')) as f:
+with open(os.path.join(module_dir_, 'm49.csv')) as f:
     PLACES = {}
     reader = csv.DictReader(f, delimiter='\t')
     for row in reader:

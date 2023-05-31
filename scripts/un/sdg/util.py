@@ -116,7 +116,7 @@ def format_description(s):
     formatted = formatted.replace(' , ', ', ').replace('  ', ' ').strip()
     # Remove trailing commas
     if formatted[-1] == ',':
-      formatted = formatted[:-1]
+        formatted = formatted[:-1]
     # Replace 100,000 with 100K
     formatted = formatted.replace('100,000', '100K')
     # Make ascii
