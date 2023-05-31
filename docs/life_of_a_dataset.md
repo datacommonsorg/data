@@ -43,7 +43,7 @@ data in a CSV into graph nodes for ingestion into Data Commons.  For additional
 information, read [Template
 MCF](https://github.com/datacommonsorg/data/blob/master/docs/mcf_format.md#template-mcf).
 
-The raw CSV will often needs pre-processing before it can be imported.  An
+The raw CSV will often need pre-processing before it can be imported.  An
 example simple cleaning script is
 [here](https://github.com/datacommonsorg/data/blob/master/scripts/covid_tracking_project/historic_state_data/preprocess_csv.py).
 
