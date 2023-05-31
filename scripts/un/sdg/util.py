@@ -14,6 +14,13 @@
 '''Shared util functions and constants.'''
 import re
 
+FIELDNAMES = [
+    'variable_measured', 'observation_about', 'observation_date', 'value',
+    'measurement_method', 'unit', 'scaling_factor'
+]
+
+DCID_PREFIX = 'Node: dcid:'
+
 SERIES_TEMPLATE = '''
 Node: dcid:{dcid}
 name: "{description}"
@@ -176,3 +183,15 @@ def format_unit_name(dcid):
         return FORMATTED_UNITS[dcid]
     return dcid.lower().replace('_', ' ').replace('1000000', '1M').replace(
         '100000', '100K').replace('10000', '10k')
+
+
+def get_dcid(template):
+    '''Gets dcid from template.
+
+    Args:
+        template: Input templated string.
+
+    Returns:
+        Dcid.
+    '''
+    return template.split(DCID_PREFIX)[1].split('\n')[0]

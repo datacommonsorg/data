@@ -1,0 +1,7 @@
+variable_measured,observation_about,observation_date,value,measurement_method,unit,scaling_factor
+dcid:sdg/AG_FOOD_WST_HHS,dcs:country/AFG,2019,3109152.67104,dcs:SDG_E_A_G,dcs:TONNES,
+dcid:sdg/AG_FOOD_WST_OOHC,dcs:country/AFG,2019,1051782.52304,dcs:SDG_E_A_G,dcs:TONNES,
+dcid:sdg/AG_FOOD_WST_RTL,dcs:country/AFG,2019,594982.44816,dcs:SDG_E_A_G,dcs:TONNES,
+dcid:sdg/AG_FOOD_WST_HHS,dcs:country/ALB,2019,238491.7727,dcs:SDG_E_A_G,dcs:TONNES,
+dcid:sdg/AG_FOOD_WST_OOHC,dcs:country/ALB,2019,79651.33802,dcs:SDG_E_A_G,dcs:TONNES,
+dcid:sdg/AG_FOOD_WST_RTL,dcs:country/ALB,2019,45057.93456,dcs:SDG_E_A_G,dcs:TONNES,
