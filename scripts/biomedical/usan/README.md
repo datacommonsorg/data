@@ -16,8 +16,9 @@
   - [Example](#example)
 
 ## About the Dataset
+The [United States Adopted Names (USAN) Council](https://www.ama-assn.org/about/united-states-adopted-names/usan-council) is co-sponsored by the American Medical Association, the United States Pharmacopeial Convention, Inc., and the American Pharmaceutical Association. The USAN Council’s goal is to provide meaningful designations for compounds, enhancing prescribing and patient safety. It was organized in 1964 to represent the health professions in the selection of appropriate nonproprietary names for drugs.
 
-[The United States Adopted Names](https://www.ama-assn.org/about/united-states-adopted-names/united-states-adopted-names-approved-stems) (USAN) provides meaningful designations for compounds that enhance prescription and patient safety. The listing of USAN stems represents common stems for which chemical and/or pharmacologic parameters have been established. These council-approved stems and their definitions are recommended for use in coining new nonproprietary drug names belonging to an established series of related agents.
+[USAN stems](https://www.ama-assn.org/about/united-states-adopted-names/united-states-adopted-names-approved-stems) represent common stems for which chemical and/or pharmacologic parameters have been established. These council-approved stems and their definitions are recommended for use in coining new nonproprietary drug names belonging to an established series of related agents. This provides meaningful designations for compounds that enhance prescription and patient safety. USAN appropriately incorporates this established class stem system. By doing so, similar compounds maintain a common "family" name that provides immediate recognition. 
 
 ### Download Data
 
@@ -38,6 +39,8 @@ Another key issue with the data was that the substems and stems were not clearly
 Lastly, the data doesn't have the USAN stem years which is them fetched from chembl and merged into the existing USAN dataframe. 
 
 ### License
+
+These data are nonproprietary, which by definition is in the public domain.
 
 ## About the import
 
