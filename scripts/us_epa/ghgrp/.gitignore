@@ -1,0 +1,4 @@
+tmp_data
+import_data/gas*.mcf
+import_data/sources*.mcf
+import_data/*.csv

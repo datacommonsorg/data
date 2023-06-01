@@ -1,0 +1,4 @@
+raw_data/** filter=lfs diff=lfs merge=lfs -text
+historical_weather_variability/4km/*.csv filter=lfs diff=lfs merge=lfs -text
+historical_weather_variability/county/*.csv filter=lfs diff=lfs merge=lfs -text
+projected_weather_variability/*.csv filter=lfs diff=lfs merge=lfs -text

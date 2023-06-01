@@ -2,7 +2,7 @@
 
 import io
 
-import generate_cohort_set
+from .generate_cohort_set import write_mcf
 import unittest
 
 TEST_DIR = 'testdata/'
@@ -18,8 +18,8 @@ class WriteMCFTest(unittest.TestCase):
 
         with open(csv_file, 'rt') as f_in:
             f_out = io.StringIO()
-            generate_cohort_set.write_mcf(f_in, f_out, "AwesomePlaces", "fooId",
-                                          "List of awesome test places.")
+            write_mcf(f_in, f_out, "AwesomePlaces", "fooId",
+                      "List of awesome test places.")
         self.assertEqual(f_out.getvalue(), expected_mcf)
 
 

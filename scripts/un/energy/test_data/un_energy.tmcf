@@ -1,0 +1,10 @@
+Node: E:UNEnergy->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:UNEnergy->Country_dcid
+variableMeasured: C:UNEnergy->StatVar
+observationDate: C:UNEnergy->Year
+observationPeriod: "P1Y"
+value: C:UNEnergy->Quantity
+unit: C:UNEnergy->Unit_dcid
+scalingFactor: C:UNEnergy->Scaling_factor
+measurementMethod: C:UNEnergy->Estimate

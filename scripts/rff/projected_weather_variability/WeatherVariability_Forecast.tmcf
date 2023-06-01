@@ -1,0 +1,88 @@
+Node: E:WeatherVariability_Forecast->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:StandardDeviation_DailyPrecipitation
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->StandardDeviation_DailyPrecipitation
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Skewness_DailyPrecipitation
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->Skewness_DailyPrecipitation
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Kurtosis_DailyPrecipitation
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->Kurtosis_DailyPrecipitation
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:StandardDeviation_DailyMinTemperature
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->StandardDeviation_DailyMinTemperature
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Skewness_DailyMinTemperature
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->Skewness_DailyMinTemperature
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Kurtosis_DailyMinTemperature
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->Kurtosis_DailyMinTemperature
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:StandardDeviation_DailyMaxTemperature
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->StandardDeviation_DailyMaxTemperature
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Skewness_DailyMaxTemperature
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->Skewness_DailyMaxTemperature
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Kurtosis_DailyMaxTemperature
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->Kurtosis_DailyMaxTemperature
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:HeavyPrecipitationIndex
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->HeavyPrecipitationIndex
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+
+Node: E:WeatherVariability_Forecast->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ConsecutiveDryDays
+observationAbout: C:WeatherVariability_Forecast->GeoId
+observationDate: C:WeatherVariability_Forecast->Date
+value: C:WeatherVariability_Forecast->ConsecutiveDryDays
+observationPeriod: C:WeatherVariability_Forecast->TimeIntervalType
+

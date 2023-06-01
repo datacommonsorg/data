@@ -23,6 +23,7 @@ import requests
 import time
 from os import path
 from csv import writer
+import pandas as pd
 
 DATA_API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getTabularData"
 MASTER_API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getMasterData"
@@ -200,6 +201,16 @@ class UDISEIndiaDataLoaderBase:
             if gender == "Female":
                 constraints_array.append("gender: schema:Female")
 
+        if "SchoolLevel" in data_row:
+            school_level = data_row["SchoolLevel"]
+            name_array.append(school_level)
+            if school_level == "PrimarySchool":
+                constraints_array.append("levelOfSchool: dcs:PrimarySchool")
+            if school_level == "MiddleSchool":
+                constraints_array.append("levelOfSchool: dcs:MiddleSchool")
+            if school_level == "SecondarySchool":
+                constraints_array.append("levelOfSchool: dcs:SecondarySchool")
+
         if "SocialCategory" in data_row:
             social_category = data_row["SocialCategory"]
             if social_category == "GeneralCategory":
@@ -215,21 +226,11 @@ class UDISEIndiaDataLoaderBase:
             if social_category != "":
                 name_array.append(social_category)
 
-        if "SchoolLevel" in data_row:
-            school_level = data_row["SchoolLevel"]
-            name_array.append(school_level)
-            if school_level == "PrimarySchool":
-                constraints_array.append("levelOfSchool: dcs:PrimarySchool")
-            if school_level == "MiddleSchool":
-                constraints_array.append("levelOfSchool: dcs:MiddleSchool")
-            if school_level == "SecondarySchool":
-                constraints_array.append("levelOfSchool: dcs:SecondarySchool")
-
         variable_name = "_".join(name_array)
 
         fileds = {}
         fileds["name"] = variable_name
-        fileds["populationType"] = "Person"
+        fileds["populationType"] = "Student"
         fileds["statType"] = "measuredValue"
         fileds["measuredProperty"] = "dropoutRate"
         fileds["constraints"] = "\n".join(constraints_array)
@@ -304,9 +305,6 @@ class UDISEIndiaDataLoaderBase:
                     writer.writeheader()
                 writer.writerows(data_rows)
                 file_object.close()
-        else:
-            raise Exception("Data file: {data_file} doesn't exist".format(
-                data_file=data_file))
 
     def _get_data(self,
                   year,
@@ -441,5 +439,10 @@ class UDISEIndiaDataLoaderBase:
                                    udise_state_code=block["udise_state_code"],
                                    udise_dist_code=block["udise_dist_code"],
                                    udise_block_code=block["udise_block_code"])
+
+        # Only keep the distinct rows
+        df = pd.read_csv(self.csv_file_path, dtype=str)
+        df = df.drop_duplicates()
+        df.to_csv(self.csv_file_path, index=False)
 
         self._save_mcf()

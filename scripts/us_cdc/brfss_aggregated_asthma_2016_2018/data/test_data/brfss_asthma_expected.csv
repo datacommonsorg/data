@@ -1,0 +1,7 @@
+Counties,Age Group,State,Alpha2,column_name,value,variableMeasured,scalingFactor,observationAbout,observationDate,unit
+Jefferson,Adult,Alabama,AL,Prevalence,8.7,Percent_Person_WithAsthma,,geoId/01073,2018,dcs:Percent
+Del Norte,Child,California,CA,Prevalence,6.1,Percent_Person_Children_WithAsthma,100,geoId/06015,2018,dcs:Percent
+Tehama,Child,California,CA,Prevalence,6.1,Percent_Person_Children_WithAsthma,100,geoId/06103,2018,dcs:Percent
+Jefferson,Adult,Alabama,AL,Error,0.72,StandardError_Person_Adults_WithAsthma,100,geoId/01073,2018,dcs:Percent
+Del Norte,Child,California,CA,Error,2.86,StandardError_Person_Children_WithAsthma,100,geoId/06015,2018,dcs:Percent
+Tehama,Child,California,CA,Error,2.86,StandardError_Person_Children_WithAsthma,100,geoId/06103,2018,dcs:Percent

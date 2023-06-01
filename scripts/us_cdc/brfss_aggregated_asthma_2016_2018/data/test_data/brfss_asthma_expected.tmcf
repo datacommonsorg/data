@@ -1,0 +1,10 @@
+
+Node: E:SubjectTable->E0
+typeOf: dcs:StatVarObservation
+measurementMethod: dcs:Aggregate_NCHS2013_BRFSS2016To2018
+observationAbout: C:SubjectTable->observationAbout
+observationDate: C:SubjectTable->observationDate
+variableMeasured: C:SubjectTable->variableMeasured
+value: C:SubjectTable->value
+scalingFactor: C:SubjectTable->scalingFactor
+unit: C:SubjectTable->unit

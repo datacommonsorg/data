@@ -1,0 +1,869 @@
+Node: dcid:dc/g/WHO/Root
+typeOf: dcs:StatVarGroup
+name: "Global Health Observatory"
+specializationOf: dcid:dc/g/Uncategorized
+
+Node: dcid:WHO/g/WorldHealthStatistics
+typeOf: dcs:StatVarGroup
+name: "World Health Statistics"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/HealthWorkforce
+typeOf: dcs:StatVarGroup
+name: "Health Workforce"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Nutrition
+typeOf: dcs:StatVarGroup
+name: "Nutrition"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/SexuallyTransmittedInfections
+typeOf: dcs:StatVarGroup
+name: "Sexually Transmitted Infections"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/GlobalHealthEstimatesLifeExpectancyAndLeadingCausesOfDeathAndDisability
+typeOf: dcs:StatVarGroup
+name: "Global Health Estimates: Life Expectancy And Leading Causes Of Death And Disability"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/HealthEquityMonitor
+typeOf: dcs:StatVarGroup
+name: "Health Equity Monitor"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/EnvironmentAndHealth
+typeOf: dcs:StatVarGroup
+name: "Environment And Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/MentalHealth
+typeOf: dcs:StatVarGroup
+name: "Mental Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/ViolenceAgainstWomen
+typeOf: dcs:StatVarGroup
+name: "Violence Against Women"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/InternationalHealthRegulations2005MonitoringFramework
+typeOf: dcs:StatVarGroup
+name: "International Health Regulations (2005) Monitoring Framework"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/ResourcesForSubstanceUseDisorders
+typeOf: dcs:StatVarGroup
+name: "Resources For Substance Use Disorders"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/ImmunizationCoverage
+typeOf: dcs:StatVarGroup
+name: "Immunization Coverage"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/TobaccoControl
+typeOf: dcs:StatVarGroup
+name: "Tobacco Control"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/PriorityHealthTechnologies
+typeOf: dcs:StatVarGroup
+name: "Priority Health Technologies"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/DementiaPolicyAndLegislation
+typeOf: dcs:StatVarGroup
+name: "Dementia Policy And Legislation"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/DementiaDiagnosisTreatmentAndCare
+typeOf: dcs:StatVarGroup
+name: "Dementia Diagnosis, Treatment And Care"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/AntimicrobialResistanceAmr
+typeOf: dcs:StatVarGroup
+name: "Antimicrobial Resistance (Amr)"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/ChildHealth
+typeOf: dcs:StatVarGroup
+name: "Child Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/AirPollution
+typeOf: dcs:StatVarGroup
+name: "Air Pollution"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/WomenAndHealth
+typeOf: dcs:StatVarGroup
+name: "Women And Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/SdgTarget38AchieveUniversalHealthCoverageUhc
+typeOf: dcs:StatVarGroup
+name: "Sdg Target 3.8 | Achieve Universal Health Coverage (Uhc)"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/RoadSafety
+typeOf: dcs:StatVarGroup
+name: "Road Safety"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/VaccinePreventableCommunicableDiseases
+typeOf: dcs:StatVarGroup
+name: "Vaccine-Preventable Communicable Diseases"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/ViolencePrevention
+typeOf: dcs:StatVarGroup
+name: "Violence Prevention"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/GlobalDementiaObservatoryGdo
+typeOf: dcs:StatVarGroup
+name: "Global Dementia Observatory (Gdo)"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/HealthSystems
+typeOf: dcs:StatVarGroup
+name: "Health Systems"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/HivAids
+typeOf: dcs:StatVarGroup
+name: "Hiv/Aids"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Tuberculosis
+typeOf: dcs:StatVarGroup
+name: "Tuberculosis"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/WaterSanitationAndHygieneWash
+typeOf: dcs:StatVarGroup
+name: "Water, Sanitation And Hygiene (Wash)"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/NeglectedTropicalDiseases
+typeOf: dcs:StatVarGroup
+name: "Neglected Tropical Diseases"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/NoncommunicableDiseases
+typeOf: dcs:StatVarGroup
+name: "Noncommunicable Diseases"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Malaria
+typeOf: dcs:StatVarGroup
+name: "Malaria"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+typeOf: dcs:StatVarGroup
+name: "Global Information System On Alcohol And Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/MaternalAndReproductiveHealth
+typeOf: dcs:StatVarGroup
+name: "Maternal And Reproductive Health"
+specializationOf: dcid:dc/g/WHO/Root
+
+Node: dcid:WHO/g/Policy
+typeOf: dcs:StatVarGroup
+name: "Policy"
+specializationOf: dcid:WHO/g/RoadSafety
+
+Node: dcid:WHO/g/Governance
+typeOf: dcs:StatVarGroup
+name: "Governance"
+specializationOf: dcid:WHO/g/WorldHealthStatistics
+
+Node: dcid:WHO/g/Legislation
+typeOf: dcs:StatVarGroup
+name: "Legislation"
+specializationOf: dcid:WHO/g/DementiaPolicyAndLegislation
+
+Node: dcid:WHO/g/RoadTrafficMortality
+typeOf: dcs:StatVarGroup
+name: "Road Traffic Mortality"
+specializationOf: dcid:WHO/g/RoadSafety
+
+Node: dcid:WHO/g/PostCrashResponse
+typeOf: dcs:StatVarGroup
+name: "Post-Crash Response"
+specializationOf: dcid:WHO/g/RoadSafety
+
+Node: dcid:WHO/g/NationalLegislation
+typeOf: dcs:StatVarGroup
+name: "National Legislation"
+specializationOf: dcid:WHO/g/RoadSafety
+
+Node: dcid:WHO/g/InstitutionalFramework
+typeOf: dcs:StatVarGroup
+name: "Institutional Framework"
+specializationOf: dcid:WHO/g/RoadSafety
+
+Node: dcid:WHO/g/AnaemiaInWomenAndChildren
+typeOf: dcs:StatVarGroup
+name: "Anaemia In Women And Children"
+specializationOf: dcid:WHO/g/MaternalAndReproductiveHealth
+
+Node: dcid:WHO/g/BodyMassIndexBmi
+typeOf: dcs:StatVarGroup
+name: "Body Mass Index (Bmi)"
+specializationOf: dcid:WHO/g/Nutrition
+
+Node: dcid:WHO/g/BreastfeedingAndLowBirthWeight
+typeOf: dcs:StatVarGroup
+name: "Breastfeeding And Low Birth Weight"
+specializationOf: dcid:WHO/g/Nutrition
+
+Node: dcid:WHO/g/JointChildMalnutritionEstimatesJmeUnicefWhoWb
+typeOf: dcs:StatVarGroup
+name: "Joint Child Malnutrition Estimates (Jme) (Unicef-Who-Wb)"
+specializationOf: dcid:WHO/g/WorldHealthStatistics
+
+Node: dcid:WHO/g/HealthInfrastructure
+typeOf: dcs:StatVarGroup
+name: "Health Infrastructure"
+specializationOf: dcid:WHO/g/PriorityHealthTechnologies
+
+Node: dcid:WHO/g/MedicalDevices
+typeOf: dcs:StatVarGroup
+name: "Medical Devices"
+specializationOf: dcid:WHO/g/PriorityHealthTechnologies
+
+Node: dcid:WHO/g/BiomedicalEngineersAndTechnicians
+typeOf: dcs:StatVarGroup
+name: "Biomedical Engineers And Technicians"
+specializationOf: dcid:WHO/g/PriorityHealthTechnologies
+
+Node: dcid:WHO/g/RaiseTaxesOnTobaccoTobaccoControl
+typeOf: dcs:StatVarGroup
+name: "Raise Taxes On Tobacco (Tobacco Control)"
+specializationOf: dcid:WHO/g/TobaccoControl
+
+Node: dcid:WHO/g/EnforceBansOnTobaccoAdvertisingTobaccoControl
+typeOf: dcs:StatVarGroup
+name: "Enforce Bans On Tobacco Advertising (Tobacco Control)"
+specializationOf: dcid:WHO/g/TobaccoControl
+
+Node: dcid:WHO/g/MonitorTobaccoUseAndPreventionPolicies
+typeOf: dcs:StatVarGroup
+name: "Monitor Tobacco Use And Prevention Policies"
+specializationOf: dcid:WHO/g/TobaccoControl
+
+Node: dcid:WHO/g/ProtectFromTobaccoSmokeTobaccoControl
+typeOf: dcs:StatVarGroup
+name: "Protect From Tobacco Smoke (Tobacco Control)"
+specializationOf: dcid:WHO/g/TobaccoControl
+
+Node: dcid:WHO/g/OfferHelpToQuitTobaccoUseTobaccoControl
+typeOf: dcs:StatVarGroup
+name: "Offer Help To Quit Tobacco Use (Tobacco Control)"
+specializationOf: dcid:WHO/g/TobaccoControl
+
+Node: dcid:WHO/g/MpowerOverviewProgressTowardsSelectedTobaccoControlPoliciesForDemandReductionTobaccoControl
+typeOf: dcs:StatVarGroup
+name: "Mpower Overview: Progress Towards Selected Tobacco Control Policies For Demand Reduction (Tobacco Control)"
+specializationOf: dcid:WHO/g/TobaccoControl
+
+Node: dcid:WHO/g/WarnAboutTheDangersOfTobaccoTobaccoControl
+typeOf: dcs:StatVarGroup
+name: "Warn About The Dangers Of Tobacco (Tobacco Control)"
+specializationOf: dcid:WHO/g/TobaccoControl
+
+Node: dcid:WHO/g/InfantNutrition
+typeOf: dcs:StatVarGroup
+name: "Infant Nutrition"
+specializationOf: dcid:WHO/g/ChildHealth
+
+Node: dcid:WHO/g/PreventingChildDeaths
+typeOf: dcs:StatVarGroup
+name: "Preventing Child Deaths"
+specializationOf: dcid:WHO/g/ChildHealth
+
+Node: dcid:WHO/g/ChildMortalityAndCausesOfDeath
+typeOf: dcs:StatVarGroup
+name: "Child Mortality And Causes Of Death"
+specializationOf: dcid:WHO/g/GlobalHealthEstimatesLifeExpectancyAndLeadingCausesOfDeathAndDisability
+
+Node: dcid:WHO/g/VaccinePreventableCommunicableDiseases
+typeOf: dcs:StatVarGroup
+name: "Vaccine-Preventable Communicable Diseases"
+specializationOf: dcid:WHO/g/VaccinePreventableCommunicableDiseases
+
+Node: dcid:WHO/g/MentalHealthServiceAvailability
+typeOf: dcs:StatVarGroup
+name: "Mental Health Service Availability"
+specializationOf: dcid:WHO/g/MentalHealth
+
+Node: dcid:WHO/g/SuicideRates
+typeOf: dcs:StatVarGroup
+name: "Suicide Rates"
+specializationOf: dcid:WHO/g/MentalHealth
+
+Node: dcid:WHO/g/PneumococcalConjugatePcv3
+typeOf: dcs:StatVarGroup
+name: "Pneumococcal Conjugate (Pcv3)"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/HibHib3
+typeOf: dcs:StatVarGroup
+name: "Hib (Hib3)"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/NeonatalTetanusPab
+typeOf: dcs:StatVarGroup
+name: "Neonatal Tetanus (Pab)"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/Rotavirus
+typeOf: dcs:StatVarGroup
+name: "Rotavirus"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/DiphtheriaTetanusToxoidAndPertussisDtp3
+typeOf: dcs:StatVarGroup
+name: "Diphtheria Tetanus Toxoid And Pertussis (Dtp3)"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/Measles1StDoseMcv1
+typeOf: dcs:StatVarGroup
+name: "Measles, 1St Dose (Mcv1)"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/Bcg
+typeOf: dcs:StatVarGroup
+name: "Bcg"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/PolioPol3
+typeOf: dcs:StatVarGroup
+name: "Polio (Pol3)"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/HepatitisBHepb3
+typeOf: dcs:StatVarGroup
+name: "Hepatitis B (Hepb3)"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/Measles2NdDoseMcv2
+typeOf: dcs:StatVarGroup
+name: "Measles, 2Nd Dose (Mcv2)"
+specializationOf: dcid:WHO/g/ImmunizationCoverage
+
+Node: dcid:WHO/g/ServicesForVictims
+typeOf: dcs:StatVarGroup
+name: "Services For Victims"
+specializationOf: dcid:WHO/g/ViolencePrevention
+
+Node: dcid:WHO/g/ViolenceAgainstWomen
+typeOf: dcs:StatVarGroup
+name: "Violence Against Women"
+specializationOf: dcid:WHO/g/ViolencePrevention
+
+Node: dcid:WHO/g/BurdenOfViolence
+typeOf: dcs:StatVarGroup
+name: "Burden Of Violence"
+specializationOf: dcid:WHO/g/ViolencePrevention
+
+Node: dcid:WHO/g/PreventionProgrammes
+typeOf: dcs:StatVarGroup
+name: "Prevention Programmes"
+specializationOf: dcid:WHO/g/ViolencePrevention
+
+Node: dcid:WHO/g/WhoGonococcalAmrSurveillanceProgrammeWhoGasp
+typeOf: dcs:StatVarGroup
+name: "Who Gonococcal Amr Surveillance Programme (Who-Gasp)"
+specializationOf: dcid:WHO/g/SexuallyTransmittedInfections
+
+Node: dcid:WHO/g/SexuallyTransmittedInfectionsRiskFactors
+typeOf: dcs:StatVarGroup
+name: "Sexually Transmitted Infections - Risk Factors"
+specializationOf: dcid:WHO/g/SexuallyTransmittedInfections
+
+Node: dcid:WHO/g/DataOnSyphilis
+typeOf: dcs:StatVarGroup
+name: "Data On Syphilis"
+specializationOf: dcid:WHO/g/SexuallyTransmittedInfections
+
+Node: dcid:WHO/g/ReproductiveMaternalNewbornAndChildHealthInterventionsRmnchCombined
+typeOf: dcs:StatVarGroup
+name: "Reproductive, Maternal, Newborn And Child Health Interventions (Rmnch), Combined"
+specializationOf: dcid:WHO/g/HealthEquityMonitor
+
+Node: dcid:WHO/g/ReproductiveHealthInterventions
+typeOf: dcs:StatVarGroup
+name: "Reproductive Health Interventions"
+specializationOf: dcid:WHO/g/HealthEquityMonitor
+
+Node: dcid:WHO/g/HealthOutcomes
+typeOf: dcs:StatVarGroup
+name: "Health Outcomes"
+specializationOf: dcid:WHO/g/HealthEquityMonitor
+
+Node: dcid:WHO/g/NewbornAndChildHealthInterventions
+typeOf: dcs:StatVarGroup
+name: "Newborn And Child Health Interventions"
+specializationOf: dcid:WHO/g/HealthEquityMonitor
+
+Node: dcid:WHO/g/MaternalHealthInterventions
+typeOf: dcs:StatVarGroup
+name: "Maternal Health Interventions"
+specializationOf: dcid:WHO/g/HealthEquityMonitor
+
+Node: dcid:WHO/g/InternationalHealthRegulations2005MonitoringFrameworkIhr20102017
+typeOf: dcs:StatVarGroup
+name: "International Health Regulations (2005) Monitoring Framework (Ihr 2010-2017)"
+specializationOf: dcid:WHO/g/InternationalHealthRegulations2005MonitoringFramework
+
+Node: dcid:WHO/g/InternationalHealthRegulations2005MonitoringFrameworkIhrSpar
+typeOf: dcs:StatVarGroup
+name: "International Health Regulations (2005) Monitoring Framework (Ihr Spar)"
+specializationOf: dcid:WHO/g/InternationalHealthRegulations2005MonitoringFramework
+
+Node: dcid:WHO/g/WaterSanitationAndHygieneWashBurdenOfDisease
+typeOf: dcs:StatVarGroup
+name: "Water, Sanitation, And Hygiene (Wash): Burden Of Disease"
+specializationOf: dcid:WHO/g/WorldHealthStatistics
+
+Node: dcid:WHO/g/WaterSanitationAndHygieneWashExposure
+typeOf: dcs:StatVarGroup
+name: "Water, Sanitation And Hygiene (Wash): Exposure"
+specializationOf: dcid:WHO/g/WaterSanitationAndHygieneWash
+
+Node: dcid:WHO/g/IntimatePartnerViolenceAndNonPartnerSexualViolence
+typeOf: dcs:StatVarGroup
+name: "Intimate Partner Violence And Non-Partner Sexual Violence"
+specializationOf: dcid:WHO/g/ViolenceAgainstWomen
+
+Node: dcid:WHO/g/LeprosyHansenSDisease
+typeOf: dcs:StatVarGroup
+name: "Leprosy (Hansen'S Disease)"
+specializationOf: dcid:WHO/g/NeglectedTropicalDiseases
+
+Node: dcid:WHO/g/Rabies
+typeOf: dcs:StatVarGroup
+name: "Rabies"
+specializationOf: dcid:WHO/g/NeglectedTropicalDiseases
+
+Node: dcid:WHO/g/BuruliUlcer
+typeOf: dcs:StatVarGroup
+name: "Buruli Ulcer"
+specializationOf: dcid:WHO/g/NeglectedTropicalDiseases
+
+Node: dcid:WHO/g/OnchocerciasisRiverBlindness
+typeOf: dcs:StatVarGroup
+name: "Onchocerciasis (River Blindness)"
+specializationOf: dcid:WHO/g/NeglectedTropicalDiseases
+
+Node: dcid:WHO/g/Leishmaniasis
+typeOf: dcs:StatVarGroup
+name: "Leishmaniasis"
+specializationOf: dcid:WHO/g/NeglectedTropicalDiseases
+
+Node: dcid:WHO/g/TaeniasisAndCysticercosis
+typeOf: dcs:StatVarGroup
+name: "Taeniasis And Cysticercosis"
+specializationOf: dcid:WHO/g/NeglectedTropicalDiseases
+
+Node: dcid:WHO/g/HumanAfricanTrypanosomiasisSleepingSickness
+typeOf: dcs:StatVarGroup
+name: "Human African Trypanosomiasis (Sleeping Sickness)"
+specializationOf: dcid:WHO/g/NeglectedTropicalDiseases
+
+Node: dcid:WHO/g/Trachoma
+typeOf: dcs:StatVarGroup
+name: "Trachoma"
+specializationOf: dcid:WHO/g/NeglectedTropicalDiseases
+
+Node: dcid:WHO/g/YawsEndemicTreponematoses
+typeOf: dcs:StatVarGroup
+name: "Yaws (Endemic Treponematoses)"
+specializationOf: dcid:WHO/g/NeglectedTropicalDiseases
+
+Node: dcid:WHO/g/ChemicalSafety
+typeOf: dcs:StatVarGroup
+name: "Chemical Safety"
+specializationOf: dcid:WHO/g/EnvironmentAndHealth
+
+Node: dcid:WHO/g/HouseholdAirPollution
+typeOf: dcs:StatVarGroup
+name: "Household Air Pollution"
+specializationOf: dcid:WHO/g/AirPollution
+
+Node: dcid:WHO/g/ChildrenEnvironmentalHealth
+typeOf: dcs:StatVarGroup
+name: "Children: Environmental Health"
+specializationOf: dcid:WHO/g/EnvironmentAndHealth
+
+Node: dcid:WHO/g/UltravioletUvRadiation
+typeOf: dcs:StatVarGroup
+name: "Ultraviolet (Uv) Radiation"
+specializationOf: dcid:WHO/g/EnvironmentAndHealth
+
+Node: dcid:WHO/g/AmbientAirPollution
+typeOf: dcs:StatVarGroup
+name: "Ambient Air Pollution"
+specializationOf: dcid:WHO/g/AirPollution
+
+Node: dcid:WHO/g/SecondHandSmoke
+typeOf: dcs:StatVarGroup
+name: "Second-Hand Smoke"
+specializationOf: dcid:WHO/g/EnvironmentAndHealth
+
+Node: dcid:WHO/g/TotalEnvironment
+typeOf: dcs:StatVarGroup
+name: "Total Environment"
+specializationOf: dcid:WHO/g/EnvironmentAndHealth
+
+Node: dcid:WHO/g/OccupationalRiskFactors
+typeOf: dcs:StatVarGroup
+name: "Occupational Risk Factors"
+specializationOf: dcid:WHO/g/EnvironmentAndHealth
+
+Node: dcid:WHO/g/RadonDatabase
+typeOf: dcs:StatVarGroup
+name: "Radon Database"
+specializationOf: dcid:WHO/g/EnvironmentAndHealth
+
+Node: dcid:WHO/g/ClimateChange
+typeOf: dcs:StatVarGroup
+name: "Climate Change"
+specializationOf: dcid:WHO/g/EnvironmentAndHealth
+
+Node: dcid:WHO/g/ElectromagneticFields
+typeOf: dcs:StatVarGroup
+name: "Electromagnetic Fields"
+specializationOf: dcid:WHO/g/EnvironmentAndHealth
+
+Node: dcid:WHO/g/TotalBurdenOfDiseaseFromHouseholdAndAmbientAirPollution
+typeOf: dcs:StatVarGroup
+name: "Total Burden Of Disease From Household And Ambient Air Pollution"
+specializationOf: dcid:WHO/g/AirPollution
+
+Node: dcid:WHO/g/RiskReduction
+typeOf: dcs:StatVarGroup
+name: "Risk Reduction"
+specializationOf: dcid:WHO/g/GlobalDementiaObservatoryGdo
+
+Node: dcid:WHO/g/PolicyAndLegislation
+typeOf: dcs:StatVarGroup
+name: "Policy And Legislation"
+specializationOf: dcid:WHO/g/GlobalDementiaObservatoryGdo
+
+Node: dcid:WHO/g/DiagnosisTreatmentAndCare
+typeOf: dcs:StatVarGroup
+name: "Diagnosis, Treatment, And Care"
+specializationOf: dcid:WHO/g/GlobalDementiaObservatoryGdo
+
+Node: dcid:WHO/g/CarerSupport
+typeOf: dcs:StatVarGroup
+name: "Carer Support"
+specializationOf: dcid:WHO/g/GlobalDementiaObservatoryGdo
+
+Node: dcid:WHO/g/AwarenessAndFriendliness
+typeOf: dcs:StatVarGroup
+name: "Awareness And Friendliness"
+specializationOf: dcid:WHO/g/GlobalDementiaObservatoryGdo
+
+Node: dcid:WHO/g/InformationSystems
+typeOf: dcs:StatVarGroup
+name: "Information Systems"
+specializationOf: dcid:WHO/g/ResourcesForSubstanceUseDisorders
+
+Node: dcid:WHO/g/Research
+typeOf: dcs:StatVarGroup
+name: "Research"
+specializationOf: dcid:WHO/g/GlobalDementiaObservatoryGdo
+
+Node: dcid:WHO/g/LifeExpectancyForWomen
+typeOf: dcs:StatVarGroup
+name: "Life Expectancy For Women"
+specializationOf: dcid:WHO/g/WomenAndHealth
+
+Node: dcid:WHO/g/MaternalAndReproductiveHealth
+typeOf: dcs:StatVarGroup
+name: "Maternal And Reproductive Health"
+specializationOf: dcid:WHO/g/MaternalAndReproductiveHealth
+
+Node: dcid:WHO/g/AntiDementiaMedicationAndCareProductsAvailability
+typeOf: dcs:StatVarGroup
+name: "Anti-Dementia Medication And Care Products Availability"
+specializationOf: dcid:WHO/g/DementiaDiagnosisTreatmentAndCare
+
+Node: dcid:WHO/g/DementiaHealthAndSocialWorkforce
+typeOf: dcs:StatVarGroup
+name: "Dementia Health And Social Workforce"
+specializationOf: dcid:WHO/g/DementiaDiagnosisTreatmentAndCare
+
+Node: dcid:WHO/g/CommunityBasedServicesForDementia
+typeOf: dcs:StatVarGroup
+name: "Community-Based Services For Dementia"
+specializationOf: dcid:WHO/g/DementiaDiagnosisTreatmentAndCare
+
+Node: dcid:WHO/g/DementiaCareCoordination
+typeOf: dcs:StatVarGroup
+name: "Dementia Care Coordination"
+specializationOf: dcid:WHO/g/DementiaDiagnosisTreatmentAndCare
+
+Node: dcid:WHO/g/DiagnosticRateOfDementia
+typeOf: dcs:StatVarGroup
+name: "Diagnostic Rate Of Dementia"
+specializationOf: dcid:WHO/g/DementiaDiagnosisTreatmentAndCare
+
+Node: dcid:WHO/g/DementiaSpecificNongovernmentalOrganization
+typeOf: dcs:StatVarGroup
+name: "Dementia-Specific Nongovernmental Organization"
+specializationOf: dcid:WHO/g/DementiaDiagnosisTreatmentAndCare
+
+Node: dcid:WHO/g/DementiaHealthAndSocialCareFacilities
+typeOf: dcs:StatVarGroup
+name: "Dementia Health And Social Care Facilities"
+specializationOf: dcid:WHO/g/DementiaDiagnosisTreatmentAndCare
+
+Node: dcid:WHO/g/StandardsGuidelinesProtocols
+typeOf: dcs:StatVarGroup
+name: "Standards/Guidelines/Protocols"
+specializationOf: dcid:WHO/g/DementiaDiagnosisTreatmentAndCare
+
+Node: dcid:WHO/g/GovernancePolicyAndFinancing
+typeOf: dcs:StatVarGroup
+name: "Governance, Policy And Financing"
+specializationOf: dcid:WHO/g/ResourcesForSubstanceUseDisorders
+
+Node: dcid:WHO/g/Youth
+typeOf: dcs:StatVarGroup
+name: "Youth"
+specializationOf: dcid:WHO/g/ResourcesForSubstanceUseDisorders
+
+Node: dcid:WHO/g/ServiceOrganizationAndDelivery
+typeOf: dcs:StatVarGroup
+name: "Service Organization And Delivery"
+specializationOf: dcid:WHO/g/ResourcesForSubstanceUseDisorders
+
+Node: dcid:WHO/g/HumanResources
+typeOf: dcs:StatVarGroup
+name: "Human Resources"
+specializationOf: dcid:WHO/g/ResourcesForSubstanceUseDisorders
+
+Node: dcid:WHO/g/Sdg382CatastrophicHealthSpendingAndRelatedIndicators
+typeOf: dcs:StatVarGroup
+name: "Sdg 3.8.2 Catastrophic Health Spending (And Related Indicators)"
+specializationOf: dcid:WHO/g/SdgTarget38AchieveUniversalHealthCoverageUhc
+
+Node: dcid:WHO/g/NoncommunicableDiseases
+typeOf: dcs:StatVarGroup
+name: "Noncommunicable Diseases"
+specializationOf: dcid:WHO/g/WorldHealthStatistics
+
+Node: dcid:WHO/g/GlobalHealthWorkforceStatisticsDatabase
+typeOf: dcs:StatVarGroup
+name: "Global Health Workforce Statistics Database"
+specializationOf: dcid:WHO/g/HealthWorkforce
+
+Node: dcid:WHO/g/DataOnTheSizeOfTheHivAidsEpidemic
+typeOf: dcs:StatVarGroup
+name: "Data On The Size Of The Hiv/Aids Epidemic"
+specializationOf: dcid:WHO/g/HivAids
+
+Node: dcid:WHO/g/HealthFinancing
+typeOf: dcs:StatVarGroup
+name: "Health Financing"
+specializationOf: dcid:WHO/g/WorldHealthStatistics
+
+Node: dcid:WHO/g/LifeExpectancyAndLifeTables
+typeOf: dcs:StatVarGroup
+name: "Life Expectancy And Life Tables"
+specializationOf: dcid:WHO/g/GlobalHealthEstimatesLifeExpectancyAndLeadingCausesOfDeathAndDisability
+
+Node: dcid:WHO/g/ImmunizationCoverage
+typeOf: dcs:StatVarGroup
+name: "Immunization Coverage"
+specializationOf: dcid:WHO/g/WorldHealthStatistics
+
+Node: dcid:WHO/g/MaternalMortality
+typeOf: dcs:StatVarGroup
+name: "Maternal Mortality"
+specializationOf: dcid:WHO/g/MaternalAndReproductiveHealth
+
+Node: dcid:WHO/g/WorldHealthStatistics
+typeOf: dcs:StatVarGroup
+name: "World Health Statistics"
+specializationOf: dcid:WHO/g/WorldHealthStatistics
+
+Node: dcid:WHO/g/DataOnTheHivAidsResponse
+typeOf: dcs:StatVarGroup
+name: "Data On The Hiv/Aids Response"
+specializationOf: dcid:WHO/g/HivAids
+
+Node: dcid:WHO/g/RiskFactors
+typeOf: dcs:StatVarGroup
+name: "Risk Factors"
+specializationOf: dcid:WHO/g/NoncommunicableDiseases
+
+Node: dcid:WHO/g/NationalCapacity
+typeOf: dcs:StatVarGroup
+name: "National Capacity"
+specializationOf: dcid:WHO/g/NoncommunicableDiseases
+
+Node: dcid:WHO/g/MortalityDeathsFromNcds
+typeOf: dcs:StatVarGroup
+name: "Mortality: Deaths From Ncds"
+specializationOf: dcid:WHO/g/GlobalHealthEstimatesLifeExpectancyAndLeadingCausesOfDeathAndDisability
+
+Node: dcid:WHO/g/HealthWorkforceDataFromOtherSources
+typeOf: dcs:StatVarGroup
+name: "Health Workforce Data From Other Sources"
+specializationOf: dcid:WHO/g/HealthWorkforce
+
+Node: dcid:WHO/g/
+typeOf: dcs:StatVarGroup
+name: ""
+specializationOf: dcid:WHO/g/HealthWorkforce
+
+Node: dcid:WHO/g/MortalityAndGlobalHealthEstimates
+typeOf: dcs:StatVarGroup
+name: "Mortality And Global Health Estimates"
+specializationOf: dcid:WHO/g/GlobalHealthEstimatesLifeExpectancyAndLeadingCausesOfDeathAndDisability
+
+Node: dcid:WHO/g/GlobalAntimicrobialResistanceAndUseSurveillanceSystemGlass
+typeOf: dcs:StatVarGroup
+name: "Global Antimicrobial Resistance And Use Surveillance System (Glass)"
+specializationOf: dcid:WHO/g/AntimicrobialResistanceAmr
+
+Node: dcid:WHO/g/MalariaTreatmentAndInterventionCoverage
+typeOf: dcs:StatVarGroup
+name: "Malaria Treatment And Intervention Coverage"
+specializationOf: dcid:WHO/g/Malaria
+
+Node: dcid:WHO/g/MalariaBurdenDataCasesAndDeaths
+typeOf: dcs:StatVarGroup
+name: "Malaria Burden Data: Cases And Deaths"
+specializationOf: dcid:WHO/g/Malaria
+
+Node: dcid:WHO/g/MalariaTestingAndDiagnosis
+typeOf: dcs:StatVarGroup
+name: "Malaria Testing And Diagnosis"
+specializationOf: dcid:WHO/g/Malaria
+
+Node: dcid:WHO/g/PreventionResearchTreatment
+typeOf: dcs:StatVarGroup
+name: "Prevention, Research, Treatment"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/AlcoholControlPolicies
+typeOf: dcs:StatVarGroup
+name: "Alcohol Control Policies"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/HarmsAndConsequences
+typeOf: dcs:StatVarGroup
+name: "Harms And Consequences"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/LevelsOfConsumption
+typeOf: dcs:StatVarGroup
+name: "Levels Of Consumption"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/DataSourcesForAbstainersAndHeavyEpisodicDrinkers
+typeOf: dcs:StatVarGroup
+name: "Data Sources For Abstainers And Heavy Episodic Drinkers"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/YouthAndAlcohol
+typeOf: dcs:StatVarGroup
+name: "Youth And Alcohol"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/KeyAlcoholIndicatorsRelevantToNoncommunicableDiseases
+typeOf: dcs:StatVarGroup
+name: "Key Alcohol Indicators Relevant To Noncommunicable Diseases"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/EconomicAspects
+typeOf: dcs:StatVarGroup
+name: "Economic Aspects"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/KeyAlcoholIndicatorsRelevantToSustainableDevelopmentGoalsSdgs
+typeOf: dcs:StatVarGroup
+name: "Key Alcohol Indicators Relevant To Sustainable Development Goals (Sdgs)"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/PatternsOfConsumption
+typeOf: dcs:StatVarGroup
+name: "Patterns Of Consumption"
+specializationOf: dcid:WHO/g/GlobalInformationSystemOnAlcoholAndHealth
+
+Node: dcid:WHO/g/HealthSecurity
+typeOf: dcs:StatVarGroup
+name: "Health Security"
+specializationOf: dcid:WHO/g/HealthSystems
+
+Node: dcid:WHO/g/PharmaceuticalsDrugsAndSupplies
+typeOf: dcs:StatVarGroup
+name: "Pharmaceuticals,Drugs And Supplies"
+specializationOf: dcid:WHO/g/HealthSystems
+
+Node: dcid:WHO/g/HealthInformationSystem
+typeOf: dcs:StatVarGroup
+name: "Health Information System"
+specializationOf: dcid:WHO/g/HealthSystems
+
+Node: dcid:WHO/g/GovernanceRelated
+typeOf: dcs:StatVarGroup
+name: "Governance-Related"
+specializationOf: dcid:WHO/g/HealthSystems
+
+Node: dcid:WHO/g/HealthSystemsHealthFinancing
+typeOf: dcs:StatVarGroup
+name: "Health Systems - Health Financing"
+specializationOf: dcid:WHO/g/HealthSystems
+
+Node: dcid:WHO/g/HealthServiceDelivery
+typeOf: dcs:StatVarGroup
+name: "Health Service Delivery"
+specializationOf: dcid:WHO/g/HealthSystems
+
+Node: dcid:WHO/g/WomenMarriedOrInAUnionBeforeAge15And18
+typeOf: dcs:StatVarGroup
+name: "Women Married Or In A Union Before Age 15 And 18"
+specializationOf: dcid:WHO/g/MaternalAndReproductiveHealth
+
+Node: dcid:WHO/g/WomenMarriedOrInAUnionBeforeAge15And19
+typeOf: dcs:StatVarGroup
+name: "Women Married Or In A Union Before Age 15 And 19"
+specializationOf: dcid:WHO/g/MaternalAndReproductiveHealth
+
+Node: dcid:WHO/g/Sdg381CoverageOfEssentialHealthServices
+typeOf: dcs:StatVarGroup
+name: "Sdg 3.8.1 Coverage Of Essential Health Services"
+specializationOf: dcid:WHO/g/SdgTarget38AchieveUniversalHealthCoverageUhc
+
+Node: dcid:WHO/g/DrugResistantTb
+typeOf: dcs:StatVarGroup
+name: "Drug Resistant Tb"
+specializationOf: dcid:WHO/g/Tuberculosis
+
+Node: dcid:WHO/g/CoEpidemicsOfTbAndHiv
+typeOf: dcs:StatVarGroup
+name: "Co-Epidemics Of Tb And Hiv"
+specializationOf: dcid:WHO/g/Tuberculosis
+
+Node: dcid:WHO/g/TreatmentSuccess
+typeOf: dcs:StatVarGroup
+name: "Treatment Success"
+specializationOf: dcid:WHO/g/Tuberculosis
+
+Node: dcid:WHO/g/TuberculosisCasesAndDeaths
+typeOf: dcs:StatVarGroup
+name: "Tuberculosis Cases And Deaths"
+specializationOf: dcid:WHO/g/Tuberculosis

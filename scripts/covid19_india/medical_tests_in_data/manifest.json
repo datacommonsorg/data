@@ -13,6 +13,6 @@
             "cleaned_csv": "COVID19_tests_india.csv"
         }],
         "cron_schedule":
-        "* * * * *"
+        "0 6 * * *"
     }]
 }

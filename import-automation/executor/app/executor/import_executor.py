@@ -693,13 +693,13 @@ def _mark_system_run_failed(run_id: str, message: str,
                             dashboard: dashboard_api.DashboardAPI) -> Dict:
     """Communicates with the import progress dashboard that a system run
     has failed.
-    
+
     Args:
         run_id: ID of the system run.
         message: An additional message to log to the dashboard
             with level critical.
         dashboard: DashboardAPI object for the communicaiton.
-    
+
     Returns:
         Updated system run returned from the dashboard.
     """
@@ -715,13 +715,13 @@ def _mark_import_attempt_failed(attempt_id: str, message: str,
                                 dashboard: dashboard_api.DashboardAPI) -> Dict:
     """Communicates with the import progress dashboard that an import attempt
     has failed.
-    
+
     Args:
         attempt_id: ID of the import attempt.
         message: An additional message to log to the dashboard
             with level critical.
         dashboard: DashboardAPI object for the communicaiton.
-    
+
     Returns:
         Updated import attempt returned from the dashboard.
     """

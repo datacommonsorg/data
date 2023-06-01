@@ -1,0 +1,9 @@
+Node: E:LocalGovernmentDirectory_Districts->E1
+typeOf: dcs:AdministrativeArea2
+dcid: C:LocalGovernmentDirectory_Districts->DistrictDCID 
+wikidataId: C:LocalGovernmentDirectory_Districts->WikiDataId
+name: C:LocalGovernmentDirectory_Districts->LGDDistrictNameTitleCase
+lgdCode: C:LocalGovernmentDirectory_Districts->LGDDistrictCode
+indianCensusAreaCode2011: C:LocalGovernmentDirectory_Districts->LGDCensus2011Code
+indianCensusAreaCode2001:  C:LocalGovernmentDirectory_Districts->LGDCensus2001Code
+containedInPlace: C:LocalGovernmentDirectory_Districts->StateDCID

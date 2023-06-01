@@ -1,0 +1,23 @@
+Node: dcid:Mean_Concentration_AirPollutant_DieselPM
+description: "Annual mean Diesel PM concentration in air measured from EPA NATA"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:concentration
+statType: dcs:meanValue
+pollutant: dcs:DieselPM
+
+Node: dcid:AirPollutant_Cancer_Risk
+description: "Probability of contracting cancer over a 70 year lifetime due to air pollutant exposure"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:lifetimeContractionProbability
+statType: dcs:measuredValue
+pollutantHealthRisk: dcs:Cancer
+
+Node: dcid:AirPollutant_Respiratory_Hazard
+description: "Ratio of lifetime exposure to reference concentration. Value of 1 or lower means unlikely noncancer health effects."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:hazardIndex
+statType: dcs:measuredValue
+pollutantHealthRisk: dcs:NonCarcinogenicRespiratoryHazard
