@@ -104,17 +104,17 @@ def format_word_stem(df):
 		df: dataframe with word stem categories
 	
 	"""
-	df['WordStem'] = np.nan
+	df['WordElementType'] = np.nan
 	for index,row in df.iterrows():
 		val = df.loc[index,'Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)']
 		if(~isNaN(val)): ## evaluate word stem based on non-empty value
 			val = str(val)
 			if((val[0] == "-") & (val[-1] == "-")): ## if the word starts and ends with a hyphen, it's an infix
-				df.loc[index,'WordStem'] = "WordStemInfix"
+				df.loc[index,'WordElementType'] = "WordElementTypeInfix"
 			elif(val[0] == "-"):
-				df.loc[index,'WordStem'] = "WordStemPrefix" ## else, if the word starts with a hyphen, it's a prefix
+				df.loc[index,'WordElementType'] = "WordElementTypePrefix" ## else, if the word starts with a hyphen, it's a prefix
 			else:
-				df.loc[index,'WordStem'] = "WordStemSuffix" ## if none of the above apply, it's a suffix
+				df.loc[index,'WordElementType'] = "WordElementTypeSuffix" ## if none of the above apply, it's a suffix
 	return df 
 
 def format_usan_specialization(df):
@@ -182,7 +182,7 @@ def format_year(df, df_chembl):
 	df1.replace("nan", np.nan, inplace=True)
 	df1 = df1.drop_duplicates()
 	df1.update('"' +
-				  df1[['Stem', 'StemType', 'Definition', 'Examples', 'WordStem', 'SpecializationOf', 'dcid', 'name'
+				  df1[['Stem', 'StemType', 'Definition', 'Examples', 'WordElementType', 'SpecializationOf', 'dcid', 'name'
 					 ]].astype(str) + '"')
 	df1.replace("\"nan\"", np.nan, inplace=True)
 	return df1
