@@ -1,0 +1,816 @@
+Node: dcid:Count_Household
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf10000OrLessInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [- 10000 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf10000OrLessInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [- 10000 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf50000To74999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [50000 74999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf50000To74999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [50000 74999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf75000To99999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [75000 99999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf75000To99999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [75000 99999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf100000To149999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [100000 149999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf100000To149999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [100000 149999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf150000To199999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [150000 199999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf150000To199999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [150000 199999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_IncomeOf200000OrMoreInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+income: [200000 - InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_IncomeOf200000OrMoreInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+income: [200000 - InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_Income_Household
+measuredProperty: dcs:income
+statType: dcs:meanValue
+populationType: dcs:Household
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf10000OrLessInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [- 10000 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf10000OrLessInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [- 10000 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf50000To74999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [50000 74999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf50000To74999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [50000 74999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf75000To99999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [75000 99999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf75000To99999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [75000 99999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf100000To149999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [100000 149999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf100000To149999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [100000 149999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf150000To199999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [150000 199999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf150000To199999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [150000 199999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_FamilyHousehold_IncomeOf200000OrMoreInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [200000 - InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_FamilyHousehold_IncomeOf200000OrMoreInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+income: [200000 - InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_FamilyHousehold
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_Income_Household_FamilyHousehold
+measuredProperty: dcs:income
+statType: dcs:meanValue
+populationType: dcs:Household
+householdType: dcs:FamilyHousehold
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf10000OrLessInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [- 10000 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf10000OrLessInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [- 10000 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf50000To74999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [50000 74999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf50000To74999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [50000 74999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf75000To99999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [75000 99999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf75000To99999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [75000 99999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf100000To149999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [100000 149999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf100000To149999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [100000 149999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf150000To199999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [150000 199999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf150000To199999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [150000 199999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_MarriedCoupleFamilyHousehold_IncomeOf200000OrMoreInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [200000 - InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_MarriedCoupleFamilyHousehold_IncomeOf200000OrMoreInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+income: [200000 - InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_Income_Household_MarriedCoupleFamilyHousehold
+measuredProperty: dcs:income
+statType: dcs:meanValue
+populationType: dcs:Household
+householdType: dcs:MarriedCoupleFamilyHousehold
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf10000OrLessInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [- 10000 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf10000OrLessInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [- 10000 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf10000To14999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [10000 14999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf15000To24999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [15000 24999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf25000To34999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [25000 34999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf35000To49999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [35000 49999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf50000To74999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [50000 74999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf50000To74999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [50000 74999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf75000To99999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [75000 99999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf75000To99999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [75000 99999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf100000To149999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [100000 149999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf100000To149999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [100000 149999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf150000To199999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [150000 199999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf150000To199999InflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [150000 199999 InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_NonfamilyHousehold_IncomeOf200000OrMoreInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [200000 - InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Household_NonfamilyHousehold_IncomeOf200000OrMoreInflationAdjustedUSDCurrentYear
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+income: [200000 - InflationAdjustedUSD_CurrentYear]
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_NonfamilyHousehold
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_Income_Household_NonfamilyHousehold
+measuredProperty: dcs:income
+statType: dcs:meanValue
+populationType: dcs:Household
+householdType: dcs:NonfamilyHousehold
+incomeStatus: dcs:WithIncome
+typeOf: dcs:StatisticalVariable
+
