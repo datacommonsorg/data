@@ -1,3 +1,27 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+Author: Samantha Piekos
+Date: 03/22/2023
+Name: format_virus_metadata_resource
+Description: This cleans and formats the ICTV Virus Metadata Resource for 
+import into the knowledge graph as a csv+tmcf pair.
+
+@file_input	Virus Metadata Resource excel file
+@file_output	cleaned and formatted csv file
+"""
+
 # set up environment
 import pandas as pd
 import sys
