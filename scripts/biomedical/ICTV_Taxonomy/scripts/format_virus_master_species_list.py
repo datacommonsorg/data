@@ -14,11 +14,11 @@
 """
 Author: Samantha Piekos
 Date: 03/22/2023
-Name: create_virus_taxonomic_ranking_enums
+Name: format_virus_master_species_list
 Description: This cleans and formats the ICTV Master Species List for 
 import into the knowledge graph as a csv+tmcf pair.
 
-@file_input	Master Species List csv file
+@file_input	Master Species List excel file
 @file_output	cleaned and formatted csv file
 """
 
