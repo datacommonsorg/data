@@ -14,7 +14,7 @@
 """
 Author: Samantha Piekos
 Date: 03/22/2023
-Name: create_virus_taxonomic_ranking_enums
+Name: download
 Description: This file downloads the most recent version of the ICTV Master 
 Species List and Virus Metadata Resource and prepares it for processing
 """
