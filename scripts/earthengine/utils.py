@@ -15,6 +15,7 @@
 
 import csv
 import datacommons as dc
+import datetime
 import glob
 import os
 import pickle
@@ -24,74 +25,25 @@ import sys
 import tempfile
 
 from absl import logging
+from datetime import date
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from geopy import distance
 from s2sphere import LatLng, Cell, CellId
 from shapely.geometry import Polygon
 from typing import Union
 
-_SCRIPTS_DIR = os.path.dirname(os.path.dirname(__file__))
+_SCRIPTS_DIR = os.path.dirname(__file__)
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-from util.config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
-from util.dc_api_wrapper import dc_api_wrapper
-
+from config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
+from dc_api_wrapper import dc_api_wrapper
 
 # Utilities for dicts.
-def aggregate_value(value1: str, value2: str, aggregate: str = 'sum') -> str:
-    '''Return value aggregated from src and dst as per the config.'''
-    value = None
-    if aggregate == 'sum':
-        value = value1 + value2
-    elif aggregate == 'min':
-        value = min(value1, value2)
-    elif aggregate == 'max':
-        value = max(value1, value2)
-    elif aggregate == 'list':
-        # Create a list of unique values combining lists.
-        value = set(str(value1).split(','))
-        value.update(str(value2).split(','))
-        value = ','.join(sorted(value))
-    else:
-        logging.fatal(
-            f'Unsupported aggregation: {aggregate} for {value1}, {value2}')
-    return value
-
-
-def dict_aggregate_values(src: dict, dst: dict, config: dict) -> dict:
-    '''Aggregate values for keys in src dict into dst.
-  The mode of aggregation (sum, mean, min, max) per property is
-  defined in the config.
-  Assumes properties to be aggregated have numeric values.
-
-  Args:
-    src: dictionary with property:value to be aggregated into dst
-    dst: dictionary with property:value which is updated.
-    config: dictionary with aggregation settings per property.
-  Returns:
-    dst dictionary with updated property:values.
-  '''
-    if config is None:
-        config = {}
-    default_aggr = config.get('aggregate', 'sum')
-    for prop, new_val in src.items():
-        if prop not in dst:
-            # Add new property to dst without any aggregation.
-            dst[prop] = new_val
-        else:
-            # Combine new value in src with current value in dst by aggregation.
-            aggr = config.get(prop, {}).get('aggregate', default_aggr)
-            cur_val = dst[prop]
-            if aggr == 'mean':
-                cur_num = dst.get(f'#{prop}:count', 1)
-                new_num = src.get(f'#{prop}:count', 1)
-                dst[prop] = ((cur_val * cur_num) +
-                             (new_val * new_num)) / (cur_num + new_num)
-                dst[f'#{prop}:count'] = cur_num + new_num
-            else:
-                dst[prop] = aggregate_value(cur_val, new_val, aggr)
-    return dst
 
 
 def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
@@ -107,6 +59,8 @@ def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
           'regex': <regex pattern>',
         },
       }
+  Returns:
+    True if the key:values in pvs meet all config criteria.
   '''
     props = list(pvs.keys())
     is_allowed = True
@@ -142,7 +96,18 @@ def is_s2_cell_id(dcid: str) -> bool:
     return strip_namespace(dcid).startswith('s2CellId/')
 
 
-def s2_cell_from_latlng(lat: float, lng: float, level: int) -> s2sphere.CellId:
+def s2_cell_from_latlng(lat: float, lng: float, level: int) -> CellId:
+    '''Returns an S2 CellId object of level for the given location lat/lng.
+
+    Args:
+      lat: Latitude in degrees
+      lng: Longitude in degrees
+      level: desired S2 level for cell id.
+        Should be <30, the max s2 level supported.
+
+    Returns:
+      CellId object oof the desired level that contains the lat/lng point.
+    '''
     assert level >= 0 and level <= 30
     ll = s2sphere.LatLng.from_degrees(lat, lng)
     cell = s2sphere.CellId.from_lat_lng(ll)
@@ -151,19 +116,22 @@ def s2_cell_from_latlng(lat: float, lng: float, level: int) -> s2sphere.CellId:
     return cell
 
 
-def s2_cell_to_hex_str(s2cell_id: int) -> str:
+def s2_cell_to_hex_str(s2cell_id: Union[int, CellId]) -> str:
+    '''Returns the s2 cell id in hex.'''
     if isinstance(s2cell_id, CellId):
         s2cell_id = s2cell_id.id()
     return f'{s2cell_id:#018x}'
 
 
-def s2_cell_to_dcid(s2cell_id: int) -> str:
+def s2_cell_to_dcid(s2cell_id: Union[int, CellId]) -> str:
+    '''Returns the dcid for the s2 cell of the form s2CellId/0x1234.'''
     if isinstance(s2cell_id, CellId):
         s2cell_id = s2cell_id.id()
     return 'dcid:s2CellId/' + s2_cell_to_hex_str(s2cell_id)
 
 
-def s2_cell_from_dcid(s2_dcid: str) -> s2sphere.CellId:
+def s2_cell_from_dcid(s2_dcid: Union[str, int, CellId]) -> CellId:
+    '''Returns the s2 CellId object for the s2 cell.'''
     if isinstance(s2_dcid, str):
         return s2sphere.CellId(int(s2_dcid[s2_dcid.find('/') + 1:], 16))
     if isinstance(s2_dcid, int):
@@ -174,11 +142,12 @@ def s2_cell_from_dcid(s2_dcid: str) -> s2sphere.CellId:
 
 
 def s2_cell_latlng_dcid(lat: float, lng: float, level: int) -> str:
+    '''Returns dcid of the s2 cell of given level containing the point lat/lng.'''
     return s2_cell_to_dcid(s2_cell_from_latlng(lat, lng, level).id())
 
 
 def s2_cells_distance(cell_id1: int, cell_id2: int) -> float:
-    '''Returns the distance between the centroid of the S2 cells.'''
+    '''Returns the distance between the centroid of two S2 cells in kilometers.'''
     p1 = CellId(cell_id1).to_lat_lng()
     p2 = CellId(cell_id2).to_lat_lng()
     return distance.distance((p1.lat().degrees, p1.lng().degrees),
@@ -201,8 +170,11 @@ def s2_cell_area(cell_id: s2sphere.CellId) -> float:
     return s2sphere.Cell(s2_cell).exact_area() * _EARTH_RADIUS * _EARTH_RADIUS
 
 
-def s2_cell_get_neighbor_ids(s2_cell_id: str) -> str:
-    '''Returns the neighbouring cell ids for a given s2 cell dcid.'''
+def s2_cell_get_neighbor_ids(s2_cell_id: str) -> list:
+    '''Returns a list of neighbouring cell dcids for a given s2 cell dcid.
+    An interior cell will have 8 neighbours: 3 above, 1 left, 1 right and 3 below.
+    A cell near the edge may have a subset of these.
+    '''
     s2_cell = s2_cell_from_dcid(s2_cell_id)
     return [
         s2_cell_to_dcid(cell)
@@ -211,6 +183,7 @@ def s2_cell_get_neighbor_ids(s2_cell_id: str) -> str:
 
 
 def s2_cell_to_polygon(s2_cell_id: str) -> Polygon:
+    '''Returns the polygon with 4 vertices for an s2 cell.'''
     s2_cell = Cell(s2_cell_from_dcid(s2_cell_id))
     if not s2_cell:
         return None
@@ -227,10 +200,10 @@ def s2_cell_to_polygon(s2_cell_id: str) -> Polygon:
 
 def latlng_cell_area(lat: float, lng: float, height: float,
                      width: float) -> float:
-    '''Returns the area of the rectangular cell in km2.
+    '''Returns the area of the rectangular region in sqkm.
     Args:
-      lat: latitude of a corner.
-      lng: Longitude of a corner
+      lat: latitude of a corner in degrees
+      lng: Longitude of a corner in degrees
       width: width in degrees
       height: height in degrees
     Returns:
@@ -384,9 +357,9 @@ def place_distance(place1: str, place2: str) -> float:
 
 
 def place_area(place: str) -> float:
-    '''Returns the area for the place.'''
+    '''Returns the area for the place in sqkm.'''
     if is_s2_cell_id(place):
-        s2_cell = s2_cell_from_dcid(placeid)
+        s2_cell = s2_cell_from_dcid(place)
         return s2_cell_area(s2_cell)
     if is_grid_id(place) or is_ipcc_id(place):
         return grid_area(place)
@@ -401,189 +374,6 @@ def place_to_polygon(place_id: str) -> Polygon:
     if is_grid_id(place_id) or is_ipcc_id(place_id):
         return grid_to_polygon(place_id)
     return None
-
-
-# Utilities for files.
-def file_get_matching(filepat: str) -> list:
-    '''Return a list of matching file names.
-    Args:
-      filepat: string with comma seperated list of file patterns to lookup
-    Returns:
-      list of matching filenames.
-    '''
-    # Get a list of input file patterns to lookup
-    input_files = filepat
-    if isinstance(filepat, str):
-        input_files = [filepat]
-    if isinstance(input_files, list):
-        for files in input_files:
-            for file in files.split(','):
-                if file not in input_files:
-                    input_files.append(file)
-    # Get all matching files for each file pattern.
-    files = list()
-    if input_files:
-        for file in input_files:
-            for f in glob.glob(file):
-                if f not in files:
-                    files.append(f)
-    return sorted(files)
-
-
-def file_estimate_num_rows(filename: str) -> int:
-    '''Returns an estimated number of rows based on size of the first few rows.
-    Args:
-      filename: string name of the file.
-    Returns:
-      An estimated number of rows.
-    '''
-    filesize = os.path.getsize(filename)
-    with open(filename) as fp:
-        lines = fp.read(4000)
-    line_size = max(len(lines) / (lines.count('\n') + 1), 1)
-    return int(filesize / line_size)
-
-
-def file_get_name(file_path: str,
-                  suffix: str = '',
-                  file_ext: str = '.csv') -> str:
-    '''Returns the filename with suffix and extension.
-    Creates the directory path for the file if it doesn't exist.
-    Args:
-      file_path: file path with directory and file name prefix
-      suffix: file name suffix
-      file_ext: file extension
-    Returns:
-      file name combined from path, suffix and extension.
-    '''
-    # Create the file directory if it doesn't exist.
-    file_dir = os.path.dirname(file_path)
-    if file_dir:
-        os.makedirs(file_dir, exist_ok=True)
-    file_prefix, ext = os.path.splitext(file_path)
-    if file_prefix.endswith(suffix):
-        # Suffix already present in name, ignore it.
-        suffix = ''
-    # Set the file extension
-    if file_ext and file_ext[0] != '.':
-        file_ext = '.' + file_ext
-    return file_prefix + suffix + file_ext
-
-
-def file_load_csv_dict(filename: str,
-                       key_column: str = None,
-                       value_column: str = None,
-                       delimiter: str = ',',
-                       config: dict = {}) -> dict:
-    '''Returns a CSV file loaded into a dict.
-  Each row is added to the dict with value from column 'key_column' as key
-  and  value from 'value_column.
-  Args:
-    filename: csv file name to be loaded into the dict.
-      it can be a comma separated list of file patterns as well.
-    key_column: column in the csv to be used as the key for the dict
-      if not set, uses the first column as the key.
-    value_column: column to be used as value in the dict.
-      If not set, value is a dict of all remaining columns.
-    config: dictionary of aggregation settings in case there are
-      multiple rows with the same key.
-      refer to dict_aggregate_values() for config settings.
-
-  Returns:
-    dictionary of {key:value} loaded from the CSV file.
-  '''
-    csv_dict = {}
-    input_files = file_get_matching(filename)
-    for filename in input_files:
-        logging.info(f'Loading csv data file: {filename}')
-        num_rows = 0
-        # Load each CSV file
-        with open(filename) as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=delimiter)
-            if not key_column:
-                key_column = reader.fieldnames[0]
-            if not value_column and len(reader.fieldnames) == 2:
-                value_column = reader.fieldnames[1]
-            # Process a row from the csv file
-            for row in reader:
-                # Get the key for the row.
-                key = None
-                if key_column in row:
-                    key = row.pop(key_column)
-                value = ''
-                if value_column:
-                    value = row.get(value_column, '')
-                else:
-                    value = row
-                if key is None or value is None:
-                    logging.debug(f'Ignoring row without key or value: {row}')
-                    continue
-                # Add the row to the dict
-                if key in csv_dict:
-                    # Key already exists. Merge values.
-                    old_value = csv_dict[key]
-                    if isinstance(old_value, dict):
-                        dict_aggregate_values(row, old_value, config)
-                    else:
-                        aggr = config.get(prop, config).get('aggregate', 'sum')
-                        value = aggregate_value(old_value, value, aggr)
-                        csv_dict[key] = value
-                else:
-                    csv_dict[key] = value
-                num_rows += 1
-        logging.info(f'Loaded {num_rows} rows from {filename} into dict')
-    return csv_dict
-
-
-def file_load_py_dict(dict_filename: str) -> dict:
-    '''Returns a py dictionary loaded from the file.
-    The file can be a pickle file (.pkl) or a .py or JSON dict (.json)'''
-    input_files = file_get_matching(dict_filename)
-    py_dict = {}
-    for filename in input_files:
-        file_size = os.path.getsize(filename)
-        if file_size:
-            if filename.endswith('.pkl'):
-                logging.info(f'Loading dict from pickle file: {filename}')
-                with open(filename, 'rb') as file:
-                    py_dict.update(pickle.load(file))
-            else:
-                # Assumes the file is a py or json dict.
-                logging.info(f'Loading dict from py from file: {filename}')
-                py_dict.update(read_py_dict_from_file(filename))
-                logging.info(
-                    f'Loaded py dict of size: {file_size} from {filename}')
-    return py_dict
-
-
-def file_write_py_dict(py_dict: dict, filename: str):
-    '''Save the py dictionary into a file.
-    First writes the dict into a temp file and moves the tmp file to the required file.
-    so that any interruption during write will not corrupt the existing file.
-    '''
-    if not py_dict or not filename:
-        return
-    output_files = file_get_matching(filename)
-    if output_files:
-        # Save into the last file
-        filename = output_files[-1]
-    # Save the active events into a tmp file and move it to the required file.
-    fd, tmp_filename = tempfile.mkstemp()
-    if filename.endswith('.pkl'):
-        logging.info(
-            f'Writing py dict of size {sys.getsizeof(py_dict)} to pickle file: {filename}'
-        )
-        with open(tmp_filename, 'wb') as file:
-            pickle.dump(py_dict, file)
-    else:
-        logging.info(
-            f'Writing py dict of size {sys.getsizeof(py_dict)} to file: {filename}'
-        )
-        write_py_dict_to_file(py_dict, tmp_filename)
-    # Rename tmp file into the required file.
-    os.rename(tmp_filename, filename)
-    file_size = os.path.getsize(filename)
-    logging.info(f'Saved py dict into file: {filename} of size: {file_size}')
 
 
 # String utilities
@@ -649,3 +439,68 @@ def str_format_float(data: float, precision_digits: int = 6):
     if isinstance(data, float):
         return f'{data:.{precision_digits}f}'
     return data
+
+
+# Date utilities
+
+
+def date_today(date_format: str = '%Y-%m-%d') -> str:
+    '''Returns today's date in the given format.'''
+    return date.today().strftime(date_format)
+
+
+def date_yesterday(date_format: str = '%Y-%m-%d') -> str:
+    '''Returns today's date in the given format.'''
+    return date_advance_by_period(date_today(date_format), '-1d', date_format)
+
+
+def date_parse_time_period(time_period: str) -> (int, str):
+    '''Parse time period into a tuple of (number, unit),
+    for eg: for 'P1M' returns (1, month).
+    Time period is assumed to be of the form: P<Nunmber><Duration>
+    where duration is a letter: D: days, M; months, Y: years.
+    .'''
+    # Extract the number and duration letter from the time period.
+    re_pat = r'P?(?P<delta>[+-]?[0-9]+)(?P<unit>[A-Z])'
+    m = re.search(re_pat, time_period.upper())
+    if m:
+        m_dict = m.groupdict()
+        delta = int(m_dict.get('delta', '0'))
+        unit = m_dict.get('unit', 'M')
+        # Convert the duration letter to unit: days/months/years
+        period_dict = {'D': 'days', 'M': 'months', 'Y': 'years'}
+        period = period_dict.get(unit, 'day')
+        return (delta, period)
+    return (0, 'days')
+
+
+def date_advance_by_period(date_str: str,
+                           time_period: str,
+                           date_format: str = '%Y-%m-%d') -> str:
+    '''Returns the date string advanced by the time period.'''
+    if not date_str:
+        return ''
+    dt = datetime.strptime(date_str, date_format)
+    (delta, unit) = date_parse_time_period(time_period)
+    if not delta or not unit:
+        logging.error(
+            f'Unable to parse time period: {time_period} for date: {date_str}')
+        return ''
+    next_dt = dt + relativedelta(**{unit: delta})
+    return next_dt.strftime(date_format)
+
+
+def date_format_by_time_period(date_str: str, time_period: str) -> str:
+    '''Returns date in the format of the time_period: P<N><L>
+      If the last letter in the time_period is Y, returns date in YYYY,
+      for 'M', returns date as YYYY-MM, for D returns date as YYYY-MM-DD.
+    '''
+    if not time_period:
+        return date_str
+    (delta, unit) = date_parse_time_period(time_period)
+    date_parts = date_str.split('-')
+    if unit == 'years':
+        return date_parts[0]
+    if unit == 'months':
+        return '-'.join(date_parts[0:2])
+    return date_str

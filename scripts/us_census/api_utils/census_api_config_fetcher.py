@@ -163,9 +163,9 @@ def compile_year_map(store_path: str = CONFIG_PATH_,
                     print('/'.join(cur_dataset_dict['c_dataset']),
                           'year not available and not timeseries')
 
-                if cur_dataset_dict['distribution'][
-                        0]['accessURL'] != _generate_url_prefix(
-                            link_tree, year)[:-1]:
+                if cur_dataset_dict['distribution'][0][
+                        'accessURL'] != _generate_url_prefix(link_tree,
+                                                             year)[:-1]:
                     if 'url_mismatch' not in error_dict:
                         error_dict['url_mismatch'] = []
                     error_dict['url_mismatch'].append({
@@ -176,8 +176,9 @@ def compile_year_map(store_path: str = CONFIG_PATH_,
                     })
                     print(link_tree, 'accessURL unexpected')
 
-                if cur_dataset_dict['c_geographyLink'] != generate_url_geography(
-                        link_tree, year):
+                if cur_dataset_dict[
+                        'c_geographyLink'] != generate_url_geography(
+                            link_tree, year):
                     if 'url_mismatch' not in error_dict:
                         error_dict['url_mismatch'] = []
                     error_dict['url_mismatch'].append({
@@ -196,8 +197,9 @@ def compile_year_map(store_path: str = CONFIG_PATH_,
                     })
                     print(link_tree, 'c_groupsLink unexpected')
 
-                if cur_dataset_dict['c_variablesLink'] != generate_url_variables(
-                        link_tree, year):
+                if cur_dataset_dict[
+                        'c_variablesLink'] != generate_url_variables(
+                            link_tree, year):
                     if 'url_mismatch' not in error_dict:
                         error_dict['url_mismatch'] = []
                     error_dict['url_mismatch'].append({

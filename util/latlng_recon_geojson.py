@@ -16,10 +16,11 @@
 See latlng_recon_geojson_test.py for usage example.
 """
 
+from shapely import geometry
 import datacommons as dc
 import json
 import logging
-from shapely import geometry
+import time
 import urllib
 
 _WORLD = 'Earth'

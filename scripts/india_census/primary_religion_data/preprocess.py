@@ -183,8 +183,8 @@ class CensusPrimaryReligiousDataLoader():
 
         # When data_category i.e religion is "Total" remove those rows
         # As they are not required
-        self.raw_df = self.raw_df[
-            self.raw_df[self.data_category_column] != "Total"]
+        self.raw_df = self.raw_df[self.raw_df[self.data_category_column] !=
+                                  "Total"]
 
         # Converting rows in to columns. So the final structure will be
         # Name,TRU,columnName,value
