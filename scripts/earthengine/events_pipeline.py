@@ -47,7 +47,7 @@ syntax, '{<config>}'. The values are resolved when that setting is used.
       'gcs_bucket': 'my-bucket',
       'gcs_folder': 'my-import-name',
     },
-    # Stage sepcific settings
+    # Stage specific settings
     'stages': [
       {
         'stage': 'download',

@@ -79,8 +79,16 @@ def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
                     if value > prop_config['max']:
                         allow_value = False
                 if 'regex' in prop_config:
+                    if not isinstance(value, str):
+                      value = str(value)
                     matches = re.search(prop_config['regex'], value)
                     if not matches:
+                        allow_value = False
+                if 'ignore' in prop_config:
+                    if not isinstance(value, str):
+                      value = str(value)
+                    matches = re.search(prop_config['ignore'], value)
+                    if matches:
                         allow_value = False
         if not allow_value:
             pvs.pop(p)

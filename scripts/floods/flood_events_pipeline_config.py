@@ -3,7 +3,7 @@
     'defaults': {
         'import_name': 'DynamicWorldFloods',
         # Set start_date to start of year to be processed.
-        # Defaults to current year if left empty.
+        # Defaults to Jan 1 of current year if left empty.
         'start_date': '',
         'time_period': 'P1M',
 
@@ -140,7 +140,7 @@
             'polygon_simplification_factor':
                 None,
             'output_geojon_string':
-                True,
+                False,
 
             # Output svobs per place
             'output_place_svobs':

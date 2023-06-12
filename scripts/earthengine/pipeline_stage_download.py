@@ -15,7 +15,9 @@
 """
 
 import os
+import re
 import sys
+import time
 
 from absl import logging
 
@@ -52,9 +54,10 @@ class DownloadRunner(StageRunner):
         # Download data from start_date up to end_date
         # advancing date by the time_period.
         start_date = self.get_config('start_date', '', config_dict)
-        end_date = self.get_config('end_date', '', config_dict)
-        if not end_date:
-            end_date = utils.date_yesterday()
+        yesterday = utils.date_yesterday()
+        end_date = self.get_config('end_date', yesterday, config_dict)
+        if end_date > yesterday:
+            end_date = yesterday
         data_files = []
         while start_date and start_date <= end_date:
             # Download data for the start_date

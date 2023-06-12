@@ -76,6 +76,52 @@ from latlng_recon_geojson import LatLng2Places
 from config_map import ConfigMap
 from dc_api_wrapper import dc_api_batched_wrapper
 
+# List of place types from biggest to smallest
+_PLACE_TYPE_ORDER = [
+    'Place',
+    'OceanicBasin',
+    'Continent',
+    'Country',
+    'CensusRegion',
+    'CensusDivision',
+    'State',
+    'AdministrativeArea1',
+    'County',
+    'AdministrativeArea2',
+    'CensusCountyDivision',
+    'EurostatNUTS1',
+    'EurostatNUTS2',
+    'CongressionalDistrict',
+    'UDISEDistrict',
+    'CensusCoreBasedStatisticalArea',
+    'EurostatNUTS3',
+    'SuperfundSite',
+    'Glacier',
+    'AdministrativeArea3',
+    'AdministrativeArea4',
+    'PublicUtility',
+    'CollegeOrUniversity',
+    'EpaParentCompany',
+    'UDISEBlock',
+    'AdministrativeArea5',
+    'EpaReportingFacility',
+    'SchoolDistrict',
+    'CensusZipCodeTabulationArea',
+    'PrivateSchool',
+    'CensusTract',
+    'City',
+    'AirQualitySite',
+    'PublicSchool',
+    'Neighborhood',
+    'CensusBlockGroup',
+    'AdministrativeArea',
+    'Village',
+]
+
+_PLACE_TYPE_RANK = {
+    _PLACE_TYPE_ORDER[index]: index for index in range(len(_PLACE_TYPE_ORDER))
+}
+
 
 class GeoEvent:
     """Class for a Geo Event."""
@@ -791,7 +837,7 @@ class GeoEventsProcessor:
             return None
         # Generate polygon for the event
         polygon_prop = self._config.get('output_affected_place_polygon',
-                                        'geoJsonCoordinatesDP1')
+                                        'geoJsonCoordinates')
         if polygon_prop:
             event_polygon = self.get_event_polygon(event_id)
             if event_polygon:
@@ -804,10 +850,10 @@ class GeoEventsProcessor:
                         event_pvs[polygon_prop] = json.dumps(
                             json.dumps(geo_json))
                     self._counters.add_counter('output_events_with_polygon', 1)
-        if not event_pvs.get('name', None):
-            event_pvs['name'] = self._get_event_name(event_pvs)
         # Set the affectedPlace and containedInPlace for the event.
         self._set_event_places(event, event_pvs)
+        if not event_pvs.get('name', None):
+            event_pvs['name'] = self._get_event_name(event_pvs)
         return event_pvs
 
     def delete_event(self, event_id):
@@ -1000,7 +1046,7 @@ class GeoEventsProcessor:
                 output_columns.append(prop)
         # Add column for affected place polygon
         polygon_prop = self._config.get('output_affected_place_polygon',
-                                        'geoJsonCoordinatesDP1')
+                                        'geoJsonCoordinates')
         if polygon_prop:
             output_columns.append(polygon_prop)
         if event_ids is None:
@@ -1639,6 +1685,31 @@ class GeoEventsProcessor:
         self.set_place_property(place_id, 'containedInPlace', contained_places)
         return contained_places
 
+    def _get_smallest_place_name(self, place_ids: list) -> str:
+        '''Returns the name of the smallest place in the place list.'''
+        max_place_rank = -1
+        place_name = ''
+        # Get the place with the highest rank (smallest place)
+        for place in _get_list(place_ids):
+            place = utils.strip_namespace(place)
+            if place == 'Earth' or utils.is_s2_cell_id(
+                    place) or utils.is_grid_id(place) or utils.is_ipcc_id(
+                        place):
+                # Ignore non admin places
+                continue
+            place_types = self.get_place_property_list(place, 'typeOf')
+            for place_type in place_types:
+                place_rank = _PLACE_TYPE_RANK.get(place_type, -1)
+                if place_rank > max_place_rank:
+                    # This place is smaller. Use its name if available.
+                    new_place_name = self.get_place_property_list(place, 'name')
+                    if new_place_name:
+                      new_place_name = new_place_name[0]
+                    if new_place_name:
+                        max_place_rank = place_rank
+                        place_name = new_place_name
+        return place_name
+
     def _get_event_name(self, event_pvs: dict, locations: list = None) -> str:
         '''Get the name for the event.'''
         typeof = event_pvs.get('typeOf',
@@ -1648,17 +1719,7 @@ class GeoEventsProcessor:
         start_location = event_pvs.get('startLocation')
         if not locations:
             locations = _get_list(event_pvs.get('affectedPlace', ''))
-        location_name = ''
-        for placeid in locations:
-            placeid = utils.strip_namespace(placeid)
-            if not utils.is_ipcc_id(placeid) and not utils.is_grid_id(placeid):
-                location_name = self.get_place_property(placeid, 'name')
-                if location_name:
-                    #    place_type = self.get_place_property(placeid, 'typeOf')
-                    #    if place_type:
-                    #        location_name = f'{place_type[0]} {location_name[0]}'
-                    location_name = f'{location_name[0]}'
-                    break
+        location_name = self._get_smallest_place_name(locations)
         if not location_name:
             # Use the lat lng from start place.
             lat_lng = event_pvs.get('startLocation')

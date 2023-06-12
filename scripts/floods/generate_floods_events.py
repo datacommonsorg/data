@@ -58,11 +58,6 @@ sys.path.append(os.path.join(os.path.dirname(_SCRIPTS_DIR), 'earthengine'))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-import file_util
-
-from config_map import ConfigMap
-from events_pipeline import EventPipeline
-
 flags.DEFINE_string(
     'flood_pipeline_config',
     os.path.join(_SCRIPTS_DIR, 'flood_events_pipeline_config.py'),
@@ -74,10 +69,17 @@ flags.DEFINE_list(
 
 _FLAGS = flags.FLAGS
 
+import file_util
+
+from config_map import ConfigMap
+from events_pipeline import EventPipeline
 
 def main(_):
-    pipeline = EventPipeline(config=ConfigMap(
-        filename=_FLAGS.flood_pipeline_config))
+    config=ConfigMap(
+        filename=_FLAGS.flood_pipeline_config)
+    if _FLAGS.start_date:
+      config.get('defaults', {})['start_date'] = _FLAGS.start_date
+    pipeline = EventPipeline(config=config)
     pipeline.run(run_stages=_FLAGS.flood_pipeline_stages)
 
 

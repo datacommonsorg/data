@@ -63,7 +63,7 @@ class ProcessEventsTest(unittest.TestCase):
                           expected_file: str,
                           actual_file: str,
                           ignore_columns: list = []):
-        '''Compare CSV files with statvar obsevration data.'''
+        '''Compare CSV files with statvar observation data.'''
         # Sort files by columns.
         df_expected = pd.read_csv(expected_file)
         df_actual = pd.read_csv(actual_file)
@@ -90,6 +90,7 @@ class ProcessEventsTest(unittest.TestCase):
 
     def test_process(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_dir = '/tmp/test_events'
             output_prefix = os.path.join(tmp_dir, 'events_test_')
             test_prefix = os.path.join(_TESTDIR, 'sample_floods_')
             # Process flood s2 cells into events.
