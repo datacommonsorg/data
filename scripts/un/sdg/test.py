@@ -35,9 +35,9 @@ with open(os.path.join(module_dir_, 'cities.csv')) as f:
     reader = csv.DictReader(f)
     CITIES = {row['name']: row['dcid'] for row in reader}
 
-def get_dimensions():
+def get_dimensions(input_dir):
     dimensions = {}
-    for root, _, files in os.walk('sdg-dataset/output/code_lists'):
+    for root, _, files in os.walk(os.path.join(input_dir, 'code_lists')):
         for file in sorted(files):
             dimension = file.removeprefix('CL__').removesuffix('.xlsx')
 
@@ -94,151 +94,150 @@ def get_measurement_method(row):
         mmethod += '_' + str(row['REPORTING_TYPE'])
     return 'SDG' + mmethod
 
-
-if not os.path.exists('csv'):
-    os.makedirs('csv')
-if not os.path.exists('schema'):
-    os.makedirs('schema')
-
-with open('schema/series.mcf', 'w') as f_series:
-    with open('schema/sdg.textproto', 'w') as f_vertical:
-        df = pd.read_excel('sdg-dataset/output/sdg_hierarchy.xlsx')
-        for _, row in df.iterrows():
-            f_series.write(SERIES_TEMPLATE.format_map({
-                'dcid': 'SDG_' + str(row['SeriesCode']),
-                'description': format_description(str(row['SeriesDescription']))
-            }))
-            f_vertical.write(
-                'spec: {\n'
-                '  pop_type: "SDG_' + str(row['SeriesCode']) + '"\n'
-                '  obs_props { mprop: "value" }\n'
-                '  vertical: "SDG_' + str(row['IndicatorRefCode']) + '"\n'
-                '}\n'
-            )
-
-dimensions = get_dimensions()
-sv_frames = []
-measurement_method_frames = []
-units = set()
-
-for root, dirs, files in os.walk('sdg-dataset/output/observations'):
-    for file in sorted(files):
-        print(file)
-        path = os.path.join(root, file)
-        df = pd.read_excel(path)
-        if df.empty:
-            continue
-
-        properties = list(filter(lambda x: x not in BASE_CONCEPTS, df.columns))
-
-        # Drop rows with nan.
-        df = df.dropna(subset=['VARIABLE_CODE', 'GEOGRAPHY_CODE', 'TIME_PERIOD', 'VALUE'])
-        if df.empty:
-            continue
-
-        # Drop invalid values.
-        df['VALUE'] = df['VALUE'].apply(lambda x: x if is_float(x) else '')
-        df = df[df['VALUE'] != '']
-        if df.empty:
-            continue
-
-        # Format places.
-        df['GEOGRAPHY_CODE'] = df.apply(lambda x: get_geography(x['GEOGRAPHY_CODE'], x['GEOGRAPHY_TYPE']), axis=1)
-        df = df[df['GEOGRAPHY_CODE'] != '']
-        if df.empty: 
-            continue
-        
-        # Special curation of names.
-        df['VARIABLE_DESCRIPTION'] = df.apply(lambda x: format_variable_description(x['VARIABLE_DESCRIPTION'], x['SERIES_DESCRIPTION']), axis=1)
-        df['VARIABLE_CODE'] = df['VARIABLE_CODE'].apply(lambda x: format_variable_code(x))
-
-        sv_frames.append(df.loc[:, ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION'] + properties].drop_duplicates())
-        measurement_method_frames.append(df.loc[:, ['NATURE', 'OBSERVATION_STATUS', 'REPORTING_TYPE']].drop_duplicates())
-        units.update(set(df['UNITS'].unique()))
-
-        df['VARIABLE_CODE'] = df['VARIABLE_CODE'].apply(lambda x: 'dcs:sdg/' + x)
-        df['UNITS'] = df.apply(lambda x: get_unit(x['UNITS'], x['BASE_PERIOD']), axis=1)
-        df['MEASUREMENT_METHOD'] = df.apply(lambda x: 'dcs:' + get_measurement_method(x), axis=1)
-
-        # Retain only columns for cleaned csv.
-        df = df.loc[:, ['VARIABLE_CODE', 'GEOGRAPHY_CODE', 'TIME_PERIOD', 'VALUE', 'UNITS', 'UNITMULTIPLIER', 'MEASUREMENT_METHOD']]
-
-        code = file.removeprefix('observations_').removesuffix('.xlsx')
-        df.to_csv(f'csv/{code}.csv', index=False)
-
-with open('schema/schema.mcf', 'w') as f:
-    for d in sorted(dimensions):
-        if d in BASE_CONCEPTS or d == 'GEOGRAPHY':
-            continue
-        prop = format_property(d)
-        enum = prop + 'Enum'
-        if d not in MAPPED_CONCEPTS:
-            f.write(
-                PROPERTY_TEMPLATE.format_map({
-                    'dcid': prop[0].lower() + prop[1:],
-                    'name': format_title(d),
-                    'enum': enum
+def process(input_dir, schema_dir, csv_dir):
+    with open(os.path.join(schema_dir, 'series.mcf'), 'w') as f_series:
+        with open(os.path.join(schema_dir, 'sdg.textproto'), 'w') as f_vertical:
+            df = pd.read_excel(os.path.join(input_dir, 'sdg_hierarchy.xlsx'))
+            for _, row in df.iterrows():
+                f_series.write(SERIES_TEMPLATE.format_map({
+                    'dcid': 'SDG_' + str(row['SeriesCode']),
+                    'description': format_description(str(row['SeriesDescription']))
                 }))
-        f.write(ENUM_TEMPLATE.format_map({'enum': enum}))
-        for k in sorted(dimensions[d]):  
+                f_vertical.write(
+                    'spec: {\n'
+                    '  pop_type: "SDG_' + str(row['SeriesCode']) + '"\n'
+                    '  obs_props { mprop: "value" }\n'
+                    '  vertical: "SDG_' + str(row['IndicatorRefCode']) + '"\n'
+                    '}\n'
+                )
 
-            # Skip totals.
-            if k == TOTAL:
-                continue  
-        
-            v = dimensions[d][k]
-            f.write(
-                VALUE_TEMPLATE.format_map({
-                    'dcid': k,
-                    'enum': enum,
-                    'name': v,
+    dimensions = get_dimensions(input_dir)
+    with open(os.path.join(schema_dir, 'sv.mcf'), 'w') as f:
+        for df in sv_frames:
+            for _, row in df.iterrows():
+                cprops = ''
+                for dimension in sorted(df.columns[2:]):
+                    
+                    # Skip totals.
+                    if row[dimension] == TOTAL:
+                        continue
+
+                    enum = format_property(dimension)
+                    if dimension in MAPPED_CONCEPTS:
+                        prop = MAPPED_CONCEPTS[dimension] 
+                    else:
+                        prop = 'sdg_' + enum[0].lower() + enum[1:]
+                    val = 'SDG_' + enum + 'Enum_' + str(row[dimension])
+                    cprops += f'\n{prop}: dcs:{val}'
+                f.write(SV_TEMPLATE.format_map({
+                    'dcid': 'sdg/' + row['VARIABLE_CODE'],
+                    'popType': 'SDG_' + row['VARIABLE_CODE'].split(':')[0],
+                    'name': '"' + row['VARIABLE_DESCRIPTION'] + '"',
+                    'cprops': cprops,
                 }))
 
-with open('schema/sv.mcf', 'w') as f:
-    for df in sv_frames:
-        for _, row in df.iterrows():
-            cprops = ''
-            ids = []
-            for dimension in sorted(df.columns[2:]):
-                
-                # Skip totals.
-                if row[dimension] == TOTAL:
-                    continue
-
-                enum = format_property(dimension)
-                if dimension in MAPPED_CONCEPTS:
-                    prop = MAPPED_CONCEPTS[dimension] 
-                else:
-                    prop = 'sdg_' + enum[0].lower() + enum[1:]
-                val = 'SDG_' + enum + 'Enum_' + str(row[dimension])
-                cprops += f'\n{prop}: dcs:{val}'
-            f.write(SV_TEMPLATE.format_map({
-                'dcid': 'sdg/' + row['VARIABLE_CODE'],
-                'popType': 'SDG_' + row['VARIABLE_CODE'].split(':')[0],
-                'name': '"' + row['VARIABLE_DESCRIPTION'] + '"',
-                'cprops': cprops,
-            }))
-
-with open('schema/measurement_method.mcf', 'w') as f:
-    df = pd.concat(measurement_method_frames).drop_duplicates()
-    for _, row in df.iterrows():
-        dcid = get_measurement_method(row)
-        if not dcid:
-            continue
-        description = 'SDG Measurement Method: [' 
-        pvs = []
-        for dimension in sorted(df.columns):
-            if not is_valid(row[dimension]):
+    sv_frames = []
+    measurement_method_frames = []
+    units = set()
+    for root, _, files in os.walk(os.path.join(input_dir, 'observations')):
+        for file in sorted(files):
+            print(file)
+            df = pd.read_excel(os.path.join(root, file))
+            if df.empty:
                 continue
-            pvs.append(format_title(dimension) + ' = ' + dimensions[dimension][row[dimension]])
-        f.write(MMETHOD_TEMPLATE.format_map({
-            'dcid': dcid,
-            'description': description + ', '.join(pvs) + ']'
-        }))
 
-with open('schema/unit.mcf', 'w') as f:
-    for unit in sorted(units):
-        f.write(UNIT_TEMPLATE.format_map({
-            'dcid': 'SDG_' + unit,
-            'name': dimensions['UNITS'][unit]
-        }))
+            properties = list(filter(lambda x: x not in BASE_CONCEPTS, df.columns))
+
+            # Drop rows with nan.
+            df = df.dropna(subset=['VARIABLE_CODE', 'GEOGRAPHY_CODE', 'TIME_PERIOD', 'VALUE'])
+            if df.empty:
+                continue
+
+            # Drop invalid values.
+            df['VALUE'] = df['VALUE'].apply(lambda x: x if is_float(x) else '')
+            df = df[df['VALUE'] != '']
+            if df.empty:
+                continue
+
+            # Format places.
+            df['GEOGRAPHY_CODE'] = df.apply(lambda x: get_geography(x['GEOGRAPHY_CODE'], x['GEOGRAPHY_TYPE']), axis=1)
+            df = df[df['GEOGRAPHY_CODE'] != '']
+            if df.empty: 
+                continue
+            
+            # Special curation of names.
+            df['VARIABLE_DESCRIPTION'] = df.apply(lambda x: format_variable_description(x['VARIABLE_DESCRIPTION'], x['SERIES_DESCRIPTION']), axis=1)
+            df['VARIABLE_CODE'] = df['VARIABLE_CODE'].apply(lambda x: format_variable_code(x))
+
+            sv_frames.append(df.loc[:, ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION'] + properties].drop_duplicates())
+            measurement_method_frames.append(df.loc[:, ['NATURE', 'OBSERVATION_STATUS', 'REPORTING_TYPE']].drop_duplicates())
+            units.update(set(df['UNITS'].unique()))
+
+            df['VARIABLE_CODE'] = df['VARIABLE_CODE'].apply(lambda x: 'dcs:sdg/' + x)
+            df['UNITS'] = df.apply(lambda x: get_unit(x['UNITS'], x['BASE_PERIOD']), axis=1)
+            df['MEASUREMENT_METHOD'] = df.apply(lambda x: 'dcs:' + get_measurement_method(x), axis=1)
+
+            # Retain only columns for cleaned csv.
+            df = df.loc[:, ['VARIABLE_CODE', 'GEOGRAPHY_CODE', 'TIME_PERIOD', 'VALUE', 'UNITS', 'UNITMULTIPLIER', 'MEASUREMENT_METHOD']]
+
+            code = file.removeprefix('observations_').removesuffix('.xlsx')
+            df.to_csv(os.path.join(csv_dir, f'{code}.csv'), index=False)
+
+    with open(os.path.join(schema_dir, 'schema.mcf'), 'w') as f:
+        for d in sorted(dimensions):
+            if d in BASE_CONCEPTS or d == 'GEOGRAPHY':
+                continue
+            prop = format_property(d)
+            enum = prop + 'Enum'
+            if d not in MAPPED_CONCEPTS:
+                f.write(
+                    PROPERTY_TEMPLATE.format_map({
+                        'dcid': prop[0].lower() + prop[1:],
+                        'name': format_title(d),
+                        'enum': enum
+                    }))
+            f.write(ENUM_TEMPLATE.format_map({'enum': enum}))
+            for k in sorted(dimensions[d]):  
+
+                # Skip totals.
+                if k == TOTAL:
+                    continue  
+            
+                v = dimensions[d][k]
+                f.write(
+                    VALUE_TEMPLATE.format_map({
+                        'dcid': k,
+                        'enum': enum,
+                        'name': v,
+                    }))
+
+    with open(os.path.join(schema_dir, 'measurement_method.mcf'), 'w') as f:
+        df = pd.concat(measurement_method_frames).drop_duplicates()
+        for _, row in df.iterrows():
+            dcid = get_measurement_method(row)
+            if not dcid:
+                continue
+            description = 'SDG Measurement Method: [' 
+            pvs = []
+            for dimension in sorted(df.columns):
+                if not is_valid(row[dimension]):
+                    continue
+                pvs.append(format_title(dimension) + ' = ' + dimensions[dimension][row[dimension]])
+            f.write(MMETHOD_TEMPLATE.format_map({
+                'dcid': dcid,
+                'description': description + ', '.join(pvs) + ']'
+            }))
+
+    with open(os.path.join(schema_dir, 'unit.mcf'), 'w') as f:
+        for unit in sorted(units):
+            f.write(UNIT_TEMPLATE.format_map({
+                'dcid': 'SDG_' + unit,
+                'name': dimensions['UNITS'][unit]
+            }))
+
+if __name__ == '__main__':
+    if not os.path.exists('schema'):
+        os.makedirs('schema')
+    if not os.path.exists('csv'):
+        os.makedirs('csv')
+    process('sdg-dataset/output', 'schema', 'csv')
