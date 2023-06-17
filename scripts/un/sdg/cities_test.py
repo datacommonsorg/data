@@ -28,19 +28,13 @@ sys.path.append(
 
 module_dir_ = os.path.dirname(__file__)
 
-CITIES = [
-    "Abidjan, CÃ´te d'Ivoire", 'Acapulco Guerrero, Mexico', 'Accra, Ghana'
-]
+CITIES = {
+    'Mazar-e Sharif, Afghanistan': 'MAZAR_E_SHARIF',
+}
 RESPONSE = {
     'entities': [{
-        'description': "Abidjan, CÃ´te d'Ivoire",
-        'dcids': ['wikidataId/Q19830972']
-    }, {
-        'description': 'Acapulco Guerrero, Mexico',
-        'dcids': ['wikidataId/Q81398']
-    }, {
-        'description': 'Accra, Ghana',
-        'dcids': ['wikidataId/Q3761']
+        'description': 'Mazar-e Sharif, Afghanistan',
+        'dcids': ['wikidataId/Q130469']
     }]
 }
 

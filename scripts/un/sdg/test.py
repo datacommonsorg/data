@@ -31,7 +31,7 @@ with open(os.path.join(module_dir_, 'm49.csv')) as f:
         PLACES[int(row['M49 code'])] = row['ISO-alpha3 code']
 
 # Create map of name -> dcid for supported cities.
-with open(os.path.join(module_dir_, 'preprocessed/cities2.csv')) as f:
+with open(os.path.join(module_dir_, 'cities.csv')) as f:
     reader = csv.DictReader(f)
     CITIES = {row['name']: row['dcid'] for row in reader}
 
@@ -123,7 +123,6 @@ units = set()
 
 for root, dirs, files in os.walk('sdg-dataset/output/observations'):
     for file in sorted(files):
-    #for file in ['observations_EN_REF_WASCOL.xlsx']:
         print(file)
         path = os.path.join(root, file)
         df = pd.read_excel(path)

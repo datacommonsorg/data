@@ -11,13 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Finds dcids for cities in input files.
+'''Finds dcids for cities.
 
 Produces:
-* preprocessed/cities.csv: dcid for each city name
+* cities.csv: dcid for each city name
  
-Note: For cities where the find entities API did not return a dcid,
-we tried manually searching for the dcid and filled these into the file.
 There are a few city names that are still missing - these are left blank.
 **This script ideally shouldn't need to be run again.**
 
@@ -53,48 +51,31 @@ def write_cities(file, cities, api_key):
 
     Args:
         file: Output file path.
-        cities: List of city dcids to process. 
+        cities: Map of city names to codes. 
         api_key: API key.
     '''
-    with open(file, 'a') as f:
+    with open(file, 'w') as f:
         writer = csv.DictWriter(f, fieldnames=['name', 'dcid'])
-        #writer.writeheader()
-        city_list = list(cities.keys())
-        for i in range(0, len(city_list), BATCH):
+        writer.writeheader()
+        for city in list(cities.keys()):
             json = {
                 'entities': [{
                     'description': city
-                } for city in city_list[i:i + BATCH]]
+                }]
             }
             response = get_cities(json, api_key)
-            print(response)
             try: 
                 for entity in response['entities']:
                     dcid = entity['dcids'][0] if 'dcids' in entity else ''
                     writer.writerow({'name': cities[entity['description']], 'dcid': dcid})
             except KeyError:
-                writer.writerow({'name': cities[city_list[i]], 'dcid': ''})
+                writer.writerow({'name': cities[city], 'dcid': ''})
 
 
 if __name__ == '__main__':
-    '''
-    cities = set()
-    for file in sorted(os.listdir('input')):
-        code = file.removesuffix('.csv')
-        with open('input/' + file) as f:
-            reader = csv.DictReader(f)
-            if '[Cities]' in reader.fieldnames:
-                for row in reader:
-                    cities.add(row['[Cities]'].replace('_', ' ').title() +
-                               ', ' + row['GeoAreaName'])
-    cities = sorted(cities)
-    '''
     df = pd.read_excel(f'sdg-dataset/output/SDG_cities_enumeration.xlsx')
-    df.to_csv('SDG_cities_enumeration.csv', index=False)
-    cities = {}
-    with open('SDG_cities_enumeration.csv') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            cities[row['CITY_NAME'] + ', ' + row['GEO_AREA_NAME'].replace('_', ' ').title()] = row['CITY_CODE']
-
-    write_cities('preprocessed/cities2.csv', cities, sys.argv[1])
+    print(df.head(4))
+    #cities = {}
+    #for _, row in df.iterrows():
+    #    cities[row['CITY_NAME'] + ', ' + row['GEO_AREA_NAME'].replace('_', ' ').title()] = row['CITY_CODE']
+    #write_cities('cities.csv', cities, sys.argv[1])
