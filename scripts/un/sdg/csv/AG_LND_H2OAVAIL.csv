@@ -1,0 +1,16 @@
+VARIABLE_CODE,GEOGRAPHY_CODE,TIME_PERIOD,VALUE,UNITS,UNITMULTIPLIER,MEASUREMENT_METHOD
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/BHR,2019,97,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/BLR,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/DNK,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/ECU,2021,24,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/FRA,2016,89,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/HUN,2021,5,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/JAM,2021,62,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/KEN,2016,58,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/MDV,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/MUS,2019,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/NOR,2020,17,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/QAT,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/VNM,2020,45,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/UKR,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_H2OAVAIL,dcs:country/GBR,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G

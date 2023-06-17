@@ -1,0 +1,16 @@
+VARIABLE_CODE,GEOGRAPHY_CODE,TIME_PERIOD,VALUE,UNITS,UNITMULTIPLIER,MEASUREMENT_METHOD
+dcs:sdg/SP_DISP_RESOL,dcs:country/CAN,2022,65.89,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:SEX--F,dcs:country/COL,2022,46.42,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL,dcs:country/COL,2022,46.57,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:SEX--M,dcs:country/COL,2022,46.71,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:DISABILITY_STATUS--PD,dcs:country/GMB,2021,1.17,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL,dcs:country/GMB,2021,46.36,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:SEX--M,dcs:country/GMB,2021,52.02,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:SEX--F,dcs:country/GMB,2021,41.92,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:DISABILITY_STATUS--PWD,dcs:country/GMB,2021,46.64,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:SEX--M,dcs:country/PSE,2022,95.97,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL,dcs:country/PSE,2022,94.41,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:SEX--F,dcs:country/PSE,2022,91.24,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:SEX--M,dcs:country/PER,2021,69.1,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL,dcs:country/PER,2021,71.9,dcs:SDG_PT,,dcs:SDG_C_G
+dcs:sdg/SP_DISP_RESOL:SEX--F,dcs:country/PER,2021,73.1,dcs:SDG_PT,,dcs:SDG_C_G

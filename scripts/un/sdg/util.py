@@ -20,6 +20,7 @@ FIELDNAMES = [
 ]
 
 DCID_PREFIX = 'Node: dcid:'
+TOTAL = '_T'
 
 SERIES_TEMPLATE = '''
 Node: dcid:{dcid}
@@ -65,7 +66,7 @@ UNIT_TEMPLATE = '''
 Node: dcid:{dcid}
 typeOf: dcs:UnitOfMeasure
 name: "{name}"
-description: "SDG unit type {dcid}."
+description: "SDG Unit: {dcid}"
 '''
 
 # Select concepts will be modeled differently.
@@ -82,6 +83,11 @@ MAPPED_CONCEPTS = {
     'Disability status': 'disabilityStatus',
     'Education level': 'educationalAttainment',
     'Sex': 'gender',
+    'AGE': 'age',
+    'CAUSE_OF_DEATH': 'causeOfDeath',
+    'DISABILITY_STATUS': 'disabilityStatus',
+    'EDUCATION_LEVEL': 'educationalAttainment',
+    'SEX': 'gender'
 }
 
 FORMATTED_UNITS = {

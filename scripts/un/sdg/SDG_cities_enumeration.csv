@@ -1,0 +1,1774 @@
+GEO_AREA_CODE,GEO_AREA_NAME,CITY_CODE,CITY_NAME,UNDATA_CITY_CODE,x,y
+1,World,WORLD_ALL,"World, all cities",undata:city-1-all,0.0,0.0
+4,Afghanistan,MAZAR_E_SHARIF,Mazar-e Sharif,undata:city-4-mazar-e-sharif,67.1092145,36.7099311
+4,Afghanistan,POL_E_KHOMRI,Pol-e Khomri,undata:city-4-pol-e-khomri,68.7166369,35.9403928
+4,Afghanistan,HERAT,Herat,undata:city-4-herat,62.2164003,34.3508273
+4,Afghanistan,LASHKAR_GAH,Lashkar Gah,undata:city-4-lashkar-gah,64.3608959,31.5852277
+4,Afghanistan,KHAN_ABAD,Khan Abad,undata:city-4-khan-abad,69.104049,36.603113
+4,Afghanistan,KANDAHAR,Kandahar,undata:city-4-kandahar,65.7157573,31.6205738
+4,Afghanistan,KABUL,Kabul,undata:city-4-kabul,69.1697692534,34.4885101558
+4,Afghanistan,JALALABAD,Jalalabad,undata:city-4-jalalabad,70.460128,34.430195
+4,Afghanistan,FARAH,Farah,undata:city-4-farah,62.671011,32.607111
+4,Afghanistan,CHARIKAR,Charikar,undata:city-4-charikar,69.1741618,35.0131732
+12,Algeria,TOLGA,Tolga,undata:city-12-tolga,5.3830752,34.73212
+12,Algeria,TIARET,Tiaret,undata:city-12-tihert,1.3194687,35.3661448
+12,Algeria,TEBESSA,Tebessa,undata:city-12-tebessa,7.9011735,35.124945
+12,Algeria,TAMANRASSET,Tamanrasset,undata:city-12-tamanrasset,4.3208436,24.3753438
+12,Algeria,ORAN,Oran,undata:city-12-oran,-0.6492976,35.7032751
+12,Algeria,M_SILA,M'Sila,undata:city-12-m-sila,4.2003107,35.1300205
+12,Algeria,MILA,Mila,undata:city-12-mila,6.1652163,36.2502135
+12,Algeria,KHEMIS_MILIANA,Khemis Miliana,undata:city-12-khemis-miliana,2.2196633,36.2601716
+12,Algeria,ALGIERS,Algiers,undata:city-12-algiers,3.0846281952,36.7126578512
+12,Algeria,DJELFA,Djelfa,undata:city-12-el-djelfa,3.254037,34.671359
+12,Algeria,CHLEF,Chlef,undata:city-12-chlef,1.2680696,36.20342
+12,Algeria,BLIDA,Blida,undata:city-12-el-boulaida,2.8271,36.4694
+12,Algeria,BATNA,Batna,undata:city-12-batna,5.7315453,35.3384291
+12,Algeria,ANNABA,Annaba,undata:city-12-annaba,7.7549272,36.8982165
+12,Algeria,EL_KHROUB,El Khroub,undata:city-12-el-khroub,6.6970014,36.2603681
+24,Angola,LUANDA,Luanda,undata:city-24-luanda,13.2658987491,-8.8875435883
+31,Azerbaijan,BAKU,Baku,undata:city-31-baku,49.9472923343,40.4074210772
+32,Argentina,ZARATE,Zárate,undata:city-32-zarate,-59.0245097,-34.0954713
+32,Argentina,SANTIAGO_DEL_ESTERO,Santiago del Estero,undata:city-32-santiago-del-estero,-64.267,-27.8
+32,Argentina,SAN_SALVADOR_DE_JUJUY,San Salvador de Jujuy,undata:city-32-san-salvador-de-jujuy,-65.3,-24.183
+32,Argentina,SAN_PEDRO_DE_JUJUY,San Pedro de Jujuy,undata:city-32-san-pedro-de-jujuy,-64.8678819,-24.2316261
+32,Argentina,SAN_MIGUEL_DE_TUCUMAN,San Miguel de Tucumán,undata:city-32-san-miguel-de-tucuman,-65.2,-26.833
+32,Argentina,SAN_MARTIN,San Martín,undata:city-32-san-martin,-58.5388435,-34.5762765
+32,Argentina,SAN_JUAN,San Juan,undata:city-32-san-juan,-68.517,-31.533
+32,Argentina,ROSARIO,Rosario,undata:city-32-rosario,-60.65,-32.95
+32,Argentina,RIO_GALLEGOS,Río Gallegos,undata:city-32-rio-gallegos,-69.2632289,-51.6460759
+32,Argentina,RIO_CUARTO,Río Cuarto,undata:city-32-rio-cuarto,-64.35,-33.133
+32,Argentina,FORMOSA,Formosa,undata:city-32-formosa,-58.167,-26.183
+32,Argentina,OBERA,Oberá,undata:city-32-obera,-55.1202965,-27.4849798
+32,Argentina,NEUQUEN,Neuquén,undata:city-32-neuquen,-68.067,-38.95
+32,Argentina,MENDOZA,Mendoza,undata:city-32-mendoza,-68.833,-34.9
+32,Argentina,CONCORDIA,Concordia,undata:city-32-concordia,-58.017,-31.4
+32,Argentina,CORDOBA,Córdoba,undata:city-32-cordoba,-64.183,-31.417
+32,Argentina,LA_PLATA,La Plata,undata:city-32-la-plata,-57.95,-34.917
+32,Argentina,COMODORO_RIVADAVIA,Comodoro Rivadavia,undata:city-32-comodoro-rivadavia,-67.483,-45.867
+32,Argentina,CATAMARCA,Catamarca,undata:city-32-catamarca,-67.105374,-27.1910825
+32,Argentina,BUENOSAIRES,Buenos Aires,undata:city-32-buenos-aires,-58.383,-34.6
+32,Argentina,BAHIA_BLANCA,Bahía Blanca,undata:city-32-bahia-blanca,-62.267,-38.717
+32,Argentina,PARANA,Paraná,undata:city-32-parana,-60.533,-31.733
+36,Australia,HOBART,Hobart ,undata:city-36-hobart,147.3333333,-42.91666667
+36,Australia,PERTH,Perth,undata:city-36-perth,115.8333333,-31.93333333
+36,Australia,MUSWELLBROOK,Muswellbrook,undata:city-36-muswellbrook,150.516408,-32.4881159
+36,Australia,MELBOURNE,Melbourne,undata:city-36-melbourne,144.9666667,-37.81666667
+36,Australia,LAUCENSTON,Laucenston,undata:city-36-laucenston,147.13781,-41.43425
+36,Australia,KINGAROY,Kingaroy,undata:city-36-kingaroy,151.8394231,-26.5412563
+36,Australia,CAIRNS,Cairns,undata:city-36-cairns,145.7666667,-16.91666667
+36,Australia,GOLDCOAST,Gold Coast,undata:city-36-gold-coast,153.4333333,-28.0
+36,Australia,GEELONG,Geelong,undata:city-36-geelong,144.35,-38.15833333
+36,Australia,DARWIN,Darwin,undata:city-36-darwin,130.8410469,-12.46044
+36,Australia,CESSNOCK,Cessnock,undata:city-36-cessnock,151.3511111,-32.8316667
+36,Australia,CANBERRA,Canberra,undata:city-36-canberra,149.078872729,-35.272155798
+36,Australia,BUNBURY,Bunbury,undata:city-36-bunbury,115.636698,-33.3267797
+36,Australia,BRISBANE,Brisbane,undata:city-36-brisbane,153.0166667,-27.5
+36,Australia,ADELAIDE,Adelaide,undata:city-36-adelaide,138.6,-34.93333333
+36,Australia,WOLLONGONG,Wollongong,undata:city-36-wollongong,150.893054,-34.4278083
+36,Australia,SYDNEY,Sydney,undata:city-36-sydney,151.2166667,-33.88333333
+36,Australia,SHEPPARTON,Shepparton,undata:city-36-shepparton,145.3993172,-36.381072
+36,Australia,ALICE_SPRINGS,Alice Springs,undata:city-36-alice-springs,133.8812885,-23.6983884
+40,Austria,VIENNA,Vienna,undata:city-40-vienna,16.4295234947,48.2433777511
+40,Austria,SALZBURG,Salzburg,undata:city-40-salzburg,13.03333333,47.8
+40,Austria,LINZ,Linz,undata:city-40-linz,14.3,48.3
+40,Austria,BREGENZ,Bregenz,undata:city-40-bregenz,9.7472924,47.5025779
+40,Austria,KLAGENFURT,Klagenfurt,undata:city-40-klagenfurt,14.3075976,46.623943
+40,Austria,INNSBRUCK,Innsbruck,undata:city-40-innsbruck,11.4,47.26666667
+40,Austria,GRAZ,Graz,undata:city-40-graz,15.45,47.06666667
+48,Bahrain,MANAMA,Manama,undata:city-48-manama,50.4979286117,26.1879483138
+50,Bangladesh,SYLHET,Sylhet,undata:city-50-sylhet,91.6852476,24.7358854
+50,Bangladesh,RAJSHAHI,Rajshahi,undata:city-50-rajshahi,89.0376862,24.6285432
+50,Bangladesh,MYMENSINGH_NASIRABAD,Mymensingh (Nasirabad),undata:city-50-mymensingh-nasirabad,90.3934812,24.7530398
+50,Bangladesh,KHULNA,Khulna,undata:city-50-khulna,89.2852741,22.9372087
+50,Bangladesh,JESSORE,Jessore,undata:city-50-jessore,89.2094419,23.1665256
+50,Bangladesh,JAMALPUR,Jamalpur,undata:city-50-jamalpur,89.9436684,24.9255866
+50,Bangladesh,GAZIPUR,Gazipur,undata:city-50-gazipur,90.4173629,23.9997558
+50,Bangladesh,DINAJPUR,Dinajpur,undata:city-50-dinajpur,88.6346228,25.6260712
+50,Bangladesh,DHAKA,Dhaka,undata:city-50-dhaka,90.4363403429,23.8039780275
+50,Bangladesh,COMILLA,Comilla,undata:city-50-comilla,91.1808748,23.4610615
+50,Bangladesh,CHITTAGONG,Chittagong,undata:city-50-chittagong,91.8342162,22.3336887
+50,Bangladesh,SAIDPUR,Saidpur,undata:city-50-saidpur,88.9002879,25.8038041
+50,Bangladesh,BARISAL,Barisal,undata:city-50-barisal,90.3548015,22.4934035
+50,Bangladesh,BOGRA,Bogra,undata:city-50-bogra,89.3728431,24.8500662
+53,Australia and New Zealand,AUSTRAILA_AND_NEWZEALAND_ALL,"Australia and New Zealand, all cities",undata:city-53-all,,
+56,Belgium,ETTERBEEK,Etterbeek,undata:city-56-etterbeek,4.3861737,50.8361447
+56,Belgium,BRUSSELS,Brussels,undata:city-56-brussels,4.4687162216,50.8198203763
+56,Belgium,BERCHEM_SAINTE_AGATHE,Berchem-Sainte-Agathe,undata:city-56-berchem-sainte-agathe,4.2946734,50.8649231
+56,Belgium,AUDERGHEM,Auderghem,undata:city-56-auderghem,4.4270852,50.8171712
+56,Belgium,SAINT_JOSSE_TEN_NOODE,Saint-Josse-ten-Noode,undata:city-56-saint-josse-ten-noode,4.3691634,50.8508197
+56,Belgium,SAINT_GILLES,Saint-Gilles,undata:city-56-saint-gilles,4.3454841,50.8249958
+56,Belgium,MOLENBEEK_SAINT_JEAN,Molenbeek-Saint-Jean,undata:city-56-molenbeek-saint-jean,4.338636,50.8545959
+56,Belgium,KOEKELBERG,Koekelberg,undata:city-56-koekelberg,4.3315503,50.8606042
+56,Belgium,JETTE,Jette,undata:city-56-jette,4.3245702,50.8759585
+56,Belgium,IXELLES,Ixelles,undata:city-56-ixelles,4.3668279,50.8331141
+56,Belgium,GANSHOREN,Ganshoren,undata:city-56-ganshoren,4.307798,50.8703273
+56,Belgium,FOREST,Forest,undata:city-56-forest,4.3181187,50.811795
+56,Belgium,EVERE,Evere,undata:city-56-evere,4.4034182,50.8720096
+56,Belgium,ANDERLECHT,Anderlecht,undata:city-56-anderlecht,4.292486,50.826961
+56,Belgium,WOLUWE_SAINT_PIERRE,Woluwe-Saint-Pierre,undata:city-56-woluwe-saint-pierre,4.4274636,50.8370253
+56,Belgium,WOLUWE_SAINT_LAMBERT,Woluwe-Saint-Lambert,undata:city-56-woluwe-saint-lambert,4.4256732,50.8430448
+56,Belgium,WATERMAEL_BOITSFORT,Watermael-Boitsfort,undata:city-56-watermael-boitsfort,4.4176441,50.7981063
+56,Belgium,UCCLE,Uccle,undata:city-56-uccle,4.3338445,50.8035441
+56,Belgium,SCHAERBEEK,Schaerbeek,undata:city-56-schaerbeek,4.383333,50.85
+56,Belgium,KAPELLEN_EKEREN,Kapellen / Ekeren,undata:city-56-kapellen-ekeren,4.4291,51.2983
+56,Belgium,GENT,Gent,undata:city-56-gent,,
+56,Belgium,OOSTENDE,Oostende,undata:city-56-oostende,2.919496,51.2258565
+56,Belgium,NAMUR,Namur,undata:city-56-namur,4.866667,50.466667
+56,Belgium,MECHELEN,Mechelen,undata:city-56-mechelen,4.4803453,51.0281381
+56,Belgium,CHARLEROI,Charleroi,undata:city-56-charleroi,4.433333,50.416667
+56,Belgium,BRUGGE,Brugge,undata:city-56-brugge,,
+56,Belgium,LIEGE,Liège,undata:city-56-liege,5.566667,50.633333
+56,Belgium,LEUVEN,Leuven,undata:city-56-leuven,4.7011675,50.879202
+56,Belgium,LA_LOUVIERE,La Louvière,undata:city-56-la-louviere,4.1852682,50.479487
+56,Belgium,ANTWERPEN,Antwerpen,undata:city-56-antwerpen,,
+56,Belgium,QUAREGNON_FRAMERIES,Quaregnon / Frameries,undata:city-56-quaregnon-frameries,3.8870153,50.4172661
+56,Belgium,VERVIERS_DISON,Verviers / Dison,undata:city-56-verviers-dison,5.854735,50.611374
+62,Central and Southern Asia,CENTRAL_AND_SOUTHERN_ASIA_ALL,"Central and Southern Asia, all cities",undata:city-62-all,78.66211,21.28937
+64,Bhutan,THIMPHU,Thimphu,undata:city-64-thimphu,89.5435791782,27.4777145974
+68,Bolivia (Plurinational State of),COCHABAMBA,Cochabamba,undata:city-68-cochabamba,-66.1675681,-17.4012458
+70,Bosnia and Herzegovina,SARAJEVO,Sarajevo,undata:city-70-sarajevo,18.4988766236,43.8302803931
+70,Bosnia and Herzegovina,BANJA_LUKA,Banja Luka,undata:city-70-banja-luka,17.1917651,44.7720845
+76,Brazil,PASSOS,Passos,undata:city-76-passos,-46.61000061,-20.71899986
+76,Brazil,PORTO_ALEGRE,Porto Alegre,undata:city-76-porto-alegre,-51.22999954,-30.03300095
+76,Brazil,SAOPAULO,São Paulo,undata:city-76-sao-paulo,-46.63600159,-23.54800034
+76,Brazil,RIBEIRAO_PRETO,Ribeirão Preto,undata:city-76-ribeirao-preto,-47.81000137,-21.1779995
+76,Brazil,VITORIA_DA_CONQUISTA,Vitória da Conquista,undata:city-76-vitoria-da-conquista,-40.8390007,-14.86600018
+76,Brazil,UMUARAMA,Umuarama,undata:city-76-umuarama,-53.32500076,-23.76600075
+76,Brazil,TEIXEIRA_DE_FREITAS,Teixeira de Freitas,undata:city-76-teixeira-de-freitas,-39.74200058,-17.53499985
+76,Brazil,TATUI,Tatuí,undata:city-76-tatui,-47.85699844,-23.3560009
+76,Brazil,SAO_CARLOS,São Carlos,undata:city-76-sao-carlos,-47.89099884,-22.01799965
+76,Brazil,SANTANA_PORTO_SANTANA,Santana (Porto Santana),undata:city-76-porto-santana,-51.1800867,-0.0574606
+76,Brazil,SANTA_CRUZ_DO_CAPIBARIBE,Santa Cruz do Capibaribe,undata:city-76-santa-cruz-do-capibaribe,-36.206092,-7.948019
+76,Brazil,SALVADOR,Salvador,undata:city-76-salvador,-38.51100159,-12.97099972
+76,Brazil,PARAUAPEBAS,Parauapebas,undata:city-76-parauapebas,-49.90200043,-6.06799984
+76,Brazil,PALMAS,Palmas,undata:city-76-palmas,-48.33300018,-10.16699982
+76,Brazil,MONTES_CLAROS,Montes Claros,undata:city-76-montes-claros,-43.86199951,-16.73500061
+76,Brazil,MACAPA,Macapá,undata:city-76-macapa,-51.06600189,0.039000001
+76,Brazil,LIMEIRA,Limeira,undata:city-76-limeira,-47.40200043,-22.56500053
+76,Brazil,JEQUIE,Jequié,undata:city-76-jequie,-40.08399963,-13.8579998
+76,Brazil,ITUIUTABA,Ituiutaba,undata:city-76-ituiutaba,-49.4639335,-18.9691887
+76,Brazil,CUIABA,Cuiabá,undata:city-76-cuiaba,-56.09700012,-15.59599972
+76,Brazil,ILHEUS,Ilhéus,undata:city-76-ilheus,-39.04899979,-14.78899956
+76,Brazil,GUARAPARI,Guarapari,undata:city-76-guarapari,-40.51100159,-20.65800095
+76,Brazil,FLORIANOPOLIS,Florianópolis,undata:city-76-florianopolis,-48.54899979,-27.59700012
+76,Brazil,DIVINOPOLIS,Divinópolis,undata:city-76-divinopolis,-44.88399887,-20.13899994
+76,Brazil,CURITIBA,Curitiba,undata:city-76-curitiba,-49.27299881,-25.4279995
+76,Brazil,CRICIUMA,Criciúma,undata:city-76-criciuma,-49.36999893,-28.6779995
+76,Brazil,CAMPINAS,Campinas,undata:city-76-campinas,-47.06100082,-22.90600014
+76,Brazil,BRASILIA,Brasilia,undata:city-76-brasilia,-47.93000031,-15.77999973
+76,Brazil,BELOHORIZONTE,Belo Horizonte,undata:city-76-belo-horizonte,-43.95600128,-19.81699944
+76,Brazil,BELEM,Belém,undata:city-76-belem,-48.50400162,-1.45599997
+76,Brazil,BARRETOS,Barretos,undata:city-76-barretos,-48.56800079,-20.55699921
+76,Brazil,ARAXA,Araxá,undata:city-76-araxa,-46.940241,-19.5928536
+76,Brazil,APARECIDA_DE_GOIANIA,Aparecida de Goiânia,undata:city-76-aparecida-de-goiania,-49.24499893,-16.8220005
+76,Brazil,RECIFE,Recife,undata:city-76-recife,-34.88100052,-8.053999901
+76,Brazil,INDAIATUBA,Indaiatuba,undata:city-76-indaiatuba,-47.2179985,-23.09000015
+90,Solomon Islands,HONIARA,Honiara,undata:city-90-honiara,159.978973437,-9.5271053391
+100,Bulgaria,RUSE,Ruse,undata:city-100-ruse,25.993056,43.860556
+100,Bulgaria,YAMBOL,Yambol,undata:city-100-yambol,26.5105553,42.483935
+100,Bulgaria,VELIKO_TARNOVO,Veliko Tarnovo,undata:city-100-veliko-tarnovo,25.6114093,43.2164885
+100,Bulgaria,DOBRIC,Dobric,undata:city-100-dobric,27.9002123,43.6637774
+100,Bulgaria,BURGAS,Burgas,undata:city-100-burgas,27.452778,42.491389
+100,Bulgaria,SOFIA,Sofia,undata:city-100-sofia,23.3420334151,42.655887654
+100,Bulgaria,SHUMEN,Shumen,undata:city-100-shumen,26.9247362,43.2703797
+100,Bulgaria,PLOVDIV,Plovdiv,undata:city-100-plovdiv,24.746667,42.147778
+100,Bulgaria,PLEVEN,Pleven,undata:city-100-pleven,24.619722,43.407222
+100,Bulgaria,MONTANA,Montana,undata:city-100-montana,23.1160767,43.480152
+100,Bulgaria,VARNA,Varna,undata:city-100-varna,27.913611,43.209444
+100,Bulgaria,STARA_ZAGORA,Stara Zagora,undata:city-100-stara-zagora,25.633056,42.426389
+104,Myanmar,TAUNGGYI,Taunggyi,undata:city-104-taunggyi,97.0364294,20.7907874
+104,Myanmar,TACHILEIK,Tachileik,undata:city-104-tachileik,99.8842143,20.4490789
+104,Myanmar,PATHEIN,Pathein,undata:city-104-pathein,94.733333,16.783333
+104,Myanmar,NAY_PYI_TAW,Nay Pyi Taw,undata:city-104-naypyitaw,96.1,19.75
+104,Myanmar,MYITKYINA,Myitkyina,undata:city-104-myitkyina,97.3999925,25.3833313
+104,Myanmar,MANDALAY,Mandalay,undata:city-104-mandalay,96.082375,21.9812746
+104,Myanmar,LOIKAW,Loikaw,undata:city-104-loikaw,97.2094441,19.674167
+104,Myanmar,LASHIO,Lashio,undata:city-104-lashio,97.75,22.933333
+104,Myanmar,KALE,Kale,undata:city-104-kale,94.4442828,22.9531886
+104,Myanmar,MYEIK,Myeik,undata:city-104-myeik,98.5955711,12.4319552
+104,Myanmar,MYEDE,Myede,undata:city-104-myede,95.216667,19.366667
+104,Myanmar,MAWLAMYINE,Mawlamyine,undata:city-104-mawlamyine,97.6284825,16.4908026
+104,Myanmar,YANGON,Yangon,undata:city-104-yangon,96.1609916,16.7967129
+112,Belarus,MINSK,Minsk,undata:city-112-minsk,27.5631142234,53.8389817167
+112,Belarus,MAZYR,Mazyr,undata:city-112-mazyr,29.2667179,52.0475482
+112,Belarus,KOBYRN,Kobyrn,undata:city-112-kobyrn,24.3539,52.2138
+112,Belarus,HRODNA,Hrodna,undata:city-112-hrodna,23.8342648,53.6834599
+112,Belarus,BREST-BELARUS,Brest,undata:city-112-brest,23.6851851,52.093751
+112,Belarus,BABRUJSK,Babrujsk,undata:city-112-babrujsk,29.2281209,53.1449683
+112,Belarus,SALIHORSK,Salihorsk,undata:city-112-soligorsk,27.5403,52.7914
+112,Belarus,POLACK,Polack,undata:city-112-polack,28.7682339,55.4854656
+112,Belarus,GOMEL,Gomel,undata:city-112-gomel,31.0131698,52.4238936
+112,Belarus,VICIEBSK,Viciebsk,undata:city-112-vitebsk,30.1844,55.1964
+124,Canada,HAMILTON_CANADA,Hamilton,undata:city-124-hamilton,-79.83333333,43.25
+124,Canada,GUELPH,Guelph,undata:city-124-guelph,-80.25,43.55
+124,Canada,GREATER_SUDBURY_GRAND_SUDBURY,Greater Sudbury / Grand Sudbury    ,undata:city-124-greater-sudbury-grand-sudbury,-81.069722,46.57777778
+124,Canada,EDMONTON,Edmonton,undata:city-124-edmonton,-113.5,53.55
+124,Canada,CALGARY,Calgary,undata:city-124-calgary,-114.0833333,51.08333333
+124,Canada,BRANTFORD,Brantford,undata:city-124-brantford,-80.2631733,43.1408157
+124,Canada,BELLEVILLE,Belleville,undata:city-124-belleville,-77.3852556,44.1633264
+124,Canada,BARRIE,Barrie,undata:city-124-barrie,-79.7,44.38333333
+124,Canada,TROIS_RIVIERES,Trois-Rivières,undata:city-124-trois-rivieres,-72.55,46.35
+124,Canada,TORONTO,Toronto,undata:city-124-toronto,-79.41666667,43.66666667
+124,Canada,THUNDER_BAY,Thunder Bay,undata:city-124-thunder-bay,-89.23333333,48.4
+124,Canada,ST_JOHNS,St. John’s,undata:city-124-st-john-s-newfoundland-and-labrador,-52.75,47.616667
+124,Canada,ST_CATHARINES,St. Catharines,undata:city-124-st-catharines-niagara,-79.253333,43.165556
+124,Canada,SHERBROOKE,Sherbrooke,undata:city-124-sherbrooke,-71.9,45.4
+124,Canada,SASKATOON,Saskatoon,undata:city-124-saskatoon,-106.6666667,52.13333333
+124,Canada,SAINT_JOHN,Saint John,undata:city-124-saint-john,-66.038889,45.25916667
+124,Canada,SAGUENAY,Saguenay,undata:city-124-saguenay,-71.066667,48.416667
+124,Canada,MONCTON,Moncton,undata:city-124-moncton,-64.76666667,46.08333333
+124,Canada,LONDON_CANADA,London,undata:city-124-london,-81.25,42.98333333
+124,Canada,LETHBRIDGE,Lethbridge,undata:city-124-lethbridge,-112.8331033,49.6945782
+124,Canada,KITCHENER_CAMBRIDGE_WATERLOO,Kitchener - Cambridge - Waterloo,undata:city-124-kitchener-cambridge-waterloo,-80.3705753,43.4023881
+124,Canada,ABBOTSFORD,Abbotsford,undata:city-124-abbotsford,-122.3,49.05
+124,Canada,KELOWNA,Kelowna,undata:city-124-kelowna,-119.4833333,49.9
+124,Canada,HALIFAX_CANADA,Halifax,undata:city-124-halifax,-63.6,44.65
+124,Canada,KINGSTON_CANADA,Kingston,undata:city-124-kingston,-76.56666667,44.3
+124,Canada,WINNIPEG,Winnipeg,undata:city-124-winnipeg,-97.16666667,49.88333333
+124,Canada,WINDSOR,Windsor,undata:city-124-windsor,-82.993611,42.302222
+124,Canada,VICTORIA,Victoria,undata:city-124-victoria,-123.35,48.43333333
+124,Canada,VANCOUVER,Vancouver,undata:city-124-vancouver,-123.1333333,49.25
+124,Canada,REGINA,Regina,undata:city-124-regina,-104.6166667,50.45
+124,Canada,QUEBEC,Québec,undata:city-124-quebec,-71.25,46.8
+124,Canada,PETERBOROUGH_CANADA,Peterborough,undata:city-124-peterborough,-78.33333333,44.3
+124,Canada,OTTAWA_GATINEAU_QUEBEC_PART,Ottawa - Gatineau (Quebec part),undata:city-124-ottawa-gatineau-quebec-part,-75.70164,45.47723
+124,Canada,OTTAWA_GATINEAU_ONTARIO_PART,Ottawa - Gatineau (Ontario part),undata:city-124-ottawa-gatineau-ontario-part,-75.70164,45.47723
+124,Canada,OSHAWA,Oshawa,undata:city-124-oshawa,-78.86666667,43.9
+124,Canada,MONTREAL,Montréal,undata:city-124-montreal,-73.58333333,45.5
+124,Canada,SAINT_JEAN_SUR_RICHELIEU,Saint-Jean-sur-Richelieu,undata:city-124-saint-jean-sur-richelieu,-73.2533401,45.3056879
+144,Sri Lanka,ANURADHAPURA,Anuradhapura,undata:city-144-anuradhapura,80.4106096,8.334985
+144,Sri Lanka,GALLE,Galle,undata:city-144-galle,80.2172444,6.0324611
+144,Sri Lanka,PUTTALAM,Puttalam,undata:city-144-puttalam,79.8293371,7.9818402
+144,Sri Lanka,COLOMBO,Colombo,undata:city-144-colombo,79.8428278,6.934675
+144,Sri Lanka,CHILAW_FERRY_STREET,"Chilaw, Ferry Street",undata:city-144-chilaw-ferry-street,79.7928425,7.5748484
+144,Sri Lanka,BATTICALOA,Batticaloa,undata:city-144-batticaloa,81.6941956,7.7356027
+144,Sri Lanka,BADULLA,Badulla,undata:city-144-badulla,81.0570589,6.9899499
+144,Sri Lanka,RATNAPURA,Ratnapura,undata:city-144-ratnapura,80.4022975,6.6803691
+144,Sri Lanka,MATARA,Matara,undata:city-144-matara,80.5482919,5.947822
+144,Sri Lanka,KANDY,Kandy,undata:city-144-kandy,80.63505,7.2930778
+144,Sri Lanka,JAFFNA,Jaffna,undata:city-144-jaffna,80.0093029,9.665093
+144,Sri Lanka,HAPUTALE,Haputale,undata:city-144-haputale,80.9575728,6.7683012
+144,Sri Lanka,HAMBANTOTA,Hambantota,undata:city-144-hambantota,81.1321195,6.176392
+144,Sri Lanka,EMBILIPITIYA,Embilipitiya,undata:city-144-embilipitiya,80.8538325,6.3340647
+152,Chile,RANCAGUA,Rancagua,undata:city-152-rancagua,-70.74071,-34.17029
+152,Chile,VALPARAISO_VALPARAISO,Valparaíso,undata:city-152-valparaiso,-71.61983,-33.04628
+152,Chile,TEMUCO,Temuco,undata:city-152-temuco,-72.59009,-38.73998
+152,Chile,TALCA,Talca,undata:city-152-talca,-71.66597,-35.42652
+152,Chile,SANTIAGO_SANTIAGO,Santiago,undata:city-152-santiago,-70.5922927762,-33.4010352382
+152,Chile,ARICA,Arica,undata:city-152-arica,-70.32211,-18.47818
+152,Chile,MAGALLANES_PUNTAARENAS,Punta Arenas,undata:city-152-punta-arenas,-70.90808,-53.16265
+152,Chile,PENAFLOR,Peñaflor,undata:city-152-penaflor,-70.8785306,-33.6058638
+152,Chile,OVALLE,Ovalle,undata:city-152-ovalle,-71.2029894,-30.6030819
+152,Chile,COPIAPO,Copiapó,undata:city-152-copiapo,-70.33224,-27.36652
+152,Chile,CONCEPCION,Concepción,undata:city-152-concepcion,-73.05019,-36.8271
+152,Chile,ANTOFAGASTA_ANTOFAGASTA,Antofagasta,undata:city-152-antofagasta,-70.39792,-23.64639
+152,Chile,IQUIQUE,Iquique,undata:city-152-iquique,-70.15245,-20.21414
+152,Chile,LA_SERENA,La Serena,undata:city-152-la-serena,-71.25199,-29.90267
+152,Chile,LOS_ANGELES,Los Angeles,undata:city-152-los-angeles,-72.35165,-37.47075
+152,Chile,LOSLAGOS_OSORNO,Osorno,undata:city-152-osorno,-73.13594,-40.57376
+156,China,XUCHENG,Xucheng,undata:city-156-xucheng-jiangsu,110.1629318,20.3368933
+156,China,XINGPING,Xingping,undata:city-156-xingping-shaanxi,108.48,34.3
+156,China,WUHAN,Wuhan,undata:city-156-wuhan-hubei,114.3,30.58
+156,China,TIANJIN,Tianjin,undata:city-156-tianjin-tianjin,117.2,39.12
+156,China,TANGSHAN,Tangshan,undata:city-156-tangshan-hebei,118.2,39.63
+156,China,TAIPEI,Taipei,undata:city-156-taipei-taiwan,,
+156,China,HANGZHOU,Hangzhou,undata:city-156-hangzhou,120.15,30.3
+156,China,QINGDAO,Qingdao,undata:city-156-qingdao-shandong,120.38,36.08
+156,China,LESHAN,Leshan,undata:city-156-leshan-sichuan,103.77,29.55
+156,China,KAIPING,Kaiping,undata:city-156-kaiping-guangdong,112.68,22.37
+156,China,JINAN,Jinan,undata:city-156-jinan,116.98,36.67
+156,China,HONG_KONG,Hong Kong,undata:city-156-hongkong,114.17,22.27
+156,China,HAIKOU,Haikou,undata:city-156-haikou,110.33,20.03
+156,China,GUIXI,Guixi,undata:city-156-guixi,117.23,28.3
+156,China,GAOYOU,Gaoyou,undata:city-156-gaoyou,119.43,32.78
+156,China,CHENGGUAN,Chengguan,undata:city-156-chengguan,104.1128772,35.8475375
+156,China,CHENGDU,Chengdu,undata:city-156-chengdu,104.07,30.67
+156,China,CHANGZHOU,Changzhou,undata:city-156-changzhou,119.95,31.78
+156,China,CHANGZHI,Changzhi,undata:city-156-changzhi,113.12,36.2
+156,China,BEIJING,Beijing,undata:city-156-beijing,116.326721268,39.9248428735
+156,China,GUANGZHOU,Guangzhou,undata:city-156-guangzhou,113.28,23.13
+156,China,YIYANG,Yiyang,undata:city-156-yiyang-hunan,112.32,28.6
+156,China,YUCHENG,Yucheng,undata:city-156-yucheng-zhejiang,116.63,36.93
+156,China,ZHENGZHOU,Zhengzhou,undata:city-156-zhengzhou-henan,113.63,34.75
+156,China,ZUNYI,Zunyi,undata:city-156-zunyi-guizhou,106.93,27.7
+156,China,ZHUJI,Zhuji,undata:city-156-zhuji-zhejiang,120.23,29.72
+156,China,SHENZHEN,Shenzhen,undata:city-156-shenzhen-guangdong,114.12,22.55
+156,China,YANGGU,Yanggu,undata:city-156-yanggu-shandong,115.7857865,36.1142991
+170,Colombia,BOGOTA,Bogota,undata:city-170-bogota,-74.0931168302,4.5802522049
+170,Colombia,ZIPAQUIRA,Zipaquirá,undata:city-170-zipaquira,-74.0039818,5.0234748
+170,Colombia,VALLEDUPAR,Valledupar,undata:city-170-valledupar,-73.2529512,10.4651733
+170,Colombia,SINCELEJO,Sincelejo,undata:city-170-sincelejo,-75.4329765,9.3154293
+170,Colombia,NEIVA,Neiva,undata:city-170-neiva,-75.2891733,2.9263127
+170,Colombia,MEDELLIN,Medellín,undata:city-170-medellin,-75.573553,6.2443382
+170,Colombia,MAICAO,Maicao,undata:city-170-maicao,-72.3131602,11.4048743
+170,Colombia,GIRARDOT,Girardot,undata:city-170-girardot,-74.8015665,4.306643
+170,Colombia,FLORENCIA,Florencia,undata:city-170-florencia,-75.6081198,1.7554212
+170,Colombia,CARTAGO_COLOMBIA,Cartago,undata:city-170-cartago,-75.9121234,4.7465494
+170,Colombia,CARTAGENA_COLOMBIA,Cartagena (Cartagena de Indias),undata:city-170-cartagena,-75.458583,10.3822295
+170,Colombia,CALI,Cali (Santiago de Cali),undata:city-170-cali,-76.5324943,3.4517923
+170,Colombia,BUGA,Buga (Guadalajara de Buga),undata:city-170-buga,-76.3065595,3.9011016
+170,Colombia,BUCARAMANGA,Bucaramanga,undata:city-170-bucaramanga,-73.1113562,7.1188675
+170,Colombia,BARRANQUILLA,Barranquilla,undata:city-170-barranquilla,-74.7946353,10.9959296
+170,Colombia,TUNJA,Tunja,undata:city-170-tunja,-73.3616014,5.5324313
+180,Democratic Republic of the Congo,KINSHASA,Kinshasa,undata:city-180-kinshasa,15.3105202345,-4.4319458833
+180,Democratic Republic of the Congo,LUBUMBASHI,Lubumbashi,undata:city-180-lubumbashi,27.4826264,-11.6642316
+188,Costa Rica,SANJOSE,San José,undata:city-188-san-jose,-84.0399626885,9.9881419586
+188,Costa Rica,PUNTARENAS,Puntarenas,undata:city-188-puntarenas,-84.200431,9.0954373
+188,Costa Rica,PUERTO_LIMON,Puerto Limon,undata:city-188-puerto-limon,-83.6660014,10.6829286
+188,Costa Rica,LIBERIA,Liberia,undata:city-188-liberia,-85.4985541,10.6916429
+188,Costa Rica,CARTAGO_COSTARICA,Cartago,undata:city-188-cartago,-83.6943029,9.8158904
+191,Croatia,ZAGREB,Zagreb,undata:city-191-zagreb,15.9817349,45.8131708
+191,Croatia,ZADAR,Zadar,undata:city-191-zadar,15.2353257,44.1168594
+191,Croatia,SPLIT,Split,undata:city-191-split,16.4514462,43.5159559
+191,Croatia,RIJEKA,Rijeka,undata:city-191-rijeka,14.4226963,45.3344121
+191,Croatia,OSIJEK,Osijek,undata:city-191-osijek,18.6811129,45.5601244
+192,Cuba,BAYAMO,Bayamo,undata:city-192-bayamo,-76.64,20.38
+192,Cuba,CAMAGUEY,Camagüey,undata:city-192-camaguey,-77.91,21.38
+192,Cuba,CIENFUEGOS,Cienfuegos,undata:city-192-cienfuegos,-80.45,22.14
+192,Cuba,GUANTANAMO,Guantánamo,undata:city-192-guantanamo,-75.2,20.14
+192,Cuba,HOLGUIN,Holguín,undata:city-192-holguin,-76.26,20.88
+192,Cuba,SANTIAGO_DE_CUBA,Santiago de Cuba             ,undata:city-192-santiago-de-cuba,-75.82,20.02
+192,Cuba,LAS_TUNAS,Las Tunas                         ,undata:city-192-las-tunas,-76.95,20.96
+192,Cuba,HAVANA,Havana,undata:city-192-havana,-82.3515320416,23.0473080506
+192,Cuba,SANTA_CLARA,Santa Clara,undata:city-192-santa-clara,-79.96,22.4
+196,Cyprus,LEYMOSUN,Leymosun,undata:city-196-lemesos-cyprus,33.033333,34.675
+202,Sub-Saharan Africa,SUBSAHARAN_ARFICA_ALL,"Sub-saharan Arfrica, all cities",undata:city-202-all,,
+203,Czechia,USTI_NAD_LABEM,Ústí nad Labem,undata:city-203-usti-nad-labem,14.0381357,50.6603327
+203,Czechia,PRAGUE,Prague,undata:city-203-prague,14.5401143672,50.0547599281
+203,Czechia,PARDUBICE,Pardubice,undata:city-203-pardubice,15.7791356,50.0385812
+203,Czechia,OSTRAVA,Ostrava,undata:city-203-ostrava,18.283333,49.833333
+203,Czechia,MOST,Most,undata:city-203-most,13.636112,50.5032737
+203,Czechia,LIBEREC,Liberec,undata:city-203-liberec,15.0583947,50.7702648
+203,Czechia,KLADNO,Kladno,undata:city-203-kladno,14.1025379,50.1478497
+203,Czechia,HRADEC_KRALOVE,Hradec Králové,undata:city-203-hradec-kralove,15.8327512,50.2092113
+203,Czechia,HRABUVKA,Hrabuvka,undata:city-203-hrabuvka,17.6912526,49.5785052
+203,Czechia,HAVIROV,Havirov,undata:city-203-havirov,18.4368451,49.7801136
+203,Czechia,CHOMUTOV_JIRKOV,Chomutov / Jirkov,undata:city-203-chomutov-jirkov,13.4476266,50.5000597
+203,Czechia,CESKE_BUDEJOVICE,Ceske Budejovice,undata:city-203-ceske-budejovice,14.474285,48.9747357
+203,Czechia,PORUBA,Poruba,undata:city-203-poruba,18.1720559,49.8297533
+203,Czechia,PLZEN,Plzeň,undata:city-203-plzen,13.366667,49.75
+203,Czechia,BRNO,Brno,undata:city-203-brno,16.633333,49.2
+203,Czechia,OLOMOUC,Olomouc,undata:city-203-olomouc,17.25,49.583333
+204,Benin,BOHICON,Bohicon,undata:city-204-bohicon,2.0695683,7.1816331
+204,Benin,DJOUGOU,Djougou,undata:city-204-djougou,1.6651614,9.7106683
+204,Benin,PARAKOU,Parakou,undata:city-204-parakou,2.6278258,9.3400159
+204,Benin,NATITINGOU,Natitingou,undata:city-204-natitingou,1.383541,10.2514083
+204,Benin,KANDI,Kandi,undata:city-204-kandi,3.0464209,11.2849785
+208,Denmark,ARHUS,Århus,undata:city-208-arhus,10.216667,56.15
+208,Denmark,AALBORG,Aalborg,undata:city-208-aalborg,9.933333,57.05
+208,Denmark,ODENSE,Odense,undata:city-208-odense,10.383333,55.4
+208,Denmark,KOBENHAVN,København,undata:city-208-copenhagen,12.5334683049,55.6804770916
+208,Denmark,GREVE_ISHOJ,Greve / Ishøj,undata:city-208-greve-ishoj,12.3158346,55.6087658
+214,Dominican Republic,SAN_FRANCISCO_DE_MACORIS,San Francisco de Macoris,undata:city-214-san-francisco-de-macoris,-70.2533206,19.2972812
+214,Dominican Republic,PUERTA_PLATA,Puerta Plata,undata:city-214-puerto-plata,-70.8000756,19.7444333
+214,Dominican Republic,LA_VEGA,La Vega,undata:city-214-la-vega,-70.6316324,19.0520669
+214,Dominican Republic,LA_ROMANA,La Romana,undata:city-214-la-romana,-68.9766638,18.4975148
+214,Dominican Republic,HIQUEY,Hiquey,undata:city-214-hiquey,-68.71138,18.61325
+214,Dominican Republic,SANTIAGO_DE_LOS_CABELLEROS,Santiago de los cabelleros,undata:city-214-santiago-de-los-cabelleros,-70.7799661,19.355864
+218,Ecuador,DURAN,Durán,undata:city-218-duran,-79.7903725,-2.215207
+218,Ecuador,SANTODOMINGODELOSCOLORADOS,Santo Domingo de los Colorados,undata:city-218-santo-domingo-de-los-colorados,-78.9848484,-2.910124
+218,Ecuador,RIOBAMBA,Riobamba,undata:city-218-riobamba,-78.6482479,-1.6732765
+218,Ecuador,QUITO,Quito,undata:city-218-quito,-78.5379562693,-0.2113329715
+218,Ecuador,QUEVEDO,Quevedo,undata:city-218-quevedo,-79.4663323,-1.0243508
+218,Ecuador,MILAGRO,Milagro,undata:city-218-milagro,-79.5552042,-2.1179635
+218,Ecuador,MACHALA,Machala,undata:city-218-machala,-79.9588518,-3.2588565
+218,Ecuador,LOJA,Loja,undata:city-218-loja,-79.8053425,-4.0528506
+218,Ecuador,GUAYAQUIL,Guayaquil,undata:city-218-guayaquil,-79.8868741,-2.1900563
+218,Ecuador,ESMERALDAS,Esmeraldas,undata:city-218-esmeraldas,-79.3858867,0.7343619
+218,Ecuador,DAULE,Daule,undata:city-218-daule,-79.9129307,-1.9200069
+218,Ecuador,CUENCA,Cuenca,undata:city-218-cuenca,-79.0041726,-2.8974072
+218,Ecuador,CHONE,Chone,undata:city-218-chone,-80.0721599,-0.3828099
+218,Ecuador,TULCAN,Tulcán,undata:city-218-tulcan,-77.7172256,0.8114572
+222,El Salvador,USULUTAN,Usulutan,undata:city-222-usulutan,-88.4382264,13.3438204
+222,El Salvador,SANTAANA_SANTAANA,Santa Ana,undata:city-222-santa-ana,-89.5566069,13.9947753
+222,El Salvador,SANMIGUEL_SANMIGUEL,San Miguel,undata:city-222-san-miguel,-88.17722,13.4803899
+222,El Salvador,APOPA,Apopa,undata:city-222-apopa,-89.1790784,13.8013036
+222,El Salvador,SANSALVADOR_SANSALVADOR,San Salvador,undata:city-222-san-salvador,-89.2386244925,13.6748276376
+231,Ethiopia,ADDIS,Addis Ababa,undata:city-231-addis-ababa,38.7356223148,9.0249186042
+231,Ethiopia,HARAR,Harar,undata:city-231-harar,42.07,9.18
+231,Ethiopia,GONDAR,Gondar,undata:city-231-gondar,37.27,12.34
+231,Ethiopia,DIRE_DAWA,Dire Dawa,undata:city-231-dire-dawa,41.5,9.36
+231,Ethiopia,BAHIR_DAR,Bahir Dar,undata:city-231-bahir-dar,37.23,11.35
+231,Ethiopia,AWASSA,Awassa,undata:city-231-awassa,38.47861,7.0481029
+231,Ethiopia,ADAMA,Adama,undata:city-231-adama-nazreth,39.16,8.32
+233,Estonia,TARTU,Tartu,undata:city-233-tartu,26.73611111,58.36611111
+233,Estonia,TALLINN,Tallinn,undata:city-233-tallinn,24.7520733039,59.4332389898
+233,Estonia,NARVA,Narva,undata:city-233-narva,28.1921457,59.3766729
+242,Fiji,SUVA,Suva,undata:city-242-suva,178.491287276,-18.1179065976
+242,Fiji,NADI,Nadi,undata:city-242-nadi,177.4178549,-17.7992725
+242,Fiji,LAUTOKA,Lautoka,undata:city-242-lautoka,177.4530138,-17.6043956
+246,Finland,ABO,Åbo,undata:city-246-turku-abo,22.27,60.45
+246,Finland,TAPIOLA_NIITTYKUMPU,Tapiola / Niittykumpu,undata:city-246-tapiola-niittykumpu,24.7630169,60.1703645
+246,Finland,TAMMERFORS,Tammerfors,undata:city-246-tampere-tammerfors,23.73,61.5
+246,Finland,OULU_ULEABORG,Oulu / Uleåborg,undata:city-246-oulu-uleaborg,25.4716809,65.0118734
+246,Finland,JYVASKYLA,Jyväskylä,undata:city-246-jyvaskyla,25.75,62.24
+246,Finland,HELSINKI_HELSINGFORS,Helsinki / Helsingfors,undata:city-246-helsinki-helsingfors,24.9427473,60.1674881
+250,France,AVIGNON,Avignon,undata:city-250-avignon,4.8059012,43.9492493
+250,France,LIMOGES,Limoges,undata:city-250-limoges,1.25,45.85
+250,France,LILLE,Lille,undata:city-250-lille,3.066667,50.633333
+250,France,CAEN,Caen,undata:city-250-caen,-0.35,49.183333
+250,France,BREST-FRANCE,Brest,undata:city-250-brest,-4.483333,48.4
+250,France,SAINT_BRIEUC,Saint-Brieuc,undata:city-250-saint-brieuc,-2.7603283,48.5141134
+250,France,ROUEN,Rouen,undata:city-250-rouen,1.083333,49.433333
+250,France,AJACCIO,Ajaccio,undata:city-250-ajaccio,8.7376029,41.9263991
+250,France,AIX_EN_PROVENCE,Aix-en-Provence,undata:city-250-aix-en-provence,5.433333,43.533333
+250,France,ARRAS,Arras,undata:city-250-arras,2.7772211,50.291048
+250,France,ANTIBES,Antibes,undata:city-250-antibes,7.10905,43.5836
+250,France,BELFORT,Belfort,undata:city-250-belfort,6.8628942,47.6379599
+250,France,BESANCON,Besançon,undata:city-250-besancon,6.033333,47.25
+250,France,BEZIERS,Béziers,undata:city-250-beziers,3.2131307,43.3426562
+250,France,MEAUX,Meaux,undata:city-250-meaux,2.8773541,48.9582708
+250,France,MAUREPAS_MONTIGNY_LE_BRETONNEUX,Maurepas / Montigny-le-Bretonneux,undata:city-250-maurepas-montigny-le-bretonneux,2.03405,48.76636
+250,France,MARTIGUES_PORT_DE_BOUC,Martigues / Port-de-Bouc,undata:city-250-martigues-port-de-bouc,4.9809,43.40657
+250,France,MARSEILLE,Marseille,undata:city-250-marseille,5.383333,43.283333
+250,France,MANTES_LA_JOLIE,Mantes-la-Jolie,undata:city-250-mantes-la-jolie,1.7140683,48.9891971
+250,France,LYON,Lyon,undata:city-250-lyon,4.85,45.75
+250,France,GRENOBLE,Grenoble,undata:city-250-grenoble,5.716667,45.166667
+250,France,FREJUS,Fréjus,undata:city-250-frejus,6.7360182,43.4330308
+250,France,LES_CLAYES_SOUS_BOIS,Les Clayes-sous-Bois,undata:city-250-les-clayes-sous-bois,1.9871825,48.8214478
+250,France,LE_MANS,Le Mans,undata:city-250-le-mans,0.2,48.0
+250,France,DUNKERQUE,Dunkerque,undata:city-250-dunkerque,2.3772525,51.0347708
+250,France,DOUAI,Douai,undata:city-250-douai,3.0804641,50.3675677
+250,France,DIJON,Dijon,undata:city-250-dijon,5.016667,47.316667
+250,France,COLMAR,Colmar,undata:city-250-colmar,7.3579641,48.0777517
+250,France,CLERMONT_FERRAND,Clermont-Ferrand,undata:city-250-clermont-ferrand,3.083333,45.783333
+250,France,CHARTRES,Chartres,undata:city-250-chartres,1.4881434,48.4438601
+250,France,MONTPELLIER,Montpellier,undata:city-250-montpellier,3.883333,43.6
+250,France,MULHOUSE,Mulhouse,undata:city-250-mulhouse,7.333333,47.75
+250,France,BOURGES,Bourges,undata:city-250-bourges,2.399125,47.0811658
+250,France,BOULOGNE_SUR_MER,Boulogne-sur-mer,undata:city-250-boulogne-sur-mer,1.6118771,50.7259985
+250,France,BAYONNE,Bayonne,undata:city-250-bayonne,-1.4736657,43.4945144
+250,France,VALENCIENNES,Valenciennes,undata:city-250-valenciennes,3.5234846,50.3579317
+250,France,VALENCE,Valence,undata:city-250-valence,4.8920811,44.9332277
+250,France,TROYES,Troyes,undata:city-250-troyes,4.0746257,48.2971626
+250,France,TOURS,Tours,undata:city-250-tours,0.68,47.4
+250,France,TOULOUSE,Toulouse,undata:city-250-toulouse,1.433333,43.6
+250,France,PAU,Pau,undata:city-250-pau,-0.3685668,43.2957547
+250,France,PARIS,Paris,undata:city-250-paris,2.4784290266,48.8090362616
+250,France,RENNES,Rennes,undata:city-250-rennes,-1.683333,48.083333
+250,France,REIMS,Reims,undata:city-250-reims,4.033333,49.25
+250,France,ORLEANS,Orléans,undata:city-250-orleans,1.9,47.916667
+250,France,NIMES,Nîmes,undata:city-250-nimes,4.35,43.833333
+250,France,NICE,Nice,undata:city-250-nice,7.25,43.7
+250,France,NANTES,Nantes,undata:city-250-nantes,-1.55,47.216667
+250,France,NANCY,Nancy,undata:city-250-nancy,6.2,48.683333
+250,France,SAINT_ETIENNE,Saint-Étienne,undata:city-250-saint-etienne,4.5,45.416667
+250,France,ANNECY,Annecy,undata:city-250-annecy,6.1288847,45.8992348
+250,France,ANGERS,Angers,undata:city-250-angers,-0.55,47.466667
+250,France,AMIENS,Amiens,undata:city-250-amiens,2.3,49.9
+250,France,POITIERS,Poitiers,undata:city-250-poitiers,0.340196,46.5802596
+250,France,POISSY,Poissy,undata:city-250-poissy,2.0428293,48.927439
+250,France,PERPIGNAN,Perpignan,undata:city-250-perpignan,2.883333,42.683333
+250,France,LE_HAVRE,Le Havre,undata:city-250-le-havre,0.133333,49.5
+250,France,LA_SEYNE_SUR_MER_SANARY_SUR_MER,La Seyne-sur-Mer / Sanary-sur-Mer,undata:city-250-la-seyne-sur-mer-sanary-sur-mer,5.80007,43.11783
+250,France,LA_ROCHELLE,La Rochelle,undata:city-250-la-rochelle,-1.1520434,46.1591126
+250,France,CHAMBERY,Chambery,undata:city-250-chambery,5.9203636,45.5662672
+250,France,CERGY_PONTOISE,Cergy-Pontoise,undata:city-250-cergy-pontoise,2.0388736,49.0527528
+250,France,CALAIS,Calais,undata:city-250-calais,1.8538446,50.9524769
+250,France,BORDEAUX,Bordeaux,undata:city-250-bordeaux,-0.566667,44.833333
+250,France,MELUN,Melun,undata:city-250-melun,2.6608169,48.539927
+250,France,METZ,Metz,undata:city-250-metz,6.166667,49.133333
+250,France,TOULON,Toulon,undata:city-250-toulon,5.933333,43.116667
+250,France,STRASBOURG,Strasbourg,undata:city-250-strasbourg,7.75,48.583333
+250,France,SAINT_QUENTIN,Saint-Quentin,undata:city-250-saint-quentin,3.2876843,49.8465253
+258,French Polynesia,FAAA_PUNAAUIA_PAPEETE_FRENCH_POLYNESIA,"Faaa/Punaauia/Papeete, French Polynesia",undata:city-258-faaa-punaauia-papeete,-149.5665,-17.53733
+275,State of Palestine,AL_KHALIL,Al-Khalil,undata:city-275-al-khalil,35.0944873,31.528902
+275,State of Palestine,AN_NUSAYRAT,An-Nusayrat,undata:city-275-an-nusayrat,34.3925,31.44861
+275,State of Palestine,AL_QUDS,Al-Quds,undata:city-275-al-quds,34.4196339,31.5013618
+275,State of Palestine,RAFAH,Rafah,undata:city-275-rafah,34.2558269,31.2752047
+275,State of Palestine,NABULUS_NABLUS,Nabulus(Nablus),undata:city-275-nabulus-nablus,35.25444,32.22111
+275,State of Palestine,JENIN,Jenin,undata:city-275-jenin,35.297566,32.4618837
+275,State of Palestine,GHAZZAH,Ghazzah,undata:city-275-ghazzah,34.46667,31.5
+275,State of Palestine,KHAN_YUNIS,Khan Yunis,undata:city-275-khan-yunis,34.3025277,31.3457612
+276,Germany,BIELEFELD,Bielefeld,undata:city-276-bielefeld,8.533333333,52.03333333
+276,Germany,MOERS,Moers,undata:city-276-moers-rheinhausen,6.65,51.45
+276,Germany,FURTH,Fürth,undata:city-276-furth,8.784722222,49.65083333
+276,Germany,FREIBURG_IM_BREISGAU,Freiburg im Breisgau,undata:city-276-freiburg-im-breisgau,7.85,48.0
+276,Germany,BRAUNSCHWEIG,Braunschweig,undata:city-276-braunschweig,10.53333333,52.26666667
+276,Germany,HAMBURG,Hamburg,undata:city-276-hamburg,10.0,53.55
+276,Germany,KREFELD,Krefeld,undata:city-276-krefeld,6.566666667,51.33333333
+276,Germany,BONN,Bonn,undata:city-276-bonn,7.1,50.73333333
+276,Germany,MONCHENGLADBACH,Mönchengladbach,undata:city-276-monchengladbach,6.433333333,51.2
+276,Germany,MUNSTER,Münster,undata:city-276-munster,7.633333333,51.96666667
+276,Germany,REUTLINGEN,Reutlingen,undata:city-276-reutlingen,9.216666667,48.48333333
+276,Germany,REMSCHEID,Remscheid,undata:city-276-remscheid,7.2,51.18333333
+276,Germany,BOCHOLT,Bocholt,undata:city-276-bocholt,6.6148669,51.8382715
+276,Germany,BERLIN,Berlin,undata:city-276-berlin,13.6185837169,52.4730911746
+276,Germany,AACHEN,Aachen,undata:city-276-aachen,6.105277778,50.77083333
+276,Germany,HALLE,Halle,undata:city-276-halle,11.9705452,51.4825041
+276,Germany,BENRATH,Benrath,undata:city-276-benrath,6.8727345,51.163479
+276,Germany,BAYREUTH,Bayreuth,undata:city-276-bayreuth,11.5763079,49.9427202
+276,Germany,HAGEN,Hagen,undata:city-276-hagen,8.65,53.36666667
+276,Germany,GUTERSLOH,Gütersloh,undata:city-276-gutersloh,8.3782078,51.9063997
+276,Germany,GROPELINGEN_VEGESACK,Gröpelingen / Vegesack,undata:city-276-gropelingen-vegesack,8.6819,53.1637
+276,Germany,GOTTINGEN,Göttingen,undata:city-276-gottingen,9.933333333,51.53333333
+276,Germany,GORLITZ,Görlitz,undata:city-276-gorlitz,14.991018,51.1563185
+276,Germany,GOPPINGEN,Göppingen,undata:city-276-goppingen,9.6541116,48.7031377
+276,Germany,ERFURT,Erfurt,undata:city-276-erfurt,11.03333333,50.98333333
+276,Germany,DUSSELDORF,Düsseldorf,undata:city-276-dusseldorf,6.766666667,51.21666667
+276,Germany,FRANKFURT_AM_MAIN,Frankfurt am Main,undata:city-276-frankfurt-am-main,8.683333333,50.11666667
+276,Germany,FRANKFURT_ODER,Frankfurt (Oder),undata:city-276-frankfurt-oder,14.549452,52.3412273
+276,Germany,DUREN,Düren,undata:city-276-duren,6.4820806,50.8031684
+276,Germany,DUISBURG,Duisburg,undata:city-276-duisburg,6.75,51.43333333
+276,Germany,DRESDEN,Dresden,undata:city-276-dresden,13.75,51.05
+276,Germany,DELMENHORST,Delmenhorst,undata:city-276-delmenhorst,8.6294626,53.0528092
+276,Germany,DARMSTADT,Darmstadt,undata:city-276-darmstadt,8.649444444,49.87055556
+276,Germany,COTTBUS,Cottbus,undata:city-276-cottbus,14.3357307,51.7567447
+276,Germany,MAINZ,Mainz,undata:city-276-mainz,8.271111111,50.0
+276,Germany,MAGDEBURG,Magdeburg,undata:city-276-magdeburg,11.66666667,52.16666667
+276,Germany,HAMM,Hamm,undata:city-276-hamm,7.8,51.68333333
+276,Germany,HANAU,Hanau,undata:city-276-hanau,8.9169797,50.132881
+276,Germany,LUTTEN_KLEIN,Lütten Klein,undata:city-276-lutten-klein,12.0511187,54.1404253
+276,Germany,LUNEN,Lünen,undata:city-276-lunen,7.5228088,51.6142482
+276,Germany,LUNEBURG,Lüneburg,undata:city-276-luneburg,10.407855,53.248706
+276,Germany,LUDWIGSBURG,Ludwigsburg,undata:city-276-ludwigsburg,9.1895147,48.8953937
+276,Germany,LUDENSCHEID,Lüdenscheid,undata:city-276-ludenscheid,7.6395513,51.218116
+276,Germany,LUBECK,Lübeck,undata:city-276-lubeck,10.7,53.86666667
+276,Germany,KAISERSLAUTERN,Kaiserslautern,undata:city-276-kaiserslautern,7.75,49.45
+276,Germany,JENA,Jena,undata:city-276-jena,11.58333333,50.93333333
+276,Germany,KOLN,Köln,undata:city-276-koln,6.95,50.93333333
+276,Germany,KIEL,Kiel,undata:city-276-kiel,10.13333333,54.33333333
+276,Germany,ISERLOHN,Iserlohn,undata:city-276-iserlohn,7.6999713,51.3746778
+276,Germany,INGOLSTADT,Ingolstadt,undata:city-276-ingolstadt,11.43333333,48.76666667
+276,Germany,HILDESHEIM,Hildesheim,undata:city-276-hildesheim,9.966666667,52.15
+276,Germany,HERZOGENRATH,Herzogenrath,undata:city-276-herzogenrath,6.0950514,50.8684545
+276,Germany,HEILBRONN,Heilbronn,undata:city-276-heilbronn,9.22,49.14027778
+276,Germany,HEIDELBERG,Heidelberg,undata:city-276-heidelberg,8.7,49.41666667
+276,Germany,TUBINGEN,Tübingen,undata:city-276-tubingen,9.0535531,48.5236164
+276,Germany,TRIER,Trier,undata:city-276-trier,6.633333333,49.75
+276,Germany,WURZBURG,Würzburg,undata:city-276-wurzburg,9.936111111,49.78777778
+276,Germany,WOLFSBURG,Wolfsburg,undata:city-276-wolfsburg,10.8,52.43333333
+276,Germany,STUTTGART,Stuttgart,undata:city-276-stuttgart,9.183333333,48.76666667
+276,Germany,SOLINGEN_WUPPERTAL,Solingen / Wuppertal,undata:city-276-solingen-wuppertal,7.144323,51.2551349
+276,Germany,SINDELFINGEN,Sindelfingen,undata:city-276-sindelfingen,9.0035455,48.7084162
+276,Germany,SCHWEINFURT,Schweinfurt,undata:city-276-schweinfurt,10.233302,50.0499945
+276,Germany,SAARBRUCKEN,Saarbrücken,undata:city-276-saarbrucken,7.0,49.23333333
+276,Germany,RUSSELSHEIM_AM_MAIN,Rüsselsheim am Main,undata:city-276-russelsheim-am-main,8.4118279,49.9948956
+276,Germany,PADERBORN,Paderborn,undata:city-276-paderborn,8.766666667,51.71666667
+276,Germany,OSNABRUCK,Osnabrück,undata:city-276-osnabruck,8.05,52.26666667
+276,Germany,REGENSBURG,Regensburg,undata:city-276-regensburg,12.09555556,49.015
+276,Germany,POTSDAM,Potsdam,undata:city-276-potsdam,13.06666667,52.4
+276,Germany,OLDENBURG_OLDENBURG,Oldenburg(Oldenburg),undata:city-276-oldenburg,8.2,53.16666667
+276,Germany,NEUSS,Neuss,undata:city-276-neuss,6.653888889,51.16527778
+276,Germany,NEUMUNSTER,Neumünster,undata:city-276-neumunster,9.9815377,54.0757442
+276,Germany,MUNCHEN,München,undata:city-276-munchen,11.58333333,48.15
+276,Germany,BAMBERG,Bamberg,undata:city-276-bamberg,10.8868478,49.8916044
+276,Germany,BAD_SODEN_AM_TAUNUS_KELKHEIM,Bad Soden am Taunus / Kelkheim,undata:city-276-bad-soden-am-taunus-kelkheim,8.4502,50.13703
+276,Germany,AUGSBURG,Augsburg,undata:city-276-augsburg,10.88333333,48.36666667
+276,Germany,GIESSEN,Gießen,undata:city-276-giessen,8.6742306,50.5862066
+276,Germany,GEVELSBERG_SCHWELM,Gevelsberg / Schwelm,undata:city-276-gevelsberg-schwelm,7.2997545,51.2968433
+276,Germany,GERA,Gera,undata:city-276-gera,12.08333333,50.86666667
+276,Germany,FLENSBURG,Flensburg,undata:city-276-flensburg,9.4333264,54.7833021
+276,Germany,ESSLINGEN_AM_NECKAR,Esslingen am Neckar,undata:city-276-esslingen-am-neckar,9.3071685,48.7427584
+276,Germany,ERLANGEN,Erlangen,undata:city-276-erlangen,11.00388889,49.58972222
+276,Germany,CHEMNITZ,Chemnitz,undata:city-276-chemnitz,12.91666667,50.83333333
+276,Germany,BREMERHAVEN,Bremerhaven,undata:city-276-bremerhaven,8.583333333,53.55
+276,Germany,BREMEN,Bremen,undata:city-276-bremen,8.8,53.08333333
+276,Germany,HANNOVER,Hannover,undata:city-276-hannover,9.716666667,52.36666667
+276,Germany,MARL,Marl,undata:city-276-marl,7.0829054,51.6485843
+276,Germany,MANNHEIM,Mannheim,undata:city-276-mannheim-ludwigshafen,8.464722222,49.48833333
+276,Germany,LEVERKUSEN,Leverkusen,undata:city-276-leverkusen,7.0,51.03333333
+276,Germany,LEIPZIG,Leipzig,undata:city-276-leipzig,12.33333333,51.3
+276,Germany,LANDSHUT,Landshut,undata:city-276-landshut,12.1516551,48.536217
+276,Germany,KEMPTEN_ALLGAU,Kempten (Allgäu),undata:city-276-kempten-allgau,10.3168835,47.7267063
+276,Germany,KASSEL,Kassel,undata:city-276-kassel,9.5,51.31666667
+276,Germany,KARLSRUHE,Karlsruhe,undata:city-276-karlsruhe,8.385833333,49.00472222
+276,Germany,HAUNSTETTEN,Haunstetten,undata:city-276-haunstetten,10.9067555,48.3086173
+276,Germany,HARBURG,Harburg,undata:city-276-harburg,10.692743,48.7856056
+276,Germany,KOBLENZ,Koblenz,undata:city-276-koblenz,7.6,50.35
+276,Germany,WIESBADEN,Wiesbaden,undata:city-276-wiesbaden,8.25,50.08333333
+276,Germany,VAIHINGEN_MOHRINGEN,Vaihingen / Möhringen,undata:city-276-vaihingen-mohringen,9.1261406,48.7229321
+276,Germany,ULM,Ulm,undata:city-276-ulm-neu-ulm,10.0,48.4
+276,Germany,RUHRGEBIET,Ruhrgebiet,undata:city-276-ruhrgebiet,7.1439182,51.5175179
+276,Germany,ROSTOCK,Rostock,undata:city-276-rostock,12.13333333,54.08333333
+276,Germany,ROSENHEIM,Rosenheim,undata:city-276-rosenheim,12.127262,47.8539273
+276,Germany,PORZ,Porz,undata:city-276-porz,7.0950745,50.8799229
+276,Germany,PLAUEN,Plauen,undata:city-276-plauen,12.1346523,50.4950632
+276,Germany,PFORZHEIM,Pforzheim,undata:city-276-pforzheim,8.7,48.88333333
+288,Ghana,ACCRA,Accra,undata:city-288-accra,-0.20001,5.52771
+300,Greece,THESSALONIKI,Thessaloníki,undata:city-300-thessaloniki,22.94388889,40.64027778
+300,Greece,KAVALA,Kavala,undata:city-300-kavala,24.4122766,40.9369224
+300,Greece,ATHINA,Athina,undata:city-300-athens,23.6930332478,37.9906883528
+300,Greece,CHANIA,Chania,undata:city-300-chania,24.0191544,35.5120831
+300,Greece,IOANNINA,Ioannina,undata:city-300-ioannina,20.8522784,39.6639818
+300,Greece,IRAKLEIO,Irakleio,undata:city-300-irakleio,23.0350983,40.7574638
+320,Guatemala,HUEHUETENANGO,Huehuetenango,undata:city-320-huehuetenango,-91.5839796,15.6634185
+320,Guatemala,SANTA_LUCIA_COTZUMALGUAPA,Santa Lucía Cotzumalguapa,undata:city-320-santa-lucia-cotzumalguapa,-91.077711,14.3001911
+320,Guatemala,SAN_JUAN_SACATEPEQUEZ,San Juan Sacatepéquez,undata:city-320-san-juan-sacatepequez,-90.6579108,14.7842945
+320,Guatemala,QUETZALTENANGO,Quetzaltenango,undata:city-320-quetzaltenango,-91.6152074,14.7360257
+320,Guatemala,PUERTO_BARRIOS,Puerto Barrios,undata:city-320-puerto-barrios,-88.5952506,15.7275154
+320,Guatemala,MAZATENANGO,Mazatenango,undata:city-320-mazatenango,-91.5060031,14.533149
+320,Guatemala,GUATEMALA_CITY,Guatemala City,undata:city-320-guatemala-city,-90.5539855695,14.6171474568
+320,Guatemala,ESCUINTLA,Escuintla,undata:city-320-escuintla,-90.7866243,14.3022857
+320,Guatemala,COBAN,Cobán,undata:city-320-coban,-90.3735065,15.4702001
+332,Haiti,SAINTMARC,Saint Marc,undata:city-332-saint-marc,-72.699511,19.1020269
+332,Haiti,PORT-AU-PRINCE,Port-au-Prince,undata:city-332-port-au-prince,-72.2834397186,18.5204505713
+332,Haiti,CAP_HAITIEN,Cap-Haitien,undata:city-332-cap-haitien,-72.2008068,19.7595236
+340,Honduras,EL_PROGRESO,El Progreso,undata:city-340-el-progreso,-87.7559949,15.474779
+340,Honduras,COMAYAGUA,Comayagua,undata:city-340-comayagua,-87.6779464,14.5550959
+340,Honduras,TEGUCIGALPA,Tegucigalpa,undata:city-340-tegucigalpa,-87.1988907743,14.0325374632
+340,Honduras,SAN_PEDRO_SULA,San Pedro Sula,undata:city-340-san-pedro-sula,-88.0248937,15.5062156
+340,Honduras,LA_CEIBA,La Ceiba,undata:city-340-la-ceiba,-86.7917749,15.7833743
+348,Hungary,VESZPREM,Veszprém,undata:city-348-veszprem,17.9140147,47.0928058
+348,Hungary,RAKOSLIGET,Rákosliget,undata:city-348-rakosliget,19.259332,47.4889412
+348,Hungary,PECS,Pécs,undata:city-348-pecs,18.233333,46.083333
+348,Hungary,TATABANYA,Tatabánya,undata:city-348-tatabanya,18.3980308,47.5837788
+348,Hungary,SZOMBATHELY,Szombathely,undata:city-348-szombathely,16.6187625,47.2291184
+348,Hungary,SZEKESFEHERVAR,Székesfehérvár,undata:city-348-szekesfehervar,18.416667,47.2
+348,Hungary,SZEGED,Szeged,undata:city-348-szeged,20.166667,46.25
+348,Hungary,NYIREGYHAZA,Nyíregyháza,undata:city-348-nyiregyhaza,21.716667,47.95
+348,Hungary,MISKOLC,Miskolc,undata:city-348-miskolc,20.783333,48.1
+348,Hungary,KECSKEMET,Kecskemét,undata:city-348-kecskemet,19.783333,46.9
+348,Hungary,GYOR,Györ,undata:city-348-gyor,17.633333,47.683333
+348,Hungary,ERD,Érd,undata:city-348-erd,18.9213833,47.3772495
+348,Hungary,DEBRECEN,Debrecen,undata:city-348-debrecen,21.633333,47.533333
+348,Hungary,BUDAPEST,Budapest,undata:city-348-budapest,19.136859969,47.4518547032
+352,Iceland,REYKJAVIK,Reykjavik,undata:city-352-reykjavik,-21.8826904267,64.0789870602
+356,India,PARBHANI,Parbhani,undata:city-356-parbhani,76.6026443,19.2901981
+356,India,SURAT,Surat,undata:city-356-surat,72.9544158,21.1917761
+356,India,SITAPUR,Sitapur,undata:city-356-sitapur,80.8294658,27.5046392
+356,India,SINGRAULI,Singrauli,undata:city-356-singrauli,82.6661453,24.1974432
+356,India,PUNE,Pune,undata:city-356-pune,73.8544541,18.521428
+356,India,PATNA,Patna,undata:city-356-patna,85.1235252,25.6093239
+356,India,PALI,Pali,undata:city-356-pali,73.4165055,25.6051226
+356,India,NELLORE,Nellore,undata:city-356-nellore,79.9873763,14.4493717
+356,India,MUMBAI,Mumbai,undata:city-356-mumbai,72.878176,19.0785451
+356,India,MORENA,Morena,undata:city-356-morena,77.5,26.166667
+356,India,MALEGAON,Malegaon,undata:city-356-malegaon,74.5717573,20.5896873
+356,India,KOZHIKODE,Kozhikode,undata:city-356-kozhikode,75.7754716,11.2450558
+356,India,KOLKATA,Kolkata,undata:city-356-kolkata,88.3638815,22.5726723
+356,India,KANPUR,Kanpur,undata:city-356-kanpur,80.3217588,26.4609135
+356,India,KANCHIPURAM,Kanchipuram,undata:city-356-kanchipuram,79.9839686,12.9647163
+356,India,JALNA,Jalna,undata:city-356-jalna,75.8708599,19.918833
+356,India,JAIPUR,Jaipur,undata:city-356-jaipur,75.8189817,26.9154576
+356,India,BELGAUM,Belgaum,undata:city-356-belgaum,74.5069343,15.8572666
+356,India,HINDUPUR,Hindupur,undata:city-356-hindupur,77.492635,13.8306127
+356,India,COIMBATORE,Coimbatore,undata:city-356-coimbatore,76.9628425,11.0018115
+356,India,CHANDIGARH,Chandigarh,undata:city-356-chandigarh,76.7841457,30.7298439
+356,India,BHIWANDI,Bhiwandi,undata:city-356-bhiwandi,73.0804893,19.3625308
+356,India,BENGALURU,Bengaluru,undata:city-356-bengaluru,77.590082,12.9767936
+356,India,BAHARAMPUR,Baharampur,undata:city-356-baharampur,88.2510635,24.1044927
+356,India,AHMEDABAD,Ahmedabad,undata:city-356-ahmedabad,72.5797068,23.0216238
+356,India,THOOTHUKKUDI,Thoothukkudi,undata:city-356-thoothukkudi,78.0797527,8.7567452
+356,India,HYDERABAD_INDIA,Hyderabad,undata:city-356-hyderabad,78.4740613,17.360589
+356,India,VIJAYAWADA,Vijayawada,undata:city-356-vijayawada,80.6185089,16.5087573
+356,India,TUMKUR,Tumkur,undata:city-356-tumkur,77.1006208,13.3400771
+360,Indonesia,PEKALONGAN,Pekalongan,undata:city-360-pekalongan,109.6666,-6.8833
+360,Indonesia,BANDA_ACEH,Banda Aceh,undata:city-360-banda-aceh,95.3259,5.516
+360,Indonesia,BANDUNG,Bandung,undata:city-360-bandung,107.6068,-6.9123
+360,Indonesia,CIREBON,Cirebon,undata:city-360-cirebon,108.5666,-6.7333
+360,Indonesia,SURABAYA,Surabaya,undata:city-360-surabaya,112.7378,-7.2993
+360,Indonesia,SEMARANG,Semarang,undata:city-360-semarang,110.4111,-7.0113
+360,Indonesia,SAMARINDA,Samarinda,undata:city-360-samarinda,117.15,-0.5
+360,Indonesia,PURWAKARTA,Purwakarta,undata:city-360-purwakarta,107.4439799,-6.5607313
+360,Indonesia,PEMATANGSIANTAR,Pematangsiantar,undata:city-360-pematangsiantar,99.05,2.95
+360,Indonesia,PEMALANG,Pemalang,undata:city-360-pemalang,109.3806499,-6.8903574
+360,Indonesia,JOMBANG,Jombang,undata:city-360-jombang,112.2413044,-7.561464
+360,Indonesia,PAREPARE,Parepare,undata:city-360-parepare,119.6333,-4.0166
+360,Indonesia,PALEMBANG,Palembang,undata:city-360-palembang,104.75,-2.9166
+360,Indonesia,MEDAN,Medan,undata:city-360-medan,98.6765,3.5851
+360,Indonesia,MAKASSAR,Makassar,undata:city-360-makassar,119.4125,-5.1305
+360,Indonesia,KENDARI,Kendari,undata:city-360-kendari,122.5777,-3.9713
+360,Indonesia,JAMBI,Jambi,undata:city-360-jambi,103.6166,-1.6
+360,Indonesia,GARUT_KOTA,Garut Kota,undata:city-360-garut-kota,107.0216578,-6.235713
+360,Indonesia,BENGKULU,Bengkulu,undata:city-360-bengkulu,102.2666,-3.8
+364,Iran (Islamic Republic of),MASHAD,Mašhad,undata:city-364-mashad,59.5818962729,36.303292663
+364,Iran (Islamic Republic of),NISHABUR,Nishabur,undata:city-364-mashad,59.5818962729,36.303292663
+364,Iran (Islamic Republic of),PIRANSHAHR,Piranshahr,undata:city-364-piranshahr,45.140337,36.6994559
+364,Iran (Islamic Republic of),QOM,Qom,undata:city-364-qom,50.8721123919,34.6455600271
+364,Iran (Islamic Republic of),KHORAM_ABAD,Khoram Abad,undata:city-364-khoram-abad,58.8790071,36.1574185
+364,Iran (Islamic Republic of),KERMAN,Kermān,undata:city-364-kerman,57.0591792386,30.279855664
+364,Iran (Islamic Republic of),KASHMAR,Kashmar,undata:city-364-kashmar,58.464248,35.2444908
+364,Iran (Islamic Republic of),BANDAR_ABBAS,Bandar'abbās,undata:city-364-bandar-abbas,56.3076471385,27.1987653626
+364,Iran (Islamic Republic of),KARAJ,Karaj,undata:city-364-karaj,50.9686703827,35.7942228086
+364,Iran (Islamic Republic of),GORGAN,Gorgān,undata:city-364-gorgan,54.4389612995,36.8392075038
+364,Iran (Islamic Republic of),ESFAHAN,Esfahān,undata:city-364-esfahan,51.6606948578,32.6665605096
+364,Iran (Islamic Republic of),DEHDASHT,Dehdasht,undata:city-364-dehdasht,50.562923,30.7923985
+364,Iran (Islamic Republic of),BOJNURD,Bojnurd,undata:city-364-bojnurd,57.326365547,37.4743490643
+364,Iran (Islamic Republic of),BABOL,Bābol,undata:city-364-babol,52.678335431,36.5461907297
+364,Iran (Islamic Republic of),ARAK,Arāk,undata:city-364-arak,49.7150932917,34.092785408
+364,Iran (Islamic Republic of),ARADABIL,Aradabil,undata:city-364-aradabil,48.2554457,38.2420435
+364,Iran (Islamic Republic of),AHVAZ,Ahvāz,undata:city-364-ahvaz,48.7240142973,31.3297911631
+364,Iran (Islamic Republic of),VARAMIN,Varāmin,undata:city-364-varamin,51.6346858609,35.3293943814
+364,Iran (Islamic Republic of),TEHRAN,Tehran,undata:city-364-tehran,51.36844735,35.71219607
+364,Iran (Islamic Republic of),TABRIZ,Tabriz,undata:city-364-tabriz,46.2891503831,38.079291212
+364,Iran (Islamic Republic of),SHIRAZ,Shiraz,undata:city-364-shiraz,52.5325239803,29.5991948055
+364,Iran (Islamic Republic of),SHAHIN_SHAHR,Shahin Shahr,undata:city-364-shahin-shahr,51.5507604607,32.8657941058
+364,Iran (Islamic Republic of),SARI,Sāri,undata:city-364-sari,53.0611117554,36.5613707412
+364,Iran (Islamic Republic of),SANANDAJ,Sanandaj,undata:city-364-sanandaj,46.9987488089,35.3039722085
+364,Iran (Islamic Republic of),SALMAS,Salmas,undata:city-364-salmas,44.7685015,38.1969035
+364,Iran (Islamic Republic of),KASAN,Kāšān,undata:city-364-kasan,51.4358564111,33.9749081937
+364,Iran (Islamic Republic of),SHADEGAN,Shadegan,undata:city-364-shadegan,48.6690288,30.6492516
+368,Iraq,BAGHDAD,Baghdad,undata:city-368-baghdad,44.3656462864,33.3699990064
+372,Ireland,SWORDS_MALAHIDE,Swords / Malahide,undata:city-372-swords-malahide,-6.2161067,53.4544056
+372,Ireland,CORK,Cork,undata:city-372-cork,-8.495833,51.898611
+372,Ireland,BLANCHARDSTOWN,Blanchardstown,undata:city-372-blanchardstown,-6.3775408,53.3868998
+372,Ireland,LIMERICK,Limerick,undata:city-372-limerick,-8.6301239,52.661252
+372,Ireland,DUBLIN,Dublin,undata:city-372-dublin,-6.2133989384,53.4353409243
+376,Israel,TEL_AVIV,Tel Aviv,undata:city-376-tel-aviv,34.7818064,32.0852997
+380,Italy,VERONA,Verona,undata:city-380-verona,10.9966638889,45.4424166667
+380,Italy,CATANIA,Catania,undata:city-380-catania,15.0889944444,37.5139833333
+380,Italy,CAGLIARI,Cagliari,undata:city-380-cagliari,9.1170527778,39.21535
+380,Italy,BRINDISI,Brindisi,undata:city-380-brindisi,17.6884434,40.6359197
+380,Italy,BRESCIA,Brescia,undata:city-380-brescia,10.2209027778,45.5392666667
+380,Italy,BOLZANO,Bolzano,undata:city-380-bolzano,11.3547801,46.4981125
+380,Italy,BOLOGNA,Bologna,undata:city-380-bologna,11.3422138889,44.4945722222
+380,Italy,CERIGNOLA,Cerignola,undata:city-380-cerignola,15.8996651,41.2648121
+380,Italy,COMO,Como,undata:city-380-como,9.1494101,45.9394759
+380,Italy,BARI,Bari,undata:city-380-bari,16.8695194444,41.1290861111
+380,Italy,ASTI,Asti,undata:city-380-asti,8.2026863,44.8260126
+380,Italy,FERRARA,Ferrara,undata:city-380-ferrara,11.6206666667,44.8373916667
+380,Italy,FIRENZE,Firenze,undata:city-380-firenze,11.2548694444,43.7725166667
+380,Italy,VENEZIA,Venezia,undata:city-380-venezia,12.3305027778,45.4391277778
+380,Italy,UDINE,Udine,undata:city-380-udine,13.2358377,46.0634632
+380,Italy,TRENTO,Trento,undata:city-380-trento,11.1216666667,46.0685555556
+380,Italy,TORINO,Torino,undata:city-380-torino,7.6774527778,45.0642555556
+380,Italy,VICENZA,Vicenza,undata:city-380-vicenza,11.5453,45.5485305556
+380,Italy,PERUGIA,Perugia,undata:city-380-perugia,12.3885666667,43.1117611111
+380,Italy,PRATO,Prato,undata:city-380-prato,11.0970333333,43.8809
+380,Italy,POZZUOLI_BACOLI,Pozzuoli / Bacoli,undata:city-380-pozzuoli-bacoli,14.0722688,40.845186
+380,Italy,PALERMO,Palermo,undata:city-380-palermo,13.3614388889,38.1155916667
+380,Italy,PADOVA,Padova,undata:city-380-padova,11.8736083333,45.4074555556
+380,Italy,OSTIA,Ostia,undata:city-380-ostia,9.8476245,44.5155048
+380,Italy,NOVARA,Novara,undata:city-380-novara,8.6216638889,45.4469722222
+380,Italy,MODENA,Modena,undata:city-380-modena,10.9259083333,44.6463083333
+380,Italy,MILAN,Milano,undata:city-380-milano,9.1886888889,45.4660694444
+380,Italy,MESTRE,Mestre,undata:city-380-mestre,12.2418053,45.4943063
+380,Italy,MESSINA,Messina,undata:city-380-messina,15.5546305556,38.1883166667
+380,Italy,MATERA,Matera,undata:city-380-matera,16.4735738,40.4476419
+380,Italy,GROSSETO,Grosseto,undata:city-380-grosseto,11.2878044,42.7751102
+380,Italy,GENOVA,Genova,undata:city-380-genova,8.9326194444,44.4096416667
+380,Italy,GELA,Gela,undata:city-380-gela,14.2502445,37.0664363
+380,Italy,PAVIA,Pavia,undata:city-380-pavia,9.1378251,45.0368546
+380,Italy,BERGAMO,Bergamo,undata:city-380-bergamo,9.6640972222,45.6932
+380,Italy,BARLETTA,Barletta,undata:city-380-barletta,16.2868696,41.3214976
+380,Italy,ROME,Rome,undata:city-380-rome,12.4753333333,41.8981861111
+380,Italy,REGGIO_DI_CALABRIA,Reggio di Calabria,undata:city-380-reggio-di-calabria,15.6472166667,38.1097416667
+380,Italy,LIVORNO,Livorno,undata:city-380-livorno,10.3092277778,43.5507277778
+380,Italy,LECCE,Lecce,undata:city-380-lecce,18.2260628,40.1522173
+380,Italy,AREZZO,Arezzo,undata:city-380-arezzo,11.7638792,43.517202
+380,Italy,ANCONA,Ancona,undata:city-380-ancona,13.5111083333,43.61885
+380,Italy,ALESSANDRIA,Alessandria,undata:city-380-alessandria,8.7450304,44.8349533
+380,Italy,SIRACUSA,Siracusa,undata:city-380-siracusa,15.29425,37.0616944444
+380,Italy,SASSUOLO,Sassuolo,undata:city-380-sassuolo,10.7829023,44.5409769
+380,Italy,SASSARI,Sassari,undata:city-380-sassari,8.5588916667,40.7280555556
+380,Italy,PORDENONE,Pordenone,undata:city-380-pordenone,12.6597197,45.9562503
+380,Italy,PISA,Pisa,undata:city-380-pisa,10.4018624,43.7159395
+380,Italy,PESARO,Pesaro,undata:city-380-pesaro,12.9131228,43.9098114
+388,Jamaica,PORTMORE,Portmore,undata:city-388-portmore,-76.8738048,17.9717917
+388,Jamaica,KINGSTON_JAMAICA,Kingston,undata:city-388-kingston,-76.7359694607,17.9856147403
+392,Japan,YAMAGUCHI,Yamaguchi,undata:city-392-yamaguchi,131.47,34.17
+392,Japan,TOKYO,Tokyo,undata:city-392-tokyo,139.68,35.68
+392,Japan,OSAKA,Osaka,undata:city-392-osaka,135.5,34.68
+392,Japan,OKAYAMA,Okayama,undata:city-392-okayama,133.92,34.65
+392,Japan,FUKUOKA,Fukuoka,undata:city-392-fukuoka,130.4,33.58
+398,Kazakhstan,TURKISTAN,Turkistan,undata:city-398-turkistan,68.2703698,43.3019457
+398,Kazakhstan,TEMIRTAY,Temirtay,undata:city-398-temirtay,72.9612927,50.0635392
+398,Kazakhstan,TARAZ,Taraz,undata:city-398-taraz,71.3769302,42.9015945
+398,Kazakhstan,QARAGANDY,Qaragandy,undata:city-398-qaragandy,73.1026622,49.8161282
+398,Kazakhstan,SHYMKENT,Shymkent,undata:city-398-shymkent,69.5883282,42.3146962
+398,Kazakhstan,SEMEY,Semey,undata:city-398-semey,80.2491787,50.4049863
+398,Kazakhstan,RUDNY,Rudny,undata:city-398-rudny,63.133488,52.964458
+398,Kazakhstan,QULSARY,Qulsary,undata:city-398-qulsary,54.01978,46.95307
+398,Kazakhstan,QASKELEN,Qaskelen,undata:city-398-qaskelen,76.6245772,43.2022724
+398,Kazakhstan,PAVLODAR,Pavlodar,undata:city-398-pavlodar,76.4285287,51.8111545
+398,Kazakhstan,OSKEMEN,Oskemen,undata:city-398-oskemen,82.6274791,49.9484438
+398,Kazakhstan,ORAL,Oral,undata:city-398-oral,51.4013953,51.2279848
+398,Kazakhstan,BALQASH,Balqash,undata:city-398-balqash,74.9773285,46.8433208
+398,Kazakhstan,NUR_SULTAN,Nur-Sultan,undata:city-398-astana-nur-sultan,71.3410111209,51.1698760341
+398,Kazakhstan,AQTAY,Aqtay,undata:city-398-aqtay,51.1665813,43.639436
+398,Kazakhstan,ALMATY,Almaty,undata:city-398-almaty,76.9457275,43.2363924
+398,Kazakhstan,AKTOBE,Aktobe,undata:city-398-aktobe,57.2298651,50.2836268
+398,Kazakhstan,TALDYQORGAN,Taldyqorgan,undata:city-398-taldyqorgan,78.3791841,45.0164138
+400,Jordan,IRBID,Irbid,undata:city-400-irbid,35.8493023,32.5556091
+400,Jordan,AMMAN,Amman,undata:city-400-amman,35.9848251138,31.8968715126
+404,Kenya,MERU,Meru,undata:city-404-meru,37.6500063,0.0499786
+404,Kenya,MALABA,Malaba,undata:city-404-malaba,34.269398,0.632706
+404,Kenya,ELDORET,Eldoret ,undata:city-404-eldoret,35.28,0.52
+404,Kenya,NAIROBI,Nairobi,undata:city-404-nairobi,36.82,-1.28
+404,Kenya,NAKURU,Nakuru ,undata:city-404-nakuru,36.07,-0.28
+404,Kenya,NYERI,Nyeri ,undata:city-404-nyeri,36.95,-0.42
+404,Kenya,KISUMU,Kisumu ,undata:city-404-kisumu,34.75,-0.1
+408,Democratic People's Republic of Korea,HAMHUNG,Hamhung,undata:city-408-hamhung,127.5439794,39.915463
+408,Democratic People's Republic of Korea,SONGNIM,Songnim,undata:city-408-songnim,125.6460599,38.7535598
+408,Democratic People's Republic of Korea,SINUIJU,Sinuiju,undata:city-408-sinuiju,124.3977559,40.0940758
+408,Democratic People's Republic of Korea,RASON,Rason,undata:city-408-rason,130.3113296,42.2497316
+408,Democratic People's Republic of Korea,PYONGYANG,Pyongyang,undata:city-408-pyongyang,125.740966842,39.0265045767
+408,Democratic People's Republic of Korea,KANGGYE,Kanggye,undata:city-408-kanggye,126.5975399,40.9659004
+408,Democratic People's Republic of Korea,CHONGJU,Chongju,undata:city-408-chongju,125.2101297,39.6929225
+408,Democratic People's Republic of Korea,CHONGJIN,Chongjin,undata:city-408-chongjin,129.8202819,41.7836648
+410,Republic of Korea,CHEONAN,Cheonan,undata:city-410-cheonan,127.15,36.833333
+410,Republic of Korea,SEOUL,Seoul,undata:city-410-seoul,126.931213299,37.5412063732
+410,Republic of Korea,GWANGJU,Gwangju,undata:city-410-gwangju,126.915556,35.154722
+410,Republic of Korea,JINJU,Jinju,undata:city-410-jinju,128.083333,35.183333
+410,Republic of Korea,BUSAN,Busan,undata:city-410-busan,129.040278,35.102778
+414,Kuwait,KUWAIT,Kuwait City,undata:city-414-kuwait,47.957420323,29.3094634954
+417,Kyrgyzstan,TOKMOK,Tokmok,undata:city-417-tokmok,75.2953881,42.8373462
+417,Kyrgyzstan,TALAS,Talas,undata:city-417-talas,72.1408556,42.4406777
+417,Kyrgyzstan,OSH,Osh,undata:city-417-osh,72.8033618,40.5361899
+417,Kyrgyzstan,NARYN,Naryn,undata:city-417-naryn,75.9931838,41.3670658
+417,Kyrgyzstan,KYZYL_KYJA,Kyzyl-Kyja,undata:city-417-kyzyl-kyja,78.8676518,42.6556118
+417,Kyrgyzstan,KARAKOL,Karakol,undata:city-417-karakol,78.3901729,42.4916808
+417,Kyrgyzstan,KARA_BALTA,Kara-Balta,undata:city-417-kara-balta,73.8526559,42.8023631
+417,Kyrgyzstan,JALAL_ABAD,Jalal-Abad,undata:city-417-jalal-abad,73.2283479,41.5107352
+417,Kyrgyzstan,BIKEK,Bikek,REMOVE,,
+417,Kyrgyzstan,BALYKCHY,Balykchy,undata:city-417-balykchy,76.1960866,42.456892
+417,Kyrgyzstan,UZGEN,Uzgen,undata:city-417-uzgen,73.286711,40.7741131
+419,Latin America and the Caribbean,LATINAMERICA_AND_CARIBBEAN_ALL,"Latin America and the Caribbean, all cities",undata:city-419-all,-72.59766,-8.05923
+422,Lebanon,TRIPOLI,Tripoli,undata:city-422-tripoli,35.8348551,34.4373616
+422,Lebanon,BEIRUT,Beirut,undata:city-422-beirut,35.5167083007,33.8031234226
+422,Lebanon,BAALBEK,Baalbek,undata:city-422-baalbek,36.2117096,34.009653
+422,Lebanon,ZAHLE,Zahle,undata:city-422-zahle,35.9026269,33.8476479
+422,Lebanon,TYRE,Tyre,undata:city-422-tyre,35.1964023,33.2721211
+422,Lebanon,SIDON,Sidon,undata:city-422-sidon,35.3780338,33.5618345
+428,Latvia,DAUGAVPILS,Daugavpils,undata:city-428-daugavpils,26.533333,55.883333
+428,Latvia,RIGA,Riga,undata:city-428-riga,23.9988460541,56.9881476792
+428,Latvia,LIEPAJA,Liepaja,undata:city-428-liepaja,21.0070903,56.5048435
+440,Lithuania,VILNIUS,Vilnius,undata:city-440-vilnius,25.2733058649,54.6757927463
+440,Lithuania,SIAULIAI,Šiauliai       ,undata:city-440-shauliai,23.32,55.95
+440,Lithuania,PANEVEZYS,Panevėžys      ,undata:city-440-panevezhis,24.416667,55.7
+440,Lithuania,KLAIPEDA,Klaipėda ,undata:city-440-klaipeda,21.166667,55.716667
+440,Lithuania,KAUNAS,Kaunas,undata:city-440-kaunas,23.9,54.9
+442,Luxembourg,LUXEMBOURG,Luxembourg,undata:city-442-luxembourg,6.1427378181,49.58868029
+450,Madagascar,FIANARANTSOA,Fianarantsoa,undata:city-450-fianarantsoa,47.083333,-21.433333
+450,Madagascar,ANTSIRANANA,Antsiranana,undata:city-450-antsiranana,49.2913394,-12.2779134
+450,Madagascar,ANTSIRABE,Antsirabe,undata:city-450-antsirabe,47.033333,-19.85
+450,Madagascar,MAROVOAY,Marovoay,undata:city-450-marovoay,46.642048,-16.1088044
+450,Madagascar,AMPARAFARAVOLA,Amparafaravola,undata:city-450-amparafaravola,48.2237417,-17.587293
+450,Madagascar,MAHAJANGA,Mahajanga,undata:city-450-mahajanga,46.316667,-15.716667
+450,Madagascar,TAOLANARO,Taolanaro,undata:city-450-taolanaro,46.98329,-25.03249
+450,Madagascar,TOLIARA,Toliara,undata:city-450-toliara,43.666667,-23.35
+450,Madagascar,TOAMASINA,Toamasina,undata:city-450-toamasina,49.383333,-18.166667
+450,Madagascar,ANTANANARIVO,Antananarivo,undata:city-450-antananarivo,47.533431995,-18.9012412712
+454,Malawi,MZUZU,Mzuzu,undata:city-454-mzuzu,34.0226422,-11.4607518
+454,Malawi,BLANTYRE,Blantyre,undata:city-454-blantyre,35.0035694,-15.7862543
+458,Malaysia,RAWANG,Rawang,undata:city-458-rawang,101.5750187,3.3189044
+458,Malaysia,IPOH,Ipoh,undata:city-458-ipoh,101.0833333,4.583333333
+462,Maldives,MALE,Male',undata:city-462-male,73.4566725885,4.1371507162
+466,Mali,BAMAKO,Bamako,undata:city-466-bamako,-7.998234,12.644962
+470,Malta,VALLETTA,Valletta,undata:city-470-valletta,14.5017947273,35.9206963367
+484,Mexico,TIJUANA,Tijuana,undata:city-484-tijuana,-117.016667,32.533333
+484,Mexico,VERACRUZ,Veracruz,undata:city-484-veracruz,-96.666667,19.333333
+484,Mexico,VILLAHERMOSA_CENTRO_TABASCO,Villahermosa,undata:city-484-villahermosa,-92.916667,17.983333
+484,Mexico,XALAPA_VERACRUZ,Xalapa,undata:city-484-xalapa-enriquez,-96.916667,19.533333
+484,Mexico,MONTERREY,Monterrey,undata:city-484-monterrey,-100.316667,25.666667
+484,Mexico,TEHUACAN,Tehuacán,undata:city-484-tehuacan,-97.383333,18.45
+484,Mexico,SAN_JUAN_DEL_RIO,San Juan del Río,undata:city-484-san-juan-del-rio,-100.0,20.383333
+484,Mexico,REYNOSA,Reynosa,undata:city-484-reynosa,-98.283333,26.083333
+484,Mexico,PUERTO_VALLARTA,Puerto Vallarta,undata:city-484-puerto-vallarta,-105.25,20.616667
+484,Mexico,PUEBLA,Puebla,undata:city-484-puebla-de-zaragoza,-98.2,19.05
+484,Mexico,MEXICOCITY,Mexico City,undata:city-484-mexico-city,-99.173805163,19.4143542825
+484,Mexico,LEON_MEXICO,León,undata:city-484-leon,-101.683333,21.116667
+484,Mexico,IRAPUATO_GUANAJUATO,Irapuato,undata:city-484-irapuato,-101.35,20.683333
+484,Mexico,GUANAJUATO_GUANAJUATO,Guanajuato,undata:city-484-guanajuato,-101.0,20.9876996
+484,Mexico,GUADALAJARA,Guadalajara,undata:city-484-guadalajara,-103.333333,20.666667
+484,Mexico,ENSENADA,Ensenada,undata:city-484-ensenada,-116.616667,31.866667
+484,Mexico,CULIACAN_ROSALES,Culiacán Rosales,undata:city-484-culiacan-rosales,-107.389722,24.799444
+484,Mexico,COMITANDEDOMINGUEZ_CHIAPAS,Comitán de Dominguez,undata:city-484-comitan,-92.1753212,16.2911698
+484,Mexico,CIUDAD_RIO_BRAVO,Ciudad Río Bravo,undata:city-484-ciudad-rio-bravo,-103.5180317,25.5640301
+484,Mexico,CIUDAD_JUAREZ,Ciudad Juárez,undata:city-484-ciudad-juarez,-106.483333,31.733333
+484,Mexico,CAMPECHE_CAMPECHE,Campeche,undata:city-484-campeche,-90.53,19.84
+484,Mexico,TEPIC,Tepic,undata:city-484-tepic,-104.9,21.5
+484,Mexico,APATZINGAN_MICHOACAN,Apatzingan,undata:city-484-apatzingan,-102.4693968,18.9681711
+484,Mexico,ACAPULCO_GUERRERO,Acapulco,undata:city-484-acapulco-de-juarez,-99.916667,16.85
+492,Monaco,MONACO,Monaco,undata:city-492-monaco,7.4265251971,43.7538566213
+496,Mongolia,ULAANBAATAR,Ulaanbaatar,undata:city-496-ulaanbaatar,106.953529325,48.0291824993
+504,Morocco,TANGER,Tanger,undata:city-504-tanger,-5.8032309,35.7774341
+504,Morocco,TEMARA,Temara,undata:city-504-temara,-6.923804,33.917166
+504,Morocco,SEFROU,Sefrou,undata:city-504-sefrou,-4.833336,33.824898
+504,Morocco,SAFI,Safi,undata:city-504-safi,-9.230554,32.2650776
+504,Morocco,OULAD_TEIMA,Oulad Teima,undata:city-504-oulad-teima,-9.2105335,30.3954707
+504,Morocco,OUJDA,Oujda,undata:city-504-oujda,-1.929306,34.677874
+504,Morocco,MIDELT,Midelt,undata:city-504-midelt,-4.739897,32.680347
+504,Morocco,MARRAKESH,Marrakesh,undata:city-504-marrakesh,-7.9891608,31.6258257
+504,Morocco,MAKNES,Maknes,undata:city-504-maknes,-5.53227,33.89831
+504,Morocco,FKIH_BEN_SALAH,Fkih Ben Salah,undata:city-504-fkih-ben-salah,-6.6860405,32.504541
+504,Morocco,FES,Fes,undata:city-504-fes,-5.0161926,34.0346534
+504,Morocco,CASABLANCA,Casablanca,undata:city-504-casablanca,-7.6187768,33.5950627
+504,Morocco,AZROU,Azrou,undata:city-504-azrou,-5.221913,33.436117
+504,Morocco,SIDI_SLIMANE,Sidi slimane,undata:city-504-sidi-slimane,-5.927253,34.259878
+508,Mozambique,MANHICA,Manhica,undata:city-508-manhica,32.8827903,-25.2889379
+508,Mozambique,NAMPULA,Nampula ,undata:city-508-nampula,39.264217,-15.120492
+508,Mozambique,NACALA,Nacala ,undata:city-508-nacala-porto,40.671585,-14.540779
+508,Mozambique,MOCUBA,Mocuba,undata:city-508-mocuba,36.8785266,-16.8519695
+508,Mozambique,MAXIXE,Maxixe ,undata:city-508-maxixe,35.346909,-23.858936
+508,Mozambique,MAPUTO,Maputo,undata:city-508-maputo,32.625461,-25.976398
+508,Mozambique,GURUE,Gurué ,undata:city-508-gurue,36.970837,-15.466026
+508,Mozambique,BEIRA,Beira ,undata:city-508-beira,34.841263,-19.845591
+508,Mozambique,ALTO_MOLOCUE,Alto Molocue,undata:city-508-alto-molocue,37.6846186,-15.6325077
+508,Mozambique,PEMBA,Pemba ,undata:city-508-pemba,40.507145,-12.961061
+512,Oman,AL_BURAYMI,Al-Buraymi,undata:city-512-al-buraymi,56.1464102,24.1614948
+512,Oman,MUSCAT,Muscat,undata:city-512-muscat,58.568027418,23.5399361563
+512,Oman,SALALAH,Salalah,undata:city-512-salalah,54.1010923,17.0174945
+512,Oman,SOHAR,Sohar,undata:city-512-sohar,56.7424766,24.3445577
+513,Europe and Northern America,EUROPE_AND_NORTHERNAMERICA_ALL,"Europe and Northern America, all cities",undata:city-513-all,,
+524,Nepal,KATHMANDU,Kathmandu,undata:city-524-kathmandu,85.32716,27.70877
+524,Nepal,POKHARA,Pokharā,undata:city-524-pokhara,83.99581,28.19936
+524,Nepal,JANAKPUR,Janakpur,undata:city-524-janakpur,85.9364304,26.7281124
+524,Nepal,ITAHARI,Itahari,undata:city-524-itahari,87.258388,26.6739314
+524,Nepal,DHARAN,Dharan,undata:city-524-dharan,87.2770008,26.7953984
+524,Nepal,DAMAK,Damak,undata:city-524-damak,87.7011507,26.6650146
+524,Nepal,BUTWAL,Butwal,undata:city-524-butwal,83.443862,27.6827731
+524,Nepal,BIRGANJ,Bīrgañj,undata:city-524-birganj,84.88987,27.01404
+524,Nepal,BIRENDRANAGAR,Birendranagar,undata:city-524-birendranagar,81.6058569,28.5988731
+524,Nepal,BIRATNAGAR,Birāṭnagar,undata:city-524-biratnagar,87.27444,26.44831
+524,Nepal,BHARATPUR,Bharatpur,undata:city-524-bharatpur,84.4360713,27.6879749
+528,Netherlands (Kingdom of the),SOEST_BAARN,Soest / Baarn,undata:city-528-soest-baarn,5.2625582,52.2242043
+528,Netherlands (Kingdom of the),SITTARD_GELEEN,Sittard-Geleen,undata:city-528-sittard-geleen,5.8376058,51.0094043
+528,Netherlands (Kingdom of the),VENLO,Venlo,undata:city-528-venlo,6.1511724,51.3924489
+528,Netherlands (Kingdom of the),VEENENDAAL,Veenendaal,undata:city-528-veenendaal,5.5518002,52.0232041
+528,Netherlands (Kingdom of the),S_HERTOGENBOSCH,'s-Hertogenbosch,undata:city-528-s-hertogenbosch,5.316666667,51.7
+528,Netherlands (Kingdom of the),S_GRAVENHAGE_THE_HAGUE,s-Gravenhage [The Hague],undata:city-528-s-gravenhage-the-hague,4.3113461,52.0799838
+528,Netherlands (Kingdom of the),ROTTERDAM,Rotterdam,undata:city-528-rotterdam,4.5,51.91666667
+528,Netherlands (Kingdom of the),ROOSENDAAL,Roosendaal,undata:city-528-roosendaal,4.4561276,51.5331484
+528,Netherlands (Kingdom of the),PURMEREND,Purmerend,undata:city-528-purmerend,4.9644201,52.4997208
+528,Netherlands (Kingdom of the),PIJNACKER_BERKEL_EN_RODENRIJS,Pijnacker / Berkel en Rodenrijs,undata:city-528-pijnacker-berkel-en-rodenrijs,4.47865,51.99313
+528,Netherlands (Kingdom of the),OSS,Oss,undata:city-528-oss,5.5320836,51.7783542
+528,Netherlands (Kingdom of the),NIJMEGEN,Nijmegen,undata:city-528-nijmegen,5.866666667,51.83333333
+528,Netherlands (Kingdom of the),HENGELO,Hengelo,undata:city-528-hengelo,6.7924049,52.2658726
+528,Netherlands (Kingdom of the),HELMOND,Helmond,undata:city-528-helmond,5.6557686,51.4790956
+528,Netherlands (Kingdom of the),LELYSTAD,Lelystad,undata:city-528-lelystad,5.4768915,52.5150949
+528,Netherlands (Kingdom of the),LEIDEN,Leiden,undata:city-528-leiden,4.5,52.15
+528,Netherlands (Kingdom of the),HEERLEN,Heerlen,undata:city-528-heerlen,5.983333333,50.9
+528,Netherlands (Kingdom of the),HAARLEMMERMEER,Haarlemmermeer,undata:city-528-haarlemmermeer,4.6986108,52.3003935
+528,Netherlands (Kingdom of the),HAARLEM,Haarlem,undata:city-528-haarlem,4.65,52.36666667
+528,Netherlands (Kingdom of the),GRONINGEN,Groningen,undata:city-528-groningen,6.55,53.21666667
+528,Netherlands (Kingdom of the),GOUDA,Gouda,undata:city-528-gouda,4.7111221,52.0181194
+528,Netherlands (Kingdom of the),EINDHOVEN,Eindhoven,undata:city-528-eindhoven,5.466666667,51.45
+528,Netherlands (Kingdom of the),DEVENTER,Deventer,undata:city-528-deventer,6.2363396,52.2695736
+528,Netherlands (Kingdom of the),BREDA,Breda,undata:city-528-breda,4.8,51.56666667
+528,Netherlands (Kingdom of the),ALPHEN_AAN_DEN_RIJN,Alphen aan den Rijn,undata:city-528-alphen-aan-den-rijn,4.6408412,52.1131403
+528,Netherlands (Kingdom of the),ALMERE,Almere,undata:city-528-almere,5.166666667,52.35
+528,Netherlands (Kingdom of the),ASSEN,Assen,undata:city-528-assen,6.560498,52.9952273
+528,Netherlands (Kingdom of the),ARNHEM,Arnhem,undata:city-528-arnhem,5.916666667,51.98333333
+528,Netherlands (Kingdom of the),ALMELO,Almelo,undata:city-528-almelo,6.6672528,52.3567956
+528,Netherlands (Kingdom of the),ALKMAAR,Alkmaar,undata:city-528-alkmaar,4.8170994,52.6008538
+528,Netherlands (Kingdom of the),ZOETERMEER,Zoetermeer,undata:city-528-zoetermeer,4.5,52.05
+528,Netherlands (Kingdom of the),ZWOLLE,Zwolle,undata:city-528-zwolle,6.083333333,52.5
+528,Netherlands (Kingdom of the),EDE,Ede,undata:city-528-ede,5.666666667,52.03333333
+528,Netherlands (Kingdom of the),ENSCHEDE,Enschede,undata:city-528-enschede,6.9,52.21666667
+528,Netherlands (Kingdom of the),NIEUWEGEIN_IJSSELSTEIN,Nieuwegein / IJsselstein,undata:city-528-nieuwegein-ijsselstein,5.0704671,52.0036671
+528,Netherlands (Kingdom of the),MAASTRICHT,Maastricht,undata:city-528-maastricht,5.683333333,50.85
+528,Netherlands (Kingdom of the),BEVERWIJK_HEEMSKERK,Beverwijk/Heemskerk,undata:city-528-beverwijk-heemskerk,4.6861461,52.4946222
+528,Netherlands (Kingdom of the),BERGEN_OP_ZOOM,Bergen op Zoom,undata:city-528-bergen-op-zoom,4.2871541,51.4944756
+528,Netherlands (Kingdom of the),DORDRECHT,Dordrecht,undata:city-528-dordrecht,4.666666667,51.8
+528,Netherlands (Kingdom of the),VLEUTEN_DE_MEERN,Vleuten / De Meern,undata:city-528-vleuten-de-meern,5.0116317,52.1063576
+528,Netherlands (Kingdom of the),UTRECHT,Utrecht,undata:city-528-utrecht,5.133333333,52.08333333
+528,Netherlands (Kingdom of the),TILBURG,Tilburg,undata:city-528-tilburg,5.116666667,51.55
+528,Netherlands (Kingdom of the),SPIJKENISSE,Spijkenisse,undata:city-528-spijkenisse,4.3287681,51.8464881
+528,Netherlands (Kingdom of the),LEEUWARDEN,Leeuwarden,undata:city-528-leeuwarden,5.7918548,53.2005936
+528,Netherlands (Kingdom of the),HOORN,Hoorn,undata:city-528-hoorn,5.0677266,52.6225455
+528,Netherlands (Kingdom of the),HILVERSUM,Hilversum,undata:city-528-hilversum,5.1719396,52.2241375
+528,Netherlands (Kingdom of the),APELDOORN,Apeldoorn,undata:city-528-apeldoorn,5.966666667,52.21666667
+528,Netherlands (Kingdom of the),AMSTERDAM,Amsterdam,undata:city-528-amsterdam,4.8874312149,52.4112586199
+528,Netherlands (Kingdom of the),AMERSFOORT,Amersfoort,undata:city-528-amersfoort,5.383333333,52.15
+554,New Zealand,NAPIER,Napier,undata:city-554-napier,176.917839,-39.4902099
+554,New Zealand,AUCKLAND,Auckland,undata:city-554-auckland,174.7666667,-36.86666667
+554,New Zealand,WELLINGTON,Wellington,undata:city-554-wellington,174.708114715,-41.2705154269
+554,New Zealand,TAURANGA,Tauranga,undata:city-554-tauranga,176.167505,-37.6859006
+554,New Zealand,PALMERSTON,Palmerston,undata:city-554-palmerston,170.715319,-45.4842441
+554,New Zealand,LOWER_HUTT,Lower Hutt,undata:city-554-lower-hutt,174.9057626,-41.2125751
+554,New Zealand,HAMILTON_NEWZEALAND,Hamilton,undata:city-554-hamilton,175.2833333,-37.78333333
+554,New Zealand,DUNEDIN,Dunedin,undata:city-554-dunedin,170.5,-45.86666667
+554,New Zealand,CHRISTCHURCH,Christchurch,undata:city-554-christchurch,172.6333333,-43.53333333
+558,Nicaragua,TIPITAPA,Tipitapa,undata:city-558-tipitapa,-86.096372,12.1962432
+558,Nicaragua,MANAGUA,Managua,undata:city-558-managua,-86.2662276527,12.1263760777
+558,Nicaragua,LEON_NICARAGUA,Leon,undata:city-558-leon,-86.5918195,12.619767
+558,Nicaragua,GRANADA_NICARAGUA,Granada,undata:city-558-granada,-85.9105976,11.8108903
+558,Nicaragua,CIUDAD_SANDINO,Ciudad Sandino,undata:city-558-ciudad-sandino,-86.3557377,12.1649227
+558,Nicaragua,CHINANDEGA,Chinandega,undata:city-558-chinandega,-86.9577726,12.8890816
+558,Nicaragua,MASAYA,Masaya,undata:city-558-masaya,-86.0513672,12.0008289
+562,Niger,ZINDER,Zinder,undata:city-562-zinder,8.983146,13.813905
+562,Niger,NIAMEY,Niamey,undata:city-562-niamey,2.110166,13.52494
+562,Niger,MARADI,Maradi,undata:city-562-maradi,7.106788,13.51435
+562,Niger,DOSSO,Dosso,undata:city-562-dosso,3.621398,13.3336993
+562,Niger,AGADEZ,Agadez ,undata:city-562-agadez,7.986365,16.980337
+566,Nigeria,OYO,Oyo,undata:city-566-oyo,3.5642897,8.2151249
+566,Nigeria,IBADAN,Ibadan,undata:city-566-ibadan,3.8972497,7.3777462
+566,Nigeria,GOMBE,Gombe,undata:city-566-gombe,11.206567,10.38301
+566,Nigeria,LAGOS,Lagos,undata:city-566-lagos,3.3941795,6.4550575
+578,Norway,OSLO,Oslo,undata:city-578-oslo,10.840360556,59.9076424165
+578,Norway,LORENSKOG_LILLESTROM,Lørenskog / Lillestrøm,undata:city-578-lorenskog-lillestrom,10.9498016,59.9479703
+578,Norway,STAVANGER,Stavanger,undata:city-578-stavanger,5.75,58.966667
+578,Norway,BERGEN,Bergen,undata:city-578-bergen,5.324722,60.391111
+580,Northern Mariana Islands,GARAPAN,Garapan,undata:city-580-garapan,145.71983,15.20769
+586,Pakistan,LAYYAH,Layyah,undata:city-586-layyah,70.9455995,30.964868
+586,Pakistan,LAHORE_PAKISTAN,Lahore,undata:city-586-lahore,74.3141829,31.5656822
+586,Pakistan,KOHAT,Kohat,undata:city-586-kohat,71.4399944,33.5967144
+586,Pakistan,KHANPUR,Khanpur,undata:city-586-khanpur,70.656008,28.6477403
+586,Pakistan,KARACHI,Karachi,undata:city-586-karachi,67.0207055,24.8546842
+586,Pakistan,DASKA,Daska,undata:city-586-daska,74.352516,32.3323692
+586,Pakistan,ISLAMABAD,Islamabad,undata:city-586-islamabad,73.0071410625,33.7007103493
+586,Pakistan,HYDERABAD_PAKISTAN,Hyderabad,undata:city-586-hyderabad,68.3750376,25.3801017
+586,Pakistan,HAFIZABAD,Hafizabad,undata:city-586-hafizabad,73.6857558,32.072546
+586,Pakistan,GUJRANWALA,Gujranwala,undata:city-586-gujranwala,74.1933745,32.1525312
+586,Pakistan,FAISALABAD,Faisalabad,undata:city-586-faisalabad,73.0923253,31.4220558
+586,Pakistan,CHISHTIAN,Chishtian,undata:city-586-chishtian,72.8572782,29.7936591
+586,Pakistan,BHAKKAR,Bhakkar,undata:city-586-bhakkar,71.0676914,31.6303103
+586,Pakistan,ATTOCK,Attock,undata:city-586-attock,72.3610911,33.7695323
+586,Pakistan,LARKANA,Larkana,undata:city-586-larkana,68.2101509,27.5564798
+586,Pakistan,TURBAT,Turbat,undata:city-586-turbat,63.0505609,26.0027894
+586,Pakistan,SIALKOT,Sialkot,undata:city-586-sialkot,74.5411575,32.4935378
+586,Pakistan,SHIKARPUR,Shikarpur,undata:city-586-shikarpur,68.6465513,27.9577983
+586,Pakistan,SHEIKHUPURA,Sheikhupura,undata:city-586-sheikhupura,73.9864014,31.7085285
+586,Pakistan,SARGODHA,Sargodha,undata:city-586-sargodha,72.6776943,32.0889657
+586,Pakistan,QUETTA,Quetta,undata:city-586-quetta,67.0172447,30.1957677
+586,Pakistan,PESHAWAR,Peshawar,undata:city-586-peshawar,71.5787458,34.0123846
+586,Pakistan,MULTAN,Multan,undata:city-586-multan,71.4719683,30.197838
+586,Pakistan,MINGAWARA,Mingawara,undata:city-586-mingawara,72.3514721,34.768854
+586,Pakistan,MARDAN,Mardan,undata:city-586-mardan,72.0451467,34.1937969
+586,Pakistan,JHANG,Jhang,undata:city-586-jhang,72.3103071,31.2728805
+586,Pakistan,NAWABSHAH,Nawabshah,undata:city-586-nawabshah,68.4040229,26.2452915
+591,Panama,LA_CHORRERA,La Chorrera,undata:city-591-la-chorrera,-79.8740897,8.9801846
+591,Panama,PANAMACITY,Panama City,undata:city-591-panama-city,-79.4413147673,9.0626706962
+591,Panama,ARRAIJAN,Arraijan,undata:city-591-arraijan,-79.6793267,8.9898564
+598,Papua New Guinea,PORT_MORESBY,Port Moresby,undata:city-598-port-moresby,147.20016487,-9.4460955487
+598,Papua New Guinea,KIMBE,Kimbe,undata:city-598-kimbe,150.1529513,-5.5562921
+598,Papua New Guinea,WEWAK,Wewak,undata:city-598-wewak,143.5,-3.583333
+598,Papua New Guinea,LAE,Lae,undata:city-598-lae,147.0008109,-6.7301976
+600,Paraguay,CIUDAD_DEL_ESTE,Ciudad del Este,undata:city-600-ciudad-del-este,-54.6168645,-25.5169015
+600,Paraguay,ASUNCION,Asunción,undata:city-600-asuncion,-57.5091743714,-25.2831249385
+604,Peru,TRUJILLO,Trujillo,undata:city-604-trujillo,-79.0287742,-8.1116778
+604,Peru,PIURA,Piura,undata:city-604-piura,-80.333333,-5.0
+604,Peru,MOQUEGUA,Moquegua,undata:city-604-moquegua,-70.916667,-16.833333
+604,Peru,LIMA,Lima,undata:city-604-lima,-77.0057296525,-12.0701322966
+604,Peru,JULIACA,Juliaca,undata:city-604-juliaca,-70.1356177,-15.4932314
+604,Peru,CHICLAYO,Chiclayo,undata:city-604-chiclayo,-79.8387175,-6.7716146
+604,Peru,IQUITOS,Iquitos,undata:city-604-iquitos,-73.2444145,-3.749365
+604,Peru,HUARAL,Huaral,undata:city-604-huaral,-76.916667,-11.25
+604,Peru,HUANCAYO,Huancayo,undata:city-604-huancayo,-75.2100953,-12.068098
+604,Peru,HUACHO,Huacho,undata:city-604-huacho,-77.6103295,-11.108524
+604,Peru,CUSCO,Cusco,undata:city-604-cusco,-71.9785356,-13.5170887
+604,Peru,CAJAMARCA,Cajamarca,undata:city-604-cajamarca,-78.833333,-6.25
+604,Peru,AYACUCHO,Ayacucho,undata:city-604-ayacucho,-74.0,-14.0
+604,Peru,AREQUIPA,Arequipa,undata:city-604-arequipa,-71.5369607,-16.3988667
+604,Peru,JAEN,Jaén,undata:city-604-jaen,-79.0604248,-5.6845697
+608,Philippines,MANILA,Manila,undata:city-608-manila,120.9815694444,14.5896583333
+608,Philippines,CEBU,Cebu,undata:city-608-cebu,123.9017166667,10.2929861111
+608,Philippines,BACOLOD,Bacolod,undata:city-608-bacolod,122.9661416667,10.6585222222
+616,Poland,LOMZA,Lomza,undata:city-616-lomza,22.0521838,53.1824307
+616,Poland,LEGNICA,Legnica,undata:city-616-legnica,16.2,51.2
+616,Poland,LEGIONOWO,Legionowo,undata:city-616-legionowo,20.9331466,52.4048356
+616,Poland,KRAKOW,Kraków,undata:city-616-krakow,19.91666667,50.08333333
+616,Poland,KOSZALIN,Koszalin,undata:city-616-koszalin,16.18333333,54.2
+616,Poland,GRUDZIADZ,Grudziadz,undata:city-616-grudziadz,18.7618937,53.4725119
+616,Poland,GORZOW_WIELKOPOLSKI,Gorzów Wielkopolski,undata:city-616-gorzow-wielkopolski,15.23333333,52.73333333
+616,Poland,KASZTELANKA,Kasztelanka,undata:city-616-kasztelanka,18.16703,53.15523
+616,Poland,KALISZ,Kalisz,undata:city-616-kalisz,18.09,51.76
+616,Poland,GORNOSLASKI_ZWIAZEK_METROPOLITALNY,Gornoslaski Zwiazek Metropolitalny,undata:city-616-gornoslaski-zwiazek-metropolitalny,17.9519353,50.2771426
+616,Poland,LODZ,Łódź,undata:city-616-lodz,19.46666667,51.75
+616,Poland,GDANSK,Gdańsk,undata:city-616-gdansk,18.66666667,54.35
+616,Poland,ELK,Elk ,undata:city-616-elk,22.3619159,53.8239583
+616,Poland,ELBLAG,Elbląg,undata:city-616-elblag,19.38333333,54.16666667
+616,Poland,CZESTOCHOWA,Częstochowa,undata:city-616-czestochowa,19.11666667,50.8
+616,Poland,POZNAN,Poznań,undata:city-616-poznan,16.96666667,52.41666667
+616,Poland,PLOCK,Płock,undata:city-616-plock,19.7,52.55
+616,Poland,GDYNIA,Gdynia,undata:city-616-gdynia,18.55,54.5
+616,Poland,GLIWICE,Gliwice,undata:city-616-gliwice,18.66666667,50.28333333
+616,Poland,PIOTRKOW_TRYBUNALSKI,Piotrków Trybunalski,undata:city-616-piotrkow-trybunalski,19.6886837,51.412854
+616,Poland,PILA,Pila,undata:city-616-pila,16.7380343,53.1511324
+616,Poland,PABIANICE,Pabianice,undata:city-616-pabianice,19.3592547,51.6662312
+616,Poland,OSTROWIEC_SWIETOKRZYSKI,Ostrowiec Swietokrzyski,undata:city-616-ostrowiec-swietokrzyski,21.4115092,50.950209
+616,Poland,OSTROW_WIELKOPOLSKI,Ostrów Wielkopolski,undata:city-616-ostrow-wielkopolski,17.8037607,51.6471864
+616,Poland,OPOLE,Opole,undata:city-616-opole,17.95,50.66666667
+616,Poland,SZCZECIN,Szczecin,undata:city-616-szczecin,14.58333333,53.41666667
+616,Poland,STALOWA_WOLA,Stalowa Wola,undata:city-616-stalowa-wola,22.0644075,50.5653105
+616,Poland,RYBNIK,Rybnik,undata:city-616-rybnik,18.54,50.1
+616,Poland,RADOM,Radom,undata:city-616-radom,21.15,51.41666667
+616,Poland,RZESZOW,Rzeszów,undata:city-616-rzeszow,22.0,50.05
+616,Poland,STARGARD_SZCZECINSKI,Stargard Szczecinski,undata:city-616-stargard-szczecinski,15.0316459,53.3089775
+616,Poland,TYCHY,Tychy,undata:city-616-tychy,18.98333333,50.13333333
+616,Poland,TCZEW,Tczew,undata:city-616-tczew,18.7779435,54.0908761
+616,Poland,SUWALKI,Suwalki,undata:city-616-suwalki,22.9318782,54.1027125
+616,Poland,TORUN,Toruń,undata:city-616-torun,18.6,53.03333333
+616,Poland,TOMASZOW_MAZOWIECKI,Tomaszów Mazowiecki,undata:city-616-tomaszow-mazowiecki,20.0337591,51.5194865
+616,Poland,WALBRZYCH,Wałbrzych,undata:city-616-walbrzych,16.28333333,50.76666667
+616,Poland,SLUPSK,Slupsk,undata:city-616-slupsk,17.020948,54.463577
+616,Poland,ZIELONA_GORA,Zielona Góra,undata:city-616-zielona-gora,15.5,51.93333333
+616,Poland,ZGIERZ,Zgierz,undata:city-616-zgierz,19.3906348,51.8555209
+616,Poland,ZAMOSC,Zamosc,undata:city-616-zamosc,23.2595887,50.721273
+616,Poland,WIDNICA,Widnica,undata:city-616-widnica,20.0256772,50.4039608
+616,Poland,WARSAW,Warsaw,undata:city-616-warsaw,21.0763282437,52.2806702446
+616,Poland,KIELCE,Kielce,undata:city-616-kielce,20.66666667,50.83333333
+616,Poland,KATOWICE,Katowice,undata:city-616-katowice,19.01666667,50.26666667
+616,Poland,BIALYSTOK,Białystok,undata:city-616-bialystok,23.16,53.13
+616,Poland,BELCHATOW,Belchatow,undata:city-616-belchatow,19.3769199,51.3547046
+616,Poland,MIELEC,Mielec,undata:city-616-mielec,21.4631343,50.2802473
+616,Poland,LUBLIN,Lublin,undata:city-616-lublin,22.56666667,51.25
+616,Poland,WROCLAW,Wrocław,undata:city-616-wroclaw,17.03333333,51.1
+616,Poland,WLOCLAWEK,Włocławek,undata:city-616-wloclawek,19.03333333,52.65
+616,Poland,JELENIA_GORA,Jelenia Góra,undata:city-616-jelenia-gora,15.7344306,50.9031028
+616,Poland,JASTRZEBIE_ZDROJ,Jastrzebie-Zdrój,undata:city-616-jastrzebie-zdroj,18.6023614,49.9519085
+616,Poland,INOWROCLAW,Inowroclaw,undata:city-616-inowroclaw,18.2463086,52.7814643
+616,Poland,CHELM,Chelm,undata:city-616-chelm,23.4939364,51.1355882
+616,Poland,BYDGOSZCZ,Bydgoszcz,undata:city-616-bydgoszcz,18.0,53.15
+616,Poland,BIELSKO_BIALA,Bielsko-Biała,undata:city-616-bielsko-biala,19.03333333,49.81666667
+616,Poland,OLSZTYN,Olsztyn,undata:city-616-olsztyn,20.48333333,53.78333333
+616,Poland,NOWY_SACZ,Nowy Sacz,undata:city-616-nowy-sacz,20.7149366,49.610304
+616,Poland,MYSLOWICE,Myslowice,undata:city-616-myslowice,19.132166,50.2096211
+616,Poland,GLOGOW,Glogów,undata:city-616-glogow,16.0614037,51.6701928
+616,Poland,GNIEZNO,Gniezno,undata:city-616-gniezno,17.5981524,52.5246501
+616,Poland,PRZEMYSL,Przemysl,undata:city-616-przemysl,22.7885113,49.7835552
+620,Portugal,BARREIRO,Barreiro,undata:city-620-barreiro,-9.0478559,38.6340657
+620,Portugal,AMORA,Amora,undata:city-620-amora,-9.1160023,38.6297097
+620,Portugal,COIMBRA,Coimbra ,undata:city-620-coimbra,-8.4213766583,40.2076876306
+620,Portugal,BRAGA,Braga ,undata:city-620-braga,-8.4187182111,41.5503442278
+620,Portugal,ALMADA,Almada,undata:city-620-almada,-9.1576301,38.6831302
+620,Portugal,SETUBAL,Setúbal ,undata:city-620-setubal,-8.8842311722,38.5304265639
+620,Portugal,FUNCHAL,Funchal ,undata:city-620-funchal,-16.9076166167,32.6479460472
+634,Qatar,AL_DAAYEN,Al Daayen,undata:city-634-al-daayen,51.4422699,25.5097419
+634,Qatar,AL_KHOR_ALTHAKIRA,Al Khor & Althakira,undata:city-634-al-khor-and-althakira,51.5132,25.6836
+634,Qatar,ALKHOR,AlKhor,undata:city-634-alkhor,51.5261689,25.7074122
+634,Qatar,MESAIEED,Mesaieed,undata:city-634-mesaieed,51.5493583,24.9953944
+634,Qatar,UMM_SLAL,Umm Slal,undata:city-634-umm-slal,51.3383996,25.4647654
+634,Qatar,QATAR_ALL,"Qatar, all cities",,,
+634,Qatar,DOHA,Doha,undata:city-634-doha,51.4985771638,25.2249088025
+634,Qatar,AL_SHEEHANIYA,Al Sheehaniya,undata:city-634-al-sheehaniya,51.2279234,25.3751376
+634,Qatar,AL_SHAMAL,Al Shamal,undata:city-634-al-shamal,51.2174082,26.0017139
+634,Qatar,AL_RAYYAN,Al Rayyan,undata:city-634-al-rayyan,50.9776888,24.9304741
+634,Qatar,AL_WAKRA,Al Wakra,undata:city-634-al-wakra,51.6013212,25.1566623
+634,Qatar,AL_SHAHANIYA,Al Shahaniya,undata:city-634-al-shahaniya,51.0111063,25.4450415
+642,Romania,ARAD,Arad,undata:city-642-arad,21.316667,46.183333
+642,Romania,BUCHAREST,Bucharest,undata:city-642-bucharest,26.1139068186,44.458309204
+642,Romania,CONSTANTA,Constanţa,undata:city-642-constanta,28.65,44.183333
+642,Romania,FALTICENI,Falticeni,undata:city-642-falticeni,26.30255,47.4597637
+642,Romania,IASI,Iaşi,undata:city-642-iasi,27.25,47.25
+642,Romania,CLUJ_NAPOCA,Cluj-Napoca,undata:city-642-cluj-napoca,23.6,46.766667
+642,Romania,CRAIOVA,Craiova,undata:city-642-craiova,23.8,44.316667
+642,Romania,CAMPIATURZII,CampiaTurzii,undata:city-642-campiaturzii,23.87981,46.54692
+642,Romania,BRASOV,Braşov,undata:city-642-brasov,25.583333,45.633333
+642,Romania,NAVODARI,Navodari,undata:city-642-navodari,28.6110868,44.3212304
+642,Romania,TARGU_JIU,Targu Jiu,undata:city-642-targu-jiu,23.2728118,45.0422947
+642,Romania,MANGALIA,Mangalia,undata:city-642-mangalia,28.5830306,43.8150793
+642,Romania,SIBIU,Sibiu,undata:city-642-sibiu,24.15,45.8
+642,Romania,TIMISOARA,Timişoara,undata:city-642-timisoara,21.227222,45.749444
+642,Romania,REGHIN,Reghin,undata:city-642-reghin,24.7000238,46.7796886
+643,Russian Federation,ASTRAHAN,Astrahan,undata:city-643-astrahan,46.349444,46.349444
+643,Russian Federation,BEREZNIKI,Berezniki,undata:city-643-berezniki,54.6149,57.1569
+643,Russian Federation,DZERZINSK,Dzeržinsk,undata:city-643-dzerzinsk,104.386944,52.280278
+643,Russian Federation,MOSCOW,Moscow,undata:city-643-moscow,37.4870376254,55.7822989614
+643,Russian Federation,SAINT_PETERSBURG,Saint Petersburg,undata:city-643-saint-petersburg,30.264167,59.894444
+643,Russian Federation,TYUMEN,Tyumen,undata:city-643-tjumen,84.5942,52.9362
+646,Rwanda,BUTARE,Butare,undata:city-646-butare,29.159087,-2.5426119
+646,Rwanda,RUHENGERI,Ruhengeri,undata:city-646-ruhengeri,29.63631,-1.50405
+646,Rwanda,KIGALI,Kigali,undata:city-646-kigali,30.0946521993,-1.9564951332
+646,Rwanda,NYANZA,Nyanza,undata:city-646-nyanza,29.7702241,-2.3430532
+646,Rwanda,GITARAMA,Gitarama,undata:city-646-gitarama,29.7526948,-2.0845197
+646,Rwanda,CYANGUGU,Cyangugu,undata:city-646-cyangugu,28.8958127,-2.4887775
+646,Rwanda,KAYONZA,Kayonza,undata:city-646-kayonza,30.510214,-1.904955
+646,Rwanda,GISENYI,Gisenyi,undata:city-646-gisenyi,29.2590525,-1.6788652
+682,Saudi Arabia,ARAR,‘Ar‘ar,undata:city-682-ar-ar,41.023847,30.977934
+682,Saudi Arabia,AL_KHAFJI,Al-Khafji,undata:city-682-al-khafji,48.4927814,28.4225409
+682,Saudi Arabia,AL_MADINAH,Al Madīnah,undata:city-682-al-madinah,39.618468,24.468579
+682,Saudi Arabia,RAFHA,Rafha ,undata:city-682-rafha,43.3553666,29.2065306
+682,Saudi Arabia,MAKKAH,Makkah,undata:city-682-makkah,39.829911,21.434872
+682,Saudi Arabia,AR_RASS,Ar-Rass,undata:city-682-ar-rass,43.5843786,25.5729395
+682,Saudi Arabia,RIYADH,Riyadh,undata:city-682-riyadh,46.761685,24.714444
+682,Saudi Arabia,TABUK,Tabūk,undata:city-682-tabuk,36.565962,28.392233
+682,Saudi Arabia,TAIF,Taif,undata:city-682-taif,40.4158308,21.2702801
+686,Senegal,THIES,Thiès,undata:city-686-thies,-16.9303404,14.7937508
+686,Senegal,SAINT_LOUIS,Saint-Louis,undata:city-686-saint-louis,-16.50495785,16.02570861
+686,Senegal,DIOURBEL,Diourbel,undata:city-686-diourbel,-16.233196,14.65326764
+686,Senegal,DAKAR,Dakar,undata:city-686-dakar,-17.45337167,14.69644908
+686,Senegal,KAOLACK,Kaolack,undata:city-686-kaolack,-16.07141661,14.14534425
+686,Senegal,MBOUR,Mbour,undata:city-686-mbour,-16.96688776,14.42215367
+686,Senegal,TOUBA,Touba,undata:city-686-touba,-15.88283513,14.86257532
+686,Senegal,LOUGA,Louga,undata:city-686-louga,-16.22319588,15.62110687
+686,Senegal,ZIGUINCHOR,Ziguinchor,undata:city-686-ziguinchor,-16.27117635,12.56977539
+688,Serbia,BOKHTAR-SERBIA,Bokhtar,undata:city-688-bokhtar,68.7828,37.8357
+688,Serbia,KIKINDA,Kikinda,undata:city-688-kikinda,20.4653054,45.8300065
+688,Serbia,ZRENJANIN,Zrenjanin,undata:city-688-zrenjanin,20.3907614,45.3802683
+688,Serbia,POZAREVAC,Pozarevac,undata:city-688-pozarevac,21.1854,44.6199926
+688,Serbia,NOVI_SAD,Novi Sad,undata:city-688-novi-sad,19.84,45.25
+688,Serbia,NOVI_PAZAR,Novi Pazar,undata:city-688-novi-pazar,20.5112273,43.1363535
+688,Serbia,NIS,Niš,undata:city-688-nis,21.9,43.32
+688,Serbia,KRAGUJEVAC,Kragujevac,undata:city-688-kragujevac,20.92,44.01
+688,Serbia,BELGRADE,Belgrade,undata:city-688-belgrade,20.5400313538,44.7190437625
+688,Serbia,BORCA,Borca,undata:city-688-borca,20.4570078,44.8773292
+702,Singapore,SINGAPORE,Singapore,undata:city-702-singapore,103.862396307,1.2871659845
+703,Slovakia,NITRA,Nitra,undata:city-703-nitra,18.0894593,48.31295
+703,Slovakia,TRNAVA,Trnava,undata:city-703-trnava,17.5858175,48.3767652
+703,Slovakia,ZILINA,Žilina,undata:city-703-zilina,18.7393139,49.2234674
+703,Slovakia,BRATISLAVA,Bratislava,undata:city-703-bratislava,17.146572029,48.1340408532
+703,Slovakia,MARTIN,Martin,undata:city-703-martin,18.929193,49.0724921
+703,Slovakia,BANSKA_BYSTRICA,Banská Bystrica,undata:city-703-banska-bystrica,19.1573494,48.7384028
+703,Slovakia,KOSICE,Košice,undata:city-703-kosice,21.25,48.716667
+704,Viet Nam,VINH_LONG,Vĩnh Long,undata:city-704-vinh-long,105.966667,10.25
+704,Viet Nam,HO_CHI_MINH_CITY,Ho Chi Minh City,undata:city-704-ho-chi-minh,106.666667,10.75
+705,Slovenia,LJUBLJANA,Ljubljana,undata:city-705-ljubljana,14.5510186645,46.0507469429
+710,South Africa,JOHANNESBURG,Johannesburg,undata:city-710-johannesburg,27.97666,-26.04166
+710,South Africa,PORT_ELIZABETH,Port Elizabeth,undata:city-710-port-elizabeth,25.56729,-33.90734
+724,Spain,PAMPLONA,Pamplona,undata:city-724-pamplona,-1.643888276,42.81520591
+724,Spain,ALBACETE,Albacete,undata:city-724-albacete,-1.854508937,38.99708557
+724,Spain,ALICANTE,Alicante,undata:city-724-alicante,-0.481990339,38.34669885
+724,Spain,ALCOI,Alcoi,undata:city-724-alcoi,-0.4747767,38.6982275
+724,Spain,BARCELONA_SPAIN,Barcelona,undata:city-724-barcelona,2.177493749,41.38537055
+724,Spain,AVILES,Avilés,undata:city-724-aviles,-5.9222466,43.5554436
+724,Spain,ALMERIA,Almería,undata:city-724-almeria,-2.462891056,36.84018741
+724,Spain,LA_CORUNA,La Coruña,undata:city-724-la-coruna,-8.389617685,43.37126143
+724,Spain,BENIDORM,Benidorm,undata:city-724-benidorm,-0.1290929,38.5406255
+724,Spain,MALAGA,Málaga,undata:city-724-malaga,-4.41867321,36.72161589
+724,Spain,MADRID,Madrid,undata:city-724-madrid,-3.6752750217,40.4521752248
+724,Spain,IGUALADA,Igualada,undata:city-724-igualada,1.617346,41.5790182
+724,Spain,MURCIA,Murcia,undata:city-724-murcia,-1.127331399,37.98558647
+724,Spain,ZARAGOZA,Zaragoza,undata:city-724-zaragoza,-0.878045923,41.65758598
+724,Spain,TALAVERA_DE_LA_REINA,Talavera de la Reina,undata:city-724-talavera-de-la-reina,-4.8311717,39.9603798
+724,Spain,SEVILLA,Sevilla,undata:city-724-sevilla,-5.991173464,37.38746392
+724,Spain,SANTIAGO_DE_COMPOSTELA,Santiago de Compostela,undata:city-724-santiago-de-compostela,-8.5458608,42.8804219
+724,Spain,SANTANDER,Santander,undata:city-724-santander,-3.803412794,43.46405308
+724,Spain,SANTA_MONICA,Santa Monica,undata:city-724-santa-monica,-0.5542071,39.557598
+724,Spain,VIGO,Vigo,undata:city-724-vigo,-8.724865177,42.24066168
+724,Spain,PARLA,Parla,undata:city-724-parla,-3.77,40.24
+724,Spain,PUERTO_DE_LA_CRUZ,Puerto de la Cruz,undata:city-724-puerto-de-la-cruz,-16.5532956,28.4159024
+724,Spain,TARRAGONA,Tarragona,undata:city-724-tarragona,1.2546057,41.1172364
+724,Spain,VILANOVA_I_LA_GELTRU,Vilanova i la Geltrú,undata:city-724-vilanova-i-la-geltru,1.7256327,41.2241992
+724,Spain,VILADECANS,Viladecans,undata:city-724-viladecans,2.0156034,41.3163083
+724,Spain,VALENCIA_SPAIN,Valencia,undata:city-724-valencia,-0.374456986,39.47652898
+724,Spain,VALDEMORO,Valdemoro,undata:city-724-valdemoro,-3.67143,40.1888604
+724,Spain,GIJON,Gijón,undata:city-724-gijon,-5.658071328,43.540286
+724,Spain,FERROL,Ferrol,undata:city-724-ferrol,-8.233162,43.4846862
+724,Spain,GRANADA_SPAIN,Granada,undata:city-724-granada,-3.598740593,37.1776762
+724,Spain,PALMA,Palma,undata:city-724-palma-de-mallorca,2.652920289,39.5723222
+724,Spain,CARTAGENA_SPAIN,Cartagena,undata:city-724-cartagena,-0.9841152,37.6019353
+724,Spain,CADIZ,Cádiz,undata:city-724-cadiz,-6.282791323,36.52299273
+724,Spain,PALENCIA,Palencia,undata:city-724-palencia,-4.6161004,42.4096322
+724,Spain,OVIEDO,Oviedo,undata:city-724-oviedo,-5.842296404,43.36341645
+724,Spain,TOLEDO_SPAIN,Toledo,undata:city-724-toledo,-4.0239568,39.8560679
+724,Spain,VALLADOLID,Valladolid,undata:city-724-valladolid,-4.721998252,41.65347767
+724,Spain,TORREVIEJA,Torrevieja,undata:city-724-torrevieja,-0.67,37.98
+724,Spain,TORREMOLINOS,Torremolinos,undata:city-724-torremolinos,-4.4995448,36.6242841
+724,Spain,SANT_BOI_DE_LLOBREGAT,Sant Boi de Llobregat,undata:city-724-sant-boi-de-llobregat,2.0413673,41.3459033
+724,Spain,LOGRONO,Logroño,undata:city-724-logrono,-2.444366526,42.46756459
+724,Spain,IRUN,Irun,undata:city-724-irun,-1.7888095,43.3383176
+724,Spain,SABADELL,Sabadell,undata:city-724-sabadell,2.108940728,41.54807784
+724,Spain,REUS,Reus,undata:city-724-reus,1.111042494,41.15524159
+724,Spain,COSLADA,Coslada,undata:city-724-coslada,-3.5552882,40.423802
+724,Spain,CASTELLDEFELS,Castelldefels,undata:city-724-castelldefels,1.9824173,41.2861022
+724,Spain,CACERES,Cáceres,undata:city-724-caceres,-6.4545805,39.4020024
+724,Spain,BURGOS,Burgos,undata:city-724-burgos,-3.702871869,42.34225249
+724,Spain,BILBAO,Bilbao,undata:city-724-bilbao,-2.922606698,43.25831121
+724,Spain,MOLLET_DEL_VALLES,Mollet del Vallès,undata:city-724-mollet-del-valles,2.2130934,41.5393484
+724,Spain,MELILLA,Melilla,undata:city-724-melilla,-2.9407146,35.2919028
+724,Spain,MANRESA,Manresa,undata:city-724-manresa,1.8286765,41.7288939
+724,Spain,SANTA_CRUZ_DE_TENERIFE,Santa Cruz de Tenerife,undata:city-724-santa-cruz-de-tenerife,-16.24720629,28.46285408
+724,Spain,SAN_SEBASTIAN,San Sebastián,undata:city-724-san-sebastian-donostia,-1.980643694,43.31826602
+724,Spain,SALAMANCA,Salamanca,undata:city-724-salamanca,-5.664004572,40.96854917
+724,Spain,TERRASSA,Terrassa,undata:city-724-terrassa,2.013305858,41.56348241
+724,Spain,ZAMORA,Zamora,undata:city-724-zamora,-5.942315,41.6857693
+724,Spain,VITORIA_GASTEIZ,Vitoria-Gasteiz,undata:city-724-vitoria-gasteiz,-2.671463844,42.85168983
+724,Spain,ELCHE,Elche,undata:city-724-elche-elx,-0.696556906,38.26863071
+724,Spain,EL_PRAT_DE_LLOBREGAT,El Prat de Llobregat,undata:city-724-el-prat-de-llobregat,2.0952568,41.3246333
+724,Spain,EL_MASNOU,El Masnou,undata:city-724-el-masnou,2.3118347,41.4796899
+729,Sudan,KASSALA,Kassala,undata:city-729-kassala,36.0181112,16.0431989
+729,Sudan,WAD_MADANI,Wad Madani,undata:city-729-wad-madani,33.5309561,14.3965781
+729,Sudan,SINJAH,Sinjah,undata:city-729-sinjah,33.93333,13.15
+729,Sudan,BUR_SUDAN,Bur Sudan,undata:city-729-bur-sudan,37.211709,19.619217
+729,Sudan,ATBARA,Atbara,undata:city-729-atbara,33.98073,17.690719
+729,Sudan,AL_QADARIF,Al Qadarif,undata:city-729-al-qadarif,35.398832,14.040941
+729,Sudan,KHARTOUM,Khartoum,undata:city-729-khartoum,32.5587195799,15.5562085782
+729,Sudan,SANNAR,Sannar,undata:city-729-sannar,33.5,13.0
+747,Northern Africa and Western Asia,NORTHERN_AFRICA_AND_WESTERN_ASIA_ALL,"Northern Afria and Western Asia, all cities",undata:city-747-all,43.24219,25.83945
+752,Sweden,UMEA,Umeå,undata:city-752-umea,20.2688497,63.82488629
+752,Sweden,TABY,Täby,undata:city-752-taby,18.0658494,59.4670482
+752,Sweden,SODERTALJE,Södertälje,undata:city-752-sodertalje,17.6271663,59.1964289
+752,Sweden,HELSINGBORG,Helsingborg,undata:city-752-helsingborg,12.7184454,56.03794876
+752,Sweden,OREBRO,Örebro,undata:city-752-orebro,15.2052678,59.27771122
+752,Sweden,BORAS,Borås,undata:city-752-boras,12.9504653,57.72160026
+752,Sweden,NORRKOPING,Norrköping,undata:city-752-norrkoping,16.1774517,58.59233512
+752,Sweden,HANINGE,Haninge,undata:city-752-haninge,18.266667,59.049722
+752,Sweden,GOTEBORG,Göteborg,undata:city-752-goteborg,11.9841512,57.71176115
+752,Sweden,STOCKHOLM,Stockholm,undata:city-752-stockholm,18.0603652,59.32531504
+752,Sweden,VASTERAS,Västerås,undata:city-752-vasteras,16.5522261,59.62050253
+752,Sweden,UPPSALA,Uppsala,undata:city-752-uppsala,17.6498498,59.85310577
+752,Sweden,MALMO,Malmö,undata:city-752-malmo,13.0164681,55.59251031
+752,Sweden,LUND,Lund,undata:city-752-lund,13.1950909,55.70442735
+752,Sweden,LINKOPING,Linköping,undata:city-752-linkoping,15.6274353,58.40519296
+753,Eastern and South-Eastern Asia,EASTERN_AND_SOUTHERN_ASIA_ALL,"Eastern and Southern Asia, all cities",undata:city-753-all,116.45508,6.83917
+756,Switzerland,LUZERN,Luzern,undata:city-756-luzern,8.1719611,47.0908207
+756,Switzerland,ZURICH,Zurich,undata:city-756-zurich,8.54,47.38
+756,Switzerland,WINTERTHUR,Winterthur,undata:city-756-winterthur,8.7291498,47.4991723
+756,Switzerland,WETZIKON,Wetzikon,undata:city-756-wetzikon,8.7980939,47.3226925
+756,Switzerland,THUN,Thun,undata:city-756-thun,7.628086,46.7582827
+756,Switzerland,ST_GALLEN,St. Gallen,undata:city-756-st-gallen,9.3765878,47.4250593
+756,Switzerland,NEUCHATEL,Neuchatel,undata:city-756-neuchatel,6.9292641,46.9895828
+756,Switzerland,BASEL,Basel,undata:city-756-bale,7.58,47.57
+756,Switzerland,EMMEN_LUCERNE,Emmen_Lucerne,undata:city-756-emmen-lucerne,8.2839456,47.0752429
+756,Switzerland,LAUSANNE,Lausanne,undata:city-756-lausanne,6.62,46.52
+756,Switzerland,GENEVA,Geneva,undata:city-756-geneva,6.14,46.21
+756,Switzerland,FRIBOURG,Fribourg,undata:city-756-fribourg,7.1027113,46.6789116
+756,Switzerland,BERNE,Berne,undata:city-756-berne,7.478683918,46.9160651978
+756,Switzerland,BIEL,Biel,undata:city-756-biel-bienne,7.2439029,47.1402077
+756,Switzerland,LUGANO,Lugano,undata:city-756-lugano,8.9520281,46.0050102
+762,Tajikistan,PANJAKENT,Panjakent,undata:city-762-panjakent,67.6141456,39.4961693
+762,Tajikistan,KONIBODOM,Konibodom,undata:city-762-konibodom,70.4254538,40.2908394
+762,Tajikistan,CHKALOVSK_BUSTON,Chkalovsk (Buston),undata:city-762-chkalovsk-buston,69.6950596,40.2449948
+762,Tajikistan,ISFARA,Isfara,undata:city-762-isfara,70.6134164,40.123264
+762,Tajikistan,DUSHANBE,Dushanbe,undata:city-762-dushanbe,68.7861252606,38.5988693758
+762,Tajikistan,KHUJAND,Khujand,undata:city-762-khujand,69.6391364,40.2734504
+762,Tajikistan,KHOROG,Khorog,undata:city-762-khorog,71.5493236,37.4903687
+762,Tajikistan,ISTARAVSHAN,Istaravshan,undata:city-762-istaravshan,68.9956351,39.9080152
+762,Tajikistan,NURAK,Nurak,undata:city-762-nurak,69.3081146,38.3896911
+762,Tajikistan,BOKHTAR,Bokhtar,undata:city-762-bokhtar,68.7820957,37.8357217
+762,Tajikistan,VAHDAT,Vahdat,undata:city-762-vahdat,69.01741,38.56121
+762,Tajikistan,TURSUNZODA,Tursunzoda,undata:city-762-tursunzoda,68.2317099,38.5138769
+762,Tajikistan,KULOB,Kulob,undata:city-762-kulob,69.7815382,37.9161378
+764,Thailand,CHIANG_MAI,Chiang Mai,undata:city-764-chiang-mai,98.9858802,18.7882778
+764,Thailand,CHA_AM,Cha-Am,undata:city-764-cha-am,99.9662102,12.7998336
+764,Thailand,BANGKOK,Bangkok,undata:city-764-bangkok,100.575569133,13.7175645405
+764,Thailand,KHON_KAEN,Khon Kaen,undata:city-764-khon-kaen,102.6352933,16.6022387
+764,Thailand,CHUMPHON,Chumphon,undata:city-764-chumphon,99.0077685,10.3782724
+764,Thailand,CHIANG_RAI,Chiang Rai,undata:city-764-chiang-rai,99.6734592,19.7589517
+764,Thailand,PHATTHALUNG,Phatthalung,undata:city-764-phatthalung,99.9971582,7.543525
+784,United Arab Emirates,AL_AIN,Al-Ain,undata:city-784-al-ain,55.760556,24.191667
+784,United Arab Emirates,DUBAI,Dubai ,undata:city-784-dubai,55.28,25.252222
+784,United Arab Emirates,ABU_DHABI,Abu Dhabi,undata:city-784-abu-dhabi,54.3860893525,24.4396362329
+788,Tunisia,AL_QAYRAWAN,Al-Qayrawan,undata:city-788-al-qayrawan,10.09633,35.6781
+788,Tunisia,TUNIS,Tunis,undata:city-788-tunis,10.1536837548,36.7901839364
+788,Tunisia,TOZEUR,Tozeur,undata:city-788-tozeur,8.0711309,33.9844105
+788,Tunisia,SUSAH,Susah,undata:city-788-susah,10.63699,35.82539
+788,Tunisia,SFAX,Sfax,undata:city-788-safaqis-sfax,10.760278,34.740556
+788,Tunisia,QABIS,Qabis,undata:city-788-qabis,10.0336686,33.8374199
+788,Tunisia,MONASTIR,Monastir,undata:city-788-monastir,10.7876948,35.6054798
+788,Tunisia,BANZART,Banzart,undata:city-788-banzart,9.87391,37.27442
+792,Türkiye,ANTALYA,Antalya,undata:city-792-antalya,30.689722,36.9125
+792,Türkiye,ADIYAMAN,Adiyaman,undata:city-792-adiyaman,38.25,37.75
+792,Türkiye,KAYSERI,Kayseri,undata:city-792-kayseri,35.916667,38.75
+792,Türkiye,BALIKESIR,Balikesir,undata:city-792-balikesir,28.0,39.75
+792,Türkiye,GAZIANTEP,Gaziantep,undata:city-792-gaziantep,37.333333,37.083333
+792,Türkiye,DENIZLI,Denizli,undata:city-792-denizli,29.25,37.7
+792,Türkiye,CORUM,Çorum,undata:city-792-corum,34.75,40.5
+792,Türkiye,KONYA,Konya,undata:city-792-konya,32.4825,37.865556
+792,Türkiye,IZMIR,Izmir,undata:city-792-izmir,27.14201025,38.41037502
+792,Türkiye,ISTANBUL,Istanbul,undata:city-792-istanbul,28.964722,41.018611
+792,Türkiye,CERKEZKOY,Çerkezköy,undata:city-792-cerkezkoy,27.999468,41.2862482
+792,Türkiye,CARASAMBA,Carasamba,undata:city-792-carasamba,36.7297,41.1939
+792,Türkiye,BURSA,Bursa,undata:city-792-bursa,29.083333,40.166667
+792,Türkiye,VIRANSEHIR,Viransehir,undata:city-792-viransehir,34.2086393,38.1852101
+792,Türkiye,UZUNKOPRU,Uzunköprü,undata:city-792-uzunkopru,26.6855961,41.2626058
+792,Türkiye,TARSUS,Tarsus,undata:city-792-tarsus,34.895149,36.9164834
+792,Türkiye,SIVAS,Sivas,undata:city-792-sivas,37.016111,39.748333
+792,Türkiye,SANLIURFA,Şanlıurfa,undata:city-792-sanliurfa,39.0,37.25
+792,Türkiye,SAMSUN,Samsun,undata:city-792-samsun,36.333333,41.25
+792,Türkiye,MALATYA,Malatya,undata:city-792-malatya,38.0,38.5
+792,Türkiye,ANKARA,Ankara,undata:city-792-ankara,32.79259107,39.9070700722
+792,Türkiye,AGRI,Agri,undata:city-792-agri,43.1684371,39.7779175
+792,Türkiye,ELBISTAN,Elbistan,undata:city-792-elbistan,37.1903006,38.2022294
+792,Türkiye,ADAPAZARI,Adapazari,undata:city-792-adapazari,30.4020898,40.7755188
+792,Türkiye,NIGDE,Niğde,undata:city-792-nigde,34.6825,37.969167
+795,Turkmenistan,TURKMENBASY,Turkmenbasy,undata:city-795-turkmenbasy,52.9928838,40.0053169
+795,Turkmenistan,TURKMENABAT,Turkmenabat,undata:city-795-turkmenabat,63.5831564,39.0733839
+795,Turkmenistan,MARY,Mary,undata:city-795-mary,62.4019513,37.1302916
+795,Turkmenistan,DASOGUZ,Dasoguz,undata:city-795-dasoguz,58.5586047,41.3862117
+795,Turkmenistan,BAYRAMALY_BAJRAM_ALI,Baýramaly (Bajram-Ali),undata:city-795-bayramaly-bajram-ali,62.17221,37.61243
+795,Turkmenistan,BALKANABAT,Balkanabat,undata:city-795-balkanabat,54.3539921,39.5116273
+795,Turkmenistan,ASHGABAT,Ashgabat,undata:city-795-ashgabat,58.4076614935,37.922473817
+795,Turkmenistan,GYZYLARBAT,Gyzylarbat,undata:city-795-gyzylarbat,56.2765852,38.9748448
+795,Turkmenistan,TEJEN,Tejen,undata:city-795-tejen,60.5027245,37.38463
+800,Uganda,MBARARA,Mbarara,undata:city-800-mbarara,30.5737374,-0.4180848
+800,Uganda,MBALE,Mbale,undata:city-800-mbale,34.2022058,0.9766007
+800,Uganda,MASAKA,Masaka,undata:city-800-masaka,31.8318895,-0.483142
+800,Uganda,KASESE,Kasese,undata:city-800-kasese,30.0046209,0.1309553
+800,Uganda,KAMPALA,Kampala,undata:city-800-kampala,32.6008988068,0.3211009786
+800,Uganda,JINJA,Jinja,undata:city-800-jinja,33.2805299,0.5751567
+800,Uganda,GULU,Gulu,undata:city-800-gulu,32.388251,3.0199023
+800,Uganda,LIRA,Lira,undata:city-800-lira,32.896244,2.2456918
+804,Ukraine,ROVNO,Rovno,undata:city-804-rivne,26.25,50.6167
+804,Ukraine,NIKOLAEV,Nikolaev,undata:city-804-mykolaiv,32.0,46.966667
+818,Egypt,DIYARB_NAJM,Diyarb Najm,undata:city-818-diyarb-najm,31.44016,30.75438
+818,Egypt,CAIRO,Cairo,undata:city-818-cairo,31.3001002622,30.0918064966
+818,Egypt,ALEXANDRIA,Alexandria,undata:city-818-alexandria,29.8951716,31.1991806
+818,Egypt,AL_ZAQAZIQ,Al Zaqaziq,undata:city-818-al-zaqaziq,31.5035127,30.5853431
+818,Egypt,AL_QHURDAQAH,Al Qhurdaqah,undata:city-818-al-qhurdaqah,33.8288,27.2212
+818,Egypt,AL_MANSHAH,Al Manshah,undata:city-818-al-manshah,31.803105,26.4761397
+818,Egypt,PORT_SAID,Port Said,undata:city-818-port-said,32.305505,31.263235
+818,Egypt,ASYUT,Asyūţ,undata:city-818-asyut,31.16372869,27.18858603
+826,United Kingdom of Great Britain and Northern Ireland,SEFTON,Sefton,undata:city-826-sefton,-2.9714708,53.5034122
+826,United Kingdom of Great Britain and Northern Ireland,SCUNTHORPE,Scunthorpe,undata:city-826-scunthorpe,-0.6450841,53.5922488
+826,United Kingdom of Great Britain and Northern Ireland,ABERDEEN,Aberdeen,undata:city-826-aberdeen,-2.1,57.13333333
+826,United Kingdom of Great Britain and Northern Ireland,BLANTYRE_HAMILTON,Blantyre / Hamilton,undata:city-826-blantyre-hamilton,-4.0579043,55.7821405
+826,United Kingdom of Great Britain and Northern Ireland,BLACKPOOL,Blackpool,undata:city-826-blackpool,-3.05,53.81666667
+826,United Kingdom of Great Britain and Northern Ireland,BLACKBURN,Blackburn,undata:city-826-blackburn-with-darwen,-2.483333333,53.75
+826,United Kingdom of Great Britain and Northern Ireland,BARNSLEY,Barnsley,undata:city-826-barnsley,-1.4827755,53.5527719
+826,United Kingdom of Great Britain and Northern Ireland,BOURNEMOUTH,Bournemouth,undata:city-826-bournemouth,-1.883333333,50.71666667
+826,United Kingdom of Great Britain and Northern Ireland,AYLESBURY,Aylesbury,undata:city-826-aylesbury,-0.8130383,51.8161412
+826,United Kingdom of Great Britain and Northern Ireland,ASHFORD,Ashford,undata:city-826-ashford,0.8722566,51.148555
+826,United Kingdom of Great Britain and Northern Ireland,ALDWICK_FELPHAM,Aldwick / Felpham,undata:city-826-aldwick-felpham,-0.6902992,50.7825611
+826,United Kingdom of Great Britain and Northern Ireland,BANGOR,Bangor,undata:city-826-bangor,-4.1268822,53.2277187
+826,United Kingdom of Great Britain and Northern Ireland,CHESTER,Chester,undata:city-826-chester,-2.8908955,53.1908873
+826,United Kingdom of Great Britain and Northern Ireland,CHELTENHAM,Cheltenham,undata:city-826-cheltenham,-2.0711559,51.8995685
+826,United Kingdom of Great Britain and Northern Ireland,BELFAST,Belfast,undata:city-826-belfast,-5.933333333,54.58333333
+826,United Kingdom of Great Britain and Northern Ireland,BEDFORD,Bedford,undata:city-826-bedford,-0.4675041,52.1363806
+826,United Kingdom of Great Britain and Northern Ireland,BATH,Bath,undata:city-826-bath,-2.3596963,51.3813864
+826,United Kingdom of Great Britain and Northern Ireland,BASINGSTOKE_AND_DEANE,Basingstoke and Deane,undata:city-826-basingstoke-and-deane,-1.2211073,51.2587797
+826,United Kingdom of Great Britain and Northern Ireland,CREWE,Crewe,undata:city-826-crewe,-2.4414627,53.0996153
+826,United Kingdom of Great Britain and Northern Ireland,DACORUM,Dacorum,undata:city-826-dacorum,-0.551551,51.7689541
+826,United Kingdom of Great Britain and Northern Ireland,HARLOW,Harlow,undata:city-826-harlow,0.0974893,51.7676194
+826,United Kingdom of Great Britain and Northern Ireland,HALTON,Halton,undata:city-826-halton,-2.7427829,53.3538525
+826,United Kingdom of Great Britain and Northern Ireland,HALIFAX_UK,Halifax,undata:city-826-halifax,-1.8604874,53.7229229
+826,United Kingdom of Great Britain and Northern Ireland,GUILDFORD,Guildford,undata:city-826-guildford,-0.5732063,51.2356068
+826,United Kingdom of Great Britain and Northern Ireland,HUDDERSFIELD,Huddersfield,undata:city-826-huddersfield,-1.783333,53.65
+826,United Kingdom of Great Britain and Northern Ireland,HARROGATE,Harrogate,undata:city-826-harrogate,-1.5391039,53.9921491
+826,United Kingdom of Great Britain and Northern Ireland,HARTLEPOOL,Hartlepool,undata:city-826-hartlepool,-1.2093696,54.6857276
+826,United Kingdom of Great Britain and Northern Ireland,HASTINGS,Hastings,undata:city-826-hastings,0.5824703,50.8553888
+826,United Kingdom of Great Britain and Northern Ireland,CHESTERFIELD,Chesterfield,undata:city-826-chesterfield,-1.4264097,53.2352134
+826,United Kingdom of Great Britain and Northern Ireland,COLCHESTER,Colchester,undata:city-826-colchester,0.9,51.88333333
+826,United Kingdom of Great Britain and Northern Ireland,COATBRIDGE,Coatbridge,undata:city-826-coatbridge,-4.0273166,55.8622848
+826,United Kingdom of Great Britain and Northern Ireland,CHELMSFORD,Chelmsford,undata:city-826-chelmsford,0.4730532,51.7345329
+826,United Kingdom of Great Britain and Northern Ireland,BRACKNELL,Bracknell,undata:city-826-bracknell,-0.7449925,51.4143513
+826,United Kingdom of Great Britain and Northern Ireland,CANNOCK_HEDNESFORD,Cannock / Hednesford,undata:city-826-cannock-hednesford,-2.0025384,52.7113843
+826,United Kingdom of Great Britain and Northern Ireland,CORBY,Corby,undata:city-826-corby,-0.7032713,52.4877341
+826,United Kingdom of Great Britain and Northern Ireland,BURNLEY,Burnley,undata:city-826-burnley,-2.2439196,53.7907262
+826,United Kingdom of Great Britain and Northern Ireland,BRISTOL,Bristol,undata:city-826-bristol,-2.583333333,51.45
+826,United Kingdom of Great Britain and Northern Ireland,BRIGHTON,Brighton,undata:city-826-brighton,-0.15,50.83333333
+826,United Kingdom of Great Britain and Northern Ireland,CAMBRIDGE,Cambridge,undata:city-826-cambridge,0.116666667,52.2
+826,United Kingdom of Great Britain and Northern Ireland,BURTON_ON_TRENT,Burton-on-Trent,undata:city-826-burton-on-trent,-1.629917,52.802742
+826,United Kingdom of Great Britain and Northern Ireland,CARLISLE,Carlisle,undata:city-826-carlisle,-2.9362311,54.8948478
+826,United Kingdom of Great Britain and Northern Ireland,CARDIFF,Cardiff,undata:city-826-cardiff,-3.2,51.5
+826,United Kingdom of Great Britain and Northern Ireland,WARRINGTON,Warrington,undata:city-826-warrington,-2.5943178,53.3899497
+826,United Kingdom of Great Britain and Northern Ireland,LIVERPOOL,Liverpool,undata:city-826-liverpool,-3.0,53.41666667
+826,United Kingdom of Great Britain and Northern Ireland,LIVINGSTON,Livingston,undata:city-826-livingston,-3.5149461,55.8831932
+826,United Kingdom of Great Britain and Northern Ireland,TAMWORTH,Tamworth,undata:city-826-tamworth,-1.6948438,52.6345819
+826,United Kingdom of Great Britain and Northern Ireland,TYNESIDE_CONURBATION,Tyneside conurbation,undata:city-826-tyneside-conurbation,-1.508366,55.0276398
+826,United Kingdom of Great Britain and Northern Ireland,WASHINGTON,Washington,undata:city-826-washington,-1.528827,54.898614
+826,United Kingdom of Great Britain and Northern Ireland,WARWICK,Warwick,undata:city-826-warwick,-1.5815742,52.2814519
+826,United Kingdom of Great Britain and Northern Ireland,TELFORD,Telford,undata:city-826-telford,-2.4514273,52.6780419
+826,United Kingdom of Great Britain and Northern Ireland,TAUNTON,Taunton,undata:city-826-taunton,-3.1029086,51.0147895
+826,United Kingdom of Great Britain and Northern Ireland,WAKEFIELD,Wakefield,undata:city-826-wakefield,-1.4967286,53.6829541
+826,United Kingdom of Great Britain and Northern Ireland,WORCESTER,Worcester,undata:city-826-worcester,-2.2206585,52.1911849
+826,United Kingdom of Great Britain and Northern Ireland,WOKING,Woking,undata:city-826-woking,-0.5564726,51.3201891
+826,United Kingdom of Great Britain and Northern Ireland,WIGAN_SKELMERSDALE,Wigan / Skelmersdale,undata:city-826-wigan-skelmersdale,-2.7888664,53.5479022
+826,United Kingdom of Great Britain and Northern Ireland,TORBAY,Torbay,undata:city-826-torbay,-3.5394998,50.446247
+826,United Kingdom of Great Britain and Northern Ireland,THURROCK,Thurrock,undata:city-826-thurrock,0.3962817,51.5080169
+826,United Kingdom of Great Britain and Northern Ireland,THATCHAM,Thatcham,undata:city-826-thatcham,-1.2504632,51.3947536
+826,United Kingdom of Great Britain and Northern Ireland,NORWICH,Norwich,undata:city-826-norwich,1.3,52.63333333
+826,United Kingdom of Great Britain and Northern Ireland,NORTHAMPTON,Northampton,undata:city-826-northampton,-0.883333333,52.25
+826,United Kingdom of Great Britain and Northern Ireland,TUNBRIDGE_WELLS,Tunbridge Wells,undata:city-826-tunbridge-wells,0.2673446,51.1371483
+826,United Kingdom of Great Britain and Northern Ireland,WYCOMBE,Wycombe,undata:city-826-wycombe,-0.74934,51.62907
+826,United Kingdom of Great Britain and Northern Ireland,SWINDON,Swindon,undata:city-826-swindon,-1.783333,51.566667
+826,United Kingdom of Great Britain and Northern Ireland,SWANSEA,Swansea,undata:city-826-swansea,-4.0,51.58333333
+826,United Kingdom of Great Britain and Northern Ireland,NEWPORT,Newport,undata:city-826-newport,-2.983333,51.583333
+826,United Kingdom of Great Britain and Northern Ireland,NEWCASTLE_UNDER_LYME,Newcastle-under-Lyme,undata:city-826-newcastle-under-lyme,-2.2273919,53.0117627
+826,United Kingdom of Great Britain and Northern Ireland,YORK,York,undata:city-826-york,-1.083333333,53.96666667
+826,United Kingdom of Great Britain and Northern Ireland,LUTON,Luton,undata:city-826-luton,-0.416666667,51.88333333
+826,United Kingdom of Great Britain and Northern Ireland,LOUGHBOROUGH,Loughborough,undata:city-826-loughborough,-1.2077985,52.7723859
+826,United Kingdom of Great Britain and Northern Ireland,LONDON_UK,London,undata:city-826-london,-0.1307549888,51.5842514368
+826,United Kingdom of Great Britain and Northern Ireland,PLYMOUTH,Plymouth,undata:city-826-plymouth,-4.138611111,50.39638889
+826,United Kingdom of Great Britain and Northern Ireland,MAIDSTONE,Maidstone,undata:city-826-maidstone,0.5231646,51.2748258
+826,United Kingdom of Great Britain and Northern Ireland,MAIDENHEAD,Maidenhead,undata:city-826-maidenhead,-0.7197966,51.5227714
+826,United Kingdom of Great Britain and Northern Ireland,OXFORD,Oxford,undata:city-826-oxford,-1.25,51.75
+826,United Kingdom of Great Britain and Northern Ireland,NUNEATON,Nuneaton,undata:city-826-nuneaton,-1.4684488,52.5246182
+826,United Kingdom of Great Britain and Northern Ireland,MANSFIELD,Mansfield,undata:city-826-mansfield,-1.1964165,53.1443785
+826,United Kingdom of Great Britain and Northern Ireland,MANCHESTER_UK,Manchester,undata:city-826-manchester,-2.216666667,53.5
+826,United Kingdom of Great Britain and Northern Ireland,MEDWAY,Medway,undata:city-826-medway,0.5687309,51.4157386
+826,United Kingdom of Great Britain and Northern Ireland,MILTON_KEYNES,Milton Keynes,undata:city-826-milton-keynes,-0.7594092,52.0406502
+826,United Kingdom of Great Britain and Northern Ireland,PORTSMOUTH,Portsmouth,undata:city-826-portsmouth,-1.083333333,50.76666667
+826,United Kingdom of Great Britain and Northern Ireland,SLOUGH,Slough,undata:city-826-slough,-0.58,51.5
+826,United Kingdom of Great Britain and Northern Ireland,RUSTINGTON,Rustington,undata:city-826-rustington,-0.5101687,50.8110774
+826,United Kingdom of Great Britain and Northern Ireland,REDHILL_REIGATE,Redhill / Reigate,undata:city-826-redhill-reigate,-0.2184049,51.2507206
+826,United Kingdom of Great Britain and Northern Ireland,ROTHERHAM,Rotherham,undata:city-826-rotherham,-1.35,53.43333333
+826,United Kingdom of Great Britain and Northern Ireland,SUTTON_IN_ASHFIELD,Sutton in Ashfield,undata:city-826-sutton-in-ashfield,-1.2608279,53.1252091
+826,United Kingdom of Great Britain and Northern Ireland,STOCKTON_ON_TEES,Stockton-on-Tees,undata:city-826-stockton-on-tees,-1.3129164,54.564094
+826,United Kingdom of Great Britain and Northern Ireland,READING,Reading,undata:city-826-reading,-1.0,51.43333333
+826,United Kingdom of Great Britain and Northern Ireland,PRESTON,Preston,undata:city-826-preston,-2.716666667,53.76666667
+826,United Kingdom of Great Britain and Northern Ireland,SHEFFIELD,Sheffield,undata:city-826-sheffield,-1.5,53.36666667
+826,United Kingdom of Great Britain and Northern Ireland,SHREWSBURY,Shrewsbury,undata:city-826-shrewsbury,-2.7540658,52.707755
+826,United Kingdom of Great Britain and Northern Ireland,STEVENAGE,Stevenage,undata:city-826-stevenage,-0.2027155,51.9016663
+826,United Kingdom of Great Britain and Northern Ireland,STAFFORD,Stafford,undata:city-826-stafford,-2.1163818,52.8063157
+826,United Kingdom of Great Britain and Northern Ireland,ST_ALBANS,St Albans,undata:city-826-st-albans,-0.3379675,51.753051
+826,United Kingdom of Great Britain and Northern Ireland,SOUTHEND_ON_SEA,Southend-on-Sea,undata:city-826-southend-on-sea,0.7,51.53333333
+826,United Kingdom of Great Britain and Northern Ireland,SOUTHAMPTON,Southampton,undata:city-826-southampton,-1.4,50.9
+826,United Kingdom of Great Britain and Northern Ireland,DERRY,Derry,undata:city-826-derry,-7.3213056,54.9978678
+826,United Kingdom of Great Britain and Northern Ireland,DERBY,Derby,undata:city-826-derby,-1.5,52.93333333
+826,United Kingdom of Great Britain and Northern Ireland,EXETER,Exeter,undata:city-826-exeter,-3.533333333,50.7
+826,United Kingdom of Great Britain and Northern Ireland,GLASGOW,Glasgow,undata:city-826-glasgow,-4.25,55.83333333
+826,United Kingdom of Great Britain and Northern Ireland,ELLESMERE_PORT,Ellesmere Port,undata:city-826-ellesmere-port,-2.9022507,53.2789347
+826,United Kingdom of Great Britain and Northern Ireland,GREAT_YARMOUTH,Great Yarmouth,undata:city-826-great-yarmouth,1.7314845,52.6071742
+826,United Kingdom of Great Britain and Northern Ireland,GRAVESHAM,Gravesham,undata:city-826-gravesham,0.3961726,51.3972369
+826,United Kingdom of Great Britain and Northern Ireland,FALKIRK,Falkirk,undata:city-826-falkirk,-3.784376,55.9991959
+826,United Kingdom of Great Britain and Northern Ireland,FRIMLEY_FARNBOROUGH,Frimley / Farnborough,undata:city-826-frimley-farnborough,-0.7633684,51.3141735
+826,United Kingdom of Great Britain and Northern Ireland,GLOUCESTER,Gloucester,undata:city-826-gloucester,-2.25,51.83333333
+826,United Kingdom of Great Britain and Northern Ireland,DUNDEE,Dundee,undata:city-826-dundee-city,-2.966666667,56.5
+826,United Kingdom of Great Britain and Northern Ireland,DONCASTER,Doncaster,undata:city-826-doncaster,-1.1335312,53.5227681
+826,United Kingdom of Great Britain and Northern Ireland,EASTBOURNE,Eastbourne,undata:city-826-eastbourne,0.283333,50.766667
+826,United Kingdom of Great Britain and Northern Ireland,EAST_KILBRIDE,East Kilbride,undata:city-826-east-kilbride,-4.1796401,55.7601174
+826,United Kingdom of Great Britain and Northern Ireland,EDINBURGH,Edinburgh,undata:city-826-edinburgh,-3.2,55.95
+826,United Kingdom of Great Britain and Northern Ireland,KETTERING,Kettering,undata:city-826-kettering,-0.728004,52.3994233
+826,United Kingdom of Great Britain and Northern Ireland,KEIGHLEY,Keighley,undata:city-826-keighley,-1.9020456,53.8684021
+826,United Kingdom of Great Britain and Northern Ireland,GRIMSBY_CLEETHORPES,Grimsby / Cleethorpes,undata:city-826-grimsby-cleethorpes,-0.0709791,53.5828856
+826,United Kingdom of Great Britain and Northern Ireland,IPSWICH,Ipswich,undata:city-826-ipswich,1.166666667,52.08333333
+826,United Kingdom of Great Britain and Northern Ireland,KINGSTON_UPON_HULL,Kingston upon Hull,undata:city-826-kingston-upon-hull,-0.333333333,53.71666667
+826,United Kingdom of Great Britain and Northern Ireland,KIDDERMINSTER,Kidderminster,undata:city-826-kidderminster,-2.2478582,52.3880787
+826,United Kingdom of Great Britain and Northern Ireland,LEICESTER,Leicester,undata:city-826-leicester,-1.133333333,52.63333333
+826,United Kingdom of Great Britain and Northern Ireland,LEEDS_BRADFORD,Leeds / Bradford,undata:city-826-leeds-bradford,-1.6567819,53.8666504
+826,United Kingdom of Great Britain and Northern Ireland,HYNDBURN,Hyndburn,undata:city-826-hyndburn,-2.3900549,53.7607317
+826,United Kingdom of Great Britain and Northern Ireland,LINCOLN,Lincoln,undata:city-826-lincoln,-0.5404819,53.2293545
+826,United Kingdom of Great Britain and Northern Ireland,BIRMINGHAM,Birmingham,undata:city-826-birmingham,-1.916666667,52.46666667
+826,United Kingdom of Great Britain and Northern Ireland,AYR_PRESTWICK,Ayr / Prestwick,undata:city-826-ayr-prestwick,-4.6113017,55.4982802
+826,United Kingdom of Great Britain and Northern Ireland,BASILDON,Basildon,undata:city-826-basildon,0.4757363,51.5754602
+826,United Kingdom of Great Britain and Northern Ireland,HEREFORD,Hereford,undata:city-826-hereford,-2.7151735,52.0553813
+826,United Kingdom of Great Britain and Northern Ireland,CRAWLEY,Crawley,undata:city-826-crawley,-0.183333,51.116667
+826,United Kingdom of Great Britain and Northern Ireland,COVENTRY,Coventry,undata:city-826-coventry,-1.55,52.41666667
+826,United Kingdom of Great Britain and Northern Ireland,WESTON_SUPER_MARE,Weston-super-Mare,undata:city-826-weston-super-mare,-2.9778916,51.3471927
+826,United Kingdom of Great Britain and Northern Ireland,WAVENEY,Waveney,undata:city-826-waveney,-0.4517008,51.7742344
+826,United Kingdom of Great Britain and Northern Ireland,THANET,Thanet,undata:city-826-thanet,1.3319866,51.3533046
+826,United Kingdom of Great Britain and Northern Ireland,WORTHING,Worthing,undata:city-826-worthing,-0.3699697,50.8115402
+826,United Kingdom of Great Britain and Northern Ireland,MOTHERWELL_WISHAW,Motherwell / Wishaw,undata:city-826-motherwell-wishaw,-3.91667,55.76667
+826,United Kingdom of Great Britain and Northern Ireland,PETERBOROUGH_UK,Peterborough,undata:city-826-peterborough,-0.25,52.58333333
+826,United Kingdom of Great Britain and Northern Ireland,RUGBY,Rugby,undata:city-826-rugby,-1.2620038,52.3726682
+826,United Kingdom of Great Britain and Northern Ireland,REDDITCH,Redditch,undata:city-826-redditch,-1.9417444,52.3057655
+826,United Kingdom of Great Britain and Northern Ireland,DARLINGTON,Darlington,undata:city-826-darlington,-1.5555812,54.5242081
+826,United Kingdom of Great Britain and Northern Ireland,GREATER_MANCHESTER,Greater Manchester,undata:city-826-greater-manchester,-2.216666667,53.5
+826,United Kingdom of Great Britain and Northern Ireland,NOTTINGHAM,Nottingham,undata:city-826-greater-nottingham,-1.166666667,52.96666667
+826,United Kingdom of Great Britain and Northern Ireland,EASTLEIGH,Eastleigh,undata:city-826-eastleigh,-1.3602724,50.9573881
+834,United Republic of Tanzania,ARUSHA,Arusha,undata:city-834-arusha,36.6880794,-3.3696827
+840,United States of America,MODESTO,Modesto,undata:city-840-modesto-ca,-120.99583,37.63917
+840,United States of America,MONTGOMERY,Montgomery,undata:city-840-montgomery-al,-86.3,32.36667
+840,United States of America,NEWYORK,New York,undata:city-840-new-york-ny,-74.00639,40.71417
+840,United States of America,CHICAGO,Chicago,undata:city-840-chicago-il,-87.65,41.85
+840,United States of America,GAINESVILLE_FL,"Gainesville, FL",undata:city-840-gainesville-fl,-82.3249846,29.6519684
+840,United States of America,KILLEEN_TX,"Killeen, TX",undata:city-840-killeen-tx,-97.727796,31.1171441
+840,United States of America,MANCHESTER_US,Manchester,undata:city-840-manchester-nh,-71.4547891,42.9956397
+840,United States of America,MINNEAPOLIS,Minneapolis,undata:city-840-minneapolis-mn,-93.26361,44.98
+840,United States of America,RALEIGH,Raleigh,undata:city-840-raleigh-nc,-78.63889,35.77194
+840,United States of America,PORTLAND,Portland,undata:city-840-portland-or,-122.675,45.52361
+840,United States of America,PHILADELPHIA,Philadelphia,undata:city-840-philadelphia-pa,-75.16417,39.95222
+840,United States of America,TOLEDO_US,Toledo,undata:city-840-toledo-oh,-83.55528,41.66389
+840,United States of America,TALLAHASEE,Tallahasee,undata:city-840-tallahassee-fl,-84.28083,30.43806
+840,United States of America,SPRINGFIELD,Springfield,undata:city-840-springfield-ma,-72.59028,42.10139
+840,United States of America,SAVANNAH,Savannah,undata:city-840-savannah-ga,-81.1,32.08333
+840,United States of America,VISALIA,Visalia,undata:city-840-visalia-ca,-119.292058,36.3302284
+840,United States of America,WACO,Waco,undata:city-840-waco-tx,-97.14639,31.54917
+840,United States of America,CLOVIS,Clovis,undata:city-840-clovis-ca,-119.7029194,36.8252277
+854,Burkina Faso,OUAGADOUGOU,Ouagadougou,undata:city-854-ouagadougou,-1.528654,12.368327
+858,Uruguay,MELO,Melo,undata:city-858-melo,-54.1697146,-32.3680849
+858,Uruguay,MERCEDES,Mercedes,undata:city-858-mercedes,-58.0298671,-33.2484204
+858,Uruguay,MONTEVIDEO,Montevideo,undata:city-858-montevideo,-56.25988,-34.88832
+858,Uruguay,RIVERA,Rivera,undata:city-858-rivera,-55.5408151,-30.900058
+858,Uruguay,PAYSANDU,Paysandu,undata:city-858-paysandu,-58.0892136,-32.3217257
+858,Uruguay,MALDONALDO,Maldonaldo,undata:city-858-maldonaldo,-54.95843,-34.90889
+858,Uruguay,LAS_PIEDRAS,Las Piedras,undata:city-858-las-piedras,-56.2164982,-34.7274904
+858,Uruguay,SALTO,Salto ,undata:city-858-salto,-57.95978,-31.37517
+858,Uruguay,TACUAREMBO,Tacuarembo,undata:city-858-tacuarembo,-55.5,-32.166667
+860,Uzbekistan,BESHARYK,Besharyk,undata:city-860-besharyk,70.61028,40.43583
+860,Uzbekistan,NAVOIY,Navoiy,undata:city-860-navoiy,65.37916667,40.08444444
+860,Uzbekistan,ANDIJAN,Andijan,undata:city-860-andijon,72.34388889,40.78305556
+860,Uzbekistan,URGANCH,Urganch,undata:city-860-urganch,60.63333333,41.55
+860,Uzbekistan,TURTKUL,Turtkul,undata:city-860-turtkul,61.0002405,41.5544131
+860,Uzbekistan,TERMIZ,Termiz,undata:city-860-termiz,67.27833333,37.22416667
+860,Uzbekistan,QARSHI,Qarshi,undata:city-860-qarshi,65.79777778,38.86333333
+860,Uzbekistan,TASHKENT,Tashkent,undata:city-860-tashkent,69.2974396087,41.2437552697
+860,Uzbekistan,NUKUS,Nukus,undata:city-860-nukus,59.61027778,42.45305556
+860,Uzbekistan,BEKOBOD,Bekobod,undata:city-860-bekobod,69.2531407,40.2320291
+860,Uzbekistan,NAMANGAN,Namangan,undata:city-860-namangan,71.6725,40.99527778
+860,Uzbekistan,BUKHARA,Bukhara,undata:city-860-buxoro,64.42861111,39.77472222
+860,Uzbekistan,DENAU,Denau,undata:city-860-denau,67.8951071,38.2753782
+860,Uzbekistan,KOKAND,Kokand,undata:city-860-kokand,70.94776,40.54028
+862,Venezuela (Bolivarian Republic of),YARITAGUA,Yaritagua,undata:city-862-yaritagua,-69.1202295,10.0800778
+862,Venezuela (Bolivarian Republic of),MARIARA,Mariara,undata:city-862-mariara,-67.7089327,10.2891045
+862,Venezuela (Bolivarian Republic of),CIUDAD_GUAYANA,Ciudad Guayana,undata:city-862-ciudad-guayana,-62.6896622,8.3223763
+862,Venezuela (Bolivarian Republic of),CIUDAD_OJEDA,Ciudad Ojeda,undata:city-862-ciudad-ojeda,-71.3100065,10.2004123
+862,Venezuela (Bolivarian Republic of),CABUDARE,Cabudare,undata:city-862-cabudare,-69.2436557,10.0260507
+862,Venezuela (Bolivarian Republic of),SAN_CRISTOBAL,San Cristobal,undata:city-862-san-cristobal,-72.2214154,7.7756663
+862,Venezuela (Bolivarian Republic of),CABIMAS,Cabimas,undata:city-862-cabimas,-71.4414049,10.395075
+862,Venezuela (Bolivarian Republic of),SAN_JUAN_DE_LOS_MORROS,San Juan de los Morros,undata:city-862-san-juan-de-los-morros,-67.3569141,9.9152306
+862,Venezuela (Bolivarian Republic of),CUMANA,Cumaná,undata:city-862-cumana,-64.1578046,10.4495706
+862,Venezuela (Bolivarian Republic of),GUARENAS_AND_GUATIRE,Guarenas and Guatire,undata:city-862-guarenas-and-guatire,-66.54266,10.4762
+862,Venezuela (Bolivarian Republic of),LOS_TEQUES,Los Teques,undata:city-862-los-teques,-67.0453091,10.3437382
+862,Venezuela (Bolivarian Republic of),CORO,Coro,undata:city-862-coro,-69.6679115,11.4055796
+862,Venezuela (Bolivarian Republic of),CARACAS,Caracas,undata:city-862-caracas,-66.8979339305,10.473561255
+862,Venezuela (Bolivarian Republic of),MARACAIBO,Maracaibo,undata:city-862-maracaibo,-71.6443596,10.6498095
+862,Venezuela (Bolivarian Republic of),MARACAY,Maracay,undata:city-862-maracay,-67.5890216,10.2375144
+862,Venezuela (Bolivarian Republic of),CUA,Cua,undata:city-862-cua,-66.8865117,10.1653676
+862,Venezuela (Bolivarian Republic of),BARCELONA_VENEZUELA,Barcelona,undata:city-862-barcelona,-64.6819583,10.1325951
+862,Venezuela (Bolivarian Republic of),ACARIGUA,Acarigua,undata:city-862-acarigua,-69.2032823,9.5507961
+862,Venezuela (Bolivarian Republic of),ALTAGRACIA_DE_ORITUCO,Altagracia de Orituco,undata:city-862-altagracia-de-orituco,-66.3605635,9.8624463
+862,Venezuela (Bolivarian Republic of),VALERA,Valera,undata:city-862-valera,-70.6081655,9.3148173
+862,Venezuela (Bolivarian Republic of),VALENCIA_VENEZUELA,Valencia,undata:city-862-valencia,-68.0003987,10.170026
+862,Venezuela (Bolivarian Republic of),BARQUISIMETO,Barquisimeto,undata:city-862-barquisimeto,-69.3222293,10.0774374
+862,Venezuela (Bolivarian Republic of),TUCUPITA,Tucupita,undata:city-862-tucupita,-62.0542973,9.0660268
+862,Venezuela (Bolivarian Republic of),BARINAS,Barinas,undata:city-862-barinas,-69.9757717,8.1743918
+862,Venezuela (Bolivarian Republic of),CIUDAD_BOLIVAR,Ciudad Bolívar,undata:city-862-ciudad-bolivar,-63.5469562,8.1028532
+862,Venezuela (Bolivarian Republic of),SACARLOS_DEL_ZULIA,SaCarlos Del Zulia,undata:city-862-sacarlos-del-zulia,-71.91352,9.00003
+882,Samoa,APIA,Apia,undata:city-882-apia,-171.791656462,-13.8497057099
+887,Yemen,ADAN,Adan,undata:city-887-adan,44.916667,12.833333
+887,Yemen,YARIM,Yarim,undata:city-887-yarim,44.3794492,14.2990691
+887,Yemen,DHAMAR,Dhamar,undata:city-887-dhamar,44.2709597,14.7384268
+887,Yemen,AMRAN,Amran,undata:city-887-amran,43.909834,16.230218
+887,Yemen,AL_HUDAYDAH,Al Hudaydah,undata:city-887-al-hudaydah,42.844785,15.1159326
+887,Yemen,RADA_A,Rada'a,undata:city-887-rada-a,44.8366678,14.4119177
+887,Yemen,TAIZZ,Taizz,undata:city-887-taizz,43.5570871,13.4115414
+887,Yemen,SANAA,Sana'a,undata:city-887-sana-a,44.1917648225,15.3971757489
+887,Yemen,TARIM,Tarim,undata:city-887-tarim,49.022897,16.099041
+894,Zambia,NDOLA,Ndola,undata:city-894-ndola,28.6365894,-12.9693056
+8,Albania,TIRANA,Tirana,undata:city-8-tirana,19.8091316314,41.3709335141
+20,Andorra,ANDORRA_ALL,Andorra,undata:city-20-all,1.5732033,42.5407167
+24,Angola,WINDHOEK,Windhoek,undata:city-24-windhoek,,
+28,Antigua and Barbuda,ANTIGUA,Antigua,undata:city-28-antigua,-61.7904505,17.1037151
+48,Bahrain,BAHRAIN_ALL,Bahrain,undata:city-48-all,50.55,26.03333
+51,Armenia,ARMENIA_ALL,"Armenia, all cities",undata:city-51-all,,
+60,Bermuda,BERMUDA,Bermuda,undata:city-60-bermuda,-64.7561647,32.30382
+68,Bolivia (Plurinational State of),LAPAZ,La Paz,undata:city-68-la-paz,-68.1257171577,-16.481233644
+70,Bosnia and Herzegovina,BOSNIA_AND_HERZEGOVINA_ALL,"Bosnia and Herzegovina, all cities",undata:city-70-all,17.83333,44.25
+72,Botswana,GABORONE,Gaborone,undata:city-72-gaborone,26.0264930679,-24.687627784
+76,Brazil,CIGRES,Cigres,undata:city-76-cigres,,
+84,Belize,BELMOPAN,Belmopan,undata:city-84-belmopan,-88.7038955773,17.2021046056
+112,Belarus,BELARUS_ALL,"Belarus, all cities",undata:city-112-all,28.0,53.0
+120,Cameroon,YAOUNDE,Yaoundé,undata:city-120-yaounde,11.5537061517,3.8880751988
+132,Cabo Verde,PRAIA,Praia,undata:city-132-praia,-23.5392951735,14.9470444512
+144,Sri Lanka,DEHIWALA-MOUNTLAVINIA,Dehiwala-Mount Lavinia,undata:city-144-dehiwala-mount-lavinia,79.8660111,6.8513222
+144,Sri Lanka,MORATUWA,Moratuwa,undata:city-144-moratuwa,79.8825944,6.7746222
+152,Chile,SANTIAGO_PROVIDENCIA,"Santiago, Providencia",undata:city-152-santiago-providencia,-70.6113373,-33.4288379
+152,Chile,LOSLAGOS_PUERTOMONTT,Puerto Montt,undata:city-152-puerto-montt,-72.93968,-41.4717
+152,Chile,COQUIMBO_COQUIMBO,Coquimbo,undata:city-152-coquimbo,-71.33798,-29.95327
+152,Chile,TARAPACA_ARICA,Tarapaca,undata:city-152-tarapaca,-69.5463448,-20.1636672
+152,Chile,CANET,Canet,undata:city-152-canet,-1.6485,40.04164
+156,China,KUNMING,Kunming,undata:city-156-kunming,102.72,25.05
+156,China,SUZHOU,Suzhou,undata:city-156-suzhou-2371,120.58,31.3
+156,China,LANZHOU,Lanzhou,undata:city-156-lanzhou,103.83,36.05
+170,Colombia,BELLO,Bello,undata:city-170-bello,-75.5582665,6.334997
+170,Colombia,BUENAVENTURA,Buenaventura,undata:city-170-buenaventura,-77.0786047,3.8899335
+170,Colombia,PEREIRA,Pereira,undata:city-170-pereira,-75.6946778,4.8143159
+170,Colombia,ITAGUI,Itagui,undata:city-170-itagui,-75.6093254,6.1724352
+170,Colombia,DOSQUEBRADAS,Dosquebradas,undata:city-170-dosquebradas,-75.6713013,4.8339551
+170,Colombia,CUCUTA,Cúcuta (San José de Cúcuta),undata:city-170-cucuta,-72.4817773,7.8974806
+192,Cuba,CIEGODEAVILA,Ciego de Ávila,undata:city-192-ciego-de-avila,-78.75,21.83
+204,Benin,COTONOU,Cotonou,undata:city-204-cotonou,2.4252507,6.3676953
+208,Denmark,COPENHAGEN,Copenhagen,undata:city-208-copenhagen,12.5334683049,55.6804770916
+214,Dominican Republic,SANTADOMINGO,Santo Domingo,undata:city-214-santo-domingo,-69.8706436947,18.4301586613
+222,El Salvador,LALIBERTAD_NUEVASANSALVADOR,La Libertad - Nueva San Salvador,undata:city-222-la-libertad-nueva-san-salvador,-89.3395511,14.0503244
+222,El Salvador,SANSALVADOR_SOYAPANGO,San Salvador - Soyapango,undata:city-222-san-salvador-soyapango,-89.1518195,13.7048998
+222,El Salvador,SANSALVADOR_MEJICANOS,San Salvador - Mejicanos,undata:city-222-san-salvador-mejicanos,-89.1845869,13.7205243
+222,El Salvador,SANSALVADOR_ILOPANGO,San Salvador - Ilopango,undata:city-222-san-salvador-ilopango,-89.11028,13.69426
+222,El Salvador,SANSALVADOR_APOPA,San Salvador - Apopa,undata:city-222-san-salvador-apopa,-89.1901243,13.8167301
+246,Finland,HELSINKI,Helsinki,undata:city-246-helsinki,24.9177837161,60.2000007781
+268,Georgia,KUTAISI,Kutaisi,undata:city-268-kutaisi,42.7054475,42.2716078
+268,Georgia,BATUMI,Batumi,undata:city-268-batumi,41.6360085,41.6509502
+268,Georgia,TBILISI,Tbilisi,undata:city-268-tbilisi,44.7963447936,41.6780129192
+300,Greece,ATHENSGAA,Athens,undata:city-300-athens,23.6930332478,37.9906883528
+324,Guinea,CONAKRY,Conakry,undata:city-324-conakry,-13.6717318748,9.5218630175
+328,Guyana,GEORGETOWN,Georgetown,undata:city-328-georgetown,-58.1193389252,6.7798601093
+332,Haiti,LESCAYES,Les Cayes,undata:city-332-les-cayes,-73.7511601,18.1944428
+332,Haiti,PETIONVILLE,Petion Ville,undata:city-332-petion-ville,-72.2860209,18.5132181
+344,"China, Hong Kong Special Administrative Region",CHINA_HONGKONG_SAR_ALL,Hong Kong,undata:city-344-all,114.16667,22.25
+356,India,DELHI,New Delhi,undata:city-356-delhi,77.1323165071,28.6566562885
+356,India,BANGALORE,Bangalore,undata:city-356-bangalore,77.590082,12.9767936
+356,India,WARANGAL,Warangal,undata:city-356-warangal,79.5970954,17.9820644
+360,Indonesia,JAKARTA,Jakarta,undata:city-360-jakarta,106.774887126,-6.1779799492
+384,Côte d'Ivoire,ABIDJAN,Abidjan,undata:city-384-abidjan,-4.0181307709,5.3494703217
+412,Kosovo,KOSOVO_ALL,"Kosovo, all cities",undata:city-412-all,20.91667,42.58333
+417,Kyrgyzstan,BISHEKEK,Bishkek,undata:city-417-bishekek,74.5826644934,42.7868880464
+426,Lesotho,MASERU,Maseru,undata:city-426-maseru,27.5413112168,-29.3241196256
+430,Liberia,MONROVIA,Monrovia,undata:city-430-monrovia,-10.7038059421,6.2713270629
+446,"China, Macao Special Administrative Region",CHINA_MACAO_SAR_ALL,Macao,undata:city-446-all,113.54077,22.18988
+462,Maldives,MALDIVES,Maldives,undata:city-462-maldives,73.2244152,3.7203503
+478,Mauritania,NOUAKCHOTT,Nouakchott,undata:city-478-nouakchott,-15.9499579332,18.0636424358
+480,Mauritius,CUREPIPE,Curepipe,undata:city-480-curepipe,57.5229655,-20.3200121
+480,Mauritius,PORTLOUIS,Port Louis,undata:city-480-port-louis,57.5060730672,-20.1389885323
+484,Mexico,CHETUMAL_OTHONP_BLANCO_QUINTANAROO,Chetumal,undata:city-484-chetumal,-88.3,18.5
+484,Mexico,CHILPANCINGO_GUERRERO,Chilpancingo,undata:city-484-chilpancingo-de-los-bravo,-99.5,17.55
+484,Mexico,CUAUTLA_MORELOS,Cuautla,undata:city-484-cuautla,-98.95,18.8
+484,Mexico,CUAUHTEMOC_CHIHUAHUA,Cuauhtémoc,undata:city-484-cuauhtemoc,-99.1518637,19.4416128
+484,Mexico,CORDOBA_VERACRUZ,Córdoba,undata:city-484-cordoba,-96.933333,18.883333
+484,Mexico,COLIMA,Colima,undata:city-484-colima,-104.0,19.166667
+484,Mexico,COATZACOALCOS_VERACRUZ,Coatzacoalcos,undata:city-484-coatzacoalcos,-94.416667,18.15
+484,Mexico,CELAYA_GUANAJUATO,Celaya,undata:city-484-celaya,-100.816667,20.516667
+484,Mexico,CARMEN_CAMPECHE,Ciudad del Carmen,undata:city-484-ciudad-del-carmen,-91.833333,18.633333
+484,Mexico,IGUALA_GUERRERO,Iguala,undata:city-484-iguala,-99.533333,18.35
+484,Mexico,ZACATECAS_ZACATECAS,Zacatecas,undata:city-484-zacatecas,-102.583333,22.783333
+484,Mexico,VICTORIA_TAMAULIPAS,Victoria,undata:city-484-victoria,-99.1441352,23.7389846
+484,Mexico,ZAMORA_MICHOACAN,Zamora,undata:city-484-zamora,-102.266667,19.983333
+484,Mexico,ZAPOPAN_JALISCO,Zapopan,undata:city-484-zapopan,-103.4,20.716667
+484,Mexico,ZITACUARO_MICHOACAN,Zitacuaro,undata:city-484-zitacuaro,-100.3178664,19.4363828
+484,Mexico,HIDALGO_MICHOACAN,"Hidalgo, Michoacan",undata:city-484-hidalgo-michoacan,-100.6367478,19.6261268
+484,Mexico,HERMOSILLO_SONORA,Hermosillo,undata:city-484-hermosillo,-110.966667,29.066667
+484,Mexico,GUAYMAS_SONORA,Guaymas,undata:city-484-guaymas,-110.9,27.933333
+484,Mexico,GUASAVE_SINALOA,Guasave,undata:city-484-guasave,-108.5399603,25.5046381
+484,Mexico,CARDENAST_TABASCO,Cárdenas,undata:city-484-cardenas,-99.6494097,22.0055489
+484,Mexico,CANCUN,Cancún,undata:city-484-cancun,-86.833333,21.166667
+484,Mexico,ALTAMIRA_TAMAULIPAS,Altamira,undata:city-484-altamira,-98.1165184,22.5630208
+484,Mexico,AGUASCALIENTES,Aguascalientes,undata:city-484-aguascalientes,-102.5,22.0
+484,Mexico,CHALCOMEX,Chalco,undata:city-484-chalco-de-diaz-covarrubias,-98.9,19.266667
+484,Mexico,ACUNACOAHUILA,Acuña,undata:city-484-ciudad-acuna,-100.916667,29.3
+484,Mexico,HIDALGODELPARRAL_CHIHUAHUA,"Hidalgo del Parral, Chihuahua",undata:city-484-hidalgo-del-parral,-105.666667,26.933333
+484,Mexico,GUADALUPE_ZACATECAS,"Guadalupe, Zacatecas",undata:city-484-guadalupe-zacatecas,-102.4505058,22.7823842
+484,Mexico,GUADALUPE_NUEVOLEON,Guadalupe,undata:city-484-guadalupe-nuevo-leon,-100.266667,25.683333
+484,Mexico,HUIXQUILUCAN_MEXICO,Huixquilucan,undata:city-484-huixquilucan,-99.3568074,19.3709328
+484,Mexico,CHIHUAHUA_CHIHUAHUA,Chihuahua,undata:city-484-chihuahua,-106.0,28.5
+484,Mexico,CIUDADOBREGON,Ciudad Obregón,undata:city-484-ciudad-obregon,-109.933333,27.483333
+484,Mexico,CORREGIDORA,Corregidora,undata:city-484-corregidora,-100.4412472,20.4778128
+492,Monaco,MONACO_ALL,Monaco,undata:city-492-all,7.4276832,43.7323492
+499,Montenegro,MONTENEGRO_ALL,"Montenegro, all cities",undata:city-499-all,19.25,42.75
+524,Nepal,GHORAI,Ghorai,undata:city-524-ghorai,82.48789,28.04595
+528,Netherlands (Kingdom of the),AMSTERDAM-UTRECHT,Amsterdam-Utrecht,undata:city-528-amsterdam-utrecht,5.1036818,52.0536237
+584,Marshall Islands,MARSHALLISLANDS,Marshall islands,undata:city-584-marshall-islands,167.7953224,8.230817
+604,Peru,LIMA_CARABAYLLO,"Lima, Carabayllo",undata:city-604-lima-carabayllo,-76.9892923,-11.794993
+604,Peru,UCAYALI_CALLERIA,"Ucayali, Calleria",undata:city-604-ucayali-calleria,-74.5563727,-8.0735949
+604,Peru,LIMA_PUENTEPIEDRA,"Lima, Puente Piedra",undata:city-604-lima-puente-piedra,-77.0744821,-11.8768271
+604,Peru,LIMA_LURIGANCHO,"Lima, Lurigancho",undata:city-604-lima-lurigancho,-76.7627012,-11.948832
+604,Peru,JUNIN_ELTAMBO,"Junin, El Tambo",undata:city-604-junin-el-tambo,-75.1473422,-11.97218
+604,Peru,LIMA_LOSOLIVOS,"Lima, Los Olivos",undata:city-604-lima-los-olivos,-77.0730713,-11.9659853
+604,Peru,LIMA_CHORRILLOS,"Lima, Chorrillos",undata:city-604-lima-chorrillos,-77.0089623,-12.1923497
+604,Peru,LIMA_SANJUANDELURIGANCHO,"Lima, San Juan de Lurigancho",undata:city-604-lima-san-juan-de-lurigancho,-76.9779107,-11.9487508
+604,Peru,LIMA_COMAS,"Lima, Comas",undata:city-604-lima-comas,-77.0406744,-11.9328613
+604,Peru,LIMA_ATE,"Lima, Ate",undata:city-604-lima-ate,-76.896873,-12.0387281
+604,Peru,CALLAO_CALLAOCERCADO,"Callao, Callao Cercado",undata:city-604-callao-callao-cercado,-77.13916,-12.05233
+604,Peru,LIMA_SANBORJA,"Lima, San Borja",undata:city-604-lima-san-borja,-76.9956899,-12.0964515
+604,Peru,LIMA_VILLAMARIADELTRIUNFO,"Lima, Villa Maria del Triunfo",undata:city-604-lima-villa-maria-del-triunfo,-76.9189677,-12.1766438
+604,Peru,PIURA_CASTILLA,"Piura, Castilla",undata:city-604-piura-castilla,-80.5340462,-5.115365
+608,Philippines,LAHORE_PHILIPPINES,Lahore,undata:city-608-lahore,,
+620,Portugal,LISBON,Lisbon,undata:city-620-lisbon,-9.1255298722,38.7260044056
+660,Anguilla,ANGUILLA,Anguilla,undata:city-660-anguilla,-63.0750234,18.1954947
+662,Saint Lucia,CASTRIES,Castries,undata:city-662-castries,-60.962474897,14.0176487817
+710,South Africa,CAPETOWN,Cape Town,undata:city-710-cape-town,18.41722,-33.92888
+710,South Africa,DURBAN,Durban,undata:city-710-durban,30.97307,-29.89059
+710,South Africa,STEVE_TSHWETE,Steve Tshwete,undata:city-710-steve-tshwete,29.5577964,-25.8308737
+716,Zimbabwe,HARARE,Harare,undata:city-716-harare,31.0270519429,-17.8032246201
+760,Syrian Arab Republic,DAMASCUS,Damascus,undata:city-760-damascus,36.2932091155,33.4951819854
+768,Togo,LOME,Lomé,undata:city-768-lome,1.2431000377,6.1512307815
+788,Tunisia,SOUSSE,Sousse ,undata:city-788-sousse,10.641111,35.825556
+807,North Macedonia,NORTH_MACEDONIA_ALL,"North Macedonia, all cities",undata:city-807-all,21.75,41.66667
+834,United Republic of Tanzania,MOSHI,Moshi,undata:city-834-moshi,37.3435249,-3.3486456
+834,United Republic of Tanzania,DARESSALAAM,Dar es Salaam,undata:city-834-dar-es-salaam,39.2803583,-6.8160837
+840,United States of America,TOMPKINS_COUNTY,Tompkins county,undata:city-840-tompkins-county,-76.472794,42.445339
+840,United States of America,SANFRANSCISCO,San Francisco,undata:city-840-san-francisco-ca,-122.41833,37.775
+894,Zambia,LUSAKA,Lusaka,undata:city-894-lusaka,28.3080463693,-15.4039631347
+48,Bahrain,NORTHERN_GOVERNORATE,Northern Governorate,undata:city-48-northern-governorate,50.4181123,26.2778477
+48,Bahrain,CAPITAL_GOVERNORATE,Capital Governorate,undata:city-48-capital-governorate,50.4747251,26.4243233
+48,Bahrain,MUHARRAQ_GOVERNORATE,Muharraq  Governorate,undata:city-48-muharraq-governorate,50.6797287,26.4134661
+48,Bahrain,SOUTHERN_GOVERNORATE,Southern Governorate,undata:city-48-southern-governorate,50.5902693,25.8400069
+72,Botswana,FRANCISTOWN,Francistown,undata:city-72-francistown,27.502515,-21.16636
+76,Brazil,INDAIATUBA_CORREGO,Indaiatuba_Corrego,undata:city-76-indaiatuba-corrego,-47.1254683,-23.1623388
+76,Brazil,PORTO_ALEGRE_AND_NOVO_HAMBURGO,Porto Alegre and Novo Hamburgo,undata:city-76-porto-alegre-and-novo-hamburgo,-51.13056,-29.67833
+76,Brazil,BELEM_ANANINDEUA,Belem_Ananindeua,undata:city-76-belem-ananindeua,-48.4016623,-1.374035
+76,Brazil,CAMPINAS_PAULINIA,Campinas_Paulinia,undata:city-76-campinas-paulinia,-47.1532213,-22.7630391
+156,China,SUINING,Suining,undata:city-156-suining-sichuan,105.57,30.5
+156,China,YULIN,Yulin,undata:city-156-yulin-guangxi,110.15,22.63
+170,Colombia,ARAUCA,Arauca,undata:city-170-arauca,-21.2134,2.2455
+170,Colombia,VILLAVICENCIO,Villavicencio,undata:city-170-villavicencio,-73.6206667,4.1315113
+218,Ecuador,BABAHOYO,Babahoyo,undata:city-218-babahoyo,-79.5338214,-1.8009022
+250,France,TOULOUSSE,Toulousse,undata:city-250-toulousse,1.444247,43.604462
+340,Honduras,CHOLOMA,Choloma,undata:city-340-choloma,-87.950694,15.6127426
+352,Iceland,ICELAND_ALL,"Iceland, all cities",undata:city-352-all,,
+356,India,BAREILLY,Bareilly,undata:city-356-bareilly,79.383333,28.416667
+360,Indonesia,PATI,Pati,undata:city-360-pati,111.0870076,-6.7070924
+360,Indonesia,SUBANG,Subang,undata:city-360-subang,107.7587397,-6.5689807
+484,Mexico,SAN_LUIS_RIO_COLORADO,San Luis Río Colorado,undata:city-484-san-luis-rio-colorado,-114.776667,32.463056
+484,Mexico,SALTILLO,Saltillo,undata:city-484-saltillo,-101.0,25.416667
+543,Oceania (exc. Australia and New Zealand),OCEANIA_EXCL_AUSTRALIA_AND_NEWZEALAND_ALL,"Oceania (exc. Australia and New Zealand), all cities",undata:city-543-all,-93.17083,15.725
+634,Qatar,AL_KHOR,Al Khor,undata:city-634-al-khor,51.5031212,25.6837333
+682,Saudi Arabia,HAIL,Ḥaʼil,undata:city-682-ja-il,41.697275,27.513235
+682,Saudi Arabia,AT_TAIF,At-Ta'if,undata:city-682-a?-?a-if,40.410817,21.269852
+682,Saudi Arabia,JIDDAH,Jiddah,undata:city-682-jiddah,39.176966,21.584361
+682,Saudi Arabia,KHAMIS_ABHA,Khamis Abha,undata:city-682-khamis-abha,42.6756253,18.2867317
+682,Saudi Arabia,AD_DAMMAM,Ad Dammām,undata:city-682-ad-dammam,50.097343,26.413796
+682,Saudi Arabia,AL_HUFUF,Al Hufūf,undata:city-682-al-hufuf,49.588981,25.36268
+682,Saudi Arabia,AL_JUBAYL,Al Jubayl,undata:city-682-al-jubayl,49.638979,26.970782
+682,Saudi Arabia,AL_KHARJ,Al-Kharj,undata:city-682-al-kharj,47.6840134,23.8304401
+729,Sudan,ALFASHIR,Alfashir,undata:city-729-alfashir,25.3512174,13.6221566
+756,Switzerland,WINTERHUR,Winterhur,undata:city-756-winterhur,8.7045499,47.4723314
+784,United Arab Emirates,AL_FUJAYRAH,Al Fujayrah,undata:city-784-al-fujayrah,56.3537889,25.4391127
+784,United Arab Emirates,RAS_AL_KHAIMAH,Ras Al-Khaimah ,undata:city-784-ras-al-khaimah,55.942778,25.791111
+840,United States of America,HOUSTON,Houston,undata:city-840-houston-tx,-95.36306,29.76306
+840,United States of America,CLEVELAND,Cleveland,undata:city-840-cleveland-oh,-81.69556,41.49944
+860,Uzbekistan,NAVOI_KARMANA,Navoi_Karmana,undata:city-860-navoi-karmana,65.3608473,40.1410626
+862,Venezuela (Bolivarian Republic of),BARCELONA_AND_PUERTO_LA_CRUZ,Barcelona and Puerto La Cruz,undata:city-862-barcelona-and-puerto-la-cruz,-64.61667,10.21667

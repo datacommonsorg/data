@@ -1,0 +1,16 @@
+VARIABLE_CODE,GEOGRAPHY_CODE,TIME_PERIOD,VALUE,UNITS,UNITMULTIPLIER,MEASUREMENT_METHOD
+dcs:sdg/AG_LND_AGRBIO,dcs:country/BHR,2019,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/BRN,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/BLR,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/DNK,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/ECU,2021,56,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/FRA,2016,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/HUN,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/JAM,2021,95,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/MWI,2018,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/MUS,2019,4,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/QAT,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/VNM,2020,38,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/CHE,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/UKR,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_AGRBIO,dcs:country/GBR,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G

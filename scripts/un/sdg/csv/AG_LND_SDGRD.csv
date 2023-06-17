@@ -1,0 +1,9 @@
+VARIABLE_CODE,GEOGRAPHY_CODE,TIME_PERIOD,VALUE,UNITS,UNITMULTIPLIER,MEASUREMENT_METHOD
+dcs:sdg/AG_LND_SDGRD,dcs:country/BHR,2019,95,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_SDGRD,dcs:country/BLR,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_SDGRD,dcs:country/DNK,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_SDGRD,dcs:country/ECU,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_SDGRD,dcs:country/HUN,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_SDGRD,dcs:country/JAM,2021,76,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_SDGRD,dcs:country/QAT,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
+dcs:sdg/AG_LND_SDGRD,dcs:country/VNM,2020,84,dcs:SDG_PT,,dcs:SDG_C_A_G
