@@ -1,0 +1,31 @@
+
+Node: dcid:sdg/AG_FOOD_WST:FOOD_WASTE_SECTOR--FWS_RTL
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:value
+name: "Food waste [Food Waste Sector = Retail]"
+populationType: dcs:SDG_AG_FOOD_WST
+statType: dcs:measuredValue
+sdg_foodWasteSector: dcs:SDG_FoodWasteSectorEnum_FWS_RTL
+
+Node: dcid:sdg/AG_FOOD_WST:FOOD_WASTE_SECTOR--FWS_OOHC
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:value
+name: "Food waste [Food Waste Sector = Out-of-home consumption]"
+populationType: dcs:SDG_AG_FOOD_WST
+statType: dcs:measuredValue
+sdg_foodWasteSector: dcs:SDG_FoodWasteSectorEnum_FWS_OOHC
+
+Node: dcid:sdg/AG_FOOD_WST:FOOD_WASTE_SECTOR--FWS_HHS
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:value
+name: "Food waste [Food Waste Sector = Households]"
+populationType: dcs:SDG_AG_FOOD_WST
+statType: dcs:measuredValue
+sdg_foodWasteSector: dcs:SDG_FoodWasteSectorEnum_FWS_HHS
+
+Node: dcid:sdg/AG_FOOD_WST
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcs:value
+name: "Food waste"
+populationType: dcs:SDG_AG_FOOD_WST
+statType: dcs:measuredValue

@@ -31,21 +31,28 @@ class UtilTest(unittest.TestCase):
         self.assertTrue(is_float(7.28))
         self.assertFalse(is_float('NA'))
 
-    def test_make_property(self):
-        self.assertEqual(make_property('Bioclimatic belt'), 'BioclimaticBelt')
+    def test_is_valid(self):
+        self.assertFalse(is_valid(float('nan')))
+        self.assertFalse(is_valid(''))
 
-    def test_make_value(self):
-        self.assertEqual(make_value('100+'), '100GEQ')
+    def test_format_variable_description(self):
+        self.assertEqual(
+            format_variable_description(
+                'Food waste (Tonnes) [Food Waste Sector = Households]',
+                'Food waste (Tonnes)'),
+            'Food waste [Food Waste Sector = Households]')
 
-    def test_get_dcid(self):
-        template = ('\nNode: dcid:sdg/AG_FOOD_WST_HHS\n'
-                    'typeOf: dcs:StatisticalVariable\n'
-                    'measuredProperty: dcs:value\n'
-                    'name: "Food waste: Households"\n'
-                    'populationType: dcs:SDG_AG_FOOD_WST\n'
-                    'statType: dcs:measuredValue\n'
-                    'sdg_foodWasteSector: dcs:SDG_FoodWasteSectorEnum_HHS\n')
-        self.assertEqual(get_dcid(template), 'sdg/AG_FOOD_WST_HHS')
+    def test_format_variable_code(self):
+        self.assertEqual(
+            format_variable_code('AG_FOOD_WST?FOOD_WASTE_SECTOR=FWS_OOHC'),
+            'AG_FOOD_WST:FOOD_WASTE_SECTOR--FWS_OOHC')
+
+    def test_format_title(self):
+        self.assertEqual(format_title('FOOD_WASTE_SECTOR'), 'Food Waste Sector')
+
+    def test_format_property(self):
+        self.assertEqual(format_property('FOOD_WASTE_SECTOR'),
+                         'FoodWasteSector')
 
 
 if __name__ == '__main__':
