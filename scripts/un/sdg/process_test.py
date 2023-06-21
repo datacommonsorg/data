@@ -21,9 +21,12 @@ import sys
 import tempfile
 import unittest
 
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+from un.sdg import process
+
 module_dir_ = os.path.dirname(__file__)
-sys.path.append(os.path.join(module_dir_))
-from .process import *
 
 
 def assert_equal_dir(self, result_dir, expected_dir):
@@ -37,12 +40,15 @@ def assert_equal_dir(self, result_dir, expected_dir):
 class ProcessTest(unittest.TestCase):
 
     def test_get_geography(self):
-        self.assertEqual(get_geography(840, 'Country'), 'dcs:country/USA')
-        self.assertEqual(get_geography('NEWYORK', 'City'), 'dcs:geoId/3651000')
+        self.assertEqual(process.get_geography(840, 'Country'),
+                         'dcs:country/USA')
+        self.assertEqual(process.get_geography('NEWYORK', 'City'),
+                         'dcs:geoId/3651000')
 
     def test_get_unit(self):
-        self.assertEqual(get_unit('CON_USD', 2021), '[CON_USD 2021]')
-        self.assertEqual(get_unit('CON_USD', float('nan')), 'dcs:SDG_CON_USD')
+        self.assertEqual(process.get_unit('CON_USD', 2021), '[CON_USD 2021]')
+        self.assertEqual(process.get_unit('CON_USD', float('nan')),
+                         'dcs:SDG_CON_USD')
 
     def test_get_measurement_method(self):
         d = {
@@ -52,12 +58,12 @@ class ProcessTest(unittest.TestCase):
         }
         df = pd.DataFrame.from_dict(d)
         for _, row in df.iterrows():
-            self.assertEqual(get_measurement_method(row), 'SDG_E_A_G')
+            self.assertEqual(process.get_measurement_method(row), 'SDG_E_A_G')
 
     def test_process(self):
         with tempfile.TemporaryDirectory() as tmp_schema:
             with tempfile.TemporaryDirectory() as tmp_csv:
-                process('testdata/test_input', tmp_schema, tmp_csv)
+                process.process('testdata/test_input', tmp_schema, tmp_csv)
                 assert_equal_dir(
                     self, tmp_schema,
                     os.path.join(module_dir_, 'testdata/test_schema'))

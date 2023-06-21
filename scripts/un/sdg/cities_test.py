@@ -20,11 +20,11 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
-from . import cities
 
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
+from un.sdg import cities
 
 module_dir_ = os.path.dirname(__file__)
 

@@ -28,8 +28,12 @@ Usage: python3 process.py
 '''
 import os
 import pandas as pd
+import sys
 
-import util
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+from un.sdg import util
 
 
 def get_geography(code, type):
