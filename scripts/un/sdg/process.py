@@ -101,6 +101,8 @@ def process(input_dir, schema_dir, csv_dir):
         with open(os.path.join(schema_dir, 'sdg.textproto'), 'w') as f_vertical:
             df = pd.read_excel(os.path.join(input_dir, 'sdg_hierarchy.xlsx'))
             for _, row in df.iterrows():
+                if not util.is_valid(row['SeriesCode']):
+                    continue
                 f_series.write(
                     util.SERIES_TEMPLATE.format_map({
                         'dcid':
