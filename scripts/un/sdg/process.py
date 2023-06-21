@@ -121,7 +121,7 @@ def process(input_dir, schema_dir, csv_dir):
     dimensions = {}
     for root, _, files in os.walk(os.path.join(input_dir, 'code_lists')):
         for file in sorted(files):
-            dimension = file.removeprefix('CL__').removesuffix('.xlsx')
+            dimension = file.split('CL__')[1].split('.xlsx')[0]
 
             # Get names directly from observation files.
             if dimension in {'SERIES', 'VARIABLE'}:
@@ -198,7 +198,7 @@ def process(input_dir, schema_dir, csv_dir):
                 'UNITS', 'UNITMULTIPLIER', 'MEASUREMENT_METHOD'
             ]]
 
-            code = file.removeprefix('observations_').removesuffix('.xlsx')
+            code = file.split('observations_')[1].split('.xlsx')[0]
             df.to_csv(os.path.join(csv_dir, f'{code}.csv'), index=False)
 
     with open(os.path.join(schema_dir, 'sv.mcf'), 'w') as f:
