@@ -102,7 +102,8 @@ def process(input_dir, schema_dir, csv_dir):
                         'dcid':
                             'SDG_' + str(row['SeriesCode']),
                         'description':
-                            util.format_description(str(row['SeriesDescription']))
+                            util.format_description(
+                                str(row['SeriesDescription']))
                     }))
                 f_vertical.write('spec: {\n'
                                  '  pop_type: "SDG_' + str(row['SeriesCode']) +
@@ -150,7 +151,8 @@ def process(input_dir, schema_dir, csv_dir):
                 continue
 
             # Drop invalid values.
-            df['VALUE'] = df['VALUE'].apply(lambda x: x if util.is_float(x) else '')
+            df['VALUE'] = df['VALUE'].apply(lambda x: x
+                                            if util.is_float(x) else '')
             df = df[df['VALUE'] != '']
             if df.empty:
                 continue
@@ -165,8 +167,8 @@ def process(input_dir, schema_dir, csv_dir):
 
             # Special curation of names.
             df['VARIABLE_DESCRIPTION'] = df.apply(
-                lambda x: util.format_variable_description(x['VARIABLE_DESCRIPTION'],
-                                                      x['SERIES_DESCRIPTION']),
+                lambda x: util.format_variable_description(
+                    x['VARIABLE_DESCRIPTION'], x['SERIES_DESCRIPTION']),
                 axis=1)
             df['VARIABLE_CODE'] = df['VARIABLE_CODE'].apply(
                 lambda x: util.format_variable_code(x))
@@ -210,7 +212,7 @@ def process(input_dir, schema_dir, csv_dir):
                     else:
                         prop = 'sdg_' + enum[0].lower() + enum[1:]
                     val = 'SDG_' + enum + 'Enum_' + str(row[dimension])
-                    cprops+= f'\n{prop}: dcs:{val}'
+                    cprops += f'\n{prop}: dcs:{val}'
                 f.write(
                     util.SV_TEMPLATE.format_map({
                         'dcid': 'sdg/' + row['VARIABLE_CODE'],
