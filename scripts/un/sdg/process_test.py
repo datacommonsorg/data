@@ -63,7 +63,9 @@ class ProcessTest(unittest.TestCase):
     def test_process(self):
         with tempfile.TemporaryDirectory() as tmp_schema:
             with tempfile.TemporaryDirectory() as tmp_csv:
-                process.process('testdata/test_input', tmp_schema, tmp_csv)
+                process.process(
+                    os.path.join(module_dir_, 'testdata/test_input'),
+                    tmp_schema, tmp_csv)
                 assert_equal_dir(
                     self, tmp_schema,
                     os.path.join(module_dir_, 'testdata/test_schema'))
