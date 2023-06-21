@@ -1,34 +1,3 @@
-VARIABLE_CODE,GEOGRAPHY_CODE,TIME_PERIOD,VALUE,UNITS,UNITMULTIPLIER,MEASUREMENT_METHOD
-dcs:sdg/SP_PSR_OSATIS_SEC:LOCATION--U,dcs:country/BLR,2022,88,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:SEX--M,dcs:country/BLR,2022,89,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC,dcs:country/BLR,2022,89,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:SEX--F,dcs:country/BLR,2022,89,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:LOCATION--R,dcs:country/BLR,2022,91,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC,dcs:country/GMB,2022,90,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y0T24,dcs:country/PSE,2022,91,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:POPULATION_GROUP--POP_B,dcs:country/PSE,2022,91,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y_GE65,dcs:country/PSE,2022,94,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:LOCATION--R,dcs:country/PSE,2022,92,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:POPULATION_GROUP--POP_A,dcs:country/PSE,2022,90,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:SEX--M,dcs:country/PSE,2022,93,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y45T54,dcs:country/PSE,2022,87,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC,dcs:country/PSE,2022,91,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y35T44,dcs:country/PSE,2022,92,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:LOCATION--U,dcs:country/PSE,2022,91,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:SEX--F,dcs:country/PSE,2022,88,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y25T34,dcs:country/PSE,2022,93,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:SEX--F,dcs:country/ISR,2022,81,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC,dcs:country/ISR,2022,80,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:SEX--M,dcs:country/ISR,2022,79,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:POPULATION_GROUP--POP_A,dcs:country/ISR,2022,68,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y35T44,dcs:country/TUN,2022,60,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y45T54,dcs:country/TUN,2022,65,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y25T34,dcs:country/TUN,2022,76,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y55T64,dcs:country/TUN,2022,66,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:SEX--M,dcs:country/TUN,2022,63,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y0T24,dcs:country/TUN,2022,63,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:DISABILITY_STATUS--PD,dcs:country/TUN,2022,58,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:DISABILITY_STATUS--PWD,dcs:country/TUN,2022,64,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:SEX--F,dcs:country/TUN,2022,64,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC:AGE--Y_GE65,dcs:country/TUN,2022,63,dcs:SDG_PT,,dcs:SDG_C_G
-dcs:sdg/SP_PSR_OSATIS_SEC,dcs:country/TUN,2022,64,dcs:SDG_PT,,dcs:SDG_C_G
+version https://git-lfs.github.com/spec/v1
+oid sha256:c00eee1613c2121395313b7a4721a00ed23cec8fd1539b955507acaf41ec108d
+size 2880

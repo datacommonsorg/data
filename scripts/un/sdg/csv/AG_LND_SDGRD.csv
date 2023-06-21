@@ -1,9 +1,3 @@
-VARIABLE_CODE,GEOGRAPHY_CODE,TIME_PERIOD,VALUE,UNITS,UNITMULTIPLIER,MEASUREMENT_METHOD
-dcs:sdg/AG_LND_SDGRD,dcs:country/BHR,2019,95,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_SDGRD,dcs:country/BLR,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_SDGRD,dcs:country/DNK,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_SDGRD,dcs:country/ECU,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_SDGRD,dcs:country/HUN,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_SDGRD,dcs:country/JAM,2021,76,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_SDGRD,dcs:country/QAT,2021,100,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_SDGRD,dcs:country/VNM,2020,84,dcs:SDG_PT,,dcs:SDG_C_A_G
+version https://git-lfs.github.com/spec/v1
+oid sha256:5343f6bb3d79d5e9ca700b7cd4a3b1727f35ed4a8572501b2852076b0e3c9d7d
+size 660

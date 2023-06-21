@@ -1,25 +1,3 @@
-VARIABLE_CODE,GEOGRAPHY_CODE,TIME_PERIOD,VALUE,UNITS,UNITMULTIPLIER,MEASUREMENT_METHOD
-dcs:sdg/AG_LND_FOVH,dcs:country/BHR,2019,87.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/BOL,2015,14.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/BGR,2020,4.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/BLR,2021,62.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/CAN,2021,71.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/DNK,2021,100.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/ECU,2021,30.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/FRA,2020,87.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/GRC,2020,22.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/HUN,2021,88.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/JAM,2021,70.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/MWI,2020,52.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/NOR,2018,47.8,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/POL,2020,54.6,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/QAT,2021,100.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/SRB,2021,65.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/SVK,2021,62.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/VNM,2020,41.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/ESP,2020,7.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/SWE,2020,72.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/CHE,2021,64.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/UKR,2020,82.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/GBR,2020,80.0,dcs:SDG_PT,,dcs:SDG_C_A_G
-dcs:sdg/AG_LND_FOVH,dcs:country/UZB,2020,99.0,dcs:SDG_PT,,dcs:SDG_C_A_G
+version https://git-lfs.github.com/spec/v1
+oid sha256:ab449539e1205e259aa1ae2c5e00b64a30d0f0307442a8eb9799c91d68aeb05e
+size 1815
