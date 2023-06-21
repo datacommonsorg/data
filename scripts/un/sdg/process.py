@@ -29,7 +29,7 @@ Usage: python3 process.py
 import os
 import pandas as pd
 
-from sdg.util import *
+from util import *
 
 
 def get_geography(code, type):

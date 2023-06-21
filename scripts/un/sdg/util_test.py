@@ -16,7 +16,7 @@
 Usage: python3 -m unittest discover -v -s ../ -p "util_test.py"
 '''
 import unittest
-from sdg.util import *
+from .util import *
 
 
 class UtilTest(unittest.TestCase):
