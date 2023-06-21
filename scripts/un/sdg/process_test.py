@@ -24,7 +24,7 @@ import unittest
 module_dir_ = os.path.dirname(__file__)
 sys.path.append(os.path.join(module_dir_))
 from .process import *
-
+from .util import *
 
 def assert_equal_dir(self, result_dir, expected_dir):
     for root, _, files in os.walk(result_dir):
