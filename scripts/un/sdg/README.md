@@ -13,7 +13,7 @@ To process data and generate artifacts:
 ```
 python3 process.py
 ```
-This will create mcf and tmcf files in the `schema` folder and csv files in the `csv/` folder.
+This will create mcf and tmcf files in the `schema/` folder and csv files in the `csv/` folder.
 
 To run unit tests: 
 ```
