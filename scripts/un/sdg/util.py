@@ -134,14 +134,14 @@ def format_description(s):
     formatted = formatted.split(', by')[0]
     # Remove references indicated by 'million USD'.
     formatted = formatted.split(', million USD')[0]
-    # Remove extra spaces
+    # Remove extra spaces.
     formatted = formatted.replace(' , ', ', ').replace('  ', ' ').strip()
-    # Remove trailing commas
+    # Remove trailing commas.
     if formatted[-1] == ',':
         formatted = formatted[:-1]
-    # Replace 100,000 with 100K
+    # Replace 100,000 with 100K.
     formatted = formatted.replace('100,000', '100K')
-    # Make ascii
+    # Make ascii.
     return formatted.replace('Â',
                              '').replace('’', '\'').replace('₂', '2').replace(
                                  '\xa0', ' ').replace('−', '-')
@@ -196,7 +196,7 @@ def format_variable_description(variable, series):
 
 
 def format_variable_code(code):
-    '''Curates variable codes.
+    '''Curates variable codes with URL-safe encoding.
 
     Args:
       code: Input code.
@@ -205,8 +205,8 @@ def format_variable_code(code):
       Formatted code.
     '''
     parts = code.split('?')
-    return parts[0] + ':' + parts[1].replace('=', '--').replace(
-        '&', '+') if len(parts) > 1 else parts[0]
+    return parts[0] + '~' + parts[1].replace('=', '-').replace(
+        '&', '.') if len(parts) > 1 else parts[0]
 
 
 def format_title(s):

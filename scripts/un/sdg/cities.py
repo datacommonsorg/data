@@ -20,7 +20,7 @@ There are a few city codes that are still missing.
 These can be manually filled in and verified.
 **This script ideally shouldn't need to be run again.**
 
-Usage: python3 cities.py <API_KEY>
+Usage: python3 cities.py <DATACOMMONS_API_KEY>
 '''
 import csv
 import requests
@@ -39,7 +39,7 @@ def get_cities(json, api_key):
         API response.
     '''
     return requests.post(
-        'https://autopush.api.datacommons.org/v1/bulk/find/entities',
+        'https://api.datacommons.org/v1/bulk/find/entities',
         headers={
             'X-API-Key': api_key
         },

@@ -5,7 +5,7 @@ This import includes country-level data from the [UN SDG Global Database](https:
 
 To generate city dcids:
 ```
-python3 cities.py <API_KEY>
+python3 cities.py <DATACOMMONS_API_KEY>
 ```
 (Note: many of these cities will require manual curation, so this script likely should not be rerun.)
 
