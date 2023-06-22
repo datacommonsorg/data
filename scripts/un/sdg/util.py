@@ -21,6 +21,7 @@ import sys
 module_dir_ = os.path.dirname(__file__)
 sys.path.append(os.path.join(module_dir_))
 
+# SDMX indicator for 'total' value in dimension.
 TOTAL = '_T'
 
 SERIES_TEMPLATE = '''
@@ -70,13 +71,13 @@ name: "{name}"
 description: "SDG Unit: {dcid}"
 '''
 
-# Select dimensinos will be modeled differently.
+# Select dimensions will be modeled differently.
 SKIPPED_DIMENSIONS = {
     'Cities', 'Freq', 'Nature', 'Observation Status', 'Report Ordinal',
     'Reporting Type', 'UnitMultiplier', 'Units'
 }
 
-# Use existing properties when they exist.
+# Use existing properties.
 # TODO: Also map enums to existing nodes.
 MAPPED_DIMENSIONS = {
     'Age': 'age',
@@ -91,6 +92,7 @@ MAPPED_DIMENSIONS = {
     'SEX': 'gender'
 }
 
+# Shared dimensions across all input xlsx files.
 BASE_DIMENSIONS = {
     'SERIES_CODE', 'SERIES_DESCRIPTION', 'VARIABLE_CODE',
     'VARIABLE_DESCRIPTION', 'GEOGRAPHY_CODE', 'GEOGRAPHY_NAME',

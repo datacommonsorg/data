@@ -15,14 +15,14 @@
 
 Produces:
 * schema/ folder: 
-- measurement_method.mcf
-- schema.mcf (classes and enums)
-- sdg.textproto (vertical spec)
-- series.mcf (series mcf)
-- sv.mcf
-- unit.mcf
+  * measurement_method.mcf
+  * schema.mcf (classes and enums)
+  * sdg.textproto (vertical spec)
+  * series.mcf (series mcf)
+  * sv.mcf
+  * unit.mcf
 * csv/ folder: 
-- [CODE].csv
+  * [CODE].csv
 
 Usage: python3 process.py
 '''
@@ -91,6 +91,17 @@ def get_measurement_method(row):
 
 def process(input_dir, schema_dir, csv_dir):
     '''Generates mcf, csv/tmcf artifacts.
+
+    Produces:
+    * schema/ folder: 
+      * measurement_method.mcf
+      * schema.mcf (classes and enums)
+      * sdg.textproto (vertical spec)
+      * series.mcf (series mcf)
+      * sv.mcf
+      * unit.mcf
+    * csv/ folder: 
+      * [CODE].csv
     
     Args:
         input_dir: Path to input xlsx files.
