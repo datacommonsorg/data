@@ -1,0 +1,11 @@
+Node: E:chem_var->E1
+typeOf: dcs:ChemicalCompoundGeneticVariantAssociation
+dcid: C:chem_var->dcid
+name: C:chem_var->name
+isPharmacodynamicRelationship: C:chem_var->PD
+isPharmacokineticRelationship: C:chem_var->PK
+relationshipAssociationType: C:chem_var->Association
+relationshipEvidenceType: C:chem_var->Evidence	
+pubMedID: C:chem_var->PMIDs	
+variantID: C:chem_var->Entity1_dcid
+compoundID: C:chem_var->Entity2_dcid
