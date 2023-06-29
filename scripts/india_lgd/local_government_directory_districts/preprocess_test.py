@@ -78,10 +78,8 @@ class TestPreprocess(unittest.TestCase):
         self.assertEqual("warangal", row.iloc[0]["LGDDistrictName"])
         self.assertEqual("wikidataId/Q28169759", row.iloc[0]["DistrictDCID"])
 
-
         row = clean_df.loc[clean_df["WikiDataId"] == "Q8560886"]
         self.assertEqual("new delhi", row.iloc[0]["LGDDistrictName"])
-
 
         os.remove(clean_csv)
 
