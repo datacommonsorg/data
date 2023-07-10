@@ -40,7 +40,7 @@ df_full = df.pivot_table(index=['city', 'station', 'state', 'last_update'],
 desired_order = ['city', 'station', 'state', 'PM2.5', 'PM10', 'NO2', 'NH3', 'SO2', 'CO', 'O3', 'last_update']
 df_full = df_full.reindex(columns=desired_order)
 df_full['last_update'] = df_full['last_update'].apply(lambda x: datetime.strptime(x, "%d-%m-%Y %H:%M:%S").strftime("%Y-%m-%dT%H:%M:%S"))
-df_full = df_full.rename(columns={'PM2.5': 'PM25'})
+df_full = df_full.rename(columns={'PM2.5': 'PM25', 'last_update': 'Date'})
 
 dcid_json_path =  'dcid_output.json'
 with open(dcid_json_path, 'r') as site_dcid_json:
