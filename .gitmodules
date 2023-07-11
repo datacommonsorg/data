@@ -1,0 +1,3 @@
+[submodule "scripts/un/sdg/sdg-dataset"]
+	path = scripts/un/sdg/sdg-dataset
+	url = https://code.officialstatistics.org/undata2/data-commons/sdg-dataset.git
