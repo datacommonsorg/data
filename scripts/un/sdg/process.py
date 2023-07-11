@@ -111,17 +111,12 @@ def process(input_dir, schema_dir, csv_dir):
     with open(os.path.join(schema_dir, 'series.mcf'), 'w') as f_series:
         with open(os.path.join(schema_dir, 'sdg.textproto'), 'w') as f_vertical:
             df = pd.read_excel(os.path.join(input_dir, 'sdg_hierarchy.xlsx'))
+            descriptions = {}
             for _, row in df.iterrows():
                 if not util.is_valid(row['SeriesCode']):
                     continue
-                f_series.write(
-                    util.SERIES_TEMPLATE.format_map({
-                        'dcid':
-                            'SDG_' + str(row['SeriesCode']),
-                        'description':
-                            util.format_description(
-                                str(row['SeriesDescription']))
-                    }))
+                descriptions[str(row['SeriesCode'])] = util.format_description(
+                    row['SeriesDescription'])
                 f_vertical.write('spec: {\n'
                                  '  pop_type: "SDG_' + str(row['SeriesCode']) +
                                  '"\n'
@@ -129,6 +124,12 @@ def process(input_dir, schema_dir, csv_dir):
                                  '  vertical: "SDG_' +
                                  str(row['IndicatorRefCode']) + '"\n'
                                  '}\n')
+            for code in sorted(descriptions):
+                f_series.write(
+                    util.SERIES_TEMPLATE.format_map({
+                        'dcid': 'SDG_' + code,
+                        'description': descriptions[code]
+                    }))
 
     # Process dimensions.
     dimensions = {}
@@ -233,7 +234,7 @@ def process(input_dir, schema_dir, csv_dir):
                 f.write(
                     util.SV_TEMPLATE.format_map({
                         'dcid': 'sdg/' + row['VARIABLE_CODE'],
-                        'popType': 'SDG_' + row['VARIABLE_CODE'].split(':')[0],
+                        'popType': 'SDG_' + row['VARIABLE_CODE'].split('~')[0],
                         'name': '"' + row['VARIABLE_DESCRIPTION'] + '"',
                         'cprops': cprops,
                     }))
@@ -283,7 +284,7 @@ def process(input_dir, schema_dir, csv_dir):
             f.write(
                 util.MMETHOD_TEMPLATE.format_map({
                     'dcid': dcid,
-                    'description': description + ', '.join(pvs) + ']'
+                    'description': description + ' | '.join(pvs) + ']'
                 }))
 
     with open(os.path.join(schema_dir, 'unit.mcf'), 'w') as f:

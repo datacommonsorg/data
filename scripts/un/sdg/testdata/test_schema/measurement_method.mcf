@@ -2,4 +2,4 @@
 Node: dcid:SDG_E_A_G
 typeOf: dcs:SDG_MeasurementMethodEnum
 name: "SDG_E_A_G"
-description: "SDG Measurement Method: [Nature = Estimated data, Observation Status = Normal value, Reporting Type = Global]"
+description: "SDG Measurement Method: [Nature = Estimated data | Observation Status = Normal value | Reporting Type = Global]"

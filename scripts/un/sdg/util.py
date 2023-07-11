@@ -66,25 +66,13 @@ description: "{description}"
 '''
 UNIT_TEMPLATE = '''
 Node: dcid:{dcid}
-typeOf: dcs:UnitOfMeasure
+typeOf: dcs:SDG_UnitOfMeasure
 name: "{name}"
-description: "SDG Unit: {dcid}"
 '''
-
-# Select dimensions will be modeled differently.
-SKIPPED_DIMENSIONS = {
-    'Cities', 'Freq', 'Nature', 'Observation Status', 'Report Ordinal',
-    'Reporting Type', 'UnitMultiplier', 'Units'
-}
 
 # Use existing properties.
 # TODO: Also map enums to existing nodes.
 MAPPED_DIMENSIONS = {
-    'Age': 'age',
-    'Cause of death': 'causeOfDeath',
-    'Disability status': 'disabilityStatus',
-    'Education level': 'educationalAttainment',
-    'Sex': 'gender',
     'AGE': 'age',
     'CAUSE_OF_DEATH': 'causeOfDeath',
     'DISABILITY_STATUS': 'disabilityStatus',
@@ -104,19 +92,44 @@ BASE_DIMENSIONS = {
     'RELEASE_NAME'
 }
 
-# Create map of M49 -> ISO-alpha3 for countries.
-with open(os.path.join(module_dir_, 'm49.csv')) as f:
-    PLACES = {}
-    reader = csv.DictReader(f, delimiter='\t')
-    for row in reader:
-        if not row['ISO-alpha3 code']:  # Only countries for now.
-            continue
-        PLACES[int(row['M49 code'])] = row['ISO-alpha3 code']
 
-# Create map of name -> dcid for supported cities.
-with open(os.path.join(module_dir_, 'cities.csv')) as f:
-    reader = csv.DictReader(f)
-    CITIES = {row['name']: row['dcid'] for row in reader}
+def get_country_map(file):
+    ''' Creates map of M49 -> ISO-alpha3 for countries.
+
+  Args:
+    file: Path to input file.
+
+  Returns:
+    Country map.
+  '''
+    with open(file) as f:
+        places = {}
+        reader = csv.DictReader(f, delimiter='\t')
+        for row in reader:
+            if not row['ISO-alpha3 code']:  # Only countries for now.
+                continue
+            places[int(row['M49 code'])] = row['ISO-alpha3 code']
+    return places
+
+
+PLACES = get_country_map(os.path.join(module_dir_, 'm49.csv'))
+
+
+def get_city_map(file):
+    ''' Creates map of name -> dcid for supported cities.
+
+  Args:
+    file: Path to input file.
+
+  Returns:
+    City map.
+  '''
+    with open(file) as f:
+        reader = csv.DictReader(f)
+        return {row['name']: row['dcid'] for row in reader}
+
+
+CITIES = get_city_map(os.path.join(module_dir_, 'cities.csv'))
 
 
 def format_description(s):

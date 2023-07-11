@@ -76,4 +76,4 @@ if __name__ == '__main__':
     for _, row in df.iterrows():
         cities[row['CITY_NAME'] + ', ' + row['GEO_AREA_NAME'].replace(
             '_', ' ').title()] = row['CITY_CODE']
-    write_cities('cities.csv', cities, sys.argv[1])
+    write_cities('cities_test.csv', cities, sys.argv[1])
