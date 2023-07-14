@@ -21,9 +21,9 @@ __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 DISTRICTS_MAPPING_CSV = os.path.join(os.path.dirname(__file__),
                                      "LocalGovernmentDirectory_Districts.csv")
 
-# Some districts have completely different names over time or in some datasets
-# Even the closestDistrictLabel cant be used for mapping these districts
-# We will use this to map them, so we can resolve it, if there are no other options
+# Some districts have entirely different names over time or in some datasets.
+# Even the closestDistrictLabel can't be used for mapping these districts.
+# We will use this to map them to resolve it when all other options fail.
 #
 # This is used for mapping them. Format of the dictionary
 # is defined below
