@@ -8,3 +8,4 @@ Year,StateAbbr,StateDesc,LocationName,DataSource,Category,Measure,Data_Value_Uni
 2018,AL,Alabama,Clio,BRFSS,Health Outcomes,Stroke among adults aged >=18 years,%,Crude prevalence,5.2,,,4.8,5.7,1399,POINT (-85.6109105 31.70855394),0115640,HLTHOUT,STROKE,CrdPrv,Stroke
 2018,AL,Alabama,Cordova,BRFSS,Unhealthy Behaviors,Obesity among adults aged >=18 years,%,Crude prevalence,38.7,,,37.4,40.0,2095,POINT (-87.19257556 33.7613345),0117368,UNHBEH,OBESITY,CrdPrv,Obesity
 2018,AL,Alabama,Courtland,BRFSS,Unhealthy Behaviors,Obesity among adults aged >=18 years,%,Crude prevalence,38.0,,,36.6,39.5,609,POINT (-87.341977 34.67298382),0118040,UNHBEH,OBESITY,CrdPrv,Obesity
+2020,CO,Colorado,Saddle Ridge,BRFSS,Health Status,Fair or poor self-rated health status among adults aged >=18 years,%,Crude prevalence,13.4,,,10.4,17.1,56,POINT (-103.8022967 40.31307128),0866995,HLTHSTAT,GHLTH,CrdPrv,General Health

@@ -36,6 +36,16 @@ DATA_URLS = {
         "https://chronicdata.cdc.gov/api/views/cwsq-ngmh/rows.csv?accessType=DOWNLOAD",
     "zipcode_raw_data.csv":
         "https://chronicdata.cdc.gov/api/views/qnzd-25i4/rows.csv?accessType=DOWNLOAD"
+    # 2022 Release: Date for 2019,2020
+    "county_raw_data_2022.csv":
+        "https://chronicdata.cdc.gov/api/views/duw2-7jbt/rows.csv?accessType=DOWNLOAD",
+    "city_raw_data_2022.csv":
+        "https://chronicdata.cdc.gov/api/views/epbn-9bv3/rows.csv?accessType=DOWNLOAD",
+    "censustract_raw_data_2022.csv":
+        "https://chronicdata.cdc.gov/api/views/nw2y-v4gm/rows.csv?accessType=DOWNLOAD",
+    "zipcode_raw_data_2022.csv":
+        "https://chronicdata.cdc.gov/api/views/gd4x-jyhw/rows.csv?accessType=DOWNLOAD",
+
 }
 
 
