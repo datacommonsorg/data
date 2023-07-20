@@ -43,8 +43,3 @@ spec: {
   obs_props { mprop: "value" }
   vertical: "SDG_1.3.1"
 }
-spec: {
-  pop_type: "SDG_SI_COV_POOR"
-  obs_props { mprop: "value" }
-  vertical: "SDG_1.3.1"
-}
