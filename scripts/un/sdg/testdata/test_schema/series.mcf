@@ -23,10 +23,6 @@ Node: dcid:SDG_SI_COV_MATNL
 name: "Proportion of mothers with newborns receiving maternity cash benefit"
 typeOf: dcs:SDG_Series
 
-Node: dcid:SDG_SI_COV_POOR
-name: "Proportion of poor population receiving social assistance cash benefit"
-typeOf: dcs:SDG_Series
-
 Node: dcid:SDG_SI_POV_DAY1
 name: "Proportion of population below international poverty line"
 typeOf: dcs:SDG_Series

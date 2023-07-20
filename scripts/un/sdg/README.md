@@ -1,6 +1,6 @@
 # UN Stats Sustainable Development Goals
 
-This import includes country-level data from the [UN SDG Global Database](https://unstats.un.org/sdgs/dataportal). Data is read from the submodule `sdg-dataset` which is managed by UN Stats.
+This import includes country, city, and select region-level data from the [UN SDG Global Database](https://unstats.un.org/sdgs/dataportal). Data is read from the submodule `sdg-dataset` which is managed by UN Stats.
 
 
 To generate city dcids:

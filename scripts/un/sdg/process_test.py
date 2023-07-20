@@ -42,8 +42,9 @@ class ProcessTest(unittest.TestCase):
     def test_get_geography(self):
         self.assertEqual(process.get_geography(840, 'Country'),
                          'dcs:country/USA')
-        self.assertEqual(process.get_geography('NEWYORK', 'City'),
-                         'dcs:geoId/3651000')
+        self.assertEqual(process.get_geography('AF_MAZAR_E_SHARIF', 'City'),
+                         'dcs:wikidataId/Q130469')
+        self.assertEqual(process.get_geography(1, 'Region'), 'dcs:Earth')
 
     def test_get_unit(self):
         self.assertEqual(process.get_unit('CON_USD', 2021), '[CON_USD 2021]')
@@ -51,11 +52,7 @@ class ProcessTest(unittest.TestCase):
                          'dcs:SDG_CON_USD')
 
     def test_get_measurement_method(self):
-        d = {
-            'NATURE': ['E'],
-            'OBSERVATION_STATUS': ['A'],
-            'REPORTING_TYPE': ['G']
-        }
+        d = {'NATURE': ['E'], 'OBS_STATUS': ['A'], 'REPORTING_TYPE': ['G']}
         df = pd.DataFrame.from_dict(d)
         for _, row in df.iterrows():
             self.assertEqual(process.get_measurement_method(row), 'SDG_E_A_G')
