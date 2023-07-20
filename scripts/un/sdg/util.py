@@ -96,6 +96,7 @@ BASE_DIMENSIONS = {
 }
 
 # Supported Regions.
+# TODO: Add other regions.
 REGIONS = {
     1: 'Earth',
     2: 'africa',
