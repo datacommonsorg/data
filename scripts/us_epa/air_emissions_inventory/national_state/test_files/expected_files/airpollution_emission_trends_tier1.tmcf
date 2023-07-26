@@ -1,0 +1,8 @@
+Node: E:airpollution_emission_trends_tier1->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:airpollution_emission_trends_tier1->SV
+measurementMethod: C:airpollution_emission_trends_tier1->Measurement_Method
+observationAbout: C:airpollution_emission_trends_tier1->geo_Id
+observationDate: C:airpollution_emission_trends_tier1->year
+unit: Ton
+value: C:airpollution_emission_trends_tier1->observation

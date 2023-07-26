@@ -1,0 +1,64 @@
+
+Node: E:FEMA_NRI->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact
+observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
+observationDate: "2021-11"
+value: C:FEMA_NRI_Counties->RISK_SCORE
+unit: FemaNationalRiskScore
+
+Node: E:FEMA_NRI->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact
+observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
+observationDate: "2021-11"
+value: C:FEMA_NRI_Counties->EAL_SCORE
+unit: FemaNationalRiskScore
+
+Node: E:FEMA_NRI->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact
+observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
+observationDate: "2021-11"
+value: C:FEMA_NRI_Counties->EAL_VALT
+unit: dcid:USDollar
+
+Node: E:FEMA_NRI->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:FemaSocialVulnerability_NaturalHazardImpact
+observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
+observationDate: "2021-11"
+value: C:FEMA_NRI_Counties->SOVI_SCORE
+unit: FemaNationalRiskScore
+
+Node: E:FEMA_NRI->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:FemaCommunityResilience_NaturalHazardImpact
+observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
+observationDate: "2021-11"
+value: C:FEMA_NRI_Counties->RESL_SCORE
+unit: FemaNationalRiskScore
+
+Node: E:FEMA_NRI->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_AvalancheEvent
+observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
+observationDate: "2021-11"
+value: C:FEMA_NRI_Counties->AVLN_EALT
+unit: dcid:USDollar
+
+Node: E:FEMA_NRI->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Annual_ExpectedLoss_NaturalHazardImpact_AvalancheEvent
+observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
+observationDate: "2021-11"
+value: C:FEMA_NRI_Counties->AVLN_EALS
+unit: FemaNationalRiskScore
+
+Node: E:FEMA_NRI->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:FemaNaturalHazardRiskIndex_NaturalHazardImpact_AvalancheEvent
+observationAbout: C:FEMA_NRI_Counties->DCID_GeoID
+observationDate: "2021-11"
+value: C:FEMA_NRI_Counties->AVLN_RISKS
+unit: FemaNationalRiskScore

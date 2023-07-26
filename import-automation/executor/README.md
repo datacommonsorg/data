@@ -45,6 +45,12 @@ Commons knowledge graph using the importer.
      - `github_auth_username`
      - `github_auth_access_token`
 
+## Running locally
+
+```
+PYTHONPATH=$(pwd) python app/main.py
+
+``
 
 ## Local Executor
 

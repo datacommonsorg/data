@@ -1,0 +1,1059 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "5819856",
+        "NumPVSuccesses": "46558848",
+        "Existence_NumChecks": "40738992",
+        "NumNodeSuccesses": "5819856",
+        "Existence_NumDcCalls": "2"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "26",
+        "StatsCheck_3_Sigma": "40",
+        "StrSplit_EmptyToken_value": "58198560",
+        "Sanity_MissingOrEmpty_value": "58198560",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "2"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_Forecast->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_Forecast->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'ConsecutiveDryDays', property: 'value', node: 'E:WeatherVariability_Forecast->E10'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E10', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'HeavyPrecipitationIndex', property: 'value', node: 'E:WeatherVariability_Forecast->E9'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E9', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_Forecast->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_Forecast->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'ConsecutiveDryDays', property: 'value', node: 'E:WeatherVariability_Forecast->E10'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E10', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'HeavyPrecipitationIndex', property: 'value', node: 'E:WeatherVariability_Forecast->E9'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E9', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_Forecast->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyPrecipitation', property: 'value', node: 'E:WeatherVariability_Forecast->E2'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E2', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'ConsecutiveDryDays', property: 'value', node: 'E:WeatherVariability_Forecast->E10'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E10', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'HeavyPrecipitationIndex', property: 'value', node: 'E:WeatherVariability_Forecast->E9'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E9', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Forecast->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Forecast.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Forecast->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "grid_0.25deg/49.00000_-121.75000",
+    "statVarDcid": "ConsecutiveDryDays",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2033",
+        "values": [{
+          "value": 26.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "1860662"
+          }]
+        }]
+      }, {
+        "date": "2042",
+        "values": [{
+          "value": 23.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "2463032"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2008",
+        "values": [{
+          "value": 5.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "187412"
+          }]
+        }]
+      }, {
+        "date": "2009",
+        "values": [{
+          "value": 15.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "254342"
+          }]
+        }]
+      }],
+      "percentDifference": 200.0
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-121.75000",
+    "statVarDcid": "Skewness_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2077",
+        "values": [{
+          "value": 6.555913,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "4765424"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2020",
+        "values": [{
+          "value": 2.6737735,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "950414"
+          }]
+        }]
+      }, {
+        "date": "2021",
+        "values": [{
+          "value": 5.659053,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "1017344"
+          }]
+        }]
+      }],
+      "percentDifference": 111.65
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-121.75000",
+    "statVarDcid": "HeavyPrecipitationIndex",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2077",
+        "values": [{
+          "value": 23.282232,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "4792196"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2020",
+        "values": [{
+          "value": 9.805421,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "977186"
+          }]
+        }]
+      }, {
+        "date": "2021",
+        "values": [{
+          "value": 20.202085,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "1044116"
+          }]
+        }]
+      }],
+      "percentDifference": 106.03
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-121.75000",
+    "statVarDcid": "Kurtosis_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2077",
+        "values": [{
+          "value": 53.299465,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "4778810"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2020",
+        "values": [{
+          "value": 8.18805,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "963800"
+          }]
+        }]
+      }, {
+        "date": "2021",
+        "values": [{
+          "value": 41.282795,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "1030730"
+          }]
+        }]
+      }],
+      "percentDifference": 404.18
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-99.25000",
+    "statVarDcid": "Skewness_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 11.101668,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "816644"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 4.918322,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "749714"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 11.101668,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "816644"
+          }]
+        }]
+      }],
+      "percentDifference": 125.72
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-99.25000",
+    "statVarDcid": "Kurtosis_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 159.11847,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "830030"
+          }]
+        }]
+      }, {
+        "date": "2049",
+        "values": [{
+          "value": 105.012146,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "2904860"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 29.289564,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "763100"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 159.11847,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "830030"
+          }]
+        }]
+      }],
+      "percentDifference": 443.26
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-99.50000",
+    "statVarDcid": "Skewness_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 11.5223,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "816643"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 5.0766344,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "749713"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 11.5223,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "816643"
+          }]
+        }]
+      }],
+      "percentDifference": 126.97
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-99.50000",
+    "statVarDcid": "Kurtosis_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2018",
+        "values": [{
+          "value": 169.50063,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "830029"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2017",
+        "values": [{
+          "value": 31.674938,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "763099"
+          }]
+        }]
+      }, {
+        "date": "2018",
+        "values": [{
+          "value": 169.50063,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "830029"
+          }]
+        }]
+      }],
+      "percentDifference": 435.13
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-122.00000",
+    "statVarDcid": "ConsecutiveDryDays",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2033",
+        "values": [{
+          "value": 26.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "1860661"
+          }]
+        }]
+      }, {
+        "date": "2042",
+        "values": [{
+          "value": 23.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "2463031"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2008",
+        "values": [{
+          "value": 5.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "187411"
+          }]
+        }]
+      }, {
+        "date": "2009",
+        "values": [{
+          "value": 15.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "254341"
+          }]
+        }]
+      }],
+      "percentDifference": 200.0
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-122.00000",
+    "statVarDcid": "Skewness_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2077",
+        "values": [{
+          "value": 6.5167427,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "4765423"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2020",
+        "values": [{
+          "value": 2.6701741,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "950413"
+          }]
+        }]
+      }, {
+        "date": "2021",
+        "values": [{
+          "value": 5.5087323,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "1017343"
+          }]
+        }]
+      }],
+      "percentDifference": 106.31
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.25000_-95.25000",
+    "statVarDcid": "Kurtosis_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2041",
+        "values": [{
+          "value": 145.3672,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "2369324"
+          }]
+        }]
+      }, {
+        "date": "2088",
+        "values": [{
+          "value": 95.95637,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "5515034"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2040",
+        "values": [{
+          "value": 23.065428,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "2302394"
+          }]
+        }]
+      }, {
+        "date": "2041",
+        "values": [{
+          "value": 145.3672,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "2369324"
+          }]
+        }]
+      }],
+      "percentDifference": 530.24
+    }]
+  }, {
+    "placeDcid": "grid_0.25deg/49.00000_-122.75000",
+    "statVarDcid": "ConsecutiveDryDays",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2033",
+        "values": [{
+          "value": 22.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "1860658"
+          }]
+        }]
+      }, {
+        "date": "2041",
+        "values": [{
+          "value": 19.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "2396098"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2040",
+        "values": [{
+          "value": 3.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "2329168"
+          }]
+        }]
+      }, {
+        "date": "2041",
+        "values": [{
+          "value": 19.0,
+          "locations": [{
+            "file": "WeatherVariability_Forecast.csv",
+            "lineNumber": "2396098"
+          }]
+        }]
+      }],
+      "percentDifference": 533.33
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

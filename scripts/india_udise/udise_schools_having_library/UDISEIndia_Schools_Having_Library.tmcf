@@ -1,0 +1,11 @@
+Node: E:UDISESchoolHavingLibraryCount->E0
+typeOf: schema:Place
+udiseCode: C:UDISESchoolHavingLibraryCount->UDISECode
+
+Node: E:UDISESchoolHavingLibraryCount->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:UDISESchoolHavingLibraryCount->StatisticalVariable
+value: C:UDISESchoolHavingLibraryCount->Value
+observationDate: C:UDISESchoolHavingLibraryCount->Period
+observationPeriod: "P1Y"
+observationAbout: E:UDISESchoolHavingLibraryCount->E0

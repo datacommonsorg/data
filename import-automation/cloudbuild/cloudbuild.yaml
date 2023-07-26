@@ -1,6 +1,7 @@
 steps:
 # Create a Cloud Tasks task that passes information
-# about the commit to the executor.
+# about the commit to the GAE executor.
+# Reference: https://cloud.google.com/sdk/gcloud/reference/tasks/create-app-engine-task
 - name: 'gcr.io/cloud-builders/gcloud'
   args: [
     'tasks',
@@ -26,7 +27,9 @@ steps:
             "github_repo_name": "$_GITHUB_REPO_NAME",
             "github_repo_owner_username": "$_GITHUB_REPO_OWNER_USERNAME",
             "email_account": "$_EMAIL_ACCOUNT",
-            "email_token": "$_EMAIL_TOKEN"
+            "email_token": "$_EMAIL_TOKEN",
+            "gcs_project_id": "$_GCS_PROJECT",
+            "storage_prod_bucket_name": "$_STORAGE_PROD_BUKCET_NAME"
         }
     }'
 ]

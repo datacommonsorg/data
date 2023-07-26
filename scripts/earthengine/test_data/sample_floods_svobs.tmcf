@@ -1,0 +1,7 @@
+Node: E:SVObs->E0
+typeOf: C:SVObs->dcid:StatVarObservation
+dcid: C:SVObs->dcid
+observationDate: C:SVObs->observationDate
+affectedPlace: C:SVObs->affectedPlace
+area: C:SVObs->area
+observationDate: C:SVObs->observationDate

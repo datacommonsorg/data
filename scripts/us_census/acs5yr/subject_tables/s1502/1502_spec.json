@@ -1,0 +1,103 @@
+{
+    "populationType": {
+        "_DEFAULT": "schema:Person"
+    },
+    "measurement": {
+        "_DEFAULT": {
+            "measuredProperty": "count",
+            "statType": "measuredValue",
+            "educationalAttainment": "BachelorsDegreeOrHigher",
+            "age": "[25 - Years]"
+        }
+    },
+    "enumSpecializations": {},
+    "pvs": {
+        "statType": {
+            "Margin of Error": "marginOfError"
+        },
+        "age": {
+            "65 years and over": "[65 - Years]",
+            "40 to 64 years": "[40 64 Years]",
+            "25 to 39 years": "[25 39 Years]"
+        },
+        "gender": {
+            "Male": "Male",
+            "Female": "Female",
+            "Male MOE": "Male",
+            "Female MOE": "Female",
+            "Males": "Male",
+            "Females": "Female"
+        },
+        "bachelorsDegreeMajor": {
+            "Science and Engineering": "ScienceAndEngineeringMajor",
+            "Science and Engineering Related Fields": "ScienceAndEngineeringRelatedMajor",
+            "Business": "BusinessMajor",
+            "Education": "EducationMajor",
+            "Arts, Humanities and Others": "ArtsHumanitiesAndOtherMajor"
+        }
+    },
+    "universePVs": [
+        {
+            "populationType": "schema:Person",
+            "constraintProperties": [
+                "bachelorsDegreeMajor"
+            ],
+            "dependentPVs": {
+                "educationalAttainment": "BachelorsDegreeOrHigher"
+            }
+        }
+    ],
+    "denominators": {},
+    "skipping overwrite dcids for these cases": {
+        "Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Male": "Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Male",
+        "Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Female": "Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Female"
+    },
+    "overwrite_dcids": {
+        "Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher": "Count_Person_EducationalAttainmentBachelorsDegreeOrHigher",
+        "MarginOfError_Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher": "MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher",
+        "Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringMajor": "Count_Person_BachelorOfScienceAndEngineeringMajor",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringMajor": "MarginOfError_Count_Person_BachelorOfScienceAndEngineeringMajor",
+        "Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor": "Count_Person_BachelorOfScienceAndEngineeringRelatedMajor",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor": "MarginOfError_Count_Person_BachelorOfScienceAndEngineeringRelatedMajor",
+        "Count_Person_25OrMoreYears_BachelorOfBusinessMajor": "Count_Person_BachelorOfBusinessMajor",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfBusinessMajor": "MarginOfError_Count_Person_BachelorOfBusinessMajor",
+        "Count_Person_25OrMoreYears_BachelorOfEducationMajor": "Count_Person_BachelorOfEducationMajor",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfEducationMajor": "MarginOfError_Count_Person_BachelorOfEducationMajor",
+        "Count_Person_25OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor": "Count_Person_BachelorOfArtsHumanitiesAndOtherMajor",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor": "MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor",
+        "MarginOfError_Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Male": "MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Male",
+        "Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringMajor_Male": "Count_Person_BachelorOfScienceAndEngineeringMajor_Male",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringMajor_Male": "MarginOfError_Count_Person_BachelorOfScienceAndEngineeringMajor_Male",
+        "Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Male": "Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Male",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Male": "MarginOfError_Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Male",
+        "Count_Person_25OrMoreYears_BachelorOfBusinessMajor_Male": "Count_Person_BachelorOfBusinessMajor_Male",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfBusinessMajor_Male": "MarginOfError_Count_Person_BachelorOfBusinessMajor_Male",
+        "Count_Person_25OrMoreYears_BachelorOfEducationMajor_Male": "Count_Person_BachelorOfEducationMajor_Male",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfEducationMajor_Male": "MarginOfError_Count_Person_BachelorOfEducationMajor_Male",
+        "Count_Person_25OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Male": "Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Male",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Male": "MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Male",
+        "MarginOfError_Count_Person_25OrMoreYears_EducationalAttainmentBachelorsDegreeOrHigher_Female": "MarginOfError_Count_Person_EducationalAttainmentBachelorsDegreeOrHigher_Female",
+        "Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringMajor_Female": "Count_Person_BachelorOfScienceAndEngineeringMajor_Female",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringMajor_Female": "MarginOfError_Count_Person_BachelorOfScienceAndEngineeringMajor_Female",
+        "Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Female": "Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Female",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfScienceAndEngineeringRelatedMajor_Female": "MarginOfError_Count_Person_BachelorOfScienceAndEngineeringRelatedMajor_Female",
+        "Count_Person_25OrMoreYears_BachelorOfBusinessMajor_Female": "Count_Person_BachelorOfBusinessMajor_Female",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfBusinessMajor_Female": "MarginOfError_Count_Person_BachelorOfBusinessMajor_Female",
+        "Count_Person_25OrMoreYears_BachelorOfEducationMajor_Female": "Count_Person_BachelorOfEducationMajor_Female",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfEducationMajor_Female": "MarginOfError_Count_Person_BachelorOfEducationMajor_Female",
+        "Count_Person_25OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Female": "Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Female",
+        "MarginOfError_Count_Person_25OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Female": "MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Female"
+    },
+    "ignoreColumns": [
+        "id",
+        "Geographic Area Name",
+        "Percent",
+        "Percent MOE",
+        "Percent Male",
+        "Percent Male MOE",
+        "Percent Female",
+        "Percent Female MOE",
+        "Percent Males",
+        "Percent Females"
+    ]
+}
