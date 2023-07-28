@@ -1,0 +1,267 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "6178",
+        "NumPVSuccesses": "49424",
+        "Existence_NumChecks": "43246",
+        "NumNodeSuccesses": "6178",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StrSplit_EmptyToken_unit": "6178"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "ag-2023.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'unit', property: 'unit', node: 'E:USDA_AgricultureSurvey->E0'",
+    "counterKey": "StrSplit_EmptyToken_unit"
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true,
+    "observationAbout": false,
+    "allowNanSvobs": false
+  }
+}
