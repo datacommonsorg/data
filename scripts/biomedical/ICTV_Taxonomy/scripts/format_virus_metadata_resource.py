@@ -1,27 +1,3 @@
-# Copyright 2023 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-"""
-Author: Samantha Piekos
-Date: 03/22/2023
-Name: format_virus_metadata_resource
-Description: This cleans and formats the ICTV Virus Metadata Resource for 
-import into the knowledge graph as a csv+tmcf pair.
-
-@file_input	Virus Metadata Resource excel file
-@file_output	cleaned and formatted csv file
-"""
-
 # set up environment
 import pandas as pd
 import sys
@@ -30,49 +6,49 @@ import unidecode
 
 # declare universal variables
 DICT_COVERAGE = {
-'complete genome': 'GenomeCoverageCompleteGenome',\
-'complete coding genome': 'GenomeCoverageCodingGenome',\
-'no entry in genbank': 'GenomeCoverageNoEntryInGenBank',\
-'partial genome': 'GenomeCoveragePartialGenome'
+'complete genome': 'dcs:GenomeCoverageCompleteGenome',\
+'complete coding genome': 'dcs:GenomeCoverageCompleteCodingGenome',\
+'no entry in genbank': 'dcs:GenomeCoverageNoEntryInGenBank',\
+'partial genome': 'dcs:GenomeCoveragePartialGenome'
 }
 
 
 DICT_GC = {
-'dsDNA': 'VirusGenomeCompositionDoubleStrandedDNA',\
-'ssDNA': 'VirusGenomeCompositionSingleStrandedDNA',\
-'ssDNA(-)': 'VirusGenomeCompositionSingleStrandedDNANegative',\
-'ssDNA(+)': 'VirusGenomeCompositionSingleStrandedDNAPositive',\
-'ssDNA(+/-)': 'VirusGenomeCompositionSingleStrandedDNA',\
-'dsDNA-RT': 'VirusGenomeCompositionDoubleStrandedDNAReverseTranscription',\
-'ssRNA-RT': 'VirusGenomeCompositionSingleStrandedDNAReverseTranscription',\
-'dsRNA': 'VirusGenomeCompositionDoubleStrandedRNA',\
-'ssRNA': 'VirusGenomeCompositionSingleStrandedRNA',\
-'ssRNA(-)': 'VirusGenomeCompositionSingleStrandedRNANegative',\
-'ssRNA(+)': 'VirusGenomeCompositionSingleStrandedRNAPositive',\
-'ssRNA(+/-)': 'VirusGenomeCompositionSingleStrandedRNA'
+'dsDNA': 'dcs:VirusGenomeCompositionDoubleStrandedDNA',\
+'ssDNA': 'dcs:VirusGenomeCompositionSingleStrandedDNA',\
+'ssDNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedDNANegative',\
+'ssDNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedDNAPositive',\
+'ssDNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedDNA',\
+'dsDNA-RT': 'dcs:VirusGenomeCompositionDoubleStrandedDNAReverseTranscription',\
+'ssRNA-RT': 'dcs:VirusGenomeCompositionSingleStrandedRNAReverseTranscription',\
+'dsRNA': 'dcs:VirusGenomeCompositionDoubleStrandedRNA',\
+'ssRNA': 'dcs:VirusGenomeCompositionSingleStrandedRNA',\
+'ssRNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedRNANegative',\
+'ssRNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedRNAPositive',\
+'ssRNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedRNA'
 }
 
 
 DICT_HOST = {
-	'algae': 'VirusHostAlgae',\
-	'archaea': 'VirusHostArchaea',\
-	'bacteria': 'VirusHostBacteria',\
-	'fungi': 'VirusHostFungi',\
-	'invertebrates': 'VirusHostInvertebrates',\
-	'plants': 'VirusHostPlants',\
-	'protists': 'VirusHostProtists',\
-	'vertebrates': 'VirusHostVertebrates'
+	'algae': 'dcs:VirusHostAlgae',\
+	'archaea': 'dcs:VirusHostArchaea',\
+	'bacteria': 'dcs:VirusHostBacteria',\
+	'fungi': 'dcs:VirusHostFungi',\
+	'invertebrates': 'dcs:VirusHostInvertebrates',\
+	'plants': 'dcs:VirusHostPlants',\
+	'protists': 'dcs:VirusHostProtists',\
+	'vertebrates': 'dcs:VirusHostVertebrates'
 }
 
 
 DICT_SOURCE = {
-	'invertebrates': 'VirusSourceInvertebrates',\
-	'marine': 'VirusSourceMarine',\
-	'phytobiome': 'VirusSourcePhytobiome',\
-	'plants': 'VirusSourcePlants',\
-	'protists': 'VirusSourceProtists',\
-	'sewage': 'VirusSourceSewage',\
-	'soil': 'VirusSourceSoil'
+	'invertebrates': 'dcs:VirusSourceInvertebrates',\
+	'marine': 'dcs:VirusSourceMarine',\
+	'phytobiome': 'dcs:VirusSourcePhytobiome',\
+	'plants': 'dcs:VirusSourcePlants',\
+	'protists': 'dcs:VirusSourceProtists',\
+	'sewage': 'dcs:VirusSourceSewage',\
+	'soil': 'dcs:VirusSourceSoil'
 }
 
 
@@ -166,7 +142,7 @@ def format_list(s):
 def format_taxonomic_rank_properties(df, index, row):
 	for rank in LIST_TAXONOMIC_LEVELS:
 		if row[rank] == row[rank]:
-			enum = 'Virus' + rank.upper() + pascalcase(row[rank])
+			enum = 'dcs:Virus' + rank.upper()[0] + rank.lower()[1:] + pascalcase(row[rank])
 			df.loc[index, rank] = enum
 	return df
 
