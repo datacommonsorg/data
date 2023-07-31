@@ -1,27 +1,3 @@
-# Copyright 2023 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-"""
-Author: Samantha Piekos
-Date: 03/22/2023
-Name: format_virus_master_species_list
-Description: This cleans and formats the ICTV Master Species List for 
-import into the knowledge graph as a csv+tmcf pair.
-
-@file_input	Master Species List excel file
-@file_output	cleaned and formatted csv file
-"""
-
 # load environment
 import pandas as pd
 import sys
@@ -29,31 +5,31 @@ import sys
 
 # declare universal variables
 DICT_CHANGE_ENUM = {
-'abolished': 'VirusLastTaxonomicChangeAbolished',\
-'demoted' : 'VirusLastTaxonomicChangeDemoted',\
-'merged': 'VirusLastTaxonomicChangeMerged',\
-'moved': 'VirusLastTaxonomicChangeMoved',\
-'new': 'VirusLastTaxonomicChangeNew',\
-'promoted': 'VirusLastTaxonomicChangePromoted',\
-'removed as type species': 'VirusLastTaxonomicChangeRemoved',\
-'renamed': 'VirusLastTaxonomicChangeRenamed',\
-'split': 'VirusLastTaxonomicChangeSplit'
+'abolished': 'dcs:VirusLastTaxonomicChangeAbolished',\
+'demoted' : 'dcs:VirusLastTaxonomicChangeDemoted',\
+'merged': 'dcs:VirusLastTaxonomicChangeMerged',\
+'moved': 'dcs:VirusLastTaxonomicChangeMoved',\
+'new': 'dcs:VirusLastTaxonomicChangeNew',\
+'promoted': 'dcs:VirusLastTaxonomicChangePromoted',\
+'removed as type species': 'dcs:VirusLastTaxonomicChangeRemoved',\
+'renamed': 'dcs:VirusLastTaxonomicChangeRenamed',\
+'split': 'dcs:VirusLastTaxonomicChangeSplit'
 }
 
 
 DICT_GC = {
-'dsDNA': 'VirusGenomeCompositionDoubleStrandedDNA',\
-'ssDNA': 'VirusGenomeCompositionSingleStrandedDNA',\
-'ssDNA(-)': 'VirusGenomeCompositionSingleStrandedDNANegative',\
-'ssDNA(+)': 'VirusGenomeCompositionSingleStrandedDNAPositive',\
-'ssDNA(+/-)': 'VirusGenomeCompositionSingleStrandedDNA',\
-'dsDNA-RT': 'VirusGenomeCompositionDoubleStrandedDNAReverseTranscription',\
-'ssRNA-RT': 'VirusGenomeCompositionSingleStrandedDNAReverseTranscription',\
-'dsRNA': 'VirusGenomeCompositionDoubleStrandedRNA',\
-'ssRNA': 'VirusGenomeCompositionSingleStrandedRNA',\
-'ssRNA(-)': 'VirusGenomeCompositionSingleStrandedRNANegative',\
-'ssRNA(+)': 'VirusGenomeCompositionSingleStrandedRNAPositive',\
-'ssRNA(+/-)': 'VirusGenomeCompositionSingleStrandedRNA'
+'dsDNA': 'dcs:VirusGenomeCompositionDoubleStrandedDNA',\
+'ssDNA': 'dcs:VirusGenomeCompositionSingleStrandedDNA',\
+'ssDNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedDNANegative',\
+'ssDNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedDNAPositive',\
+'ssDNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedDNA',\
+'dsDNA-RT': 'dcs:VirusGenomeCompositionDoubleStrandedDNAReverseTranscription',\
+'ssRNA-RT': 'dcs:VirusGenomeCompositionSingleStrandedRNAReverseTranscription',\
+'dsRNA': 'dcs:VirusGenomeCompositionDoubleStrandedRNA',\
+'ssRNA': 'dcs:VirusGenomeCompositionSingleStrandedRNA',\
+'ssRNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedRNANegative',\
+'ssRNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedRNAPositive',\
+'ssRNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedRNA'
 }
 
 
@@ -117,7 +93,7 @@ def check_for_illegal_charc(s):
 def format_taxonomic_rank_properties(df, index, row):
 	for rank in LIST_TAXONOMIC_LEVELS:
 		if row[rank] == row[rank]:
-			enum = 'Virus' + rank.upper() + pascalcase(row[rank])
+			enum = 'dcs:Virus' + rank.upper()[0] + rank.lower()[1:] + pascalcase(row[rank])
 			df.loc[index, rank] = enum
 	return df
 
