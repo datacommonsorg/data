@@ -19,122 +19,167 @@ Description: converts a .csv file containing ATC (Anatomical Therapeutic Chemica
 @file_input: input .csv from ATC codes scraped from WHO website
 @file_output: formatted .csv with ATC codes with dcids, 5 atc levels
 """
+ADM_R_ENUM_DICT = {'"Inhal. powder"': "dcs:AdministrationRouteRespiratory",
+'Chewing gum': "dcs:AdministrationRouteOral",
+'Inhal': "dcs:AdministrationRouteRespiratory",
+'Inhal.aerosol': "dcs:AdministrationRouteRespiratory",
+'Inhal.powder': "dcs:AdministrationRouteRespiratory",
+'Inhal.solution': "dcs:AdministrationRouteRespiratory",
+'Instill.solution': "dcs:AdministrationRouteNasal",
+'N': "dcs:AdministrationRouteNasal",
+'O': "dcs:AdministrationRouteOral",
+'P': "dcs:AdministrationRouteParenteral",
+'R': "dcs:AdministrationRouteRectal",
+'SL': "dcs:AdministrationRouteSublingual,AdministrationRouteBuccal",
+'TD': "dcs:AdministrationRouteTransdermal",
+'V': "dcs:AdministrationRouteVaginal",
+'implant': "dcs:AdministrationRouteImplantation",
+'intravesical': "dcs:AdministrationRouteIntravesical",
+'lamella': "dcs:AdministrationRouteTopical",
+'ointment': "dcs:AdministrationRouteTopical",
+'oral aerosol': "dcs:AdministrationRouteOral",
+'s.c. implant': "dcs:AdministrationRouteImplantation",
+'urethral':"dcs:AdministrationRouteUrethral"}
+
+DOSAGE_FORM_ENUM_DICT = {'"Inhal. powder"': "dcs:DosageFormAerosolPowder",
+'Chewing gum': "dcs:DosageFormGumChewing",
+'Inhal.aerosol': "dcs:DosageFormAerosol",
+'Inhal.powder': "dcs:DosageFormAerosolPowder",
+'Inhal.solution': "dcs:DosageFormSolution",
+'Instill.solution': "dcs:DosageFormSolution",
+'lamella': "dcs:DosageFormLamella",
+'oral aerosol': "dcs:DosageFormAerosol",
+'s.c. implant': "dcs:DosageFormImplant"
+}
+
+UOM_ENUM_DICT = {'LSU': 'LipoproteinLipaseReleasingUnits',
+'MU': 'Units',
+'TU': 'Units',
+'U': 'Units',
+'g': 'Grams',
+'mcg': 'Micrograms',
+'mg': 'Milligrams',
+'ml': 'Milliliters',
+'mmol': 'Millimolar'
+}
 
 # import the required packages
 import pandas as pd
 import numpy as np
 import sys 
 
-LIST_ATC_COLS = ['atc_level1', 'atc_level2', 'atc_level3', 'atc_level4', 'atc_level5']
-
 #Disable false positive index chaining warnings
 pd.options.mode.chained_assignment = None
 
 def check_for_illegal_charc(s):
-    """Checks for illegal characters in a string and prints an error statement if any are present
-    Args:
-        s: target string that needs to be checked
-    
-    """
-    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
-    if any([x in s for x in list_illegal]):
-        print('Error! dcid contains illegal characters!', s)
-    
+	list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+	if any([x in s for x in list_illegal]):
+		print('Error! dcid contains illegal characters!', s)
+
+def isNaN(var):
+    return var != var
+
 def format_atc_name(df):
-    """Formats the ATC code names for each of the compounds
-    Args:
-        df: dataframe with atc names 
-    Returns:
-        df: dataframe with formatted atc names 
-    
-    """
-    df['atc_name'] = df['atc_name'].str.replace(r"[\"]", '') ## replaces all quotes with empty value
-    df['atc_name'] = df['atc_name'].str.lower() ## makes all names lowercase
-    return df
+	"""Formats the ATC code names for each of the compounds
+	Args:
+		df: dataframe with atc names 
+	Returns:
+		df: dataframe with formatted atc names 
+	
+	"""
+	df['atc_name'] = df['atc_name'].str.replace(r"[\"]", '', regex=True) ## replaces all quotes with empty value
+	df['atc_name'] = df['atc_name'].str.lower() ## makes all names lowercase
+	return df
 
 def format_atc_levels(df):
-    """Splits the ATC codes into 5 different levels based on characters and string length
-    Args:
-        df: dataframe with atc codes
-    Returns:
-        df: dataframe with atc codes split in 5 different levels
-    
-    """
-    for i in LIST_ATC_COLS:
-        df[i] = np.nan ## initiate empty columns for each of the atc levels
-    for index,row in df.iterrows():
-        val = str(df.loc[index, 'atc_code'])
-        if(len(val) == 1):
-            df.loc[index, 'atc_level1'] = val ## if length of atc code is 1, only one level exists
-        elif(len(val) == 3):
-            df.loc[index, 'atc_level1'] = val[0] ## if length of atc code is 2, two levels exist
-            df.loc[index, 'atc_level2'] = val[0:3]
-        elif(len(val) == 4):
-            df.loc[index, 'atc_level1'] = val[0] ## if length of atc code is 4, three levels exist
-            df.loc[index, 'atc_level2'] = val[0:3]
-            df.loc[index, 'atc_level3'] = val[0:4]
-        elif(len(val) == 5):
-            df.loc[index, 'atc_level1'] = val[0] ## if length of atc code is 5, four levels exist
-            df.loc[index, 'atc_level2'] = val[0:3]
-            df.loc[index, 'atc_level3'] = val[0:4]
-            df.loc[index, 'atc_level4'] = val[0:5]
-        else:
-            df.loc[index, 'atc_level1'] = val[0] ## if length of atc code is greater than 5, five levels exist
-            df.loc[index, 'atc_level2'] = val[0:3]
-            df.loc[index, 'atc_level3'] = val[0:4]
-            df.loc[index, 'atc_level4'] = val[0:5]
-            df.loc[index, 'atc_level5'] = val
+	"""Splits the ATC codes into 5 different levels based on characters and string length
+	Args:
+		df: dataframe with atc codes
+	Returns:
+		df: dataframe with atc codes split in 5 different levels
+	
+	"""
+	df['specialization'] = np.nan
+	for index,row in df.iterrows():
+		val = df.loc[index, 'atc_code']
+		val = str(val)
+		if(len(val) == 1):
+			df.loc[index, 'specialization'] = np.nan
+		elif(len(val) == 3):
+			df.loc[index, 'specialization'] = val[0]
+		elif(len(val) == 4):
+			df.loc[index, 'specialization'] = val[0:3]
+		elif(len(val) == 5):
+			df.loc[index, 'specialization'] = val[0:4]
+		else:
+			df.loc[index, 'specialization'] = val[0:5]
+	df['specialization'] = 'chem/' + df['specialization']
+	df.replace("chem/nan", np.nan, inplace=True)
+	return df
+
+def format_cols(df):
+	for index,row in df.iterrows():
+		if (df.loc[index, 'atc_code'] == 'B01AF03'):
+			df.loc[index, 'ddd'] = df.loc[index, 'uom']
+			df.loc[index, 'uom'] = df.loc[index, 'adm_r']
+			df.loc[index, 'adm_r'] = df.loc[index, 'note']
+			df.loc[index, 'note'] = np.nan
+		if(df.loc[index, 'uom'] == 'tablet'):
+			df.loc[index, 'uom'] = np.nan
+			df.loc[index,'ddd'] = np.nan
+			df.loc[index,'dosageForm'] = 'DosageFormTablet'
+		if(isNaN(df.loc[index, 'uom']) | isNaN(df.loc[index, 'ddd'])):
+			df.loc[index, 'ddd'] = np.nan
+			df.loc[index, 'uom'] = np.nan
+		if(df.loc[index, 'uom'] == 'MU'):
+			df.loc[index, 'ddd'] = 1000000 * df.loc[index, 'ddd']
+		if(df.loc[index, 'uom'] == 'MU'):
+			df.loc[index, 'ddd'] = 1000 * df.loc[index, 'ddd']    
+	return df
+
+def format_enums(df):
+	df["adm_r_enum"]=df['adm_r'].map(ADM_R_ENUM_DICT)
+	df['dosageForm']= df['adm_r'].map(DOSAGE_FORM_ENUM_DICT)
+	df['uom']= df['uom'].map(UOM_ENUM_DICT)
+	return df
+
+def format_quantity_node(df):
+    df['quantity_dcid'] = df['uom'].fillna('').astype(str) + df['ddd'].fillna('').astype(str)
+    df['quantity_name'] = df['uom'].fillna('').astype(str) + ' ' +  df['ddd'].fillna('').astype(str)
     return df
 
 def create_dcid(df):
-    """Generates the dcids for all atc codes
-    Args:
-        df: dataframe without dcids
-    Returns:
-        df: dataframe with dcids
-    
-    """
-    df['dcid'] = "chem/" + df['atc_code']
-    for i in LIST_ATC_COLS:
-        df[i] = "chem/" + df[i]
-    return df
+	df['dcid'] = df
 
-def format_cols(df):
-    """Formats string columns of the dataframe
-    Args:
-        df: dataframe with unformatted columns
-    Returns:
-        df: dataframe with formatted columns
-    
-    """
-    df.update('"' +
-              df[['atc_name', 'ddd', 'uom', 'adm_r', 'note']].astype(str) + '"')
-    df.replace("\"nan\"", np.nan, inplace=True)
-    return df
 
 def driver_function(df):
-    """Runs all the required functions for data processing in the right order
-    Args:
-        df: dataframe with unprocessed data
-    Returns:
-        df: dataframe with fully processed data
-    
-    """
-    df = format_atc_name(df)
-    df = format_atc_levels(df)
-    df = create_dcid(df)
-    df = format_cols(df)
-    df.apply(check_for_illegal_charc)
-    return df
+	"""Runs all the required functions for data processing in the right order
+	Args:
+		df: dataframe with unprocessed data
+	Returns:
+		df: dataframe with fully processed data
+	
+	"""
+	df = format_atc_name(df)
+	df = format_atc_levels(df)
+	df = format_cols(df)
+	df = format_enums(df)
+	df = format_quantity_node(df)
+	df['dcid'] = 'chem/' + df['atc_code']
+	df.update('"' +
+			  df[['atc_name', 'uom', 'adm_r', 'note', 'quantity_dcid', 'quantity_name']].astype(str) + '"')
+	df.replace("\"nan\"", np.nan, inplace=True)
+	df.apply(check_for_illegal_charc)
+	return df
 
 
 def main():
-    file_input = sys.argv[1]
-    file_output = sys.argv[2]
-    df = pd.read_csv(file_input)
-    df = driver_function(df)
-    df.to_csv(file_output, doublequote=False, escapechar='\\')
-    
+	file_input = sys.argv[1]
+	file_output = sys.argv[2]
+	df = pd.read_csv(file_input)
+	df = driver_function(df)
+	df.to_csv(file_output, doublequote=False, escapechar='\\')
+	
 
 if __name__ == '__main__':
-    main()
+	main()
