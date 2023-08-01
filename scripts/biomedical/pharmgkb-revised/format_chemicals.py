@@ -27,41 +27,41 @@ import numpy as np
 import re
 
 DRUG_TYPE_DICT = {
-    "Drug": "DrugTypeUnknown",
-    "Drug Class": "DrugTypeUnknown",
-    "Prodrug": "DrugTypeProdrug",
-    "Biological Intermediate": "DrugTypeBiologicalIntermediate",
-    "Metabolite": "DrugTypeMetabolite",
-    "Ion": "DrugTypeIon",
-    "Small Molecule": "DrugTypeSmallMolecule"
+    "Drug": "dcs:DrugTypeUnknown",
+    "Drug Class": "dcs:DrugTypeUnknown",
+    "Prodrug": "dcs:DrugTypeProdrug",
+    "Biological Intermediate": "dcs:DrugTypeBiologicalIntermediate",
+    "Metabolite": "dcs:DrugTypeMetabolite",
+    "Ion": "dcs:DrugTypeIon",
+    "Small Molecule": "dcs:DrugTypeSmallMolecule"
 }
 
 DOSAGE_GUIDELINE_SOURCE_DICT = {
-    "ACR": "DosageGuidelineSourceAmericanCollegeOfRheumatology",
-    "AusNZ": "DosageGuidelineSourceAustralasianAntifungalGuidelinesSteeringCommittee",
-    "CFF": "DosageGuidelineSourceCysticFibrosisFoundation",
-    "CPIC": "DosageGuidelineSourceClinicalPharmacogenomicsImplementationConsortium",
-    "CPNDS": "DosageGuidelineSourceCanadianPharmacogenomicsNetworkForDrugSafety",
-    "DPWG": "DosageGuidelineSourceDutchPharmacogeneticsWorkingGroup",
-    "RNPGx": "DosageGuidelineSourceFrenchNationalNetworkOfPharmacogenetics",
-    "SEFF/SEOM": "DosageGuidelineSourceSeffSeom"
+    "ACR": "dcs:DosageGuidelineSourceAmericanCollegeOfRheumatology",
+    "AusNZ": "dcs:DosageGuidelineSourceAustralasianAntifungalGuidelinesSteeringCommittee",
+    "CFF": "dcs:DosageGuidelineSourceCysticFibrosisFoundation",
+    "CPIC": "dcs:DosageGuidelineSourceClinicalPharmacogenomicsImplementationConsortium",
+    "CPNDS": "dcs:DosageGuidelineSourceCanadianPharmacogenomicsNetworkForDrugSafety",
+    "DPWG": "dcs:DosageGuidelineSourceDutchPharmacogeneticsWorkingGroup",
+    "RNPGx": "dcs:DosageGuidelineSourceFrenchNationalNetworkOfPharmacogenetics",
+    "SEFF/SEOM": "dcs:DosageGuidelineSourceSeffSeom"
 }
 
 FDA_PGX_LEVEL = {
-    "Testing Required": "PharmGkbPGxLevelTestingRequired",
-    "Testing Recommended": "PharmGkbPGxLevelTestingRecommended",
-    "Actionable PGx": "PharmGkbPGxLevelActionablePGx",
-    "Informative PGx": "PharmGkbPGxLevelInformativePGx"
+    "Testing Required": "dcs:PharmGkbPGxLevelTestingRequired",
+    "Testing Recommended": "dcs:PharmGkbPGxLevelTestingRecommended",
+    "Actionable PGx": "dcs:PharmGkbPGxLevelActionablePGx",
+    "Informative PGx": "dcs:PharmGkbPGxLevelInformativePGx"
 
 }
 
 CLINICAL_ANNOTATION_LEVEL = {
-    "1A": "PharmGkbClinicalLevelOneA",
-    "1B": "PharmGkbClinicalLevelOneB",
-    "2A": "PharmGkbClinicalLevelTwoA",
-    "2B": "PharmGkbClinicalLevelTwoB",
-    "3": "PharmGkbClinicalLevelThree",
-    "4": "PharmGkbClinicalLevelFour"
+    "1A": "dcs:PharmGkbClinicalLevelOneA",
+    "1B": "dcs:PharmGkbClinicalLevelOneB",
+    "2A": "dcs:PharmGkbClinicalLevelTwoA",
+    "2B": "dcs:PharmGkbClinicalLevelTwoB",
+    "3": "dcs:PharmGkbClinicalLevelThree",
+    "4": "dcs:PharmGkbClinicalLevelFour"
 }
 
 

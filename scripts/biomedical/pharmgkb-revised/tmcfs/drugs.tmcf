@@ -16,6 +16,7 @@ drugGenericName: C:chemicals->genericName
 drugHasRxAnnotation: C:chemicals->Has Rx Annotation
 drugLabelHasDosingInformation: C:chemicals->Label Has Dosing Info
 drugTradeName: C:chemicals->tradeName
+drugType: C:chemicals->Type
 genBankID: C:chemicals->GenBank
 fdaTopPGxLevel: C:drugs->Top FDA Label Testing Level
 hetID: C:chemicals->HET

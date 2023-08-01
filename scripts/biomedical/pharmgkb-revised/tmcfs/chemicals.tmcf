@@ -1,4 +1,4 @@
- Node: E:chemicals->E1
+Node: E:chemicals->E1
 typeOf: dcs:ChemicalCompound
 dcid: C:chemicals->dcid
 name: C:chemicals->Name
@@ -15,6 +15,7 @@ drugGenericName: C:chemicals->genericName
 drugHasRxAnnotation: C:chemicals->Has Rx Annotation
 drugLabelHasDosingInformation: C:chemicals->Label Has Dosing Info
 drugTradeName: C:chemicals->tradeName
+drugType: C:chemicals->Type
 fdaTopPGxLevel: C:drugs->Top FDA Label Testing Level
 hetID: C:chemicals->HET
 humanMetabolomeDatabaseID: C:chemicals->HMDB
