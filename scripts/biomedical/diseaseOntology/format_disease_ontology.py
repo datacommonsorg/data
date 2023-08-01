@@ -208,8 +208,8 @@ def create_dcid(df):
 	for col in col_names:
 		df[col] = "bio/" + df[col]
 		df[col] = df[col].replace(["bio/nan"],np.nan)
-	df['ICD10CM'] = "ICD10/" + df['ICD10CM'].astype(str)
-	df['ICD10CM'] = df['ICD10CM'].replace("ICD10/nan", np.nan)
+	df['ICD10CM'] = "dcid:ICD10/" + df['ICD10CM'].astype(str)
+	df['ICD10CM'] = df['ICD10CM'].replace("dcid:ICD10/nan", np.nan)
 	df.update('"' + df[['diseaseId']].astype(str) + '"')
 	return df
 
