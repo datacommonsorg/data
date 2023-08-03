@@ -102,11 +102,7 @@ def fetch_and_write(county_name, year, svs, out_dir):
     print('Writing', len(county_csv_rows), 'rows for county', county_name,
           'to file', out_file)
     with open(out_file, 'w', newline='') as out:
-        csv_writer = csv.DictWriter(out,
-                                    fieldnames=CSV_COLUMNS,
-                                    lineterminator='\n')
-        csv_writer.writeheader()
-        csv_writer.writerows(county_csv_rows)
+        write_csv(out, county_csv_rows)
 
 
 def get_survey_county_data(year, county, out_dir):
