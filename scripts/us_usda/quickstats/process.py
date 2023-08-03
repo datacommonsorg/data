@@ -11,7 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Import USDA Agriculture Survey data."""
+"""Import USDA Agriculture Survey data.
+
+To run this script, specify a USDA api key as follows:
+
+python3 process.py --usda_api_key=<KEY>
+
+You can request an API key here: https://quickstats.nass.usda.gov/api/
+
+If the key is not specified as above, it falls back to using a key specified
+in a GCS config file. However, that file is available to DC team members only.
+
+"""
 
 import json
 
@@ -245,7 +256,7 @@ def get_multiple_years():
     print('Start', start)
 
     svs = load_svs()
-    for year in range(2000, 2024):
+    for year in range(2000, datetime.now().year + 1):
         process_survey_data(year, svs, "output")
 
     end = datetime.datetime.now()
@@ -273,7 +284,7 @@ def get_usda_api_key():
 def main(_):
     load_usda_api_key()
     print('USDA API key', get_usda_api_key())
-    get_all_counties()
+    get_multiple_years()
 
 
 if __name__ == '__main__':
