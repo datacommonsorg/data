@@ -7,10 +7,11 @@ import multiprocessing
 from itertools import repeat
 import os
 import datetime
+from google.cloud import storage
+from absl import app
+from absl import flags
 
 API_BASE = 'https://quickstats.nass.usda.gov/api'
-
-API_KEY = '569256A0-9CF4-34F0-86F3-FC477003330A'
 
 CSV_COLUMNS = [
     'variableMeasured',
@@ -25,6 +26,18 @@ SKIPPED_VALUES = {'(D)', '(Z)'}
 SKIPPED_COUNTY_CODES = set([
     '998',  # "OTHER" county code
 ])
+
+_GCS_PROJECT_ID = "datcom-204919"
+_GCS_BUCKET = "datcom-csv"
+_GCS_FILE_PATH = "usda/agriculture_survey/config.json"
+
+_USDA_API_KEY = 'usda_api_key'
+
+_FLAGS = flags.FLAGS
+
+flags.DEFINE_string(_USDA_API_KEY,
+                    None,
+                    'USDA quickstats API key.')
 
 
 def process_survey_data(year, svs, out_dir):
@@ -104,7 +117,7 @@ def get_survey_county_data(year, county, out_dir):
     with open(response_file, 'r') as f:
       response = json.load(f)
   else:
-    params = {'key': API_KEY, 'source_desc': "SURVEY", 'year': year,
+    params = {'key': get_usda_api_key(), 'source_desc': "SURVEY", 'year': year,
               'county_name': county}
     response = get_data(params)
     with open(response_file, 'w') as f:
@@ -124,7 +137,7 @@ def get_data(params):
 
 
 def get_param_values(param):
-  params = {'key': API_KEY, 'param': param}
+  params = {'key': get_usda_api_key(), 'param': param}
   response = requests.get(f'{API_BASE}/get_param_values', params=params).json()
   return [] if param not in response else response[param]
 
@@ -223,5 +236,28 @@ def get_multiple_years():
   print('Duration', str(end - start))
 
 
+def get_cloud_config():
+  print('Getting cloud config.')
+  storage_client = storage.Client(_GCS_PROJECT_ID)
+  bucket = storage_client.bucket(_GCS_BUCKET)
+  blob = bucket.blob(_GCS_FILE_PATH)
+  return json.loads(blob.download_as_string(client=None))
+
+
+def load_usda_api_key():
+  if get_usda_api_key() is None:
+    _FLAGS.set_default(_USDA_API_KEY, get_cloud_config()[_USDA_API_KEY])
+
+
+def get_usda_api_key():
+  return _FLAGS.usda_api_key
+
+
+def main(_):
+  load_usda_api_key()
+  print('USDA API key', get_usda_api_key())
+  get_all_counties()
+
+
 if __name__ == '__main__':
-  get_multiple_years()
+  app.run(main)
