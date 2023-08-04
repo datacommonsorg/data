@@ -32,7 +32,7 @@ import csv
 import multiprocessing
 from itertools import repeat
 import os
-import datetime
+from datetime import datetime
 from google.cloud import storage
 from absl import app
 from absl import flags
