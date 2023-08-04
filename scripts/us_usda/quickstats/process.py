@@ -65,7 +65,7 @@ flags.DEFINE_string(_USDA_API_KEY, None, 'USDA quickstats API key.')
 
 
 def process_survey_data(year, svs, out_dir):
-    start = datetime.datetime.now()
+    start = datetime.now()
     print('Start', year, '=', start)
 
     os.makedirs(get_parts_dir(out_dir, year), exist_ok=True)
@@ -86,7 +86,7 @@ def process_survey_data(year, svs, out_dir):
 
     write_aggregate_csv(year, out_dir)
 
-    end = datetime.datetime.now()
+    end = datetime.now()
     print('End', year, '=', end)
     print('Duration', year, '=', str(end - start))
 
@@ -252,14 +252,14 @@ def get_all_counties():
 
 
 def get_multiple_years():
-    start = datetime.datetime.now()
+    start = datetime.now()
     print('Start', start)
 
     svs = load_svs()
     for year in range(2000, datetime.now().year + 1):
         process_survey_data(year, svs, "output")
 
-    end = datetime.datetime.now()
+    end = datetime.now()
     print('End', end)
     print('Duration', str(end - start))
 
