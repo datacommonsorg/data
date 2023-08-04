@@ -36,8 +36,8 @@ class LatlngReconServiceTest(unittest.TestCase):
         self.assertEqual(idmap_out['cascal_mtv'], [
             'zip/94041', 'ipcc_50/37.25_-122.25_USA', 'geoId/sch0626310',
             'geoId/sch0626280', 'geoId/0649670', 'geoId/0618',
-            'geoId/0608592830', 'geoId/06085509600', 'geoId/06085', 'geoId/06',
-            'country/USA'
+            'geoId/0608592830', 'geoId/060855096001', 'geoId/06085509600',
+            'geoId/06085', 'geoId/06', 'country/USA'
         ])
         self.assertEqual(idmap_out['besant_beach_chennai'], [
             'wikidataId/Q15116', 'wikidataId/Q1445', 'ipcc_50/12.75_80.25_IND',
