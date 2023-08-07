@@ -284,7 +284,8 @@ def get_usda_api_key():
 def main(_):
     load_usda_api_key()
     print('USDA API key', get_usda_api_key())
-    get_multiple_years()
+    # get_multiple_years()
+    get_all_counties()
 
 
 if __name__ == '__main__':
