@@ -50,8 +50,9 @@ class UtilTest(unittest.TestCase):
 
     def test_format_variable_code(self):
         self.assertEqual(
-            util.format_variable_code('AG_FOOD_WST?FOOD_WASTE_SECTOR=FWS_OOHC'),
-            'AG_FOOD_WST~FOOD_WASTE_SECTOR-FWS_OOHC')
+            util.format_variable_code(
+                'AG_FOOD_WST@FOOD_WASTE_SECTOR--FWS_OOHC'),
+            'AG_FOOD_WST.FOOD_WASTE_SECTOR--FWS_OOHC')
 
     def test_format_title(self):
         self.assertEqual(util.format_title('FOOD_WASTE_SECTOR'),

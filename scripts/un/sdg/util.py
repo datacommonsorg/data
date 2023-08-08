@@ -24,6 +24,9 @@ sys.path.append(os.path.join(module_dir_))
 # SDMX indicator for 'total' value in dimension.
 TOTAL = '_T'
 
+# Used to split the series code from constraint properties in stat var dcids.
+SV_CODE_SEPARATOR = '.'
+
 SERIES_TEMPLATE = '''
 Node: dcid:{dcid}
 name: "{description}"
@@ -76,20 +79,33 @@ MAPPED_DIMENSIONS = {
     'AGE': 'age',
     'CAUSE_OF_DEATH': 'causeOfDeath',
     'DISABILITY_STATUS': 'disabilityStatus',
-    'EDUCATION_LEVEL': 'educationalAttainment',
+    'EDUCATION_LEV': 'educationalAttainment',
     'SEX': 'gender'
 }
 
-# Shared dimensions across all input xlsx files.
+# Shared dimensions across all input csv files.
 BASE_DIMENSIONS = {
     'SERIES_CODE', 'SERIES_DESCRIPTION', 'VARIABLE_CODE',
-    'VARIABLE_DESCRIPTION', 'GEOGRAPHY_CODE', 'GEOGRAPHY_NAME',
-    'GEOGRAPHY_TYPE', 'GEO_AREA_CODE', 'GEO_AREA_NAME', 'CITIES',
-    'SAMPLING_STATIONS', 'TIME_PERIOD', 'TIME_DETAIL', 'TIME_COVERAGE', 'FREQ',
-    'VALUE', 'VALUE_TYPE', 'UPPER_BOUND', 'LOWER_BOUND', 'UNITS',
-    'UNITMULTIPLIER', 'BASE_PERIOD', 'NATURE', 'SOURCE', 'GEO_INFO_URL',
-    'FOOT_NOTE', 'REPORTING_TYPE', 'OBSERVATION_STATUS', 'RELEASE_STATUS',
-    'RELEASE_NAME'
+    'VARIABLE_DESCRIPTION', 'VARIABLE_ACTIVE_DIMS', 'GEOGRAPHY_CODE',
+    'GEOGRAPHY_NAME', 'GEOGRAPHY_TYPE', 'GEO_AREA_CODE', 'GEO_AREA_NAME',
+    'CITIES', 'SAMPLING_STATIONS', 'IS_LATEST_PERIOD', 'TIME_PERIOD',
+    'TIME_DETAIL', 'TIME_COVERAGE', 'FREQ', 'OBS_VALUE', 'VALUE_TYPE',
+    'UPPER_BOUND', 'LOWER_BOUND', 'UNIT_MEASURE', 'UNIT_MULT', 'BASE_PERIOD',
+    'NATURE', 'SOURCE', 'GEO_INFO_URL', 'FOOT_NOTE', 'REPORTING_TYPE',
+    'OBS_STATUS', 'RELEASE_STATUS', 'RELEASE_NAME'
+}
+
+# Supported Regions.
+# TODO: Add other regions.
+REGIONS = {
+    1: 'Earth',
+    2: 'africa',
+    5: 'southamerica',
+    9: 'oceania',
+    10: 'antarctica',
+    21: 'northamerica',
+    142: 'asia',
+    150: 'europe',
 }
 
 
@@ -219,9 +235,7 @@ def format_variable_code(code):
     Returns:
       Formatted code.
     '''
-    parts = code.split('?')
-    return parts[0] + '~' + parts[1].replace('=', '-').replace(
-        '&', '.') if len(parts) > 1 else parts[0]
+    return code.replace('@', SV_CODE_SEPARATOR).replace(' ', '')
 
 
 def format_title(s):

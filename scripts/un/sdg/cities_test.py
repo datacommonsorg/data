@@ -29,11 +29,11 @@ from un.sdg import cities
 module_dir_ = os.path.dirname(__file__)
 
 CITIES = {
-    'Mazar-e Sharif, Afghanistan': 'MAZAR_E_SHARIF',
+    'Mazār-e Sharīf, Afghanistan': 'AF_MAZAR_E_SHARIF',
 }
 RESPONSE = {
     'entities': [{
-        'description': 'Mazar-e Sharif, Afghanistan',
+        'description': 'Mazār-e Sharīf, Afghanistan',
         'dcids': ['wikidataId/Q130469']
     }]
 }
