@@ -8,7 +8,7 @@
             "scripts": ["process.py"],
             "import_inputs": [{
                 "template_mcf": "ag.tmcf",
-                "cleaned_csv": "output/ag-2023.csv"
+                "cleaned_csv": "output/consolidated.csv"
             }],
         "cron_schedule": "0 10 * * 2"
         }
