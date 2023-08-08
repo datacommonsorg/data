@@ -103,10 +103,14 @@ def get_response_file_path(out_dir, year, county):
     return f"{get_response_dir(out_dir, year)}/{county}.json"
 
 
+def get_year_csv_file_path(out_dir, year):
+  return f"{out_dir}/ag-{year}.csv"
+
+
 def write_aggregate_csv(year, out_dir):
     parts_dir = get_parts_dir(out_dir, year)
     part_files = os.listdir(parts_dir)
-    out_file = f"{out_dir}/ag-{year}.csv"
+    out_file = get_year_csv_file_path(out_dir, year)
 
     print('Writing aggregate CSV', out_file)
 
@@ -119,6 +123,21 @@ def write_aggregate_csv(year, out_dir):
             if part_file.endswith(".csv"):
                 with open(f"{parts_dir}/{part_file}", 'r') as part:
                     csv_writer.writerows(csv.DictReader(part))
+
+
+def write_consolidated_csv(years, out_dir):
+  out_file = f"{out_dir}/consolidated.csv"
+
+  print('Writing consolidated CSV', out_file)
+
+  with open(out_file, 'w', newline='') as out:
+    csv_writer = csv.DictWriter(out,
+                                fieldnames=CSV_COLUMNS,
+                                lineterminator='\n')
+    csv_writer.writeheader()
+    for year in years:
+      with open(get_year_csv_file_path(out_dir, year), 'r') as part:
+        csv_writer.writerows(csv.DictReader(part))
 
 
 def fetch_and_write(county_name, year, svs, out_dir):
@@ -255,9 +274,13 @@ def get_multiple_years():
     start = datetime.now()
     print('Start', start)
 
+    out_dir = "output"
     svs = load_svs()
-    for year in range(2000, datetime.now().year + 1):
-        process_survey_data(year, svs, "output")
+    years = range(2000, datetime.now().year + 1)
+    for year in years:
+        process_survey_data(year, svs, out_dir)
+
+    write_consolidated_csv(years, out_dir)
 
     end = datetime.now()
     print('End', end)
@@ -284,8 +307,7 @@ def get_usda_api_key():
 def main(_):
     load_usda_api_key()
     print('USDA API key', get_usda_api_key())
-    # get_multiple_years()
-    get_all_counties()
+    get_multiple_years()
 
 
 if __name__ == '__main__':
