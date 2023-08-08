@@ -104,7 +104,7 @@ def get_response_file_path(out_dir, year, county):
 
 
 def get_year_csv_file_path(out_dir, year):
-  return f"{out_dir}/ag-{year}.csv"
+    return f"{out_dir}/ag-{year}.csv"
 
 
 def write_aggregate_csv(year, out_dir):
@@ -126,18 +126,18 @@ def write_aggregate_csv(year, out_dir):
 
 
 def write_consolidated_csv(years, out_dir):
-  out_file = f"{out_dir}/consolidated.csv"
+    out_file = f"{out_dir}/consolidated.csv"
 
-  print('Writing consolidated CSV', out_file)
+    print('Writing consolidated CSV', out_file)
 
-  with open(out_file, 'w', newline='') as out:
-    csv_writer = csv.DictWriter(out,
-                                fieldnames=CSV_COLUMNS,
-                                lineterminator='\n')
-    csv_writer.writeheader()
-    for year in years:
-      with open(get_year_csv_file_path(out_dir, year), 'r') as part:
-        csv_writer.writerows(csv.DictReader(part))
+    with open(out_file, 'w', newline='') as out:
+        csv_writer = csv.DictWriter(out,
+                                    fieldnames=CSV_COLUMNS,
+                                    lineterminator='\n')
+        csv_writer.writeheader()
+        for year in years:
+            with open(get_year_csv_file_path(out_dir, year), 'r') as part:
+                csv_writer.writerows(csv.DictReader(part))
 
 
 def fetch_and_write(county_name, year, svs, out_dir):
