@@ -5,6 +5,12 @@ import os
 import json
 import multiprocessing
 import csv
+import urllib3
+from urllib3.util.ssl_ import create_urllib3_context
+
+ctx = create_urllib3_context()
+ctx.load_default_certs()
+ctx.options |= 0x4  # ssl.OP_LEGACY_SERVER_CONNECT
 
 DATASET_LIST_URL = 'https://datacatalogapi.worldbank.org/ddhxext/DatasetList'
 DATASET_VIEW_URL = 'https://datacatalogapi.worldbank.org/ddhxext/DatasetView'
@@ -58,10 +64,21 @@ def download_datasets():
 def download(url):
     file_name = url.split('/')[-1]
     file_path = f"{DOWNLOADS_DIR}/{file_name}"
+    if os.path.exists(file_path):
+        logging.info('Already downloaded %s to file %s', url, file_path)
+        return
+
     logging.info('Downloading %s to file %s', url, file_path)
-    response = requests.get(url)
-    with open(file_path, 'wb') as f:
-        f.write(response.content)
+    try:
+        # response = requests.get(url)
+        # Using urllib3 for downloading content to avoid SSL issue.
+        # See: https://github.com/urllib3/urllib3/issues/2653#issuecomment-1165418616
+        with urllib3.PoolManager(ssl_context=ctx) as http:
+            response = http.request("GET", url)
+        with open(file_path, 'wb') as f:
+            f.write(response.data)
+    except Exception as e:
+        logging.error("Error downloading %s", url, exc_info=e)
 
 
 def fetch_and_write_datasets_csv():
@@ -188,8 +205,8 @@ def load_json_file(json_file):
 
 
 def main(_):
-    fetch_and_write_datasets_csv()
-    # download_datasets()
+    # fetch_and_write_datasets_csv()
+    download_datasets()
 
 
 if __name__ == '__main__':
