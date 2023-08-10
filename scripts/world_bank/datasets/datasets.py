@@ -205,8 +205,8 @@ def load_json_file(json_file):
 
 
 def main(_):
-    # fetch_and_write_datasets_csv()
-    download_datasets()
+    fetch_and_write_datasets_csv()
+    # download_datasets()
 
 
 if __name__ == '__main__':
