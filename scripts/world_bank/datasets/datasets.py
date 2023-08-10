@@ -11,6 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Populates a list of downloadable world bank datasets.
+
+It can also optionally download these datasets.
+
+To run this script:
+
+python3 datasets.py
+
+Be default, the script will only produce a CSV with the list of datasets.
+Once the CSV is created, to download the datasets, the download_datasets method will need to be called explicitly.
+
+"""
 
 import requests
 from absl import app
