@@ -14,9 +14,11 @@ RESPONSE_DIR = f"{OUTPUT_DIR}/response"
 DATASET_LISTS_RESPONSE_DIR = f"{RESPONSE_DIR}/lists"
 DATASET_VIEWS_RESPONSE_DIR = f"{RESPONSE_DIR}/views"
 DATASETS_CSV_FILE_PATH = f"{OUTPUT_DIR}/wb-datasets.csv"
+DOWNLOADS_DIR = f"{OUTPUT_DIR}/downloads"
 
 os.makedirs(DATASET_LISTS_RESPONSE_DIR, exist_ok=True)
 os.makedirs(DATASET_VIEWS_RESPONSE_DIR, exist_ok=True)
+os.makedirs(DOWNLOADS_DIR, exist_ok=True)
 
 POOL_SIZE = max(2, multiprocessing.cpu_count() - 1)
 
@@ -36,7 +38,33 @@ DATASETS_CSV_COLUMNS = [
 ]
 
 
-def fetch_and_write():
+def download_datasets():
+    '''Downloads dataset files. This is a very expensive operation so run it with care. It assumes that the datasets CSV is already available.'''
+
+    with open(DATASETS_CSV_FILE_PATH, 'r') as f:
+        csv_rows = list(csv.DictReader(f))
+        download_urls = []
+        for csv_row in csv_rows:
+            download_url = csv_row.get(DATASET_DOWNLOAD_URL_COLUMN_NAME)
+            if download_url:
+                download_urls.append(download_url)
+
+        with multiprocessing.Pool(POOL_SIZE) as pool:
+            pool.starmap(download, zip(download_urls))
+
+        logging.info('# files downloaded: %s', len(download_urls))
+
+
+def download(url):
+    file_name = url.split('/')[-1]
+    file_path = f"{DOWNLOADS_DIR}/{file_name}"
+    logging.info('Downloading %s to file %s', url, file_path)
+    response = requests.get(url)
+    with open(file_path, 'wb') as f:
+        f.write(response.content)
+
+
+def fetch_and_write_datasets_csv():
     fetch_dataset_lists()
     fetch_dataset_views()
     write_datasets_csv()
@@ -160,7 +188,8 @@ def load_json_file(json_file):
 
 
 def main(_):
-    fetch_and_write()
+    fetch_and_write_datasets_csv()
+    # download_datasets()
 
 
 if __name__ == '__main__':
