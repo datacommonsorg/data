@@ -5,6 +5,7 @@ import os
 import json
 import multiprocessing
 import csv
+import re
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
 
@@ -62,7 +63,7 @@ def download_datasets():
 
 
 def download(url):
-    file_name = url.split('/')[-1]
+    file_name = re.sub(r'[^a-zA-Z0-9.\-_]', '', url.split('/')[-1])
     file_path = f"{DOWNLOADS_DIR}/{file_name}"
     if os.path.exists(file_path):
         logging.info('Already downloaded %s to file %s', url, file_path)
