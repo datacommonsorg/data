@@ -11,17 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Populates a list of downloadable world bank datasets.
+"""Produces a list of downloadable world bank datasets and downloads them.
 
-It can also optionally download these datasets.
-
-To run this script:
+To produce the list of downloadable datasets, run:
 
 python3 datasets.py
 
-Be default, the script will only produce a CSV with the list of datasets.
-Once the CSV is created, to download the datasets, the download_datasets method will need to be called explicitly.
+The list will be populated in "output/wb-datasets.csv".
 
+To download datasets, run:
+
+python3 datasets.py --download_datasets
+
+The datasets will be downloaded in the "output/downloads" folder.
+The CSV needs to be created before you can download the datasets.
 """
 
 import requests
@@ -34,6 +37,11 @@ import csv
 import re
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
+from absl import flags
+
+FLAGS = flags.FLAGS
+
+flags.DEFINE_boolean('download_datasets', False, 'Downloads the datasets.')
 
 ctx = create_urllib3_context()
 ctx.load_default_certs()
@@ -232,8 +240,10 @@ def load_json_file(json_file):
 
 
 def main(_):
-    fetch_and_write_datasets_csv()
-    # download_datasets()
+    if FLAGS.download_datasets:
+        download_datasets()
+    else:
+        fetch_and_write_datasets_csv()
 
 
 if __name__ == '__main__':
