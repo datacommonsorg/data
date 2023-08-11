@@ -11,20 +11,29 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Produces a list of downloadable world bank datasets and downloads them.
+"""Processes WB datasets.
 
-To produce the list of downloadable datasets, run:
+Supports the following tasks:
 
-python3 datasets.py
+============================
 
-The list will be populated in "output/wb-datasets.csv".
+fetch_datasets: Fetches WB dataset lists and resources and writes them to 'output/wb-datasets.csv'
 
-To download datasets, run:
+Run: python3 datasets.py mode=fetch_datasets
 
-python3 datasets.py --download_datasets
+============================
 
-The datasets will be downloaded in the "output/downloads" folder.
-The CSV needs to be created before you can download the datasets.
+download_datasets: Downloads datasets listed in 'output/wb-datasets.csv' to the  'output/downloads' folder.
+
+Run: python3 datasets.py mode=download_datasets
+
+============================
+
+write_wb_codes: Extracts World Bank indicator codes (and related information) from files downloaded in the  'output/downloads' folder to 'output/wb-codes.csv'.
+
+It only operates on files that are named '*_CSV.zip'.
+
+Run: python3 datasets.py mode=write_wb_codes
 """
 
 import requests
@@ -38,10 +47,22 @@ import re
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
 from absl import flags
+import zipfile
+import codecs
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean('download_datasets', False, 'Downloads the datasets.')
+
+class Mode:
+    FETCH_DATASETS = 'fetch_datasets'
+    DOWNLOAD_DATASETS = 'download_datasets'
+    WRITE_WB_CODES = 'write_wb_codes'
+
+
+flags.DEFINE_string(
+    'mode', Mode.WRITE_WB_CODES,
+    f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}"
+)
 
 ctx = create_urllib3_context()
 ctx.load_default_certs()
@@ -239,11 +260,110 @@ def load_json_file(json_file):
         return json.load(f)
 
 
+DATA_FILE_SUFFIX = 'Data.csv'
+SERIES_FILE_SUFFIX = 'Series.csv'
+CSV_ZIP_FILE_SUFFIX = '_CSV.zip'
+SERIES_CODE_KEY = 'seriescode'
+INDICATOR_NAME_KEY = 'indicatorname'
+SHORT_DEFINITION_KEY = 'shortdefinition'
+TOPIC_KEY = 'topic'
+CODES_FILE_PATH = f"{OUTPUT_DIR}/wb-codes.csv"
+CODES_CSV_COLUMNS = [
+    SERIES_CODE_KEY, INDICATOR_NAME_KEY, SHORT_DEFINITION_KEY, TOPIC_KEY
+]
+
+
+def write_wb_codes():
+    csv_rows = get_all_codes().values()
+    with open(CODES_FILE_PATH, 'w', newline='') as out:
+        csv_writer = csv.DictWriter(out,
+                                    fieldnames=CODES_CSV_COLUMNS,
+                                    lineterminator='\n')
+        csv_writer.writeheader()
+        csv_writer.writerows(csv_rows)
+
+
+def get_all_codes():
+    all_codes = {}
+    for file_name in os.listdir(DOWNLOADS_DIR):
+        if file_name.endswith(CSV_ZIP_FILE_SUFFIX):
+            zip_file = f"{DOWNLOADS_DIR}/{file_name}"
+            codes = get_codes_from_zip(zip_file)
+            if codes:
+                all_codes.update(codes)
+    logging.info('# total codes: %s', len(all_codes))
+    return all_codes
+
+
+def get_codes_from_zip(zip_file):
+    with zipfile.ZipFile(zip_file, 'r') as zip:
+        series_file = get_series_file_name(zip)
+        if series_file is None:
+            logging.warning('No series file found in ZIP file: %s', zip_file)
+        else:
+            with zip.open(series_file, 'r') as csv_file:
+                series_rows = sanitize_csv_rows(
+                    list(csv.DictReader(codecs.iterdecode(csv_file, 'utf-8'))))
+                num_codes = len(series_rows)
+                logging.info('# code(s) in %s: %s', zip_file, num_codes)
+                if num_codes == 0:
+                    return {}
+
+                if series_rows[0].get(SERIES_CODE_KEY) is None:
+                    logging.error('No series code found in %s, sample row: %s',
+                                  zip_file, series_rows[0])
+                    return {}
+
+                codes = {}
+                for series_row in series_rows:
+                    code = series_row.get(SERIES_CODE_KEY)
+                    codes[code] = {
+                        SERIES_CODE_KEY:
+                            code,
+                        INDICATOR_NAME_KEY:
+                            series_row.get(INDICATOR_NAME_KEY),
+                        SHORT_DEFINITION_KEY:
+                            series_row.get(SHORT_DEFINITION_KEY),
+                        TOPIC_KEY:
+                            series_row.get(TOPIC_KEY)
+                    }
+                return codes
+        return {}
+
+
+def sanitize_csv_rows(csv_rows):
+    sanitized_rows = []
+    for csv_row in csv_rows:
+        sanitized_rows.append(
+            dict((sanitize_csv_key(key), value)
+                 for (key, value) in csv_row.items()))
+    return sanitized_rows
+
+
+def sanitize_csv_key(key):
+    return re.sub(r'[^a-zA-Z0-9]', '', key).lower()
+
+
+def get_series_file_name(zip):
+    for file_name in zip.namelist():
+        if file_name.endswith(DATA_FILE_SUFFIX):
+            series_file_name = file_name.replace(DATA_FILE_SUFFIX,
+                                                 SERIES_FILE_SUFFIX)
+            if series_file_name in zip.namelist():
+                return series_file_name
+    return None
+
+
 def main(_):
-    if FLAGS.download_datasets:
-        download_datasets()
-    else:
-        fetch_and_write_datasets_csv()
+    match FLAGS.mode:
+        case Mode.FETCH_DATASETS:
+            download_datasets()
+        case Mode.DOWNLOAD_DATASETS:
+            fetch_and_write_datasets_csv()
+        case Mode.WRITE_WB_CODES:
+            write_wb_codes()
+        case _:
+            logging.error('No mode specified.')
 
 
 if __name__ == '__main__':
