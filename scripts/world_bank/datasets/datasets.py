@@ -264,12 +264,16 @@ DATA_FILE_SUFFIX = 'Data.csv'
 SERIES_FILE_SUFFIX = 'Series.csv'
 CSV_ZIP_FILE_SUFFIX = '_CSV.zip'
 SERIES_CODE_KEY = 'seriescode'
+NUM_DATASETS_KEY = 'numdatasets'
 INDICATOR_NAME_KEY = 'indicatorname'
-SHORT_DEFINITION_KEY = 'shortdefinition'
 TOPIC_KEY = 'topic'
+UNIT_OF_MEASURE_KEY = 'unitofmeasure'
+SHORT_DEFINITION_KEY = 'shortdefinition'
+LONG_DEFINITION_KEY = 'longdefinition'
 CODES_FILE_PATH = f"{OUTPUT_DIR}/wb-codes.csv"
 CODES_CSV_COLUMNS = [
-    SERIES_CODE_KEY, INDICATOR_NAME_KEY, SHORT_DEFINITION_KEY, TOPIC_KEY
+    SERIES_CODE_KEY, INDICATOR_NAME_KEY, NUM_DATASETS_KEY, TOPIC_KEY,
+    UNIT_OF_MEASURE_KEY, SHORT_DEFINITION_KEY, LONG_DEFINITION_KEY
 ]
 
 
@@ -290,7 +294,12 @@ def get_all_codes():
             zip_file = f"{DOWNLOADS_DIR}/{file_name}"
             codes = get_codes_from_zip(zip_file)
             if codes:
-                all_codes.update(codes)
+                for key, value in codes.items():
+                    if key in all_codes:
+                        all_codes[key][NUM_DATASETS_KEY] = all_codes[key][
+                            NUM_DATASETS_KEY] + 1
+                    else:
+                        all_codes[key] = value
     logging.info('# total codes: %s', len(all_codes))
     return all_codes
 
@@ -322,10 +331,16 @@ def get_codes_from_zip(zip_file):
                             code,
                         INDICATOR_NAME_KEY:
                             series_row.get(INDICATOR_NAME_KEY),
+                        NUM_DATASETS_KEY:
+                            1,
+                        TOPIC_KEY:
+                            series_row.get(TOPIC_KEY),
+                        UNIT_OF_MEASURE_KEY:
+                            series_row.get(UNIT_OF_MEASURE_KEY),
                         SHORT_DEFINITION_KEY:
                             series_row.get(SHORT_DEFINITION_KEY),
-                        TOPIC_KEY:
-                            series_row.get(TOPIC_KEY)
+                        LONG_DEFINITION_KEY:
+                            series_row.get(LONG_DEFINITION_KEY),
                     }
                 return codes
         return {}
