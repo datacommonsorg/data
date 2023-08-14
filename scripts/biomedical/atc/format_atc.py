@@ -148,9 +148,16 @@ def format_quantity_node(df):
     df['quantity_name'] = df['uom'].fillna('').astype(str) + ' ' +  df['ddd'].fillna('').astype(str)
     return df
 
-def create_dcid(df):
-	df['dcid'] = df
+def check_for_illegal_charc(s):
+	list_illegal = ["'", "#", "–", "*" ">", "<", "@", "]", "[", "|", ":", ";", " "]
+	if any([x in s for x in list_illegal]):
+		print('Error! dcid contains illegal characters!', s)
 
+def check_for_dcid(row):
+	check_for_illegal_charc(str(row['uom']))
+	check_for_illegal_charc(str(row['quantity_dcid']))
+	check_for_illegal_charc(str(row['dcid']))
+	return row
 
 def driver_function(df):
 	"""Runs all the required functions for data processing in the right order
@@ -169,7 +176,7 @@ def driver_function(df):
 	df.update('"' +
 			  df[['atc_name', 'uom', 'adm_r', 'note', 'quantity_dcid', 'quantity_name']].astype(str) + '"')
 	df.replace("\"nan\"", np.nan, inplace=True)
-	df.apply(check_for_illegal_charc)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df
 
 
