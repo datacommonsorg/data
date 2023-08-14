@@ -183,6 +183,11 @@ def format_year(df, df_chembl):
 	df1.replace("\"nan\"", np.nan, inplace=True)
 	return df1
 
+def check_for_dcid(row):
+	check_for_illegal_charc(str(row['dcid']))
+	check_for_illegal_charc(str(row['SpecializationOf']))
+	return row
+
 def driver_function(df, df_chembl):
 	df = remove_null_entries(df)
 	df = format_stem_definitions(df)
@@ -192,7 +197,7 @@ def driver_function(df, df_chembl):
 	df = format_dcid(df)
 	df_chembl = format_chembl(df_chembl)
 	df_final = format_year(df, df_chembl)
-	df_final.apply(check_for_illegal_charc)
+	df_final = df_final.apply(lambda x: check_for_dcid(x),axis=1)
 	return df_final
 
 def main():
