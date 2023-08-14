@@ -303,14 +303,15 @@ INDICATOR_CODE_KEY = 'indicatorcode'
 OBSERVATION_DATE_KEY = 'observationdate'
 OBSERVATION_ABOUT_KEY = 'observationabout'
 OBSERVATION_VALUE_KEY = 'observationvalue'
+MEASUREMENT_METHOD_KEY = 'measurementmethod'
 CODES_FILE_PATH = f"{OUTPUT_DIR}/wb-codes.csv"
 CODES_CSV_COLUMNS = [
     SERIES_CODE_KEY, INDICATOR_NAME_KEY, NUM_DATASETS_KEY, TOPIC_KEY,
     UNIT_OF_MEASURE_KEY, SHORT_DEFINITION_KEY, LONG_DEFINITION_KEY
 ]
 OBS_CSV_COLUMNS = [
-    INDICATOR_CODE_KEY, STAT_VAR_KEY, OBSERVATION_ABOUT_KEY,
-    OBSERVATION_DATE_KEY, OBSERVATION_VALUE_KEY
+    INDICATOR_CODE_KEY, STAT_VAR_KEY, MEASUREMENT_METHOD_KEY,
+    OBSERVATION_ABOUT_KEY, OBSERVATION_DATE_KEY, OBSERVATION_VALUE_KEY
 ]
 EARTH_DCID = 'dcid:Earth'
 COUNTRY_DCID_PREFIX = 'dcid:country'
@@ -452,6 +453,8 @@ def get_observations_from_zip(zip_file, svs):
             return []
         else:
             data_file = file_names[0]
+            # Use name of file (excluding the extension) as the measurement method
+            measurement_method = f"{WORLD_BANK_STAT_VAR_PREFIX}_{zip_file.split('/')[-1].split('.')[0]}"
             with zip.open(data_file, 'r') as csv_file:
                 data_rows = sanitize_csv_rows(
                     list(csv.DictReader(codecs.iterdecode(csv_file, 'utf-8'))))
@@ -461,12 +464,13 @@ def get_observations_from_zip(zip_file, svs):
                 obs_csv_rows = []
                 for data_row in data_rows:
                     obs_csv_rows.extend(
-                        get_observations_from_data_row(data_row, svs))
+                        get_observations_from_data_row(data_row, svs,
+                                                       measurement_method))
 
                 return obs_csv_rows
 
 
-def get_observations_from_data_row(data_row, svs):
+def get_observations_from_data_row(data_row, svs, measurement_method):
     code = data_row.get(INDICATOR_CODE_KEY)
     if code is None:
         logging.error('SKIPPED data row, no indicator code: %s', data_row)
@@ -478,9 +482,10 @@ def get_observations_from_data_row(data_row, svs):
 
     place_dcid = data_row.get(COUNTRY_CODE_KEY)
     if place_dcid:
-        # Sometimes the CSVs suffix the country code value with other info.
-        # So we only take the first 3 characters explicitly.
-        place_dcid = f"{COUNTRY_DCID_PREFIX}/{place_dcid[0:3]}"
+        if len(place_dcid) != 3:
+            logging.error('SKIPPED data row, not a country code: %s',
+                          place_dcid)
+            return []
     else:
         place_dcid = EARTH_DCID
 
@@ -502,6 +507,7 @@ def get_observations_from_data_row(data_row, svs):
         obs_csv_rows.append({
             INDICATOR_CODE_KEY: code,
             STAT_VAR_KEY: sv,
+            MEASUREMENT_METHOD_KEY: measurement_method,
             OBSERVATION_ABOUT_KEY: place_dcid,
             OBSERVATION_DATE_KEY: year,
             OBSERVATION_VALUE_KEY: value
