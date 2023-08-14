@@ -314,6 +314,7 @@ OBS_CSV_COLUMNS = [
 ]
 EARTH_DCID = 'dcid:Earth'
 COUNTRY_DCID_PREFIX = 'dcid:country'
+WORLD_BANK_STAT_VAR_PREFIX = 'worldBank'
 
 
 def load_stat_vars(stat_var_file):
@@ -471,12 +472,7 @@ def get_observations_from_data_row(data_row, svs):
         logging.error('SKIPPED data row, no indicator code: %s', data_row)
         return []
 
-    sv_mapping = svs.get(code)
-    if sv_mapping is None:
-        logging.error('SKIPPED data row, no SV mapped: %s', code)
-        return []
-
-    sv = sv_mapping[STAT_VAR_KEY]
+    sv = get_stat_var_from_code(code, svs)
 
     place_dcid = data_row.get(COUNTRY_CODE_KEY)
     if place_dcid:
@@ -510,6 +506,13 @@ def get_observations_from_data_row(data_row, svs):
         })
 
     return obs_csv_rows
+
+
+def get_stat_var_from_code(code, svs):
+    sv_mapping = svs.get(code)
+    if sv_mapping is None:
+        return f"{WORLD_BANK_STAT_VAR_PREFIX}/{code.replace('.', '_')}"
+    return sv_mapping[STAT_VAR_KEY]
 
 
 def is_numeric(value):
