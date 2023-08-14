@@ -23,12 +23,13 @@ import sys
 import pandas as pd
 import numpy as np
 import re
+import csv
 from Bio.SeqIO.FastaIO import SimpleFastaParser
 
 
 def fasta_to_df(input_file):
     """
-    Parses and converts the fasta file into a pandas dataframe
+    Converts the fasta file into a pandas dataframe
     Args:
         input_file = input fasta file
     Returns:
@@ -108,7 +109,7 @@ def multiple_dcid(df):
             df['chembl'][i] = old_chembl
             df['dcid'][i] = "bio/" + old_chembl
             new_dcid = "bio/" + new_chembl
-            df = df.append({'Sequence': df['Sequence'][i], 'chembl': new_chembl, 'uniprot': df['uniprot'][i], 'name': df['name'][i], 'dcid': new_dcid}, ignore_index=True)
+            df = df._append({'Sequence': df['Sequence'][i], 'chembl': new_chembl, 'uniprot': df['uniprot'][i], 'name': df['name'][i], 'dcid': new_dcid}, ignore_index=True)
     return df
 
 def add_col_quotes(df):
@@ -126,6 +127,20 @@ def add_col_quotes(df):
         df[col] = df[col].replace(["\"nan\""],np.nan)
     return df
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid(row):
+    check_for_illegal_charc(str(row['dcid']))
+    return row
+
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
@@ -134,9 +149,9 @@ def main():
     df = format_cols(df)
     df = multiple_dcid(df)
     df = add_col_quotes(df)
+    df = df.apply(lambda x: check_for_dcid(x),axis=1)
     df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 
 if __name__ == '__main__':
     main()
-

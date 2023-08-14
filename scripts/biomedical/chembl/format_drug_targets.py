@@ -43,11 +43,10 @@ def format_cols(df):
 def format_str_cols(df):
 	df['TerminalStructure'] = df['TerminalStructure'].apply(str.title)
 	df['TerminalStructure'] = df['TerminalStructure'].replace(" ", "", regex=True)
-	df['TerminalStructure'] = 'ProteinTerminalStructure' + df['TerminalStructure']
+	df['TerminalStructure'] = 'dcs:ProteinTerminalStructure' + df['TerminalStructure']
 	df.update('"' +
 			  df[['ChEMBL ID', 'Name', 'UniProtID', 'TerminalStructure', 'Organism']].astype(str) + '"')
 	df.replace("\"nan\"", np.nan, inplace=True)
-	df.apply(check_for_illegal_charc)
 	return df
 
 def format_numerical_cols(df):
@@ -57,6 +56,10 @@ def format_numerical_cols(df):
 		df[i] = df[i].replace('nan', np.nan)
 	return df
 
+def check_for_dcid(row):
+	check_for_illegal_charc(str(row['dcid']))
+	return row
+
 def main():
 	file_input = sys.argv[1]
 	file_output = sys.argv[2]
@@ -64,6 +67,7 @@ def main():
 	df = format_cols(df)
 	df = format_str_cols(df)
 	df = format_numerical_cols(df)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df.to_csv(file_output, doublequote=False, escapechar='\\')
 	
 

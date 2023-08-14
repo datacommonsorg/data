@@ -132,6 +132,20 @@ def add_col_quotes(df):
         df[col] = df[col].replace(["\"nan\""],np.nan)
     return df
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid(row):
+    check_for_illegal_charc(str(row['dcid']))
+    return row
+
 
 def main():
     file_input = sys.argv[1]
@@ -141,10 +155,10 @@ def main():
     df = format_cols(df)
     df = multiple_dcid(df)
     df = add_col_quotes(df)
+    df = df.apply(lambda x: check_for_dcid(x),axis=1)
     df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 
 if __name__ == '__main__':
     main()
-
 

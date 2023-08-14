@@ -13,7 +13,7 @@
 # limitations under the License.
 '''
 Author: Suhana Bedi
-Date: 01/01/2022
+Date: 01/01/2021
 Name: format_chembl_uniprot.py
 Description: Add dcids for all the proteins and format uniprot IDs and protein type
 @file_input: .txt input file with chembl-uniprot mapping
@@ -23,6 +23,18 @@ Description: Add dcids for all the proteins and format uniprot IDs and protein t
 import sys
 import pandas as pd
 import numpy as np
+import re
+import csv
+
+DICT_PROTEIN_TYPE = {'SINGLE PROTEIN':'dcs:ProteinTargetTypeSingleProtein', 
+ 'PROTEIN FAMILY':'dcs:ProteinTargetTypeProteinFamily', 
+ 'PROTEIN-PROTEIN INTERACTION':'dcs:ProteinTargetTypeProteinProteinInteraction',
+ 'PROTEIN COMPLEX':'dcs:ProteinTargetTypeProteinComplex',
+ 'PROTEIN COMPLEX GROUP':'dcs:ProteinTargetTypeProteinComplexGroup',
+ 'NUCLEIC-ACID':'dcs:ProteinTargetTypeNucleicAcid',
+ 'SELECTIVITY GROUP':'dcs:ProteinTargetTypeSelectivityGroup',
+ 'CHIMERIC PROTEIN':'dcs:ProteinTargetTypeChimericProtein',
+ 'PROTEIN NUCLEIC-ACID COMPLEX':'dcs:ProteinTargetTypeProteinNucleicAcidComplex'}
 
 def format_names(df):
     """
@@ -40,6 +52,7 @@ def format_names(df):
     df['Name'] = df['Name'].str.lower()
     return df
 
+
 def format_cols(df):
     """
     Format the columns of the input dataframe
@@ -49,8 +62,7 @@ def format_cols(df):
         chembl-uniprot dataframe with formatted columns
     """
     df['dcid'] = "bio/" + df['ChemBL'].astype(str)
-    df['Protein_Type'] = df['Protein_Type'].str.replace(' ', '_')
-    df['Protein_Type'] = df['Protein_Type'].str.lower()
+    df['Protein_Type'] = df['Protein_Type'].map(DICT_PROTEIN_TYPE)
     col_names = ['Name', 'Protein_Type', 'uniprotID', 'ChemBL']
     for col in col_names:
         df[col] = df[col].str.replace('"', "")
@@ -58,12 +70,28 @@ def format_cols(df):
         df[col] = df[col].replace(["\"nan\""],np.nan)
     return df
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid(row):
+    check_for_illegal_charc(str(row['dcid']))
+    return row
+
+
 def main():
     file_input = sys.argv[1]
     file_output = sys.argv[2]
     df = pd.read_csv(file_input, sep='\t', header=None)
     df = format_names(df)
     df = format_cols(df)
+    df = df.apply(lambda x: check_for_dcid(x),axis=1)
     df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 
