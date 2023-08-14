@@ -113,6 +113,29 @@ def format_mesh_qual(mesh_qual):
     df = pd.DataFrame(d)
     return df
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid_qualifier_supp(row):
+    check_for_illegal_charc(str(row['Qualifier_dcid']))
+    return row
+
+def check_for_dcid_qualifier_concept(row):
+    check_for_illegal_charc(str(row['Qualifier_dcid']))
+    check_for_illegal_charc(str(row['Concept_dcid']))
+    return row
+
+def check_for_dcid_concept_term(row):
+    check_for_illegal_charc(str(row['Term_dcid']))
+    check_for_illegal_charc(str(row['Concept_dcid']))
+    return row
 
 def date_modify(df1):
     """
@@ -166,6 +189,7 @@ def format_qualifier_df(df):
     df_1['Qualifier_dcid'] = 'bio/' + df_1['QualifierID'].astype(str)
     ## drops the duplicate rows
     df_1 = df_1.drop_duplicates()
+    df_1 = df_1.apply(lambda x: check_for_dcid_qualifier_supp(x),axis=1)
     return df_1
 
 def format_concept_df(df1):
@@ -192,6 +216,7 @@ def format_concept_df(df1):
     df_3['Qualifier_dcid'] = 'bio/' + df_3['QualifierID'].astype(str)
     ## drops the duplicate rows
     df_3 = df_3.drop_duplicates()
+    df_3 = df_3.apply(lambda x: check_for_dcid_qualifier_concept(x),axis=1)
     return df_3
 
 def format_term_df(df):
@@ -223,6 +248,7 @@ def format_term_df(df):
     df_4['Term_dcid'] = 'bio/' + df_4['TermID'].astype(str)
     df_4['Concept_dcid'] = 'bio/' + df_4['ConceptID'].astype(str)
     df_4 = df_4.drop_duplicates()
+    df_4 = df_4.apply(lambda x: check_for_dcid_concept_term(x),axis=1)
     return df_4
 
 def main():

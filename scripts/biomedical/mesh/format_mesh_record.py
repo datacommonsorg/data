@@ -79,6 +79,26 @@ def format_mesh_record(mesh_record_xml):
     df = pd.DataFrame(d)
     return df
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_record_dcid(row):
+    check_for_illegal_charc(str(row['Record_dcid']))
+    check_for_illegal_charc(str(row['Descriptor_dcid']))
+    return row
+
+def check_for_pubchem_dcid(row):
+    check_for_illegal_charc(str(row['Record_dcid']))
+    check_for_illegal_charc(str(row['CID_dcid']))
+    return row
+
 def date_modify_record(df1):
     """
     Modifies the dates in a df, into an ISO format
@@ -116,7 +136,7 @@ def format_recordID(df):
     """
     ## unzips the descriptor ID column 
     df = (df.set_index('RecordID').apply(
-        lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
+        lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', axis=1))
     ## puts quotes around record name string values
     df['RecordName'] = '"' + df.RecordName + '"'
     ## removes special characters from the descriptor column 
@@ -124,6 +144,7 @@ def format_recordID(df):
     ## generates record and descriptor dcids
     df['Record_dcid'] = 'bio/' + df['RecordID'].astype(str)
     df['Descriptor_dcid'] = 'bio/' + df['DescriptorID'].astype(str)
+    df = df.apply(lambda x: check_for_record_dcid(x),axis=1)
     return df
 
 def format_pubchem_mesh_mapping(pubchem_file, df_mesh):
@@ -141,6 +162,7 @@ def format_pubchem_mesh_mapping(pubchem_file, df_mesh):
     df_match = pd.merge(df_mesh, df_pubchem, left_on='RecordName', right_on='CompoundName', how = 'inner')
     df_match = df_match.filter(['CID', 'RecordID', 'RecordName', 'Record_dcid'], axis=1)
     df_match['CID_dcid'] = 'chem/CID' + df_match['CID'].astype(str)
+    df_match = df_match.apply(lambda x: check_for_pubchem_dcid(x),axis=1)
     return df_match
 
 def main():

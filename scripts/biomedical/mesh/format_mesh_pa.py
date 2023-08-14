@@ -16,7 +16,8 @@ Author: Suhana Bedi
 Date: 09/17/2021
 Name: format_mesh_pa.py
 Description: converts nested .xml to .csv and further breaks down the csv into 
-two different csvs, each describing relations between descriptors and their pharmacological substance records
+four different csvs, each describing relations between terms, qualifiers, descriptors and
+concepts.
 @file_input: input .xml downloaded from NCBI 
 '''
 import sys
@@ -73,6 +74,26 @@ def format_mesh_pa(mesh_pa):
     df = pd.DataFrame(d)
     return df
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid_descriptor(row):
+    check_for_illegal_charc(str(row['Descriptor_dcid']))
+    check_for_illegal_charc(str(row['DescriptorID']))
+    return row
+
+def check_for_dcid_concept(row):
+    check_for_illegal_charc(str(row['DescriptorID']))
+    check_for_illegal_charc(str(row['ConceptID']))
+    return row
+
 def format_descriptor_record(df):
     """
     Modifies the original dataframe to retain all
@@ -85,7 +106,7 @@ def format_descriptor_record(df):
     df1 = df
     df1 = df1.drop(columns=['Concept_Record', 'Concept_RecordName'])
     df1 = (df1.set_index('DescriptorID').apply(
-            lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
+            lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', axis=1))
     df1['Descriptor_dcid'] = 'bio/' + df1['Descriptor_Record'].astype(str)
     df1['DescriptorID'] = 'bio/' + df1['DescriptorID'].astype(str)
     df1_new = df1.dropna( how='all',
@@ -95,6 +116,7 @@ def format_descriptor_record(df):
         df1_new.update('"' + df1_new[[col]].astype(str) + '"')
         df1_new[col] = df1_new[col].replace(["\"nan\""],np.nan)
     df1_new['isPharmacologicalActionSubstance'] = True
+    df1_new = df1_new.apply(lambda x: check_for_dcid_descriptor(x),axis=1)
     return df1_new
 
 def format_concept_record(df):
@@ -109,7 +131,7 @@ def format_concept_record(df):
     df2 = df
     df2 = df2.drop(columns=['Descriptor_Record', 'Descriptor_RecordName'])
     df2 = (df2.set_index('DescriptorID').apply(
-            lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
+            lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', axis=1))
     df2['DescriptorID'] = 'bio/' + df2['DescriptorID'].astype(str)
     df2['ConceptID'] = 'bio/' + df2['Concept_Record'].astype(str)
     df2_new = df2.dropna( how='all',
@@ -119,6 +141,7 @@ def format_concept_record(df):
         df2_new.update('"' + df2_new[[col]].astype(str) + '"')
         df2_new[col] = df2_new[col].replace(["\"nan\""],np.nan)
     df2_new['isPharmacologicalActionSubstance'] = True
+    df2_new = df2_new.apply(lambda x: check_for_dcid_concept(x),axis=1)
     return df2_new
 
 def main():

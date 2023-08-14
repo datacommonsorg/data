@@ -88,9 +88,10 @@ def format_mesh_xml(mesh_xml):
             tree_num = np.nan
         else:
             tree_num = []
-            for i in range(len(tree_list)):
+            t1 = tree_list.findall("TreeNumber")
+            for t in t1:
                 ## parses the Tree Number
-                tree_num.append(tree_list.findtext("TreeNumber"))
+                tree_num.append(t.text)
         ## parses the NLM Classification Number
         nlm_num = item.findtext("NLMClassificationNumber")
         if not nlm_num:
@@ -158,6 +159,36 @@ def format_mesh_xml(mesh_xml):
     df = pd.DataFrame(d)
     return df
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_descriptor_dcid(row):
+    check_for_illegal_charc(str(row['DescriptorParentID']))
+    check_for_illegal_charc(str(row['Descriptor_dcid']))
+    return row
+
+def check_for_concept_dcid(row):
+    check_for_illegal_charc(str(row['Concept_dcid']))
+    check_for_illegal_charc(str(row['Descriptor_dcid']))
+    return row
+
+def check_for_qualifier_dcid(row):
+    check_for_illegal_charc(str(row['Qualifier_dcid']))
+    check_for_illegal_charc(str(row['Descriptor_dcid']))
+    return row
+
+def check_for_term_dcid(row):
+    check_for_illegal_charc(str(row['Term_dcid']))
+    check_for_illegal_charc(str(row['Concept_dcid']))
+    return row
+
 def date_modify(df1):
     """
     Modifies the dates in a df, into an ISO format
@@ -179,7 +210,7 @@ def date_modify(df1):
     ## adds quotes from text type columns and replaces "nan" with np.nan
     col_names_quote = ['DateCreated', 'DateRevised', 'DateEstablished']
     for col in col_names_quote:
-       df1[col] = df1[col].replace(["nan-nan-nan"],np.nan)
+        df1[col] = df1[col].replace(["nan-nan-nan"],np.nan)
     ## drop repetitive column values
     df1 = df1.drop(columns=[
         'DateCreated-Year', 'DateCreated-Month', 'DateCreated-Day',
@@ -218,6 +249,7 @@ def format_descriptor_df(df):
     df_1["DescriptorParentID"] = np.where(df_1['DescriptorParentID'].str[0] == "b", df_1["DescriptorParentID"], np.nan)
     ## drops the duplicate rows
     df_1 = df_1.drop_duplicates()
+    df_1 = df_1.apply(lambda x: check_for_descriptor_dcid(x),axis=1)
     return df_1
 
 
@@ -241,7 +273,7 @@ def format_qualifier_df(df):
     ])
     ## unzips the qualifer ID and qualifier name lists
     df_2 = (df_2.set_index('DescriptorID').apply(
-        lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
+        lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', axis=1))
     col_names_quote = ['QualifierName', 'QualifierAbbreviation']
     ## adds quotes from text type columns and replaces "nan" with np.nan
     for col in col_names_quote:
@@ -252,6 +284,7 @@ def format_qualifier_df(df):
     df_2['Descriptor_dcid'] = 'bio/' + df_2['DescriptorID'].astype(str)
     ## drops the duplicate rows
     df_2 = df_2.drop_duplicates()
+    df_2 = df_2.apply(lambda x: check_for_qualifier_dcid(x),axis=1)
     return df_2
 
 
@@ -278,7 +311,7 @@ def format_concept_df(df):
     df_3['ScopeNote'] = df_3['ScopeNote'].str.strip()
     ## unzips the concept name and concept IDs list
     df_3 = df_3 = (df_3.set_index('DescriptorID').apply(
-        lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', 1))
+        lambda x: x.apply(pd.Series).stack()).reset_index().drop('level_1', axis=1))
     ## adds quotes from text type columns and replaces "nan" with np.nan
     col_names_quote = ['ScopeNote', 'ConceptName']
     for col in col_names_quote:
@@ -289,6 +322,7 @@ def format_concept_df(df):
     df_3['Descriptor_dcid'] = 'bio/' + df_3['DescriptorID'].astype(str)
     ## drops the duplicate rows
     df_3 = df_3.drop_duplicates()
+    df_3 = df_3.apply(lambda x: check_for_concept_dcid(x),axis=1)
     return df_3
 
 
@@ -325,6 +359,7 @@ def format_term_df(df):
     df_4['Term_dcid'] = 'bio/' + df_4['TermID'].astype(str)
     df_4['Concept_dcid'] = 'bio/' + df_4['ConceptID'].astype(str)
     df_4 = df_4.drop_duplicates()
+    df_4 = df_4.apply(lambda x: check_for_term_dcid(x),axis=1)
     return df_4
 
 
@@ -341,7 +376,7 @@ def mesh_wrapper(file_input):
     df2 = format_qualifier_df(df)
     df3 = format_concept_df(df)
     df4 = format_term_df(df)
-    
+
     df1.to_csv('mesh_descriptor.csv', doublequote=False, escapechar='\\')
     df2.to_csv('mesh_qualifier.csv', doublequote=False, escapechar='\\')
     df3.to_csv('mesh_concept.csv', doublequote=False, escapechar='\\')
