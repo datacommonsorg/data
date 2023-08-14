@@ -37,11 +37,27 @@ def format_cols(df):
 	df['dcid'] = 'bio/' + df['Variant Name']
 	return df 
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid(row):
+    check_for_illegal_charc(str(row['dcid']))
+    return row
+
+
 def main():
 	file_input = sys.argv[1]
 	file_output = sys.argv[2]
 	df = pd.read_csv(file_input, sep = '\t')
 	df = format_cols(df)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 

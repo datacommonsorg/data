@@ -27,30 +27,30 @@ import sys
 import re
 
 def replace_nan_func(x):
-    """
-    Combines all NaN rows with same ID 
-    Args:
-        df = dataframe to change
-    Returns:
-        none
-    """
-    x = x[~pd.isna(x)]
-    if len(x) > 0:
-        return x.iloc[0]
-    else:
-        return np.NaN
+	"""
+	Combines all NaN rows with same ID 
+	Args:
+		df = dataframe to change
+	Returns:
+		none
+	"""
+	x = x[~pd.isna(x)]
+	if len(x) > 0:
+		return x.iloc[0]
+	else:
+		return np.NaN
 
 def format_external_vocab(df):
 	df = df.rename(columns={'PharmGKB Accession Id':'pharmGKBID','External Vocabulary':'externalVocab', 'Cross-references':'crossReferences'})
 	df = df.replace('"', '', regex=True)
 	df = df.assign(externalVocab=df.externalVocab.str.split(",")).explode('externalVocab')
-	df[['A', 'B']] = df['externalVocab'].str.split(':', 1, expand=True)
+	df[['A', 'B']] = df['externalVocab'].str.split(':', n=1, expand=True)
 	df['A'] = df['A'].astype(str).map(lambda x: re.sub('[^A-Za-z0-9]+', '', x))
 	col_add = list(df['A'].unique())
 	for newcol in col_add:
-	    df[newcol] = np.nan
-	    df[newcol] = np.where(df['A'] == newcol, df['B'], np.nan)
-	    df[newcol] = df[newcol].astype(str).replace("nan", np.nan)
+		df[newcol] = np.nan
+		df[newcol] = np.where(df['A'] == newcol, df['B'], np.nan)
+		df[newcol] = df[newcol].astype(str).replace("nan", np.nan)
 	df = df.groupby(by='pharmGKBID').agg(dict.fromkeys(df.columns[0:], replace_nan_func))
 	df = df.drop(['A', 'B', 'externalVocab'], axis =1)
 	df = df.iloc[:,4:8]
@@ -60,10 +60,24 @@ def format_cols(df):
 	df = df[df['MeSH'].notna()]
 	list_cols = ['MeSH', 'SnoMedCT', 'UMLS', 'NDFRT']
 	for i in list_cols:
-	    df[i] = df[i].str.replace(r"\([^()]*\)", "", regex=True)
-	    df[i] = df[i].str.split('(').str[0]
+		df[i] = df[i].str.replace(r"\([^()]*\)", "", regex=True)
+		df[i] = df[i].str.split('(').str[0]
 	df['MeSHDcid'] = 'bio/' + df['MeSH']
 	return df 
+
+def check_for_illegal_charc(s):
+	"""Checks for illegal characters in a string and prints an error statement if any are present
+	Args:
+		s: target string that needs to be checked
+	
+	"""
+	list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+	if any([x in s for x in list_illegal]):
+		print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid(row):
+	check_for_illegal_charc(str(row['MeSHDcid']))
+	return row
 
 def main():
 	file_input = sys.argv[1]
@@ -71,6 +85,7 @@ def main():
 	df = pd.read_csv(file_input, sep = '\t')
 	df = format_external_vocab(df)
 	df = format_cols(df)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 

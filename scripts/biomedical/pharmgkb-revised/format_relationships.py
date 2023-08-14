@@ -43,6 +43,16 @@ MESH_MAPPING_DICT = {
 	'Arthritis Rheumatoid': 'bio/D001172'
 }
 
+def check_for_illegal_charc(s):
+	"""Checks for illegal characters in a string and prints an error statement if any are present
+	Args:
+		s: target string that needs to be checked
+	
+	"""
+	list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+	if any([x in s for x in list_illegal]):
+		print('Error! dcid contains illegal characters!', s)
+
 def choose_data_subset(df):
 	df['sorted'] = df.apply(lambda x: ''.join(sorted([x['Entity1_id'],x['Entity2_id']])),axis=1)
 	df = df.drop_duplicates(subset='sorted').drop('sorted',axis=1)
@@ -70,23 +80,29 @@ def col_swap(df):
 	return df
 
 def query_mesh_terms(df, col_name, dict_mesh_terms):
-    df[col_name] = df[col_name].str.title()
-    list_names = list(df[col_name].unique())
-    arr_name = np.array(list_names)
-    query_str = """
-    SELECT DISTINCT ?dcid ?name
-    WHERE {{
-    ?a typeOf MeSHDescriptor .
-    ?a name {value} .
-    ?a dcid ?dcid .
-    ?a name ?name
-    }}
-    """.format(value=arr_name)
-    result = dc.query(query_str)
-    result = pd.DataFrame(result)
-    dict_terms = dict(zip(result['?name'], result['?dcid']))
-    dict_mesh_terms = dict_mesh_terms | dict_terms
-    return dict_mesh_terms
+	df[col_name] = df[col_name].str.title()
+	list_names = list(df[col_name].unique())
+	arr_name = np.array(list_names)
+	query_str = """
+	SELECT DISTINCT ?dcid ?name
+	WHERE {{
+	?a typeOf MeSHDescriptor .
+	?a name {value} .
+	?a dcid ?dcid .
+	?a name ?name
+	}}
+	""".format(value=arr_name)
+	result = dc.query(query_str)
+	result = pd.DataFrame(result)
+	dict_terms = dict(zip(result['?name'], result['?dcid']))
+	dict_mesh_terms = dict_mesh_terms | dict_terms
+	return dict_mesh_terms
+
+def check_for_dcid(row):
+	check_for_illegal_charc(str(row['dcid']))
+	check_for_illegal_charc(str(row['Entity1_dcid']))
+	check_for_illegal_charc(str(row['Entity2_dcid']))
+	return row
 
 def format_disease_disease_df(df):
 	df = df[ (df['Entity1_type'] == 'Disease') & (df['Entity2_type'] == 'Disease')]
@@ -98,6 +114,7 @@ def format_disease_disease_df(df):
 	df['name'] = df['dcid'].str[8:]
 	df['Evidence'] = 'dcs:RelationshipEvidenceType' + df['Evidence']
 	df['Association'] = df['Association'].map(ASSOCIATION_DICT)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df.to_csv('disease_disease_assoc.csv', doublequote=False, escapechar='\\')
 	return df
 
@@ -110,6 +127,7 @@ def format_disease_variant_df1(df):
 	df['Entity2_dcid'] = 'bio/' + df['Entity2_name']
 	df['dcid'] = 'bio/DGVA_' + df['Entity1_dcid'].str[4:] + '_' + df['Entity2_dcid'].str[4:]
 	df['name'] = df['dcid'].str[9:]
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df
 
 def format_disease_variant_df2(df):
@@ -122,6 +140,7 @@ def format_disease_variant_df2(df):
 	df['dcid'] = 'bio/DGVA_' + df['Entity2_dcid'].str[4:] + '_' + df['Entity1_dcid'].str[4:]
 	df['name'] = df['dcid'].str[9:]
 	df = col_swap(df)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df
 
 def combined_disease_variant(df):
@@ -140,6 +159,7 @@ def format_disease_gene_df1(df):
 	df['Entity2_dcid'] = 'bio/' + df['Entity2_name']
 	df['dcid'] = 'bio/DGA_' + df['Entity1_dcid'].str[4:] + '_' + df['Entity2_dcid'].str[4:]
 	df['name'] = df['dcid'].str[8:]
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df
 
 def format_disease_gene_df2(df):
@@ -151,6 +171,7 @@ def format_disease_gene_df2(df):
 	df['dcid'] = 'bio/DGA_' + df['Entity2_dcid'].str[4:] + '_' + df['Entity1_dcid'].str[4:]
 	df['name'] = df['dcid'].str[8:]
 	df = col_swap(df)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df
 
 def combined_disease_gene(df):
@@ -196,7 +217,7 @@ def format_variant_names(row):
 def format_chemical_chemical_df(df, df_dict):
 	df1 = pd.read_csv('drugs_pkgb_dict.csv')
 	df2 = pd.read_csv('chemicals_pkgb_dict.csv')
-	df_dict = df1.append(df2)
+	df_dict = df1._append(df2)
 	df = df[ (df['Entity1_type'] == 'Chemical') & (df['Entity2_type'] == 'Chemical')]
 	key_list_1 = list(df['Entity1_id'])
 	key_list_2 = list(df['Entity2_id'])
@@ -209,6 +230,7 @@ def format_chemical_chemical_df(df, df_dict):
 	df['name'] = df['dcid'].str[9:]
 	df['Evidence'] = 'dcs:RelationshipEvidenceType' + df['Evidence']
 	df['Association'] = df['Association'].map(ASSOCIATION_DICT)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df.to_csv('chemical_chemical_assoc.csv', doublequote=False, escapechar='\\')
 
 def format_chemical_gene_df1(df, df_dict):
@@ -218,6 +240,7 @@ def format_chemical_gene_df1(df, df_dict):
 	df['Entity2_dcid'] = 'bio/' + df['Entity2_name']
 	df['dcid'] = 'chem/CGA_' + df['Entity1_dcid'].str[5:] + '_' + df['Entity2_dcid'].str[4:]
 	df['name'] = df['dcid'].str[9:]
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df
 
 def format_chemical_gene_df2(df, df_dict):
@@ -227,6 +250,7 @@ def format_chemical_gene_df2(df, df_dict):
 	df['Entity1_dcid'] = 'bio/' + df['Entity1_name']
 	df['dcid'] = 'chem/CGA_' + df['Entity2_dcid'].str[5:] + '_' + df['Entity1_dcid'].str[4:]
 	df['name'] = df['dcid'].str[9:]
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df = col_swap(df)
 	return df
 
@@ -237,6 +261,7 @@ def format_gene_variant_df1(df):
 	df['Entity2_dcid'] = 'bio/' + df['Entity2_name']
 	df['dcid'] = 'bio/GGVA_' + df['Entity2_name'] + '_' + df['Entity1_name']
 	df['name'] = df['dcid'].str[9:]
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df
 
 def format_gene_variant_df2(df):
@@ -246,6 +271,7 @@ def format_gene_variant_df2(df):
 	df['Entity2_dcid'] = 'bio/' + df['Entity2_name']
 	df['dcid'] = 'bio/GGVA_' + df['Entity1_name'] + '_' + df['Entity2_name']
 	df['name'] = df['dcid'].str[9:]
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df = col_swap(df)
 	return df
 
@@ -258,6 +284,7 @@ def format_chemical_variant_df1(df, df_dict):
 	df['Entity2_dcid'] = df['Entity2_id'].astype(str).map(dict_lookup)
 	df['dcid'] = 'chem/CGVA_' + df['Entity2_dcid'].str[5:] + '_' + df['Entity1_name']
 	df['name'] = df['dcid'].str[10:]
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df
 
 def format_chemical_variant_df2(df, df_dict):
@@ -269,6 +296,7 @@ def format_chemical_variant_df2(df, df_dict):
 	df['Entity1_dcid'] = df['Entity1_id'].astype(str).map(dict_lookup)
 	df['dcid'] = 'chem/CGVA_' + df['Entity1_dcid'].str[5:] + '_' + df['Entity2_name']
 	df['name'] = df['dcid'].str[10:]
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df = col_swap(df)
 	return df
 
@@ -280,6 +308,7 @@ def format_gene_gene_df(df):
 	df['name'] = df['dcid'].str[8:]
 	df['Evidence'] = 'dcs:RelationshipEvidenceType' + df['Evidence']
 	df['Association'] = df['Association'].map(ASSOCIATION_DICT)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df.to_csv('gene_gene_assoc.csv', doublequote=False, escapechar='\\')
 
 def format_var_var_df(df):
@@ -294,6 +323,7 @@ def format_var_var_df(df):
 	df['name'] = df['dcid'].str[10:]
 	df['Evidence'] = 'dcs:RelationshipEvidenceType' + df['Evidence']
 	df['Association'] = df['Association'].map(ASSOCIATION_DICT)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	df.to_csv('var_var_assoc.csv', doublequote=False, escapechar='\\')
 
 def combined_chemical_gene(df, df_dict):
@@ -345,7 +375,7 @@ def main():
 	df = pd.read_csv(file_input, sep = '\t')
 	df_dict1 = pd.read_csv(file_dict_drug)
 	df_dict2 = pd.read_csv(file_dict_chem)
-	df_dict = df_dict1.append(df_dict2)
+	df_dict = df_dict1._append(df_dict2)
 	wrapper_fun(df, df_dict)
 
 

@@ -53,9 +53,9 @@ def format_cols(df):
 	df = df.replace('"', '', regex=True)
 	df = df.rename(columns={'PharmGKB Accession Id':'pharmGKBID', 'NCBI Gene ID':'ncbiGeneID', 'HGNC ID':'hgncID', 'Ensembl Id':'ensemblID', 'Alternate Names':'synonyms', 'Cross-references':'crossReferences' })
 	df['crossReferences'] = df['crossReferences'].str.replace('"','')
-	df['hgncID'] = df['hgncID'].str.split(":", 1).str[1]
+	df['hgncID'] = df['hgncID'].str.split(":", n=1).str[1]
 	df = df.assign(crossReferences=df.crossReferences.str.split(",")).explode('crossReferences')
-	df[['A', 'B']] = df['crossReferences'].str.split(':', 1, expand=True)
+	df[['A', 'B']] = df['crossReferences'].str.split(':', n=1, expand=True)
 	df= df.replace(r'[^0-9a-zA-Z ]', '', regex=True).replace("'", '')
 	df['dcid'] = "bio/" + df['Symbol']
 	return df
@@ -110,6 +110,22 @@ def format_boolean_cols(df):
 		df[i] = np.where(df[i] == "Yes", "True", "False")
 	return df 
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid(row):
+    check_for_illegal_charc(str(row['dcid']))
+    check_for_illegal_charc(str(row['genomeCoordDcid37']))
+    check_for_illegal_charc(str(row['genomeCoordDcid38']))
+    return row
+
 def wrapper_fun(df):
 	"""
 	Runs the intermediate functions to 
@@ -129,8 +145,9 @@ def wrapper_fun(df):
 			  df[['Name', 'Symbol', 'synonyms', 'Alternate Symbols', 'dcid', 'genomeCoordDcid38', 'genomeCoordDcid37']].astype(str) + '"')
 	df.replace("\"nan\"", np.nan, inplace=True)
 	df = df.drop('pharmGKBID', axis=1)
+	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df
-		
+
 
 def main():
 	file_input = sys.argv[1]

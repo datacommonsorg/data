@@ -83,7 +83,7 @@ def format_cross_references(df):
     df = df.replace('"', '', regex=True)
     df = df.rename(columns={'PharmGKB Accession Id':'pharmGKBID', 'Generic Names':'genericName', 'Trade Names':'tradeName', 'Brand Mixtures':'brandMixture', 'External Vocabulary':'externalVocab', 'Cross-references':'crossReferences', 'ATC Identifiers':'ATC'})
     df = df.assign(crossReferences=df.crossReferences.str.split(",")).explode('crossReferences')
-    df[['A', 'B']] = df['crossReferences'].str.split(':', 1, expand=True)
+    df[['A', 'B']] = df['crossReferences'].str.split(':', n=1, expand=True)
     df['A'] = df['A'].astype(str).map(lambda x: re.sub('[^A-Za-z0-9]+', '', x))
     col_add = list(df['A'].unique())
     for newcol in col_add:
@@ -99,7 +99,7 @@ def format_external_vocab(df):
     df = df.replace('"', '', regex=True)
     df = df.rename(columns={'PharmGKB Accession Id':'pharmGKBID', 'Generic Names':'genericName', 'Trade Names':'tradeName', 'Brand Mixtures':'brandMixture', 'External Vocabulary':'externalVocab', 'Cross-references':'crossReferences', 'Dosing Guideline Sources':'dosingGuidelineSource'})
     df = df.assign(externalVocab=df.externalVocab.str.split(",")).explode('externalVocab')
-    df[['A', 'B']] = df['externalVocab'].str.split(':', 1, expand=True)
+    df[['A', 'B']] = df['externalVocab'].str.split(':', n=1, expand=True)
     df['A'] = df['A'].astype(str).map(lambda x: re.sub('[^A-Za-z0-9]+', '', x))
     col_add = list(df['A'].unique())
     for newcol in col_add:
@@ -167,6 +167,22 @@ def format_dcid(df):
         df = format_dcid_identifiers(df, i)
     return df
 
+def check_for_illegal_charc(s):
+    """Checks for illegal characters in a string and prints an error statement if any are present
+    Args:
+        s: target string that needs to be checked
+    
+    """
+    list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
+    if any([x in s for x in list_illegal]):
+        print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid(row):
+    check_for_illegal_charc(str(row['dcid']))
+    check_for_illegal_charc(str(row['ATC']))
+    check_for_illegal_charc(str(row['MeSH']))
+    return row
+
 def wrapper_fun(df):
     """
     Runs the intermediate functions to 
@@ -198,6 +214,7 @@ def wrapper_fun(df):
        'UMLS', 'NDFRT', 'MeSH']].astype(str) + '"')
     df.replace("\"nan\"", np.nan, inplace=True) 
     df = df.drop('pharmGKBID', axis=1)
+    df = df.apply(lambda x: check_for_dcid(x),axis=1)
     return df
 
 def main():
