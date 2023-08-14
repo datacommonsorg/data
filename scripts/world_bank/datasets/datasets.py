@@ -86,7 +86,7 @@ flags.DEFINE_string(
     f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}, {Mode.LOAD_STAT_VARS}, {Mode.WRITE_OBSERVATIONS}"
 )
 
-flags.DEFINE_string('stat_vars_file', 'sample-svs.csv',
+flags.DEFINE_string('stat_vars_file', 'svs.csv',
                     'Path to CSV file with Stat Var mappings.')
 
 ctx = create_urllib3_context()
@@ -319,7 +319,7 @@ WORLD_BANK_STAT_VAR_PREFIX = 'worldBank'
 
 def load_stat_vars(stat_var_file):
     with open(stat_var_file, 'r') as f:
-        csv_rows = list(csv.DictReader(f))
+        csv_rows = sanitize_csv_rows(list(csv.DictReader(f)))
         svs = {}
         for csv_row in csv_rows:
             if csv_row.get(SERIES_CODE_KEY) and csv_row.get(STAT_VAR_KEY):
@@ -473,6 +473,8 @@ def get_observations_from_data_row(data_row, svs):
         return []
 
     sv = get_stat_var_from_code(code, svs)
+    if sv is None:
+        return []
 
     place_dcid = data_row.get(COUNTRY_CODE_KEY)
     if place_dcid:
@@ -510,8 +512,9 @@ def get_observations_from_data_row(data_row, svs):
 
 def get_stat_var_from_code(code, svs):
     sv_mapping = svs.get(code)
-    if sv_mapping is None:
-        return f"{WORLD_BANK_STAT_VAR_PREFIX}/{code.replace('.', '_')}"
+    if sv_mapping is None or sv_mapping.get(STAT_VAR_KEY) is None:
+        logging.warning('SKIPPED, WB code not mapped: %s', code)
+        return None
     return sv_mapping[STAT_VAR_KEY]
 
 
