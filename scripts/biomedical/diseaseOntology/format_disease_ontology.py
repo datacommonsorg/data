@@ -97,7 +97,7 @@ def format_cols(df):
 		df.iloc[:, i] = df.iloc[:, i].str.replace("'", '')
 		df[col] = df[col].replace('nan', np.nan)
 	df['id'] = df['id'].str.replace(':', '_')
-	df['hasAlternativeId'] = df['hasAlternativeId'].str.replace(':', '_')
+	#df['hasAlternativeId'] = df['hasAlternativeId'].str.replace(':', '_')
 	
 def replace_nan_func(x):
 	"""
@@ -125,17 +125,17 @@ def col_explode(df):
 		df = modified dataframe
 	"""
 	df = df.assign(hasDbXref=df.hasDbXref.str.split(",")).explode('hasDbXref')
-	df[['A', 'B']] = df['hasDbXref'].str.split(':', 1, expand=True)
+	df[['A', 'B']] = df['hasDbXref'].str.split(':', n=1, expand=True)
 	df['A'] = df['A'].astype(str).map(lambda x: re.sub('[^A-Za-z0-9]+', '', x))
 	col_add = list(df['A'].unique())
 	for newcol in col_add:
 		df[newcol] = np.nan
 		df[newcol] = np.where(df['A'] == newcol, df['B'], np.nan)
 		df[newcol] = df[newcol].astype(str).replace("nan", np.nan)
-	df['hasAlternativeId'] = df['hasAlternativeId'].str.split(',')
-	df = df.explode('hasAlternativeId')
-	df1 = df.groupby(by='id').agg(dict.fromkeys(df.columns[0:], replace_nan_func))
-	return df1
+	#df['hasAlternativeId'] = df['hasAlternativeId'].str.split(',')
+	#df = df.explode('hasAlternativeId')
+	#df1 = df.groupby(by='id').agg(dict.fromkeys(df.columns[0:], replace_nan_func))
+	return df
 
 
 def shard(list_to_shard, shard_size):
@@ -190,21 +190,12 @@ def col_string(df):
 		df[col] = df[col].replace(["\"nan\""],np.nan)
 	return df
 
-def remove_newline(df):
-	df.loc[1735, 'IAO_0000115'] = df.loc[1735, 'IAO_0000115'].replace("\\n", "")
-	df.loc[2513, 'IAO_0000115'] = df.loc[2513, 'IAO_0000115'].replace("\\n", "")
-	df.loc[2869, 'IAO_0000115'] = df.loc[2869, 'IAO_0000115'].replace("\\n", "")
-	df.loc[2904, 'IAO_0000115'] = df.loc[2904, 'IAO_0000115'].replace("\\n", "")
-	df.loc[2943, 'IAO_0000115'] = df.loc[2943, 'IAO_0000115'].replace("\\n", "")
-	df.loc[3045, 'IAO_0000115'] = df.loc[3045, 'IAO_0000115'].replace("\\n", "")
-	df.loc[11689, 'IAO_0000115'] = df.loc[11689, 'IAO_0000115'].replace("\\n", "")
-	return df
-
 def create_dcid(df):
 	df['diseaseId'] = df['id']
 	df['diseaseId'] = df['diseaseId'].str.replace("_", ":")
-	df['hasAlternativeId'] = df['hasAlternativeId'].str.strip()
-	col_names = ['id', 'subClassOf', 'hasAlternativeId']
+	df['subClassOf'] = df['subClassOf'].str.split(',')
+	df['subClassOf'] = df['subClassOf'].str[0]
+	col_names = ['id', 'subClassOf']
 	for col in col_names:
 		df[col] = "bio/" + df[col]
 		df[col] = df[col].replace(["bio/nan"],np.nan)
@@ -212,6 +203,16 @@ def create_dcid(df):
 	df['ICD10CM'] = df['ICD10CM'].replace("dcid:ICD10/nan", np.nan)
 	df.update('"' + df[['diseaseId']].astype(str) + '"')
 	return df
+
+def check_for_illegal_charc(s):
+	list_illegal = ["'", "#", "–", "*" ">", "<", "@", "]", "[", "|", ":", ";", " "]
+	if any([x in s for x in list_illegal]):
+		print('Error! dcid contains illegal characters!', s)
+
+def check_for_dcid(row):
+	check_for_illegal_charc(str(row['id']))
+	check_for_illegal_charc(str(row['subClassOf']))
+	return row
 
 
 def wrapper_fun(file_input):
@@ -244,8 +245,8 @@ def wrapper_fun(file_input):
 	df_do = df_do.reset_index(drop=True)
 	df_do = df_do.replace('"nan"', np.nan)
 	df_do = create_dcid(df_do)
-	df_do = remove_newline(df_do)
 	df_do['IAO_0000115'] = df_do['IAO_0000115'].str.replace("_", " ")
+	df_do = df_do.apply(lambda x: check_for_dcid(x),axis=1)
 	return df_do
 
 def main():
@@ -258,18 +259,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
