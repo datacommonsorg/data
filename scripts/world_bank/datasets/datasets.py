@@ -486,6 +486,8 @@ def get_observations_from_data_row(data_row, svs, measurement_method):
             logging.error('SKIPPED data row, not a country code: %s',
                           place_dcid)
             return []
+        else:
+            place_dcid = f"{COUNTRY_DCID_PREFIX}/{place_dcid}"
     else:
         place_dcid = EARTH_DCID
 
