@@ -43,6 +43,8 @@ Use this for debugging to ensure that the mappings load correctly and fix any er
 
 Run: python3 datasets.py --mode=load_stat_vars --stat_vars_file=/path/to/sv_mappings.csv
 
+See `sample-svs.csv` for a sample mappings file.
+
 ============================
 
 write_observations: Extracts observations from files downloaded in the 'output/downloads' folder and saves them to CSVs in the 'output/observations' folder.
@@ -295,8 +297,10 @@ NUM_DATASETS_KEY = 'numdatasets'
 INDICATOR_NAME_KEY = 'indicatorname'
 TOPIC_KEY = 'topic'
 UNIT_OF_MEASURE_KEY = 'unitofmeasure'
+UNIT_KEY = 'unit'
 SHORT_DEFINITION_KEY = 'shortdefinition'
 LONG_DEFINITION_KEY = 'longdefinition'
+LICENSE_TYPE_KEY = 'licensetype'
 STAT_VAR_KEY = 'statvar'
 COUNTRY_CODE_KEY = 'countrycode'
 INDICATOR_CODE_KEY = 'indicatorcode'
@@ -304,14 +308,15 @@ OBSERVATION_DATE_KEY = 'observationdate'
 OBSERVATION_ABOUT_KEY = 'observationabout'
 OBSERVATION_VALUE_KEY = 'observationvalue'
 MEASUREMENT_METHOD_KEY = 'measurementmethod'
-CODES_FILE_PATH = f"{OUTPUT_DIR}/wb-codes.csv"
+CODES_FILE_PATH = os.path.join(OUTPUT_DIR, 'wb-codes.csv')
 CODES_CSV_COLUMNS = [
     SERIES_CODE_KEY, INDICATOR_NAME_KEY, NUM_DATASETS_KEY, TOPIC_KEY,
-    UNIT_OF_MEASURE_KEY, SHORT_DEFINITION_KEY, LONG_DEFINITION_KEY
+    UNIT_OF_MEASURE_KEY, SHORT_DEFINITION_KEY, LONG_DEFINITION_KEY,
+    LICENSE_TYPE_KEY
 ]
 OBS_CSV_COLUMNS = [
     INDICATOR_CODE_KEY, STAT_VAR_KEY, MEASUREMENT_METHOD_KEY,
-    OBSERVATION_ABOUT_KEY, OBSERVATION_DATE_KEY, OBSERVATION_VALUE_KEY
+    OBSERVATION_ABOUT_KEY, OBSERVATION_DATE_KEY, OBSERVATION_VALUE_KEY, UNIT_KEY
 ]
 EARTH_DCID = 'dcid:Earth'
 COUNTRY_DCID_PREFIX = 'dcid:country'
@@ -397,6 +402,8 @@ def get_codes_from_zip(zip_file):
                             series_row.get(SHORT_DEFINITION_KEY),
                         LONG_DEFINITION_KEY:
                             series_row.get(LONG_DEFINITION_KEY),
+                        LICENSE_TYPE_KEY:
+                            series_row.get(LICENSE_TYPE_KEY),
                     }
                 return codes
         return {}
@@ -439,7 +446,7 @@ def write_observations_from_zip(zip_file, svs):
         return
 
     obs_file_name = f"{zip_file.split('/')[-1].split('.')[0]}_obs.csv"
-    obs_file_path = f"{OBSERVATIONS_DIR}/{obs_file_name}"
+    obs_file_path = os.path.join(OBSERVATIONS_DIR, obs_file_name)
     logging.info('Writing %s observations from %s to %s', len(csv_rows),
                  zip_file, obs_file_path)
     write_csv(obs_file_path, OBS_CSV_COLUMNS, csv_rows)
@@ -508,11 +515,12 @@ def get_observations_from_data_row(data_row, svs, measurement_method):
 
         obs_csv_rows.append({
             INDICATOR_CODE_KEY: code,
-            STAT_VAR_KEY: sv,
+            STAT_VAR_KEY: sv[STAT_VAR_KEY],
             MEASUREMENT_METHOD_KEY: measurement_method,
             OBSERVATION_ABOUT_KEY: place_dcid,
             OBSERVATION_DATE_KEY: year,
-            OBSERVATION_VALUE_KEY: value
+            OBSERVATION_VALUE_KEY: value,
+            UNIT_KEY: sv.get(UNIT_KEY)
         })
 
     return obs_csv_rows
@@ -523,7 +531,7 @@ def get_stat_var_from_code(code, svs):
     if sv_mapping is None or sv_mapping.get(STAT_VAR_KEY) is None:
         logging.warning('SKIPPED, WB code not mapped: %s', code)
         return None
-    return sv_mapping[STAT_VAR_KEY]
+    return sv_mapping
 
 
 def is_numeric(value):
