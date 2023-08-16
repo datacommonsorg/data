@@ -19,13 +19,13 @@ Supports the following tasks:
 
 fetch_datasets: Fetches WB dataset lists and resources and writes them to 'output/wb-datasets.csv'
 
-Run: python3 datasets.py mode=fetch_datasets
+Run: python3 datasets.py --mode=fetch_datasets
 
 ============================
 
-download_datasets: Downloads datasets listed in 'output/wb-datasets.csv' to the  'output/downloads' folder.
+download_datasets: Downloads datasets listed in 'output/wb-datasets.csv' to the 'output/downloads' folder.
 
-Run: python3 datasets.py mode=download_datasets
+Run: python3 datasets.py --mode=download_datasets
 
 ============================
 
@@ -33,7 +33,27 @@ write_wb_codes: Extracts World Bank indicator codes (and related information) fr
 
 It only operates on files that are named '*_CSV.zip'.
 
-Run: python3 datasets.py mode=write_wb_codes
+Run: python3 datasets.py --mode=write_wb_codes
+
+============================
+
+load_stat_vars: Loads stat vars from a mapping file specified via the `stat_vars_file` flag.
+
+Use this for debugging to ensure that the mappings load correctly and fix any errors logged by this operation.
+
+Run: python3 datasets.py --mode=load_stat_vars --stat_vars_file=/path/to/sv_mappings.csv
+
+See `sample-svs.csv` for a sample mappings file.
+
+============================
+
+write_observations: Extracts observations from files downloaded in the 'output/downloads' folder and saves them to CSVs in the 'output/observations' folder.
+
+The stat vars file to be used for mappings should be specified using the `stat_vars_file' flag.
+
+It only operates on files that are named '*_CSV.zip'.
+
+Run: python3 datasets.py --mode=write_observations --stat_vars_file=/path/to/sv_mappings.csv
 """
 
 import requests
@@ -49,6 +69,8 @@ from urllib3.util.ssl_ import create_urllib3_context
 from absl import flags
 import zipfile
 import codecs
+from itertools import repeat
+from datetime import datetime
 
 FLAGS = flags.FLAGS
 
@@ -57,12 +79,17 @@ class Mode:
     FETCH_DATASETS = 'fetch_datasets'
     DOWNLOAD_DATASETS = 'download_datasets'
     WRITE_WB_CODES = 'write_wb_codes'
+    LOAD_STAT_VARS = 'load_stat_vars'
+    WRITE_OBSERVATIONS = 'write_observations'
 
 
 flags.DEFINE_string(
-    'mode', Mode.WRITE_WB_CODES,
-    f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}"
+    'mode', Mode.WRITE_OBSERVATIONS,
+    f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}, {Mode.LOAD_STAT_VARS}, {Mode.WRITE_OBSERVATIONS}"
 )
+
+flags.DEFINE_string('stat_vars_file', 'statvars.csv',
+                    'Path to CSV file with Stat Var mappings.')
 
 ctx = create_urllib3_context()
 ctx.load_default_certs()
@@ -77,10 +104,12 @@ DATASET_LISTS_RESPONSE_DIR = f"{RESPONSE_DIR}/lists"
 DATASET_VIEWS_RESPONSE_DIR = f"{RESPONSE_DIR}/views"
 DATASETS_CSV_FILE_PATH = f"{OUTPUT_DIR}/wb-datasets.csv"
 DOWNLOADS_DIR = f"{OUTPUT_DIR}/downloads"
+OBSERVATIONS_DIR = f"{OUTPUT_DIR}/observations"
 
 os.makedirs(DATASET_LISTS_RESPONSE_DIR, exist_ok=True)
 os.makedirs(DATASET_VIEWS_RESPONSE_DIR, exist_ok=True)
 os.makedirs(DOWNLOADS_DIR, exist_ok=True)
+os.makedirs(OBSERVATIONS_DIR, exist_ok=True)
 
 POOL_SIZE = max(2, multiprocessing.cpu_count() - 1)
 
@@ -264,13 +293,48 @@ DATA_FILE_SUFFIX = 'Data.csv'
 SERIES_FILE_SUFFIX = 'Series.csv'
 CSV_ZIP_FILE_SUFFIX = '_CSV.zip'
 SERIES_CODE_KEY = 'seriescode'
+NUM_DATASETS_KEY = 'numdatasets'
 INDICATOR_NAME_KEY = 'indicatorname'
-SHORT_DEFINITION_KEY = 'shortdefinition'
 TOPIC_KEY = 'topic'
-CODES_FILE_PATH = f"{OUTPUT_DIR}/wb-codes.csv"
+UNIT_OF_MEASURE_KEY = 'unitofmeasure'
+UNIT_KEY = 'unit'
+SHORT_DEFINITION_KEY = 'shortdefinition'
+LONG_DEFINITION_KEY = 'longdefinition'
+LICENSE_TYPE_KEY = 'licensetype'
+STAT_VAR_KEY = 'statvar'
+COUNTRY_CODE_KEY = 'countrycode'
+INDICATOR_CODE_KEY = 'indicatorcode'
+OBSERVATION_DATE_KEY = 'observationdate'
+OBSERVATION_ABOUT_KEY = 'observationabout'
+OBSERVATION_VALUE_KEY = 'observationvalue'
+MEASUREMENT_METHOD_KEY = 'measurementmethod'
+CODES_FILE_PATH = os.path.join(OUTPUT_DIR, 'wb-codes.csv')
 CODES_CSV_COLUMNS = [
-    SERIES_CODE_KEY, INDICATOR_NAME_KEY, SHORT_DEFINITION_KEY, TOPIC_KEY
+    SERIES_CODE_KEY, INDICATOR_NAME_KEY, NUM_DATASETS_KEY, TOPIC_KEY,
+    UNIT_OF_MEASURE_KEY, SHORT_DEFINITION_KEY, LONG_DEFINITION_KEY,
+    LICENSE_TYPE_KEY
 ]
+OBS_CSV_COLUMNS = [
+    INDICATOR_CODE_KEY, STAT_VAR_KEY, MEASUREMENT_METHOD_KEY,
+    OBSERVATION_ABOUT_KEY, OBSERVATION_DATE_KEY, OBSERVATION_VALUE_KEY, UNIT_KEY
+]
+EARTH_DCID = 'dcid:Earth'
+COUNTRY_DCID_PREFIX = 'dcid:country'
+WORLD_BANK_STAT_VAR_PREFIX = 'worldBank'
+
+
+def load_stat_vars(stat_var_file):
+    with open(stat_var_file, 'r') as f:
+        csv_rows = sanitize_csv_rows(list(csv.DictReader(f)))
+        svs = {}
+        for csv_row in csv_rows:
+            if csv_row.get(SERIES_CODE_KEY) and csv_row.get(STAT_VAR_KEY):
+                svs[csv_row[SERIES_CODE_KEY]] = csv_row
+            else:
+                logging.error('SKIPPED stat var row: %s', csv_row)
+
+        logging.info(svs)
+        return svs
 
 
 def write_wb_codes():
@@ -290,14 +354,19 @@ def get_all_codes():
             zip_file = f"{DOWNLOADS_DIR}/{file_name}"
             codes = get_codes_from_zip(zip_file)
             if codes:
-                all_codes.update(codes)
+                for key, value in codes.items():
+                    if key in all_codes:
+                        all_codes[key][NUM_DATASETS_KEY] = all_codes[key][
+                            NUM_DATASETS_KEY] + 1
+                    else:
+                        all_codes[key] = value
     logging.info('# total codes: %s', len(all_codes))
     return all_codes
 
 
 def get_codes_from_zip(zip_file):
     with zipfile.ZipFile(zip_file, 'r') as zip:
-        series_file = get_series_file_name(zip)
+        (_, series_file) = get_data_and_series_file_names(zip)
         if series_file is None:
             logging.warning('No series file found in ZIP file: %s', zip_file)
         else:
@@ -322,13 +391,159 @@ def get_codes_from_zip(zip_file):
                             code,
                         INDICATOR_NAME_KEY:
                             series_row.get(INDICATOR_NAME_KEY),
+                        NUM_DATASETS_KEY:
+                            1,
+                        TOPIC_KEY:
+                            series_row.get(TOPIC_KEY),
+                        UNIT_OF_MEASURE_KEY:
+                            series_row.get(UNIT_OF_MEASURE_KEY),
                         SHORT_DEFINITION_KEY:
                             series_row.get(SHORT_DEFINITION_KEY),
-                        TOPIC_KEY:
-                            series_row.get(TOPIC_KEY)
+                        LONG_DEFINITION_KEY:
+                            series_row.get(LONG_DEFINITION_KEY),
+                        LICENSE_TYPE_KEY:
+                            series_row.get(LICENSE_TYPE_KEY),
                     }
                 return codes
         return {}
+
+
+def write_csv(csv_file_path, csv_columns, csv_rows):
+    with open(csv_file_path, 'w', newline='') as out:
+        csv_writer = csv.DictWriter(out,
+                                    fieldnames=csv_columns,
+                                    lineterminator='\n')
+        csv_writer.writeheader()
+        csv_writer.writerows(csv_rows)
+
+
+def write_all_observations(stat_vars_file):
+    start = datetime.now()
+    logging.info('Start: %s', start)
+
+    svs = load_stat_vars(stat_vars_file)
+
+    zip_files = []
+    for file_name in os.listdir(DOWNLOADS_DIR):
+        if file_name.endswith(CSV_ZIP_FILE_SUFFIX):
+            zip_files.append(f"{DOWNLOADS_DIR}/{file_name}")
+
+    with multiprocessing.Pool(POOL_SIZE) as pool:
+        pool.starmap(write_observations_from_zip, zip(zip_files, repeat(svs)))
+
+    end = datetime.now()
+    logging.info('End: %s', end)
+    logging.info('Duration: %s', str(end - start))
+
+
+def write_observations_from_zip(zip_file, svs):
+    csv_rows = get_observations_from_zip(zip_file, svs)
+    if len(csv_rows) == 0:
+        logging.info(
+            'SKIPPED writing obs file, no observations extracted from %s',
+            zip_file)
+        return
+
+    obs_file_name = f"{zip_file.split('/')[-1].split('.')[0]}_obs.csv"
+    obs_file_path = os.path.join(OBSERVATIONS_DIR, obs_file_name)
+    logging.info('Writing %s observations from %s to %s', len(csv_rows),
+                 zip_file, obs_file_path)
+    write_csv(obs_file_path, OBS_CSV_COLUMNS, csv_rows)
+
+
+def get_observations_from_zip(zip_file, svs):
+    with zipfile.ZipFile(zip_file, 'r') as zip:
+        (data_file, _) = get_data_and_series_file_names(zip)
+        if data_file is None:
+            logging.warning('No data file found in ZIP file: %s', zip_file)
+            return []
+        else:
+            # Use name of file (excluding the extension) as the measurement method
+            measurement_method = f"{WORLD_BANK_STAT_VAR_PREFIX}_{zip_file.split('/')[-1].split('.')[0]}"
+            with zip.open(data_file, 'r') as csv_file:
+                data_rows = sanitize_csv_rows(
+                    list(csv.DictReader(codecs.iterdecode(csv_file, 'utf-8'))))
+                num_rows = len(data_rows)
+                logging.info('# data rows in %s: %s', zip_file, num_rows)
+
+                obs_csv_rows = []
+                for data_row in data_rows:
+                    obs_csv_rows.extend(
+                        get_observations_from_data_row(data_row, svs,
+                                                       measurement_method))
+
+                return obs_csv_rows
+
+
+def get_observations_from_data_row(data_row, svs, measurement_method):
+    code = data_row.get(INDICATOR_CODE_KEY)
+    if code is None:
+        logging.error('SKIPPED data row, no indicator code: %s', data_row)
+        return []
+
+    sv = get_stat_var_from_code(code, svs)
+    if sv is None:
+        return []
+
+    place_dcid = data_row.get(COUNTRY_CODE_KEY)
+    if place_dcid:
+        if len(place_dcid) != 3:
+            logging.error('SKIPPED data row, not a country code: %s',
+                          place_dcid)
+            return []
+        else:
+            place_dcid = f"{COUNTRY_DCID_PREFIX}/{place_dcid}"
+    else:
+        place_dcid = EARTH_DCID
+
+    obs_csv_rows = []
+    for key in data_row.keys():
+        # Flatten year columns with values into rows.
+        # Each year is a column and columns are integers.
+        # So we ignore those that are not.
+        if not key.isdecimal():
+            continue
+
+        year = key
+
+        # We are only interested in numeric values.
+        value = data_row[year]
+        if not is_numeric(value):
+            continue
+
+        obs_csv_rows.append({
+            INDICATOR_CODE_KEY: code,
+            STAT_VAR_KEY: sv[STAT_VAR_KEY],
+            MEASUREMENT_METHOD_KEY: measurement_method,
+            OBSERVATION_ABOUT_KEY: place_dcid,
+            OBSERVATION_DATE_KEY: year,
+            OBSERVATION_VALUE_KEY: value,
+            UNIT_KEY: sv.get(UNIT_KEY)
+        })
+
+    return obs_csv_rows
+
+
+def get_stat_var_from_code(code, svs):
+    sv_mapping = svs.get(code)
+    if sv_mapping is None or sv_mapping.get(STAT_VAR_KEY) is None:
+        logging.warning('SKIPPED, WB code not mapped: %s', code)
+        return None
+    return sv_mapping
+
+
+def is_numeric(value):
+    if value is None:
+        return False
+
+    if value.isdecimal():
+        return True
+
+    try:
+        float(value)
+        return True
+    except:
+        return False
 
 
 def sanitize_csv_rows(csv_rows):
@@ -344,14 +559,14 @@ def sanitize_csv_key(key):
     return re.sub(r'[^a-zA-Z0-9]', '', key).lower()
 
 
-def get_series_file_name(zip):
+def get_data_and_series_file_names(zip):
     for file_name in zip.namelist():
         if file_name.endswith(DATA_FILE_SUFFIX):
             series_file_name = file_name.replace(DATA_FILE_SUFFIX,
                                                  SERIES_FILE_SUFFIX)
             if series_file_name in zip.namelist():
-                return series_file_name
-    return None
+                return (file_name, series_file_name)
+    return (None, None)
 
 
 def main(_):
@@ -362,6 +577,10 @@ def main(_):
             fetch_and_write_datasets_csv()
         case Mode.WRITE_WB_CODES:
             write_wb_codes()
+        case Mode.LOAD_STAT_VARS:
+            load_stat_vars(FLAGS.stat_vars_file)
+        case Mode.WRITE_OBSERVATIONS:
+            write_all_observations(FLAGS.stat_vars_file)
         case _:
             logging.error('No mode specified.')
 
