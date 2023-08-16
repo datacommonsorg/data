@@ -88,7 +88,7 @@ flags.DEFINE_string(
     f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}, {Mode.LOAD_STAT_VARS}, {Mode.WRITE_OBSERVATIONS}"
 )
 
-flags.DEFINE_string('stat_vars_file', 'svs.csv',
+flags.DEFINE_string('stat_vars_file', 'statvars.csv',
                     'Path to CSV file with Stat Var mappings.')
 
 ctx = create_urllib3_context()
@@ -366,11 +366,10 @@ def get_all_codes():
 
 def get_codes_from_zip(zip_file):
     with zipfile.ZipFile(zip_file, 'r') as zip:
-        file_names = get_data_and_series_file_names(zip)
-        if file_names is None or len(file_names) != 2:
+        (_, series_file) = get_data_and_series_file_names(zip)
+        if series_file is None:
             logging.warning('No series file found in ZIP file: %s', zip_file)
         else:
-            series_file = file_names[1]
             with zip.open(series_file, 'r') as csv_file:
                 series_rows = sanitize_csv_rows(
                     list(csv.DictReader(codecs.iterdecode(csv_file, 'utf-8'))))
@@ -454,12 +453,11 @@ def write_observations_from_zip(zip_file, svs):
 
 def get_observations_from_zip(zip_file, svs):
     with zipfile.ZipFile(zip_file, 'r') as zip:
-        file_names = get_data_and_series_file_names(zip)
-        if file_names is None or len(file_names) != 2:
+        (data_file, _) = get_data_and_series_file_names(zip)
+        if data_file is None:
             logging.warning('No data file found in ZIP file: %s', zip_file)
             return []
         else:
-            data_file = file_names[0]
             # Use name of file (excluding the extension) as the measurement method
             measurement_method = f"{WORLD_BANK_STAT_VAR_PREFIX}_{zip_file.split('/')[-1].split('.')[0]}"
             with zip.open(data_file, 'r') as csv_file:
@@ -567,8 +565,8 @@ def get_data_and_series_file_names(zip):
             series_file_name = file_name.replace(DATA_FILE_SUFFIX,
                                                  SERIES_FILE_SUFFIX)
             if series_file_name in zip.namelist():
-                return [file_name, series_file_name]
-    return None
+                return (file_name, series_file_name)
+    return (None, None)
 
 
 def main(_):
