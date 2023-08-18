@@ -41,20 +41,16 @@ As discussed above, since most of the data is extracted from side effects from d
 
 ##### Python Script
 
-[`format_atc.py`](format_atc.py) parses the raw .csv file and converts it into a .csv with ATC codes mapped to their corresponding properties.
+[`format_atc_pubchem.py`](format_atc_pubchem.py) parses the raw .csv file and converts it into a .csv with ATC codes mapped to their corresponding properties.
 
 #### Files
 
-##### Data File
-
-[`atc-raw.csv`](atc-raw.csv) contains scraped raw atc codes data
-
 ##### tMCF File
 
-[`atc_output.tmcf`](atc_output.tmcf) contains the tmcf mapping to the csv file, to generate an accurate tmcf-csv pair.
+[`drugs_atc.tmcf`](drugs_atc.tmcf) contains the tmcf mapping to the csv file, to generate an accurate tmcf-csv pair.
 
 ### Example
 
 ```
-python3 format_atc.py atc-raw.csv atc_output.csv
+python3 format_atc_pubchem.py
 ```
