@@ -321,6 +321,7 @@ OBS_CSV_COLUMNS = [
 EARTH_DCID = 'dcid:Earth'
 COUNTRY_DCID_PREFIX = 'dcid:country'
 WORLD_BANK_STAT_VAR_PREFIX = 'worldBank'
+WORLD_BANK_MEASUREMENT_METHOD_PREFIX = 'WorldBank'
 
 
 def load_stat_vars(stat_var_file):
@@ -459,7 +460,7 @@ def get_observations_from_zip(zip_file, svs):
             return []
         else:
             # Use name of file (excluding the extension) as the measurement method
-            measurement_method = f"{WORLD_BANK_STAT_VAR_PREFIX}_{zip_file.split('/')[-1].split('.')[0]}"
+            measurement_method = f"{WORLD_BANK_MEASUREMENT_METHOD_PREFIX}_{zip_file.split('/')[-1].split('.')[0]}"
             with zip.open(data_file, 'r') as csv_file:
                 data_rows = sanitize_csv_rows(
                     list(csv.DictReader(codecs.iterdecode(csv_file, 'utf-8'))))
