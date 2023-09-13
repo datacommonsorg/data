@@ -4,7 +4,7 @@ This document summarizes the steps involved in adding a dataset to Data Commons 
 
 ## Prerequisites
 
-* Ensure that the DC team (support@datacommons.org) has approved the addition of the dataset.
+* Ensure that the Data Commons team has approved the addition of the dataset. Please [suggest a dataset here](https://docs.google.com/forms/d/e/1FAIpQLSf_kZ13bmzXvgEbim0OXeAVsTQYsIhN8_o9ekdbjKoeFjfvRA/viewform).
 * Review the following documents to get a background on the data model, format and workflow:
   * [Summary of data model](https://schema.org/docs/datamodel.html) (DC inherits schema from schema.org)
   * [How statistics is represented in DC](representing_statistics.md)
