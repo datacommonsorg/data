@@ -35,7 +35,7 @@ Once the entity and schema mapping have been finalized, you can now prepare the 
   * Data cleaning code (along with README) checked into [data repo](https://github.com/datacommonsorg/data)
   * Validation results for the artifacts (from running [`dc-import`](https://github.com/datacommonsorg/import#using-import-tool) tool)
 
-Note: you may also use the [DC Import Wizard](datacommons.org/import) to help generate artifacts for common dataset structures
+Note: you may also use the [DC Import Wizard](https://datacommons.org/import) to help generate artifacts for common dataset structures
 
 ## Review by DC team
 
