@@ -6,6 +6,31 @@
 
 ### Overview
 
+This script generates both the MCFs as well as the json caches used
+in the DC website.
+
+Since Place geos have a single provenance and we want to use these
+boundaries only for UN SDG, we add them as a new `unGeoJsonCoordinates`
+property (plus `DPx` suffixes).
+
+The following countries in DC do not have boundaries:
+* country/ANT
+* country/ATB
+* country/ATN
+* country/CTE
+* country/FXX
+* country/IOT
+* country/UMI
+* country/WLF
+* country/XKS
+* country/YUG
+
+Among those, the following ones have boundary from World Bank source:
+* country/IOT
+* country/UMI
+* country/WLF
+
+
 ### Scripts
 
 Run the following script to generate Website cache and MCFs ready for import.
@@ -13,3 +38,7 @@ Run the following script to generate Website cache and MCFs ready for import.
 ```bash
 ./run.sh
 ```
+
+Copy the contents of `output/mcf` over for manifesting.
+
+Copy the contents of `output/cache` to the website repo.

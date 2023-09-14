@@ -41,7 +41,7 @@ flags.DEFINE_string(
 )
 
 # Threshold to DP level map, from scripts/us_census/geojsons_low_res/generate_mcf.py
-# TODO: Add levels 6, 10 and 13.
+# TODO: Identify exact tolerance for levels 6, 10 and 13.
 EPS_LEVEL_MAP = {0: 0, 0.03: 2, 0.05: 3, 0.1: 6, 0.2: 10, 0.5: 13}
 
 MCF_PATH = '{MCF_OUT_FOLDER}/mcf/countries.dp{dp_level}.mcfgeojson.mcf'
@@ -54,6 +54,7 @@ MULTIPOLYGON_GEOJSON_TYPE = "MultiPolygon"
 POLYGON_GEOJSON_TYPE = "Polygon"
 
 # Map from parent-place DCID to DP level
+# TODO: Add more regions
 PARENT_PLACES = {
     'Earth': 13,
     'asia': 10,
@@ -63,7 +64,6 @@ PARENT_PLACES = {
     'oceania': 13,
     'southamerica': 10,
 }
-
 
 #
 # Code from @chejennifer.
@@ -163,8 +163,7 @@ class CountryBoundariesGenerator:
 
         # Compare dataset countries with results from DC
         idx = all_countries['iso3cd'].apply(is_dc_country)
-        # return sorted(all_countries.loc[idx]['iso3cd'])
-        return ['CHN', 'IND', 'PAK']
+        return sorted(all_countries.loc[idx]['iso3cd'])
 
     def _geojson_tmpfile(self, country_code, dp_level):
         """Returns filename of the geojson output file."""
