@@ -42,7 +42,7 @@ flags.DEFINE_string(
 
 # Threshold to DP level map, from scripts/us_census/geojsons_low_res/generate_mcf.py
 # TODO: Identify exact tolerance for levels 6, 10 and 13.
-EPS_LEVEL_MAP = {0: 0, 0.03: 2, 0.05: 3, 0.1: 6, 0.2: 10, 0.5: 13}
+EPS_LEVEL_MAP = {0: 0, 0.03: 2, 0.05: 3, 0.125: 6, 0.225: 10, 0.3: 13}
 
 MCF_PATH = '{MCF_OUT_FOLDER}/mcf/countries.dp{dp_level}.mcfgeojson.mcf'
 MCF_FORMAT_STR = "\n".join([
@@ -124,6 +124,7 @@ def get_geojson_feature(geo_id: str, geo_name: str, geojson: Dict):
             "coordinates": coordinates
         }
     else:
+        assert False, geojson_type
         geo_feature = None
     return geo_feature
 
@@ -182,7 +183,7 @@ class CountryBoundariesGenerator:
         geometry = features[0].get('geometry')
         fname = self._geojson_tmpfile(country_code, dp_level)
         with open(fname, 'w') as f:
-            json.dump(geometry, f)
+            json.dump(geometry, f, indent=2)
 
     def _simplify_json(self, country_code, country_data):
         """Simplifies (and exports) a geojson."""
@@ -195,11 +196,13 @@ class CountryBoundariesGenerator:
 
     def extract_country_geojson(self, all_countries_df, existing_codes):
         """Extract and export all geojson to tempfiles."""
+
         print(f'Exporting geojson to {self.output_dir}')
         col = 'iso3cd'
         for country_code in existing_codes:
-            country_data = all_countries_df[all_countries_df[col] ==
-                                            country_code]
+            country_data = all_countries_df[(all_countries_df[col] == country_code) &
+                                            (all_countries_df['geometry'].geom_type != 'LineString') &
+                                            (all_countries_df['geometry'].geom_type != 'MultiLineString')]
             country_data = country_data.dissolve(
                 by=col)  # Join multiple rows into a single shape
             self._simplify_json(country_code, country_data)
@@ -207,7 +210,6 @@ class CountryBoundariesGenerator:
     def build_cache(self, existing_codes):
         parent2children = dc.get_places_in(list(PARENT_PLACES.keys()),
                                            'Country')
-
         all_children = set()
         for children in parent2children.values():
             all_children.update(children)
@@ -232,8 +234,9 @@ class CountryBoundariesGenerator:
                     print(f'Missing geojson for {child}')
                     continue
                 geo = self._geojson(code, dp_level)
-                features.append(
-                    get_geojson_feature(child, child2name.get(child, ''), geo))
+                feature = get_geojson_feature(child, child2name.get(child, ''), geo)
+                if feature:
+                    features.append(feature)
             result = {
                 "type": "FeatureCollection",
                 "features": features,
@@ -251,8 +254,8 @@ class CountryBoundariesGenerator:
 
         def prop_for_dp_level(dp_level):
             if dp_level == 0:
-                return "unGeoJsonCoordinates"
-            return f"unGeoJsonCoordinatesDP{dp_level}"
+                return "geoJsonCoordinatesUN"
+            return f"geoJsonCoordinatesUNDP{dp_level}"
 
         for _, dp_level in EPS_LEVEL_MAP.items():
             mcf_path = MCF_PATH.format(MCF_OUT_FOLDER=self.output_dir,

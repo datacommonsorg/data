@@ -10,7 +10,7 @@ This script generates both the MCFs as well as the json caches used
 in the DC website.
 
 Since Place geos have a single provenance and we want to use these
-boundaries only for UN SDG, we add them as a new `unGeoJsonCoordinates`
+boundaries only for UN SDG, we add them as a new `geoJsonCoordinatesUN`
 property (plus `DPx` suffixes).
 
 The following countries in DC do not have boundaries:
