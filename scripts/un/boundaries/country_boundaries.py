@@ -41,7 +41,6 @@ flags.DEFINE_string(
 )
 
 # Threshold to DP level map, from scripts/us_census/geojsons_low_res/generate_mcf.py
-# TODO: Identify exact tolerance for levels 6, 10 and 13.
 EPS_LEVEL_MAP = {0: 0, 0.03: 2, 0.05: 3, 0.125: 6, 0.225: 10, 0.3: 13}
 
 MCF_PATH = '{MCF_OUT_FOLDER}/mcf/countries.dp{dp_level}.mcfgeojson.mcf'
