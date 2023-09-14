@@ -80,7 +80,6 @@ MAPPED_DIMENSIONS = {
     'CAUSE_OF_DEATH': 'causeOfDeath',
     'DISABILITY_STATUS': 'disabilityStatus',
     'EDUCATION_LEV': 'educationalAttainment',
-    #'SEX': 'gender'
 }
 
 # Shared dimensions across all input csv files.
@@ -93,57 +92,6 @@ BASE_DIMENSIONS = {
     'UPPER_BOUND', 'LOWER_BOUND', 'UNIT_MEASURE', 'UNIT_MULT', 'BASE_PERIOD',
     'NATURE', 'SOURCE', 'GEO_INFO_URL', 'FOOT_NOTE', 'REPORTING_TYPE',
     'OBS_STATUS', 'RELEASE_STATUS', 'RELEASE_NAME'
-}
-
-UNIT_MAPPING = {
-    'CON_USD_M': ('CON_USD', 1000000),
-    'CUR_LCU_M': ('CUR_LCU', 1000000),
-    'CU_USD_B': ('CU_USD', 1000000000),
-    'CU_USD_M': ('CU_USD', 1000000),
-    'HA_TH': ('HA', 1000),
-    'NUM_M': ('NUMBER', 1000000),
-    'NUM_TH': ('NUMBER', 1000 ),
-    'TONNES_M': ('TONNES', 1000000),
-}
-
-# Supported Regions.
-# TODO: Add other regions.
-REGIONS = {
-    1: 'Earth',
-    2: 'africa',
-    5: 'southamerica',
-    9: 'oceania',
-    10: 'antarctica',  # Note: UN labels Antarctica as Country not Region.
-    11: 'WesternAfrica',
-    13: 'CentralAmerica',
-    14: 'EasternAfrica',
-    15: 'NorthernAfrica',
-    17: 'MiddleAfrica',
-    18: 'SouthernAfrica',
-    21: 'northamerica',
-    29: 'Caribbean',
-    30: 'EasternAsia',
-    34: 'SouthernAsia',
-    35: 'SouthEasternAsia',
-    39: 'SouthernEurope',
-    53: 'AustraliaAndNewZealand',
-    54: 'Melanesia',
-    57: 'Micronesia',
-    61: 'Polynesia',
-    62: 'SouthCentralAsia',
-    142: 'asia',
-    143: 'CentralAsia',
-    145: 'WesternAsia',
-    150: 'europe',
-    151: 'EasternEurope',
-    154: 'NothernEurope',
-    155: 'WesternEurope',
-    202: 'SubSaharanAfrica',
-    419: 'LatinAmericaAndCaribbean',
-    420: 'LatinAmerica',
-    830: 'ChannelIslands',
-    # ADD EU
-    97: 'EuropeanUnion',
 }
 
 ZERO_NULL = {
@@ -179,49 +127,6 @@ with open('place_mappings.csv') as f:
   for row in reader:
     PLACE_MAPPINGS[str(row['sdg'])] = str(row['dcid'])
 
-with open('geographies/regions.csv') as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        REGIONS[int(row['code'])] = row['un_code'].replace(':', '/')
-
-def get_country_map(file):
-    ''' Creates map of M49 -> ISO-alpha3 for countries.
-
-  Args:
-    file: Path to input file.
-
-  Returns:
-    Country map.
-  '''
-    with open(file) as f:
-        places = {}
-        reader = csv.DictReader(f, delimiter='\t')
-        for row in reader:
-            if not row['ISO-alpha3 code']:  # Only countries for now.
-                continue
-            places[int(row['M49 code'])] = row['ISO-alpha3 code']
-    return places
-
-
-PLACES = get_country_map(os.path.join(module_dir_, 'm49.csv'))
-
-
-def get_city_map(file):
-    ''' Creates map of name -> dcid for supported cities.
-
-  Args:
-    file: Path to input file.
-
-  Returns:
-    City map.
-  '''
-    with open(file) as f:
-        reader = csv.DictReader(f)
-        return {row['name']: row['dcid'] for row in reader}
-
-
-CITIES = get_city_map(os.path.join(module_dir_, 'cities_filtered.csv'))
-
 
 def format_description(s):
     '''Formats input with curated style.
@@ -236,8 +141,6 @@ def format_description(s):
     formatted = re.sub('\((?:[^)(]|\([^)(]*\))*\)', '', s)
     # Remove <=2 levels of [].
     formatted = re.sub('\[(?:[^)(]|\[[^)(]*\])*\]', '', formatted)
-    # Remove attributes indicated with 'by'.
-    #formatted = formatted.split(', by')[0]
     # Remove references indicated by 'million USD'.
     formatted = formatted.split(', million USD')[0]
     # Remove extra spaces.
@@ -310,8 +213,6 @@ def replace_me(text, mappings):
     new_pair = ''
 
     temp = raw_pair.split('=')
-    if (len(temp) < 2):
-       print(text)
     left_equal, right_equal = temp[0], temp[1]
     left_equal = left_equal.strip()
     right_equal = right_equal.strip()

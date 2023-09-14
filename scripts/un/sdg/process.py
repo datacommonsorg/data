@@ -53,26 +53,6 @@ def get_geography(code, type):
     if str(code) in util.PLACE_MAPPINGS:
         return 'dcs:' + util.PLACE_MAPPINGS[str(code)]
     return ''
-    '''
-    # Currently only support Country, City, and select Regions .
-    if code in util.REGIONS:
-        return 'dcs:' + util.REGIONS[code]
-    elif type == 'Country' and code in util.PLACES:
-        return 'dcs:country/' + util.PLACES[code]
-    elif type == 'City':
-        # Remove country prefix for now.
-        #city = '_'.join(code.split('_')[1:])
-        city = code
-        if city in util.CITIES and util.CITIES[city]:
-            return 'dcs:' + util.CITIES[city]
-    return ''
-    '''
-
-def scale_value(value, unit):
-    new_value = float(value)
-    if unit in util.UNIT_MAPPING:
-        new_value *= util.UNIT_MAPPING[unit][1]
-    return int(new_value) if new_value.is_integer() else new_value
 
 
 def get_unit(unit, base_period):
@@ -85,14 +65,7 @@ def get_unit(unit, base_period):
     Returns:
         Unit dcid.
     '''
-    formatted_unit = unit
-    #if formatted_unit in util.UNIT_MAPPING:
-    #    formatted_unit = util.UNIT_MAPPING[formatted_unit][0]
-    #if formatted_unit == 'NUMBER':
-    #    return '' 
-    #if util.is_valid(base_period):
-    #    return f'[SDG_{formatted_unit} {base_period}]'
-    return 'dcs:SDG_' + formatted_unit
+    return 'dcs:SDG_' + unit
 
 
 def get_measurement_method(row):
@@ -261,8 +234,6 @@ def process(input_dir, schema_dir, csv_dir):
 
             df['VARIABLE_CODE'] = df['VARIABLE_CODE'].apply(
                 lambda x: 'dcs:sdg/' + x)
-            #df['OBS_VALUE'] = df.apply(
-            #    lambda x: scale_value(x['OBS_VALUE'], x['UNIT_MEASURE']), axis=1)
             df['UNIT_MEASURE'] = df.apply(
                 lambda x: get_unit(x['UNIT_MEASURE'], x['BASE_PERIOD']), axis=1)
             df['MEASUREMENT_METHOD'] = df.apply(
