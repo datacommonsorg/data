@@ -64,6 +64,7 @@ PARENT_PLACES = {
     'southamerica': 10,
 }
 
+
 #
 # Code from @chejennifer.
 #
@@ -199,9 +200,10 @@ class CountryBoundariesGenerator:
         print(f'Exporting geojson to {self.output_dir}')
         col = 'iso3cd'
         for country_code in existing_codes:
-            country_data = all_countries_df[(all_countries_df[col] == country_code) &
-                                            (all_countries_df['geometry'].geom_type != 'LineString') &
-                                            (all_countries_df['geometry'].geom_type != 'MultiLineString')]
+            country_data = all_countries_df[
+                (all_countries_df[col] == country_code) &
+                (all_countries_df['geometry'].geom_type != 'LineString') &
+                (all_countries_df['geometry'].geom_type != 'MultiLineString')]
             country_data = country_data.dissolve(
                 by=col)  # Join multiple rows into a single shape
             self._simplify_json(country_code, country_data)
@@ -233,7 +235,8 @@ class CountryBoundariesGenerator:
                     print(f'Missing geojson for {child}')
                     continue
                 geo = self._geojson(code, dp_level)
-                feature = get_geojson_feature(child, child2name.get(child, ''), geo)
+                feature = get_geojson_feature(child, child2name.get(child, ''),
+                                              geo)
                 if feature:
                     features.append(feature)
             result = {
