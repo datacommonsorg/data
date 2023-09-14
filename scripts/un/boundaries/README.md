@@ -2,7 +2,9 @@
 
 ### Download URL
 
-[UN Geodata Simplified](https://geoportal.un.org/arcgis/apps/sites/#/geohub/datasets/d7caaff3ef4b4f7c82689b7c4694ad92/about)
+From [UN Geodata
+Simplified](https://geoportal.un.org/arcgis/apps/sites/#/geohub/datasets/d7caaff3ef4b4f7c82689b7c4694ad92/about),
+the UN team got us the BNDA geojson that is checked into `data/`.
 
 ### Overview
 

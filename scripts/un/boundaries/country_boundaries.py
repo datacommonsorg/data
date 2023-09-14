@@ -33,7 +33,7 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_file', 'data/UN_Geodata_simplified.geojson',
+flags.DEFINE_string('input_file', 'data/UNGIS_BNDA.geojson',
                     'Input geojson file')
 flags.DEFINE_string(
     'output_dir', 'output',
