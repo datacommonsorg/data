@@ -57,6 +57,7 @@ def write_cities(file, cities, api_key):
         writer = csv.DictWriter(f, fieldnames=['name', 'dcid'])
         writer.writeheader()
         for city in list(cities.keys()):
+            print(city)
             json = {'entities': [{'description': city}]}
             response = get_cities(json, api_key)
             try:
@@ -71,9 +72,10 @@ def write_cities(file, cities, api_key):
 
 
 if __name__ == '__main__':
-    df = pd.read_excel(f'sdg-dataset/output/SDG_cities_enumeration.xlsx')
+    #df = pd.read_csv(f'sdg-dataset/output/SDG_cities_enumeration.csv')
+    df = pd.read_csv('cities_copy.csv')
     cities = {}
     for _, row in df.iterrows():
-        cities[row['CITY_NAME'] + ', ' + row['GEO_AREA_NAME'].replace(
-            '_', ' ').title()] = row['CITY_CODE']
+        cities[row['CITIES_NAME'] + ', ' + row['GEO_AREA_NAME'].replace(
+            '_', ' ').title()] = row['CITIES_CODE']
     write_cities('cities_test.csv', cities, sys.argv[1])

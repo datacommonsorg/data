@@ -31,7 +31,7 @@ class UtilTest(unittest.TestCase):
         self.assertEqual(
             util.format_description(
                 'Indicator of Food Price Anomalies (IFPA), by Consumer Food Price Index'
-            ), 'Indicator of Food Price Anomalies')
+            ), 'Indicator of Food Price Anomalies, by Consumer Food Price Index')
 
     def test_is_float(self):
         self.assertTrue(util.is_float(7.28))
@@ -46,7 +46,7 @@ class UtilTest(unittest.TestCase):
             util.format_variable_description(
                 'Food waste (Tonnes) [Food Waste Sector = Households]',
                 'Food waste (Tonnes)'),
-            'Food waste [Food Waste Sector = Households]')
+            'Food waste [Households]')
 
     def test_format_variable_code(self):
         self.assertEqual(

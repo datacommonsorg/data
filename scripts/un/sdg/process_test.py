@@ -47,7 +47,6 @@ class ProcessTest(unittest.TestCase):
         self.assertEqual(process.get_geography(1, 'Region'), 'dcs:Earth')
 
     def test_get_unit(self):
-        self.assertEqual(process.get_unit('CON_USD', 2021), '[CON_USD 2021]')
         self.assertEqual(process.get_unit('CON_USD', float('nan')),
                          'dcs:SDG_CON_USD')
 

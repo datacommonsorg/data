@@ -80,7 +80,7 @@ MAPPED_DIMENSIONS = {
     'CAUSE_OF_DEATH': 'causeOfDeath',
     'DISABILITY_STATUS': 'disabilityStatus',
     'EDUCATION_LEV': 'educationalAttainment',
-    'SEX': 'gender'
+    #'SEX': 'gender'
 }
 
 # Shared dimensions across all input csv files.
@@ -93,6 +93,17 @@ BASE_DIMENSIONS = {
     'UPPER_BOUND', 'LOWER_BOUND', 'UNIT_MEASURE', 'UNIT_MULT', 'BASE_PERIOD',
     'NATURE', 'SOURCE', 'GEO_INFO_URL', 'FOOT_NOTE', 'REPORTING_TYPE',
     'OBS_STATUS', 'RELEASE_STATUS', 'RELEASE_NAME'
+}
+
+UNIT_MAPPING = {
+    'CON_USD_M': ('CON_USD', 1000000),
+    'CUR_LCU_M': ('CUR_LCU', 1000000),
+    'CU_USD_B': ('CU_USD', 1000000000),
+    'CU_USD_M': ('CU_USD', 1000000),
+    'HA_TH': ('HA', 1000),
+    'NUM_M': ('NUMBER', 1000000),
+    'NUM_TH': ('NUMBER', 1000 ),
+    'TONNES_M': ('TONNES', 1000000),
 }
 
 # Supported Regions.
@@ -131,8 +142,47 @@ REGIONS = {
     419: 'LatinAmericaAndCaribbean',
     420: 'LatinAmerica',
     830: 'ChannelIslands',
+    # ADD EU
+    97: 'EuropeanUnion',
 }
 
+ZERO_NULL = {
+  'SE_ACS_CMPTR',
+  'SE_ACS_H2O',
+  'SE_AGP_CPRA',
+  'SE_ALP_CPLR',
+  'SE_AWP_CPRA',
+  'SE_ACC_HNDWSH',
+  'SE_INF_DSBL',
+  'SE_TOT_CPLR',
+  'SE_TRA_GRDL',
+  'SE_ACS_INTNT',
+}
+ZERO_NULL_TEXT = 'This data point is NIL for the submitting nation.'
+
+DROP_SERIES = {
+  'TX_IMP_GBMRCH',
+  'TX_EXP_GBMRCH',
+  'TX_IMP_GBSVR',
+  'TX_EXP_GBSVR',
+  'SH_SAN_SAFE',
+  'AG_PRD_XSUBDY',
+}
+
+DROP_VARIABLE = {
+   'VC_DTH_TOTPT'
+}
+
+PLACE_MAPPINGS = {}
+with open('place_mappings.csv') as f:
+  reader = csv.DictReader(f)
+  for row in reader:
+    PLACE_MAPPINGS[str(row['sdg'])] = str(row['dcid'])
+
+with open('geographies/regions.csv') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        REGIONS[int(row['code'])] = row['un_code'].replace(':', '/')
 
 def get_country_map(file):
     ''' Creates map of M49 -> ISO-alpha3 for countries.
@@ -170,7 +220,7 @@ def get_city_map(file):
         return {row['name']: row['dcid'] for row in reader}
 
 
-CITIES = get_city_map(os.path.join(module_dir_, 'cities.csv'))
+CITIES = get_city_map(os.path.join(module_dir_, 'cities_filtered.csv'))
 
 
 def format_description(s):
@@ -187,7 +237,7 @@ def format_description(s):
     # Remove <=2 levels of [].
     formatted = re.sub('\[(?:[^)(]|\[[^)(]*\])*\]', '', formatted)
     # Remove attributes indicated with 'by'.
-    formatted = formatted.split(', by')[0]
+    #formatted = formatted.split(', by')[0]
     # Remove references indicated by 'million USD'.
     formatted = formatted.split(', million USD')[0]
     # Remove extra spaces.
@@ -197,6 +247,10 @@ def format_description(s):
         formatted = formatted[:-1]
     # Replace 100,000 with 100K.
     formatted = formatted.replace('100,000', '100K')
+    # Remove some apostrophe.
+    formatted = formatted.replace("Developing countries’", 'Developing countries')
+    # Replace DRR with Disaster Risk Reduction.
+    formatted = formatted.replace('DRR', 'Disaster Risk Reduction')
     # Make ascii.
     return formatted.replace('Â',
                              '').replace('’', '\'').replace('₂', '2').replace(
@@ -235,6 +289,53 @@ def is_valid(v):
     except ValueError:
         return v and not v == 'nan'
 
+MAP = {
+      'Education level': 'education',
+      'Frequency of Chlorophyll-a concentration': 'frequency',
+      'Report Ordinal': 'ordinal',
+      'Grounds of discrimination': 'discrimination',
+      'Deviation Level': 'deviation'
+}
+
+def replace_me(text, mappings):
+  new_text = text.split('[')
+  if len(new_text) == 1:
+    return text
+  next_text = new_text[1][0:-1]
+  new_string = new_text[0] + '['
+  raw_pairs = next_text.split('|')
+  
+  new_pairs = []
+  for raw_pair in raw_pairs:
+    new_pair = ''
+
+    temp = raw_pair.split('=')
+    if (len(temp) < 2):
+       print(text)
+    left_equal, right_equal = temp[0], temp[1]
+    left_equal = left_equal.strip()
+    right_equal = right_equal.strip()
+
+    if left_equal in mappings:
+      if left_equal == 'Education level':
+        if 'education' in right_equal:
+          new_pair = right_equal
+        else:
+          new_pair = right_equal + ' ' + mappings[left_equal]
+      elif '(' in right_equal:
+        level, percentage = right_equal.split('(')
+        level = level.strip()
+        percentage = percentage[:-1]
+        new_pair = level + ' ' + mappings[left_equal] + ' (' + percentage + ')'
+      else:
+        new_pair = right_equal + ' ' + mappings[left_equal]
+    else:
+      new_pair = raw_pair.strip()
+
+    new_pairs.append(new_pair)
+  new_string += ', '.join(new_pairs)
+  new_string += ']'
+  return new_string
 
 def format_variable_description(variable, series):
     '''Curates variable descriptions.
@@ -246,9 +347,42 @@ def format_variable_description(variable, series):
     Returns:
       Formatted description.
     '''
-    parts = variable.split(series)
-    return format_description(series) + parts[1] if len(
-        parts) > 1 else format_description(series)
+    head = format_description(series)
+    pvs = variable.removeprefix(series) 
+    if not pvs:
+       return head
+    pvs = re.sub(r'\(ISIC[^)]*\)', '', pvs)
+    pvs = re.sub(r'\(isco[^)]*\)', '', pvs)
+    pvs = replace_me(pvs, MAP)
+    pvs = pvs.replace('Age = ', '')
+    pvs = pvs.replace('Name of non-communicable disease = ', '')
+    pvs = pvs.replace('Substance use disorders = ', '')
+    pvs = pvs.replace('Quantile = ', '')
+    pvs = pvs.replace('Type of skill = Skill: ', '')
+    pvs = pvs.replace('Type of skill = ', '')
+    pvs = pvs.replace('Sex = ', '')
+    pvs = pvs.replace('Land cover = ', '')
+    pvs = pvs.replace('Level/Status = ', '')
+    pvs = pvs.replace('Policy instruments = ', '')
+    pvs = pvs.replace('Type of product = ', '')
+    pvs = pvs.replace('Type of waste treatment = ', '')
+    pvs = pvs.replace('Activity = ', '')
+    pvs = pvs.replace('Type of renewable technology = ', '')
+    pvs = pvs.replace('Location = ', '')
+    pvs = pvs.replace('Level_of_government = ', '')
+    pvs = pvs.replace('Fiscal intervention stage = ', '')
+    pvs = pvs.replace('Name of international institution = ', '')
+    pvs = pvs.replace('Policy Domains = ', '')
+    pvs = pvs.replace('Mode of transportation = ', '') 
+    pvs = pvs.replace('Food Waste Sector = ', '')
+    pvs = pvs.replace('24 to 59 months old', '2 to 5 years old')
+    pvs = pvs.replace('36 to 47 months old', '3 to 4 years old')
+    pvs = pvs.replace('36 to 59 months old', '3 to 5 years old')
+    pvs = pvs.replace('12 to 23 months', '1 to 2 years old')
+    pvs = pvs.replace('24 to 35 months', '2 to 3 years old')
+    pvs = pvs.replace('36 to 47 months old', '3 to 4 years old')
+    pvs = pvs.replace('48 to 59 months', '4 to 5 years old')
+    return head + pvs
 
 
 def format_variable_code(code):

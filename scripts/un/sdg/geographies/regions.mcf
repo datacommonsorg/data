@@ -1,0 +1,385 @@
+
+Node: dcid:undata-geo/G00134000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Americas"
+unDataCode: "undata-geo:G00134000"
+unDataLabel: "Americas"
+
+Node: dcid:undata-geo/G00404000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Least developed countries (LDCs)"
+unDataCode: "undata-geo:G00404000"
+unDataLabel: "Least developed countries (LDCs)"
+
+Node: dcid:undata-geo/G00405000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Small Island Developing States (SIDS)"
+unDataCode: "undata-geo:G00405000"
+unDataLabel: "Small Island Developing States (SIDS)"
+
+Node: dcid:undata-geo/G00403000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Landlocked developing countries (LLDCs)"
+unDataCode: "undata-geo:G00403000"
+unDataLabel: "Landlocked developing countries (LLDCs)"
+
+Node: dcid:undata-geo/G00800130
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Southern Asia (excl. India)"
+unDataCode: "undata-geo:G00800130"
+unDataLabel: "Southern Asia (excl. India)"
+
+Node: dcid:undata-geo/G00800100
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Caucasus and Central Asia"
+unDataCode: "undata-geo:G00800100"
+unDataLabel: "Caucasus and Central Asia"
+
+Node: dcid:undata-geo/G00406000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Organisation for Economic Co-operation and Development (OECD)"
+unDataCode: "undata-geo:G00406000"
+unDataLabel: "Organisation for Economic Co-operation and Development (OECD)"
+
+Node: dcid:undata-geo/G00800150
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Eastern Asia (excl. Japan and China)"
+unDataCode: "undata-geo:G00800150"
+unDataLabel: "Eastern Asia (excl. Japan and China)"
+
+Node: dcid:undata-geo/G00800370
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Western Asia (excl. Armenia, Azerbaijan, Cyprus, Israel and Georgia)"
+unDataCode: "undata-geo:G00800370"
+unDataLabel: "Western Asia (excl. Armenia, Azerbaijan, Cyprus, Israel and Georgia)"
+
+Node: dcid:undata-geo/G00126000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Europe and Northern America"
+unDataCode: "undata-geo:G00126000"
+unDataLabel: "Europe and Northern America"
+
+Node: dcid:undata-geo/G00800160
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Eastern Asia (excl. Japan)"
+unDataCode: "undata-geo:G00800160"
+unDataLabel: "Eastern Asia (excl. Japan)"
+
+Node: dcid:undata-geo/G00145000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Oceania excluding Australia and New Zealand"
+unDataCode: "undata-geo:G00145000"
+unDataLabel: "Oceania excluding Australia and New Zealand"
+
+Node: dcid:undata-geo/G00500200
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Development Assistance Committee (DAC)"
+unDataCode: "undata-geo:G00500200"
+unDataLabel: "Development Assistance Committee (DAC)"
+
+Node: dcid:undata-geo/G00800500
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Sub-Saharan Africa (incl. Sudan)"
+unDataCode: "undata-geo:G00800500"
+unDataLabel: "Sub-Saharan Africa (incl. Sudan)"
+
+Node: dcid:undata-geo/G00800480
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Northern Africa (excl. Sudan)"
+unDataCode: "undata-geo:G00800480"
+unDataLabel: "Northern Africa (excl. Sudan)"
+
+Node: dcid:undata-geo/G00103000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Northern Africa and Western Asia"
+unDataCode: "undata-geo:G00103000"
+unDataLabel: "Northern Africa and Western Asia"
+
+Node: dcid:undata-geo/G00122000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Eastern and South-eastern Asia"
+unDataCode: "undata-geo:G00122000"
+unDataLabel: "Eastern and South-eastern Asia"
+
+Node: dcid:undata-geo/G00600700
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World Trade Organization (WTO)"
+unDataCode: "undata-geo:G00600700"
+unDataLabel: "World Trade Organization (WTO)"
+
+Node: dcid:undata-geo/G00600710
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World Trade Organization (WTO) Developing Member States"
+unDataCode: "undata-geo:G00600710"
+unDataLabel: "World Trade Organization (WTO) Developing Member States"
+
+Node: dcid:undata-geo/G00600720
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World Trade Organization (WTO) Developed Member States"
+unDataCode: "undata-geo:G00600720"
+unDataLabel: "World Trade Organization (WTO) Developed Member States"
+
+Node: dcid:undata-geo/G00600110
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Food and Agriculture Organization (FAO) International Centers"
+unDataCode: "undata-geo:G00600110"
+unDataLabel: "Food and Agriculture Organization (FAO) International Centers"
+
+Node: dcid:undata-geo/G00500360
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "European Union (EU) Institutions"
+unDataCode: "undata-geo:G00500360"
+unDataLabel: "European Union (EU) Institutions"
+
+Node: dcid:undata-geo/G00600120
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Food and Agriculture Organization (FAO) Regional Centers"
+unDataCode: "undata-geo:G00600120"
+unDataLabel: "Food and Agriculture Organization (FAO) Regional Centers"
+
+Node: dcid:undata-geo/G00600410
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World Health Organization (WHO) Member States: Africa"
+unDataCode: "undata-geo:G00600410"
+unDataLabel: "World Health Organization (WHO) Member States: Africa"
+
+Node: dcid:undata-geo/G00600420
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World Health Organization (WHO) Member States: Americas"
+unDataCode: "undata-geo:G00600420"
+unDataLabel: "World Health Organization (WHO) Member States: Americas"
+
+Node: dcid:undata-geo/G00600430
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World Health Organization (WHO) Member States: South-East Asia"
+unDataCode: "undata-geo:G00600430"
+unDataLabel: "World Health Organization (WHO) Member States: South-East Asia"
+
+Node: dcid:undata-geo/G00600440
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World Health Organization (WHO) Member States: Europe"
+unDataCode: "undata-geo:G00600440"
+unDataLabel: "World Health Organization (WHO) Member States: Europe"
+
+Node: dcid:undata-geo/G00600450
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World Health Organization (WHO) Member States: Western Pacific"
+unDataCode: "undata-geo:G00600450"
+unDataLabel: "World Health Organization (WHO) Member States: Western Pacific"
+
+Node: dcid:undata-geo/G00600400
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World Health Organization (WHO)"
+unDataCode: "undata-geo:G00600400"
+unDataLabel: "World Health Organization (WHO)"
+
+Node: dcid:undata-geo/G00403100
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Landlocked developing countries (LLDCs): Africa"
+unDataCode: "undata-geo:G00403100"
+unDataLabel: "Landlocked developing countries (LLDCs): Africa"
+
+Node: dcid:undata-geo/G00403200
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Landlocked developing countries (LLDCs): Americas"
+unDataCode: "undata-geo:G00403200"
+unDataLabel: "Landlocked developing countries (LLDCs): Americas"
+
+Node: dcid:undata-geo/G00403300
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Landlocked developing countries (LLDCs): Asia"
+unDataCode: "undata-geo:G00403300"
+unDataLabel: "Landlocked developing countries (LLDCs): Asia"
+
+Node: dcid:undata-geo/G00403500
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Landlocked developing countries (LLDCs): Europe"
+unDataCode: "undata-geo:G00403500"
+unDataLabel: "Landlocked developing countries (LLDCs): Europe"
+
+Node: dcid:undata-geo/G00404100
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Least developed countries (LDCs): Africa"
+unDataCode: "undata-geo:G00404100"
+unDataLabel: "Least developed countries (LDCs): Africa"
+
+Node: dcid:undata-geo/G00404200
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Least developed countries (LDCs): Americas"
+unDataCode: "undata-geo:G00404200"
+unDataLabel: "Least developed countries (LDCs): Americas"
+
+Node: dcid:undata-geo/G00404300
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Least developed countries (LDCs): Asia"
+unDataCode: "undata-geo:G00404300"
+unDataLabel: "Least developed countries (LDCs): Asia"
+
+Node: dcid:undata-geo/G00404400
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Least developed countries (LDCs): Oceania"
+unDataCode: "undata-geo:G00404400"
+unDataLabel: "Least developed countries (LDCs): Oceania"
+
+Node: dcid:undata-geo/G00405100
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Small Island Developing States (SIDS): Africa"
+unDataCode: "undata-geo:G00405100"
+unDataLabel: "Small Island Developing States (SIDS): Africa"
+
+Node: dcid:undata-geo/G00405200
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Small Island Developing States (SIDS): Americas"
+unDataCode: "undata-geo:G00405200"
+unDataLabel: "Small Island Developing States (SIDS): Americas"
+
+Node: dcid:undata-geo/G00405300
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Small Island Developing States (SIDS): Asia"
+unDataCode: "undata-geo:G00405300"
+unDataLabel: "Small Island Developing States (SIDS): Asia"
+
+Node: dcid:undata-geo/G00405400
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Small Island Developing States (SIDS): Oceania"
+unDataCode: "undata-geo:G00405400"
+unDataLabel: "Small Island Developing States (SIDS): Oceania"
+
+Node: dcid:undata-geo/G00600000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "United Nations Member States"
+unDataCode: "undata-geo:G00600000"
+unDataLabel: "United Nations Member States"
+
+Node: dcid:undata-geo/G00401000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Developed economies"
+unDataCode: "undata-geo:G00401000"
+unDataLabel: "Developed economies"
+
+Node: dcid:undata-geo/G00402000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Developing economies"
+unDataCode: "undata-geo:G00402000"
+unDataLabel: "Developing economies"
+
+Node: dcid:undata-geo/G00154000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Asia and the Pacific"
+unDataCode: "undata-geo:G00154000"
+unDataLabel: "Asia and the Pacific"
+
+Node: dcid:undata-geo/G00162000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Central and Eastern Europe"
+unDataCode: "undata-geo:G00162000"
+unDataLabel: "Central and Eastern Europe"
+
+Node: dcid:undata-geo/G00152000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Middle East and North Africa"
+unDataCode: "undata-geo:G00152000"
+unDataLabel: "Middle East and North Africa"
+
+Node: dcid:undata-geo/G00151000
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Middle East"
+unDataCode: "undata-geo:G00151000"
+unDataLabel: "Middle East"
+
+Node: dcid:undata-geo/G00100900
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World, not elsewhere specified"
+unDataCode: "undata-geo:G00100900"
+unDataLabel: "World, not elsewhere specified"
+
+Node: dcid:undata-geo/G00100100
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World: High income"
+unDataCode: "undata-geo:G00100100"
+unDataLabel: "World: High income"
+
+Node: dcid:undata-geo/G00100600
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World: Low income"
+unDataCode: "undata-geo:G00100600"
+unDataLabel: "World: Low income"
+
+Node: dcid:undata-geo/G00100500
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World: Lower-middle income"
+unDataCode: "undata-geo:G00100500"
+unDataLabel: "World: Lower-middle income"
+
+Node: dcid:undata-geo/G00100200
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World: Low and middle income"
+unDataCode: "undata-geo:G00100200"
+unDataLabel: "World: Low and middle income"
+
+Node: dcid:undata-geo/G00100400
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "World: Upper-middle income"
+unDataCode: "undata-geo:G00100400"
+unDataLabel: "World: Upper-middle income"
+
+Node: dcid:undata-geo/G99999999
+typeOf: dcs:GeoRegion
+containedInPlace: dcs:Earth
+name: "Source geographies without a corresponding geography in UNdata"
+unDataCode: "undata-geo:G99999999"
+unDataLabel: "Source geographies without a corresponding geography in UNdata"

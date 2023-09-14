@@ -1,0 +1,59 @@
+code,name,un_code
+19,Americas,undata-geo:G00134000
+199,"Least Developed Countries (LDCs)",undata-geo:G00404000
+722,"Small island developing States (SIDS)",undata-geo:G00405000
+432,"Landlocked developing countries (LLDCs)",undata-geo:G00403000
+127,"Southern Asia (excluding India)",undata-geo:G00800130
+135,"Caucasus and Central Asia",undata-geo:G00800100
+198,"Organisation for Economic Co-operation and Development (OECD) Member States",undata-geo:G00406000
+223,"Eastern Asia (excluding Japan and China)",undata-geo:G00800150
+485,"Western Asia (exc. Armenia, Azerbaijan, Cyprus, Israel and Georgia)",undata-geo:G00800370
+513,"Europe and Northern America",undata-geo:G00126000
+518,"Eastern Asia (excluding Japan)",undata-geo:G00800160
+543,"Oceania (exc. Australia and New Zealand)",undata-geo:G00145000
+593,"Development Assistance Committee members (DAC)",undata-geo:G00500200
+738,"Sub-Saharan Africa (inc. Sudan)",undata-geo:G00800500
+746,"Northern Africa (exc. Sudan)",undata-geo:G00800480
+747,"Northern Africa and Western Asia",undata-geo:G00103000
+753,"Eastern and South-Eastern Asia",undata-geo:G00122000
+889,"World Trade Organization (WTO) Member States",undata-geo:G00600700
+915,"WTO Developing Member States",undata-geo:G00600710
+916,"WTO Developed Member States",undata-geo:G00600720
+917,"International Centers (FAO)",undata-geo:G00600110
+918,"European Union (EU) Institutions",undata-geo:G00500360
+919,"Regional Centres (FAO)",undata-geo:G00600120
+99042,"WHO Africa",undata-geo:G00600410
+99043,"WHO Americas",undata-geo:G00600420
+99044,"WHO South-East Asia",undata-geo:G00600430
+99045,"WHO Europe",undata-geo:G00600440
+99047,"WHO Western Pacific",undata-geo:G00600450
+99048,"WHO Global",undata-geo:G00600400
+923,"LLDC Africa",undata-geo:G00403100
+924,"LLDC Americas",undata-geo:G00403200
+925,"LLDC Asia",undata-geo:G00403300
+926,"LLDC Europe",undata-geo:G00403500
+927,"LDC Africa",undata-geo:G00404100
+928,"LDC Americas",undata-geo:G00404200
+929,"LDC Asia",undata-geo:G00404300
+930,"LDC Oceania",undata-geo:G00404400
+931,"SIDS Africa",undata-geo:G00405100
+932,"SIDS Americas",undata-geo:G00405200
+933,"SIDS Asia",undata-geo:G00405300
+934,"SIDS Oceania",undata-geo:G00405400
+938,"Member States",undata-geo:G00600000
+514,,undata-geo:G00401000
+515,,undata-geo:G00402000
+902,,undata-geo:G00154000
+903,,undata-geo:G00162000
+904,,undata-geo:G00152000
+905,,undata-geo:G00151000
+907,,undata-geo:G00100900
+910,,undata-geo:G00100100
+911,,undata-geo:G00100600
+912,,undata-geo:G00100500
+912,,undata-geo:G00100200
+914,,undata-geo:G00100400
+921,,undata-geo:G99999999
+922,,undata-geo:G99999999
+99046,,undata-geo:G00121000
+909,,undata-geo:G99999999

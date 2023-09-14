@@ -27,6 +27,7 @@ Produces:
 Usage: python3 process.py
 '''
 import collections
+import math
 import os
 import pandas as pd
 import shutil
@@ -49,6 +50,10 @@ def get_geography(code, type):
         Geography dcid.
     '''
 
+    if str(code) in util.PLACE_MAPPINGS:
+        return 'dcs:' + util.PLACE_MAPPINGS[str(code)]
+    return ''
+    '''
     # Currently only support Country, City, and select Regions .
     if code in util.REGIONS:
         return 'dcs:' + util.REGIONS[code]
@@ -56,13 +61,21 @@ def get_geography(code, type):
         return 'dcs:country/' + util.PLACES[code]
     elif type == 'City':
         # Remove country prefix for now.
-        city = '_'.join(code.split('_')[1:])
+        #city = '_'.join(code.split('_')[1:])
+        city = code
         if city in util.CITIES and util.CITIES[city]:
             return 'dcs:' + util.CITIES[city]
     return ''
+    '''
+
+def scale_value(value, unit):
+    new_value = float(value)
+    if unit in util.UNIT_MAPPING:
+        new_value *= util.UNIT_MAPPING[unit][1]
+    return int(new_value) if new_value.is_integer() else new_value
 
 
-def get_unit(units, base_period):
+def get_unit(unit, base_period):
     '''Returns dcid of unit.
 
     Args:
@@ -72,9 +85,14 @@ def get_unit(units, base_period):
     Returns:
         Unit dcid.
     '''
-    if util.is_valid(base_period):
-        return f'[{units} {base_period}]'
-    return 'dcs:SDG_' + units
+    formatted_unit = unit
+    #if formatted_unit in util.UNIT_MAPPING:
+    #    formatted_unit = util.UNIT_MAPPING[formatted_unit][0]
+    #if formatted_unit == 'NUMBER':
+    #    return '' 
+    #if util.is_valid(base_period):
+    #    return f'[SDG_{formatted_unit} {base_period}]'
+    return 'dcs:SDG_' + formatted_unit
 
 
 def get_measurement_method(row):
@@ -94,6 +112,22 @@ def get_measurement_method(row):
     if util.is_valid(row['REPORTING_TYPE']):
         mmethod += '_' + str(row['REPORTING_TYPE'])
     return 'SDG' + mmethod
+
+def drop_null(value, series, footnote):
+    if series not in util.ZERO_NULL:
+        return value
+    if footnote != util.ZERO_NULL_TEXT:
+        return value
+    if math.isclose(float(value), 0):
+        return ''
+    return value
+
+def drop_special(value, variable, series):
+    if variable in util.DROP_VARIABLE:
+        return ''
+    if series in util.DROP_SERIES:
+        return ''
+    return value
 
 
 def process(input_dir, schema_dir, csv_dir):
@@ -147,7 +181,7 @@ def process(input_dir, schema_dir, csv_dir):
 
     for _, row in df.iterrows():
         if str(row['Enumeration_Code_SDMX']) != 'CUST_BREAKDOWN' and str(
-                row['Enumeration_Code_SDMX']) != 'COMPOSITE_BREAKDOWN':
+                row['Enumeration_Code_SDMX']) != 'COMPOSITE_BREAKDOWN' and str(row['Enumeration_Code_SDMX']) != 'UNIT_MEASURE':
             dimensions[str(row['Enumeration_Code_SDMX'])][str(
                 row['EnumerationValue_Code_SDMX'])] = str(
                     row['EnumerationValue_Name'])
@@ -183,6 +217,18 @@ def process(input_dir, schema_dir, csv_dir):
             if df.empty:
                 continue
 
+            # Drop known null values.
+            df['OBS_VALUE'] = df.apply(lambda x: drop_null(x['OBS_VALUE'], x['SERIES_CODE'], x['FOOT_NOTE']), axis=1)
+            df = df[df['OBS_VALUE'] != '']
+            if df.empty:
+                continue
+
+            # Drop curated.
+            df['OBS_VALUE'] = df.apply(lambda x: drop_special(x['OBS_VALUE'], x['VARIABLE_CODE'], x['SERIES_CODE']), axis=1)
+            df = df[df['OBS_VALUE'] != '']
+            if df.empty:
+                continue
+
             # Format places.
             df['GEOGRAPHY_CODE'] = df.apply(lambda x: get_geography(
                 x['GEOGRAPHY_CODE'], x['GEOGRAPHY_TYPE']),
@@ -207,7 +253,7 @@ def process(input_dir, schema_dir, csv_dir):
 
             sv_frames.append(df.loc[:,
                                     ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION'] +
-                                    properties].drop_duplicates())
+                                    properties + ['SOURCE', 'FOOT_NOTE']].drop_duplicates())
             measurement_method_frames.append(
                 df.loc[:, ['NATURE', 'OBS_STATUS', 'REPORTING_TYPE']].
                 drop_duplicates())
@@ -215,10 +261,13 @@ def process(input_dir, schema_dir, csv_dir):
 
             df['VARIABLE_CODE'] = df['VARIABLE_CODE'].apply(
                 lambda x: 'dcs:sdg/' + x)
+            #df['OBS_VALUE'] = df.apply(
+            #    lambda x: scale_value(x['OBS_VALUE'], x['UNIT_MEASURE']), axis=1)
             df['UNIT_MEASURE'] = df.apply(
                 lambda x: get_unit(x['UNIT_MEASURE'], x['BASE_PERIOD']), axis=1)
             df['MEASUREMENT_METHOD'] = df.apply(
                 lambda x: 'dcs:' + get_measurement_method(x), axis=1)
+            
 
             # Retain only columns for cleaned csv.
             df = df.loc[:, [
@@ -231,10 +280,15 @@ def process(input_dir, schema_dir, csv_dir):
                       index=False)
 
     with open(os.path.join(schema_dir, 'sv.mcf'), 'w') as f:
+        #sv_frames.append(df.loc[:,
+                                    #['VARIABLE_CODE', 'VARIABLE_DESCRIPTION', 'SOURCE', 'FOOT_NOTE'] +
+                                    #properties].drop_duplicates())
         for df in sv_frames:
-            for _, row in df.iterrows():
+            main = df.drop(['SOURCE', 'FOOT_NOTE'], axis=1).drop_duplicates()
+            for _, row in main.iterrows():
+                #notes = df.loc[:, [df[df.columns[i]].equals(row.iloc[i]) for i in range(len(row))]].drop_duplicates()
                 cprops = ''
-                for dimension in sorted(df.columns[2:]):
+                for dimension in sorted(main.columns[2:]):
                     # Skip totals.
                     if row[dimension] == util.TOTAL:
                         continue
