@@ -94,6 +94,7 @@ BASE_DIMENSIONS = {
     'OBS_STATUS', 'RELEASE_STATUS', 'RELEASE_NAME'
 }
 
+# Series where zero should be treated as null and removed.
 ZERO_NULL = {
   'SE_ACS_CMPTR',
   'SE_ACS_H2O',
@@ -106,6 +107,8 @@ ZERO_NULL = {
   'SE_TRA_GRDL',
   'SE_ACS_INTNT',
 }
+
+# Footnote text indicated that a zero point should be treated as null and removed.
 ZERO_NULL_TEXT = 'This data point is NIL for the submitting nation.'
 
 DROP_SERIES = {
@@ -121,8 +124,16 @@ DROP_VARIABLE = {
    'VC_DTH_TOTPT'
 }
 
+MAP = {
+      'Education level': 'education',
+      'Frequency of Chlorophyll-a concentration': 'frequency',
+      'Report Ordinal': 'ordinal',
+      'Grounds of discrimination': 'discrimination',
+      'Deviation Level': 'deviation'
+}
+
 PLACE_MAPPINGS = {}
-with open('place_mappings.csv') as f:
+with open('geography/place_mappings.csv') as f:
   reader = csv.DictReader(f)
   for row in reader:
     PLACE_MAPPINGS[str(row['sdg'])] = str(row['dcid'])
@@ -192,13 +203,6 @@ def is_valid(v):
     except ValueError:
         return v and not v == 'nan'
 
-MAP = {
-      'Education level': 'education',
-      'Frequency of Chlorophyll-a concentration': 'frequency',
-      'Report Ordinal': 'ordinal',
-      'Grounds of discrimination': 'discrimination',
-      'Deviation Level': 'deviation'
-}
 
 def replace_me(text, mappings):
   new_text = text.split('[')

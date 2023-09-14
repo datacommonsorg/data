@@ -39,7 +39,7 @@ sys.path.append(
 from un.sdg import util
 
 
-def get_geography(code, type):
+def get_geography(code):
     '''Returns dcid of geography.
 
     Args:
@@ -49,23 +49,9 @@ def get_geography(code, type):
     Returns:
         Geography dcid.
     '''
-
     if str(code) in util.PLACE_MAPPINGS:
         return 'dcs:' + util.PLACE_MAPPINGS[str(code)]
     return ''
-
-
-def get_unit(unit, base_period):
-    '''Returns dcid of unit.
-
-    Args:
-        unit: Unit.
-        base_period: Base period of unit.
-
-    Returns:
-        Unit dcid.
-    '''
-    return 'dcs:SDG_' + unit
 
 
 def get_measurement_method(row):
@@ -204,7 +190,7 @@ def process(input_dir, schema_dir, csv_dir):
 
             # Format places.
             df['GEOGRAPHY_CODE'] = df.apply(lambda x: get_geography(
-                x['GEOGRAPHY_CODE'], x['GEOGRAPHY_TYPE']),
+                x['GEOGRAPHY_CODE']),
                                             axis=1)
             df = df[df['GEOGRAPHY_CODE'] != '']
             if df.empty:
@@ -226,7 +212,7 @@ def process(input_dir, schema_dir, csv_dir):
 
             sv_frames.append(df.loc[:,
                                     ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION'] +
-                                    properties + ['SOURCE', 'FOOT_NOTE']].drop_duplicates())
+                                    properties].drop_duplicates())
             measurement_method_frames.append(
                 df.loc[:, ['NATURE', 'OBS_STATUS', 'REPORTING_TYPE']].
                 drop_duplicates())
@@ -234,8 +220,8 @@ def process(input_dir, schema_dir, csv_dir):
 
             df['VARIABLE_CODE'] = df['VARIABLE_CODE'].apply(
                 lambda x: 'dcs:sdg/' + x)
-            df['UNIT_MEASURE'] = df.apply(
-                lambda x: get_unit(x['UNIT_MEASURE'], x['BASE_PERIOD']), axis=1)
+            df['UNIT_MEASURE'] = df['UNIT_MEASURE'].apply(
+                lambda x: 'dcs:SDG_' + x)
             df['MEASUREMENT_METHOD'] = df.apply(
                 lambda x: 'dcs:' + get_measurement_method(x), axis=1)
             
@@ -251,15 +237,10 @@ def process(input_dir, schema_dir, csv_dir):
                       index=False)
 
     with open(os.path.join(schema_dir, 'sv.mcf'), 'w') as f:
-        #sv_frames.append(df.loc[:,
-                                    #['VARIABLE_CODE', 'VARIABLE_DESCRIPTION', 'SOURCE', 'FOOT_NOTE'] +
-                                    #properties].drop_duplicates())
         for df in sv_frames:
-            main = df.drop(['SOURCE', 'FOOT_NOTE'], axis=1).drop_duplicates()
-            for _, row in main.iterrows():
-                #notes = df.loc[:, [df[df.columns[i]].equals(row.iloc[i]) for i in range(len(row))]].drop_duplicates()
+            for _, row in df.iterrows():
                 cprops = ''
-                for dimension in sorted(main.columns[2:]):
+                for dimension in sorted(df.columns[2:]):
                     # Skip totals.
                     if row[dimension] == util.TOTAL:
                         continue

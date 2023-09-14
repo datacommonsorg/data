@@ -1,8 +1,4 @@
 csv/* filter=lfs diff=lfs merge=lfs -text
 schema/* filter=lfs diff=lfs merge=lfs -text
 dc_generated/* filter=lfs diff=lfs merge=lfs -text
-geography/un_places.mcf filter=lfs diff=lfs merge=lfs -text
-geography/geographies.csv filter=lfs diff=lfs merge=lfs -text
-geography/place_mappings.csv filter=lfs diff=lfs merge=lfs -text
-geography/places.csv filter=lfs diff=lfs merge=lfs -text
-geography/un_containment.mcf filter=lfs diff=lfs merge=lfs -text
+geography/* filter=lfs diff=lfs merge=lfs -text

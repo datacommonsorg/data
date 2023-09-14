@@ -40,15 +40,11 @@ def assert_equal_dir(self, result_dir, expected_dir):
 class ProcessTest(unittest.TestCase):
 
     def test_get_geography(self):
-        self.assertEqual(process.get_geography(840, 'Country'),
+        self.assertEqual(process.get_geography(840),
                          'dcs:country/USA')
-        self.assertEqual(process.get_geography('AF_MAZAR_E_SHARIF', 'City'),
+        self.assertEqual(process.get_geography('AF_MAZAR_E_SHARIF'),
                          'dcs:wikidataId/Q130469')
-        self.assertEqual(process.get_geography(1, 'Region'), 'dcs:Earth')
-
-    def test_get_unit(self):
-        self.assertEqual(process.get_unit('CON_USD', float('nan')),
-                         'dcs:SDG_CON_USD')
+        self.assertEqual(process.get_geography(1), 'dcs:Earth')
 
     def test_get_measurement_method(self):
         d = {'NATURE': ['E'], 'OBS_STATUS': ['A'], 'REPORTING_TYPE': ['G']}
