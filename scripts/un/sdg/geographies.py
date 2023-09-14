@@ -2,6 +2,11 @@ import collections
 import csv 
 import json
 
+FIXED = {
+    'africa': '2',
+    'undata-geo/G99999999': '952',
+}
+
 def should_include_containment(s, s_dcid, o, o_dcid):
     if (s == 'GeoRegion' or s == 'UNGeoRegion') and o_dcid == 'Earth':
         return True
@@ -35,7 +40,7 @@ with open('sssom-mappings/output_mappings/undata-geo__sdg-geo.csv') as f:
 
 # un -> (dcid, type, name)
 un2dc = {}
-with open('places.csv') as f:
+with open('geography/places.csv') as f:
     reader = csv.DictReader(f)
     for row in reader: 
         if row['unDataCode'] == 'x':
@@ -56,8 +61,8 @@ unDataLabel: "{label}"
 '''
 un2dc2 = {}
 subjects = set()
-with open('geographies.csv') as f_in:
-    with open('un_places.mcf', 'w') as f_out:
+with open('geography/geographies.csv') as f_in:
+    with open('geography/un_places.mcf', 'w') as f_out:
         reader = csv.DictReader(f_in)
         for row in reader:
             subject = row['subject_id']
@@ -117,7 +122,7 @@ CONTAINMENT_TEMPLATE = '''
 Node: dcid:{dcid}
 typeOf: dcid:{type}{containment}
 '''
-with open('un_containment.mcf', 'w') as f:
+with open('geography/un_containment.mcf', 'w') as f:
     for s in sorted(containment):
         c = ''
         for o in containment[s]:
@@ -137,7 +142,7 @@ with open('un_containment.mcf', 'w') as f:
             'containment': c
         }))
     
-with open('place_mappings.csv', 'w') as f:
+with open('geography/place_mappings.csv', 'w') as f:
     writer = csv.DictWriter(f, fieldnames=['sdg', 'dcid'])
     writer.writeheader()
     for s in sdg2un:
@@ -148,6 +153,11 @@ with open('place_mappings.csv', 'w') as f:
             dcid = un2dc2[un][0]
         else:
             continue
+        
+        # Filter duplicates.
+        if dcid in FIXED and s != FIXED[dcid]:
+            continue
+
         writer.writerow({
             'sdg': s,
             'dcid': dcid
