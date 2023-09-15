@@ -40,7 +40,6 @@ flags.DEFINE_string(
     'output_dir', 'output',
     'Dir to output generated MCF files too. If blank, a temp folder will be used.'
 )
-flags.DEFINE_string('api_key', '', 'Autopush API key')
 
 # Threshold to DP level map, from scripts/us_census/geojsons_low_res/generate_mcf.py
 EPS_LEVEL_MAP = {0: 0, 0.03: 2, 0.05: 3, 0.125: 6, 0.225: 10, 0.3: 13}
