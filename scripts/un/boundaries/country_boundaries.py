@@ -28,6 +28,7 @@ import geopandas as gpd
 from geojson_rewind import rewind
 import json
 import os
+import requests
 
 from absl import app
 from absl import flags
@@ -53,7 +54,6 @@ MULTIPOLYGON_GEOJSON_TYPE = "MultiPolygon"
 POLYGON_GEOJSON_TYPE = "Polygon"
 
 # Map from parent-place DCID to DP level
-# TODO: Add more regions
 PARENT_PLACES = {
     'Earth': 13,
     'asia': 10,
@@ -62,7 +62,49 @@ PARENT_PLACES = {
     'northamerica': 13,
     'oceania': 13,
     'southamerica': 10,
+    'AustraliaAndNewZealand': 6,
+    'Caribbean': 6,
+    'CentralAmerica': 6,
+    'CentralAsia': 6,
+    'ChannelIslands': 6,
+    'EasternAfrica': 6,
+    'EasternAsia': 6,
+    'EasternEurope': 6,
+    'EuropeanUnion': 6,
+    'LatinAmericaAndCaribbean': 6,
+    'Melanesia': 6,
+    'MiddleAfrica': 6,
+    'NorthernAfrica': 6,
+    'NorthernEurope': 6,
+    'SouthEasternAsia': 6,
+    'SouthernAfrica': 6,
+    'SouthernAsia': 6,
+    'SouthernEurope': 6,
+    'SubSaharanAfrica': 6,
+    'WesternAfrica': 6,
+    'WesternAsia': 6,
+    'WesternEurope': 6,
+    # Americas
+    'undata-geo/G00134000': 6,
 }
+
+
+def get_countries_in(dcids):
+    resp = requests.post('https://autopush.api.datacommons.org/v2/node',
+                         headers={
+                             'X-API-Key': os.environ['MIXER_API_KEY']
+                         },
+                         json={
+                             'nodes': dcids,
+                             'property': "<-containedInPlace+{typeOf:Country}"
+                         }).json()
+    node2children = {}
+    for place, d in resp.get('data', {}).items():
+        node2children[place] = []
+        for n in d.get('arcs', {}).get('containedInPlace+',
+                                       {}).get('nodes', []):
+            node2children[place].append(n['dcid'])
+    return node2children
 
 
 #
@@ -209,8 +251,7 @@ class CountryBoundariesGenerator:
             self._simplify_json(country_code, country_data)
 
     def build_cache(self, existing_codes):
-        parent2children = dc.get_places_in(list(PARENT_PLACES.keys()),
-                                           'Country')
+        parent2children = get_countries_in(list(PARENT_PLACES.keys()))
         all_children = set()
         for children in parent2children.values():
             all_children.update(children)
@@ -246,7 +287,7 @@ class CountryBoundariesGenerator:
                     "current_geo": "Earth"
                 }
             }
-            fname = f'{parent.lower()}_country_dp{dp_level}.json'
+            fname = f'{parent.replace("/", "").lower()}_country_dp{dp_level}.json'
             with open(os.path.join(self.output_dir, 'cache', fname), 'w') as fp:
                 json.dump(result, fp, indent=2)
 
