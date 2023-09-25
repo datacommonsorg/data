@@ -72,7 +72,18 @@ def get_measurement_method(row):
         mmethod += '_' + str(row['REPORTING_TYPE'])
     return 'SDG' + mmethod
 
+
 def drop_null(value, series, footnote):
+    '''Returns value or '' if it should be dropped.
+
+    Args:
+        value: Input value.
+        series: Series code.
+        footnote: Footnote for observation.
+
+    Returns:
+        value or ''.
+    '''
     if series not in util.ZERO_NULL:
         return value
     if footnote != util.ZERO_NULL_TEXT:
@@ -87,6 +98,13 @@ def drop_special(value, variable, series):
     if series in util.DROP_SERIES:
         return ''
     return value
+
+
+def fix(s):
+    try:
+        return s.encode('latin1').decode('utf8')
+    except:
+        return s.encode('utf8').decode('utf8')
 
 
 def process(input_dir, schema_dir, csv_dir):
@@ -210,8 +228,11 @@ def process(input_dir, schema_dir, csv_dir):
                 'SG_SCP_PROCN_LS.LEVEL_STATUS--DEG_MLOW__GOVERNMENT_NAME--CITY_OF_WROCLAW'
             )
 
+            #sv_frames.append(df.loc[:,
+            #                        ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION'] +
+            #                        properties].drop_duplicates())
             sv_frames.append(df.loc[:,
-                                    ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION'] +
+                                    ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION', 'SOURCE'] +
                                     properties].drop_duplicates())
             measurement_method_frames.append(
                 df.loc[:, ['NATURE', 'OBS_STATUS', 'REPORTING_TYPE']].
@@ -238,9 +259,15 @@ def process(input_dir, schema_dir, csv_dir):
 
     with open(os.path.join(schema_dir, 'sv.mcf'), 'w') as f:
         for df in sv_frames:
-            for _, row in df.iterrows():
+            main = df.drop(['SOURCE'], axis=1).drop_duplicates()
+            for _, row in main.iterrows():
+                sources = df.loc[df['VARIABLE_CODE'] == row['VARIABLE_CODE']]
+                sources = sources.loc[:, ['SOURCE']].drop_duplicates()['SOURCE']
+                footnote = ''
+                if not sources.empty:
+                    footnote = '\nfootnote: "Includes data from the following sources: ' + '; '.join(sorted([fix(str(s)).removesuffix('.').strip().replace('"', "'").replace('\n', '').replace('\t', '').replace('__', '_') for s in sources])) + '"'
                 cprops = ''
-                for dimension in sorted(df.columns[2:]):
+                for dimension in sorted(main.columns[2:]):
                     # Skip totals.
                     if row[dimension] == util.TOTAL:
                         continue
@@ -272,6 +299,8 @@ def process(input_dir, schema_dir, csv_dir):
                             '"' + row['VARIABLE_DESCRIPTION'] + '"',
                         'cprops':
                             cprops,
+                        'footnote':
+                            footnote,
                     }))
 
     with open(os.path.join(schema_dir, 'schema.mcf'), 'w') as f:

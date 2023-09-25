@@ -2,6 +2,19 @@ import collections
 import csv 
 import json
 
+CONTAINMENT_TEMPLATE = '''
+Node: dcid:{dcid}
+typeOf: dcid:{type}{containment}
+'''
+PLACE_TEMPLATE = '''
+Node: dcid:{dcid}
+typeOf: dcs:{type}
+name: "{name}"
+unDataCode: "{code}"
+unDataLabel: "{label}"
+'''
+
+# Curated map of SDG GEOGRAPHY_CODE to UN data code.
 FIXED = {
     'africa': '2',
     'undata-geo/G99999999': '952',
@@ -52,13 +65,6 @@ with open('geography/places.csv') as f:
         un2dc[row['unDataCode']] = (row['dcid'], type, row['dc_name'])
 
 # write base place mcf
-PLACE_TEMPLATE = '''
-Node: dcid:{dcid}
-typeOf: dcs:{type}
-name: "{name}"
-unDataCode: "{code}"
-unDataLabel: "{label}"
-'''
 un2dc2 = {}
 subjects = set()
 with open('geography/geographies.csv') as f_in:
@@ -118,10 +124,7 @@ with open('sssom-mappings/data/enumerations/undata/geography_hierarchy.csv') as 
         if should_include_containment(s_type, s_dcid, o_type, o_dcid):
             containment[(s_dcid, s_type)].append(o_dcid)
 
-CONTAINMENT_TEMPLATE = '''
-Node: dcid:{dcid}
-typeOf: dcid:{type}{containment}
-'''
+
 with open('geography/un_containment.mcf', 'w') as f:
     for s in sorted(containment):
         c = ''

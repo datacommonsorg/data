@@ -59,7 +59,7 @@ typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:value
 name: {name}
 populationType: dcs:{popType}
-statType: dcs:measuredValue{cprops}
+statType: dcs:measuredValue{cprops}{footnote}
 '''
 MMETHOD_TEMPLATE = '''
 Node: dcid:{dcid}
