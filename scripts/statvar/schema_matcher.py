@@ -31,27 +31,30 @@ sys.path.append(os.path.join(os.path.dirname(_SCRIPT_DIR), 'statvar'))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
+flags.DEFINE_string('input_file', '', 'Input file with queries to lookup.')
+flags.DEFINE_list('input_query', [], 'Input queries to lookup.')
+flags.DEFINE_string('output_csv', '',
+                    'Output CSV with matching property, values.')
+flags.DEFINE_string('schema_mcf', '/usr/local/google/dc/stat_vars/all_schema.mcf',
+                    'Comma separated list of MCF files.')
+flags.DEFINE_list('mcf_include_pv', [],
+                  'List of property:values to include in the MCF.')
+flags.DEFINE_string('config', '', 'Config dictionary.')
+flags.DEFINE_float('min_match_fraction', 0.7,
+                   'Minimum fraction of input string to match in results.')
+flags.DEFINE_bool('debug', False, 'Enable debug messages.')
+
+_FLAGS = flags.FLAGS
+
 import file_util
 import download_util
+import process_http_server
 
 from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, strip_namespace
 from ngram_matcher import NgramMatcher
 from config_map import ConfigMap
 from counters import Counters
 
-flags.DEFINE_string('input_file', '', 'Input file with queries to lookup.')
-flags.DEFINE_list('input_query', [], 'Input queries to lookup.')
-flags.DEFINE_string('output_csv', '',
-                    'Output CSV with matching property, values.')
-flags.DEFINE_string('schema_mcf', '', 'Comma separated list of MCF files.')
-flags.DEFINE_list('mcf_include_pv', [],
-                  'List of property:values to include in the MCF.')
-flags.DEFINE_bool('debug', False, 'Enable debug messages.')
-flags.DEFINE_string('config', '', 'Config dictionary.')
-flags.DEFINE_float('min_match_fraction', 0.7,
-                   'Minimum fraction of input string to match in results.')
-
-_FLAGS = flags.FLAGS
 
 _DEFAULT_CONFIG = {
     'match_props': ['dcid', 'name', 'description'],
@@ -296,6 +299,10 @@ def search_pvs(mcf_file: str,
 
 
 def main(_):
+    # Launch a web server if --http_port is set.
+    if process_http_server.run_http_server(script=__file__, module=__name__):
+        return
+
     if _FLAGS.debug:
         logging.set_verbosity(2)
     config = ConfigMap(filename=_FLAGS.config)

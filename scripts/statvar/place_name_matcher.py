@@ -142,6 +142,15 @@ class PlaceNameMatcher:
     def _load_places_dict(self, place_csv: str, places_within: list):
         '''Add place names from csv to the name matcher.'''
         for file in file_util.file_get_matching(place_csv):
+            # Load large place files only when places_within is set.
+            file_size = file_util.file_get_size(file)
+            if file_size > self._config.get('max_places_csv_file_size',
+                                            10000000):
+                if not places_within:
+                    logging.warning(
+                        f'Skip places file: {file} with size: {file_size} as places_within not set'
+                    )
+                    continue
             places_dict = file_util.file_load_csv_dict(file, key_column='dcid')
             places_filter = set(places_within)
             for placeid, pvs in places_dict.items():

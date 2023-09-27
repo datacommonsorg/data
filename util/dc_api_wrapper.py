@@ -212,7 +212,7 @@ def dc_api_get_node_property_values(dcids: list,
     return predefined_nodes
 
 
-def dc_api_resolve_placeid(dcids: list) -> dict:
+def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
     '''Returns the resolved dcid for each of the placeid.
 
     Args:
@@ -221,7 +221,7 @@ def dc_api_resolve_placeid(dcids: list) -> dict:
     Returns:
       dictionary keyed by input placeid with reoslved dcid as value.
     '''
-    data = {'in_prop': 'placeId', 'out_prop': 'dcid'}
+    data = {'in_prop': in_prop, 'out_prop': 'dcid'}
     data['ids'] = dcids
     num_ids = len(dcids)
     api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_ID

@@ -33,11 +33,11 @@ from typing import Union
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('maps_key', '', 'Google Maps API key')
 flags.DEFINE_list('resolve_input_csv', '',
                   'Input csv with places to resolve under column "name".')
 flags.DEFINE_string('resolve_output_csv', '', 'Output csv with place dcids.')
 flags.DEFINE_list('resolve_place_names', [], 'List of place names to resolve.')
+flags.DEFINE_string('maps_key', '', 'Google Maps API key')
 flags.DEFINE_string(
     'resolve_config', '',
     'Config setting for place resolution as json or python dict.')
@@ -80,6 +80,7 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 import file_util
+import process_http_server
 
 from counters import Counters
 from config_map import ConfigMap
@@ -1079,6 +1080,10 @@ def process(input_filenames: list,
 
 
 def main(_):
+    # Launch a web server if --http_port is set.
+    if process_http_server.run_http_server(script=__file__, module=__name__):
+        return
+
     logging.set_verbosity(2)
     config = ConfigMap(filename=_FLAGS.resolve_config)
     config.set_config('places_csv', _FLAGS.place_names_csv)

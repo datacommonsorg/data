@@ -265,7 +265,16 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'mothersEducation': {
         'prepend': 'Mother'
-    }
+    },
+    'importSource': {
+       'prepend': 'ImportFrom',
+    },
+    'exportDestination': {
+       'prepend': 'ExportTo',
+    },
+    'lendingEntity': {
+        'prepend': 'Lender',
+    },
 }
 
 # This is a list of boolean properties
@@ -319,6 +328,7 @@ def _capitalize_process(word: str) -> str:
 
         # Removing all underscores
         word = word.replace('_', '')
+        word = word.replace('/', '')
 
         # Upper casing the first character
         word = word[0].upper() + word[1:]

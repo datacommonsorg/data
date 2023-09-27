@@ -90,12 +90,14 @@ class FileIO:
                  mode: str = 'r',
                  encoding: str = None,
                  newline: str = None,
-                 use_tempfile: bool = True):
+                 use_tempfile: bool = True,
+                 errors: str = None):
         self._filename = filename
         self._mode = mode
         self._encoding = encoding
         self._newline = newline
         self._tmp_filename = None
+        self._errors = errors
         self._fd = None
 
         if not file_is_local(self._filename):
@@ -153,7 +155,8 @@ class FileIO:
             self._fd = open(filename,
                             mode=self._mode,
                             encoding=self._encoding,
-                            newline=self._newline)
+                            newline=self._newline,
+                            errors=self._errors)
 
     def __del__(self):
         '''Cleanup any temporary files.'''
@@ -557,7 +560,7 @@ def file_load_csv_dict(filename: str,
 
 def file_write_csv_dict(py_dict: dict,
                         filename: str,
-                        columns: list = None) -> str:
+                        columns: list = None) -> list:
     '''Returns the filename after writing py_dict with a csv row per item.
     Each dictionary items is written as a row in the CSV file.
 
@@ -590,6 +593,8 @@ def file_write_csv_dict(py_dict: dict,
         If no columns are specified for values, column names are picked from
         each entry's value if the value is a dict.
         Else the value is written as column name 'value'.
+    Returns:
+      list of columns written to the output csv
     '''
     # Get the list of columns
     value_column_name = ''
@@ -643,6 +648,7 @@ def file_write_csv_dict(py_dict: dict,
                 csv_writer.writerow(row)
                 num_rows += 1
         logging.info(f'Wrote {num_rows} into file: {filename}')
+    return columns
 
 
 def file_load_py_dict(dict_filename: str) -> dict:

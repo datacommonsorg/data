@@ -105,7 +105,7 @@ def process_sheet_in_drive_path(
         pv_map_files: list = None,
         parallelism: int = 1):
     '''
-        Reads the spreasheets under the input drive folder and
+        Reads the spreadsheets under the input drive folder and
         process them by calling process_spreadsheet
     '''
     # Authorize user
@@ -203,7 +203,7 @@ def process_spreadsheets(
                     break
         if not data_sets:
             # Sheet is a single data input_file. Process it.
-            data_sets[0] = {'data': input_file}
+            data_sets['0'] = {'data': input_file}
 
         # Process each set of data sheets.
         if not parallelism:
@@ -245,7 +245,7 @@ def process_spreadsheets(
                     # Generate output into the output path
                     data_config[
                         'output_path'] = output_path + '-' + gs.title.replace(
-                            ' ', '_') + index
+                            ' ', '_') + str(index)
                 else:
                     # Generate outputs into sheets.
                     data_config['output_path'] = ''
@@ -268,6 +268,12 @@ def process_spreadsheets(
                             logging.fatal(
                                 f'Unable to add worksheet: mcf{index}')
                         data_config['output_mcf'] = ws.url
+                    if 'schema_mcf' not in data_sets:
+                        ws = _add_worksheet(gs, title=f'schema_mcf{index}')
+                        if not ws:
+                            logging.fatal(
+                                f'Unable to add worksheet: schema_mcf{index}')
+                        data_config['output_schema_mcf'] = ws.url
 
                 # Process the sheet
                 logging.info(f'Processing sheet: {data_config}')

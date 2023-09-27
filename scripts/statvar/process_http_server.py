@@ -78,7 +78,7 @@ flags.DEFINE_integer(
     'Number of http listener threads for simultaneous requests.')
 flags.DEFINE_string('http_config', '',
                     'File with configurations for the HTTP server.')
-flags.DEFINE_integer('http_server_timeout', sys.maxsize,
+flags.DEFINE_integer('http_server_timeout', 86400*365,
                      'Maximum duration in seconds to run the web server.')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

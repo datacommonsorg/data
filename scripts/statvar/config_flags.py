@@ -47,11 +47,14 @@ flags.DEFINE_list(
     'Comma separated list of namespace:file with property values.')
 flags.DEFINE_list('input_data', [],
                   'Comma separated list of data files to be processed.')
+flags.DEFINE_string('input_encoding', 'utf-8', 'Encoding for input_data files.')
 flags.DEFINE_list(
     'input_xls', [],
     'Comma separated list of sheets within xls files to be processed.')
 flags.DEFINE_integer('input_rows', sys.maxsize,
                      'Number of rows per input file to process.')
+flags.DEFINE_integer('input_columns', sys.maxsize,
+                     'Number of columns in input file to process.')
 flags.DEFINE_integer(
     'skip_rows', 0, 'Number of rows to skip at the begining of the input file.')
 flags.DEFINE_integer(
@@ -70,7 +73,9 @@ flags.DEFINE_bool('schemaless', False, 'Allow schemaless StatVars.')
 flags.DEFINE_string('output_path', '',
                     'File prefix for output mcf, csv and tmcf.')
 flags.DEFINE_string('existing_statvar_mcf', '',
-                    'StatVar MCF files for any existing nodes to be resused.')
+                    'StatVar MCF files for any existing stat var nodes to be resused.')
+flags.DEFINE_string('existing_schema_mcf', '',
+                    'StatVar MCF files for any existing schema nodes to be resused.')
 flags.DEFINE_integer('parallelism', 0, 'Number of parallel processes to use.')
 flags.DEFINE_integer('pprof_port', 0, 'HTTP port for pprof server.')
 flags.DEFINE_bool('debug', False, 'Enable debug messages.')
@@ -89,6 +94,8 @@ flags.DEFINE_string('places_resolved_csv', '',
 flags.DEFINE_list('place_type', [], 'List of places types for name reoslution.')
 flags.DEFINE_list('places_within', [],
                   'List of places types for name reoslution.')
+flags.DEFINE_string('statvar_dcid_remap_csv', '',
+                    'CSV file with existing DCIDs for generated statvars.')
 
 flags.DEFINE_bool(
     'resume', False,
@@ -106,6 +113,8 @@ _DEFAULT_CONFIG = {
         2,
     'input_data':
         _FLAGS.input_data,
+    'input_encoding':
+        _FLAGS.input_encoding,
     'input_xls':
         _FLAGS.input_xls,
     'pv_map_drop_undefined_nodes':
@@ -145,7 +154,10 @@ _DEFAULT_CONFIG = {
             'measurementQualifier': '',
             'statType': 'dcs:measuredValue',
             'measuredProperty': 'dcs:count',
-            'populationType': ''
+            'populationType': '',
+            'memberOf': '',
+            'name': '',
+            'description': '',
         }),
     'statvar_dcid_ignore_values': ['measuredValue', 'StatisticalVariable'],
     'default_svobs_pvs':
@@ -173,6 +185,8 @@ _DEFAULT_CONFIG = {
     # Settings to compare StatVars with existing statvars to reuse dcids.
     'existing_statvar_mcf':
         _FLAGS.existing_statvar_mcf,
+    'existing_schema_mcf':
+        _FLAGS.existing_schema_mcf,
     'statvar_fingerprint_ignore_props': [
         'dcid', 'name', 'description', 'provenance', 'memberOf'
     ],
@@ -181,7 +195,7 @@ _DEFAULT_CONFIG = {
     # This is used for schemaless statvars that can't be matched with
     # existing statvars using property:value
     'statvar_dcid_remap_csv':
-        '',
+        _FLAGS.statvar_dcid_remap_csv,
 
     # Use numeric data in any column as a value.
     # It may still be dropped if no SVObs can be constructed out of it.
@@ -239,6 +253,9 @@ _DEFAULT_CONFIG = {
         True,  # Skip emitting columns with constant values in the csv
     'output_only_new_statvars':
         True,  # Drop existing statvars from output
+    'output_precision_digits': 5, # Round floating values to 5 decimal digits.
+    'generate_schema_mcf': True,
+    'generate_provisional_schema': True,
 
     # Settings for DC API.
     'dc_api_root':
@@ -253,6 +270,8 @@ _DEFAULT_CONFIG = {
         _FLAGS.pv_map,
     'input_rows':
         _FLAGS.input_rows,
+    'input_columns':
+        _FLAGS.input_columns,
     'skip_rows':
         _FLAGS.skip_rows,
     'header_rows':
