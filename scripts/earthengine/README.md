@@ -139,6 +139,19 @@ python3 process_events.py \
 # - flood_svobs.{csv}: Observations for each event
 ```
 
+## Events pipeline
+The script `events_pipeline.py` can run all the above steps, including
+downloading data from URLs or extracting geoTiff from EarthEngine and
+generate events from the data.
+
+It uses a config with settings for each stage and can resume processing
+from a previous instance, incrementally processing new data.
+```
+# Process data from source to generate events
+python3 events_pipeline.py \
+  --config=events_pipeline_config.py
+```
+
 
 ## Testing
 To test the scripts in this folder, run the commands:

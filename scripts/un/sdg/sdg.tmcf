@@ -1,0 +1,9 @@
+Node: E:SDG->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:SDG->VARIABLE_CODE
+observationAbout: C:SDG->GEOGRAPHY_CODE
+observationDate: C:SDG->TIME_PERIOD
+value: C:SDG->OBS_VALUE
+unit: C:SDG->UNIT_MEASURE
+scalingFactor: C:SDG->UNIT_MULT
+measurementMethod: C:SDG->MEASUREMENT_METHOD

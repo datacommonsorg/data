@@ -70,18 +70,21 @@ _SCRIPTS_DIR = os.path.dirname(__file__)
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
+import common_flags
+import file_util
 import utils
 
-from util.config_map import ConfigMap
-from util.counters import Counters, CounterOptions
+from config_map import ConfigMap
+from counters import Counters, CounterOptions
 
 flags.DEFINE_string('input_geotiff', '', 'GeoTIFF file to process')
 flags.DEFINE_string('ignore_geotiff', '',
                     'GeoTIFF with points to be ignored set as data.')
 flags.DEFINE_string('allow_geotiff', '',
                     'GeoTIFF with points to be used set as data.')
-flags.DEFINE_string('input_csv', '', 'CSV file to process')
 flags.DEFINE_string('ignore_csv', '',
                     'CSV with points to be ignored set as data.')
 flags.DEFINE_string('allow_csv', '', 'CSV with points to be used set as data.')
@@ -103,86 +106,88 @@ flags.DEFINE_list(
     'Levels to be added as contained in place nodes into s2 place output.')
 flags.DEFINE_string('aggregate', 'max',
                     'Aggregate function for data values with same key.')
-flags.DEFINE_bool('debug', False, 'Enable debug logs.')
 flags.DEFINE_integer('log_every_n', 10000, 'Print logs every N records.')
 flags.DEFINE_float('default_cell_area', 0,
                    'Area of the cell if the raster input is not provided.')
-flags.DEFINE_string('config', '', 'Config dictionary with parameter settings.')
 
 _FLAGS = flags.FLAGS
 _FLAGS(sys.argv)  # Allow invocation without app.run()
 
-_DEFAULT_CONFIG = {
-    # Inputs
-    'input_geotiff': _FLAGS.input_geotiff,
-    'ignore_geotiff': _FLAGS.ignore_geotiff,
-    'allow_geotiff': _FLAGS.allow_geotiff,
-    'input_csv': _FLAGS.input_csv,
-    'ignore_csv': _FLAGS.ignore_csv,
-    'allow_csv': _FLAGS.allow_csv,
-    'limit_points': _FLAGS.limit_points,
 
-    # Output settings
-    'output_csv': _FLAGS.output_csv,
-    'output_mode': _FLAGS.output_mode,
-    'output_columns': _FLAGS.output_columns,
-    'output_date': _FLAGS.output_date,
-    'output_precision': _FLAGS.output_precision,
-    'output_s2_place': _FLAGS.output_s2_place,
-    'output_contained_s2_level': _FLAGS.output_contained_s2_level,
+def get_default_config():
+    # Create config from command line flags.
+    return {
+        # Inputs
+        'input_geotiff': _FLAGS.input_geotiff,
+        'ignore_geotiff': _FLAGS.ignore_geotiff,
+        'allow_geotiff': _FLAGS.allow_geotiff,
+        'input_csv': _FLAGS.input_csv,
+        'ignore_csv': _FLAGS.ignore_csv,
+        'allow_csv': _FLAGS.allow_csv,
+        'limit_points': _FLAGS.limit_points,
 
-    # Processing parameters
-    's2_level': _FLAGS.s2_level,
-    # default aggregation for data values mapped to the same s2-cell+date
-    # that can be one of: min, max, mean, sum.
-    # For columns specific aggregation methods, use config:'input_data_filter'.
-    'aggregate': _FLAGS.aggregate,
-    # generate data for all s2 cells from --s2_level upto this level.
-    # Default cell area if constant for the whole data set.
-    'default_cell_area': _FLAGS.default_cell_area,
-    # Default point/cell width/height for ~1sqkm at equator, lower near poles.
-    'default_cell_width': 0.009,
-    'default_cell_height': 0.009,
-    # rename columns <input-name>: <output-name>
-    'rename_columns': {
-        'acq_date': 'date',
-        'band:0': 'water',
-    },
+        # Output settings
+        'output_csv': _FLAGS.output_csv,
+        'output_mode': _FLAGS.output_mode,
+        'output_columns': _FLAGS.output_columns,
+        'output_date': _FLAGS.output_date,
+        'output_precision': _FLAGS.output_precision,
+        'output_s2_place': _FLAGS.output_s2_place,
+        'output_contained_s2_level': _FLAGS.output_contained_s2_level,
 
-    # filter settings per column for data
-    # input (pre-aggregation) and output (post-aggregation) of the form:
-    # {
-    #   '<column>' : {
-    #     'min': <NN.NNN>, # Minimum value for <column>
-    #     'max': <NN.NNN>, # Maximum value for <column>
-    #     'aggregate': 'sum', # one of 'min','max','sum','mean'
-    #   },
-    #   ...
-    # }
-    'input_data_filter': {
-        # Add up area for points added to an s2cell.
-        'area': {
-            'aggregate': 'sum',
+        # Processing parameters
+        's2_level': _FLAGS.s2_level,
+        # default aggregation for data values mapped to the same s2-cell+date
+        # that can be one of: min, max, mean, sum.
+        # For columns specific aggregation methods, use config:'input_data_filter'.
+        'aggregate': _FLAGS.aggregate,
+        # generate data for all s2 cells from --s2_level upto this level.
+        # Default cell area if constant for the whole data set.
+        'default_cell_area': _FLAGS.default_cell_area,
+        # Default point/cell width/height for ~1sqkm at equator, lower near poles.
+        'default_cell_width': 0.009,
+        'default_cell_height': 0.009,
+        # rename columns <input-name>: <output-name>
+        'rename_columns': {
+            'acq_date': 'date',
+            'band:0': 'water',
         },
-        #'confidence': {
-        #    'regex': r'[nh]',  # pick normal or high
-        #}
-        # 'water': {  # band:0
-        #     'min': 1.0
-        #},
-    },
-    'output_data_filter': {
-        #   'area': {
-        #       'min': 1.0,  # Minimum area in sqkm after aggregation
-        #   },
-    },
 
-    # Debug settings
-    'debug': _FLAGS.debug,  # Enable debug logs
-    'log_every_n':
-        _FLAGS.log_every_n,  # Show counters when counter increments by N
-    'log_every': 'processed_points',  # Counter to check for log_every_n
-}
+        # filter settings per column for data
+        # input (pre-aggregation) and output (post-aggregation) of the form:
+        # {
+        #   '<column>' : {
+        #     'min': <NN.NNN>, # Minimum value for <column>
+        #     'max': <NN.NNN>, # Maximum value for <column>
+        #     'aggregate': 'sum', # one of 'min','max','sum','mean'
+        #   },
+        #   ...
+        # }
+        'input_data_filter': {
+            # Add up area for points added to an s2cell.
+            'area': {
+                'aggregate': 'sum',
+            },
+            #'confidence': {
+            #    'regex': r'[nh]',  # pick normal or high
+            #}
+            # 'water': {  # band:0
+            #     'min': 1.0
+            #},
+        },
+        'output_data_filter': {
+            #   'area': {
+            #       'min': 1.0,  # Minimum area in sqkm after aggregation
+            #   },
+        },
+
+        # Debug settings
+        'debug': _FLAGS.debug,  # Enable debug logs
+        'log_every_n':
+            _FLAGS.log_every_n,  # Show counters when counter increments by N
+        'log_every': 'processed_points',  # Counter to check for log_every_n
+    }
+
 
 _DEFAULT_COLUMNS = set({'latitude', 'longitude', 's2CellId', 'date'})
 
@@ -463,6 +468,9 @@ def load_raster_geotiff(filename: str) -> rasterio.io.DatasetReader:
       raster data set for the file.
     '''
     logging.info(f'Loading raster GeoTiff File: {filename}')
+    if file_util.file_is_gcs(filename):
+        # RasterIO doesn't support GCS files. Copy over to a local file.
+        filename = file_util.file_copy(filename)
     src = rasterio.open(filename)
     _log_raster_info(src)
     return src
@@ -516,7 +524,7 @@ def write_data_csv(data_points: dict,
         if not os.path.exists(filename):
             # File doesn't exist yet. Open in write mode and add column headers.
             output_mode = 'w'
-    with open(filename, mode=output_mode) as csv_file:
+    with file_util.FileIO(filename, mode=output_mode) as csv_file:
         writer = csv.DictWriter(csv_file,
                                 fieldnames=columns,
                                 escapechar='\\',
@@ -598,7 +606,7 @@ def write_s2place_csv_tmcf(data_points: dict,
     place_tmcf.append('typeOf: C:Place->typeOf')
     place_tmcf.append('containedInPlace: C:Place->containedInPlace')
     place_tmcf.append('name: C:Place->name')
-    with open(f'{output_prefix}.tmcf', 'w') as tmcf_file:
+    with file_util.FileIO(f'{output_prefix}.tmcf', 'w') as tmcf_file:
         tmcf_file.write('\n'.join(place_tmcf))
         tmcf_file.write('\n')
 
@@ -815,15 +823,15 @@ def process_csv_points(input_csv: str,
         logging.info(
             f'Loaded {len(allow_points)} allow points from {allow_csv}')
     data_filter = config.get('input_data_filter', {})
-    input_csv_files = utils.file_get_matching(input_csv)
+    input_csv_files = file_util.file_get_matching(input_csv)
     logging.info(f'Processing csv files: {input_csv_files}')
     counter.set_prefix('1:process_csv:')
     for filename in input_csv_files:
         counter.add_counter('total_points',
-                            utils.file_estimate_num_rows(filename))
+                            file_util.file_estimate_num_rows(filename))
     for filename in input_csv_files:
         counter.add_counter('input_csv_files', 1)
-        with open(filename) as csvfile:
+        with file_util.FileIO(filename) as csvfile:
             logging.info(f'Processing data from file {filename} ...')
             reader = csv.DictReader(csvfile)
             # Save the input columns
@@ -912,7 +920,7 @@ def process(input_geotiff: str,
         logging.info(
             f'Processing raster {input_geotiff} with config: {config.get_configs()}'
         )
-        for geotiff_file in utils.file_get_matching(input_geotiff):
+        for geotiff_file in file_util.file_get_matching(input_geotiff):
             process_raster(geotiff_file, config, data_points, counter)
     if input_csv:
         logging.info(
@@ -983,7 +991,7 @@ def _log_raster_info(raster: rasterio.io.DatasetReader):
 
 
 def main(_):
-    config = ConfigMap(filename=_FLAGS.config, config_dict=_DEFAULT_CONFIG)
+    config = ConfigMap(filename=_FLAGS.config, config_dict=get_default_config())
     if config.get('debug', False):
         logging.set_verbosity(2)
     process(_FLAGS.input_geotiff, _FLAGS.input_csv, _FLAGS.output_csv, config)

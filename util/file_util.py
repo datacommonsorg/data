@@ -810,7 +810,7 @@ def file_get_gspread_worksheet(
 
 def file_copy_from_spreadsheet(url: str,
                                worksheet_title: str = None,
-                               dst_filename: str = '') -> list[str]:
+                               dst_filename: str = '') -> list:
     '''Copies the spreadsheet to a local file and returns the filename.
 
     Args:

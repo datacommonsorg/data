@@ -1,0 +1,36 @@
+
+Node: dcid:SDG_SD_MDP_ANDI
+name: "Average proportion of deprivations for people multidimensionally poor"
+typeOf: dcs:SDG_Series
+
+Node: dcid:SDG_SD_MDP_ANDIHH
+name: "Average share of weighted deprivations of total households"
+typeOf: dcs:SDG_Series
+
+Node: dcid:SDG_SD_MDP_CSMP
+name: "Proportion of children living in child-specific multidimensional poverty"
+typeOf: dcs:SDG_Series
+
+Node: dcid:SDG_SD_MDP_MUHC
+name: "Proportion of population living in multidimensional poverty"
+typeOf: dcs:SDG_Series
+
+Node: dcid:SDG_SD_MDP_MUHHC
+name: "Proportion of households living in multidimensional poverty"
+typeOf: dcs:SDG_Series
+
+Node: dcid:SDG_SI_COV_MATNL
+name: "Proportion of mothers with newborns receiving maternity cash benefit"
+typeOf: dcs:SDG_Series
+
+Node: dcid:SDG_SI_POV_DAY1
+name: "Proportion of population below international poverty line"
+typeOf: dcs:SDG_Series
+
+Node: dcid:SDG_SI_POV_EMP1
+name: "Employed population below international poverty line"
+typeOf: dcs:SDG_Series
+
+Node: dcid:SDG_SI_POV_NAHC
+name: "Proportion of population living below the national poverty line"
+typeOf: dcs:SDG_Series
