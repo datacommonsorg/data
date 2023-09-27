@@ -261,11 +261,6 @@ def process(input_dir, schema_dir, csv_dir):
         for df in sv_frames:
             main = df.drop(['SOURCE'], axis=1).drop_duplicates()
             for _, row in main.iterrows():
-                sources = df.loc[df['VARIABLE_CODE'] == row['VARIABLE_CODE']]
-                sources = sources.loc[:, ['SOURCE']].drop_duplicates()['SOURCE']
-                footnote = ''
-                if not sources.empty:
-                    footnote = '\nfootnote: "Includes data from the following sources: ' + '; '.join(sorted([fix(str(s)).removesuffix('.').strip().replace('"', "'").replace('\n', '').replace('\t', '').replace('__', '_') for s in sources])) + '"'
                 cprops = ''
                 for dimension in sorted(main.columns[2:]):
                     # Skip totals.
@@ -288,6 +283,11 @@ def process(input_dir, schema_dir, csv_dir):
 
                     val = 'SDG_' + enum + 'Enum_' + val
                     cprops += f'\n{prop}: dcs:{val}'
+                sources = df.loc[df['VARIABLE_CODE'] == row['VARIABLE_CODE']]
+                sources = sources.loc[:, ['SOURCE']].drop_duplicates()['SOURCE']
+                footnote = ''
+                if not sources.empty:
+                    footnote = '\nfootnote: "Includes data from the following sources: ' + '; '.join(sorted([fix(str(s)).removesuffix('.').strip().replace('"', "'").replace('\n', '').replace('\t', '').replace('__', '_') for s in sources])) + '"'
                 f.write(
                     util.SV_TEMPLATE.format_map({
                         'dcid':
