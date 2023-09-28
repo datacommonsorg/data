@@ -114,8 +114,10 @@ ZERO_NULL = {
 # Footnote text indicated that a zero point should be treated as null and removed.
 ZERO_NULL_TEXT = 'This data point is NIL for the submitting nation.'
 
+# Variables that should be dropped.
 DROP_VARIABLE = {'VC_DTH_TOTPT'}
 
+# Series that should be dropped.
 DROP_SERIES = {
     'TX_IMP_GBMRCH',
     'TX_EXP_GBMRCH',
@@ -125,7 +127,8 @@ DROP_SERIES = {
     'AG_PRD_XSUBDY',
 }
 
-MAP = {
+# Map of input title text to output formatted text.
+TITLE_MAPPINGS = {
     'Education level': 'education',
     'Frequency of Chlorophyll-a concentration': 'frequency',
     'Report Ordinal': 'ordinal',
@@ -133,6 +136,45 @@ MAP = {
     'Deviation Level': 'deviation'
 }
 
+# List of substrings to be deleted from titles.
+TITLE_DELETIONS = [
+    'Age = ',
+    'Name of non-communicable disease = ',
+    'Substance use disorders = ',
+    'Quantile = ',
+    'Type of skill = Skill: ',
+    'Type of skill = ',
+    'Sex = ',
+    'Land cover = ',
+    'Level/Status = ',
+    'Policy instruments = ',
+    'Type of product = ',
+    'Type of waste treatment = ',
+    'Activity = ',
+    '',
+    'Type of renewable technology = ',
+    'Location = ',
+    'Level_of_government = ',
+    'Fiscal intervention stage = ',
+    'Name of international institution = ',
+    'Policy Domains = ',
+    '',
+    'Mode of transportation = ',
+    'Food Waste Sector = ',
+]
+
+# Map of input title text to output replacement text.
+TITLE_REPLACEMENTS = {
+    '24 to 59 months old': '2 to 5 years old',
+    '36 to 47 months old': '3 to 4 years old',
+    '36 to 59 months old': '3 to 5 years old',
+    '12 to 23 months': '1 to 2 years old',
+    '24 to 35 months': '2 to 3 years old',
+    '36 to 47 months old': '3 to 4 years old',
+    '48 to 59 months': '4 to 5 years old'
+}
+
+# Map of SDG code -> dcid.
 PLACE_MAPPINGS = {}
 with open('geography/place_mappings.csv') as f:
     reader = csv.DictReader(f)
@@ -206,44 +248,41 @@ def is_valid(v):
         return v and not v == 'nan'
 
 
-def replace_me(text, mappings):
-    new_text = text.split('[')
-    if len(new_text) == 1:
-        return text
-    next_text = new_text[1][0:-1]
-    new_string = new_text[0] + '['
-    raw_pairs = next_text.split('|')
+def curate_pvs(text, mappings):
+    '''Curates PVs based on custom mappings.
 
+    Args:
+      text: Input text.
+      mappings: Custom mappings.
+
+    Returns: 
+      Formatted text.
+    '''
+    pairs = text[1:-1].split('|')
     new_pairs = []
-    for raw_pair in raw_pairs:
+    for pair in pairs:
         new_pair = ''
+        pv = pair.split('=')
+        p, v = pv[0].strip(), pv[1].strip()
+        if p in mappings:
+            v_components = v.split('(')
+            v_main = v_components[0].strip()
 
-        temp = raw_pair.split('=')
-        left_equal, right_equal = temp[0], temp[1]
-        left_equal = left_equal.strip()
-        right_equal = right_equal.strip()
+            # Don't repeat 'education'.
+            if p == 'Education level' and 'education' in v_main:
+                new_pair = v_main
 
-        if left_equal in mappings:
-            if left_equal == 'Education level':
-                if 'education' in right_equal:
-                    new_pair = right_equal
-                else:
-                    new_pair = right_equal + ' ' + mappings[left_equal]
-            elif '(' in right_equal:
-                level, percentage = right_equal.split('(')
-                level = level.strip()
-                percentage = percentage[:-1]
-                new_pair = level + ' ' + mappings[
-                    left_equal] + ' (' + percentage + ')'
             else:
-                new_pair = right_equal + ' ' + mappings[left_equal]
-        else:
-            new_pair = raw_pair.strip()
+                new_pair = v_main + ' ' + mappings[p]
 
-        new_pairs.append(new_pair)
-    new_string += ', '.join(new_pairs)
-    new_string += ']'
-    return new_string
+            # Keep () on the right.
+            if len(v_components) > 1:
+                new_pair += ' (' + v_components[1].strip()
+
+            new_pairs.append(new_pair)
+        else:
+            new_pairs.append(pair.strip())
+    return '[' + ', '.join(new_pairs) + ']'
 
 
 def format_variable_description(variable, series):
@@ -257,41 +296,26 @@ def format_variable_description(variable, series):
       Formatted description.
     '''
     head = format_description(series)
-    pvs = variable.removeprefix(series)
+    pvs = variable.removeprefix(series).strip()
     if not pvs:
         return head
+
+    # Remove ISIC code.
     pvs = re.sub(r'\(ISIC[^)]*\)', '', pvs)
+
+    # Remove isco code.
     pvs = re.sub(r'\(isco[^)]*\)', '', pvs)
-    pvs = replace_me(pvs, MAP)
-    pvs = pvs.replace('Age = ', '')
-    pvs = pvs.replace('Name of non-communicable disease = ', '')
-    pvs = pvs.replace('Substance use disorders = ', '')
-    pvs = pvs.replace('Quantile = ', '')
-    pvs = pvs.replace('Type of skill = Skill: ', '')
-    pvs = pvs.replace('Type of skill = ', '')
-    pvs = pvs.replace('Sex = ', '')
-    pvs = pvs.replace('Land cover = ', '')
-    pvs = pvs.replace('Level/Status = ', '')
-    pvs = pvs.replace('Policy instruments = ', '')
-    pvs = pvs.replace('Type of product = ', '')
-    pvs = pvs.replace('Type of waste treatment = ', '')
-    pvs = pvs.replace('Activity = ', '')
-    pvs = pvs.replace('Type of renewable technology = ', '')
-    pvs = pvs.replace('Location = ', '')
-    pvs = pvs.replace('Level_of_government = ', '')
-    pvs = pvs.replace('Fiscal intervention stage = ', '')
-    pvs = pvs.replace('Name of international institution = ', '')
-    pvs = pvs.replace('Policy Domains = ', '')
-    pvs = pvs.replace('Mode of transportation = ', '')
-    pvs = pvs.replace('Food Waste Sector = ', '')
-    pvs = pvs.replace('24 to 59 months old', '2 to 5 years old')
-    pvs = pvs.replace('36 to 47 months old', '3 to 4 years old')
-    pvs = pvs.replace('36 to 59 months old', '3 to 5 years old')
-    pvs = pvs.replace('12 to 23 months', '1 to 2 years old')
-    pvs = pvs.replace('24 to 35 months', '2 to 3 years old')
-    pvs = pvs.replace('36 to 47 months old', '3 to 4 years old')
-    pvs = pvs.replace('48 to 59 months', '4 to 5 years old')
-    return head + pvs
+
+    # Custom text formatting.
+    pvs = curate_pvs(pvs, TITLE_MAPPINGS)
+
+    # Custom replacements.
+    for s in TITLE_DELETIONS:
+        pvs = pvs.replace(s, '')
+    for s in TITLE_REPLACEMENTS:
+        pvs = pvs.replace(s, TITLE_REPLACEMENTS[s])
+
+    return head + ' ' + pvs
 
 
 def format_variable_code(code):

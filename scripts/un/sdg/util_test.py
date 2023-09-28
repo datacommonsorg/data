@@ -42,6 +42,17 @@ class UtilTest(unittest.TestCase):
         self.assertFalse(util.is_valid(float('nan')))
         self.assertFalse(util.is_valid(''))
 
+    def test_curate_pvs(self):
+        self.assertEqual(
+            util.curate_pvs(
+                '[Age = 15 years old and over | Education level = Primary education or less]',
+                util.TITLE_MAPPINGS),
+            '[Age = 15 years old and over, Primary education or less]')
+        self.assertEqual(
+            util.curate_pvs('[Deviation Level = Extreme (75-100%)]',
+                            util.TITLE_MAPPINGS),
+            '[Extreme deviation (75-100%)]')
+
     def test_format_variable_description(self):
         self.assertEqual(
             util.format_variable_description(

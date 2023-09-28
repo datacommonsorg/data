@@ -251,9 +251,6 @@ def process(input_dir, schema_dir, csv_dir):
                 'SG_SCP_PROCN_LS.LEVEL_STATUS--DEG_MLOW__GOVERNMENT_NAME--CITY_OF_WROCLAW'
             )
 
-            #sv_frames.append(df.loc[:,
-            #                        ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION'] +
-            #                        properties].drop_duplicates())
             sv_frames.append(
                 df.loc[:, ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION', 'SOURCE'] +
                        properties].drop_duplicates())
