@@ -24,6 +24,9 @@ sys.path.append(os.path.join(module_dir_))
 # SDMX indicator for 'total' value in dimension.
 TOTAL = '_T'
 
+# Splits the series code from constraint properties in SDG variable codes.
+SDG_CODE_SEPARATOR = '@'
+
 # Used to split the series code from constraint properties in stat var dcids.
 SV_CODE_SEPARATOR = '.'
 
@@ -96,47 +99,45 @@ BASE_DIMENSIONS = {
 
 # Series where zero should be treated as null and removed.
 ZERO_NULL = {
-  'SE_ACS_CMPTR',
-  'SE_ACS_H2O',
-  'SE_AGP_CPRA',
-  'SE_ALP_CPLR',
-  'SE_AWP_CPRA',
-  'SE_ACC_HNDWSH',
-  'SE_INF_DSBL',
-  'SE_TOT_CPLR',
-  'SE_TRA_GRDL',
-  'SE_ACS_INTNT',
+    'SE_ACS_CMPTR',
+    'SE_ACS_H2O',
+    'SE_AGP_CPRA',
+    'SE_ALP_CPLR',
+    'SE_AWP_CPRA',
+    'SE_ACC_HNDWSH',
+    'SE_INF_DSBL',
+    'SE_TOT_CPLR',
+    'SE_TRA_GRDL',
+    'SE_ACS_INTNT',
 }
 
 # Footnote text indicated that a zero point should be treated as null and removed.
 ZERO_NULL_TEXT = 'This data point is NIL for the submitting nation.'
 
-DROP_SERIES = {
-  'TX_IMP_GBMRCH',
-  'TX_EXP_GBMRCH',
-  'TX_IMP_GBSVR',
-  'TX_EXP_GBSVR',
-  'SH_SAN_SAFE',
-  'AG_PRD_XSUBDY',
-}
+DROP_VARIABLE = {'VC_DTH_TOTPT'}
 
-DROP_VARIABLE = {
-   'VC_DTH_TOTPT'
+DROP_SERIES = {
+    'TX_IMP_GBMRCH',
+    'TX_EXP_GBMRCH',
+    'TX_IMP_GBSVR',
+    'TX_EXP_GBSVR',
+    'SH_SAN_SAFE',
+    'AG_PRD_XSUBDY',
 }
 
 MAP = {
-      'Education level': 'education',
-      'Frequency of Chlorophyll-a concentration': 'frequency',
-      'Report Ordinal': 'ordinal',
-      'Grounds of discrimination': 'discrimination',
-      'Deviation Level': 'deviation'
+    'Education level': 'education',
+    'Frequency of Chlorophyll-a concentration': 'frequency',
+    'Report Ordinal': 'ordinal',
+    'Grounds of discrimination': 'discrimination',
+    'Deviation Level': 'deviation'
 }
 
 PLACE_MAPPINGS = {}
 with open('geography/place_mappings.csv') as f:
-  reader = csv.DictReader(f)
-  for row in reader:
-    PLACE_MAPPINGS[str(row['sdg'])] = str(row['dcid'])
+    reader = csv.DictReader(f)
+    for row in reader:
+        PLACE_MAPPINGS[str(row['sdg'])] = str(row['dcid'])
 
 
 def format_description(s):
@@ -162,7 +163,8 @@ def format_description(s):
     # Replace 100,000 with 100K.
     formatted = formatted.replace('100,000', '100K')
     # Remove some apostrophe.
-    formatted = formatted.replace("Developing countries’", 'Developing countries')
+    formatted = formatted.replace("Developing countries’",
+                                  'Developing countries')
     # Replace DRR with Disaster Risk Reduction.
     formatted = formatted.replace('DRR', 'Disaster Risk Reduction')
     # Make ascii.
@@ -205,42 +207,44 @@ def is_valid(v):
 
 
 def replace_me(text, mappings):
-  new_text = text.split('[')
-  if len(new_text) == 1:
-    return text
-  next_text = new_text[1][0:-1]
-  new_string = new_text[0] + '['
-  raw_pairs = next_text.split('|')
-  
-  new_pairs = []
-  for raw_pair in raw_pairs:
-    new_pair = ''
+    new_text = text.split('[')
+    if len(new_text) == 1:
+        return text
+    next_text = new_text[1][0:-1]
+    new_string = new_text[0] + '['
+    raw_pairs = next_text.split('|')
 
-    temp = raw_pair.split('=')
-    left_equal, right_equal = temp[0], temp[1]
-    left_equal = left_equal.strip()
-    right_equal = right_equal.strip()
+    new_pairs = []
+    for raw_pair in raw_pairs:
+        new_pair = ''
 
-    if left_equal in mappings:
-      if left_equal == 'Education level':
-        if 'education' in right_equal:
-          new_pair = right_equal
+        temp = raw_pair.split('=')
+        left_equal, right_equal = temp[0], temp[1]
+        left_equal = left_equal.strip()
+        right_equal = right_equal.strip()
+
+        if left_equal in mappings:
+            if left_equal == 'Education level':
+                if 'education' in right_equal:
+                    new_pair = right_equal
+                else:
+                    new_pair = right_equal + ' ' + mappings[left_equal]
+            elif '(' in right_equal:
+                level, percentage = right_equal.split('(')
+                level = level.strip()
+                percentage = percentage[:-1]
+                new_pair = level + ' ' + mappings[
+                    left_equal] + ' (' + percentage + ')'
+            else:
+                new_pair = right_equal + ' ' + mappings[left_equal]
         else:
-          new_pair = right_equal + ' ' + mappings[left_equal]
-      elif '(' in right_equal:
-        level, percentage = right_equal.split('(')
-        level = level.strip()
-        percentage = percentage[:-1]
-        new_pair = level + ' ' + mappings[left_equal] + ' (' + percentage + ')'
-      else:
-        new_pair = right_equal + ' ' + mappings[left_equal]
-    else:
-      new_pair = raw_pair.strip()
+            new_pair = raw_pair.strip()
 
-    new_pairs.append(new_pair)
-  new_string += ', '.join(new_pairs)
-  new_string += ']'
-  return new_string
+        new_pairs.append(new_pair)
+    new_string += ', '.join(new_pairs)
+    new_string += ']'
+    return new_string
+
 
 def format_variable_description(variable, series):
     '''Curates variable descriptions.
@@ -253,9 +257,9 @@ def format_variable_description(variable, series):
       Formatted description.
     '''
     head = format_description(series)
-    pvs = variable.removeprefix(series) 
+    pvs = variable.removeprefix(series)
     if not pvs:
-       return head
+        return head
     pvs = re.sub(r'\(ISIC[^)]*\)', '', pvs)
     pvs = re.sub(r'\(isco[^)]*\)', '', pvs)
     pvs = replace_me(pvs, MAP)
@@ -278,7 +282,7 @@ def format_variable_description(variable, series):
     pvs = pvs.replace('Fiscal intervention stage = ', '')
     pvs = pvs.replace('Name of international institution = ', '')
     pvs = pvs.replace('Policy Domains = ', '')
-    pvs = pvs.replace('Mode of transportation = ', '') 
+    pvs = pvs.replace('Mode of transportation = ', '')
     pvs = pvs.replace('Food Waste Sector = ', '')
     pvs = pvs.replace('24 to 59 months old', '2 to 5 years old')
     pvs = pvs.replace('36 to 47 months old', '3 to 4 years old')
@@ -299,7 +303,7 @@ def format_variable_code(code):
     Returns:
       Formatted code.
     '''
-    return code.replace('@', SV_CODE_SEPARATOR).replace(' ', '')
+    return code.replace(SDG_CODE_SEPARATOR, SV_CODE_SEPARATOR).replace(' ', '')
 
 
 def format_title(s):

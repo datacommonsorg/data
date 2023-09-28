@@ -74,7 +74,7 @@ def get_measurement_method(row):
 
 
 def drop_null(value, series, footnote):
-    '''Returns value or '' if it should be dropped.
+    '''Returns value or '' if it should be dropped for being null.
 
     Args:
         value: Input value.
@@ -92,15 +92,34 @@ def drop_null(value, series, footnote):
         return ''
     return value
 
-def drop_special(value, variable, series):
+
+def drop_special(value, variable):
+    '''Returns value or '' if it should be dropped based on special curation.
+
+    Args:
+        value: Input value.
+        variable: Input variable.
+
+    Returns:
+        value or ''.
+    '''
     if variable in util.DROP_VARIABLE:
         return ''
+    series = variable.split(util.SDG_CODE_SEPARATOR)[0]
     if series in util.DROP_SERIES:
         return ''
     return value
 
 
-def fix(s):
+def fix_encoding(s):
+    '''Fixes input encoding to decode special characters.
+
+    Args:
+        s: Input string.
+
+    Returns:
+        Formatted string.
+    '''
     try:
         return s.encode('latin1').decode('utf8')
     except:
@@ -158,7 +177,8 @@ def process(input_dir, schema_dir, csv_dir):
 
     for _, row in df.iterrows():
         if str(row['Enumeration_Code_SDMX']) != 'CUST_BREAKDOWN' and str(
-                row['Enumeration_Code_SDMX']) != 'COMPOSITE_BREAKDOWN' and str(row['Enumeration_Code_SDMX']) != 'UNIT_MEASURE':
+                row['Enumeration_Code_SDMX']) != 'COMPOSITE_BREAKDOWN' and str(
+                    row['Enumeration_Code_SDMX']) != 'UNIT_MEASURE':
             dimensions[str(row['Enumeration_Code_SDMX'])][str(
                 row['EnumerationValue_Code_SDMX'])] = str(
                     row['EnumerationValue_Name'])
@@ -195,21 +215,24 @@ def process(input_dir, schema_dir, csv_dir):
                 continue
 
             # Drop known null values.
-            df['OBS_VALUE'] = df.apply(lambda x: drop_null(x['OBS_VALUE'], x['SERIES_CODE'], x['FOOT_NOTE']), axis=1)
+            df['OBS_VALUE'] = df.apply(lambda x: drop_null(
+                x['OBS_VALUE'], x['SERIES_CODE'], x['FOOT_NOTE']),
+                                       axis=1)
             df = df[df['OBS_VALUE'] != '']
             if df.empty:
                 continue
 
             # Drop curated.
-            df['OBS_VALUE'] = df.apply(lambda x: drop_special(x['OBS_VALUE'], x['VARIABLE_CODE'], x['SERIES_CODE']), axis=1)
+            df['OBS_VALUE'] = df.apply(
+                lambda x: drop_special(x['OBS_VALUE'], x['VARIABLE_CODE']),
+                axis=1)
             df = df[df['OBS_VALUE'] != '']
             if df.empty:
                 continue
 
             # Format places.
-            df['GEOGRAPHY_CODE'] = df.apply(lambda x: get_geography(
-                x['GEOGRAPHY_CODE']),
-                                            axis=1)
+            df['GEOGRAPHY_CODE'] = df.apply(
+                lambda x: get_geography(x['GEOGRAPHY_CODE']), axis=1)
             df = df[df['GEOGRAPHY_CODE'] != '']
             if df.empty:
                 continue
@@ -231,9 +254,9 @@ def process(input_dir, schema_dir, csv_dir):
             #sv_frames.append(df.loc[:,
             #                        ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION'] +
             #                        properties].drop_duplicates())
-            sv_frames.append(df.loc[:,
-                                    ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION', 'SOURCE'] +
-                                    properties].drop_duplicates())
+            sv_frames.append(
+                df.loc[:, ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION', 'SOURCE'] +
+                       properties].drop_duplicates())
             measurement_method_frames.append(
                 df.loc[:, ['NATURE', 'OBS_STATUS', 'REPORTING_TYPE']].
                 drop_duplicates())
@@ -245,7 +268,6 @@ def process(input_dir, schema_dir, csv_dir):
                 lambda x: 'dcs:SDG_' + x)
             df['MEASUREMENT_METHOD'] = df.apply(
                 lambda x: 'dcs:' + get_measurement_method(x), axis=1)
-            
 
             # Retain only columns for cleaned csv.
             df = df.loc[:, [
@@ -287,7 +309,14 @@ def process(input_dir, schema_dir, csv_dir):
                 sources = sources.loc[:, ['SOURCE']].drop_duplicates()['SOURCE']
                 footnote = ''
                 if not sources.empty:
-                    footnote = '\nfootnote: "Includes data from the following sources: ' + '; '.join(sorted([fix(str(s)).removesuffix('.').strip().replace('"', "'").replace('\n', '').replace('\t', '').replace('__', '_') for s in sources])) + '"'
+                    footnote = '\nfootnote: "Includes data from the following sources: ' + '; '.join(
+                        sorted([
+                            fix_encoding(
+                                str(s)).removesuffix('.').strip().replace(
+                                    '"', "'").replace('\n', '').replace(
+                                        '\t', '').replace('__', '_')
+                            for s in sources
+                        ])) + '"'
                 f.write(
                     util.SV_TEMPLATE.format_map({
                         'dcid':
