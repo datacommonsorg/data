@@ -18,8 +18,11 @@ import os
 import re
 import sys
 
+sys.path.append(
+    os.path.dirname(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__)))))
+
 module_dir_ = os.path.dirname(__file__)
-sys.path.append(os.path.join(module_dir_))
 
 # SDMX indicator for 'total' value in dimension.
 TOTAL = '_T'
