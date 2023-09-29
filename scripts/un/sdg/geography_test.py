@@ -27,6 +27,14 @@ from un.sdg import geography
 
 module_dir_ = os.path.dirname(__file__)
 
+# Read input geography mappings.
+SDG2TYPE = geography.get_sdg2type(
+    os.path.join(module_dir_, 'sdg-dataset/output/SDG_geographies.csv'))
+UN2SDG, SDG2UN = geography.get_sdg_un_maps(
+    os.path.join(module_dir_,
+                 'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv'))
+UN2DC = geography.get_un2dc(os.path.join(module_dir_, 'geography/places.csv'))
+
 FOLDER = os.path.join(module_dir_, 'testdata/test_geography')
 
 UN2DC2 = {
@@ -83,7 +91,8 @@ class GeographyTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             output = os.path.join(tmp_dir, 'un_places.mcf')
             un2dc2, new_subjects = geography.write_un_places(
-                os.path.join(FOLDER, 'test_geographies.csv'), output)
+                os.path.join(FOLDER, 'test_geographies.csv'), output, SDG2TYPE,
+                UN2SDG, UN2DC)
             with open(output) as result:
                 with open(os.path.join(FOLDER,
                                        'expected_un_places.mcf')) as expected:
@@ -93,7 +102,8 @@ class GeographyTest(unittest.TestCase):
 
     def test_process_containment(self):
         containment = geography.process_containment(
-            os.path.join(FOLDER, 'test_geography_hierarchy.csv'), UN2DC2_FULL)
+            os.path.join(FOLDER, 'test_geography_hierarchy.csv'), UN2DC,
+            UN2DC2_FULL)
         self.assertEqual(containment, CONTAINMENT)
 
     def test_write_un_containment(self):
@@ -108,7 +118,7 @@ class GeographyTest(unittest.TestCase):
     def test_write_place_mappings(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             output = os.path.join(tmp_dir, 'place_mappings.csv')
-            geography.write_place_mappings(output, UN2DC2_FULL)
+            geography.write_place_mappings(output, SDG2UN, UN2DC, UN2DC2_FULL)
             with open(output) as result:
                 with open(os.path.join(
                         FOLDER, 'expected_place_mappings.csv')) as expected:

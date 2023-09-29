@@ -14,15 +14,17 @@
 '''Shared util functions and constants.'''
 import csv
 import math
-import os
+#import os
 import re
-import sys
+#import sys
 
+'''
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
 
 module_dir_ = os.path.dirname(__file__)
+'''
 
 # SDMX indicator for 'total' value in dimension.
 TOTAL = '_T'
@@ -178,11 +180,22 @@ TITLE_REPLACEMENTS = {
 }
 
 # Map of SDG code -> dcid.
-PLACE_MAPPINGS = {}
-with open(os.path.join(module_dir_, 'geography/place_mappings.csv')) as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        PLACE_MAPPINGS[str(row['sdg'])] = str(row['dcid'])
+def get_place_mappings(file):
+    '''Produces map of SDG code -> dcid:
+
+    Args:
+      file: Input file path.
+
+    Returns:
+      Map of SDG code -> dcid:
+    '''
+    place_mappings = {}
+    with open(file) as f:
+      reader = csv.DictReader(f)
+      for row in reader:
+          place_mappings[str(row['sdg'])] = str(row['dcid'])
+    return place_mappings
+PLACE_MAPPINGS = get_place_mappings('geography/place_mappings.csv')
 
 
 def format_description(s):
