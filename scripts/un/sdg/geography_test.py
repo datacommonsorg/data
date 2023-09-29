@@ -27,12 +27,6 @@ from un.sdg import geography
 
 module_dir_ = os.path.dirname(__file__)
 
-# Read input geography mappings.
-SDG2TYPE = geography.get_sdg2type('sdg-dataset/output/SDG_geographies.csv')
-UN2SDG, SDG2UN = geography.get_sdg_un_maps(
-    'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv')
-UN2DC = geography.get_un2dc('geography/places.csv')
-
 FOLDER = os.path.join(module_dir_, 'testdata/test_geography')
 
 UN2DC2 = {
@@ -86,11 +80,19 @@ class GeographyTest(unittest.TestCase):
                                                  'Country', 'country/USA'))
 
     def test_write_un_places(self):
+        sdg2type = geography.get_sdg2type(
+            os.path.join(module_dir_, 'sdg-dataset/output/SDG_geographies.csv'))
+        un2sdg, _ = geography.get_sdg_un_maps(
+            os.path.join(
+                module_dir_,
+                'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv'))
+        un2dc = geography.get_un2dc(
+            os.path.join(module_dir_, 'geography/places.csv'))
         with tempfile.TemporaryDirectory() as tmp_dir:
             output = os.path.join(tmp_dir, 'un_places.mcf')
             un2dc2, new_subjects = geography.write_un_places(
-                os.path.join(FOLDER, 'test_geographies.csv'), output, SDG2TYPE,
-                UN2SDG, UN2DC)
+                os.path.join(FOLDER, 'test_geographies.csv'), output, sdg2type,
+                un2sdg, un2dc)
             with open(output) as result:
                 with open(os.path.join(FOLDER,
                                        'expected_un_places.mcf')) as expected:
@@ -99,8 +101,10 @@ class GeographyTest(unittest.TestCase):
             self.assertEqual(new_subjects, NEW_SUBJECTS)
 
     def test_process_containment(self):
+        un2dc = geography.get_un2dc(
+            os.path.join(module_dir_, 'geography/places.csv'))
         containment = geography.process_containment(
-            os.path.join(FOLDER, 'test_geography_hierarchy.csv'), UN2DC,
+            os.path.join(FOLDER, 'test_geography_hierarchy.csv'), un2dc,
             UN2DC2_FULL)
         self.assertEqual(containment, CONTAINMENT)
 
@@ -114,10 +118,16 @@ class GeographyTest(unittest.TestCase):
                     self.assertEqual(result.read(), expected.read())
 
     def test_write_place_mappings(self):
+        _, sdg2un = geography.get_sdg_un_maps(
+            os.path.join(
+                module_dir_,
+                'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv'))
+        un2dc = geography.get_un2dc(
+            os.path.join(module_dir_, 'geography/places.csv'))
         with tempfile.TemporaryDirectory() as tmp_dir:
             output = os.path.join(tmp_dir, 'place_mappings.csv')
-            geography.write_place_mappings(os.path.join(FOLDER, output), SDG2UN,
-                                           UN2DC, UN2DC2_FULL)
+            geography.write_place_mappings(os.path.join(FOLDER, output), sdg2un,
+                                           un2dc, UN2DC2_FULL)
             with open(output) as result:
                 with open(os.path.join(
                         FOLDER, 'expected_place_mappings.csv')) as expected:
