@@ -34,6 +34,8 @@ import pandas as pd
 import shutil
 import sys
 
+from string import punctuation
+
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
@@ -329,7 +331,7 @@ def process(input_dir, schema_dir, csv_dir, place_mappings):
                     footnote = '\nfootnote: "Includes data from the following sources: ' + '; '.join(
                         sorted([
                             fix_encoding(
-                                str(s)).removesuffix('.').strip().replace(
+                                str(s)).rstrip(punctuation).strip().replace(
                                     '"', "'").replace('\n', '').replace(
                                         '\t', '').replace('__', '_')
                             for s in sources

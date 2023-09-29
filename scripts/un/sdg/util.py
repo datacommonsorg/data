@@ -293,7 +293,7 @@ def format_variable_description(variable, series):
       Formatted description.
     '''
     head = format_description(series)
-    pvs = variable.removeprefix(series).strip()
+    pvs = variable.split(series)[1].strip()
     if not pvs:
         return head
 
