@@ -28,12 +28,10 @@ from un.sdg import geography
 module_dir_ = os.path.dirname(__file__)
 
 # Read input geography mappings.
-SDG2TYPE = geography.get_sdg2type(
-    os.path.join(module_dir_, 'sdg-dataset/output/SDG_geographies.csv'))
+SDG2TYPE = geography.get_sdg2type('sdg-dataset/output/SDG_geographies.csv')
 UN2SDG, SDG2UN = geography.get_sdg_un_maps(
-    os.path.join(module_dir_,
-                 'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv'))
-UN2DC = geography.get_un2dc(os.path.join(module_dir_, 'geography/places.csv'))
+    'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv')
+UN2DC = geography.get_un2dc('geography/places.csv')
 
 FOLDER = os.path.join(module_dir_, 'testdata/test_geography')
 
@@ -118,7 +116,8 @@ class GeographyTest(unittest.TestCase):
     def test_write_place_mappings(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             output = os.path.join(tmp_dir, 'place_mappings.csv')
-            geography.write_place_mappings(output, SDG2UN, UN2DC, UN2DC2_FULL)
+            geography.write_place_mappings(os.path.join(FOLDER, output), SDG2UN,
+                                           UN2DC, UN2DC2_FULL)
             with open(output) as result:
                 with open(os.path.join(
                         FOLDER, 'expected_place_mappings.csv')) as expected:
