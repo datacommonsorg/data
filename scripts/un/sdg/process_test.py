@@ -28,6 +28,21 @@ from un.sdg import process
 
 module_dir_ = os.path.dirname(__file__)
 
+PLACE_MAPPINGS = {
+    '1': 'Earth',
+    '2': 'africa',
+    '4': 'country/AFG',
+    '5': 'southamerica',
+    '8': 'country/ALB',
+    '9': 'oceania',
+    '11': 'WesternAfrica',
+    '12': 'country/DZA',
+    '13': 'CentralAmerica',
+    '14': 'EasternAfrica',
+    '840': 'country/USA',
+    'AF_MAZAR_E_SHARIF': 'wikidataId/Q130469'
+}
+
 
 def assert_equal_dir(self, result_dir, expected_dir):
     for root, _, files in os.walk(result_dir):
@@ -40,10 +55,12 @@ def assert_equal_dir(self, result_dir, expected_dir):
 class ProcessTest(unittest.TestCase):
 
     def test_get_geography(self):
-        self.assertEqual(process.get_geography(840), 'dcs:country/USA')
-        self.assertEqual(process.get_geography('AF_MAZAR_E_SHARIF'),
-                         'dcs:wikidataId/Q130469')
-        self.assertEqual(process.get_geography(1), 'dcs:Earth')
+        self.assertEqual(process.get_geography(840, PLACE_MAPPINGS),
+                         'dcs:country/USA')
+        self.assertEqual(
+            process.get_geography('AF_MAZAR_E_SHARIF', PLACE_MAPPINGS),
+            'dcs:wikidataId/Q130469')
+        self.assertEqual(process.get_geography(1, PLACE_MAPPINGS), 'dcs:Earth')
 
     def test_get_measurement_method(self):
         d = {'NATURE': ['E'], 'OBS_STATUS': ['A'], 'REPORTING_TYPE': ['G']}
@@ -74,7 +91,7 @@ class ProcessTest(unittest.TestCase):
             with tempfile.TemporaryDirectory() as tmp_csv:
                 process.process(
                     os.path.join(module_dir_, 'testdata/test_input'),
-                    tmp_schema, tmp_csv)
+                    tmp_schema, tmp_csv, PLACE_MAPPINGS)
                 assert_equal_dir(
                     self, tmp_schema,
                     os.path.join(module_dir_, 'testdata/test_schema'))

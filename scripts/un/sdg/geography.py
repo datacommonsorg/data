@@ -289,7 +289,7 @@ def write_place_mappings(output, sdg2un, un2dc, un2dc2):
     with open(output, 'w') as f:
         writer = csv.DictWriter(f, fieldnames=['sdg', 'dcid'])
         writer.writeheader()
-        for code in sdg2un:
+        for code in sorted(sdg2un):
             un = sdg2un[code]
             if un in un2dc:
                 dcid = un2dc[un][0]

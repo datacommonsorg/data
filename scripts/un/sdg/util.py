@@ -17,7 +17,6 @@ import math
 #import os
 import re
 #import sys
-
 '''
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
@@ -178,24 +177,6 @@ TITLE_REPLACEMENTS = {
     '36 to 47 months old': '3 to 4 years old',
     '48 to 59 months': '4 to 5 years old'
 }
-
-# Map of SDG code -> dcid.
-def get_place_mappings(file):
-    '''Produces map of SDG code -> dcid:
-
-    Args:
-      file: Input file path.
-
-    Returns:
-      Map of SDG code -> dcid:
-    '''
-    place_mappings = {}
-    with open(file) as f:
-      reader = csv.DictReader(f)
-      for row in reader:
-          place_mappings[str(row['sdg'])] = str(row['dcid'])
-    return place_mappings
-PLACE_MAPPINGS = get_place_mappings('geography/place_mappings.csv')
 
 
 def format_description(s):

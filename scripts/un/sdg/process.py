@@ -27,6 +27,7 @@ Produces:
 Usage: python3 process.py
 '''
 import collections
+import csv
 import math
 import os
 import pandas as pd
@@ -39,18 +40,35 @@ sys.path.append(
 from un.sdg import util
 
 
-def get_geography(code):
+def get_place_mappings(file):
+    '''Produces map of SDG code -> dcid:
+
+    Args:
+      file: Input file path.
+
+    Returns:
+      Map of SDG code -> dcid:
+    '''
+    place_mappings = {}
+    with open(file) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            place_mappings[str(row['sdg'])] = str(row['dcid'])
+    return place_mappings
+
+
+def get_geography(code, place_mappings):
     '''Returns dcid of geography.
 
     Args:
         code: Geography code.
-        type: Geography type.
+        place_mappings: Map of SDG code -> dcid.
 
     Returns:
         Geography dcid.
     '''
-    if str(code) in util.PLACE_MAPPINGS:
-        return 'dcs:' + util.PLACE_MAPPINGS[str(code)]
+    if str(code) in place_mappings:
+        return 'dcs:' + place_mappings[str(code)]
     return ''
 
 
@@ -126,7 +144,7 @@ def fix_encoding(s):
         return s.encode('utf8').decode('utf8')
 
 
-def process(input_dir, schema_dir, csv_dir):
+def process(input_dir, schema_dir, csv_dir, place_mappings):
     '''Generates mcf, csv/tmcf artifacts.
 
     Produces:
@@ -144,6 +162,7 @@ def process(input_dir, schema_dir, csv_dir):
         input_dir: Path to input xlsx files.
         schema_dir: Path to output schema files.
         csv_dir: Path to output csv files.
+        place_mappings: Map of SDG code -> dcid.
     '''
     with open(os.path.join(schema_dir, 'series.mcf'), 'w') as f_series:
         with open(os.path.join(schema_dir, 'sdg.textproto'), 'w') as f_vertical:
@@ -232,7 +251,8 @@ def process(input_dir, schema_dir, csv_dir):
 
             # Format places.
             df['GEOGRAPHY_CODE'] = df.apply(
-                lambda x: get_geography(x['GEOGRAPHY_CODE']), axis=1)
+                lambda x: get_geography(x['GEOGRAPHY_CODE'], place_mappings),
+                axis=1)
             df = df[df['GEOGRAPHY_CODE'] != '']
             if df.empty:
                 continue
@@ -398,4 +418,5 @@ if __name__ == '__main__':
     if os.path.exists('csv'):
         shutil.rmtree('csv')
     os.makedirs('csv')
-    process('sdg-dataset/output', 'schema', 'csv')
+    place_mappings = get_place_mappings('geography/place_mappings.csv')
+    process('sdg-dataset/output', 'schema', 'csv', place_mappings)
