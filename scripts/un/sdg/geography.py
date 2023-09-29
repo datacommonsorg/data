@@ -24,13 +24,7 @@ import collections
 import csv
 import json
 import os
-import sys
 
-#sys.path.append(
-#    os.path.dirname(os.path.dirname(os.path.dirname(
-#        os.path.abspath(__file__)))))
-
-module_dir_ = os.path.dirname(__file__)
 
 # Output folder.
 FOLDER = 'geography'
@@ -55,8 +49,7 @@ FIXED = {
 
 # Map of SDG code -> SDG type.
 SDG2TYPE = {}
-with open(os.path.join(module_dir_,
-                       'sdg-dataset/output/SDG_geographies.csv')) as f:
+with open(os.path.join('sdg-dataset/output/SDG_geographies.csv')) as f:
     reader = csv.DictReader(f)
     for row in reader:
         SDG2TYPE[row['GEOGRAPHY_CODE']] = row['GEOGRAPHY_TYPE']
@@ -64,7 +57,7 @@ with open(os.path.join(module_dir_,
 UN2SDG = {}  # Map of UN code -> SDG code.
 SDG2UN = {}  # Map of SDG code -> UN code.
 with open(os.path.join(
-        module_dir_, 'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv'),
+    'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv'),
           encoding='utf-8-sig') as f:
     reader = csv.DictReader(f)
     for row in reader:
@@ -77,7 +70,7 @@ with open(os.path.join(
 
 # Map of UN code -> curated (dcid, DC type, DC name).
 UN2DC = {}
-with open(os.path.join(module_dir_, FOLDER, 'places.csv')) as f:
+with open(os.path.join(FOLDER, 'places.csv')) as f:
     reader = csv.DictReader(f)
     for row in reader:
 
