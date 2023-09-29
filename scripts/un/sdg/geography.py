@@ -25,7 +25,6 @@ import csv
 import json
 import os
 
-
 # Output folder.
 FOLDER = 'geography'
 
@@ -56,9 +55,9 @@ with open(os.path.join('sdg-dataset/output/SDG_geographies.csv')) as f:
 
 UN2SDG = {}  # Map of UN code -> SDG code.
 SDG2UN = {}  # Map of SDG code -> UN code.
-with open(os.path.join(
-    'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv'),
-          encoding='utf-8-sig') as f:
+with open(
+        os.path.join('sssom-mappings/output_mappings/undata-geo__sdg-geo.csv'),
+        encoding='utf-8-sig') as f:
     reader = csv.DictReader(f)
     for row in reader:
         subject = row['subject_id']  # UN code.
