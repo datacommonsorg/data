@@ -176,7 +176,7 @@ TITLE_REPLACEMENTS = {
 
 # Map of SDG code -> dcid.
 PLACE_MAPPINGS = {}
-with open('geography/place_mappings.csv') as f:
+with open(os.path.join(module_dir_, 'geography/place_mappings.csv')) as f:
     reader = csv.DictReader(f)
     for row in reader:
         PLACE_MAPPINGS[str(row['sdg'])] = str(row['dcid'])
