@@ -35,17 +35,15 @@ UN2DC2 = {
 }
 
 # Add additional referenced objects that aren't defined in test_geographies.csv.
-UN2DC2_FULL = UN2DC2 | {
-    'undata-geo:G00403300': ('undata-geo/G00403300', 'GeoRegion',
-                             'Landlocked developing countries (LLDCs): Asia'),
-    'undata-geo:G00404100': ('undata-geo/G00404100', 'GeoRegion',
-                             'Least developed countries (LDCs): Africa'),
-    'undata-geo:G00404300': ('undata-geo/G00404300', 'GeoRegion',
-                             'Least developed countries (LDCs): Asia'),
-    'undata-geo:G00405200': ('undata-geo/G00405200', 'GeoRegion',
-                             'Small Island Developing States (SIDS): Americas'),
-    'undata-geo:G00405400': ('undata-geo/G00405400', 'GeoRegion',
-                             'Small Island Developing States (SIDS): Oceania')
+UN2DC2_FULL = {
+    **UN2DC2,
+    **{
+        'undata-geo:G00403300': ('undata-geo/G00403300', 'GeoRegion', 'Landlocked developing countries (LLDCs): Asia'),
+        'undata-geo:G00404100': ('undata-geo/G00404100', 'GeoRegion', 'Least developed countries (LDCs): Africa'),
+        'undata-geo:G00404300': ('undata-geo/G00404300', 'GeoRegion', 'Least developed countries (LDCs): Asia'),
+        'undata-geo:G00405200': ('undata-geo/G00405200', 'GeoRegion', 'Small Island Developing States (SIDS): Americas'),
+        'undata-geo:G00405400': ('undata-geo/G00405400', 'GeoRegion', 'Small Island Developing States (SIDS): Oceania')
+    }
 }
 
 NEW_SUBJECTS = {('undata-geo/G00000030', 'GeoRegion'),
