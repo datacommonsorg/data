@@ -7,35 +7,6 @@ containedInPlace: dcs:undata-geo/G00403300
 containedInPlace: dcs:undata-geo/G00404000
 containedInPlace: dcs:undata-geo/G00404300
 
-Node: dcid:country/AGO
-typeOf: dcid:Country
-containedInPlace: dcs:SubSaharanAfrica
-containedInPlace: dcs:MiddleAfrica
-containedInPlace: dcs:undata-geo/G00404000
-containedInPlace: dcs:undata-geo/G00404100
-
-Node: dcid:country/ALA
-typeOf: dcid:Country
-containedInPlace: dcs:NorthernEurope
-
-Node: dcid:country/ALB
-typeOf: dcid:Country
-containedInPlace: dcs:SouthernEurope
-
-Node: dcid:country/AND
-typeOf: dcid:Country
-containedInPlace: dcs:SouthernEurope
-
-Node: dcid:country/DZA
-typeOf: dcid:Country
-containedInPlace: dcs:NorthernAfrica
-
-Node: dcid:undata-geo/G00000010
-typeOf: dcid:GeoRegion
-containedInPlace: dcs:Earth
-containedInPlace: dcs:asia
-containedInPlace: dcs:WesternAsia
-
 Node: dcid:undata-geo/G00000030
 typeOf: dcid:GeoRegion
 containedInPlace: dcs:Earth

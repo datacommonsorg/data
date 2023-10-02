@@ -1,10 +1,4 @@
 
-Node: dcid:undata-geo/G00000010
-typeOf: dcs:GeoRegion
-name: "Abu Dhabi"
-unDataCode: "undata-geo:G00000010"
-unDataLabel: "Abu Dhabi"
-
 Node: dcid:country/AFG
 typeOf: dcs:Country
 name: "Afghanistan"
@@ -16,45 +10,3 @@ typeOf: dcs:GeoRegion
 name: "Ajman"
 unDataCode: "undata-geo:G00000030"
 unDataLabel: "Ajman"
-
-Node: dcid:country/ALA
-typeOf: dcs:Country
-name: "Åland Islands"
-unDataCode: "undata-geo:G00000040"
-unDataLabel: "Åland Islands"
-
-Node: dcid:country/ALB
-typeOf: dcs:Country
-name: "Albania"
-unDataCode: "undata-geo:G00000050"
-unDataLabel: "Albania"
-
-Node: dcid:country/DZA
-typeOf: dcs:Country
-name: "Algeria"
-unDataCode: "undata-geo:G00000060"
-unDataLabel: "Algeria"
-
-Node: dcid:country/ASM
-typeOf: dcs:AdministrativeArea1
-name: "American Samoa"
-unDataCode: "undata-geo:G00000070"
-unDataLabel: "American Samoa"
-
-Node: dcid:country/AND
-typeOf: dcs:Country
-name: "Andorra"
-unDataCode: "undata-geo:G00000080"
-unDataLabel: "Andorra"
-
-Node: dcid:country/AGO
-typeOf: dcs:Country
-name: "Angola"
-unDataCode: "undata-geo:G00000090"
-unDataLabel: "Angola"
-
-Node: dcid:country/AIA
-typeOf: dcs:AdministrativeArea1
-name: "Anguilla"
-unDataCode: "undata-geo:G00000100"
-unDataLabel: "Anguilla"
