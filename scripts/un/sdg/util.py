@@ -12,18 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''Shared util functions and constants.'''
-import csv
 import math
-#import os
 import re
-#import sys
-'''
-sys.path.append(
-    os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__)))))
-
-module_dir_ = os.path.dirname(__file__)
-'''
 
 # SDMX indicator for 'total' value in dimension.
 TOTAL = '_T'
@@ -155,14 +145,12 @@ TITLE_DELETIONS = [
     'Type of product = ',
     'Type of waste treatment = ',
     'Activity = ',
-    '',
     'Type of renewable technology = ',
     'Location = ',
     'Level_of_government = ',
     'Fiscal intervention stage = ',
     'Name of international institution = ',
     'Policy Domains = ',
-    '',
     'Mode of transportation = ',
     'Food Waste Sector = ',
 ]
