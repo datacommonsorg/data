@@ -11,32 +11,33 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Unit tests for NgramMatcher.'''
+"""Unit tests for NgramMatcher."""
 
 import unittest
 
 from absl import app
 from absl import logging
-
 import ngram_matcher
 
 
 class NgramMatcherTest(unittest.TestCase):
 
-    def setUp(self):
-        ngram_matcher._DEBUG = True
-        logging.set_verbosity(2)
+  def setUp(self):
+    # logging.set_verbosity(2)
+    return
 
-    def test_lookup_string(self):
-        matcher = ngram_matcher.NgramMatcher(ngram_size=4)
-        matcher.add_key_value('Test Key 1', 1)
-        matcher.add_key_value('TESTKeyTwo', 'two')
-        matches = matcher.lookup('Test')
-        self.assertEqual([('Test Key 1', 1), ('TESTKeyTwo', 'two')], matches)
-        self.assertTrue(matcher.lookup('Tester'))
-        self.assertFalse(matcher.lookup('ABCDEF'))
+  def test_lookup_string(self):
+    matcher = ngram_matcher.NgramMatcher(config={'ngram_size': 4})
+    matcher.add_key_value('Test Key 1', 1)
+    matcher.add_key_value('TESTKey Two', 'two')
+    matches = matcher.lookup('Test')
+    self.assertEqual([('TESTKey Two', 'two'), ('Test Key 1', 1)], matches)
+    self.assertTrue(
+        matcher.lookup('Tester', config={'min_match_fraction': 0.1})
+    )
+    self.assertFalse(matcher.lookup('ABCDEF'))
 
 
 if __name__ == '__main__':
-    app.run()
-    unittest.main()
+  app.run()
+  unittest.main()

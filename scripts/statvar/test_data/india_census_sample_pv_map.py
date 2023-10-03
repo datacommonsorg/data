@@ -12,6 +12,12 @@
     "Urban": {
         "placeOfResidenceClassification": "dcs:Urban"
     },
+    "Rural/": {
+        "placeOfResidenceClassification": ""
+    },
+    "Urban/": {
+        "placeOfResidenceClassification": ""
+    },
 
     # Values in Column:F: Age-group
     "Age-group": {

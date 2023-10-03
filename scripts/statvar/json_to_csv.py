@@ -120,7 +120,7 @@ def file_json_to_csv(
     if isinstance(file_dict, list):
       input_list.extend(file_dict)
       logging.info(f'Loaded {len(file_dict)} items from {filename}')
-      counters.add_counter('input-rows', file_dict)
+      counters.add_counter('input-rows', len(file_dict))
     elif isinstance(file_dict, dict):
       counters.max_counter('input-columns', len(file_dict))
       filtered_dict = filter_columns(file_dict, output_columns, exclude_columns)

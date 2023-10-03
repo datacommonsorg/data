@@ -234,7 +234,7 @@ def add_mcf_node(
   If the node exists, the PVs are added to the existing node.
   """
   if pvs is None or len(pvs) == 0:
-    return
+    return None
   dcid = get_node_dcid(pvs)
   if dcid == '':
     logging.warning(f'Ignoring node without a dcid: {pvs}')
@@ -276,9 +276,10 @@ def load_mcf_nodes(
             # MCFs downloaded from sheets have "" for empty lines.
             line = ''
           if line == '':
-            add_mcf_node(pvs, nodes, strip_namespace, append_values)
-            num_nodes += 1
-            pvs = {}
+            if pvs:
+              add_mcf_node(pvs, nodes, strip_namespaces, append_values)
+              num_nodes += 1
+              pvs = {}
           elif line[0] == '#':
             add_comment_to_node(line, pvs)
           else:
@@ -429,7 +430,7 @@ def normalize_list(val: str) -> str:
     return val
 
 
-def normalize_range(val: str) -> str:
+def normalize_range(val: str, quantity_range_to_dcid: bool = False) -> str:
   """Normalize a quantity range into [<N> <M> Unit]."""
   # Extract start, end and unit for the quantity range
   quantity_pat = (
@@ -452,7 +453,23 @@ def normalize_range(val: str) -> str:
   unit2 = match_dict.get('unit2', unit)
   if unit2:
     unit = unit2
-  normalized_range = f'['
+  normalized_range = ''
+  if quantity_range_to_dcid:
+    # Normalize quantity range to a dcid
+    if unit:
+      normalized_range += unit
+    if start and start != '-':
+      if end:
+        if end != '-':
+          normalized_range += f'{start}To{end}'
+        else:
+          normalized_range += f'{start}Onwards'
+      else:
+        normalized_range += f'{start}'
+    else:
+      normalized_range += f'Upto{end}'
+    return add_namespace(normalized_range)
+  normalized_range = '['
   if start:
     normalized_range += start + ' '
   if end:
@@ -463,7 +480,7 @@ def normalize_range(val: str) -> str:
   return normalized_range
 
 
-def normalize_value(val) -> str:
+def normalize_value(val, quantity_range_to_dcid: bool = False) -> str:
   """Normalize a property value adding a standard namespace prefix 'dcid:'."""
   if val:
     if isinstance(val, str):
@@ -473,10 +490,12 @@ def normalize_value(val) -> str:
         return normalize_list(val)
       elif ',' in val:
         # Sort comma separated dcids.
-        values = sorted([normalize_value(x) for x in val.split(',')])
+        values = sorted(
+            [normalize_value(x, quantity_range_to_dcid) for x in val.split(',')]
+        )
         return ','.join(values)
       elif val[0] == '[':
-        return normalize_range(val)
+        return normalize_range(val, quantity_range_to_dcid)
       else:
         # Check if string is a numeric value.
         number = get_numeric_value(val)
@@ -489,7 +508,7 @@ def normalize_value(val) -> str:
       return f'{val}'
     elif isinstance(val, list):
       # Sort a list of values normalizing the namespace prefix.
-      values = sorted([normalize_value(x) for x in val])
+      values = sorted([normalize_value(x, quantity_range_to_dcid) for x in val])
       return ','.join(values)
   return val
 
@@ -499,7 +518,11 @@ def normalize_pv(prop: str, value: str) -> str:
   return ':'.join([prop.strip(), normalize_value(value)])
 
 
-def normalize_mcf_node(node: dict, ignore_comments: bool = True) -> dict:
+def normalize_mcf_node(
+    node: dict,
+    ignore_comments: bool = True,
+    quantity_range_to_dcid: bool = False,
+) -> dict:
   """Returns a normalized MCF node with all PVs in alphabetical order,
 
   a common namespace of 'dcid' and comma separated lists also sorted.
@@ -522,7 +545,7 @@ def normalize_mcf_node(node: dict, ignore_comments: bool = True) -> dict:
     value = node[p]
     if not value:
       continue
-    normal_node[p] = normalize_value(value)
+    normal_node[p] = normalize_value(value, quantity_range_to_dcid)
   logging.log(3, f'Normalized {node} to {normal_node}')
   return normal_node
 

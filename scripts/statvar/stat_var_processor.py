@@ -1612,7 +1612,9 @@ class StatVarsMap:
                       'description',
                       'constraintProperties',
                       'memberOf',
+                      'member',
                       'provenance',
+                      'relevantVariable',
                   ]
               },
           ),

@@ -1,7 +1,7 @@
 ,,,,,C-2  MARITAL STATUS BY AGE AND SEX ,,,,,,,,,,,,,,,,,,,,,
-Table,State,Distt.,Area Name,Total/,Age-group,Total ,,,Marital status,,,,,,,,,,,,,,,,,
-Name,Code,Code,,Rural/,,,,,Never married,,,Currently Married,,,Widowed,,,Separated,,,Divorced,,,Unspecified,,
-,,,,Urban/,,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females
+Table,State,Distt.,Area Name,,Age-group,Total ,,,Marital status,,,,,,,,,,,,,,,,,
+Name,Code,Code,,,,,,,Never married,,,Currently Married,,,Widowed,,,Separated,,,Divorced,,,Unspecified,,
+,,,,,,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females,Persons,Males,Females
 ,,,,,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
 ,,,,,,,,,,,,,,,,,,,,,,,,,,
 C0402,00,000,INDIA,Total,All ages,1210854977,623270258,587584719,570833969,322870527,247963442,579584783,286507311,293077472,55538707,12277229,43261478,3535202,1162448,2372754,1362316,452743,909573,0,0,0

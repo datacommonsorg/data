@@ -83,6 +83,10 @@ _BASE_SCHEMA = {
         'Node': 'dcs:measuredvalue',
         'typeOf': 'dcid:Property',
     },
+    'dcid:member': {
+        'Node': 'dcs:member',
+        'typeOf': 'dcid:Property',
+    },
     'dcid:memberOf': {
         'Node': 'dcs:memberOf',
         'typeOf': 'dcid:Property',
@@ -126,6 +130,10 @@ _BASE_SCHEMA = {
     'dcid:Number': {
         'Node': 'dcid:Number',
         'typeOf': 'dcs:Class',
+    },
+    'dcid:relevantVariable': {
+        'Node': 'dcs:relevantVariable',
+        'typeOf': 'dcid:Property',
     },
 }
 
