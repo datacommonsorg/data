@@ -37,3 +37,6 @@ To run unit tests:
 ```
 python3 -m unittest discover -v -s ../ -p "*_test.py"
 ```
+
+Notes:
+* We currently drop certain series and variables (refer to `util.py` for the list) which have been identified by UN as potentially containing outliers.

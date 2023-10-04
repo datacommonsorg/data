@@ -91,7 +91,7 @@ BASE_DIMENSIONS = {
     'OBS_STATUS', 'RELEASE_STATUS', 'RELEASE_NAME'
 }
 
-# Series where zero should be treated as null and removed.
+# Series where zero should be treated as null and dropped (curated by UN).
 ZERO_NULL = {
     'SE_ACS_CMPTR',
     'SE_ACS_H2O',
@@ -105,13 +105,15 @@ ZERO_NULL = {
     'SE_ACS_INTNT',
 }
 
-# Footnote text indicated that a zero point should be treated as null and removed.
+# Footnote text indicated that a zero point should be treated as null and dropped.
 ZERO_NULL_TEXT = 'This data point is NIL for the submitting nation.'
 
-# Variables that should be dropped.
+# Variables that should be dropped due to outlier values (curated by UN).
+# TODO: Follow up with UN.
 DROP_VARIABLE = {'VC_DTH_TOTPT'}
 
-# Series that should be dropped.
+# Series that should be dropped due to outlier values (curated by UN).
+# TODO: Follow up with UN.
 DROP_SERIES = {
     'TX_IMP_GBMRCH',
     'TX_EXP_GBMRCH',
@@ -235,6 +237,9 @@ def is_valid(v):
 
 def curate_pvs(text, mappings):
     '''Curates PVs based on custom mappings.
+
+    Example: '[Deviation Level = Extreme (75-100%)]' 
+        -> '[Extreme deviation (75-100%)]'
 
     Args:
       text: Input text.

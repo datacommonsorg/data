@@ -56,11 +56,11 @@ class ProcessTest(unittest.TestCase):
 
     def test_get_geography(self):
         self.assertEqual(process.get_geography(840, PLACE_MAPPINGS),
-                         'dcs:country/USA')
+                         'dcid:country/USA')
         self.assertEqual(
             process.get_geography('AF_MAZAR_E_SHARIF', PLACE_MAPPINGS),
-            'dcs:wikidataId/Q130469')
-        self.assertEqual(process.get_geography(1, PLACE_MAPPINGS), 'dcs:Earth')
+            'dcid:wikidataId/Q130469')
+        self.assertEqual(process.get_geography(1, PLACE_MAPPINGS), 'dcid:Earth')
 
     def test_get_measurement_method(self):
         d = {'NATURE': ['E'], 'OBS_STATUS': ['A'], 'REPORTING_TYPE': ['G']}

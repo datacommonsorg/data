@@ -70,7 +70,7 @@ def get_geography(code, place_mappings):
         Geography dcid.
     '''
     if str(code) in place_mappings:
-        return 'dcs:' + place_mappings[str(code)]
+        return 'dcid:' + place_mappings[str(code)]
     return ''
 
 
@@ -138,7 +138,7 @@ def fix_encoding(s):
         s: Input string.
 
     Returns:
-        Formatted string.
+        String with special characters decoded.
     '''
     try:
         return s.encode('latin1').decode('utf8')
@@ -324,18 +324,22 @@ def process(input_dir, schema_dir, csv_dir, place_mappings):
 
                     val = 'SDG_' + enum + 'Enum_' + val
                     cprops += f'\n{prop}: dcs:{val}'
+
+                # Add list of observation sources to 'footnote' property on SV.
                 sources = df.loc[df['VARIABLE_CODE'] == row['VARIABLE_CODE']]
+                sources = sources.dropna(subset=['SOURCE'])
                 sources = sources.loc[:, ['SOURCE']].drop_duplicates()['SOURCE']
                 footnote = ''
                 if not sources.empty:
                     footnote = '\nfootnote: "Includes data from the following sources: ' + '; '.join(
                         sorted([
                             fix_encoding(
-                                str(s)).rstrip(punctuation).strip().replace(
+                                str(s)).rstrip('.,;:!?').strip().replace(
                                     '"', "'").replace('\n', '').replace(
                                         '\t', '').replace('__', '_')
                             for s in sources
                         ])) + '"'
+
                 f.write(
                     util.SV_TEMPLATE.format_map({
                         'dcid':

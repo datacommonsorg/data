@@ -37,14 +37,54 @@ unDataLabel: "{label}"
 '''
 CONTAINMENT_TEMPLATE = '''
 Node: dcid:{dcid}
-typeOf: dcid:{type}{containment}
+typeOf: dcs:{type}{containment}
 '''
 
-# Curated map of SDG GEOGRAPHY_CODE to UN data code.
+# Curated map of dcid to SDG code to avoid duplicates.
 FIXED = {
+    # Africa.
     'africa': '2',
+    # Source geographies without a corresponding geography in UNdata.
     'undata-geo/G99999999': '952',
 }
+
+# Geography types.
+CITY = 'City'
+CONTINENT = 'Continent'
+COUNTRY = 'Country'
+GEO_REGION = 'GeoRegion'
+SAMPLING_STATION = 'SamplingStation'
+UN_GEO_REGION = 'UNGeoRegion'
+
+# UN geography prefix.
+UN_PREFIX = 'undata-geo'
+
+
+# Simplified representation of DC MCF Node.
+class Node:
+
+    def __init__(self, dcid, type, name):
+        self.dcid = dcid
+        self.type = type
+        self.name = name
+
+    def __eq__(self, other):
+        if not isinstance(other, Node):
+            return NotImplemented
+
+        return self.dcid == other.dcid and self.type == other.type and self.name == other.name
+
+    def __str__(self):
+        return self.dcid + self.type + self.name
+
+    def __hash__(self):
+        return (hash(str(self)))
+
+    def __lt__(self, other):
+        if not isinstance(other, Node):
+            return NotImplemented
+
+        return str(self) < str(other)
 
 
 def get_sdg2type(file):
@@ -76,6 +116,8 @@ def get_sdg_un_maps(file):
     '''
     un2sdg = {}  # Map of UN code -> SDG code.
     sdg2un = {}  # Map of SDG code -> UN code.
+
+    # Use special encoding to parse UN input file.
     with open(file, encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -88,16 +130,16 @@ def get_sdg_un_maps(file):
     return un2sdg, sdg2un
 
 
-def get_un2dc(file):
-    '''Produces map of UN code -> curated (dcid, DC type, DC name).
+def get_un2dc_curated(file):
+    '''Produces map of UN code -> curated Node.
 
     Args:
         file: Input file path.
 
     Returns:
-        Map of UN code -> curated (dcid, DC type, DC name).
+        Map of UN code -> curated Node.
     '''
-    un2dc = {}
+    un2dc_curated = {}
     with open(file) as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -108,47 +150,45 @@ def get_un2dc(file):
 
             # Add missing type for NorthernEurope.
             if row['dcid'] == 'NorthernEurope':
-                type = 'UNGeoRegion'
+                type = UN_GEO_REGION
 
             else:
                 type = json.loads(row['typeOf'].replace("'", '"'))[0]['dcid']
-            un2dc[row['unDataCode']] = (row['dcid'], type, row['dc_name'])
-    return un2dc
+            un2dc_curated[row['unDataCode']] = Node(row['dcid'], type,
+                                                    row['dc_name'])
+    return un2dc_curated
 
 
-def should_include_containment(s_type, s_dcid, o_type, o_dcid):
+def should_include_containment(s, o):
     '''Returns whether triple should be included in containment.
 
     Args: 
-        s_type: Type of triple subject.
-        s_dcid: Dcid of triple subject.
-        o_type: Type of triple object.
-        o_dcid: Type of triple object.
+        s: Subject node.
+        o: Object node.
 
     Returns:
         Whether triple should be included in containment.
     '''
-    if (s_type == 'GeoRegion' or s_type == 'UNGeoRegion') and o_dcid == 'Earth':
+    if (s.type == GEO_REGION or s.type == UN_GEO_REGION) and o.dcid == 'Earth':
         return True
-    elif (s_type == 'GeoRegion' or
-          s_type == 'UNGeoRegion') and o_type == 'Continent':
+    elif (s.type == GEO_REGION or
+          s.type == UN_GEO_REGION) and o.type == CONTINENT:
         return True
-    elif (s_type == 'GeoRegion' or
-          s_type == 'UNGeoRegion') and (o_type == 'GeoRegion' or
-                                        o_type == 'UNGeoRegion'):
+    elif (s.type == GEO_REGION or
+          s.type == UN_GEO_REGION) and (o.type == GEO_REGION or
+                                        o.type == UN_GEO_REGION):
         return True
-    elif s_type == 'Country' and (o_type == 'GeoRegion' or
-                                  o_type == 'UNGeoRegion'):
+    elif s.type == COUNTRY and (o.type == GEO_REGION or
+                                o.type == UN_GEO_REGION):
         return True
-    elif s_type == 'SamplingStation' and o_type == 'Country':
+    elif s.type == SAMPLING_STATION and o.type == COUNTRY:
         return True
-    elif s_type == 'City' and s_dcid.startswith(
-            'undata-geo') and o_type == 'Country':
+    elif s.type == CITY and s.dcid.startswith(UN_PREFIX) and o.type == COUNTRY:
         return True
     return False
 
 
-def write_un_places(input_geos, output, sdg2type, un2sdg, un2dc):
+def write_un_places(input_geos, output, sdg2type, un2sdg, un2dc_curated):
     '''Writes UN places to output and computes new places.
 
     Args: 
@@ -156,41 +196,41 @@ def write_un_places(input_geos, output, sdg2type, un2sdg, un2dc):
         output: Path to output file.
         sdg2type: Map of SDG code -> SDG type.
         un2sdg: Map of UN code -> SDG code.
-        un2dc: Map of UN code -> curated (dcid, DC type, DC name).
+        un2dc_curated: Map of UN code -> curated Node.
 
     Returns:
-        - Map of UN code -> generated (dcid, DC type, DC name).
-        - Set of (dcid, type) for new places.
+        - Map of UN code -> generated Node.
+        - List of (dcid, type) for new places.
     '''
-    un2dc2 = {}
-    new_subjects = set()
+    un2dc_generated = {}
+    new_subjects = []
     with open(input_geos) as f_in:
         with open(output, 'w') as f_out:
             reader = csv.DictReader(f_in)
             for row in reader:
                 subject = row['subject_id']
-                if subject in un2dc:
-                    dcid = un2dc[subject][0]
-                    type = un2dc[subject][1]
-                    name = un2dc[subject][2]
+                if subject in un2dc_curated:
+                    dcid = un2dc_curated[subject].dcid
+                    type = un2dc_curated[subject].type
+                    name = un2dc_curated[subject].name
                 else:
                     dcid = row['subject_id'].replace(':', '/')
                     if row['subject_id'] in un2sdg and un2sdg[
                             row['subject_id']] in sdg2type:
                         sdg_type = sdg2type[un2sdg[row['subject_id']]]
-                        if sdg_type == 'SamplingStation' or sdg_type == 'City':
+                        if sdg_type == SAMPLING_STATION or sdg_type == CITY:
                             type = sdg_type
                         else:
-                            type = 'GeoRegion'
+                            type = GEO_REGION
                     else:
-                        type = 'GeoRegion'
+                        type = GEO_REGION
                     name = row['subject_label'].split('_')[-1]
-                    un2dc2[subject] = (dcid, type, name)
+                    un2dc_generated[subject] = Node(dcid, type, name)
 
                 # Add non-UN-specific places to new_subjects.
-                if type == 'GeoRegion' or type == 'UNGeoRegion' or type == 'SamplingStation' or (
-                        type == 'City' and dcid.startswith('undata-geo')):
-                    new_subjects.add((dcid, type))
+                if type == GEO_REGION or type == UN_GEO_REGION or type == SAMPLING_STATION or (
+                        type == CITY and dcid.startswith(UN_PREFIX)):
+                    new_subjects.append(Node(dcid, type, name))
 
                 f_out.write(
                     PLACE_TEMPLATE.format_map({
@@ -200,44 +240,42 @@ def write_un_places(input_geos, output, sdg2type, un2sdg, un2dc):
                         'code': row['subject_id'],
                         'label': row['subject_label']
                     }))
-    return un2dc2, new_subjects
+    return un2dc_generated, new_subjects
 
 
-def process_containment(input_containment, un2dc, un2dc2):
+def process_containment(input_containment, un2dc_curated, un2dc_generated):
     '''Filters UN geography containment triples.
 
     Args:
         input_containment: Path to input containment file.
-        un2dc: Map of UN code -> curated (dcid, DC type, DC name).
-        un2dc2: Map of UN code -> generated (dcid, DC type, DC name).
+        un2dc_curated: Map of UN code -> curated Node.
+        un2dc_generated: Map of UN code -> generated Node.
 
     Returns:
-        - Map of (subject dcid, subject type) -> list of containing object dcids.
+        - Map of child Node -> list of containing object dcids.
     '''
     containment = collections.defaultdict(list)
+
+    # Use special encoding to parse UN input file.
     with open(input_containment, encoding='utf-8-sig') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            subject = 'undata-geo:' + row['subject_id']
-            if subject in un2dc:
-                s_dcid = un2dc[subject][0]
-                s_type = un2dc[subject][1]
-            elif subject in un2dc2:
-                s_dcid = un2dc2[subject][0]
-                s_type = un2dc2[subject][1]
+            subject = UN_PREFIX + ':' + row['subject_id']
+            if subject in un2dc_curated:
+                s = un2dc_curated[subject]
+            elif subject in un2dc_generated:
+                s = un2dc_generated[subject]
             else:
                 print('Missing subject: ', subject)
-            object = 'undata-geo:' + row['object_id']
-            if object in un2dc:
-                o_dcid = un2dc[object][0]
-                o_type = un2dc[object][1]
-            elif object in un2dc2:
-                o_dcid = un2dc2[object][0]
-                o_type = un2dc2[object][1]
+            object = UN_PREFIX + ':' + row['object_id']
+            if object in un2dc_curated:
+                o = un2dc_curated[object]
+            elif object in un2dc_generated:
+                o = un2dc_generated[object]
             else:
                 print('Missing object: ', object)
-            if should_include_containment(s_type, s_dcid, o_type, o_dcid):
-                containment[(s_dcid, s_type)].append(o_dcid)
+            if should_include_containment(s, o):
+                containment[s].append(o.dcid)
     return containment
 
 
@@ -246,20 +284,19 @@ def write_un_containment(output, containment, new_subjects):
 
     Args:
         output: Path to output file.
-        containment: Map of (subject dcid, subject type) -> list of containing
-            object dcids.
-        new_subjects: Set of (dcid, type) for new places.
+        containment: Map of child Node -> list of containing object dcids.
+        new_subjects: List of Nodes for new places.
 
     '''
     with open(output, 'w') as f:
         for s in sorted(containment):
             c = ''
             for o in containment[s]:
-                c += '\ncontainedInPlace: dcs:' + o
+                c += '\ncontainedInPlace: dcid:' + o
             f.write(
                 CONTAINMENT_TEMPLATE.format_map({
-                    'dcid': s[0],
-                    'type': s[1],
+                    'dcid': s.dcid,
+                    'type': s.type,
                     'containment': c
                 }))
 
@@ -268,33 +305,33 @@ def write_un_containment(output, containment, new_subjects):
         for s in sorted(new_subjects):
             if s in containment:
                 continue
-            c = '\ncontainedInPlace: dcs:Earth'
+            c = '\ncontainedInPlace: dcid:Earth'
             f.write(
                 CONTAINMENT_TEMPLATE.format_map({
-                    'dcid': s[0],
-                    'type': s[1],
+                    'dcid': s.dcid,
+                    'type': s.type,
                     'containment': c
                 }))
 
 
-def write_place_mappings(output, sdg2un, un2dc, un2dc2):
+def write_place_mappings(output, sdg2un, un2dc_curated, un2dc_generated):
     '''Writes SDG code -> dcid mappings to output.
 
     Args:
         output: Path to output file.
         sdg2un: Map of SDG code -> UN code.
-        un2dc: Map of UN code -> curated (dcid, DC type, DC name).
-        un2dc2: Map of UN code -> generated (dcid, DC type, DC name).
+        un2dc_curated: Map of UN code -> curated Node.
+        un2dc_generated: Map of UN code -> generated Node.
     '''
     with open(output, 'w') as f:
         writer = csv.DictWriter(f, fieldnames=['sdg', 'dcid'])
         writer.writeheader()
         for code in sorted(sdg2un):
             un = sdg2un[code]
-            if un in un2dc:
-                dcid = un2dc[un][0]
-            elif un in un2dc2:
-                dcid = un2dc2[un][0]
+            if un in un2dc_curated:
+                dcid = un2dc_curated[un].dcid
+            elif un in un2dc_generated:
+                dcid = un2dc_generated[un].dcid
             else:
                 continue
 
@@ -311,15 +348,15 @@ if __name__ == '__main__':
     sdg2type = get_sdg2type('sdg-dataset/output/SDG_geographies.csv')
     un2sdg, sdg2un = get_sdg_un_maps(
         'sssom-mappings/output_mappings/undata-geo__sdg-geo.csv')
-    un2dc = get_un2dc(os.path.join(FOLDER, 'places.csv'))
+    un2dc_curated = get_un2dc_curated(os.path.join(FOLDER, 'places.csv'))
 
-    un2dc2, new_subjects = write_un_places(
+    un2dc_generated, new_subjects = write_un_places(
         os.path.join(FOLDER, 'geographies.csv'),
-        os.path.join(FOLDER, 'un_places.mcf'), sdg2type, un2sdg, un2dc)
+        os.path.join(FOLDER, 'un_places.mcf'), sdg2type, un2sdg, un2dc_curated)
     containment = process_containment(
         'sssom-mappings/data/enumerations/undata/geography_hierarchy.csv',
-        un2dc, un2dc2)
+        un2dc_curated, un2dc_generated)
     write_un_containment(os.path.join(FOLDER, 'un_containment.mcf'),
                          containment, new_subjects)
     write_place_mappings(os.path.join(FOLDER, 'place_mappings.csv'), sdg2un,
-                         un2dc, un2dc2)
+                         un2dc_curated, un2dc_generated)
