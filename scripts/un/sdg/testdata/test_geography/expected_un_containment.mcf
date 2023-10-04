@@ -1,0 +1,14 @@
+
+Node: dcid:country/AFG
+typeOf: dcs:Country
+containedInPlace: dcid:SouthernAsia
+containedInPlace: dcid:undata-geo/G00403000
+containedInPlace: dcid:undata-geo/G00403300
+containedInPlace: dcid:undata-geo/G00404000
+containedInPlace: dcid:undata-geo/G00404300
+
+Node: dcid:undata-geo/G00000030
+typeOf: dcs:GeoRegion
+containedInPlace: dcid:Earth
+containedInPlace: dcid:asia
+containedInPlace: dcid:WesternAsia
