@@ -27,10 +27,14 @@ Produces:
 Usage: python3 process.py
 '''
 import collections
+import csv
+import math
 import os
 import pandas as pd
 import shutil
 import sys
+
+from string import punctuation
 
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
@@ -38,43 +42,36 @@ sys.path.append(
 from un.sdg import util
 
 
-def get_geography(code, type):
+def get_place_mappings(file):
+    '''Produces map of SDG code -> dcid:
+
+    Args:
+      file: Input file path.
+
+    Returns:
+      Map of SDG code -> dcid:
+    '''
+    place_mappings = {}
+    with open(file) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            place_mappings[str(row['sdg'])] = str(row['dcid'])
+    return place_mappings
+
+
+def get_geography(code, place_mappings):
     '''Returns dcid of geography.
 
     Args:
         code: Geography code.
-        type: Geography type.
+        place_mappings: Map of SDG code -> dcid.
 
     Returns:
         Geography dcid.
     '''
-
-    # Currently only support Country, City, and select Regions .
-    if code in util.REGIONS:
-        return 'dcs:' + util.REGIONS[code]
-    elif type == 'Country' and code in util.PLACES:
-        return 'dcs:country/' + util.PLACES[code]
-    elif type == 'City':
-        # Remove country prefix for now.
-        city = '_'.join(code.split('_')[1:])
-        if city in util.CITIES and util.CITIES[city]:
-            return 'dcs:' + util.CITIES[city]
+    if str(code) in place_mappings:
+        return 'dcid:' + place_mappings[str(code)]
     return ''
-
-
-def get_unit(units, base_period):
-    '''Returns dcid of unit.
-
-    Args:
-        unit: Unit.
-        base_period: Base period of unit.
-
-    Returns:
-        Unit dcid.
-    '''
-    if util.is_valid(base_period):
-        return f'[{units} {base_period}]'
-    return 'dcs:SDG_' + units
 
 
 def get_measurement_method(row):
@@ -96,7 +93,60 @@ def get_measurement_method(row):
     return 'SDG' + mmethod
 
 
-def process(input_dir, schema_dir, csv_dir):
+def drop_null(value, series, footnote):
+    '''Returns value or '' if it should be dropped for being null.
+
+    Args:
+        value: Input value.
+        series: Series code.
+        footnote: Footnote for observation.
+
+    Returns:
+        value or ''.
+    '''
+    if series not in util.ZERO_NULL:
+        return value
+    if footnote != util.ZERO_NULL_TEXT:
+        return value
+    if math.isclose(float(value), 0):
+        return ''
+    return value
+
+
+def drop_special(value, variable):
+    '''Returns value or '' if it should be dropped based on special curation.
+
+    Args:
+        value: Input value.
+        variable: Input variable.
+
+    Returns:
+        value or ''.
+    '''
+    if variable in util.DROP_VARIABLE:
+        return ''
+    series = variable.split(util.SDG_CODE_SEPARATOR)[0]
+    if series in util.DROP_SERIES:
+        return ''
+    return value
+
+
+def fix_encoding(s):
+    '''Fixes input encoding to decode special characters.
+
+    Args:
+        s: Input string.
+
+    Returns:
+        String with special characters decoded.
+    '''
+    try:
+        return s.encode('latin1').decode('utf8')
+    except:
+        return s.encode('utf8').decode('utf8')
+
+
+def process(input_dir, schema_dir, csv_dir, place_mappings):
     '''Generates mcf, csv/tmcf artifacts.
 
     Produces:
@@ -114,6 +164,7 @@ def process(input_dir, schema_dir, csv_dir):
         input_dir: Path to input xlsx files.
         schema_dir: Path to output schema files.
         csv_dir: Path to output csv files.
+        place_mappings: Map of SDG code -> dcid.
     '''
     with open(os.path.join(schema_dir, 'series.mcf'), 'w') as f_series:
         with open(os.path.join(schema_dir, 'sdg.textproto'), 'w') as f_vertical:
@@ -147,7 +198,8 @@ def process(input_dir, schema_dir, csv_dir):
 
     for _, row in df.iterrows():
         if str(row['Enumeration_Code_SDMX']) != 'CUST_BREAKDOWN' and str(
-                row['Enumeration_Code_SDMX']) != 'COMPOSITE_BREAKDOWN':
+                row['Enumeration_Code_SDMX']) != 'COMPOSITE_BREAKDOWN' and str(
+                    row['Enumeration_Code_SDMX']) != 'UNIT_MEASURE':
             dimensions[str(row['Enumeration_Code_SDMX'])][str(
                 row['EnumerationValue_Code_SDMX'])] = str(
                     row['EnumerationValue_Name'])
@@ -183,10 +235,26 @@ def process(input_dir, schema_dir, csv_dir):
             if df.empty:
                 continue
 
+            # Drop known null values.
+            df['OBS_VALUE'] = df.apply(lambda x: drop_null(
+                x['OBS_VALUE'], x['SERIES_CODE'], x['FOOT_NOTE']),
+                                       axis=1)
+            df = df[df['OBS_VALUE'] != '']
+            if df.empty:
+                continue
+
+            # Drop curated.
+            df['OBS_VALUE'] = df.apply(
+                lambda x: drop_special(x['OBS_VALUE'], x['VARIABLE_CODE']),
+                axis=1)
+            df = df[df['OBS_VALUE'] != '']
+            if df.empty:
+                continue
+
             # Format places.
-            df['GEOGRAPHY_CODE'] = df.apply(lambda x: get_geography(
-                x['GEOGRAPHY_CODE'], x['GEOGRAPHY_TYPE']),
-                                            axis=1)
+            df['GEOGRAPHY_CODE'] = df.apply(
+                lambda x: get_geography(x['GEOGRAPHY_CODE'], place_mappings),
+                axis=1)
             df = df[df['GEOGRAPHY_CODE'] != '']
             if df.empty:
                 continue
@@ -205,9 +273,9 @@ def process(input_dir, schema_dir, csv_dir):
                 'SG_SCP_PROCN_LS.LEVEL_STATUS--DEG_MLOW__GOVERNMENT_NAME--CITY_OF_WROCLAW'
             )
 
-            sv_frames.append(df.loc[:,
-                                    ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION'] +
-                                    properties].drop_duplicates())
+            sv_frames.append(
+                df.loc[:, ['VARIABLE_CODE', 'VARIABLE_DESCRIPTION', 'SOURCE'] +
+                       properties].drop_duplicates())
             measurement_method_frames.append(
                 df.loc[:, ['NATURE', 'OBS_STATUS', 'REPORTING_TYPE']].
                 drop_duplicates())
@@ -215,8 +283,8 @@ def process(input_dir, schema_dir, csv_dir):
 
             df['VARIABLE_CODE'] = df['VARIABLE_CODE'].apply(
                 lambda x: 'dcs:sdg/' + x)
-            df['UNIT_MEASURE'] = df.apply(
-                lambda x: get_unit(x['UNIT_MEASURE'], x['BASE_PERIOD']), axis=1)
+            df['UNIT_MEASURE'] = df['UNIT_MEASURE'].apply(
+                lambda x: 'dcs:SDG_' + x)
             df['MEASUREMENT_METHOD'] = df.apply(
                 lambda x: 'dcs:' + get_measurement_method(x), axis=1)
 
@@ -232,9 +300,10 @@ def process(input_dir, schema_dir, csv_dir):
 
     with open(os.path.join(schema_dir, 'sv.mcf'), 'w') as f:
         for df in sv_frames:
-            for _, row in df.iterrows():
+            main = df.drop(['SOURCE'], axis=1).drop_duplicates()
+            for _, row in main.iterrows():
                 cprops = ''
-                for dimension in sorted(df.columns[2:]):
+                for dimension in sorted(main.columns[2:]):
                     # Skip totals.
                     if row[dimension] == util.TOTAL:
                         continue
@@ -255,6 +324,22 @@ def process(input_dir, schema_dir, csv_dir):
 
                     val = 'SDG_' + enum + 'Enum_' + val
                     cprops += f'\n{prop}: dcs:{val}'
+
+                # Add list of observation sources to 'footnote' property on SV.
+                sources = df.loc[df['VARIABLE_CODE'] == row['VARIABLE_CODE']]
+                sources = sources.dropna(subset=['SOURCE'])
+                sources = sources.loc[:, ['SOURCE']].drop_duplicates()['SOURCE']
+                footnote = ''
+                if not sources.empty:
+                    footnote = '\nfootnote: "Includes data from the following sources: ' + '; '.join(
+                        sorted([
+                            fix_encoding(
+                                str(s)).rstrip('.,;:!?').strip().replace(
+                                    '"', "'").replace('\n', '').replace(
+                                        '\t', '').replace('__', '_')
+                            for s in sources
+                        ])) + '"'
+
                 f.write(
                     util.SV_TEMPLATE.format_map({
                         'dcid':
@@ -266,6 +351,8 @@ def process(input_dir, schema_dir, csv_dir):
                             '"' + row['VARIABLE_DESCRIPTION'] + '"',
                         'cprops':
                             cprops,
+                        'footnote':
+                            footnote,
                     }))
 
     with open(os.path.join(schema_dir, 'schema.mcf'), 'w') as f:
@@ -337,4 +424,5 @@ if __name__ == '__main__':
     if os.path.exists('csv'):
         shutil.rmtree('csv')
     os.makedirs('csv')
-    process('sdg-dataset/output', 'schema', 'csv')
+    place_mappings = get_place_mappings('geography/place_mappings.csv')
+    process('sdg-dataset/output', 'schema', 'csv', place_mappings)
