@@ -12,17 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''Shared util functions and constants.'''
-import csv
 import math
-import os
 import re
-import sys
-
-module_dir_ = os.path.dirname(__file__)
-sys.path.append(os.path.join(module_dir_))
 
 # SDMX indicator for 'total' value in dimension.
 TOTAL = '_T'
+
+# Splits the series code from constraint properties in SDG variable codes.
+SDG_CODE_SEPARATOR = '@'
 
 # Used to split the series code from constraint properties in stat var dcids.
 SV_CODE_SEPARATOR = '.'
@@ -59,7 +56,7 @@ typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:value
 name: {name}
 populationType: dcs:{popType}
-statType: dcs:measuredValue{cprops}
+statType: dcs:measuredValue{cprops}{footnote}
 '''
 MMETHOD_TEMPLATE = '''
 Node: dcid:{dcid}
@@ -80,7 +77,6 @@ MAPPED_DIMENSIONS = {
     'CAUSE_OF_DEATH': 'causeOfDeath',
     'DISABILITY_STATUS': 'disabilityStatus',
     'EDUCATION_LEV': 'educationalAttainment',
-    'SEX': 'gender'
 }
 
 # Shared dimensions across all input csv files.
@@ -95,57 +91,82 @@ BASE_DIMENSIONS = {
     'OBS_STATUS', 'RELEASE_STATUS', 'RELEASE_NAME'
 }
 
-# Supported Regions.
-# TODO: Add other regions.
-REGIONS = {
-    1: 'Earth',
-    2: 'africa',
-    5: 'southamerica',
-    9: 'oceania',
-    10: 'antarctica',
-    21: 'northamerica',
-    142: 'asia',
-    150: 'europe',
+# Series where zero should be treated as null and dropped (curated by UN).
+ZERO_NULL = {
+    'SE_ACS_CMPTR',
+    'SE_ACS_H2O',
+    'SE_AGP_CPRA',
+    'SE_ALP_CPLR',
+    'SE_AWP_CPRA',
+    'SE_ACC_HNDWSH',
+    'SE_INF_DSBL',
+    'SE_TOT_CPLR',
+    'SE_TRA_GRDL',
+    'SE_ACS_INTNT',
 }
 
+# Footnote text indicated that a zero point should be treated as null and dropped.
+ZERO_NULL_TEXT = 'This data point is NIL for the submitting nation.'
 
-def get_country_map(file):
-    ''' Creates map of M49 -> ISO-alpha3 for countries.
+# Variables that should be dropped due to outlier values (curated by UN).
+# TODO: Follow up with UN.
+DROP_VARIABLE = {'VC_DTH_TOTPT'}
 
-  Args:
-    file: Path to input file.
+# Series that should be dropped due to outlier values (curated by UN).
+# TODO: Follow up with UN.
+DROP_SERIES = {
+    'TX_IMP_GBMRCH',
+    'TX_EXP_GBMRCH',
+    'TX_IMP_GBSVR',
+    'TX_EXP_GBSVR',
+    'SH_SAN_SAFE',
+    'AG_PRD_XSUBDY',
+}
 
-  Returns:
-    Country map.
-  '''
-    with open(file) as f:
-        places = {}
-        reader = csv.DictReader(f, delimiter='\t')
-        for row in reader:
-            if not row['ISO-alpha3 code']:  # Only countries for now.
-                continue
-            places[int(row['M49 code'])] = row['ISO-alpha3 code']
-    return places
+# Map of input title text to output formatted text.
+TITLE_MAPPINGS = {
+    'Education level': 'education',
+    'Frequency of Chlorophyll-a concentration': 'frequency',
+    'Report Ordinal': 'ordinal',
+    'Grounds of discrimination': 'discrimination',
+    'Deviation Level': 'deviation'
+}
 
+# List of substrings to be deleted from titles.
+TITLE_DELETIONS = [
+    'Age = ',
+    'Name of non-communicable disease = ',
+    'Substance use disorders = ',
+    'Quantile = ',
+    'Type of skill = Skill: ',
+    'Type of skill = ',
+    'Sex = ',
+    'Land cover = ',
+    'Level/Status = ',
+    'Policy instruments = ',
+    'Type of product = ',
+    'Type of waste treatment = ',
+    'Activity = ',
+    'Type of renewable technology = ',
+    'Location = ',
+    'Level_of_government = ',
+    'Fiscal intervention stage = ',
+    'Name of international institution = ',
+    'Policy Domains = ',
+    'Mode of transportation = ',
+    'Food Waste Sector = ',
+]
 
-PLACES = get_country_map(os.path.join(module_dir_, 'm49.csv'))
-
-
-def get_city_map(file):
-    ''' Creates map of name -> dcid for supported cities.
-
-  Args:
-    file: Path to input file.
-
-  Returns:
-    City map.
-  '''
-    with open(file) as f:
-        reader = csv.DictReader(f)
-        return {row['name']: row['dcid'] for row in reader}
-
-
-CITIES = get_city_map(os.path.join(module_dir_, 'cities.csv'))
+# Map of input title text to output replacement text.
+TITLE_REPLACEMENTS = {
+    '24 to 59 months old': '2 to 5 years old',
+    '36 to 47 months old': '3 to 4 years old',
+    '36 to 59 months old': '3 to 5 years old',
+    '12 to 23 months': '1 to 2 years old',
+    '24 to 35 months': '2 to 3 years old',
+    '36 to 47 months old': '3 to 4 years old',
+    '48 to 59 months': '4 to 5 years old'
+}
 
 
 def format_description(s):
@@ -161,8 +182,6 @@ def format_description(s):
     formatted = re.sub('\((?:[^)(]|\([^)(]*\))*\)', '', s)
     # Remove <=2 levels of [].
     formatted = re.sub('\[(?:[^)(]|\[[^)(]*\])*\]', '', formatted)
-    # Remove attributes indicated with 'by'.
-    formatted = formatted.split(', by')[0]
     # Remove references indicated by 'million USD'.
     formatted = formatted.split(', million USD')[0]
     # Remove extra spaces.
@@ -172,6 +191,11 @@ def format_description(s):
         formatted = formatted[:-1]
     # Replace 100,000 with 100K.
     formatted = formatted.replace('100,000', '100K')
+    # Remove some apostrophe.
+    formatted = formatted.replace("Developing countries’",
+                                  'Developing countries')
+    # Replace DRR with Disaster Risk Reduction.
+    formatted = formatted.replace('DRR', 'Disaster Risk Reduction')
     # Make ascii.
     return formatted.replace('Â',
                              '').replace('’', '\'').replace('₂', '2').replace(
@@ -211,6 +235,46 @@ def is_valid(v):
         return v and not v == 'nan'
 
 
+def curate_pvs(text, mappings):
+    '''Curates PVs based on custom mappings.
+
+    Example: '[Deviation Level = Extreme (75-100%)]' 
+        -> '[Extreme deviation (75-100%)]'
+
+    Args:
+      text: Input text.
+      mappings: Custom mappings.
+
+    Returns: 
+      Formatted text.
+    '''
+    pairs = text[1:-1].split('|')
+    new_pairs = []
+    for pair in pairs:
+        new_pair = ''
+        pv = pair.split('=')
+        p, v = pv[0].strip(), pv[1].strip()
+        if p in mappings:
+            v_components = v.split('(')
+            v_main = v_components[0].strip()
+
+            # Don't repeat 'education'.
+            if p == 'Education level' and 'education' in v_main:
+                new_pair = v_main
+
+            else:
+                new_pair = v_main + ' ' + mappings[p]
+
+            # Keep () on the right.
+            if len(v_components) > 1:
+                new_pair += ' (' + v_components[1].strip()
+
+            new_pairs.append(new_pair)
+        else:
+            new_pairs.append(pair.strip())
+    return '[' + ', '.join(new_pairs) + ']'
+
+
 def format_variable_description(variable, series):
     '''Curates variable descriptions.
 
@@ -221,9 +285,27 @@ def format_variable_description(variable, series):
     Returns:
       Formatted description.
     '''
-    parts = variable.split(series)
-    return format_description(series) + parts[1] if len(
-        parts) > 1 else format_description(series)
+    head = format_description(series)
+    pvs = series.join(variable.split(series)[1:]).strip()
+    if not pvs:
+        return head
+
+    # Remove ISIC code.
+    pvs = re.sub(r'\(ISIC[^)]*\)', '', pvs)
+
+    # Remove isco code.
+    pvs = re.sub(r'\(isco[^)]*\)', '', pvs)
+
+    # Custom text formatting.
+    pvs = curate_pvs(pvs, TITLE_MAPPINGS)
+
+    # Custom replacements.
+    for s in TITLE_DELETIONS:
+        pvs = pvs.replace(s, '')
+    for s in TITLE_REPLACEMENTS:
+        pvs = pvs.replace(s, TITLE_REPLACEMENTS[s])
+
+    return head + ' ' + pvs
 
 
 def format_variable_code(code):
@@ -235,7 +317,7 @@ def format_variable_code(code):
     Returns:
       Formatted code.
     '''
-    return code.replace('@', SV_CODE_SEPARATOR).replace(' ', '')
+    return code.replace(SDG_CODE_SEPARATOR, SV_CODE_SEPARATOR).replace(' ', '')
 
 
 def format_title(s):
