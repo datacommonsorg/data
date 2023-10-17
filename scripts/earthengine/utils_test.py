@@ -47,6 +47,9 @@ class DictUtilsTest(unittest.TestCase):
       'string_key2': 'Value1',
   }
 
+  def setUp(self):
+    self.maxDiff = None
+
   def test_dict_filter_values(self):
     filter_config = {
         'int_key1': {
@@ -171,6 +174,9 @@ class S2CellUtilsTest(unittest.TestCase):
 
 
 class GridCellUtilsTest(unittest.TestCase):
+
+  def setUp(self):
+    self.maxDiff = None
 
   def test_is_grid_id(self):
     self.assertFalse(utils.is_grid_id(''))

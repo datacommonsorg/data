@@ -1544,7 +1544,7 @@ class GeoEventsProcessor:
                 # Got a location. Convert it to a grid.
                 if (output_place_type
                         == 'grid_1') and (not utils.is_grid_id(place_id)):
-                    grid_id = utils.grid_id_from_lat_lng(1, int(lat), int(lng))
+                    grid_id = utils.grid_id_from_lat_lng(1, lat, lng)
                     place_id = grid_id
                     self._counters.add_counter(f'place_converted_to_grid_1', 1)
                 elif (output_place_type
