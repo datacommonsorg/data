@@ -1,0 +1,11 @@
+Enumeration_Code,Enumeration_Code_SDMX,Enumeration_Code2,Enumeration_Name,isAttribute,EnumerationValue_Code,EnumerationValue_Code_SDMX,EnumerationValue_Code2,EnumerationValue_Name,EnumerationValue_Type
+4,NATURE,NATURE,Nature,True,E,E,E,Estimated data,string
+4,NATURE,NATURE,Nature,True,N,N,N,Non-relevant,string
+8,UNIT_MEASURE,UNIT_MEASURE,Units,True,TONNES,T,T,Tonnes,string
+30,REPORTING_TYPE,REPORTING_TYPE,Reporting Type,False,G,G,G,Global,string
+33,OBS_STATUS,OBS_STATUS,Observation Status,True,A,A,A,Normal value,string
+47,COMPOSITE_BREAKDOWN,FOOD_WASTE_SECTOR,Food Waste Sector,False,RTL,FWS_RTL,FWS_RTL,Retail,string
+47,COMPOSITE_BREAKDOWN,FOOD_WASTE_SECTOR,Food Waste Sector,False,OOHC,FWS_OOHC,FWS_OOHC,Out-of-home consumption,string
+47,COMPOSITE_BREAKDOWN,FOOD_WASTE_SECTOR,Food Waste Sector,False,HHS,FWS_HHS,FWS_HHS,Households,string
+47,COMPOSITE_BREAKDOWN,FOOD_WASTE_SECTOR,Food Waste Sector,False,MNFC,FWS_MNFC,FWS_MNFC,Manufacturing,string
+47,COMPOSITE_BREAKDOWN,FOOD_WASTE_SECTOR,Food Waste Sector,False,ALL,_T,_T,Total or no breakdown,string

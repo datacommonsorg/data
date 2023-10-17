@@ -1,0 +1,12 @@
+
+Node: dcid:country/AFG
+typeOf: dcs:Country
+name: "Afghanistan"
+unDataCode: "undata-geo:G00000020"
+unDataLabel: "Afghanistan"
+
+Node: dcid:undata-geo/G00000030
+typeOf: dcs:GeoRegion
+name: "Ajman"
+unDataCode: "undata-geo:G00000030"
+unDataLabel: "Ajman"

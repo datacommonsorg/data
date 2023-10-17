@@ -1,0 +1,33 @@
+
+Node: dcid:sdg_foodWasteSector
+typeOf: schema:Property
+domainIncludes: dcs:Thing
+rangeIncludes: dcs:SDG_FoodWasteSectorEnum
+name: "Food Waste Sector"
+isProvisional: dcs:True
+
+Node: dcid:SDG_FoodWasteSectorEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "FoodWasteSectorEnum"
+isProvisional: dcs:True
+
+Node: dcid:SDG_FoodWasteSectorEnum_FWS_HHS
+typeOf: dcs:SDG_FoodWasteSectorEnum
+name: "Households"
+isProvisional: dcs:True
+
+Node: dcid:SDG_FoodWasteSectorEnum_FWS_MNFC
+typeOf: dcs:SDG_FoodWasteSectorEnum
+name: "Manufacturing"
+isProvisional: dcs:True
+
+Node: dcid:SDG_FoodWasteSectorEnum_FWS_OOHC
+typeOf: dcs:SDG_FoodWasteSectorEnum
+name: "Out-of-home consumption"
+isProvisional: dcs:True
+
+Node: dcid:SDG_FoodWasteSectorEnum_FWS_RTL
+typeOf: dcs:SDG_FoodWasteSectorEnum
+name: "Retail"
+isProvisional: dcs:True
