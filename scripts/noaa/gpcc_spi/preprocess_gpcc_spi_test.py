@@ -16,7 +16,7 @@ Unit tests for preprocess_gpcc_spi.py
 Usage: python -m unittest discover -v -s ../ -p "preprocess_gpcc_spi_test.py"
 '''
 import unittest
-from preprocess_gpcc_spi import preprocess_one
+from .preprocess_gpcc_spi import preprocess_one
 import os
 import tempfile
 import filecmp
