@@ -7,8 +7,7 @@ Author: <github_handle>
 ## Table of Contents
 
 1. [About the Dataset](#about-the-dataset)
-1. [Import Artifacts](#import-artifacts)
-1. [Generating Artifacts](#generating-artifacts)
+1. [About the Import](#about-the-import)
 
 ## About the Dataset
 

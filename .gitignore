@@ -1,4 +1,16 @@
 *.pyc
 __pycache__/
+.pylint.d/
 *.DS_Store
 .vscode/settings.json
+.env/
+.vscode/
+.idea/
+*.iml
+**/tmp/
+dc_generated/
+# Ignore the data folder under the un_census/enhanced_tmcf/ directory.
+*/*/*/data/*
+lib/
+bin/
+pyvenv.cfg

@@ -1,0 +1,32 @@
+{
+  "columnName": [
+    "udise_state_code",
+    "udise_dist_code",
+    "udise_block_code",
+    "block_name"
+  ],
+  "rowValue": [
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0818",
+      "udise_block_code": "081801",
+      "block_name": "AAHOR"
+    }
+  ],
+  "staticFilter": null,
+  "columnView": null,
+  "columnDataType": null,
+  "msData": null,
+  "status": "1",
+  "errorMessage": null,
+  "jsonString": null,
+  "yearList": [
+    "2012-13",
+    "2013-14",
+    "2014-15",
+    "2015-16",
+    "2016-17",
+    "2017-18",
+    "2018-19"
+  ]
+}

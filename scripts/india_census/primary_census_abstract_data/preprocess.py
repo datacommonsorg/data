@@ -31,7 +31,7 @@ class CensusPrimaryCensusAbstractDataLoader(CensusPrimaryAbstractDataLoaderBase
 if __name__ == '__main__':
     data_file_path = os.path.join(os.path.dirname(__file__),
                                   'data/DDW_PCA0000_2011_Indiastatedist.xlsx')
-    #data_file_path = "http://censusindia.gov.in/pca/DDW_PCA0000_2011_Indiastatedist.xlsx"
+    # data_file_path = "http://censusindia.gov.in/pca/DDW_PCA0000_2011_Indiastatedist.xlsx"
     metadata_file_path = os.path.join(
         os.path.dirname(__file__),
         '../common/primary_abstract_data_variables.csv')

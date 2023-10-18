@@ -1,0 +1,146 @@
+{
+  "columnName": [
+    "udise_state_code",
+    "udise_dist_code",
+    "udise_block_code",
+    "block_name"
+  ],
+  "rowValue": [
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0818",
+      "udise_block_code": "081801",
+      "block_name": "AAHOR"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "2734",
+      "udise_block_code": "273410",
+      "block_name": "AAJARA"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0903",
+      "udise_block_code": "090303",
+      "block_name": "AAKU(NEHTOR)"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0919",
+      "udise_block_code": "091915",
+      "block_name": "AASAFPUR"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0824",
+      "udise_block_code": "082401",
+      "block_name": "AASIND"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0943",
+      "udise_block_code": "094301",
+      "block_name": "AASPUR-DEOSARA"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "2401",
+      "udise_block_code": "240107",
+      "block_name": "ABDASA"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "3623",
+      "udise_block_code": "362308",
+      "block_name": "ABDULLAPURMET"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "2211",
+      "udise_block_code": "221106",
+      "block_name": "ABHANPUR"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0971",
+      "udise_block_code": "097107",
+      "block_name": "ABHOLI"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0321",
+      "udise_block_code": "032101",
+      "block_name": "ABOHAR"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "1301",
+      "udise_block_code": "130104",
+      "block_name": "ABOI"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "2218",
+      "udise_block_code": "221820",
+      "block_name": "ABUJHMAD (ORCHA)"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0819",
+      "udise_block_code": "081902",
+      "block_name": "ABU-ROAD"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0915",
+      "udise_block_code": "091502",
+      "block_name": "ACCHNERA"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "0106",
+      "udise_block_code": "010601",
+      "block_name": "ACHABAL"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "2707",
+      "udise_block_code": "270701",
+      "block_name": "ACHALPUR"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "2817",
+      "udise_block_code": "281707",
+      "block_name": "ACHAMET"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "3607",
+      "udise_block_code": "360744",
+      "block_name": "ACHAMPET"
+    },
+    {
+      "udise_state_code": null,
+      "udise_dist_code": "3628",
+      "udise_block_code": "362812",
+      "block_name": "ACHAMPET"
+    }
+  ],
+  "staticFilter": null,
+  "columnView": null,
+  "columnDataType": null,
+  "msData": null,
+  "status": "1",
+  "errorMessage": null,
+  "jsonString": null,
+  "yearList": [
+    "2012-13",
+    "2013-14",
+    "2014-15",
+    "2015-16",
+    "2016-17",
+    "2017-18",
+    "2018-19"
+  ]
+}

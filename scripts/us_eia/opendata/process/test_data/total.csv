@@ -1,0 +1,3 @@
+place,stat_var,date,value,unit,scaling_factor,eia_series_id
+dcid:country/USA,dcid:eia/TOTAL.LUACP.A,2020,52.852,ThousandBarrelsPerDay,,TOTAL.LUACPUS.A
+dcid:country/USA,dcid:eia/TOTAL.LUACP.A,2019,59.325,ThousandBarrelsPerDay,,TOTAL.LUACPUS.A

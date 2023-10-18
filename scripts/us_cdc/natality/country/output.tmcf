@@ -1,0 +1,8 @@
+Node: E:CDCWonderNatality->E0
+typeOf: dcs:StatVarObservation
+measurementMethod: dcs:DataCommonsAggregate
+observationAbout: country/USA
+observationDate: C:CDCWonderNatality->Year
+variableMeasured: C:CDCWonderNatality->StatVar
+observationPeriod: "P1Y"
+value: C:CDCWonderNatality->Quantity

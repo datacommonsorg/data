@@ -1,0 +1,6 @@
+Year,GeoId,Count_CriminalActivities_ViolentCrime,Count_CriminalActivities_MurderAndNonNegligentManslaughter,Count_CriminalActivities_ForcibleRape,Count_CriminalActivities_Robbery,Count_CriminalActivities_AggravatedAssault,Count_CriminalActivities_PropertyCrime,Count_CriminalActivities_Burglary,Count_CriminalActivities_LarcenyTheft,Count_CriminalActivities_MotorVehicleTheft,Count_CriminalActivities_Arson,Count_CriminalActivities_CombinedCrime
+2019,dcid:geoId/0135896,114,4,15,27,68,1922,128,1694,100,2,2038
+2019,dcid:geoId/0203000,3581,32,540,621,2388,12261,1692,9038,1531,93,15935
+2019,dcid:geoId/0206520,130,1,47,3,79,132,20,84,28,12,274
+2019,dcid:geoId/0217410,0,0,0,0,0,7,1,6,0,0,7
+2019,dcid:geoId/0217740,7,0,0,0,7,20,5,12,3,0,27

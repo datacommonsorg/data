@@ -2,8 +2,8 @@ Node: E:IndiaCensus2011_Primary_Abstract_ScheduledCaste->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: C:IndiaCensus2011_Primary_Abstract_ScheduledCaste->StatisticalVariable
 observationDate: C:IndiaCensus2011_Primary_Abstract_ScheduledCaste->Year
-observationAbout: C:IndiaCensus2011_Primary_Abstract_ScheduledCaste->E1
-value: C:IndiaCensus2011_Primary_Abstract_ScheduledCaste->value
+observationAbout: E:IndiaCensus2011_Primary_Abstract_ScheduledCaste->E1
+value: C:IndiaCensus2011_Primary_Abstract_ScheduledCaste->Value
 
 Node: E:IndiaCensus2011_Primary_Abstract_ScheduledCaste->E1
 typeOf: schema:Place

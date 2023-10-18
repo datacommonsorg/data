@@ -1,0 +1,149 @@
+{
+	"Coal": {
+		"QtyInMillionTonnes_Consumption": {
+			"property": "Consumption",
+			"popType": "Coal",
+			"consumingSector": "True",
+			"unit": "MetricTon",
+			"scale": "1000000"
+		},
+		"QtyInMillionTonnes_Imports": {
+			"property": "Imports",
+			"popType": "Coal",
+			"unit": "MetricTon",
+			"scale": "1000000"
+		},
+		"QtyInMillionTonnes_Reserves": {
+			"property": "Reserves",
+			"popType": "Coal",
+			"unit": "MetricTon",
+			"scale": "1000000"
+		},
+		"QtyInMillionTonnes_Generation": {
+			"property": "Generation",
+			"popType": "Electricity",
+			"unit": "MetricTon",
+			"scale": "1000000"
+		}
+	},
+	"Gas": {
+		"QtyMMSCM_Consumption": {
+			"property": "Consumption",
+			"popType": "Fuel",
+			"consumingSector": "True",
+			"unit": "MillionMetricStandardCubicMeter",
+			"scale": "1"
+		},
+		"GrossProduction_MMSCM_M": {
+			"property": "Generation",
+			"popType": "Fuel",
+			"unit": "MillionMetricStandardCubicMeter",
+			"scale": "1"
+		},
+		"Qty_Tonne_Imports": {
+			"property": "Imports",
+			"popType": "Fuel",
+			"unit": "MetricTon",
+			"scale": "1"
+		},
+		"GrossProduction_MMSCM": {
+			"property": "Generation",
+			"popType": "Fuel",
+			"unit": "MillionMetricStandardCubicMeter",
+			"scale": "1"
+		}
+	},
+	"Oil": {
+		"Qty_000Tonne_Consumption": {
+			"property": "Consumption",
+			"popType": "Fuel",
+			"consumingSector": "True",
+			"unit": "MetricTon",
+			"scale": "1000"
+		},
+		"Capacity_MMT": {
+			"property": "Capacity",
+			"popType": "Fuel",
+			"unit": "MetricTon",
+			"scale": "1000000"
+		},
+		"Qty_000Tonne_Imports_M": {
+			"property": "Imports",
+			"popType": "Fuel",
+			"unit": "MetricTon",
+			"scale": "1000"
+		}
+	},
+	"Renewables": {
+		"Generation_GWh": {
+			"property": "Generation",
+			"popType": "Electricity",
+			"unit": "GigawattHour",
+			"scale": "1"
+		},
+		"Capacity": {
+			"property": "Capacity",
+			"popType": "Electricity",
+			"unit": "Megawatt",
+			"scale": "1"
+		},
+		"CapacityIdentified_MW": {
+			"property": "PotentialCapacity",
+			"popType": "Electricity",
+			"unit": "Megawatt",
+			"scale": "1"
+		}
+	},
+	"Electricity": {
+		"Capacity_MW": {
+			"property": "Capacity",
+			"popType": "Electricity",
+			"unit": "Megawatt",
+			"scale": "1"
+		},
+		"Electrified_Households": {
+    		"property": "ElectrifiedHouseholds",
+    		"popType": "Household",
+    		"unit": "count",
+    		"scale": "1"
+		},
+		"ConsumerNo": {
+			"property": "Count",
+			"popType": "ElectricityConsumer",
+			"unit": "count",
+			"scale": "1"
+		},
+		"Consumption_GWh": {
+			"property": "Generation",
+			"popType": "Electricity",
+			"consumingSector": "True",
+			"unit": "GigawattHour",
+			"scale": "1"
+		},
+		"Consumption_KWh_PerCapita": {
+			"property": "Consumption",
+			"popType": "Electricity",
+			"consumingSector": "True",
+			"unit": "KilowattHour",
+			"scale": "1"
+		},
+		"Generation_GWh": {
+			"property": "Generation",
+			"popType": "Electricity",
+			"unit": "GigawattHour",
+			"scale": "1"
+		},
+		"CapacityIdentified_MW": {
+			"property": "PotentialCapacity",
+			"popType": "Electricity",
+			"unit": "Megawatt",
+			"scale": "1"
+		},
+		"TandDLosses_GWh": {
+			"property": "Loss",
+			"popType": "Electricity",
+			"unit": "GigawattHour",
+			"scale": "1"
+		}
+	}
+}

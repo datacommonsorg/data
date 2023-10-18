@@ -1,0 +1,9 @@
+Node: E:cpi_w->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:cpi_w->statvar
+measurementMethod: dcs:BLSUnchained
+observationAbout: dcid:country/USA
+observationDate: C:cpi_w->date
+observationPeriod: C:cpi_w->duration
+value: C:cpi_w->value
+unit: C:cpi_w->unit

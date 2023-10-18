@@ -1,0 +1,34 @@
+Node: dcid:eia/g/Root
+typeOf: dcs:StatVarGroup
+name: "Other Data (eia.gov)"
+specializationOf: dcid:dc/g/Energy
+
+Node: dcid:eia/g/NG.714804
+typeOf: dcs:StatVarGroup
+name: "Natural Gas"
+specializationOf: dcid:eia/g/Root
+
+Node: dcid:eia/g/NG.714805
+typeOf: dcs:StatVarGroup
+name: "Summary"
+specializationOf: dcid:eia/g/NG.714804
+
+Node: dcid:eia/g/NG.456172
+typeOf: dcs:StatVarGroup
+name: "Natural Gas Annual Supply & Disposition by State"
+specializationOf: dcid:eia/g/NG.714805
+
+Node: dcid:eia/g/NG.457052
+typeOf: dcs:StatVarGroup
+name: "Natural Gas Summary"
+specializationOf: dcid:eia/g/NG.714805
+
+Node: dcid:eia/g/NG.459123
+typeOf: dcs:StatVarGroup
+name: "by Data Series"
+specializationOf: dcid:eia/g/NG.457052
+
+Node: dcid:eia/g/NG.460678
+typeOf: dcs:StatVarGroup
+name: "Total Consumption"
+specializationOf: dcid:eia/g/NG.459123

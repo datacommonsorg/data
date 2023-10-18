@@ -1,0 +1,5 @@
+place,stat_var,date,value,unit,scaling_factor,eia_series_id
+dcid:country/USA,dcid:eia/NG.N9140_2.A,2020,30482049,MillionCubicFeet,,NG.N9140US2.A
+dcid:country/USA,dcid:eia/NG.N9140_2.A,2019,31099061,MillionCubicFeet,,NG.N9140US2.A
+dcid:country/USA,dcid:eia/NG.N9140_2.M,2021-02,3036972,MillionCubicFeet,,NG.N9140US2.M
+dcid:country/USA,dcid:eia/NG.N9140_2.M,2021-01,3286266,MillionCubicFeet,,NG.N9140US2.M

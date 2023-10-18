@@ -1,0 +1,401 @@
+{
+  "yearsPotentialLifeLost": [
+    "Number"
+  ],
+  "worksFor": [
+    "Organization"
+  ],
+  "workerStatus": [
+    "WorkerClassificationEnum"
+  ],
+  "workerClassification": [
+    "WorkerClassificationEnum"
+  ],
+  "workStatus": [
+    "USC_WorkStatusEnum"
+  ],
+  "workPeriod": [
+    "QuantityRange"
+  ],
+  "workLocation": [
+    "Place"
+  ],
+  "workExperience": [
+    "WorkExperienceEnum"
+  ],
+  "workCategory": [
+    "WorkCategoryEnum"
+  ],
+  "wagesWeekly": [
+    "Number"
+  ],
+  "wagesTotal": [
+    "Number"
+  ],
+  "wagesMonthly": [
+    "Number"
+  ],
+  "wagesDaily": [
+    "Number"
+  ],
+  "wagesAnnual": [
+    "Number"
+  ],
+  "voterStatus": [
+    "VoterStatusEnum"
+  ],
+  "veteranStatus": [
+    "VeteranStatusEnum"
+  ],
+  "usualHoursWorked": [
+    "QuantityRange"
+  ],
+  "unemploymentInsuranceStatus": [
+    "UnemploymentInsuranceStatusEnum"
+  ],
+  "treatmentStatus": [
+    "TreatmentStatusEnum"
+  ],
+  "supplementalSecurityIncome": [
+    "Quantity",
+    "Number"
+  ],
+  "substanceUsed": [
+    "SubstanceTypeEnum"
+  ],
+  "substanceUseDisorder": [
+    "SubstanceUseDisorderEnum"
+  ],
+  "substanceUsageOccurrence": [
+    "UsageOccurrenceEnum"
+  ],
+  "substanceUsageFrequency": [
+    "UsageFrequencyEnum"
+  ],
+  "spouse": [
+    "Person"
+  ],
+  "socialSecurityIncome": [
+    "Quantity",
+    "Number"
+  ],
+  "socialCategory": [
+    "SocialCategoryEnum"
+  ],
+  "siblings": [
+    "Person"
+  ],
+  "sibling": [
+    "Person"
+  ],
+  "sexualOrientation": [
+    "SexualOrientationEnum"
+  ],
+  "schoolEnrollment": [
+    "USC_SchoolEnrollmentEnum"
+  ],
+  "retirementIncome": [
+    "Quantity",
+    "Number"
+  ],
+  "residentalSegregationNonWhiteWhite": [
+    "UnitOfMeasure"
+  ],
+  "residentalSegregationBlackWhite": [
+    "DissimilarityIndex"
+  ],
+  "residentStatus": [
+    "USC_ResidentStatusEnum"
+  ],
+  "residenceType": [
+    "USC_ResidenceTypeEnum"
+  ],
+  "residenceCharacteristic": [
+    "ResidenceCharacteristicEnum"
+  ],
+  "religion": [
+    "ReligionEnum"
+  ],
+  "relatedTo": [
+    "Thing",
+    "Person"
+  ],
+  "race": [
+    "RaceCodeEnum"
+  ],
+  "prisonSentenceStatus": [
+    "PrisonSentenceStatusEnum"
+  ],
+  "povertyStatus": [
+    "USC_PovertyStatusEnum"
+  ],
+  "placeOfWork": [
+    "USC_PlaceOfWorkEnum"
+  ],
+  "placeOfResidenceClassification": [
+    "HumanSettlementClassificationEnum",
+    "CountyClassificationEnum"
+  ],
+  "periodOfMilitaryService": [
+    "USC_PeriodOfMilitaryServiceEnum"
+  ],
+  "performerIn": [
+    "Event"
+  ],
+  "perceivedGreatRisk": [
+    "Boolean"
+  ],
+  "perceivedAvailabilityToObtain": [
+    "AvailabilityToObtainEnum"
+  ],
+  "parents": [
+    "Person"
+  ],
+  "parent": [
+    "Person"
+  ],
+  "occupancyTenure": [
+    "OccupancyTenureEnum"
+  ],
+  "netWorth": [
+    "MonetaryAmount"
+  ],
+  "nativity": [
+    "USC_NativityEnum"
+  ],
+  "nationality": [
+    "Country"
+  ],
+  "nace": [
+    "NACEEnum"
+  ],
+  "medicalTestingMethod": [
+    "MedicalTestingMethodEnum"
+  ],
+  "medicalCondition": [
+    "MedicalConditionIncidentTypeEnum"
+  ],
+  "maxPrisonSentence": [
+    "QuantityRange"
+  ],
+  "maritalStatus": [
+    "USC_MaritalStatusEnum"
+  ],
+  "literacyStatus": [
+    "LiteracyStatusEnum"
+  ],
+  "lifeExpectancy": [
+    "Number",
+    "Float"
+  ],
+  "languageSpokenAtHome": [
+    "USC_LanguageSpokenAtHomeEnum"
+  ],
+  "knows": [
+    "Person"
+  ],
+  "jobTitle": [
+    "Text"
+  ],
+  "jobChangeEvent": [
+    "JobChangeEventEnum"
+  ],
+  "isInternetUser": [
+    "Boolean"
+  ],
+  "internetSubscriptionType": [
+    "USC_InternetSubscriptionTypeEnum"
+  ],
+  "institutionalization": [
+    "InstitutionalizationEnum"
+  ],
+  "initialSubstanceUse": [
+    "UsageOccurrenceEnum"
+  ],
+  "incomeStatus": [
+    "IncomeStatusEnum"
+  ],
+  "income": [
+    "Quantity",
+    "Percentile",
+    "Number",
+    "Farm"
+  ],
+  "householdType": [
+    "HouseholdTypeEnum"
+  ],
+  "householdIncome": [
+    "Quantity",
+    "Percentile",
+    "Number"
+  ],
+  "honorificSuffix": [
+    "Text"
+  ],
+  "honorificPrefix": [
+    "Text"
+  ],
+  "homeLocation": [
+    "Place"
+  ],
+  "healthPrevention": [
+    "HealthPreventionEnum"
+  ],
+  "healthOutcome": [
+    "HealthOutcomeEnum"
+  ],
+  "healthInsurance": [
+    "USC_HealthInsuranceEnum"
+  ],
+  "healthBehavior": [
+    "HealthBehaviorEnum"
+  ],
+  "hasChildren": [
+    "HasChildrenStatusEnum"
+  ],
+  "givenName": [
+    "Text"
+  ],
+  "gender": [
+    "GenderType"
+  ],
+  "follows": [
+    "Person"
+  ],
+  "familyName": [
+    "Text"
+  ],
+  "familyIncome": [
+    "QuantityRange",
+    "Number"
+  ],
+  "ethnicity": [
+    "EthnicityEnum"
+  ],
+  "enrollmentStatus": [
+    "EnrollmentStatusEnum"
+  ],
+  "enrollmentLevel": [
+    "EnrollmentLevelEnum"
+  ],
+  "employmentStatus": [
+    "EmploymentStatusEnum",
+    "EmploymentEnum"
+  ],
+  "employment": [
+    "EmploymentEnum"
+  ],
+  "educationalAttainment": [
+    "WHO_EducationalAttainmentEnum",
+    "USC_EducationalAttainmentEnum"
+  ],
+  "economicSector": [
+    "NACEEnum"
+  ],
+  "earnings": [
+    "Quantity",
+    "Number"
+  ],
+  "dropoutRate": [
+    "Number"
+  ],
+  "disabilityStatus": [
+    "USC_DisabilityStatusEnum"
+  ],
+  "detailedLevelOfSchool": [
+    "USC_DetailedLevelOfSchoolEnum"
+  ],
+  "deathPlace": [
+    "Place"
+  ],
+  "deathDate": [
+    "Date"
+  ],
+  "dateOfEntry": [
+    "Quantity",
+    "DateTime"
+  ],
+  "commuteTime": [
+    "TimeUnitOfMeasure"
+  ],
+  "commuteMode": [
+    "USC_CommuteModeEnum"
+  ],
+  "collegeOrGraduateSchoolEnrollment": [
+    "USC_CollegeOrGraduateSchoolEnrollmentEnum"
+  ],
+  "colleagues": [
+    "Person"
+  ],
+  "colleague": [
+    "Person"
+  ],
+  "citizenshipStatus": [
+    "USC_CitizenshipEnum"
+  ],
+  "citizenship": [
+    "USC_CitizenshipEnum"
+  ],
+  "childrenStatus": [
+    "HousingMemberStatusEnum"
+  ],
+  "children": [
+    "Person"
+  ],
+  "childSchoolEnrollment": [
+    "USC_SchoolEnrollmentEnum"
+  ],
+  "causeOfDeath": [
+    "ICD10_113CausesOfDeath",
+    "HealthOutcomeEnum",
+    "CauseOfDeathAndDisabilityEnum"
+  ],
+  "cashAssistance": [
+    "Quantity",
+    "Number"
+  ],
+  "brand": [
+    "Brand"
+  ],
+  "birthPlace": [
+    "Place"
+  ],
+  "birthEventStatus": [
+    "BirthEventStatusEnum"
+  ],
+  "birthDate": [
+    "Date"
+  ],
+  "benefitsStatus": [
+    "BenefitsStatusEnum"
+  ],
+  "bachelorsDegreeMajor": [
+    "EducationalMajorEnum"
+  ],
+  "awards": [
+    "Text"
+  ],
+  "armedForcesStatus": [
+    "USC_ArmedForcesStatusEnum"
+  ],
+  "alumniOf": [
+    "EducationalOrganization"
+  ],
+  "alcoholUsage": [
+    "AlcoholUsageEnum"
+  ],
+  "age": [
+    "QuantityRange",
+    "Number",
+    "AgeStatusEnum"
+  ],
+  "affiliation": [
+    "Organization"
+  ],
+  "additionalName": [
+    "Text"
+  ],
+  "abilityToSpeakEnglish": [
+    "USC_AbilityToSpeakEnglishEnum"
+  ]
+}

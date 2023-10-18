@@ -1,0 +1,735 @@
+udise_state_code,udise_district_code,district_name
+36,udiseCode/3601,Adilabad
+23,udiseCode/2351,Agar Malwa
+09,udiseCode/0915,Agra
+27,udiseCode/2726,Ahmadnagar
+24,udiseCode/2407,Ahmedabad
+15,udiseCode/1503,Aizawl
+08,udiseCode/0821,Ajmer
+27,udiseCode/2705,Akola
+32,udiseCode/3211,Alappuzha
+09,udiseCode/0912,Aligarh
+19,udiseCode/1922,Alipurduar
+23,udiseCode/2349,Alirajpur
+09,udiseCode/0945,Allahabad
+05,udiseCode/0509,Almora
+08,udiseCode/0806,Alwar
+06,udiseCode/0602,Ambala
+09,udiseCode/0948,Ambedkar Nagar
+09,udiseCode/0973,Amethi - Csm Nagar
+27,udiseCode/2707,Amravati
+24,udiseCode/2413,Amreli
+03,udiseCode/0302,Amritsar
+24,udiseCode/2415,Anand
+28,udiseCode/2822,Anantapur
+01,udiseCode/0106,Anantnag
+35,udiseCode/3501,Andamans
+21,udiseCode/2115,Angul
+12,udiseCode/1216,Anjaw
+23,udiseCode/2347,Anuppur
+10,udiseCode/1007,Araria
+24,udiseCode/2427,Aravalli
+33,udiseCode/3332,Ariyalur
+10,udiseCode/1038,Arwal
+23,udiseCode/2346,Ashoknagar
+09,udiseCode/0932,Auraiya
+10,udiseCode/1034,Aurangabad (Bihar)
+27,udiseCode/2719,Aurangabad (Maharashtra)
+09,udiseCode/0961,Azamgarh
+01,udiseCode/0104,Badgam
+29,udiseCode/2902,Bagalkot
+05,udiseCode/0508,Bageshwar
+09,udiseCode/0908,Baghpat
+09,udiseCode/0950,Bahraich
+18,udiseCode/1824,Baksa
+23,udiseCode/2345,Balaghat
+21,udiseCode/2108,Balasore
+29,udiseCode/2912,Ballari
+09,udiseCode/0963,Ballia
+22,udiseCode/2222,Balod
+22,udiseCode/2224,Balodabazar
+09,udiseCode/0952,Balrampur
+22,udiseCode/2226,Balrampur
+24,udiseCode/2402,Banas Kantha
+09,udiseCode/0940,Banda
+01,udiseCode/0116,Bandipora
+10,udiseCode/1023,Banka
+19,udiseCode/1913,Bankura
+08,udiseCode/0828,Banswara
+09,udiseCode/0946,Barabanki
+21,udiseCode/2101,Baragarh
+01,udiseCode/0102,Baramula
+08,udiseCode/0831,Baran
+09,udiseCode/0920,Bareilly
+08,udiseCode/0817,Barmer
+03,udiseCode/0320,Barnala
+18,udiseCode/1805,Barpeta
+23,udiseCode/2328,Barwani
+22,udiseCode/2215,Baster
+09,udiseCode/0955,Basti
+03,udiseCode/0314,Bathinda
+10,udiseCode/1020,Begusarai
+29,udiseCode/2901,Belagavi
+29,udiseCode/2930,Belagavi Chikkodi
+22,udiseCode/2223,Bemetara
+29,udiseCode/2921,Bengaluru Rural
+29,udiseCode/2928,Bengaluru U North
+29,udiseCode/2920,Bengaluru U South
+23,udiseCode/2335,Betul
+09,udiseCode/0971,Bhadoi
+36,udiseCode/3609,Bhadradri
+21,udiseCode/2109,Bhadrak
+10,udiseCode/1022,Bhagalpur
+27,udiseCode/2710,Bhandara
+08,udiseCode/0807,Bharatpur
+24,udiseCode/2421,Bharuch
+24,udiseCode/2414,Bhavnagar
+08,udiseCode/0824,Bhilwara
+23,udiseCode/2303,Bhind
+06,udiseCode/0613,Bhiwani
+10,udiseCode/1029,Bhojpur
+23,udiseCode/2332,Bhopal
+27,udiseCode/2727,Bid
+29,udiseCode/2905,Bidar
+22,udiseCode/2220,Bijapur
+09,udiseCode/0903,Bijnor
+08,udiseCode/0803,Bikaner
+22,udiseCode/2207,Bilaspur
+02,udiseCode/0208,Bilaspur (H.P.)
+19,udiseCode/1908,Birbhum
+14,udiseCode/1404,Bishnupur
+18,udiseCode/1828,Biswanath
+20,udiseCode/2013,Bokaro
+21,udiseCode/2124,Bolangir
+18,udiseCode/1804,Bongaigaon
+24,udiseCode/2428,Botad
+21,udiseCode/2122,Boudh
+09,udiseCode/0919,Budaun
+09,udiseCode/0911,Bulandshahr
+27,udiseCode/2704,Buldana
+08,udiseCode/0823,Bundi
+23,udiseCode/2348,Burhanpur
+10,udiseCode/1030,Buxar
+18,udiseCode/1821,Cachar
+12,udiseCode/1223,Capital Complex Itanagar
+07,udiseCode/0721,Central
+29,udiseCode/2927,Chamarajanagara
+02,udiseCode/0201,Chamba
+05,udiseCode/0502,Chamoli
+05,udiseCode/0510,Champawat
+15,udiseCode/1504,Champhai
+09,udiseCode/0966,Chandauli
+14,udiseCode/1409,Chandel
+04,udiseCode/0401,Chandigarh
+27,udiseCode/2713,Chandrapur
+12,udiseCode/1212,Changlang
+18,udiseCode/1829,Charaideo
+06,udiseCode/0622,Charkhi Dadri
+20,udiseCode/2003,Chatra
+33,udiseCode/3302,Chennai
+23,udiseCode/2309,Chhatarpur
+23,udiseCode/2343,Chhindwara
+24,udiseCode/2432,Chhotaudepur
+29,udiseCode/2929,Chikkaballapura
+29,udiseCode/2917,Chikkamangaluru
+18,udiseCode/1825,Chirang
+29,udiseCode/2913,Chitradurga
+09,udiseCode/0941,Chitrakoot
+08,udiseCode/0829,Chittaurgarh
+28,udiseCode/2823,Chittoor
+14,udiseCode/1403,Churachandpur
+08,udiseCode/0804,Churu
+33,udiseCode/3312,Coimbatore
+19,udiseCode/1903,Cooch Bihar
+33,udiseCode/3318,Cuddalore
+21,udiseCode/2112,Cuttack
+26,udiseCode/2601,Dadra And Nagar Haveli(Ut)
+29,udiseCode/2924,Dakshina Kannada
+19,udiseCode/1905,Dakshin Dinajpur
+25,udiseCode/2502,Daman
+23,udiseCode/2312,Damoh
+22,udiseCode/2216,Dantewada
+10,udiseCode/1013,Darbhanga
+19,udiseCode/1901,Darjeeling
+18,udiseCode/1808,Darrang
+23,udiseCode/2305,Datia
+08,udiseCode/0811,Dausa
+29,udiseCode/2914,Davanagere
+05,udiseCode/0505,Dehradun
+21,udiseCode/2104,Deogarh
+20,udiseCode/2007,Deoghar
+09,udiseCode/0960,Deoria
+24,udiseCode/2429,Devbhoomi Dwarka
+23,udiseCode/2323,Dewas
+16,udiseCode/1603,Dhalai
+22,udiseCode/2213,Dhamtari
+20,udiseCode/2012,Dhanbad
+23,udiseCode/2325,Dhar
+33,udiseCode/3305,Dharmapuri
+29,udiseCode/2909,Dharwad
+08,udiseCode/0808,Dhaulpur
+18,udiseCode/1813,Dhemaji
+21,udiseCode/2114,Dhenkanal
+18,udiseCode/1802,Dhubri
+27,udiseCode/2702,Dhule
+12,udiseCode/1210,Dibang Valley
+18,udiseCode/1815,Dibrugarh
+18,udiseCode/1820,Dima Hasao
+13,udiseCode/1306,Dimapur
+33,udiseCode/3313,Dindigul
+23,udiseCode/2341,Dindori
+25,udiseCode/2501,Diu
+01,udiseCode/0109,Doda
+24,udiseCode/2418,Dohad
+20,udiseCode/2011,Dumka
+08,udiseCode/0827,Dungarpur
+22,udiseCode/2210,Durg
+07,udiseCode/0710,East
+17,udiseCode/1702,East Garo Hills
+28,udiseCode/2814,East Godavari
+17,udiseCode/1709,East Jaintia Hills
+12,udiseCode/1203,East Kameng
+17,udiseCode/1706,East Khasi Hills
+12,udiseCode/1208,East Siang
+11,udiseCode/1104,East Sikkim
+32,udiseCode/3208,Ernakulam
+33,udiseCode/3310,Erode
+09,udiseCode/0917,Etah
+09,udiseCode/0931,Etawah
+09,udiseCode/0947,Faizabad
+06,udiseCode/0619,Faridabad
+03,udiseCode/0313,Faridkot
+09,udiseCode/0929,Farrukhabad
+06,udiseCode/0610,Fatehabad
+03,udiseCode/0308,Fatehgarh Sahib
+09,udiseCode/0942,Fatehpur
+03,udiseCode/0321,Fazilka
+09,udiseCode/0916,Firozabad
+03,udiseCode/0311,Firozpur
+29,udiseCode/2908,Gadag
+27,udiseCode/2712,Gadchiroli
+21,udiseCode/2120,Gajapati
+01,udiseCode/0119,Ganderbal
+24,udiseCode/2406,Gandhinagar
+08,udiseCode/0801,Ganganagar
+21,udiseCode/2119,Ganjam
+20,udiseCode/2001,Garhwa
+22,udiseCode/2225,Gariaband
+09,udiseCode/0910,Gautam Buddha Nagar
+10,udiseCode/1035,Gaya
+09,udiseCode/0909,Ghaziabad
+09,udiseCode/0965,Ghazipur
+20,udiseCode/2006,Giridih
+24,udiseCode/2430,Gir Somnath
+18,udiseCode/1803,Goalpara
+20,udiseCode/2008,Godda
+18,udiseCode/1818,Golaghat
+16,udiseCode/1607,Gomati
+09,udiseCode/0953,Gonda
+27,udiseCode/2711,Gondiya
+10,udiseCode/1015,Gopalganj
+09,udiseCode/0958,Gorakhpur
+20,udiseCode/2016,Gumla
+23,udiseCode/2307,Guna
+28,udiseCode/2817,Guntur
+03,udiseCode/0301,Gurdaspur
+06,udiseCode/0618,Gurugram
+23,udiseCode/2304,Gwalior
+18,udiseCode/1823,Hailakandi
+02,udiseCode/0206,Hamirpur (H.P.)
+09,udiseCode/0938,Hamirpur (U.P.)
+08,udiseCode/0802,Hanumangarh
+09,udiseCode/0975,Hapur (Panchsheel Nagar)
+23,udiseCode/2336,Harda
+09,udiseCode/0925,Hardoi
+05,udiseCode/0513,Hardwar
+29,udiseCode/2923,Hassan
+09,udiseCode/0913,Hathras
+29,udiseCode/2911,Haveri
+20,udiseCode/2004,Hazaribag
+27,udiseCode/2716,Hingoli
+06,udiseCode/0612,Hisar
+18,udiseCode/1830,Hojai
+19,udiseCode/1912,Hooghly
+23,udiseCode/2337,Hoshangabad
+03,udiseCode/0305,Hoshiarpur
+19,udiseCode/1916,Howrah
+36,udiseCode/3622,Hyderabad
+32,udiseCode/3209,Idukki
+14,udiseCode/1407,Imphal East
+14,udiseCode/1406,Imphal West
+23,udiseCode/2326,Indore
+23,udiseCode/2339,Jabalpur
+21,udiseCode/2111,Jagatsinghpur
+36,udiseCode/3606,Jagtial
+08,udiseCode/0812,Jaipur
+08,udiseCode/0816,Jaisalmer
+21,udiseCode/2113,Jajpur
+03,udiseCode/0304,Jalandhar
+09,udiseCode/0935,Jalaun
+27,udiseCode/2703,Jalgaon
+27,udiseCode/2718,Jalna
+08,udiseCode/0818,Jalor
+19,udiseCode/1902,Jalpaiguri
+01,udiseCode/0113,Jammu
+24,udiseCode/2410,Jamnagar
+20,udiseCode/2019,Jamtara
+10,udiseCode/1037,Jamui
+36,udiseCode/3619,Jangaon
+22,udiseCode/2206,Janjgir - Champa
+22,udiseCode/2203,Jashpur
+09,udiseCode/0964,Jaunpur
+36,udiseCode/3608,Jayashankar
+10,udiseCode/1033,Jehanabad
+23,udiseCode/2324,Jhabua
+06,udiseCode/0615,Jhajjar
+08,udiseCode/0832,Jhalawar
+09,udiseCode/0936,Jhansi
+19,udiseCode/1923,Jhargram
+21,udiseCode/2102,Jharsuguda
+08,udiseCode/0805,Jhunjhunu
+06,udiseCode/0609,Jind
+14,udiseCode/1413,Jiribam
+08,udiseCode/0815,Jodhpur
+36,udiseCode/3626,Jogulamba
+18,udiseCode/1817,Jorhat
+24,udiseCode/2412,Junagadh
+09,udiseCode/0906,Jyotiba Phule Nagar (Amroha)
+24,udiseCode/2401,Kachchh
+28,udiseCode/2820,Kadapa
+10,udiseCode/1031,Kaimur (Bhabua)
+06,udiseCode/0605,Kaithal
+14,udiseCode/1414,Kakching
+21,udiseCode/2126,Kalahandi
+29,udiseCode/2904,Kalburgi
+19,udiseCode/1924,Kalimpong
+36,udiseCode/3615,Kamareddy
+14,udiseCode/1415,Kamjong
+12,udiseCode/1222,Kamle
+18,udiseCode/1827,Kamrup-Metro
+18,udiseCode/1806,Kamrup-Rural
+33,udiseCode/3303,Kancheepuram
+21,udiseCode/2121,Kandhamal
+14,udiseCode/1410,Kangpokpi
+02,udiseCode/0202,Kangra
+22,udiseCode/2214,Kanker
+09,udiseCode/0930,Kannauj
+33,udiseCode/3330,Kanniyakumari
+32,udiseCode/3202,Kannur
+09,udiseCode/0933,Kanpur Dehat
+09,udiseCode/0934,Kanpur Nagar
+09,udiseCode/0972,Kanshiram Nagar
+03,udiseCode/0303,Kapurthala
+34,udiseCode/3404,Karaikal
+08,udiseCode/0809,Karauli
+18,udiseCode/1819,Karbi Anglong
+37,udiseCode/3708,Kargil
+18,udiseCode/1822,Karimganj
+36,udiseCode/3613,Karimnagar
+06,udiseCode/0606,Karnal
+33,udiseCode/3314,Karur
+32,udiseCode/3201,Kasaragod
+01,udiseCode/0114,Kathua
+10,udiseCode/1010,Katihar
+23,udiseCode/2338,Katni
+09,udiseCode/0944,Kaushambi
+22,udiseCode/2208,Kawardha
+21,udiseCode/2110,Kendrapara
+21,udiseCode/2106,Keonjhar
+10,udiseCode/1021,Khagaria
+36,udiseCode/3631,Khammam
+23,udiseCode/2329,Khandwa
+23,udiseCode/2327,Khargone
+24,udiseCode/2416,Kheda
+09,udiseCode/0923,Kheri
+16,udiseCode/1606,Khowai
+20,udiseCode/2023,Khunti
+21,udiseCode/2117,Khurdha
+02,udiseCode/0212,Kinnaur
+13,udiseCode/1310,Kiphire
+10,udiseCode/1008,Kishanganj
+01,udiseCode/0117,Kishtwar
+29,udiseCode/2925,Kodagu
+20,udiseCode/2005,Kodarma
+13,udiseCode/1307,Kohima
+18,udiseCode/1801,Kokrajhar
+29,udiseCode/2919,Kolar
+15,udiseCode/1502,Kolasib
+27,udiseCode/2734,Kolhapur
+19,udiseCode/1917,Kolkata
+32,udiseCode/3213,Kollam
+36,udiseCode/3602,Komaram Bheem
+22,udiseCode/2217,Kondagaon
+29,udiseCode/2907,Koppal
+21,udiseCode/2129,Koraput
+22,udiseCode/2205,Korba
+22,udiseCode/2201,Koriya
+08,udiseCode/0830,Kota
+32,udiseCode/3210,Kottayam
+32,udiseCode/3204,Kozhikode
+12,udiseCode/1219,Kra Dadi
+28,udiseCode/2816,Krishna
+33,udiseCode/3331,Krishnagiri
+01,udiseCode/0120,Kulgam
+02,udiseCode/0204,Kullu
+01,udiseCode/0101,Kupwara
+28,udiseCode/2821,Kurnool
+06,udiseCode/0604,Kurukshetra
+12,udiseCode/1214,Kurung Kumey
+09,udiseCode/0959,Kushinagar
+02,udiseCode/0203,Lahul & Spiti
+18,udiseCode/1812,Lakhimpur
+10,udiseCode/1025,Lakhisarai
+31,udiseCode/3101,Lakshadweep
+09,udiseCode/0937,Lalitpur
+20,udiseCode/2022,Latehar
+27,udiseCode/2728,Latur
+15,udiseCode/1507,Lawngtlai
+37,udiseCode/3707,Leh (Ladakh)
+12,udiseCode/1226,Lepa Rada
+20,udiseCode/2015,Lohardaga
+12,udiseCode/1211,Lohit
+12,udiseCode/1217,Longding
+13,udiseCode/1309,Longleng
+12,udiseCode/1215,Lower Dibang Valley
+12,udiseCode/1221,Lower Siang
+12,udiseCode/1205,Lower Subansiri
+09,udiseCode/0927,Lucknow
+03,udiseCode/0309,Ludhiana
+15,udiseCode/1506,Lunglei
+10,udiseCode/1011,Madhepura
+10,udiseCode/1005,Madhubani
+33,udiseCode/3324,Madurai
+36,udiseCode/3610,Mahabubabad
+36,udiseCode/3625,Mahabubnagar
+09,udiseCode/0957,Maharajganj
+22,udiseCode/2212,Mahasamund
+34,udiseCode/3403,Mahe
+06,udiseCode/0616,Mahendragarh
+24,udiseCode/2404,Mahesana
+24,udiseCode/2431,Mahisagar
+09,udiseCode/0939,Mahoba
+09,udiseCode/0918,Mainpuri
+18,udiseCode/1831,Majuli
+32,udiseCode/3205,Malappuram
+19,udiseCode/1906,Maldah
+21,udiseCode/2130,Malkangiri
+15,udiseCode/1501,Mamit
+36,udiseCode/3603,Mancherial
+02,udiseCode/0205,Mandi
+23,udiseCode/2342,Mandla
+23,udiseCode/2319,Mandsaur
+29,udiseCode/2922,Mandya
+03,udiseCode/0315,Mansa
+09,udiseCode/0914,Mathura
+09,udiseCode/0962,Mau
+21,udiseCode/2107,Mayurbhanj
+36,udiseCode/3617,Medak
+36,udiseCode/3621,Medchal
+09,udiseCode/0907,Meerut
+35,udiseCode/3503,Middle And North Andamans
+09,udiseCode/0969,Mirzapur
+03,udiseCode/0310,Moga
+03,udiseCode/0318,Mohali
+13,udiseCode/1303,Mokokchung
+13,udiseCode/1301,Mon
+09,udiseCode/0904,Moradabad
+24,udiseCode/2433,Morbi
+23,udiseCode/2302,Morena
+18,udiseCode/1809,Morigaon
+03,udiseCode/0312,Muktsar
+36,udiseCode/3632,Mulugu
+27,udiseCode/2723,Mumbai Ii
+27,udiseCode/2722,Mumbai (Suburban)
+22,udiseCode/2219,Mungeli
+10,udiseCode/1024,Munger
+19,udiseCode/1907,Murshidabad
+09,udiseCode/0902,Muzaffarnagar
+10,udiseCode/1014,Muzaffarpur
+29,udiseCode/2926,Mysuru
+21,udiseCode/2128,Nabarangpur
+19,udiseCode/1910,Nadia
+18,udiseCode/1810,Nagaon
+33,udiseCode/3319,Nagapattinam
+36,udiseCode/3628,Nagarkurnool
+08,udiseCode/0814,Nagaur
+27,udiseCode/2709,Nagpur
+05,udiseCode/0511,Nainital
+10,udiseCode/1027,Nalanda
+18,udiseCode/1807,Nalbari
+36,udiseCode/3629,Nalgonda
+33,udiseCode/3309,Namakkal
+12,udiseCode/1218,Namsai
+27,udiseCode/2715,Nanded
+27,udiseCode/2701,Nandurbar
+36,udiseCode/3633,Narayanapet
+22,udiseCode/2218,Narayanpur
+24,udiseCode/2420,Narmada
+23,udiseCode/2340,Narsimhapur
+27,udiseCode/2720,Nashik
+24,udiseCode/2424,Navsari
+10,udiseCode/1036,Nawada
+03,udiseCode/0306,Nawanshahr
+21,udiseCode/2116,Nayagarh
+23,udiseCode/2318,Neemuch
+28,udiseCode/2819,Nellore
+07,udiseCode/0720,New Delhi
+35,udiseCode/3502,Nicobars
+36,udiseCode/3604,Nirmal
+23,udiseCode/2352,Niwari
+36,udiseCode/3605,Nizamabad
+14,udiseCode/1416,Noney
+07,udiseCode/0712,North
+19,udiseCode/1911,North 24 Parganas
+07,udiseCode/0711,North East
+17,udiseCode/1708,North Garo Hills
+30,udiseCode/3001,North Goa
+11,udiseCode/1101,North Sikkim
+16,udiseCode/1604,North Tripura
+07,udiseCode/0713,North West A
+07,udiseCode/0714,North West B
+21,udiseCode/2125,Nuapada
+06,udiseCode/0620,Nuh
+27,udiseCode/2729,Osmanabad
+20,udiseCode/2010,Pakaur
+12,udiseCode/1224,Pakke Kessang
+32,udiseCode/3206,Palakkad
+20,udiseCode/2002,Palamu
+27,udiseCode/2736,Palghar
+08,udiseCode/0820,Pali
+06,udiseCode/0621,Palwal
+06,udiseCode/0601,Panchkula
+24,udiseCode/2417,Panch Mahals
+06,udiseCode/0607,Panipat
+23,udiseCode/2310,Panna
+12,udiseCode/1204,Papum Pare
+27,udiseCode/2717,Parbhani
+19,udiseCode/1926,Paschim Bardhaman
+19,udiseCode/1920,Paschim Medinipur
+10,udiseCode/1001,Pashchim Champaran
+20,udiseCode/2017,Pashchimi Singhbhum
+24,udiseCode/2403,Patan
+32,udiseCode/3212,Pathanamthitta
+03,udiseCode/0322,Pathankot
+03,udiseCode/0317,Patiala
+10,udiseCode/1028,Patna
+05,udiseCode/0506,Pauri
+36,udiseCode/3607,Peddapalli
+33,udiseCode/3316,Perambalur
+13,udiseCode/1311,Peren
+13,udiseCode/1308,Phek
+14,udiseCode/1412,Pherzawl
+09,udiseCode/0921,Pilibhit
+05,udiseCode/0507,Pithoragarh
+34,udiseCode/3402,Pondicherry
+24,udiseCode/2411,Porbandar
+28,udiseCode/2818,Prakasam
+09,udiseCode/0943,Pratapgarh
+08,udiseCode/0833,Pratapgarh (Raj.)
+33,udiseCode/3322,Pudukkottai
+01,udiseCode/0105,Pulwama
+01,udiseCode/0111,Punch
+27,udiseCode/2725,Pune
+19,udiseCode/1925,Purba Bardhaman
+10,udiseCode/1002,Purba Champaran
+19,udiseCode/1919,Purba Medinipur
+20,udiseCode/2018,Purbi Singhbhum
+21,udiseCode/2118,Puri
+10,udiseCode/1009,Purnia
+19,udiseCode/1914,Purulia
+09,udiseCode/0928,Rae Bareli
+29,udiseCode/2906,Raichur
+22,udiseCode/2204,Raigarh
+27,udiseCode/2724,Raigarh (Maharashtra)
+22,udiseCode/2211,Raipur
+23,udiseCode/2334,Raisen
+36,udiseCode/3614,Rajanna
+01,udiseCode/0112,Rajauri
+23,udiseCode/2330,Rajgarh
+24,udiseCode/2409,Rajkot
+22,udiseCode/2209,Rajnandgaon
+08,udiseCode/0825,Rajsamand
+29,udiseCode/2932,Ramanagara
+33,udiseCode/3327,Ramanathapuram
+01,udiseCode/0118,Ramban
+20,udiseCode/2024,Ramgarh
+09,udiseCode/0905,Rampur
+20,udiseCode/2014,Ranchi
+36,udiseCode/3623,Rangareddy
+23,udiseCode/2320,Ratlam
+27,udiseCode/2732,Ratnagiri
+21,udiseCode/2127,Rayagada
+01,udiseCode/0121,Reasi
+23,udiseCode/2314,Rewa
+06,udiseCode/0617,Rewari
+17,udiseCode/1705,Ri Bhoi
+06,udiseCode/0614,Rohtak
+10,udiseCode/1032,Rohtas
+05,udiseCode/0503,Rudraprayag
+03,udiseCode/0307,Rupnagar
+24,udiseCode/2405,Sabar Kantha
+23,udiseCode/2311,Sagar
+09,udiseCode/0901,Saharanpur
+10,udiseCode/1012,Saharsa
+20,udiseCode/2009,Sahibganj
+15,udiseCode/1508,Saiha
+33,udiseCode/3308,Salem
+10,udiseCode/1019,Samastipur
+01,udiseCode/0122,Samba
+21,udiseCode/2103,Sambalpur
+09,udiseCode/0968,Sambhal (Bhim Nagar)
+36,udiseCode/3616,Sangareddy
+27,udiseCode/2735,Sangli
+03,udiseCode/0316,Sangrur
+09,udiseCode/0956,Sant Kabir Nagar
+20,udiseCode/2020,Saraikela-Kharsawan
+10,udiseCode/1017,Saran
+27,udiseCode/2731,Satara
+23,udiseCode/2313,Satna
+08,udiseCode/0810,Sawai Madhopur
+23,udiseCode/2333,Sehore
+14,udiseCode/1401,Senapati
+23,udiseCode/2344,Seoni
+16,udiseCode/1605,Sepahijala
+15,udiseCode/1505,Serchhip
+23,udiseCode/2316,Shahdol
+09,udiseCode/0922,Shahjahanpur
+23,udiseCode/2322,Shajapur
+09,udiseCode/0974,Shamli (Prabudh Nagar)
+10,udiseCode/1026,Sheikhpura
+10,udiseCode/1003,Sheohar
+23,udiseCode/2301,Sheopur
+02,udiseCode/0211,Shimla
+29,udiseCode/2915,Shivamogga
+23,udiseCode/2306,Shivpuri
+12,udiseCode/1225,Shi Yomi
+01,udiseCode/0115,Shopian
+09,udiseCode/0951,Shrawasti
+12,udiseCode/1220,Siang
+18,udiseCode/1816,Sibsagar
+09,udiseCode/0954,Siddharthnagar
+36,udiseCode/3618,Siddipet
+23,udiseCode/2317,Sidhi
+08,udiseCode/0813,Sikar
+19,udiseCode/1921,Siliguri
+20,udiseCode/2021,Simdega
+27,udiseCode/2733,Sindhudurg
+23,udiseCode/2350,Singrauli
+02,udiseCode/0210,Sirmaur
+08,udiseCode/0819,Sirohi
+06,udiseCode/0611,Sirsa
+10,udiseCode/1004,Sitamarhi
+09,udiseCode/0924,Sitapur
+33,udiseCode/3323,Sivagangai
+10,udiseCode/1016,Siwan
+02,udiseCode/0209,Solan
+27,udiseCode/2730,Solapur
+09,udiseCode/0970,Sonbhadra
+21,udiseCode/2123,Sonepur
+06,udiseCode/0608,Sonipat
+18,udiseCode/1811,Sonitpur
+07,udiseCode/0719,South
+19,udiseCode/1918,South 24 Parganas
+07,udiseCode/0722,South East
+17,udiseCode/1703,South Garo Hills
+30,udiseCode/3002,South Goa
+18,udiseCode/1832,South Salmara-Mankachar
+11,udiseCode/1103,South Sikkim
+16,udiseCode/1602,South Tripura
+07,udiseCode/0717,South West A
+07,udiseCode/0718,South West B
+17,udiseCode/1711,South West Garo Hills
+17,udiseCode/1710,South West Khasi Hills
+28,udiseCode/2811,Srikakulam
+01,udiseCode/0103,Srinagar
+22,udiseCode/2221,Sukma
+09,udiseCode/0949,Sultanpur
+21,udiseCode/2105,Sundergarh
+10,udiseCode/1006,Supaul
+22,udiseCode/2227,Surajpur
+24,udiseCode/2422,Surat
+24,udiseCode/2408,Surendranagar
+22,udiseCode/2202,Surguja
+36,udiseCode/3630,Suryapet
+14,udiseCode/1402,Tamenglong
+24,udiseCode/2426,Tapi
+03,udiseCode/0319,Taran Taran
+12,udiseCode/1201,Tawang
+05,udiseCode/0504,Tehri Garhwal
+14,udiseCode/1411,Tengnoupal
+99,udiseCode/9901,Test District
+27,udiseCode/2721,Thane
+33,udiseCode/3321,Thanjavur
+24,udiseCode/2423,The Dangs
+33,udiseCode/3325,Theni
+33,udiseCode/3311,The Nilgiris
+32,udiseCode/3214,Thiruvananthapuram
+33,udiseCode/3328,Thoothukkudi
+14,udiseCode/1405,Thoubal
+32,udiseCode/3207,Thrissur
+23,udiseCode/2308,Tikamgarh
+18,udiseCode/1814,Tinsukia
+12,udiseCode/1213,Tirap
+33,udiseCode/3315,Tiruchirappalli
+33,udiseCode/3329,Tirunelveli
+33,udiseCode/3333,Tiruppur
+33,udiseCode/3301,Tiruvallur
+33,udiseCode/3306,Tiruvannamalai
+33,udiseCode/3320,Tiruvarur
+08,udiseCode/0822,Tonk
+13,udiseCode/1302,Tuensang
+29,udiseCode/2918,Tumakuru
+29,udiseCode/2931,Tumakuru Madhugiri
+08,udiseCode/0826,Udaipur
+18,udiseCode/1826,Udalguri
+01,udiseCode/0110,Udhampur
+05,udiseCode/0512,Udham Singh Nagar
+29,udiseCode/2916,Udupi
+23,udiseCode/2321,Ujjain
+14,udiseCode/1408,Ukhrul
+23,udiseCode/2315,Umaria
+02,udiseCode/0207,Una
+16,udiseCode/1608,Unakoti
+09,udiseCode/0926,Unnao
+12,udiseCode/1209,Upper Siang
+12,udiseCode/1206,Upper Subansiri
+29,udiseCode/2910,Uttara Kannada
+29,udiseCode/2934,Uttara Kannada Sirsi
+19,udiseCode/1904,Uttar Dinajpur
+05,udiseCode/0501,Uttarkashi
+24,udiseCode/2419,Vadodara
+10,udiseCode/1018,Vaishali
+24,udiseCode/2425,Valsad
+09,udiseCode/0967,Varanasi
+33,udiseCode/3304,Vellore
+23,udiseCode/2331,Vidisha
+29,udiseCode/2903,Vijayapura
+36,udiseCode/3624,Vikarabad
+33,udiseCode/3307,Villupuram
+33,udiseCode/3326,Virudhunagar
+28,udiseCode/2813,Visakhapatnam
+28,udiseCode/2812,Vizianagaram
+36,udiseCode/3627,Wanaparthy
+36,udiseCode/3611,Warangal Rural
+36,udiseCode/3612,Warangal Urban
+27,udiseCode/2708,Wardha
+27,udiseCode/2706,Washim
+32,udiseCode/3203,Wayanad
+07,udiseCode/0715,West A
+07,udiseCode/0716,West B
+17,udiseCode/1701,West Garo Hills
+28,udiseCode/2815,West Godavari
+17,udiseCode/1707,West Jaintia Hills
+12,udiseCode/1202,West Kameng
+18,udiseCode/1833,West Karbi Anglong
+17,udiseCode/1704,West Khasi Hills
+12,udiseCode/1207,West Siang
+11,udiseCode/1102,West Sikkim
+16,udiseCode/1601,West Tripura
+13,udiseCode/1305,Wokha
+36,udiseCode/3620,Yadadri
+29,udiseCode/2933,Yadagiri
+06,udiseCode/0603,Yamunanagar
+34,udiseCode/3401,Yanam
+27,udiseCode/2714,Yavatmal
+13,udiseCode/1304,Zunheboto

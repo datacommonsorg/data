@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Country and US State Alpha2 -> DCID maps."""
+"""Country, US state and Canadian province Alpha2 -> DCID maps."""
 
 COUNTRY_MAP = {
     'AD': 'country/AND',
@@ -41,6 +41,7 @@ COUNTRY_MAP = {
     'BJ': 'country/BEN',
     'BM': 'country/BMU',
     'BN': 'country/BRN',
+    'BX': 'country/BRN',  # FIPS code.
     'BO': 'country/BOL',
     'BR': 'country/BRA',
     'BS': 'country/BHS',
@@ -128,6 +129,7 @@ COUNTRY_MAP = {
     'JM': 'country/JAM',
     'JO': 'country/JOR',
     'JP': 'country/JPN',
+    'JA': 'country/JPN',  # FIPS Code.
     'KE': 'country/KEN',
     'KG': 'country/KGZ',
     'KH': 'country/KHM',
@@ -199,7 +201,9 @@ COUNTRY_MAP = {
     'PT': 'country/PRT',
     'PW': 'country/PLW',
     'PY': 'country/PRY',
+    'PZ': 'geoId/72',  # Some sources refer to Puerto Rico as country.
     'QA': 'country/QAT',
+    'QR': 'country/QAT',  # EIA uses this.
     'RE': 'country/REU',
     'RO': 'country/ROU',
     'RS': 'country/SRB',
@@ -255,6 +259,7 @@ COUNTRY_MAP = {
     'VG': 'country/VGB',
     'VI': 'country/VIR',
     'VN': 'country/VNM',
+    'VQ': 'geoId/78',  # Some sources refer to Virgin Islands as country.
     'VU': 'country/VUT',
     'WF': 'country/WLF',
     'WS': 'country/WSM',
@@ -323,4 +328,20 @@ USSTATE_MAP = {
     'PR': 'geoId/72',
     'UM': 'geoId/74',
     'VI': 'geoId/78',
+}
+
+CAN_PROVINCE_MAP = {
+    'AB': 'wikidataId/Q1951',
+    'BC': 'wikidataId/Q1974',
+    'MB': 'wikidataId/Q1948',
+    'NB': 'wikidataId/Q1965',
+    'NL': 'wikidataId/Q2003',
+    'NS': 'wikidataId/Q1952',
+    'ON': 'wikidataId/Q1904',
+    'PE': 'wikidataId/Q1979',
+    'QC': 'wikidataId/Q176',
+    'SK': 'wikidataId/Q1989',
+    'NT': 'wikidataId/Q2007',
+    'NU': 'wikidataId/Q2023',
+    'YT': 'wikidataId/Q2009',
 }

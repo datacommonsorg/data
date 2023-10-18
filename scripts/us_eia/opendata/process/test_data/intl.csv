@@ -1,0 +1,7 @@
+place,stat_var,date,value,unit,scaling_factor,eia_series_id
+dcid:country/IND,dcid:eia/INTL.53-1-TBPD.A,2020,924.4588369430336,ThousandBarrelsPerDay,,INTL.53-1-IND-TBPD.A
+dcid:country/IND,dcid:eia/INTL.53-1-TBPD.A,2019,986.3134487671233,ThousandBarrelsPerDay,,INTL.53-1-IND-TBPD.A
+dcid:country/IND,dcid:eia/INTL.53-1-TBPD.A,2018,1017.5592096438356,ThousandBarrelsPerDay,,INTL.53-1-IND-TBPD.A
+dcid:country/IND,dcid:eia/INTL.53-1-TBPD.A,2017,1017.3772797808219,ThousandBarrelsPerDay,,INTL.53-1-IND-TBPD.A
+dcid:Earth,dcid:eia/INTL.55-1-TBPD.A,2020,91753.99016207967,ThousandBarrelsPerDay,,INTL.55-1-WORL-TBPD.A
+dcid:Earth,dcid:eia/INTL.55-1-TBPD.A,2019,97993.61794135909,ThousandBarrelsPerDay,,INTL.55-1-WORL-TBPD.A

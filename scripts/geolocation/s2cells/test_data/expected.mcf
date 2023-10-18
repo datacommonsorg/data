@@ -1,0 +1,70 @@
+
+Node: dcid:s2CellId/0x4628400000000000
+typeOf: dcs:S2CellLevel7
+name: "L7 S2 Cell 0x4628400000000000"
+latitude: "58.0063"
+longitude: "0.4796"
+containedInPlace: dcid:europe
+
+Node: dcid:s2CellId/0x4628100000000000
+typeOf: dcs:S2CellLevel8
+name: "L8 S2 Cell 0x4628100000000000"
+latitude: "58.1891"
+longitude: "0.2410"
+containedInPlace: dcid:europe
+
+Node: dcid:s2CellId/0x46281c0000000000
+typeOf: dcs:S2CellLevel9
+name: "L9 S2 Cell 0x46281c0000000000"
+latitude: "58.0981"
+longitude: "0.1200"
+containedInPlace: dcid:europe
+
+Node: dcid:s2CellId/0x4628140000000000
+typeOf: dcs:S2CellLevel9
+name: "L9 S2 Cell 0x4628140000000000"
+latitude: "58.0977"
+longitude: "0.3606"
+containedInPlace: dcid:europe
+
+Node: dcid:s2CellId/0x4628700000000000
+typeOf: dcs:S2CellLevel8
+name: "L8 S2 Cell 0x4628700000000000"
+latitude: "58.1872"
+longitude: "0.7258"
+containedInPlace: dcid:europe
+
+Node: dcid:s2CellId/0x46286c0000000000
+typeOf: dcs:S2CellLevel9
+name: "L9 S2 Cell 0x46286c0000000000"
+latitude: "58.0968"
+longitude: "0.6021"
+containedInPlace: dcid:europe
+
+Node: dcid:s2CellId/0x45e8c00000000000
+typeOf: dcs:S2CellLevel7
+name: "L7 S2 Cell 0x45e8c00000000000"
+latitude: "70.4449"
+longitude: "11.5545"
+containedInPlace: dcid:europe
+
+Node: dcid:s2CellId/0x45e8b00000000000
+typeOf: dcs:S2CellLevel8
+name: "L8 S2 Cell 0x45e8b00000000000"
+latitude: "70.2875"
+longitude: "10.9864"
+containedInPlace: dcid:europe
+
+Node: dcid:s2CellId/0x45e8ac0000000000
+typeOf: dcs:S2CellLevel9
+name: "L9 S2 Cell 0x45e8ac0000000000"
+latitude: "70.2081"
+longitude: "10.7066"
+containedInPlace: dcid:europe
+
+Node: dcid:s2CellId/0x45e8a40000000000
+typeOf: dcs:S2CellLevel9
+name: "L9 S2 Cell 0x45e8a40000000000"
+latitude: "70.1806"
+longitude: "11.1531"
+containedInPlace: dcid:europe

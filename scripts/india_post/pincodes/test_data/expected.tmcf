@@ -1,0 +1,16 @@
+Node: E:IndiaPost->E0
+typeOf: dcs:Place
+lgdCode: C:IndiaPost->DistrictLGDCode0
+
+Node: E:IndiaPost->E1
+typeOf: dcs:Place
+lgdCode: C:IndiaPost->DistrictLGDCode1
+
+Node: E:IndiaPost->E2
+typeOf: dcs:PinCodeArea
+name: C:IndiaPost->Pincode
+pinCode: C:IndiaPost->Pincode
+dcid: C:IndiaPost->PincodeDCID
+geoOverlaps: E:IndiaPost->E0
+geoOverlaps: E:IndiaPost->E1
+

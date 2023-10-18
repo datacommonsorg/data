@@ -1,0 +1,220 @@
+Node: dcid:Count_Household_Urban
+description: "Number of Households - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Count_Household_Rural
+description: "Number of Households - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Count_Person_Urban_Male
+description: "Total Males - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Urban
+gender: schema:Male
+
+Node: dcid:Count_Person_Rural_Male
+description: "Total Males - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Rural
+gender: schema:Male
+
+Node: dcid:Count_Person_Urban_Female
+description: "Total Females - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Urban
+gender: schema:Female
+
+Node: dcid:Count_Person_Rural_Female
+description: "Total Females - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+placeOfResidenceClassification: dcs:Rural
+gender: schema:Female
+
+Node: dcid:Count_Person_Literate
+description: "Literates"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Literate
+
+Node: dcid:Count_Person_Literate_Urban
+description: "Literates - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Literate
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Count_Person_Literate_Rural
+description: "Literates - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Literate
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Count_Person_Literate_Male
+description: "Male literates"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Literate
+gender: schema:Male
+
+Node: dcid:Count_Person_Literate_Urban_Male
+description: "Male literates - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Literate
+placeOfResidenceClassification: dcs:Urban
+gender: schema:Male
+
+Node: dcid:Count_Person_Literate_Rural_Male
+description: "Male literates - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Literate
+placeOfResidenceClassification: dcs:Rural
+gender: schema:Male
+
+Node: dcid:Count_Person_Literate_Female
+description: "Female literates"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Literate
+gender: schema:Female
+
+Node: dcid:Count_Person_Literate_Urban_Female
+description: "Female literates - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Literate
+placeOfResidenceClassification: dcs:Urban
+gender: schema:Female
+
+Node: dcid:Count_Person_Literate_Rural_Female
+description: "Female literates - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Literate
+placeOfResidenceClassification: dcs:Rural
+gender: schema:Female
+
+Node: dcid:Count_Person_Illiterate
+description: "Illiterates"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Illiterate
+
+Node: dcid:Count_Person_Illiterate_Urban
+description: "Illiterates - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Illiterate
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:Count_Person_Illiterate_Rural
+description: "Illiterates - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Illiterate
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:Count_Person_Illiterate_Male
+description: "Male Illiterates"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Illiterate
+gender: schema:Male
+
+Node: dcid:Count_Person_Illiterate_Urban_Male
+description: "Male Illiterates - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Illiterate
+placeOfResidenceClassification: dcs:Urban
+gender: schema:Male
+
+Node: dcid:Count_Person_Illiterate_Rural_Male
+description: "Male Illiterates - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Illiterate
+placeOfResidenceClassification: dcs:Rural
+gender: schema:Male
+
+Node: dcid:Count_Person_Illiterate_Female
+description: "Female Illiterates"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Illiterate
+gender: schema:Female
+
+Node: dcid:Count_Person_Illiterate_Urban_Female
+description: "Female Illiterates - Urban"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Illiterate
+placeOfResidenceClassification: dcs:Urban
+gender: schema:Female
+
+Node: dcid:Count_Person_Illiterate_Rural_Female
+description: "Female Illiterates - Rural"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+literacyStatus: dcs:Illiterate
+placeOfResidenceClassification: dcs:Rural
+gender: schema:Female
+

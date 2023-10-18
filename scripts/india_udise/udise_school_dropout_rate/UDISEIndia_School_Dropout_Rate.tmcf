@@ -1,0 +1,11 @@
+Node: E:UDISEDropoutRate->E0
+typeOf: schema:Place
+udiseCode: C:UDISEDropoutRate->LocationCode
+
+Node: E:UDISEDropoutRate->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:UDISEDropoutRate->StatisticalVariable
+value: C:UDISEDropoutRate->Value
+observationDate: C:UDISEDropoutRate->Period
+observationPeriod: "P1Y"
+observationAbout: E:UDISEDropoutRate->E0

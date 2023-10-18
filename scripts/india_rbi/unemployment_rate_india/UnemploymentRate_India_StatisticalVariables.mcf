@@ -1,0 +1,45 @@
+Node: dcid:UnemploymentRate_Person_Urban
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:unemploymentRate
+placeOfResidenceClassification: dcs:Urban
+
+Node: dcid:UnemploymentRate_Person_Urban_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:unemploymentRate
+placeOfResidenceClassification: dcs:Urban
+gender: schema:Male
+
+Node: dcid:UnemploymentRate_Person_Urban_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:unemploymentRate
+placeOfResidenceClassification: dcs:Urban
+gender: schema:Female
+
+Node: dcid:UnemploymentRate_Person_Rural
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:unemploymentRate
+placeOfResidenceClassification: dcs:Rural
+
+Node: dcid:UnemploymentRate_Person_Rural_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:unemploymentRate
+placeOfResidenceClassification: dcs:Rural
+gender: schema:Male
+
+Node: dcid:UnemploymentRate_Person_Rural_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:unemploymentRate
+placeOfResidenceClassification: dcs:Rural
+gender: schema:Female

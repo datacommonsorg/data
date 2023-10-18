@@ -1,0 +1,4 @@
+Node: C:UDISE_Districts->isoCode
+typeOf: dcs:State
+isoCode: C:UDISE_Districts->isoCode
+udiseCode: C:UDISE_Districts->udise_state_code

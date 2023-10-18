@@ -1,0 +1,229 @@
+Node: dcid:Count_MedicalConditionIncident_0To4Years_SummerSeason_Male_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [0 4 Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_SummerSeason_Female_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [0 4 Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_SummerSeason_Male_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [5 14 Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_SummerSeason_Female_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [5 14 Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_15To34Years_SummerSeason_Male_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [15 34 Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_15To34Years_SummerSeason_Female_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [15 34 Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_35To64Years_SummerSeason_Male_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [35 64 Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_35To64Years_SummerSeason_Female_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [35 64 Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_65OrMoreYears_SummerSeason_Male_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [65 - Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_65OrMoreYears_SummerSeason_Female_ConditionHeatStress_VisitedEmergencyDepartment
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:VisitedEmergencyDepartment
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [65 - Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_SummerSeason_Male_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [0 4 Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_SummerSeason_Female_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [0 4 Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_SummerSeason_Male_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [5 14 Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_SummerSeason_Female_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [5 14 Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_15To34Years_SummerSeason_Male_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [15 34 Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_15To34Years_SummerSeason_Female_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [15 34 Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_35To64Years_SummerSeason_Male_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [35 64 Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_35To64Years_SummerSeason_Female_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [35 64 Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_65OrMoreYears_SummerSeason_Male_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [65 - Years]
+gender: dcs:Male
+
+Node: dcid:Count_MedicalConditionIncident_65OrMoreYears_SummerSeason_Female_ConditionHeatStress_PatientHospitalized
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientHospitalized
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+age: [65 - Years]
+gender: dcs:Female
+
+Node: dcid:Count_MedicalConditionIncident_SummerSeason_ConditionHeatStress_PatientDeceased
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientDeceased
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+

@@ -3,10 +3,10 @@ import io
 import urllib.request
 
 output_columns = [
-    'Date', 'CumulativeCount_MedicalTest_COVID_19',
-    'CumulativeCount_MedicalTest_COVID_19_Positive',
-    'CumulativeCount_MedicalTest_COVID_19_Negative',
-    'Count_MedicalTest_COVID_19_Pending',
+    'Date', 'CumulativeCount_MedicalTest_ConditionCOVID_19',
+    'CumulativeCount_MedicalTest_ConditionCOVID_19_Positive',
+    'CumulativeCount_MedicalTest_ConditionCOVID_19_Negative',
+    'Count_MedicalTest_ConditionCOVID_19_Pending',
     'CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered',
     'CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased',
     'Count_MedicalConditionIncident_COVID_19_PatientHospitalized',
@@ -30,13 +30,13 @@ with open('COVIDTracking_US.csv', 'w', newline='') as f_out:
                 'Date':
                     '%s-%s-%s' % (row_dict['date'][:4], row_dict['date'][4:6],
                                   row_dict['date'][6:]),
-                'CumulativeCount_MedicalTest_COVID_19':
+                'CumulativeCount_MedicalTest_ConditionCOVID_19':
                     row_dict['totalTestResults'],
-                'CumulativeCount_MedicalTest_COVID_19_Positive':
+                'CumulativeCount_MedicalTest_ConditionCOVID_19_Positive':
                     row_dict['positive'],
-                'CumulativeCount_MedicalTest_COVID_19_Negative':
+                'CumulativeCount_MedicalTest_ConditionCOVID_19_Negative':
                     row_dict['negative'],
-                'Count_MedicalTest_COVID_19_Pending':
+                'Count_MedicalTest_ConditionCOVID_19_Pending':
                     row_dict['pending'],
                 ('CumulativeCount_MedicalConditionIncident'
                  '_COVID_19_PatientRecovered'):

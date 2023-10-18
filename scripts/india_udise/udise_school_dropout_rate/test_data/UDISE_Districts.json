@@ -1,0 +1,30 @@
+{
+  "columnName": [
+    "udise_state_code",
+    "udise_district_code",
+    "district_name"
+  ],
+  "rowValue": [
+    {
+      "udise_state_code": "36",
+      "udise_district_code": "3601",
+      "district_name": "ADILABAD"
+    }
+  ],
+  "staticFilter": null,
+  "columnView": null,
+  "columnDataType": null,
+  "msData": null,
+  "status": "1",
+  "errorMessage": null,
+  "jsonString": null,
+  "yearList": [
+    "2012-13",
+    "2013-14",
+    "2014-15",
+    "2015-16",
+    "2016-17",
+    "2017-18",
+    "2018-19"
+  ]
+}

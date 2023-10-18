@@ -1,0 +1,13 @@
+Date,GeoId,CumulativeCount_Vaccine_COVID_19_Administered,IncrementalCount_Vaccine_COVID_19_Administered,CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase,IncrementalCount_MedicalConditionIncident_COVID_19_ConfirmedCase,CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased,IncrementalCount_MedicalConditionIncident_COVID_19_PatientDeceased,Count_MedicalConditionIncident_COVID_19_PatientInICU,Count_MedicalConditionIncident_COVID_19_PatientHospitalized,CumulativeCount_MedicalTest_ConditionCOVID_19,IncrementalCount_MedicalTest_ConditionCOVID_19
+2020-02-24,country/AFG,,,1.0,1.0,,,,,,
+2020-02-25,country/AFG,,,1.0,0.0,,,,,,
+2020-02-26,country/AFG,,,1.0,0.0,,,,,,
+2020-02-27,country/AFG,,,1.0,0.0,,,,,,
+2020-02-28,country/AFG,,,1.0,0.0,,,,,,
+2020-02-29,country/AFG,,,1.0,0.0,,,,,,
+2020-03-01,country/AFG,,,1.0,0.0,,,,,,
+2020-03-02,country/AFG,,,1.0,0.0,,,,,,
+2020-03-03,country/AFG,,,2.0,1.0,,,,,,
+2020-03-04,country/AFG,,,4.0,2.0,,,,,,
+2020-03-05,country/AFG,,,4.0,0.0,,,,,,
+2020-03-06,country/AFG,,,4.0,0.0,,,,,,

@@ -1,0 +1,11 @@
+Node: E:UnemploymentRate_India->E0
+typeOf: schema:Place
+isoCode: C:UnemploymentRate_India->territory
+
+Node: E:UnemploymentRate_India->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:UnemploymentRate_India->statisticalVariable
+value: C:UnemploymentRate_India->value
+observationDate: C:UnemploymentRate_India->period
+observationPeriod: "P1Y"
+observationAbout: E:UnemploymentRate_India->E0

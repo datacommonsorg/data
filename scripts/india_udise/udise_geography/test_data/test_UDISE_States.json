@@ -1,0 +1,48 @@
+{
+  "columnName": [
+    "state_name",
+    "udise_state_code"
+  ],
+  "rowValue": [
+    {
+      "state_name": "Jammu & Kashmir",
+      "udise_state_code": "01"
+    },
+    {
+      "state_name": "Himachal Pradesh",
+      "udise_state_code": "02"
+    },
+    {
+      "state_name": "Punjab",
+      "udise_state_code": "03"
+    },
+    {
+      "state_name": "Chandigarh",
+      "udise_state_code": "04"
+    },
+    {
+      "state_name": "Chandigarh",
+      "udise_state_code": "04"
+    },    
+    {
+      "state_name": "Uttarakhand",
+      "udise_state_code": "05"
+    }
+  ],
+  "staticFilter": null,
+  "columnView": null,
+  "columnDataType": null,
+  "msData": null,
+  "status": "1",
+  "errorMessage": null,
+  "jsonString": null,
+  "yearList": [
+    "2012-13",
+    "2013-14",
+    "2014-15",
+    "2015-16",
+    "2016-17",
+    "2017-18",
+    "2018-19"
+  ]
+}

@@ -1,0 +1,144 @@
+[
+    {
+        "name": "dataset",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "series_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "description",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "copyright",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "f",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "geography",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "lat",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "lon",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "latlon",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "geography2",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "lat2",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "lon2",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "latlon2",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "geoset_id",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "iso3166",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "lastHistoricalPeriod",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "last_updated",
+        "type": "TIMESTAMP",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "source",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "start",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "end",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "units",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "unitsshort",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "data",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+            {
+                "name": "date",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "value",
+                "type": "FLOAT",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "value_note",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            }
+        ]
+    },
+    {
+        "name": "len_data",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    }
+]

@@ -1,0 +1,10 @@
+Node: E:IndiaCensus2011_Primary_Abstract_Religion->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:IndiaCensus2011_Primary_Abstract_Religion->StatisticalVariable
+observationDate: C:IndiaCensus2011_Primary_Abstract_Religion->Year
+observationAbout: E:IndiaCensus2011_Primary_Abstract_Religion->E1
+value: C:IndiaCensus2011_Primary_Abstract_Religion->Value
+
+Node: E:IndiaCensus2011_Primary_Abstract_Religion->E1
+typeOf: schema:Place
+indianCensusAreaCode2011: C:IndiaCensus2011_Primary_Abstract_Religion->census_location_id

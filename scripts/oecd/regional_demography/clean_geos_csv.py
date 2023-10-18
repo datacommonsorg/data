@@ -20,13 +20,20 @@ df.columns = [
     'containedInPlace', 'rural_or_urban', 'access_to_city'
 ]
 
+# Append AA1 to the name of TL2 geos as a hint to the Place Name Resolver
 df.loc[df.oecd_territorial_level == '2',
        'name'] = df.loc[df.oecd_territorial_level == '2',
                         'name'] + ' AdministrativeArea1'
+
+# Remove places that do not actually exist
+
 # Remove Non-official grid (NOG)
 df = df[df.oecd_territorial_level != 'NOG']
 
 # Remove statistical regions
+# Note: In clean_geos_resolved_to_dict.py, we anyway hardcode dcids for NUTS,
+# ignoring resolver output. So I've excluded special casing European countries
+# here.
 df = df[~((df.containedInCountry == 'CAN') &
           (df.name.str.startswith('Division')))]
 df = df[~((df.containedInCountry == 'CAN') &

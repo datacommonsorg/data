@@ -1,0 +1,17 @@
+Node: E:Glaciers->E0
+typeOf: dcs:Glacier
+dcid: C:Glaciers->dcid
+rgiId: C:Glaciers->rgiId
+glimsId: C:Glaciers->glimsId
+name: C:Glaciers->name
+latitude: C:Glaciers->latitude
+longitude: C:Glaciers->longitude
+containedInPlace: C:Glaciers->containedInPlace
+
+Node: E:Glaciers->E1
+typeOf: dcs:StatVarObservation
+observationAbout: C:Glaciers->observationAbout
+variableMeasured: dcs:SurfaceArea
+observationDate: C:Glaciers->observationDate
+value: C:Glaciers->value
+unit: dcs:SquareKilometer

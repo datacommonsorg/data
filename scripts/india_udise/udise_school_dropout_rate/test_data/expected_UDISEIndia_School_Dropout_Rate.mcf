@@ -1,0 +1,381 @@
+Node: dcid:DropoutRate_Student_Female_PrimarySchool_GeneralCategory
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:GeneralCategory
+
+Node: dcid:DropoutRate_Student_Male_PrimarySchool_GeneralCategory
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:GeneralCategory
+
+Node: dcid:DropoutRate_Student_PrimarySchool_GeneralCategory
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:GeneralCategory
+
+Node: dcid:DropoutRate_Student_Female_MiddleSchool_GeneralCategory
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:GeneralCategory
+
+Node: dcid:DropoutRate_Student_Male_MiddleSchool_GeneralCategory
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:GeneralCategory
+
+Node: dcid:DropoutRate_Student_MiddleSchool_GeneralCategory
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:GeneralCategory
+
+Node: dcid:DropoutRate_Student_Female_SecondarySchool_GeneralCategory
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:GeneralCategory
+
+Node: dcid:DropoutRate_Student_Male_SecondarySchool_GeneralCategory
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:GeneralCategory
+
+Node: dcid:DropoutRate_Student_SecondarySchool_GeneralCategory
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:GeneralCategory
+
+Node: dcid:DropoutRate_Student_Female_PrimarySchool_ScheduledCaste
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:DropoutRate_Student_Male_PrimarySchool_ScheduledCaste
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:DropoutRate_Student_PrimarySchool_ScheduledCaste
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:DropoutRate_Student_Female_MiddleSchool_ScheduledCaste
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:DropoutRate_Student_Male_MiddleSchool_ScheduledCaste
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:DropoutRate_Student_MiddleSchool_ScheduledCaste
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:DropoutRate_Student_Female_SecondarySchool_ScheduledCaste
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:DropoutRate_Student_Male_SecondarySchool_ScheduledCaste
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:DropoutRate_Student_SecondarySchool_ScheduledCaste
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:ScheduledCaste
+
+Node: dcid:DropoutRate_Student_Female_PrimarySchool_ScheduledTribe
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:DropoutRate_Student_Male_PrimarySchool_ScheduledTribe
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:DropoutRate_Student_PrimarySchool_ScheduledTribe
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:DropoutRate_Student_Female_MiddleSchool_ScheduledTribe
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:DropoutRate_Student_Male_MiddleSchool_ScheduledTribe
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:DropoutRate_Student_MiddleSchool_ScheduledTribe
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:DropoutRate_Student_Female_SecondarySchool_ScheduledTribe
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:DropoutRate_Student_Male_SecondarySchool_ScheduledTribe
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:DropoutRate_Student_SecondarySchool_ScheduledTribe
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:ScheduledTribe
+
+Node: dcid:DropoutRate_Student_Female_PrimarySchool_OtherBackwardClass
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:OtherBackwardClass
+
+Node: dcid:DropoutRate_Student_Male_PrimarySchool_OtherBackwardClass
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:OtherBackwardClass
+
+Node: dcid:DropoutRate_Student_PrimarySchool_OtherBackwardClass
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:PrimarySchool
+socialCategory: dcs:OtherBackwardClass
+
+Node: dcid:DropoutRate_Student_Female_MiddleSchool_OtherBackwardClass
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:OtherBackwardClass
+
+Node: dcid:DropoutRate_Student_Male_MiddleSchool_OtherBackwardClass
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:OtherBackwardClass
+
+Node: dcid:DropoutRate_Student_MiddleSchool_OtherBackwardClass
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:MiddleSchool
+socialCategory: dcs:OtherBackwardClass
+
+Node: dcid:DropoutRate_Student_Female_SecondarySchool_OtherBackwardClass
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:OtherBackwardClass
+
+Node: dcid:DropoutRate_Student_Male_SecondarySchool_OtherBackwardClass
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:OtherBackwardClass
+
+Node: dcid:DropoutRate_Student_SecondarySchool_OtherBackwardClass
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:SecondarySchool
+socialCategory: dcs:OtherBackwardClass
+
+Node: dcid:DropoutRate_Student_Female_PrimarySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:PrimarySchool
+
+Node: dcid:DropoutRate_Student_Male_PrimarySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:PrimarySchool
+
+Node: dcid:DropoutRate_Student_PrimarySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:PrimarySchool
+
+Node: dcid:DropoutRate_Student_Female_MiddleSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:MiddleSchool
+
+Node: dcid:DropoutRate_Student_Male_MiddleSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:MiddleSchool
+
+Node: dcid:DropoutRate_Student_MiddleSchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:MiddleSchool
+
+Node: dcid:DropoutRate_Student_Female_SecondarySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Female
+levelOfSchool: dcs:SecondarySchool
+
+Node: dcid:DropoutRate_Student_Male_SecondarySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+gender: schema:Male
+levelOfSchool: dcs:SecondarySchool
+
+Node: dcid:DropoutRate_Student_SecondarySchool
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Student
+statType: dcs:measuredValue
+measuredProperty: dcs:dropoutRate
+levelOfSchool: dcs:SecondarySchool
+

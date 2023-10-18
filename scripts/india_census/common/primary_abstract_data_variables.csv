@@ -30,12 +30,12 @@ MAIN_CL_F,Female Main Cultivators,Person,measuredValue,count,Female,,,,Worker,Ma
 MAIN_AL_P,Main Agricultural Labourers,Person,measuredValue,count,,,,,Worker,MainWorker,AgriculturalLabourers,
 MAIN_AL_M,Male Main Agricultural Labourers,Person,measuredValue,count,Male,,,,Worker,MainWorker,AgriculturalLabourers,
 MAIN_AL_F,Female Main Agricultural Labourers,Person,measuredValue,count,Female,,,,Worker,MainWorker,AgriculturalLabourers,
-MAIN_HH_P,Main Wokers in Household Industries,Person,measuredValue,count,,,,,Worker,MainWorker,HouseholdIndustries,
-MAIN_HH_M,Male Main Wokers in Household Industries,Person,measuredValue,count,Male,,,,Worker,MainWorker,HouseholdIndustries,
-MAIN_HH_F,Female Main Wokers in Household Industries,Person,measuredValue,count,Female,,,,Worker,MainWorker,HouseholdIndustries,
-MAIN_OT_P,Main Other Wokers,Person,measuredValue,count,,,,,Worker,MainWorker,OtherWorkers,
-MAIN_OT_M,Male Main Other Wokers,Person,measuredValue,count,Male,,,,Worker,MainWorker,OtherWorkers,
-MAIN_OT_F,Female Main Other Wokers,Person,measuredValue,count,Female,,,,Worker,MainWorker,OtherWorkers,
+MAIN_HH_P,Main workers in Household Industries,Person,measuredValue,count,,,,,Worker,MainWorker,HouseholdIndustries,
+MAIN_HH_M,Male Main workers in Household Industries,Person,measuredValue,count,Male,,,,Worker,MainWorker,HouseholdIndustries,
+MAIN_HH_F,Female Main workers in Household Industries,Person,measuredValue,count,Female,,,,Worker,MainWorker,HouseholdIndustries,
+MAIN_OT_P,Main Other workers,Person,measuredValue,count,,,,,Worker,MainWorker,OtherWorkers,
+MAIN_OT_M,Male Main Other workers,Person,measuredValue,count,Male,,,,Worker,MainWorker,OtherWorkers,
+MAIN_OT_F,Female Main Other workers,Person,measuredValue,count,Female,,,,Worker,MainWorker,OtherWorkers,
 MARGWORK_P,Marginal Workers,Person,measuredValue,count,,,,,Worker,MarginalWorker,,
 MARGWORK_M,Male Marginal Workers,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,,
 MARGWORK_F,Female Marginal Workers,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,,
@@ -60,27 +60,27 @@ MARG_CL_3_6_F,Female Marginal Cultivators- worked for 3 months or more but less 
 MARG_AL_3_6_P,Marginal Agricultural Labourers- worked for 3 months or more but less than 6 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,AgriculturalLabourers,[Month 3 6]
 MARG_AL_3_6_M,Male Marginal Agricultural Labourers- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,AgriculturalLabourers,[Month 3 6]
 MARG_AL_3_6_F,Female Marginal Agricultural Labourers- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,AgriculturalLabourers,[Month 3 6]
-MARG_HH_3_6_P,Marginal Wokers in Household Industries- worked for 3 months or more but less than 6 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,HouseholdIndustries,[Month 3 6]
-MARG_HH_3_6_M,Male Marginal Wokers in Household Industries- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,HouseholdIndustries,[Month 3 6]
-MARG_HH_3_6_F,Female Marginal Wokers in Household Industries- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,HouseholdIndustries,[Month 3 6]
-MARG_OT_3_6_P,Marginal Other Wokers- worked for 3 months or more but less than 6 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,OtherWorkers,[Month 3 6]
-MARG_OT_3_6_M,Male Marginal Other Wokers- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,OtherWorkers,[Month 3 6]
-MARG_OT_3_6_F,Female Marginal Other Wokers- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,OtherWorkers,[Month 3 6]
-MARGWORK_0_3_P,Marginal Workers- worked for less than 3 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,,[Month – 3]
-MARGWORK_0_3_M,Male Marginal Workers- worked for less than 3 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,,[Month – 3]
-MARGWORK_0_3_F,Female Marginal Workers- worked for less than 3 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,,[Month – 3]
-MARG_CL_0_3_P,Marginal Cultivators- worked for less than 3 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,Cultivators,[Month – 3]
-MARG_CL_0_3_M,Male Marginal Cultivators- worked for less than 3 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,Cultivators,[Month – 3]
-MARG_CL_0_3_F,Female Marginal Cultivators- worked for less than 3 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,Cultivators,[Month – 3]
-MARG_AL_0_3_P,Marginal Agricultural Labourers- worked for less than 3 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,AgriculturalLabourers,[Month – 3]
-MARG_AL_0_3_M,Male Marginal Agricultural Labourers- worked for less than 3 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,AgriculturalLabourers,[Month – 3]
-MARG_AL_0_3_F,Female Marginal Agricultural Labourers- worked for less than 3 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,AgriculturalLabourers,[Month – 3]
-MARG_HH_0_3_P,Marginal Wokers in Household Industries- worked for less than 3 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,HouseholdIndustries,[Month – 3]
-MARG_HH_0_3_M,Male Marginal Wokers in Household Industries- worked for less than 3 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,HouseholdIndustries,[Month – 3]
-MARG_HH_0_3_F,Female Marginal Wokers in Household Industries- worked for less than 3 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,HouseholdIndustries,[Month – 3]
-MARG_OT_0_3_P,Marginal Other Wokers,Person,measuredValue,count,,,,,Worker,MarginalWorker,OtherWorkers,[Month – 3]
-MARG_OT_0_3_M,Male Marginal Other Wokers,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,OtherWorkers,[Month – 3]
-MARG_OT_0_3_F,Female Marginal Other Wokers,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,OtherWorkers,[Month – 3]
+MARG_HH_3_6_P,Marginal workers in Household Industries- worked for 3 months or more but less than 6 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,HouseholdIndustries,[Month 3 6]
+MARG_HH_3_6_M,Male Marginal workers in Household Industries- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,HouseholdIndustries,[Month 3 6]
+MARG_HH_3_6_F,Female Marginal workers in Household Industries- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,HouseholdIndustries,[Month 3 6]
+MARG_OT_3_6_P,Marginal Other workers- worked for 3 months or more but less than 6 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,OtherWorkers,[Month 3 6]
+MARG_OT_3_6_M,Male Marginal Other workers- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,OtherWorkers,[Month 3 6]
+MARG_OT_3_6_F,Female Marginal Other workers- worked for 3 months or more but less than 6 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,OtherWorkers,[Month 3 6]
+MARGWORK_0_3_P,Marginal Workers- worked for less than 3 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,,[Month - 3]
+MARGWORK_0_3_M,Male Marginal Workers- worked for less than 3 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,,[Month - 3]
+MARGWORK_0_3_F,Female Marginal Workers- worked for less than 3 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,,[Month - 3]
+MARG_CL_0_3_P,Marginal Cultivators- worked for less than 3 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,Cultivators,[Month - 3]
+MARG_CL_0_3_M,Male Marginal Cultivators- worked for less than 3 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,Cultivators,[Month - 3]
+MARG_CL_0_3_F,Female Marginal Cultivators- worked for less than 3 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,Cultivators,[Month - 3]
+MARG_AL_0_3_P,Marginal Agricultural Labourers- worked for less than 3 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,AgriculturalLabourers,[Month - 3]
+MARG_AL_0_3_M,Male Marginal Agricultural Labourers- worked for less than 3 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,AgriculturalLabourers,[Month - 3]
+MARG_AL_0_3_F,Female Marginal Agricultural Labourers- worked for less than 3 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,AgriculturalLabourers,[Month - 3]
+MARG_HH_0_3_P,Marginal workers in Household Industries- worked for less than 3 months,Person,measuredValue,count,,,,,Worker,MarginalWorker,HouseholdIndustries,[Month - 3]
+MARG_HH_0_3_M,Male Marginal workers in Household Industries- worked for less than 3 months,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,HouseholdIndustries,[Month - 3]
+MARG_HH_0_3_F,Female Marginal workers in Household Industries- worked for less than 3 months,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,HouseholdIndustries,[Month - 3]
+MARG_OT_0_3_P,Marginal Other workers,Person,measuredValue,count,,,,,Worker,MarginalWorker,OtherWorkers,[Month - 3]
+MARG_OT_0_3_M,Male Marginal Other workers,Person,measuredValue,count,Male,,,,Worker,MarginalWorker,OtherWorkers,[Month - 3]
+MARG_OT_0_3_F,Female Marginal Other workers,Person,measuredValue,count,Female,,,,Worker,MarginalWorker,OtherWorkers,[Month - 3]
 NON_WORK_P,Non-Workers,Person,measuredValue,count,,,,,NonWorker,,,
 NON_WORK_M,Male Non-Workers,Person,measuredValue,count,Male,,,,NonWorker,,,
 NON_WORK_F,Female Non-Workers,Person,measuredValue,count,Female,,,,NonWorker,,,
