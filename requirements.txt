@@ -39,3 +39,4 @@ xlrd==1.2.0
 yapf
 zipp
 beautifulsoup4
+ratelimit
