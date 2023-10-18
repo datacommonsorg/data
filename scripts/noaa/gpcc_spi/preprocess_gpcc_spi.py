@@ -69,10 +69,10 @@ def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     # This is so that data for all accumulation periods have a standard SPI column
     # for the tmcf to express.
     df.rename(columns={spi_col: "spi"}, inplace=True)
-    df['variable'] = f'dcs:StandardizedPrecipitationIndex_Atmosphere_\
-        {int(period)}MonthPeriod'
+    df['variable'] = f'dcs:StandardizedPrecipitationIndex_Atmosphere_{int(period)}MonthPeriod'
 
     df['period'] = f'"[{int(period)} dcs:Monthly]"'
+    # Adding observation period in output csv
     df['observationPeriod'] = f'P{int(period)}M'
     df['place'] = df[['lat', 'lon']].apply(to_one_degree_grid_place, axis=1)
     df = df.drop('lat', axis=1)
@@ -97,6 +97,9 @@ def preprocess_one(start_date,
         return df
 
     output_path = os.path.join(preprocessed_dir, path.with_suffix('.csv').name)
+    # Subtracting the date by one day. (Ex 1988-01-01 -> 1987-12-01)
+    # and removing day from the year format. ('YYYY-MM-DD' -> 'YYYY-MM')
+    # Ex 1988-01-01 will be 1987-12 in output csv.
     df['time'] = pd.to_datetime(df.time)
     df['time'] = df['time'] - pd.Timedelta(1, unit='D')
     df['time'] = df['time'].astype(str).str[:-3]

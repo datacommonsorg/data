@@ -16,7 +16,7 @@ Unit tests for preprocess_gpcc_spi.py
 Usage: python -m unittest discover -v -s ../ -p "preprocess_gpcc_spi_test.py"
 '''
 import unittest
-from .preprocess_gpcc_spi import preprocess_one
+from preprocess_gpcc_spi import preprocess_one
 import os
 import tempfile
 import filecmp
@@ -41,8 +41,8 @@ class GPCCSPIPreprocessTest(unittest.TestCase):
         test_cases = [
             TestCase(input=os.path.join(module_dir,
                                         'testdata/gpcc_spi_pearson_12.nc'),
-                     start_date='1988-02-01',
-                     end_date='1988-11-01',
+                     start_date='1988-01-01',
+                     end_date='1988-12-01',
                      expected=os.path.join(
                          module_dir,
                          'testdata/expected_gpcc_spi_pearson_12.csv')),

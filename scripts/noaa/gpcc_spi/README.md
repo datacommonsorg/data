@@ -27,3 +27,13 @@ gpcc_spi_aggregation.py
 Reads the files generated from 'preprocess_gpcc_spi.py' script from tmp directory, aggragte data based on place and create output csv files in tmp directory itself inside 'agg' folder.(/tmp/gpcc_spi/agg/)
 This script generate output for 'NOAA_GPCC_StandardardizedPrecipitationIndex_AggPlace' Import.
 Tmcf for this can be taken from 'scripts/noaa/gpcc_spi/gpcc_spi_aggregation.tmcf'
+
+## To run test
+
+```
+python3 -m unittest preprocess_gpcc_spi.py
+```
+
+```
+python3 -m unittest gpcc_spi_aggregation_test.py
+```

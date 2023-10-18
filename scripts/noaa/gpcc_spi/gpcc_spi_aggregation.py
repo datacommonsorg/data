@@ -82,8 +82,7 @@ def aggregate_with_loop(agg_dir, place_grid_ratio_dict, spi_df, period):
         time_weighted_spi['period'] = f'"[{int(period)} dcs:Monthly]"'
         time_weighted_spi['observationPeriod'] = f'P{int(period)}M'
         time_weighted_spi[
-            'variable'] = f'dcs:StandardizedPrecipitationIndex_Atmosphere_\
-                {int(period)}MonthPeriod'
+            'variable'] = f'dcs:StandardizedPrecipitationIndex_Atmosphere_{int(period)}MonthPeriod'
 
         time_weighted_spi.to_csv(path,
                                  columns=columns,
