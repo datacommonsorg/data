@@ -397,7 +397,10 @@ class ImportExecutor:
                     interpreter_path=interpreter_path,
                     script_path=os.path.join(absolute_import_dir, path),
                     timeout=self.config.user_script_timeout,
-                    cwd=absolute_import_dir)
+                    cwd=absolute_import_dir,
+                    # TODO(ajaits): Delete this
+                    args=['--start_year=2022', '--num_counties=10'],
+                    )
                 _log_process(process=process,
                              dashboard=self.dashboard,
                              attempt_id=attempt_id,
@@ -583,6 +586,7 @@ def _run_with_timeout(args: List[str],
     Raises:
         Same exceptions as subprocess.run.
     """
+    logging.info(f'Running {args} with timeout: {timeout}')
     return subprocess.run(args,
                           capture_output=True,
                           text=True,
