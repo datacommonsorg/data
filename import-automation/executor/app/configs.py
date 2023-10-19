@@ -104,7 +104,7 @@ class ExecutorConfig:
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 600
     # Maximum time venv creation can take in seconds.
-    venv_create_timeout: float = 600
+    venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.
     file_download_timeout: float = 600
     # Maximum time downloading the repo can take in seconds.
