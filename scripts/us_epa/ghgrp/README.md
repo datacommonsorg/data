@@ -2,7 +2,8 @@
 
 This directory contains scripts to download and import the US EPA's Greenhouse
 Gas Reporting Program data from
-https://www.epa.gov/sites/default/files/2020-11/2019_data_summary_spreadsheets.zip
+#https://www.epa.gov/sites/default/files/2020-11/2019_data_summary_spreadsheets.zip
+https://www.epa.gov/system/files/other-files/2022-10/2021_data_summary_spreadsheets.zip
 
 ## Resolution
 
@@ -10,6 +11,19 @@ We use the provided "crosswalk" between facilities and EIA, and assume that repo
 were included in the import from [EPA GHG facility import](../facility/README.md)
 
 ## Generating and Validating Artifacts
+
+## Moved confiuration changes to config.txt
+
+ Moved frequent  config related changes to config.txt
+
+DOWNLOAD_URI = Download URL from EPA
+Latest URL: https://www.epa.gov/system/files/other-files/2022-10/2021_data_summary_spreadsheets.zip
+CROSSWALK_URI = Crosswalk URL
+Latest Cross walk URL: https://www.epa.gov/system/files/documents/2022-04/ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx
+YEAR_DATA_FILENAME = Downloaded_Folder_Name/Original File name
+Start_Year_Range = Start range
+End_Year_Range = Till what year update is available
+End_Year_Range changed from 2020 to 2022
 
 1. To download crosswalks, tables and regenerate the TMCF/CSV/MCF, run:
 
