@@ -20,7 +20,7 @@ google-cloud-scheduler==2.10.0
 gspread
 lxml==4.9.1
 matplotlib==3.3.0
-netCDF4
+netCDF4==1.6.4
 numpy
 openpyxl==3.0.7
 pandas
