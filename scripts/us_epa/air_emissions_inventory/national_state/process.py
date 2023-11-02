@@ -101,6 +101,9 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
         }
 
         sv_list = pd.unique(self._final_df['SV'])
+        #sv_list = sv_list[np.logical_not(np.isnan(sv_list))]
+        sv_list = [item for item in sv_list if not(pd.isnull(item)) == True]
+        print("===========sv List=========="+str(sv_list))
         sv_list.sort()
 
         for sv in sv_list:
@@ -228,8 +231,8 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             None
         """
         source_file_to_method_mapping = {
-            "national_tier1_caps": self._national_emissions,
-            "state_tier1_caps": self._state_emissions
+            "state_tier1_caps_05Apr2023_Ktons": self._state_emissions,
+            "national_tier1_caps_05Apr2023": self._national_emissions
         }
         for file_path in self._input_files:
             # Taking the File name out of the complete file address
@@ -237,12 +240,15 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             # Read till -5 inorder to remove the .xlsx extension
             file_name = file_path.split("/")[-1][:-5]
             df = source_file_to_method_mapping[file_name](file_path)
-            self._final_df = pd.concat([self._final_df, df])
 
+            print("===========self.file_name===="+str(df))
+            
+            self._final_df = pd.concat([self._final_df, df])
         self._final_df = self._final_df.sort_values(
             by=['geo_Id', 'year', 'SV_TEMP', 'observation'])
         self._final_df['observation'].replace('', np.nan, inplace=True)
         self._final_df.dropna(subset=['observation'], inplace=True)
+        self._final_df.dropna(subset=['SV_TEMP'], inplace=True)
         self._final_df['observation'] = self._final_df['observation'].astype(
             float) * _SCALING_FACTOR
         self._add_sv_and_mcf_column_to_final_df()
@@ -252,11 +258,13 @@ def main(_):
     input_path = FLAGS.input_path
     try:
         ip_files = os.listdir(input_path)
+        
     except Exception:
         download_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                      "download.py")
         os.system("python " + download_file)
         ip_files = os.listdir(input_path)
+    
     ip_files = [input_path + os.sep + file for file in ip_files]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
