@@ -4,7 +4,7 @@ This document summarizes the steps involved in adding a dataset to Data Commons 
 
 ## Prerequisites
 
-* Ensure that the DC team (support@datacommons.org) has approved the addition of the dataset.
+* Ensure that the Data Commons team has approved the addition of the dataset. Please [suggest a dataset here](https://docs.google.com/forms/d/e/1FAIpQLSf_kZ13bmzXvgEbim0OXeAVsTQYsIhN8_o9ekdbjKoeFjfvRA/viewform).
 * Review the following documents to get a background on the data model, format and workflow:
   * [Summary of data model](https://schema.org/docs/datamodel.html) (DC inherits schema from schema.org)
   * [How statistics is represented in DC](representing_statistics.md)
@@ -35,7 +35,7 @@ Once the entity and schema mapping have been finalized, you can now prepare the 
   * Data cleaning code (along with README) checked into [data repo](https://github.com/datacommonsorg/data)
   * Validation results for the artifacts (from running [`dc-import`](https://github.com/datacommonsorg/import#using-import-tool) tool)
 
-Note: you may also use the [DC Import Wizard](datacommons.org/import) to help generate artifacts for common dataset structures
+Note: you may also use the [DC Import Wizard](https://datacommons.org/import) to help generate artifacts for common dataset structures
 
 ## Review by DC team
 
