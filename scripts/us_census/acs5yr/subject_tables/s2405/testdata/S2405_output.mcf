@@ -1,3 +1,9 @@
+Node: dcid:Count_Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+typeOf: dcs:StatisticalVariable
+
 Node: dcid:Count_Person_Civilian_Employed
 measuredProperty: dcs:count
 statType: dcs:measuredValue

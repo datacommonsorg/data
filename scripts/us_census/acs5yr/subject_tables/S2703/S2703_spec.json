@@ -205,7 +205,13 @@
     ],
     "denominators": {},
     "ignoreColumns": [
+        "Annotation of Total",
+        "Annotation of Estimate",
+        "Annotation of Margin of Error",
+        "Annotation of Private Coverage",
+        "Annotation of Percent Private Coverage",
         "id",
+        "Geography",
         "Geographic Area Name",
         "Percent Private Coverage",
         "Percent Private Coverage MOE"
@@ -215,5 +221,6 @@
         "Civilian noninstitutionalized population",
         "COVERAGE ALONE OR IN COMBINATION",
         "COVERAGE ALONE"
+        
     ]
 }

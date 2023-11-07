@@ -159,6 +159,7 @@
     "enumSpecializations": {},
     "ignoreColumns": [
         "id",
+        "Geography",
         "Geographic Area Name",
         "PERCENT IMPUTED",
         "Percent Male",
@@ -191,7 +192,17 @@
         "Median earnings (dollars)!!Margin of Error!!Civilian employed population 16 years and over",
         "Median earnings (dollars)!!Margin of Error!!State government workers",
         "Median earnings (dollars)!!Margin of Error!!Private not-for-profit wage and salary workers",
-        "Median earnings (dollars)!!Margin of Error!!Private for-profit wage and salary workers!!Employee of private company workers"
+        "Median earnings (dollars)!!Margin of Error!!Private for-profit wage and salary workers!!Employee of private company workers",
+        "Annotation of Margin of Error",
+        "Annotation of Estimate",
+        "Annotation of Total",
+        "Annotation of Male",
+        "Annotation of Percent Male",
+        "Annotation of Female",
+        "Annotation of Percent Female",
+        "Annotation of Median earnings (dollars)",
+        "Annotation of Median earnings (dollars) for male",
+        "Annotation of Median earnings (dollars) for female"
     ],
     "denominators": {
         "Total!!Estimate!!Civilian employed population 16 years and over": [

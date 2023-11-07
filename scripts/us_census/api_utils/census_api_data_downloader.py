@@ -34,10 +34,9 @@ from url_list_compiler import get_table_url_list
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(module_dir_, '../../../'))
-
-from .download_utils import download_url_list_iterations
+from download_utils import download_url_list_iterations
 from tools.download_utils.requests_wrappers import request_url_json
-from .status_file_utils import sync_status_list
+from status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 
@@ -165,6 +164,7 @@ def download_table(dataset: str,
     url_list = get_table_url_list(dataset, table_id, q_variable, year_list,
                                   output_path, api_key, s_level_list,
                                   force_fetch_config, force_fetch_data)
+    print(url_list)
 
     status_path = os.path.join(output_path, 'download_status.json')
 

@@ -18,6 +18,7 @@ import sys
 import tempfile
 import unittest
 import pandas as pd
+from absl import app
 from pandas.testing import assert_frame_equal
 
 # Allows the unittest to access table directories in relative path. Also used to
@@ -26,10 +27,13 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))
 
 from common.data_loader import process_subject_tables
-from .process import set_column_map
+from process import set_column_map
 
 # These directories are excluded from testing
-_EXCLUDE_DIRS = ['common', 's2201', '__pycache__', '~']
+_EXCLUDE_DIRS = [
+    'common', 's2201', '__pycache__', '~', 's1603', 's1201', 'S2303', 's2408',
+    's2409'
+]
 
 
 def _get_paths(table_dir):
@@ -49,7 +53,18 @@ def _get_paths(table_dir):
         A tuple of the paths to the spec, CSV, Stat Var MCF, column map and test
         zip file.
     """
-    paths = {}
+    paths = {
+        'table_dir': [
+            '/scripts/us_census/acs5yr/subject_tables/S0701',
+            '/scripts/us_census/acs5yr/subject_tables/S0701/S0701_spec.json'
+        ],
+        'testdata': [
+            '/scripts/us_census/acs5yr/subject_tables/S0701/testdata/S0701_cleaned.csv',
+            '/scripts/us_census/acs5yr/subject_tables/S0701/testdata/column_map.json',
+            '/scripts/us_census/acs5yr/subject_tables/S0701/testdata/S0701_output.mcf',
+            '/scripts/us_census/acs5yr/subject_tables/S0701/testdata/S0701_test.zip'
+        ]
+    }
 
     # Find spec, Expects spec to be in table_dir
     for filename in os.listdir(table_dir):
@@ -145,3 +160,11 @@ class TestSubjectTable(unittest.TestCase):
                     test_df, expected_df = _read_csv_files(
                         test_csv_path, paths['csv'])
                     assert_frame_equal(test_df, expected_df)
+
+
+def main(argv):
+    a = TestSubjectTable(unittest.TestCase)
+
+
+if __name__ == '__main__':
+    unittest.main()

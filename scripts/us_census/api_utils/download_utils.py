@@ -24,7 +24,7 @@ import aiohttp
 from typing import Any, Callable, Union
 from aiolimiter import AsyncLimiter
 
-from .status_file_utils import get_pending_or_fail_url_list, url_to_download
+from status_file_utils import get_pending_or_fail_url_list, url_to_download
 
 
 async def async_save_resp_json(response: Any, filename: str):

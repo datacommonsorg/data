@@ -1,5 +1,5 @@
 ## S0902:Selected Characteristics of the Uninsured in the United States
-Data availability: 2011 - 2019
+Data availability: 2011 - 2021
 Data Source: [ACS 5Yr Estimates](https://data.census.gov/cedsci/table?q=S0902&g=0100000US.050000&tid=ACSST5Y2019.S0902&hidePreview=true)
 Data Granularity: County, State and Country
 

@@ -107,13 +107,10 @@
     "residentStatus": {
       "Moved; from different municipio": "DifferentHouseInDifferentCountySameState",
       "Moved; from different municipio MOE": "DifferentHouseInDifferentCountySameState",
-
       "Moved; from the U.S.": "DifferentHouseInDifferentCountyDifferentState",
       "Moved; from the U.S. MOE": "DifferentHouseInDifferentCountyDifferentState",
-
       "Moved; from outside Puerto Rico and the U.S.": "DifferentHouseAbroad",
       "Moved; from outside Puerto Rico and the U.S. MOE": "DifferentHouseAbroad",
-
       "Moved; within same municipio": "DifferentHouseInSameCounty",
       "Moved; within same municipio MOE": "DifferentHouseInSameCounty"
     },
@@ -152,21 +149,27 @@
   "universePVs": [
     {
       "populationType": "Person",
-      "constraintProperties": ["educationalAttainment"],
+      "constraintProperties": [
+        "educationalAttainment"
+      ],
       "dependentPVs": {
         "age": "[25 - Years]"
       }
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["maritalStatus"],
+      "constraintProperties": [
+        "maritalStatus"
+      ],
       "dependentPVs": {
         "age": "[15 - Years]"
       }
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["income"],
+      "constraintProperties": [
+        "income"
+      ],
       "dependentPVs": {
         "age": "[15 - Years]",
         "incomeStatus": "WithIncome"
@@ -175,17 +178,23 @@
   ],
   "ignoreColumns": [
     "id",
+    "Geography",
     "Geographic Area Name",
     "Percent Imputed",
     "PERCENT IMPUTED",
     "PERCENT ALLOCATED",
-
+    "Annotation of Estimate",
+    "Annotation of Margin of Error",
+    "Annotation of Total",
+    "Annotation of Moved; within same municipio",
+    "Annotation of Moved; from different municipio",
+    "Annotation of Moved; from outside Puerto Rico and the U.S.",
+    "Annotation of Moved; from the U.S.",
     "Total!!Estimate!!MARITAL STATUS!!Population 15 years and over",
     "Total!!Margin of Error!!MARITAL STATUS!!Population 15 years and over",
     "Margin of Error!!Total MOE!!MARITAL STATUS!!Population 15 years and over",
     "Estimate!!Total!!MARITAL STATUS!!Population 15 years and over",
     "Margin of Error!!Total!!MARITAL STATUS!!Population 15 years and over",
-    
     "Moved; from the U.S.!!Estimate!!MARITAL STATUS!!Population 15 years and over",
     "Margin of Error!!Moved; from the U.S.!!MARITAL STATUS!!Population 15 years and over",
     "Moved; from different municipio!!Margin of Error!!MARITAL STATUS!!Population 15 years and over",
@@ -206,7 +215,6 @@
     "Margin of Error!!Moved; from outside Puerto Rico and the U.S. MOE!!MARITAL STATUS!!Population 15 years and over",
     "Estimate!!Moved; from outside Puerto Rico and the U.S.!!MARITAL STATUS!!Population 15 years and over",
     "Estimate!!Moved; from different municipio!!MARITAL STATUS!!Population 15 years and over",
-
     "Total!!Margin of Error!!Median age (years)",
     "Margin of Error!!Moved; from outside Puerto Rico and the U.S. MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Total MOE!!Population 1 year and over!!AGE!!Median age (years)",
@@ -214,6 +222,8 @@
     "Margin of Error!!Moved; from the U.S. MOE!!Population 1 year and over!!AGE!!Median age (years)",
     "Margin of Error!!Moved; from the U.S. MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Moved; within same municipio!!Margin of Error!!Median age (years)",
     "Margin of Error!!Moved; from different municipio MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Total!!Population 1 year and over!!AGE!!Median age (years)",
@@ -230,17 +240,25 @@
     "Margin of Error!!Moved; within same municipio MOE!!Population 1 year and over!!AGE!!Median age (years)",
     "Moved; from the U.S.!!Margin of Error!!Median age (years)",
     "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Total MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; from outside Puerto Rico and the U.S. MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Moved; from outside Puerto Rico and the U.S.!!Margin of Error!!Median age (years)",
     "Margin of Error!!Moved; within same municipio MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Total MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; from the U.S. MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Moved; from different municipio!!Margin of Error!!Median age (years)",
     "Moved; within same municipio!!Margin of Error!!Median income (dollars)",
     "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Moved; from different municipio!!Margin of Error!!Median income (dollars)"
   ],
   "denominators": {
@@ -417,6 +435,26 @@
       "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
       "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
       "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999"
     ],
     "Total!!Estimate!!HOUSING TENURE!!Householder lived in owner-occupied housing units": [
       "Moved; within same municipio!!Estimate!!HOUSING TENURE!!Householder lived in owner-occupied housing units",
@@ -714,6 +752,26 @@
       "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
       "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999"
     ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999"
+    ],
     "Total!!Estimate!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2011 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over": [
       "Moved; within same municipio!!Estimate!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2011 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
       "Moved; within same municipio!!Margin of Error!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2011 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
@@ -988,6 +1046,26 @@
       "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
       "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999"
     ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999"
+    ],
     "Total!!Estimate!!White alone, not Hispanic or Latino": [
       "Moved; within same municipio!!Estimate!!White alone, not Hispanic or Latino",
       "Moved; within same municipio!!Margin of Error!!White alone, not Hispanic or Latino",
@@ -1065,6 +1143,26 @@
       "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
       "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
       "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss"
     ],
     "Estimate!!Total!!Population 1 year and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": [
       "Estimate!!Moved; within same municipio!!Population 1 year and over!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race",
@@ -1450,6 +1548,26 @@
       "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
       "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999"
     ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999"
+    ],
     "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)": [
       "Moved; within same municipio!!Estimate!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
       "Moved; within same municipio!!Margin of Error!!EDUCATIONAL ATTAINMENT!!High school graduate (includes equivalency)",
@@ -1666,6 +1784,26 @@
       "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
       "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999"
     ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999"
+    ],
     "Estimate!!Total!!Population 1 year and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)": [
       "Estimate!!Moved; within same municipio!!Population 1 year and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
       "Margin of Error!!Moved; within same municipio!!Population 1 year and over!!RACE AND HISPANIC OR LATINO ORIGIN!!Hispanic or Latino origin (of any race)",
@@ -1825,6 +1963,26 @@
       "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
       "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
       "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999"
     ],
     "Total!!Estimate!!MARITAL STATUS!!Widowed": [
       "Moved; within same municipio!!Estimate!!MARITAL STATUS!!Widowed",
@@ -2112,6 +2270,26 @@
       "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
       "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over"
     ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over"
+    ],
     "Total!!Estimate!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2013 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999": [
       "Moved; within same municipio!!Estimate!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2013 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
       "Moved; within same municipio!!Margin of Error!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2013 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
@@ -2276,6 +2454,26 @@
       "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
       "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more"
     ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more": [
+      "Estimate!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; within same municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from different municipio!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from outside Puerto Rico and the U.S.!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more"
+    ],
     "Total!!Estimate!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2010 INFLATION-ADJUSTED DOLLARS)!!$10,000 to $14,999": [
       "Moved; within same municipio!!Estimate!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2010 INFLATION-ADJUSTED DOLLARS)!!$10,000 to $14,999",
       "Moved; within same municipio!!Margin of Error!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2010 INFLATION-ADJUSTED DOLLARS)!!$10,000 to $14,999",
@@ -2368,6 +2566,8 @@
     "EDUCATIONAL ATTAINMENT",
     "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)",
     "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)",
+    "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)",
+    "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)",
     "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)",
     "NATIVITY AND CITIZENSHIP STATUS",
     "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2015 INFLATION-ADJUSTED DOLLARS)",

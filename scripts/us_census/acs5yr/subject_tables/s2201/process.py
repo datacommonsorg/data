@@ -23,7 +23,6 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-
 flags.DEFINE_string('output', None, 'Path to folder for output files')
 flags.DEFINE_string('download_id', None, 'Download id for input data')
 flags.DEFINE_string('features', None, 'JSON of feature maps')
@@ -109,8 +108,8 @@ def write_csv(filename, reader, output, features, stat_vars):
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         observation_date = filename.split('ACSST5Y')[1][:4]
         valid_columns = {}
-        for row in reader:
-            if row['GEO_ID'] == 'id':
+        for row in reader:          
+            if row['GEO_ID'] == 'Geography' or row['GEO_ID'] == 'id':
 
                 # Map feature names to stat vars
                 for c in row:
@@ -119,11 +118,22 @@ def write_csv(filename, reader, output, features, stat_vars):
                         valid_columns[c] = sv
                 continue
 
-            new_row = {
-                'observationDate': observation_date,
+            #new_row = {
+                #'observationDate': observation_date,
                 # TODO: Expand to support other prefixes?
-                'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
-            }
+                #'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
+           # }
+            geo = row['GEO_ID'].split('US')
+            if geo[1] == "":
+                new_row = {
+                    'observationDate': observation_date,
+                    'observationAbout': 'dcid:country/USA'
+                }
+            else:
+                new_row = {
+                    'observationDate': observation_date,
+                    'observationAbout': 'dcid:geoId/' + geo[1]
+                }
             for c in row:
 
                 # We currently only support the stat vars in the list
@@ -174,7 +184,7 @@ def main(argv):
     )
     with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
         for filename in zf.namelist():
-            if 'data_with_overlays' in filename:
+            if '-Data' in filename:
                 print(filename)
                 with zf.open(filename, 'r') as infile:
                     reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))

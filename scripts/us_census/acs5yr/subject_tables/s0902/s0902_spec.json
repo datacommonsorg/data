@@ -76,15 +76,26 @@
 			"residenceType": "Household"
 		}
 	},
-	"universePVs":[{
-		"populationType": "Person",
-		"constraintProperties": ["birthEventStatus"],
-		"dependentPV":{
-			"gender": "Female"
+	"universePVs": [
+		{
+			"populationType": "Person",
+			"constraintProperties": [
+				"birthEventStatus"
+			],
+			"dependentPV": {
+				"gender": "Female"
+			}
 		}
-	}],
+	],
 	"ignoreColumns": [
 		"id",
+		"Geography",
+		"Annotation of Estimate",
+		"Annotation of Hispanic or Latino origin (of any race)",
+		"Annotation of Black or African American",
+		"Annotation of White alone, not Hispanic or Latino",
+		"Annotation of Margin of Error",
+		"Annotation of Total",
 		"Geographic Area Name",
 		"Total",
 		"Total MOE"
@@ -200,7 +211,6 @@
 			"Margin of Error!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married",
 			"Margin of Error!!Black or African American MOE!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Male!!Ever married"
 		],
-
 		"Black or African American!!Estimate!!MARITAL STATUS AND FERTILITY!!Female": [
 			"Black or African American!!Estimate!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
 			"Black or African American!!Estimate!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months",
@@ -215,8 +225,6 @@
 			"Margin of Error!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Ever married",
 			"Margin of Error!!Black or African American!!Population 15 to 19 years!!MARITAL STATUS AND FERTILITY!!Female!!Female with a birth in the past 12 months"
 		],
-
-
 		"Black or African American!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households": [
 			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!In married-couple family households",
 			"Black or African American!!Estimate!!HOUSEHOLD TYPE!!Population 15 to 19 years in households!!In married-couple family households",
@@ -259,7 +267,6 @@
 			"Black or African American!!Margin of Error!!IDLENESS!!Not enrolled in school and not in the labor force",
 			"Black or African American!!Margin of Error!!LABOR FORCE STATUS!!In the labor force"
 		],
-
 		"Estimate!!Black or African American!!Population 16 to 19 years": [
 			"Estimate!!Black or African American!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
 			"Estimate!!Black or African American!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force",
@@ -268,7 +275,6 @@
 			"Margin of Error!!Black or African American!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
 			"Margin of Error!!Black or African American!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force"
 		],
-
 		"Hispanic or Latino origin (of any race)!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school": [
 			"Hispanic or Latino origin (of any race)!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school!!Public",
 			"Hispanic or Latino origin (of any race)!!Estimate!!SCHOOL ENROLLMENT!!Enrolled in school!!Private",
@@ -356,7 +362,5 @@
 			"Margin of Error!!Hispanic or Latino origin (of any race)!!Population 16 to 19 years!!IDLENESS!!Not enrolled in school and not in the labor force",
 			"Margin of Error!!Hispanic or Latino origin (of any race)!!Population 16 to 19 years!!LABOR FORCE STATUS!!In the labor force"
 		]
-
 	}
 }
-
