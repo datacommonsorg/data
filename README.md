@@ -249,7 +249,6 @@ To disable yapf for some lines,
 
 For general questions or issues about importing data into Data Commons, please
 open an issue on our [issues](https://github.com/datacommonsorg/data/issues)
-page. For all other questions, please send an email to
-`support@datacommons.org`.
+page. For all other questions, please [share feedback on this form](https://docs.google.com/forms/d/e/1FAIpQLScJTtNlIItT-uSPXI98WT6yNlavF-kf5JS0jMrCvJ9TPLmelg/viewform).
 
 **Note** - This is not an officially supported Google product.
