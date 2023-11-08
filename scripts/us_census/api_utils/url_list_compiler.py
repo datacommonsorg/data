@@ -167,7 +167,7 @@ def get_table_url_list(dataset: str,
             for s_level in year_dict['summary_levels']:
                 if s_level not in s_level_list:
                     s_level_list.append(s_level)
-    ret_list = []   
+    ret_list = []
     for year in year_list:
         if int(year) in available_years:
             print('Compiling urls for', year)

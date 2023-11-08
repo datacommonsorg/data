@@ -23,7 +23,7 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_path',None,'Path of input files')
+flags.DEFINE_string('input_path', None, 'Path of input files')
 flags.DEFINE_string('output', None, 'Path to folder for output files')
 flags.DEFINE_string('download_id', None, 'Download id for input data')
 flags.DEFINE_string('features', None, 'JSON of feature maps')

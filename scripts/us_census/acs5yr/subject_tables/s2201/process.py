@@ -108,7 +108,7 @@ def write_csv(filename, reader, output, features, stat_vars):
         writer = csv.DictWriter(f_out, fieldnames=fieldnames)
         observation_date = filename.split('ACSST5Y')[1][:4]
         valid_columns = {}
-        for row in reader:          
+        for row in reader:
             if row['GEO_ID'] == 'Geography' or row['GEO_ID'] == 'id':
 
                 # Map feature names to stat vars
@@ -119,10 +119,10 @@ def write_csv(filename, reader, output, features, stat_vars):
                 continue
 
             #new_row = {
-                #'observationDate': observation_date,
-                # TODO: Expand to support other prefixes?
-                #'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
-           # }
+            #'observationDate': observation_date,
+            # TODO: Expand to support other prefixes?
+            #'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
+        # }
             geo = row['GEO_ID'].split('US')
             if geo[1] == "":
                 new_row = {

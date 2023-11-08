@@ -83,7 +83,10 @@ class ProcessTest(unittest.TestCase):
                     self.assertEqual(test_result, expected)
             os.remove(test_tmcf)
 
+
 def main(argv):
-    a=ProcessTest(unittest.TestCase)
+    a = ProcessTest(unittest.TestCase)
+
+
 if __name__ == '__main__':
     unittest.main()
