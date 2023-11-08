@@ -1,0 +1,12 @@
+subject_id,subject_label,predicate,object_id,object_label
+G00000020,Afghanistan,isPartOf,G00100000,World
+G00000020,Afghanistan,isPartOf,G00114000,Asia
+G00000020,Afghanistan,isPartOf,G00119000,Southern Asia
+G00000020,Afghanistan,isPartOf,G00403000,Landlocked developing countries (LLDCs)
+G00000020,Afghanistan,isPartOf,G00403300,Landlocked developing countries (LLDCs): Asia
+G00000020,Afghanistan,isPartOf,G00404000,Least developed countries (LDCs)
+G00000020,Afghanistan,isPartOf,G00404300,Least developed countries (LDCs): Asia
+G00000030,Ajman,isPartOf,G00003250,United Arab Emirates
+G00000030,Ajman,isPartOf,G00100000,World
+G00000030,Ajman,isPartOf,G00114000,Asia
+G00000030,Ajman,isPartOf,G00120000,Western Asia

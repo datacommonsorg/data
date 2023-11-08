@@ -11,3 +11,6 @@ __pycache__/
 dc_generated/
 # Ignore the data folder under the un_census/enhanced_tmcf/ directory.
 */*/*/data/*
+lib/
+bin/
+pyvenv.cfg
