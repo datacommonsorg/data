@@ -1,6 +1,6 @@
 # UN Stats Sustainable Development Goals
 
-This import includes data from the [UN SDG Global Database](https://unstats.un.org/sdgs/dataportal). Data is read from the submodule `sdg-dataset` which is managed by UN Stats. Geography mappings are read from the submodule `sssom-mappings` which is also managed by UN Stats. Please make sure the submodules stay up to date.
+This import includes data from the [UN SDG Global Database](https://unstats.un.org/sdgs/dataportal). Data is read from the submodule `sdg-dataset` which is managed by UN Stats. Geography mappings are read from the submodule `sssom-mappings` which is also managed by UN Stats. Please ensure the submodules stay up to date.
 
 
 To generate place mappings:
