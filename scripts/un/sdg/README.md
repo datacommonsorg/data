@@ -50,4 +50,5 @@ As a quick overview:
 * `preprocess.py` downloads all the raw input CSVs to an `input/` folder as well as adds all dimensions and attributes to a `preprocessed/` folder.
 * `cities.py` reads the input CSVs and matches cities with dcids.
 * `process.py` reads the input CSVs and concepts and generates a cleaned CSV and schema.
-* The `util.py` file has various shared util functions and constants.
+* `util.py` has various shared util functions and constants.
+* `m49.csv` has country code mappings.
