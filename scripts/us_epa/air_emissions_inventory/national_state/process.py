@@ -101,7 +101,6 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
         }
 
         sv_list = pd.unique(self._final_df['SV'])
-        #sv_list = sv_list[np.logical_not(np.isnan(sv_list))]
         sv_list = [item for item in sv_list if not(pd.isnull(item)) == True]
         print("===========sv List=========="+str(sv_list))
         sv_list.sort()
