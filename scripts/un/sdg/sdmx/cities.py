@@ -11,7 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Finds dcids for cities in input files.
+'''This script does not use the most up-to-date schema format. 
+It should only be used as an illustration of the SDMX -> MCF mapping.
+Do not actually run!
+
+Finds dcids for cities in input files.
+
 Produces:
 * preprocessed/cities.csv: dcid for each city name
  
@@ -38,7 +43,7 @@ def get_cities(json, api_key):
         API response.
     '''
     return requests.post(
-        'https://autopush.api.datacommons.org/v1/bulk/find/entities',
+        'https://api.datacommons.org/v1/bulk/find/entities',
         headers={
             'X-API-Key': api_key
         },

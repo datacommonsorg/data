@@ -11,7 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Downloads data from UN Stats API to be used in further processing.
+'''This script does not use the most up-to-date schema format. 
+It should only be used as an illustration of the SDMX -> MCF mapping.
+Do not actually run!
+
+Downloads data from UN Stats API to be used in further processing.
+
 Produces:
 * input/ directory containing csv files for each series
 * preprocessed/attributes.csv: metadata about attributes

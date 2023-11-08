@@ -11,7 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Produces CSV/TMCF + schema for UN Stats data.
+'''This script does not use the most up-to-date schema format. 
+It should only be used as an illustration of the SDMX -> MCF mapping.
+Do not actually run!
+
+Produces CSV/TMCF + schema for UN Stats data.
+
 Produces:
 * output/output.csv: cleaned CSV
 * output/measurement_method.csv: measurement methods
@@ -34,7 +39,7 @@ sys.path.append(
 module_dir_ = os.path.dirname(__file__)
 
 # Create map of M49 -> ISO-alpha3 for countries.
-with open(os.path.join(module_dir_, 'm49.csv')) as f:
+with open(os.path.join(module_dir_, 'm49.tsv')) as f:
     PLACES = {}
     reader = csv.DictReader(f, delimiter='\t')
     for row in reader:

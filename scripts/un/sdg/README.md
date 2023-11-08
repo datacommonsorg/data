@@ -44,7 +44,7 @@ Notes:
 
 ### SDMX
 
-As reference, we provide an earlier version of the import scripts that utilized the UN API (which uses SDMX) in the `sdmx/` folder. Please note that these scripts may have errors and do not use the most up-to-date schema format, so should only be used as an illustration of the SDMX -> MCF mapping and should not actually be run.
+As reference, we provide an earlier version of the import scripts that utilized the UN API (which uses SDMX) in the `sdmx/` folder. Please note that these scripts may have errors and do not use the most up-to-date schema format, so should only be used as an illustration of the SDMX -> MCF mapping and **should not actually be run**.
 
 As a quick overview: 
 * `preprocess.py` downloads all the raw input CSVs to an `input/` folder as well as adds all dimensions and attributes to a `preprocessed/` folder.
