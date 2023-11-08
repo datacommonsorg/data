@@ -42,12 +42,11 @@ def get_cities(json, api_key):
     Returns:
         API response.
     '''
-    return requests.post(
-        'https://api.datacommons.org/v1/bulk/find/entities',
-        headers={
-            'X-API-Key': api_key
-        },
-        json=json).json()
+    return requests.post('https://api.datacommons.org/v1/bulk/find/entities',
+                         headers={
+                             'X-API-Key': api_key
+                         },
+                         json=json).json()
 
 
 def write_cities(file, cities, api_key):
