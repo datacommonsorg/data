@@ -1,0 +1,68 @@
+{
+	"WB": {
+		"dates": {
+			"2020-01-01": {
+				"delta": {
+					"confirmed": 1
+				},
+				"total": {
+					"confirmed": 1
+				}
+			},
+			"2020-01-02": {
+				"delta": {
+					"confirmed": 2
+				},
+				"total": {
+					"confirmed": 2
+				}
+			}
+		},
+		"districts": {
+			"Cooch Behar": {
+				"dates": {
+					"2020-01-01": {
+						"total": {
+							"confirmed": 3,
+							"deceased": 3,
+							"recovered": 3
+						}
+					},
+					"2020-01-02": {
+						"delta": {
+							"confirmed": 4,
+							"recovered": 4
+						},
+						"total": {
+							"confirmed": 5,
+							"deceased": 5,
+							"recovered": 5
+						}
+					}
+				},
+				"Jalpaiguri": {
+					"dates": {
+						"2020-01-01": {
+							"total": {
+								"confirmed": 6,
+								"deceased": 6,
+								"recovered": 6
+							}
+						},
+						"2020-01-02": {
+							"delta": {
+								"confirmed": 7,
+								"recovered": 7
+							},
+							"total": {
+								"confirmed": 8,
+								"deceased": 8,
+								"recovered": 8
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

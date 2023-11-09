@@ -1,0 +1,35 @@
+Node: E:COVID19IndiaORGTracking->E0
+typeOf: schema:Place
+wikidataId: C:COVID19IndiaORGTracking->wikidataId
+
+Node:E:COVID19IndiaORGTracking->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedCase
+observationAbout: E:COVID19IndiaORGTracking->E0
+observationDate: C:COVID19IndiaORGTracking->date
+value: C:COVID19IndiaORGTracking->confirmed
+measurementMethod: dcs:COVID19IndiaORGTracking
+
+Node:E:COVID19IndiaORGTracking->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_MedicalConditionIncident_COVID_19_ConfirmedCase
+observationAbout: E:COVID19IndiaORGTracking->E0
+observationDate: C:COVID19IndiaORGTracking->date
+value: C:COVID19IndiaORGTracking->active
+measurementMethod: dcs:COVID19IndiaORGTracking
+
+Node:E:COVID19IndiaORGTracking->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientRecovered
+observationAbout: E:COVID19IndiaORGTracking->E0
+observationDate: C:COVID19IndiaORGTracking->date
+value: C:COVID19IndiaORGTracking->recovered
+measurementMethod: dcs:COVID19IndiaORGTracking
+
+Node:E:COVID19IndiaORGTracking->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+observationAbout: E:COVID19IndiaORGTracking->E0
+observationDate: C:COVID19IndiaORGTracking->date
+value: C:COVID19IndiaORGTracking->deceased
+measurementMethod: dcs:COVID19IndiaORGTracking
