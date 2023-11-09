@@ -1,0 +1,10 @@
+[downloadUrl]
+
+#DOWNLOAD_URI = 'https://www.epa.gov/sites/default/files/2020-11/2019_data_summary_spreadsheets.zip'
+DOWNLOAD_URI = https://www.epa.gov/system/files/other-files/2022-10/2021_data_summary_spreadsheets.zip
+#CROSSWALK_URI = 'https://www.epa.gov/sites/default/files/2020-12/ghgrp_oris_power_plant_crosswalk_11_24_20.xlsx'
+CROSSWALK_URI = https://www.epa.gov/system/files/documents/2022-04/ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx
+YEAR_DATA_FILENAME = 2021_data_summary_spreadsheets/ghgp_data_{year}.xlsx
+Start_Year_Range = 2010
+End_Year_Range = 2022
+
