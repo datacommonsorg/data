@@ -48,7 +48,7 @@ class ProcessTest(unittest.TestCase):
         mock_df.return_value = pd.DataFrame(
             pd.read_csv(os.path.join(TEST_DIR, 'test_input_2006.csv')))
         matches = {'dcs:geoId/02110': 'dcs:geoId/0236400'}
-        process.process(2006, matches, 'testdata')
+        process.process(2006, matches, TEST_DIR)
         with open(os.path.join(TEST_DIR, 'output_2006.csv')) as result:
             with open(os.path.join(TEST_DIR,
                                    'expected_output_2006.csv')) as expected:
