@@ -1,78 +1,144 @@
-"""This script processes climate trace data for ingestion into data commons.
+"""This script processes Climate Trace data for ingestion into Data Commons.
 
-It imports data from climate trace URLs, merges forest and non forest data,
-extracts year from the dates and creates stat-vars for each sub-sector. It also
-calculates values for the whole sector and appends them to the data set with
-a stat-var representing the sector. The processed file is placed in the
-output_files directory.
+It imports data from Climate Trace URLs and creates a cleaned 'output.csv'
 """
-from absl import app
-from datetime import datetime
-import numpy as np
-import pandas as pd
-import statvar_mapping
+import csv
+import datetime
+import requests
+from .statvar_mapping import *
+
+YEAR = datetime.date.today().year
+URL = 'https://api.dev.climatetrace.org/v3/emissions/timeseries/sectors{sector}?since=2010&to={year}{continents}{countries}'
+
+FIELDNAMES = [
+    'observation_about', 'observation_date', 'variable_measured', 'value'
+]
 
 
-def _ImportDataFromURL(url):
-    return pd.read_csv(url)
+def get_definition(param):
+    """Fetches definition for given parameter.
+
+    Args:
+        param: Input parameter.
+
+    Returns:
+        JSON of API response.
+    """
+    return requests.get(
+        f'https://api.dev.climatetrace.org/v3/definitions/{param}').json()
 
 
-def _ExtractDate(dt_str):
-    return datetime.strptime(dt_str, "%Y-%m-%d")
+CONTINENTS = get_definition('continents')
+COUNTRIES = [x['alpha3'] for x in get_definition('countries')]
+S = SECTORS.copy()
+S.update(SUBSECTORS)
 
 
-def MergeAndProcessData(forest_df, other_data_df):
-    """Merge the two data frames and output processed data frames for country and sectors."""
-    base_df = pd.concat([other_data_df, forest_df], ignore_index=True)
-    column_list = [
-        "country", "year", "statvar", "measurement_method", "Tonnes Co2e"
-    ]
-    # drop all rows with missing or zero values
-    base_df["Tonnes Co2e"].replace('', np.nan, inplace=True)
-    base_df.dropna(subset=["Tonnes Co2e"], inplace=True)
-    base_df = base_df[base_df["Tonnes Co2e"] != 0]
+def get_observation_about(name):
+    """Returns formatted place DCID.
 
-    base_df["year"] = base_df["start"].apply(_ExtractDate).apply(
-        lambda x: x.year)
+    Args:
+        name: Input place name.
 
-    # Get per sector aggregates
-    sector_df = base_df.groupby(["country", "year",
-                                 "sector"])["Tonnes Co2e"].sum().reset_index()
-    sector_df["statvar"] = (
-        statvar_mapping.STATVAR_PREFIX +
-        sector_df["sector"].apply(statvar_mapping.SECTOR_VAR_MAP.get))
-    sector_df["measurement_method"] = statvar_mapping.MEASUREMENT_METHOD_SECTORS
-    sector_df = sector_df[column_list]
-
-    sub_sector_df = base_df
-    sub_sector_df["statvar"] = (
-        statvar_mapping.STATVAR_PREFIX +
-        base_df["subsector"].apply(statvar_mapping.SUBSECTOR_VAR_MAP.get))
-    sub_sector_df[
-        "measurement_method"] = statvar_mapping.MEASUREMENT_METHOD_SECTORS
-    sub_sector_df = sub_sector_df[column_list]
-
-    # Get per country aggregates
-    country_df = base_df.groupby(["country",
-                                  "year"])["Tonnes Co2e"].sum().reset_index()
-    country_df["statvar"] = statvar_mapping.STATVAR_COUNTRY_METRICS
-    country_df[
-        "measurement_method"] = statvar_mapping.MEASUREMENT_METHOD_COUNTRIES
-    country_df = country_df[column_list]
-
-    return pd.concat([sector_df, sub_sector_df, country_df], ignore_index=True)
+    Returns:
+        Formatted DCID or empty string if not found.
+    """
+    if name == 'all':
+        return 'dcid:Earth'
+    elif name in CONTINENTS:
+        return 'dcid:' + name.lower().replace(' ', '')
+    elif name in COUNTRIES:
+        return 'dcid:country/' + name
+    else:
+        print(f'No dcid found for {name}.')
+        return ''
 
 
-def main(_):
-    url = "https://api.climatetrace.org/emissions_by_subsector_timeseries?interval=year&since=2015&to=2020&download=csv"
-    df = _ImportDataFromURL(url)
-    # Climate trace import URL has a bug wherein it skips the forest category.
-    # So adding and concatenating it separately
-    forest_url = "https://api.climatetrace.org/emissions_by_subsector_timeseries?sector=forests&since=2015&to=2020&interval=year&download=csv"
-    forest_df = _ImportDataFromURL(forest_url)
-    final_df = MergeAndProcessData(forest_df, df)
-    final_df.to_csv("./output_files/processed_data.csv", index=False)
+def get_variable_measured(s, gas):
+    """Returns formatted statistical variable DCID.
+
+    Args:
+        s: Input sector/subsector.
+        gas: Input gas.
+
+    Returns:
+        Formatted DCID or empty string if not found.
+    """
+    if s not in S or gas not in GASES:
+        print(f'No dcid found for {s} and {gas}.')
+        return ''
+    return f'dcid:Annual_Emissions_{GASES[gas]}_{S[s]}'
+
+
+def fetch_data(sector, continents, countries):
+    """Returns emissions data for given parameters.
+
+    Args:
+        sector: Input sector.
+        continents: Comma-separated list of continents.
+        countries: Comma-separated list of countries
+
+    Returns:
+        JSON of API response.
+    """
+    url = URL.format_map({
+        'sector': '/' + sector if sector else '',
+        'year': YEAR,
+        'continents': f'&continents={continents}' if continents else '',
+        'countries': f'&countries={countries}' if countries else '',
+    })
+    return requests.get(url).json()
+
+
+def write_emissions(writer, data):
+    """Writes cleaned CSV rows of data.
+
+    Args:
+        writer: CSV DictWriter.
+        data: JSON of input data.
+    """
+    for entry in data:
+        observation_about = get_observation_about(entry['name'])
+        if not observation_about:  # No place
+            continue
+        for s in entry['data']:
+            for emission in s['emissions']:
+                if not emission['year']:  # No date
+                    continue
+                for gas in GASES:
+                    if gas in emission:
+                        variable_measured = get_variable_measured(
+                            s['name'], gas)
+                        if not variable_measured:  # No SV
+                            continue
+                        if not emission[gas]:  # No value
+                            continue
+                        writer.writerow({
+                            'observation_about': observation_about,
+                            'observation_date': emission['year'],
+                            'variable_measured': variable_measured,
+                            'value': emission[gas]
+                        })
 
 
 if __name__ == "__main__":
-    app.run(main)
+    with open('output.csv', 'w') as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
+        writer.writeheader()
+
+        continents = ','.join(CONTINENTS)
+        countries = ','.join(COUNTRIES)
+
+        for sector in [''] + list(SECTORS.keys()):
+            # 'fluorinated-gases' is both a sector and subsector, so don't duplicate.
+            if sector == 'fluorinated-gases':
+                continue
+
+            # Earth
+            write_emissions(writer, fetch_data(sector, '', ''))
+
+            # Continents
+            write_emissions(writer, fetch_data(sector, continents, ''))
+
+            # Countries
+            write_emissions(writer, fetch_data(sector, '', countries))

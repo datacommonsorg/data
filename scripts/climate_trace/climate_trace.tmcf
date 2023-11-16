@@ -1,11 +1,8 @@
-Node: E:processed_data->E0
-typeOf: dcs:Country
-countryAlpha3Code: C:processed_data->country
-
-Node: E:processed_data->E1
+Node: E:climate->E0
 typeOf: dcs:StatVarObservation
-value: C:processed_data->Tonnes Co2e
-unit: dcid:MetricTonCO2e
-observationAbout: E:processed_data->E0
-variableMeasured: C:processed_data->statvar
-observationDate: C:processed_data->year
+variableMeasured: C:climate->variable_measured
+observationDate: C:climate->observation_date
+observationAbout: C:climate->observation_about
+observationPeriod: "P1Y"
+value: C:climate->value
+unit: dcs:MetricTon

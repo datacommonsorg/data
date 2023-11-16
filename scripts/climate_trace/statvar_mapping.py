@@ -1,117 +1,146 @@
-"""This file contains mappings required to get climate trace stat-vars.
+"""This file contains mappings required to get Climate Trace stat-vars.
 
 It is used by the preproccess_data.py file to find stat-vars for sectors and
 sub-sectors.
 """
-MEASUREMENT_METHOD_SECTORS = "ClimateTraceEstimate"
+GASES = {
+    "co2": "CarbonDioxide",
+    "ch4": "Methane",
+    "n20": "NitrousOxide",
+    "co2100": "CarbonDioxideEquivalent100YearGlobalWarmingPotential",
+    "co220": "CarbonDioxideEquivalent20YearGlobalWarmingPotential"
+}
 
-MEASUREMENT_METHOD_COUNTRIES = "dcAggregate/ClimateTraceEstimate"
+SECTORS = {
+    "fossil-fuel-operations": "FossilFuelOperations",
+    "power": "Power",
+    "waste": "WasteManagement",
+    "agriculture": "Agriculture",
+    "mineral-extraction": "MineralExtraction",
+    "fluorinated-gases": "FluorinatedGases",
+    "forestry-and-land-use": "ForestryAndLandUse",
+    "manufacturing": "Manufacturing",
+    "buildings": "FuelCombustionInBuildings",
+    "transportation": "Transportation"
+}
 
-STATVAR_PREFIX = "Annual_Emissions_GreenhouseGas_"
-
-STATVAR_COUNTRY_METRICS = "Annual_Emissions_GreenhouseGas"
-
-# Sub-sector mapping
-SUBSECTOR_VAR_MAP = {
-    "wastewater treatment and discharge":
-        "WastewaterTreatmentAndDischarge",
-    "solid waste disposal":
-        "SolidWasteDisposal",
-    "open burning waste":
-        "OpenBurningWaste",
-    "biological treatment of solid waste and biogenic":
-        "BiologicalTreatmentOfSolidWasteAndBiogenic",
-    "copper mining":
-        "CopperMining",
-    "sand quarry":
-        "SandQuarry",
-    "rock quarry":
-        "RockQuarry",
-    "iron mining":
-        "IronMining",
-    "coal mining":
-        "CoalMining",
-    "aluminum":
-        "AluminumProduction",
-    "fluorchemical production":
-        "FluorchemicalProduction",
-    "cement production":
-        "CementProduction",
-    "food processing beverages tobbaco":
-        "FoodProcessingBeveragesTobbacoProduction",
-    "glass production":
-        "GlassProduction",
-    "steel":
-        "SteelManufacturing",
-    "pulp paper":
-        "PulpAndPaperManufacturing",
-    "petrochemicals":
-        "PetrochemicalProduction",
-    "nitric acid production":
-        "NitricAcidProduction",
-    "lime production":
-        "LimeProduction",
-    "other manufacturing":
-        "ClimateTrace_OtherManufacturing",
-    # shrubland subsector is misspelled as scrubland in the data
-    "scrubland fires":
-        "ShrublandFire",
-    "savannas fires":
-        "SavannaFire",
-    "forest fires":
-        "ForestFire",
-    "forest clearing":
-        "ForestClearing",
-    "residential commercial onsite heating":
-        "FuelCombustionForResidentialCommercialOnsiteHeating",
-    "refrigeration air conditioning":
-        "FuelCombustionForRefrigerationAirConditioning",
-    "cooking":
-        "FuelCombustionForCooking",
-    "rice cultivation":
-        "RiceCultivation",
-    "manure management":
-        "ManureManagement",
-    "managed soils":
-        "ManagedSoils",
-    "enteric fermentation":
-        "EntericFermentation",
-    "cropland fires":
-        "CroplandFire",
-    "solid fuel transformation":
-        "SolidFuelTransformation",
-    "oil refining":
-        "PetroleumRefining",
-    "oil and gas production":
-        "OilAndGasProduction",
-    "roads":
+SUBSECTORS = {
+    "electricity-generation":
+        "ElectricityGeneration",
+    "other-energy-use":
+        "ClimateTrace_OtherEnergyUse",
+    "domestic-aviation":
+        "FuelCombustionForDomesticAviation",
+    "international-aviation":
+        "FuelCombustionForInternationalAviation",
+    "road-transportation":
         "FuelCombustionForRoadVehicles",
     "railways":
         "FuelCombustionForRailways",
-    "aviation":
-        "FuelCombustionForAviation",
-    "other transportation":
-        "ClimateTrace_OtherTransportation",
-    "electricity generation":
-        "ElectricityGenerationFromThermalPowerPlant",
-    "other energy use":
-        "ClimateTrace_OtherEnergyUse",
     "shipping":
         "MaritimeShipping",
-    "bauxite mining":
-        "BauxiteMining"
-}
-
-# Sector mapping
-SECTOR_VAR_MAP = {
-    "agriculture": "Agriculture",
-    "buildings": "FuelCombustionInBuildings",
-    "extraction": "MineralExtraction",
-    "forests": "ForestryAndLandUse",
-    "manufacturing": "Manufacturing",
-    "maritime": "MaritimeTransport",
-    "oil and gas": "OilAndGas",
-    "power": "ElectricityGeneration",
-    "transport": "Transportation",
-    "waste": "WasteManagement"
+    "other-transport":
+        "ClimateTrace_OtherTransportation",
+    "residential-and-commercial-onsite-fuel-usage":
+        "FuelCombustionForResidentialCommercialOnsiteHeating",
+    "other-onsite-fuel-usage":
+        "ClimateTrace_OtherOnsiteFuelUsage",
+    "coal-mining":
+        "CoalMining",
+    "solid-fuel-transformation":
+        "SolidFuelTransformation",
+    "oil-and-gas-production-and-transport":
+        "OilAndGasProduction",
+    "oil-and-gas-refining":
+        "OilAndGasRefining",
+    "other-fossil-fuel-operations":
+        "ClimateTrace_OtherFossilFuelOperations",
+    "cement":
+        "CementProduction",
+    "chemicals":
+        "ChemicalPetrochemicalIndustry",
+    "steel":
+        "SteelManufacturing",
+    "aluminum":
+        "AluminumProduction",
+    "pulp-and-paper":
+        "PulpAndPaperManufacturing",
+    "other-manufacturing":
+        "ClimateTrace_OtherManufacturing",
+    "bauxite-mining":
+        "BauxiteMining",
+    "copper-mining":
+        "CopperMining",
+    "iron-mining":
+        "IronMining",
+    "rock-quarrying":
+        "RockQuarry",
+    "sand-quarrying":
+        "SandQuarry",
+    "other-mineral-extraction":
+        "ClimateTrace_OtherMineralExtraction",
+    "enteric-fermentation":
+        "EntericFermentation",
+    "manure-management":
+        "ManureManagement",
+    "rice-cultivation":
+        "RiceCultivation",
+    "synthetic-fertilizer-application":
+        "SyntheticFertilizerApplication",
+    "cropland-fires":
+        "CroplandFire",
+    "other-agricultural-soil-emissions":
+        "ClimateTrace_OtherAgriculturalSoilEmissions",
+    "other-agriculture":
+        "ClimateTrace_OtherAgriculture",
+    "solid-waste-disposal":
+        "SolidWasteDisposal",
+    "biological-treatment-of-solid-waste-&-biogenic":
+        "BiologicalTreatmentOfSolidWasteAndBiogenic",
+    "incineration-and-open-burning-of-waste":
+        "OpenBurningWaste",
+    "wastewater-treatment-and-discharge":
+        "WastewaterTreatmentAndDischarge",
+    "forest-clearing":
+        "ForestClearing",
+    "forest-land-sink":
+        "ForestLandSink",
+    "forest-land-sources":
+        "ForestLandSources",
+    "grassland-sink":
+        "GrasslandSink",
+    "wetland-sources":
+        "WetlandSources",
+    "wetland-sink":
+        "WetlandSink",
+    "other-land-sources":
+        "ClimateTract_OtherLandSources",
+    "other-land-sink":
+        "ClimateTract_OtherLandSink",
+    "net-forest-emissions":
+        "NetForestEmissions",
+    "forest-fires":
+        "ForestFire",
+    "savannas-fires":
+        "SavannaFire",
+    "scrubland-fires":
+        "ShrublandFire",
+    "peatland-fires":
+        "PeatlandFire",
+    "forest-grassland-wetland-sink":
+        "ForestGrasslandWetlandSink",
+    "forest-land-clearing":
+        "ForestLandClearing",
+    "forest-land-degradation":
+        "ForestLandDegredation",
+    "forest-land-fires":
+        "ForestLandFire",
+    "grassland-fires":
+        "GrasslandFire",
+    "net-grassland-emissions":
+        "NetGrasslandEmissions",
+    "net-wetland-emissions":
+        "NetWetlandEmissions",
+    "wetland-fires":
+        "WetlandFire"
 }
