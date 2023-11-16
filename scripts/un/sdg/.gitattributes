@@ -1,3 +1,4 @@
 csv/* filter=lfs diff=lfs merge=lfs -text
 schema/* filter=lfs diff=lfs merge=lfs -text
 dc_generated/* filter=lfs diff=lfs merge=lfs -text
+geography/* filter=lfs diff=lfs merge=lfs -text
