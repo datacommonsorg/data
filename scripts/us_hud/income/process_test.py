@@ -15,11 +15,9 @@
 
 Usage: python3 -m unittest discover -v -s ../ -p "process_test.py"
 '''
-import csv
 import os
 import pandas as pd
 import sys
-import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -50,11 +48,7 @@ class ProcessTest(unittest.TestCase):
         mock_df.return_value = pd.DataFrame(
             pd.read_csv(
                 os.path.join(module_dir_, TEST_DIR, 'test_input_2006.csv')))
-        with open('match_bq.csv') as f:
-            reader = csv.DictReader(f)
-            matches = {
-                'dcs:' + row['fips']: 'dcs:' + row['city'] for row in reader
-            }
+        matches = {'dcs:geoId/02110': 'dcs:geoId/0236400'}
         process.process(2006, matches, 'testdata')
         with open(os.path.join(module_dir_, TEST_DIR,
                                'output_2006.csv')) as result:
