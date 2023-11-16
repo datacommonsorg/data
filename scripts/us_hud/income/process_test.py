@@ -28,7 +28,7 @@ from us_hud.income import process
 
 module_dir_ = os.path.dirname(__file__)
 
-TEST_DIR = 'testdata'
+TEST_DIR = os.path.join(module_dir_, 'testdata')
 
 
 class ProcessTest(unittest.TestCase):
@@ -46,13 +46,10 @@ class ProcessTest(unittest.TestCase):
     @patch('pandas.read_excel')
     def test_process(self, mock_df):
         mock_df.return_value = pd.DataFrame(
-            pd.read_csv(
-                os.path.join(module_dir_, TEST_DIR, 'test_input_2006.csv')))
+            pd.read_csv(os.path.join(TEST_DIR, 'test_input_2006.csv')))
         matches = {'dcs:geoId/02110': 'dcs:geoId/0236400'}
         process.process(2006, matches, 'testdata')
-        with open(os.path.join(module_dir_, TEST_DIR,
-                               'output_2006.csv')) as result:
-            with open(
-                    os.path.join(module_dir_, TEST_DIR,
-                                 'expected_output_2006.csv')) as expected:
+        with open(os.path.join(TEST_DIR, 'output_2006.csv')) as result:
+            with open(os.path.join(TEST_DIR,
+                                   'expected_output_2006.csv')) as expected:
                 self.assertEqual(result.read(), expected.read())

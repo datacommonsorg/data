@@ -10,6 +10,8 @@ python3 process.py
 
 This will produce a folder `csv/` with cleaned CSVs `output_[YEAR].csv`.
 
+The `match_bq.csv` file contains places that have additional dcids that we would like to generate stats for.
+
 To run unit tests: 
 ```
 python3 -m unittest discover -v -s ../ -p "*_test.py"

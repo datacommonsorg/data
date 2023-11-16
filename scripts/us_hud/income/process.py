@@ -23,9 +23,13 @@ import csv
 import datetime
 import os
 import pandas as pd
+from absl import app
+from absl import flags
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string('output_dir', 'csv', 'Path to write cleaned CSVs.')
 
 URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il'
-OUTPUT_DIR = 'csv'
 
 
 def get_url(year):
@@ -87,10 +91,13 @@ def process(year, matches, output_dir):
         return
     if 'fips2010' in df:
         df = df.rename(columns={'fips2010': 'fips'})
+
+    # Filter to 80th percentile income stats for each household size.
     df = df.loc[:, [
         'fips', 'l80_1', 'l80_2', 'l80_3', 'l80_4', 'l80_5', 'l80_6', 'l80_7',
         'l80_8'
     ]]
+
     df['fips'] = df.apply(lambda x: 'dcs:geoId/' + str(x['fips']).zfill(10),
                           axis=1)
     df['fips'] = df.apply(lambda x: x['fips'][:-5]
@@ -109,13 +116,17 @@ def process(year, matches, output_dir):
     df.to_csv(os.path.join(output_dir, f'output_{year}.csv'), index=False)
 
 
-if __name__ == '__main__':
+def main(argv):
     with open('match_bq.csv') as f:
         reader = csv.DictReader(f)
         matches = {'dcs:' + row['fips']: 'dcs:' + row['city'] for row in reader}
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
+    if not os.path.exists(FLAGS.output_dir):
+        os.makedirs(FLAGS.output_dir)
     today = datetime.date.today()
     for year in range(2006, today.year):
         print(year)
-        process(year, matches, OUTPUT_DIR)
+        process(year, matches, FLAGS.output_dir)
+
+
+if __name__ == '__main__':
+    app.run(main)
