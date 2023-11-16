@@ -32,6 +32,7 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util')
 )
 
+import file_util
 from config_map import ConfigMap
 from mcf_file_util import get_numeric_value
 
@@ -131,6 +132,7 @@ flags.DEFINE_string(
     '',
     'CSV file with existing DCIDs for generated statvars.',
 )
+flags.DEFINE_string('output_counters_file', '', 'CSV file with counters.')
 
 flags.DEFINE_bool(
     'resume',
@@ -273,6 +275,7 @@ _DEFAULT_CONFIG = {
     'header_rows': _FLAGS.header_rows,
     'header_columns': _FLAGS.header_columns,
     'parallelism': _FLAGS.parallelism,
+    'output_counters_file': _FLAGS.output_counters_file,
     'debug': _FLAGS.debug,
     'log_level': _FLAGS.log_level,
 }
@@ -295,7 +298,11 @@ def get_config_from_flags(filename: str = None) -> ConfigMap:
   if isinstance(filename, dict):
     config_dict.update(filename)
     filename = None
-  return ConfigMap(config_dict=config_dict, filename=filename)
+  else:
+    # Load config from file.
+    file_config = file_util.file_load_py_dict(filename)
+    update_config(file_config, config_dict)
+  return ConfigMap(config_dict=config_dict)
 
 
 def set_config_value(param: str, value: str, config: dict):

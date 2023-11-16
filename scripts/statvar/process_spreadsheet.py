@@ -299,6 +299,12 @@ def process_spreadsheets(
             if not ws:
               logging.fatal(f'Unable to add worksheet: schema_mcf{index}')
             data_config['output_schema_mcf'] = ws.url
+          if 'counters' not in data_sets:
+            ws = _add_worksheet(gs, title=f'counters{index}')
+            if not ws:
+              logging.fatal(f'Unable to add worksheet: counters{index}')
+            data_config['output_counters_file'] = ws.url
+
 
         # Process the sheet
         logging.info(f'Processing sheet: {data_config}')
