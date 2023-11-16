@@ -27,7 +27,7 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_dir', 'csv', 'Path to write cleaned CSVs.')
+flags.DEFINE_string('income_output_dir', 'csv', 'Path to write cleaned CSVs.')
 
 URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il'
 
@@ -120,12 +120,12 @@ def main(argv):
     with open('match_bq.csv') as f:
         reader = csv.DictReader(f)
         matches = {'dcs:' + row['fips']: 'dcs:' + row['city'] for row in reader}
-    if not os.path.exists(FLAGS.output_dir):
-        os.makedirs(FLAGS.output_dir)
+    if not os.path.exists(FLAGS.income_output_dir):
+        os.makedirs(FLAGS.income_output_dir)
     today = datetime.date.today()
     for year in range(2006, today.year):
         print(year)
-        process(year, matches, FLAGS.output_dir)
+        process(year, matches, FLAGS.income_output_dir)
 
 
 if __name__ == '__main__':
