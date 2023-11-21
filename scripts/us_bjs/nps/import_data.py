@@ -1,5 +1,5 @@
 import pandas as pd
-from preprocess_data import preprocess_df
+from .preprocess_data import preprocess_df
 from nps_statvar_writer import write_sv
 from absl import flags
 from absl import app
