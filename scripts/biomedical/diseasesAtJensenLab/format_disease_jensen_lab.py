@@ -55,6 +55,7 @@ def check_for_illegal_charc(s):
 def check_for_dcid(row):
     check_for_illegal_charc(str(row['dcid']))
     check_for_illegal_charc(str(row['GeneDcid']))
+    check_for_illegal_charc(str(row['ICD10']))
     return row
 
 def format_disease_gene_cols(df):
@@ -65,7 +66,7 @@ def format_disease_gene_cols(df):
     df['DOID'] = 'dcid:bio/' + df['DOID'].str.replace(':', '_')
     df['DOID'] = df['DOID'].replace('dcid:bio/nan', np.nan)
     df['ICD10'] = df['ICD10'].str.replace(':', '/')
-    df['DiseaseDcid'] = df['DOID'].fillna(df['ICD10'])
+    df['DiseaseDcid'] = df['DOID'].fillna('dcid:'+df['ICD10'])
     df['dcid'] = 'bio/DGA_' + df['Identifier'] + '_' + df['Gene'] + '_text_mining'
     df['dcid'] = df['dcid'].str.replace(':', '_')
     return df
@@ -92,23 +93,23 @@ def format_genes(df):
 
 def format_df(df, num):
 	if num ==1:
-		df['associationSource'] = 'bio/AssociationSourceTextMining'
+		df['associationType'] = 'bio/AssociationTypeTextMining'
 		df.update('"' +
-				  df[['Name', 'url', 'associationSource']].astype(str) + '"')
+				  df[['Name', 'url', 'associationType']].astype(str) + '"')
 		df.replace("\"nan\"", np.nan, inplace=True)
 	elif num==2:
 		df['dcid'] = df['dcid'].str.replace('text_mining', 'manual_curation')
-		df['associationSource'] = 'bio/AssociationSourceManualCuration'
+		df['associationType'] = 'bio/AssociationTypeManualCuration'
 		df.update('"' +
-				  df[['Name', 'score-db', 'associationSource']].astype(str) + '"')
+				  df[['Name', 'score-db', 'associationType']].astype(str) + '"')
 		df.replace("\"nan\"", np.nan, inplace=True)
 	else:
 		df['dcid'] = df['dcid'].str.replace('text_mining', 'experiment')
-		df['associationSource'] = 'bio/AssociationSourceExperiment'
+		df['associationType'] = 'bio/AssociationTypeExperiment'
 		df['source-score'] = df['source-score'].str.split('=')
 		df['source-score'] = np.where(df['source-score'] == df['source-score'],df['source-score'].str[1],np.nan)
 		df.update('"' +
-				  df[['Name', 'score-db', 'associationSource']].astype(str) + '"')
+				  df[['Name', 'score-db', 'associationType']].astype(str) + '"')
 		df.replace("\"nan\"", np.nan, inplace=True)
 	return df
 
@@ -177,12 +178,12 @@ def wrapper_function(df_textmining, df_manual, df_experiment):
 	df_txt, df_txt_rna = format_genes_textmining(df_textmining)
 	df_txt1, df_txt_rna1 = format_genes_knowledge(df_manual)
 	df_txt2, df_txt_rna2 = format_genes_experiment(df_experiment)
-	df_txt[0:4003718].to_csv('jensenLab-codingGenes-textmining-1.csv', doublequote=False, escapechar='\\')
-	df_txt[4003719:].to_csv('jensenLab-codingGenes-textmining-2.csv', doublequote=False, escapechar='\\')
-	df_txt_rna.to_csv('jensenLab-NonCodingGenes-textmining.csv', doublequote=False, escapechar='\\')
-	df_txt1.to_csv('jensenLab-codingGenes-manual.csv', doublequote=False, escapechar='\\')
-	df_txt_rna1.to_csv('jensenLab-NonCodingGenes-manual.csv', doublequote=False, escapechar='\\')
-	df_txt2.to_csv('jensenLab-codingGenes-experiment.csv', doublequote=False, escapechar='\\')
+	df_txt[0:4003718].to_csv('codingGenes-textmining-1.csv', doublequote=False, escapechar='\\')
+	df_txt[4003719:].to_csv('codingGenes-textmining-2.csv', doublequote=False, escapechar='\\')
+	df_txt_rna.to_csv('nonCodingGenes-textmining.csv', doublequote=False, escapechar='\\')
+	df_txt1.to_csv('codingGenes-manual.csv', doublequote=False, escapechar='\\')
+	df_txt_rna1.to_csv('nonCodingGenes-manual.csv', doublequote=False, escapechar='\\')
+	df_txt2.to_csv('experiment.csv', doublequote=False, escapechar='\\')
 
 def main():
 	df_textmining = pd.read_csv('human_disease_textmining_full.tsv', sep = '\t', header=None)
