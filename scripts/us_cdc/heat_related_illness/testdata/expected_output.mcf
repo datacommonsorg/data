@@ -1,3 +1,12 @@
+Node: dcid:Count_MedicalConditionIncident_SummerSeason_ConditionHeatStress_PatientDeceased
+populationType: dcs:MedicalConditionIncident
+medicalStatus: dcs:PatientDeceased
+medicalCondition: dcs:HeatStress
+climaticSeason: dcs:SummerSeason
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+
 Node: dcid:Count_MedicalConditionIncident_0To4Years_SummerSeason_Male_ConditionHeatStress_VisitedEmergencyDepartment
 populationType: dcs:MedicalConditionIncident
 medicalStatus: dcs:VisitedEmergencyDepartment
@@ -217,13 +226,4 @@ statType: dcs:measuredValue
 typeOf: dcs:StatisticalVariable
 age: [65 - Years]
 gender: dcs:Female
-
-Node: dcid:Count_MedicalConditionIncident_SummerSeason_ConditionHeatStress_PatientDeceased
-populationType: dcs:MedicalConditionIncident
-medicalStatus: dcs:PatientDeceased
-medicalCondition: dcs:HeatStress
-climaticSeason: dcs:SummerSeason
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-typeOf: dcs:StatisticalVariable
 
