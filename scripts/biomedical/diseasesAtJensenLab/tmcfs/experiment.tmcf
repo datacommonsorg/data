@@ -5,10 +5,10 @@ diseaseOntologyID: C:experiment->DOID
 icd10CMCode: E:experiment->E2
 geneID: E:experiment->E3
 associationType: C:experiment->associationType
-associationSourceDatabase: C:experiment->score-db
-associationSourceScore: C:experiment->source-score
-associationConfidenceScore: C:experiment->confidence
-synonyms: C:experiment->synonym
+associationSource: C:experiment->score-db
+zScore: C:experiment->source-score
+confidence: C:experiment->confidence
+synonym: C:experiment->synonym
 
 Node: E:experiment->E2
 typeOf: dcs:ICD10Code
