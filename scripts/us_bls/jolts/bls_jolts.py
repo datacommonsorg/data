@@ -18,7 +18,7 @@ then combined and cleaned.
 
 Statistical Variables are generated and cleaned CSV is output.
 
-Download the requirements.txt via pip and execute the file with Python 3.
+Download the requirements_all.txt via pip and execute the file with Python 3.
 
 Dataset being processed: https://download.bls.gov/pub/time.series/jt/
 """
