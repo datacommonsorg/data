@@ -21,7 +21,7 @@ import json
 import pandas as pd
 
 # Read csv from source csv
-df = pd.read_csv('REGION_DEMOGR_life_expectancy_and_mortality.csv')
+df = pd.read_csv('REGION_DEMOGR_life_expectancy_and_mortality.csv',low_memory=False)
 df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 # First remove geos with names that we don't have mappings to dcid for.
 regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))

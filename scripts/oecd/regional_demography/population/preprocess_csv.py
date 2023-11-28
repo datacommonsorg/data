@@ -28,7 +28,6 @@ import pandas as pd
 # Process the dataset.
 ag_df = []
 df1 = pd.read_csv("REGION_DEMOGR_population.csv",
-                  sep='\t',
                   low_memory=False,
                   index_col=None,
                   header=0)
