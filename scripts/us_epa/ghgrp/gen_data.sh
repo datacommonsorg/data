@@ -4,7 +4,7 @@
 pushd ../../../
 python3 -m venv .env
 source .env/bin/activate
-pip3 install -r requirements.txt -q
+pip3 install -r requirements_all.txt -q
 popd
 
 # Generate schema to import_data/
