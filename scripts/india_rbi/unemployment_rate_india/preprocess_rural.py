@@ -107,6 +107,7 @@ FINANCIAL_YEAR_TO_OBSERVATION_DATE_MAPPING = {
     "2018-19": "2019-03"
 }
 
+
 class UnempolymentRateIndiaLoader:
     COLUMN_HEADERS = ["territory", "value", "period", "statisticalVariable"]
 
@@ -152,18 +153,17 @@ class UnempolymentRateIndiaLoader:
             df = pd.DataFrame()
             if period_column_name in list(self.raw_df.columns.values):
                 df = self.raw_df[["State/Union Territory", period_column_name]]
-            # Its for the financial year. For example 1993-94 means
-            # One year period from 1993-04-01 to 1994-03-31
-            # Which is same as 1994-03, with period "PY1"
-            ##apply function  added 20230803
+                # Its for the financial year. For example 1993-94 means
+                # One year period from 1993-04-01 to 1994-03-31
+                # Which is same as 1994-03, with period "PY1"
+                ##apply function  added 20230803
                 df["period"] = FINANCIAL_YEAR_TO_OBSERVATION_DATE_MAPPING[
-                    period_column_name]            
+                    period_column_name]
                 df["statisticalVariable"] = self.statisticalVariable
-            #print(df.head(2))
-            # Rename columns
+                #print(df.head(2))
+                # Rename columns
                 df.columns = self.COLUMN_HEADERS
                 self.clean_df = self.clean_df.append(df, ignore_index=True)
-            
 
         self._make_column_numerical("value")
         # Setup place ISO codes
