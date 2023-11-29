@@ -21,6 +21,35 @@ __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 DISTRICTS_MAPPING_CSV = os.path.join(os.path.dirname(__file__),
                                      "LocalGovernmentDirectory_Districts.csv")
 
+# Some districts have entirely different names over time or in some datasets.
+# Even the closestDistrictLabel can't be used for mapping these districts.
+# We will use this to map them to resolve it when all other options fail.
+#
+# This is used for mapping them. Format of the dictionary
+# is defined below
+# ALTERNATIVE_NAMES_MAPPING = {
+#     "state_lgd_code": {
+#         "district_lgd_code" : ["alt name1","alt name2"],
+#     }
+# }
+#
+
+ALTERNATIVE_NAMES_MAPPING = {
+    "11": {
+        "225": ["east sikkim", "east district", "gangtok"],
+        "226": ["north sikkim", "north district", "mangan"],
+        "227": ["south sikkim", "south district", "namchi"],
+        "228": ["west sikkim", "west district", "gyalshing"]
+    },
+    "03": {
+        "031": ["firozpur", "ferozepore", "firozepur"]
+    },
+    "36": {
+        "686": ["warangal urban", "hanumakonda"],
+        "522": ["warangal rural", "warangal"]
+    }
+}
+
 
 class IndiaDistrictsMapper:
     """Class for resolving various mappings for Indian districts """
@@ -66,6 +95,15 @@ class IndiaDistrictsMapper:
         if len(df_districts.index) == 1:
             return list(df_districts["LGDDistrictCode"])[0]
 
+        # May be name is completely different now
+        if state_lgd_code in ALTERNATIVE_NAMES_MAPPING:
+            district_name_alternatives = ALTERNATIVE_NAMES_MAPPING[
+                state_lgd_code]
+            for key, values in district_name_alternatives.items():
+                if district_name in values:
+                    return key
+
         # This shouldn't happen
-        raise Exception("District name - {district_name} is not found".format(
-            district_name=district_name))
+        raise Exception(
+            "{state_name} - District name - {district_name} is not found".
+            format(district_name=district_name, state_name=state_name))
