@@ -47,7 +47,8 @@ It has the following columns
 - [UnemploymentRate_India_StatisticalVariables.tmcf](UnemploymentRate_India_StatisticalVariables.tmcf).
 
 #### Scripts
-- [preprocess.py](preprocess.py): Clean up and import script.
+-[preprocess_rural.py](preprocess_rural.py): Clean up and import script.
+-[preprocess_urban.py](preprocess_urban.py): Clean up and import script.
 
 
 ### Running Tests
@@ -60,4 +61,8 @@ python3 -m unittest discover -v -s scripts/ -p *_test.py
 
 The below script will generate csv file.
 
-`python -m india_rbi.unemployment_rate_india.preprocess`
+`python -m india_rbi.unemployment_rate_india.preprocess_rural`
+`python -m india_rbi.unemployment_rate_india.preprocess_urban`
+
+
+Note: Preprocess.py is splited into two scripts based on urban and rural data set.
