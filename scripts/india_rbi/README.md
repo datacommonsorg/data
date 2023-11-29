@@ -5,3 +5,6 @@
 
 ## State-wise Unemployment Rate: Usual Status (Adjusted)
 - Refer the read me inside [unemployment_rate_india](./unemployment_rate_india/README.md) folder.
+
+
+Note: prerocess.py has been divided into two seperate scripts depending on the rural and urban dataset. 

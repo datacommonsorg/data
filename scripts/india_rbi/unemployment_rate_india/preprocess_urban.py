@@ -84,29 +84,17 @@ INDIA_ISO_CODES = {
 }
 
 DATASETS = [{
-    "data_file": "T_13091EFB2ADFEA47CAA069BEE53BD82F14.xlsx",
+    "data_file": "16T_191120227736B67118DF4738B877149AD2AC57B3.xlsx",
     "sheet_no": 0,
     "statisticalVariable": "dcs:UnemploymentRate_Person_Urban_Male"
 }, {
-    "data_file": "T_13091EFB2ADFEA47CAA069BEE53BD82F14.xlsx",
+    "data_file": "16T_191120227736B67118DF4738B877149AD2AC57B3.xlsx",
     "sheet_no": 1,
     "statisticalVariable": "dcs:UnemploymentRate_Person_Urban_Female"
 }, {
-    "data_file": "T_13091EFB2ADFEA47CAA069BEE53BD82F14.xlsx",
+    "data_file": "16T_191120227736B67118DF4738B877149AD2AC57B3.xlsx",
     "sheet_no": 2,
     "statisticalVariable": "dcs:UnemploymentRate_Person_Urban"
-}, {
-    "data_file": "T_123C6CE499AEFB461E8242E14098242CA5.xlsx",
-    "sheet_no": 0,
-    "statisticalVariable": "dcs:UnemploymentRate_Person_Rural_Male"
-}, {
-    "data_file": "T_123C6CE499AEFB461E8242E14098242CA5.xlsx",
-    "sheet_no": 1,
-    "statisticalVariable": "dcs:UnemploymentRate_Person_Rural_Female"
-}, {
-    "data_file": "T_123C6CE499AEFB461E8242E14098242CA5.xlsx",
-    "sheet_no": 2,
-    "statisticalVariable": "dcs:UnemploymentRate_Person_Rural"
 }]
 
 FINANCIAL_YEAR_TO_OBSERVATION_DATE_MAPPING = {
@@ -116,9 +104,10 @@ FINANCIAL_YEAR_TO_OBSERVATION_DATE_MAPPING = {
     "2009-10": "2010-03",
     "2011-12": "2012-03",
     "2017-18": "2018-03",
-    "2018-19": "2019-03"
+    "2018-19": "2019-03",
+    "2019-20": "2020-03",
+    "2020-21": "2021-03"
 }
-
 
 class UnempolymentRateIndiaLoader:
     COLUMN_HEADERS = ["territory", "value", "period", "statisticalVariable"]
@@ -135,12 +124,13 @@ class UnempolymentRateIndiaLoader:
         # Column headers in row 3, grab them
         headers = df.iloc[3]
 
-        # The actual data is between the 4th and 41st row
-        df = df.iloc[4:40]
+        # The actual data is between the 4th and 43rd row
+        df = df.iloc[4:42]
 
         # Set the headers as df column name
         df.columns = headers
         self.raw_df = df
+        print(list(df.columns.values))
 
     def _setup_location(self):
         self.clean_df["territory"] = self.clean_df["territory"].apply(
@@ -160,19 +150,23 @@ class UnempolymentRateIndiaLoader:
 
         for period_column_name in [
                 "1993-94", "1999-00", "2004-05", "2009-10", "2011-12",
-                "2017-18", "2018-19"
+                "2017-18", "2018-19", "2019-20", "2020-21"
         ]:
             df = pd.DataFrame()
-            df = self.raw_df[["State/Union Territory", period_column_name]]
+            if period_column_name in list(self.raw_df.columns.values):
+                df = self.raw_df[["State/Union Territory", period_column_name]]
             # Its for the financial year. For example 1993-94 means
             # One year period from 1993-04-01 to 1994-03-31
             # Which is same as 1994-03, with period "PY1"
-            df["period"] = FINANCIAL_YEAR_TO_OBSERVATION_DATE_MAPPING[
-                period_column_name]
-            df["statisticalVariable"] = self.statisticalVariable
+            ##apply function  added 20230803
+                df["period"] = FINANCIAL_YEAR_TO_OBSERVATION_DATE_MAPPING[
+                    period_column_name]            
+                df["statisticalVariable"] = self.statisticalVariable
+            #print(df.head(2))
             # Rename columns
-            df.columns = self.COLUMN_HEADERS
-            self.clean_df = self.clean_df.append(df, ignore_index=True)
+                df.columns = self.COLUMN_HEADERS
+                self.clean_df = self.clean_df.append(df, ignore_index=True)
+            
 
         self._make_column_numerical("value")
         # Setup place ISO codes
@@ -199,7 +193,7 @@ def main():
     # If the final output csv already exists
     # Remove it, so it can be regenerated
     csv_file_path = os.path.join(os.path.dirname(__file__),
-                                 "./UnemploymentRate_India.csv")
+                                 "./UnemploymentRate_India_urban.csv")
     if path.exists(csv_file_path):
         os.remove(csv_file_path)
 
