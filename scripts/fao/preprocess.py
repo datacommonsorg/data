@@ -39,6 +39,10 @@ DISSOLVED_COUNTRIES = {
     "'200": 'CSK',
     "'530": 'NLD',
     "'736": 'SDN',
+    "'230": 'ETH',
+    "'810": 'SUN',
+    "'886": 'YEM',
+    "'720": 'YEM',
     "'890": 'YUG'
 }
 
@@ -70,6 +74,9 @@ with open(INPUT_CSV_FILENAME, 'r', encoding='ISO-8859-1') as csv_in:
             else:
                 pycountry_decoded = pycountry.countries.get(
                     numeric=row_dict['Area Code (M49)'].replace("\'", ""))
+                if pycountry_decoded is None:
+                    print(row_dict)
+                    continue
                 country_iso += pycountry_decoded.alpha_3
             processed_dict['Country'] = country_iso
 
