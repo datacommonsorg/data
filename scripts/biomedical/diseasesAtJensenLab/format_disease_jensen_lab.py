@@ -75,14 +75,14 @@ def format_RNA_type(df_tm):
 	gene_list = ['orf', 'ZNF']
 	sno_rna_list = ['sno', 'SNOR', 'SCAR']
 	linc_rna_list = ['LINC', 'linc', 'MIR']
-	df_tm['RNA_type'] = 'NonCodingRNATypeLongNonCodingRNA'
+	df_tm['RNA_type'] = 'dcs:NonCodingRNATypeLongNonCodingRNA'
 	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('|'.join(gene_list)),'Gene', df_tm['RNA_type'])
-	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('rRNA'),'NonCodingRNATypeRibosomalRNA', df_tm['RNA_type'])
-	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('|'.join(linc_rna_list)),'NonCodingRNATypeLongIntergenicNonCodingRNA', df_tm['RNA_type'])
-	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('|'.join(sno_rna_list)),'NonCodingRNATypeSmallNucleolarRNA', df_tm['RNA_type'])
-	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('miR'),'NonCodingRNATypeMicroRNA', df_tm['RNA_type'])
-	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('circ'),'NonCodingRNATypeCircularRNA', df_tm['RNA_type'])
-	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('pRNA'),'NonCodingRNATypePromoterAssociatedRNA', df_tm['RNA_type'])
+	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('rRNA'),'dcs:NonCodingRNATypeRibosomalRNA', df_tm['RNA_type'])
+	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('|'.join(linc_rna_list)),'dcs:NonCodingRNATypeLongIntergenicNonCodingRNA', df_tm['RNA_type'])
+	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('|'.join(sno_rna_list)),'dcs:NonCodingRNATypeSmallNucleolarRNA', df_tm['RNA_type'])
+	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('miR'),'dcs:NonCodingRNATypeMicroRNA', df_tm['RNA_type'])
+	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('circ'),'dcs:NonCodingRNATypeCircularRNA', df_tm['RNA_type'])
+	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('pRNA'),'dcs:NonCodingRNATypePromoterAssociatedRNA', df_tm['RNA_type'])
 	return df_tm
 
 def format_genes(df):
