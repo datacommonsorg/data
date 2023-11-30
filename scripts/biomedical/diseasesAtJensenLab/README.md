@@ -17,7 +17,7 @@
 
 ## About the Dataset
 
-[The Diseases at Jensen Lab](https://diseases.jensenlab.org/About) is a "weekly updated web resource that integrates evidence on disease-gene associations from automatic text mining, manually curated literature, cancer mutation data, and genome-wide association studies." The data has evidence with confidence scores that facilitate comparison of the different types and sources of evidence.
+[The DISEASES at Jensen Lab](https://diseases.jensenlab.org/About) is a "weekly updated web resource that integrates evidence on disease-gene associations from automatic text mining, manually curated literature, cancer mutation data, and genome-wide association studies." The data has evidence with confidence scores that facilitate comparison of the different types and sources of evidence.
 
 ### Download Data
 
@@ -45,9 +45,13 @@ This dataset is under a Creative Commons CC BY license.
 
 #### Scripts
 
+##### Bash Script
+
+[`run.sh`](run.sh) downloads the experimental, manually curated, and text mining data from DISEASES at Jensen Lab and converts it into csv files formatted for import into the Data Commons knowledge graph.
+
 ##### Python Script
 
-[`format_disease_jensen_lab.py`](format_disease_jensen_lab.py) parses the raw .tsv files with Diseases at Jensen Lab into well formatted .csv files with generated dcids.
+[`format_disease_jensen_lab.py`](format_disease_jensen_lab.py) parses the raw .tsv files with DISEASES at Jensen Lab into well formatted csv files with generated dcids.
 
 #### Files
 
