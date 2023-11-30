@@ -1,6 +1,6 @@
 Node: E:codingGenes-manual->E1
 typeOf: dcs:DiseaseGeneAssociation
-dcid: C:codingGenes-manual>dcid	
+dcid: C:codingGenes-manual->dcid	
 diseaseOntologyID: C:codingGenes-manual->DOID	
 icd10CMCode: C:codingGenes-manual->ICD10
 geneID: C:codingGenes-manual->GeneDcid
