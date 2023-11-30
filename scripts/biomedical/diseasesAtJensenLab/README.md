@@ -53,15 +53,15 @@ This dataset is under a Creative Commons CC BY license.
 
 ##### tMCF File
 
-[`codingGenes_manual.tmcf`](tmcfs/codingGenes_manual.tmcfatc_output.tmcf) contains the tmcf mapping to the csv of coding genes curated manually.
+[`codingGenes-manual.tmcf`](tmcfs/codingGenes-manual.tmcf) contains the tmcf mapping to the csv of coding genes curated manually.
 
-[`nonCodingGenes_manual.tmcf`](tmcfs/nonCodingGenes_manual.tmcf) contains the tmcf mapping to the csv of non-coding genes curated manually.
+[`nonCodingGenes-manual.tmcf`](tmcfs/nonCodingGenes-manual.tmcf) contains the tmcf mapping to the csv of non-coding genes curated manually.
 
-[`codingGenes_textmining.tmcf`](tmcfs/codingGenes_textmining.tmcf) contains the tmcf mapping to the csv of coding genes using textmining.
+[`codingGenes-textMining.tmcf`](tmcfs/codingGenes-textMining.tmcf) contains the tmcf mapping to the csv of coding genes using textmining.
 
-[`nonCodingGenes_textmining.tmcf`](tmcfs/nonCodingGenes_textmining.tmcf) contains the tmcf mapping to the csv of non-coding genes using textmining.
+[`nonCodingGenes-textMining.tmcf`](tmcfs/nonCodingGenes-textMining.tmcf) contains the tmcf mapping to the csv of non-coding genes using textmining.
 
-[`genes-experiment.tmcf`](tmcfs/genes-experiment.tmcf) contains the tmcf mapping to the csv of coding genes curated experimentally.
+[`experiment.tmcf`](tmcfs/experiment.tmcf) contains the tmcf mapping to the csv of coding genes curated experimentally.
 
 ### Example
 
