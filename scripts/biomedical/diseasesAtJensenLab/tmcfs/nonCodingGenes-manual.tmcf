@@ -1,0 +1,21 @@
+Node: E:nonCodingGenes-manual->E1
+typeOf: dcs:DiseaseGeneAssociation
+dcid: C:nonCodingGenes-manual->dcid	
+diseaseOntologyID: C:nonCodingGenes-manual->DOID	
+icd10CMCode: C:nonCodingGenes-manual->ICD10
+geneID: C:nonCodingGenes-manual->GeneDcid
+associationType: C:nonCodingGenes-manual->associationType
+associationSource: C:nonCodingGenes-manual->score-db
+confidence: C:nonCodingGenes-manual->confidence
+synonym: C:nonCodingGenes-manual->synonym
+
+Node: E:nonCodingGenes-manual->E2
+typeOf: dcs:ICD10Code
+dcid: C:nonCodingGenes-manual->ICD10
+name: C:nonCodingGenes-manual->Name
+
+Node: E:nonCodingGenes-manual->E3
+typeOf: dcs:NonCodingRNA
+dcid: C:nonCodingGenes-manual->GeneDcid
+name: C:nonCodingGenes-manual->Gene
+nonCodingRNAType: C:nonCodingGenes-manual->RNA_type
