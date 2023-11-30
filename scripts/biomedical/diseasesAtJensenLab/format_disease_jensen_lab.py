@@ -93,19 +93,19 @@ def format_genes(df):
 
 def format_df(df, num):
 	if num ==1:
-		df['associationType'] = 'bio/AssociationTypeTextMining'
+		df['associationType'] = 'dcs:AssociationTypeTextMining'
 		df.update('"' +
 				  df[['Name', 'url', 'associationType']].astype(str) + '"')
 		df.replace("\"nan\"", np.nan, inplace=True)
 	elif num==2:
 		df['dcid'] = df['dcid'].str.replace('text_mining', 'manual_curation')
-		df['associationType'] = 'bio/AssociationTypeManualCuration'
+		df['associationType'] = 'dcs:AssociationTypeManualCuration'
 		df.update('"' +
 				  df[['Name', 'score-db', 'associationType']].astype(str) + '"')
 		df.replace("\"nan\"", np.nan, inplace=True)
 	else:
 		df['dcid'] = df['dcid'].str.replace('text_mining', 'experiment')
-		df['associationType'] = 'bio/AssociationTypeExperiment'
+		df['associationType'] = 'dcs:AssociationTypeExperiment'
 		df['source-score'] = df['source-score'].str.split('=')
 		df['source-score'] = np.where(df['source-score'] == df['source-score'],df['source-score'].str[1],np.nan)
 		df.update('"' +
