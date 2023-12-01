@@ -16,7 +16,7 @@ import csv
 import os
 import pandas as pd
 import unittest
-from india_lgd.local_government_directory_districts.preprocess import LocalGovermentDirectoryDistrictsDataLoader
+from scripts.india_lgd.local_government_directory_districts.preprocess import LocalGovermentDirectoryDistrictsDataLoader
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

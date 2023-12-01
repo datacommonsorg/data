@@ -18,8 +18,8 @@ import os
 import csv
 import difflib
 import pandas as pd
-from india.geo.states import IndiaStatesMapper
-from india.formatters import CodeFormatter
+from scripts.india.geo.states import IndiaStatesMapper
+from scripts.india.formatters import CodeFormatter
 # Some of the names don't match correctly while using
 # difflib library. This is used to force the match manually.
 
