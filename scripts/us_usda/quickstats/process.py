@@ -64,14 +64,17 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string(_USDA_API_KEY, None, 'USDA quickstats API key.')
 flags.DEFINE_integer(
     'start_year',
-    os.getenv('start_year', 2000),
-    'Year from whihc data is processed.',
+    os.getenv('start_year',
+              datetime.now().year),
+    'Year from which data is processed.',
 )
 flags.DEFINE_integer(
     'num_counties',
-    os.getenv('num_counties', 5000),
+    os.getenv('num_counties', 100),
     'number of counties for which data is processed.',
 )
+flags.DEFINE_string('output_dir', 'output',
+                    'Output firectory for generated files.')
 
 
 def process_survey_data(year, svs, out_dir):
@@ -295,7 +298,7 @@ def get_multiple_years():
     start = datetime.now()
     print('Start', start)
 
-    out_dir = 'output'
+    out_dir = _FLAGS.output_dir
     svs = load_svs()
     years = range(_FLAGS.start_year, datetime.now().year + 1)
     for year in years:
