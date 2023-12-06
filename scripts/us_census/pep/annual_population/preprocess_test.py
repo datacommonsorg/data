@@ -49,13 +49,15 @@ class TestPreprocess(unittest.TestCase):
                 for file in sorted(os.listdir(files_dir))
             ]
         with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_dir = "/usr/local/google/home/shamimansari/datarefresh/data/scripts/us_census/pep/annual_population/test_data/created_by_shamim"
             cleaned_csv_file_path = os.path.join(tmp_dir,
                                                  "test_output_data.csv")
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+            print(tmp_dir)
 
-            process(test_files, cleaned_csv_file_path, mcf_file_path,
-                    tmcf_file_path)
+            # process(test_files, cleaned_csv_file_path, mcf_file_path,
+            #         tmcf_file_path)
 
             with open(mcf_file_path, encoding="UTF-8") as mcf_file:
                 self._actual_mcf_data = mcf_file.read()
@@ -105,6 +107,7 @@ class TestPreprocess(unittest.TestCase):
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
-
+        print("Shamim test ")
+        print(str(self._actual_csv_data))
         self.assertEqual(expected_csv_data.strip(),
                          self._actual_csv_data.strip())

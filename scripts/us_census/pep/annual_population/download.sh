@@ -9,6 +9,7 @@ mkdir -p ./input_files/1990_1999/city/
 mkdir -p ./input_files/2000_2009/city/
 mkdir -p ./input_files/2010_2019/city/
 mkdir -p ./input_files/2020_2021/city/
+mkdir -p ./input_files/2020_2022/city/
 
 mkdir -p ./input_files/1970_1979/county/
 mkdir -p ./input_files/1980_1989/county/
@@ -16,12 +17,14 @@ mkdir -p ./input_files/1990_1999/county/
 mkdir -p ./input_files/2000_2009/county/
 mkdir -p ./input_files/2010_2020/county/
 mkdir -p ./input_files/2021/county/
+mkdir -p ./input_files/2020_2022/county/
 
 mkdir -p ./input_files/1900_1989/state/
 mkdir -p ./input_files/1990_1999/state/
 mkdir -p ./input_files/2000_2009/state/
 mkdir -p ./input_files/2010_2020/state/
 mkdir -p ./input_files/2021/state/
+mkdir -p ./input_files/2020_2022/state/
 
 mkdir -p ./input_files/1900_1979/national/
 mkdir -p ./input_files/1980_1989/national/
@@ -29,6 +32,7 @@ mkdir -p ./input_files/1990_1999/national/
 mkdir -p ./input_files/2000_2009/national/
 mkdir -p ./input_files/2010_2020/national/
 mkdir -p ./input_files/2021/national/
+mkdir -p ./input_files/2020_2022/national/
 
 mkdir -p ./output_files/
 
@@ -54,6 +58,12 @@ for file in $(cat download_city_2020_2021.txt)
 do
     $(curl https://www2.census.gov/programs-surveys/popest/datasets/2020-2021/cities/totals/${file} \
           -o ./input_files/2020_2021/city/${file})
+done
+
+for file in $(cat download_city_2020_2022.txt)
+do
+$(curl https://www2.census.gov/programs-surveys/popest/datasets/2020-2022/cities/totals/${file} \
+-o ./input_files/2020_2022/city/${file})
 done
 
 for file in $(cat download_county_1970_1979.txt)
@@ -92,6 +102,12 @@ do
           -o ./input_files/2021/county/${file})
 done
 
+for file in $(cat download_county_2020_2022.txt)
+do
+    $(curl https://www2.census.gov/programs-surveys/popest/datasets/2020-2022/counties/totals/${file} \
+    -o ./input_files/2020_2022/county/${file})
+done
+
 for file in $(cat download_state_1900_1989.txt)
 do
     $(curl https://www2.census.gov/programs-surveys/popest/tables/1980-1990/state/asrh/${file} \
@@ -120,6 +136,12 @@ for file in $(cat download_state_2021.txt)
 do
     $(curl https://www2.census.gov/programs-surveys/popest/tables/2020-2021/state/totals/${file} \
           -o ./input_files/2021/state/${file})
+done
+
+for file in $(cat download_state_2020_2022.txt)
+do
+    $(curl https://www2.census.gov/programs-surveys/popest/tables/2020-2022/state/totals/${file} \
+    -o ./input_files/2020_2022/state/${file})
 done
 
 for file in $(cat download_national_1900_1979.txt)
@@ -157,4 +179,10 @@ for file in $(cat download_national_2021.txt)
 do
     $(curl https://www2.census.gov/programs-surveys/popest/tables/2020-2021/state/totals/${file} \
           -o ./input_files/2021/national/${file})
+done
+
+for file in $(cat download_national_2020_2022.txt)
+do
+$(curl https://www2.census.gov/programs-surveys/popest/datasets/2020-2022/state/totals/${file} \
+  -o ./input_files/2020_2022/national/${file})
 done
