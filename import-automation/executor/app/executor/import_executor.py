@@ -635,7 +635,8 @@ def _run_with_timeout_async(args: List[str],
   """
     try:
         logging.info(
-            f'Launching async command: {args} with timeout {timeout} in {cwd}')
+            f'Launching async command: {args} with timeout {timeout} in {cwd}, env: {env}'
+        )
         start_time = time.time()
         stdout = []
         stderr = []
