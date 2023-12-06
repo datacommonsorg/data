@@ -157,7 +157,7 @@ def tmcf_from_row(row, index, statvar_dcid, unit):
     # "Field Name" in the data dictionary holds the name of the column in the data CSV
     tmcf = TMCF_FORMAT.format(index=index,
                               statvar_dcid=statvar_dcid,
-                              obs_date=row["Version ISO8601"],
+                              obs_date=row["NRI_VER"],
                               field_name=row["Field Name"])
 
     if unit is not None and unit:
@@ -466,7 +466,7 @@ def generate_schema_and_tmcf_from_file(input_data_dictionary,
     logging.info(
         f"[info] ignoring {len(IGNORED_FIELDS)} fields in NRIDataDictionary")
     dd = dd[~dd["Field Name"].isin(IGNORED_FIELDS)]
-    dd["Version ISO8601"] = pd.to_datetime(dd["Version"]).dt.strftime('%Y-%m')
+    dd["NRI_VER"] = pd.to_datetime(dd["Version Date"]).dt.strftime('%Y-%m')
     dd = dd.reset_index()
 
     extracted_properties = []
