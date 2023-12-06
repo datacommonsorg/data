@@ -817,21 +817,14 @@ def _process_cities(file_path: str) -> pd.DataFrame:
                                 file_format="csv",
                                 header=0,
                                 encoding="ISO-8859-1")
-        #encoding="ISO-8859-1"
-        print(f"Input file is : {file_path}")
-        print(f"column list : {data_df.columns.to_list}")
         data_df = data_df[data_df["SUMLEV"] == 162]
-        print("After SUMLEV 162===============================")
         data_df['STATE'] = data_df['STATE'].astype('str').str.pad(2,
                                                                   side='left',
                                                                   fillchar='0')
-        print("STATE========" + str(data_df['STATE']))
         data_df['PLACE'] = data_df['PLACE'].astype('str').str.pad(5,
                                                                   side='left',
                                                                   fillchar='0')
-        print("PLACE========" + str(data_df['PLACE']))
         data_df["Location"] = "geoId/" + data_df["STATE"] + data_df["PLACE"]
-        print("Location========" + str(data_df['Location']))
         if "sub-est2010-alt" == file_name_without_ext:
             key = "POPESTIMATE07"
             pop_cols = [
