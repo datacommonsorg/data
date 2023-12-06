@@ -1,6 +1,6 @@
 Node: E:GHGRP->E0
 typeOf: dcs:StatVarObservation
-observationAbout: C:GHGRP->dcid
+observationAbout: C:GHGRP->location
 variableMeasured: C:GHGRP->sv
 observationDate: C:GHGRP->year
 observationPeriod: "P1Y"
