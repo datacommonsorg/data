@@ -1,0 +1,5 @@
+Node: dcid:Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
