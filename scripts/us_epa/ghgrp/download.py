@@ -22,13 +22,19 @@ import pandas as pd
 import requests
 import zipfile
 import configparser
+import sys
 
 #DOWNLOAD_URI = 'https://www.epa.gov/sites/default/files/2020-11/2019_data_summary_spreadsheets.zip'
 #DOWNLOAD_URI = 'https://www.epa.gov/system/files/other-files/2022-10/2021_data_summary_spreadsheets.zip'
 
+file_directry = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+file_directry_str = str(file_directry) + '/config.txt'
+print(">>>>>>>>>>>>", file_directry_str)
 #Moved the download URL to config.txt file and reading from there
 config = configparser.ConfigParser()
-config.readfp(open(r'config.txt'))
+#config.readfp(open(r'config.txt'))
+file_content = open(file_directry_str, "r")
+config.readfp(file_content)
 DOWNLOAD_URI = config.get('downloadUrl', 'DOWNLOAD_URI')
 
 #YEAR_DATA_FILENAME = 'ghgp_data_{year}.xlsx'
