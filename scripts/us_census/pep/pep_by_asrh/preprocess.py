@@ -302,7 +302,6 @@ def _load_data_df(path: str,
     elif file_format.lower() in ["xls", "xlsx"]:
         data_df = pd.read_excel(path, header=header, engine='openpyxl')
         #data_df = pd.read_excel(path, header=1, engine='openpyxl')
-        print("=============inside _load_data_df" + str(path))
     data_df = _convert_to_int(data_df)
     return data_df
 
@@ -807,7 +806,6 @@ def _process_state_2010_2020(file_path: str) -> pd.DataFrame:
     # SKipping Sex: 0, Origin: 0 which represents Total Count
     data_df = data_df[(data_df["SEX"] != 0) &
                       (data_df["ORIGIN"] != 0)].reset_index(drop=True)
-    print("===========Shamim test========" + file_path)
     # Creating GeoId"s for State FIPS Code
     # Before padding STATE = 6, After padding STATE = 06
     data_df["STATE"] = "geoId/" + data_df["STATE"].astype("str").str.pad(
@@ -910,7 +908,6 @@ def _process_state_2020_2022(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Cleaned DataFrame
     """
     data_df = _load_data_df(path=file_path, file_format="csv", header=0)
-    print("==========inside 2020-2022======" + str(data_df))
     # SKipping Sex: 0, Origin: 0 which represents Total Count
     data_df = data_df[(data_df["SEX"] != 0) &
                       (data_df["ORIGIN"] != 0)].reset_index(drop=True)
@@ -1206,7 +1203,6 @@ def _process_county_2000_2022(file_path: str,
     data_df = data_df[(~data_df["YEAR"].isin(county_conf["exclude_year"])) & (
         data_df["AGEGRP"] != county_conf["exclude_age_grp"])].reset_index(
             drop=True)
-    print("==================Inside  _process_county_2000_2022 " + file_path)
     if "replace_year_from" in county_conf.keys():
         data_df["YEAR"] = data_df["YEAR"].astype("str").str.replace(
             county_conf["replace_year_from"],
@@ -1366,7 +1362,6 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
         elif "cc-est2022-all" in file_path:
             data_df = _process_county_2000_2022(file_path,
                                                 _COUNTY_2020_2022_INFO)
-            print("==========File_Path  " + file_path)
         data_df = _convert_to_int(data_df)
 
         data_df.to_csv(cleaned_csv_file_path,
