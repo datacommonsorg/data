@@ -201,6 +201,10 @@ def _process_geo_level_aggregation():
             '2010_2020/county/', 'county_2010_2020.csv', '2010_2020/state/',
             'state_2010_2020.csv', 'state'
         ],
+        'state_2020_2022': [
+            '2020_2022/county/', 'county_2020_2022.csv', '2020_2022/state/',
+            'state_2020_2022.csv', 'state'
+        ],
         'national_1980_1990': [
             '1980_1990/state/', 'state_1980_1990.csv', '1980_1990/national/',
             'national_1980_1990.csv', 'national'
@@ -627,6 +631,77 @@ def _process_county_files_2010_2020(download_dir):
     df1.to_csv(output_file_path + output_file_name, header=True, index=False)
 
 
+def _process_county_files_2020_2022(download_dir):
+    """
+    Process County files 2010 2020.
+    This method generates files for SV available as-is in source 
+    file and aggregated SV by adding relevant stats 
+    e.g., NH = NH_MALE + NH_FEMALE.
+
+    Args:
+      download_dir: download directory - input files are saved here.
+    """
+    input_file_path = _CODEDIR + download_dir + '2020_2022/county/'
+    output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '2020_2022/county/'
+    output_file_name = 'county_2020_2022.csv'
+    files_list = os.listdir(input_file_path)
+    files_list.sort()
+
+    for file in files_list:
+        df = pd.read_csv(input_file_path + file,
+                         encoding='ISO-8859-1',
+                         low_memory=False)
+        # filter by agegrp = 0 (0 = sum of all age group added)
+        # filter years 3 - 13 (1, 2 - is base estimate and not for month July)
+        df = df.query("AGEGRP == 0 & YEAR not in [1]").copy()
+
+        # convert year code to year
+        # Year code starting from 3 for Year 2010
+        df['YEAR'] = df['YEAR'] + 2020 - 2
+
+        # add fips code for location
+        df.insert(6, 'LOCATION', 'geoId/', True)
+        df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
+            df['COUNTY'].map(str)).str.zfill(3)
+
+        # drop not reuqire columns
+        df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+                axis=1,
+                inplace=True)
+
+        if file == files_list[0]:
+            df.to_csv(output_file_path + output_file_name, index=False)
+        else:
+            df.to_csv(output_file_path + output_file_name,
+                      index=False,
+                      mode='a')
+
+    # Section 2 - Writing Agg data
+    df = pd.read_csv(output_file_path + output_file_name)
+    output_file_path = _CODEDIR + PROCESS_AGG_DIR + '2020_2022/county/'
+    df1 = pd.DataFrame()
+    df1['YEAR'] = df['YEAR'].copy()
+    df1['LOCATION'] = df['LOCATION'].copy()
+
+    _NOT_HISPANIC_RACES = [
+        'NH', 'NHWA', 'NHBA', 'NHIA', 'NHAA', 'NHNA', 'NHTOM', 'NHWAC', 'NHBAC',
+        'NHIAC', 'NHAAC', 'NHNAC'
+    ]
+    _HISPANIC_RACES = [
+        'H', 'HWA', 'HBA', 'HIA', 'HAA', 'HNA', 'HTOM', 'HWAC', 'HBAC', 'HIAC',
+        'HAAC', 'HNAC'
+    ]
+
+    # df1['NH'] = df1['H'] = 0
+    for p in _NOT_HISPANIC_RACES:
+        df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
+
+    for p in _HISPANIC_RACES:
+        df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
+
+    df1.to_csv(output_file_path + output_file_name, header=True, index=False)
+
+
 def _process_county_files(download_dir):
     """
     Process county files from 1990 - 2020
@@ -638,6 +713,7 @@ def _process_county_files(download_dir):
     _process_county_files_1990_2000(download_dir)
     _process_county_files_2000_2010(download_dir)
     _process_county_files_2010_2020(download_dir)
+    _process_county_files_2020_2022(download_dir)
 
 
 def _consolidate_national_files():
@@ -797,8 +873,8 @@ def _consolidate_state_files():
 
     # Agg file processing
     state_agg_files = [
-        _CODEDIR + PROCESS_AGG_DIR + yr + '/state/state_' + yr + '.csv'
-        for yr in ['1980_1990', '1990_2000', '2000_2010', '2010_2020']
+        _CODEDIR + PROCESS_AGG_DIR + yr + '/state/state_' + yr + '.csv' for yr
+        in ['1980_1990', '1990_2000', '2000_2010', '2010_2020', '2020_2022']
     ]
 
     for file in state_agg_files:
@@ -846,7 +922,8 @@ def _consolidate_county_files():
 
     county_file = [
         _CODEDIR + PROCESS_AS_IS_DIR + '2000_2010/county/county_2000_2010.csv',
-        _CODEDIR + PROCESS_AS_IS_DIR + '2010_2020/county/county_2010_2020.csv'
+        _CODEDIR + PROCESS_AS_IS_DIR + '2010_2020/county/county_2010_2020.csv',
+        _CODEDIR + PROCESS_AS_IS_DIR + '2020_2022/county/county_2020_2022.csv'
     ]
 
     for file in county_file:
@@ -865,11 +942,19 @@ def _consolidate_county_files():
             lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
 
         if file == county_file[0]:
+            #added by Shamim to keep last values
+            df = df.drop_duplicates(
+                subset=['YEAR', 'LOCATION', 'SV', 'MEASUREMENT_METHOD'],
+                keep='last')
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'county_consolidated_temp.csv',
                       header=True,
                       index=False)
         else:
+            #added by Shamim to keep last values
+            df = df.drop_duplicates(
+                subset=['YEAR', 'LOCATION', 'SV', 'MEASUREMENT_METHOD'],
+                keep='last')
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'county_consolidated_temp.csv',
                       header=False,
@@ -879,6 +964,9 @@ def _consolidate_county_files():
     df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                      'county_consolidated_temp.csv')
     df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+    #added by Shamim to keep last values
+    df = df.drop_duplicates(
+        subset=['YEAR', 'LOCATION', 'SV', 'MEASUREMENT_METHOD'], keep='last')
     df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
               'county_consolidated_as_is_final.csv',
               header=True,
@@ -893,7 +981,8 @@ def _consolidate_county_files():
         _CODEDIR + PROCESS_AS_IS_DIR + '1990_2000/county/county_1990_2000.csv',
         _CODEDIR + PROCESS_AGG_DIR + '1990_2000/county/county_1990_2000.csv',
         _CODEDIR + PROCESS_AGG_DIR + '2000_2010/county/county_2000_2010.csv',
-        _CODEDIR + PROCESS_AGG_DIR + '2010_2020/county/county_2010_2020.csv'
+        _CODEDIR + PROCESS_AGG_DIR + '2010_2020/county/county_2010_2020.csv',
+        _CODEDIR + PROCESS_AGG_DIR + '2020_2022/county/county_2020_2022.csv'
     ]
 
     for file in county_file:
@@ -945,7 +1034,9 @@ def _consolidate_all_geo_files():
             for geo in ['national', 'state', 'county']
     ]:
         as_is_df = pd.concat([as_is_df, pd.read_csv(file)])
-
+    #added by Shamim to keep last values
+    as_is_df = as_is_df.drop_duplicates(
+        subset=['YEAR', 'LOCATION', 'SV', 'MEASUREMENT_METHOD'], keep='last')
     as_is_df.to_csv(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh.csv',
                     header=True,
                     index=False)
@@ -956,6 +1047,10 @@ def _consolidate_all_geo_files():
             for geo in ['national', 'state', 'county']
     ]:
         agg_df = pd.concat([agg_df, pd.read_csv(file)])
+        #Added by shamim
+        agg_df = agg_df.drop_duplicates(
+            subset=['YEAR', 'LOCATION', 'MEASUREMENT_METHOD', 'SV'],
+            keep='last')
         agg_df.to_csv(_CODEDIR + OUTPUT_DIR +
                       'population_estimate_by_srh_agg.csv',
                       header=True,

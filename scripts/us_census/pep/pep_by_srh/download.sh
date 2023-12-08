@@ -9,14 +9,17 @@ rm -rf ./output_files/
 mkdir -p ./download_files/1990_2000/county/
 mkdir -p ./download_files/2000_2010/county/
 mkdir -p ./download_files/2010_2020/county/
+mkdir -p ./download_files/2020_2022/county/
 
 mkdir -p ./process_files/agg/1990_2000/county/
 mkdir -p ./process_files/agg/2000_2010/county/
 mkdir -p ./process_files/agg/2010_2020/county/
+mkdir -p ./process_files/agg/2020_2022/county/
 
 mkdir -p ./process_files/as_is/1990_2000/county/
 mkdir -p ./process_files/as_is/2000_2010/county/
 mkdir -p ./process_files/as_is/2010_2020/county/
+mkdir -p ./process_files/as_is/2020_2022/county/
 
 mkdir -p ./download_files/1980_1990/state/
 mkdir -p ./download_files/1990_2000/state/
@@ -47,6 +50,12 @@ for file in $(cat download_county_files_1990_2000.txt)
 do
     $(curl https://www2.census.gov/programs-surveys/popest/datasets/1990-2000/counties/asrh/${file} \
           -o ./download_files/1990_2000/county/${file})
+done
+
+for file in $(cat download_county_files_2020_2022.txt)
+do
+    $(curl https://www2.census.gov/programs-surveys/popest/datasets/2020-2022/counties/asrh/${file} \
+        -o ./download_files/2020_2022/county/${file})
 done
 
 for file in $(cat download_county_files_2000_2010.txt)
