@@ -435,6 +435,93 @@ def _clean_county_2010_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def _clean_county_2022_csv_file(df: pd.DataFrame) -> pd.DataFrame:
+    '''
+    This Python Script Loads csv datasets
+    from 2010-2020 on a County Level,
+    cleans it and create a cleaned csv
+
+    Arguments:
+        df (DataFrame) : DataFrame of csv dataset
+
+    Returns:
+        df (DataFrame) : Transformed DataFrame for csv dataset.
+    '''
+    # filter by agegrp = 0
+    df = df.query("YEAR not in [1]")
+    df = df.query("AGEGRP == 0")
+    # filter years 3 - 14
+    df['YEAR'] = df['YEAR'].astype(str)
+    conversion_of_year_to_value = {
+        '2': '2020',
+        '3': '2021',
+        '4': '2022',
+    }
+    df = df.replace({'YEAR': conversion_of_year_to_value})
+    df.insert(6, 'geo_ID', 'geoId/', True)
+    df['geo_ID'] = 'geoId/' +(df['STATE'].map(str)).str.zfill(2) + \
+        (df['COUNTY'].map(str)).str.zfill(3)
+    df['AGEGRP'] = df['AGEGRP'].astype(str)
+    # Replacing the numbers with more understandable metadata headings
+    conversion_of_agebracket_to_value = {
+        '1': '0To4Years',
+        '2': '5To9Years',
+        '3': '10To14Years',
+        '4': '15To19Years',
+        '5': '20To24Years',
+        '6': '25To29Years',
+        '7': '30To34Years',
+        '8': '35To39Years',
+        '9': '40To44Years',
+        '10': '45To49Years',
+        '11': '50To54Years',
+        '12': '55To59Years',
+        '13': '60To64Years',
+        '14': '65To69Years',
+        '15': '70To74Years',
+        '16': '75To79Years',
+        '17': '80To84Years',
+        '18': '85OrMoreYears'
+    }
+    df = df.replace({"AGEGRP": conversion_of_agebracket_to_value})
+    # drop unwanted columns
+    df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
+        inplace=True)
+    df = df.loc[:, :'NAC_FEMALE']
+    df['Year'] = df['YEAR']
+    df.drop(columns=['YEAR'], inplace=True)
+    df['WhiteAlone'] = df['WA_MALE'].astype(int) + df['WA_FEMALE'].astype(int)
+    df['BlackOrAfricanAmericanAlone'] = df['BA_MALE'].astype(int)\
+        +df['BA_FEMALE'].astype(int)
+    df['AmericanIndianAndAlaskaNativeAlone'] = df['IA_MALE'].astype(int)\
+        +df['IA_FEMALE'].astype(int)
+    df['AsianAlone'] = df['AA_MALE'].astype(int) + df['AA_FEMALE'].astype(int)
+    df['NativeHawaiianAndOtherPacificIslanderAlone'] = df['NA_MALE']\
+        .astype(int)+df['NA_FEMALE'].astype(int)
+    df['TwoOrMoreRaces'] = df['TOM_MALE'].astype(int)+\
+        df['TOM_FEMALE'].astype(int)
+    df['WhiteAloneOrInCombinationWithOneOrMoreOtherRaces'] = df['WAC_MALE']\
+        .astype(int)+ df['WAC_FEMALE'].astype(int)
+    df['BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces']\
+         = df['BAC_MALE'].astype(int)+df['BAC_FEMALE'].astype(int)
+    df['AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMore'+\
+        'OtherRaces']= df['IAC_MALE'].astype(int)+df['IAC_FEMALE'].astype(int)
+    df['AsianAloneOrInCombinationWithOneOrMoreOtherRaces'] = df[
+        'AAC_MALE'].astype(int) + df['AAC_FEMALE'].astype(int)
+    df['NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOr'+\
+        'MoreOtherRaces']= df['NAC_MALE']\
+            .astype(int)+df['NAC_FEMALE'].astype(int)
+    df.drop(columns=[
+        'AGEGRP', 'TOT_POP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE', 'WA_FEMALE',
+        'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE', 'AA_FEMALE',
+        'NA_MALE', 'NA_FEMALE', 'TOM_MALE', 'TOM_FEMALE', 'WAC_MALE',
+        'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE',
+        'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE'
+    ],
+            inplace=True)
+    return df
+
+
 def _clean_csv2_file(df: pd.DataFrame) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
@@ -729,6 +816,26 @@ class CensusUSAPopulationByRace:
                 float_col = df.select_dtypes(include=['float64'])
                 for col in float_col.columns.values:
                     df[col] = df[col].astype('int64')
+
+            elif "cc-est2022" in file:
+                df = pd.read_csv(file, encoding='ISO-8859-1', low_memory=False)
+                df = _clean_county_2022_csv_file(df)
+                # aggregating County data to obtain National data for 2020-2022
+                df_national = df.copy()
+                df_national['geo_ID'] = "country/USA"
+                df_national = df_national.groupby(['Year','geo_ID']).sum().\
+                    reset_index()
+                # aggregating County data to obtain State data for 2020-2022
+                df_state = df.copy()
+                df_state['geo_ID'] = (
+                    df['geo_ID'].map(str)).str[:len('geoId/NN')]
+                df_state = df_state.groupby(['Year', 'geo_ID']).sum().\
+                    reset_index()
+                df = df.append(df_state, ignore_index=True)
+                df = df.append(df_national, ignore_index=True)
+                float_col = df.select_dtypes(include=['float64'])
+                for col in float_col.columns.values:
+                    df[col] = df[col].astype('int64')
             else:
                 df = pd.read_csv(file)
                 df = _clean_csv_file(df)
@@ -819,10 +926,16 @@ class CensusUSAPopulationByRace:
             self.cleaned_csv_file_path,
             "USA_Population_Count_by_Race_before_2000.csv"),
                               index=False)
+        #Added by Shamim to resolve 2020 inconsistent data remove
+        df_county_after_2000 = df_county_after_2000.drop_duplicates(
+            subset=['geo_ID', 'Year'], keep='last')
         df_county_after_2000.to_csv(os.path.join(
             self.cleaned_csv_file_path,
             "USA_Population_Count_by_Race_county_after_2000.csv"),
                                     index=False)
+        #Added by Shamim to resolve 2020 inconsistent data remove
+        df_national_state_2000 = df_national_state_2000.drop_duplicates(
+            subset=['geo_ID', 'Year'], keep='last')
         df_national_state_2000.to_csv(os.path.join(
             self.cleaned_csv_file_path,
             "USA_Population_Count_by_Race_National_state_2000.csv"),
