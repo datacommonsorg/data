@@ -123,7 +123,7 @@ def generate_aggregates(df: pd.DataFrame,
     #     'observationDate', 'observationAbout', 'Primary Mode', 'Illnesses',
     #     'Hospitalizations', 'Deaths'
     # ]]
-    
+
     # merge all aggregations
     aggregate_df = pd.concat([aggregate_df, us_aggreagte_df, country_stat_df],
                              ignore_index=True)
@@ -217,7 +217,7 @@ def fix_place_names(clean_df):
 def process_non_infectious_data(input_path: str, sheet_name: str,
                                 schema_map_path: str, output_path: str) -> None:
     f = open(schema_map_path, 'r')
-    
+
     PV_MAP = json.load(f)
     f.close()
 
