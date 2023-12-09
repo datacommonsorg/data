@@ -28,3 +28,14 @@ There are some notes and caveats with this dataset.
 	> The other columns add more classification of the etiology outbreak which can be added to the script at a later time -- since it requires new schema
 4. This import also imports statistics only for a single etiology -- since it is unclear how to interpret the statistics with multiple Etiologies
 5. The columns `Info on Hospitalisations` and `Info on Deaths` are not used in this import.
+
+### For data refresh below new schema has been added into "col_map_exc_food.json" and same also need to update into file "google3/third_party/datacommons/schema/core/cdc.mcf"
+
+"Brucella other": {
+            "etiology": "BrucellaOther"
+},
+        
+"Salmonella bongori": {
+            "etiology": "SalmonellaBongori"
+},
+        
