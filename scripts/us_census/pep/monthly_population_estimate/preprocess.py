@@ -217,7 +217,6 @@ class CensusUSACountryPopulation:
             df (DataFrame) : DataFrame.
         """
         final_cols = [col for col in df.columns if 'year' not in col.lower()]
-        #final_cols = [col for col in df.columns(inplace = True)]
         # _return_year("1999") or _return_year("1999 [1]"): 1999
         # _return_year(".07 1"): pd.NA
         df['Year'] = df['Year and Month'].apply(_return_year).fillna(
@@ -280,7 +279,7 @@ class CensusUSACountryPopulation:
             self._df = df
         else:
             self._df = self._df._append(df, ignore_index=True)
-            
+
         self._df.sort_values(by=['Date', 'date_range'],
                              ascending=False,
                              inplace=True)
