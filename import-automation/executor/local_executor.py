@@ -29,6 +29,8 @@ owner_username and repo_name uniquely identify a repository. E.g., in
 and 'data' is the repo_name.
 """
 
+import os
+
 from absl import flags
 from absl import app
 
@@ -85,7 +87,8 @@ def main(_):
         github_repo_name=FLAGS.repo_name,
         github_repo_owner_username=FLAGS.owner_username,
         github_auth_username=FLAGS.username,
-        github_auth_access_token=FLAGS.access_token)
+        github_auth_access_token=FLAGS.access_token,
+        user_script_env=os.environ)
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.LocalFileUploader(output_dir=FLAGS.output_dir),
         github=github_api.GitHubRepoAPI(config.github_repo_owner_username,
