@@ -216,7 +216,6 @@ class CensusUSACountryPopulation:
         Returns:
             df (DataFrame) : DataFrame.
         """
-        print("---------------- " + str(df))
         final_cols = [col for col in df.columns if 'year' not in col.lower()]
         #final_cols = [col for col in df.columns(inplace = True)]
         # _return_year("1999") or _return_year("1999 [1]"): 1999
@@ -281,7 +280,7 @@ class CensusUSACountryPopulation:
             self._df = df
         else:
             self._df = self._df._append(df, ignore_index=True)
-
+            
         self._df.sort_values(by=['Date', 'date_range'],
                              ascending=False,
                              inplace=True)
